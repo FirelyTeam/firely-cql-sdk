@@ -6,6 +6,24 @@ specialization). Assessment of whether this repo should migrate its CQL primitiv
 (`Hl7.Fhir.ElementModel.Types`, "P.*"), reachable from POCOs via `IToSystemPrimitive`
 (SDK ≥ 5.13.1/6.0.0; this repo references 6.2.0).
 
+## Why this is a semantics question, not just deduplication
+
+FhirPath and CQL do not merely happen to have similar primitive types: **FhirPath's type
+system was deliberately aligned with CQL's when it was added** (the then-separate FhirPath
+and CQL specification efforts unified on it), and **FhirPath is specified as a subset of
+CQL** — FhirPath expressions are translatable to ELM. The two engines in this product
+family therefore implement the *same specified type system* twice. That changes the stakes
+of every difference catalogued below:
+
+- a divergence between P.* and Cql.Primitives is not a "local variation" — one side (or
+  both) is wrong against the shared spec, and FhirPath evaluation (validator invariants,
+  search, server) can disagree with CQL logic over the same data;
+- the SDK-side gap list at the end of this document is not a favor to the cql-sdk — each
+  item is arguably a FhirPath spec-compliance improvement in its own right;
+- the bridge proposed below doubles as a **conformance instrument**: differential tests
+  across the two implementations expose exactly where they disagree on shared semantics,
+  and every disagreement found is a bug report for one side.
+
 ## The two systems, honestly compared
 
 **Where they overlap** — the scalar/temporal core — both are serious implementations:
@@ -66,9 +84,17 @@ roadmap item gated on a concrete gap list (below).**
 4. **The realistic unification path runs through the SDK**, over its own release cadence:
    add a generic `Interval<T>`, UCUM canonicalization (Fhir.Metrics), CQL-grade
    Code/Concept/Ratio semantics, and the spec-shaped sub-second/decimal rules to
-   ElementModel.Types — each valuable to FhirPath users independently. Re-evaluate the
-   cql-sdk migration when that gap list closes; the golden corpus built for the
-   Linq.Expressions removal is then exactly the safety net a type swap would need.
+   ElementModel.Types. Because FhirPath is specified as a subset of CQL, each of these is
+   a FhirPath spec-compliance improvement independently of this repo — the gap list is an
+   SDK backlog on its own merits. Re-evaluate the cql-sdk migration when that list closes;
+   the golden corpus built for the Linq.Expressions removal is then exactly the safety net
+   a type swap would need.
+5. **Start the bridge with differential tests.** Before (and while) writing adapters, run
+   both implementations over a shared table of comparison/arithmetic cases (partial
+   precisions, offsets, sub-second values, decimal scales, calendar vs UCUM durations).
+   Where they disagree, the shared spec decides which side has the bug — file it there.
+   This turns the alignment intent behind the specifications into something enforced by CI
+   rather than remembered by people.
 
 ## The gap list (what ElementModel.Types would need to be CQL-grade)
 
