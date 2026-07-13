@@ -36,10 +36,20 @@ namespace Hl7.Cql.Fhir
     /// positive counterparts, based on the discriminating element each profile fixes.
     /// </summary>
     /// <remarks>
+    /// <para>
+    /// <b>Derived from QICore 6.0.0.</b> The profile canonical urls and the discriminating
+    /// elements below are hardcoded from that version of the QICore implementation guide
+    /// (<see href="http://hl7.org/fhir/us/qicore/STU6/">QICore STU6</see>). They are <b>not</b> read from the
+    /// profile definitions at runtime, so this table must be revisited and kept in sync
+    /// whenever the SDK targets a new version of QICore: profiles may be added, renamed, or
+    /// change the element (or fixed value) they constrain. See <see cref="FiltersByProfile"/>.
+    /// </para>
+    /// <para>
     /// Only the data of the instance is inspected; declared profiles (<c>meta.profile</c>)
     /// play no role. An instance whose declared profile contradicts its data (e.g. an
     /// instance declaring <c>servicenotrequested</c> while carrying
     /// <c>doNotPerform = false</c>) is treated according to its data.
+    /// </para>
     /// </remarks>
     public class QICoreRetrieveProfileFilter : IRetrieveProfileFilter
     {
@@ -50,6 +60,9 @@ namespace Hl7.Cql.Fhir
 
         private const string QICore = "http://hl7.org/fhir/us/qicore/StructureDefinition/";
 
+        // Hardcoded from QICore 6.0.0 (http://hl7.org/fhir/us/qicore/STU6/). Keep this table in
+        // sync when the SDK targets a new QICore version - profiles and the elements they
+        // constrain can change between releases.
         private static readonly IReadOnlyDictionary<string, Predicate<Resource>> FiltersByProfile =
             new Dictionary<string, Predicate<Resource>>
             {
