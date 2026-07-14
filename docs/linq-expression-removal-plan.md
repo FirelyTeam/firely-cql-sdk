@@ -207,9 +207,12 @@ one exercises:
   error and no exception, only wrong data, and would only be caught by an exact output
   comparison like this one.
 
-Once both are fixed, HEDIS 2025 should be added as a permanent golden corpus (alongside
-RR23 and dqm-content-qicore-2025) in `CSharpGenerationGoldenTests`, since it demonstrably
-covers code paths the other two don't. Neither bug is being deferred under the
+Unlike RR23 and dqm-content-qicore-2025 (whose sources are public and openly licensed),
+the full HEDIS 2025 corpus is NCQA-licensed commercial content, so it cannot live in this
+(public) repo's `LibrarySets/` the way those two do. It's vendored instead in the private
+`Firely.Cql.Sdk.Integration.Runner` repo (`Hedis2025/`), with a permanent golden-parity
+test alongside it, `Hedis2025.GoldenTests` — currently `[Fact(Skip = ...)]`, pointing at
+#1361/#1362, to be un-skipped once both are fixed. Neither bug is being deferred under the
 preserve-vs-fix policy above — both are new defects introduced by the IR port itself (not
 old-pipeline bugs being faithfully replicated), so both block phase 5's byte-identical-output
 requirement and must be fixed before the default flips.
