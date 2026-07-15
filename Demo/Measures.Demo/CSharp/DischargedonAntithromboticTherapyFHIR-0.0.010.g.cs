@@ -205,25 +205,24 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     {
         IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
 
-        IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
+        bool? b_(Encounter IschemicStrokeEncounter) {
             IEnumerable<MedicationRequest> d_ = this.Antithrombotic_Not_Given_at_Discharge(context);
 
             bool? e_(MedicationRequest NoDischargeAntithrombotic) {
-                FhirDateTime i_ = NoDischargeAntithrombotic?.AuthoredOnElement;
-                CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_);
-                Period k_ = IschemicStrokeEncounter?.Period;
-                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
-                bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
-                return m_;
+                FhirDateTime h_ = NoDischargeAntithrombotic?.AuthoredOnElement;
+                CqlDateTime i_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, h_);
+                Period j_ = IschemicStrokeEncounter?.Period;
+                CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, j_);
+                bool? l_ = context.Operators.In<CqlDateTime>(i_, k_, (string)default);
+                return l_;
             }
 
             IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
-            Encounter g_(MedicationRequest NoDischargeAntithrombotic) => IschemicStrokeEncounter;
-            IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
-            return h_;
+            bool? g_ = context.Operators.Exists<MedicationRequest>(f_);
+            return g_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
@@ -291,25 +290,24 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     {
         IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
 
-        IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
+        bool? b_(Encounter IschemicStrokeEncounter) {
             IEnumerable<MedicationRequest> d_ = this.Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(context);
 
             bool? e_(MedicationRequest DischargePharmacological) {
-                FhirDateTime i_ = DischargePharmacological?.AuthoredOnElement;
-                CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_);
-                Period k_ = IschemicStrokeEncounter?.Period;
-                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
-                bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
-                return m_;
+                FhirDateTime h_ = DischargePharmacological?.AuthoredOnElement;
+                CqlDateTime i_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, h_);
+                Period j_ = IschemicStrokeEncounter?.Period;
+                CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, j_);
+                bool? l_ = context.Operators.In<CqlDateTime>(i_, k_, (string)default);
+                return l_;
             }
 
             IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
-            Encounter g_(MedicationRequest DischargePharmacological) => IschemicStrokeEncounter;
-            IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
-            return h_;
+            bool? g_ = context.Operators.Exists<MedicationRequest>(f_);
+            return g_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
@@ -420,25 +418,24 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     {
         IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
 
-        IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
+        bool? b_(Encounter IschemicStrokeEncounter) {
             IEnumerable<MedicationRequest> d_ = this.Antithrombotic_Therapy_at_Discharge(context);
 
             bool? e_(MedicationRequest DischargeAntithrombotic) {
-                FhirDateTime i_ = DischargeAntithrombotic?.AuthoredOnElement;
-                CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_);
-                Period k_ = IschemicStrokeEncounter?.Period;
-                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
-                bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
-                return m_;
+                FhirDateTime h_ = DischargeAntithrombotic?.AuthoredOnElement;
+                CqlDateTime i_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, h_);
+                Period j_ = IschemicStrokeEncounter?.Period;
+                CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, j_);
+                bool? l_ = context.Operators.In<CqlDateTime>(i_, k_, (string)default);
+                return l_;
             }
 
             IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
-            Encounter g_(MedicationRequest DischargeAntithrombotic) => IschemicStrokeEncounter;
-            IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
-            return h_;
+            bool? g_ = context.Operators.Exists<MedicationRequest>(f_);
+            return g_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
