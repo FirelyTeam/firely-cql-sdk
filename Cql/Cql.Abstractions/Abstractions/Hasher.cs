@@ -14,12 +14,13 @@ internal class Hasher
 
     public static Hasher Instance { get; } = new();
 
-    private static MD5 MD5 { get; } = MD5.Create();
-
     public virtual string Hash(string input)
     {
         var bytes = Encoding.UTF8.GetBytes(input);
-        var hashBytes = MD5.ComputeHash(bytes);
+        // Static MD5.HashData is threadsafe (no shared mutable state); an instance's
+        // ComputeHash is not, and a cached/shared MD5 instance previously caused
+        // CryptographicException under concurrent test execution.
+        var hashBytes = MD5.HashData(bytes);
         var alpha = ToAlphaString(hashBytes);
         return alpha;
     }
