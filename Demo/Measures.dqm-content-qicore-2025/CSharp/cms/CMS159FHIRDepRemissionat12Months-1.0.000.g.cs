@@ -290,34 +290,33 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         CqlValueSet a_ = this.Contact_or_Office_Visit(context);
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
-        IEnumerable<Encounter> c_(Encounter ValidEncounter) {
+        bool? c_(Encounter ValidEncounter) {
             IEnumerable<Condition> e_ = this.Depression_Diagnoses(context);
 
             bool? f_(Condition Depression) {
-                Period j_ = ValidEncounter?.Period;
-                CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
-                CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Depression);
-                bool? m_ = context.Operators.Overlaps(k_, l_, (string)default);
-                CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
-                CqlDateTime p_ = context.Operators.End(o_);
-                CqlInterval<CqlDateTime> q_ = this.Denominator_Identification_Period(context);
-                bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
-                bool? s_ = context.Operators.And(m_, r_);
-                Code<Encounter.EncounterStatus> t_ = ValidEncounter?.StatusElement;
-                Encounter.EncounterStatus? u_ = t_?.Value;
-                Code<Encounter.EncounterStatus> v_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(u_);
-                bool? w_ = context.Operators.Equal(v_, "finished");
-                bool? x_ = context.Operators.And(s_, w_);
-                return x_;
+                Period i_ = ValidEncounter?.Period;
+                CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Depression);
+                bool? l_ = context.Operators.Overlaps(j_, k_, (string)default);
+                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                CqlDateTime o_ = context.Operators.End(n_);
+                CqlInterval<CqlDateTime> p_ = this.Denominator_Identification_Period(context);
+                bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, "day");
+                bool? r_ = context.Operators.And(l_, q_);
+                Code<Encounter.EncounterStatus> s_ = ValidEncounter?.StatusElement;
+                Encounter.EncounterStatus? t_ = s_?.Value;
+                Code<Encounter.EncounterStatus> u_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(t_);
+                bool? v_ = context.Operators.Equal(u_, "finished");
+                bool? w_ = context.Operators.And(r_, v_);
+                return w_;
             }
 
             IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
-            Encounter h_(Condition Depression) => ValidEncounter;
-            IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
-            return i_;
+            bool? h_ = context.Operators.Exists<Condition>(g_);
+            return h_;
         }
 
-        IEnumerable<Encounter> d_ = context.Operators.SelectMany<Encounter, Encounter>(b_, c_);
+        IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
         return d_;
     }
 
@@ -332,39 +331,38 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     {
         IEnumerable<Observation> a_ = this.Depression_Assessments_Greater_Than_9(context);
 
-        IEnumerable<Observation> b_(Observation DepressionAssessment) {
+        bool? b_(Observation DepressionAssessment) {
             IEnumerable<Encounter> g_ = this.Depression_Encounter(context);
 
             bool? h_(Encounter DepressionEncounter) {
-                Period l_ = DepressionEncounter?.Period;
-                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                CqlDateTime n_ = context.Operators.Start(m_);
-                CqlQuantity o_ = context.Operators.Quantity(7m, "days");
-                CqlDateTime p_ = context.Operators.Subtract(n_, o_);
-                CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                CqlDateTime s_ = context.Operators.End(r_);
-                CqlInterval<CqlDateTime> t_ = context.Operators.Interval(p_, s_, true, true);
-                DataType u_ = DepressionAssessment?.Effective;
-                object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.toInterval(context, v_);
-                bool? x_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, w_, "day");
-                return x_;
+                Period k_ = DepressionEncounter?.Period;
+                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                CqlDateTime m_ = context.Operators.Start(l_);
+                CqlQuantity n_ = context.Operators.Quantity(7m, "days");
+                CqlDateTime o_ = context.Operators.Subtract(m_, n_);
+                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                CqlDateTime r_ = context.Operators.End(q_);
+                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(o_, r_, true, true);
+                DataType t_ = DepressionAssessment?.Effective;
+                object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_);
+                bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(s_, v_, "day");
+                return w_;
             }
 
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
-            Observation j_(Encounter DepressionEncounter) => DepressionAssessment;
-            IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
-            return k_;
+            bool? j_ = context.Operators.Exists<Encounter>(i_);
+            return j_;
         }
 
-        IEnumerable<Observation> c_ = context.Operators.SelectMany<Observation, Observation>(a_, b_);
+        IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
 
         object d_(Observation @this) {
-            DataType y_ = @this?.Effective;
-            object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-            CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.toInterval(context, z_);
-            CqlDateTime ab_ = context.Operators.Start(aa_);
-            return ab_;
+            DataType x_ = @this?.Effective;
+            object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+            CqlInterval<CqlDateTime> z_ = QICoreCommon_4_0_000.Instance.toInterval(context, y_);
+            CqlDateTime aa_ = context.Operators.Start(z_);
+            return aa_;
         }
 
         IEnumerable<Observation> e_ = context.Operators.SortBy<Observation>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);

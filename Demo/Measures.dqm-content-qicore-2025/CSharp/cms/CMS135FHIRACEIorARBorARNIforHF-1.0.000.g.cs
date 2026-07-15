@@ -357,87 +357,85 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        IEnumerable<Condition> f_(Condition PregnancyDiagnosis) {
+        bool? f_(Condition PregnancyDiagnosis) {
             IEnumerable<Encounter> n_ = AHAOverall_4_1_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
 
             bool? o_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) {
-                CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyDiagnosis);
-                CqlDateTime t_ = context.Operators.Start(s_);
-                Period u_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
-                CqlDateTime w_ = context.Operators.Start(v_);
-                CqlQuantity x_ = context.Operators.Quantity(9m, "months");
-                CqlDateTime y_ = context.Operators.Subtract(w_, x_);
-                CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
-                CqlDateTime ab_ = context.Operators.Start(aa_);
-                CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(y_, ab_, true, true);
-                bool? ad_ = context.Operators.In<CqlDateTime>(t_, ac_, (string)default);
-                CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
-                CqlDateTime ag_ = context.Operators.Start(af_);
-                bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-                bool? ai_ = context.Operators.And(ad_, ah_);
-                bool? aj_ = AHAOverall_4_1_000.Instance.isVerified(context, PregnancyDiagnosis);
-                bool? ak_ = context.Operators.And(ai_, aj_);
-                return ak_;
+                CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyDiagnosis);
+                CqlDateTime s_ = context.Operators.Start(r_);
+                Period t_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
+                CqlDateTime v_ = context.Operators.Start(u_);
+                CqlQuantity w_ = context.Operators.Quantity(9m, "months");
+                CqlDateTime x_ = context.Operators.Subtract(v_, w_);
+                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
+                CqlDateTime aa_ = context.Operators.Start(z_);
+                CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(x_, aa_, true, true);
+                bool? ac_ = context.Operators.In<CqlDateTime>(s_, ab_, (string)default);
+                CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
+                CqlDateTime af_ = context.Operators.Start(ae_);
+                bool? ag_ = context.Operators.Not((bool?)(af_ is null));
+                bool? ah_ = context.Operators.And(ac_, ag_);
+                bool? ai_ = AHAOverall_4_1_000.Instance.isVerified(context, PregnancyDiagnosis);
+                bool? aj_ = context.Operators.And(ah_, ai_);
+                return aj_;
             }
 
             IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
-            Condition q_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => PregnancyDiagnosis;
-            IEnumerable<Condition> r_ = context.Operators.Select<Encounter, Condition>(p_, q_);
-            return r_;
+            bool? q_ = context.Operators.Exists<Encounter>(p_);
+            return q_;
         }
 
-        IEnumerable<Condition> g_ = context.Operators.SelectMany<Condition, Condition>(e_, f_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
         bool? h_ = context.Operators.Exists<Condition>(g_);
         IEnumerable<Observation> i_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-pregnancystatus"));
 
-        IEnumerable<Observation> j_(Observation PregnantObservation) {
-            IEnumerable<Encounter> al_ = AHAOverall_4_1_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
+        bool? j_(Observation PregnantObservation) {
+            IEnumerable<Encounter> ak_ = AHAOverall_4_1_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
 
-            bool? am_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) {
-                DataType aq_ = PregnantObservation?.Effective;
-                CqlDateTime ar_ = context.Operators.LateBoundProperty<CqlDateTime>(aq_, "value");
-                CqlInterval<CqlDateTime> as_ = QICoreCommon_4_0_000.Instance.toInterval(context, ar_ as object);
-                CqlDateTime at_ = context.Operators.Start(as_);
-                Period au_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> av_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, au_);
-                CqlDateTime aw_ = context.Operators.Start(av_);
-                CqlQuantity ax_ = context.Operators.Quantity(9m, "months");
-                CqlDateTime ay_ = context.Operators.Subtract(aw_, ax_);
-                CqlInterval<CqlDateTime> ba_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, au_);
-                CqlDateTime bb_ = context.Operators.Start(ba_);
-                CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ay_, bb_, true, true);
-                bool? bd_ = context.Operators.In<CqlDateTime>(at_, bc_, (string)default);
-                CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, au_);
-                CqlDateTime bg_ = context.Operators.Start(bf_);
-                bool? bh_ = context.Operators.Not((bool?)(bg_ is null));
-                bool? bi_ = context.Operators.And(bd_, bh_);
-                DataType bj_ = PregnantObservation?.Value;
-                CqlConcept bk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bj_ as CodeableConcept);
-                CqlValueSet bl_ = this.Pregnancy(context);
-                bool? bm_ = context.Operators.ConceptInValueSet(bk_, bl_);
-                Code<ObservationStatus> bn_ = PregnantObservation?.StatusElement;
-                ObservationStatus? bo_ = bn_?.Value;
-                Code<ObservationStatus> bp_ = context.Operators.Convert<Code<ObservationStatus>>(bo_);
-                string bq_ = context.Operators.Convert<string>(bp_);
-                string[] br_ = [
+            bool? al_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) {
+                DataType ao_ = PregnantObservation?.Effective;
+                CqlDateTime ap_ = context.Operators.LateBoundProperty<CqlDateTime>(ao_, "value");
+                CqlInterval<CqlDateTime> aq_ = QICoreCommon_4_0_000.Instance.toInterval(context, ap_ as object);
+                CqlDateTime ar_ = context.Operators.Start(aq_);
+                Period as_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> at_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, as_);
+                CqlDateTime au_ = context.Operators.Start(at_);
+                CqlQuantity av_ = context.Operators.Quantity(9m, "months");
+                CqlDateTime aw_ = context.Operators.Subtract(au_, av_);
+                CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, as_);
+                CqlDateTime az_ = context.Operators.Start(ay_);
+                CqlInterval<CqlDateTime> ba_ = context.Operators.Interval(aw_, az_, true, true);
+                bool? bb_ = context.Operators.In<CqlDateTime>(ar_, ba_, (string)default);
+                CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, as_);
+                CqlDateTime be_ = context.Operators.Start(bd_);
+                bool? bf_ = context.Operators.Not((bool?)(be_ is null));
+                bool? bg_ = context.Operators.And(bb_, bf_);
+                DataType bh_ = PregnantObservation?.Value;
+                CqlConcept bi_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bh_ as CodeableConcept);
+                CqlValueSet bj_ = this.Pregnancy(context);
+                bool? bk_ = context.Operators.ConceptInValueSet(bi_, bj_);
+                Code<ObservationStatus> bl_ = PregnantObservation?.StatusElement;
+                ObservationStatus? bm_ = bl_?.Value;
+                Code<ObservationStatus> bn_ = context.Operators.Convert<Code<ObservationStatus>>(bm_);
+                string bo_ = context.Operators.Convert<string>(bn_);
+                string[] bp_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
-                bool? bt_ = context.Operators.And(bm_, bs_);
-                bool? bu_ = context.Operators.And(bi_, bt_);
-                return bu_;
+                bool? bq_ = context.Operators.In<string>(bo_, (IEnumerable<string>)bp_);
+                bool? br_ = context.Operators.And(bk_, bq_);
+                bool? bs_ = context.Operators.And(bg_, br_);
+                return bs_;
             }
 
-            IEnumerable<Encounter> an_ = context.Operators.Where<Encounter>(al_, am_);
-            Observation ao_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => PregnantObservation;
-            IEnumerable<Observation> ap_ = context.Operators.Select<Encounter, Observation>(an_, ao_);
-            return ap_;
+            IEnumerable<Encounter> am_ = context.Operators.Where<Encounter>(ak_, al_);
+            bool? an_ = context.Operators.Exists<Encounter>(am_);
+            return an_;
         }
 
-        IEnumerable<Observation> k_ = context.Operators.SelectMany<Observation, Observation>(i_, j_);
+        IEnumerable<Observation> k_ = context.Operators.Where<Observation>(i_, j_);
         bool? l_ = context.Operators.Exists<Observation>(k_);
         bool? m_ = context.Operators.Or(h_, l_);
         return m_;
