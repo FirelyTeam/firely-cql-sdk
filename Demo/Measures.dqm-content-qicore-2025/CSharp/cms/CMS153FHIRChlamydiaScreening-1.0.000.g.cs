@@ -376,45 +376,44 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        IEnumerable<MedicationRequest> d_(MedicationRequest MR) {
+        bool? d_(MedicationRequest MR) {
             IEnumerable<Medication> k_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? l_(Medication M) {
-                object p_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object q_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> r_ = context.Operators.Split((string)q_, "/");
-                string s_ = context.Operators.Last<string>(r_);
-                bool? t_ = context.Operators.Equal(p_, s_);
-                CodeableConcept u_ = M?.Code;
-                CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
-                CqlValueSet w_ = this.Contraceptive_Medications(context);
-                bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
-                bool? y_ = context.Operators.And(t_, x_);
-                return y_;
+                object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
+                string r_ = context.Operators.Last<string>(q_);
+                bool? s_ = context.Operators.Equal(o_, r_);
+                CodeableConcept t_ = M?.Code;
+                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+                CqlValueSet v_ = this.Contraceptive_Medications(context);
+                bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
+                bool? x_ = context.Operators.And(s_, w_);
+                return x_;
             }
 
             IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
-            MedicationRequest n_(Medication M) => MR;
-            IEnumerable<MedicationRequest> o_ = context.Operators.Select<Medication, MedicationRequest>(m_, n_);
-            return o_;
+            bool? n_ = context.Operators.Exists<Medication>(m_);
+            return n_;
         }
 
-        IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
+        IEnumerable<MedicationRequest> e_ = context.Operators.Where<MedicationRequest>(c_, d_);
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
         IEnumerable<MedicationRequest> g_ = Status_1_15_000.Instance.isMedicationActive(context, f_);
 
         bool? h_(MedicationRequest ActiveContraceptives) {
-            CqlInterval<CqlDate> z_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ActiveContraceptives);
-            CqlDate aa_ = z_?.low;
-            CqlDateTime ab_ = context.Operators.ConvertDateToDateTime(aa_);
-            CqlDate ad_ = z_?.high;
-            CqlDateTime ae_ = context.Operators.ConvertDateToDateTime(ad_);
-            bool? ag_ = z_?.lowClosed;
-            bool? ai_ = z_?.highClosed;
-            CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ab_, ae_, ag_, ai_);
-            CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
-            bool? al_ = context.Operators.Overlaps(aj_, ak_, (string)default);
-            return al_;
+            CqlInterval<CqlDate> y_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ActiveContraceptives);
+            CqlDate z_ = y_?.low;
+            CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
+            CqlDate ac_ = y_?.high;
+            CqlDateTime ad_ = context.Operators.ConvertDateToDateTime(ac_);
+            bool? af_ = y_?.lowClosed;
+            bool? ah_ = y_?.highClosed;
+            CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(aa_, ad_, af_, ah_);
+            CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
+            bool? ak_ = context.Operators.Overlaps(ai_, aj_, (string)default);
+            return ak_;
         }
 
         IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
@@ -435,40 +434,39 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        IEnumerable<MedicationRequest> d_(MedicationRequest MR) {
+        bool? d_(MedicationRequest MR) {
             IEnumerable<Medication> k_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? l_(Medication M) {
-                object p_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object q_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> r_ = context.Operators.Split((string)q_, "/");
-                string s_ = context.Operators.Last<string>(r_);
-                bool? t_ = context.Operators.Equal(p_, s_);
-                CodeableConcept u_ = M?.Code;
-                CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
-                CqlValueSet w_ = this.Contraceptive_Medications(context);
-                bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
-                bool? y_ = context.Operators.And(t_, x_);
-                return y_;
+                object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
+                string r_ = context.Operators.Last<string>(q_);
+                bool? s_ = context.Operators.Equal(o_, r_);
+                CodeableConcept t_ = M?.Code;
+                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+                CqlValueSet v_ = this.Contraceptive_Medications(context);
+                bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
+                bool? x_ = context.Operators.And(s_, w_);
+                return x_;
             }
 
             IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
-            MedicationRequest n_(Medication M) => MR;
-            IEnumerable<MedicationRequest> o_ = context.Operators.Select<Medication, MedicationRequest>(m_, n_);
-            return o_;
+            bool? n_ = context.Operators.Exists<Medication>(m_);
+            return n_;
         }
 
-        IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
+        IEnumerable<MedicationRequest> e_ = context.Operators.Where<MedicationRequest>(c_, d_);
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
         IEnumerable<MedicationRequest> g_ = Status_1_15_000.Instance.isMedicationOrder(context, f_);
 
         bool? h_(MedicationRequest OrderedContraceptives) {
-            CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
-            FhirDateTime aa_ = OrderedContraceptives?.AuthoredOnElement;
-            CqlDateTime ab_ = context.Operators.Convert<CqlDateTime>(aa_);
-            CqlInterval<CqlDateTime> ac_ = QICoreCommon_4_0_000.Instance.toInterval(context, ab_ as object);
-            bool? ad_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ac_, "day");
-            return ad_;
+            CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
+            FhirDateTime z_ = OrderedContraceptives?.AuthoredOnElement;
+            CqlDateTime aa_ = context.Operators.Convert<CqlDateTime>(z_);
+            CqlInterval<CqlDateTime> ab_ = QICoreCommon_4_0_000.Instance.toInterval(context, aa_ as object);
+            bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, ab_, "day");
+            return ac_;
         }
 
         IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
@@ -758,127 +756,124 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
         IEnumerable<ServiceRequest> c_ = Status_1_15_000.Instance.isLaboratoryTestOrder(context, b_);
 
-        IEnumerable<ServiceRequest> d_(ServiceRequest PregnancyTest) {
+        bool? d_(ServiceRequest PregnancyTest) {
             CqlValueSet q_ = this.XRay_Study(context);
             IEnumerable<ServiceRequest> r_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
             IEnumerable<ServiceRequest> s_ = Status_1_15_000.Instance.isDiagnosticStudyOrder(context, r_);
 
             bool? t_(ServiceRequest XrayOrder) {
-                FhirDateTime x_ = XrayOrder?.AuthoredOnElement;
-                CqlDateTime y_ = context.Operators.Convert<CqlDateTime>(x_);
-                CqlInterval<CqlDateTime> z_ = QICoreCommon_4_0_000.Instance.toInterval(context, y_ as object);
-                CqlDateTime aa_ = context.Operators.Start(z_);
-                FhirDateTime ab_ = PregnancyTest?.AuthoredOnElement;
-                CqlDateTime ac_ = context.Operators.Convert<CqlDateTime>(ab_);
-                CqlInterval<CqlDateTime> ad_ = QICoreCommon_4_0_000.Instance.toInterval(context, ac_ as object);
-                CqlDateTime ae_ = context.Operators.End(ad_);
-                CqlDateTime ag_ = context.Operators.Convert<CqlDateTime>(ab_);
-                CqlInterval<CqlDateTime> ah_ = QICoreCommon_4_0_000.Instance.toInterval(context, ag_ as object);
-                CqlDateTime ai_ = context.Operators.End(ah_);
-                CqlQuantity aj_ = context.Operators.Quantity(6m, "days");
-                CqlDateTime ak_ = context.Operators.Add(ai_, aj_);
-                CqlInterval<CqlDateTime> al_ = context.Operators.Interval(ae_, ak_, true, true);
-                bool? am_ = context.Operators.In<CqlDateTime>(aa_, al_, "day");
-                CqlDateTime ao_ = context.Operators.Convert<CqlDateTime>(ab_);
-                CqlInterval<CqlDateTime> ap_ = QICoreCommon_4_0_000.Instance.toInterval(context, ao_ as object);
-                CqlDateTime aq_ = context.Operators.End(ap_);
-                bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
-                bool? as_ = context.Operators.And(am_, ar_);
-                return as_;
+                FhirDateTime w_ = XrayOrder?.AuthoredOnElement;
+                CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
+                CqlInterval<CqlDateTime> y_ = QICoreCommon_4_0_000.Instance.toInterval(context, x_ as object);
+                CqlDateTime z_ = context.Operators.Start(y_);
+                FhirDateTime aa_ = PregnancyTest?.AuthoredOnElement;
+                CqlDateTime ab_ = context.Operators.Convert<CqlDateTime>(aa_);
+                CqlInterval<CqlDateTime> ac_ = QICoreCommon_4_0_000.Instance.toInterval(context, ab_ as object);
+                CqlDateTime ad_ = context.Operators.End(ac_);
+                CqlDateTime af_ = context.Operators.Convert<CqlDateTime>(aa_);
+                CqlInterval<CqlDateTime> ag_ = QICoreCommon_4_0_000.Instance.toInterval(context, af_ as object);
+                CqlDateTime ah_ = context.Operators.End(ag_);
+                CqlQuantity ai_ = context.Operators.Quantity(6m, "days");
+                CqlDateTime aj_ = context.Operators.Add(ah_, ai_);
+                CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ad_, aj_, true, true);
+                bool? al_ = context.Operators.In<CqlDateTime>(z_, ak_, "day");
+                CqlDateTime an_ = context.Operators.Convert<CqlDateTime>(aa_);
+                CqlInterval<CqlDateTime> ao_ = QICoreCommon_4_0_000.Instance.toInterval(context, an_ as object);
+                CqlDateTime ap_ = context.Operators.End(ao_);
+                bool? aq_ = context.Operators.Not((bool?)(ap_ is null));
+                bool? ar_ = context.Operators.And(al_, aq_);
+                return ar_;
             }
 
             IEnumerable<ServiceRequest> u_ = context.Operators.Where<ServiceRequest>(s_, t_);
-            ServiceRequest v_(ServiceRequest XrayOrder) => PregnancyTest;
-            IEnumerable<ServiceRequest> w_ = context.Operators.Select<ServiceRequest, ServiceRequest>(u_, v_);
-            return w_;
+            bool? v_ = context.Operators.Exists<ServiceRequest>(u_);
+            return v_;
         }
 
-        IEnumerable<ServiceRequest> e_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(c_, d_);
+        IEnumerable<ServiceRequest> e_ = context.Operators.Where<ServiceRequest>(c_, d_);
 
         bool? f_(ServiceRequest PregnancyTest) {
-            CqlInterval<CqlDateTime> at_ = this.Measurement_Period(context);
-            FhirDateTime au_ = PregnancyTest?.AuthoredOnElement;
-            CqlDateTime av_ = context.Operators.Convert<CqlDateTime>(au_);
-            CqlInterval<CqlDateTime> aw_ = QICoreCommon_4_0_000.Instance.toInterval(context, av_ as object);
-            bool? ax_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(at_, aw_, (string)default);
-            return ax_;
+            CqlInterval<CqlDateTime> as_ = this.Measurement_Period(context);
+            FhirDateTime at_ = PregnancyTest?.AuthoredOnElement;
+            CqlDateTime au_ = context.Operators.Convert<CqlDateTime>(at_);
+            CqlInterval<CqlDateTime> av_ = QICoreCommon_4_0_000.Instance.toInterval(context, au_ as object);
+            bool? aw_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(as_, av_, (string)default);
+            return aw_;
         }
 
         IEnumerable<ServiceRequest> g_ = context.Operators.Where<ServiceRequest>(e_, f_);
         IEnumerable<ServiceRequest> i_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
         IEnumerable<ServiceRequest> j_ = Status_1_15_000.Instance.isLaboratoryTestOrder(context, i_);
 
-        IEnumerable<ServiceRequest> k_(ServiceRequest PregnancyTestOrder) {
-            CqlValueSet ay_ = this.Isotretinoin(context);
-            IEnumerable<MedicationRequest> az_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ay_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> ba_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        bool? k_(ServiceRequest PregnancyTestOrder) {
+            CqlValueSet ax_ = this.Isotretinoin(context);
+            IEnumerable<MedicationRequest> ay_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ax_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> az_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-            IEnumerable<MedicationRequest> bb_(MedicationRequest MR) {
-                IEnumerable<Medication> bj_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? ba_(MedicationRequest MR) {
+                IEnumerable<Medication> bh_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-                bool? bk_(Medication M) {
-                    object bo_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                    object bp_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string> bq_ = context.Operators.Split((string)bp_, "/");
-                    string br_ = context.Operators.Last<string>(bq_);
-                    bool? bs_ = context.Operators.Equal(bo_, br_);
-                    CodeableConcept bt_ = M?.Code;
-                    CqlConcept bu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bt_);
-                    CqlValueSet bv_ = this.Isotretinoin(context);
-                    bool? bw_ = context.Operators.ConceptInValueSet(bu_, bv_);
-                    bool? bx_ = context.Operators.And(bs_, bw_);
-                    return bx_;
+                bool? bi_(Medication M) {
+                    object bl_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                    object bm_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                    IEnumerable<string> bn_ = context.Operators.Split((string)bm_, "/");
+                    string bo_ = context.Operators.Last<string>(bn_);
+                    bool? bp_ = context.Operators.Equal(bl_, bo_);
+                    CodeableConcept bq_ = M?.Code;
+                    CqlConcept br_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bq_);
+                    CqlValueSet bs_ = this.Isotretinoin(context);
+                    bool? bt_ = context.Operators.ConceptInValueSet(br_, bs_);
+                    bool? bu_ = context.Operators.And(bp_, bt_);
+                    return bu_;
                 }
 
-                IEnumerable<Medication> bl_ = context.Operators.Where<Medication>(bj_, bk_);
-                MedicationRequest bm_(Medication M) => MR;
-                IEnumerable<MedicationRequest> bn_ = context.Operators.Select<Medication, MedicationRequest>(bl_, bm_);
-                return bn_;
+                IEnumerable<Medication> bj_ = context.Operators.Where<Medication>(bh_, bi_);
+                bool? bk_ = context.Operators.Exists<Medication>(bj_);
+                return bk_;
             }
 
-            IEnumerable<MedicationRequest> bc_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(ba_, bb_);
-            IEnumerable<MedicationRequest> bd_ = context.Operators.Union<MedicationRequest>(az_, bc_);
-            IEnumerable<MedicationRequest> be_ = Status_1_15_000.Instance.isMedicationOrder(context, bd_);
+            IEnumerable<MedicationRequest> bb_ = context.Operators.Where<MedicationRequest>(az_, ba_);
+            IEnumerable<MedicationRequest> bc_ = context.Operators.Union<MedicationRequest>(ay_, bb_);
+            IEnumerable<MedicationRequest> bd_ = Status_1_15_000.Instance.isMedicationOrder(context, bc_);
 
-            bool? bf_(MedicationRequest AccutaneOrder) {
-                FhirDateTime by_ = AccutaneOrder?.AuthoredOnElement;
-                CqlDateTime bz_ = context.Operators.Convert<CqlDateTime>(by_);
-                CqlInterval<CqlDateTime> ca_ = QICoreCommon_4_0_000.Instance.toInterval(context, bz_ as object);
-                CqlDateTime cb_ = context.Operators.Start(ca_);
-                FhirDateTime cc_ = PregnancyTestOrder?.AuthoredOnElement;
-                CqlDateTime cd_ = context.Operators.Convert<CqlDateTime>(cc_);
-                CqlInterval<CqlDateTime> ce_ = QICoreCommon_4_0_000.Instance.toInterval(context, cd_ as object);
-                CqlDateTime cf_ = context.Operators.End(ce_);
-                CqlDateTime ch_ = context.Operators.Convert<CqlDateTime>(cc_);
-                CqlInterval<CqlDateTime> ci_ = QICoreCommon_4_0_000.Instance.toInterval(context, ch_ as object);
-                CqlDateTime cj_ = context.Operators.End(ci_);
-                CqlQuantity ck_ = context.Operators.Quantity(6m, "days");
-                CqlDateTime cl_ = context.Operators.Add(cj_, ck_);
-                CqlInterval<CqlDateTime> cm_ = context.Operators.Interval(cf_, cl_, true, true);
-                bool? cn_ = context.Operators.In<CqlDateTime>(cb_, cm_, "day");
-                CqlDateTime cp_ = context.Operators.Convert<CqlDateTime>(cc_);
-                CqlInterval<CqlDateTime> cq_ = QICoreCommon_4_0_000.Instance.toInterval(context, cp_ as object);
-                CqlDateTime cr_ = context.Operators.End(cq_);
-                bool? cs_ = context.Operators.Not((bool?)(cr_ is null));
-                bool? ct_ = context.Operators.And(cn_, cs_);
-                return ct_;
+            bool? be_(MedicationRequest AccutaneOrder) {
+                FhirDateTime bv_ = AccutaneOrder?.AuthoredOnElement;
+                CqlDateTime bw_ = context.Operators.Convert<CqlDateTime>(bv_);
+                CqlInterval<CqlDateTime> bx_ = QICoreCommon_4_0_000.Instance.toInterval(context, bw_ as object);
+                CqlDateTime by_ = context.Operators.Start(bx_);
+                FhirDateTime bz_ = PregnancyTestOrder?.AuthoredOnElement;
+                CqlDateTime ca_ = context.Operators.Convert<CqlDateTime>(bz_);
+                CqlInterval<CqlDateTime> cb_ = QICoreCommon_4_0_000.Instance.toInterval(context, ca_ as object);
+                CqlDateTime cc_ = context.Operators.End(cb_);
+                CqlDateTime ce_ = context.Operators.Convert<CqlDateTime>(bz_);
+                CqlInterval<CqlDateTime> cf_ = QICoreCommon_4_0_000.Instance.toInterval(context, ce_ as object);
+                CqlDateTime cg_ = context.Operators.End(cf_);
+                CqlQuantity ch_ = context.Operators.Quantity(6m, "days");
+                CqlDateTime ci_ = context.Operators.Add(cg_, ch_);
+                CqlInterval<CqlDateTime> cj_ = context.Operators.Interval(cc_, ci_, true, true);
+                bool? ck_ = context.Operators.In<CqlDateTime>(by_, cj_, "day");
+                CqlDateTime cm_ = context.Operators.Convert<CqlDateTime>(bz_);
+                CqlInterval<CqlDateTime> cn_ = QICoreCommon_4_0_000.Instance.toInterval(context, cm_ as object);
+                CqlDateTime co_ = context.Operators.End(cn_);
+                bool? cp_ = context.Operators.Not((bool?)(co_ is null));
+                bool? cq_ = context.Operators.And(ck_, cp_);
+                return cq_;
             }
 
-            IEnumerable<MedicationRequest> bg_ = context.Operators.Where<MedicationRequest>(be_, bf_);
-            ServiceRequest bh_(MedicationRequest AccutaneOrder) => PregnancyTestOrder;
-            IEnumerable<ServiceRequest> bi_ = context.Operators.Select<MedicationRequest, ServiceRequest>(bg_, bh_);
-            return bi_;
+            IEnumerable<MedicationRequest> bf_ = context.Operators.Where<MedicationRequest>(bd_, be_);
+            bool? bg_ = context.Operators.Exists<MedicationRequest>(bf_);
+            return bg_;
         }
 
-        IEnumerable<ServiceRequest> l_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(j_, k_);
+        IEnumerable<ServiceRequest> l_ = context.Operators.Where<ServiceRequest>(j_, k_);
 
         bool? m_(ServiceRequest PregnancyTestOrder) {
-            CqlInterval<CqlDateTime> cu_ = this.Measurement_Period(context);
-            FhirDateTime cv_ = PregnancyTestOrder?.AuthoredOnElement;
-            CqlDateTime cw_ = context.Operators.Convert<CqlDateTime>(cv_);
-            CqlInterval<CqlDateTime> cx_ = QICoreCommon_4_0_000.Instance.toInterval(context, cw_ as object);
-            bool? cy_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(cu_, cx_, (string)default);
-            return cy_;
+            CqlInterval<CqlDateTime> cr_ = this.Measurement_Period(context);
+            FhirDateTime cs_ = PregnancyTestOrder?.AuthoredOnElement;
+            CqlDateTime ct_ = context.Operators.Convert<CqlDateTime>(cs_);
+            CqlInterval<CqlDateTime> cu_ = QICoreCommon_4_0_000.Instance.toInterval(context, ct_ as object);
+            bool? cv_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(cr_, cu_, (string)default);
+            return cv_;
         }
 
         IEnumerable<ServiceRequest> n_ = context.Operators.Where<ServiceRequest>(l_, m_);
