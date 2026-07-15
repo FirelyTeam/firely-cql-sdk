@@ -210,6 +210,96 @@ public class CSharpIrEmitterTests
     }
 
     [TestMethod]
+    public void Conditional_DefinitionCallCoalesceWhen_PrintsInline()
+    {
+        // CountSpineNodes (CSharpIrEmitter.Scope.cs) was missing a case for IrDefinitionCall, so
+        // it fell to the "any other spine node" default (2) and a when-condition shaped
+        // "Coalesce(DefinitionCall, false)" always hoisted into its own zero-arg bool function,
+        // where the old pipeline's isSimpleWhen rule (SimplifyExpressionsVisitor.cs's
+        // VisitCaseWhenThenExpression: "testVisitor.Assignments.Count <= 1") leaves it fully
+        // inline instead — a single definition/function call is exactly one hoist-worth of
+        // complexity. The CQL shape is a "case when <boolean expr> then ... else ..." whose
+        // when-clause is nullable-boolean-valued: Case()'s "if (caseWhen.Type.
+        // IsNullableValueType(out _)) caseWhen = caseWhen.Coalesce();" wraps it in
+        // Coalesce(_, false) before it ever reaches the writer. Found via the HEDIS 2025 corpus
+        // (AAB_Details and ~130 other libraries all define a "Check_data_source(context)"-shaped
+        // guard this way). The printed condition also picks up the old writer's
+        // ParenthesizeIfNeeded quirk: "this.Foo(context)" ends with ')' but doesn't start with
+        // '(', so the XOR rule wraps it in an extra pair of parens even though it has no
+        // whitespace.
+        var definitionCall = new IrDefinitionCall(
+            "MyLib", "1.0.0", "Foo", isLocalLibrary: true, [IrContextParameter.Instance], typeof(bool?));
+        var when = new IrBinary(IrBinaryOp.Coalesce, definitionCall, new IrConstant(false, typeof(bool)));
+        var ifTrue = new IrInvoke(null, MathAbsInt, new IrConstant(-5, typeof(int))); // needs its own hoisted statement
+        var ifFalse = new IrConstant(2, typeof(int));
+        var conditional = new IrConditional(when, ifTrue, ifFalse, typeof(int));
+        var lambda = new IrLambda([], conditional);
+
+        var expected =
+            "{\n" +
+            "\n" +
+            "    int a_() {\n" +
+            "        if ((this.Foo(context)) ?? false)\n" +
+            "        {\n" +
+            "            int b_ = Math.Abs(-5);\n" +
+            "            return b_;\n" +
+            "        }\n" +
+            "        else\n" +
+            "        {\n" +
+            "            return 2;\n" +
+            "        };\n" +
+            "    }\n" +
+            "\n" +
+            "    return a_();\n" +
+            "}";
+        Assert.AreEqual(expected, EmitBody(lambda));
+    }
+
+    [TestMethod]
+    public void Conditional_NonSimpleConditionalWhen_PrintsInlineTernary()
+    {
+        // A when-condition that is itself a NON-simple conditional still prints inline: the
+        // old trial visit (SimplifyExpressionsVisitor.VisitConditional over a non-simple
+        // conditional) converted it via ToCwt + VisitCaseWhenThenExpression, whose branch
+        // contents went to NESTED visitors — only "MakeLet(caseStatementLambda)" landed on
+        // the trial visitor, so isSimpleWhen's "Assignments.Count <= 1" held and the when
+        // printed as the raw unvisited ternary, branches and all (see CountSpineNodes'
+        // IrConditional => 1 arm in CSharpIrEmitter.Scope.cs). Found via the HEDIS 2025
+        // corpus (TRC_Elements/IET_Elements/AISE_Reporting/HEDIS's
+        // "if (((X) ?? false ? A : B))" when-conditions).
+        var isNullOrEmpty = typeof(string).GetMethod(nameof(string.IsNullOrEmpty), [typeof(string)])!;
+        var c = new IrLocal(typeof(bool), "c");
+        var s = new IrLocal(typeof(string), "s");
+        // Non-simple: the true branch is a call, which would hoist if linearized.
+        var when = new IrConditional(c,
+            new IrInvoke(null, isNullOrEmpty, s), new IrConstant(false, typeof(bool)), typeof(bool));
+        var ifTrue = new IrInvoke(null, MathAbsInt, new IrConstant(-5, typeof(int))); // forces statement form
+        var conditional = new IrConditional(when, ifTrue, new IrConstant(2, typeof(int)), typeof(int));
+        var lambda = new IrLambda([c, s], conditional);
+
+        var expected =
+            "{\n" +
+            "\n" +
+            "    int a_() {\n" +
+            "        if ((c\n" +
+            "            ? string.IsNullOrEmpty(s)\n" +
+            "            : false))\n" +
+            "        {\n" +
+            "            int b_ = Math.Abs(-5);\n" +
+            "            return b_;\n" +
+            "        }\n" +
+            "        else\n" +
+            "        {\n" +
+            "            return 2;\n" +
+            "        };\n" +
+            "    }\n" +
+            "\n" +
+            "    return a_();\n" +
+            "}";
+        Assert.AreEqual(expected, EmitBody(lambda));
+    }
+
+    [TestMethod]
     public void IfChain_TailPosition_PrintsReturningIfElseChain()
     {
         // If-chains flatten into the same hoisted-local-function CaseWhenThen form as a
@@ -280,6 +370,68 @@ public class CSharpIrEmitterTests
         Assert.AreEqual(
             "{\n    return o as string;\n}",
             EmitBody(new IrLambda([o], safeCast)));
+    }
+
+    [TestMethod]
+    public void Cast_OfNullConstant_CollapsesToDefaultLiteral()
+    {
+        // ElmAsExpression.Reduce() (Cql.Compiler/Expressions/ElmAsExpression.cs): "if
+        // (Expression is ConstantExpression { Value: null }) return Constant(null, AsType);" —
+        // an As/Cast wrapping an ALREADY-CONSTANT null collapses to a plain null constant of the
+        // cast's own target type, printing as a bare "default" — not "null as T"/"(T)null". This
+        // is the shape produced by the old As() branch that resolves a plain type NAME (as
+        // opposed to a nested type-specifier): its operand goes through the ordinary ELM Null
+        // dispatch ("Null e => NullExpression.ForType(TypeFor(e)!)", a real ConstantExpression),
+        // not the asTypeSpecifier branch's special-cased Expression.Default(type). Found via the
+        // HEDIS 2025 corpus (a parameter's "Interval[3, null]" default value:
+        // "context.Operators.Interval(3, default, true, true)").
+        var castOfNullConstant = new IrCast(new IrConstant(null, typeof(object)), typeof(int?), IrCastKind.As);
+        Assert.AreEqual(
+            "{\n    return default;\n}",
+            EmitBody(new IrLambda([], castOfNullConstant)));
+
+        // An IrDefault operand (the OTHER As() branch — a Null CQL operand under an
+        // asTypeSpecifier, which builds Expression.Default(type) directly, never a
+        // ConstantExpression) does NOT qualify for the collapse and keeps printing "null as T",
+        // matching Cast_ExplicitAndAs's plain "as" case.
+        var castOfDefault = new IrCast(new IrDefault(typeof(int?)), typeof(int?), IrCastKind.As);
+        Assert.AreEqual(
+            "{\n    return null as int?;\n}",
+            EmitBody(new IrLambda([], castOfDefault)));
+    }
+
+    [TestMethod]
+    public void Cast_ToObject_SurvivesOnlyForCqlAsOperatorCasts()
+    {
+        // Reference-typed casts to object are redundant C# and the old
+        // RedundantCastsTransformer stripped them — but ONLY the raw Convert/TypeAs nodes its
+        // single tree pass could see. Casts built by the builder's As() for an ELM "as"
+        // operator were ElmAsExpression wrappers that reduced to a real TypeAs at print time,
+        // AFTER the transformer ran, so they always survived and printed "x as object"
+        // (whatever their operand — HEDIS AMR_Details returns a definition-call result this
+        // way). IrCast.FromCqlAsOperator records that origin; see PrintCast in
+        // CSharpIrEmitter.Print.cs.
+        var s = new IrLocal(typeof(string), "s");
+
+        var fromCqlAs = new IrCast(s, typeof(object), IrCastKind.As, fromCqlAsOperator: true);
+        Assert.AreEqual(
+            "{\n    return s as object;\n}",
+            EmitBody(new IrLambda([s], fromCqlAs)));
+
+        // A conversion-helper cast (old: raw Expression.TypeAs) strips like the old
+        // transformer's reference-type rule.
+        var fromConversion = new IrCast(s, typeof(object), IrCastKind.As);
+        Assert.AreEqual(
+            "{\n    return s;\n}",
+            EmitBody(new IrLambda([s], fromConversion)));
+
+        // Value-typed operands always strip — the old StripBoxing ran at PRINT time inside
+        // BuildUnaryExpression, so it applied to reduced ElmAsExpression nodes too.
+        var i = new IrLocal(typeof(int?), "i");
+        var boxing = new IrCast(i, typeof(object), IrCastKind.As, fromCqlAsOperator: true);
+        Assert.AreEqual(
+            "{\n    return i;\n}",
+            EmitBody(new IrLambda([i], boxing)));
     }
 
     [TestMethod]
@@ -373,6 +525,23 @@ public class CSharpIrEmitterTests
     }
 
     [TestMethod]
+    public void Binary_RightOperandNeverParenthesized()
+    {
+        // LambdaDefinitionWriter.BuildBinaryExpression parenthesizes ONLY the left operand
+        // ("leftCode = leftCode.ParenthesizeIfNeeded();") -- rightCode is used verbatim,
+        // however it printed, e.g. an "as" cast: "g ?? h as string", never
+        // "g ?? (h as string)". Found via the HEDIS 2025 corpus (Claims/ExplanationOfBenefits'
+        // "g_ ?? h_ as IEnumerable<CodeableConcept>").
+        var g = new IrLocal(typeof(string), "g");
+        var h = new IrLocal(typeof(object), "h");
+        var coalesceWithAsRight = new IrBinary(IrBinaryOp.Coalesce, g, new IrCast(h, typeof(string), IrCastKind.As));
+
+        Assert.AreEqual(
+            "{\n    return g ?? h as string;\n}",
+            EmitBody(new IrLambda([g, h], coalesceWithAsRight)));
+    }
+
+    [TestMethod]
     public void ObjectCreation_NewAndMemberInit()
     {
         var listCtor = typeof(List<int>).GetConstructor([typeof(int)])!;
@@ -385,8 +554,15 @@ public class CSharpIrEmitterTests
         var widgetNew = new IrNew(widgetCtor);
         var countProperty = typeof(CSharpIrEmitterTestWidget).GetProperty(nameof(CSharpIrEmitterTestWidget.Count))!;
         var memberInit = new IrMemberInit(widgetNew, [(countProperty, new IrConstant(7, typeof(int)))]);
+        // LambdaDefinitionWriter.BuildMemberInitExpression prints a multi-line block: "new
+        // Type" (no parens — that form is never routed through BuildNewExpression/PrintNew),
+        // "{" on its own line, one "Member = value," per indented line (trailing comma even on
+        // the last binding), closing "}" back at the original indent (see PrintMemberInit in
+        // CSharpIrEmitter.Print.cs). This replaced an earlier single-line "new Type() { ... }"
+        // rendering that never matched the old pipeline (found via the HEDIS 2025 corpus —
+        // ResultParameters/HFS_Elements construct a FHIR Parameters resource this way).
         Assert.AreEqual(
-            "{\n    CSharpIrEmitterTestWidget a_ = new CSharpIrEmitterTestWidget() { Count = 7 };\n    return a_;\n}",
+            "{\n    CSharpIrEmitterTestWidget a_ = new CSharpIrEmitterTestWidget\n    {\n        Count = 7,\n    };\n    return a_;\n}",
             EmitBody(new IrLambda([], memberInit)));
     }
 
@@ -400,9 +576,14 @@ public class CSharpIrEmitterTests
             "{\n    int[] a_ = [\n        1,\n        2,\n    ];\n    return a_;\n}",
             EmitBody(new IrLambda([], newArray)));
 
+        // LambdaDefinitionWriter.BuildNewArrayExpression: "case ExpressionType.NewArrayBounds:
+        // return "[]";" — unconditional, regardless of the bounds value; the old builder only
+        // ever constructs this node with a literal zero bound (empty untyped/typed lists), so
+        // it never had to print anything else. Found via the HEDIS 2025 corpus (many libraries
+        // build an empty typed array this way, e.g. "Immunization[] k_ = [];").
         var newArrayBounds = new IrNewArrayBounds(typeof(string), new IrConstant(3, typeof(int)));
         Assert.AreEqual(
-            "{\n    string[] a_ = new string[3];\n    return a_;\n}",
+            "{\n    string[] a_ = [];\n    return a_;\n}",
             EmitBody(new IrLambda([], newArrayBounds)));
     }
 
@@ -465,6 +646,27 @@ public class CSharpIrEmitterTests
     }
 
     [TestMethod]
+    public void Conditional_CoalescedConstantTest_FoldsToSurvivingBranch()
+    {
+        // The old RedundantCastsTransformer.VisitConditional ran Visit(node.Test) BEFORE
+        // matching it against a bool constant, so its own bottom-up VisitBinary coalesce fold
+        // ("a (not null) ?? x => a") had already reduced Coalesce(Constant(true), false) to
+        // Constant(true) — the shape the builder's If() produces for CQL's
+        // "if true then ... else null" idiom (test coalesced via .Coalesce()). Mirrored by
+        // TryFoldTestToBoolConstant in CSharpIrEmitter.Print.cs; found via the HEDIS 2025
+        // corpus (CQL_Common's Error/Warning function bodies).
+        var discarded = new IrInvoke(null, MathAbsInt, new IrConstant(-5, typeof(int)));
+        var coalescedTest = new IrBinary(IrBinaryOp.Coalesce,
+            new IrConstant(true, typeof(bool?)), new IrConstant(false, typeof(bool)));
+        var kept = new IrInvoke(null, MathAbsInt, new IrConstant(-7, typeof(int)));
+        var conditional = new IrConditional(coalescedTest, kept, discarded, typeof(int));
+
+        Assert.AreEqual(
+            "{\n    int a_ = Math.Abs(-7);\n    return a_;\n}",
+            EmitBody(new IrLambda([], conditional)));
+    }
+
+    [TestMethod]
     public void DefinitionCall_LocalAndForeign()
     {
         var localCall = new IrDefinitionCall(
@@ -501,10 +703,16 @@ public class CSharpIrEmitterTests
     }
 
     [TestMethod]
-    public void NameHints_KeywordAndDuplicateHintsFallBackToGeneratedNames()
+    public void NameHints_HonoredVerbatim_KeywordsFallBackToGeneratedNames()
     {
-        // "class" is a C# keyword and the two "x" hints collide: only the first "x" is
-        // honored; the others get generated names so the emitted code compiles.
+        // Hints print VERBATIM, duplicates included — the old pipeline never renamed lambda
+        // parameters (RenameVariablesVisitor only named unnamed block variables; the writer
+        // printed p.Name as-is), so a repeated alias prints repeated (the pre-existing #1343
+        // shape) and a nested lambda's alias shadows an ancestor's verbatim (HEDIS
+        // PCR_Details' "stay"). Test updated when an earlier, stricter lineage-reservation
+        // rule was removed for byte parity — see AllocateName in CSharpIrEmitter.Scope.cs.
+        // The keyword fallback is a deliberate deviation from old (old printed an @-escaped
+        // declaration but unescaped references, i.e. non-compiling; ledger note).
         var keyword = new IrLocal(typeof(int), "class");
         var x1 = new IrLocal(typeof(int), "x");
         var x2 = new IrLocal(typeof(int), "x");
@@ -514,11 +722,33 @@ public class CSharpIrEmitterTests
         var body = emitter.EmitBodyBlock(lambda).Replace("\r\n", "\n");
         var names = emitter.GetParameterNames(lambda);
 
-        Assert.AreEqual("x", names[1]);
         Assert.AreNotEqual("class", names[0]);
-        Assert.AreNotEqual("x", names[2]);
-        CollectionAssert.AllItemsAreUnique(names.ToList());
-        Assert.AreEqual($"{{\n    return {names[2]};\n}}", body);
+        Assert.AreEqual("x", names[1]);
+        Assert.AreEqual("x", names[2]);
+        Assert.AreEqual("{\n    return x;\n}", body);
+    }
+
+    [TestMethod]
+    public void NameHints_NestedLambdaReusesAncestorHintVerbatim()
+    {
+        // A nested lambda whose parameter carries the SAME CQL alias as an enclosing lambda's
+        // parameter prints it verbatim, shadowing the ancestor — the old pipeline never
+        // renamed parameters, so HEDIS PCR_Details' Select over "stay" tuples inside a
+        // "stay" lambda prints both as "stay". (See AllocateName in CSharpIrEmitter.Scope.cs.)
+        var applyFunc = typeof(CSharpIrEmitterTestHelpers).GetMethod(nameof(CSharpIrEmitterTestHelpers.ApplyFunc))!;
+        var outer = new IrLocal(typeof(int), "stay");
+        var inner = new IrLocal(typeof(int), "stay");
+        var innerLambda = new IrLambda([inner], new IrCast(inner, typeof(int?), IrCastKind.Cast));
+        var call = new IrInvoke(null, applyFunc, innerLambda, outer);
+        var lambda = new IrLambda([outer], call);
+
+        var expected =
+            "{\n" +
+            "    int? a_(int stay) => (int?)stay;\n" +
+            "    int? b_ = CSharpIrEmitterTestHelpers.ApplyFunc(a_, stay);\n" +
+            "    return b_;\n" +
+            "}";
+        Assert.AreEqual(expected, EmitBody(lambda));
     }
 
     [TestMethod]

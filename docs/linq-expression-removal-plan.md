@@ -5,13 +5,15 @@ phases 2–4 implemented and in review as a stacked PR chain
 ([#1331](https://github.com/FirelyTeam/firely-cql-sdk/pull/1331) →
 [#1340](https://github.com/FirelyTeam/firely-cql-sdk/pull/1340) →
 [#1344](https://github.com/FirelyTeam/firely-cql-sdk/pull/1344), aggregating onto
-`feature/linq-expr-removal`); phase 5 in progress — the RR23 and dqm-content-qicore-2025
-(CMS56) golden corpora are byte-identical between pipelines, but regenerating the larger
-HEDIS 2025 corpus surfaced two blocking bugs in the IR pipeline
+`feature/linq-expr-removal`); phase 5 golden parity is proven on all three corpora: RR23,
+dqm-content-qicore-2025 (CMS56), and the full HEDIS 2025 corpus (381 libraries,
+byte-identical between pipelines). The two HEDIS-surfaced blocking bugs
 ([#1361](https://github.com/FirelyTeam/firely-cql-sdk/issues/1361),
-[#1362](https://github.com/FirelyTeam/firely-cql-sdk/issues/1362)) — see "Findings from
-phase 5" below. Golden parity is not yet proven; do not flip the default until both are
-fixed and HEDIS 2025 is added as a permanent golden corpus.
+[#1362](https://github.com/FirelyTeam/firely-cql-sdk/issues/1362)) are fixed, six further
+cosmetic divergence classes were aligned (see "Findings from phase 5" and the post-parity
+ledger), and the permanent `Hedis2025.GoldenTests` parity guard is un-skipped in the
+`Firely.Cql.Sdk.Integration.Runner` submodule. The remaining flip-over decision (default
+`UseIrPipeline`, then phase 6) is tracked in PR #1346.
 
 ## Context
 
@@ -145,10 +147,22 @@ fallback for branches that hoist locals), and the printing backend itself is swa
 emitting Roslyn syntax trees from the IR for normalized formatting. The phase-5 grind added
 several faithfully-replicated old quirks worth revisiting (all documented at their emitter
 sites): duplicate eliminations burn a letter from the naming sequence (visible gaps);
-the multi-branch conditional form carries a stray `;` after its final else block; and
-redundant `as object` casts survive only when they wrap another cast — an accident of the
-old visitor ordering (`ElmAsExpression` reduced after `RedundantCastsTransformer` ran),
-not a design choice.
+the multi-branch conditional form carries a stray `;` after its final else block;
+redundant `as object` casts survive exactly when they were built from the ELM
+`as`/`cast` operator (tracked via `IrCast.FromCqlAsOperator`) — an accident of the old
+visitor ordering (`ElmAsExpression` reduced only at print time, after
+`RedundantCastsTransformer`'s single pass), not a design choice; a binary expression's
+RIGHT operand is never parenthesized (`g_ ?? h_ as IEnumerable<...>`) — the old
+`BuildBinaryExpression` only guarded the left side, a latent precedence hazard replicated
+for parity; lambda-parameter alias names print verbatim with NO collision handling — the
+old pipeline never renamed parameters, so a repeated alias prints repeated (#1343) and a
+nested lambda's alias shadows an ancestor's (HEDIS PCR_Details' nested `stay` lambdas),
+legal C# only because local functions may shadow; a when-condition that is itself a
+non-simple conditional prints fully inline, branches and all (the old trial visit counted
+the whole hoisted case-lambda as a single assignment). One deliberate DEVIATION from the
+old pipeline (no corpus exercises it): a CQL alias that is a C# keyword falls back to a
+generated name, where the old writer printed a non-compiling `@keyword`-escaped
+declaration with unescaped references.
 
 ### Findings from phases 2–4
 

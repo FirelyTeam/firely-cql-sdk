@@ -381,13 +381,15 @@ partial class IrExpressionBuilderContext
                                               throw this.NewExpressionBuildingException(
                                                   $"{type} was expected to be a list type.");
                         var newArray = new IrNewArrayBounds(listElementType, new IrConstant(0, typeof(int)));
-                        var elmAs = new IrCast(newArray, type, castKind);
+                        // fromCqlAsOperator: the old pipeline built ElmAsExpression here (and at
+                        // the other As() return sites below) — see IrCast.FromCqlAsOperator.
+                        var elmAs = new IrCast(newArray, type, castKind, fromCqlAsOperator: true);
                         return elmAs;
                     }
                     else if (type == _typeResolver.AnyType) // handles untyped empty lists whose type is Any
                     {
                         var newArray = new IrNewArrayBounds(_typeResolver.AnyType, new IrConstant(0, typeof(int)));
-                        var elmAs = new IrCast(newArray, type, castKind);
+                        var elmAs = new IrCast(newArray, type, castKind, fromCqlAsOperator: true);
                         return elmAs;
                     }
 
@@ -406,7 +408,7 @@ partial class IrExpressionBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
                     var defaultExpression = new IrDefault(type);
-                    return new IrCast(defaultExpression, type, castKind);
+                    return new IrCast(defaultExpression, type, castKind, fromCqlAsOperator: true);
                 }
                 else
                 {
@@ -433,7 +435,7 @@ partial class IrExpressionBuilderContext
                             // falls into the default arm and still wraps in a cast/as node built
                             // from the original operand, rather than returning operand or
                             // converted directly.
-                            return new IrCast(operand, type, castKind);
+                            return new IrCast(operand, type, castKind, fromCqlAsOperator: true);
                     }
                 }
             }
@@ -457,7 +459,7 @@ partial class IrExpressionBuilderContext
                                        @as.operand));
             }
 
-            return new IrCast(operand, type, castKind);
+            return new IrCast(operand, type, castKind, fromCqlAsOperator: true);
         }
     }
 

@@ -22,16 +22,6 @@ internal partial class CSharpIrEmitter
         private readonly CSharpIrEmitter _emitter;
         private readonly VariableNameGenerator _names;
 
-        // Hint names (original CQL alias names, e.g. a lambda parameter's NameHint) reserved
-        // in THIS LINEAGE only: copied — not shared — into each nested scope, exactly like the
-        // old VariableNameGenerator.Reserved list (ForNewScope conses onto a copy of the
-        // parent's list). A hint used by an earlier SIBLING scope (e.g. one "where" lambda's
-        // alias) is therefore free to be reused by a later, unrelated lambda with the same CQL
-        // alias — reproducing CMS56's "LowerBodyFracture" reused verbatim as the parameter of
-        // two separate (sibling) local functions in the same method. Only an ANCESTOR scope's
-        // hint (still live/capturable from a nested closure) blocks reuse.
-        private readonly HashSet<string> _reservedHints;
-
         // Statements are deferred renderers: plain declarations resolve immediately, but a
         // hoisted local function's INTERIOR renders only when the enclosing scope writes out.
         // This reproduces the old RenameVariablesVisitor naming order, which named all of a
@@ -41,11 +31,10 @@ internal partial class CSharpIrEmitter
         private readonly List<Func<string>> _statements = [];
         private readonly Dictionary<string, Atom> _dedup = [];
 
-        private Scope(CSharpIrEmitter emitter, VariableNameGenerator names, HashSet<string> reservedHints)
+        private Scope(CSharpIrEmitter emitter, VariableNameGenerator names)
         {
             _emitter = emitter;
             _names = names;
-            _reservedHints = reservedHints;
         }
 
         public static Scope CreateRoot(CSharpIrEmitter emitter, IReadOnlyList<IrLocal> parameters)
@@ -53,7 +42,7 @@ internal partial class CSharpIrEmitter
             var names = new VariableNameGenerator(
                 reserved: parameters.Select(p => p.NameHint).OfType<string>(),
                 postfix: "_");
-            var scope = new Scope(emitter, names, []);
+            var scope = new Scope(emitter, names);
             scope.NameParameters(parameters);
             return scope;
         }
@@ -62,8 +51,10 @@ internal partial class CSharpIrEmitter
         {
             var nested = new Scope(
                 _emitter,
-                _names.ForNewScope(parameters.Select(p => p.NameHint).OfType<string>()),
-                [.. _reservedHints]); // copy, not share: see _reservedHints
+                // The GENERATED letter sequence must never collide with a hint name visible in
+                // this lineage: the old VariableNameGenerator.Reserved list, threaded the same
+                // way (ForNewScope conses the new scope's names onto a copy of the parent's).
+                _names.ForNewScope(parameters.Select(p => p.NameHint).OfType<string>()));
             nested.NameParameters(parameters);
             return nested;
         }
@@ -78,21 +69,30 @@ internal partial class CSharpIrEmitter
         }
 
         /// <summary>
-        /// Allocates a variable name, honoring <paramref name="hint"/> only when it is not a
-        /// C# keyword and not already reserved in this lineage (see
-        /// <see cref="_reservedHints"/>) — a duplicate hint still live in an ancestor scope
-        /// would print shadowing declarations (CS0136).
-        /// <para>Deliberately NOT guarded (matching the old pipeline exactly): a hint that
-        /// happens to collide with a GENERATED name (an alias literally shaped like
-        /// <c>a_</c>) is used verbatim, just as the old builder used alias names verbatim on
-        /// its ParameterExpressions — such an alias would produce the same non-compiling
+        /// Allocates a variable name, honoring <paramref name="hint"/> UNCONDITIONALLY when it
+        /// is not a C# keyword — exactly like the old pipeline, whose
+        /// RenameVariablesVisitor only ever named unnamed BLOCK variables and never touched
+        /// lambda parameters: the old writer printed a parameter's <c>p.Name</c> (the CQL
+        /// alias) verbatim wherever it occurred (BuildLambdaExpressionParameters /
+        /// GetOrCreateName). In particular a nested lambda's alias reuses the ancestor's name
+        /// verbatim, shadowing it — HEDIS 2025's PCR_Details maps over "stay" tuples inside a
+        /// lambda whose own parameter is already named "stay", and the old output prints both
+        /// as <c>stay</c>. (An earlier lineage-reservation rule here renamed the inner one to
+        /// a generated name; that was stricter than old and broke byte parity.)
+        /// <para>Also deliberately NOT guarded (matching the old pipeline exactly): a hint
+        /// that happens to collide with a GENERATED name (an alias literally shaped like
+        /// <c>a_</c>) is used verbatim — such an alias would produce the same non-compiling
         /// output from both pipelines.</para>
+        /// <para>The keyword guard is a deliberate DEVIATION from old: the old writer printed
+        /// the declaration <c>@keyword</c>-escaped (EscapeKeywords) but the REFERENCES
+        /// unescaped (GetOrCreateName uses the raw name), i.e. non-compiling output. No
+        /// corpus exercises a keyword-named CQL alias; falling back to a generated name keeps
+        /// the output legal. Recorded in the plan doc's post-parity ledger.</para>
         /// </summary>
         private string AllocateName(string? hint)
         {
             if (hint is not null
-                && SyntaxFacts.GetKeywordKind(hint) == SyntaxKind.None
-                && _reservedHints.Add(hint))
+                && SyntaxFacts.GetKeywordKind(hint) == SyntaxKind.None)
                 return hint;
 
             // The generated-letter sequence (_names) is shared and monotonically increasing
@@ -395,6 +395,13 @@ internal partial class CSharpIrEmitter
             {
                 IrConstant or IrDefault or IrContextParameter or IrLocal => 0,
                 IrProperty { NullConditional: false } p => p.Receiver is null ? 0 : CountSpineNodes(p.Receiver),
+                // A null-conditional member access was the custom NullConditionalMemberExpression
+                // in the old pipeline — an extension node, NOT a MemberExpression — so
+                // SimplifyExpressionsVisitor.DoVisit fell through to "_ => MakeLet(...)": exactly
+                // one assignment for itself plus its receiver's. That keeps a when-condition like
+                // "info?.snfStay ?? false" (HEDIS PCR_Elements) or "period?.StartElement is null"
+                // (FHIRHelpers ToInterval) within isSimpleWhen's "<= 1" budget, printing inline.
+                IrProperty { NullConditional: true } p => 1 + (p.Receiver is null ? 0 : CountSpineNodes(p.Receiver)),
                 IrCast c => CountSpineNodes(c.Operand),
                 IrNew n => n.Arguments.Sum(CountSpineNodes),
                 IrThrow t => CountSpineNodes(t.Exception),
@@ -402,7 +409,32 @@ internal partial class CSharpIrEmitter
                     CountSpineNodes(b.Left) + CountSpineNodes(b.Right),
                 IrConditional c when
                     c.IfFalse is not IrConditional && IsInlineOnly(c.IfTrue) && IsInlineOnly(c.IfFalse) => 0,
+                // A NON-simple conditional still counts exactly ONE hoist as a when-condition:
+                // the old trial visit (SimplifyExpressionsVisitor.VisitConditional) converted it
+                // via ToCwt and VisitCaseWhenThenExpression, whose branch contents went to
+                // NESTED visitors — only "MakeLet(caseStatementLambda)" landed on the trial
+                // visitor itself. isSimpleWhen's "<= 1" therefore held and the when printed
+                // inline as the raw ternary, branches and all (BuildExpression of the
+                // unvisited ConditionalExpression). Found via the HEDIS 2025 corpus
+                // (TRC_Elements/IET_Elements/AISE_Reporting/HEDIS's
+                // "if (((X) ?? false ? A : B)"-shaped when-conditions).
+                IrConditional => 1,
                 IrInvoke i => 1 + (i.Receiver is null ? 0 : CountSpineNodes(i.Receiver)) + i.Arguments.Sum(CountSpineNodes),
+                // A type test (old: TypeBinaryExpression) also had no special case in the old
+                // DoVisit — "_ => MakeLet(...)", one assignment plus its operand's. Keeps
+                // "proc is CodeableConcept" (HEDIS Claims/Encounters) inline as a when.
+                IrTypeIs t => 1 + CountSpineNodes(t.Operand),
+                // A definition/function call is DoVisit's default case in the old visitor too
+                // (DefinitionCallExpression/FunctionCallExpression aren't in its pass-through
+                // list — Constant/Parameter/New/Member/ElmAs/Default — nor separately handled),
+                // so it falls to "_ => MakeLet(base.Visit(node))": exactly one assignment for
+                // itself plus whatever its (visited) arguments would need. Without this case
+                // (falling through to the "2" default below), a when-condition shaped
+                // "Coalesce(DefinitionCall, false)" always hoisted into a zero-arg bool
+                // function instead of printing inline like old's
+                // "(this.Foo(context)) ?? false" (isSimpleWhen's threshold is "<= 1") —
+                // ~131 HEDIS 2025 libraries hit this (e.g. AAB_Details' data-source guards).
+                IrDefinitionCall d => 1 + d.Arguments.Sum(CountSpineNodes),
                 _ => 2, // any other spine node: treat as "complex enough" to defer
             };
 
