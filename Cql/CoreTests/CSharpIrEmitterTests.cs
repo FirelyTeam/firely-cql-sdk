@@ -345,6 +345,27 @@ public class CSharpIrEmitterTests
             "{\n    return s is null;\n}",
             EmitBody(new IrLambda([s], equalNull)));
 
+        // #1361 — the old RedundantCastsTransformer's constant coalesce folds, mirrored at
+        // print time. Without the first, Message(source, true, ...) emits the invalid C#
+        // `true ?? false` (CS0019: ?? needs a nullable left operand).
+        var trueCoalesce = new IrBinary(IrBinaryOp.Coalesce,
+            new IrConstant(true, typeof(bool?)), new IrConstant(false, typeof(bool?)));
+        Assert.AreEqual( // a (not null) ?? x => a
+            "{\n    return true;\n}",
+            EmitBody(new IrLambda([], trueCoalesce)));
+
+        var nullCoalesce = new IrBinary(IrBinaryOp.Coalesce,
+            new IrConstant(null, typeof(int?)), new IrConstant(5, typeof(int?)));
+        Assert.AreEqual( // null_constant ?? x => x
+            "{\n    return 5;\n}",
+            EmitBody(new IrLambda([], nullCoalesce)));
+
+        var defaultCoalesce = new IrBinary(IrBinaryOp.Coalesce,
+            new IrDefault(typeof(int?)), new IrConstant(5, typeof(int?)));
+        Assert.AreEqual( // default ?? x => x
+            "{\n    return 5;\n}",
+            EmitBody(new IrLambda([], defaultCoalesce)));
+
         var notEqualNull = new IrBinary(IrBinaryOp.NotEqual, s, new IrConstant(null, typeof(object)));
         Assert.AreEqual(
             "{\n    return s is not null;\n}",
@@ -396,6 +417,51 @@ public class CSharpIrEmitterTests
         Assert.AreEqual(
             "{\n    (CqlTupleMetadata, int? A, string B)? a_ = (CqlTupleMetadata_TEST, 1, \"x\");\n    return a_;\n}",
             EmitBody(lambda));
+    }
+
+    [TestMethod]
+    public void TupleInit_ElementsOutOfCanonicalOrder_PrintInDeclaredPropertyOrder()
+    {
+        // #1362: values are looked up by name and emitted in the tuple type's declared
+        // property order (A, B) regardless of the stored (CQL-authored) order — the
+        // positional value-tuple literal would otherwise silently transpose same-typed
+        // fields. Mirrors the old writer's BuildMemberInitTupleExpression.
+        var tupleType = typeof(CSharpIrEmitterTestTuple);
+        var tupleInit = new IrTupleInit(tupleType,
+            [("B", new IrConstant("x", typeof(string))), ("A", new IrConstant(1, typeof(int?)))]);
+
+        Assert.AreEqual(
+            "{\n    (CqlTupleMetadata, int? A, string B)? a_ = (CqlTupleMetadata_TEST, 1, \"x\");\n    return a_;\n}",
+            EmitBody(new IrLambda([], tupleInit)));
+    }
+
+    [TestMethod]
+    public void TupleInit_UnboundElement_PrintsDefault()
+    {
+        // Properties without a binding print "default", exactly like the old
+        // BuildMemberInitTupleExpression's GetValueOrDefault fallback.
+        var tupleType = typeof(CSharpIrEmitterTestTuple);
+        var tupleInit = new IrTupleInit(tupleType, [("B", new IrConstant("x", typeof(string)))]);
+
+        Assert.AreEqual(
+            "{\n    (CqlTupleMetadata, int? A, string B)? a_ = (CqlTupleMetadata_TEST, default, \"x\");\n    return a_;\n}",
+            EmitBody(new IrLambda([], tupleInit)));
+    }
+
+    [TestMethod]
+    public void Conditional_ConstantTest_FoldsToSurvivingBranch()
+    {
+        // if(true, A, B) => A / if(false, A, B) => B — the old RedundantCastsTransformer's
+        // VisitConditional fold (#1361). The discarded branch would hoist a call; folding
+        // before dispatch means no statement is ever emitted for it.
+        var discarded = new IrInvoke(null, MathAbsInt, new IrConstant(-5, typeof(int)));
+        var foldTrue = new IrConditional(
+            new IrConstant(true, typeof(bool)), new IrConstant(1, typeof(int)), discarded, typeof(int));
+        Assert.AreEqual("{\n    return 1;\n}", EmitBody(new IrLambda([], foldTrue)));
+
+        var foldFalse = new IrConditional(
+            new IrConstant(false, typeof(bool)), discarded, new IrConstant(2, typeof(int)), typeof(int));
+        Assert.AreEqual("{\n    return 2;\n}", EmitBody(new IrLambda([], foldFalse)));
     }
 
     [TestMethod]

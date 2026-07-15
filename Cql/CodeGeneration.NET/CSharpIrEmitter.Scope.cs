@@ -120,6 +120,10 @@ internal partial class CSharpIrEmitter
         /// </summary>
         public Atom? Linearize(IrExpression node, bool tailPosition = false)
         {
+            // if(true, A, B) => A / if(false, A, B) => B before dispatch, so the discarded
+            // branch is never linearized — the old RedundantCastsTransformer fold (#1361).
+            node = FoldConstantTest(node);
+
             switch (node)
             {
                 // Simple expressions print in place, nothing to hoist.
@@ -275,7 +279,9 @@ internal partial class CSharpIrEmitter
             while (current is IrConditional c)
             {
                 cases.Add((c.Test, c.IfTrue));
-                current = c.IfFalse;
+                // Fold constant-test conditionals while walking the else-chain too, so a
+                // folded link collapses into its surviving branch instead of becoming a case.
+                current = FoldConstantTest(c.IfFalse);
             }
             return HoistConditionalFunction(conditional.Type, cases, current);
         }

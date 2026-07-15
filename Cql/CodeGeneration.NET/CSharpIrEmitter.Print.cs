@@ -114,12 +114,27 @@ internal partial class CSharpIrEmitter
     }
 
     /// <summary>
+    /// <c>if(true, A, B) => A</c> / <c>if(false, A, B) => B</c> — the old
+    /// RedundantCastsTransformer's constant-test conditional fold (see #1361), applied
+    /// wherever a conditional is consumed so that, like the old tree-level pre-pass, the
+    /// discarded branch is never linearized and contributes no hoisted statements.
+    /// </summary>
+    internal static IrExpression FoldConstantTest(IrExpression node)
+    {
+        while (node is IrConditional { Test: IrConstant { Value: bool test } } conditional)
+            node = test ? conditional.IfTrue : conditional.IfFalse;
+        return node;
+    }
+
+    /// <summary>
     /// Prints an entire subtree as one inline expression — no hoisting at all, calls
     /// included. Used for "simple" conditionals, which the old pipeline returned unvisited
     /// so their whole subtree (the test included, however complex) printed inline.
     /// </summary>
-    internal string PrintFullyInline(IrExpression node) =>
-        node switch
+    internal string PrintFullyInline(IrExpression node)
+    {
+        node = FoldConstantTest(node);
+        return node switch
         {
             IrConstant or IrDefault or IrContextParameter => PrintSimple(node),
             IrLocal local => _assignedNames.TryGetValue(local, out var name)
@@ -131,6 +146,7 @@ internal partial class CSharpIrEmitter
                 "An if-chain cannot print as an inline expression; this subtree should not have been classified inline-only."),
             _ => PrintShallow(node, child => new Atom(PrintFullyInline(child), child)),
         };
+    }
 
     /// <summary>
     /// The old writer's ternary format (BuildConditionalExpression): open paren, test on its
@@ -276,6 +292,28 @@ internal partial class CSharpIrEmitter
             && Nullable.GetUnderlyingType(leftCast.Type) == leftCast.Operand.Type)
             return child(leftCast.Operand).Code;
 
+        // The old RedundantCastsTransformer's remaining coalesce folds (#1361). Ordering and
+        // conditions mirror its VisitBinary exactly, and each fold returns before the discarded
+        // side is linearized, so — like the old tree-level rewrite — the dropped operand
+        // contributes no hoisted statements. Without the first fold, CQL's
+        // Message(source, true, ...) idiom prints as the invalid C# `true ?? false` (CS0019).
+        if (binary.Op == IrBinaryOp.Coalesce)
+        {
+            // a (not null) ?? x => a
+            if (binary.Left is IrConstant { Value: not null })
+                return child(binary.Left).Code;
+
+            var isNullableType = !binary.Left.Type.IsValueType || Nullable.GetUnderlyingType(binary.Left.Type) is not null;
+
+            // default ?? x => x
+            if (binary.Left is IrDefault && isNullableType)
+                return child(binary.Right).Code;
+
+            // null_constant ?? x => x
+            if (binary.Left is IrConstant { Value: null } && isNullableType)
+                return child(binary.Right).Code;
+        }
+
         var left = child(binary.Left).Code.ParenthesizeIfNeeded();
         var right = child(binary.Right).Code;
 
@@ -310,7 +348,15 @@ internal partial class CSharpIrEmitter
 
     private string PrintTupleInit(IrTupleInit tupleInit, Func<IrExpression, Atom> child)
     {
-        var elements = string.Join(", ", tupleInit.Elements.Select(e => child(e.Value).Code));
+        // Elements are emitted in the tuple type's canonical declared property order, looked up
+        // by name — NOT in the stored (CQL-authored) order, which the printed positional value
+        // tuple would silently transpose (#1362). Mirrors the old writer's
+        // BuildMemberInitTupleExpression, including printing "default" for unbound properties.
+        var codeByName = tupleInit.Elements.ToDictionary(e => e.Name, e => child(e.Value).Code);
+        var elements = string.Join(", ",
+            _typeToCSharpConverter
+                .GetTupleProperties(tupleInit.Type)
+                .Select(p => codeByName.GetValueOrDefault(p.Name, "default")));
         return $"({_namingConventions.TupleMetadataFieldName(tupleInit.Type)}, {elements})";
     }
 
