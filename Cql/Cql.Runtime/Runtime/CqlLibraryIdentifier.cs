@@ -133,10 +133,8 @@ public readonly record struct CqlLibraryIdentifier :
     /// </summary>
     /// <param name="other">The other identifier to compare with.</param>
     /// <returns>A value that indicates the relative order of the identifiers being compared.</returns>
-    public int CompareTo(CqlLibraryIdentifier other)
-    {
-        return string.Compare(_value, other._value, StringComparison.Ordinal);
-    }
+    /// <remarks>Uses spec-conformant case-sensitive ordinal comparison via <see cref="CqlLibrarySemantics"/>.</remarks>
+    public int CompareTo(CqlLibraryIdentifier other) => CqlLibrarySemantics.CompareIds(_value, other._value);
 
     /// <summary>
     /// Compares the current instance with another object and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
@@ -152,6 +150,14 @@ public readonly record struct CqlLibraryIdentifier :
             _ => throw new ArgumentException($"Object must be of type {nameof(CqlLibraryIdentifier)}")
         };
     }
+
+    /// <inheritdoc/>
+    /// <remarks>
+    /// Uses spec-conformant case-sensitive ordinal hashing via <see cref="CqlLibrarySemantics"/>.
+    /// The auto-generated record <c>Equals(CqlLibraryIdentifier)</c> uses ordinal string equality,
+    /// which is consistent with this hash.
+    /// </remarks>
+    public override int GetHashCode() => CqlLibrarySemantics.ComputeHashCode(_value, null);
 
     #endregion
 

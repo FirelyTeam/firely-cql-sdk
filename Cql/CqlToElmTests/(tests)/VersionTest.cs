@@ -87,10 +87,10 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var x = vi("foo", "1.0");
             var y = vi("food", "1.0");
-            x.CompareTo(y).Should().Be(-1);
+            x.CompareTo(y).Should().BeNegative();
             x.Equals(y).Should().BeFalse();
             Equals(x, y).Should().BeFalse();
-            y.CompareTo(x).Should().Be(1);
+            y.CompareTo(x).Should().BePositive();
             y.Equals(x).Should().BeFalse();
             Equals(y, x).Should().BeFalse();
         }
@@ -100,10 +100,10 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var x = vi("foo", "1.0");
             var y = vi("foo", "1.1");
-            x.CompareTo(y).Should().Be(-1);
+            x.CompareTo(y).Should().BeNegative();
             x.Equals(y).Should().BeFalse();
             Equals(x, y).Should().BeFalse();
-            y.CompareTo(x).Should().Be(1);
+            y.CompareTo(x).Should().BePositive();
             y.Equals(x).Should().BeFalse();
             Equals(y, x).Should().BeFalse();
         }
@@ -113,10 +113,10 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var x = vi("foo", "1");
             var y = vi("foo", "1.1");
-            x.CompareTo(y).Should().Be(-1);
+            x.CompareTo(y).Should().BeNegative();
             x.Equals(y).Should().BeFalse();
             Equals(x, y).Should().BeFalse();
-            y.CompareTo(x).Should().Be(1);
+            y.CompareTo(x).Should().BePositive();
             y.Equals(x).Should().BeFalse();
             Equals(y, x).Should().BeFalse();
         }
@@ -126,10 +126,10 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var x = vi("foo", "1.1");
             var y = vi("foo", "1.1.1");
-            x.CompareTo(y).Should().Be(-1);
+            x.CompareTo(y).Should().BeNegative();
             x.Equals(y).Should().BeFalse();
             Equals(x, y).Should().BeFalse();
-            y.CompareTo(x).Should().Be(1);
+            y.CompareTo(x).Should().BePositive();
             y.Equals(x).Should().BeFalse();
             Equals(y, x).Should().BeFalse();
         }
@@ -139,10 +139,10 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var x = vi("foo", "1.1");
             var y = vi("foo", null);
-            x.CompareTo(y).Should().Be(1);
+            x.CompareTo(y).Should().BePositive();
             x.Equals(y).Should().BeFalse();
             Equals(x, y).Should().BeFalse();
-            y.CompareTo(x).Should().Be(-1);
+            y.CompareTo(x).Should().BeNegative();
             y.Equals(x).Should().BeFalse();
             Equals(y, x).Should().BeFalse();
         }

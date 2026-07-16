@@ -6,10 +6,36 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Runtime;
+
 namespace Hl7.Cql.Elm
 {
     partial class VersionedIdentifier : IComparable<VersionedIdentifier>, IEquatable<VersionedIdentifier>
     {
+        // Spec-conformant comparison primitives — shared DRY helpers that delegate to
+        // Hl7.Cql.Runtime.CqlLibrarySemantics (accessible via transitive project dependency
+        // Elm → Cql.Firely → Cql.Runtime, with InternalsVisibleTo granted by Cql.Runtime to Elm).
+        // The Cql* runtime structs (CqlLibraryIdentifier, CqlLibraryVersion, CqlVersionedLibraryIdentifier)
+        // call CqlLibrarySemantics directly.
+
+        /// <summary>
+        /// Compares two library identifier strings using spec-conformant case-sensitive ordinal comparison.
+        /// Delegates to <see cref="CqlLibrarySemantics.CompareIds"/>.
+        /// </summary>
+        internal static int CompareIds(string? a, string? b) => CqlLibrarySemantics.CompareIds(a, b);
+
+        /// <summary>
+        /// Compares two library version strings using spec-conformant exact ordinal comparison.
+        /// Delegates to <see cref="CqlLibrarySemantics.CompareVersions"/>.
+        /// </summary>
+        internal static int CompareVersions(string? a, string? b) => CqlLibrarySemantics.CompareVersions(a, b);
+
+        /// <summary>
+        /// Computes a hash code for a library identifier and optional version using spec-conformant semantics.
+        /// Delegates to <see cref="CqlLibrarySemantics.ComputeHashCode"/>.
+        /// </summary>
+        internal static int ComputeHashCode(string? id, string? version) => CqlLibrarySemantics.ComputeHashCode(id, version);
+
         /// <inheritdoc/>
         public int CompareTo(VersionedIdentifier? other)
         {
@@ -19,31 +45,10 @@ namespace Hl7.Cql.Elm
                 throw new InvalidOperationException("id is requlred for comparison");
             else
             {
-                // CQL is a case-sensitive language (spec/condensed/03-developersguide.md §3.4.1 "Case-Sensitivity"):
-                // "To encourage consistency and reduce potential confusion, CQL is a case-sensitive language."
-                // Library identifiers are CQL identifiers, so id comparison must be case-sensitive.
-                var idComparison = StringComparer.Ordinal.Compare(this.id, other.id);
+                var idComparison = CompareIds(this.id, other.id);
                 if (idComparison == 0)
                 {
-                    if (version is null)
-                    {
-                        if (other.version is null)
-                        {
-                            return 0;
-                        }
-                        else return -1;
-                    }
-                    else if (other.version is null)
-                        return 1;
-                    else
-                    {
-                        // Version specifiers must match exactly (spec/condensed/03-developersguide.md §3.2 "Libraries"):
-                        // "If the reference includes a version specifier, the library with that version specifier must be used."
-                        // The version is an opaque string identifier
-                        // (spec/condensed/04-logicalspecification.md §2.1.5 "VersionedIdentifier"):
-                        // "the actual version of the instance of interest in this set"
-                        return StringComparer.Ordinal.Compare(version, other.version);
-                    }
+                    return CompareVersions(version, other.version);
                 }
                 else return idComparison;
             }
@@ -61,19 +66,7 @@ namespace Hl7.Cql.Elm
             };
 
         /// <inheritdoc/>
-        public override int GetHashCode()
-        {
-            // Hash must be consistent with Equals/CompareTo semantics:
-            // - id uses case-sensitive Ordinal comparison (CQL is case-sensitive per
-            //   spec/condensed/03-developersguide.md §3.4.1 "Case-Sensitivity")
-            // - version is an opaque string matched exactly (spec/condensed/03-developersguide.md
-            //   §3.2 "Libraries", spec/condensed/04-logicalspecification.md §2.1.5 "VersionedIdentifier")
-            var hash = new HashCode();
-            hash.Add(id, StringComparer.Ordinal);
-            if (version is { Length: > 0 })
-                hash.Add(version, StringComparer.Ordinal);
-            return hash.ToHashCode();
-        }
+        public override int GetHashCode() => ComputeHashCode(id, version);
 
         /// <nodoc/>
         public void Deconstruct(out string id, out string? version)
