@@ -6,12 +6,14 @@ phases 2–4 implemented and in review as a stacked PR chain
 [#1340](https://github.com/FirelyTeam/firely-cql-sdk/pull/1340) →
 [#1344](https://github.com/FirelyTeam/firely-cql-sdk/pull/1344), aggregating onto
 `feature/linq-expr-removal`); phase 5 golden parity is proven on all three corpora: RR23,
-dqm-content-qicore-2025 (CMS56), and the full HEDIS 2025 corpus (381 libraries,
-byte-identical between pipelines). The two HEDIS-surfaced blocking bugs
+dqm-content-qicore-2025 (CMS56), and the complete HEDIS 2025 corpus (382 libraries,
+byte-identical between pipelines; the one initially-missing ELM file turned out to be a
+`.gitignore` casualty — `coverage*.json` matched `Coverages-2025.2.1.json` — and is
+restored). The two HEDIS-surfaced blocking bugs
 ([#1361](https://github.com/FirelyTeam/firely-cql-sdk/issues/1361),
 [#1362](https://github.com/FirelyTeam/firely-cql-sdk/issues/1362)) are fixed, six further
 cosmetic divergence classes were aligned (see "Findings from phase 5" and the post-parity
-ledger), and the permanent `Hedis2025.GoldenTests` parity guard is un-skipped in the
+ledger), and both permanent `Hedis2025.GoldenTests` guards pass un-skipped in the
 `Firely.Cql.Sdk.Integration.Runner` submodule. The remaining flip-over decision (default
 `UseIrPipeline`, then phase 6) is tracked in PR #1346.
 
