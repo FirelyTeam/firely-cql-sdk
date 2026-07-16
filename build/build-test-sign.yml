@@ -111,6 +111,12 @@ stages:
             inputs:
               nuGetServiceConnections: "${{ parameters.nuGetServiceConnections }}"
 
+          # Ensure the cache path exists even when CqlToolingEnabled is false (the default)
+          # and the Java dependency download never runs -- Cache@2's post-job tar step
+          # fails outright if the directory it's asked to cache doesn't exist at all.
+          - pwsh: New-Item -ItemType Directory -Force -Path "$(Build.SourcesDirectory)/Demo/Cql/Build/target/dependency" | Out-Null
+            displayName: "Ensure Java dependency cache path exists"
+
           # Cache Java dependencies to avoid re-downloading on each build
           - task: Cache@2
             displayName: "Cache Java Dependencies"
