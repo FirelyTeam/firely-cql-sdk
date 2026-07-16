@@ -19,7 +19,10 @@ namespace Hl7.Cql.Elm
                 throw new InvalidOperationException("id is requlred for comparison");
             else
             {
-                var idComparison = StringComparer.OrdinalIgnoreCase.Compare(this.id, other.id);
+                // CQL is a case-sensitive language (spec/condensed/03-developersguide.md §3.4.1 "Case-Sensitivity"):
+                // "To encourage consistency and reduce potential confusion, CQL is a case-sensitive language."
+                // Library identifiers are CQL identifiers, so id comparison must be case-sensitive.
+                var idComparison = StringComparer.Ordinal.Compare(this.id, other.id);
                 if (idComparison == 0)
                 {
                     if (version is null)
@@ -34,7 +37,12 @@ namespace Hl7.Cql.Elm
                         return 1;
                     else
                     {
-                        return VersionComparer.Instance.Compare(version, other.version);
+                        // Version specifiers must match exactly (spec/condensed/03-developersguide.md §3.2 "Libraries"):
+                        // "If the reference includes a version specifier, the library with that version specifier must be used."
+                        // The version is an opaque string identifier
+                        // (spec/condensed/04-logicalspecification.md §2.1.5 "VersionedIdentifier"):
+                        // "the actual version of the instance of interest in this set"
+                        return StringComparer.Ordinal.Compare(version, other.version);
                     }
                 }
                 else return idComparison;
@@ -55,15 +63,15 @@ namespace Hl7.Cql.Elm
         /// <inheritdoc/>
         public override int GetHashCode()
         {
+            // Hash must be consistent with Equals/CompareTo semantics:
+            // - id uses case-sensitive Ordinal comparison (CQL is case-sensitive per
+            //   spec/condensed/03-developersguide.md §3.4.1 "Case-Sensitivity")
+            // - version is an opaque string matched exactly (spec/condensed/03-developersguide.md
+            //   §3.2 "Libraries", spec/condensed/04-logicalspecification.md §2.1.5 "VersionedIdentifier")
             var hash = new HashCode();
-            hash.Add(id, StringComparer.OrdinalIgnoreCase);
+            hash.Add(id, StringComparer.Ordinal);
             if (version is { Length: > 0 })
-            {
-                var parts = version.Split('.').Select(int.Parse).ToArray();
-                int len = parts.Length;
-                while (len > 0 && parts[len - 1] == 0) len--;
-                for (int i = 0; i < len; i++) hash.Add(parts[i]);
-            }
+                hash.Add(version, StringComparer.Ordinal);
             return hash.ToHashCode();
         }
 

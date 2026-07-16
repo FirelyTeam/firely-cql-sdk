@@ -28,23 +28,24 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void VersionedIdentifier_CaseInsensitiveMatch()
+        // CQL is case-sensitive per spec/condensed/03-developersguide.md §3.4.1 "Case-Sensitivity":
+        // "CQL is a case-sensitive language. This means that case is considered when matching
+        //  keywords and identifiers in the language."
+        // Library identifiers are CQL identifiers, so "FoO" and "foo" are different.
+        public void VersionedIdentifier_CaseSensitive_DifferentCase_NotEqual()
         {
             var x = vi("FoO", "1.0");
             var y = vi("fOo", "1.0");
-            x.CompareTo(y).Should().Be(0);
-            x.Equals(y).Should().BeTrue();
-            Equals(x, y).Should().BeTrue();
-            y.CompareTo(x).Should().Be(0);
-            y.Equals(x).Should().BeTrue();
-            Equals(y, x).Should().BeTrue();
+            x.CompareTo(y).Should().NotBe(0);
+            x.Equals(y).Should().BeFalse();
+            Equals(x, y).Should().BeFalse();
         }
 
         [TestMethod]
-        public void VersionedIdentifier_CaseInsensitiveMatch_HashSetContains()
+        public void VersionedIdentifier_CaseSensitive_SameCase_HashSetContains()
         {
-            var x = vi("FoO", "1.0");
-            var y = vi("fOo", "1.0");
+            var x = vi("Foo", "1.0");
+            var y = vi("Foo", "1.0");
             var set = new HashSet<Elm.VersionedIdentifier> { x };
 
             set.Contains(y).Should().BeTrue();
@@ -53,19 +54,23 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void VersionedIdentifier_SemanticallyEqualVersion_HashSetContains()
+        // Version specifiers must match exactly per spec/condensed/03-developersguide.md §3.2 "Libraries":
+        // "If the reference includes a version specifier, the library with that version specifier
+        //  must be used."
+        // The version is an opaque string identifier, not a semantic version to be normalized.
+        public void VersionedIdentifier_ExactVersion_Required_DifferentFormat_NotEqual()
         {
             var x = vi("foo", "1.0");
             var y = vi("foo", "1.0.0");
             var set = new HashSet<Elm.VersionedIdentifier> { x };
 
-            x.CompareTo(y).Should().Be(0);
-            x.Equals(y).Should().BeTrue();
-            Equals(x, y).Should().BeTrue();
-            x.GetHashCode().Should().Be(y.GetHashCode());
-            set.Contains(y).Should().BeTrue();
-            set.Add(y).Should().BeFalse();
-            set.Count.Should().Be(1);
+            x.CompareTo(y).Should().NotBe(0);
+            x.Equals(y).Should().BeFalse();
+            Equals(x, y).Should().BeFalse();
+            x.GetHashCode().Should().NotBe(y.GetHashCode());
+            set.Contains(y).Should().BeFalse();
+            set.Add(y).Should().BeTrue();
+            set.Count.Should().Be(2);
         }
 
         [TestMethod]
