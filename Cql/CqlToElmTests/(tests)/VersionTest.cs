@@ -41,6 +41,34 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void LibraryFileInfo_CaseInsensitiveMatch_HashSetContains()
+        {
+            var x = vi("FoO", "1.0");
+            var y = vi("fOo", "1.0");
+            var set = new HashSet<Elm.VersionedIdentifier> { x };
+
+            set.Contains(y).Should().BeTrue();
+            set.Add(y).Should().BeFalse();
+            set.Count.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void LibraryFileInfo_SemanticallyEqualVersion_HashSetContains()
+        {
+            var x = vi("foo", "1.0");
+            var y = vi("foo", "1.0.0");
+            var set = new HashSet<Elm.VersionedIdentifier> { x };
+
+            x.CompareTo(y).Should().Be(0);
+            x.Equals(y).Should().BeTrue();
+            Equals(x, y).Should().BeTrue();
+            x.GetHashCode().Should().Be(y.GetHashCode());
+            set.Contains(y).Should().BeTrue();
+            set.Add(y).Should().BeFalse();
+            set.Count.Should().Be(1);
+        }
+
+        [TestMethod]
         public void LibraryFileInfo_Different_Names()
         {
             var x = vi("foo", "1.0");

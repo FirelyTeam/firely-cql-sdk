@@ -53,7 +53,10 @@ namespace Hl7.Cql.Elm
             };
 
         /// <inheritdoc/>
-        public override int GetHashCode() => HashCode.Combine(id, version);
+        public override int GetHashCode() =>
+            id is null
+                ? 0
+                : StringComparer.OrdinalIgnoreCase.GetHashCode(id);
 
         /// <nodoc/>
         public void Deconstruct(out string id, out string? version)
