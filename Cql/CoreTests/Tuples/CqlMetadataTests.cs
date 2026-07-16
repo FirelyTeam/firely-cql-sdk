@@ -80,4 +80,24 @@ public class CqlTupleMetadataTests
         // Assert
         Assert.AreEqual("COYHiUGZgWUZAKEBBFZOcbQMe", signature);
     }
+
+    [TestMethod]
+    public void BuildSignatureHashString_IsThreadSafe()
+    {
+        // Arrange
+        var props = new[] { (typeof(string), "Name"), (typeof(int), "Age") };
+        var expected = CqlTupleMetadata.BuildSignatureHashString(props);
+        var signatures = new string[1000];
+
+        // Act
+        Parallel.For(0, signatures.Length, i =>
+        {
+            signatures[i] = CqlTupleMetadata.BuildSignatureHashString(props);
+        });
+
+        // Assert
+        CollectionAssert.AllItemsAreNotNull(signatures);
+        foreach (var signature in signatures)
+            Assert.AreEqual(expected, signature);
+    }
 }
