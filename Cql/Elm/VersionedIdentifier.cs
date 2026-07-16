@@ -12,30 +12,6 @@ namespace Hl7.Cql.Elm
 {
     partial class VersionedIdentifier : IComparable<VersionedIdentifier>, IEquatable<VersionedIdentifier>
     {
-        // Spec-conformant comparison primitives — shared DRY helpers that delegate to
-        // Hl7.Cql.Runtime.CqlLibrarySemantics (accessible via transitive project dependency
-        // Elm → Cql.Firely → Cql.Runtime, with InternalsVisibleTo granted by Cql.Runtime to Elm).
-        // The Cql* runtime structs (CqlLibraryIdentifier, CqlLibraryVersion, CqlVersionedLibraryIdentifier)
-        // call CqlLibrarySemantics directly.
-
-        /// <summary>
-        /// Compares two library identifier strings using spec-conformant case-sensitive ordinal comparison.
-        /// Delegates to <see cref="CqlLibrarySemantics.CompareIds"/>.
-        /// </summary>
-        internal static int CompareIds(string? a, string? b) => CqlLibrarySemantics.CompareIds(a, b);
-
-        /// <summary>
-        /// Compares two library version strings using spec-conformant exact ordinal comparison.
-        /// Delegates to <see cref="CqlLibrarySemantics.CompareVersions"/>.
-        /// </summary>
-        internal static int CompareVersions(string? a, string? b) => CqlLibrarySemantics.CompareVersions(a, b);
-
-        /// <summary>
-        /// Computes a hash code for a library identifier and optional version using spec-conformant semantics.
-        /// Delegates to <see cref="CqlLibrarySemantics.ComputeHashCode"/>.
-        /// </summary>
-        internal static int ComputeHashCode(string? id, string? version) => CqlLibrarySemantics.ComputeHashCode(id, version);
-
         /// <inheritdoc/>
         public int CompareTo(VersionedIdentifier? other)
         {
@@ -45,10 +21,10 @@ namespace Hl7.Cql.Elm
                 throw new InvalidOperationException("id is requlred for comparison");
             else
             {
-                var idComparison = CompareIds(this.id, other.id);
+                var idComparison = CqlLibrarySemantics.CompareIds(this.id, other.id);
                 if (idComparison == 0)
                 {
-                    return CompareVersions(version, other.version);
+                    return CqlLibrarySemantics.CompareVersions(version, other.version);
                 }
                 else return idComparison;
             }
@@ -66,7 +42,7 @@ namespace Hl7.Cql.Elm
             };
 
         /// <inheritdoc/>
-        public override int GetHashCode() => ComputeHashCode(id, version);
+        public override int GetHashCode() => CqlLibrarySemantics.ComputeHashCode(id, version);
 
         /// <nodoc/>
         public void Deconstruct(out string id, out string? version)

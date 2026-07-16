@@ -2,6 +2,8 @@
 
 ## Breaking Changes
 
+- Removed the redundant internal static helper methods on `Hl7.Cql.Elm.VersionedIdentifier` (`CompareIds`, `CompareVersions`, and `ComputeHashCode`). Internal/friend consumers that still referenced those helpers must now call the underlying `Hl7.Cql.Runtime.CqlLibrarySemantics` methods directly.
+
 ## Features
 
 ## Fixes
