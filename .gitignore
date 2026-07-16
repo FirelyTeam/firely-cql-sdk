@@ -164,9 +164,15 @@ _TeamCity*
 !.axoCover/settings.json
 
 # Coverlet is a free, cross platform Code Coverage Tool
-coverage*.json
-coverage*.xml
-coverage*.info
+# (anchored with a literal dot after "coverage" - a bare "coverage*" wildcard on
+# case-insensitive filesystems also matches real data files like Hedis's
+# Coverages-2025.2.1.json, silently excluding them from the repo)
+coverage.json
+coverage.*.json
+coverage.xml
+coverage.*.xml
+coverage.info
+coverage.*.info
 
 # Visual Studio code coverage results
 *.coverage
