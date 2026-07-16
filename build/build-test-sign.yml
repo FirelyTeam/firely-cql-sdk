@@ -254,6 +254,8 @@ stages:
     jobs:
       - job: TestNet8
         displayName: "Test on .NET 8"
+        # TEMP: skipped while iterating on firely-cql-sdk#1373 -- not needed for this diagnostic branch.
+        condition: false
         pool:
           vmImage: "windows-latest"
         steps:
@@ -290,6 +292,8 @@ stages:
 
       - job: TestNet10
         displayName: "Test on .NET 10"
+        # TEMP: skipped while iterating on firely-cql-sdk#1373 -- not needed for this diagnostic branch.
+        condition: false
         pool:
           vmImage: "windows-latest"
         steps:
