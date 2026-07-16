@@ -93,13 +93,18 @@ namespace Hl7.Cql.CodeGeneration.NET
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
 
+            // Materialized once: librariesWithCSharp is a lazy, side-effecting iterator in the
+            // real ElmToolkit pipeline (it generates each library's C# and logs on every
+            // enumeration), so it must not be enumerated more than once here.
+            var materialized = librariesWithCSharp.ToList();
+
             // Looked up by identifier so a dependency can be compiled on demand regardless of
-            // where it falls in librariesWithCSharp's own enumeration order (see
-            // firely-cql-sdk#1373: relying on that order alone to already guarantee
-            // "dependencies come before dependents" turned out not to hold reliably --
-            // ElmToolkit builds this sequence from an ImmutableDictionary.Values enumeration,
-            // whose order is hash-bucket-driven and varies per process, not insertion-stable).
-            var sourceByIdentifier = librariesWithCSharp.ToDictionary(t => t.library.VersionedLibraryIdentifier, t => t);
+            // where it falls in the original enumeration order (see firely-cql-sdk#1373:
+            // relying on that order alone to already guarantee "dependencies come before
+            // dependents" turned out not to hold reliably -- ElmToolkit builds this sequence
+            // from an ImmutableDictionary.Values enumeration, whose order is hash-bucket-driven
+            // and varies per process, not insertion-stable).
+            var sourceByIdentifier = materialized.ToDictionary(t => t.library.VersionedLibraryIdentifier, t => t);
             var currentlyCompiling = new HashSet<CqlVersionedLibraryIdentifier>();
 
             AssemblyBinaryWithSourceCode CompileWithDependenciesFirst(CqlVersionedLibraryIdentifier identifier)
@@ -129,7 +134,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
             }
 
-            return librariesWithCSharp
+            return materialized
                 .TrySelect(
                     t => (t.library, assemblyBinaryWithSourceCode: CompileWithDependenciesFirst(t.library.VersionedLibraryIdentifier)),
                     buildExceptionHandlingStrategy,
