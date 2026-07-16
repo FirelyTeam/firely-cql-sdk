@@ -16,11 +16,13 @@ internal class Hasher
 
     public virtual string Hash(string input)
     {
-        var bytes = Encoding.UTF8.GetBytes(input);
-        var hashBytes = MD5.HashData(bytes);
+        var hashBytes = HashData(input);
         var alpha = ToAlphaString(hashBytes);
         return alpha;
     }
+
+    public virtual byte[] HashData(string input) =>
+        MD5.HashData(Encoding.UTF8.GetBytes(input));
 
     private static string ToAlphaString(byte[] toConvert, bool bigEndian = false)
     {
