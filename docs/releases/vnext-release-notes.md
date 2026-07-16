@@ -2,7 +2,7 @@
 
 ## Breaking Changes
 
-- Removed the redundant internal static helper methods on `Hl7.Cql.Elm.VersionedIdentifier` (`CompareIds`, `CompareVersions`, and `ComputeHashCode`). Internal/friend consumers that still referenced those helpers must now call the underlying `Hl7.Cql.Runtime.CqlLibrarySemantics` methods directly.
+- `Hl7.Cql.Elm.VersionedIdentifier` equality and ordering semantics changed to be spec-conformant (#1376). Library `id` comparison is now **case-sensitive** (CQL is a case-sensitive language) and `version` is now matched as an **exact opaque string** rather than being normalized. This means `VersionedIdentifier` instances that previously compared equal may now compare unequal — for example, ids differing only by case (`"FoO"` vs `"fOo"`) or versions in different but formerly-equivalent formats (`"1.0"` vs `"1.0.0"`) are now considered distinct. This affects all identity checks built on `VersionedIdentifier` comparison, including library dependency graphs and per-library dependency sets in `LibrarySet`.
 
 ## Features
 
