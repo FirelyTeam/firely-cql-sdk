@@ -92,15 +92,46 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
+
+            // Looked up by identifier so a dependency can be compiled on demand regardless of
+            // where it falls in librariesWithCSharp's own enumeration order (see
+            // firely-cql-sdk#1373: relying on that order alone to already guarantee
+            // "dependencies come before dependents" turned out not to hold reliably --
+            // ElmToolkit builds this sequence from an ImmutableDictionary.Values enumeration,
+            // whose order is hash-bucket-driven and varies per process, not insertion-stable).
+            var sourceByIdentifier = librariesWithCSharp.ToDictionary(t => t.library.VersionedLibraryIdentifier, t => t);
+            var currentlyCompiling = new HashSet<CqlVersionedLibraryIdentifier>();
+
+            AssemblyBinaryWithSourceCode CompileWithDependenciesFirst(CqlVersionedLibraryIdentifier identifier)
+            {
+                if (results.TryGetValue(identifier, out var existing))
+                    return existing;
+
+                if (!currentlyCompiling.Add(identifier))
+                    throw new InvalidOperationException($"Circular dependency detected involving library '{identifier}'.");
+
+                try
+                {
+                    if (!sourceByIdentifier.TryGetValue(identifier, out var self))
+                        throw new InvalidOperationException(
+                            $"No C# source was generated for library '{identifier}', but it's a declared dependency of another library.");
+
+                    foreach (var dependency in librarySet.GetLibraryDependencies(identifier))
+                        CompileWithDependenciesFirst(dependency.VersionedLibraryIdentifier);
+
+                    var compiled = CompileNode(self.csharp, results, librarySet, self.library, assemblyReferences, debugSymbolsFormat);
+                    results[identifier] = compiled;
+                    return compiled;
+                }
+                finally
+                {
+                    currentlyCompiling.Remove(identifier);
+                }
+            }
+
             return librariesWithCSharp
                 .TrySelect(
-                    t =>
-                    {
-                        var (library, cSharp) = t;
-                        var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugSymbolsFormat);
-                        results.Add(library.VersionedLibraryIdentifier, assemblyBinaryWithSourceCode);
-                        return (library, assemblyBinaryWithSourceCode);
-                    },
+                    t => (t.library, assemblyBinaryWithSourceCode: CompileWithDependenciesFirst(t.library.VersionedLibraryIdentifier)),
                     buildExceptionHandlingStrategy,
                     allowInvalidCSharp ? YieldWithoutAssemblyBinary : null);
 
@@ -158,16 +189,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
                 else
                 {
-                    // TEMP DIAGNOSTIC -- firely-cql-sdk#1373
-                    var dep = libraryDependency.VersionedLibraryIdentifier;
-                    var depKeys = string.Join(", ", assemblies.Keys);
-                    var exactKeyMatch = assemblies.Keys.Any(k => (string)k == (string)dep);
-                    var caseInsensitiveMatch = assemblies.Keys.Any(k => string.Equals((string)k, (string)dep, StringComparison.OrdinalIgnoreCase));
-                    Console.Error.WriteLine(
-                        $"[DIAG-1373] MISSING while compiling {libraryVersionedIdentifier}: " +
-                        $"dependency='{dep}' (hash={dep.GetHashCode()}) not found in assemblies dict " +
-                        $"(count={assemblies.Count}). ExactStringMatchExistsButTryGetValueFailed={exactKeyMatch} " +
-                        $"CaseInsensitiveMatchExists={caseInsensitiveMatch}. Keys so far: {depKeys}");
+                    // Should be structurally unreachable: CompileEachLibraryToAssemblies compiles
+                    // dependencies before dependents via recursive memoization (CompileWithDependenciesFirst),
+                    // not by trusting a pre-computed enumeration order. Fail loudly rather than silently
+                    // drop the reference (which used to surface later as a confusing unrelated CS0103 --
+                    // see firely-cql-sdk#1373).
+                    throw new InvalidOperationException(
+                        $"Library '{libraryVersionedIdentifier}' depends on '{libraryDependency.VersionedLibraryIdentifier}', " +
+                        "which has not been compiled yet.");
                 }
             }
 
