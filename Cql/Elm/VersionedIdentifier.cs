@@ -42,7 +42,7 @@ namespace Hl7.Cql.Elm
         }
 
         /// <inheritdoc/>
-        public bool Equals(VersionedIdentifier? other) => CompareTo(other) == 0;
+        public bool Equals(VersionedIdentifier? other) => other is not null && CompareTo(other) == 0;
 
         /// <inheritdoc/>
         public override bool Equals(object? obj) =>
@@ -53,10 +53,19 @@ namespace Hl7.Cql.Elm
             };
 
         /// <inheritdoc/>
-        public override int GetHashCode() =>
-            id is null
-                ? 0
-                : StringComparer.OrdinalIgnoreCase.GetHashCode(id);
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(id, StringComparer.OrdinalIgnoreCase);
+            if (version is { Length: > 0 })
+            {
+                var parts = version.Split('.').Select(int.Parse).ToArray();
+                int len = parts.Length;
+                while (len > 0 && parts[len - 1] == 0) len--;
+                for (int i = 0; i < len; i++) hash.Add(parts[i]);
+            }
+            return hash.ToHashCode();
+        }
 
         /// <nodoc/>
         public void Deconstruct(out string id, out string? version)

@@ -69,6 +69,15 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void VersionedIdentifier_Null_HashSetContains_DoesNotThrow()
+        {
+            var x = vi("foo", "1.0");
+            var set = new HashSet<Elm.VersionedIdentifier> { x };
+
+            set.Contains(null!).Should().BeFalse();
+        }
+
+        [TestMethod]
         public void VersionedIdentifier_Different_Names()
         {
             var x = vi("foo", "1.0");
