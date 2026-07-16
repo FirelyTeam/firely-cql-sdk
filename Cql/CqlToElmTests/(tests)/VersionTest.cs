@@ -15,7 +15,7 @@ namespace Hl7.Cql.CqlToElm.Test
             new Elm.VersionedIdentifier { id = id, version = version };
 
         [TestMethod]
-        public void LibraryFileInfo_ExactMatch()
+        public void VersionedIdentifier_ExactMatch()
         {
             var x = vi("foo", "1.0");
             var y = vi("foo", "1.0");
@@ -28,7 +28,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void LibraryFileInfo_CaseInsensitiveMatch()
+        public void VersionedIdentifier_CaseInsensitiveMatch()
         {
             var x = vi("FoO", "1.0");
             var y = vi("fOo", "1.0");
@@ -41,7 +41,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void LibraryFileInfo_CaseInsensitiveMatch_HashSetContains()
+        public void VersionedIdentifier_CaseInsensitiveMatch_HashSetContains()
         {
             var x = vi("FoO", "1.0");
             var y = vi("fOo", "1.0");
@@ -53,7 +53,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void LibraryFileInfo_SemanticallyEqualVersion_HashSetContains()
+        public void VersionedIdentifier_SemanticallyEqualVersion_HashSetContains()
         {
             var x = vi("foo", "1.0");
             var y = vi("foo", "1.0.0");
@@ -69,7 +69,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void LibraryFileInfo_Different_Names()
+        public void VersionedIdentifier_Different_Names()
         {
             var x = vi("foo", "1.0");
             var y = vi("food", "1.0");
@@ -82,7 +82,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void LibraryFileInfo_Different_Minors()
+        public void VersionedIdentifier_Different_Minors()
         {
             var x = vi("foo", "1.0");
             var y = vi("foo", "1.1");
@@ -95,7 +95,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void LibraryFileInfo_Assume_Zero_Minor()
+        public void VersionedIdentifier_Assume_Zero_Minor()
         {
             var x = vi("foo", "1");
             var y = vi("foo", "1.1");
@@ -108,7 +108,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void LibraryFileInfo_Different_Revisions()
+        public void VersionedIdentifier_Different_Revisions()
         {
             var x = vi("foo", "1.1");
             var y = vi("foo", "1.1.1");
@@ -121,7 +121,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void LibraryFileInfo_Version_Against_Missing()
+        public void VersionedIdentifier_Version_Against_Missing()
         {
             var x = vi("foo", "1.1");
             var y = vi("foo", null);
