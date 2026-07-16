@@ -151,8 +151,25 @@ namespace Hl7.Cql.CodeGeneration.NET
                 metadataReferences.Add(GetOrCreateMetadataReference(asm.Location));
 
             foreach (var libraryDependency in librarySet.GetLibraryDependencies(libraryVersionedIdentifier!))
+            {
                 if (assemblies.TryGetValue(libraryDependency.VersionedLibraryIdentifier, out var referencedDll))
+                {
                     metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.AssemblyBytes!));
+                }
+                else
+                {
+                    // TEMP DIAGNOSTIC -- firely-cql-sdk#1373
+                    var dep = libraryDependency.VersionedLibraryIdentifier;
+                    var depKeys = string.Join(", ", assemblies.Keys);
+                    var exactKeyMatch = assemblies.Keys.Any(k => (string)k == (string)dep);
+                    var caseInsensitiveMatch = assemblies.Keys.Any(k => string.Equals((string)k, (string)dep, StringComparison.OrdinalIgnoreCase));
+                    Console.Error.WriteLine(
+                        $"[DIAG-1373] MISSING while compiling {libraryVersionedIdentifier}: " +
+                        $"dependency='{dep}' (hash={dep.GetHashCode()}) not found in assemblies dict " +
+                        $"(count={assemblies.Count}). ExactStringMatchExistsButTryGetValueFailed={exactKeyMatch} " +
+                        $"CaseInsensitiveMatchExists={caseInsensitiveMatch}. Keys so far: {depKeys}");
+                }
+            }
 
             var assemblyInfoSourceString = CreateAssemblyInfoSourceString(library);
             var assemblyInfoSourcePath = "AssemblyInfo.cs";
