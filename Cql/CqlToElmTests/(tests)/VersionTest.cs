@@ -83,6 +83,39 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        // `id` is a plain mutable string on this XSD-generated type - the default constructor
+        // leaves it null, so a null id is trivially reachable (not just a null reference).
+        // Equals must never throw for a valid non-null argument, even when id is null on either
+        // side - GetHashCode already tolerates it, so Equals/CompareTo must be consistent.
+        public void VersionedIdentifier_NullId_DoesNotThrow()
+        {
+            var withNullId = vi(null!, "1.0");
+            var withRealId = vi("foo", "1.0");
+
+            withNullId.GetHashCode();
+            withNullId.Equals(withRealId).Should().BeFalse();
+            withRealId.Equals(withNullId).Should().BeFalse();
+
+            var set = new HashSet<Elm.VersionedIdentifier> { withRealId };
+            set.Contains(withNullId).Should().BeFalse();
+            set.Add(withNullId).Should().BeTrue();
+            set.Count.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void VersionedIdentifier_NullId_HashCollision_DoesNotThrow()
+        {
+            var nullId1 = vi(null!, "1.0");
+            var nullId2 = vi(null!, "1.0");
+            nullId1.GetHashCode().Should().Be(nullId2.GetHashCode());
+
+            var set = new HashSet<Elm.VersionedIdentifier> { nullId1 };
+            set.Contains(nullId2).Should().BeTrue();
+            set.Add(nullId2).Should().BeFalse();
+            set.Count.Should().Be(1);
+        }
+
+        [TestMethod]
         public void VersionedIdentifier_Different_Names()
         {
             var x = vi("foo", "1.0");

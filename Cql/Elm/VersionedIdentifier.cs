@@ -15,19 +15,19 @@ namespace Hl7.Cql.Elm
         /// <inheritdoc/>
         public int CompareTo(VersionedIdentifier? other)
         {
-            if (other is null || other.id is null)
-                throw new ArgumentNullException("other");
-            else if (id is null)
-                throw new InvalidOperationException("id is requlred for comparison");
-            else
+            if (other is null)
+                throw new ArgumentNullException(nameof(other));
+
+            // CqlLibrarySemantics.CompareIds/CompareVersions tolerate a null id/version on
+            // either side (unlike StringComparer.GetHashCode), so a null id here doesn't need
+            // special-casing - and, critically, doesn't need to throw. Equals delegates to this
+            // method, and IEquatable<T>.Equals must never throw for a valid non-null argument.
+            var idComparison = CqlLibrarySemantics.CompareIds(this.id, other.id);
+            if (idComparison == 0)
             {
-                var idComparison = CqlLibrarySemantics.CompareIds(this.id, other.id);
-                if (idComparison == 0)
-                {
-                    return CqlLibrarySemantics.CompareVersions(version, other.version);
-                }
-                else return idComparison;
+                return CqlLibrarySemantics.CompareVersions(version, other.version);
             }
+            else return idComparison;
         }
 
         /// <inheritdoc/>
