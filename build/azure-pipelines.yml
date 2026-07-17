@@ -39,6 +39,7 @@ stages:
     dotNetCoreVersion: $(DOTNET_CORE_SDK)
     multiTargetTestProjects: $(multiTargetTestProjects)
     net10IntegrationTestProjects: $(net10IntegrationTestProjects)
+    hedisIntegrationTestProjects: $(hedisIntegrationTestProjects)
     buildConfiguration: $(buildConfiguration)
     testConsoleLoggerVerbosity: $(testConsoleLoggerVerbosity)
     checkoutSubmodules: 'true'

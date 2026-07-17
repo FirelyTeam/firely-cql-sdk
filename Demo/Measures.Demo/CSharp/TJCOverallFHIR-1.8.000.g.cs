@@ -194,29 +194,28 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     {
         IEnumerable<Encounter> a_ = this.All_Stroke_Encounter(context);
 
-        IEnumerable<Encounter> b_(Encounter AllStrokeEncounter) {
+        bool? b_(Encounter AllStrokeEncounter) {
             IEnumerable<Patient> d_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 
             bool? e_(Patient BirthDate) {
-                Patient i_ = this.Patient(context);
-                Date j_ = i_?.BirthDateElement;
-                string k_ = j_?.Value;
-                CqlDateTime l_ = context.Operators.ConvertStringToDateTime(k_);
-                Period m_ = AllStrokeEncounter?.Period;
-                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, m_);
-                CqlDateTime o_ = context.Operators.Start(n_);
-                int? p_ = context.Operators.CalculateAgeAt(l_, o_, "year");
-                bool? q_ = context.Operators.GreaterOrEqual(p_, 18);
-                return q_;
+                Patient h_ = this.Patient(context);
+                Date i_ = h_?.BirthDateElement;
+                string j_ = i_?.Value;
+                CqlDateTime k_ = context.Operators.ConvertStringToDateTime(j_);
+                Period l_ = AllStrokeEncounter?.Period;
+                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, l_);
+                CqlDateTime n_ = context.Operators.Start(m_);
+                int? o_ = context.Operators.CalculateAgeAt(k_, n_, "year");
+                bool? p_ = context.Operators.GreaterOrEqual(o_, 18);
+                return p_;
             }
 
             IEnumerable<Patient> f_ = context.Operators.Where<Patient>(d_, e_);
-            Encounter g_(Patient BirthDate) => AllStrokeEncounter;
-            IEnumerable<Encounter> h_ = context.Operators.Select<Patient, Encounter>(f_, g_);
-            return h_;
+            bool? g_ = context.Operators.Exists<Patient>(f_);
+            return g_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
@@ -337,25 +336,24 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     {
         IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
 
-        IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
+        bool? b_(Encounter IschemicStrokeEncounter) {
             IEnumerable<object> d_ = this.Intervention_Comfort_Measures(context);
 
             bool? e_(object ComfortMeasure) {
-                object i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                FhirDateTime j_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
-                CqlDateTime k_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, (i_ as FhirDateTime) ?? j_);
-                CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
-                bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, (string)default);
-                return m_;
+                object h_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                FhirDateTime i_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
+                CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, (h_ as FhirDateTime) ?? i_);
+                CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
+                bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, (string)default);
+                return l_;
             }
 
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-            Encounter g_(object ComfortMeasure) => IschemicStrokeEncounter;
-            IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
-            return h_;
+            bool? g_ = context.Operators.Exists<object>(f_);
+            return g_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
@@ -370,27 +368,26 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     {
         IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
 
-        IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
+        bool? b_(Encounter IschemicStrokeEncounter) {
             IEnumerable<object> d_ = this.Intervention_Comfort_Measures(context);
 
             bool? e_(object ComfortMeasure) {
-                object i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
-                CqlDateTime k_ = context.Operators.Start(j_);
-                FhirDateTime l_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
-                CqlDateTime m_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, l_);
-                CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
-                bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, (string)default);
-                return o_;
+                object h_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, h_);
+                CqlDateTime j_ = context.Operators.Start(i_);
+                FhirDateTime k_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
+                CqlDateTime l_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, k_);
+                CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
+                bool? n_ = context.Operators.In<CqlDateTime>(j_ ?? l_, m_, (string)default);
+                return n_;
             }
 
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-            Encounter g_(object ComfortMeasure) => IschemicStrokeEncounter;
-            IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
-            return h_;
+            bool? g_ = context.Operators.Exists<object>(f_);
+            return g_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
