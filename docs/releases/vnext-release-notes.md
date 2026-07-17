@@ -3,6 +3,7 @@
 ## Breaking Changes
 
 - `Hl7.Cql.Elm.VersionedIdentifier` equality and ordering semantics changed to be spec-conformant (#1376). Library `id` comparison is now **case-sensitive** (CQL is a case-sensitive language) and `version` is now matched as an **exact opaque string** rather than being normalized. This means `VersionedIdentifier` instances that previously compared equal may now compare unequal — for example, ids differing only by case (`"FoO"` vs `"fOo"`) or versions in different but formerly-equivalent formats (`"1.0"` vs `"1.0.0"`) are now considered distinct. This affects all identity checks built on `VersionedIdentifier` comparison, including library dependency graphs and per-library dependency sets in `LibrarySet`.
+- `VersionedIdentifierDictionary` (backing `MemoryLibraryProvider`'s `include` resolution on the active `TryResolveLibrary` path) now resolves library identifiers using the same spec-conformant semantics: `id` lookup is **case-sensitive** (was `OrdinalIgnoreCase`) and `version` must match **exactly** (was numeric-segment normalization that silently equated `"1.0"` with `"1.0.0"`). Code that previously resolved an `include` by a differently-cased id or by a semantically-but-not-textually-equal version specifier will no longer find a match.
 
 ## Features
 
