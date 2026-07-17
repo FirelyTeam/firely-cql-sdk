@@ -27,6 +27,19 @@ namespace Hl7.Cql.Runtime;
 /// (spec/condensed/04-logicalspecification.md §2.1.5 "VersionedIdentifier":
 /// "the actual version of the instance of interest in this set")
 /// </para>
+/// <para>
+/// These are plain static methods rather than reusable <see cref="IComparer{T}"/>/
+/// <see cref="IEqualityComparer{T}"/> singletons because every current consumer either
+/// implements its own <see cref="IEquatable{T}"/>/<see cref="IComparable{T}"/> (getting correct
+/// behavior "for free") or is <c>Hl7.Cql.Elm.VersionComparer</c>, the sole consumer needing a
+/// bare-<see cref="string"/> comparer object, which already composes over
+/// <see cref="CompareVersions"/> correctly. If a future consumer outside <c>Hl7.Cql.Elm</c>
+/// (i.e. one that can depend on <c>Cql.Runtime</c> but not <c>Cql.Elm</c>) needs to compare or
+/// hash bare version strings, that's the trigger to promote a canonical
+/// <see cref="IComparer{T}"/>/<see cref="IEqualityComparer{T}"/> singleton here and refactor
+/// <c>Hl7.Cql.Elm.VersionComparer</c> into a thin numeric-ordering decorator over it — give it a
+/// name other than "VersionComparer" so it doesn't collide with that class across namespaces.
+/// </para>
 /// </remarks>
 internal static class CqlLibrarySemantics
 {
