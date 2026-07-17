@@ -37,8 +37,13 @@ namespace Hl7.Cql.Elm
             if (string.IsNullOrEmpty(x) || string.IsNullOrEmpty(y))
                 return exact;
 
-            var versionX = x.Split('.').Select(int.Parse).ToArray();
-            var versionY = y!.Split('.').Select(int.Parse).ToArray();
+            // Version specifiers are arbitrary CQL string literals (e.g. "R4", "2021-05-01"),
+            // not guaranteed to be dot-separated integers - fall back to the exact ordinal
+            // order (already non-zero, since exact != 0 above) rather than throwing when a
+            // segment isn't a parseable, in-range integer.
+            if (!TryParseNumericSegments(x, out var versionX) || !TryParseNumericSegments(y, out var versionY))
+                return exact;
+
             for (int i = 0; i < Math.Max(versionX.Length, versionY.Length); i++)
             {
                 int partX = i < versionX.Length ? versionX[i] : 0;
@@ -59,6 +64,18 @@ namespace Hl7.Cql.Elm
             // back to the exact ordinal order, guaranteed non-zero since exact != 0 above, so
             // these never collide as the same key.
             return exact;
+        }
+
+        private static bool TryParseNumericSegments(string version, out int[] segments)
+        {
+            var parts = version.Split('.');
+            segments = new int[parts.Length];
+            for (int i = 0; i < parts.Length; i++)
+            {
+                if (!int.TryParse(parts[i], out segments[i]))
+                    return false;
+            }
+            return true;
         }
     }
 }

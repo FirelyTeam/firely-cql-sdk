@@ -25,7 +25,12 @@ namespace Hl7.Cql.Elm
             var idComparison = CqlLibrarySemantics.CompareIds(this.id, other.id);
             if (idComparison == 0)
             {
-                return CqlLibrarySemantics.CompareVersions(version, other.version);
+                // VersionComparer orders numerically (so "1.9" sorts before "1.10") while still
+                // guaranteeing textually-different versions never compare equal - CompareVersions
+                // alone would order "1.9" after "1.10" lexicographically, which is wrong for
+                // "most appropriate version" selection (spec/condensed/03-developersguide.md
+                // SS Libraries).
+                return VersionComparer.Instance.Compare(version, other.version);
             }
             else return idComparison;
         }

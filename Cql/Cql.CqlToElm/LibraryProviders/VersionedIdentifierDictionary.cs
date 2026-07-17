@@ -26,7 +26,8 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
         {
             if (Versions.TryGetValue(id, out var versions))
             {
-                var ts = versions.First();
+                // versions is sorted ascending by VersionComparer, so the latest is the last entry.
+                var ts = versions.Last();
                 if (ts.Value.Count == 1)
                 {
                     version = ts.Key;
@@ -61,7 +62,8 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
         {
             if (Versions.TryGetValue(id, out var versions))
             {
-                var ts = versions.First();
+                // versions is sorted ascending by VersionComparer, so the latest is the last entry.
+                var ts = versions.Last();
                 if (ts.Value.Count == 1)
                     return true;
             }

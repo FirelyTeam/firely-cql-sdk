@@ -141,11 +141,15 @@ public readonly record struct CqlLibraryIdentifier :
     /// </summary>
     /// <param name="obj">The object to compare with.</param>
     /// <returns>A value that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">Thrown when the object is not of type <see cref="CqlLibraryIdentifier"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when the object is not <see langword="null"/> and not of type <see cref="CqlLibraryIdentifier"/>.</exception>
     int IComparable.CompareTo(object? obj)
     {
         return obj switch
         {
+            // Matches the IComparable.CompareTo(Object) convention used throughout the BCL
+            // (e.g. Int32, String): null precedes any instance, so this returns a positive
+            // number rather than throwing.
+            null => 1,
             CqlLibraryIdentifier other => CompareTo(other),
             _ => throw new ArgumentException($"Object must be of type {nameof(CqlLibraryIdentifier)}")
         };

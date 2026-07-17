@@ -116,6 +116,18 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        // Ordering must stay numeric ("1.9" before "1.10"), not lexicographic, for "most
+        // appropriate version" selection - lexicographic would put "1.10" first since '1' < '9'
+        // at the second character.
+        public void VersionedIdentifier_OrdersVersionsNumerically_NotLexicographically()
+        {
+            var x = vi("foo", "1.9");
+            var y = vi("foo", "1.10");
+            x.CompareTo(y).Should().BeNegative();
+            y.CompareTo(x).Should().BePositive();
+        }
+
+        [TestMethod]
         public void VersionedIdentifier_Different_Names()
         {
             var x = vi("foo", "1.0");
