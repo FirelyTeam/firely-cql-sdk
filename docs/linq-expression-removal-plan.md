@@ -139,7 +139,7 @@ standalone fixes.
 | 2 | Typed IR nodes + validating factories; `CSharpEmitter` reproducing current output | ✅ in review (#1331) |
 | 3 | Port `CqlOperatorsBinder` + partials onto the IR (algorithm unchanged) | ✅ in review (#1340) |
 | 4 | Port `ExpressionBuilderContext` + partials (FHIRHelpers workarounds, choice types, query machinery) | ✅ in review (#1344) |
-| 5 | Dual-pipeline flag, golden diffs across all corpora + full suites, flip default | 🚧 blocked on [#1361](https://github.com/FirelyTeam/firely-cql-sdk/issues/1361), [#1362](https://github.com/FirelyTeam/firely-cql-sdk/issues/1362) |
+| 5 | Dual-pipeline flag, golden diffs across all corpora + full suites, flip default | parity proven on RR23 + CMS56 + HEDIS 2025 (#1361/#1362 fixed); flip decision pending |
 | 6 | Delete the Expression-based builder/binder/visitors/custom expressions; bump generator version | |
 
 Post-parity cleanups (once the old pipeline is gone and byte-identical output no longer

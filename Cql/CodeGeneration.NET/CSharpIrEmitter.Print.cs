@@ -85,13 +85,14 @@ internal partial class CSharpIrEmitter
             IrTupleInit tupleInit => PrintTupleInit(tupleInit, child),
             IrNewArray newArray => PrintNewArray(newArray, child),
             // LambdaDefinitionWriter.BuildNewArrayExpression: "case ExpressionType.NewArrayBounds:
-            // return "[]";" — unconditional, regardless of the bounds expression. The old builder
-            // (ExpressionBuilderContext.cs) only ever constructs this node with a literal
-            // Expression.Constant(0) bound (empty untyped/typed lists), so old never prints
-            // anything else for it; the IR node is built the same way (only ever with a zero
-            // IrConstant length), so printing the collection-expression form unconditionally
-            // matches without needing to inspect Length at all.
-            IrNewArrayBounds => "[]",
+            // return "[]";" — the old builder (ExpressionBuilderContext.cs) only ever constructs
+            // this node with a literal Expression.Constant(0) bound (empty untyped/typed lists),
+            // and the IR node is built the same way. Guard the zero-length shape explicitly and
+            // fail loudly on anything else instead of silently discarding a real length (the old
+            // writer would have printed "[]" for that too, but no builder path can produce it).
+            IrNewArrayBounds { Length: IrConstant { Value: 0 } } => "[]",
+            IrNewArrayBounds => throw new NotSupportedException(
+                "IrNewArrayBounds with a non-zero length has no print form; only empty arrays are constructed this way."),
             IrThrow @throw => $"throw ({child(@throw.Exception).Code})",
             _ => throw new NotSupportedException($"Don't know how to print an IR node of type {node.GetType().Name}."),
         };
@@ -426,8 +427,14 @@ internal partial class CSharpIrEmitter
     private string PrintMemberInit(IrMemberInit memberInit, Func<IrExpression, Atom> child)
     {
         var typeName = _typeToCSharpConverter.ToCSharp(memberInit.Type);
+        // The builder only member-inits with parameterless constructors, and the old writer's
+        // BuildMemberInitExpression printed "new T" accordingly (no argument list) — but if a
+        // constructor argument ever appears, print it rather than silently dropping it.
+        var arguments = memberInit.New.Arguments.Count == 0
+            ? ""
+            : $"({string.Join(", ", memberInit.New.Arguments.Select(a => child(a).Code))})";
         var isb = new IndentedStringBuilder();
-        isb.AppendLine($"new {typeName}");
+        isb.AppendLine($"new {typeName}{arguments}");
         isb.AppendLine("{");
         using (isb.Indent())
         {

@@ -581,10 +581,15 @@ public class CSharpIrEmitterTests
         // ever constructs this node with a literal zero bound (empty untyped/typed lists), so
         // it never had to print anything else. Found via the HEDIS 2025 corpus (many libraries
         // build an empty typed array this way, e.g. "Immunization[] k_ = [];").
-        var newArrayBounds = new IrNewArrayBounds(typeof(string), new IrConstant(3, typeof(int)));
+        var newArrayBounds = new IrNewArrayBounds(typeof(string), new IrConstant(0, typeof(int)));
         Assert.AreEqual(
             "{\n    string[] a_ = [];\n    return a_;\n}",
             EmitBody(new IrLambda([], newArrayBounds)));
+
+        // A non-zero length has no print form (no builder path produces one); the emitter
+        // fails loudly rather than silently printing an empty collection expression.
+        var nonZeroBounds = new IrNewArrayBounds(typeof(string), new IrConstant(3, typeof(int)));
+        Assert.ThrowsException<NotSupportedException>(() => EmitBody(new IrLambda([], nonZeroBounds)));
     }
 
     [TestMethod]
