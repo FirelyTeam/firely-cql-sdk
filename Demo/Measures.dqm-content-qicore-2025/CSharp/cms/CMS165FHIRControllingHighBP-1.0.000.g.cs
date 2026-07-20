@@ -411,54 +411,52 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     {
         IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
         IEnumerable<Observation> b_ = Status_1_15_000.Instance.isObservationBP(context, a_);
-        IEnumerable<Observation> d_ = Status_1_15_000.Instance.isObservationBP(context, a_);
 
-        IEnumerable<Observation> e_(Observation BloodPressure) {
-            CqlValueSet o_ = this.Encounter_Inpatient(context);
-            IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            CqlValueSet q_ = this.Emergency_Department_Evaluation_and_Management_Visit(context);
-            IEnumerable<Encounter> r_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(p_, r_);
-            IEnumerable<Encounter> t_ = Status_1_15_000.Instance.isEncounterPerformed(context, s_);
+        bool? c_(Observation BloodPressure) {
+            CqlValueSet l_ = this.Encounter_Inpatient(context);
+            IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+            CqlValueSet n_ = this.Emergency_Department_Evaluation_and_Management_Visit(context);
+            IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+            IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
+            IEnumerable<Encounter> q_ = Status_1_15_000.Instance.isEncounterPerformed(context, p_);
 
-            bool? u_(Encounter DisqualifyingEncounter) {
-                DataType y_ = BloodPressure?.Effective;
-                object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                CqlDateTime aa_ = QICoreCommon_4_0_000.Instance.latest(context, z_);
-                Period ab_ = DisqualifyingEncounter?.Period;
-                CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ab_);
-                bool? ad_ = context.Operators.In<CqlDateTime>(aa_, ac_, "day");
-                return ad_;
+            bool? r_(Encounter DisqualifyingEncounter) {
+                DataType v_ = BloodPressure?.Effective;
+                object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+                CqlDateTime x_ = QICoreCommon_4_0_000.Instance.latest(context, w_);
+                Period y_ = DisqualifyingEncounter?.Period;
+                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
+                bool? aa_ = context.Operators.In<CqlDateTime>(x_, z_, "day");
+                return aa_;
             }
 
-            IEnumerable<Encounter> v_ = context.Operators.Where<Encounter>(t_, u_);
-            Observation w_(Encounter DisqualifyingEncounter) => BloodPressure;
-            IEnumerable<Observation> x_ = context.Operators.Select<Encounter, Observation>(v_, w_);
-            return x_;
+            IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
+            bool? t_ = context.Operators.Exists<Encounter>(s_);
+            bool? u_ = context.Operators.Not(t_);
+            return u_;
         }
 
-        IEnumerable<Observation> f_ = context.Operators.SelectMany<Observation, Observation>(d_, e_);
-        IEnumerable<Observation> g_ = context.Operators.Except<Observation>(b_, f_);
+        IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
-        bool? h_(Observation BloodPressure) {
-            DataType ae_ = BloodPressure?.Effective;
-            object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-            CqlDateTime ag_ = QICoreCommon_4_0_000.Instance.latest(context, af_);
-            CqlInterval<CqlDateTime> ah_ = this.Measurement_Period(context);
-            bool? ai_ = context.Operators.In<CqlDateTime>(ag_, ah_, "day");
-            return ai_;
+        bool? e_(Observation BloodPressure) {
+            DataType ab_ = BloodPressure?.Effective;
+            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
+            CqlDateTime ad_ = QICoreCommon_4_0_000.Instance.latest(context, ac_);
+            CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
+            bool? af_ = context.Operators.In<CqlDateTime>(ad_, ae_, "day");
+            return af_;
         }
 
-        IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
-        IEnumerable<Observation> k_ = Status_1_15_000.Instance.isObservationBP(context, a_);
+        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
+        IEnumerable<Observation> h_ = Status_1_15_000.Instance.isObservationBP(context, a_);
 
-        bool? l_(Observation BloodPressure) {
-            ResourceReference aj_ = BloodPressure?.Encounter;
-            Encounter ak_ = this.getEncounter(context, aj_);
-            Coding al_ = ak_?.Class;
-            CqlCode am_ = FHIRHelpers_4_4_000.Instance.ToCode(context, al_);
-            string an_ = am_?.code;
-            string[] ao_ = [
+        bool? i_(Observation BloodPressure) {
+            ResourceReference ag_ = BloodPressure?.Encounter;
+            Encounter ah_ = this.getEncounter(context, ag_);
+            Coding ai_ = ah_?.Class;
+            CqlCode aj_ = FHIRHelpers_4_4_000.Instance.ToCode(context, ai_);
+            string ak_ = aj_?.code;
+            string[] al_ = [
                 "EMER",
                 "IMP",
                 "ACUTE",
@@ -466,20 +464,20 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 "PRENC",
                 "SS",
             ];
-            bool? ap_ = context.Operators.In<string>(an_, (IEnumerable<string>)ao_);
-            bool? aq_ = context.Operators.Not(ap_);
-            DataType ar_ = BloodPressure?.Effective;
-            object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-            CqlDateTime at_ = QICoreCommon_4_0_000.Instance.latest(context, as_);
-            CqlInterval<CqlDateTime> au_ = this.Measurement_Period(context);
-            bool? av_ = context.Operators.In<CqlDateTime>(at_, au_, "day");
-            bool? aw_ = context.Operators.And(aq_, av_);
-            return aw_;
+            bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
+            bool? an_ = context.Operators.Not(am_);
+            DataType ao_ = BloodPressure?.Effective;
+            object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
+            CqlDateTime aq_ = QICoreCommon_4_0_000.Instance.latest(context, ap_);
+            CqlInterval<CqlDateTime> ar_ = this.Measurement_Period(context);
+            bool? as_ = context.Operators.In<CqlDateTime>(aq_, ar_, "day");
+            bool? at_ = context.Operators.And(an_, as_);
+            return at_;
         }
 
-        IEnumerable<Observation> m_ = context.Operators.Where<Observation>(k_, l_);
-        IEnumerable<Observation> n_ = context.Operators.Union<Observation>(i_, m_);
-        return n_;
+        IEnumerable<Observation> j_ = context.Operators.Where<Observation>(h_, i_);
+        IEnumerable<Observation> k_ = context.Operators.Union<Observation>(f_, j_);
+        return k_;
     }
 
 

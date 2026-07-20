@@ -1648,23 +1648,23 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 bool? t_(Claim.ItemComponent medClaimLineItem) {
                     IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> w_ = ClaimAndResponse?.PaidMedicalClaimResponse;
 
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> x_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim) {
+                    bool? x_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim) {
                         IEnumerable<ClaimResponse.ItemComponent> aa_ = pClaim?.LineItems;
 
                         bool? ab_(ClaimResponse.ItemComponent pClaimLineItem) {
 
-                            Id af_() {
+                            Id ae_() {
 
-                                bool at_() {
-                                    Claim au_ = medClaim?.ClaimofInterest;
-                                    bool av_ = au_ is Resource;
-                                    return av_;
+                                bool as_() {
+                                    Claim at_ = medClaim?.ClaimofInterest;
+                                    bool au_ = at_ is Resource;
+                                    return au_;
                                 }
 
-                                if (at_())
+                                if (as_())
                                 {
-                                    Claim aw_ = medClaim?.ClaimofInterest;
-                                    return (aw_ as Resource).IdElement;
+                                    Claim av_ = medClaim?.ClaimofInterest;
+                                    return (av_ as Resource).IdElement;
                                 }
                                 else
                                 {
@@ -1672,29 +1672,28 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 };
                             }
 
-                            string ag_ = FHIRHelpers_4_0_001.Instance.ToString(context, af_());
-                            ClaimResponse ah_ = pClaim?.Response;
-                            ResourceReference ai_ = ah_?.Request;
-                            FhirString aj_ = ai_?.ReferenceElement;
-                            string ak_ = FHIRHelpers_4_0_001.Instance.ToString(context, aj_);
-                            string al_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ak_);
-                            bool? am_ = context.Operators.Equal(ag_, al_);
-                            PositiveInt an_ = medClaimLineItem?.SequenceElement;
-                            Integer ao_ = context.Operators.Convert<Integer>(an_);
-                            PositiveInt ap_ = pClaimLineItem?.ItemSequenceElement;
-                            Integer aq_ = context.Operators.Convert<Integer>(ap_);
-                            bool? ar_ = context.Operators.Equal(ao_, aq_);
-                            bool? as_ = context.Operators.And(am_, ar_);
-                            return as_;
+                            string af_ = FHIRHelpers_4_0_001.Instance.ToString(context, ae_());
+                            ClaimResponse ag_ = pClaim?.Response;
+                            ResourceReference ah_ = ag_?.Request;
+                            FhirString ai_ = ah_?.ReferenceElement;
+                            string aj_ = FHIRHelpers_4_0_001.Instance.ToString(context, ai_);
+                            string ak_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, aj_);
+                            bool? al_ = context.Operators.Equal(af_, ak_);
+                            PositiveInt am_ = medClaimLineItem?.SequenceElement;
+                            Integer an_ = context.Operators.Convert<Integer>(am_);
+                            PositiveInt ao_ = pClaimLineItem?.ItemSequenceElement;
+                            Integer ap_ = context.Operators.Convert<Integer>(ao_);
+                            bool? aq_ = context.Operators.Equal(an_, ap_);
+                            bool? ar_ = context.Operators.And(al_, aq_);
+                            return ar_;
                         }
 
                         IEnumerable<ClaimResponse.ItemComponent> ac_ = context.Operators.Where<ClaimResponse.ItemComponent>(aa_, ab_);
-                        (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? ad_(ClaimResponse.ItemComponent pClaimLineItem) => pClaim;
-                        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ae_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(ac_, ad_);
-                        return ae_;
+                        bool? ad_ = context.Operators.Exists<ClaimResponse.ItemComponent>(ac_);
+                        return ad_;
                     }
 
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> y_ = context.Operators.SelectMany<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(w_, x_);
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> y_ = context.Operators.Where<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(w_, x_);
                     bool? z_ = context.Operators.Exists<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(y_);
                     return z_;
                 }
@@ -1713,75 +1712,75 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
             (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? o_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ClaimWithPaidResponse) {
 
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ax_() {
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? aw_() {
 
-                    bool bc_() {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bd_ = ClaimWithPaidResponse?.AggregateClaim;
+                    bool bb_() {
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bc_ = ClaimWithPaidResponse?.AggregateClaim;
 
-                        bool? be_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> bk_ = @this?.ClaimItem;
-                            bool? bl_ = context.Operators.Not((bool?)(bk_ is null));
+                        bool? bd_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> bj_ = @this?.ClaimItem;
+                            bool? bk_ = context.Operators.Not((bool?)(bj_ is null));
+                            return bk_;
+                        }
+
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> be_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bc_, bd_);
+
+                        IEnumerable<Claim.ItemComponent> bf_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> bl_ = @this?.ClaimItem;
                             return bl_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bf_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bd_, be_);
-
-                        IEnumerable<Claim.ItemComponent> bg_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> bm_ = @this?.ClaimItem;
-                            return bm_;
-                        }
-
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> bh_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(bf_, bg_);
-                        IEnumerable<Claim.ItemComponent> bi_ = context.Operators.Flatten<Claim.ItemComponent>(bh_);
-                        bool? bj_ = context.Operators.Exists<Claim.ItemComponent>(bi_);
-                        return bj_ ?? false;
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> bg_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(be_, bf_);
+                        IEnumerable<Claim.ItemComponent> bh_ = context.Operators.Flatten<Claim.ItemComponent>(bg_);
+                        bool? bi_ = context.Operators.Exists<Claim.ItemComponent>(bh_);
+                        return bi_ ?? false;
                     }
 
-                    if (bc_())
+                    if (bb_())
                     {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bn_ = ClaimWithPaidResponse?.AggregateClaim;
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bm_ = ClaimWithPaidResponse?.AggregateClaim;
 
-                        bool? bo_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? cc_ = @this?.PaidClaim;
-                            bool? cd_ = context.Operators.Not((bool?)(cc_ is null));
+                        bool? bn_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? cb_ = @this?.PaidClaim;
+                            bool? cc_ = context.Operators.Not((bool?)(cb_ is null));
+                            return cc_;
+                        }
+
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bo_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bm_, bn_);
+
+                        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? bp_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? cd_ = @this?.PaidClaim;
                             return cd_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bp_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bn_, bo_);
+                        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> bq_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(bo_, bp_);
 
-                        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? bq_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? ce_ = @this?.PaidClaim;
-                            return ce_;
+                        bool? bs_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> ce_ = @this?.ClaimItem;
+                            bool? cf_ = context.Operators.Not((bool?)(ce_ is null));
+                            return cf_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> br_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(bp_, bq_);
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bt_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bm_, bs_);
 
-                        bool? bt_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> cf_ = @this?.ClaimItem;
-                            bool? cg_ = context.Operators.Not((bool?)(cf_ is null));
+                        IEnumerable<Claim.ItemComponent> bu_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> cg_ = @this?.ClaimItem;
                             return cg_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bu_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bn_, bt_);
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> bv_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(bt_, bu_);
+                        IEnumerable<Claim.ItemComponent> bw_ = context.Operators.Flatten<Claim.ItemComponent>(bv_);
 
-                        IEnumerable<Claim.ItemComponent> bv_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> ch_ = @this?.ClaimItem;
-                            return ch_;
+                        CqlInterval<CqlDateTime> bx_(Claim.ItemComponent PaidItem) {
+                            DataType ch_ = PaidItem?.Serviced;
+                            CqlInterval<CqlDateTime> ci_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ch_);
+                            return ci_;
                         }
 
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> bw_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(bu_, bv_);
-                        IEnumerable<Claim.ItemComponent> bx_ = context.Operators.Flatten<Claim.ItemComponent>(bw_);
-
-                        CqlInterval<CqlDateTime> by_(Claim.ItemComponent PaidItem) {
-                            DataType ci_ = PaidItem?.Serviced;
-                            CqlInterval<CqlDateTime> cj_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ci_);
-                            return cj_;
-                        }
-
-                        IEnumerable<CqlInterval<CqlDateTime>> bz_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bx_, by_);
-                        IEnumerable<CqlInterval<CqlDateTime>> ca_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(bz_);
-                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? cb_ = (CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR, br_, ca_);
-                        return cb_;
+                        IEnumerable<CqlInterval<CqlDateTime>> by_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bw_, bx_);
+                        IEnumerable<CqlInterval<CqlDateTime>> bz_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(by_);
+                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ca_ = (CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR, bq_, bz_);
+                        return ca_;
                     }
                     else
                     {
@@ -1789,18 +1788,18 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     };
                 }
 
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] ay_ = [
-                    ax_(),
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] ax_ = [
+                    aw_(),
                 ];
 
-                bool? az_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList) {
-                    bool? ck_ = context.Operators.Not((bool?)(FinalList is null));
-                    return ck_;
+                bool? ay_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList) {
+                    bool? cj_ = context.Operators.Not((bool?)(FinalList is null));
+                    return cj_;
                 }
 
-                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ba_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)ay_, az_);
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? bb_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(ba_);
-                return bb_;
+                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> az_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)ax_, ay_);
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ba_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(az_);
+                return ba_;
             }
 
             IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> p_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?>)n_, o_);
@@ -2123,23 +2122,23 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 bool? t_(Claim.ItemComponent medClaimLineItem) {
                     IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> w_ = ClaimAndResponse?.PaidMedicalClaimResponse;
 
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> x_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim) {
+                    bool? x_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim) {
                         IEnumerable<ClaimResponse.ItemComponent> aa_ = pClaim?.LineItems;
 
                         bool? ab_(ClaimResponse.ItemComponent pClaimLineItem) {
 
-                            Id af_() {
+                            Id ae_() {
 
-                                bool at_() {
-                                    Claim au_ = medClaim?.ClaimofInterest;
-                                    bool av_ = au_ is Resource;
-                                    return av_;
+                                bool as_() {
+                                    Claim at_ = medClaim?.ClaimofInterest;
+                                    bool au_ = at_ is Resource;
+                                    return au_;
                                 }
 
-                                if (at_())
+                                if (as_())
                                 {
-                                    Claim aw_ = medClaim?.ClaimofInterest;
-                                    return (aw_ as Resource).IdElement;
+                                    Claim av_ = medClaim?.ClaimofInterest;
+                                    return (av_ as Resource).IdElement;
                                 }
                                 else
                                 {
@@ -2147,29 +2146,28 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 };
                             }
 
-                            string ag_ = FHIRHelpers_4_0_001.Instance.ToString(context, af_());
-                            ClaimResponse ah_ = pClaim?.Response;
-                            ResourceReference ai_ = ah_?.Request;
-                            FhirString aj_ = ai_?.ReferenceElement;
-                            string ak_ = FHIRHelpers_4_0_001.Instance.ToString(context, aj_);
-                            string al_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ak_);
-                            bool? am_ = context.Operators.Equal(ag_, al_);
-                            PositiveInt an_ = medClaimLineItem?.SequenceElement;
-                            Integer ao_ = context.Operators.Convert<Integer>(an_);
-                            PositiveInt ap_ = pClaimLineItem?.ItemSequenceElement;
-                            Integer aq_ = context.Operators.Convert<Integer>(ap_);
-                            bool? ar_ = context.Operators.Equal(ao_, aq_);
-                            bool? as_ = context.Operators.And(am_, ar_);
-                            return as_;
+                            string af_ = FHIRHelpers_4_0_001.Instance.ToString(context, ae_());
+                            ClaimResponse ag_ = pClaim?.Response;
+                            ResourceReference ah_ = ag_?.Request;
+                            FhirString ai_ = ah_?.ReferenceElement;
+                            string aj_ = FHIRHelpers_4_0_001.Instance.ToString(context, ai_);
+                            string ak_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, aj_);
+                            bool? al_ = context.Operators.Equal(af_, ak_);
+                            PositiveInt am_ = medClaimLineItem?.SequenceElement;
+                            Integer an_ = context.Operators.Convert<Integer>(am_);
+                            PositiveInt ao_ = pClaimLineItem?.ItemSequenceElement;
+                            Integer ap_ = context.Operators.Convert<Integer>(ao_);
+                            bool? aq_ = context.Operators.Equal(an_, ap_);
+                            bool? ar_ = context.Operators.And(al_, aq_);
+                            return ar_;
                         }
 
                         IEnumerable<ClaimResponse.ItemComponent> ac_ = context.Operators.Where<ClaimResponse.ItemComponent>(aa_, ab_);
-                        (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? ad_(ClaimResponse.ItemComponent pClaimLineItem) => pClaim;
-                        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ae_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(ac_, ad_);
-                        return ae_;
+                        bool? ad_ = context.Operators.Exists<ClaimResponse.ItemComponent>(ac_);
+                        return ad_;
                     }
 
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> y_ = context.Operators.SelectMany<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(w_, x_);
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> y_ = context.Operators.Where<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(w_, x_);
                     bool? z_ = context.Operators.Exists<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(y_);
                     return z_;
                 }
@@ -2188,75 +2186,75 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
             (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? o_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ClaimWithPaidResponse) {
 
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ax_() {
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? aw_() {
 
-                    bool bc_() {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bd_ = ClaimWithPaidResponse?.AggregateClaim;
+                    bool bb_() {
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bc_ = ClaimWithPaidResponse?.AggregateClaim;
 
-                        bool? be_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> bk_ = @this?.ClaimItem;
-                            bool? bl_ = context.Operators.Not((bool?)(bk_ is null));
+                        bool? bd_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> bj_ = @this?.ClaimItem;
+                            bool? bk_ = context.Operators.Not((bool?)(bj_ is null));
+                            return bk_;
+                        }
+
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> be_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bc_, bd_);
+
+                        IEnumerable<Claim.ItemComponent> bf_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> bl_ = @this?.ClaimItem;
                             return bl_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bf_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bd_, be_);
-
-                        IEnumerable<Claim.ItemComponent> bg_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> bm_ = @this?.ClaimItem;
-                            return bm_;
-                        }
-
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> bh_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(bf_, bg_);
-                        IEnumerable<Claim.ItemComponent> bi_ = context.Operators.Flatten<Claim.ItemComponent>(bh_);
-                        bool? bj_ = context.Operators.Exists<Claim.ItemComponent>(bi_);
-                        return bj_ ?? false;
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> bg_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(be_, bf_);
+                        IEnumerable<Claim.ItemComponent> bh_ = context.Operators.Flatten<Claim.ItemComponent>(bg_);
+                        bool? bi_ = context.Operators.Exists<Claim.ItemComponent>(bh_);
+                        return bi_ ?? false;
                     }
 
-                    if (bc_())
+                    if (bb_())
                     {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bn_ = ClaimWithPaidResponse?.AggregateClaim;
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bm_ = ClaimWithPaidResponse?.AggregateClaim;
 
-                        bool? bo_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? cc_ = @this?.PaidClaim;
-                            bool? cd_ = context.Operators.Not((bool?)(cc_ is null));
+                        bool? bn_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? cb_ = @this?.PaidClaim;
+                            bool? cc_ = context.Operators.Not((bool?)(cb_ is null));
+                            return cc_;
+                        }
+
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bo_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bm_, bn_);
+
+                        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? bp_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? cd_ = @this?.PaidClaim;
                             return cd_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bp_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bn_, bo_);
+                        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> bq_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(bo_, bp_);
 
-                        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? bq_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? ce_ = @this?.PaidClaim;
-                            return ce_;
+                        bool? bs_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> ce_ = @this?.ClaimItem;
+                            bool? cf_ = context.Operators.Not((bool?)(ce_ is null));
+                            return cf_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> br_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(bp_, bq_);
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bt_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bm_, bs_);
 
-                        bool? bt_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> cf_ = @this?.ClaimItem;
-                            bool? cg_ = context.Operators.Not((bool?)(cf_ is null));
+                        IEnumerable<Claim.ItemComponent> bu_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> cg_ = @this?.ClaimItem;
                             return cg_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bu_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bn_, bt_);
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> bv_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(bt_, bu_);
+                        IEnumerable<Claim.ItemComponent> bw_ = context.Operators.Flatten<Claim.ItemComponent>(bv_);
 
-                        IEnumerable<Claim.ItemComponent> bv_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> ch_ = @this?.ClaimItem;
-                            return ch_;
+                        CqlInterval<CqlDateTime> bx_(Claim.ItemComponent PaidItem) {
+                            DataType ch_ = PaidItem?.Serviced;
+                            CqlInterval<CqlDateTime> ci_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ch_);
+                            return ci_;
                         }
 
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> bw_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(bu_, bv_);
-                        IEnumerable<Claim.ItemComponent> bx_ = context.Operators.Flatten<Claim.ItemComponent>(bw_);
-
-                        CqlInterval<CqlDateTime> by_(Claim.ItemComponent PaidItem) {
-                            DataType ci_ = PaidItem?.Serviced;
-                            CqlInterval<CqlDateTime> cj_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ci_);
-                            return cj_;
-                        }
-
-                        IEnumerable<CqlInterval<CqlDateTime>> bz_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bx_, by_);
-                        IEnumerable<CqlInterval<CqlDateTime>> ca_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(bz_);
-                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? cb_ = (CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR, br_, ca_);
-                        return cb_;
+                        IEnumerable<CqlInterval<CqlDateTime>> by_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bw_, bx_);
+                        IEnumerable<CqlInterval<CqlDateTime>> bz_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(by_);
+                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ca_ = (CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR, bq_, bz_);
+                        return ca_;
                     }
                     else
                     {
@@ -2264,18 +2262,18 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     };
                 }
 
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] ay_ = [
-                    ax_(),
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] ax_ = [
+                    aw_(),
                 ];
 
-                bool? az_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList) {
-                    bool? ck_ = context.Operators.Not((bool?)(FinalList is null));
-                    return ck_;
+                bool? ay_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList) {
+                    bool? cj_ = context.Operators.Not((bool?)(FinalList is null));
+                    return cj_;
                 }
 
-                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ba_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)ay_, az_);
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? bb_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(ba_);
-                return bb_;
+                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> az_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)ax_, ay_);
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ba_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(az_);
+                return ba_;
             }
 
             IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> p_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?>)n_, o_);
@@ -2526,23 +2524,23 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 bool? t_(Claim.ItemComponent medClaimLineItem) {
                     IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> w_ = ClaimAndResponse?.PaidMedicalClaimResponse;
 
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> x_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim) {
+                    bool? x_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim) {
                         IEnumerable<ClaimResponse.ItemComponent> aa_ = pClaim?.LineItems;
 
                         bool? ab_(ClaimResponse.ItemComponent pClaimLineItem) {
 
-                            Id af_() {
+                            Id ae_() {
 
-                                bool at_() {
-                                    Claim au_ = medClaim?.ClaimofInterest;
-                                    bool av_ = au_ is Resource;
-                                    return av_;
+                                bool as_() {
+                                    Claim at_ = medClaim?.ClaimofInterest;
+                                    bool au_ = at_ is Resource;
+                                    return au_;
                                 }
 
-                                if (at_())
+                                if (as_())
                                 {
-                                    Claim aw_ = medClaim?.ClaimofInterest;
-                                    return (aw_ as Resource).IdElement;
+                                    Claim av_ = medClaim?.ClaimofInterest;
+                                    return (av_ as Resource).IdElement;
                                 }
                                 else
                                 {
@@ -2550,29 +2548,28 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 };
                             }
 
-                            string ag_ = FHIRHelpers_4_0_001.Instance.ToString(context, af_());
-                            ClaimResponse ah_ = pClaim?.Response;
-                            ResourceReference ai_ = ah_?.Request;
-                            FhirString aj_ = ai_?.ReferenceElement;
-                            string ak_ = FHIRHelpers_4_0_001.Instance.ToString(context, aj_);
-                            string al_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ak_);
-                            bool? am_ = context.Operators.Equal(ag_, al_);
-                            PositiveInt an_ = medClaimLineItem?.SequenceElement;
-                            Integer ao_ = context.Operators.Convert<Integer>(an_);
-                            PositiveInt ap_ = pClaimLineItem?.ItemSequenceElement;
-                            Integer aq_ = context.Operators.Convert<Integer>(ap_);
-                            bool? ar_ = context.Operators.Equal(ao_, aq_);
-                            bool? as_ = context.Operators.And(am_, ar_);
-                            return as_;
+                            string af_ = FHIRHelpers_4_0_001.Instance.ToString(context, ae_());
+                            ClaimResponse ag_ = pClaim?.Response;
+                            ResourceReference ah_ = ag_?.Request;
+                            FhirString ai_ = ah_?.ReferenceElement;
+                            string aj_ = FHIRHelpers_4_0_001.Instance.ToString(context, ai_);
+                            string ak_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, aj_);
+                            bool? al_ = context.Operators.Equal(af_, ak_);
+                            PositiveInt am_ = medClaimLineItem?.SequenceElement;
+                            Integer an_ = context.Operators.Convert<Integer>(am_);
+                            PositiveInt ao_ = pClaimLineItem?.ItemSequenceElement;
+                            Integer ap_ = context.Operators.Convert<Integer>(ao_);
+                            bool? aq_ = context.Operators.Equal(an_, ap_);
+                            bool? ar_ = context.Operators.And(al_, aq_);
+                            return ar_;
                         }
 
                         IEnumerable<ClaimResponse.ItemComponent> ac_ = context.Operators.Where<ClaimResponse.ItemComponent>(aa_, ab_);
-                        (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? ad_(ClaimResponse.ItemComponent pClaimLineItem) => pClaim;
-                        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ae_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(ac_, ad_);
-                        return ae_;
+                        bool? ad_ = context.Operators.Exists<ClaimResponse.ItemComponent>(ac_);
+                        return ad_;
                     }
 
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> y_ = context.Operators.SelectMany<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(w_, x_);
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> y_ = context.Operators.Where<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(w_, x_);
                     bool? z_ = context.Operators.Exists<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(y_);
                     return z_;
                 }
@@ -2591,75 +2588,75 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
             (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? o_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ClaimWithPaidResponse) {
 
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ax_() {
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? aw_() {
 
-                    bool bc_() {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bd_ = ClaimWithPaidResponse?.AggregateClaim;
+                    bool bb_() {
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bc_ = ClaimWithPaidResponse?.AggregateClaim;
 
-                        bool? be_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> bk_ = @this?.ClaimItem;
-                            bool? bl_ = context.Operators.Not((bool?)(bk_ is null));
+                        bool? bd_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> bj_ = @this?.ClaimItem;
+                            bool? bk_ = context.Operators.Not((bool?)(bj_ is null));
+                            return bk_;
+                        }
+
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> be_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bc_, bd_);
+
+                        IEnumerable<Claim.ItemComponent> bf_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> bl_ = @this?.ClaimItem;
                             return bl_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bf_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bd_, be_);
-
-                        IEnumerable<Claim.ItemComponent> bg_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> bm_ = @this?.ClaimItem;
-                            return bm_;
-                        }
-
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> bh_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(bf_, bg_);
-                        IEnumerable<Claim.ItemComponent> bi_ = context.Operators.Flatten<Claim.ItemComponent>(bh_);
-                        bool? bj_ = context.Operators.Exists<Claim.ItemComponent>(bi_);
-                        return bj_ ?? false;
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> bg_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(be_, bf_);
+                        IEnumerable<Claim.ItemComponent> bh_ = context.Operators.Flatten<Claim.ItemComponent>(bg_);
+                        bool? bi_ = context.Operators.Exists<Claim.ItemComponent>(bh_);
+                        return bi_ ?? false;
                     }
 
-                    if (bc_())
+                    if (bb_())
                     {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bn_ = ClaimWithPaidResponse?.AggregateClaim;
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bm_ = ClaimWithPaidResponse?.AggregateClaim;
 
-                        bool? bo_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? cc_ = @this?.PaidClaim;
-                            bool? cd_ = context.Operators.Not((bool?)(cc_ is null));
+                        bool? bn_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? cb_ = @this?.PaidClaim;
+                            bool? cc_ = context.Operators.Not((bool?)(cb_ is null));
+                            return cc_;
+                        }
+
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bo_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bm_, bn_);
+
+                        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? bp_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? cd_ = @this?.PaidClaim;
                             return cd_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bp_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bn_, bo_);
+                        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> bq_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(bo_, bp_);
 
-                        (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? bq_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? ce_ = @this?.PaidClaim;
-                            return ce_;
+                        bool? bs_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> ce_ = @this?.ClaimItem;
+                            bool? cf_ = context.Operators.Not((bool?)(ce_ is null));
+                            return cf_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> br_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>(bp_, bq_);
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bt_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bm_, bs_);
 
-                        bool? bt_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> cf_ = @this?.ClaimItem;
-                            bool? cg_ = context.Operators.Not((bool?)(cf_ is null));
+                        IEnumerable<Claim.ItemComponent> bu_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> cg_ = @this?.ClaimItem;
                             return cg_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bu_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bn_, bt_);
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> bv_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(bt_, bu_);
+                        IEnumerable<Claim.ItemComponent> bw_ = context.Operators.Flatten<Claim.ItemComponent>(bv_);
 
-                        IEnumerable<Claim.ItemComponent> bv_((CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> ch_ = @this?.ClaimItem;
-                            return ch_;
+                        CqlInterval<CqlDateTime> bx_(Claim.ItemComponent PaidItem) {
+                            DataType ch_ = PaidItem?.Serviced;
+                            CqlInterval<CqlDateTime> ci_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ch_);
+                            return ci_;
                         }
 
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> bw_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(bu_, bv_);
-                        IEnumerable<Claim.ItemComponent> bx_ = context.Operators.Flatten<Claim.ItemComponent>(bw_);
-
-                        CqlInterval<CqlDateTime> by_(Claim.ItemComponent PaidItem) {
-                            DataType ci_ = PaidItem?.Serviced;
-                            CqlInterval<CqlDateTime> cj_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ci_);
-                            return cj_;
-                        }
-
-                        IEnumerable<CqlInterval<CqlDateTime>> bz_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bx_, by_);
-                        IEnumerable<CqlInterval<CqlDateTime>> ca_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(bz_);
-                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? cb_ = (CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR, br_, ca_);
-                        return cb_;
+                        IEnumerable<CqlInterval<CqlDateTime>> by_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bw_, bx_);
+                        IEnumerable<CqlInterval<CqlDateTime>> bz_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(by_);
+                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ca_ = (CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR, bq_, bz_);
+                        return ca_;
                     }
                     else
                     {
@@ -2667,18 +2664,18 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     };
                 }
 
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] ay_ = [
-                    ax_(),
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] ax_ = [
+                    aw_(),
                 ];
 
-                bool? az_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList) {
-                    bool? ck_ = context.Operators.Not((bool?)(FinalList is null));
-                    return ck_;
+                bool? ay_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? FinalList) {
+                    bool? cj_ = context.Operators.Not((bool?)(FinalList is null));
+                    return cj_;
                 }
 
-                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ba_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)ay_, az_);
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? bb_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(ba_);
-                return bb_;
+                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> az_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)ax_, ay_);
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ba_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(az_);
+                return ba_;
             }
 
             IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> p_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?>)n_, o_);
@@ -2846,23 +2843,23 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 bool? t_(Claim.ItemComponent medClaimLineItem) {
                     IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> w_ = ClaimAndResponse?.PaidPharmacyClaimResponse;
 
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> x_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim) {
+                    bool? x_((CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? pClaim) {
                         IEnumerable<ClaimResponse.ItemComponent> aa_ = pClaim?.LineItems;
 
                         bool? ab_(ClaimResponse.ItemComponent pClaimLineItem) {
 
-                            Id af_() {
+                            Id ae_() {
 
-                                bool at_() {
-                                    Claim au_ = medClaim?.Claim;
-                                    bool av_ = au_ is Resource;
-                                    return av_;
+                                bool as_() {
+                                    Claim at_ = medClaim?.Claim;
+                                    bool au_ = at_ is Resource;
+                                    return au_;
                                 }
 
-                                if (at_())
+                                if (as_())
                                 {
-                                    Claim aw_ = medClaim?.Claim;
-                                    return (aw_ as Resource).IdElement;
+                                    Claim av_ = medClaim?.Claim;
+                                    return (av_ as Resource).IdElement;
                                 }
                                 else
                                 {
@@ -2870,29 +2867,28 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 };
                             }
 
-                            string ag_ = FHIRHelpers_4_0_001.Instance.ToString(context, af_());
-                            ClaimResponse ah_ = pClaim?.Response;
-                            ResourceReference ai_ = ah_?.Request;
-                            FhirString aj_ = ai_?.ReferenceElement;
-                            string ak_ = FHIRHelpers_4_0_001.Instance.ToString(context, aj_);
-                            string al_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ak_);
-                            bool? am_ = context.Operators.Equal(ag_, al_);
-                            PositiveInt an_ = medClaimLineItem?.SequenceElement;
-                            Integer ao_ = context.Operators.Convert<Integer>(an_);
-                            PositiveInt ap_ = pClaimLineItem?.ItemSequenceElement;
-                            Integer aq_ = context.Operators.Convert<Integer>(ap_);
-                            bool? ar_ = context.Operators.Equal(ao_, aq_);
-                            bool? as_ = context.Operators.And(am_, ar_);
-                            return as_;
+                            string af_ = FHIRHelpers_4_0_001.Instance.ToString(context, ae_());
+                            ClaimResponse ag_ = pClaim?.Response;
+                            ResourceReference ah_ = ag_?.Request;
+                            FhirString ai_ = ah_?.ReferenceElement;
+                            string aj_ = FHIRHelpers_4_0_001.Instance.ToString(context, ai_);
+                            string ak_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, aj_);
+                            bool? al_ = context.Operators.Equal(af_, ak_);
+                            PositiveInt am_ = medClaimLineItem?.SequenceElement;
+                            Integer an_ = context.Operators.Convert<Integer>(am_);
+                            PositiveInt ao_ = pClaimLineItem?.ItemSequenceElement;
+                            Integer ap_ = context.Operators.Convert<Integer>(ao_);
+                            bool? aq_ = context.Operators.Equal(an_, ap_);
+                            bool? ar_ = context.Operators.And(al_, aq_);
+                            return ar_;
                         }
 
                         IEnumerable<ClaimResponse.ItemComponent> ac_ = context.Operators.Where<ClaimResponse.ItemComponent>(aa_, ab_);
-                        (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? ad_(ClaimResponse.ItemComponent pClaimLineItem) => pClaim;
-                        IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> ae_ = context.Operators.Select<ClaimResponse.ItemComponent, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(ac_, ad_);
-                        return ae_;
+                        bool? ad_ = context.Operators.Exists<ClaimResponse.ItemComponent>(ac_);
+                        return ad_;
                     }
 
-                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> y_ = context.Operators.SelectMany<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?, (CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(w_, x_);
+                    IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> y_ = context.Operators.Where<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(w_, x_);
                     bool? z_ = context.Operators.Exists<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>(y_);
                     return z_;
                 }
@@ -2911,117 +2907,117 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
             (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? o_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)? ClaimWithPaidResponse) {
 
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? ax_() {
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? aw_() {
 
-                    bool bc_() {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bd_ = ClaimWithPaidResponse?.AggregateClaim;
+                    bool bb_() {
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bc_ = ClaimWithPaidResponse?.AggregateClaim;
 
-                        bool? be_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> bk_ = @this?.ClaimItem;
-                            bool? bl_ = context.Operators.Not((bool?)(bk_ is null));
+                        bool? bd_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> bj_ = @this?.ClaimItem;
+                            bool? bk_ = context.Operators.Not((bool?)(bj_ is null));
+                            return bk_;
+                        }
+
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> be_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bc_, bd_);
+
+                        IEnumerable<Claim.ItemComponent> bf_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> bl_ = @this?.ClaimItem;
                             return bl_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bf_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bd_, be_);
-
-                        IEnumerable<Claim.ItemComponent> bg_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> bm_ = @this?.ClaimItem;
-                            return bm_;
-                        }
-
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> bh_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(bf_, bg_);
-                        IEnumerable<Claim.ItemComponent> bi_ = context.Operators.Flatten<Claim.ItemComponent>(bh_);
-                        bool? bj_ = context.Operators.Exists<Claim.ItemComponent>(bi_);
-                        return bj_ ?? false;
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> bg_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(be_, bf_);
+                        IEnumerable<Claim.ItemComponent> bh_ = context.Operators.Flatten<Claim.ItemComponent>(bg_);
+                        bool? bi_ = context.Operators.Exists<Claim.ItemComponent>(bh_);
+                        return bi_ ?? false;
                     }
 
-                    if (bc_())
+                    if (bb_())
                     {
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bn_ = ClaimWithPaidResponse?.AggregateClaim;
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bm_ = ClaimWithPaidResponse?.AggregateClaim;
 
-                        bool? bo_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? cl_ = @this?.PaidClaim;
-                            bool? cm_ = context.Operators.Not((bool?)(cl_ is null));
+                        bool? bn_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? ck_ = @this?.PaidClaim;
+                            bool? cl_ = context.Operators.Not((bool?)(ck_ is null));
+                            return cl_;
+                        }
+
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bo_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bm_, bn_);
+
+                        (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? bp_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? cm_ = @this?.PaidClaim;
                             return cm_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bp_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bn_, bo_);
+                        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> bq_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(bo_, bp_);
 
-                        (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? bq_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? cn_ = @this?.PaidClaim;
-                            return cn_;
+                        bool? bs_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> cn_ = @this?.ClaimItem;
+                            bool? co_ = context.Operators.Not((bool?)(cn_ is null));
+                            return co_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> br_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(bp_, bq_);
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bt_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bm_, bs_);
 
-                        bool? bt_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> co_ = @this?.ClaimItem;
-                            bool? cp_ = context.Operators.Not((bool?)(co_ is null));
+                        IEnumerable<Claim.ItemComponent> bu_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> cp_ = @this?.ClaimItem;
                             return cp_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> bu_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bn_, bt_);
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> bv_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(bt_, bu_);
+                        IEnumerable<Claim.ItemComponent> bw_ = context.Operators.Flatten<Claim.ItemComponent>(bv_);
 
-                        IEnumerable<Claim.ItemComponent> bv_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> cq_ = @this?.ClaimItem;
-                            return cq_;
+                        CqlInterval<CqlDateTime> bx_(Claim.ItemComponent PaidItem) {
+                            DataType cq_ = PaidItem?.Serviced;
+                            CqlInterval<CqlDateTime> cr_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, cq_);
+                            return cr_;
                         }
 
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> bw_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(bu_, bv_);
-                        IEnumerable<Claim.ItemComponent> bx_ = context.Operators.Flatten<Claim.ItemComponent>(bw_);
+                        IEnumerable<CqlInterval<CqlDateTime>> by_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bw_, bx_);
+                        IEnumerable<CqlInterval<CqlDateTime>> bz_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(by_);
 
-                        CqlInterval<CqlDateTime> by_(Claim.ItemComponent PaidItem) {
-                            DataType cr_ = PaidItem?.Serviced;
-                            CqlInterval<CqlDateTime> cs_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, cr_);
-                            return cs_;
+                        bool? cb_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> cs_ = @this?.ClaimItem;
+                            bool? ct_ = context.Operators.Not((bool?)(cs_ is null));
+                            return ct_;
                         }
 
-                        IEnumerable<CqlInterval<CqlDateTime>> bz_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDateTime>>(bx_, by_);
-                        IEnumerable<CqlInterval<CqlDateTime>> ca_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(bz_);
+                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> cc_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bm_, cb_);
 
-                        bool? cc_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> ct_ = @this?.ClaimItem;
-                            bool? cu_ = context.Operators.Not((bool?)(ct_ is null));
+                        IEnumerable<Claim.ItemComponent> cd_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
+                            IEnumerable<Claim.ItemComponent> cu_ = @this?.ClaimItem;
                             return cu_;
                         }
 
-                        IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> cd_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>(bn_, cc_);
+                        IEnumerable<IEnumerable<Claim.ItemComponent>> ce_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(cc_, cd_);
+                        IEnumerable<Claim.ItemComponent> cf_ = context.Operators.Flatten<Claim.ItemComponent>(ce_);
 
-                        IEnumerable<Claim.ItemComponent> ce_((CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)? @this) {
-                            IEnumerable<Claim.ItemComponent> cv_ = @this?.ClaimItem;
-                            return cv_;
-                        }
+                        CqlInterval<CqlDate> cg_(Claim.ItemComponent i) {
 
-                        IEnumerable<IEnumerable<Claim.ItemComponent>> cf_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?, IEnumerable<Claim.ItemComponent>>(cd_, ce_);
-                        IEnumerable<Claim.ItemComponent> cg_ = context.Operators.Flatten<Claim.ItemComponent>(cf_);
+                            CqlInterval<CqlDate> cv_() {
 
-                        CqlInterval<CqlDate> ch_(Claim.ItemComponent i) {
-
-                            CqlInterval<CqlDate> cw_() {
-
-                                bool cx_() {
-                                    Quantity cy_ = i?.Quantity;
-                                    bool? cz_ = context.Operators.Not((bool?)(cy_ is null));
-                                    return cz_ ?? false;
+                                bool cw_() {
+                                    Quantity cx_ = i?.Quantity;
+                                    bool? cy_ = context.Operators.Not((bool?)(cx_ is null));
+                                    return cy_ ?? false;
                                 }
 
-                                if (cx_())
+                                if (cw_())
                                 {
-                                    DataType da_ = i?.Serviced;
-                                    CqlInterval<CqlDateTime> db_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, da_);
-                                    CqlDateTime dc_ = context.Operators.Start(db_);
-                                    CqlDate dd_ = context.Operators.ConvertDateTimeToDate(dc_);
-                                    CqlInterval<CqlDateTime> df_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, da_);
-                                    CqlDateTime dg_ = context.Operators.Start(df_);
-                                    Quantity dh_ = i?.Quantity;
-                                    FhirDecimal di_ = dh_?.ValueElement;
-                                    decimal? dj_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, di_);
-                                    CqlDateTime dk_ = context.Operators.Add(dg_, new CqlQuantity(dj_, "day"));
-                                    CqlQuantity dl_ = context.Operators.Quantity(1m, "day");
-                                    CqlDateTime dm_ = context.Operators.Subtract(dk_, dl_);
-                                    CqlDate dn_ = context.Operators.ConvertDateTimeToDate(dm_);
-                                    CqlInterval<CqlDate> do_ = context.Operators.Interval(dd_, dn_, true, true);
-                                    return do_;
+                                    DataType cz_ = i?.Serviced;
+                                    CqlInterval<CqlDateTime> da_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, cz_);
+                                    CqlDateTime db_ = context.Operators.Start(da_);
+                                    CqlDate dc_ = context.Operators.ConvertDateTimeToDate(db_);
+                                    CqlInterval<CqlDateTime> de_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, cz_);
+                                    CqlDateTime df_ = context.Operators.Start(de_);
+                                    Quantity dg_ = i?.Quantity;
+                                    FhirDecimal dh_ = dg_?.ValueElement;
+                                    decimal? di_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, dh_);
+                                    CqlDateTime dj_ = context.Operators.Add(df_, new CqlQuantity(di_, "day"));
+                                    CqlQuantity dk_ = context.Operators.Quantity(1m, "day");
+                                    CqlDateTime dl_ = context.Operators.Subtract(dj_, dk_);
+                                    CqlDate dm_ = context.Operators.ConvertDateTimeToDate(dl_);
+                                    CqlInterval<CqlDate> dn_ = context.Operators.Interval(dc_, dm_, true, true);
+                                    return dn_;
                                 }
                                 else
                                 {
@@ -3029,13 +3025,13 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 };
                             }
 
-                            return cw_();
+                            return cv_();
                         }
 
-                        IEnumerable<CqlInterval<CqlDate>> ci_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDate>>(cg_, ch_);
-                        IEnumerable<CqlInterval<CqlDate>> cj_ = context.Operators.Distinct<CqlInterval<CqlDate>>(ci_);
-                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? ck_ = (CqlTupleMetadata_DXGMEVDRBZgHMANCfXfEUYMNW, br_, ca_, cj_);
-                        return ck_;
+                        IEnumerable<CqlInterval<CqlDate>> ch_ = context.Operators.Select<Claim.ItemComponent, CqlInterval<CqlDate>>(cf_, cg_);
+                        IEnumerable<CqlInterval<CqlDate>> ci_ = context.Operators.Distinct<CqlInterval<CqlDate>>(ch_);
+                        (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? cj_ = (CqlTupleMetadata_DXGMEVDRBZgHMANCfXfEUYMNW, bq_, bz_, ci_);
+                        return cj_;
                     }
                     else
                     {
@@ -3043,18 +3039,18 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     };
                 }
 
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?[] ay_ = [
-                    ax_(),
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?[] ax_ = [
+                    aw_(),
                 ];
 
-                bool? az_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? FinalList) {
-                    bool? dp_ = context.Operators.Not((bool?)(FinalList is null));
-                    return dp_;
+                bool? ay_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? FinalList) {
+                    bool? do_ = context.Operators.Not((bool?)(FinalList is null));
+                    return do_;
                 }
 
-                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> ba_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>)ay_, az_);
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? bb_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(ba_);
-                return bb_;
+                IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> az_ = context.Operators.Where<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>)ax_, ay_);
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? ba_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(az_);
+                return ba_;
             }
 
             IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> p_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?, (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim)?>)n_, o_);
@@ -3266,44 +3262,42 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 IEnumerable<Claim> bf_ = LineItemDefinition?.InpatientStayLineItems;
                 IEnumerable<Claim> bg_ = LineItemDefinition?.NonacuteInpatientLineItems;
 
-                IEnumerable<Claim> bh_(Claim nonAcuteInpatientStay) {
-                    IEnumerable<Claim> bp_ = LineItemDefinition?.InpatientStayLineItems;
+                bool? bh_(Claim nonAcuteInpatientStay) {
+                    IEnumerable<Claim> bn_ = LineItemDefinition?.InpatientStayLineItems;
 
-                    bool? bq_(Claim inpatientStay) {
-                        Id bu_ = nonAcuteInpatientStay?.IdElement;
-                        Id bv_ = inpatientStay?.IdElement;
-                        bool? bw_ = context.Operators.Equal(bu_, bv_);
-                        return bw_;
+                    bool? bo_(Claim inpatientStay) {
+                        Id br_ = nonAcuteInpatientStay?.IdElement;
+                        Id bs_ = inpatientStay?.IdElement;
+                        bool? bt_ = context.Operators.Equal(br_, bs_);
+                        return bt_;
                     }
 
-                    IEnumerable<Claim> br_ = context.Operators.Where<Claim>(bp_, bq_);
-                    Claim bs_(Claim inpatientStay) => nonAcuteInpatientStay;
-                    IEnumerable<Claim> bt_ = context.Operators.Select<Claim, Claim>(br_, bs_);
-                    return bt_;
+                    IEnumerable<Claim> bp_ = context.Operators.Where<Claim>(bn_, bo_);
+                    bool? bq_ = context.Operators.Exists<Claim>(bp_);
+                    return bq_;
                 }
 
-                IEnumerable<Claim> bi_ = context.Operators.SelectMany<Claim, Claim>(bg_, bh_);
+                IEnumerable<Claim> bi_ = context.Operators.Where<Claim>(bg_, bh_);
 
-                IEnumerable<Claim> bl_(Claim inpatientStay) {
-                    IEnumerable<Claim> bx_ = LineItemDefinition?.NonacuteInpatientLineItems;
+                bool? bk_(Claim inpatientStay) {
+                    IEnumerable<Claim> bu_ = LineItemDefinition?.NonacuteInpatientLineItems;
 
-                    bool? by_(Claim nonAcuteInpatientStay) {
-                        Id cc_ = inpatientStay?.IdElement;
-                        Id cd_ = nonAcuteInpatientStay?.IdElement;
-                        bool? ce_ = context.Operators.Equal(cc_, cd_);
-                        return ce_;
+                    bool? bv_(Claim nonAcuteInpatientStay) {
+                        Id bz_ = inpatientStay?.IdElement;
+                        Id ca_ = nonAcuteInpatientStay?.IdElement;
+                        bool? cb_ = context.Operators.Equal(bz_, ca_);
+                        return cb_;
                     }
 
-                    IEnumerable<Claim> bz_ = context.Operators.Where<Claim>(bx_, by_);
-                    Claim ca_(Claim nonAcuteInpatientStay) => inpatientStay;
-                    IEnumerable<Claim> cb_ = context.Operators.Select<Claim, Claim>(bz_, ca_);
-                    return cb_;
+                    IEnumerable<Claim> bw_ = context.Operators.Where<Claim>(bu_, bv_);
+                    bool? bx_ = context.Operators.Exists<Claim>(bw_);
+                    bool? by_ = context.Operators.Not(bx_);
+                    return by_;
                 }
 
-                IEnumerable<Claim> bm_ = context.Operators.SelectMany<Claim, Claim>(bf_, bl_);
-                IEnumerable<Claim> bn_ = context.Operators.Except<Claim>(bf_, bm_);
-                (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? bo_ = (CqlTupleMetadata_DBGUUNgWTQDYFIeOfMhQJAYTB, bf_, bi_, bn_);
-                return bo_;
+                IEnumerable<Claim> bl_ = context.Operators.Where<Claim>(bf_, bk_);
+                (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? bm_ = (CqlTupleMetadata_DBGUUNgWTQDYFIeOfMhQJAYTB, bf_, bi_, bl_);
+                return bm_;
             }
 
             IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> m_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)?, (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)?>)k_, l_);
