@@ -16,7 +16,8 @@ namespace Hl7.Cql.Runtime;
 /// </summary>
 [JsonConverter(typeof(StringEncapsulatedValueJsonConverter<CqlLibraryVersion>))]
 public readonly record struct CqlLibraryVersion :
-    IParsable<CqlLibraryVersion>
+    IParsable<CqlLibraryVersion>,
+    IComparable<CqlLibraryVersion>
 {
     /// <summary>
     /// Implicitly converts a <see cref="CqlLibraryVersion"/> to a <see cref="string"/>.
@@ -122,6 +123,24 @@ public readonly record struct CqlLibraryVersion :
         result = NewVerbatim(s);
         return true;
     }
+
+    #endregion
+
+    #region Comparison and Equality
+
+    /// <summary>
+    /// Compares the current version with another <see cref="CqlLibraryVersion"/>.
+    /// </summary>
+    /// <remarks>Uses spec-conformant exact ordinal comparison via <see cref="CqlLibrarySemantics"/>.</remarks>
+    public int CompareTo(CqlLibraryVersion other) => CqlLibrarySemantics.CompareVersions(_value, other._value);
+
+    /// <inheritdoc/>
+    /// <remarks>
+    /// Uses spec-conformant exact ordinal hashing via <see cref="CqlLibrarySemantics"/>.
+    /// The auto-generated record <c>Equals(CqlLibraryVersion)</c> uses ordinal string equality,
+    /// which is consistent with this hash.
+    /// </remarks>
+    public override int GetHashCode() => CqlLibrarySemantics.ComputeHashCode(null, _value);
 
     #endregion
 
