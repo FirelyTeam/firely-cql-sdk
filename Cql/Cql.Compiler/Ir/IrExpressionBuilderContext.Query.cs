@@ -88,18 +88,12 @@ partial class IrExpressionBuilderContext
                 {
                     using (PushElement(relationship))
                     {
-                        var selectManyLambda = WithToSelectManyBody(scopeParameter, relationship);
-
-                        var selectManyCall = BindCqlOperator(nameof(ICqlOperators.SelectMany), @return, selectManyLambda);
-                        if (relationship is Without)
-                        {
-                            var callExcept = BindCqlOperator(nameof(ICqlOperators.Except), @return, selectManyCall);
-                            @return = callExcept;
-                        }
-                        else
-                        {
-                            @return = selectManyCall;
-                        }
+                        // A 'with' is a semi-join and a 'without' an anti-semi-join: each source
+                        // element is kept or dropped based on whether a matching related element
+                        // exists, and is emitted at most once no matter how many elements match.
+                        // (Ported from the old builder's eb8a22211, which fixed #1366.)
+                        var existsLambda = WithToExistenceCheck(scopeParameter, relationship);
+                        @return = BindCqlOperator(nameof(ICqlOperators.Where), @return, existsLambda);
                     }
                 }
             }
@@ -408,7 +402,7 @@ partial class IrExpressionBuilderContext
         return @return;
     }
 
-    protected IrLambda WithToSelectManyBody(
+    protected IrLambda WithToExistenceCheck(
         IrLocal rootScopeParameter,
         RelationshipClause with)
     {
@@ -426,10 +420,10 @@ partial class IrExpressionBuilderContext
 
         //Func<Bundle, Context, IEnumerable<Encounter>> x = (bundle, ctx) =>
         //    bundle.Entry.ByResourceType<Encounter>()
-        //    .SelectMany(E =>
+        //    .Where(E =>
         //        bundle.Entry.ByResourceType<Condition>() // <--
         //            .Where(P => true) // such that goes here
-        //            .Select(P => E));
+        //            .Any());          // negated for a 'without'
         var source = TranslateArg(with.expression);
         if (!_typeResolver.IsListType(source.Type))
         {
@@ -450,18 +444,10 @@ partial class IrExpressionBuilderContext
 
             var whereLambda = new IrLambda([whereLambdaParameter], suchThatBody);
             var callWhereOnSource = BindCqlOperator(nameof(ICqlOperators.Where), source, whereLambda);
-
-            // NOTE(phase4): ported as-is (#1343) — this second parameter shares the alias name with
-            // whereLambdaParameter but is a distinct IrLocal instance, exactly as the old builder
-            // called Expression.Parameter(...) a second time here. It is never referenced in the
-            // lambda body below (selectBody is rootScopeParameter, ignoring the parameter), so its
-            // identity doesn't matter beyond giving the Select lambda a correctly-typed parameter slot.
-            var selectLambdaParameter = new IrLocal(sourceElementType, with.alias);
-            IrExpression selectBody = rootScopeParameter; // P => E
-            var selectLambda = new IrLambda([selectLambdaParameter], selectBody);
-            var callSelectOnWhere = BindCqlOperator(nameof(ICqlOperators.Select), callWhereOnSource, selectLambda);
-            var selectManyLambda = new IrLambda([rootScopeParameter], callSelectOnWhere);
-            return selectManyLambda;
+            var exists = BindCqlOperator(nameof(ICqlOperators.Exists), callWhereOnSource);
+            if (with is Without)
+                exists = BindCqlOperator(nameof(ICqlOperators.Not), exists);
+            return new IrLambda([rootScopeParameter], exists);
         }
     }
 

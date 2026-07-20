@@ -14,8 +14,9 @@ restored). The two HEDIS-surfaced blocking bugs
 [#1362](https://github.com/FirelyTeam/firely-cql-sdk/issues/1362)) are fixed, six further
 cosmetic divergence classes were aligned (see "Findings from phase 5" and the post-parity
 ledger), and both permanent `Hedis2025.GoldenTests` guards pass un-skipped in the
-`Firely.Cql.Sdk.Integration.Runner` submodule. The remaining flip-over decision (default
-`UseIrPipeline`, then phase 6) is tracked in PR #1346.
+`Firely.Cql.Sdk.Integration.Runner` submodule. Phases 2–5 are merged to
+`feature/linq-expr-removal`; the remaining flip-over decision (default `UseIrPipeline`,
+then phase 6) happens on that branch before it merges to develop.
 
 ## Context
 
