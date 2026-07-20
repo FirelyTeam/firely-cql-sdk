@@ -18,7 +18,9 @@ partial class CqlOperators
         public int Compare(object? x, object? y) =>
             (x, y) is (null, null) // #REVIEW: This is overriding the spec which says that nulls are not equal
                 ? 0
-                : owningCqlOperators.Comparer.Compare(x, y, null) ?? coalesceCompareTo;
+                : ReferenceEquals(x, y)
+                    ? 0
+                    : owningCqlOperators.Comparer.Compare(x, y, null) ?? coalesceCompareTo;
     }
 
     private readonly struct EqualityComparerBridge(
@@ -28,6 +30,7 @@ partial class CqlOperators
     {
         public new bool Equals(object? x, object? y) =>
             (x, y) is (null,null) // #REVIEW: This is overriding the spec which says that nulls are not equal
+            || ReferenceEquals(x, y)
             || (owningCqlOperators.Comparer.Equals(x, y, null) ?? coalesceEqualTo);
 
         public int GetHashCode(object obj) =>

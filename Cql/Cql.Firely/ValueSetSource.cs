@@ -151,7 +151,15 @@ public class ValueSetSource : IValueSetDictionary
         Predicate<IValueSetFacade> @internal,
         Action<ValidateCodeParameters> external)
     {
-        if (TaskHelper.Await(() => Load(valueSetUri)) is { } vs && @internal(vs)) return true;
+        // Fast path: a warm cache hit does not need the sync-over-async machinery in Load.
+        if (_valueSets.TryGetValue(valueSetUri, out var cached))
+        {
+            if (@internal(cached)) return true;
+        }
+        else if (TaskHelper.Await(() => Load(valueSetUri)) is { } vs && @internal(vs))
+        {
+            return true;
+        }
 
         if (_termService is null) return false;
 
@@ -166,6 +174,13 @@ public class ValueSetSource : IValueSetDictionary
     /// <inheritdoc />
     public bool TryGetCodesInValueSet(string valueSetUri, out IEnumerable<CqlCode>? codes)
     {
+        // Fast path: a warm cache hit does not need the sync-over-async machinery in Load.
+        if (_valueSets.TryGetValue(valueSetUri, out var cachedValueSet))
+        {
+            codes = cachedValueSet;
+            return true;
+        }
+
         codes = TaskHelper.Await(() => Load(valueSetUri));
         if (codes is not null) return true;
 
