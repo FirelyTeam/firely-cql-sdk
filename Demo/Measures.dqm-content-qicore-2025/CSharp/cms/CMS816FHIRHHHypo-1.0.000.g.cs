@@ -124,38 +124,37 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
         IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        IEnumerable<MedicationAdministration> d_(MedicationAdministration MR) {
+        bool? d_(MedicationAdministration MR) {
             IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? j_(Medication M) {
-                object n_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object o_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
-                string q_ = context.Operators.Last<string>(p_);
-                bool? r_ = context.Operators.Equal(n_, q_);
-                CodeableConcept s_ = M?.Code;
-                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                CqlValueSet u_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
-                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                bool? w_ = context.Operators.And(r_, v_);
-                return w_;
+                object m_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object n_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> o_ = context.Operators.Split((string)n_, "/");
+                string p_ = context.Operators.Last<string>(o_);
+                bool? q_ = context.Operators.Equal(m_, p_);
+                CodeableConcept r_ = M?.Code;
+                CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
+                CqlValueSet t_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
+                bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
+                bool? v_ = context.Operators.And(q_, u_);
+                return v_;
             }
 
             IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
-            MedicationAdministration l_(Medication M) => MR;
-            IEnumerable<MedicationAdministration> m_ = context.Operators.Select<Medication, MedicationAdministration>(k_, l_);
-            return m_;
+            bool? l_ = context.Operators.Exists<Medication>(k_);
+            return l_;
         }
 
-        IEnumerable<MedicationAdministration> e_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(c_, d_);
+        IEnumerable<MedicationAdministration> e_ = context.Operators.Where<MedicationAdministration>(c_, d_);
         IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(b_, e_);
 
         bool? g_(MedicationAdministration HypoMedication) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> x_ = HypoMedication?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? y_ = x_?.Value;
-            string z_ = context.Operators.Convert<string>(y_);
-            bool? aa_ = context.Operators.Equal(z_, "completed");
-            return aa_;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> w_ = HypoMedication?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? x_ = w_?.Value;
+            string y_ = context.Operators.Convert<string>(x_);
+            bool? z_ = context.Operators.Equal(y_, "completed");
+            return z_;
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
@@ -173,26 +172,25 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
     {
         IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
-        IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
+        bool? b_(Encounter InpatientHospitalization) {
             IEnumerable<MedicationAdministration> d_ = this.Hypoglycemic_Medication_Administration(context);
 
             bool? e_(MedicationAdministration HypoglycemicMedication) {
-                DataType i_ = HypoglycemicMedication?.Effective;
-                object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
-                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
-                CqlDateTime l_ = context.Operators.Start(k_);
-                CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
-                bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, (string)default);
-                return n_;
+                DataType h_ = HypoglycemicMedication?.Effective;
+                object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
+                CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
+                CqlDateTime k_ = context.Operators.Start(j_);
+                CqlInterval<CqlDateTime> l_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
+                bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, (string)default);
+                return m_;
             }
 
             IEnumerable<MedicationAdministration> f_ = context.Operators.Where<MedicationAdministration>(d_, e_);
-            Encounter g_(MedicationAdministration HypoglycemicMedication) => InpatientHospitalization;
-            IEnumerable<Encounter> h_ = context.Operators.Select<MedicationAdministration, Encounter>(f_, g_);
-            return h_;
+            bool? g_ = context.Operators.Exists<MedicationAdministration>(f_);
+            return g_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 

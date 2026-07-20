@@ -1,10 +1,10 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.29.0",
+         "type" : "CqlToElmInfo",
+         "translatorVersion" : "4.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
-         "signatureLevel" : "All",
-         "type" : "CqlToElmInfo"
+         "signatureLevel" : "All"
       } ],
       "identifier" : {
          "id" : "TestCodeSystemInclude",
@@ -20,6 +20,7 @@
             "uri" : "urn:hl7-org:elm-types:r1",
             "annotation" : [ ]
          }, {
+            "locator" : "3:1-3:26",
             "localIdentifier" : "FHIR",
             "uri" : "http://hl7.org/fhir",
             "version" : "4.0.1",
@@ -28,6 +29,8 @@
       },
       "codeSystems" : {
          "def" : [ {
+            "locator" : "5:1-5:71",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "TaskCodeSystem",
             "id" : "http://hl7.org/fhir/CodeSystem/task-code",
             "accessLevel" : "Public",
@@ -36,12 +39,16 @@
       },
       "codes" : {
          "def" : [ {
+            "locator" : "7:1-7:88",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Fulfill Task",
             "id" : "fulfill",
             "display" : "Fulfill the focal request",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "codeSystem" : {
+               "locator" : "7:37-7:52",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "TaskCodeSystem",
                "annotation" : [ ]
             }
@@ -49,3 +56,4 @@
       }
    }
 }
+

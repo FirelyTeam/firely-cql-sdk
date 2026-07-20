@@ -137,7 +137,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
         CqlValueSet a_ = this.Encounter_Inpatient(context);
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
-        IEnumerable<Encounter> c_(Encounter EncounterInpatient) {
+        bool? c_(Encounter EncounterInpatient) {
             CqlValueSet e_ = this.Medicare_FFS_payer(context);
             IEnumerable<Coverage> f_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-coverage"));
             CqlValueSet g_ = this.Medicare_Advantage_payer(context);
@@ -145,41 +145,40 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
             IEnumerable<Coverage> i_ = context.Operators.Union<Coverage>(f_, h_);
 
             bool? j_(Coverage MedicarePayer) {
-                CqlInterval<CqlDateTime> n_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservationAndOutpatientSurgeryService(context, EncounterInpatient);
-                int? o_ = CQMCommon_4_1_000.Instance.lengthInDays(context, n_);
-                bool? p_ = context.Operators.Less(o_, 365);
-                Code<Encounter.EncounterStatus> q_ = EncounterInpatient?.StatusElement;
-                Encounter.EncounterStatus? r_ = q_?.Value;
-                Code<Encounter.EncounterStatus> s_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(r_);
-                bool? t_ = context.Operators.Equal(s_, "finished");
-                bool? u_ = context.Operators.And(p_, t_);
-                Patient v_ = this.Patient(context);
-                Date w_ = v_?.BirthDateElement;
-                string x_ = w_?.Value;
-                CqlDate y_ = context.Operators.ConvertStringToDate(x_);
-                Period z_ = EncounterInpatient?.Period;
-                CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
-                CqlDateTime ab_ = context.Operators.Start(aa_);
-                CqlDate ac_ = context.Operators.DateFrom(ab_);
-                int? ad_ = context.Operators.CalculateAgeAt(y_, ac_, "year");
-                CqlInterval<int?> ae_ = context.Operators.Interval(65, 94, true, true);
-                bool? af_ = context.Operators.In<int?>(ad_, ae_, (string)default);
-                bool? ag_ = context.Operators.And(u_, af_);
-                CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
-                CqlDateTime aj_ = context.Operators.End(ai_);
-                CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
-                bool? al_ = context.Operators.In<CqlDateTime>(aj_, ak_, "day");
-                bool? am_ = context.Operators.And(ag_, al_);
-                return am_;
+                CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservationAndOutpatientSurgeryService(context, EncounterInpatient);
+                int? n_ = CQMCommon_4_1_000.Instance.lengthInDays(context, m_);
+                bool? o_ = context.Operators.Less(n_, 365);
+                Code<Encounter.EncounterStatus> p_ = EncounterInpatient?.StatusElement;
+                Encounter.EncounterStatus? q_ = p_?.Value;
+                Code<Encounter.EncounterStatus> r_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(q_);
+                bool? s_ = context.Operators.Equal(r_, "finished");
+                bool? t_ = context.Operators.And(o_, s_);
+                Patient u_ = this.Patient(context);
+                Date v_ = u_?.BirthDateElement;
+                string w_ = v_?.Value;
+                CqlDate x_ = context.Operators.ConvertStringToDate(w_);
+                Period y_ = EncounterInpatient?.Period;
+                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
+                CqlDateTime aa_ = context.Operators.Start(z_);
+                CqlDate ab_ = context.Operators.DateFrom(aa_);
+                int? ac_ = context.Operators.CalculateAgeAt(x_, ab_, "year");
+                CqlInterval<int?> ad_ = context.Operators.Interval(65, 94, true, true);
+                bool? ae_ = context.Operators.In<int?>(ac_, ad_, (string)default);
+                bool? af_ = context.Operators.And(t_, ae_);
+                CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
+                CqlDateTime ai_ = context.Operators.End(ah_);
+                CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
+                bool? ak_ = context.Operators.In<CqlDateTime>(ai_, aj_, "day");
+                bool? al_ = context.Operators.And(af_, ak_);
+                return al_;
             }
 
             IEnumerable<Coverage> k_ = context.Operators.Where<Coverage>(i_, j_);
-            Encounter l_(Coverage MedicarePayer) => EncounterInpatient;
-            IEnumerable<Encounter> m_ = context.Operators.Select<Coverage, Encounter>(k_, l_);
-            return m_;
+            bool? l_ = context.Operators.Exists<Coverage>(k_);
+            return l_;
         }
 
-        IEnumerable<Encounter> d_ = context.Operators.SelectMany<Encounter, Encounter>(b_, c_);
+        IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
         return d_;
     }
 

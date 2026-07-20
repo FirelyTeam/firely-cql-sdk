@@ -15,7 +15,7 @@ The SDK targets **.NET 8 (LTS)** and **.NET 10 (LTS)** to provide optimal perfor
 
 ## Release Notes
 
-This is release version 2.9.1 of the engine.
+This is release version 2.9.2 of the engine.
 
 The release notes at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version document changes and known issues.
 
@@ -102,8 +102,8 @@ The SDK depends on the following key external packages:
 
 ### FHIR Support
 
-- **Hl7.Fhir.Base**: Version 6.2.1 - Base classes and utilities for FHIR support
-- **Hl7.Fhir.R4**: Version 6.2.1 - FHIR R4 POCOs and serialization support
+- **Hl7.Fhir.Base**: Version 6.3.0 - Base classes and utilities for FHIR support
+- **Hl7.Fhir.R4**: Version 6.3.0 - FHIR R4 POCOs and serialization support
 - **Fhir.Metrics**: Version 1.3.0 - FHIR units and metrics support
 
 ### Parsing & Compilation

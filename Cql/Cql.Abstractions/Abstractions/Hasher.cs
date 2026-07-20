@@ -14,15 +14,15 @@ internal class Hasher
 
     public static Hasher Instance { get; } = new();
 
-    private static MD5 MD5 { get; } = MD5.Create();
-
     public virtual string Hash(string input)
     {
-        var bytes = Encoding.UTF8.GetBytes(input);
-        var hashBytes = MD5.ComputeHash(bytes);
+        var hashBytes = HashData(input);
         var alpha = ToAlphaString(hashBytes);
         return alpha;
     }
+
+    public virtual byte[] HashData(string input) =>
+        MD5.HashData(Encoding.UTF8.GetBytes(input));
 
     private static string ToAlphaString(byte[] toConvert, bool bigEndian = false)
     {

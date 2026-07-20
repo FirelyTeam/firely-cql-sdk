@@ -1,10 +1,10 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.29.0",
+         "type" : "CqlToElmInfo",
+         "translatorVersion" : "4.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
-         "signatureLevel" : "All",
-         "type" : "CqlToElmInfo"
+         "signatureLevel" : "All"
       } ],
       "identifier" : {
          "id" : "CqlNestedTupleTest",
@@ -35,8 +35,8 @@
                   "name" : "status",
                   "annotation" : [ ],
                   "elementType" : {
-                     "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
                      "annotation" : [ ]
                   }
                }, {
@@ -49,16 +49,16 @@
                         "name" : "result1",
                         "annotation" : [ ],
                         "elementType" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
                            "annotation" : [ ]
                         }
                      }, {
                         "name" : "result2",
                         "annotation" : [ ],
                         "elementType" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
                            "annotation" : [ ]
                         }
                      } ]
@@ -66,8 +66,8 @@
                } ]
             },
             "expression" : {
-               "locator" : "4:3-10:3",
                "type" : "Tuple",
+               "locator" : "4:3-10:3",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
                   "type" : "TupleTypeSpecifier",
@@ -76,8 +76,8 @@
                      "name" : "status",
                      "annotation" : [ ],
                      "elementType" : {
-                        "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
                         "annotation" : [ ]
                      }
                   }, {
@@ -90,16 +90,16 @@
                            "name" : "result1",
                            "annotation" : [ ],
                            "elementType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
                               "annotation" : [ ]
                            }
                         }, {
                            "name" : "result2",
                            "annotation" : [ ],
                            "elementType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
                               "annotation" : [ ]
                            }
                         } ]
@@ -109,18 +109,18 @@
                "element" : [ {
                   "name" : "status",
                   "value" : {
+                     "type" : "Literal",
                      "locator" : "5:13-5:21",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "success",
-                     "type" : "Literal",
                      "annotation" : [ ]
                   }
                }, {
                   "name" : "result",
                   "value" : {
-                     "locator" : "6:13-9:9",
                      "type" : "Tuple",
+                     "locator" : "6:13-9:9",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
                         "type" : "TupleTypeSpecifier",
@@ -129,16 +129,16 @@
                            "name" : "result1",
                            "annotation" : [ ],
                            "elementType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
                               "annotation" : [ ]
                            }
                         }, {
                            "name" : "result2",
                            "annotation" : [ ],
                            "elementType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
                               "annotation" : [ ]
                            }
                         } ]
@@ -146,21 +146,21 @@
                      "element" : [ {
                         "name" : "result1",
                         "value" : {
+                           "type" : "Literal",
                            "locator" : "7:18-7:36",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "some first result",
-                           "type" : "Literal",
                            "annotation" : [ ]
                         }
                      }, {
                         "name" : "result2",
                         "value" : {
+                           "type" : "Literal",
                            "locator" : "8:18-8:37",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "some second result",
-                           "type" : "Literal",
                            "annotation" : [ ]
                         }
                      } ]

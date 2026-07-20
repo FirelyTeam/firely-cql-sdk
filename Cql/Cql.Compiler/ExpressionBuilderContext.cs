@@ -1743,18 +1743,11 @@ internal partial class ExpressionBuilderContext
                 {
                     using (PushElement(relationship))
                     {
-                        var selectManyLambda = WithToSelectManyBody(scopeParameter, relationship);
-
-                        var selectManyCall = BindCqlOperator(nameof(ICqlOperators.SelectMany), @return, selectManyLambda);
-                        if (relationship is Without)
-                        {
-                            var callExcept = BindCqlOperator(nameof(ICqlOperators.Except), @return, selectManyCall);
-                            @return = callExcept;
-                        }
-                        else
-                        {
-                            @return = selectManyCall;
-                        }
+                        // A 'with' is a semi-join and a 'without' an anti-semi-join: each source
+                        // element is kept or dropped based on whether a matching related element
+                        // exists, and is emitted at most once no matter how many elements match.
+                        var existsLambda = WithToExistenceCheck(scopeParameter, relationship);
+                        @return = BindCqlOperator(nameof(ICqlOperators.Where), @return, existsLambda);
                     }
                 }
             }
@@ -2063,7 +2056,7 @@ internal partial class ExpressionBuilderContext
         return @return;
     }
 
-    protected LambdaExpression WithToSelectManyBody(
+    protected LambdaExpression WithToExistenceCheck(
         ParameterExpression rootScopeParameter,
         RelationshipClause with)
     {
@@ -2081,10 +2074,10 @@ internal partial class ExpressionBuilderContext
 
         //Func<Bundle, Context, IEnumerable<Encounter>> x = (bundle, ctx) =>
         //    bundle.Entry.ByResourceType<Encounter>()
-        //    .SelectMany(E =>
+        //    .Where(E =>
         //        bundle.Entry.ByResourceType<Condition>() // <--
         //            .Where(P => true) // such that goes here
-        //            .Select(P => E));
+        //            .Any());          // negated for a 'without'
         var source = TranslateArg(with.expression);
         if (!_typeResolver.IsListType(source.Type))
         {
@@ -2105,13 +2098,10 @@ internal partial class ExpressionBuilderContext
 
             var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
             var callWhereOnSource = BindCqlOperator(nameof(ICqlOperators.Where), source, whereLambda);
-
-            var selectLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
-            var selectBody = rootScopeParameter; // P => E
-            var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-            var callSelectOnWhere = BindCqlOperator(nameof(ICqlOperators.Select), callWhereOnSource, selectLambda);
-            var selectManyLambda = Expression.Lambda(callSelectOnWhere, rootScopeParameter);
-            return selectManyLambda;
+            var exists = BindCqlOperator(nameof(ICqlOperators.Exists), callWhereOnSource);
+            if (with is Without)
+                exists = BindCqlOperator(nameof(ICqlOperators.Not), exists);
+            return Expression.Lambda(exists, rootScopeParameter);
         }
     }
 

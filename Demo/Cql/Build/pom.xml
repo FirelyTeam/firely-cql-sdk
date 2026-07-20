@@ -19,7 +19,7 @@
 		* Java-Dependencies-Vars.sh
 		* The Hl7.Cql.Packager.Program.JavaToolVersion for the Packager CLI
 		-->
-		<cql.version>3.29.0</cql.version>
+		<cql.version>4.0.0</cql.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -31,12 +31,12 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>info.cqframework</groupId>
+			<groupId>org.cqframework</groupId>
 			<artifactId>cql-to-elm-cli</artifactId>
 			<version>${cql.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>info.cqframework</groupId>
+			<groupId>org.cqframework</groupId>
 			<artifactId>elm-fhir</artifactId>
 			<version>${cql.version}</version>
 		</dependency>
