@@ -121,14 +121,18 @@ public class CSharpIrEmitterTests
     {
         // Two separately-constructed, but structurally identical, IrInvoke nodes: the emitter
         // dedups on printed code + type, so only one "Math.Abs(-5)" local is introduced even
-        // though it is referenced twice.
+        // though it is referenced twice. The deduped duplicate still burns a name from the
+        // sequence (the old LocalVariableDeduper's letter-gap behavior — see Hoist's
+        // "burnedName" in CSharpIrEmitter.Scope.cs), so the array itself is named "c_", not
+        // "b_"; arrays also print as multi-line collection expressions (see
+        // ObjectCreation_NewArrayAndNewArrayBounds).
         var call1 = new IrInvoke(null, MathAbsInt, new IrConstant(-5, typeof(int)));
         var call2 = new IrInvoke(null, MathAbsInt, new IrConstant(-5, typeof(int)));
         var array = new IrNewArray(typeof(int), call1, call2);
         var lambda = new IrLambda([], array);
 
         Assert.AreEqual(
-            "{\n    int a_ = Math.Abs(-5);\n    int[] b_ = new int[] { a_, a_ };\n    return b_;\n}",
+            "{\n    int a_ = Math.Abs(-5);\n    int[] c_ = [\n        a_,\n        a_,\n    ];\n    return c_;\n}",
             EmitBody(lambda));
     }
 
@@ -137,23 +141,21 @@ public class CSharpIrEmitterTests
     {
         var applyFunc = typeof(CSharpIrEmitterTestHelpers).GetMethod(nameof(CSharpIrEmitterTestHelpers.ApplyFunc))!;
         var p = new IrLocal(typeof(int), "n");
-        // A cast is a compound node, so the local function's own body hoists it into a local
-        // before returning it -- this is what pins down where the local-function-name
-        // allocation happens relative to hoisting inside its body (after, per the source).
+        // Casts are pass-through, so the function body returns the cast inline; the
+        // function's own generated name comes first in the a_, b_, ... sequence. The body
+        // linearizes without hoisting any statement, so the local function prints expression-
+        // bodied ("=> expr;", no surrounding blank lines) — the old writer's
+        // BuildLambdaOperator/BuildBlockExpression rule, keyed on the body actually being a
+        // multi-statement block (see HoistLocalFunction in CSharpIrEmitter.Scope.cs).
         var innerLambda = new IrLambda([p], new IrCast(p, typeof(int?), IrCastKind.Cast));
         var call = new IrInvoke(null, applyFunc, innerLambda, new IrConstant(5, typeof(int)));
         var lambda = new IrLambda([], call);
 
         var expected =
             "{\n" +
-            "    int? b_(int n)\n" +
-            "    {\n" +
-            "        int? a_ = (int?)n;\n" +
-            "        return a_;\n" +
-            "    }\n" +
-            "\n" +
-            "    int? c_ = CSharpIrEmitterTestHelpers.ApplyFunc(b_, 5);\n" +
-            "    return c_;\n" +
+            "    int? a_(int n) => (int?)n;\n" +
+            "    int? b_ = CSharpIrEmitterTestHelpers.ApplyFunc(a_, 5);\n" +
+            "    return b_;\n" +
             "}";
         Assert.AreEqual(expected, EmitBody(lambda));
     }
@@ -166,7 +168,7 @@ public class CSharpIrEmitterTests
         var lambda = new IrLambda([test], conditional);
 
         Assert.AreEqual(
-            "{\n    int a_ = c ? 1 : 2;\n    return a_;\n}",
+            "{\n    return (c\n        ? 1\n        : 2);\n}",
             EmitBody(lambda));
     }
 
@@ -175,8 +177,11 @@ public class CSharpIrEmitterTests
     {
         var test = new IrLocal(typeof(bool), "c");
         // The true branch needs its own hoisted statement, so the conditional can no longer
-        // print as a single-expression ternary and must become an if/else assigning a
-        // declared result local instead.
+        // print as a single-expression ternary and must flatten into the old pipeline's
+        // CaseWhenThen form instead: a hoisted zero-parameter local function containing the
+        // if/else chain (branches `return`, a stray `;` after the final else block), invoked
+        // where the value is needed (see HoistConditionalFunction in
+        // CSharpIrEmitter.Scope.cs).
         var ifTrue = new IrInvoke(null, MathAbsInt, new IrConstant(-5, typeof(int)));
         var ifFalse = new IrConstant(2, typeof(int));
         var conditional = new IrConditional(test, ifTrue, ifFalse, typeof(int));
@@ -184,21 +189,22 @@ public class CSharpIrEmitterTests
 
         var actual = EmitBody(lambda);
 
-        // A declared result local assigned in an if/else statement; names stay contiguous
-        // because the inline-vs-statement decision is a static test, not a trial hoist.
         var expected =
             "{\n" +
-            "    int a_;\n" +
-            "    if (c)\n" +
-            "    {\n" +
-            "        int b_ = Math.Abs(-5);\n" +
-            "        a_ = b_;\n" +
+            "\n" +
+            "    int a_() {\n" +
+            "        if (c)\n" +
+            "        {\n" +
+            "            int b_ = Math.Abs(-5);\n" +
+            "            return b_;\n" +
+            "        }\n" +
+            "        else\n" +
+            "        {\n" +
+            "            return 2;\n" +
+            "        };\n" +
             "    }\n" +
-            "    else\n" +
-            "    {\n" +
-            "        a_ = 2;\n" +
-            "    }\n" +
-            "    return a_;\n" +
+            "\n" +
+            "    return a_();\n" +
             "}";
         Assert.AreEqual(expected, actual);
     }
@@ -206,6 +212,10 @@ public class CSharpIrEmitterTests
     [TestMethod]
     public void IfChain_TailPosition_PrintsReturningIfElseChain()
     {
+        // If-chains flatten into the same hoisted-local-function CaseWhenThen form as a
+        // compound conditional (see HoistConditionalFunction in CSharpIrEmitter.Scope.cs);
+        // here neither the "when" (a bare local) nor either branch (bare constants) hoists
+        // anything, so the function body is just the if/else chain itself.
         var when = new IrLocal(typeof(bool), "w");
         var chain = new IrIfChain(
             [(when, new IrConstant(1, typeof(int)))],
@@ -215,14 +225,19 @@ public class CSharpIrEmitterTests
 
         var expected =
             "{\n" +
-            "    if (w)\n" +
-            "    {\n" +
-            "        return 1;\n" +
+            "\n" +
+            "    int a_() {\n" +
+            "        if (w)\n" +
+            "        {\n" +
+            "            return 1;\n" +
+            "        }\n" +
+            "        else\n" +
+            "        {\n" +
+            "            return 2;\n" +
+            "        };\n" +
             "    }\n" +
-            "    else\n" +
-            "    {\n" +
-            "        return 2;\n" +
-            "    }\n" +
+            "\n" +
+            "    return a_();\n" +
             "}";
         Assert.AreEqual(expected, EmitBody(lambda));
     }
@@ -235,7 +250,7 @@ public class CSharpIrEmitterTests
 
         var instance = new IrProperty(x, stringLength, nullConditional: false);
         Assert.AreEqual(
-            "{\n    int a_ = x.Length;\n    return a_;\n}",
+            "{\n    return x.Length;\n}",
             EmitBody(new IrLambda([x], instance)));
         Assert.AreEqual(typeof(int), instance.Type);
 
@@ -248,7 +263,7 @@ public class CSharpIrEmitterTests
         var newLine = typeof(Environment).GetProperty(nameof(Environment.NewLine))!;
         var staticProperty = new IrProperty(null, newLine);
         Assert.AreEqual(
-            "{\n    string a_ = Environment.NewLine;\n    return a_;\n}",
+            "{\n    return Environment.NewLine;\n}",
             EmitBody(new IrLambda([], staticProperty)));
     }
 
@@ -257,13 +272,13 @@ public class CSharpIrEmitterTests
     {
         var explicitCast = new IrCast(new IrConstant(3, typeof(int)), typeof(long), IrCastKind.Cast);
         Assert.AreEqual(
-            "{\n    long a_ = (long)3;\n    return a_;\n}",
+            "{\n    return (long)3;\n}",
             EmitBody(new IrLambda([], explicitCast)));
 
         var o = new IrLocal(typeof(object), "o");
         var safeCast = new IrCast(o, typeof(string), IrCastKind.As);
         Assert.AreEqual(
-            "{\n    string a_ = o as string;\n    return a_;\n}",
+            "{\n    return o as string;\n}",
             EmitBody(new IrLambda([o], safeCast)));
     }
 
@@ -277,7 +292,7 @@ public class CSharpIrEmitterTests
         var lambda = new IrLambda([], cast);
 
         Assert.AreEqual(
-            "{\n    decimal? a_ = (decimal?)((object)true);\n    return a_;\n}",
+            "{\n    return (decimal?)((object)true);\n}",
             EmitBody(lambda));
     }
 
@@ -318,7 +333,7 @@ public class CSharpIrEmitterTests
         var coalesce = new IrBinary(IrBinaryOp.Coalesce, x, new IrConstant(5, typeof(int)));
         Assert.AreEqual(typeof(int), coalesce.Type);
         Assert.AreEqual(
-            "{\n    int a_ = x ?? 5;\n    return a_;\n}",
+            "{\n    return x ?? 5;\n}",
             EmitBody(new IrLambda([x], coalesce)));
 
         var s = new IrLocal(typeof(string), "s");
@@ -327,12 +342,12 @@ public class CSharpIrEmitterTests
         // "default" instead -- see Constants_PrintExpectedLiterals).
         var equalNull = new IrBinary(IrBinaryOp.Equal, s, new IrConstant(null, typeof(object)));
         Assert.AreEqual(
-            "{\n    bool a_ = s is null;\n    return a_;\n}",
+            "{\n    return s is null;\n}",
             EmitBody(new IrLambda([s], equalNull)));
 
         var notEqualNull = new IrBinary(IrBinaryOp.NotEqual, s, new IrConstant(null, typeof(object)));
         Assert.AreEqual(
-            "{\n    bool a_ = s is not null;\n    return a_;\n}",
+            "{\n    return s is not null;\n}",
             EmitBody(new IrLambda([s], notEqualNull)));
     }
 
@@ -342,7 +357,7 @@ public class CSharpIrEmitterTests
         var listCtor = typeof(List<int>).GetConstructor([typeof(int)])!;
         var @new = new IrNew(listCtor, new IrConstant(4, typeof(int)));
         Assert.AreEqual(
-            "{\n    List<int> a_ = new List<int>(4);\n    return a_;\n}",
+            "{\n    return new List<int>(4);\n}",
             EmitBody(new IrLambda([], @new)));
 
         var widgetCtor = typeof(CSharpIrEmitterTestWidget).GetConstructor(Type.EmptyTypes)!;
@@ -357,9 +372,11 @@ public class CSharpIrEmitterTests
     [TestMethod]
     public void ObjectCreation_NewArrayAndNewArrayBounds()
     {
+        // Arrays print as multi-line collection expressions with trailing commas, matching
+        // the old writer's array format (see CSharpIrEmitter.Print.cs PrintNewArray).
         var newArray = new IrNewArray(typeof(int), new IrConstant(1, typeof(int)), new IrConstant(2, typeof(int)));
         Assert.AreEqual(
-            "{\n    int[] a_ = new int[] { 1, 2 };\n    return a_;\n}",
+            "{\n    int[] a_ = [\n        1,\n        2,\n    ];\n    return a_;\n}",
             EmitBody(new IrLambda([], newArray)));
 
         var newArrayBounds = new IrNewArrayBounds(typeof(string), new IrConstant(3, typeof(int)));

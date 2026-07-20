@@ -33,7 +33,7 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// emitting Roslyn syntax trees from the IR) without touching the IR itself.</para>
 ///
 /// <para>Instances are not thread-safe: naming state is per emission, reset at the start of
-/// each <see cref="EmitBodyBlock"/> call.</para>
+/// each <see cref="EmitBodyBlock"/>/<see cref="TryEmitExpressionBody"/> call.</para>
 /// </summary>
 internal partial class CSharpIrEmitter
 {
@@ -41,7 +41,6 @@ internal partial class CSharpIrEmitter
     private readonly ICSharpNamingConventions _namingConventions;
 
     private readonly Dictionary<IrLocal, string> _assignedNames = new(ReferenceEqualityComparer.Instance);
-    private readonly HashSet<string> _usedNames = [];
 
     /// <param name="typeToCSharpConverter">Renders .NET types as C# type syntax.</param>
     /// <param name="namingConventions">The generated-class naming conventions the printed
@@ -65,7 +64,6 @@ internal partial class CSharpIrEmitter
         // Naming is scoped to one definition body: each emission starts fresh, so earlier
         // emissions can neither cause collisions nor grow the maps without bound.
         _assignedNames.Clear();
-        _usedNames.Clear();
 
         var scope = Scope.CreateRoot(this, lambda.Parameters);
         var result = scope.Linearize(lambda.Body, tailPosition: true);
@@ -76,24 +74,55 @@ internal partial class CSharpIrEmitter
         {
             scope.WriteStatements(isb);
             if (result is not null) // null when the tail was emitted as a return-ing if-chain
-                isb.AppendLine($"return {result.Code};");
+                isb.AppendLine(TailStatement(result));
         }
         isb.Append("}");
         return isb;
     }
 
+    /// <summary>The final statement for a block whose tail value is <paramref name="result"/>:
+    /// a <c>return</c>, except before a throw-expression (the old writer's
+    /// BuildBlockExpression rule — <c>return throw …</c> is not legal C#).</summary>
+    private static string TailStatement(Atom result) =>
+        result.Node is IrThrow ? $"{result.Code};" : $"return {result.Code};";
+
+    /// <summary>
+    /// Emits the body of a definition as a single C# expression when it linearizes without
+    /// hoisting any statements (e.g. a constant body), for the scaffolding writer's
+    /// expression-bodied (<c>=> expr;</c>) member form. Returns <see langword="null"/> when
+    /// the body needs hoisted statements — use <see cref="EmitBodyBlock"/> then instead.
+    /// Semantically this is exactly the case where <see cref="EmitBodyBlock"/> would produce
+    /// a block whose only statement is <c>return expr;</c>.
+    /// </summary>
+    public string? TryEmitExpressionBody(IrLambda lambda)
+    {
+        _assignedNames.Clear();
+
+        var scope = Scope.CreateRoot(this, lambda.Parameters);
+        var result = scope.Linearize(lambda.Body, tailPosition: true);
+        return scope.HasStatements || result is null ? null : result.Code;
+    }
+
     /// <summary>
     /// The name the emitter assigned to each parameter of <paramref name="lambda"/> in the
-    /// last <see cref="EmitBodyBlock"/> call, for the scaffolding writer to print the
-    /// parameter list.
+    /// last <see cref="EmitBodyBlock"/>/<see cref="TryEmitExpressionBody"/> call, for the
+    /// scaffolding writer to print the parameter list.
     /// </summary>
     public IReadOnlyList<string> GetParameterNames(IrLambda lambda) =>
         [.. lambda.Parameters.Select(p => _assignedNames.TryGetValue(p, out var n) ? n : p.NameHint ?? "?")];
 
     /// <summary>A linearized subexpression: the C# code of a simple (non-compound)
-    /// expression, plus the IR node it denotes (for type-driven peepholes).</summary>
-    private sealed record Atom(string Code, IrExpression Node)
+    /// expression, plus the IR node it denotes (for type-driven peepholes).
+    /// <para><see cref="KeyCode"/> is the code as it would print WITHOUT duplicate
+    /// elimination — a deduplicated local contributes its own (burned) name here, not its
+    /// replacement. Dedup decisions key on it, reproducing the old LocalVariableDeduper's
+    /// single-pass behavior: duplicates whose operands only become identical AFTER
+    /// replacement are NOT collapsed (no fixpoint), and every duplicate still consumed a
+    /// name from the sequence before being removed (the letter gaps in the old output).</para></summary>
+    private sealed record Atom(string Code, string KeyCode, IrExpression Node)
     {
+        public Atom(string code, IrExpression node) : this(code, code, node) { }
+
         public Type Type => Node.Type;
     }
 }

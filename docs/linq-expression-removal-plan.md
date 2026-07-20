@@ -136,7 +136,13 @@ Post-parity cleanups (once the old pipeline is gone and byte-identical output no
 constrains the emitter): multi-branch conditionals whose branches are all simple can print as
 C# `switch` expressions instead of `if`/`else if` chains (statement form stays as the general
 fallback for branches that hoist locals), and the printing backend itself is swappable — e.g.
-emitting Roslyn syntax trees from the IR for normalized formatting.
+emitting Roslyn syntax trees from the IR for normalized formatting. The phase-5 grind added
+several faithfully-replicated old quirks worth revisiting (all documented at their emitter
+sites): duplicate eliminations burn a letter from the naming sequence (visible gaps);
+the multi-branch conditional form carries a stray `;` after its final else block; and
+redundant `as object` casts survive only when they wrap another cast — an accident of the
+old visitor ordering (`ElmAsExpression` reduced after `RedundantCastsTransformer` ran),
+not a design choice.
 
 ### Findings from phases 2–4
 
