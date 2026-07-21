@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.6.0
+**Version:** 3.6.1
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,8 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.6.1
+  - Fixed a broken relative link to `vnext-release-notes.md` in §4.5.1 (was missing a directory level), corrected `CodeGeneration.NET`/`LibraryInvoker` example paths in §5.3 to include the `Cql/` prefix, and scoped the `PublicAPI.Unshipped.txt` registration requirement in §10.3.3 to public `ICqlError` structs only (the project already has `internal` ones that don't belong there). Found by Copilot's automated review of PR #1386; mirrored into `CLAUDE.md` and `Cql/Cql.Abstractions/CLAUDE.md`.
 - 3.6.0
   - Added a new section (1.8, Acceptance Criteria Tracking): after pushing work that completes checklist items in a linked issue or PR, tick them off before reporting the task done.
 - 3.5.0

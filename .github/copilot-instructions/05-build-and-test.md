@@ -65,7 +65,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 5.3.1.3 Changes to `ICqlOperators` signatures or constraints that flow into generated call sites
 
 5.3.2 **When modifying C# code generation logic, always update the `LibrarySetCSharpCodeGenerator.GeneratorToolVersion`**:
-5.3.2.1 **Locate the version**: The version is hardcoded in `CodeGeneration.NET/_CODE GENERATOR VERSION_.cs` as `GeneratorToolVersion`
+5.3.2.1 **Locate the version**: The version is hardcoded in `Cql/CodeGeneration.NET/_CODE GENERATOR VERSION_.cs` as `GeneratorToolVersion`
 
 5.3.2.2 **Apply semantic versioning**:
 5.3.2.2.1 **Major version** (x.0.0.0): Breaking changes to generated code that require new `LibraryInstanceInvoker` support
@@ -74,7 +74,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
       5.3.2.2.3 **Patch version** (x.y.z.0): Bug fixes that don't change the generated API
 
-5.3.2.3 **Check compatibility**: Ensure the current `LibraryInstanceInvoker_X_Y.SupportsVersion` covers the new version (check `MinSupportedGeneratorToolVersion` and `FirstUnsupportedGeneratorToolVersion` in `Cql.Invocation/Toolkit/Internal/LibraryInvoker.X.Y.cs`)
+5.3.2.3 **Check compatibility**: Ensure the current `LibraryInstanceInvoker_<major>_<minor>.SupportsVersion` covers the new version (check `MinSupportedGeneratorToolVersion` and `FirstUnsupportedGeneratorToolVersion` in `Cql/Cql.Invocation/Toolkit/Internal/LibraryInvoker.<major>.<minor>.cs`, e.g. `LibraryInvoker.5.0.cs`)
 
 5.3.2.4 **Create new invoker if needed**: For major version changes, a new `LibraryInstanceInvoker_X_Y` may be required
 
@@ -91,4 +91,4 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 5.4. Generating ELM Files from CQL
 
-5.4.1 Follow the shared procedure in [generate-elm-from-cql](../../.claude/skills/generate-elm-from-cql/SKILL.md) to regenerate ELM JSON after adding or changing CQL input files (e.g. in `CoreTests\Input\ELM\HL7`).
+5.4.1 Follow the shared procedure in [generate-elm-from-cql](../../.claude/skills/generate-elm-from-cql/SKILL.md) to regenerate ELM JSON after adding or changing CQL input files (e.g. in `Cql/CoreTests/Input/ELM/HL7`).

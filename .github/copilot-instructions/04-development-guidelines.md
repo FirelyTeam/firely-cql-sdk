@@ -173,6 +173,6 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 4.5. Release Notes
 
-4.5.1 **Any breaking change** (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in [docs/releases/vnext-release-notes.md](../docs/releases/vnext-release-notes.md) in the same PR that introduces it — not deferred to release time.
+4.5.1 **Any breaking change** (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in [docs/releases/vnext-release-notes.md](../../docs/releases/vnext-release-notes.md) in the same PR that introduces it — not deferred to release time.
 
 4.5.2 For the full procedure to turn that accumulated content into a versioned release note (template, README version sync, resetting vnext-release-notes.md), follow [cut-release-notes](../../.claude/skills/cut-release-notes/SKILL.md).
