@@ -299,40 +299,39 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
         IEnumerable<Encounter> ae_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         IEnumerable<Encounter> af_ = context.Operators.Union<Encounter>(ac_, ae_);
 
-        IEnumerable<Encounter> ag_(Encounter ValidEncounter) {
+        bool? ag_(Encounter ValidEncounter) {
             CqlValueSet ai_ = this.HIV(context);
             IEnumerable<Condition> aj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> al_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> am_ = context.Operators.Union<Condition>(aj_ as IEnumerable<Condition>, al_ as IEnumerable<Condition>);
 
             bool? an_(Condition HIVDiagnosis) {
-                CqlInterval<CqlDateTime> ar_ = this.Measurement_Period(context);
-                Period as_ = ValidEncounter?.Period;
-                CqlInterval<CqlDateTime> at_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, as_);
-                bool? au_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ar_, at_, "day");
-                Code<Encounter.EncounterStatus> av_ = ValidEncounter?.StatusElement;
-                Encounter.EncounterStatus? aw_ = av_?.Value;
-                Code<Encounter.EncounterStatus> ax_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(aw_);
-                bool? ay_ = context.Operators.Equal(ax_, "finished");
-                bool? az_ = context.Operators.And(au_, ay_);
-                CqlInterval<CqlDateTime> ba_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDiagnosis);
-                CqlDateTime bb_ = context.Operators.Start(ba_);
-                CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, as_);
-                CqlDateTime be_ = context.Operators.Start(bd_);
-                bool? bf_ = context.Operators.SameOrBefore(bb_, be_, "day");
-                bool? bg_ = context.Operators.And(az_, bf_);
-                bool? bh_ = this.isVerified(context, HIVDiagnosis);
-                bool? bi_ = context.Operators.And(bg_, bh_);
-                return bi_;
+                CqlInterval<CqlDateTime> aq_ = this.Measurement_Period(context);
+                Period ar_ = ValidEncounter?.Period;
+                CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ar_);
+                bool? at_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aq_, as_, "day");
+                Code<Encounter.EncounterStatus> au_ = ValidEncounter?.StatusElement;
+                Encounter.EncounterStatus? av_ = au_?.Value;
+                Code<Encounter.EncounterStatus> aw_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(av_);
+                bool? ax_ = context.Operators.Equal(aw_, "finished");
+                bool? ay_ = context.Operators.And(at_, ax_);
+                CqlInterval<CqlDateTime> az_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDiagnosis);
+                CqlDateTime ba_ = context.Operators.Start(az_);
+                CqlInterval<CqlDateTime> bc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ar_);
+                CqlDateTime bd_ = context.Operators.Start(bc_);
+                bool? be_ = context.Operators.SameOrBefore(ba_, bd_, "day");
+                bool? bf_ = context.Operators.And(ay_, be_);
+                bool? bg_ = this.isVerified(context, HIVDiagnosis);
+                bool? bh_ = context.Operators.And(bf_, bg_);
+                return bh_;
             }
 
             IEnumerable<Condition> ao_ = context.Operators.Where<Condition>(am_, an_);
-            Encounter ap_(Condition HIVDiagnosis) => ValidEncounter;
-            IEnumerable<Encounter> aq_ = context.Operators.Select<Condition, Encounter>(ao_, ap_);
-            return aq_;
+            bool? ap_ = context.Operators.Exists<Condition>(ao_);
+            return ap_;
         }
 
-        IEnumerable<Encounter> ah_ = context.Operators.SelectMany<Encounter, Encounter>(af_, ag_);
+        IEnumerable<Encounter> ah_ = context.Operators.Where<Encounter>(af_, ag_);
         return ah_;
     }
 
@@ -347,54 +346,53 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
     {
         IEnumerable<Encounter> a_ = this.Encounter_During_Measurement_Period_With_HIV(context);
 
-        IEnumerable<Encounter> b_(Encounter EncounterWithHIV) {
+        bool? b_(Encounter EncounterWithHIV) {
             CqlValueSet e_ = this.HIV_Viral_Load_Tests(context);
             IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
             bool? g_(Observation ViralLoadTest) {
-                Code<ObservationStatus> k_ = ViralLoadTest?.StatusElement;
-                ObservationStatus? l_ = k_?.Value;
-                string m_ = context.Operators.Convert<string>(l_);
-                string[] n_ = [
+                Code<ObservationStatus> j_ = ViralLoadTest?.StatusElement;
+                ObservationStatus? k_ = j_?.Value;
+                string l_ = context.Operators.Convert<string>(k_);
+                string[] m_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
-                CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-                DataType q_ = ViralLoadTest?.Effective;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
-                bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, s_, "day");
-                bool? u_ = context.Operators.And(o_, t_);
-                object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
-                CqlDateTime y_ = context.Operators.Start(x_);
-                Period z_ = EncounterWithHIV?.Period;
-                CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
-                CqlDateTime ab_ = context.Operators.End(aa_);
-                CqlQuantity ac_ = context.Operators.Quantity(90m, "days");
-                CqlDateTime ad_ = context.Operators.Add(ab_, ac_);
-                bool? ae_ = context.Operators.SameOrAfter(y_, ad_, "day");
-                CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
-                CqlDateTime ah_ = context.Operators.Start(ag_);
-                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                CqlInterval<CqlDateTime> ak_ = QICoreCommon_4_0_000.Instance.toInterval(context, aj_);
-                CqlDateTime al_ = context.Operators.End(ak_);
-                CqlDateTime an_ = context.Operators.Add(al_, ac_);
-                bool? ao_ = context.Operators.SameOrAfter(ah_, an_, "day");
-                bool? ap_ = context.Operators.Or(ae_, ao_);
-                bool? aq_ = context.Operators.And(u_, ap_);
-                return aq_;
+                bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+                CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
+                DataType p_ = ViralLoadTest?.Effective;
+                object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+                CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
+                bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, "day");
+                bool? t_ = context.Operators.And(n_, s_);
+                object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+                CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.toInterval(context, v_);
+                CqlDateTime x_ = context.Operators.Start(w_);
+                Period y_ = EncounterWithHIV?.Period;
+                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
+                CqlDateTime aa_ = context.Operators.End(z_);
+                CqlQuantity ab_ = context.Operators.Quantity(90m, "days");
+                CqlDateTime ac_ = context.Operators.Add(aa_, ab_);
+                bool? ad_ = context.Operators.SameOrAfter(x_, ac_, "day");
+                CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
+                CqlDateTime ag_ = context.Operators.Start(af_);
+                object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+                CqlInterval<CqlDateTime> aj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ai_);
+                CqlDateTime ak_ = context.Operators.End(aj_);
+                CqlDateTime am_ = context.Operators.Add(ak_, ab_);
+                bool? an_ = context.Operators.SameOrAfter(ag_, am_, "day");
+                bool? ao_ = context.Operators.Or(ad_, an_);
+                bool? ap_ = context.Operators.And(t_, ao_);
+                return ap_;
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
-            Encounter i_(Observation ViralLoadTest) => EncounterWithHIV;
-            IEnumerable<Encounter> j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
-            return j_;
+            bool? i_ = context.Operators.Exists<Observation>(h_);
+            return i_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         bool? d_ = context.Operators.Exists<Encounter>(c_);
         return d_;
     }
@@ -410,32 +408,31 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
     {
         IEnumerable<Encounter> a_ = this.Encounter_During_Measurement_Period_With_HIV(context);
 
-        IEnumerable<Encounter> b_(Encounter EncounterWithHIV) {
+        bool? b_(Encounter EncounterWithHIV) {
             IEnumerable<Encounter> e_ = this.Encounter_During_Measurement_Period_With_HIV(context);
 
             bool? f_(Encounter AnotherEncounterWithHIV) {
-                bool? j_ = context.Operators.Equivalent(EncounterWithHIV, AnotherEncounterWithHIV);
-                bool? k_ = context.Operators.Not(j_);
-                Period l_ = AnotherEncounterWithHIV?.Period;
-                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                CqlDateTime n_ = context.Operators.Start(m_);
-                Period o_ = EncounterWithHIV?.Period;
-                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
-                CqlDateTime q_ = context.Operators.End(p_);
-                CqlQuantity r_ = context.Operators.Quantity(90m, "days");
-                CqlDateTime s_ = context.Operators.Add(q_, r_);
-                bool? t_ = context.Operators.SameOrAfter(n_, s_, "day");
-                bool? u_ = context.Operators.And(k_, t_);
-                return u_;
+                bool? i_ = context.Operators.Equivalent(EncounterWithHIV, AnotherEncounterWithHIV);
+                bool? j_ = context.Operators.Not(i_);
+                Period k_ = AnotherEncounterWithHIV?.Period;
+                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                CqlDateTime m_ = context.Operators.Start(l_);
+                Period n_ = EncounterWithHIV?.Period;
+                CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+                CqlDateTime p_ = context.Operators.End(o_);
+                CqlQuantity q_ = context.Operators.Quantity(90m, "days");
+                CqlDateTime r_ = context.Operators.Add(p_, q_);
+                bool? s_ = context.Operators.SameOrAfter(m_, r_, "day");
+                bool? t_ = context.Operators.And(j_, s_);
+                return t_;
             }
 
             IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
-            Encounter h_(Encounter AnotherEncounterWithHIV) => EncounterWithHIV;
-            IEnumerable<Encounter> i_ = context.Operators.Select<Encounter, Encounter>(g_, h_);
-            return i_;
+            bool? h_ = context.Operators.Exists<Encounter>(g_);
+            return h_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         bool? d_ = context.Operators.Exists<Encounter>(c_);
         return d_;
     }

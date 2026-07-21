@@ -50,6 +50,32 @@ namespace CoreTests.Fhir
         }
 
         [TestMethod]
+        public void ReturnsResourceOnceWhenMultipleCodingsMatch()
+        {
+            // https://github.com/FirelyTeam/firely-cql-sdk/issues/1365
+            var dr = buildDataSource();
+
+            var results = dr.Retrieve<Observation>(Pars(new CqlCode("m1", "http://nu.nl"), new CqlCode("m2", "http://nu.nl")));
+            results.Should().ContainSingle().Which.Should().BeOfType<Observation>()
+                .Which.Code.Coding.Should().HaveCount(3);
+        }
+
+        [TestMethod]
+        public void ReturnsResourceOnceWhenMultipleCodingsMatchOnSpecificProp()
+        {
+            // https://github.com/FirelyTeam/firely-cql-sdk/issues/1365
+            var dr = buildDataSource();
+            var model = new FhirTypeResolver(ModelInfo.ModelInspector);
+            var codeProp = model.GetProperty(model.ResolveType("{http://hl7.org/fhir}Observation")!, "code");
+            codeProp.Should().NotBeNull();
+
+            var results = dr.Retrieve<Observation>(new RetrieveParameters(codeProp, null,
+                [new CqlCode("m1", "http://nu.nl"), new CqlCode("m2", "http://nu.nl")], null));
+            results.Should().ContainSingle().Which.Should().BeOfType<Observation>()
+                .Which.Code.Coding.Should().HaveCount(3);
+        }
+
+        [TestMethod]
         public void FiltersOnSpecificProp()
         {
             var dr = buildDataSource();
@@ -77,7 +103,20 @@ namespace CoreTests.Fhir
                 new Patient { Active = true, Gender = AdministrativeGender.Male },  // uncoded
                 new Patient { Active = true, Gender = AdministrativeGender.Female }, // uncoded
                 new Observation { Code = new CodeableConcept("http://nu.nl", "x"), Status = ObservationStatus.Final }, // coded on Code
-                new Observation { Code = new CodeableConcept("http://nu.nl", "y"), Status = ObservationStatus.Preliminary } // coded on Code
+                new Observation { Code = new CodeableConcept("http://nu.nl", "y"), Status = ObservationStatus.Preliminary }, // coded on Code
+                new Observation // multiple codings matching the same filter (https://github.com/FirelyTeam/firely-cql-sdk/issues/1365)
+                {
+                    Code = new CodeableConcept
+                    {
+                        Coding =
+                        [
+                            new Coding("http://nu.nl", "m1"),
+                            new Coding("http://nu.nl", "m2"),
+                            new Coding("http://ergens.anders.nl", "m3")
+                        ]
+                    },
+                    Status = ObservationStatus.Final
+                }
             ];
 
             var bundle = new Bundle();

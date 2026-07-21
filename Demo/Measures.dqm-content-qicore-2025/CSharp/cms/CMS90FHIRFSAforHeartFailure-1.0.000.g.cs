@@ -328,29 +328,28 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
     {
         IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
 
-        IEnumerable<Encounter> b_(Encounter OfficeVisit1) {
+        bool? b_(Encounter OfficeVisit1) {
             IEnumerable<Encounter> d_ = this.Qualifying_Encounters(context);
 
             bool? e_(Encounter OfficeVisit2) {
-                Period i_ = OfficeVisit2?.Period;
-                CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                CqlDateTime k_ = context.Operators.Start(j_);
-                Period l_ = OfficeVisit1?.Period;
-                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                CqlDateTime n_ = context.Operators.End(m_);
-                CqlQuantity o_ = context.Operators.Quantity(1m, "day");
-                CqlDateTime p_ = context.Operators.Add(n_, o_);
-                bool? q_ = context.Operators.SameOrAfter(k_, p_, "day");
-                return q_;
+                Period h_ = OfficeVisit2?.Period;
+                CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
+                CqlDateTime j_ = context.Operators.Start(i_);
+                Period k_ = OfficeVisit1?.Period;
+                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                CqlDateTime m_ = context.Operators.End(l_);
+                CqlQuantity n_ = context.Operators.Quantity(1m, "day");
+                CqlDateTime o_ = context.Operators.Add(m_, n_);
+                bool? p_ = context.Operators.SameOrAfter(j_, o_, "day");
+                return p_;
             }
 
             IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
-            Encounter g_(Encounter OfficeVisit2) => OfficeVisit1;
-            IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
-            return h_;
+            bool? g_ = context.Operators.Exists<Encounter>(f_);
+            return g_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 

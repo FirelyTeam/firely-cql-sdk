@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Runtime;
+
 namespace Hl7.Cql.Elm
 {
     partial class VersionedIdentifier : IComparable<VersionedIdentifier>, IEquatable<VersionedIdentifier>
@@ -13,36 +15,28 @@ namespace Hl7.Cql.Elm
         /// <inheritdoc/>
         public int CompareTo(VersionedIdentifier? other)
         {
-            if (other is null || other.id is null)
-                throw new ArgumentNullException("other");
-            else if (id is null)
-                throw new InvalidOperationException("id is requlred for comparison");
-            else
+            if (other is null)
+                throw new ArgumentNullException(nameof(other));
+
+            // CqlLibrarySemantics.CompareIds/CompareVersions tolerate a null id/version on
+            // either side (unlike StringComparer.GetHashCode), so a null id here doesn't need
+            // special-casing - and, critically, doesn't need to throw. Equals delegates to this
+            // method, and IEquatable<T>.Equals must never throw for a valid non-null argument.
+            var idComparison = CqlLibrarySemantics.CompareIds(this.id, other.id);
+            if (idComparison == 0)
             {
-                var idComparison = StringComparer.OrdinalIgnoreCase.Compare(this.id, other.id);
-                if (idComparison == 0)
-                {
-                    if (version is null)
-                    {
-                        if (other.version is null)
-                        {
-                            return 0;
-                        }
-                        else return -1;
-                    }
-                    else if (other.version is null)
-                        return 1;
-                    else
-                    {
-                        return VersionComparer.Instance.Compare(version, other.version);
-                    }
-                }
-                else return idComparison;
+                // VersionComparer orders numerically (so "1.9" sorts before "1.10") while still
+                // guaranteeing textually-different versions never compare equal - CompareVersions
+                // alone would order "1.9" after "1.10" lexicographically, which is wrong for
+                // "most appropriate version" selection (spec/condensed/03-developersguide.md
+                // SS Libraries).
+                return VersionComparer.Instance.Compare(version, other.version);
             }
+            else return idComparison;
         }
 
         /// <inheritdoc/>
-        public bool Equals(VersionedIdentifier? other) => CompareTo(other) == 0;
+        public bool Equals(VersionedIdentifier? other) => other is not null && CompareTo(other) == 0;
 
         /// <inheritdoc/>
         public override bool Equals(object? obj) =>
@@ -53,7 +47,7 @@ namespace Hl7.Cql.Elm
             };
 
         /// <inheritdoc/>
-        public override int GetHashCode() => HashCode.Combine(id, version);
+        public override int GetHashCode() => CqlLibrarySemantics.ComputeHashCode(id, version);
 
         /// <nodoc/>
         public void Deconstruct(out string id, out string? version)

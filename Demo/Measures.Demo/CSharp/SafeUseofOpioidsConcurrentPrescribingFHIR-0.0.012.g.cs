@@ -146,112 +146,109 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
     {
         IEnumerable<Encounter> a_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18(context);
 
-        IEnumerable<Encounter> b_(Encounter InpatientEncounter) {
+        bool? b_(Encounter InpatientEncounter) {
             CqlValueSet d_ = this.Schedule_II__and__III_Opioid_Medications(context);
             IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
             IEnumerable<MedicationRequest> f_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 
-            IEnumerable<MedicationRequest> g_(MedicationRequest MR) {
-                IEnumerable<Medication> w_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Medication"));
+            bool? g_(MedicationRequest MR) {
+                IEnumerable<Medication> v_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Medication"));
 
-                bool? x_(Medication M) {
-                    Id ab_ = M?.IdElement;
-                    string ac_ = FHIRHelpers_4_0_001.Instance.ToString(context, ab_);
-                    object ad_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
-                    string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_ as FhirString);
-                    IEnumerable<string> af_ = context.Operators.Split(ae_, "/");
-                    string ag_ = context.Operators.Last<string>(af_);
-                    bool? ah_ = context.Operators.Equal(ac_, ag_);
-                    CodeableConcept ai_ = M?.Code;
-                    CqlConcept aj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ai_);
-                    CqlValueSet ak_ = this.Schedule_II__and__III_Opioid_Medications(context);
-                    bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
-                    bool? am_ = context.Operators.And(ah_, al_);
-                    return am_;
+                bool? w_(Medication M) {
+                    Id z_ = M?.IdElement;
+                    string aa_ = FHIRHelpers_4_0_001.Instance.ToString(context, z_);
+                    object ab_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
+                    string ac_ = FHIRHelpers_4_0_001.Instance.ToString(context, ab_ as FhirString);
+                    IEnumerable<string> ad_ = context.Operators.Split(ac_, "/");
+                    string ae_ = context.Operators.Last<string>(ad_);
+                    bool? af_ = context.Operators.Equal(aa_, ae_);
+                    CodeableConcept ag_ = M?.Code;
+                    CqlConcept ah_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ag_);
+                    CqlValueSet ai_ = this.Schedule_II__and__III_Opioid_Medications(context);
+                    bool? aj_ = context.Operators.ConceptInValueSet(ah_, ai_);
+                    bool? ak_ = context.Operators.And(af_, aj_);
+                    return ak_;
                 }
 
-                IEnumerable<Medication> y_ = context.Operators.Where<Medication>(w_, x_);
-                MedicationRequest z_(Medication M) => MR;
-                IEnumerable<MedicationRequest> aa_ = context.Operators.Select<Medication, MedicationRequest>(y_, z_);
-                return aa_;
+                IEnumerable<Medication> x_ = context.Operators.Where<Medication>(v_, w_);
+                bool? y_ = context.Operators.Exists<Medication>(x_);
+                return y_;
             }
 
-            IEnumerable<MedicationRequest> h_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(f_, g_);
+            IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(e_, h_);
             CqlValueSet j_ = this.Schedule_IV_Benzodiazepines(context);
             IEnumerable<MedicationRequest> k_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 
-            IEnumerable<MedicationRequest> m_(MedicationRequest MR) {
-                IEnumerable<Medication> an_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Medication"));
+            bool? m_(MedicationRequest MR) {
+                IEnumerable<Medication> al_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Medication"));
 
-                bool? ao_(Medication M) {
-                    Id as_ = M?.IdElement;
-                    string at_ = FHIRHelpers_4_0_001.Instance.ToString(context, as_);
-                    object au_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
-                    string av_ = FHIRHelpers_4_0_001.Instance.ToString(context, au_ as FhirString);
-                    IEnumerable<string> aw_ = context.Operators.Split(av_, "/");
-                    string ax_ = context.Operators.Last<string>(aw_);
-                    bool? ay_ = context.Operators.Equal(at_, ax_);
-                    CodeableConcept az_ = M?.Code;
-                    CqlConcept ba_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, az_);
-                    CqlValueSet bb_ = this.Schedule_IV_Benzodiazepines(context);
-                    bool? bc_ = context.Operators.ConceptInValueSet(ba_, bb_);
-                    bool? bd_ = context.Operators.And(ay_, bc_);
-                    return bd_;
+                bool? am_(Medication M) {
+                    Id ap_ = M?.IdElement;
+                    string aq_ = FHIRHelpers_4_0_001.Instance.ToString(context, ap_);
+                    object ar_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
+                    string as_ = FHIRHelpers_4_0_001.Instance.ToString(context, ar_ as FhirString);
+                    IEnumerable<string> at_ = context.Operators.Split(as_, "/");
+                    string au_ = context.Operators.Last<string>(at_);
+                    bool? av_ = context.Operators.Equal(aq_, au_);
+                    CodeableConcept aw_ = M?.Code;
+                    CqlConcept ax_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, aw_);
+                    CqlValueSet ay_ = this.Schedule_IV_Benzodiazepines(context);
+                    bool? az_ = context.Operators.ConceptInValueSet(ax_, ay_);
+                    bool? ba_ = context.Operators.And(av_, az_);
+                    return ba_;
                 }
 
-                IEnumerable<Medication> ap_ = context.Operators.Where<Medication>(an_, ao_);
-                MedicationRequest aq_(Medication M) => MR;
-                IEnumerable<MedicationRequest> ar_ = context.Operators.Select<Medication, MedicationRequest>(ap_, aq_);
-                return ar_;
+                IEnumerable<Medication> an_ = context.Operators.Where<Medication>(al_, am_);
+                bool? ao_ = context.Operators.Exists<Medication>(an_);
+                return ao_;
             }
 
-            IEnumerable<MedicationRequest> n_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(f_, m_);
+            IEnumerable<MedicationRequest> n_ = context.Operators.Where<MedicationRequest>(f_, m_);
             IEnumerable<MedicationRequest> o_ = context.Operators.Union<MedicationRequest>(k_, n_);
 
             bool? p_(MedicationRequest Medications) {
-                List<CodeableConcept> be_ = Medications?.Category;
+                List<CodeableConcept> bb_ = Medications?.Category;
 
-                bool? bf_(CodeableConcept C) {
-                    CqlConcept bi_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
-                    CqlCode bj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
-                    CqlConcept bk_ = context.Operators.ConvertCodeToConcept(bj_);
-                    bool? bl_ = context.Operators.Equivalent(bi_, bk_);
-                    return bl_;
+                bool? bc_(CodeableConcept C) {
+                    CqlConcept bf_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
+                    CqlCode bg_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
+                    CqlConcept bh_ = context.Operators.ConvertCodeToConcept(bg_);
+                    bool? bi_ = context.Operators.Equivalent(bf_, bh_);
+                    return bi_;
                 }
 
-                IEnumerable<CodeableConcept> bg_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)be_, bf_);
-                bool? bh_ = context.Operators.Exists<CodeableConcept>(bg_);
-                return bh_;
+                IEnumerable<CodeableConcept> bd_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)bb_, bc_);
+                bool? be_ = context.Operators.Exists<CodeableConcept>(bd_);
+                return be_;
             }
 
             IEnumerable<MedicationRequest> q_ = context.Operators.Where<MedicationRequest>(o_, p_);
             IEnumerable<MedicationRequest> r_ = context.Operators.Union<MedicationRequest>(i_, q_);
 
             bool? s_(MedicationRequest OpioidOrBenzodiazepineDischargeMedication) {
-                FhirDateTime bm_ = OpioidOrBenzodiazepineDischargeMedication?.AuthoredOnElement;
-                CqlDateTime bn_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, bm_);
-                Period bo_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> bp_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bo_);
-                bool? bq_ = context.Operators.In<CqlDateTime>(bn_, bp_, (string)default);
-                Code<MedicationRequest.MedicationrequestStatus> br_ = OpioidOrBenzodiazepineDischargeMedication?.StatusElement;
-                string bs_ = FHIRHelpers_4_0_001.Instance.ToString(context, br_);
-                bool? bt_ = context.Operators.Equal(bs_, "active");
-                bool? bu_ = context.Operators.And(bq_, bt_);
-                Code<MedicationRequest.MedicationRequestIntent> bv_ = OpioidOrBenzodiazepineDischargeMedication?.IntentElement;
-                string bw_ = FHIRHelpers_4_0_001.Instance.ToString(context, bv_);
-                bool? bx_ = context.Operators.Equal(bw_, "plan");
-                bool? by_ = context.Operators.And(bu_, bx_);
-                return by_;
+                FhirDateTime bj_ = OpioidOrBenzodiazepineDischargeMedication?.AuthoredOnElement;
+                CqlDateTime bk_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, bj_);
+                Period bl_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> bm_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bl_);
+                bool? bn_ = context.Operators.In<CqlDateTime>(bk_, bm_, (string)default);
+                Code<MedicationRequest.MedicationrequestStatus> bo_ = OpioidOrBenzodiazepineDischargeMedication?.StatusElement;
+                string bp_ = FHIRHelpers_4_0_001.Instance.ToString(context, bo_);
+                bool? bq_ = context.Operators.Equal(bp_, "active");
+                bool? br_ = context.Operators.And(bn_, bq_);
+                Code<MedicationRequest.MedicationRequestIntent> bs_ = OpioidOrBenzodiazepineDischargeMedication?.IntentElement;
+                string bt_ = FHIRHelpers_4_0_001.Instance.ToString(context, bs_);
+                bool? bu_ = context.Operators.Equal(bt_, "plan");
+                bool? bv_ = context.Operators.And(br_, bu_);
+                return bv_;
             }
 
             IEnumerable<MedicationRequest> t_ = context.Operators.Where<MedicationRequest>(r_, s_);
-            Encounter u_(MedicationRequest OpioidOrBenzodiazepineDischargeMedication) => InpatientEncounter;
-            IEnumerable<Encounter> v_ = context.Operators.Select<MedicationRequest, Encounter>(t_, u_);
-            return v_;
+            bool? u_ = context.Operators.Exists<MedicationRequest>(t_);
+            return u_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
@@ -360,47 +357,45 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
-        IEnumerable<Encounter> e_(Encounter InpatientEncounter) {
+        bool? e_(Encounter InpatientEncounter) {
             CqlValueSet y_ = this.Schedule_II__and__III_Opioid_Medications(context);
             IEnumerable<MedicationRequest> z_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 
             bool? aa_(MedicationRequest OpioidsDischarge) {
-                FhirDateTime ae_ = OpioidsDischarge?.AuthoredOnElement;
-                CqlDateTime af_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ae_);
-                Period ag_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ag_);
-                bool? ai_ = context.Operators.In<CqlDateTime>(af_, ah_, (string)default);
-                return ai_;
+                FhirDateTime ad_ = OpioidsDischarge?.AuthoredOnElement;
+                CqlDateTime ae_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ad_);
+                Period af_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, af_);
+                bool? ah_ = context.Operators.In<CqlDateTime>(ae_, ag_, (string)default);
+                return ah_;
             }
 
             IEnumerable<MedicationRequest> ab_ = context.Operators.Where<MedicationRequest>(z_, aa_);
-            Encounter ac_(MedicationRequest OpioidsDischarge) => InpatientEncounter;
-            IEnumerable<Encounter> ad_ = context.Operators.Select<MedicationRequest, Encounter>(ab_, ac_);
-            return ad_;
+            bool? ac_ = context.Operators.Exists<MedicationRequest>(ab_);
+            return ac_;
         }
 
-        IEnumerable<Encounter> f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
+        IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(a_, e_);
 
-        IEnumerable<Encounter> g_(Encounter InpatientEncounter) {
-            CqlValueSet aj_ = this.Schedule_IV_Benzodiazepines(context);
-            IEnumerable<MedicationRequest> ak_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
+        bool? g_(Encounter InpatientEncounter) {
+            CqlValueSet ai_ = this.Schedule_IV_Benzodiazepines(context);
+            IEnumerable<MedicationRequest> aj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 
-            bool? al_(MedicationRequest BenzodiazepinesDischarge) {
-                FhirDateTime ap_ = BenzodiazepinesDischarge?.AuthoredOnElement;
-                CqlDateTime aq_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ap_);
-                Period ar_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ar_);
-                bool? at_ = context.Operators.In<CqlDateTime>(aq_, as_, (string)default);
-                return at_;
+            bool? ak_(MedicationRequest BenzodiazepinesDischarge) {
+                FhirDateTime an_ = BenzodiazepinesDischarge?.AuthoredOnElement;
+                CqlDateTime ao_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, an_);
+                Period ap_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ap_);
+                bool? ar_ = context.Operators.In<CqlDateTime>(ao_, aq_, (string)default);
+                return ar_;
             }
 
-            IEnumerable<MedicationRequest> am_ = context.Operators.Where<MedicationRequest>(ak_, al_);
-            Encounter an_(MedicationRequest BenzodiazepinesDischarge) => InpatientEncounter;
-            IEnumerable<Encounter> ao_ = context.Operators.Select<MedicationRequest, Encounter>(am_, an_);
-            return ao_;
+            IEnumerable<MedicationRequest> al_ = context.Operators.Where<MedicationRequest>(aj_, ak_);
+            bool? am_ = context.Operators.Exists<MedicationRequest>(al_);
+            return am_;
         }
 
-        IEnumerable<Encounter> h_ = context.Operators.SelectMany<Encounter, Encounter>(f_, g_);
+        IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
         IEnumerable<Encounter> i_ = context.Operators.Union<Encounter>(c_, h_);
         return i_;
     }
