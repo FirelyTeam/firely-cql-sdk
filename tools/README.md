@@ -5,6 +5,7 @@ Utility scripts for the Firely CQL SDK.
 ## Directory Structure
 
 - **condense_spec/** - CQL Specification HTML to Markdown converter
+- **dqic_sync/** - Compares the vendored CQL conformance test suite against the official upstream suite
 - **XsdToCSharpConverter/** - XSD to C# code generation tool
 - **XsdToCSharpConverterTests/** - Tests for XSD converter
 
@@ -32,6 +33,23 @@ python3 tools/condense_spec/condense_spec.py
 **Documentation:** See [tools/condense_spec/README.md](condense_spec/README.md) for complete details.
 
 **Created in:** PR for "Experimental - Using AI to verify codebase conformance with CQL spec"
+
+### dqic_sync
+
+Compares `Cql/CqlToElmTests/Input/DQIC/*.xml` against the official CQL test suite
+(https://cql.hl7.org/tests.zip) and produces a markdown report of missing/added/modified tests, for
+manual review — it does not modify any test files itself.
+
+**Location:** `tools/dqic_sync/`
+
+**Usage:**
+```bash
+python3 tools/dqic_sync/compare_dqic_tests.py --report-path /tmp/dqic-report.md
+```
+
+**Documentation:** See [tools/dqic_sync/README.md](dqic_sync/README.md) for complete details.
+
+**Created in:** [#1389](https://github.com/FirelyTeam/firely-cql-sdk/issues/1389)
 
 ---
 
