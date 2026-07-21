@@ -246,6 +246,27 @@ public class FhirMeasureExtensionsTests
     }
 
     [TestMethod]
+    public void DefinitionWithPopulationAndStratifierTags_ProducesBoth()
+    {
+        // A single define annotated with both @population and @stratifier is supported:
+        // it should appear as a population criterion *and* as a stratifier component.
+        var measure = CreateMeasure(BaseStatements(
+            Def("Denominator Stratifier",
+                CreateTag("group", "RateA"),
+                CreateTag("population", "denominator"),
+                CreateTag("stratifier", "Region"))));
+
+        var group = measure.Group.Single(g => g.ElementId == "RateA");
+
+        group.Population.Should().Contain(p => p.Criteria.Expression_ == "Denominator Stratifier",
+            "the definition should contribute a population entry");
+
+        var component = group.Stratifier.Single().Component.Single();
+        component.Criteria.Expression_.Should().Be("Denominator Stratifier",
+            "the definition should also contribute a stratifier component");
+    }
+
+    [TestMethod]
     public void LibraryWithoutStratifierTags_ProducesNoStratifiers()
     {
         var measure = CreateMeasure(BaseStatements());
