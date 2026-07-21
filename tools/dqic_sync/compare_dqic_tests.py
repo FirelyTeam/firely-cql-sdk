@@ -32,7 +32,7 @@ from pathlib import Path
 
 TESTS_ZIP_URL = "https://cql.hl7.org/tests.zip"
 NS = "{http://hl7.org/fhirpath/tests}"
-USER_AGENT = "firely-cql-sdk-spec-condenser/1.0 (+https://github.com/FirelyTeam/firely-cql-sdk)"
+USER_AGENT = "firely-cql-sdk-dqic-comparator/1.0 (+https://github.com/FirelyTeam/firely-cql-sdk)"
 
 
 def download_tests_zip() -> bytes:
@@ -93,9 +93,10 @@ def load_official_suite(zip_bytes: bytes) -> tuple:
 
 
 def load_local_suite(local_dir: Path) -> tuple:
-    """Returns ({filename: {test_name: canonical_content}}, {filename: [dup names]}) for the local suite."""
+    """Returns ({filename: {test_name: canonical_content}}, {filename: [dup names]}, {filename: parse_error}) for the local suite."""
     suite = {}
     duplicates = {}
+    errors = {}
     for xml_file in local_dir.glob("*.xml"):
         try:
             tests, dups = parse_tests_file(xml_file.read_bytes())
@@ -103,8 +104,8 @@ def load_local_suite(local_dir: Path) -> tuple:
             if dups:
                 duplicates[xml_file.name] = dups
         except ET.ParseError as e:
-            print(f"Warning: local file {xml_file.name} failed to parse: {e}", file=sys.stderr)
-    return suite, duplicates
+            errors[xml_file.name] = str(e)
+    return suite, duplicates, errors
 
 
 def git_log_for_test(repo_root: Path, local_file: Path, test_name: str, max_entries: int = 5) -> list:
@@ -123,7 +124,7 @@ def git_log_for_test(repo_root: Path, local_file: Path, test_name: str, max_entr
 
 
 def build_report(official: dict, official_dups: dict, errors: dict, local: dict, local_dups: dict,
-                  repo_root: Path, local_dir: Path) -> str:
+                  local_errors: dict, repo_root: Path, local_dir: Path) -> str:
     lines = [
         "# DQIC Test Suite Comparison Report",
         "",
@@ -146,6 +147,13 @@ def build_report(official: dict, official_dups: dict, errors: dict, local: dict,
             lines.append(f"- `{filename}`: {error} (skipped; compare this one by hand)")
         lines.append("")
 
+    if local_errors:
+        lines.append("## Local files that failed to parse")
+        lines.append("")
+        for filename, error in sorted(local_errors.items()):
+            lines.append(f"- `{filename}`: {error} (parse error; file excluded from comparison — investigate before syncing)")
+        lines.append("")
+
     if official_dups or local_dups:
         lines.append("## Duplicate test names within a single file")
         lines.append("")
@@ -156,7 +164,7 @@ def build_report(official: dict, official_dups: dict, errors: dict, local: dict,
                 lines.append(f"- `{filename}` (local): {', '.join(local_dups[filename])}")
         lines.append("")
 
-    all_files = sorted(set(official) | set(local) | set(errors))
+    all_files = sorted(set(official) | set(local) | set(errors) | set(local_errors))
     summary_rows = []
     detail_sections = []
 
@@ -166,11 +174,15 @@ def build_report(official: dict, official_dups: dict, errors: dict, local: dict,
         local_file = local_dir / filename
 
         if filename in errors:
-            summary_rows.append((filename, "PARSE ERROR", str(len(local_tests) if local_tests else 0), "-", "-", "-"))
+            summary_rows.append((filename, "PARSE ERROR (upstream)", str(len(local_tests) if local_tests else 0), "-", "-", "-", "-"))
             continue  # already covered in the "failed to parse" section above
 
+        if filename in local_errors:
+            summary_rows.append((filename, str(len(official_tests) if official_tests else 0), "PARSE ERROR (local)", "-", "-", "-", "-"))
+            continue  # already covered in the "local files that failed to parse" section above
+
         if official_tests is None:
-            summary_rows.append((filename, "-", "-", "-", "-", "LOCAL-ONLY FILE"))
+            summary_rows.append((filename, "-", "-", "-", "-", "-", "LOCAL-ONLY FILE"))
             detail_sections.append(
                 f"## {filename}\n\n**This entire file does not exist upstream** — a Firely-only "
                 f"addition ({len(local_tests)} tests). No action needed unless this was meant to "
@@ -179,7 +191,7 @@ def build_report(official: dict, official_dups: dict, errors: dict, local: dict,
             continue
 
         if local_tests is None:
-            summary_rows.append((filename, str(len(official_tests)), "-", "MISSING FILE", "-", "-"))
+            summary_rows.append((filename, str(len(official_tests)), "-", "MISSING FILE", "-", "-", "-"))
             detail_sections.append(
                 f"## {filename}\n\n**This entire file is missing locally** "
                 f"({len(official_tests)} upstream tests never imported):\n\n"
@@ -196,7 +208,7 @@ def build_report(official: dict, official_dups: dict, errors: dict, local: dict,
 
         summary_rows.append((
             filename, str(len(official_tests)), str(len(local_tests)),
-            str(len(upstream_only)), str(len(local_only)), str(len(modified)),
+            str(len(upstream_only)), str(len(local_only)), str(len(modified)), str(identical_count),
         ))
 
         if not upstream_only and not local_only and not modified:
@@ -210,14 +222,14 @@ def build_report(official: dict, official_dups: dict, errors: dict, local: dict,
             for name in upstream_only:
                 commits = git_log_for_test(repo_root, local_file, name)
                 commit_note = f" — git history: {'; '.join(commits)}" if commits else ""
-                section.append(f"- `{name}`: `{official_tests[name]}`{commit_note}")
+                section.append(f"- `{name}`: `{official_tests[name].replace(chr(10), r'\n')}`{commit_note}")
             section.append("")
 
         if local_only:
             section.append(f"### Firely additions, not upstream ({len(local_only)})")
             section.append("")
             for name in local_only:
-                section.append(f"- `{name}`: `{local_tests[name]}`")
+                section.append(f"- `{name}`: `{local_tests[name].replace(chr(10), r'\n')}`")
             section.append("")
 
         if modified:
@@ -227,8 +239,8 @@ def build_report(official: dict, official_dups: dict, errors: dict, local: dict,
                 commits = git_log_for_test(repo_root, local_file, name)
                 commit_note = "; ".join(commits) if commits else "(no matching commit found via pickaxe search)"
                 section.append(f"- `{name}`")
-                section.append(f"  - upstream: `{official_tests[name]}`")
-                section.append(f"  - local: `{local_tests[name]}`")
+                section.append(f"  - upstream: `{official_tests[name].replace(chr(10), r'\n')}`")
+                section.append(f"  - local: `{local_tests[name].replace(chr(10), r'\n')}`")
                 section.append(f"  - git history: {commit_note}")
             section.append("")
 
@@ -237,8 +249,8 @@ def build_report(official: dict, official_dups: dict, errors: dict, local: dict,
     summary_lines = [
         "## Summary",
         "",
-        "| File | Upstream tests | Local tests | Missing locally | Firely additions | Modified |",
-        "|---|---|---|---|---|---|",
+        "| File | Upstream tests | Local tests | Missing locally | Firely additions | Modified | Identical |",
+        "|---|---|---|---|---|---|---|",
     ]
     for row in summary_rows:
         summary_lines.append("| " + " | ".join(row) + " |")
@@ -262,9 +274,9 @@ def main():
         zip_bytes = download_tests_zip()
 
     official, official_dups, errors = load_official_suite(zip_bytes)
-    local, local_dups = load_local_suite(local_dir)
+    local, local_dups, local_errors = load_local_suite(local_dir)
 
-    report = build_report(official, official_dups, errors, local, local_dups, repo_root, local_dir)
+    report = build_report(official, official_dups, errors, local, local_dups, local_errors, repo_root, local_dir)
 
     if args.report_path:
         args.report_path.write_text(report, encoding="utf-8")
