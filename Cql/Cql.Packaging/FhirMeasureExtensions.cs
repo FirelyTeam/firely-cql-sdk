@@ -108,21 +108,21 @@ internal static class FhirMeasureExtensions
         .Where(t => t is not null)
         .ToArray();
 
-    private static FhirMeasure.GroupComponent GetOrCreateGroup(FhirMeasure fhirMeasure, string rate)
+    private static FhirMeasure.GroupComponent GetOrCreateGroup(FhirMeasure fhirMeasure, string groupId)
     {
-        var groupsForRate = fhirMeasure.Group?
-                                       .Where(g => g.ElementId == rate)
-                                       .ToArray() ?? [];
-        if (groupsForRate.Length == 1)
-            return groupsForRate[0];
-        if (groupsForRate.Length > 1)
-            throw new InvalidOperationException($"Rate {rate} is defined twice for this measure.");
+        var groupsForId = fhirMeasure.Group?
+                                     .Where(g => g.ElementId == groupId)
+                                     .ToArray() ?? [];
+        if (groupsForId.Length == 1)
+            return groupsForId[0];
+        if (groupsForId.Length > 1)
+            throw new InvalidOperationException($"Group {groupId} is defined twice for this measure.");
 
         var group = new FhirMeasure.GroupComponent
         {
-            ElementId = rate,
-            //Code = new CodeableConcept(rate, MeasureGroupCodeSystem),
-            Description = $"Rate {rate}",
+            ElementId = groupId,
+            //Code = new CodeableConcept(groupId, MeasureGroupCodeSystem),
+            Description = $"Group {groupId}",
         };
         fhirMeasure.Group!.Add(group);
         return group;
