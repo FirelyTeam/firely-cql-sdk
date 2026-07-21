@@ -194,6 +194,43 @@ cql-package replace-library-attachments \
 
 ---
 
+## Measure Annotations
+
+A FHIR `Measure-*.json` resource is generated for a library when its CQL carries measure
+annotations — `@name: value` tags in comment blocks that the CQL-to-ELM translator copies into the
+ELM `annotation` element. See `LibrarySets/Demo/Cql/MeasureExample.cql` for a complete example.
+
+| Tag | On | Effect |
+|-----|----|--------|
+| `@measure` | any definition | Enables Measure generation; the value becomes `Measure.title` |
+| `@year` | any definition | Measurement year; sets `Measure.effectivePeriod` (required together with `@measure`) |
+| `@group` | population/stratifier definitions | Names a measure group (rate) the definition belongs to; repeatable |
+| `@population` | population definitions | Population kind (e.g. `initial-population`, `denominator`, `numerator`); combined with each `@group` tag into `Measure.group.population` |
+| `@productline` | population definitions | Optional suffix applied to population ids and codes |
+| `@stratifier` | stratifier definitions | Adds one stratification dimension per `@group` tag; repeatable |
+| `@description` | stratifier definitions | Optional description for the stratifier component |
+
+### Stratifiers
+
+All stratifier-tagged definitions of a group collapse into a single container stratifier
+(`<group>-Stratifier`) whose dimensions are `stratifier.component` entries — including when a group
+has only one dimension. Each component gets id `<group>-StratifierComponent-<value>`, a text-only
+code with the `@stratifier` value, and a `text/cql-identifier` criteria referencing the definition.
+The definition's return value is the stratum value for the subject; any CQL type is allowed.
+
+```cql
+/*
+* @group: RateA
+* @group: RateB
+* @stratifier: Region
+*/
+define "Region Stratifier":
+    Common."Reported region"(Patient)
+```
+
+A `@stratifier` tag with an empty value, without any `@group` tag, or duplicated within a group is
+an error.
+
 ## Common Options
 
 All commands share the following logging options:
