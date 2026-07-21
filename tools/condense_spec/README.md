@@ -1,32 +1,71 @@
-# CQL Specification Condenser
+# Spec Condenser
 
-Converts the CQL specification from HTML to Markdown format for AI parsing.
+Converts HL7 specification HTML into Markdown for AI parsing. Covers two tools sharing the same
+HTML→Markdown logic (`html_to_markdown.py`):
+
+- `condense_spec.py` — CQL spec, converted from a full local site export
+- `fetch_fhir_page.py` — FHIR spec, fetched page-by-page from a URL you pass in (the FHIR spec is
+  too large to vendor wholesale, so this only pulls the pages actually needed)
 
 **Created in:** PR for "Experimental - Using AI to verify codebase conformance with CQL spec"  
-**Branch:** `copilot/validate-cql-conformance`
+**Branch:** `copilot/validate-cql-conformance`  
+**Extended in:** [#1389](https://github.com/FirelyTeam/firely-cql-sdk/issues/1389) to add the FHIR
+fetch tool and split output by technology (`spec/cql/`, `spec/fhir/`)
 
-## Purpose
+## Versioning
+
+Neither tool encodes the spec version in a folder name — that would rename the whole output
+directory (and break any cross-references) every time a spec is refreshed. Instead, each
+`spec/<tech>/README.md` (`spec/cql/README.md`, `spec/fhir/README.md`) records the current
+version/source details in plain text/markdown, and is fully rewritten by its tool on each run, so
+it never needs manual upkeep. The two folders' layouts differ slightly because the tools work
+differently (one converts a vendored site export, the other fetches pages on demand) — see each
+tool's section below.
+
+## CQL spec: `condense_spec.py`
 
 The official CQL specification website contains 1,752 files (40MB) including HTML, CSS, JavaScript, images, and other web assets. This makes it difficult for AI agents to parse and analyze the specification content.
 
 This tool extracts the main content from the specification HTML files and converts them to clean Markdown format, reducing the total size from 40MB to 912KB (97.7% reduction).
 
-## Usage
+### Usage
 
 ```bash
 # From repository root
 python3 tools/condense_spec/condense_spec.py
 ```
 
-## Input
+### Input
 
-- Source: `spec/source/1.5.3 - Release 1 Errata 2/site/` (HTML files)
+- Source: `spec/cql/source/1.5.3 - Release 1 Errata 2/site/` (HTML files, gitignored)
 
-## Output
+### Output
 
-- Destination: `spec/condensed/` (Markdown files)
-- 23 Markdown files containing the specification content
-- README.md with conversion statistics
+- Destination: `spec/cql/condensed/` (23 Markdown files containing the specification content)
+- `spec/cql/README.md` — version, source URL, conversion stats, file index, and instructions for
+  regenerating after a spec update (same one-README-per-technology layout as `spec/fhir/README.md`)
+
+## FHIR spec: `fetch_fhir_page.py`
+
+The FHIR spec (hl7.org/fhir) is far larger than the CQL spec and changes per-version; rather than
+vendoring it wholesale, this tool fetches and condenses individual pages on demand — pass the URL(s)
+of the pages you actually need (e.g. a resource's `-definitions.html` page, or an IG conformance
+page).
+
+### Usage
+
+```bash
+# From repository root — one or more URLs
+python3 tools/condense_spec/fetch_fhir_page.py https://hl7.org/fhir/R4/measure-definitions.html
+python3 tools/condense_spec/fetch_fhir_page.py <url1> <url2> ...
+```
+
+### Output
+
+- Destination: `spec/fhir/condensed/<slug-derived-from-url>.md`
+- `spec/fhir/README.md` — baseline FHIR version plus a table of every page fetched, its source URL,
+  and last-fetched date (re-running against an already-tracked URL refreshes its row and file in
+  place, not duplicated)
 
 ## What Gets Removed
 
@@ -45,87 +84,33 @@ python3 tools/condense_spec/condense_spec.py
 - Lists and formatting
 - Tables (simplified)
 
-## Output Files
-
-The script generates these files in `spec/condensed/`:
-
-1. `00-executivesummary.md` - Executive Summary
-2. `01-introduction.md` - Introduction  
-3. `02-authorsguide.md` - CQL Author's Guide
-4. `03-developersguide.md` - CQL Developer's Guide
-5. `04-logicalspecification.md` - Logical Specification
-6. `05-languagesemantics.md` - Language Semantics
-7. `06-translationsemantics.md` - Translation Semantics
-8. `07-physicalrepresentation.md` - Physical Representation
-9. `08-a-cqlsyntax.md` - Appendix A: CQL Syntax
-10. `09-b-cqlreference.md` - Appendix B: CQL Reference
-11. `10-c-referenceimplementations.md` - Appendix C: Reference Implementations
-12. `11-d-references.md` - Appendix D: References
-13. `12-e-acronyms.md` - Appendix E: Acronyms
-14. `13-f-glossary.md` - Appendix F: Glossary
-15. `14-g-formattingconventions.md` - Appendix G: Formatting Conventions
-16. `15-h-timeintervalcalculations.md` - Appendix H: Time Interval Calculations
-17. `16-i-fhirpathtranslation.md` - Appendix I: FHIRPath Function Translation
-18. `17-j-listoftables.md` - Appendix J: List of Tables
-19. `18-k-listoffigures.md` - Appendix K: List of Figures
-20. `19-l-cqlsyntaxdiagrams.md` - Appendix L: CQL Syntax Diagrams
-21. `elm.md` - ELM (Expression Logical Model)
-22. `examples.md` - Examples
-23. `tests.md` - Tests
-24. `README.md` - Documentation
-
 ## Implementation Details
 
-The script:
-1. Reads each HTML file
-2. Extracts the main content section (using regex to find `segment-content` div)
-3. Parses HTML using Python's `HTMLParser`
-4. Converts to simple Markdown:
-   - Preserves headings with `#` markers
-   - Preserves code blocks with triple backticks
-   - Preserves lists with `-` markers
-   - Preserves bold/italic formatting
-   - Removes navigation, scripts, and styling
-5. Writes clean Markdown to output files
-
-## Benefits for AI Agents
-
-- **Smaller size:** 97.7% reduction (40MB → 912KB)
-- **Cleaner format:** Pure text content without HTML tags
-- **Faster parsing:** Markdown is easier to parse than HTML
-- **No dependencies:** Just text files, no need to render web assets
-- **Focused content:** Only specification text, no navigation or UI elements
+Both tools share `html_to_markdown.py`:
+1. Isolate the main content region (tries `segment-content` div, `<main>`, `<article>`, a
+   `class*=content` div, then falls back to `<body>` — different HL7 publishing templates vary)
+2. Parse with Python's `HTMLParser`
+3. Convert to simple Markdown (headings, code blocks, lists, bold/italic; strips navigation,
+   scripts, and styling)
 
 ## Requirements
 
 - Python 3.6+
-- No additional packages required (uses standard library only)
-
-## Results
-
-After running the tool:
-
-- **Original spec:** 40MB (1,752 files including 1,000+ CSS/JS/images)
-- **Condensed spec:** 912KB (24 Markdown files)
-- **Total size reduction:** 97.7%
-- **Content reduction:** 57.5% (from HTML to Markdown)
-
-The condensed specification is available in the `spec/condensed/` directory.
+- No additional packages required — `fetch_fhir_page.py` uses `urllib` from the standard library,
+  no `requests` dependency
 
 ## Background
 
-This tool was created as part of the CQL specification conformance analysis work. The original issue requested using AI to verify codebase conformance with the CQL specification.
-
-During the analysis, it became clear that the full specification folder with 1,752 files (40MB) including CSS, JavaScript, and images was impractical for AI agents to parse. This condensation tool solves that problem by extracting just the text content.
-
-**Related Work:**
-- **Issue:** "Experimental - Using AI to verify codebase conformance with CQL spec"
-- **Branch:** `copilot/validate-cql-conformance`
-- **Analysis Results:** See `spec/report/` directory for detailed conformance findings
-- **Condensed Spec:** See `spec/condensed/` directory for the AI-friendly version
-
-The condensed specification enabled efficient analysis that identified 7 spec violations with detailed fix recommendations, all documented in the spec-report directory.
+This tool was created as part of the CQL specification conformance analysis work (issue
+"Experimental - Using AI to verify codebase conformance with CQL spec", branch
+`copilot/validate-cql-conformance`). The condensed CQL spec enabled an AI-assisted analysis pass
+that found several real conformance bugs; those findings are now tracked as GitHub issues under
+epic [#1193](https://github.com/FirelyTeam/firely-cql-sdk/issues/1193) rather than as markdown
+reports in the repo (see `spec/report/README.md`).
 
 ## Future Use
 
-This tool can be reused whenever the CQL specification is updated to generate a new condensed version for AI analysis.
+Re-run `condense_spec.py` whenever a newer CQL spec errata is vendored into `spec/cql/source/`, and
+run `fetch_fhir_page.py` against the FHIR pages tracked in `spec/fhir/README.md` whenever those
+pages might have changed. See [#1389](https://github.com/FirelyTeam/firely-cql-sdk/issues/1389) for
+the plan to make this periodic rather than ad hoc.

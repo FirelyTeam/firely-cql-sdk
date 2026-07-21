@@ -28,7 +28,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        // CQL is case-sensitive per spec/condensed/03-developersguide.md §3.4.1 "Case-Sensitivity":
+        // CQL is case-sensitive per spec/cql/condensed/03-developersguide.md §3.4.1 "Case-Sensitivity":
         // "CQL is a case-sensitive language. This means that case is considered when matching
         //  keywords and identifiers in the language."
         // Library identifiers are CQL identifiers, so "FoO" and "foo" are different.
@@ -54,7 +54,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        // Version specifiers must match exactly per spec/condensed/03-developersguide.md §3.2 "Libraries":
+        // Version specifiers must match exactly per spec/cql/condensed/03-developersguide.md §3.2 "Libraries":
         // "If the reference includes a version specifier, the library with that version specifier
         //  must be used."
         // The version is an opaque string identifier, not a semantic version to be normalized.

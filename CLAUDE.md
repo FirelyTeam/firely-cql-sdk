@@ -51,7 +51,9 @@ These are **not interchangeable**. `Library.Name` is the canonical identifier us
 
 ## CQL specification conformance
 
-`/spec/condensed/` (see its `README.md` for the section index) is the authoritative CQL 1.5.3 Release 1 Errata 2 spec for this repo — a markdown mirror kept because `cql.hl7.org` may be unreachable in some environments. Check it before implementing/reviewing/fixing any CQL operator, and when writing tests for operator semantics. If `cql.hl7.org` turns out to be reachable during a session, tell the user — it may mean the local mirror needs updating.
+`/spec/cql/condensed/` (see `/spec/cql/README.md` for the section index and which spec version is mirrored) is the authoritative CQL 1.5.3 Release 1 Errata 2 spec for this repo — a markdown mirror kept because `cql.hl7.org` may be unreachable in some environments. Check it before implementing/reviewing/fixing any CQL operator, and when writing tests for operator semantics. If `cql.hl7.org` turns out to be reachable during a session, tell the user — it may mean the local mirror needs updating.
+
+A similar mirror for FHIR spec pages actually used by this repo (e.g. `Measure`/`Library` resource definitions, Quality Measure IG conformance) lives at `/spec/fhir/condensed/`, fetched on demand per-page via `tools/condense_spec/fetch_fhir_page.py <url>` rather than vendored wholesale — see `/spec/fhir/README.md` for which pages are cached and when they were last fetched.
 
 ## Build
 

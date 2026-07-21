@@ -13,7 +13,7 @@ namespace Hl7.Cql.Elm
     /// <summary>
     /// Orders version strings numerically (so "1.10" sorts after "1.9") for "most appropriate
     /// version" selection when no version is specified - an implementation choice the CQL spec
-    /// explicitly leaves open (spec/condensed/03-developersguide.md &#167;Libraries).
+    /// explicitly leaves open (spec/cql/condensed/03-developersguide.md &#167;Libraries).
     /// </summary>
     /// <remarks>
     /// Distinct version strings are never considered equal here, even when numerically
