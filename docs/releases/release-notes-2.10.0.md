@@ -57,7 +57,7 @@
 
 #### Improvements
 
-- Vendored the NCQA HEDIS 2025 golden-parity test corpus (382 libraries) into the Integration Runner and wired `Hedis2025.GoldenTests` into CI, giving much larger and more densely-interconnected coverage than the existing golden corpora (RR23, dqm-content-qicore-2025) — this is what surfaced the `AssemblyCompiler` fix above (#1371).
+- Vendored the NCQA HEDIS 2025 golden-parity test corpus (382 libraries) into the Integration Runner and wired `Hedis2025.GoldenTests` into CI, giving much larger and more densely-interconnected coverage than the existing golden corpora (RR23, dqm-content-qicore-2025) — this is what surfaced the `AssemblyCompiler` fix above (#1371). Note: this submodule is not public so this is mostly of interest to the Firely SDK developers.
 - The Java/Maven dependency download in `Demo/Cql/Build/CqlTooling.Targets.xml` is now properly gated on `CqlToolingEnabled` (matching its only consumer), instead of running unconditionally on every CI build. Previously, rapid repeated CI builds could hit a download-lock timeout that silently hung the entire build for the full 60-minute job timeout (#1377).
 
 ---
