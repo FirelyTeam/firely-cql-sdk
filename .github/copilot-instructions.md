@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.5.0
+**Version:** 3.6.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,8 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.6.0
+  - Added a new section (1.8, Acceptance Criteria Tracking): after pushing work that completes checklist items in a linked issue or PR, tick them off before reporting the task done.
 - 3.5.0
   - Added a rule (1.3.8) requiring these instructions and the root `CLAUDE.md`/`.claude/skills/` files to be kept in sync: any rule added, removed, or changed on one side must be checked against the other.
 - 3.4.0

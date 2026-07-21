@@ -13,6 +13,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 - [1.5. GitHub CLI Usage](#15-github-cli-usage)
 - [1.6. Issue Formatting Standards](#16-issue-formatting-standards)
 - [1.7. Ticket Pickup Workflow](#17-ticket-pickup-workflow)
+- [1.8. Acceptance Criteria Tracking](#18-acceptance-criteria-tracking)
 
 ## 1.1. Discuss Before Implementing
 
@@ -91,3 +92,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 ## 1.7. Ticket Pickup Workflow
 
 1.7.1 Follow the shared procedure in [pickup-github-ticket](../../.claude/skills/pickup-github-ticket/SKILL.md) for resolving a ticket number/URL to a branch and picking up the work.
+
+## 1.8. Acceptance Criteria Tracking
+
+1.8.1 After pushing work that completes one or more acceptance-criteria checkboxes in a linked issue or the PR body, tick them off before reporting the task done — follow the shared procedure in [sync-acceptance-criteria](../../.claude/skills/sync-acceptance-criteria/SKILL.md).
