@@ -51,7 +51,7 @@ partial class IrCqlOperatorsBinder
 
         var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.In), [left, right], [], false);
         if (methodInfo is null)
-            return NullOfType<object>();
+            return new IrConstant(null, typeof(object));
 
         var call = new IrInvoke(OperatorsReceiver, methodInfo, convertedArgs);
         return call;
@@ -65,7 +65,7 @@ partial class IrCqlOperatorsBinder
         {
             return BindToBestMethodOverload(
                 nameof(ICqlOperators.ValueSetUnion),
-                [TypeAsExpression(left, typeof(IEnumerable<CqlCode>)), TypeAsExpression(right, typeof(IEnumerable<CqlCode>))],
+                [left.NewTypeAsExpression(typeof(IEnumerable<CqlCode>)), right.NewTypeAsExpression(typeof(IEnumerable<CqlCode>))],
                 [])!;
         }
         var leftElementType = _typeResolver.GetListElementType(left.Type);
@@ -87,8 +87,8 @@ partial class IrCqlOperatorsBinder
             if (ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElementType, rightListElementType, _typeConverter))
             {
                 // Cast both to IEnumerable<object> to allow union
-                var leftAsObjectEnumerable = TypeAsExpression(left, typeof(IEnumerable<object>));
-                var rightAsObjectEnumerable = TypeAsExpression(right, typeof(IEnumerable<object>));
+                var leftAsObjectEnumerable = left.NewTypeAsExpression(typeof(IEnumerable<object>));
+                var rightAsObjectEnumerable = right.NewTypeAsExpression(typeof(IEnumerable<object>));
                 return BindToBestMethodOverload(nameof(ICqlOperators.Union), [leftAsObjectEnumerable, rightAsObjectEnumerable], [])!;
             }
         }
@@ -152,7 +152,7 @@ partial class IrCqlOperatorsBinder
         if (typeExpression is IrConstant { Value: Type type })
         {
             if (source.Type != typeof(object))
-                source = TypeAsExpression(source, typeof(object));
+                source = source.NewTypeAsExpression(typeof(object));
 
             var call = BindToBestMethodOverload(nameof(ICqlOperators.LateBoundProperty), [source, propertyName], [type!])!;
             return call;
@@ -219,8 +219,8 @@ partial class IrCqlOperatorsBinder
         IrExpression templateId)
     {
         var forType = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.Retrieve))!.MakeGenericMethod(resourceType);
-        IrExpression codeExpression = NullOfType<IEnumerable<CqlCode>>();
-        IrExpression valuesetExpression = NullOfType<CqlValueSet>();
+        IrExpression codeExpression = new IrConstant(null, typeof(IEnumerable<CqlCode>));
+        IrExpression valuesetExpression = new IrConstant(null, typeof(CqlValueSet));
 
         if (codes.Type == typeof(CqlValueSet))
             valuesetExpression = codes;
@@ -247,13 +247,13 @@ partial class IrCqlOperatorsBinder
             throw new ArgumentException($"Retrieve statements can only accept terminology expressions whose type is {nameof(CqlValueSet)} or {nameof(IEnumerable<CqlCode>)}.  The expression provided has a type of {codes.Type.FullName}", nameof(codes));
 
         var constructor = typeof(RetrieveParameters).GetConstructors(BindingFlags.Public | BindingFlags.Instance).Single();
-        var hasFilters = !IsNullConstant(codeProperty) || !IsNullConstant(codeExpression)
-                                                       || !IsNullConstant(valuesetExpression)
-                                                       || !IsNullConstant(templateId);
+        var hasFilters = !codeProperty.IsNullConstant() || !codeExpression.IsNullConstant()
+                                                       || !valuesetExpression.IsNullConstant()
+                                                       || !templateId.IsNullConstant();
 
         IrExpression createParameters = hasFilters
                                    ? new IrNew(constructor, codeProperty, valuesetExpression, codeExpression, templateId)
-                                   : NullOfType<RetrieveParameters>();
+                                   : new IrConstant(null, typeof(RetrieveParameters));
 
         var call = BindToDirectMethod(forType, createParameters);
         return call;

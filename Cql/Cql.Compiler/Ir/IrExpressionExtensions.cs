@@ -14,15 +14,15 @@ using Hl7.Fhir.Utility;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of <see cref="Hl7.Cql.Compiler.Expressions.ExpressionExtensions"/>: the
-/// assign-to-type / type-as / type-is / coalesce helpers the expression builder uses on
+/// IR counterpart of the old (deleted) <c>Hl7.Cql.Compiler.Expressions.ExpressionExtensions</c>:
+/// the assign-to-type / type-as / type-is / coalesce helpers the expression builder uses on
 /// subexpressions. This is a mechanical port; see the remarks on
 /// <see cref="IrExpressionBuilderContext"/>.
 ///
-/// <para>NOTE(phase4): <see cref="IrCqlOperatorsBinder"/> carries a private copy of the
-/// assign-to-type logic (ported in phase 3 before this shared class existed).
-/// FIXME(phase6): consolidate the binder's private copy onto this class once the old pipeline
-/// is deleted.</para>
+/// <para><see cref="IrCqlOperatorsBinder"/> carried a private copy of the assign-to-type logic
+/// (ported in phase 3 before this shared class existed); phase 6 of the Linq.Expressions removal
+/// (see <c>docs/linq-expression-removal-plan.md</c>) consolidated the binder onto these shared
+/// extension methods and deleted its private copy.</para>
 /// </summary>
 internal static class IrExpressionExtensions
 {

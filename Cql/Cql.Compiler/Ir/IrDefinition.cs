@@ -119,10 +119,13 @@ internal class IrCodeDefinition(
 {
     public CqlCode Code { get; } = code;
 
-    // NOTE(phase4): faithful to CqlCodeDefinition.ReturnType, which (likely unintentionally)
-    // returns the old definition class itself rather than typeof(CqlCode). The same value is
-    // returned here to guarantee parity. FIXME(phase6): revisit when the old class is deleted.
-    public override Type ReturnType => typeof(Hl7.Cql.Compiler.Expressions.CqlCodeDefinition);
+    // NOTE(phase4/6): faithful to the old (deleted) CqlCodeDefinition.ReturnType, which (likely
+    // unintentionally) returned the definition class itself rather than typeof(CqlCode). Phase 6
+    // of the Linq.Expressions removal (docs/linq-expression-removal-plan.md) deleted that class,
+    // so the same "returns its own wrapper type" bug is preserved here by self-reference instead
+    // -- this remains deliberately un-fixed (deferred, see the phase-6 checklist) since nothing
+    // has been found to observe this value; a real fix (typeof(CqlCode)) is still out of scope.
+    public override Type ReturnType => typeof(IrCodeDefinition);
 }
 
 /// <summary>

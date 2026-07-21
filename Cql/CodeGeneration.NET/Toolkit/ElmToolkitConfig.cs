@@ -80,15 +80,6 @@ public record ElmToolkitConfig(
     public bool AllowUnresolvedExternals { get; init; } = AllowUnresolvedExternals;
 
     /// <summary>
-    /// When <see langword="true"/>, selects the typed-IR expression builder and C# code generator
-    /// (<see cref="Hl7.Cql.Compiler.Ir"/>) instead of the default Expression-tree-based pipeline.
-    /// The typed-IR pipeline produces C# output that is byte-identical to the default pipeline's
-    /// output; see <c>docs/linq-expression-removal-plan.md</c> for background on this migration.
-    /// The default value is <see langword="false"/>.
-    /// </summary>
-    public bool UseIrPipeline { get; init; } = false;
-
-    /// <summary>
     /// Converts the current configuration settings to <see cref="ExpressionBuilderSettings"/>.
     /// </summary>
     /// <returns>An instance of <see cref="ExpressionBuilderSettings"/> with the current configuration settings.</returns>

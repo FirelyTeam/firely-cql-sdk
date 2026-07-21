@@ -97,7 +97,7 @@ internal partial class IrCqlOperatorsBinder(
 
         IrExpression? Width(IrExpression[] args) =>
             args is [{ Type:{} t }] && t == typeof(CqlInterval<object>)
-                ? NullOfType<int?>() // This should be disallowed but isn't, so handle it:
+                ? new IrConstant(null, typeof(int?)) // This should be disallowed but isn't, so handle it:
                 : null;
 
         IrExpression? ToList(IrExpression[] args) =>

@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -194,6 +195,51 @@ public class IrCqlOperatorsBinderTests
     }
 
     [TestMethod]
+    public void Coalesce_NullableValueTupleList_UsesCoalesceWithNullableElementType()
+    {
+        // Regression test (#1307/#1313), ported from the old (deleted) CqlOperatorsBinder
+        // tests (see LibraryPreprocessorTest): Coalesce over a list of nullable value tuples
+        // must bind to the unconstrained Coalesce<T> with T = the nullable tuple type, so the
+        // no-match result is null.
+        var binder = CreateBinder();
+        var source = new IrConstant(
+            new (int? isHighRisk, int? isInconclusive, DateOnly? eventDate)?[]
+            {
+                ((int?)1, null, new DateOnly(2026, 6, 11)),
+                null
+            },
+            typeof((int?, int?, DateOnly?)?[]));
+
+        var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.Coalesce), [source], []));
+
+        Assert.AreEqual(nameof(ICqlOperators.Coalesce), call.Method.Name);
+        Assert.AreEqual(typeof((int?, int?, DateOnly?)?), call.Method.GetGenericArguments().Single());
+    }
+
+    [TestMethod]
+    public void Coalesce_HedisNullableTupleList_UsesCoalesceWithNullableElementType()
+    {
+        // Regression test (#1307/#1313), ported from the old (deleted) CqlOperatorsBinder
+        // tests (see LibraryPreprocessorTest): exact HEDIS 2025 shape that previously failed
+        // with CS0452.
+        var binder = CreateBinder();
+        IEnumerable<(CqlTupleMetadata, bool? isInpatient, bool? isEdVisit, CqlInterval<CqlDate> inpatientPeriod, CqlDate historyReferenceDate, CqlDate episodeDate)?> source =
+        [
+            (new CqlTupleMetadata(), true, false, null, new CqlDate(2026, 6, 11), new CqlDate(2026, 6, 12)),
+            null
+        ];
+
+        var sourceConstant = new IrConstant(
+            source,
+            typeof(IEnumerable<(CqlTupleMetadata, bool? isInpatient, bool? isEdVisit, CqlInterval<CqlDate> inpatientPeriod, CqlDate historyReferenceDate, CqlDate episodeDate)?>));
+
+        var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.Coalesce), [sourceConstant], []));
+
+        Assert.AreEqual(nameof(ICqlOperators.Coalesce), call.Method.Name);
+        Assert.AreEqual(typeof((CqlTupleMetadata, bool?, bool?, CqlInterval<CqlDate>, CqlDate, CqlDate)?), call.Method.GetGenericArguments().Single());
+    }
+
+    [TestMethod]
     public void ToList_OnListTypedArgument_ReturnsOperandUnchanged()
     {
         // Name-dispatch: "ToList" over something that is already a list short-circuits and
@@ -209,10 +255,12 @@ public class IrCqlOperatorsBinderTests
     [TestMethod]
     public void UnknownMethod_Throws()
     {
+        // Phase 6 unified this with CannotBindToCqlOperatorError (the same error the old binder
+        // threw), so the exception is now a CqlException, not a plain InvalidOperationException.
         var binder = CreateBinder();
         var argument = new IrConstant(1, typeof(int?));
 
-        var exception = Assert.ThrowsException<InvalidOperationException>(() =>
+        var exception = Assert.ThrowsException<CqlException<Hl7.Cql.Compiler.CannotBindToCqlOperatorError>>(() =>
             binder.BindToMethod("ThisMethodDoesNotExist", [argument], []));
         StringAssert.Contains(exception.Message, "No suitable method could be bound");
     }

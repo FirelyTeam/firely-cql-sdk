@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Ir;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,8 +13,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 
 internal sealed class ElmToolkitScopedState(IServiceScope scope) : IDisposable
 {
-    public LibrarySetExpressionBuilder LibrarySetExpressionBuilder { get; } = scope.ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
-
     public IrLibrarySetExpressionBuilder IrLibrarySetExpressionBuilder { get; } = scope.ServiceProvider.GetRequiredService<IrLibrarySetExpressionBuilder>();
 
     public void Dispose() => scope.Dispose();

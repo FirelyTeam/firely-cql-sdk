@@ -46,14 +46,6 @@ internal partial class IrLibrarySetCSharpCodeGenerator
     /// </summary>
     private static string GeneratorToolName { get; } = GetGeneratorToolNameFromAssemblyProductName();
 
-    /// <summary>
-    /// Gets the version of this generator as will appear in the
-    /// <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Version"/>. Shared with the
-    /// old pipeline (<see cref="LibrarySetCSharpCodeGenerator.GeneratorToolVersion"/>) so both
-    /// generate byte-identical headers until the flip-over bumps it.
-    /// </summary>
-    private const string GeneratorToolVersion = LibrarySetCSharpCodeGenerator.GeneratorToolVersion;
-
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
     /// <summary>

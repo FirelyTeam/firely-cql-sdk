@@ -6,15 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Ir;
-using Hl7.Cql.Compiler.Preprocessing;
-using Hl7.Cql.Fhir;
-using Microsoft.Extensions.Logging.Abstractions;
-using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 namespace CoreTests;
 
@@ -24,63 +18,25 @@ namespace CoreTests;
 /// differences and a trailing newline (git may rewrite line endings on checkout, so the
 /// comparison normalizes those before asserting equality).
 /// These tests guard the C# code generator against unintended output changes
-/// (e.g. while refactoring the expression-building or code-writing pipeline), and — during the
-/// Linq.Expressions removal (docs/linq-expression-removal-plan.md) — prove that the typed-IR
-/// pipeline produces the same output as the Expression-based one.
+/// (e.g. while refactoring the expression-building or code-writing pipeline). Before phase 6 of
+/// the Linq.Expressions removal (docs/linq-expression-removal-plan.md) these tests also proved
+/// the typed-IR pipeline produced byte-identical output to the Expression-based one; now that the
+/// typed-IR pipeline is the only pipeline (the old one is deleted), the old-pipeline and
+/// IR-pipeline variants collapsed into a single set of tests through the public
+/// <see cref="ElmToolkit"/> API.
 /// When an output change is intentional, regenerate the corpus with PackagerCLI
 /// (see its launchSettings.json profiles) and commit the updated <c>.g.cs</c> files.
 /// </summary>
 [TestClass]
 public class CSharpGenerationGoldenTests
 {
-    [TestMethod]
-    public void Regenerated_RR23_CSharp_Matches_CheckedInFiles() =>
-        AssertGeneratedCSharpMatchesGoldenFiles(
-            LibrarySetsDirs.RR23.ElmDir,
-            "RR23",
-            LibrarySetsDirs.RR23.CSharpDir,
-            GenerateWithOldPipeline,
-            version: "1.0.0",
-            goldenCorpusIsComplete: true);
-
-    [TestMethod]
-    public void Regenerated_DqmQiCore2025_CMS56_CSharp_Matches_CheckedInFiles() =>
-        AssertGeneratedCSharpMatchesGoldenFiles(
-            LibrarySetsDirs.DqmQiCore2025.ElmDir,
-            "CMS56FHIRFuncStatHipReplacement",
-            LibrarySetsDirs.DqmQiCore2025.ExtractedCSharpDir,
-            GenerateWithOldPipeline,
-            // Only the top library's C# is checked in (extracted from the packaged FHIR Library
-            // resource); its dependencies are generated but have no golden counterpart.
-            goldenCorpusIsComplete: false);
-
-    [TestMethod]
-    public void IrPipeline_RR23_CSharp_Matches_CheckedInFiles() =>
-        AssertGeneratedCSharpMatchesGoldenFiles(
-            LibrarySetsDirs.RR23.ElmDir,
-            "RR23",
-            LibrarySetsDirs.RR23.CSharpDir,
-            GenerateWithIrPipeline,
-            version: "1.0.0",
-            goldenCorpusIsComplete: true);
-
-    [TestMethod]
-    public void IrPipeline_DqmQiCore2025_CMS56_CSharp_Matches_CheckedInFiles() =>
-        AssertGeneratedCSharpMatchesGoldenFiles(
-            LibrarySetsDirs.DqmQiCore2025.ElmDir,
-            "CMS56FHIRFuncStatHipReplacement",
-            LibrarySetsDirs.DqmQiCore2025.ExtractedCSharpDir,
-            GenerateWithIrPipeline,
-            goldenCorpusIsComplete: false);
-
     /// <summary>
-    /// Same corpus as <see cref="IrPipeline_RR23_CSharp_Matches_CheckedInFiles"/>, but going through
-    /// the PUBLIC <see cref="ElmToolkit"/> API (<see cref="ElmToolkitConfig.UseIrPipeline"/> set to
-    /// <see langword="true"/>) rather than manually wiring the typed-IR classes. This proves the
-    /// toolkit flag selects the typed-IR pipeline end-to-end, including assembly compilation.
+    /// Also asserts assembly compilation succeeds end-to-end via the toolkit (compiled C# ->
+    /// .NET assembly), proving the toolkit's default pipeline works beyond just C# text
+    /// generation.
     /// </summary>
     [TestMethod]
-    public void IrPipelineViaToolkit_RR23_CSharp_Matches_CheckedInFiles()
+    public void RR23_CSharp_Matches_CheckedInFiles()
     {
         ElmToolkit? elmToolkitCapture = null;
 
@@ -91,7 +47,7 @@ public class CSharpGenerationGoldenTests
             librarySet =>
             {
                 var elmToolkit =
-                    new ElmToolkit(config: ElmToolkitConfig.Default with { UseIrPipeline = true })
+                    new ElmToolkit()
                         .AddElmLibraries(librarySet)
                         .CompileToAssemblies();
                 elmToolkitCapture = elmToolkit;
@@ -110,7 +66,18 @@ public class CSharpGenerationGoldenTests
             Assert.IsNotNull(assemblyBinary, $"AssemblyBinary was null for library {libraryIdentifier}.");
     }
 
-    private static Dictionary<string, string> GenerateWithOldPipeline(LibrarySet librarySet)
+    [TestMethod]
+    public void DqmQiCore2025_CMS56_CSharp_Matches_CheckedInFiles() =>
+        AssertGeneratedCSharpMatchesGoldenFiles(
+            LibrarySetsDirs.DqmQiCore2025.ElmDir,
+            "CMS56FHIRFuncStatHipReplacement",
+            LibrarySetsDirs.DqmQiCore2025.ExtractedCSharpDir,
+            GenerateWithToolkit,
+            // Only the top library's C# is checked in (extracted from the packaged FHIR Library
+            // resource); its dependencies are generated but have no golden counterpart.
+            goldenCorpusIsComplete: false);
+
+    private static Dictionary<string, string> GenerateWithToolkit(LibrarySet librarySet)
     {
         var elmToolkit =
             new ElmToolkit()
@@ -120,43 +87,6 @@ public class CSharpGenerationGoldenTests
         return elmToolkit
             .GetElmToCSharpResults()
             .ToDictionary(t => t.libraryIdentifier.ToString()!, t => t.cSharp);
-    }
-
-    private static Dictionary<string, string> GenerateWithIrPipeline(LibrarySet librarySet)
-    {
-        // Mirrors the service composition of ElmToolkitServices.AddCqlCompilerServices with
-        // the typed-IR classes (same wiring as IrPipelineTests in CqlToElmTests).
-        var typeResolver = FhirTypeResolver.Default;
-        var typeConverter = FhirTypeConverter
-            .Create(Hl7.Fhir.Model.ModelInfo.ModelInspector)
-            .UseLogger(NullLogger<TypeConverter>.Instance);
-        typeConverter.CaptureAvailableConverters();
-
-        var tupleBuilderCache = new TupleBuilderCache(NullLogger<TupleBuilderCache>.Instance);
-        var libraryPreprocessorBuilder = new LibraryPreprocessorBuilder(NullLoggerFactory.Instance);
-
-        var expressionBuilder = new IrExpressionBuilder(
-            NullLogger<IrExpressionBuilder>.Instance,
-            ExpressionBuilderSettings.Default,
-            new IrCqlOperatorsBinder(NullLogger<IrCqlOperatorsBinder>.Instance, typeResolver, typeConverter),
-            tupleBuilderCache,
-            typeResolver,
-            typeConverter,
-            new IrCqlContextBinder());
-
-        var libraryExpressionBuilder = new IrLibraryExpressionBuilder(
-            NullLogger<IrLibraryExpressionBuilder>.Instance,
-            expressionBuilder,
-            libraryPreprocessorBuilder);
-
-        var librarySetBuilder = new IrLibrarySetExpressionBuilder(libraryExpressionBuilder, libraryPreprocessorBuilder);
-
-        IrDefinitionDictionary definitions = new();
-        _ = librarySetBuilder.BuildEachLibraryDefinitions(librarySet, definitions).ToList(); // drain the batch
-
-        return new IrLibrarySetCSharpCodeGenerator(typeResolver, new TypeToCSharpConverter())
-            .GenerateEachLibraryToCSharp(librarySet, definitions)
-            .ToDictionary(t => t.library.VersionedLibraryIdentifier.ToString()!, t => t.cSharp);
     }
 
     private static void AssertGeneratedCSharpMatchesGoldenFiles(
