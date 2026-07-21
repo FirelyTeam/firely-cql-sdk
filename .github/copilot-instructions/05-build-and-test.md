@@ -91,11 +91,4 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 5.4. Generating ELM Files from CQL
 
-5.4.1 When adding CQL files (e.g., to `CoreTests\Input\ELM\HL7`), follow these steps to generate the ELM JSON files:
-5.4.1.1 **Enable CQL to ELM conversion**: Find the commented out property `CqlToolingEnabled` in the csproj (e.g., `<!-- <CqlToolingEnabled>true</CqlToolingEnabled> -->`) and uncomment it to set `CqlToolingEnabled` to `true`
-
-5.4.1.2 **Build the project**: Build that particular csproj, which will generate the ELM files
-
-5.4.1.3 **Verify generation**: Confirm that all ELM files are generated for each CQL file. The directory for the ELM files can be discovered in the `ElmDirectory` property in the csproj file
-
-5.4.1.4 **Restore setting**: Roll back step 1 by commenting out `CqlToolingEnabled=true`
+5.4.1 Follow the shared procedure in [generate-elm-from-cql](../../.claude/skills/generate-elm-from-cql/SKILL.md) to regenerate ELM JSON after adding or changing CQL input files (e.g. in `CoreTests\Input\ELM\HL7`).

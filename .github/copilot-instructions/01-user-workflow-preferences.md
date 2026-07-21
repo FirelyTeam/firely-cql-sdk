@@ -28,43 +28,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 1.2. Instruction for PR AI
 
-1.2.1 When I ask you to update or improve the Pull Request description, follow these requirements:
-
-1.2.1.1 **Analyze the entire set of commits in this PR's branch**
-
-1.2.1.2 **Incorporate all changes made across the full diff**, not just the snippet I'm currently discussing
-
-1.2.1.3 **Summarize the full scope and intent of the work** done throughout the branch
-
-1.2.1.4 The PR description should always reflect:
-
-      1.2.1.4.1 the whole branch history
-
-      1.2.1.4.2 the complete set of code changes
-
-      1.2.1.4.3 architectural decisions
-
-      1.2.1.4.4 reasoning behind changes
-
-      1.2.1.4.5 any breaking changes or migrations
-
-      1.2.1.4.6 anything meaningful discovered during review discussions
-
-1.2.2 **DO NOT** base the PR description only on the last change request or a summary of my prompt
-
-1.2.3 Your goal: **Maintain a comprehensive, up-to-date PR description that represents the entire branch's work, not just the latest prompt**
-
-1.2.4 When writing/updating PR descriptions, use sections:
-
-      1.2.4.1 **Primary Work**
-
-      1.2.4.2 **Auxiliary Work**
-
-1.2.5 Separate those sections with `---`
-
-1.2.6 Even if all work is primary, still label it explicitly
-
-1.2.7 When asked for PR description output, provide raw markdown in a fenced ` ```markdown ` block
+1.2.1 When asked to update or improve a Pull Request description, follow the shared procedure in [write-pr-description](../../.claude/skills/write-pr-description/SKILL.md): base it on the full branch history (all commits and the full diff), not just the current prompt, and structure it into `Primary Work` / `Auxiliary Work` sections separated by `---`.
 
 ## 1.3. Managing Copilot Instructions
 
@@ -120,48 +84,8 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 1.6. Issue Formatting Standards
 
-1.6.1 Use clean markdown with real line breaks and headings
-
-1.6.2 Never leave escaped `\n` in final issue body content
-
-1.6.3 Prefer drafting issue body in `/temp/`
-
-1.6.4 Use `gh issue edit --body-file` to avoid shell escaping/encoding artifacts
-
-1.6.5 Use these sections where relevant:
-
-      1.6.5.1 `Summary`
-
-      1.6.5.2 `Impact`
-
-      1.6.5.3 `Observed Behavior`
-
-      1.6.5.4 `Root Cause`
-
-      1.6.5.5 `Repro Steps`
-
-      1.6.5.6 `Expected Behavior`
-
-      1.6.5.7 `Acceptance Criteria`
+1.6.1 Follow the shared procedure in [file-github-issue](../../.claude/skills/file-github-issue/SKILL.md) for issue body formatting, drafting, and section conventions.
 
 ## 1.7. Ticket Pickup Workflow
 
-1.7.1 When the user says to pick up a ticket by issue number or GitHub issue URL, resolve that request to the issue number first
-
-1.7.2 Check for an existing remote branch for that ticket before creating a new branch
-
-1.7.3 If multiple remote branches match, prefer the branch that already has an active pull request
-
-1.7.4 Check out the selected remote branch locally before doing other work
-
-1.7.5 If no matching remote branch exists, create a new local branch for the ticket and check it out immediately
-
-1.7.6 Prefer an issue-number-prefixed branch name when creating the branch (for example `86-short-description`)
-
-1.7.7 If the ticket is already closed or the related work is already merged, ask the user to confirm that they still want to pick it up because the work appears done already
-
-1.7.8 If the user confirms they still want to pick it up, reopen the ticket when needed, set its status to `In Progress`, create a new branch for the ticket, and check it out locally
-
-1.7.9 If the ticket is still open but already has merged partial work, treat it as in progress and continue evaluating whether an existing active branch or PR covers the remaining work
-
-1.7.10 After completing a ticket pickup request, include the direct GitHub issue link in the chat response
+1.7.1 Follow the shared procedure in [pickup-github-ticket](../../.claude/skills/pickup-github-ticket/SKILL.md) for resolving a ticket number/URL to a branch and picking up the work.

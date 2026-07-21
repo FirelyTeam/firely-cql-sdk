@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.3.0
+**Version:** 3.4.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,8 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.4.0
+  - De-duplicated task-specific workflows against `.claude/skills/` (also used by Claude Code): PR description conventions, issue formatting, ticket pickup, release-note cutting, and ELM generation now link out to the corresponding skill file instead of restating the procedure. Each sub-document keeps only the universal trigger rules (e.g. breaking changes must land in `vnext-release-notes.md`); the step-by-step mechanics live in the linked skill.
 - 3.3.0
   - Expanded code generation version management guidance: clarified that binder/compiler changes which alter generated C# (not only CodeGeneration.NET changes) require a `GeneratorToolVersion` bump, fixed the stale invoker reference, and added the requirement to regenerate checked-in `*.g.cs` files in the same pull request.
 - 3.2.0
