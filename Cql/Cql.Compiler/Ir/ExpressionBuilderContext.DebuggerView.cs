@@ -20,7 +20,7 @@ namespace Hl7.Cql.Compiler.Ir;
 /// directly rather than ported.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
-partial class IrExpressionBuilderContext : IBuilderContext
+partial class ExpressionBuilderContext : IBuilderContext
 {
     private IBuilderContext CreateBuilderNode() => new ExpressionBuilderNode()
     {
@@ -58,7 +58,7 @@ partial class IrExpressionBuilderContext : IBuilderContext
 
     private readonly record struct ExpressionBuilderNode : IBuilderContext
     {
-        public IrLibraryExpressionBuilderContext LibraryExpressionBuilder { get; init; }
+        public LibraryExpressionBuilderContext LibraryExpressionBuilder { get; init; }
         public IReadOnlyList<Elm.Element> ElementStackList { get; init; }
         public int ElementStackPosition { get; init; }
 
@@ -73,11 +73,11 @@ partial class IrExpressionBuilderContext : IBuilderContext
 
     private readonly record struct PopElementToken : IPopToken
     {
-        private readonly IrExpressionBuilderContext _owner;
+        private readonly ExpressionBuilderContext _owner;
         private readonly Elm.Element? _previousElement;
 
         [DebuggerStepThrough]
-        public PopElementToken(IrExpressionBuilderContext owner, Elm.Element? previousElement)
+        public PopElementToken(ExpressionBuilderContext owner, Elm.Element? previousElement)
         {
             _owner = owner;
             _previousElement = previousElement;

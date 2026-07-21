@@ -165,7 +165,7 @@ internal static class FhirLibraryExtensions
             optionsParameter.Parameter.Add(new Parameters.ParameterComponent
             {
                 Name = "CSharpGeneratorVersion",
-                Value = new FhirString(IrLibrarySetCSharpCodeGenerator.GeneratorToolVersion)
+                Value = new FhirString(LibrarySetCSharpCodeGenerator.GeneratorToolVersion)
             });
 
             fhirLibrary.EnsureCqlOptionsExtension();

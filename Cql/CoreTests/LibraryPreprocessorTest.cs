@@ -102,13 +102,13 @@ namespace CoreTests
         // CoalesceOnNonNullableValueTypeList_Throws) exercised the old (deleted)
         // Expression-based CqlOperatorsBinder, which no longer exists as of phase 6 of the
         // Linq.Expressions removal (docs/linq-expression-removal-plan.md). Two were already
-        // covered by IrCqlOperatorsBinderTests (Coalesce_StringList_DispatchesToUnconstrainedGenericCoalesce,
+        // covered by CqlOperatorsBinderTests (Coalesce_StringList_DispatchesToUnconstrainedGenericCoalesce,
         // Coalesce_NonNullableValueTypeList_Throws); the two regression tests not yet covered
-        // there (#1307/#1313, nullable-tuple Coalesce) were ported onto IrCqlOperatorsBinder as
+        // there (#1307/#1313, nullable-tuple Coalesce) were ported onto CqlOperatorsBinder as
         // Coalesce_NullableValueTupleList_UsesCoalesceWithNullableElementType and
         // Coalesce_HedisNullableTupleList_UsesCoalesceWithNullableElementType in
-        // IrCqlOperatorsBinderTests.cs, which is where all the other IrCqlOperatorsBinder tests
-        // already live. TestTypeResolver (below) stays here because IrCqlOperatorsBinderTests
+        // CqlOperatorsBinderTests.cs, which is where all the other CqlOperatorsBinder tests
+        // already live. TestTypeResolver (below) stays here because CqlOperatorsBinderTests
         // (same CoreTests project/namespace) still uses it.
     }
 

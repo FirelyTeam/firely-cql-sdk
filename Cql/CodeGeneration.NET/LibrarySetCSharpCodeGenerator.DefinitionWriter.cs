@@ -11,7 +11,7 @@ using Hl7.Cql.Compiler.Ir;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-partial class IrLibrarySetCSharpCodeGenerator
+partial class LibrarySetCSharpCodeGenerator
 {
     // Verbatim port of LibrarySetCSharpCodeGenerator.DefinitionWriter onto the typed IR:
     // the value set / concept / code system / code writers are Expression-free and copied
@@ -22,50 +22,50 @@ partial class IrLibrarySetCSharpCodeGenerator
 
         public DefinitionWriter(
             LibraryWriter LibraryWriter,
-            IrDefinition IrDefinition)
+            CqlDefinition CqlDefinition)
         {
             this.LibraryWriter = LibraryWriter;
-            this.IrDefinition = IrDefinition;
+            this.CqlDefinition = CqlDefinition;
             _lambdaDefinitionWriter = new LambdaDefinitionWriter(this.LibraryWriter);
         }
 
         private IndentedStringBuilder ISB => LibraryWriter.ISB;
         public LibraryWriter LibraryWriter { get; }
-        public IrDefinition IrDefinition { get; }
+        public CqlDefinition CqlDefinition { get; }
 
         public void AppendDefinition()
         {
-            switch (IrDefinition)
+            switch (CqlDefinition)
             {
-                case IrValueSetDefinition vsd:
+                case CqlValueSetDefinition vsd:
                     AppendValueSetDefinition(vsd);
                     return;
 
-                case IrConceptDefinition ccd:
+                case CqlConceptDefinition ccd:
                     AppendConceptDefinition(ccd);
                     return;
 
-                case IrCodeSystemDefinition csd:
+                case CqlCodeSystemDefinition csd:
                     AppendCodeSystemDefinition(csd);
                     return;
 
-                case IrCodeDefinition cd:
+                case CqlCodeDefinition cd:
                     AppendCodeDefinition(cd);
                     return;
 
-                case IrLambdaDefinition ld:
+                case CqlLambdaDefinition ld:
                     _lambdaDefinitionWriter.AppendLambdaDefinition(ld);
                     break;
 
                 default:
-                    throw new NotSupportedException($"No support for {IrDefinition.GetType()}");
+                    throw new NotSupportedException($"No support for {CqlDefinition.GetType()}");
             }
         }
 
         private void AppendCodeDefinition(
-            IrCodeDefinition cd)
+            CqlCodeDefinition cd)
         {
-            var (quotedName, methodName, fieldName) = GetMemberNames(IrDefinition);
+            var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             var quotedCodeId = cd.Code.code!.QuoteString();
             var quotedCodeSystem = cd.Code.system.QuoteOrNullString();
             ISB.AppendLine(
@@ -77,9 +77,9 @@ partial class IrLibrarySetCSharpCodeGenerator
         }
 
         private void AppendCodeSystemDefinition(
-            IrCodeSystemDefinition csd)
+            CqlCodeSystemDefinition csd)
         {
-            var (quotedName, methodName, fieldName) = GetMemberNames(IrDefinition);
+            var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             string quotedCodeSystemId = csd.CodeSystem.id!.QuoteString();
             string quotedCodeSystemVersion = csd.CodeSystem.version.QuoteOrNullString();
             string arrayOfCodes = string.Join(
@@ -105,9 +105,9 @@ partial class IrLibrarySetCSharpCodeGenerator
         }
 
         private void AppendConceptDefinition(
-            IrConceptDefinition ccd)
+            CqlConceptDefinition ccd)
         {
-            var (quotedName, methodName, fieldName) = GetMemberNames(IrDefinition);
+            var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             string quotedConceptDisplay = ccd.Display.QuoteOrNullString();
             string arrayOfCodes = string.Join(
                 ",",
@@ -133,9 +133,9 @@ partial class IrLibrarySetCSharpCodeGenerator
         }
 
         private void AppendValueSetDefinition(
-            IrValueSetDefinition vsd)
+            CqlValueSetDefinition vsd)
         {
-            var (quotedName, methodName, fieldName) = GetMemberNames(IrDefinition);
+            var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             string quotedValueSetId = vsd.ValueSetId.QuoteString();
             string quotedValueSetVersion = vsd.ValueSetVersion.QuoteOrNullString();
             ISB.AppendLine(

@@ -16,9 +16,9 @@ namespace Hl7.Cql.Compiler.Ir;
 /// <summary>
 /// IR counterpart of the old <c>CqlOperatorsBinder</c>'s <c>.Specific.cs</c> partial: the hand-written bindings
 /// (Select/Where/SelectMany/Retrieve/Coalesce/etc. with generic type construction). This is a
-/// mechanical port; see the remarks on <see cref="IrCqlOperatorsBinder"/>.
+/// mechanical port; see the remarks on <see cref="CqlOperatorsBinder"/>.
 /// </summary>
-partial class IrCqlOperatorsBinder
+partial class CqlOperatorsBinder
 {
     private IrExpression SortBy(
         IrExpression source,

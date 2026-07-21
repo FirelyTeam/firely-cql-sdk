@@ -18,9 +18,9 @@ namespace Hl7.Cql.Compiler.Ir;
 /// <summary>
 /// IR counterpart of the old <c>CqlOperatorsBinder</c>'s <c>.Conversions.cs</c> partial: <see cref="TryConvert"/> and
 /// the <see cref="TypeConversion"/> ranking. This is a mechanical port; see the remarks on
-/// <see cref="IrCqlOperatorsBinder"/>.
+/// <see cref="CqlOperatorsBinder"/>.
 /// </summary>
-partial class IrCqlOperatorsBinder
+partial class CqlOperatorsBinder
 {
     /// <summary>
     /// The <c>context.Operators</c> property access used as the receiver of every

@@ -15,9 +15,9 @@ namespace Hl7.Cql.Compiler.Ir;
 /// <summary>
 /// IR counterpart of <c>LibraryExpressionBuilderContext.LibraryDefs.cs</c>: the definition
 /// dictionary, alias/code/code-system bookkeeping shared by the per-definition processors.
-/// Mechanical port; see the remarks on <see cref="IrExpressionBuilderContext"/>.
+/// Mechanical port; see the remarks on <see cref="ExpressionBuilderContext"/>.
 /// </summary>
-partial class IrLibraryExpressionBuilderContext
+partial class LibraryExpressionBuilderContext
 {
     #region Definitions
 
@@ -28,7 +28,7 @@ partial class IrLibraryExpressionBuilderContext
     /// If the library was processed within the context of a library set,
     /// then this dictionary will be merged with the library set's dictionary.
     /// </summary>
-    public IrDefinitionDictionary LibraryDefinitions  => _libraryDefinitions;
+    public CqlDefinitionDictionary LibraryDefinitions  => _libraryDefinitions;
 
     private void AddLibraryDefinitionsFromIncludes()
     {
@@ -110,7 +110,7 @@ partial class IrLibraryExpressionBuilderContext
         return codings;
     }
 
-    public IrLibrarySetExpressionBuilderContext? LibrarySetContext => _libsCtx;
+    public LibrarySetExpressionBuilderContext? LibrarySetContext => _libsCtx;
 
     #endregion
 

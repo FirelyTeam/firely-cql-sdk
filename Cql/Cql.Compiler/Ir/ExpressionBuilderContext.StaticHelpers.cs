@@ -17,9 +17,9 @@ using F = Hl7.Fhir.Model;
 /// <summary>
 /// IR counterpart of <c>ExpressionBuilderContext.StaticHelpers.cs</c>: the QiCore binding
 /// workaround, nullable handling, null propagation and identifier helpers. This is a
-/// mechanical port; see the remarks on <see cref="IrExpressionBuilderContext"/>.
+/// mechanical port; see the remarks on <see cref="ExpressionBuilderContext"/>.
 /// </summary>
-partial class IrExpressionBuilderContext
+partial class ExpressionBuilderContext
 {
     // Yeah, hardwired to FHIR 4.0.1 for now.
     private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
@@ -76,7 +76,7 @@ partial class IrExpressionBuilderContext
         return new IrProperty(before, member, nullConditional: true);
     }
 
-    private static string TypeNameToIdentifier(Type type, IrExpressionBuilderContext? ctx = null)
+    private static string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx = null)
     {
         var typeName = type.Name.ToLowerInvariant();
         if (type.IsGenericType)

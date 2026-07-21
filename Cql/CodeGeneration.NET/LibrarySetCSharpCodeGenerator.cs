@@ -17,7 +17,7 @@ using Hl7.Cql.ValueSets;
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
-/// Processes a definition dictionary of <see cref="IrDefinition"/> into a .NET class per library.
+/// Processes a definition dictionary of <see cref="CqlDefinition"/> into a .NET class per library.
 ///
 /// <para>IR counterpart of the old <c>LibrarySetCSharpCodeGenerator</c> (phase 5 of the
 /// Linq.Expressions removal, see <c>docs/linq-expression-removal-plan.md</c>): the class
@@ -26,12 +26,12 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// pipelines can be golden-diffed; only the lambda bodies are produced differently, by
 /// <see cref="CSharpIrEmitter"/> instead of the expression-tree visitor pipeline.</para>
 /// </summary>
-internal partial class IrLibrarySetCSharpCodeGenerator
+internal partial class LibrarySetCSharpCodeGenerator
 {
     /// <summary>
-    /// Processes a definition dictionary of <see cref="IrDefinition"/> into a .NET class per library.
+    /// Processes a definition dictionary of <see cref="CqlDefinition"/> into a .NET class per library.
     /// </summary>
-    public IrLibrarySetCSharpCodeGenerator(
+    public LibrarySetCSharpCodeGenerator(
         TypeResolver typeResolver,
         TypeToCSharpConverter typeToCSharpConverter)
     {
@@ -41,7 +41,7 @@ internal partial class IrLibrarySetCSharpCodeGenerator
     }
 
     /// <summary>
-    /// Gets the product of this <see cref="IrLibrarySetCSharpCodeGenerator"/> as will appear
+    /// Gets the product of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear
     /// in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
     /// </summary>
     private static string GeneratorToolName { get; } = GetGeneratorToolNameFromAssemblyProductName();
@@ -63,7 +63,7 @@ internal partial class IrLibrarySetCSharpCodeGenerator
     private readonly IReadOnlyList<(string alias, string type)> _aliasedUsings;
 
     private static string GetGeneratorToolNameFromAssemblyProductName() =>
-        typeof(IrLibrarySetCSharpCodeGenerator)
+        typeof(LibrarySetCSharpCodeGenerator)
             .Assembly
             .GetCustomAttributes(false)
             .OfType<AssemblyProductAttribute>()
@@ -94,7 +94,7 @@ internal partial class IrLibrarySetCSharpCodeGenerator
 
     public IEnumerable<(ElmLibrary library, string cSharp)> GenerateEachLibraryToCSharp(
         LibrarySet librarySet,
-        IrDefinitionDictionary definitions,
+        CqlDefinitionDictionary definitions,
         string? @namespace = null,
         BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
         Action<ElmLibrary>? onBeforeProcessLibrary = null)
@@ -104,7 +104,7 @@ internal partial class IrLibrarySetCSharpCodeGenerator
         return librarySetWriter.GenerateEachLibraryToCSharp(buildExceptionHandlingStrategy, onBeforeProcessLibrary);
     }
 
-    private static (string quotedName, string methodName, string fieldName) GetMemberNames(IrDefinition definition)
+    private static (string quotedName, string methodName, string fieldName) GetMemberNames(CqlDefinition definition)
     {
         var name = definition.Name;
         string quotedName = name.QuoteString();

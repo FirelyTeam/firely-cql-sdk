@@ -21,9 +21,9 @@ using IrExpressionElementPairForIdentifier = System.Collections.Generic.KeyValue
 /// IR counterpart of the query region of <c>ExpressionBuilderContext.cs</c> (query sources,
 /// where/return/aggregate/sort clauses, relationship clauses) plus the property/instance/tuple
 /// construction machinery. Mechanical port of the old per-node methods; see the remarks on
-/// <see cref="IrExpressionBuilderContext"/>.
+/// <see cref="ExpressionBuilderContext"/>.
 /// </summary>
-partial class IrExpressionBuilderContext
+partial class ExpressionBuilderContext
 {
     #region Query
 

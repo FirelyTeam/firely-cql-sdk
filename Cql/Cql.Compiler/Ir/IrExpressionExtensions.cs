@@ -17,9 +17,9 @@ namespace Hl7.Cql.Compiler.Ir;
 /// IR counterpart of the old (deleted) <c>Hl7.Cql.Compiler.Expressions.ExpressionExtensions</c>:
 /// the assign-to-type / type-as / type-is / coalesce helpers the expression builder uses on
 /// subexpressions. This is a mechanical port; see the remarks on
-/// <see cref="IrExpressionBuilderContext"/>.
+/// <see cref="ExpressionBuilderContext"/>.
 ///
-/// <para><see cref="IrCqlOperatorsBinder"/> carried a private copy of the assign-to-type logic
+/// <para><see cref="CqlOperatorsBinder"/> carried a private copy of the assign-to-type logic
 /// (ported in phase 3 before this shared class existed); phase 6 of the Linq.Expressions removal
 /// (see <c>docs/linq-expression-removal-plan.md</c>) consolidated the binder onto these shared
 /// extension methods and deleted its private copy.</para>

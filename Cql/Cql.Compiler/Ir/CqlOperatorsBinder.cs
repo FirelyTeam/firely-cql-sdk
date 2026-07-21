@@ -42,12 +42,12 @@ using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 /// you may get errors at runtime, because this binding will think a conversion is possible when at runtime it is not.
 /// If not provided, only conversions defined in <see cref="CqlOperators"/> will be used.
 /// </param>
-internal partial class IrCqlOperatorsBinder(
-    ILogger<IrCqlOperatorsBinder> logger,
+internal partial class CqlOperatorsBinder(
+    ILogger<CqlOperatorsBinder> logger,
     TypeResolver typeResolver,
     TypeConverter typeConverter)
 {
-    private readonly ILogger<IrCqlOperatorsBinder> _logger = logger;
+    private readonly ILogger<CqlOperatorsBinder> _logger = logger;
     private readonly TypeResolver _typeResolver = typeResolver;
     private readonly TypeConverter _typeConverter = typeConverter;
 

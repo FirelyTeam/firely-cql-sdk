@@ -20,9 +20,9 @@ using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 /// IR counterpart of the operator regions of <c>ExpressionBuilderContext.cs</c> (arithmetic,
 /// comparison, messaging, interval, nullological and type operators, plus the ChangeType
 /// helpers). Mechanical port of the old per-node methods; see the remarks on
-/// <see cref="IrExpressionBuilderContext"/>.
+/// <see cref="ExpressionBuilderContext"/>.
 /// </summary>
-partial class IrExpressionBuilderContext
+partial class ExpressionBuilderContext
 {
     #region ArithmeticOperators
 

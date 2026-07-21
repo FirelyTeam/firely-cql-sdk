@@ -24,8 +24,8 @@ using Expression = Hl7.Cql.Elm.Expression;
 /// </summary>
 internal static class ElmToolkitTestExtensions
 {
-    public static IrLibrarySetCSharpCodeGenerator GetLibrarySetCSharpCodeGenerator(this ElmToolkit elmToolkit) =>
-        elmToolkit.ServiceProvider.GetRequiredService<IrLibrarySetCSharpCodeGenerator>();
+    public static LibrarySetCSharpCodeGenerator GetLibrarySetCSharpCodeGenerator(this ElmToolkit elmToolkit) =>
+        elmToolkit.ServiceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
 
     public static AssemblyCompiler GetAssemblyCompiler(this ElmToolkit elmToolkit) =>
         elmToolkit.ServiceProvider.GetRequiredService<AssemblyCompiler>();
@@ -33,8 +33,8 @@ internal static class ElmToolkitTestExtensions
     public static Scope CreateScope(this ElmToolkit elmToolkit) =>
         new (elmToolkit.ServiceProvider.CreateScope());
 
-    public static IrLibraryExpressionBuilder GetLibraryExpressionBuilder(this Scope elmFluentFluentToolkitScope) =>
-        elmFluentFluentToolkitScope.ServiceProvider.GetRequiredService<IrLibraryExpressionBuilder>();
+    public static LibraryExpressionBuilder GetLibraryExpressionBuilder(this Scope elmFluentFluentToolkitScope) =>
+        elmFluentFluentToolkitScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
 
     internal class Scope(IServiceScope serviceScope) : IServiceScope
     {
@@ -53,7 +53,7 @@ internal static class ElmToolkitTestExtensions
             .AddElmLibraries(library)
             .UseLibrarySetInvoker(useLibrarySetInvoker, name);
 
-    internal static IrDefinitionDictionary ProcessLibrary(
+    internal static CqlDefinitionDictionary ProcessLibrary(
         this ElmToolkit elmToolkit,
         Library library)
     {
@@ -67,8 +67,8 @@ internal static class ElmToolkitTestExtensions
     /// Unlike the old (deleted) Expression-based <c>Lambda()</c>, the IR lambda carries no
     /// leading <c>CqlContext</c> parameter (the well-known <see cref="IrContextParameter"/> is
     /// referenced directly instead) -- so this has zero declared parameters, mirroring how
-    /// <see cref="IrExpressionBuilderContext"/> builds expression-definition lambdas (see
-    /// <c>IrExpressionBuilderContext.LibraryDefs.cs</c>).
+    /// <see cref="ExpressionBuilderContext"/> builds expression-definition lambdas (see
+    /// <c>ExpressionBuilderContext.LibraryDefs.cs</c>).
     /// </summary>
     internal static IrLambda Lambda(
         this ElmToolkit elmToolkit,
@@ -77,7 +77,7 @@ internal static class ElmToolkitTestExtensions
         using var scope = elmToolkit.CreateScope();
         var libraryExpressionBuilder = scope.GetLibraryExpressionBuilder();
 
-        IrDefinitionDictionary definitions = new();
+        CqlDefinitionDictionary definitions = new();
         var ctx = libraryExpressionBuilder.NewExpressionBuilderContext(Library, definitions);
         IrExpression translated = ctx.TranslateArg(expression);
         return new IrLambda([], translated);

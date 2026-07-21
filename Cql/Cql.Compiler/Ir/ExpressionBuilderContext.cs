@@ -24,7 +24,7 @@ using Tuple = Hl7.Cql.Elm.Tuple;
 #region Context
 
 /// <summary>
-/// The IrExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
+/// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
 /// </summary>
 /// <remarks>
 /// IR counterpart of the old <c>ExpressionBuilderContext</c> (phase 4 of the Linq.Expressions
@@ -34,27 +34,27 @@ using Tuple = Hl7.Cql.Elm.Tuple;
 /// of the Expression-based pipeline; its sources remain readable at that pipeline's final
 /// commit, <c>85207efd5</c>.
 /// </remarks>
-internal partial class IrExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 (
-    ILogger<IrExpressionBuilder> logger,
+    ILogger<ExpressionBuilder> logger,
     ExpressionBuilderSettings expressionBuilderSettings,
-    IrCqlOperatorsBinder cqlOperatorsBinder,
+    CqlOperatorsBinder cqlOperatorsBinder,
     TupleBuilderCache tupleBuilderCache,
     TypeResolver typeResolver,
     TypeConverter typeConverter,
-    IrCqlContextBinder cqlContextBinder,
-    IrLibraryExpressionBuilderContext libraryContext,
+    CqlContextBinder cqlContextBinder,
+    LibraryExpressionBuilderContext libraryContext,
     Dictionary<string, IrLocal>? operands = null // Parameters for function definitions. Used during ProcessExpressionDef.
 )
 {
-    private readonly ILogger<IrExpressionBuilder> _logger = logger;
+    private readonly ILogger<ExpressionBuilder> _logger = logger;
     private readonly ExpressionBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
-    private readonly IrCqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
+    private readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
     private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
     private readonly TypeResolver _typeResolver = typeResolver;
     private readonly TypeConverter _typeConverter = typeConverter;
-    private readonly IrCqlContextBinder _cqlContextBinder = cqlContextBinder;
-    private readonly IrLibraryExpressionBuilderContext _libraryContext = libraryContext;
+    private readonly CqlContextBinder _cqlContextBinder = cqlContextBinder;
+    private readonly LibraryExpressionBuilderContext _libraryContext = libraryContext;
     private readonly Dictionary<string, IrLocal>? _operands = operands;
 
     // NOTE(phase4): the old builder carried an IExpressionMutator list here, documented as

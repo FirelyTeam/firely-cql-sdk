@@ -40,10 +40,10 @@ namespace Hl7.Cql.CqlToElm.Test
             ctx ??= DefaultCqlContext;
             var elmToolkit = CreateElmToolkit();
             var expressionName = "TempExpression";
-            var definition = new IrExpressionDefinition(elmToolkit.Lambda(expression), expressionName);
+            var definition = new CqlExpressionDefinition(elmToolkit.Lambda(expression), expressionName);
             var elmToolkitServices = elmToolkit;
             LibrarySet librarySet = new("TempLibrarySet", library);
-            IrDefinitionDictionary definitions = new();
+            CqlDefinitionDictionary definitions = new();
             definitions.AddDefinition(library.VersionedLibraryIdentifier, expressionName, definition);
 
             var generateCSharp =

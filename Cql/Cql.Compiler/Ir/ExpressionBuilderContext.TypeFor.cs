@@ -17,9 +17,9 @@ namespace Hl7.Cql.Compiler.Ir;
 /// <summary>
 /// IR counterpart of <c>ExpressionBuilderContext.TypeFor.cs</c>: resolving the .NET type for
 /// an ELM element or type specifier. Mechanical port of the old partial; see the remarks on
-/// <see cref="IrExpressionBuilderContext"/>.
+/// <see cref="ExpressionBuilderContext"/>.
 /// </summary>
-partial class IrExpressionBuilderContext
+partial class ExpressionBuilderContext
 {
     private Type? TypeFor(
         Element element,

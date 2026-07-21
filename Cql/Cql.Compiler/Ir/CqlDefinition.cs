@@ -22,7 +22,7 @@ namespace Hl7.Cql.Compiler.Ir;
 /// only needed to host definitions inside expression trees, which the IR pipeline never does.
 /// Only the surface the builder actually writes/reads is mirrored.</para>
 /// </summary>
-internal abstract class IrDefinition(string name)
+internal abstract class CqlDefinition(string name)
 {
     public string Name { get; } = name;
 
@@ -33,9 +33,9 @@ internal abstract class IrDefinition(string name)
 /// IR counterpart of the old <c>Hl7.Cql.Abstractions.CqlLambdaDefinition</c>: a definition whose
 /// body is a lambda (expression definitions, functions and parameters).
 /// </summary>
-internal abstract class IrLambdaDefinition(
+internal abstract class CqlLambdaDefinition(
     IrLambda lambda,
-    string name) : IrDefinition(name)
+    string name) : CqlDefinition(name)
 {
     public IrLambda Lambda { get; } = lambda;
 
@@ -50,11 +50,11 @@ internal abstract class IrLambdaDefinition(
 /// <summary>
 /// IR counterpart of the old <c>CqlExpressionDefinition</c>.
 /// </summary>
-internal class IrExpressionDefinition(
+internal class CqlExpressionDefinition(
     IrLambda lambda,
     string name,
     (string tagName, string[] tagValues)[]? tags = null)
-    : IrLambdaDefinition(lambda, name)
+    : CqlLambdaDefinition(lambda, name)
 {
     public (string Name, string[] Values)[] Tags { get; } = tags ?? [];
 }
@@ -62,11 +62,11 @@ internal class IrExpressionDefinition(
 /// <summary>
 /// IR counterpart of the old <c>CqlFunctionDefinition</c>.
 /// </summary>
-internal class IrFunctionDefinition(
+internal class CqlFunctionDefinition(
     IrLambda lambda,
     string name,
     IReadOnlyDictionary<string, string>? originalParameterNames = null,
-    params (string tagName, string[] tagValues)[] tags) : IrExpressionDefinition(lambda, name, tags)
+    params (string tagName, string[] tagValues)[] tags) : CqlExpressionDefinition(lambda, name, tags)
 {
     /// <summary>
     /// Gets a dictionary mapping normalized C# parameter names to their original CQL parameter names.
@@ -78,18 +78,18 @@ internal class IrFunctionDefinition(
 /// <summary>
 /// IR counterpart of the old <c>CqlParameterDefinition</c>.
 /// </summary>
-internal class IrParameterDefinition(
+internal class CqlParameterDefinition(
     IrLambda lambda,
     string name)
-    : IrLambdaDefinition(lambda, name);
+    : CqlLambdaDefinition(lambda, name);
 
 /// <summary>
 /// IR counterpart of the old <c>CqlCodeSystemDefinition</c>.
 /// </summary>
-internal class IrCodeSystemDefinition(
+internal class CqlCodeSystemDefinition(
     string name,
     CqlCodeSystem codeSystem)
-    : IrDefinition(name)
+    : CqlDefinition(name)
 {
     public CqlCodeSystem CodeSystem { get; } = codeSystem;
     public override Type ReturnType => typeof(CqlCodeSystem);
@@ -98,11 +98,11 @@ internal class IrCodeSystemDefinition(
 /// <summary>
 /// IR counterpart of the old <c>CqlConceptDefinition</c>.
 /// </summary>
-internal class IrConceptDefinition(
+internal class CqlConceptDefinition(
     string name,
     string? display,
     IReadOnlyList<CqlCode> codes)
-    : IrDefinition(name)
+    : CqlDefinition(name)
 {
     public string? Display { get; } = display;
     public IReadOnlyList<CqlCode> Codes { get; } = codes;
@@ -112,10 +112,10 @@ internal class IrConceptDefinition(
 /// <summary>
 /// IR counterpart of the old <c>CqlCodeDefinition</c>.
 /// </summary>
-internal class IrCodeDefinition(
+internal class CqlCodeDefinition(
     string name,
     CqlCode code)
-    : IrDefinition(name)
+    : CqlDefinition(name)
 {
     public CqlCode Code { get; } = code;
 
@@ -125,17 +125,17 @@ internal class IrCodeDefinition(
     // so the same "returns its own wrapper type" bug is preserved here by self-reference instead
     // -- this remains deliberately un-fixed (deferred, see the phase-6 checklist) since nothing
     // has been found to observe this value; a real fix (typeof(CqlCode)) is still out of scope.
-    public override Type ReturnType => typeof(IrCodeDefinition);
+    public override Type ReturnType => typeof(CqlCodeDefinition);
 }
 
 /// <summary>
 /// IR counterpart of the old <c>CqlValueSetDefinition</c>.
 /// </summary>
-internal class IrValueSetDefinition(
+internal class CqlValueSetDefinition(
     string name,
     string valueSetId,
     string? valueSetVersion)
-    : IrDefinition(name)
+    : CqlDefinition(name)
 {
     public string ValueSetId { get; } = valueSetId;
     public string? ValueSetVersion { get; } = valueSetVersion;
@@ -150,4 +150,4 @@ internal class IrValueSetDefinition(
 /// closed generic a name usable across the IR pipeline without touching the (old-pipeline)
 /// global usings.
 /// </summary>
-internal sealed class IrDefinitionDictionary : DefinitionDictionary<IrDefinition>;
+internal sealed class CqlDefinitionDictionary : DefinitionDictionary<CqlDefinition>;

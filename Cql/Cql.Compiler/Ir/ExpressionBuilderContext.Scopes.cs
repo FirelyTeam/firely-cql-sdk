@@ -17,7 +17,7 @@ using IrExpressionElementPairForIdentifier = System.Collections.Generic.KeyValue
 /// stack. This is a mechanical port; the scope dictionary values are
 /// <c>(IrExpression, Element)</c> instead of <c>(Expression, Element)</c>.
 /// </summary>
-partial class IrExpressionBuilderContext
+partial class ExpressionBuilderContext
 {
     protected IReadOnlyDictionary<string, (IrExpression expr, Elm.Element element)> Scopes
     {
@@ -108,10 +108,10 @@ partial class IrExpressionBuilderContext
 
     private readonly record struct PopScopesToken : IPopToken
     {
-        private readonly IrExpressionBuilderContext _owner;
+        private readonly ExpressionBuilderContext _owner;
         private readonly object? _prevId;
 
-        public PopScopesToken(IrExpressionBuilderContext owner, object? prevId)
+        public PopScopesToken(ExpressionBuilderContext owner, object? prevId)
         {
             _owner = owner;
             _prevId = prevId;

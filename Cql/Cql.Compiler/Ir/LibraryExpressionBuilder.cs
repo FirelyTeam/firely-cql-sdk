@@ -12,31 +12,31 @@ using Hl7.Cql.Elm;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// Encapsulates the IrExpressionBuilder and state dictionaries for building definitions.
+/// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// IR counterpart of the old <c>LibraryExpressionBuilder</c>; a mechanical port, see the
-/// remarks on <see cref="IrExpressionBuilderContext"/>.
+/// remarks on <see cref="ExpressionBuilderContext"/>.
 /// </summary>
-internal class IrLibraryExpressionBuilder(
-    ILogger<IrLibraryExpressionBuilder> logger,
-    IrExpressionBuilder expressionBuilder,
+internal class LibraryExpressionBuilder(
+    ILogger<LibraryExpressionBuilder> logger,
+    ExpressionBuilder expressionBuilder,
     LibraryPreprocessorBuilder libraryPreprocessorBuilder)
 {
-    public IrDefinitionDictionary ProcessLibrary(
+    public CqlDefinitionDictionary ProcessLibrary(
         Library library,
-        IrDefinitionDictionary? libraryDefinitions = null,
-        IrLibrarySetExpressionBuilderContext? libsCtx = null) =>
+        CqlDefinitionDictionary? libraryDefinitions = null,
+        LibrarySetExpressionBuilderContext? libsCtx = null) =>
         NewLibraryExpressionBuilderContext(library, libraryDefinitions, libsCtx)
             .ProcessLibrary();
 
-    public IrLibraryExpressionBuilderContext NewLibraryExpressionBuilderContext(
+    public LibraryExpressionBuilderContext NewLibraryExpressionBuilderContext(
         Library library,
-        IrDefinitionDictionary? libraryDefinitions = null,
-        IrLibrarySetExpressionBuilderContext? libsCtx = null) =>
+        CqlDefinitionDictionary? libraryDefinitions = null,
+        LibrarySetExpressionBuilderContext? libsCtx = null) =>
         new(logger, expressionBuilder, libraryPreprocessorBuilder, library, libraryDefinitions ?? new(), libsCtx);
 
-    public IrExpressionBuilderContext NewExpressionBuilderContext(
+    public ExpressionBuilderContext NewExpressionBuilderContext(
         Library library,
-        IrDefinitionDictionary? libraryDefinitions = null,
+        CqlDefinitionDictionary? libraryDefinitions = null,
         Dictionary<string, IrLocal>? operands = null)
     {
         var libraryExpressionBuilderContext = NewLibraryExpressionBuilderContext(library, libraryDefinitions);
