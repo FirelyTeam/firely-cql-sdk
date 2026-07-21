@@ -6,7 +6,7 @@
 >
 > - **Breaking changes:** `VersionedIdentifier` (and `VersionedIdentifierDictionary`'s `include` resolution) now compares library `id` case-sensitively and matches `version` as an exact opaque string, instead of case-insensitive/normalized comparison.
 > - **Required migrations:** Review any code or data relying on case-insensitive library id lookups (e.g. `"FoO"` vs `"fOo"`) or normalized version-string equivalence (e.g. `"1.0"` treated the same as `"1.0.0"`) — these are now treated as distinct identifiers.
-> - **Highlights:** Fixed several correctness bugs: duplicate `Retrieve` results, intermittently dropped cross-library references during compilation, `with`/`without` relationship-clause duplication, `Equivalent` on `FHIR.CodeableConcept` ~ `Code`, and late-bound FHIR primitive property access.
+> - **Highlights:** The packager now maps `@stratifier` ELM annotations onto `Measure.group.stratifier`. Also fixed several correctness bugs: duplicate `Retrieve` results, intermittently dropped cross-library references during compilation, `with`/`without` relationship-clause duplication, `Equivalent` on `FHIR.CodeableConcept` ~ `Code`, and late-bound FHIR primitive property access.
 
 ---
 
@@ -45,7 +45,7 @@
 
 #### Improvements
 
-- None.
+- The packager now maps `@stratifier` ELM annotations onto `Measure.group.stratifier`, instead of silently ignoring them. All stratifier-tagged definitions of a group collapse into a single container stratifier (`<group>-Stratifier`) with one `component` per `(group, stratifier)` tag pair, each with a text-only code from the tag value, an optional `@description`, and a `text/cql-identifier` criteria referencing the CQL definition. Empty `@stratifier` values, `@stratifier` without a `@group` tag, and duplicate component codes within a group now throw with clear messages instead of producing malformed output. See [docs/cql-packager.md](../cql-packager.md#measure-annotations) (#1358).
 
 ---
 
@@ -75,6 +75,7 @@
 | --- | --- |
 | [#1283](https://github.com/FirelyTeam/firely-cql-sdk/pull/1283) | Fix tuple-to-tuple implicit conversion compatibility check |
 | [#1347](https://github.com/FirelyTeam/firely-cql-sdk/pull/1347) | Fix late-bound property access for FHIR primitive values |
+| [#1358](https://github.com/FirelyTeam/firely-cql-sdk/pull/1358) | Add stratifier support to generated FHIR Measures |
 | [#1367](https://github.com/FirelyTeam/firely-cql-sdk/pull/1367) | Compile 'with'/'without' clauses as semi-joins |
 | [#1368](https://github.com/FirelyTeam/firely-cql-sdk/pull/1368) | Fix duplicate Retrieve results when multiple codings match |
 | [#1371](https://github.com/FirelyTeam/firely-cql-sdk/pull/1371) | Vendor the HEDIS 2025 golden-parity corpus into Integration Runner |
