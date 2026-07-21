@@ -108,12 +108,21 @@ def main(argv):
 
     today = date.today().isoformat()
 
+    had_errors = False
+
     for url in argv:
+        parsed = urlparse(url)
+        if parsed.scheme not in ("http", "https"):
+            print(f"  Unsupported URL scheme for {url!r} (expected http/https).", file=sys.stderr)
+            had_errors = True
+            continue
+
         print(f"Fetching {url} ...")
         try:
             html = fetch_html(url)
         except Exception as e:
             print(f"  Error fetching {url}: {e}", file=sys.stderr)
+            had_errors = True
             continue
 
         markdown_content = convert_html_to_markdown(html, label=url)
@@ -129,7 +138,7 @@ def main(argv):
 
     write_readme(readme_file, entries)
     print(f"\nWrote {readme_file}")
-    return 0
+    return 1 if had_errors else 0
 
 
 if __name__ == '__main__':
