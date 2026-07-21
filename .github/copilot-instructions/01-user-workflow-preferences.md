@@ -14,6 +14,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 - [1.6. Issue Formatting Standards](#16-issue-formatting-standards)
 - [1.7. Ticket Pickup Workflow](#17-ticket-pickup-workflow)
 - [1.8. Acceptance Criteria Tracking](#18-acceptance-criteria-tracking)
+- [1.9. PR Review Comment Handling](#19-pr-review-comment-handling)
 
 ## 1.1. Discuss Before Implementing
 
@@ -96,3 +97,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 ## 1.8. Acceptance Criteria Tracking
 
 1.8.1 After pushing work that completes one or more acceptance-criteria checkboxes in a linked issue or the PR body, tick them off before reporting the task done — follow the shared procedure in [sync-acceptance-criteria](../../.claude/skills/sync-acceptance-criteria/SKILL.md).
+
+## 1.9. PR Review Comment Handling
+
+1.9.1 After fixing a review comment (e.g. from Copilot's automated PR review) and pushing the fix, mark that conversation resolved — this does not happen automatically. Follow the shared procedure in [resolve-pr-review-comments](../../.claude/skills/resolve-pr-review-comments/SKILL.md).

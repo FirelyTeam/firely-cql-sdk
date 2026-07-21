@@ -12,6 +12,7 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 - When running PowerShell via a terminal tool, always use non-interactive mode (`-NonInteractive`) — interactive PowerShell/`dotnet repl` sessions will hang waiting for input. Don't open an interactive shell unless explicitly asked.
 - Prefer the GitHub CLI (`gh`) over raw HTTP/browser steps for issue/PR lookup and edits. If it's missing, install and authenticate it first.
 - After pushing work that completes one or more acceptance-criteria checkboxes in a linked issue or the PR body, tick them off before reporting the task done — see the `sync-acceptance-criteria` skill.
+- After fixing a review comment and pushing the fix, mark that conversation resolved (it doesn't happen automatically) — see the `resolve-pr-review-comments` skill.
 
 ## Code conventions (non-obvious ones)
 
