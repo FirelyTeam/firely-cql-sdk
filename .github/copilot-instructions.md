@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.4.0
+**Version:** 3.5.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,8 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.5.0
+  - Added a rule (1.3.8) requiring these instructions and the root `CLAUDE.md`/`.claude/skills/` files to be kept in sync: any rule added, removed, or changed on one side must be checked against the other.
 - 3.4.0
   - De-duplicated task-specific workflows against `.claude/skills/` (also used by Claude Code): PR description conventions, issue formatting, ticket pickup, release-note cutting, and ELM generation now link out to the corresponding skill file instead of restating the procedure. Each sub-document keeps only the universal trigger rules (e.g. breaking changes must land in `vnext-release-notes.md`); the step-by-step mechanics live in the linked skill.
 - 3.3.0

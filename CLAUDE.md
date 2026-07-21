@@ -4,6 +4,8 @@ This project also maintains GitHub Copilot instructions under [.github/copilot-i
 
 If the user gives a memory-style instruction ("remember...", "never...", "always..."), add it to this file immediately (or the relevant skill, if it's specific to one workflow) rather than only remembering it for the session.
 
+**Keep this in sync with the Copilot instructions.** When you add, remove, or change a rule here (or in a `.claude/skills/` file), check whether `.github/copilot-instructions.md` or one of its sub-documents states the same rule and needs the equivalent update, and vice versa. A universal convention or gotcha shouldn't exist in one file and not the other; a task-specific workflow should have exactly one canonical copy (here, in `.claude/skills/`), with the Copilot side linking to it rather than restating it.
+
 ## Working style
 
 - When asked for ideas, suggestions, or "what's the best way to..." — discuss 2-3 options with trade-offs and wait for the user to pick one before implementing. Don't jump straight to code for exploratory questions.

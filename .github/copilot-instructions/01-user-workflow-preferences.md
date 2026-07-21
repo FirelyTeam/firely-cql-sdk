@@ -64,6 +64,8 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 1.3.7 Fix numbering mismatches before completion
 
+1.3.8 **Keep the Claude Code instructions in sync**: when adding, removing, or changing a rule here (or in a sub-document), check whether the root [CLAUDE.md](../../CLAUDE.md) or a `.claude/skills/` file states the same rule and needs the equivalent update, and vice versa. A universal convention or gotcha should not exist in one file and not the other; a task-specific workflow should have exactly one canonical copy (in `.claude/skills/`) with the other file linking to it, not restating it.
+
 ## 1.4. Terminal and Command Execution
 
 1.4.1 **CRITICAL - PowerShell Non-Interactive Mode**: When running PowerShell commands via `run_in_terminal`, **ALWAYS** use non-interactive mode by adding the `-NonInteractive` flag (e.g., `pwsh -NonInteractive -Command "..."`) to prevent commands from hanging waiting for user input
