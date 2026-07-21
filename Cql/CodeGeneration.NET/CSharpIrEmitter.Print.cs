@@ -218,31 +218,21 @@ internal partial class CSharpIrEmitter
             isb.Append($": {print(conditional.IfFalse)})");
         }
 
-        // BuildConditionalExpression's outer cast, ported: the old writer added an explicit
-        // outer cast to the conditional's type whenever a branch's LambdaExpression.Type
-        // differed from it -- which, for a literal branch, was always true, because
-        // Expression.Constant(5) is typed as the non-nullable "int" even when the conditional
-        // as a whole is "int?" (CQL's If is always nullable). The IR instead types constant
-        // nodes with the nullable type up front (IrConstant(5, typeof(int?))), so a plain
-        // Type-equality check never trips here -- but PrintConstant still prints such a node as
-        // the bare literal "5", which C# infers as the non-nullable underlying type in a ternary
-        // regardless of what the IR model claims. Left unguarded, this misinference is invisible
-        // until something downstream needs the printed expression to actually be nullable (e.g.
-        // an enclosing "is null" check), which then fails to compile (CS0037: cannot convert
-        // null to a non-nullable value type).
+        // BuildConditionalExpression's outer cast: the old writer wrapped the ternary in an
+        // explicit cast to the conditional's type whenever a branch node's Type differed from
+        // it. Without the cast, a branch printing as a bare literal (e.g. "5") makes C# infer
+        // the ternary as the non-nullable underlying type, which fails to compile as soon as
+        // an enclosing context needs the nullable type (e.g. an "is null" check — CS0037).
         //
-        // The trigger only fires for a NON-NULL-valued constant branch, not any IrConstant: a
-        // null-valued constant prints as bare "default" (value types, and reference types other
-        // than exactly "object") or "null" (typeof(object)) via PrintConstant -- and all of those
-        // are C#-target-typed literals that adapt to whatever the sibling branch/context resolves
-        // to, exactly like a non-constant branch would, and exactly what the old writer's
-        // Type-equality check also treated as needing no cast
-        // (Expression.Constant(null, ce.Type).Type == ce.Type there). Firing on a null constant
-        // too would add a cast the old writer never emitted for e.g.
-        // "cond ? someNullableTypedExpr : null", breaking byte-identical output.
-        if (Nullable.GetUnderlyingType(conditional.Type) is not null
-            && (conditional.IfTrue is IrConstant { Value: not null }
-                || conditional.IfFalse is IrConstant { Value: not null }))
+        // This is the literal port of the old rule — plain node-type inequality against the
+        // conditional's own type. The IR builder assigns branch and conditional types through
+        // the same mechanically-ported paths the old builder used (CQL literals type as the
+        // nullable ELM type; TranslateArg's fallback constants type as their runtime type), so
+        // this fires in exactly the same cases the old writer cast. Two earlier re-derived
+        // triggers (any-constant-branch; all-constant-branches) both diverged from the old
+        // writer's HEDIS 2025 output — 13 and 5 of 382 libraries respectively — because the
+        // truth is carried by the node types, not by the shape of the printed literals.
+        if (conditional.IfTrue.Type != conditional.Type || conditional.IfFalse.Type != conditional.Type)
             return $"({_typeToCSharpConverter.ToCSharp(conditional.Type)}){isb}";
 
         return isb;
@@ -397,7 +387,7 @@ internal partial class CSharpIrEmitter
         return $"{operand} is {typeName}";
     }
 
-    private static string PrintBinary(IrBinary binary, Func<IrExpression, Atom> child)
+    private string PrintBinary(IrBinary binary, Func<IrExpression, Atom> child)
     {
         // ((T?)a) ?? b or (a as T?) ?? b, where a is a non-nullable T, reduces to just a — the
         // old RedundantCastsTransformer's coalesce rule, which matched both Convert AND TypeAs
@@ -429,7 +419,8 @@ internal partial class CSharpIrEmitter
                 return child(binary.Right).Code;
         }
 
-        var left = child(binary.Left).Code.ParenthesizeIfNeeded();
+        var leftAtom = child(binary.Left);
+        var left = leftAtom.Code.ParenthesizeIfNeeded();
         // LambdaDefinitionWriter.BuildBinaryExpression parenthesizes ONLY the left operand
         // ("leftCode = leftCode.ParenthesizeIfNeeded();") — rightCode is used as-is, verbatim,
         // however it printed (e.g. an "as" cast: "g_ ?? h_ as IEnumerable<CodeableConcept>",
@@ -452,8 +443,8 @@ internal partial class CSharpIrEmitter
             IrBinaryOp.Equal when right is "null" or "default" && binary.Left is IrConstant { Value: null } => "true",
             // "default" rewrites to "null" in patterns: a default literal is not a legal
             // pattern (CS8505) — the old writer's rule.
-            IrBinaryOp.Equal when right is "null" or "default" => $"{left} is null",
-            IrBinaryOp.NotEqual when right is "null" or "default" => $"{left} is not null",
+            IrBinaryOp.Equal when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is null",
+            IrBinaryOp.NotEqual when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is not null",
             IrBinaryOp.Equal => $"{left} == {right}",
             IrBinaryOp.NotEqual => $"{left} != {right}",
             IrBinaryOp.Coalesce => $"{left} ?? {right}",
@@ -462,6 +453,35 @@ internal partial class CSharpIrEmitter
             _ => throw new NotSupportedException($"Don't know how to print binary operator {binary.Op}."),
         };
     }
+
+    /// <summary>
+    /// The operand text for an "is (not) null" pattern. Safety net with no old-writer
+    /// counterpart: when the operand is a conditional that printed inline as a ternary of
+    /// bare constant literals (no outer cast — see <see cref="PrintInlineConditional"/>),
+    /// the ternary's natural C# type is the non-nullable value type (or, with a null
+    /// branch, no natural type at all), making the null pattern illegal (CS0037/CS0173).
+    /// Casting to the conditional's IR type restores the nullable operand. The old writer
+    /// emitted the same broken pattern text for this shape, so it cannot occur in any
+    /// parity corpus (all of which compile) — it is only reachable from synthetic trees
+    /// such as the XmlTest equality harness wrapping IsNull around a constant conditional.
+    /// </summary>
+    private string NullPatternOperand(Atom leftAtom, string left) =>
+        leftAtom.Node is IrConditional conditional && TernaryPrintsWithoutNaturalNullableType(conditional)
+            ? $"(({_typeToCSharpConverter.ToCSharp(leftAtom.Type)}){left})"
+            : left;
+
+    private static bool TernaryPrintsWithoutNaturalNullableType(IrConditional conditional) =>
+        // PrintInlineConditional adds no outer cast in this case...
+        conditional.IfTrue.Type == conditional.Type && conditional.IfFalse.Type == conditional.Type
+        // ...and both branches print as target-typed literals contributing no nullable type.
+        && PrintsAsBareLiteral(conditional.IfTrue) && PrintsAsBareLiteral(conditional.IfFalse);
+
+    private static bool PrintsAsBareLiteral(IrExpression node) => node switch
+    {
+        IrConstant { Value: ValueType or null } => true,
+        IrConditional nested => TernaryPrintsWithoutNaturalNullableType(nested),
+        _ => false,
+    };
 
     private string PrintNew(IrNew @new, Func<IrExpression, Atom> child)
     {
