@@ -25,6 +25,9 @@ parameters:
   - name: net10IntegrationTestProjects
     type: string
     default: ""
+  - name: hedisIntegrationTestProjects
+    type: string
+    default: ""
   - name: buildConfiguration
     type: string
     default: "Release"
@@ -110,6 +113,12 @@ stages:
             displayName: "NuGet Authenticate"
             inputs:
               nuGetServiceConnections: "${{ parameters.nuGetServiceConnections }}"
+
+          # Ensure the cache path exists even when CqlToolingEnabled is false (the default)
+          # and the Java dependency download never runs -- Cache@2's post-job tar step
+          # fails outright if the directory it's asked to cache doesn't exist at all.
+          - pwsh: New-Item -ItemType Directory -Force -Path "$(Build.SourcesDirectory)/Demo/Cql/Build/target/dependency" | Out-Null
+            displayName: "Ensure Java dependency cache path exists"
 
           # Cache Java dependencies to avoid re-downloading on each build
           - task: Cache@2
@@ -373,6 +382,57 @@ stages:
             condition: succeededOrFailed()
             inputs:
               summaryFileLocation: "$(Agent.TempDirectory)/**/coverage.cobertura.xml"
+
+      - job: TestHedisNet10
+        displayName: "HEDIS 2025 Golden Parity Tests on .NET 10"
+        pool:
+          vmImage: "windows-latest"
+        steps:
+          # Needs source tree (FindParentDirectoryContaining for the vendored HEDIS corpus)
+          - checkout: self
+            submodules: ${{ parameters.checkoutSubmodules }}
+
+          - task: UseDotNet@2
+            displayName: "Install .NET 10 SDK"
+            inputs:
+              packageType: "sdk"
+              version: "${{ parameters.dotNetCoreVersion }}"
+              installationPath: $(Agent.ToolsDirectory)/dotnet
+
+          # Download bin/obj from build stage
+          - task: DownloadPipelineArtifact@2
+            displayName: "Download Build Artifacts"
+            inputs:
+              buildType: "current"
+              artifactName: "BuildOutput"
+              targetPath: "$(Build.SourcesDirectory)"
+
+          - pwsh: |
+              $projects = "${{ parameters.hedisIntegrationTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
+              foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not $proj) { continue }
+                if ($proj -match 'Benchmark') {
+                  Write-Error "Benchmark project '$proj' is not allowed in hedisIntegrationTestProjects."
+                  exit 1
+                }
+              }
+            displayName: "Guard: prevent benchmark projects in HEDIS test list"
+
+          - task: DotNetCoreCLI@2
+            displayName: "Run HEDIS 2025 golden-parity tests on .NET 10"
+            inputs:
+              command: test
+              projects: "${{ parameters.hedisIntegrationTestProjects }}"
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
+              testRunTitle: "HEDIS 2025 Golden Parity Tests on .NET 10"
+
+          - task: PublishCodeCoverageResults@2
+            displayName: "Publish HEDIS 2025 test code coverage"
+            condition: succeededOrFailed()
+            inputs:
+              summaryFileLocation: "$(Agent.TempDirectory)/**/coverage.cobertura.xml"
+
       # Compare test results across frameworks
       - job: CompareTestResults
         displayName: "Compare Test Results Across Frameworks"
@@ -380,6 +440,7 @@ stages:
           - TestNet8
           - TestNet10
           - TestIntegrationNet10
+          - TestHedisNet10
         condition: succeededOrFailed()
         pool:
           vmImage: "windows-latest"
@@ -387,6 +448,7 @@ stages:
           net8Status: $[ dependencies.TestNet8.result ]
           net10Status: $[ dependencies.TestNet10.result ]
           integrationStatus: $[ dependencies.TestIntegrationNet10.result ]
+          hedisStatus: $[ dependencies.TestHedisNet10.result ]
         steps:
           - powershell: |
               Write-Host "##[section]Multi-Framework Test Comparison Report"
@@ -398,6 +460,7 @@ stages:
               $net8Status = "$(net8Status)"
               $net10Status = "$(net10Status)"
               $integrationStatus = "$(integrationStatus)"
+              $hedisStatus = "$(hedisStatus)"
 
               Write-Host "Test Results:"
               Write-Host "  .NET 8:  $net8Status"
@@ -406,15 +469,20 @@ stages:
               Write-Host "Integration Test Results:"
               Write-Host "  .NET 10: $integrationStatus"
               Write-Host ""
+              Write-Host "HEDIS 2025 Golden Parity Results:"
+              Write-Host "  .NET 10: $hedisStatus"
+              Write-Host ""
 
-              if ($net8Status -eq "Succeeded" -and $net10Status -eq "Succeeded" -and $integrationStatus -eq "Succeeded") {
-                  Write-Host "##[section]✅ SUCCESS: All tests pass on both .NET 8 and .NET 10, including integration tests"
+              if ($net8Status -eq "Succeeded" -and $net10Status -eq "Succeeded" -and $integrationStatus -eq "Succeeded" -and $hedisStatus -eq "Succeeded") {
+                  Write-Host "##[section]✅ SUCCESS: All tests pass on both .NET 8 and .NET 10, including integration and HEDIS 2025 tests"
                   Write-Host "The SDK exhibits identical behavior across both LTS frameworks."
               } elseif ($net8Status -ne $net10Status) {
                   Write-Host "##[warning]⚠️ WARNING: Test results differ between .NET 8 and .NET 10!"
                   Write-Host "This may indicate a framework-specific issue that needs investigation."
               } elseif ($integrationStatus -ne "Succeeded") {
                   Write-Host "##[warning]⚠️ WARNING: Integration tests failed on .NET 10"
+              } elseif ($hedisStatus -ne "Succeeded") {
+                  Write-Host "##[warning]⚠️ WARNING: HEDIS 2025 golden-parity tests failed on .NET 10"
               } else {
                   Write-Host "##[error]❌ FAILURE: Tests failed"
               }
