@@ -21,10 +21,8 @@ using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
 using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 
 /// <summary>
-/// IR counterpart of the reference regions of <c>ExpressionBuilderContext.cs</c>: references
-/// to other definitions (expressions, functions, parameters, codes, code systems, concepts,
-/// value sets), retrieves, and the runtime-context invocation helpers. Mechanical port of the
-/// old per-node methods; see the remarks on <see cref="ExpressionBuilderContext"/>.
+/// References to other definitions (expressions, functions, parameters, codes, code systems,
+/// concepts, value sets), retrieves, and the runtime-context invocation helpers.
 /// </summary>
 partial class ExpressionBuilderContext
 {

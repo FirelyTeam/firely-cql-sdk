@@ -13,9 +13,8 @@ using Hl7.Cql.Primitives;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of <c>LibraryExpressionBuilderContext.LibraryDefs.cs</c>: the definition
-/// dictionary, alias/code/code-system bookkeeping shared by the per-definition processors.
-/// Mechanical port; see the remarks on <see cref="ExpressionBuilderContext"/>.
+/// The definition dictionary and the alias/code/code-system bookkeeping shared by the
+/// per-definition processors.
 /// </summary>
 partial class LibraryExpressionBuilderContext
 {

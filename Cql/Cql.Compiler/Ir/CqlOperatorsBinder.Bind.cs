@@ -13,10 +13,9 @@ using Hl7.Cql.Operators;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of the old (deleted) <c>CqlOperatorsBinder</c>'s <c>.Bind.cs</c> partial: overload resolution
-/// (<see cref="ResolveMethodInfoWithPotentialArgumentConversions"/>), candidate scoring, generic
-/// inference, and the trailing-null precision retry. This is a mechanical port; see the remarks
-/// on <see cref="CqlOperatorsBinder"/>.
+/// Overload resolution (<see cref="ResolveMethodInfoWithPotentialArgumentConversions"/>):
+/// candidate scoring, generic inference, and the trailing-null precision retry. See the
+/// remarks on <see cref="CqlOperatorsBinder"/>.
 /// </summary>
 #pragma warning disable CS1591
 partial class CqlOperatorsBinder

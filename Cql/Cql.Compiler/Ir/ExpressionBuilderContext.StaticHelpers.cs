@@ -15,9 +15,7 @@ namespace Hl7.Cql.Compiler.Ir;
 using F = Hl7.Fhir.Model;
 
 /// <summary>
-/// IR counterpart of <c>ExpressionBuilderContext.StaticHelpers.cs</c>: the QiCore binding
-/// workaround, nullable handling, null propagation and identifier helpers. This is a
-/// mechanical port; see the remarks on <see cref="ExpressionBuilderContext"/>.
+/// The QiCore binding workaround, nullable handling, null propagation and identifier helpers.
 /// </summary>
 partial class ExpressionBuilderContext
 {

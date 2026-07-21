@@ -17,10 +17,8 @@ using Convert = System.Convert;
 using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 
 /// <summary>
-/// IR counterpart of the operator regions of <c>ExpressionBuilderContext.cs</c> (arithmetic,
-/// comparison, messaging, interval, nullological and type operators, plus the ChangeType
-/// helpers). Mechanical port of the old per-node methods; see the remarks on
-/// <see cref="ExpressionBuilderContext"/>.
+/// The ELM operators (arithmetic, comparison, messaging, interval, nullological and type
+/// operators, plus the ChangeType helpers).
 /// </summary>
 partial class ExpressionBuilderContext
 {

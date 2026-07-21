@@ -14,10 +14,9 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of <c>ExpressionBuilderContext.LibraryDefs.cs</c>: processing the library's
-/// top-level definitions (codes, code systems, concepts, includes, parameters, value sets and
-/// expression/function definitions) into <see cref="CqlDefinition"/>s on the library context.
-/// Mechanical port; see the remarks on <see cref="ExpressionBuilderContext"/>.
+/// Processing the library's top-level definitions (codes, code systems, concepts, includes,
+/// parameters, value sets and expression/function definitions) into
+/// <see cref="CqlDefinition"/>s on the library context.
 /// </summary>
 partial class ExpressionBuilderContext
 {

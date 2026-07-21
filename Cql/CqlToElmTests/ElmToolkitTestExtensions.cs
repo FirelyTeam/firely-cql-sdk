@@ -17,10 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test;
 using Expression = Hl7.Cql.Elm.Expression;
 
 /// <summary>
-/// Test-only service-composition helpers over the typed-IR pipeline (the sole pipeline as of
-/// phase 6 of the Linq.Expressions removal, see docs/linq-expression-removal-plan.md). Ported
-/// from the old Expression-based equivalents (<c>LibraryExpressionBuilder</c>,
-/// <c>LibrarySetCSharpCodeGenerator</c>) onto their Ir* counterparts.
+/// Test-only service-composition helpers over the ELM-to-C# pipeline.
 /// </summary>
 internal static class ElmToolkitTestExtensions
 {

@@ -12,12 +12,8 @@ using Hl7.Cql.Operators;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// Caches <see cref="ICqlOperators"/>' methods by name and by (name, parameter count), so overload
-/// resolution doesn't re-reflect on every bind. Expression-free (pure reflection over
-/// <see cref="ICqlOperators"/>), so it was shared directly by both the old Expression-based binder
-/// and <see cref="CqlOperatorsBinder"/> until phase 6 of the Linq.Expressions removal (see
-/// <c>docs/linq-expression-removal-plan.md</c>) deleted the old binder; relocated here (out of the
-/// old, now-deleted <c>CqlOperatorsBinder</c>) at that point.
+/// Caches <see cref="ICqlOperators"/>' methods by name and by (name, parameter count), so
+/// overload resolution doesn't re-reflect on every bind.
 /// </summary>
 internal class CqlOperatorsMethodsCache
 {

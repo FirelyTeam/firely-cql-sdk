@@ -14,9 +14,8 @@ using Library = Hl7.Cql.Elm.Library;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of the old <c>LibrarySetExpressionBuilderContext</c>: orchestrates building
-/// each library of a library set and merging its definitions. This is a mechanical port; see
-/// the remarks on <see cref="ExpressionBuilderContext"/>.
+/// Orchestrates building each library of a library set and merging its definitions; see the
+/// remarks on <see cref="ExpressionBuilderContext"/>.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
 internal class LibrarySetExpressionBuilderContext : IBuilderContext

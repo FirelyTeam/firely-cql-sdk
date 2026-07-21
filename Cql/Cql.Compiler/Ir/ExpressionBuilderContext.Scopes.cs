@@ -13,9 +13,8 @@ namespace Hl7.Cql.Compiler.Ir;
 using IrExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (Hl7.Cql.Compiler.Ir.IrExpression, Hl7.Cql.Elm.Element)>;
 
 /// <summary>
-/// IR counterpart of <c>ExpressionBuilderContext.Scopes.cs</c>: the query alias / let scope
-/// stack. This is a mechanical port; the scope dictionary values are
-/// <c>(IrExpression, Element)</c> instead of <c>(Expression, Element)</c>.
+/// The query alias / let scope stack; scope dictionary values are
+/// <c>(IrExpression, Element)</c> pairs.
 /// </summary>
 partial class ExpressionBuilderContext
 {

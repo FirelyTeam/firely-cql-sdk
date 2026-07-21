@@ -13,8 +13,6 @@ namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
-/// IR counterpart of the old <c>LibraryExpressionBuilder</c>; a mechanical port, see the
-/// remarks on <see cref="ExpressionBuilderContext"/>.
 /// </summary>
 internal class LibraryExpressionBuilder(
     ILogger<LibraryExpressionBuilder> logger,

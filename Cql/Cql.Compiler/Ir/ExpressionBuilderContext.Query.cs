@@ -18,10 +18,8 @@ using Tuple = Hl7.Cql.Elm.Tuple;
 using IrExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (Hl7.Cql.Compiler.Ir.IrExpression, Hl7.Cql.Elm.Element)>;
 
 /// <summary>
-/// IR counterpart of the query region of <c>ExpressionBuilderContext.cs</c> (query sources,
-/// where/return/aggregate/sort clauses, relationship clauses) plus the property/instance/tuple
-/// construction machinery. Mechanical port of the old per-node methods; see the remarks on
-/// <see cref="ExpressionBuilderContext"/>.
+/// Queries (query sources, where/return/aggregate/sort clauses, relationship clauses) plus
+/// the property/instance/tuple construction machinery.
 /// </summary>
 partial class ExpressionBuilderContext
 {

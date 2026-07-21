@@ -171,7 +171,7 @@ partial class LibrarySetCSharpCodeGenerator
         private static string GetDefinitionRegion(CqlDefinition definition) =>
             definition switch
             {
-                // CqlFunctionDefinition is an CqlExpressionDefinition
+                // CqlFunctionDefinition is a CqlExpressionDefinition
                 // We combine them into one region otherwise we would have too many segments switching between Function and Expression
                 CqlExpressionDefinition => "Functions and Expressions",
 

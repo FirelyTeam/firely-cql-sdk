@@ -14,9 +14,9 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of the old <c>LibraryExpressionBuilderContext</c>: orchestrates building all
-/// definitions of a single library into an <see cref="CqlDefinitionDictionary"/>. This is a
-/// mechanical port; see the remarks on <see cref="ExpressionBuilderContext"/>.
+/// Orchestrates building all definitions of a single library into an
+/// <see cref="CqlDefinitionDictionary"/>; see the remarks on
+/// <see cref="ExpressionBuilderContext"/>.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
 internal partial class LibraryExpressionBuilderContext : IBuilderContext

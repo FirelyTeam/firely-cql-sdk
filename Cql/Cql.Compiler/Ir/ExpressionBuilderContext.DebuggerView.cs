@@ -12,9 +12,8 @@ using Hl7.Cql.Abstractions.Infrastructure;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of <c>ExpressionBuilderContext.DebuggerView.cs</c>: the
-/// <see cref="IBuilderContext"/> implementation (element stack, <c>PushElement</c>, debugger
-/// views) that the shared <c>NewExpressionBuildingException</c> /
+/// The <see cref="IBuilderContext"/> implementation (element stack, <c>PushElement</c>,
+/// debugger views) that the shared <c>NewExpressionBuildingException</c> /
 /// <c>CatchRethrowExpressionBuildingException</c> extensions build their ELM context from.
 /// <see cref="IBuilderContext"/> and those extensions are Expression-free, so they are reused
 /// directly rather than ported.

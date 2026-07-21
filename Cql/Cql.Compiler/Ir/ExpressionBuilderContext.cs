@@ -27,12 +27,10 @@ using Tuple = Hl7.Cql.Elm.Tuple;
 /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
 /// </summary>
 /// <remarks>
-/// IR counterpart of the old <c>ExpressionBuilderContext</c> (phase 4 of the Linq.Expressions
-/// removal, see <c>docs/linq-expression-removal-plan.md</c>): a mechanical port with the same
-/// dispatch shape, producing <see cref="IrExpression"/> trees instead of
-/// <c>System.Linq.Expressions</c> trees. Phase 6 deleted the old builder along with the rest
-/// of the Expression-based pipeline; its sources remain readable at that pipeline's final
-/// commit, <c>85207efd5</c>.
+/// Translates ELM nodes into <see cref="IrExpression"/> trees. The dispatch shape and
+/// per-operator behavior are preserved bug-for-bug from the deleted Linq.Expressions-based
+/// pipeline (see <c>docs/linq-expression-removal-plan.md</c>; its sources remain readable at
+/// that pipeline's final commit, <c>85207efd5</c>).
 /// </remarks>
 internal partial class ExpressionBuilderContext
 (

@@ -12,15 +12,8 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of the old <c>Hl7.Cql.Abstractions.CqlDefinition</c>: the base class for the
-/// definitions the expression builder produces for a library (expressions, functions,
-/// parameters, codes, code systems, concepts and value sets).
-///
-/// <para>This is a mechanical port onto the typed IR (phase 4 of the Linq.Expressions removal,
-/// see <c>docs/linq-expression-removal-plan.md</c>). Unlike the old <c>CqlDefinition</c>, this
-/// class does <b>not</b> derive from <c>System.Linq.Expressions.Expression</c> — that base was
-/// only needed to host definitions inside expression trees, which the IR pipeline never does.
-/// Only the surface the builder actually writes/reads is mirrored.</para>
+/// The base class for the definitions the expression builder produces for a library
+/// (expressions, functions, parameters, codes, code systems, concepts and value sets).
 /// </summary>
 internal abstract class CqlDefinition(string name)
 {
@@ -30,8 +23,7 @@ internal abstract class CqlDefinition(string name)
 }
 
 /// <summary>
-/// IR counterpart of the old <c>Hl7.Cql.Abstractions.CqlLambdaDefinition</c>: a definition whose
-/// body is a lambda (expression definitions, functions and parameters).
+/// A definition whose body is a lambda (expression definitions, functions and parameters).
 /// </summary>
 internal abstract class CqlLambdaDefinition(
     IrLambda lambda,
@@ -39,16 +31,15 @@ internal abstract class CqlLambdaDefinition(
 {
     public IrLambda Lambda { get; } = lambda;
 
-    /// <summary>The <c>Func&lt;…&gt;</c> delegate type of <see cref="Lambda"/>, mirroring
-    /// <c>CqlLambdaDefinition.Type</c> (note: the IR lambda does not carry the implicit
-    /// <c>CqlContext</c> parameter the old <c>LambdaExpression</c> was prefixed with).</summary>
+    /// <summary>The <c>Func&lt;…&gt;</c> delegate type of <see cref="Lambda"/> (note: the IR
+    /// lambda does not carry an implicit <c>CqlContext</c> parameter).</summary>
     public Type Type => Lambda.Type;
 
     public override Type ReturnType => Lambda.Body.Type;
 }
 
 /// <summary>
-/// IR counterpart of the old <c>CqlExpressionDefinition</c>.
+/// A CQL <c>define</c> statement: a named, parameterless expression.
 /// </summary>
 internal class CqlExpressionDefinition(
     IrLambda lambda,
@@ -60,7 +51,7 @@ internal class CqlExpressionDefinition(
 }
 
 /// <summary>
-/// IR counterpart of the old <c>CqlFunctionDefinition</c>.
+/// A CQL <c>define function</c> statement.
 /// </summary>
 internal class CqlFunctionDefinition(
     IrLambda lambda,
@@ -76,7 +67,8 @@ internal class CqlFunctionDefinition(
 }
 
 /// <summary>
-/// IR counterpart of the old <c>CqlParameterDefinition</c>.
+/// A CQL <c>parameter</c> declaration; the lambda produces the parameter's value
+/// (its default, unless overridden at runtime).
 /// </summary>
 internal class CqlParameterDefinition(
     IrLambda lambda,
@@ -84,7 +76,7 @@ internal class CqlParameterDefinition(
     : CqlLambdaDefinition(lambda, name);
 
 /// <summary>
-/// IR counterpart of the old <c>CqlCodeSystemDefinition</c>.
+/// A CQL <c>codesystem</c> declaration.
 /// </summary>
 internal class CqlCodeSystemDefinition(
     string name,
@@ -96,7 +88,7 @@ internal class CqlCodeSystemDefinition(
 }
 
 /// <summary>
-/// IR counterpart of the old <c>CqlConceptDefinition</c>.
+/// A CQL <c>concept</c> declaration.
 /// </summary>
 internal class CqlConceptDefinition(
     string name,
@@ -110,7 +102,7 @@ internal class CqlConceptDefinition(
 }
 
 /// <summary>
-/// IR counterpart of the old <c>CqlCodeDefinition</c>.
+/// A CQL <c>code</c> declaration.
 /// </summary>
 internal class CqlCodeDefinition(
     string name,
@@ -119,17 +111,16 @@ internal class CqlCodeDefinition(
 {
     public CqlCode Code { get; } = code;
 
-    // NOTE(phase4/6): faithful to the old (deleted) CqlCodeDefinition.ReturnType, which (likely
-    // unintentionally) returned the definition class itself rather than typeof(CqlCode). Phase 6
-    // of the Linq.Expressions removal (docs/linq-expression-removal-plan.md) deleted that class,
-    // so the same "returns its own wrapper type" bug is preserved here by self-reference instead
-    // -- this remains deliberately un-fixed (deferred, see the phase-6 checklist) since nothing
-    // has been found to observe this value; a real fix (typeof(CqlCode)) is still out of scope.
+    // Likely-unintentional legacy behavior, preserved bug-for-bug from the deleted
+    // Linq.Expressions pipeline (its CqlCodeDefinition.ReturnType returned the definition
+    // class itself rather than typeof(CqlCode)). Deliberately un-fixed since nothing has been
+    // found to observe this value; the real fix (typeof(CqlCode)) is tracked in the cleanup
+    // checklist of docs/linq-expression-removal-plan.md.
     public override Type ReturnType => typeof(CqlCodeDefinition);
 }
 
 /// <summary>
-/// IR counterpart of the old <c>CqlValueSetDefinition</c>.
+/// A CQL <c>valueset</c> declaration.
 /// </summary>
 internal class CqlValueSetDefinition(
     string name,
@@ -143,11 +134,7 @@ internal class CqlValueSetDefinition(
 }
 
 /// <summary>
-/// IR counterpart of <c>CqlDefinitionDictionary</c> (the
-/// <c>DefinitionDictionary&lt;CqlDefinition&gt;</c> global-using alias): the definitions
-/// dictionary the IR library contexts read and write. <see cref="DefinitionDictionary{T}"/>
-/// itself is Expression-free, so it is reused directly; this subclass only exists to give the
-/// closed generic a name usable across the IR pipeline without touching the (old-pipeline)
-/// global usings.
+/// The definitions dictionary the library contexts read and write; this subclass only exists
+/// to give the closed generic <see cref="DefinitionDictionary{T}"/> a short name.
 /// </summary>
 internal sealed class CqlDefinitionDictionary : DefinitionDictionary<CqlDefinition>;

@@ -17,14 +17,10 @@ using Hl7.Cql.ValueSets;
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
-/// Processes a definition dictionary of <see cref="CqlDefinition"/> into a .NET class per library.
-///
-/// <para>IR counterpart of the old <c>LibrarySetCSharpCodeGenerator</c> (phase 5 of the
-/// Linq.Expressions removal, see <c>docs/linq-expression-removal-plan.md</c>): the class
-/// scaffolding (usings, regions, attributes, tuple-metadata fields, singleton/ILibrary
-/// boilerplate) is Expression-free and copied verbatim from the old generator so the two
-/// pipelines can be golden-diffed; only the lambda bodies are produced differently, by
-/// <see cref="CSharpIrEmitter"/> instead of the expression-tree visitor pipeline.</para>
+/// Processes a definition dictionary of <see cref="CqlDefinition"/> into a .NET class per
+/// library: the class scaffolding (usings, regions, attributes, tuple-metadata fields,
+/// singleton/ILibrary boilerplate), with the lambda bodies produced by
+/// <see cref="CSharpIrEmitter"/>.
 /// </summary>
 internal partial class LibrarySetCSharpCodeGenerator
 {

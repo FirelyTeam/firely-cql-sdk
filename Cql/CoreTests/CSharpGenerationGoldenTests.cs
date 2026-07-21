@@ -18,12 +18,8 @@ namespace CoreTests;
 /// differences and a trailing newline (git may rewrite line endings on checkout, so the
 /// comparison normalizes those before asserting equality).
 /// These tests guard the C# code generator against unintended output changes
-/// (e.g. while refactoring the expression-building or code-writing pipeline). Before phase 6 of
-/// the Linq.Expressions removal (docs/linq-expression-removal-plan.md) these tests also proved
-/// the typed-IR pipeline produced byte-identical output to the Expression-based one; now that the
-/// typed-IR pipeline is the only pipeline (the old one is deleted), the old-pipeline and
-/// IR-pipeline variants collapsed into a single set of tests through the public
-/// <see cref="ElmToolkit"/> API.
+/// (e.g. while refactoring the expression-building or code-writing pipeline), exercising it
+/// through the public <see cref="ElmToolkit"/> API.
 /// When an output change is intentional, regenerate the corpus with PackagerCLI
 /// (see its launchSettings.json profiles) and commit the updated <c>.g.cs</c> files.
 /// </summary>

@@ -57,7 +57,7 @@ partial class LibrarySetCSharpCodeGenerator
                 bodyIsBlock = true;
             }
 
-            // Map the IR definition type onto the old attribute names:
+            // The definition types share their names with the generated-code attributes:
             // CqlExpressionDefinition => [CqlExpressionDefinition("...")], etc.
             var definitionAttributeTypeName = ld.GetType().Name;
 
