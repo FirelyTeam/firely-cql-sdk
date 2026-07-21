@@ -11,7 +11,7 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of <see cref="CqlContextBinder"/>: facilitates binding to
+/// IR counterpart of the old <c>CqlContextBinder</c>: facilitates binding to
 /// <see cref="CqlContext"/> methods. This is a mechanical port; see the remarks on
 /// <see cref="IrCqlOperatorsBinder"/>.
 /// </summary>

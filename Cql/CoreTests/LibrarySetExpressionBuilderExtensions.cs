@@ -8,16 +8,17 @@
 
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Ir;
 
 namespace CoreTests;
 
 internal static class LibrarySetExpressionBuilderExtensions
 {
-    internal static CqlDefinitionDictionary ProcessLibrarySet(
-        this LibrarySetExpressionBuilder librarySetExpressionBuilder,
+    internal static IrDefinitionDictionary ProcessLibrarySet(
+        this IrLibrarySetExpressionBuilder librarySetExpressionBuilder,
         LibrarySet librarySet)
     {
-        CqlDefinitionDictionary definitions = new ();
+        IrDefinitionDictionary definitions = new ();
         librarySetExpressionBuilder.BuildEachLibraryDefinitions(librarySet, definitions).ForEach();
         return definitions;
     }

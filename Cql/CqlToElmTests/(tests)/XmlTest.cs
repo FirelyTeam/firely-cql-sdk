@@ -95,15 +95,17 @@ namespace Hl7.Cql.CqlToElm.Test
             }
 
             Expression equal = Equals(expression, expectation);
-            var equalLambda = CreateElmToolkit().Lambda(equal);
-
-            var equalDelegate = equalLambda.Compile();
-            // TODO: These needs to be changed to run through the AssemblyCompiler too
-            var equalResult = (bool?)equalDelegate.DynamicInvoke(CqlContext);
+            // Runs through the real ELM -> IR -> C# -> assembly pipeline (Base.Run), same as
+            // every other test in this suite -- the old Expression.Compile()/DynamicInvoke path
+            // this used is gone now that the typed-IR pipeline is the only pipeline (phase 6 of
+            // the Linq.Expressions removal, see docs/linq-expression-removal-plan.md); IrLambda
+            // has no Compile() (this also completes the long-standing TODO below to run through
+            // the AssemblyCompiler).
+            var equalResult = (bool?)Run(equal, CreateTempLibrary(), CqlContext);
             if (equalResult != true)
             {
-                var expressionValue = CreateElmToolkit().Lambda(expression).Compile().DynamicInvoke(CqlContext);
-                var expectationValue = CreateElmToolkit().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
+                var expressionValue = Run(expression, CreateTempLibrary(), CqlContext);
+                var expectationValue = Run(expectation, CreateTempLibrary(), CqlContext);
                 WriteLineToFile(
                     """c:\temp\XmlTest.assertion-failed.txt""",
                     $$"""{ "{{testCase.TestName}}", "actual: {{expressionValue}} does not meet expectation: {{expectationValue}}"""

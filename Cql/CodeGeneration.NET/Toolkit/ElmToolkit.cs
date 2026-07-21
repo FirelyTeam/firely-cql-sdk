@@ -46,7 +46,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <summary>
     /// Gets the version of the .NET code generator tool used by this toolkit.
     /// </summary>
-    public static readonly Version GeneratorToolVersion = new(LibrarySetCSharpCodeGenerator.GeneratorToolVersion);
+    public static readonly Version GeneratorToolVersion = new(IrLibrarySetCSharpCodeGenerator.GeneratorToolVersion);
 
     private ElmToolkitArtifactsById _artifactsById;
     private readonly ElmToolkitServices _services;
@@ -145,20 +145,16 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         foreach (var (id, _) in removedLibraries)
             logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
 
-        // Both branches produce IEnumerable<(ElmLibrary library, string cSharp)>; the rest of the
-        // pipeline (assembly compilation) is agnostic to which builder/generator produced it. See
-        // docs/linq-expression-removal-plan.md for the typed-IR pipeline behind UseIrPipeline.
-        var cSharps = Config.UseIrPipeline
-            ? GenerateCSharp(
-                _services.IrLibrarySetCSharpCodeGenerator,
-                librarySet,
-                BuildLibrarySetDefinitions(servicesScope.IrLibrarySetExpressionBuilder, librarySet),
-                cSharpNamespace)
-            : GenerateCSharp(
-                _services.LibrarySetCSharpCodeGenerator,
-                librarySet,
-                BuildLibrarySetDefinitions(servicesScope.LibrarySetExpressionBuilder, librarySet),
-                cSharpNamespace);
+        // Produces IEnumerable<(ElmLibrary library, string cSharp)> via the typed-IR pipeline
+        // (docs/linq-expression-removal-plan.md) -- the sole builder/generator pipeline as of
+        // phase 6, since golden parity with the old Expression-based pipeline was proven across
+        // all corpora (RR23, dqm-content-qicore-2025, and the full HEDIS 2025 corpus) and the old
+        // pipeline was deleted.
+        var cSharps = GenerateCSharp(
+            _services.IrLibrarySetCSharpCodeGenerator,
+            librarySet,
+            BuildLibrarySetDefinitions(servicesScope.IrLibrarySetExpressionBuilder, librarySet),
+            cSharpNamespace);
         var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat);
 
         var entriesBuilder = _artifactsById.ToBuilder();
@@ -227,33 +223,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                                                     logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.VersionedLibraryIdentifier)));
 
     /// <summary>
-    /// Generates the C# code for the libraries.
-    /// </summary>
-    /// <param name="cSharpCodeProcessor">The C# code processor to use.</param>
-    /// <param name="librarySet">The set of libraries to generate code for.</param>
-    /// <param name="librarySetDefinitions">The definitions for the library set.</param>
-    /// <param name="namespace">The C# namespace to use for generated code.</param>
-    /// <returns>The generated C# code.</returns>
-    private IEnumerable<(ElmLibrary library, string cSharp)> GenerateCSharp(
-        LibrarySetCSharpCodeGenerator cSharpCodeProcessor,
-        LibrarySet librarySet,
-        DefinitionDictionary<CqlDefinition> librarySetDefinitions,
-        string? @namespace) =>
-        cSharpCodeProcessor
-            .GenerateEachLibraryToCSharp(
-                librarySet,
-                librarySetDefinitions,
-                @namespace,
-                errorStrategy => errorStrategy
-                                 .SetContinuation(BatchProcessExceptionContinuation)
-                                 .AddLoggerExceptionHandler(
-                                     _services.Logger,
-                                     (library, log) => log("Could not generate definitions into C#: {lib}", library.VersionedLibraryIdentifier)),
-                library => _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.VersionedLibraryIdentifier));
-
-    /// <summary>
-    /// Generates the C# code for the libraries, using the typed-IR code generator
-    /// (see <see cref="ElmToolkitConfig.UseIrPipeline"/>).
+    /// Generates the C# code for the libraries, using the typed-IR code generator.
     /// </summary>
     /// <param name="cSharpCodeProcessor">The typed-IR C# code processor to use.</param>
     /// <param name="librarySet">The set of libraries to generate code for.</param>
@@ -278,34 +248,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                 library => _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.VersionedLibraryIdentifier));
 
     /// <summary>
-    /// Builds the library set definitions.
-    /// </summary>
-    /// <param name="librarySetExpressionBuilderScoped">The library set expression builder to use.</param>
-    /// <param name="librarySet">The set of libraries to build definitions for.</param>
-    /// <returns>The dictionary of library set definitions.</returns>
-    private DefinitionDictionary<CqlDefinition> BuildLibrarySetDefinitions(
-        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped,
-        LibrarySet librarySet)
-    {
-        DefinitionDictionary<CqlDefinition> librarySetDefinitions = new();
-        librarySetExpressionBuilderScoped
-            .BuildEachLibraryDefinitions(
-                librarySet,
-                librarySetDefinitions,
-                errorStrategy => errorStrategy
-                                 .SetContinuation(BatchProcessExceptionContinuation)
-                                 .AddLoggerExceptionHandler(
-                                     _services.Logger,
-                                     (library, logMessage) =>
-                                         logMessage("Could not convert ELM into definitions for {id}", library.VersionedLibraryIdentifier)),
-                library => _services.Logger.LogInformation("Converting ELM Library into definitions for {id}", library.VersionedLibraryIdentifier))
-            .ForEach(); // Important to enumerate
-        return librarySetDefinitions;
-    }
-
-    /// <summary>
-    /// Builds the library set definitions, using the typed-IR expression builder
-    /// (see <see cref="ElmToolkitConfig.UseIrPipeline"/>).
+    /// Builds the library set definitions, using the typed-IR expression builder.
     /// </summary>
     /// <param name="librarySetExpressionBuilderScoped">The typed-IR library set expression builder to use.</param>
     /// <param name="librarySet">The set of libraries to build definitions for.</param>

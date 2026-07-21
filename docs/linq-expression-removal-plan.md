@@ -1,22 +1,27 @@
 # Replacing System.Linq.Expressions with a typed IR
 
-Status: **phases 0–1 merged** ([#1311](https://github.com/FirelyTeam/firely-cql-sdk/pull/1311));
-phases 2–4 implemented and in review as a stacked PR chain
+Status: **all phases complete.** Phases 0–1 merged to develop
+([#1311](https://github.com/FirelyTeam/firely-cql-sdk/pull/1311)); phases 2–5 merged to
+`feature/linq-expr-removal` as a stacked PR chain
 ([#1331](https://github.com/FirelyTeam/firely-cql-sdk/pull/1331) →
 [#1340](https://github.com/FirelyTeam/firely-cql-sdk/pull/1340) →
-[#1344](https://github.com/FirelyTeam/firely-cql-sdk/pull/1344), aggregating onto
-`feature/linq-expr-removal`); phase 5 golden parity is proven on all three corpora: RR23,
-dqm-content-qicore-2025 (CMS56), and the complete HEDIS 2025 corpus (382 libraries,
-byte-identical between pipelines; the one initially-missing ELM file turned out to be a
-`.gitignore` casualty — `coverage*.json` matched `Coverages-2025.2.1.json` — and is
-restored). The two HEDIS-surfaced blocking bugs
-([#1361](https://github.com/FirelyTeam/firely-cql-sdk/issues/1361),
-[#1362](https://github.com/FirelyTeam/firely-cql-sdk/issues/1362)) are fixed, six further
-cosmetic divergence classes were aligned (see "Findings from phase 5" and the post-parity
-ledger), and both permanent `Hedis2025.GoldenTests` guards pass un-skipped in the
-`Firely.Cql.Sdk.Integration.Runner` submodule. Phases 2–5 are merged to
-`feature/linq-expr-removal`; the remaining flip-over decision (default `UseIrPipeline`,
-then phase 6) happens on that branch before it merges to develop.
+[#1344](https://github.com/FirelyTeam/firely-cql-sdk/pull/1344) →
+[#1346](https://github.com/FirelyTeam/firely-cql-sdk/pull/1346) →
+[#1378](https://github.com/FirelyTeam/firely-cql-sdk/pull/1378)) with golden parity proven
+byte-identical between pipelines on all three corpora: RR23, dqm-content-qicore-2025
+(CMS56), and the complete HEDIS 2025 corpus (382 libraries; the two HEDIS-surfaced blocking
+bugs [#1361](https://github.com/FirelyTeam/firely-cql-sdk/issues/1361) /
+[#1362](https://github.com/FirelyTeam/firely-cql-sdk/issues/1362) fixed, six cosmetic
+divergence classes aligned — see the post-parity ledger). Phase 6 then deleted the
+Expression-based pipeline outright (−8,097 lines): the `UseIrPipeline` flag is gone (never
+released, so removed rather than deprecated), the typed IR is the only pipeline, and every
+test suite plus the HEDIS compile-all guard runs through it. `GeneratedCodeAttribute`'s
+tool version was **not** bumped — a deliberate deviation from the plan below, since the
+IR pipeline's output is byte-identical to the old writer's. The old pipeline's parity
+reference is its final commit,
+[`85207efd5`](https://github.com/FirelyTeam/firely-cql-sdk/commit/85207efd5). What remains
+is merging `feature/linq-expr-removal` to develop and the deferred post-parity cleanups
+(checklist below).
 
 ## Context
 
@@ -227,23 +232,46 @@ one exercises:
 Unlike RR23 and dqm-content-qicore-2025 (whose sources are public and openly licensed),
 the full HEDIS 2025 corpus is NCQA-licensed commercial content, so it cannot live in this
 (public) repo's `LibrarySets/` the way those two do. It's vendored instead in the private
-`Firely.Cql.Sdk.Integration.Runner` repo (`Hedis2025/`), with a permanent golden-parity
-test alongside it, `Hedis2025.GoldenTests` — currently `[Fact(Skip = ...)]`, pointing at
-#1361/#1362, to be un-skipped once both are fixed. Neither bug is being deferred under the
-preserve-vs-fix policy above — both are new defects introduced by the IR port itself (not
-old-pipeline bugs being faithfully replicated), so both block phase 5's byte-identical-output
-requirement and must be fixed before the default flips.
+`Firely.Cql.Sdk.Integration.Runner` repo (`Hedis2025/`), with a permanent guard alongside
+it, `Hedis2025.GoldenTests`. During phases 2–5 that guard asserted byte-identical generated
+C# between the two pipelines across the whole corpus (both #1361 and #1362 — new defects
+introduced by the IR port itself, not old-pipeline bugs being faithfully replicated — were
+fixed to make it pass). Phase 6 deleted the Expression-based pipeline, so the comparison
+target no longer exists; the guard is now `HEDIS_2025_CompilesToAssemblies`, which
+exercises the IR pipeline end to end over all 382 libraries.
 
 ### Phase 6 checklist (accumulated `FIXME(phase6)` markers)
 
-- Unify the IR binder's `InvalidOperationException` + `FormatCannotBindMessage` with
-  `CannotBindToCqlOperatorError` (generalize the error type off `Expression[]`).
-- Relocate `CqlOperatorsMethodsCache` out of the deleted `CqlOperatorsBinder`.
-- Consolidate the duplicated assign-to-type helpers (`IrExpressionExtensions` vs. the
-  binder's private phase-3 copies).
+Done in phase 6 itself:
+
+- ~~Unify the IR binder's `InvalidOperationException` + `FormatCannotBindMessage` with
+  `CannotBindToCqlOperatorError` (generalize the error type off `Expression[]`).~~
+  Done — the error type now carries `Type[]`.
+- ~~Relocate `CqlOperatorsMethodsCache` out of the deleted `CqlOperatorsBinder`.~~
+  Done — now `Cql.Compiler\Ir\CqlOperatorsMethodsCache.cs`.
+- ~~Consolidate the duplicated assign-to-type helpers (`IrExpressionExtensions` vs. the
+  binder's private phase-3 copies).~~ Done — consolidated onto `IrExpressionExtensions`.
+- ~~Review #1343.~~ Retired — develop's semi-join compilation of `with`/`without`
+  (#1366) replaced `WithToSelectManyBody`, and the IR side ports it as
+  `WithToExistenceCheck`.
+
+Deferred to post-merge cleanup (no behavior change, all parity-preserved):
+
 - Revisit `IrCodeDefinition.ReturnType` (parity-preserved `typeof(CqlCodeDefinition)`).
-- Fix the tracked upstream bugs in one place: #1341, #1342; review #1343; close #1345.
-- Remove the `NOTE(phase3)`/`NOTE(phase4)` markers as each is resolved.
+- Fix the tracked upstream bugs in one place: #1341, #1342; close #1345.
+- Drop the now-redundant `Ir` prefix from the IR-side type names (e.g.
+  `IrLibrarySetCSharpCodeGenerator`) now that there is no Expression-side counterpart
+  to disambiguate from.
+- Scrub the migration narrative from doc comments: the "IR counterpart of the old X" /
+  "phase N of the Linq.Expressions removal" framing (and, with the rename above, the
+  `Ir*` mentions) made sense while both pipelines coexisted on the feature branch, but
+  reads as noise once this is simply *the* pipeline — describe what each type does,
+  and leave the history to this document and to commit `85207efd5`. This includes the
+  `<c>OldTypeName</c>` plain-text mentions that replaced the unresolvable
+  `<see cref=""/>` references when the old types were deleted.
+- Replace the hoisted zero-parameter local functions for conditional chains with native
+  `if`/`else` statements (an old-writer shape kept for golden parity).
+- Remove the remaining `NOTE(phase3)`/`NOTE(phase4)` markers as each is resolved.
 
 ### Findings from phases 0–1
 

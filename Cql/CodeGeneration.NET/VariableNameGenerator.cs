@@ -22,13 +22,6 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// Create a new VariableNameGenerator with an (optional) set of extra reserved variable names
         /// introduced in a scope, which continues naming where the parent scope left off.
         /// </summary>
-        public VariableNameGenerator ForNewScope(IEnumerable<ParameterExpression>? scopeVariables)
-        {
-            var newReservations = scopeVariables?.Where(p => p.Name is not null).Select(p => p.Name!);
-            return ForNewScope(newReservations);
-        }
-
-        /// <inheritdoc cref="ForNewScope(IEnumerable{ParameterExpression}?)"/>
         public VariableNameGenerator ForNewScope(IEnumerable<string>? scopeNames)
         {
             var newGenerator = new VariableNameGenerator(_letters, Reserved.Concat(scopeNames ?? []), Postfix);

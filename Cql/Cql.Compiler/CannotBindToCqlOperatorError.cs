@@ -10,9 +10,17 @@ using Hl7.Cql.Exceptions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Compiler;
+
+/// <summary>
+/// Signals that no <see cref="Hl7.Cql.Operators.ICqlOperators"/> overload could be bound for a
+/// method call. Shared by both the (Ir) expression builder pipeline's binders; it only needs the
+/// argument <see cref="Type"/>s to format its message, not the expressions/IR nodes that produced
+/// them, so it is expression-representation-agnostic (generalized off <c>Expression[]</c> in
+/// phase 6 of the Linq.Expressions removal, see <c>docs/linq-expression-removal-plan.md</c>).
+/// </summary>
 internal readonly record struct CannotBindToCqlOperatorError(
     string MethodName,
-    Expression[] MethodArguments,
+    Type[] MethodArgumentTypes,
     Type[] GenericTypeArguments,
     IReadOnlyCollection<MethodInfo> AvailableMethods,
     MethodCSharpFormat? MethodCSharpFormat = null) : ICqlError
@@ -22,7 +30,7 @@ internal readonly record struct CannotBindToCqlOperatorError(
         StringBuilder sb = new();
         sb.Append("No suitable method could be bound from:");
         sb.Append(Defaults.NextItem);
-        sb.AppendCSharp(MethodName, MethodArguments, GenericTypeArguments, MethodCSharpFormat);
+        sb.AppendCSharp(MethodName, MethodArgumentTypes, GenericTypeArguments, MethodCSharpFormat);
         if (AvailableMethods.Count > 0)
         {
             sb.Append('\n');

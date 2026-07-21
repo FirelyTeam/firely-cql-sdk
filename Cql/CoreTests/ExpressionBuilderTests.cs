@@ -12,6 +12,7 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Fhir.Model;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Ir;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
@@ -35,7 +36,7 @@ namespace CoreTests
             using var servicesScope = serviceProvider.CreateScope();
             var elm = new FileInfo(Path.Combine("Input", "ELM", "Test", "Aggregates-1.0.0.json"));
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmPackage);
+            var definitions = servicesScope.ServiceProvider.GetRequiredService<IrLibraryExpressionBuilder>().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -47,7 +48,7 @@ namespace CoreTests
             using var servicesScope = serviceProvider.CreateScope();
             var elm = new FileInfo(Path.Combine("Input", "ELM", "HL7", "FHIRConversionTest.json"));
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmPackage);
+            var definitions = servicesScope.ServiceProvider.GetRequiredService<IrLibraryExpressionBuilder>().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -59,7 +60,7 @@ namespace CoreTests
             using var servicesScope = serviceProvider.CreateScope();
             var elm = new FileInfo(Path.Combine("Input", "ELM", "Test", "QueriesTest-1.0.0.json"));
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmPackage);
+            var definitions = servicesScope.ServiceProvider.GetRequiredService<IrLibraryExpressionBuilder>().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -78,7 +79,7 @@ namespace CoreTests
             var librarySet = new LibrarySet();
             librarySet.LoadLibraries(files);
 
-            var librarySetExpressionBuilder = servicesScope.ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
+            var librarySetExpressionBuilder = servicesScope.ServiceProvider.GetRequiredService<IrLibrarySetExpressionBuilder>();
             var definitions = librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
@@ -105,7 +106,7 @@ namespace CoreTests
 
             // Act
             var definitions = servicesScope.ServiceProvider
-                                           .GetRequiredService<LibraryExpressionBuilder>()
+                                           .GetRequiredService<IrLibraryExpressionBuilder>()
                                            .ProcessLibrary(elmLibrary);
             // Assert
             Assert.IsNotNull(definitions);
@@ -139,7 +140,7 @@ namespace CoreTests
 
             // Act
             var definitions = servicesScope.ServiceProvider
-                                           .GetRequiredService<LibraryExpressionBuilder>()
+                                           .GetRequiredService<IrLibraryExpressionBuilder>()
                                            .ProcessLibrary(elmLibrary);
             // Assert
             Assert.IsNotNull(definitions);
@@ -177,7 +178,7 @@ namespace CoreTests
 
             // Act - building the library exercises the CqlConcept -> CodeableConcept conversion
             var definitions = servicesScope.ServiceProvider
-                                           .GetRequiredService<LibraryExpressionBuilder>()
+                                           .GetRequiredService<IrLibraryExpressionBuilder>()
                                            .ProcessLibrary(elmLibrary);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
@@ -259,7 +260,7 @@ namespace CoreTests
             Assert.AreEqual(typeof(IEnumerable<object>), lambda.ReturnType);
         }
 
-        private static Hl7.Cql.Runtime.DefinitionDictionary<Hl7.Cql.Abstractions.CqlDefinition> ProcessLibraryWithChoiceResult(
+        private static IrDefinitionDictionary ProcessLibraryWithChoiceResult(
             Hl7.Cql.Elm.ChoiceTypeSpecifier choiceType)
         {
             using var serviceProvider = BuildServiceProvider();
@@ -287,7 +288,7 @@ namespace CoreTests
                 ],
             };
 
-            return servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmLibrary);
+            return servicesScope.ServiceProvider.GetRequiredService<IrLibraryExpressionBuilder>().ProcessLibrary(elmLibrary);
         }
 
         private static Library CreateElmLibrary(CqlLibraryString libraryString)

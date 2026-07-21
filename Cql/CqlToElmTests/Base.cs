@@ -14,7 +14,7 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Model;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
-using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Compiler.Ir;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.Invocation.Toolkit;
 
@@ -40,10 +40,10 @@ namespace Hl7.Cql.CqlToElm.Test
             ctx ??= DefaultCqlContext;
             var elmToolkit = CreateElmToolkit();
             var expressionName = "TempExpression";
-            var definition = new CqlExpressionDefinition(elmToolkit.Lambda(expression), expressionName);
+            var definition = new IrExpressionDefinition(elmToolkit.Lambda(expression), expressionName);
             var elmToolkitServices = elmToolkit;
             LibrarySet librarySet = new("TempLibrarySet", library);
-            CqlDefinitionDictionary definitions = new();
+            IrDefinitionDictionary definitions = new();
             definitions.AddDefinition(library.VersionedLibraryIdentifier, expressionName, definition);
 
             var generateCSharp =

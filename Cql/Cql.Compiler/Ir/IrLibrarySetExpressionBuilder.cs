@@ -13,7 +13,7 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of <see cref="LibrarySetExpressionBuilder"/>. This is a mechanical port; see
+/// IR counterpart of the old <c>LibrarySetExpressionBuilder</c>. This is a mechanical port; see
 /// the remarks on <see cref="IrExpressionBuilderContext"/>.
 /// </summary>
 internal class IrLibrarySetExpressionBuilder(

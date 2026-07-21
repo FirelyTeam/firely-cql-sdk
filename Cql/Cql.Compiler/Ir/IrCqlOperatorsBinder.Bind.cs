@@ -7,12 +7,13 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Operators;
 
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of <see cref="CqlOperatorsBinder"/>'s <c>.Bind.cs</c> partial: overload resolution
+/// IR counterpart of the old (deleted) <c>CqlOperatorsBinder</c>'s <c>.Bind.cs</c> partial: overload resolution
 /// (<see cref="ResolveMethodInfoWithPotentialArgumentConversions"/>), candidate scoring, generic
 /// inference, and the trailing-null precision retry. This is a mechanical port; see the remarks
 /// on <see cref="IrCqlOperatorsBinder"/>.
@@ -20,11 +21,10 @@ namespace Hl7.Cql.Compiler.Ir;
 #pragma warning disable CS1591
 partial class IrCqlOperatorsBinder
 {
-    // The method-info cache is Expression-free (pure reflection over ICqlOperators), so it is
-    // reused directly from the old binder rather than ported. The type is nested inside the old
-    // (internal) CqlOperatorsBinder, so it stays reachable until phase 6 deletes that class.
-    // NOTE(phase6): relocate CqlOperatorsMethodsCache out of the old binder when it is deleted.
-    private static readonly CqlOperatorsBinder.CqlOperatorsMethodsCache ICqlOperatorsMethods = new();
+    // The method-info cache is Expression-free (pure reflection over ICqlOperators); phase 6
+    // relocated it out of the old (deleted) CqlOperatorsBinder into its own file so both binders
+    // could share it while the old one still existed. See CqlOperatorsMethodsCache.cs.
+    private static readonly CqlOperatorsMethodsCache ICqlOperatorsMethods = new();
 
     ///  <summary>
     ///
@@ -96,12 +96,13 @@ partial class IrCqlOperatorsBinder
                 return (candidate.method, candidate.arguments);
 
             case (method: null, throwError: true):
-                // FIXME(phase6): unify with CannotBindToCqlOperatorError, which requires
-                // Expression[] and cannot be constructed from IrExpression[] without modifying
-                // the shared (Expression-based) error type. Build the same message shape by
-                // hand until the old binder is deleted and the error type can be generalized.
-                throw new InvalidOperationException(
-                    FormatCannotBindMessage(methodName, methodArguments, genericTypeArguments));
+                throw new CannotBindToCqlOperatorError(
+                        methodName,
+                        methodArguments.SelectToArray(a => a.Type),
+                        genericTypeArguments,
+                        ICqlOperatorsMethods.GetMethodsByName(methodName),
+                        Defaults.MethodCSharpFormat)
+                    .ToException();
 
             case (method: null, throwError: false):
                 // No need to log here, since the caller didn't care about if the method
@@ -352,32 +353,5 @@ partial class IrCqlOperatorsBinder
             : $"<{string.Join(", ", genericTypeArguments.Select(t => t.ToCSharpString(Defaults.TypeCSharpFormat)))}>";
         var argsStr = string.Join(", ", args.Select(a => a.Type.ToCSharpString(Defaults.TypeCSharpFormat)));
         return $"{methodName}{typeArgsStr}({argsStr})";
-    }
-
-    /// <summary>
-    /// Minimal, IR-side replacement for <see cref="CannotBindToCqlOperatorError"/> (which
-    /// requires <c>Expression[]</c> and is left untouched per the phase-3 brief). Mirrors
-    /// <see cref="CannotBindToCqlOperatorError.GetMessage"/>.
-    /// FIXME(phase6): unify once the old binder and its Expression-based error type are deleted.
-    /// </summary>
-    private static string FormatCannotBindMessage(string methodName, IrExpression[] methodArguments, Type[] genericTypeArguments)
-    {
-        StringBuilder sb = new();
-        sb.Append("No suitable method could be bound from:");
-        sb.Append(Defaults.NextItem);
-        sb.Append(FormatMethodCall(methodName, methodArguments, genericTypeArguments));
-
-        var availableMethods = ICqlOperatorsMethods.GetMethodsByName(methodName);
-        if (availableMethods.Count > 0)
-        {
-            sb.Append('\n');
-            sb.Append("to the following method overloads:");
-            foreach (var availableMethod in availableMethods)
-            {
-                sb.Append(Defaults.NextItem);
-                sb.AppendCSharp(availableMethod, Defaults.MethodCSharpFormat);
-            }
-        }
-        return sb.ToString();
     }
 }

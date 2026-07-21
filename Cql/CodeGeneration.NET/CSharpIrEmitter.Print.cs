@@ -217,6 +217,24 @@ internal partial class CSharpIrEmitter
             isb.AppendLine($"? {print(conditional.IfTrue)}");
             isb.Append($": {print(conditional.IfFalse)})");
         }
+
+        // BuildConditionalExpression's outer cast: the old writer wrapped the ternary in an
+        // explicit cast to the conditional's type whenever a branch node's Type differed from
+        // it. Without the cast, a branch printing as a bare literal (e.g. "5") makes C# infer
+        // the ternary as the non-nullable underlying type, which fails to compile as soon as
+        // an enclosing context needs the nullable type (e.g. an "is null" check — CS0037).
+        //
+        // This is the literal port of the old rule — plain node-type inequality against the
+        // conditional's own type. The IR builder assigns branch and conditional types through
+        // the same mechanically-ported paths the old builder used (CQL literals type as the
+        // nullable ELM type; TranslateArg's fallback constants type as their runtime type), so
+        // this fires in exactly the same cases the old writer cast. Two earlier re-derived
+        // triggers (any-constant-branch; all-constant-branches) both diverged from the old
+        // writer's HEDIS 2025 output — 13 and 5 of 382 libraries respectively — because the
+        // truth is carried by the node types, not by the shape of the printed literals.
+        if (conditional.IfTrue.Type != conditional.Type || conditional.IfFalse.Type != conditional.Type)
+            return $"({_typeToCSharpConverter.ToCSharp(conditional.Type)}){isb}";
+
         return isb;
     }
 
@@ -250,7 +268,21 @@ internal partial class CSharpIrEmitter
         if (property.Receiver is not { } receiver)
             return $"{_typeToCSharpConverter.ToCSharp(property.Member.DeclaringType!)}.{property.Member.Name}";
 
-        var target = child(receiver).Code.ParenthesizeIfNeeded();
+        // A property access whose receiver is a null constant (e.g. reading .low/.high off a
+        // structurally-decomposed interval literal whose own value is null) needs the receiver
+        // printed with an explicit type -- "default(SomeType)?.member" -- rather than the bare
+        // "default" PrintConstant otherwise uses for a null reference-type constant. Bare
+        // "default" only resolves its type from an enclosing TARGET-TYPED context (a variable
+        // initializer, a return, a cast) -- which member access does not provide, so
+        // "default?.member" fails to compile (CS8716: "There is no target type for the default
+        // literal"). This is old-pipeline-equivalent-safe: the old writer's PropagateNull /
+        // NullConditionalMemberExpression never happened to receive a bare constant receiver
+        // (its property sources were always already-hoisted locals), so this exact shape wasn't
+        // reachable there; this is a genuinely new corner case in the IR pipeline (IrConstant is
+        // always print-inlined, never hoisted to a local first) rather than a parity fix.
+        var target = receiver is IrConstant { Value: null }
+            ? $"default({_typeToCSharpConverter.ToCSharp(receiver.Type)})"
+            : child(receiver).Code.ParenthesizeIfNeeded();
 
         // The old writer's GetMemberAccessNullabilityOperator: a plain (non-null-conditional)
         // property access still prints "?." when the receiver's static type is a nullable
@@ -355,7 +387,7 @@ internal partial class CSharpIrEmitter
         return $"{operand} is {typeName}";
     }
 
-    private static string PrintBinary(IrBinary binary, Func<IrExpression, Atom> child)
+    private string PrintBinary(IrBinary binary, Func<IrExpression, Atom> child)
     {
         // ((T?)a) ?? b or (a as T?) ?? b, where a is a non-nullable T, reduces to just a — the
         // old RedundantCastsTransformer's coalesce rule, which matched both Convert AND TypeAs
@@ -387,7 +419,8 @@ internal partial class CSharpIrEmitter
                 return child(binary.Right).Code;
         }
 
-        var left = child(binary.Left).Code.ParenthesizeIfNeeded();
+        var leftAtom = child(binary.Left);
+        var left = leftAtom.Code.ParenthesizeIfNeeded();
         // LambdaDefinitionWriter.BuildBinaryExpression parenthesizes ONLY the left operand
         // ("leftCode = leftCode.ParenthesizeIfNeeded();") — rightCode is used as-is, verbatim,
         // however it printed (e.g. an "as" cast: "g_ ?? h_ as IEnumerable<CodeableConcept>",
@@ -397,10 +430,21 @@ internal partial class CSharpIrEmitter
 
         return binary.Op switch
         {
+            // LambdaDefinitionWriter.BuildBinaryExpression's guards, ported: printing a bare
+            // constant literal (e.g. the int literal "1") in an "is null" pattern is illegal
+            // C# (CS0037 -- the literal's inferred type is the non-nullable value type, which
+            // "is null" can't match), unlike "==" which target-types the literal against the
+            // nullable operand. IsNull(<non-null-constant>) is always false and
+            // IsNull(<null constant>) is always true, so these fold directly to the boolean
+            // literal instead of emitting the (potentially illegal) pattern text. This is only
+            // reachable from IsNull (the sole builder of IrBinaryOp.Equal), so binary.Left is
+            // never a boxing-cast-wrapped constant here.
+            IrBinaryOp.Equal when right is "null" or "default" && binary.Left is IrConstant { Value: ValueType } => "false",
+            IrBinaryOp.Equal when right is "null" or "default" && binary.Left is IrConstant { Value: null } => "true",
             // "default" rewrites to "null" in patterns: a default literal is not a legal
             // pattern (CS8505) — the old writer's rule.
-            IrBinaryOp.Equal when right is "null" or "default" => $"{left} is null",
-            IrBinaryOp.NotEqual when right is "null" or "default" => $"{left} is not null",
+            IrBinaryOp.Equal when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is null",
+            IrBinaryOp.NotEqual when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is not null",
             IrBinaryOp.Equal => $"{left} == {right}",
             IrBinaryOp.NotEqual => $"{left} != {right}",
             IrBinaryOp.Coalesce => $"{left} ?? {right}",
@@ -409,6 +453,35 @@ internal partial class CSharpIrEmitter
             _ => throw new NotSupportedException($"Don't know how to print binary operator {binary.Op}."),
         };
     }
+
+    /// <summary>
+    /// The operand text for an "is (not) null" pattern. Safety net with no old-writer
+    /// counterpart: when the operand is a conditional that printed inline as a ternary of
+    /// bare constant literals (no outer cast — see <see cref="PrintInlineConditional"/>),
+    /// the ternary's natural C# type is the non-nullable value type (or, with a null
+    /// branch, no natural type at all), making the null pattern illegal (CS0037/CS0173).
+    /// Casting to the conditional's IR type restores the nullable operand. The old writer
+    /// emitted the same broken pattern text for this shape, so it cannot occur in any
+    /// parity corpus (all of which compile) — it is only reachable from synthetic trees
+    /// such as the XmlTest equality harness wrapping IsNull around a constant conditional.
+    /// </summary>
+    private string NullPatternOperand(Atom leftAtom, string left) =>
+        leftAtom.Node is IrConditional conditional && TernaryPrintsWithoutNaturalNullableType(conditional)
+            ? $"(({_typeToCSharpConverter.ToCSharp(leftAtom.Type)}){left})"
+            : left;
+
+    private static bool TernaryPrintsWithoutNaturalNullableType(IrConditional conditional) =>
+        // PrintInlineConditional adds no outer cast in this case...
+        conditional.IfTrue.Type == conditional.Type && conditional.IfFalse.Type == conditional.Type
+        // ...and both branches print as target-typed literals contributing no nullable type.
+        && PrintsAsBareLiteral(conditional.IfTrue) && PrintsAsBareLiteral(conditional.IfFalse);
+
+    private static bool PrintsAsBareLiteral(IrExpression node) => node switch
+    {
+        IrConstant { Value: ValueType or null } => true,
+        IrConditional nested => TernaryPrintsWithoutNaturalNullableType(nested),
+        _ => false,
+    };
 
     private string PrintNew(IrNew @new, Func<IrExpression, Atom> child)
     {
@@ -426,6 +499,27 @@ internal partial class CSharpIrEmitter
     // constructor arguments either.
     private string PrintMemberInit(IrMemberInit memberInit, Func<IrExpression, Atom> child)
     {
+        // BuildMemberInitExpression's tuple redirect, ported: a MemberInit whose target type
+        // prints as a C# value tuple (ShouldUseTupleType) cannot use object-initializer syntax
+        // at all -- a value tuple's element names are pure compile-time aliases for
+        // Item1/Item2/..., not real settable members, so "new (…)? { x = ... }" is illegal
+        // (CS0117). It must print positionally instead, exactly like IrTupleInit
+        // (PrintTupleInit) -- including "default" for any unbound property. This MemberInit
+        // shape reaches here from ChangeType's cross-tuple-type conversion (copying one tuple's
+        // fields into another tuple type during a CQL "as"/comparison-normalization), which,
+        // unlike IrExpressionBuilderContext.Query.cs's Tuple() builder, has no reason to ever
+        // choose the IrTupleInit node kind itself, so the redirect has to happen here at print
+        // time instead, just like the old writer did.
+        if (_typeToCSharpConverter.ShouldUseTupleType(memberInit.Type))
+        {
+            var tupleCodeByName = memberInit.Bindings.ToDictionary(b => b.Member.Name, b => child(b.Value).Code);
+            var tupleElements = string.Join(", ",
+                _typeToCSharpConverter
+                    .GetTupleProperties(memberInit.Type)
+                    .Select(p => tupleCodeByName.GetValueOrDefault(p.Name, "default")));
+            return $"({_namingConventions.TupleMetadataFieldName(memberInit.Type)}, {tupleElements})";
+        }
+
         var typeName = _typeToCSharpConverter.ToCSharp(memberInit.Type);
         // The builder only member-inits with parameterless constructors, and the old writer's
         // BuildMemberInitExpression printed "new T" accordingly (no argument list) — but if a
@@ -482,10 +576,23 @@ internal partial class CSharpIrEmitter
 
     /// <summary>
     /// The static C# type of the code printed for a simple node, which can be narrower than
-    /// its IR type: constants typed as object print as their underlying literal.
+    /// its IR type: constants typed as object print as their underlying literal, and a
+    /// value-typed-operand cast to object is boxing-elided (see <see cref="PrintCast"/>) so it
+    /// contributes no cast token at all -- the printed type is then whatever printed underneath
+    /// it. Ported from LambdaDefinitionWriter.GetPrintedType, whose first case recursed through
+    /// exactly this StripBoxing-eligible shape; the port initially covered only the constant
+    /// case, missing the recursion -- so a cast like "cast (true as Any) as Decimal" (the inner
+    /// "as Any" boxing-elided to bare "true") was misjudged as printing an object-typed operand,
+    /// skipping the "route through object" rewrite the outer cast needs and printing the illegal
+    /// "(decimal?)true" (CS0030) instead of "(decimal?)((object)true)".
     /// </summary>
     private static Type GetPrintedType(IrExpression node) =>
-        node is IrConstant { Type.IsClass: true, Value: { } value } && node.Type == typeof(object)
-            ? value.GetType()
-            : node.Type;
+        node switch
+        {
+            IrCast cast when cast.Type == typeof(object) && (cast.Operand.Type.IsValueType || !cast.FromCqlAsOperator)
+                => GetPrintedType(cast.Operand),
+            IrConstant { Type.IsClass: true, Value: { } value } when node.Type == typeof(object)
+                => value.GetType(),
+            _ => node.Type,
+        };
 }

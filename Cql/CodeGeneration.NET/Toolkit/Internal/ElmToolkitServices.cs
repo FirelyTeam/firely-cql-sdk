@@ -24,7 +24,6 @@ internal readonly record struct ElmToolkitServices(
     ServiceProvider ServiceProvider,
     ILogger<ElmToolkit> Logger,
     AssemblyCompiler AssemblyCompiler,
-    LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator,
     IrLibrarySetCSharpCodeGenerator IrLibrarySetCSharpCodeGenerator)
 {
     public static ElmToolkitServices Create(
@@ -46,7 +45,6 @@ internal readonly record struct ElmToolkitServices(
         var expressionBuilderSettings = config.ToExpressionBuilderSettings();
         AddCqlCompilerServices(services, config.LRUCacheSize, expressionBuilderSettings);
         services.TryAddSingleton<TypeToCSharpConverter>();
-        services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
         services.TryAddSingleton<IrLibrarySetCSharpCodeGenerator>();
         services.TryAddSingleton<AssemblyCompiler>();
     }
@@ -75,17 +73,12 @@ internal readonly record struct ElmToolkitServices(
         });
 
         services.TryAddSingleton<LibraryPreprocessorBuilder>();
-        services.TryAddSingleton<CqlOperatorsBinder>();
-        services.TryAddSingleton<CqlContextBinder>();
         services.TryAddSingleton(_ => expressionBuilderSettings);
         services.TryAddScoped<TupleBuilderCache>();
-        services.TryAddScoped<LibrarySetExpressionBuilder>();
-        services.TryAddScoped<LibraryExpressionBuilder>();
-        services.TryAddScoped<ExpressionBuilder>();
 
-        // Typed-IR pipeline (docs/linq-expression-removal-plan.md), selected via
-        // ElmToolkitConfig.UseIrPipeline. Shares TypeResolver/TypeConverter/TupleBuilderCache/
-        // LibraryPreprocessorBuilder with the Expression-based pipeline above.
+        // Typed-IR pipeline (docs/linq-expression-removal-plan.md) -- the sole builder/generator
+        // pipeline as of phase 6. Shares TypeResolver/TypeConverter/TupleBuilderCache/
+        // LibraryPreprocessorBuilder above.
         services.TryAddSingleton<IrCqlOperatorsBinder>();
         services.TryAddSingleton<IrCqlContextBinder>();
         services.TryAddScoped<IrExpressionBuilder>();
@@ -97,7 +90,6 @@ internal readonly record struct ElmToolkitServices(
 
     public ServiceProvider ServiceProvider { get; } = ServiceProvider;
     public AssemblyCompiler AssemblyCompiler { get; } = AssemblyCompiler;
-    public LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator { get; } = LibrarySetCSharpCodeGenerator;
     public IrLibrarySetCSharpCodeGenerator IrLibrarySetCSharpCodeGenerator { get; } = IrLibrarySetCSharpCodeGenerator;
     public ElmToolkitScopedState CreateScopedState() => new(ServiceProvider.CreateScope());
 }

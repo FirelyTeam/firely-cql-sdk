@@ -19,7 +19,7 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <summary>
 /// Processes a definition dictionary of <see cref="IrDefinition"/> into a .NET class per library.
 ///
-/// <para>IR counterpart of <see cref="LibrarySetCSharpCodeGenerator"/> (phase 5 of the
+/// <para>IR counterpart of the old <c>LibrarySetCSharpCodeGenerator</c> (phase 5 of the
 /// Linq.Expressions removal, see <c>docs/linq-expression-removal-plan.md</c>): the class
 /// scaffolding (usings, regions, attributes, tuple-metadata fields, singleton/ILibrary
 /// boilerplate) is Expression-free and copied verbatim from the old generator so the two
@@ -45,14 +45,6 @@ internal partial class IrLibrarySetCSharpCodeGenerator
     /// in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
     /// </summary>
     private static string GeneratorToolName { get; } = GetGeneratorToolNameFromAssemblyProductName();
-
-    /// <summary>
-    /// Gets the version of this generator as will appear in the
-    /// <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Version"/>. Shared with the
-    /// old pipeline (<see cref="LibrarySetCSharpCodeGenerator.GeneratorToolVersion"/>) so both
-    /// generate byte-identical headers until the flip-over bumps it.
-    /// </summary>
-    private const string GeneratorToolVersion = LibrarySetCSharpCodeGenerator.GeneratorToolVersion;
 
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
 

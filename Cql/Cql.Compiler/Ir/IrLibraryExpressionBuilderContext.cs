@@ -14,7 +14,7 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of <see cref="LibraryExpressionBuilderContext"/>: orchestrates building all
+/// IR counterpart of the old <c>LibraryExpressionBuilderContext</c>: orchestrates building all
 /// definitions of a single library into an <see cref="IrDefinitionDictionary"/>. This is a
 /// mechanical port; see the remarks on <see cref="IrExpressionBuilderContext"/>.
 /// </summary>

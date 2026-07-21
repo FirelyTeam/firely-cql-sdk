@@ -13,7 +13,7 @@ using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of <see cref="ExpressionBuilder"/>. This is a mechanical port; see the
+/// IR counterpart of the old <c>ExpressionBuilder</c>. This is a mechanical port; see the
 /// remarks on <see cref="IrExpressionBuilderContext"/>.
 /// </summary>
 internal class IrExpressionBuilder(
