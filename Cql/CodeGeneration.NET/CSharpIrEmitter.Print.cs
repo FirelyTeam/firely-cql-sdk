@@ -84,8 +84,15 @@ internal partial class CSharpIrEmitter
             IrMemberInit memberInit => PrintMemberInit(memberInit, child),
             IrTupleInit tupleInit => PrintTupleInit(tupleInit, child),
             IrNewArray newArray => PrintNewArray(newArray, child),
-            IrNewArrayBounds newArrayBounds =>
-                $"new {_typeToCSharpConverter.ToCSharp(newArrayBounds.ElementType)}[{child(newArrayBounds.Length).Code}]",
+            // LambdaDefinitionWriter.BuildNewArrayExpression: "case ExpressionType.NewArrayBounds:
+            // return "[]";" — the old builder (ExpressionBuilderContext.cs) only ever constructs
+            // this node with a literal Expression.Constant(0) bound (empty untyped/typed lists),
+            // and the IR node is built the same way. Guard the zero-length shape explicitly and
+            // fail loudly on anything else instead of silently discarding a real length (the old
+            // writer would have printed "[]" for that too, but no builder path can produce it).
+            IrNewArrayBounds { Length: IrConstant { Value: 0 } } => "[]",
+            IrNewArrayBounds => throw new NotSupportedException(
+                "IrNewArrayBounds with a non-zero length has no print form; only empty arrays are constructed this way."),
             IrThrow @throw => $"throw ({child(@throw.Exception).Code})",
             _ => throw new NotSupportedException($"Don't know how to print an IR node of type {node.GetType().Name}."),
         };
@@ -114,12 +121,75 @@ internal partial class CSharpIrEmitter
     }
 
     /// <summary>
+    /// <c>if(true, A, B) => A</c> / <c>if(false, A, B) => B</c> — the old
+    /// RedundantCastsTransformer's constant-test conditional fold (see #1361), applied
+    /// wherever a conditional is consumed so that, like the old tree-level pre-pass, the
+    /// discarded branch is never linearized and contributes no hoisted statements.
+    /// </summary>
+    internal static IrExpression FoldConstantTest(IrExpression node)
+    {
+        while (node is IrConditional conditional && TryFoldTestToBoolConstant(conditional.Test) is { } test)
+            node = test ? conditional.IfTrue : conditional.IfFalse;
+        return node;
+    }
+
+    /// <summary>
+    /// Resolves a conditional's test to a bool constant when the old visitor pipeline would
+    /// have. The old RedundantCastsTransformer.VisitConditional ran <c>Visit(node.Test)</c>
+    /// BEFORE matching the result against <c>ConstantExpression { Value: true/false }</c>,
+    /// so the test had already been through the transformer's own bottom-up rewrites — in
+    /// particular the VisitBinary coalesce folds. That is how CQL's
+    /// <c>if true then … else null</c> idiom folds in the old pipeline: the builder's If()
+    /// wraps the test via <c>.Coalesce()</c> into <c>Coalesce(Constant(true), Constant(false))</c>,
+    /// VisitBinary's "a (not null) ?? x => a" reduces it to <c>Constant(true)</c>, and only
+    /// then does the conditional fold fire (seen in the HEDIS 2025 corpus: CQL_Common's
+    /// Error/Warning bodies). The folds mirrored here are exactly the transformer's coalesce
+    /// rules over foldable operands; anything else leaves the test unresolved (null).
+    /// </summary>
+    private static bool? TryFoldTestToBoolConstant(IrExpression test)
+    {
+        while (test is IrBinary { Op: IrBinaryOp.Coalesce } coalesce)
+        {
+            // ((T?)a) ?? b / (a as T?) ?? b, a non-nullable => a
+            if (coalesce.Left is IrCast leftCast
+                && Nullable.GetUnderlyingType(leftCast.Type) == leftCast.Operand.Type)
+            {
+                test = leftCast.Operand;
+                continue;
+            }
+
+            // a (not null) ?? x => a
+            if (coalesce.Left is IrConstant { Value: not null })
+            {
+                test = coalesce.Left;
+                continue;
+            }
+
+            var isNullableType = !coalesce.Left.Type.IsValueType
+                || Nullable.GetUnderlyingType(coalesce.Left.Type) is not null;
+
+            // default ?? x => x / null_constant ?? x => x
+            if ((coalesce.Left is IrDefault || coalesce.Left is IrConstant { Value: null }) && isNullableType)
+            {
+                test = coalesce.Right;
+                continue;
+            }
+
+            break;
+        }
+
+        return test is IrConstant { Value: bool value } ? value : null;
+    }
+
+    /// <summary>
     /// Prints an entire subtree as one inline expression — no hoisting at all, calls
     /// included. Used for "simple" conditionals, which the old pipeline returned unvisited
     /// so their whole subtree (the test included, however complex) printed inline.
     /// </summary>
-    internal string PrintFullyInline(IrExpression node) =>
-        node switch
+    internal string PrintFullyInline(IrExpression node)
+    {
+        node = FoldConstantTest(node);
+        return node switch
         {
             IrConstant or IrDefault or IrContextParameter => PrintSimple(node),
             IrLocal local => _assignedNames.TryGetValue(local, out var name)
@@ -131,6 +201,7 @@ internal partial class CSharpIrEmitter
                 "An if-chain cannot print as an inline expression; this subtree should not have been classified inline-only."),
             _ => PrintShallow(node, child => new Atom(PrintFullyInline(child), child)),
         };
+    }
 
     /// <summary>
     /// The old writer's ternary format (BuildConditionalExpression): open paren, test on its
@@ -195,27 +266,45 @@ internal partial class CSharpIrEmitter
 
     private string PrintCast(IrCast cast, Func<IrExpression, Atom> child)
     {
+        // ElmAsExpression.Reduce() (Cql.Compiler/Expressions/ElmAsExpression.cs): "if
+        // (Expression is ConstantExpression { Value: null }) return Constant(null, AsType);" —
+        // an As/Cast wrapping an ALREADY-CONSTANT null collapses to a plain null constant of the
+        // cast's own target type before the old writer ever prints a cast/as token (the call
+        // site is BuildExpression's "ElmAsExpression ea => BuildExpression(ea.Reduce())"). This
+        // is how a HEDIS parameter default's "high: As(asType: Integer, operand: Null)" — the
+        // ELM shape produced by the *plain-type-name* As() branch (old ExpressionBuilderContext.cs,
+        // final `{ }` block; ported at IrExpressionBuilderContext.Operators.cs's As(), same
+        // shape), whose operand goes through the ordinary Null dispatch
+        // ("Null e => NullExpression.ForType(TypeFor(e)!)", i.e. a real ConstantExpression) —
+        // prints as bare "default" rather than "null as int?". It does NOT fire for an IrDefault
+        // operand (built by the OTHER As() branch, the asTypeSpecifier-with-Null-operand special
+        // case, which constructs Expression.Default(type) directly, never a ConstantExpression):
+        // that shape legitimately prints as "null as T"/"(T)null", matching old exactly.
+        if (cast.Operand is IrConstant { Value: null })
+            return PrintConstant(new IrConstant(null, cast.Type));
+
         // Boxing casts are dropped from the output (the C# compiler re-inserts the boxing),
-        // exactly like the old writer's StripBoxing — value-typed operands unconditionally.
+        // exactly like the old writer's StripBoxing — value-typed operands unconditionally
+        // (StripBoxing ran at PRINT time inside BuildUnaryExpression, so it applied to reduced
+        // ElmAsExpression nodes too — the flag below does not exempt them).
         //
         // A reference-typed cast to object is redundant C# too (an implicit reference
         // conversion always exists), and the old RedundantCastsTransformer struck those as
         // well — EXCEPT it could only ever see a cast that already existed as a raw
-        // Convert/TypeAs node when its single pass ran. A cast built from the ELM "as"
-        // operator was instead represented by ElmAsExpression, a lazy wrapper that only
-        // reduces to a real Convert/TypeAs (specifically TypeAs for a non-strict "as", which
-        // this always is here) at print time, i.e. AFTER RedundantCastsTransformer had already
-        // run — such a cast was invisible to it and always survived. That happens precisely
-        // when a non-strict "as"-to-object cast is nested directly around ANOTHER cast (a
-        // Choice-typed union coercion wrapping a CQL "as" cast, e.g. CMS56's case/when/then
-        // branches: "(ad_ as CqlDateTime) as object" — the inner cast node stands for the
-        // ElmAsExpression operand the outer one wrapped). Every other shape — a strict
-        // Cast/Convert to object (e.g. RR23's Operators.Convert argument,
-        // "(object)(e_ as FhirDateTime)"), or an As/Cast wrapping a plain non-cast node (e.g. a
-        // ResolveParameter argument, "c_ as object") — was always a raw Convert/TypeAs from the
-        // start and got stripped like any other redundant reference cast.
+        // Convert/TypeAs node when its single tree pass ran. A cast built by the builder's
+        // As() for an ELM "as"/"cast" operator was instead represented by ElmAsExpression, a
+        // lazy wrapper that only reduces to a real Convert/TypeAs at print time, i.e. AFTER
+        // RedundantCastsTransformer had already run — such a cast was invisible to it and
+        // ALWAYS survived, whatever its operand (CMS56's "(ad_ as CqlDateTime) as object";
+        // HEDIS AMR's "return b_ as object" over a plain definition-call result). Casts from
+        // the conversion helpers (old TryNewAssignToTypeExpression/NewTypeAsExpression, e.g. a
+        // ResolveParameter argument's "as object") were raw Convert/TypeAs from the start and
+        // got stripped like any other redundant reference cast. IrCast.FromCqlAsOperator
+        // records exactly the ElmAsExpression construction sites, replacing the earlier
+        // operand-is-another-cast approximation (which happened to cover RR23/CMS56 but broke
+        // on HEDIS's cast-over-definition-call shapes).
         if (cast.Type == typeof(object)
-            && (cast.Operand.Type.IsValueType || cast.Kind != IrCastKind.As || cast.Operand is not IrCast))
+            && (cast.Operand.Type.IsValueType || !cast.FromCqlAsOperator))
             return child(cast.Operand).Code;
 
         var atom = child(cast.Operand);
@@ -276,7 +365,34 @@ internal partial class CSharpIrEmitter
             && Nullable.GetUnderlyingType(leftCast.Type) == leftCast.Operand.Type)
             return child(leftCast.Operand).Code;
 
+        // The old RedundantCastsTransformer's remaining coalesce folds (#1361). Ordering and
+        // conditions mirror its VisitBinary exactly, and each fold returns before the discarded
+        // side is linearized, so — like the old tree-level rewrite — the dropped operand
+        // contributes no hoisted statements. Without the first fold, CQL's
+        // Message(source, true, ...) idiom prints as the invalid C# `true ?? false` (CS0019).
+        if (binary.Op == IrBinaryOp.Coalesce)
+        {
+            // a (not null) ?? x => a
+            if (binary.Left is IrConstant { Value: not null })
+                return child(binary.Left).Code;
+
+            var isNullableType = !binary.Left.Type.IsValueType || Nullable.GetUnderlyingType(binary.Left.Type) is not null;
+
+            // default ?? x => x
+            if (binary.Left is IrDefault && isNullableType)
+                return child(binary.Right).Code;
+
+            // null_constant ?? x => x
+            if (binary.Left is IrConstant { Value: null } && isNullableType)
+                return child(binary.Right).Code;
+        }
+
         var left = child(binary.Left).Code.ParenthesizeIfNeeded();
+        // LambdaDefinitionWriter.BuildBinaryExpression parenthesizes ONLY the left operand
+        // ("leftCode = leftCode.ParenthesizeIfNeeded();") — rightCode is used as-is, verbatim,
+        // however it printed (e.g. an "as" cast: "g_ ?? h_ as IEnumerable<CodeableConcept>",
+        // never "g_ ?? (h_ as IEnumerable<CodeableConcept>)"). Asymmetric and arguably a latent
+        // bug in the old writer, but replicated faithfully for byte parity.
         var right = child(binary.Right).Code;
 
         return binary.Op switch
@@ -285,11 +401,11 @@ internal partial class CSharpIrEmitter
             // pattern (CS8505) — the old writer's rule.
             IrBinaryOp.Equal when right is "null" or "default" => $"{left} is null",
             IrBinaryOp.NotEqual when right is "null" or "default" => $"{left} is not null",
-            IrBinaryOp.Equal => $"{left} == {right.ParenthesizeIfNeeded()}",
-            IrBinaryOp.NotEqual => $"{left} != {right.ParenthesizeIfNeeded()}",
-            IrBinaryOp.Coalesce => $"{left} ?? {right.ParenthesizeIfNeeded()}",
-            IrBinaryOp.OrElse => $"{left} || {right.ParenthesizeIfNeeded()}",
-            IrBinaryOp.AndAlso => $"{left} && {right.ParenthesizeIfNeeded()}",
+            IrBinaryOp.Equal => $"{left} == {right}",
+            IrBinaryOp.NotEqual => $"{left} != {right}",
+            IrBinaryOp.Coalesce => $"{left} ?? {right}",
+            IrBinaryOp.OrElse => $"{left} || {right}",
+            IrBinaryOp.AndAlso => $"{left} && {right}",
             _ => throw new NotSupportedException($"Don't know how to print binary operator {binary.Op}."),
         };
     }
@@ -300,17 +416,49 @@ internal partial class CSharpIrEmitter
         return $"new {_typeToCSharpConverter.ToCSharp(@new.Type)}({arguments})";
     }
 
+    // LambdaDefinitionWriter.BuildMemberInitExpression: a multi-line block — "new Type" (NOT
+    // "new Type()": this is never printed via BuildNewExpression/PrintNew, which is what adds
+    // the parens), "{" on its own line, one "Member = value," per indented line (trailing
+    // comma on every binding, including the last), closing "}" un-indented. Old's MemberInit is
+    // always built from a parameterless constructor here (ExpressionBuilderContext.cs's
+    // Instance(), the "fallback to member initialization" branch: "ctor =
+    // instanceType.GetConstructor(Type.EmptyTypes);"), so the "new Type" line never carries
+    // constructor arguments either.
     private string PrintMemberInit(IrMemberInit memberInit, Func<IrExpression, Atom> child)
     {
-        var ctor = PrintNew(memberInit.New, child);
-        var bindings = string.Join(", ",
-            memberInit.Bindings.Select(b => $"{b.Member.Name} = {child(b.Value).Code}"));
-        return $"{ctor} {{ {bindings} }}";
+        var typeName = _typeToCSharpConverter.ToCSharp(memberInit.Type);
+        // The builder only member-inits with parameterless constructors, and the old writer's
+        // BuildMemberInitExpression printed "new T" accordingly (no argument list) — but if a
+        // constructor argument ever appears, print it rather than silently dropping it.
+        var arguments = memberInit.New.Arguments.Count == 0
+            ? ""
+            : $"({string.Join(", ", memberInit.New.Arguments.Select(a => child(a).Code))})";
+        var isb = new IndentedStringBuilder();
+        isb.AppendLine($"new {typeName}{arguments}");
+        isb.AppendLine("{");
+        using (isb.Indent())
+        {
+            foreach (var binding in memberInit.Bindings)
+            {
+                isb.Append($"{binding.Member.Name} = {child(binding.Value).Code}");
+                isb.AppendLine(",");
+            }
+        }
+        isb.Append("}");
+        return isb;
     }
 
     private string PrintTupleInit(IrTupleInit tupleInit, Func<IrExpression, Atom> child)
     {
-        var elements = string.Join(", ", tupleInit.Elements.Select(e => child(e.Value).Code));
+        // Elements are emitted in the tuple type's canonical declared property order, looked up
+        // by name — NOT in the stored (CQL-authored) order, which the printed positional value
+        // tuple would silently transpose (#1362). Mirrors the old writer's
+        // BuildMemberInitTupleExpression, including printing "default" for unbound properties.
+        var codeByName = tupleInit.Elements.ToDictionary(e => e.Name, e => child(e.Value).Code);
+        var elements = string.Join(", ",
+            _typeToCSharpConverter
+                .GetTupleProperties(tupleInit.Type)
+                .Select(p => codeByName.GetValueOrDefault(p.Name, "default")));
         return $"({_namingConventions.TupleMetadataFieldName(tupleInit.Type)}, {elements})";
     }
 

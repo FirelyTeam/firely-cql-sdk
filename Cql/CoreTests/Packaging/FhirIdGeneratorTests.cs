@@ -45,4 +45,24 @@ public class FhirIdGeneratorTests
         Assert.IsTrue(result.Length <= 64);
         Assert.AreEqual(expected, result);
     }
+
+    [TestMethod]
+    public void GenerateFhirId_IsThreadSafe()
+    {
+        // Arrange
+        var identifier = CqlVersionedLibraryIdentifier.Parse("Status-1.8.000");
+        var expected = FhirIdGenerator.GenerateFhirId(identifier);
+        var results = new string[1000];
+
+        // Act
+        Parallel.For(0, results.Length, i =>
+        {
+            results[i] = FhirIdGenerator.GenerateFhirId(identifier);
+        });
+
+        // Assert
+        CollectionAssert.AllItemsAreNotNull(results);
+        foreach (var result in results)
+            Assert.AreEqual(expected, result);
+    }
 }

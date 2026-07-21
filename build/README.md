@@ -9,7 +9,7 @@ Main pipeline configuration that orchestrates the complete CI/CD process with th
 
 1. **checkForDocChangesStage**: Checks if only documentation changed (skips build if so)
 2. **Build**: Builds the solution once, signs assemblies (conditionally), and packages NuGet packages
-3. **Test**: Three parallel test jobs that download build artifacts and run tests
+3. **Test**: Four parallel test jobs that download build artifacts and run tests
 4. **deployToGitHub**: Deploys to GitHub Packages (non-PR builds only)
 5. **deployToNuget**: Deploys to NuGet.org (release tags only)
 
@@ -22,6 +22,7 @@ Centralized variables used across pipeline configurations:
 - **Test project configuration**:
   - `multiTargetTestProjects`: Projects tested on both .NET 8 and .NET 10 (CoreTests, CqlToElmTests)
   - `net10IntegrationTestProjects`: Projects tested only on .NET 10 (IntegrationRunner)
+  - `hedisIntegrationTestProjects`: HEDIS 2025 golden-parity tests, tested only on .NET 10 (Hedis2025.GoldenTests)
   - `excludedTestProjects`: Projects excluded from all test runs (XsdToCSharpConverterTests)
 
 ### `build-test-sign.yml`
@@ -35,10 +36,11 @@ Reusable Azure Pipelines template that implements an optimized build-once, test-
 - Packages NuGet packages
 - Publishes build artifacts for test jobs
 
-**Test Stage** (three parallel jobs):
+**Test Stage** (four parallel jobs):
 - **TestNet8**: Downloads artifacts, tests CoreTests/CqlToElmTests on .NET 8
 - **TestNet10**: Downloads artifacts, tests CoreTests/CqlToElmTests on .NET 10
-- **IntegrationTests**: Downloads artifacts, tests IntegrationRunner on .NET 10
+- **TestIntegrationNet10**: Downloads artifacts, tests IntegrationRunner on .NET 10
+- **TestHedisNet10**: Downloads artifacts, tests Hedis2025.GoldenTests on .NET 10
 
 Each test job only installs the .NET SDK version it needs, maximizing efficiency.
 
@@ -64,10 +66,11 @@ Each test job only installs the .NET SDK version it needs, maximizing efficiency
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Test Stage                                   │
-│  ┌─────────────┐  ┌─────────────┐  ┌──────────────────┐        │
-│  │ TestNet8    │  │ TestNet10   │  │ TestIntegration  │        │
-│  └─────────────┘  └─────────────┘  └──────────────────┘        │
-│                   (run in parallel)                             │
+│  ┌───────────┐ ┌───────────┐ ┌──────────────────┐ ┌──────────┐ │
+│  │ TestNet8  │ │ TestNet10 │ │ TestIntegration  │ │ TestHedis│ │
+│  │           │ │           │ │ Net10            │ │ Net10    │ │
+│  └───────────┘ └───────────┘ └──────────────────┘ └──────────┘ │
+│                       (run in parallel)                         │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
@@ -81,14 +84,14 @@ Each test job only installs the .NET SDK version it needs, maximizing efficiency
 - **Java dependency caching** - Maven dependencies cached to avoid redundant downloads
 - **Conditional signing** - Assemblies signed only on release tags or develop branch (not PRs), saving ~12 minutes on PR builds
 - **Optimized SDK installation** - Each test job only installs the .NET version it needs
-- **Maximum test parallelization** - All three test jobs start simultaneously after build completes
+- **Maximum test parallelization** - All four test jobs start simultaneously after build completes
 - **Build artifacts shared** - Test jobs download pre-built artifacts instead of rebuilding
 - **All tests gate deployment** - Cannot deploy unless all test jobs succeed
 
 ## Multi-Framework Testing
 
 ### Overview
-The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to leverage .NET 10 performance improvements while maintaining broad compatibility. The `build-test-sign.yml` template implements a build-once, test-parallel workflow: a single Build stage compiles the solution once, then three parallel Test jobs verify behavior across both frameworks.
+The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to leverage .NET 10 performance improvements while maintaining broad compatibility. The `build-test-sign.yml` template implements a build-once, test-parallel workflow: a single Build stage compiles the solution once, then four parallel Test jobs verify behavior across both frameworks.
 
 ### Test Project Configuration
 
@@ -100,6 +103,9 @@ All test project specifications are centralized in `variables.yml`:
 
 **.NET 10 Integration Tests** (tested only on .NET 10):
 - `submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj` - Integration test suite
+
+**HEDIS 2025 Golden-Parity Tests** (tested only on .NET 10, own parallel job):
+- `submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025.GoldenTests/Hedis2025.GoldenTests.csproj` - HEDIS 2025 corpus golden-parity tests
 
 **Excluded Tests** (not run in pipeline):
 - `tools/XsdToCSharpConverterTests/XsdToCSharpConverterTests.csproj` - Internal tool tests
@@ -114,6 +120,7 @@ The `Build` and `Test` stages in `azure-pipelines.yml` use the template with par
     dotNetCoreVersion: $(DOTNET_CORE_SDK)
     multiTargetTestProjects: $(multiTargetTestProjects)
     net10IntegrationTestProjects: $(net10IntegrationTestProjects)
+    hedisIntegrationTestProjects: $(hedisIntegrationTestProjects)
     buildConfiguration: $(buildConfiguration)
     checkoutSubmodules: 'true'
     shouldSign: ${{ ... }}  # true only for release tags or develop branch
@@ -136,6 +143,10 @@ variables:
   net10IntegrationTestProjects: |
     submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
     # Add new .NET 10-only integration test projects here
+
+  hedisIntegrationTestProjects: |
+    submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025.GoldenTests/Hedis2025.GoldenTests.csproj
+    # Add new HEDIS golden-parity test projects here
   
   excludedTestProjects: |
     !**/XsdToCSharpConverterTests.csproj
@@ -144,7 +155,7 @@ variables:
 
 ### Usage
 
-Multi-framework testing is fully integrated into `azure-pipelines.yml` and runs automatically on every build (unless only documentation changed). The Build stage completes first, then three parallel Test jobs execute simultaneously, providing fast feedback while ensuring framework parity.
+Multi-framework testing is fully integrated into `azure-pipelines.yml` and runs automatically on every build (unless only documentation changed). The Build stage completes first, then four parallel Test jobs execute simultaneously, providing fast feedback while ensuring framework parity.
 
 #### Running Tests Locally
 
@@ -164,6 +175,9 @@ dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --framework net10.0
 
 # Test IntegrationRunner on .NET 10
 dotnet test submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj --framework net10.0
+
+# Test HEDIS 2025 golden-parity tests on .NET 10
+dotnet test submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025.GoldenTests/Hedis2025.GoldenTests.csproj --framework net10.0
 ```
 
 **Test entire solution**:
@@ -212,7 +226,7 @@ Several test projects locate test data by walking up the directory tree from the
 
 Because of this, all test jobs use `checkout: self` to ensure the source tree (including `LibrarySets/` and submodule directories) is present at runtime, even though the actual test binaries come from pre-built artifacts.
 
-**Test Stage** (three parallel jobs):
+**Test Stage** (four parallel jobs):
 
 **Job 1: TestNet8**
 - Checks out source tree (for `LibrarySets/` directory access)
@@ -228,15 +242,22 @@ Because of this, all test jobs use `checkout: self` to ensure the source tree (i
 - Runs `dotnet test` on `*Tests.dll` for .NET 10
 - Publishes test results as "Tests on .NET 10"
 
-**Job 3: IntegrationTests**
+**Job 3: TestIntegrationNet10**
 - Checks out source tree **with submodules** (for `CMS Resources/` access)
 - Installs only .NET 10 SDK
 - Downloads `BuildOutput` artifact (bin/obj overlaid onto source tree)
 - Runs `dotnet test --no-build` on the `.csproj` for .NET 10
 - Publishes test results as "Integration Tests on .NET 10"
 
-**Job 4: CompareTestResults**
-- Runs after all three test jobs complete
+**Job 4: TestHedisNet10**
+- Checks out source tree **with submodules** (for the vendored HEDIS 2025 corpus)
+- Installs only .NET 10 SDK
+- Downloads `BuildOutput` artifact (bin/obj overlaid onto source tree)
+- Runs `dotnet test --no-build` on `Hedis2025.GoldenTests.csproj` for .NET 10
+- Publishes test results as "HEDIS 2025 Golden Parity Tests on .NET 10"
+
+**Job 5: CompareTestResults**
+- Runs after all four test jobs complete
 - Compares test results across .NET 8 and .NET 10
 - Reports framework parity status (identical vs. different behavior)
 - Identifies framework-specific test failures if any
@@ -247,7 +268,7 @@ Because of this, all test jobs use `checkout: self` to ensure the source tree (i
 - ✅ **Java Dependency Caching**: Maven dependencies cached to avoid redundant downloads across builds
 - ✅ **Conditional Signing**: Assemblies signed only on release tags or develop branch (~12 min saved on PRs)
 - ✅ **Optimized SDK Installation**: Each test job installs only the .NET version it needs
-- ✅ **Maximum Test Parallelization**: Three test jobs execute simultaneously after build
+- ✅ **Maximum Test Parallelization**: Four test jobs execute simultaneously after build
 - ✅ **Framework Parity Verification**: Ensures identical behavior across .NET 8 and .NET 10
 - ✅ **Early Detection**: Framework-specific issues caught before deployment
 - ✅ **Comprehensive Testing**: Multi-target tests + integration tests
@@ -261,6 +282,7 @@ Test results are published with framework-specific titles for easy identificatio
 - **Tests on .NET 8** - CoreTests and CqlToElmTests on .NET 8
 - **Tests on .NET 10** - CoreTests and CqlToElmTests on .NET 10
 - **Integration Tests on .NET 10** - IntegrationRunner on .NET 10
+- **HEDIS 2025 Golden Parity Tests on .NET 10** - Hedis2025.GoldenTests on .NET 10
 
 The CompareTestResults job reports framework parity status after all tests complete.
 
@@ -303,10 +325,11 @@ The pipeline executes in two stages:
 - ✅ Packages NuGet packages
 - ✅ Publishes build artifacts
 
-**Test Stage** (three parallel jobs):
+**Test Stage** (four parallel jobs):
 - ✅ TestNet8 - CoreTests/CqlToElmTests on .NET 8
 - ✅ TestNet10 - CoreTests/CqlToElmTests on .NET 10
-- ✅ IntegrationTests - IntegrationRunner on .NET 10
+- ✅ TestIntegrationNet10 - IntegrationRunner on .NET 10
+- ✅ TestHedisNet10 - Hedis2025.GoldenTests on .NET 10
 
 All test jobs must succeed before deployment stages run. This ensures:
 - Framework parity (identical behavior on .NET 8 and .NET 10)

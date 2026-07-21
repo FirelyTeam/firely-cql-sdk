@@ -578,39 +578,38 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
         CqlValueSet a_ = this.Radiation_Treatment_Management(context);
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
-        IEnumerable<Encounter> c_(Encounter RadiationTreatmentManagement) {
+        bool? c_(Encounter RadiationTreatmentManagement) {
             CqlValueSet g_ = this.Cancer(context);
             IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition>, j_ as IEnumerable<Condition>);
 
             bool? l_(Condition CancerDx) {
-                CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, CancerDx);
-                Period q_ = RadiationTreatmentManagement?.Period;
-                CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
-                bool? s_ = context.Operators.Overlaps(p_, r_, "day");
-                return s_;
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, CancerDx);
+                Period p_ = RadiationTreatmentManagement?.Period;
+                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
+                bool? r_ = context.Operators.Overlaps(o_, q_, "day");
+                return r_;
             }
 
             IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
-            Encounter n_(Condition CancerDx) => RadiationTreatmentManagement;
-            IEnumerable<Encounter> o_ = context.Operators.Select<Condition, Encounter>(m_, n_);
-            return o_;
+            bool? n_ = context.Operators.Exists<Condition>(m_);
+            return n_;
         }
 
-        IEnumerable<Encounter> d_ = context.Operators.SelectMany<Encounter, Encounter>(b_, c_);
+        IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 
         bool? e_(Encounter RadiationTreatmentManagement) {
-            CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
-            Period u_ = RadiationTreatmentManagement?.Period;
-            CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
-            bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, "day");
-            Code<Encounter.EncounterStatus> x_ = RadiationTreatmentManagement?.StatusElement;
-            Encounter.EncounterStatus? y_ = x_?.Value;
-            Code<Encounter.EncounterStatus> z_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(y_);
-            bool? aa_ = context.Operators.Equal(z_, "finished");
-            bool? ab_ = context.Operators.And(w_, aa_);
-            return ab_;
+            CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
+            Period t_ = RadiationTreatmentManagement?.Period;
+            CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
+            bool? v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(s_, u_, "day");
+            Code<Encounter.EncounterStatus> w_ = RadiationTreatmentManagement?.StatusElement;
+            Encounter.EncounterStatus? x_ = w_?.Value;
+            Code<Encounter.EncounterStatus> y_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(x_);
+            bool? z_ = context.Operators.Equal(y_, "finished");
+            bool? aa_ = context.Operators.And(v_, z_);
+            return aa_;
         }
 
         IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
@@ -677,26 +676,25 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     {
         IEnumerable<Encounter> a_ = this.Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(context);
 
-        IEnumerable<Encounter> b_(Encounter FaceToFaceOrTelehealthEncounterWithChemo) {
+        bool? b_(Encounter FaceToFaceOrTelehealthEncounterWithChemo) {
             IEnumerable<Observation> d_ = this.Standard_Pain_Assessment_with_Result(context);
 
             bool? e_(Observation PainAssessed) {
-                Period i_ = FaceToFaceOrTelehealthEncounterWithChemo?.Period;
-                CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                DataType k_ = PainAssessed?.Effective;
-                object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
-                CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_);
-                bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, m_, "day");
-                return n_;
+                Period h_ = FaceToFaceOrTelehealthEncounterWithChemo?.Period;
+                CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
+                DataType j_ = PainAssessed?.Effective;
+                object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
+                CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_);
+                bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(i_, l_, "day");
+                return m_;
             }
 
             IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-            Encounter g_(Observation PainAssessed) => FaceToFaceOrTelehealthEncounterWithChemo;
-            IEnumerable<Encounter> h_ = context.Operators.Select<Observation, Encounter>(f_, g_);
-            return h_;
+            bool? g_ = context.Operators.Exists<Observation>(f_);
+            return g_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
@@ -711,78 +709,77 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     {
         IEnumerable<Encounter> a_ = this.Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(context);
 
-        IEnumerable<Encounter> b_(Encounter RadiationManagementEncounter) {
+        bool? b_(Encounter RadiationManagementEncounter) {
             IEnumerable<Observation> d_ = this.Standard_Pain_Assessment_with_Result(context);
 
             bool? e_(Observation PainAssessed) {
 
-                bool? i_() {
+                bool? h_() {
 
-                    bool j_() {
-                        List<CodeableConcept> k_ = RadiationManagementEncounter?.Type;
+                    bool i_() {
+                        List<CodeableConcept> j_ = RadiationManagementEncounter?.Type;
 
-                        CqlConcept l_(CodeableConcept @this) {
-                            CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                            return q_;
+                        CqlConcept k_(CodeableConcept @this) {
+                            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                            return p_;
                         }
 
-                        IEnumerable<CqlConcept> m_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)k_, l_);
+                        IEnumerable<CqlConcept> l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
 
-                        bool? n_(CqlConcept RadiationManagement) {
-                            CqlCode r_ = this.Radiation_treatment_management__5_treatments(context);
-                            CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
-                            bool? t_ = context.Operators.Equivalent(RadiationManagement, s_);
-                            return t_;
+                        bool? m_(CqlConcept RadiationManagement) {
+                            CqlCode q_ = this.Radiation_treatment_management__5_treatments(context);
+                            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
+                            bool? s_ = context.Operators.Equivalent(RadiationManagement, r_);
+                            return s_;
                         }
 
-                        IEnumerable<CqlConcept> o_ = context.Operators.Where<CqlConcept>(m_, n_);
-                        bool? p_ = context.Operators.Exists<CqlConcept>(o_);
-                        return p_ ?? false;
+                        IEnumerable<CqlConcept> n_ = context.Operators.Where<CqlConcept>(l_, m_);
+                        bool? o_ = context.Operators.Exists<CqlConcept>(n_);
+                        return o_ ?? false;
                     }
 
-                    if (j_())
+                    if (i_())
                     {
-                        DataType u_ = PainAssessed?.Effective;
-                        object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                        CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.toInterval(context, v_);
-                        CqlDateTime x_ = context.Operators.End(w_);
-                        Period y_ = RadiationManagementEncounter?.Period;
-                        CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
-                        CqlDateTime aa_ = context.Operators.Start(z_);
-                        CqlQuantity ab_ = context.Operators.Quantity(6m, "days");
-                        CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
-                        CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
-                        CqlDateTime af_ = context.Operators.Start(ae_);
-                        CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ac_, af_, true, true);
-                        bool? ah_ = context.Operators.In<CqlDateTime>(x_, ag_, "day");
-                        CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
-                        CqlDateTime ak_ = context.Operators.Start(aj_);
-                        bool? al_ = context.Operators.Not((bool?)(ak_ is null));
-                        bool? am_ = context.Operators.And(ah_, al_);
-                        return am_;
+                        DataType t_ = PainAssessed?.Effective;
+                        object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                        CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_);
+                        CqlDateTime w_ = context.Operators.End(v_);
+                        Period x_ = RadiationManagementEncounter?.Period;
+                        CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, x_);
+                        CqlDateTime z_ = context.Operators.Start(y_);
+                        CqlQuantity aa_ = context.Operators.Quantity(6m, "days");
+                        CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
+                        CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, x_);
+                        CqlDateTime ae_ = context.Operators.Start(ad_);
+                        CqlInterval<CqlDateTime> af_ = context.Operators.Interval(ab_, ae_, true, true);
+                        bool? ag_ = context.Operators.In<CqlDateTime>(w_, af_, "day");
+                        CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, x_);
+                        CqlDateTime aj_ = context.Operators.Start(ai_);
+                        bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
+                        bool? al_ = context.Operators.And(ag_, ak_);
+                        return al_;
                     }
                     else
                     {
-                        Period an_ = RadiationManagementEncounter?.Period;
-                        CqlInterval<CqlDateTime> ao_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, an_);
-                        DataType ap_ = PainAssessed?.Effective;
-                        object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        CqlInterval<CqlDateTime> ar_ = QICoreCommon_4_0_000.Instance.toInterval(context, aq_);
-                        bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, ar_, "day");
-                        return as_;
+                        Period am_ = RadiationManagementEncounter?.Period;
+                        CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, am_);
+                        DataType ao_ = PainAssessed?.Effective;
+                        object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
+                        CqlInterval<CqlDateTime> aq_ = QICoreCommon_4_0_000.Instance.toInterval(context, ap_);
+                        bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(an_, aq_, "day");
+                        return ar_;
                     };
                 }
 
-                return i_();
+                return h_();
             }
 
             IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-            Encounter g_(Observation PainAssessed) => RadiationManagementEncounter;
-            IEnumerable<Encounter> h_ = context.Operators.Select<Observation, Encounter>(f_, g_);
-            return h_;
+            bool? g_ = context.Operators.Exists<Observation>(f_);
+            return g_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
