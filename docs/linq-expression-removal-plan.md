@@ -266,7 +266,9 @@ Deferred to post-merge cleanup (no behavior change, all parity-preserved):
   "phase N of the Linq.Expressions removal" framing (and, with the rename above, the
   `Ir*` mentions) made sense while both pipelines coexisted on the feature branch, but
   reads as noise once this is simply *the* pipeline — describe what each type does,
-  and leave the history to this document and to commit `85207efd5`.
+  and leave the history to this document and to commit `85207efd5`. This includes the
+  `<c>OldTypeName</c>` plain-text mentions that replaced the unresolvable
+  `<see cref=""/>` references when the old types were deleted.
 - Replace the hoisted zero-parameter local functions for conditional chains with native
   `if`/`else` statements (an old-writer shape kept for golden parity).
 - Remove the remaining `NOTE(phase3)`/`NOTE(phase4)` markers as each is resolved.
