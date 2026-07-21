@@ -440,50 +440,49 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Task> c_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-task"));
 
-        IEnumerable<Task> d_(Task ConsultantReportObtained) {
+        bool? d_(Task ConsultantReportObtained) {
             ServiceRequest g_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
             ServiceRequest[] h_ = [
                 g_,
             ];
 
             bool? i_(ServiceRequest FirstReferral) {
-                ResourceReference m_ = ConsultantReportObtained?.Focus;
-                bool? n_ = QICoreCommon_4_0_000.Instance.references(context, m_, FirstReferral);
-                List<ResourceReference> o_ = ConsultantReportObtained?.BasedOn;
-                bool? p_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)o_, FirstReferral);
-                bool? q_ = context.Operators.Or(n_, p_);
-                Period r_ = ConsultantReportObtained?.ExecutionPeriod;
-                CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-                CqlDateTime t_ = context.Operators.End(s_);
-                FhirDateTime u_ = FirstReferral?.AuthoredOnElement;
-                CqlDateTime v_ = context.Operators.Convert<CqlDateTime>(u_);
-                bool? w_ = context.Operators.After(t_, v_, (string)default);
-                bool? x_ = context.Operators.And(q_, w_);
-                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-                CqlDateTime aa_ = context.Operators.End(z_);
-                CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
-                bool? ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, "day");
-                bool? ad_ = context.Operators.And(x_, ac_);
-                Code<Task.TaskStatus> ae_ = ConsultantReportObtained?.StatusElement;
-                Task.TaskStatus? af_ = ae_?.Value;
-                string ag_ = context.Operators.Convert<string>(af_);
-                bool? ah_ = context.Operators.Equal(ag_, "completed");
-                bool? ai_ = context.Operators.And(ad_, ah_);
-                CodeableConcept aj_ = ConsultantReportObtained?.ReasonCode;
-                CqlConcept ak_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aj_);
-                CqlValueSet al_ = this.Consultant_Report(context);
-                bool? am_ = context.Operators.ConceptInValueSet(ak_, al_);
-                bool? an_ = context.Operators.And(ai_, am_);
-                return an_;
+                ResourceReference l_ = ConsultantReportObtained?.Focus;
+                bool? m_ = QICoreCommon_4_0_000.Instance.references(context, l_, FirstReferral);
+                List<ResourceReference> n_ = ConsultantReportObtained?.BasedOn;
+                bool? o_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)n_, FirstReferral);
+                bool? p_ = context.Operators.Or(m_, o_);
+                Period q_ = ConsultantReportObtained?.ExecutionPeriod;
+                CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
+                CqlDateTime s_ = context.Operators.End(r_);
+                FhirDateTime t_ = FirstReferral?.AuthoredOnElement;
+                CqlDateTime u_ = context.Operators.Convert<CqlDateTime>(t_);
+                bool? v_ = context.Operators.After(s_, u_, (string)default);
+                bool? w_ = context.Operators.And(p_, v_);
+                CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
+                CqlDateTime z_ = context.Operators.End(y_);
+                CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
+                bool? ab_ = context.Operators.In<CqlDateTime>(z_, aa_, "day");
+                bool? ac_ = context.Operators.And(w_, ab_);
+                Code<Task.TaskStatus> ad_ = ConsultantReportObtained?.StatusElement;
+                Task.TaskStatus? ae_ = ad_?.Value;
+                string af_ = context.Operators.Convert<string>(ae_);
+                bool? ag_ = context.Operators.Equal(af_, "completed");
+                bool? ah_ = context.Operators.And(ac_, ag_);
+                CodeableConcept ai_ = ConsultantReportObtained?.ReasonCode;
+                CqlConcept aj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ai_);
+                CqlValueSet ak_ = this.Consultant_Report(context);
+                bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
+                bool? am_ = context.Operators.And(ah_, al_);
+                return am_;
             }
 
             IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>((IEnumerable<ServiceRequest>)h_, i_);
-            Task k_(ServiceRequest FirstReferral) => ConsultantReportObtained;
-            IEnumerable<Task> l_ = context.Operators.Select<ServiceRequest, Task>(j_, k_);
-            return l_;
+            bool? k_ = context.Operators.Exists<ServiceRequest>(j_);
+            return k_;
         }
 
-        IEnumerable<Task> e_ = context.Operators.SelectMany<Task, Task>(c_, d_);
+        IEnumerable<Task> e_ = context.Operators.Where<Task>(c_, d_);
         bool? f_ = context.Operators.Exists<Task>(e_);
         return f_;
     }

@@ -19,6 +19,8 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 5.1.3 Run relevant tests after modifications
 
+5.1.4 CI skips the full build when every changed file matches an `ignorePatterns` entry in `build/azure-pipelines.yml` (currently `docs/`, any `*.md` file, and `.claude/`). If a PR touching only those also needs CI to actually run (e.g. testing a skill's shell commands), touch a non-ignored file too.
+
 5.1.4 Check that new projects are included in solution files (`*.sln`)
 
 ## 5.2. Cross-Platform Compatibility
@@ -65,7 +67,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 5.3.1.3 Changes to `ICqlOperators` signatures or constraints that flow into generated call sites
 
 5.3.2 **When modifying C# code generation logic, always update the `LibrarySetCSharpCodeGenerator.GeneratorToolVersion`**:
-5.3.2.1 **Locate the version**: The version is hardcoded in `CodeGeneration.NET/_CODE GENERATOR VERSION_.cs` as `GeneratorToolVersion`
+5.3.2.1 **Locate the version**: The version is hardcoded in `Cql/CodeGeneration.NET/_CODE GENERATOR VERSION_.cs` as `GeneratorToolVersion`
 
 5.3.2.2 **Apply semantic versioning**:
 5.3.2.2.1 **Major version** (x.0.0.0): Breaking changes to generated code that require new `LibraryInstanceInvoker` support
@@ -74,7 +76,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
       5.3.2.2.3 **Patch version** (x.y.z.0): Bug fixes that don't change the generated API
 
-5.3.2.3 **Check compatibility**: Ensure the current `LibraryInstanceInvoker_X_Y.SupportsVersion` covers the new version (check `MinSupportedGeneratorToolVersion` and `FirstUnsupportedGeneratorToolVersion` in `Cql.Invocation/Toolkit/Internal/LibraryInvoker.X.Y.cs`)
+5.3.2.3 **Check compatibility**: Ensure the current `LibraryInstanceInvoker_<major>_<minor>.SupportsVersion` covers the new version (check `MinSupportedGeneratorToolVersion` and `FirstUnsupportedGeneratorToolVersion` in `Cql/Cql.Invocation/Toolkit/Internal/LibraryInvoker.<major>.<minor>.cs`, e.g. `LibraryInvoker.5.0.cs`)
 
 5.3.2.4 **Create new invoker if needed**: For major version changes, a new `LibraryInstanceInvoker_X_Y` may be required
 
@@ -91,11 +93,4 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 5.4. Generating ELM Files from CQL
 
-5.4.1 When adding CQL files (e.g., to `CoreTests\Input\ELM\HL7`), follow these steps to generate the ELM JSON files:
-5.4.1.1 **Enable CQL to ELM conversion**: Find the commented out property `CqlToolingEnabled` in the csproj (e.g., `<!-- <CqlToolingEnabled>true</CqlToolingEnabled> -->`) and uncomment it to set `CqlToolingEnabled` to `true`
-
-5.4.1.2 **Build the project**: Build that particular csproj, which will generate the ELM files
-
-5.4.1.3 **Verify generation**: Confirm that all ELM files are generated for each CQL file. The directory for the ELM files can be discovered in the `ElmDirectory` property in the csproj file
-
-5.4.1.4 **Restore setting**: Roll back step 1 by commenting out `CqlToolingEnabled=true`
+5.4.1 Follow the shared procedure in [generate-elm-from-cql](../../.claude/skills/generate-elm-from-cql/SKILL.md) to regenerate ELM JSON after adding or changing CQL input files (e.g. in `Cql/CoreTests/Input/ELM/HL7`).

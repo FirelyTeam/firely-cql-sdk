@@ -35,7 +35,7 @@ public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
 
         _toString = $"[{string.Join(", ", ItemNames.Select(pn => $"\"{pn}\""))}]";
 
-        // For some odd reason, if this is not lazy, the hash code is occasionally fails deep inside the Hasher with NullReferenceException, whenever a library is created.
+        // Keep this lazy to avoid redundant signature-hash computation during object construction and when hash-based methods are never used.
         _signatureHashStringLazy = new Lazy<string>(() => BuildSignatureHashString(ItemTypes.Zip(ItemNames).ToList(), PropertyPrefix, _toString));
     }
 
