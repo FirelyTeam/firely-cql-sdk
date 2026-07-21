@@ -4,8 +4,7 @@
 - **Spec version:** 1.5.3 - Release 1 Errata 2
 - **Condensed by:** `tools/condense_spec/condense_spec.py`
 - **Files converted:** 23
-- **Size reduction:** 2,055,180 -> 873,655 bytes (57.5% smaller); 40MB -> 912KB (97.7%) counting the
-  original site's CSS/JS/images
+- **Size reduction:** 2,055,180 -> 873,655 bytes (57.5% smaller)
 
 `source/` (gitignored) holds the original HTML site export, only needed to regenerate `condensed/`
 after a new CQL spec errata/version is published — day-to-day, just read the files below directly.
