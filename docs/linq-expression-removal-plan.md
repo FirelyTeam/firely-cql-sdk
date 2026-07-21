@@ -262,6 +262,11 @@ Deferred to post-merge cleanup (no behavior change, all parity-preserved):
 - Drop the now-redundant `Ir` prefix from the IR-side type names (e.g.
   `IrLibrarySetCSharpCodeGenerator`) now that there is no Expression-side counterpart
   to disambiguate from.
+- Scrub the migration narrative from doc comments: the "IR counterpart of the old X" /
+  "phase N of the Linq.Expressions removal" framing (and, with the rename above, the
+  `Ir*` mentions) made sense while both pipelines coexisted on the feature branch, but
+  reads as noise once this is simply *the* pipeline — describe what each type does,
+  and leave the history to this document and to commit `85207efd5`.
 - Replace the hoisted zero-parameter local functions for conditional chains with native
   `if`/`else` statements (an old-writer shape kept for golden parity).
 - Remove the remaining `NOTE(phase3)`/`NOTE(phase4)` markers as each is resolved.
