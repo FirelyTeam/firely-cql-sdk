@@ -16,17 +16,18 @@ namespace Hl7.Cql.Compiler.Ir;
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 /// <summary>
-/// IR counterpart of <see cref="CqlOperatorsBinder"/>: facilitates binding to
+/// IR counterpart of the old <c>CqlOperatorsBinder</c>: facilitates binding to
 /// <see cref="ICqlOperators"/> methods, by converting the method name and <see cref="IrExpression"/>
 /// arguments to the appropriate overload of the method.
 ///
-/// <para>This is a mechanical port of <see cref="CqlOperatorsBinder"/> onto the typed IR
+/// <para>This is a mechanical port of <c>CqlOperatorsBinder</c> onto the typed IR
 /// (phase 3 of the Linq.Expressions removal, see
 /// <c>docs/linq-expression-removal-plan.md</c>): the overload-resolution algorithm is
 /// unchanged, only the tree representation differs (<see cref="IrExpression"/> instead of
-/// <see cref="Expression"/>, <see cref="IrInvoke"/> instead of <c>MethodCallExpression</c>,
-/// etc.). The old <see cref="CqlOperatorsBinder"/> remains untouched and both pipelines coexist
-/// until phase 6.</para>
+/// <c>Expression</c>, <see cref="IrInvoke"/> instead of <c>MethodCallExpression</c>,
+/// etc.). Phase 6 deleted the old binder along with the rest of the Expression-based
+/// pipeline; its sources remain readable at that pipeline's final commit,
+/// <c>85207efd5</c>.</para>
 /// </summary>
 /// <param name="logger">
 /// The logger used.

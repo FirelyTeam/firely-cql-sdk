@@ -12,7 +12,7 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of <see cref="Hl7.Cql.Abstractions.CqlDefinition"/>: the base class for the
+/// IR counterpart of the old <c>Hl7.Cql.Abstractions.CqlDefinition</c>: the base class for the
 /// definitions the expression builder produces for a library (expressions, functions,
 /// parameters, codes, code systems, concepts and value sets).
 ///
@@ -30,7 +30,7 @@ internal abstract class IrDefinition(string name)
 }
 
 /// <summary>
-/// IR counterpart of <see cref="Hl7.Cql.Abstractions.CqlLambdaDefinition"/>: a definition whose
+/// IR counterpart of the old <c>Hl7.Cql.Abstractions.CqlLambdaDefinition</c>: a definition whose
 /// body is a lambda (expression definitions, functions and parameters).
 /// </summary>
 internal abstract class IrLambdaDefinition(
@@ -48,7 +48,7 @@ internal abstract class IrLambdaDefinition(
 }
 
 /// <summary>
-/// IR counterpart of <see cref="Hl7.Cql.Compiler.Expressions.CqlExpressionDefinition"/>.
+/// IR counterpart of the old <c>CqlExpressionDefinition</c>.
 /// </summary>
 internal class IrExpressionDefinition(
     IrLambda lambda,
@@ -60,7 +60,7 @@ internal class IrExpressionDefinition(
 }
 
 /// <summary>
-/// IR counterpart of <see cref="Hl7.Cql.Compiler.Expressions.CqlFunctionDefinition"/>.
+/// IR counterpart of the old <c>CqlFunctionDefinition</c>.
 /// </summary>
 internal class IrFunctionDefinition(
     IrLambda lambda,
@@ -76,7 +76,7 @@ internal class IrFunctionDefinition(
 }
 
 /// <summary>
-/// IR counterpart of <see cref="CqlParameterDefinition"/>.
+/// IR counterpart of the old <c>CqlParameterDefinition</c>.
 /// </summary>
 internal class IrParameterDefinition(
     IrLambda lambda,
@@ -84,7 +84,7 @@ internal class IrParameterDefinition(
     : IrLambdaDefinition(lambda, name);
 
 /// <summary>
-/// IR counterpart of <see cref="Hl7.Cql.Compiler.Expressions.CqlCodeSystemDefinition"/>.
+/// IR counterpart of the old <c>CqlCodeSystemDefinition</c>.
 /// </summary>
 internal class IrCodeSystemDefinition(
     string name,
@@ -96,7 +96,7 @@ internal class IrCodeSystemDefinition(
 }
 
 /// <summary>
-/// IR counterpart of <see cref="Hl7.Cql.Compiler.Expressions.CqlConceptDefinition"/>.
+/// IR counterpart of the old <c>CqlConceptDefinition</c>.
 /// </summary>
 internal class IrConceptDefinition(
     string name,
@@ -110,7 +110,7 @@ internal class IrConceptDefinition(
 }
 
 /// <summary>
-/// IR counterpart of <see cref="Hl7.Cql.Compiler.Expressions.CqlCodeDefinition"/>.
+/// IR counterpart of the old <c>CqlCodeDefinition</c>.
 /// </summary>
 internal class IrCodeDefinition(
     string name,
@@ -129,7 +129,7 @@ internal class IrCodeDefinition(
 }
 
 /// <summary>
-/// IR counterpart of <see cref="CqlValueSetDefinition"/>.
+/// IR counterpart of the old <c>CqlValueSetDefinition</c>.
 /// </summary>
 internal class IrValueSetDefinition(
     string name,

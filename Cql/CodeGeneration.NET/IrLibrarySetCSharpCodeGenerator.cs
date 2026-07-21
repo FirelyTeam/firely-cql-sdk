@@ -19,7 +19,7 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <summary>
 /// Processes a definition dictionary of <see cref="IrDefinition"/> into a .NET class per library.
 ///
-/// <para>IR counterpart of <see cref="LibrarySetCSharpCodeGenerator"/> (phase 5 of the
+/// <para>IR counterpart of the old <c>LibrarySetCSharpCodeGenerator</c> (phase 5 of the
 /// Linq.Expressions removal, see <c>docs/linq-expression-removal-plan.md</c>): the class
 /// scaffolding (usings, regions, attributes, tuple-metadata fields, singleton/ILibrary
 /// boilerplate) is Expression-free and copied verbatim from the old generator so the two
