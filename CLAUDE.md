@@ -57,6 +57,7 @@ These are **not interchangeable**. `Library.Name` is the canonical identifier us
 
 - Build `Cql-Sdk.slnf`, not `Cql-Sdk-All.sln` — the `.sln` includes submodules you likely don't have access to.
 - Any change to build scripts/project files must keep working on both Windows and Unix (Linux/macOS/WSL): maintain matching `.ps1`/`.sh` script pairs, use `Condition="'$(OS)' == 'Windows_NT'"` (or `!=`) rather than assuming an OS, and match directory-name case exactly — Unix filesystems are case-sensitive even though this repo is usually edited on Windows. Avoid platform-specific tools like `flock` (no default on macOS); prefer a portable mechanism like directory-based locking.
+- CI skips the full build when every changed file matches an `ignorePatterns` entry in `build/azure-pipelines.yml` (currently `docs/`, `CLAUDE.md` files, `.claude/`, and `.github/copilot-instructions*`). If a PR touching only those also needs CI to actually run (e.g. testing a skill's shell commands), touch a non-ignored file too.
 
 ## Code generation version (`GeneratorToolVersion`)
 

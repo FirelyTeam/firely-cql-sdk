@@ -30,6 +30,12 @@ stages:
   parameters:
     ignorePatterns:
       - '^docs/.+'
+      # AI instruction files (Claude Code and GitHub Copilot) - no build impact
+      - '^CLAUDE\.md$'
+      - '^.+/CLAUDE\.md$'
+      - '^\.claude/.+$'
+      - '^\.github/copilot-instructions\.md$'
+      - '^\.github/copilot-instructions/.+$'
 
 # Include the build-test-sign template which defines Build, Test, and Package stages
 - template: build-test-sign.yml

@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.7.0
+**Version:** 3.8.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,8 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.8.0
+  - Added 5.1.4: CI's `build/azure-pipelines.yml` now skips the full build when every changed file is a documentation or AI-instruction file (`docs/`, `CLAUDE.md`, `.claude/`, `.github/copilot-instructions*`).
 - 3.7.0
   - Added a new section (1.9, PR Review Comment Handling): after fixing a review comment and pushing, mark the conversation resolved via the GraphQL `resolveReviewThread` mutation — pushing a fix or replying does not resolve it automatically.
 - 3.6.1

@@ -19,6 +19,8 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 5.1.3 Run relevant tests after modifications
 
+5.1.4 CI skips the full build when every changed file matches an `ignorePatterns` entry in `build/azure-pipelines.yml` (currently `docs/`, `CLAUDE.md` files, `.claude/`, and `.github/copilot-instructions*`). If a PR touching only those also needs CI to actually run (e.g. testing a skill's shell commands), touch a non-ignored file too.
+
 5.1.4 Check that new projects are included in solution files (`*.sln`)
 
 ## 5.2. Cross-Platform Compatibility
