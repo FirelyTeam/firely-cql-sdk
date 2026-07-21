@@ -82,3 +82,4 @@
 | [#1372](https://github.com/FirelyTeam/firely-cql-sdk/pull/1372) | Make Hasher thread-safe using one-shot MD5.HashData |
 | [#1374](https://github.com/FirelyTeam/firely-cql-sdk/pull/1374) | Fix AssemblyCompiler intermittently dropping cross-library references |
 | [#1376](https://github.com/FirelyTeam/firely-cql-sdk/pull/1376) | Align VersionedIdentifier hash semantics (breaking change, low risk) |
+| [#1388](https://github.com/FirelyTeam/firely-cql-sdk/pull/1388) | Prepare 2.10.0 release (fixes #1387) |
