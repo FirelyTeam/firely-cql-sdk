@@ -80,4 +80,4 @@ catch (CqlException<CqlArithmeticError> e) { ... }
 - `Cql.Abstractions/Primitives/Errors.cs` → `namespace Hl7.Cql.Primitives` (errors thrown by primitive types like `CqlDate`, `CqlDateTime`)
 - Add a new `FolderName/Errors.cs` when adding errors used by types in a new folder
 
-  10.3.3 New `ICqlError` structs should be placed in the `Errors.cs` of the folder that contains the throw site, and registered in `Cql/Cql.Abstractions/PublicAPI.Unshipped.txt`.
+  10.3.3 New `ICqlError` structs should be placed in the `Errors.cs` of the folder that contains the throw site. If the struct is part of the public API (not `internal`, like the existing structs in `Exceptions/Errors.cs`), it must also be registered in `Cql/Cql.Abstractions/PublicAPI.Unshipped.txt`.

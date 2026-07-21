@@ -383,27 +383,45 @@ namespace Hl7.Cql.CqlToElm
                 // tuple, this also guarantees every to element is covered.
                 return true;
             }
-            else if (from == SystemTypes.IntegerType
-                && (to == SystemTypes.LongType || to == SystemTypes.DecimalType || to == SystemTypes.QuantityType))
-                return true;
-            else if (from == SystemTypes.LongType
-                && (to == SystemTypes.DecimalType || to == SystemTypes.QuantityType))
-                return true;
-            else if (from == SystemTypes.DecimalType
-                && to == SystemTypes.QuantityType)
-                return true;
-            else if (from == SystemTypes.DateType
-                && to == SystemTypes.DateTimeType)
-                return true;
-            else if (from == SystemTypes.CodeType
-                && to == SystemTypes.ConceptType)
-                return true;
-            else if (from == SystemTypes.ValueSetType
-                && to == SystemTypes.CodeType.ToListType())
+            else if (GetSystemImplicitConversionTargets(from).Any(t => t == to))
                 return true;
             else if (HasImplicitConversionThroughModel(from, to))
                 return true;
             return false;
+        }
+
+        // Single source of truth for system-level implicit conversions.
+        // Used by both HasImplicitConversion and GetImplicitConversionTargets.
+        // See https://cql.hl7.org/09-b-cqlreference.html#convert
+        private static IEnumerable<TypeSpecifier> GetSystemImplicitConversionTargets(TypeSpecifier from)
+        {
+            if (from == SystemTypes.IntegerType)
+            {
+                yield return SystemTypes.LongType;
+                yield return SystemTypes.DecimalType;
+                yield return SystemTypes.QuantityType;
+            }
+            else if (from == SystemTypes.LongType)
+            {
+                yield return SystemTypes.DecimalType;
+                yield return SystemTypes.QuantityType;
+            }
+            else if (from == SystemTypes.DecimalType)
+            {
+                yield return SystemTypes.QuantityType;
+            }
+            else if (from == SystemTypes.DateType)
+            {
+                yield return SystemTypes.DateTimeType;
+            }
+            else if (from == SystemTypes.CodeType)
+            {
+                yield return SystemTypes.ConceptType;
+            }
+            else if (from == SystemTypes.ValueSetType)
+            {
+                yield return SystemTypes.CodeType.ToListType();
+            }
         }
 
         internal bool IsSimpleType(TypeSpecifier typeSpecifier)
@@ -549,6 +567,47 @@ namespace Hl7.Cql.CqlToElm
                     ListTypeSpecifier list => $"List<{typeString(list.elementType)}>",
                     _ => null
                 };
+        }
+
+        /// <summary>
+        /// Returns all types that the given type can be implicitly converted to.
+        /// This includes both system-level implicit conversions (e.g., Code → Concept,
+        /// ValueSet → List&lt;Code&gt;), structural propagation for List and Interval types,
+        /// and model-level conversions (e.g., FHIR.CodeableConcept → Concept via FHIRHelpers).
+        /// </summary>
+        internal IEnumerable<TypeSpecifier> GetImplicitConversionTargets(TypeSpecifier from)
+        {
+            // System-level implicit conversions (shared with HasImplicitConversion)
+            foreach (var target in GetSystemImplicitConversionTargets(from))
+                yield return target;
+
+            if (from is ListTypeSpecifier listFrom)
+            {
+                // Propagate element-level conversion targets: List<X> → List<Y> for each Y in targets(X)
+                foreach (var elementTarget in GetImplicitConversionTargets(listFrom.elementType))
+                    yield return elementTarget.ToListType();
+            }
+            else if (from is IntervalTypeSpecifier intervalFrom)
+            {
+                // Propagate point-type conversion targets: Interval<X> → Interval<Y> for each Y in targets(X)
+                foreach (var pointTarget in GetImplicitConversionTargets(intervalFrom.pointType))
+                    yield return pointTarget.ToIntervalType();
+            }
+
+            // Model-level implicit conversions
+            if (from is NamedTypeSpecifier fromNts
+                && ModelProvider.TryMakeQualifiedNameFromType(fromNts, out var fromQualified)
+                && ModelProvider.TryGetConversionFunctions(fromQualified!, out var conversions))
+            {
+                foreach (var (to, _) in conversions!)
+                {
+                    var urlPrefixedName = ModelProvider.TryGetUrlPrefixedName(to);
+                    if (urlPrefixedName is not null)
+                    {
+                        yield return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName(urlPrefixedName) };
+                    }
+                }
+            }
         }
 
         private int ListDegree(TypeSpecifier type) =>

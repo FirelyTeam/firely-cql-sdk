@@ -675,38 +675,37 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     {
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> a_ = this.Urinary_Symptom_Score_Assessment(context);
 
-        IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> b_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? USSAssessment) {
+        bool? b_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? USSAssessment) {
             Condition g_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
             Condition[] h_ = [
                 g_,
             ];
 
             bool? i_(Condition InitialBPHDiagnosis) {
-                CqlDateTime m_ = USSAssessment?.effectiveDatetime;
-                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
-                CqlDateTime o_ = context.Operators.Start(n_);
-                CqlDateTime q_ = context.Operators.Start(n_);
-                CqlQuantity r_ = context.Operators.Quantity(1m, "month");
-                CqlDateTime s_ = context.Operators.Add(q_, r_);
-                CqlInterval<CqlDateTime> t_ = context.Operators.Interval(o_, s_, true, true);
-                bool? u_ = context.Operators.In<CqlDateTime>(m_, t_, "day");
-                CqlDateTime w_ = context.Operators.Start(n_);
-                bool? x_ = context.Operators.Not((bool?)(w_ is null));
-                bool? y_ = context.Operators.And(u_, x_);
-                return y_;
+                CqlDateTime l_ = USSAssessment?.effectiveDatetime;
+                CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
+                CqlDateTime n_ = context.Operators.Start(m_);
+                CqlDateTime p_ = context.Operators.Start(m_);
+                CqlQuantity q_ = context.Operators.Quantity(1m, "month");
+                CqlDateTime r_ = context.Operators.Add(p_, q_);
+                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, true, true);
+                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, "day");
+                CqlDateTime v_ = context.Operators.Start(m_);
+                bool? w_ = context.Operators.Not((bool?)(v_ is null));
+                bool? x_ = context.Operators.And(t_, w_);
+                return x_;
             }
 
             IEnumerable<Condition> j_ = context.Operators.Where<Condition>((IEnumerable<Condition>)h_, i_);
-            (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? k_(Condition InitialBPHDiagnosis) => USSAssessment;
-            IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> l_ = context.Operators.Select<Condition, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(j_, k_);
-            return l_;
+            bool? k_ = context.Operators.Exists<Condition>(j_);
+            return k_;
         }
 
-        IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> c_ = context.Operators.SelectMany<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> c_ = context.Operators.Where<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(a_, b_);
 
         object d_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? @this) {
-            CqlDateTime z_ = @this?.effectiveDatetime;
-            return z_;
+            CqlDateTime y_ = @this?.effectiveDatetime;
+            return y_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> e_ = context.Operators.SortBy<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
@@ -725,33 +724,32 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     {
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> a_ = this.Urinary_Symptom_Score_Assessment(context);
 
-        IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> b_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? USSAssessment) {
+        bool? b_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? USSAssessment) {
             Condition g_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
             Condition[] h_ = [
                 g_,
             ];
 
             bool? i_(Condition InitialBPHDiagnosis) {
-                CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
-                CqlDateTime n_ = context.Operators.Start(m_);
-                CqlDateTime o_ = USSAssessment?.effectiveDatetime;
-                int? p_ = context.Operators.DifferenceBetween(n_, o_, "month");
-                CqlInterval<int?> q_ = context.Operators.Interval(6, 12, true, true);
-                bool? r_ = context.Operators.In<int?>(p_, q_, (string)default);
-                return r_;
+                CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
+                CqlDateTime m_ = context.Operators.Start(l_);
+                CqlDateTime n_ = USSAssessment?.effectiveDatetime;
+                int? o_ = context.Operators.DifferenceBetween(m_, n_, "month");
+                CqlInterval<int?> p_ = context.Operators.Interval(6, 12, true, true);
+                bool? q_ = context.Operators.In<int?>(o_, p_, (string)default);
+                return q_;
             }
 
             IEnumerable<Condition> j_ = context.Operators.Where<Condition>((IEnumerable<Condition>)h_, i_);
-            (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? k_(Condition InitialBPHDiagnosis) => USSAssessment;
-            IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> l_ = context.Operators.Select<Condition, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(j_, k_);
-            return l_;
+            bool? k_ = context.Operators.Exists<Condition>(j_);
+            return k_;
         }
 
-        IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> c_ = context.Operators.SelectMany<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> c_ = context.Operators.Where<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(a_, b_);
 
         object d_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? @this) {
-            CqlDateTime s_ = @this?.effectiveDatetime;
-            return s_;
+            CqlDateTime r_ = @this?.effectiveDatetime;
+            return r_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> e_ = context.Operators.SortBy<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
@@ -792,39 +790,38 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        IEnumerable<Condition> f_(Condition UrinaryRetention) {
+        bool? f_(Condition UrinaryRetention) {
             Condition j_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
             Condition[] k_ = [
                 j_,
             ];
 
             bool? l_(Condition InitialBPHDiagnosis) {
-                CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UrinaryRetention);
-                CqlDateTime q_ = context.Operators.Start(p_);
-                CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
-                CqlDateTime s_ = context.Operators.Start(r_);
-                CqlDateTime u_ = context.Operators.Start(r_);
-                CqlQuantity v_ = context.Operators.Quantity(1m, "year");
-                CqlDateTime w_ = context.Operators.Add(u_, v_);
-                CqlInterval<CqlDateTime> x_ = context.Operators.Interval(s_, w_, true, true);
-                bool? y_ = context.Operators.In<CqlDateTime>(q_, x_, "day");
-                CqlDateTime aa_ = context.Operators.Start(r_);
-                bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
-                bool? ac_ = context.Operators.And(y_, ab_);
-                return ac_;
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UrinaryRetention);
+                CqlDateTime p_ = context.Operators.Start(o_);
+                CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
+                CqlDateTime r_ = context.Operators.Start(q_);
+                CqlDateTime t_ = context.Operators.Start(q_);
+                CqlQuantity u_ = context.Operators.Quantity(1m, "year");
+                CqlDateTime v_ = context.Operators.Add(t_, u_);
+                CqlInterval<CqlDateTime> w_ = context.Operators.Interval(r_, v_, true, true);
+                bool? x_ = context.Operators.In<CqlDateTime>(p_, w_, "day");
+                CqlDateTime z_ = context.Operators.Start(q_);
+                bool? aa_ = context.Operators.Not((bool?)(z_ is null));
+                bool? ab_ = context.Operators.And(x_, aa_);
+                return ab_;
             }
 
             IEnumerable<Condition> m_ = context.Operators.Where<Condition>((IEnumerable<Condition>)k_, l_);
-            Condition n_(Condition InitialBPHDiagnosis) => UrinaryRetention;
-            IEnumerable<Condition> o_ = context.Operators.Select<Condition, Condition>(m_, n_);
-            return o_;
+            bool? n_ = context.Operators.Exists<Condition>(m_);
+            return n_;
         }
 
-        IEnumerable<Condition> g_ = context.Operators.SelectMany<Condition, Condition>(e_, f_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
 
         bool? h_(Condition UrinaryRetention) {
-            bool? ad_ = this.verificationStatusIsNotInvalid(context, UrinaryRetention);
-            return ad_;
+            bool? ac_ = this.verificationStatusIsNotInvalid(context, UrinaryRetention);
+            return ac_;
         }
 
         IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
@@ -845,37 +842,36 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             a_,
         ];
 
-        IEnumerable<Condition> c_(Condition InitialBPHDiagnosis) {
+        bool? c_(Condition InitialBPHDiagnosis) {
             CqlValueSet f_ = this.Hospital_Services_for_Urology_Care(context);
             IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
             bool? h_(Encounter UrologyHospitalServices) {
-                CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
-                CqlDateTime m_ = context.Operators.Start(l_);
-                Period n_ = UrologyHospitalServices?.Period;
-                CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
-                CqlDateTime p_ = context.Operators.Start(o_);
-                CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
-                CqlDateTime s_ = context.Operators.End(r_);
-                CqlQuantity t_ = context.Operators.Quantity(31m, "days");
-                CqlDateTime u_ = context.Operators.Add(s_, t_);
-                CqlInterval<CqlDateTime> v_ = context.Operators.Interval(p_, u_, true, true);
-                bool? w_ = context.Operators.In<CqlDateTime>(m_, v_, (string)default);
-                Code<Encounter.EncounterStatus> x_ = UrologyHospitalServices?.StatusElement;
-                Encounter.EncounterStatus? y_ = x_?.Value;
-                Code<Encounter.EncounterStatus> z_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(y_);
-                bool? aa_ = context.Operators.Equal(z_, "finished");
-                bool? ab_ = context.Operators.And(w_, aa_);
-                return ab_;
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
+                CqlDateTime l_ = context.Operators.Start(k_);
+                Period m_ = UrologyHospitalServices?.Period;
+                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
+                CqlDateTime o_ = context.Operators.Start(n_);
+                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
+                CqlDateTime r_ = context.Operators.End(q_);
+                CqlQuantity s_ = context.Operators.Quantity(31m, "days");
+                CqlDateTime t_ = context.Operators.Add(r_, s_);
+                CqlInterval<CqlDateTime> u_ = context.Operators.Interval(o_, t_, true, true);
+                bool? v_ = context.Operators.In<CqlDateTime>(l_, u_, (string)default);
+                Code<Encounter.EncounterStatus> w_ = UrologyHospitalServices?.StatusElement;
+                Encounter.EncounterStatus? x_ = w_?.Value;
+                Code<Encounter.EncounterStatus> y_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(x_);
+                bool? z_ = context.Operators.Equal(y_, "finished");
+                bool? aa_ = context.Operators.And(v_, z_);
+                return aa_;
             }
 
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
-            Condition j_(Encounter UrologyHospitalServices) => InitialBPHDiagnosis;
-            IEnumerable<Condition> k_ = context.Operators.Select<Encounter, Condition>(i_, j_);
-            return k_;
+            bool? j_ = context.Operators.Exists<Encounter>(i_);
+            return j_;
         }
 
-        IEnumerable<Condition> d_ = context.Operators.SelectMany<Condition, Condition>((IEnumerable<Condition>)b_, c_);
+        IEnumerable<Condition> d_ = context.Operators.Where<Condition>((IEnumerable<Condition>)b_, c_);
         Condition e_ = context.Operators.SingletonFrom<Condition>(d_);
         return e_;
     }
@@ -894,34 +890,33 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        IEnumerable<Condition> f_(Condition MorbidObesityDiagnosis) {
+        bool? f_(Condition MorbidObesityDiagnosis) {
             (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? j_ = this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(context);
             (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?[] k_ = [
                 j_,
             ];
 
             bool? l_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment) {
-                CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MorbidObesityDiagnosis);
-                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-                bool? r_ = context.Operators.Overlaps(p_, q_, (string)default);
-                CqlDateTime t_ = context.Operators.Start(p_);
-                CqlDateTime u_ = FollowUpUSSAssessment?.effectiveDatetime;
-                bool? v_ = context.Operators.SameOrBefore(t_, u_, (string)default);
-                bool? w_ = context.Operators.And(r_, v_);
-                return w_;
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MorbidObesityDiagnosis);
+                CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
+                bool? q_ = context.Operators.Overlaps(o_, p_, (string)default);
+                CqlDateTime s_ = context.Operators.Start(o_);
+                CqlDateTime t_ = FollowUpUSSAssessment?.effectiveDatetime;
+                bool? u_ = context.Operators.SameOrBefore(s_, t_, (string)default);
+                bool? v_ = context.Operators.And(q_, u_);
+                return v_;
             }
 
             IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> m_ = context.Operators.Where<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>((IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>)k_, l_);
-            Condition n_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment) => MorbidObesityDiagnosis;
-            IEnumerable<Condition> o_ = context.Operators.Select<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, Condition>(m_, n_);
-            return o_;
+            bool? n_ = context.Operators.Exists<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(m_);
+            return n_;
         }
 
-        IEnumerable<Condition> g_ = context.Operators.SelectMany<Condition, Condition>(e_, f_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
 
         bool? h_(Condition MorbidObesityDiagnosis) {
-            bool? x_ = this.verificationStatusIsNotInvalid(context, MorbidObesityDiagnosis);
-            return x_;
+            bool? w_ = this.verificationStatusIsNotInvalid(context, MorbidObesityDiagnosis);
+            return w_;
         }
 
         IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
@@ -941,54 +936,53 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     {
         IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-bmi"));
 
-        IEnumerable<Observation> b_(Observation BMIExam) {
+        bool? b_(Observation BMIExam) {
             (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? h_ = this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(context);
             (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?[] i_ = [
                 h_,
             ];
 
             bool? j_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment) {
-                DataType n_ = BMIExam?.Value;
-                CqlQuantity o_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, n_ as Quantity);
-                CqlQuantity p_ = context.Operators.Quantity(40m, "kg/m2");
-                bool? q_ = context.Operators.GreaterOrEqual(o_, p_);
-                Code<ObservationStatus> r_ = BMIExam?.StatusElement;
-                ObservationStatus? s_ = r_?.Value;
-                string t_ = context.Operators.Convert<string>(s_);
-                string[] u_ = [
+                DataType m_ = BMIExam?.Value;
+                CqlQuantity n_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, m_ as Quantity);
+                CqlQuantity o_ = context.Operators.Quantity(40m, "kg/m2");
+                bool? p_ = context.Operators.GreaterOrEqual(n_, o_);
+                Code<ObservationStatus> q_ = BMIExam?.StatusElement;
+                ObservationStatus? r_ = q_?.Value;
+                string s_ = context.Operators.Convert<string>(r_);
+                string[] t_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
-                bool? w_ = context.Operators.And(q_, v_);
-                DataType x_ = BMIExam?.Effective;
-                object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                CqlDateTime z_ = QICoreCommon_4_0_000.Instance.earliest(context, y_);
-                CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
-                bool? ab_ = context.Operators.In<CqlDateTime>(z_, aa_, "day");
-                bool? ac_ = context.Operators.And(w_, ab_);
-                object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                CqlDateTime af_ = QICoreCommon_4_0_000.Instance.earliest(context, ae_);
-                CqlDateTime ag_ = FollowUpUSSAssessment?.effectiveDatetime;
-                bool? ah_ = context.Operators.SameOrBefore(af_, ag_, (string)default);
-                bool? ai_ = context.Operators.And(ac_, ah_);
-                return ai_;
+                bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
+                bool? v_ = context.Operators.And(p_, u_);
+                DataType w_ = BMIExam?.Effective;
+                object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                CqlDateTime y_ = QICoreCommon_4_0_000.Instance.earliest(context, x_);
+                CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
+                bool? aa_ = context.Operators.In<CqlDateTime>(y_, z_, "day");
+                bool? ab_ = context.Operators.And(v_, aa_);
+                object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                CqlDateTime ae_ = QICoreCommon_4_0_000.Instance.earliest(context, ad_);
+                CqlDateTime af_ = FollowUpUSSAssessment?.effectiveDatetime;
+                bool? ag_ = context.Operators.SameOrBefore(ae_, af_, (string)default);
+                bool? ah_ = context.Operators.And(ab_, ag_);
+                return ah_;
             }
 
             IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> k_ = context.Operators.Where<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>((IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>)i_, j_);
-            Observation l_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment) => BMIExam;
-            IEnumerable<Observation> m_ = context.Operators.Select<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, Observation>(k_, l_);
-            return m_;
+            bool? l_ = context.Operators.Exists<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(k_);
+            return l_;
         }
 
-        IEnumerable<Observation> c_ = context.Operators.SelectMany<Observation, Observation>(a_, b_);
+        IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
 
         CqlDateTime d_(Observation BMIExam) {
-            DataType aj_ = BMIExam?.Effective;
-            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-            CqlDateTime al_ = QICoreCommon_4_0_000.Instance.earliest(context, ak_);
-            return al_;
+            DataType ai_ = BMIExam?.Effective;
+            object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+            CqlDateTime ak_ = QICoreCommon_4_0_000.Instance.earliest(context, aj_);
+            return ak_;
         }
 
         IEnumerable<CqlDateTime> e_ = context.Operators.Select<Observation, CqlDateTime>(c_, d_);

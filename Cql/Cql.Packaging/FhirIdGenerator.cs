@@ -6,14 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Packaging;
 
 internal static partial class FhirIdGenerator
 {
-    private static readonly MD5 MD5 = MD5.Create();
-
     [GeneratedRegex(
         """
         (?<word>
@@ -83,7 +82,7 @@ internal static partial class FhirIdGenerator
     private static string GetMd5Hash(CqlVersionedLibraryIdentifier input)
     {
         var text = input.FormatDelimited('*');
-        byte[] hashBytes = MD5.ComputeHash(Encoding.UTF8.GetBytes(text));
+        byte[] hashBytes = Hasher.Instance.HashData(text);
         StringBuilder sb = new StringBuilder();
         foreach (byte b in hashBytes)
             sb.Append(b.ToString("x2", CultureInfo.InvariantCulture));
