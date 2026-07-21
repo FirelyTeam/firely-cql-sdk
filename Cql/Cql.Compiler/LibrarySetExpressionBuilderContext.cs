@@ -11,7 +11,7 @@ using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Runtime;
 using Library = Hl7.Cql.Elm.Library;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// Orchestrates building each library of a library set and merging its definitions; see the

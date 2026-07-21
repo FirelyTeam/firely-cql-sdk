@@ -10,7 +10,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Model;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using F = Hl7.Fhir.Model;
 

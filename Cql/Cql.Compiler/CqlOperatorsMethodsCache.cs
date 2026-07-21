@@ -9,7 +9,7 @@
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// Caches <see cref="ICqlOperators"/>' methods by name and by (name, parameter count), so

@@ -9,7 +9,7 @@
 using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Elm;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.

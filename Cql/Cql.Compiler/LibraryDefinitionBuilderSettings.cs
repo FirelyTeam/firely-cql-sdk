@@ -9,7 +9,7 @@
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// Describes settings to control the behavior of <see cref="Ir.ExpressionBuilder"/>
+    /// Describes settings to control the behavior of <see cref="ExpressionBuilder"/>
     /// </summary>
     internal class ExpressionBuilderSettings
     {

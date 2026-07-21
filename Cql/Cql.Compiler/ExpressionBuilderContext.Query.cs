@@ -12,7 +12,7 @@ using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Operators;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using Tuple = Hl7.Cql.Elm.Tuple;
 using IrExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (Hl7.Cql.Compiler.Ir.IrExpression, Hl7.Cql.Elm.Element)>;

@@ -13,7 +13,7 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Utility;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// Argument conversions: <see cref="TryConvert"/> and the <see cref="TypeConversion"/>

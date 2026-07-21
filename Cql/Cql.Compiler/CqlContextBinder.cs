@@ -8,7 +8,7 @@
 
 using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// Facilitates binding to <see cref="CqlContext"/> methods. See the remarks on

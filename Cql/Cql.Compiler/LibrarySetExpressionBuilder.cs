@@ -10,7 +10,7 @@ using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// Creates a <see cref="LibrarySetExpressionBuilderContext"/> per library set; see the

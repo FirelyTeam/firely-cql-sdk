@@ -9,7 +9,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// The <see cref="IBuilderContext"/> implementation (element stack, <c>PushElement</c>,

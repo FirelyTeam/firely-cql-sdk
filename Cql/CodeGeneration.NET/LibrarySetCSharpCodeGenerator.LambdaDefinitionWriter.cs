@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Ir;
 
 namespace Hl7.Cql.CodeGeneration.NET;

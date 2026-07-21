@@ -9,7 +9,7 @@
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// The base class for the definitions the expression builder produces for a library

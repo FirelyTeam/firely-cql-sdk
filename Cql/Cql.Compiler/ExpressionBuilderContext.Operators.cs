@@ -11,7 +11,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using Convert = System.Convert;
 using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;

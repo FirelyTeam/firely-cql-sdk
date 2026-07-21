@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// The hand-written bindings (Select/Where/SelectMany/Retrieve/Coalesce/etc. with generic

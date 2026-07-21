@@ -12,7 +12,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using Element = Hl7.Cql.Elm.Element;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// Resolving the .NET type for an ELM element or type specifier.

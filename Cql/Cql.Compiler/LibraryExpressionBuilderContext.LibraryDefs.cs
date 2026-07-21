@@ -10,7 +10,7 @@ using Hl7.Cql.Exceptions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// The definition dictionary and the alias/code/code-system bookkeeping shared by the

@@ -8,7 +8,7 @@
 
 using Hl7.Cql.Abstractions.Infrastructure;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using IrExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (Hl7.Cql.Compiler.Ir.IrExpression, Hl7.Cql.Elm.Element)>;
 

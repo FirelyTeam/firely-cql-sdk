@@ -14,7 +14,7 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using DateTime = Hl7.Cql.Elm.DateTime;
 using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;

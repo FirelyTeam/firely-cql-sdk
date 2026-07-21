@@ -11,7 +11,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 

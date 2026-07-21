@@ -10,7 +10,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Operators;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// Overload resolution (<see cref="ResolveMethodInfoWithPotentialArgumentConversions"/>):

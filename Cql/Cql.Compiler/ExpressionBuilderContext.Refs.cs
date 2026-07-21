@@ -13,7 +13,7 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using ChoiceTypeSpecifier = Hl7.Cql.Elm.ChoiceTypeSpecifier;
 using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;

@@ -10,7 +10,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// Creates an <see cref="ExpressionBuilderContext"/> per library; see the remarks there.
