@@ -14,7 +14,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
     {
         internal VersionedIdentifierDictionary(StringComparer? idComparer = null)
         {
-            // CQL is a case-sensitive language (spec/condensed/03-developersguide.md SS3.4.1),
+            // CQL is a case-sensitive language (spec/cql/condensed/03-developersguide.md SS3.4.1),
             // so library identifiers must be matched case-sensitively - matching
             // CqlLibrarySemantics.CompareIds, used everywhere else for the same comparison.
             Versions = new(idComparer ?? StringComparer.Ordinal);
