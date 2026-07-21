@@ -19,3 +19,7 @@ Structure the body with two sections separated by `---`:
 Label both explicitly even if everything is primary work (still include an "Auxiliary Work" section, e.g. "None").
 
 When asked to just show the description (not post it), output raw markdown in a fenced ` ```markdown ` block. When posting/updating it on GitHub, use `gh pr edit --body-file` on a temp file rather than `--body` with an inline string, to avoid shell-escaping issues.
+
+**Always link the PR to its tracking ticket.** Include a closing keyword (`Fixes #NNNN`, or `Refs #NNNN` if it shouldn't auto-close the issue) directly in the PR body/title — a closing keyword buried only in a commit message on the branch does **not** reliably create the tracked link (verify with `gh api graphql` querying `pullRequest.closingIssuesReferences` if in doubt). If no ticket exists yet for the work, create one first (see `file-github-issue` / `pickup-github-ticket`) rather than opening an unlinked PR.
+
+If `gh pr edit --body-file` fails with an unrelated GraphQL error (e.g. a "Projects (classic)" deprecation error), the edit did not apply — fall back to `gh api repos/<owner>/<repo>/pulls/<number> -X PATCH --input <json-file>` with a `{"body": "..."}` payload, and re-verify the body actually changed.
