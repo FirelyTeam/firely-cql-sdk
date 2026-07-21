@@ -7,6 +7,12 @@
 
 ## Features
 
+- The packager now maps `@stratifier` ELM annotations onto `Measure.group.stratifier`: all
+  stratifier-tagged definitions of a group collapse into a single container stratifier
+  (`<group>-Stratifier`) with one `component` per dimension. See
+  [docs/cql-packager.md](../cql-packager.md#measure-annotations). Previously these annotations
+  were silently ignored.
+
 ## Fixes
 
 - `Hasher` no longer shares a single static `MD5` instance across threads, fixing intermittent `CryptographicException: Concurrent operations from multiple threads on this type are not supported` when tuple metadata signature hashes were computed concurrently (e.g. during parallel measure evaluation). It now uses the thread-safe one-shot `MD5.HashData` API (#1372).
