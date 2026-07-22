@@ -299,11 +299,14 @@ regenerated goldens as the review artifact (the first one also bumps the
 
 ## Verification
 
-- Phases 2–5: golden-file byte comparison of generated C# (old vs. new pipeline) across
-  `LibrarySets\RR23`, `dqm-content-qicore-2025`, and demo measures; full `CqlToElmTests` +
-  `CoreTests` suites against the new pipeline behind the flag before flipping.
-- End-to-end: `Examples\CqlSdkExamples` and `Demo` measure runs must produce identical
-  results under both pipelines.
+- The dual-pipeline parity proof was completed before the Expression-based pipeline was
+  deleted: generated C# was byte-compared across all three golden corpora — `LibrarySets\RR23`,
+  `dqm-content-qicore-2025`, and the full NCQA HEDIS 2025 corpus (382 libraries) — and found
+  identical in every case.
+- Post-deletion, correctness is pinned by the golden corpora themselves: `CoreTests` (incl. RR23
+  + CMS56 golden-regeneration tests) and `CqlToElmTests` must pass, and the HEDIS 2025
+  end-to-end test (`HEDIS_2025_CompilesToAssemblies`) must compile all 382 libraries to
+  assemblies without error.
 
 ## What gets deleted / rewritten / kept
 

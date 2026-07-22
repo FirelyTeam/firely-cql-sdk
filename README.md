@@ -109,7 +109,7 @@ The SDK depends on the following key external packages:
 ### Parsing & Compilation
 
 - **Antlr4.Runtime.Standard**: Version 4.13.1 - ANTLR4 runtime for CQL grammar parsing
-- **Microsoft.CodeAnalysis.CSharp**: Version 4.12.0 - Roslyn C# compiler APIs
+- **Microsoft.CodeAnalysis.CSharp**: Version 5.3.0 - Roslyn C# compiler APIs
 
 ### Configuration & Logging
 
