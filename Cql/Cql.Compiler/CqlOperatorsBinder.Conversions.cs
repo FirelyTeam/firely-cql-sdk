@@ -120,10 +120,8 @@ partial class CqlOperatorsBinder
             ? t.arg!
             : throw new InvalidOperationException($"Cannot convert '{expression.Type.FullName}' to '{type.FullName}'");
 
-    // The assign-to-type / type-as / is-null-constant helpers formerly duplicated here (private
-    // phase-3 copies, predating CodeExpressionExtensions) are gone as of phase 6: TryConvert and
-    // the Specific.cs bindings now call the shared Hl7.Cql.Compiler.CodeModel.CodeExpressionExtensions
-    // versions directly (NewAssignToTypeExpression / TryNewAssignToTypeExpression /
-    // NewTypeAsExpression / IsNullConstant). There is no shared "NullOfType" helper there, so
-    // those call sites construct `new CodeConstant(null, type)` inline instead.
+    // TryConvert and the Specific.cs bindings call CodeExpressionExtensions helpers
+    // (NewAssignToTypeExpression / TryNewAssignToTypeExpression / NewTypeAsExpression /
+    // IsNullConstant) directly; null-of-type constants are constructed inline as
+    // new CodeConstant(null, type).
 }
