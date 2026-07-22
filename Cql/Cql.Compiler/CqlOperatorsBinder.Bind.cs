@@ -52,16 +52,16 @@ partial class CqlOperatorsBinder
     ///  <param name="genericTypeArguments">When binding to a generic method definition, these are the type arguments.</param>
     ///  <param name="throwError">Whether to throw an error if no method overload could be found. This is the default behavior. Otherwise, returns the tuple with method as null.</param>
     ///  <exception cref="ArgumentException">If no method overload is discovered, and if <paramref name="throwError"/> is <c>true</c>.</exception>
-    private (MethodInfo? method, IrExpression[] arguments) ResolveMethodInfoWithPotentialArgumentConversions(
+    private (MethodInfo? method, CodeExpression[] arguments) ResolveMethodInfoWithPotentialArgumentConversions(
         string methodName,
-        IrExpression[] methodArguments,
+        CodeExpression[] methodArguments,
         Type[] genericTypeArguments,
         bool throwError = true)
     {
         if (_logger.IsEnabled(LogLevel.Debug))
             _logger.LogDebug("Resolving method overload for {input}", FormatMethodCall(methodName, methodArguments, genericTypeArguments));
 
-        (MethodInfo method, IrExpression[] arguments, TypeConversion[] conversionMethods)[] candidates =
+        (MethodInfo method, CodeExpression[] arguments, TypeConversion[] conversionMethods)[] candidates =
             ResolveMethodInfosWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments).ToArray();
 
         var candidate = candidates switch
@@ -109,8 +109,8 @@ partial class CqlOperatorsBinder
                 return default;
         }
 
-        (MethodInfo? method, IrExpression[] arguments, TypeConversion[] conversionMethods) PickCandidate(
-            (MethodInfo method, IrExpression[] arguments, TypeConversion[] conversionMethods)[] candidates)
+        (MethodInfo? method, CodeExpression[] arguments, TypeConversion[] conversionMethods) PickCandidate(
+            (MethodInfo method, CodeExpression[] arguments, TypeConversion[] conversionMethods)[] candidates)
         {
             if (methodArguments.Length > 0)
             {
@@ -142,7 +142,7 @@ partial class CqlOperatorsBinder
             throw new InvalidOperationException("");
         }
 
-        double Score((MethodInfo method, IrExpression[] arguments, TypeConversion[] conversionMethods) candidate)
+        double Score((MethodInfo method, CodeExpression[] arguments, TypeConversion[] conversionMethods) candidate)
         {
             var score =
                 PadWhenEmpty( // Cannot get average of empty list
@@ -170,13 +170,13 @@ partial class CqlOperatorsBinder
         }
     }
 
-    private IEnumerable<(MethodInfo method, IrExpression[] arguments, TypeConversion[] conversionMethods)>
+    private IEnumerable<(MethodInfo method, CodeExpression[] arguments, TypeConversion[] conversionMethods)>
         ResolveMethodInfosWithPotentialArgumentConversions(
             string methodName,
-            IrExpression[] arguments,
+            CodeExpression[] arguments,
             Type[] genericTypeArguments)
     {
-        IrExpression[] args = arguments; // So we don't modify the original array
+        CodeExpression[] args = arguments; // So we don't modify the original array
 
         if (genericTypeArguments.Length > 0)
         {
@@ -287,7 +287,7 @@ partial class CqlOperatorsBinder
             }
 
             // Handles precision cases where the last argument might be supplied or not
-            if (i <= 0 && args[^1] is IrConstant { Value: null })
+            if (i <= 0 && args[^1] is CodeConstant { Value: null })
                 args = args[..^1];
             else
                 break;
@@ -295,10 +295,10 @@ partial class CqlOperatorsBinder
 
         bool TryBindArguments(
             ParameterInfo[] parameters,
-            out IrExpression[] bindArgs,
+            out CodeExpression[] bindArgs,
             out TypeConversion[] bindConversions)
         {
-            bindArgs = new IrExpression[args.Length];
+            bindArgs = new CodeExpression[args.Length];
             bindConversions = new TypeConversion[args.Length];
 
             for (int i = 0; i < args.Length; i++)
@@ -314,13 +314,13 @@ partial class CqlOperatorsBinder
         }
     }
 
-    private static IrInvoke BindToDirectMethod(
+    private static CodeInvoke BindToDirectMethod(
         string methodName,
-        params IrExpression[] arguments)
+        params CodeExpression[] arguments)
     {
         // FIXME(phase3-review): the old binder used Expression.Call(receiver, methodName,
         // typeArguments, arguments), which performs its own reflection-based overload
-        // resolution against the argument expressions. IrInvoke requires an already-resolved
+        // resolution against the argument expressions. CodeInvoke requires an already-resolved
         // MethodInfo, so this resolves by name + argument count only. Every current call site
         // (ResolveValueSet, FlattenLateBoundList, and the ConvertXToY family selected via
         // CqlOperators.ConversionFunctionName) has exactly one overload under that name, so this
@@ -332,12 +332,12 @@ partial class CqlOperatorsBinder
             0 => throw new InvalidOperationException($"No method named '{methodName}' with {arguments.Length} parameter(s) was found on {nameof(ICqlOperators)}."),
             _ => throw new InvalidOperationException($"Method name '{methodName}' with {arguments.Length} parameter(s) is ambiguous on {nameof(ICqlOperators)}; direct binding requires a unique overload by name and arity.")
         };
-        return new IrInvoke(OperatorsReceiver, method, arguments);
+        return new CodeInvoke(OperatorsReceiver, method, arguments);
     }
 
-    private static IrInvoke BindToDirectMethod(
+    private static CodeInvoke BindToDirectMethod(
         MethodInfo method,
-        params IrExpression[] expressions) =>
+        params CodeExpression[] expressions) =>
         new(OperatorsReceiver, method, expressions);
 
     /// <summary>
@@ -345,7 +345,7 @@ partial class CqlOperatorsBinder
     /// extension (which formatted from <c>Expression.Type</c>), used only for debug logging and
     /// error messages. Produces e.g. <c>"MethodName&lt;T1&gt;(Type1, Type2)"</c>.
     /// </summary>
-    private static string FormatMethodCall(string methodName, IrExpression[] args, Type[] genericTypeArguments)
+    private static string FormatMethodCall(string methodName, CodeExpression[] args, Type[] genericTypeArguments)
     {
         var typeArgsStr = genericTypeArguments.Length == 0
             ? ""

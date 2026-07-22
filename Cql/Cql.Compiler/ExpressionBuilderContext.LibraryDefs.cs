@@ -109,7 +109,7 @@ partial class ExpressionBuilderContext
                 // does not carry the CqlContext parameter (see CqlLambdaDefinition remarks) — this
                 // array holds only the CQL operand locals, so it starts empty instead of
                 // `[CqlExpressions.ParameterExpression]`.
-                IrLocal[] parameters = [];
+                CodeLocal[] parameters = [];
                 IReadOnlyDictionary<string, string> originalParameterNames = new Dictionary<string, string>();
 
                 // Handle function definitions
@@ -143,7 +143,7 @@ partial class ExpressionBuilderContext
                 if (expressionDef.expression is { } expressionDefExpression)
                 {
                     var bodyExpression = TranslateArg(expressionDefExpression);
-                    var lambda = new IrLambda(parameters, bodyExpression);
+                    var lambda = new CodeLambda(parameters, bodyExpression);
                     var tags = BuildTags();
                     var def = expressionDef is FunctionDef
                                   ? new CqlFunctionDefinition(lambda, expressionDefName, originalParameterNames, tags)
@@ -223,7 +223,7 @@ partial class ExpressionBuilderContext
 
                 var operandType = TypeFor(operandDef.operandTypeSpecifier)!;
                 var normalizedName = IdentifierNormalizer.Normalize(operandDef.name);
-                var parameter = new IrLocal(operandType, normalizedName);
+                var parameter = new CodeLocal(operandType, normalizedName);
                 _operands.Add(operandDef.name, parameter);
                 parameterTypes[i++] = parameter.Type;
 
@@ -268,7 +268,7 @@ partial class ExpressionBuilderContext
                 var defaultValue =
                     parameter.@default != null
                         ? TranslateArg(parameter.@default).NewTypeAsExpression<object>()
-                        : new IrConstant(null, typeof(object));
+                        : new CodeConstant(null, typeof(object));
                 var resolveParam = _cqlContextBinder.ResolveParameter(_libraryContext.LibraryVersionedIdentifier, parameterName, defaultValue);
 
                 var parameterType = TypeFor(parameter.parameterTypeSpecifier)!;
@@ -276,8 +276,8 @@ partial class ExpressionBuilderContext
                 // e.g. (bundle, context) => context.Parameters["Measurement Period"]
                 // NOTE(phase4): the IR lambda for a parameter definition has no parameters at all,
                 // not even the context (see CqlLambdaDefinition remarks) — the body references
-                // IrContextParameter.Instance directly (see CqlContextBinder.ResolveParameter).
-                var lambda = new IrLambda([], cast);
+                // CodeContextParameter.Instance directly (see CqlContextBinder.ResolveParameter).
+                var lambda = new CodeLambda([], cast);
                 var paramDef = new CqlParameterDefinition(lambda, parameterName);
                 _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, parameterName, paramDef);
             }

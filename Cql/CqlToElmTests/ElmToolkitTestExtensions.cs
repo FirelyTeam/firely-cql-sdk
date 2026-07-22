@@ -9,7 +9,7 @@
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Invocation.Toolkit;
 
@@ -61,14 +61,14 @@ internal static class ElmToolkitTestExtensions
     }
 
     /// <summary>
-    /// Builds an <see cref="IrLambda"/> wrapping the translated <paramref name="expression"/>.
+    /// Builds an <see cref="CodeLambda"/> wrapping the translated <paramref name="expression"/>.
     /// Unlike the old (deleted) Expression-based <c>Lambda()</c>, the IR lambda carries no
-    /// leading <c>CqlContext</c> parameter (the well-known <see cref="IrContextParameter"/> is
+    /// leading <c>CqlContext</c> parameter (the well-known <see cref="CodeContextParameter"/> is
     /// referenced directly instead) -- so this has zero declared parameters, mirroring how
     /// <see cref="ExpressionBuilderContext"/> builds expression-definition lambdas (see
     /// <c>ExpressionBuilderContext.LibraryDefs.cs</c>).
     /// </summary>
-    internal static IrLambda Lambda(
+    internal static CodeLambda Lambda(
         this ElmToolkit elmToolkit,
         Expression expression)
     {
@@ -77,7 +77,7 @@ internal static class ElmToolkitTestExtensions
 
         CqlDefinitionDictionary definitions = new();
         var ctx = libraryExpressionBuilder.NewExpressionBuilderContext(Library, definitions);
-        IrExpression translated = ctx.TranslateArg(expression);
-        return new IrLambda([], translated);
+        CodeExpression translated = ctx.TranslateArg(expression);
+        return new CodeLambda([], translated);
     }
 }

@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
 /// A function value. The emitter prints it as a local function (the style the previous
@@ -14,9 +14,9 @@ namespace Hl7.Cql.Compiler.Ir;
 /// <see cref="Type"/> is the corresponding <c>Func&lt;…&gt;</c> delegate type, which is what
 /// operator overload resolution matches against parameters like <c>Func&lt;T, bool?&gt;</c>.
 /// </summary>
-internal sealed class IrLambda : IrExpression
+internal sealed class CodeLambda : CodeExpression
 {
-    public IrLambda(IReadOnlyList<IrLocal> parameters, IrExpression body)
+    public CodeLambda(IReadOnlyList<CodeLocal> parameters, CodeExpression body)
     {
         Parameters = parameters;
         Body = body;
@@ -25,10 +25,10 @@ internal sealed class IrLambda : IrExpression
     }
 
     /// <summary>The parameter variables; occurrences in <see cref="Body"/> are these same
-    /// instances (reference identity, see <see cref="IrLocal"/>).</summary>
-    public IReadOnlyList<IrLocal> Parameters { get; }
+    /// instances (reference identity, see <see cref="CodeLocal"/>).</summary>
+    public IReadOnlyList<CodeLocal> Parameters { get; }
 
-    public IrExpression Body { get; }
+    public CodeExpression Body { get; }
 
     public override Type Type { get; }
 }

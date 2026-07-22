@@ -7,7 +7,7 @@
  */
 
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
@@ -20,7 +20,7 @@ namespace CoreTests;
 /// <summary>
 /// Unit tests for <see cref="CqlOperatorsBinder"/> (and <see cref="CqlContextBinder"/>),
 /// the phase-3 port of <see cref="Hl7.Cql.Compiler.CqlOperatorsBinder"/> onto the typed IR.
-/// The tests build small IR argument trees directly via the <c>Hl7.Cql.Compiler.Ir.*</c> node
+/// The tests build small IR argument trees directly via the <c>Hl7.Cql.Compiler.CodeModel.*</c> node
 /// constructors and assert on the resulting IR shape (bound method, generic arguments,
 /// inserted conversions, null padding) — not on emitted text; the binder's contract is the
 /// overload-resolution outcome, which must match the old Expression-based binder's.
@@ -33,16 +33,16 @@ public class CqlOperatorsBinderTests
         new TestTypeResolver(),
         Hl7.Cql.Conversion.TypeConverter.Create());
 
-    /// <summary>Asserts the call is an <see cref="IrInvoke"/> on <c>context.Operators</c>
-    /// (an <see cref="IrProperty"/> over the <see cref="IrContextParameter"/>) and returns it.</summary>
-    private static IrInvoke AssertOperatorsInvoke(IrExpression result)
+    /// <summary>Asserts the call is an <see cref="CodeInvoke"/> on <c>context.Operators</c>
+    /// (an <see cref="CodeProperty"/> over the <see cref="CodeContextParameter"/>) and returns it.</summary>
+    private static CodeInvoke AssertOperatorsInvoke(CodeExpression result)
     {
-        var invoke = result as IrInvoke;
-        Assert.IsNotNull(invoke, $"Expected an IrInvoke, got {result.GetType().Name}.");
-        var receiver = invoke.Receiver as IrProperty;
+        var invoke = result as CodeInvoke;
+        Assert.IsNotNull(invoke, $"Expected an CodeInvoke, got {result.GetType().Name}.");
+        var receiver = invoke.Receiver as CodeProperty;
         Assert.IsNotNull(receiver, "Expected the receiver to be a property access.");
         Assert.AreEqual(nameof(CqlContext.Operators), receiver.Member.Name);
-        Assert.IsInstanceOfType<IrContextParameter>(receiver.Receiver);
+        Assert.IsInstanceOfType<CodeContextParameter>(receiver.Receiver);
         return invoke;
     }
 
@@ -50,8 +50,8 @@ public class CqlOperatorsBinderTests
     public void Add_Int32Arguments_BindsExactOverloadWithoutConversions()
     {
         var binder = CreateBinder();
-        var left = new IrConstant(1, typeof(int?));
-        var right = new IrConstant(2, typeof(int?));
+        var left = new CodeConstant(1, typeof(int?));
+        var right = new CodeConstant(2, typeof(int?));
 
         var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.Add), [left, right], []));
 
@@ -73,8 +73,8 @@ public class CqlOperatorsBinderTests
         // OperatorConvert + one ExactType) over Add(CqlQuantity?, CqlQuantity?) (two
         // OperatorConverts); the int? argument is wrapped in ConvertIntegerToDecimal.
         var binder = CreateBinder();
-        var left = new IrConstant(1, typeof(int?));
-        var right = new IrConstant(2.5m, typeof(decimal?));
+        var left = new CodeConstant(1, typeof(int?));
+        var right = new CodeConstant(2.5m, typeof(decimal?));
 
         var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.Add), [left, right], []));
 
@@ -93,7 +93,7 @@ public class CqlOperatorsBinderTests
         // SingletonFrom<T>(IEnumerable<T>?) has no explicit type args at the call site: the
         // binder infers T by trying the argument's type and then its single generic argument.
         var binder = CreateBinder();
-        var source = new IrConstant(new int?[] { 1, 2 }, typeof(IEnumerable<int?>));
+        var source = new CodeConstant(new int?[] { 1, 2 }, typeof(IEnumerable<int?>));
 
         var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.SingletonFrom), [source], []));
 
@@ -108,12 +108,12 @@ public class CqlOperatorsBinderTests
     public void Where_LambdaArgument_BindsGenericMethodWithInferredElementType()
     {
         // Where<T>(IEnumerable<T>?, Func<T, bool?>): the specialized Where binding infers T
-        // from the source's element type, and the IrLambda (whose Type is Func<int?, bool?>)
+        // from the source's element type, and the CodeLambda (whose Type is Func<int?, bool?>)
         // binds to the delegate parameter without conversion.
         var binder = CreateBinder();
-        var source = new IrConstant(new int?[] { 1, 2 }, typeof(IEnumerable<int?>));
-        var parameter = new IrLocal(typeof(int?), "x");
-        var lambda = new IrLambda([parameter], new IrConstant(true, typeof(bool?)));
+        var source = new CodeConstant(new int?[] { 1, 2 }, typeof(IEnumerable<int?>));
+        var parameter = new CodeLocal(typeof(int?), "x");
+        var lambda = new CodeLambda([parameter], new CodeConstant(true, typeof(bool?)));
 
         var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.Where), [source, lambda], []));
 
@@ -131,9 +131,9 @@ public class CqlOperatorsBinderTests
         // the resolver retries without it (the trailing-null precision mechanism) and binds
         // the 2-parameter overload.
         var binder = CreateBinder();
-        var left = new IrConstant(1, typeof(int?));
-        var right = new IrConstant(2, typeof(int?));
-        var trailingNull = new IrConstant(null, typeof(object));
+        var left = new CodeConstant(1, typeof(int?));
+        var right = new CodeConstant(2, typeof(int?));
+        var trailingNull = new CodeConstant(null, typeof(object));
 
         var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.Add), [left, right, trailingNull], []));
 
@@ -150,9 +150,9 @@ public class CqlOperatorsBinderTests
         // instead the untyped (object) null constant is re-typed to the string? precision
         // parameter during argument conversion.
         var binder = CreateBinder();
-        var low = new IrConstant(new CqlDate(2020, 1, 1), typeof(CqlDate));
-        var high = new IrConstant(new CqlDate(2021, 1, 1), typeof(CqlDate));
-        var precision = new IrConstant(null, typeof(object));
+        var low = new CodeConstant(new CqlDate(2020, 1, 1), typeof(CqlDate));
+        var high = new CodeConstant(new CqlDate(2021, 1, 1), typeof(CqlDate));
+        var precision = new CodeConstant(null, typeof(object));
 
         var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.DurationBetween), [low, high, precision], []));
 
@@ -161,7 +161,7 @@ public class CqlOperatorsBinderTests
             new[] { typeof(CqlDate), typeof(CqlDate), typeof(string) },
             call.Method.GetParameters().Select(p => p.ParameterType).ToArray());
         Assert.AreEqual(3, call.Arguments.Count);
-        var boundPrecision = call.Arguments[2] as IrConstant;
+        var boundPrecision = call.Arguments[2] as CodeConstant;
         Assert.IsNotNull(boundPrecision);
         Assert.IsNull(boundPrecision.Value);
         Assert.AreEqual(typeof(string), boundPrecision.Type);
@@ -173,7 +173,7 @@ public class CqlOperatorsBinderTests
         // Name-dispatch: "Coalesce" routes through the specialized binding, which constructs
         // Coalesce<T> with T = the list's element type.
         var binder = CreateBinder();
-        var source = new IrConstant(new string?[] { "hello", null }, typeof(IEnumerable<string>));
+        var source = new CodeConstant(new string?[] { "hello", null }, typeof(IEnumerable<string>));
 
         var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.Coalesce), [source], []));
 
@@ -188,7 +188,7 @@ public class CqlOperatorsBinderTests
         // Mirrors the old binder's contract (see LibraryPreprocessorTest): Coalesce<T>
         // requires T to be a reference type or Nullable<U>.
         var binder = CreateBinder();
-        var source = new IrConstant(new[] { 1, 2, 3 }, typeof(IEnumerable<int>));
+        var source = new CodeConstant(new[] { 1, 2, 3 }, typeof(IEnumerable<int>));
 
         var exception = Assert.ThrowsException<ArgumentException>(() =>
             binder.BindToMethod(nameof(ICqlOperators.Coalesce), [source], []));
@@ -203,7 +203,7 @@ public class CqlOperatorsBinderTests
         // must bind to the unconstrained Coalesce<T> with T = the nullable tuple type, so the
         // no-match result is null.
         var binder = CreateBinder();
-        var source = new IrConstant(
+        var source = new CodeConstant(
             new (int? isHighRisk, int? isInconclusive, DateOnly? eventDate)?[]
             {
                 ((int?)1, null, new DateOnly(2026, 6, 11)),
@@ -230,7 +230,7 @@ public class CqlOperatorsBinderTests
             null
         ];
 
-        var sourceConstant = new IrConstant(
+        var sourceConstant = new CodeConstant(
             source,
             typeof(IEnumerable<(CqlTupleMetadata, bool? isInpatient, bool? isEdVisit, CqlInterval<CqlDate> inpatientPeriod, CqlDate historyReferenceDate, CqlDate episodeDate)?>));
 
@@ -246,7 +246,7 @@ public class CqlOperatorsBinderTests
         // Name-dispatch: "ToList" over something that is already a list short-circuits and
         // returns the operand itself instead of binding an operator call.
         var binder = CreateBinder();
-        var source = new IrConstant(new int?[] { 1 }, typeof(IEnumerable<int?>));
+        var source = new CodeConstant(new int?[] { 1 }, typeof(IEnumerable<int?>));
 
         var result = binder.BindToMethod("ToList", [source], []);
 
@@ -259,7 +259,7 @@ public class CqlOperatorsBinderTests
         // Phase 6 unified this with CannotBindToCqlOperatorError (the same error the old binder
         // threw), so the exception is now a CqlException, not a plain InvalidOperationException.
         var binder = CreateBinder();
-        var argument = new IrConstant(1, typeof(int?));
+        var argument = new CodeConstant(1, typeof(int?));
 
         var exception = Assert.ThrowsException<CqlException<Hl7.Cql.Compiler.CannotBindToCqlOperatorError>>(() =>
             binder.BindToMethod("ThisMethodDoesNotExist", [argument], []));
@@ -270,16 +270,16 @@ public class CqlOperatorsBinderTests
     public void BoundCall_ReceiverIsOperatorsPropertyOnContextParameter()
     {
         var binder = CreateBinder();
-        var argument = new IrConstant(1, typeof(int?));
+        var argument = new CodeConstant(1, typeof(int?));
 
-        var call = (IrInvoke)binder.BindToMethod(nameof(ICqlOperators.Abs), [argument], []);
+        var call = (CodeInvoke)binder.BindToMethod(nameof(ICqlOperators.Abs), [argument], []);
 
-        var receiver = call.Receiver as IrProperty;
+        var receiver = call.Receiver as CodeProperty;
         Assert.IsNotNull(receiver);
         Assert.IsInstanceOfType<PropertyInfo>(receiver.Member);
         Assert.AreEqual(nameof(CqlContext.Operators), receiver.Member.Name);
         Assert.AreEqual(typeof(ICqlOperators), receiver.Type);
-        Assert.AreSame(IrContextParameter.Instance, receiver.Receiver);
+        Assert.AreSame(CodeContextParameter.Instance, receiver.Receiver);
     }
 
     [TestMethod]
@@ -288,17 +288,17 @@ public class CqlOperatorsBinderTests
         // The specialized Union binding safe-casts both IValueSetFacade operands to
         // IEnumerable<CqlCode> and binds ValueSetUnion.
         var binder = CreateBinder();
-        var left = new IrConstant(null, typeof(IValueSetFacade));
-        var right = new IrConstant(null, typeof(IValueSetFacade));
+        var left = new CodeConstant(null, typeof(IValueSetFacade));
+        var right = new CodeConstant(null, typeof(IValueSetFacade));
 
         var call = AssertOperatorsInvoke(binder.BindToMethod("Union", [left, right], []));
 
         Assert.AreEqual(nameof(ICqlOperators.ValueSetUnion), call.Method.Name);
         foreach (var argument in call.Arguments)
         {
-            var cast = argument as IrCast;
-            Assert.IsNotNull(cast, $"Expected an IrCast argument, got {argument.GetType().Name}.");
-            Assert.AreEqual(IrCastKind.As, cast.Kind);
+            var cast = argument as CodeCast;
+            Assert.IsNotNull(cast, $"Expected an CodeCast argument, got {argument.GetType().Name}.");
+            Assert.AreEqual(CodeCastKind.As, cast.Kind);
             Assert.AreEqual(typeof(IEnumerable<CqlCode>), cast.Type);
         }
     }
@@ -309,7 +309,7 @@ public class CqlOperatorsBinderTests
         // The TryConvert path: no assignment conversion exists from int? to decimal?, so the
         // binder falls back to the CqlOperators conversion function.
         var binder = CreateBinder();
-        var operand = new IrConstant(1, typeof(int?));
+        var operand = new CodeConstant(1, typeof(int?));
 
         var result = binder.ConvertToType(operand, typeof(decimal?));
 
@@ -323,15 +323,15 @@ public class CqlOperatorsBinderTests
     public void ContextBinder_ResolveParameter_BindsCqlContextMethod()
     {
         var binder = new CqlContextBinder();
-        var defaultValue = new IrConstant(null, typeof(object));
+        var defaultValue = new CodeConstant(null, typeof(object));
 
-        var call = (IrInvoke)binder.ResolveParameter("MyLib-1.0.0", "Measurement Period", defaultValue);
+        var call = (CodeInvoke)binder.ResolveParameter("MyLib-1.0.0", "Measurement Period", defaultValue);
 
-        Assert.AreSame(IrContextParameter.Instance, call.Receiver);
+        Assert.AreSame(CodeContextParameter.Instance, call.Receiver);
         Assert.AreEqual(nameof(CqlContext.ResolveParameter), call.Method.Name);
         Assert.AreEqual(3, call.Arguments.Count);
-        Assert.AreEqual("MyLib-1.0.0", ((IrConstant)call.Arguments[0]).Value);
-        Assert.AreEqual("Measurement Period", ((IrConstant)call.Arguments[1]).Value);
+        Assert.AreEqual("MyLib-1.0.0", ((CodeConstant)call.Arguments[0]).Value);
+        Assert.AreEqual("Measurement Period", ((CodeConstant)call.Arguments[1]).Value);
         Assert.AreSame(defaultValue, call.Arguments[2]);
     }
 
@@ -339,7 +339,7 @@ public class CqlOperatorsBinderTests
     public void Flatten_NestedList_BindsGenericFlattenWithNestedElementType()
     {
         var binder = CreateBinder();
-        var source = new IrConstant(
+        var source = new CodeConstant(
             new List<List<int?>>(),
             typeof(IEnumerable<IEnumerable<int?>>));
 
@@ -349,7 +349,7 @@ public class CqlOperatorsBinderTests
         Assert.AreEqual(typeof(int?), call.Method.GetGenericArguments().Single());
 
         // Flatten over an already-flat list returns the operand unchanged.
-        var flat = new IrConstant(new int?[] { 1 }, typeof(IEnumerable<int?>));
+        var flat = new CodeConstant(new int?[] { 1 }, typeof(IEnumerable<int?>));
         Assert.AreSame(flat, binder.BindToMethod("Flatten", [flat], []));
     }
 }

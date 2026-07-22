@@ -8,7 +8,7 @@
 
 using System.Diagnostics;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET;
@@ -64,7 +64,7 @@ partial class LibrarySetCSharpCodeGenerator
 
             // The emitter prints the lambda bodies; its naming conventions must agree with the
             // class scaffolding this writer produces (see ICSharpNamingConventions).
-            _emitter = new CSharpIrEmitter(
+            _emitter = new CSharpEmitter(
                 LibrarySetWriter.TypeToCSharpConverter,
                 new CSharpNamingConventions(
                     LibrarySetWriter.TypeToCSharpConverter,
@@ -161,12 +161,12 @@ partial class LibrarySetCSharpCodeGenerator
 
         public LibrarySetWriter LibrarySetWriter { get; }
         private ElmLibrary? _library;
-        private CSharpIrEmitter? _emitter;
+        private CSharpEmitter? _emitter;
         public IndentedStringBuilder ISB { get; private set; } = new();
 
         /// <summary>The body emitter for the library being written, created per library in
         /// <see cref="AppendLibraryFile"/> (its naming conventions carry the library name).</summary>
-        public CSharpIrEmitter Emitter => _emitter ?? throw new InvalidOperationException("Library not initialized.");
+        public CSharpEmitter Emitter => _emitter ?? throw new InvalidOperationException("Library not initialized.");
 
         private static string GetDefinitionRegion(CqlDefinition definition) =>
             definition switch

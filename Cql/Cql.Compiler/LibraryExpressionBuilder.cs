@@ -35,7 +35,7 @@ internal class LibraryExpressionBuilder(
     public ExpressionBuilderContext NewExpressionBuilderContext(
         Library library,
         CqlDefinitionDictionary? libraryDefinitions = null,
-        Dictionary<string, IrLocal>? operands = null)
+        Dictionary<string, CodeLocal>? operands = null)
     {
         var libraryExpressionBuilderContext = NewLibraryExpressionBuilderContext(library, libraryDefinitions);
         return expressionBuilder.NewExpressionBuilderContext(libraryExpressionBuilderContext, operands);

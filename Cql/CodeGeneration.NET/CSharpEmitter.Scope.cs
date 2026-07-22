@@ -6,11 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Compiler.CodeModel;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-internal partial class CSharpIrEmitter
+internal partial class CSharpEmitter
 {
     /// <summary>
     /// One statement scope (a method body or local-function body). Holds the statements
@@ -19,7 +19,7 @@ internal partial class CSharpIrEmitter
     /// </summary>
     private sealed class Scope
     {
-        private readonly CSharpIrEmitter _emitter;
+        private readonly CSharpEmitter _emitter;
         private readonly VariableNameGenerator _names;
 
         // Statements are deferred renderers: plain declarations resolve immediately, but a
@@ -31,13 +31,13 @@ internal partial class CSharpIrEmitter
         private readonly List<Func<string>> _statements = [];
         private readonly Dictionary<string, Atom> _dedup = [];
 
-        private Scope(CSharpIrEmitter emitter, VariableNameGenerator names)
+        private Scope(CSharpEmitter emitter, VariableNameGenerator names)
         {
             _emitter = emitter;
             _names = names;
         }
 
-        public static Scope CreateRoot(CSharpIrEmitter emitter, IReadOnlyList<IrLocal> parameters)
+        public static Scope CreateRoot(CSharpEmitter emitter, IReadOnlyList<CodeLocal> parameters)
         {
             var names = new VariableNameGenerator(
                 reserved: parameters.Select(p => p.NameHint).OfType<string>(),
@@ -47,7 +47,7 @@ internal partial class CSharpIrEmitter
             return scope;
         }
 
-        private Scope CreateNested(IReadOnlyList<IrLocal> parameters)
+        private Scope CreateNested(IReadOnlyList<CodeLocal> parameters)
         {
             var nested = new Scope(
                 _emitter,
@@ -59,7 +59,7 @@ internal partial class CSharpIrEmitter
             return nested;
         }
 
-        private void NameParameters(IReadOnlyList<IrLocal> parameters)
+        private void NameParameters(IReadOnlyList<CodeLocal> parameters)
         {
             foreach (var p in parameters)
             {
@@ -118,7 +118,7 @@ internal partial class CSharpIrEmitter
         /// expression — or null when the node was a tail-position if-chain emitted entirely
         /// as <c>return</c>-ing statements.
         /// </summary>
-        public Atom? Linearize(IrExpression node, bool tailPosition = false)
+        public Atom? Linearize(CodeExpression node, bool tailPosition = false)
         {
             // if(true, A, B) => A / if(false, A, B) => B before dispatch, so the discarded
             // branch is never linearized — the old RedundantCastsTransformer fold (#1361).
@@ -127,22 +127,22 @@ internal partial class CSharpIrEmitter
             switch (node)
             {
                 // Simple expressions print in place, nothing to hoist.
-                case IrConstant or IrDefault or IrContextParameter:
+                case CodeConstant or CodeDefault or CodeContextParameter:
                     return new Atom(_emitter.PrintSimple(node), node);
 
-                case IrLocal local:
+                case CodeLocal local:
                     return new Atom(_emitter._assignedNames.TryGetValue(local, out var name)
                         ? name
                         : throw new InvalidOperationException($"Local '{local}' is used before it is introduced by any lambda or hoisted assignment."),
                         local);
 
-                case IrLambda lambda:
+                case CodeLambda lambda:
                     return HoistLocalFunction(lambda);
 
-                case IrConditional conditional:
+                case CodeConditional conditional:
                     return LinearizeConditional(conditional);
 
-                case IrIfChain chain:
+                case CodeIfChain chain:
                     return LinearizeIfChain(chain, tailPosition);
 
                 // Pass-through composites: printed inline over their (spine-linearized)
@@ -151,11 +151,11 @@ internal partial class CSharpIrEmitter
                 // Member/ElmAs/Default passed straight through, Convert/TypeAs/Throw unaries
                 // and Equal/NotEqual/Coalesce binaries were not simplified — balancing
                 // unnecessary hoisting against per-line readability.
-                case IrProperty { NullConditional: false }
-                    or IrCast
-                    or IrNew
-                    or IrThrow
-                    or IrBinary { Op: IrBinaryOp.Equal or IrBinaryOp.NotEqual or IrBinaryOp.Coalesce }:
+                case CodeProperty { NullConditional: false }
+                    or CodeCast
+                    or CodeNew
+                    or CodeThrow
+                    or CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce }:
                 {
                     var (printed, keyPrinted) = PrintBoth(node);
                     return new Atom(printed, keyPrinted, node);
@@ -176,10 +176,10 @@ internal partial class CSharpIrEmitter
         /// children: once with replacement codes (the real output) and once with
         /// pre-replacement key codes (for dedup decisions). Children are linearized exactly
         /// once via the memo.</summary>
-        private (string printed, string keyPrinted) PrintBoth(IrExpression node)
+        private (string printed, string keyPrinted) PrintBoth(CodeExpression node)
         {
-            Dictionary<IrExpression, Atom> memo = new(ReferenceEqualityComparer.Instance);
-            Atom Child(IrExpression child) =>
+            Dictionary<CodeExpression, Atom> memo = new(ReferenceEqualityComparer.Instance);
+            Atom Child(CodeExpression child) =>
                 memo.TryGetValue(child, out var atom) ? atom : memo[child] = Linearize(child)!;
 
             var printed = _emitter.PrintShallow(node, child => Child(child));
@@ -187,7 +187,7 @@ internal partial class CSharpIrEmitter
             return (printed, keyPrinted);
         }
 
-        private Atom Hoist(string code, string keyCode, IrExpression node)
+        private Atom Hoist(string code, string keyCode, CodeExpression node)
         {
             var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(node.Type);
             var dedupKey = $"{keyCode}::{typeSyntax}";
@@ -200,7 +200,7 @@ internal partial class CSharpIrEmitter
                 return existing with { KeyCode = burnedName };
             }
 
-            var local = new IrLocal(node.Type);
+            var local = new CodeLocal(node.Type);
             var name = AllocateName(null);
             _emitter._assignedNames[local] = name;
             var statement = $"{typeSyntax} {name} = {code};";
@@ -211,11 +211,11 @@ internal partial class CSharpIrEmitter
             return atom;
         }
 
-        private Atom HoistLocalFunction(IrLambda lambda)
+        private Atom HoistLocalFunction(CodeLambda lambda)
         {
             // The function's own name is allocated now (it participates in this scope's
             // naming sequence), but its interior renders deferred — see _statements.
-            var functionLocal = new IrLocal(lambda.Type);
+            var functionLocal = new CodeLocal(lambda.Type);
             var functionName = AllocateName(null);
             _emitter._assignedNames[functionLocal] = functionName;
 
@@ -256,14 +256,14 @@ internal partial class CSharpIrEmitter
             return new Atom(functionName, functionLocal);
         }
 
-        private Atom LinearizeConditional(IrConditional conditional)
+        private Atom LinearizeConditional(CodeConditional conditional)
         {
             // Mirrors the old SimplifyExpressionsVisitor.VisitConditional: a "simple"
             // conditional (IfFalse is not itself a conditional, and neither branch would
             // hoist anything) is returned UNVISITED — its entire subtree, the test included
             // (however complex), prints as one inline ternary. Everything else flattens the
             // else-chain into statement form.
-            if (conditional.IfFalse is not IrConditional
+            if (conditional.IfFalse is not CodeConditional
                 && IsInlineOnly(conditional.IfTrue)
                 && IsInlineOnly(conditional.IfFalse))
             {
@@ -274,9 +274,9 @@ internal partial class CSharpIrEmitter
             // zero-parameter local function containing the if/else chain, invoked where the
             // value is needed. (A native if/else chain would be cleaner — post-parity
             // cleanup, see docs/linq-expression-removal-plan.md.)
-            var cases = new List<(IrExpression When, IrExpression Then)>();
-            IrExpression current = conditional;
-            while (current is IrConditional c)
+            var cases = new List<(CodeExpression When, CodeExpression Then)>();
+            CodeExpression current = conditional;
+            while (current is CodeConditional c)
             {
                 cases.Add((c.Test, c.IfTrue));
                 // Fold constant-test conditionals while walking the else-chain too, so a
@@ -295,24 +295,24 @@ internal partial class CSharpIrEmitter
         /// "simple" — its test is not examined, exactly like the old trial visit (which
         /// returned simple conditionals unvisited).
         /// </summary>
-        private static bool IsInlineOnly(IrExpression node) =>
+        private static bool IsInlineOnly(CodeExpression node) =>
             node switch
             {
-                IrConstant or IrDefault or IrContextParameter or IrLocal => true,
-                IrProperty { NullConditional: false } p => p.Receiver is null || IsInlineOnly(p.Receiver),
-                IrCast c => IsInlineOnly(c.Operand),
-                IrNew n => n.Arguments.All(IsInlineOnly),
-                IrThrow t => IsInlineOnly(t.Exception),
-                IrBinary { Op: IrBinaryOp.Equal or IrBinaryOp.NotEqual or IrBinaryOp.Coalesce } b =>
+                CodeConstant or CodeDefault or CodeContextParameter or CodeLocal => true,
+                CodeProperty { NullConditional: false } p => p.Receiver is null || IsInlineOnly(p.Receiver),
+                CodeCast c => IsInlineOnly(c.Operand),
+                CodeNew n => n.Arguments.All(IsInlineOnly),
+                CodeThrow t => IsInlineOnly(t.Exception),
+                CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce } b =>
                     IsInlineOnly(b.Left) && IsInlineOnly(b.Right),
-                IrConditional nested =>
-                    nested.IfFalse is not IrConditional
+                CodeConditional nested =>
+                    nested.IfFalse is not CodeConditional
                     && IsInlineOnly(nested.IfTrue)
                     && IsInlineOnly(nested.IfFalse),
                 _ => false,
             };
 
-        private Atom? LinearizeIfChain(IrIfChain chain, bool tailPosition) =>
+        private Atom? LinearizeIfChain(CodeIfChain chain, bool tailPosition) =>
             HoistConditionalFunction(chain.Type, chain.Cases, chain.Else);
 
         /// <summary>
@@ -324,12 +324,12 @@ internal partial class CSharpIrEmitter
         /// </summary>
         private Atom HoistConditionalFunction(
             Type resultType,
-            IReadOnlyList<(IrExpression When, IrExpression Then)> cases,
-            IrExpression @else)
+            IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
+            CodeExpression @else)
         {
             // The function's own name participates in this scope's naming sequence now; the
             // interior renders deferred, like every hoisted function — see _statements.
-            var functionLocal = new IrLocal(resultType);
+            var functionLocal = new CodeLocal(resultType);
             var functionName = AllocateName(null);
             _emitter._assignedNames[functionLocal] = functionName;
 
@@ -379,36 +379,36 @@ internal partial class CSharpIrEmitter
         /// possible (a later case's condition must not evaluate before the earlier cases have
         /// been tested).
         /// </summary>
-        private string PrintWhen(IrExpression when)
+        private string PrintWhen(CodeExpression when)
         {
             if (CountSpineNodes(when) <= 1)
                 return _emitter.PrintFullyInline(when);
 
-            var atom = HoistLocalFunction(new IrLambda([], when));
+            var atom = HoistLocalFunction(new CodeLambda([], when));
             return $"{atom.Code}()";
         }
 
         /// <summary>The number of statements linearizing <paramref name="node"/> would hoist —
         /// the IR equivalent of the old trial visit's assignment count.</summary>
-        private static int CountSpineNodes(IrExpression node) =>
+        private static int CountSpineNodes(CodeExpression node) =>
             node switch
             {
-                IrConstant or IrDefault or IrContextParameter or IrLocal => 0,
-                IrProperty { NullConditional: false } p => p.Receiver is null ? 0 : CountSpineNodes(p.Receiver),
+                CodeConstant or CodeDefault or CodeContextParameter or CodeLocal => 0,
+                CodeProperty { NullConditional: false } p => p.Receiver is null ? 0 : CountSpineNodes(p.Receiver),
                 // A null-conditional member access was the custom NullConditionalMemberExpression
                 // in the old pipeline — an extension node, NOT a MemberExpression — so
                 // SimplifyExpressionsVisitor.DoVisit fell through to "_ => MakeLet(...)": exactly
                 // one assignment for itself plus its receiver's. That keeps a when-condition like
                 // "info?.snfStay ?? false" (HEDIS PCR_Elements) or "period?.StartElement is null"
                 // (FHIRHelpers ToInterval) within isSimpleWhen's "<= 1" budget, printing inline.
-                IrProperty { NullConditional: true } p => 1 + (p.Receiver is null ? 0 : CountSpineNodes(p.Receiver)),
-                IrCast c => CountSpineNodes(c.Operand),
-                IrNew n => n.Arguments.Sum(CountSpineNodes),
-                IrThrow t => CountSpineNodes(t.Exception),
-                IrBinary { Op: IrBinaryOp.Equal or IrBinaryOp.NotEqual or IrBinaryOp.Coalesce } b =>
+                CodeProperty { NullConditional: true } p => 1 + (p.Receiver is null ? 0 : CountSpineNodes(p.Receiver)),
+                CodeCast c => CountSpineNodes(c.Operand),
+                CodeNew n => n.Arguments.Sum(CountSpineNodes),
+                CodeThrow t => CountSpineNodes(t.Exception),
+                CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce } b =>
                     CountSpineNodes(b.Left) + CountSpineNodes(b.Right),
-                IrConditional c when
-                    c.IfFalse is not IrConditional && IsInlineOnly(c.IfTrue) && IsInlineOnly(c.IfFalse) => 0,
+                CodeConditional c when
+                    c.IfFalse is not CodeConditional && IsInlineOnly(c.IfTrue) && IsInlineOnly(c.IfFalse) => 0,
                 // A NON-simple conditional still counts exactly ONE hoist as a when-condition:
                 // the old trial visit (SimplifyExpressionsVisitor.VisitConditional) converted it
                 // via ToCwt and VisitCaseWhenThenExpression, whose branch contents went to
@@ -418,12 +418,12 @@ internal partial class CSharpIrEmitter
                 // unvisited ConditionalExpression). Found via the HEDIS 2025 corpus
                 // (TRC_Elements/IET_Elements/AISE_Reporting/HEDIS's
                 // "if (((X) ?? false ? A : B)"-shaped when-conditions).
-                IrConditional => 1,
-                IrInvoke i => 1 + (i.Receiver is null ? 0 : CountSpineNodes(i.Receiver)) + i.Arguments.Sum(CountSpineNodes),
+                CodeConditional => 1,
+                CodeInvoke i => 1 + (i.Receiver is null ? 0 : CountSpineNodes(i.Receiver)) + i.Arguments.Sum(CountSpineNodes),
                 // A type test (old: TypeBinaryExpression) also had no special case in the old
                 // DoVisit — "_ => MakeLet(...)", one assignment plus its operand's. Keeps
                 // "proc is CodeableConcept" (HEDIS Claims/Encounters) inline as a when.
-                IrTypeIs t => 1 + CountSpineNodes(t.Operand),
+                CodeTypeIs t => 1 + CountSpineNodes(t.Operand),
                 // A definition/function call is DoVisit's default case in the old visitor too
                 // (DefinitionCallExpression/FunctionCallExpression aren't in its pass-through
                 // list — Constant/Parameter/New/Member/ElmAs/Default — nor separately handled),
@@ -434,7 +434,7 @@ internal partial class CSharpIrEmitter
                 // function instead of printing inline like old's
                 // "(this.Foo(context)) ?? false" (isSimpleWhen's threshold is "<= 1") —
                 // ~131 HEDIS 2025 libraries hit this (e.g. AAB_Details' data-source guards).
-                IrDefinitionCall d => 1 + d.Arguments.Sum(CountSpineNodes),
+                CodeDefinitionCall d => 1 + d.Arguments.Sum(CountSpineNodes),
                 _ => 2, // any other spine node: treat as "complex enough" to defer
             };
 
@@ -443,7 +443,7 @@ internal partial class CSharpIrEmitter
         /// function, with an optional statement terminator after the closing brace (the old
         /// writer leaves a stray <c>;</c> after the final else block).
         /// </summary>
-        private void EmitBranchBlock(IndentedStringBuilder isb, IrExpression value, string? terminator)
+        private void EmitBranchBlock(IndentedStringBuilder isb, CodeExpression value, string? terminator)
         {
             isb.AppendLine("{");
             using (isb.Indent())

@@ -46,7 +46,7 @@ internal class ExpressionBuilder(
 
     internal ExpressionBuilderContext NewExpressionBuilderContext(
         LibraryExpressionBuilderContext libCtx,
-        Dictionary<string, IrLocal>? operands = null) =>
+        Dictionary<string, CodeLocal>? operands = null) =>
         new(_logger, _expressionBuilderSettings, _cqlOperatorsBinder, _tupleBuilderCache, _typeResolver, _typeConverter, _cqlContextBinder, libCtx, operands);
 
     public void ProcessValueSetDef(LibraryExpressionBuilderContext libCtx, ValueSetDef valueSetDef) =>
@@ -73,6 +73,6 @@ internal class ExpressionBuilder(
             .ProcessParameterDef(parameterDef);
 
     public void ProcessExpressionDef(LibraryExpressionBuilderContext libCtx, ExpressionDef expressionDef) =>
-        NewExpressionBuilderContext(libCtx, new Dictionary<string, IrLocal>())
+        NewExpressionBuilderContext(libCtx, new Dictionary<string, CodeLocal>())
             .ProcessExpressionDef(expressionDef);
 }

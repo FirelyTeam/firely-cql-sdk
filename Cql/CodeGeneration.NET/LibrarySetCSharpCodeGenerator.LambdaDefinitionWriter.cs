@@ -7,7 +7,7 @@
  */
 
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Compiler.CodeModel;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -18,7 +18,7 @@ partial class LibrarySetCSharpCodeGenerator
     /// (attributes incl. tags, cache-key generation + <c>GetOrCompute</c> wrapper for
     /// parameterless definitions, method naming, parameter list, return type) onto
     /// <see cref="CqlLambdaDefinition"/>. The method bodies themselves are produced by
-    /// <see cref="CSharpIrEmitter"/> — which replaces the old writer's four visitor passes
+    /// <see cref="CSharpEmitter"/> — which replaces the old writer's four visitor passes
     /// plus recursive <c>BuildExpression</c> printing.
     /// </summary>
     private record LambdaDefinitionWriter(LibraryWriter LibraryWriter)
@@ -128,7 +128,7 @@ partial class LibrarySetCSharpCodeGenerator
         }
 
         private string BuildLambdaParameters(
-            IrLambda lambda,
+            CodeLambda lambda,
             IReadOnlyList<string> parameterNames,
             IReadOnlyDictionary<string, string>? originalParameterNames)
         {

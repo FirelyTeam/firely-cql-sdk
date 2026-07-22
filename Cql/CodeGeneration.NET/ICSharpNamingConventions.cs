@@ -6,12 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Compiler.CodeModel;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
-/// The naming conventions of the generated library classes that <see cref="CSharpIrEmitter"/>
+/// The naming conventions of the generated library classes that <see cref="CSharpEmitter"/>
 /// must agree with when printing expression bodies. Implemented by the library scaffolding
 /// writer, which owns identifier normalization, class naming and the class-level members the
 /// bodies refer to; faked in unit tests.
@@ -33,5 +33,5 @@ internal interface ICSharpNamingConventions
     /// the library being generated or <c>FHIRHelpers_4_0_001.Instance.ToCode</c> for an
     /// included library (without the argument list).
     /// </summary>
-    string DefinitionTarget(IrDefinitionCall definitionCall);
+    string DefinitionTarget(CodeDefinitionCall definitionCall);
 }

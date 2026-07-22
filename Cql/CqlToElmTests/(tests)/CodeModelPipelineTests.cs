@@ -8,7 +8,7 @@
 
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
@@ -20,21 +20,21 @@ namespace Hl7.Cql.CqlToElm.Test;
 /// <summary>
 /// First end-to-end integration tests for the phase-4 typed-IR builder pipeline
 /// (<see cref="LibraryExpressionBuilder"/> et al.) feeding into the phase-3
-/// <see cref="CSharpIrEmitter"/>. Nothing exercised this combination before these tests; the
+/// <see cref="CSharpEmitter"/>. Nothing exercised this combination before these tests; the
 /// assertions are deliberately loose (shape-level <see cref="StringAssert.Contains"/> checks,
 /// not byte-exact comparisons) since byte-parity with the old pipeline is a phase-5 concern.
 /// </summary>
 [TestClass]
-public class IrPipelineTests : Base
+public class CodeModelPipelineTests : Base
 {
     /// <summary>Test stand-in for the scaffolding writer's naming conventions (mirrors
-    /// <c>CSharpIrEmitterTests.TestNamingConventions</c> in CoreTests, which lives in a
+    /// <c>CSharpEmitterTests.TestNamingConventions</c> in CoreTests, which lives in a
     /// different assembly and isn't shared).</summary>
     private sealed class TestNamingConventions : ICSharpNamingConventions
     {
         public string TupleMetadataFieldName(Type tupleType) => "CqlTupleMetadata_TEST";
 
-        public string DefinitionTarget(IrDefinitionCall dc) => dc.IsLocalLibrary
+        public string DefinitionTarget(CodeDefinitionCall dc) => dc.IsLocalLibrary
             ? $"this.{dc.DefinitionName}"
             : $"{dc.LibraryName}_{dc.LibraryVersion.Replace('.', '_')}.Instance.{dc.DefinitionName}";
     }
@@ -87,7 +87,7 @@ public class IrPipelineTests : Base
     /// <summary>
     /// Fetches a top-level definition of the given name from the library's own definitions
     /// (as opposed to any included library's) and emits its body as C# via
-    /// <see cref="CSharpIrEmitter"/>. Filtering by name (rather than relying on there being a
+    /// <see cref="CSharpEmitter"/>. Filtering by name (rather than relying on there being a
     /// single definition) matters because a <c>context Patient</c>/default-context library gets
     /// a synthesized context definition alongside the CQL-authored ones (see
     /// <c>ContextDefTest</c>).
@@ -100,7 +100,7 @@ public class IrPipelineTests : Base
             .OfType<CqlLambdaDefinition>()
             .First(d => d.Name == name);
 
-        var emitter = new CSharpIrEmitter(new TypeToCSharpConverter(), new TestNamingConventions());
+        var emitter = new CSharpEmitter(new TypeToCSharpConverter(), new TestNamingConventions());
         return emitter.EmitBodyBlock(lambdaDefinition.Lambda).Replace("\r\n", "\n");
     }
 
@@ -143,7 +143,7 @@ public class IrPipelineTests : Base
         StringAssert.Contains(body, "10");
         StringAssert.Contains(body, "20");
         // Either a ternary or an if/else statement, depending on whether the condition
-        // is trivial enough to inline (see CSharpIrEmitterTests.Conditional_*).
+        // is trivial enough to inline (see CSharpEmitterTests.Conditional_*).
         Assert.IsTrue(body.Contains('?') || body.Contains("if ("),
             $"Expected a ternary or if/else in the emitted body, got:\n{body}");
     }

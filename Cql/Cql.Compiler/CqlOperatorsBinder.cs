@@ -17,7 +17,7 @@ using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 /// <summary>
 /// Facilitates binding to <see cref="ICqlOperators"/> methods, by converting the method name
-/// and <see cref="IrExpression"/> arguments to the appropriate overload of the method.
+/// and <see cref="CodeExpression"/> arguments to the appropriate overload of the method.
 ///
 /// <para>The overload-resolution algorithm is preserved bug-for-bug from the deleted
 /// Linq.Expressions-based pipeline (see <c>docs/linq-expression-removal-plan.md</c>; its
@@ -47,16 +47,16 @@ internal partial class CqlOperatorsBinder(
 
     /// <summary>
     /// Facilitates binding to <see cref="ICqlOperators"/> methods,
-    /// by converting the <param ref="methodName"/> and <see cref="IrExpression"/> <param ref="args"/>
+    /// by converting the <param ref="methodName"/> and <see cref="CodeExpression"/> <param ref="args"/>
     /// to the appropriate overload of the method.
     /// </summary>
     /// <param name="methodName">The method to bind to.</param>
     /// <param name="args">The arguments that will be bound to the closest matching overload.</param>
     /// <param name="typeArgs">Optional types when binding to a specific generic method definition.</param>
-    /// <returns>Typically an <see cref="IrInvoke"/> that binds to the method.</returns>
-    public virtual IrExpression BindToMethod(
+    /// <returns>Typically an <see cref="CodeInvoke"/> that binds to the method.</returns>
+    public virtual CodeExpression BindToMethod(
         string methodName,
-        IrExpression[] args,
+        CodeExpression[] args,
         Type[] typeArgs
         )
     {
@@ -90,12 +90,12 @@ internal partial class CqlOperatorsBinder(
         };
         return result;
 
-        IrExpression? Width(IrExpression[] args) =>
+        CodeExpression? Width(CodeExpression[] args) =>
             args is [{ Type:{} t }] && t == typeof(CqlInterval<object>)
-                ? new IrConstant(null, typeof(int?)) // This should be disallowed but isn't, so handle it:
+                ? new CodeConstant(null, typeof(int?)) // This should be disallowed but isn't, so handle it:
                 : null;
 
-        IrExpression? ToList(IrExpression[] args) =>
+        CodeExpression? ToList(CodeExpression[] args) =>
             args is [{ Type:{} t } a] && _typeResolver.IsListType(t)
                 ? a // Already a list type
                 : null;

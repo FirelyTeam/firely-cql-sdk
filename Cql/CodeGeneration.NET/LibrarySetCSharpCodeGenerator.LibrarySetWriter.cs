@@ -7,7 +7,7 @@
  */
 
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET;

@@ -26,22 +26,22 @@ partial class ExpressionBuilderContext
 
     private const string Int32MaxPlusOneAsString = "2147483648";
 
-    private IrExpression NegateLiteral(Negate e, Literal literal)
+    private CodeExpression NegateLiteral(Negate e, Literal literal)
     {
         // handle things like -2147483648 which gets translated to Negate(2147483648)
         // since int.MaxValue is 2147483647, we have to handle this specially
         var literalType = TypeFor(literal);
         if (literalType == typeof(int?) && literal.value == Int32MaxPlusOneAsString)
-            return new IrConstant(int.MinValue, typeof(int));
+            return new CodeConstant(int.MinValue, typeof(int));
 
         if (literalType == typeof(long?)
             && literal.value == long.MinValue.ToString(CultureInfo.InvariantCulture))
-            return new IrConstant(long.MinValue, typeof(long));
+            return new CodeConstant(long.MinValue, typeof(long));
 
         return BindCqlOperator(nameof(ICqlOperators.Negate), e.operand);
     }
 
-    private IrExpression Negate(Negate e)
+    private CodeExpression Negate(Negate e)
     {
         if (e.operand is Literal literal)
             return NegateLiteral(e, literal);
@@ -53,7 +53,7 @@ partial class ExpressionBuilderContext
 
     #region ComparisonOperators
 
-    protected IrExpression Equivalent(Equivalent eqv)
+    protected CodeExpression Equivalent(Equivalent eqv)
     {
         if (TranslateArgs(eqv.operand) is [{ } left, { } right]
             && _typeResolver.GetListElementType(left.Type, throwError: false) is { } leftType
@@ -62,7 +62,7 @@ partial class ExpressionBuilderContext
         {
             // This appears in the CQL tests:
             //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
-            return new IrConstant(false, typeof(bool?));
+            return new CodeConstant(false, typeof(bool?));
         }
 
         return BindCqlOperator(nameof(ICqlOperators.Equivalent), GetBindArgs(eqv));
@@ -72,7 +72,7 @@ partial class ExpressionBuilderContext
 
     #region ErrorsAndMessaging
 
-    private IrExpression Message(Message e)
+    private CodeExpression Message(Message e)
     {
         var condition = TranslateArg(e.condition!);
 
@@ -81,7 +81,7 @@ partial class ExpressionBuilderContext
         var severity = TranslateArg(e.severity!);
         var message = TranslateArg(e.message!);
 
-        if (source is IrConstant { Value: null } constant)
+        if (source is CodeConstant { Value: null } constant)
         {
             // create an explicit "null as object" so the generic type can be inferred in source code.
             // NOTE(phase4): ported as-is — constant.Type == constant.Type trivially, so
@@ -96,14 +96,14 @@ partial class ExpressionBuilderContext
             condition = condition.Coalesce();
         }
 
-        return new IrConditional(condition, call, source, call.Type);
+        return new CodeConditional(condition, call, source, call.Type);
     }
 
     #endregion
 
     #region IntervalOperators
 
-    protected IrExpression? Includes(Includes e)
+    protected CodeExpression? Includes(Includes e)
     {
         var left = TranslateArg(e.operand![0]);
         var right = TranslateArg(e.operand![1]);
@@ -143,7 +143,7 @@ partial class ExpressionBuilderContext
         throw new NotImplementedException().WithContext(this);
     }
 
-    protected IrExpression IncludedIn(IncludedIn e)
+    protected CodeExpression IncludedIn(IncludedIn e)
     {
         var left = TranslateArg(e.operand![0]);
         var right = TranslateArg(e.operand![1]);
@@ -182,7 +182,7 @@ partial class ExpressionBuilderContext
         throw new NotImplementedException().WithContext(this);
     }
 
-    protected IrExpression? ProperIncludes(ProperIncludes e)
+    protected CodeExpression? ProperIncludes(ProperIncludes e)
     {
         var left = TranslateArg(e.operand![0]);
         var right = TranslateArg(e.operand![1]);
@@ -213,7 +213,7 @@ partial class ExpressionBuilderContext
     }
 
 
-    protected IrExpression? ProperIncludedIn(ProperIncludedIn e)
+    protected CodeExpression? ProperIncludedIn(ProperIncludedIn e)
     {
         var left = TranslateArg(e.operand![0]);
         var right = TranslateArg(e.operand![1]);
@@ -245,7 +245,7 @@ partial class ExpressionBuilderContext
         throw new NotImplementedException().WithContext(this);
     }
 
-    private IrExpression? ProperIn(ProperIn e)
+    private CodeExpression? ProperIn(ProperIn e)
     {
         var element = TranslateArg(e.operand![0]);
         var intervalOrList = TranslateArg(e.operand![1]);
@@ -263,7 +263,7 @@ partial class ExpressionBuilderContext
         throw new NotImplementedException().WithContext(this);
     }
 
-    protected IrExpression? ProperContains(ProperContains e)
+    protected CodeExpression? ProperContains(ProperContains e)
     {
         var left = TranslateArg(e.operand![0]);
         var right = TranslateArg(e.operand![1]);
@@ -298,7 +298,7 @@ partial class ExpressionBuilderContext
 
     #region NullologicalOperators
 
-    protected IrExpression Coalesce(Coalesce ce)
+    protected CodeExpression Coalesce(Coalesce ce)
     {
         var operands = TranslateArgs(ce.operand);
 
@@ -319,26 +319,26 @@ partial class ExpressionBuilderContext
         if (operands.Length == 1)
             return operands[0];
 
-        IrExpression coalesce = new IrBinary(IrBinaryOp.Coalesce, operands[0], operands[1]);
+        CodeExpression coalesce = new CodeBinary(CodeBinaryOp.Coalesce, operands[0], operands[1]);
         for (int i = 2; i < operands.Length; i++)
         {
-            coalesce = new IrBinary(IrBinaryOp.Coalesce, coalesce, operands[i]);
+            coalesce = new CodeBinary(CodeBinaryOp.Coalesce, coalesce, operands[i]);
         }
 
         return coalesce;
     }
 
-    protected IrExpression IsNull(IsNull isn)
+    protected CodeExpression IsNull(IsNull isn)
     {
         var operand = TranslateArg(isn.operand!);
         while (true)
         {
             // NOTE(phase4): the old code unwrapped two distinct node shapes that both represent
             // a cast to object — the custom ElmAsExpression node and a raw
-            // UnaryExpression(Convert/ConvertChecked/TypeAs). The IR collapses both into IrCast
+            // UnaryExpression(Convert/ConvertChecked/TypeAs). The IR collapses both into CodeCast
             // (see its doc comment), so a single check here covers what used to be two separate
             // loop iterations in the Expression-based pipeline.
-            if (operand is IrCast { Type: var asType } cast && asType == typeof(object))
+            if (operand is CodeCast { Type: var asType } cast && asType == typeof(object))
             {
                 operand = cast.Operand;
                 continue;
@@ -348,10 +348,10 @@ partial class ExpressionBuilderContext
         }
 
         if (operand.Type.IsValueType && operand.Type.IsNullableValueType(out _) == false)
-            return new IrConstant(false, typeof(bool?));
+            return new CodeConstant(false, typeof(bool?));
 
 
-        var compare = new IrBinary(IrBinaryOp.Equal, operand, new IrConstant(null, operand.Type));
+        var compare = new CodeBinary(CodeBinaryOp.Equal, operand, new CodeConstant(null, operand.Type));
         return compare;
         //var asNullableBool = compare.NewAssignToTypeExpression<bool?>();
         //return asNullableBool;
@@ -361,9 +361,9 @@ partial class ExpressionBuilderContext
 
     #region Type Operators
 
-    protected IrExpression As(As @as) //@ TODO: Cast - As
+    protected CodeExpression As(As @as) //@ TODO: Cast - As
     {
-        var castKind = @as.strict ? IrCastKind.Cast : IrCastKind.As;
+        var castKind = @as.strict ? CodeCastKind.Cast : CodeCastKind.As;
 
         if (@as.operand is List list)
         {
@@ -378,16 +378,16 @@ partial class ExpressionBuilderContext
                         var listElementType = _typeResolver.GetListElementType(type) ??
                                               throw this.NewExpressionBuildingException(
                                                   $"{type} was expected to be a list type.");
-                        var newArray = new IrNewArrayBounds(listElementType, new IrConstant(0, typeof(int)));
+                        var newArray = new CodeNewArrayBounds(listElementType, new CodeConstant(0, typeof(int)));
                         // fromCqlAsOperator: the old pipeline built ElmAsExpression here (and at
-                        // the other As() return sites below) — see IrCast.FromCqlAsOperator.
-                        var elmAs = new IrCast(newArray, type, castKind, fromCqlAsOperator: true);
+                        // the other As() return sites below) — see CodeCast.FromCqlAsOperator.
+                        var elmAs = new CodeCast(newArray, type, castKind, fromCqlAsOperator: true);
                         return elmAs;
                     }
                     else if (type == _typeResolver.AnyType) // handles untyped empty lists whose type is Any
                     {
-                        var newArray = new IrNewArrayBounds(_typeResolver.AnyType, new IrConstant(0, typeof(int)));
-                        var elmAs = new IrCast(newArray, type, castKind, fromCqlAsOperator: true);
+                        var newArray = new CodeNewArrayBounds(_typeResolver.AnyType, new CodeConstant(0, typeof(int)));
+                        var elmAs = new CodeCast(newArray, type, castKind, fromCqlAsOperator: true);
                         return elmAs;
                     }
 
@@ -405,8 +405,8 @@ partial class ExpressionBuilderContext
                 if (@as.operand is Null)
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
-                    var defaultExpression = new IrDefault(type);
-                    return new IrCast(defaultExpression, type, castKind, fromCqlAsOperator: true);
+                    var defaultExpression = new CodeDefault(type);
+                    return new CodeCast(defaultExpression, type, castKind, fromCqlAsOperator: true);
                 }
                 else
                 {
@@ -421,7 +421,7 @@ partial class ExpressionBuilderContext
                                 FormatMessage(
                                     $"{operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} as {type.ToCSharpString(Defaults.TypeCSharpFormat)} will always result in null.",
                                     @as.operand));
-                            return new IrDefault(type);
+                            return new CodeDefault(type);
 
                         case TypeConversion.OperatorConvert:
                             return converted;
@@ -433,7 +433,7 @@ partial class ExpressionBuilderContext
                             // falls into the default arm and still wraps in a cast/as node built
                             // from the original operand, rather than returning operand or
                             // converted directly.
-                            return new IrCast(operand, type, castKind, fromCqlAsOperator: true);
+                            return new CodeCast(operand, type, castKind, fromCqlAsOperator: true);
                     }
                 }
             }
@@ -457,11 +457,11 @@ partial class ExpressionBuilderContext
                                        @as.operand));
             }
 
-            return new IrCast(operand, type, castKind, fromCqlAsOperator: true);
+            return new CodeCast(operand, type, castKind, fromCqlAsOperator: true);
         }
     }
 
-    protected IrExpression Is(Is @is) // @TODO: Cast - Is
+    protected CodeExpression Is(Is @is) // @TODO: Cast - Is
     {
         var op = TranslateArg(@is.operand!);
         Type? type = null;
@@ -472,7 +472,7 @@ partial class ExpressionBuilderContext
                 var firstChoiceType = TypeFor(choice.choice[0], false) ??
                                       throw this.NewExpressionBuildingException("Could not resolve type for Is expression");
 
-                IrExpression result = op.NewTypeIsExpression(firstChoiceType);
+                CodeExpression result = op.NewTypeIsExpression(firstChoiceType);
                 for (int i = 1; i < choice.choice.Length; i++)
                 {
                     var cti = TypeFor(choice.choice[i], false) ??
@@ -481,9 +481,9 @@ partial class ExpressionBuilderContext
                     var ie = op.NewTypeIsExpression(cti);
                     // NOTE(phase4): the old code used Expression.Or (a non-short-circuiting
                     // logical OR). The IR only models the short-circuiting form (OrElse); since
-                    // both operands are pure IrTypeIs checks with no side effects, OrElse is
+                    // both operands are pure CodeTypeIs checks with no side effects, OrElse is
                     // observably identical here.
-                    result = new IrBinary(IrBinaryOp.OrElse, result, ie);
+                    result = new CodeBinary(CodeBinaryOp.OrElse, result, ie);
                 }
 
                 var ta = result.NewTypeAsExpression<bool?>();
@@ -512,14 +512,14 @@ partial class ExpressionBuilderContext
 
     #region Conditionals and literals
 
-    protected IrExpression Case(Case ce)
+    protected CodeExpression Case(Case ce)
     {
         //[{ when1, then1 }, { when2, then2}, { when3, then3 }]
         // when1 ? then 1 : (when2 ? then 2 : (when3 ? then 3 : else }
         if (ce.caseItem?.Length > 0 && ce.@else != null)
         {
             var elseThen = TranslateArg(ce.@else!);
-            var cases = new List<(IrExpression When, IrExpression Then)>();
+            var cases = new List<(CodeExpression When, CodeExpression Then)>();
 
             if (ce.comparand != null)
             {
@@ -556,13 +556,13 @@ partial class ExpressionBuilderContext
                 }
             }
 
-            return new IrIfChain(cases, elseThen, elseThen.Type);
+            return new CodeIfChain(cases, elseThen, elseThen.Type);
         }
 
         throw this.NewExpressionBuildingException("Invalid case expression.  At least 1 case and an else must be present.");
     }
 
-    protected IrExpression If(If @if)
+    protected CodeExpression If(If @if)
     {
         var rc = TranslateArg(@if.condition!);
         var condition = rc.Coalesce();
@@ -588,17 +588,17 @@ partial class ExpressionBuilderContext
                 // @else = Expression.Convert(@else, typeof(object));
             }
 
-            var ifThenElse = new IrConditional(condition, then, @else, then.Type);
+            var ifThenElse = new CodeConditional(condition, then, @else, then.Type);
 
             return ifThenElse;
         }
 
-        var @false = new IrConstant(null, typeof(object)).NewAssignToTypeExpression(then.Type);
-        var ifThen = new IrConditional(condition, then, @false, then.Type);
+        var @false = new CodeConstant(null, typeof(object)).NewAssignToTypeExpression(then.Type);
+        var ifThen = new CodeConditional(condition, then, @false, then.Type);
         return ifThen;
     }
 
-    protected IrExpression List(List list)
+    protected CodeExpression List(List list)
     {
         if (list.resultTypeSpecifier == null)
             throw this.NewExpressionBuildingException($"List is missing a result type specifier.");
@@ -625,14 +625,14 @@ partial class ExpressionBuilderContext
             // NOTE(phase4): ported as-is — TranslateArgs never returns null, so the null-check
             // below (and the NewArrayBounds fallback it guards) is dead code in both the old and
             // new pipelines.
-            IrExpression array;
+            CodeExpression array;
             if (elements != null)
             {
-                array = new IrNewArray(elementType, elements);
+                array = new CodeNewArray(elementType, elements);
             }
             else
             {
-                array = new IrNewArrayBounds(elementType, new IrConstant(0, typeof(int)));
+                array = new CodeNewArrayBounds(elementType, new CodeConstant(0, typeof(int)));
             }
 
             return array;
@@ -641,7 +641,7 @@ partial class ExpressionBuilderContext
         throw this.NewExpressionBuildingException($"List is the wrong type");
     }
 
-    protected IrExpression Literal(Literal lit)
+    protected CodeExpression Literal(Literal lit)
     {
         var type = _typeResolver.ResolveType(lit.valueType.Name) ?? throw this.NewExpressionBuildingException($"Cannot resolve type for {lit.valueType}");
 
@@ -653,12 +653,12 @@ partial class ExpressionBuilderContext
 
         if (type.IsNullableValueType(out _))
         {
-            var changed = new IrConstant(value!, convertedType);
+            var changed = new CodeConstant(value!, convertedType);
             var asNullable = changed.NewAssignToTypeExpression(type);
             return asNullable;
         }
 
-        return new IrConstant(value, convertedType);
+        return new CodeConstant(value, convertedType);
     }
 
     protected (object?, Type) ConvertLiteral(Literal lit, Type? type) //@ TODO: Cast - ConvertLiteral
@@ -701,8 +701,8 @@ partial class ExpressionBuilderContext
 
     #region ChangeType
 
-    private IrExpression ChangeType(
-        IrExpression expr,
+    private CodeExpression ChangeType(
+        CodeExpression expr,
         TypeSpecifier? typeSpecifier,
         bool throwOnError = false,
         bool considerSafeUpcast = false) // @TODO: Cast - ChangeType
@@ -723,7 +723,7 @@ partial class ExpressionBuilderContext
     }
 
 
-    private IrExpression ChangeType(
+    private CodeExpression ChangeType(
         Element element,
         Type outputType,
         bool throwOnError = false,
@@ -734,16 +734,16 @@ partial class ExpressionBuilderContext
             throwOnError,
             considerSafeUpcast); // @TODO: Cast - ChangeType
 
-    private IrExpression ChangeType(
-        IrExpression input,
+    private CodeExpression ChangeType(
+        CodeExpression input,
         Type outputType,
         bool throwOnError = false,
         bool considerSafeUpcast = false) =>
         ChangeType(input, outputType, out _, throwOnError, considerSafeUpcast); // @TODO: Cast - ChangeType
 
 
-    private IrExpression ChangeType(
-        IrExpression input,
+    private CodeExpression ChangeType(
+        CodeExpression input,
         Type outputType,
         out TypeConversion typeConversion,
         bool throwOnError = false,
@@ -774,7 +774,7 @@ partial class ExpressionBuilderContext
                 var outputProps = outputType.GetProperties();
                 if (inputProps.Length == outputProps.Length)
                 {
-                    var bindings = new List<(MemberInfo Member, IrExpression Value)>();
+                    var bindings = new List<(MemberInfo Member, CodeExpression Value)>();
                     bool allMatched = true;
                     foreach (var outputProp in outputProps)
                     {
@@ -785,10 +785,10 @@ partial class ExpressionBuilderContext
                             break;
                         }
 
-                        var inputAccess = new IrProperty(input, inputProp);
+                        var inputAccess = new CodeProperty(input, inputProp);
                         var convertedValue = inputProp.PropertyType != outputProp.PropertyType
                             ? ChangeType(inputAccess, outputProp.PropertyType, considerSafeUpcast: true)
-                            : (IrExpression)inputAccess;
+                            : (CodeExpression)inputAccess;
                         bindings.Add((outputProp, convertedValue));
                     }
 
@@ -797,7 +797,7 @@ partial class ExpressionBuilderContext
                         typeConversion = TypeConversion.OperatorConvert;
                         var ctor = outputType.GetConstructor(Type.EmptyTypes)
                                    ?? throw this.NewExpressionBuildingException($"Tuple type {outputType} has no accessible parameterless constructor.");
-                        return new IrMemberInit(new IrNew(ctor), bindings);
+                        return new CodeMemberInit(new CodeNew(ctor), bindings);
                     }
                 }
             }
@@ -812,16 +812,16 @@ partial class ExpressionBuilderContext
         {
             var inputElementType = _typeResolver.GetListElementType(input.Type, true)!;
             var outputElementType = _typeResolver.GetListElementType(outputType, true)!;
-            var lambdaParameter = new IrLocal(inputElementType, TypeNameToIdentifier(inputElementType, this));
+            var lambdaParameter = new CodeLocal(inputElementType, TypeNameToIdentifier(inputElementType, this));
             var lambdaBody = ChangeType(lambdaParameter, outputElementType, out typeConversion, throwOnError: true);
-            var lambda = new IrLambda([lambdaParameter], lambdaBody);
+            var lambda = new CodeLambda([lambdaParameter], lambdaBody);
             return BindCqlOperator(nameof(ICqlOperators.Select), input, lambda);
         }
 
         Type toType = TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo)
                           ? correctedTo!
                           : outputType;
-        _cqlOperatorsBinder.TryConvert(input, toType, out (IrExpression arg, TypeConversion conversion) tryConvert);
+        _cqlOperatorsBinder.TryConvert(input, toType, out (CodeExpression arg, TypeConversion conversion) tryConvert);
         typeConversion = tryConvert.conversion;
         throwCannotCastIfNoMatch(tryConvert.conversion);
         return tryConvert.arg;

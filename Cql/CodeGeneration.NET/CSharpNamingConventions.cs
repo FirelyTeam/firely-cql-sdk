@@ -7,7 +7,7 @@
  */
 
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Compiler.CodeModel;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -15,7 +15,7 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// The production <see cref="ICSharpNamingConventions"/> implementation, backed by the same
 /// building blocks the library scaffolding writer uses — <see cref="IdentifierNormalizer"/>
 /// for member/class names and <see cref="TupleMetadataBuilder"/> for the tuple-metadata field
-/// names — so the expression bodies printed by <see cref="CSharpIrEmitter"/> reference exactly
+/// names — so the expression bodies printed by <see cref="CSharpEmitter"/> reference exactly
 /// the members the scaffolding declares.
 ///
 /// <para>One instance exists per library being written: <paramref name="libraryVersionedIdentifier"/>
@@ -48,7 +48,7 @@ internal sealed class CSharpNamingConventions(
     /// <c>{normalizedLibraryClassName}.Instance.{member}</c> for an included library, where
     /// the class name is the normalized "Name-Version" identifier — the same mangling
     /// <c>LibraryWriter.AppendLibraryFile</c> applies when naming the generated classes.</remarks>
-    public string DefinitionTarget(IrDefinitionCall definitionCall)
+    public string DefinitionTarget(CodeDefinitionCall definitionCall)
     {
         var member = IdentifierNormalizer.Normalize(definitionCall.DefinitionName);
 

@@ -26,17 +26,17 @@ partial class CqlOperatorsBinder
     /// <see cref="ICqlOperators"/> call. Corresponds to <c>CqlExpressions.Operators_PropertyExpression</c>
     /// in the old binder.
     /// </summary>
-    private static IrExpression OperatorsReceiver { get; } =
-        new IrProperty(IrContextParameter.Instance, typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!);
+    private static CodeExpression OperatorsReceiver { get; } =
+        new CodeProperty(CodeContextParameter.Instance, typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!);
 
     /// <summary>
     /// Tries to convert the given <paramref name="expression"/> to the specified type <paramref name="to"/>.
     /// </summary>
     /// <exception cref="InvalidOperationException"></exception>
     public virtual bool TryConvert(
-        IrExpression expression,
+        CodeExpression expression,
         Type to,
-        out (IrExpression arg, TypeConversion conversion) result)
+        out (CodeExpression arg, TypeConversion conversion) result)
     {
         Type from = expression.Type;
         result = expression.TryNewAssignToTypeExpression(to, throwError: false)!;
@@ -66,9 +66,9 @@ partial class CqlOperatorsBinder
         return false;
     }
 
-    private IrInvoke? BindToBestMethodOverload(
+    private CodeInvoke? BindToBestMethodOverload(
         string methodName,
-        IrExpression[] methodArguments,
+        CodeExpression[] methodArguments,
         Type[] genericTypeArguments,
         bool throwError = true)
     {
@@ -78,7 +78,7 @@ partial class CqlOperatorsBinder
 
         try
         {
-            var call = new IrInvoke(OperatorsReceiver, methodInfo!, convertedArgs);
+            var call = new CodeInvoke(OperatorsReceiver, methodInfo!, convertedArgs);
             return call;
         }
         catch (Exception e)
@@ -102,7 +102,7 @@ partial class CqlOperatorsBinder
     /// <param name="expression">The expression to cast.</param>
     /// <param name="type">The type to cast the expression to.</param>
     /// <returns>The expression that was cast.</returns>
-    public virtual IrExpression CastToType(IrExpression expression, Type type)
+    public virtual CodeExpression CastToType(CodeExpression expression, Type type)
     {
         if (expression.Type != typeof(object))
             throw new ArgumentException("Cast only allowed on Object typed expressions.", nameof(expression));
@@ -116,15 +116,15 @@ partial class CqlOperatorsBinder
     /// <param name="expression">The expression to convert.</param>
     /// <param name="type">The type to convert the expression to.</param>
     /// <returns>The converted expression.</returns>
-    public virtual IrExpression ConvertToType(IrExpression expression, Type type) =>
+    public virtual CodeExpression ConvertToType(CodeExpression expression, Type type) =>
         TryConvert(expression, type, out var t)
             ? t.arg!
             : throw new InvalidOperationException($"Cannot convert '{expression.Type.FullName}' to '{type.FullName}'");
 
     // The assign-to-type / type-as / is-null-constant helpers formerly duplicated here (private
-    // phase-3 copies, predating IrExpressionExtensions) are gone as of phase 6: TryConvert and
-    // the Specific.cs bindings now call the shared Hl7.Cql.Compiler.Ir.IrExpressionExtensions
+    // phase-3 copies, predating CodeExpressionExtensions) are gone as of phase 6: TryConvert and
+    // the Specific.cs bindings now call the shared Hl7.Cql.Compiler.CodeModel.CodeExpressionExtensions
     // versions directly (NewAssignToTypeExpression / TryNewAssignToTypeExpression /
     // NewTypeAsExpression / IsNullConstant). There is no shared "NullOfType" helper there, so
-    // those call sites construct `new IrConstant(null, type)` inline instead.
+    // those call sites construct `new CodeConstant(null, type)` inline instead.
 }

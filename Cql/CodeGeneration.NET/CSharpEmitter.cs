@@ -6,12 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Compiler.CodeModel;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
-/// Prints the typed IR (<see cref="IrExpression"/>) as C#. This replaces the combination of
+/// Prints the typed IR (<see cref="CodeExpression"/>) as C#. This replaces the combination of
 /// the four expression-tree rewrite passes and <c>LambdaDefinitionWriter</c> in the previous
 /// pipeline:
 ///
@@ -35,18 +35,18 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <para>Instances are not thread-safe: naming state is per emission, reset at the start of
 /// each <see cref="EmitBodyBlock"/>/<see cref="TryEmitExpressionBody"/> call.</para>
 /// </summary>
-internal partial class CSharpIrEmitter
+internal partial class CSharpEmitter
 {
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
     private readonly ICSharpNamingConventions _namingConventions;
 
-    private readonly Dictionary<IrLocal, string> _assignedNames = new(ReferenceEqualityComparer.Instance);
+    private readonly Dictionary<CodeLocal, string> _assignedNames = new(ReferenceEqualityComparer.Instance);
 
     /// <param name="typeToCSharpConverter">Renders .NET types as C# type syntax.</param>
     /// <param name="namingConventions">The generated-class naming conventions the printed
     /// bodies must agree with (see <see cref="ICSharpNamingConventions"/>); provided by the
     /// library scaffolding writer.</param>
-    public CSharpIrEmitter(
+    public CSharpEmitter(
         TypeToCSharpConverter typeToCSharpConverter,
         ICSharpNamingConventions namingConventions)
     {
@@ -56,10 +56,10 @@ internal partial class CSharpIrEmitter
 
     /// <summary>
     /// Emits the body of a definition as a C# block statement, including the final
-    /// <c>return</c>. Parameter names are taken from the lambda's <see cref="IrLocal"/>
+    /// <c>return</c>. Parameter names are taken from the lambda's <see cref="CodeLocal"/>
     /// name hints where legal (generated names on collision or keyword hints).
     /// </summary>
-    public string EmitBodyBlock(IrLambda lambda)
+    public string EmitBodyBlock(CodeLambda lambda)
     {
         // Naming is scoped to one definition body: each emission starts fresh, so earlier
         // emissions can neither cause collisions nor grow the maps without bound.
@@ -84,7 +84,7 @@ internal partial class CSharpIrEmitter
     /// a <c>return</c>, except before a throw-expression (the old writer's
     /// BuildBlockExpression rule — <c>return throw …</c> is not legal C#).</summary>
     private static string TailStatement(Atom result) =>
-        result.Node is IrThrow ? $"{result.Code};" : $"return {result.Code};";
+        result.Node is CodeThrow ? $"{result.Code};" : $"return {result.Code};";
 
     /// <summary>
     /// Emits the body of a definition as a single C# expression when it linearizes without
@@ -94,7 +94,7 @@ internal partial class CSharpIrEmitter
     /// Semantically this is exactly the case where <see cref="EmitBodyBlock"/> would produce
     /// a block whose only statement is <c>return expr;</c>.
     /// </summary>
-    public string? TryEmitExpressionBody(IrLambda lambda)
+    public string? TryEmitExpressionBody(CodeLambda lambda)
     {
         _assignedNames.Clear();
 
@@ -108,7 +108,7 @@ internal partial class CSharpIrEmitter
     /// last <see cref="EmitBodyBlock"/>/<see cref="TryEmitExpressionBody"/> call, for the
     /// scaffolding writer to print the parameter list.
     /// </summary>
-    public IReadOnlyList<string> GetParameterNames(IrLambda lambda) =>
+    public IReadOnlyList<string> GetParameterNames(CodeLambda lambda) =>
         [.. lambda.Parameters.Select(p => _assignedNames.TryGetValue(p, out var n) ? n : p.NameHint ?? "?")];
 
     /// <summary>A linearized subexpression: the C# code of a simple (non-compound)
@@ -119,9 +119,9 @@ internal partial class CSharpIrEmitter
     /// single-pass behavior: duplicates whose operands only become identical AFTER
     /// replacement are NOT collapsed (no fixpoint), and every duplicate still consumed a
     /// name from the sequence before being removed (the letter gaps in the old output).</para></summary>
-    private sealed record Atom(string Code, string KeyCode, IrExpression Node)
+    private sealed record Atom(string Code, string KeyCode, CodeExpression Node)
     {
-        public Atom(string code, IrExpression node) : this(code, code, node) { }
+        public Atom(string code, CodeExpression node) : this(code, code, node) { }
 
         public Type Type => Node.Type;
     }

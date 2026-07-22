@@ -37,20 +37,20 @@ partial class ExpressionBuilderContext
         return KnownErrors.TryGetValue((source, to), out correctedTo);
     }
 
-    private IrLambda NotImplemented(
+    private CodeLambda NotImplemented(
         string nav,
         (string name, Type type)[] signature,
         Type returnType)
     {
-        var parameters = signature.SelectToArray(type => new IrLocal(type.type, type.name));
+        var parameters = signature.SelectToArray(type => new CodeLocal(type.type, type.name));
         var ctor = ConstructorInfos.NotImplementedException;
-        var @new = new IrNew(ctor, new IrConstant($"External function {nav} is not implemented.", typeof(string)));
-        var @throw = new IrThrow(@new, returnType);
-        var lambda = new IrLambda(parameters, @throw);
+        var @new = new CodeNew(ctor, new CodeConstant($"External function {nav} is not implemented.", typeof(string)));
+        var @throw = new CodeThrow(@new, returnType);
+        var lambda = new CodeLambda(parameters, @throw);
         return lambda;
     }
 
-    private static IrExpression HandleNullable(IrExpression expression, Type targetType) =>
+    private static CodeExpression HandleNullable(CodeExpression expression, Type targetType) =>
         (
                 exprNullTypeArg: Nullable.GetUnderlyingType(expression.Type),
                 targetNullTypeArg: Nullable.GetUnderlyingType(targetType)) switch
@@ -59,7 +59,7 @@ partial class ExpressionBuilderContext
                 (exprNullTypeArg: null, targetNullTypeArg: not null) => expression.NewAssignToTypeExpression(targetType),
 
                 // Both are nullable or not nullable
-                ({ } exprNullTypeArg, targetNullTypeArg: null) => new IrBinary(IrBinaryOp.Coalesce, expression, new IrDefault(exprNullTypeArg)),
+                ({ } exprNullTypeArg, targetNullTypeArg: null) => new CodeBinary(CodeBinaryOp.Coalesce, expression, new CodeDefault(exprNullTypeArg)),
 
                 _ => expression,
             };
@@ -67,11 +67,11 @@ partial class ExpressionBuilderContext
     /// <summary>
     /// Implements the null propagation operator (x?.y) into (x == null ? null : x.y);
     /// </summary>
-    private static IrExpression PropagateNull(IrExpression before, MemberInfo member)
+    private static CodeExpression PropagateNull(CodeExpression before, MemberInfo member)
     {
         if (before.Type.IsValueType)
             return before;
-        return new IrProperty(before, member, nullConditional: true);
+        return new CodeProperty(before, member, nullConditional: true);
     }
 
     private static string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx = null)

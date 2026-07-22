@@ -6,13 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
 /// The binary operators the builder emits directly. CQL's arithmetic and logic go through
 /// <c>ICqlOperators</c> calls, so only the handful of operators used for plumbing exist here.
 /// </summary>
-internal enum IrBinaryOp
+internal enum CodeBinaryOp
 {
     /// <summary><c>a ?? b</c></summary>
     Coalesce,
@@ -33,15 +33,15 @@ internal enum IrBinaryOp
 /// <summary>
 /// A binary operator application.
 /// </summary>
-internal sealed class IrBinary : IrExpression
+internal sealed class CodeBinary : CodeExpression
 {
-    public IrBinary(IrBinaryOp op, IrExpression left, IrExpression right)
+    public CodeBinary(CodeBinaryOp op, CodeExpression left, CodeExpression right)
     {
         Type = op switch
         {
-            IrBinaryOp.Coalesce => ValidateCoalesce(left, right),
-            IrBinaryOp.Equal or IrBinaryOp.NotEqual => typeof(bool),
-            IrBinaryOp.OrElse or IrBinaryOp.AndAlso => ValidateLogical(op, left, right),
+            CodeBinaryOp.Coalesce => ValidateCoalesce(left, right),
+            CodeBinaryOp.Equal or CodeBinaryOp.NotEqual => typeof(bool),
+            CodeBinaryOp.OrElse or CodeBinaryOp.AndAlso => ValidateLogical(op, left, right),
             _ => throw new ArgumentException($"Unknown binary operator {op}.")
         };
 
@@ -50,9 +50,9 @@ internal sealed class IrBinary : IrExpression
         Right = right;
     }
 
-    private static Type ValidateCoalesce(IrExpression left, IrExpression right)
+    private static Type ValidateCoalesce(CodeExpression left, CodeExpression right)
     {
-        if (!IrTypeRules.IsNullAssignable(left.Type))
+        if (!CodeTypeRules.IsNullAssignable(left.Type))
             throw new ArgumentException($"The left side of ?? must be nullable, not {left.Type}.");
 
         // T? ?? T yields T; otherwise the result keeps the left type (matching C# rules
@@ -61,22 +61,22 @@ internal sealed class IrBinary : IrExpression
         if (right.Type == unwrappedLeft)
             return unwrappedLeft;
 
-        IrTypeRules.ValidateAssignment(right, left.Type, "The right side of ??");
+        CodeTypeRules.ValidateAssignment(right, left.Type, "The right side of ??");
         return left.Type;
     }
 
-    private static Type ValidateLogical(IrBinaryOp op, IrExpression left, IrExpression right)
+    private static Type ValidateLogical(CodeBinaryOp op, CodeExpression left, CodeExpression right)
     {
         if (left.Type != typeof(bool) || right.Type != typeof(bool))
             throw new ArgumentException($"Operands of {op} must be bool, got {left.Type} and {right.Type}.");
         return typeof(bool);
     }
 
-    public IrBinaryOp Op { get; }
+    public CodeBinaryOp Op { get; }
 
-    public IrExpression Left { get; }
+    public CodeExpression Left { get; }
 
-    public IrExpression Right { get; }
+    public CodeExpression Right { get; }
 
     public override Type Type { get; }
 }

@@ -6,20 +6,20 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
 /// A constant value, printed as a C# literal (or <c>null</c>). Replaces both
 /// <c>ConstantExpression</c> and the old <c>NullExpression</c> helpers: a typed null is
-/// simply <c>new IrConstant(null, type)</c>.
+/// simply <c>new CodeConstant(null, type)</c>.
 /// </summary>
-internal sealed class IrConstant : IrExpression
+internal sealed class CodeConstant : CodeExpression
 {
-    public IrConstant(object? value, Type type)
+    public CodeConstant(object? value, Type type)
     {
-        if (value is not null && !IrTypeRules.CanBeAssigned(value.GetType(), type))
+        if (value is not null && !CodeTypeRules.CanBeAssigned(value.GetType(), type))
             throw new ArgumentException($"Constant value of type {value.GetType()} is not assignable to {type}.");
-        if (value is null && !IrTypeRules.IsNullAssignable(type))
+        if (value is null && !CodeTypeRules.IsNullAssignable(type))
             throw new ArgumentException($"A null constant cannot have non-nullable type {type}.");
 
         Value = value;
@@ -37,7 +37,7 @@ internal sealed class IrConstant : IrExpression
 /// null (reference types and <see cref="Nullable{T}"/>) and <c>default(T)</c> for other
 /// value types.
 /// </summary>
-internal sealed class IrDefault(Type type) : IrExpression
+internal sealed class CodeDefault(Type type) : CodeExpression
 {
     public override Type Type { get; } = type;
 }

@@ -19,12 +19,12 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 partial class CqlOperatorsBinder
 {
-    private IrExpression SortBy(
-        IrExpression source,
-        IrExpression by,
-        IrExpression order)
+    private CodeExpression SortBy(
+        CodeExpression source,
+        CodeExpression by,
+        CodeExpression order)
     {
-        if (by is IrLambda lambda && order is IrConstant orderConstant && orderConstant.Type == typeof(ListSortDirection))
+        if (by is CodeLambda lambda && order is CodeConstant orderConstant && orderConstant.Type == typeof(ListSortDirection))
         {
             var elementType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var call = BindToBestMethodOverload(nameof(ICqlOperators.SortBy), [source, lambda, orderConstant], [elementType])!;
@@ -35,9 +35,9 @@ partial class CqlOperatorsBinder
         throw new ArgumentException("SortBy expects 3 parameters: source, lambda, and SortOrder constant", nameof(by));
     }
 
-    private IrExpression InList(
-        IrExpression left,
-        IrExpression right)
+    private CodeExpression InList(
+        CodeExpression left,
+        CodeExpression right)
     {
         if (left.Type == typeof(CqlCode))
         {
@@ -50,15 +50,15 @@ partial class CqlOperatorsBinder
 
         var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(nameof(ICqlOperators.In), [left, right], [], false);
         if (methodInfo is null)
-            return new IrConstant(null, typeof(object));
+            return new CodeConstant(null, typeof(object));
 
-        var call = new IrInvoke(OperatorsReceiver, methodInfo, convertedArgs);
+        var call = new CodeInvoke(OperatorsReceiver, methodInfo, convertedArgs);
         return call;
     }
 
-    private IrExpression Union(
-        IrExpression left,
-        IrExpression right)
+    private CodeExpression Union(
+        CodeExpression left,
+        CodeExpression right)
     {
         if (left.Type == typeof(IValueSetFacade) && right.Type == typeof(IValueSetFacade))
         {
@@ -95,9 +95,9 @@ partial class CqlOperatorsBinder
         return BindToBestMethodOverload(nameof(ICqlOperators.Union), [left, right], [])!;
     }
 
-    private IrExpression ResolveValueSet(IrExpression expression)
+    private CodeExpression ResolveValueSet(CodeExpression expression)
     {
-        if (expression is IrNew @new && @new.Type == typeof(CqlValueSet))
+        if (expression is CodeNew @new && @new.Type == typeof(CqlValueSet))
         {
             var call = BindToDirectMethod(nameof(ICqlOperators.ResolveValueSet), @new);
             return call;
@@ -106,7 +106,7 @@ partial class CqlOperatorsBinder
         throw new ArgumentException($"Expression should be a 'new {nameof(CqlValueSet)}(...)' construction, but was a {expression.GetType().Name} of type {expression.Type}.");
     }
 
-    private IrExpression Coalesce(IrExpression operand)
+    private CodeExpression Coalesce(CodeExpression operand)
     {
         var elementType = _typeResolver.GetListElementType(operand.Type, throwError: false)
             ?? throw new ArgumentException(
@@ -123,7 +123,7 @@ partial class CqlOperatorsBinder
         return BindToBestMethodOverload(nameof(ICqlOperators.Coalesce), [operand], [elementType])!;
     }
 
-    private IrExpression Flatten(IrExpression operand)
+    private CodeExpression Flatten(CodeExpression operand)
     {
         var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
         if (_typeResolver.IsListType(elementType))
@@ -143,12 +143,12 @@ partial class CqlOperatorsBinder
         return operand; // flatten is being called on a list that is already flat.
     }
 
-    private IrInvoke LateBoundProperty(
-        IrExpression source,
-        IrExpression propertyName,
-        IrExpression typeExpression)
+    private CodeInvoke LateBoundProperty(
+        CodeExpression source,
+        CodeExpression propertyName,
+        CodeExpression typeExpression)
     {
-        if (typeExpression is IrConstant { Value: Type type })
+        if (typeExpression is CodeConstant { Value: Type type })
         {
             if (source.Type != typeof(object))
                 source = source.NewTypeAsExpression(typeof(object));
@@ -163,11 +163,11 @@ partial class CqlOperatorsBinder
     /// <summary>
     /// Handles explicit conversions, i.e., the Convert operator
     /// </summary>
-    private IrExpression BindConvert(
-        IrExpression source,
-        IrExpression typeExpression)
+    private CodeExpression BindConvert(
+        CodeExpression source,
+        CodeExpression typeExpression)
     {
-        if (typeExpression is not IrConstant { Value: Type toType })
+        if (typeExpression is not CodeConstant { Value: Type toType })
             throw new ArgumentException("Expected constant type expression", nameof(typeExpression));
 
         var methodName = CqlOperators.ConversionFunctionName(source.Type, toType);
@@ -183,17 +183,17 @@ partial class CqlOperatorsBinder
     }
 
 
-    private IrInvoke Retrieve(
-        IrExpression typeExpression,
-        IrExpression valueSetOrCodes,
-        IrExpression codePropertyExpression,
-        IrExpression templateId)
+    private CodeInvoke Retrieve(
+        CodeExpression typeExpression,
+        CodeExpression valueSetOrCodes,
+        CodeExpression codePropertyExpression,
+        CodeExpression templateId)
     {
-        if (typeExpression is not IrConstant ce || ce.Type != typeof(Type))
+        if (typeExpression is not CodeConstant ce || ce.Type != typeof(Type))
             throw new ArgumentException("First parameter to Retrieve is expected to be a constant Type", nameof(typeExpression));
 
         if (ce.Value is not Type type
-            || codePropertyExpression is not IrConstant cpe
+            || codePropertyExpression is not CodeConstant cpe
             || cpe.Type != typeof(PropertyInfo))
             throw new ArgumentException("Third parameter to Retrieve is expected to be a constant PropertyInfo", nameof(codePropertyExpression));
 
@@ -202,8 +202,8 @@ partial class CqlOperatorsBinder
             var declaringType = pi!.DeclaringType;
             var propName = pi.Name;
             var method = typeof(Type).GetMethod(nameof(Type.GetProperty), [typeof(string)])!;
-            var typeOf = new IrConstant(declaringType, typeof(Type));
-            codePropertyExpression = new IrInvoke(typeOf, method, new IrConstant(propName, typeof(string)));
+            var typeOf = new CodeConstant(declaringType, typeof(Type));
+            codePropertyExpression = new CodeInvoke(typeOf, method, new CodeConstant(propName, typeof(string)));
         }
 
         return Retrieve(type, valueSetOrCodes, codePropertyExpression, templateId);
@@ -211,15 +211,15 @@ partial class CqlOperatorsBinder
     }
 
 
-    protected IrInvoke Retrieve(
+    protected CodeInvoke Retrieve(
         Type resourceType,
-        IrExpression codes,
-        IrExpression codeProperty,
-        IrExpression templateId)
+        CodeExpression codes,
+        CodeExpression codeProperty,
+        CodeExpression templateId)
     {
         var forType = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.Retrieve))!.MakeGenericMethod(resourceType);
-        IrExpression codeExpression = new IrConstant(null, typeof(IEnumerable<CqlCode>));
-        IrExpression valuesetExpression = new IrConstant(null, typeof(CqlValueSet));
+        CodeExpression codeExpression = new CodeConstant(null, typeof(IEnumerable<CqlCode>));
+        CodeExpression valuesetExpression = new CodeConstant(null, typeof(CqlValueSet));
 
         if (codes.Type == typeof(CqlValueSet))
             valuesetExpression = codes;
@@ -250,19 +250,19 @@ partial class CqlOperatorsBinder
                                                        || !valuesetExpression.IsNullConstant()
                                                        || !templateId.IsNullConstant();
 
-        IrExpression createParameters = hasFilters
-                                   ? new IrNew(constructor, codeProperty, valuesetExpression, codeExpression, templateId)
-                                   : new IrConstant(null, typeof(RetrieveParameters));
+        CodeExpression createParameters = hasFilters
+                                   ? new CodeNew(constructor, codeProperty, valuesetExpression, codeExpression, templateId)
+                                   : new CodeConstant(null, typeof(RetrieveParameters));
 
         var call = BindToDirectMethod(forType, createParameters);
         return call;
     }
 
-    private IrInvoke Select(
-        IrExpression source,
-        IrExpression lambda)
+    private CodeInvoke Select(
+        CodeExpression source,
+        CodeExpression lambda)
     {
-        if (lambda is IrLambda lambdaExpr)
+        if (lambda is CodeLambda lambdaExpr)
         {
             var sourceType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var resultType = lambdaExpr.Body.Type;
@@ -273,11 +273,11 @@ partial class CqlOperatorsBinder
         throw new ArgumentException("Source is not generic", nameof(source));
     }
 
-    private IrInvoke Where(
-        IrExpression source,
-        IrExpression lambda)
+    private CodeInvoke Where(
+        CodeExpression source,
+        CodeExpression lambda)
     {
-        if (lambda is IrLambda)
+        if (lambda is CodeLambda)
         {
             var sourceType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var call = BindToBestMethodOverload(nameof(ICqlOperators.Where), [source, lambda], [sourceType])!;
@@ -287,11 +287,11 @@ partial class CqlOperatorsBinder
         throw new ArgumentException("Source is not generic", nameof(source));
     }
 
-    private IrInvoke SelectMany(
-        IrExpression source,
-        IrExpression collectionSelectorLambda)
+    private CodeInvoke SelectMany(
+        CodeExpression source,
+        CodeExpression collectionSelectorLambda)
     {
-        if (collectionSelectorLambda is IrLambda collectionSelector)
+        if (collectionSelectorLambda is CodeLambda collectionSelector)
         {
             var firstGenericArgument = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
             if (_typeResolver.IsListType(collectionSelector.Body.Type))
@@ -307,12 +307,12 @@ partial class CqlOperatorsBinder
         throw new ArgumentException("Source is not generic", nameof(source));
     }
 
-    private IrInvoke SelectManyResults(
-        IrExpression source,
-        IrExpression collectionSelectorLambda,
-        IrExpression resultSelectorLambda)
+    private CodeInvoke SelectManyResults(
+        CodeExpression source,
+        CodeExpression collectionSelectorLambda,
+        CodeExpression resultSelectorLambda)
     {
-        if (collectionSelectorLambda is not IrLambda collectionSelector)
+        if (collectionSelectorLambda is not CodeLambda collectionSelector)
             throw new ArgumentException("Source is not generic", nameof(source));
 
         var firstGenericArgument = _typeResolver.GetListElementType(source.Type) ??
@@ -325,7 +325,7 @@ partial class CqlOperatorsBinder
         var secondGenericArgument = _typeResolver.GetListElementType(collectionSelector.Body.Type) ??
                                     throw new InvalidOperationException(
                                         $"{collectionSelector.Type} was expected to be a list type.");
-        if (resultSelectorLambda is not IrLambda resultSelector)
+        if (resultSelectorLambda is not CodeLambda resultSelector)
             throw new ArgumentException("Result expression is not a lambda", nameof(resultSelectorLambda));
 
         var call = BindToBestMethodOverload(nameof(ICqlOperators.SelectManyResults), [source, collectionSelector, resultSelector], [firstGenericArgument, secondGenericArgument, resultSelector.Body.Type])!;

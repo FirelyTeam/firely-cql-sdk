@@ -8,7 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -20,7 +20,7 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// Processes a definition dictionary of <see cref="CqlDefinition"/> into a .NET class per
 /// library: the class scaffolding (usings, regions, attributes, tuple-metadata fields,
 /// singleton/ILibrary boilerplate), with the lambda bodies produced by
-/// <see cref="CSharpIrEmitter"/>.
+/// <see cref="CSharpEmitter"/>.
 /// </summary>
 internal partial class LibrarySetCSharpCodeGenerator
 {

@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
 /// Base class for the typed intermediate representation (IR) produced by the expression
@@ -25,11 +25,11 @@ namespace Hl7.Cql.Compiler.Ir;
 ///
 /// <para>Unlike Linq expression trees, the IR is statement-aware at print time only: the tree
 /// itself is expression-shaped, and the emitter linearizes nested expressions into sequential
-/// local assignments (<c>var a_ = ...;</c>). Nodes are immutable; <see cref="IrLocal"/> is
+/// local assignments (<c>var a_ = ...;</c>). Nodes are immutable; <see cref="CodeLocal"/> is
 /// the only node with reference-identity semantics (two locals are the same variable if and
 /// only if they are the same instance).</para>
 /// </summary>
-internal abstract class IrExpression
+internal abstract class CodeExpression
 {
     /// <summary>
     /// The .NET type of the C# expression this node prints as.

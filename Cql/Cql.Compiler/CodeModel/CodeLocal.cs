@@ -8,19 +8,19 @@
 
 using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
 /// A local variable or lambda parameter.
 ///
-/// <para><b>Reference identity is the variable's identity</b>: two <see cref="IrLocal"/>
+/// <para><b>Reference identity is the variable's identity</b>: two <see cref="CodeLocal"/>
 /// instances denote the same variable if and only if they are the same instance. This mirrors
 /// how <c>ParameterExpression</c> identity scoped query aliases in the previous pipeline.
 /// The builder introduces one instance per alias/parameter and reuses it at every occurrence;
 /// the emitter allocates the final C# name per method scope (using <see cref="NameHint"/>
 /// where possible), so names never need to be unique at construction time.</para>
 /// </summary>
-internal sealed class IrLocal(Type type, string? nameHint = null) : IrExpression
+internal sealed class CodeLocal(Type type, string? nameHint = null) : CodeExpression
 {
     /// <summary>
     /// Optional preferred name (e.g. a CQL query alias). The emitter uses it when it is
@@ -38,11 +38,11 @@ internal sealed class IrLocal(Type type, string? nameHint = null) : IrExpression
 /// as <c>context</c>. A single well-known instance is used so occurrences compare equal by
 /// reference like any other variable.
 /// </summary>
-internal sealed class IrContextParameter : IrExpression
+internal sealed class CodeContextParameter : CodeExpression
 {
-    private IrContextParameter() { }
+    private CodeContextParameter() { }
 
-    public static IrContextParameter Instance { get; } = new();
+    public static CodeContextParameter Instance { get; } = new();
 
     public override Type Type => typeof(CqlContext);
 }

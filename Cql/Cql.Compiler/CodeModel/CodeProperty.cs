@@ -6,15 +6,15 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
 /// A property or field access, optionally null-conditional (<c>x?.Member</c>). Replaces both
 /// <c>MemberExpression</c> and the old <c>NullConditionalMemberExpression</c> custom node.
 /// </summary>
-internal sealed class IrProperty : IrExpression
+internal sealed class CodeProperty : CodeExpression
 {
-    public IrProperty(IrExpression? receiver, MemberInfo member, bool nullConditional = false)
+    public CodeProperty(CodeExpression? receiver, MemberInfo member, bool nullConditional = false)
     {
         var memberType = member switch
         {
@@ -33,7 +33,7 @@ internal sealed class IrProperty : IrExpression
             throw new ArgumentException(isStatic
                 ? $"Static member {member.Name} cannot have a receiver."
                 : $"Instance member {member.Name} requires a receiver.");
-        if (receiver is not null && !IrTypeRules.CanBeAssigned(receiver.Type, member.DeclaringType!))
+        if (receiver is not null && !CodeTypeRules.CanBeAssigned(receiver.Type, member.DeclaringType!))
             throw new ArgumentException($"Receiver of type {receiver.Type} does not declare member {member.Name} (expected {member.DeclaringType}).");
         if (nullConditional && receiver is null)
             throw new ArgumentException($"A null-conditional access to {member.Name} requires a receiver.");
@@ -49,7 +49,7 @@ internal sealed class IrProperty : IrExpression
     }
 
     /// <summary>The instance whose member is accessed, or null for static members.</summary>
-    public IrExpression? Receiver { get; }
+    public CodeExpression? Receiver { get; }
 
     public MemberInfo Member { get; }
 

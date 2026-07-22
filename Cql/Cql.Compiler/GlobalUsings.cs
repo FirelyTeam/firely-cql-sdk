@@ -26,6 +26,6 @@ global using System.Security;
 global using System.Text;
 global using System.Threading.Tasks;
 global using System.Xml;
-global using Hl7.Cql.Compiler.Ir;
+global using Hl7.Cql.Compiler.CodeModel;
 global using Microsoft.CodeAnalysis.CSharp;
 global using Microsoft.Extensions.Logging;

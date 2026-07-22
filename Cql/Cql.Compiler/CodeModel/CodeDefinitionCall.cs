@@ -6,26 +6,26 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
 /// A call to another CQL definition or function, printed as <c>this.Name(context, ...)</c>
 /// for the library being generated and <c>LibraryClass.Instance.Name(context, ...)</c> for an
-/// included library — as opposed to <see cref="IrInvoke"/>, which invokes pre-existing .NET
+/// included library — as opposed to <see cref="CodeInvoke"/>, which invokes pre-existing .NET
 /// methods. Replaces the old <c>DefinitionCallExpression</c>/<c>FunctionCallExpression</c>
 /// custom nodes (whose <c>Reduce()</c> bodies only served the removed in-memory execution path).
 /// </summary>
-internal sealed class IrDefinitionCall : IrExpression
+internal sealed class CodeDefinitionCall : CodeExpression
 {
-    public IrDefinitionCall(
+    public CodeDefinitionCall(
         string libraryName,
         string libraryVersion,
         string definitionName,
         bool isLocalLibrary,
-        IReadOnlyList<IrExpression> arguments,
+        IReadOnlyList<CodeExpression> arguments,
         Type returnType)
     {
-        if (arguments.Count == 0 || arguments[0] is not IrContextParameter)
+        if (arguments.Count == 0 || arguments[0] is not CodeContextParameter)
             throw new ArgumentException($"A definition call to {definitionName} must pass the CqlContext as its first argument.");
 
         LibraryName = libraryName;
@@ -49,8 +49,8 @@ internal sealed class IrDefinitionCall : IrExpression
     /// (printed via the library class singleton).</summary>
     public bool IsLocalLibrary { get; }
 
-    /// <summary>The arguments, starting with the <see cref="IrContextParameter"/>.</summary>
-    public IReadOnlyList<IrExpression> Arguments { get; }
+    /// <summary>The arguments, starting with the <see cref="CodeContextParameter"/>.</summary>
+    public IReadOnlyList<CodeExpression> Arguments { get; }
 
     public override Type Type { get; }
 }

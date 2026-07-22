@@ -15,7 +15,7 @@ using Hl7.Cql.Operators;
 namespace Hl7.Cql.Compiler;
 
 using Tuple = Hl7.Cql.Elm.Tuple;
-using IrExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (Hl7.Cql.Compiler.Ir.IrExpression, Hl7.Cql.Elm.Element)>;
+using CodeExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (Hl7.Cql.Compiler.CodeModel.CodeExpression, Hl7.Cql.Elm.Element)>;
 
 /// <summary>
 /// Queries (query sources, where/return/aggregate/sort clauses, relationship clauses) plus
@@ -25,7 +25,7 @@ partial class ExpressionBuilderContext
 {
     #region Query
 
-    protected IrExpression Query(Query query)
+    protected CodeExpression Query(Query query)
     {
         QueryDumpDebugInfoToLog(query);
 
@@ -33,7 +33,7 @@ partial class ExpressionBuilderContext
 
         void PushScopes(
             string? alias = null,
-            params IrExpressionElementPairForIdentifier[] kvps)
+            params CodeExpressionElementPairForIdentifier[] kvps)
         {
             var popToken = this.PushScopes(alias, kvps);
             popTokens = (() => popToken.Pop()) + popTokens;
@@ -48,23 +48,23 @@ partial class ExpressionBuilderContext
             var (@return, sourcesPreviouslySingletons) = ProcessQuerySources(query);
             var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
 
-            IrLocal scopeParameter;
+            CodeLocal scopeParameter;
             if (sources.Length == 1)
             {
                 var source0 = sources[0];
                 var sourceParameterName = IdentifierNormalizer.Normalize(source0.alias);
-                scopeParameter = new IrLocal(returnElementType, sourceParameterName);
-                PushScopes(ImpliedAlias, new IrExpressionElementPairForIdentifier(source0.alias, ((IrExpression)scopeParameter, (Elm.Element)source0.expression)));
+                scopeParameter = new CodeLocal(returnElementType, sourceParameterName);
+                PushScopes(ImpliedAlias, new CodeExpressionElementPairForIdentifier(source0.alias, ((CodeExpression)scopeParameter, (Elm.Element)source0.expression)));
             }
             else
             {
                 var sourceParameterName = TypeNameToIdentifier(returnElementType, this);
-                scopeParameter = new IrLocal(returnElementType, sourceParameterName);
+                scopeParameter = new CodeLocal(returnElementType, sourceParameterName);
                 var scopes =
                     (
                         from property in returnElementType!.GetProperties()
-                        let propertyAccess = new IrProperty(scopeParameter, property)
-                        select new IrExpressionElementPairForIdentifier(property.Name, (propertyAccess, (Elm.Element)query))
+                        let propertyAccess = new CodeProperty(scopeParameter, property)
+                        select new CodeExpressionElementPairForIdentifier(property.Name, (propertyAccess, (Elm.Element)query))
                     )
                     .ToArray();
                 PushScopes(ImpliedAlias, scopes);
@@ -75,7 +75,7 @@ partial class ExpressionBuilderContext
                 foreach (var let in query.let)
                 {
                     var expression = TranslateArg(let.expression!);
-                    PushScopes(ImpliedAlias, new IrExpressionElementPairForIdentifier(let.identifier!, (expression, (Elm.Element)let.expression!)));
+                    PushScopes(ImpliedAlias, new CodeExpressionElementPairForIdentifier(let.identifier!, (expression, (Elm.Element)let.expression!)));
                 }
             }
 
@@ -112,7 +112,7 @@ partial class ExpressionBuilderContext
                 using (PushElement(query.@return))
                 {
                     var selectBody = TranslateArg(query.@return.expression!);
-                    var selectLambda = new IrLambda([scopeParameter], selectBody);
+                    var selectLambda = new CodeLambda([scopeParameter], selectBody);
                     var callSelect = BindCqlOperator(nameof(ICqlOperators.Select), @return, selectLambda);
                     @return = callSelect;
                     if (query.@return.distinct)
@@ -145,7 +145,7 @@ partial class ExpressionBuilderContext
 
             if (query.resultTypeSpecifier is ListTypeSpecifier && !_typeResolver.IsListType(@return.Type))
             {
-                @return = new IrNewArray(@return.Type, @return);
+                @return = new CodeNewArray(@return.Type, @return);
             }
 
             return @return;
@@ -156,19 +156,19 @@ partial class ExpressionBuilderContext
         }
     }
 
-    private IrExpression DemoteSourceListToSingleton(IrExpression source)
+    private CodeExpression DemoteSourceListToSingleton(CodeExpression source)
     {
         // Do not inline this method, so that we can clearly see the pairing with the call to PromoteSourceSingletonToList
         var typeArg = _typeResolver.GetListElementType(source.Type, true);
         return BindCqlOperator(nameof(ICqlOperators.SingletonFrom), [source], [typeArg!]);
     }
 
-    private (IrExpression source, bool sourceOriginallyASingleton) PromoteSourceSingletonToList(IrExpression source)
+    private (CodeExpression source, bool sourceOriginallyASingleton) PromoteSourceSingletonToList(CodeExpression source)
     {
         if (_typeResolver.IsListType(source.Type))
             return (source, false);
 
-        source = new IrNewArray(source.Type, source);
+        source = new CodeNewArray(source.Type, source);
         return (source, true);
     }
 
@@ -252,7 +252,7 @@ partial class ExpressionBuilderContext
             lines is not null ? $"{string.Concat(from l in lines select $"\n\t{l}")}" : "");
     }
 
-    private (IrExpression sourceExpression, bool[] sourcesPreviouslySingletons) ProcessQuerySources(Query query)
+    private (CodeExpression sourceExpression, bool[] sourcesPreviouslySingletons) ProcessQuerySources(Query query)
     {
         AliasedQuerySource[] sources = query.source;
 
@@ -314,24 +314,24 @@ partial class ExpressionBuilderContext
         Debug.Assert(valueTupleFields.Length > 0);
         Debug.Assert(valueTupleFields.Length == cqlTupleProperties.Length);
 
-        var valueTupleTypeParam = new IrLocal(valueTupleType, "_valueTuple");
+        var valueTupleTypeParam = new CodeLocal(valueTupleType, "_valueTuple");
         var selectExpression =
-            new IrLambda(
+            new CodeLambda(
                 [valueTupleTypeParam],
                 CopyValueTupleIntoCqlTuple());
 
-        IrExpression CopyValueTupleIntoCqlTuple()
+        CodeExpression CopyValueTupleIntoCqlTuple()
         {
-            // NOTE(phase4): the reflection-emitted CQL tuple type is constructed via IrTupleInit
-            // (matching every element to its property by name) rather than IrNew + IrMemberInit,
+            // NOTE(phase4): the reflection-emitted CQL tuple type is constructed via CodeTupleInit
+            // (matching every element to its property by name) rather than CodeNew + CodeMemberInit,
             // per the phase-4 node-type mapping for CQL tuple types.
             var elements = valueTupleFields
                           .Zip(cqlTupleProperties, (valueTupleField, cqlTupleProp) => (valueTupleField, cqlTupleProp))
                           .SelectToArray(
                               valueTupleFields.Length,
-                              t => (t.cqlTupleProp.Name, (IrExpression)new IrProperty(valueTupleTypeParam, t.valueTupleField)));
+                              t => (t.cqlTupleProp.Name, (CodeExpression)new CodeProperty(valueTupleTypeParam, t.valueTupleField)));
 
-            var copyProps = new IrTupleInit(cqlTupleType, elements);
+            var copyProps = new CodeTupleInit(cqlTupleType, elements);
             return copyProps;
         }
 
@@ -340,9 +340,9 @@ partial class ExpressionBuilderContext
         return (crossJoinedCqlTupleResultsExpression, sourcesPreviouslySingletons)!;
     }
 
-    protected IrExpression SortClause(
+    protected CodeExpression SortClause(
         Query query,
-        IrExpression @return)
+        CodeExpression @return)
     {
         //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByExpression))]
         //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByColumn))]
@@ -360,22 +360,22 @@ partial class ExpressionBuilderContext
                         {
                             var parameterName = "@this";
                             var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
-                            var sortMemberParameter = new IrLocal(returnElementType, parameterName);
+                            var sortMemberParameter = new CodeLocal(returnElementType, parameterName);
                             using (PushScopes(parameterName,
-                                              new IrExpressionElementPairForIdentifier(parameterName, (sortMemberParameter, (Elm.Element)byExpression.expression))))
+                                              new CodeExpressionElementPairForIdentifier(parameterName, (sortMemberParameter, (Elm.Element)byExpression.expression))))
                             {
                                 var sortMemberExpression = TranslateArg(byExpression.expression);
                                 var lambdaBody = _cqlOperatorsBinder.ConvertToType(sortMemberExpression, typeof(object));
-                                var sortLambda = new IrLambda([sortMemberParameter], lambdaBody);
+                                var sortLambda = new CodeLambda([sortMemberParameter], lambdaBody);
                                 return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda,
-                                                       new IrConstant(order, typeof(ListSortDirection)));
+                                                       new CodeConstant(order, typeof(ListSortDirection)));
                             }
                         }
                         case ByColumn byColumn:
                         {
                             var parameterName = "@this";
                             var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
-                            var sortMemberParameter = new IrLocal(returnElementType, parameterName);
+                            var sortMemberParameter = new CodeLocal(returnElementType, parameterName);
                             var pathMemberType = TypeFor(byColumn);
                             if (pathMemberType == null)
                             {
@@ -385,12 +385,12 @@ partial class ExpressionBuilderContext
 
                             var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
                             var lambdaBody = _cqlOperatorsBinder.ConvertToType(pathExpression, typeof(object));
-                            var sortLambda = new IrLambda([sortMemberParameter], lambdaBody);
-                            return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, new IrConstant(order, typeof(ListSortDirection)));
+                            var sortLambda = new CodeLambda([sortMemberParameter], lambdaBody);
+                            return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, new CodeConstant(order, typeof(ListSortDirection)));
                         }
                         default:
                         {
-                            return BindCqlOperator(nameof(ICqlOperators.ListSort), @return, new IrConstant(order, typeof(ListSortDirection)));
+                            return BindCqlOperator(nameof(ICqlOperators.ListSort), @return, new CodeConstant(order, typeof(ListSortDirection)));
                         }
                     }
                 }
@@ -400,8 +400,8 @@ partial class ExpressionBuilderContext
         return @return;
     }
 
-    protected IrLambda WithToExistenceCheck(
-        IrLocal rootScopeParameter,
+    protected CodeLambda WithToExistenceCheck(
+        CodeLocal rootScopeParameter,
         RelationshipClause with)
     {
         if (with.expression == null)
@@ -429,45 +429,45 @@ partial class ExpressionBuilderContext
             // with "Index Prescription Start Date" IPSD
             // where IPSD is a Date
             // Promote to an array for consistency.
-            var newArray = new IrNewArray(source.Type, source);
+            var newArray = new CodeNewArray(source.Type, source);
             source = newArray;
         }
 
         var sourceElementType = _typeResolver.GetListElementType(source.Type)!;
 
-        var whereLambdaParameter = new IrLocal(sourceElementType, with.alias);
-        using (PushScopes(ImpliedAlias, new IrExpressionElementPairForIdentifier(with.alias!, (whereLambdaParameter, (Elm.Element)with))))
+        var whereLambdaParameter = new CodeLocal(sourceElementType, with.alias);
+        using (PushScopes(ImpliedAlias, new CodeExpressionElementPairForIdentifier(with.alias!, (whereLambdaParameter, (Elm.Element)with))))
         {
             var suchThatBody = TranslateArg(with.suchThat);
 
-            var whereLambda = new IrLambda([whereLambdaParameter], suchThatBody);
+            var whereLambda = new CodeLambda([whereLambdaParameter], suchThatBody);
             var callWhereOnSource = BindCqlOperator(nameof(ICqlOperators.Where), source, whereLambda);
             var exists = BindCqlOperator(nameof(ICqlOperators.Exists), callWhereOnSource);
             if (with is Without)
                 exists = BindCqlOperator(nameof(ICqlOperators.Not), exists);
-            return new IrLambda([rootScopeParameter], exists);
+            return new CodeLambda([rootScopeParameter], exists);
         }
     }
 
 
-    protected IrExpression Where(
+    protected CodeExpression Where(
         Elm.Expression queryWhere,
-        IrLocal sourceParameter,
-        IrExpression @return)
+        CodeLocal sourceParameter,
+        CodeExpression @return)
     {
         using (PushElement(queryWhere))
         {
             var whereBody = TranslateArg(queryWhere);
-            var whereLambda = new IrLambda([sourceParameter], whereBody);
+            var whereLambda = new CodeLambda([sourceParameter], whereBody);
             return BindCqlOperator(nameof(ICqlOperators.Where), @return, whereLambda);
         }
     }
 
-    protected IrExpression AggregateClause(
+    protected CodeExpression AggregateClause(
         Query query,
         AggregateClause queryAggregate,
-        IrLocal sourceParameter,
-        IrExpression @return)
+        CodeLocal sourceParameter,
+        CodeExpression @return)
     {
         using (PushElement(queryAggregate))
         {
@@ -486,8 +486,8 @@ partial class ExpressionBuilderContext
                 throw this.NewExpressionBuildingException(
                     $"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
 
-            var resultParameter = new IrLocal(resultType, resultAlias);
-            using (PushScopes(ImpliedAlias, new IrExpressionElementPairForIdentifier(resultAlias!, (resultParameter, (Elm.Element)queryAggregate))))
+            var resultParameter = new CodeLocal(resultType, resultAlias);
+            using (PushScopes(ImpliedAlias, new CodeExpressionElementPairForIdentifier(resultAlias!, (resultParameter, (Elm.Element)queryAggregate))))
             {
                 var lambdaBody = TranslateArg(queryAggregate.expression!);
                 // when starting is not present, it is a null literal typed as Any (object).
@@ -496,7 +496,7 @@ partial class ExpressionBuilderContext
                 var startingValue = ChangeType(starting, lambdaBody.Type, throwOnError: true);
                 if (queryAggregate.distinct)
                     @return = _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.Distinct), [@return], [resultType]);
-                var lambda = new IrLambda([resultParameter, sourceParameter], lambdaBody);
+                var lambda = new CodeLambda([resultParameter, sourceParameter], lambdaBody);
 
                 return BindCqlOperator(nameof(ICqlOperators.Aggregate), @return, lambda, startingValue);
             }
@@ -507,7 +507,7 @@ partial class ExpressionBuilderContext
 
     #region Properties, instances and tuples
 
-    protected IrExpression? IdentifierRef(IdentifierRef ire)
+    protected CodeExpression? IdentifierRef(IdentifierRef ire)
     {
         if (string.Equals("$this", ire.name) && ImpliedAlias != null)
         {
@@ -528,14 +528,14 @@ partial class ExpressionBuilderContext
         return prop;
     }
 
-    protected IrExpression OperandRef(OperandRef ore)
+    protected CodeExpression OperandRef(OperandRef ore)
     {
         if (_operands?.TryGetValue(ore.name!, out var expression) == true)
             return expression;
         throw this.NewExpressionBuildingException($"Operand reference to {ore.name} not found in definition operands.");
     }
 
-    protected IrExpression Property(Property op)
+    protected CodeExpression Property(Property op)
     {
         using (PushElement(op))
         {
@@ -557,8 +557,8 @@ partial class ExpressionBuilderContext
                         FormatMessage(
                             $"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.",
                             op));
-                    return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), scopeExpression, new IrConstant(op.path, typeof(string)),
-                                           new IrConstant(expectedType, typeof(Type)));
+                    return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), scopeExpression, new CodeConstant(op.path, typeof(string)),
+                                           new CodeConstant(expectedType, typeof(Type)));
                 }
 
                 var propogate = PropagateNull(scopeExpression, pathMemberInfo);
@@ -605,12 +605,12 @@ partial class ExpressionBuilderContext
         }
     }
 
-    protected IrExpression PropertyHelper(
-        IrExpression source,
+    protected CodeExpression PropertyHelper(
+        CodeExpression source,
         string? path,
         Type expectedType)
     {
-        IrExpression? result = null;
+        CodeExpression? result = null;
         if (_typeResolver.ShouldUseSourceObject(source.Type, path!))
         {
             result = source;
@@ -624,17 +624,17 @@ partial class ExpressionBuilderContext
                 _logger.LogWarning(
                     FormatMessage(
                         $"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound."));
-                return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), source, new IrConstant(path, typeof(string)),
-                                       new IrConstant(expectedType, typeof(Type)));
+                return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), source, new CodeConstant(path, typeof(string)),
+                                       new CodeConstant(expectedType, typeof(Type)));
             }
 
             if (pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
             {
                 var isCheck = source.NewTypeIsExpression(pathMemberInfo.DeclaringType!);
                 var typeAs = source.NewTypeAsExpression(pathMemberInfo.DeclaringType!);
-                var pathAccess = new IrProperty(typeAs, pathMemberInfo);
-                IrExpression? ifIs = pathAccess;
-                IrExpression elseNull = new IrConstant(null, pathMemberInfo.PropertyType);
+                var pathAccess = new CodeProperty(typeAs, pathMemberInfo);
+                CodeExpression? ifIs = pathAccess;
+                CodeExpression elseNull = new CodeConstant(null, pathMemberInfo.PropertyType);
                 // some ops, like properties on alias refs, don't have type information on them.
                 // can't check against what we don't have.
                 if (expectedType != null)
@@ -650,7 +650,7 @@ partial class ExpressionBuilderContext
                     }
                 }
 
-                var condition = new IrConditional(isCheck, ifIs, elseNull, ifIs.Type);
+                var condition = new CodeConditional(isCheck, ifIs, elseNull, ifIs.Type);
                 return condition;
             }
 
@@ -688,9 +688,9 @@ partial class ExpressionBuilderContext
     }
 
     /// <remarks>The old builder returned a <c>MemberAssignment</c>; the IR pipeline represents
-    /// an object-initializer binding as a <c>(MemberInfo, IrExpression)</c> pair (see
-    /// <see cref="IrMemberInit"/>).</remarks>
-    protected (MemberInfo member, IrExpression value) Binding(IrExpression value, MemberInfo memberInfo)
+    /// an object-initializer binding as a <c>(MemberInfo, CodeExpression)</c> pair (see
+    /// <see cref="CodeMemberInit"/>).</remarks>
+    protected (MemberInfo member, CodeExpression value) Binding(CodeExpression value, MemberInfo memberInfo)
     {
         if (memberInfo is PropertyInfo property)
         {
@@ -718,21 +718,21 @@ partial class ExpressionBuilderContext
                         var toArrayMethod = typeof(Enumerable)
                                             .GetMethod(nameof(Enumerable.ToArray))!
                                             .MakeGenericMethod(valueEnumerableElement);
-                        var callToArray = new IrInvoke(null, toArrayMethod, value);
+                        var callToArray = new CodeInvoke(null, toArrayMethod, value);
                         return (memberInfo, callToArray);
                     }
                     else
                     {
-                        var selectParameter = new IrLocal(valueEnumerableElement, TypeNameToIdentifier(value.Type, this));
+                        var selectParameter = new CodeLocal(valueEnumerableElement, TypeNameToIdentifier(value.Type, this));
                         var body = ChangeType(selectParameter, memberArrayElement, throwOnError: true);
-                        var selectLambda = new IrLambda([selectParameter], body);
+                        var selectLambda = new CodeLambda([selectParameter], body);
                         var callSelectMethod = BindCqlOperator(nameof(ICqlOperators.Select), [
                             value, selectLambda
                         ]);
                         var toArrayMethod = typeof(Enumerable)
                                             .GetMethod(nameof(Enumerable.ToArray))!
                                             .MakeGenericMethod(memberArrayElement);
-                        var callToArray = new IrInvoke(null, toArrayMethod, callSelectMethod);
+                        var callToArray = new CodeInvoke(null, toArrayMethod, callSelectMethod);
                         return (memberInfo, callToArray);
                     }
                 }
@@ -743,7 +743,7 @@ partial class ExpressionBuilderContext
                 {
                     var elementType = _typeResolver.GetListElementType(property.PropertyType)!;
                     var ctor = ConstructorInfos.ListOf(elementType);
-                    var newList = new IrNew(ctor, value);
+                    var newList = new CodeNew(ctor, value);
                     return (memberInfo, newList);
                 }
             }
@@ -755,7 +755,7 @@ partial class ExpressionBuilderContext
         throw new NotImplementedException().WithContext(this);
     }
 
-    protected IrExpression Instance(Instance ine)
+    protected CodeExpression Instance(Instance ine)
     {
         var instanceType = _typeResolver.ResolveType(ine.classType.Name)
                            ?? throw this.NewExpressionBuildingException($"Could not resolve type for '{ine.classType.Name}'");
@@ -777,7 +777,7 @@ partial class ExpressionBuilderContext
                     var methodInfo = typeof(Enum).GetMethod(nameof(Enum.Parse), new[] { typeof(Type), typeof(string), typeof(bool) })
                                      ?? throw this.NewExpressionBuildingException($"Could not find Enum.Parse method.");
 
-                    var callEnumParse = new IrInvoke(null, methodInfo, new IrConstant(instanceType, typeof(Type)), enumValueValue, new IrConstant(true, typeof(bool)));
+                    var callEnumParse = new CodeInvoke(null, methodInfo, new CodeConstant(instanceType, typeof(Type)), enumValueValue, new CodeConstant(true, typeof(bool)));
                     return callEnumParse;
                 }
             }
@@ -809,16 +809,16 @@ partial class ExpressionBuilderContext
                                           ?? throw this.NewExpressionBuildingException(
                                               $"Could not find constructor for {instanceType}<{genericType}>({genericType})");
 
-                    var parseCall = new IrInvoke(
+                    var parseCall = new CodeInvoke(
                         null,
                         enumParseMethod!,
-                        new IrConstant(instanceType.GenericTypeArguments[0], typeof(Type)),
+                        new CodeConstant(instanceType.GenericTypeArguments[0], typeof(Type)),
                         enumValueValue,
-                        new IrConstant(true, typeof(bool)));
+                        new CodeConstant(true, typeof(bool)));
 
-                    var typedParsedValue = new IrCast(parseCall, genericType.MakeNullable(), IrCastKind.Cast);
+                    var typedParsedValue = new CodeCast(parseCall, genericType.MakeNullable(), CodeCastKind.Cast);
 
-                    var genericEnumValue = new IrNew(
+                    var genericEnumValue = new CodeNew(
                         constructorInfo,
                         typedParsedValue);
 
@@ -827,7 +827,7 @@ partial class ExpressionBuilderContext
             }
         }
 
-        (string name, IrExpression value)[] parameterNameValuePairs = ine.element!.SelectToArray(el => (name: el.name!, value: TranslateArg(el.value)));
+        (string name, CodeExpression value)[] parameterNameValuePairs = ine.element!.SelectToArray(el => (name: el.name!, value: TranslateArg(el.value)));
 
         // Find a constructor that matches the provided parameters.
         const int NOT_MAPPED_HAS_DEFAULT_VALUE = int.MaxValue;
@@ -880,19 +880,19 @@ partial class ExpressionBuilderContext
 
         if (ctor is not null)
         {
-            IrExpression[] values = new IrExpression[ctorPositionToParameterPositionMap.Length];
+            CodeExpression[] values = new CodeExpression[ctorPositionToParameterPositionMap.Length];
             for (int i = 0; i < ctorPositionToParameterPositionMap.Length; i++)
             {
                 var parameterPosition = ctorPositionToParameterPositionMap[i];
                 var ctorParameter = ctorParameters[i];
                 values[i] = (parameterPosition, ctorParameter.DefaultValue) switch
                 {
-                    (NOT_MAPPED_HAS_DEFAULT_VALUE, null) => new IrConstant(null, ctorParameter.ParameterType),
-                    (NOT_MAPPED_HAS_DEFAULT_VALUE, {} defaultValue) => new IrConstant(defaultValue, ctorParameter.ParameterType),
+                    (NOT_MAPPED_HAS_DEFAULT_VALUE, null) => new CodeConstant(null, ctorParameter.ParameterType),
+                    (NOT_MAPPED_HAS_DEFAULT_VALUE, {} defaultValue) => new CodeConstant(defaultValue, ctorParameter.ParameterType),
                     _                                               => parameterNameValuePairs[parameterPosition].value
                 };
             }
-            var newInstance = new IrNew(ctor, values);
+            var newInstance = new CodeNew(ctor, values);
             return newInstance;
         }
 
@@ -900,7 +900,7 @@ partial class ExpressionBuilderContext
         ctor = instanceType.GetConstructor(Type.EmptyTypes);
         if (ctor != null)
         {
-            var elementBindings = new (MemberInfo Member, IrExpression Value)[parameterNameValuePairs.Length];
+            var elementBindings = new (MemberInfo Member, CodeExpression Value)[parameterNameValuePairs.Length];
             for (int i = 0; i < parameterNameValuePairs.Length; i++)
             {
                 var (name, value) = parameterNameValuePairs[i];
@@ -910,15 +910,15 @@ partial class ExpressionBuilderContext
                 elementBindings[i] = binding;
             }
 
-            var @new = new IrNew(ctor);
-            var init = new IrMemberInit(@new, elementBindings);
+            var @new = new CodeNew(ctor);
+            var init = new CodeMemberInit(@new, elementBindings);
             return init;
         }
 
         throw this.NewExpressionBuildingException($"No suitable constructor found for type {instanceType}.");
     }
 
-    protected IrExpression Tuple(Tuple tuple)
+    protected CodeExpression Tuple(Tuple tuple)
     {
         Type tupleType;
         if (tuple.resultTypeSpecifier is null)
@@ -932,8 +932,8 @@ partial class ExpressionBuilderContext
             tupleType = TupleTypeFor(tupleTypeSpecifier);
         }
 
-        // NOTE(phase4): the reflection-emitted CQL tuple type is constructed via IrTupleInit
-        // rather than IrNew + IrMemberInit, per the phase-4 node-type mapping for CQL tuple
+        // NOTE(phase4): the reflection-emitted CQL tuple type is constructed via CodeTupleInit
+        // rather than CodeNew + CodeMemberInit, per the phase-4 node-type mapping for CQL tuple
         // types. Binding(...) is still used per element so that the same coercion logic
         // (array/ICollection conversions, ChangeType fallback) applies as before.
         if (tuple.element?.Length > 0)
@@ -949,11 +949,11 @@ partial class ExpressionBuilderContext
                          var binding = Binding(value, propInfo);
                          return (binding.member.Name, binding.value);
                      });
-            var init = new IrTupleInit(tupleType, elementBindings);
+            var init = new CodeTupleInit(tupleType, elementBindings);
             return init;
         }
 
-        return new IrTupleInit(tupleType, []);
+        return new CodeTupleInit(tupleType, []);
     }
 
     #endregion

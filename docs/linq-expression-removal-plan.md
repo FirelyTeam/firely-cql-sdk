@@ -157,7 +157,7 @@ several faithfully-replicated old quirks worth revisiting (all documented at the
 sites): duplicate eliminations burn a letter from the naming sequence (visible gaps);
 the multi-branch conditional form carries a stray `;` after its final else block;
 redundant `as object` casts survive exactly when they were built from the ELM
-`as`/`cast` operator (tracked via `IrCast.FromCqlAsOperator`) — an accident of the old
+`as`/`cast` operator (tracked via `CodeCast.FromCqlAsOperator`) — an accident of the old
 visitor ordering (`ElmAsExpression` reduced only at print time, after
 `RedundantCastsTransformer`'s single pass), not a design choice; a binary expression's
 RIGHT operand is never parenthesized (`g_ ?? h_ as IEnumerable<...>`) — the old
@@ -178,9 +178,9 @@ declaration with unescaped references.
   retrieves, FHIR property null-propagation, definition/function calls) required **zero new
   node kinds** and left no unresolved `FIXME(phase4-review)` markers — the ~18 kinds designed
   in phase 2 from the `Expression.*` usage survey were sufficient. The first end-to-end
-  execution of the new pipeline (ten CQL constructs, `IrPipelineTests`) passed without a
+  execution of the new pipeline (ten CQL constructs, `CodeModelPipelineTests`) passed without a
   single builder fix.
-- **Complication #3 (variable identity) was cheaper than predicted.** `IrLocal` reference
+- **Complication #3 (variable identity) was cheaper than predicted.** `CodeLocal` reference
   identity slotted in mechanically for `ParameterExpression` identity; the only subtlety
   found was pre-existing (`WithToSelectManyBody` creates two same-alias parameters, #1343).
 - **More reuse than planned**: the exception-context machinery
@@ -188,8 +188,8 @@ declaration with unescaped references.
   `CqlOperatorsMethodsCache` are all Expression-free and shared by both pipelines instead of
   duplicated.
 - **One deliberate shape change**: definition lambdas no longer carry an explicit
-  `CqlContext` parameter — the well-known `IrContextParameter.Instance` is referenced
-  directly, and `IrDefinitionCall` carries it as `arguments[0]`. Phase 5's
+  `CqlContext` parameter — the well-known `CodeContextParameter.Instance` is referenced
+  directly, and `CodeDefinitionCall` carries it as `arguments[0]`. Phase 5's
   `DefinitionWriter` integration must account for this.
 - **Preserve-vs-fix policy, refined by practice**: anything that could change a *binding
   outcome* is preserved bug-for-bug and tracked (#1341 generic-inference indexing, #1342
@@ -249,8 +249,8 @@ Done in phase 6 itself:
   Done — the error type now carries `Type[]`.
 - ~~Relocate `CqlOperatorsMethodsCache` out of the deleted `CqlOperatorsBinder`.~~
   Done — now `Cql.Compiler\Ir\CqlOperatorsMethodsCache.cs`.
-- ~~Consolidate the duplicated assign-to-type helpers (`IrExpressionExtensions` vs. the
-  binder's private phase-3 copies).~~ Done — consolidated onto `IrExpressionExtensions`.
+- ~~Consolidate the duplicated assign-to-type helpers (`CodeExpressionExtensions` vs. the
+  binder's private phase-3 copies).~~ Done — consolidated onto `CodeExpressionExtensions`.
 - ~~Review #1343.~~ Retired — develop's semi-join compilation of `with`/`without`
   (#1366) replaced `WithToSelectManyBody`, and the IR side ports it as
   `WithToExistenceCheck`.
@@ -263,8 +263,8 @@ byte-identical against the golden corpora):
   to disambiguate from.~~ Done — the pipeline orchestration classes took back the names
   their deleted counterparts held (`CqlOperatorsBinder`, `ExpressionBuilderContext`, the
   `CqlDefinition` family, `LibrarySetCSharpCodeGenerator`, …). The IR node vocabulary
-  (`IrExpression`, `IrConstant`, …, plus `CSharpIrEmitter`/`IrTypeRules`/
-  `IrExpressionExtensions`) keeps the prefix: there it is descriptive, not a
+  (`CodeExpression`, `CodeConstant`, …, plus `CSharpEmitter`/`CodeTypeRules`/
+  `CodeExpressionExtensions`) keeps the prefix: there it is descriptive, not a
   disambiguator.
 - ~~Scrub the migration narrative from doc comments: the "IR counterpart of the old X" /
   "phase N of the Linq.Expressions removal" framing made sense while both pipelines

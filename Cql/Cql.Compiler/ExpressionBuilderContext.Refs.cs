@@ -26,9 +26,9 @@ using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 /// </summary>
 partial class ExpressionBuilderContext
 {
-    protected IrExpression FunctionRef(FunctionRef op)
+    protected CodeExpression FunctionRef(FunctionRef op)
     {
-        IrExpression[] operands = TranslateArgs(op.operand);
+        CodeExpression[] operands = TranslateArgs(op.operand);
 
         // NOTE: Breaks
         //var resultType = op.resultTypeSpecifier ?? op.resultTypeName?.ToNamedType() ??
@@ -40,7 +40,7 @@ partial class ExpressionBuilderContext
         return invoke;
     }
 
-    protected IrExpression ExpressionRef(ExpressionRef expressionRef)
+    protected CodeExpression ExpressionRef(ExpressionRef expressionRef)
     {
         IPopToken popToken = null!;
         try
@@ -78,7 +78,7 @@ partial class ExpressionBuilderContext
         }
     }
 
-    protected IrExpression ParameterRef(ParameterRef op)
+    protected CodeExpression ParameterRef(ParameterRef op)
     {
         if (_libraryContext.LibraryDefinitions.TryGetDefinition(_libraryContext.LibraryVersionedIdentifier, op.name!, out var definition))
         {
@@ -89,7 +89,7 @@ partial class ExpressionBuilderContext
         throw this.NewExpressionBuildingException($"Parameter {op.name} hasn't been defined yet.");
     }
 
-    protected IrExpression CodeRef(CodeRef codeRef)
+    protected CodeExpression CodeRef(CodeRef codeRef)
     {
         if (string.IsNullOrWhiteSpace(codeRef.name))
             throw this.NewExpressionBuildingException("The code ref has no name.");
@@ -100,7 +100,7 @@ partial class ExpressionBuilderContext
         return definitionCallExpression;
     }
 
-    private IrExpression CodeSystemRef(CodeSystemRef codeSystemRef)
+    private CodeExpression CodeSystemRef(CodeSystemRef codeSystemRef)
     {
         if (string.IsNullOrWhiteSpace(codeSystemRef.name))
             throw this.NewExpressionBuildingException("The code system ref has no name.");
@@ -110,7 +110,7 @@ partial class ExpressionBuilderContext
         return definitionCallExpression;
     }
 
-    protected IrExpression ConceptRef(ConceptRef conceptRef)
+    protected CodeExpression ConceptRef(ConceptRef conceptRef)
     {
         if (string.IsNullOrWhiteSpace(conceptRef.name))
             throw this.NewExpressionBuildingException("The concept ref has no name.");
@@ -119,7 +119,7 @@ partial class ExpressionBuilderContext
         return InvokeDefinitionThroughRuntimeContext(conceptRef.name, conceptRef.libraryName, conceptType);
     }
 
-    protected IrExpression ValueSetRef(ValueSetRef valueSetRef)
+    protected CodeExpression ValueSetRef(ValueSetRef valueSetRef)
     {
         if (string.IsNullOrWhiteSpace(valueSetRef.name))
             throw this.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
@@ -128,7 +128,7 @@ partial class ExpressionBuilderContext
         return cqlValueSet;
     }
 
-    private IrExpression Retrieve(Retrieve retrieve)
+    private CodeExpression Retrieve(Retrieve retrieve)
     {
         Type? sourceElementType;
         string? cqlRetrieveResultType;
@@ -152,7 +152,7 @@ partial class ExpressionBuilderContext
             else throw new NotImplementedException($"Sources with type {retrieve.resultTypeSpecifier.GetType().Name} are not implemented.").WithContext(this);
         }
 
-        IrExpression? codeProperty;
+        CodeExpression? codeProperty;
 
         var hasCodePropertySpecified = sourceElementType != null && retrieve.codeProperty != null;
         var isDefaultCodeProperty = retrieve.codeProperty is null ||
@@ -163,16 +163,16 @@ partial class ExpressionBuilderContext
         if (hasCodePropertySpecified && !isDefaultCodeProperty)
         {
             var codePropertyInfo = _typeResolver.GetProperty(sourceElementType!, retrieve.codeProperty!);
-            codeProperty = new IrConstant(codePropertyInfo, typeof(PropertyInfo));
+            codeProperty = new CodeConstant(codePropertyInfo, typeof(PropertyInfo));
         }
         else
         {
-            codeProperty = new IrConstant(null, typeof(PropertyInfo));
+            codeProperty = new CodeConstant(null, typeof(PropertyInfo));
         }
 
         var templateId = TranslateArg(retrieve.templateId);
-        var sourceElementTypeExpr = new IrConstant(sourceElementType, typeof(Type));
-        IrExpression values = new IrConstant(null, typeof(CqlValueSet));
+        var sourceElementTypeExpr = new CodeConstant(sourceElementType, typeof(Type));
+        CodeExpression values = new CodeConstant(null, typeof(CqlValueSet));
 
         if (retrieve.codes != null)
         {
@@ -194,9 +194,9 @@ partial class ExpressionBuilderContext
         return BindCqlOperator(CqlOperator.Retrieve, sourceElementTypeExpr, values, codeProperty, templateId);
     }
 
-    private IrExpression BindValueInValueSet(
-        IrExpression valueExpr,
-        IrExpression valueSetExpr,
+    private CodeExpression BindValueInValueSet(
+        CodeExpression valueExpr,
+        CodeExpression valueSetExpr,
         bool isList)
     {
         var codeType = isList ? _typeResolver.GetListElementType(valueExpr.Type, throwError: true)! : valueExpr.Type;
@@ -213,7 +213,7 @@ partial class ExpressionBuilderContext
         throw new NotImplementedException().WithContext(this);
     }
 
-    private IrExpression TranslateValueSet(ValueSetRef valueSetRef, Elm.Expression valueSetExpression)
+    private CodeExpression TranslateValueSet(ValueSetRef valueSetRef, Elm.Expression valueSetExpression)
     {
         var valueSet =
             (valueSetRef, valueSetExpression) switch
@@ -233,11 +233,11 @@ partial class ExpressionBuilderContext
     /// <param name="arguments">The function arguments</param>
     /// <param name="returnType">The function's return type</param>
     /// <returns></returns>
-    protected IrExpression InvokeDefinedFunctionThroughRuntimeContext(
+    protected CodeExpression InvokeDefinedFunctionThroughRuntimeContext(
         string name,
         string? libraryAlias,
         TypeSpecifier[]? signature,
-        IrExpression[] arguments,
+        CodeExpression[] arguments,
         TypeSpecifier returnType)
     {
         string libraryName = _libraryContext.GetLibraryVersionedIdentifierFromAlias(libraryAlias, throwError: false)
@@ -246,20 +246,20 @@ partial class ExpressionBuilderContext
         var rtt = TypeFor(returnType) ?? throw this.NewExpressionBuildingException($"Unable to resolve type for {returnType}");
         var convertedArguments = arguments
                                  .Select((a, i) => ConvertArgumentTargetType(a, signature?[i], i))
-                                 .Prepend(IrContextParameter.Instance)
+                                 .Prepend(CodeContextParameter.Instance)
                                  .ToArray();
 
         // NOTE(phase4): the old builder built a Func<> delegate type here (prepending CqlContext to
         // the argument types and appending rtt) purely to construct FunctionCallExpression, which
-        // needed it to reduce to a runtime DefinitionDictionary<Delegate> lookup. IrDefinitionCall
+        // needed it to reduce to a runtime DefinitionDictionary<Delegate> lookup. CodeDefinitionCall
         // takes the return type directly and needs no delegate type.
         var (splitLibraryName, splitLibraryVersion) = SplitLibraryVersionedIdentifier(libraryName);
         var isLocalLibrary = libraryName == _libraryContext.LibraryVersionedIdentifier;
-        var functionCallExpression = new IrDefinitionCall(splitLibraryName, splitLibraryVersion, name, isLocalLibrary, convertedArguments, rtt);
+        var functionCallExpression = new CodeDefinitionCall(splitLibraryName, splitLibraryVersion, name, isLocalLibrary, convertedArguments, rtt);
         return functionCallExpression;
 
-        IrExpression ConvertArgumentTargetType(
-            IrExpression argument,
+        CodeExpression ConvertArgumentTargetType(
+            CodeExpression argument,
             TypeSpecifier? targetTypeSpecifier,
             int argumentIndex)
         {
@@ -355,7 +355,7 @@ partial class ExpressionBuilderContext
     /// <c>Expression.Type</c> either, so passing a non-lambda definition would have failed at
     /// runtime there too). In practice only <see cref="ParameterRef"/> calls this overload, and
     /// parameter references always resolve to an <see cref="CqlParameterDefinition"/>.</remarks>
-    private IrExpression InvokeDefinitionThroughRuntimeContext(
+    private CodeExpression InvokeDefinitionThroughRuntimeContext(
         string name,
         string? libraryAlias,
         CqlDefinition definition)
@@ -371,7 +371,7 @@ partial class ExpressionBuilderContext
         throw this.NewExpressionBuildingException("LambdaExpressions should be a variant of Func<>");
     }
 
-    private IrDefinitionCall InvokeDefinitionThroughRuntimeContext(
+    private CodeDefinitionCall InvokeDefinitionThroughRuntimeContext(
         string name,
         string? libraryAlias,
         Type definitionReturnType)
@@ -380,13 +380,13 @@ partial class ExpressionBuilderContext
                              ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
         var (splitLibraryName, splitLibraryVersion) = SplitLibraryVersionedIdentifier(libraryName);
         var isLocalLibrary = libraryName == _libraryContext.LibraryVersionedIdentifier;
-        return new IrDefinitionCall(splitLibraryName, splitLibraryVersion, name, isLocalLibrary, [IrContextParameter.Instance], definitionReturnType);
+        return new CodeDefinitionCall(splitLibraryName, splitLibraryVersion, name, isLocalLibrary, [CodeContextParameter.Instance], definitionReturnType);
     }
 
     /// <summary>
     /// Splits a <see cref="LibraryExpressionBuilderContext.LibraryVersionedIdentifier"/>-shaped
     /// string (e.g. <c>"FHIRHelpers-4.0.1"</c>) back into its name and version parts, for
-    /// <see cref="IrDefinitionCall"/>, which (unlike the old <c>DefinitionCallExpression</c>/
+    /// <see cref="CodeDefinitionCall"/>, which (unlike the old <c>DefinitionCallExpression</c>/
     /// <c>FunctionCallExpression</c>, which only ever carried the combined key for a runtime
     /// dictionary lookup) needs the two separately to print either <c>this.…</c> or
     /// <c>LibraryClass.Instance.…</c>.

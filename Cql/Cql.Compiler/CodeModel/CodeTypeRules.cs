@@ -6,14 +6,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
 /// Type rules shared by the IR node constructors. These mirror what the C# compiler will
 /// accept in the generated code, so that violations are caught at tree-construction time
 /// (with ELM context available) instead of at C# compilation time.
 /// </summary>
-internal static class IrTypeRules
+internal static class CodeTypeRules
 {
     /// <summary>
     /// Determines whether an expression of type <paramref name="from"/> can be used where a
@@ -76,9 +76,9 @@ internal static class IrTypeRules
     /// <paramref name="parameterType"/>, throwing an <see cref="ArgumentException"/> with the
     /// given <paramref name="what"/> in the message otherwise.
     /// </summary>
-    public static void ValidateAssignment(IrExpression argument, Type parameterType, string what)
+    public static void ValidateAssignment(CodeExpression argument, Type parameterType, string what)
     {
-        if (argument is IrConstant { Value: null })
+        if (argument is CodeConstant { Value: null })
         {
             if (!IsNullAssignable(parameterType))
                 throw new ArgumentException($"{what}: null is not assignable to non-nullable type {parameterType}.");

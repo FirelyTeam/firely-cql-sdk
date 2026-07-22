@@ -6,10 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler.CodeModel;
 
-/// <summary>How an <see cref="IrCast"/> is printed.</summary>
-internal enum IrCastKind
+/// <summary>How an <see cref="CodeCast"/> is printed.</summary>
+internal enum CodeCastKind
 {
     /// <summary>An explicit cast, <c>(T)x</c> — throws at runtime when the value is not a T.
     /// Corresponds to ELM's strict <c>cast … as T</c> and to <c>Expression.Convert</c>.</summary>
@@ -28,13 +28,13 @@ internal enum IrCastKind
 /// routes casts through <c>object</c> when the printed operand's type is narrower than the
 /// IR type (the CS0030 cases fixed in #1311).</para>
 /// </summary>
-internal sealed class IrCast : IrExpression
+internal sealed class CodeCast : CodeExpression
 {
-    public IrCast(IrExpression operand, Type type, IrCastKind kind, bool fromCqlAsOperator = false)
+    public CodeCast(CodeExpression operand, Type type, CodeCastKind kind, bool fromCqlAsOperator = false)
     {
-        if (kind == IrCastKind.As && !IrTypeRules.IsNullAssignable(type))
+        if (kind == CodeCastKind.As && !CodeTypeRules.IsNullAssignable(type))
             throw new ArgumentException($"'as {type}' is not legal C#: the target of a safe cast must be a reference or nullable type.");
-        if (!IrTypeRules.HasCSharpConversion(operand.Type, type) && operand.Type != typeof(object) && type != typeof(object))
+        if (!CodeTypeRules.HasCSharpConversion(operand.Type, type) && operand.Type != typeof(object) && type != typeof(object))
             throw new ArgumentException($"No C# conversion exists from {operand.Type} to {type}.");
 
         Operand = operand;
@@ -43,9 +43,9 @@ internal sealed class IrCast : IrExpression
         FromCqlAsOperator = fromCqlAsOperator;
     }
 
-    public IrExpression Operand { get; }
+    public CodeExpression Operand { get; }
 
-    public IrCastKind Kind { get; }
+    public CodeCastKind Kind { get; }
 
     /// <summary>
     /// True when this cast was built by the builder's <c>As()</c> for an ELM <c>as</c>/<c>cast</c>
@@ -57,7 +57,7 @@ internal sealed class IrCast : IrExpression
     /// AFTER the transformer's single pass — so those always survived and printed
     /// (<c>x as object</c>). Conversion-helper casts (the old
     /// <c>TryNewAssignToTypeExpression</c>/<c>NewTypeAsExpression</c> raw nodes) leave this
-    /// false and strip like the old ones did. See <c>CSharpIrEmitter.PrintCast</c>.
+    /// false and strip like the old ones did. See <c>CSharpEmitter.PrintCast</c>.
     /// </summary>
     public bool FromCqlAsOperator { get; }
 
@@ -69,9 +69,9 @@ internal sealed class IrCast : IrExpression
 /// #1311: nullable tested types are unwrapped, tuple types print in <c>ValueTuple&lt;…&gt;</c>
 /// form, and value-typed operands are boxed so the pattern is always legal C#.
 /// </summary>
-internal sealed class IrTypeIs(IrExpression operand, Type testedType) : IrExpression
+internal sealed class CodeTypeIs(CodeExpression operand, Type testedType) : CodeExpression
 {
-    public IrExpression Operand { get; } = operand;
+    public CodeExpression Operand { get; } = operand;
 
     public Type TestedType { get; } = testedType;
 

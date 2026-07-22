@@ -8,7 +8,7 @@
 
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Ir;
+using Hl7.Cql.Compiler.CodeModel;
 
 namespace CoreTests;
 

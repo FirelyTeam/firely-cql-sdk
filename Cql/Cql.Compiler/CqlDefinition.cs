@@ -26,10 +26,10 @@ internal abstract class CqlDefinition(string name)
 /// A definition whose body is a lambda (expression definitions, functions and parameters).
 /// </summary>
 internal abstract class CqlLambdaDefinition(
-    IrLambda lambda,
+    CodeLambda lambda,
     string name) : CqlDefinition(name)
 {
-    public IrLambda Lambda { get; } = lambda;
+    public CodeLambda Lambda { get; } = lambda;
 
     /// <summary>The <c>Func&lt;…&gt;</c> delegate type of <see cref="Lambda"/> (note: the IR
     /// lambda does not carry an implicit <c>CqlContext</c> parameter).</summary>
@@ -42,7 +42,7 @@ internal abstract class CqlLambdaDefinition(
 /// A CQL <c>define</c> statement: a named, parameterless expression.
 /// </summary>
 internal class CqlExpressionDefinition(
-    IrLambda lambda,
+    CodeLambda lambda,
     string name,
     (string tagName, string[] tagValues)[]? tags = null)
     : CqlLambdaDefinition(lambda, name)
@@ -54,7 +54,7 @@ internal class CqlExpressionDefinition(
 /// A CQL <c>define function</c> statement.
 /// </summary>
 internal class CqlFunctionDefinition(
-    IrLambda lambda,
+    CodeLambda lambda,
     string name,
     IReadOnlyDictionary<string, string>? originalParameterNames = null,
     params (string tagName, string[] tagValues)[] tags) : CqlExpressionDefinition(lambda, name, tags)
@@ -71,7 +71,7 @@ internal class CqlFunctionDefinition(
 /// (its default, unless overridden at runtime).
 /// </summary>
 internal class CqlParameterDefinition(
-    IrLambda lambda,
+    CodeLambda lambda,
     string name)
     : CqlLambdaDefinition(lambda, name);
 

@@ -10,20 +10,20 @@ using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Compiler;
 
-using IrExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (Hl7.Cql.Compiler.Ir.IrExpression, Hl7.Cql.Elm.Element)>;
+using CodeExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (Hl7.Cql.Compiler.CodeModel.CodeExpression, Hl7.Cql.Elm.Element)>;
 
 /// <summary>
 /// The query alias / let scope stack; scope dictionary values are
-/// <c>(IrExpression, Element)</c> pairs.
+/// <c>(CodeExpression, Element)</c> pairs.
 /// </summary>
 partial class ExpressionBuilderContext
 {
-    protected IReadOnlyDictionary<string, (IrExpression expr, Elm.Element element)> Scopes
+    protected IReadOnlyDictionary<string, (CodeExpression expr, Elm.Element element)> Scopes
     {
         get
         {
             _impliedAliasAndScopesStack.TryPeek(out var item);
-            return item.scopes ?? ReadOnlyDictionary<string, (IrExpression expr, Elm.Element element)>.Empty;
+            return item.scopes ?? ReadOnlyDictionary<string, (CodeExpression expr, Elm.Element element)>.Empty;
         }
     }
 
@@ -43,7 +43,7 @@ partial class ExpressionBuilderContext
             ? item.impliedAlias
             : null;
 
-    protected IrExpression GetScopeExpression(string elmAlias)
+    protected CodeExpression GetScopeExpression(string elmAlias)
     {
         var normalized = IdentifierNormalizer.Normalize(elmAlias!)!;
         if (!Scopes.TryGetValue(normalized, out var kv))
@@ -53,7 +53,7 @@ partial class ExpressionBuilderContext
         return kv.expr;
     }
 
-    protected (IrExpression, Elm.Element) GetScope(string elmAlias)
+    protected (CodeExpression, Elm.Element) GetScope(string elmAlias)
     {
         var normalized = IdentifierNormalizer.Normalize(elmAlias!)!;
         if (!Scopes.TryGetValue(normalized, out var kv))
@@ -66,11 +66,11 @@ partial class ExpressionBuilderContext
 
     protected IPopToken PushScopes(
         string? alias = null,
-        params IrExpressionElementPairForIdentifier[] kvps)
+        params CodeExpressionElementPairForIdentifier[] kvps)
     {
         _impliedAliasAndScopesStack.TryPeek(out var peek);
 
-        var scopes = new Dictionary<string, (IrExpression, Elm.Element)>(peek.scopes ?? ReadOnlyDictionary<string, (IrExpression, Elm.Element)>.Empty);
+        var scopes = new Dictionary<string, (CodeExpression, Elm.Element)>(peek.scopes ?? ReadOnlyDictionary<string, (CodeExpression, Elm.Element)>.Empty);
         alias ??= peek.impliedAlias;
 
         if (_expressionBuilderSettings.AllowScopeRedefinition)

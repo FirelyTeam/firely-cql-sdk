@@ -27,15 +27,15 @@ internal class CqlContextBinder
     /// <param name="parameterName">The name of the parameter.</param>
     /// <param name="defaultValue">The default value of the parameter.</param>
     /// <returns>The resolved parameter expression.</returns>
-    public virtual IrExpression ResolveParameter(
+    public virtual CodeExpression ResolveParameter(
         string libraryKey,
         string parameterName,
-        IrExpression defaultValue) =>
-        new IrInvoke(
-            IrContextParameter.Instance,
+        CodeExpression defaultValue) =>
+        new CodeInvoke(
+            CodeContextParameter.Instance,
             ResolveParameterMethod,
-            new IrConstant(libraryKey, typeof(string)),
-            new IrConstant(parameterName, typeof(string)),
+            new CodeConstant(libraryKey, typeof(string)),
+            new CodeConstant(parameterName, typeof(string)),
             defaultValue
         );
 }

@@ -27,7 +27,7 @@ using Tuple = Hl7.Cql.Elm.Tuple;
 /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
 /// </summary>
 /// <remarks>
-/// Translates ELM nodes into <see cref="IrExpression"/> trees. The dispatch shape and
+/// Translates ELM nodes into <see cref="CodeExpression"/> trees. The dispatch shape and
 /// per-operator behavior are preserved bug-for-bug from the deleted Linq.Expressions-based
 /// pipeline (see <c>docs/linq-expression-removal-plan.md</c>; its sources remain readable at
 /// that pipeline's final commit, <c>85207efd5</c>).
@@ -42,7 +42,7 @@ internal partial class ExpressionBuilderContext
     TypeConverter typeConverter,
     CqlContextBinder cqlContextBinder,
     LibraryExpressionBuilderContext libraryContext,
-    Dictionary<string, IrLocal>? operands = null // Parameters for function definitions. Used during ProcessExpressionDef.
+    Dictionary<string, CodeLocal>? operands = null // Parameters for function definitions. Used during ProcessExpressionDef.
 )
 {
     private readonly ILogger<ExpressionBuilder> _logger = logger;
@@ -53,7 +53,7 @@ internal partial class ExpressionBuilderContext
     private readonly TypeConverter _typeConverter = typeConverter;
     private readonly CqlContextBinder _cqlContextBinder = cqlContextBinder;
     private readonly LibraryExpressionBuilderContext _libraryContext = libraryContext;
-    private readonly Dictionary<string, IrLocal>? _operands = operands;
+    private readonly Dictionary<string, CodeLocal>? _operands = operands;
 
     // NOTE(phase4): the old builder carried an IExpressionMutator list here, documented as
     // "Not used yet, since it's always empty". That (Expression-based) hook was dropped in the
@@ -64,20 +64,20 @@ internal partial class ExpressionBuilderContext
     /// <summary>
     /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
     /// </summary>
-    private ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (IrExpression expr, Element element)>? scopes)>
+    private ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (CodeExpression expr, Element element)>? scopes)>
         _impliedAliasAndScopesStack =
-            ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (IrExpression expr, Element element)>? scopes)>.Empty;
+            ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (CodeExpression expr, Element element)>? scopes)>.Empty;
 
-    private static IrExpression[] NoArgs { get; } = [];
+    private static CodeExpression[] NoArgs { get; } = [];
 
     private static Type[] NoTypes { get; } = [];
 
-    private IrExpression BindCqlOperator<TArg>(
+    private CodeExpression BindCqlOperator<TArg>(
         string methodName,
         params TArg?[] args) =>
         _cqlOperatorsBinder.BindToMethod(methodName, TranslateArgs(args), NoTypes);
 
-    private IrExpression BindCqlOperator<TArg>(
+    private CodeExpression BindCqlOperator<TArg>(
         string methodName,
         TArg?[] args,
         Type[] typeArgs) =>
@@ -104,25 +104,25 @@ internal partial class ExpressionBuilderContext
         };
 
     [DebuggerStepThrough]
-    private IrExpression[] TranslateArgs<TArg>(params TArg?[] args) =>
+    private CodeExpression[] TranslateArgs<TArg>(params TArg?[] args) =>
         args switch
         {
-            IrExpression[] expressions => expressions,
+            CodeExpression[] expressions => expressions,
             { } objects                => objects.SelectToArray(obj => TranslateArg(obj!)),
             _                          => [],
         };
 
     [DebuggerStepThrough]
-    internal IrExpression TranslateArg<TArg>(TArg? arg) =>
+    internal CodeExpression TranslateArg<TArg>(TArg? arg) =>
         arg switch
         {
-            IrExpression expression => expression,
+            CodeExpression expression => expression,
             Element element         => TranslateElement(element),
-            null                    => new IrConstant(null, typeof(TArg)),
-            _                       => new IrConstant(arg, arg.GetType()),
+            null                    => new CodeConstant(null, typeof(TArg)),
+            _                       => new CodeConstant(arg, arg.GetType()),
         };
 
-    private IrExpression TranslateElement(Element element) =>
+    private CodeExpression TranslateElement(Element element) =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
             using (PushElement(element))
@@ -141,7 +141,7 @@ internal partial class ExpressionBuilderContext
                 }
                 */
 
-                IrExpression? expression = element switch
+                CodeExpression? expression = element switch
                 {
                     //@formatter:off
                     Ratio e            => throw new NotSupportedException($"Operator {element.GetType().Name} is not supported yet."),
@@ -149,7 +149,7 @@ internal partial class ExpressionBuilderContext
                     Negate e           => Negate(e),
                     As e               => As(e),
                     Case e             => Case(e),
-                    Interval { low: Null, high: Null } => new IrConstant(null, typeof(object)),
+                    Interval { low: Null, high: Null } => new CodeConstant(null, typeof(object)),
                     ToTime e           => ChangeType(e.operand!, _typeResolver.TimeType),
                     ToBoolean e        => ChangeType(e.operand!, typeof(bool?)),
                     ToString e         => ChangeType(e.operand!, typeof(string)),
@@ -174,7 +174,7 @@ internal partial class ExpressionBuilderContext
                     List e             => List(e),
                     Literal e          => Literal(e),
                     Message e          => Message(e),
-                    Null e             => new IrConstant(null, TypeFor(e)!),
+                    Null e             => new CodeConstant(null, TypeFor(e)!),
                     OperandRef e       => OperandRef(e),
                     ProperContains e   => ProperContains(e),
                     ProperIn e         => ProperIn(e),
@@ -215,7 +215,7 @@ internal partial class ExpressionBuilderContext
                 expression = Mutate(element, expression);
                 return expression!;
 
-                IrExpression ConvertToResultType()
+                CodeExpression ConvertToResultType()
                 {
                     var tsType = TypeFor(element.resultTypeSpecifier, false);
                     if (tsType is not null)
@@ -297,7 +297,7 @@ internal partial class ExpressionBuilderContext
                 object precision = e.operand switch
                 {
                     [_, Quantity quantity, ..] => quantity.unit,
-                    _                          => new IrConstant(null, typeof(string))
+                    _                          => new CodeConstant(null, typeof(string))
                 };
 
                 return [operand, precision];
@@ -355,7 +355,7 @@ internal partial class ExpressionBuilderContext
     /// was always empty (the hook was never used), so the IR port drops it and simply returns
     /// the expression.
     /// </summary>
-    protected IrExpression? Mutate(Element op, IrExpression? expression) =>
+    protected CodeExpression? Mutate(Element op, CodeExpression? expression) =>
         expression;
 }
 

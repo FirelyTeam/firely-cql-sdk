@@ -6,23 +6,23 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
 /// A two-way conditional, printed as a ternary (<c>a ? b : c</c>) when simple. The emitter
-/// may rewrite nested conditionals into an <see cref="IrIfChain"/> for readability, exactly
+/// may rewrite nested conditionals into an <see cref="CodeIfChain"/> for readability, exactly
 /// as <c>SimplifyExpressionsVisitor</c> did.
 /// </summary>
-internal sealed class IrConditional : IrExpression
+internal sealed class CodeConditional : CodeExpression
 {
-    public IrConditional(IrExpression test, IrExpression ifTrue, IrExpression ifFalse, Type type)
+    public CodeConditional(CodeExpression test, CodeExpression ifTrue, CodeExpression ifFalse, Type type)
     {
         // bool, not bool?: the builder coerces CQL's three-valued logic to bool before
         // testing, exactly as it had to for Expression.Condition.
         if (test.Type != typeof(bool))
             throw new ArgumentException($"Conditional test must be bool, not {test.Type}.");
-        IrTypeRules.ValidateAssignment(ifTrue, type, "Conditional true branch");
-        IrTypeRules.ValidateAssignment(ifFalse, type, "Conditional false branch");
+        CodeTypeRules.ValidateAssignment(ifTrue, type, "Conditional true branch");
+        CodeTypeRules.ValidateAssignment(ifFalse, type, "Conditional false branch");
 
         Test = test;
         IfTrue = ifTrue;
@@ -30,11 +30,11 @@ internal sealed class IrConditional : IrExpression
         Type = type;
     }
 
-    public IrExpression Test { get; }
+    public CodeExpression Test { get; }
 
-    public IrExpression IfTrue { get; }
+    public CodeExpression IfTrue { get; }
 
-    public IrExpression IfFalse { get; }
+    public CodeExpression IfFalse { get; }
 
     public override Type Type { get; }
 }
@@ -45,9 +45,9 @@ internal sealed class IrConditional : IrExpression
 /// <c>CaseWhenThenExpression</c> custom node — natively statement-shaped, so no lambda-wrap
 /// tricks are needed to host it in an expression tree.
 /// </summary>
-internal sealed class IrIfChain : IrExpression
+internal sealed class CodeIfChain : CodeExpression
 {
-    public IrIfChain(IReadOnlyList<(IrExpression When, IrExpression Then)> cases, IrExpression @else, Type type)
+    public CodeIfChain(IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases, CodeExpression @else, Type type)
     {
         if (cases.Count == 0)
             throw new ArgumentException("An if-chain requires at least one case.");
@@ -55,18 +55,18 @@ internal sealed class IrIfChain : IrExpression
         {
             if (when.Type != typeof(bool))
                 throw new ArgumentException($"If-chain condition must be bool, not {when.Type}.");
-            IrTypeRules.ValidateAssignment(then, type, "If-chain case value");
+            CodeTypeRules.ValidateAssignment(then, type, "If-chain case value");
         }
-        IrTypeRules.ValidateAssignment(@else, type, "If-chain else value");
+        CodeTypeRules.ValidateAssignment(@else, type, "If-chain else value");
 
         Cases = cases;
         Else = @else;
         Type = type;
     }
 
-    public IReadOnlyList<(IrExpression When, IrExpression Then)> Cases { get; }
+    public IReadOnlyList<(CodeExpression When, CodeExpression Then)> Cases { get; }
 
-    public IrExpression Else { get; }
+    public CodeExpression Else { get; }
 
     public override Type Type { get; }
 }

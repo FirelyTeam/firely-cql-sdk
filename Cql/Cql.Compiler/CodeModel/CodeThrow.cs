@@ -6,15 +6,15 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
 /// Throws an exception. Used only for the generator's error-recovery stubs; carries a result
 /// type so it can stand in for an expression of any type.
 /// </summary>
-internal sealed class IrThrow : IrExpression
+internal sealed class CodeThrow : CodeExpression
 {
-    public IrThrow(IrExpression exception, Type resultType)
+    public CodeThrow(CodeExpression exception, Type resultType)
     {
         if (!typeof(Exception).IsAssignableFrom(exception.Type))
             throw new ArgumentException($"Throw operand must be an Exception, not {exception.Type}.");
@@ -22,7 +22,7 @@ internal sealed class IrThrow : IrExpression
         Type = resultType;
     }
 
-    public IrExpression Exception { get; }
+    public CodeExpression Exception { get; }
 
     public override Type Type { get; }
 }

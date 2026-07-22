@@ -105,7 +105,7 @@ partial class ExpressionBuilderContext
 
             case OperandRef operandRef when !string.IsNullOrWhiteSpace(operandRef.name):
             {
-                IrLocal? operand = null;
+                CodeLocal? operand = null;
                 _operands?.TryGetValue(operandRef.name, out operand);
                 if (operand != null)
                     return operand.Type;

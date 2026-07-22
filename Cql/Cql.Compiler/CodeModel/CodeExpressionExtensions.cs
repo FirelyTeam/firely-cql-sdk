@@ -11,24 +11,24 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Utility;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
 /// The assign-to-type / type-as / type-is / coalesce helpers the expression builder and
 /// <see cref="CqlOperatorsBinder"/> use on subexpressions; see the remarks on
 /// <see cref="ExpressionBuilderContext"/>.
 /// </summary>
-internal static class IrExpressionExtensions
+internal static class CodeExpressionExtensions
 {
-    public static IrExpression NewAssignToTypeExpression(
-        this IrExpression expression,
+    public static CodeExpression NewAssignToTypeExpression(
+        this CodeExpression expression,
         Type type) =>
         TryNewAssignToTypeExpression(
             expression,
             type).expression!;
 
-    public static (IrExpression? expression, TypeConversion typeConversion) TryNewAssignToTypeExpression(
-        this IrExpression expression,
+    public static (CodeExpression? expression, TypeConversion typeConversion) TryNewAssignToTypeExpression(
+        this CodeExpression expression,
         Type type,
         bool throwError = true,
         bool safeUpcastAllowed = false)
@@ -36,16 +36,16 @@ internal static class IrExpressionExtensions
         if (expression.Type == type)
             return (expression, TypeConversion.ExactType);
 
-        if (expression is IrConstant { Value: var constantValue })
+        if (expression is CodeConstant { Value: var constantValue })
         {
             switch (constantValue)
             {
                 case null when type.IsNullable(out _):
-                    return (new IrConstant(null, type), TypeConversion.ExactType);
+                    return (new CodeConstant(null, type), TypeConversion.ExactType);
 
                 case { } value and not string when
                     value.GetType().IsAssignableTo(type): // <-- Don't remove this, otherwise string constant will not have double-quotes in the generated code. 🤷
-                    return (new IrConstant(value, type), TypeConversion.ExactType);
+                    return (new CodeConstant(value, type), TypeConversion.ExactType);
 
                 case Enum enumValue
                     when type == typeof(string)
@@ -53,7 +53,7 @@ internal static class IrExpressionExtensions
                          && FhirTypeConverter.IsFhirEnum(enumType):
 
                     var enumLiteral = enumValue.GetLiteral();
-                    return (new IrConstant(enumLiteral, typeof(string)), TypeConversion.ExactType);
+                    return (new CodeConstant(enumLiteral, typeof(string)), TypeConversion.ExactType);
 
 
                 case Hl7.Cql.Elm.DateTimePrecision dateTimePrecision
@@ -65,7 +65,7 @@ internal static class IrExpressionExtensions
                         throw new InvalidOperationException($"Enum value {dateTimeString} is not defined in enum type {typeof(DateTimePrecision)}");
                     }
 
-                    return (new IrConstant(dateTimeString.ToLowerInvariant(), typeof(string)), TypeConversion.ExactType);
+                    return (new CodeConstant(dateTimeString.ToLowerInvariant(), typeof(string)), TypeConversion.ExactType);
             }
         }
 
@@ -76,7 +76,7 @@ internal static class IrExpressionExtensions
                 || expression.Type.IsAssignableFrom(type);
             if (isAssignableFrom || throwError)
             {
-                IrExpression cast = new IrCast(expression, type, IrCastKind.As);
+                CodeExpression cast = new CodeCast(expression, type, CodeCastKind.As);
                 return (cast, TypeConversion.ExpressionTypeAs);
             }
         }
@@ -86,38 +86,38 @@ internal static class IrExpressionExtensions
             || expression.Type.IsAssignableTo(type);
         if (isAssignableTo || throwError)
         {
-            IrExpression cast = new IrCast(expression, type, IrCastKind.Cast);
+            CodeExpression cast = new CodeCast(expression, type, CodeCastKind.Cast);
             return (cast, TypeConversion.ExpressionCast);
         }
 
         return (null, TypeConversion.NoMatch);
     }
 
-    public static IrExpression NewAssignToTypeExpression<TType>(
-        this IrExpression expression) =>
+    public static CodeExpression NewAssignToTypeExpression<TType>(
+        this CodeExpression expression) =>
         expression.NewAssignToTypeExpression(typeof(TType));
 
 
-    public static IrExpression NewTypeAsExpression(this IrExpression expression, Type type)
+    public static CodeExpression NewTypeAsExpression(this CodeExpression expression, Type type)
     {
         if (expression.Type == type)
             return expression;
 
-        var typeAs = new IrCast(expression, type, IrCastKind.As);
+        var typeAs = new CodeCast(expression, type, CodeCastKind.As);
         return typeAs;
     }
 
-    public static IrExpression NewTypeAsExpression<TType>(this IrExpression expression) =>
+    public static CodeExpression NewTypeAsExpression<TType>(this CodeExpression expression) =>
         expression.NewTypeAsExpression(typeof(TType));
 
-    public static IrTypeIs NewTypeIsExpression(this IrExpression expression, Type type)
+    public static CodeTypeIs NewTypeIsExpression(this CodeExpression expression, Type type)
     {
-        var typeAs = new IrTypeIs(expression, type);
+        var typeAs = new CodeTypeIs(expression, type);
         return typeAs;
     }
 
-    public static IrExpression Coalesce(
-        this IrExpression expression)
+    public static CodeExpression Coalesce(
+        this CodeExpression expression)
     {
         if (expression.Type.IsValueType)
         {
@@ -125,7 +125,7 @@ internal static class IrExpressionExtensions
                 && underlyingType.IsValueType)
             {
                 var defaultValue = Activator.CreateInstance(underlyingType)!;
-                var result = new IrBinary(IrBinaryOp.Coalesce, expression, new IrConstant(defaultValue, underlyingType));
+                var result = new CodeBinary(CodeBinaryOp.Coalesce, expression, new CodeConstant(defaultValue, underlyingType));
                 return result;
             }
 
@@ -136,6 +136,6 @@ internal static class IrExpressionExtensions
             $"Cannot coalesce reference '{expression.Type}'.");
     }
 
-    public static bool IsNullConstant(this IrExpression expression) =>
-        expression is IrConstant { Value: null };
+    public static bool IsNullConstant(this CodeExpression expression) =>
+        expression is CodeConstant { Value: null };
 }
