@@ -40,12 +40,12 @@ public class IrPipelineTests : Base
     }
 
     /// <summary>
-    /// Builds a <see cref="Library"/> from CQL source, then runs it through the typed-IR
-    /// builder chain, mirroring the composition <c>ElmToolkitServices.AddCqlCompilerServices</c>
-    /// wires up via DI for the old (Linq.Expressions) pipeline -- see
-    /// <c>Cql\CodeGeneration.NET\Toolkit\Internal\ElmToolkitServices.cs</c> -- but constructed by
-    /// hand with <see cref="NullLogger{T}"/>/<see cref="NullLoggerFactory"/> instances, since
-    /// these new Ir* classes are not (yet) registered in that container.
+    /// Builds a <see cref="Library"/> from CQL source, then runs it through the
+    /// expression-builder chain constructed by hand with
+    /// <see cref="NullLogger{T}"/>/<see cref="NullLoggerFactory"/> instances — rather than
+    /// resolved from the <c>ElmToolkitServices.AddCqlCompilerServices</c> DI composition (see
+    /// <c>Cql\CodeGeneration.NET\Toolkit\Internal\ElmToolkitServices.cs</c>) — so these tests
+    /// exercise the builder chain directly, independent of the toolkit's service wiring.
     /// </summary>
     private static (Library library, CqlDefinitionDictionary definitions) BuildIr(string cql)
     {
@@ -292,7 +292,7 @@ public class IrPipelineTests : Base
     /// byte-identical (modulo line endings, like <c>CSharpGenerationGoldenTests</c>).
     /// </summary>
     [TestMethod]
-    public void SmokeTest_OldAndIrPipelines_GenerateIdenticalCSharp()
+    public void SmokeTest_ToolkitAndHandBuiltComposition_GenerateIdenticalCSharp()
     {
         const string cql = """
             library IrSmokeTest version '1.0.0'
@@ -311,21 +311,21 @@ public class IrPipelineTests : Base
         var library = CreateCqlToolkit().MakeLibrary(cql);
         LibrarySet librarySet = new("IrSmokeTest", library);
 
-        // Old pipeline: build definitions and generate C# through the toolkit services.
+        // Toolkit composition: build definitions and generate C# through the DI-wired services.
         var elmToolkit = CreateElmToolkit();
-        var oldDefinitions = elmToolkit.ProcessLibrary(library);
-        var oldCSharp = elmToolkit
+        var toolkitDefinitions = elmToolkit.ProcessLibrary(library);
+        var toolkitCSharp = elmToolkit
             .GetLibrarySetCSharpCodeGenerator()
-            .GenerateEachLibraryToCSharp(librarySet, oldDefinitions)
+            .GenerateEachLibraryToCSharp(librarySet, toolkitDefinitions)
             .Single().cSharp;
 
-        // New pipeline: same Library instance through the typed-IR builder + generator.
-        var irDefinitions = BuildCqlDefinitions(library);
-        var newCSharp = new LibrarySetCSharpCodeGenerator(FhirTypeResolver.Default, new TypeToCSharpConverter())
-            .GenerateEachLibraryToCSharp(librarySet, irDefinitions)
+        // Hand-built composition: same Library instance through the hand-constructed chain.
+        var handBuiltDefinitions = BuildCqlDefinitions(library);
+        var handBuiltCSharp = new LibrarySetCSharpCodeGenerator(FhirTypeResolver.Default, new TypeToCSharpConverter())
+            .GenerateEachLibraryToCSharp(librarySet, handBuiltDefinitions)
             .Single().cSharp;
 
-        AssertEqualCSharp(oldCSharp, newCSharp);
+        AssertEqualCSharp(toolkitCSharp, handBuiltCSharp);
     }
 
     /// <summary>Asserts the two generated sources are equal (line endings normalized) and, on
