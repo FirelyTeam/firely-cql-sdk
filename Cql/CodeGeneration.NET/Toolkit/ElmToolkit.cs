@@ -246,7 +246,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <summary>
     /// Builds the library set definitions.
     /// </summary>
-    /// <param name="librarySetCodeBuilderScoped">The library set expression builder to use.</param>
+    /// <param name="librarySetCodeBuilderScoped">The library set code builder to use.</param>
     /// <param name="librarySet">The set of libraries to build definitions for.</param>
     /// <returns>The dictionary of library set definitions.</returns>
     private CqlDefinitionDictionary BuildLibrarySetDefinitions(
