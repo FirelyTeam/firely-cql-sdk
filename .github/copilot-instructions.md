@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.3.0
+**Version:** 3.8.1
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,20 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.8.1
+  - Simplified 5.1.4's CI skip-pattern description: `build/azure-pipelines.yml` now uses a single `^.*\.md$` pattern for all markdown files instead of separate entries per instruction-file location.
+- 3.8.0
+  - Added 5.1.4: CI's `build/azure-pipelines.yml` now skips the full build when every changed file is a documentation or AI-instruction file (`docs/`, `CLAUDE.md`, `.claude/`, `.github/copilot-instructions*`).
+- 3.7.0
+  - Added a new section (1.9, PR Review Comment Handling): after fixing a review comment and pushing, mark the conversation resolved via the GraphQL `resolveReviewThread` mutation — pushing a fix or replying does not resolve it automatically.
+- 3.6.1
+  - Fixed a broken relative link to `vnext-release-notes.md` in §4.5.1 (was missing a directory level), corrected `CodeGeneration.NET`/`LibraryInvoker` example paths in §5.3 to include the `Cql/` prefix, and scoped the `PublicAPI.Unshipped.txt` registration requirement in §10.3.3 to public `ICqlError` structs only (the project already has `internal` ones that don't belong there). Found by Copilot's automated review of PR #1386; mirrored into `CLAUDE.md` and `Cql/Cql.Abstractions/CLAUDE.md`.
+- 3.6.0
+  - Added a new section (1.8, Acceptance Criteria Tracking): after pushing work that completes checklist items in a linked issue or PR, tick them off before reporting the task done.
+- 3.5.0
+  - Added a rule (1.3.8) requiring these instructions and the root `CLAUDE.md`/`.claude/skills/` files to be kept in sync: any rule added, removed, or changed on one side must be checked against the other.
+- 3.4.0
+  - De-duplicated task-specific workflows against `.claude/skills/` (also used by Claude Code): PR description conventions, issue formatting, ticket pickup, release-note cutting, and ELM generation now link out to the corresponding skill file instead of restating the procedure. Each sub-document keeps only the universal trigger rules (e.g. breaking changes must land in `vnext-release-notes.md`); the step-by-step mechanics live in the linked skill.
 - 3.3.0
   - Expanded code generation version management guidance: clarified that binder/compiler changes which alter generated C# (not only CodeGeneration.NET changes) require a `GeneratorToolVersion` bump, fixed the stale invoker reference, and added the requirement to regenerate checked-in `*.g.cs` files in the same pull request.
 - 3.2.0

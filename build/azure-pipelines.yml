@@ -30,6 +30,11 @@ stages:
   parameters:
     ignorePatterns:
       - '^docs/.+'
+      # Any markdown file anywhere - covers CLAUDE.md (root and nested), README.md files,
+      # .github/copilot-instructions*.md, and .claude/skills/*/SKILL.md
+      - '^.*\.md$'
+      # Non-markdown AI instruction/config files (e.g. .claude/settings.local.json)
+      - '^\.claude/.+$'
 
 # Include the build-test-sign template which defines Build, Test, and Package stages
 - template: build-test-sign.yml

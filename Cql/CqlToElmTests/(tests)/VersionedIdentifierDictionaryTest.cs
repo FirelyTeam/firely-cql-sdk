@@ -15,7 +15,7 @@ namespace Hl7.Cql.CqlToElm.Test
     public class VersionedIdentifierDictionaryTest
     {
         [TestMethod]
-        // Per spec/condensed/03-developersguide.md §Libraries: "If the reference includes a
+        // Per spec/cql/condensed/03-developersguide.md §Libraries: "If the reference includes a
         // version specifier, the library with that version specifier must be used" - "1.0" and
         // "1.0.0" are different specifiers, so referencing one must not resolve the other.
         public void TryGet_ExactVersion_DifferentFormat_DoesNotMatch()
@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        // CQL is case-sensitive per spec/condensed/03-developersguide.md §3.4.1.
+        // CQL is case-sensitive per spec/cql/condensed/03-developersguide.md §3.4.1.
         public void TryGet_CaseSensitive_DifferentCase_DoesNotMatch()
         {
             var dict = new VersionedIdentifierDictionary<string>();
