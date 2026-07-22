@@ -35,7 +35,7 @@ using Tuple = Hl7.Cql.Elm.Tuple;
 internal partial class CodeBuilderContext
 (
     ILogger<CodeBuilder> logger,
-    CodeBuilderSettings expressionBuilderSettings,
+    CodeBuilderSettings codeBuilderSettings,
     CqlOperatorsBinder cqlOperatorsBinder,
     TupleBuilderCache tupleBuilderCache,
     TypeResolver typeResolver,
@@ -46,7 +46,7 @@ internal partial class CodeBuilderContext
 )
 {
     private readonly ILogger<CodeBuilder> _logger = logger;
-    private readonly CodeBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
+    private readonly CodeBuilderSettings _codeBuilderSettings = codeBuilderSettings;
     private readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
     private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
     private readonly TypeResolver _typeResolver = typeResolver;

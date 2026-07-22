@@ -17,7 +17,7 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 internal class CodeBuilder(
     ILogger<CodeBuilder> logger,
-    CodeBuilderSettings expressionBuilderSettings,
+    CodeBuilderSettings codeBuilderSettings,
     CqlOperatorsBinder cqlOperatorsBinder,
     TupleBuilderCache tupleBuilderCache,
     TypeResolver typeResolver,
@@ -25,7 +25,7 @@ internal class CodeBuilder(
     CqlContextBinder cqlContextBinder)
 {
     private readonly ILogger<CodeBuilder> _logger = logger;
-    private readonly CodeBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
+    private readonly CodeBuilderSettings _codeBuilderSettings = codeBuilderSettings;
     private readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
     private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
     private readonly TypeResolver _typeResolver = typeResolver;
@@ -47,7 +47,7 @@ internal class CodeBuilder(
     internal CodeBuilderContext NewCodeBuilderContext(
         LibraryCodeBuilderContext libCtx,
         Dictionary<string, CodeLocal>? operands = null) =>
-        new(_logger, _expressionBuilderSettings, _cqlOperatorsBinder, _tupleBuilderCache, _typeResolver, _typeConverter, _cqlContextBinder, libCtx, operands);
+        new(_logger, _codeBuilderSettings, _cqlOperatorsBinder, _tupleBuilderCache, _typeResolver, _typeConverter, _cqlContextBinder, libCtx, operands);
 
     public void ProcessValueSetDef(LibraryCodeBuilderContext libCtx, ValueSetDef valueSetDef) =>
         NewCodeBuilderContext(libCtx)

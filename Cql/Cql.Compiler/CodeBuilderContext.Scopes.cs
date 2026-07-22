@@ -73,7 +73,7 @@ partial class CodeBuilderContext
         var scopes = new Dictionary<string, (CodeExpression, Elm.Element)>(peek.scopes ?? ReadOnlyDictionary<string, (CodeExpression, Elm.Element)>.Empty);
         alias ??= peek.impliedAlias;
 
-        if (_expressionBuilderSettings.AllowScopeRedefinition)
+        if (_codeBuilderSettings.AllowScopeRedefinition)
         {
             foreach (var (expr, element) in kvps)
             {
@@ -94,7 +94,7 @@ partial class CodeBuilderContext
 
                 if (!scopes.TryAdd(normalizedIdentifier, element))
                     throw this.NewExpressionBuildingException(
-                        $"Scope {expr}, normalized to {IdentifierNormalizer.Normalize(expr)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(_expressionBuilderSettings.AllowScopeRedefinition)} to true");
+                        $"Scope {expr}, normalized to {IdentifierNormalizer.Normalize(expr)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(_codeBuilderSettings.AllowScopeRedefinition)} to true");
             }
         }
 

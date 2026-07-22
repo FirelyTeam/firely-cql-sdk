@@ -175,7 +175,7 @@ partial class CodeBuilderContext
             Type[] parameterTypes,
             string expressionDefName)
         {
-            if (!_expressionBuilderSettings.AllowUnresolvedExternals)
+            if (!_codeBuilderSettings.AllowUnresolvedExternals)
                 throw this.NewExpressionBuildingException(
                     $"{expressionKey} is declared external, but it was not defined in the expression scope.");
 

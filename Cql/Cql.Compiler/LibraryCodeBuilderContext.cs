@@ -22,14 +22,14 @@ namespace Hl7.Cql.Compiler;
 internal partial class LibraryCodeBuilderContext : IBuilderContext
 {
     private readonly ILogger<LibraryCodeBuilder> _logger;
-    private readonly CodeBuilder _expressionBuilder;
+    private readonly CodeBuilder _codeBuilder;
     private readonly CqlDefinitionDictionary _libraryDefinitions;
     private readonly LibrarySetCodeBuilderContext? _libsCtx;
     private readonly LibraryPreprocessor _preprocessor;
 
     public LibraryCodeBuilderContext(
         ILogger<LibraryCodeBuilder> logger,
-        CodeBuilder expressionBuilder,
+        CodeBuilder codeBuilder,
         LibraryPreprocessorBuilder libraryPreprocessorBuilder,
         Library library,
         CqlDefinitionDictionary libraryDefinitions,
@@ -38,7 +38,7 @@ internal partial class LibraryCodeBuilderContext : IBuilderContext
         _libraryDefinitions = libraryDefinitions;
         _libsCtx = libsCtx;
         _logger = logger;
-        _expressionBuilder = expressionBuilder;
+        _codeBuilder = codeBuilder;
         Library = library;
         LibraryVersionedIdentifier = Library.VersionedLibraryIdentifier;
         _preprocessor =
@@ -68,7 +68,7 @@ internal partial class LibraryCodeBuilderContext : IBuilderContext
             {
                 foreach (var includeDef in includeDefs)
                 {
-                    _expressionBuilder.ProcessIncludes(this, includeDef);
+                    _codeBuilder.ProcessIncludes(this, includeDef);
                 }
 
                 AddLibraryDefinitionsFromIncludes();
@@ -79,7 +79,7 @@ internal partial class LibraryCodeBuilderContext : IBuilderContext
             {
                 foreach (var valueSetDef in valueSetDefs)
                 {
-                    _expressionBuilder.ProcessValueSetDef(this, valueSetDef);
+                    _codeBuilder.ProcessValueSetDef(this, valueSetDef);
                 }
             }
 
@@ -91,7 +91,7 @@ internal partial class LibraryCodeBuilderContext : IBuilderContext
 
                 foreach (var codeDef in codeDefs)
                 {
-                    _expressionBuilder.ProcessCodeDef(this, codeDef, foundCodeNameCodeSystemUrls);
+                    _codeBuilder.ProcessCodeDef(this, codeDef, foundCodeNameCodeSystemUrls);
                 }
             }
 
@@ -99,7 +99,7 @@ internal partial class LibraryCodeBuilderContext : IBuilderContext
             {
                 foreach (var codeSystemDef in codeSystemDefs)
                 {
-                    _expressionBuilder.ProcessCodeSystemDef(this, codeSystemDef);
+                    _codeBuilder.ProcessCodeSystemDef(this, codeSystemDef);
                 }
             }
 
@@ -107,7 +107,7 @@ internal partial class LibraryCodeBuilderContext : IBuilderContext
             {
                 foreach (var conceptDef in conceptDefs)
                 {
-                    _expressionBuilder.ProcessConceptDef(this, conceptDef);
+                    _codeBuilder.ProcessConceptDef(this, conceptDef);
                 }
             }
 
@@ -115,7 +115,7 @@ internal partial class LibraryCodeBuilderContext : IBuilderContext
             {
                 foreach (var parameterDef in parameterDefs)
                 {
-                    _expressionBuilder.ProcessParameterDef(this, parameterDef);
+                    _codeBuilder.ProcessParameterDef(this, parameterDef);
                 }
             }
 
@@ -123,7 +123,7 @@ internal partial class LibraryCodeBuilderContext : IBuilderContext
             {
                 foreach (var expressionDef in expressionDefs)
                 {
-                    _expressionBuilder.ProcessExpressionDef(this, expressionDef);
+                    _codeBuilder.ProcessExpressionDef(this, expressionDef);
                 }
             }
 

@@ -69,7 +69,7 @@ public class CodeModelPipelineTests : Base
         var cqlOperatorsBinder = new CqlOperatorsBinder(NullLogger<CqlOperatorsBinder>.Instance, typeResolver, typeConverter);
         var cqlContextBinder = new CqlContextBinder();
 
-        var expressionBuilder = new CodeBuilder(
+        var codeBuilder = new CodeBuilder(
             NullLogger<CodeBuilder>.Instance,
             CodeBuilderSettings.Default,
             cqlOperatorsBinder,
@@ -80,7 +80,7 @@ public class CodeModelPipelineTests : Base
 
         var libraryCodeBuilder = new LibraryCodeBuilder(
             NullLogger<LibraryCodeBuilder>.Instance,
-            expressionBuilder,
+            codeBuilder,
             libraryPreprocessorBuilder);
 
         return libraryCodeBuilder.ProcessLibrary(library);

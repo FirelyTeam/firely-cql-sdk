@@ -42,8 +42,8 @@ internal readonly record struct ElmToolkitServices(
         IServiceCollection services,
         ElmToolkitConfig config)
     {
-        var expressionBuilderSettings = config.ToCodeBuilderSettings();
-        AddCqlCompilerServices(services, config.LRUCacheSize, expressionBuilderSettings);
+        var codeBuilderSettings = config.ToCodeBuilderSettings();
+        AddCqlCompilerServices(services, config.LRUCacheSize, codeBuilderSettings);
         services.TryAddSingleton<TypeToCSharpConverter>();
         services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
         services.TryAddSingleton<AssemblyCompiler>();
@@ -55,9 +55,9 @@ internal readonly record struct ElmToolkitServices(
     public static IServiceCollection AddCqlCompilerServices(
         IServiceCollection services,
         int lruCacheSize = 0,
-        CodeBuilderSettings? expressionBuilderSettings = null)
+        CodeBuilderSettings? codeBuilderSettings = null)
     {
-        expressionBuilderSettings ??= CodeBuilderSettings.Default;
+        codeBuilderSettings ??= CodeBuilderSettings.Default;
         services.TryAddSingleton(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
 
@@ -73,7 +73,7 @@ internal readonly record struct ElmToolkitServices(
         });
 
         services.TryAddSingleton<LibraryPreprocessorBuilder>();
-        services.TryAddSingleton(_ => expressionBuilderSettings);
+        services.TryAddSingleton(_ => codeBuilderSettings);
         services.TryAddScoped<TupleBuilderCache>();
 
         // Register the compiler/code-generation pipeline components. These share the

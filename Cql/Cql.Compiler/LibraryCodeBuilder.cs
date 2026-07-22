@@ -16,7 +16,7 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 internal class LibraryCodeBuilder(
     ILogger<LibraryCodeBuilder> logger,
-    CodeBuilder expressionBuilder,
+    CodeBuilder codeBuilder,
     LibraryPreprocessorBuilder libraryPreprocessorBuilder)
 {
     public CqlDefinitionDictionary ProcessLibrary(
@@ -30,7 +30,7 @@ internal class LibraryCodeBuilder(
         Library library,
         CqlDefinitionDictionary? libraryDefinitions = null,
         LibrarySetCodeBuilderContext? libsCtx = null) =>
-        new(logger, expressionBuilder, libraryPreprocessorBuilder, library, libraryDefinitions ?? new(), libsCtx);
+        new(logger, codeBuilder, libraryPreprocessorBuilder, library, libraryDefinitions ?? new(), libsCtx);
 
     public CodeBuilderContext NewCodeBuilderContext(
         Library library,
@@ -38,6 +38,6 @@ internal class LibraryCodeBuilder(
         Dictionary<string, CodeLocal>? operands = null)
     {
         var libraryCodeBuilderContext = NewLibraryCodeBuilderContext(library, libraryDefinitions);
-        return expressionBuilder.NewCodeBuilderContext(libraryCodeBuilderContext, operands);
+        return codeBuilder.NewCodeBuilderContext(libraryCodeBuilderContext, operands);
     }
 }
