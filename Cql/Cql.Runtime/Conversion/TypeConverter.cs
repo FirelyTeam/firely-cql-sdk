@@ -98,7 +98,7 @@ namespace Hl7.Cql.Conversion
         /// <param name="from">The object to convert.</param>
         /// <returns>The result of the conversion.</returns>
         /// <exception cref="InvalidOperationException">If no conversion is defined.</exception>
-        /// <remarks>The CodeBuilder inserts calls to this method in the generated Linq.Expressions,
+        /// <remarks>The CodeBuilder inserts calls to this method in the generated C# output,
         /// so do not rename or change this method, without adapting the CodeBuilder.</remarks>
         public T? Convert<T>(object? from) => (T?)Convert(from, typeof(T));
 
