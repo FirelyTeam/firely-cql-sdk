@@ -255,22 +255,34 @@ Done in phase 6 itself:
   (#1366) replaced `WithToSelectManyBody`, and the IR side ports it as
   `WithToExistenceCheck`.
 
-Deferred to post-merge cleanup (no behavior change, all parity-preserved):
+Output-neutral cleanups, done on the feature branch before the develop merge (all proven
+byte-identical against the golden corpora):
 
-- Revisit `IrCodeDefinition.ReturnType` (parity-preserved `typeof(CqlCodeDefinition)`).
-- Fix the tracked upstream bugs in one place: #1341, #1342; close #1345.
-- Drop the now-redundant `Ir` prefix from the IR-side type names (e.g.
+- ~~Drop the now-redundant `Ir` prefix from the IR-side type names (e.g.
   `IrLibrarySetCSharpCodeGenerator`) now that there is no Expression-side counterpart
-  to disambiguate from.
-- Scrub the migration narrative from doc comments: the "IR counterpart of the old X" /
-  "phase N of the Linq.Expressions removal" framing (and, with the rename above, the
-  `Ir*` mentions) made sense while both pipelines coexisted on the feature branch, but
-  reads as noise once this is simply *the* pipeline — describe what each type does,
-  and leave the history to this document and to commit `85207efd5`. This includes the
-  `<c>OldTypeName</c>` plain-text mentions that replaced the unresolvable
-  `<see cref=""/>` references when the old types were deleted.
+  to disambiguate from.~~ Done — the pipeline orchestration classes took back the names
+  their deleted counterparts held (`CqlOperatorsBinder`, `ExpressionBuilderContext`, the
+  `CqlDefinition` family, `LibrarySetCSharpCodeGenerator`, …). The IR node vocabulary
+  (`IrExpression`, `IrConstant`, …, plus `CSharpIrEmitter`/`IrTypeRules`/
+  `IrExpressionExtensions`) keeps the prefix: there it is descriptive, not a
+  disambiguator.
+- ~~Scrub the migration narrative from doc comments: the "IR counterpart of the old X" /
+  "phase N of the Linq.Expressions removal" framing made sense while both pipelines
+  coexisted, but reads as noise once this is simply *the* pipeline.~~ Done — doc comments
+  now describe what each type does; the history lives in this document and at commit
+  `85207efd5`. Inline `//` comments that cite old-writer mechanisms by name are kept
+  deliberately: they document the bug-for-bug quirks and point into `85207efd5`.
+
+Deferred to post-merge cleanup — output-changing, so each lands as a develop PR with
+regenerated goldens as the review artifact (the first one also bumps the
+`GeneratedCodeAttribute` version deferred in phase 6):
+
+- Revisit `CqlCodeDefinition.ReturnType` (parity-preserved `typeof(CqlCodeDefinition)`).
+- Fix the tracked upstream bugs in one place: #1341, #1342; close #1345.
 - Replace the hoisted zero-parameter local functions for conditional chains with native
   `if`/`else` statements (an old-writer shape kept for golden parity).
+- The quirk ledger above (burned-letter naming gaps, the stray `};`, the as-object
+  ordering accident).
 - Remove the remaining `NOTE(phase3)`/`NOTE(phase4)` markers as each is resolved.
 
 ### Findings from phases 0–1

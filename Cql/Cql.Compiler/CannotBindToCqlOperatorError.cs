@@ -13,10 +13,8 @@ namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// Signals that no <see cref="Hl7.Cql.Operators.ICqlOperators"/> overload could be bound for a
-/// method call. Shared by both the (Ir) expression builder pipeline's binders; it only needs the
-/// argument <see cref="Type"/>s to format its message, not the expressions/IR nodes that produced
-/// them, so it is expression-representation-agnostic (generalized off <c>Expression[]</c> in
-/// phase 6 of the Linq.Expressions removal, see <c>docs/linq-expression-removal-plan.md</c>).
+/// method call. It only needs the argument <see cref="Type"/>s to format its message, not the
+/// IR nodes that produced them.
 /// </summary>
 internal readonly record struct CannotBindToCqlOperatorError(
     string MethodName,

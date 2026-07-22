@@ -6,17 +6,18 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Ir;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-partial class IrLibrarySetCSharpCodeGenerator
+partial class LibrarySetCSharpCodeGenerator
 {
     /// <summary>
     /// Port of <c>LibrarySetCSharpCodeGenerator.LambdaDefinitionWriter</c>'s non-body logic
     /// (attributes incl. tags, cache-key generation + <c>GetOrCompute</c> wrapper for
     /// parameterless definitions, method naming, parameter list, return type) onto
-    /// <see cref="IrLambdaDefinition"/>. The method bodies themselves are produced by
+    /// <see cref="CqlLambdaDefinition"/>. The method bodies themselves are produced by
     /// <see cref="CSharpIrEmitter"/> — which replaces the old writer's four visitor passes
     /// plus recursive <c>BuildExpression</c> printing.
     /// </summary>
@@ -27,12 +28,12 @@ partial class IrLibrarySetCSharpCodeGenerator
         private IndentedStringBuilder ISB => LibraryWriter.ISB;
 
         public void AppendLambdaDefinition(
-            IrLambdaDefinition ld)
+            CqlLambdaDefinition ld)
         {
             var (quotedName, methodName, _) = GetMemberNames(ld);
 
             // NOTE: unlike the old CqlLambdaDefinition, the IR lambda does not carry the
-            // implicit CqlContext parameter (see IrLambdaDefinition remarks) — these are only
+            // implicit CqlContext parameter (see CqlLambdaDefinition remarks) — these are only
             // the CQL operands; the printed signature prepends "CqlContext context" explicitly.
             var parameters = ld.Lambda.Parameters;
             var returnType = TypeToCSharpConverter.ToCSharp(ld.Lambda.Body.Type);
@@ -57,9 +58,9 @@ partial class IrLibrarySetCSharpCodeGenerator
                 bodyIsBlock = true;
             }
 
-            // Map the IR definition type onto the old attribute names:
-            // IrExpressionDefinition => [CqlExpressionDefinition("...")], etc.
-            var definitionAttributeTypeName = $"Cql{ld.GetType().Name["Ir".Length..]}";
+            // The definition types share their names with the generated-code attributes:
+            // CqlExpressionDefinition => [CqlExpressionDefinition("...")], etc.
+            var definitionAttributeTypeName = ld.GetType().Name;
 
             // [CqlExpressionDefinition("Patient")] or [CqlFunctionDefinition("Patient")]
             ISB.AppendLine($"[{definitionAttributeTypeName}({quotedName})]");
@@ -67,7 +68,7 @@ partial class IrLibrarySetCSharpCodeGenerator
             // [CqlTag("tagName1", "tagValue")]
             // [CqlTag("tagName1", "tagValue")]
             // [CqlTag("tagName2", "tagValue")]
-            if (ld is IrExpressionDefinition ed)
+            if (ld is CqlExpressionDefinition ed)
                 foreach (var tag in ed.Tags)
                     foreach (var tagValue in tag.Values)
                         ISB.AppendLine($"[CqlTag({tag.Name.QuoteString()}, {tagValue.QuoteString()})]");
@@ -75,9 +76,9 @@ partial class IrLibrarySetCSharpCodeGenerator
             // Signature
             ISB.Append($"public {returnType} {methodName}");
 
-            // Extract original parameter names if this is an IrFunctionDefinition
+            // Extract original parameter names if this is an CqlFunctionDefinition
             IReadOnlyDictionary<string, string>? originalParameterNames =
-                ld is IrFunctionDefinition { OriginalParameterNames.Count: > 0 } functionDef
+                ld is CqlFunctionDefinition { OriginalParameterNames.Count: > 0 } functionDef
                     ? functionDef.OriginalParameterNames
                     : null;
             var lambdaParameters = BuildLambdaParameters(ld.Lambda, emitter.GetParameterNames(ld.Lambda), originalParameterNames);
@@ -149,7 +150,7 @@ partial class IrLibrarySetCSharpCodeGenerator
             }).ToList();
 
             // inserts the context parameter in the start of the parameter list; the IR lambda
-            // does not carry it (see IrLambdaDefinition remarks) but the generated method does.
+            // does not carry it (see CqlLambdaDefinition remarks) but the generated method does.
             parameters.Insert(0, "CqlContext context");
 
             return $"({string.Join(", ", parameters)})";

@@ -13,7 +13,7 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-partial class IrLibrarySetCSharpCodeGenerator
+partial class LibrarySetCSharpCodeGenerator
 {
     // Verbatim port of LibrarySetCSharpCodeGenerator.LibraryWriter onto the typed IR: the
     // scaffolding it writes is Expression-free, so only the definition types and the body
@@ -59,7 +59,7 @@ partial class IrLibrarySetCSharpCodeGenerator
                            .Select(t => t.definition)
                            .ToArray();
             CodeDefinitions = _definitions
-                               .OfType<IrCodeDefinition>()
+                               .OfType<CqlCodeDefinition>()
                                .ToArray();
 
             // The emitter prints the lambda bodies; its naming conventions must agree with the
@@ -155,9 +155,9 @@ partial class IrLibrarySetCSharpCodeGenerator
             }
         }
 
-        private IrDefinition[] _definitions = Array.Empty<IrDefinition>();
+        private CqlDefinition[] _definitions = Array.Empty<CqlDefinition>();
 
-        public IrCodeDefinition[] CodeDefinitions { get; private set; } = Array.Empty<IrCodeDefinition>();
+        public CqlCodeDefinition[] CodeDefinitions { get; private set; } = Array.Empty<CqlCodeDefinition>();
 
         public LibrarySetWriter LibrarySetWriter { get; }
         private ElmLibrary? _library;
@@ -168,15 +168,15 @@ partial class IrLibrarySetCSharpCodeGenerator
         /// <see cref="AppendLibraryFile"/> (its naming conventions carry the library name).</summary>
         public CSharpIrEmitter Emitter => _emitter ?? throw new InvalidOperationException("Library not initialized.");
 
-        private static string GetDefinitionRegion(IrDefinition definition) =>
+        private static string GetDefinitionRegion(CqlDefinition definition) =>
             definition switch
             {
-                // IrFunctionDefinition is an IrExpressionDefinition
+                // CqlFunctionDefinition is a CqlExpressionDefinition
                 // We combine them into one region otherwise we would have too many segments switching between Function and Expression
-                IrExpressionDefinition => "Functions and Expressions",
+                CqlExpressionDefinition => "Functions and Expressions",
 
-                // Extract the region name from the definition type name e.g. Ir[Parameter]Definition => Parameters
-                _ => $"{definition.GetType().Name["Ir".Length..^"Definition".Length]}s"
+                // Extract the region name from the definition type name e.g. Cql[Parameter]Definition => Parameters
+                _ => $"{definition.GetType().Name["Cql".Length..^"Definition".Length]}s"
             };
 
         private void AppendMethods()
@@ -191,8 +191,8 @@ partial class IrLibrarySetCSharpCodeGenerator
             // Assumption: definitions are already sorted by definition type
             foreach (var definition in _definitions)
             {
-                // Assumption: type name will be Ir....Definition
-                Debug.Assert(definition.GetType().Name is { } name && name.StartsWith("Ir") && name.EndsWith("Definition"));
+                // Assumption: type name will be Cql....Definition
+                Debug.Assert(definition.GetType().Name is { } name && name.StartsWith("Cql") && name.EndsWith("Definition"));
                 string definitionRegion = GetDefinitionRegion(definition);
 
                 if (lastDefinitionRegion != definitionRegion)

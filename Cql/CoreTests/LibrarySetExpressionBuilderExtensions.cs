@@ -14,11 +14,11 @@ namespace CoreTests;
 
 internal static class LibrarySetExpressionBuilderExtensions
 {
-    internal static IrDefinitionDictionary ProcessLibrarySet(
-        this IrLibrarySetExpressionBuilder librarySetExpressionBuilder,
+    internal static CqlDefinitionDictionary ProcessLibrarySet(
+        this LibrarySetExpressionBuilder librarySetExpressionBuilder,
         LibrarySet librarySet)
     {
-        IrDefinitionDictionary definitions = new ();
+        CqlDefinitionDictionary definitions = new ();
         librarySetExpressionBuilder.BuildEachLibraryDefinitions(librarySet, definitions).ForEach();
         return definitions;
     }

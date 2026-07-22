@@ -11,18 +11,16 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using Convert = System.Convert;
 using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 
 /// <summary>
-/// IR counterpart of the operator regions of <c>ExpressionBuilderContext.cs</c> (arithmetic,
-/// comparison, messaging, interval, nullological and type operators, plus the ChangeType
-/// helpers). Mechanical port of the old per-node methods; see the remarks on
-/// <see cref="IrExpressionBuilderContext"/>.
+/// The ELM operators (arithmetic, comparison, messaging, interval, nullological and type
+/// operators, plus the ChangeType helpers).
 /// </summary>
-partial class IrExpressionBuilderContext
+partial class ExpressionBuilderContext
 {
     #region ArithmeticOperators
 

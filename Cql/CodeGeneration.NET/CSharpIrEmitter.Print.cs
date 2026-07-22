@@ -305,7 +305,7 @@ internal partial class CSharpIrEmitter
         // site is BuildExpression's "ElmAsExpression ea => BuildExpression(ea.Reduce())"). This
         // is how a HEDIS parameter default's "high: As(asType: Integer, operand: Null)" — the
         // ELM shape produced by the *plain-type-name* As() branch (old ExpressionBuilderContext.cs,
-        // final `{ }` block; ported at IrExpressionBuilderContext.Operators.cs's As(), same
+        // final `{ }` block; ported at ExpressionBuilderContext.Operators.cs's As(), same
         // shape), whose operand goes through the ordinary Null dispatch
         // ("Null e => NullExpression.ForType(TypeFor(e)!)", i.e. a real ConstantExpression) —
         // prints as bare "default" rather than "null as int?". It does NOT fire for an IrDefault
@@ -507,7 +507,7 @@ internal partial class CSharpIrEmitter
         // (PrintTupleInit) -- including "default" for any unbound property. This MemberInit
         // shape reaches here from ChangeType's cross-tuple-type conversion (copying one tuple's
         // fields into another tuple type during a CQL "as"/comparison-normalization), which,
-        // unlike IrExpressionBuilderContext.Query.cs's Tuple() builder, has no reason to ever
+        // unlike ExpressionBuilderContext.Query.cs's Tuple() builder, has no reason to ever
         // choose the IrTupleInit node kind itself, so the redirect has to happen here at print
         // time instead, just like the old writer did.
         if (_typeToCSharpConverter.ShouldUseTupleType(memberInit.Type))

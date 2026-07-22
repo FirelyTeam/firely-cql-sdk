@@ -10,26 +10,26 @@ using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// IR counterpart of the old <c>LibrarySetExpressionBuilder</c>. This is a mechanical port; see
-/// the remarks on <see cref="IrExpressionBuilderContext"/>.
+/// Creates a <see cref="LibrarySetExpressionBuilderContext"/> per library set; see the
+/// remarks on <see cref="ExpressionBuilderContext"/>.
 /// </summary>
-internal class IrLibrarySetExpressionBuilder(
-    IrLibraryExpressionBuilder libraryExpressionBuilder,
+internal class LibrarySetExpressionBuilder(
+    LibraryExpressionBuilder libraryExpressionBuilder,
     LibraryPreprocessorBuilder libraryPreprocessorBuilder)
 {
-    public IEnumerable<(Library library, IrDefinitionDictionary libraryDefinitions)> BuildEachLibraryDefinitions(
+    public IEnumerable<(Library library, CqlDefinitionDictionary libraryDefinitions)> BuildEachLibraryDefinitions(
         LibrarySet librarySet,
-        IrDefinitionDictionary librarySetDefinitions,
+        CqlDefinitionDictionary librarySetDefinitions,
         BatchProcessExceptionHandlingStrategyBuilder<Library>? errorStrategyBuilder = null,
         Action<Library>? onNextLibrary = null) =>
         NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
             .BuildEachLibraryDefinitions(errorStrategyBuilder, onNextLibrary);
 
-    private IrLibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
+    private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
         LibrarySet librarySet,
-        IrDefinitionDictionary librarySetDefinitions) =>
+        CqlDefinitionDictionary librarySetDefinitions) =>
         new(libraryExpressionBuilder, libraryPreprocessorBuilder, librarySet, librarySetDefinitions);
 }

@@ -12,18 +12,16 @@ using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Operators;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using Tuple = Hl7.Cql.Elm.Tuple;
 using IrExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (Hl7.Cql.Compiler.Ir.IrExpression, Hl7.Cql.Elm.Element)>;
 
 /// <summary>
-/// IR counterpart of the query region of <c>ExpressionBuilderContext.cs</c> (query sources,
-/// where/return/aggregate/sort clauses, relationship clauses) plus the property/instance/tuple
-/// construction machinery. Mechanical port of the old per-node methods; see the remarks on
-/// <see cref="IrExpressionBuilderContext"/>.
+/// Queries (query sources, where/return/aggregate/sort clauses, relationship clauses) plus
+/// the property/instance/tuple construction machinery.
 /// </summary>
-partial class IrExpressionBuilderContext
+partial class ExpressionBuilderContext
 {
     #region Query
 

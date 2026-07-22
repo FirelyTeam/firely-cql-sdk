@@ -11,29 +11,29 @@ using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// IR counterpart of the old <c>LibraryExpressionBuilderContext</c>: orchestrates building all
-/// definitions of a single library into an <see cref="IrDefinitionDictionary"/>. This is a
-/// mechanical port; see the remarks on <see cref="IrExpressionBuilderContext"/>.
+/// Orchestrates building all definitions of a single library into an
+/// <see cref="CqlDefinitionDictionary"/>; see the remarks on
+/// <see cref="ExpressionBuilderContext"/>.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
-internal partial class IrLibraryExpressionBuilderContext : IBuilderContext
+internal partial class LibraryExpressionBuilderContext : IBuilderContext
 {
-    private readonly ILogger<IrLibraryExpressionBuilder> _logger;
-    private readonly IrExpressionBuilder _expressionBuilder;
-    private readonly IrDefinitionDictionary _libraryDefinitions;
-    private readonly IrLibrarySetExpressionBuilderContext? _libsCtx;
+    private readonly ILogger<LibraryExpressionBuilder> _logger;
+    private readonly ExpressionBuilder _expressionBuilder;
+    private readonly CqlDefinitionDictionary _libraryDefinitions;
+    private readonly LibrarySetExpressionBuilderContext? _libsCtx;
     private readonly LibraryPreprocessor _preprocessor;
 
-    public IrLibraryExpressionBuilderContext(
-        ILogger<IrLibraryExpressionBuilder> logger,
-        IrExpressionBuilder expressionBuilder,
+    public LibraryExpressionBuilderContext(
+        ILogger<LibraryExpressionBuilder> logger,
+        ExpressionBuilder expressionBuilder,
         LibraryPreprocessorBuilder libraryPreprocessorBuilder,
         Library library,
-        IrDefinitionDictionary libraryDefinitions,
-        IrLibrarySetExpressionBuilderContext? libsCtx = null)
+        CqlDefinitionDictionary libraryDefinitions,
+        LibrarySetExpressionBuilderContext? libsCtx = null)
     {
         _libraryDefinitions = libraryDefinitions;
         _libsCtx = libsCtx;
@@ -57,7 +57,7 @@ internal partial class IrLibraryExpressionBuilderContext : IBuilderContext
     /// <seealso cref="IGetVersionedIdentifierExtensions.GetVersionedLibraryIdentifierString"/>
     public string LibraryVersionedIdentifier { get; }
 
-    public IrDefinitionDictionary ProcessLibrary() =>
+    public CqlDefinitionDictionary ProcessLibrary() =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
             _logger.LogDebug("Building expressions for '{library}'", LibraryVersionedIdentifier);

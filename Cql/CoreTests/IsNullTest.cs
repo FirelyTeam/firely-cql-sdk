@@ -46,7 +46,7 @@ public class IsNullTest
 
         // Act
         var libraryExpressionBuilder = servicesScope.ServiceProvider
-                                                    .GetRequiredService<IrLibraryExpressionBuilder>();
+                                                    .GetRequiredService<LibraryExpressionBuilder>();
         var definitions = libraryExpressionBuilder.ProcessLibrary(elmLibrary);
 
         // Assert
@@ -75,7 +75,7 @@ public class IsNullTest
 
         // Act
         var definitions = servicesScope.ServiceProvider
-                                       .GetRequiredService<IrLibraryExpressionBuilder>()
+                                       .GetRequiredService<LibraryExpressionBuilder>()
                                        .ProcessLibrary(elmLibrary);
 
         // Assert
@@ -104,7 +104,7 @@ public class IsNullTest
 
         // Act
         var definitions = servicesScope.ServiceProvider
-                                       .GetRequiredService<IrLibraryExpressionBuilder>()
+                                       .GetRequiredService<LibraryExpressionBuilder>()
                                        .ProcessLibrary(elmLibrary);
 
         // Assert
@@ -133,7 +133,7 @@ public class IsNullTest
 
         // Act
         var definitions = servicesScope.ServiceProvider
-                                       .GetRequiredService<IrLibraryExpressionBuilder>()
+                                       .GetRequiredService<LibraryExpressionBuilder>()
                                        .ProcessLibrary(elmLibrary);
 
         // Assert
@@ -162,7 +162,7 @@ public class IsNullTest
 
         // Act
         var definitions = servicesScope.ServiceProvider
-                                       .GetRequiredService<IrLibraryExpressionBuilder>()
+                                       .GetRequiredService<LibraryExpressionBuilder>()
                                        .ProcessLibrary(elmLibrary);
 
         // Assert

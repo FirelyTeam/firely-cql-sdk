@@ -13,14 +13,13 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Utility;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// IR counterpart of the old <c>CqlOperatorsBinder</c>'s <c>.Conversions.cs</c> partial: <see cref="TryConvert"/> and
-/// the <see cref="TypeConversion"/> ranking. This is a mechanical port; see the remarks on
-/// <see cref="IrCqlOperatorsBinder"/>.
+/// Argument conversions: <see cref="TryConvert"/> and the <see cref="TypeConversion"/>
+/// ranking. See the remarks on <see cref="CqlOperatorsBinder"/>.
 /// </summary>
-partial class IrCqlOperatorsBinder
+partial class CqlOperatorsBinder
 {
     /// <summary>
     /// The <c>context.Operators</c> property access used as the receiver of every

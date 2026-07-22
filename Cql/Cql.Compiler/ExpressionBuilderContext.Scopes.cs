@@ -8,16 +8,15 @@
 
 using Hl7.Cql.Abstractions.Infrastructure;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using IrExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (Hl7.Cql.Compiler.Ir.IrExpression, Hl7.Cql.Elm.Element)>;
 
 /// <summary>
-/// IR counterpart of <c>ExpressionBuilderContext.Scopes.cs</c>: the query alias / let scope
-/// stack. This is a mechanical port; the scope dictionary values are
-/// <c>(IrExpression, Element)</c> instead of <c>(Expression, Element)</c>.
+/// The query alias / let scope stack; scope dictionary values are
+/// <c>(IrExpression, Element)</c> pairs.
 /// </summary>
-partial class IrExpressionBuilderContext
+partial class ExpressionBuilderContext
 {
     protected IReadOnlyDictionary<string, (IrExpression expr, Elm.Element element)> Scopes
     {
@@ -108,10 +107,10 @@ partial class IrExpressionBuilderContext
 
     private readonly record struct PopScopesToken : IPopToken
     {
-        private readonly IrExpressionBuilderContext _owner;
+        private readonly ExpressionBuilderContext _owner;
         private readonly object? _prevId;
 
-        public PopScopesToken(IrExpressionBuilderContext owner, object? prevId)
+        public PopScopesToken(ExpressionBuilderContext owner, object? prevId)
         {
             _owner = owner;
             _prevId = prevId;

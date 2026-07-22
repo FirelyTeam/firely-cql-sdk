@@ -12,14 +12,12 @@ using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using Element = Hl7.Cql.Elm.Element;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// IR counterpart of <c>ExpressionBuilderContext.TypeFor.cs</c>: resolving the .NET type for
-/// an ELM element or type specifier. Mechanical port of the old partial; see the remarks on
-/// <see cref="IrExpressionBuilderContext"/>.
+/// Resolving the .NET type for an ELM element or type specifier.
 /// </summary>
-partial class IrExpressionBuilderContext
+partial class ExpressionBuilderContext
 {
     private Type? TypeFor(
         Element element,

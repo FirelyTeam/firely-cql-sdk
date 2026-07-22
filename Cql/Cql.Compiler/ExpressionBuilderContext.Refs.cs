@@ -13,7 +13,7 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using ChoiceTypeSpecifier = Hl7.Cql.Elm.ChoiceTypeSpecifier;
 using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
@@ -21,12 +21,10 @@ using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
 using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 
 /// <summary>
-/// IR counterpart of the reference regions of <c>ExpressionBuilderContext.cs</c>: references
-/// to other definitions (expressions, functions, parameters, codes, code systems, concepts,
-/// value sets), retrieves, and the runtime-context invocation helpers. Mechanical port of the
-/// old per-node methods; see the remarks on <see cref="IrExpressionBuilderContext"/>.
+/// References to other definitions (expressions, functions, parameters, codes, code systems,
+/// concepts, value sets), retrieves, and the runtime-context invocation helpers.
 /// </summary>
-partial class IrExpressionBuilderContext
+partial class ExpressionBuilderContext
 {
     protected IrExpression FunctionRef(FunctionRef op)
     {
@@ -352,17 +350,17 @@ partial class IrExpressionBuilderContext
 
     /// <remarks>The old builder resolved <c>CqlDefinition.Type</c> (the <c>Func&lt;…&gt;</c> delegate
     /// type of the definition's <c>LambdaExpression</c>, always prefixed with <c>CqlContext</c>) for
-    /// any <see cref="IrDefinition"/>; only <see cref="IrLambdaDefinition"/> exposes a comparable
-    /// <see cref="IrLambdaDefinition.Type"/> here (the old base <c>CqlDefinition</c> did not override
+    /// any <see cref="CqlDefinition"/>; only <see cref="CqlLambdaDefinition"/> exposes a comparable
+    /// <see cref="CqlLambdaDefinition.Type"/> here (the old base <c>CqlDefinition</c> did not override
     /// <c>Expression.Type</c> either, so passing a non-lambda definition would have failed at
     /// runtime there too). In practice only <see cref="ParameterRef"/> calls this overload, and
-    /// parameter references always resolve to an <see cref="IrParameterDefinition"/>.</remarks>
+    /// parameter references always resolve to an <see cref="CqlParameterDefinition"/>.</remarks>
     private IrExpression InvokeDefinitionThroughRuntimeContext(
         string name,
         string? libraryAlias,
-        IrDefinition definition)
+        CqlDefinition definition)
     {
-        if (definition is IrLambdaDefinition { Type: { IsGenericType: true } type })
+        if (definition is CqlLambdaDefinition { Type: { IsGenericType: true } type })
         {
             var typeArgs = type.GetGenericArguments();
             var returnType = typeArgs[^1];
@@ -386,7 +384,7 @@ partial class IrExpressionBuilderContext
     }
 
     /// <summary>
-    /// Splits a <see cref="IrLibraryExpressionBuilderContext.LibraryVersionedIdentifier"/>-shaped
+    /// Splits a <see cref="LibraryExpressionBuilderContext.LibraryVersionedIdentifier"/>-shaped
     /// string (e.g. <c>"FHIRHelpers-4.0.1"</c>) back into its name and version parts, for
     /// <see cref="IrDefinitionCall"/>, which (unlike the old <c>DefinitionCallExpression</c>/
     /// <c>FunctionCallExpression</c>, which only ever carried the combined key for a runtime

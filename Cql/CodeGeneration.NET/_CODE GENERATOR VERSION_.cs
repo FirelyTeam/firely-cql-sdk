@@ -12,10 +12,10 @@ namespace Hl7.Cql.CodeGeneration.NET;
 // the old (deleted) LibrarySetCSharpCodeGenerator onto its IR successor, the sole surviving
 // C# generator, so ElmToolkit.GeneratorToolVersion and Cql.Packaging's
 // AddGeneratorToolVersionToParameters keep a value to read.
-internal partial class IrLibrarySetCSharpCodeGenerator
+internal partial class LibrarySetCSharpCodeGenerator
 {
     /// <summary>
-    /// Gets the version of this <see cref="IrLibrarySetCSharpCodeGenerator"/> as will appear
+    /// Gets the version of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear
     /// in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Version"/>.
     /// </summary>
     /// <remarks>

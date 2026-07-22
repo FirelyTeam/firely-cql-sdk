@@ -8,6 +8,7 @@
 
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Ir;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Invocation.Toolkit;
@@ -17,15 +18,12 @@ namespace Hl7.Cql.CqlToElm.Test;
 using Expression = Hl7.Cql.Elm.Expression;
 
 /// <summary>
-/// Test-only service-composition helpers over the typed-IR pipeline (the sole pipeline as of
-/// phase 6 of the Linq.Expressions removal, see docs/linq-expression-removal-plan.md). Ported
-/// from the old Expression-based equivalents (<c>LibraryExpressionBuilder</c>,
-/// <c>LibrarySetCSharpCodeGenerator</c>) onto their Ir* counterparts.
+/// Test-only service-composition helpers over the ELM-to-C# pipeline.
 /// </summary>
 internal static class ElmToolkitTestExtensions
 {
-    public static IrLibrarySetCSharpCodeGenerator GetLibrarySetCSharpCodeGenerator(this ElmToolkit elmToolkit) =>
-        elmToolkit.ServiceProvider.GetRequiredService<IrLibrarySetCSharpCodeGenerator>();
+    public static LibrarySetCSharpCodeGenerator GetLibrarySetCSharpCodeGenerator(this ElmToolkit elmToolkit) =>
+        elmToolkit.ServiceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
 
     public static AssemblyCompiler GetAssemblyCompiler(this ElmToolkit elmToolkit) =>
         elmToolkit.ServiceProvider.GetRequiredService<AssemblyCompiler>();
@@ -33,8 +31,8 @@ internal static class ElmToolkitTestExtensions
     public static Scope CreateScope(this ElmToolkit elmToolkit) =>
         new (elmToolkit.ServiceProvider.CreateScope());
 
-    public static IrLibraryExpressionBuilder GetLibraryExpressionBuilder(this Scope elmFluentFluentToolkitScope) =>
-        elmFluentFluentToolkitScope.ServiceProvider.GetRequiredService<IrLibraryExpressionBuilder>();
+    public static LibraryExpressionBuilder GetLibraryExpressionBuilder(this Scope elmFluentFluentToolkitScope) =>
+        elmFluentFluentToolkitScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
 
     internal class Scope(IServiceScope serviceScope) : IServiceScope
     {
@@ -53,7 +51,7 @@ internal static class ElmToolkitTestExtensions
             .AddElmLibraries(library)
             .UseLibrarySetInvoker(useLibrarySetInvoker, name);
 
-    internal static IrDefinitionDictionary ProcessLibrary(
+    internal static CqlDefinitionDictionary ProcessLibrary(
         this ElmToolkit elmToolkit,
         Library library)
     {
@@ -67,8 +65,8 @@ internal static class ElmToolkitTestExtensions
     /// Unlike the old (deleted) Expression-based <c>Lambda()</c>, the IR lambda carries no
     /// leading <c>CqlContext</c> parameter (the well-known <see cref="IrContextParameter"/> is
     /// referenced directly instead) -- so this has zero declared parameters, mirroring how
-    /// <see cref="IrExpressionBuilderContext"/> builds expression-definition lambdas (see
-    /// <c>IrExpressionBuilderContext.LibraryDefs.cs</c>).
+    /// <see cref="ExpressionBuilderContext"/> builds expression-definition lambdas (see
+    /// <c>ExpressionBuilderContext.LibraryDefs.cs</c>).
     /// </summary>
     internal static IrLambda Lambda(
         this ElmToolkit elmToolkit,
@@ -77,7 +75,7 @@ internal static class ElmToolkitTestExtensions
         using var scope = elmToolkit.CreateScope();
         var libraryExpressionBuilder = scope.GetLibraryExpressionBuilder();
 
-        IrDefinitionDictionary definitions = new();
+        CqlDefinitionDictionary definitions = new();
         var ctx = libraryExpressionBuilder.NewExpressionBuilderContext(Library, definitions);
         IrExpression translated = ctx.TranslateArg(expression);
         return new IrLambda([], translated);

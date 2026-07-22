@@ -10,16 +10,15 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Operators;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// IR counterpart of the old (deleted) <c>CqlOperatorsBinder</c>'s <c>.Bind.cs</c> partial: overload resolution
-/// (<see cref="ResolveMethodInfoWithPotentialArgumentConversions"/>), candidate scoring, generic
-/// inference, and the trailing-null precision retry. This is a mechanical port; see the remarks
-/// on <see cref="IrCqlOperatorsBinder"/>.
+/// Overload resolution (<see cref="ResolveMethodInfoWithPotentialArgumentConversions"/>):
+/// candidate scoring, generic inference, and the trailing-null precision retry. See the
+/// remarks on <see cref="CqlOperatorsBinder"/>.
 /// </summary>
 #pragma warning disable CS1591
-partial class IrCqlOperatorsBinder
+partial class CqlOperatorsBinder
 {
     // The method-info cache is Expression-free (pure reflection over ICqlOperators); phase 6
     // relocated it out of the old (deleted) CqlOperatorsBinder into its own file so both binders

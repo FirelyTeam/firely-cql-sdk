@@ -11,14 +11,13 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// IR counterpart of the old <c>CqlOperatorsBinder</c>'s <c>.Specific.cs</c> partial: the hand-written bindings
-/// (Select/Where/SelectMany/Retrieve/Coalesce/etc. with generic type construction). This is a
-/// mechanical port; see the remarks on <see cref="IrCqlOperatorsBinder"/>.
+/// The hand-written bindings (Select/Where/SelectMany/Retrieve/Coalesce/etc. with generic
+/// type construction). See the remarks on <see cref="CqlOperatorsBinder"/>.
 /// </summary>
-partial class IrCqlOperatorsBinder
+partial class CqlOperatorsBinder
 {
     private IrExpression SortBy(
         IrExpression source,

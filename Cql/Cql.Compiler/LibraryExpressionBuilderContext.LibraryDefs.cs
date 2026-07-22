@@ -10,14 +10,13 @@ using Hl7.Cql.Exceptions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// IR counterpart of <c>LibraryExpressionBuilderContext.LibraryDefs.cs</c>: the definition
-/// dictionary, alias/code/code-system bookkeeping shared by the per-definition processors.
-/// Mechanical port; see the remarks on <see cref="IrExpressionBuilderContext"/>.
+/// The definition dictionary and the alias/code/code-system bookkeeping shared by the
+/// per-definition processors.
 /// </summary>
-partial class IrLibraryExpressionBuilderContext
+partial class LibraryExpressionBuilderContext
 {
     #region Definitions
 
@@ -28,7 +27,7 @@ partial class IrLibraryExpressionBuilderContext
     /// If the library was processed within the context of a library set,
     /// then this dictionary will be merged with the library set's dictionary.
     /// </summary>
-    public IrDefinitionDictionary LibraryDefinitions  => _libraryDefinitions;
+    public CqlDefinitionDictionary LibraryDefinitions  => _libraryDefinitions;
 
     private void AddLibraryDefinitionsFromIncludes()
     {
@@ -110,7 +109,7 @@ partial class IrLibraryExpressionBuilderContext
         return codings;
     }
 
-    public IrLibrarySetExpressionBuilderContext? LibrarySetContext => _libsCtx;
+    public LibrarySetExpressionBuilderContext? LibrarySetContext => _libsCtx;
 
     #endregion
 

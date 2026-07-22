@@ -23,7 +23,7 @@ public class ExpressionBuilderContextTests
     public void Get_Property_Uses_TypeResolver()
     {
         using var serviceProvider = ElmToolkitServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
-        var property = IrExpressionBuilderContext.GetProperty(typeof(MeasureReport.PopulationComponent), "id", serviceProvider.GetRequiredService<TypeResolver>())!;
+        var property = ExpressionBuilderContext.GetProperty(typeof(MeasureReport.PopulationComponent), "id", serviceProvider.GetRequiredService<TypeResolver>())!;
         Assert.AreEqual(typeof(Element), property.DeclaringType);
         Assert.AreEqual(nameof(Element.ElementIdElement), property.Name);
     }

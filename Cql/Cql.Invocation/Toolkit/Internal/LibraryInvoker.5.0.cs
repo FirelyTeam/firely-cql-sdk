@@ -64,7 +64,7 @@ internal sealed class LibraryInstanceInvoker_5_0 : LibraryInstanceInvoker
 
     /// <summary>
     /// Determines whether the specified CQL tool version is supported.
-    /// The current CQL tool version can be referenced by <c>IrLibrarySetCSharpCodeGenerator.GeneratorToolVersion</c>.
+    /// The current CQL tool version can be referenced by <c>LibrarySetCSharpCodeGenerator.GeneratorToolVersion</c>.
     /// </summary>
     public static bool SupportsVersion(Version cqlToolVersion) =>
         cqlToolVersion >= MinSupportedGeneratorToolVersion

@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Ir;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Operators;
@@ -17,7 +18,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 namespace CoreTests;
 
 /// <summary>
-/// Unit tests for <see cref="IrCqlOperatorsBinder"/> (and <see cref="IrCqlContextBinder"/>),
+/// Unit tests for <see cref="CqlOperatorsBinder"/> (and <see cref="CqlContextBinder"/>),
 /// the phase-3 port of <see cref="Hl7.Cql.Compiler.CqlOperatorsBinder"/> onto the typed IR.
 /// The tests build small IR argument trees directly via the <c>Hl7.Cql.Compiler.Ir.*</c> node
 /// constructors and assert on the resulting IR shape (bound method, generic arguments,
@@ -25,10 +26,10 @@ namespace CoreTests;
 /// overload-resolution outcome, which must match the old Expression-based binder's.
 /// </summary>
 [TestClass]
-public class IrCqlOperatorsBinderTests
+public class CqlOperatorsBinderTests
 {
-    private static IrCqlOperatorsBinder CreateBinder() => new(
-        NullLogger<IrCqlOperatorsBinder>.Instance,
+    private static CqlOperatorsBinder CreateBinder() => new(
+        NullLogger<CqlOperatorsBinder>.Instance,
         new TestTypeResolver(),
         Hl7.Cql.Conversion.TypeConverter.Create());
 
@@ -321,7 +322,7 @@ public class IrCqlOperatorsBinderTests
     [TestMethod]
     public void ContextBinder_ResolveParameter_BindsCqlContextMethod()
     {
-        var binder = new IrCqlContextBinder();
+        var binder = new CqlContextBinder();
         var defaultValue = new IrConstant(null, typeof(object));
 
         var call = (IrInvoke)binder.ResolveParameter("MyLib-1.0.0", "Measurement Period", defaultValue);

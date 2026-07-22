@@ -11,23 +11,22 @@ using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Runtime;
 using Library = Hl7.Cql.Elm.Library;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// IR counterpart of the old <c>LibrarySetExpressionBuilderContext</c>: orchestrates building
-/// each library of a library set and merging its definitions. This is a mechanical port; see
-/// the remarks on <see cref="IrExpressionBuilderContext"/>.
+/// Orchestrates building each library of a library set and merging its definitions; see the
+/// remarks on <see cref="ExpressionBuilderContext"/>.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
-internal class IrLibrarySetExpressionBuilderContext : IBuilderContext
+internal class LibrarySetExpressionBuilderContext : IBuilderContext
 {
-    private readonly IrLibraryExpressionBuilder _libraryExpressionBuilder;
+    private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
 
-    public IrLibrarySetExpressionBuilderContext(
-        IrLibraryExpressionBuilder libraryExpressionBuilder,
+    public LibrarySetExpressionBuilderContext(
+        LibraryExpressionBuilder libraryExpressionBuilder,
         LibraryPreprocessorBuilder libraryPreprocessorBuilder,
         LibrarySet librarySet,
-        IrDefinitionDictionary librarySetDefinitions)
+        CqlDefinitionDictionary librarySetDefinitions)
     {
         _libraryExpressionBuilder = libraryExpressionBuilder;
         LibrarySetDefinitions = librarySetDefinitions;
@@ -39,7 +38,7 @@ internal class IrLibrarySetExpressionBuilderContext : IBuilderContext
     /// <summary>
     /// Gets the merged definitions of all the libraries processed in the <see cref="LibrarySet"/>.
     /// </summary>
-    public IrDefinitionDictionary LibrarySetDefinitions { get; }
+    public CqlDefinitionDictionary LibrarySetDefinitions { get; }
 
     /// <summary>
     /// Gets the library set being processed.
@@ -48,7 +47,7 @@ internal class IrLibrarySetExpressionBuilderContext : IBuilderContext
 
     public LibraryPreprocessor Preprocessor { get; }
 
-    public IEnumerable<(Library library, IrDefinitionDictionary libraryDefinitions)> BuildEachLibraryDefinitions(
+    public IEnumerable<(Library library, CqlDefinitionDictionary libraryDefinitions)> BuildEachLibraryDefinitions(
         BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,
         Action<Library>? prebuildLibraryHandler = null) =>
         LibrarySet

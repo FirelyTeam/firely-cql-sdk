@@ -14,7 +14,7 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using DateTime = Hl7.Cql.Elm.DateTime;
 using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
@@ -24,37 +24,35 @@ using Tuple = Hl7.Cql.Elm.Tuple;
 #region Context
 
 /// <summary>
-/// The IrExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
+/// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
 /// </summary>
 /// <remarks>
-/// IR counterpart of the old <c>ExpressionBuilderContext</c> (phase 4 of the Linq.Expressions
-/// removal, see <c>docs/linq-expression-removal-plan.md</c>): a mechanical port with the same
-/// dispatch shape, producing <see cref="IrExpression"/> trees instead of
-/// <c>System.Linq.Expressions</c> trees. Phase 6 deleted the old builder along with the rest
-/// of the Expression-based pipeline; its sources remain readable at that pipeline's final
-/// commit, <c>85207efd5</c>.
+/// Translates ELM nodes into <see cref="IrExpression"/> trees. The dispatch shape and
+/// per-operator behavior are preserved bug-for-bug from the deleted Linq.Expressions-based
+/// pipeline (see <c>docs/linq-expression-removal-plan.md</c>; its sources remain readable at
+/// that pipeline's final commit, <c>85207efd5</c>).
 /// </remarks>
-internal partial class IrExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 (
-    ILogger<IrExpressionBuilder> logger,
+    ILogger<ExpressionBuilder> logger,
     ExpressionBuilderSettings expressionBuilderSettings,
-    IrCqlOperatorsBinder cqlOperatorsBinder,
+    CqlOperatorsBinder cqlOperatorsBinder,
     TupleBuilderCache tupleBuilderCache,
     TypeResolver typeResolver,
     TypeConverter typeConverter,
-    IrCqlContextBinder cqlContextBinder,
-    IrLibraryExpressionBuilderContext libraryContext,
+    CqlContextBinder cqlContextBinder,
+    LibraryExpressionBuilderContext libraryContext,
     Dictionary<string, IrLocal>? operands = null // Parameters for function definitions. Used during ProcessExpressionDef.
 )
 {
-    private readonly ILogger<IrExpressionBuilder> _logger = logger;
+    private readonly ILogger<ExpressionBuilder> _logger = logger;
     private readonly ExpressionBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
-    private readonly IrCqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
+    private readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
     private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
     private readonly TypeResolver _typeResolver = typeResolver;
     private readonly TypeConverter _typeConverter = typeConverter;
-    private readonly IrCqlContextBinder _cqlContextBinder = cqlContextBinder;
-    private readonly IrLibraryExpressionBuilderContext _libraryContext = libraryContext;
+    private readonly CqlContextBinder _cqlContextBinder = cqlContextBinder;
+    private readonly LibraryExpressionBuilderContext _libraryContext = libraryContext;
     private readonly Dictionary<string, IrLocal>? _operands = operands;
 
     // NOTE(phase4): the old builder carried an IExpressionMutator list here, documented as

@@ -12,14 +12,14 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-partial class IrLibrarySetCSharpCodeGenerator
+partial class LibrarySetCSharpCodeGenerator
 {
     // Verbatim port of LibrarySetCSharpCodeGenerator.LibrarySetWriter onto the typed IR
     // (only the definitions dictionary type differs).
     private class LibrarySetWriter(
-        IrLibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator,
+        LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator,
         LibrarySet librarySet,
-        IrDefinitionDictionary definitions,
+        CqlDefinitionDictionary definitions,
         ICacheKeyGenerator cacheKeyGenerator,
         string? @namespace = null)
     {
@@ -29,7 +29,7 @@ partial class IrLibrarySetCSharpCodeGenerator
         public HashSet<string> Usings => librarySetCSharpCodeGenerator._usings;
         public string? Namespace { get; } = @namespace;
         public LibrarySet LibrarySet { get; } = librarySet;
-        public IrDefinitionDictionary Definitions { get; } = definitions;
+        public CqlDefinitionDictionary Definitions { get; } = definitions;
         public ICacheKeyGenerator CacheKeyGenerator { get; } = cacheKeyGenerator;
 
         public IEnumerable<(ElmLibrary library, string cSharp)> GenerateEachLibraryToCSharp(

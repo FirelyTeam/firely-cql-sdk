@@ -11,23 +11,17 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Compiler.Ir;
+namespace Hl7.Cql.Compiler;
 
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 /// <summary>
-/// IR counterpart of the old <c>CqlOperatorsBinder</c>: facilitates binding to
-/// <see cref="ICqlOperators"/> methods, by converting the method name and <see cref="IrExpression"/>
-/// arguments to the appropriate overload of the method.
+/// Facilitates binding to <see cref="ICqlOperators"/> methods, by converting the method name
+/// and <see cref="IrExpression"/> arguments to the appropriate overload of the method.
 ///
-/// <para>This is a mechanical port of <c>CqlOperatorsBinder</c> onto the typed IR
-/// (phase 3 of the Linq.Expressions removal, see
-/// <c>docs/linq-expression-removal-plan.md</c>): the overload-resolution algorithm is
-/// unchanged, only the tree representation differs (<see cref="IrExpression"/> instead of
-/// <c>Expression</c>, <see cref="IrInvoke"/> instead of <c>MethodCallExpression</c>,
-/// etc.). Phase 6 deleted the old binder along with the rest of the Expression-based
-/// pipeline; its sources remain readable at that pipeline's final commit,
-/// <c>85207efd5</c>.</para>
+/// <para>The overload-resolution algorithm is preserved bug-for-bug from the deleted
+/// Linq.Expressions-based pipeline (see <c>docs/linq-expression-removal-plan.md</c>; its
+/// sources remain readable at that pipeline's final commit, <c>85207efd5</c>).</para>
 /// </summary>
 /// <param name="logger">
 /// The logger used.
@@ -42,12 +36,12 @@ using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 /// you may get errors at runtime, because this binding will think a conversion is possible when at runtime it is not.
 /// If not provided, only conversions defined in <see cref="CqlOperators"/> will be used.
 /// </param>
-internal partial class IrCqlOperatorsBinder(
-    ILogger<IrCqlOperatorsBinder> logger,
+internal partial class CqlOperatorsBinder(
+    ILogger<CqlOperatorsBinder> logger,
     TypeResolver typeResolver,
     TypeConverter typeConverter)
 {
-    private readonly ILogger<IrCqlOperatorsBinder> _logger = logger;
+    private readonly ILogger<CqlOperatorsBinder> _logger = logger;
     private readonly TypeResolver _typeResolver = typeResolver;
     private readonly TypeConverter _typeConverter = typeConverter;
 
