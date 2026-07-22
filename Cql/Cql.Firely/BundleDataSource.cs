@@ -28,15 +28,18 @@ namespace Hl7.Cql.Fhir
         /// <param name="valueSets"></param>
         /// <param name="codeComparer"></param>
         /// <param name="systemComparer"></param>
+        /// <param name="profileFilter"></param>
         /// <exception cref="ArgumentNullException"></exception>
         public BundleDataSource(Bundle bundle,
             IValueSetDictionary valueSets,
             ICqlComparer<string>? codeComparer = null,
-            ICqlComparer<string>? systemComparer = null)
+            ICqlComparer<string>? systemComparer = null,
+            IRetrieveProfileFilter? profileFilter = null)
         {
             ValueSets = valueSets ?? throw new ArgumentNullException(nameof(valueSets));
             _codeComparer = codeComparer ?? DefaultStringComparer.Value;
             _systemComparer = systemComparer ?? DefaultStringComparer.Value;
+            _profileFilter = profileFilter ?? QICoreRetrieveProfileFilter.Default;
             Bundle = bundle is not null ? new IndexedBundle(bundle.Entry) : throw new ArgumentNullException(nameof(bundle));
         }
 
@@ -48,6 +51,7 @@ namespace Hl7.Cql.Fhir
 
         private readonly ICqlComparer<string> _codeComparer;
         private readonly ICqlComparer<string> _systemComparer;
+        private readonly IRetrieveProfileFilter _profileFilter;
 
 #if VNEXT
         /// <inheritdoc/>
@@ -58,13 +62,23 @@ namespace Hl7.Cql.Fhir
 
         public IEnumerable<T> Retrieve<T>(RetrieveParameters? parameters) where T : class
         {
-            return parameters switch
+            var result = parameters switch
             {
                 null => Bundle.FilterByType<T>(),
                 { Codes: { } codes }   => RetrieveByCodes<T>(codes, parameters.CodeProperty),
                 { ValueSet: { } valueSet } => RetrieveByValueSet<T>(valueSet, parameters.CodeProperty),
                 _ => Bundle.FilterByType<T>()
             };
+
+            return ApplyProfileFilter(result, parameters?.TemplateId);
+        }
+
+        private IEnumerable<T> ApplyProfileFilter<T>(IEnumerable<T> source, string? templateId) where T : class
+        {
+            if (templateId is null || _profileFilter.GetFilter(templateId) is not { } filter)
+                return source;
+
+            return source.Where(instance => instance is not Resource resource || filter(resource));
         }
 
         /// <inheritdoc/>
