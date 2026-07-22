@@ -118,9 +118,9 @@ The SDK follows a pipeline from CQL source to .NET execution results:
 
 1. **CQL → ELM**: CQL text is parsed and compiled to ELM (a structured representation). The .NET `Hl7.Cql.CqlToElm` package handles this. For production use with complex measures, the Java-based [CQL-to-ELM tool](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java) may also be used.
 
-2. **ELM → LINQ Expressions**: The `Hl7.Cql.Compiler` package interprets the ELM tree and produces `System.Linq.Expressions` lambdas for each CQL definition.
+2. **ELM → typed IR**: The `Hl7.Cql.Compiler` package interprets the ELM tree and produces a typed code model (IR) for each CQL definition.
 
-3. **LINQ Expressions → .NET Assembly**: The `Hl7.Cql.CodeGeneration.NET` package converts the expressions to C# source code, which is then compiled to a .NET assembly by Roslyn.
+3. **Typed IR → .NET Assembly**: The `Hl7.Cql.CodeGeneration.NET` package emits C# source code from the typed IR, which is then compiled to a .NET assembly by Roslyn.
 
 4. **Assembly → CQL Results**: The `Hl7.Cql.Invocation` toolkit loads the assembly, binds a `CqlContext` (containing patient data, parameters, value sets, and the reference date), and invokes individual definitions.
 
