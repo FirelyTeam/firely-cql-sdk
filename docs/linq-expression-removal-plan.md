@@ -7,7 +7,9 @@ Status: **all phases complete.** Phases 0–1 merged to develop
 [#1340](https://github.com/FirelyTeam/firely-cql-sdk/pull/1340) →
 [#1344](https://github.com/FirelyTeam/firely-cql-sdk/pull/1344) →
 [#1346](https://github.com/FirelyTeam/firely-cql-sdk/pull/1346) →
-[#1378](https://github.com/FirelyTeam/firely-cql-sdk/pull/1378)) with golden parity proven
+[#1378](https://github.com/FirelyTeam/firely-cql-sdk/pull/1378) →
+[#1392](https://github.com/FirelyTeam/firely-cql-sdk/pull/1392) →
+[#1394](https://github.com/FirelyTeam/firely-cql-sdk/pull/1394)) with golden parity proven
 byte-identical between pipelines on all three corpora: RR23, dqm-content-qicore-2025
 (CMS56), and the complete HEDIS 2025 corpus (382 libraries; the two HEDIS-surfaced blocking
 bugs [#1361](https://github.com/FirelyTeam/firely-cql-sdk/issues/1361) /
@@ -142,11 +144,11 @@ standalone fixes.
 |---|---|---|
 | 0 | Delete dead visitors; golden regeneration tests over `LibrarySets\` corpora | ✅ merged (#1311) |
 | 1 | Decouple tests from `Expression.Compile()`; cache metadata references in `AssemblyCompiler` | ✅ merged (#1311) |
-| 2 | Typed IR nodes + validating factories; `CSharpEmitter` reproducing current output | ✅ in review (#1331) |
-| 3 | Port `CqlOperatorsBinder` + partials onto the IR (algorithm unchanged) | ✅ in review (#1340) |
-| 4 | Port `ExpressionBuilderContext` + partials (FHIRHelpers workarounds, choice types, query machinery) | ✅ in review (#1344) |
-| 5 | Dual-pipeline flag, golden diffs across all corpora + full suites, flip default | parity proven on RR23 + CMS56 + HEDIS 2025 (#1361/#1362 fixed); flip decision pending |
-| 6 | Delete the Expression-based builder/binder/visitors/custom expressions; bump generator version | |
+| 2 | Typed IR nodes + validating factories; `CSharpEmitter` reproducing current output | ✅ merged into feature branch ([#1331](https://github.com/FirelyTeam/firely-cql-sdk/pull/1331)) |
+| 3 | Port `CqlOperatorsBinder` + partials onto the IR (algorithm unchanged) | ✅ merged into feature branch ([#1340](https://github.com/FirelyTeam/firely-cql-sdk/pull/1340)) |
+| 4 | Port `ExpressionBuilderContext` + partials (FHIRHelpers workarounds, choice types, query machinery) | ✅ merged into feature branch ([#1344](https://github.com/FirelyTeam/firely-cql-sdk/pull/1344)) |
+| 5 | Dual-pipeline flag, golden diffs across all corpora + full suites, flip default | ✅ merged into feature branch; parity proven on RR23 + CMS56 + HEDIS 2025 ([#1346](https://github.com/FirelyTeam/firely-cql-sdk/pull/1346), [#1378](https://github.com/FirelyTeam/firely-cql-sdk/pull/1378)) |
+| 6 | Delete the Expression-based builder/binder/visitors/custom expressions; cleanup | ✅ merged into feature branch ([#1392](https://github.com/FirelyTeam/firely-cql-sdk/pull/1392), [#1394](https://github.com/FirelyTeam/firely-cql-sdk/pull/1394)); generator version intentionally unchanged because output stayed byte-identical |
 
 Post-parity cleanups (once the old pipeline is gone and byte-identical output no longer
 constrains the emitter): multi-branch conditionals whose branches are all simple can print as
@@ -248,7 +250,7 @@ Done in phase 6 itself:
   `CannotBindToCqlOperatorError` (generalize the error type off `Expression[]`).~~
   Done — the error type now carries `Type[]`.
 - ~~Relocate `CqlOperatorsMethodsCache` out of the deleted `CqlOperatorsBinder`.~~
-  Done — now `Cql.Compiler\Ir\CqlOperatorsMethodsCache.cs`.
+  Done — now `Cql.Compiler\CqlOperatorsMethodsCache.cs`.
 - ~~Consolidate the duplicated assign-to-type helpers (`CodeExpressionExtensions` vs. the
   binder's private phase-3 copies).~~ Done — consolidated onto `CodeExpressionExtensions`.
 - ~~Review #1343.~~ Retired — develop's semi-join compilation of `with`/`without`

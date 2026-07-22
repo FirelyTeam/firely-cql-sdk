@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026, Firely, NCQA and contributors
+ * Copyright (c) 2024, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -20,9 +20,7 @@ namespace Hl7.Cql.Compiler;
 #pragma warning disable CS1591
 partial class CqlOperatorsBinder
 {
-    // The method-info cache is Expression-free (pure reflection over ICqlOperators); phase 6
-    // relocated it out of the old (deleted) CqlOperatorsBinder into its own file so both binders
-    // could share it while the old one still existed. See CqlOperatorsMethodsCache.cs.
+    // Reflection cache of ICqlOperators method metadata used during overload resolution.
     private static readonly CqlOperatorsMethodsCache ICqlOperatorsMethods = new();
 
     ///  <summary>

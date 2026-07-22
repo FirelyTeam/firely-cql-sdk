@@ -1,12 +1,13 @@
 # Generated C#: optimization opportunities (post-phase-6)
 
-Companion to `linq-expression-removal-plan.md`. Once phase 6 deletes the Expression-based
-pipeline, byte-parity no longer constrains the output and the typed IR — which carries the
-static .NET type of every node — makes a class of optimizations straightforward that the old
-pipeline could not attempt. This catalogue is evidence-based: each item points at real
-generated code from the golden corpus.
+Companion to `linq-expression-removal-plan.md`. With the Expression-based pipeline deleted,
+byte-parity no longer constrains the output and the typed IR — which carries the static .NET
+type of every node — makes a class of optimizations straightforward that the old pipeline
+could not attempt. This catalogue is evidence-based: each item points at real generated code
+from the golden corpus.
 
-Ground rule: **measure first**. The BenchmarkDotNet integration runner (#97) should get a
+Ground rule: **measure first**. The BenchmarkDotNet integration runner
+([FirelyTeam/Firely.Cql.Sdk.Integration.Runner#97](https://github.com/FirelyTeam/Firely.Cql.Sdk.Integration.Runner/issues/97)) should get a
 baseline per corpus before and after each class lands, and every class needs semantic tests
 (CQL three-valued logic and overflow/precision rules are where "obvious" native lowerings go
 wrong).
@@ -56,8 +57,9 @@ The binder/emitter know every operand type statically. Where a native C# constru
 ### 2. Devirtualization of what remains
 
 `context.Operators` is an interface receiver — virtual dispatch on every call, largely
-opaque to JIT inlining. Options: generate calls against the concrete (sealed)
-`CqlOperators` type; or make hot operators static. Cheap to try, benchmark decides.
+opaque to JIT inlining. Options: generate calls against the concrete `CqlOperators` type
+(it is internal, not sealed, so any devirtualization benefit needs measuring in the real
+generated call sites); or make hot operators static. Cheap to try, benchmark decides.
 
 ### 3. Conversion specialization
 
@@ -104,8 +106,9 @@ returns, `(bool?)x ?? false` in conditions, and the invoked-local-function condi
 
 ## Sequencing suggestion
 
-Phase 6 deletes the old pipeline and bumps the generator version (goldens regenerate once).
-Then: (7) cosmetics + (4) honest dedup land together in that same regeneration; (1)–(3) as
+Phase 6 deleted the old pipeline without bumping the generator version because output stayed
+byte-identical. The first deliberate output change will carry the deferred version bump and
+golden regeneration. Then: (7) cosmetics + (4) honest dedup land together in that same regeneration; (1)–(3) as
 measured, per-operator-class PRs with semantic tests; (5) alongside; (6) last, driven by
 benchmarks. Each class changes generated output, so each is one golden regeneration —
 batching related classes keeps corpus churn reviewable.

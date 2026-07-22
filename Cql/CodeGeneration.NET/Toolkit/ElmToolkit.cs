@@ -145,11 +145,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         foreach (var (id, _) in removedLibraries)
             logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
 
-        // Produces IEnumerable<(ElmLibrary library, string cSharp)> via the typed-IR pipeline
-        // (docs/linq-expression-removal-plan.md) -- the sole builder/generator pipeline as of
-        // phase 6, since golden parity with the old Expression-based pipeline was proven across
-        // all corpora (RR23, dqm-content-qicore-2025, and the full HEDIS 2025 corpus) and the old
-        // pipeline was deleted.
+        // Produces one generated C# source per library in the set.
         var cSharps = GenerateCSharp(
             _services.LibrarySetCSharpCodeGenerator,
             librarySet,
@@ -223,11 +219,11 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                                                     logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.VersionedLibraryIdentifier)));
 
     /// <summary>
-    /// Generates the C# code for the libraries, using the typed-IR code generator.
+    /// Generates the C# code for the libraries.
     /// </summary>
-    /// <param name="cSharpCodeProcessor">The typed-IR C# code processor to use.</param>
+    /// <param name="cSharpCodeProcessor">The C# code processor to use.</param>
     /// <param name="librarySet">The set of libraries to generate code for.</param>
-    /// <param name="librarySetDefinitions">The typed-IR definitions for the library set.</param>
+    /// <param name="librarySetDefinitions">The definitions for the library set.</param>
     /// <param name="namespace">The C# namespace to use for generated code.</param>
     /// <returns>The generated C# code.</returns>
     private IEnumerable<(ElmLibrary library, string cSharp)> GenerateCSharp(
@@ -248,11 +244,11 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                 library => _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.VersionedLibraryIdentifier));
 
     /// <summary>
-    /// Builds the library set definitions, using the typed-IR expression builder.
+    /// Builds the library set definitions.
     /// </summary>
-    /// <param name="librarySetExpressionBuilderScoped">The typed-IR library set expression builder to use.</param>
+    /// <param name="librarySetExpressionBuilderScoped">The library set expression builder to use.</param>
     /// <param name="librarySet">The set of libraries to build definitions for.</param>
-    /// <returns>The dictionary of typed-IR library set definitions.</returns>
+    /// <returns>The dictionary of library set definitions.</returns>
     private CqlDefinitionDictionary BuildLibrarySetDefinitions(
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped,
         LibrarySet librarySet)

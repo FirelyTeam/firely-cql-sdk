@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026, Firely, NCQA and contributors
+ * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -47,7 +47,7 @@ internal partial class CqlOperatorsBinder(
 
     /// <summary>
     /// Facilitates binding to <see cref="ICqlOperators"/> methods,
-    /// by converting the <param ref="methodName"/> and <see cref="CodeExpression"/> <param ref="args"/>
+    /// by converting <paramref name="methodName"/> and <see cref="CodeExpression"/> <paramref name="args"/>
     /// to the appropriate overload of the method.
     /// </summary>
     /// <param name="methodName">The method to bind to.</param>
@@ -86,7 +86,7 @@ internal partial class CqlOperatorsBinder(
             ("ToList"           ,_ , _)    => ToList(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
             ("Width"            ,_ , _)    => Width(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
             _                                        => BindToBestMethodOverload(methodName, args, typeArgs)!,
-            // @formatter:om
+            // @formatter:on
         };
         return result;
 

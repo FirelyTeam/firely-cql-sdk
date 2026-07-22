@@ -12,9 +12,8 @@ using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-// The per-node print methods. These follow LambdaDefinitionWriter's output for each construct
-// so that the two pipelines can be golden-diffed during the migration; the peepholes fixed in
-// #1311 (is-patterns, casts through object) are ported here as well.
+// The per-node print methods. Their output is pinned by the golden corpora, and the peepholes
+// fixed in #1311 (is-patterns, casts through object) are preserved here as well.
 internal partial class CSharpEmitter
 {
     /// <summary>
@@ -389,37 +388,34 @@ internal partial class CSharpEmitter
 
     private string PrintBinary(CodeBinary binary, Func<CodeExpression, Atom> child)
     {
-        // ((T?)a) ?? b or (a as T?) ?? b, where a is a non-nullable T, reduces to just a — the
-        // old RedundantCastsTransformer's coalesce rule, which matched both Convert AND TypeAs
-        // on the left (the cast-then-coalesce contributes nothing once the value is known
-        // non-null, regardless of which cast kind produced the nullable wrapper).
-        if (binary is { Op: CodeBinaryOp.Coalesce, Left: CodeCast leftCast }
-            && Nullable.GetUnderlyingType(leftCast.Type) == leftCast.Operand.Type)
-            return child(leftCast.Operand).Code;
+        var leftExpression = binary.Left;
 
-        // The old RedundantCastsTransformer's remaining coalesce folds (#1361). Ordering and
-        // conditions mirror its VisitBinary exactly, and each fold returns before the discarded
-        // side is linearized, so — like the old tree-level rewrite — the dropped operand
-        // contributes no hoisted statements. Without the first fold, CQL's
-        // Message(source, true, ...) idiom prints as the invalid C# `true ?? false` (CS0019).
         if (binary.Op == CodeBinaryOp.Coalesce)
         {
-            // a (not null) ?? x => a
-            if (binary.Left is CodeConstant { Value: not null })
-                return child(binary.Left).Code;
+            leftExpression = binary.Left is CodeCast leftCast
+                && Nullable.GetUnderlyingType(leftCast.Type) == leftCast.Operand.Type
+                    ? leftCast.Operand
+                    : SimplifyCoalesceLeft(binary.Left);
 
-            var isNullableType = !binary.Left.Type.IsValueType || Nullable.GetUnderlyingType(binary.Left.Type) is not null;
+            if (!CodeTypeRules.IsNullAssignable(leftExpression.Type))
+                return child(leftExpression).Code;
+
+            // a (not null) ?? x => a
+            if (leftExpression is CodeConstant { Value: not null })
+                return child(leftExpression).Code;
+
+            var isNullableType = !leftExpression.Type.IsValueType || Nullable.GetUnderlyingType(leftExpression.Type) is not null;
 
             // default ?? x => x
-            if (binary.Left is CodeDefault && isNullableType)
+            if (leftExpression is CodeDefault && isNullableType)
                 return child(binary.Right).Code;
 
             // null_constant ?? x => x
-            if (binary.Left is CodeConstant { Value: null } && isNullableType)
+            if (leftExpression is CodeConstant { Value: null } && isNullableType)
                 return child(binary.Right).Code;
         }
 
-        var leftAtom = child(binary.Left);
+        var leftAtom = child(leftExpression);
         var left = leftAtom.Code.ParenthesizeIfNeeded();
         // LambdaDefinitionWriter.BuildBinaryExpression parenthesizes ONLY the left operand
         // ("leftCode = leftCode.ParenthesizeIfNeeded();") — rightCode is used as-is, verbatim,
@@ -452,6 +448,55 @@ internal partial class CSharpEmitter
             CodeBinaryOp.AndAlso => $"{left} && {right}",
             _ => throw new NotSupportedException($"Don't know how to print binary operator {binary.Op}."),
         };
+    }
+
+    private static CodeExpression SimplifyCoalesceLeft(CodeExpression expression)
+    {
+        while (expression is CodeBinary { Op: CodeBinaryOp.Coalesce } coalesce)
+        {
+            if (TryFoldSingleCoalesce(coalesce, out var folded))
+            {
+                expression = folded;
+                continue;
+            }
+
+            break;
+        }
+
+        return expression;
+    }
+
+    private static bool TryFoldSingleCoalesce(CodeBinary binary, out CodeExpression folded)
+    {
+        if (binary.Left is CodeCast leftCast
+            && Nullable.GetUnderlyingType(leftCast.Type) == leftCast.Operand.Type)
+        {
+            folded = leftCast.Operand;
+            return true;
+        }
+
+        var isNullableType = !binary.Left.Type.IsValueType || Nullable.GetUnderlyingType(binary.Left.Type) is not null;
+
+        if (binary.Left is CodeConstant { Value: not null })
+        {
+            folded = binary.Left;
+            return true;
+        }
+
+        if (binary.Left is CodeDefault && isNullableType)
+        {
+            folded = binary.Right;
+            return true;
+        }
+
+        if (binary.Left is CodeConstant { Value: null } && isNullableType)
+        {
+            folded = binary.Right;
+            return true;
+        }
+
+        folded = binary;
+        return false;
     }
 
     /// <summary>

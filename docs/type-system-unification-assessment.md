@@ -4,7 +4,7 @@ Companion to `generated-csharp-optimization-opportunities.md` (§3, conversion
 specialization). Assessment of whether this repo should migrate its CQL primitives
 (`Hl7.Cql.Primitives` + `Hl7.Cql.Iso8601`) onto the Firely .NET SDK's System types
 (`Hl7.Fhir.ElementModel.Types`, "P.*"), reachable from POCOs via `IToSystemPrimitive`
-(SDK ≥ 5.13.1/6.0.0; this repo references 6.2.0).
+(SDK ≥ 5.13.1/6.0.0; this repo references 6.3.0).
 
 ## Why this is a semantics question, not just deduplication
 
@@ -34,7 +34,7 @@ product family.
 
 **Where they differ** decides the question:
 
-| Capability | Cql.Primitives (here) | ElementModel.Types (SDK 6.2) |
+| Capability | Cql.Primitives (here) | ElementModel.Types (SDK 6.3) |
 |---|---|---|
 | `Interval<T>` with open/closed bounds | first-class; **186 signature references in ICqlOperators** | **absent entirely** |
 | UCUM canonicalization/conversion | yes (Fhir.Metrics 1.3), incl. the CQL calendar-unit shim | none — Quantity comparison requires exact unit equality (doc-comment overstates) |
@@ -56,7 +56,7 @@ Today the repo's only contact with P.* is incidental: `FhirTypeConverter` borrow
 **Do not migrate now; build a first-class bridge now; treat unification as an SDK-side
 roadmap item gated on a concrete gap list (below).**
 
-1. **Migration is not viable against SDK 6.2 as-is.** The absent pieces (Interval — the
+1. **Migration is not viable against SDK 6.3 as-is.** The absent pieces (Interval — the
    single largest coupling in `ICqlOperators` — UCUM math, Code/Concept semantics, tuple
    metadata) mean this repo would keep roughly half its types anyway, while paying the full
    blast radius for the other half: `ICqlOperators` + every operator/comparer

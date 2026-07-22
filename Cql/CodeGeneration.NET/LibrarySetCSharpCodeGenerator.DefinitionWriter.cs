@@ -1,11 +1,3 @@
-/*
- * Copyright (c) 2026, Firely, NCQA and contributors
- * See the file CONTRIBUTORS for details.
- *
- * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
- */
-
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.CodeModel;
 
@@ -13,9 +5,8 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class LibrarySetCSharpCodeGenerator
 {
-    // Verbatim port of LibrarySetCSharpCodeGenerator.DefinitionWriter onto the typed IR:
-    // the value set / concept / code system / code writers are Expression-free and copied
-    // as-is; only the lambda definitions dispatch to the IR-based LambdaDefinitionWriter.
+    // Writes individual definitions (value sets, concepts, code systems, codes, and lambdas)
+    // into the generated library class.
     private class DefinitionWriter
     {
         private readonly LambdaDefinitionWriter _lambdaDefinitionWriter;

@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable enable
+
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Primitives;
@@ -44,6 +46,8 @@ internal sealed class CSharpEmitterTestTuple : TupleBaseType
 internal static class CSharpEmitterTestHelpers
 {
     public static int? ApplyFunc(Func<int, int?> f, int x) => f(x);
+
+    public static bool? IdentityBool(bool? value) => value;
 }
 
 /// <summary>
@@ -517,6 +521,26 @@ public class CSharpEmitterTests
         Assert.AreEqual( // default ?? x => x
             "{\n    return 5;\n}",
             EmitBody(new CodeLambda([], defaultCoalesce)));
+
+        var n = new CodeLocal(typeof(int), "n");
+        var castCoalesce = new CodeBinary(CodeBinaryOp.Coalesce,
+            new CodeCast(n, typeof(int?), CodeCastKind.Cast),
+            new CodeConstant(5, typeof(int)));
+        Assert.AreEqual(
+            "{\n    return n;\n}",
+            EmitBody(new CodeLambda([n], castCoalesce)));
+
+        var nestedCoalesce = new CodeBinary(CodeBinaryOp.Coalesce,
+            new CodeBinary(CodeBinaryOp.Coalesce,
+                new CodeConstant(true, typeof(bool?)),
+                new CodeInvoke(
+                    null,
+                    typeof(CSharpEmitterTestHelpers).GetMethod(nameof(CSharpEmitterTestHelpers.IdentityBool))!,
+                    new CodeConstant(false, typeof(bool?)))),
+            new CodeConstant(false, typeof(bool?)));
+        Assert.AreEqual(
+            "{\n    return true;\n}",
+            EmitBody(new CodeLambda([], nestedCoalesce)));
 
         var notEqualNull = new CodeBinary(CodeBinaryOp.NotEqual, s, new CodeConstant(null, typeof(object)));
         Assert.AreEqual(

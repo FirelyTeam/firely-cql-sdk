@@ -1,11 +1,3 @@
-/*
- * Copyright (c) 2026, Firely, NCQA and contributors
- * See the file CONTRIBUTORS for details.
- *
- * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
- */
-
 using System.Diagnostics;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.CodeModel;
@@ -15,9 +7,8 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class LibrarySetCSharpCodeGenerator
 {
-    // Verbatim port of LibrarySetCSharpCodeGenerator.LibraryWriter onto the typed IR: the
-    // scaffolding it writes is Expression-free, so only the definition types and the body
-    // emitter (created per library in AppendLibraryFile) differ from the old pipeline.
+    // Writes the generated class scaffolding for one library, delegating definition bodies to
+    // CSharpEmitter.
     private class LibraryWriter
     {
         public LibraryWriter(

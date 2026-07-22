@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable enable
+
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Exceptions;
@@ -18,12 +20,11 @@ using Microsoft.Extensions.Logging.Abstractions;
 namespace CoreTests;
 
 /// <summary>
-/// Unit tests for <see cref="CqlOperatorsBinder"/> (and <see cref="CqlContextBinder"/>),
-/// the phase-3 port of <see cref="Hl7.Cql.Compiler.CqlOperatorsBinder"/> onto the typed IR.
-/// The tests build small IR argument trees directly via the <c>Hl7.Cql.Compiler.CodeModel.*</c> node
-/// constructors and assert on the resulting IR shape (bound method, generic arguments,
-/// inserted conversions, null padding) — not on emitted text; the binder's contract is the
-/// overload-resolution outcome, which must match the old Expression-based binder's.
+/// Unit tests for <see cref="CqlOperatorsBinder"/> (and <see cref="CqlContextBinder"/>).
+/// The tests build small IR argument trees directly via the
+/// <c>Hl7.Cql.Compiler.CodeModel.*</c> node constructors and assert on the resulting IR shape
+/// (bound method, generic arguments, inserted conversions, null padding) — not on emitted
+/// text; the binder's contract is the overload-resolution outcome.
 /// </summary>
 [TestClass]
 public class CqlOperatorsBinderTests
@@ -185,8 +186,7 @@ public class CqlOperatorsBinderTests
     [TestMethod]
     public void Coalesce_NonNullableValueTypeList_Throws()
     {
-        // Mirrors the old binder's contract (see LibraryPreprocessorTest): Coalesce<T>
-        // requires T to be a reference type or Nullable<U>.
+        // Coalesce<T> requires T to be a reference type or Nullable<U>.
         var binder = CreateBinder();
         var source = new CodeConstant(new[] { 1, 2, 3 }, typeof(IEnumerable<int>));
 
@@ -198,9 +198,8 @@ public class CqlOperatorsBinderTests
     [TestMethod]
     public void Coalesce_NullableValueTupleList_UsesCoalesceWithNullableElementType()
     {
-        // Regression test (#1307/#1313), ported from the old (deleted) CqlOperatorsBinder
-        // tests (see LibraryPreprocessorTest): Coalesce over a list of nullable value tuples
-        // must bind to the unconstrained Coalesce<T> with T = the nullable tuple type, so the
+        // Regression test (#1307/#1313): Coalesce over a list of nullable value tuples must
+        // bind to the unconstrained Coalesce<T> with T = the nullable tuple type, so the
         // no-match result is null.
         var binder = CreateBinder();
         var source = new CodeConstant(
@@ -220,9 +219,8 @@ public class CqlOperatorsBinderTests
     [TestMethod]
     public void Coalesce_HedisNullableTupleList_UsesCoalesceWithNullableElementType()
     {
-        // Regression test (#1307/#1313), ported from the old (deleted) CqlOperatorsBinder
-        // tests (see LibraryPreprocessorTest): exact HEDIS 2025 shape that previously failed
-        // with CS0452.
+        // Regression test (#1307/#1313): exact HEDIS 2025 shape that previously failed with
+        // CS0452.
         var binder = CreateBinder();
         IEnumerable<(CqlTupleMetadata, bool? isInpatient, bool? isEdVisit, CqlInterval<CqlDate> inpatientPeriod, CqlDate historyReferenceDate, CqlDate episodeDate)?> source =
         [
@@ -256,8 +254,8 @@ public class CqlOperatorsBinderTests
     [TestMethod]
     public void UnknownMethod_Throws()
     {
-        // Phase 6 unified this with CannotBindToCqlOperatorError (the same error the old binder
-        // threw), so the exception is now a CqlException, not a plain InvalidOperationException.
+        // Invalid bindings surface as CannotBindToCqlOperatorError, so the exception is a
+        // typed CqlException rather than a plain InvalidOperationException.
         var binder = CreateBinder();
         var argument = new CodeConstant(1, typeof(int?));
 

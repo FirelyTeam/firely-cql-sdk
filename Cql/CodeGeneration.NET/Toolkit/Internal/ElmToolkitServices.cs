@@ -76,9 +76,8 @@ internal readonly record struct ElmToolkitServices(
         services.TryAddSingleton(_ => expressionBuilderSettings);
         services.TryAddScoped<TupleBuilderCache>();
 
-        // Typed-IR pipeline (docs/linq-expression-removal-plan.md) -- the sole builder/generator
-        // pipeline as of phase 6. Shares TypeResolver/TypeConverter/TupleBuilderCache/
-        // LibraryPreprocessorBuilder above.
+        // Register the compiler/code-generation pipeline components. These share the
+        // TypeResolver/TypeConverter/TupleBuilderCache/LibraryPreprocessorBuilder above.
         services.TryAddSingleton<CqlOperatorsBinder>();
         services.TryAddSingleton<CqlContextBinder>();
         services.TryAddScoped<ExpressionBuilder>();

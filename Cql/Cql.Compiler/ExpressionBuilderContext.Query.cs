@@ -89,7 +89,6 @@ partial class ExpressionBuilderContext
                         // A 'with' is a semi-join and a 'without' an anti-semi-join: each source
                         // element is kept or dropped based on whether a matching related element
                         // exists, and is emitted at most once no matter how many elements match.
-                        // (Ported from the old builder's eb8a22211, which fixed #1366.)
                         var existsLambda = WithToExistenceCheck(scopeParameter, relationship);
                         @return = BindCqlOperator(nameof(ICqlOperators.Where), @return, existsLambda);
                     }
@@ -322,9 +321,8 @@ partial class ExpressionBuilderContext
 
         CodeExpression CopyValueTupleIntoCqlTuple()
         {
-            // NOTE(phase4): the reflection-emitted CQL tuple type is constructed via CodeTupleInit
-            // (matching every element to its property by name) rather than CodeNew + CodeMemberInit,
-            // per the phase-4 node-type mapping for CQL tuple types.
+            // Reflection-emitted CQL tuple types are constructed via CodeTupleInit so the
+            // generated value-tuple literal can bind elements by tuple-property name.
             var elements = valueTupleFields
                           .Zip(cqlTupleProperties, (valueTupleField, cqlTupleProp) => (valueTupleField, cqlTupleProp))
                           .SelectToArray(
@@ -932,10 +930,9 @@ partial class ExpressionBuilderContext
             tupleType = TupleTypeFor(tupleTypeSpecifier);
         }
 
-        // NOTE(phase4): the reflection-emitted CQL tuple type is constructed via CodeTupleInit
-        // rather than CodeNew + CodeMemberInit, per the phase-4 node-type mapping for CQL tuple
-        // types. Binding(...) is still used per element so that the same coercion logic
-        // (array/ICollection conversions, ChangeType fallback) applies as before.
+        // Reflection-emitted CQL tuple types are constructed via CodeTupleInit rather than
+        // CodeNew + CodeMemberInit so tuple literals keep the tuple-specific print shape while
+        // still reusing Binding(...) for per-element coercions.
         if (tuple.element?.Length > 0)
         {
             var elementBindings =
@@ -952,6 +949,9 @@ partial class ExpressionBuilderContext
             var init = new CodeTupleInit(tupleType, elementBindings);
             return init;
         }
+
+        if (tupleType == typeof(object))
+            return new CodeNew(typeof(object).GetConstructor(Type.EmptyTypes)!);
 
         return new CodeTupleInit(tupleType, []);
     }

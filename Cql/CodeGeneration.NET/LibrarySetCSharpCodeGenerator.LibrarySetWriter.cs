@@ -1,11 +1,3 @@
-/*
- * Copyright (c) 2026, Firely, NCQA and contributors
- * See the file CONTRIBUTORS for details.
- *
- * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
- */
-
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Runtime;
@@ -14,8 +6,7 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class LibrarySetCSharpCodeGenerator
 {
-    // Verbatim port of LibrarySetCSharpCodeGenerator.LibrarySetWriter onto the typed IR
-    // (only the definitions dictionary type differs).
+    // Coordinates per-library C# generation for a library set.
     private class LibrarySetWriter(
         LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator,
         LibrarySet librarySet,

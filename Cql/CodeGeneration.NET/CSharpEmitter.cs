@@ -11,26 +11,21 @@ using Hl7.Cql.Compiler.CodeModel;
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
-/// Prints the typed IR (<see cref="CodeExpression"/>) as C#. This replaces the combination of
-/// the four expression-tree rewrite passes and <c>LambdaDefinitionWriter</c> in the previous
-/// pipeline:
+/// Prints <see cref="CodeExpression"/> trees as C#.
 ///
 /// <list type="bullet">
 /// <item>nested expressions are linearized into sequential <c>T a_ = …;</c> declarations at
-/// print time (was <c>SimplifyExpressionsVisitor</c>);</item>
-/// <item>variable names are allocated per method scope from a shared sequence
-/// (was <c>RenameVariablesVisitor</c>);</item>
+/// print time;</item>
+/// <item>variable names are allocated per method scope from a shared sequence;</item>
 /// <item>identical right-hand sides reuse the earlier local, keyed on the printed code and
-/// declared type (was <c>LocalVariableDeduper</c>'s DebugView comparison);</item>
-/// <item>lambdas print as local functions, if-chains as native <c>if</c>/<c>else</c>
-/// statements (no lambda-wrap tricks).</item>
+/// declared type;</item>
+/// <item>lambdas print as local functions, and if-chains as native <c>if</c>/<c>else</c>
+/// statements.</item>
 /// </list>
 ///
-/// <para>The printed output deliberately follows the existing generated-code style so that
-/// the golden-file tests (<c>CSharpGenerationGoldenTests</c>) can compare the two pipelines
-/// during the migration. Once the old pipeline is deleted and byte-parity no longer
-/// constrains the output, the printing backend is free to change (e.g. reformatting, or
-/// emitting Roslyn syntax trees from the IR) without touching the IR itself.</para>
+/// <para>The printed output is pinned by the golden-file tests
+/// (<c>CSharpGenerationGoldenTests</c>); changing it requires regenerating the checked-in
+/// golden files and bumping <c>GeneratorToolVersion</c>.</para>
 ///
 /// <para>Instances are not thread-safe: naming state is per emission, reset at the start of
 /// each <see cref="EmitBodyBlock"/>/<see cref="TryEmitExpressionBody"/> call.</para>

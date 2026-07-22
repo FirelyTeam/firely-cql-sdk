@@ -6,10 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable enable
+
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Compiler.Preprocessing;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -18,11 +21,10 @@ using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 namespace Hl7.Cql.CqlToElm.Test;
 
 /// <summary>
-/// First end-to-end integration tests for the phase-4 typed-IR builder pipeline
-/// (<see cref="LibraryExpressionBuilder"/> et al.) feeding into the phase-3
-/// <see cref="CSharpEmitter"/>. Nothing exercised this combination before these tests; the
-/// assertions are deliberately loose (shape-level <see cref="StringAssert.Contains"/> checks,
-/// not byte-exact comparisons) since byte-parity with the old pipeline is a phase-5 concern.
+/// End-to-end integration tests for the builder pipeline
+/// (<see cref="LibraryExpressionBuilder"/> et al.) feeding into <see cref="CSharpEmitter"/>.
+/// Assertions are deliberately shape-level (<see cref="StringAssert.Contains"/> checks, not
+/// byte-exact comparisons); byte-exact output is covered by the golden-file tests.
 /// </summary>
 [TestClass]
 public class CodeModelPipelineTests : Base
@@ -220,6 +222,31 @@ public class CodeModelPipelineTests : Base
     }
 
     [TestMethod]
+    public void EmptyTupleLiteral_EmitsObjectConstruction()
+    {
+        var elmLibrary = new Library
+        {
+            identifier = new VersionedIdentifier { id = "EmptyTupleLiteral", version = "1.0.0" },
+            schemaIdentifier = new VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+            statements =
+            [
+                new ExpressionDef
+                {
+                    name = "T",
+                    context = "Patient",
+                    expression = new Hl7.Cql.Elm.Tuple { element = [] }
+                }
+            ]
+        };
+        var definitions = BuildCqlDefinitions(elmLibrary);
+
+        var body = EmitDefinition(elmLibrary, definitions, "T");
+
+        AssertWellFormedBody(body);
+        StringAssert.Contains(body, "new object()");
+    }
+
+    [TestMethod]
     public void ListLiteralWithFirst_EmitsFirstCall()
     {
         var (library, definitions) = BuildIr("""
@@ -285,11 +312,9 @@ public class CodeModelPipelineTests : Base
     }
 
     /// <summary>
-    /// Phase-5 smoke test: run one CQL library end to end through BOTH C#-generation
-    /// pipelines — the existing Expression-based <c>LibrarySetCSharpCodeGenerator</c> (via the
-    /// toolkit services, see <see cref="Base.Run"/>) and the typed-IR
-    /// <c>LibrarySetCSharpCodeGenerator</c> — and assert the generated library files are
-    /// byte-identical (modulo line endings, like <c>CSharpGenerationGoldenTests</c>).
+    /// Smoke test: compare the toolkit-composed and hand-built compositions of the current
+    /// builder/generator pipeline and assert that they generate identical C# (modulo line
+    /// endings, like <c>CSharpGenerationGoldenTests</c>).
     /// </summary>
     [TestMethod]
     public void SmokeTest_ToolkitAndHandBuiltComposition_GenerateIdenticalCSharp()

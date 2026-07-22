@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026, Firely, NCQA and contributors
+ * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -23,8 +23,7 @@ partial class CqlOperatorsBinder
 {
     /// <summary>
     /// The <c>context.Operators</c> property access used as the receiver of every
-    /// <see cref="ICqlOperators"/> call. Corresponds to <c>CqlExpressions.Operators_PropertyExpression</c>
-    /// in the old binder.
+    /// <see cref="ICqlOperators"/> call.
     /// </summary>
     private static CodeExpression OperatorsReceiver { get; } =
         new CodeProperty(CodeContextParameter.Instance, typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!);

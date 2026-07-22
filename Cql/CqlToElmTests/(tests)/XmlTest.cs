@@ -96,11 +96,8 @@ namespace Hl7.Cql.CqlToElm.Test
 
             Expression equal = Equals(expression, expectation);
             // Runs through the real ELM -> IR -> C# -> assembly pipeline (Base.Run), same as
-            // every other test in this suite -- the old Expression.Compile()/DynamicInvoke path
-            // this used is gone now that the typed-IR pipeline is the only pipeline (phase 6 of
-            // the Linq.Expressions removal, see docs/linq-expression-removal-plan.md); CodeLambda
-            // has no Compile() (this also completes the long-standing TODO below to run through
-            // the AssemblyCompiler).
+            // every other test in this suite. CodeLambda has no Compile(), so this path also
+            // covers the long-standing TODO below to execute via the AssemblyCompiler.
             var equalResult = (bool?)Run(equal, CreateTempLibrary(), CqlContext);
             if (equalResult != true)
             {
