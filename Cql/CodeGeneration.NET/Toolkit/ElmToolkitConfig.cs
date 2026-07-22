@@ -80,10 +80,10 @@ public record ElmToolkitConfig(
     public bool AllowUnresolvedExternals { get; init; } = AllowUnresolvedExternals;
 
     /// <summary>
-    /// Converts the current configuration settings to <see cref="ExpressionBuilderSettings"/>.
+    /// Converts the current configuration settings to <see cref="CodeBuilderSettings"/>.
     /// </summary>
-    /// <returns>An instance of <see cref="ExpressionBuilderSettings"/> with the current configuration settings.</returns>
-    internal ExpressionBuilderSettings ToExpressionBuilderSettings() => new()
+    /// <returns>An instance of <see cref="CodeBuilderSettings"/> with the current configuration settings.</returns>
+    internal CodeBuilderSettings ToCodeBuilderSettings() => new()
     {
         AllowScopeRedefinition = AllowScopeRedefinition,
         AllowUnresolvedExternals = AllowUnresolvedExternals

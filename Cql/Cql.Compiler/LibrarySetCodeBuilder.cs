@@ -13,11 +13,11 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// Creates a <see cref="LibrarySetExpressionBuilderContext"/> per library set; see the
-/// remarks on <see cref="ExpressionBuilderContext"/>.
+/// Creates a <see cref="LibrarySetCodeBuilderContext"/> per library set; see the
+/// remarks on <see cref="CodeBuilderContext"/>.
 /// </summary>
-internal class LibrarySetExpressionBuilder(
-    LibraryExpressionBuilder libraryExpressionBuilder,
+internal class LibrarySetCodeBuilder(
+    LibraryCodeBuilder libraryCodeBuilder,
     LibraryPreprocessorBuilder libraryPreprocessorBuilder)
 {
     public IEnumerable<(Library library, CqlDefinitionDictionary libraryDefinitions)> BuildEachLibraryDefinitions(
@@ -25,11 +25,11 @@ internal class LibrarySetExpressionBuilder(
         CqlDefinitionDictionary librarySetDefinitions,
         BatchProcessExceptionHandlingStrategyBuilder<Library>? errorStrategyBuilder = null,
         Action<Library>? onNextLibrary = null) =>
-        NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
+        NewLibrarySetCodeBuilderContext(librarySet, librarySetDefinitions)
             .BuildEachLibraryDefinitions(errorStrategyBuilder, onNextLibrary);
 
-    private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
+    private LibrarySetCodeBuilderContext NewLibrarySetCodeBuilderContext(
         LibrarySet librarySet,
         CqlDefinitionDictionary librarySetDefinitions) =>
-        new(libraryExpressionBuilder, libraryPreprocessorBuilder, librarySet, librarySetDefinitions);
+        new(libraryCodeBuilder, libraryPreprocessorBuilder, librarySet, librarySetDefinitions);
 }

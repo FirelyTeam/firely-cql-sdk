@@ -24,7 +24,7 @@ using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 /// References to other definitions (expressions, functions, parameters, codes, code systems,
 /// concepts, value sets), retrieves, and the runtime-context invocation helpers.
 /// </summary>
-partial class ExpressionBuilderContext
+partial class CodeBuilderContext
 {
     protected CodeExpression FunctionRef(FunctionRef op)
     {
@@ -384,7 +384,7 @@ partial class ExpressionBuilderContext
     }
 
     /// <summary>
-    /// Splits a <see cref="LibraryExpressionBuilderContext.LibraryVersionedIdentifier"/>-shaped
+    /// Splits a <see cref="LibraryCodeBuilderContext.LibraryVersionedIdentifier"/>-shaped
     /// string (e.g. <c>"FHIRHelpers-4.0.1"</c>) back into its name and version parts, for
     /// <see cref="CodeDefinitionCall"/>, which (unlike the old <c>DefinitionCallExpression</c>/
     /// <c>FunctionCallExpression</c>, which only ever carried the combined key for a runtime

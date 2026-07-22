@@ -149,7 +149,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         var cSharps = GenerateCSharp(
             _services.LibrarySetCSharpCodeGenerator,
             librarySet,
-            BuildLibrarySetDefinitions(servicesScope.LibrarySetExpressionBuilder, librarySet),
+            BuildLibrarySetDefinitions(servicesScope.LibrarySetCodeBuilder, librarySet),
             cSharpNamespace);
         var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat);
 
@@ -246,15 +246,15 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <summary>
     /// Builds the library set definitions.
     /// </summary>
-    /// <param name="librarySetExpressionBuilderScoped">The library set expression builder to use.</param>
+    /// <param name="librarySetCodeBuilderScoped">The library set expression builder to use.</param>
     /// <param name="librarySet">The set of libraries to build definitions for.</param>
     /// <returns>The dictionary of library set definitions.</returns>
     private CqlDefinitionDictionary BuildLibrarySetDefinitions(
-        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped,
+        LibrarySetCodeBuilder librarySetCodeBuilderScoped,
         LibrarySet librarySet)
     {
         CqlDefinitionDictionary librarySetDefinitions = new();
-        librarySetExpressionBuilderScoped
+        librarySetCodeBuilderScoped
             .BuildEachLibraryDefinitions(
                 librarySet,
                 librarySetDefinitions,

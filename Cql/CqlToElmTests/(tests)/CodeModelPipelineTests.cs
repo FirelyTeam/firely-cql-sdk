@@ -22,7 +22,7 @@ namespace Hl7.Cql.CqlToElm.Test;
 
 /// <summary>
 /// End-to-end integration tests for the builder pipeline
-/// (<see cref="LibraryExpressionBuilder"/> et al.) feeding into <see cref="CSharpEmitter"/>.
+/// (<see cref="LibraryCodeBuilder"/> et al.) feeding into <see cref="CSharpEmitter"/>.
 /// Assertions are deliberately shape-level (<see cref="StringAssert.Contains"/> checks, not
 /// byte-exact comparisons); byte-exact output is covered by the golden-file tests.
 /// </summary>
@@ -69,21 +69,21 @@ public class CodeModelPipelineTests : Base
         var cqlOperatorsBinder = new CqlOperatorsBinder(NullLogger<CqlOperatorsBinder>.Instance, typeResolver, typeConverter);
         var cqlContextBinder = new CqlContextBinder();
 
-        var expressionBuilder = new ExpressionBuilder(
-            NullLogger<ExpressionBuilder>.Instance,
-            ExpressionBuilderSettings.Default,
+        var expressionBuilder = new CodeBuilder(
+            NullLogger<CodeBuilder>.Instance,
+            CodeBuilderSettings.Default,
             cqlOperatorsBinder,
             tupleBuilderCache,
             typeResolver,
             typeConverter,
             cqlContextBinder);
 
-        var libraryExpressionBuilder = new LibraryExpressionBuilder(
-            NullLogger<LibraryExpressionBuilder>.Instance,
+        var libraryCodeBuilder = new LibraryCodeBuilder(
+            NullLogger<LibraryCodeBuilder>.Instance,
             expressionBuilder,
             libraryPreprocessorBuilder);
 
-        return libraryExpressionBuilder.ProcessLibrary(library);
+        return libraryCodeBuilder.ProcessLibrary(library);
     }
 
     /// <summary>

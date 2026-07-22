@@ -20,7 +20,7 @@ using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 /// The ELM operators (arithmetic, comparison, messaging, interval, nullological and type
 /// operators, plus the ChangeType helpers).
 /// </summary>
-partial class ExpressionBuilderContext
+partial class CodeBuilderContext
 {
     #region ArithmeticOperators
 

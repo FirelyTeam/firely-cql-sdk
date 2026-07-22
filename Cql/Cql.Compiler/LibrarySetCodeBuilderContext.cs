@@ -15,20 +15,20 @@ namespace Hl7.Cql.Compiler;
 
 /// <summary>
 /// Orchestrates building each library of a library set and merging its definitions; see the
-/// remarks on <see cref="ExpressionBuilderContext"/>.
+/// remarks on <see cref="CodeBuilderContext"/>.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
-internal class LibrarySetExpressionBuilderContext : IBuilderContext
+internal class LibrarySetCodeBuilderContext : IBuilderContext
 {
-    private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
+    private readonly LibraryCodeBuilder _libraryCodeBuilder;
 
-    public LibrarySetExpressionBuilderContext(
-        LibraryExpressionBuilder libraryExpressionBuilder,
+    public LibrarySetCodeBuilderContext(
+        LibraryCodeBuilder libraryCodeBuilder,
         LibraryPreprocessorBuilder libraryPreprocessorBuilder,
         LibrarySet librarySet,
         CqlDefinitionDictionary librarySetDefinitions)
     {
-        _libraryExpressionBuilder = libraryExpressionBuilder;
+        _libraryCodeBuilder = libraryCodeBuilder;
         LibrarySetDefinitions = librarySetDefinitions;
         LibrarySet = librarySet;
         Preprocessor = libraryPreprocessorBuilder.Build(librarySet);
@@ -57,7 +57,7 @@ internal class LibrarySetExpressionBuilderContext : IBuilderContext
                     prebuildLibraryHandler?.Invoke(library);
                     return this.CatchRethrowExpressionBuildingException(_ =>
                     {
-                        var libraryDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);
+                        var libraryDefinitions = _libraryCodeBuilder.ProcessLibrary(library, null, this);
                         LibrarySetDefinitions.Merge(libraryDefinitions);
                         return (library, libraryDefinitions);
                     });

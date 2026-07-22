@@ -21,7 +21,7 @@ using CodeExpressionElementPairForIdentifier = System.Collections.Generic.KeyVal
 /// Queries (query sources, where/return/aggregate/sort clauses, relationship clauses) plus
 /// the property/instance/tuple construction machinery.
 /// </summary>
-partial class ExpressionBuilderContext
+partial class CodeBuilderContext
 {
     #region Query
 
@@ -117,7 +117,7 @@ partial class ExpressionBuilderContext
                     if (query.@return.distinct)
                     {
                         // NOTE(phase4): ported as-is — `qt`/`t` are computed but never used, matching
-                        // the old ExpressionBuilderContext.Query's dead code.
+                        // the old CodeBuilderContext.Query's dead code.
                         var qt = query.GetTypeSpecifier();
                         var t = TypeFor(qt, false);
                         @return = BindCqlOperator(nameof(ICqlOperators.Distinct), [@return]);

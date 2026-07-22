@@ -51,7 +51,7 @@
 //             var errors = lib.GetErrors();
 //             errors.Should().BeEmpty();
 //
-//             var eb = LibraryExpressionBuilder;
+//             var eb = LibraryCodeBuilder;
 //             var lambdas = eb.ProcessLibrary(lib);
 //             var delegates = lambdas.CompileAll();
 //         }

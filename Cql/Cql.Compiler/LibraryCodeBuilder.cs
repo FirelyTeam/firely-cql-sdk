@@ -12,32 +12,32 @@ using Hl7.Cql.Elm;
 namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
+/// Encapsulates the CodeBuilder and state dictionaries for building definitions.
 /// </summary>
-internal class LibraryExpressionBuilder(
-    ILogger<LibraryExpressionBuilder> logger,
-    ExpressionBuilder expressionBuilder,
+internal class LibraryCodeBuilder(
+    ILogger<LibraryCodeBuilder> logger,
+    CodeBuilder expressionBuilder,
     LibraryPreprocessorBuilder libraryPreprocessorBuilder)
 {
     public CqlDefinitionDictionary ProcessLibrary(
         Library library,
         CqlDefinitionDictionary? libraryDefinitions = null,
-        LibrarySetExpressionBuilderContext? libsCtx = null) =>
-        NewLibraryExpressionBuilderContext(library, libraryDefinitions, libsCtx)
+        LibrarySetCodeBuilderContext? libsCtx = null) =>
+        NewLibraryCodeBuilderContext(library, libraryDefinitions, libsCtx)
             .ProcessLibrary();
 
-    public LibraryExpressionBuilderContext NewLibraryExpressionBuilderContext(
+    public LibraryCodeBuilderContext NewLibraryCodeBuilderContext(
         Library library,
         CqlDefinitionDictionary? libraryDefinitions = null,
-        LibrarySetExpressionBuilderContext? libsCtx = null) =>
+        LibrarySetCodeBuilderContext? libsCtx = null) =>
         new(logger, expressionBuilder, libraryPreprocessorBuilder, library, libraryDefinitions ?? new(), libsCtx);
 
-    public ExpressionBuilderContext NewExpressionBuilderContext(
+    public CodeBuilderContext NewCodeBuilderContext(
         Library library,
         CqlDefinitionDictionary? libraryDefinitions = null,
         Dictionary<string, CodeLocal>? operands = null)
     {
-        var libraryExpressionBuilderContext = NewLibraryExpressionBuilderContext(library, libraryDefinitions);
-        return expressionBuilder.NewExpressionBuilderContext(libraryExpressionBuilderContext, operands);
+        var libraryCodeBuilderContext = NewLibraryCodeBuilderContext(library, libraryDefinitions);
+        return expressionBuilder.NewCodeBuilderContext(libraryCodeBuilderContext, operands);
     }
 }

@@ -45,9 +45,9 @@ public class IsNullTest
         var elmLibrary = CreateElmLibrary(libraryString);
 
         // Act
-        var libraryExpressionBuilder = servicesScope.ServiceProvider
-                                                    .GetRequiredService<LibraryExpressionBuilder>();
-        var definitions = libraryExpressionBuilder.ProcessLibrary(elmLibrary);
+        var libraryCodeBuilder = servicesScope.ServiceProvider
+                                                    .GetRequiredService<LibraryCodeBuilder>();
+        var definitions = libraryCodeBuilder.ProcessLibrary(elmLibrary);
 
         // Assert
         Assert.IsNotNull(definitions);
@@ -75,7 +75,7 @@ public class IsNullTest
 
         // Act
         var definitions = servicesScope.ServiceProvider
-                                       .GetRequiredService<LibraryExpressionBuilder>()
+                                       .GetRequiredService<LibraryCodeBuilder>()
                                        .ProcessLibrary(elmLibrary);
 
         // Assert
@@ -104,7 +104,7 @@ public class IsNullTest
 
         // Act
         var definitions = servicesScope.ServiceProvider
-                                       .GetRequiredService<LibraryExpressionBuilder>()
+                                       .GetRequiredService<LibraryCodeBuilder>()
                                        .ProcessLibrary(elmLibrary);
 
         // Assert
@@ -133,7 +133,7 @@ public class IsNullTest
 
         // Act
         var definitions = servicesScope.ServiceProvider
-                                       .GetRequiredService<LibraryExpressionBuilder>()
+                                       .GetRequiredService<LibraryCodeBuilder>()
                                        .ProcessLibrary(elmLibrary);
 
         // Assert
@@ -162,7 +162,7 @@ public class IsNullTest
 
         // Act
         var definitions = servicesScope.ServiceProvider
-                                       .GetRequiredService<LibraryExpressionBuilder>()
+                                       .GetRequiredService<LibraryCodeBuilder>()
                                        .ProcessLibrary(elmLibrary);
 
         // Assert

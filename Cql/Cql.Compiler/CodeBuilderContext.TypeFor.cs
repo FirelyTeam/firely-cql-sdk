@@ -17,7 +17,7 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Resolving the .NET type for an ELM element or type specifier.
 /// </summary>
-partial class ExpressionBuilderContext
+partial class CodeBuilderContext
 {
     private Type? TypeFor(
         Element element,

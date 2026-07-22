@@ -16,7 +16,7 @@ using CodeExpressionElementPairForIdentifier = System.Collections.Generic.KeyVal
 /// The query alias / let scope stack; scope dictionary values are
 /// <c>(CodeExpression, Element)</c> pairs.
 /// </summary>
-partial class ExpressionBuilderContext
+partial class CodeBuilderContext
 {
     protected IReadOnlyDictionary<string, (CodeExpression expr, Elm.Element element)> Scopes
     {
@@ -107,10 +107,10 @@ partial class ExpressionBuilderContext
 
     private readonly record struct PopScopesToken : IPopToken
     {
-        private readonly ExpressionBuilderContext _owner;
+        private readonly CodeBuilderContext _owner;
         private readonly object? _prevId;
 
-        public PopScopesToken(ExpressionBuilderContext owner, object? prevId)
+        public PopScopesToken(CodeBuilderContext owner, object? prevId)
         {
             _owner = owner;
             _prevId = prevId;

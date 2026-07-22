@@ -19,11 +19,11 @@ namespace Hl7.Cql.Compiler;
 /// directly rather than ported.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
-partial class ExpressionBuilderContext : IBuilderContext
+partial class CodeBuilderContext : IBuilderContext
 {
-    private IBuilderContext CreateBuilderNode() => new ExpressionBuilderNode()
+    private IBuilderContext CreateBuilderNode() => new CodeBuilderNode()
     {
-        LibraryExpressionBuilder = _libraryContext,
+        LibraryCodeBuilder = _libraryContext,
         ElementStackList = [.. _elementStack],
         ElementStackPosition = 0,
     };
@@ -55,15 +55,15 @@ partial class ExpressionBuilderContext : IBuilderContext
         return new PopElementToken(this, previous);
     }
 
-    private readonly record struct ExpressionBuilderNode : IBuilderContext
+    private readonly record struct CodeBuilderNode : IBuilderContext
     {
-        public LibraryExpressionBuilderContext LibraryExpressionBuilder { get; init; }
+        public LibraryCodeBuilderContext LibraryCodeBuilder { get; init; }
         public IReadOnlyList<Elm.Element> ElementStackList { get; init; }
         public int ElementStackPosition { get; init; }
 
         public IBuilderContext? OuterBuilderContext => ElementStackPosition < ElementStackList.Count - 1
             ? this with { ElementStackPosition = ElementStackPosition + 1 }
-            : LibraryExpressionBuilder;
+            : LibraryCodeBuilder;
 
         public BuilderContextDebuggerInfo? DebuggerInfo => ElementStackPosition >= 0 && ElementStackPosition < ElementStackList.Count
             ? BuilderContextDebuggerInfo.FromElement(ElementStackList[ElementStackPosition])
@@ -72,11 +72,11 @@ partial class ExpressionBuilderContext : IBuilderContext
 
     private readonly record struct PopElementToken : IPopToken
     {
-        private readonly ExpressionBuilderContext _owner;
+        private readonly CodeBuilderContext _owner;
         private readonly Elm.Element? _previousElement;
 
         [DebuggerStepThrough]
-        public PopElementToken(ExpressionBuilderContext owner, Elm.Element? previousElement)
+        public PopElementToken(CodeBuilderContext owner, Elm.Element? previousElement)
         {
             _owner = owner;
             _previousElement = previousElement;

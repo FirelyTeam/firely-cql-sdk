@@ -42,7 +42,7 @@ internal readonly record struct ElmToolkitServices(
         IServiceCollection services,
         ElmToolkitConfig config)
     {
-        var expressionBuilderSettings = config.ToExpressionBuilderSettings();
+        var expressionBuilderSettings = config.ToCodeBuilderSettings();
         AddCqlCompilerServices(services, config.LRUCacheSize, expressionBuilderSettings);
         services.TryAddSingleton<TypeToCSharpConverter>();
         services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
@@ -55,9 +55,9 @@ internal readonly record struct ElmToolkitServices(
     public static IServiceCollection AddCqlCompilerServices(
         IServiceCollection services,
         int lruCacheSize = 0,
-        ExpressionBuilderSettings? expressionBuilderSettings = null)
+        CodeBuilderSettings? expressionBuilderSettings = null)
     {
-        expressionBuilderSettings ??= ExpressionBuilderSettings.Default;
+        expressionBuilderSettings ??= CodeBuilderSettings.Default;
         services.TryAddSingleton(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
 
@@ -80,9 +80,9 @@ internal readonly record struct ElmToolkitServices(
         // TypeResolver/TypeConverter/TupleBuilderCache/LibraryPreprocessorBuilder above.
         services.TryAddSingleton<CqlOperatorsBinder>();
         services.TryAddSingleton<CqlContextBinder>();
-        services.TryAddScoped<ExpressionBuilder>();
-        services.TryAddScoped<LibraryExpressionBuilder>();
-        services.TryAddScoped<LibrarySetExpressionBuilder>();
+        services.TryAddScoped<CodeBuilder>();
+        services.TryAddScoped<LibraryCodeBuilder>();
+        services.TryAddScoped<LibrarySetCodeBuilder>();
 
         return services;
     }

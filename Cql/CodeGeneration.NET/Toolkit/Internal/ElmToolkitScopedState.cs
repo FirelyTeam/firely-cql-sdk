@@ -13,7 +13,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 
 internal sealed class ElmToolkitScopedState(IServiceScope scope) : IDisposable
 {
-    public LibrarySetExpressionBuilder LibrarySetExpressionBuilder { get; } = scope.ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
+    public LibrarySetCodeBuilder LibrarySetCodeBuilder { get; } = scope.ServiceProvider.GetRequiredService<LibrarySetCodeBuilder>();
 
     public void Dispose() => scope.Dispose();
 }

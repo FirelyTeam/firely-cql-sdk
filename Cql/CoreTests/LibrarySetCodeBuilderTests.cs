@@ -16,7 +16,7 @@ using Hl7.Cql.Runtime;
 namespace CoreTests;
 
 [TestClass]
-public class LibrarySetExpressionBuilderTests
+public class LibrarySetCodeBuilderTests
 {
     [TestMethod]
     public void LoadLibraryAndDependencies_CrossLibraryCodeSystems()

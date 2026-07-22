@@ -16,24 +16,24 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Orchestrates building all definitions of a single library into an
 /// <see cref="CqlDefinitionDictionary"/>; see the remarks on
-/// <see cref="ExpressionBuilderContext"/>.
+/// <see cref="CodeBuilderContext"/>.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
-internal partial class LibraryExpressionBuilderContext : IBuilderContext
+internal partial class LibraryCodeBuilderContext : IBuilderContext
 {
-    private readonly ILogger<LibraryExpressionBuilder> _logger;
-    private readonly ExpressionBuilder _expressionBuilder;
+    private readonly ILogger<LibraryCodeBuilder> _logger;
+    private readonly CodeBuilder _expressionBuilder;
     private readonly CqlDefinitionDictionary _libraryDefinitions;
-    private readonly LibrarySetExpressionBuilderContext? _libsCtx;
+    private readonly LibrarySetCodeBuilderContext? _libsCtx;
     private readonly LibraryPreprocessor _preprocessor;
 
-    public LibraryExpressionBuilderContext(
-        ILogger<LibraryExpressionBuilder> logger,
-        ExpressionBuilder expressionBuilder,
+    public LibraryCodeBuilderContext(
+        ILogger<LibraryCodeBuilder> logger,
+        CodeBuilder expressionBuilder,
         LibraryPreprocessorBuilder libraryPreprocessorBuilder,
         Library library,
         CqlDefinitionDictionary libraryDefinitions,
-        LibrarySetExpressionBuilderContext? libsCtx = null)
+        LibrarySetCodeBuilderContext? libsCtx = null)
     {
         _libraryDefinitions = libraryDefinitions;
         _libsCtx = libsCtx;

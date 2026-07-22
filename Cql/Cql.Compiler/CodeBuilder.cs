@@ -13,19 +13,19 @@ using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// Creates an <see cref="ExpressionBuilderContext"/> per library; see the remarks there.
+/// Creates an <see cref="CodeBuilderContext"/> per library; see the remarks there.
 /// </summary>
-internal class ExpressionBuilder(
-    ILogger<ExpressionBuilder> logger,
-    ExpressionBuilderSettings expressionBuilderSettings,
+internal class CodeBuilder(
+    ILogger<CodeBuilder> logger,
+    CodeBuilderSettings expressionBuilderSettings,
     CqlOperatorsBinder cqlOperatorsBinder,
     TupleBuilderCache tupleBuilderCache,
     TypeResolver typeResolver,
     TypeConverter typeConverter,
     CqlContextBinder cqlContextBinder)
 {
-    private readonly ILogger<ExpressionBuilder> _logger = logger;
-    private readonly ExpressionBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
+    private readonly ILogger<CodeBuilder> _logger = logger;
+    private readonly CodeBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
     private readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
     private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
     private readonly TypeResolver _typeResolver = typeResolver;
@@ -33,46 +33,46 @@ internal class ExpressionBuilder(
     private readonly CqlContextBinder _cqlContextBinder = cqlContextBinder;
 
     /*
-     * The ExpressionBuilderContext is created anew for each of the ProcessXXX methods.
+     * The CodeBuilderContext is created anew for each of the ProcessXXX methods.
      * This works, because all but the ProcessExpressionDef methods only change state
-     * on the LibraryExpressionBuilderContext.
+     * on the LibraryCodeBuilderContext.
      *
-     * Only ProcessExpressionDef changes state on the ExpressionBuilderContext.
+     * Only ProcessExpressionDef changes state on the CodeBuilderContext.
      */
 
-    public void ProcessIncludes(LibraryExpressionBuilderContext libCtx, IncludeDef includeDef) =>
-        NewExpressionBuilderContext(libCtx)
+    public void ProcessIncludes(LibraryCodeBuilderContext libCtx, IncludeDef includeDef) =>
+        NewCodeBuilderContext(libCtx)
             .ProcessIncludes(includeDef);
 
-    internal ExpressionBuilderContext NewExpressionBuilderContext(
-        LibraryExpressionBuilderContext libCtx,
+    internal CodeBuilderContext NewCodeBuilderContext(
+        LibraryCodeBuilderContext libCtx,
         Dictionary<string, CodeLocal>? operands = null) =>
         new(_logger, _expressionBuilderSettings, _cqlOperatorsBinder, _tupleBuilderCache, _typeResolver, _typeConverter, _cqlContextBinder, libCtx, operands);
 
-    public void ProcessValueSetDef(LibraryExpressionBuilderContext libCtx, ValueSetDef valueSetDef) =>
-        NewExpressionBuilderContext(libCtx)
+    public void ProcessValueSetDef(LibraryCodeBuilderContext libCtx, ValueSetDef valueSetDef) =>
+        NewCodeBuilderContext(libCtx)
             .ProcessValueSetDef(valueSetDef);
 
     public void ProcessCodeDef(
-        LibraryExpressionBuilderContext libCtx,
+        LibraryCodeBuilderContext libCtx,
         CodeDef codeDef,
         HashSet<(string codeName, string codeSystemUrl)> foundCodeNameCodeSystemUrls) =>
-        NewExpressionBuilderContext(libCtx)
+        NewCodeBuilderContext(libCtx)
             .ProcessCodeDef(codeDef, foundCodeNameCodeSystemUrls);
 
-    public void ProcessCodeSystemDef(LibraryExpressionBuilderContext libCtx, CodeSystemDef codeSystemDef) =>
-        NewExpressionBuilderContext(libCtx)
+    public void ProcessCodeSystemDef(LibraryCodeBuilderContext libCtx, CodeSystemDef codeSystemDef) =>
+        NewCodeBuilderContext(libCtx)
             .ProcessCodeSystemDef(codeSystemDef);
 
-    public void ProcessConceptDef(LibraryExpressionBuilderContext libCtx, ConceptDef conceptDef) =>
-        NewExpressionBuilderContext(libCtx)
+    public void ProcessConceptDef(LibraryCodeBuilderContext libCtx, ConceptDef conceptDef) =>
+        NewCodeBuilderContext(libCtx)
             .ProcessConceptDef(conceptDef);
 
-    public void ProcessParameterDef(LibraryExpressionBuilderContext libCtx, ParameterDef parameterDef) =>
-        NewExpressionBuilderContext(libCtx)
+    public void ProcessParameterDef(LibraryCodeBuilderContext libCtx, ParameterDef parameterDef) =>
+        NewCodeBuilderContext(libCtx)
             .ProcessParameterDef(parameterDef);
 
-    public void ProcessExpressionDef(LibraryExpressionBuilderContext libCtx, ExpressionDef expressionDef) =>
-        NewExpressionBuilderContext(libCtx, new Dictionary<string, CodeLocal>())
+    public void ProcessExpressionDef(LibraryCodeBuilderContext libCtx, ExpressionDef expressionDef) =>
+        NewCodeBuilderContext(libCtx, new Dictionary<string, CodeLocal>())
             .ProcessExpressionDef(expressionDef);
 }

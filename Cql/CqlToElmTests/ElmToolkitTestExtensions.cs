@@ -31,8 +31,8 @@ internal static class ElmToolkitTestExtensions
     public static Scope CreateScope(this ElmToolkit elmToolkit) =>
         new (elmToolkit.ServiceProvider.CreateScope());
 
-    public static LibraryExpressionBuilder GetLibraryExpressionBuilder(this Scope elmFluentFluentToolkitScope) =>
-        elmFluentFluentToolkitScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
+    public static LibraryCodeBuilder GetLibraryCodeBuilder(this Scope elmFluentFluentToolkitScope) =>
+        elmFluentFluentToolkitScope.ServiceProvider.GetRequiredService<LibraryCodeBuilder>();
 
     internal class Scope(IServiceScope serviceScope) : IServiceScope
     {
@@ -56,8 +56,8 @@ internal static class ElmToolkitTestExtensions
         Library library)
     {
         using var scope = elmToolkit.CreateScope();
-        var libraryExpressionBuilder = scope.GetLibraryExpressionBuilder();
-        return libraryExpressionBuilder.ProcessLibrary(library);
+        var libraryCodeBuilder = scope.GetLibraryCodeBuilder();
+        return libraryCodeBuilder.ProcessLibrary(library);
     }
 
     /// <summary>
@@ -65,18 +65,18 @@ internal static class ElmToolkitTestExtensions
     /// Unlike the old (deleted) Expression-based <c>Lambda()</c>, the IR lambda carries no
     /// leading <c>CqlContext</c> parameter (the well-known <see cref="CodeContextParameter"/> is
     /// referenced directly instead) -- so this has zero declared parameters, mirroring how
-    /// <see cref="ExpressionBuilderContext"/> builds expression-definition lambdas (see
-    /// <c>ExpressionBuilderContext.LibraryDefs.cs</c>).
+    /// <see cref="CodeBuilderContext"/> builds expression-definition lambdas (see
+    /// <c>CodeBuilderContext.LibraryDefs.cs</c>).
     /// </summary>
     internal static CodeLambda Lambda(
         this ElmToolkit elmToolkit,
         Expression expression)
     {
         using var scope = elmToolkit.CreateScope();
-        var libraryExpressionBuilder = scope.GetLibraryExpressionBuilder();
+        var libraryCodeBuilder = scope.GetLibraryCodeBuilder();
 
         CqlDefinitionDictionary definitions = new();
-        var ctx = libraryExpressionBuilder.NewExpressionBuilderContext(Library, definitions);
+        var ctx = libraryCodeBuilder.NewCodeBuilderContext(Library, definitions);
         CodeExpression translated = ctx.TranslateArg(expression);
         return new CodeLambda([], translated);
     }

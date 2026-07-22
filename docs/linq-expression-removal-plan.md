@@ -45,7 +45,7 @@ ELM → C# → assembly path. Meanwhile the Expression layer costs us:
 **Current pipeline:**
 
 ```
-ELM → ExpressionBuilderContext (~2,460 lines, switch over ELM nodes)
+ELM → CodeBuilderContext (~2,460 lines, switch over ELM nodes)
     → Linq Expression tree (+ 5 custom Expression subclasses)
     → 4 visitor passes
     → LambdaDefinitionWriter (~770 lines) → C# text
@@ -77,7 +77,7 @@ contortions, `ParameterExpression` identity quirks, the visitor pipeline).
 ## Target architecture
 
 ```
-ELM → ExpressionBuilderContext (ported, same dispatch shape) → typed IR (nodes carry System.Type)
+ELM → CodeBuilderContext (ported, same dispatch shape) → typed IR (nodes carry System.Type)
     → DefinitionDictionary<CqlDefinition> (decoupled from Expression)
     → CSharpEmitter (statement-aware printer; replaces 4 visitors + LambdaDefinitionWriter)
     → C# text → AssemblyCompiler (unchanged)
@@ -146,7 +146,7 @@ standalone fixes.
 | 1 | Decouple tests from `Expression.Compile()`; cache metadata references in `AssemblyCompiler` | ✅ merged (#1311) |
 | 2 | Typed IR nodes + validating factories; `CSharpEmitter` reproducing current output | ✅ merged into feature branch ([#1331](https://github.com/FirelyTeam/firely-cql-sdk/pull/1331)) |
 | 3 | Port `CqlOperatorsBinder` + partials onto the IR (algorithm unchanged) | ✅ merged into feature branch ([#1340](https://github.com/FirelyTeam/firely-cql-sdk/pull/1340)) |
-| 4 | Port `ExpressionBuilderContext` + partials (FHIRHelpers workarounds, choice types, query machinery) | ✅ merged into feature branch ([#1344](https://github.com/FirelyTeam/firely-cql-sdk/pull/1344)) |
+| 4 | Port `CodeBuilderContext` + partials (FHIRHelpers workarounds, choice types, query machinery) | ✅ merged into feature branch ([#1344](https://github.com/FirelyTeam/firely-cql-sdk/pull/1344)) |
 | 5 | Dual-pipeline flag, golden diffs across all corpora + full suites, flip default | ✅ merged into feature branch; parity proven on RR23 + CMS56 + HEDIS 2025 ([#1346](https://github.com/FirelyTeam/firely-cql-sdk/pull/1346), [#1378](https://github.com/FirelyTeam/firely-cql-sdk/pull/1378)) |
 | 6 | Delete the Expression-based builder/binder/visitors/custom expressions; cleanup | ✅ merged into feature branch ([#1392](https://github.com/FirelyTeam/firely-cql-sdk/pull/1392), [#1394](https://github.com/FirelyTeam/firely-cql-sdk/pull/1394)); generator version intentionally unchanged because output stayed byte-identical |
 
@@ -263,7 +263,7 @@ byte-identical against the golden corpora):
 - ~~Drop the now-redundant `Ir` prefix from the IR-side type names (e.g.
   `IrLibrarySetCSharpCodeGenerator`) now that there is no Expression-side counterpart
   to disambiguate from.~~ Done — the pipeline orchestration classes took back the names
-  their deleted counterparts held (`CqlOperatorsBinder`, `ExpressionBuilderContext`, the
+  their deleted counterparts held (`CqlOperatorsBinder`, `CodeBuilderContext`, the
   `CqlDefinition` family, `LibrarySetCSharpCodeGenerator`, …). The IR node vocabulary
   (`CodeExpression`, `CodeConstant`, …, plus `CSharpEmitter`/`CodeTypeRules`/
   `CodeExpressionExtensions`) keeps the prefix: there it is descriptive, not a
@@ -314,7 +314,7 @@ regenerated goldens as the review artifact (the first one also bumps the
 
 - **Deleted** (~1,800 lines): `Cql.Compiler\Expressions\*`, `CodeGeneration.NET\Visitors\*`,
   `CqlExpressions.cs`.
-- **Rewritten onto the IR** (~4,200 lines, mostly mechanical): `ExpressionBuilderContext.cs`
+- **Rewritten onto the IR** (~4,200 lines, mostly mechanical): `CodeBuilderContext.cs`
   + partials, `CqlOperatorsBinder.*`, `CqlContextBinder.cs`, `LambdaDefinitionWriter`
   (becomes the emitter; much print logic ports verbatim), `CqlDefinition`/`CqlLambdaDefinition`.
 - **Kept unchanged**: `TypeResolver`/`TypeConverter`, `TupleBuilderCache`,

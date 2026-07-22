@@ -18,7 +18,7 @@ namespace Hl7.Cql.Compiler;
 /// parameters, value sets and expression/function definitions) into
 /// <see cref="CqlDefinition"/>s on the library context.
 /// </summary>
-partial class ExpressionBuilderContext
+partial class CodeBuilderContext
 {
     public void ProcessCodeSystemDef(
         CodeSystemDef codeSystem) =>
