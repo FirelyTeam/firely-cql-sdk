@@ -14,6 +14,12 @@ standalone `.mmd` source files and rendered ahead of time to `.svg` via
 image link. Never leave a raw ` ```mermaid ` fenced block as the only way to view a diagram meant
 for GitHub.
 
+Use the same layout engine as [firely-dqm-libraries](https://github.com/FirelyTeam/firely-dqm-libraries)'s
+diagrams: set `'layout': 'elk'` in the `%%{init: {...}}%%` directive at the top of the `.mmd` file.
+`@mermaid-js/mermaid-cli` bundles the ELK layout engine, so no extra install is needed — it applies
+to `classDiagram` as well as `flowchart`/`stateDiagram` and generally produces a less cramped
+auto-layout than Mermaid's default (dagre) for diagrams with many nodes/edges.
+
 ## File layout
 
 - One `.mmd` per diagram, next to the markdown doc that embeds it, in a sibling `diagrams/`

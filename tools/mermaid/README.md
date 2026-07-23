@@ -47,6 +47,15 @@ For a doc with more than one diagram this names the extracted files generically
 (`some-doc.diagram-01.mmd`, `-02`, ...) — rename them to something meaningful afterward and update
 the two links (source + image) each time you rename.
 
+## Layout engine
+
+Diagrams in this repo use Mermaid's ELK layout engine (bundled with `@mermaid-js/mermaid-cli`,
+no extra install needed) instead of the default (dagre) — set `'layout': 'elk'` in the
+`%%{init: {...}}%%` directive at the top of the `.mmd` file. This matches
+[firely-dqm-libraries](https://github.com/FirelyTeam/firely-dqm-libraries)'s diagrams and generally
+produces a less cramped auto-layout for diagrams with many nodes/edges (applies to `classDiagram`
+as well as `flowchart`/`stateDiagram`).
+
 ## Requirements
 
 Node.js (the scripts invoke `npx -y @mermaid-js/mermaid-cli` directly — no local install or
