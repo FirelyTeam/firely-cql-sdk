@@ -13,34 +13,39 @@ namespace Hl7.Cql.Compiler;
 #pragma warning disable CS1591
 internal static class Extensions
 {
+    /// <summary>
+    /// Formats a method call by its argument <em>types</em> (not the expressions/IR nodes that
+    /// produced them) — e.g. <c>"MethodName&lt;T1&gt;(Type1, Type2)"</c>. Used by
+    /// <see cref="CannotBindToCqlOperatorError"/>, which is expression-representation-agnostic.
+    /// </summary>
     internal static StringBuilder AppendCSharp(
         this StringBuilder sb,
         string methodName,
-        Expression[] methodArguments,
+        Type[] methodArgumentTypes,
         Type[] genericTypeArguments,
         MethodCSharpFormat? methodCSharpFormatOptions = null)
     {
         methodCSharpFormatOptions ??= Defaults.MethodCSharpFormat;
-        var methodCSharpFormatContext = new MethodExpressionsContext((methodName, methodArguments, genericTypeArguments), methodCSharpFormatOptions);
+        var methodCSharpFormatContext = new MethodTypesContext((methodName, methodArgumentTypes, genericTypeArguments), methodCSharpFormatOptions);
         var formattableString = methodCSharpFormatOptions.Format(methodCSharpFormatContext);
         var sbAdapter = new BasicStringBuilderAdapter(sb);
         formattableString.WriteTo(sbAdapter);
         return sb;
     }
 
-    private readonly record struct MethodExpressionsContext
+    private readonly record struct MethodTypesContext
     (
         (string methodName,
-            Expression[] methodArguments,
-            Type[] genericTypeArguments) MethodExpressions,
+            Type[] methodArgumentTypes,
+            Type[] genericTypeArguments) MethodTypes,
         MethodCSharpFormat MethodFormat) : IMethodCSharpFormatContext
     {
         private (string methodName,
-            Expression[] methodArguments,
-            Type[] genericTypeArguments) MethodExpressions
-        { get; } = MethodExpressions;
+            Type[] methodArgumentTypes,
+            Type[] genericTypeArguments) MethodTypes
+        { get; } = MethodTypes;
 
-        public string Name => MethodExpressions.methodName;
+        public string Name => MethodTypes.methodName;
         public TextWriterFormattableString ReturnType => default;
 
         public TextWriterFormattableString GenericArguments
@@ -49,7 +54,7 @@ internal static class Extensions
             {
                 var typeFormat = MethodFormat.ParameterFormat.TypeFormat;
                 return TextWriterFormattableString.Join(
-                    MethodExpressions
+                    MethodTypes
                         .genericTypeArguments
                         .Select(type => typeFormat.GetFormattableString(type)),
                     typeFormat.GenericArgumentTokens);
@@ -62,9 +67,9 @@ internal static class Extensions
             {
                 var typeFormat = MethodFormat.ParameterFormat.TypeFormat;
                 return TextWriterFormattableString.Join(
-                    MethodExpressions
-                        .methodArguments
-                        .Select(expression => typeFormat.GetFormattableString(expression.Type)),
+                    MethodTypes
+                        .methodArgumentTypes
+                        .Select(type => typeFormat.GetFormattableString(type)),
                     MethodFormat.ParameterTokens);
             }
         }

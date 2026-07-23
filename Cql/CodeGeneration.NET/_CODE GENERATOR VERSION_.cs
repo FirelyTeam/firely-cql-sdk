@@ -8,6 +8,10 @@
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
+// Relocated (phase 6 of the Linq.Expressions removal, docs/linq-expression-removal-plan.md) from
+// the old (deleted) LibrarySetCSharpCodeGenerator onto its IR successor, the sole surviving
+// C# generator, so ElmToolkit.GeneratorToolVersion and Cql.Packaging's
+// AddGeneratorToolVersionToParameters keep a value to read.
 internal partial class LibrarySetCSharpCodeGenerator
 {
     /// <summary>

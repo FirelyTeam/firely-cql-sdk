@@ -66,10 +66,4 @@ internal static class StringExtensions
 
         throw new InvalidOperationException($"Unbalanced parentheses in expression '{term}'");
     }
-
-#pragma warning disable SYSLIB0050 // Type or member is obsolete
-    private static readonly ObjectIDGenerator Gen = new();
-#pragma warning restore SYSLIB0050 // Type or member is obsolete
-
-    public static string GetOrCreateName(ParameterExpression p) => p.Name ?? $"var{Gen.GetId(p, out _)}";
 }

@@ -1,17 +1,16 @@
 # Hl7.Cql.CodeGeneration.NET
 
-A support package for HL7.Cql that converts .NET lambda expressions into C# source code and supports compiling the C# to .NET assemblies.
+A support package for HL7.Cql that prints a typed IR (intermediate representation) as C# source code and supports compiling the C# to .NET assemblies.
 
 ## Overview
 
-This package provides functionality to generate readable C# source code from .NET Expression objects. It's used in the CQL compilation pipeline to produce human-readable C# code from the compiled CQL expressions and can also generate .NET assemblies from that generated C#.
+This package provides functionality to generate readable C# source code from the typed IR produced by `Hl7.Cql.Compiler`. It's used in the CQL compilation pipeline to produce human-readable C# code from the compiled CQL expressions and can also generate .NET assemblies from that generated C#.
 
 ## Key Features
 
-- **Expression to C# Conversion**: Transforms .NET Expression trees into readable C# source code
+- **IR to C# Printing**: Transforms the typed IR (carrying `System.Type` on each node) into readable C# source code by direct string emission — no Roslyn syntax-tree construction
 - **Code Formatting**: Generates well-formatted, readable C# code
-- **Roslyn Integration**: Uses Microsoft.CodeAnalysis.CSharp for syntax tree generation
-- **Lambda Expression Support**: Full support for converting lambda expressions
+- **Roslyn Integration**: Uses Microsoft.CodeAnalysis.CSharp to compile already-generated C# source text into .NET assemblies
 - **Debugging Support**: Generated code includes debugging information, and debugging information is included in the .NET assemblies based on the DebugSymbolsFormat setting
 
 ## Usage

@@ -1,10 +1,12 @@
-﻿using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class LibrarySetCSharpCodeGenerator
 {
+    // Coordinates per-library C# generation for a library set.
     private class LibrarySetWriter(
         LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator,
         LibrarySet librarySet,

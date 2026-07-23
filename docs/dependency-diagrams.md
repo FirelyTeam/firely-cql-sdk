@@ -25,10 +25,10 @@ classDiagram
     direction LR
 
     namespace Compiler {
-        class LibrarySetExpressionBuilder { }    
-        class LibraryExpressionBuilder { }    
-        class ExpressionBuilder { }    
-        class ExpressionBuilderSettings { }    
+        class LibrarySetCodeBuilder { }    
+        class LibraryCodeBuilder { }    
+        class CodeBuilder { }    
+        class CodeBuilderSettings { }    
         class TupleBuilderCache { }
         class CqlContextBinder { }
         class CqlOperatorsBinder { }       
@@ -49,6 +49,7 @@ classDiagram
 
     namespace Runtime {
         class BaseTypeResolver { }
+        class TypeConverter { }
     }
 
     namespace Fhir {
@@ -56,14 +57,10 @@ classDiagram
         class ModelInspector { }
     }
 
-    namespace Conversion {
-        class TypeConverter { }
-    }
-
     %% Style Scoped Types as Cyan
-    style LibrarySetExpressionBuilder fill:#055
-    style LibraryExpressionBuilder fill:#055
-    style ExpressionBuilder fill:#055
+    style LibrarySetCodeBuilder fill:#055
+    style LibraryCodeBuilder fill:#055
+    style CodeBuilder fill:#055
     style TupleBuilderCache fill:#055
     
     %% Inheritance  
@@ -72,16 +69,17 @@ classDiagram
     DeterministicIdGenerator --> ICacheKeyGenerator : implements
     
     %% Dependencies                                                 
-    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
-    LibraryPreprocessorBuilder ..> LibrarySetExpressionBuilder : injected
-    ExpressionBuilder ..> LibraryExpressionBuilder : injected
-    LibraryPreprocessorBuilder ..> LibraryExpressionBuilder : injected
+    LibraryCodeBuilder ..> LibrarySetCodeBuilder : injected
+    LibraryPreprocessorBuilder ..> LibrarySetCodeBuilder : injected
+    CodeBuilder ..> LibraryCodeBuilder : injected
+    LibraryPreprocessorBuilder ..> LibraryCodeBuilder : injected
 
-    TypeResolver ..> ExpressionBuilder : injected
-    CqlOperatorsBinder ..> ExpressionBuilder : injected
-    TupleBuilderCache ..> ExpressionBuilder : injected
-    CqlContextBinder ..> ExpressionBuilder : injected
-    ExpressionBuilderSettings ..> ExpressionBuilder : injected
+    TypeResolver ..> CodeBuilder : injected
+    CqlOperatorsBinder ..> CodeBuilder : injected
+    TupleBuilderCache ..> CodeBuilder : injected
+    CqlContextBinder ..> CodeBuilder : injected
+    CodeBuilderSettings ..> CodeBuilder : injected
+    TypeConverter ..> CodeBuilder : injected
 
     TypeResolver ..> CqlOperatorsBinder : injected
     TypeConverter ..> CqlOperatorsBinder : injected
@@ -119,7 +117,6 @@ classDiagram
     namespace Packaging {
         class ResourcePackager { }
         class ResourceCanonicalBuilder { }
-        class CqlTypeToFhirTypeMapper { }
     }
 
     namespace Abstraction {
@@ -152,7 +149,7 @@ Services for translating CQL to ELM format.
 
 **Remarks:**
 * Excludes Logger and Options for clarity
-* All services are singleton services except LibraryVisitor which is scoped
+* All services are singleton services except LibraryVisitor (scoped) and ExpressionVisitor (transient factory)
 * Classes are grouped by their respective projects
 
 ```mermaid
@@ -171,6 +168,7 @@ classDiagram
         class LibraryBuilderProvider { }
         class LibraryVisitor { }
         class ExpressionVisitor { }
+        class ILibraryProvider { }
     }
 
     namespace Model {
@@ -178,17 +176,12 @@ classDiagram
         class IModelProvider { }
     }
 
-    namespace Infrastructure {
-        class ILibraryProvider { }
-    }
-
     %% Style Scoped Types as Cyan
     style LibraryVisitor fill:#055
     
     %% Dependencies                                                 
-    LibraryBuilderProvider ..> CqlToElmConverter : injected
-    ILibraryProvider ..> CqlToElmConverter : injected
-    IModelProvider ..> CqlToElmConverter : injected
+    IModelProvider ..> LibraryVisitor : injected
+    ILibraryProvider ..> LibraryVisitor : injected
     
     ModelInfo ..> IModelProvider : configured
     
