@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2024, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -6,10 +6,18 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Compiler;
 
+/// <summary>
+/// The <see cref="IBuilderContext"/> implementation (element stack, <c>PushElement</c>,
+/// debugger views) that the shared <c>NewExpressionBuildingException</c> /
+/// <c>CatchRethrowExpressionBuildingException</c> extensions build their ELM context from.
+/// <see cref="IBuilderContext"/> and those extensions are Expression-free, so they are reused
+/// directly rather than ported.
+/// </summary>
 [DebuggerDisplay("{DebuggerView}")]
 partial class ExpressionBuilderContext : IBuilderContext
 {

@@ -12,6 +12,7 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Fhir.Model;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
@@ -259,7 +260,7 @@ namespace CoreTests
             Assert.AreEqual(typeof(IEnumerable<object>), lambda.ReturnType);
         }
 
-        private static Hl7.Cql.Runtime.DefinitionDictionary<Hl7.Cql.Abstractions.CqlDefinition> ProcessLibraryWithChoiceResult(
+        private static CqlDefinitionDictionary ProcessLibraryWithChoiceResult(
             Hl7.Cql.Elm.ChoiceTypeSpecifier choiceType)
         {
             using var serviceProvider = BuildServiceProvider();

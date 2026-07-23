@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2024, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -12,6 +12,10 @@ using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Compiler;
 
+/// <summary>
+/// The definition dictionary and the alias/code/code-system bookkeeping shared by the
+/// per-definition processors.
+/// </summary>
 partial class LibraryExpressionBuilderContext
 {
     #region Definitions

@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime.Hosting;
@@ -72,13 +73,16 @@ internal readonly record struct ElmToolkitServices(
         });
 
         services.TryAddSingleton<LibraryPreprocessorBuilder>();
-        services.TryAddSingleton<CqlOperatorsBinder>();
-        services.TryAddSingleton<CqlContextBinder>();
         services.TryAddSingleton(_ => expressionBuilderSettings);
         services.TryAddScoped<TupleBuilderCache>();
-        services.TryAddScoped<LibrarySetExpressionBuilder>();
-        services.TryAddScoped<LibraryExpressionBuilder>();
+
+        // Register the compiler/code-generation pipeline components. These share the
+        // TypeResolver/TypeConverter/TupleBuilderCache/LibraryPreprocessorBuilder above.
+        services.TryAddSingleton<CqlOperatorsBinder>();
+        services.TryAddSingleton<CqlContextBinder>();
         services.TryAddScoped<ExpressionBuilder>();
+        services.TryAddScoped<LibraryExpressionBuilder>();
+        services.TryAddScoped<LibrarySetExpressionBuilder>();
 
         return services;
     }

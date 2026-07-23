@@ -49,15 +49,12 @@ classDiagram
 
     namespace Runtime {
         class BaseTypeResolver { }
+        class TypeConverter { }
     }
 
     namespace Fhir {
         class FhirTypeResolver { }
         class ModelInspector { }
-    }
-
-    namespace Conversion {
-        class TypeConverter { }
     }
 
     %% Style Scoped Types as Cyan
@@ -82,6 +79,7 @@ classDiagram
     TupleBuilderCache ..> ExpressionBuilder : injected
     CqlContextBinder ..> ExpressionBuilder : injected
     ExpressionBuilderSettings ..> ExpressionBuilder : injected
+    TypeConverter ..> ExpressionBuilder : injected
 
     TypeResolver ..> CqlOperatorsBinder : injected
     TypeConverter ..> CqlOperatorsBinder : injected
@@ -119,7 +117,6 @@ classDiagram
     namespace Packaging {
         class ResourcePackager { }
         class ResourceCanonicalBuilder { }
-        class CqlTypeToFhirTypeMapper { }
     }
 
     namespace Abstraction {
@@ -152,7 +149,7 @@ Services for translating CQL to ELM format.
 
 **Remarks:**
 * Excludes Logger and Options for clarity
-* All services are singleton services except LibraryVisitor which is scoped
+* All services are singleton services except LibraryVisitor (scoped) and ExpressionVisitor (transient factory)
 * Classes are grouped by their respective projects
 
 ```mermaid
@@ -171,6 +168,7 @@ classDiagram
         class LibraryBuilderProvider { }
         class LibraryVisitor { }
         class ExpressionVisitor { }
+        class ILibraryProvider { }
     }
 
     namespace Model {
@@ -178,17 +176,12 @@ classDiagram
         class IModelProvider { }
     }
 
-    namespace Infrastructure {
-        class ILibraryProvider { }
-    }
-
     %% Style Scoped Types as Cyan
     style LibraryVisitor fill:#055
     
     %% Dependencies                                                 
-    LibraryBuilderProvider ..> CqlToElmConverter : injected
-    ILibraryProvider ..> CqlToElmConverter : injected
-    IModelProvider ..> CqlToElmConverter : injected
+    IModelProvider ..> LibraryVisitor : injected
+    ILibraryProvider ..> LibraryVisitor : injected
     
     ModelInfo ..> IModelProvider : configured
     

@@ -7,12 +7,14 @@
  */
 
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 namespace Hl7.Cql.Compiler;
 
+/// <summary>
+/// Creates an <see cref="ExpressionBuilderContext"/> per library; see the remarks there.
+/// </summary>
 internal class ExpressionBuilder(
     ILogger<ExpressionBuilder> logger,
     ExpressionBuilderSettings expressionBuilderSettings,
@@ -44,7 +46,7 @@ internal class ExpressionBuilder(
 
     internal ExpressionBuilderContext NewExpressionBuilderContext(
         LibraryExpressionBuilderContext libCtx,
-        Dictionary<string, ParameterExpression>? operands = null) =>
+        Dictionary<string, CodeLocal>? operands = null) =>
         new(_logger, _expressionBuilderSettings, _cqlOperatorsBinder, _tupleBuilderCache, _typeResolver, _typeConverter, _cqlContextBinder, libCtx, operands);
 
     public void ProcessValueSetDef(LibraryExpressionBuilderContext libCtx, ValueSetDef valueSetDef) =>
@@ -71,6 +73,6 @@ internal class ExpressionBuilder(
             .ProcessParameterDef(parameterDef);
 
     public void ProcessExpressionDef(LibraryExpressionBuilderContext libCtx, ExpressionDef expressionDef) =>
-        NewExpressionBuilderContext(libCtx, new Dictionary<string, ParameterExpression>())
+        NewExpressionBuilderContext(libCtx, new Dictionary<string, CodeLocal>())
             .ProcessExpressionDef(expressionDef);
 }

@@ -14,6 +14,9 @@ using Element = Hl7.Cql.Elm.Element;
 
 namespace Hl7.Cql.Compiler;
 
+/// <summary>
+/// Resolving the .NET type for an ELM element or type specifier.
+/// </summary>
 partial class ExpressionBuilderContext
 {
     private Type? TypeFor(
@@ -102,7 +105,7 @@ partial class ExpressionBuilderContext
 
             case OperandRef operandRef when !string.IsNullOrWhiteSpace(operandRef.name):
             {
-                ParameterExpression? operand = null;
+                CodeLocal? operand = null;
                 _operands?.TryGetValue(operandRef.name, out operand);
                 if (operand != null)
                     return operand.Type;
@@ -185,7 +188,7 @@ partial class ExpressionBuilderContext
             {
                 if (throwIfNotFound)
                     throw new ArgumentException($"Cannot resolve type for typeSpecifier {list.elementType}");
-                
+
                 return null;
             }
 

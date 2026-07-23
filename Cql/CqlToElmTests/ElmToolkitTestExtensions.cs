@@ -9,6 +9,7 @@
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Invocation.Toolkit;
 
@@ -16,6 +17,9 @@ namespace Hl7.Cql.CqlToElm.Test;
 
 using Expression = Hl7.Cql.Elm.Expression;
 
+/// <summary>
+/// Test-only service-composition helpers over the ELM-to-C# pipeline.
+/// </summary>
 internal static class ElmToolkitTestExtensions
 {
     public static LibrarySetCSharpCodeGenerator GetLibrarySetCSharpCodeGenerator(this ElmToolkit elmToolkit) =>
@@ -56,7 +60,15 @@ internal static class ElmToolkitTestExtensions
         return libraryExpressionBuilder.ProcessLibrary(library);
     }
 
-    internal static LambdaExpression Lambda(
+    /// <summary>
+    /// Builds an <see cref="CodeLambda"/> wrapping the translated <paramref name="expression"/>.
+    /// Unlike the old (deleted) Expression-based <c>Lambda()</c>, the IR lambda carries no
+    /// leading <c>CqlContext</c> parameter (the well-known <see cref="CodeContextParameter"/> is
+    /// referenced directly instead) -- so this has zero declared parameters, mirroring how
+    /// <see cref="ExpressionBuilderContext"/> builds expression-definition lambdas (see
+    /// <c>ExpressionBuilderContext.LibraryDefs.cs</c>).
+    /// </summary>
+    internal static CodeLambda Lambda(
         this ElmToolkit elmToolkit,
         Expression expression)
     {
@@ -65,9 +77,7 @@ internal static class ElmToolkitTestExtensions
 
         CqlDefinitionDictionary definitions = new();
         var ctx = libraryExpressionBuilder.NewExpressionBuilderContext(Library, definitions);
-        System.Linq.Expressions.Expression translated = ctx.TranslateArg(expression);
-        var contextParameter = CqlExpressions.ParameterExpression;
-        LambdaExpression lambda = System.Linq.Expressions.Expression.Lambda(translated, contextParameter);
-        return lambda;
+        CodeExpression translated = ctx.TranslateArg(expression);
+        return new CodeLambda([], translated);
     }
 }

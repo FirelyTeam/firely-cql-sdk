@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2024, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -6,12 +6,20 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
-internal partial class LibraryExpressionBuilderContext
+/// <summary>
+/// Orchestrates building all definitions of a single library into an
+/// <see cref="CqlDefinitionDictionary"/>; see the remarks on
+/// <see cref="ExpressionBuilderContext"/>.
+/// </summary>
+[DebuggerDisplay("{DebuggerView}")]
+internal partial class LibraryExpressionBuilderContext : IBuilderContext
 {
     private readonly ILogger<LibraryExpressionBuilder> _logger;
     private readonly ExpressionBuilder _expressionBuilder;
@@ -121,4 +129,14 @@ internal partial class LibraryExpressionBuilderContext
 
             return LibraryDefinitions;
         });
+
+    #region DebuggerView
+
+    IBuilderContext? IBuilderContext.OuterBuilderContext => LibrarySetContext;
+
+    BuilderContextDebuggerInfo? IBuilderContext.DebuggerInfo => BuilderContextDebuggerInfo.FromElement(Library);
+
+    public string DebuggerView => this.GetDebuggerView();
+
+    #endregion
 }

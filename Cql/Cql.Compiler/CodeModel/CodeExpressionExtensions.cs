@@ -1,5 +1,5 @@
-﻿/*
- * Copyright (c) 2024, NCQA and contributors
+/*
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -11,19 +11,24 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Utility;
 
-namespace Hl7.Cql.Compiler.Expressions;
+namespace Hl7.Cql.Compiler.CodeModel;
 
-internal static class ExpressionExtensions
+/// <summary>
+/// The assign-to-type / type-as / type-is / coalesce helpers the expression builder and
+/// <see cref="CqlOperatorsBinder"/> use on subexpressions; see the remarks on
+/// <see cref="ExpressionBuilderContext"/>.
+/// </summary>
+internal static class CodeExpressionExtensions
 {
-    public static Expression NewAssignToTypeExpression(
-        this Expression expression,
+    public static CodeExpression NewAssignToTypeExpression(
+        this CodeExpression expression,
         Type type) =>
         TryNewAssignToTypeExpression(
             expression,
             type).expression!;
 
-    public static (Expression? expression, TypeConversion typeConversion) TryNewAssignToTypeExpression(
-        this Expression expression,
+    public static (CodeExpression? expression, TypeConversion typeConversion) TryNewAssignToTypeExpression(
+        this CodeExpression expression,
         Type type,
         bool throwError = true,
         bool safeUpcastAllowed = false)
@@ -31,16 +36,16 @@ internal static class ExpressionExtensions
         if (expression.Type == type)
             return (expression, TypeConversion.ExactType);
 
-        if (expression is ConstantExpression { Value: var constantValue })
+        if (expression is CodeConstant { Value: var constantValue })
         {
             switch (constantValue)
             {
                 case null when type.IsNullable(out _):
-                    return (NullExpression.ForType(type), TypeConversion.ExactType);
+                    return (new CodeConstant(null, type), TypeConversion.ExactType);
 
                 case { } value and not string when
                     value.GetType().IsAssignableTo(type): // <-- Don't remove this, otherwise string constant will not have double-quotes in the generated code. 🤷
-                    return (Expression.Constant(value, type), TypeConversion.ExactType);
+                    return (new CodeConstant(value, type), TypeConversion.ExactType);
 
                 case Enum enumValue
                     when type == typeof(string)
@@ -48,7 +53,7 @@ internal static class ExpressionExtensions
                          && FhirTypeConverter.IsFhirEnum(enumType):
 
                     var enumLiteral = enumValue.GetLiteral();
-                    return (Expression.Constant(enumLiteral), TypeConversion.ExactType);
+                    return (new CodeConstant(enumLiteral, typeof(string)), TypeConversion.ExactType);
 
 
                 case Hl7.Cql.Elm.DateTimePrecision dateTimePrecision
@@ -60,7 +65,7 @@ internal static class ExpressionExtensions
                         throw new InvalidOperationException($"Enum value {dateTimeString} is not defined in enum type {typeof(DateTimePrecision)}");
                     }
 
-                    return (Expression.Constant(dateTimeString.ToLowerInvariant()), TypeConversion.ExactType);
+                    return (new CodeConstant(dateTimeString.ToLowerInvariant(), typeof(string)), TypeConversion.ExactType);
             }
         }
 
@@ -71,7 +76,7 @@ internal static class ExpressionExtensions
                 || expression.Type.IsAssignableFrom(type);
             if (isAssignableFrom || throwError)
             {
-                Expression cast = Expression.TypeAs(expression, type);
+                CodeExpression cast = new CodeCast(expression, type, CodeCastKind.As);
                 return (cast, TypeConversion.ExpressionTypeAs);
             }
         }
@@ -81,38 +86,38 @@ internal static class ExpressionExtensions
             || expression.Type.IsAssignableTo(type);
         if (isAssignableTo || throwError)
         {
-            Expression cast = Expression.Convert(expression, type);
+            CodeExpression cast = new CodeCast(expression, type, CodeCastKind.Cast);
             return (cast, TypeConversion.ExpressionCast);
         }
 
         return (null, TypeConversion.NoMatch);
     }
 
-    public static Expression NewAssignToTypeExpression<TType>(
-        this Expression expression) =>
+    public static CodeExpression NewAssignToTypeExpression<TType>(
+        this CodeExpression expression) =>
         expression.NewAssignToTypeExpression(typeof(TType));
 
 
-    public static Expression NewTypeAsExpression(this Expression expression, Type type)
+    public static CodeExpression NewTypeAsExpression(this CodeExpression expression, Type type)
     {
         if (expression.Type == type)
             return expression;
 
-        var typeAs = Expression.TypeAs(expression, type);
+        var typeAs = new CodeCast(expression, type, CodeCastKind.As);
         return typeAs;
     }
 
-    public static Expression NewTypeAsExpression<TType>(this Expression expression) =>
+    public static CodeExpression NewTypeAsExpression<TType>(this CodeExpression expression) =>
         expression.NewTypeAsExpression(typeof(TType));
 
-    public static TypeBinaryExpression NewTypeIsExpression(this Expression expression, Type type)
+    public static CodeTypeIs NewTypeIsExpression(this CodeExpression expression, Type type)
     {
-        var typeAs = Expression.TypeIs(expression, type);
+        var typeAs = new CodeTypeIs(expression, type);
         return typeAs;
     }
 
-    public static Expression Coalesce(
-        this Expression expression)
+    public static CodeExpression Coalesce(
+        this CodeExpression expression)
     {
         if (expression.Type.IsValueType)
         {
@@ -120,7 +125,7 @@ internal static class ExpressionExtensions
                 && underlyingType.IsValueType)
             {
                 var defaultValue = Activator.CreateInstance(underlyingType)!;
-                var result = Expression.Coalesce(expression, Expression.Constant(defaultValue));
+                var result = new CodeBinary(CodeBinaryOp.Coalesce, expression, new CodeConstant(defaultValue, underlyingType));
                 return result;
             }
 
@@ -130,4 +135,7 @@ internal static class ExpressionExtensions
         throw new InvalidOperationException(
             $"Cannot coalesce reference '{expression.Type}'.");
     }
+
+    public static bool IsNullConstant(this CodeExpression expression) =>
+        expression is CodeConstant { Value: null };
 }

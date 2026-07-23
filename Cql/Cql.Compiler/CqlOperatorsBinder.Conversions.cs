@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -6,23 +6,36 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Exceptions;
-using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Runtime;
+using Hl7.Fhir.Utility;
 
 namespace Hl7.Cql.Compiler;
 
+/// <summary>
+/// Argument conversions: <see cref="TryConvert"/> and the <see cref="TypeConversion"/>
+/// ranking. See the remarks on <see cref="CqlOperatorsBinder"/>.
+/// </summary>
 partial class CqlOperatorsBinder
 {
+    /// <summary>
+    /// The <c>context.Operators</c> property access used as the receiver of every
+    /// <see cref="ICqlOperators"/> call.
+    /// </summary>
+    private static CodeExpression OperatorsReceiver { get; } =
+        new CodeProperty(CodeContextParameter.Instance, typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!);
 
     /// <summary>
     /// Tries to convert the given <paramref name="expression"/> to the specified type <paramref name="to"/>.
     /// </summary>
     /// <exception cref="InvalidOperationException"></exception>
     public virtual bool TryConvert(
-        Expression expression,
+        CodeExpression expression,
         Type to,
-        out (Expression arg, TypeConversion conversion) result)
+        out (CodeExpression arg, TypeConversion conversion) result)
     {
         Type from = expression.Type;
         result = expression.TryNewAssignToTypeExpression(to, throwError: false)!;
@@ -52,11 +65,11 @@ partial class CqlOperatorsBinder
         return false;
     }
 
-    private MethodCallExpression? BindToBestMethodOverload(
+    private CodeInvoke? BindToBestMethodOverload(
         string methodName,
-        Expression[] methodArguments,
+        CodeExpression[] methodArguments,
         Type[] genericTypeArguments,
-        bool throwError=true)
+        bool throwError = true)
     {
         var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments, throwError);
         if ((methodInfo, throwError) is (null, false))
@@ -64,13 +77,20 @@ partial class CqlOperatorsBinder
 
         try
         {
-            var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
+            var call = new CodeInvoke(OperatorsReceiver, methodInfo!, convertedArgs);
             return call;
         }
         catch (Exception e)
         {
             if (throwError)
-                throw new CannotBindToCqlOperatorError(methodName, methodArguments, genericTypeArguments, ICqlOperatorsMethods.GetMethodsByName(methodName)).ToException(e);
+            {
+                throw new CannotBindToCqlOperatorError(
+                        methodName,
+                        methodArguments.SelectToArray(a => a.Type),
+                        genericTypeArguments,
+                        ICqlOperatorsMethods.GetMethodsByName(methodName))
+                    .ToException(e);
+            }
             return null;
         }
     }
@@ -81,7 +101,7 @@ partial class CqlOperatorsBinder
     /// <param name="expression">The expression to cast.</param>
     /// <param name="type">The type to cast the expression to.</param>
     /// <returns>The expression that was cast.</returns>
-    public virtual Expression CastToType(Expression expression, Type type)
+    public virtual CodeExpression CastToType(CodeExpression expression, Type type)
     {
         if (expression.Type != typeof(object))
             throw new ArgumentException("Cast only allowed on Object typed expressions.", nameof(expression));
@@ -95,8 +115,13 @@ partial class CqlOperatorsBinder
     /// <param name="expression">The expression to convert.</param>
     /// <param name="type">The type to convert the expression to.</param>
     /// <returns>The converted expression.</returns>
-    public virtual Expression ConvertToType(Expression expression, Type type) =>
+    public virtual CodeExpression ConvertToType(CodeExpression expression, Type type) =>
         TryConvert(expression, type, out var t)
             ? t.arg!
             : throw new InvalidOperationException($"Cannot convert '{expression.Type.FullName}' to '{type.FullName}'");
+
+    // TryConvert and the Specific.cs bindings call CodeExpressionExtensions helpers
+    // (NewAssignToTypeExpression / TryNewAssignToTypeExpression / NewTypeAsExpression /
+    // IsNullConstant) directly; null-of-type constants are constructed inline as
+    // new CodeConstant(null, type).
 }

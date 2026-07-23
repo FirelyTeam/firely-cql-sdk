@@ -26,7 +26,8 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             "System.Text.RegularExpressions.dll", // IMPORTANT!
             "System.Linq.dll",
-            "System.Linq.Expressions.dll", // IMPORTANT!
+            // System.Linq.Expressions.dll is intentionally omitted: generated C# no longer uses
+            // expression trees — the IR pipeline emits plain C# methods and delegates directly.
 
             "System.IO.dll",
             "System.Net.Primitives.dll",

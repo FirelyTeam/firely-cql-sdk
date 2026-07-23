@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2024, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -7,13 +7,17 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
+/// <summary>
+/// Processing the library's top-level definitions (codes, code systems, concepts, includes,
+/// parameters, value sets and expression/function definitions) into
+/// <see cref="CqlDefinition"/>s on the library context.
+/// </summary>
 partial class ExpressionBuilderContext
 {
     public void ProcessCodeSystemDef(
@@ -100,14 +104,19 @@ partial class ExpressionBuilderContext
 
                 var expressionKey = $"{_libraryContext.LibraryVersionedIdentifier}.{expressionDefName}";
                 Type[] parameterTypes = [];
-                ParameterExpression[] parameters = [CqlExpressions.ParameterExpression];
+
+                // NOTE(phase4): unlike the old CqlLambdaDefinition, the IR lambda for a definition
+                // does not carry the CqlContext parameter (see CqlLambdaDefinition remarks) — this
+                // array holds only the CQL operand locals, so it starts empty instead of
+                // `[CqlExpressions.ParameterExpression]`.
+                CodeLocal[] parameters = [];
                 IReadOnlyDictionary<string, string> originalParameterNames = new Dictionary<string, string>();
 
                 // Handle function definitions
                 if (expressionDef is FunctionDef { operand: { } operands, external: var isExternalFunction } functionDef)
                 {
                     (parameterTypes, originalParameterNames) = BuildParameterTypes(operands, expressionDefName);
-                    parameters = [.. parameters, .. _operands.Values];
+                    parameters = [.. _operands.Values];
 
                     if (isExternalFunction)
                     {
@@ -134,11 +143,11 @@ partial class ExpressionBuilderContext
                 if (expressionDef.expression is { } expressionDefExpression)
                 {
                     var bodyExpression = TranslateArg(expressionDefExpression);
-                    var lambda = Expression.Lambda(bodyExpression, parameters);
+                    var lambda = new CodeLambda(parameters, bodyExpression);
                     var tags = BuildTags();
                     var def = expressionDef is FunctionDef
                                   ? new CqlFunctionDefinition(lambda, expressionDefName, originalParameterNames, tags)
-                                  : new CqlExpressionDefinition(lambda, expressionDefName, tags);
+                                  : (CqlDefinition)new CqlExpressionDefinition(lambda, expressionDefName, tags);
                     _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, new(expressionDefName, parameterTypes), def);
                 }
             }
@@ -172,11 +181,22 @@ partial class ExpressionBuilderContext
 
             var returnType = TypeFor(expressionDef)!;
             var operands = function.operand ?? [];
+
+            // NOTE(phase4): ported as-is. The old builder prefixed this signature with a synthetic
+            // "context" entry (CqlExpressions.ParameterExpression.Type there, typeof(CqlContext)
+            // here) because CqlFunctionDefinition's LambdaExpression always carried the context
+            // parameter first; the resulting DefinitionSignature below therefore includes the
+            // context type even though non-external definitions register their signature with only
+            // the CQL operand types (see the isDuplicate check above). This looks like a latent bug
+            // (a CQL-argument-only lookup could never match this signature), but it's preserved here
+            // for parity. The IR lambda passed to NotImplemented, however, only ever carries the CQL
+            // operand parameters (see CqlLambdaDefinition remarks), so the synthetic entry is sliced
+            // off before it gets there.
             (string name, Type type)[] paramNamesAndTypes = new (string name, Type type)[operands.Length + 1];
-            paramNamesAndTypes[0] = ("context", CqlExpressions.ParameterExpression.Type);
+            paramNamesAndTypes[0] = ("context", typeof(CqlContext));
             for (int o = 0; o < operands.Length; o++)
                 paramNamesAndTypes[o + 1] = (operands[o].name, parameterTypes[o]);
-            var notImplemented = NotImplemented(expressionKey, paramNamesAndTypes, returnType);
+            var notImplemented = NotImplemented(expressionKey, paramNamesAndTypes[1..], returnType);
             var paramTypes = paramNamesAndTypes.Select(p => p.type).ToArray();
             var definition = new CqlFunctionDefinition(notImplemented, expressionDefName);
             var definitionSignature = new DefinitionSignature(expressionDefName, paramTypes);
@@ -203,7 +223,7 @@ partial class ExpressionBuilderContext
 
                 var operandType = TypeFor(operandDef.operandTypeSpecifier)!;
                 var normalizedName = IdentifierNormalizer.Normalize(operandDef.name);
-                var parameter = Expression.Parameter(operandType, normalizedName);
+                var parameter = new CodeLocal(operandType, normalizedName);
                 _operands.Add(operandDef.name, parameter);
                 parameterTypes[i++] = parameter.Type;
 
@@ -248,13 +268,16 @@ partial class ExpressionBuilderContext
                 var defaultValue =
                     parameter.@default != null
                         ? TranslateArg(parameter.@default).NewTypeAsExpression<object>()
-                        : NullExpression.Object;
+                        : new CodeConstant(null, typeof(object));
                 var resolveParam = _cqlContextBinder.ResolveParameter(_libraryContext.LibraryVersionedIdentifier, parameterName, defaultValue);
 
                 var parameterType = TypeFor(parameter.parameterTypeSpecifier)!;
                 var cast = _cqlOperatorsBinder.CastToType(resolveParam, parameterType);
                 // e.g. (bundle, context) => context.Parameters["Measurement Period"]
-                var lambda = Expression.Lambda(cast, CqlExpressions.ParameterExpression);
+                // NOTE(phase4): the IR lambda for a parameter definition has no parameters at all,
+                // not even the context (see CqlLambdaDefinition remarks) — the body references
+                // CodeContextParameter.Instance directly (see CqlContextBinder.ResolveParameter).
+                var lambda = new CodeLambda([], cast);
                 var paramDef = new CqlParameterDefinition(lambda, parameterName);
                 _libraryContext.LibraryDefinitions.AddDefinition(_libraryContext.LibraryVersionedIdentifier, parameterName, paramDef);
             }

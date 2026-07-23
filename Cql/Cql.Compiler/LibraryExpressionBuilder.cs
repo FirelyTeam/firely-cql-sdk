@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -35,7 +35,7 @@ internal class LibraryExpressionBuilder(
     public ExpressionBuilderContext NewExpressionBuilderContext(
         Library library,
         CqlDefinitionDictionary? libraryDefinitions = null,
-        Dictionary<string, ParameterExpression>? operands = null)
+        Dictionary<string, CodeLocal>? operands = null)
     {
         var libraryExpressionBuilderContext = NewLibraryExpressionBuilderContext(library, libraryDefinitions);
         return expressionBuilder.NewExpressionBuilderContext(libraryExpressionBuilderContext, operands);

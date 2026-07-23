@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2024, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -12,6 +12,10 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
+/// <summary>
+/// Creates a <see cref="LibrarySetExpressionBuilderContext"/> per library set; see the
+/// remarks on <see cref="ExpressionBuilderContext"/>.
+/// </summary>
 internal class LibrarySetExpressionBuilder(
     LibraryExpressionBuilder libraryExpressionBuilder,
     LibraryPreprocessorBuilder libraryPreprocessorBuilder)

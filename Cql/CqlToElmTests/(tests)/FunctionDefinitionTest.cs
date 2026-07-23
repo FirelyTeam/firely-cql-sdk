@@ -7,6 +7,8 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
@@ -293,11 +295,18 @@ namespace Hl7.Cql.CqlToElm.Test
                 """);
 
             var lib = cqlToolkit.MakeLibrary(cqlLibraryString.Cql);
-            var cqlDefinitionDictionary = cqlToolkit.CreateElmToolkit().ProcessLibrary(lib);
-            var cqlDefinition = cqlDefinitionDictionary["FuncTest-1.0.0", new DefinitionSignature("ToInteger", typeof(CqlContext), typeof(decimal?))] is CqlLambdaDefinition ld ? ld.LambdaExpression : null;
+            var irDefinitionDictionary = cqlToolkit.CreateElmToolkit().ProcessLibrary(lib);
+            // Unlike the old CqlLambdaDefinition, the IR lambda does not carry a leading
+            // CqlContext parameter (see CqlLambdaDefinition remarks) -- so its Parameters list is
+            // CQL-operand-only and the index shifts down by one. The registered
+            // DefinitionSignature, however, is a documented parity quirk for EXTERNAL functions
+            // specifically (see ExpressionBuilderContext.LibraryDefs.cs's HandleExternalFunction
+            // NOTE): it still carries a synthetic leading typeof(CqlContext) entry, faithfully
+            // replicating the old builder's signature for this lookup.
+            var cqlDefinition = irDefinitionDictionary["FuncTest-1.0.0", new DefinitionSignature("ToInteger", typeof(CqlContext), typeof(decimal?))] is CqlLambdaDefinition ld ? ld.Lambda : null;
             cqlDefinition.Should().NotBeNull();
-            cqlDefinition!.Parameters.Should().HaveCount(2);
-            cqlDefinition.Parameters[1].Name.Should().Be("decimal");
+            cqlDefinition!.Parameters.Should().HaveCount(1);
+            cqlDefinition.Parameters[0].NameHint.Should().Be("decimal");
 
             var act = () =>
             {
