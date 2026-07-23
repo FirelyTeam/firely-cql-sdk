@@ -102,6 +102,9 @@ Services for packaging CQL libraries as FHIR Library resources.
 * Excludes Logger and Options for clarity
 * All services are singleton services
 * Classes are grouped by their respective projects
+* `ResourceCanonicalBuilder` is a delegate, not a class — shown as a class here only for diagram simplicity
+* `CqlTypeToFhirTypeMapper` is registered in this container but is never DI-injected anywhere; `ResourcePackager` builds its own instance manually from its injected `TypeResolver`
+* `ModelInspector` is an external type from the Firely .NET SDK (`Hl7.Fhir.Introspection`), not source declared in this repo
 
 ```mermaid
 %%{init: {
@@ -116,7 +119,10 @@ classDiagram
 
     namespace Packaging {
         class ResourcePackager { }
-        class ResourceCanonicalBuilder { }
+        class ResourceCanonicalBuilder {
+            <<Delegate>>
+        }
+        class CqlTypeToFhirTypeMapper { }
     }
 
     namespace Abstraction {
@@ -129,7 +135,9 @@ classDiagram
 
     namespace Fhir {
         class FhirTypeResolver { }
-        class ModelInspector { }
+        class ModelInspector {
+            <<external>>
+        }
     }
 
     %% Inheritance  
@@ -139,6 +147,8 @@ classDiagram
     %% Dependencies                                                 
     TypeResolver ..> ResourcePackager : injected
     ResourceCanonicalBuilder ..> ResourcePackager : injected
+    TypeResolver ..> CqlTypeToFhirTypeMapper : injected
+    CqlTypeToFhirTypeMapper ..> ResourcePackager : created
     
     ModelInspector ..> FhirTypeResolver : injected
 ```
@@ -149,8 +159,10 @@ Services for translating CQL to ELM format.
 
 **Remarks:**
 * Excludes Logger and Options for clarity
-* All services are singleton services except LibraryVisitor (scoped) and ExpressionVisitor (transient factory)
+* All services are singleton services except `LibraryVisitor` (scoped); `LibraryVisitor.DefinitionVisitor`, `ExpressionVisitor` and `TypeSpecifierVisitor` (transient factories, created per-`LibraryBuilder` via a `Func<LibraryBuilder, T>` factory delegate); and `LocalIdentifierProvider` (plain transient)
 * Classes are grouped by their respective projects
+* `DefinitionVisitor` below is the nested class `LibraryVisitor.DefinitionVisitor`
+* `BuiltinModelProvider` is the concrete `IModelProvider` implementation actually registered by this toolkit
 
 ```mermaid
 %%{init: {
@@ -167,23 +179,67 @@ classDiagram
         class CqlToElmConverter { }
         class LibraryBuilderProvider { }
         class LibraryVisitor { }
+        class DefinitionVisitor { }
         class ExpressionVisitor { }
+        class TypeSpecifierVisitor { }
         class ILibraryProvider { }
+        class IModelProvider { }
+        class CoercionProvider { }
+        class ElmFactory { }
+        class SystemLibrary { }
+        class StreamInspector { }
+        class InvocationBuilder { }
+        class LocalIdentifierProvider { }
+        class MessageProvider { }
+        class BuiltinModelProvider { }
     }
 
     namespace Model {
         class ModelInfo { }
-        class IModelProvider { }
     }
 
     %% Style Scoped Types as Cyan
     style LibraryVisitor fill:#055
-    
-    %% Dependencies                                                 
-    IModelProvider ..> LibraryVisitor : injected
-    ILibraryProvider ..> LibraryVisitor : injected
-    
-    ModelInfo ..> IModelProvider : configured
-    
+
+    %% Inheritance / implements
+    BuiltinModelProvider --> IModelProvider : implements
     LibraryBuilderProvider --> ILibraryProvider : implements
+
+    %% Dependencies (injected)                                                 
+    SystemLibrary ..> LibraryVisitor : injected
+    IModelProvider ..> LibraryVisitor : injected
+    LocalIdentifierProvider ..> LibraryVisitor : injected
+
+    IModelProvider ..> DefinitionVisitor : injected
+    ILibraryProvider ..> DefinitionVisitor : injected
+    CoercionProvider ..> DefinitionVisitor : injected
+    MessageProvider ..> DefinitionVisitor : injected
+    InvocationBuilder ..> DefinitionVisitor : injected
+
+    IModelProvider ..> ExpressionVisitor : injected
+    CoercionProvider ..> ExpressionVisitor : injected
+    ElmFactory ..> ExpressionVisitor : injected
+    MessageProvider ..> ExpressionVisitor : injected
+    InvocationBuilder ..> ExpressionVisitor : injected
+
+    MessageProvider ..> TypeSpecifierVisitor : injected
+
+    IModelProvider ..> InvocationBuilder : injected
+    CoercionProvider ..> InvocationBuilder : injected
+    ElmFactory ..> InvocationBuilder : injected
+    MessageProvider ..> InvocationBuilder : injected
+
+    IModelProvider ..> CoercionProvider : injected
+
+    CoercionProvider ..> ElmFactory : injected
+    MessageProvider ..> ElmFactory : injected
+
+    %% Dependencies (factory-created per LibraryBuilder)
+    DefinitionVisitor ..> LibraryVisitor : created
+    ExpressionVisitor ..> DefinitionVisitor : created
+    TypeSpecifierVisitor ..> DefinitionVisitor : created
+    TypeSpecifierVisitor ..> ExpressionVisitor : created
+
+    %% Configuration
+    ModelInfo ..> BuiltinModelProvider : configured
 ```
