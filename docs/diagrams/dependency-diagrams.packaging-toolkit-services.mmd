@@ -1,0 +1,44 @@
+%%{init: {
+    'themeVariables':{  
+      'lineColor': '#888',
+      'lineWidth': 4
+}}}%%
+
+classDiagram
+
+    direction LR
+
+    namespace Packaging {
+        class ResourcePackager { }
+        class ResourceCanonicalBuilder {
+            <<Delegate>>
+        }
+        class CqlTypeToFhirTypeMapper { }
+    }
+
+    namespace Abstraction {
+        class TypeResolver { }
+    }
+
+    namespace Runtime {
+        class BaseTypeResolver { }
+    }
+
+    namespace Fhir {
+        class FhirTypeResolver { }
+        class ModelInspector {
+            <<external>>
+        }
+    }
+
+    %% Inheritance  
+    BaseTypeResolver --> TypeResolver : inherits
+    FhirTypeResolver --> BaseTypeResolver : inherits
+    
+    %% Dependencies                                                 
+    TypeResolver ..> ResourcePackager : injected
+    ResourceCanonicalBuilder ..> ResourcePackager : injected
+    TypeResolver ..> CqlTypeToFhirTypeMapper : injected
+    CqlTypeToFhirTypeMapper ..> ResourcePackager : created
+    
+    ModelInspector ..> FhirTypeResolver : injected

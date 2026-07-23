@@ -1,0 +1,78 @@
+%%{init: {
+    'themeVariables':{  
+      'lineColor': '#888',
+      'lineWidth': 4
+}}}%%
+
+classDiagram
+
+    direction LR
+
+    namespace Compiler {
+        class LibrarySetCodeBuilder { }    
+        class LibraryCodeBuilder { }    
+        class CodeBuilder { }    
+        class CodeBuilderSettings { }    
+        class TupleBuilderCache { }
+        class CqlContextBinder { }
+        class CqlOperatorsBinder { }       
+        class LibraryPreprocessorBuilder { }
+    }
+
+    namespace CodeGeneration {
+        class TypeToCSharpConverter { }
+        class LibrarySetCSharpCodeGenerator { }
+        class AssemblyCompiler { }
+        class ICacheKeyGenerator { }
+        class DeterministicIdGenerator { }
+    }
+
+    namespace Abstraction {
+        class TypeResolver { }
+    }
+
+    namespace Runtime {
+        class BaseTypeResolver { }
+        class TypeConverter { }
+    }
+
+    namespace Fhir {
+        class FhirTypeResolver { }
+        class ModelInspector { }
+    }
+
+    %% Style Scoped Types as Cyan
+    style LibrarySetCodeBuilder fill:#055
+    style LibraryCodeBuilder fill:#055
+    style CodeBuilder fill:#055
+    style TupleBuilderCache fill:#055
+    
+    %% Inheritance  
+    BaseTypeResolver --> TypeResolver : inherits
+    FhirTypeResolver --> BaseTypeResolver : inherits
+    DeterministicIdGenerator --> ICacheKeyGenerator : implements
+    
+    %% Dependencies                                                 
+    LibraryCodeBuilder ..> LibrarySetCodeBuilder : injected
+    LibraryPreprocessorBuilder ..> LibrarySetCodeBuilder : injected
+    CodeBuilder ..> LibraryCodeBuilder : injected
+    LibraryPreprocessorBuilder ..> LibraryCodeBuilder : injected
+
+    TypeResolver ..> CodeBuilder : injected
+    CqlOperatorsBinder ..> CodeBuilder : injected
+    TupleBuilderCache ..> CodeBuilder : injected
+    CqlContextBinder ..> CodeBuilder : injected
+    CodeBuilderSettings ..> CodeBuilder : injected
+    TypeConverter ..> CodeBuilder : injected
+
+    TypeResolver ..> CqlOperatorsBinder : injected
+    TypeConverter ..> CqlOperatorsBinder : injected
+
+    ModelInspector ..> TypeConverter : injected  
+    ModelInspector ..> FhirTypeResolver : injected  
+
+    TypeToCSharpConverter ..> LibrarySetCSharpCodeGenerator : injected
+    TypeResolver ..> LibrarySetCSharpCodeGenerator : injected
+    ICacheKeyGenerator ..> LibrarySetCSharpCodeGenerator : created
+
+    TypeResolver ..> AssemblyCompiler : injected

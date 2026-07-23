@@ -1,0 +1,79 @@
+---
+name: generate-svg-from-mermaid
+description: Add, edit, or regenerate a Mermaid diagram embedded in a markdown doc, rendering it to a pre-generated .svg instead of a raw fenced code block. Use when a markdown file needs a Mermaid diagram, or when editing an existing .mmd diagram source under docs/diagrams/ or similar.
+---
+
+# Generate SVG from Mermaid
+
+GitHub's inline Mermaid renderer does not reliably support every feature used in this repo's
+diagrams — `classDiagram` `namespace` blocks, multi-target `style` directives, and custom
+`<<stereotype>>` annotations can silently fail to render. Diagrams are therefore authored as
+standalone `.mmd` source files and rendered ahead of time to `.svg` via
+[tools/mermaid/export-mermaid-svg.ps1](../../../tools/mermaid/export-mermaid-svg.ps1) /
+[.sh](../../../tools/mermaid/export-mermaid-svg.sh), then embedded in the markdown as a normal
+image link. Never leave a raw ` ```mermaid ` fenced block as the only way to view a diagram meant
+for GitHub.
+
+## File layout
+
+- One `.mmd` per diagram, next to the markdown doc that embeds it, in a sibling `diagrams/`
+  subfolder (e.g. `docs/diagrams/` for `docs/*.md`).
+- Name it `<markdown-basename>.mmd` when the doc has exactly one diagram, or
+  `<markdown-basename>.<diagram-name>.mmd` when the doc embeds several (e.g.
+  `dependency-diagrams.elm-toolkit-services.mmd`) — don't rely on the export script's
+  auto-numbered `diagram-01`/`diagram-02` fallback names for multi-diagram docs; they're
+  meaningless out of context.
+- The matching `.svg` lives alongside it with the same base name.
+- Both the `.mmd` source and the `.svg` artifact are committed together — never regenerate one
+  without the other, and never hand-edit the `.svg`.
+
+## Embedding in markdown
+
+```markdown
+Mermaid source: [<name>.mmd](diagrams/<name>.mmd)
+
+![<Alt text>](diagrams/<name>.svg)
+```
+
+## Editing an existing diagram
+
+1. Edit the `.mmd` source file directly.
+2. Regenerate its `.svg`:
+   - PowerShell: `pwsh tools/mermaid/export-mermaid-svg.ps1 -MarkdownPath <doc.md> -SourcePath <diagrams/name.mmd> -OutputDir <diagrams-dir>`
+   - Bash: `tools/mermaid/export-mermaid-svg.sh --markdown-path <doc.md> --source-path <diagrams/name.mmd> --output-dir <diagrams-dir>`
+   - `-MarkdownPath`/`--markdown-path` only needs to point at *a* markdown file in the repo (used
+     to resolve the repo root) — when `-SourcePath`/`--source-path` is given explicitly, the
+     output `.svg` is named after the *source* file, not the markdown file, so this is safe to
+     reuse across multiple diagrams sharing one doc.
+3. Confirm the script reports success and the `.svg` file's mtime/size changed.
+4. Diff the rendered `.svg` mentions the classes/edges you expect (open it, or `grep` the SVG
+   text for a class/edge name you added) before committing — a syntax mistake in the `.mmd` can
+   still render successfully as a near-empty or malformed diagram.
+
+## Adding a brand-new diagram to a doc that has none yet
+
+Write the `.mmd` source directly (don't draft it as an inline fenced block first) at
+`docs/diagrams/<markdown-basename>.<diagram-name>.mmd`, run the render command above, then add
+the "Mermaid source: [...]" + image link pair to the markdown by hand.
+
+## Migrating an old doc that still has inline ` ```mermaid ` fences
+
+The export scripts also support bulk-extracting every fenced block in one pass and rewriting the
+markdown automatically:
+
+```
+pwsh tools/mermaid/export-mermaid-svg.ps1 -MarkdownPath <doc.md> -OutputDir <diagrams-dir> -RewriteMarkdown
+```
+
+This names the extracted files `<markdown-basename>.diagram-01.mmd`, `-02`, etc. (or just
+`<markdown-basename>.mmd` if there was only one block) and rewrites each fenced block in place to
+the "Mermaid source: [...] + image" pair. For a doc with more than one diagram, rename the
+extracted files to something meaningful afterward (and update the two links each time you rename)
+rather than leaving the generic numbered names.
+
+## Prerequisites
+
+Rendering requires Node.js (`npx -y @mermaid-js/mermaid-cli` is invoked directly — no local
+install/lockfile needed). The script auto-creates a gitignored `temp/puppeteer-config.json`
+(`--no-sandbox`) the first time it runs, so headless rendering works in sandboxed/CI environments
+without extra setup.

@@ -1,0 +1,77 @@
+%%{init: {
+    'themeVariables':{  
+      'lineColor': '#888',
+      'lineWidth': 4
+}}}%%
+
+classDiagram
+
+    direction LR
+
+    namespace CqlToElm {
+        class CqlToElmConverter { }
+        class LibraryBuilderProvider { }
+        class LibraryVisitor { }
+        class DefinitionVisitor { }
+        class ExpressionVisitor { }
+        class TypeSpecifierVisitor { }
+        class ILibraryProvider { }
+        class IModelProvider { }
+        class CoercionProvider { }
+        class ElmFactory { }
+        class SystemLibrary { }
+        class StreamInspector { }
+        class InvocationBuilder { }
+        class LocalIdentifierProvider { }
+        class MessageProvider { }
+        class BuiltinModelProvider { }
+    }
+
+    namespace Model {
+        class ModelInfo { }
+    }
+
+    %% Style Scoped Types as Cyan
+    style LibraryVisitor fill:#055
+
+    %% Inheritance / implements
+    BuiltinModelProvider --> IModelProvider : implements
+    LibraryBuilderProvider --> ILibraryProvider : implements
+
+    %% Dependencies (injected)                                                 
+    SystemLibrary ..> LibraryVisitor : injected
+    IModelProvider ..> LibraryVisitor : injected
+    LocalIdentifierProvider ..> LibraryVisitor : injected
+
+    IModelProvider ..> DefinitionVisitor : injected
+    ILibraryProvider ..> DefinitionVisitor : injected
+    CoercionProvider ..> DefinitionVisitor : injected
+    MessageProvider ..> DefinitionVisitor : injected
+    InvocationBuilder ..> DefinitionVisitor : injected
+
+    IModelProvider ..> ExpressionVisitor : injected
+    CoercionProvider ..> ExpressionVisitor : injected
+    ElmFactory ..> ExpressionVisitor : injected
+    MessageProvider ..> ExpressionVisitor : injected
+    InvocationBuilder ..> ExpressionVisitor : injected
+
+    MessageProvider ..> TypeSpecifierVisitor : injected
+
+    IModelProvider ..> InvocationBuilder : injected
+    CoercionProvider ..> InvocationBuilder : injected
+    ElmFactory ..> InvocationBuilder : injected
+    MessageProvider ..> InvocationBuilder : injected
+
+    IModelProvider ..> CoercionProvider : injected
+
+    CoercionProvider ..> ElmFactory : injected
+    MessageProvider ..> ElmFactory : injected
+
+    %% Dependencies (factory-created per LibraryBuilder)
+    DefinitionVisitor ..> LibraryVisitor : created
+    ExpressionVisitor ..> DefinitionVisitor : created
+    TypeSpecifierVisitor ..> DefinitionVisitor : created
+    TypeSpecifierVisitor ..> ExpressionVisitor : created
+
+    %% Configuration
+    ModelInfo ..> BuiltinModelProvider : configured
