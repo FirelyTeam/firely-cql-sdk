@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -12,14 +12,14 @@ using Hl7.Cql.Compiler.CodeModel;
 
 namespace CoreTests;
 
-internal static class LibrarySetExpressionBuilderExtensions
+internal static class LibrarySetCodeBuilderExtensions
 {
     internal static CqlDefinitionDictionary ProcessLibrarySet(
-        this LibrarySetExpressionBuilder librarySetExpressionBuilder,
+        this LibrarySetCodeBuilder librarySetCodeBuilder,
         LibrarySet librarySet)
     {
         CqlDefinitionDictionary definitions = new ();
-        librarySetExpressionBuilder.BuildEachLibraryDefinitions(librarySet, definitions).ForEach();
+        librarySetCodeBuilder.BuildEachLibraryDefinitions(librarySet, definitions).ForEach();
         return definitions;
     }
 }

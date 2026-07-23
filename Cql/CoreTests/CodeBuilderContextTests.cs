@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -16,14 +16,14 @@ using Hl7.Fhir.Model;
 namespace CoreTests;
 
 [TestClass]
-public class ExpressionBuilderContextTests
+public class CodeBuilderContextTests
 {
 
     [TestMethod]
     public void Get_Property_Uses_TypeResolver()
     {
         using var serviceProvider = ElmToolkitServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
-        var property = ExpressionBuilderContext.GetProperty(typeof(MeasureReport.PopulationComponent), "id", serviceProvider.GetRequiredService<TypeResolver>())!;
+        var property = CodeBuilderContext.GetProperty(typeof(MeasureReport.PopulationComponent), "id", serviceProvider.GetRequiredService<TypeResolver>())!;
         Assert.AreEqual(typeof(Element), property.DeclaringType);
         Assert.AreEqual(nameof(Element.ElementIdElement), property.Name);
     }

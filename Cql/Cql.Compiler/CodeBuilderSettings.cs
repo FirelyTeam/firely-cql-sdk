@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -9,9 +9,9 @@
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// Describes settings to control the behavior of <see cref="ExpressionBuilder"/>
+    /// Describes settings to control the behavior of <see cref="CodeBuilder"/>
     /// </summary>
-    internal class ExpressionBuilderSettings
+    internal class CodeBuilderSettings
     {
         /// <summary>
         /// Allows a child scope to redefine an existing parent scope.  Default is <see langword="true" />
@@ -50,6 +50,6 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         public bool AllowUnresolvedExternals { get; init; } = true;
 
-        public static readonly ExpressionBuilderSettings Default = new ExpressionBuilderSettings();
+        public static readonly CodeBuilderSettings Default = new CodeBuilderSettings();
     }
 }

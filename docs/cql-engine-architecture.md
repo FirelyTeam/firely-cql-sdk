@@ -24,7 +24,7 @@ This approach has a number of key advantages over engines which simultaneously i
 
 ### Hl7.Cql.Compiler Project
 
-#### ExpressionBuilder Class
+#### CodeBuilder Class
 - Responsible for interpreting the ELM expression tree and building `CodeModel` IR nodes for all definitions and functions in the provided ELM library
 - Relies on `CqlOperatorsBinder` to determine which `ICqlOperators` method calls to emit for CQL's operators
 - Relies on `CqlContextBinder` to emit parameter and context access nodes
@@ -35,8 +35,8 @@ This approach has a number of key advantages over engines which simultaneously i
 - Resolves overloads, generic type arguments, and implicit type conversions
 - Uses `TypeResolver` to map CQL type references to .NET types and `TypeConverter` for conversion expressions
 
-#### LibraryExpressionBuilder / LibrarySetExpressionBuilder Classes
-- Orchestrate `ExpressionBuilder` across a single library or a full set of interdependent libraries
+#### LibraryCodeBuilder / LibrarySetCodeBuilder Classes
+- Orchestrate `CodeBuilder` across a single library or a full set of interdependent libraries
 - Handle inter-library definition references and dependency ordering
 
 ### Hl7.Cql.CodeGeneration.NET Project
@@ -76,7 +76,7 @@ This approach has a number of key advantages over engines which simultaneously i
 
 #### TypeResolver Class (in Hl7.Cql.Abstractions)
 - Abstract class mapping CQL type names to .NET `Type` objects
-- Used by `ExpressionBuilder`, `CqlOperatorsBinder`, and `CSharpEmitter`
+- Used by `CodeBuilder`, `CqlOperatorsBinder`, and `CSharpEmitter`
 - `BaseTypeResolver` (in `Hl7.Cql.Runtime`) provides mappings for CQL system types; `FhirTypeResolver` (in `Hl7.Cql.Firely`) extends it for FHIR R4 model types
 
 #### IValueSetDictionary Interface

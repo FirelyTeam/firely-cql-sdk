@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -16,7 +16,7 @@ using CodeExpressionElementPairForIdentifier = System.Collections.Generic.KeyVal
 /// The query alias / let scope stack; scope dictionary values are
 /// <c>(CodeExpression, Element)</c> pairs.
 /// </summary>
-partial class ExpressionBuilderContext
+partial class CodeBuilderContext
 {
     protected IReadOnlyDictionary<string, (CodeExpression expr, Elm.Element element)> Scopes
     {
@@ -73,7 +73,7 @@ partial class ExpressionBuilderContext
         var scopes = new Dictionary<string, (CodeExpression, Elm.Element)>(peek.scopes ?? ReadOnlyDictionary<string, (CodeExpression, Elm.Element)>.Empty);
         alias ??= peek.impliedAlias;
 
-        if (_expressionBuilderSettings.AllowScopeRedefinition)
+        if (_codeBuilderSettings.AllowScopeRedefinition)
         {
             foreach (var (expr, element) in kvps)
             {
@@ -94,7 +94,7 @@ partial class ExpressionBuilderContext
 
                 if (!scopes.TryAdd(normalizedIdentifier, element))
                     throw this.NewExpressionBuildingException(
-                        $"Scope {expr}, normalized to {IdentifierNormalizer.Normalize(expr)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(_expressionBuilderSettings.AllowScopeRedefinition)} to true");
+                        $"Scope {expr}, normalized to {IdentifierNormalizer.Normalize(expr)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(_codeBuilderSettings.AllowScopeRedefinition)} to true");
             }
         }
 
@@ -107,10 +107,10 @@ partial class ExpressionBuilderContext
 
     private readonly record struct PopScopesToken : IPopToken
     {
-        private readonly ExpressionBuilderContext _owner;
+        private readonly CodeBuilderContext _owner;
         private readonly object? _prevId;
 
-        public PopScopesToken(ExpressionBuilderContext owner, object? prevId)
+        public PopScopesToken(CodeBuilderContext owner, object? prevId)
         {
             _owner = owner;
             _prevId = prevId;

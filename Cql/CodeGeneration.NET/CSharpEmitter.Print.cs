@@ -84,7 +84,7 @@ internal partial class CSharpEmitter
             CodeTupleInit tupleInit => PrintTupleInit(tupleInit, child),
             CodeNewArray newArray => PrintNewArray(newArray, child),
             // LambdaDefinitionWriter.BuildNewArrayExpression: "case ExpressionType.NewArrayBounds:
-            // return "[]";" — the old builder (ExpressionBuilderContext.cs) only ever constructs
+            // return "[]";" — the old builder (CodeBuilderContext.cs) only ever constructs
             // this node with a literal Expression.Constant(0) bound (empty untyped/typed lists),
             // and the IR node is built the same way. Guard the zero-length shape explicitly and
             // fail loudly on anything else instead of silently discarding a real length (the old
@@ -303,8 +303,8 @@ internal partial class CSharpEmitter
         // cast's own target type before the old writer ever prints a cast/as token (the call
         // site is BuildExpression's "ElmAsExpression ea => BuildExpression(ea.Reduce())"). This
         // is how a HEDIS parameter default's "high: As(asType: Integer, operand: Null)" — the
-        // ELM shape produced by the *plain-type-name* As() branch (old ExpressionBuilderContext.cs,
-        // final `{ }` block; ported at ExpressionBuilderContext.Operators.cs's As(), same
+        // ELM shape produced by the *plain-type-name* As() branch (old CodeBuilderContext.cs,
+        // final `{ }` block; ported at CodeBuilderContext.Operators.cs's As(), same
         // shape), whose operand goes through the ordinary Null dispatch
         // ("Null e => NullExpression.ForType(TypeFor(e)!)", i.e. a real ConstantExpression) —
         // prints as bare "default" rather than "null as int?". It does NOT fire for an CodeDefault
@@ -538,7 +538,7 @@ internal partial class CSharpEmitter
     // "new Type()": this is never printed via BuildNewExpression/PrintNew, which is what adds
     // the parens), "{" on its own line, one "Member = value," per indented line (trailing
     // comma on every binding, including the last), closing "}" un-indented. Old's MemberInit is
-    // always built from a parameterless constructor here (ExpressionBuilderContext.cs's
+    // always built from a parameterless constructor here (CodeBuilderContext.cs's
     // Instance(), the "fallback to member initialization" branch: "ctor =
     // instanceType.GetConstructor(Type.EmptyTypes);"), so the "new Type" line never carries
     // constructor arguments either.
@@ -552,7 +552,7 @@ internal partial class CSharpEmitter
         // (PrintTupleInit) -- including "default" for any unbound property. This MemberInit
         // shape reaches here from ChangeType's cross-tuple-type conversion (copying one tuple's
         // fields into another tuple type during a CQL "as"/comparison-normalization), which,
-        // unlike ExpressionBuilderContext.Query.cs's Tuple() builder, has no reason to ever
+        // unlike CodeBuilderContext.Query.cs's Tuple() builder, has no reason to ever
         // choose the CodeTupleInit node kind itself, so the redirect has to happen here at print
         // time instead, just like the old writer did.
         if (_typeToCSharpConverter.ShouldUseTupleType(memberInit.Type))

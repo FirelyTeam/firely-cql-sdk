@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -16,29 +16,29 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Orchestrates building all definitions of a single library into an
 /// <see cref="CqlDefinitionDictionary"/>; see the remarks on
-/// <see cref="ExpressionBuilderContext"/>.
+/// <see cref="CodeBuilderContext"/>.
 /// </summary>
 [DebuggerDisplay("{DebuggerView}")]
-internal partial class LibraryExpressionBuilderContext : IBuilderContext
+internal partial class LibraryCodeBuilderContext : IBuilderContext
 {
-    private readonly ILogger<LibraryExpressionBuilder> _logger;
-    private readonly ExpressionBuilder _expressionBuilder;
+    private readonly ILogger<LibraryCodeBuilder> _logger;
+    private readonly CodeBuilder _codeBuilder;
     private readonly CqlDefinitionDictionary _libraryDefinitions;
-    private readonly LibrarySetExpressionBuilderContext? _libsCtx;
+    private readonly LibrarySetCodeBuilderContext? _libsCtx;
     private readonly LibraryPreprocessor _preprocessor;
 
-    public LibraryExpressionBuilderContext(
-        ILogger<LibraryExpressionBuilder> logger,
-        ExpressionBuilder expressionBuilder,
+    public LibraryCodeBuilderContext(
+        ILogger<LibraryCodeBuilder> logger,
+        CodeBuilder codeBuilder,
         LibraryPreprocessorBuilder libraryPreprocessorBuilder,
         Library library,
         CqlDefinitionDictionary libraryDefinitions,
-        LibrarySetExpressionBuilderContext? libsCtx = null)
+        LibrarySetCodeBuilderContext? libsCtx = null)
     {
         _libraryDefinitions = libraryDefinitions;
         _libsCtx = libsCtx;
         _logger = logger;
-        _expressionBuilder = expressionBuilder;
+        _codeBuilder = codeBuilder;
         Library = library;
         LibraryVersionedIdentifier = Library.VersionedLibraryIdentifier;
         _preprocessor =
@@ -68,7 +68,7 @@ internal partial class LibraryExpressionBuilderContext : IBuilderContext
             {
                 foreach (var includeDef in includeDefs)
                 {
-                    _expressionBuilder.ProcessIncludes(this, includeDef);
+                    _codeBuilder.ProcessIncludes(this, includeDef);
                 }
 
                 AddLibraryDefinitionsFromIncludes();
@@ -79,7 +79,7 @@ internal partial class LibraryExpressionBuilderContext : IBuilderContext
             {
                 foreach (var valueSetDef in valueSetDefs)
                 {
-                    _expressionBuilder.ProcessValueSetDef(this, valueSetDef);
+                    _codeBuilder.ProcessValueSetDef(this, valueSetDef);
                 }
             }
 
@@ -91,7 +91,7 @@ internal partial class LibraryExpressionBuilderContext : IBuilderContext
 
                 foreach (var codeDef in codeDefs)
                 {
-                    _expressionBuilder.ProcessCodeDef(this, codeDef, foundCodeNameCodeSystemUrls);
+                    _codeBuilder.ProcessCodeDef(this, codeDef, foundCodeNameCodeSystemUrls);
                 }
             }
 
@@ -99,7 +99,7 @@ internal partial class LibraryExpressionBuilderContext : IBuilderContext
             {
                 foreach (var codeSystemDef in codeSystemDefs)
                 {
-                    _expressionBuilder.ProcessCodeSystemDef(this, codeSystemDef);
+                    _codeBuilder.ProcessCodeSystemDef(this, codeSystemDef);
                 }
             }
 
@@ -107,7 +107,7 @@ internal partial class LibraryExpressionBuilderContext : IBuilderContext
             {
                 foreach (var conceptDef in conceptDefs)
                 {
-                    _expressionBuilder.ProcessConceptDef(this, conceptDef);
+                    _codeBuilder.ProcessConceptDef(this, conceptDef);
                 }
             }
 
@@ -115,7 +115,7 @@ internal partial class LibraryExpressionBuilderContext : IBuilderContext
             {
                 foreach (var parameterDef in parameterDefs)
                 {
-                    _expressionBuilder.ProcessParameterDef(this, parameterDef);
+                    _codeBuilder.ProcessParameterDef(this, parameterDef);
                 }
             }
 
@@ -123,7 +123,7 @@ internal partial class LibraryExpressionBuilderContext : IBuilderContext
             {
                 foreach (var expressionDef in expressionDefs)
                 {
-                    _expressionBuilder.ProcessExpressionDef(this, expressionDef);
+                    _codeBuilder.ProcessExpressionDef(this, expressionDef);
                 }
             }
 

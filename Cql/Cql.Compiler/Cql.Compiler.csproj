@@ -36,14 +36,14 @@
 		<Compile Update="CqlOperatorsBinder.*.cs">
 			<DependentUpon>CqlOperatorsBinder.cs</DependentUpon>
 		</Compile>
-		<Compile Update="ExpressionBuilderContext.*.cs">
-			<DependentUpon>ExpressionBuilderContext.cs</DependentUpon>
+		<Compile Update="CodeBuilderContext.*.cs">
+			<DependentUpon>CodeBuilderContext.cs</DependentUpon>
 		</Compile>
-		<Compile Update="LibraryExpressionBuilderContext.*.cs">
-			<DependentUpon>LibraryExpressionBuilderContext.cs</DependentUpon>
+		<Compile Update="LibraryCodeBuilderContext.*.cs">
+			<DependentUpon>LibraryCodeBuilderContext.cs</DependentUpon>
 		</Compile>
-		<Compile Update="LibrarySetExpressionBuilderContext.*.cs">
-			<DependentUpon>LibrarySetExpressionBuilderContext.cs</DependentUpon>
+		<Compile Update="LibrarySetCodeBuilderContext.*.cs">
+			<DependentUpon>LibrarySetCodeBuilderContext.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
 

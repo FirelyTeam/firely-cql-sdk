@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -17,7 +17,7 @@ using F = Hl7.Fhir.Model;
 /// <summary>
 /// The QiCore binding workaround, nullable handling, null propagation and identifier helpers.
 /// </summary>
-partial class ExpressionBuilderContext
+partial class CodeBuilderContext
 {
     // Yeah, hardwired to FHIR 4.0.1 for now.
     private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
@@ -74,7 +74,7 @@ partial class ExpressionBuilderContext
         return new CodeProperty(before, member, nullConditional: true);
     }
 
-    private static string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx = null)
+    private static string TypeNameToIdentifier(Type type, CodeBuilderContext? ctx = null)
     {
         var typeName = type.Name.ToLowerInvariant();
         if (type.IsGenericType)

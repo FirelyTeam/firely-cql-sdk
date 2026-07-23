@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -18,7 +18,7 @@ namespace Hl7.Cql.Compiler;
 /// parameters, value sets and expression/function definitions) into
 /// <see cref="CqlDefinition"/>s on the library context.
 /// </summary>
-partial class ExpressionBuilderContext
+partial class CodeBuilderContext
 {
     public void ProcessCodeSystemDef(
         CodeSystemDef codeSystem) =>
@@ -175,7 +175,7 @@ partial class ExpressionBuilderContext
             Type[] parameterTypes,
             string expressionDefName)
         {
-            if (!_expressionBuilderSettings.AllowUnresolvedExternals)
+            if (!_codeBuilderSettings.AllowUnresolvedExternals)
                 throw this.NewExpressionBuildingException(
                     $"{expressionKey} is declared external, but it was not defined in the expression scope.");
 

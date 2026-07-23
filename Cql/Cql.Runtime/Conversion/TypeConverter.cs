@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -98,8 +98,8 @@ namespace Hl7.Cql.Conversion
         /// <param name="from">The object to convert.</param>
         /// <returns>The result of the conversion.</returns>
         /// <exception cref="InvalidOperationException">If no conversion is defined.</exception>
-        /// <remarks>The ExpressionBuilder inserts calls to this method in the generated Linq.Expressions,
-        /// so do not rename or change this method, without adapting the ExpressionBuilder.</remarks>
+        /// <remarks>The CodeBuilder inserts calls to this method in the generated C# output,
+        /// so do not rename or change this method, without adapting the CodeBuilder.</remarks>
         public T? Convert<T>(object? from) => (T?)Convert(from, typeof(T));
 
         /// <summary>

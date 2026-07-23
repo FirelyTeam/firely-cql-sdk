@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -16,7 +16,7 @@ namespace Hl7.Cql.Compiler;
 /// The definition dictionary and the alias/code/code-system bookkeeping shared by the
 /// per-definition processors.
 /// </summary>
-partial class LibraryExpressionBuilderContext
+partial class LibraryCodeBuilderContext
 {
     #region Definitions
 
@@ -109,7 +109,7 @@ partial class LibraryExpressionBuilderContext
         return codings;
     }
 
-    public LibrarySetExpressionBuilderContext? LibrarySetContext => _libsCtx;
+    public LibrarySetCodeBuilderContext? LibrarySetContext => _libsCtx;
 
     #endregion
 

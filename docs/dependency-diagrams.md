@@ -25,10 +25,10 @@ classDiagram
     direction LR
 
     namespace Compiler {
-        class LibrarySetExpressionBuilder { }    
-        class LibraryExpressionBuilder { }    
-        class ExpressionBuilder { }    
-        class ExpressionBuilderSettings { }    
+        class LibrarySetCodeBuilder { }    
+        class LibraryCodeBuilder { }    
+        class CodeBuilder { }    
+        class CodeBuilderSettings { }    
         class TupleBuilderCache { }
         class CqlContextBinder { }
         class CqlOperatorsBinder { }       
@@ -58,9 +58,9 @@ classDiagram
     }
 
     %% Style Scoped Types as Cyan
-    style LibrarySetExpressionBuilder fill:#055
-    style LibraryExpressionBuilder fill:#055
-    style ExpressionBuilder fill:#055
+    style LibrarySetCodeBuilder fill:#055
+    style LibraryCodeBuilder fill:#055
+    style CodeBuilder fill:#055
     style TupleBuilderCache fill:#055
     
     %% Inheritance  
@@ -69,17 +69,17 @@ classDiagram
     DeterministicIdGenerator --> ICacheKeyGenerator : implements
     
     %% Dependencies                                                 
-    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
-    LibraryPreprocessorBuilder ..> LibrarySetExpressionBuilder : injected
-    ExpressionBuilder ..> LibraryExpressionBuilder : injected
-    LibraryPreprocessorBuilder ..> LibraryExpressionBuilder : injected
+    LibraryCodeBuilder ..> LibrarySetCodeBuilder : injected
+    LibraryPreprocessorBuilder ..> LibrarySetCodeBuilder : injected
+    CodeBuilder ..> LibraryCodeBuilder : injected
+    LibraryPreprocessorBuilder ..> LibraryCodeBuilder : injected
 
-    TypeResolver ..> ExpressionBuilder : injected
-    CqlOperatorsBinder ..> ExpressionBuilder : injected
-    TupleBuilderCache ..> ExpressionBuilder : injected
-    CqlContextBinder ..> ExpressionBuilder : injected
-    ExpressionBuilderSettings ..> ExpressionBuilder : injected
-    TypeConverter ..> ExpressionBuilder : injected
+    TypeResolver ..> CodeBuilder : injected
+    CqlOperatorsBinder ..> CodeBuilder : injected
+    TupleBuilderCache ..> CodeBuilder : injected
+    CqlContextBinder ..> CodeBuilder : injected
+    CodeBuilderSettings ..> CodeBuilder : injected
+    TypeConverter ..> CodeBuilder : injected
 
     TypeResolver ..> CqlOperatorsBinder : injected
     TypeConverter ..> CqlOperatorsBinder : injected

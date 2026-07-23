@@ -16,7 +16,7 @@ namespace Hl7.Cql.Compiler.CodeModel;
 /// <summary>
 /// The assign-to-type / type-as / type-is / coalesce helpers the expression builder and
 /// <see cref="CqlOperatorsBinder"/> use on subexpressions; see the remarks on
-/// <see cref="ExpressionBuilderContext"/>.
+/// <see cref="CodeBuilderContext"/>.
 /// </summary>
 internal static class CodeExpressionExtensions
 {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -24,7 +24,7 @@ using Tuple = Hl7.Cql.Elm.Tuple;
 #region Context
 
 /// <summary>
-/// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
+/// The CodeBuilderContext class maintains scope information for the traversal of ElmPackage statements.
 /// </summary>
 /// <remarks>
 /// Translates ELM nodes into <see cref="CodeExpression"/> trees. The dispatch shape and
@@ -32,27 +32,27 @@ using Tuple = Hl7.Cql.Elm.Tuple;
 /// pipeline (see <c>docs/linq-expression-removal-plan.md</c>; its sources remain readable at
 /// that pipeline's final commit, <c>85207efd5</c>).
 /// </remarks>
-internal partial class ExpressionBuilderContext
+internal partial class CodeBuilderContext
 (
-    ILogger<ExpressionBuilder> logger,
-    ExpressionBuilderSettings expressionBuilderSettings,
+    ILogger<CodeBuilder> logger,
+    CodeBuilderSettings codeBuilderSettings,
     CqlOperatorsBinder cqlOperatorsBinder,
     TupleBuilderCache tupleBuilderCache,
     TypeResolver typeResolver,
     TypeConverter typeConverter,
     CqlContextBinder cqlContextBinder,
-    LibraryExpressionBuilderContext libraryContext,
+    LibraryCodeBuilderContext libraryContext,
     Dictionary<string, CodeLocal>? operands = null // Parameters for function definitions. Used during ProcessExpressionDef.
 )
 {
-    private readonly ILogger<ExpressionBuilder> _logger = logger;
-    private readonly ExpressionBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
+    private readonly ILogger<CodeBuilder> _logger = logger;
+    private readonly CodeBuilderSettings _codeBuilderSettings = codeBuilderSettings;
     private readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
     private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
     private readonly TypeResolver _typeResolver = typeResolver;
     private readonly TypeConverter _typeConverter = typeConverter;
     private readonly CqlContextBinder _cqlContextBinder = cqlContextBinder;
-    private readonly LibraryExpressionBuilderContext _libraryContext = libraryContext;
+    private readonly LibraryCodeBuilderContext _libraryContext = libraryContext;
     private readonly Dictionary<string, CodeLocal>? _operands = operands;
 
     // NOTE(phase4): the old builder carried an IExpressionMutator list here, documented as

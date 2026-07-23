@@ -1,6 +1,6 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 /*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -119,7 +119,7 @@ namespace Hl7.Cql.Operators
                 return (T)(object)null!;
             var type = source.GetType();
 
-            // Mirror the design-time behavior in ExpressionBuilderContext.PropertyHelper:
+            // Mirror the design-time behavior in CodeBuilderContext.PropertyHelper:
             // for properties such as FhirDateTime.value, use the source object itself and
             // convert it (e.g. FhirDateTime -> CqlDateTime) rather than reading and parsing
             // the primitive string value. Without this, a late-bound access - which happens

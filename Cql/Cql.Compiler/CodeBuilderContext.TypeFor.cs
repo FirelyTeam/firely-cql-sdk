@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -17,7 +17,7 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Resolving the .NET type for an ELM element or type specifier.
 /// </summary>
-partial class ExpressionBuilderContext
+partial class CodeBuilderContext
 {
     private Type? TypeFor(
         Element element,

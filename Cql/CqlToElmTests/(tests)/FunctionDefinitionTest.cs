@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -300,7 +300,7 @@ namespace Hl7.Cql.CqlToElm.Test
             // CqlContext parameter (see CqlLambdaDefinition remarks) -- so its Parameters list is
             // CQL-operand-only and the index shifts down by one. The registered
             // DefinitionSignature, however, is a documented parity quirk for EXTERNAL functions
-            // specifically (see ExpressionBuilderContext.LibraryDefs.cs's HandleExternalFunction
+            // specifically (see CodeBuilderContext.LibraryDefs.cs's HandleExternalFunction
             // NOTE): it still carries a synthetic leading typeof(CqlContext) entry, faithfully
             // replicating the old builder's signature for this lookup.
             var cqlDefinition = irDefinitionDictionary["FuncTest-1.0.0", new DefinitionSignature("ToInteger", typeof(CqlContext), typeof(decimal?))] is CqlLambdaDefinition ld ? ld.Lambda : null;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -42,8 +42,8 @@ internal readonly record struct ElmToolkitServices(
         IServiceCollection services,
         ElmToolkitConfig config)
     {
-        var expressionBuilderSettings = config.ToExpressionBuilderSettings();
-        AddCqlCompilerServices(services, config.LRUCacheSize, expressionBuilderSettings);
+        var codeBuilderSettings = config.ToCodeBuilderSettings();
+        AddCqlCompilerServices(services, config.LRUCacheSize, codeBuilderSettings);
         services.TryAddSingleton<TypeToCSharpConverter>();
         services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
         services.TryAddSingleton<AssemblyCompiler>();
@@ -55,9 +55,9 @@ internal readonly record struct ElmToolkitServices(
     public static IServiceCollection AddCqlCompilerServices(
         IServiceCollection services,
         int lruCacheSize = 0,
-        ExpressionBuilderSettings? expressionBuilderSettings = null)
+        CodeBuilderSettings? codeBuilderSettings = null)
     {
-        expressionBuilderSettings ??= ExpressionBuilderSettings.Default;
+        codeBuilderSettings ??= CodeBuilderSettings.Default;
         services.TryAddSingleton(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
 
@@ -73,16 +73,16 @@ internal readonly record struct ElmToolkitServices(
         });
 
         services.TryAddSingleton<LibraryPreprocessorBuilder>();
-        services.TryAddSingleton(_ => expressionBuilderSettings);
+        services.TryAddSingleton(_ => codeBuilderSettings);
         services.TryAddScoped<TupleBuilderCache>();
 
         // Register the compiler/code-generation pipeline components. These share the
         // TypeResolver/TypeConverter/TupleBuilderCache/LibraryPreprocessorBuilder above.
         services.TryAddSingleton<CqlOperatorsBinder>();
         services.TryAddSingleton<CqlContextBinder>();
-        services.TryAddScoped<ExpressionBuilder>();
-        services.TryAddScoped<LibraryExpressionBuilder>();
-        services.TryAddScoped<LibrarySetExpressionBuilder>();
+        services.TryAddScoped<CodeBuilder>();
+        services.TryAddScoped<LibraryCodeBuilder>();
+        services.TryAddScoped<LibrarySetCodeBuilder>();
 
         return services;
     }
