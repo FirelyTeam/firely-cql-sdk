@@ -381,16 +381,12 @@ partial class CodeBuilderContext
                                               throw this.NewExpressionBuildingException(
                                                   $"{type} was expected to be a list type.");
                         var newArray = new CodeNewArrayBounds(listElementType, new CodeConstant(0, typeof(int)));
-                        // fromCqlAsOperator: the old pipeline built ElmAsExpression here (and at
-                        // the other As() return sites below) — see CodeCast.FromCqlAsOperator.
-                        var elmAs = new CodeCast(newArray, type, castKind, fromCqlAsOperator: true);
-                        return elmAs;
+                        return new CodeCast(newArray, type, castKind);
                     }
                     else if (type == _typeResolver.AnyType) // handles untyped empty lists whose type is Any
                     {
                         var newArray = new CodeNewArrayBounds(_typeResolver.AnyType, new CodeConstant(0, typeof(int)));
-                        var elmAs = new CodeCast(newArray, type, castKind, fromCqlAsOperator: true);
-                        return elmAs;
+                        return new CodeCast(newArray, type, castKind);
                     }
 
                     throw this.NewExpressionBuildingException(
@@ -408,7 +404,7 @@ partial class CodeBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
                     var defaultExpression = new CodeDefault(type);
-                    return new CodeCast(defaultExpression, type, castKind, fromCqlAsOperator: true);
+                    return new CodeCast(defaultExpression, type, castKind);
                 }
                 else
                 {
@@ -435,7 +431,7 @@ partial class CodeBuilderContext
                             // falls into the default arm and still wraps in a cast/as node built
                             // from the original operand, rather than returning operand or
                             // converted directly.
-                            return new CodeCast(operand, type, castKind, fromCqlAsOperator: true);
+                            return new CodeCast(operand, type, castKind);
                     }
                 }
             }
@@ -459,7 +455,7 @@ partial class CodeBuilderContext
                                        @as.operand));
             }
 
-            return new CodeCast(operand, type, castKind, fromCqlAsOperator: true);
+            return new CodeCast(operand, type, castKind);
         }
     }
 
