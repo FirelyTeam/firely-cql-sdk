@@ -38,7 +38,7 @@ python3 tools/condense_spec/fetch_fhir_page.py <url> [<url> ...]
 
 ### mermaid
 
-Renders Mermaid diagrams (`.mmd` source files, or inline ` ```mermaid ` fences in a markdown file)
+Renders Mermaid diagrams (`.mmd` source files, or inline `` ```mermaid `` fences in a markdown file)
 to `.svg`, so docs embed a pre-rendered image instead of relying on the host's inline Mermaid
 renderer — GitHub's renderer does not reliably support every Mermaid feature used in this repo's
 diagrams (`classDiagram` `namespace` blocks, multi-target `style` directives, custom

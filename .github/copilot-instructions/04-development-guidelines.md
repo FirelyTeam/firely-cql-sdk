@@ -173,7 +173,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 4.4.11 **Mermaid diagrams**
 
-4.4.11.1 Pre-render every Mermaid diagram to `.svg` and embed it as an image — never leave a raw ` ```mermaid ` fenced block as the only way to view it. GitHub's inline renderer doesn't reliably support `classDiagram` `namespace` blocks, multi-target `style` directives, or custom `<<stereotype>>` annotations, which this repo's diagrams use, and can silently fail to render them.
+4.4.11.1 Pre-render every Mermaid diagram to `.svg` and embed it as an image — never leave a raw `` ```mermaid `` fenced block as the only way to view it. GitHub's inline renderer doesn't reliably support `classDiagram` `namespace` blocks, multi-target `style` directives, or custom `<<stereotype>>` annotations, which this repo's diagrams use, and can silently fail to render them.
 
 4.4.11.2 For the full authoring workflow (file layout/naming, embedding, editing, migrating an old inline diagram), follow [generate-svg-from-mermaid](../../.claude/skills/generate-svg-from-mermaid/SKILL.md).
 

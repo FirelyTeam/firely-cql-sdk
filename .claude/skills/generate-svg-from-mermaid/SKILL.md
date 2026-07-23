@@ -11,7 +11,7 @@ diagrams — `classDiagram` `namespace` blocks, multi-target `style` directives,
 standalone `.mmd` source files and rendered ahead of time to `.svg` via
 [tools/mermaid/export-mermaid-svg.ps1](../../../tools/mermaid/export-mermaid-svg.ps1) /
 [.sh](../../../tools/mermaid/export-mermaid-svg.sh), then embedded in the markdown as a normal
-image link. Never leave a raw ` ```mermaid ` fenced block as the only way to view a diagram meant
+image link. Never leave a raw `` ```mermaid `` fenced block as the only way to view a diagram meant
 for GitHub.
 
 Use the same layout engine as [firely-dqm-libraries](https://github.com/FirelyTeam/firely-dqm-libraries)'s
@@ -62,7 +62,7 @@ Write the `.mmd` source directly (don't draft it as an inline fenced block first
 `docs/diagrams/<markdown-basename>.<diagram-name>.mmd`, run the render command above, then add
 the "Mermaid source: [...]" + image link pair to the markdown by hand.
 
-## Migrating an old doc that still has inline ` ```mermaid ` fences
+## Migrating an old doc that still has inline `` ```mermaid `` fences
 
 The export scripts also support bulk-extracting every fenced block in one pass and rewriting the
 markdown automatically:

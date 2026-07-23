@@ -32,7 +32,7 @@ locate the repo root); when `-SourcePath`/`--source-path` is given, the output `
 after the *source* file, so the same `-MarkdownPath` can be reused across several diagrams that
 share one doc without their outputs colliding.
 
-Bulk-extract every inline ` ```mermaid ` fenced block from a markdown file and rewrite it to
+Bulk-extract every inline `` ```mermaid `` fenced block from a markdown file and rewrite it to
 reference the rendered images:
 
 ```powershell
@@ -59,8 +59,10 @@ as well as `flowchart`/`stateDiagram`).
 ## Requirements
 
 Node.js (the scripts invoke `npx -y @mermaid-js/mermaid-cli` directly — no local install or
-lockfile needed). A `temp/puppeteer-config.json` (gitignored, `--no-sandbox`) is created
-automatically on first run so rendering works headlessly in sandboxed/CI environments.
+lockfile needed). The Bash script additionally requires `git` (to locate the repo root) and `perl`
+(for portable multiline extraction and relative-path computation). A `temp/puppeteer-config.json`
+(gitignored, `--no-sandbox`) is created automatically on first run so rendering works headlessly in
+sandboxed/CI environments.
 
 **Created in:** [#1399](https://github.com/FirelyTeam/firely-cql-sdk/issues/1399), alongside the
 `docs/dependency-diagrams.md` accuracy fixes — adapted from

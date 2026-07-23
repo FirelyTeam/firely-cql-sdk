@@ -23,7 +23,7 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 - Check `GlobalUsings.cs` before adding a `using` — don't duplicate what's already global.
 - Naming: `CqlSdk` prefix for example projects, `Hl7.Cql` namespace prefix for core SDK assemblies.
 - Project docs (READMEs, `docs/`) use hierarchical heading numbers (`# 1.`, `## 1.1.`, `### 1.1.1.`) and always cross-reference other documents with real Markdown links (`[label](relative/path.md)`), never a bare filename. Internal-only packages should describe what they do in their README but skip usage code samples (only packages meant for direct consumer use get those).
-- **Mermaid diagrams** in markdown docs must be pre-rendered to `.svg` and embedded as an image, not left as a raw ` ```mermaid ` fenced block — GitHub's inline renderer doesn't reliably support `classDiagram` `namespace` blocks, multi-target `style` directives, or custom `<<stereotype>>` annotations, which this repo's diagrams use. See the `generate-svg-from-mermaid` skill.
+- **Mermaid diagrams** in markdown docs must be pre-rendered to `.svg` and embedded as an image, not left as a raw `` ```mermaid `` fenced block — GitHub's inline renderer doesn't reliably support `classDiagram` `namespace` blocks, multi-target `style` directives, or custom `<<stereotype>>` annotations, which this repo's diagrams use. See the `generate-svg-from-mermaid` skill.
 
 ## Nullological operators — interface vs implementation return type
 
