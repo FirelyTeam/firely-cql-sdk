@@ -12,26 +12,28 @@ Utility scripts for the Firely CQL SDK.
 
 ### condense_spec
 
-Converts the CQL specification from HTML to Markdown format for AI parsing.
+Converts HL7 specification HTML to Markdown format for AI parsing — `condense_spec.py` for the CQL
+spec (converted from a full local site export), `fetch_fhir_page.py` for individual FHIR spec pages
+(fetched by URL, since the FHIR spec is too large to vendor wholesale).
 
 **Location:** `tools/condense_spec/`
 
-**Purpose:** Condenses the 40MB CQL spec (1,752 files) into 912KB of clean Markdown (24 files) for easier AI analysis.
+**Purpose:** Condenses the 40MB CQL spec (1,752 files) into 912KB of clean Markdown (24 files) for easier AI analysis; fetches and condenses FHIR spec pages on demand.
 
 **Usage:**
 ```bash
 python3 tools/condense_spec/condense_spec.py
+python3 tools/condense_spec/fetch_fhir_page.py <url> [<url> ...]
 ```
 
 **Results:**
-- Reduces spec from 40MB → 912KB (97.7% reduction)
-- Converts 23 HTML files to clean Markdown
-- Removes CSS, JavaScript, images, navigation
-- Output: `spec/condensed/` directory
+- CQL: reduces spec from 40MB → 912KB (97.7% reduction), converts 23 HTML files to clean Markdown
+- Both: removes CSS, JavaScript, images, navigation
+- Output: `spec/cql/condensed/` and `spec/fhir/condensed/`, each with a `README.md` one level up (`spec/cql/README.md`, `spec/fhir/README.md`) recording version/source details and a file index
 
 **Documentation:** See [tools/condense_spec/README.md](condense_spec/README.md) for complete details.
 
-**Created in:** PR for "Experimental - Using AI to verify codebase conformance with CQL spec"
+**Created in:** PR for "Experimental - Using AI to verify codebase conformance with CQL spec"; extended in [#1389](https://github.com/FirelyTeam/firely-cql-sdk/issues/1389) to add the FHIR fetch tool
 
 ---
 
