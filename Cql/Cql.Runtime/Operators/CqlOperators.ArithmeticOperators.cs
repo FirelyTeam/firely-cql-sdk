@@ -14,6 +14,12 @@ namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {
+        /// <summary>
+        /// The minimum precision value for the Decimal type (10^-8), which <see cref="Successor(decimal?)"/> adds to,
+        /// and <see cref="Predecessor(decimal?)"/> subtracts from, its argument (CQL spec §9.B).
+        /// </summary>
+        internal const decimal MinDecimalPrecisionValue = 0.00000001m;
+
         #region Abs
 
         public int? Abs(int? argument)
@@ -658,7 +664,7 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null)
                 return null;
-            else return argument - 0.00000001m;
+            else return argument - MinDecimalPrecisionValue;
         }
         public CqlQuantity? Predecessor(CqlQuantity? argument)
         {
@@ -840,7 +846,7 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null)
                 return null;
-            else return argument + 0.00000001m;
+            else return argument + MinDecimalPrecisionValue;
         }
         public CqlQuantity? Successor(CqlQuantity? argument)
         {
