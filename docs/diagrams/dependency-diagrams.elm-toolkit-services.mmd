@@ -1,84 +1,81 @@
 %%{init: {
     'layout': 'elk',
     'themeVariables':{
-      'lineColor': '#888',
-      'lineWidth': 4,
-      'mainBkg': '#2b2b2b',
-      'classText': '#f0f0f0',
-      'nodeBorder': '#aaaaaa'
+      'lineColor': '#333',
+      'lineWidth': 4
     },
-    'themeCSS': '.labelBkg { background: transparent !important; } .edgeLabel .label rect { fill: transparent !important; } .edgeLabel .label span { background: transparent !important; } .edgeLabel, .edgeLabel p { color: #333 !important; }'
+    'themeCSS': '.edgeLabel, .edgeLabel p, .edgeLabel rect, .labelBkg { background: transparent !important; background-color: transparent !important; fill: transparent !important; }'
 }}%%
 
-classDiagram
+flowchart TB
 
-    direction TB
+subgraph Compiler
+direction TB
+LibrarySetCodeBuilder["<b>LibrarySetCodeBuilder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Builds C# code-model definitions for every library in a library set — the top of the ELM→C# pipeline.</div>"]
+LibraryCodeBuilder["<b>LibraryCodeBuilder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Processes a single library's ELM definitions into a CqlDefinitionDictionary of C# code-model members.</div>"]
+CodeBuilder["<b>CodeBuilder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Builds the C# code-model expression tree for one CQL/ELM expression definition.</div>"]
+CodeBuilderSettings["<b>CodeBuilderSettings</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Configuration flags controlling CodeBuilder behavior (e.g. scope-redefinition rules).</div>"]
+TupleBuilderCache["<b>TupleBuilderCache</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Creates and caches dynamically-generated CQL tuple types for the current library set.</div>"]
+CqlContextBinder["<b>CqlContextBinder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Binds ELM parameter/context references to CqlContext runtime method calls.</div>"]
+CqlOperatorsBinder["<b>CqlOperatorsBinder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Resolves an ELM operator/function call to the matching ICqlOperators method overload.</div>"]
+LibraryPreprocessorBuilder["<b>LibraryPreprocessorBuilder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Creates a LibraryPreprocessor that runs a preparatory pass over a library set before code building.</div>"]
+end
 
-    namespace Compiler {
-        class LibrarySetCodeBuilder { }    
-        class LibraryCodeBuilder { }    
-        class CodeBuilder { }    
-        class CodeBuilderSettings { }    
-        class TupleBuilderCache { }
-        class CqlContextBinder { }
-        class CqlOperatorsBinder { }       
-        class LibraryPreprocessorBuilder { }
-    }
+subgraph CodeGeneration
+direction TB
+TypeToCSharpConverter["<b>TypeToCSharpConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Formats .NET Type/TypeInfo values as C# source-code type-name syntax (including CQL tuple types) for the emitted code.</div>"]
+LibrarySetCSharpCodeGenerator["<b>LibrarySetCSharpCodeGenerator</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Turns the built CqlDefinition dictionary into per-library .NET C# classes (usings, tuple metadata, singleton/ILibrary boilerplate).</div>"]
+AssemblyCompiler["<b>AssemblyCompiler</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Compiles the generated C# source into an in-memory .NET assembly via Roslyn.</div>"]
+ICacheKeyGenerator["<b>ICacheKeyGenerator</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstraction for generating a deterministic cache key for a library/definition pair.</div>"]
+DeterministicIdGenerator["<b>DeterministicIdGenerator</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>SHA256-hash-based ICacheKeyGenerator implementation, salted per library set.</div>"]
+end
 
-    namespace CodeGeneration {
-        class TypeToCSharpConverter { }
-        class LibrarySetCSharpCodeGenerator { }
-        class AssemblyCompiler { }
-        class ICacheKeyGenerator { }
-        class DeterministicIdGenerator { }
-    }
+subgraph Abstraction
+direction TB
+TypeResolver["<b>TypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstract base defining how ELM type specifiers map to .NET Types.</div>"]
+end
 
-    namespace Abstraction {
-        class TypeResolver { }
-    }
+subgraph Runtime
+direction TB
+BaseTypeResolver["<b>BaseTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>TypeResolver implementation providing the default CQL System-type-to-.NET mappings.</div>"]
+TypeConverter["<b>TypeConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Runtime value-conversion engine used to coerce values between CQL/.NET types.</div>"]
+end
 
-    namespace Runtime {
-        class BaseTypeResolver { }
-        class TypeConverter { }
-    }
+subgraph Fhir
+direction TB
+FhirTypeResolver["<b>FhirTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>BaseTypeResolver extended with FHIR resource/type mappings, built from a Firely SDK ModelInspector.</div>"]
+ModelInspector["<b>ModelInspector</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(external) External Firely .NET SDK type (Hl7.Fhir.Introspection) that reflects over FHIR POCO classes to expose their type/property metadata.</div>"]
+end
 
-    namespace Fhir {
-        class FhirTypeResolver { }
-        class ModelInspector { }
-    }
+style LibrarySetCodeBuilder fill:#AFEEEE
+style LibraryCodeBuilder fill:#AFEEEE
+style CodeBuilder fill:#AFEEEE
+style TupleBuilderCache fill:#AFEEEE
 
-    %% Style Scoped Types as Cyan
-    style LibrarySetCodeBuilder fill:#055
-    style LibraryCodeBuilder fill:#055
-    style CodeBuilder fill:#055
-    style TupleBuilderCache fill:#055
-    
-    %% Inheritance  
-    BaseTypeResolver --> TypeResolver : inherits
-    FhirTypeResolver --> BaseTypeResolver : inherits
-    DeterministicIdGenerator --> ICacheKeyGenerator : implements
-    
-    %% Dependencies                                                 
-    LibraryCodeBuilder ..> LibrarySetCodeBuilder : injected
-    LibraryPreprocessorBuilder ..> LibrarySetCodeBuilder : injected
-    CodeBuilder ..> LibraryCodeBuilder : injected
-    LibraryPreprocessorBuilder ..> LibraryCodeBuilder : injected
+BaseTypeResolver -->|inherits| TypeResolver
+FhirTypeResolver -->|inherits| BaseTypeResolver
+DeterministicIdGenerator -->|implements| ICacheKeyGenerator
 
-    TypeResolver ..> CodeBuilder : injected
-    CqlOperatorsBinder ..> CodeBuilder : injected
-    TupleBuilderCache ..> CodeBuilder : injected
-    CqlContextBinder ..> CodeBuilder : injected
-    CodeBuilderSettings ..> CodeBuilder : injected
-    TypeConverter ..> CodeBuilder : injected
+LibraryCodeBuilder -.->|injected| LibrarySetCodeBuilder
+LibraryPreprocessorBuilder -.->|injected| LibrarySetCodeBuilder
+CodeBuilder -.->|injected| LibraryCodeBuilder
+LibraryPreprocessorBuilder -.->|injected| LibraryCodeBuilder
 
-    TypeResolver ..> CqlOperatorsBinder : injected
-    TypeConverter ..> CqlOperatorsBinder : injected
+TypeResolver -.->|injected| CodeBuilder
+CqlOperatorsBinder -.->|injected| CodeBuilder
+TupleBuilderCache -.->|injected| CodeBuilder
+CqlContextBinder -.->|injected| CodeBuilder
+CodeBuilderSettings -.->|injected| CodeBuilder
+TypeConverter -.->|injected| CodeBuilder
 
-    ModelInspector ..> TypeConverter : injected  
-    ModelInspector ..> FhirTypeResolver : injected  
+TypeResolver -.->|injected| CqlOperatorsBinder
+TypeConverter -.->|injected| CqlOperatorsBinder
 
-    TypeToCSharpConverter ..> LibrarySetCSharpCodeGenerator : injected
-    TypeResolver ..> LibrarySetCSharpCodeGenerator : injected
-    ICacheKeyGenerator ..> LibrarySetCSharpCodeGenerator : created
+ModelInspector -.->|injected| TypeConverter
+ModelInspector -.->|injected| FhirTypeResolver
 
-    TypeResolver ..> AssemblyCompiler : injected
+TypeToCSharpConverter -.->|injected| LibrarySetCSharpCodeGenerator
+TypeResolver -.->|injected| LibrarySetCSharpCodeGenerator
+ICacheKeyGenerator -.->|created| LibrarySetCSharpCodeGenerator
+
+TypeResolver -.->|injected| AssemblyCompiler

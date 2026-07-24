@@ -1,50 +1,45 @@
 %%{init: {
     'layout': 'elk',
     'themeVariables':{
-      'lineColor': '#888',
-      'lineWidth': 4,
-      'mainBkg': '#2b2b2b',
-      'classText': '#f0f0f0',
-      'nodeBorder': '#aaaaaa'
+      'lineColor': '#333',
+      'lineWidth': 4
     },
-    'themeCSS': '.labelBkg { background: transparent !important; } .edgeLabel .label rect { fill: transparent !important; } .edgeLabel .label span { background: transparent !important; } .edgeLabel, .edgeLabel p { color: #333 !important; }'
+    'themeCSS': '.edgeLabel, .edgeLabel p, .edgeLabel rect, .labelBkg { background: transparent !important; background-color: transparent !important; fill: transparent !important; }'
 }}%%
 
-classDiagram
+flowchart TB
 
-    direction TB
+subgraph Packaging
+direction TB
+ResourcePackager["<b>ResourcePackager</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Packages a compiled ELM/C#/assembly bundle for one library into FHIR Library (and optionally Measure) resources.</div>"]
+ResourceCanonicalBuilder["<b>ResourceCanonicalBuilder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(delegate) Builds a FHIR resource's canonical URL from its type, identifier, and version.</div>"]
+CqlTypeToFhirTypeMapper["<b>CqlTypeToFhirTypeMapper</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Maps CQL/ELM types to their corresponding FHIR type representations for packaging.</div>"]
+end
 
-    namespace Packaging {
-        class ResourcePackager { }
-        class ResourceCanonicalBuilder {
-            <<Delegate>>
-        }
-        class CqlTypeToFhirTypeMapper { }
-    }
+subgraph Abstraction
+direction TB
+TypeResolver["<b>TypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstract base defining how ELM type specifiers map to .NET Types.</div>"]
+end
 
-    namespace Abstraction {
-        class TypeResolver { }
-    }
+subgraph Runtime
+direction TB
+BaseTypeResolver["<b>BaseTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>TypeResolver implementation providing the default CQL System-type-to-.NET mappings.</div>"]
+end
 
-    namespace Runtime {
-        class BaseTypeResolver { }
-    }
+subgraph Fhir
+direction TB
+FhirTypeResolver["<b>FhirTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>BaseTypeResolver extended with FHIR resource/type mappings, built from a Firely SDK ModelInspector.</div>"]
+ModelInspector["<b>ModelInspector</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(external) External Firely .NET SDK type (Hl7.Fhir.Introspection) that reflects over FHIR POCO classes to expose their type/property metadata.</div>"]
+end
 
-    namespace Fhir {
-        class FhirTypeResolver { }
-        class ModelInspector {
-            <<external>>
-        }
-    }
+BaseTypeResolver -->|inherits| TypeResolver
+FhirTypeResolver -->|inherits| BaseTypeResolver
 
-    %% Inheritance  
-    BaseTypeResolver --> TypeResolver : inherits
-    FhirTypeResolver --> BaseTypeResolver : inherits
-    
-    %% Dependencies                                                 
-    TypeResolver ..> ResourcePackager : injected
-    ResourceCanonicalBuilder ..> ResourcePackager : injected
-    TypeResolver ..> CqlTypeToFhirTypeMapper : injected
-    CqlTypeToFhirTypeMapper ..> ResourcePackager : created
-    
-    ModelInspector ..> FhirTypeResolver : injected
+TypeResolver -.->|injected| ResourcePackager
+ResourceCanonicalBuilder -.->|injected| ResourcePackager
+TypeResolver -.->|injected| CqlTypeToFhirTypeMapper
+CqlTypeToFhirTypeMapper -.->|created| ResourcePackager
+
+ModelInspector -.->|injected| FhirTypeResolver
+
+style ResourceCanonicalBuilder fill:#AFEEEE

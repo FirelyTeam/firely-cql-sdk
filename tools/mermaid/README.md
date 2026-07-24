@@ -3,9 +3,8 @@
 Renders Mermaid diagrams to `.svg` via [@mermaid-js/mermaid-cli](https://github.com/mermaid-js/mermaid-cli),
 so markdown docs can embed a pre-rendered image instead of relying on the host's inline Mermaid
 renderer. GitHub's renderer does not reliably support every Mermaid feature used in this repo's
-diagrams (`classDiagram` `namespace` blocks, multi-target `style` directives, custom
-`<<stereotype>>` annotations), so those diagrams are authored as standalone `.mmd` source files
-and shipped as `.svg` artifacts instead.
+diagrams (`subgraph` grouping, HTML node labels, multi-target `style` directives), so those diagrams
+are authored as standalone `.mmd` source files and shipped as `.svg` artifacts instead.
 
 For the full authoring workflow (file layout, naming, embedding, migrating an old inline diagram),
 see the [generate-svg-from-mermaid](../../.claude/skills/generate-svg-from-mermaid/SKILL.md) skill.

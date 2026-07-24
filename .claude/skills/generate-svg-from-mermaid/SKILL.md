@@ -6,9 +6,11 @@ description: Add, edit, or regenerate a Mermaid diagram embedded in a markdown d
 # Generate SVG from Mermaid
 
 GitHub's inline Mermaid renderer does not reliably support every feature used in this repo's
-diagrams — `classDiagram` `namespace` blocks, multi-target `style` directives, and custom
-`<<stereotype>>` annotations can silently fail to render. Diagrams are therefore authored as
-standalone `.mmd` source files and rendered ahead of time to `.svg` via
+diagrams — `classDiagram` `namespace` blocks, multi-target `style` directives, custom
+`<<stereotype>>` annotations, and (for `flowchart`) HTML node labels (`<b>`/`<br/>`/`<div>`, used
+for the title+description card style below) can silently fail to render, since GitHub's renderer
+runs with a stricter security policy than a local `mermaid-cli` render does. Diagrams are therefore
+authored as standalone `.mmd` source files and rendered ahead of time to `.svg` via
 [tools/mermaid/export-mermaid-svg.ps1](../../../tools/mermaid/export-mermaid-svg.ps1) /
 [.sh](../../../tools/mermaid/export-mermaid-svg.sh), then embedded in the markdown as a normal
 image link. Never leave a raw `` ```mermaid `` fenced block as the only way to view a diagram meant
@@ -20,41 +22,62 @@ diagrams: set `'layout': 'elk'` in the `%%{init: {...}}%%` directive at the top 
 to `classDiagram` as well as `flowchart`/`stateDiagram` and generally produces a less cramped
 auto-layout than Mermaid's default (dagre) for diagrams with many nodes/edges.
 
+## Diagram type and node style
+
+Dependency-style diagrams (a set of types + their relationships) in this repo use `flowchart TB`
+with `subgraph` blocks for grouping — **not** `classDiagram` — so each node can show a title plus
+a short description instead of UML's mostly-empty attribute/method compartments. Each node's label
+is bold-centered title + left-aligned description paragraph:
+
+```
+NodeId["<b>NodeId</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>One-sentence description of what this type does.</div>"]
+```
+
+- `max-width` keeps boxes a readable width instead of growing to fit the whole sentence on one line.
+- `overflow-wrap:anywhere` is required — without it, a long unbroken run with no spaces (e.g.
+  `using/include/parameter/code/valueset/concept`) overflows the box edge instead of wrapping.
+- Escape literal `<`/`>` in the description text itself (e.g. generic syntax like `Interval<T>` →
+  `Interval&lt;T&gt;`) — the label is parsed as HTML, so unescaped angle brackets are read as
+  (invalid) tags, not text.
+- Group nodes with `subgraph Name ... end` (optionally `direction TB` inside), not
+  `namespace X { class Y {} }` — that was the `classDiagram` grouping syntax and no longer applies.
+- Edges: `A -->|inherits| B` for solid/structural relationships (inherits, implements), `A -.->|injected| B`
+  for dashed/dependency relationships (injected, created, configured) — `classDiagram`'s `-->`/`..>`
+  arrow syntax doesn't apply to `flowchart`.
+- A `style NodeId fill:#AABBCC` override (e.g. marking scoped/highlighted nodes) must stay a
+  **light** fill, since node text color is untouched (Mermaid's default dark purple/near-black) —
+  this repo uses `fill:#AFEEEE` (light cyan/PaleTurquoise) for that.
+
 ## Color scheme
 
-Class diagrams in this repo use dark vertices (class boxes) with light text, transparent-background
-edge labels, and the original pale-yellow `namespace` (cluster) boxes left untouched. Use this exact
-`%%{init: {...}}%%` block (only `lineColor`/`lineWidth` may already be present — merge in the rest):
+Nodes and `subgraph` boxes are left at Mermaid's default styling — only the connector lines are
+darkened, and edge labels ("injected", "created", etc.) have a transparent background instead of
+inheriting a fill. Use this exact `%%{init: {...}}%%` block:
 
 ```
 %%{init: {
     'layout': 'elk',
     'themeVariables':{
-      'lineColor': '#888',
-      'lineWidth': 4,
-      'mainBkg': '#2b2b2b',
-      'classText': '#f0f0f0',
-      'nodeBorder': '#aaaaaa'
+      'lineColor': '#333',
+      'lineWidth': 4
     },
-    'themeCSS': '.labelBkg { background: transparent !important; } .edgeLabel .label rect { fill: transparent !important; } .edgeLabel .label span { background: transparent !important; } .edgeLabel, .edgeLabel p { color: #333 !important; }'
+    'themeCSS': '.edgeLabel, .edgeLabel p, .edgeLabel rect, .labelBkg { background: transparent !important; background-color: transparent !important; fill: transparent !important; }'
 }}%%
 ```
 
 Notes if you need to tweak this further:
-- `mainBkg`/`classText`/`nodeBorder` control the vertex fill/text/border. Mermaid's `edgeLabelBackground`
-  theme variable does *not* control edge-label backgrounds for `classDiagram` in the ELK-rendered
-  "neo" look Mermaid currently uses — the actual element is a plain `<div class="labelBkg">`, so it
-  must be overridden via `themeCSS`, not `themeVariables`.
-- Edge-label *text* color is tied to the same variable family as vertex text (`classText`), so once
-  vertex text goes light, edge labels (which sit on the light namespace/canvas background, not on a
-  vertex) need their own explicit dark color override in `themeCSS` too — otherwise they end up
-  light-on-light and unreadable.
-- A `style ClassName fill:#AABBCC` override (e.g. marking scoped/highlighted classes) must use a
-  **dark** fill to stay legible, since all vertex text is now light — this repo uses `fill:#055`
-  (dark teal) for that. A light highlight fill (e.g. light cyan) would be illegible against light text,
-  same failure mode as the original dark-cyan-with-dark-text bug this scheme replaced.
-- Always render and visually check (convert to PNG and view it) after any color change — a plausible
-  variable name can silently target the wrong element, as above.
+- `lineColor` controls the connector lines/arrows only, not node fill/border — don't add
+  `mainBkg`/`classText`/`nodeBorder` unless you actually intend to recolor the nodes themselves
+  (a past iteration of this recipe did that by mistake; it was reverted — the ask was specifically
+  for the lines to be dark, not the nodes).
+- Mermaid's `edgeLabelBackground` theme variable does *not* control edge-label backgrounds in the
+  ELK-rendered "neo" look Mermaid currently uses, and the actual selector differs by diagram type —
+  `classDiagram` renders labels via a plain `<div class="labelBkg">`, while `flowchart` renders them
+  via `.edgeLabel`/`.edgeLabel p`/`.edgeLabel rect` with an inline `background-color`. Either way it
+  must be overridden via `themeCSS` (with `!important`), not `themeVariables` — and you may need to
+  inspect the rendered SVG's `<style>` block (or grep it) to find the real selector rather than
+  guessing, since a plausible-looking selector can silently fail to match.
+- Always render and visually check (convert to PNG and view it) after any color change.
 
 ## File layout
 

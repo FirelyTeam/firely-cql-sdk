@@ -1,11 +1,12 @@
 # Toolkit Services Dependency Diagrams
 These diagrams represent the internal dependencies of the CQL SDK toolkit services.
 
-Each diagram is authored as a Mermaid class diagram and rendered to a `.svg` ahead of time (see
+Each diagram is authored as a Mermaid flowchart (grouped into `subgraph` boxes per project, with each
+type shown as a title + one-line description) and rendered to a `.svg` ahead of time (see
 [tools/mermaid/](../tools/mermaid/)) rather than relying on GitHub's inline Mermaid renderer, which
-does not reliably support every Mermaid feature used here (`namespace` blocks, multi-target `style`
-directives, custom `<<stereotype>>` annotations). If you edit a diagram, edit its `.mmd` source file
-and regenerate the `.svg` — see [tools/mermaid/README.md](../tools/mermaid/README.md).
+does not reliably support every Mermaid feature used here (`subgraph` grouping, HTML node labels,
+multi-target `style` directives). If you edit a diagram, edit its `.mmd` source file and regenerate
+the `.svg` — see [tools/mermaid/README.md](../tools/mermaid/README.md).
 
 ## ElmToolkitServices Dependency Diagram
 
