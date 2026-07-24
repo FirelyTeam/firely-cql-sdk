@@ -14,7 +14,7 @@ direction TB
 LibrarySetCodeBuilder["<b>LibrarySetCodeBuilder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Builds C# code-model definitions for every library in a library set — the top of the ELM→C# pipeline.</div>"]
 LibraryCodeBuilder["<b>LibraryCodeBuilder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Processes a single library's ELM definitions into a CqlDefinitionDictionary of C# code-model members.</div>"]
 CodeBuilder["<b>CodeBuilder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Builds the C# code-model expression tree for one CQL/ELM expression definition.</div>"]
-CodeBuilderSettings["<b>CodeBuilderSettings</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Configuration flags controlling <b>CodeBuilder</b> behavior (e.g. scope-redefinition rules).</div>"]
+CodeBuilderSettings["<b>CodeBuilderSettings</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Configuration flags controlling CodeBuilder behavior (e.g. scope-redefinition rules).</div>"]
 TupleBuilderCache["<b>TupleBuilderCache</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Creates and caches dynamically-generated CQL tuple types for the current library set.</div>"]
 CqlContextBinder["<b>CqlContextBinder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Binds ELM parameter/context references to CqlContext runtime method calls.</div>"]
 CqlOperatorsBinder["<b>CqlOperatorsBinder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Resolves an ELM operator/function call to the matching ICqlOperators method overload.</div>"]
@@ -27,7 +27,7 @@ TypeToCSharpConverter["<b>TypeToCSharpConverter</b><br/><div style='text-align:l
 LibrarySetCSharpCodeGenerator["<b>LibrarySetCSharpCodeGenerator</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Turns the built CqlDefinition dictionary into per-library .NET C# classes (usings, tuple metadata, singleton/ILibrary boilerplate).</div>"]
 AssemblyCompiler["<b>AssemblyCompiler</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Compiles the generated C# source into an in-memory .NET assembly via Roslyn.</div>"]
 ICacheKeyGenerator["<b>ICacheKeyGenerator</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstraction for generating a deterministic cache key for a library/definition pair.</div>"]
-DeterministicIdGenerator["<b>DeterministicIdGenerator</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>SHA256-hash-based <b>ICacheKeyGenerator</b> implementation, salted per library set.</div>"]
+DeterministicIdGenerator["<b>DeterministicIdGenerator</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>SHA256-hash-based ICacheKeyGenerator implementation, salted per library set.</div>"]
 end
 
 subgraph Abstraction
@@ -37,13 +37,13 @@ end
 
 subgraph Runtime
 direction TB
-BaseTypeResolver["<b>BaseTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'><b>TypeResolver</b> implementation providing the default CQL System-type-to-.NET mappings.</div>"]
+BaseTypeResolver["<b>BaseTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>TypeResolver implementation providing the default CQL System-type-to-.NET mappings.</div>"]
 TypeConverter["<b>TypeConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Runtime value-conversion engine used to coerce values between CQL/.NET types.</div>"]
 end
 
 subgraph Fhir
 direction TB
-FhirTypeResolver["<b>FhirTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'><b>BaseTypeResolver</b> extended with FHIR resource/type mappings, built from a Firely SDK <b>ModelInspector</b>.</div>"]
+FhirTypeResolver["<b>FhirTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>BaseTypeResolver extended with FHIR resource/type mappings, built from a Firely SDK ModelInspector.</div>"]
 ModelInspector["<b>ModelInspector</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(external) External Firely .NET SDK type (Hl7.Fhir.Introspection) that reflects over FHIR POCO classes to expose their type/property metadata.</div>"]
 end
 
