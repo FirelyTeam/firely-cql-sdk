@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.0.004")]
 public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : ILibrary, ISingleton<DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004>
 {
@@ -361,7 +361,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                     else
                     {
                         return default;
-                    };
+                    }
                 }
 
                 Period m_ = EncounterDiabeticRetinopathy?.Period;
@@ -390,12 +390,11 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             CqlConcept am_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, al_);
             CqlValueSet an_ = this.Medical_Reason(context);
             bool? ao_ = context.Operators.ConceptInValueSet(am_, an_);
-            CqlConcept aq_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, al_);
-            CqlValueSet ar_ = this.Patient_Reason(context);
-            bool? as_ = context.Operators.ConceptInValueSet(aq_, ar_);
-            bool? at_ = context.Operators.Or(ao_, as_);
-            bool? au_ = context.Operators.And(ak_, at_);
-            return au_;
+            CqlValueSet ap_ = this.Patient_Reason(context);
+            bool? aq_ = context.Operators.ConceptInValueSet(am_, ap_);
+            bool? ar_ = context.Operators.Or(ao_, aq_);
+            bool? as_ = context.Operators.And(ak_, ar_);
+            return as_;
         }
 
         IEnumerable<Communication> g_ = context.Operators.Where<Communication>(e_, f_);
@@ -455,7 +454,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                     else
                     {
                         return default;
-                    };
+                    }
                 }
 
                 Period n_ = EncounterDiabeticRetinopathy?.Period;
@@ -484,12 +483,11 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             CqlConcept an_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, am_);
             CqlValueSet ao_ = this.Medical_Reason(context);
             bool? ap_ = context.Operators.ConceptInValueSet(an_, ao_);
-            CqlConcept ar_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, am_);
-            CqlValueSet as_ = this.Patient_Reason(context);
-            bool? at_ = context.Operators.ConceptInValueSet(ar_, as_);
-            bool? au_ = context.Operators.Or(ap_, at_);
-            bool? av_ = context.Operators.And(al_, au_);
-            return av_;
+            CqlValueSet aq_ = this.Patient_Reason(context);
+            bool? ar_ = context.Operators.ConceptInValueSet(an_, aq_);
+            bool? as_ = context.Operators.Or(ap_, ar_);
+            bool? at_ = context.Operators.And(al_, as_);
+            return at_;
         }
 
         IEnumerable<Communication> h_ = context.Operators.Where<Communication>(f_, g_);
@@ -548,7 +546,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                     else
                     {
                         return default;
-                    };
+                    }
                 }
 
                 Period m_ = EncounterDiabeticRetinopathy?.Period;
@@ -577,12 +575,11 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             CqlConcept am_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, al_);
             CqlValueSet an_ = this.Medical_Reason(context);
             bool? ao_ = context.Operators.ConceptInValueSet(am_, an_);
-            CqlConcept aq_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, al_);
-            CqlValueSet ar_ = this.Patient_Reason(context);
-            bool? as_ = context.Operators.ConceptInValueSet(aq_, ar_);
-            bool? at_ = context.Operators.Or(ao_, as_);
-            bool? au_ = context.Operators.And(ak_, at_);
-            return au_;
+            CqlValueSet ap_ = this.Patient_Reason(context);
+            bool? aq_ = context.Operators.ConceptInValueSet(am_, ap_);
+            bool? ar_ = context.Operators.Or(ao_, aq_);
+            bool? as_ = context.Operators.And(ak_, ar_);
+            return as_;
         }
 
         IEnumerable<Communication> g_ = context.Operators.Where<Communication>(e_, f_);

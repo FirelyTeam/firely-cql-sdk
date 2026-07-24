@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("CMS2FHIRPCSDepScreenAndFollowUp", "1.0.000")]
 public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS2FHIRPCSDepScreenAndFollowUp_1_0_000>
 {
@@ -323,29 +323,25 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 CqlDateTime s_ = context.Operators.Start(r_);
                 CqlQuantity t_ = context.Operators.Quantity(14m, "days");
                 CqlDateTime u_ = context.Operators.Subtract(s_, t_);
-                CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
-                CqlDateTime x_ = context.Operators.Start(w_);
-                CqlInterval<CqlDateTime> y_ = context.Operators.Interval(u_, x_, true, true);
-                bool? z_ = context.Operators.In<CqlDateTime>(p_, y_, "day");
-                CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
-                CqlDateTime ac_ = context.Operators.Start(ab_);
-                bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
-                bool? ae_ = context.Operators.And(z_, ad_);
-                DataType af_ = AdolescentDepressionScreening?.Value;
-                object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-                bool? ai_ = context.Operators.And(ae_, ah_);
-                Code<ObservationStatus> aj_ = AdolescentDepressionScreening?.StatusElement;
-                ObservationStatus? ak_ = aj_?.Value;
-                string al_ = context.Operators.Convert<string>(ak_);
-                string[] am_ = [
+                CqlInterval<CqlDateTime> v_ = context.Operators.Interval(u_, s_, true, true);
+                bool? w_ = context.Operators.In<CqlDateTime>(p_, v_, "day");
+                bool? x_ = context.Operators.Not((bool?)(s_ is null));
+                bool? y_ = context.Operators.And(w_, x_);
+                DataType z_ = AdolescentDepressionScreening?.Value;
+                object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
+                bool? ac_ = context.Operators.And(y_, ab_);
+                Code<ObservationStatus> ad_ = AdolescentDepressionScreening?.StatusElement;
+                ObservationStatus? ae_ = ad_?.Value;
+                string af_ = context.Operators.Convert<string>(ae_);
+                string[] ag_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? an_ = context.Operators.In<string>(al_, (IEnumerable<string>)am_);
-                bool? ao_ = context.Operators.And(ai_, an_);
-                return ao_;
+                bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
+                bool? ai_ = context.Operators.And(ac_, ah_);
+                return ai_;
             }
 
             IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
@@ -356,11 +352,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 
         object f_(Observation @this) {
-            DataType ap_ = @this?.Effective;
-            object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-            CqlInterval<CqlDateTime> ar_ = QICoreCommon_4_0_000.Instance.toInterval(context, aq_);
-            CqlDateTime as_ = context.Operators.Start(ar_);
-            return as_;
+            DataType aj_ = @this?.Effective;
+            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_4_0_000.Instance.toInterval(context, ak_);
+            CqlDateTime am_ = context.Operators.Start(al_);
+            return am_;
         }
 
         IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -449,54 +445,49 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 CqlDateTime ar_ = context.Operators.Start(aq_);
                 CqlQuantity as_ = context.Operators.Quantity(14m, "days");
                 CqlDateTime at_ = context.Operators.Subtract(ar_, as_);
-                CqlInterval<CqlDateTime> av_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ap_);
-                CqlDateTime aw_ = context.Operators.Start(av_);
-                CqlInterval<CqlDateTime> ax_ = context.Operators.Interval(at_, aw_, true, true);
-                bool? ay_ = context.Operators.In<CqlDateTime>(ao_, ax_, "day");
-                CqlInterval<CqlDateTime> ba_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ap_);
-                CqlDateTime bb_ = context.Operators.Start(ba_);
-                bool? bc_ = context.Operators.Not((bool?)(bb_ is null));
-                bool? bd_ = context.Operators.And(ay_, bc_);
-                CqlInterval<CqlDate> be_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AdolescentMed);
-                CqlDate bf_ = (be_ as CqlInterval<CqlDate>)?.low;
-                CqlDateTime bg_ = context.Operators.ConvertDateToDateTime(bf_);
-                CqlDate bi_ = (be_ as CqlInterval<CqlDate>)?.high;
-                CqlDateTime bj_ = context.Operators.ConvertDateToDateTime(bi_);
-                bool? bl_ = (be_ as CqlInterval<CqlDate>)?.lowClosed;
-                bool? bn_ = (be_ as CqlInterval<CqlDate>)?.highClosed;
-                CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(bg_, bj_, bl_, bn_);
-                CqlInterval<CqlDateTime> bp_ = QICoreCommon_4_0_000.Instance.toInterval(context, bo_);
-                CqlInterval<CqlDateTime> br_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ap_);
-                bool? bs_ = context.Operators.OverlapsAfter(bp_, br_, "day");
-                bool? bt_ = context.Operators.And(bd_, bs_);
-                DataType bv_ = ak_?.Value;
-                object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                CqlCode bx_ = this.Depression_screening_positive__finding_(context);
-                CqlConcept by_ = context.Operators.ConvertCodeToConcept(bx_);
-                bool? bz_ = context.Operators.Equivalent(bw_ as CqlConcept, by_);
-                bool? ca_ = context.Operators.And(bt_, bz_);
-                Code<MedicationRequest.MedicationrequestStatus> cb_ = AdolescentMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? cc_ = cb_?.Value;
-                string cd_ = context.Operators.Convert<string>(cc_);
-                string[] ce_ = [
+                CqlInterval<CqlDateTime> au_ = context.Operators.Interval(at_, ar_, true, true);
+                bool? av_ = context.Operators.In<CqlDateTime>(ao_, au_, "day");
+                bool? aw_ = context.Operators.Not((bool?)(ar_ is null));
+                bool? ax_ = context.Operators.And(av_, aw_);
+                CqlInterval<CqlDate> ay_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AdolescentMed);
+                CqlDate az_ = (ay_ as CqlInterval<CqlDate>)?.low;
+                CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                CqlDate bb_ = (ay_ as CqlInterval<CqlDate>)?.high;
+                CqlDateTime bc_ = context.Operators.ConvertDateToDateTime(bb_);
+                bool? bd_ = (ay_ as CqlInterval<CqlDate>)?.lowClosed;
+                bool? be_ = (ay_ as CqlInterval<CqlDate>)?.highClosed;
+                CqlInterval<CqlDateTime> bf_ = context.Operators.Interval(ba_, bc_, bd_, be_);
+                CqlInterval<CqlDateTime> bg_ = QICoreCommon_4_0_000.Instance.toInterval(context, bf_);
+                bool? bh_ = context.Operators.OverlapsAfter(bg_, aq_, "day");
+                bool? bi_ = context.Operators.And(ax_, bh_);
+                DataType bj_ = ak_?.Value;
+                object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
+                CqlCode bl_ = this.Depression_screening_positive__finding_(context);
+                CqlConcept bm_ = context.Operators.ConvertCodeToConcept(bl_);
+                bool? bn_ = context.Operators.Equivalent(bk_ as CqlConcept, bm_);
+                bool? bo_ = context.Operators.And(bi_, bn_);
+                Code<MedicationRequest.MedicationrequestStatus> bp_ = AdolescentMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? bq_ = bp_?.Value;
+                string br_ = context.Operators.Convert<string>(bq_);
+                string[] bs_ = [
                     "active",
                     "completed",
                 ];
-                bool? cf_ = context.Operators.In<string>(cd_, (IEnumerable<string>)ce_);
-                bool? cg_ = context.Operators.And(ca_, cf_);
-                Code<MedicationRequest.MedicationRequestIntent> ch_ = AdolescentMed?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? ci_ = ch_?.Value;
-                string cj_ = context.Operators.Convert<string>(ci_);
-                string[] ck_ = [
+                bool? bt_ = context.Operators.In<string>(br_, (IEnumerable<string>)bs_);
+                bool? bu_ = context.Operators.And(bo_, bt_);
+                Code<MedicationRequest.MedicationRequestIntent> bv_ = AdolescentMed?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? bw_ = bv_?.Value;
+                string bx_ = context.Operators.Convert<string>(bw_);
+                string[] by_ = [
                     "order",
                     "original-order",
                     "reflex-order",
                     "filler-order",
                     "instance-order",
                 ];
-                bool? cl_ = context.Operators.In<string>(cj_, (IEnumerable<string>)ck_);
-                bool? cm_ = context.Operators.And(cg_, cl_);
-                return cm_;
+                bool? bz_ = context.Operators.In<string>(bx_, (IEnumerable<string>)by_);
+                bool? ca_ = context.Operators.And(bu_, bz_);
+                return ca_;
             }
 
             IEnumerable<Encounter> ai_ = context.Operators.Where<Encounter>(ag_, ah_);
@@ -509,16 +500,16 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         IEnumerable<ServiceRequest> j_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 
         bool? k_(ServiceRequest AdolescentReferral) {
-            Code<RequestStatus> cn_ = AdolescentReferral?.StatusElement;
-            RequestStatus? co_ = cn_?.Value;
-            Code<RequestStatus> cp_ = context.Operators.Convert<Code<RequestStatus>>(co_);
-            string cq_ = context.Operators.Convert<string>(cp_);
-            string[] cr_ = [
+            Code<RequestStatus> cb_ = AdolescentReferral?.StatusElement;
+            RequestStatus? cc_ = cb_?.Value;
+            Code<RequestStatus> cd_ = context.Operators.Convert<Code<RequestStatus>>(cc_);
+            string ce_ = context.Operators.Convert<string>(cd_);
+            string[] cf_ = [
                 "active",
                 "completed",
             ];
-            bool? cs_ = context.Operators.In<string>(cq_, (IEnumerable<string>)cr_);
-            return cs_;
+            bool? cg_ = context.Operators.In<string>(ce_, (IEnumerable<string>)cf_);
+            return cg_;
         }
 
         IEnumerable<ServiceRequest> l_ = context.Operators.Where<ServiceRequest>(j_, k_);
@@ -527,11 +518,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         IEnumerable<Procedure> o_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
         bool? p_(Procedure AdolescentFollowUp) {
-            Code<EventStatus> ct_ = AdolescentFollowUp?.StatusElement;
-            EventStatus? cu_ = ct_?.Value;
-            string cv_ = context.Operators.Convert<string>(cu_);
-            bool? cw_ = context.Operators.Equal(cv_, "completed");
-            return cw_;
+            Code<EventStatus> ch_ = AdolescentFollowUp?.StatusElement;
+            EventStatus? ci_ = ch_?.Value;
+            string cj_ = context.Operators.Convert<string>(ci_);
+            bool? ck_ = context.Operators.Equal(cj_, "completed");
+            return ck_;
         }
 
         IEnumerable<Procedure> q_ = context.Operators.Where<Procedure>(o_, p_);
@@ -573,182 +564,171 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             CqlDateTime t_ = context.Operators.Start(s_);
             CqlQuantity u_ = context.Operators.Quantity(14m, "days");
             CqlDateTime v_ = context.Operators.Subtract(t_, u_);
-            CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            CqlDateTime y_ = context.Operators.Start(x_);
-            CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, true, true);
-            bool? aa_ = context.Operators.In<CqlDateTime>(q_, z_, "day");
-            CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            CqlDateTime ad_ = context.Operators.Start(ac_);
-            bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
-            bool? af_ = context.Operators.And(aa_, ae_);
-            DataType ag_ = tuple_ewmohjtdtinujhphqjvbwmmhh?.LastAdolescentScreen?.Value;
-            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-            CqlCode ai_ = this.Depression_screening_positive__finding_(context);
-            CqlConcept aj_ = context.Operators.ConvertCodeToConcept(ai_);
-            bool? ak_ = context.Operators.Equivalent(ah_ as CqlConcept, aj_);
-            bool? al_ = context.Operators.And(af_, ak_);
+            CqlInterval<CqlDateTime> w_ = context.Operators.Interval(v_, t_, true, true);
+            bool? x_ = context.Operators.In<CqlDateTime>(q_, w_, "day");
+            bool? y_ = context.Operators.Not((bool?)(t_ is null));
+            bool? z_ = context.Operators.And(x_, y_);
+            DataType aa_ = tuple_ewmohjtdtinujhphqjvbwmmhh?.LastAdolescentScreen?.Value;
+            object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+            CqlCode ac_ = this.Depression_screening_positive__finding_(context);
+            CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
+            bool? ae_ = context.Operators.Equivalent(ab_ as CqlConcept, ad_);
+            bool? af_ = context.Operators.And(z_, ae_);
 
-            object am_() {
+            object ag_() {
 
-                bool bt_() {
+                bool bb_() {
+                    object bf_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
+                    object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
+                    bool bh_ = bg_ is CqlDateTime;
+                    return bh_;
+                }
+
+
+                bool bc_() {
+                    object bi_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
+                    object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
+                    bool bk_ = bj_ is CqlInterval<CqlDateTime>;
+                    return bk_;
+                }
+
+
+                bool bd_() {
+                    object bl_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
+                    object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
+                    bool bn_ = bm_ is CqlQuantity;
+                    return bn_;
+                }
+
+
+                bool be_() {
+                    object bo_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
+                    object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
+                    bool bq_ = bp_ is CqlInterval<CqlQuantity>;
+                    return bq_;
+                }
+
+                if (bb_())
+                {
+                    object br_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
+                    object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
+                    return bs_ as CqlDateTime;
+                }
+                else if (bc_())
+                {
+                    object bt_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
+                    object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
+                    return bu_ as CqlInterval<CqlDateTime>;
+                }
+                else if (bd_())
+                {
+                    object bv_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
+                    object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
+                    return bw_ as CqlQuantity;
+                }
+                else if (be_())
+                {
                     object bx_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                     object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    bool bz_ = by_ is CqlDateTime;
-                    return bz_;
+                    return by_ as CqlInterval<CqlQuantity>;
                 }
-
-
-                bool bu_() {
-                    object ca_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
-                    object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                    bool cc_ = cb_ is CqlInterval<CqlDateTime>;
-                    return cc_;
+                else
+                {
+                    return null;
                 }
+            }
 
+            CqlInterval<CqlDateTime> ah_ = QICoreCommon_4_0_000.Instance.toInterval(context, ag_());
+            CqlDateTime ai_ = context.Operators.Start(ah_);
+            bool? aj_ = context.Operators.In<CqlDateTime>(ai_, s_, (string)default);
+            object ak_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "authoredOn");
+            CqlDateTime al_ = context.Operators.LateBoundProperty<CqlDateTime>(ak_, "value");
+            CqlDateTime am_ = context.Operators.End(s_);
+            CqlQuantity an_ = context.Operators.Quantity(2m, "days");
+            CqlDateTime ao_ = context.Operators.Add(am_, an_);
+            CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(am_, ao_, true, true);
+            bool? aq_ = context.Operators.In<CqlDateTime>(al_, ap_, "day");
+            bool? ar_ = context.Operators.Not((bool?)(am_ is null));
+            bool? as_ = context.Operators.And(aq_, ar_);
+            bool? at_ = context.Operators.Or(aj_, as_);
+            bool? au_ = context.Operators.And(af_, at_);
 
-                bool bv_() {
+            object av_() {
+
+                bool bz_() {
                     object cd_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                     object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                    bool cf_ = ce_ is CqlQuantity;
+                    bool cf_ = ce_ is CqlDateTime;
                     return cf_;
                 }
 
 
-                bool bw_() {
+                bool ca_() {
                     object cg_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                     object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                    bool ci_ = ch_ is CqlInterval<CqlQuantity>;
+                    bool ci_ = ch_ is CqlInterval<CqlDateTime>;
                     return ci_;
                 }
 
-                if (bt_())
-                {
+
+                bool cb_() {
                     object cj_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                     object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                    return (ck_ as CqlDateTime) as object;
+                    bool cl_ = ck_ is CqlQuantity;
+                    return cl_;
                 }
-                else if (bu_())
-                {
-                    object cl_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
-                    object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                    return (cm_ as CqlInterval<CqlDateTime>) as object;
+
+
+                bool cc_() {
+                    object cm_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
+                    object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
+                    bool co_ = cn_ is CqlInterval<CqlQuantity>;
+                    return co_;
                 }
-                else if (bv_())
-                {
-                    object cn_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
-                    object co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-                    return (co_ as CqlQuantity) as object;
-                }
-                else if (bw_())
+
+                if (bz_())
                 {
                     object cp_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                     object cq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cp_);
-                    return (cq_ as CqlInterval<CqlQuantity>) as object;
+                    return cq_ as CqlDateTime;
                 }
-                else
+                else if (ca_())
                 {
-                    return null;
-                };
-            }
-
-            CqlInterval<CqlDateTime> an_ = QICoreCommon_4_0_000.Instance.toInterval(context, am_());
-            CqlDateTime ao_ = context.Operators.Start(an_);
-            CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            bool? ar_ = context.Operators.In<CqlDateTime>(ao_, aq_, (string)default);
-            object as_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "authoredOn");
-            CqlDateTime at_ = context.Operators.LateBoundProperty<CqlDateTime>(as_, "value");
-            CqlInterval<CqlDateTime> av_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            CqlDateTime aw_ = context.Operators.End(av_);
-            CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            CqlDateTime az_ = context.Operators.End(ay_);
-            CqlQuantity ba_ = context.Operators.Quantity(2m, "days");
-            CqlDateTime bb_ = context.Operators.Add(az_, ba_);
-            CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(aw_, bb_, true, true);
-            bool? bd_ = context.Operators.In<CqlDateTime>(at_, bc_, "day");
-            CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            CqlDateTime bg_ = context.Operators.End(bf_);
-            bool? bh_ = context.Operators.Not((bool?)(bg_ is null));
-            bool? bi_ = context.Operators.And(bd_, bh_);
-            bool? bj_ = context.Operators.Or(ar_, bi_);
-            bool? bk_ = context.Operators.And(al_, bj_);
-
-            object bl_() {
-
-                bool cr_() {
+                    object cr_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
+                    object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
+                    return cs_ as CqlInterval<CqlDateTime>;
+                }
+                else if (cb_())
+                {
+                    object ct_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
+                    object cu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ct_);
+                    return cu_ as CqlQuantity;
+                }
+                else if (cc_())
+                {
                     object cv_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                     object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
-                    bool cx_ = cw_ is CqlDateTime;
-                    return cx_;
-                }
-
-
-                bool cs_() {
-                    object cy_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
-                    object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-                    bool da_ = cz_ is CqlInterval<CqlDateTime>;
-                    return da_;
-                }
-
-
-                bool ct_() {
-                    object db_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
-                    object dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
-                    bool dd_ = dc_ is CqlQuantity;
-                    return dd_;
-                }
-
-
-                bool cu_() {
-                    object de_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
-                    object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
-                    bool dg_ = df_ is CqlInterval<CqlQuantity>;
-                    return dg_;
-                }
-
-                if (cr_())
-                {
-                    object dh_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
-                    object di_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dh_);
-                    return (di_ as CqlDateTime) as object;
-                }
-                else if (cs_())
-                {
-                    object dj_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
-                    object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                    return (dk_ as CqlInterval<CqlDateTime>) as object;
-                }
-                else if (ct_())
-                {
-                    object dl_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
-                    object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
-                    return (dm_ as CqlQuantity) as object;
-                }
-                else if (cu_())
-                {
-                    object dn_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
-                    object do_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dn_);
-                    return (do_ as CqlInterval<CqlQuantity>) as object;
+                    return cw_ as CqlInterval<CqlQuantity>;
                 }
                 else
                 {
                     return null;
-                };
+                }
             }
 
-            CqlInterval<CqlDateTime> bm_ = QICoreCommon_4_0_000.Instance.toInterval(context, bl_());
-            CqlDateTime bn_ = context.Operators.Start(bm_);
-            CqlDateTime bp_ = context.Operators.LateBoundProperty<CqlDateTime>(as_, "value");
-            CqlInterval<CqlDateTime> bq_ = this.Measurement_Period(context);
-            bool? br_ = context.Operators.In<CqlDateTime>(bn_ ?? bp_, bq_, "day");
-            bool? bs_ = context.Operators.And(bk_, br_);
-            return bs_;
+            CqlInterval<CqlDateTime> aw_ = QICoreCommon_4_0_000.Instance.toInterval(context, av_());
+            CqlDateTime ax_ = context.Operators.Start(aw_);
+            CqlInterval<CqlDateTime> ay_ = this.Measurement_Period(context);
+            bool? az_ = context.Operators.In<CqlDateTime>(ax_ ?? al_, ay_, "day");
+            bool? ba_ = context.Operators.And(au_, az_);
+            return ba_;
         }
 
         IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?> i_ = context.Operators.Where<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>(g_, h_);
 
         (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)? j_((CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)? tuple_ewmohjtdtinujhphqjvbwmmhh) {
-            (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)? dp_ = (CqlTupleMetadata_ZRHehPJEDEeRJPiLbCPjUggS, tuple_ewmohjtdtinujhphqjvbwmmhh?.LastAdolescentScreen, tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, tuple_ewmohjtdtinujhphqjvbwmmhh?.QualifyingEncounter);
-            return dp_;
+            (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)? cx_ = (CqlTupleMetadata_ZRHehPJEDEeRJPiLbCPjUggS, tuple_ewmohjtdtinujhphqjvbwmmhh?.LastAdolescentScreen, tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, tuple_ewmohjtdtinujhphqjvbwmmhh?.QualifyingEncounter);
+            return cx_;
         }
 
         IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?> k_ = context.Operators.Select<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?, (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>(i_, j_);
@@ -803,29 +783,25 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 CqlDateTime s_ = context.Operators.Start(r_);
                 CqlQuantity t_ = context.Operators.Quantity(14m, "days");
                 CqlDateTime u_ = context.Operators.Subtract(s_, t_);
-                CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
-                CqlDateTime x_ = context.Operators.Start(w_);
-                CqlInterval<CqlDateTime> y_ = context.Operators.Interval(u_, x_, true, true);
-                bool? z_ = context.Operators.In<CqlDateTime>(p_, y_, "day");
-                CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
-                CqlDateTime ac_ = context.Operators.Start(ab_);
-                bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
-                bool? ae_ = context.Operators.And(z_, ad_);
-                DataType af_ = AdultDepressionScreening?.Value;
-                object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-                bool? ai_ = context.Operators.And(ae_, ah_);
-                Code<ObservationStatus> aj_ = AdultDepressionScreening?.StatusElement;
-                ObservationStatus? ak_ = aj_?.Value;
-                string al_ = context.Operators.Convert<string>(ak_);
-                string[] am_ = [
+                CqlInterval<CqlDateTime> v_ = context.Operators.Interval(u_, s_, true, true);
+                bool? w_ = context.Operators.In<CqlDateTime>(p_, v_, "day");
+                bool? x_ = context.Operators.Not((bool?)(s_ is null));
+                bool? y_ = context.Operators.And(w_, x_);
+                DataType z_ = AdultDepressionScreening?.Value;
+                object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
+                bool? ac_ = context.Operators.And(y_, ab_);
+                Code<ObservationStatus> ad_ = AdultDepressionScreening?.StatusElement;
+                ObservationStatus? ae_ = ad_?.Value;
+                string af_ = context.Operators.Convert<string>(ae_);
+                string[] ag_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? an_ = context.Operators.In<string>(al_, (IEnumerable<string>)am_);
-                bool? ao_ = context.Operators.And(ai_, an_);
-                return ao_;
+                bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
+                bool? ai_ = context.Operators.And(ac_, ah_);
+                return ai_;
             }
 
             IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
@@ -836,11 +812,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 
         object f_(Observation @this) {
-            DataType ap_ = @this?.Effective;
-            object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-            CqlInterval<CqlDateTime> ar_ = QICoreCommon_4_0_000.Instance.toInterval(context, aq_);
-            CqlDateTime as_ = context.Operators.Start(ar_);
-            return as_;
+            DataType aj_ = @this?.Effective;
+            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_4_0_000.Instance.toInterval(context, ak_);
+            CqlDateTime am_ = context.Operators.Start(al_);
+            return am_;
         }
 
         IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -929,54 +905,49 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 CqlDateTime ar_ = context.Operators.Start(aq_);
                 CqlQuantity as_ = context.Operators.Quantity(14m, "days");
                 CqlDateTime at_ = context.Operators.Subtract(ar_, as_);
-                CqlInterval<CqlDateTime> av_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ap_);
-                CqlDateTime aw_ = context.Operators.Start(av_);
-                CqlInterval<CqlDateTime> ax_ = context.Operators.Interval(at_, aw_, true, true);
-                bool? ay_ = context.Operators.In<CqlDateTime>(ao_, ax_, "day");
-                CqlInterval<CqlDateTime> ba_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ap_);
-                CqlDateTime bb_ = context.Operators.Start(ba_);
-                bool? bc_ = context.Operators.Not((bool?)(bb_ is null));
-                bool? bd_ = context.Operators.And(ay_, bc_);
-                CqlInterval<CqlDate> be_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AdultMed);
-                CqlDate bf_ = (be_ as CqlInterval<CqlDate>)?.low;
-                CqlDateTime bg_ = context.Operators.ConvertDateToDateTime(bf_);
-                CqlDate bi_ = (be_ as CqlInterval<CqlDate>)?.high;
-                CqlDateTime bj_ = context.Operators.ConvertDateToDateTime(bi_);
-                bool? bl_ = (be_ as CqlInterval<CqlDate>)?.lowClosed;
-                bool? bn_ = (be_ as CqlInterval<CqlDate>)?.highClosed;
-                CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(bg_, bj_, bl_, bn_);
-                CqlInterval<CqlDateTime> bp_ = QICoreCommon_4_0_000.Instance.toInterval(context, bo_);
-                CqlInterval<CqlDateTime> br_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ap_);
-                bool? bs_ = context.Operators.OverlapsAfter(bp_, br_, "day");
-                bool? bt_ = context.Operators.And(bd_, bs_);
-                DataType bv_ = ak_?.Value;
-                object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                CqlCode bx_ = this.Depression_screening_positive__finding_(context);
-                CqlConcept by_ = context.Operators.ConvertCodeToConcept(bx_);
-                bool? bz_ = context.Operators.Equivalent(bw_ as CqlConcept, by_);
-                bool? ca_ = context.Operators.And(bt_, bz_);
-                Code<MedicationRequest.MedicationrequestStatus> cb_ = AdultMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? cc_ = cb_?.Value;
-                string cd_ = context.Operators.Convert<string>(cc_);
-                string[] ce_ = [
+                CqlInterval<CqlDateTime> au_ = context.Operators.Interval(at_, ar_, true, true);
+                bool? av_ = context.Operators.In<CqlDateTime>(ao_, au_, "day");
+                bool? aw_ = context.Operators.Not((bool?)(ar_ is null));
+                bool? ax_ = context.Operators.And(av_, aw_);
+                CqlInterval<CqlDate> ay_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AdultMed);
+                CqlDate az_ = (ay_ as CqlInterval<CqlDate>)?.low;
+                CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                CqlDate bb_ = (ay_ as CqlInterval<CqlDate>)?.high;
+                CqlDateTime bc_ = context.Operators.ConvertDateToDateTime(bb_);
+                bool? bd_ = (ay_ as CqlInterval<CqlDate>)?.lowClosed;
+                bool? be_ = (ay_ as CqlInterval<CqlDate>)?.highClosed;
+                CqlInterval<CqlDateTime> bf_ = context.Operators.Interval(ba_, bc_, bd_, be_);
+                CqlInterval<CqlDateTime> bg_ = QICoreCommon_4_0_000.Instance.toInterval(context, bf_);
+                bool? bh_ = context.Operators.OverlapsAfter(bg_, aq_, "day");
+                bool? bi_ = context.Operators.And(ax_, bh_);
+                DataType bj_ = ak_?.Value;
+                object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
+                CqlCode bl_ = this.Depression_screening_positive__finding_(context);
+                CqlConcept bm_ = context.Operators.ConvertCodeToConcept(bl_);
+                bool? bn_ = context.Operators.Equivalent(bk_ as CqlConcept, bm_);
+                bool? bo_ = context.Operators.And(bi_, bn_);
+                Code<MedicationRequest.MedicationrequestStatus> bp_ = AdultMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? bq_ = bp_?.Value;
+                string br_ = context.Operators.Convert<string>(bq_);
+                string[] bs_ = [
                     "active",
                     "completed",
                 ];
-                bool? cf_ = context.Operators.In<string>(cd_, (IEnumerable<string>)ce_);
-                bool? cg_ = context.Operators.And(ca_, cf_);
-                Code<MedicationRequest.MedicationRequestIntent> ch_ = AdultMed?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? ci_ = ch_?.Value;
-                string cj_ = context.Operators.Convert<string>(ci_);
-                string[] ck_ = [
+                bool? bt_ = context.Operators.In<string>(br_, (IEnumerable<string>)bs_);
+                bool? bu_ = context.Operators.And(bo_, bt_);
+                Code<MedicationRequest.MedicationRequestIntent> bv_ = AdultMed?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? bw_ = bv_?.Value;
+                string bx_ = context.Operators.Convert<string>(bw_);
+                string[] by_ = [
                     "order",
                     "original-order",
                     "reflex-order",
                     "filler-order",
                     "instance-order",
                 ];
-                bool? cl_ = context.Operators.In<string>(cj_, (IEnumerable<string>)ck_);
-                bool? cm_ = context.Operators.And(cg_, cl_);
-                return cm_;
+                bool? bz_ = context.Operators.In<string>(bx_, (IEnumerable<string>)by_);
+                bool? ca_ = context.Operators.And(bu_, bz_);
+                return ca_;
             }
 
             IEnumerable<Encounter> ai_ = context.Operators.Where<Encounter>(ag_, ah_);
@@ -989,16 +960,16 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         IEnumerable<ServiceRequest> j_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 
         bool? k_(ServiceRequest AdultReferral) {
-            Code<RequestStatus> cn_ = AdultReferral?.StatusElement;
-            RequestStatus? co_ = cn_?.Value;
-            Code<RequestStatus> cp_ = context.Operators.Convert<Code<RequestStatus>>(co_);
-            string cq_ = context.Operators.Convert<string>(cp_);
-            string[] cr_ = [
+            Code<RequestStatus> cb_ = AdultReferral?.StatusElement;
+            RequestStatus? cc_ = cb_?.Value;
+            Code<RequestStatus> cd_ = context.Operators.Convert<Code<RequestStatus>>(cc_);
+            string ce_ = context.Operators.Convert<string>(cd_);
+            string[] cf_ = [
                 "active",
                 "completed",
             ];
-            bool? cs_ = context.Operators.In<string>(cq_, (IEnumerable<string>)cr_);
-            return cs_;
+            bool? cg_ = context.Operators.In<string>(ce_, (IEnumerable<string>)cf_);
+            return cg_;
         }
 
         IEnumerable<ServiceRequest> l_ = context.Operators.Where<ServiceRequest>(j_, k_);
@@ -1007,11 +978,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         IEnumerable<Procedure> o_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
         bool? p_(Procedure AdultFollowUp) {
-            Code<EventStatus> ct_ = AdultFollowUp?.StatusElement;
-            EventStatus? cu_ = ct_?.Value;
-            string cv_ = context.Operators.Convert<string>(cu_);
-            bool? cw_ = context.Operators.Equal(cv_, "completed");
-            return cw_;
+            Code<EventStatus> ch_ = AdultFollowUp?.StatusElement;
+            EventStatus? ci_ = ch_?.Value;
+            string cj_ = context.Operators.Convert<string>(ci_);
+            bool? ck_ = context.Operators.Equal(cj_, "completed");
+            return ck_;
         }
 
         IEnumerable<Procedure> q_ = context.Operators.Where<Procedure>(o_, p_);
@@ -1053,182 +1024,171 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             CqlDateTime t_ = context.Operators.Start(s_);
             CqlQuantity u_ = context.Operators.Quantity(14m, "days");
             CqlDateTime v_ = context.Operators.Subtract(t_, u_);
-            CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            CqlDateTime y_ = context.Operators.Start(x_);
-            CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, true, true);
-            bool? aa_ = context.Operators.In<CqlDateTime>(q_, z_, "day");
-            CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            CqlDateTime ad_ = context.Operators.Start(ac_);
-            bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
-            bool? af_ = context.Operators.And(aa_, ae_);
-            DataType ag_ = tuple_cgtoaqsajoehgwcararimqzsa?.LastAdultScreen?.Value;
-            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-            CqlCode ai_ = this.Depression_screening_positive__finding_(context);
-            CqlConcept aj_ = context.Operators.ConvertCodeToConcept(ai_);
-            bool? ak_ = context.Operators.Equivalent(ah_ as CqlConcept, aj_);
-            bool? al_ = context.Operators.And(af_, ak_);
+            CqlInterval<CqlDateTime> w_ = context.Operators.Interval(v_, t_, true, true);
+            bool? x_ = context.Operators.In<CqlDateTime>(q_, w_, "day");
+            bool? y_ = context.Operators.Not((bool?)(t_ is null));
+            bool? z_ = context.Operators.And(x_, y_);
+            DataType aa_ = tuple_cgtoaqsajoehgwcararimqzsa?.LastAdultScreen?.Value;
+            object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+            CqlCode ac_ = this.Depression_screening_positive__finding_(context);
+            CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
+            bool? ae_ = context.Operators.Equivalent(ab_ as CqlConcept, ad_);
+            bool? af_ = context.Operators.And(z_, ae_);
 
-            object am_() {
+            object ag_() {
 
-                bool bt_() {
+                bool bb_() {
+                    object bf_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
+                    object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
+                    bool bh_ = bg_ is CqlDateTime;
+                    return bh_;
+                }
+
+
+                bool bc_() {
+                    object bi_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
+                    object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
+                    bool bk_ = bj_ is CqlInterval<CqlDateTime>;
+                    return bk_;
+                }
+
+
+                bool bd_() {
+                    object bl_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
+                    object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
+                    bool bn_ = bm_ is CqlQuantity;
+                    return bn_;
+                }
+
+
+                bool be_() {
+                    object bo_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
+                    object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
+                    bool bq_ = bp_ is CqlInterval<CqlQuantity>;
+                    return bq_;
+                }
+
+                if (bb_())
+                {
+                    object br_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
+                    object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
+                    return bs_ as CqlDateTime;
+                }
+                else if (bc_())
+                {
+                    object bt_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
+                    object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
+                    return bu_ as CqlInterval<CqlDateTime>;
+                }
+                else if (bd_())
+                {
+                    object bv_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
+                    object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
+                    return bw_ as CqlQuantity;
+                }
+                else if (be_())
+                {
                     object bx_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                     object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    bool bz_ = by_ is CqlDateTime;
-                    return bz_;
+                    return by_ as CqlInterval<CqlQuantity>;
                 }
-
-
-                bool bu_() {
-                    object ca_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
-                    object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                    bool cc_ = cb_ is CqlInterval<CqlDateTime>;
-                    return cc_;
+                else
+                {
+                    return null;
                 }
+            }
 
+            CqlInterval<CqlDateTime> ah_ = QICoreCommon_4_0_000.Instance.toInterval(context, ag_());
+            CqlDateTime ai_ = context.Operators.Start(ah_);
+            bool? aj_ = context.Operators.In<CqlDateTime>(ai_, s_, (string)default);
+            object ak_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "authoredOn");
+            CqlDateTime al_ = context.Operators.LateBoundProperty<CqlDateTime>(ak_, "value");
+            CqlDateTime am_ = context.Operators.End(s_);
+            CqlQuantity an_ = context.Operators.Quantity(2m, "days");
+            CqlDateTime ao_ = context.Operators.Add(am_, an_);
+            CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(am_, ao_, true, true);
+            bool? aq_ = context.Operators.In<CqlDateTime>(al_, ap_, "day");
+            bool? ar_ = context.Operators.Not((bool?)(am_ is null));
+            bool? as_ = context.Operators.And(aq_, ar_);
+            bool? at_ = context.Operators.Or(aj_, as_);
+            bool? au_ = context.Operators.And(af_, at_);
 
-                bool bv_() {
+            object av_() {
+
+                bool bz_() {
                     object cd_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                     object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                    bool cf_ = ce_ is CqlQuantity;
+                    bool cf_ = ce_ is CqlDateTime;
                     return cf_;
                 }
 
 
-                bool bw_() {
+                bool ca_() {
                     object cg_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                     object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                    bool ci_ = ch_ is CqlInterval<CqlQuantity>;
+                    bool ci_ = ch_ is CqlInterval<CqlDateTime>;
                     return ci_;
                 }
 
-                if (bt_())
-                {
+
+                bool cb_() {
                     object cj_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                     object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                    return (ck_ as CqlDateTime) as object;
+                    bool cl_ = ck_ is CqlQuantity;
+                    return cl_;
                 }
-                else if (bu_())
-                {
-                    object cl_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
-                    object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                    return (cm_ as CqlInterval<CqlDateTime>) as object;
+
+
+                bool cc_() {
+                    object cm_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
+                    object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
+                    bool co_ = cn_ is CqlInterval<CqlQuantity>;
+                    return co_;
                 }
-                else if (bv_())
-                {
-                    object cn_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
-                    object co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-                    return (co_ as CqlQuantity) as object;
-                }
-                else if (bw_())
+
+                if (bz_())
                 {
                     object cp_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                     object cq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cp_);
-                    return (cq_ as CqlInterval<CqlQuantity>) as object;
+                    return cq_ as CqlDateTime;
                 }
-                else
+                else if (ca_())
                 {
-                    return null;
-                };
-            }
-
-            CqlInterval<CqlDateTime> an_ = QICoreCommon_4_0_000.Instance.toInterval(context, am_());
-            CqlDateTime ao_ = context.Operators.Start(an_);
-            CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            bool? ar_ = context.Operators.In<CqlDateTime>(ao_, aq_, (string)default);
-            object as_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "authoredOn");
-            CqlDateTime at_ = context.Operators.LateBoundProperty<CqlDateTime>(as_, "value");
-            CqlInterval<CqlDateTime> av_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            CqlDateTime aw_ = context.Operators.End(av_);
-            CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            CqlDateTime az_ = context.Operators.End(ay_);
-            CqlQuantity ba_ = context.Operators.Quantity(2m, "days");
-            CqlDateTime bb_ = context.Operators.Add(az_, ba_);
-            CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(aw_, bb_, true, true);
-            bool? bd_ = context.Operators.In<CqlDateTime>(at_, bc_, "day");
-            CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            CqlDateTime bg_ = context.Operators.End(bf_);
-            bool? bh_ = context.Operators.Not((bool?)(bg_ is null));
-            bool? bi_ = context.Operators.And(bd_, bh_);
-            bool? bj_ = context.Operators.Or(ar_, bi_);
-            bool? bk_ = context.Operators.And(al_, bj_);
-
-            object bl_() {
-
-                bool cr_() {
+                    object cr_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
+                    object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
+                    return cs_ as CqlInterval<CqlDateTime>;
+                }
+                else if (cb_())
+                {
+                    object ct_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
+                    object cu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ct_);
+                    return cu_ as CqlQuantity;
+                }
+                else if (cc_())
+                {
                     object cv_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                     object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
-                    bool cx_ = cw_ is CqlDateTime;
-                    return cx_;
-                }
-
-
-                bool cs_() {
-                    object cy_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
-                    object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-                    bool da_ = cz_ is CqlInterval<CqlDateTime>;
-                    return da_;
-                }
-
-
-                bool ct_() {
-                    object db_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
-                    object dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
-                    bool dd_ = dc_ is CqlQuantity;
-                    return dd_;
-                }
-
-
-                bool cu_() {
-                    object de_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
-                    object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
-                    bool dg_ = df_ is CqlInterval<CqlQuantity>;
-                    return dg_;
-                }
-
-                if (cr_())
-                {
-                    object dh_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
-                    object di_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dh_);
-                    return (di_ as CqlDateTime) as object;
-                }
-                else if (cs_())
-                {
-                    object dj_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
-                    object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                    return (dk_ as CqlInterval<CqlDateTime>) as object;
-                }
-                else if (ct_())
-                {
-                    object dl_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
-                    object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
-                    return (dm_ as CqlQuantity) as object;
-                }
-                else if (cu_())
-                {
-                    object dn_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
-                    object do_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dn_);
-                    return (do_ as CqlInterval<CqlQuantity>) as object;
+                    return cw_ as CqlInterval<CqlQuantity>;
                 }
                 else
                 {
                     return null;
-                };
+                }
             }
 
-            CqlInterval<CqlDateTime> bm_ = QICoreCommon_4_0_000.Instance.toInterval(context, bl_());
-            CqlDateTime bn_ = context.Operators.Start(bm_);
-            CqlDateTime bp_ = context.Operators.LateBoundProperty<CqlDateTime>(as_, "value");
-            CqlInterval<CqlDateTime> bq_ = this.Measurement_Period(context);
-            bool? br_ = context.Operators.In<CqlDateTime>(bn_ ?? bp_, bq_, "day");
-            bool? bs_ = context.Operators.And(bk_, br_);
-            return bs_;
+            CqlInterval<CqlDateTime> aw_ = QICoreCommon_4_0_000.Instance.toInterval(context, av_());
+            CqlDateTime ax_ = context.Operators.Start(aw_);
+            CqlInterval<CqlDateTime> ay_ = this.Measurement_Period(context);
+            bool? az_ = context.Operators.In<CqlDateTime>(ax_ ?? al_, ay_, "day");
+            bool? ba_ = context.Operators.And(au_, az_);
+            return ba_;
         }
 
         IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?> i_ = context.Operators.Where<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>(g_, h_);
 
         (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)? j_((CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)? tuple_cgtoaqsajoehgwcararimqzsa) {
-            (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)? dp_ = (CqlTupleMetadata_ICeCVaggPeLLMJUWQdWMZROe, tuple_cgtoaqsajoehgwcararimqzsa?.LastAdultScreen, tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, tuple_cgtoaqsajoehgwcararimqzsa?.QualifyingEncounter);
-            return dp_;
+            (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)? cx_ = (CqlTupleMetadata_ICeCVaggPeLLMJUWQdWMZROe, tuple_cgtoaqsajoehgwcararimqzsa?.LastAdultScreen, tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, tuple_cgtoaqsajoehgwcararimqzsa?.QualifyingEncounter);
+            return cx_;
         }
 
         IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?> k_ = context.Operators.Select<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?, (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>(i_, j_);
@@ -1273,21 +1233,18 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         bool? e_ = context.Operators.Or(b_, d_);
         bool? f_ = context.Operators.And(a_, e_);
         bool? g_ = this.Patient_Age_17_Years_at_Start_of_Measurement_Period(context);
-        bool? j_ = context.Operators.Exists<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>(c_);
-        bool? k_ = context.Operators.Or(b_, j_);
-        bool? l_ = this.Has_Most_Recent_Adult_Screening_Negative(context);
-        bool? m_ = context.Operators.Or(k_, l_);
-        IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?> n_ = this.Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided(context);
-        bool? o_ = context.Operators.Exists<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>(n_);
-        bool? p_ = context.Operators.Or(m_, o_);
-        bool? q_ = context.Operators.And(g_, p_);
-        bool? r_ = context.Operators.Or(f_, q_);
-        bool? s_ = this.Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period(context);
-        bool? v_ = context.Operators.Exists<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>(n_);
-        bool? w_ = context.Operators.Or(l_, v_);
-        bool? x_ = context.Operators.And(s_, w_);
-        bool? y_ = context.Operators.Or(r_, x_);
-        return y_;
+        bool? h_ = this.Has_Most_Recent_Adult_Screening_Negative(context);
+        bool? i_ = context.Operators.Or(e_, h_);
+        IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?> j_ = this.Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided(context);
+        bool? k_ = context.Operators.Exists<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>(j_);
+        bool? l_ = context.Operators.Or(i_, k_);
+        bool? m_ = context.Operators.And(g_, l_);
+        bool? n_ = context.Operators.Or(f_, m_);
+        bool? o_ = this.Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period(context);
+        bool? p_ = context.Operators.Or(h_, k_);
+        bool? q_ = context.Operators.And(o_, p_);
+        bool? r_ = context.Operators.Or(n_, q_);
+        return r_;
     }
 
 
@@ -1403,29 +1360,25 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 CqlDateTime q_ = context.Operators.Start(p_);
                 CqlQuantity r_ = context.Operators.Quantity(14m, "days");
                 CqlDateTime s_ = context.Operators.Subtract(q_, r_);
-                CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
-                CqlDateTime v_ = context.Operators.Start(u_);
-                CqlInterval<CqlDateTime> w_ = context.Operators.Interval(s_, v_, true, true);
-                bool? x_ = context.Operators.In<CqlDateTime>(n_, w_, "day");
-                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
-                CqlDateTime aa_ = context.Operators.Start(z_);
-                bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
-                bool? ac_ = context.Operators.And(x_, ab_);
-                DataType ad_ = AdolescentScreening?.Value;
-                object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                bool? af_ = context.Operators.Not((bool?)(ae_ is null));
-                bool? ag_ = context.Operators.And(ac_, af_);
-                Code<ObservationStatus> ah_ = AdolescentScreening?.StatusElement;
-                ObservationStatus? ai_ = ah_?.Value;
-                string aj_ = context.Operators.Convert<string>(ai_);
-                string[] ak_ = [
+                CqlInterval<CqlDateTime> t_ = context.Operators.Interval(s_, q_, true, true);
+                bool? u_ = context.Operators.In<CqlDateTime>(n_, t_, "day");
+                bool? v_ = context.Operators.Not((bool?)(q_ is null));
+                bool? w_ = context.Operators.And(u_, v_);
+                DataType x_ = AdolescentScreening?.Value;
+                object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                bool? z_ = context.Operators.Not((bool?)(y_ is null));
+                bool? aa_ = context.Operators.And(w_, z_);
+                Code<ObservationStatus> ab_ = AdolescentScreening?.StatusElement;
+                ObservationStatus? ac_ = ab_?.Value;
+                string ad_ = context.Operators.Convert<string>(ac_);
+                string[] ae_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
-                bool? am_ = context.Operators.And(ag_, al_);
-                return am_;
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? ag_ = context.Operators.And(aa_, af_);
+                return ag_;
             }
 
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
@@ -1551,29 +1504,25 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 CqlDateTime q_ = context.Operators.Start(p_);
                 CqlQuantity r_ = context.Operators.Quantity(14m, "days");
                 CqlDateTime s_ = context.Operators.Subtract(q_, r_);
-                CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
-                CqlDateTime v_ = context.Operators.Start(u_);
-                CqlInterval<CqlDateTime> w_ = context.Operators.Interval(s_, v_, true, true);
-                bool? x_ = context.Operators.In<CqlDateTime>(n_, w_, "day");
-                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
-                CqlDateTime aa_ = context.Operators.Start(z_);
-                bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
-                bool? ac_ = context.Operators.And(x_, ab_);
-                DataType ad_ = AdultScreening?.Value;
-                object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                bool? af_ = context.Operators.Not((bool?)(ae_ is null));
-                bool? ag_ = context.Operators.And(ac_, af_);
-                Code<ObservationStatus> ah_ = AdultScreening?.StatusElement;
-                ObservationStatus? ai_ = ah_?.Value;
-                string aj_ = context.Operators.Convert<string>(ai_);
-                string[] ak_ = [
+                CqlInterval<CqlDateTime> t_ = context.Operators.Interval(s_, q_, true, true);
+                bool? u_ = context.Operators.In<CqlDateTime>(n_, t_, "day");
+                bool? v_ = context.Operators.Not((bool?)(q_ is null));
+                bool? w_ = context.Operators.And(u_, v_);
+                DataType x_ = AdultScreening?.Value;
+                object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                bool? z_ = context.Operators.Not((bool?)(y_ is null));
+                bool? aa_ = context.Operators.And(w_, z_);
+                Code<ObservationStatus> ab_ = AdultScreening?.StatusElement;
+                ObservationStatus? ac_ = ab_?.Value;
+                string ad_ = context.Operators.Convert<string>(ac_);
+                string[] ae_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
-                bool? am_ = context.Operators.And(ag_, al_);
-                return am_;
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? ag_ = context.Operators.And(aa_, af_);
+                return ag_;
             }
 
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);

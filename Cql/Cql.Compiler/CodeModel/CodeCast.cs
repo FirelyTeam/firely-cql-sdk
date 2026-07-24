@@ -30,7 +30,7 @@ internal enum CodeCastKind
 /// </summary>
 internal sealed class CodeCast : CodeExpression
 {
-    public CodeCast(CodeExpression operand, Type type, CodeCastKind kind, bool fromCqlAsOperator = false)
+    public CodeCast(CodeExpression operand, Type type, CodeCastKind kind)
     {
         if (kind == CodeCastKind.As && !CodeTypeRules.IsNullAssignable(type))
             throw new ArgumentException($"'as {type}' is not legal C#: the target of a safe cast must be a reference or nullable type.");
@@ -40,26 +40,11 @@ internal sealed class CodeCast : CodeExpression
         Operand = operand;
         Type = type;
         Kind = kind;
-        FromCqlAsOperator = fromCqlAsOperator;
     }
 
     public CodeExpression Operand { get; }
 
     public CodeCastKind Kind { get; }
-
-    /// <summary>
-    /// True when this cast was built by the builder's <c>As()</c> for an ELM <c>as</c>/<c>cast</c>
-    /// operator — the casts the old pipeline represented as its custom <c>ElmAsExpression</c>
-    /// node rather than a raw <c>Expression.Convert</c>/<c>TypeAs</c>. The distinction is
-    /// PRINT-relevant only for casts to <c>object</c>: the old
-    /// <c>RedundantCastsTransformer</c> stripped redundant reference-typed to-object casts,
-    /// but an <c>ElmAsExpression</c> only reduced to a real Convert/TypeAs at print time —
-    /// AFTER the transformer's single pass — so those always survived and printed
-    /// (<c>x as object</c>). Conversion-helper casts (the old
-    /// <c>TryNewAssignToTypeExpression</c>/<c>NewTypeAsExpression</c> raw nodes) leave this
-    /// false and strip like the old ones did. See <c>CSharpEmitter.PrintCast</c>.
-    /// </summary>
-    public bool FromCqlAsOperator { get; }
 
     public override Type Type { get; }
 }

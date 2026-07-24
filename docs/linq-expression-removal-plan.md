@@ -287,16 +287,21 @@ Deferred to post-merge cleanup, landing as develop PRs:
   IR binder; the old binder it described is deleted. No corpus output changed (the corpora
   never exercised either bug), so the `GeneratedCodeAttribute` version bump still waits
   for the first output-changing PR below.
+- ~~The quirk ledger above (burned-letter naming gaps, the stray `};`, the as-object
+  ordering accident).~~ Done — first output-changing cleanup, carrying the
+  `GeneratedCodeAttribute` bump to 5.1.3.0 (a patch: only expression internals change,
+  well inside the invoker's supported range). Regenerated goldens reviewed by
+  classification: every changed line is the version attribute, a dropped `};`
+  terminator, a dropped `as object` (with its parentheses), or contiguous local
+  renumbering — plus a real win: the burned-letter keying had *blocked* deduplication of
+  identical parent expressions, so dropping it collapses previously-duplicated pure
+  computations (52 statements in CMS56; 1,028 across the HEDIS 2025 corpus).
 - Replace the hoisted zero-parameter local functions for conditional chains with native
   `if`/`else` statements (an old-writer shape kept for golden parity). Output-changing:
-  regenerated goldens are the review artifact, and the first such PR also bumps the
-  `GeneratedCodeAttribute` version deferred in phase 6. Note (Ewout, 2026-07-23): the old
+  regenerated goldens are the review artifact. Note (Ewout, 2026-07-23): the old
   writer's hoisting thresholds and inline shapes were readability heuristics, not
   contracts — where a simpler linearization rule keeps or improves readability, prefer it
   over faithfully replicating the old behavior.
-- The quirk ledger above (burned-letter naming gaps, the stray `};`, the as-object
-  ordering accident). Output-changing; same golden-regeneration process and readability
-  license as above.
 - Remove the remaining `NOTE(phase4)` markers as each is resolved (the phase-3 markers
   left with #1341's fix; the two `phase3-review` remarks were downgraded to plain design
   notes, since both document deliberate, guarded deviations).

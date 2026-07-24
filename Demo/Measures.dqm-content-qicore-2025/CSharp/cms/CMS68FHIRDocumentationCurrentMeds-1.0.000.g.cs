@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("CMS68FHIRDocumentationCurrentMeds", "1.0.000")]
 public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISingleton<CMS68FHIRDocumentationCurrentMeds_1_0_000>
 {
@@ -244,30 +244,30 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                     {
                         DataType ao_ = MedicationsDocumented?.Performed;
                         object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        return (ap_ as CqlDateTime) as object;
+                        return ap_ as CqlDateTime;
                     }
                     else if (z_())
                     {
                         DataType aq_ = MedicationsDocumented?.Performed;
                         object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                        return (ar_ as CqlInterval<CqlDateTime>) as object;
+                        return ar_ as CqlInterval<CqlDateTime>;
                     }
                     else if (aa_())
                     {
                         DataType as_ = MedicationsDocumented?.Performed;
                         object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
-                        return (at_ as CqlQuantity) as object;
+                        return at_ as CqlQuantity;
                     }
                     else if (ab_())
                     {
                         DataType au_ = MedicationsDocumented?.Performed;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        return (av_ as CqlInterval<CqlQuantity>) as object;
+                        return av_ as CqlInterval<CqlQuantity>;
                     }
                     else
                     {
                         return null;
-                    };
+                    }
                 }
 
                 CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_());
@@ -313,30 +313,30 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                     {
                         DataType bm_ = MedicationsDocumented?.Performed;
                         object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
-                        return (bn_ as CqlDateTime) as object;
+                        return bn_ as CqlDateTime;
                     }
                     else if (ax_())
                     {
                         DataType bo_ = MedicationsDocumented?.Performed;
                         object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
-                        return (bp_ as CqlInterval<CqlDateTime>) as object;
+                        return bp_ as CqlInterval<CqlDateTime>;
                     }
                     else if (ay_())
                     {
                         DataType bq_ = MedicationsDocumented?.Performed;
                         object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
-                        return (br_ as CqlQuantity) as object;
+                        return br_ as CqlQuantity;
                     }
                     else if (az_())
                     {
                         DataType bs_ = MedicationsDocumented?.Performed;
                         object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                        return (bt_ as CqlInterval<CqlQuantity>) as object;
+                        return bt_ as CqlInterval<CqlQuantity>;
                     }
                     else
                     {
                         return null;
-                    };
+                    }
                 }
 
                 CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_());
