@@ -417,7 +417,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         Condition e_(Condition X) => X as Condition;
         IEnumerable<Condition> f_ = context.Operators.Select<Condition, Condition>(d_, e_);
         IEnumerable<Condition> g_ = Status_1_15_000.Instance.verified(context, f_);
-        IEnumerable<Condition> i_ = context.Operators.Select<Condition, Condition>(g_, e_);
+        Condition h_(Condition X) => X as Condition;
+        IEnumerable<Condition> i_ = context.Operators.Select<Condition, Condition>(g_, h_);
         IEnumerable<Encounter> j_ = Antibiotic_1_11_000.Instance.Encounter_with_Comorbid_Condition_History(context, b_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(a_, j_);
         CqlValueSet m_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
@@ -458,9 +459,11 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         CqlValueSet aa_ = this.Acute_Tonsillitis(context);
         IEnumerable<Condition> ab_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aa_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> ac_ = context.Operators.Union<Condition>(z_, ab_);
-        IEnumerable<Condition> ae_ = context.Operators.Select<Condition, Condition>(ac_, e_);
+        Condition ad_(Condition X) => X as Condition;
+        IEnumerable<Condition> ae_ = context.Operators.Select<Condition, Condition>(ac_, ad_);
         IEnumerable<Condition> af_ = Status_1_15_000.Instance.verified(context, ae_);
-        IEnumerable<Condition> ah_ = context.Operators.Select<Condition, Condition>(af_, e_);
+        Condition ag_(Condition X) => X as Condition;
+        IEnumerable<Condition> ah_ = context.Operators.Select<Condition, Condition>(af_, ag_);
         IEnumerable<Encounter> ai_ = Antibiotic_1_11_000.Instance.Encounter_with_Competing_Diagnosis_History(context, b_, ah_);
         IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(t_, ai_);
         IEnumerable<Encounter> ak_ = context.Operators.Union<Encounter>(k_, aj_);

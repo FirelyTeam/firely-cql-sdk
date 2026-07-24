@@ -499,7 +499,8 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         Condition e_(Condition X) => X as Condition;
         IEnumerable<Condition> f_ = context.Operators.Select<Condition, Condition>(d_, e_);
         IEnumerable<Condition> g_ = Status_1_15_000.Instance.verified(context, f_);
-        IEnumerable<Condition> i_ = context.Operators.Select<Condition, Condition>(g_, e_);
+        Condition h_(Condition X) => X as Condition;
+        IEnumerable<Condition> i_ = context.Operators.Select<Condition, Condition>(g_, h_);
         IEnumerable<Encounter> j_ = Antibiotic_1_11_000.Instance.Encounter_with_Comorbid_Condition_History(context, b_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(a_, j_);
         CqlValueSet m_ = this.Antibiotic_Medications_for_Pharyngitis(context);
@@ -534,9 +535,11 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> t_ = Antibiotic_1_11_000.Instance.Encounter_with_Antibiotic_Medication_History(context, b_, s_);
         CqlValueSet v_ = this.Competing_Conditions_for_Respiratory_Conditions(context);
         IEnumerable<Condition> w_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, v_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> y_ = context.Operators.Select<Condition, Condition>(w_, e_);
+        Condition x_(Condition X) => X as Condition;
+        IEnumerable<Condition> y_ = context.Operators.Select<Condition, Condition>(w_, x_);
         IEnumerable<Condition> z_ = Status_1_15_000.Instance.verified(context, y_);
-        IEnumerable<Condition> ab_ = context.Operators.Select<Condition, Condition>(z_, e_);
+        Condition aa_(Condition X) => X as Condition;
+        IEnumerable<Condition> ab_ = context.Operators.Select<Condition, Condition>(z_, aa_);
         IEnumerable<Encounter> ac_ = Antibiotic_1_11_000.Instance.Encounter_with_Competing_Diagnosis_History(context, b_, ab_);
         IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(t_, ac_);
         IEnumerable<Encounter> ae_ = context.Operators.Union<Encounter>(k_, ad_);
