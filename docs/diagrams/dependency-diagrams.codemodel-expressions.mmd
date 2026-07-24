@@ -74,11 +74,16 @@ CodeDefinitionCall -.->|"Arguments[0]"| CodeContextParameter
 %% Invisible layout-only links: with almost no real edges between categories, ELK has nothing
 %% to infer a top-to-bottom order from and packs the subgraphs into a wide row instead. These
 %% force the intended reading order (top to bottom) without drawing a visible line.
-CodeThrow ~~~ CodeLambda
-CodeLambda ~~~ CodeProperty
-CodeProperty ~~~ CodeNew
-CodeNew ~~~ CodeInvoke
-CodeInvoke ~~~ CodeConditional
-CodeConditional ~~~ CodeBinary
-CodeBinary ~~~ CodeConstant
-CodeConstant ~~~ CodeExpression
+%% Order matters: a real edge's source category must come BEFORE its target category in this
+%% chain, or ELK treats it as a backward edge and produces a scrambled, non-monotonic layout
+%% (seen when this chain started at CodeExpression instead of ending there). Functions (source
+%% of the Parameters edge) and Calls (source of the Arguments[0] edge) both target Literals &
+%% Variables, so both are placed immediately before it here to keep those two edges short.
+CodeExpression ~~~ CodeLambda
+CodeLambda ~~~ CodeInvoke
+CodeInvoke ~~~ CodeConstant
+CodeConstant ~~~ CodeNew
+CodeNew ~~~ CodeProperty
+CodeProperty ~~~ CodeBinary
+CodeBinary ~~~ CodeConditional
+CodeConditional ~~~ CodeThrow
