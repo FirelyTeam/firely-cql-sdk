@@ -23,12 +23,12 @@ end
 
 subgraph Runtime
 direction TB
-BaseTypeResolver["<b>BaseTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>TypeResolver implementation providing the default CQL System-type-to-.NET mappings.</div>"]
+BaseTypeResolver["<b>BaseTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'><b>TypeResolver</b> implementation providing the default CQL System-type-to-.NET mappings.</div>"]
 end
 
 subgraph Fhir
 direction TB
-FhirTypeResolver["<b>FhirTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>BaseTypeResolver extended with FHIR resource/type mappings, built from a Firely SDK ModelInspector.</div>"]
+FhirTypeResolver["<b>FhirTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'><b>BaseTypeResolver</b> extended with FHIR resource/type mappings, built from a Firely SDK <b>ModelInspector</b>.</div>"]
 ModelInspector["<b>ModelInspector</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(external) External Firely .NET SDK type (Hl7.Fhir.Introspection) that reflects over FHIR POCO classes to expose their type/property metadata.</div>"]
 end
 
