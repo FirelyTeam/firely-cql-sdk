@@ -112,12 +112,13 @@ partial class CodeBuilderContext
             var leftElementType = _typeResolver.GetListElementType(left.Type);
             if (_typeResolver.IsListType(right.Type))
             {
-                // NOTE(phase4): ported as-is — this reads left.Type where right.Type looks
-                // intended, so leftElementType != rightElementType can never be true and the
-                // element-type check below is dead. Preserved verbatim from the old pipeline.
-                var rightElementType = _typeResolver.GetListElementType(left.Type);
+                // Reading left.Type here was a long-standing copy-paste bug (#1342) that made
+                // this mismatch check compare the left element type against itself, so it
+                // could never fire.
+                var rightElementType = _typeResolver.GetListElementType(right.Type);
                 if (leftElementType != rightElementType)
-                    throw this.NewExpressionBuildingException();
+                    throw this.NewExpressionBuildingException(
+                        $"Includes: the list operands' element types differ ({leftElementType} vs {rightElementType}).");
                 return BindCqlOperator(nameof(ICqlOperators.ListIncludesList), left, right);
             }
 
@@ -152,11 +153,12 @@ partial class CodeBuilderContext
             var leftElementType = _typeResolver.GetListElementType(left.Type);
             if (_typeResolver.IsListType(right.Type))
             {
-                // NOTE(phase4): ported as-is — same left.Type/right.Type mixup as in Includes()
-                // above; leftElementType != rightElementType can never be true here.
-                var rightElementType = _typeResolver.GetListElementType(left.Type);
+                // Reading left.Type here was the same copy-paste bug (#1342) as in Includes()
+                // above — the mismatch check could never fire.
+                var rightElementType = _typeResolver.GetListElementType(right.Type);
                 if (leftElementType != rightElementType)
-                    throw this.NewExpressionBuildingException();
+                    throw this.NewExpressionBuildingException(
+                        $"IncludedIn: the list operands' element types differ ({leftElementType} vs {rightElementType}).");
                 return BindCqlOperator(nameof(ICqlOperators.ListIncludesList), right, left);
             }
 

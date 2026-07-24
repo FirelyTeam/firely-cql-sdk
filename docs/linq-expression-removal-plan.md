@@ -275,17 +275,31 @@ byte-identical against the golden corpora):
   `85207efd5`. Inline `//` comments that cite old-writer mechanisms by name are kept
   deliberately: they document the bug-for-bug quirks and point into `85207efd5`.
 
-Deferred to post-merge cleanup — output-changing, so each lands as a develop PR with
-regenerated goldens as the review artifact (the first one also bumps the
-`GeneratedCodeAttribute` version deferred in phase 6):
+Deferred to post-merge cleanup, landing as develop PRs:
 
-- Revisit `CqlCodeDefinition.ReturnType` (parity-preserved `typeof(CqlCodeDefinition)`).
-- Fix the tracked upstream bugs in one place: #1341, #1342; close #1345.
+- ~~Revisit `CqlCodeDefinition.ReturnType` (parity-preserved `typeof(CqlCodeDefinition)`).~~
+  Done — returns `typeof(CqlCode)`, the static type of what a generated code definition
+  actually produces (practically unobservable: only reachable via an `ExpressionRef`
+  naming a code definition, which CQL compiles as `CodeRef` instead).
+- ~~Fix the tracked upstream bugs in one place: #1341, #1342; close #1345.~~ Done — both
+  fixed with discriminating regression tests (verified to fail against the unfixed code);
+  the #1342 guard also gained a real diagnostic message. #1345's fixes shipped with the
+  IR binder; the old binder it described is deleted. No corpus output changed (the corpora
+  never exercised either bug), so the `GeneratedCodeAttribute` version bump still waits
+  for the first output-changing PR below.
 - Replace the hoisted zero-parameter local functions for conditional chains with native
-  `if`/`else` statements (an old-writer shape kept for golden parity).
+  `if`/`else` statements (an old-writer shape kept for golden parity). Output-changing:
+  regenerated goldens are the review artifact, and the first such PR also bumps the
+  `GeneratedCodeAttribute` version deferred in phase 6. Note (Ewout, 2026-07-23): the old
+  writer's hoisting thresholds and inline shapes were readability heuristics, not
+  contracts — where a simpler linearization rule keeps or improves readability, prefer it
+  over faithfully replicating the old behavior.
 - The quirk ledger above (burned-letter naming gaps, the stray `};`, the as-object
-  ordering accident).
-- Remove the remaining `NOTE(phase3)`/`NOTE(phase4)` markers as each is resolved.
+  ordering accident). Output-changing; same golden-regeneration process and readability
+  license as above.
+- Remove the remaining `NOTE(phase4)` markers as each is resolved (the phase-3 markers
+  left with #1341's fix; the two `phase3-review` remarks were downgraded to plain design
+  notes, since both document deliberate, guarded deviations).
 
 ### Findings from phases 0–1
 
