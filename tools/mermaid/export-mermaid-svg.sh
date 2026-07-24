@@ -92,12 +92,36 @@ relpath() {
     perl -MFile::Spec -e 'print File::Spec->abs2rel($ARGV[1], $ARGV[0])' "$1" "$2"
 }
 
+set_svg_intrinsic_size() {
+    # mmdc emits width="100%" on the root <svg> (plus a max-width style, which some renderers --
+    # e.g. GitHub's SVG sanitizer -- strip). Without an absolute width, a narrow/short diagram
+    # gets stretched to fill its container's full width instead of displaying at its natural
+    # size, making everything inside it look oversized. Pin width/height to the viewBox so the
+    # diagram always displays at its actual rendered size (still free to shrink on narrow
+    # viewports via the host's responsive-image CSS, just never stretched larger).
+    local svg_path="$1"
+    perl -0777 -e '
+        local $/;
+        open(my $fh, "<:utf8", $ARGV[0]) or die "Cannot read $ARGV[0]: $!";
+        my $content = <$fh>;
+        close $fh;
+        if ($content =~ /viewBox="[\d.]+\s+[\d.]+\s+([\d.]+)\s+([\d.]+)"/) {
+            my ($w, $h) = ($1, $2);
+            $content =~ s/width="100%"/width="$w" height="$h"/;
+        }
+        open(my $out, ">:utf8", $ARGV[0]) or die "Cannot write $ARGV[0]: $!";
+        print $out $content;
+        close $out;
+    ' "$svg_path"
+}
+
 render_svg() {
     local src="$1" out="$2"
     if ! npx -y @mermaid-js/mermaid-cli -i "$src" -o "$out" --puppeteerConfigFile "$PUPPETEER_CONFIG_PATH"; then
         echo "Error: Mermaid render failed for: $src" >&2
         exit 1
     fi
+    set_svg_intrinsic_size "$out"
 }
 
 BLOCK_COUNT="$(perl -0777 -ne 'my @m = /```mermaid\s*\r?\n(.*?)\r?\n```/gs; print scalar(@m)' "$RESOLVED_MARKDOWN_PATH")"
@@ -191,6 +215,19 @@ ARTIFACTS="$(perl -0777 -e '
             open(STDOUT, ">&", $saved_stdout) or die "Cannot restore STDOUT: $!";
 
             ($renderResult == 0) or die "Mermaid render failed for: $mmd_path";
+
+            # Pin the rendered SVG intrinsic width/height to its viewBox (see
+            # set_svg_intrinsic_size in the 0-blocks branch above for why).
+            open(my $svg_in, "<:utf8", $svg_path) or die "Cannot read $svg_path: $!";
+            my $svg_content = do { local $/; <$svg_in> };
+            close $svg_in;
+            if ($svg_content =~ /viewBox="[\d.]+\s+[\d.]+\s+([\d.]+)\s+([\d.]+)"/) {
+                my ($svg_w, $svg_h) = ($1, $2);
+                $svg_content =~ s/width="100%"/width="$svg_w" height="$svg_h"/;
+            }
+            open(my $svg_out, ">:utf8", $svg_path) or die "Cannot write $svg_path: $!";
+            print $svg_out $svg_content;
+            close $svg_out;
 
             push @artifacts, File::Spec->abs2rel($mmd_path, $repo_root);
             push @artifacts, File::Spec->abs2rel($svg_path, $repo_root);

@@ -31,6 +31,24 @@ function Get-RelativePathUnix {
     return $relative.Replace('\\', '/').Replace('\', '/')
 }
 
+function Set-SvgIntrinsicSize {
+    # mmdc emits width="100%" on the root <svg> (plus a max-width style, which some renderers --
+    # e.g. GitHub's SVG sanitizer -- strip). Without an absolute width, a narrow/short diagram
+    # gets stretched to fill its container's full width instead of displaying at its natural
+    # size, making everything inside it look oversized. Pin width/height to the viewBox so the
+    # diagram always displays at its actual rendered size (still free to shrink on narrow
+    # viewports via the host's responsive-image CSS, just never stretched larger).
+    param([Parameter(Mandatory = $true)][string]$SvgPath)
+
+    $svgContent = Get-Content -Path $SvgPath -Raw -Encoding utf8
+    if ($svgContent -match 'viewBox="[\d.]+\s+[\d.]+\s+([\d.]+)\s+([\d.]+)"') {
+        $width = $Matches[1]
+        $height = $Matches[2]
+        $updated = $svgContent -replace 'width="100%"', "width=`"$width`" height=`"$height`""
+        Set-Content -Path $SvgPath -Value $updated -Encoding utf8 -NoNewline
+    }
+}
+
 $repoRoot = (git rev-parse --show-toplevel).Trim()
 if ([string]::IsNullOrWhiteSpace($repoRoot)) {
     throw 'Unable to determine repository root. Run this script inside a git repository.'
@@ -91,6 +109,7 @@ if ($matches.Count -eq 0) {
     if ($LASTEXITCODE -ne 0) {
         throw "Mermaid render failed for: $resolvedSourcePath"
     }
+    Set-SvgIntrinsicSize -SvgPath $svgOutPath
 
     Write-Host ''
     Write-Host 'Mermaid export completed.' -ForegroundColor Green
@@ -124,6 +143,7 @@ for ($i = 0; $i -lt $matches.Count; $i++) {
     if ($LASTEXITCODE -ne 0) {
         throw "Mermaid render failed for: $mmdPath"
     }
+    Set-SvgIntrinsicSize -SvgPath $svgPath
 
     $generatedArtifacts.Add((Get-RelativePathUnix -FromDirectory $repoRoot -ToPath $mmdPath))
     $generatedArtifacts.Add((Get-RelativePathUnix -FromDirectory $repoRoot -ToPath $svgPath))

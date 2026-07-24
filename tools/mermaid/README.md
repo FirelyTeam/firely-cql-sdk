@@ -55,6 +55,17 @@ no extra install needed) instead of the default (dagre) — set `'layout': 'elk'
 produces a less cramped auto-layout for diagrams with many nodes/edges (applies to `classDiagram`
 as well as `flowchart`/`stateDiagram`).
 
+## Intrinsic sizing
+
+`mmdc` emits the root `<svg>` with `width="100%"` (plus a `max-width` style, which some renderers —
+e.g. GitHub's SVG sanitizer — strip). Without an absolute width, a small diagram gets stretched to
+fill its container's full width instead of displaying at its natural size, making everything inside
+it look oversized (this is most noticeable on a narrow/short diagram like
+`dependency-diagrams.packaging-toolkit-services.svg`, embedded on a wide page). Both scripts
+post-process every rendered `.svg` to replace `width="100%"` with explicit `width`/`height`
+attributes taken from its own `viewBox`, so this is automatic — you don't need to do anything, and
+should never hand-edit an `.svg`'s dimensions to work around this.
+
 ## Requirements
 
 Node.js (the scripts invoke `npx -y @mermaid-js/mermaid-cli` directly — no local install or
