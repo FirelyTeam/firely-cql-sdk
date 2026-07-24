@@ -1,5 +1,6 @@
 # Toolkit Services Dependency Diagrams
-These diagrams represent the internal dependencies of the CQL SDK toolkit services.
+These diagrams represent the internal dependencies of the CQL SDK toolkit services, plus one
+structural diagram of the code-model IR (not a dependency graph — see its own section below).
 
 Each diagram is authored as a Mermaid flowchart (grouped into `subgraph` boxes per project, with each
 type shown as a title + one-line description) and rendered to a `.svg` ahead of time (see
@@ -52,3 +53,21 @@ Services for translating CQL to ELM format.
 Mermaid source: [dependency-diagrams.cql-toolkit-services.mmd](diagrams/dependency-diagrams.cql-toolkit-services.mmd)
 
 ![CqlToolkitServices Dependency Diagram](diagrams/dependency-diagrams.cql-toolkit-services.svg)
+
+## CodeModel Expression Types
+
+The `Hl7.Cql.Compiler.CodeModel` types that make up the typed C# code-model IR (intermediate
+representation) built by `CodeBuilder` and printed to C# source by the emitter — see
+[cql-engine-architecture.md](cql-engine-architecture.md) for where this fits in the overall
+CQL→ELM→C#→assembly pipeline.
+
+**Remarks:**
+* Unlike the toolkit-service diagrams above (DI dependency graphs), this shows structural composition — which node types exist and what kind of child expressions they hold
+* Grouped by conceptual category, not by project — every type here lives in `Hl7.Cql.Compiler.CodeModel`
+* All 19 concrete types inherit directly from the abstract `CodeExpression` base (not drawn as 19 identical edges — noted on the `CodeExpression` card instead)
+* Every "child expression" slot named in a card's description is typed as the abstract `CodeExpression` base, so any of the 19 concrete types may appear there — only the few relationships that require one *specific* concrete type are drawn as edges
+* Excludes `CodeExpressionExtensions` and `CodeTypeRules` (static helper/validation utilities, not IR node types)
+
+Mermaid source: [dependency-diagrams.codemodel-expressions.mmd](diagrams/dependency-diagrams.codemodel-expressions.mmd)
+
+![CodeModel Expression Types Diagram](diagrams/dependency-diagrams.codemodel-expressions.svg)

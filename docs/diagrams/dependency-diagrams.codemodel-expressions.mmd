@@ -1,0 +1,72 @@
+%%{init: {
+    'layout': 'elk',
+    'themeVariables':{
+      'lineColor': '#333',
+      'lineWidth': 4
+    },
+    'themeCSS': '.edgeLabel, .edgeLabel p, .edgeLabel rect, .labelBkg { background: transparent !important; background-color: transparent !important; fill: transparent !important; }'
+}}%%
+
+flowchart TB
+
+CodeExpression["<b>CodeExpression</b><br/><div style='text-align:left; max-width:300px; overflow-wrap:anywhere;'>Abstract base for every code-model IR node below (all 19 inherit from it directly). Carries the .NET Type the printed C# expression will have. Every child-expression slot named below is typed as this base, so any node type can nest inside any other.</div>"]
+
+subgraph "Literals & Variables"
+direction TB
+CodeConstant["<b>CodeConstant</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A constant value, printed as a C# literal or null. Leaf node -- no child expressions.</div>"]
+CodeDefault["<b>CodeDefault</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>The C# default value for a type -- null for nullable types, default(T) otherwise. Leaf node.</div>"]
+CodeLocal["<b>CodeLocal</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A local variable or lambda parameter. Leaf node. Reference identity is the variable's identity: two instances denote the same variable only if they are the same object.</div>"]
+CodeContextParameter["<b>CodeContextParameter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>The CqlContext parameter every generated definition receives, printed as context. Leaf node; a single well-known instance is reused everywhere.</div>"]
+end
+
+subgraph "Operators & Type Tests"
+direction TB
+CodeBinary["<b>CodeBinary</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A binary operator application (??, ==, !=, ||, &amp;&amp;) over a Left and Right child expression -- CQL's arithmetic/logic instead goes through ICqlOperators calls.</div>"]
+CodeCast["<b>CodeCast</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A type conversion of an Operand expression: an explicit cast (T)x or a safe cast x as T.</div>"]
+CodeTypeIs["<b>CodeTypeIs</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A runtime type test of an Operand expression, printed as a C# is pattern.</div>"]
+end
+
+subgraph "Control Flow"
+direction TB
+CodeConditional["<b>CodeConditional</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A two-way conditional over a Test, IfTrue and IfFalse expression, printed as a ternary a ? b : c when simple.</div>"]
+CodeIfChain["<b>CodeIfChain</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A multi-way conditional over a list of (When, Then) case expressions plus an Else expression, printed as an if / else if / else statement chain.</div>"]
+end
+
+subgraph Calls
+direction TB
+CodeInvoke["<b>CodeInvoke</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A .NET method invocation over an optional Receiver expression and Argument expressions -- instance or static, optionally null-conditional -- covering ICqlOperators/CqlContext calls and any other bound .NET method.</div>"]
+CodeDefinitionCall["<b>CodeDefinitionCall</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A call to another CQL definition or function over Argument expressions, printed as this.Name(...) or LibraryClass.Instance.Name(...).</div>"]
+end
+
+subgraph "Object & Array Construction"
+direction TB
+CodeNew["<b>CodeNew</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A constructor call, new T(args), over Argument expressions.</div>"]
+CodeMemberInit["<b>CodeMemberInit</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A constructor call with an object initializer, new T { A = x, B = y }, wrapping a CodeNew plus Binding value expressions.</div>"]
+CodeTupleInit["<b>CodeTupleInit</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A CQL tuple construction over named Element value expressions, printed as a C# value tuple.</div>"]
+CodeNewArray["<b>CodeNewArray</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>An array created from Item expressions, new T[] { a, b, ... }.</div>"]
+CodeNewArrayBounds["<b>CodeNewArrayBounds</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>An array created with a Length expression, new T[n].</div>"]
+end
+
+subgraph "Member Access"
+direction TB
+CodeProperty["<b>CodeProperty</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A property or field access over an optional Receiver expression, optionally null-conditional (x?.Member).</div>"]
+end
+
+subgraph Functions
+direction TB
+CodeLambda["<b>CodeLambda</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A function value over Parameter locals and a Body expression, printed as a local function; its Type is the corresponding Func&lt;...&gt; delegate type.</div>"]
+end
+
+subgraph "Error Handling"
+direction TB
+CodeThrow["<b>CodeThrow</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Throws an Exception expression; used only for the generator's error-recovery stubs.</div>"]
+end
+
+%% Only the relationships that name a SPECIFIC concrete type are drawn as edges -- every
+%% child-expression slot named in the descriptions above is generically typed CodeExpression
+%% (any node type may appear there), so drawing all of those would just be ~30 identical edges
+%% converging on one box. These three are the exceptions: a real constructor-level constraint
+%% on which concrete type may appear.
+CodeLambda -.->|Parameters| CodeLocal
+CodeMemberInit -.->|New| CodeNew
+CodeDefinitionCall -.->|"Arguments[0]"| CodeContextParameter
