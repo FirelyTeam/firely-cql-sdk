@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.3.0")]
 [CqlLibrary("CMS996FHIRAptTxforSTEMI", "2.0.000")]
 public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS996FHIRAptTxforSTEMI_2_0_000>
 {
@@ -308,7 +308,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     private IEnumerable<Encounter> ED_Encounter_During_MP_Compute(CqlContext context)
     {
-        PropertyInfo a_ = typeof(Encounter).GetProperty("Class");
+        PropertyInfo a_ = (typeof(Encounter)).GetProperty("Class");
         CqlCode b_ = this.EMER(context);
         IEnumerable<CqlCode> c_ = context.Operators.ToList<CqlCode>(b_);
         IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(a_, default, c_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
