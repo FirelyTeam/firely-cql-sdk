@@ -70,3 +70,15 @@ end
 CodeLambda -.->|Parameters| CodeLocal
 CodeMemberInit -.->|New| CodeNew
 CodeDefinitionCall -.->|"Arguments[0]"| CodeContextParameter
+
+%% Invisible layout-only links: with almost no real edges between categories, ELK has nothing
+%% to infer a top-to-bottom order from and packs the subgraphs into a wide row instead. These
+%% force the intended reading order (top to bottom) without drawing a visible line.
+CodeThrow ~~~ CodeLambda
+CodeLambda ~~~ CodeProperty
+CodeProperty ~~~ CodeNew
+CodeNew ~~~ CodeInvoke
+CodeInvoke ~~~ CodeConditional
+CodeConditional ~~~ CodeBinary
+CodeBinary ~~~ CodeConstant
+CodeConstant ~~~ CodeExpression
