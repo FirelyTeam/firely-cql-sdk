@@ -20,6 +20,42 @@ diagrams: set `'layout': 'elk'` in the `%%{init: {...}}%%` directive at the top 
 to `classDiagram` as well as `flowchart`/`stateDiagram` and generally produces a less cramped
 auto-layout than Mermaid's default (dagre) for diagrams with many nodes/edges.
 
+## Color scheme
+
+Class diagrams in this repo use dark vertices (class boxes) with light text, transparent-background
+edge labels, and the original pale-yellow `namespace` (cluster) boxes left untouched. Use this exact
+`%%{init: {...}}%%` block (only `lineColor`/`lineWidth` may already be present — merge in the rest):
+
+```
+%%{init: {
+    'layout': 'elk',
+    'themeVariables':{
+      'lineColor': '#888',
+      'lineWidth': 4,
+      'mainBkg': '#2b2b2b',
+      'classText': '#f0f0f0',
+      'nodeBorder': '#aaaaaa'
+    },
+    'themeCSS': '.labelBkg { background: transparent !important; } .edgeLabel .label rect { fill: transparent !important; } .edgeLabel .label span { background: transparent !important; } .edgeLabel, .edgeLabel p { color: #333 !important; }'
+}}%%
+```
+
+Notes if you need to tweak this further:
+- `mainBkg`/`classText`/`nodeBorder` control the vertex fill/text/border. Mermaid's `edgeLabelBackground`
+  theme variable does *not* control edge-label backgrounds for `classDiagram` in the ELK-rendered
+  "neo" look Mermaid currently uses — the actual element is a plain `<div class="labelBkg">`, so it
+  must be overridden via `themeCSS`, not `themeVariables`.
+- Edge-label *text* color is tied to the same variable family as vertex text (`classText`), so once
+  vertex text goes light, edge labels (which sit on the light namespace/canvas background, not on a
+  vertex) need their own explicit dark color override in `themeCSS` too — otherwise they end up
+  light-on-light and unreadable.
+- A `style ClassName fill:#AABBCC` override (e.g. marking scoped/highlighted classes) must use a
+  **dark** fill to stay legible, since all vertex text is now light — this repo uses `fill:#055`
+  (dark teal) for that. A light highlight fill (e.g. light cyan) would be illegible against light text,
+  same failure mode as the original dark-cyan-with-dark-text bug this scheme replaced.
+- Always render and visually check (convert to PNG and view it) after any color change — a plausible
+  variable name can silently target the wrong element, as above.
+
 ## File layout
 
 - One `.mmd` per diagram, next to the markdown doc that embeds it, in a sibling `diagrams/`
