@@ -689,11 +689,8 @@ namespace Hl7.Cql.Operators
                     var perValue = per.value ?? 1m;
                     var usesDefaultDecimalUnit = string.IsNullOrEmpty(per.unit) || per.unit == "1";
                     var needsIntegerTruncation = usesDefaultDecimalUnit
-                        && getDecimalPrecision(perValue) == 0
-                        && (getDecimalPrecision(listItem) > 0 || getDecimalPrecision(highBoundary) > 0);
-
-                    static int getDecimalPrecision(decimal value) =>
-                        BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
+                        && perValue.GetScale() == 0
+                        && (listItem.GetScale() > 0 || highBoundary.GetScale() > 0);
 
                     if (needsIntegerTruncation)
                     {

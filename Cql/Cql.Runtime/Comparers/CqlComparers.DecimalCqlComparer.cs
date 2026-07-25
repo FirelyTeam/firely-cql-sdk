@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions.Infrastructure;
+
 namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
@@ -28,8 +30,8 @@ partial class CqlComparers
             [DisallowNull] decimal? y,
             string? precision)
         {
-            var @thisPrecision = GetPrecision(x.Value);
-            var otherPrecision = GetPrecision(y.Value);
+            var @thisPrecision = x.Value.GetScale();
+            var otherPrecision = y.Value.GetScale();
             if (@thisPrecision < otherPrecision)
                 y = decimal.Round(y.Value, thisPrecision);
             else if (thisPrecision > otherPrecision)
@@ -37,9 +39,6 @@ partial class CqlComparers
             var areEqual = x == y;
             return areEqual;
         }
-
-        private static int GetPrecision(decimal value) =>
-            BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
 
         private static decimal TruncateDigits(decimal value, int places)
         {
