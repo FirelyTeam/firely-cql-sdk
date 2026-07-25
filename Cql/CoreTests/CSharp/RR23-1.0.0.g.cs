@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
@@ -113,13 +113,13 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             object g_ = this.Measurement_Period(context);
             CqlDate h_ = ((CqlInterval<CqlDate>)g_)?.low;
             CqlDateTime i_ = context.Operators.ConvertDateToDateTime(h_);
-            CqlDate k_ = ((CqlInterval<CqlDate>)g_)?.high;
-            CqlDateTime l_ = context.Operators.ConvertDateToDateTime(k_);
-            bool? n_ = ((CqlInterval<CqlDate>)g_)?.lowClosed;
-            bool? p_ = ((CqlInterval<CqlDate>)g_)?.highClosed;
-            CqlInterval<CqlDateTime> q_ = context.Operators.Interval(i_, l_, n_, p_);
-            bool? r_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, q_, (string)default);
-            return r_;
+            CqlDate j_ = ((CqlInterval<CqlDate>)g_)?.high;
+            CqlDateTime k_ = context.Operators.ConvertDateToDateTime(j_);
+            bool? l_ = ((CqlInterval<CqlDate>)g_)?.lowClosed;
+            bool? m_ = ((CqlInterval<CqlDate>)g_)?.highClosed;
+            CqlInterval<CqlDateTime> n_ = context.Operators.Interval(i_, k_, l_, m_);
+            bool? o_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, n_, (string)default);
+            return o_;
         }
 
         IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
@@ -182,13 +182,11 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                 CqlDateTime t_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
                 CqlQuantity u_ = context.Operators.Quantity(7m, "days");
                 CqlDateTime v_ = context.Operators.Subtract(t_, u_);
-                CqlDateTime x_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
-                CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, true, false);
-                bool? z_ = context.Operators.In<CqlDateTime>(r_ as CqlDateTime, y_, (string)default);
-                CqlDateTime ab_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
-                bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
-                bool? ad_ = context.Operators.And(z_, ac_);
-                return ad_;
+                CqlInterval<CqlDateTime> w_ = context.Operators.Interval(v_, t_, true, false);
+                bool? x_ = context.Operators.In<CqlDateTime>(r_ as CqlDateTime, w_, (string)default);
+                bool? y_ = context.Operators.Not((bool?)(t_ is null));
+                bool? z_ = context.Operators.And(x_, y_);
+                return z_;
             }
 
             IEnumerable<Condition> m_ = context.Operators.Where<Condition>((IEnumerable<Condition>)k_, l_);

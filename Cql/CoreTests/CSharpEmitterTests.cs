@@ -125,18 +125,17 @@ public class CSharpEmitterTests
     {
         // Two separately-constructed, but structurally identical, CodeInvoke nodes: the emitter
         // dedups on printed code + type, so only one "Math.Abs(-5)" local is introduced even
-        // though it is referenced twice. The deduped duplicate still burns a name from the
-        // sequence (the old LocalVariableDeduper's letter-gap behavior — see Hoist's
-        // "burnedName" in CSharpEmitter.Scope.cs), so the array itself is named "c_", not
-        // "b_"; arrays also print as multi-line collection expressions (see
-        // ObjectCreation_NewArrayAndNewArrayBounds).
+        // though it is referenced twice, and the naming sequence stays contiguous (the old
+        // pipeline burned a letter per removed duplicate, a deduper artifact dropped in the
+        // post-migration cleanup); arrays also print as multi-line collection expressions
+        // (see ObjectCreation_NewArrayAndNewArrayBounds).
         var call1 = new CodeInvoke(null, MathAbsInt, new CodeConstant(-5, typeof(int)));
         var call2 = new CodeInvoke(null, MathAbsInt, new CodeConstant(-5, typeof(int)));
         var array = new CodeNewArray(typeof(int), call1, call2);
         var lambda = new CodeLambda([], array);
 
         Assert.AreEqual(
-            "{\n    int a_ = Math.Abs(-5);\n    int[] c_ = [\n        a_,\n        a_,\n    ];\n    return c_;\n}",
+            "{\n    int a_ = Math.Abs(-5);\n    int[] b_ = [\n        a_,\n        a_,\n    ];\n    return b_;\n}",
             EmitBody(lambda));
     }
 
@@ -183,9 +182,8 @@ public class CSharpEmitterTests
         // The true branch needs its own hoisted statement, so the conditional can no longer
         // print as a single-expression ternary and must flatten into the old pipeline's
         // CaseWhenThen form instead: a hoisted zero-parameter local function containing the
-        // if/else chain (branches `return`, a stray `;` after the final else block), invoked
-        // where the value is needed (see HoistConditionalFunction in
-        // CSharpEmitter.Scope.cs).
+        // if/else chain (branches `return`), invoked where the value is needed (see
+        // HoistConditionalFunction in CSharpEmitter.Scope.cs).
         var ifTrue = new CodeInvoke(null, MathAbsInt, new CodeConstant(-5, typeof(int)));
         var ifFalse = new CodeConstant(2, typeof(int));
         var conditional = new CodeConditional(test, ifTrue, ifFalse, typeof(int));
@@ -205,7 +203,7 @@ public class CSharpEmitterTests
             "        else\n" +
             "        {\n" +
             "            return 2;\n" +
-            "        };\n" +
+            "        }\n" +
             "    }\n" +
             "\n" +
             "    return a_();\n" +
@@ -251,7 +249,7 @@ public class CSharpEmitterTests
             "        else\n" +
             "        {\n" +
             "            return 2;\n" +
-            "        };\n" +
+            "        }\n" +
             "    }\n" +
             "\n" +
             "    return a_();\n" +
@@ -295,7 +293,7 @@ public class CSharpEmitterTests
             "        else\n" +
             "        {\n" +
             "            return 2;\n" +
-            "        };\n" +
+            "        }\n" +
             "    }\n" +
             "\n" +
             "    return a_();\n" +
@@ -328,7 +326,7 @@ public class CSharpEmitterTests
             "        else\n" +
             "        {\n" +
             "            return 2;\n" +
-            "        };\n" +
+            "        }\n" +
             "    }\n" +
             "\n" +
             "    return a_();\n" +
@@ -405,37 +403,22 @@ public class CSharpEmitterTests
     }
 
     [TestMethod]
-    public void Cast_ToObject_SurvivesOnlyForCqlAsOperatorCasts()
+    public void Cast_ToObject_NeverPrints()
     {
-        // Reference-typed casts to object are redundant C# and the old
-        // RedundantCastsTransformer stripped them — but ONLY the raw Convert/TypeAs nodes its
-        // single tree pass could see. Casts built by the builder's As() for an ELM "as"
-        // operator were ElmAsExpression wrappers that reduced to a real TypeAs at print time,
-        // AFTER the transformer ran, so they always survived and printed "x as object"
-        // (whatever their operand — HEDIS AMR_Details returns a definition-call result this
-        // way). CodeCast.FromCqlAsOperator records that origin; see PrintCast in
-        // CSharpEmitter.Print.cs.
+        // Casts to object never print: the conversion is always implicit in C# (an implicit
+        // reference conversion for reference types, boxing for value types), so the cast token
+        // is pure noise. (The old pipeline let a subset survive — ELM "as"-operator casts over
+        // reference-typed operands — purely because of a visitor-ordering accident; that quirk
+        // was dropped in the post-migration cleanup.)
         var s = new CodeLocal(typeof(string), "s");
-
-        var fromCqlAs = new CodeCast(s, typeof(object), CodeCastKind.As, fromCqlAsOperator: true);
-        Assert.AreEqual(
-            "{\n    return s as object;\n}",
-            EmitBody(new CodeLambda([s], fromCqlAs)));
-
-        // A conversion-helper cast (old: raw Expression.TypeAs) strips like the old
-        // transformer's reference-type rule.
-        var fromConversion = new CodeCast(s, typeof(object), CodeCastKind.As);
         Assert.AreEqual(
             "{\n    return s;\n}",
-            EmitBody(new CodeLambda([s], fromConversion)));
+            EmitBody(new CodeLambda([s], new CodeCast(s, typeof(object), CodeCastKind.As))));
 
-        // Value-typed operands always strip — the old StripBoxing ran at PRINT time inside
-        // BuildUnaryExpression, so it applied to reduced ElmAsExpression nodes too.
         var i = new CodeLocal(typeof(int?), "i");
-        var boxing = new CodeCast(i, typeof(object), CodeCastKind.As, fromCqlAsOperator: true);
         Assert.AreEqual(
             "{\n    return i;\n}",
-            EmitBody(new CodeLambda([i], boxing)));
+            EmitBody(new CodeLambda([i], new CodeCast(i, typeof(object), CodeCastKind.As))));
     }
 
     [TestMethod]

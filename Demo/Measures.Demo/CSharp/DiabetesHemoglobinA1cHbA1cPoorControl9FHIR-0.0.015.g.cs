@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR", "0.0.015")]
 public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibrary, ISingleton<DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015>
 {
@@ -188,7 +188,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             bool? g_ = context.Operators.Equal(f_, "finished");
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             Period i_ = TelehealthEncounter?.Period;
-            CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_ as object);
+            CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
             bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, (string)default);
             bool? l_ = context.Operators.And(g_, k_);
             return l_;
@@ -305,9 +305,9 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     {
         Observation a_ = this.Most_Recent_HbA1c(context);
         bool? b_ = context.Operators.Not((bool?)(a_ is null));
-        DataType d_ = a_?.Value;
-        bool? e_ = context.Operators.And(b_, (bool?)(d_ is null));
-        return e_;
+        DataType c_ = a_?.Value;
+        bool? d_ = context.Operators.And(b_, (bool?)(c_ is null));
+        return d_;
     }
 
 

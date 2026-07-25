@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("NCQAEncounter", "1.0.0")]
 public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_0_0>
 {
@@ -106,7 +106,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 
         bool? b_(Encounter EncounterPeriod) {
             Period e_ = EncounterPeriod?.Period;
-            CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, e_ as object);
+            CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, e_);
             CqlDateTime g_ = context.Operators.End(f_);
             bool? h_ = context.Operators.In<CqlDateTime>(g_, timeperiod, (string)default);
             return h_;
@@ -126,11 +126,11 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
         bool? b_(Encounter E) {
             Coding d_ = E?.Class;
             bool? e_ = context.Operators.Not((bool?)(d_ is null));
-            CqlCode g_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
-            CqlCode h_ = NCQATerminology_1_0_0.Instance.@virtual(context);
-            bool? i_ = context.Operators.Equivalent(g_, h_);
-            bool? j_ = context.Operators.And(e_, i_);
-            return j_;
+            CqlCode f_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
+            CqlCode g_ = NCQATerminology_1_0_0.Instance.@virtual(context);
+            bool? h_ = context.Operators.Equivalent(f_, g_);
+            bool? i_ = context.Operators.And(e_, h_);
+            return i_;
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -146,15 +146,14 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
         bool? b_(Encounter E) {
             Coding d_ = E?.Class;
             bool? e_ = context.Operators.Not((bool?)(d_ is null));
-            CqlCode g_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
-            CqlCode h_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
-            bool? i_ = context.Operators.Equivalent(g_, h_);
-            CqlCode k_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
-            CqlCode l_ = NCQATerminology_1_0_0.Instance.home_health(context);
-            bool? m_ = context.Operators.Equivalent(k_, l_);
-            bool? n_ = context.Operators.Or(i_, m_);
-            bool? o_ = context.Operators.And(e_, n_);
-            return o_;
+            CqlCode f_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
+            CqlCode g_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
+            bool? h_ = context.Operators.Equivalent(f_, g_);
+            CqlCode i_ = NCQATerminology_1_0_0.Instance.home_health(context);
+            bool? j_ = context.Operators.Equivalent(f_, i_);
+            bool? k_ = context.Operators.Or(h_, j_);
+            bool? l_ = context.Operators.And(e_, k_);
+            return l_;
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -170,11 +169,11 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
         bool? b_(Encounter E) {
             Coding d_ = E?.Class;
             bool? e_ = context.Operators.Not((bool?)(d_ is null));
-            CqlCode g_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
-            CqlCode h_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
-            bool? i_ = context.Operators.Equivalent(g_, h_);
-            bool? j_ = context.Operators.And(e_, i_);
-            return j_;
+            CqlCode f_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
+            CqlCode g_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
+            bool? h_ = context.Operators.Equivalent(f_, g_);
+            bool? i_ = context.Operators.And(e_, h_);
+            return i_;
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);

@@ -314,28 +314,14 @@ internal partial class CSharpEmitter
         if (cast.Operand is CodeConstant { Value: null })
             return PrintConstant(new CodeConstant(null, cast.Type));
 
-        // Boxing casts are dropped from the output (the C# compiler re-inserts the boxing),
-        // exactly like the old writer's StripBoxing — value-typed operands unconditionally
-        // (StripBoxing ran at PRINT time inside BuildUnaryExpression, so it applied to reduced
-        // ElmAsExpression nodes too — the flag below does not exempt them).
-        //
-        // A reference-typed cast to object is redundant C# too (an implicit reference
-        // conversion always exists), and the old RedundantCastsTransformer struck those as
-        // well — EXCEPT it could only ever see a cast that already existed as a raw
-        // Convert/TypeAs node when its single tree pass ran. A cast built by the builder's
-        // As() for an ELM "as"/"cast" operator was instead represented by ElmAsExpression, a
-        // lazy wrapper that only reduces to a real Convert/TypeAs at print time, i.e. AFTER
-        // RedundantCastsTransformer had already run — such a cast was invisible to it and
-        // ALWAYS survived, whatever its operand (CMS56's "(ad_ as CqlDateTime) as object";
-        // HEDIS AMR's "return b_ as object" over a plain definition-call result). Casts from
-        // the conversion helpers (old TryNewAssignToTypeExpression/NewTypeAsExpression, e.g. a
-        // ResolveParameter argument's "as object") were raw Convert/TypeAs from the start and
-        // got stripped like any other redundant reference cast. CodeCast.FromCqlAsOperator
-        // records exactly the ElmAsExpression construction sites, replacing the earlier
-        // operand-is-another-cast approximation (which happened to cover RR23/CMS56 but broke
-        // on HEDIS's cast-over-definition-call shapes).
-        if (cast.Type == typeof(object)
-            && (cast.Operand.Type.IsValueType || !cast.FromCqlAsOperator))
+        // Casts to object never print: the conversion is always implicit in C# (boxing for
+        // value types, an implicit reference conversion otherwise), so the cast token is pure
+        // noise. (The old pipeline stripped these too — except for casts built for an ELM
+        // "as"/"cast" operator over a reference-typed operand, which its single-pass
+        // RedundantCastsTransformer could not see because they materialized lazily at print
+        // time. That survival was a visitor-ordering accident, kept only for golden parity
+        // and removed with the post-migration quirk cleanup.)
+        if (cast.Type == typeof(object))
             return child(cast.Operand).Code;
 
         var atom = child(cast.Operand);
@@ -634,7 +620,7 @@ internal partial class CSharpEmitter
     private static Type GetPrintedType(CodeExpression node) =>
         node switch
         {
-            CodeCast cast when cast.Type == typeof(object) && (cast.Operand.Type.IsValueType || !cast.FromCqlAsOperator)
+            CodeCast cast when cast.Type == typeof(object)
                 => GetPrintedType(cast.Operand),
             CodeConstant { Type.IsClass: true, Value: { } value } when node.Type == typeof(object)
                 => value.GetType(),

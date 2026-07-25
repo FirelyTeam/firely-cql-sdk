@@ -112,12 +112,13 @@ partial class CodeBuilderContext
             var leftElementType = _typeResolver.GetListElementType(left.Type);
             if (_typeResolver.IsListType(right.Type))
             {
-                // NOTE(phase4): ported as-is — this reads left.Type where right.Type looks
-                // intended, so leftElementType != rightElementType can never be true and the
-                // element-type check below is dead. Preserved verbatim from the old pipeline.
-                var rightElementType = _typeResolver.GetListElementType(left.Type);
+                // Reading left.Type here was a long-standing copy-paste bug (#1342) that made
+                // this mismatch check compare the left element type against itself, so it
+                // could never fire.
+                var rightElementType = _typeResolver.GetListElementType(right.Type);
                 if (leftElementType != rightElementType)
-                    throw this.NewExpressionBuildingException();
+                    throw this.NewExpressionBuildingException(
+                        $"Includes: the list operands' element types differ ({leftElementType} vs {rightElementType}).");
                 return BindCqlOperator(nameof(ICqlOperators.ListIncludesList), left, right);
             }
 
@@ -152,11 +153,12 @@ partial class CodeBuilderContext
             var leftElementType = _typeResolver.GetListElementType(left.Type);
             if (_typeResolver.IsListType(right.Type))
             {
-                // NOTE(phase4): ported as-is — same left.Type/right.Type mixup as in Includes()
-                // above; leftElementType != rightElementType can never be true here.
-                var rightElementType = _typeResolver.GetListElementType(left.Type);
+                // Reading left.Type here was the same copy-paste bug (#1342) as in Includes()
+                // above — the mismatch check could never fire.
+                var rightElementType = _typeResolver.GetListElementType(right.Type);
                 if (leftElementType != rightElementType)
-                    throw this.NewExpressionBuildingException();
+                    throw this.NewExpressionBuildingException(
+                        $"IncludedIn: the list operands' element types differ ({leftElementType} vs {rightElementType}).");
                 return BindCqlOperator(nameof(ICqlOperators.ListIncludesList), right, left);
             }
 
@@ -379,16 +381,12 @@ partial class CodeBuilderContext
                                               throw this.NewExpressionBuildingException(
                                                   $"{type} was expected to be a list type.");
                         var newArray = new CodeNewArrayBounds(listElementType, new CodeConstant(0, typeof(int)));
-                        // fromCqlAsOperator: the old pipeline built ElmAsExpression here (and at
-                        // the other As() return sites below) — see CodeCast.FromCqlAsOperator.
-                        var elmAs = new CodeCast(newArray, type, castKind, fromCqlAsOperator: true);
-                        return elmAs;
+                        return new CodeCast(newArray, type, castKind);
                     }
                     else if (type == _typeResolver.AnyType) // handles untyped empty lists whose type is Any
                     {
                         var newArray = new CodeNewArrayBounds(_typeResolver.AnyType, new CodeConstant(0, typeof(int)));
-                        var elmAs = new CodeCast(newArray, type, castKind, fromCqlAsOperator: true);
-                        return elmAs;
+                        return new CodeCast(newArray, type, castKind);
                     }
 
                     throw this.NewExpressionBuildingException(
@@ -406,7 +404,7 @@ partial class CodeBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
                     var defaultExpression = new CodeDefault(type);
-                    return new CodeCast(defaultExpression, type, castKind, fromCqlAsOperator: true);
+                    return new CodeCast(defaultExpression, type, castKind);
                 }
                 else
                 {
@@ -433,7 +431,7 @@ partial class CodeBuilderContext
                             // falls into the default arm and still wraps in a cast/as node built
                             // from the original operand, rather than returning operand or
                             // converted directly.
-                            return new CodeCast(operand, type, castKind, fromCqlAsOperator: true);
+                            return new CodeCast(operand, type, castKind);
                     }
                 }
             }
@@ -457,7 +455,7 @@ partial class CodeBuilderContext
                                        @as.operand));
             }
 
-            return new CodeCast(operand, type, castKind, fromCqlAsOperator: true);
+            return new CodeCast(operand, type, castKind);
         }
     }
 

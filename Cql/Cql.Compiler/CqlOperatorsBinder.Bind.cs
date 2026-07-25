@@ -232,13 +232,13 @@ partial class CqlOperatorsBinder
                              argIndexForGenericMethod++) // Try to get generic type from argument up to the second one
                         {
                             var argType = args[argIndexForGenericMethod].Type;
-                            // NOTE(phase3): ported as-is, possible upstream bug (#1341): this
-                            // indexes methodParameters with `i` (the outer retry-pass index, 0 or
-                            // 1), not `argIndexForGenericMethod`. The old CqlOperatorsBinder.Bind.cs
-                            // has the same indexing, so this is faithfully preserved rather than
-                            // "fixed" during the port -- the old behavior is the contract until
-                            // golden parity is proven; fix after phase 6, in one place.
-                            var parameterType = methodParameters[i].ParameterType;
+                            // The parameter must be the one in the probed argument's position —
+                            // indexing with the outer retry-pass index here was a long-standing
+                            // bug (#1341) that made the genericity probe check the wrong
+                            // parameter while probing argument 1, missing candidate type
+                            // arguments (and with them, bindings) for overload shapes whose
+                            // generic parameter sits in the second position.
+                            var parameterType = methodParameters[argIndexForGenericMethod].ParameterType;
                             var argIsGeneric = argType.IsGenericType;
                             var paramIsGeneric = parameterType.IsGenericMethodParameter;
 
@@ -316,13 +316,11 @@ partial class CqlOperatorsBinder
         string methodName,
         params CodeExpression[] arguments)
     {
-        // FIXME(phase3-review): the old binder used Expression.Call(receiver, methodName,
-        // typeArguments, arguments), which performs its own reflection-based overload
-        // resolution against the argument expressions. CodeInvoke requires an already-resolved
-        // MethodInfo, so this resolves by name + argument count only. Every current call site
-        // (ResolveValueSet, FlattenLateBoundList, and the ConvertXToY family selected via
-        // CqlOperators.ConversionFunctionName) has exactly one overload under that name, so this
-        // is behavior-preserving today; a genuinely overloaded name would need real resolution.
+        // Resolves by name + argument count only (CodeInvoke requires an already-resolved
+        // MethodInfo). Every current call site (ResolveValueSet, FlattenLateBoundList, and the
+        // ConvertXToY family selected via CqlOperators.ConversionFunctionName) has exactly one
+        // overload under that name; a genuinely overloaded name would need real overload
+        // resolution — the ambiguity guard below throws rather than guessing.
         var candidates = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(methodName, arguments.Length);
         var method = candidates.Count switch
         {
