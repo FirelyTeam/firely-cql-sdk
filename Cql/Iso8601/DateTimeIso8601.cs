@@ -201,9 +201,9 @@ namespace Hl7.Cql.Iso8601
                                     throw new ArgumentException("Offset hours must between [-14,14]", nameof(osHour));
                                 if (osMinute.HasValue)
                                 {
-                                    var abs = Math.Abs(osMinute.Value);  
+                                    var abs = Math.Abs(osMinute.Value);
                                     if (abs > 59)
-                                        throw new ArgumentException("Offset minutes must between [0,59]", nameof(osMinute));
+                                        throw new ArgumentException("Offset minutes must between [-59,59]", nameof(osMinute));
                                 }
                             }
                             else if (osMinute.HasValue)

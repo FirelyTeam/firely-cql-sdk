@@ -85,6 +85,17 @@ public class Iso8601OffsetTests
     }
 
     [TestMethod]
+    public void DateTimeIso8601_ParsesNegativeOffsetWithMinutes()
+    {
+        Assert.IsTrue(DateTimeIso8601.TryParse("2024-01-01T10:30:00-05:30", out var dateTime));
+
+        Assert.AreEqual(new TimeSpan(-5, -30, 0), dateTime!.DateTimeOffset.Offset);
+        Assert.AreEqual(-5, dateTime.OffsetHour);
+        Assert.AreEqual(-30, dateTime.OffsetMinute);
+        Assert.AreEqual("2024-01-01T10:30:00-05:30", dateTime.ToString());
+    }
+
+    [TestMethod]
     public void DateTimeIso8601_ParsesNegativeOffsetWithoutHours()
     {
         Assert.IsTrue(DateTimeIso8601.TryParse("2024-01-01T10:30:00-00:30", out var dateTime));

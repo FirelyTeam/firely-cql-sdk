@@ -79,6 +79,19 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertCqlIntervalOfTime_Period_PreservesPrecisionAndAbsentOffset()
+        {
+            // A time with minute precision and no timezone offset keeps both characteristics.
+            var low = new CqlTime(10, 30, null, null, null, null);
+            var interval = new CqlInterval<CqlTime>(low, null, lowClosed: true, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("0001-01-01T10:30", converted.Start);
+        }
+
+        [TestMethod]
         public void ConvertCqlCode_Code()
         {
             var code = new CqlCode { code = "123" };
@@ -99,6 +112,16 @@ namespace CoreTests
             var fhirCode = converted as Code;
             Assert.IsNotNull(fhirCode);
             Assert.AreEqual("123", fhirCode.Value);
+        }
+
+        [TestMethod]
+        public void ConvertCqlCodeToFhir_Null_WhenNothingPopulated()
+        {
+            var code = new CqlCode();
+
+            var converted = FhirTypeConverter.ConvertCqlCodeToFhir(code);
+
+            Assert.IsNull(converted);
         }
 
         [TestMethod]
