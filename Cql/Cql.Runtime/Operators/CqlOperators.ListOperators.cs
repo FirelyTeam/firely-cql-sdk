@@ -132,7 +132,7 @@ namespace Hl7.Cql.Operators
                 return null;
 
             // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
-            if (per?.value <= 0)
+            if (per?.value is <= 0)
                 return null;
 
             var collapsed = Collapse(argument!, null)!;
@@ -277,7 +277,7 @@ namespace Hl7.Cql.Operators
                 return null;
 
             // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
-            if (per?.value <= 0)
+            if (per?.value is <= 0)
                 return null;
 
             var collapsed = Collapse(argument, null)!;
@@ -472,7 +472,7 @@ namespace Hl7.Cql.Operators
                 return null;
 
             // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
-            if (per?.value <= 0)
+            if (per?.value is <= 0)
                 return null;
 
             var collapsed = Collapse(argument!, null)!;
@@ -670,7 +670,7 @@ namespace Hl7.Cql.Operators
                 return null;
 
             // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
-            if (per?.value <= 0)
+            if (per?.value is <= 0)
                 return null;
 
             var collapsed = Collapse(argument, null)!;
@@ -738,7 +738,7 @@ namespace Hl7.Cql.Operators
                 return null;
 
             // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
-            if (per?.value <= 0)
+            if (per?.value is <= 0)
                 return null;
 
             var collapsed = Collapse(argument, null)!;
@@ -796,7 +796,7 @@ namespace Hl7.Cql.Operators
                 return null;
 
             // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
-            if (per?.value <= 0)
+            if (per?.value is <= 0)
                 return null;
 
             var collapsed = Collapse(argument, null)!;
