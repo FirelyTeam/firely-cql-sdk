@@ -39,14 +39,21 @@ partial class CqlComparers
             }
 
             // If no direct comparison is possible, normalize the units using UCUM and
-            // redo the comparison.
-            if (x.TryCanonicalize(out var left1) && y.TryCanonicalize(out var right1))
+            // redo the comparison. TryCanonicalize succeeds for any valid UCUM unit, so the
+            // canonical units have to agree before the values may be compared: quantities of
+            // different base metrics are incommensurable, and comparing their canonical values
+            // would answer as if both were dimensionless (1 'cm' = 0.01 'g').
+            if (x.TryCanonicalize(out var left1)
+                && y.TryCanonicalize(out var right1)
+                && left1!.unit == right1!.unit)
             {
-                var valueComparison = ValueComparer.Compare(left1!.value!, right1!.value!, precision);
+                var valueComparison = ValueComparer.Compare(left1.value!, right1.value!, precision);
                 return valueComparison;
             }
 
-            throw new NotSupportedException($"Comparison against unlike units {x.unit} and {y.unit} is not supported.");
+            throw new NotSupportedException(
+                $"Comparison against unlike units {x.unit} and {y.unit} is not supported. The units are either not "
+                + "convertible to a common UCUM base unit, or measure different base quantities.");
         }
 
         protected override bool EquivalentValues(
@@ -62,8 +69,9 @@ partial class CqlComparers
             }
 
             // Spec §9.B: quantity equivalence considers unit conversion, so normalize the units
-            // using UCUM and redo the comparison. Unlike CompareValues, equivalence must never
-            // signal an error, so units that cannot be canonicalized, or that canonicalize to
+            // using UCUM and redo the comparison. The canonical units must agree for the same
+            // reason they must in CompareValues, but where that method signals an error,
+            // equivalence never may: units that cannot be canonicalized, or that canonicalize to
             // different base metrics (incommensurable), are simply not equivalent.
             if (x.TryCanonicalize(out var left1)
                 && y.TryCanonicalize(out var right1)

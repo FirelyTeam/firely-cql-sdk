@@ -148,7 +148,21 @@ internal abstract class CqlComparer<T>(
         switch (EquivalentImplementation)
         {
             case CqlComparerEquivalentImplementation.Compare:
-                int? compareValues = CompareValues(x!, y!, precision);
+                // Equivalence never signals an error, but a comparison may -- CqlQuantity throws
+                // NotSupportedException for incommensurable units, and an interval over those
+                // quantities reaches it through this branch. Borrowing the comparison
+                // implementation must not borrow its error behaviour: unorderable values are not
+                // equivalent.
+                int? compareValues;
+                try
+                {
+                    compareValues = CompareValues(x!, y!, precision);
+                }
+                catch (NotSupportedException)
+                {
+                    return false;
+                }
+
                 var equivalenceFromCompare = CqlComparisonToEquivalence(compareValues);
                 return equivalenceFromCompare;
 

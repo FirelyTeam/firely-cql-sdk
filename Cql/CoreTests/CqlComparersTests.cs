@@ -470,4 +470,75 @@ public class CqlComparersTests
 
         Assert.AreEqual(1, scaleDeduplicated.Count);
     }
+
+    // Regression tests for #1417: CqlQuantityCqlComparer.CompareValues canonicalized each quantity
+    // independently and then compared only the canonicalized values. TryCanonicalize succeeds for
+    // any valid UCUM unit, so quantities measuring different base quantities were compared as if
+    // both were dimensionless: 1 'cm' = 0.01 'g' returned true, and ordering across dimensions
+    // returned a numeric answer. CompareValues now requires the canonical units to agree, the same
+    // guard EquivalentValues got in #1415.
+
+    /// <summary>
+    /// The case from the issue. Both units canonicalize, but to different base metrics, so the
+    /// comparison takes the unsupported path -- which for <c>=</c> means the
+    /// <see cref="NotSupportedException"/> surfaces to the caller, exactly as it already did for a
+    /// unit UCUM cannot canonicalize at all.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_IncommensurableUnits_ComparisonIsNotSupported()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, "cm");
+        var y = new CqlQuantity(0.01m, "g");
+
+        Assert.ThrowsException<NotSupportedException>(() => comparers.Equals(x, y, null));
+        Assert.ThrowsException<NotSupportedException>(() => comparers.Compare(x, y, null));
+
+        // Ordering across dimensions, which used to answer 0/-1/1 off the canonicalized values.
+        Assert.ThrowsException<NotSupportedException>(
+            () => comparers.Compare(new CqlQuantity(1m, "cm"), new CqlQuantity(1m, "g"), null));
+    }
+
+    /// <summary>
+    /// Convertible units are unaffected: equality and ordering both still canonicalize and compare.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_ConvertibleUnits_ComparisonUnchanged()
+    {
+        var comparers = new CqlComparers();
+
+        Assert.AreEqual(true, comparers.Equals(new CqlQuantity(1m, "cm"), new CqlQuantity(0.01m, "m"), null));
+        Assert.AreEqual(0, comparers.Compare(new CqlQuantity(1m, "cm"), new CqlQuantity(0.01m, "m"), null));
+
+        Assert.AreEqual(-1, comparers.Compare(new CqlQuantity(1m, "cm"), new CqlQuantity(1m, "m"), null));
+        Assert.AreEqual(1, comparers.Compare(new CqlQuantity(1m, "m"), new CqlQuantity(1m, "cm"), null));
+    }
+
+    /// <summary>
+    /// An interval's comparer answers equivalence by borrowing its own comparison implementation
+    /// (<c>CqlComparerEquivalentImplementation.Compare</c>), so an interval over incommensurable
+    /// quantities reaches <c>CqlQuantityCqlComparer.CompareValues</c> along an equivalence path.
+    /// Equivalence never signals an error, so the unsupported comparison has to come back as
+    /// <see langword="false"/> -- before this fix these intervals were equivalent, comparing
+    /// 0.01 'm' against 0.01 'g' as bare numbers. Interval equality, in contrast, propagates the
+    /// error like the scalar case does.
+    /// </summary>
+    [TestMethod]
+    public void CqlIntervalOfQuantity_IncommensurableBounds_IsNotEquivalent_AndDoesNotThrow()
+    {
+        // Interval comparers are registered by the operators, not by the bare CqlComparers ctor.
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        var centimeters = new CqlInterval<CqlQuantity>(new CqlQuantity(1m, "cm"), new CqlQuantity(2m, "cm"), true, true);
+        var grams = new CqlInterval<CqlQuantity>(new CqlQuantity(0.01m, "g"), new CqlQuantity(0.02m, "g"), true, true);
+        var meters = new CqlInterval<CqlQuantity>(new CqlQuantity(0.01m, "m"), new CqlQuantity(0.02m, "m"), true, true);
+
+        Assert.AreEqual(false, operators.Equivalent(centimeters, grams));
+        Assert.ThrowsException<NotSupportedException>(() => operators.Equal(centimeters, grams));
+
+        // Convertible bounds unchanged.
+        Assert.AreEqual(true, operators.Equivalent(centimeters, meters));
+        Assert.AreEqual(true, operators.Equal(centimeters, meters));
+    }
 }
