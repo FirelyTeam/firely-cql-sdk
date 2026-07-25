@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Elm;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -51,6 +52,64 @@ namespace Hl7.Cql.CqlToElm.Test
             expand.operand[0].Should().HaveType(SystemTypes.DecimalType.ToIntervalType().ToListType());
             var result = Run(expand, lib);
             // not implemented correctly
+        }
+
+        [TestMethod]
+        public void ExpandIntegerIntervalPerFractional()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[10, 10] } per 0.1");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            // The spec (§9.B, expand) requires { Interval[10.0, 10.0], ..., Interval[10.9, 10.9] } here, i.e. intervals of
+            // Decimal, which the Integer-typed overload cannot represent. The invoker does not wrap exceptions, so the
+            // runtime error surfaces directly.
+            Assert.ThrowsException<NotSupportedException>(() => Run(expand, lib));
+        }
+
+        [TestMethod]
+        public void ExpandIntegerIntervalPer0()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[1, 10] } per 0");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            Run(expand, lib).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ExpandDecimalIntervalPerNegative()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[1.0, 2.0] } per -1");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            Run(expand, lib).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ExpandDecimalIntervalPer0D5()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[1.0, 2.0] } per 0.5");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<CqlInterval<decimal?>>>(expand, lib);
+            result.Should().NotBeNull();
+            // Each interval is [start, Predecessor(start + per)]. The trailing interval starting at the upper boundary
+            // reaches past it; that pre-existing off-by-one is unrelated to the non-positive/fractional per guards.
+            result!.Select(i => (i!.low, i.high)).Should().Equal(
+                (1.0m, 1.49999999m),
+                (1.5m, 1.99999999m),
+                (2.0m, 2.49999999m));
+        }
+
+        [TestMethod]
+        public void ExpandDateIntervalPer0Days()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[@2018-01-01, @2018-01-04] } per 0 days");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            Run(expand, lib).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ExpandSingleIntegerIntervalPer0()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand Interval[1, 10] per 0");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            Run(expand, lib).Should().BeNull();
         }
 
         [TestMethod]

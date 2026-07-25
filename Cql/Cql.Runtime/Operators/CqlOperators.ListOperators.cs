@@ -131,6 +131,10 @@ namespace Hl7.Cql.Operators
             if (argument == null)
                 return null;
 
+            // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
+            if (per?.value <= 0)
+                return null;
+
             var collapsed = Collapse(argument!, null)!;
 
             var expanded = new List<CqlInterval<CqlDate?>>();
@@ -270,6 +274,10 @@ namespace Hl7.Cql.Operators
         public IEnumerable<CqlInterval<CqlDateTime?>>? Expand(IEnumerable<CqlInterval<CqlDateTime?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
+                return null;
+
+            // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
+            if (per?.value <= 0)
                 return null;
 
             var collapsed = Collapse(argument, null)!;
@@ -461,6 +469,10 @@ namespace Hl7.Cql.Operators
         public IEnumerable<CqlInterval<CqlTime?>>? Expand(IEnumerable<CqlInterval<CqlTime?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
+                return null;
+
+            // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
+            if (per?.value <= 0)
                 return null;
 
             var collapsed = Collapse(argument!, null)!;
@@ -657,6 +669,10 @@ namespace Hl7.Cql.Operators
             if (argument == null)
                 return null;
 
+            // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
+            if (per?.value <= 0)
+                return null;
+
             var collapsed = Collapse(argument, null)!;
 
             var expanded = new List<CqlInterval<decimal?>>();
@@ -721,6 +737,10 @@ namespace Hl7.Cql.Operators
             if (argument == null)
                 return null;
 
+            // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
+            if (per?.value <= 0)
+                return null;
+
             var collapsed = Collapse(argument, null)!;
 
             var expanded = new List<CqlInterval<int?>>();
@@ -748,10 +768,16 @@ namespace Hl7.Cql.Operators
                             continue;
                     }
 
+                    var perValue = per.value ?? 1;
+
+                    // A fractional per makes the spec produce intervals of Decimal, which this Integer overload cannot represent.
+                    if (decimal.Truncate(perValue) != perValue)
+                        throw new NotSupportedException($"Expand of an interval of Integer with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of intervals of Decimal.");
+
+                    var intQuantity = decimal.ToInt32(perValue);
                     var listItem = interval.low!.Value;
                     do
                     {
-                        var intQuantity = decimal.ToInt32(per.value ?? 1);
                         var high = listItem + intQuantity;
                         var listInterval = new CqlInterval<int?>(listItem, Predecessor(high), true, true);
                         expanded.Add(listInterval);
@@ -767,6 +793,10 @@ namespace Hl7.Cql.Operators
         public IEnumerable<CqlInterval<long?>>? Expand(IEnumerable<CqlInterval<long?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
+                return null;
+
+            // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
+            if (per?.value <= 0)
                 return null;
 
             var collapsed = Collapse(argument, null)!;
@@ -796,10 +826,16 @@ namespace Hl7.Cql.Operators
                             continue;
                     }
 
+                    var perValue = per.value ?? 1;
+
+                    // A fractional per makes the spec produce intervals of Decimal, which this Long overload cannot represent.
+                    if (decimal.Truncate(perValue) != perValue)
+                        throw new NotSupportedException($"Expand of an interval of Long with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of intervals of Decimal.");
+
+                    var intQuantity = decimal.ToInt64(perValue);
                     var listItem = interval.low!.Value;
                     do
                     {
-                        var intQuantity = decimal.ToInt64(per.value ?? 1);
                         var high = listItem + intQuantity;
                         var listInterval = new CqlInterval<long?>(listItem, Predecessor(high), true, true);
                         expanded.Add(listInterval);

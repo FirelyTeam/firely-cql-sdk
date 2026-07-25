@@ -656,6 +656,10 @@ namespace Hl7.Cql.Operators
             if ((argument.low == null && !(argument.lowClosed ?? false)) || (argument.high == null && !(argument.highClosed ?? false)))
                 return null;
 
+            // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
+            if (per?.value <= 0)
+                return null;
+
             var interval = ToClosed(argument!)!;
             var expanded = new List<CqlDate>();
 
@@ -780,6 +784,10 @@ namespace Hl7.Cql.Operators
             // would contribute all intervals to the beginning or ending of the domain. In practice, because such an expansion is potentially too
             // expensive to compute, and implementations are allowed to not return results for such an interval.
             if ((argument.low == null && !(argument.lowClosed ?? false)) || (argument.high == null && !(argument.highClosed ?? false)))
+                return null;
+
+            // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
+            if (per?.value <= 0)
                 return null;
 
             var interval = ToClosed(argument!)!;
@@ -958,6 +966,10 @@ namespace Hl7.Cql.Operators
             if ((argument.low == null && !(argument.lowClosed ?? false)) || (argument.high == null && !(argument.highClosed ?? false)))
                 return null;
 
+            // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
+            if (per?.value <= 0)
+                return null;
+
             var interval = ToClosed(argument!)!;
             var expanded = new List<CqlTime>();
 
@@ -1098,6 +1110,10 @@ namespace Hl7.Cql.Operators
             if ((argument.low == null && !(argument.lowClosed ?? false)) || (argument.high == null && !(argument.highClosed ?? false)))
                 return null;
 
+            // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
+            if (per?.value <= 0)
+                return null;
+
             var interval = ToClosed(argument!)!;
             var expanded = new List<decimal?>();
 
@@ -1134,6 +1150,10 @@ namespace Hl7.Cql.Operators
             if ((argument.low == null && !(argument.lowClosed ?? false)) || (argument.high == null && !(argument.highClosed ?? false)))
                 return null;
 
+            // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
+            if (per?.value <= 0)
+                return null;
+
             var interval = ToClosed(argument!)!;
             var expanded = new List<int?>();
 
@@ -1147,13 +1167,18 @@ namespace Hl7.Cql.Operators
                     return expanded;
             }
 
+            var perValue = per.value ?? 1;
+
+            // A fractional per makes the spec produce Decimal points, which this Integer overload cannot represent.
+            if (decimal.Truncate(perValue) != perValue)
+                throw new NotSupportedException($"Expand of an interval of Integer with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of Decimal.");
+
+            var intQuantity = decimal.ToInt32(perValue);
             var listItem = interval.low!.Value;
             do
             {
                 expanded.Add(listItem);
-                var intQuantity = decimal.ToInt32(per.value ?? 1);
                 listItem += intQuantity;
-
             }
             while (Comparer.Compare(listItem, interval.high!, null) <= 0);
 
@@ -1172,6 +1197,10 @@ namespace Hl7.Cql.Operators
             if ((argument.low == null && !(argument.lowClosed ?? false)) || (argument.high == null && !(argument.highClosed ?? false)))
                 return null;
 
+            // A per of zero or less never advances towards the high boundary, so no expansion can be computed.
+            if (per?.value <= 0)
+                return null;
+
             var interval = ToClosed(argument!)!;
             var expanded = new List<long?>();
 
@@ -1185,11 +1214,17 @@ namespace Hl7.Cql.Operators
                     return expanded;
             }
 
+            var perValue = per.value ?? 1;
+
+            // A fractional per makes the spec produce Decimal points, which this Long overload cannot represent.
+            if (decimal.Truncate(perValue) != perValue)
+                throw new NotSupportedException($"Expand of an interval of Long with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of Decimal.");
+
+            var intQuantity = decimal.ToInt64(perValue);
             var listItem = interval.low!.Value;
             do
             {
                 expanded.Add(listItem);
-                var intQuantity = decimal.ToInt64(per.value ?? 1);
                 listItem += intQuantity;
             }
             while (Comparer.Compare(listItem, interval.high!, null) <= 0);
