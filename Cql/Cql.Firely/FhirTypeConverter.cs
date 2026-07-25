@@ -412,11 +412,24 @@ namespace Hl7.Cql.Fhir
 
         // CQL Time values have no date component; anchor them on the minimum FHIR date
         // (0001-01-01) so they can be represented within a Period.
+        // The value is composed as a string rather than built from a DateTimeOffset: the minimum
+        // date combined with a positive UTC offset has no DateTimeOffset representation (the UTC
+        // instant it denotes precedes DateTime.MinValue, e.g. 0001-01-01T00:30:00+02:00), even
+        // though it is a perfectly valid FHIR dateTime.
         private static M.FhirDateTime CqlTimeToFhirDateTime(CqlTime time)
         {
             var t = time.Value;
-            var dto = new DateTimeOffset(1, 1, 1, t.Hour, t.Minute ?? 0, t.Second ?? 0, t.Millisecond ?? 0, t.Offset);
-            return new M.FhirDateTime(dto);
+            var milliseconds = t.Millisecond ?? 0;
+            var fraction = milliseconds != 0
+                ? "." + milliseconds.ToString("D3", CultureInfo.InvariantCulture).TrimEnd('0')
+                : string.Empty;
+            var offset = t.Offset;
+            var absoluteOffset = offset.Duration();
+            var value = string.Format(CultureInfo.InvariantCulture,
+                "0001-01-01T{0:D2}:{1:D2}:{2:D2}{3}{4}{5:D2}:{6:D2}",
+                t.Hour, t.Minute ?? 0, t.Second ?? 0, fraction,
+                offset < TimeSpan.Zero ? '-' : '+', absoluteOffset.Hours, absoluteOffset.Minutes);
+            return new M.FhirDateTime(value);
         }
 
         /// <summary>

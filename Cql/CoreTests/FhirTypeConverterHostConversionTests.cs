@@ -38,6 +38,35 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertCqlIntervalOfTime_Period_KeepsOffsetsThatUnderflowTheMinimumFhirDate()
+        {
+            // 0001-01-01T00:30:00+02:00 denotes a UTC instant before DateTime.MinValue, so it has no
+            // DateTimeOffset representation — but it is a valid FHIR dateTime and must convert.
+            var low = new CqlTime(0, 30, 0, null, 2, 0);
+            var high = new CqlTime(1, 0, 0, null, 2, 0);
+            var interval = new CqlInterval<CqlTime>(low, high, lowClosed: true, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("0001-01-01T00:30:00+02:00", converted.Start);
+            Assert.AreEqual("0001-01-01T01:00:00+02:00", converted.End);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfTime_Period_RendersNegativeOffsets()
+        {
+            var low = new CqlTime(10, 30, 0, null, -5, 0);
+            var interval = new CqlInterval<CqlTime>(low, null, lowClosed: true, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("0001-01-01T10:30:00-05:00", converted.Start);
+            Assert.IsNull(converted.End);
+        }
+
+        [TestMethod]
         public void ConvertCqlCode_Code()
         {
             var code = new CqlCode { code = "123" };
