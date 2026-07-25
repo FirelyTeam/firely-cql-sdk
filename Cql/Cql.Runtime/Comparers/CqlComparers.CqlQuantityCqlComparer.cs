@@ -61,6 +61,18 @@ partial class CqlComparers
                 return valueComparison;
             }
 
+            // Spec §9.B: quantity equivalence considers unit conversion, so normalize the units
+            // using UCUM and redo the comparison. Unlike CompareValues, equivalence must never
+            // signal an error, so units that cannot be canonicalized, or that canonicalize to
+            // different base metrics (incommensurable), are simply not equivalent.
+            if (x.TryCanonicalize(out var left1)
+                && y.TryCanonicalize(out var right1)
+                && left1!.unit == right1!.unit)
+            {
+                var valueComparison = ValueComparer.Equivalent(left1.value, right1.value, precision);
+                return valueComparison;
+            }
+
             return false;
         }
 
