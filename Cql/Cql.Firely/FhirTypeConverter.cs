@@ -459,7 +459,7 @@ namespace Hl7.Cql.Fhir
         public static object? ConvertPeriodToCqlInterval(this TypeConverter converter, M.Period? period, string? cqlPointTypeName) =>
             cqlPointTypeName switch
             {
-                "Date" => converter.Convert<CqlInterval<CqlDate>>(period),
+                nameof(CqlPrimitiveType.Date) => converter.Convert<CqlInterval<CqlDate>>(period),
                 _ => converter.Convert<CqlInterval<CqlDateTime>>(period)
             };
 
