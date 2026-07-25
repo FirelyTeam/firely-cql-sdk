@@ -391,9 +391,22 @@ namespace Hl7.Cql.Fhir
         private static M.Quantity UnitlessQuantity(decimal value)
         {
             var quantity = new M.Quantity(value, "1");
-            quantity.Extension.Add(new M.Extension(QuantityPrecisionExtensionUrl, new M.Integer(value.Scale)));
+            // The extension's value is the bound's number of digits after the decimal point, which for a decimal
+            // is exactly its scale (so 1.50m yields 2, and the trailing zero survives even if the serializer drops it).
+            quantity.Extension.Add(new M.Extension(QuantityPrecisionExtensionUrl, new M.Integer(GetDecimalScale(value))));
             return quantity;
         }
+
+        /// <summary>
+        /// Returns the scale of <paramref name="value"/>, i.e. its number of digits after the decimal point,
+        /// counting trailing zeros.
+        /// </summary>
+        private static int GetDecimalScale(decimal value) =>
+            // GetBits() returns the decimal's 96-bit integer part in [0..2] and its flags word in [3]. In the flags
+            // word, bits 16-23 hold the scale - the power of ten that integer part is divided by, which is the digit
+            // count we are after - and bit 31 holds the sign. Shifting right by 16 and masking off everything above
+            // the low byte therefore isolates the scale.
+            (decimal.GetBits(value)[3] >> 16) & 0xFF;
 
         internal static TypeConverter ConvertSystemTypes(this TypeConverter converter)
         {
