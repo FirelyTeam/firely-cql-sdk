@@ -80,7 +80,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 5.3.2.4 **Create new invoker if needed**: For major version changes, a new `LibraryInstanceInvoker_X_Y` may be required
 
-5.3.2.5 **Regenerate checked-in generated code**: The version is embedded in every checked-in `*.g.cs` file via `GeneratedCodeAttribute` (e.g., `CoreTests/CSharp`, Demo library sets). Regenerate these libraries as part of the same pull request so the embedded version matches
+5.3.2.5 **Regenerate checked-in generated code, but commit only real changes**: The version is embedded in every checked-in `*.g.cs` file via `GeneratedCodeAttribute` (e.g., `CoreTests/CSharp`, Demo library sets). Regenerate these libraries as part of the same pull request, then revert (`git checkout`) every file whose sole difference is that version header, committing only the files whose content actually changed. Checked-in generated files therefore carry a mix of versions, which is intentional: the version is an internal marker, the invoker toolkit accepts any version within its supported range (see 5.3.2.3), and the golden tests normalize it away before comparing. This keeps the pull request diff reviewable instead of burying one real change in dozens of one-line header updates
 
 5.3.2.6 **Examples**:
 5.3.2.6.1 Adding `CqlFunctionParameterAttribute` → Minor version increment (3.0.0.0 → 3.1.0.0)
