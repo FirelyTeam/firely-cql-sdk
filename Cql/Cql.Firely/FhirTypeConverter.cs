@@ -297,69 +297,15 @@ namespace Hl7.Cql.Fhir
                     return range;
                 }
             });
-            // Intervals of Integer, Decimal and Long map to a FHIR Range of unit-less Quantities (FHIR-56226).
-            // FHIR Range bounds are always inclusive, so an open endpoint is emitted as its closed equivalent,
-            // i.e. the successor of an open low bound and the predecessor of an open high bound, using the same
-            // minimum precision step the engine's ToClosed() applies.
-            converter.AddConversion((CqlInterval<decimal?> interval) =>
-            {
-                if (interval is null)
-                    return null;
-                else
-                {
-                    var range = new M.Range();
-                    if (interval.low is { } low)
-                    {
-                        range.Low = UnitlessQuantity(
-                            (interval.lowClosed ?? false) ? low : low + CqlOperators.MinDecimalPrecisionValue);
-                    }
-
-                    if (interval.high is { } high)
-                    {
-                        range.High = UnitlessQuantity(
-                            (interval.highClosed ?? false) ? high : high - CqlOperators.MinDecimalPrecisionValue);
-                    }
-                    return range;
-                }
-            });
-            converter.AddConversion((CqlInterval<int?> interval) =>
-            {
-                if (interval is null)
-                    return null;
-                else
-                {
-                    var range = new M.Range();
-                    if (interval.low is { } low)
-                    {
-                        range.Low = UnitlessQuantity((interval.lowClosed ?? false) ? low : low + 1);
-                    }
-
-                    if (interval.high is { } high)
-                    {
-                        range.High = UnitlessQuantity((interval.highClosed ?? false) ? high : high - 1);
-                    }
-                    return range;
-                }
-            });
-            converter.AddConversion((CqlInterval<long?> interval) =>
-            {
-                if (interval is null)
-                    return null;
-                else
-                {
-                    var range = new M.Range();
-                    if (interval.low is { } low)
-                    {
-                        range.Low = UnitlessQuantity((interval.lowClosed ?? false) ? low : low + 1);
-                    }
-
-                    if (interval.high is { } high)
-                    {
-                        range.High = UnitlessQuantity((interval.highClosed ?? false) ? high : high - 1);
-                    }
-                    return range;
-                }
-            });
+            converter.AddConversion((CqlInterval<decimal?> interval) => interval is null
+                ? null
+                : NumericIntervalToRange(interval.low, interval.high, interval.lowClosed, interval.highClosed, CqlOperators.MinDecimalPrecisionValue));
+            converter.AddConversion((CqlInterval<int?> interval) => interval is null
+                ? null
+                : NumericIntervalToRange(interval.low, interval.high, interval.lowClosed, interval.highClosed, 1m));
+            converter.AddConversion((CqlInterval<long?> interval) => interval is null
+                ? null
+                : NumericIntervalToRange(interval.low, interval.high, interval.lowClosed, interval.highClosed, 1m));
             converter.AddConversion((CqlInterval<CqlDateTime> interval) =>
             {
                 if (interval is null)
@@ -415,6 +361,27 @@ namespace Hl7.Cql.Fhir
         /// the CQL IG's FHIR type mapping to make the precision of a value explicit.
         /// </summary>
         internal const string QuantityPrecisionExtensionUrl = "http://hl7.org/fhir/StructureDefinition/quantity-precision";
+
+        /// <summary>
+        /// Converts an interval of Integer, Decimal or Long to a FHIR Range of unit-less Quantities (FHIR-56226).
+        /// FHIR Range bounds are always inclusive, so an open endpoint is emitted as its closed equivalent, i.e.
+        /// the successor of an open low bound and the predecessor of an open high bound, stepping by <paramref name="step"/> -
+        /// the same minimum precision value the engine's ToClosed() applies for the interval's point type.
+        /// </summary>
+        private static M.Range NumericIntervalToRange(decimal? low, decimal? high, bool? lowClosed, bool? highClosed, decimal step)
+        {
+            var range = new M.Range();
+            if (low is { } l)
+            {
+                range.Low = UnitlessQuantity((lowClosed ?? false) ? l : l + step);
+            }
+
+            if (high is { } h)
+            {
+                range.High = UnitlessQuantity((highClosed ?? false) ? h : h - step);
+            }
+            return range;
+        }
 
         /// <summary>
         /// Creates the unit-less (UCUM <c>1</c>) Quantity used for the bounds of a Range converted from an interval
