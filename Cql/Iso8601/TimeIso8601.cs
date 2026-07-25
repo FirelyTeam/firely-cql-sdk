@@ -180,7 +180,7 @@ namespace Hl7.Cql.Iso8601
                         throw new ArgumentException("Offset hours must between [-14,14]", nameof(osHour));
                     if (osMinute.HasValue)
                     {
-                        if (osMinute.Value < 0 || osMinute.Value > 59)
+                        if (Math.Abs(osMinute.Value) > 59)
                             throw new ArgumentException("Offset minutes must between [0,59]", nameof(osMinute));
                     }
                 }
@@ -227,6 +227,11 @@ namespace Hl7.Cql.Iso8601
                 seconds: second ?? 0,
                 milliseconds: ms ?? 0);
             OffsetHour = osHour;
+            // The sign of an offset applies to the whole offset, not just its hour component:
+            // -05:30 is -(5h + 30m), not -5h + 30m. Store the minutes signed so that composing
+            // the two components yields the right TimeSpan.
+            if (osHour < 0 && osMinute > 0)
+                osMinute *= -1;
             OffsetMinute = osMinute;
             Offset = new TimeSpan(OffsetHour ?? 0, OffsetMinute ?? 0, 0);
 
@@ -284,7 +289,12 @@ namespace Hl7.Cql.Iso8601
                     }
 
                     if (tzm.Success)
-                        osMinute = int.Parse(tzm.Value, CultureInfo.InvariantCulture);
+                    {
+                        var minuteValue = int.Parse(tzm.Value, CultureInfo.InvariantCulture);
+                        // Carry the sign on the minutes as well; for offsets like -00:30 the hour
+                        // component is zero and cannot hold it.
+                        osMinute = timezone.Value[0] == '-' ? -minuteValue : minuteValue;
+                    }
                 }
             }
 
@@ -343,15 +353,17 @@ namespace Hl7.Cql.Iso8601
             }
             if (osHour.HasValue)
             {
-                if (osHour == 0 && osMinute == 0)
+                var offsetHour = osHour.Value;
+                var offsetMinute = osMinute ?? 0;
+                if (offsetHour == 0 && offsetMinute == 0)
                     sb.Append('Z');
                 else
                 {
-                    if (osHour > 0)
-                        sb.Append('+');
-                    sb.Append(osHour.Value.ToString("D2", CultureInfo.InvariantCulture));
+                    // Either component can carry the sign; the offset is signed as a whole.
+                    sb.Append(offsetHour < 0 || offsetMinute < 0 ? '-' : '+');
+                    sb.Append(Math.Abs(offsetHour).ToString("D2", CultureInfo.InvariantCulture));
                     sb.Append(':');
-                    sb.Append((osMinute ?? 0).ToString("D2", CultureInfo.InvariantCulture));
+                    sb.Append(Math.Abs(offsetMinute).ToString("D2", CultureInfo.InvariantCulture));
                 }
             }
             return sb.ToString();

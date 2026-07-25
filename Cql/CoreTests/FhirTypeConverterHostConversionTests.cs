@@ -67,6 +67,18 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertCqlIntervalOfTime_Period_RendersNegativeOffsetsWithMinutes()
+        {
+            var low = new CqlTime(10, 30, 0, null, -5, 30);
+            var interval = new CqlInterval<CqlTime>(low, null, lowClosed: true, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("0001-01-01T10:30:00-05:30", converted.Start);
+        }
+
+        [TestMethod]
         public void ConvertCqlCode_Code()
         {
             var code = new CqlCode { code = "123" };

@@ -18,3 +18,9 @@
     point type name (typically read from the `cqf-cqlType` extension on a `Library` parameter).
 
 ## Fixes
+
+- ISO 8601 timezone offsets are now signed as a whole rather than only on their hour component.
+  `TimeIso8601` read an offset of `-05:30` as `-04:30` (`DateTimeIso8601` already handled this), and
+  both types rendered an offset with a zero hour component without its sign (`00:30` instead of
+  `+00:30`) and could not represent `-00:30` at all. Note that `TimeIso8601.OffsetMinute` is now
+  negative for negative offsets, matching `DateTimeIso8601.OffsetMinute`.

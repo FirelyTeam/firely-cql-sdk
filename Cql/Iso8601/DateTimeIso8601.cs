@@ -351,7 +351,12 @@ namespace Hl7.Cql.Iso8601
                     }
 
                     if (tzm.Success)
-                        osMinute = int.Parse(tzm.Value, CultureInfo.InvariantCulture);
+                    {
+                        var minuteValue = int.Parse(tzm.Value, CultureInfo.InvariantCulture);
+                        // Carry the sign on the minutes as well; for offsets like -00:30 the hour
+                        // component is zero and cannot hold it.
+                        osMinute = timezone.Value[0] == '-' ? -minuteValue : minuteValue;
+                    }
                 }
             }
 
@@ -441,15 +446,17 @@ namespace Hl7.Cql.Iso8601
                         }
                         if (osHour.HasValue)
                         {
-                            if (osHour == 0 && osMinute == 0)
+                            var offsetHour = osHour.Value;
+                            var offsetMinute = osMinute ?? 0;
+                            if (offsetHour == 0 && offsetMinute == 0)
                                 sb.Append('Z');
                             else
                             {
-                                if (osHour > 0)
-                                    sb.Append('+');
-                                sb.Append(osHour.Value.ToString("D2", CultureInfo.InvariantCulture));
+                                // Either component can carry the sign; the offset is signed as a whole.
+                                sb.Append(offsetHour < 0 || offsetMinute < 0 ? '-' : '+');
+                                sb.Append(Math.Abs(offsetHour).ToString("D2", CultureInfo.InvariantCulture));
                                 sb.Append(':');
-                                sb.Append((osMinute ?? 0).ToString("D2", CultureInfo.InvariantCulture));
+                                sb.Append(Math.Abs(offsetMinute).ToString("D2", CultureInfo.InvariantCulture));
                             }
                         }
                     }
