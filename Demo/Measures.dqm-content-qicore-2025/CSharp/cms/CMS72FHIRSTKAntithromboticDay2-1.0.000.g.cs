@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS72FHIRSTKAntithromboticDay2", "1.0.000")]
 public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISingleton<CMS72FHIRSTKAntithromboticDay2_1_0_000>
 {
@@ -150,71 +150,57 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             IEnumerable<object> d_ = TJCOverall_8_25_000.Instance.Intervention_Comfort_Measures(context);
 
             bool? e_(object ComfortMeasure) {
-
-                object h_() {
-
-                    bool x_() {
-                        object ab_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlDateTime;
-                        return ad_;
-                    }
-
-
-                    bool y_() {
-                        object ae_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlInterval<CqlDateTime>;
-                        return ag_;
-                    }
-
-
-                    bool z_() {
-                        object ah_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        bool aj_ = ai_ is CqlQuantity;
-                        return aj_;
-                    }
-
-
-                    bool aa_() {
-                        object ak_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        bool am_ = al_ is CqlInterval<CqlQuantity>;
-                        return am_;
-                    }
-
-                    if (x_())
+                object h_;
+                object x_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                bool z_ = y_ is CqlDateTime;
+                if (z_)
+                {
+                    object aa_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                    h_ = ab_ as CqlDateTime;
+                }
+                else
+                {
+                    object ac_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
+                    if (ae_)
                     {
-                        object an_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        return ao_ as CqlDateTime;
-                    }
-                    else if (y_())
-                    {
-                        object ap_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        return aq_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (z_())
-                    {
-                        object ar_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                        return as_ as CqlQuantity;
-                    }
-                    else if (aa_())
-                    {
-                        object at_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        return au_ as CqlInterval<CqlQuantity>;
+                        object af_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                        h_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        return null;
+                        object ah_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                        bool aj_ = ai_ is CqlQuantity;
+                        if (aj_)
+                        {
+                            object ak_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+                            h_ = al_ as CqlQuantity;
+                        }
+                        else
+                        {
+                            object am_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                            object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
+                            bool ao_ = an_ is CqlInterval<CqlQuantity>;
+                            if (ao_)
+                            {
+                                object ap_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                                object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
+                                h_ = aq_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                h_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_());
+                CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
                 CqlDateTime j_ = context.Operators.Start(i_);
                 object k_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
                 CqlDateTime l_ = context.Operators.LateBoundProperty<CqlDateTime>(k_, "value");
@@ -347,87 +333,69 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             IEnumerable<(CqlTupleMetadata, string id, object effective)?> d_ = this.Thrombolytic_Therapy_Medication_Or_Procedures(context);
 
             bool? e_((CqlTupleMetadata, string id, object effective)? ThrombolyticTherapy) {
-
-                object h_() {
-
-                    bool r_() {
-                        object x_ = ThrombolyticTherapy?.effective;
-                        bool y_ = x_ is CqlDateTime;
-                        return y_;
-                    }
-
-
-                    bool s_() {
-                        object z_ = ThrombolyticTherapy?.effective;
-                        bool aa_ = z_ is CqlInterval<CqlDateTime>;
-                        return aa_;
-                    }
-
-
-                    bool t_() {
-                        object ab_ = ThrombolyticTherapy?.effective;
-                        bool ac_ = ab_ is CqlQuantity;
-                        return ac_;
-                    }
-
-
-                    bool u_() {
-                        object ad_ = ThrombolyticTherapy?.effective;
-                        bool ae_ = ad_ is CqlInterval<CqlQuantity>;
-                        return ae_;
-                    }
-
-
-                    bool v_() {
-                        object af_ = ThrombolyticTherapy?.effective;
-                        bool ag_ = af_ is CqlDateTime;
-                        return ag_;
-                    }
-
-
-                    bool w_() {
-                        object ah_ = ThrombolyticTherapy?.effective;
-                        bool ai_ = ah_ is CqlInterval<CqlDateTime>;
-                        return ai_;
-                    }
-
-                    if (r_())
+                object h_;
+                object r_ = ThrombolyticTherapy?.effective;
+                bool s_ = r_ is CqlDateTime;
+                if (s_)
+                {
+                    object t_ = ThrombolyticTherapy?.effective;
+                    h_ = t_ as CqlDateTime;
+                }
+                else
+                {
+                    object u_ = ThrombolyticTherapy?.effective;
+                    bool v_ = u_ is CqlInterval<CqlDateTime>;
+                    if (v_)
                     {
-                        object aj_ = ThrombolyticTherapy?.effective;
-                        return aj_ as CqlDateTime;
-                    }
-                    else if (s_())
-                    {
-                        object ak_ = ThrombolyticTherapy?.effective;
-                        return ak_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (t_())
-                    {
-                        object al_ = ThrombolyticTherapy?.effective;
-                        return al_ as CqlQuantity;
-                    }
-                    else if (u_())
-                    {
-                        object am_ = ThrombolyticTherapy?.effective;
-                        return am_ as CqlInterval<CqlQuantity>;
-                    }
-                    else if (v_())
-                    {
-                        object an_ = ThrombolyticTherapy?.effective;
-                        return an_ as CqlDateTime;
-                    }
-                    else if (w_())
-                    {
-                        object ao_ = ThrombolyticTherapy?.effective;
-                        return ao_ as CqlInterval<CqlDateTime>;
+                        object w_ = ThrombolyticTherapy?.effective;
+                        h_ = w_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        return null;
+                        object x_ = ThrombolyticTherapy?.effective;
+                        bool y_ = x_ is CqlQuantity;
+                        if (y_)
+                        {
+                            object z_ = ThrombolyticTherapy?.effective;
+                            h_ = z_ as CqlQuantity;
+                        }
+                        else
+                        {
+                            object aa_ = ThrombolyticTherapy?.effective;
+                            bool ab_ = aa_ is CqlInterval<CqlQuantity>;
+                            if (ab_)
+                            {
+                                object ac_ = ThrombolyticTherapy?.effective;
+                                h_ = ac_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                object ad_ = ThrombolyticTherapy?.effective;
+                                bool ae_ = ad_ is CqlDateTime;
+                                if (ae_)
+                                {
+                                    object af_ = ThrombolyticTherapy?.effective;
+                                    h_ = af_ as CqlDateTime;
+                                }
+                                else
+                                {
+                                    object ag_ = ThrombolyticTherapy?.effective;
+                                    bool ah_ = ag_ is CqlInterval<CqlDateTime>;
+                                    if (ah_)
+                                    {
+                                        object ai_ = ThrombolyticTherapy?.effective;
+                                        h_ = ai_ as CqlInterval<CqlDateTime>;
+                                    }
+                                    else
+                                    {
+                                        h_ = null;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_());
+                CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
                 CqlDateTime j_ = context.Operators.Start(i_);
                 CqlInterval<CqlDateTime> k_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, IschemicStrokeEncounter);
                 CqlDateTime l_ = context.Operators.Start(k_);

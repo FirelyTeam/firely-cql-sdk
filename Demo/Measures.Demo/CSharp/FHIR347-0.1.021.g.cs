@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("FHIR347", "0.1.021")]
 public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
 {
@@ -1143,43 +1143,33 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             IEnumerable<Timing> bu_ = context.Operators.Select<Dosage, Timing>(bs_, bt_);
 
             bool? bv_(Timing T) {
-
-                object cg_() {
-
-                    bool ck_() {
-                        Timing.RepeatComponent cm_ = T?.Repeat;
-                        DataType cn_ = cm_?.Bounds;
-                        bool co_ = cn_ is Range;
-                        return co_;
-                    }
-
-
-                    bool cl_() {
-                        Timing.RepeatComponent cp_ = T?.Repeat;
-                        DataType cq_ = cp_?.Bounds;
-                        bool cr_ = cq_ is Period;
-                        return cr_;
-                    }
-
-                    if (ck_())
+                object cg_;
+                Timing.RepeatComponent ck_ = T?.Repeat;
+                DataType cl_ = ck_?.Bounds;
+                bool cm_ = cl_ is Range;
+                if (cm_)
+                {
+                    Timing.RepeatComponent cn_ = T?.Repeat;
+                    DataType co_ = cn_?.Bounds;
+                    cg_ = co_ as Range;
+                }
+                else
+                {
+                    Timing.RepeatComponent cp_ = T?.Repeat;
+                    DataType cq_ = cp_?.Bounds;
+                    bool cr_ = cq_ is Period;
+                    if (cr_)
                     {
                         Timing.RepeatComponent cs_ = T?.Repeat;
                         DataType ct_ = cs_?.Bounds;
-                        return ct_ as Range;
-                    }
-                    else if (cl_())
-                    {
-                        Timing.RepeatComponent cu_ = T?.Repeat;
-                        DataType cv_ = cu_?.Bounds;
-                        return cv_ as Period;
+                        cg_ = ct_ as Period;
                     }
                     else
                     {
-                        return null;
+                        cg_ = null;
                     }
                 }
-
-                CqlInterval<CqlDateTime> ch_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, cg_());
+                CqlInterval<CqlDateTime> ch_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, cg_);
                 CqlInterval<CqlDateTime> ci_ = this.Measurement_Period(context);
                 bool? cj_ = context.Operators.Overlaps(ch_, ci_, (string)default);
                 return cj_;

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS145FHIRCADBBlockerTPMIorLVSD", "1.0.000")]
 public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingleton<CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000>
 {
@@ -362,71 +362,57 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
             bool? f_(Procedure CardiacSurgeryProcedure) {
-
-                object i_() {
-
-                    bool u_() {
-                        DataType y_ = CardiacSurgeryProcedure?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        bool aa_ = z_ is CqlDateTime;
-                        return aa_;
-                    }
-
-
-                    bool v_() {
-                        DataType ab_ = CardiacSurgeryProcedure?.Performed;
-                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlInterval<CqlDateTime>;
-                        return ad_;
-                    }
-
-
-                    bool w_() {
-                        DataType ae_ = CardiacSurgeryProcedure?.Performed;
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlQuantity;
-                        return ag_;
-                    }
-
-
-                    bool x_() {
-                        DataType ah_ = CardiacSurgeryProcedure?.Performed;
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        bool aj_ = ai_ is CqlInterval<CqlQuantity>;
-                        return aj_;
-                    }
-
-                    if (u_())
+                object i_;
+                DataType u_ = CardiacSurgeryProcedure?.Performed;
+                object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
+                bool w_ = v_ is CqlDateTime;
+                if (w_)
+                {
+                    DataType x_ = CardiacSurgeryProcedure?.Performed;
+                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                    i_ = y_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType z_ = CardiacSurgeryProcedure?.Performed;
+                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                    bool ab_ = aa_ is CqlInterval<CqlDateTime>;
+                    if (ab_)
                     {
-                        DataType ak_ = CardiacSurgeryProcedure?.Performed;
-                        object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        return al_ as CqlDateTime;
-                    }
-                    else if (v_())
-                    {
-                        DataType am_ = CardiacSurgeryProcedure?.Performed;
-                        object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        return an_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (w_())
-                    {
-                        DataType ao_ = CardiacSurgeryProcedure?.Performed;
-                        object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        return ap_ as CqlQuantity;
-                    }
-                    else if (x_())
-                    {
-                        DataType aq_ = CardiacSurgeryProcedure?.Performed;
-                        object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                        return ar_ as CqlInterval<CqlQuantity>;
+                        DataType ac_ = CardiacSurgeryProcedure?.Performed;
+                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                        i_ = ad_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        return null;
+                        DataType ae_ = CardiacSurgeryProcedure?.Performed;
+                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
+                        bool ag_ = af_ is CqlQuantity;
+                        if (ag_)
+                        {
+                            DataType ah_ = CardiacSurgeryProcedure?.Performed;
+                            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                            i_ = ai_ as CqlQuantity;
+                        }
+                        else
+                        {
+                            DataType aj_ = CardiacSurgeryProcedure?.Performed;
+                            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                            bool al_ = ak_ is CqlInterval<CqlQuantity>;
+                            if (al_)
+                            {
+                                DataType am_ = CardiacSurgeryProcedure?.Performed;
+                                object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
+                                i_ = an_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                i_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_());
+                CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
                 CqlDateTime k_ = context.Operators.Start(j_);
                 Period l_ = ValidQualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
@@ -636,71 +622,57 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             IEnumerable<Encounter> f_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
 
             bool? g_(Encounter CADEncounterMI) {
-
-                object j_() {
-
-                    bool v_() {
-                        DataType z_ = ImplantedCardiacPacer?.Performed;
-                        object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        bool ab_ = aa_ is CqlDateTime;
-                        return ab_;
-                    }
-
-
-                    bool w_() {
-                        DataType ac_ = ImplantedCardiacPacer?.Performed;
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        bool ae_ = ad_ is CqlInterval<CqlDateTime>;
-                        return ae_;
-                    }
-
-
-                    bool x_() {
-                        DataType af_ = ImplantedCardiacPacer?.Performed;
-                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        bool ah_ = ag_ is CqlQuantity;
-                        return ah_;
-                    }
-
-
-                    bool y_() {
-                        DataType ai_ = ImplantedCardiacPacer?.Performed;
-                        object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                        bool ak_ = aj_ is CqlInterval<CqlQuantity>;
-                        return ak_;
-                    }
-
-                    if (v_())
+                object j_;
+                DataType v_ = ImplantedCardiacPacer?.Performed;
+                object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+                bool x_ = w_ is CqlDateTime;
+                if (x_)
+                {
+                    DataType y_ = ImplantedCardiacPacer?.Performed;
+                    object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
+                    j_ = z_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType aa_ = ImplantedCardiacPacer?.Performed;
+                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                    bool ac_ = ab_ is CqlInterval<CqlDateTime>;
+                    if (ac_)
                     {
-                        DataType al_ = ImplantedCardiacPacer?.Performed;
-                        object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        return am_ as CqlDateTime;
-                    }
-                    else if (w_())
-                    {
-                        DataType an_ = ImplantedCardiacPacer?.Performed;
-                        object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        return ao_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (x_())
-                    {
-                        DataType ap_ = ImplantedCardiacPacer?.Performed;
-                        object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        return aq_ as CqlQuantity;
-                    }
-                    else if (y_())
-                    {
-                        DataType ar_ = ImplantedCardiacPacer?.Performed;
-                        object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                        return as_ as CqlInterval<CqlQuantity>;
+                        DataType ad_ = ImplantedCardiacPacer?.Performed;
+                        object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+                        j_ = ae_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        return null;
+                        DataType af_ = ImplantedCardiacPacer?.Performed;
+                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                        bool ah_ = ag_ is CqlQuantity;
+                        if (ah_)
+                        {
+                            DataType ai_ = ImplantedCardiacPacer?.Performed;
+                            object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+                            j_ = aj_ as CqlQuantity;
+                        }
+                        else
+                        {
+                            DataType ak_ = ImplantedCardiacPacer?.Performed;
+                            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+                            bool am_ = al_ is CqlInterval<CqlQuantity>;
+                            if (am_)
+                            {
+                                DataType an_ = ImplantedCardiacPacer?.Performed;
+                                object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
+                                j_ = ao_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                j_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_());
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
                 CqlDateTime l_ = context.Operators.Start(k_);
                 Period m_ = CADEncounterMI?.Period;
                 CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
@@ -888,71 +860,66 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     {
 
         bool? a_(Encounter Visit) {
-
-            bool? e_() {
-                if (Order is MedicationRequest)
-                {
-                    FhirDateTime f_ = Order?.AuthoredOnElement;
-                    CqlDateTime g_ = context.Operators.Convert<CqlDateTime>(f_);
-                    Period h_ = Visit?.Period;
-                    CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
-                    bool? j_ = context.Operators.In<CqlDateTime>(g_, i_, "day");
-                    Code<MedicationRequest.MedicationrequestStatus> k_ = Order?.StatusElement;
-                    MedicationRequest.MedicationrequestStatus? l_ = k_?.Value;
-                    string m_ = context.Operators.Convert<string>(l_);
-                    string[] n_ = [
-                        "active",
-                        "completed",
-                    ];
-                    bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
-                    bool? p_ = context.Operators.And(j_, o_);
-                    Code<MedicationRequest.MedicationRequestIntent> q_ = Order?.IntentElement;
-                    MedicationRequest.MedicationRequestIntent? r_ = q_?.Value;
-                    string s_ = context.Operators.Convert<string>(r_);
-                    string[] t_ = [
-                        "order",
-                        "original-order",
-                        "reflex-order",
-                        "filler-order",
-                        "instance-order",
-                    ];
-                    bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
-                    bool? v_ = context.Operators.And(p_, u_);
-                    FhirBoolean w_ = Order?.DoNotPerformElement;
-                    bool? x_ = w_?.Value;
-                    bool? y_ = context.Operators.IsTrue(x_);
-                    bool? z_ = context.Operators.Not(y_);
-                    bool? aa_ = context.Operators.And(v_, z_);
-                    return aa_;
-                }
-                else if (Order is MedicationRequest)
-                {
-                    FhirDateTime ab_ = Order?.AuthoredOnElement;
-                    CqlDateTime ac_ = context.Operators.Convert<CqlDateTime>(ab_);
-                    Period ad_ = Visit?.Period;
-                    CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
-                    bool? af_ = context.Operators.In<CqlDateTime>(ac_, ae_, "day");
-                    Code<MedicationRequest.MedicationRequestIntent> ag_ = Order?.IntentElement;
-                    MedicationRequest.MedicationRequestIntent? ah_ = ag_?.Value;
-                    string ai_ = context.Operators.Convert<string>(ah_);
-                    string[] aj_ = [
-                        "order",
-                        "original-order",
-                        "reflex-order",
-                        "filler-order",
-                        "instance-order",
-                    ];
-                    bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
-                    bool? al_ = context.Operators.And(af_, ak_);
-                    return al_;
-                }
-                else
-                {
-                    return false;
-                }
+            if (Order is MedicationRequest)
+            {
+                FhirDateTime e_ = Order?.AuthoredOnElement;
+                CqlDateTime f_ = context.Operators.Convert<CqlDateTime>(e_);
+                Period g_ = Visit?.Period;
+                CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
+                bool? i_ = context.Operators.In<CqlDateTime>(f_, h_, "day");
+                Code<MedicationRequest.MedicationrequestStatus> j_ = Order?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? k_ = j_?.Value;
+                string l_ = context.Operators.Convert<string>(k_);
+                string[] m_ = [
+                    "active",
+                    "completed",
+                ];
+                bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+                bool? o_ = context.Operators.And(i_, n_);
+                Code<MedicationRequest.MedicationRequestIntent> p_ = Order?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? q_ = p_?.Value;
+                string r_ = context.Operators.Convert<string>(q_);
+                string[] s_ = [
+                    "order",
+                    "original-order",
+                    "reflex-order",
+                    "filler-order",
+                    "instance-order",
+                ];
+                bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
+                bool? u_ = context.Operators.And(o_, t_);
+                FhirBoolean v_ = Order?.DoNotPerformElement;
+                bool? w_ = v_?.Value;
+                bool? x_ = context.Operators.IsTrue(w_);
+                bool? y_ = context.Operators.Not(x_);
+                bool? z_ = context.Operators.And(u_, y_);
+                return z_;
             }
-
-            return e_();
+            else if (Order is MedicationRequest)
+            {
+                FhirDateTime aa_ = Order?.AuthoredOnElement;
+                CqlDateTime ab_ = context.Operators.Convert<CqlDateTime>(aa_);
+                Period ac_ = Visit?.Period;
+                CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ac_);
+                bool? ae_ = context.Operators.In<CqlDateTime>(ab_, ad_, "day");
+                Code<MedicationRequest.MedicationRequestIntent> af_ = Order?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                string ah_ = context.Operators.Convert<string>(ag_);
+                string[] ai_ = [
+                    "order",
+                    "original-order",
+                    "reflex-order",
+                    "filler-order",
+                    "instance-order",
+                ];
+                bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
+                bool? ak_ = context.Operators.And(ae_, aj_);
+                return ak_;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         IEnumerable<bool?> b_ = context.Operators.Select<Encounter, bool?>(EncounterList, a_);
@@ -1413,71 +1380,57 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             IEnumerable<Encounter> f_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
 
             bool? g_(Encounter CADEncounterModerateOrSevereLVSD) {
-
-                object j_() {
-
-                    bool q_() {
-                        DataType u_ = ImplantedCardiacPacer?.Performed;
-                        object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                        bool w_ = v_ is CqlDateTime;
-                        return w_;
-                    }
-
-
-                    bool r_() {
-                        DataType x_ = ImplantedCardiacPacer?.Performed;
-                        object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                        bool z_ = y_ is CqlInterval<CqlDateTime>;
-                        return z_;
-                    }
-
-
-                    bool s_() {
-                        DataType aa_ = ImplantedCardiacPacer?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlQuantity;
-                        return ac_;
-                    }
-
-
-                    bool t_() {
-                        DataType ad_ = ImplantedCardiacPacer?.Performed;
-                        object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                        bool af_ = ae_ is CqlInterval<CqlQuantity>;
-                        return af_;
-                    }
-
-                    if (q_())
+                object j_;
+                DataType q_ = ImplantedCardiacPacer?.Performed;
+                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
+                bool s_ = r_ is CqlDateTime;
+                if (s_)
+                {
+                    DataType t_ = ImplantedCardiacPacer?.Performed;
+                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                    j_ = u_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType v_ = ImplantedCardiacPacer?.Performed;
+                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+                    bool x_ = w_ is CqlInterval<CqlDateTime>;
+                    if (x_)
                     {
-                        DataType ag_ = ImplantedCardiacPacer?.Performed;
-                        object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        return ah_ as CqlDateTime;
-                    }
-                    else if (r_())
-                    {
-                        DataType ai_ = ImplantedCardiacPacer?.Performed;
-                        object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                        return aj_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (s_())
-                    {
-                        DataType ak_ = ImplantedCardiacPacer?.Performed;
-                        object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        return al_ as CqlQuantity;
-                    }
-                    else if (t_())
-                    {
-                        DataType am_ = ImplantedCardiacPacer?.Performed;
-                        object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        return an_ as CqlInterval<CqlQuantity>;
+                        DataType y_ = ImplantedCardiacPacer?.Performed;
+                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
+                        j_ = z_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        return null;
+                        DataType aa_ = ImplantedCardiacPacer?.Performed;
+                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                        bool ac_ = ab_ is CqlQuantity;
+                        if (ac_)
+                        {
+                            DataType ad_ = ImplantedCardiacPacer?.Performed;
+                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+                            j_ = ae_ as CqlQuantity;
+                        }
+                        else
+                        {
+                            DataType af_ = ImplantedCardiacPacer?.Performed;
+                            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                            bool ah_ = ag_ is CqlInterval<CqlQuantity>;
+                            if (ah_)
+                            {
+                                DataType ai_ = ImplantedCardiacPacer?.Performed;
+                                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+                                j_ = aj_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                j_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_());
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
                 CqlDateTime l_ = context.Operators.Start(k_);
                 Period m_ = CADEncounterModerateOrSevereLVSD?.Period;
                 CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
@@ -1624,53 +1577,48 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     {
 
         bool? a_(Encounter Visit) {
-
-            bool? e_() {
-                if (Event is AllergyIntolerance)
-                {
-                    object f_ = context.Operators.LateBoundProperty<object>(Event, "onset");
-                    object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-                    CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
-                    CqlDateTime i_ = context.Operators.Start(h_);
-                    object j_ = context.Operators.LateBoundProperty<object>(Event, "lastOccurrence");
-                    CqlDateTime k_ = context.Operators.LateBoundProperty<CqlDateTime>(j_, "value");
-                    CqlInterval<CqlDateTime> l_ = context.Operators.Interval(i_, k_, true, true);
-                    Period m_ = Visit?.Period;
-                    CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-                    bool? o_ = context.Operators.OverlapsAfter(l_, n_, "day");
-                    object p_ = context.Operators.LateBoundProperty<object>(Event, "clinicalStatus");
-                    CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_ as CodeableConcept);
-                    CqlCode r_ = QICoreCommon_4_0_000.Instance.allergy_active(context);
-                    CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
-                    bool? t_ = context.Operators.Equivalent(q_, s_);
-                    bool? u_ = context.Operators.Or((bool?)(q_ is null), t_);
-                    bool? v_ = context.Operators.And(o_, u_);
-                    object w_ = context.Operators.LateBoundProperty<object>(Event, "verificationStatus");
-                    CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_ as CodeableConcept);
-                    CqlCode y_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
-                    CqlConcept z_ = context.Operators.ConvertCodeToConcept(y_);
-                    bool? aa_ = context.Operators.Equivalent(x_, z_);
-                    bool? ab_ = context.Operators.Or((bool?)(x_ is null), aa_);
-                    bool? ac_ = context.Operators.And(v_, ab_);
-                    return ac_;
-                }
-                else if (Event is Condition)
-                {
-                    bool? ad_ = AHAOverall_4_1_000.Instance.isVerified(context, Event as AllergyIntolerance);
-                    CqlInterval<CqlDateTime> ae_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, (Event as Condition) as Condition);
-                    Period af_ = Visit?.Period;
-                    CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, af_);
-                    bool? ah_ = context.Operators.OverlapsAfter(ae_, ag_, "day");
-                    bool? ai_ = context.Operators.And(ad_, ah_);
-                    return ai_;
-                }
-                else
-                {
-                    return false;
-                }
+            if (Event is AllergyIntolerance)
+            {
+                object e_ = context.Operators.LateBoundProperty<object>(Event, "onset");
+                object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
+                CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_);
+                CqlDateTime h_ = context.Operators.Start(g_);
+                object i_ = context.Operators.LateBoundProperty<object>(Event, "lastOccurrence");
+                CqlDateTime j_ = context.Operators.LateBoundProperty<CqlDateTime>(i_, "value");
+                CqlInterval<CqlDateTime> k_ = context.Operators.Interval(h_, j_, true, true);
+                Period l_ = Visit?.Period;
+                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
+                bool? n_ = context.Operators.OverlapsAfter(k_, m_, "day");
+                object o_ = context.Operators.LateBoundProperty<object>(Event, "clinicalStatus");
+                CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_ as CodeableConcept);
+                CqlCode q_ = QICoreCommon_4_0_000.Instance.allergy_active(context);
+                CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
+                bool? s_ = context.Operators.Equivalent(p_, r_);
+                bool? t_ = context.Operators.Or((bool?)(p_ is null), s_);
+                bool? u_ = context.Operators.And(n_, t_);
+                object v_ = context.Operators.LateBoundProperty<object>(Event, "verificationStatus");
+                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_ as CodeableConcept);
+                CqlCode x_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
+                CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
+                bool? z_ = context.Operators.Equivalent(w_, y_);
+                bool? aa_ = context.Operators.Or((bool?)(w_ is null), z_);
+                bool? ab_ = context.Operators.And(u_, aa_);
+                return ab_;
             }
-
-            return e_();
+            else if (Event is Condition)
+            {
+                bool? ac_ = AHAOverall_4_1_000.Instance.isVerified(context, Event as AllergyIntolerance);
+                CqlInterval<CqlDateTime> ad_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, (Event as Condition) as Condition);
+                Period ae_ = Visit?.Period;
+                CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ae_);
+                bool? ag_ = context.Operators.OverlapsAfter(ad_, af_, "day");
+                bool? ah_ = context.Operators.And(ac_, ag_);
+                return ah_;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         IEnumerable<bool?> b_ = context.Operators.Select<Encounter, bool?>(EncounterList, a_);

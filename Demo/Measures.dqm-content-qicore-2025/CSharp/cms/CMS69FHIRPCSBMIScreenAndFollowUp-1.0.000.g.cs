@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS69FHIRPCSBMIScreenAndFollowUp", "1.0.000")]
 public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000>
 {
@@ -454,139 +454,111 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             bool? k_(Condition OverweightObese) {
                 CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OverweightObese as Condition);
                 CqlDateTime q_ = context.Operators.Start(p_);
-
-                object r_() {
-
-                    bool ac_() {
-                        DataType ag_ = HighInterventionsPerformed?.Performed;
-                        object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        bool ai_ = ah_ is CqlDateTime;
-                        return ai_;
+                object r_;
+                DataType ac_ = HighInterventionsPerformed?.Performed;
+                object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                bool ae_ = ad_ is CqlDateTime;
+                if (ae_)
+                {
+                    DataType af_ = HighInterventionsPerformed?.Performed;
+                    object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                    r_ = ag_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType ah_ = HighInterventionsPerformed?.Performed;
+                    object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                    bool aj_ = ai_ is CqlInterval<CqlDateTime>;
+                    if (aj_)
+                    {
+                        DataType ak_ = HighInterventionsPerformed?.Performed;
+                        object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+                        r_ = al_ as CqlInterval<CqlDateTime>;
                     }
-
-
-                    bool ad_() {
-                        DataType aj_ = HighInterventionsPerformed?.Performed;
-                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        bool al_ = ak_ is CqlInterval<CqlDateTime>;
-                        return al_;
-                    }
-
-
-                    bool ae_() {
+                    else
+                    {
                         DataType am_ = HighInterventionsPerformed?.Performed;
                         object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
                         bool ao_ = an_ is CqlQuantity;
-                        return ao_;
-                    }
-
-
-                    bool af_() {
-                        DataType ap_ = HighInterventionsPerformed?.Performed;
-                        object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        bool ar_ = aq_ is CqlInterval<CqlQuantity>;
-                        return ar_;
-                    }
-
-                    if (ac_())
-                    {
-                        DataType as_ = HighInterventionsPerformed?.Performed;
-                        object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
-                        return at_ as CqlDateTime;
-                    }
-                    else if (ad_())
-                    {
-                        DataType au_ = HighInterventionsPerformed?.Performed;
-                        object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        return av_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (ae_())
-                    {
-                        DataType aw_ = HighInterventionsPerformed?.Performed;
-                        object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                        return ax_ as CqlQuantity;
-                    }
-                    else if (af_())
-                    {
-                        DataType ay_ = HighInterventionsPerformed?.Performed;
-                        object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                        return az_ as CqlInterval<CqlQuantity>;
-                    }
-                    else
-                    {
-                        return null;
+                        if (ao_)
+                        {
+                            DataType ap_ = HighInterventionsPerformed?.Performed;
+                            object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
+                            r_ = aq_ as CqlQuantity;
+                        }
+                        else
+                        {
+                            DataType ar_ = HighInterventionsPerformed?.Performed;
+                            object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
+                            bool at_ = as_ is CqlInterval<CqlQuantity>;
+                            if (at_)
+                            {
+                                DataType au_ = HighInterventionsPerformed?.Performed;
+                                object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
+                                r_ = av_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                r_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_());
+                CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
                 CqlDateTime t_ = context.Operators.Start(s_);
                 bool? u_ = context.Operators.SameOrBefore(q_, t_, "day");
                 CqlDateTime v_ = context.Operators.End(p_);
-
-                object w_() {
-
-                    bool ba_() {
+                object w_;
+                DataType aw_ = HighInterventionsPerformed?.Performed;
+                object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
+                bool ay_ = ax_ is CqlDateTime;
+                if (ay_)
+                {
+                    DataType az_ = HighInterventionsPerformed?.Performed;
+                    object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
+                    w_ = ba_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType bb_ = HighInterventionsPerformed?.Performed;
+                    object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
+                    bool bd_ = bc_ is CqlInterval<CqlDateTime>;
+                    if (bd_)
+                    {
                         DataType be_ = HighInterventionsPerformed?.Performed;
                         object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                        bool bg_ = bf_ is CqlDateTime;
-                        return bg_;
-                    }
-
-
-                    bool bb_() {
-                        DataType bh_ = HighInterventionsPerformed?.Performed;
-                        object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                        bool bj_ = bi_ is CqlInterval<CqlDateTime>;
-                        return bj_;
-                    }
-
-
-                    bool bc_() {
-                        DataType bk_ = HighInterventionsPerformed?.Performed;
-                        object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                        bool bm_ = bl_ is CqlQuantity;
-                        return bm_;
-                    }
-
-
-                    bool bd_() {
-                        DataType bn_ = HighInterventionsPerformed?.Performed;
-                        object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                        bool bp_ = bo_ is CqlInterval<CqlQuantity>;
-                        return bp_;
-                    }
-
-                    if (ba_())
-                    {
-                        DataType bq_ = HighInterventionsPerformed?.Performed;
-                        object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
-                        return br_ as CqlDateTime;
-                    }
-                    else if (bb_())
-                    {
-                        DataType bs_ = HighInterventionsPerformed?.Performed;
-                        object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                        return bt_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (bc_())
-                    {
-                        DataType bu_ = HighInterventionsPerformed?.Performed;
-                        object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                        return bv_ as CqlQuantity;
-                    }
-                    else if (bd_())
-                    {
-                        DataType bw_ = HighInterventionsPerformed?.Performed;
-                        object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                        return bx_ as CqlInterval<CqlQuantity>;
+                        w_ = bf_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        return null;
+                        DataType bg_ = HighInterventionsPerformed?.Performed;
+                        object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
+                        bool bi_ = bh_ is CqlQuantity;
+                        if (bi_)
+                        {
+                            DataType bj_ = HighInterventionsPerformed?.Performed;
+                            object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
+                            w_ = bk_ as CqlQuantity;
+                        }
+                        else
+                        {
+                            DataType bl_ = HighInterventionsPerformed?.Performed;
+                            object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
+                            bool bn_ = bm_ is CqlInterval<CqlQuantity>;
+                            if (bn_)
+                            {
+                                DataType bo_ = HighInterventionsPerformed?.Performed;
+                                object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
+                                w_ = bp_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                w_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_());
+                CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
                 CqlDateTime y_ = context.Operators.Start(x_);
                 bool? z_ = context.Operators.Before(v_, y_, "day");
                 bool? aa_ = context.Operators.Not(z_);
@@ -621,71 +593,57 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             IEnumerable<object> f_ = context.Operators.Union<object>(d_ as IEnumerable<object>, e_ as IEnumerable<object>);
 
             bool? g_(object HighBMIInterventions) {
-
-                object j_() {
-
-                    bool r_() {
-                        object v_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
-                        object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                        bool x_ = w_ is CqlDateTime;
-                        return x_;
-                    }
-
-
-                    bool s_() {
-                        object y_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        bool aa_ = z_ is CqlInterval<CqlDateTime>;
-                        return aa_;
-                    }
-
-
-                    bool t_() {
-                        object ab_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
-                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlQuantity;
-                        return ad_;
-                    }
-
-
-                    bool u_() {
-                        object ae_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlInterval<CqlQuantity>;
-                        return ag_;
-                    }
-
-                    if (r_())
+                object j_;
+                object r_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
+                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+                bool t_ = s_ is CqlDateTime;
+                if (t_)
+                {
+                    object u_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
+                    object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
+                    j_ = v_ as CqlDateTime;
+                }
+                else
+                {
+                    object w_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
+                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                    bool y_ = x_ is CqlInterval<CqlDateTime>;
+                    if (y_)
                     {
-                        object ah_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        return ai_ as CqlDateTime;
-                    }
-                    else if (s_())
-                    {
-                        object aj_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
-                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        return ak_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (t_())
-                    {
-                        object al_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
-                        object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        return am_ as CqlQuantity;
-                    }
-                    else if (u_())
-                    {
-                        object an_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
-                        object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        return ao_ as CqlInterval<CqlQuantity>;
+                        object z_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
+                        object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                        j_ = aa_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        return null;
+                        object ab_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
+                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
+                        bool ad_ = ac_ is CqlQuantity;
+                        if (ad_)
+                        {
+                            object ae_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
+                            object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
+                            j_ = af_ as CqlQuantity;
+                        }
+                        else
+                        {
+                            object ag_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
+                            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+                            bool ai_ = ah_ is CqlInterval<CqlQuantity>;
+                            if (ai_)
+                            {
+                                object aj_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
+                                object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                                j_ = ak_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                j_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_());
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
                 object l_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "authoredOn");
                 CqlDateTime m_ = context.Operators.LateBoundProperty<CqlDateTime>(l_, "value");
                 CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
@@ -849,208 +807,166 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 bool? u_ = QICoreCommon_4_0_000.Instance.isHealthConcern(context, UnderweightDiagnosis as Condition);
                 CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UnderweightDiagnosis as Condition);
                 CqlDateTime w_ = context.Operators.Start(v_);
-
-                object x_() {
-
-                    bool ao_() {
-                        DataType as_ = LowInterventionsPerformed?.Performed;
-                        object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
-                        bool au_ = at_ is CqlDateTime;
-                        return au_;
-                    }
-
-
-                    bool ap_() {
-                        DataType av_ = LowInterventionsPerformed?.Performed;
-                        object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                        bool ax_ = aw_ is CqlInterval<CqlDateTime>;
-                        return ax_;
-                    }
-
-
-                    bool aq_() {
-                        DataType ay_ = LowInterventionsPerformed?.Performed;
-                        object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                        bool ba_ = az_ is CqlQuantity;
-                        return ba_;
-                    }
-
-
-                    bool ar_() {
-                        DataType bb_ = LowInterventionsPerformed?.Performed;
-                        object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                        bool bd_ = bc_ is CqlInterval<CqlQuantity>;
-                        return bd_;
-                    }
-
-                    if (ao_())
+                object x_;
+                DataType ao_ = LowInterventionsPerformed?.Performed;
+                object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
+                bool aq_ = ap_ is CqlDateTime;
+                if (aq_)
+                {
+                    DataType ar_ = LowInterventionsPerformed?.Performed;
+                    object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
+                    x_ = as_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType at_ = LowInterventionsPerformed?.Performed;
+                    object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
+                    bool av_ = au_ is CqlInterval<CqlDateTime>;
+                    if (av_)
                     {
-                        DataType be_ = LowInterventionsPerformed?.Performed;
-                        object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                        return bf_ as CqlDateTime;
-                    }
-                    else if (ap_())
-                    {
-                        DataType bg_ = LowInterventionsPerformed?.Performed;
-                        object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                        return bh_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (aq_())
-                    {
-                        DataType bi_ = LowInterventionsPerformed?.Performed;
-                        object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
-                        return bj_ as CqlQuantity;
-                    }
-                    else if (ar_())
-                    {
-                        DataType bk_ = LowInterventionsPerformed?.Performed;
-                        object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                        return bl_ as CqlInterval<CqlQuantity>;
+                        DataType aw_ = LowInterventionsPerformed?.Performed;
+                        object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
+                        x_ = ax_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        return null;
+                        DataType ay_ = LowInterventionsPerformed?.Performed;
+                        object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
+                        bool ba_ = az_ is CqlQuantity;
+                        if (ba_)
+                        {
+                            DataType bb_ = LowInterventionsPerformed?.Performed;
+                            object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
+                            x_ = bc_ as CqlQuantity;
+                        }
+                        else
+                        {
+                            DataType bd_ = LowInterventionsPerformed?.Performed;
+                            object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
+                            bool bf_ = be_ is CqlInterval<CqlQuantity>;
+                            if (bf_)
+                            {
+                                DataType bg_ = LowInterventionsPerformed?.Performed;
+                                object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
+                                x_ = bh_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                x_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> y_ = QICoreCommon_4_0_000.Instance.toInterval(context, x_());
+                CqlInterval<CqlDateTime> y_ = QICoreCommon_4_0_000.Instance.toInterval(context, x_);
                 CqlDateTime z_ = context.Operators.Start(y_);
                 bool? aa_ = context.Operators.SameOrBefore(w_, z_, "day");
                 bool? ab_ = context.Operators.And(u_, aa_);
                 CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
-
-                object ad_() {
-
-                    bool bm_() {
+                object ad_;
+                DataType bi_ = LowInterventionsPerformed?.Performed;
+                object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
+                bool bk_ = bj_ is CqlDateTime;
+                if (bk_)
+                {
+                    DataType bl_ = LowInterventionsPerformed?.Performed;
+                    object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
+                    ad_ = bm_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType bn_ = LowInterventionsPerformed?.Performed;
+                    object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
+                    bool bp_ = bo_ is CqlInterval<CqlDateTime>;
+                    if (bp_)
+                    {
                         DataType bq_ = LowInterventionsPerformed?.Performed;
                         object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
-                        bool bs_ = br_ is CqlDateTime;
-                        return bs_;
-                    }
-
-
-                    bool bn_() {
-                        DataType bt_ = LowInterventionsPerformed?.Performed;
-                        object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                        bool bv_ = bu_ is CqlInterval<CqlDateTime>;
-                        return bv_;
-                    }
-
-
-                    bool bo_() {
-                        DataType bw_ = LowInterventionsPerformed?.Performed;
-                        object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                        bool by_ = bx_ is CqlQuantity;
-                        return by_;
-                    }
-
-
-                    bool bp_() {
-                        DataType bz_ = LowInterventionsPerformed?.Performed;
-                        object ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
-                        bool cb_ = ca_ is CqlInterval<CqlQuantity>;
-                        return cb_;
-                    }
-
-                    if (bm_())
-                    {
-                        DataType cc_ = LowInterventionsPerformed?.Performed;
-                        object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
-                        return cd_ as CqlDateTime;
-                    }
-                    else if (bn_())
-                    {
-                        DataType ce_ = LowInterventionsPerformed?.Performed;
-                        object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                        return cf_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (bo_())
-                    {
-                        DataType cg_ = LowInterventionsPerformed?.Performed;
-                        object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                        return ch_ as CqlQuantity;
-                    }
-                    else if (bp_())
-                    {
-                        DataType ci_ = LowInterventionsPerformed?.Performed;
-                        object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                        return cj_ as CqlInterval<CqlQuantity>;
+                        ad_ = br_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        return null;
+                        DataType bs_ = LowInterventionsPerformed?.Performed;
+                        object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
+                        bool bu_ = bt_ is CqlQuantity;
+                        if (bu_)
+                        {
+                            DataType bv_ = LowInterventionsPerformed?.Performed;
+                            object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
+                            ad_ = bw_ as CqlQuantity;
+                        }
+                        else
+                        {
+                            DataType bx_ = LowInterventionsPerformed?.Performed;
+                            object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
+                            bool bz_ = by_ is CqlInterval<CqlQuantity>;
+                            if (bz_)
+                            {
+                                DataType ca_ = LowInterventionsPerformed?.Performed;
+                                object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
+                                ad_ = cb_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ad_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> ae_ = QICoreCommon_4_0_000.Instance.toInterval(context, ad_());
+                CqlInterval<CqlDateTime> ae_ = QICoreCommon_4_0_000.Instance.toInterval(context, ad_);
                 bool? af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ac_, ae_, "day");
                 bool? ag_ = context.Operators.And(ab_, af_);
                 CqlDateTime ah_ = context.Operators.End(v_);
-
-                object ai_() {
-
-                    bool ck_() {
-                        DataType co_ = LowInterventionsPerformed?.Performed;
-                        object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
-                        bool cq_ = cp_ is CqlDateTime;
-                        return cq_;
-                    }
-
-
-                    bool cl_() {
-                        DataType cr_ = LowInterventionsPerformed?.Performed;
-                        object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                        bool ct_ = cs_ is CqlInterval<CqlDateTime>;
-                        return ct_;
-                    }
-
-
-                    bool cm_() {
-                        DataType cu_ = LowInterventionsPerformed?.Performed;
-                        object cv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cu_);
-                        bool cw_ = cv_ is CqlQuantity;
-                        return cw_;
-                    }
-
-
-                    bool cn_() {
-                        DataType cx_ = LowInterventionsPerformed?.Performed;
-                        object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
-                        bool cz_ = cy_ is CqlInterval<CqlQuantity>;
-                        return cz_;
-                    }
-
-                    if (ck_())
+                object ai_;
+                DataType cc_ = LowInterventionsPerformed?.Performed;
+                object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
+                bool ce_ = cd_ is CqlDateTime;
+                if (ce_)
+                {
+                    DataType cf_ = LowInterventionsPerformed?.Performed;
+                    object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
+                    ai_ = cg_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType ch_ = LowInterventionsPerformed?.Performed;
+                    object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
+                    bool cj_ = ci_ is CqlInterval<CqlDateTime>;
+                    if (cj_)
                     {
-                        DataType da_ = LowInterventionsPerformed?.Performed;
-                        object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-                        return db_ as CqlDateTime;
-                    }
-                    else if (cl_())
-                    {
-                        DataType dc_ = LowInterventionsPerformed?.Performed;
-                        object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                        return dd_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (cm_())
-                    {
-                        DataType de_ = LowInterventionsPerformed?.Performed;
-                        object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
-                        return df_ as CqlQuantity;
-                    }
-                    else if (cn_())
-                    {
-                        DataType dg_ = LowInterventionsPerformed?.Performed;
-                        object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                        return dh_ as CqlInterval<CqlQuantity>;
+                        DataType ck_ = LowInterventionsPerformed?.Performed;
+                        object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
+                        ai_ = cl_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        return null;
+                        DataType cm_ = LowInterventionsPerformed?.Performed;
+                        object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
+                        bool co_ = cn_ is CqlQuantity;
+                        if (co_)
+                        {
+                            DataType cp_ = LowInterventionsPerformed?.Performed;
+                            object cq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cp_);
+                            ai_ = cq_ as CqlQuantity;
+                        }
+                        else
+                        {
+                            DataType cr_ = LowInterventionsPerformed?.Performed;
+                            object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
+                            bool ct_ = cs_ is CqlInterval<CqlQuantity>;
+                            if (ct_)
+                            {
+                                DataType cu_ = LowInterventionsPerformed?.Performed;
+                                object cv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cu_);
+                                ai_ = cv_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ai_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> aj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ai_());
+                CqlInterval<CqlDateTime> aj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ai_);
                 CqlDateTime ak_ = context.Operators.Start(aj_);
                 bool? al_ = context.Operators.Before(ah_, ak_, "day");
                 bool? am_ = context.Operators.Not(al_);
@@ -1085,71 +1001,57 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             IEnumerable<object> f_ = context.Operators.Union<object>(d_ as IEnumerable<object>, e_ as IEnumerable<object>);
 
             bool? g_(object LowBMIInterventions) {
-
-                object j_() {
-
-                    bool r_() {
-                        object v_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
-                        object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                        bool x_ = w_ is CqlDateTime;
-                        return x_;
-                    }
-
-
-                    bool s_() {
-                        object y_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        bool aa_ = z_ is CqlInterval<CqlDateTime>;
-                        return aa_;
-                    }
-
-
-                    bool t_() {
-                        object ab_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
-                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlQuantity;
-                        return ad_;
-                    }
-
-
-                    bool u_() {
-                        object ae_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlInterval<CqlQuantity>;
-                        return ag_;
-                    }
-
-                    if (r_())
+                object j_;
+                object r_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
+                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+                bool t_ = s_ is CqlDateTime;
+                if (t_)
+                {
+                    object u_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
+                    object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
+                    j_ = v_ as CqlDateTime;
+                }
+                else
+                {
+                    object w_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
+                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                    bool y_ = x_ is CqlInterval<CqlDateTime>;
+                    if (y_)
                     {
-                        object ah_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        return ai_ as CqlDateTime;
-                    }
-                    else if (s_())
-                    {
-                        object aj_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
-                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        return ak_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (t_())
-                    {
-                        object al_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
-                        object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        return am_ as CqlQuantity;
-                    }
-                    else if (u_())
-                    {
-                        object an_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
-                        object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        return ao_ as CqlInterval<CqlQuantity>;
+                        object z_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
+                        object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                        j_ = aa_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        return null;
+                        object ab_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
+                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
+                        bool ad_ = ac_ is CqlQuantity;
+                        if (ad_)
+                        {
+                            object ae_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
+                            object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
+                            j_ = af_ as CqlQuantity;
+                        }
+                        else
+                        {
+                            object ag_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
+                            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+                            bool ai_ = ah_ is CqlInterval<CqlQuantity>;
+                            if (ai_)
+                            {
+                                object aj_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
+                                object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                                j_ = ak_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                j_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_());
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
                 object l_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "authoredOn");
                 CqlDateTime m_ = context.Operators.LateBoundProperty<CqlDateTime>(l_, "value");
                 CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
