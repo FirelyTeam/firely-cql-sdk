@@ -663,113 +663,45 @@ namespace Hl7.Cql.Operators
             var interval = ToClosed(argument!)!;
             var expanded = new List<CqlDate>();
 
-            var setLowPrecisionToPer = false;
-            var setHighPrecisionToPer = false;
-
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
             if (per?.unit == null)
-            {
-                if (interval.low!.Precision == interval.high!.Precision)
-                {
-                    Units.DatePrecisionToCqlUnits.TryGetValue(interval.low.Precision.ToString(), out var cqlunits);
-                    per = new CqlQuantity(1, cqlunits);
-                }
-                else if (interval.low.Precision < interval.high.Precision)
-                {
-                    Units.DatePrecisionToCqlUnits.TryGetValue(interval.low.Precision.ToString(), out var cqlunits);
-                    per = new CqlQuantity(1, cqlunits);
-
-                    setHighPrecisionToPer = true;
-                }
-                else
-                {
-                    Units.DatePrecisionToCqlUnits.TryGetValue(interval.high.Precision.ToString(), out var cqlunits);
-                    per = new CqlQuantity(1, cqlunits);
-
-                    setLowPrecisionToPer = true;
-                }
-            }
-            else
-            {
-                switch (per.unit)
-                {
-                    case "month":
-                        if (interval.low!.Precision < Iso8601.DateTimePrecision.Month
-                            && interval.high!.Precision < Iso8601.DateTimePrecision.Month)
-                            return expanded;
-
-                        if (interval.low.Precision > Iso8601.DateTimePrecision.Month)
-                            setLowPrecisionToPer = true;
-                        else if (interval.high!.Precision > Iso8601.DateTimePrecision.Month)
-                            setHighPrecisionToPer = true;
-
-
-                        break;
-                    case "day":
-                    case "week":
-                        if (interval.low!.Precision < Iso8601.DateTimePrecision.Day
-                            && interval.high!.Precision < Iso8601.DateTimePrecision.Day)
-                            return expanded;
-
-                        if (interval.low.Precision > Iso8601.DateTimePrecision.Day)
-                            setLowPrecisionToPer = true;
-                        else if (interval.high!.Precision > Iso8601.DateTimePrecision.Day)
-                            setHighPrecisionToPer = true;
-
-                        break;
-                    // parsed as a time unit when it's a date so default to the coarsest
-                    // ex: Interval[2023-01-01, 2023-12-31] per minute
-                    case "hour":
-                    case "minute":
-                    case "second":
-                    case "millisecond":
-                        return expanded;
-                }
-            }
+                per = CoarsestPer(interval.low!.Precision, interval.high!.Precision);
 
             var listItem = interval.low;
             var highInterval = interval.high;
+            var perPrecision = PerUnitPrecision(per.unit);
 
-            if (setLowPrecisionToPer)
+            if (perPrecision is { } precision)
             {
-                var lowValue = interval.low!.Value;
-                switch (interval.high!.Precision)
-                {
-                    case Iso8601.DateTimePrecision.Year:
-                        listItem = new CqlDate(lowValue.Year, null, null);
-                        break;
-                    case Iso8601.DateTimePrecision.Month:
-                        listItem = new CqlDate(lowValue.Year, lowValue.Month ?? 1, null);
-                        break;
-                    case Iso8601.DateTimePrecision.Day:
-                        listItem = new CqlDate(lowValue.Year, lowValue.Month, lowValue.Day ?? 1);
-                        break;
-                }
+                // A Date has no time-of-day component, so a time-based per contributes nothing.
+                // ex: Interval[@2023-01-01, @2023-12-31] per minute
+                if (precision > Iso8601.DateTimePrecision.Day)
+                    return expanded;
+
+                // Adding a per finer than the lower boundary's precision is null, so the interval contributes nothing.
+                if (interval.low!.Precision < precision)
+                    return expanded;
+
+                listItem = TruncateToPrecision(interval.low!, precision);
+                highInterval = TruncateToPrecision(interval.high!, precision);
             }
 
-            if (setHighPrecisionToPer)
+            while (true)
             {
-                var highValue = interval.high!.Value;
-                switch (interval.low!.Precision)
-                {
-                    case Iso8601.DateTimePrecision.Year:
-                        highInterval = new CqlDate(highValue.Year, null, null);
-                        break;
-                    case Iso8601.DateTimePrecision.Month:
-                        highInterval = new CqlDate(highValue.Year, highValue.Month ?? 1, null);
-                        break;
-                    case Iso8601.DateTimePrecision.Day:
-                        highInterval = new CqlDate(highValue.Year, highValue.Month, highValue.Day ?? 1);
-                        break;
-                }
-            }
+                Units.DatePrecisionToCqlUnits.TryGetValue(listItem!.Precision.ToString(), out var cqlunits);
 
-            do
-            {
-                expanded.Add(listItem!);
-                listItem = listItem!.Add(per);
+                // The starting point is only returned for intervals of size per that end on or before the upper boundary.
+                var onePrior = new CqlQuantity(1, cqlunits);
+                var next = listItem.Add(per);
+
+                var high = next?.Subtract(onePrior);
+                var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
+                if (!endsOnOrBeforeHigh)
+                    break;
+
+                expanded.Add(listItem);
+                listItem = next;
             }
-            while (Comparer.Compare(listItem!, highInterval!, null) <= 0);
 
             return expanded;
         }
@@ -793,163 +725,40 @@ namespace Hl7.Cql.Operators
             var interval = ToClosed(argument!)!;
             var expanded = new List<CqlDateTime>();
 
-            var setLowPrecisionToPer = false;
-            var setHighPrecisionToPer = false;
-
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
             if (per?.unit == null)
-            {
-                if (interval.low!.Precision == interval.high!.Precision)
-                {
-                    Units.DatePrecisionToCqlUnits.TryGetValue(interval.low.Precision.ToString(), out var cqlunits);
-                    per = new CqlQuantity(1, cqlunits);
-                }
-                else if (interval.low.Precision < interval.high.Precision)
-                {
-                    Units.DatePrecisionToCqlUnits.TryGetValue(interval.low.Precision.ToString(), out var cqlunits);
-                    per = new CqlQuantity(1, cqlunits);
-
-                    setHighPrecisionToPer = true;
-                }
-                else
-                {
-                    Units.DatePrecisionToCqlUnits.TryGetValue(interval.high.Precision.ToString(), out var cqlunits);
-                    per = new CqlQuantity(1, cqlunits);
-
-                    setLowPrecisionToPer = true;
-                }
-            }
-            else
-            {
-                switch (per.unit)
-                {
-                    case "month":
-                        if (interval.low!.Precision < Iso8601.DateTimePrecision.Month
-                            && interval.high!.Precision < Iso8601.DateTimePrecision.Month)
-                            return expanded;
-
-                        if (interval.low.Precision > Iso8601.DateTimePrecision.Month)
-                            setLowPrecisionToPer = true;
-                        else if (interval.high!.Precision > Iso8601.DateTimePrecision.Month)
-                            setHighPrecisionToPer = true;
-
-                        break;
-                    case "day":
-                    case "week":
-                        if (interval.low!.Precision < Iso8601.DateTimePrecision.Day
-                            && interval.high!.Precision < Iso8601.DateTimePrecision.Day)
-                            return expanded;
-
-                        if (interval.low.Precision > Iso8601.DateTimePrecision.Day)
-                            setLowPrecisionToPer = true;
-                        else if (interval.high!.Precision > Iso8601.DateTimePrecision.Day)
-                            setHighPrecisionToPer = true;
-
-                        break;
-                    // per has a coarser precision than the interval so nothing is added
-                    case "hour":
-                        if (interval.low!.Precision < Iso8601.DateTimePrecision.Hour
-                            && interval.high!.Precision < Iso8601.DateTimePrecision.Hour)
-                            return expanded;
-
-                        if (interval.low.Precision > Iso8601.DateTimePrecision.Hour)
-                            setLowPrecisionToPer = true;
-                        else if (interval.high!.Precision > Iso8601.DateTimePrecision.Hour)
-                            setHighPrecisionToPer = true;
-
-                        break;
-                    case "minute":
-                        if (interval.low!.Precision < Iso8601.DateTimePrecision.Minute
-                            && interval.high!.Precision < Iso8601.DateTimePrecision.Minute)
-                            return expanded;
-
-                        if (interval.low.Precision > Iso8601.DateTimePrecision.Minute)
-                            setLowPrecisionToPer = true;
-                        else if (interval.high!.Precision > Iso8601.DateTimePrecision.Minute)
-                            setHighPrecisionToPer = true;
-
-                        break;
-                    case "second":
-                        if (interval.low!.Precision < Iso8601.DateTimePrecision.Second
-                            && interval.high!.Precision < Iso8601.DateTimePrecision.Second)
-                            return expanded;
-
-                        if (interval.low.Precision > Iso8601.DateTimePrecision.Second)
-                            setLowPrecisionToPer = true;
-                        else if (interval.high!.Precision > Iso8601.DateTimePrecision.Second)
-                            setHighPrecisionToPer = true;
-
-                        break;
-                }
-            }
+                per = CoarsestPer(interval.low!.Precision, interval.high!.Precision);
 
             var listItem = interval.low;
             var highInterval = interval.high;
+            var perPrecision = PerUnitPrecision(per.unit);
 
-            if (setLowPrecisionToPer)
+            if (perPrecision is { } precision)
             {
-                var lowValue = interval.low!.Value;
-                switch (interval.high!.Precision)
-                {
-                    case Iso8601.DateTimePrecision.Year:
-                        listItem = new CqlDateTime(lowValue.Year, null, null, null, null, null, null, lowValue.OffsetHour, lowValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Month:
-                        listItem = new CqlDateTime(lowValue.Year, lowValue.Month ?? 1, null, null, null, null, null, lowValue.OffsetHour, lowValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Day:
-                        listItem = new CqlDateTime(lowValue.Year, lowValue.Month, lowValue.Day ?? 1, null, null, null, null, lowValue.OffsetHour, lowValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Hour:
-                        listItem = new CqlDateTime(lowValue.Year, lowValue.Month, lowValue.Day, 0, null, null, null, lowValue.OffsetHour, lowValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Minute:
-                        listItem = new CqlDateTime(lowValue.Year, lowValue.Month, lowValue.Day, lowValue.Hour, 0, null, null, lowValue.OffsetHour, lowValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Second:
-                        listItem = new CqlDateTime(lowValue.Year, lowValue.Month, lowValue.Day, lowValue.Hour, 0, 0, null, lowValue.OffsetHour, lowValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Millisecond:
-                        listItem = new CqlDateTime(lowValue.Year, lowValue.Month, lowValue.Day, lowValue.Hour, 0, 0, 0, lowValue.OffsetHour, lowValue.OffsetMinute);
-                        break;
-                }
+                // Adding a per finer than the lower boundary's precision is null, so the interval contributes nothing.
+                if (interval.low!.Precision < precision)
+                    return expanded;
+
+                listItem = TruncateToPrecision(interval.low!, precision);
+                highInterval = TruncateToPrecision(interval.high!, precision);
             }
 
-            if (setHighPrecisionToPer)
+            while (true)
             {
-                var highValue = interval.high!.Value;
-                switch (interval.low!.Precision)
-                {
-                    case Iso8601.DateTimePrecision.Year:
-                        highInterval = new CqlDateTime(highValue.Year, null, null, null, null, null, null, highValue.OffsetHour, highValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Month:
-                        highInterval = new CqlDateTime(highValue.Year, highValue.Month ?? 1, null, null, null, null, null, highValue.OffsetHour, highValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Day:
-                        highInterval = new CqlDateTime(highValue.Year, highValue.Month, highValue.Day ?? 1, null, null, null, null, highValue.OffsetHour, highValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Hour:
-                        highInterval = new CqlDateTime(highValue.Year, highValue.Month, highValue.Day, 0, null, null, null, highValue.OffsetHour, highValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Minute:
-                        highInterval = new CqlDateTime(highValue.Year, highValue.Month, highValue.Day, highValue.Hour, 0, null, null, highValue.OffsetHour, highValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Second:
-                        highInterval = new CqlDateTime(highValue.Year, highValue.Month, highValue.Day, highValue.Hour, 0, 0, null, highValue.OffsetHour, highValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Millisecond:
-                        highInterval = new CqlDateTime(highValue.Year, highValue.Month, highValue.Day, highValue.Hour, 0, 0, 0, highValue.OffsetHour, highValue.OffsetMinute);
-                        break;
-                }
-            }
+                Units.DatePrecisionToCqlUnits.TryGetValue(listItem!.Precision.ToString(), out var cqlunits);
 
-            do
-            {
-                expanded.Add(listItem!);
-                listItem = listItem!.Add(per);
+                // The starting point is only returned for intervals of size per that end on or before the upper boundary.
+                var onePrior = new CqlQuantity(1, cqlunits);
+                var next = listItem.Add(per);
+
+                var high = next?.Subtract(onePrior);
+                var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
+                if (!endsOnOrBeforeHigh)
+                    break;
+
+                expanded.Add(listItem);
+                listItem = next;
             }
-            while (Comparer.Compare(listItem!, highInterval!, null) <= 0);
 
             return expanded;
         }
@@ -973,127 +782,45 @@ namespace Hl7.Cql.Operators
             var interval = ToClosed(argument!)!;
             var expanded = new List<CqlTime>();
 
-            var setLowPrecisionToPer = false;
-            var setHighPrecisionToPer = false;
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
             if (per?.unit == null)
-            {
-                if (interval.low!.Precision == interval.high!.Precision)
-                {
-                    Units.DatePrecisionToCqlUnits.TryGetValue(interval.low.Precision.ToString(), out var cqlunits);
-                    per = new CqlQuantity(1, cqlunits);
-                }
-                else if (interval.low.Precision < interval.high.Precision)
-                {
-                    Units.DatePrecisionToCqlUnits.TryGetValue(interval.low.Precision.ToString(), out var cqlunits);
-                    per = new CqlQuantity(1, cqlunits);
-
-                    setHighPrecisionToPer = true;
-                }
-                else
-                {
-                    Units.DatePrecisionToCqlUnits.TryGetValue(interval.high.Precision.ToString(), out var cqlunits);
-                    per = new CqlQuantity(1, cqlunits);
-
-                    setLowPrecisionToPer = true;
-                }
-            }
-            else
-            {
-                switch (per.unit)
-                {
-                    // per has a coarser precision than the interval so nothing is added
-                    case "hour":
-                        if (interval.low!.Precision < Iso8601.DateTimePrecision.Hour
-                            && interval.high!.Precision < Iso8601.DateTimePrecision.Hour)
-                            return expanded;
-
-                        if (interval.low.Precision > Iso8601.DateTimePrecision.Hour)
-                            setLowPrecisionToPer = true;
-                        else if (interval.high!.Precision > Iso8601.DateTimePrecision.Hour)
-                            setHighPrecisionToPer = true;
-
-                        break;
-                    case "minute":
-                        if (interval.low!.Precision < Iso8601.DateTimePrecision.Minute
-                            && interval.high!.Precision < Iso8601.DateTimePrecision.Minute)
-                            return expanded;
-
-                        if (interval.low.Precision > Iso8601.DateTimePrecision.Minute)
-                            setLowPrecisionToPer = true;
-                        else if (interval.high!.Precision > Iso8601.DateTimePrecision.Minute)
-                            setHighPrecisionToPer = true;
-
-                        break;
-                    case "second":
-                        if (interval.low!.Precision > Iso8601.DateTimePrecision.Second
-                            && interval.high!.Precision > Iso8601.DateTimePrecision.Second)
-                            return expanded;
-
-                        if (interval.low.Precision > Iso8601.DateTimePrecision.Second)
-                            setLowPrecisionToPer = true;
-                        else if (interval.high!.Precision > Iso8601.DateTimePrecision.Second)
-                            setHighPrecisionToPer = true;
-
-                        break;
-                    // parsed as a date unit when it's a time so return empty list
-                    // ex: Interval[@T10, @T10] per month
-                    case "year":
-                    case "month":
-                    case "day":
-                    case "week":
-                        return expanded;
-                }
-            }
+                per = CoarsestPer(interval.low!.Precision, interval.high!.Precision);
 
             var listItem = interval.low;
             var highInterval = interval.high;
-            if (setLowPrecisionToPer)
+            var perPrecision = PerUnitPrecision(per.unit);
+
+            if (perPrecision is { } precision)
             {
-                var lowValue = interval.low!.Value;
-                switch (interval.high!.Precision)
-                {
-                    case Iso8601.DateTimePrecision.Hour:
-                        listItem = new CqlTime(lowValue.Hour, null, null, null, lowValue.OffsetHour, lowValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Minute:
-                        listItem = new CqlTime(lowValue.Hour, 0, null, null, lowValue.OffsetHour, lowValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Second:
-                        listItem = new CqlTime(lowValue.Hour, 0, 0, null, lowValue.OffsetHour, lowValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Millisecond:
-                        listItem = new CqlTime(lowValue.Hour, 0, 0, 0, lowValue.OffsetHour, lowValue.OffsetMinute);
-                        break;
-                }
+                // A Time has no date component, so a date-based per contributes nothing.
+                // ex: Interval[@T10, @T10] per month
+                if (precision < Iso8601.DateTimePrecision.Hour)
+                    return expanded;
+
+                // Adding a per finer than the lower boundary's precision is null, so the interval contributes nothing.
+                if (interval.low!.Precision < precision)
+                    return expanded;
+
+                listItem = TruncateToPrecision(interval.low!, precision);
+                highInterval = TruncateToPrecision(interval.high!, precision);
             }
 
-            if (setHighPrecisionToPer)
+            while (true)
             {
-                var highValue = interval.high!.Value;
-                switch (interval.low!.Precision)
-                {
-                    case Iso8601.DateTimePrecision.Hour:
-                        highInterval = new CqlTime(highValue.Hour, null, null, null, highValue.OffsetHour, highValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Minute:
-                        highInterval = new CqlTime(highValue.Hour, 0, null, null, highValue.OffsetHour, highValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Second:
-                        highInterval = new CqlTime(highValue.Hour, 0, 0, null, highValue.OffsetHour, highValue.OffsetMinute);
-                        break;
-                    case Iso8601.DateTimePrecision.Millisecond:
-                        highInterval = new CqlTime(highValue.Hour, 0, 0, 0, highValue.OffsetHour, highValue.OffsetMinute);
-                        break;
-                }
-            }
+                Units.DatePrecisionToCqlUnits.TryGetValue(listItem!.Precision.ToString(), out var cqlunits);
 
-            do
-            {
-                expanded.Add(listItem!);
-                listItem = listItem!.Add(per);
+                // The starting point is only returned for intervals of size per that end on or before the upper boundary.
+                var onePrior = new CqlQuantity(1, cqlunits);
+                var next = listItem.Add(per);
+
+                var high = next?.Subtract(onePrior);
+                var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
+                if (!endsOnOrBeforeHigh)
+                    break;
+
+                expanded.Add(listItem);
+                listItem = next;
             }
-            while (Comparer.Compare(listItem!, highInterval!, null) <= 0);
 
             return expanded;
         }
@@ -1128,12 +855,35 @@ namespace Hl7.Cql.Operators
             }
 
             var listItem = interval.low!.Value;
-            do
+            var highBoundary = interval.high!.Value;
+            var perValue = per.value ?? 1m;
+            var usesDefaultDecimalUnit = string.IsNullOrEmpty(per.unit) || per.unit == UCUMUnits.Unary;
+            var perScale = DecimalScale(perValue);
+
+            // Boundaries more precise than per are truncated to per's scale, which may broaden the input range.
+            var needsTruncation = usesDefaultDecimalUnit
+                && (DecimalScale(listItem) > perScale || DecimalScale(highBoundary) > perScale);
+
+            if (needsTruncation)
             {
-                expanded.Add(listItem);
-                listItem = decimal.Add(listItem, per.value ?? 1);
+                listItem = TruncateToScale(listItem, perScale);
+                highBoundary = TruncateToScale(highBoundary, perScale);
             }
-            while (Comparer.Compare(listItem, interval.high!, null) <= 0);
+
+            while (true)
+            {
+                var next = decimal.Add(listItem, perValue);
+
+                // The starting point is only returned for intervals of size per that end on or before the upper boundary.
+                // Truncation expands at per's scale, so the interval ends one unit of that scale below the next start.
+                var high = needsTruncation ? decimal.Subtract(next, UnitAtScale(perScale)) : Predecessor(next);
+                var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highBoundary, null) <= 0;
+                if (!endsOnOrBeforeHigh)
+                    break;
+
+                expanded.Add(listItem);
+                listItem = next;
+            }
 
             return expanded;
         }
@@ -1175,12 +925,19 @@ namespace Hl7.Cql.Operators
 
             var intQuantity = decimal.ToInt32(perValue);
             var listItem = interval.low!.Value;
-            do
+            while (true)
             {
+                var next = listItem + intQuantity;
+
+                // The starting point is only returned for intervals of size per that end on or before the upper boundary.
+                var high = Predecessor(next);
+                var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, interval.high!, null) <= 0;
+                if (!endsOnOrBeforeHigh)
+                    break;
+
                 expanded.Add(listItem);
-                listItem += intQuantity;
+                listItem = next;
             }
-            while (Comparer.Compare(listItem, interval.high!, null) <= 0);
 
             return expanded;
         }
@@ -1222,12 +979,19 @@ namespace Hl7.Cql.Operators
 
             var intQuantity = decimal.ToInt64(perValue);
             var listItem = interval.low!.Value;
-            do
+            while (true)
             {
+                var next = listItem + intQuantity;
+
+                // The starting point is only returned for intervals of size per that end on or before the upper boundary.
+                var high = Predecessor(next);
+                var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, interval.high!, null) <= 0;
+                if (!endsOnOrBeforeHigh)
+                    break;
+
                 expanded.Add(listItem);
-                listItem += intQuantity;
+                listItem = next;
             }
-            while (Comparer.Compare(listItem, interval.high!, null) <= 0);
 
             return expanded;
         }

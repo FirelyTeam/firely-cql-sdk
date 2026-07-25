@@ -112,12 +112,123 @@ namespace Hl7.Cql.CqlToElm.Test
             var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
             var result = Run<IEnumerable<CqlInterval<decimal?>>>(expand, lib);
             result.Should().NotBeNull();
-            // Each interval is [start, Predecessor(start + per)]. The trailing interval starting at the upper boundary
-            // reaches past it; that pre-existing off-by-one is unrelated to the non-positive/fractional per guards.
+            // Each interval is [start, Predecessor(start + per)]; only those ending on or before 2.0 are contributed.
             result!.Select(i => (i!.low, i.high)).Should().Equal(
                 (1.0m, 1.49999999m),
-                (1.5m, 1.99999999m),
-                (2.0m, 2.49999999m));
+                (1.5m, 1.99999999m));
+        }
+
+        [TestMethod]
+        public void ExpandIntegerIntervalPer3()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[1, 10] } per 3 '1'");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<CqlInterval<int?>>>(expand, lib);
+            result.Should().NotBeNull();
+            // The candidate starting at 10 would end at 12, past the upper boundary.
+            result!.Select(i => (i!.low, i.high)).Should().Equal(
+                (1, 3),
+                (4, 6),
+                (7, 9));
+        }
+
+        [TestMethod]
+        public void ExpandSingleIntegerIntervalPer3()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand Interval[1, 10] per 3 '1'");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<int?>>(expand, lib);
+            result.Should().NotBeNull();
+            // The point form returns the starting point of each interval the list form would contribute.
+            result!.Should().Equal(1, 4, 7);
+        }
+
+        [TestMethod]
+        public void ExpandDecimalIntervalNarrowerThanPer()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[1.0, 1.2] } per 0.5");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<CqlInterval<decimal?>>>(expand, lib);
+            // The only candidate, [1.0, 1.49999999], ends past the upper boundary.
+            result.Should().NotBeNull().And.BeEmpty();
+        }
+
+        [TestMethod]
+        public void ExpandIntegerIntervalNarrowerThanPer()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[1, 10] } per 20 '1'");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<CqlInterval<int?>>>(expand, lib);
+            // The only candidate, [1, 20], ends past the upper boundary.
+            result.Should().NotBeNull().And.BeEmpty();
+        }
+
+        [TestMethod]
+        public void ExpandDateIntervalPer3DaysDoesNotDivide()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[@2018-01-01, @2018-01-04] } per 3 days");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<CqlInterval<CqlDate?>>>(expand, lib);
+            result.Should().NotBeNull();
+            // The candidate starting at @2018-01-04 would end at @2018-01-06, past the upper boundary.
+            result!.Select(i => (i!.low, i.high)).Should().Equal(
+                (new CqlDate(2018, 1, 1), new CqlDate(2018, 1, 3)));
+        }
+
+        [TestMethod]
+        public void ExpandDecimalIntervalPer0D5FinerBoundaries()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[1.00, 2.50] } per 0.5");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<CqlInterval<decimal?>>>(expand, lib);
+            result.Should().NotBeNull();
+            // Boundaries finer than per's scale are truncated to it and the intervals are emitted at that scale, so
+            // three intervals fit where the same range at per's own scale ([1.0, 2.0]) admits only two.
+            result!.Select(i => (i!.low, i.high)).Should().Equal(
+                (1.0m, 1.4m),
+                (1.5m, 1.9m),
+                (2.0m, 2.4m));
+        }
+
+        [TestMethod]
+        public void ExpandSingleDecimalIntervalPer1()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand Interval[1.0, 10.0] per 1 '1'");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<decimal?>>(expand, lib);
+            result.Should().NotBeNull();
+            // The boundaries are truncated to per's scale, so the point at the upper boundary still fits.
+            result!.Should().Equal(1.0m, 2.0m, 3.0m, 4.0m, 5.0m, 6.0m, 7.0m, 8.0m, 9.0m, 10.0m);
+        }
+
+        [TestMethod]
+        public void ExpandTimeIntervalPerHourWithMillisecondBoundaries()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[@T10:00:00.000, @T12:00:00.000] } per hour");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<CqlInterval<CqlTime?>>>(expand, lib);
+            result.Should().NotBeNull();
+            // Truncation to per precision does not depend on the boundaries having a remainder below the per unit,
+            // so the truncated upper boundary @T12 admits the interval starting at @T12.
+            result!.Select(i => (i!.low!.Value.ToString(), i.high!.Value.ToString())).Should().Equal(
+                ("10", "10"),
+                ("11", "11"),
+                ("12", "12"));
+        }
+
+        [TestMethod]
+        public void ExpandTimeIntervalPerHourTruncatesBoundaries()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[@T10:00, @T12:30] } per hour");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<CqlInterval<CqlTime?>>>(expand, lib);
+            result.Should().NotBeNull();
+            // Boundaries more precise than per are truncated to per precision before the end check, so the
+            // truncated upper boundary @T12 still admits the interval starting at @T12 (§9.B, expand).
+            result!.Select(i => (i!.low!.Value.ToString(), i.high!.Value.ToString())).Should().Equal(
+                ("10", "10"),
+                ("11", "11"),
+                ("12", "12"));
         }
 
         [TestMethod]
