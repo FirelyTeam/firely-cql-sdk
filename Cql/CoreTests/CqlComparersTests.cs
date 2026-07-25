@@ -9,6 +9,7 @@
 #nullable enable
 
 using Hl7.Cql.Comparers;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 
 namespace CoreTests;
@@ -236,10 +237,7 @@ public class CqlComparersTests
     // Regression tests for #1415: CqlQuantityCqlComparer.EquivalentValues used to return false as
     // soon as the two units weren't textually equivalent, even though CompareValues (and therefore
     // = and the comparison operators) already canonicalized via UCUM. Spec §9.B requires quantity
-    // equivalence to consider unit conversion.
-    // Note: GetHashCodeValue still hashes CqlQuantity.ToString(), so two quantities that are now
-    // equivalent (or equal) via unit conversion hash differently. That inconsistency predates this
-    // fix -- it applies equally to the = path -- and is deliberately left alone here.
+    // equivalence to consider unit conversion. The matching hash code fix is #1418, tested below.
 
     /// <summary>
     /// Different but convertible units with the same magnitude are equivalent -- the spec's own
@@ -346,5 +344,120 @@ public class CqlComparersTests
 
         Assert.IsTrue(comparers.Equivalent(new CqlQuantity(1m, "1"), new CqlQuantity(1m, "cm"), null));
         Assert.IsFalse(comparers.Equivalent(new CqlQuantity(2m, "1"), new CqlQuantity(1m, "cm"), null));
+    }
+
+    // Regression tests for #1418: GetHashCodeValue used to hash CqlQuantity.ToString(), which
+    // disagrees with both Equals and Equivalent. Quantities that differ only by unit conversion
+    // (1 'cm' / 0.01 'm') or by decimal scale (1.0 'cm' / 1.00 'cm') compare equal yet hashed into
+    // different buckets, so the HashSet-backed operators (Distinct, Union, Except) failed to
+    // deduplicate them. Unit conversion and scale are the whole of what a hash can cover here:
+    // equivalence rounds both operands to the least precise of the two, which is non-transitive
+    // (0.15 ~ 0.2 and 0.2 ~ 0.24, but 0.15 !~ 0.24) and so has no consistent hash, and the '1' unit
+    // compares equal against every other unit.
+
+    /// <summary>
+    /// The case from the issue: convertible units, equal per both <c>=</c> and <c>~</c>, so the
+    /// hash codes must agree too.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_ConvertibleUnitsSameMagnitude_HashCodesAgree()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, "cm");
+        var y = new CqlQuantity(0.01m, "m");
+
+        Assert.AreEqual(true, comparers.Equals(x, y, null));
+        Assert.AreEqual(comparers.GetHashCode(x), comparers.GetHashCode(y));
+    }
+
+    /// <summary>
+    /// Trailing zeros are not part of a decimal's value, and CQL comparison ignores them, so
+    /// same-unit quantities differing only in scale must hash alike -- <c>decimal.ToString()</c>
+    /// preserves the scale, which is how the old <c>ToString()</c>-based hash broke this.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_SameUnitDifferentDecimalScale_HashCodesAgree()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1.0m, "cm");
+        var y = new CqlQuantity(1.00m, "cm");
+
+        Assert.AreEqual(true, comparers.Equals(x, y, null));
+        Assert.AreEqual(comparers.GetHashCode(x), comparers.GetHashCode(y));
+    }
+
+    /// <summary>
+    /// A unit UCUM cannot canonicalize takes the fallback path, which must still scale-normalize
+    /// the value and must not throw. Quantities with a null value or unit reach
+    /// <c>GetHashCodeValue</c> too -- the comparer's <c>IsNull</c> only rejects a null
+    /// <see cref="CqlQuantity"/> reference, not a null <c>value</c>/<c>unit</c>.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_UncanonicalizableOrPartlyNull_HashesWithoutThrowing()
+    {
+        var comparers = new CqlComparers();
+
+        Assert.AreEqual(
+            comparers.GetHashCode(new CqlQuantity(1.0m, "widgets")),
+            comparers.GetHashCode(new CqlQuantity(1.00m, "widgets")));
+
+        Assert.AreEqual(
+            comparers.GetHashCode(new CqlQuantity(null, "widgets")),
+            comparers.GetHashCode(new CqlQuantity(null, "widgets")));
+
+        Assert.AreEqual(
+            comparers.GetHashCode(new CqlQuantity(1.0m, null)),
+            comparers.GetHashCode(new CqlQuantity(1.00m, null)));
+
+        Assert.AreEqual(
+            comparers.GetHashCode(new CqlQuantity(null, null)),
+            comparers.GetHashCode(new CqlQuantity(null, null)));
+    }
+
+    /// <summary>
+    /// Quantities that are not equal are still allowed to collide, but the everyday cases must not:
+    /// a different magnitude in the same unit, and the same magnitude in an incommensurable unit.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_UnequalQuantities_HashCodesDiffer()
+    {
+        var comparers = new CqlComparers();
+
+        Assert.AreNotEqual(
+            comparers.GetHashCode(new CqlQuantity(1.0m, "cm")),
+            comparers.GetHashCode(new CqlQuantity(1.01m, "cm")));
+
+        Assert.AreNotEqual(
+            comparers.GetHashCode(new CqlQuantity(1m, "cm")),
+            comparers.GetHashCode(new CqlQuantity(1m, "g")));
+    }
+
+    /// <summary>
+    /// End-to-end: <c>Distinct</c> puts every element through a <see cref="HashSet{T}"/> keyed on
+    /// the runtime comparer, so it only collapses unit-converted duplicates once the hash agrees
+    /// with equality.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_Distinct_DeduplicatesAcrossUnitConversionAndScale()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        var deduplicated = operators.Distinct<CqlQuantity>(
+        [
+            new CqlQuantity(1m, "cm"),
+            new CqlQuantity(0.01m, "m"),
+        ])!.ToList();
+
+        Assert.AreEqual(1, deduplicated.Count);
+
+        var scaleDeduplicated = operators.Distinct<CqlQuantity>(
+        [
+            new CqlQuantity(1.0m, "cm"),
+            new CqlQuantity(1.00m, "cm"),
+        ])!.ToList();
+
+        Assert.AreEqual(1, scaleDeduplicated.Count);
     }
 }

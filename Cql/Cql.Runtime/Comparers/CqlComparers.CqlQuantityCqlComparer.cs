@@ -78,7 +78,25 @@ partial class CqlComparers
 
         protected override int GetHashCodeValue(CqlQuantity value)
         {
-            return value.ToString()?.GetHashCode() ?? GetHashCodeForNull();
+            // Both equality (CompareValues) and equivalence (EquivalentValues) canonicalize units,
+            // so the hash has to be taken over the canonical form: 1 'cm' and 0.01 'm' are equal
+            // and must land in the same bucket for the HashSet-based operators (Distinct, Union,
+            // Except) to deduplicate them. Value normalization covers the same-unit case, where
+            // 1.0 'cm' and 1.00 'cm' are equal but have different decimal representations.
+            //
+            // Unit conversion and scale are all that can be covered here. Equivalence rounds both
+            // operands to the least precise of the two, which is not transitive (0.15 ~ 0.2 and
+            // 0.2 ~ 0.24, but 0.15 !~ 0.24) and therefore has no consistent hash; neither does the
+            // '1' unit, which compares equal against every other unit.
+            if (value.TryCanonicalize(out var canonical))
+                return combine(canonical!.value, canonical.unit);
+
+            // A unit UCUM cannot canonicalize -- and a quantity whose value or unit is null, which
+            // this comparer does not treat as a null quantity -- must still hash without throwing.
+            return combine(value.value, value.unit);
+
+            static int combine(decimal? quantityValue, string? unit) =>
+                HashCode.Combine(quantityValue is { } v ? NormalizeDecimalScale(v) : (decimal?)null, unit);
         }
     }
 }
