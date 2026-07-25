@@ -144,6 +144,8 @@ namespace Hl7.Cql.Fhir
             add((M.Integer c) => new M.UnsignedInt(c.Value));
             add((M.Integer c) => new M.PositiveInt(c.Value));
             add((M.Code c) => c.Value);
+            add((M.Code c) => new CqlCode { code = c.Value });
+            add((M.Coding c) => new CqlCode { code = c.Code, system = c.System, version = c.Version, display = c.Display });
             add((M.Date f) => f.TryToSystemDate(out var date) ? new CqlDate(date!.Years!.Value, date.Months, date.Days) : null);
             add((M.Date f) => f.TryToSystemDate(out var date) ? new CqlDateTime(date!.Years!.Value, date.Months, date.Days, 0, 0, 0, 0, 0, 0) : null);
             add((M.Date f) => f.ToString());
@@ -373,9 +375,32 @@ namespace Hl7.Cql.Fhir
                     return period;
                 }
             });
+            converter.AddConversion((CqlInterval<CqlTime> interval) =>
+            {
+                if (interval is null)
+                    return null;
+                else
+                {
+                    var period = new M.Period();
+                    if (interval.low is { } low)
+                    {
+                        period.StartElement = CqlTimeToFhirDateTime(low);
+                    }
+
+                    if (interval.high is { } high)
+                    {
+                        period.EndElement = CqlTimeToFhirDateTime(high);
+                    }
+                    return period;
+                }
+            });
             converter.AddConversion((CqlRatio f) => (f.denominator is not null && f.numerator is not null) ?
                 new M.Ratio(converter.Convert<M.Quantity>(f.numerator)!, converter.Convert<M.Quantity>(f.denominator)!) : null);
             converter.AddConversion((CqlCode f) => new M.Coding(f.system, f.code, f.display) { Version = f.version });
+            converter.AddConversion((CqlCode f) => new M.Code(f.code));
+            // In FHIR R4 the CQL Long type maps to a FHIR string (see CqlTypeToFhirTypeMapper);
+            // FHIR R5 hosts can convert to integer64 once that mapping is enabled.
+            converter.AddConversion<long, M.FhirString>(l => new M.FhirString(l.ToString(CultureInfo.InvariantCulture)));
             converter.AddConversion((CqlConcept f) => new M.CodeableConcept
             {
                 Coding = f.codes?.Select(c => new M.Coding(c.system, c.code, c.display) { Version = c.version }).ToList() ?? [],
@@ -384,6 +409,46 @@ namespace Hl7.Cql.Fhir
 
             return converter;
         }
+
+        // CQL Time values have no date component; anchor them on the minimum FHIR date
+        // (0001-01-01) so they can be represented within a Period.
+        private static M.FhirDateTime CqlTimeToFhirDateTime(CqlTime time)
+        {
+            var t = time.Value;
+            var dto = new DateTimeOffset(1, 1, 1, t.Hour, t.Minute ?? 0, t.Second ?? 0, t.Millisecond ?? 0, t.Offset);
+            return new M.FhirDateTime(dto);
+        }
+
+        /// <summary>
+        /// Converts a <see cref="CqlCode"/> to the most appropriate FHIR type: a bare <see cref="M.Code"/>
+        /// when only the code element is populated, otherwise a <see cref="M.Coding"/>.
+        /// </summary>
+        /// <param name="converter">the type converter</param>
+        /// <param name="code">the CQL code to convert, or <see langword="null"/></param>
+        /// <returns>a <see cref="M.Code"/> or <see cref="M.Coding"/>, or <see langword="null"/> when <paramref name="code"/> is <see langword="null"/></returns>
+        public static M.DataType? ConvertCqlCodeToFhir(this TypeConverter converter, CqlCode? code) =>
+            code switch
+            {
+                null => null,
+                { system: null, version: null, display: null } => converter.Convert<M.Code>(code),
+                _ => converter.Convert<M.Coding>(code)
+            };
+
+        /// <summary>
+        /// Converts a FHIR <see cref="M.Period"/> to a CQL interval, using the CQL point type name
+        /// (typically taken from the cqf-cqlType extension on a Library parameter, e.g. "Date" or "DateTime")
+        /// to disambiguate the otherwise ambiguous Period mapping.
+        /// </summary>
+        /// <param name="converter">the type converter</param>
+        /// <param name="period">the period to convert, or <see langword="null"/></param>
+        /// <param name="cqlPointTypeName">the CQL point type name; "Date" yields an Interval&lt;Date&gt;, anything else an Interval&lt;DateTime&gt;</param>
+        /// <returns>a <see cref="CqlInterval{CqlDate}"/> or <see cref="CqlInterval{CqlDateTime}"/>, or <see langword="null"/> when <paramref name="period"/> is <see langword="null"/></returns>
+        public static object? ConvertPeriodToCqlInterval(this TypeConverter converter, M.Period? period, string? cqlPointTypeName) =>
+            cqlPointTypeName switch
+            {
+                "Date" => converter.Convert<CqlInterval<CqlDate>>(period),
+                _ => converter.Convert<CqlInterval<CqlDateTime>>(period)
+            };
 
         internal static TypeConverter ConvertSystemTypes(this TypeConverter converter)
         {
