@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS1173FHIRDiagnosticDelayVTE", "1.0.000")]
 public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleton<CMS1173FHIRDiagnosticDelayVTE_1_0_000>
 {
@@ -484,7 +484,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
             bool? aa_ = context.Operators.Not((bool?)(o_ is null));
             bool? ab_ = context.Operators.And(z_, aa_);
             CqlDateTime ac_ = context.Operators.Add(o_ as CqlDateTime, w_);
-            CqlInterval<CqlDate> ad_ = context.Operators.Interval((CqlDate)o_, (CqlDate)((object)ac_), false, true);
+            CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(o_ as CqlDateTime, ac_ as CqlDateTime, false, true);
             CqlInterval<object> ae_ = context.Operators.Convert<CqlInterval<object>>(ad_);
             object af_ = ae_?.low;
             object ag_ = ae_?.high;
