@@ -688,9 +688,11 @@ namespace Hl7.Cql.Operators
                     var highBoundary = interval.high!.Value;
                     var perValue = per.value ?? 1m;
                     var usesDefaultDecimalUnit = string.IsNullOrEmpty(per.unit) || per.unit == "1";
+                    // Decimal.Scale is the number of digits after the decimal point, so a scale of 0 means the
+                    // per step is a whole number while the bounds still carry decimals.
                     var needsIntegerTruncation = usesDefaultDecimalUnit
-                        && perValue.GetScale() == 0
-                        && (listItem.GetScale() > 0 || highBoundary.GetScale() > 0);
+                        && perValue.Scale == 0
+                        && (listItem.Scale > 0 || highBoundary.Scale > 0);
 
                     if (needsIntegerTruncation)
                     {

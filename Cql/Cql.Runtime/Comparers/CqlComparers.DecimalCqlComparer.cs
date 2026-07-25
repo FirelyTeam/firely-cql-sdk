@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions.Infrastructure;
-
 namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
@@ -30,8 +28,9 @@ partial class CqlComparers
             [DisallowNull] decimal? y,
             string? precision)
         {
-            var @thisPrecision = x.Value.GetScale();
-            var otherPrecision = y.Value.GetScale();
+            // Decimal.Scale is the number of digits after the decimal point, counting trailing zeros.
+            var @thisPrecision = x.Value.Scale;
+            var otherPrecision = y.Value.Scale;
             if (@thisPrecision < otherPrecision)
                 y = decimal.Round(y.Value, thisPrecision);
             else if (thisPrecision > otherPrecision)

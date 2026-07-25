@@ -391,9 +391,9 @@ namespace Hl7.Cql.Fhir
         private static M.Quantity UnitlessQuantity(decimal value)
         {
             var quantity = new M.Quantity(value, "1");
-            // The extension's value is the bound's number of digits after the decimal point, which for a decimal
-            // is exactly its scale (so 1.50m yields 2, and the trailing zero survives even if the serializer drops it).
-            quantity.Extension.Add(new M.Extension(QuantityPrecisionExtensionUrl, new M.Integer(value.GetScale())));
+            // The extension's value is the bound's number of digits after the decimal point, which is exactly
+            // Decimal.Scale (so 1.50m yields 2, and the trailing zero survives even if the serializer drops it).
+            quantity.Extension.Add(new M.Extension(QuantityPrecisionExtensionUrl, new M.Integer(value.Scale)));
             return quantity;
         }
 
