@@ -12,7 +12,6 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         internal static Dictionary<string, string> DoesNotCompile = new()
         {
-            { "EquivEqCM1M01", "Mixed unit equivalence is not supported." },
             { "Multiply1CMBy2CM", "Unit arithmetic is not supported." },
             { "TruncatedDivide10d1ByNeg3D1Quantity", "Unit arithmetic is not supported." },
 
@@ -27,20 +26,15 @@ namespace Hl7.Cql.CqlToElm.Test
             { "NotEqual123AndABC",  "Equal is not defined for two disparate list types." },
             { "NotEqual123AndString123",  "Equal is not defined for two disparate list types." },
 
-            { "CodeToConcept1", "The expectation requires ListPromotion to be enabled to evaluate properly." },
+            { "CodeToConcept1", "Expectation throws NotImplementedException in VisitInstanceSelector: coercing 'codes:' from a single Code needs ListPromotion." },
 
             { "Decimal10Pow28ToZeroOneStepDecimalMaxValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
             { "DecimalPos10Pow28ToZeroOneStepDecimalMaxValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
             { "DecimalNeg10Pow28ToZeroOneStepDecimalMinValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
 
-            { "ExpandPer0D1", "Not working" },
-            { "ExpandIntervalPer2", "Not working" },
+            { "ExpandPer0D1", "Compiles, but hangs at runtime: Expand of an integer interval with a decimal per loops forever." },
 
-            { "TestExceptNull", "This is ambiguous with every valid interval overload." },
-
-            { "DescendentsEmptyList", "Not implemented" },
-
-            { "ReplaceMatchesSpaces", "The first argument should have four backslashes instead of 2" }
+            { "TestExceptNull", "This is ambiguous with every valid interval overload." }
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
@@ -56,18 +50,8 @@ namespace Hl7.Cql.CqlToElm.Test
             { "DateTimeUncertain", "We don't support uncertainty" },
             { "DecimalMaxValue", "Our implementation returns a larger value" },
             { "DecimalMinValue", "Our implementation returns a smaller value" },
-            { "DecimalNegOneStep", "Power returns integers, not decimals" },
-            { "DecimalNegTenStep", "Power returns integers, not decimals" },
-            { "DecimalNegTwoStep", "Power returns integers, not decimals" },
-            { "DecimalOneStep", "Power returns integers, not decimals" },
-            { "DecimalPosOneStep", "Power returns integers, not decimals" },
-            { "DecimalPosTenStep", "Power returns integers, not decimals" },
-            { "DecimalPosTwoStep", "Power returns integers, not decimals" },
-            { "DecimalTenStep", "Power returns integers, not decimals" },
-            { "DecimalTwoStep", "Power returns integers, not decimals" },
-            { "Power2ToNeg2", "Power returns integers, not decimals" },
-            { "ProperContainsTimeNull", "There is no spec language justifying null instead of false" },
-            { "ProperInTimeNull", "There is no spec language justifying null instead of false" },
+            { "EquivEqCM1M01", "Returns false: CqlQuantityCqlComparer.EquivalentValues does not canonicalize UCUM units like CompareValues does." },
+            { "ReplaceMatchesSpaces", "Returns 'All\\$that...': .NET keeps backslash escapes in the Regex.Replace substitution literally, unlike Java's Matcher." },
             { "SortDatesAsc", "Sort tests shouldn't contain differing precision" },
             { "SortDatesDesc", "Sort tests shouldn't contain differing precision" },
         };
