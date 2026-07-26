@@ -51,9 +51,15 @@ partial class CqlComparers
                 return valueComparison;
             }
 
-            throw new NotSupportedException(
-                $"Comparison against unlike units {x.unit} and {y.unit} is not supported. The units are either not "
-                + "convertible to a common UCUM base unit, or measure different base quantities.");
+            // Spec §9.B, stated identically for Equal, Less, Greater, LessOrEqual, GreaterOrEqual
+            // and between: "For comparisons involving quantities, the dimensions of each quantity
+            // must be the same, but not necessarily the unit. [...] Attempting to operate on
+            // quantities with invalid units will result in a null." Units that do not reduce to a
+            // shared base unit -- incommensurable ('cm' vs 'g') or not valid UCUM at all -- make
+            // the comparison unknown, not an error: real measure logic compares dirty clinical
+            // data (a '%' against a '/min'), which must degrade to null rather than abort the
+            // evaluation of the whole define.
+            return null;
         }
 
         protected override bool EquivalentValues(
@@ -70,9 +76,10 @@ partial class CqlComparers
 
             // Spec §9.B: quantity equivalence considers unit conversion, so normalize the units
             // using UCUM and redo the comparison. The canonical units must agree for the same
-            // reason they must in CompareValues, but where that method signals an error,
-            // equivalence never may: units that cannot be canonicalized, or that canonicalize to
-            // different base metrics (incommensurable), are simply not equivalent.
+            // reason they must in CompareValues, but where that method answers null, equivalence
+            // never may -- it "will always return true or false": units that cannot be
+            // canonicalized, or that canonicalize to different base metrics (incommensurable), are
+            // simply not equivalent (spec example: 3.5 'cm2' ~ 3.5 'cm' is false).
             if (x.TryCanonicalize(out var left1)
                 && y.TryCanonicalize(out var right1)
                 && left1!.unit == right1!.unit)

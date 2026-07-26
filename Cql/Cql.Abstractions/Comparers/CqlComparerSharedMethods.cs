@@ -10,7 +10,23 @@ namespace Hl7.Cql.Comparers;
 
 internal static class CqlComparerSharedMethods
 {
-    public static bool CqlComparisonToEquivalence(int? cqlComparisonResult) => cqlComparisonResult is null or 0;
+    /// <summary>
+    /// Maps the result of a comparison onto equivalence, for the comparers and primitives that
+    /// answer equivalence by reusing their comparison implementation.
+    /// </summary>
+    /// <remarks>
+    /// A null comparison means the two values could not be ordered, and maps to <c>false</c>:
+    /// equivalence "will always return true or false" (spec §9.B, Equivalent), so there is nothing
+    /// else it could become. Every call site wants exactly that. The comparers reach here with
+    /// operands already known non-null, so a null can only mean incomparable -- quantities whose
+    /// units share no base unit, which the same section makes <c>false</c> (<c>3.5 'cm2' ~ 3.5
+    /// 'cm'</c>). <see cref="Hl7.Cql.Primitives.CqlDate"/>/<see cref="Hl7.Cql.Primitives.CqlTime"/>/
+    /// <see cref="Hl7.Cql.Primitives.CqlDateTime"/> reach here with a null from insufficient precision,
+    /// which the same section also makes <c>false</c>: "if one input has a value for a given
+    /// precision and the other does not, the comparison stops and the result is false, rather than
+    /// null" (<c>@2012-01-01 ~ @2012-01-01T12</c> is false).
+    /// </remarks>
+    public static bool CqlComparisonToEquivalence(int? cqlComparisonResult) => cqlComparisonResult is 0;
 
     public static int? CompareTemporalIntegers(int? x, int? y) =>
         x is null || y is null
