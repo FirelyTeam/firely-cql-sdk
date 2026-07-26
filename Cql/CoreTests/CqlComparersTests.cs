@@ -566,14 +566,13 @@ public class CqlComparersTests
     }
 
     /// <summary>
-    /// A list of quantities: equivalence propagates the element-level false, but <c>ListEqual</c>
-    /// treats a null element comparison as "not known unequal" and reports the lists equal instead
-    /// of null. That is a pre-existing gap in <c>ListEqual</c>'s three-valued logic -- it only ever
-    /// short-circuits on <c>is false</c> -- and not something the quantity comparer can influence;
-    /// pinned here so the difference against the scalar and interval cases above is on the record.
+    /// A list of quantities: equivalence propagates the element-level false, and <c>ListEqual</c>
+    /// propagates a null element comparison as null -- the lists are neither equal nor known
+    /// unequal, matching the scalar and interval cases above. A known-unequal element still wins
+    /// over an unknown one: false short-circuits the three-valued conjunction.
     /// </summary>
     [TestMethod]
-    public void CqlListOfQuantity_IncommensurableElements_EquivalenceIsFalse_AndEqualityDoesNotPropagateNull()
+    public void CqlListOfQuantity_IncommensurableElements_EquivalenceIsFalse_AndEqualityIsNull()
     {
         var operators = FhirCqlContext.WithDataSource().Operators;
 
@@ -581,7 +580,14 @@ public class CqlComparersTests
         CqlQuantity[] grams = [new CqlQuantity(0.01m, "g")];
 
         Assert.AreEqual(false, operators.Equivalent(centimeters, grams));
-        Assert.AreEqual(true, operators.ListEqual(centimeters, grams));
+        Assert.IsNull(operators.ListEqual(centimeters, grams));
+        Assert.IsNull(operators.ListNotEqual(centimeters, grams));
+
+        // False beats null in the conjunction: a known-unequal element makes the lists unequal
+        // even when another element comparison is unknown.
+        CqlQuantity[] mixedLeft = [new CqlQuantity(1m, "cm"), new CqlQuantity(1m, "cm")];
+        CqlQuantity[] mixedRight = [new CqlQuantity(0.01m, "g"), new CqlQuantity(2m, "cm")];
+        Assert.AreEqual(false, operators.ListEqual(mixedLeft, mixedRight));
     }
 
     /// <summary>
