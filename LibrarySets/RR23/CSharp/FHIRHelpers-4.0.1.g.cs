@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.3.0")]
 [CqlLibrary("FHIRHelpers", "4.0.1")]
 public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
 {
@@ -49,7 +49,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 CqlDateTime e_ = context.Operators.Convert<CqlDateTime>(d_);
                 CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, true, true);
                 return f_;
-            };
+            }
         }
 
         return a_();
@@ -73,7 +73,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 CqlQuantity e_ = this.ToQuantity(context, d_ as Quantity);
                 CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, true, true);
                 return f_;
-            };
+            }
         }
 
         return a_();
@@ -96,7 +96,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 FhirString d_ = quantity?.UnitElement;
                 string e_ = d_?.Value;
                 return new CqlQuantity(c_, e_);
-            };
+            }
         }
 
         return a_();
@@ -119,7 +119,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 Quantity d_ = ratio?.Denominator;
                 CqlQuantity e_ = this.ToQuantity(context, d_);
                 return new CqlRatio(c_, e_);
-            };
+            }
         }
 
         return a_();
@@ -146,7 +146,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 FhirString h_ = coding?.DisplayElement;
                 string i_ = h_?.Value;
                 return new CqlCode(c_, e_, g_, i_);
-            };
+            }
         }
 
         return a_();
@@ -176,7 +176,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 FhirString f_ = concept?.TextElement;
                 string g_ = f_?.Value;
                 return new CqlConcept(e_, g_);
-            };
+            }
         }
 
         return a_();

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -16,12 +17,15 @@ using Hl7.Cql.ValueSets;
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
-/// Processes a definition dictionary of <see cref="LambdaExpression"/> into a .NET classes per library.
+/// Processes a definition dictionary of <see cref="CqlDefinition"/> into a .NET class per
+/// library: the class scaffolding (usings, regions, attributes, tuple-metadata fields,
+/// singleton/ILibrary boilerplate), with the lambda bodies produced by
+/// <see cref="CSharpEmitter"/>.
 /// </summary>
 internal partial class LibrarySetCSharpCodeGenerator
 {
     /// <summary>
-    /// Processes a definition dictionary of <see cref="LambdaExpression"/> into a .NET classes per library.
+    /// Processes a definition dictionary of <see cref="CqlDefinition"/> into a .NET class per library.
     /// </summary>
     public LibrarySetCSharpCodeGenerator(
         TypeResolver typeResolver,
@@ -96,9 +100,9 @@ internal partial class LibrarySetCSharpCodeGenerator
         return librarySetWriter.GenerateEachLibraryToCSharp(buildExceptionHandlingStrategy, onBeforeProcessLibrary);
     }
 
-    private static (string quotedName, string methodName, string fieldName) GetMemberNames(CqlDefinition cqlDefinition)
+    private static (string quotedName, string methodName, string fieldName) GetMemberNames(CqlDefinition definition)
     {
-        var name = cqlDefinition.Name;
+        var name = definition.Name;
         string quotedName = name.QuoteString();
         string methodName = IdentifierNormalizer.Normalize(name);
         string fieldName = IdentifierNormalizer.Normalize($"_{name}");

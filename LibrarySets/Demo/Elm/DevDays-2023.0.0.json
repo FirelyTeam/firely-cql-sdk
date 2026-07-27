@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "4.6.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       } ],
@@ -372,10 +372,6 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}dateTime",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
                                     "name" : "{http://hl7.org/fhir}Age",
                                     "annotation" : [ ]
                                  }, {
@@ -385,6 +381,10 @@
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{http://hl7.org/fhir}Range",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}dateTime",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -647,10 +647,6 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}dateTime",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
                                     "name" : "{http://hl7.org/fhir}Age",
                                     "annotation" : [ ]
                                  }, {
@@ -660,6 +656,10 @@
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{http://hl7.org/fhir}Range",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}dateTime",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",

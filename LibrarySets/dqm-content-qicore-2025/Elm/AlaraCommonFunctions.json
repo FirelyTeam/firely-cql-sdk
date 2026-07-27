@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "4.6.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       }, {
@@ -1936,7 +1936,7 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
@@ -1944,35 +1944,27 @@
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}String",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "annotation" : [ ]
                            }, {
-                              "type" : "IntervalTypeSpecifier",
-                              "annotation" : [ ],
-                              "pointType" : {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "annotation" : [ ]
-                              }
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
                               "name" : "{urn:hl7-org:elm-types:r1}Ratio",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}Time",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "name" : "{urn:hl7-org:elm-types:r1}Time",
                               "annotation" : [ ]
                            }, {
                               "type" : "IntervalTypeSpecifier",
@@ -1980,6 +1972,14 @@
                               "pointType" : {
                                  "type" : "NamedTypeSpecifier",
                                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "type" : "IntervalTypeSpecifier",
+                              "annotation" : [ ],
+                              "pointType" : {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "annotation" : [ ]
                               }
                            } ]
@@ -2412,15 +2412,7 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "name" : "{http://hl7.org/fhir}SampledData",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -2428,31 +2420,31 @@
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
                                        "annotation" : [ ]
                                     }, {
-                                       "type" : "IntervalTypeSpecifier",
-                                       "annotation" : [ ],
-                                       "pointType" : {
-                                          "type" : "NamedTypeSpecifier",
-                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                          "annotation" : [ ]
-                                       }
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}Ratio",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}SampledData",
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}Time",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "IntervalTypeSpecifier",
@@ -2460,6 +2452,14 @@
                                        "pointType" : {
                                           "type" : "NamedTypeSpecifier",
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "annotation" : [ ]
+                                       }
+                                    }, {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "pointType" : {
+                                          "type" : "NamedTypeSpecifier",
+                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                           "annotation" : [ ]
                                        }
                                     } ]
@@ -2526,15 +2526,7 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "name" : "{http://hl7.org/fhir}SampledData",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -2542,31 +2534,31 @@
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "annotation" : [ ]
                                  }, {
-                                    "type" : "IntervalTypeSpecifier",
-                                    "annotation" : [ ],
-                                    "pointType" : {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "annotation" : [ ]
-                                    }
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}Ratio",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}SampledData",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}Time",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "IntervalTypeSpecifier",
@@ -2574,6 +2566,14 @@
                                     "pointType" : {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "pointType" : {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                        "annotation" : [ ]
                                     }
                                  } ]
@@ -2864,15 +2864,7 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "name" : "{http://hl7.org/fhir}SampledData",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -2880,31 +2872,31 @@
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
                                        "annotation" : [ ]
                                     }, {
-                                       "type" : "IntervalTypeSpecifier",
-                                       "annotation" : [ ],
-                                       "pointType" : {
-                                          "type" : "NamedTypeSpecifier",
-                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                          "annotation" : [ ]
-                                       }
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}Ratio",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}SampledData",
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}Time",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "IntervalTypeSpecifier",
@@ -2912,6 +2904,14 @@
                                        "pointType" : {
                                           "type" : "NamedTypeSpecifier",
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "annotation" : [ ]
+                                       }
+                                    }, {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "pointType" : {
+                                          "type" : "NamedTypeSpecifier",
+                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                           "annotation" : [ ]
                                        }
                                     } ]
@@ -2978,15 +2978,7 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "name" : "{http://hl7.org/fhir}SampledData",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -2994,31 +2986,31 @@
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "annotation" : [ ]
                                  }, {
-                                    "type" : "IntervalTypeSpecifier",
-                                    "annotation" : [ ],
-                                    "pointType" : {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "annotation" : [ ]
-                                    }
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}Ratio",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}SampledData",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}Time",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "IntervalTypeSpecifier",
@@ -3026,6 +3018,14 @@
                                     "pointType" : {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "pointType" : {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                        "annotation" : [ ]
                                     }
                                  } ]
@@ -4615,7 +4615,7 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
@@ -4623,35 +4623,27 @@
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}String",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "annotation" : [ ]
                            }, {
-                              "type" : "IntervalTypeSpecifier",
-                              "annotation" : [ ],
-                              "pointType" : {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "annotation" : [ ]
-                              }
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
                               "name" : "{urn:hl7-org:elm-types:r1}Ratio",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}Time",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "name" : "{urn:hl7-org:elm-types:r1}Time",
                               "annotation" : [ ]
                            }, {
                               "type" : "IntervalTypeSpecifier",
@@ -4659,6 +4651,14 @@
                               "pointType" : {
                                  "type" : "NamedTypeSpecifier",
                                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "type" : "IntervalTypeSpecifier",
+                              "annotation" : [ ],
+                              "pointType" : {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "annotation" : [ ]
                               }
                            } ]
@@ -5090,15 +5090,7 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "name" : "{http://hl7.org/fhir}SampledData",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -5106,31 +5098,31 @@
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
                                        "annotation" : [ ]
                                     }, {
-                                       "type" : "IntervalTypeSpecifier",
-                                       "annotation" : [ ],
-                                       "pointType" : {
-                                          "type" : "NamedTypeSpecifier",
-                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                          "annotation" : [ ]
-                                       }
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}Ratio",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}SampledData",
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}Time",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "IntervalTypeSpecifier",
@@ -5138,6 +5130,14 @@
                                        "pointType" : {
                                           "type" : "NamedTypeSpecifier",
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "annotation" : [ ]
+                                       }
+                                    }, {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "pointType" : {
+                                          "type" : "NamedTypeSpecifier",
+                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                           "annotation" : [ ]
                                        }
                                     } ]
@@ -5204,15 +5204,7 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "name" : "{http://hl7.org/fhir}SampledData",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -5220,31 +5212,31 @@
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "annotation" : [ ]
                                  }, {
-                                    "type" : "IntervalTypeSpecifier",
-                                    "annotation" : [ ],
-                                    "pointType" : {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "annotation" : [ ]
-                                    }
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}Ratio",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}SampledData",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}Time",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "IntervalTypeSpecifier",
@@ -5252,6 +5244,14 @@
                                     "pointType" : {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "pointType" : {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                        "annotation" : [ ]
                                     }
                                  } ]
@@ -5541,15 +5541,7 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "name" : "{http://hl7.org/fhir}SampledData",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -5557,31 +5549,31 @@
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
                                        "annotation" : [ ]
                                     }, {
-                                       "type" : "IntervalTypeSpecifier",
-                                       "annotation" : [ ],
-                                       "pointType" : {
-                                          "type" : "NamedTypeSpecifier",
-                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                          "annotation" : [ ]
-                                       }
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                       "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}Ratio",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}SampledData",
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}Time",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "IntervalTypeSpecifier",
@@ -5589,6 +5581,14 @@
                                        "pointType" : {
                                           "type" : "NamedTypeSpecifier",
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "annotation" : [ ]
+                                       }
+                                    }, {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "pointType" : {
+                                          "type" : "NamedTypeSpecifier",
+                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                           "annotation" : [ ]
                                        }
                                     } ]
@@ -5655,15 +5655,7 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "name" : "{http://hl7.org/fhir}SampledData",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -5671,31 +5663,31 @@
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "annotation" : [ ]
                                  }, {
-                                    "type" : "IntervalTypeSpecifier",
-                                    "annotation" : [ ],
-                                    "pointType" : {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "annotation" : [ ]
-                                    }
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}Ratio",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}SampledData",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}Time",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "IntervalTypeSpecifier",
@@ -5703,6 +5695,14 @@
                                     "pointType" : {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "pointType" : {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                        "annotation" : [ ]
                                     }
                                  } ]

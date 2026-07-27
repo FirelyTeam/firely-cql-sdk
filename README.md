@@ -15,7 +15,7 @@ The SDK targets **.NET 8 (LTS)** and **.NET 10 (LTS)** to provide optimal perfor
 
 ## Release Notes
 
-This is release version 2.9.2 of the engine.
+This is release version 2.10.0 of the engine.
 
 The release notes at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version document changes and known issues.
 
@@ -109,7 +109,7 @@ The SDK depends on the following key external packages:
 ### Parsing & Compilation
 
 - **Antlr4.Runtime.Standard**: Version 4.13.1 - ANTLR4 runtime for CQL grammar parsing
-- **Microsoft.CodeAnalysis.CSharp**: Version 4.12.0 - Roslyn C# compiler APIs
+- **Microsoft.CodeAnalysis.CSharp**: Version 5.3.0 - Roslyn C# compiler APIs
 
 ### Configuration & Logging
 

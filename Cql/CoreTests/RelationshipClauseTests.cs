@@ -68,6 +68,19 @@ public class RelationshipClauseTests
                   such that R1 = 10 * S
                 with "Related" R2
                   such that R2 > 10 * S
+
+            define "With Clause Promotes Singleton Source":
+              from "Sources" S
+                with (10 * S) R
+                  such that R = 10 * S
+
+            define "Multi Source With Clause":
+              from
+                "Sources" S,
+                "Related" T
+                with "Related" R
+                  such that R = T and R = 10 * S
+                return T
             """);
         _libraryIdentifier = cqlLibrary.LibraryIdentifier;
         _invoker = new CqlToolkit()
@@ -116,5 +129,17 @@ public class RelationshipClauseTests
     {
         // 1 matches R1 = 10 and R2 in { 20, 30 }; 2 matches R1 = 20 and R2 = 30; 3 matches R1 = 30 but no R2.
         Invoke("Multiple With Clauses").Should().Equal(1, 2);
+    }
+
+    [TestMethod]
+    public void With_PromotesSingletonRelationshipSource()
+    {
+        Invoke("With Clause Promotes Singleton Source").Should().Equal(1, 2, 3);
+    }
+
+    [TestMethod]
+    public void With_InMultiSourceQuery_UsesOuterAliases()
+    {
+        Invoke("Multi Source With Clause").Should().Equal(10, 20, 30);
     }
 }

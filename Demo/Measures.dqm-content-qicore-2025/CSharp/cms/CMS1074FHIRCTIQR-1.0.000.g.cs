@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS1074FHIRCTIQR", "1.0.000")]
 public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIRCTIQR_1_0_000>
 {
@@ -109,12 +109,12 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
             Date p_ = o_?.BirthDateElement;
             string q_ = p_?.Value;
             CqlDate r_ = context.Operators.ConvertStringToDate(q_);
-            CqlDateTime t_ = context.Operators.Start(l_);
-            CqlDate u_ = context.Operators.DateFrom(t_);
-            int? v_ = context.Operators.CalculateAgeAt(r_, u_, "year");
-            bool? w_ = context.Operators.GreaterOrEqual(v_, 18);
-            bool? x_ = context.Operators.And(n_, w_);
-            return x_;
+            CqlDateTime s_ = context.Operators.Start(l_);
+            CqlDate t_ = context.Operators.DateFrom(s_);
+            int? u_ = context.Operators.CalculateAgeAt(r_, t_, "year");
+            bool? v_ = context.Operators.GreaterOrEqual(u_, 18);
+            bool? w_ = context.Operators.And(n_, v_);
+            return w_;
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -207,13 +207,11 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
                 CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, s_);
                 bool? u_ = context.Operators.In<CqlDateTime>(r_, t_, (string)default);
                 bool? v_ = context.Operators.And(n_, u_);
-                object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                CqlInterval<CqlDateTime> y_ = QICoreCommon_4_0_000.Instance.toInterval(context, x_);
-                CqlDateTime z_ = context.Operators.End(y_);
-                CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
-                bool? ab_ = context.Operators.In<CqlDateTime>(z_, aa_, "day");
-                bool? ac_ = context.Operators.And(v_, ab_);
-                return ac_;
+                CqlDateTime w_ = context.Operators.End(q_);
+                CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+                bool? y_ = context.Operators.In<CqlDateTime>(w_, x_, "day");
+                bool? z_ = context.Operators.And(v_, y_);
+                return z_;
             }
 
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);

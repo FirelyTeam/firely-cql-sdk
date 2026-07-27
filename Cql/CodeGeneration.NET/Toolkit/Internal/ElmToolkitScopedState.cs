@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -13,7 +13,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 
 internal sealed class ElmToolkitScopedState(IServiceScope scope) : IDisposable
 {
-    public LibrarySetExpressionBuilder LibrarySetExpressionBuilder { get; } = scope.ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
+    public LibrarySetCodeBuilder LibrarySetCodeBuilder { get; } = scope.ServiceProvider.GetRequiredService<LibrarySetCodeBuilder>();
 
     public void Dispose() => scope.Dispose();
 }

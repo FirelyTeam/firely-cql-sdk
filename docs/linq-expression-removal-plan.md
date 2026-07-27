@@ -1,17 +1,29 @@
 # Replacing System.Linq.Expressions with a typed IR
 
-Status: **phases 0–1 merged** ([#1311](https://github.com/FirelyTeam/firely-cql-sdk/pull/1311));
-phases 2–4 implemented and in review as a stacked PR chain
+Status: **all phases complete.** Phases 0–1 merged to develop
+([#1311](https://github.com/FirelyTeam/firely-cql-sdk/pull/1311)); phases 2–5 merged to
+`feature/linq-expr-removal` as a stacked PR chain
 ([#1331](https://github.com/FirelyTeam/firely-cql-sdk/pull/1331) →
 [#1340](https://github.com/FirelyTeam/firely-cql-sdk/pull/1340) →
-[#1344](https://github.com/FirelyTeam/firely-cql-sdk/pull/1344), aggregating onto
-`feature/linq-expr-removal`); phase 5 in progress — the RR23 and dqm-content-qicore-2025
-(CMS56) golden corpora are byte-identical between pipelines, but regenerating the larger
-HEDIS 2025 corpus surfaced two blocking bugs in the IR pipeline
-([#1361](https://github.com/FirelyTeam/firely-cql-sdk/issues/1361),
-[#1362](https://github.com/FirelyTeam/firely-cql-sdk/issues/1362)) — see "Findings from
-phase 5" below. Golden parity is not yet proven; do not flip the default until both are
-fixed and HEDIS 2025 is added as a permanent golden corpus.
+[#1344](https://github.com/FirelyTeam/firely-cql-sdk/pull/1344) →
+[#1346](https://github.com/FirelyTeam/firely-cql-sdk/pull/1346) →
+[#1378](https://github.com/FirelyTeam/firely-cql-sdk/pull/1378) →
+[#1392](https://github.com/FirelyTeam/firely-cql-sdk/pull/1392) →
+[#1394](https://github.com/FirelyTeam/firely-cql-sdk/pull/1394)) with golden parity proven
+byte-identical between pipelines on all three corpora: RR23, dqm-content-qicore-2025
+(CMS56), and the complete HEDIS 2025 corpus (382 libraries; the two HEDIS-surfaced blocking
+bugs [#1361](https://github.com/FirelyTeam/firely-cql-sdk/issues/1361) /
+[#1362](https://github.com/FirelyTeam/firely-cql-sdk/issues/1362) fixed, six cosmetic
+divergence classes aligned — see the post-parity ledger). Phase 6 then deleted the
+Expression-based pipeline outright (−8,097 lines): the `UseIrPipeline` flag is gone (never
+released, so removed rather than deprecated), the typed IR is the only pipeline, and every
+test suite plus the HEDIS compile-all guard runs through it. `GeneratedCodeAttribute`'s
+tool version was **not** bumped — a deliberate deviation from the plan below, since the
+IR pipeline's output is byte-identical to the old writer's. The old pipeline's parity
+reference is its final commit,
+[`85207efd5`](https://github.com/FirelyTeam/firely-cql-sdk/commit/85207efd5). What remains
+is merging `feature/linq-expr-removal` to develop and the deferred post-parity cleanups
+(checklist below).
 
 ## Context
 
@@ -33,7 +45,7 @@ ELM → C# → assembly path. Meanwhile the Expression layer costs us:
 **Current pipeline:**
 
 ```
-ELM → ExpressionBuilderContext (~2,460 lines, switch over ELM nodes)
+ELM → CodeBuilderContext (~2,460 lines, switch over ELM nodes)
     → Linq Expression tree (+ 5 custom Expression subclasses)
     → 4 visitor passes
     → LambdaDefinitionWriter (~770 lines) → C# text
@@ -65,7 +77,7 @@ contortions, `ParameterExpression` identity quirks, the visitor pipeline).
 ## Target architecture
 
 ```
-ELM → ExpressionBuilderContext (ported, same dispatch shape) → typed IR (nodes carry System.Type)
+ELM → CodeBuilderContext (ported, same dispatch shape) → typed IR (nodes carry System.Type)
     → DefinitionDictionary<CqlDefinition> (decoupled from Expression)
     → CSharpEmitter (statement-aware printer; replaces 4 visitors + LambdaDefinitionWriter)
     → C# text → AssemblyCompiler (unchanged)
@@ -132,11 +144,11 @@ standalone fixes.
 |---|---|---|
 | 0 | Delete dead visitors; golden regeneration tests over `LibrarySets\` corpora | ✅ merged (#1311) |
 | 1 | Decouple tests from `Expression.Compile()`; cache metadata references in `AssemblyCompiler` | ✅ merged (#1311) |
-| 2 | Typed IR nodes + validating factories; `CSharpEmitter` reproducing current output | ✅ in review (#1331) |
-| 3 | Port `CqlOperatorsBinder` + partials onto the IR (algorithm unchanged) | ✅ in review (#1340) |
-| 4 | Port `ExpressionBuilderContext` + partials (FHIRHelpers workarounds, choice types, query machinery) | ✅ in review (#1344) |
-| 5 | Dual-pipeline flag, golden diffs across all corpora + full suites, flip default | 🚧 blocked on [#1361](https://github.com/FirelyTeam/firely-cql-sdk/issues/1361), [#1362](https://github.com/FirelyTeam/firely-cql-sdk/issues/1362) |
-| 6 | Delete the Expression-based builder/binder/visitors/custom expressions; bump generator version | |
+| 2 | Typed IR nodes + validating factories; `CSharpEmitter` reproducing current output | ✅ merged into feature branch ([#1331](https://github.com/FirelyTeam/firely-cql-sdk/pull/1331)) |
+| 3 | Port `CqlOperatorsBinder` + partials onto the IR (algorithm unchanged) | ✅ merged into feature branch ([#1340](https://github.com/FirelyTeam/firely-cql-sdk/pull/1340)) |
+| 4 | Port `CodeBuilderContext` + partials (FHIRHelpers workarounds, choice types, query machinery) | ✅ merged into feature branch ([#1344](https://github.com/FirelyTeam/firely-cql-sdk/pull/1344)) |
+| 5 | Dual-pipeline flag, golden diffs across all corpora + full suites, flip default | ✅ merged into feature branch; parity proven on RR23 + CMS56 + HEDIS 2025 ([#1346](https://github.com/FirelyTeam/firely-cql-sdk/pull/1346), [#1378](https://github.com/FirelyTeam/firely-cql-sdk/pull/1378)) |
+| 6 | Delete the Expression-based builder/binder/visitors/custom expressions; cleanup | ✅ merged into feature branch ([#1392](https://github.com/FirelyTeam/firely-cql-sdk/pull/1392), [#1394](https://github.com/FirelyTeam/firely-cql-sdk/pull/1394)); generator version intentionally unchanged because output stayed byte-identical |
 
 Post-parity cleanups (once the old pipeline is gone and byte-identical output no longer
 constrains the emitter): multi-branch conditionals whose branches are all simple can print as
@@ -145,10 +157,22 @@ fallback for branches that hoist locals), and the printing backend itself is swa
 emitting Roslyn syntax trees from the IR for normalized formatting. The phase-5 grind added
 several faithfully-replicated old quirks worth revisiting (all documented at their emitter
 sites): duplicate eliminations burn a letter from the naming sequence (visible gaps);
-the multi-branch conditional form carries a stray `;` after its final else block; and
-redundant `as object` casts survive only when they wrap another cast — an accident of the
-old visitor ordering (`ElmAsExpression` reduced after `RedundantCastsTransformer` ran),
-not a design choice.
+the multi-branch conditional form carries a stray `;` after its final else block;
+redundant `as object` casts survive exactly when they were built from the ELM
+`as`/`cast` operator (tracked via `CodeCast.FromCqlAsOperator`) — an accident of the old
+visitor ordering (`ElmAsExpression` reduced only at print time, after
+`RedundantCastsTransformer`'s single pass), not a design choice; a binary expression's
+RIGHT operand is never parenthesized (`g_ ?? h_ as IEnumerable<...>`) — the old
+`BuildBinaryExpression` only guarded the left side, a latent precedence hazard replicated
+for parity; lambda-parameter alias names print verbatim with NO collision handling — the
+old pipeline never renamed parameters, so a repeated alias prints repeated (#1343) and a
+nested lambda's alias shadows an ancestor's (HEDIS PCR_Details' nested `stay` lambdas),
+legal C# only because local functions may shadow; a when-condition that is itself a
+non-simple conditional prints fully inline, branches and all (the old trial visit counted
+the whole hoisted case-lambda as a single assignment). One deliberate DEVIATION from the
+old pipeline (no corpus exercises it): a CQL alias that is a C# keyword falls back to a
+generated name, where the old writer printed a non-compiling `@keyword`-escaped
+declaration with unescaped references.
 
 ### Findings from phases 2–4
 
@@ -156,9 +180,9 @@ not a design choice.
   retrieves, FHIR property null-propagation, definition/function calls) required **zero new
   node kinds** and left no unresolved `FIXME(phase4-review)` markers — the ~18 kinds designed
   in phase 2 from the `Expression.*` usage survey were sufficient. The first end-to-end
-  execution of the new pipeline (ten CQL constructs, `IrPipelineTests`) passed without a
+  execution of the new pipeline (ten CQL constructs, `CodeModelPipelineTests`) passed without a
   single builder fix.
-- **Complication #3 (variable identity) was cheaper than predicted.** `IrLocal` reference
+- **Complication #3 (variable identity) was cheaper than predicted.** `CodeLocal` reference
   identity slotted in mechanically for `ParameterExpression` identity; the only subtlety
   found was pre-existing (`WithToSelectManyBody` creates two same-alias parameters, #1343).
 - **More reuse than planned**: the exception-context machinery
@@ -166,8 +190,8 @@ not a design choice.
   `CqlOperatorsMethodsCache` are all Expression-free and shared by both pipelines instead of
   duplicated.
 - **One deliberate shape change**: definition lambdas no longer carry an explicit
-  `CqlContext` parameter — the well-known `IrContextParameter.Instance` is referenced
-  directly, and `IrDefinitionCall` carries it as `arguments[0]`. Phase 5's
+  `CqlContext` parameter — the well-known `CodeContextParameter.Instance` is referenced
+  directly, and `CodeDefinitionCall` carries it as `arguments[0]`. Phase 5's
   `DefinitionWriter` integration must account for this.
 - **Preserve-vs-fix policy, refined by practice**: anything that could change a *binding
   outcome* is preserved bug-for-bug and tracked (#1341 generic-inference indexing, #1342
@@ -210,28 +234,77 @@ one exercises:
 Unlike RR23 and dqm-content-qicore-2025 (whose sources are public and openly licensed),
 the full HEDIS 2025 corpus is NCQA-licensed commercial content, so it cannot live in this
 (public) repo's `LibrarySets/` the way those two do. It's vendored instead in the private
-`Firely.Cql.Sdk.Integration.Runner` repo (`Hedis2025/`), alongside a build-verification test
-(`HEDIS_2025_OldPipeline_CompilesToAssemblies`, unconditional) and a permanent golden-parity
-test (`HEDIS_2025_IrPipeline_MatchesOldPipeline`). The corpus and both tests were merged to
-`develop` directly, decoupled from the `feature/linq-expr-removal` branch stack, since the
-build-verification half only exercises the existing default pipeline. The parity test's body
-is commented out rather than `[Fact(Skip = ...)]`: it references `ElmToolkitConfig.UseIrPipeline`,
-which only exists on the phase 2–5 branches, and `Skip` only suppresses execution, not
-compilation. It'll be un-commented once phase 5 (#1346) merges and #1361/#1362 are fixed.
-Neither bug is being deferred under the preserve-vs-fix policy above — both are new defects
-introduced by the IR port itself (not old-pipeline bugs being faithfully replicated), so both
-block phase 5's byte-identical-output requirement and must be fixed before the default flips.
+`Firely.Cql.Sdk.Integration.Runner` repo (`Hedis2025/`), with a permanent guard alongside
+it, `Hedis2025.GoldenTests`. During phases 2–5 that guard asserted byte-identical generated
+C# between the two pipelines across the whole corpus (both #1361 and #1362 — new defects
+introduced by the IR port itself, not old-pipeline bugs being faithfully replicated — were
+fixed to make it pass). Phase 6 deleted the Expression-based pipeline, so the comparison
+target no longer exists; the guard is now `HEDIS_2025_CompilesToAssemblies`, which
+exercises the IR pipeline end to end over all 382 libraries.
 
 ### Phase 6 checklist (accumulated `FIXME(phase6)` markers)
 
-- Unify the IR binder's `InvalidOperationException` + `FormatCannotBindMessage` with
-  `CannotBindToCqlOperatorError` (generalize the error type off `Expression[]`).
-- Relocate `CqlOperatorsMethodsCache` out of the deleted `CqlOperatorsBinder`.
-- Consolidate the duplicated assign-to-type helpers (`IrExpressionExtensions` vs. the
-  binder's private phase-3 copies).
-- Revisit `IrCodeDefinition.ReturnType` (parity-preserved `typeof(CqlCodeDefinition)`).
-- Fix the tracked upstream bugs in one place: #1341, #1342; review #1343; close #1345.
-- Remove the `NOTE(phase3)`/`NOTE(phase4)` markers as each is resolved.
+Done in phase 6 itself:
+
+- ~~Unify the IR binder's `InvalidOperationException` + `FormatCannotBindMessage` with
+  `CannotBindToCqlOperatorError` (generalize the error type off `Expression[]`).~~
+  Done — the error type now carries `Type[]`.
+- ~~Relocate `CqlOperatorsMethodsCache` out of the deleted `CqlOperatorsBinder`.~~
+  Done — now `Cql.Compiler\CqlOperatorsMethodsCache.cs`.
+- ~~Consolidate the duplicated assign-to-type helpers (`CodeExpressionExtensions` vs. the
+  binder's private phase-3 copies).~~ Done — consolidated onto `CodeExpressionExtensions`.
+- ~~Review #1343.~~ Retired — develop's semi-join compilation of `with`/`without`
+  (#1366) replaced `WithToSelectManyBody`, and the IR side ports it as
+  `WithToExistenceCheck`.
+
+Output-neutral cleanups, done on the feature branch before the develop merge (all proven
+byte-identical against the golden corpora):
+
+- ~~Drop the now-redundant `Ir` prefix from the IR-side type names (e.g.
+  `IrLibrarySetCSharpCodeGenerator`) now that there is no Expression-side counterpart
+  to disambiguate from.~~ Done — the pipeline orchestration classes took back the names
+  their deleted counterparts held (`CqlOperatorsBinder`, `CodeBuilderContext`, the
+  `CqlDefinition` family, `LibrarySetCSharpCodeGenerator`, …). The IR node vocabulary
+  (`CodeExpression`, `CodeConstant`, …, plus `CSharpEmitter`/`CodeTypeRules`/
+  `CodeExpressionExtensions`) keeps the prefix: there it is descriptive, not a
+  disambiguator.
+- ~~Scrub the migration narrative from doc comments: the "IR counterpart of the old X" /
+  "phase N of the Linq.Expressions removal" framing made sense while both pipelines
+  coexisted, but reads as noise once this is simply *the* pipeline.~~ Done — doc comments
+  now describe what each type does; the history lives in this document and at commit
+  `85207efd5`. Inline `//` comments that cite old-writer mechanisms by name are kept
+  deliberately: they document the bug-for-bug quirks and point into `85207efd5`.
+
+Deferred to post-merge cleanup, landing as develop PRs:
+
+- ~~Revisit `CqlCodeDefinition.ReturnType` (parity-preserved `typeof(CqlCodeDefinition)`).~~
+  Done — returns `typeof(CqlCode)`, the static type of what a generated code definition
+  actually produces (practically unobservable: only reachable via an `ExpressionRef`
+  naming a code definition, which CQL compiles as `CodeRef` instead).
+- ~~Fix the tracked upstream bugs in one place: #1341, #1342; close #1345.~~ Done — both
+  fixed with discriminating regression tests (verified to fail against the unfixed code);
+  the #1342 guard also gained a real diagnostic message. #1345's fixes shipped with the
+  IR binder; the old binder it described is deleted. No corpus output changed (the corpora
+  never exercised either bug), so the `GeneratedCodeAttribute` version bump still waits
+  for the first output-changing PR below.
+- ~~The quirk ledger above (burned-letter naming gaps, the stray `};`, the as-object
+  ordering accident).~~ Done — first output-changing cleanup, carrying the
+  `GeneratedCodeAttribute` bump to 5.1.3.0 (a patch: only expression internals change,
+  well inside the invoker's supported range). Regenerated goldens reviewed by
+  classification: every changed line is the version attribute, a dropped `};`
+  terminator, a dropped `as object` (with its parentheses), or contiguous local
+  renumbering — plus a real win: the burned-letter keying had *blocked* deduplication of
+  identical parent expressions, so dropping it collapses previously-duplicated pure
+  computations (52 statements in CMS56; 1,028 across the HEDIS 2025 corpus).
+- Replace the hoisted zero-parameter local functions for conditional chains with native
+  `if`/`else` statements (an old-writer shape kept for golden parity). Output-changing:
+  regenerated goldens are the review artifact. Note (Ewout, 2026-07-23): the old
+  writer's hoisting thresholds and inline shapes were readability heuristics, not
+  contracts — where a simpler linearization rule keeps or improves readability, prefer it
+  over faithfully replicating the old behavior.
+- Remove the remaining `NOTE(phase4)` markers as each is resolved (the phase-3 markers
+  left with #1341's fix; the two `phase3-review` remarks were downgraded to plain design
+  notes, since both document deliberate, guarded deviations).
 
 ### Findings from phases 0–1
 
@@ -247,17 +320,20 @@ block phase 5's byte-identical-output requirement and must be fixed before the d
 
 ## Verification
 
-- Phases 2–5: golden-file byte comparison of generated C# (old vs. new pipeline) across
-  `LibrarySets\RR23`, `dqm-content-qicore-2025`, and demo measures; full `CqlToElmTests` +
-  `CoreTests` suites against the new pipeline behind the flag before flipping.
-- End-to-end: `Examples\CqlSdkExamples` and `Demo` measure runs must produce identical
-  results under both pipelines.
+- The dual-pipeline parity proof was completed before the Expression-based pipeline was
+  deleted: generated C# was byte-compared across all three golden corpora — `LibrarySets\RR23`,
+  `dqm-content-qicore-2025`, and the full NCQA HEDIS 2025 corpus (382 libraries) — and found
+  identical in every case.
+- Post-deletion, correctness is pinned by the golden corpora themselves: `CoreTests` (incl. RR23
+  + CMS56 golden-regeneration tests) and `CqlToElmTests` must pass, and the HEDIS 2025
+  end-to-end test (`HEDIS_2025_CompilesToAssemblies`) must compile all 382 libraries to
+  assemblies without error.
 
 ## What gets deleted / rewritten / kept
 
 - **Deleted** (~1,800 lines): `Cql.Compiler\Expressions\*`, `CodeGeneration.NET\Visitors\*`,
   `CqlExpressions.cs`.
-- **Rewritten onto the IR** (~4,200 lines, mostly mechanical): `ExpressionBuilderContext.cs`
+- **Rewritten onto the IR** (~4,200 lines, mostly mechanical): `CodeBuilderContext.cs`
   + partials, `CqlOperatorsBinder.*`, `CqlContextBinder.cs`, `LambdaDefinitionWriter`
   (becomes the emitter; much print logic ports verbatim), `CqlDefinition`/`CqlLambdaDefinition`.
 - **Kept unchanged**: `TypeResolver`/`TypeConverter`, `TupleBuilderCache`,

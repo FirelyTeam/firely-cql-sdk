@@ -6,7 +6,7 @@
 		<AssemblyName>Hl7.Cql.Compiler</AssemblyName>
 		<RootNamespace>Hl7.Cql.Compiler</RootNamespace>
 		<Product>CQL measure compiler</Product>
-		<Description>Support package for Hl7.Cql. Translates ELM into C# expression trees and can emit those expression trees into either runtime Delegates or C# source code.</Description>
+		<Description>Support package for Hl7.Cql. Translates ELM into a typed intermediate representation (IR) and emits it as C# source code.</Description>
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
@@ -36,14 +36,14 @@
 		<Compile Update="CqlOperatorsBinder.*.cs">
 			<DependentUpon>CqlOperatorsBinder.cs</DependentUpon>
 		</Compile>
-		<Compile Update="ExpressionBuilderContext.*.cs">
-			<DependentUpon>ExpressionBuilderContext.cs</DependentUpon>
+		<Compile Update="CodeBuilderContext.*.cs">
+			<DependentUpon>CodeBuilderContext.cs</DependentUpon>
 		</Compile>
-		<Compile Update="LibraryExpressionBuilderContext.*.cs">
-			<DependentUpon>LibraryExpressionBuilderContext.cs</DependentUpon>
+		<Compile Update="LibraryCodeBuilderContext.*.cs">
+			<DependentUpon>LibraryCodeBuilderContext.cs</DependentUpon>
 		</Compile>
-		<Compile Update="LibrarySetExpressionBuilderContext.*.cs">
-			<DependentUpon>LibrarySetExpressionBuilderContext.cs</DependentUpon>
+		<Compile Update="LibrarySetCodeBuilderContext.*.cs">
+			<DependentUpon>LibrarySetCodeBuilderContext.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
 

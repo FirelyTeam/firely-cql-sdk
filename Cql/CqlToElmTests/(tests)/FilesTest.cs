@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -51,7 +51,7 @@
 //             var errors = lib.GetErrors();
 //             errors.Should().BeEmpty();
 //
-//             var eb = LibraryExpressionBuilder;
+//             var eb = LibraryCodeBuilder;
 //             var lambdas = eb.ProcessLibrary(lib);
 //             var delegates = lambdas.CompileAll();
 //         }

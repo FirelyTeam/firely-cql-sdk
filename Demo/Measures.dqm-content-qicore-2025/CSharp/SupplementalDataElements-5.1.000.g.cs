@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("SupplementalDataElements", "5.1.000")]
 public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<SupplementalDataElements_5_1_000>
 {
@@ -100,7 +100,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
             else
             {
                 return default;
-            };
+            }
         }
 
 
@@ -249,7 +249,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
             else
             {
                 return default;
-            };
+            }
         }
 
 
@@ -378,7 +378,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
                     else
                     {
                         return default;
-                    };
+                    }
                 }
 
 
@@ -421,7 +421,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
                     else
                     {
                         return default;
-                    };
+                    }
                 }
 
 
@@ -458,7 +458,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
             else
             {
                 return default;
-            };
+            }
         }
 
         return a_();
