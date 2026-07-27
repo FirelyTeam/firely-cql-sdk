@@ -11,14 +11,12 @@
 
 ## Fixes
 
-## Dependencies
-
 - Upgraded the upstream Java `cql-to-elm-cli`/`elm-fhir` tooling (`org.cqframework`) from `4.0.0` to
   `5.0.0`, applied incrementally one minor/major version at a time (4.1.0 through 5.0.0), regenerating
   and testing at each step. Only `4.6.0` introduced observable ELM-shape changes (interval-literal
-  constant-folding, choice-type alphabetical sorting); every other step was a no-op version bump. No
-  generated C# output changed as a result — the existing code generator already handles both ELM
-  shapes correctly. (#1334)
+  constant-folding, choice-type alphabetical sorting); every other step was a no-op version bump.
+  Generated ELM / checked-in C# output changed textually but is intended to be behavior-preserving;
+  the existing compiler/codegen already handles both ELM shapes correctly. (#1334)
 
 - Fixed a CQL `union` of two structurally compatible tuple lists with differing element types
   silently evaluating to empty. Both operands were converted through `as IEnumerable<object>`,
