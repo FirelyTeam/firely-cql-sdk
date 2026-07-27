@@ -18,7 +18,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # * Java-Dependencies-Vars.ps1
 # * Java-Dependencies-Vars.sh
 # * The Hl7.Cql.Packager.Program.JavaToolVersion for the Packager CLI
-: "${CqlToElmCliVersion:=4.6.0}"
+: "${CqlToElmCliVersion:=4.7.0}"
 
 : "${TargetDependencies:=$SCRIPT_DIR/target/dependency}"
 
