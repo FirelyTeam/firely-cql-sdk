@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS159FHIRDepRemissionat12Months", "1.0.000")]
 public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingleton<CMS159FHIRDepRemissionat12Months_1_0_000>
 {
@@ -605,7 +605,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 bool em_() {
                     DataType es_ = HospicePerformed?.Performed;
                     object et_ = FHIRHelpers_4_4_000.Instance.ToValue(context, es_);
-                    bool eu_ = et_ is CqlInterval<CqlDateTime>;
+                    bool eu_ = et_ is CqlQuantity;
                     return eu_;
                 }
 
@@ -613,7 +613,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 bool en_() {
                     DataType ev_ = HospicePerformed?.Performed;
                     object ew_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ev_);
-                    bool ex_ = ew_ is CqlQuantity;
+                    bool ex_ = ew_ is CqlInterval<CqlDateTime>;
                     return ex_;
                 }
 
@@ -635,13 +635,13 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 {
                     DataType fd_ = HospicePerformed?.Performed;
                     object fe_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fd_);
-                    return fe_ as CqlInterval<CqlDateTime>;
+                    return fe_ as CqlQuantity;
                 }
                 else if (en_())
                 {
                     DataType ff_ = HospicePerformed?.Performed;
                     object fg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ff_);
-                    return fg_ as CqlQuantity;
+                    return fg_ as CqlInterval<CqlDateTime>;
                 }
                 else if (eo_())
                 {
@@ -808,7 +808,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 bool cf_() {
                     DataType cl_ = PalliativeIntervention?.Performed;
                     object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                    bool cn_ = cm_ is CqlInterval<CqlDateTime>;
+                    bool cn_ = cm_ is CqlQuantity;
                     return cn_;
                 }
 
@@ -816,7 +816,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 bool cg_() {
                     DataType co_ = PalliativeIntervention?.Performed;
                     object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
-                    bool cq_ = cp_ is CqlQuantity;
+                    bool cq_ = cp_ is CqlInterval<CqlDateTime>;
                     return cq_;
                 }
 
@@ -838,13 +838,13 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 {
                     DataType cw_ = PalliativeIntervention?.Performed;
                     object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
-                    return cx_ as CqlInterval<CqlDateTime>;
+                    return cx_ as CqlQuantity;
                 }
                 else if (cg_())
                 {
                     DataType cy_ = PalliativeIntervention?.Performed;
                     object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-                    return cz_ as CqlQuantity;
+                    return cz_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ch_())
                 {

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("Hospice", "6.18.000")]
 public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
 {
@@ -212,7 +212,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 bool cf_() {
                     DataType cl_ = HospicePerformed?.Performed;
                     object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                    bool cn_ = cm_ is CqlInterval<CqlDateTime>;
+                    bool cn_ = cm_ is CqlQuantity;
                     return cn_;
                 }
 
@@ -220,7 +220,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 bool cg_() {
                     DataType co_ = HospicePerformed?.Performed;
                     object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
-                    bool cq_ = cp_ is CqlQuantity;
+                    bool cq_ = cp_ is CqlInterval<CqlDateTime>;
                     return cq_;
                 }
 
@@ -242,13 +242,13 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 {
                     DataType cw_ = HospicePerformed?.Performed;
                     object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
-                    return cx_ as CqlInterval<CqlDateTime>;
+                    return cx_ as CqlQuantity;
                 }
                 else if (cg_())
                 {
                     DataType cy_ = HospicePerformed?.Performed;
                     object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-                    return cz_ as CqlQuantity;
+                    return cz_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ch_())
                 {

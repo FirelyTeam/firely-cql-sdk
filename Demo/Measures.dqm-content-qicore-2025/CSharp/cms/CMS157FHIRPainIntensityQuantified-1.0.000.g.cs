@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS157FHIRPainIntensityQuantified", "1.0.000")]
 public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISingleton<CMS157FHIRPainIntensityQuantified_1_0_000>
 {
@@ -130,7 +130,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 bool u_() {
                     DataType aa_ = ChemoAdministration?.Performed;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    bool ac_ = ab_ is CqlInterval<CqlDateTime>;
+                    bool ac_ = ab_ is CqlQuantity;
                     return ac_;
                 }
 
@@ -138,7 +138,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 bool v_() {
                     DataType ad_ = ChemoAdministration?.Performed;
                     object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                    bool af_ = ae_ is CqlQuantity;
+                    bool af_ = ae_ is CqlInterval<CqlDateTime>;
                     return af_;
                 }
 
@@ -160,13 +160,13 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 {
                     DataType al_ = ChemoAdministration?.Performed;
                     object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                    return am_ as CqlInterval<CqlDateTime>;
+                    return am_ as CqlQuantity;
                 }
                 else if (v_())
                 {
                     DataType an_ = ChemoAdministration?.Performed;
                     object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                    return ao_ as CqlQuantity;
+                    return ao_ as CqlInterval<CqlDateTime>;
                 }
                 else if (w_())
                 {
@@ -245,7 +245,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 bool bg_() {
                     DataType bm_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoBeforeEncounter?.Performed;
                     object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
-                    bool bo_ = bn_ is CqlInterval<CqlDateTime>;
+                    bool bo_ = bn_ is CqlQuantity;
                     return bo_;
                 }
 
@@ -253,7 +253,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 bool bh_() {
                     DataType bp_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoBeforeEncounter?.Performed;
                     object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
-                    bool br_ = bq_ is CqlQuantity;
+                    bool br_ = bq_ is CqlInterval<CqlDateTime>;
                     return br_;
                 }
 
@@ -275,13 +275,13 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 {
                     DataType bx_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoBeforeEncounter?.Performed;
                     object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    return by_ as CqlInterval<CqlDateTime>;
+                    return by_ as CqlQuantity;
                 }
                 else if (bh_())
                 {
                     DataType bz_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoBeforeEncounter?.Performed;
                     object ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
-                    return ca_ as CqlQuantity;
+                    return ca_ as CqlInterval<CqlDateTime>;
                 }
                 else if (bi_())
                 {
@@ -319,7 +319,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 bool ce_() {
                     DataType ck_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoAfterEncounter?.Performed;
                     object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
-                    bool cm_ = cl_ is CqlInterval<CqlDateTime>;
+                    bool cm_ = cl_ is CqlQuantity;
                     return cm_;
                 }
 
@@ -327,7 +327,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 bool cf_() {
                     DataType cn_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoAfterEncounter?.Performed;
                     object co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-                    bool cp_ = co_ is CqlQuantity;
+                    bool cp_ = co_ is CqlInterval<CqlDateTime>;
                     return cp_;
                 }
 
@@ -349,13 +349,13 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 {
                     DataType cv_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoAfterEncounter?.Performed;
                     object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
-                    return cw_ as CqlInterval<CqlDateTime>;
+                    return cw_ as CqlQuantity;
                 }
                 else if (cf_())
                 {
                     DataType cx_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoAfterEncounter?.Performed;
                     object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
-                    return cy_ as CqlQuantity;
+                    return cy_ as CqlInterval<CqlDateTime>;
                 }
                 else if (cg_())
                 {
@@ -390,7 +390,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 bool dc_() {
                     DataType di_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoAfterEncounter?.Performed;
                     object dj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, di_);
-                    bool dk_ = dj_ is CqlInterval<CqlDateTime>;
+                    bool dk_ = dj_ is CqlQuantity;
                     return dk_;
                 }
 
@@ -398,7 +398,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 bool dd_() {
                     DataType dl_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoAfterEncounter?.Performed;
                     object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
-                    bool dn_ = dm_ is CqlQuantity;
+                    bool dn_ = dm_ is CqlInterval<CqlDateTime>;
                     return dn_;
                 }
 
@@ -420,13 +420,13 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 {
                     DataType dt_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoAfterEncounter?.Performed;
                     object du_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dt_);
-                    return du_ as CqlInterval<CqlDateTime>;
+                    return du_ as CqlQuantity;
                 }
                 else if (dd_())
                 {
                     DataType dv_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoAfterEncounter?.Performed;
                     object dw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dv_);
-                    return dw_ as CqlQuantity;
+                    return dw_ as CqlInterval<CqlDateTime>;
                 }
                 else if (de_())
                 {
@@ -455,7 +455,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 bool ea_() {
                     DataType eg_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoBeforeEncounter?.Performed;
                     object eh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eg_);
-                    bool ei_ = eh_ is CqlInterval<CqlDateTime>;
+                    bool ei_ = eh_ is CqlQuantity;
                     return ei_;
                 }
 
@@ -463,7 +463,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 bool eb_() {
                     DataType ej_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoBeforeEncounter?.Performed;
                     object ek_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ej_);
-                    bool el_ = ek_ is CqlQuantity;
+                    bool el_ = ek_ is CqlInterval<CqlDateTime>;
                     return el_;
                 }
 
@@ -485,13 +485,13 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 {
                     DataType er_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoBeforeEncounter?.Performed;
                     object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                    return es_ as CqlInterval<CqlDateTime>;
+                    return es_ as CqlQuantity;
                 }
                 else if (eb_())
                 {
                     DataType et_ = tuple_eweddbdxxszcpujsdbltgdxcc?.ChemoBeforeEncounter?.Performed;
                     object eu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, et_);
-                    return eu_ as CqlQuantity;
+                    return eu_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ec_())
                 {

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS74FHIRDentalCariesPrevention", "1.0.000")]
 public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingleton<CMS74FHIRDentalCariesPrevention_1_0_000>
 {
@@ -179,7 +179,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
                 bool q_() {
                     DataType w_ = FluorideApplication?.Performed;
                     object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                    bool y_ = x_ is CqlInterval<CqlDateTime>;
+                    bool y_ = x_ is CqlQuantity;
                     return y_;
                 }
 
@@ -187,7 +187,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
                 bool r_() {
                     DataType z_ = FluorideApplication?.Performed;
                     object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    bool ab_ = aa_ is CqlQuantity;
+                    bool ab_ = aa_ is CqlInterval<CqlDateTime>;
                     return ab_;
                 }
 
@@ -209,13 +209,13 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
                 {
                     DataType ah_ = FluorideApplication?.Performed;
                     object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                    return ai_ as CqlInterval<CqlDateTime>;
+                    return ai_ as CqlQuantity;
                 }
                 else if (r_())
                 {
                     DataType aj_ = FluorideApplication?.Performed;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    return ak_ as CqlQuantity;
+                    return ak_ as CqlInterval<CqlDateTime>;
                 }
                 else if (s_())
                 {
@@ -253,7 +253,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
                 bool as_() {
                     DataType ay_ = FluorideApplication?.Performed;
                     object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                    bool ba_ = az_ is CqlInterval<CqlDateTime>;
+                    bool ba_ = az_ is CqlQuantity;
                     return ba_;
                 }
 
@@ -261,7 +261,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
                 bool at_() {
                     DataType bb_ = FluorideApplication?.Performed;
                     object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                    bool bd_ = bc_ is CqlQuantity;
+                    bool bd_ = bc_ is CqlInterval<CqlDateTime>;
                     return bd_;
                 }
 
@@ -283,13 +283,13 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
                 {
                     DataType bj_ = FluorideApplication?.Performed;
                     object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                    return bk_ as CqlInterval<CqlDateTime>;
+                    return bk_ as CqlQuantity;
                 }
                 else if (at_())
                 {
                     DataType bl_ = FluorideApplication?.Performed;
                     object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    return bm_ as CqlQuantity;
+                    return bm_ as CqlInterval<CqlDateTime>;
                 }
                 else if (au_())
                 {

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("TJCOverall", "8.25.000")]
 public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_000>
 {
@@ -263,7 +263,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                     bool p_() {
                         object v_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                         object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                        bool x_ = w_ is CqlInterval<CqlDateTime>;
+                        bool x_ = w_ is CqlQuantity;
                         return x_;
                     }
 
@@ -271,7 +271,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                     bool q_() {
                         object y_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                         object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        bool aa_ = z_ is CqlQuantity;
+                        bool aa_ = z_ is CqlInterval<CqlDateTime>;
                         return aa_;
                     }
 
@@ -293,13 +293,13 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                     {
                         object ag_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                         object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        return ah_ as CqlInterval<CqlDateTime>;
+                        return ah_ as CqlQuantity;
                     }
                     else if (q_())
                     {
                         object ai_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                         object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                        return aj_ as CqlQuantity;
+                        return aj_ as CqlInterval<CqlDateTime>;
                     }
                     else if (r_())
                     {

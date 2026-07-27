@@ -503,7 +503,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     bool w_() {
                         object ac_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                         object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        bool ae_ = ad_ is CqlInterval<CqlDateTime>;
+                        bool ae_ = ad_ is CqlQuantity;
                         return ae_;
                     }
 
@@ -511,7 +511,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     bool x_() {
                         object af_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        bool ah_ = ag_ is CqlQuantity;
+                        bool ah_ = ag_ is CqlInterval<CqlDateTime>;
                         return ah_;
                     }
 
@@ -533,13 +533,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     {
                         object an_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                         object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        return ao_ as CqlInterval<CqlDateTime>;
+                        return ao_ as CqlQuantity;
                     }
                     else if (x_())
                     {
                         object ap_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                         object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        return aq_ as CqlQuantity;
+                        return aq_ as CqlInterval<CqlDateTime>;
                     }
                     else if (y_())
                     {
@@ -619,7 +619,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool be_() {
                     DataType bk_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                    bool bm_ = bl_ is CqlInterval<CqlDateTime>;
+                    bool bm_ = bl_ is CqlQuantity;
                     return bm_;
                 }
 
@@ -627,7 +627,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool bf_() {
                     DataType bn_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    bool bp_ = bo_ is CqlQuantity;
+                    bool bp_ = bo_ is CqlInterval<CqlDateTime>;
                     return bp_;
                 }
 
@@ -649,13 +649,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType bv_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    return bw_ as CqlInterval<CqlDateTime>;
+                    return bw_ as CqlQuantity;
                 }
                 else if (bf_())
                 {
                     DataType bx_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    return by_ as CqlQuantity;
+                    return by_ as CqlInterval<CqlDateTime>;
                 }
                 else if (bg_())
                 {
@@ -690,7 +690,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool cc_() {
                     object ci_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
                     object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                    bool ck_ = cj_ is CqlInterval<CqlDateTime>;
+                    bool ck_ = cj_ is CqlQuantity;
                     return ck_;
                 }
 
@@ -698,7 +698,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool cd_() {
                     object cl_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
                     object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                    bool cn_ = cm_ is CqlQuantity;
+                    bool cn_ = cm_ is CqlInterval<CqlDateTime>;
                     return cn_;
                 }
 
@@ -720,13 +720,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     object ct_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
                     object cu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ct_);
-                    return cu_ as CqlInterval<CqlDateTime>;
+                    return cu_ as CqlQuantity;
                 }
                 else if (cd_())
                 {
                     object cv_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
                     object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
-                    return cw_ as CqlQuantity;
+                    return cw_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ce_())
                 {
@@ -758,7 +758,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool da_() {
                     DataType dg_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                    bool di_ = dh_ is CqlInterval<CqlDateTime>;
+                    bool di_ = dh_ is CqlQuantity;
                     return di_;
                 }
 
@@ -766,7 +766,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool db_() {
                     DataType dj_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                    bool dl_ = dk_ is CqlQuantity;
+                    bool dl_ = dk_ is CqlInterval<CqlDateTime>;
                     return dl_;
                 }
 
@@ -788,13 +788,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType dr_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object ds_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dr_);
-                    return ds_ as CqlInterval<CqlDateTime>;
+                    return ds_ as CqlQuantity;
                 }
                 else if (db_())
                 {
                     DataType dt_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object du_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dt_);
-                    return du_ as CqlQuantity;
+                    return du_ as CqlInterval<CqlDateTime>;
                 }
                 else if (dc_())
                 {
@@ -827,7 +827,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool dy_() {
                     DataType ee_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object ef_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ee_);
-                    bool eg_ = ef_ is CqlInterval<CqlDateTime>;
+                    bool eg_ = ef_ is CqlQuantity;
                     return eg_;
                 }
 
@@ -835,7 +835,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool dz_() {
                     DataType eh_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object ei_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eh_);
-                    bool ej_ = ei_ is CqlQuantity;
+                    bool ej_ = ei_ is CqlInterval<CqlDateTime>;
                     return ej_;
                 }
 
@@ -857,13 +857,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType ep_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
-                    return eq_ as CqlInterval<CqlDateTime>;
+                    return eq_ as CqlQuantity;
                 }
                 else if (dz_())
                 {
                     DataType er_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                    return es_ as CqlQuantity;
+                    return es_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ea_())
                 {
@@ -896,7 +896,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ew_() {
                     DataType fc_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object fd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fc_);
-                    bool fe_ = fd_ is CqlInterval<CqlDateTime>;
+                    bool fe_ = fd_ is CqlQuantity;
                     return fe_;
                 }
 
@@ -904,7 +904,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ex_() {
                     DataType ff_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object fg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ff_);
-                    bool fh_ = fg_ is CqlQuantity;
+                    bool fh_ = fg_ is CqlInterval<CqlDateTime>;
                     return fh_;
                 }
 
@@ -926,13 +926,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType fn_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object fo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fn_);
-                    return fo_ as CqlInterval<CqlDateTime>;
+                    return fo_ as CqlQuantity;
                 }
                 else if (ex_())
                 {
                     DataType fp_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object fq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fp_);
-                    return fq_ as CqlQuantity;
+                    return fq_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ey_())
                 {
@@ -964,7 +964,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool fu_() {
                     DataType ga_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object gb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ga_);
-                    bool gc_ = gb_ is CqlInterval<CqlDateTime>;
+                    bool gc_ = gb_ is CqlQuantity;
                     return gc_;
                 }
 
@@ -972,7 +972,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool fv_() {
                     DataType gd_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object ge_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gd_);
-                    bool gf_ = ge_ is CqlQuantity;
+                    bool gf_ = ge_ is CqlInterval<CqlDateTime>;
                     return gf_;
                 }
 
@@ -994,13 +994,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType gl_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object gm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gl_);
-                    return gm_ as CqlInterval<CqlDateTime>;
+                    return gm_ as CqlQuantity;
                 }
                 else if (fv_())
                 {
                     DataType gn_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
                     object go_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gn_);
-                    return go_ as CqlQuantity;
+                    return go_ as CqlInterval<CqlDateTime>;
                 }
                 else if (fw_())
                 {
@@ -1059,11 +1059,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
 
     private IEnumerable<object> Pharmacological_Or_Mechanical_VTE_Prophylaxis_Received_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.Low_Dose_Unfractionated_Heparin_for_VTE_Prophylaxis(context);
-        IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> a_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? d_(MedicationAdministration MR) {
+        bool? b_(MedicationAdministration MR) {
             IEnumerable<Medication> az_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ba_(Medication M) {
@@ -1085,8 +1083,10 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return bc_;
         }
 
-        IEnumerable<MedicationAdministration> e_ = context.Operators.Where<MedicationAdministration>(c_, d_);
-        IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(b_, e_);
+        IEnumerable<MedicationAdministration> c_ = context.Operators.Where<MedicationAdministration>(a_, b_);
+        CqlValueSet d_ = this.Low_Dose_Unfractionated_Heparin_for_VTE_Prophylaxis(context);
+        IEnumerable<MedicationAdministration> e_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(c_, e_);
 
         bool? g_(MedicationAdministration VTEMedication) {
             Code<MedicationAdministration.MedicationAdministrationStatusCodes> bn_ = VTEMedication?.StatusElement;
@@ -1103,10 +1103,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
-        CqlValueSet i_ = this.Low_Molecular_Weight_Heparin_for_VTE_Prophylaxis(context);
-        IEnumerable<MedicationAdministration> j_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? k_(MedicationAdministration MR) {
+        bool? i_(MedicationAdministration MR) {
             IEnumerable<Medication> bx_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? by_(Medication M) {
@@ -1128,7 +1126,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return ca_;
         }
 
-        IEnumerable<MedicationAdministration> l_ = context.Operators.Where<MedicationAdministration>(c_, k_);
+        IEnumerable<MedicationAdministration> j_ = context.Operators.Where<MedicationAdministration>(a_, i_);
+        CqlValueSet k_ = this.Low_Molecular_Weight_Heparin_for_VTE_Prophylaxis(context);
+        IEnumerable<MedicationAdministration> l_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> m_ = context.Operators.Union<MedicationAdministration>(j_, l_);
 
         bool? n_(MedicationAdministration LMWH) {
@@ -1141,10 +1141,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
 
         IEnumerable<MedicationAdministration> o_ = context.Operators.Where<MedicationAdministration>(m_, n_);
         IEnumerable<MedicationAdministration> p_ = context.Operators.Union<MedicationAdministration>(h_, o_);
-        CqlValueSet q_ = this.Injectable_Factor_Xa_Inhibitor_for_VTE_Prophylaxis(context);
-        IEnumerable<MedicationAdministration> r_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? s_(MedicationAdministration MR) {
+        bool? q_(MedicationAdministration MR) {
             IEnumerable<Medication> cp_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? cq_(Medication M) {
@@ -1166,7 +1164,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return cs_;
         }
 
-        IEnumerable<MedicationAdministration> t_ = context.Operators.Where<MedicationAdministration>(c_, s_);
+        IEnumerable<MedicationAdministration> r_ = context.Operators.Where<MedicationAdministration>(a_, q_);
+        CqlValueSet s_ = this.Injectable_Factor_Xa_Inhibitor_for_VTE_Prophylaxis(context);
+        IEnumerable<MedicationAdministration> t_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> u_ = context.Operators.Union<MedicationAdministration>(r_, t_);
 
         bool? v_(MedicationAdministration FactorXa) {
@@ -1178,10 +1178,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         }
 
         IEnumerable<MedicationAdministration> w_ = context.Operators.Where<MedicationAdministration>(u_, v_);
-        CqlValueSet x_ = this.Warfarin(context);
-        IEnumerable<MedicationAdministration> y_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? z_(MedicationAdministration MR) {
+        bool? x_(MedicationAdministration MR) {
             IEnumerable<Medication> dh_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? di_(Medication M) {
@@ -1203,7 +1201,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return dk_;
         }
 
-        IEnumerable<MedicationAdministration> aa_ = context.Operators.Where<MedicationAdministration>(c_, z_);
+        IEnumerable<MedicationAdministration> y_ = context.Operators.Where<MedicationAdministration>(a_, x_);
+        CqlValueSet z_ = this.Warfarin(context);
+        IEnumerable<MedicationAdministration> aa_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> ab_ = context.Operators.Union<MedicationAdministration>(y_, aa_);
 
         bool? ac_(MedicationAdministration WarfarinAdm) {
@@ -1217,10 +1217,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<MedicationAdministration> ad_ = context.Operators.Where<MedicationAdministration>(ab_, ac_);
         IEnumerable<MedicationAdministration> ae_ = context.Operators.Union<MedicationAdministration>(w_, ad_);
         IEnumerable<MedicationAdministration> af_ = context.Operators.Union<MedicationAdministration>(p_, ae_);
-        CqlValueSet ag_ = this.Rivaroxaban_for_VTE_Prophylaxis(context);
-        IEnumerable<MedicationAdministration> ah_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? ai_(MedicationAdministration MR) {
+        bool? ag_(MedicationAdministration MR) {
             IEnumerable<Medication> dz_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ea_(Medication M) {
@@ -1242,7 +1240,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return ec_;
         }
 
-        IEnumerable<MedicationAdministration> aj_ = context.Operators.Where<MedicationAdministration>(c_, ai_);
+        IEnumerable<MedicationAdministration> ah_ = context.Operators.Where<MedicationAdministration>(a_, ag_);
+        CqlValueSet ai_ = this.Rivaroxaban_for_VTE_Prophylaxis(context);
+        IEnumerable<MedicationAdministration> aj_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> ak_ = context.Operators.Union<MedicationAdministration>(ah_, aj_);
 
         bool? al_(MedicationAdministration Rivaroxaban) {
@@ -1309,7 +1309,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     bool ak_() {
                         object aq_ = context.Operators.LateBoundProperty<object>(VTEProphylaxis, "performed");
                         object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                        bool as_ = ar_ is CqlInterval<CqlDateTime>;
+                        bool as_ = ar_ is CqlQuantity;
                         return as_;
                     }
 
@@ -1317,7 +1317,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     bool al_() {
                         object at_ = context.Operators.LateBoundProperty<object>(VTEProphylaxis, "performed");
                         object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        bool av_ = au_ is CqlQuantity;
+                        bool av_ = au_ is CqlInterval<CqlDateTime>;
                         return av_;
                     }
 
@@ -1339,13 +1339,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     {
                         object bb_ = context.Operators.LateBoundProperty<object>(VTEProphylaxis, "performed");
                         object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                        return bc_ as CqlInterval<CqlDateTime>;
+                        return bc_ as CqlQuantity;
                     }
                     else if (al_())
                     {
                         object bd_ = context.Operators.LateBoundProperty<object>(VTEProphylaxis, "performed");
                         object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                        return be_ as CqlQuantity;
+                        return be_ as CqlInterval<CqlDateTime>;
                     }
                     else if (am_())
                     {
@@ -1411,7 +1411,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool da_() {
                     DataType dg_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                    bool di_ = dh_ is CqlInterval<CqlDateTime>;
+                    bool di_ = dh_ is CqlQuantity;
                     return di_;
                 }
 
@@ -1419,7 +1419,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool db_() {
                     DataType dj_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                    bool dl_ = dk_ is CqlQuantity;
+                    bool dl_ = dk_ is CqlInterval<CqlDateTime>;
                     return dl_;
                 }
 
@@ -1441,13 +1441,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType dr_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object ds_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dr_);
-                    return ds_ as CqlInterval<CqlDateTime>;
+                    return ds_ as CqlQuantity;
                 }
                 else if (db_())
                 {
                     DataType dt_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object du_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dt_);
-                    return du_ as CqlQuantity;
+                    return du_ as CqlInterval<CqlDateTime>;
                 }
                 else if (dc_())
                 {
@@ -1485,7 +1485,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool dy_() {
                     object ee_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
                     object ef_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ee_);
-                    bool eg_ = ef_ is CqlInterval<CqlDateTime>;
+                    bool eg_ = ef_ is CqlQuantity;
                     return eg_;
                 }
 
@@ -1493,7 +1493,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool dz_() {
                     object eh_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
                     object ei_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eh_);
-                    bool ej_ = ei_ is CqlQuantity;
+                    bool ej_ = ei_ is CqlInterval<CqlDateTime>;
                     return ej_;
                 }
 
@@ -1515,13 +1515,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     object ep_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
                     object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
-                    return eq_ as CqlInterval<CqlDateTime>;
+                    return eq_ as CqlQuantity;
                 }
                 else if (dz_())
                 {
                     object er_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
                     object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                    return es_ as CqlQuantity;
+                    return es_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ea_())
                 {
@@ -1551,7 +1551,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ew_() {
                     DataType fc_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object fd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fc_);
-                    bool fe_ = fd_ is CqlInterval<CqlDateTime>;
+                    bool fe_ = fd_ is CqlQuantity;
                     return fe_;
                 }
 
@@ -1559,7 +1559,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ex_() {
                     DataType ff_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object fg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ff_);
-                    bool fh_ = fg_ is CqlQuantity;
+                    bool fh_ = fg_ is CqlInterval<CqlDateTime>;
                     return fh_;
                 }
 
@@ -1581,13 +1581,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType fn_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object fo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fn_);
-                    return fo_ as CqlInterval<CqlDateTime>;
+                    return fo_ as CqlQuantity;
                 }
                 else if (ex_())
                 {
                     DataType fp_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object fq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fp_);
-                    return fq_ as CqlQuantity;
+                    return fq_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ey_())
                 {
@@ -1620,7 +1620,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool fu_() {
                     DataType ga_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object gb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ga_);
-                    bool gc_ = gb_ is CqlInterval<CqlDateTime>;
+                    bool gc_ = gb_ is CqlQuantity;
                     return gc_;
                 }
 
@@ -1628,7 +1628,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool fv_() {
                     DataType gd_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object ge_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gd_);
-                    bool gf_ = ge_ is CqlQuantity;
+                    bool gf_ = ge_ is CqlInterval<CqlDateTime>;
                     return gf_;
                 }
 
@@ -1650,13 +1650,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType gl_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object gm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gl_);
-                    return gm_ as CqlInterval<CqlDateTime>;
+                    return gm_ as CqlQuantity;
                 }
                 else if (fv_())
                 {
                     DataType gn_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object go_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gn_);
-                    return go_ as CqlQuantity;
+                    return go_ as CqlInterval<CqlDateTime>;
                 }
                 else if (fw_())
                 {
@@ -1689,7 +1689,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool gs_() {
                     DataType gy_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object gz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gy_);
-                    bool ha_ = gz_ is CqlInterval<CqlDateTime>;
+                    bool ha_ = gz_ is CqlQuantity;
                     return ha_;
                 }
 
@@ -1697,7 +1697,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool gt_() {
                     DataType hb_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object hc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hb_);
-                    bool hd_ = hc_ is CqlQuantity;
+                    bool hd_ = hc_ is CqlInterval<CqlDateTime>;
                     return hd_;
                 }
 
@@ -1719,13 +1719,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType hj_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object hk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hj_);
-                    return hk_ as CqlInterval<CqlDateTime>;
+                    return hk_ as CqlQuantity;
                 }
                 else if (gt_())
                 {
                     DataType hl_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object hm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hl_);
-                    return hm_ as CqlQuantity;
+                    return hm_ as CqlInterval<CqlDateTime>;
                 }
                 else if (gu_())
                 {
@@ -1757,7 +1757,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool hq_() {
                     DataType hw_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object hx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hw_);
-                    bool hy_ = hx_ is CqlInterval<CqlDateTime>;
+                    bool hy_ = hx_ is CqlQuantity;
                     return hy_;
                 }
 
@@ -1765,7 +1765,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool hr_() {
                     DataType hz_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object ia_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hz_);
-                    bool ib_ = ia_ is CqlQuantity;
+                    bool ib_ = ia_ is CqlInterval<CqlDateTime>;
                     return ib_;
                 }
 
@@ -1787,13 +1787,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType ih_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object ii_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ih_);
-                    return ii_ as CqlInterval<CqlDateTime>;
+                    return ii_ as CqlQuantity;
                 }
                 else if (hr_())
                 {
                     DataType ij_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
                     object ik_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ij_);
-                    return ik_ as CqlQuantity;
+                    return ik_ as CqlInterval<CqlDateTime>;
                 }
                 else if (hs_())
                 {
@@ -1837,11 +1837,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<Encounter> a_ = this.Encounter_With_ICU_Location(context);
 
         bool? b_(Encounter QualifyingEncounterICU) {
-            CqlValueSet u_ = this.Oral_Factor_Xa_Inhibitor_for_VTE_Prophylaxis_or_VTE_Treatment(context);
-            IEnumerable<MedicationAdministration> v_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, u_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-            IEnumerable<MedicationAdministration> w_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+            IEnumerable<MedicationAdministration> u_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-            bool? x_(MedicationAdministration MR) {
+            bool? v_(MedicationAdministration MR) {
                 IEnumerable<Medication> ad_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? ae_(Medication M) {
@@ -1863,8 +1861,10 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return ag_;
             }
 
-            IEnumerable<MedicationAdministration> y_ = context.Operators.Where<MedicationAdministration>(w_, x_);
-            IEnumerable<MedicationAdministration> z_ = context.Operators.Union<MedicationAdministration>(v_, y_);
+            IEnumerable<MedicationAdministration> w_ = context.Operators.Where<MedicationAdministration>(u_, v_);
+            CqlValueSet x_ = this.Oral_Factor_Xa_Inhibitor_for_VTE_Prophylaxis_or_VTE_Treatment(context);
+            IEnumerable<MedicationAdministration> y_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+            IEnumerable<MedicationAdministration> z_ = context.Operators.Union<MedicationAdministration>(w_, y_);
 
             bool? aa_(MedicationAdministration FactorXaMedication) {
                 Code<MedicationAdministration.MedicationAdministrationStatusCodes> ar_ = FactorXaMedication?.StatusElement;
@@ -1897,11 +1897,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         CqlValueSet d_ = this.General_or_Neuraxial_Anesthesia(context);
         IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        CqlValueSet f_ = this.Oral_Factor_Xa_Inhibitor_for_VTE_Prophylaxis_or_VTE_Treatment(context);
-        IEnumerable<MedicationAdministration> g_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> h_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> f_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? i_(MedicationAdministration MR) {
+        bool? g_(MedicationAdministration MR) {
             IEnumerable<Medication> bk_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? bl_(Medication M) {
@@ -1923,8 +1921,10 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return bn_;
         }
 
-        IEnumerable<MedicationAdministration> j_ = context.Operators.Where<MedicationAdministration>(h_, i_);
-        IEnumerable<MedicationAdministration> k_ = context.Operators.Union<MedicationAdministration>(g_, j_);
+        IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
+        CqlValueSet i_ = this.Oral_Factor_Xa_Inhibitor_for_VTE_Prophylaxis_or_VTE_Treatment(context);
+        IEnumerable<MedicationAdministration> j_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> k_ = context.Operators.Union<MedicationAdministration>(h_, j_);
         IEnumerable<ValueTuple<Encounter, Procedure, MedicationAdministration>> l_ = context.Operators.CrossJoin<Encounter, Procedure, MedicationAdministration>(a_, e_, k_);
 
         (CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, MedicationAdministration FactorXaMedication)? m_(ValueTuple<Encounter, Procedure, MedicationAdministration> _valueTuple) {
@@ -1958,7 +1958,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool du_() {
                     DataType ea_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-                    bool ec_ = eb_ is CqlInterval<CqlDateTime>;
+                    bool ec_ = eb_ is CqlQuantity;
                     return ec_;
                 }
 
@@ -1966,7 +1966,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool dv_() {
                     DataType ed_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object ee_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ed_);
-                    bool ef_ = ee_ is CqlQuantity;
+                    bool ef_ = ee_ is CqlInterval<CqlDateTime>;
                     return ef_;
                 }
 
@@ -1988,13 +1988,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType el_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object em_ = FHIRHelpers_4_4_000.Instance.ToValue(context, el_);
-                    return em_ as CqlInterval<CqlDateTime>;
+                    return em_ as CqlQuantity;
                 }
                 else if (dv_())
                 {
                     DataType en_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object eo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, en_);
-                    return eo_ as CqlQuantity;
+                    return eo_ as CqlInterval<CqlDateTime>;
                 }
                 else if (dw_())
                 {
@@ -2033,7 +2033,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool es_() {
                     DataType ey_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object ez_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ey_);
-                    bool fa_ = ez_ is CqlInterval<CqlDateTime>;
+                    bool fa_ = ez_ is CqlQuantity;
                     return fa_;
                 }
 
@@ -2041,7 +2041,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool et_() {
                     DataType fb_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object fc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fb_);
-                    bool fd_ = fc_ is CqlQuantity;
+                    bool fd_ = fc_ is CqlInterval<CqlDateTime>;
                     return fd_;
                 }
 
@@ -2063,13 +2063,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType fj_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object fk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fj_);
-                    return fk_ as CqlInterval<CqlDateTime>;
+                    return fk_ as CqlQuantity;
                 }
                 else if (et_())
                 {
                     DataType fl_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object fm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fl_);
-                    return fm_ as CqlQuantity;
+                    return fm_ as CqlInterval<CqlDateTime>;
                 }
                 else if (eu_())
                 {
@@ -2102,7 +2102,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool fq_() {
                     DataType fw_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object fx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fw_);
-                    bool fy_ = fx_ is CqlInterval<CqlDateTime>;
+                    bool fy_ = fx_ is CqlQuantity;
                     return fy_;
                 }
 
@@ -2110,7 +2110,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool fr_() {
                     DataType fz_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object ga_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fz_);
-                    bool gb_ = ga_ is CqlQuantity;
+                    bool gb_ = ga_ is CqlInterval<CqlDateTime>;
                     return gb_;
                 }
 
@@ -2132,13 +2132,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType gh_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object gi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gh_);
-                    return gi_ as CqlInterval<CqlDateTime>;
+                    return gi_ as CqlQuantity;
                 }
                 else if (fr_())
                 {
                     DataType gj_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object gk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gj_);
-                    return gk_ as CqlQuantity;
+                    return gk_ as CqlInterval<CqlDateTime>;
                 }
                 else if (fs_())
                 {
@@ -2171,7 +2171,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool go_() {
                     DataType gu_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object gv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gu_);
-                    bool gw_ = gv_ is CqlInterval<CqlDateTime>;
+                    bool gw_ = gv_ is CqlQuantity;
                     return gw_;
                 }
 
@@ -2179,7 +2179,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool gp_() {
                     DataType gx_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object gy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gx_);
-                    bool gz_ = gy_ is CqlQuantity;
+                    bool gz_ = gy_ is CqlInterval<CqlDateTime>;
                     return gz_;
                 }
 
@@ -2201,13 +2201,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType hf_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object hg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hf_);
-                    return hg_ as CqlInterval<CqlDateTime>;
+                    return hg_ as CqlQuantity;
                 }
                 else if (gp_())
                 {
                     DataType hh_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object hi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hh_);
-                    return hi_ as CqlQuantity;
+                    return hi_ as CqlInterval<CqlDateTime>;
                 }
                 else if (gq_())
                 {
@@ -2239,7 +2239,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool hm_() {
                     DataType hs_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object ht_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hs_);
-                    bool hu_ = ht_ is CqlInterval<CqlDateTime>;
+                    bool hu_ = ht_ is CqlQuantity;
                     return hu_;
                 }
 
@@ -2247,7 +2247,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool hn_() {
                     DataType hv_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object hw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hv_);
-                    bool hx_ = hw_ is CqlQuantity;
+                    bool hx_ = hw_ is CqlInterval<CqlDateTime>;
                     return hx_;
                 }
 
@@ -2269,13 +2269,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType id_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object ie_ = FHIRHelpers_4_4_000.Instance.ToValue(context, id_);
-                    return ie_ as CqlInterval<CqlDateTime>;
+                    return ie_ as CqlQuantity;
                 }
                 else if (hn_())
                 {
                     DataType if_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
                     object ig_ = FHIRHelpers_4_4_000.Instance.ToValue(context, if_);
-                    return ig_ as CqlQuantity;
+                    return ig_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ho_())
                 {
@@ -2475,7 +2475,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     bool y_() {
                         DataType ae_ = HipKneeProcedure?.Performed;
                         object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlInterval<CqlDateTime>;
+                        bool ag_ = af_ is CqlQuantity;
                         return ag_;
                     }
 
@@ -2483,7 +2483,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     bool z_() {
                         DataType ah_ = HipKneeProcedure?.Performed;
                         object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        bool aj_ = ai_ is CqlQuantity;
+                        bool aj_ = ai_ is CqlInterval<CqlDateTime>;
                         return aj_;
                     }
 
@@ -2505,13 +2505,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     {
                         DataType ap_ = HipKneeProcedure?.Performed;
                         object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        return aq_ as CqlInterval<CqlDateTime>;
+                        return aq_ as CqlQuantity;
                     }
                     else if (z_())
                     {
                         DataType ar_ = HipKneeProcedure?.Performed;
                         object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                        return as_ as CqlQuantity;
+                        return as_ as CqlInterval<CqlDateTime>;
                     }
                     else if (aa_())
                     {
@@ -2594,7 +2594,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool bg_() {
                     DataType bl_ = VTERiskAssessment?.Effective;
                     object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    bool bn_ = bm_ is CqlInterval<CqlDateTime>;
+                    bool bn_ = bm_ is CqlDateTime;
                     return bn_;
                 }
 
@@ -2602,7 +2602,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool bh_() {
                     DataType bo_ = VTERiskAssessment?.Effective;
                     object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
-                    bool bq_ = bp_ is CqlDateTime;
+                    bool bq_ = bp_ is CqlInterval<CqlDateTime>;
                     return bq_;
                 }
 
@@ -2616,13 +2616,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType bt_ = VTERiskAssessment?.Effective;
                     object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                    return bu_ as CqlInterval<CqlDateTime>;
+                    return bu_ as CqlDateTime;
                 }
                 else if (bh_())
                 {
                     DataType bv_ = VTERiskAssessment?.Effective;
                     object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    return bw_ as CqlDateTime;
+                    return bw_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2673,11 +2673,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?> n_ = context.Operators.Select<Observation, (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?>(l_, m_);
         IEnumerable<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?> o_ = context.Operators.Distinct<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?>(n_);
         IEnumerable<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?> p_ = context.Operators.Union<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?>(h_, o_);
-        CqlValueSet q_ = this.Unfractionated_Heparin(context);
-        IEnumerable<MedicationAdministration> r_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> s_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> q_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? t_(MedicationAdministration MR) {
+        bool? r_(MedicationAdministration MR) {
             IEnumerable<Medication> cn_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? co_(Medication M) {
@@ -2699,8 +2697,10 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return cq_;
         }
 
-        IEnumerable<MedicationAdministration> u_ = context.Operators.Where<MedicationAdministration>(s_, t_);
-        IEnumerable<MedicationAdministration> v_ = context.Operators.Union<MedicationAdministration>(r_, u_);
+        IEnumerable<MedicationAdministration> s_ = context.Operators.Where<MedicationAdministration>(q_, r_);
+        CqlValueSet t_ = this.Unfractionated_Heparin(context);
+        IEnumerable<MedicationAdministration> u_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> v_ = context.Operators.Union<MedicationAdministration>(s_, u_);
 
         bool? w_(MedicationAdministration UnfractionatedHeparin) {
             MedicationAdministration.DosageComponent db_ = UnfractionatedHeparin?.Dosage;
@@ -2712,10 +2712,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         }
 
         IEnumerable<MedicationAdministration> x_ = context.Operators.Where<MedicationAdministration>(v_, w_);
-        CqlValueSet y_ = this.Direct_Thrombin_Inhibitor(context);
-        IEnumerable<MedicationAdministration> z_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? aa_(MedicationAdministration MR) {
+        bool? y_(MedicationAdministration MR) {
             IEnumerable<Medication> dg_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? dh_(Medication M) {
@@ -2737,13 +2735,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return dj_;
         }
 
-        IEnumerable<MedicationAdministration> ab_ = context.Operators.Where<MedicationAdministration>(s_, aa_);
+        IEnumerable<MedicationAdministration> z_ = context.Operators.Where<MedicationAdministration>(q_, y_);
+        CqlValueSet aa_ = this.Direct_Thrombin_Inhibitor(context);
+        IEnumerable<MedicationAdministration> ab_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, aa_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> ac_ = context.Operators.Union<MedicationAdministration>(z_, ab_);
         IEnumerable<MedicationAdministration> ad_ = context.Operators.Union<MedicationAdministration>(x_, ac_);
-        CqlValueSet ae_ = this.Glycoprotein_IIb_IIIa_Inhibitors(context);
-        IEnumerable<MedicationAdministration> af_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? ag_(MedicationAdministration MR) {
+        bool? ae_(MedicationAdministration MR) {
             IEnumerable<Medication> du_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? dv_(Medication M) {
@@ -2765,7 +2763,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return dx_;
         }
 
-        IEnumerable<MedicationAdministration> ah_ = context.Operators.Where<MedicationAdministration>(s_, ag_);
+        IEnumerable<MedicationAdministration> af_ = context.Operators.Where<MedicationAdministration>(q_, ae_);
+        CqlValueSet ag_ = this.Glycoprotein_IIb_IIIa_Inhibitors(context);
+        IEnumerable<MedicationAdministration> ah_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> ai_ = context.Operators.Union<MedicationAdministration>(af_, ah_);
         IEnumerable<MedicationAdministration> aj_ = context.Operators.Union<MedicationAdministration>(ad_, ai_);
 
@@ -2874,7 +2874,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ba_() {
                     DataType bg_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                    bool bi_ = bh_ is CqlInterval<CqlDateTime>;
+                    bool bi_ = bh_ is CqlQuantity;
                     return bi_;
                 }
 
@@ -2882,7 +2882,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool bb_() {
                     DataType bj_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                    bool bl_ = bk_ is CqlQuantity;
+                    bool bl_ = bk_ is CqlInterval<CqlDateTime>;
                     return bl_;
                 }
 
@@ -2904,13 +2904,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType br_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
-                    return bs_ as CqlInterval<CqlDateTime>;
+                    return bs_ as CqlQuantity;
                 }
                 else if (bb_())
                 {
                     DataType bt_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                    return bu_ as CqlQuantity;
+                    return bu_ as CqlInterval<CqlDateTime>;
                 }
                 else if (bc_())
                 {
@@ -2946,7 +2946,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool by_() {
                     DataType ce_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                    bool cg_ = cf_ is CqlInterval<CqlDateTime>;
+                    bool cg_ = cf_ is CqlQuantity;
                     return cg_;
                 }
 
@@ -2954,7 +2954,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool bz_() {
                     DataType ch_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                    bool cj_ = ci_ is CqlQuantity;
+                    bool cj_ = ci_ is CqlInterval<CqlDateTime>;
                     return cj_;
                 }
 
@@ -2976,13 +2976,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType cp_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object cq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cp_);
-                    return cq_ as CqlInterval<CqlDateTime>;
+                    return cq_ as CqlQuantity;
                 }
                 else if (bz_())
                 {
                     DataType cr_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                    return cs_ as CqlQuantity;
+                    return cs_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ca_())
                 {
@@ -3015,7 +3015,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool cw_() {
                     DataType dc_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                    bool de_ = dd_ is CqlInterval<CqlDateTime>;
+                    bool de_ = dd_ is CqlQuantity;
                     return de_;
                 }
 
@@ -3023,7 +3023,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool cx_() {
                     DataType df_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object dg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, df_);
-                    bool dh_ = dg_ is CqlQuantity;
+                    bool dh_ = dg_ is CqlInterval<CqlDateTime>;
                     return dh_;
                 }
 
@@ -3045,13 +3045,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType dn_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object do_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dn_);
-                    return do_ as CqlInterval<CqlDateTime>;
+                    return do_ as CqlQuantity;
                 }
                 else if (cx_())
                 {
                     DataType dp_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object dq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dp_);
-                    return dq_ as CqlQuantity;
+                    return dq_ as CqlInterval<CqlDateTime>;
                 }
                 else if (cy_())
                 {
@@ -3084,7 +3084,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool du_() {
                     DataType ea_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-                    bool ec_ = eb_ is CqlInterval<CqlDateTime>;
+                    bool ec_ = eb_ is CqlQuantity;
                     return ec_;
                 }
 
@@ -3092,7 +3092,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool dv_() {
                     DataType ed_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object ee_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ed_);
-                    bool ef_ = ee_ is CqlQuantity;
+                    bool ef_ = ee_ is CqlInterval<CqlDateTime>;
                     return ef_;
                 }
 
@@ -3114,13 +3114,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType el_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object em_ = FHIRHelpers_4_4_000.Instance.ToValue(context, el_);
-                    return em_ as CqlInterval<CqlDateTime>;
+                    return em_ as CqlQuantity;
                 }
                 else if (dv_())
                 {
                     DataType en_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object eo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, en_);
-                    return eo_ as CqlQuantity;
+                    return eo_ as CqlInterval<CqlDateTime>;
                 }
                 else if (dw_())
                 {
@@ -3152,7 +3152,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool es_() {
                     DataType ey_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object ez_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ey_);
-                    bool fa_ = ez_ is CqlInterval<CqlDateTime>;
+                    bool fa_ = ez_ is CqlQuantity;
                     return fa_;
                 }
 
@@ -3160,7 +3160,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool et_() {
                     DataType fb_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object fc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fb_);
-                    bool fd_ = fc_ is CqlQuantity;
+                    bool fd_ = fc_ is CqlInterval<CqlDateTime>;
                     return fd_;
                 }
 
@@ -3182,13 +3182,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType fj_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object fk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fj_);
-                    return fk_ as CqlInterval<CqlDateTime>;
+                    return fk_ as CqlQuantity;
                 }
                 else if (et_())
                 {
                     DataType fl_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
                     object fm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fl_);
-                    return fm_ as CqlQuantity;
+                    return fm_ as CqlInterval<CqlDateTime>;
                 }
                 else if (eu_())
                 {
@@ -3381,10 +3381,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> ap_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(an_, ao_);
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> aq_ = context.Operators.Distinct<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(ap_);
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> ar_ = context.Operators.Union<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(x_, aq_);
-        IEnumerable<MedicationRequest> as_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> at_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> as_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? au_(MedicationRequest MR) {
+        bool? at_(MedicationRequest MR) {
             IEnumerable<Medication> dp_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? dq_(Medication M) {
@@ -3406,11 +3405,11 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return ds_;
         }
 
-        IEnumerable<MedicationRequest> av_ = context.Operators.Where<MedicationRequest>(at_, au_);
-        IEnumerable<MedicationRequest> aw_ = context.Operators.Union<MedicationRequest>(as_, av_);
-        IEnumerable<MedicationRequest> ax_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> au_ = context.Operators.Where<MedicationRequest>(as_, at_);
+        IEnumerable<MedicationRequest> av_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> aw_ = context.Operators.Union<MedicationRequest>(au_, av_);
 
-        bool? ay_(MedicationRequest MR) {
+        bool? ax_(MedicationRequest MR) {
             IEnumerable<Medication> ed_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ee_(Medication M) {
@@ -3432,12 +3431,12 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return eg_;
         }
 
-        IEnumerable<MedicationRequest> az_ = context.Operators.Where<MedicationRequest>(at_, ay_);
-        IEnumerable<MedicationRequest> ba_ = context.Operators.Union<MedicationRequest>(ax_, az_);
+        IEnumerable<MedicationRequest> ay_ = context.Operators.Where<MedicationRequest>(as_, ax_);
+        IEnumerable<MedicationRequest> az_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> ba_ = context.Operators.Union<MedicationRequest>(ay_, az_);
         IEnumerable<MedicationRequest> bb_ = context.Operators.Union<MedicationRequest>(aw_, ba_);
-        IEnumerable<MedicationRequest> bc_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? bd_(MedicationRequest MR) {
+        bool? bc_(MedicationRequest MR) {
             IEnumerable<Medication> er_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? es_(Medication M) {
@@ -3459,12 +3458,12 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return eu_;
         }
 
-        IEnumerable<MedicationRequest> be_ = context.Operators.Where<MedicationRequest>(at_, bd_);
-        IEnumerable<MedicationRequest> bf_ = context.Operators.Union<MedicationRequest>(bc_, be_);
+        IEnumerable<MedicationRequest> bd_ = context.Operators.Where<MedicationRequest>(as_, bc_);
+        IEnumerable<MedicationRequest> be_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> bf_ = context.Operators.Union<MedicationRequest>(bd_, be_);
         IEnumerable<MedicationRequest> bg_ = context.Operators.Union<MedicationRequest>(bb_, bf_);
-        IEnumerable<MedicationRequest> bh_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? bi_(MedicationRequest MR) {
+        bool? bh_(MedicationRequest MR) {
             IEnumerable<Medication> ff_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? fg_(Medication M) {
@@ -3486,12 +3485,12 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return fi_;
         }
 
-        IEnumerable<MedicationRequest> bj_ = context.Operators.Where<MedicationRequest>(at_, bi_);
-        IEnumerable<MedicationRequest> bk_ = context.Operators.Union<MedicationRequest>(bh_, bj_);
+        IEnumerable<MedicationRequest> bi_ = context.Operators.Where<MedicationRequest>(as_, bh_);
+        IEnumerable<MedicationRequest> bj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> bk_ = context.Operators.Union<MedicationRequest>(bi_, bj_);
         IEnumerable<MedicationRequest> bl_ = context.Operators.Union<MedicationRequest>(bg_, bk_);
-        IEnumerable<MedicationRequest> bm_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? bn_(MedicationRequest MR) {
+        bool? bm_(MedicationRequest MR) {
             IEnumerable<Medication> ft_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? fu_(Medication M) {
@@ -3513,8 +3512,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             return fw_;
         }
 
-        IEnumerable<MedicationRequest> bo_ = context.Operators.Where<MedicationRequest>(at_, bn_);
-        IEnumerable<MedicationRequest> bp_ = context.Operators.Union<MedicationRequest>(bm_, bo_);
+        IEnumerable<MedicationRequest> bn_ = context.Operators.Where<MedicationRequest>(as_, bm_);
+        IEnumerable<MedicationRequest> bo_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> bp_ = context.Operators.Union<MedicationRequest>(bn_, bo_);
         IEnumerable<MedicationRequest> bq_ = context.Operators.Union<MedicationRequest>(bl_, bp_);
         IEnumerable<Task> br_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
         IEnumerable<ValueTuple<MedicationRequest, Task>> bs_ = context.Operators.CrossJoin<MedicationRequest, Task>(bq_, br_);
@@ -3911,7 +3911,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool be_() {
                     DataType bk_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                    bool bm_ = bl_ is CqlInterval<CqlDateTime>;
+                    bool bm_ = bl_ is CqlQuantity;
                     return bm_;
                 }
 
@@ -3919,7 +3919,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool bf_() {
                     DataType bn_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    bool bp_ = bo_ is CqlQuantity;
+                    bool bp_ = bo_ is CqlInterval<CqlDateTime>;
                     return bp_;
                 }
 
@@ -3941,13 +3941,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType bv_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    return bw_ as CqlInterval<CqlDateTime>;
+                    return bw_ as CqlQuantity;
                 }
                 else if (bf_())
                 {
                     DataType bx_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    return by_ as CqlQuantity;
+                    return by_ as CqlInterval<CqlDateTime>;
                 }
                 else if (bg_())
                 {
@@ -3983,7 +3983,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool cc_() {
                     DataType ci_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                    bool ck_ = cj_ is CqlInterval<CqlDateTime>;
+                    bool ck_ = cj_ is CqlQuantity;
                     return ck_;
                 }
 
@@ -3991,7 +3991,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool cd_() {
                     DataType cl_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                    bool cn_ = cm_ is CqlQuantity;
+                    bool cn_ = cm_ is CqlInterval<CqlDateTime>;
                     return cn_;
                 }
 
@@ -4013,13 +4013,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType ct_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object cu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ct_);
-                    return cu_ as CqlInterval<CqlDateTime>;
+                    return cu_ as CqlQuantity;
                 }
                 else if (cd_())
                 {
                     DataType cv_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
-                    return cw_ as CqlQuantity;
+                    return cw_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ce_())
                 {
@@ -4052,7 +4052,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool da_() {
                     DataType dg_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                    bool di_ = dh_ is CqlInterval<CqlDateTime>;
+                    bool di_ = dh_ is CqlQuantity;
                     return di_;
                 }
 
@@ -4060,7 +4060,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool db_() {
                     DataType dj_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                    bool dl_ = dk_ is CqlQuantity;
+                    bool dl_ = dk_ is CqlInterval<CqlDateTime>;
                     return dl_;
                 }
 
@@ -4082,13 +4082,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType dr_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object ds_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dr_);
-                    return ds_ as CqlInterval<CqlDateTime>;
+                    return ds_ as CqlQuantity;
                 }
                 else if (db_())
                 {
                     DataType dt_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object du_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dt_);
-                    return du_ as CqlQuantity;
+                    return du_ as CqlInterval<CqlDateTime>;
                 }
                 else if (dc_())
                 {
@@ -4121,7 +4121,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool dy_() {
                     DataType ee_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object ef_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ee_);
-                    bool eg_ = ef_ is CqlInterval<CqlDateTime>;
+                    bool eg_ = ef_ is CqlQuantity;
                     return eg_;
                 }
 
@@ -4129,7 +4129,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool dz_() {
                     DataType eh_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object ei_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eh_);
-                    bool ej_ = ei_ is CqlQuantity;
+                    bool ej_ = ei_ is CqlInterval<CqlDateTime>;
                     return ej_;
                 }
 
@@ -4151,13 +4151,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType ep_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
-                    return eq_ as CqlInterval<CqlDateTime>;
+                    return eq_ as CqlQuantity;
                 }
                 else if (dz_())
                 {
                     DataType er_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                    return es_ as CqlQuantity;
+                    return es_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ea_())
                 {
@@ -4189,7 +4189,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ew_() {
                     DataType fc_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object fd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fc_);
-                    bool fe_ = fd_ is CqlInterval<CqlDateTime>;
+                    bool fe_ = fd_ is CqlQuantity;
                     return fe_;
                 }
 
@@ -4197,7 +4197,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ex_() {
                     DataType ff_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object fg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ff_);
-                    bool fh_ = fg_ is CqlQuantity;
+                    bool fh_ = fg_ is CqlInterval<CqlDateTime>;
                     return fh_;
                 }
 
@@ -4219,13 +4219,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType fn_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object fo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fn_);
-                    return fo_ as CqlInterval<CqlDateTime>;
+                    return fo_ as CqlQuantity;
                 }
                 else if (ex_())
                 {
                     DataType fp_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
                     object fq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fp_);
-                    return fq_ as CqlQuantity;
+                    return fq_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ey_())
                 {
@@ -4301,7 +4301,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool be_() {
                     DataType bk_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                    bool bm_ = bl_ is CqlInterval<CqlDateTime>;
+                    bool bm_ = bl_ is CqlQuantity;
                     return bm_;
                 }
 
@@ -4309,7 +4309,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool bf_() {
                     DataType bn_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    bool bp_ = bo_ is CqlQuantity;
+                    bool bp_ = bo_ is CqlInterval<CqlDateTime>;
                     return bp_;
                 }
 
@@ -4331,13 +4331,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType bv_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    return bw_ as CqlInterval<CqlDateTime>;
+                    return bw_ as CqlQuantity;
                 }
                 else if (bf_())
                 {
                     DataType bx_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    return by_ as CqlQuantity;
+                    return by_ as CqlInterval<CqlDateTime>;
                 }
                 else if (bg_())
                 {
@@ -4373,7 +4373,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool cc_() {
                     DataType ci_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                    bool ck_ = cj_ is CqlInterval<CqlDateTime>;
+                    bool ck_ = cj_ is CqlQuantity;
                     return ck_;
                 }
 
@@ -4381,7 +4381,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool cd_() {
                     DataType cl_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                    bool cn_ = cm_ is CqlQuantity;
+                    bool cn_ = cm_ is CqlInterval<CqlDateTime>;
                     return cn_;
                 }
 
@@ -4403,13 +4403,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType ct_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object cu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ct_);
-                    return cu_ as CqlInterval<CqlDateTime>;
+                    return cu_ as CqlQuantity;
                 }
                 else if (cd_())
                 {
                     DataType cv_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
-                    return cw_ as CqlQuantity;
+                    return cw_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ce_())
                 {
@@ -4442,7 +4442,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool da_() {
                     DataType dg_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                    bool di_ = dh_ is CqlInterval<CqlDateTime>;
+                    bool di_ = dh_ is CqlQuantity;
                     return di_;
                 }
 
@@ -4450,7 +4450,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool db_() {
                     DataType dj_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                    bool dl_ = dk_ is CqlQuantity;
+                    bool dl_ = dk_ is CqlInterval<CqlDateTime>;
                     return dl_;
                 }
 
@@ -4472,13 +4472,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType dr_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object ds_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dr_);
-                    return ds_ as CqlInterval<CqlDateTime>;
+                    return ds_ as CqlQuantity;
                 }
                 else if (db_())
                 {
                     DataType dt_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object du_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dt_);
-                    return du_ as CqlQuantity;
+                    return du_ as CqlInterval<CqlDateTime>;
                 }
                 else if (dc_())
                 {
@@ -4511,7 +4511,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool dy_() {
                     DataType ee_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object ef_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ee_);
-                    bool eg_ = ef_ is CqlInterval<CqlDateTime>;
+                    bool eg_ = ef_ is CqlQuantity;
                     return eg_;
                 }
 
@@ -4519,7 +4519,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool dz_() {
                     DataType eh_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object ei_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eh_);
-                    bool ej_ = ei_ is CqlQuantity;
+                    bool ej_ = ei_ is CqlInterval<CqlDateTime>;
                     return ej_;
                 }
 
@@ -4541,13 +4541,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType ep_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
-                    return eq_ as CqlInterval<CqlDateTime>;
+                    return eq_ as CqlQuantity;
                 }
                 else if (dz_())
                 {
                     DataType er_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                    return es_ as CqlQuantity;
+                    return es_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ea_())
                 {
@@ -4579,7 +4579,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ew_() {
                     DataType fc_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object fd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fc_);
-                    bool fe_ = fd_ is CqlInterval<CqlDateTime>;
+                    bool fe_ = fd_ is CqlQuantity;
                     return fe_;
                 }
 
@@ -4587,7 +4587,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ex_() {
                     DataType ff_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object fg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ff_);
-                    bool fh_ = fg_ is CqlQuantity;
+                    bool fh_ = fg_ is CqlInterval<CqlDateTime>;
                     return fh_;
                 }
 
@@ -4609,13 +4609,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType fn_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object fo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fn_);
-                    return fo_ as CqlInterval<CqlDateTime>;
+                    return fo_ as CqlQuantity;
                 }
                 else if (ex_())
                 {
                     DataType fp_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
                     object fq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fp_);
-                    return fq_ as CqlQuantity;
+                    return fq_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ey_())
                 {
@@ -4780,7 +4780,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ba_() {
                     DataType bg_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                    bool bi_ = bh_ is CqlInterval<CqlDateTime>;
+                    bool bi_ = bh_ is CqlQuantity;
                     return bi_;
                 }
 
@@ -4788,7 +4788,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool bb_() {
                     DataType bj_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                    bool bl_ = bk_ is CqlQuantity;
+                    bool bl_ = bk_ is CqlInterval<CqlDateTime>;
                     return bl_;
                 }
 
@@ -4810,13 +4810,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType br_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
-                    return bs_ as CqlInterval<CqlDateTime>;
+                    return bs_ as CqlQuantity;
                 }
                 else if (bb_())
                 {
                     DataType bt_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                    return bu_ as CqlQuantity;
+                    return bu_ as CqlInterval<CqlDateTime>;
                 }
                 else if (bc_())
                 {
@@ -4852,7 +4852,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool by_() {
                     DataType ce_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                    bool cg_ = cf_ is CqlInterval<CqlDateTime>;
+                    bool cg_ = cf_ is CqlQuantity;
                     return cg_;
                 }
 
@@ -4860,7 +4860,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool bz_() {
                     DataType ch_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                    bool cj_ = ci_ is CqlQuantity;
+                    bool cj_ = ci_ is CqlInterval<CqlDateTime>;
                     return cj_;
                 }
 
@@ -4882,13 +4882,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType cp_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object cq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cp_);
-                    return cq_ as CqlInterval<CqlDateTime>;
+                    return cq_ as CqlQuantity;
                 }
                 else if (bz_())
                 {
                     DataType cr_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                    return cs_ as CqlQuantity;
+                    return cs_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ca_())
                 {
@@ -4921,7 +4921,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool cw_() {
                     DataType dc_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                    bool de_ = dd_ is CqlInterval<CqlDateTime>;
+                    bool de_ = dd_ is CqlQuantity;
                     return de_;
                 }
 
@@ -4929,7 +4929,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool cx_() {
                     DataType df_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object dg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, df_);
-                    bool dh_ = dg_ is CqlQuantity;
+                    bool dh_ = dg_ is CqlInterval<CqlDateTime>;
                     return dh_;
                 }
 
@@ -4951,13 +4951,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType dn_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object do_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dn_);
-                    return do_ as CqlInterval<CqlDateTime>;
+                    return do_ as CqlQuantity;
                 }
                 else if (cx_())
                 {
                     DataType dp_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object dq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dp_);
-                    return dq_ as CqlQuantity;
+                    return dq_ as CqlInterval<CqlDateTime>;
                 }
                 else if (cy_())
                 {
@@ -4990,7 +4990,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool du_() {
                     DataType ea_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-                    bool ec_ = eb_ is CqlInterval<CqlDateTime>;
+                    bool ec_ = eb_ is CqlQuantity;
                     return ec_;
                 }
 
@@ -4998,7 +4998,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool dv_() {
                     DataType ed_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object ee_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ed_);
-                    bool ef_ = ee_ is CqlQuantity;
+                    bool ef_ = ee_ is CqlInterval<CqlDateTime>;
                     return ef_;
                 }
 
@@ -5020,13 +5020,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType el_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object em_ = FHIRHelpers_4_4_000.Instance.ToValue(context, el_);
-                    return em_ as CqlInterval<CqlDateTime>;
+                    return em_ as CqlQuantity;
                 }
                 else if (dv_())
                 {
                     DataType en_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object eo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, en_);
-                    return eo_ as CqlQuantity;
+                    return eo_ as CqlInterval<CqlDateTime>;
                 }
                 else if (dw_())
                 {
@@ -5058,7 +5058,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool es_() {
                     DataType ey_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object ez_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ey_);
-                    bool fa_ = ez_ is CqlInterval<CqlDateTime>;
+                    bool fa_ = ez_ is CqlQuantity;
                     return fa_;
                 }
 
@@ -5066,7 +5066,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool et_() {
                     DataType fb_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object fc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fb_);
-                    bool fd_ = fc_ is CqlQuantity;
+                    bool fd_ = fc_ is CqlInterval<CqlDateTime>;
                     return fd_;
                 }
 
@@ -5088,13 +5088,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType fj_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object fk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fj_);
-                    return fk_ as CqlInterval<CqlDateTime>;
+                    return fk_ as CqlQuantity;
                 }
                 else if (et_())
                 {
                     DataType fl_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
                     object fm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fl_);
-                    return fm_ as CqlQuantity;
+                    return fm_ as CqlInterval<CqlDateTime>;
                 }
                 else if (eu_())
                 {

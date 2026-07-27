@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS69FHIRPCSBMIScreenAndFollowUp", "1.0.000")]
 public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000>
 {
@@ -355,11 +355,9 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         CqlValueSet c_ = this.Referrals_Where_Weight_Assessment_May_Occur(context);
         IEnumerable<ServiceRequest> d_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
         IEnumerable<ServiceRequest> e_ = context.Operators.Union<ServiceRequest>(b_, d_);
-        CqlValueSet f_ = this.Medications_for_Above_Normal_BMI(context);
-        IEnumerable<MedicationRequest> g_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> h_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> f_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? i_(MedicationRequest MR) {
+        bool? g_(MedicationRequest MR) {
             IEnumerable<Medication> o_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? p_(Medication M) {
@@ -381,8 +379,10 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             return r_;
         }
 
-        IEnumerable<MedicationRequest> j_ = context.Operators.Where<MedicationRequest>(h_, i_);
-        IEnumerable<MedicationRequest> k_ = context.Operators.Union<MedicationRequest>(g_, j_);
+        IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+        CqlValueSet i_ = this.Medications_for_Above_Normal_BMI(context);
+        IEnumerable<MedicationRequest> j_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> k_ = context.Operators.Union<MedicationRequest>(h_, j_);
         IEnumerable<object> l_ = context.Operators.Union<object>(e_ as IEnumerable<object>, k_ as IEnumerable<object>);
 
         bool? m_(object HighInterventionsOrdered) {
@@ -468,7 +468,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool ad_() {
                         DataType aj_ = HighInterventionsPerformed?.Performed;
                         object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        bool al_ = ak_ is CqlInterval<CqlDateTime>;
+                        bool al_ = ak_ is CqlQuantity;
                         return al_;
                     }
 
@@ -476,7 +476,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool ae_() {
                         DataType am_ = HighInterventionsPerformed?.Performed;
                         object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        bool ao_ = an_ is CqlQuantity;
+                        bool ao_ = an_ is CqlInterval<CqlDateTime>;
                         return ao_;
                     }
 
@@ -498,13 +498,13 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     {
                         DataType au_ = HighInterventionsPerformed?.Performed;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        return av_ as CqlInterval<CqlDateTime>;
+                        return av_ as CqlQuantity;
                     }
                     else if (ae_())
                     {
                         DataType aw_ = HighInterventionsPerformed?.Performed;
                         object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                        return ax_ as CqlQuantity;
+                        return ax_ as CqlInterval<CqlDateTime>;
                     }
                     else if (af_())
                     {
@@ -536,7 +536,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool bb_() {
                         DataType bh_ = HighInterventionsPerformed?.Performed;
                         object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                        bool bj_ = bi_ is CqlInterval<CqlDateTime>;
+                        bool bj_ = bi_ is CqlQuantity;
                         return bj_;
                     }
 
@@ -544,7 +544,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool bc_() {
                         DataType bk_ = HighInterventionsPerformed?.Performed;
                         object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                        bool bm_ = bl_ is CqlQuantity;
+                        bool bm_ = bl_ is CqlInterval<CqlDateTime>;
                         return bm_;
                     }
 
@@ -566,13 +566,13 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     {
                         DataType bs_ = HighInterventionsPerformed?.Performed;
                         object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                        return bt_ as CqlInterval<CqlDateTime>;
+                        return bt_ as CqlQuantity;
                     }
                     else if (bc_())
                     {
                         DataType bu_ = HighInterventionsPerformed?.Performed;
                         object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                        return bv_ as CqlQuantity;
+                        return bv_ as CqlInterval<CqlDateTime>;
                     }
                     else if (bd_())
                     {
@@ -635,7 +635,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool s_() {
                         object y_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
                         object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        bool aa_ = z_ is CqlInterval<CqlDateTime>;
+                        bool aa_ = z_ is CqlQuantity;
                         return aa_;
                     }
 
@@ -643,7 +643,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool t_() {
                         object ab_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
                         object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlQuantity;
+                        bool ad_ = ac_ is CqlInterval<CqlDateTime>;
                         return ad_;
                     }
 
@@ -665,13 +665,13 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     {
                         object aj_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
                         object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        return ak_ as CqlInterval<CqlDateTime>;
+                        return ak_ as CqlQuantity;
                     }
                     else if (t_())
                     {
                         object al_ = context.Operators.LateBoundProperty<object>(HighBMIInterventions, "performed");
                         object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        return am_ as CqlQuantity;
+                        return am_ as CqlInterval<CqlDateTime>;
                     }
                     else if (u_())
                     {
@@ -741,11 +741,9 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         CqlValueSet c_ = this.Referrals_Where_Weight_Assessment_May_Occur(context);
         IEnumerable<ServiceRequest> d_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
         IEnumerable<ServiceRequest> e_ = context.Operators.Union<ServiceRequest>(b_, d_);
-        CqlValueSet f_ = this.Medications_for_Below_Normal_BMI(context);
-        IEnumerable<MedicationRequest> g_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> h_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> f_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? i_(MedicationRequest MR) {
+        bool? g_(MedicationRequest MR) {
             IEnumerable<Medication> o_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? p_(Medication M) {
@@ -767,8 +765,10 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             return r_;
         }
 
-        IEnumerable<MedicationRequest> j_ = context.Operators.Where<MedicationRequest>(h_, i_);
-        IEnumerable<MedicationRequest> k_ = context.Operators.Union<MedicationRequest>(g_, j_);
+        IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+        CqlValueSet i_ = this.Medications_for_Below_Normal_BMI(context);
+        IEnumerable<MedicationRequest> j_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> k_ = context.Operators.Union<MedicationRequest>(h_, j_);
         IEnumerable<object> l_ = context.Operators.Union<object>(e_ as IEnumerable<object>, k_ as IEnumerable<object>);
 
         bool? m_(object LowInterventionsOrdered) {
@@ -863,7 +863,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool ap_() {
                         DataType av_ = LowInterventionsPerformed?.Performed;
                         object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                        bool ax_ = aw_ is CqlInterval<CqlDateTime>;
+                        bool ax_ = aw_ is CqlQuantity;
                         return ax_;
                     }
 
@@ -871,7 +871,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool aq_() {
                         DataType ay_ = LowInterventionsPerformed?.Performed;
                         object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                        bool ba_ = az_ is CqlQuantity;
+                        bool ba_ = az_ is CqlInterval<CqlDateTime>;
                         return ba_;
                     }
 
@@ -893,13 +893,13 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     {
                         DataType bg_ = LowInterventionsPerformed?.Performed;
                         object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                        return bh_ as CqlInterval<CqlDateTime>;
+                        return bh_ as CqlQuantity;
                     }
                     else if (aq_())
                     {
                         DataType bi_ = LowInterventionsPerformed?.Performed;
                         object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
-                        return bj_ as CqlQuantity;
+                        return bj_ as CqlInterval<CqlDateTime>;
                     }
                     else if (ar_())
                     {
@@ -932,7 +932,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool bn_() {
                         DataType bt_ = LowInterventionsPerformed?.Performed;
                         object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                        bool bv_ = bu_ is CqlInterval<CqlDateTime>;
+                        bool bv_ = bu_ is CqlQuantity;
                         return bv_;
                     }
 
@@ -940,7 +940,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool bo_() {
                         DataType bw_ = LowInterventionsPerformed?.Performed;
                         object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                        bool by_ = bx_ is CqlQuantity;
+                        bool by_ = bx_ is CqlInterval<CqlDateTime>;
                         return by_;
                     }
 
@@ -962,13 +962,13 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     {
                         DataType ce_ = LowInterventionsPerformed?.Performed;
                         object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                        return cf_ as CqlInterval<CqlDateTime>;
+                        return cf_ as CqlQuantity;
                     }
                     else if (bo_())
                     {
                         DataType cg_ = LowInterventionsPerformed?.Performed;
                         object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                        return ch_ as CqlQuantity;
+                        return ch_ as CqlInterval<CqlDateTime>;
                     }
                     else if (bp_())
                     {
@@ -1000,7 +1000,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool cl_() {
                         DataType cr_ = LowInterventionsPerformed?.Performed;
                         object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                        bool ct_ = cs_ is CqlInterval<CqlDateTime>;
+                        bool ct_ = cs_ is CqlQuantity;
                         return ct_;
                     }
 
@@ -1008,7 +1008,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool cm_() {
                         DataType cu_ = LowInterventionsPerformed?.Performed;
                         object cv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cu_);
-                        bool cw_ = cv_ is CqlQuantity;
+                        bool cw_ = cv_ is CqlInterval<CqlDateTime>;
                         return cw_;
                     }
 
@@ -1030,13 +1030,13 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     {
                         DataType dc_ = LowInterventionsPerformed?.Performed;
                         object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                        return dd_ as CqlInterval<CqlDateTime>;
+                        return dd_ as CqlQuantity;
                     }
                     else if (cm_())
                     {
                         DataType de_ = LowInterventionsPerformed?.Performed;
                         object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
-                        return df_ as CqlQuantity;
+                        return df_ as CqlInterval<CqlDateTime>;
                     }
                     else if (cn_())
                     {
@@ -1099,7 +1099,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool s_() {
                         object y_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
                         object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        bool aa_ = z_ is CqlInterval<CqlDateTime>;
+                        bool aa_ = z_ is CqlQuantity;
                         return aa_;
                     }
 
@@ -1107,7 +1107,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     bool t_() {
                         object ab_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
                         object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlQuantity;
+                        bool ad_ = ac_ is CqlInterval<CqlDateTime>;
                         return ad_;
                     }
 
@@ -1129,13 +1129,13 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     {
                         object aj_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
                         object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        return ak_ as CqlInterval<CqlDateTime>;
+                        return ak_ as CqlQuantity;
                     }
                     else if (t_())
                     {
                         object al_ = context.Operators.LateBoundProperty<object>(LowBMIInterventions, "performed");
                         object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        return am_ as CqlQuantity;
+                        return am_ as CqlInterval<CqlDateTime>;
                     }
                     else if (u_())
                     {

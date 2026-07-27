@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "4.6.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       } ],
@@ -585,13 +585,13 @@
                      },
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
-                        "locator" : "23:56-23:86",
+                        "locator" : "23:89-23:115",
                         "resultTypeName" : "{http://hl7.org/fhir}Condition",
                         "name" : "{http://hl7.org/fhir}Condition",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
-                        "locator" : "23:89-23:115",
+                        "locator" : "23:56-23:86",
                         "resultTypeName" : "{http://hl7.org/fhir}Condition",
                         "name" : "{http://hl7.org/fhir}Condition",
                         "annotation" : [ ]

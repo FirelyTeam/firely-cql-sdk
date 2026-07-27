@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "4.6.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       } ],
@@ -874,37 +874,9 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "type" : "Retrieve",
-                                 "dataType" : "{http://hl7.org/fhir}MedicationDispense",
-                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense",
-                                 "codeProperty" : "medication",
-                                 "codeComparator" : "in",
-                                 "annotation" : [ ],
-                                 "codes" : {
-                                    "type" : "ValueSetRef",
-                                    "locator" : "48:32-48:58",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                    "name" : "Antidepressant Medication",
-                                    "preserve" : true,
-                                    "annotation" : [ ]
-                                 },
-                                 "include" : [ ],
-                                 "codeFilter" : [ ],
-                                 "dateFilter" : [ ],
-                                 "otherFilter" : [ ]
-                              }, {
                                  "type" : "Query",
                                  "locator" : "48:11-48:59",
                                  "annotation" : [ ],
-                                 "resultTypeSpecifier" : {
-                                    "type" : "ListTypeSpecifier",
-                                    "annotation" : [ ],
-                                    "elementType" : {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationDispense",
-                                       "annotation" : [ ]
-                                    }
-                                 },
                                  "source" : [ {
                                     "locator" : "48:11-48:59",
                                     "alias" : "MR",
@@ -1034,6 +1006,35 @@
                                        } ]
                                     }
                                  } ]
+                              }, {
+                                 "type" : "Retrieve",
+                                 "locator" : "48:11-48:59",
+                                 "dataType" : "{http://hl7.org/fhir}MedicationDispense",
+                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense",
+                                 "codeProperty" : "medication",
+                                 "codeComparator" : "in",
+                                 "annotation" : [ ],
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                       "annotation" : [ ]
+                                    }
+                                 },
+                                 "codes" : {
+                                    "type" : "ValueSetRef",
+                                    "locator" : "48:32-48:58",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Antidepressant Medication",
+                                    "preserve" : true,
+                                    "annotation" : [ ]
+                                 },
+                                 "include" : [ ],
+                                 "codeFilter" : [ ],
+                                 "dateFilter" : [ ],
+                                 "otherFilter" : [ ]
                               } ]
                            } ]
                         }
@@ -2837,37 +2838,9 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "type" : "Retrieve",
-                                 "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                 "codeProperty" : "medication",
-                                 "codeComparator" : "in",
-                                 "annotation" : [ ],
-                                 "codes" : {
-                                    "type" : "ValueSetRef",
-                                    "locator" : "81:41-81:67",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                    "name" : "Antidepressant Medication",
-                                    "preserve" : true,
-                                    "annotation" : [ ]
-                                 },
-                                 "include" : [ ],
-                                 "codeFilter" : [ ],
-                                 "dateFilter" : [ ],
-                                 "otherFilter" : [ ]
-                              }, {
                                  "type" : "Query",
                                  "locator" : "81:21-81:68",
                                  "annotation" : [ ],
-                                 "resultTypeSpecifier" : {
-                                    "type" : "ListTypeSpecifier",
-                                    "annotation" : [ ],
-                                    "elementType" : {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "annotation" : [ ]
-                                    }
-                                 },
                                  "source" : [ {
                                     "locator" : "81:21-81:68",
                                     "alias" : "MR",
@@ -2997,6 +2970,35 @@
                                        } ]
                                     }
                                  } ]
+                              }, {
+                                 "type" : "Retrieve",
+                                 "locator" : "81:21-81:68",
+                                 "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                 "codeProperty" : "medication",
+                                 "codeComparator" : "in",
+                                 "annotation" : [ ],
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "annotation" : [ ]
+                                    }
+                                 },
+                                 "codes" : {
+                                    "type" : "ValueSetRef",
+                                    "locator" : "81:41-81:67",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Antidepressant Medication",
+                                    "preserve" : true,
+                                    "annotation" : [ ]
+                                 },
+                                 "include" : [ ],
+                                 "codeFilter" : [ ],
+                                 "dateFilter" : [ ],
+                                 "otherFilter" : [ ]
                               } ]
                            } ]
                         }
@@ -3406,37 +3408,9 @@
                            }
                         } ],
                         "operand" : [ {
-                           "type" : "Retrieve",
-                           "dataType" : "{http://hl7.org/fhir}MedicationDispense",
-                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense",
-                           "codeProperty" : "medication",
-                           "codeComparator" : "in",
-                           "annotation" : [ ],
-                           "codes" : {
-                              "type" : "ValueSetRef",
-                              "locator" : "93:28-93:54",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                              "name" : "Antidepressant Medication",
-                              "preserve" : true,
-                              "annotation" : [ ]
-                           },
-                           "include" : [ ],
-                           "codeFilter" : [ ],
-                           "dateFilter" : [ ],
-                           "otherFilter" : [ ]
-                        }, {
                            "type" : "Query",
                            "locator" : "93:7-93:55",
                            "annotation" : [ ],
-                           "resultTypeSpecifier" : {
-                              "type" : "ListTypeSpecifier",
-                              "annotation" : [ ],
-                              "elementType" : {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
-                                 "annotation" : [ ]
-                              }
-                           },
                            "source" : [ {
                               "locator" : "93:7-93:55",
                               "alias" : "MR",
@@ -3566,6 +3540,35 @@
                                  } ]
                               }
                            } ]
+                        }, {
+                           "type" : "Retrieve",
+                           "locator" : "93:7-93:55",
+                           "dataType" : "{http://hl7.org/fhir}MedicationDispense",
+                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense",
+                           "codeProperty" : "medication",
+                           "codeComparator" : "in",
+                           "annotation" : [ ],
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                 "annotation" : [ ]
+                              }
+                           },
+                           "codes" : {
+                              "type" : "ValueSetRef",
+                              "locator" : "93:28-93:54",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Antidepressant Medication",
+                              "preserve" : true,
+                              "annotation" : [ ]
+                           },
+                           "include" : [ ],
+                           "codeFilter" : [ ],
+                           "dateFilter" : [ ],
+                           "otherFilter" : [ ]
                         } ]
                      } ]
                   }
@@ -3915,37 +3918,9 @@
                            }
                         } ],
                         "operand" : [ {
-                           "type" : "Retrieve",
-                           "dataType" : "{http://hl7.org/fhir}MedicationDispense",
-                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense",
-                           "codeProperty" : "medication",
-                           "codeComparator" : "in",
-                           "annotation" : [ ],
-                           "codes" : {
-                              "type" : "ValueSetRef",
-                              "locator" : "105:28-105:54",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                              "name" : "Antidepressant Medication",
-                              "preserve" : true,
-                              "annotation" : [ ]
-                           },
-                           "include" : [ ],
-                           "codeFilter" : [ ],
-                           "dateFilter" : [ ],
-                           "otherFilter" : [ ]
-                        }, {
                            "type" : "Query",
                            "locator" : "105:7-105:55",
                            "annotation" : [ ],
-                           "resultTypeSpecifier" : {
-                              "type" : "ListTypeSpecifier",
-                              "annotation" : [ ],
-                              "elementType" : {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
-                                 "annotation" : [ ]
-                              }
-                           },
                            "source" : [ {
                               "locator" : "105:7-105:55",
                               "alias" : "MR",
@@ -4075,6 +4050,35 @@
                                  } ]
                               }
                            } ]
+                        }, {
+                           "type" : "Retrieve",
+                           "locator" : "105:7-105:55",
+                           "dataType" : "{http://hl7.org/fhir}MedicationDispense",
+                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense",
+                           "codeProperty" : "medication",
+                           "codeComparator" : "in",
+                           "annotation" : [ ],
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                 "annotation" : [ ]
+                              }
+                           },
+                           "codes" : {
+                              "type" : "ValueSetRef",
+                              "locator" : "105:28-105:54",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Antidepressant Medication",
+                              "preserve" : true,
+                              "annotation" : [ ]
+                           },
+                           "include" : [ ],
+                           "codeFilter" : [ ],
+                           "dateFilter" : [ ],
+                           "otherFilter" : [ ]
                         } ]
                      } ]
                   }
