@@ -280,7 +280,7 @@ public class FhirMeasureExtensionsTests
     [TestMethod]
     public void MeasureGroupCodeSystem_SetsGroupCodeWithGroupIdAsCode()
     {
-        const string system = "https://ncqa.org/fhir/CodeSystem/measure-group";
+        const string system = "https://example.org/fhir/CodeSystem/measure-group";
 
         var measure = CreateMeasure(system, BaseStatements());
 
@@ -296,7 +296,7 @@ public class FhirMeasureExtensionsTests
     [TestMethod]
     public void MeasureGroupCodeSystem_AlsoAppliesToGroupsCreatedByStratifiers()
     {
-        const string system = "https://ncqa.org/fhir/CodeSystem/measure-group";
+        const string system = "https://example.org/fhir/CodeSystem/measure-group";
 
         var measure = CreateMeasure(system, BaseStatements(
             Def("Region Stratifier",
