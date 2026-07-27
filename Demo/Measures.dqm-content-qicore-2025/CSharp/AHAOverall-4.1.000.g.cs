@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("AHAOverall", "4.1.000")]
 public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_000>
 {
@@ -439,7 +439,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     bool t_() {
                         DataType z_ = LVADPlacement?.Performed;
                         object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        bool ab_ = aa_ is CqlInterval<CqlDateTime>;
+                        bool ab_ = aa_ is CqlQuantity;
                         return ab_;
                     }
 
@@ -447,7 +447,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     bool u_() {
                         DataType ac_ = LVADPlacement?.Performed;
                         object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        bool ae_ = ad_ is CqlQuantity;
+                        bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                         return ae_;
                     }
 
@@ -469,13 +469,13 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     {
                         DataType ak_ = LVADPlacement?.Performed;
                         object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        return al_ as CqlInterval<CqlDateTime>;
+                        return al_ as CqlQuantity;
                     }
                     else if (u_())
                     {
                         DataType am_ = LVADPlacement?.Performed;
                         object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        return an_ as CqlQuantity;
+                        return an_ as CqlInterval<CqlDateTime>;
                     }
                     else if (v_())
                     {
@@ -640,7 +640,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     bool t_() {
                         DataType z_ = HeartTransplant?.Performed;
                         object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        bool ab_ = aa_ is CqlInterval<CqlDateTime>;
+                        bool ab_ = aa_ is CqlQuantity;
                         return ab_;
                     }
 
@@ -648,7 +648,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     bool u_() {
                         DataType ac_ = HeartTransplant?.Performed;
                         object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        bool ae_ = ad_ is CqlQuantity;
+                        bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                         return ae_;
                     }
 
@@ -670,13 +670,13 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     {
                         DataType ak_ = HeartTransplant?.Performed;
                         object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        return al_ as CqlInterval<CqlDateTime>;
+                        return al_ as CqlQuantity;
                     }
                     else if (u_())
                     {
                         DataType am_ = HeartTransplant?.Performed;
                         object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        return an_ as CqlQuantity;
+                        return an_ as CqlInterval<CqlDateTime>;
                     }
                     else if (v_())
                     {
@@ -955,7 +955,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 bool p_() {
                     DataType v_ = Procedure?.Performed;
                     object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlInterval<CqlDateTime>;
+                    bool x_ = w_ is CqlQuantity;
                     return x_;
                 }
 
@@ -963,7 +963,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 bool q_() {
                     DataType y_ = Procedure?.Performed;
                     object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    bool aa_ = z_ is CqlQuantity;
+                    bool aa_ = z_ is CqlInterval<CqlDateTime>;
                     return aa_;
                 }
 
@@ -985,13 +985,13 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 {
                     DataType ag_ = Procedure?.Performed;
                     object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                    return ah_ as CqlInterval<CqlDateTime>;
+                    return ah_ as CqlQuantity;
                 }
                 else if (q_())
                 {
                     DataType ai_ = Procedure?.Performed;
                     object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                    return aj_ as CqlQuantity;
+                    return aj_ as CqlInterval<CqlDateTime>;
                 }
                 else if (r_())
                 {

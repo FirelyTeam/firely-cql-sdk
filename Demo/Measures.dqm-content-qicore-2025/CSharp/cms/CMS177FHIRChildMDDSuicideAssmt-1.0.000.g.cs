@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS177FHIRChildMDDSuicideAssmt", "1.0.000")]
 public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISingleton<CMS177FHIRChildMDDSuicideAssmt_1_0_000>
 {
@@ -389,7 +389,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                     bool u_() {
                         DataType aa_ = SuicideRiskAssessmentProcedure?.Performed;
                         object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlInterval<CqlDateTime>;
+                        bool ac_ = ab_ is CqlQuantity;
                         return ac_;
                     }
 
@@ -397,7 +397,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                     bool v_() {
                         DataType ad_ = SuicideRiskAssessmentProcedure?.Performed;
                         object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                        bool af_ = ae_ is CqlQuantity;
+                        bool af_ = ae_ is CqlInterval<CqlDateTime>;
                         return af_;
                     }
 
@@ -419,13 +419,13 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                     {
                         DataType al_ = SuicideRiskAssessmentProcedure?.Performed;
                         object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        return am_ as CqlInterval<CqlDateTime>;
+                        return am_ as CqlQuantity;
                     }
                     else if (v_())
                     {
                         DataType an_ = SuicideRiskAssessmentProcedure?.Performed;
                         object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        return ao_ as CqlQuantity;
+                        return ao_ as CqlInterval<CqlDateTime>;
                     }
                     else if (w_())
                     {

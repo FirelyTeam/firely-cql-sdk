@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS124FHIRCervicalCancerScreen", "1.0.000")]
 public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISingleton<CMS124FHIRCervicalCancerScreen_1_0_000>
 {
@@ -258,7 +258,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 bool u_() {
                     DataType aa_ = NoCervixProcedure?.Performed;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    bool ac_ = ab_ is CqlInterval<CqlDateTime>;
+                    bool ac_ = ab_ is CqlQuantity;
                     return ac_;
                 }
 
@@ -266,7 +266,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 bool v_() {
                     DataType ad_ = NoCervixProcedure?.Performed;
                     object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                    bool af_ = ae_ is CqlQuantity;
+                    bool af_ = ae_ is CqlInterval<CqlDateTime>;
                     return af_;
                 }
 
@@ -288,13 +288,13 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 {
                     DataType al_ = NoCervixProcedure?.Performed;
                     object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                    return am_ as CqlInterval<CqlDateTime>;
+                    return am_ as CqlQuantity;
                 }
                 else if (v_())
                 {
                     DataType an_ = NoCervixProcedure?.Performed;
                     object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                    return ao_ as CqlQuantity;
+                    return ao_ as CqlInterval<CqlDateTime>;
                 }
                 else if (w_())
                 {
@@ -383,7 +383,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 bool t_() {
                     DataType y_ = CervicalCytology?.Effective;
                     object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    bool aa_ = z_ is CqlInterval<CqlDateTime>;
+                    bool aa_ = z_ is CqlDateTime;
                     return aa_;
                 }
 
@@ -391,7 +391,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 bool u_() {
                     DataType ab_ = CervicalCytology?.Effective;
                     object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    bool ad_ = ac_ is CqlDateTime;
+                    bool ad_ = ac_ is CqlInterval<CqlDateTime>;
                     return ad_;
                 }
 
@@ -405,13 +405,13 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 {
                     DataType ag_ = CervicalCytology?.Effective;
                     object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                    return ah_ as CqlInterval<CqlDateTime>;
+                    return ah_ as CqlDateTime;
                 }
                 else if (u_())
                 {
                     DataType ai_ = CervicalCytology?.Effective;
                     object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                    return aj_ as CqlDateTime;
+                    return aj_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -470,7 +470,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 bool ad_() {
                     DataType ai_ = HPVTest?.Effective;
                     object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                    bool ak_ = aj_ is CqlInterval<CqlDateTime>;
+                    bool ak_ = aj_ is CqlDateTime;
                     return ak_;
                 }
 
@@ -478,7 +478,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 bool ae_() {
                     DataType al_ = HPVTest?.Effective;
                     object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                    bool an_ = am_ is CqlDateTime;
+                    bool an_ = am_ is CqlInterval<CqlDateTime>;
                     return an_;
                 }
 
@@ -492,13 +492,13 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 {
                     DataType aq_ = HPVTest?.Effective;
                     object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                    return ar_ as CqlInterval<CqlDateTime>;
+                    return ar_ as CqlDateTime;
                 }
                 else if (ae_())
                 {
                     DataType as_ = HPVTest?.Effective;
                     object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
-                    return at_ as CqlDateTime;
+                    return at_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -524,7 +524,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 bool av_() {
                     DataType ba_ = HPVTest?.Effective;
                     object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                    bool bc_ = bb_ is CqlInterval<CqlDateTime>;
+                    bool bc_ = bb_ is CqlDateTime;
                     return bc_;
                 }
 
@@ -532,7 +532,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 bool aw_() {
                     DataType bd_ = HPVTest?.Effective;
                     object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                    bool bf_ = be_ is CqlDateTime;
+                    bool bf_ = be_ is CqlInterval<CqlDateTime>;
                     return bf_;
                 }
 
@@ -546,13 +546,13 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 {
                     DataType bi_ = HPVTest?.Effective;
                     object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
-                    return bj_ as CqlInterval<CqlDateTime>;
+                    return bj_ as CqlDateTime;
                 }
                 else if (aw_())
                 {
                     DataType bk_ = HPVTest?.Effective;
                     object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                    return bl_ as CqlDateTime;
+                    return bl_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {

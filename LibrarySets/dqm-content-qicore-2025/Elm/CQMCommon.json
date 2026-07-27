@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "4.6.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       }, {
@@ -13435,11 +13435,11 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                    "name" : "{http://hl7.org/fhir}Reference",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}Reference",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
                                     "annotation" : [ ]
                                  } ]
                               },
@@ -13524,11 +13524,11 @@
                                           "annotation" : [ ],
                                           "choice" : [ {
                                              "type" : "NamedTypeSpecifier",
-                                             "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                             "name" : "{http://hl7.org/fhir}Reference",
                                              "annotation" : [ ]
                                           }, {
                                              "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}Reference",
+                                             "name" : "{urn:hl7-org:elm-types:r1}Concept",
                                              "annotation" : [ ]
                                           } ]
                                        },
@@ -13758,11 +13758,11 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                       "name" : "{http://hl7.org/fhir}Reference",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}Reference",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "annotation" : [ ]
                                     } ]
                                  },
@@ -13847,11 +13847,11 @@
                                              "annotation" : [ ],
                                              "choice" : [ {
                                                 "type" : "NamedTypeSpecifier",
-                                                "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                                "name" : "{http://hl7.org/fhir}Reference",
                                                 "annotation" : [ ]
                                              }, {
                                                 "type" : "NamedTypeSpecifier",
-                                                "name" : "{http://hl7.org/fhir}Reference",
+                                                "name" : "{urn:hl7-org:elm-types:r1}Concept",
                                                 "annotation" : [ ]
                                              } ]
                                           },
@@ -14070,11 +14070,11 @@
                         "annotation" : [ ],
                         "choice" : [ {
                            "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "name" : "{http://hl7.org/fhir}Reference",
                            "annotation" : [ ]
                         }, {
                            "type" : "NamedTypeSpecifier",
-                           "name" : "{http://hl7.org/fhir}Reference",
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
                            "annotation" : [ ]
                         } ]
                      },
@@ -14118,11 +14118,11 @@
                         "annotation" : [ ],
                         "choice" : [ {
                            "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "name" : "{http://hl7.org/fhir}Reference",
                            "annotation" : [ ]
                         }, {
                            "type" : "NamedTypeSpecifier",
-                           "name" : "{http://hl7.org/fhir}Reference",
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
                            "annotation" : [ ]
                         } ]
                      },
@@ -14255,11 +14255,11 @@
                                        "annotation" : [ ],
                                        "choice" : [ {
                                           "type" : "NamedTypeSpecifier",
-                                          "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                          "name" : "{http://hl7.org/fhir}Reference",
                                           "annotation" : [ ]
                                        }, {
                                           "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}Reference",
+                                          "name" : "{urn:hl7-org:elm-types:r1}Concept",
                                           "annotation" : [ ]
                                        } ]
                                     },
@@ -14338,11 +14338,11 @@
                         "annotation" : [ ],
                         "choice" : [ {
                            "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "name" : "{http://hl7.org/fhir}Reference",
                            "annotation" : [ ]
                         }, {
                            "type" : "NamedTypeSpecifier",
-                           "name" : "{http://hl7.org/fhir}Reference",
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
                            "annotation" : [ ]
                         } ]
                      },
@@ -14386,11 +14386,11 @@
                         "annotation" : [ ],
                         "choice" : [ {
                            "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "name" : "{http://hl7.org/fhir}Reference",
                            "annotation" : [ ]
                         }, {
                            "type" : "NamedTypeSpecifier",
-                           "name" : "{http://hl7.org/fhir}Reference",
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
                            "annotation" : [ ]
                         } ]
                      },
@@ -14523,11 +14523,11 @@
                                        "annotation" : [ ],
                                        "choice" : [ {
                                           "type" : "NamedTypeSpecifier",
-                                          "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                          "name" : "{http://hl7.org/fhir}Reference",
                                           "annotation" : [ ]
                                        }, {
                                           "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}Reference",
+                                          "name" : "{urn:hl7-org:elm-types:r1}Concept",
                                           "annotation" : [ ]
                                        } ]
                                     },

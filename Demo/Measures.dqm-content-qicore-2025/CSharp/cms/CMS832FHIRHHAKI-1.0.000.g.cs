@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS832FHIRHHAKI", "1.0.000")]
 public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHHAKI_1_0_000>
 {
@@ -318,7 +318,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ag_() {
                     DataType al_ = tuple_bbcfbwcplsbuhefbwpxpvuequ?.CreatinineTest?.Effective;
                     object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                    bool an_ = am_ is CqlInterval<CqlDateTime>;
+                    bool an_ = am_ is CqlDateTime;
                     return an_;
                 }
 
@@ -326,7 +326,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ah_() {
                     DataType ao_ = tuple_bbcfbwcplsbuhefbwpxpvuequ?.CreatinineTest?.Effective;
                     object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    bool aq_ = ap_ is CqlDateTime;
+                    bool aq_ = ap_ is CqlInterval<CqlDateTime>;
                     return aq_;
                 }
 
@@ -340,13 +340,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType at_ = tuple_bbcfbwcplsbuhefbwpxpvuequ?.CreatinineTest?.Effective;
                     object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                    return au_ as CqlInterval<CqlDateTime>;
+                    return au_ as CqlDateTime;
                 }
                 else if (ah_())
                 {
                     DataType av_ = tuple_bbcfbwcplsbuhefbwpxpvuequ?.CreatinineTest?.Effective;
                     object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                    return aw_ as CqlDateTime;
+                    return aw_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -484,7 +484,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ae_() {
                     DataType aj_ = CreatinineTest?.Effective;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    bool al_ = ak_ is CqlInterval<CqlDateTime>;
+                    bool al_ = ak_ is CqlDateTime;
                     return al_;
                 }
 
@@ -492,7 +492,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool af_() {
                     DataType am_ = CreatinineTest?.Effective;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    bool ao_ = an_ is CqlDateTime;
+                    bool ao_ = an_ is CqlInterval<CqlDateTime>;
                     return ao_;
                 }
 
@@ -506,13 +506,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ar_ = CreatinineTest?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    return as_ as CqlInterval<CqlDateTime>;
+                    return as_ as CqlDateTime;
                 }
                 else if (af_())
                 {
                     DataType at_ = CreatinineTest?.Effective;
                     object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                    return au_ as CqlDateTime;
+                    return au_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -542,7 +542,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool aw_() {
                     DataType bb_ = CreatinineTest?.Effective;
                     object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                    bool bd_ = bc_ is CqlInterval<CqlDateTime>;
+                    bool bd_ = bc_ is CqlDateTime;
                     return bd_;
                 }
 
@@ -550,7 +550,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ax_() {
                     DataType be_ = CreatinineTest?.Effective;
                     object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                    bool bg_ = bf_ is CqlDateTime;
+                    bool bg_ = bf_ is CqlInterval<CqlDateTime>;
                     return bg_;
                 }
 
@@ -564,13 +564,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType bj_ = CreatinineTest?.Effective;
                     object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                    return bk_ as CqlInterval<CqlDateTime>;
+                    return bk_ as CqlDateTime;
                 }
                 else if (ax_())
                 {
                     DataType bl_ = CreatinineTest?.Effective;
                     object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    return bm_ as CqlDateTime;
+                    return bm_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -803,7 +803,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool al_() {
                     DataType aq_ = tuple_ccccqpjvqogtctjhtilehkfoj?.CreatinineTestByTime?.Effective;
                     object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                    bool as_ = ar_ is CqlInterval<CqlDateTime>;
+                    bool as_ = ar_ is CqlDateTime;
                     return as_;
                 }
 
@@ -811,7 +811,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool am_() {
                     DataType at_ = tuple_ccccqpjvqogtctjhtilehkfoj?.CreatinineTestByTime?.Effective;
                     object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                    bool av_ = au_ is CqlDateTime;
+                    bool av_ = au_ is CqlInterval<CqlDateTime>;
                     return av_;
                 }
 
@@ -825,13 +825,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ay_ = tuple_ccccqpjvqogtctjhtilehkfoj?.CreatinineTestByTime?.Effective;
                     object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                    return az_ as CqlInterval<CqlDateTime>;
+                    return az_ as CqlDateTime;
                 }
                 else if (am_())
                 {
                     DataType ba_ = tuple_ccccqpjvqogtctjhtilehkfoj?.CreatinineTestByTime?.Effective;
                     object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                    return bb_ as CqlDateTime;
+                    return bb_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -917,7 +917,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool cb_() {
                     DataType cg_ = tuple_ccccqpjvqogtctjhtilehkfoj?.CreatinineTestByTime?.Effective;
                     object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                    bool ci_ = ch_ is CqlInterval<CqlDateTime>;
+                    bool ci_ = ch_ is CqlDateTime;
                     return ci_;
                 }
 
@@ -925,7 +925,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool cc_() {
                     DataType cj_ = tuple_ccccqpjvqogtctjhtilehkfoj?.CreatinineTestByTime?.Effective;
                     object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                    bool cl_ = ck_ is CqlDateTime;
+                    bool cl_ = ck_ is CqlInterval<CqlDateTime>;
                     return cl_;
                 }
 
@@ -939,13 +939,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType co_ = tuple_ccccqpjvqogtctjhtilehkfoj?.CreatinineTestByTime?.Effective;
                     object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
-                    return cp_ as CqlInterval<CqlDateTime>;
+                    return cp_ as CqlDateTime;
                 }
                 else if (cc_())
                 {
                     DataType cq_ = tuple_ccccqpjvqogtctjhtilehkfoj?.CreatinineTestByTime?.Effective;
                     object cr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cq_);
-                    return cr_ as CqlDateTime;
+                    return cr_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -1292,7 +1292,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool bx_() {
                     DataType cc_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
-                    bool ce_ = cd_ is CqlInterval<CqlDateTime>;
+                    bool ce_ = cd_ is CqlDateTime;
                     return ce_;
                 }
 
@@ -1300,7 +1300,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool by_() {
                     DataType cf_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                    bool ch_ = cg_ is CqlDateTime;
+                    bool ch_ = cg_ is CqlInterval<CqlDateTime>;
                     return ch_;
                 }
 
@@ -1314,13 +1314,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ck_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
-                    return cl_ as CqlInterval<CqlDateTime>;
+                    return cl_ as CqlDateTime;
                 }
                 else if (by_())
                 {
                     DataType cm_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
-                    return cn_ as CqlDateTime;
+                    return cn_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -1343,7 +1343,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool cp_() {
                     DataType cu_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object cv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cu_);
-                    bool cw_ = cv_ is CqlInterval<CqlDateTime>;
+                    bool cw_ = cv_ is CqlDateTime;
                     return cw_;
                 }
 
@@ -1351,7 +1351,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool cq_() {
                     DataType cx_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
-                    bool cz_ = cy_ is CqlDateTime;
+                    bool cz_ = cy_ is CqlInterval<CqlDateTime>;
                     return cz_;
                 }
 
@@ -1365,13 +1365,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType dc_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                    return dd_ as CqlInterval<CqlDateTime>;
+                    return dd_ as CqlDateTime;
                 }
                 else if (cq_())
                 {
                     DataType de_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
-                    return df_ as CqlDateTime;
+                    return df_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -1396,7 +1396,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool dh_() {
                     DataType dm_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object dn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dm_);
-                    bool do_ = dn_ is CqlInterval<CqlDateTime>;
+                    bool do_ = dn_ is CqlDateTime;
                     return do_;
                 }
 
@@ -1404,7 +1404,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool di_() {
                     DataType dp_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object dq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dp_);
-                    bool dr_ = dq_ is CqlDateTime;
+                    bool dr_ = dq_ is CqlInterval<CqlDateTime>;
                     return dr_;
                 }
 
@@ -1418,13 +1418,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType du_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object dv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, du_);
-                    return dv_ as CqlInterval<CqlDateTime>;
+                    return dv_ as CqlDateTime;
                 }
                 else if (di_())
                 {
                     DataType dw_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object dx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dw_);
-                    return dx_ as CqlDateTime;
+                    return dx_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -1450,7 +1450,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool dz_() {
                     DataType ee_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object ef_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ee_);
-                    bool eg_ = ef_ is CqlInterval<CqlDateTime>;
+                    bool eg_ = ef_ is CqlDateTime;
                     return eg_;
                 }
 
@@ -1458,7 +1458,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ea_() {
                     DataType eh_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object ei_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eh_);
-                    bool ej_ = ei_ is CqlDateTime;
+                    bool ej_ = ei_ is CqlInterval<CqlDateTime>;
                     return ej_;
                 }
 
@@ -1472,13 +1472,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType em_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object en_ = FHIRHelpers_4_4_000.Instance.ToValue(context, em_);
-                    return en_ as CqlInterval<CqlDateTime>;
+                    return en_ as CqlDateTime;
                 }
                 else if (ea_())
                 {
                     DataType eo_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object ep_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eo_);
-                    return ep_ as CqlDateTime;
+                    return ep_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -1504,7 +1504,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool er_() {
                     DataType ew_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object ex_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ew_);
-                    bool ey_ = ex_ is CqlInterval<CqlDateTime>;
+                    bool ey_ = ex_ is CqlDateTime;
                     return ey_;
                 }
 
@@ -1512,7 +1512,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool es_() {
                     DataType ez_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object fa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ez_);
-                    bool fb_ = fa_ is CqlDateTime;
+                    bool fb_ = fa_ is CqlInterval<CqlDateTime>;
                     return fb_;
                 }
 
@@ -1526,13 +1526,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType fe_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object ff_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fe_);
-                    return ff_ as CqlInterval<CqlDateTime>;
+                    return ff_ as CqlDateTime;
                 }
                 else if (es_())
                 {
                     DataType fg_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object fh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fg_);
-                    return fh_ as CqlDateTime;
+                    return fh_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -1561,7 +1561,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool fj_() {
                     DataType fo_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object fp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fo_);
-                    bool fq_ = fp_ is CqlInterval<CqlDateTime>;
+                    bool fq_ = fp_ is CqlDateTime;
                     return fq_;
                 }
 
@@ -1569,7 +1569,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool fk_() {
                     DataType fr_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object fs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fr_);
-                    bool ft_ = fs_ is CqlDateTime;
+                    bool ft_ = fs_ is CqlInterval<CqlDateTime>;
                     return ft_;
                 }
 
@@ -1583,13 +1583,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType fw_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object fx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fw_);
-                    return fx_ as CqlInterval<CqlDateTime>;
+                    return fx_ as CqlDateTime;
                 }
                 else if (fk_())
                 {
                     DataType fy_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object fz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fy_);
-                    return fz_ as CqlDateTime;
+                    return fz_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -1614,7 +1614,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool gb_() {
                     DataType gg_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object gh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gg_);
-                    bool gi_ = gh_ is CqlInterval<CqlDateTime>;
+                    bool gi_ = gh_ is CqlDateTime;
                     return gi_;
                 }
 
@@ -1622,7 +1622,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool gc_() {
                     DataType gj_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object gk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gj_);
-                    bool gl_ = gk_ is CqlDateTime;
+                    bool gl_ = gk_ is CqlInterval<CqlDateTime>;
                     return gl_;
                 }
 
@@ -1636,13 +1636,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType go_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object gp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, go_);
-                    return gp_ as CqlInterval<CqlDateTime>;
+                    return gp_ as CqlDateTime;
                 }
                 else if (gc_())
                 {
                     DataType gq_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object gr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gq_);
-                    return gr_ as CqlDateTime;
+                    return gr_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -1794,7 +1794,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool bv_() {
                     DataType ca_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                    bool cc_ = cb_ is CqlInterval<CqlDateTime>;
+                    bool cc_ = cb_ is CqlDateTime;
                     return cc_;
                 }
 
@@ -1802,7 +1802,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool bw_() {
                     DataType cd_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                    bool cf_ = ce_ is CqlDateTime;
+                    bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                     return cf_;
                 }
 
@@ -1816,13 +1816,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ci_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                    return cj_ as CqlInterval<CqlDateTime>;
+                    return cj_ as CqlDateTime;
                 }
                 else if (bw_())
                 {
                     DataType ck_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
-                    return cl_ as CqlDateTime;
+                    return cl_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -1845,7 +1845,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool cn_() {
                     DataType cs_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object ct_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
-                    bool cu_ = ct_ is CqlInterval<CqlDateTime>;
+                    bool cu_ = ct_ is CqlDateTime;
                     return cu_;
                 }
 
@@ -1853,7 +1853,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool co_() {
                     DataType cv_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
-                    bool cx_ = cw_ is CqlDateTime;
+                    bool cx_ = cw_ is CqlInterval<CqlDateTime>;
                     return cx_;
                 }
 
@@ -1867,13 +1867,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType da_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-                    return db_ as CqlInterval<CqlDateTime>;
+                    return db_ as CqlDateTime;
                 }
                 else if (co_())
                 {
                     DataType dc_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                    return dd_ as CqlDateTime;
+                    return dd_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -1898,7 +1898,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool df_() {
                     DataType dk_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object dl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dk_);
-                    bool dm_ = dl_ is CqlInterval<CqlDateTime>;
+                    bool dm_ = dl_ is CqlDateTime;
                     return dm_;
                 }
 
@@ -1906,7 +1906,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool dg_() {
                     DataType dn_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object do_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dn_);
-                    bool dp_ = do_ is CqlDateTime;
+                    bool dp_ = do_ is CqlInterval<CqlDateTime>;
                     return dp_;
                 }
 
@@ -1920,13 +1920,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ds_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object dt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ds_);
-                    return dt_ as CqlInterval<CqlDateTime>;
+                    return dt_ as CqlDateTime;
                 }
                 else if (dg_())
                 {
                     DataType du_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object dv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, du_);
-                    return dv_ as CqlDateTime;
+                    return dv_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -1952,7 +1952,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool dx_() {
                     DataType ec_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object ed_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ec_);
-                    bool ee_ = ed_ is CqlInterval<CqlDateTime>;
+                    bool ee_ = ed_ is CqlDateTime;
                     return ee_;
                 }
 
@@ -1960,7 +1960,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool dy_() {
                     DataType ef_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object eg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ef_);
-                    bool eh_ = eg_ is CqlDateTime;
+                    bool eh_ = eg_ is CqlInterval<CqlDateTime>;
                     return eh_;
                 }
 
@@ -1974,13 +1974,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ek_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object el_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ek_);
-                    return el_ as CqlInterval<CqlDateTime>;
+                    return el_ as CqlDateTime;
                 }
                 else if (dy_())
                 {
                     DataType em_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object en_ = FHIRHelpers_4_4_000.Instance.ToValue(context, em_);
-                    return en_ as CqlDateTime;
+                    return en_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2006,7 +2006,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ep_() {
                     DataType eu_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object ev_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eu_);
-                    bool ew_ = ev_ is CqlInterval<CqlDateTime>;
+                    bool ew_ = ev_ is CqlDateTime;
                     return ew_;
                 }
 
@@ -2014,7 +2014,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool eq_() {
                     DataType ex_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object ey_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ex_);
-                    bool ez_ = ey_ is CqlDateTime;
+                    bool ez_ = ey_ is CqlInterval<CqlDateTime>;
                     return ez_;
                 }
 
@@ -2028,13 +2028,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType fc_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object fd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fc_);
-                    return fd_ as CqlInterval<CqlDateTime>;
+                    return fd_ as CqlDateTime;
                 }
                 else if (eq_())
                 {
                     DataType fe_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object ff_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fe_);
-                    return ff_ as CqlDateTime;
+                    return ff_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2062,7 +2062,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool fh_() {
                     DataType fm_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object fn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fm_);
-                    bool fo_ = fn_ is CqlInterval<CqlDateTime>;
+                    bool fo_ = fn_ is CqlDateTime;
                     return fo_;
                 }
 
@@ -2070,7 +2070,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool fi_() {
                     DataType fp_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object fq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fp_);
-                    bool fr_ = fq_ is CqlDateTime;
+                    bool fr_ = fq_ is CqlInterval<CqlDateTime>;
                     return fr_;
                 }
 
@@ -2084,13 +2084,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType fu_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object fv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fu_);
-                    return fv_ as CqlInterval<CqlDateTime>;
+                    return fv_ as CqlDateTime;
                 }
                 else if (fi_())
                 {
                     DataType fw_ = tuple_hsukaxezrzqpeqifkirnhhzen?.SubsequentCreatinineLabResult?.Effective;
                     object fx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fw_);
-                    return fx_ as CqlDateTime;
+                    return fx_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2115,7 +2115,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool fz_() {
                     DataType ge_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object gf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ge_);
-                    bool gg_ = gf_ is CqlInterval<CqlDateTime>;
+                    bool gg_ = gf_ is CqlDateTime;
                     return gg_;
                 }
 
@@ -2123,7 +2123,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ga_() {
                     DataType gh_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object gi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gh_);
-                    bool gj_ = gi_ is CqlDateTime;
+                    bool gj_ = gi_ is CqlInterval<CqlDateTime>;
                     return gj_;
                 }
 
@@ -2137,13 +2137,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType gm_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object gn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gm_);
-                    return gn_ as CqlInterval<CqlDateTime>;
+                    return gn_ as CqlDateTime;
                 }
                 else if (ga_())
                 {
                     DataType go_ = tuple_hsukaxezrzqpeqifkirnhhzen?.IndexCreatinineLabResult?.Effective;
                     object gp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, go_);
-                    return gp_ as CqlDateTime;
+                    return gp_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2226,7 +2226,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ag_() {
                     DataType am_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    bool ao_ = an_ is CqlInterval<CqlDateTime>;
+                    bool ao_ = an_ is CqlQuantity;
                     return ao_;
                 }
 
@@ -2234,7 +2234,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ah_() {
                     DataType ap_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                    bool ar_ = aq_ is CqlQuantity;
+                    bool ar_ = aq_ is CqlInterval<CqlDateTime>;
                     return ar_;
                 }
 
@@ -2256,13 +2256,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ax_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
-                    return ay_ as CqlInterval<CqlDateTime>;
+                    return ay_ as CqlQuantity;
                 }
                 else if (ah_())
                 {
                     DataType az_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                    return ba_ as CqlQuantity;
+                    return ba_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ai_())
                 {
@@ -2299,7 +2299,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool be_() {
                     DataType bk_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                    bool bm_ = bl_ is CqlInterval<CqlDateTime>;
+                    bool bm_ = bl_ is CqlQuantity;
                     return bm_;
                 }
 
@@ -2307,7 +2307,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool bf_() {
                     DataType bn_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    bool bp_ = bo_ is CqlQuantity;
+                    bool bp_ = bo_ is CqlInterval<CqlDateTime>;
                     return bp_;
                 }
 
@@ -2329,13 +2329,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType bv_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    return bw_ as CqlInterval<CqlDateTime>;
+                    return bw_ as CqlQuantity;
                 }
                 else if (bf_())
                 {
                     DataType bx_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    return by_ as CqlQuantity;
+                    return by_ as CqlInterval<CqlDateTime>;
                 }
                 else if (bg_())
                 {
@@ -2545,7 +2545,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool bv_() {
                     DataType ca_ = tuple_gsqsgqbihalobloqrcccgdeiw?.LowCreatinineTest?.Effective;
                     object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                    bool cc_ = cb_ is CqlInterval<CqlDateTime>;
+                    bool cc_ = cb_ is CqlDateTime;
                     return cc_;
                 }
 
@@ -2553,7 +2553,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool bw_() {
                     DataType cd_ = tuple_gsqsgqbihalobloqrcccgdeiw?.LowCreatinineTest?.Effective;
                     object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                    bool cf_ = ce_ is CqlDateTime;
+                    bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                     return cf_;
                 }
 
@@ -2567,13 +2567,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ci_ = tuple_gsqsgqbihalobloqrcccgdeiw?.LowCreatinineTest?.Effective;
                     object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                    return cj_ as CqlInterval<CqlDateTime>;
+                    return cj_ as CqlDateTime;
                 }
                 else if (bw_())
                 {
                     DataType ck_ = tuple_gsqsgqbihalobloqrcccgdeiw?.LowCreatinineTest?.Effective;
                     object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
-                    return cl_ as CqlDateTime;
+                    return cl_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2596,7 +2596,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool cn_() {
                     DataType cs_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object ct_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
-                    bool cu_ = ct_ is CqlInterval<CqlDateTime>;
+                    bool cu_ = ct_ is CqlDateTime;
                     return cu_;
                 }
 
@@ -2604,7 +2604,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool co_() {
                     DataType cv_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
-                    bool cx_ = cw_ is CqlDateTime;
+                    bool cx_ = cw_ is CqlInterval<CqlDateTime>;
                     return cx_;
                 }
 
@@ -2618,13 +2618,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType da_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-                    return db_ as CqlInterval<CqlDateTime>;
+                    return db_ as CqlDateTime;
                 }
                 else if (co_())
                 {
                     DataType dc_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                    return dd_ as CqlDateTime;
+                    return dd_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2649,7 +2649,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool df_() {
                     DataType dk_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object dl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dk_);
-                    bool dm_ = dl_ is CqlInterval<CqlDateTime>;
+                    bool dm_ = dl_ is CqlDateTime;
                     return dm_;
                 }
 
@@ -2657,7 +2657,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool dg_() {
                     DataType dn_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object do_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dn_);
-                    bool dp_ = do_ is CqlDateTime;
+                    bool dp_ = do_ is CqlInterval<CqlDateTime>;
                     return dp_;
                 }
 
@@ -2671,13 +2671,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ds_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object dt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ds_);
-                    return dt_ as CqlInterval<CqlDateTime>;
+                    return dt_ as CqlDateTime;
                 }
                 else if (dg_())
                 {
                     DataType du_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object dv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, du_);
-                    return dv_ as CqlDateTime;
+                    return dv_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2702,7 +2702,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool dx_() {
                     DataType ec_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object ed_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ec_);
-                    bool ee_ = ed_ is CqlInterval<CqlDateTime>;
+                    bool ee_ = ed_ is CqlDateTime;
                     return ee_;
                 }
 
@@ -2710,7 +2710,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool dy_() {
                     DataType ef_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object eg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ef_);
-                    bool eh_ = eg_ is CqlDateTime;
+                    bool eh_ = eg_ is CqlInterval<CqlDateTime>;
                     return eh_;
                 }
 
@@ -2724,13 +2724,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ek_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object el_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ek_);
-                    return el_ as CqlInterval<CqlDateTime>;
+                    return el_ as CqlDateTime;
                 }
                 else if (dy_())
                 {
                     DataType em_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object en_ = FHIRHelpers_4_4_000.Instance.ToValue(context, em_);
-                    return en_ as CqlDateTime;
+                    return en_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2756,7 +2756,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ep_() {
                     DataType eu_ = tuple_gsqsgqbihalobloqrcccgdeiw?.LowCreatinineTest?.Effective;
                     object ev_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eu_);
-                    bool ew_ = ev_ is CqlInterval<CqlDateTime>;
+                    bool ew_ = ev_ is CqlDateTime;
                     return ew_;
                 }
 
@@ -2764,7 +2764,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool eq_() {
                     DataType ex_ = tuple_gsqsgqbihalobloqrcccgdeiw?.LowCreatinineTest?.Effective;
                     object ey_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ex_);
-                    bool ez_ = ey_ is CqlDateTime;
+                    bool ez_ = ey_ is CqlInterval<CqlDateTime>;
                     return ez_;
                 }
 
@@ -2778,13 +2778,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType fc_ = tuple_gsqsgqbihalobloqrcccgdeiw?.LowCreatinineTest?.Effective;
                     object fd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fc_);
-                    return fd_ as CqlInterval<CqlDateTime>;
+                    return fd_ as CqlDateTime;
                 }
                 else if (eq_())
                 {
                     DataType fe_ = tuple_gsqsgqbihalobloqrcccgdeiw?.LowCreatinineTest?.Effective;
                     object ff_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fe_);
-                    return ff_ as CqlDateTime;
+                    return ff_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2810,7 +2810,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool fh_() {
                     DataType fm_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object fn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fm_);
-                    bool fo_ = fn_ is CqlInterval<CqlDateTime>;
+                    bool fo_ = fn_ is CqlDateTime;
                     return fo_;
                 }
 
@@ -2818,7 +2818,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool fi_() {
                     DataType fp_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object fq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fp_);
-                    bool fr_ = fq_ is CqlDateTime;
+                    bool fr_ = fq_ is CqlInterval<CqlDateTime>;
                     return fr_;
                 }
 
@@ -2832,13 +2832,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType fu_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object fv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fu_);
-                    return fv_ as CqlInterval<CqlDateTime>;
+                    return fv_ as CqlDateTime;
                 }
                 else if (fi_())
                 {
                     DataType fw_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object fx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fw_);
-                    return fx_ as CqlDateTime;
+                    return fx_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2869,7 +2869,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool fz_() {
                     DataType ge_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object gf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ge_);
-                    bool gg_ = gf_ is CqlInterval<CqlDateTime>;
+                    bool gg_ = gf_ is CqlDateTime;
                     return gg_;
                 }
 
@@ -2877,7 +2877,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ga_() {
                     DataType gh_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object gi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gh_);
-                    bool gj_ = gi_ is CqlDateTime;
+                    bool gj_ = gi_ is CqlInterval<CqlDateTime>;
                     return gj_;
                 }
 
@@ -2891,13 +2891,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType gm_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object gn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gm_);
-                    return gn_ as CqlInterval<CqlDateTime>;
+                    return gn_ as CqlDateTime;
                 }
                 else if (ga_())
                 {
                     DataType go_ = tuple_gsqsgqbihalobloqrcccgdeiw?.HighCreatinineTest?.Effective;
                     object gp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, go_);
-                    return gp_ as CqlDateTime;
+                    return gp_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2983,7 +2983,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool bu_() {
                     DataType bz_ = tuple_bdjsizcahxcvgeetfrjvehxor?.LowCreatinineTest?.Effective;
                     object ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
-                    bool cb_ = ca_ is CqlInterval<CqlDateTime>;
+                    bool cb_ = ca_ is CqlDateTime;
                     return cb_;
                 }
 
@@ -2991,7 +2991,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool bv_() {
                     DataType cc_ = tuple_bdjsizcahxcvgeetfrjvehxor?.LowCreatinineTest?.Effective;
                     object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
-                    bool ce_ = cd_ is CqlDateTime;
+                    bool ce_ = cd_ is CqlInterval<CqlDateTime>;
                     return ce_;
                 }
 
@@ -3005,13 +3005,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ch_ = tuple_bdjsizcahxcvgeetfrjvehxor?.LowCreatinineTest?.Effective;
                     object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                    return ci_ as CqlInterval<CqlDateTime>;
+                    return ci_ as CqlDateTime;
                 }
                 else if (bv_())
                 {
                     DataType cj_ = tuple_bdjsizcahxcvgeetfrjvehxor?.LowCreatinineTest?.Effective;
                     object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                    return ck_ as CqlDateTime;
+                    return ck_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -3034,7 +3034,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool cm_() {
                     DataType cr_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                    bool ct_ = cs_ is CqlInterval<CqlDateTime>;
+                    bool ct_ = cs_ is CqlDateTime;
                     return ct_;
                 }
 
@@ -3042,7 +3042,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool cn_() {
                     DataType cu_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object cv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cu_);
-                    bool cw_ = cv_ is CqlDateTime;
+                    bool cw_ = cv_ is CqlInterval<CqlDateTime>;
                     return cw_;
                 }
 
@@ -3056,13 +3056,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType cz_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object da_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cz_);
-                    return da_ as CqlInterval<CqlDateTime>;
+                    return da_ as CqlDateTime;
                 }
                 else if (cn_())
                 {
                     DataType db_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
-                    return dc_ as CqlDateTime;
+                    return dc_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -3087,7 +3087,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool de_() {
                     DataType dj_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                    bool dl_ = dk_ is CqlInterval<CqlDateTime>;
+                    bool dl_ = dk_ is CqlDateTime;
                     return dl_;
                 }
 
@@ -3095,7 +3095,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool df_() {
                     DataType dm_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object dn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dm_);
-                    bool do_ = dn_ is CqlDateTime;
+                    bool do_ = dn_ is CqlInterval<CqlDateTime>;
                     return do_;
                 }
 
@@ -3109,13 +3109,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType dr_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object ds_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dr_);
-                    return ds_ as CqlInterval<CqlDateTime>;
+                    return ds_ as CqlDateTime;
                 }
                 else if (df_())
                 {
                     DataType dt_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object du_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dt_);
-                    return du_ as CqlDateTime;
+                    return du_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -3140,7 +3140,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool dw_() {
                     DataType eb_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object ec_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eb_);
-                    bool ed_ = ec_ is CqlInterval<CqlDateTime>;
+                    bool ed_ = ec_ is CqlDateTime;
                     return ed_;
                 }
 
@@ -3148,7 +3148,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool dx_() {
                     DataType ee_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object ef_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ee_);
-                    bool eg_ = ef_ is CqlDateTime;
+                    bool eg_ = ef_ is CqlInterval<CqlDateTime>;
                     return eg_;
                 }
 
@@ -3162,13 +3162,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ej_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object ek_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ej_);
-                    return ek_ as CqlInterval<CqlDateTime>;
+                    return ek_ as CqlDateTime;
                 }
                 else if (dx_())
                 {
                     DataType el_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object em_ = FHIRHelpers_4_4_000.Instance.ToValue(context, el_);
-                    return em_ as CqlDateTime;
+                    return em_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -3194,7 +3194,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool eo_() {
                     DataType et_ = tuple_bdjsizcahxcvgeetfrjvehxor?.LowCreatinineTest?.Effective;
                     object eu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, et_);
-                    bool ev_ = eu_ is CqlInterval<CqlDateTime>;
+                    bool ev_ = eu_ is CqlDateTime;
                     return ev_;
                 }
 
@@ -3202,7 +3202,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ep_() {
                     DataType ew_ = tuple_bdjsizcahxcvgeetfrjvehxor?.LowCreatinineTest?.Effective;
                     object ex_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ew_);
-                    bool ey_ = ex_ is CqlDateTime;
+                    bool ey_ = ex_ is CqlInterval<CqlDateTime>;
                     return ey_;
                 }
 
@@ -3216,13 +3216,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType fb_ = tuple_bdjsizcahxcvgeetfrjvehxor?.LowCreatinineTest?.Effective;
                     object fc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fb_);
-                    return fc_ as CqlInterval<CqlDateTime>;
+                    return fc_ as CqlDateTime;
                 }
                 else if (ep_())
                 {
                     DataType fd_ = tuple_bdjsizcahxcvgeetfrjvehxor?.LowCreatinineTest?.Effective;
                     object fe_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fd_);
-                    return fe_ as CqlDateTime;
+                    return fe_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -3248,7 +3248,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool fg_() {
                     DataType fl_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object fm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fl_);
-                    bool fn_ = fm_ is CqlInterval<CqlDateTime>;
+                    bool fn_ = fm_ is CqlDateTime;
                     return fn_;
                 }
 
@@ -3256,7 +3256,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool fh_() {
                     DataType fo_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object fp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fo_);
-                    bool fq_ = fp_ is CqlDateTime;
+                    bool fq_ = fp_ is CqlInterval<CqlDateTime>;
                     return fq_;
                 }
 
@@ -3270,13 +3270,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ft_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object fu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ft_);
-                    return fu_ as CqlInterval<CqlDateTime>;
+                    return fu_ as CqlDateTime;
                 }
                 else if (fh_())
                 {
                     DataType fv_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object fw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fv_);
-                    return fw_ as CqlDateTime;
+                    return fw_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -3307,7 +3307,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool fy_() {
                     DataType gd_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object ge_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gd_);
-                    bool gf_ = ge_ is CqlInterval<CqlDateTime>;
+                    bool gf_ = ge_ is CqlDateTime;
                     return gf_;
                 }
 
@@ -3315,7 +3315,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool fz_() {
                     DataType gg_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object gh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gg_);
-                    bool gi_ = gh_ is CqlDateTime;
+                    bool gi_ = gh_ is CqlInterval<CqlDateTime>;
                     return gi_;
                 }
 
@@ -3329,13 +3329,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType gl_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object gm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gl_);
-                    return gm_ as CqlInterval<CqlDateTime>;
+                    return gm_ as CqlDateTime;
                 }
                 else if (fz_())
                 {
                     DataType gn_ = tuple_bdjsizcahxcvgeetfrjvehxor?.HighCreatinineTest?.Effective;
                     object go_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gn_);
-                    return go_ as CqlDateTime;
+                    return go_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -3472,7 +3472,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                     bool t_() {
                         DataType z_ = HighRiskProcedures?.Performed;
                         object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        bool ab_ = aa_ is CqlInterval<CqlDateTime>;
+                        bool ab_ = aa_ is CqlQuantity;
                         return ab_;
                     }
 
@@ -3480,7 +3480,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                     bool u_() {
                         DataType ac_ = HighRiskProcedures?.Performed;
                         object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        bool ae_ = ad_ is CqlQuantity;
+                        bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                         return ae_;
                     }
 
@@ -3502,13 +3502,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                     {
                         DataType ak_ = HighRiskProcedures?.Performed;
                         object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        return al_ as CqlInterval<CqlDateTime>;
+                        return al_ as CqlQuantity;
                     }
                     else if (u_())
                     {
                         DataType am_ = HighRiskProcedures?.Performed;
                         object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        return an_ as CqlQuantity;
+                        return an_ as CqlInterval<CqlDateTime>;
                     }
                     else if (v_())
                     {
@@ -3598,7 +3598,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ah_() {
                     DataType an_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                    bool ap_ = ao_ is CqlInterval<CqlDateTime>;
+                    bool ap_ = ao_ is CqlQuantity;
                     return ap_;
                 }
 
@@ -3606,7 +3606,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool ai_() {
                     DataType aq_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                    bool as_ = ar_ is CqlQuantity;
+                    bool as_ = ar_ is CqlInterval<CqlDateTime>;
                     return as_;
                 }
 
@@ -3628,13 +3628,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType ay_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                    return az_ as CqlInterval<CqlDateTime>;
+                    return az_ as CqlQuantity;
                 }
                 else if (ai_())
                 {
                     DataType ba_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                    return bb_ as CqlQuantity;
+                    return bb_ as CqlInterval<CqlDateTime>;
                 }
                 else if (aj_())
                 {
@@ -3671,7 +3671,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool bf_() {
                     DataType bl_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    bool bn_ = bm_ is CqlInterval<CqlDateTime>;
+                    bool bn_ = bm_ is CqlQuantity;
                     return bn_;
                 }
 
@@ -3679,7 +3679,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool bg_() {
                     DataType bo_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
-                    bool bq_ = bp_ is CqlQuantity;
+                    bool bq_ = bp_ is CqlInterval<CqlDateTime>;
                     return bq_;
                 }
 
@@ -3701,13 +3701,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 {
                     DataType bw_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                    return bx_ as CqlInterval<CqlDateTime>;
+                    return bx_ as CqlQuantity;
                 }
                 else if (bg_())
                 {
                     DataType by_ = tuple_bwwsxdxsfijqjjncdevjkzegj?.Dialysis?.Performed;
                     object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                    return bz_ as CqlQuantity;
+                    return bz_ as CqlInterval<CqlDateTime>;
                 }
                 else if (bh_())
                 {

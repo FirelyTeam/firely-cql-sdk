@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("FHIR347", "0.1.021")]
 public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
 {
@@ -1149,7 +1149,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     bool ck_() {
                         Timing.RepeatComponent cm_ = T?.Repeat;
                         DataType cn_ = cm_?.Bounds;
-                        bool co_ = cn_ is Range;
+                        bool co_ = cn_ is Period;
                         return co_;
                     }
 
@@ -1157,7 +1157,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     bool cl_() {
                         Timing.RepeatComponent cp_ = T?.Repeat;
                         DataType cq_ = cp_?.Bounds;
-                        bool cr_ = cq_ is Period;
+                        bool cr_ = cq_ is Range;
                         return cr_;
                     }
 
@@ -1165,13 +1165,13 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     {
                         Timing.RepeatComponent cs_ = T?.Repeat;
                         DataType ct_ = cs_?.Bounds;
-                        return ct_ as Range;
+                        return ct_ as Period;
                     }
                     else if (cl_())
                     {
                         Timing.RepeatComponent cu_ = T?.Repeat;
                         DataType cv_ = cu_?.Bounds;
-                        return cv_ as Period;
+                        return cv_ as Range;
                     }
                     else
                     {

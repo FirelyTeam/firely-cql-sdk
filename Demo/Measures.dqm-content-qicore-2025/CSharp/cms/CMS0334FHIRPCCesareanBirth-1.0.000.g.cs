@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS0334FHIRPCCesareanBirth", "1.0.000")]
 public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<CMS0334FHIRPCCesareanBirth_1_0_000>
 {
@@ -312,7 +312,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool ae_() {
                     DataType aj_ = Gravida?.Effective;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    bool al_ = ak_ is CqlInterval<CqlDateTime>;
+                    bool al_ = ak_ is CqlDateTime;
                     return al_;
                 }
 
@@ -320,7 +320,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool af_() {
                     DataType am_ = Gravida?.Effective;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    bool ao_ = an_ is CqlDateTime;
+                    bool ao_ = an_ is CqlInterval<CqlDateTime>;
                     return ao_;
                 }
 
@@ -334,13 +334,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType ar_ = Gravida?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    return as_ as CqlInterval<CqlDateTime>;
+                    return as_ as CqlDateTime;
                 }
                 else if (af_())
                 {
                     DataType at_ = Gravida?.Effective;
                     object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                    return au_ as CqlDateTime;
+                    return au_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -377,7 +377,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool ay_() {
                     DataType bd_ = @this?.Effective;
                     object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                    bool bf_ = be_ is CqlInterval<CqlDateTime>;
+                    bool bf_ = be_ is CqlDateTime;
                     return bf_;
                 }
 
@@ -385,7 +385,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool az_() {
                     DataType bg_ = @this?.Effective;
                     object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                    bool bi_ = bh_ is CqlDateTime;
+                    bool bi_ = bh_ is CqlInterval<CqlDateTime>;
                     return bi_;
                 }
 
@@ -399,13 +399,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType bl_ = @this?.Effective;
                     object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    return bm_ as CqlInterval<CqlDateTime>;
+                    return bm_ as CqlDateTime;
                 }
                 else if (az_())
                 {
                     DataType bn_ = @this?.Effective;
                     object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    return bo_ as CqlDateTime;
+                    return bo_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -447,7 +447,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool ae_() {
                     DataType aj_ = Parity?.Effective;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    bool al_ = ak_ is CqlInterval<CqlDateTime>;
+                    bool al_ = ak_ is CqlDateTime;
                     return al_;
                 }
 
@@ -455,7 +455,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool af_() {
                     DataType am_ = Parity?.Effective;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    bool ao_ = an_ is CqlDateTime;
+                    bool ao_ = an_ is CqlInterval<CqlDateTime>;
                     return ao_;
                 }
 
@@ -469,13 +469,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType ar_ = Parity?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    return as_ as CqlInterval<CqlDateTime>;
+                    return as_ as CqlDateTime;
                 }
                 else if (af_())
                 {
                     DataType at_ = Parity?.Effective;
                     object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                    return au_ as CqlDateTime;
+                    return au_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -525,7 +525,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool ay_() {
                     DataType bd_ = @this?.Effective;
                     object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                    bool bf_ = be_ is CqlInterval<CqlDateTime>;
+                    bool bf_ = be_ is CqlDateTime;
                     return bf_;
                 }
 
@@ -533,7 +533,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool az_() {
                     DataType bg_ = @this?.Effective;
                     object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                    bool bi_ = bh_ is CqlDateTime;
+                    bool bi_ = bh_ is CqlInterval<CqlDateTime>;
                     return bi_;
                 }
 
@@ -547,13 +547,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType bl_ = @this?.Effective;
                     object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    return bm_ as CqlInterval<CqlDateTime>;
+                    return bm_ as CqlDateTime;
                 }
                 else if (az_())
                 {
                     DataType bn_ = @this?.Effective;
                     object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    return bo_ as CqlDateTime;
+                    return bo_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -595,7 +595,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool ae_() {
                     DataType aj_ = PretermBirth?.Effective;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    bool al_ = ak_ is CqlInterval<CqlDateTime>;
+                    bool al_ = ak_ is CqlDateTime;
                     return al_;
                 }
 
@@ -603,7 +603,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool af_() {
                     DataType am_ = PretermBirth?.Effective;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    bool ao_ = an_ is CqlDateTime;
+                    bool ao_ = an_ is CqlInterval<CqlDateTime>;
                     return ao_;
                 }
 
@@ -617,13 +617,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType ar_ = PretermBirth?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    return as_ as CqlInterval<CqlDateTime>;
+                    return as_ as CqlDateTime;
                 }
                 else if (af_())
                 {
                     DataType at_ = PretermBirth?.Effective;
                     object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                    return au_ as CqlDateTime;
+                    return au_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -673,7 +673,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool ay_() {
                     DataType bd_ = @this?.Effective;
                     object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                    bool bf_ = be_ is CqlInterval<CqlDateTime>;
+                    bool bf_ = be_ is CqlDateTime;
                     return bf_;
                 }
 
@@ -681,7 +681,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool az_() {
                     DataType bg_ = @this?.Effective;
                     object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                    bool bi_ = bh_ is CqlDateTime;
+                    bool bi_ = bh_ is CqlInterval<CqlDateTime>;
                     return bi_;
                 }
 
@@ -695,13 +695,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType bl_ = @this?.Effective;
                     object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    return bm_ as CqlInterval<CqlDateTime>;
+                    return bm_ as CqlDateTime;
                 }
                 else if (az_())
                 {
                     DataType bn_ = @this?.Effective;
                     object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    return bo_ as CqlDateTime;
+                    return bo_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -743,7 +743,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool ae_() {
                     DataType aj_ = TermBirth?.Effective;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    bool al_ = ak_ is CqlInterval<CqlDateTime>;
+                    bool al_ = ak_ is CqlDateTime;
                     return al_;
                 }
 
@@ -751,7 +751,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool af_() {
                     DataType am_ = TermBirth?.Effective;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    bool ao_ = an_ is CqlDateTime;
+                    bool ao_ = an_ is CqlInterval<CqlDateTime>;
                     return ao_;
                 }
 
@@ -765,13 +765,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType ar_ = TermBirth?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    return as_ as CqlInterval<CqlDateTime>;
+                    return as_ as CqlDateTime;
                 }
                 else if (af_())
                 {
                     DataType at_ = TermBirth?.Effective;
                     object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                    return au_ as CqlDateTime;
+                    return au_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -821,7 +821,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool ay_() {
                     DataType bd_ = @this?.Effective;
                     object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                    bool bf_ = be_ is CqlInterval<CqlDateTime>;
+                    bool bf_ = be_ is CqlDateTime;
                     return bf_;
                 }
 
@@ -829,7 +829,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool az_() {
                     DataType bg_ = @this?.Effective;
                     object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                    bool bi_ = bh_ is CqlDateTime;
+                    bool bi_ = bh_ is CqlInterval<CqlDateTime>;
                     return bi_;
                 }
 
@@ -843,13 +843,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType bl_ = @this?.Effective;
                     object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    return bm_ as CqlInterval<CqlDateTime>;
+                    return bm_ as CqlDateTime;
                 }
                 else if (az_())
                 {
                     DataType bn_ = @this?.Effective;
                     object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    return bo_ as CqlDateTime;
+                    return bo_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -934,7 +934,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool as_() {
                                 DataType ax_ = AbnormalPresentation?.Effective;
                                 object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
-                                bool az_ = ay_ is CqlInterval<CqlDateTime>;
+                                bool az_ = ay_ is CqlDateTime;
                                 return az_;
                             }
 
@@ -942,7 +942,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool at_() {
                                 DataType ba_ = AbnormalPresentation?.Effective;
                                 object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                                bool bc_ = bb_ is CqlDateTime;
+                                bool bc_ = bb_ is CqlInterval<CqlDateTime>;
                                 return bc_;
                             }
 
@@ -956,13 +956,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType bf_ = AbnormalPresentation?.Effective;
                                 object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
-                                return bg_ as CqlInterval<CqlDateTime>;
+                                return bg_ as CqlDateTime;
                             }
                             else if (at_())
                             {
                                 DataType bh_ = AbnormalPresentation?.Effective;
                                 object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                                return bi_ as CqlDateTime;
+                                return bi_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1003,7 +1003,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool bm_() {
                                 DataType br_ = @this?.Effective;
                                 object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
-                                bool bt_ = bs_ is CqlInterval<CqlDateTime>;
+                                bool bt_ = bs_ is CqlDateTime;
                                 return bt_;
                             }
 
@@ -1011,7 +1011,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool bn_() {
                                 DataType bu_ = @this?.Effective;
                                 object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                                bool bw_ = bv_ is CqlDateTime;
+                                bool bw_ = bv_ is CqlInterval<CqlDateTime>;
                                 return bw_;
                             }
 
@@ -1025,13 +1025,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType bz_ = @this?.Effective;
                                 object ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
-                                return ca_ as CqlInterval<CqlDateTime>;
+                                return ca_ as CqlDateTime;
                             }
                             else if (bn_())
                             {
                                 DataType cb_ = @this?.Effective;
                                 object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                                return cc_ as CqlDateTime;
+                                return cc_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1071,7 +1071,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool cy_() {
                                 DataType dd_ = AbnormalPresentation?.Effective;
                                 object de_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dd_);
-                                bool df_ = de_ is CqlInterval<CqlDateTime>;
+                                bool df_ = de_ is CqlDateTime;
                                 return df_;
                             }
 
@@ -1079,7 +1079,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool cz_() {
                                 DataType dg_ = AbnormalPresentation?.Effective;
                                 object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                                bool di_ = dh_ is CqlDateTime;
+                                bool di_ = dh_ is CqlInterval<CqlDateTime>;
                                 return di_;
                             }
 
@@ -1093,13 +1093,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType dl_ = AbnormalPresentation?.Effective;
                                 object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
-                                return dm_ as CqlInterval<CqlDateTime>;
+                                return dm_ as CqlDateTime;
                             }
                             else if (cz_())
                             {
                                 DataType dn_ = AbnormalPresentation?.Effective;
                                 object do_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dn_);
-                                return do_ as CqlDateTime;
+                                return do_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1140,7 +1140,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool ds_() {
                                 DataType dx_ = @this?.Effective;
                                 object dy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dx_);
-                                bool dz_ = dy_ is CqlInterval<CqlDateTime>;
+                                bool dz_ = dy_ is CqlDateTime;
                                 return dz_;
                             }
 
@@ -1148,7 +1148,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool dt_() {
                                 DataType ea_ = @this?.Effective;
                                 object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-                                bool ec_ = eb_ is CqlDateTime;
+                                bool ec_ = eb_ is CqlInterval<CqlDateTime>;
                                 return ec_;
                             }
 
@@ -1162,13 +1162,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType ef_ = @this?.Effective;
                                 object eg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ef_);
-                                return eg_ as CqlInterval<CqlDateTime>;
+                                return eg_ as CqlDateTime;
                             }
                             else if (dt_())
                             {
                                 DataType eh_ = @this?.Effective;
                                 object ei_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eh_);
-                                return ei_ as CqlDateTime;
+                                return ei_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1184,7 +1184,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     Observation cj_ = context.Operators.Last<Observation>(ci_);
                     DataType ck_ = cj_?.Effective;
                     object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
-                    bool cm_ = cl_ is CqlInterval<CqlDateTime>;
+                    bool cm_ = cl_ is CqlDateTime;
                     return cm_;
                 }
 
@@ -1208,7 +1208,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool fe_() {
                                 DataType fj_ = AbnormalPresentation?.Effective;
                                 object fk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fj_);
-                                bool fl_ = fk_ is CqlInterval<CqlDateTime>;
+                                bool fl_ = fk_ is CqlDateTime;
                                 return fl_;
                             }
 
@@ -1216,7 +1216,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool ff_() {
                                 DataType fm_ = AbnormalPresentation?.Effective;
                                 object fn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fm_);
-                                bool fo_ = fn_ is CqlDateTime;
+                                bool fo_ = fn_ is CqlInterval<CqlDateTime>;
                                 return fo_;
                             }
 
@@ -1230,13 +1230,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType fr_ = AbnormalPresentation?.Effective;
                                 object fs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fr_);
-                                return fs_ as CqlInterval<CqlDateTime>;
+                                return fs_ as CqlDateTime;
                             }
                             else if (ff_())
                             {
                                 DataType ft_ = AbnormalPresentation?.Effective;
                                 object fu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ft_);
-                                return fu_ as CqlDateTime;
+                                return fu_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1277,7 +1277,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool fy_() {
                                 DataType gd_ = @this?.Effective;
                                 object ge_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gd_);
-                                bool gf_ = ge_ is CqlInterval<CqlDateTime>;
+                                bool gf_ = ge_ is CqlDateTime;
                                 return gf_;
                             }
 
@@ -1285,7 +1285,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool fz_() {
                                 DataType gg_ = @this?.Effective;
                                 object gh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gg_);
-                                bool gi_ = gh_ is CqlDateTime;
+                                bool gi_ = gh_ is CqlInterval<CqlDateTime>;
                                 return gi_;
                             }
 
@@ -1299,13 +1299,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType gl_ = @this?.Effective;
                                 object gm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gl_);
-                                return gm_ as CqlInterval<CqlDateTime>;
+                                return gm_ as CqlDateTime;
                             }
                             else if (fz_())
                             {
                                 DataType gn_ = @this?.Effective;
                                 object go_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gn_);
-                                return go_ as CqlDateTime;
+                                return go_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1321,7 +1321,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     Observation ep_ = context.Operators.Last<Observation>(eo_);
                     DataType eq_ = ep_?.Effective;
                     object er_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eq_);
-                    bool es_ = er_ is CqlDateTime;
+                    bool es_ = er_ is CqlInterval<CqlDateTime>;
                     return es_;
                 }
 
@@ -1345,7 +1345,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool hj_() {
                                 DataType ho_ = AbnormalPresentation?.Effective;
                                 object hp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ho_);
-                                bool hq_ = hp_ is CqlInterval<CqlDateTime>;
+                                bool hq_ = hp_ is CqlDateTime;
                                 return hq_;
                             }
 
@@ -1353,7 +1353,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool hk_() {
                                 DataType hr_ = AbnormalPresentation?.Effective;
                                 object hs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hr_);
-                                bool ht_ = hs_ is CqlDateTime;
+                                bool ht_ = hs_ is CqlInterval<CqlDateTime>;
                                 return ht_;
                             }
 
@@ -1367,13 +1367,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType hw_ = AbnormalPresentation?.Effective;
                                 object hx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hw_);
-                                return hx_ as CqlInterval<CqlDateTime>;
+                                return hx_ as CqlDateTime;
                             }
                             else if (hk_())
                             {
                                 DataType hy_ = AbnormalPresentation?.Effective;
                                 object hz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hy_);
-                                return hz_ as CqlDateTime;
+                                return hz_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1414,7 +1414,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool id_() {
                                 DataType ii_ = @this?.Effective;
                                 object ij_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ii_);
-                                bool ik_ = ij_ is CqlInterval<CqlDateTime>;
+                                bool ik_ = ij_ is CqlDateTime;
                                 return ik_;
                             }
 
@@ -1422,7 +1422,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool ie_() {
                                 DataType il_ = @this?.Effective;
                                 object im_ = FHIRHelpers_4_4_000.Instance.ToValue(context, il_);
-                                bool in_ = im_ is CqlDateTime;
+                                bool in_ = im_ is CqlInterval<CqlDateTime>;
                                 return in_;
                             }
 
@@ -1436,13 +1436,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType iq_ = @this?.Effective;
                                 object ir_ = FHIRHelpers_4_4_000.Instance.ToValue(context, iq_);
-                                return ir_ as CqlInterval<CqlDateTime>;
+                                return ir_ as CqlDateTime;
                             }
                             else if (ie_())
                             {
                                 DataType is_ = @this?.Effective;
                                 object it_ = FHIRHelpers_4_4_000.Instance.ToValue(context, is_);
-                                return it_ as CqlDateTime;
+                                return it_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1480,7 +1480,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool jo_() {
                                 DataType jt_ = AbnormalPresentation?.Effective;
                                 object ju_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jt_);
-                                bool jv_ = ju_ is CqlInterval<CqlDateTime>;
+                                bool jv_ = ju_ is CqlDateTime;
                                 return jv_;
                             }
 
@@ -1488,7 +1488,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool jp_() {
                                 DataType jw_ = AbnormalPresentation?.Effective;
                                 object jx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jw_);
-                                bool jy_ = jx_ is CqlDateTime;
+                                bool jy_ = jx_ is CqlInterval<CqlDateTime>;
                                 return jy_;
                             }
 
@@ -1502,13 +1502,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType kb_ = AbnormalPresentation?.Effective;
                                 object kc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kb_);
-                                return kc_ as CqlInterval<CqlDateTime>;
+                                return kc_ as CqlDateTime;
                             }
                             else if (jp_())
                             {
                                 DataType kd_ = AbnormalPresentation?.Effective;
                                 object ke_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kd_);
-                                return ke_ as CqlDateTime;
+                                return ke_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1549,7 +1549,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool ki_() {
                                 DataType kn_ = @this?.Effective;
                                 object ko_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kn_);
-                                bool kp_ = ko_ is CqlInterval<CqlDateTime>;
+                                bool kp_ = ko_ is CqlDateTime;
                                 return kp_;
                             }
 
@@ -1557,7 +1557,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool kj_() {
                                 DataType kq_ = @this?.Effective;
                                 object kr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kq_);
-                                bool ks_ = kr_ is CqlDateTime;
+                                bool ks_ = kr_ is CqlInterval<CqlDateTime>;
                                 return ks_;
                             }
 
@@ -1571,13 +1571,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType kv_ = @this?.Effective;
                                 object kw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kv_);
-                                return kw_ as CqlInterval<CqlDateTime>;
+                                return kw_ as CqlDateTime;
                             }
                             else if (kj_())
                             {
                                 DataType kx_ = @this?.Effective;
                                 object ky_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kx_);
-                                return ky_ as CqlDateTime;
+                                return ky_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1593,7 +1593,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     Observation ja_ = context.Operators.Last<Observation>(iz_);
                     DataType jb_ = ja_?.Effective;
                     object jc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jb_);
-                    return jc_ as CqlInterval<CqlDateTime>;
+                    return jc_ as CqlDateTime;
                 }
                 else if (w_())
                 {
@@ -1615,7 +1615,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool lt_() {
                                 DataType ly_ = AbnormalPresentation?.Effective;
                                 object lz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ly_);
-                                bool ma_ = lz_ is CqlInterval<CqlDateTime>;
+                                bool ma_ = lz_ is CqlDateTime;
                                 return ma_;
                             }
 
@@ -1623,7 +1623,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool lu_() {
                                 DataType mb_ = AbnormalPresentation?.Effective;
                                 object mc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mb_);
-                                bool md_ = mc_ is CqlDateTime;
+                                bool md_ = mc_ is CqlInterval<CqlDateTime>;
                                 return md_;
                             }
 
@@ -1637,13 +1637,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType mg_ = AbnormalPresentation?.Effective;
                                 object mh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mg_);
-                                return mh_ as CqlInterval<CqlDateTime>;
+                                return mh_ as CqlDateTime;
                             }
                             else if (lu_())
                             {
                                 DataType mi_ = AbnormalPresentation?.Effective;
                                 object mj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mi_);
-                                return mj_ as CqlDateTime;
+                                return mj_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1684,7 +1684,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool mn_() {
                                 DataType ms_ = @this?.Effective;
                                 object mt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ms_);
-                                bool mu_ = mt_ is CqlInterval<CqlDateTime>;
+                                bool mu_ = mt_ is CqlDateTime;
                                 return mu_;
                             }
 
@@ -1692,7 +1692,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             bool mo_() {
                                 DataType mv_ = @this?.Effective;
                                 object mw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, mv_);
-                                bool mx_ = mw_ is CqlDateTime;
+                                bool mx_ = mw_ is CqlInterval<CqlDateTime>;
                                 return mx_;
                             }
 
@@ -1706,13 +1706,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType na_ = @this?.Effective;
                                 object nb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, na_);
-                                return nb_ as CqlInterval<CqlDateTime>;
+                                return nb_ as CqlDateTime;
                             }
                             else if (mo_())
                             {
                                 DataType nc_ = @this?.Effective;
                                 object nd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, nc_);
-                                return nd_ as CqlDateTime;
+                                return nd_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1728,7 +1728,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     Observation lf_ = context.Operators.Last<Observation>(le_);
                     DataType lg_ = lf_?.Effective;
                     object lh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lg_);
-                    return lh_ as CqlDateTime;
+                    return lh_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -1940,7 +1940,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     bool s_() {
                         DataType y_ = CSection?.Performed;
                         object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        bool aa_ = z_ is CqlInterval<CqlDateTime>;
+                        bool aa_ = z_ is CqlQuantity;
                         return aa_;
                     }
 
@@ -1948,7 +1948,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     bool t_() {
                         DataType ab_ = CSection?.Performed;
                         object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlQuantity;
+                        bool ad_ = ac_ is CqlInterval<CqlDateTime>;
                         return ad_;
                     }
 
@@ -1970,13 +1970,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     {
                         DataType aj_ = CSection?.Performed;
                         object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        return ak_ as CqlInterval<CqlDateTime>;
+                        return ak_ as CqlQuantity;
                     }
                     else if (t_())
                     {
                         DataType al_ = CSection?.Performed;
                         object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        return am_ as CqlQuantity;
+                        return am_ as CqlInterval<CqlDateTime>;
                     }
                     else if (u_())
                     {

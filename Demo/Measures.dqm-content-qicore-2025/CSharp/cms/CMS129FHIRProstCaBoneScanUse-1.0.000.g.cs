@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS129FHIRProstCaBoneScanUse", "1.0.000")]
 public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton<CMS129FHIRProstCaBoneScanUse_1_0_000>
 {
@@ -283,7 +283,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 bool s_() {
                     DataType y_ = ProstateCancerTreatment?.Performed;
                     object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    bool aa_ = z_ is CqlInterval<CqlDateTime>;
+                    bool aa_ = z_ is CqlQuantity;
                     return aa_;
                 }
 
@@ -291,7 +291,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 bool t_() {
                     DataType ab_ = ProstateCancerTreatment?.Performed;
                     object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    bool ad_ = ac_ is CqlQuantity;
+                    bool ad_ = ac_ is CqlInterval<CqlDateTime>;
                     return ad_;
                 }
 
@@ -313,13 +313,13 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 {
                     DataType aj_ = ProstateCancerTreatment?.Performed;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    return ak_ as CqlInterval<CqlDateTime>;
+                    return ak_ as CqlQuantity;
                 }
                 else if (t_())
                 {
                     DataType al_ = ProstateCancerTreatment?.Performed;
                     object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                    return am_ as CqlQuantity;
+                    return am_ as CqlInterval<CqlDateTime>;
                 }
                 else if (u_())
                 {
@@ -362,7 +362,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 bool at_() {
                     DataType az_ = @this?.Performed;
                     object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                    bool bb_ = ba_ is CqlInterval<CqlDateTime>;
+                    bool bb_ = ba_ is CqlQuantity;
                     return bb_;
                 }
 
@@ -370,7 +370,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 bool au_() {
                     DataType bc_ = @this?.Performed;
                     object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
-                    bool be_ = bd_ is CqlQuantity;
+                    bool be_ = bd_ is CqlInterval<CqlDateTime>;
                     return be_;
                 }
 
@@ -392,13 +392,13 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 {
                     DataType bk_ = @this?.Performed;
                     object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                    return bl_ as CqlInterval<CqlDateTime>;
+                    return bl_ as CqlQuantity;
                 }
                 else if (au_())
                 {
                     DataType bm_ = @this?.Performed;
                     object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
-                    return bn_ as CqlQuantity;
+                    return bn_ as CqlInterval<CqlDateTime>;
                 }
                 else if (av_())
                 {
@@ -460,7 +460,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     bool ag_() {
                         DataType am_ = FirstProstateCancerTreatment?.Performed;
                         object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        bool ao_ = an_ is CqlInterval<CqlDateTime>;
+                        bool ao_ = an_ is CqlQuantity;
                         return ao_;
                     }
 
@@ -468,7 +468,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     bool ah_() {
                         DataType ap_ = FirstProstateCancerTreatment?.Performed;
                         object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        bool ar_ = aq_ is CqlQuantity;
+                        bool ar_ = aq_ is CqlInterval<CqlDateTime>;
                         return ar_;
                     }
 
@@ -490,13 +490,13 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     {
                         DataType ax_ = FirstProstateCancerTreatment?.Performed;
                         object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
-                        return ay_ as CqlInterval<CqlDateTime>;
+                        return ay_ as CqlQuantity;
                     }
                     else if (ah_())
                     {
                         DataType az_ = FirstProstateCancerTreatment?.Performed;
                         object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                        return ba_ as CqlQuantity;
+                        return ba_ as CqlInterval<CqlDateTime>;
                     }
                     else if (ai_())
                     {
@@ -708,7 +708,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     bool ah_() {
                         DataType an_ = FirstProstateCancerTreatment?.Performed;
                         object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        bool ap_ = ao_ is CqlInterval<CqlDateTime>;
+                        bool ap_ = ao_ is CqlQuantity;
                         return ap_;
                     }
 
@@ -716,7 +716,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     bool ai_() {
                         DataType aq_ = FirstProstateCancerTreatment?.Performed;
                         object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                        bool as_ = ar_ is CqlQuantity;
+                        bool as_ = ar_ is CqlInterval<CqlDateTime>;
                         return as_;
                     }
 
@@ -738,13 +738,13 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     {
                         DataType ay_ = FirstProstateCancerTreatment?.Performed;
                         object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                        return az_ as CqlInterval<CqlDateTime>;
+                        return az_ as CqlQuantity;
                     }
                     else if (ai_())
                     {
                         DataType ba_ = FirstProstateCancerTreatment?.Performed;
                         object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                        return bb_ as CqlQuantity;
+                        return bb_ as CqlInterval<CqlDateTime>;
                     }
                     else if (aj_())
                     {
@@ -971,7 +971,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     bool v_() {
                         DataType ab_ = SalvageTherapy?.Performed;
                         object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlInterval<CqlDateTime>;
+                        bool ad_ = ac_ is CqlQuantity;
                         return ad_;
                     }
 
@@ -979,7 +979,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     bool w_() {
                         DataType ae_ = SalvageTherapy?.Performed;
                         object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlQuantity;
+                        bool ag_ = af_ is CqlInterval<CqlDateTime>;
                         return ag_;
                     }
 
@@ -1001,13 +1001,13 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     {
                         DataType am_ = SalvageTherapy?.Performed;
                         object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        return an_ as CqlInterval<CqlDateTime>;
+                        return an_ as CqlQuantity;
                     }
                     else if (w_())
                     {
                         DataType ao_ = SalvageTherapy?.Performed;
                         object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        return ap_ as CqlQuantity;
+                        return ap_ as CqlInterval<CqlDateTime>;
                     }
                     else if (x_())
                     {

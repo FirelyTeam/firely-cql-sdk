@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS50FHIRReceiptofSpecialistReport", "1.0.000")]
 public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISingleton<CMS50FHIRReceiptofSpecialistReport_1_0_000>
 {
@@ -230,7 +230,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 bool ai_() {
                     DataType ao_ = ValidIntervention?.Performed;
                     object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    bool aq_ = ap_ is CqlInterval<CqlDateTime>;
+                    bool aq_ = ap_ is CqlQuantity;
                     return aq_;
                 }
 
@@ -238,7 +238,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 bool aj_() {
                     DataType ar_ = ValidIntervention?.Performed;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlQuantity;
+                    bool at_ = as_ is CqlInterval<CqlDateTime>;
                     return at_;
                 }
 
@@ -260,13 +260,13 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 {
                     DataType az_ = ValidIntervention?.Performed;
                     object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                    return ba_ as CqlInterval<CqlDateTime>;
+                    return ba_ as CqlQuantity;
                 }
                 else if (aj_())
                 {
                     DataType bb_ = ValidIntervention?.Performed;
                     object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                    return bc_ as CqlQuantity;
+                    return bc_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ak_())
                 {
