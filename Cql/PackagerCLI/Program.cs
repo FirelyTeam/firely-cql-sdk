@@ -25,7 +25,7 @@ public class Program
     // * Java-Dependencies-Vars.ps1
     // * Java-Dependencies-Vars.sh
     // * The Hl7.Cql.Packager.Program.JavaToolVersion for the Packager CLI
-    private const string JavaToolVersion = "4.2.0";
+    private const string JavaToolVersion = "4.3.0";
 
     private static readonly string ApplicationName = Process.GetCurrentProcess().ProcessName;
 
