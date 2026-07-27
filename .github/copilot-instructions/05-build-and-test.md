@@ -10,6 +10,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 - [5.2. Cross-Platform Compatibility](#52-cross-platform-compatibility)
 - [5.3. Code Generation Version Management](#53-code-generation-version-management)
 - [5.4. Generating ELM Files from CQL](#54-generating-elm-files-from-cql)
+- [5.5. Running Integration Runner Benchmarks](#55-running-integration-runner-benchmarks)
 
 ## 5.1. General Build Requirements
 
@@ -94,3 +95,9 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 ## 5.4. Generating ELM Files from CQL
 
 5.4.1 Follow the shared procedure in [generate-elm-from-cql](../../.claude/skills/generate-elm-from-cql/SKILL.md) to regenerate ELM JSON after adding or changing CQL input files (e.g. in `Cql/CoreTests/Input/ELM/HL7`).
+
+## 5.5. Running Integration Runner Benchmarks
+
+5.5.1 Follow the shared procedure in [run-integration-benchmarks](../../.claude/skills/run-integration-benchmarks/SKILL.md) to run the `Firely.Cql.Sdk.Integration.Runner` submodule's BenchmarkDotNet project, append a new dated file to its `IntegrationRunner.Benchmarks/baselines/` folder, and compare against the most recent prior baseline.
+
+5.5.2 Compare medians, not means, and scope the run to match the baseline being compared against — a full unfiltered run spans 1000+ cases and can take hours.

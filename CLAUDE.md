@@ -78,3 +78,4 @@ Task-specific workflows live under `.claude/skills/` and load on demand — invo
 - `pickup-github-ticket` — resolving a ticket number/URL to a branch and picking up work
 - `cut-release-notes` — turning `vnext-release-notes.md` into a versioned release note
 - `generate-elm-from-cql` — regenerating ELM JSON after adding CQL test input files
+- `run-integration-benchmarks` — running the Integration Runner submodule's BenchmarkDotNet project and comparing against its committed baselines (INTERNAL USE ONLY)
