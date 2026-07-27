@@ -54,7 +54,10 @@ public class FhirMeasureExtensionsTests
         .. extra,
     ];
 
-    private static FhirMeasure CreateMeasure(params ExpressionDef[] statements)
+    private static FhirMeasure CreateMeasure(params ExpressionDef[] statements) =>
+        CreateMeasure(measureGroupCodeSystem: null, statements);
+
+    private static FhirMeasure CreateMeasure(string? measureGroupCodeSystem, params ExpressionDef[] statements)
     {
         var elmLibrary = new ElmLibrary
         {
@@ -62,7 +65,7 @@ public class FhirMeasureExtensionsTests
             statements = statements,
         };
         var fhirLibrary = new FhirLibrary { Id = "StratifierExample-1.0.0", Name = "StratifierExample" };
-        var created = fhirLibrary.TryCreateMeasure(elmLibrary, out var fhirMeasure, CanonicalBuilder, TestDate);
+        var created = fhirLibrary.TryCreateMeasure(elmLibrary, out var fhirMeasure, CanonicalBuilder, TestDate, measureGroupCodeSystem);
         created.Should().BeTrue();
         return fhirMeasure!;
     }
@@ -272,5 +275,45 @@ public class FhirMeasureExtensionsTests
         var measure = CreateMeasure(BaseStatements());
 
         measure.Group.Should().OnlyContain(g => g.Stratifier.Count == 0);
+    }
+
+    [TestMethod]
+    public void MeasureGroupCodeSystem_SetsGroupCodeWithGroupIdAsCode()
+    {
+        const string system = "https://ncqa.org/fhir/CodeSystem/measure-group";
+
+        var measure = CreateMeasure(system, BaseStatements());
+
+        foreach (var rate in new[] { "RateA", "RateB" })
+        {
+            var group = measure.Group.Single(g => g.ElementId == rate);
+            var coding = group.Code!.Coding.Should().ContainSingle().Subject;
+            coding.System.Should().Be(system);
+            coding.Code.Should().Be(rate);
+        }
+    }
+
+    [TestMethod]
+    public void MeasureGroupCodeSystem_AlsoAppliesToGroupsCreatedByStratifiers()
+    {
+        const string system = "https://ncqa.org/fhir/CodeSystem/measure-group";
+
+        var measure = CreateMeasure(system, BaseStatements(
+            Def("Region Stratifier",
+                CreateTag("group", "RateC"),
+                CreateTag("stratifier", "Region"))));
+
+        var group = measure.Group.Single(g => g.ElementId == "RateC");
+        var coding = group.Code!.Coding.Should().ContainSingle().Subject;
+        coding.System.Should().Be(system);
+        coding.Code.Should().Be("RateC");
+    }
+
+    [TestMethod]
+    public void NoMeasureGroupCodeSystem_LeavesGroupCodeUnset()
+    {
+        var measure = CreateMeasure(BaseStatements());
+
+        measure.Group.Should().OnlyContain(g => g.Code == null);
     }
 }

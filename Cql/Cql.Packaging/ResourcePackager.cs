@@ -30,7 +30,8 @@ internal class ResourcePackager(
         Func<string, InputArtifacts> inputsById,
         SysDateTime? overrideDate = null,
         BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
-        Action<ElmLibrary>? onNextLibrary = null)
+        Action<ElmLibrary>? onNextLibrary = null,
+        string? measureGroupCodeSystem = null)
     {
         return librarySet.TrySelect(PackageResource, buildExceptionHandlingStrategy);
 
@@ -62,7 +63,8 @@ internal class ResourcePackager(
 
             fhirLibrary.TryCreateMeasure(elmLibrary,
                           out var fhirMeasure,
-                          resourceCanonicalBuilder, localOverrideDate);
+                          resourceCanonicalBuilder, localOverrideDate,
+                          measureGroupCodeSystem);
             return (versionedIdentifier, fhirLibrary, fhirMeasure);
         }
     }

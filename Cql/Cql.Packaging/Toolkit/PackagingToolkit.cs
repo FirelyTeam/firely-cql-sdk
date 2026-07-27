@@ -166,7 +166,8 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                          librarySet: librarySet,
                          inputsById: id => inputArtifactsById[id],
                          overrideDate: Config.OverrideDate,
-                         errorStrategy => errorStrategy
+                         measureGroupCodeSystem: Config.MeasureGroupCodeSystem,
+                         buildExceptionHandlingStrategy: errorStrategy => errorStrategy
                              .SetContinuation(BatchProcessExceptionContinuation)
                              .AddLoggerExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.VersionedLibraryIdentifier)),
                          onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library: {lib}", library.VersionedLibraryIdentifier))

@@ -38,7 +38,8 @@ internal static class FhirMeasureExtensions
             Tag measureAnnotation,
             int measureYear,
             ResourceCanonicalBuilder resourceCanonicalBuilder,
-            SysDateTime overrideDate)
+            SysDateTime overrideDate,
+            string? measureGroupCodeSystem = null)
         {
             var measure = new FhirMeasure();
             var libName = fhirLibrary.Name ?? throw new ArgumentException("Library must have a name", nameof(fhirLibrary));
@@ -59,8 +60,8 @@ internal static class FhirMeasureExtensions
             };
             measure.Group = [];
 
-            FhirMeasureExtensions.AnnotateMeasurePopulations(measure, elmLibrary);
-            FhirMeasureExtensions.AnnotateMeasureStratifiers(measure, elmLibrary);
+            FhirMeasureExtensions.AnnotateMeasurePopulations(measure, elmLibrary, measureGroupCodeSystem);
+            FhirMeasureExtensions.AnnotateMeasureStratifiers(measure, elmLibrary, measureGroupCodeSystem);
             string[] library = [resourceCanonicalBuilder("Library", libName, libVer)];
             measure.Library = library;
             return measure;
@@ -73,7 +74,8 @@ internal static class FhirMeasureExtensions
             ElmLibrary elmLibrary,
             [NotNullWhen(true)] out FhirMeasure? fhirMeasure,
             ResourceCanonicalBuilder resourceCanonicalBuilder,
-            SysDateTime overrideDate)
+            SysDateTime overrideDate,
+            string? measureGroupCodeSystem = null)
         {
             var tags = elmLibrary.statements?
                                  .SelectMany(GetAnnotationTags)
@@ -91,7 +93,8 @@ internal static class FhirMeasureExtensions
                     fhirLibrary,
                     elmLibrary,
                     measureAnnotation,
-                    measureYear, resourceCanonicalBuilder, overrideDate);
+                    measureYear, resourceCanonicalBuilder, overrideDate,
+                    measureGroupCodeSystem);
                 return true;
             }
 
@@ -108,7 +111,7 @@ internal static class FhirMeasureExtensions
         .Where(t => t is not null)
         .ToArray();
 
-    private static FhirMeasure.GroupComponent GetOrCreateGroup(FhirMeasure fhirMeasure, string groupId)
+    private static FhirMeasure.GroupComponent GetOrCreateGroup(FhirMeasure fhirMeasure, string groupId, string? measureGroupCodeSystem)
     {
         var groupsForId = fhirMeasure.Group?
                                      .Where(g => g.ElementId == groupId)
@@ -121,14 +124,27 @@ internal static class FhirMeasureExtensions
         var group = new FhirMeasure.GroupComponent
         {
             ElementId = groupId,
-            //Code = new CodeableConcept(groupId, MeasureGroupCodeSystem),
             Description = $"Group {groupId}",
         };
+        if (!string.IsNullOrWhiteSpace(measureGroupCodeSystem))
+        {
+            group.Code = new CodeableConcept
+            {
+                Coding =
+                [
+                    new Coding
+                    {
+                        System = measureGroupCodeSystem,
+                        Code = groupId,
+                    }
+                ]
+            };
+        }
         fhirMeasure.Group!.Add(group);
         return group;
     }
 
-    private static void AnnotateMeasurePopulations(FhirMeasure fhirMeasure, ElmLibrary library)
+    private static void AnnotateMeasurePopulations(FhirMeasure fhirMeasure, ElmLibrary library, string? measureGroupCodeSystem)
     {
         var defs = library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>();
         foreach (var def in defs)
@@ -155,7 +171,7 @@ internal static class FhirMeasureExtensions
                             $"Definition {def.name} has a @population annotation whose value is {tuple.Population}.  @population must be one of: {string.Join(", ", Populations.Keys)}");
 
                     var rate = $"{tuple.Group}";
-                    var group = GetOrCreateGroup(fhirMeasure, rate);
+                    var group = GetOrCreateGroup(fhirMeasure, rate, measureGroupCodeSystem);
 
                     var populationSuffix = productLine != null ? $"{tuple.Population}-{productLine.value}" : tuple.Population;
                     var pop = $"{rate}-{populationSuffix}";
@@ -216,7 +232,7 @@ internal static class FhirMeasureExtensions
         return container;
     }
 
-    private static void AnnotateMeasureStratifiers(FhirMeasure fhirMeasure, ElmLibrary library)
+    private static void AnnotateMeasureStratifiers(FhirMeasure fhirMeasure, ElmLibrary library, string? measureGroupCodeSystem)
     {
         var defs = library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>();
         foreach (var def in defs)
@@ -249,7 +265,7 @@ internal static class FhirMeasureExtensions
                          select new { Group = g.value, Stratifier = s.value };
             foreach (var tuple in tuples)
             {
-                var group = GetOrCreateGroup(fhirMeasure, tuple.Group);
+                var group = GetOrCreateGroup(fhirMeasure, tuple.Group, measureGroupCodeSystem);
                 var container = GetOrCreateStratifier(group);
 
                 var componentId = $"{tuple.Group}-StratifierComponent-{tuple.Stratifier}";

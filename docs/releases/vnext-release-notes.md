@@ -9,6 +9,13 @@
 
 ## Features
 
+- The Measure packaging step can now emit `Measure.group.code`: the new
+  `PackagingToolkitConfig.MeasureGroupCodeSystem` setting (also available as the
+  `--measure-group-code-system` PackagerCLI option and the `Packaging:MeasureGroupCodeSystem`
+  appsettings key) takes a code system URL, and when set, each measure group's id is also emitted
+  as a coding with that system and the group id as its code. Unset (the default), the output is
+  unchanged.
+
 ## Fixes
 
 - Fixed a CQL `union` of two structurally compatible tuple lists with differing element types
