@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS165FHIRControllingHighBP", "1.0.000")]
 public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<CMS165FHIRControllingHighBP_1_0_000>
 {
@@ -129,24 +129,23 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     {
         CqlValueSet a_ = this.Essential_Hypertension(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
-        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> e_ = Status_1_15_000.Instance.verified(context, d_);
 
-        bool? g_(Condition Hypertension) {
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypertension);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            CqlDateTime k_ = context.Operators.Start(j_);
-            CqlDateTime m_ = context.Operators.Start(j_);
-            CqlQuantity n_ = context.Operators.Quantity(6m, "months");
-            CqlDateTime o_ = context.Operators.Add(m_, n_);
-            CqlInterval<CqlDateTime> p_ = context.Operators.Interval(k_, o_, true, false);
-            bool? q_ = context.Operators.Overlaps(i_, p_, (string)default);
-            return q_;
+        bool? f_(Condition Hypertension) {
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypertension);
+            CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
+            CqlDateTime j_ = context.Operators.Start(i_);
+            CqlQuantity k_ = context.Operators.Quantity(6m, "months");
+            CqlDateTime l_ = context.Operators.Add(j_, k_);
+            CqlInterval<CqlDateTime> m_ = context.Operators.Interval(j_, l_, true, false);
+            bool? n_ = context.Operators.Overlaps(h_, m_, (string)default);
+            return n_;
         }
 
-        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
-        return h_;
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        return g_;
     }
 
 
@@ -201,34 +200,34 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     {
         CqlValueSet a_ = this.Pregnancy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
-        CqlValueSet f_ = this.End_Stage_Renal_Disease(context);
-        IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
-        IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition>, j_ as IEnumerable<Condition>);
-        CqlValueSet l_ = this.Kidney_Transplant_Recipient(context);
-        IEnumerable<Condition> m_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> n_ = context.Operators.Union<Condition>(k_ as IEnumerable<Condition>, m_ as IEnumerable<Condition>);
-        IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        CqlValueSet e_ = this.End_Stage_Renal_Disease(context);
+        IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
+        CqlValueSet j_ = this.Kidney_Transplant_Recipient(context);
+        IEnumerable<Condition> k_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition> l_ = context.Operators.Union<Condition>(i_ as IEnumerable<Condition>, k_ as IEnumerable<Condition>);
+        IEnumerable<Condition> m_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> n_ = context.Operators.Union<Condition>(l_ as IEnumerable<Condition>, m_ as IEnumerable<Condition>);
+        CqlValueSet o_ = this.Chronic_Kidney_Disease__Stage_5(context);
+        IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> q_ = context.Operators.Union<Condition>(n_ as IEnumerable<Condition>, p_ as IEnumerable<Condition>);
-        CqlValueSet r_ = this.Chronic_Kidney_Disease__Stage_5(context);
-        IEnumerable<Condition> s_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> t_ = context.Operators.Union<Condition>(q_ as IEnumerable<Condition>, s_ as IEnumerable<Condition>);
-        IEnumerable<Condition> v_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> w_ = context.Operators.Union<Condition>(t_ as IEnumerable<Condition>, v_ as IEnumerable<Condition>);
-        IEnumerable<Condition> x_ = Status_1_15_000.Instance.verified(context, w_);
+        IEnumerable<Condition> r_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> s_ = context.Operators.Union<Condition>(q_ as IEnumerable<Condition>, r_ as IEnumerable<Condition>);
+        IEnumerable<Condition> t_ = Status_1_15_000.Instance.verified(context, s_);
 
-        bool? y_(Condition PregnancyESRDDiagnosis) {
-            CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyESRDDiagnosis);
-            CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
-            bool? ac_ = context.Operators.Overlaps(aa_, ab_, (string)default);
-            return ac_;
+        bool? u_(Condition PregnancyESRDDiagnosis) {
+            CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyESRDDiagnosis);
+            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+            bool? y_ = context.Operators.Overlaps(w_, x_, (string)default);
+            return y_;
         }
 
-        IEnumerable<Condition> z_ = context.Operators.Where<Condition>(x_, y_);
-        return z_;
+        IEnumerable<Condition> v_ = context.Operators.Where<Condition>(t_, u_);
+        return v_;
     }
 
 
@@ -262,7 +261,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 bool p_() {
                     DataType v_ = ESRDProcedure?.Performed;
                     object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlInterval<CqlDateTime>;
+                    bool x_ = w_ is CqlQuantity;
                     return x_;
                 }
 
@@ -270,7 +269,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 bool q_() {
                     DataType y_ = ESRDProcedure?.Performed;
                     object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    bool aa_ = z_ is CqlQuantity;
+                    bool aa_ = z_ is CqlInterval<CqlDateTime>;
                     return aa_;
                 }
 
@@ -286,30 +285,30 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType ae_ = ESRDProcedure?.Performed;
                     object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                    return (af_ as CqlDateTime) as object;
+                    return af_ as CqlDateTime;
                 }
                 else if (p_())
                 {
                     DataType ag_ = ESRDProcedure?.Performed;
                     object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                    return (ah_ as CqlInterval<CqlDateTime>) as object;
+                    return ah_ as CqlQuantity;
                 }
                 else if (q_())
                 {
                     DataType ai_ = ESRDProcedure?.Performed;
                     object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                    return (aj_ as CqlQuantity) as object;
+                    return aj_ as CqlInterval<CqlDateTime>;
                 }
                 else if (r_())
                 {
                     DataType ak_ = ESRDProcedure?.Performed;
                     object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                    return (al_ as CqlInterval<CqlQuantity>) as object;
+                    return al_ as CqlInterval<CqlQuantity>;
                 }
                 else
                 {
                     return null;
-                };
+                }
             }
 
             CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_());
@@ -413,50 +412,49 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
         IEnumerable<Observation> b_ = Status_1_15_000.Instance.isObservationBP(context, a_);
 
         bool? c_(Observation BloodPressure) {
-            CqlValueSet l_ = this.Encounter_Inpatient(context);
+            CqlValueSet j_ = this.Encounter_Inpatient(context);
+            IEnumerable<Encounter> k_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+            CqlValueSet l_ = this.Emergency_Department_Evaluation_and_Management_Visit(context);
             IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            CqlValueSet n_ = this.Emergency_Department_Evaluation_and_Management_Visit(context);
-            IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
-            IEnumerable<Encounter> q_ = Status_1_15_000.Instance.isEncounterPerformed(context, p_);
+            IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(k_, m_);
+            IEnumerable<Encounter> o_ = Status_1_15_000.Instance.isEncounterPerformed(context, n_);
 
-            bool? r_(Encounter DisqualifyingEncounter) {
-                DataType v_ = BloodPressure?.Effective;
-                object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                CqlDateTime x_ = QICoreCommon_4_0_000.Instance.latest(context, w_);
-                Period y_ = DisqualifyingEncounter?.Period;
-                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
-                bool? aa_ = context.Operators.In<CqlDateTime>(x_, z_, "day");
-                return aa_;
+            bool? p_(Encounter DisqualifyingEncounter) {
+                DataType t_ = BloodPressure?.Effective;
+                object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                CqlDateTime v_ = QICoreCommon_4_0_000.Instance.latest(context, u_);
+                Period w_ = DisqualifyingEncounter?.Period;
+                CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
+                bool? y_ = context.Operators.In<CqlDateTime>(v_, x_, "day");
+                return y_;
             }
 
-            IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
-            bool? t_ = context.Operators.Exists<Encounter>(s_);
-            bool? u_ = context.Operators.Not(t_);
-            return u_;
+            IEnumerable<Encounter> q_ = context.Operators.Where<Encounter>(o_, p_);
+            bool? r_ = context.Operators.Exists<Encounter>(q_);
+            bool? s_ = context.Operators.Not(r_);
+            return s_;
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
         bool? e_(Observation BloodPressure) {
-            DataType ab_ = BloodPressure?.Effective;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            CqlDateTime ad_ = QICoreCommon_4_0_000.Instance.latest(context, ac_);
-            CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
-            bool? af_ = context.Operators.In<CqlDateTime>(ad_, ae_, "day");
-            return af_;
+            DataType z_ = BloodPressure?.Effective;
+            object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+            CqlDateTime ab_ = QICoreCommon_4_0_000.Instance.latest(context, aa_);
+            CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
+            bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, "day");
+            return ad_;
         }
 
         IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-        IEnumerable<Observation> h_ = Status_1_15_000.Instance.isObservationBP(context, a_);
 
-        bool? i_(Observation BloodPressure) {
-            ResourceReference ag_ = BloodPressure?.Encounter;
-            Encounter ah_ = this.getEncounter(context, ag_);
-            Coding ai_ = ah_?.Class;
-            CqlCode aj_ = FHIRHelpers_4_4_000.Instance.ToCode(context, ai_);
-            string ak_ = aj_?.code;
-            string[] al_ = [
+        bool? g_(Observation BloodPressure) {
+            ResourceReference ae_ = BloodPressure?.Encounter;
+            Encounter af_ = this.getEncounter(context, ae_);
+            Coding ag_ = af_?.Class;
+            CqlCode ah_ = FHIRHelpers_4_4_000.Instance.ToCode(context, ag_);
+            string ai_ = ah_?.code;
+            string[] aj_ = [
                 "EMER",
                 "IMP",
                 "ACUTE",
@@ -464,20 +462,20 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 "PRENC",
                 "SS",
             ];
-            bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
-            bool? an_ = context.Operators.Not(am_);
-            DataType ao_ = BloodPressure?.Effective;
-            object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-            CqlDateTime aq_ = QICoreCommon_4_0_000.Instance.latest(context, ap_);
-            CqlInterval<CqlDateTime> ar_ = this.Measurement_Period(context);
-            bool? as_ = context.Operators.In<CqlDateTime>(aq_, ar_, "day");
-            bool? at_ = context.Operators.And(an_, as_);
-            return at_;
+            bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
+            bool? al_ = context.Operators.Not(ak_);
+            DataType am_ = BloodPressure?.Effective;
+            object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
+            CqlDateTime ao_ = QICoreCommon_4_0_000.Instance.latest(context, an_);
+            CqlInterval<CqlDateTime> ap_ = this.Measurement_Period(context);
+            bool? aq_ = context.Operators.In<CqlDateTime>(ao_, ap_, "day");
+            bool? ar_ = context.Operators.And(al_, aq_);
+            return ar_;
         }
 
-        IEnumerable<Observation> j_ = context.Operators.Where<Observation>(h_, i_);
-        IEnumerable<Observation> k_ = context.Operators.Union<Observation>(f_, j_);
-        return k_;
+        IEnumerable<Observation> h_ = context.Operators.Where<Observation>(b_, g_);
+        IEnumerable<Observation> i_ = context.Operators.Union<Observation>(f_, h_);
+        return i_;
     }
 
 

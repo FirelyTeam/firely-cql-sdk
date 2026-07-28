@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("TJCOverallFHIR", "1.8.000")]
 public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHIR_1_8_000>
 {
@@ -142,12 +142,11 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, e_);
             int? g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.LengthInDays(context, f_);
             bool? h_ = context.Operators.LessOrEqual(g_, 120);
-            CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, e_);
-            CqlDateTime k_ = context.Operators.End(j_);
-            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-            bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
-            bool? n_ = context.Operators.And(h_, m_);
-            return n_;
+            CqlDateTime i_ = context.Operators.End(f_);
+            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
+            bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
+            bool? l_ = context.Operators.And(h_, k_);
+            return l_;
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -171,12 +170,10 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             CqlConcept f_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, e_);
             CqlValueSet g_ = this.Hemorrhagic_Stroke(context);
             bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
-            CodeableConcept j_ = d_?.Code;
-            CqlConcept k_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, j_);
-            CqlValueSet l_ = this.Ischemic_Stroke(context);
-            bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
-            bool? n_ = context.Operators.Or(h_, m_);
-            return n_;
+            CqlValueSet i_ = this.Ischemic_Stroke(context);
+            bool? j_ = context.Operators.ConceptInValueSet(f_, i_);
+            bool? k_ = context.Operators.Or(h_, j_);
+            return k_;
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -260,27 +257,19 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             CqlConcept f_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, e_);
             CqlValueSet g_ = this.Discharge_To_Acute_Care_Facility(context);
             bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
-            CodeableConcept j_ = d_?.DischargeDisposition;
-            CqlConcept k_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, j_);
-            CqlValueSet l_ = this.Left_Against_Medical_Advice(context);
-            bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
-            bool? n_ = context.Operators.Or(h_, m_);
-            CodeableConcept p_ = d_?.DischargeDisposition;
-            CqlConcept q_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, p_);
-            CqlValueSet r_ = this.Patient_Expired(context);
-            bool? s_ = context.Operators.ConceptInValueSet(q_, r_);
-            bool? t_ = context.Operators.Or(n_, s_);
-            CodeableConcept v_ = d_?.DischargeDisposition;
-            CqlConcept w_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, v_);
-            CqlValueSet x_ = this.Discharged_to_Home_for_Hospice_Care(context);
-            bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
-            bool? z_ = context.Operators.Or(t_, y_);
-            CodeableConcept ab_ = d_?.DischargeDisposition;
-            CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ab_);
-            CqlValueSet ad_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
-            bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
-            bool? af_ = context.Operators.Or(z_, ae_);
-            return af_;
+            CqlValueSet i_ = this.Left_Against_Medical_Advice(context);
+            bool? j_ = context.Operators.ConceptInValueSet(f_, i_);
+            bool? k_ = context.Operators.Or(h_, j_);
+            CqlValueSet l_ = this.Patient_Expired(context);
+            bool? m_ = context.Operators.ConceptInValueSet(f_, l_);
+            bool? n_ = context.Operators.Or(k_, m_);
+            CqlValueSet o_ = this.Discharged_to_Home_for_Hospice_Care(context);
+            bool? p_ = context.Operators.ConceptInValueSet(f_, o_);
+            bool? q_ = context.Operators.Or(n_, p_);
+            CqlValueSet r_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
+            bool? s_ = context.Operators.ConceptInValueSet(f_, r_);
+            bool? t_ = context.Operators.Or(q_, s_);
+            return t_;
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -300,29 +289,29 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
         IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
 
         bool? c_(ServiceRequest P) {
-            Code<RequestIntent> j_ = P?.IntentElement;
-            string k_ = FHIRHelpers_4_0_001.Instance.ToString(context, j_);
-            bool? l_ = context.Operators.Equal(k_, "order");
-            return l_;
+            Code<RequestIntent> i_ = P?.IntentElement;
+            string j_ = FHIRHelpers_4_0_001.Instance.ToString(context, i_);
+            bool? k_ = context.Operators.Equal(j_, "order");
+            return k_;
         }
 
         IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
-        IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+        IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 
-        bool? g_(Procedure InterventionPerformed) {
-            Code<EventStatus> m_ = InterventionPerformed?.StatusElement;
-            string n_ = FHIRHelpers_4_0_001.Instance.ToString(context, m_);
-            string[] o_ = [
+        bool? f_(Procedure InterventionPerformed) {
+            Code<EventStatus> l_ = InterventionPerformed?.StatusElement;
+            string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
+            string[] n_ = [
                 "completed",
                 "in-progress",
             ];
-            bool? p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
-            return p_;
+            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
+            return o_;
         }
 
-        IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
-        IEnumerable<object> i_ = context.Operators.Union<object>(d_ as IEnumerable<object>, h_ as IEnumerable<object>);
-        return i_;
+        IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
+        IEnumerable<object> h_ = context.Operators.Union<object>(d_ as IEnumerable<object>, g_ as IEnumerable<object>);
+        return h_;
     }
 
 

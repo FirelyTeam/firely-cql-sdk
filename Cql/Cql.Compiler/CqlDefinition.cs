@@ -111,12 +111,7 @@ internal class CqlCodeDefinition(
 {
     public CqlCode Code { get; } = code;
 
-    // Likely-unintentional legacy behavior, preserved bug-for-bug from the deleted
-    // Linq.Expressions pipeline (its CqlCodeDefinition.ReturnType returned the definition
-    // class itself rather than typeof(CqlCode)). Deliberately un-fixed since nothing has been
-    // found to observe this value; the real fix (typeof(CqlCode)) is tracked in the cleanup
-    // checklist of docs/linq-expression-removal-plan.md.
-    public override Type ReturnType => typeof(CqlCodeDefinition);
+    public override Type ReturnType => typeof(CqlCode);
 }
 
 /// <summary>

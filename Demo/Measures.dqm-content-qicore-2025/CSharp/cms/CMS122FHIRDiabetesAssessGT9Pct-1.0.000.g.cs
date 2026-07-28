@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS122FHIRDiabetesAssessGT9Pct", "1.0.000")]
 public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISingleton<CMS122FHIRDiabetesAssessGT9Pct_1_0_000>
 {
@@ -225,144 +225,144 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> r_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
         bool? s_(Encounter E) {
-            List<CodeableConcept> ar_ = E?.Type;
+            List<CodeableConcept> an_ = E?.Type;
 
-            CqlConcept as_(CodeableConcept @this) {
-                CqlConcept ax_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return ax_;
+            CqlConcept ao_(CodeableConcept @this) {
+                CqlConcept at_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return at_;
             }
 
-            IEnumerable<CqlConcept> at_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ar_, as_);
+            IEnumerable<CqlConcept> ap_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)an_, ao_);
 
-            bool? au_(CqlConcept T) {
-                CqlCode ay_ = this.Medical_nutrition_therapy__initial_assessment_and_intervention__individual__face_to_face_with_the_patient__each_15_minutes(context);
-                CqlConcept az_ = context.Operators.ConvertCodeToConcept(ay_);
-                bool? ba_ = context.Operators.Equivalent(T, az_);
-                return ba_;
+            bool? aq_(CqlConcept T) {
+                CqlCode au_ = this.Medical_nutrition_therapy__initial_assessment_and_intervention__individual__face_to_face_with_the_patient__each_15_minutes(context);
+                CqlConcept av_ = context.Operators.ConvertCodeToConcept(au_);
+                bool? aw_ = context.Operators.Equivalent(T, av_);
+                return aw_;
             }
 
-            IEnumerable<CqlConcept> av_ = context.Operators.Where<CqlConcept>(at_, au_);
-            bool? aw_ = context.Operators.Exists<CqlConcept>(av_);
-            return aw_;
+            IEnumerable<CqlConcept> ar_ = context.Operators.Where<CqlConcept>(ap_, aq_);
+            bool? as_ = context.Operators.Exists<CqlConcept>(ar_);
+            return as_;
         }
 
         IEnumerable<Encounter> t_ = context.Operators.Where<Encounter>(r_, s_);
 
-        bool? v_(Encounter E) {
-            List<CodeableConcept> bb_ = E?.Type;
+        bool? u_(Encounter E) {
+            List<CodeableConcept> ax_ = E?.Type;
 
-            CqlConcept bc_(CodeableConcept @this) {
-                CqlConcept bh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return bh_;
+            CqlConcept ay_(CodeableConcept @this) {
+                CqlConcept bd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return bd_;
             }
 
-            IEnumerable<CqlConcept> bd_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bb_, bc_);
+            IEnumerable<CqlConcept> az_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ax_, ay_);
 
-            bool? be_(CqlConcept T) {
-                CqlCode bi_ = this.Medical_nutrition_therapy__re_assessment_and_intervention__individual__face_to_face_with_the_patient__each_15_minutes(context);
-                CqlConcept bj_ = context.Operators.ConvertCodeToConcept(bi_);
-                bool? bk_ = context.Operators.Equivalent(T, bj_);
-                return bk_;
+            bool? ba_(CqlConcept T) {
+                CqlCode be_ = this.Medical_nutrition_therapy__re_assessment_and_intervention__individual__face_to_face_with_the_patient__each_15_minutes(context);
+                CqlConcept bf_ = context.Operators.ConvertCodeToConcept(be_);
+                bool? bg_ = context.Operators.Equivalent(T, bf_);
+                return bg_;
             }
 
-            IEnumerable<CqlConcept> bf_ = context.Operators.Where<CqlConcept>(bd_, be_);
-            bool? bg_ = context.Operators.Exists<CqlConcept>(bf_);
-            return bg_;
+            IEnumerable<CqlConcept> bb_ = context.Operators.Where<CqlConcept>(az_, ba_);
+            bool? bc_ = context.Operators.Exists<CqlConcept>(bb_);
+            return bc_;
         }
 
-        IEnumerable<Encounter> w_ = context.Operators.Where<Encounter>(r_, v_);
-        IEnumerable<Encounter> x_ = context.Operators.Union<Encounter>(t_, w_);
-        IEnumerable<Encounter> y_ = context.Operators.Union<Encounter>(q_, x_);
+        IEnumerable<Encounter> v_ = context.Operators.Where<Encounter>(r_, u_);
+        IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(t_, v_);
+        IEnumerable<Encounter> x_ = context.Operators.Union<Encounter>(q_, w_);
+
+        bool? y_(Encounter E) {
+            List<CodeableConcept> bh_ = E?.Type;
+
+            CqlConcept bi_(CodeableConcept @this) {
+                CqlConcept bn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return bn_;
+            }
+
+            IEnumerable<CqlConcept> bj_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bh_, bi_);
+
+            bool? bk_(CqlConcept T) {
+                CqlCode bo_ = this.Medical_nutrition_therapy__group__2_or_more_individual_s____each_30_minutes(context);
+                CqlConcept bp_ = context.Operators.ConvertCodeToConcept(bo_);
+                bool? bq_ = context.Operators.Equivalent(T, bp_);
+                return bq_;
+            }
+
+            IEnumerable<CqlConcept> bl_ = context.Operators.Where<CqlConcept>(bj_, bk_);
+            bool? bm_ = context.Operators.Exists<CqlConcept>(bl_);
+            return bm_;
+        }
+
+        IEnumerable<Encounter> z_ = context.Operators.Where<Encounter>(r_, y_);
 
         bool? aa_(Encounter E) {
-            List<CodeableConcept> bl_ = E?.Type;
+            List<CodeableConcept> br_ = E?.Type;
 
-            CqlConcept bm_(CodeableConcept @this) {
-                CqlConcept br_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return br_;
+            CqlConcept bs_(CodeableConcept @this) {
+                CqlConcept bx_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return bx_;
             }
 
-            IEnumerable<CqlConcept> bn_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bl_, bm_);
+            IEnumerable<CqlConcept> bt_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)br_, bs_);
 
-            bool? bo_(CqlConcept T) {
-                CqlCode bs_ = this.Medical_nutrition_therapy__group__2_or_more_individual_s____each_30_minutes(context);
-                CqlConcept bt_ = context.Operators.ConvertCodeToConcept(bs_);
-                bool? bu_ = context.Operators.Equivalent(T, bt_);
-                return bu_;
+            bool? bu_(CqlConcept T) {
+                CqlCode by_ = this.Medical_nutrition_therapy__reassessment_and_subsequent_intervention_s__following_second_referral_in_same_year_for_change_in_diagnosis__medical_condition_or_treatment_regimen__including_additional_hours_needed_for_renal_disease___individual__face_to_face_with_the_patient__each_15_minutes(context);
+                CqlConcept bz_ = context.Operators.ConvertCodeToConcept(by_);
+                bool? ca_ = context.Operators.Equivalent(T, bz_);
+                return ca_;
             }
 
-            IEnumerable<CqlConcept> bp_ = context.Operators.Where<CqlConcept>(bn_, bo_);
-            bool? bq_ = context.Operators.Exists<CqlConcept>(bp_);
-            return bq_;
+            IEnumerable<CqlConcept> bv_ = context.Operators.Where<CqlConcept>(bt_, bu_);
+            bool? bw_ = context.Operators.Exists<CqlConcept>(bv_);
+            return bw_;
         }
 
         IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(r_, aa_);
+        IEnumerable<Encounter> ac_ = context.Operators.Union<Encounter>(z_, ab_);
+        IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(x_, ac_);
 
-        bool? ad_(Encounter E) {
-            List<CodeableConcept> bv_ = E?.Type;
+        bool? ae_(Encounter E) {
+            List<CodeableConcept> cb_ = E?.Type;
 
-            CqlConcept bw_(CodeableConcept @this) {
-                CqlConcept cb_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return cb_;
+            CqlConcept cc_(CodeableConcept @this) {
+                CqlConcept ch_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return ch_;
             }
 
-            IEnumerable<CqlConcept> bx_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bv_, bw_);
+            IEnumerable<CqlConcept> cd_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)cb_, cc_);
 
-            bool? by_(CqlConcept T) {
-                CqlCode cc_ = this.Medical_nutrition_therapy__reassessment_and_subsequent_intervention_s__following_second_referral_in_same_year_for_change_in_diagnosis__medical_condition_or_treatment_regimen__including_additional_hours_needed_for_renal_disease___individual__face_to_face_with_the_patient__each_15_minutes(context);
-                CqlConcept cd_ = context.Operators.ConvertCodeToConcept(cc_);
-                bool? ce_ = context.Operators.Equivalent(T, cd_);
-                return ce_;
+            bool? ce_(CqlConcept T) {
+                CqlCode ci_ = this.Medical_nutrition_therapy__reassessment_and_subsequent_intervention_s__following_second_referral_in_same_year_for_change_in_diagnosis__medical_condition__or_treatment_regimen__including_additional_hours_needed_for_renal_disease___group__2_or_more_individuals___each_30_minutes(context);
+                CqlConcept cj_ = context.Operators.ConvertCodeToConcept(ci_);
+                bool? ck_ = context.Operators.Equivalent(T, cj_);
+                return ck_;
             }
 
-            IEnumerable<CqlConcept> bz_ = context.Operators.Where<CqlConcept>(bx_, by_);
-            bool? ca_ = context.Operators.Exists<CqlConcept>(bz_);
-            return ca_;
+            IEnumerable<CqlConcept> cf_ = context.Operators.Where<CqlConcept>(cd_, ce_);
+            bool? cg_ = context.Operators.Exists<CqlConcept>(cf_);
+            return cg_;
         }
 
-        IEnumerable<Encounter> ae_ = context.Operators.Where<Encounter>(r_, ad_);
-        IEnumerable<Encounter> af_ = context.Operators.Union<Encounter>(ab_, ae_);
-        IEnumerable<Encounter> ag_ = context.Operators.Union<Encounter>(y_, af_);
+        IEnumerable<Encounter> af_ = context.Operators.Where<Encounter>(r_, ae_);
+        CqlValueSet ag_ = this.Telephone_Visits(context);
+        IEnumerable<Encounter> ah_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> ai_ = context.Operators.Union<Encounter>(af_, ah_);
+        IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(ad_, ai_);
+        IEnumerable<Encounter> ak_ = Status_1_15_000.Instance.isEncounterPerformed(context, aj_);
 
-        bool? ai_(Encounter E) {
-            List<CodeableConcept> cf_ = E?.Type;
-
-            CqlConcept cg_(CodeableConcept @this) {
-                CqlConcept cl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return cl_;
-            }
-
-            IEnumerable<CqlConcept> ch_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)cf_, cg_);
-
-            bool? ci_(CqlConcept T) {
-                CqlCode cm_ = this.Medical_nutrition_therapy__reassessment_and_subsequent_intervention_s__following_second_referral_in_same_year_for_change_in_diagnosis__medical_condition__or_treatment_regimen__including_additional_hours_needed_for_renal_disease___group__2_or_more_individuals___each_30_minutes(context);
-                CqlConcept cn_ = context.Operators.ConvertCodeToConcept(cm_);
-                bool? co_ = context.Operators.Equivalent(T, cn_);
-                return co_;
-            }
-
-            IEnumerable<CqlConcept> cj_ = context.Operators.Where<CqlConcept>(ch_, ci_);
-            bool? ck_ = context.Operators.Exists<CqlConcept>(cj_);
-            return ck_;
+        bool? al_(Encounter ValidEncounters) {
+            CqlInterval<CqlDateTime> cl_ = this.Measurement_Period(context);
+            Period cm_ = ValidEncounters?.Period;
+            CqlInterval<CqlDateTime> cn_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cm_);
+            bool? co_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(cl_, cn_, "day");
+            return co_;
         }
 
-        IEnumerable<Encounter> aj_ = context.Operators.Where<Encounter>(r_, ai_);
-        CqlValueSet ak_ = this.Telephone_Visits(context);
-        IEnumerable<Encounter> al_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ak_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> am_ = context.Operators.Union<Encounter>(aj_, al_);
-        IEnumerable<Encounter> an_ = context.Operators.Union<Encounter>(ag_, am_);
-        IEnumerable<Encounter> ao_ = Status_1_15_000.Instance.isEncounterPerformed(context, an_);
-
-        bool? ap_(Encounter ValidEncounters) {
-            CqlInterval<CqlDateTime> cp_ = this.Measurement_Period(context);
-            Period cq_ = ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> cr_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cq_);
-            bool? cs_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(cp_, cr_, "day");
-            return cs_;
-        }
-
-        IEnumerable<Encounter> aq_ = context.Operators.Where<Encounter>(ao_, ap_);
-        return aq_;
+        IEnumerable<Encounter> am_ = context.Operators.Where<Encounter>(ak_, al_);
+        return am_;
     }
 
 
@@ -470,7 +470,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
                 bool o_() {
                     DataType t_ = GlycemicStatus?.Effective;
                     object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    bool v_ = u_ is CqlInterval<CqlDateTime>;
+                    bool v_ = u_ is CqlDateTime;
                     return v_;
                 }
 
@@ -478,7 +478,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
                 bool p_() {
                     DataType w_ = GlycemicStatus?.Effective;
                     object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                    bool y_ = x_ is CqlDateTime;
+                    bool y_ = x_ is CqlInterval<CqlDateTime>;
                     return y_;
                 }
 
@@ -486,24 +486,24 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
                 {
                     DataType z_ = GlycemicStatus?.Effective;
                     object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    return (aa_ as CqlDateTime) as object;
+                    return aa_ as CqlDateTime;
                 }
                 else if (o_())
                 {
                     DataType ab_ = GlycemicStatus?.Effective;
                     object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    return (ac_ as CqlInterval<CqlDateTime>) as object;
+                    return ac_ as CqlDateTime;
                 }
                 else if (p_())
                 {
                     DataType ad_ = GlycemicStatus?.Effective;
                     object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                    return (ae_ as CqlDateTime) as object;
+                    return ae_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
                     return null;
-                };
+                }
             }
 
             CqlDateTime k_ = QICoreCommon_4_0_000.Instance.latest(context, j_());
@@ -542,7 +542,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
                 bool k_() {
                     DataType p_ = QualifyingGlycemicStatus?.Effective;
                     object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
-                    bool r_ = q_ is CqlInterval<CqlDateTime>;
+                    bool r_ = q_ is CqlDateTime;
                     return r_;
                 }
 
@@ -550,7 +550,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
                 bool l_() {
                     DataType s_ = QualifyingGlycemicStatus?.Effective;
                     object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                    bool u_ = t_ is CqlDateTime;
+                    bool u_ = t_ is CqlInterval<CqlDateTime>;
                     return u_;
                 }
 
@@ -558,24 +558,24 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
                 {
                     DataType v_ = QualifyingGlycemicStatus?.Effective;
                     object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    return (w_ as CqlDateTime) as object;
+                    return w_ as CqlDateTime;
                 }
                 else if (k_())
                 {
                     DataType x_ = QualifyingGlycemicStatus?.Effective;
                     object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    return (y_ as CqlInterval<CqlDateTime>) as object;
+                    return y_ as CqlDateTime;
                 }
                 else if (l_())
                 {
                     DataType z_ = QualifyingGlycemicStatus?.Effective;
                     object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    return (aa_ as CqlDateTime) as object;
+                    return aa_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
                     return null;
-                };
+                }
             }
 
             CqlDateTime h_ = QICoreCommon_4_0_000.Instance.latest(context, g_());
@@ -616,7 +616,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
                 bool q_() {
                     DataType v_ = QualifyingGlycemicStatus?.Effective;
                     object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlInterval<CqlDateTime>;
+                    bool x_ = w_ is CqlDateTime;
                     return x_;
                 }
 
@@ -624,7 +624,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
                 bool r_() {
                     DataType y_ = QualifyingGlycemicStatus?.Effective;
                     object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    bool aa_ = z_ is CqlDateTime;
+                    bool aa_ = z_ is CqlInterval<CqlDateTime>;
                     return aa_;
                 }
 
@@ -632,24 +632,24 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
                 {
                     DataType ab_ = QualifyingGlycemicStatus?.Effective;
                     object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    return (ac_ as CqlDateTime) as object;
+                    return ac_ as CqlDateTime;
                 }
                 else if (q_())
                 {
                     DataType ad_ = QualifyingGlycemicStatus?.Effective;
                     object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                    return (ae_ as CqlInterval<CqlDateTime>) as object;
+                    return ae_ as CqlDateTime;
                 }
                 else if (r_())
                 {
                     DataType af_ = QualifyingGlycemicStatus?.Effective;
                     object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                    return (ag_ as CqlDateTime) as object;
+                    return ag_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
                     return null;
-                };
+                }
             }
 
             CqlDateTime l_ = QICoreCommon_4_0_000.Instance.latest(context, k_());
@@ -693,10 +693,10 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
     {
         Observation a_ = this.Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day(context);
         bool? b_ = context.Operators.Not((bool?)(a_ is null));
-        DataType d_ = a_?.Value;
-        object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
-        bool? f_ = context.Operators.And(b_, (bool?)(e_ is null));
-        return f_;
+        DataType c_ = a_?.Value;
+        object d_ = FHIRHelpers_4_4_000.Instance.ToValue(context, c_);
+        bool? e_ = context.Operators.And(b_, (bool?)(d_ is null));
+        return e_;
     }
 
 

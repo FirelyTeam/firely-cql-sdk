@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "4.6.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       }, {
@@ -441,6 +441,130 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Address",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Age",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Annotation",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Attachment",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}CodeableConcept",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Coding",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}ContactDetail",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}ContactPoint",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Contributor",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Count",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}DataRequirement",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Distance",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Dosage",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Duration",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Expression",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}HumanName",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Identifier",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Meta",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Money",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}ParameterDefinition",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Period",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Quantity",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Range",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Ratio",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Reference",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}RelatedArtifact",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}SampledData",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Signature",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Timing",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}TriggerDefinition",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}UsageContext",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
                               "name" : "{http://hl7.org/fhir}base64Binary",
                               "annotation" : [ ]
                            }, {
@@ -514,130 +638,6 @@
                            }, {
                               "type" : "NamedTypeSpecifier",
                               "name" : "{http://hl7.org/fhir}uuid",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Address",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Age",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Annotation",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Attachment",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}CodeableConcept",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Coding",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}ContactPoint",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Count",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Distance",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Duration",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}HumanName",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Identifier",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Money",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Period",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Quantity",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Range",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Ratio",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Reference",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}SampledData",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Signature",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Timing",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}ContactDetail",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Contributor",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}DataRequirement",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Expression",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}ParameterDefinition",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}RelatedArtifact",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}TriggerDefinition",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}UsageContext",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Dosage",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Meta",
                               "annotation" : [ ]
                            } ]
                         }
@@ -1160,6 +1160,130 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Address",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Age",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Annotation",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Attachment",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}CodeableConcept",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Coding",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}ContactDetail",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}ContactPoint",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Contributor",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Count",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}DataRequirement",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Distance",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Dosage",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Duration",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Expression",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}HumanName",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Identifier",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Meta",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Money",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}ParameterDefinition",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Period",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Quantity",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Range",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Ratio",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Reference",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}RelatedArtifact",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}SampledData",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Signature",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Timing",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}TriggerDefinition",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}UsageContext",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
                               "name" : "{http://hl7.org/fhir}base64Binary",
                               "annotation" : [ ]
                            }, {
@@ -1233,130 +1357,6 @@
                            }, {
                               "type" : "NamedTypeSpecifier",
                               "name" : "{http://hl7.org/fhir}uuid",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Address",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Age",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Annotation",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Attachment",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}CodeableConcept",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Coding",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}ContactPoint",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Count",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Distance",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Duration",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}HumanName",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Identifier",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Money",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Period",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Quantity",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Range",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Ratio",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Reference",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}SampledData",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Signature",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Timing",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}ContactDetail",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Contributor",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}DataRequirement",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Expression",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}ParameterDefinition",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}RelatedArtifact",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}TriggerDefinition",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}UsageContext",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Dosage",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Meta",
                               "annotation" : [ ]
                            } ]
                         }

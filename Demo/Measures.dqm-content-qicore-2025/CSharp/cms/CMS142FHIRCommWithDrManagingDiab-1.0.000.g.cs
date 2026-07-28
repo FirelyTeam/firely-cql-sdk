@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS142FHIRCommWithDrManagingDiab", "1.0.000")]
 public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingleton<CMS142FHIRCommWithDrManagingDiab_1_0_000>
 {
@@ -237,27 +237,23 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         bool? c_ = context.Operators.Not((bool?)(b_ is null));
-        CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
-        CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
-        CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
-        bool? h_ = context.Operators.Equivalent(e_, g_);
-        CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
-        CqlCode k_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+        CqlCode d_ = QICoreCommon_4_0_000.Instance.confirmed(context);
+        CqlConcept e_ = context.Operators.ConvertCodeToConcept(d_);
+        bool? f_ = context.Operators.Equivalent(b_, e_);
+        CqlCode g_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+        CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
+        bool? i_ = context.Operators.Equivalent(b_, h_);
+        bool? j_ = context.Operators.Or(f_, i_);
+        CqlCode k_ = QICoreCommon_4_0_000.Instance.provisional(context);
         CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-        bool? m_ = context.Operators.Equivalent(j_, l_);
-        bool? n_ = context.Operators.Or(h_, m_);
-        CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
-        CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
-        CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-        bool? s_ = context.Operators.Equivalent(p_, r_);
-        bool? t_ = context.Operators.Or(n_, s_);
-        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
-        CqlCode w_ = QICoreCommon_4_0_000.Instance.differential(context);
-        CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
-        bool? y_ = context.Operators.Equivalent(v_, x_);
-        bool? z_ = context.Operators.Or(t_, y_);
-        bool? aa_ = context.Operators.Implies(c_, z_);
-        return aa_;
+        bool? m_ = context.Operators.Equivalent(b_, l_);
+        bool? n_ = context.Operators.Or(j_, m_);
+        CqlCode o_ = QICoreCommon_4_0_000.Instance.differential(context);
+        CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+        bool? q_ = context.Operators.Equivalent(b_, p_);
+        bool? r_ = context.Operators.Or(n_, q_);
+        bool? s_ = context.Operators.Implies(c_, r_);
+        return s_;
     }
 
 
@@ -274,22 +270,22 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         bool? b_(Encounter ValidQualifyingEncounter) {
             CqlValueSet d_ = this.Diabetic_Retinopathy(context);
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
+            IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+            IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
 
-            bool? i_(Condition DiabeticRetinopathy) {
-                CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabeticRetinopathy);
-                Period m_ = ValidQualifyingEncounter?.Period;
-                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-                bool? o_ = context.Operators.Overlaps(l_, n_, "day");
-                bool? p_ = this.isVerified(context, DiabeticRetinopathy);
-                bool? q_ = context.Operators.And(o_, p_);
-                return q_;
+            bool? h_(Condition DiabeticRetinopathy) {
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabeticRetinopathy);
+                Period l_ = ValidQualifyingEncounter?.Period;
+                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
+                bool? n_ = context.Operators.Overlaps(k_, m_, "day");
+                bool? o_ = this.isVerified(context, DiabeticRetinopathy);
+                bool? p_ = context.Operators.And(n_, o_);
+                return p_;
             }
 
-            IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
-            bool? k_ = context.Operators.Exists<Condition>(j_);
-            return k_;
+            IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
+            bool? j_ = context.Operators.Exists<Condition>(i_);
+            return j_;
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -411,11 +407,10 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                 CqlDateTime o_ = context.Operators.Start(n_);
                 bool? p_ = context.Operators.After(l_, o_, (string)default);
-                CqlDateTime r_ = context.Operators.Convert<CqlDateTime>(k_);
-                CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
-                bool? u_ = context.Operators.And(p_, t_);
-                return u_;
+                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
+                bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, "day");
+                bool? s_ = context.Operators.And(p_, r_);
+                return s_;
             }
 
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
@@ -426,11 +421,11 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         IEnumerable<Communication> d_ = context.Operators.Where<Communication>(b_, c_);
 
         bool? e_(Communication LevelOfSeverityCommunicated) {
-            Code<EventStatus> v_ = LevelOfSeverityCommunicated?.StatusElement;
-            EventStatus? w_ = v_?.Value;
-            string x_ = context.Operators.Convert<string>(w_);
-            bool? y_ = context.Operators.Equal(x_, "completed");
-            return y_;
+            Code<EventStatus> t_ = LevelOfSeverityCommunicated?.StatusElement;
+            EventStatus? u_ = t_?.Value;
+            string v_ = context.Operators.Convert<string>(u_);
+            bool? w_ = context.Operators.Equal(v_, "completed");
+            return w_;
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -459,11 +454,10 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                 CqlDateTime o_ = context.Operators.Start(n_);
                 bool? p_ = context.Operators.After(l_, o_, (string)default);
-                CqlDateTime r_ = context.Operators.Convert<CqlDateTime>(k_);
-                CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
-                bool? u_ = context.Operators.And(p_, t_);
-                return u_;
+                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
+                bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, "day");
+                bool? s_ = context.Operators.And(p_, r_);
+                return s_;
             }
 
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
@@ -474,11 +468,11 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         IEnumerable<Communication> d_ = context.Operators.Where<Communication>(b_, c_);
 
         bool? e_(Communication MacularEdemaAbsentCommunicated) {
-            Code<EventStatus> v_ = MacularEdemaAbsentCommunicated?.StatusElement;
-            EventStatus? w_ = v_?.Value;
-            string x_ = context.Operators.Convert<string>(w_);
-            bool? y_ = context.Operators.Equal(x_, "completed");
-            return y_;
+            Code<EventStatus> t_ = MacularEdemaAbsentCommunicated?.StatusElement;
+            EventStatus? u_ = t_?.Value;
+            string v_ = context.Operators.Convert<string>(u_);
+            bool? w_ = context.Operators.Equal(v_, "completed");
+            return w_;
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -507,11 +501,10 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                 CqlDateTime o_ = context.Operators.Start(n_);
                 bool? p_ = context.Operators.After(l_, o_, (string)default);
-                CqlDateTime r_ = context.Operators.Convert<CqlDateTime>(k_);
-                CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, (string)default);
-                bool? u_ = context.Operators.And(p_, t_);
-                return u_;
+                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
+                bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
+                bool? s_ = context.Operators.And(p_, r_);
+                return s_;
             }
 
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
@@ -522,11 +515,11 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         IEnumerable<Communication> d_ = context.Operators.Where<Communication>(b_, c_);
 
         bool? e_(Communication MacularEdemaPresentCommunicated) {
-            Code<EventStatus> v_ = MacularEdemaPresentCommunicated?.StatusElement;
-            EventStatus? w_ = v_?.Value;
-            string x_ = context.Operators.Convert<string>(w_);
-            bool? y_ = context.Operators.Equal(x_, "completed");
-            return y_;
+            Code<EventStatus> t_ = MacularEdemaPresentCommunicated?.StatusElement;
+            EventStatus? u_ = t_?.Value;
+            string v_ = context.Operators.Convert<string>(u_);
+            bool? w_ = context.Operators.Equal(v_, "completed");
+            return w_;
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -608,11 +601,10 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
             CqlValueSet aa_ = this.Medical_Reason(context);
             bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
-            CqlConcept ad_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
-            CqlValueSet ae_ = this.Patient_Reason(context);
-            bool? af_ = context.Operators.ConceptInValueSet(ad_, ae_);
-            bool? ag_ = context.Operators.Or(ab_, af_);
-            return ag_;
+            CqlValueSet ac_ = this.Patient_Reason(context);
+            bool? ad_ = context.Operators.ConceptInValueSet(z_, ac_);
+            bool? ae_ = context.Operators.Or(ab_, ad_);
+            return ae_;
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -674,11 +666,10 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
             CqlValueSet aa_ = this.Medical_Reason(context);
             bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
-            CqlConcept ad_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
-            CqlValueSet ae_ = this.Patient_Reason(context);
-            bool? af_ = context.Operators.ConceptInValueSet(ad_, ae_);
-            bool? ag_ = context.Operators.Or(ab_, af_);
-            return ag_;
+            CqlValueSet ac_ = this.Patient_Reason(context);
+            bool? ad_ = context.Operators.ConceptInValueSet(z_, ac_);
+            bool? ae_ = context.Operators.Or(ab_, ad_);
+            return ae_;
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -740,11 +731,10 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
             CqlValueSet aa_ = this.Medical_Reason(context);
             bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
-            CqlConcept ad_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
-            CqlValueSet ae_ = this.Patient_Reason(context);
-            bool? af_ = context.Operators.ConceptInValueSet(ad_, ae_);
-            bool? ag_ = context.Operators.Or(ab_, af_);
-            return ag_;
+            CqlValueSet ac_ = this.Patient_Reason(context);
+            bool? ad_ = context.Operators.ConceptInValueSet(z_, ac_);
+            bool? ae_ = context.Operators.Or(ab_, ad_);
+            return ae_;
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);

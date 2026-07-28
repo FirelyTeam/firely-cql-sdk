@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
 public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleton<SupplementalDataElementsFHIR4_2_0_000>
 {
@@ -77,7 +77,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             else
             {
                 return default;
-            };
+            }
         }
 
 
@@ -103,17 +103,16 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             FhirUri u_ = E?.UrlElement;
             string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
             bool? w_ = context.Operators.Equal(v_, "ombCategory");
-            string y_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-            bool? z_ = context.Operators.Equal(y_, "detailed");
-            bool? aa_ = context.Operators.Or(w_, z_);
-            return aa_;
+            bool? x_ = context.Operators.Equal(v_, "detailed");
+            bool? y_ = context.Operators.Or(w_, x_);
+            return y_;
         }
 
         IEnumerable<Extension> i_ = context.Operators.Where<Extension>(g_, h_);
 
         Coding j_(Extension E) {
-            DataType ab_ = E?.Value;
-            return ab_ as Coding;
+            DataType z_ = E?.Value;
+            return z_ as Coding;
         }
 
         IEnumerable<Coding> k_ = context.Operators.Select<Extension, Coding>(i_, j_);
@@ -171,7 +170,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             else
             {
                 return default;
-            };
+            }
         }
 
 
@@ -197,17 +196,16 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             FhirUri u_ = E?.UrlElement;
             string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
             bool? w_ = context.Operators.Equal(v_, "ombCategory");
-            string y_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-            bool? z_ = context.Operators.Equal(y_, "detailed");
-            bool? aa_ = context.Operators.Or(w_, z_);
-            return aa_;
+            bool? x_ = context.Operators.Equal(v_, "detailed");
+            bool? y_ = context.Operators.Or(w_, x_);
+            return y_;
         }
 
         IEnumerable<Extension> i_ = context.Operators.Where<Extension>(g_, h_);
 
         Coding j_(Extension E) {
-            DataType ab_ = E?.Value;
-            return ab_ as Coding;
+            DataType z_ = E?.Value;
+            return z_ as Coding;
         }
 
         IEnumerable<Coding> k_ = context.Operators.Select<Extension, Coding>(i_, j_);
@@ -255,7 +253,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             else
             {
                 return default;
-            };
+            }
         }
 
         return a_();

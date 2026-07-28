@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "4.6.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       } ],
@@ -3301,37 +3301,9 @@
                                                 }
                                              } ],
                                              "operand" : [ {
-                                                "type" : "Retrieve",
-                                                "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                "codeProperty" : "medication",
-                                                "codeComparator" : "in",
-                                                "annotation" : [ ],
-                                                "codes" : {
-                                                   "type" : "ValueSetRef",
-                                                   "locator" : "120:25-120:77",
-                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                   "name" : "Potentially Harmful Antihistamines for Older Adults",
-                                                   "preserve" : true,
-                                                   "annotation" : [ ]
-                                                },
-                                                "include" : [ ],
-                                                "codeFilter" : [ ],
-                                                "dateFilter" : [ ],
-                                                "otherFilter" : [ ]
-                                             }, {
                                                 "type" : "Query",
                                                 "locator" : "120:5-120:78",
                                                 "annotation" : [ ],
-                                                "resultTypeSpecifier" : {
-                                                   "type" : "ListTypeSpecifier",
-                                                   "annotation" : [ ],
-                                                   "elementType" : {
-                                                      "type" : "NamedTypeSpecifier",
-                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                      "annotation" : [ ]
-                                                   }
-                                                },
                                                 "source" : [ {
                                                    "locator" : "120:5-120:78",
                                                    "alias" : "MR",
@@ -3461,6 +3433,35 @@
                                                       } ]
                                                    }
                                                 } ]
+                                             }, {
+                                                "type" : "Retrieve",
+                                                "locator" : "120:5-120:78",
+                                                "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                "codeProperty" : "medication",
+                                                "codeComparator" : "in",
+                                                "annotation" : [ ],
+                                                "resultTypeSpecifier" : {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "annotation" : [ ],
+                                                   "elementType" : {
+                                                      "type" : "NamedTypeSpecifier",
+                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "annotation" : [ ]
+                                                   }
+                                                },
+                                                "codes" : {
+                                                   "type" : "ValueSetRef",
+                                                   "locator" : "120:25-120:77",
+                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                   "name" : "Potentially Harmful Antihistamines for Older Adults",
+                                                   "preserve" : true,
+                                                   "annotation" : [ ]
+                                                },
+                                                "include" : [ ],
+                                                "codeFilter" : [ ],
+                                                "dateFilter" : [ ],
+                                                "otherFilter" : [ ]
                                              } ]
                                           } ]
                                        }, {
@@ -3517,37 +3518,9 @@
                                                 }
                                              } ],
                                              "operand" : [ {
-                                                "type" : "Retrieve",
-                                                "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                "codeProperty" : "medication",
-                                                "codeComparator" : "in",
-                                                "annotation" : [ ],
-                                                "codes" : {
-                                                   "type" : "ValueSetRef",
-                                                   "locator" : "121:33-121:94",
-                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                   "name" : "Potentially Harmful Antiparkinsonian Agents for Older Adults",
-                                                   "preserve" : true,
-                                                   "annotation" : [ ]
-                                                },
-                                                "include" : [ ],
-                                                "codeFilter" : [ ],
-                                                "dateFilter" : [ ],
-                                                "otherFilter" : [ ]
-                                             }, {
                                                 "type" : "Query",
                                                 "locator" : "121:13-121:95",
                                                 "annotation" : [ ],
-                                                "resultTypeSpecifier" : {
-                                                   "type" : "ListTypeSpecifier",
-                                                   "annotation" : [ ],
-                                                   "elementType" : {
-                                                      "type" : "NamedTypeSpecifier",
-                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                      "annotation" : [ ]
-                                                   }
-                                                },
                                                 "source" : [ {
                                                    "locator" : "121:13-121:95",
                                                    "alias" : "MR",
@@ -3677,6 +3650,35 @@
                                                       } ]
                                                    }
                                                 } ]
+                                             }, {
+                                                "type" : "Retrieve",
+                                                "locator" : "121:13-121:95",
+                                                "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                "codeProperty" : "medication",
+                                                "codeComparator" : "in",
+                                                "annotation" : [ ],
+                                                "resultTypeSpecifier" : {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "annotation" : [ ],
+                                                   "elementType" : {
+                                                      "type" : "NamedTypeSpecifier",
+                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "annotation" : [ ]
+                                                   }
+                                                },
+                                                "codes" : {
+                                                   "type" : "ValueSetRef",
+                                                   "locator" : "121:33-121:94",
+                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                   "name" : "Potentially Harmful Antiparkinsonian Agents for Older Adults",
+                                                   "preserve" : true,
+                                                   "annotation" : [ ]
+                                                },
+                                                "include" : [ ],
+                                                "codeFilter" : [ ],
+                                                "dateFilter" : [ ],
+                                                "otherFilter" : [ ]
                                              } ]
                                           } ]
                                        } ]
@@ -3754,37 +3756,9 @@
                                                 }
                                              } ],
                                              "operand" : [ {
-                                                "type" : "Retrieve",
-                                                "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                "codeProperty" : "medication",
-                                                "codeComparator" : "in",
-                                                "annotation" : [ ],
-                                                "codes" : {
-                                                   "type" : "ValueSetRef",
-                                                   "locator" : "122:33-122:102",
-                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                   "name" : "Potentially Harmful Gastrointestinal Antispasmodics for Older Adults",
-                                                   "preserve" : true,
-                                                   "annotation" : [ ]
-                                                },
-                                                "include" : [ ],
-                                                "codeFilter" : [ ],
-                                                "dateFilter" : [ ],
-                                                "otherFilter" : [ ]
-                                             }, {
                                                 "type" : "Query",
                                                 "locator" : "122:13-122:103",
                                                 "annotation" : [ ],
-                                                "resultTypeSpecifier" : {
-                                                   "type" : "ListTypeSpecifier",
-                                                   "annotation" : [ ],
-                                                   "elementType" : {
-                                                      "type" : "NamedTypeSpecifier",
-                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                      "annotation" : [ ]
-                                                   }
-                                                },
                                                 "source" : [ {
                                                    "locator" : "122:13-122:103",
                                                    "alias" : "MR",
@@ -3914,6 +3888,35 @@
                                                       } ]
                                                    }
                                                 } ]
+                                             }, {
+                                                "type" : "Retrieve",
+                                                "locator" : "122:13-122:103",
+                                                "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                "codeProperty" : "medication",
+                                                "codeComparator" : "in",
+                                                "annotation" : [ ],
+                                                "resultTypeSpecifier" : {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "annotation" : [ ],
+                                                   "elementType" : {
+                                                      "type" : "NamedTypeSpecifier",
+                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "annotation" : [ ]
+                                                   }
+                                                },
+                                                "codes" : {
+                                                   "type" : "ValueSetRef",
+                                                   "locator" : "122:33-122:102",
+                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                   "name" : "Potentially Harmful Gastrointestinal Antispasmodics for Older Adults",
+                                                   "preserve" : true,
+                                                   "annotation" : [ ]
+                                                },
+                                                "include" : [ ],
+                                                "codeFilter" : [ ],
+                                                "dateFilter" : [ ],
+                                                "otherFilter" : [ ]
                                              } ]
                                           } ]
                                        }, {
@@ -3970,37 +3973,9 @@
                                                 }
                                              } ],
                                              "operand" : [ {
-                                                "type" : "Retrieve",
-                                                "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                "codeProperty" : "medication",
-                                                "codeComparator" : "in",
-                                                "annotation" : [ ],
-                                                "codes" : {
-                                                   "type" : "ValueSetRef",
-                                                   "locator" : "123:33-123:58",
-                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                   "name" : "Dipyridamole Medications",
-                                                   "preserve" : true,
-                                                   "annotation" : [ ]
-                                                },
-                                                "include" : [ ],
-                                                "codeFilter" : [ ],
-                                                "dateFilter" : [ ],
-                                                "otherFilter" : [ ]
-                                             }, {
                                                 "type" : "Query",
                                                 "locator" : "123:13-123:59",
                                                 "annotation" : [ ],
-                                                "resultTypeSpecifier" : {
-                                                   "type" : "ListTypeSpecifier",
-                                                   "annotation" : [ ],
-                                                   "elementType" : {
-                                                      "type" : "NamedTypeSpecifier",
-                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                      "annotation" : [ ]
-                                                   }
-                                                },
                                                 "source" : [ {
                                                    "locator" : "123:13-123:59",
                                                    "alias" : "MR",
@@ -4130,6 +4105,35 @@
                                                       } ]
                                                    }
                                                 } ]
+                                             }, {
+                                                "type" : "Retrieve",
+                                                "locator" : "123:13-123:59",
+                                                "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                "codeProperty" : "medication",
+                                                "codeComparator" : "in",
+                                                "annotation" : [ ],
+                                                "resultTypeSpecifier" : {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "annotation" : [ ],
+                                                   "elementType" : {
+                                                      "type" : "NamedTypeSpecifier",
+                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "annotation" : [ ]
+                                                   }
+                                                },
+                                                "codes" : {
+                                                   "type" : "ValueSetRef",
+                                                   "locator" : "123:33-123:58",
+                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                   "name" : "Dipyridamole Medications",
+                                                   "preserve" : true,
+                                                   "annotation" : [ ]
+                                                },
+                                                "include" : [ ],
+                                                "codeFilter" : [ ],
+                                                "dateFilter" : [ ],
+                                                "otherFilter" : [ ]
                                              } ]
                                           } ]
                                        } ]
@@ -4208,37 +4212,9 @@
                                              }
                                           } ],
                                           "operand" : [ {
-                                             "type" : "Retrieve",
-                                             "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                             "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                             "codeProperty" : "medication",
-                                             "codeComparator" : "in",
-                                             "annotation" : [ ],
-                                             "codes" : {
-                                                "type" : "ValueSetRef",
-                                                "locator" : "124:33-124:56",
-                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                "name" : "Guanfacine Medications",
-                                                "preserve" : true,
-                                                "annotation" : [ ]
-                                             },
-                                             "include" : [ ],
-                                             "codeFilter" : [ ],
-                                             "dateFilter" : [ ],
-                                             "otherFilter" : [ ]
-                                          }, {
                                              "type" : "Query",
                                              "locator" : "124:13-124:57",
                                              "annotation" : [ ],
-                                             "resultTypeSpecifier" : {
-                                                "type" : "ListTypeSpecifier",
-                                                "annotation" : [ ],
-                                                "elementType" : {
-                                                   "type" : "NamedTypeSpecifier",
-                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                   "annotation" : [ ]
-                                                }
-                                             },
                                              "source" : [ {
                                                 "locator" : "124:13-124:57",
                                                 "alias" : "MR",
@@ -4368,6 +4344,35 @@
                                                    } ]
                                                 }
                                              } ]
+                                          }, {
+                                             "type" : "Retrieve",
+                                             "locator" : "124:13-124:57",
+                                             "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                             "codeProperty" : "medication",
+                                             "codeComparator" : "in",
+                                             "annotation" : [ ],
+                                             "resultTypeSpecifier" : {
+                                                "type" : "ListTypeSpecifier",
+                                                "annotation" : [ ],
+                                                "elementType" : {
+                                                   "type" : "NamedTypeSpecifier",
+                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "annotation" : [ ]
+                                                }
+                                             },
+                                             "codes" : {
+                                                "type" : "ValueSetRef",
+                                                "locator" : "124:33-124:56",
+                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                "name" : "Guanfacine Medications",
+                                                "preserve" : true,
+                                                "annotation" : [ ]
+                                             },
+                                             "include" : [ ],
+                                             "codeFilter" : [ ],
+                                             "dateFilter" : [ ],
+                                             "otherFilter" : [ ]
                                           } ]
                                        } ]
                                     }, {
@@ -4424,37 +4429,9 @@
                                              }
                                           } ],
                                           "operand" : [ {
-                                             "type" : "Retrieve",
-                                             "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                             "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                             "codeProperty" : "medication",
-                                             "codeComparator" : "in",
-                                             "annotation" : [ ],
-                                             "codes" : {
-                                                "type" : "ValueSetRef",
-                                                "locator" : "125:33-125:56",
-                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                "name" : "Nifedipine Medications",
-                                                "preserve" : true,
-                                                "annotation" : [ ]
-                                             },
-                                             "include" : [ ],
-                                             "codeFilter" : [ ],
-                                             "dateFilter" : [ ],
-                                             "otherFilter" : [ ]
-                                          }, {
                                              "type" : "Query",
                                              "locator" : "125:13-125:57",
                                              "annotation" : [ ],
-                                             "resultTypeSpecifier" : {
-                                                "type" : "ListTypeSpecifier",
-                                                "annotation" : [ ],
-                                                "elementType" : {
-                                                   "type" : "NamedTypeSpecifier",
-                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                   "annotation" : [ ]
-                                                }
-                                             },
                                              "source" : [ {
                                                 "locator" : "125:13-125:57",
                                                 "alias" : "MR",
@@ -4584,6 +4561,35 @@
                                                    } ]
                                                 }
                                              } ]
+                                          }, {
+                                             "type" : "Retrieve",
+                                             "locator" : "125:13-125:57",
+                                             "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                             "codeProperty" : "medication",
+                                             "codeComparator" : "in",
+                                             "annotation" : [ ],
+                                             "resultTypeSpecifier" : {
+                                                "type" : "ListTypeSpecifier",
+                                                "annotation" : [ ],
+                                                "elementType" : {
+                                                   "type" : "NamedTypeSpecifier",
+                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "annotation" : [ ]
+                                                }
+                                             },
+                                             "codes" : {
+                                                "type" : "ValueSetRef",
+                                                "locator" : "125:33-125:56",
+                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                "name" : "Nifedipine Medications",
+                                                "preserve" : true,
+                                                "annotation" : [ ]
+                                             },
+                                             "include" : [ ],
+                                             "codeFilter" : [ ],
+                                             "dateFilter" : [ ],
+                                             "otherFilter" : [ ]
                                           } ]
                                        } ]
                                     } ]
@@ -4662,37 +4668,9 @@
                                           }
                                        } ],
                                        "operand" : [ {
-                                          "type" : "Retrieve",
-                                          "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                          "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                          "codeProperty" : "medication",
-                                          "codeComparator" : "in",
-                                          "annotation" : [ ],
-                                          "codes" : {
-                                             "type" : "ValueSetRef",
-                                             "locator" : "126:33-126:86",
-                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                             "name" : "Potentially Harmful Antidepressants for Older Adults",
-                                             "preserve" : true,
-                                             "annotation" : [ ]
-                                          },
-                                          "include" : [ ],
-                                          "codeFilter" : [ ],
-                                          "dateFilter" : [ ],
-                                          "otherFilter" : [ ]
-                                       }, {
                                           "type" : "Query",
                                           "locator" : "126:13-126:87",
                                           "annotation" : [ ],
-                                          "resultTypeSpecifier" : {
-                                             "type" : "ListTypeSpecifier",
-                                             "annotation" : [ ],
-                                             "elementType" : {
-                                                "type" : "NamedTypeSpecifier",
-                                                "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "annotation" : [ ]
-                                             }
-                                          },
                                           "source" : [ {
                                              "locator" : "126:13-126:87",
                                              "alias" : "MR",
@@ -4822,6 +4800,35 @@
                                                 } ]
                                              }
                                           } ]
+                                       }, {
+                                          "type" : "Retrieve",
+                                          "locator" : "126:13-126:87",
+                                          "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                          "codeProperty" : "medication",
+                                          "codeComparator" : "in",
+                                          "annotation" : [ ],
+                                          "resultTypeSpecifier" : {
+                                             "type" : "ListTypeSpecifier",
+                                             "annotation" : [ ],
+                                             "elementType" : {
+                                                "type" : "NamedTypeSpecifier",
+                                                "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                "annotation" : [ ]
+                                             }
+                                          },
+                                          "codes" : {
+                                             "type" : "ValueSetRef",
+                                             "locator" : "126:33-126:86",
+                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                             "name" : "Potentially Harmful Antidepressants for Older Adults",
+                                             "preserve" : true,
+                                             "annotation" : [ ]
+                                          },
+                                          "include" : [ ],
+                                          "codeFilter" : [ ],
+                                          "dateFilter" : [ ],
+                                          "otherFilter" : [ ]
                                        } ]
                                     } ]
                                  }, {
@@ -4878,37 +4885,9 @@
                                           }
                                        } ],
                                        "operand" : [ {
-                                          "type" : "Retrieve",
-                                          "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                          "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                          "codeProperty" : "medication",
-                                          "codeComparator" : "in",
-                                          "annotation" : [ ],
-                                          "codes" : {
-                                             "type" : "ValueSetRef",
-                                             "locator" : "127:33-127:83",
-                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                             "name" : "Potentially Harmful Barbiturates for Older Adults",
-                                             "preserve" : true,
-                                             "annotation" : [ ]
-                                          },
-                                          "include" : [ ],
-                                          "codeFilter" : [ ],
-                                          "dateFilter" : [ ],
-                                          "otherFilter" : [ ]
-                                       }, {
                                           "type" : "Query",
                                           "locator" : "127:13-127:84",
                                           "annotation" : [ ],
-                                          "resultTypeSpecifier" : {
-                                             "type" : "ListTypeSpecifier",
-                                             "annotation" : [ ],
-                                             "elementType" : {
-                                                "type" : "NamedTypeSpecifier",
-                                                "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "annotation" : [ ]
-                                             }
-                                          },
                                           "source" : [ {
                                              "locator" : "127:13-127:84",
                                              "alias" : "MR",
@@ -5038,6 +5017,35 @@
                                                 } ]
                                              }
                                           } ]
+                                       }, {
+                                          "type" : "Retrieve",
+                                          "locator" : "127:13-127:84",
+                                          "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                          "codeProperty" : "medication",
+                                          "codeComparator" : "in",
+                                          "annotation" : [ ],
+                                          "resultTypeSpecifier" : {
+                                             "type" : "ListTypeSpecifier",
+                                             "annotation" : [ ],
+                                             "elementType" : {
+                                                "type" : "NamedTypeSpecifier",
+                                                "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                "annotation" : [ ]
+                                             }
+                                          },
+                                          "codes" : {
+                                             "type" : "ValueSetRef",
+                                             "locator" : "127:33-127:83",
+                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                             "name" : "Potentially Harmful Barbiturates for Older Adults",
+                                             "preserve" : true,
+                                             "annotation" : [ ]
+                                          },
+                                          "include" : [ ],
+                                          "codeFilter" : [ ],
+                                          "dateFilter" : [ ],
+                                          "otherFilter" : [ ]
                                        } ]
                                     } ]
                                  } ]
@@ -5116,41 +5124,9 @@
                                        }
                                     } ],
                                     "operand" : [ {
-                                       "type" : "Retrieve",
-                                       "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                       "codeProperty" : "medication",
-                                       "codeComparator" : "~",
-                                       "annotation" : [ ],
-                                       "codes" : {
-                                          "type" : "ToList",
-                                          "annotation" : [ ],
-                                          "signature" : [ ],
-                                          "operand" : {
-                                             "type" : "CodeRef",
-                                             "locator" : "128:33-128:74",
-                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                                             "name" : "ergoloid mesylates, USP 1 MG Oral Tablet",
-                                             "annotation" : [ ]
-                                          }
-                                       },
-                                       "include" : [ ],
-                                       "codeFilter" : [ ],
-                                       "dateFilter" : [ ],
-                                       "otherFilter" : [ ]
-                                    }, {
                                        "type" : "Query",
                                        "locator" : "128:13-128:75",
                                        "annotation" : [ ],
-                                       "resultTypeSpecifier" : {
-                                          "type" : "ListTypeSpecifier",
-                                          "annotation" : [ ],
-                                          "elementType" : {
-                                             "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                             "annotation" : [ ]
-                                          }
-                                       },
                                        "source" : [ {
                                           "locator" : "128:13-128:75",
                                           "alias" : "MR",
@@ -5292,6 +5268,39 @@
                                              } ]
                                           }
                                        } ]
+                                    }, {
+                                       "type" : "Retrieve",
+                                       "locator" : "128:13-128:75",
+                                       "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                       "codeProperty" : "medication",
+                                       "codeComparator" : "~",
+                                       "annotation" : [ ],
+                                       "resultTypeSpecifier" : {
+                                          "type" : "ListTypeSpecifier",
+                                          "annotation" : [ ],
+                                          "elementType" : {
+                                             "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "annotation" : [ ]
+                                          }
+                                       },
+                                       "codes" : {
+                                          "type" : "ToList",
+                                          "annotation" : [ ],
+                                          "signature" : [ ],
+                                          "operand" : {
+                                             "type" : "CodeRef",
+                                             "locator" : "128:33-128:74",
+                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                                             "name" : "ergoloid mesylates, USP 1 MG Oral Tablet",
+                                             "annotation" : [ ]
+                                          }
+                                       },
+                                       "include" : [ ],
+                                       "codeFilter" : [ ],
+                                       "dateFilter" : [ ],
+                                       "otherFilter" : [ ]
                                     } ]
                                  } ]
                               }, {
@@ -5348,37 +5357,9 @@
                                        }
                                     } ],
                                     "operand" : [ {
-                                       "type" : "Retrieve",
-                                       "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                       "codeProperty" : "medication",
-                                       "codeComparator" : "in",
-                                       "annotation" : [ ],
-                                       "codes" : {
-                                          "type" : "ValueSetRef",
-                                          "locator" : "129:33-129:57",
-                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                          "name" : "Meprobamate Medications",
-                                          "preserve" : true,
-                                          "annotation" : [ ]
-                                       },
-                                       "include" : [ ],
-                                       "codeFilter" : [ ],
-                                       "dateFilter" : [ ],
-                                       "otherFilter" : [ ]
-                                    }, {
                                        "type" : "Query",
                                        "locator" : "129:13-129:58",
                                        "annotation" : [ ],
-                                       "resultTypeSpecifier" : {
-                                          "type" : "ListTypeSpecifier",
-                                          "annotation" : [ ],
-                                          "elementType" : {
-                                             "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                             "annotation" : [ ]
-                                          }
-                                       },
                                        "source" : [ {
                                           "locator" : "129:13-129:58",
                                           "alias" : "MR",
@@ -5508,6 +5489,35 @@
                                              } ]
                                           }
                                        } ]
+                                    }, {
+                                       "type" : "Retrieve",
+                                       "locator" : "129:13-129:58",
+                                       "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                       "codeProperty" : "medication",
+                                       "codeComparator" : "in",
+                                       "annotation" : [ ],
+                                       "resultTypeSpecifier" : {
+                                          "type" : "ListTypeSpecifier",
+                                          "annotation" : [ ],
+                                          "elementType" : {
+                                             "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "annotation" : [ ]
+                                          }
+                                       },
+                                       "codes" : {
+                                          "type" : "ValueSetRef",
+                                          "locator" : "129:33-129:57",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                          "name" : "Meprobamate Medications",
+                                          "preserve" : true,
+                                          "annotation" : [ ]
+                                       },
+                                       "include" : [ ],
+                                       "codeFilter" : [ ],
+                                       "dateFilter" : [ ],
+                                       "otherFilter" : [ ]
                                     } ]
                                  } ]
                               } ]
@@ -5586,37 +5596,9 @@
                                     }
                                  } ],
                                  "operand" : [ {
-                                    "type" : "Retrieve",
-                                    "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                    "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                    "codeProperty" : "medication",
-                                    "codeComparator" : "in",
-                                    "annotation" : [ ],
-                                    "codes" : {
-                                       "type" : "ValueSetRef",
-                                       "locator" : "130:33-130:80",
-                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                       "name" : "Potentially Harmful Estrogens for Older Adults",
-                                       "preserve" : true,
-                                       "annotation" : [ ]
-                                    },
-                                    "include" : [ ],
-                                    "codeFilter" : [ ],
-                                    "dateFilter" : [ ],
-                                    "otherFilter" : [ ]
-                                 }, {
                                     "type" : "Query",
                                     "locator" : "130:13-130:81",
                                     "annotation" : [ ],
-                                    "resultTypeSpecifier" : {
-                                       "type" : "ListTypeSpecifier",
-                                       "annotation" : [ ],
-                                       "elementType" : {
-                                          "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                          "annotation" : [ ]
-                                       }
-                                    },
                                     "source" : [ {
                                        "locator" : "130:13-130:81",
                                        "alias" : "MR",
@@ -5746,6 +5728,35 @@
                                           } ]
                                        }
                                     } ]
+                                 }, {
+                                    "type" : "Retrieve",
+                                    "locator" : "130:13-130:81",
+                                    "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                    "codeProperty" : "medication",
+                                    "codeComparator" : "in",
+                                    "annotation" : [ ],
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "elementType" : {
+                                          "type" : "NamedTypeSpecifier",
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "annotation" : [ ]
+                                       }
+                                    },
+                                    "codes" : {
+                                       "type" : "ValueSetRef",
+                                       "locator" : "130:33-130:80",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                       "name" : "Potentially Harmful Estrogens for Older Adults",
+                                       "preserve" : true,
+                                       "annotation" : [ ]
+                                    },
+                                    "include" : [ ],
+                                    "codeFilter" : [ ],
+                                    "dateFilter" : [ ],
+                                    "otherFilter" : [ ]
                                  } ]
                               } ]
                            }, {
@@ -5802,37 +5813,9 @@
                                     }
                                  } ],
                                  "operand" : [ {
-                                    "type" : "Retrieve",
-                                    "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                    "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                    "codeProperty" : "medication",
-                                    "codeComparator" : "in",
-                                    "annotation" : [ ],
-                                    "codes" : {
-                                       "type" : "ValueSetRef",
-                                       "locator" : "131:33-131:84",
-                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                       "name" : "Potentially Harmful Sulfonylureas for Older Adults",
-                                       "preserve" : true,
-                                       "annotation" : [ ]
-                                    },
-                                    "include" : [ ],
-                                    "codeFilter" : [ ],
-                                    "dateFilter" : [ ],
-                                    "otherFilter" : [ ]
-                                 }, {
                                     "type" : "Query",
                                     "locator" : "131:13-131:85",
                                     "annotation" : [ ],
-                                    "resultTypeSpecifier" : {
-                                       "type" : "ListTypeSpecifier",
-                                       "annotation" : [ ],
-                                       "elementType" : {
-                                          "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                          "annotation" : [ ]
-                                       }
-                                    },
                                     "source" : [ {
                                        "locator" : "131:13-131:85",
                                        "alias" : "MR",
@@ -5962,6 +5945,35 @@
                                           } ]
                                        }
                                     } ]
+                                 }, {
+                                    "type" : "Retrieve",
+                                    "locator" : "131:13-131:85",
+                                    "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                    "codeProperty" : "medication",
+                                    "codeComparator" : "in",
+                                    "annotation" : [ ],
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "elementType" : {
+                                          "type" : "NamedTypeSpecifier",
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "annotation" : [ ]
+                                       }
+                                    },
+                                    "codes" : {
+                                       "type" : "ValueSetRef",
+                                       "locator" : "131:33-131:84",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                       "name" : "Potentially Harmful Sulfonylureas for Older Adults",
+                                       "preserve" : true,
+                                       "annotation" : [ ]
+                                    },
+                                    "include" : [ ],
+                                    "codeFilter" : [ ],
+                                    "dateFilter" : [ ],
+                                    "otherFilter" : [ ]
                                  } ]
                               } ]
                            } ]
@@ -6040,37 +6052,9 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "type" : "Retrieve",
-                                 "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                 "codeProperty" : "medication",
-                                 "codeComparator" : "in",
-                                 "annotation" : [ ],
-                                 "codes" : {
-                                    "type" : "ValueSetRef",
-                                    "locator" : "132:33-132:64",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                    "name" : "Desiccated Thyroid Medications",
-                                    "preserve" : true,
-                                    "annotation" : [ ]
-                                 },
-                                 "include" : [ ],
-                                 "codeFilter" : [ ],
-                                 "dateFilter" : [ ],
-                                 "otherFilter" : [ ]
-                              }, {
                                  "type" : "Query",
                                  "locator" : "132:13-132:65",
                                  "annotation" : [ ],
-                                 "resultTypeSpecifier" : {
-                                    "type" : "ListTypeSpecifier",
-                                    "annotation" : [ ],
-                                    "elementType" : {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "annotation" : [ ]
-                                    }
-                                 },
                                  "source" : [ {
                                     "locator" : "132:13-132:65",
                                     "alias" : "MR",
@@ -6200,6 +6184,35 @@
                                        } ]
                                     }
                                  } ]
+                              }, {
+                                 "type" : "Retrieve",
+                                 "locator" : "132:13-132:65",
+                                 "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                 "codeProperty" : "medication",
+                                 "codeComparator" : "in",
+                                 "annotation" : [ ],
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "annotation" : [ ]
+                                    }
+                                 },
+                                 "codes" : {
+                                    "type" : "ValueSetRef",
+                                    "locator" : "132:33-132:64",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Desiccated Thyroid Medications",
+                                    "preserve" : true,
+                                    "annotation" : [ ]
+                                 },
+                                 "include" : [ ],
+                                 "codeFilter" : [ ],
+                                 "dateFilter" : [ ],
+                                 "otherFilter" : [ ]
                               } ]
                            } ]
                         }, {
@@ -6256,37 +6269,9 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "type" : "Retrieve",
-                                 "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                 "codeProperty" : "medication",
-                                 "codeComparator" : "in",
-                                 "annotation" : [ ],
-                                 "codes" : {
-                                    "type" : "ValueSetRef",
-                                    "locator" : "133:33-133:98",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                    "name" : "Potentially Harmful Nonbenzodiazepine Hypnotics for Older Adults",
-                                    "preserve" : true,
-                                    "annotation" : [ ]
-                                 },
-                                 "include" : [ ],
-                                 "codeFilter" : [ ],
-                                 "dateFilter" : [ ],
-                                 "otherFilter" : [ ]
-                              }, {
                                  "type" : "Query",
                                  "locator" : "133:13-133:99",
                                  "annotation" : [ ],
-                                 "resultTypeSpecifier" : {
-                                    "type" : "ListTypeSpecifier",
-                                    "annotation" : [ ],
-                                    "elementType" : {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "annotation" : [ ]
-                                    }
-                                 },
                                  "source" : [ {
                                     "locator" : "133:13-133:99",
                                     "alias" : "MR",
@@ -6416,6 +6401,35 @@
                                        } ]
                                     }
                                  } ]
+                              }, {
+                                 "type" : "Retrieve",
+                                 "locator" : "133:13-133:99",
+                                 "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                 "codeProperty" : "medication",
+                                 "codeComparator" : "in",
+                                 "annotation" : [ ],
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "annotation" : [ ]
+                                    }
+                                 },
+                                 "codes" : {
+                                    "type" : "ValueSetRef",
+                                    "locator" : "133:33-133:98",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Potentially Harmful Nonbenzodiazepine Hypnotics for Older Adults",
+                                    "preserve" : true,
+                                    "annotation" : [ ]
+                                 },
+                                 "include" : [ ],
+                                 "codeFilter" : [ ],
+                                 "dateFilter" : [ ],
+                                 "otherFilter" : [ ]
                               } ]
                            } ]
                         } ]
@@ -6494,37 +6508,9 @@
                               }
                            } ],
                            "operand" : [ {
-                              "type" : "Retrieve",
-                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                              "codeProperty" : "medication",
-                              "codeComparator" : "in",
-                              "annotation" : [ ],
-                              "codes" : {
-                                 "type" : "ValueSetRef",
-                                 "locator" : "134:33-134:96",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                 "name" : "Potentially Harmful Skeletal Muscle Relaxants for Older Adults",
-                                 "preserve" : true,
-                                 "annotation" : [ ]
-                              },
-                              "include" : [ ],
-                              "codeFilter" : [ ],
-                              "dateFilter" : [ ],
-                              "otherFilter" : [ ]
-                           }, {
                               "type" : "Query",
                               "locator" : "134:13-134:97",
                               "annotation" : [ ],
-                              "resultTypeSpecifier" : {
-                                 "type" : "ListTypeSpecifier",
-                                 "annotation" : [ ],
-                                 "elementType" : {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                    "annotation" : [ ]
-                                 }
-                              },
                               "source" : [ {
                                  "locator" : "134:13-134:97",
                                  "alias" : "MR",
@@ -6654,6 +6640,35 @@
                                     } ]
                                  }
                               } ]
+                           }, {
+                              "type" : "Retrieve",
+                              "locator" : "134:13-134:97",
+                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                              "codeProperty" : "medication",
+                              "codeComparator" : "in",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "elementType" : {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "codes" : {
+                                 "type" : "ValueSetRef",
+                                 "locator" : "134:33-134:96",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Potentially Harmful Skeletal Muscle Relaxants for Older Adults",
+                                 "preserve" : true,
+                                 "annotation" : [ ]
+                              },
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
                            } ]
                         } ]
                      }, {
@@ -6710,37 +6725,9 @@
                               }
                            } ],
                            "operand" : [ {
-                              "type" : "Retrieve",
-                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                              "codeProperty" : "medication",
-                              "codeComparator" : "in",
-                              "annotation" : [ ],
-                              "codes" : {
-                                 "type" : "ValueSetRef",
-                                 "locator" : "135:33-135:87",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                 "name" : "Potentially Harmful Pain Medications for Older Adults",
-                                 "preserve" : true,
-                                 "annotation" : [ ]
-                              },
-                              "include" : [ ],
-                              "codeFilter" : [ ],
-                              "dateFilter" : [ ],
-                              "otherFilter" : [ ]
-                           }, {
                               "type" : "Query",
                               "locator" : "135:13-135:88",
                               "annotation" : [ ],
-                              "resultTypeSpecifier" : {
-                                 "type" : "ListTypeSpecifier",
-                                 "annotation" : [ ],
-                                 "elementType" : {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                    "annotation" : [ ]
-                                 }
-                              },
                               "source" : [ {
                                  "locator" : "135:13-135:88",
                                  "alias" : "MR",
@@ -6870,6 +6857,35 @@
                                     } ]
                                  }
                               } ]
+                           }, {
+                              "type" : "Retrieve",
+                              "locator" : "135:13-135:88",
+                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                              "codeProperty" : "medication",
+                              "codeComparator" : "in",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "elementType" : {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "codes" : {
+                                 "type" : "ValueSetRef",
+                                 "locator" : "135:33-135:87",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Potentially Harmful Pain Medications for Older Adults",
+                                 "preserve" : true,
+                                 "annotation" : [ ]
+                              },
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
                            } ]
                         } ]
                      } ]
@@ -6948,37 +6964,9 @@
                            }
                         } ],
                         "operand" : [ {
-                           "type" : "Retrieve",
-                           "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                           "codeProperty" : "medication",
-                           "codeComparator" : "in",
-                           "annotation" : [ ],
-                           "codes" : {
-                              "type" : "ValueSetRef",
-                              "locator" : "136:33-136:55",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                              "name" : "Megestrol Medications",
-                              "preserve" : true,
-                              "annotation" : [ ]
-                           },
-                           "include" : [ ],
-                           "codeFilter" : [ ],
-                           "dateFilter" : [ ],
-                           "otherFilter" : [ ]
-                        }, {
                            "type" : "Query",
                            "locator" : "136:13-136:56",
                            "annotation" : [ ],
-                           "resultTypeSpecifier" : {
-                              "type" : "ListTypeSpecifier",
-                              "annotation" : [ ],
-                              "elementType" : {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "annotation" : [ ]
-                              }
-                           },
                            "source" : [ {
                               "locator" : "136:13-136:56",
                               "alias" : "MR",
@@ -7108,6 +7096,35 @@
                                  } ]
                               }
                            } ]
+                        }, {
+                           "type" : "Retrieve",
+                           "locator" : "136:13-136:56",
+                           "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                           "codeProperty" : "medication",
+                           "codeComparator" : "in",
+                           "annotation" : [ ],
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "annotation" : [ ]
+                              }
+                           },
+                           "codes" : {
+                              "type" : "ValueSetRef",
+                              "locator" : "136:33-136:55",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Megestrol Medications",
+                              "preserve" : true,
+                              "annotation" : [ ]
+                           },
+                           "include" : [ ],
+                           "codeFilter" : [ ],
+                           "dateFilter" : [ ],
+                           "otherFilter" : [ ]
                         } ]
                      } ]
                   }, {
@@ -7164,37 +7181,9 @@
                            }
                         } ],
                         "operand" : [ {
-                           "type" : "Retrieve",
-                           "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                           "codeProperty" : "medication",
-                           "codeComparator" : "in",
-                           "annotation" : [ ],
-                           "codes" : {
-                              "type" : "ValueSetRef",
-                              "locator" : "137:33-137:56",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                              "name" : "Meperidine Medications",
-                              "preserve" : true,
-                              "annotation" : [ ]
-                           },
-                           "include" : [ ],
-                           "codeFilter" : [ ],
-                           "dateFilter" : [ ],
-                           "otherFilter" : [ ]
-                        }, {
                            "type" : "Query",
                            "locator" : "137:13-137:57",
                            "annotation" : [ ],
-                           "resultTypeSpecifier" : {
-                              "type" : "ListTypeSpecifier",
-                              "annotation" : [ ],
-                              "elementType" : {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "annotation" : [ ]
-                              }
-                           },
                            "source" : [ {
                               "locator" : "137:13-137:57",
                               "alias" : "MR",
@@ -7324,6 +7313,35 @@
                                  } ]
                               }
                            } ]
+                        }, {
+                           "type" : "Retrieve",
+                           "locator" : "137:13-137:57",
+                           "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                           "codeProperty" : "medication",
+                           "codeComparator" : "in",
+                           "annotation" : [ ],
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "annotation" : [ ]
+                              }
+                           },
+                           "codes" : {
+                              "type" : "ValueSetRef",
+                              "locator" : "137:33-137:56",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Meperidine Medications",
+                              "preserve" : true,
+                              "annotation" : [ ]
+                           },
+                           "include" : [ ],
+                           "codeFilter" : [ ],
+                           "dateFilter" : [ ],
+                           "otherFilter" : [ ]
                         } ]
                      } ]
                   } ]
@@ -7605,6 +7623,10 @@
                      "type" : "ChoiceTypeSpecifier",
                      "annotation" : [ ],
                      "choice" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation" : [ ]
+                     }, {
                         "type" : "IntervalTypeSpecifier",
                         "annotation" : [ ],
                         "pointType" : {
@@ -7612,10 +7634,6 @@
                            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "annotation" : [ ]
                         }
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation" : [ ]
                      } ]
                   },
                   "expression" : {
@@ -7628,6 +7646,10 @@
                         "type" : "ChoiceTypeSpecifier",
                         "annotation" : [ ],
                         "choice" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "annotation" : [ ]
+                        }, {
                            "type" : "IntervalTypeSpecifier",
                            "annotation" : [ ],
                            "pointType" : {
@@ -7635,10 +7657,6 @@
                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "annotation" : [ ]
                            }
-                        }, {
-                           "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "annotation" : [ ]
                         } ]
                      },
                      "signature" : [ ],
@@ -7663,6 +7681,10 @@
                      "type" : "ChoiceTypeSpecifier",
                      "annotation" : [ ],
                      "choice" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation" : [ ]
+                     }, {
                         "type" : "IntervalTypeSpecifier",
                         "annotation" : [ ],
                         "pointType" : {
@@ -7670,10 +7692,6 @@
                            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "annotation" : [ ]
                         }
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation" : [ ]
                      } ]
                   },
                   "expression" : {
@@ -7686,6 +7704,10 @@
                         "type" : "ChoiceTypeSpecifier",
                         "annotation" : [ ],
                         "choice" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "annotation" : [ ]
+                        }, {
                            "type" : "IntervalTypeSpecifier",
                            "annotation" : [ ],
                            "pointType" : {
@@ -7693,10 +7715,6 @@
                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "annotation" : [ ]
                            }
-                        }, {
-                           "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "annotation" : [ ]
                         } ]
                      },
                      "signature" : [ ],
@@ -7759,6 +7777,10 @@
                                  "type" : "ChoiceTypeSpecifier",
                                  "annotation" : [ ],
                                  "choice" : [ {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "annotation" : [ ]
+                                 }, {
                                     "type" : "IntervalTypeSpecifier",
                                     "annotation" : [ ],
                                     "pointType" : {
@@ -7766,10 +7788,6 @@
                                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                        "annotation" : [ ]
                                     }
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "annotation" : [ ]
                                  } ]
                               }
                            },
@@ -7797,6 +7815,10 @@
                               "type" : "ChoiceTypeSpecifier",
                               "annotation" : [ ],
                               "choice" : [ {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "annotation" : [ ]
+                              }, {
                                  "type" : "IntervalTypeSpecifier",
                                  "annotation" : [ ],
                                  "pointType" : {
@@ -7804,10 +7826,6 @@
                                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                     "annotation" : [ ]
                                  }
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "annotation" : [ ]
                               } ]
                            }
                         }
@@ -7992,7 +8010,7 @@
                               "annotation" : [ ],
                               "pointType" : {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "annotation" : [ ]
                               }
                            }, {
@@ -8000,7 +8018,7 @@
                               "annotation" : [ ],
                               "pointType" : {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "annotation" : [ ]
                               }
                            } ]
@@ -8609,37 +8627,9 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "type" : "Retrieve",
-                                 "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                 "codeProperty" : "medication",
-                                 "codeComparator" : "in",
-                                 "annotation" : [ ],
-                                 "codes" : {
-                                    "type" : "ValueSetRef",
-                                    "locator" : "140:29-140:81",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                    "name" : "Potentially Harmful Antiinfectives for Older Adults",
-                                    "preserve" : true,
-                                    "annotation" : [ ]
-                                 },
-                                 "include" : [ ],
-                                 "codeFilter" : [ ],
-                                 "dateFilter" : [ ],
-                                 "otherFilter" : [ ]
-                              }, {
                                  "type" : "Query",
                                  "locator" : "140:9-140:82",
                                  "annotation" : [ ],
-                                 "resultTypeSpecifier" : {
-                                    "type" : "ListTypeSpecifier",
-                                    "annotation" : [ ],
-                                    "elementType" : {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "annotation" : [ ]
-                                    }
-                                 },
                                  "source" : [ {
                                     "locator" : "140:9-140:82",
                                     "alias" : "MR",
@@ -8769,6 +8759,35 @@
                                        } ]
                                     }
                                  } ]
+                              }, {
+                                 "type" : "Retrieve",
+                                 "locator" : "140:9-140:82",
+                                 "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                 "codeProperty" : "medication",
+                                 "codeComparator" : "in",
+                                 "annotation" : [ ],
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "annotation" : [ ]
+                                    }
+                                 },
+                                 "codes" : {
+                                    "type" : "ValueSetRef",
+                                    "locator" : "140:29-140:81",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Potentially Harmful Antiinfectives for Older Adults",
+                                    "preserve" : true,
+                                    "annotation" : [ ]
+                                 },
+                                 "include" : [ ],
+                                 "codeFilter" : [ ],
+                                 "dateFilter" : [ ],
+                                 "otherFilter" : [ ]
                               } ]
                            } ]
                         }
@@ -10116,37 +10135,9 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "type" : "Retrieve",
-                                 "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                 "codeProperty" : "medication",
-                                 "codeComparator" : "in",
-                                 "annotation" : [ ],
-                                 "codes" : {
-                                    "type" : "ValueSetRef",
-                                    "locator" : "146:34-146:54",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                    "name" : "Digoxin Medications",
-                                    "preserve" : true,
-                                    "annotation" : [ ]
-                                 },
-                                 "include" : [ ],
-                                 "codeFilter" : [ ],
-                                 "dateFilter" : [ ],
-                                 "otherFilter" : [ ]
-                              }, {
                                  "type" : "Query",
                                  "locator" : "146:14-146:55",
                                  "annotation" : [ ],
-                                 "resultTypeSpecifier" : {
-                                    "type" : "ListTypeSpecifier",
-                                    "annotation" : [ ],
-                                    "elementType" : {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "annotation" : [ ]
-                                    }
-                                 },
                                  "source" : [ {
                                     "locator" : "146:14-146:55",
                                     "alias" : "MR",
@@ -10276,6 +10267,35 @@
                                        } ]
                                     }
                                  } ]
+                              }, {
+                                 "type" : "Retrieve",
+                                 "locator" : "146:14-146:55",
+                                 "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                 "codeProperty" : "medication",
+                                 "codeComparator" : "in",
+                                 "annotation" : [ ],
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "annotation" : [ ]
+                                    }
+                                 },
+                                 "codes" : {
+                                    "type" : "ValueSetRef",
+                                    "locator" : "146:34-146:54",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Digoxin Medications",
+                                    "preserve" : true,
+                                    "annotation" : [ ]
+                                 },
+                                 "include" : [ ],
+                                 "codeFilter" : [ ],
+                                 "dateFilter" : [ ],
+                                 "otherFilter" : [ ]
                               } ]
                            }
                         } ],
@@ -10418,37 +10438,9 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "type" : "Retrieve",
-                                 "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                 "codeProperty" : "medication",
-                                 "codeComparator" : "in",
-                                 "annotation" : [ ],
-                                 "codes" : {
-                                    "type" : "ValueSetRef",
-                                    "locator" : "150:39-150:59",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                    "name" : "Doxepin Medications",
-                                    "preserve" : true,
-                                    "annotation" : [ ]
-                                 },
-                                 "include" : [ ],
-                                 "codeFilter" : [ ],
-                                 "dateFilter" : [ ],
-                                 "otherFilter" : [ ]
-                              }, {
                                  "type" : "Query",
                                  "locator" : "150:19-150:60",
                                  "annotation" : [ ],
-                                 "resultTypeSpecifier" : {
-                                    "type" : "ListTypeSpecifier",
-                                    "annotation" : [ ],
-                                    "elementType" : {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "annotation" : [ ]
-                                    }
-                                 },
                                  "source" : [ {
                                     "locator" : "150:19-150:60",
                                     "alias" : "MR",
@@ -10578,6 +10570,35 @@
                                        } ]
                                     }
                                  } ]
+                              }, {
+                                 "type" : "Retrieve",
+                                 "locator" : "150:19-150:60",
+                                 "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                 "codeProperty" : "medication",
+                                 "codeComparator" : "in",
+                                 "annotation" : [ ],
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "annotation" : [ ]
+                                    }
+                                 },
+                                 "codes" : {
+                                    "type" : "ValueSetRef",
+                                    "locator" : "150:39-150:59",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Doxepin Medications",
+                                    "preserve" : true,
+                                    "annotation" : [ ]
+                                 },
+                                 "include" : [ ],
+                                 "codeFilter" : [ ],
+                                 "dateFilter" : [ ],
+                                 "otherFilter" : [ ]
                               } ]
                            }
                         } ],
@@ -10782,37 +10803,9 @@
                         }
                      } ],
                      "operand" : [ {
-                        "type" : "Retrieve",
-                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                        "codeProperty" : "medication",
-                        "codeComparator" : "in",
-                        "annotation" : [ ],
-                        "codes" : {
-                           "type" : "ValueSetRef",
-                           "locator" : "175:32-175:84",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                           "name" : "Potentially Harmful Antipsychotics for Older Adults",
-                           "preserve" : true,
-                           "annotation" : [ ]
-                        },
-                        "include" : [ ],
-                        "codeFilter" : [ ],
-                        "dateFilter" : [ ],
-                        "otherFilter" : [ ]
-                     }, {
                         "type" : "Query",
                         "locator" : "175:12-175:85",
                         "annotation" : [ ],
-                        "resultTypeSpecifier" : {
-                           "type" : "ListTypeSpecifier",
-                           "annotation" : [ ],
-                           "elementType" : {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
-                              "annotation" : [ ]
-                           }
-                        },
                         "source" : [ {
                            "locator" : "175:12-175:85",
                            "alias" : "MR",
@@ -10942,6 +10935,35 @@
                               } ]
                            }
                         } ]
+                     }, {
+                        "type" : "Retrieve",
+                        "locator" : "175:12-175:85",
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "codes" : {
+                           "type" : "ValueSetRef",
+                           "locator" : "175:32-175:84",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Potentially Harmful Antipsychotics for Older Adults",
+                           "preserve" : true,
+                           "annotation" : [ ]
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      } ]
                   } ]
                }
@@ -11492,37 +11514,9 @@
                               }
                            } ],
                            "operand" : [ {
-                              "type" : "Retrieve",
-                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                              "codeProperty" : "medication",
-                              "codeComparator" : "in",
-                              "annotation" : [ ],
-                              "codes" : {
-                                 "type" : "ValueSetRef",
-                                 "locator" : "216:31-216:83",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                 "name" : "Potentially Harmful Antipsychotics for Older Adults",
-                                 "preserve" : true,
-                                 "annotation" : [ ]
-                              },
-                              "include" : [ ],
-                              "codeFilter" : [ ],
-                              "dateFilter" : [ ],
-                              "otherFilter" : [ ]
-                           }, {
                               "type" : "Query",
                               "locator" : "216:11-216:84",
                               "annotation" : [ ],
-                              "resultTypeSpecifier" : {
-                                 "type" : "ListTypeSpecifier",
-                                 "annotation" : [ ],
-                                 "elementType" : {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                    "annotation" : [ ]
-                                 }
-                              },
                               "source" : [ {
                                  "locator" : "216:11-216:84",
                                  "alias" : "MR",
@@ -11652,6 +11646,35 @@
                                     } ]
                                  }
                               } ]
+                           }, {
+                              "type" : "Retrieve",
+                              "locator" : "216:11-216:84",
+                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                              "codeProperty" : "medication",
+                              "codeComparator" : "in",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "elementType" : {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "codes" : {
+                                 "type" : "ValueSetRef",
+                                 "locator" : "216:31-216:83",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Potentially Harmful Antipsychotics for Older Adults",
+                                 "preserve" : true,
+                                 "annotation" : [ ]
+                              },
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
                            } ]
                         } ]
                      }
@@ -11816,37 +11839,9 @@
                         }
                      } ],
                      "operand" : [ {
-                        "type" : "Retrieve",
-                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                        "codeProperty" : "medication",
-                        "codeComparator" : "in",
-                        "annotation" : [ ],
-                        "codes" : {
-                           "type" : "ValueSetRef",
-                           "locator" : "178:32-178:85",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                           "name" : "Potentially Harmful Benzodiazepines for Older Adults",
-                           "preserve" : true,
-                           "annotation" : [ ]
-                        },
-                        "include" : [ ],
-                        "codeFilter" : [ ],
-                        "dateFilter" : [ ],
-                        "otherFilter" : [ ]
-                     }, {
                         "type" : "Query",
                         "locator" : "178:12-178:86",
                         "annotation" : [ ],
-                        "resultTypeSpecifier" : {
-                           "type" : "ListTypeSpecifier",
-                           "annotation" : [ ],
-                           "elementType" : {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
-                              "annotation" : [ ]
-                           }
-                        },
                         "source" : [ {
                            "locator" : "178:12-178:86",
                            "alias" : "MR",
@@ -11976,6 +11971,35 @@
                               } ]
                            }
                         } ]
+                     }, {
+                        "type" : "Retrieve",
+                        "locator" : "178:12-178:86",
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "codes" : {
+                           "type" : "ValueSetRef",
+                           "locator" : "178:32-178:85",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Potentially Harmful Benzodiazepines for Older Adults",
+                           "preserve" : true,
+                           "annotation" : [ ]
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      } ]
                   } ]
                }
@@ -13192,37 +13216,9 @@
                               }
                            } ],
                            "operand" : [ {
-                              "type" : "Retrieve",
-                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                              "codeProperty" : "medication",
-                              "codeComparator" : "in",
-                              "annotation" : [ ],
-                              "codes" : {
-                                 "type" : "ValueSetRef",
-                                 "locator" : "223:31-223:84",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                 "name" : "Potentially Harmful Benzodiazepines for Older Adults",
-                                 "preserve" : true,
-                                 "annotation" : [ ]
-                              },
-                              "include" : [ ],
-                              "codeFilter" : [ ],
-                              "dateFilter" : [ ],
-                              "otherFilter" : [ ]
-                           }, {
                               "type" : "Query",
                               "locator" : "223:11-223:85",
                               "annotation" : [ ],
-                              "resultTypeSpecifier" : {
-                                 "type" : "ListTypeSpecifier",
-                                 "annotation" : [ ],
-                                 "elementType" : {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                    "annotation" : [ ]
-                                 }
-                              },
                               "source" : [ {
                                  "locator" : "223:11-223:85",
                                  "alias" : "MR",
@@ -13352,6 +13348,35 @@
                                     } ]
                                  }
                               } ]
+                           }, {
+                              "type" : "Retrieve",
+                              "locator" : "223:11-223:85",
+                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                              "codeProperty" : "medication",
+                              "codeComparator" : "in",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "elementType" : {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "codes" : {
+                                 "type" : "ValueSetRef",
+                                 "locator" : "223:31-223:84",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Potentially Harmful Benzodiazepines for Older Adults",
+                                 "preserve" : true,
+                                 "annotation" : [ ]
+                              },
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
                            } ]
                         } ]
                      }

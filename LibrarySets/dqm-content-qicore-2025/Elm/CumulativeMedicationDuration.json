@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "4.6.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       } ],
@@ -5949,6 +5949,10 @@
                      "type" : "ChoiceTypeSpecifier",
                      "annotation" : [ ],
                      "choice" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation" : [ ]
+                     }, {
                         "type" : "IntervalTypeSpecifier",
                         "annotation" : [ ],
                         "pointType" : {
@@ -5956,10 +5960,6 @@
                            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "annotation" : [ ]
                         }
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation" : [ ]
                      } ]
                   },
                   "expression" : {
@@ -5972,6 +5972,10 @@
                         "type" : "ChoiceTypeSpecifier",
                         "annotation" : [ ],
                         "choice" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "annotation" : [ ]
+                        }, {
                            "type" : "IntervalTypeSpecifier",
                            "annotation" : [ ],
                            "pointType" : {
@@ -5979,10 +5983,6 @@
                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "annotation" : [ ]
                            }
-                        }, {
-                           "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "annotation" : [ ]
                         } ]
                      },
                      "signature" : [ ],
@@ -6007,6 +6007,10 @@
                      "type" : "ChoiceTypeSpecifier",
                      "annotation" : [ ],
                      "choice" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation" : [ ]
+                     }, {
                         "type" : "IntervalTypeSpecifier",
                         "annotation" : [ ],
                         "pointType" : {
@@ -6014,10 +6018,6 @@
                            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "annotation" : [ ]
                         }
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation" : [ ]
                      } ]
                   },
                   "expression" : {
@@ -6030,6 +6030,10 @@
                         "type" : "ChoiceTypeSpecifier",
                         "annotation" : [ ],
                         "choice" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "annotation" : [ ]
+                        }, {
                            "type" : "IntervalTypeSpecifier",
                            "annotation" : [ ],
                            "pointType" : {
@@ -6037,10 +6041,6 @@
                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "annotation" : [ ]
                            }
-                        }, {
-                           "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "annotation" : [ ]
                         } ]
                      },
                      "signature" : [ ],
@@ -6103,6 +6103,10 @@
                                  "type" : "ChoiceTypeSpecifier",
                                  "annotation" : [ ],
                                  "choice" : [ {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "annotation" : [ ]
+                                 }, {
                                     "type" : "IntervalTypeSpecifier",
                                     "annotation" : [ ],
                                     "pointType" : {
@@ -6110,10 +6114,6 @@
                                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                        "annotation" : [ ]
                                     }
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "annotation" : [ ]
                                  } ]
                               }
                            },
@@ -6141,6 +6141,10 @@
                               "type" : "ChoiceTypeSpecifier",
                               "annotation" : [ ],
                               "choice" : [ {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "annotation" : [ ]
+                              }, {
                                  "type" : "IntervalTypeSpecifier",
                                  "annotation" : [ ],
                                  "pointType" : {
@@ -6148,10 +6152,6 @@
                                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                     "annotation" : [ ]
                                  }
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "annotation" : [ ]
                               } ]
                            }
                         }
@@ -6335,7 +6335,7 @@
                               "annotation" : [ ],
                               "pointType" : {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "annotation" : [ ]
                               }
                            }, {
@@ -6343,7 +6343,7 @@
                               "annotation" : [ ],
                               "pointType" : {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "annotation" : [ ]
                               }
                            } ]
@@ -7607,6 +7607,10 @@
                      "type" : "ChoiceTypeSpecifier",
                      "annotation" : [ ],
                      "choice" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation" : [ ]
+                     }, {
                         "type" : "IntervalTypeSpecifier",
                         "annotation" : [ ],
                         "pointType" : {
@@ -7614,10 +7618,6 @@
                            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "annotation" : [ ]
                         }
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation" : [ ]
                      } ]
                   },
                   "expression" : {
@@ -7630,6 +7630,10 @@
                         "type" : "ChoiceTypeSpecifier",
                         "annotation" : [ ],
                         "choice" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "annotation" : [ ]
+                        }, {
                            "type" : "IntervalTypeSpecifier",
                            "annotation" : [ ],
                            "pointType" : {
@@ -7637,10 +7641,6 @@
                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "annotation" : [ ]
                            }
-                        }, {
-                           "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "annotation" : [ ]
                         } ]
                      },
                      "signature" : [ ],
@@ -7665,6 +7665,10 @@
                      "type" : "ChoiceTypeSpecifier",
                      "annotation" : [ ],
                      "choice" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation" : [ ]
+                     }, {
                         "type" : "IntervalTypeSpecifier",
                         "annotation" : [ ],
                         "pointType" : {
@@ -7672,10 +7676,6 @@
                            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "annotation" : [ ]
                         }
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation" : [ ]
                      } ]
                   },
                   "expression" : {
@@ -7688,6 +7688,10 @@
                         "type" : "ChoiceTypeSpecifier",
                         "annotation" : [ ],
                         "choice" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "annotation" : [ ]
+                        }, {
                            "type" : "IntervalTypeSpecifier",
                            "annotation" : [ ],
                            "pointType" : {
@@ -7695,10 +7699,6 @@
                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "annotation" : [ ]
                            }
-                        }, {
-                           "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "annotation" : [ ]
                         } ]
                      },
                      "signature" : [ ],
@@ -7761,6 +7761,10 @@
                                  "type" : "ChoiceTypeSpecifier",
                                  "annotation" : [ ],
                                  "choice" : [ {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "annotation" : [ ]
+                                 }, {
                                     "type" : "IntervalTypeSpecifier",
                                     "annotation" : [ ],
                                     "pointType" : {
@@ -7768,10 +7772,6 @@
                                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                        "annotation" : [ ]
                                     }
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "annotation" : [ ]
                                  } ]
                               }
                            },
@@ -7799,6 +7799,10 @@
                               "type" : "ChoiceTypeSpecifier",
                               "annotation" : [ ],
                               "choice" : [ {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "annotation" : [ ]
+                              }, {
                                  "type" : "IntervalTypeSpecifier",
                                  "annotation" : [ ],
                                  "pointType" : {
@@ -7806,10 +7810,6 @@
                                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                     "annotation" : [ ]
                                  }
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "annotation" : [ ]
                               } ]
                            }
                         }
@@ -7993,7 +7993,7 @@
                               "annotation" : [ ],
                               "pointType" : {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "annotation" : [ ]
                               }
                            }, {
@@ -8001,7 +8001,7 @@
                               "annotation" : [ ],
                               "pointType" : {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "annotation" : [ ]
                               }
                            } ]
@@ -9162,6 +9162,10 @@
                      "type" : "ChoiceTypeSpecifier",
                      "annotation" : [ ],
                      "choice" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation" : [ ]
+                     }, {
                         "type" : "IntervalTypeSpecifier",
                         "annotation" : [ ],
                         "pointType" : {
@@ -9169,10 +9173,6 @@
                            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "annotation" : [ ]
                         }
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation" : [ ]
                      } ]
                   },
                   "expression" : {
@@ -9185,6 +9185,10 @@
                         "type" : "ChoiceTypeSpecifier",
                         "annotation" : [ ],
                         "choice" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "annotation" : [ ]
+                        }, {
                            "type" : "IntervalTypeSpecifier",
                            "annotation" : [ ],
                            "pointType" : {
@@ -9192,10 +9196,6 @@
                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "annotation" : [ ]
                            }
-                        }, {
-                           "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "annotation" : [ ]
                         } ]
                      },
                      "signature" : [ ],
@@ -9220,6 +9220,10 @@
                      "type" : "ChoiceTypeSpecifier",
                      "annotation" : [ ],
                      "choice" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation" : [ ]
+                     }, {
                         "type" : "IntervalTypeSpecifier",
                         "annotation" : [ ],
                         "pointType" : {
@@ -9227,10 +9231,6 @@
                            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "annotation" : [ ]
                         }
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation" : [ ]
                      } ]
                   },
                   "expression" : {
@@ -9243,6 +9243,10 @@
                         "type" : "ChoiceTypeSpecifier",
                         "annotation" : [ ],
                         "choice" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "annotation" : [ ]
+                        }, {
                            "type" : "IntervalTypeSpecifier",
                            "annotation" : [ ],
                            "pointType" : {
@@ -9250,10 +9254,6 @@
                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "annotation" : [ ]
                            }
-                        }, {
-                           "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "annotation" : [ ]
                         } ]
                      },
                      "signature" : [ ],
@@ -9316,6 +9316,10 @@
                                  "type" : "ChoiceTypeSpecifier",
                                  "annotation" : [ ],
                                  "choice" : [ {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "annotation" : [ ]
+                                 }, {
                                     "type" : "IntervalTypeSpecifier",
                                     "annotation" : [ ],
                                     "pointType" : {
@@ -9323,10 +9327,6 @@
                                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                        "annotation" : [ ]
                                     }
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "annotation" : [ ]
                                  } ]
                               }
                            },
@@ -9354,6 +9354,10 @@
                               "type" : "ChoiceTypeSpecifier",
                               "annotation" : [ ],
                               "choice" : [ {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "annotation" : [ ]
+                              }, {
                                  "type" : "IntervalTypeSpecifier",
                                  "annotation" : [ ],
                                  "pointType" : {
@@ -9361,10 +9365,6 @@
                                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                     "annotation" : [ ]
                                  }
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "annotation" : [ ]
                               } ]
                            }
                         }
@@ -10244,6 +10244,10 @@
                      "type" : "ChoiceTypeSpecifier",
                      "annotation" : [ ],
                      "choice" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation" : [ ]
+                     }, {
                         "type" : "IntervalTypeSpecifier",
                         "annotation" : [ ],
                         "pointType" : {
@@ -10251,10 +10255,6 @@
                            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "annotation" : [ ]
                         }
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation" : [ ]
                      } ]
                   },
                   "expression" : {
@@ -10267,6 +10267,10 @@
                         "type" : "ChoiceTypeSpecifier",
                         "annotation" : [ ],
                         "choice" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "annotation" : [ ]
+                        }, {
                            "type" : "IntervalTypeSpecifier",
                            "annotation" : [ ],
                            "pointType" : {
@@ -10274,10 +10278,6 @@
                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "annotation" : [ ]
                            }
-                        }, {
-                           "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "annotation" : [ ]
                         } ]
                      },
                      "signature" : [ ],
@@ -10302,6 +10302,10 @@
                      "type" : "ChoiceTypeSpecifier",
                      "annotation" : [ ],
                      "choice" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "annotation" : [ ]
+                     }, {
                         "type" : "IntervalTypeSpecifier",
                         "annotation" : [ ],
                         "pointType" : {
@@ -10309,10 +10313,6 @@
                            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "annotation" : [ ]
                         }
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation" : [ ]
                      } ]
                   },
                   "expression" : {
@@ -10325,6 +10325,10 @@
                         "type" : "ChoiceTypeSpecifier",
                         "annotation" : [ ],
                         "choice" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "annotation" : [ ]
+                        }, {
                            "type" : "IntervalTypeSpecifier",
                            "annotation" : [ ],
                            "pointType" : {
@@ -10332,10 +10336,6 @@
                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "annotation" : [ ]
                            }
-                        }, {
-                           "type" : "NamedTypeSpecifier",
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "annotation" : [ ]
                         } ]
                      },
                      "signature" : [ ],
@@ -10398,6 +10398,10 @@
                                  "type" : "ChoiceTypeSpecifier",
                                  "annotation" : [ ],
                                  "choice" : [ {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                    "annotation" : [ ]
+                                 }, {
                                     "type" : "IntervalTypeSpecifier",
                                     "annotation" : [ ],
                                     "pointType" : {
@@ -10405,10 +10409,6 @@
                                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                        "annotation" : [ ]
                                     }
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "annotation" : [ ]
                                  } ]
                               }
                            },
@@ -10436,6 +10436,10 @@
                               "type" : "ChoiceTypeSpecifier",
                               "annotation" : [ ],
                               "choice" : [ {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "annotation" : [ ]
+                              }, {
                                  "type" : "IntervalTypeSpecifier",
                                  "annotation" : [ ],
                                  "pointType" : {
@@ -10443,10 +10447,6 @@
                                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                     "annotation" : [ ]
                                  }
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "annotation" : [ ]
                               } ]
                            }
                         }
@@ -11136,11 +11136,11 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                 "name" : "{http://hl7.org/fhir}Reference",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Reference",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
                                  "annotation" : [ ]
                               } ]
                            },
@@ -11532,11 +11532,11 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                 "name" : "{http://hl7.org/fhir}Reference",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Reference",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
                                  "annotation" : [ ]
                               } ]
                            },
@@ -13927,11 +13927,11 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "name" : "{http://hl7.org/fhir}MedicationDispense",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationDispense",
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
                               "annotation" : [ ]
                            } ]
                         }
@@ -13978,11 +13978,11 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -14008,11 +14008,11 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "name" : "{http://hl7.org/fhir}MedicationDispense",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationDispense",
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
                               "annotation" : [ ]
                            } ]
                         }
@@ -14059,11 +14059,11 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -14106,26 +14106,26 @@
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "3385",
-                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "name" : "{http://hl7.org/fhir}MedicationDispense",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "3386",
-                        "name" : "{http://hl7.org/fhir}MedicationDispense",
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
                         "annotation" : [ ]
                      } ]
                   },
                   "choice" : [ {
                      "type" : "NamedTypeSpecifier",
-                     "locator" : "578:21-578:39",
-                     "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
-                     "name" : "{http://hl7.org/fhir}MedicationRequest",
-                     "annotation" : [ ]
-                  }, {
-                     "type" : "NamedTypeSpecifier",
                      "locator" : "579:5-579:24",
                      "resultTypeName" : "{http://hl7.org/fhir}MedicationDispense",
                      "name" : "{http://hl7.org/fhir}MedicationDispense",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
+                     "locator" : "578:21-578:39",
+                     "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
                      "annotation" : [ ]
                   } ]
                }
@@ -14179,11 +14179,11 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "name" : "{http://hl7.org/fhir}MedicationDispense",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationDispense",
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
                               "annotation" : [ ]
                            } ]
                         }
@@ -14230,11 +14230,11 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -14260,11 +14260,11 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "name" : "{http://hl7.org/fhir}MedicationDispense",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationDispense",
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
                               "annotation" : [ ]
                            } ]
                         }
@@ -14311,11 +14311,11 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -14358,26 +14358,26 @@
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "3438",
-                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "name" : "{http://hl7.org/fhir}MedicationDispense",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "3439",
-                        "name" : "{http://hl7.org/fhir}MedicationDispense",
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
                         "annotation" : [ ]
                      } ]
                   },
                   "choice" : [ {
                      "type" : "NamedTypeSpecifier",
-                     "locator" : "593:21-593:39",
-                     "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
-                     "name" : "{http://hl7.org/fhir}MedicationRequest",
-                     "annotation" : [ ]
-                  }, {
-                     "type" : "NamedTypeSpecifier",
                      "locator" : "594:5-594:24",
                      "resultTypeName" : "{http://hl7.org/fhir}MedicationDispense",
                      "name" : "{http://hl7.org/fhir}MedicationDispense",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
+                     "locator" : "593:21-593:39",
+                     "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
                      "annotation" : [ ]
                   } ]
                }
@@ -14480,11 +14480,11 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -14502,11 +14502,11 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "name" : "{http://hl7.org/fhir}MedicationDispense",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
                                     "annotation" : [ ]
                                  } ]
                               }
@@ -14531,11 +14531,11 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -14598,11 +14598,11 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "name" : "{http://hl7.org/fhir}MedicationDispense",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
                                        "annotation" : [ ]
                                     } ]
                                  }
@@ -14670,11 +14670,11 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "name" : "{http://hl7.org/fhir}MedicationDispense",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
                                     "annotation" : [ ]
                                  } ]
                               }
@@ -14692,11 +14692,11 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "name" : "{http://hl7.org/fhir}MedicationDispense",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
                                        "annotation" : [ ]
                                     } ]
                                  }
@@ -14721,11 +14721,11 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "name" : "{http://hl7.org/fhir}MedicationDispense",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
                                     "annotation" : [ ]
                                  } ]
                               }
@@ -14788,11 +14788,11 @@
                                        "annotation" : [ ],
                                        "choice" : [ {
                                           "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "name" : "{http://hl7.org/fhir}MedicationDispense",
                                           "annotation" : [ ]
                                        }, {
                                           "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
                                           "annotation" : [ ]
                                        } ]
                                     }
@@ -14822,12 +14822,12 @@
                         "choice" : [ {
                            "type" : "NamedTypeSpecifier",
                            "localId" : "3500",
-                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "name" : "{http://hl7.org/fhir}MedicationDispense",
                            "annotation" : [ ]
                         }, {
                            "type" : "NamedTypeSpecifier",
                            "localId" : "3501",
-                           "name" : "{http://hl7.org/fhir}MedicationDispense",
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
                            "annotation" : [ ]
                         } ]
                      }
@@ -14843,26 +14843,26 @@
                         "choice" : [ {
                            "type" : "NamedTypeSpecifier",
                            "localId" : "3496",
-                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "name" : "{http://hl7.org/fhir}MedicationDispense",
                            "annotation" : [ ]
                         }, {
                            "type" : "NamedTypeSpecifier",
                            "localId" : "3497",
-                           "name" : "{http://hl7.org/fhir}MedicationDispense",
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
                            "annotation" : [ ]
                         } ]
                      },
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
-                        "locator" : "614:27-614:45",
-                        "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
-                        "name" : "{http://hl7.org/fhir}MedicationRequest",
-                        "annotation" : [ ]
-                     }, {
-                        "type" : "NamedTypeSpecifier",
                         "locator" : "615:5-615:24",
                         "resultTypeName" : "{http://hl7.org/fhir}MedicationDispense",
                         "name" : "{http://hl7.org/fhir}MedicationDispense",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "NamedTypeSpecifier",
+                        "locator" : "614:27-614:45",
+                        "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
                         "annotation" : [ ]
                      } ]
                   }
@@ -14967,11 +14967,11 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -14989,11 +14989,11 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "name" : "{http://hl7.org/fhir}MedicationDispense",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
                                     "annotation" : [ ]
                                  } ]
                               }
@@ -15018,11 +15018,11 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -15085,11 +15085,11 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "name" : "{http://hl7.org/fhir}MedicationDispense",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
                                        "annotation" : [ ]
                                     } ]
                                  }
@@ -15157,11 +15157,11 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "name" : "{http://hl7.org/fhir}MedicationDispense",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
                                     "annotation" : [ ]
                                  } ]
                               }
@@ -15179,11 +15179,11 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "name" : "{http://hl7.org/fhir}MedicationDispense",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
                                        "annotation" : [ ]
                                     } ]
                                  }
@@ -15208,11 +15208,11 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "name" : "{http://hl7.org/fhir}MedicationDispense",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
                                     "annotation" : [ ]
                                  } ]
                               }
@@ -15275,11 +15275,11 @@
                                        "annotation" : [ ],
                                        "choice" : [ {
                                           "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "name" : "{http://hl7.org/fhir}MedicationDispense",
                                           "annotation" : [ ]
                                        }, {
                                           "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}MedicationDispense",
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
                                           "annotation" : [ ]
                                        } ]
                                     }
@@ -15309,12 +15309,12 @@
                         "choice" : [ {
                            "type" : "NamedTypeSpecifier",
                            "localId" : "3610",
-                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "name" : "{http://hl7.org/fhir}MedicationDispense",
                            "annotation" : [ ]
                         }, {
                            "type" : "NamedTypeSpecifier",
                            "localId" : "3611",
-                           "name" : "{http://hl7.org/fhir}MedicationDispense",
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
                            "annotation" : [ ]
                         } ]
                      }
@@ -15330,26 +15330,26 @@
                         "choice" : [ {
                            "type" : "NamedTypeSpecifier",
                            "localId" : "3606",
-                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "name" : "{http://hl7.org/fhir}MedicationDispense",
                            "annotation" : [ ]
                         }, {
                            "type" : "NamedTypeSpecifier",
                            "localId" : "3607",
-                           "name" : "{http://hl7.org/fhir}MedicationDispense",
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
                            "annotation" : [ ]
                         } ]
                      },
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
-                        "locator" : "643:25-643:43",
-                        "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
-                        "name" : "{http://hl7.org/fhir}MedicationRequest",
-                        "annotation" : [ ]
-                     }, {
-                        "type" : "NamedTypeSpecifier",
                         "locator" : "644:1-644:20",
                         "resultTypeName" : "{http://hl7.org/fhir}MedicationDispense",
                         "name" : "{http://hl7.org/fhir}MedicationDispense",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "NamedTypeSpecifier",
+                        "locator" : "643:25-643:43",
+                        "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
                         "annotation" : [ ]
                      } ]
                   }

@@ -106,6 +106,28 @@ public class CqlOperatorsBinderTests
     }
 
     [TestMethod]
+    public void ListIncludesElement_NonGenericArgumentTypes_InfersElementTypeFromSecondParameter()
+    {
+        // Regression test for #1341. ListIncludesElement<T>(IEnumerable<T>? left, T right):
+        // the left argument's type is an array (not IsGenericType) and the right argument's
+        // type is a plain class (also not IsGenericType), so the only inference source is the
+        // genericity of the parameter in the RIGHT argument's position (the bare T). The old
+        // probe indexed methodParameters with the outer retry-pass index instead of the
+        // argument index, so while probing argument 1 it checked parameter 0 (IEnumerable<T>,
+        // not a bare generic parameter), yielded no candidate type arguments, and failed to
+        // bind this shape at all.
+        var binder = CreateBinder();
+        var left = new CodeConstant(System.Array.Empty<CqlCode>(), typeof(CqlCode[]));
+        var right = new CodeConstant(new CqlCode("a", "s"), typeof(CqlCode));
+
+        var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.ListIncludesElement), [left, right], []));
+
+        Assert.AreEqual(nameof(ICqlOperators.ListIncludesElement), call.Method.Name);
+        Assert.IsTrue(call.Method.IsGenericMethod);
+        Assert.AreEqual(typeof(CqlCode), call.Method.GetGenericArguments().Single());
+    }
+
+    [TestMethod]
     public void Where_LambdaArgument_BindsGenericMethodWithInferredElementType()
     {
         // Where<T>(IEnumerable<T>?, Func<T, bool?>): the specialized Where binding infers T

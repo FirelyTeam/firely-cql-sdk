@@ -112,12 +112,13 @@ partial class CodeBuilderContext
             var leftElementType = _typeResolver.GetListElementType(left.Type);
             if (_typeResolver.IsListType(right.Type))
             {
-                // NOTE(phase4): ported as-is — this reads left.Type where right.Type looks
-                // intended, so leftElementType != rightElementType can never be true and the
-                // element-type check below is dead. Preserved verbatim from the old pipeline.
-                var rightElementType = _typeResolver.GetListElementType(left.Type);
+                // Reading left.Type here was a long-standing copy-paste bug (#1342) that made
+                // this mismatch check compare the left element type against itself, so it
+                // could never fire.
+                var rightElementType = _typeResolver.GetListElementType(right.Type);
                 if (leftElementType != rightElementType)
-                    throw this.NewExpressionBuildingException();
+                    throw this.NewExpressionBuildingException(
+                        $"Includes: the list operands' element types differ ({leftElementType} vs {rightElementType}).");
                 return BindCqlOperator(nameof(ICqlOperators.ListIncludesList), left, right);
             }
 
@@ -152,11 +153,12 @@ partial class CodeBuilderContext
             var leftElementType = _typeResolver.GetListElementType(left.Type);
             if (_typeResolver.IsListType(right.Type))
             {
-                // NOTE(phase4): ported as-is — same left.Type/right.Type mixup as in Includes()
-                // above; leftElementType != rightElementType can never be true here.
-                var rightElementType = _typeResolver.GetListElementType(left.Type);
+                // Reading left.Type here was the same copy-paste bug (#1342) as in Includes()
+                // above — the mismatch check could never fire.
+                var rightElementType = _typeResolver.GetListElementType(right.Type);
                 if (leftElementType != rightElementType)
-                    throw this.NewExpressionBuildingException();
+                    throw this.NewExpressionBuildingException(
+                        $"IncludedIn: the list operands' element types differ ({leftElementType} vs {rightElementType}).");
                 return BindCqlOperator(nameof(ICqlOperators.ListIncludesList), right, left);
             }
 
@@ -379,16 +381,12 @@ partial class CodeBuilderContext
                                               throw this.NewExpressionBuildingException(
                                                   $"{type} was expected to be a list type.");
                         var newArray = new CodeNewArrayBounds(listElementType, new CodeConstant(0, typeof(int)));
-                        // fromCqlAsOperator: the old pipeline built ElmAsExpression here (and at
-                        // the other As() return sites below) — see CodeCast.FromCqlAsOperator.
-                        var elmAs = new CodeCast(newArray, type, castKind, fromCqlAsOperator: true);
-                        return elmAs;
+                        return new CodeCast(newArray, type, castKind);
                     }
                     else if (type == _typeResolver.AnyType) // handles untyped empty lists whose type is Any
                     {
                         var newArray = new CodeNewArrayBounds(_typeResolver.AnyType, new CodeConstant(0, typeof(int)));
-                        var elmAs = new CodeCast(newArray, type, castKind, fromCqlAsOperator: true);
-                        return elmAs;
+                        return new CodeCast(newArray, type, castKind);
                     }
 
                     throw this.NewExpressionBuildingException(
@@ -406,7 +404,7 @@ partial class CodeBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
                     var defaultExpression = new CodeDefault(type);
-                    return new CodeCast(defaultExpression, type, castKind, fromCqlAsOperator: true);
+                    return new CodeCast(defaultExpression, type, castKind);
                 }
                 else
                 {
@@ -433,7 +431,7 @@ partial class CodeBuilderContext
                             // falls into the default arm and still wraps in a cast/as node built
                             // from the original operand, rather than returning operand or
                             // converted directly.
-                            return new CodeCast(operand, type, castKind, fromCqlAsOperator: true);
+                            return new CodeCast(operand, type, castKind);
                     }
                 }
             }
@@ -457,7 +455,7 @@ partial class CodeBuilderContext
                                        @as.operand));
             }
 
-            return new CodeCast(operand, type, castKind, fromCqlAsOperator: true);
+            return new CodeCast(operand, type, castKind);
         }
     }
 
@@ -749,11 +747,25 @@ partial class CodeBuilderContext
         bool throwOnError = false,
         bool considerSafeUpcast = false) // @TODO: Cast - ChangeType
     {
-        var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false, considerSafeUpcast);
-        if (tc != TypeConversion.NoMatch)
+        // A covariant list conversion (e.g. IEnumerable<Derived> as IEnumerable<Base>) is not
+        // an option when compiler-generated tuple types are involved: the C# code generator
+        // lowers those element types to value tuples, and IEnumerable<T> covariance does not
+        // apply to value types, so the emitted 'as' cast would silently yield null at runtime
+        // (see #1354). Convert such lists element-wise below instead.
+        bool isTupleListConversion =
+            _typeResolver.GetListElementType(input.Type, throwError: false) is { } inputListElemType
+            && _typeResolver.GetListElementType(outputType, throwError: false) is { } outputListElemType
+            && inputListElemType != outputListElemType
+            && (inputListElemType.IsTupleBaseType() || outputListElemType.IsTupleBaseType());
+
+        if (!isTupleListConversion)
         {
-            typeConversion = tc;
-            return expression!;
+            var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false, considerSafeUpcast);
+            if (tc != TypeConversion.NoMatch)
+            {
+                typeConversion = tc;
+                return expression!;
+            }
         }
 
         // tuples are not convertible.
@@ -797,7 +809,18 @@ partial class CodeBuilderContext
                         typeConversion = TypeConversion.OperatorConvert;
                         var ctor = outputType.GetConstructor(Type.EmptyTypes)
                                    ?? throw this.NewExpressionBuildingException($"Tuple type {outputType} has no accessible parameterless constructor.");
-                        return new CodeMemberInit(new CodeNew(ctor), bindings);
+                        var memberInit = new CodeMemberInit(new CodeNew(ctor), bindings);
+
+                        // A freshly constructed tuple is never null; skip the null guard.
+                        if (input is CodeMemberInit or CodeNew)
+                            return memberInit;
+
+                        // A null tuple converts to null rather than to a tuple whose elements
+                        // are all null; without this check property accesses in the bindings
+                        // would throw when evaluated against a null input (see #1354).
+                        var isNull = new CodeBinary(CodeBinaryOp.Equal, input, new CodeConstant(null, input.Type));
+                        var nullResult = new CodeConstant(null, outputType);
+                        return new CodeConditional(isNull, nullResult, memberInit, outputType);
                     }
                 }
             }
@@ -815,7 +838,16 @@ partial class CodeBuilderContext
             var lambdaParameter = new CodeLocal(inputElementType, TypeNameToIdentifier(inputElementType, this));
             var lambdaBody = ChangeType(lambdaParameter, outputElementType, out typeConversion, throwOnError: true);
             var lambda = new CodeLambda([lambdaParameter], lambdaBody);
-            return BindCqlOperator(nameof(ICqlOperators.Select), input, lambda);
+            var select = BindCqlOperator(nameof(ICqlOperators.Select), input, lambda);
+
+            // The element-wise Select is the conversion: callers such as the As handler must
+            // use it rather than fall back to a type-as cast on the whole list, which for
+            // tuple-typed elements would yield null at runtime after the C# code generator
+            // lowers them to value tuples (see #1354).
+            if (isTupleListConversion)
+                typeConversion = TypeConversion.OperatorConvert;
+
+            return select;
         }
 
         Type toType = TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo)

@@ -14,6 +14,7 @@ using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Microsoft.Extensions.Logging.Abstractions;
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
@@ -309,6 +310,29 @@ public class CodeModelPipelineTests : Base
         var body = EmitDefinition(library, definitions, "X");
         AssertWellFormedBody(body);
         StringAssert.Contains(body, "Width");
+    }
+
+    [TestMethod]
+    public void Includes_MismatchedListElementTypes_ThrowsElementTypeDiagnostic()
+    {
+        // Regression test for #1342: the element-type mismatch check in Includes/IncludedIn
+        // computed rightElementType from the LEFT operand, so it compared the left element
+        // type against itself and could never fire. CqlToElm never emits mismatched operand
+        // types itself (it inserts implicit conversions or rejects the CQL), so compile two
+        // well-formed definitions and graft the string list in as the right operand.
+        var library = CreateCqlToolkit().MakeLibrary("""
+            library IncludesMismatch version '1.0.0'
+
+            define IntegerIncludes: {1, 2} includes {3}
+            define Strings: {'a'}
+            """);
+        var includes = (Includes)library.statements.Single(d => d.name == "IntegerIncludes").expression!;
+        var strings = library.statements.Single(d => d.name == "Strings").expression!;
+        includes.operand![1] = strings;
+
+        var exception = Assert.ThrowsException<CqlException<ExpressionBuildingError>>(
+            () => BuildCqlDefinitions(library));
+        StringAssert.Contains(exception.Message, "element types differ");
     }
 
     /// <summary>

@@ -155,5 +155,11 @@ public class CSharpGenerationGoldenTests
     }
 
     private static string NormalizeLineEndings(string text) =>
-        text.Replace("\r\n", "\n").TrimEnd('\n');
+        NormalizeGeneratedCodeVersion(text.Replace("\r\n", "\n")).TrimEnd('\n');
+
+    private static string NormalizeGeneratedCodeVersion(string text) =>
+        System.Text.RegularExpressions.Regex.Replace(
+            text,
+            "\\[System\\.CodeDom\\.Compiler\\.GeneratedCode\\(\"\\.NET Code Generation\", \"[^\"]+\"\\)\\]",
+            "[System.CodeDom.Compiler.GeneratedCode(\".NET Code Generation\", \"<normalized>\")]");
 }

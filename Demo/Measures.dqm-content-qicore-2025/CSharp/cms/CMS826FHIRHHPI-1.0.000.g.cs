@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS826FHIRHHPI", "1.0.000")]
 public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHPI_1_0_000>
 {
@@ -176,17 +176,16 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             CqlDate l_ = context.Operators.DateFrom(k_);
             int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
             bool? n_ = context.Operators.GreaterOrEqual(m_, 18);
-            CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-            CqlDateTime q_ = context.Operators.End(p_);
-            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-            bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
-            bool? t_ = context.Operators.And(n_, s_);
-            Code<Encounter.EncounterStatus> u_ = InpatientEncounter?.StatusElement;
-            Encounter.EncounterStatus? v_ = u_?.Value;
-            Code<Encounter.EncounterStatus> w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
-            bool? x_ = context.Operators.Equal(w_, "finished");
-            bool? y_ = context.Operators.And(t_, x_);
-            return y_;
+            CqlDateTime o_ = context.Operators.End(j_);
+            CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
+            bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, "day");
+            bool? r_ = context.Operators.And(n_, q_);
+            Code<Encounter.EncounterStatus> s_ = InpatientEncounter?.StatusElement;
+            Encounter.EncounterStatus? t_ = s_?.Value;
+            Code<Encounter.EncounterStatus> u_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(t_);
+            bool? v_ = context.Operators.Equal(u_, "finished");
+            bool? w_ = context.Operators.And(r_, v_);
+            return w_;
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -279,7 +278,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             else
             {
                 return default;
-            };
+            }
         }
 
         bool? m_ = context.Operators.And(k_, l_());
@@ -368,12 +367,11 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                 CqlDateTime k_ = context.Operators.Start(j_);
                 CqlInterval<CqlDateTime> l_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
                 CqlDateTime m_ = context.Operators.Start(l_);
-                CqlDateTime o_ = context.Operators.Start(l_);
-                CqlQuantity p_ = context.Operators.Quantity(72m, "hours");
-                CqlDateTime q_ = context.Operators.Add(o_, p_);
-                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(m_, q_, true, true);
-                bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, (string)default);
-                return s_;
+                CqlQuantity n_ = context.Operators.Quantity(72m, "hours");
+                CqlDateTime o_ = context.Operators.Add(m_, n_);
+                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
+                bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
+                return q_;
             }
 
             IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
@@ -443,12 +441,11 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                 CqlDateTime k_ = context.Operators.Start(j_);
                 CqlInterval<CqlDateTime> l_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
                 CqlDateTime m_ = context.Operators.Start(l_);
-                CqlDateTime o_ = context.Operators.Start(l_);
-                CqlQuantity p_ = context.Operators.Quantity(24m, "hours");
-                CqlDateTime q_ = context.Operators.Add(o_, p_);
-                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(m_, q_, true, true);
-                bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, (string)default);
-                return s_;
+                CqlQuantity n_ = context.Operators.Quantity(24m, "hours");
+                CqlDateTime o_ = context.Operators.Add(m_, n_);
+                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
+                bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
+                return q_;
             }
 
             IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
@@ -535,10 +532,10 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                 CqlDateTime m_ = context.Operators.Start(l_);
                 CqlQuantity n_ = context.Operators.Quantity(72m, "hours");
                 CqlDateTime o_ = context.Operators.Add(m_, n_);
-                CqlDateTime q_ = context.Operators.End(l_);
-                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
-                bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, (string)default);
-                return s_;
+                CqlDateTime p_ = context.Operators.End(l_);
+                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(o_, p_, true, true);
+                bool? r_ = context.Operators.In<CqlDateTime>(k_, q_, (string)default);
+                return r_;
             }
 
             IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
@@ -610,10 +607,10 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                 CqlDateTime m_ = context.Operators.Start(l_);
                 CqlQuantity n_ = context.Operators.Quantity(24m, "hours");
                 CqlDateTime o_ = context.Operators.Add(m_, n_);
-                CqlDateTime q_ = context.Operators.End(l_);
-                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
-                bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, (string)default);
-                return s_;
+                CqlDateTime p_ = context.Operators.End(l_);
+                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(o_, p_, true, true);
+                bool? r_ = context.Operators.In<CqlDateTime>(k_, q_, (string)default);
+                return r_;
             }
 
             IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);

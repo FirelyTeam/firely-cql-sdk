@@ -191,14 +191,13 @@ internal partial class CSharpEmitter
         {
             var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(node.Type);
             var dedupKey = $"{keyCode}::{typeSyntax}";
+            // A duplicate reuses the original's local — name, key identity and all. (The old
+            // pipeline allocated a fresh name for the duplicate before the deduper removed its
+            // statement, which burned a letter out of the naming sequence and, because that
+            // burned name keyed the duplicate for its parents, kept identical parent
+            // expressions from ever deduplicating with each other.)
             if (_dedup.TryGetValue(dedupKey, out var existing))
-            {
-                // The old pipeline still named the duplicate before the deduper removed its
-                // statement, leaving a gap in the letter sequence; the burned name is the
-                // duplicate's key identity for any parent's dedup decision.
-                var burnedName = AllocateName(null);
-                return existing with { KeyCode = burnedName };
-            }
+                return existing;
 
             var local = new CodeLocal(node.Type);
             var name = AllocateName(null);
@@ -359,11 +358,11 @@ internal partial class CSharpEmitter
                     for (int i = 0; i < cases.Count; i++)
                     {
                         isb.AppendLine(first ? $"if ({tests[i]})" : $"else if ({tests[i]})");
-                        EmitBranchBlock(isb, cases[i].Then, terminator: null);
+                        EmitBranchBlock(isb, cases[i].Then);
                         first = false;
                     }
                     isb.AppendLine("else");
-                    EmitBranchBlock(isb, @else, terminator: ";");
+                    EmitBranchBlock(isb, @else);
                 }
                 isb.AppendLine("}");
                 return isb;
@@ -440,10 +439,9 @@ internal partial class CSharpEmitter
 
         /// <summary>
         /// Emits <c>{ …hoisted…; return value; }</c> for a branch of the conditional
-        /// function, with an optional statement terminator after the closing brace (the old
-        /// writer leaves a stray <c>;</c> after the final else block).
+        /// function.
         /// </summary>
-        private void EmitBranchBlock(IndentedStringBuilder isb, CodeExpression value, string? terminator)
+        private void EmitBranchBlock(IndentedStringBuilder isb, CodeExpression value)
         {
             isb.AppendLine("{");
             using (isb.Indent())
@@ -454,7 +452,7 @@ internal partial class CSharpEmitter
                 if (atom is not null)
                     isb.AppendLine(TailStatement(atom));
             }
-            isb.AppendLine($"}}{terminator}");
+            isb.AppendLine("}");
         }
     }
 }
