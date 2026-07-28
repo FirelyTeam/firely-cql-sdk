@@ -33,22 +33,48 @@ internal static class ElmTupleTypeUtility
             return true;
 
         // Check for structural equivalence of tuple types
-        if (AreElmTupleTypesStructurallyEquivalent(leftType, rightType, typeConverter))
+        if (AreElmTupleTypesStructurallyCompatible(leftType, rightType, typeConverter, directional: false))
             return true;
 
         return false;
     }
 
     /// <summary>
-    /// Determines whether two types are structurally equivalent ELM tuple types.
-    /// ELM tuple types are considered structurally equivalent if they have the same properties
-    /// in the same order with compatible types.
+    /// Determines whether elements of type <paramref name="fromType"/> can be converted to
+    /// <paramref name="toType"/> for a Union operation: exact equality, assignability to the
+    /// target, or element-wise structural conversion for tuple types. Unlike
+    /// <see cref="AreCompatibleForUnionOperation"/> this check is directional, matching the
+    /// conversion that is actually performed on the operand: a symmetric check would accept
+    /// operands for which only the reverse conversion exists (see #1354).
     /// </summary>
-    /// <param name="leftType">The left tuple type.</param>
-    /// <param name="rightType">The right tuple type.</param>
+    /// <param name="fromType">The operand element type to convert from.</param>
+    /// <param name="toType">The union element type to convert to.</param>
     /// <param name="typeConverter">The type converter to check for known conversions between types.</param>
-    /// <returns><c>true</c> if both types are ELM tuple types and are structurally equivalent; otherwise, <c>false</c>.</returns>
-    private static bool AreElmTupleTypesStructurallyEquivalent(Type leftType, Type rightType, TypeConverter typeConverter)
+    /// <returns><c>true</c> if <paramref name="fromType"/> converts to <paramref name="toType"/>; otherwise, <c>false</c>.</returns>
+    public static bool CanConvertForUnionOperation(Type fromType, Type toType, TypeConverter typeConverter)
+    {
+        if (fromType == toType)
+            return true;
+
+        if (toType.IsAssignableFrom(fromType))
+            return true;
+
+        return AreElmTupleTypesStructurallyCompatible(fromType, toType, typeConverter, directional: true);
+    }
+
+    /// <summary>
+    /// Determines whether two types are structurally compatible ELM tuple types.
+    /// ELM tuple types are considered structurally compatible if they have the same properties
+    /// in the same order with compatible types. When <paramref name="directional"/> is
+    /// <c>true</c>, property types must be assignable or convertible from left to right; when
+    /// <c>false</c>, a conversion in either direction counts.
+    /// </summary>
+    /// <param name="leftType">The left (source) tuple type.</param>
+    /// <param name="rightType">The right (target) tuple type.</param>
+    /// <param name="typeConverter">The type converter to check for known conversions between types.</param>
+    /// <param name="directional">Whether property conversions are only considered from left to right.</param>
+    /// <returns><c>true</c> if both types are ELM tuple types and are structurally compatible; otherwise, <c>false</c>.</returns>
+    private static bool AreElmTupleTypesStructurallyCompatible(Type leftType, Type rightType, TypeConverter typeConverter, bool directional)
     {
         // Check if both types are tuple-like (derive from TupleBaseType or have tuple-like properties)
         if (!leftType.IsTupleBaseType() || !rightType.IsTupleBaseType())
@@ -85,6 +111,10 @@ internal static class ElmTupleTypeUtility
             // Exact match
             if (leftPropType == rightPropType)
                 return true;
+
+            if (directional)
+                return rightPropType.IsAssignableFrom(leftPropType)
+                       || typeConverter.CanConvert(leftPropType, rightPropType);
 
             // Check assignability in both directions
             if (leftPropType.IsAssignableFrom(rightPropType) || rightPropType.IsAssignableFrom(leftPropType))

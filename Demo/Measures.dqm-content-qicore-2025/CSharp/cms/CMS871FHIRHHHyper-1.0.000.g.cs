@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS871FHIRHHHyper", "1.0.000")]
 public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIRHHHyper_1_0_000>
 {
@@ -298,11 +298,9 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
     private IEnumerable<Encounter> Encounter_with_Hypoglycemic_Medication_Compute(CqlContext context)
     {
         IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> a_ = this.Encounter_with_Hospitalization_Period(context);
-        CqlValueSet b_ = this.Hypoglycemics_Treatment_Medications(context);
-        IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? e_(MedicationAdministration MR) {
+        bool? c_(MedicationAdministration MR) {
             IEnumerable<Medication> p_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? q_(Medication M) {
@@ -324,8 +322,10 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             return s_;
         }
 
-        IEnumerable<MedicationAdministration> f_ = context.Operators.Where<MedicationAdministration>(d_, e_);
-        IEnumerable<MedicationAdministration> g_ = context.Operators.Union<MedicationAdministration>(c_, f_);
+        IEnumerable<MedicationAdministration> d_ = context.Operators.Where<MedicationAdministration>(b_, c_);
+        CqlValueSet e_ = this.Hypoglycemics_Treatment_Medications(context);
+        IEnumerable<MedicationAdministration> f_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> g_ = context.Operators.Union<MedicationAdministration>(d_, f_);
         IEnumerable<ValueTuple<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, MedicationAdministration>> h_ = context.Operators.CrossJoin<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, MedicationAdministration>(a_, g_);
 
         (CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? Hospitalization, MedicationAdministration HypoglycemicMed)? i_(ValueTuple<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, MedicationAdministration> _valueTuple) {
@@ -395,23 +395,23 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 {
                     DataType af_ = GlucoseTest?.Effective;
                     object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                    bool ah_ = ag_ is CqlInterval<CqlDateTime>;
+                    bool ah_ = ag_ is CqlDateTime;
                     if (ah_)
                     {
                         DataType ai_ = GlucoseTest?.Effective;
                         object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                        l_ = aj_ as CqlInterval<CqlDateTime>;
+                        l_ = aj_ as CqlDateTime;
                     }
                     else
                     {
                         DataType ak_ = GlucoseTest?.Effective;
                         object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        bool am_ = al_ is CqlDateTime;
+                        bool am_ = al_ is CqlInterval<CqlDateTime>;
                         if (am_)
                         {
                             DataType an_ = GlucoseTest?.Effective;
                             object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                            l_ = ao_ as CqlDateTime;
+                            l_ = ao_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -592,23 +592,23 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                     {
                         DataType au_ = GlucoseTest?.Effective;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        bool aw_ = av_ is CqlInterval<CqlDateTime>;
+                        bool aw_ = av_ is CqlDateTime;
                         if (aw_)
                         {
                             DataType ax_ = GlucoseTest?.Effective;
                             object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
-                            ak_ = ay_ as CqlInterval<CqlDateTime>;
+                            ak_ = ay_ as CqlDateTime;
                         }
                         else
                         {
                             DataType az_ = GlucoseTest?.Effective;
                             object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                            bool bb_ = ba_ is CqlDateTime;
+                            bool bb_ = ba_ is CqlInterval<CqlDateTime>;
                             if (bb_)
                             {
                                 DataType bc_ = GlucoseTest?.Effective;
                                 object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
-                                ak_ = bd_ as CqlDateTime;
+                                ak_ = bd_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -655,23 +655,23 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                     {
                         DataType by_ = GlucoseTest?.Effective;
                         object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                        bool ca_ = bz_ is CqlInterval<CqlDateTime>;
+                        bool ca_ = bz_ is CqlDateTime;
                         if (ca_)
                         {
                             DataType cb_ = GlucoseTest?.Effective;
                             object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                            bo_ = cc_ as CqlInterval<CqlDateTime>;
+                            bo_ = cc_ as CqlDateTime;
                         }
                         else
                         {
                             DataType cd_ = GlucoseTest?.Effective;
                             object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                            bool cf_ = ce_ is CqlDateTime;
+                            bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                             if (cf_)
                             {
                                 DataType cg_ = GlucoseTest?.Effective;
                                 object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                                bo_ = ch_ as CqlDateTime;
+                                bo_ = ch_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -713,23 +713,23 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                     {
                         DataType cx_ = GlucoseTest?.Effective;
                         object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
-                        bool cz_ = cy_ is CqlInterval<CqlDateTime>;
+                        bool cz_ = cy_ is CqlDateTime;
                         if (cz_)
                         {
                             DataType da_ = GlucoseTest?.Effective;
                             object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-                            cn_ = db_ as CqlInterval<CqlDateTime>;
+                            cn_ = db_ as CqlDateTime;
                         }
                         else
                         {
                             DataType dc_ = GlucoseTest?.Effective;
                             object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                            bool de_ = dd_ is CqlDateTime;
+                            bool de_ = dd_ is CqlInterval<CqlDateTime>;
                             if (de_)
                             {
                                 DataType df_ = GlucoseTest?.Effective;
                                 object dg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, df_);
-                                cn_ = dg_ as CqlDateTime;
+                                cn_ = dg_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -866,23 +866,23 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             {
                 DataType am_ = tuple_gldtpgaqprrprerabeflfanwh?.GlucoseTest?.Effective;
                 object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                bool ao_ = an_ is CqlInterval<CqlDateTime>;
+                bool ao_ = an_ is CqlDateTime;
                 if (ao_)
                 {
                     DataType ap_ = tuple_gldtpgaqprrprerabeflfanwh?.GlucoseTest?.Effective;
                     object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                    w_ = aq_ as CqlInterval<CqlDateTime>;
+                    w_ = aq_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ar_ = tuple_gldtpgaqprrprerabeflfanwh?.GlucoseTest?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlDateTime;
+                    bool at_ = as_ is CqlInterval<CqlDateTime>;
                     if (at_)
                     {
                         DataType au_ = tuple_gldtpgaqprrprerabeflfanwh?.GlucoseTest?.Effective;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        w_ = av_ as CqlDateTime;
+                        w_ = av_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -947,23 +947,23 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             {
                 DataType aq_ = tuple_ghpnfyjsiaqamntcrzhgtgped?.GlucoseResult600?.Effective;
                 object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                bool as_ = ar_ is CqlInterval<CqlDateTime>;
+                bool as_ = ar_ is CqlDateTime;
                 if (as_)
                 {
                     DataType at_ = tuple_ghpnfyjsiaqamntcrzhgtgped?.GlucoseResult600?.Effective;
                     object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                    n_ = au_ as CqlInterval<CqlDateTime>;
+                    n_ = au_ as CqlDateTime;
                 }
                 else
                 {
                     DataType av_ = tuple_ghpnfyjsiaqamntcrzhgtgped?.GlucoseResult600?.Effective;
                     object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                    bool ax_ = aw_ is CqlDateTime;
+                    bool ax_ = aw_ is CqlInterval<CqlDateTime>;
                     if (ax_)
                     {
                         DataType ay_ = tuple_ghpnfyjsiaqamntcrzhgtgped?.GlucoseResult600?.Effective;
                         object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                        n_ = az_ as CqlDateTime;
+                        n_ = az_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -994,23 +994,23 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             {
                 DataType bf_ = tuple_ghpnfyjsiaqamntcrzhgtgped?.EarlierGlucoseTest?.Effective;
                 object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
-                bool bh_ = bg_ is CqlInterval<CqlDateTime>;
+                bool bh_ = bg_ is CqlDateTime;
                 if (bh_)
                 {
                     DataType bi_ = tuple_ghpnfyjsiaqamntcrzhgtgped?.EarlierGlucoseTest?.Effective;
                     object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
-                    x_ = bj_ as CqlInterval<CqlDateTime>;
+                    x_ = bj_ as CqlDateTime;
                 }
                 else
                 {
                     DataType bk_ = tuple_ghpnfyjsiaqamntcrzhgtgped?.EarlierGlucoseTest?.Effective;
                     object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                    bool bm_ = bl_ is CqlDateTime;
+                    bool bm_ = bl_ is CqlInterval<CqlDateTime>;
                     if (bm_)
                     {
                         DataType bn_ = tuple_ghpnfyjsiaqamntcrzhgtgped?.EarlierGlucoseTest?.Effective;
                         object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                        x_ = bo_ as CqlDateTime;
+                        x_ = bo_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1033,23 +1033,23 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             {
                 DataType bu_ = tuple_ghpnfyjsiaqamntcrzhgtgped?.GlucoseResult600?.Effective;
                 object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                bool bw_ = bv_ is CqlInterval<CqlDateTime>;
+                bool bw_ = bv_ is CqlDateTime;
                 if (bw_)
                 {
                     DataType bx_ = tuple_ghpnfyjsiaqamntcrzhgtgped?.GlucoseResult600?.Effective;
                     object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    z_ = by_ as CqlInterval<CqlDateTime>;
+                    z_ = by_ as CqlDateTime;
                 }
                 else
                 {
                     DataType bz_ = tuple_ghpnfyjsiaqamntcrzhgtgped?.GlucoseResult600?.Effective;
                     object ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
-                    bool cb_ = ca_ is CqlDateTime;
+                    bool cb_ = ca_ is CqlInterval<CqlDateTime>;
                     if (cb_)
                     {
                         DataType cc_ = tuple_ghpnfyjsiaqamntcrzhgtgped?.GlucoseResult600?.Effective;
                         object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
-                        z_ = cd_ as CqlDateTime;
+                        z_ = cd_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1170,23 +1170,23 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             {
                 DataType al_ = tuple_olaiqtwvfyenjplsytlpsbjd?.EarlyGlucoseResult?.Effective;
                 object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                bool an_ = am_ is CqlInterval<CqlDateTime>;
+                bool an_ = am_ is CqlDateTime;
                 if (an_)
                 {
                     DataType ao_ = tuple_olaiqtwvfyenjplsytlpsbjd?.EarlyGlucoseResult?.Effective;
                     object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    v_ = ap_ as CqlInterval<CqlDateTime>;
+                    v_ = ap_ as CqlDateTime;
                 }
                 else
                 {
                     DataType aq_ = tuple_olaiqtwvfyenjplsytlpsbjd?.EarlyGlucoseResult?.Effective;
                     object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                    bool as_ = ar_ is CqlDateTime;
+                    bool as_ = ar_ is CqlInterval<CqlDateTime>;
                     if (as_)
                     {
                         DataType at_ = tuple_olaiqtwvfyenjplsytlpsbjd?.EarlyGlucoseResult?.Effective;
                         object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        v_ = au_ as CqlDateTime;
+                        v_ = au_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1243,23 +1243,23 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 {
                     object u_ = context.Operators.LateBoundProperty<object>(ComfortCare, "performed");
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    bool w_ = v_ is CqlInterval<CqlDateTime>;
+                    bool w_ = v_ is CqlQuantity;
                     if (w_)
                     {
                         object x_ = context.Operators.LateBoundProperty<object>(ComfortCare, "performed");
                         object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                        h_ = y_ as CqlInterval<CqlDateTime>;
+                        h_ = y_ as CqlQuantity;
                     }
                     else
                     {
                         object z_ = context.Operators.LateBoundProperty<object>(ComfortCare, "performed");
                         object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        bool ab_ = aa_ is CqlQuantity;
+                        bool ab_ = aa_ is CqlInterval<CqlDateTime>;
                         if (ab_)
                         {
                             object ac_ = context.Operators.LateBoundProperty<object>(ComfortCare, "performed");
                             object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                            h_ = ad_ as CqlQuantity;
+                            h_ = ad_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {

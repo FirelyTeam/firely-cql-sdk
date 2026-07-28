@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS177FHIRChildMDDSuicideAssmt", "1.0.000")]
 public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISingleton<CMS177FHIRChildMDDSuicideAssmt_1_0_000>
 {
@@ -389,23 +389,23 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                 {
                     DataType y_ = SuicideRiskAssessmentProcedure?.Performed;
                     object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    bool aa_ = z_ is CqlInterval<CqlDateTime>;
+                    bool aa_ = z_ is CqlQuantity;
                     if (aa_)
                     {
                         DataType ab_ = SuicideRiskAssessmentProcedure?.Performed;
                         object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        p_ = ac_ as CqlInterval<CqlDateTime>;
+                        p_ = ac_ as CqlQuantity;
                     }
                     else
                     {
                         DataType ad_ = SuicideRiskAssessmentProcedure?.Performed;
                         object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                        bool af_ = ae_ is CqlQuantity;
+                        bool af_ = ae_ is CqlInterval<CqlDateTime>;
                         if (af_)
                         {
                             DataType ag_ = SuicideRiskAssessmentProcedure?.Performed;
                             object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                            p_ = ah_ as CqlQuantity;
+                            p_ = ah_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {

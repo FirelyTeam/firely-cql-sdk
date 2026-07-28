@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS771FHIRUrinarySymptomScoreBPH", "1.0.000")]
 public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingleton<CMS771FHIRUrinarySymptomScoreBPH_1_0_000>
 {
@@ -314,23 +314,23 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             {
                 DataType ab_ = IPSSAssessment?.Effective;
                 object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                bool ad_ = ac_ is CqlInterval<CqlDateTime>;
+                bool ad_ = ac_ is CqlDateTime;
                 if (ad_)
                 {
                     DataType ae_ = IPSSAssessment?.Effective;
                     object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                    r_ = af_ as CqlInterval<CqlDateTime>;
+                    r_ = af_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ag_ = IPSSAssessment?.Effective;
                     object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                    bool ai_ = ah_ is CqlDateTime;
+                    bool ai_ = ah_ is CqlInterval<CqlDateTime>;
                     if (ai_)
                     {
                         DataType aj_ = IPSSAssessment?.Effective;
                         object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        r_ = ak_ as CqlDateTime;
+                        r_ = ak_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -397,23 +397,23 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             {
                 DataType am_ = AUASIAssessment?.Effective;
                 object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                bool ao_ = an_ is CqlInterval<CqlDateTime>;
+                bool ao_ = an_ is CqlDateTime;
                 if (ao_)
                 {
                     DataType ap_ = AUASIAssessment?.Effective;
                     object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                    r_ = aq_ as CqlInterval<CqlDateTime>;
+                    r_ = aq_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ar_ = AUASIAssessment?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlDateTime;
+                    bool at_ = as_ is CqlInterval<CqlDateTime>;
                     if (at_)
                     {
                         DataType au_ = AUASIAssessment?.Effective;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        r_ = av_ as CqlDateTime;
+                        r_ = av_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -443,23 +443,23 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 {
                     DataType bq_ = QOLAssessment?.Effective;
                     object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
-                    bool bs_ = br_ is CqlInterval<CqlDateTime>;
+                    bool bs_ = br_ is CqlDateTime;
                     if (bs_)
                     {
                         DataType bt_ = QOLAssessment?.Effective;
                         object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                        aw_ = bu_ as CqlInterval<CqlDateTime>;
+                        aw_ = bu_ as CqlDateTime;
                     }
                     else
                     {
                         DataType bv_ = QOLAssessment?.Effective;
                         object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                        bool bx_ = bw_ is CqlDateTime;
+                        bool bx_ = bw_ is CqlInterval<CqlDateTime>;
                         if (bx_)
                         {
                             DataType by_ = QOLAssessment?.Effective;
                             object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                            aw_ = bz_ as CqlDateTime;
+                            aw_ = bz_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -482,23 +482,23 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 {
                     DataType cf_ = AUASIAssessment?.Effective;
                     object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                    bool ch_ = cg_ is CqlInterval<CqlDateTime>;
+                    bool ch_ = cg_ is CqlDateTime;
                     if (ch_)
                     {
                         DataType ci_ = AUASIAssessment?.Effective;
                         object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                        ay_ = cj_ as CqlInterval<CqlDateTime>;
+                        ay_ = cj_ as CqlDateTime;
                     }
                     else
                     {
                         DataType ck_ = AUASIAssessment?.Effective;
                         object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
-                        bool cm_ = cl_ is CqlDateTime;
+                        bool cm_ = cl_ is CqlInterval<CqlDateTime>;
                         if (cm_)
                         {
                             DataType cn_ = AUASIAssessment?.Effective;
                             object co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-                            ay_ = co_ as CqlDateTime;
+                            ay_ = co_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -542,23 +542,23 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 {
                     DataType cw_ = @this?.Effective;
                     object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
-                    bool cy_ = cx_ is CqlInterval<CqlDateTime>;
+                    bool cy_ = cx_ is CqlDateTime;
                     if (cy_)
                     {
                         DataType cz_ = @this?.Effective;
                         object da_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cz_);
-                        cp_ = da_ as CqlInterval<CqlDateTime>;
+                        cp_ = da_ as CqlDateTime;
                     }
                     else
                     {
                         DataType db_ = @this?.Effective;
                         object dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
-                        bool dd_ = dc_ is CqlDateTime;
+                        bool dd_ = dc_ is CqlInterval<CqlDateTime>;
                         if (dd_)
                         {
                             DataType de_ = @this?.Effective;
                             object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
-                            cp_ = df_ as CqlDateTime;
+                            cp_ = df_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {

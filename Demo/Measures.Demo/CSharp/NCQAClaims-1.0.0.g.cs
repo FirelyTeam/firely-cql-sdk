@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("NCQAClaims", "1.0.0")]
 public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 {
@@ -665,21 +665,16 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 {
                                     DataType bv_ = i?.Serviced;
                                     CqlDate bw_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bv_ as Date);
-                                    Quantity bx_ = i?.Quantity;
-                                    FhirDecimal by_ = bx_?.ValueElement;
-                                    decimal? bz_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, by_);
-                                    CqlDate ca_ = context.Operators.Add(bw_, new CqlQuantity(bz_, "day"));
-                                    CqlQuantity cb_ = context.Operators.Quantity(1m, "day");
-                                    CqlDate cc_ = context.Operators.Subtract(ca_, cb_);
-                                    CqlInterval<CqlDate> cd_ = context.Operators.Interval(bw_, cc_, true, true);
-                                    CqlDate ce_ = cd_?.low;
-                                    CqlDateTime cf_ = context.Operators.ConvertDateToDateTime(ce_);
-                                    CqlDate cg_ = cd_?.high;
-                                    CqlDateTime ch_ = context.Operators.ConvertDateToDateTime(cg_);
-                                    bool? ci_ = cd_?.lowClosed;
-                                    bool? cj_ = cd_?.highClosed;
-                                    CqlInterval<CqlDateTime> ck_ = context.Operators.Interval(cf_, ch_, ci_, cj_);
-                                    bi_ = ck_;
+                                    CqlDateTime bx_ = context.Operators.ConvertDateToDateTime(bw_);
+                                    Quantity by_ = i?.Quantity;
+                                    FhirDecimal bz_ = by_?.ValueElement;
+                                    decimal? ca_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, bz_);
+                                    CqlDate cb_ = context.Operators.Add(bw_, new CqlQuantity(ca_, "day"));
+                                    CqlQuantity cc_ = context.Operators.Quantity(1m, "day");
+                                    CqlDate cd_ = context.Operators.Subtract(cb_, cc_);
+                                    CqlDateTime ce_ = context.Operators.ConvertDateToDateTime(cd_);
+                                    CqlInterval<CqlDateTime> cf_ = context.Operators.Interval(bx_, ce_, true, true);
+                                    bi_ = cf_;
                                 }
                                 be_ = bi_;
                             }
@@ -698,45 +693,45 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         ];
 
                         (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? as_((CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> CoveredDays)? ItemCalculation) {
-                            IEnumerable<Claim.ItemComponent> cl_ = LineItemDefinition?.LineItems;
-                            bool? cm_ = context.Operators.Exists<Claim.ItemComponent>(cl_);
-                            if (cm_ ?? false)
+                            IEnumerable<Claim.ItemComponent> cg_ = LineItemDefinition?.LineItems;
+                            bool? ch_ = context.Operators.Exists<Claim.ItemComponent>(cg_);
+                            if (ch_ ?? false)
                             {
-                                Claim cn_ = LineItemDefinition?.Claim;
-                                IEnumerable<Claim.ItemComponent> co_ = LineItemDefinition?.LineItems;
+                                Claim ci_ = LineItemDefinition?.Claim;
+                                IEnumerable<Claim.ItemComponent> cj_ = LineItemDefinition?.LineItems;
 
-                                bool? cp_(Claim.ItemComponent @this) {
-                                    DataType da_ = @this?.Serviced;
-                                    bool? db_ = context.Operators.Not((bool?)(da_ is null));
-                                    return db_;
+                                bool? ck_(Claim.ItemComponent @this) {
+                                    DataType cv_ = @this?.Serviced;
+                                    bool? cw_ = context.Operators.Not((bool?)(cv_ is null));
+                                    return cw_;
                                 }
 
-                                IEnumerable<Claim.ItemComponent> cq_ = context.Operators.Where<Claim.ItemComponent>(co_, cp_);
+                                IEnumerable<Claim.ItemComponent> cl_ = context.Operators.Where<Claim.ItemComponent>(cj_, ck_);
 
-                                object cr_(Claim.ItemComponent @this) {
-                                    DataType dc_ = @this?.Serviced;
-                                    return dc_;
+                                object cm_(Claim.ItemComponent @this) {
+                                    DataType cx_ = @this?.Serviced;
+                                    return cx_;
                                 }
 
-                                IEnumerable<object> cs_ = context.Operators.Select<Claim.ItemComponent, object>(cq_, cr_);
+                                IEnumerable<object> cn_ = context.Operators.Select<Claim.ItemComponent, object>(cl_, cm_);
 
-                                CqlInterval<CqlDateTime> ct_(object NormalDate) {
-                                    CqlInterval<CqlDateTime> dd_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
-                                    return dd_;
+                                CqlInterval<CqlDateTime> co_(object NormalDate) {
+                                    CqlInterval<CqlDateTime> cy_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
+                                    return cy_;
                                 }
 
-                                IEnumerable<CqlInterval<CqlDateTime>> cu_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(cs_, ct_);
-                                IEnumerable<CqlInterval<CqlDateTime>> cv_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(cu_);
-                                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> cw_ = ItemCalculation?.CoveredDays;
+                                IEnumerable<CqlInterval<CqlDateTime>> cp_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(cn_, co_);
+                                IEnumerable<CqlInterval<CqlDateTime>> cq_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(cp_);
+                                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?> cr_ = ItemCalculation?.CoveredDays;
 
-                                CqlInterval<CqlDateTime> cx_((CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)? d) {
-                                    CqlInterval<CqlDateTime> de_ = d?.DaysSupplyInterval;
-                                    return de_;
+                                CqlInterval<CqlDateTime> cs_((CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)? d) {
+                                    CqlInterval<CqlDateTime> cz_ = d?.DaysSupplyInterval;
+                                    return cz_;
                                 }
 
-                                IEnumerable<CqlInterval<CqlDateTime>> cy_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?, CqlInterval<CqlDateTime>>(cw_, cx_);
-                                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? cz_ = (CqlTupleMetadata_FCdHTREUGBEaiYVQNNGRPZFjf, cn_, co_, cv_, cy_);
-                                return cz_;
+                                IEnumerable<CqlInterval<CqlDateTime>> ct_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?, CqlInterval<CqlDateTime>>(cr_, cs_);
+                                (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? cu_ = (CqlTupleMetadata_FCdHTREUGBEaiYVQNNGRPZFjf, ci_, cj_, cq_, ct_);
+                                return cu_;
                             }
                             else
                             {
@@ -762,8 +757,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> m_ = context.Operators.Select<Claim, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(k_, l_);
 
             bool? n_((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? FinalList) {
-                bool? df_ = context.Operators.Not((bool?)(FinalList is null));
-                return df_;
+                bool? da_ = context.Operators.Not((bool?)(FinalList is null));
+                return da_;
             }
 
             IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> o_ = context.Operators.Where<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(m_, n_);

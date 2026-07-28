@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS1188FHIRHIVSTITesting", "1.0.000")]
 public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS1188FHIRHIVSTITesting_1_0_000>
 {
@@ -309,23 +309,23 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType y_ = ChlamydiaTest?.Effective;
                 object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                bool aa_ = z_ is CqlInterval<CqlDateTime>;
+                bool aa_ = z_ is CqlDateTime;
                 if (aa_)
                 {
                     DataType ab_ = ChlamydiaTest?.Effective;
                     object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    o_ = ac_ as CqlInterval<CqlDateTime>;
+                    o_ = ac_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ad_ = ChlamydiaTest?.Effective;
                     object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                    bool af_ = ae_ is CqlDateTime;
+                    bool af_ = ae_ is CqlInterval<CqlDateTime>;
                     if (af_)
                     {
                         DataType ag_ = ChlamydiaTest?.Effective;
                         object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        o_ = ah_ as CqlDateTime;
+                        o_ = ah_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -385,23 +385,23 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType y_ = GonorrheaTest?.Effective;
                 object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                bool aa_ = z_ is CqlInterval<CqlDateTime>;
+                bool aa_ = z_ is CqlDateTime;
                 if (aa_)
                 {
                     DataType ab_ = GonorrheaTest?.Effective;
                     object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    o_ = ac_ as CqlInterval<CqlDateTime>;
+                    o_ = ac_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ad_ = GonorrheaTest?.Effective;
                     object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                    bool af_ = ae_ is CqlDateTime;
+                    bool af_ = ae_ is CqlInterval<CqlDateTime>;
                     if (af_)
                     {
                         DataType ag_ = GonorrheaTest?.Effective;
                         object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        o_ = ah_ as CqlDateTime;
+                        o_ = ah_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -461,23 +461,23 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType y_ = SyphilisTest?.Effective;
                 object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                bool aa_ = z_ is CqlInterval<CqlDateTime>;
+                bool aa_ = z_ is CqlDateTime;
                 if (aa_)
                 {
                     DataType ab_ = SyphilisTest?.Effective;
                     object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    o_ = ac_ as CqlInterval<CqlDateTime>;
+                    o_ = ac_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ad_ = SyphilisTest?.Effective;
                     object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                    bool af_ = ae_ is CqlDateTime;
+                    bool af_ = ae_ is CqlInterval<CqlDateTime>;
                     if (af_)
                     {
                         DataType ag_ = SyphilisTest?.Effective;
                         object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        o_ = ah_ as CqlDateTime;
+                        o_ = ah_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {

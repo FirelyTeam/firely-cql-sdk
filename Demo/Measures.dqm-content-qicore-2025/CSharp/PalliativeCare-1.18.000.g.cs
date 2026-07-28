@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("PalliativeCare", "1.18.000")]
 public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCare_1_18_000>
 {
@@ -157,23 +157,23 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
             {
                 DataType az_ = PalliativeIntervention?.Performed;
                 object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                bool bb_ = ba_ is CqlInterval<CqlDateTime>;
+                bool bb_ = ba_ is CqlQuantity;
                 if (bb_)
                 {
                     DataType bc_ = PalliativeIntervention?.Performed;
                     object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
-                    aq_ = bd_ as CqlInterval<CqlDateTime>;
+                    aq_ = bd_ as CqlQuantity;
                 }
                 else
                 {
                     DataType be_ = PalliativeIntervention?.Performed;
                     object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                    bool bg_ = bf_ is CqlQuantity;
+                    bool bg_ = bf_ is CqlInterval<CqlDateTime>;
                     if (bg_)
                     {
                         DataType bh_ = PalliativeIntervention?.Performed;
                         object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                        aq_ = bi_ as CqlQuantity;
+                        aq_ = bi_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {

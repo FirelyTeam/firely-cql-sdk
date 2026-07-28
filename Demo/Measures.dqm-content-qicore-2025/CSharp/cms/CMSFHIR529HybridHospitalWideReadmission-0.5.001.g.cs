@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMSFHIR529HybridHospitalWideReadmission", "0.5.001")]
 public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary, ISingleton<CMSFHIR529HybridHospitalWideReadmission_0_5_001>
 {
@@ -772,23 +772,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType ar_ = bicarbonatelab?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlInterval<CqlDateTime>;
+                    bool at_ = as_ is CqlDateTime;
                     if (at_)
                     {
                         DataType au_ = bicarbonatelab?.Effective;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        y_ = av_ as CqlInterval<CqlDateTime>;
+                        y_ = av_ as CqlDateTime;
                     }
                     else
                     {
                         DataType aw_ = bicarbonatelab?.Effective;
                         object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                        bool ay_ = ax_ is CqlDateTime;
+                        bool ay_ = ax_ is CqlInterval<CqlDateTime>;
                         if (ay_)
                         {
                             DataType az_ = bicarbonatelab?.Effective;
                             object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                            y_ = ba_ as CqlDateTime;
+                            y_ = ba_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -846,23 +846,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType by_ = bicarbonatelab?.Effective;
                     object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                    bool ca_ = bz_ is CqlInterval<CqlDateTime>;
+                    bool ca_ = bz_ is CqlDateTime;
                     if (ca_)
                     {
                         DataType cb_ = bicarbonatelab?.Effective;
                         object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                        bf_ = cc_ as CqlInterval<CqlDateTime>;
+                        bf_ = cc_ as CqlDateTime;
                     }
                     else
                     {
                         DataType cd_ = bicarbonatelab?.Effective;
                         object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                        bool cf_ = ce_ is CqlDateTime;
+                        bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                         if (cf_)
                         {
                             DataType cg_ = bicarbonatelab?.Effective;
                             object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                            bf_ = ch_ as CqlDateTime;
+                            bf_ = ch_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -946,23 +946,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType ar_ = CreatinineLab?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlInterval<CqlDateTime>;
+                    bool at_ = as_ is CqlDateTime;
                     if (at_)
                     {
                         DataType au_ = CreatinineLab?.Effective;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        y_ = av_ as CqlInterval<CqlDateTime>;
+                        y_ = av_ as CqlDateTime;
                     }
                     else
                     {
                         DataType aw_ = CreatinineLab?.Effective;
                         object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                        bool ay_ = ax_ is CqlDateTime;
+                        bool ay_ = ax_ is CqlInterval<CqlDateTime>;
                         if (ay_)
                         {
                             DataType az_ = CreatinineLab?.Effective;
                             object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                            y_ = ba_ as CqlDateTime;
+                            y_ = ba_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1020,23 +1020,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType by_ = CreatinineLab?.Effective;
                     object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                    bool ca_ = bz_ is CqlInterval<CqlDateTime>;
+                    bool ca_ = bz_ is CqlDateTime;
                     if (ca_)
                     {
                         DataType cb_ = CreatinineLab?.Effective;
                         object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                        bf_ = cc_ as CqlInterval<CqlDateTime>;
+                        bf_ = cc_ as CqlDateTime;
                     }
                     else
                     {
                         DataType cd_ = CreatinineLab?.Effective;
                         object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                        bool cf_ = ce_ is CqlDateTime;
+                        bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                         if (cf_)
                         {
                             DataType cg_ = CreatinineLab?.Effective;
                             object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                            bf_ = ch_ as CqlDateTime;
+                            bf_ = ch_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1120,23 +1120,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType ar_ = GlucoseLab?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlInterval<CqlDateTime>;
+                    bool at_ = as_ is CqlDateTime;
                     if (at_)
                     {
                         DataType au_ = GlucoseLab?.Effective;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        y_ = av_ as CqlInterval<CqlDateTime>;
+                        y_ = av_ as CqlDateTime;
                     }
                     else
                     {
                         DataType aw_ = GlucoseLab?.Effective;
                         object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                        bool ay_ = ax_ is CqlDateTime;
+                        bool ay_ = ax_ is CqlInterval<CqlDateTime>;
                         if (ay_)
                         {
                             DataType az_ = GlucoseLab?.Effective;
                             object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                            y_ = ba_ as CqlDateTime;
+                            y_ = ba_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1194,23 +1194,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType by_ = GlucoseLab?.Effective;
                     object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                    bool ca_ = bz_ is CqlInterval<CqlDateTime>;
+                    bool ca_ = bz_ is CqlDateTime;
                     if (ca_)
                     {
                         DataType cb_ = GlucoseLab?.Effective;
                         object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                        bf_ = cc_ as CqlInterval<CqlDateTime>;
+                        bf_ = cc_ as CqlDateTime;
                     }
                     else
                     {
                         DataType cd_ = GlucoseLab?.Effective;
                         object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                        bool cf_ = ce_ is CqlDateTime;
+                        bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                         if (cf_)
                         {
                             DataType cg_ = GlucoseLab?.Effective;
                             object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                            bf_ = ch_ as CqlDateTime;
+                            bf_ = ch_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1294,23 +1294,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType ar_ = HematocritLab?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlInterval<CqlDateTime>;
+                    bool at_ = as_ is CqlDateTime;
                     if (at_)
                     {
                         DataType au_ = HematocritLab?.Effective;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        y_ = av_ as CqlInterval<CqlDateTime>;
+                        y_ = av_ as CqlDateTime;
                     }
                     else
                     {
                         DataType aw_ = HematocritLab?.Effective;
                         object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                        bool ay_ = ax_ is CqlDateTime;
+                        bool ay_ = ax_ is CqlInterval<CqlDateTime>;
                         if (ay_)
                         {
                             DataType az_ = HematocritLab?.Effective;
                             object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                            y_ = ba_ as CqlDateTime;
+                            y_ = ba_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1368,23 +1368,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType by_ = HematocritLab?.Effective;
                     object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                    bool ca_ = bz_ is CqlInterval<CqlDateTime>;
+                    bool ca_ = bz_ is CqlDateTime;
                     if (ca_)
                     {
                         DataType cb_ = HematocritLab?.Effective;
                         object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                        bf_ = cc_ as CqlInterval<CqlDateTime>;
+                        bf_ = cc_ as CqlDateTime;
                     }
                     else
                     {
                         DataType cd_ = HematocritLab?.Effective;
                         object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                        bool cf_ = ce_ is CqlDateTime;
+                        bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                         if (cf_)
                         {
                             DataType cg_ = HematocritLab?.Effective;
                             object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                            bf_ = ch_ as CqlDateTime;
+                            bf_ = ch_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1468,23 +1468,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType ar_ = PotassiumLab?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlInterval<CqlDateTime>;
+                    bool at_ = as_ is CqlDateTime;
                     if (at_)
                     {
                         DataType au_ = PotassiumLab?.Effective;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        y_ = av_ as CqlInterval<CqlDateTime>;
+                        y_ = av_ as CqlDateTime;
                     }
                     else
                     {
                         DataType aw_ = PotassiumLab?.Effective;
                         object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                        bool ay_ = ax_ is CqlDateTime;
+                        bool ay_ = ax_ is CqlInterval<CqlDateTime>;
                         if (ay_)
                         {
                             DataType az_ = PotassiumLab?.Effective;
                             object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                            y_ = ba_ as CqlDateTime;
+                            y_ = ba_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1542,23 +1542,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType by_ = PotassiumLab?.Effective;
                     object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                    bool ca_ = bz_ is CqlInterval<CqlDateTime>;
+                    bool ca_ = bz_ is CqlDateTime;
                     if (ca_)
                     {
                         DataType cb_ = PotassiumLab?.Effective;
                         object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                        bf_ = cc_ as CqlInterval<CqlDateTime>;
+                        bf_ = cc_ as CqlDateTime;
                     }
                     else
                     {
                         DataType cd_ = PotassiumLab?.Effective;
                         object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                        bool cf_ = ce_ is CqlDateTime;
+                        bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                         if (cf_)
                         {
                             DataType cg_ = PotassiumLab?.Effective;
                             object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                            bf_ = ch_ as CqlDateTime;
+                            bf_ = ch_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1642,23 +1642,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType ar_ = SodiumLab?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlInterval<CqlDateTime>;
+                    bool at_ = as_ is CqlDateTime;
                     if (at_)
                     {
                         DataType au_ = SodiumLab?.Effective;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        y_ = av_ as CqlInterval<CqlDateTime>;
+                        y_ = av_ as CqlDateTime;
                     }
                     else
                     {
                         DataType aw_ = SodiumLab?.Effective;
                         object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                        bool ay_ = ax_ is CqlDateTime;
+                        bool ay_ = ax_ is CqlInterval<CqlDateTime>;
                         if (ay_)
                         {
                             DataType az_ = SodiumLab?.Effective;
                             object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                            y_ = ba_ as CqlDateTime;
+                            y_ = ba_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1716,23 +1716,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType by_ = SodiumLab?.Effective;
                     object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                    bool ca_ = bz_ is CqlInterval<CqlDateTime>;
+                    bool ca_ = bz_ is CqlDateTime;
                     if (ca_)
                     {
                         DataType cb_ = SodiumLab?.Effective;
                         object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                        bf_ = cc_ as CqlInterval<CqlDateTime>;
+                        bf_ = cc_ as CqlDateTime;
                     }
                     else
                     {
                         DataType cd_ = SodiumLab?.Effective;
                         object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                        bool cf_ = ce_ is CqlDateTime;
+                        bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                         if (cf_)
                         {
                             DataType cg_ = SodiumLab?.Effective;
                             object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                            bf_ = ch_ as CqlDateTime;
+                            bf_ = ch_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1816,23 +1816,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType ar_ = WhiteBloodCellLab?.Effective;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlInterval<CqlDateTime>;
+                    bool at_ = as_ is CqlDateTime;
                     if (at_)
                     {
                         DataType au_ = WhiteBloodCellLab?.Effective;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        y_ = av_ as CqlInterval<CqlDateTime>;
+                        y_ = av_ as CqlDateTime;
                     }
                     else
                     {
                         DataType aw_ = WhiteBloodCellLab?.Effective;
                         object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                        bool ay_ = ax_ is CqlDateTime;
+                        bool ay_ = ax_ is CqlInterval<CqlDateTime>;
                         if (ay_)
                         {
                             DataType az_ = WhiteBloodCellLab?.Effective;
                             object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                            y_ = ba_ as CqlDateTime;
+                            y_ = ba_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1890,23 +1890,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType by_ = WhiteBloodCellLab?.Effective;
                     object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                    bool ca_ = bz_ is CqlInterval<CqlDateTime>;
+                    bool ca_ = bz_ is CqlDateTime;
                     if (ca_)
                     {
                         DataType cb_ = WhiteBloodCellLab?.Effective;
                         object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                        bf_ = cc_ as CqlInterval<CqlDateTime>;
+                        bf_ = cc_ as CqlDateTime;
                     }
                     else
                     {
                         DataType cd_ = WhiteBloodCellLab?.Effective;
                         object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                        bool cf_ = ce_ is CqlDateTime;
+                        bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                         if (cf_)
                         {
                             DataType cg_ = WhiteBloodCellLab?.Effective;
                             object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                            bf_ = ch_ as CqlDateTime;
+                            bf_ = ch_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -2142,23 +2142,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType cg_ = OxygenAdminInterv?.Performed;
                     object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                    bool ci_ = ch_ is CqlInterval<CqlDateTime>;
+                    bool ci_ = ch_ is CqlQuantity;
                     if (ci_)
                     {
                         DataType cj_ = OxygenAdminInterv?.Performed;
                         object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                        be_ = ck_ as CqlInterval<CqlDateTime>;
+                        be_ = ck_ as CqlQuantity;
                     }
                     else
                     {
                         DataType cl_ = OxygenAdminInterv?.Performed;
                         object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                        bool cn_ = cm_ is CqlQuantity;
+                        bool cn_ = cm_ is CqlInterval<CqlDateTime>;
                         if (cn_)
                         {
                             DataType co_ = OxygenAdminInterv?.Performed;
                             object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
-                            be_ = cp_ as CqlQuantity;
+                            be_ = cp_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -2198,23 +2198,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType da_ = OxygenAdminInterv?.Performed;
                     object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-                    bool dc_ = db_ is CqlInterval<CqlDateTime>;
+                    bool dc_ = db_ is CqlQuantity;
                     if (dc_)
                     {
                         DataType dd_ = OxygenAdminInterv?.Performed;
                         object de_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dd_);
-                        bl_ = de_ as CqlInterval<CqlDateTime>;
+                        bl_ = de_ as CqlQuantity;
                     }
                     else
                     {
                         DataType df_ = OxygenAdminInterv?.Performed;
                         object dg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, df_);
-                        bool dh_ = dg_ is CqlQuantity;
+                        bool dh_ = dg_ is CqlInterval<CqlDateTime>;
                         if (dh_)
                         {
                             DataType di_ = OxygenAdminInterv?.Performed;
                             object dj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, di_);
-                            bl_ = dj_ as CqlQuantity;
+                            bl_ = dj_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -2277,23 +2277,23 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType ef_ = OxygenAdminInterv?.Performed;
                     object eg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ef_);
-                    bool eh_ = eg_ is CqlInterval<CqlDateTime>;
+                    bool eh_ = eg_ is CqlQuantity;
                     if (eh_)
                     {
                         DataType ei_ = OxygenAdminInterv?.Performed;
                         object ej_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ei_);
-                        dx_ = ej_ as CqlInterval<CqlDateTime>;
+                        dx_ = ej_ as CqlQuantity;
                     }
                     else
                     {
                         DataType ek_ = OxygenAdminInterv?.Performed;
                         object el_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ek_);
-                        bool em_ = el_ is CqlQuantity;
+                        bool em_ = el_ is CqlInterval<CqlDateTime>;
                         if (em_)
                         {
                             DataType en_ = OxygenAdminInterv?.Performed;
                             object eo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, en_);
-                            dx_ = eo_ as CqlQuantity;
+                            dx_ = eo_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {

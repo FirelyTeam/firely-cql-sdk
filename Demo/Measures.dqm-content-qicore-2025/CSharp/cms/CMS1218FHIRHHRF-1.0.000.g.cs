@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS1218FHIRHHRF", "1.0.000")]
 public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRHHRF_1_0_000>
 {
@@ -548,23 +548,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType k_ = (choice as Procedure)?.Performed;
                 object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
-                bool m_ = l_ is CqlInterval<CqlDateTime>;
+                bool m_ = l_ is CqlQuantity;
                 if (m_)
                 {
                     DataType n_ = (choice as Procedure)?.Performed;
                     object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-                    a_ = o_ as CqlInterval<CqlDateTime>;
+                    a_ = o_ as CqlQuantity;
                 }
                 else
                 {
                     DataType p_ = (choice as Procedure)?.Performed;
                     object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
-                    bool r_ = q_ is CqlQuantity;
+                    bool r_ = q_ is CqlInterval<CqlDateTime>;
                     if (r_)
                     {
                         DataType s_ = (choice as Procedure)?.Performed;
                         object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                        a_ = t_ as CqlQuantity;
+                        a_ = t_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -683,23 +683,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType u_ = @this?.Performed;
                 object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                bool w_ = v_ is CqlInterval<CqlDateTime>;
+                bool w_ = v_ is CqlQuantity;
                 if (w_)
                 {
                     DataType x_ = @this?.Performed;
                     object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    m_ = y_ as CqlInterval<CqlDateTime>;
+                    m_ = y_ as CqlQuantity;
                 }
                 else
                 {
                     DataType z_ = @this?.Performed;
                     object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    bool ab_ = aa_ is CqlQuantity;
+                    bool ab_ = aa_ is CqlInterval<CqlDateTime>;
                     if (ab_)
                     {
                         DataType ac_ = @this?.Performed;
                         object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        m_ = ad_ as CqlQuantity;
+                        m_ = ad_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -788,23 +788,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 {
                     DataType ad_ = Ventilation?.Performed;
                     object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                    bool af_ = ae_ is CqlInterval<CqlDateTime>;
+                    bool af_ = ae_ is CqlQuantity;
                     if (af_)
                     {
                         DataType ag_ = Ventilation?.Performed;
                         object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        m_ = ah_ as CqlInterval<CqlDateTime>;
+                        m_ = ah_ as CqlQuantity;
                     }
                     else
                     {
                         DataType ai_ = Ventilation?.Performed;
                         object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                        bool ak_ = aj_ is CqlQuantity;
+                        bool ak_ = aj_ is CqlInterval<CqlDateTime>;
                         if (ak_)
                         {
                             DataType al_ = Ventilation?.Performed;
                             object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                            m_ = am_ as CqlQuantity;
+                            m_ = am_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -843,26 +843,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure az_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                     DataType ba_ = az_?.Performed;
                     object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                    bool bc_ = bb_ is CqlInterval<CqlDateTime>;
+                    bool bc_ = bb_ is CqlQuantity;
                     if (bc_)
                     {
                         Procedure bd_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType be_ = bd_?.Performed;
                         object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                        p_ = bf_ as CqlInterval<CqlDateTime>;
+                        p_ = bf_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure bg_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType bh_ = bg_?.Performed;
                         object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                        bool bj_ = bi_ is CqlQuantity;
+                        bool bj_ = bi_ is CqlInterval<CqlDateTime>;
                         if (bj_)
                         {
                             Procedure bk_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                             DataType bl_ = bk_?.Performed;
                             object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                            p_ = bm_ as CqlQuantity;
+                            p_ = bm_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -999,26 +999,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure av_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                     DataType aw_ = av_?.Performed;
                     object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                    bool ay_ = ax_ is CqlInterval<CqlDateTime>;
+                    bool ay_ = ax_ is CqlQuantity;
                     if (ay_)
                     {
                         Procedure az_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType ba_ = az_?.Performed;
                         object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                        t_ = bb_ as CqlInterval<CqlDateTime>;
+                        t_ = bb_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure bc_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType bd_ = bc_?.Performed;
                         object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                        bool bf_ = be_ is CqlQuantity;
+                        bool bf_ = be_ is CqlInterval<CqlDateTime>;
                         if (bf_)
                         {
                             Procedure bg_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                             DataType bh_ = bg_?.Performed;
                             object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                            t_ = bi_ as CqlQuantity;
+                            t_ = bi_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1061,26 +1061,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure bx_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                     DataType by_ = bx_?.Performed;
                     object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                    bool ca_ = bz_ is CqlInterval<CqlDateTime>;
+                    bool ca_ = bz_ is CqlQuantity;
                     if (ca_)
                     {
                         Procedure cb_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType cc_ = cb_?.Performed;
                         object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
-                        y_ = cd_ as CqlInterval<CqlDateTime>;
+                        y_ = cd_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure ce_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType cf_ = ce_?.Performed;
                         object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                        bool ch_ = cg_ is CqlQuantity;
+                        bool ch_ = cg_ is CqlInterval<CqlDateTime>;
                         if (ch_)
                         {
                             Procedure ci_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                             DataType cj_ = ci_?.Performed;
                             object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                            y_ = ck_ as CqlQuantity;
+                            y_ = ck_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1123,26 +1123,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure cz_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                     DataType da_ = cz_?.Performed;
                     object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-                    bool dc_ = db_ is CqlInterval<CqlDateTime>;
+                    bool dc_ = db_ is CqlQuantity;
                     if (dc_)
                     {
                         Procedure dd_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType de_ = dd_?.Performed;
                         object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
-                        ad_ = df_ as CqlInterval<CqlDateTime>;
+                        ad_ = df_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure dg_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType dh_ = dg_?.Performed;
                         object di_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dh_);
-                        bool dj_ = di_ is CqlQuantity;
+                        bool dj_ = di_ is CqlInterval<CqlDateTime>;
                         if (dj_)
                         {
                             Procedure dk_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                             DataType dl_ = dk_?.Performed;
                             object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
-                            ad_ = dm_ as CqlQuantity;
+                            ad_ = dm_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1219,26 +1219,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure fk_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                     DataType fl_ = fk_?.Performed;
                     object fm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fl_);
-                    bool fn_ = fm_ is CqlInterval<CqlDateTime>;
+                    bool fn_ = fm_ is CqlQuantity;
                     if (fn_)
                     {
                         Procedure fo_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType fp_ = fo_?.Performed;
                         object fq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fp_);
-                        ei_ = fq_ as CqlInterval<CqlDateTime>;
+                        ei_ = fq_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure fr_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType fs_ = fr_?.Performed;
                         object ft_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fs_);
-                        bool fu_ = ft_ is CqlQuantity;
+                        bool fu_ = ft_ is CqlInterval<CqlDateTime>;
                         if (fu_)
                         {
                             Procedure fv_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                             DataType fw_ = fv_?.Performed;
                             object fx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fw_);
-                            ei_ = fx_ as CqlQuantity;
+                            ei_ = fx_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1281,26 +1281,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure gm_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                     DataType gn_ = gm_?.Performed;
                     object go_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gn_);
-                    bool gp_ = go_ is CqlInterval<CqlDateTime>;
+                    bool gp_ = go_ is CqlQuantity;
                     if (gp_)
                     {
                         Procedure gq_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType gr_ = gq_?.Performed;
                         object gs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gr_);
-                        en_ = gs_ as CqlInterval<CqlDateTime>;
+                        en_ = gs_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure gt_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType gu_ = gt_?.Performed;
                         object gv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gu_);
-                        bool gw_ = gv_ is CqlQuantity;
+                        bool gw_ = gv_ is CqlInterval<CqlDateTime>;
                         if (gw_)
                         {
                             Procedure gx_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                             DataType gy_ = gx_?.Performed;
                             object gz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gy_);
-                            en_ = gz_ as CqlQuantity;
+                            en_ = gz_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1343,26 +1343,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure ho_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                     DataType hp_ = ho_?.Performed;
                     object hq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hp_);
-                    bool hr_ = hq_ is CqlInterval<CqlDateTime>;
+                    bool hr_ = hq_ is CqlQuantity;
                     if (hr_)
                     {
                         Procedure hs_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType ht_ = hs_?.Performed;
                         object hu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ht_);
-                        es_ = hu_ as CqlInterval<CqlDateTime>;
+                        es_ = hu_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure hv_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType hw_ = hv_?.Performed;
                         object hx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hw_);
-                        bool hy_ = hx_ is CqlQuantity;
+                        bool hy_ = hx_ is CqlInterval<CqlDateTime>;
                         if (hy_)
                         {
                             Procedure hz_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                             DataType ia_ = hz_?.Performed;
                             object ib_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ia_);
-                            es_ = ib_ as CqlQuantity;
+                            es_ = ib_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1452,26 +1452,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure at_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                     DataType au_ = at_?.Performed;
                     object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                    bool aw_ = av_ is CqlInterval<CqlDateTime>;
+                    bool aw_ = av_ is CqlQuantity;
                     if (aw_)
                     {
                         Procedure ax_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType ay_ = ax_?.Performed;
                         object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                        r_ = az_ as CqlInterval<CqlDateTime>;
+                        r_ = az_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure ba_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType bb_ = ba_?.Performed;
                         object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                        bool bd_ = bc_ is CqlQuantity;
+                        bool bd_ = bc_ is CqlInterval<CqlDateTime>;
                         if (bd_)
                         {
                             Procedure be_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                             DataType bf_ = be_?.Performed;
                             object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
-                            r_ = bg_ as CqlQuantity;
+                            r_ = bg_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1514,26 +1514,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure bv_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                     DataType bw_ = bv_?.Performed;
                     object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                    bool by_ = bx_ is CqlInterval<CqlDateTime>;
+                    bool by_ = bx_ is CqlQuantity;
                     if (by_)
                     {
                         Procedure bz_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType ca_ = bz_?.Performed;
                         object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                        w_ = cb_ as CqlInterval<CqlDateTime>;
+                        w_ = cb_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure cc_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType cd_ = cc_?.Performed;
                         object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                        bool cf_ = ce_ is CqlQuantity;
+                        bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                         if (cf_)
                         {
                             Procedure cg_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                             DataType ch_ = cg_?.Performed;
                             object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                            w_ = ci_ as CqlQuantity;
+                            w_ = ci_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1576,26 +1576,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure cx_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                     DataType cy_ = cx_?.Performed;
                     object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-                    bool da_ = cz_ is CqlInterval<CqlDateTime>;
+                    bool da_ = cz_ is CqlQuantity;
                     if (da_)
                     {
                         Procedure db_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType dc_ = db_?.Performed;
                         object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                        ab_ = dd_ as CqlInterval<CqlDateTime>;
+                        ab_ = dd_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure de_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType df_ = de_?.Performed;
                         object dg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, df_);
-                        bool dh_ = dg_ is CqlQuantity;
+                        bool dh_ = dg_ is CqlInterval<CqlDateTime>;
                         if (dh_)
                         {
                             Procedure di_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                             DataType dj_ = di_?.Performed;
                             object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                            ab_ = dk_ as CqlQuantity;
+                            ab_ = dk_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1741,23 +1741,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 {
                     DataType ab_ = TracheostomySurgery?.Performed;
                     object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    bool ad_ = ac_ is CqlInterval<CqlDateTime>;
+                    bool ad_ = ac_ is CqlQuantity;
                     if (ad_)
                     {
                         DataType ae_ = TracheostomySurgery?.Performed;
                         object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        t_ = af_ as CqlInterval<CqlDateTime>;
+                        t_ = af_ as CqlQuantity;
                     }
                     else
                     {
                         DataType ag_ = TracheostomySurgery?.Performed;
                         object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        bool ai_ = ah_ is CqlQuantity;
+                        bool ai_ = ah_ is CqlInterval<CqlDateTime>;
                         if (ai_)
                         {
                             DataType aj_ = TracheostomySurgery?.Performed;
                             object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                            t_ = ak_ as CqlQuantity;
+                            t_ = ak_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1799,23 +1799,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     {
                         DataType bc_ = TracheostomySurgery?.Performed;
                         object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
-                        bool be_ = bd_ is CqlInterval<CqlDateTime>;
+                        bool be_ = bd_ is CqlQuantity;
                         if (be_)
                         {
                             DataType bf_ = TracheostomySurgery?.Performed;
                             object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
-                            aq_ = bg_ as CqlInterval<CqlDateTime>;
+                            aq_ = bg_ as CqlQuantity;
                         }
                         else
                         {
                             DataType bh_ = TracheostomySurgery?.Performed;
                             object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                            bool bj_ = bi_ is CqlQuantity;
+                            bool bj_ = bi_ is CqlInterval<CqlDateTime>;
                             if (bj_)
                             {
                                 DataType bk_ = TracheostomySurgery?.Performed;
                                 object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                                aq_ = bl_ as CqlQuantity;
+                                aq_ = bl_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1851,23 +1851,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     {
                         DataType bw_ = TracheostomySurgery?.Performed;
                         object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                        bool by_ = bx_ is CqlInterval<CqlDateTime>;
+                        bool by_ = bx_ is CqlQuantity;
                         if (by_)
                         {
                             DataType bz_ = TracheostomySurgery?.Performed;
                             object ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
-                            at_ = ca_ as CqlInterval<CqlDateTime>;
+                            at_ = ca_ as CqlQuantity;
                         }
                         else
                         {
                             DataType cb_ = TracheostomySurgery?.Performed;
                             object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                            bool cd_ = cc_ is CqlQuantity;
+                            bool cd_ = cc_ is CqlInterval<CqlDateTime>;
                             if (cd_)
                             {
                                 DataType ce_ = TracheostomySurgery?.Performed;
                                 object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                                at_ = cf_ as CqlQuantity;
+                                at_ = cf_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
@@ -1909,26 +1909,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure cs_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                     DataType ct_ = cs_?.Performed;
                     object cu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ct_);
-                    bool cv_ = cu_ is CqlInterval<CqlDateTime>;
+                    bool cv_ = cu_ is CqlQuantity;
                     if (cv_)
                     {
                         Procedure cw_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType cx_ = cw_?.Performed;
                         object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
-                        p_ = cy_ as CqlInterval<CqlDateTime>;
+                        p_ = cy_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure cz_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType da_ = cz_?.Performed;
                         object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-                        bool dc_ = db_ is CqlQuantity;
+                        bool dc_ = db_ is CqlInterval<CqlDateTime>;
                         if (dc_)
                         {
                             Procedure dd_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                             DataType de_ = dd_?.Performed;
                             object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
-                            p_ = df_ as CqlQuantity;
+                            p_ = df_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -2001,23 +2001,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 {
                     DataType aa_ = TracheostomySurgery?.Performed;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    bool ac_ = ab_ is CqlInterval<CqlDateTime>;
+                    bool ac_ = ab_ is CqlQuantity;
                     if (ac_)
                     {
                         DataType ad_ = TracheostomySurgery?.Performed;
                         object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                        o_ = ae_ as CqlInterval<CqlDateTime>;
+                        o_ = ae_ as CqlQuantity;
                     }
                     else
                     {
                         DataType af_ = TracheostomySurgery?.Performed;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        bool ah_ = ag_ is CqlQuantity;
+                        bool ah_ = ag_ is CqlInterval<CqlDateTime>;
                         if (ah_)
                         {
                             DataType ai_ = TracheostomySurgery?.Performed;
                             object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                            o_ = aj_ as CqlQuantity;
+                            o_ = aj_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -2056,26 +2056,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure aw_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                     DataType ax_ = aw_?.Performed;
                     object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
-                    bool az_ = ay_ is CqlInterval<CqlDateTime>;
+                    bool az_ = ay_ is CqlQuantity;
                     if (az_)
                     {
                         Procedure ba_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType bb_ = ba_?.Performed;
                         object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                        r_ = bc_ as CqlInterval<CqlDateTime>;
+                        r_ = bc_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure bd_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                         DataType be_ = bd_?.Performed;
                         object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                        bool bg_ = bf_ is CqlQuantity;
+                        bool bg_ = bf_ is CqlInterval<CqlDateTime>;
                         if (bg_)
                         {
                             Procedure bh_ = this.firstAnesthesiaDuringHospitalization(context, EncounterWithSurgery);
                             DataType bi_ = bh_?.Performed;
                             object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
-                            r_ = bj_ as CqlQuantity;
+                            r_ = bj_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -2176,23 +2176,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         {
             DataType x_ = procedure?.Performed;
             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-            bool z_ = y_ is CqlInterval<CqlDateTime>;
+            bool z_ = y_ is CqlQuantity;
             if (z_)
             {
                 DataType aa_ = procedure?.Performed;
                 object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                a_ = ab_ as CqlInterval<CqlDateTime>;
+                a_ = ab_ as CqlQuantity;
             }
             else
             {
                 DataType ac_ = procedure?.Performed;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                bool ae_ = ad_ is CqlQuantity;
+                bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                 if (ae_)
                 {
                     DataType af_ = procedure?.Performed;
                     object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                    a_ = ag_ as CqlQuantity;
+                    a_ = ag_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2231,26 +2231,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             Procedure at_ = this.firstAnesthesiaDuringHospitalization(context, encounter);
             DataType au_ = at_?.Performed;
             object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-            bool aw_ = av_ is CqlInterval<CqlDateTime>;
+            bool aw_ = av_ is CqlQuantity;
             if (aw_)
             {
                 Procedure ax_ = this.firstAnesthesiaDuringHospitalization(context, encounter);
                 DataType ay_ = ax_?.Performed;
                 object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                d_ = az_ as CqlInterval<CqlDateTime>;
+                d_ = az_ as CqlQuantity;
             }
             else
             {
                 Procedure ba_ = this.firstAnesthesiaDuringHospitalization(context, encounter);
                 DataType bb_ = ba_?.Performed;
                 object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                bool bd_ = bc_ is CqlQuantity;
+                bool bd_ = bc_ is CqlInterval<CqlDateTime>;
                 if (bd_)
                 {
                     Procedure be_ = this.firstAnesthesiaDuringHospitalization(context, encounter);
                     DataType bf_ = be_?.Performed;
                     object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
-                    d_ = bg_ as CqlQuantity;
+                    d_ = bg_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2291,26 +2291,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             Procedure bv_ = this.firstAnesthesiaDuringHospitalization(context, encounter);
             DataType bw_ = bv_?.Performed;
             object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-            bool by_ = bx_ is CqlInterval<CqlDateTime>;
+            bool by_ = bx_ is CqlQuantity;
             if (by_)
             {
                 Procedure bz_ = this.firstAnesthesiaDuringHospitalization(context, encounter);
                 DataType ca_ = bz_?.Performed;
                 object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                g_ = cb_ as CqlInterval<CqlDateTime>;
+                g_ = cb_ as CqlQuantity;
             }
             else
             {
                 Procedure cc_ = this.firstAnesthesiaDuringHospitalization(context, encounter);
                 DataType cd_ = cc_?.Performed;
                 object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                bool cf_ = ce_ is CqlQuantity;
+                bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                 if (cf_)
                 {
                     Procedure cg_ = this.firstAnesthesiaDuringHospitalization(context, encounter);
                     DataType ch_ = cg_?.Performed;
                     object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                    g_ = ci_ as CqlQuantity;
+                    g_ = ci_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2355,26 +2355,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             Procedure cx_ = this.firstAnesthesiaDuringHospitalization(context, encounter);
             DataType cy_ = cx_?.Performed;
             object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-            bool da_ = cz_ is CqlInterval<CqlDateTime>;
+            bool da_ = cz_ is CqlQuantity;
             if (da_)
             {
                 Procedure db_ = this.firstAnesthesiaDuringHospitalization(context, encounter);
                 DataType dc_ = db_?.Performed;
                 object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                n_ = dd_ as CqlInterval<CqlDateTime>;
+                n_ = dd_ as CqlQuantity;
             }
             else
             {
                 Procedure de_ = this.firstAnesthesiaDuringHospitalization(context, encounter);
                 DataType df_ = de_?.Performed;
                 object dg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, df_);
-                bool dh_ = dg_ is CqlQuantity;
+                bool dh_ = dg_ is CqlInterval<CqlDateTime>;
                 if (dh_)
                 {
                     Procedure di_ = this.firstAnesthesiaDuringHospitalization(context, encounter);
                     DataType dj_ = di_?.Performed;
                     object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                    n_ = dk_ as CqlQuantity;
+                    n_ = dk_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -2428,23 +2428,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = ProcedureList?.Performed;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlQuantity;
                 if (z_)
                 {
                     DataType aa_ = ProcedureList?.Performed;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    k_ = ab_ as CqlInterval<CqlDateTime>;
+                    k_ = ab_ as CqlQuantity;
                 }
                 else
                 {
                     DataType ac_ = ProcedureList?.Performed;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlQuantity;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = ProcedureList?.Performed;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        k_ = ag_ as CqlQuantity;
+                        k_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2480,23 +2480,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType ar_ = @event?.Performed;
                 object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                bool at_ = as_ is CqlInterval<CqlDateTime>;
+                bool at_ = as_ is CqlQuantity;
                 if (at_)
                 {
                     DataType au_ = @event?.Performed;
                     object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                    n_ = av_ as CqlInterval<CqlDateTime>;
+                    n_ = av_ as CqlQuantity;
                 }
                 else
                 {
                     DataType aw_ = @event?.Performed;
                     object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                    bool ay_ = ax_ is CqlQuantity;
+                    bool ay_ = ax_ is CqlInterval<CqlDateTime>;
                     if (ay_)
                     {
                         DataType az_ = @event?.Performed;
                         object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                        n_ = ba_ as CqlQuantity;
+                        n_ = ba_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2540,23 +2540,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType bo_ = @this?.Performed;
                 object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
-                bool bq_ = bp_ is CqlInterval<CqlDateTime>;
+                bool bq_ = bp_ is CqlQuantity;
                 if (bq_)
                 {
                     DataType br_ = @this?.Performed;
                     object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
-                    bg_ = bs_ as CqlInterval<CqlDateTime>;
+                    bg_ = bs_ as CqlQuantity;
                 }
                 else
                 {
                     DataType bt_ = @this?.Performed;
                     object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                    bool bv_ = bu_ is CqlQuantity;
+                    bool bv_ = bu_ is CqlInterval<CqlDateTime>;
                     if (bv_)
                     {
                         DataType bw_ = @this?.Performed;
                         object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                        bg_ = bx_ as CqlQuantity;
+                        bg_ = bx_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2688,23 +2688,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType af_ = tuple_fccbecjtombnskgdhjbefdudj?.ProceduralIntubation?.Performed;
                 object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                bool ah_ = ag_ is CqlInterval<CqlDateTime>;
+                bool ah_ = ag_ is CqlQuantity;
                 if (ah_)
                 {
                     DataType ai_ = tuple_fccbecjtombnskgdhjbefdudj?.ProceduralIntubation?.Performed;
                     object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                    t_ = aj_ as CqlInterval<CqlDateTime>;
+                    t_ = aj_ as CqlQuantity;
                 }
                 else
                 {
                     DataType ak_ = tuple_fccbecjtombnskgdhjbefdudj?.ProceduralIntubation?.Performed;
                     object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                    bool am_ = al_ is CqlQuantity;
+                    bool am_ = al_ is CqlInterval<CqlDateTime>;
                     if (am_)
                     {
                         DataType an_ = tuple_fccbecjtombnskgdhjbefdudj?.ProceduralIntubation?.Performed;
                         object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        t_ = ao_ as CqlQuantity;
+                        t_ = ao_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2740,23 +2740,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType az_ = tuple_fccbecjtombnskgdhjbefdudj?.Anesthesia?.Performed;
                 object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                bool bb_ = ba_ is CqlInterval<CqlDateTime>;
+                bool bb_ = ba_ is CqlQuantity;
                 if (bb_)
                 {
                     DataType bc_ = tuple_fccbecjtombnskgdhjbefdudj?.Anesthesia?.Performed;
                     object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
-                    w_ = bd_ as CqlInterval<CqlDateTime>;
+                    w_ = bd_ as CqlQuantity;
                 }
                 else
                 {
                     DataType be_ = tuple_fccbecjtombnskgdhjbefdudj?.Anesthesia?.Performed;
                     object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                    bool bg_ = bf_ is CqlQuantity;
+                    bool bg_ = bf_ is CqlInterval<CqlDateTime>;
                     if (bg_)
                     {
                         DataType bh_ = tuple_fccbecjtombnskgdhjbefdudj?.Anesthesia?.Performed;
                         object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                        w_ = bi_ as CqlQuantity;
+                        w_ = bi_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2827,23 +2827,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 {
                     DataType ar_ = EndotrachealTubeIn?.Performed;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlInterval<CqlDateTime>;
+                    bool at_ = as_ is CqlQuantity;
                     if (at_)
                     {
                         DataType au_ = EndotrachealTubeIn?.Performed;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        q_ = av_ as CqlInterval<CqlDateTime>;
+                        q_ = av_ as CqlQuantity;
                     }
                     else
                     {
                         DataType aw_ = EndotrachealTubeIn?.Performed;
                         object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                        bool ay_ = ax_ is CqlQuantity;
+                        bool ay_ = ax_ is CqlInterval<CqlDateTime>;
                         if (ay_)
                         {
                             DataType az_ = EndotrachealTubeIn?.Performed;
                             object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                            q_ = ba_ as CqlQuantity;
+                            q_ = ba_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -2882,26 +2882,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure bn_ = this.latestGeneralAnesthesiaOrMAC(context, EndotrachealTubeIn);
                     DataType bo_ = bn_?.Performed;
                     object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
-                    bool bq_ = bp_ is CqlInterval<CqlDateTime>;
+                    bool bq_ = bp_ is CqlQuantity;
                     if (bq_)
                     {
                         Procedure br_ = this.latestGeneralAnesthesiaOrMAC(context, EndotrachealTubeIn);
                         DataType bs_ = br_?.Performed;
                         object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                        t_ = bt_ as CqlInterval<CqlDateTime>;
+                        t_ = bt_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure bu_ = this.latestGeneralAnesthesiaOrMAC(context, EndotrachealTubeIn);
                         DataType bv_ = bu_?.Performed;
                         object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                        bool bx_ = bw_ is CqlQuantity;
+                        bool bx_ = bw_ is CqlInterval<CqlDateTime>;
                         if (bx_)
                         {
                             Procedure by_ = this.latestGeneralAnesthesiaOrMAC(context, EndotrachealTubeIn);
                             DataType bz_ = by_?.Performed;
                             object ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
-                            t_ = ca_ as CqlQuantity;
+                            t_ = ca_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -2941,23 +2941,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 {
                     DataType cn_ = EndotrachealTubeIn?.Performed;
                     object co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-                    bool cp_ = co_ is CqlInterval<CqlDateTime>;
+                    bool cp_ = co_ is CqlQuantity;
                     if (cp_)
                     {
                         DataType cq_ = EndotrachealTubeIn?.Performed;
                         object cr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cq_);
-                        y_ = cr_ as CqlInterval<CqlDateTime>;
+                        y_ = cr_ as CqlQuantity;
                     }
                     else
                     {
                         DataType cs_ = EndotrachealTubeIn?.Performed;
                         object ct_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
-                        bool cu_ = ct_ is CqlQuantity;
+                        bool cu_ = ct_ is CqlInterval<CqlDateTime>;
                         if (cu_)
                         {
                             DataType cv_ = EndotrachealTubeIn?.Performed;
                             object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
-                            y_ = cw_ as CqlQuantity;
+                            y_ = cw_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -3079,23 +3079,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType h_ = (choice as Procedure)?.Performed;
                 object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-                bool j_ = i_ is CqlInterval<CqlDateTime>;
+                bool j_ = i_ is CqlQuantity;
                 if (j_)
                 {
                     DataType k_ = (choice as Procedure)?.Performed;
                     object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
-                    a_ = l_ as CqlInterval<CqlDateTime>;
+                    a_ = l_ as CqlQuantity;
                 }
                 else
                 {
                     DataType m_ = (choice as Procedure)?.Performed;
                     object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                    bool o_ = n_ is CqlQuantity;
+                    bool o_ = n_ is CqlInterval<CqlDateTime>;
                     if (o_)
                     {
                         DataType p_ = (choice as Procedure)?.Performed;
                         object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
-                        a_ = q_ as CqlQuantity;
+                        a_ = q_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3183,23 +3183,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType ax_ = tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation?.Performed;
                 object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
-                bool az_ = ay_ is CqlInterval<CqlDateTime>;
+                bool az_ = ay_ is CqlQuantity;
                 if (az_)
                 {
                     DataType ba_ = tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation?.Performed;
                     object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                    v_ = bb_ as CqlInterval<CqlDateTime>;
+                    v_ = bb_ as CqlQuantity;
                 }
                 else
                 {
                     DataType bc_ = tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation?.Performed;
                     object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
-                    bool be_ = bd_ is CqlQuantity;
+                    bool be_ = bd_ is CqlInterval<CqlDateTime>;
                     if (be_)
                     {
                         DataType bf_ = tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation?.Performed;
                         object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
-                        v_ = bg_ as CqlQuantity;
+                        v_ = bg_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3238,26 +3238,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 Procedure bt_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation);
                 DataType bu_ = bt_?.Performed;
                 object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                bool bw_ = bv_ is CqlInterval<CqlDateTime>;
+                bool bw_ = bv_ is CqlQuantity;
                 if (bw_)
                 {
                     Procedure bx_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation);
                     DataType by_ = bx_?.Performed;
                     object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                    y_ = bz_ as CqlInterval<CqlDateTime>;
+                    y_ = bz_ as CqlQuantity;
                 }
                 else
                 {
                     Procedure ca_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation);
                     DataType cb_ = ca_?.Performed;
                     object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                    bool cd_ = cc_ is CqlQuantity;
+                    bool cd_ = cc_ is CqlInterval<CqlDateTime>;
                     if (cd_)
                     {
                         Procedure ce_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation);
                         DataType cf_ = ce_?.Performed;
                         object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                        y_ = cg_ as CqlQuantity;
+                        y_ = cg_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3302,26 +3302,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 Procedure cv_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation);
                 DataType cw_ = cv_?.Performed;
                 object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
-                bool cy_ = cx_ is CqlInterval<CqlDateTime>;
+                bool cy_ = cx_ is CqlQuantity;
                 if (cy_)
                 {
                     Procedure cz_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation);
                     DataType da_ = cz_?.Performed;
                     object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-                    af_ = db_ as CqlInterval<CqlDateTime>;
+                    af_ = db_ as CqlQuantity;
                 }
                 else
                 {
                     Procedure dc_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation);
                     DataType dd_ = dc_?.Performed;
                     object de_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dd_);
-                    bool df_ = de_ is CqlQuantity;
+                    bool df_ = de_ is CqlInterval<CqlDateTime>;
                     if (df_)
                     {
                         Procedure dg_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation);
                         DataType dh_ = dg_?.Performed;
                         object di_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dh_);
-                        af_ = di_ as CqlQuantity;
+                        af_ = di_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3359,23 +3359,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType dv_ = tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation?.Performed;
                 object dw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dv_);
-                bool dx_ = dw_ is CqlInterval<CqlDateTime>;
+                bool dx_ = dw_ is CqlQuantity;
                 if (dx_)
                 {
                     DataType dy_ = tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation?.Performed;
                     object dz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dy_);
-                    ai_ = dz_ as CqlInterval<CqlDateTime>;
+                    ai_ = dz_ as CqlQuantity;
                 }
                 else
                 {
                     DataType ea_ = tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation?.Performed;
                     object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-                    bool ec_ = eb_ is CqlQuantity;
+                    bool ec_ = eb_ is CqlInterval<CqlDateTime>;
                     if (ec_)
                     {
                         DataType ed_ = tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation?.Performed;
                         object ee_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ed_);
-                        ai_ = ee_ as CqlQuantity;
+                        ai_ = ee_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3414,23 +3414,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType ep_ = tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation?.Performed;
                 object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
-                bool er_ = eq_ is CqlInterval<CqlDateTime>;
+                bool er_ = eq_ is CqlQuantity;
                 if (er_)
                 {
                     DataType es_ = tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation?.Performed;
                     object et_ = FHIRHelpers_4_4_000.Instance.ToValue(context, es_);
-                    ao_ = et_ as CqlInterval<CqlDateTime>;
+                    ao_ = et_ as CqlQuantity;
                 }
                 else
                 {
                     DataType eu_ = tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation?.Performed;
                     object ev_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eu_);
-                    bool ew_ = ev_ is CqlQuantity;
+                    bool ew_ = ev_ is CqlInterval<CqlDateTime>;
                     if (ew_)
                     {
                         DataType ex_ = tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation?.Performed;
                         object ey_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ex_);
-                        ao_ = ey_ as CqlQuantity;
+                        ao_ = ey_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3484,23 +3484,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType j_ = (choice as Procedure)?.Performed;
                 object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
-                bool l_ = k_ is CqlInterval<CqlDateTime>;
+                bool l_ = k_ is CqlQuantity;
                 if (l_)
                 {
                     DataType m_ = (choice as Procedure)?.Performed;
                     object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                    b_ = n_ as CqlInterval<CqlDateTime>;
+                    b_ = n_ as CqlQuantity;
                 }
                 else
                 {
                     DataType o_ = (choice as Procedure)?.Performed;
                     object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                    bool q_ = p_ is CqlQuantity;
+                    bool q_ = p_ is CqlInterval<CqlDateTime>;
                     if (q_)
                     {
                         DataType r_ = (choice as Procedure)?.Performed;
                         object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                        b_ = s_ as CqlQuantity;
+                        b_ = s_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3584,23 +3584,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType as_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                 object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
-                bool au_ = at_ is CqlInterval<CqlDateTime>;
+                bool au_ = at_ is CqlQuantity;
                 if (au_)
                 {
                     DataType av_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                     object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                    ak_ = aw_ as CqlInterval<CqlDateTime>;
+                    ak_ = aw_ as CqlQuantity;
                 }
                 else
                 {
                     DataType ax_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                     object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
-                    bool az_ = ay_ is CqlQuantity;
+                    bool az_ = ay_ is CqlInterval<CqlDateTime>;
                     if (az_)
                     {
                         DataType ba_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                         object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                        ak_ = bb_ as CqlQuantity;
+                        ak_ = bb_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3642,23 +3642,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 {
                     DataType bt_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                     object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                    bool bv_ = bu_ is CqlInterval<CqlDateTime>;
+                    bool bv_ = bu_ is CqlQuantity;
                     if (bv_)
                     {
                         DataType bw_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                         object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                        bh_ = bx_ as CqlInterval<CqlDateTime>;
+                        bh_ = bx_ as CqlQuantity;
                     }
                     else
                     {
                         DataType by_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                         object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                        bool ca_ = bz_ is CqlQuantity;
+                        bool ca_ = bz_ is CqlInterval<CqlDateTime>;
                         if (ca_)
                         {
                             DataType cb_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                             object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                            bh_ = cc_ as CqlQuantity;
+                            bh_ = cc_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -3694,23 +3694,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 {
                     DataType cn_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                     object co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-                    bool cp_ = co_ is CqlInterval<CqlDateTime>;
+                    bool cp_ = co_ is CqlQuantity;
                     if (cp_)
                     {
                         DataType cq_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                         object cr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cq_);
-                        bk_ = cr_ as CqlInterval<CqlDateTime>;
+                        bk_ = cr_ as CqlQuantity;
                     }
                     else
                     {
                         DataType cs_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                         object ct_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
-                        bool cu_ = ct_ is CqlQuantity;
+                        bool cu_ = ct_ is CqlInterval<CqlDateTime>;
                         if (cu_)
                         {
                             DataType cv_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                             object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
-                            bk_ = cw_ as CqlQuantity;
+                            bk_ = cw_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -3752,26 +3752,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 Procedure dj_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_bmexejitjfqtagoadebdecoag?.Extubation);
                 DataType dk_ = dj_?.Performed;
                 object dl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dk_);
-                bool dm_ = dl_ is CqlInterval<CqlDateTime>;
+                bool dm_ = dl_ is CqlQuantity;
                 if (dm_)
                 {
                     Procedure dn_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_bmexejitjfqtagoadebdecoag?.Extubation);
                     DataType do_ = dn_?.Performed;
                     object dp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, do_);
-                    v_ = dp_ as CqlInterval<CqlDateTime>;
+                    v_ = dp_ as CqlQuantity;
                 }
                 else
                 {
                     Procedure dq_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_bmexejitjfqtagoadebdecoag?.Extubation);
                     DataType dr_ = dq_?.Performed;
                     object ds_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dr_);
-                    bool dt_ = ds_ is CqlQuantity;
+                    bool dt_ = ds_ is CqlInterval<CqlDateTime>;
                     if (dt_)
                     {
                         Procedure du_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_bmexejitjfqtagoadebdecoag?.Extubation);
                         DataType dv_ = du_?.Performed;
                         object dw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dv_);
-                        v_ = dw_ as CqlQuantity;
+                        v_ = dw_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3815,26 +3815,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 Procedure el_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_bmexejitjfqtagoadebdecoag?.Extubation);
                 DataType em_ = el_?.Performed;
                 object en_ = FHIRHelpers_4_4_000.Instance.ToValue(context, em_);
-                bool eo_ = en_ is CqlInterval<CqlDateTime>;
+                bool eo_ = en_ is CqlQuantity;
                 if (eo_)
                 {
                     Procedure ep_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_bmexejitjfqtagoadebdecoag?.Extubation);
                     DataType eq_ = ep_?.Performed;
                     object er_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eq_);
-                    ab_ = er_ as CqlInterval<CqlDateTime>;
+                    ab_ = er_ as CqlQuantity;
                 }
                 else
                 {
                     Procedure es_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_bmexejitjfqtagoadebdecoag?.Extubation);
                     DataType et_ = es_?.Performed;
                     object eu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, et_);
-                    bool ev_ = eu_ is CqlQuantity;
+                    bool ev_ = eu_ is CqlInterval<CqlDateTime>;
                     if (ev_)
                     {
                         Procedure ew_ = this.latestGeneralAnesthesiaOrMAC(context, tuple_bmexejitjfqtagoadebdecoag?.Extubation);
                         DataType ex_ = ew_?.Performed;
                         object ey_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ex_);
-                        ab_ = ey_ as CqlQuantity;
+                        ab_ = ey_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3872,23 +3872,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType fl_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                 object fm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fl_);
-                bool fn_ = fm_ is CqlInterval<CqlDateTime>;
+                bool fn_ = fm_ is CqlQuantity;
                 if (fn_)
                 {
                     DataType fo_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                     object fp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fo_);
-                    ae_ = fp_ as CqlInterval<CqlDateTime>;
+                    ae_ = fp_ as CqlQuantity;
                 }
                 else
                 {
                     DataType fq_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                     object fr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fq_);
-                    bool fs_ = fr_ is CqlQuantity;
+                    bool fs_ = fr_ is CqlInterval<CqlDateTime>;
                     if (fs_)
                     {
                         DataType ft_ = tuple_bmexejitjfqtagoadebdecoag?.Extubation?.Performed;
                         object fu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ft_);
-                        ae_ = fu_ as CqlQuantity;
+                        ae_ = fu_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3967,23 +3967,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType ag_ = tuple_ekminbgfrptfmgtchtshrgjuc?.Extubation?.Performed;
                 object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                bool ai_ = ah_ is CqlInterval<CqlDateTime>;
+                bool ai_ = ah_ is CqlQuantity;
                 if (ai_)
                 {
                     DataType aj_ = tuple_ekminbgfrptfmgtchtshrgjuc?.Extubation?.Performed;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    u_ = ak_ as CqlInterval<CqlDateTime>;
+                    u_ = ak_ as CqlQuantity;
                 }
                 else
                 {
                     DataType al_ = tuple_ekminbgfrptfmgtchtshrgjuc?.Extubation?.Performed;
                     object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                    bool an_ = am_ is CqlQuantity;
+                    bool an_ = am_ is CqlInterval<CqlDateTime>;
                     if (an_)
                     {
                         DataType ao_ = tuple_ekminbgfrptfmgtchtshrgjuc?.Extubation?.Performed;
                         object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        u_ = ap_ as CqlQuantity;
+                        u_ = ap_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -4019,23 +4019,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType ba_ = tuple_ekminbgfrptfmgtchtshrgjuc?.Anesthesia?.Performed;
                 object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                bool bc_ = bb_ is CqlInterval<CqlDateTime>;
+                bool bc_ = bb_ is CqlQuantity;
                 if (bc_)
                 {
                     DataType bd_ = tuple_ekminbgfrptfmgtchtshrgjuc?.Anesthesia?.Performed;
                     object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                    x_ = be_ as CqlInterval<CqlDateTime>;
+                    x_ = be_ as CqlQuantity;
                 }
                 else
                 {
                     DataType bf_ = tuple_ekminbgfrptfmgtchtshrgjuc?.Anesthesia?.Performed;
                     object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
-                    bool bh_ = bg_ is CqlQuantity;
+                    bool bh_ = bg_ is CqlInterval<CqlDateTime>;
                     if (bh_)
                     {
                         DataType bi_ = tuple_ekminbgfrptfmgtchtshrgjuc?.Anesthesia?.Performed;
                         object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
-                        x_ = bj_ as CqlQuantity;
+                        x_ = bj_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -4144,23 +4144,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 {
                     DataType ba_ = Extubation?.Performed;
                     object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                    bool bc_ = bb_ is CqlInterval<CqlDateTime>;
+                    bool bc_ = bb_ is CqlQuantity;
                     if (bc_)
                     {
                         DataType bd_ = Extubation?.Performed;
                         object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                        r_ = be_ as CqlInterval<CqlDateTime>;
+                        r_ = be_ as CqlQuantity;
                     }
                     else
                     {
                         DataType bf_ = Extubation?.Performed;
                         object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
-                        bool bh_ = bg_ is CqlQuantity;
+                        bool bh_ = bg_ is CqlInterval<CqlDateTime>;
                         if (bh_)
                         {
                             DataType bi_ = Extubation?.Performed;
                             object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
-                            r_ = bj_ as CqlQuantity;
+                            r_ = bj_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -4199,26 +4199,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure bw_ = this.latestGeneralAnesthesiaOrMAC(context, Extubation);
                     DataType bx_ = bw_?.Performed;
                     object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    bool bz_ = by_ is CqlInterval<CqlDateTime>;
+                    bool bz_ = by_ is CqlQuantity;
                     if (bz_)
                     {
                         Procedure ca_ = this.latestGeneralAnesthesiaOrMAC(context, Extubation);
                         DataType cb_ = ca_?.Performed;
                         object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                        u_ = cc_ as CqlInterval<CqlDateTime>;
+                        u_ = cc_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure cd_ = this.latestGeneralAnesthesiaOrMAC(context, Extubation);
                         DataType ce_ = cd_?.Performed;
                         object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                        bool cg_ = cf_ is CqlQuantity;
+                        bool cg_ = cf_ is CqlInterval<CqlDateTime>;
                         if (cg_)
                         {
                             Procedure ch_ = this.latestGeneralAnesthesiaOrMAC(context, Extubation);
                             DataType ci_ = ch_?.Performed;
                             object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                            u_ = cj_ as CqlQuantity;
+                            u_ = cj_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -4342,23 +4342,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 {
                     DataType bk_ = Ventilation?.Performed;
                     object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                    bool bm_ = bl_ is CqlInterval<CqlDateTime>;
+                    bool bm_ = bl_ is CqlQuantity;
                     if (bm_)
                     {
                         DataType bn_ = Ventilation?.Performed;
                         object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                        m_ = bo_ as CqlInterval<CqlDateTime>;
+                        m_ = bo_ as CqlQuantity;
                     }
                     else
                     {
                         DataType bp_ = Ventilation?.Performed;
                         object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
-                        bool br_ = bq_ is CqlQuantity;
+                        bool br_ = bq_ is CqlInterval<CqlDateTime>;
                         if (br_)
                         {
                             DataType bs_ = Ventilation?.Performed;
                             object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                            m_ = bt_ as CqlQuantity;
+                            m_ = bt_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -4397,26 +4397,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure cg_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                     DataType ch_ = cg_?.Performed;
                     object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                    bool cj_ = ci_ is CqlInterval<CqlDateTime>;
+                    bool cj_ = ci_ is CqlQuantity;
                     if (cj_)
                     {
                         Procedure ck_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                         DataType cl_ = ck_?.Performed;
                         object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                        p_ = cm_ as CqlInterval<CqlDateTime>;
+                        p_ = cm_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure cn_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                         DataType co_ = cn_?.Performed;
                         object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
-                        bool cq_ = cp_ is CqlQuantity;
+                        bool cq_ = cp_ is CqlInterval<CqlDateTime>;
                         if (cq_)
                         {
                             Procedure cr_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                             DataType cs_ = cr_?.Performed;
                             object ct_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
-                            p_ = ct_ as CqlQuantity;
+                            p_ = ct_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -4458,23 +4458,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 {
                     DataType dg_ = Ventilation?.Performed;
                     object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                    bool di_ = dh_ is CqlInterval<CqlDateTime>;
+                    bool di_ = dh_ is CqlQuantity;
                     if (di_)
                     {
                         DataType dj_ = Ventilation?.Performed;
                         object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                        w_ = dk_ as CqlInterval<CqlDateTime>;
+                        w_ = dk_ as CqlQuantity;
                     }
                     else
                     {
                         DataType dl_ = Ventilation?.Performed;
                         object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
-                        bool dn_ = dm_ is CqlQuantity;
+                        bool dn_ = dm_ is CqlInterval<CqlDateTime>;
                         if (dn_)
                         {
                             DataType do_ = Ventilation?.Performed;
                             object dp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, do_);
-                            w_ = dp_ as CqlQuantity;
+                            w_ = dp_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -4513,26 +4513,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure ec_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                     DataType ed_ = ec_?.Performed;
                     object ee_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ed_);
-                    bool ef_ = ee_ is CqlInterval<CqlDateTime>;
+                    bool ef_ = ee_ is CqlQuantity;
                     if (ef_)
                     {
                         Procedure eg_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                         DataType eh_ = eg_?.Performed;
                         object ei_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eh_);
-                        z_ = ei_ as CqlInterval<CqlDateTime>;
+                        z_ = ei_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure ej_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                         DataType ek_ = ej_?.Performed;
                         object el_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ek_);
-                        bool em_ = el_ is CqlQuantity;
+                        bool em_ = el_ is CqlInterval<CqlDateTime>;
                         if (em_)
                         {
                             Procedure en_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                             DataType eo_ = en_?.Performed;
                             object ep_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eo_);
-                            z_ = ep_ as CqlQuantity;
+                            z_ = ep_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -4573,26 +4573,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure fe_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                     DataType ff_ = fe_?.Performed;
                     object fg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ff_);
-                    bool fh_ = fg_ is CqlInterval<CqlDateTime>;
+                    bool fh_ = fg_ is CqlQuantity;
                     if (fh_)
                     {
                         Procedure fi_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                         DataType fj_ = fi_?.Performed;
                         object fk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fj_);
-                        ac_ = fk_ as CqlInterval<CqlDateTime>;
+                        ac_ = fk_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure fl_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                         DataType fm_ = fl_?.Performed;
                         object fn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fm_);
-                        bool fo_ = fn_ is CqlQuantity;
+                        bool fo_ = fn_ is CqlInterval<CqlDateTime>;
                         if (fo_)
                         {
                             Procedure fp_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                             DataType fq_ = fp_?.Performed;
                             object fr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fq_);
-                            ac_ = fr_ as CqlQuantity;
+                            ac_ = fr_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -4637,26 +4637,26 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     Procedure gg_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                     DataType gh_ = gg_?.Performed;
                     object gi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gh_);
-                    bool gj_ = gi_ is CqlInterval<CqlDateTime>;
+                    bool gj_ = gi_ is CqlQuantity;
                     if (gj_)
                     {
                         Procedure gk_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                         DataType gl_ = gk_?.Performed;
                         object gm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gl_);
-                        aj_ = gm_ as CqlInterval<CqlDateTime>;
+                        aj_ = gm_ as CqlQuantity;
                     }
                     else
                     {
                         Procedure gn_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                         DataType go_ = gn_?.Performed;
                         object gp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, go_);
-                        bool gq_ = gp_ is CqlQuantity;
+                        bool gq_ = gp_ is CqlInterval<CqlDateTime>;
                         if (gq_)
                         {
                             Procedure gr_ = this.latestGeneralAnesthesiaOrMAC(context, Ventilation);
                             DataType gs_ = gr_?.Performed;
                             object gt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gs_);
-                            aj_ = gt_ as CqlQuantity;
+                            aj_ = gt_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -5176,23 +5176,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType ag_ = tuple_bbumigfyezrerewminccecat?.TheProcedure?.Performed;
                 object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                bool ai_ = ah_ is CqlInterval<CqlDateTime>;
+                bool ai_ = ah_ is CqlQuantity;
                 if (ai_)
                 {
                     DataType aj_ = tuple_bbumigfyezrerewminccecat?.TheProcedure?.Performed;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    y_ = ak_ as CqlInterval<CqlDateTime>;
+                    y_ = ak_ as CqlQuantity;
                 }
                 else
                 {
                     DataType al_ = tuple_bbumigfyezrerewminccecat?.TheProcedure?.Performed;
                     object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                    bool an_ = am_ is CqlQuantity;
+                    bool an_ = am_ is CqlInterval<CqlDateTime>;
                     if (an_)
                     {
                         DataType ao_ = tuple_bbumigfyezrerewminccecat?.TheProcedure?.Performed;
                         object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        y_ = ap_ as CqlQuantity;
+                        y_ = ap_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -5261,23 +5261,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -5349,23 +5349,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         {
             DataType n_ = observation?.Effective;
             object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-            bool p_ = o_ is CqlInterval<CqlDateTime>;
+            bool p_ = o_ is CqlDateTime;
             if (p_)
             {
                 DataType q_ = observation?.Effective;
                 object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                a_ = r_ as CqlInterval<CqlDateTime>;
+                a_ = r_ as CqlDateTime;
             }
             else
             {
                 DataType s_ = observation?.Effective;
                 object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                bool u_ = t_ is CqlDateTime;
+                bool u_ = t_ is CqlInterval<CqlDateTime>;
                 if (u_)
                 {
                     DataType v_ = observation?.Effective;
                     object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    a_ = w_ as CqlDateTime;
+                    a_ = w_ as CqlInterval<CqlDateTime>;
                 }
                 else
                 {
@@ -5446,23 +5446,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -5544,23 +5544,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -5642,23 +5642,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -5740,23 +5740,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -5838,23 +5838,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -6077,23 +6077,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -6175,23 +6175,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -6344,23 +6344,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -6442,23 +6442,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -6540,23 +6540,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -6638,23 +6638,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -6736,23 +6736,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -6905,23 +6905,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -7110,23 +7110,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType x_ = @this?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlInterval<CqlDateTime>;
+                bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
                     DataType aa_ = @this?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlInterval<CqlDateTime>;
+                    q_ = ab_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ac_ = @this?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
+                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
                         DataType af_ = @this?.Effective;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlDateTime;
+                        q_ = ag_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -7226,23 +7226,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             {
                 DataType aj_ = tuple_bbumigfyezrerewminccecat?.TheProcedure?.Performed;
                 object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                bool al_ = ak_ is CqlInterval<CqlDateTime>;
+                bool al_ = ak_ is CqlQuantity;
                 if (al_)
                 {
                     DataType am_ = tuple_bbumigfyezrerewminccecat?.TheProcedure?.Performed;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    ab_ = an_ as CqlInterval<CqlDateTime>;
+                    ab_ = an_ as CqlQuantity;
                 }
                 else
                 {
                     DataType ao_ = tuple_bbumigfyezrerewminccecat?.TheProcedure?.Performed;
                     object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    bool aq_ = ap_ is CqlQuantity;
+                    bool aq_ = ap_ is CqlInterval<CqlDateTime>;
                     if (aq_)
                     {
                         DataType ar_ = tuple_bbumigfyezrerewminccecat?.TheProcedure?.Performed;
                         object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                        ab_ = as_ as CqlQuantity;
+                        ab_ = as_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {

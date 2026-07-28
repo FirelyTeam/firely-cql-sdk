@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS165FHIRControllingHighBP", "1.0.000")]
 public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<CMS165FHIRControllingHighBP_1_0_000>
 {
@@ -261,23 +261,23 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             {
                 DataType t_ = ESRDProcedure?.Performed;
                 object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                bool v_ = u_ is CqlInterval<CqlDateTime>;
+                bool v_ = u_ is CqlQuantity;
                 if (v_)
                 {
                     DataType w_ = ESRDProcedure?.Performed;
                     object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                    i_ = x_ as CqlInterval<CqlDateTime>;
+                    i_ = x_ as CqlQuantity;
                 }
                 else
                 {
                     DataType y_ = ESRDProcedure?.Performed;
                     object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    bool aa_ = z_ is CqlQuantity;
+                    bool aa_ = z_ is CqlInterval<CqlDateTime>;
                     if (aa_)
                     {
                         DataType ab_ = ESRDProcedure?.Performed;
                         object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        i_ = ac_ as CqlQuantity;
+                        i_ = ac_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {

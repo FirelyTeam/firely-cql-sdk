@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS50FHIRReceiptofSpecialistReport", "1.0.000")]
 public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISingleton<CMS50FHIRReceiptofSpecialistReport_1_0_000>
 {
@@ -230,23 +230,23 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
             {
                 DataType am_ = ValidIntervention?.Performed;
                 object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                bool ao_ = an_ is CqlInterval<CqlDateTime>;
+                bool ao_ = an_ is CqlQuantity;
                 if (ao_)
                 {
                     DataType ap_ = ValidIntervention?.Performed;
                     object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                    ae_ = aq_ as CqlInterval<CqlDateTime>;
+                    ae_ = aq_ as CqlQuantity;
                 }
                 else
                 {
                     DataType ar_ = ValidIntervention?.Performed;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlQuantity;
+                    bool at_ = as_ is CqlInterval<CqlDateTime>;
                     if (at_)
                     {
                         DataType au_ = ValidIntervention?.Performed;
                         object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        ae_ = av_ as CqlQuantity;
+                        ae_ = av_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {

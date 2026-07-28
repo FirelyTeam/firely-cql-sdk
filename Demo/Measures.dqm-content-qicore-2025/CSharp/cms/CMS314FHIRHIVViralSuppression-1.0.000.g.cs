@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS314FHIRHIVViralSuppression", "1.0.000")]
 public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleton<CMS314FHIRHIVViralSuppression_1_0_000>
 {
@@ -316,23 +316,23 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
             {
                 DataType w_ = ViralLoad?.Effective;
                 object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                bool y_ = x_ is CqlInterval<CqlDateTime>;
+                bool y_ = x_ is CqlDateTime;
                 if (y_)
                 {
                     DataType z_ = ViralLoad?.Effective;
                     object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    m_ = aa_ as CqlInterval<CqlDateTime>;
+                    m_ = aa_ as CqlDateTime;
                 }
                 else
                 {
                     DataType ab_ = ViralLoad?.Effective;
                     object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    bool ad_ = ac_ is CqlDateTime;
+                    bool ad_ = ac_ is CqlInterval<CqlDateTime>;
                     if (ad_)
                     {
                         DataType ae_ = ViralLoad?.Effective;
                         object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        m_ = af_ as CqlDateTime;
+                        m_ = af_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -364,23 +364,23 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
             {
                 DataType an_ = @this?.Effective;
                 object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                bool ap_ = ao_ is CqlInterval<CqlDateTime>;
+                bool ap_ = ao_ is CqlDateTime;
                 if (ap_)
                 {
                     DataType aq_ = @this?.Effective;
                     object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                    ag_ = ar_ as CqlInterval<CqlDateTime>;
+                    ag_ = ar_ as CqlDateTime;
                 }
                 else
                 {
                     DataType as_ = @this?.Effective;
                     object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
-                    bool au_ = at_ is CqlDateTime;
+                    bool au_ = at_ is CqlInterval<CqlDateTime>;
                     if (au_)
                     {
                         DataType av_ = @this?.Effective;
                         object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                        ag_ = aw_ as CqlDateTime;
+                        ag_ = aw_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {

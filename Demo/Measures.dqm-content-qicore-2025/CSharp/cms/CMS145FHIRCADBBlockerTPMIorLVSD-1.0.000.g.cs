@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS145FHIRCADBBlockerTPMIorLVSD", "1.0.000")]
 public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingleton<CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000>
 {
@@ -376,23 +376,23 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 {
                     DataType z_ = CardiacSurgeryProcedure?.Performed;
                     object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    bool ab_ = aa_ is CqlInterval<CqlDateTime>;
+                    bool ab_ = aa_ is CqlQuantity;
                     if (ab_)
                     {
                         DataType ac_ = CardiacSurgeryProcedure?.Performed;
                         object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        i_ = ad_ as CqlInterval<CqlDateTime>;
+                        i_ = ad_ as CqlQuantity;
                     }
                     else
                     {
                         DataType ae_ = CardiacSurgeryProcedure?.Performed;
                         object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlQuantity;
+                        bool ag_ = af_ is CqlInterval<CqlDateTime>;
                         if (ag_)
                         {
                             DataType ah_ = CardiacSurgeryProcedure?.Performed;
                             object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                            i_ = ai_ as CqlQuantity;
+                            i_ = ai_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -636,23 +636,23 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 {
                     DataType aa_ = ImplantedCardiacPacer?.Performed;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    bool ac_ = ab_ is CqlInterval<CqlDateTime>;
+                    bool ac_ = ab_ is CqlQuantity;
                     if (ac_)
                     {
                         DataType ad_ = ImplantedCardiacPacer?.Performed;
                         object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                        j_ = ae_ as CqlInterval<CqlDateTime>;
+                        j_ = ae_ as CqlQuantity;
                     }
                     else
                     {
                         DataType af_ = ImplantedCardiacPacer?.Performed;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        bool ah_ = ag_ is CqlQuantity;
+                        bool ah_ = ag_ is CqlInterval<CqlDateTime>;
                         if (ah_)
                         {
                             DataType ai_ = ImplantedCardiacPacer?.Performed;
                             object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                            j_ = aj_ as CqlQuantity;
+                            j_ = aj_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1394,23 +1394,23 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 {
                     DataType v_ = ImplantedCardiacPacer?.Performed;
                     object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlInterval<CqlDateTime>;
+                    bool x_ = w_ is CqlQuantity;
                     if (x_)
                     {
                         DataType y_ = ImplantedCardiacPacer?.Performed;
                         object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        j_ = z_ as CqlInterval<CqlDateTime>;
+                        j_ = z_ as CqlQuantity;
                     }
                     else
                     {
                         DataType aa_ = ImplantedCardiacPacer?.Performed;
                         object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlQuantity;
+                        bool ac_ = ab_ is CqlInterval<CqlDateTime>;
                         if (ac_)
                         {
                             DataType ad_ = ImplantedCardiacPacer?.Performed;
                             object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            j_ = ae_ as CqlQuantity;
+                            j_ = ae_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {

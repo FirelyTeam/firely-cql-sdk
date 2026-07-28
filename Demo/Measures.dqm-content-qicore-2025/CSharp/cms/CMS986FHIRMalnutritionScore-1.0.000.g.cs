@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS986FHIRMalnutritionScore", "1.0.000")]
 public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<CMS986FHIRMalnutritionScore_1_0_000>
 {
@@ -318,23 +318,23 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             {
                 DataType aq_ = HospiceStatusPerformed?.Performed;
                 object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                bool as_ = ar_ is CqlInterval<CqlDateTime>;
+                bool as_ = ar_ is CqlQuantity;
                 if (as_)
                 {
                     DataType at_ = HospiceStatusPerformed?.Performed;
                     object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                    ai_ = au_ as CqlInterval<CqlDateTime>;
+                    ai_ = au_ as CqlQuantity;
                 }
                 else
                 {
                     DataType av_ = HospiceStatusPerformed?.Performed;
                     object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                    bool ax_ = aw_ is CqlQuantity;
+                    bool ax_ = aw_ is CqlInterval<CqlDateTime>;
                     if (ax_)
                     {
                         DataType ay_ = HospiceStatusPerformed?.Performed;
                         object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                        ai_ = az_ as CqlQuantity;
+                        ai_ = az_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -489,23 +489,23 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             {
                 DataType aq_ = DietitianReferralPerformed?.Performed;
                 object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                bool as_ = ar_ is CqlInterval<CqlDateTime>;
+                bool as_ = ar_ is CqlQuantity;
                 if (as_)
                 {
                     DataType at_ = DietitianReferralPerformed?.Performed;
                     object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                    ai_ = au_ as CqlInterval<CqlDateTime>;
+                    ai_ = au_ as CqlQuantity;
                 }
                 else
                 {
                     DataType av_ = DietitianReferralPerformed?.Performed;
                     object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                    bool ax_ = aw_ is CqlQuantity;
+                    bool ax_ = aw_ is CqlInterval<CqlDateTime>;
                     if (ax_)
                     {
                         DataType ay_ = DietitianReferralPerformed?.Performed;
                         object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                        ai_ = az_ as CqlQuantity;
+                        ai_ = az_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -768,23 +768,23 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             {
                 DataType ae_ = NutritionAssessment?.Effective;
                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                bool ag_ = af_ is CqlInterval<CqlDateTime>;
+                bool ag_ = af_ is CqlDateTime;
                 if (ag_)
                 {
                     DataType ah_ = NutritionAssessment?.Effective;
                     object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                    x_ = ai_ as CqlInterval<CqlDateTime>;
+                    x_ = ai_ as CqlDateTime;
                 }
                 else
                 {
                     DataType aj_ = NutritionAssessment?.Effective;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    bool al_ = ak_ is CqlDateTime;
+                    bool al_ = ak_ is CqlInterval<CqlDateTime>;
                     if (al_)
                     {
                         DataType am_ = NutritionAssessment?.Effective;
                         object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        x_ = an_ as CqlDateTime;
+                        x_ = an_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -858,23 +858,23 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType ao_ = NutritionAssessment?.Effective;
                     object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    bool aq_ = ap_ is CqlInterval<CqlDateTime>;
+                    bool aq_ = ap_ is CqlDateTime;
                     if (aq_)
                     {
                         DataType ar_ = NutritionAssessment?.Effective;
                         object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                        ae_ = as_ as CqlInterval<CqlDateTime>;
+                        ae_ = as_ as CqlDateTime;
                     }
                     else
                     {
                         DataType at_ = NutritionAssessment?.Effective;
                         object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        bool av_ = au_ is CqlDateTime;
+                        bool av_ = au_ is CqlInterval<CqlDateTime>;
                         if (av_)
                         {
                             DataType aw_ = NutritionAssessment?.Effective;
                             object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                            ae_ = ax_ as CqlDateTime;
+                            ae_ = ax_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -951,23 +951,23 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType al_ = NutritionAssessment?.Effective;
                     object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                    bool an_ = am_ is CqlInterval<CqlDateTime>;
+                    bool an_ = am_ is CqlDateTime;
                     if (an_)
                     {
                         DataType ao_ = NutritionAssessment?.Effective;
                         object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        ab_ = ap_ as CqlInterval<CqlDateTime>;
+                        ab_ = ap_ as CqlDateTime;
                     }
                     else
                     {
                         DataType aq_ = NutritionAssessment?.Effective;
                         object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                        bool as_ = ar_ is CqlDateTime;
+                        bool as_ = ar_ is CqlInterval<CqlDateTime>;
                         if (as_)
                         {
                             DataType at_ = NutritionAssessment?.Effective;
                             object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                            ab_ = au_ as CqlDateTime;
+                            ab_ = au_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1041,23 +1041,23 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 {
                     DataType ai_ = NutritionAssessment?.Effective;
                     object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                    bool ak_ = aj_ is CqlInterval<CqlDateTime>;
+                    bool ak_ = aj_ is CqlDateTime;
                     if (ak_)
                     {
                         DataType al_ = NutritionAssessment?.Effective;
                         object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        y_ = am_ as CqlInterval<CqlDateTime>;
+                        y_ = am_ as CqlDateTime;
                     }
                     else
                     {
                         DataType an_ = NutritionAssessment?.Effective;
                         object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        bool ap_ = ao_ is CqlDateTime;
+                        bool ap_ = ao_ is CqlInterval<CqlDateTime>;
                         if (ap_)
                         {
                             DataType aq_ = NutritionAssessment?.Effective;
                             object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                            y_ = ar_ as CqlDateTime;
+                            y_ = ar_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {

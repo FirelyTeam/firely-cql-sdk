@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS108FHIRVTEProphylaxis", "1.0.000")]
 public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS108FHIRVTEProphylaxis_1_0_000>
 {
@@ -542,23 +542,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 {
                     object aa_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    bool ac_ = ab_ is CqlInterval<CqlDateTime>;
+                    bool ac_ = ab_ is CqlQuantity;
                     if (ac_)
                     {
                         object ad_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                         object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                        h_ = ae_ as CqlInterval<CqlDateTime>;
+                        h_ = ae_ as CqlQuantity;
                     }
                     else
                     {
                         object af_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        bool ah_ = ag_ is CqlQuantity;
+                        bool ah_ = ag_ is CqlInterval<CqlDateTime>;
                         if (ah_)
                         {
                             object ai_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                             object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                            h_ = aj_ as CqlQuantity;
+                            h_ = aj_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -644,23 +644,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType bk_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                 object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                bool bm_ = bl_ is CqlInterval<CqlDateTime>;
+                bool bm_ = bl_ is CqlQuantity;
                 if (bm_)
                 {
                     DataType bn_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                     object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    r_ = bo_ as CqlInterval<CqlDateTime>;
+                    r_ = bo_ as CqlQuantity;
                 }
                 else
                 {
                     DataType bp_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                     object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
-                    bool br_ = bq_ is CqlQuantity;
+                    bool br_ = bq_ is CqlInterval<CqlDateTime>;
                     if (br_)
                     {
                         DataType bs_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                         object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                        r_ = bt_ as CqlQuantity;
+                        r_ = bt_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -703,23 +703,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 object ce_ = context.Operators.LateBoundProperty<object>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed");
                 object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                bool cg_ = cf_ is CqlInterval<CqlDateTime>;
+                bool cg_ = cf_ is CqlQuantity;
                 if (cg_)
                 {
                     object ch_ = context.Operators.LateBoundProperty<object>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed");
                     object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                    ab_ = ci_ as CqlInterval<CqlDateTime>;
+                    ab_ = ci_ as CqlQuantity;
                 }
                 else
                 {
                     object cj_ = context.Operators.LateBoundProperty<object>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed");
                     object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                    bool cl_ = ck_ is CqlQuantity;
+                    bool cl_ = ck_ is CqlInterval<CqlDateTime>;
                     if (cl_)
                     {
                         object cm_ = context.Operators.LateBoundProperty<object>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed");
                         object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
-                        ab_ = cn_ as CqlQuantity;
+                        ab_ = cn_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -757,23 +757,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType cy_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                 object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-                bool da_ = cz_ is CqlInterval<CqlDateTime>;
+                bool da_ = cz_ is CqlQuantity;
                 if (da_)
                 {
                     DataType db_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                     object dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
-                    ag_ = dc_ as CqlInterval<CqlDateTime>;
+                    ag_ = dc_ as CqlQuantity;
                 }
                 else
                 {
                     DataType dd_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                     object de_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dd_);
-                    bool df_ = de_ is CqlQuantity;
+                    bool df_ = de_ is CqlInterval<CqlDateTime>;
                     if (df_)
                     {
                         DataType dg_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                         object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                        ag_ = dh_ as CqlQuantity;
+                        ag_ = dh_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -812,23 +812,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType ds_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                 object dt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ds_);
-                bool du_ = dt_ is CqlInterval<CqlDateTime>;
+                bool du_ = dt_ is CqlQuantity;
                 if (du_)
                 {
                     DataType dv_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                     object dw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dv_);
-                    am_ = dw_ as CqlInterval<CqlDateTime>;
+                    am_ = dw_ as CqlQuantity;
                 }
                 else
                 {
                     DataType dx_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                     object dy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dx_);
-                    bool dz_ = dy_ is CqlQuantity;
+                    bool dz_ = dy_ is CqlInterval<CqlDateTime>;
                     if (dz_)
                     {
                         DataType ea_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                         object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-                        am_ = eb_ as CqlQuantity;
+                        am_ = eb_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -867,23 +867,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType em_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                 object en_ = FHIRHelpers_4_4_000.Instance.ToValue(context, em_);
-                bool eo_ = en_ is CqlInterval<CqlDateTime>;
+                bool eo_ = en_ is CqlQuantity;
                 if (eo_)
                 {
                     DataType ep_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                     object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
-                    as_ = eq_ as CqlInterval<CqlDateTime>;
+                    as_ = eq_ as CqlQuantity;
                 }
                 else
                 {
                     DataType er_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                     object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                    bool et_ = es_ is CqlQuantity;
+                    bool et_ = es_ is CqlInterval<CqlDateTime>;
                     if (et_)
                     {
                         DataType eu_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                         object ev_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eu_);
-                        as_ = ev_ as CqlQuantity;
+                        as_ = ev_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -921,23 +921,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType fg_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                 object fh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fg_);
-                bool fi_ = fh_ is CqlInterval<CqlDateTime>;
+                bool fi_ = fh_ is CqlQuantity;
                 if (fi_)
                 {
                     DataType fj_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                     object fk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fj_);
-                    ax_ = fk_ as CqlInterval<CqlDateTime>;
+                    ax_ = fk_ as CqlQuantity;
                 }
                 else
                 {
                     DataType fl_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                     object fm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fl_);
-                    bool fn_ = fm_ is CqlQuantity;
+                    bool fn_ = fm_ is CqlInterval<CqlDateTime>;
                     if (fn_)
                     {
                         DataType fo_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
                         object fp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fo_);
-                        ax_ = fp_ as CqlQuantity;
+                        ax_ = fp_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1006,11 +1006,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
 
     private IEnumerable<object> Pharmacological_or_Mechanical_VTE_Prophylaxis_Received_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.Low_Dose_Unfractionated_Heparin_for_VTE_Prophylaxis(context);
-        IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> a_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? d_(MedicationAdministration MR) {
+        bool? b_(MedicationAdministration MR) {
             IEnumerable<Medication> az_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ba_(Medication M) {
@@ -1032,8 +1030,10 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             return bc_;
         }
 
-        IEnumerable<MedicationAdministration> e_ = context.Operators.Where<MedicationAdministration>(c_, d_);
-        IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(b_, e_);
+        IEnumerable<MedicationAdministration> c_ = context.Operators.Where<MedicationAdministration>(a_, b_);
+        CqlValueSet d_ = this.Low_Dose_Unfractionated_Heparin_for_VTE_Prophylaxis(context);
+        IEnumerable<MedicationAdministration> e_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(c_, e_);
 
         bool? g_(MedicationAdministration VTEMedication) {
             Code<MedicationAdministration.MedicationAdministrationStatusCodes> bn_ = VTEMedication?.StatusElement;
@@ -1050,10 +1050,8 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
-        CqlValueSet i_ = this.Low_Molecular_Weight_Heparin_for_VTE_Prophylaxis(context);
-        IEnumerable<MedicationAdministration> j_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? k_(MedicationAdministration MR) {
+        bool? i_(MedicationAdministration MR) {
             IEnumerable<Medication> bx_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? by_(Medication M) {
@@ -1075,7 +1073,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             return ca_;
         }
 
-        IEnumerable<MedicationAdministration> l_ = context.Operators.Where<MedicationAdministration>(c_, k_);
+        IEnumerable<MedicationAdministration> j_ = context.Operators.Where<MedicationAdministration>(a_, i_);
+        CqlValueSet k_ = this.Low_Molecular_Weight_Heparin_for_VTE_Prophylaxis(context);
+        IEnumerable<MedicationAdministration> l_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> m_ = context.Operators.Union<MedicationAdministration>(j_, l_);
 
         bool? n_(MedicationAdministration LMWH) {
@@ -1088,10 +1088,8 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
 
         IEnumerable<MedicationAdministration> o_ = context.Operators.Where<MedicationAdministration>(m_, n_);
         IEnumerable<MedicationAdministration> p_ = context.Operators.Union<MedicationAdministration>(h_, o_);
-        CqlValueSet q_ = this.Injectable_Factor_Xa_Inhibitor_for_VTE_Prophylaxis(context);
-        IEnumerable<MedicationAdministration> r_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? s_(MedicationAdministration MR) {
+        bool? q_(MedicationAdministration MR) {
             IEnumerable<Medication> cp_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? cq_(Medication M) {
@@ -1113,7 +1111,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             return cs_;
         }
 
-        IEnumerable<MedicationAdministration> t_ = context.Operators.Where<MedicationAdministration>(c_, s_);
+        IEnumerable<MedicationAdministration> r_ = context.Operators.Where<MedicationAdministration>(a_, q_);
+        CqlValueSet s_ = this.Injectable_Factor_Xa_Inhibitor_for_VTE_Prophylaxis(context);
+        IEnumerable<MedicationAdministration> t_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> u_ = context.Operators.Union<MedicationAdministration>(r_, t_);
 
         bool? v_(MedicationAdministration FactorXa) {
@@ -1125,10 +1125,8 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
         }
 
         IEnumerable<MedicationAdministration> w_ = context.Operators.Where<MedicationAdministration>(u_, v_);
-        CqlValueSet x_ = this.Warfarin(context);
-        IEnumerable<MedicationAdministration> y_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? z_(MedicationAdministration MR) {
+        bool? x_(MedicationAdministration MR) {
             IEnumerable<Medication> dh_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? di_(Medication M) {
@@ -1150,7 +1148,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             return dk_;
         }
 
-        IEnumerable<MedicationAdministration> aa_ = context.Operators.Where<MedicationAdministration>(c_, z_);
+        IEnumerable<MedicationAdministration> y_ = context.Operators.Where<MedicationAdministration>(a_, x_);
+        CqlValueSet z_ = this.Warfarin(context);
+        IEnumerable<MedicationAdministration> aa_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> ab_ = context.Operators.Union<MedicationAdministration>(y_, aa_);
 
         bool? ac_(MedicationAdministration WarfarinAdm) {
@@ -1164,10 +1164,8 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
         IEnumerable<MedicationAdministration> ad_ = context.Operators.Where<MedicationAdministration>(ab_, ac_);
         IEnumerable<MedicationAdministration> ae_ = context.Operators.Union<MedicationAdministration>(w_, ad_);
         IEnumerable<MedicationAdministration> af_ = context.Operators.Union<MedicationAdministration>(p_, ae_);
-        CqlValueSet ag_ = this.Rivaroxaban_for_VTE_Prophylaxis(context);
-        IEnumerable<MedicationAdministration> ah_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? ai_(MedicationAdministration MR) {
+        bool? ag_(MedicationAdministration MR) {
             IEnumerable<Medication> dz_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ea_(Medication M) {
@@ -1189,7 +1187,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             return ec_;
         }
 
-        IEnumerable<MedicationAdministration> aj_ = context.Operators.Where<MedicationAdministration>(c_, ai_);
+        IEnumerable<MedicationAdministration> ah_ = context.Operators.Where<MedicationAdministration>(a_, ag_);
+        CqlValueSet ai_ = this.Rivaroxaban_for_VTE_Prophylaxis(context);
+        IEnumerable<MedicationAdministration> aj_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> ak_ = context.Operators.Union<MedicationAdministration>(ah_, aj_);
 
         bool? al_(MedicationAdministration Rivaroxaban) {
@@ -1262,23 +1262,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 object aq_ = context.Operators.LateBoundProperty<object>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed");
                 object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                bool as_ = ar_ is CqlInterval<CqlDateTime>;
+                bool as_ = ar_ is CqlQuantity;
                 if (as_)
                 {
                     object at_ = context.Operators.LateBoundProperty<object>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed");
                     object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                    z_ = au_ as CqlInterval<CqlDateTime>;
+                    z_ = au_ as CqlQuantity;
                 }
                 else
                 {
                     object av_ = context.Operators.LateBoundProperty<object>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed");
                     object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                    bool ax_ = aw_ is CqlQuantity;
+                    bool ax_ = aw_ is CqlInterval<CqlDateTime>;
                     if (ax_)
                     {
                         object ay_ = context.Operators.LateBoundProperty<object>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed");
                         object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                        z_ = az_ as CqlQuantity;
+                        z_ = az_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1346,23 +1346,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType de_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                 object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
-                bool dg_ = df_ is CqlInterval<CqlDateTime>;
+                bool dg_ = df_ is CqlQuantity;
                 if (dg_)
                 {
                     DataType dh_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                     object di_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dh_);
-                    bk_ = di_ as CqlInterval<CqlDateTime>;
+                    bk_ = di_ as CqlQuantity;
                 }
                 else
                 {
                     DataType dj_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                     object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                    bool dl_ = dk_ is CqlQuantity;
+                    bool dl_ = dk_ is CqlInterval<CqlDateTime>;
                     if (dl_)
                     {
                         DataType dm_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                         object dn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dm_);
-                        bk_ = dn_ as CqlQuantity;
+                        bk_ = dn_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1408,23 +1408,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 object dy_ = context.Operators.LateBoundProperty<object>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed");
                 object dz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dy_);
-                bool ea_ = dz_ is CqlInterval<CqlDateTime>;
+                bool ea_ = dz_ is CqlQuantity;
                 if (ea_)
                 {
                     object eb_ = context.Operators.LateBoundProperty<object>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed");
                     object ec_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eb_);
-                    bx_ = ec_ as CqlInterval<CqlDateTime>;
+                    bx_ = ec_ as CqlQuantity;
                 }
                 else
                 {
                     object ed_ = context.Operators.LateBoundProperty<object>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed");
                     object ee_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ed_);
-                    bool ef_ = ee_ is CqlQuantity;
+                    bool ef_ = ee_ is CqlInterval<CqlDateTime>;
                     if (ef_)
                     {
                         object eg_ = context.Operators.LateBoundProperty<object>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed");
                         object eh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eg_);
-                        bx_ = eh_ as CqlQuantity;
+                        bx_ = eh_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1460,23 +1460,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType es_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                 object et_ = FHIRHelpers_4_4_000.Instance.ToValue(context, es_);
-                bool eu_ = et_ is CqlInterval<CqlDateTime>;
+                bool eu_ = et_ is CqlQuantity;
                 if (eu_)
                 {
                     DataType ev_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                     object ew_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ev_);
-                    ca_ = ew_ as CqlInterval<CqlDateTime>;
+                    ca_ = ew_ as CqlQuantity;
                 }
                 else
                 {
                     DataType ex_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                     object ey_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ex_);
-                    bool ez_ = ey_ is CqlQuantity;
+                    bool ez_ = ey_ is CqlInterval<CqlDateTime>;
                     if (ez_)
                     {
                         DataType fa_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                         object fb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fa_);
-                        ca_ = fb_ as CqlQuantity;
+                        ca_ = fb_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1515,23 +1515,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType fm_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                 object fn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fm_);
-                bool fo_ = fn_ is CqlInterval<CqlDateTime>;
+                bool fo_ = fn_ is CqlQuantity;
                 if (fo_)
                 {
                     DataType fp_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                     object fq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fp_);
-                    cg_ = fq_ as CqlInterval<CqlDateTime>;
+                    cg_ = fq_ as CqlQuantity;
                 }
                 else
                 {
                     DataType fr_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                     object fs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fr_);
-                    bool ft_ = fs_ is CqlQuantity;
+                    bool ft_ = fs_ is CqlInterval<CqlDateTime>;
                     if (ft_)
                     {
                         DataType fu_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                         object fv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fu_);
-                        cg_ = fv_ as CqlQuantity;
+                        cg_ = fv_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1570,23 +1570,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType gg_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                 object gh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gg_);
-                bool gi_ = gh_ is CqlInterval<CqlDateTime>;
+                bool gi_ = gh_ is CqlQuantity;
                 if (gi_)
                 {
                     DataType gj_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                     object gk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gj_);
-                    cm_ = gk_ as CqlInterval<CqlDateTime>;
+                    cm_ = gk_ as CqlQuantity;
                 }
                 else
                 {
                     DataType gl_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                     object gm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gl_);
-                    bool gn_ = gm_ is CqlQuantity;
+                    bool gn_ = gm_ is CqlInterval<CqlDateTime>;
                     if (gn_)
                     {
                         DataType go_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                         object gp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, go_);
-                        cm_ = gp_ as CqlQuantity;
+                        cm_ = gp_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1624,23 +1624,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType ha_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                 object hb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ha_);
-                bool hc_ = hb_ is CqlInterval<CqlDateTime>;
+                bool hc_ = hb_ is CqlQuantity;
                 if (hc_)
                 {
                     DataType hd_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                     object he_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hd_);
-                    cr_ = he_ as CqlInterval<CqlDateTime>;
+                    cr_ = he_ as CqlQuantity;
                 }
                 else
                 {
                     DataType hf_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                     object hg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hf_);
-                    bool hh_ = hg_ is CqlQuantity;
+                    bool hh_ = hg_ is CqlInterval<CqlDateTime>;
                     if (hh_)
                     {
                         DataType hi_ = tuple_bnvctjfzpousixdcefwhciwq?.AnesthesiaProcedure?.Performed;
                         object hj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hi_);
-                        cr_ = hj_ as CqlQuantity;
+                        cr_ = hj_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1688,11 +1688,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
     private IEnumerable<Encounter> Encounter_With_Medication_Oral_Factor_Xa_Inhibitor_Administered_On_Day_Of_Or_Day_After_Admission_Or_Procedure_Compute(CqlContext context)
     {
         IEnumerable<Encounter> a_ = VTE_8_18_000.Instance.Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(context);
-        CqlValueSet b_ = this.Oral_Factor_Xa_Inhibitor_for_VTE_Prophylaxis_or_VTE_Treatment(context);
-        IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? e_(MedicationAdministration MR) {
+        bool? c_(MedicationAdministration MR) {
             IEnumerable<Medication> ad_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ae_(Medication M) {
@@ -1714,8 +1712,10 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             return ag_;
         }
 
-        IEnumerable<MedicationAdministration> f_ = context.Operators.Where<MedicationAdministration>(d_, e_);
-        IEnumerable<MedicationAdministration> g_ = context.Operators.Union<MedicationAdministration>(c_, f_);
+        IEnumerable<MedicationAdministration> d_ = context.Operators.Where<MedicationAdministration>(b_, c_);
+        CqlValueSet e_ = this.Oral_Factor_Xa_Inhibitor_for_VTE_Prophylaxis_or_VTE_Treatment(context);
+        IEnumerable<MedicationAdministration> f_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> g_ = context.Operators.Union<MedicationAdministration>(d_, f_);
         IEnumerable<ValueTuple<Encounter, MedicationAdministration>> h_ = context.Operators.CrossJoin<Encounter, MedicationAdministration>(a_, g_);
 
         (CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration FactorXaMedication)? i_(ValueTuple<Encounter, MedicationAdministration> _valueTuple) {
@@ -1779,8 +1779,8 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             return bq_;
         }
 
-        IEnumerable<MedicationAdministration> s_ = context.Operators.Where<MedicationAdministration>(d_, r_);
-        IEnumerable<MedicationAdministration> t_ = context.Operators.Union<MedicationAdministration>(c_, s_);
+        IEnumerable<MedicationAdministration> s_ = context.Operators.Where<MedicationAdministration>(b_, r_);
+        IEnumerable<MedicationAdministration> t_ = context.Operators.Union<MedicationAdministration>(s_, f_);
         IEnumerable<ValueTuple<Encounter, Procedure, MedicationAdministration>> u_ = context.Operators.CrossJoin<Encounter, Procedure, MedicationAdministration>(a_, q_, t_);
 
         (CqlTupleMetadata, Encounter QualifyingEncounter, Procedure AnesthesiaProcedure, MedicationAdministration FactorXaMedication)? v_(ValueTuple<Encounter, Procedure, MedicationAdministration> _valueTuple) {
@@ -1814,23 +1814,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType ed_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                 object ee_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ed_);
-                bool ef_ = ee_ is CqlInterval<CqlDateTime>;
+                bool ef_ = ee_ is CqlQuantity;
                 if (ef_)
                 {
                     DataType eg_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                     object eh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eg_);
-                    cl_ = eh_ as CqlInterval<CqlDateTime>;
+                    cl_ = eh_ as CqlQuantity;
                 }
                 else
                 {
                     DataType ei_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                     object ej_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ei_);
-                    bool ek_ = ej_ is CqlQuantity;
+                    bool ek_ = ej_ is CqlInterval<CqlDateTime>;
                     if (ek_)
                     {
                         DataType el_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                         object em_ = FHIRHelpers_4_4_000.Instance.ToValue(context, el_);
-                        cl_ = em_ as CqlQuantity;
+                        cl_ = em_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1877,23 +1877,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType ex_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                 object ey_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ex_);
-                bool ez_ = ey_ is CqlInterval<CqlDateTime>;
+                bool ez_ = ey_ is CqlQuantity;
                 if (ez_)
                 {
                     DataType fa_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                     object fb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fa_);
-                    cz_ = fb_ as CqlInterval<CqlDateTime>;
+                    cz_ = fb_ as CqlQuantity;
                 }
                 else
                 {
                     DataType fc_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                     object fd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fc_);
-                    bool fe_ = fd_ is CqlQuantity;
+                    bool fe_ = fd_ is CqlInterval<CqlDateTime>;
                     if (fe_)
                     {
                         DataType ff_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                         object fg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ff_);
-                        cz_ = fg_ as CqlQuantity;
+                        cz_ = fg_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1932,23 +1932,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType fr_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                 object fs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fr_);
-                bool ft_ = fs_ is CqlInterval<CqlDateTime>;
+                bool ft_ = fs_ is CqlQuantity;
                 if (ft_)
                 {
                     DataType fu_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                     object fv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fu_);
-                    df_ = fv_ as CqlInterval<CqlDateTime>;
+                    df_ = fv_ as CqlQuantity;
                 }
                 else
                 {
                     DataType fw_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                     object fx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fw_);
-                    bool fy_ = fx_ is CqlQuantity;
+                    bool fy_ = fx_ is CqlInterval<CqlDateTime>;
                     if (fy_)
                     {
                         DataType fz_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                         object ga_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fz_);
-                        df_ = ga_ as CqlQuantity;
+                        df_ = ga_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1987,23 +1987,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType gl_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                 object gm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gl_);
-                bool gn_ = gm_ is CqlInterval<CqlDateTime>;
+                bool gn_ = gm_ is CqlQuantity;
                 if (gn_)
                 {
                     DataType go_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                     object gp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, go_);
-                    dl_ = gp_ as CqlInterval<CqlDateTime>;
+                    dl_ = gp_ as CqlQuantity;
                 }
                 else
                 {
                     DataType gq_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                     object gr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gq_);
-                    bool gs_ = gr_ is CqlQuantity;
+                    bool gs_ = gr_ is CqlInterval<CqlDateTime>;
                     if (gs_)
                     {
                         DataType gt_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                         object gu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gt_);
-                        dl_ = gu_ as CqlQuantity;
+                        dl_ = gu_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2041,23 +2041,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType hf_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                 object hg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hf_);
-                bool hh_ = hg_ is CqlInterval<CqlDateTime>;
+                bool hh_ = hg_ is CqlQuantity;
                 if (hh_)
                 {
                     DataType hi_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                     object hj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hi_);
-                    dq_ = hj_ as CqlInterval<CqlDateTime>;
+                    dq_ = hj_ as CqlQuantity;
                 }
                 else
                 {
                     DataType hk_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                     object hl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hk_);
-                    bool hm_ = hl_ is CqlQuantity;
+                    bool hm_ = hl_ is CqlInterval<CqlDateTime>;
                     if (hm_)
                     {
                         DataType hn_ = tuple_dejnabiogwrwyxienqokgepgj?.AnesthesiaProcedure?.Performed;
                         object ho_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hn_);
-                        dq_ = ho_ as CqlQuantity;
+                        dq_ = ho_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2255,23 +2255,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 {
                     DataType ac_ = HipKneeProcedure?.Performed;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
+                    bool ae_ = ad_ is CqlQuantity;
                     if (ae_)
                     {
                         DataType af_ = HipKneeProcedure?.Performed;
                         object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        p_ = ag_ as CqlInterval<CqlDateTime>;
+                        p_ = ag_ as CqlQuantity;
                     }
                     else
                     {
                         DataType ah_ = HipKneeProcedure?.Performed;
                         object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        bool aj_ = ai_ is CqlQuantity;
+                        bool aj_ = ai_ is CqlInterval<CqlDateTime>;
                         if (aj_)
                         {
                             DataType ak_ = HipKneeProcedure?.Performed;
                             object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                            p_ = al_ as CqlQuantity;
+                            p_ = al_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -2360,23 +2360,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType bk_ = VTERiskAssessment?.Effective;
                 object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                bool bm_ = bl_ is CqlInterval<CqlDateTime>;
+                bool bm_ = bl_ is CqlDateTime;
                 if (bm_)
                 {
                     DataType bn_ = VTERiskAssessment?.Effective;
                     object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    bc_ = bo_ as CqlInterval<CqlDateTime>;
+                    bc_ = bo_ as CqlDateTime;
                 }
                 else
                 {
                     DataType bp_ = VTERiskAssessment?.Effective;
                     object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
-                    bool br_ = bq_ is CqlDateTime;
+                    bool br_ = bq_ is CqlInterval<CqlDateTime>;
                     if (br_)
                     {
                         DataType bs_ = VTERiskAssessment?.Effective;
                         object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                        bc_ = bt_ as CqlDateTime;
+                        bc_ = bt_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2427,11 +2427,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
         IEnumerable<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?> n_ = context.Operators.Select<Observation, (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?>(l_, m_);
         IEnumerable<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?> o_ = context.Operators.Distinct<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?>(n_);
         IEnumerable<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?> p_ = context.Operators.Union<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?>(h_, o_);
-        CqlValueSet q_ = this.Unfractionated_Heparin(context);
-        IEnumerable<MedicationAdministration> r_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-        IEnumerable<MedicationAdministration> s_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> q_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? t_(MedicationAdministration MR) {
+        bool? r_(MedicationAdministration MR) {
             IEnumerable<Medication> ck_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? cl_(Medication M) {
@@ -2453,8 +2451,10 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             return cn_;
         }
 
-        IEnumerable<MedicationAdministration> u_ = context.Operators.Where<MedicationAdministration>(s_, t_);
-        IEnumerable<MedicationAdministration> v_ = context.Operators.Union<MedicationAdministration>(r_, u_);
+        IEnumerable<MedicationAdministration> s_ = context.Operators.Where<MedicationAdministration>(q_, r_);
+        CqlValueSet t_ = this.Unfractionated_Heparin(context);
+        IEnumerable<MedicationAdministration> u_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+        IEnumerable<MedicationAdministration> v_ = context.Operators.Union<MedicationAdministration>(s_, u_);
 
         bool? w_(MedicationAdministration UnfractionatedHeparin) {
             MedicationAdministration.DosageComponent cy_ = UnfractionatedHeparin?.Dosage;
@@ -2466,10 +2466,8 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
         }
 
         IEnumerable<MedicationAdministration> x_ = context.Operators.Where<MedicationAdministration>(v_, w_);
-        CqlValueSet y_ = this.Direct_Thrombin_Inhibitor(context);
-        IEnumerable<MedicationAdministration> z_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? aa_(MedicationAdministration MR) {
+        bool? y_(MedicationAdministration MR) {
             IEnumerable<Medication> dd_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? de_(Medication M) {
@@ -2491,13 +2489,13 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             return dg_;
         }
 
-        IEnumerable<MedicationAdministration> ab_ = context.Operators.Where<MedicationAdministration>(s_, aa_);
+        IEnumerable<MedicationAdministration> z_ = context.Operators.Where<MedicationAdministration>(q_, y_);
+        CqlValueSet aa_ = this.Direct_Thrombin_Inhibitor(context);
+        IEnumerable<MedicationAdministration> ab_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, aa_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> ac_ = context.Operators.Union<MedicationAdministration>(z_, ab_);
         IEnumerable<MedicationAdministration> ad_ = context.Operators.Union<MedicationAdministration>(x_, ac_);
-        CqlValueSet ae_ = this.Glycoprotein_IIb_IIIa_Inhibitors(context);
-        IEnumerable<MedicationAdministration> af_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-        bool? ag_(MedicationAdministration MR) {
+        bool? ae_(MedicationAdministration MR) {
             IEnumerable<Medication> dr_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ds_(Medication M) {
@@ -2519,7 +2517,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             return du_;
         }
 
-        IEnumerable<MedicationAdministration> ah_ = context.Operators.Where<MedicationAdministration>(s_, ag_);
+        IEnumerable<MedicationAdministration> af_ = context.Operators.Where<MedicationAdministration>(q_, ae_);
+        CqlValueSet ag_ = this.Glycoprotein_IIb_IIIa_Inhibitors(context);
+        IEnumerable<MedicationAdministration> ah_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
         IEnumerable<MedicationAdministration> ai_ = context.Operators.Union<MedicationAdministration>(af_, ah_);
         IEnumerable<MedicationAdministration> aj_ = context.Operators.Union<MedicationAdministration>(ad_, ai_);
 
@@ -2628,23 +2628,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType bg_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                 object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                bool bi_ = bh_ is CqlInterval<CqlDateTime>;
+                bool bi_ = bh_ is CqlQuantity;
                 if (bi_)
                 {
                     DataType bj_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                     object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                    r_ = bk_ as CqlInterval<CqlDateTime>;
+                    r_ = bk_ as CqlQuantity;
                 }
                 else
                 {
                     DataType bl_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                     object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    bool bn_ = bm_ is CqlQuantity;
+                    bool bn_ = bm_ is CqlInterval<CqlDateTime>;
                     if (bn_)
                     {
                         DataType bo_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                         object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
-                        r_ = bp_ as CqlQuantity;
+                        r_ = bp_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2688,23 +2688,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType ca_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                 object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                bool cc_ = cb_ is CqlInterval<CqlDateTime>;
+                bool cc_ = cb_ is CqlQuantity;
                 if (cc_)
                 {
                     DataType cd_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                     object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                    ac_ = ce_ as CqlInterval<CqlDateTime>;
+                    ac_ = ce_ as CqlQuantity;
                 }
                 else
                 {
                     DataType cf_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                     object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                    bool ch_ = cg_ is CqlQuantity;
+                    bool ch_ = cg_ is CqlInterval<CqlDateTime>;
                     if (ch_)
                     {
                         DataType ci_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                         object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                        ac_ = cj_ as CqlQuantity;
+                        ac_ = cj_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2743,23 +2743,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType cu_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                 object cv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cu_);
-                bool cw_ = cv_ is CqlInterval<CqlDateTime>;
+                bool cw_ = cv_ is CqlQuantity;
                 if (cw_)
                 {
                     DataType cx_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                     object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
-                    ai_ = cy_ as CqlInterval<CqlDateTime>;
+                    ai_ = cy_ as CqlQuantity;
                 }
                 else
                 {
                     DataType cz_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                     object da_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cz_);
-                    bool db_ = da_ is CqlQuantity;
+                    bool db_ = da_ is CqlInterval<CqlDateTime>;
                     if (db_)
                     {
                         DataType dc_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                         object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                        ai_ = dd_ as CqlQuantity;
+                        ai_ = dd_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2798,23 +2798,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType do_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                 object dp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, do_);
-                bool dq_ = dp_ is CqlInterval<CqlDateTime>;
+                bool dq_ = dp_ is CqlQuantity;
                 if (dq_)
                 {
                     DataType dr_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                     object ds_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dr_);
-                    ao_ = ds_ as CqlInterval<CqlDateTime>;
+                    ao_ = ds_ as CqlQuantity;
                 }
                 else
                 {
                     DataType dt_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                     object du_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dt_);
-                    bool dv_ = du_ is CqlQuantity;
+                    bool dv_ = du_ is CqlInterval<CqlDateTime>;
                     if (dv_)
                     {
                         DataType dw_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                         object dx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dw_);
-                        ao_ = dx_ as CqlQuantity;
+                        ao_ = dx_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2852,23 +2852,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType ei_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                 object ej_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ei_);
-                bool ek_ = ej_ is CqlInterval<CqlDateTime>;
+                bool ek_ = ej_ is CqlQuantity;
                 if (ek_)
                 {
                     DataType el_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                     object em_ = FHIRHelpers_4_4_000.Instance.ToValue(context, el_);
-                    at_ = em_ as CqlInterval<CqlDateTime>;
+                    at_ = em_ as CqlQuantity;
                 }
                 else
                 {
                     DataType en_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                     object eo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, en_);
-                    bool ep_ = eo_ is CqlQuantity;
+                    bool ep_ = eo_ is CqlInterval<CqlDateTime>;
                     if (ep_)
                     {
                         DataType eq_ = tuple_gwhjghwetinfdseedvamgjivv?.AnesthesiaProcedure?.Performed;
                         object er_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eq_);
-                        at_ = er_ as CqlQuantity;
+                        at_ = er_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2986,245 +2986,258 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
 
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, FhirDateTime authoredOn)?> u_ = context.Operators.Select<MedicationAdministration, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, FhirDateTime authoredOn)?>(s_, t_);
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, FhirDateTime authoredOn)?> v_ = context.Operators.Distinct<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, FhirDateTime authoredOn)?>(u_);
-        IEnumerable<MedicationRequest> w_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> x_ = context.Operators.Union<MedicationRequest>(w_, w_);
-        IEnumerable<MedicationRequest> y_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> z_ = context.Operators.Union<MedicationRequest>(y_, y_);
-        IEnumerable<MedicationRequest> aa_ = context.Operators.Union<MedicationRequest>(x_, z_);
-        IEnumerable<MedicationRequest> ab_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> ac_ = context.Operators.Union<MedicationRequest>(ab_, ab_);
-        IEnumerable<MedicationRequest> ad_ = context.Operators.Union<MedicationRequest>(aa_, ac_);
-        IEnumerable<MedicationRequest> ae_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> af_ = context.Operators.Union<MedicationRequest>(ae_, ae_);
-        IEnumerable<MedicationRequest> ag_ = context.Operators.Union<MedicationRequest>(ad_, af_);
-        IEnumerable<MedicationRequest> ah_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> ai_ = context.Operators.Union<MedicationRequest>(ah_, ah_);
-        IEnumerable<MedicationRequest> aj_ = context.Operators.Union<MedicationRequest>(ag_, ai_);
 
-        bool? ak_(MedicationRequest NoMedicationOrder) {
-            Code<MedicationRequest.MedicationRequestIntent> cs_ = NoMedicationOrder?.IntentElement;
-            MedicationRequest.MedicationRequestIntent? ct_ = cs_?.Value;
-            string cu_ = context.Operators.Convert<string>(ct_);
-            string[] cv_ = [
+        (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? w_((CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, FhirDateTime authoredOn)? tuple_cumbjbeguchwelldvxijceahs) {
+            if (tuple_cumbjbeguchwelldvxijceahs is null)
+            {
+                return default;
+            }
+            else
+            {
+                CqlDateTime cs_ = context.Operators.Convert<CqlDateTime>(tuple_cumbjbeguchwelldvxijceahs?.authoredOn);
+                (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? ct_ = (CqlTupleMetadata_CNeQfiIHcQEUBjZNVZiOLfdeP, tuple_cumbjbeguchwelldvxijceahs?.id, tuple_cumbjbeguchwelldvxijceahs?.medicationStatusReason, cs_);
+                return ct_;
+            }
+        }
+
+        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> x_ = context.Operators.Select<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, FhirDateTime authoredOn)?, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(v_, w_);
+        IEnumerable<MedicationRequest> y_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> z_ = context.Operators.Union<MedicationRequest>(y_, y_);
+        IEnumerable<MedicationRequest> aa_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> ab_ = context.Operators.Union<MedicationRequest>(aa_, aa_);
+        IEnumerable<MedicationRequest> ac_ = context.Operators.Union<MedicationRequest>(z_, ab_);
+        IEnumerable<MedicationRequest> ad_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> ae_ = context.Operators.Union<MedicationRequest>(ad_, ad_);
+        IEnumerable<MedicationRequest> af_ = context.Operators.Union<MedicationRequest>(ac_, ae_);
+        IEnumerable<MedicationRequest> ag_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> ah_ = context.Operators.Union<MedicationRequest>(ag_, ag_);
+        IEnumerable<MedicationRequest> ai_ = context.Operators.Union<MedicationRequest>(af_, ah_);
+        IEnumerable<MedicationRequest> aj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> ak_ = context.Operators.Union<MedicationRequest>(aj_, aj_);
+        IEnumerable<MedicationRequest> al_ = context.Operators.Union<MedicationRequest>(ai_, ak_);
+
+        bool? am_(MedicationRequest NoMedicationOrder) {
+            Code<MedicationRequest.MedicationRequestIntent> cu_ = NoMedicationOrder?.IntentElement;
+            MedicationRequest.MedicationRequestIntent? cv_ = cu_?.Value;
+            string cw_ = context.Operators.Convert<string>(cv_);
+            string[] cx_ = [
                 "order",
                 "original-order",
                 "reflex-order",
                 "filler-order",
                 "instance-order",
             ];
-            bool? cw_ = context.Operators.In<string>(cu_, (IEnumerable<string>)cv_);
-            Code<MedicationRequest.MedicationrequestStatus> cx_ = NoMedicationOrder?.StatusElement;
-            MedicationRequest.MedicationrequestStatus? cy_ = cx_?.Value;
-            string cz_ = context.Operators.Convert<string>(cy_);
-            string[] da_ = [
+            bool? cy_ = context.Operators.In<string>(cw_, (IEnumerable<string>)cx_);
+            Code<MedicationRequest.MedicationrequestStatus> cz_ = NoMedicationOrder?.StatusElement;
+            MedicationRequest.MedicationrequestStatus? da_ = cz_?.Value;
+            string db_ = context.Operators.Convert<string>(da_);
+            string[] dc_ = [
                 "active",
                 "completed",
             ];
-            bool? db_ = context.Operators.In<string>(cz_, (IEnumerable<string>)da_);
-            bool? dc_ = context.Operators.And(cw_, db_);
-            return dc_;
+            bool? dd_ = context.Operators.In<string>(db_, (IEnumerable<string>)dc_);
+            bool? de_ = context.Operators.And(cy_, dd_);
+            return de_;
         }
 
-        IEnumerable<MedicationRequest> al_ = context.Operators.Where<MedicationRequest>(aj_, ak_);
+        IEnumerable<MedicationRequest> an_ = context.Operators.Where<MedicationRequest>(al_, am_);
 
-        (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? am_(MedicationRequest NoMedicationOrder) {
-            Id dd_ = NoMedicationOrder?.IdElement;
-            string de_ = dd_?.Value;
-            List<CodeableConcept> df_ = NoMedicationOrder?.ReasonCode;
+        (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? ao_(MedicationRequest NoMedicationOrder) {
+            Id df_ = NoMedicationOrder?.IdElement;
+            string dg_ = df_?.Value;
+            List<CodeableConcept> dh_ = NoMedicationOrder?.ReasonCode;
 
-            CqlConcept dg_(CodeableConcept @this) {
-                CqlConcept dl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return dl_;
+            CqlConcept di_(CodeableConcept @this) {
+                CqlConcept dn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return dn_;
             }
 
-            IEnumerable<CqlConcept> dh_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)df_, dg_);
-            FhirDateTime di_ = NoMedicationOrder?.AuthoredOnElement;
-            CqlDateTime dj_ = context.Operators.Convert<CqlDateTime>(di_);
-            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? dk_ = (CqlTupleMetadata_CNeQfiIHcQEUBjZNVZiOLfdeP, de_, dh_, dj_);
-            return dk_;
+            IEnumerable<CqlConcept> dj_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)dh_, di_);
+            FhirDateTime dk_ = NoMedicationOrder?.AuthoredOnElement;
+            CqlDateTime dl_ = context.Operators.Convert<CqlDateTime>(dk_);
+            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? dm_ = (CqlTupleMetadata_CNeQfiIHcQEUBjZNVZiOLfdeP, dg_, dj_, dl_);
+            return dm_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> an_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(al_, am_);
-        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> ao_ = context.Operators.Distinct<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(an_);
-        IEnumerable<object> ap_ = context.Operators.Union<object>(v_ as IEnumerable<object>, ao_ as IEnumerable<object>);
-        (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? aq_(object @object) => ((CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?)@object;
-        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> ar_ = context.Operators.Select<object, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(ap_, aq_);
-        IEnumerable<MedicationRequest> as_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> at_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> ap_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(an_, ao_);
+        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> aq_ = context.Operators.Distinct<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(ap_);
+        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> ar_ = context.Operators.Union<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(x_, aq_);
+        IEnumerable<MedicationRequest> as_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? au_(MedicationRequest MR) {
-            IEnumerable<Medication> dm_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+        bool? at_(MedicationRequest MR) {
+            IEnumerable<Medication> do_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? dn_(Medication M) {
-                object dq_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object dr_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> ds_ = context.Operators.Split((string)dr_, "/");
-                string dt_ = context.Operators.Last<string>(ds_);
-                bool? du_ = context.Operators.Equal(dq_, dt_);
-                CodeableConcept dv_ = M?.Code;
-                CqlConcept dw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dv_);
-                CqlValueSet dx_ = this.Low_Dose_Unfractionated_Heparin_for_VTE_Prophylaxis(context);
-                bool? dy_ = context.Operators.ConceptInValueSet(dw_, dx_);
-                bool? dz_ = context.Operators.And(du_, dy_);
-                return dz_;
+            bool? dp_(Medication M) {
+                object ds_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object dt_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> du_ = context.Operators.Split((string)dt_, "/");
+                string dv_ = context.Operators.Last<string>(du_);
+                bool? dw_ = context.Operators.Equal(ds_, dv_);
+                CodeableConcept dx_ = M?.Code;
+                CqlConcept dy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dx_);
+                CqlValueSet dz_ = this.Low_Dose_Unfractionated_Heparin_for_VTE_Prophylaxis(context);
+                bool? ea_ = context.Operators.ConceptInValueSet(dy_, dz_);
+                bool? eb_ = context.Operators.And(dw_, ea_);
+                return eb_;
             }
 
-            IEnumerable<Medication> do_ = context.Operators.Where<Medication>(dm_, dn_);
-            bool? dp_ = context.Operators.Exists<Medication>(do_);
-            return dp_;
+            IEnumerable<Medication> dq_ = context.Operators.Where<Medication>(do_, dp_);
+            bool? dr_ = context.Operators.Exists<Medication>(dq_);
+            return dr_;
         }
 
-        IEnumerable<MedicationRequest> av_ = context.Operators.Where<MedicationRequest>(at_, au_);
-        IEnumerable<MedicationRequest> aw_ = context.Operators.Union<MedicationRequest>(as_, av_);
-        IEnumerable<MedicationRequest> ax_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> au_ = context.Operators.Where<MedicationRequest>(as_, at_);
+        IEnumerable<MedicationRequest> av_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> aw_ = context.Operators.Union<MedicationRequest>(au_, av_);
 
-        bool? ay_(MedicationRequest MR) {
-            IEnumerable<Medication> ea_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+        bool? ax_(MedicationRequest MR) {
+            IEnumerable<Medication> ec_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? eb_(Medication M) {
-                object ee_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object ef_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> eg_ = context.Operators.Split((string)ef_, "/");
-                string eh_ = context.Operators.Last<string>(eg_);
-                bool? ei_ = context.Operators.Equal(ee_, eh_);
-                CodeableConcept ej_ = M?.Code;
-                CqlConcept ek_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ej_);
-                CqlValueSet el_ = this.Low_Molecular_Weight_Heparin_for_VTE_Prophylaxis(context);
-                bool? em_ = context.Operators.ConceptInValueSet(ek_, el_);
-                bool? en_ = context.Operators.And(ei_, em_);
-                return en_;
+            bool? ed_(Medication M) {
+                object eg_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object eh_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> ei_ = context.Operators.Split((string)eh_, "/");
+                string ej_ = context.Operators.Last<string>(ei_);
+                bool? ek_ = context.Operators.Equal(eg_, ej_);
+                CodeableConcept el_ = M?.Code;
+                CqlConcept em_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, el_);
+                CqlValueSet en_ = this.Low_Molecular_Weight_Heparin_for_VTE_Prophylaxis(context);
+                bool? eo_ = context.Operators.ConceptInValueSet(em_, en_);
+                bool? ep_ = context.Operators.And(ek_, eo_);
+                return ep_;
             }
 
-            IEnumerable<Medication> ec_ = context.Operators.Where<Medication>(ea_, eb_);
-            bool? ed_ = context.Operators.Exists<Medication>(ec_);
-            return ed_;
+            IEnumerable<Medication> ee_ = context.Operators.Where<Medication>(ec_, ed_);
+            bool? ef_ = context.Operators.Exists<Medication>(ee_);
+            return ef_;
         }
 
-        IEnumerable<MedicationRequest> az_ = context.Operators.Where<MedicationRequest>(at_, ay_);
-        IEnumerable<MedicationRequest> ba_ = context.Operators.Union<MedicationRequest>(ax_, az_);
+        IEnumerable<MedicationRequest> ay_ = context.Operators.Where<MedicationRequest>(as_, ax_);
+        IEnumerable<MedicationRequest> az_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> ba_ = context.Operators.Union<MedicationRequest>(ay_, az_);
         IEnumerable<MedicationRequest> bb_ = context.Operators.Union<MedicationRequest>(aw_, ba_);
-        IEnumerable<MedicationRequest> bc_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? bd_(MedicationRequest MR) {
-            IEnumerable<Medication> eo_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+        bool? bc_(MedicationRequest MR) {
+            IEnumerable<Medication> eq_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? ep_(Medication M) {
-                object es_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object et_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> eu_ = context.Operators.Split((string)et_, "/");
-                string ev_ = context.Operators.Last<string>(eu_);
-                bool? ew_ = context.Operators.Equal(es_, ev_);
-                CodeableConcept ex_ = M?.Code;
-                CqlConcept ey_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ex_);
-                CqlValueSet ez_ = this.Injectable_Factor_Xa_Inhibitor_for_VTE_Prophylaxis(context);
-                bool? fa_ = context.Operators.ConceptInValueSet(ey_, ez_);
-                bool? fb_ = context.Operators.And(ew_, fa_);
-                return fb_;
+            bool? er_(Medication M) {
+                object eu_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object ev_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> ew_ = context.Operators.Split((string)ev_, "/");
+                string ex_ = context.Operators.Last<string>(ew_);
+                bool? ey_ = context.Operators.Equal(eu_, ex_);
+                CodeableConcept ez_ = M?.Code;
+                CqlConcept fa_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ez_);
+                CqlValueSet fb_ = this.Injectable_Factor_Xa_Inhibitor_for_VTE_Prophylaxis(context);
+                bool? fc_ = context.Operators.ConceptInValueSet(fa_, fb_);
+                bool? fd_ = context.Operators.And(ey_, fc_);
+                return fd_;
             }
 
-            IEnumerable<Medication> eq_ = context.Operators.Where<Medication>(eo_, ep_);
-            bool? er_ = context.Operators.Exists<Medication>(eq_);
-            return er_;
+            IEnumerable<Medication> es_ = context.Operators.Where<Medication>(eq_, er_);
+            bool? et_ = context.Operators.Exists<Medication>(es_);
+            return et_;
         }
 
-        IEnumerable<MedicationRequest> be_ = context.Operators.Where<MedicationRequest>(at_, bd_);
-        IEnumerable<MedicationRequest> bf_ = context.Operators.Union<MedicationRequest>(bc_, be_);
+        IEnumerable<MedicationRequest> bd_ = context.Operators.Where<MedicationRequest>(as_, bc_);
+        IEnumerable<MedicationRequest> be_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> bf_ = context.Operators.Union<MedicationRequest>(bd_, be_);
         IEnumerable<MedicationRequest> bg_ = context.Operators.Union<MedicationRequest>(bb_, bf_);
-        IEnumerable<MedicationRequest> bh_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? bi_(MedicationRequest MR) {
-            IEnumerable<Medication> fc_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+        bool? bh_(MedicationRequest MR) {
+            IEnumerable<Medication> fe_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? fd_(Medication M) {
-                object fg_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object fh_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> fi_ = context.Operators.Split((string)fh_, "/");
-                string fj_ = context.Operators.Last<string>(fi_);
-                bool? fk_ = context.Operators.Equal(fg_, fj_);
-                CodeableConcept fl_ = M?.Code;
-                CqlConcept fm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fl_);
-                CqlValueSet fn_ = this.Warfarin(context);
-                bool? fo_ = context.Operators.ConceptInValueSet(fm_, fn_);
-                bool? fp_ = context.Operators.And(fk_, fo_);
-                return fp_;
+            bool? ff_(Medication M) {
+                object fi_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object fj_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> fk_ = context.Operators.Split((string)fj_, "/");
+                string fl_ = context.Operators.Last<string>(fk_);
+                bool? fm_ = context.Operators.Equal(fi_, fl_);
+                CodeableConcept fn_ = M?.Code;
+                CqlConcept fo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fn_);
+                CqlValueSet fp_ = this.Warfarin(context);
+                bool? fq_ = context.Operators.ConceptInValueSet(fo_, fp_);
+                bool? fr_ = context.Operators.And(fm_, fq_);
+                return fr_;
             }
 
-            IEnumerable<Medication> fe_ = context.Operators.Where<Medication>(fc_, fd_);
-            bool? ff_ = context.Operators.Exists<Medication>(fe_);
-            return ff_;
+            IEnumerable<Medication> fg_ = context.Operators.Where<Medication>(fe_, ff_);
+            bool? fh_ = context.Operators.Exists<Medication>(fg_);
+            return fh_;
         }
 
-        IEnumerable<MedicationRequest> bj_ = context.Operators.Where<MedicationRequest>(at_, bi_);
-        IEnumerable<MedicationRequest> bk_ = context.Operators.Union<MedicationRequest>(bh_, bj_);
+        IEnumerable<MedicationRequest> bi_ = context.Operators.Where<MedicationRequest>(as_, bh_);
+        IEnumerable<MedicationRequest> bj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> bk_ = context.Operators.Union<MedicationRequest>(bi_, bj_);
         IEnumerable<MedicationRequest> bl_ = context.Operators.Union<MedicationRequest>(bg_, bk_);
-        IEnumerable<MedicationRequest> bm_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? bn_(MedicationRequest MR) {
-            IEnumerable<Medication> fq_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+        bool? bm_(MedicationRequest MR) {
+            IEnumerable<Medication> fs_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? fr_(Medication M) {
-                object fu_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object fv_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> fw_ = context.Operators.Split((string)fv_, "/");
-                string fx_ = context.Operators.Last<string>(fw_);
-                bool? fy_ = context.Operators.Equal(fu_, fx_);
-                CodeableConcept fz_ = M?.Code;
-                CqlConcept ga_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fz_);
-                CqlValueSet gb_ = this.Rivaroxaban_for_VTE_Prophylaxis(context);
-                bool? gc_ = context.Operators.ConceptInValueSet(ga_, gb_);
-                bool? gd_ = context.Operators.And(fy_, gc_);
-                return gd_;
+            bool? ft_(Medication M) {
+                object fw_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object fx_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> fy_ = context.Operators.Split((string)fx_, "/");
+                string fz_ = context.Operators.Last<string>(fy_);
+                bool? ga_ = context.Operators.Equal(fw_, fz_);
+                CodeableConcept gb_ = M?.Code;
+                CqlConcept gc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gb_);
+                CqlValueSet gd_ = this.Rivaroxaban_for_VTE_Prophylaxis(context);
+                bool? ge_ = context.Operators.ConceptInValueSet(gc_, gd_);
+                bool? gf_ = context.Operators.And(ga_, ge_);
+                return gf_;
             }
 
-            IEnumerable<Medication> fs_ = context.Operators.Where<Medication>(fq_, fr_);
-            bool? ft_ = context.Operators.Exists<Medication>(fs_);
-            return ft_;
+            IEnumerable<Medication> fu_ = context.Operators.Where<Medication>(fs_, ft_);
+            bool? fv_ = context.Operators.Exists<Medication>(fu_);
+            return fv_;
         }
 
-        IEnumerable<MedicationRequest> bo_ = context.Operators.Where<MedicationRequest>(at_, bn_);
-        IEnumerable<MedicationRequest> bp_ = context.Operators.Union<MedicationRequest>(bm_, bo_);
+        IEnumerable<MedicationRequest> bn_ = context.Operators.Where<MedicationRequest>(as_, bm_);
+        IEnumerable<MedicationRequest> bo_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> bp_ = context.Operators.Union<MedicationRequest>(bn_, bo_);
         IEnumerable<MedicationRequest> bq_ = context.Operators.Union<MedicationRequest>(bl_, bp_);
         IEnumerable<Task> br_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
         IEnumerable<ValueTuple<MedicationRequest, Task>> bs_ = context.Operators.CrossJoin<MedicationRequest, Task>(bq_, br_);
 
         (CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)? bt_(ValueTuple<MedicationRequest, Task> _valueTuple) {
-            (CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)? ge_ = (CqlTupleMetadata_IIUQMBcJhJBPgdDOLHaTTRUE, _valueTuple.Item1, _valueTuple.Item2);
-            return ge_;
+            (CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)? gg_ = (CqlTupleMetadata_IIUQMBcJhJBPgdDOLHaTTRUE, _valueTuple.Item1, _valueTuple.Item2);
+            return gg_;
         }
 
         IEnumerable<(CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)?> bu_ = context.Operators.Select<ValueTuple<MedicationRequest, Task>, (CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)?>(bs_, bt_);
 
         bool? bv_((CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)? tuple_iiuqmbcjhjbpgddolhattrue) {
-            ResourceReference gf_ = tuple_iiuqmbcjhjbpgddolhattrue?.T?.Focus;
-            bool? gg_ = QICoreCommon_4_0_000.Instance.references(context, gf_, tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject);
-            CodeableConcept gh_ = tuple_iiuqmbcjhjbpgddolhattrue?.T?.Code;
-            CqlConcept gi_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gh_);
-            CqlCode gj_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
-            CqlConcept gk_ = context.Operators.ConvertCodeToConcept(gj_);
-            bool? gl_ = context.Operators.Equivalent(gi_, gk_);
-            bool? gm_ = context.Operators.And(gg_, gl_);
-            Code<MedicationRequest.MedicationrequestStatus> gn_ = tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject?.StatusElement;
-            MedicationRequest.MedicationrequestStatus? go_ = gn_?.Value;
-            string gp_ = context.Operators.Convert<string>(go_);
-            bool? gq_ = context.Operators.Equal(gp_, "active");
-            bool? gr_ = context.Operators.And(gm_, gq_);
-            return gr_;
+            ResourceReference gh_ = tuple_iiuqmbcjhjbpgddolhattrue?.T?.Focus;
+            bool? gi_ = QICoreCommon_4_0_000.Instance.references(context, gh_, tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject);
+            CodeableConcept gj_ = tuple_iiuqmbcjhjbpgddolhattrue?.T?.Code;
+            CqlConcept gk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gj_);
+            CqlCode gl_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
+            CqlConcept gm_ = context.Operators.ConvertCodeToConcept(gl_);
+            bool? gn_ = context.Operators.Equivalent(gk_, gm_);
+            bool? go_ = context.Operators.And(gi_, gn_);
+            Code<MedicationRequest.MedicationrequestStatus> gp_ = tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject?.StatusElement;
+            MedicationRequest.MedicationrequestStatus? gq_ = gp_?.Value;
+            string gr_ = context.Operators.Convert<string>(gq_);
+            bool? gs_ = context.Operators.Equal(gr_, "active");
+            bool? gt_ = context.Operators.And(go_, gs_);
+            return gt_;
         }
 
         IEnumerable<(CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)?> bw_ = context.Operators.Where<(CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)?>(bu_, bv_);
 
         (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? bx_((CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)? tuple_iiuqmbcjhjbpgddolhattrue) {
-            Id gs_ = tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject?.IdElement;
-            string gt_ = gs_?.Value;
-            CodeableConcept gu_ = tuple_iiuqmbcjhjbpgddolhattrue?.T?.StatusReason;
-            CqlConcept gv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gu_);
-            CqlConcept[] gw_ = [
-                gv_,
+            Id gu_ = tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject?.IdElement;
+            string gv_ = gu_?.Value;
+            CodeableConcept gw_ = tuple_iiuqmbcjhjbpgddolhattrue?.T?.StatusReason;
+            CqlConcept gx_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gw_);
+            CqlConcept[] gy_ = [
+                gx_,
             ];
-            FhirDateTime gx_ = tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject?.AuthoredOnElement;
-            CqlDateTime gy_ = context.Operators.Convert<CqlDateTime>(gx_);
-            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? gz_ = (CqlTupleMetadata_CNeQfiIHcQEUBjZNVZiOLfdeP, gt_, (IEnumerable<CqlConcept>)gw_, gy_);
-            return gz_;
+            FhirDateTime gz_ = tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject?.AuthoredOnElement;
+            CqlDateTime ha_ = context.Operators.Convert<CqlDateTime>(gz_);
+            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? hb_ = (CqlTupleMetadata_CNeQfiIHcQEUBjZNVZiOLfdeP, gv_, (IEnumerable<CqlConcept>)gy_, ha_);
+            return hb_;
         }
 
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> by_ = context.Operators.Select<(CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)?, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(bw_, bx_);
@@ -3345,69 +3358,82 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
 
         IEnumerable<(CqlTupleMetadata, string id, CodeableConcept requestStatusReason, CqlDateTime authoredOn)?> o_ = context.Operators.Select<ServiceRequest, (CqlTupleMetadata, string id, CodeableConcept requestStatusReason, CqlDateTime authoredOn)?>(m_, n_);
         IEnumerable<(CqlTupleMetadata, string id, CodeableConcept requestStatusReason, CqlDateTime authoredOn)?> p_ = context.Operators.Distinct<(CqlTupleMetadata, string id, CodeableConcept requestStatusReason, CqlDateTime authoredOn)?>(o_);
-        IEnumerable<ServiceRequest> q_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
-        IEnumerable<ServiceRequest> r_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
-        IEnumerable<ServiceRequest> s_ = context.Operators.Union<ServiceRequest>(q_, r_);
-        IEnumerable<ServiceRequest> t_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
-        IEnumerable<ServiceRequest> u_ = context.Operators.Union<ServiceRequest>(s_, t_);
-        IEnumerable<Task> v_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
-        IEnumerable<ValueTuple<ServiceRequest, Task>> w_ = context.Operators.CrossJoin<ServiceRequest, Task>(u_, v_);
 
-        (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? x_(ValueTuple<ServiceRequest, Task> _valueTuple) {
-            (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? bu_ = (CqlTupleMetadata_YYIDPXBNjhOGFRJKYRBMGChb, _valueTuple.Item1, _valueTuple.Item2);
-            return bu_;
+        (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? q_((CqlTupleMetadata, string id, CodeableConcept requestStatusReason, CqlDateTime authoredOn)? tuple_gnbatbigxtpdibanunzcndfbr) {
+            if (tuple_gnbatbigxtpdibanunzcndfbr is null)
+            {
+                return default;
+            }
+            else
+            {
+                CqlConcept bu_ = context.Operators.Convert<CqlConcept>(tuple_gnbatbigxtpdibanunzcndfbr?.requestStatusReason);
+                (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? bv_ = (CqlTupleMetadata_DheTAGNHbFgKVJGaRbPLJVjKH, tuple_gnbatbigxtpdibanunzcndfbr?.id, bu_, tuple_gnbatbigxtpdibanunzcndfbr?.authoredOn);
+                return bv_;
+            }
         }
 
-        IEnumerable<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?> y_ = context.Operators.Select<ValueTuple<ServiceRequest, Task>, (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?>(w_, x_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> r_ = context.Operators.Select<(CqlTupleMetadata, string id, CodeableConcept requestStatusReason, CqlDateTime authoredOn)?, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(p_, q_);
+        IEnumerable<ServiceRequest> s_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
+        IEnumerable<ServiceRequest> t_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
+        IEnumerable<ServiceRequest> u_ = context.Operators.Union<ServiceRequest>(s_, t_);
+        IEnumerable<ServiceRequest> v_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
+        IEnumerable<ServiceRequest> w_ = context.Operators.Union<ServiceRequest>(u_, v_);
+        IEnumerable<Task> x_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
+        IEnumerable<ValueTuple<ServiceRequest, Task>> y_ = context.Operators.CrossJoin<ServiceRequest, Task>(w_, x_);
 
-        bool? z_((CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? tuple_yyidpxbnjhogfrjkyrbmgchb) {
-            Code<RequestIntent> bv_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.IntentElement;
-            RequestIntent? bw_ = bv_?.Value;
-            Code<RequestIntent> bx_ = context.Operators.Convert<Code<RequestIntent>>(bw_);
-            string by_ = context.Operators.Convert<string>(bx_);
-            string[] bz_ = [
+        (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? z_(ValueTuple<ServiceRequest, Task> _valueTuple) {
+            (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? bw_ = (CqlTupleMetadata_YYIDPXBNjhOGFRJKYRBMGChb, _valueTuple.Item1, _valueTuple.Item2);
+            return bw_;
+        }
+
+        IEnumerable<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?> aa_ = context.Operators.Select<ValueTuple<ServiceRequest, Task>, (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?>(y_, z_);
+
+        bool? ab_((CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? tuple_yyidpxbnjhogfrjkyrbmgchb) {
+            Code<RequestIntent> bx_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.IntentElement;
+            RequestIntent? by_ = bx_?.Value;
+            Code<RequestIntent> bz_ = context.Operators.Convert<Code<RequestIntent>>(by_);
+            string ca_ = context.Operators.Convert<string>(bz_);
+            string[] cb_ = [
                 "order",
                 "original-order",
                 "reflex-order",
                 "filler-order",
                 "instance-order",
             ];
-            bool? ca_ = context.Operators.In<string>(by_, (IEnumerable<string>)bz_);
-            Code<RequestStatus> cb_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.StatusElement;
-            RequestStatus? cc_ = cb_?.Value;
-            Code<RequestStatus> cd_ = context.Operators.Convert<Code<RequestStatus>>(cc_);
-            bool? ce_ = context.Operators.Equal(cd_, "active");
-            bool? cf_ = context.Operators.And(ca_, ce_);
-            ResourceReference cg_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.T?.Focus;
-            bool? ch_ = QICoreCommon_4_0_000.Instance.references(context, cg_, tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject);
-            bool? ci_ = context.Operators.And(cf_, ch_);
-            CodeableConcept cj_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.T?.Code;
-            CqlConcept ck_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cj_);
-            CqlCode cl_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
-            CqlConcept cm_ = context.Operators.ConvertCodeToConcept(cl_);
-            bool? cn_ = context.Operators.Equivalent(ck_, cm_);
-            bool? co_ = context.Operators.And(ci_, cn_);
-            return co_;
+            bool? cc_ = context.Operators.In<string>(ca_, (IEnumerable<string>)cb_);
+            Code<RequestStatus> cd_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.StatusElement;
+            RequestStatus? ce_ = cd_?.Value;
+            Code<RequestStatus> cf_ = context.Operators.Convert<Code<RequestStatus>>(ce_);
+            bool? cg_ = context.Operators.Equal(cf_, "active");
+            bool? ch_ = context.Operators.And(cc_, cg_);
+            ResourceReference ci_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.T?.Focus;
+            bool? cj_ = QICoreCommon_4_0_000.Instance.references(context, ci_, tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject);
+            bool? ck_ = context.Operators.And(ch_, cj_);
+            CodeableConcept cl_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.T?.Code;
+            CqlConcept cm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cl_);
+            CqlCode cn_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
+            CqlConcept co_ = context.Operators.ConvertCodeToConcept(cn_);
+            bool? cp_ = context.Operators.Equivalent(cm_, co_);
+            bool? cq_ = context.Operators.And(ck_, cp_);
+            return cq_;
         }
 
-        IEnumerable<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?> aa_ = context.Operators.Where<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?>(y_, z_);
+        IEnumerable<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?> ac_ = context.Operators.Where<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?>(aa_, ab_);
 
-        (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? ab_((CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? tuple_yyidpxbnjhogfrjkyrbmgchb) {
-            Id cp_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.IdElement;
-            string cq_ = cp_?.Value;
-            CodeableConcept cr_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.T?.StatusReason;
-            CqlConcept cs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cr_);
-            FhirDateTime ct_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.AuthoredOnElement;
-            CqlDateTime cu_ = context.Operators.Convert<CqlDateTime>(ct_);
-            (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? cv_ = (CqlTupleMetadata_DheTAGNHbFgKVJGaRbPLJVjKH, cq_, cs_, cu_);
-            return cv_;
+        (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? ad_((CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? tuple_yyidpxbnjhogfrjkyrbmgchb) {
+            Id cr_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.IdElement;
+            string cs_ = cr_?.Value;
+            CodeableConcept ct_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.T?.StatusReason;
+            CqlConcept cu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ct_);
+            FhirDateTime cv_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.AuthoredOnElement;
+            CqlDateTime cw_ = context.Operators.Convert<CqlDateTime>(cv_);
+            (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? cx_ = (CqlTupleMetadata_DheTAGNHbFgKVJGaRbPLJVjKH, cs_, cu_, cw_);
+            return cx_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> ac_ = context.Operators.Select<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(aa_, ab_);
-        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> ad_ = context.Operators.Distinct<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(ac_);
-        IEnumerable<object> ae_ = context.Operators.Union<object>(p_ as IEnumerable<object>, ad_ as IEnumerable<object>);
-        (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? af_(object @object) => ((CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?)@object;
-        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> ag_ = context.Operators.Select<object, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(ae_, af_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> ae_ = context.Operators.Select<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(ac_, ad_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> af_ = context.Operators.Distinct<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(ae_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> ag_ = context.Operators.Union<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(r_, af_);
         CqlValueSet ah_ = this.Application_of_Intermittent_Pneumatic_Compression_Devices(context);
         IEnumerable<Procedure> ai_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, ah_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedurenotdone"));
         IEnumerable<Procedure> aj_ = context.Operators.Union<Procedure>(ai_, ai_);
@@ -3421,39 +3447,52 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
         IEnumerable<Procedure> ar_ = context.Operators.Union<Procedure>(an_, aq_);
 
         (CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)? as_(Procedure DeviceNotApplied) {
-            Id cw_ = DeviceNotApplied?.IdElement;
-            string cx_ = cw_?.Value;
-            CodeableConcept cy_ = DeviceNotApplied?.StatusReason;
-            CqlConcept cz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cy_);
+            Id cy_ = DeviceNotApplied?.IdElement;
+            string cz_ = cy_?.Value;
+            CodeableConcept da_ = DeviceNotApplied?.StatusReason;
+            CqlConcept db_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, da_);
 
-            bool? da_(Extension @this) {
-                FhirUri dh_ = @this?.UrlElement;
-                string di_ = FHIRHelpers_4_4_000.Instance.ToString(context, dh_);
-                bool? dj_ = context.Operators.Equal(di_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
-                return dj_;
+            bool? dc_(Extension @this) {
+                FhirUri dj_ = @this?.UrlElement;
+                string dk_ = FHIRHelpers_4_4_000.Instance.ToString(context, dj_);
+                bool? dl_ = context.Operators.Equal(dk_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+                return dl_;
             }
 
-            IEnumerable<Extension> db_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(DeviceNotApplied is DomainResource
+            IEnumerable<Extension> dd_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(DeviceNotApplied is DomainResource
                 ? (DeviceNotApplied as DomainResource).Extension
-                : default), da_);
+                : default), dc_);
 
-            DataType dc_(Extension @this) {
-                DataType dk_ = @this?.Value;
-                return dk_;
+            DataType de_(Extension @this) {
+                DataType dm_ = @this?.Value;
+                return dm_;
             }
 
-            IEnumerable<DataType> dd_ = context.Operators.Select<Extension, DataType>(db_, dc_);
-            DataType de_ = context.Operators.SingletonFrom<DataType>(dd_);
-            FhirDateTime df_ = context.Operators.Convert<FhirDateTime>(de_);
-            (CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)? dg_ = (CqlTupleMetadata_DPXDaXjPQUNAIiZCCbGhNdDMi, cx_, cz_, df_);
-            return dg_;
+            IEnumerable<DataType> df_ = context.Operators.Select<Extension, DataType>(dd_, de_);
+            DataType dg_ = context.Operators.SingletonFrom<DataType>(df_);
+            FhirDateTime dh_ = context.Operators.Convert<FhirDateTime>(dg_);
+            (CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)? di_ = (CqlTupleMetadata_DPXDaXjPQUNAIiZCCbGhNdDMi, cz_, db_, dh_);
+            return di_;
         }
 
         IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)?> at_ = context.Operators.Select<Procedure, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)?>(ar_, as_);
         IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)?> au_ = context.Operators.Distinct<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)?>(at_);
-        IEnumerable<object> av_ = context.Operators.Union<object>(ag_ as IEnumerable<object>, au_ as IEnumerable<object>);
-        (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? aw_(object @object) => ((CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?)@object;
-        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> ax_ = context.Operators.Select<object, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(av_, aw_);
+
+        (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? av_((CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)? tuple_fcgxmnobtfvlcbqjjfugxtftk) {
+            if (tuple_fcgxmnobtfvlcbqjjfugxtftk is null)
+            {
+                return default;
+            }
+            else
+            {
+                CqlDateTime dn_ = context.Operators.Convert<CqlDateTime>(tuple_fcgxmnobtfvlcbqjjfugxtftk?.authoredOn);
+                (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? do_ = (CqlTupleMetadata_DheTAGNHbFgKVJGaRbPLJVjKH, tuple_fcgxmnobtfvlcbqjjfugxtftk?.id, tuple_fcgxmnobtfvlcbqjjfugxtftk?.requestStatusReason, dn_);
+                return do_;
+            }
+        }
+
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> aw_ = context.Operators.Select<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)?, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(au_, av_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> ax_ = context.Operators.Union<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(ag_, aw_);
         return ax_;
     }
 
@@ -3543,23 +3582,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType bk_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                 object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                bool bm_ = bl_ is CqlInterval<CqlDateTime>;
+                bool bm_ = bl_ is CqlQuantity;
                 if (bm_)
                 {
                     DataType bn_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                     object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    v_ = bo_ as CqlInterval<CqlDateTime>;
+                    v_ = bo_ as CqlQuantity;
                 }
                 else
                 {
                     DataType bp_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                     object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
-                    bool br_ = bq_ is CqlQuantity;
+                    bool br_ = bq_ is CqlInterval<CqlDateTime>;
                     if (br_)
                     {
                         DataType bs_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                         object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                        v_ = bt_ as CqlQuantity;
+                        v_ = bt_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3603,23 +3642,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType ce_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                 object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                bool cg_ = cf_ is CqlInterval<CqlDateTime>;
+                bool cg_ = cf_ is CqlQuantity;
                 if (cg_)
                 {
                     DataType ch_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                     object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                    ag_ = ci_ as CqlInterval<CqlDateTime>;
+                    ag_ = ci_ as CqlQuantity;
                 }
                 else
                 {
                     DataType cj_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                     object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                    bool cl_ = ck_ is CqlQuantity;
+                    bool cl_ = ck_ is CqlInterval<CqlDateTime>;
                     if (cl_)
                     {
                         DataType cm_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                         object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
-                        ag_ = cn_ as CqlQuantity;
+                        ag_ = cn_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3658,23 +3697,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType cy_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                 object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-                bool da_ = cz_ is CqlInterval<CqlDateTime>;
+                bool da_ = cz_ is CqlQuantity;
                 if (da_)
                 {
                     DataType db_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                     object dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
-                    am_ = dc_ as CqlInterval<CqlDateTime>;
+                    am_ = dc_ as CqlQuantity;
                 }
                 else
                 {
                     DataType dd_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                     object de_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dd_);
-                    bool df_ = de_ is CqlQuantity;
+                    bool df_ = de_ is CqlInterval<CqlDateTime>;
                     if (df_)
                     {
                         DataType dg_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                         object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                        am_ = dh_ as CqlQuantity;
+                        am_ = dh_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3713,23 +3752,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType ds_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                 object dt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ds_);
-                bool du_ = dt_ is CqlInterval<CqlDateTime>;
+                bool du_ = dt_ is CqlQuantity;
                 if (du_)
                 {
                     DataType dv_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                     object dw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dv_);
-                    as_ = dw_ as CqlInterval<CqlDateTime>;
+                    as_ = dw_ as CqlQuantity;
                 }
                 else
                 {
                     DataType dx_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                     object dy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dx_);
-                    bool dz_ = dy_ is CqlQuantity;
+                    bool dz_ = dy_ is CqlInterval<CqlDateTime>;
                     if (dz_)
                     {
                         DataType ea_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                         object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-                        as_ = eb_ as CqlQuantity;
+                        as_ = eb_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3767,23 +3806,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType em_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                 object en_ = FHIRHelpers_4_4_000.Instance.ToValue(context, em_);
-                bool eo_ = en_ is CqlInterval<CqlDateTime>;
+                bool eo_ = en_ is CqlQuantity;
                 if (eo_)
                 {
                     DataType ep_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                     object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
-                    ax_ = eq_ as CqlInterval<CqlDateTime>;
+                    ax_ = eq_ as CqlQuantity;
                 }
                 else
                 {
                     DataType er_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                     object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                    bool et_ = es_ is CqlQuantity;
+                    bool et_ = es_ is CqlInterval<CqlDateTime>;
                     if (et_)
                     {
                         DataType eu_ = tuple_chjebychscdthhbpzggacmwxe?.AnesthesiaProcedure?.Performed;
                         object ev_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eu_);
-                        ax_ = ev_ as CqlQuantity;
+                        ax_ = ev_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3865,23 +3904,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType bk_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                 object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                bool bm_ = bl_ is CqlInterval<CqlDateTime>;
+                bool bm_ = bl_ is CqlQuantity;
                 if (bm_)
                 {
                     DataType bn_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                     object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    v_ = bo_ as CqlInterval<CqlDateTime>;
+                    v_ = bo_ as CqlQuantity;
                 }
                 else
                 {
                     DataType bp_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                     object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
-                    bool br_ = bq_ is CqlQuantity;
+                    bool br_ = bq_ is CqlInterval<CqlDateTime>;
                     if (br_)
                     {
                         DataType bs_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                         object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                        v_ = bt_ as CqlQuantity;
+                        v_ = bt_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3925,23 +3964,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType ce_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                 object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                bool cg_ = cf_ is CqlInterval<CqlDateTime>;
+                bool cg_ = cf_ is CqlQuantity;
                 if (cg_)
                 {
                     DataType ch_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                     object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                    ag_ = ci_ as CqlInterval<CqlDateTime>;
+                    ag_ = ci_ as CqlQuantity;
                 }
                 else
                 {
                     DataType cj_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                     object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                    bool cl_ = ck_ is CqlQuantity;
+                    bool cl_ = ck_ is CqlInterval<CqlDateTime>;
                     if (cl_)
                     {
                         DataType cm_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                         object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
-                        ag_ = cn_ as CqlQuantity;
+                        ag_ = cn_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -3980,23 +4019,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType cy_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                 object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-                bool da_ = cz_ is CqlInterval<CqlDateTime>;
+                bool da_ = cz_ is CqlQuantity;
                 if (da_)
                 {
                     DataType db_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                     object dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
-                    am_ = dc_ as CqlInterval<CqlDateTime>;
+                    am_ = dc_ as CqlQuantity;
                 }
                 else
                 {
                     DataType dd_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                     object de_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dd_);
-                    bool df_ = de_ is CqlQuantity;
+                    bool df_ = de_ is CqlInterval<CqlDateTime>;
                     if (df_)
                     {
                         DataType dg_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                         object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                        am_ = dh_ as CqlQuantity;
+                        am_ = dh_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -4035,23 +4074,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType ds_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                 object dt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ds_);
-                bool du_ = dt_ is CqlInterval<CqlDateTime>;
+                bool du_ = dt_ is CqlQuantity;
                 if (du_)
                 {
                     DataType dv_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                     object dw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dv_);
-                    as_ = dw_ as CqlInterval<CqlDateTime>;
+                    as_ = dw_ as CqlQuantity;
                 }
                 else
                 {
                     DataType dx_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                     object dy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dx_);
-                    bool dz_ = dy_ is CqlQuantity;
+                    bool dz_ = dy_ is CqlInterval<CqlDateTime>;
                     if (dz_)
                     {
                         DataType ea_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                         object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-                        as_ = eb_ as CqlQuantity;
+                        as_ = eb_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -4089,23 +4128,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType em_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                 object en_ = FHIRHelpers_4_4_000.Instance.ToValue(context, em_);
-                bool eo_ = en_ is CqlInterval<CqlDateTime>;
+                bool eo_ = en_ is CqlQuantity;
                 if (eo_)
                 {
                     DataType ep_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                     object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
-                    ax_ = eq_ as CqlInterval<CqlDateTime>;
+                    ax_ = eq_ as CqlQuantity;
                 }
                 else
                 {
                     DataType er_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                     object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                    bool et_ = es_ is CqlQuantity;
+                    bool et_ = es_ is CqlInterval<CqlDateTime>;
                     if (et_)
                     {
                         DataType eu_ = tuple_cadhcldckpqwmtcazwxfnkhgc?.AnesthesiaProcedure?.Performed;
                         object ev_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eu_);
-                        ax_ = ev_ as CqlQuantity;
+                        ax_ = ev_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -4173,32 +4212,36 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> a_ = this.No_VTE_Prophylaxis_Medication_Administered_Or_Ordered(context);
 
         bool? b_((CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? NoVTEMedication) {
-            IEnumerable<CqlConcept> h_ = NoVTEMedication?.medicationStatusReason;
+            IEnumerable<CqlConcept> l_ = NoVTEMedication?.medicationStatusReason;
 
-            bool? i_(CqlConcept MedRsn) {
-                CqlValueSet l_ = this.Patient_Refusal(context);
-                bool? m_ = context.Operators.ConceptInValueSet(MedRsn, l_);
-                return m_;
+            bool? m_(CqlConcept MedRsn) {
+                CqlValueSet p_ = this.Patient_Refusal(context);
+                bool? q_ = context.Operators.ConceptInValueSet(MedRsn, p_);
+                return q_;
             }
 
-            IEnumerable<CqlConcept> j_ = context.Operators.Where<CqlConcept>(h_, i_);
-            bool? k_ = context.Operators.Exists<CqlConcept>(j_);
-            return k_;
+            IEnumerable<CqlConcept> n_ = context.Operators.Where<CqlConcept>(l_, m_);
+            bool? o_ = context.Operators.Exists<CqlConcept>(n_);
+            return o_;
         }
 
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> c_ = context.Operators.Where<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(a_, b_);
-        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> d_ = this.No_Mechanical_VTE_Prophylaxis_Performed_Or_Ordered(context);
+        object d_((CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? tuple_eodcxckcyhgehinqchjlrjuqw) => tuple_eodcxckcyhgehinqchjlrjuqw;
+        IEnumerable<object> e_ = context.Operators.Select<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?, object>(c_, d_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> f_ = this.No_Mechanical_VTE_Prophylaxis_Performed_Or_Ordered(context);
 
-        bool? e_((CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? NoVTEDevice) {
-            CqlConcept n_ = NoVTEDevice?.requestStatusReason;
-            CqlValueSet o_ = this.Patient_Refusal(context);
-            bool? p_ = context.Operators.ConceptInValueSet(n_, o_);
-            return p_;
+        bool? g_((CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? NoVTEDevice) {
+            CqlConcept r_ = NoVTEDevice?.requestStatusReason;
+            CqlValueSet s_ = this.Patient_Refusal(context);
+            bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
+            return t_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> f_ = context.Operators.Where<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(d_, e_);
-        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
-        return g_;
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> h_ = context.Operators.Where<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(f_, g_);
+        object i_((CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? tuple_dahzgfwmlihdcaesamjofzbqi) => tuple_dahzgfwmlihdcaesamjofzbqi;
+        IEnumerable<object> j_ = context.Operators.Select<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?, object>(h_, i_);
+        IEnumerable<object> k_ = context.Operators.Union<object>(e_, j_);
+        return k_;
     }
 
 
@@ -4279,23 +4322,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType bg_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                 object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                bool bi_ = bh_ is CqlInterval<CqlDateTime>;
+                bool bi_ = bh_ is CqlQuantity;
                 if (bi_)
                 {
                     DataType bj_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                     object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                    r_ = bk_ as CqlInterval<CqlDateTime>;
+                    r_ = bk_ as CqlQuantity;
                 }
                 else
                 {
                     DataType bl_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                     object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    bool bn_ = bm_ is CqlQuantity;
+                    bool bn_ = bm_ is CqlInterval<CqlDateTime>;
                     if (bn_)
                     {
                         DataType bo_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                         object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
-                        r_ = bp_ as CqlQuantity;
+                        r_ = bp_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -4339,23 +4382,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType ca_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                 object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                bool cc_ = cb_ is CqlInterval<CqlDateTime>;
+                bool cc_ = cb_ is CqlQuantity;
                 if (cc_)
                 {
                     DataType cd_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                     object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                    ac_ = ce_ as CqlInterval<CqlDateTime>;
+                    ac_ = ce_ as CqlQuantity;
                 }
                 else
                 {
                     DataType cf_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                     object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                    bool ch_ = cg_ is CqlQuantity;
+                    bool ch_ = cg_ is CqlInterval<CqlDateTime>;
                     if (ch_)
                     {
                         DataType ci_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                         object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                        ac_ = cj_ as CqlQuantity;
+                        ac_ = cj_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -4394,23 +4437,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType cu_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                 object cv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cu_);
-                bool cw_ = cv_ is CqlInterval<CqlDateTime>;
+                bool cw_ = cv_ is CqlQuantity;
                 if (cw_)
                 {
                     DataType cx_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                     object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
-                    ai_ = cy_ as CqlInterval<CqlDateTime>;
+                    ai_ = cy_ as CqlQuantity;
                 }
                 else
                 {
                     DataType cz_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                     object da_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cz_);
-                    bool db_ = da_ is CqlQuantity;
+                    bool db_ = da_ is CqlInterval<CqlDateTime>;
                     if (db_)
                     {
                         DataType dc_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                         object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                        ai_ = dd_ as CqlQuantity;
+                        ai_ = dd_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -4449,23 +4492,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType do_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                 object dp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, do_);
-                bool dq_ = dp_ is CqlInterval<CqlDateTime>;
+                bool dq_ = dp_ is CqlQuantity;
                 if (dq_)
                 {
                     DataType dr_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                     object ds_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dr_);
-                    ao_ = ds_ as CqlInterval<CqlDateTime>;
+                    ao_ = ds_ as CqlQuantity;
                 }
                 else
                 {
                     DataType dt_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                     object du_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dt_);
-                    bool dv_ = du_ is CqlQuantity;
+                    bool dv_ = du_ is CqlInterval<CqlDateTime>;
                     if (dv_)
                     {
                         DataType dw_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                         object dx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dw_);
-                        ao_ = dx_ as CqlQuantity;
+                        ao_ = dx_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -4503,23 +4546,23 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             {
                 DataType ei_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                 object ej_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ei_);
-                bool ek_ = ej_ is CqlInterval<CqlDateTime>;
+                bool ek_ = ej_ is CqlQuantity;
                 if (ek_)
                 {
                     DataType el_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                     object em_ = FHIRHelpers_4_4_000.Instance.ToValue(context, el_);
-                    at_ = em_ as CqlInterval<CqlDateTime>;
+                    at_ = em_ as CqlQuantity;
                 }
                 else
                 {
                     DataType en_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                     object eo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, en_);
-                    bool ep_ = eo_ is CqlQuantity;
+                    bool ep_ = eo_ is CqlInterval<CqlDateTime>;
                     if (ep_)
                     {
                         DataType eq_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
                         object er_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eq_);
-                        at_ = er_ as CqlQuantity;
+                        at_ = er_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {

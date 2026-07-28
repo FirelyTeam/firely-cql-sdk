@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("NCQAFHIRBase", "1.0.0")]
 public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_0>
 {
@@ -422,50 +422,40 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
             CqlDate o_ = FHIRHelpers_4_0_001.Instance.ToDate(context, n_);
             CqlQuantity p_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, choice as Age);
             CqlDate q_ = context.Operators.Add(o_, p_);
-            CqlQuantity r_ = context.Operators.Quantity(1m, "year");
-            CqlDate s_ = context.Operators.Add(q_, r_);
-            CqlInterval<CqlDate> t_ = context.Operators.Interval(q_, s_, true, false);
-            CqlDate u_ = t_?.low;
-            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(u_);
-            CqlDate w_ = t_?.high;
-            CqlDateTime x_ = context.Operators.ConvertDateToDateTime(w_);
-            bool? y_ = t_?.lowClosed;
-            bool? z_ = t_?.highClosed;
-            CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(v_, x_, y_, z_);
-            return aa_;
+            CqlDateTime r_ = context.Operators.ConvertDateToDateTime(q_);
+            CqlQuantity s_ = context.Operators.Quantity(1m, "year");
+            CqlDate t_ = context.Operators.Add(q_, s_);
+            CqlDateTime u_ = context.Operators.ConvertDateToDateTime(t_);
+            CqlInterval<CqlDateTime> v_ = context.Operators.Interval(r_, u_, true, false);
+            return v_;
         }
         else if (choice is Range)
         {
-            Patient ab_ = this.Patient(context);
-            Date ac_ = ab_?.BirthDateElement;
-            CqlDate ad_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ac_);
-            Quantity ae_ = (choice as Range)?.Low;
-            CqlQuantity af_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ae_);
-            CqlDate ag_ = context.Operators.Add(ad_, af_);
-            Quantity ah_ = (choice as Range)?.High;
-            CqlQuantity ai_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ah_);
-            CqlDate aj_ = context.Operators.Add(ad_, ai_);
-            CqlQuantity ak_ = context.Operators.Quantity(1m, "year");
-            CqlDate al_ = context.Operators.Add(aj_, ak_);
-            CqlInterval<CqlDate> am_ = context.Operators.Interval(ag_, al_, true, false);
-            CqlDate an_ = am_?.low;
-            CqlDateTime ao_ = context.Operators.ConvertDateToDateTime(an_);
-            CqlDate ap_ = am_?.high;
-            CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(ap_);
-            bool? ar_ = am_?.lowClosed;
-            bool? as_ = am_?.highClosed;
-            CqlInterval<CqlDateTime> at_ = context.Operators.Interval(ao_, aq_, ar_, as_);
-            return at_;
+            Patient w_ = this.Patient(context);
+            Date x_ = w_?.BirthDateElement;
+            CqlDate y_ = FHIRHelpers_4_0_001.Instance.ToDate(context, x_);
+            Quantity z_ = (choice as Range)?.Low;
+            CqlQuantity aa_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, z_);
+            CqlDate ab_ = context.Operators.Add(y_, aa_);
+            CqlDateTime ac_ = context.Operators.ConvertDateToDateTime(ab_);
+            Quantity ad_ = (choice as Range)?.High;
+            CqlQuantity ae_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ad_);
+            CqlDate af_ = context.Operators.Add(y_, ae_);
+            CqlQuantity ag_ = context.Operators.Quantity(1m, "year");
+            CqlDate ah_ = context.Operators.Add(af_, ag_);
+            CqlDateTime ai_ = context.Operators.ConvertDateToDateTime(ah_);
+            CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ac_, ai_, true, false);
+            return aj_;
         }
         else if (choice is Timing)
         {
-            CqlInterval<CqlDateTime> au_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute a single interval from a Timing type");
-            return au_;
+            CqlInterval<CqlDateTime> ak_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute a single interval from a Timing type");
+            return ak_;
         }
         else if (choice is FhirString)
         {
-            CqlInterval<CqlDateTime> av_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute an interval from a String value");
-            return av_;
+            CqlInterval<CqlDateTime> al_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute an interval from a String value");
+            return al_;
         }
         else
         {

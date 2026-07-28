@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS136FHIRChildADHDMedFollowUp", "1.0.000")]
 public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISingleton<CMS136FHIRChildADHDMedFollowUp_1_0_000>
 {
@@ -234,11 +234,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     private IEnumerable<(CqlTupleMetadata, CqlDate startDate)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.Atomoxetine(context);
-        IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> a_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? d_(MedicationRequest MR) {
+        bool? b_(MedicationRequest MR) {
             IEnumerable<Medication> bm_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? bn_(Medication M) {
@@ -260,12 +258,12 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return bp_;
         }
 
-        IEnumerable<MedicationRequest> e_ = context.Operators.Where<MedicationRequest>(c_, d_);
-        IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
-        CqlValueSet g_ = this.Clonidine(context);
-        IEnumerable<MedicationRequest> h_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> c_ = context.Operators.Where<MedicationRequest>(a_, b_);
+        CqlValueSet d_ = this.Atomoxetine(context);
+        IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(c_, e_);
 
-        bool? i_(MedicationRequest MR) {
+        bool? g_(MedicationRequest MR) {
             IEnumerable<Medication> ca_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? cb_(Medication M) {
@@ -287,13 +285,13 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return cd_;
         }
 
-        IEnumerable<MedicationRequest> j_ = context.Operators.Where<MedicationRequest>(c_, i_);
+        IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(a_, g_);
+        CqlValueSet i_ = this.Clonidine(context);
+        IEnumerable<MedicationRequest> j_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> k_ = context.Operators.Union<MedicationRequest>(h_, j_);
         IEnumerable<MedicationRequest> l_ = context.Operators.Union<MedicationRequest>(f_, k_);
-        CqlValueSet m_ = this.Dexmethylphenidate(context);
-        IEnumerable<MedicationRequest> n_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? o_(MedicationRequest MR) {
+        bool? m_(MedicationRequest MR) {
             IEnumerable<Medication> co_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? cp_(Medication M) {
@@ -315,13 +313,13 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return cr_;
         }
 
-        IEnumerable<MedicationRequest> p_ = context.Operators.Where<MedicationRequest>(c_, o_);
+        IEnumerable<MedicationRequest> n_ = context.Operators.Where<MedicationRequest>(a_, m_);
+        CqlValueSet o_ = this.Dexmethylphenidate(context);
+        IEnumerable<MedicationRequest> p_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> q_ = context.Operators.Union<MedicationRequest>(n_, p_);
         IEnumerable<MedicationRequest> r_ = context.Operators.Union<MedicationRequest>(l_, q_);
-        CqlValueSet s_ = this.Dextroamphetamine(context);
-        IEnumerable<MedicationRequest> t_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? u_(MedicationRequest MR) {
+        bool? s_(MedicationRequest MR) {
             IEnumerable<Medication> dc_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? dd_(Medication M) {
@@ -343,13 +341,13 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return df_;
         }
 
-        IEnumerable<MedicationRequest> v_ = context.Operators.Where<MedicationRequest>(c_, u_);
+        IEnumerable<MedicationRequest> t_ = context.Operators.Where<MedicationRequest>(a_, s_);
+        CqlValueSet u_ = this.Dextroamphetamine(context);
+        IEnumerable<MedicationRequest> v_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, u_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> w_ = context.Operators.Union<MedicationRequest>(t_, v_);
         IEnumerable<MedicationRequest> x_ = context.Operators.Union<MedicationRequest>(r_, w_);
-        CqlValueSet y_ = this.Lisdexamfetamine(context);
-        IEnumerable<MedicationRequest> z_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? aa_(MedicationRequest MR) {
+        bool? y_(MedicationRequest MR) {
             IEnumerable<Medication> dq_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? dr_(Medication M) {
@@ -371,14 +369,13 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return dt_;
         }
 
-        IEnumerable<MedicationRequest> ab_ = context.Operators.Where<MedicationRequest>(c_, aa_);
+        IEnumerable<MedicationRequest> z_ = context.Operators.Where<MedicationRequest>(a_, y_);
+        CqlValueSet aa_ = this.Lisdexamfetamine(context);
+        IEnumerable<MedicationRequest> ab_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, aa_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> ac_ = context.Operators.Union<MedicationRequest>(z_, ab_);
         IEnumerable<MedicationRequest> ad_ = context.Operators.Union<MedicationRequest>(x_, ac_);
-        CqlCode ae_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
-        IEnumerable<CqlCode> af_ = context.Operators.ToList<CqlCode>(ae_);
-        IEnumerable<MedicationRequest> ag_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, af_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? ah_(MedicationRequest MR) {
+        bool? ae_(MedicationRequest MR) {
             IEnumerable<Medication> ee_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ef_(Medication M) {
@@ -401,13 +398,14 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return eh_;
         }
 
-        IEnumerable<MedicationRequest> ai_ = context.Operators.Where<MedicationRequest>(c_, ah_);
-        IEnumerable<MedicationRequest> aj_ = context.Operators.Union<MedicationRequest>(ag_, ai_);
+        IEnumerable<MedicationRequest> af_ = context.Operators.Where<MedicationRequest>(a_, ae_);
+        CqlCode ag_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
+        IEnumerable<CqlCode> ah_ = context.Operators.ToList<CqlCode>(ag_);
+        IEnumerable<MedicationRequest> ai_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, ah_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> aj_ = context.Operators.Union<MedicationRequest>(af_, ai_);
         IEnumerable<MedicationRequest> ak_ = context.Operators.Union<MedicationRequest>(ad_, aj_);
-        CqlValueSet al_ = this.Methylphenidate(context);
-        IEnumerable<MedicationRequest> am_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? an_(MedicationRequest MR) {
+        bool? al_(MedicationRequest MR) {
             IEnumerable<Medication> et_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? eu_(Medication M) {
@@ -429,13 +427,13 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return ew_;
         }
 
-        IEnumerable<MedicationRequest> ao_ = context.Operators.Where<MedicationRequest>(c_, an_);
+        IEnumerable<MedicationRequest> am_ = context.Operators.Where<MedicationRequest>(a_, al_);
+        CqlValueSet an_ = this.Methylphenidate(context);
+        IEnumerable<MedicationRequest> ao_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, an_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> ap_ = context.Operators.Union<MedicationRequest>(am_, ao_);
         IEnumerable<MedicationRequest> aq_ = context.Operators.Union<MedicationRequest>(ak_, ap_);
-        CqlValueSet ar_ = this.Guanfacine_Medications(context);
-        IEnumerable<MedicationRequest> as_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ar_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? at_(MedicationRequest MR) {
+        bool? ar_(MedicationRequest MR) {
             IEnumerable<Medication> fh_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? fi_(Medication M) {
@@ -457,13 +455,13 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return fk_;
         }
 
-        IEnumerable<MedicationRequest> au_ = context.Operators.Where<MedicationRequest>(c_, at_);
+        IEnumerable<MedicationRequest> as_ = context.Operators.Where<MedicationRequest>(a_, ar_);
+        CqlValueSet at_ = this.Guanfacine_Medications(context);
+        IEnumerable<MedicationRequest> au_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, at_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> av_ = context.Operators.Union<MedicationRequest>(as_, au_);
         IEnumerable<MedicationRequest> aw_ = context.Operators.Union<MedicationRequest>(aq_, av_);
-        CqlValueSet ax_ = this.Viloxazine(context);
-        IEnumerable<MedicationRequest> ay_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ax_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? az_(MedicationRequest MR) {
+        bool? ax_(MedicationRequest MR) {
             IEnumerable<Medication> fv_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? fw_(Medication M) {
@@ -485,7 +483,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return fy_;
         }
 
-        IEnumerable<MedicationRequest> ba_ = context.Operators.Where<MedicationRequest>(c_, az_);
+        IEnumerable<MedicationRequest> ay_ = context.Operators.Where<MedicationRequest>(a_, ax_);
+        CqlValueSet az_ = this.Viloxazine(context);
+        IEnumerable<MedicationRequest> ba_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, az_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> bb_ = context.Operators.Union<MedicationRequest>(ay_, ba_);
         IEnumerable<MedicationRequest> bc_ = context.Operators.Union<MedicationRequest>(aw_, bb_);
         IEnumerable<MedicationRequest> bd_ = Status_1_15_000.Instance.isMedicationOrder(context, bc_);
@@ -502,11 +502,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> bf_ = context.Operators.Where<MedicationRequest>(bd_, be_);
 
         bool? bg_(MedicationRequest ADHDMedicationOrder) {
-            CqlValueSet go_ = this.Atomoxetine(context);
-            IEnumerable<MedicationRequest> gp_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, go_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> gq_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> go_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-            bool? gr_(MedicationRequest MR) {
+            bool? gp_(MedicationRequest MR) {
                 IEnumerable<Medication> iw_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? ix_(Medication M) {
@@ -528,12 +526,12 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return iz_;
             }
 
-            IEnumerable<MedicationRequest> gs_ = context.Operators.Where<MedicationRequest>(gq_, gr_);
-            IEnumerable<MedicationRequest> gt_ = context.Operators.Union<MedicationRequest>(gp_, gs_);
-            CqlValueSet gu_ = this.Clonidine(context);
-            IEnumerable<MedicationRequest> gv_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, gu_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> gq_ = context.Operators.Where<MedicationRequest>(go_, gp_);
+            CqlValueSet gr_ = this.Atomoxetine(context);
+            IEnumerable<MedicationRequest> gs_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, gr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> gt_ = context.Operators.Union<MedicationRequest>(gq_, gs_);
 
-            bool? gw_(MedicationRequest MR) {
+            bool? gu_(MedicationRequest MR) {
                 IEnumerable<Medication> jk_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? jl_(Medication M) {
@@ -555,13 +553,13 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return jn_;
             }
 
-            IEnumerable<MedicationRequest> gx_ = context.Operators.Where<MedicationRequest>(gq_, gw_);
+            IEnumerable<MedicationRequest> gv_ = context.Operators.Where<MedicationRequest>(go_, gu_);
+            CqlValueSet gw_ = this.Clonidine(context);
+            IEnumerable<MedicationRequest> gx_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, gw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> gy_ = context.Operators.Union<MedicationRequest>(gv_, gx_);
             IEnumerable<MedicationRequest> gz_ = context.Operators.Union<MedicationRequest>(gt_, gy_);
-            CqlValueSet ha_ = this.Dexmethylphenidate(context);
-            IEnumerable<MedicationRequest> hb_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ha_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-            bool? hc_(MedicationRequest MR) {
+            bool? ha_(MedicationRequest MR) {
                 IEnumerable<Medication> jy_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? jz_(Medication M) {
@@ -583,13 +581,13 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return kb_;
             }
 
-            IEnumerable<MedicationRequest> hd_ = context.Operators.Where<MedicationRequest>(gq_, hc_);
+            IEnumerable<MedicationRequest> hb_ = context.Operators.Where<MedicationRequest>(go_, ha_);
+            CqlValueSet hc_ = this.Dexmethylphenidate(context);
+            IEnumerable<MedicationRequest> hd_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, hc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> he_ = context.Operators.Union<MedicationRequest>(hb_, hd_);
             IEnumerable<MedicationRequest> hf_ = context.Operators.Union<MedicationRequest>(gz_, he_);
-            CqlValueSet hg_ = this.Dextroamphetamine(context);
-            IEnumerable<MedicationRequest> hh_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, hg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-            bool? hi_(MedicationRequest MR) {
+            bool? hg_(MedicationRequest MR) {
                 IEnumerable<Medication> km_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? kn_(Medication M) {
@@ -611,13 +609,13 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return kp_;
             }
 
-            IEnumerable<MedicationRequest> hj_ = context.Operators.Where<MedicationRequest>(gq_, hi_);
+            IEnumerable<MedicationRequest> hh_ = context.Operators.Where<MedicationRequest>(go_, hg_);
+            CqlValueSet hi_ = this.Dextroamphetamine(context);
+            IEnumerable<MedicationRequest> hj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, hi_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> hk_ = context.Operators.Union<MedicationRequest>(hh_, hj_);
             IEnumerable<MedicationRequest> hl_ = context.Operators.Union<MedicationRequest>(hf_, hk_);
-            CqlValueSet hm_ = this.Lisdexamfetamine(context);
-            IEnumerable<MedicationRequest> hn_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, hm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-            bool? ho_(MedicationRequest MR) {
+            bool? hm_(MedicationRequest MR) {
                 IEnumerable<Medication> la_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? lb_(Medication M) {
@@ -639,14 +637,13 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return ld_;
             }
 
-            IEnumerable<MedicationRequest> hp_ = context.Operators.Where<MedicationRequest>(gq_, ho_);
+            IEnumerable<MedicationRequest> hn_ = context.Operators.Where<MedicationRequest>(go_, hm_);
+            CqlValueSet ho_ = this.Lisdexamfetamine(context);
+            IEnumerable<MedicationRequest> hp_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ho_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> hq_ = context.Operators.Union<MedicationRequest>(hn_, hp_);
             IEnumerable<MedicationRequest> hr_ = context.Operators.Union<MedicationRequest>(hl_, hq_);
-            CqlCode hs_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
-            IEnumerable<CqlCode> ht_ = context.Operators.ToList<CqlCode>(hs_);
-            IEnumerable<MedicationRequest> hu_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, ht_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-            bool? hv_(MedicationRequest MR) {
+            bool? hs_(MedicationRequest MR) {
                 IEnumerable<Medication> lo_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? lp_(Medication M) {
@@ -669,13 +666,14 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return lr_;
             }
 
-            IEnumerable<MedicationRequest> hw_ = context.Operators.Where<MedicationRequest>(gq_, hv_);
-            IEnumerable<MedicationRequest> hx_ = context.Operators.Union<MedicationRequest>(hu_, hw_);
+            IEnumerable<MedicationRequest> ht_ = context.Operators.Where<MedicationRequest>(go_, hs_);
+            CqlCode hu_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
+            IEnumerable<CqlCode> hv_ = context.Operators.ToList<CqlCode>(hu_);
+            IEnumerable<MedicationRequest> hw_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, hv_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> hx_ = context.Operators.Union<MedicationRequest>(ht_, hw_);
             IEnumerable<MedicationRequest> hy_ = context.Operators.Union<MedicationRequest>(hr_, hx_);
-            CqlValueSet hz_ = this.Methylphenidate(context);
-            IEnumerable<MedicationRequest> ia_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, hz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-            bool? ib_(MedicationRequest MR) {
+            bool? hz_(MedicationRequest MR) {
                 IEnumerable<Medication> md_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? me_(Medication M) {
@@ -697,13 +695,13 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return mg_;
             }
 
-            IEnumerable<MedicationRequest> ic_ = context.Operators.Where<MedicationRequest>(gq_, ib_);
+            IEnumerable<MedicationRequest> ia_ = context.Operators.Where<MedicationRequest>(go_, hz_);
+            CqlValueSet ib_ = this.Methylphenidate(context);
+            IEnumerable<MedicationRequest> ic_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ib_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> id_ = context.Operators.Union<MedicationRequest>(ia_, ic_);
             IEnumerable<MedicationRequest> ie_ = context.Operators.Union<MedicationRequest>(hy_, id_);
-            CqlValueSet if_ = this.Guanfacine_Medications(context);
-            IEnumerable<MedicationRequest> ig_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, if_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-            bool? ih_(MedicationRequest MR) {
+            bool? if_(MedicationRequest MR) {
                 IEnumerable<Medication> mr_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? ms_(Medication M) {
@@ -725,13 +723,13 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return mu_;
             }
 
-            IEnumerable<MedicationRequest> ii_ = context.Operators.Where<MedicationRequest>(gq_, ih_);
+            IEnumerable<MedicationRequest> ig_ = context.Operators.Where<MedicationRequest>(go_, if_);
+            CqlValueSet ih_ = this.Guanfacine_Medications(context);
+            IEnumerable<MedicationRequest> ii_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ih_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> ij_ = context.Operators.Union<MedicationRequest>(ig_, ii_);
             IEnumerable<MedicationRequest> ik_ = context.Operators.Union<MedicationRequest>(ie_, ij_);
-            CqlValueSet il_ = this.Viloxazine(context);
-            IEnumerable<MedicationRequest> im_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, il_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-            bool? in_(MedicationRequest MR) {
+            bool? il_(MedicationRequest MR) {
                 IEnumerable<Medication> nf_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? ng_(Medication M) {
@@ -753,7 +751,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return ni_;
             }
 
-            IEnumerable<MedicationRequest> io_ = context.Operators.Where<MedicationRequest>(gq_, in_);
+            IEnumerable<MedicationRequest> im_ = context.Operators.Where<MedicationRequest>(go_, il_);
+            CqlValueSet in_ = this.Viloxazine(context);
+            IEnumerable<MedicationRequest> io_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, in_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> ip_ = context.Operators.Union<MedicationRequest>(im_, io_);
             IEnumerable<MedicationRequest> iq_ = context.Operators.Union<MedicationRequest>(ik_, ip_);
             IEnumerable<MedicationRequest> ir_ = Status_1_15_000.Instance.isMedicationActive(context, iq_);
@@ -1150,11 +1150,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     private IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.Atomoxetine(context);
-        IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-        IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> a_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? d_(MedicationRequest MR) {
+        bool? b_(MedicationRequest MR) {
             IEnumerable<Medication> er_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? es_(Medication M) {
@@ -1176,8 +1174,10 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return eu_;
         }
 
-        IEnumerable<MedicationRequest> e_ = context.Operators.Where<MedicationRequest>(c_, d_);
-        IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
+        IEnumerable<MedicationRequest> c_ = context.Operators.Where<MedicationRequest>(a_, b_);
+        CqlValueSet d_ = this.Atomoxetine(context);
+        IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(c_, e_);
         IEnumerable<MedicationRequest> g_ = Status_1_15_000.Instance.isMedicationOrder(context, f_);
 
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? h_(MedicationRequest AtomoxetineMed) {
@@ -1211,10 +1211,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
         IEnumerable<CqlInterval<CqlDate>> o_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(m_, n_);
         IEnumerable<CqlInterval<CqlDate>> p_ = CumulativeMedicationDuration_6_0_000.Instance.rolloutIntervals(context, o_);
-        CqlValueSet q_ = this.Clonidine(context);
-        IEnumerable<MedicationRequest> r_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? s_(MedicationRequest MR) {
+        bool? q_(MedicationRequest MR) {
             IEnumerable<Medication> fm_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? fn_(Medication M) {
@@ -1236,7 +1234,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return fp_;
         }
 
-        IEnumerable<MedicationRequest> t_ = context.Operators.Where<MedicationRequest>(c_, s_);
+        IEnumerable<MedicationRequest> r_ = context.Operators.Where<MedicationRequest>(a_, q_);
+        CqlValueSet s_ = this.Clonidine(context);
+        IEnumerable<MedicationRequest> t_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> u_ = context.Operators.Union<MedicationRequest>(r_, t_);
         IEnumerable<MedicationRequest> v_ = Status_1_15_000.Instance.isMedicationOrder(context, u_);
 
@@ -1272,10 +1272,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<CqlInterval<CqlDate>> ad_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(ab_, ac_);
         IEnumerable<CqlInterval<CqlDate>> ae_ = CumulativeMedicationDuration_6_0_000.Instance.rolloutIntervals(context, ad_);
         IEnumerable<CqlInterval<CqlDate>> af_ = context.Operators.Union<CqlInterval<CqlDate>>(p_, ae_);
-        CqlValueSet ag_ = this.Dexmethylphenidate(context);
-        IEnumerable<MedicationRequest> ah_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? ai_(MedicationRequest MR) {
+        bool? ag_(MedicationRequest MR) {
             IEnumerable<Medication> gh_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? gi_(Medication M) {
@@ -1297,7 +1295,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return gk_;
         }
 
-        IEnumerable<MedicationRequest> aj_ = context.Operators.Where<MedicationRequest>(c_, ai_);
+        IEnumerable<MedicationRequest> ah_ = context.Operators.Where<MedicationRequest>(a_, ag_);
+        CqlValueSet ai_ = this.Dexmethylphenidate(context);
+        IEnumerable<MedicationRequest> aj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> ak_ = context.Operators.Union<MedicationRequest>(ah_, aj_);
         IEnumerable<MedicationRequest> al_ = Status_1_15_000.Instance.isMedicationOrder(context, ak_);
 
@@ -1332,10 +1332,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
         IEnumerable<CqlInterval<CqlDate>> at_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(ar_, as_);
         IEnumerable<CqlInterval<CqlDate>> au_ = CumulativeMedicationDuration_6_0_000.Instance.rolloutIntervals(context, at_);
-        CqlValueSet av_ = this.Dextroamphetamine(context);
-        IEnumerable<MedicationRequest> aw_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, av_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? ax_(MedicationRequest MR) {
+        bool? av_(MedicationRequest MR) {
             IEnumerable<Medication> hc_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? hd_(Medication M) {
@@ -1357,7 +1355,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return hf_;
         }
 
-        IEnumerable<MedicationRequest> ay_ = context.Operators.Where<MedicationRequest>(c_, ax_);
+        IEnumerable<MedicationRequest> aw_ = context.Operators.Where<MedicationRequest>(a_, av_);
+        CqlValueSet ax_ = this.Dextroamphetamine(context);
+        IEnumerable<MedicationRequest> ay_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ax_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> az_ = context.Operators.Union<MedicationRequest>(aw_, ay_);
         IEnumerable<MedicationRequest> ba_ = Status_1_15_000.Instance.isMedicationOrder(context, az_);
 
@@ -1394,10 +1394,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<CqlInterval<CqlDate>> bj_ = CumulativeMedicationDuration_6_0_000.Instance.rolloutIntervals(context, bi_);
         IEnumerable<CqlInterval<CqlDate>> bk_ = context.Operators.Union<CqlInterval<CqlDate>>(au_, bj_);
         IEnumerable<CqlInterval<CqlDate>> bl_ = context.Operators.Union<CqlInterval<CqlDate>>(af_, bk_);
-        CqlValueSet bm_ = this.Lisdexamfetamine(context);
-        IEnumerable<MedicationRequest> bn_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, bm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? bo_(MedicationRequest MR) {
+        bool? bm_(MedicationRequest MR) {
             IEnumerable<Medication> hx_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? hy_(Medication M) {
@@ -1419,7 +1417,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return ia_;
         }
 
-        IEnumerable<MedicationRequest> bp_ = context.Operators.Where<MedicationRequest>(c_, bo_);
+        IEnumerable<MedicationRequest> bn_ = context.Operators.Where<MedicationRequest>(a_, bm_);
+        CqlValueSet bo_ = this.Lisdexamfetamine(context);
+        IEnumerable<MedicationRequest> bp_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, bo_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> bq_ = context.Operators.Union<MedicationRequest>(bn_, bp_);
         IEnumerable<MedicationRequest> br_ = Status_1_15_000.Instance.isMedicationOrder(context, bq_);
 
@@ -1454,10 +1454,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
         IEnumerable<CqlInterval<CqlDate>> bz_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(bx_, by_);
         IEnumerable<CqlInterval<CqlDate>> ca_ = CumulativeMedicationDuration_6_0_000.Instance.rolloutIntervals(context, bz_);
-        CqlValueSet cb_ = this.Methylphenidate(context);
-        IEnumerable<MedicationRequest> cc_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, cb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? cd_(MedicationRequest MR) {
+        bool? cb_(MedicationRequest MR) {
             IEnumerable<Medication> is_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? it_(Medication M) {
@@ -1479,7 +1477,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return iv_;
         }
 
-        IEnumerable<MedicationRequest> ce_ = context.Operators.Where<MedicationRequest>(c_, cd_);
+        IEnumerable<MedicationRequest> cc_ = context.Operators.Where<MedicationRequest>(a_, cb_);
+        CqlValueSet cd_ = this.Methylphenidate(context);
+        IEnumerable<MedicationRequest> ce_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, cd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> cf_ = context.Operators.Union<MedicationRequest>(cc_, ce_);
         IEnumerable<MedicationRequest> cg_ = Status_1_15_000.Instance.isMedicationOrder(context, cf_);
 
@@ -1516,10 +1516,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<CqlInterval<CqlDate>> cp_ = CumulativeMedicationDuration_6_0_000.Instance.rolloutIntervals(context, co_);
         IEnumerable<CqlInterval<CqlDate>> cq_ = context.Operators.Union<CqlInterval<CqlDate>>(ca_, cp_);
         IEnumerable<CqlInterval<CqlDate>> cr_ = context.Operators.Union<CqlInterval<CqlDate>>(bl_, cq_);
-        CqlValueSet cs_ = this.Guanfacine_Medications(context);
-        IEnumerable<MedicationRequest> ct_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, cs_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? cu_(MedicationRequest MR) {
+        bool? cs_(MedicationRequest MR) {
             IEnumerable<Medication> jn_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? jo_(Medication M) {
@@ -1541,7 +1539,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return jq_;
         }
 
-        IEnumerable<MedicationRequest> cv_ = context.Operators.Where<MedicationRequest>(c_, cu_);
+        IEnumerable<MedicationRequest> ct_ = context.Operators.Where<MedicationRequest>(a_, cs_);
+        CqlValueSet cu_ = this.Guanfacine_Medications(context);
+        IEnumerable<MedicationRequest> cv_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, cu_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> cw_ = context.Operators.Union<MedicationRequest>(ct_, cv_);
         IEnumerable<MedicationRequest> cx_ = Status_1_15_000.Instance.isMedicationOrder(context, cw_);
 
@@ -1576,11 +1576,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
         IEnumerable<CqlInterval<CqlDate>> df_ = context.Operators.Select<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(dd_, de_);
         IEnumerable<CqlInterval<CqlDate>> dg_ = CumulativeMedicationDuration_6_0_000.Instance.rolloutIntervals(context, df_);
-        CqlCode dh_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
-        IEnumerable<CqlCode> di_ = context.Operators.ToList<CqlCode>(dh_);
-        IEnumerable<MedicationRequest> dj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, di_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? dk_(MedicationRequest MR) {
+        bool? dh_(MedicationRequest MR) {
             IEnumerable<Medication> ki_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? kj_(Medication M) {
@@ -1603,8 +1600,11 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return kl_;
         }
 
-        IEnumerable<MedicationRequest> dl_ = context.Operators.Where<MedicationRequest>(c_, dk_);
-        IEnumerable<MedicationRequest> dm_ = context.Operators.Union<MedicationRequest>(dj_, dl_);
+        IEnumerable<MedicationRequest> di_ = context.Operators.Where<MedicationRequest>(a_, dh_);
+        CqlCode dj_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
+        IEnumerable<CqlCode> dk_ = context.Operators.ToList<CqlCode>(dj_);
+        IEnumerable<MedicationRequest> dl_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, dk_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+        IEnumerable<MedicationRequest> dm_ = context.Operators.Union<MedicationRequest>(di_, dl_);
         IEnumerable<MedicationRequest> dn_ = Status_1_15_000.Instance.isMedicationOrder(context, dm_);
 
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? do_(MedicationRequest MethamphetamineMed) {
@@ -1640,10 +1640,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<CqlInterval<CqlDate>> dw_ = CumulativeMedicationDuration_6_0_000.Instance.rolloutIntervals(context, dv_);
         IEnumerable<CqlInterval<CqlDate>> dx_ = context.Operators.Union<CqlInterval<CqlDate>>(dg_, dw_);
         IEnumerable<CqlInterval<CqlDate>> dy_ = context.Operators.Union<CqlInterval<CqlDate>>(cr_, dx_);
-        CqlValueSet dz_ = this.Viloxazine(context);
-        IEnumerable<MedicationRequest> ea_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, dz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-        bool? eb_(MedicationRequest MR) {
+        bool? dz_(MedicationRequest MR) {
             IEnumerable<Medication> le_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? lf_(Medication M) {
@@ -1665,7 +1663,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return lh_;
         }
 
-        IEnumerable<MedicationRequest> ec_ = context.Operators.Where<MedicationRequest>(c_, eb_);
+        IEnumerable<MedicationRequest> ea_ = context.Operators.Where<MedicationRequest>(a_, dz_);
+        CqlValueSet eb_ = this.Viloxazine(context);
+        IEnumerable<MedicationRequest> ec_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, eb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> ed_ = context.Operators.Union<MedicationRequest>(ea_, ec_);
         IEnumerable<MedicationRequest> ee_ = Status_1_15_000.Instance.isMedicationOrder(context, ed_);
 

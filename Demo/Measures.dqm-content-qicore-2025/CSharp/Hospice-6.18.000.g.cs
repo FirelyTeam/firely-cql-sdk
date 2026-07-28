@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("Hospice", "6.18.000")]
 public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
 {
@@ -212,23 +212,23 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
             {
                 DataType cj_ = HospicePerformed?.Performed;
                 object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                bool cl_ = ck_ is CqlInterval<CqlDateTime>;
+                bool cl_ = ck_ is CqlQuantity;
                 if (cl_)
                 {
                     DataType cm_ = HospicePerformed?.Performed;
                     object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
-                    ca_ = cn_ as CqlInterval<CqlDateTime>;
+                    ca_ = cn_ as CqlQuantity;
                 }
                 else
                 {
                     DataType co_ = HospicePerformed?.Performed;
                     object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
-                    bool cq_ = cp_ is CqlQuantity;
+                    bool cq_ = cp_ is CqlInterval<CqlDateTime>;
                     if (cq_)
                     {
                         DataType cr_ = HospicePerformed?.Performed;
                         object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                        ca_ = cs_ as CqlQuantity;
+                        ca_ = cs_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {

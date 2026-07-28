@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("FHIR347", "0.1.021")]
 public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
 {
@@ -1146,23 +1146,23 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 object cg_;
                 Timing.RepeatComponent ck_ = T?.Repeat;
                 DataType cl_ = ck_?.Bounds;
-                bool cm_ = cl_ is Range;
+                bool cm_ = cl_ is Period;
                 if (cm_)
                 {
                     Timing.RepeatComponent cn_ = T?.Repeat;
                     DataType co_ = cn_?.Bounds;
-                    cg_ = co_ as Range;
+                    cg_ = co_ as Period;
                 }
                 else
                 {
                     Timing.RepeatComponent cp_ = T?.Repeat;
                     DataType cq_ = cp_?.Bounds;
-                    bool cr_ = cq_ is Period;
+                    bool cr_ = cq_ is Range;
                     if (cr_)
                     {
                         Timing.RepeatComponent cs_ = T?.Repeat;
                         DataType ct_ = cs_?.Bounds;
-                        cg_ = ct_ as Period;
+                        cg_ = ct_ as Range;
                     }
                     else
                     {

@@ -747,11 +747,25 @@ partial class CodeBuilderContext
         bool throwOnError = false,
         bool considerSafeUpcast = false) // @TODO: Cast - ChangeType
     {
-        var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false, considerSafeUpcast);
-        if (tc != TypeConversion.NoMatch)
+        // A covariant list conversion (e.g. IEnumerable<Derived> as IEnumerable<Base>) is not
+        // an option when compiler-generated tuple types are involved: the C# code generator
+        // lowers those element types to value tuples, and IEnumerable<T> covariance does not
+        // apply to value types, so the emitted 'as' cast would silently yield null at runtime
+        // (see #1354). Convert such lists element-wise below instead.
+        bool isTupleListConversion =
+            _typeResolver.GetListElementType(input.Type, throwError: false) is { } inputListElemType
+            && _typeResolver.GetListElementType(outputType, throwError: false) is { } outputListElemType
+            && inputListElemType != outputListElemType
+            && (inputListElemType.IsTupleBaseType() || outputListElemType.IsTupleBaseType());
+
+        if (!isTupleListConversion)
         {
-            typeConversion = tc;
-            return expression!;
+            var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false, considerSafeUpcast);
+            if (tc != TypeConversion.NoMatch)
+            {
+                typeConversion = tc;
+                return expression!;
+            }
         }
 
         // tuples are not convertible.
@@ -795,7 +809,18 @@ partial class CodeBuilderContext
                         typeConversion = TypeConversion.OperatorConvert;
                         var ctor = outputType.GetConstructor(Type.EmptyTypes)
                                    ?? throw this.NewExpressionBuildingException($"Tuple type {outputType} has no accessible parameterless constructor.");
-                        return new CodeMemberInit(new CodeNew(ctor), bindings);
+                        var memberInit = new CodeMemberInit(new CodeNew(ctor), bindings);
+
+                        // A freshly constructed tuple is never null; skip the null guard.
+                        if (input is CodeMemberInit or CodeNew)
+                            return memberInit;
+
+                        // A null tuple converts to null rather than to a tuple whose elements
+                        // are all null; without this check property accesses in the bindings
+                        // would throw when evaluated against a null input (see #1354).
+                        var isNull = new CodeBinary(CodeBinaryOp.Equal, input, new CodeConstant(null, input.Type));
+                        var nullResult = new CodeConstant(null, outputType);
+                        return new CodeConditional(isNull, nullResult, memberInit, outputType);
                     }
                 }
             }
@@ -813,7 +838,16 @@ partial class CodeBuilderContext
             var lambdaParameter = new CodeLocal(inputElementType, TypeNameToIdentifier(inputElementType, this));
             var lambdaBody = ChangeType(lambdaParameter, outputElementType, out typeConversion, throwOnError: true);
             var lambda = new CodeLambda([lambdaParameter], lambdaBody);
-            return BindCqlOperator(nameof(ICqlOperators.Select), input, lambda);
+            var select = BindCqlOperator(nameof(ICqlOperators.Select), input, lambda);
+
+            // The element-wise Select is the conversion: callers such as the As handler must
+            // use it rather than fall back to a type-as cast on the whole list, which for
+            // tuple-typed elements would yield null at runtime after the C# code generator
+            // lowers them to value tuples (see #1354).
+            if (isTupleListConversion)
+                typeConversion = TypeConversion.OperatorConvert;
+
+            return select;
         }
 
         Type toType = TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo)

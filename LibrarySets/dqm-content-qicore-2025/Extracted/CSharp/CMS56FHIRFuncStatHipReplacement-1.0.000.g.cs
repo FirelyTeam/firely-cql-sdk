@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS56FHIRFuncStatHipReplacement", "1.0.000")]
 public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingleton<CMS56FHIRFuncStatHipReplacement_1_0_000>
 {
@@ -391,23 +391,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             {
                 DataType r_ = THAProcedure?.Performed;
                 object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                bool t_ = s_ is CqlInterval<CqlDateTime>;
+                bool t_ = s_ is CqlQuantity;
                 if (t_)
                 {
                     DataType u_ = THAProcedure?.Performed;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    f_ = v_ as CqlInterval<CqlDateTime>;
+                    f_ = v_ as CqlQuantity;
                 }
                 else
                 {
                     DataType w_ = THAProcedure?.Performed;
                     object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                    bool y_ = x_ is CqlQuantity;
+                    bool y_ = x_ is CqlInterval<CqlDateTime>;
                     if (y_)
                     {
                         DataType z_ = THAProcedure?.Performed;
                         object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        f_ = aa_ as CqlQuantity;
+                        f_ = aa_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -568,23 +568,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 {
                     DataType aj_ = THAProcedure?.Performed;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    bool al_ = ak_ is CqlInterval<CqlDateTime>;
+                    bool al_ = ak_ is CqlQuantity;
                     if (al_)
                     {
                         DataType am_ = THAProcedure?.Performed;
                         object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        n_ = an_ as CqlInterval<CqlDateTime>;
+                        n_ = an_ as CqlQuantity;
                     }
                     else
                     {
                         DataType ao_ = THAProcedure?.Performed;
                         object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        bool aq_ = ap_ is CqlQuantity;
+                        bool aq_ = ap_ is CqlInterval<CqlDateTime>;
                         if (aq_)
                         {
                             DataType ar_ = THAProcedure?.Performed;
                             object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                            n_ = as_ as CqlQuantity;
+                            n_ = as_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -622,23 +622,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 {
                     DataType bd_ = THAProcedure?.Performed;
                     object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                    bool bf_ = be_ is CqlInterval<CqlDateTime>;
+                    bool bf_ = be_ is CqlQuantity;
                     if (bf_)
                     {
                         DataType bg_ = THAProcedure?.Performed;
                         object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                        s_ = bh_ as CqlInterval<CqlDateTime>;
+                        s_ = bh_ as CqlQuantity;
                     }
                     else
                     {
                         DataType bi_ = THAProcedure?.Performed;
                         object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
-                        bool bk_ = bj_ is CqlQuantity;
+                        bool bk_ = bj_ is CqlInterval<CqlDateTime>;
                         if (bk_)
                         {
                             DataType bl_ = THAProcedure?.Performed;
                             object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                            s_ = bm_ as CqlQuantity;
+                            s_ = bm_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -676,23 +676,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 {
                     DataType bx_ = THAProcedure?.Performed;
                     object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    bool bz_ = by_ is CqlInterval<CqlDateTime>;
+                    bool bz_ = by_ is CqlQuantity;
                     if (bz_)
                     {
                         DataType ca_ = THAProcedure?.Performed;
                         object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                        x_ = cb_ as CqlInterval<CqlDateTime>;
+                        x_ = cb_ as CqlQuantity;
                     }
                     else
                     {
                         DataType cc_ = THAProcedure?.Performed;
                         object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
-                        bool ce_ = cd_ is CqlQuantity;
+                        bool ce_ = cd_ is CqlInterval<CqlDateTime>;
                         if (ce_)
                         {
                             DataType cf_ = THAProcedure?.Performed;
                             object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                            x_ = cg_ as CqlQuantity;
+                            x_ = cg_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -762,23 +762,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 {
                     DataType u_ = THAProcedure?.Performed;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    bool w_ = v_ is CqlInterval<CqlDateTime>;
+                    bool w_ = v_ is CqlQuantity;
                     if (w_)
                     {
                         DataType x_ = THAProcedure?.Performed;
                         object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                        k_ = y_ as CqlInterval<CqlDateTime>;
+                        k_ = y_ as CqlQuantity;
                     }
                     else
                     {
                         DataType z_ = THAProcedure?.Performed;
                         object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        bool ab_ = aa_ is CqlQuantity;
+                        bool ab_ = aa_ is CqlInterval<CqlDateTime>;
                         if (ab_)
                         {
                             DataType ac_ = THAProcedure?.Performed;
                             object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                            k_ = ad_ as CqlQuantity;
+                            k_ = ad_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -813,23 +813,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 {
                     DataType ao_ = PartialTHAProcedure?.Performed;
                     object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    bool aq_ = ap_ is CqlInterval<CqlDateTime>;
+                    bool aq_ = ap_ is CqlQuantity;
                     if (aq_)
                     {
                         DataType ar_ = PartialTHAProcedure?.Performed;
                         object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                        m_ = as_ as CqlInterval<CqlDateTime>;
+                        m_ = as_ as CqlQuantity;
                     }
                     else
                     {
                         DataType at_ = PartialTHAProcedure?.Performed;
                         object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        bool av_ = au_ is CqlQuantity;
+                        bool av_ = au_ is CqlInterval<CqlDateTime>;
                         if (av_)
                         {
                             DataType aw_ = PartialTHAProcedure?.Performed;
                             object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                            m_ = ax_ as CqlQuantity;
+                            m_ = ax_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -895,23 +895,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 {
                     DataType u_ = THAProcedure?.Performed;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    bool w_ = v_ is CqlInterval<CqlDateTime>;
+                    bool w_ = v_ is CqlQuantity;
                     if (w_)
                     {
                         DataType x_ = THAProcedure?.Performed;
                         object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                        k_ = y_ as CqlInterval<CqlDateTime>;
+                        k_ = y_ as CqlQuantity;
                     }
                     else
                     {
                         DataType z_ = THAProcedure?.Performed;
                         object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        bool ab_ = aa_ is CqlQuantity;
+                        bool ab_ = aa_ is CqlInterval<CqlDateTime>;
                         if (ab_)
                         {
                             DataType ac_ = THAProcedure?.Performed;
                             object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                            k_ = ad_ as CqlQuantity;
+                            k_ = ad_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -946,23 +946,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 {
                     DataType ao_ = RevisionTHAProcedure?.Performed;
                     object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    bool aq_ = ap_ is CqlInterval<CqlDateTime>;
+                    bool aq_ = ap_ is CqlQuantity;
                     if (aq_)
                     {
                         DataType ar_ = RevisionTHAProcedure?.Performed;
                         object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                        m_ = as_ as CqlInterval<CqlDateTime>;
+                        m_ = as_ as CqlQuantity;
                     }
                     else
                     {
                         DataType at_ = RevisionTHAProcedure?.Performed;
                         object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        bool av_ = au_ is CqlQuantity;
+                        bool av_ = au_ is CqlInterval<CqlDateTime>;
                         if (av_)
                         {
                             DataType aw_ = RevisionTHAProcedure?.Performed;
                             object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                            m_ = ax_ as CqlQuantity;
+                            m_ = ax_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1030,23 +1030,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 {
                     DataType w_ = THAProcedure?.Performed;
                     object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                    bool y_ = x_ is CqlInterval<CqlDateTime>;
+                    bool y_ = x_ is CqlQuantity;
                     if (y_)
                     {
                         DataType z_ = THAProcedure?.Performed;
                         object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        m_ = aa_ as CqlInterval<CqlDateTime>;
+                        m_ = aa_ as CqlQuantity;
                     }
                     else
                     {
                         DataType ab_ = THAProcedure?.Performed;
                         object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlQuantity;
+                        bool ad_ = ac_ is CqlInterval<CqlDateTime>;
                         if (ad_)
                         {
                             DataType ae_ = THAProcedure?.Performed;
                             object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                            m_ = af_ as CqlQuantity;
+                            m_ = af_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1116,23 +1116,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 {
                     DataType w_ = THAProcedure?.Performed;
                     object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                    bool y_ = x_ is CqlInterval<CqlDateTime>;
+                    bool y_ = x_ is CqlQuantity;
                     if (y_)
                     {
                         DataType z_ = THAProcedure?.Performed;
                         object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        m_ = aa_ as CqlInterval<CqlDateTime>;
+                        m_ = aa_ as CqlQuantity;
                     }
                     else
                     {
                         DataType ab_ = THAProcedure?.Performed;
                         object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlQuantity;
+                        bool ad_ = ac_ is CqlInterval<CqlDateTime>;
                         if (ad_)
                         {
                             DataType ae_ = THAProcedure?.Performed;
                             object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                            m_ = af_ as CqlQuantity;
+                            m_ = af_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1206,23 +1206,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 {
                     DataType ak_ = ElectiveTHAProcedure?.Performed;
                     object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                    bool am_ = al_ is CqlInterval<CqlDateTime>;
+                    bool am_ = al_ is CqlQuantity;
                     if (am_)
                     {
                         DataType an_ = ElectiveTHAProcedure?.Performed;
                         object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        q_ = ao_ as CqlInterval<CqlDateTime>;
+                        q_ = ao_ as CqlQuantity;
                     }
                     else
                     {
                         DataType ap_ = ElectiveTHAProcedure?.Performed;
                         object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        bool ar_ = aq_ is CqlQuantity;
+                        bool ar_ = aq_ is CqlInterval<CqlDateTime>;
                         if (ar_)
                         {
                             DataType as_ = ElectiveTHAProcedure?.Performed;
                             object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
-                            q_ = at_ as CqlQuantity;
+                            q_ = at_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1258,23 +1258,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 {
                     DataType be_ = THAProcedure?.Performed;
                     object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                    bool bg_ = bf_ is CqlInterval<CqlDateTime>;
+                    bool bg_ = bf_ is CqlQuantity;
                     if (bg_)
                     {
                         DataType bh_ = THAProcedure?.Performed;
                         object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                        t_ = bi_ as CqlInterval<CqlDateTime>;
+                        t_ = bi_ as CqlQuantity;
                     }
                     else
                     {
                         DataType bj_ = THAProcedure?.Performed;
                         object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                        bool bl_ = bk_ is CqlQuantity;
+                        bool bl_ = bk_ is CqlInterval<CqlDateTime>;
                         if (bl_)
                         {
                             DataType bm_ = THAProcedure?.Performed;
                             object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
-                            t_ = bn_ as CqlQuantity;
+                            t_ = bn_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1312,23 +1312,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 {
                     DataType by_ = THAProcedure?.Performed;
                     object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                    bool ca_ = bz_ is CqlInterval<CqlDateTime>;
+                    bool ca_ = bz_ is CqlQuantity;
                     if (ca_)
                     {
                         DataType cb_ = THAProcedure?.Performed;
                         object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                        y_ = cc_ as CqlInterval<CqlDateTime>;
+                        y_ = cc_ as CqlQuantity;
                     }
                     else
                     {
                         DataType cd_ = THAProcedure?.Performed;
                         object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                        bool cf_ = ce_ is CqlQuantity;
+                        bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                         if (cf_)
                         {
                             DataType cg_ = THAProcedure?.Performed;
                             object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                            y_ = ch_ as CqlQuantity;
+                            y_ = ch_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -1397,23 +1397,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             {
                 DataType z_ = THAProcedure?.Performed;
                 object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                bool ab_ = aa_ is CqlInterval<CqlDateTime>;
+                bool ab_ = aa_ is CqlQuantity;
                 if (ab_)
                 {
                     DataType ac_ = THAProcedure?.Performed;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    i_ = ad_ as CqlInterval<CqlDateTime>;
+                    i_ = ad_ as CqlQuantity;
                 }
                 else
                 {
                     DataType ae_ = THAProcedure?.Performed;
                     object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                    bool ag_ = af_ is CqlQuantity;
+                    bool ag_ = af_ is CqlInterval<CqlDateTime>;
                     if (ag_)
                     {
                         DataType ah_ = THAProcedure?.Performed;
                         object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        i_ = ai_ as CqlQuantity;
+                        i_ = ai_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1450,23 +1450,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             {
                 DataType at_ = THAProcedure?.Performed;
                 object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                bool av_ = au_ is CqlInterval<CqlDateTime>;
+                bool av_ = au_ is CqlQuantity;
                 if (av_)
                 {
                     DataType aw_ = THAProcedure?.Performed;
                     object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                    m_ = ax_ as CqlInterval<CqlDateTime>;
+                    m_ = ax_ as CqlQuantity;
                 }
                 else
                 {
                     DataType ay_ = THAProcedure?.Performed;
                     object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                    bool ba_ = az_ is CqlQuantity;
+                    bool ba_ = az_ is CqlInterval<CqlDateTime>;
                     if (ba_)
                     {
                         DataType bb_ = THAProcedure?.Performed;
                         object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                        m_ = bc_ as CqlQuantity;
+                        m_ = bc_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1694,23 +1694,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             {
                 DataType q_ = THAProcedure?.Performed;
                 object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlInterval<CqlDateTime>;
+                bool s_ = r_ is CqlQuantity;
                 if (s_)
                 {
                     DataType t_ = THAProcedure?.Performed;
                     object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    j_ = u_ as CqlInterval<CqlDateTime>;
+                    j_ = u_ as CqlQuantity;
                 }
                 else
                 {
                     DataType v_ = THAProcedure?.Performed;
                     object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlQuantity;
+                    bool x_ = w_ is CqlInterval<CqlDateTime>;
                     if (x_)
                     {
                         DataType y_ = THAProcedure?.Performed;
                         object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        j_ = z_ as CqlQuantity;
+                        j_ = z_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1742,20 +1742,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
             bool? ag_(CqlDate InitialHipAssessmentHOOS) {
                 CqlDateTime aj_ = context.Operators.Start(TotalHip);
-                CqlQuantity ak_ = context.Operators.Quantity(90m, "days");
-                CqlDate al_ = context.Operators.Add(InitialHipAssessmentHOOS, ak_);
-                CqlInterval<CqlDate> am_ = context.Operators.Interval(InitialHipAssessmentHOOS, al_, true, true);
-                CqlDate an_ = am_?.low;
-                CqlDateTime ao_ = context.Operators.ConvertDateToDateTime(an_);
-                CqlDate ap_ = am_?.high;
-                CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(ap_);
-                bool? ar_ = am_?.lowClosed;
-                bool? as_ = am_?.highClosed;
-                CqlInterval<CqlDateTime> at_ = context.Operators.Interval(ao_, aq_, ar_, as_);
-                bool? au_ = context.Operators.In<CqlDateTime>(aj_, at_, "day");
-                bool? av_ = context.Operators.Not((bool?)(InitialHipAssessmentHOOS is null));
-                bool? aw_ = context.Operators.And(au_, av_);
-                return aw_;
+                CqlDateTime ak_ = context.Operators.ConvertDateToDateTime(InitialHipAssessmentHOOS);
+                CqlQuantity al_ = context.Operators.Quantity(90m, "days");
+                CqlDate am_ = context.Operators.Add(InitialHipAssessmentHOOS, al_);
+                CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+                CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(ak_, an_, true, true);
+                bool? ap_ = context.Operators.In<CqlDateTime>(aj_, ao_, "day");
+                bool? aq_ = context.Operators.Not((bool?)(InitialHipAssessmentHOOS is null));
+                bool? ar_ = context.Operators.And(ap_, aq_);
+                return ar_;
             }
 
             IEnumerable<CqlDate> ah_ = context.Operators.Where<CqlDate>(af_, ag_);
@@ -1766,25 +1761,25 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         IEnumerable<CqlInterval<CqlDateTime>> f_ = context.Operators.Where<CqlInterval<CqlDateTime>>(d_, e_);
 
         bool? g_(CqlInterval<CqlDateTime> TotalHip) {
-            IEnumerable<CqlDate> ax_ = this.Date_HOOS_Total_Assessment_Completed(context);
+            IEnumerable<CqlDate> as_ = this.Date_HOOS_Total_Assessment_Completed(context);
 
-            bool? ay_(CqlDate FollowUpHipAssessmentHOOS) {
-                CqlDateTime bb_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentHOOS);
-                CqlDate bc_ = context.Operators.DateFrom(bb_);
-                CqlDateTime bd_ = context.Operators.End(TotalHip);
-                CqlDate be_ = context.Operators.DateFrom(bd_);
-                CqlQuantity bf_ = context.Operators.Quantity(300m, "days");
-                CqlDate bg_ = context.Operators.Add(be_, bf_);
-                CqlQuantity bh_ = context.Operators.Quantity(425m, "days");
-                CqlDate bi_ = context.Operators.Add(be_, bh_);
-                CqlInterval<CqlDate> bj_ = context.Operators.Interval(bg_, bi_, true, true);
-                bool? bk_ = context.Operators.In<CqlDate>(bc_, bj_, "day");
-                return bk_;
+            bool? at_(CqlDate FollowUpHipAssessmentHOOS) {
+                CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentHOOS);
+                CqlDate ax_ = context.Operators.DateFrom(aw_);
+                CqlDateTime ay_ = context.Operators.End(TotalHip);
+                CqlDate az_ = context.Operators.DateFrom(ay_);
+                CqlQuantity ba_ = context.Operators.Quantity(300m, "days");
+                CqlDate bb_ = context.Operators.Add(az_, ba_);
+                CqlQuantity bc_ = context.Operators.Quantity(425m, "days");
+                CqlDate bd_ = context.Operators.Add(az_, bc_);
+                CqlInterval<CqlDate> be_ = context.Operators.Interval(bb_, bd_, true, true);
+                bool? bf_ = context.Operators.In<CqlDate>(ax_, be_, "day");
+                return bf_;
             }
 
-            IEnumerable<CqlDate> az_ = context.Operators.Where<CqlDate>(ax_, ay_);
-            bool? ba_ = context.Operators.Exists<CqlDate>(az_);
-            return ba_;
+            IEnumerable<CqlDate> au_ = context.Operators.Where<CqlDate>(as_, at_);
+            bool? av_ = context.Operators.Exists<CqlDate>(au_);
+            return av_;
         }
 
         IEnumerable<CqlInterval<CqlDateTime>> h_ = context.Operators.Where<CqlInterval<CqlDateTime>>(f_, g_);
@@ -1855,23 +1850,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             {
                 DataType q_ = THAProcedure?.Performed;
                 object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlInterval<CqlDateTime>;
+                bool s_ = r_ is CqlQuantity;
                 if (s_)
                 {
                     DataType t_ = THAProcedure?.Performed;
                     object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    j_ = u_ as CqlInterval<CqlDateTime>;
+                    j_ = u_ as CqlQuantity;
                 }
                 else
                 {
                     DataType v_ = THAProcedure?.Performed;
                     object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlQuantity;
+                    bool x_ = w_ is CqlInterval<CqlDateTime>;
                     if (x_)
                     {
                         DataType y_ = THAProcedure?.Performed;
                         object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        j_ = z_ as CqlQuantity;
+                        j_ = z_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1903,20 +1898,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
             bool? ag_(CqlDate InitialHipAssessment) {
                 CqlDateTime aj_ = context.Operators.Start(TotalHip);
-                CqlQuantity ak_ = context.Operators.Quantity(90m, "days");
-                CqlDate al_ = context.Operators.Add(InitialHipAssessment, ak_);
-                CqlInterval<CqlDate> am_ = context.Operators.Interval(InitialHipAssessment, al_, true, true);
-                CqlDate an_ = am_?.low;
-                CqlDateTime ao_ = context.Operators.ConvertDateToDateTime(an_);
-                CqlDate ap_ = am_?.high;
-                CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(ap_);
-                bool? ar_ = am_?.lowClosed;
-                bool? as_ = am_?.highClosed;
-                CqlInterval<CqlDateTime> at_ = context.Operators.Interval(ao_, aq_, ar_, as_);
-                bool? au_ = context.Operators.In<CqlDateTime>(aj_, at_, "day");
-                bool? av_ = context.Operators.Not((bool?)(InitialHipAssessment is null));
-                bool? aw_ = context.Operators.And(au_, av_);
-                return aw_;
+                CqlDateTime ak_ = context.Operators.ConvertDateToDateTime(InitialHipAssessment);
+                CqlQuantity al_ = context.Operators.Quantity(90m, "days");
+                CqlDate am_ = context.Operators.Add(InitialHipAssessment, al_);
+                CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+                CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(ak_, an_, true, true);
+                bool? ap_ = context.Operators.In<CqlDateTime>(aj_, ao_, "day");
+                bool? aq_ = context.Operators.Not((bool?)(InitialHipAssessment is null));
+                bool? ar_ = context.Operators.And(ap_, aq_);
+                return ar_;
             }
 
             IEnumerable<CqlDate> ah_ = context.Operators.Where<CqlDate>(af_, ag_);
@@ -1927,25 +1917,25 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         IEnumerable<CqlInterval<CqlDateTime>> f_ = context.Operators.Where<CqlInterval<CqlDateTime>>(d_, e_);
 
         bool? g_(CqlInterval<CqlDateTime> TotalHip) {
-            IEnumerable<CqlDate> ax_ = this.Date_HOOSJr_Total_Assessment_Completed(context);
+            IEnumerable<CqlDate> as_ = this.Date_HOOSJr_Total_Assessment_Completed(context);
 
-            bool? ay_(CqlDate FollowUpHipAssessment) {
-                CqlDateTime bb_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessment);
-                CqlDate bc_ = context.Operators.DateFrom(bb_);
-                CqlDateTime bd_ = context.Operators.End(TotalHip);
-                CqlDate be_ = context.Operators.DateFrom(bd_);
-                CqlQuantity bf_ = context.Operators.Quantity(300m, "days");
-                CqlDate bg_ = context.Operators.Add(be_, bf_);
-                CqlQuantity bh_ = context.Operators.Quantity(425m, "days");
-                CqlDate bi_ = context.Operators.Add(be_, bh_);
-                CqlInterval<CqlDate> bj_ = context.Operators.Interval(bg_, bi_, true, true);
-                bool? bk_ = context.Operators.In<CqlDate>(bc_, bj_, "day");
-                return bk_;
+            bool? at_(CqlDate FollowUpHipAssessment) {
+                CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessment);
+                CqlDate ax_ = context.Operators.DateFrom(aw_);
+                CqlDateTime ay_ = context.Operators.End(TotalHip);
+                CqlDate az_ = context.Operators.DateFrom(ay_);
+                CqlQuantity ba_ = context.Operators.Quantity(300m, "days");
+                CqlDate bb_ = context.Operators.Add(az_, ba_);
+                CqlQuantity bc_ = context.Operators.Quantity(425m, "days");
+                CqlDate bd_ = context.Operators.Add(az_, bc_);
+                CqlInterval<CqlDate> be_ = context.Operators.Interval(bb_, bd_, true, true);
+                bool? bf_ = context.Operators.In<CqlDate>(ax_, be_, "day");
+                return bf_;
             }
 
-            IEnumerable<CqlDate> az_ = context.Operators.Where<CqlDate>(ax_, ay_);
-            bool? ba_ = context.Operators.Exists<CqlDate>(az_);
-            return ba_;
+            IEnumerable<CqlDate> au_ = context.Operators.Where<CqlDate>(as_, at_);
+            bool? av_ = context.Operators.Exists<CqlDate>(au_);
+            return av_;
         }
 
         IEnumerable<CqlInterval<CqlDateTime>> h_ = context.Operators.Where<CqlInterval<CqlDateTime>>(f_, g_);
@@ -2054,23 +2044,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             {
                 DataType q_ = THAProcedure?.Performed;
                 object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlInterval<CqlDateTime>;
+                bool s_ = r_ is CqlQuantity;
                 if (s_)
                 {
                     DataType t_ = THAProcedure?.Performed;
                     object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    j_ = u_ as CqlInterval<CqlDateTime>;
+                    j_ = u_ as CqlQuantity;
                 }
                 else
                 {
                     DataType v_ = THAProcedure?.Performed;
                     object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlQuantity;
+                    bool x_ = w_ is CqlInterval<CqlDateTime>;
                     if (x_)
                     {
                         DataType y_ = THAProcedure?.Performed;
                         object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        j_ = z_ as CqlQuantity;
+                        j_ = z_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2102,20 +2092,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
             bool? ag_(CqlDate InitialHipAssessmentPROMIS10) {
                 CqlDateTime aj_ = context.Operators.Start(TotalHip);
-                CqlQuantity ak_ = context.Operators.Quantity(90m, "days");
-                CqlDate al_ = context.Operators.Add(InitialHipAssessmentPROMIS10, ak_);
-                CqlInterval<CqlDate> am_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, al_, true, true);
-                CqlDate an_ = am_?.low;
-                CqlDateTime ao_ = context.Operators.ConvertDateToDateTime(an_);
-                CqlDate ap_ = am_?.high;
-                CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(ap_);
-                bool? ar_ = am_?.lowClosed;
-                bool? as_ = am_?.highClosed;
-                CqlInterval<CqlDateTime> at_ = context.Operators.Interval(ao_, aq_, ar_, as_);
-                bool? au_ = context.Operators.In<CqlDateTime>(aj_, at_, "day");
-                bool? av_ = context.Operators.Not((bool?)(InitialHipAssessmentPROMIS10 is null));
-                bool? aw_ = context.Operators.And(au_, av_);
-                return aw_;
+                CqlDateTime ak_ = context.Operators.ConvertDateToDateTime(InitialHipAssessmentPROMIS10);
+                CqlQuantity al_ = context.Operators.Quantity(90m, "days");
+                CqlDate am_ = context.Operators.Add(InitialHipAssessmentPROMIS10, al_);
+                CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+                CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(ak_, an_, true, true);
+                bool? ap_ = context.Operators.In<CqlDateTime>(aj_, ao_, "day");
+                bool? aq_ = context.Operators.Not((bool?)(InitialHipAssessmentPROMIS10 is null));
+                bool? ar_ = context.Operators.And(ap_, aq_);
+                return ar_;
             }
 
             IEnumerable<CqlDate> ah_ = context.Operators.Where<CqlDate>(af_, ag_);
@@ -2126,25 +2111,25 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         IEnumerable<CqlInterval<CqlDateTime>> f_ = context.Operators.Where<CqlInterval<CqlDateTime>>(d_, e_);
 
         bool? g_(CqlInterval<CqlDateTime> TotalHip) {
-            IEnumerable<CqlDate> ax_ = this.Date_PROMIS10_Total_Assessment_Completed(context);
+            IEnumerable<CqlDate> as_ = this.Date_PROMIS10_Total_Assessment_Completed(context);
 
-            bool? ay_(CqlDate FollowUpHipAssessmentPROMIS10) {
-                CqlDateTime bb_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentPROMIS10);
-                CqlDate bc_ = context.Operators.DateFrom(bb_);
-                CqlDateTime bd_ = context.Operators.End(TotalHip);
-                CqlDate be_ = context.Operators.DateFrom(bd_);
-                CqlQuantity bf_ = context.Operators.Quantity(300m, "days");
-                CqlDate bg_ = context.Operators.Add(be_, bf_);
-                CqlQuantity bh_ = context.Operators.Quantity(425m, "days");
-                CqlDate bi_ = context.Operators.Add(be_, bh_);
-                CqlInterval<CqlDate> bj_ = context.Operators.Interval(bg_, bi_, true, true);
-                bool? bk_ = context.Operators.In<CqlDate>(bc_, bj_, "day");
-                return bk_;
+            bool? at_(CqlDate FollowUpHipAssessmentPROMIS10) {
+                CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentPROMIS10);
+                CqlDate ax_ = context.Operators.DateFrom(aw_);
+                CqlDateTime ay_ = context.Operators.End(TotalHip);
+                CqlDate az_ = context.Operators.DateFrom(ay_);
+                CqlQuantity ba_ = context.Operators.Quantity(300m, "days");
+                CqlDate bb_ = context.Operators.Add(az_, ba_);
+                CqlQuantity bc_ = context.Operators.Quantity(425m, "days");
+                CqlDate bd_ = context.Operators.Add(az_, bc_);
+                CqlInterval<CqlDate> be_ = context.Operators.Interval(bb_, bd_, true, true);
+                bool? bf_ = context.Operators.In<CqlDate>(ax_, be_, "day");
+                return bf_;
             }
 
-            IEnumerable<CqlDate> az_ = context.Operators.Where<CqlDate>(ax_, ay_);
-            bool? ba_ = context.Operators.Exists<CqlDate>(az_);
-            return ba_;
+            IEnumerable<CqlDate> au_ = context.Operators.Where<CqlDate>(as_, at_);
+            bool? av_ = context.Operators.Exists<CqlDate>(au_);
+            return av_;
         }
 
         IEnumerable<CqlInterval<CqlDateTime>> h_ = context.Operators.Where<CqlInterval<CqlDateTime>>(f_, g_);
@@ -2253,23 +2238,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             {
                 DataType q_ = THAProcedure?.Performed;
                 object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlInterval<CqlDateTime>;
+                bool s_ = r_ is CqlQuantity;
                 if (s_)
                 {
                     DataType t_ = THAProcedure?.Performed;
                     object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    j_ = u_ as CqlInterval<CqlDateTime>;
+                    j_ = u_ as CqlQuantity;
                 }
                 else
                 {
                     DataType v_ = THAProcedure?.Performed;
                     object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlQuantity;
+                    bool x_ = w_ is CqlInterval<CqlDateTime>;
                     if (x_)
                     {
                         DataType y_ = THAProcedure?.Performed;
                         object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        j_ = z_ as CqlQuantity;
+                        j_ = z_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2301,20 +2286,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
             bool? ag_(CqlDate InitialHipAssessmentOblique) {
                 CqlDateTime aj_ = context.Operators.Start(TotalHip);
-                CqlQuantity ak_ = context.Operators.Quantity(90m, "days");
-                CqlDate al_ = context.Operators.Add(InitialHipAssessmentOblique, ak_);
-                CqlInterval<CqlDate> am_ = context.Operators.Interval(InitialHipAssessmentOblique, al_, true, true);
-                CqlDate an_ = am_?.low;
-                CqlDateTime ao_ = context.Operators.ConvertDateToDateTime(an_);
-                CqlDate ap_ = am_?.high;
-                CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(ap_);
-                bool? ar_ = am_?.lowClosed;
-                bool? as_ = am_?.highClosed;
-                CqlInterval<CqlDateTime> at_ = context.Operators.Interval(ao_, aq_, ar_, as_);
-                bool? au_ = context.Operators.In<CqlDateTime>(aj_, at_, "day");
-                bool? av_ = context.Operators.Not((bool?)(InitialHipAssessmentOblique is null));
-                bool? aw_ = context.Operators.And(au_, av_);
-                return aw_;
+                CqlDateTime ak_ = context.Operators.ConvertDateToDateTime(InitialHipAssessmentOblique);
+                CqlQuantity al_ = context.Operators.Quantity(90m, "days");
+                CqlDate am_ = context.Operators.Add(InitialHipAssessmentOblique, al_);
+                CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+                CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(ak_, an_, true, true);
+                bool? ap_ = context.Operators.In<CqlDateTime>(aj_, ao_, "day");
+                bool? aq_ = context.Operators.Not((bool?)(InitialHipAssessmentOblique is null));
+                bool? ar_ = context.Operators.And(ap_, aq_);
+                return ar_;
             }
 
             IEnumerable<CqlDate> ah_ = context.Operators.Where<CqlDate>(af_, ag_);
@@ -2325,25 +2305,25 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         IEnumerable<CqlInterval<CqlDateTime>> f_ = context.Operators.Where<CqlInterval<CqlDateTime>>(d_, e_);
 
         bool? g_(CqlInterval<CqlDateTime> TotalHip) {
-            IEnumerable<CqlDate> ax_ = this.Date_VR12_Oblique_Total_Assessment_Completed(context);
+            IEnumerable<CqlDate> as_ = this.Date_VR12_Oblique_Total_Assessment_Completed(context);
 
-            bool? ay_(CqlDate FollowUpHipAssessmentOblique) {
-                CqlDateTime bb_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentOblique);
-                CqlDate bc_ = context.Operators.DateFrom(bb_);
-                CqlDateTime bd_ = context.Operators.End(TotalHip);
-                CqlDate be_ = context.Operators.DateFrom(bd_);
-                CqlQuantity bf_ = context.Operators.Quantity(300m, "days");
-                CqlDate bg_ = context.Operators.Add(be_, bf_);
-                CqlQuantity bh_ = context.Operators.Quantity(425m, "days");
-                CqlDate bi_ = context.Operators.Add(be_, bh_);
-                CqlInterval<CqlDate> bj_ = context.Operators.Interval(bg_, bi_, true, true);
-                bool? bk_ = context.Operators.In<CqlDate>(bc_, bj_, "day");
-                return bk_;
+            bool? at_(CqlDate FollowUpHipAssessmentOblique) {
+                CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentOblique);
+                CqlDate ax_ = context.Operators.DateFrom(aw_);
+                CqlDateTime ay_ = context.Operators.End(TotalHip);
+                CqlDate az_ = context.Operators.DateFrom(ay_);
+                CqlQuantity ba_ = context.Operators.Quantity(300m, "days");
+                CqlDate bb_ = context.Operators.Add(az_, ba_);
+                CqlQuantity bc_ = context.Operators.Quantity(425m, "days");
+                CqlDate bd_ = context.Operators.Add(az_, bc_);
+                CqlInterval<CqlDate> be_ = context.Operators.Interval(bb_, bd_, true, true);
+                bool? bf_ = context.Operators.In<CqlDate>(ax_, be_, "day");
+                return bf_;
             }
 
-            IEnumerable<CqlDate> az_ = context.Operators.Where<CqlDate>(ax_, ay_);
-            bool? ba_ = context.Operators.Exists<CqlDate>(az_);
-            return ba_;
+            IEnumerable<CqlDate> au_ = context.Operators.Where<CqlDate>(as_, at_);
+            bool? av_ = context.Operators.Exists<CqlDate>(au_);
+            return av_;
         }
 
         IEnumerable<CqlInterval<CqlDateTime>> h_ = context.Operators.Where<CqlInterval<CqlDateTime>>(f_, g_);
@@ -2452,23 +2432,23 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             {
                 DataType q_ = THAProcedure?.Performed;
                 object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlInterval<CqlDateTime>;
+                bool s_ = r_ is CqlQuantity;
                 if (s_)
                 {
                     DataType t_ = THAProcedure?.Performed;
                     object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    j_ = u_ as CqlInterval<CqlDateTime>;
+                    j_ = u_ as CqlQuantity;
                 }
                 else
                 {
                     DataType v_ = THAProcedure?.Performed;
                     object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlQuantity;
+                    bool x_ = w_ is CqlInterval<CqlDateTime>;
                     if (x_)
                     {
                         DataType y_ = THAProcedure?.Performed;
                         object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        j_ = z_ as CqlQuantity;
+                        j_ = z_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2500,20 +2480,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
             bool? ag_(CqlDate InitialHipAssessmentOrthogonal) {
                 CqlDateTime aj_ = context.Operators.Start(TotalHip);
-                CqlQuantity ak_ = context.Operators.Quantity(90m, "days");
-                CqlDate al_ = context.Operators.Add(InitialHipAssessmentOrthogonal, ak_);
-                CqlInterval<CqlDate> am_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, al_, true, true);
-                CqlDate an_ = am_?.low;
-                CqlDateTime ao_ = context.Operators.ConvertDateToDateTime(an_);
-                CqlDate ap_ = am_?.high;
-                CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(ap_);
-                bool? ar_ = am_?.lowClosed;
-                bool? as_ = am_?.highClosed;
-                CqlInterval<CqlDateTime> at_ = context.Operators.Interval(ao_, aq_, ar_, as_);
-                bool? au_ = context.Operators.In<CqlDateTime>(aj_, at_, "day");
-                bool? av_ = context.Operators.Not((bool?)(InitialHipAssessmentOrthogonal is null));
-                bool? aw_ = context.Operators.And(au_, av_);
-                return aw_;
+                CqlDateTime ak_ = context.Operators.ConvertDateToDateTime(InitialHipAssessmentOrthogonal);
+                CqlQuantity al_ = context.Operators.Quantity(90m, "days");
+                CqlDate am_ = context.Operators.Add(InitialHipAssessmentOrthogonal, al_);
+                CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+                CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(ak_, an_, true, true);
+                bool? ap_ = context.Operators.In<CqlDateTime>(aj_, ao_, "day");
+                bool? aq_ = context.Operators.Not((bool?)(InitialHipAssessmentOrthogonal is null));
+                bool? ar_ = context.Operators.And(ap_, aq_);
+                return ar_;
             }
 
             IEnumerable<CqlDate> ah_ = context.Operators.Where<CqlDate>(af_, ag_);
@@ -2524,25 +2499,25 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         IEnumerable<CqlInterval<CqlDateTime>> f_ = context.Operators.Where<CqlInterval<CqlDateTime>>(d_, e_);
 
         bool? g_(CqlInterval<CqlDateTime> TotalHip) {
-            IEnumerable<CqlDate> ax_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed(context);
+            IEnumerable<CqlDate> as_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed(context);
 
-            bool? ay_(CqlDate FollowUpHipAssessmentOrthogonal) {
-                CqlDateTime bb_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentOrthogonal);
-                CqlDate bc_ = context.Operators.DateFrom(bb_);
-                CqlDateTime bd_ = context.Operators.End(TotalHip);
-                CqlDate be_ = context.Operators.DateFrom(bd_);
-                CqlQuantity bf_ = context.Operators.Quantity(300m, "days");
-                CqlDate bg_ = context.Operators.Add(be_, bf_);
-                CqlQuantity bh_ = context.Operators.Quantity(425m, "days");
-                CqlDate bi_ = context.Operators.Add(be_, bh_);
-                CqlInterval<CqlDate> bj_ = context.Operators.Interval(bg_, bi_, true, true);
-                bool? bk_ = context.Operators.In<CqlDate>(bc_, bj_, "day");
-                return bk_;
+            bool? at_(CqlDate FollowUpHipAssessmentOrthogonal) {
+                CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(FollowUpHipAssessmentOrthogonal);
+                CqlDate ax_ = context.Operators.DateFrom(aw_);
+                CqlDateTime ay_ = context.Operators.End(TotalHip);
+                CqlDate az_ = context.Operators.DateFrom(ay_);
+                CqlQuantity ba_ = context.Operators.Quantity(300m, "days");
+                CqlDate bb_ = context.Operators.Add(az_, ba_);
+                CqlQuantity bc_ = context.Operators.Quantity(425m, "days");
+                CqlDate bd_ = context.Operators.Add(az_, bc_);
+                CqlInterval<CqlDate> be_ = context.Operators.Interval(bb_, bd_, true, true);
+                bool? bf_ = context.Operators.In<CqlDate>(ax_, be_, "day");
+                return bf_;
             }
 
-            IEnumerable<CqlDate> az_ = context.Operators.Where<CqlDate>(ax_, ay_);
-            bool? ba_ = context.Operators.Exists<CqlDate>(az_);
-            return ba_;
+            IEnumerable<CqlDate> au_ = context.Operators.Where<CqlDate>(as_, at_);
+            bool? av_ = context.Operators.Exists<CqlDate>(au_);
+            return av_;
         }
 
         IEnumerable<CqlInterval<CqlDateTime>> h_ = context.Operators.Where<CqlInterval<CqlDateTime>>(f_, g_);
