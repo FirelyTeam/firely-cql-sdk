@@ -13,8 +13,10 @@
   `PackagingToolkitConfig.MeasureGroupCodeSystem` setting (also available as the
   `--measure-group-code-system` PackagerCLI option and the `Packaging:MeasureGroupCodeSystem`
   appsettings key) takes a code system URL, and when set, each measure group's id is also emitted
-  as a coding with that system and the group id as its code. Unset (the default), the output is
-  unchanged.
+  as a coding with that system and the group id as its code. When the setting is enabled, group ids
+  are validated against the FHIR `code` datatype constraints (non-empty, no leading/trailing
+  whitespace, internal whitespace limited to single spaces) and packaging fails with a clear error
+  for a `@group` annotation value that violates them. Unset (the default), the output is unchanged.
 
 ## Fixes
 

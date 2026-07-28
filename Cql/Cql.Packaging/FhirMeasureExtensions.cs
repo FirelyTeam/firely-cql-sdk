@@ -4,7 +4,7 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Packaging;
 
-internal static class FhirMeasureExtensions
+internal static partial class FhirMeasureExtensions
 {
     private static readonly Dictionary<string, string> Populations = new()
     {
@@ -128,6 +128,10 @@ internal static class FhirMeasureExtensions
         };
         if (!string.IsNullOrWhiteSpace(measureGroupCodeSystem))
         {
+            if (!FhirCodeConstraint().IsMatch(groupId))
+                throw new InvalidOperationException(
+                    $"Group id '{groupId}' cannot be used as the code of Measure.group.code: a FHIR code must be non-empty, without leading or trailing whitespace, and with no whitespace other than single spaces. Fix the @group annotation value or unset the measure group code system.");
+
             group.Code = new CodeableConcept
             {
                 Coding =
@@ -135,7 +139,7 @@ internal static class FhirMeasureExtensions
                     new Coding
                     {
                         System = measureGroupCodeSystem,
-                        Code = groupId.Trim(),
+                        Code = groupId,
                     }
                 ]
             };
@@ -143,6 +147,11 @@ internal static class FhirMeasureExtensions
         fhirMeasure.Group!.Add(group);
         return group;
     }
+
+    // The FHIR `code` datatype constraint (https://hl7.org/fhir/R4/datatypes.html#code):
+    // at least one character, no leading/trailing whitespace, internal whitespace only single spaces.
+    [GeneratedRegex(@"^[^\s]+( [^\s]+)*$")]
+    private static partial Regex FhirCodeConstraint();
 
     private static void AnnotateMeasurePopulations(FhirMeasure fhirMeasure, ElmLibrary library, string? measureGroupCodeSystem)
     {
