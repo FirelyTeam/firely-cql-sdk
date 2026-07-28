@@ -323,10 +323,14 @@ internal partial class CodeBuilderContext
             // type, and convert the choice-typed operands with 'as' semantics.
             if (low.Type == typeof(object) || high.Type == typeof(object))
             {
+                // The anchored type is lifted to its nullable form: 'as' requires a
+                // null-assignable target, and an operand's static type can be a non-nullable
+                // value type (e.g. the int from NegateLiteral's -2147483648 special case).
+                // The Interval factory overloads take nullable points anyway.
                 var pointType =
-                    IsIntervalPointType(low.Type) ? low.Type
-                    : IsIntervalPointType(high.Type) ? high.Type
-                    : SingleIntervalPointTypeFromChoice(e);
+                    (IsIntervalPointType(low.Type) ? low.Type
+                        : IsIntervalPointType(high.Type) ? high.Type
+                        : SingleIntervalPointTypeFromChoice(e))?.MakeNullable();
 
                 if (pointType is not null)
                 {
