@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS155FHIRWgtAssessCounseling", "1.0.000")]
 public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleton<CMS155FHIRWgtAssessCounseling_1_0_000>
 {
@@ -406,7 +406,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 bool l_() {
                     DataType r_ = NutritionCounseling?.Performed;
                     object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                    bool t_ = s_ is CqlInterval<CqlDateTime>;
+                    bool t_ = s_ is CqlQuantity;
                     return t_;
                 }
 
@@ -414,7 +414,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 bool m_() {
                     DataType u_ = NutritionCounseling?.Performed;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    bool w_ = v_ is CqlQuantity;
+                    bool w_ = v_ is CqlInterval<CqlDateTime>;
                     return w_;
                 }
 
@@ -436,13 +436,13 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 {
                     DataType ac_ = NutritionCounseling?.Performed;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    return ad_ as CqlInterval<CqlDateTime>;
+                    return ad_ as CqlQuantity;
                 }
                 else if (m_())
                 {
                     DataType ae_ = NutritionCounseling?.Performed;
                     object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                    return af_ as CqlQuantity;
+                    return af_ as CqlInterval<CqlDateTime>;
                 }
                 else if (n_())
                 {
@@ -495,7 +495,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 bool l_() {
                     DataType r_ = ActivityCounseling?.Performed;
                     object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                    bool t_ = s_ is CqlInterval<CqlDateTime>;
+                    bool t_ = s_ is CqlQuantity;
                     return t_;
                 }
 
@@ -503,7 +503,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 bool m_() {
                     DataType u_ = ActivityCounseling?.Performed;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    bool w_ = v_ is CqlQuantity;
+                    bool w_ = v_ is CqlInterval<CqlDateTime>;
                     return w_;
                 }
 
@@ -525,13 +525,13 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 {
                     DataType ac_ = ActivityCounseling?.Performed;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    return ad_ as CqlInterval<CqlDateTime>;
+                    return ad_ as CqlQuantity;
                 }
                 else if (m_())
                 {
                     DataType ae_ = ActivityCounseling?.Performed;
                     object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                    return af_ as CqlQuantity;
+                    return af_ as CqlInterval<CqlDateTime>;
                 }
                 else if (n_())
                 {

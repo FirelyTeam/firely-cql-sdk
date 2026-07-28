@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("CMS996FHIRAptTxforSTEMI", "2.0.000")]
 public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS996FHIRAptTxforSTEMI_2_0_000>
 {
@@ -604,11 +604,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
         IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
         bool? b_(Encounter EDwithSTEMI) {
-            CqlValueSet d_ = this.Oral_Anticoagulant_Medications(context);
-            IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> f_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-            bool? g_(MedicationRequest MR) {
+            bool? e_(MedicationRequest MR) {
                 IEnumerable<Medication> m_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? n_(Medication M) {
@@ -630,8 +628,10 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return p_;
             }
 
-            IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
-            IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(e_, h_);
+            IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
+            CqlValueSet g_ = this.Oral_Anticoagulant_Medications(context);
+            IEnumerable<MedicationRequest> h_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest OralAnticoagulant) {
                 Code<MedicationRequest.MedicationrequestStatus> aa_ = OralAnticoagulant?.StatusElement;
@@ -827,7 +827,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool af_() {
                         DataType al_ = MajorSurgery?.Performed;
                         object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        bool an_ = am_ is CqlInterval<CqlDateTime>;
+                        bool an_ = am_ is CqlQuantity;
                         return an_;
                     }
 
@@ -835,7 +835,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool ag_() {
                         DataType ao_ = MajorSurgery?.Performed;
                         object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        bool aq_ = ap_ is CqlQuantity;
+                        bool aq_ = ap_ is CqlInterval<CqlDateTime>;
                         return aq_;
                     }
 
@@ -857,13 +857,13 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType aw_ = MajorSurgery?.Performed;
                         object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                        return ax_ as CqlInterval<CqlDateTime>;
+                        return ax_ as CqlQuantity;
                     }
                     else if (ag_())
                     {
                         DataType ay_ = MajorSurgery?.Performed;
                         object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                        return az_ as CqlQuantity;
+                        return az_ as CqlInterval<CqlDateTime>;
                     }
                     else if (ah_())
                     {
@@ -902,7 +902,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool bd_() {
                         DataType bj_ = MajorSurgery?.Performed;
                         object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                        bool bl_ = bk_ is CqlInterval<CqlDateTime>;
+                        bool bl_ = bk_ is CqlQuantity;
                         return bl_;
                     }
 
@@ -910,7 +910,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool be_() {
                         DataType bm_ = MajorSurgery?.Performed;
                         object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
-                        bool bo_ = bn_ is CqlQuantity;
+                        bool bo_ = bn_ is CqlInterval<CqlDateTime>;
                         return bo_;
                     }
 
@@ -932,13 +932,13 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType bu_ = MajorSurgery?.Performed;
                         object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                        return bv_ as CqlInterval<CqlDateTime>;
+                        return bv_ as CqlQuantity;
                     }
                     else if (be_())
                     {
                         DataType bw_ = MajorSurgery?.Performed;
                         object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                        return bx_ as CqlQuantity;
+                        return bx_ as CqlInterval<CqlDateTime>;
                     }
                     else if (bf_())
                     {
@@ -1006,7 +1006,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool ai_() {
                         DataType ao_ = AirwayProcedure?.Performed;
                         object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        bool aq_ = ap_ is CqlInterval<CqlDateTime>;
+                        bool aq_ = ap_ is CqlQuantity;
                         return aq_;
                     }
 
@@ -1014,7 +1014,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool aj_() {
                         DataType ar_ = AirwayProcedure?.Performed;
                         object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                        bool at_ = as_ is CqlQuantity;
+                        bool at_ = as_ is CqlInterval<CqlDateTime>;
                         return at_;
                     }
 
@@ -1036,13 +1036,13 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType az_ = AirwayProcedure?.Performed;
                         object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                        return ba_ as CqlInterval<CqlDateTime>;
+                        return ba_ as CqlQuantity;
                     }
                     else if (aj_())
                     {
                         DataType bb_ = AirwayProcedure?.Performed;
                         object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                        return bc_ as CqlQuantity;
+                        return bc_ as CqlInterval<CqlDateTime>;
                     }
                     else if (ak_())
                     {
@@ -1075,7 +1075,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool bg_() {
                         DataType bm_ = AirwayProcedure?.Performed;
                         object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
-                        bool bo_ = bn_ is CqlInterval<CqlDateTime>;
+                        bool bo_ = bn_ is CqlQuantity;
                         return bo_;
                     }
 
@@ -1083,7 +1083,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool bh_() {
                         DataType bp_ = AirwayProcedure?.Performed;
                         object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
-                        bool br_ = bq_ is CqlQuantity;
+                        bool br_ = bq_ is CqlInterval<CqlDateTime>;
                         return br_;
                     }
 
@@ -1105,13 +1105,13 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType bx_ = AirwayProcedure?.Performed;
                         object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                        return by_ as CqlInterval<CqlDateTime>;
+                        return by_ as CqlQuantity;
                     }
                     else if (bh_())
                     {
                         DataType bz_ = AirwayProcedure?.Performed;
                         object ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
-                        return ca_ as CqlQuantity;
+                        return ca_ as CqlInterval<CqlDateTime>;
                     }
                     else if (bi_())
                     {
@@ -1228,7 +1228,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool aa_() {
                         DataType ag_ = CranialorSpinalSurgery?.Performed;
                         object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        bool ai_ = ah_ is CqlInterval<CqlDateTime>;
+                        bool ai_ = ah_ is CqlQuantity;
                         return ai_;
                     }
 
@@ -1236,7 +1236,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool ab_() {
                         DataType aj_ = CranialorSpinalSurgery?.Performed;
                         object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        bool al_ = ak_ is CqlQuantity;
+                        bool al_ = ak_ is CqlInterval<CqlDateTime>;
                         return al_;
                     }
 
@@ -1258,13 +1258,13 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType ar_ = CranialorSpinalSurgery?.Performed;
                         object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                        return as_ as CqlInterval<CqlDateTime>;
+                        return as_ as CqlQuantity;
                     }
                     else if (ab_())
                     {
                         DataType at_ = CranialorSpinalSurgery?.Performed;
                         object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        return au_ as CqlQuantity;
+                        return au_ as CqlInterval<CqlDateTime>;
                     }
                     else if (ac_())
                     {
@@ -1496,7 +1496,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool ea_() {
                         DataType eg_ = HospicePerformed?.Performed;
                         object eh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eg_);
-                        bool ei_ = eh_ is CqlInterval<CqlDateTime>;
+                        bool ei_ = eh_ is CqlQuantity;
                         return ei_;
                     }
 
@@ -1504,7 +1504,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool eb_() {
                         DataType ej_ = HospicePerformed?.Performed;
                         object ek_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ej_);
-                        bool el_ = ek_ is CqlQuantity;
+                        bool el_ = ek_ is CqlInterval<CqlDateTime>;
                         return el_;
                     }
 
@@ -1526,13 +1526,13 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType er_ = HospicePerformed?.Performed;
                         object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                        return es_ as CqlInterval<CqlDateTime>;
+                        return es_ as CqlQuantity;
                     }
                     else if (eb_())
                     {
                         DataType et_ = HospicePerformed?.Performed;
                         object eu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, et_);
-                        return eu_ as CqlQuantity;
+                        return eu_ as CqlInterval<CqlDateTime>;
                     }
                     else if (ec_())
                     {
@@ -1566,7 +1566,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool ey_() {
                         DataType fe_ = HospicePerformed?.Performed;
                         object ff_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fe_);
-                        bool fg_ = ff_ is CqlInterval<CqlDateTime>;
+                        bool fg_ = ff_ is CqlQuantity;
                         return fg_;
                     }
 
@@ -1574,7 +1574,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool ez_() {
                         DataType fh_ = HospicePerformed?.Performed;
                         object fi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fh_);
-                        bool fj_ = fi_ is CqlQuantity;
+                        bool fj_ = fi_ is CqlInterval<CqlDateTime>;
                         return fj_;
                     }
 
@@ -1596,13 +1596,13 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType fp_ = HospicePerformed?.Performed;
                         object fq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fp_);
-                        return fq_ as CqlInterval<CqlDateTime>;
+                        return fq_ as CqlQuantity;
                     }
                     else if (ez_())
                     {
                         DataType fr_ = HospicePerformed?.Performed;
                         object fs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fr_);
-                        return fs_ as CqlQuantity;
+                        return fs_ as CqlInterval<CqlDateTime>;
                     }
                     else if (fa_())
                     {
@@ -1993,11 +1993,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
         IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
         bool? b_(Encounter EDwithSTEMI) {
-            CqlValueSet d_ = this.Fibrinolytic_Therapy(context);
-            IEnumerable<MedicationAdministration> e_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-            IEnumerable<MedicationAdministration> f_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+            IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
-            bool? g_(MedicationAdministration MR) {
+            bool? e_(MedicationAdministration MR) {
                 IEnumerable<Medication> m_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? n_(Medication M) {
@@ -2019,8 +2017,10 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return p_;
             }
 
-            IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
-            IEnumerable<MedicationAdministration> i_ = context.Operators.Union<MedicationAdministration>(e_, h_);
+            IEnumerable<MedicationAdministration> f_ = context.Operators.Where<MedicationAdministration>(d_, e_);
+            CqlValueSet g_ = this.Fibrinolytic_Therapy(context);
+            IEnumerable<MedicationAdministration> h_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+            IEnumerable<MedicationAdministration> i_ = context.Operators.Union<MedicationAdministration>(f_, h_);
 
             bool? j_(MedicationAdministration Fibrinolytic) {
                 Code<MedicationAdministration.MedicationAdministrationStatusCodes> aa_ = Fibrinolytic?.StatusElement;
@@ -2081,7 +2081,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool y_() {
                         DataType ae_ = PCI?.Performed;
                         object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlInterval<CqlDateTime>;
+                        bool ag_ = af_ is CqlQuantity;
                         return ag_;
                     }
 
@@ -2089,7 +2089,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool z_() {
                         DataType ah_ = PCI?.Performed;
                         object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        bool aj_ = ai_ is CqlQuantity;
+                        bool aj_ = ai_ is CqlInterval<CqlDateTime>;
                         return aj_;
                     }
 
@@ -2111,13 +2111,13 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType ap_ = PCI?.Performed;
                         object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        return aq_ as CqlInterval<CqlDateTime>;
+                        return aq_ as CqlQuantity;
                     }
                     else if (z_())
                     {
                         DataType ar_ = PCI?.Performed;
                         object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                        return as_ as CqlQuantity;
+                        return as_ as CqlInterval<CqlDateTime>;
                     }
                     else if (aa_())
                     {

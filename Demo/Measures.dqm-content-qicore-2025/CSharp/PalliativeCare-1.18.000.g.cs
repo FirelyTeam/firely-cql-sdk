@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("PalliativeCare", "1.18.000")]
 public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCare_1_18_000>
 {
@@ -157,7 +157,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
                 bool av_() {
                     DataType bb_ = PalliativeIntervention?.Performed;
                     object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                    bool bd_ = bc_ is CqlInterval<CqlDateTime>;
+                    bool bd_ = bc_ is CqlQuantity;
                     return bd_;
                 }
 
@@ -165,7 +165,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
                 bool aw_() {
                     DataType be_ = PalliativeIntervention?.Performed;
                     object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                    bool bg_ = bf_ is CqlQuantity;
+                    bool bg_ = bf_ is CqlInterval<CqlDateTime>;
                     return bg_;
                 }
 
@@ -187,13 +187,13 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
                 {
                     DataType bm_ = PalliativeIntervention?.Performed;
                     object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
-                    return bn_ as CqlInterval<CqlDateTime>;
+                    return bn_ as CqlQuantity;
                 }
                 else if (aw_())
                 {
                     DataType bo_ = PalliativeIntervention?.Performed;
                     object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
-                    return bp_ as CqlQuantity;
+                    return bp_ as CqlInterval<CqlDateTime>;
                 }
                 else if (ax_())
                 {

@@ -373,9 +373,43 @@ internal partial class CodeBuilderContext
             if (TranslateArgs(e.operand) is [{ } left, { } right, ..])
             {
                 if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftListElemType
-                    && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType
-                    && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElemType, rightListElemType, _typeConverter))
-                    return [left, right];
+                    && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType)
+                {
+                    if (leftListElemType == rightListElemType)
+                        return [left, right];
+
+                    // The operands materialize as different element types (e.g. structurally
+                    // equivalent tuple types whose elements need a conversion). Perform the
+                    // union over a single element type: prefer the declared result type,
+                    // falling back to either operand's type. Both operands must convert *to*
+                    // that type - the check is directional because a symmetric compatibility
+                    // check would accept operands for which only the reverse conversion
+                    // exists. A union over IEnumerable<object> is not an option for
+                    // tuple-typed elements, since the cast cannot survive the value-tuple
+                    // lowering performed by the C# code generator (see #1354).
+                    var declaredType = TypeFor(e, throwIfNotFound: false) is { } declared
+                                       && _typeResolver.IsListType(declared)
+                        ? declared
+                        : null;
+
+                    foreach (var unionType in (Type?[]) [declaredType, left.Type, right.Type])
+                    {
+                        if (unionType is null
+                            || _typeResolver.GetListElementType(unionType, throwError: false) is not { } unionElemType)
+                            continue;
+
+                        if (!ElmTupleTypeUtility.CanConvertForUnionOperation(leftListElemType, unionElemType, _typeConverter)
+                            || !ElmTupleTypeUtility.CanConvertForUnionOperation(rightListElemType, unionElemType, _typeConverter))
+                            continue;
+
+                        if (leftListElemType != unionElemType)
+                            left = ChangeType(left, unionType, throwOnError: true);
+                        if (rightListElemType != unionElemType)
+                            right = ChangeType(right, unionType, throwOnError: true);
+
+                        return [left, right];
+                    }
+                }
 
                 if (left.Type.IsCqlInterval(out var leftPointType)
                     && right.Type.IsCqlInterval(out var rightPointType)
