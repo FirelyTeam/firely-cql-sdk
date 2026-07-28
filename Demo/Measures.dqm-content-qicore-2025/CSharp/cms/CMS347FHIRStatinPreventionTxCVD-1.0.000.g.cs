@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS347FHIRStatinPreventionTxCVD", "1.0.000")]
 public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingleton<CMS347FHIRStatinPreventionTxCVD_1_0_000>
 {
@@ -299,71 +299,57 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         IEnumerable<Procedure> ae_ = context.Operators.Union<Procedure>(y_, ad_);
 
         bool? af_(Procedure ASCVDProcedure) {
-
-            object ap_() {
-
-                bool ba_() {
-                    DataType be_ = ASCVDProcedure?.Performed;
-                    object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                    bool bg_ = bf_ is CqlDateTime;
-                    return bg_;
-                }
-
-
-                bool bb_() {
-                    DataType bh_ = ASCVDProcedure?.Performed;
-                    object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                    bool bj_ = bi_ is CqlQuantity;
-                    return bj_;
-                }
-
-
-                bool bc_() {
-                    DataType bk_ = ASCVDProcedure?.Performed;
-                    object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                    bool bm_ = bl_ is CqlInterval<CqlDateTime>;
-                    return bm_;
-                }
-
-
-                bool bd_() {
-                    DataType bn_ = ASCVDProcedure?.Performed;
-                    object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    bool bp_ = bo_ is CqlInterval<CqlQuantity>;
-                    return bp_;
-                }
-
-                if (ba_())
+            object ap_;
+            DataType ba_ = ASCVDProcedure?.Performed;
+            object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
+            bool bc_ = bb_ is CqlDateTime;
+            if (bc_)
+            {
+                DataType bd_ = ASCVDProcedure?.Performed;
+                object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
+                ap_ = be_ as CqlDateTime;
+            }
+            else
+            {
+                DataType bf_ = ASCVDProcedure?.Performed;
+                object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
+                bool bh_ = bg_ is CqlQuantity;
+                if (bh_)
                 {
-                    DataType bq_ = ASCVDProcedure?.Performed;
-                    object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
-                    return br_ as CqlDateTime;
-                }
-                else if (bb_())
-                {
-                    DataType bs_ = ASCVDProcedure?.Performed;
-                    object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                    return bt_ as CqlQuantity;
-                }
-                else if (bc_())
-                {
-                    DataType bu_ = ASCVDProcedure?.Performed;
-                    object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                    return bv_ as CqlInterval<CqlDateTime>;
-                }
-                else if (bd_())
-                {
-                    DataType bw_ = ASCVDProcedure?.Performed;
-                    object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                    return bx_ as CqlInterval<CqlQuantity>;
+                    DataType bi_ = ASCVDProcedure?.Performed;
+                    object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
+                    ap_ = bj_ as CqlQuantity;
                 }
                 else
                 {
-                    return null;
+                    DataType bk_ = ASCVDProcedure?.Performed;
+                    object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
+                    bool bm_ = bl_ is CqlInterval<CqlDateTime>;
+                    if (bm_)
+                    {
+                        DataType bn_ = ASCVDProcedure?.Performed;
+                        object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
+                        ap_ = bo_ as CqlInterval<CqlDateTime>;
+                    }
+                    else
+                    {
+                        DataType bp_ = ASCVDProcedure?.Performed;
+                        object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
+                        bool br_ = bq_ is CqlInterval<CqlQuantity>;
+                        if (br_)
+                        {
+                            DataType bs_ = ASCVDProcedure?.Performed;
+                            object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
+                            ap_ = bt_ as CqlInterval<CqlQuantity>;
+                        }
+                        else
+                        {
+                            ap_ = null;
+                        }
+                    }
                 }
             }
-
-            CqlInterval<CqlDateTime> aq_ = QICoreCommon_4_0_000.Instance.toInterval(context, ap_());
+            CqlInterval<CqlDateTime> aq_ = QICoreCommon_4_0_000.Instance.toInterval(context, ap_);
             CqlDateTime ar_ = context.Operators.Start(aq_);
             CqlInterval<CqlDateTime> as_ = this.Measurement_Period(context);
             CqlDateTime at_ = context.Operators.End(as_);

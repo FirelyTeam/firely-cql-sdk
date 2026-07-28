@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS156FHIRHighRiskMedsElderly", "1.0.000")]
 public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleton<CMS156FHIRHighRiskMedsElderly_1_0_000>
 {
@@ -1179,47 +1179,37 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         ];
 
         CqlQuantity b_(MedicationRequest Order) {
-
-            CqlQuantity f_() {
-
-                bool g_() {
-                    decimal? h_ = this.medicationRequestPeriodInDays(context, Order);
-                    bool? i_ = context.Operators.Not((bool?)(h_ is null));
-                    CqlConcept j_ = CQMCommon_4_1_000.Instance.getMedicationCode(context, Order);
-                    CqlQuantity k_ = this.medicationStrengthPerUnit(context, j_);
-                    string l_ = k_?.unit;
-                    bool? m_ = context.Operators.Equal(l_, "mg");
-                    bool? n_ = context.Operators.Equal(l_, "mg/mL");
-                    MedicationRequest.DispenseRequestComponent o_ = Order?.DispenseRequest;
-                    Quantity p_ = o_?.Quantity;
-                    CqlQuantity q_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, p_);
-                    string r_ = q_?.unit;
-                    bool? s_ = context.Operators.Equal(r_, "mL");
-                    bool? t_ = context.Operators.And(n_, s_);
-                    bool? u_ = context.Operators.Or(m_, t_);
-                    bool? v_ = context.Operators.And(i_, u_);
-                    return v_ ?? false;
-                }
-
-                if (g_())
-                {
-                    MedicationRequest.DispenseRequestComponent w_ = Order?.DispenseRequest;
-                    Quantity x_ = w_?.Quantity;
-                    CqlQuantity y_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, x_);
-                    CqlConcept z_ = CQMCommon_4_1_000.Instance.getMedicationCode(context, Order);
-                    CqlQuantity aa_ = this.medicationStrengthPerUnit(context, z_);
-                    CqlQuantity ab_ = context.Operators.Multiply(y_, aa_);
-                    decimal? ac_ = this.medicationRequestPeriodInDays(context, Order);
-                    CqlQuantity ad_ = context.Operators.Divide(ab_, new CqlQuantity(ac_, "d"));
-                    return ad_;
-                }
-                else
-                {
-                    return default;
-                }
+            decimal? f_ = this.medicationRequestPeriodInDays(context, Order);
+            bool? g_ = context.Operators.Not((bool?)(f_ is null));
+            CqlConcept h_ = CQMCommon_4_1_000.Instance.getMedicationCode(context, Order);
+            CqlQuantity i_ = this.medicationStrengthPerUnit(context, h_);
+            string j_ = i_?.unit;
+            bool? k_ = context.Operators.Equal(j_, "mg");
+            bool? l_ = context.Operators.Equal(j_, "mg/mL");
+            MedicationRequest.DispenseRequestComponent m_ = Order?.DispenseRequest;
+            Quantity n_ = m_?.Quantity;
+            CqlQuantity o_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, n_);
+            string p_ = o_?.unit;
+            bool? q_ = context.Operators.Equal(p_, "mL");
+            bool? r_ = context.Operators.And(l_, q_);
+            bool? s_ = context.Operators.Or(k_, r_);
+            bool? t_ = context.Operators.And(g_, s_);
+            if (t_ ?? false)
+            {
+                MedicationRequest.DispenseRequestComponent u_ = Order?.DispenseRequest;
+                Quantity v_ = u_?.Quantity;
+                CqlQuantity w_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, v_);
+                CqlConcept x_ = CQMCommon_4_1_000.Instance.getMedicationCode(context, Order);
+                CqlQuantity y_ = this.medicationStrengthPerUnit(context, x_);
+                CqlQuantity z_ = context.Operators.Multiply(w_, y_);
+                decimal? aa_ = this.medicationRequestPeriodInDays(context, Order);
+                CqlQuantity ab_ = context.Operators.Divide(z_, new CqlQuantity(aa_, "d"));
+                return ab_;
             }
-
-            return f_();
+            else
+            {
+                return default;
+            }
         }
 
         IEnumerable<CqlQuantity> c_ = context.Operators.Select<MedicationRequest, CqlQuantity>((IEnumerable<MedicationRequest>)a_, b_);
@@ -1232,210 +1222,172 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     [CqlFunctionDefinition("medicationStrengthPerUnit")]
     public CqlQuantity medicationStrengthPerUnit(CqlContext context, CqlConcept Strength)
     {
-
-        CqlQuantity a_() {
-
-            bool b_() {
-                CqlCode q_ = this.digoxin_0_05_MG_ML_Oral_Solution(context);
-                CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-                bool? s_ = context.Operators.Equivalent(Strength, r_);
-                return s_ ?? false;
-            }
-
-
-            bool c_() {
-                CqlCode t_ = this.digoxin_0_0625_MG_Oral_Tablet(context);
-                CqlConcept u_ = context.Operators.ConvertCodeToConcept(t_);
-                bool? v_ = context.Operators.Equivalent(Strength, u_);
-                return v_ ?? false;
-            }
-
-
-            bool d_() {
-                CqlCode w_ = this._1_ML_digoxin_0_1_MG_ML_Injection(context);
-                CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
-                bool? y_ = context.Operators.Equivalent(Strength, x_);
-                return y_ ?? false;
-            }
-
-
-            bool e_() {
-                CqlCode z_ = this.digoxin_0_125_MG_Oral_Tablet(context);
-                CqlConcept aa_ = context.Operators.ConvertCodeToConcept(z_);
-                bool? ab_ = context.Operators.Equivalent(Strength, aa_);
-                return ab_ ?? false;
-            }
-
-
-            bool f_() {
-                CqlCode ac_ = this.digoxin_0_25_MG_Oral_Tablet(context);
-                CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
-                bool? ae_ = context.Operators.Equivalent(Strength, ad_);
-                return ae_ ?? false;
-            }
-
-
-            bool g_() {
-                CqlCode af_ = this._2_ML_digoxin_0_25_MG_ML_Injection(context);
-                CqlConcept ag_ = context.Operators.ConvertCodeToConcept(af_);
-                bool? ah_ = context.Operators.Equivalent(Strength, ag_);
-                return ah_ ?? false;
-            }
-
-
-            bool h_() {
-                CqlCode ai_ = this.doxepin_3_MG_Oral_Tablet(context);
-                CqlConcept aj_ = context.Operators.ConvertCodeToConcept(ai_);
-                bool? ak_ = context.Operators.Equivalent(Strength, aj_);
-                return ak_ ?? false;
-            }
-
-
-            bool i_() {
-                CqlCode al_ = this.doxepin_6_MG_Oral_Tablet(context);
-                CqlConcept am_ = context.Operators.ConvertCodeToConcept(al_);
-                bool? an_ = context.Operators.Equivalent(Strength, am_);
-                return an_ ?? false;
-            }
-
-
-            bool j_() {
-                CqlCode ao_ = this.doxepin_10_MG_Oral_Capsule(context);
-                CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
-                bool? aq_ = context.Operators.Equivalent(Strength, ap_);
-                return aq_ ?? false;
-            }
-
-
-            bool k_() {
-                CqlCode ar_ = this.doxepin_10_MG_ML_Oral_Solution(context);
-                CqlConcept as_ = context.Operators.ConvertCodeToConcept(ar_);
-                bool? at_ = context.Operators.Equivalent(Strength, as_);
-                return at_ ?? false;
-            }
-
-
-            bool l_() {
-                CqlCode au_ = this.doxepin_25_MG_Oral_Capsule(context);
-                CqlConcept av_ = context.Operators.ConvertCodeToConcept(au_);
-                bool? aw_ = context.Operators.Equivalent(Strength, av_);
-                return aw_ ?? false;
-            }
-
-
-            bool m_() {
-                CqlCode ax_ = this.doxepin_50_MG_Oral_Capsule(context);
-                CqlConcept ay_ = context.Operators.ConvertCodeToConcept(ax_);
-                bool? az_ = context.Operators.Equivalent(Strength, ay_);
-                return az_ ?? false;
-            }
-
-
-            bool n_() {
-                CqlCode ba_ = this.doxepin_75_MG_Oral_Capsule(context);
-                CqlConcept bb_ = context.Operators.ConvertCodeToConcept(ba_);
-                bool? bc_ = context.Operators.Equivalent(Strength, bb_);
-                return bc_ ?? false;
-            }
-
-
-            bool o_() {
-                CqlCode bd_ = this.doxepin_100_MG_Oral_Capsule(context);
-                CqlConcept be_ = context.Operators.ConvertCodeToConcept(bd_);
-                bool? bf_ = context.Operators.Equivalent(Strength, be_);
-                return bf_ ?? false;
-            }
-
-
-            bool p_() {
-                CqlCode bg_ = this.doxepin_150_MG_Oral_Capsule(context);
-                CqlConcept bh_ = context.Operators.ConvertCodeToConcept(bg_);
-                bool? bi_ = context.Operators.Equivalent(Strength, bh_);
-                return bi_ ?? false;
-            }
-
-            if (b_())
+        CqlCode a_ = this.digoxin_0_05_MG_ML_Oral_Solution(context);
+        CqlConcept b_ = context.Operators.ConvertCodeToConcept(a_);
+        bool? c_ = context.Operators.Equivalent(Strength, b_);
+        if (c_ ?? false)
+        {
+            CqlQuantity d_ = context.Operators.Quantity(0.05m, "mg/mL");
+            return d_;
+        }
+        else
+        {
+            CqlCode e_ = this.digoxin_0_0625_MG_Oral_Tablet(context);
+            CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
+            bool? g_ = context.Operators.Equivalent(Strength, f_);
+            if (g_ ?? false)
             {
-                CqlQuantity bj_ = context.Operators.Quantity(0.05m, "mg/mL");
-                return bj_;
-            }
-            else if (c_())
-            {
-                CqlQuantity bk_ = context.Operators.Quantity(0.0625m, "mg");
-                return bk_;
-            }
-            else if (d_())
-            {
-                CqlQuantity bl_ = context.Operators.Quantity(0.1m, "mg/mL");
-                return bl_;
-            }
-            else if (e_())
-            {
-                CqlQuantity bm_ = context.Operators.Quantity(0.125m, "mg");
-                return bm_;
-            }
-            else if (f_())
-            {
-                CqlQuantity bn_ = context.Operators.Quantity(0.25m, "mg");
-                return bn_;
-            }
-            else if (g_())
-            {
-                CqlQuantity bo_ = context.Operators.Quantity(0.25m, "mg/mL");
-                return bo_;
-            }
-            else if (h_())
-            {
-                CqlQuantity bp_ = context.Operators.Quantity(3m, "mg");
-                return bp_;
-            }
-            else if (i_())
-            {
-                CqlQuantity bq_ = context.Operators.Quantity(6m, "mg");
-                return bq_;
-            }
-            else if (j_())
-            {
-                CqlQuantity br_ = context.Operators.Quantity(10m, "mg");
-                return br_;
-            }
-            else if (k_())
-            {
-                CqlQuantity bs_ = context.Operators.Quantity(10m, "mg/mL");
-                return bs_;
-            }
-            else if (l_())
-            {
-                CqlQuantity bt_ = context.Operators.Quantity(25m, "mg");
-                return bt_;
-            }
-            else if (m_())
-            {
-                CqlQuantity bu_ = context.Operators.Quantity(50m, "mg");
-                return bu_;
-            }
-            else if (n_())
-            {
-                CqlQuantity bv_ = context.Operators.Quantity(75m, "mg");
-                return bv_;
-            }
-            else if (o_())
-            {
-                CqlQuantity bw_ = context.Operators.Quantity(100m, "mg");
-                return bw_;
-            }
-            else if (p_())
-            {
-                CqlQuantity bx_ = context.Operators.Quantity(150m, "mg");
-                return bx_;
+                CqlQuantity h_ = context.Operators.Quantity(0.0625m, "mg");
+                return h_;
             }
             else
             {
-                return default;
+                CqlCode i_ = this._1_ML_digoxin_0_1_MG_ML_Injection(context);
+                CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
+                bool? k_ = context.Operators.Equivalent(Strength, j_);
+                if (k_ ?? false)
+                {
+                    CqlQuantity l_ = context.Operators.Quantity(0.1m, "mg/mL");
+                    return l_;
+                }
+                else
+                {
+                    CqlCode m_ = this.digoxin_0_125_MG_Oral_Tablet(context);
+                    CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
+                    bool? o_ = context.Operators.Equivalent(Strength, n_);
+                    if (o_ ?? false)
+                    {
+                        CqlQuantity p_ = context.Operators.Quantity(0.125m, "mg");
+                        return p_;
+                    }
+                    else
+                    {
+                        CqlCode q_ = this.digoxin_0_25_MG_Oral_Tablet(context);
+                        CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
+                        bool? s_ = context.Operators.Equivalent(Strength, r_);
+                        if (s_ ?? false)
+                        {
+                            CqlQuantity t_ = context.Operators.Quantity(0.25m, "mg");
+                            return t_;
+                        }
+                        else
+                        {
+                            CqlCode u_ = this._2_ML_digoxin_0_25_MG_ML_Injection(context);
+                            CqlConcept v_ = context.Operators.ConvertCodeToConcept(u_);
+                            bool? w_ = context.Operators.Equivalent(Strength, v_);
+                            if (w_ ?? false)
+                            {
+                                CqlQuantity x_ = context.Operators.Quantity(0.25m, "mg/mL");
+                                return x_;
+                            }
+                            else
+                            {
+                                CqlCode y_ = this.doxepin_3_MG_Oral_Tablet(context);
+                                CqlConcept z_ = context.Operators.ConvertCodeToConcept(y_);
+                                bool? aa_ = context.Operators.Equivalent(Strength, z_);
+                                if (aa_ ?? false)
+                                {
+                                    CqlQuantity ab_ = context.Operators.Quantity(3m, "mg");
+                                    return ab_;
+                                }
+                                else
+                                {
+                                    CqlCode ac_ = this.doxepin_6_MG_Oral_Tablet(context);
+                                    CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
+                                    bool? ae_ = context.Operators.Equivalent(Strength, ad_);
+                                    if (ae_ ?? false)
+                                    {
+                                        CqlQuantity af_ = context.Operators.Quantity(6m, "mg");
+                                        return af_;
+                                    }
+                                    else
+                                    {
+                                        CqlCode ag_ = this.doxepin_10_MG_Oral_Capsule(context);
+                                        CqlConcept ah_ = context.Operators.ConvertCodeToConcept(ag_);
+                                        bool? ai_ = context.Operators.Equivalent(Strength, ah_);
+                                        if (ai_ ?? false)
+                                        {
+                                            CqlQuantity aj_ = context.Operators.Quantity(10m, "mg");
+                                            return aj_;
+                                        }
+                                        else
+                                        {
+                                            CqlCode ak_ = this.doxepin_10_MG_ML_Oral_Solution(context);
+                                            CqlConcept al_ = context.Operators.ConvertCodeToConcept(ak_);
+                                            bool? am_ = context.Operators.Equivalent(Strength, al_);
+                                            if (am_ ?? false)
+                                            {
+                                                CqlQuantity an_ = context.Operators.Quantity(10m, "mg/mL");
+                                                return an_;
+                                            }
+                                            else
+                                            {
+                                                CqlCode ao_ = this.doxepin_25_MG_Oral_Capsule(context);
+                                                CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
+                                                bool? aq_ = context.Operators.Equivalent(Strength, ap_);
+                                                if (aq_ ?? false)
+                                                {
+                                                    CqlQuantity ar_ = context.Operators.Quantity(25m, "mg");
+                                                    return ar_;
+                                                }
+                                                else
+                                                {
+                                                    CqlCode as_ = this.doxepin_50_MG_Oral_Capsule(context);
+                                                    CqlConcept at_ = context.Operators.ConvertCodeToConcept(as_);
+                                                    bool? au_ = context.Operators.Equivalent(Strength, at_);
+                                                    if (au_ ?? false)
+                                                    {
+                                                        CqlQuantity av_ = context.Operators.Quantity(50m, "mg");
+                                                        return av_;
+                                                    }
+                                                    else
+                                                    {
+                                                        CqlCode aw_ = this.doxepin_75_MG_Oral_Capsule(context);
+                                                        CqlConcept ax_ = context.Operators.ConvertCodeToConcept(aw_);
+                                                        bool? ay_ = context.Operators.Equivalent(Strength, ax_);
+                                                        if (ay_ ?? false)
+                                                        {
+                                                            CqlQuantity az_ = context.Operators.Quantity(75m, "mg");
+                                                            return az_;
+                                                        }
+                                                        else
+                                                        {
+                                                            CqlCode ba_ = this.doxepin_100_MG_Oral_Capsule(context);
+                                                            CqlConcept bb_ = context.Operators.ConvertCodeToConcept(ba_);
+                                                            bool? bc_ = context.Operators.Equivalent(Strength, bb_);
+                                                            if (bc_ ?? false)
+                                                            {
+                                                                CqlQuantity bd_ = context.Operators.Quantity(100m, "mg");
+                                                                return bd_;
+                                                            }
+                                                            else
+                                                            {
+                                                                CqlCode be_ = this.doxepin_150_MG_Oral_Capsule(context);
+                                                                CqlConcept bf_ = context.Operators.ConvertCodeToConcept(be_);
+                                                                bool? bg_ = context.Operators.Equivalent(Strength, bf_);
+                                                                if (bg_ ?? false)
+                                                                {
+                                                                    CqlQuantity bh_ = context.Operators.Quantity(150m, "mg");
+                                                                    return bh_;
+                                                                }
+                                                                else
+                                                                {
+                                                                    return default;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-
-        return a_();
     }
 
 

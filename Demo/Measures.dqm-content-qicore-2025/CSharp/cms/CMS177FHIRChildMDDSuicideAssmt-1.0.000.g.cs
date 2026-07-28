@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS177FHIRChildMDDSuicideAssmt", "1.0.000")]
 public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISingleton<CMS177FHIRChildMDDSuicideAssmt_1_0_000>
 {
@@ -375,71 +375,57 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                 bool? m_ = context.Operators.Equal(l_, "completed");
                 Period n_ = MDDEncounter?.Period;
                 CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
-
-                object p_() {
-
-                    bool t_() {
-                        DataType x_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                        bool z_ = y_ is CqlDateTime;
-                        return z_;
-                    }
-
-
-                    bool u_() {
-                        DataType aa_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlQuantity;
-                        return ac_;
-                    }
-
-
-                    bool v_() {
-                        DataType ad_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                        bool af_ = ae_ is CqlInterval<CqlDateTime>;
-                        return af_;
-                    }
-
-
-                    bool w_() {
-                        DataType ag_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        bool ai_ = ah_ is CqlInterval<CqlQuantity>;
-                        return ai_;
-                    }
-
-                    if (t_())
+                object p_;
+                DataType t_ = SuicideRiskAssessmentProcedure?.Performed;
+                object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                bool v_ = u_ is CqlDateTime;
+                if (v_)
+                {
+                    DataType w_ = SuicideRiskAssessmentProcedure?.Performed;
+                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                    p_ = x_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType y_ = SuicideRiskAssessmentProcedure?.Performed;
+                    object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
+                    bool aa_ = z_ is CqlQuantity;
+                    if (aa_)
                     {
-                        DataType aj_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        return ak_ as CqlDateTime;
-                    }
-                    else if (u_())
-                    {
-                        DataType al_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        return am_ as CqlQuantity;
-                    }
-                    else if (v_())
-                    {
-                        DataType an_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        return ao_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (w_())
-                    {
-                        DataType ap_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        return aq_ as CqlInterval<CqlQuantity>;
+                        DataType ab_ = SuicideRiskAssessmentProcedure?.Performed;
+                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
+                        p_ = ac_ as CqlQuantity;
                     }
                     else
                     {
-                        return null;
+                        DataType ad_ = SuicideRiskAssessmentProcedure?.Performed;
+                        object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+                        bool af_ = ae_ is CqlInterval<CqlDateTime>;
+                        if (af_)
+                        {
+                            DataType ag_ = SuicideRiskAssessmentProcedure?.Performed;
+                            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+                            p_ = ah_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            DataType ai_ = SuicideRiskAssessmentProcedure?.Performed;
+                            object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+                            bool ak_ = aj_ is CqlInterval<CqlQuantity>;
+                            if (ak_)
+                            {
+                                DataType al_ = SuicideRiskAssessmentProcedure?.Performed;
+                                object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+                                p_ = am_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                p_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_());
+                CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_);
                 bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, (string)default);
                 bool? s_ = context.Operators.And(m_, r_);
                 return s_;
