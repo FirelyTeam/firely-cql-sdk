@@ -135,7 +135,7 @@ internal static class FhirMeasureExtensions
                     new Coding
                     {
                         System = measureGroupCodeSystem,
-                        Code = groupId,
+                        Code = groupId.Trim(),
                     }
                 ]
             };

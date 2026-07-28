@@ -31,7 +31,7 @@ public record PackagingToolkitConfig(
     /// <summary>
     /// The code system URL used for <c>Measure.group.code</c>. When set, each measure group's id is
     /// also emitted as a coding with this system and the group id as its code. When <see langword="null"/>
-    /// (the default), no <c>Measure.group.code</c> is emitted.
+    /// or empty/whitespace (the default), no <c>Measure.group.code</c> is emitted.
     /// </summary>
     public string? MeasureGroupCodeSystem { get; init; }
 
