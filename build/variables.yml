@@ -21,7 +21,6 @@ variables:
   # .NET 10 integration tests (run in parallel as separate job)
   net10IntegrationTestProjects: |
     submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
-
   # HEDIS 2025 golden-parity tests (run in parallel as their own separate job)
   hedisIntegrationTestProjects: |
     submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025.GoldenTests/Hedis2025.GoldenTests.csproj

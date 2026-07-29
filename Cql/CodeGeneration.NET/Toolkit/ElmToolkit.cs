@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -10,6 +10,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 using Microsoft.Extensions.DependencyInjection;
@@ -137,8 +138,6 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         var cSharpNamespace = Config.CSharpNamespace;
         var debugInformationFormat = Config.DebugSymbolsFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
-        LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
-        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
         ElmLibrary[] libraries = _artifactsById.Values.Select(selector: v => v.InputElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet(name: "", libraries: libraries);
 
@@ -146,8 +145,12 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         foreach (var (id, _) in removedLibraries)
             logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
 
-        var librarySetDefinitions = BuildLibrarySetDefinitions(librarySetExpressionBuilderScoped, librarySet);
-        var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions, cSharpNamespace);
+        // Produces one generated C# source per library in the set.
+        var cSharps = GenerateCSharp(
+            _services.LibrarySetCSharpCodeGenerator,
+            librarySet,
+            BuildLibrarySetDefinitions(servicesScope.LibrarySetCodeBuilder, librarySet),
+            cSharpNamespace);
         var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat);
 
         var entriesBuilder = _artifactsById.ToBuilder();
@@ -226,7 +229,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     private IEnumerable<(ElmLibrary library, string cSharp)> GenerateCSharp(
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor,
         LibrarySet librarySet,
-        DefinitionDictionary<CqlDefinition> librarySetDefinitions,
+        CqlDefinitionDictionary librarySetDefinitions,
         string? @namespace) =>
         cSharpCodeProcessor
             .GenerateEachLibraryToCSharp(
@@ -243,15 +246,15 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <summary>
     /// Builds the library set definitions.
     /// </summary>
-    /// <param name="librarySetExpressionBuilderScoped">The library set expression builder to use.</param>
+    /// <param name="librarySetCodeBuilderScoped">The library set code builder to use.</param>
     /// <param name="librarySet">The set of libraries to build definitions for.</param>
     /// <returns>The dictionary of library set definitions.</returns>
-    private DefinitionDictionary<CqlDefinition> BuildLibrarySetDefinitions(
-        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped,
+    private CqlDefinitionDictionary BuildLibrarySetDefinitions(
+        LibrarySetCodeBuilder librarySetCodeBuilderScoped,
         LibrarySet librarySet)
     {
-        DefinitionDictionary<CqlDefinition> librarySetDefinitions = new();
-        librarySetExpressionBuilderScoped
+        CqlDefinitionDictionary librarySetDefinitions = new();
+        librarySetCodeBuilderScoped
             .BuildEachLibraryDefinitions(
                 librarySet,
                 librarySetDefinitions,

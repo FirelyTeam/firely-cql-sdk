@@ -23,6 +23,7 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 - Check `GlobalUsings.cs` before adding a `using` — don't duplicate what's already global.
 - Naming: `CqlSdk` prefix for example projects, `Hl7.Cql` namespace prefix for core SDK assemblies.
 - Project docs (READMEs, `docs/`) use hierarchical heading numbers (`# 1.`, `## 1.1.`, `### 1.1.1.`) and always cross-reference other documents with real Markdown links (`[label](relative/path.md)`), never a bare filename. Internal-only packages should describe what they do in their README but skip usage code samples (only packages meant for direct consumer use get those).
+- **Mermaid diagrams** in markdown docs must be pre-rendered to `.svg` and embedded as an image, not left as a raw `` ```mermaid `` fenced block — GitHub's inline renderer doesn't reliably support `classDiagram` `namespace` blocks, multi-target `style` directives, or custom `<<stereotype>>` annotations, which this repo's diagrams use. See the `generate-svg-from-mermaid` skill.
 
 ## Nullological operators — interface vs implementation return type
 
@@ -51,7 +52,9 @@ These are **not interchangeable**. `Library.Name` is the canonical identifier us
 
 ## CQL specification conformance
 
-`/spec/condensed/` (see its `README.md` for the section index) is the authoritative CQL 1.5.3 Release 1 Errata 2 spec for this repo — a markdown mirror kept because `cql.hl7.org` may be unreachable in some environments. Check it before implementing/reviewing/fixing any CQL operator, and when writing tests for operator semantics. If `cql.hl7.org` turns out to be reachable during a session, tell the user — it may mean the local mirror needs updating.
+`/spec/cql/condensed/` (see `/spec/cql/README.md` for the section index and which spec version is mirrored) is the authoritative CQL 1.5.3 Release 1 Errata 2 spec for this repo — a markdown mirror kept because `cql.hl7.org` may be unreachable in some environments. Check it before implementing/reviewing/fixing any CQL operator, and when writing tests for operator semantics. If `cql.hl7.org` turns out to be reachable during a session, tell the user — it may mean the local mirror needs updating.
+
+A similar mirror for FHIR spec pages actually used by this repo (e.g. `Measure`/`Library` resource definitions, Quality Measure IG conformance) lives at `/spec/fhir/condensed/`, fetched on demand per-page via `tools/condense_spec/fetch_fhir_page.py <url>` rather than vendored wholesale — see `/spec/fhir/README.md` for which pages are cached and when they were last fetched.
 
 ## Build
 
@@ -61,7 +64,7 @@ These are **not interchangeable**. `Library.Name` is the canonical identifier us
 
 ## Code generation version (`GeneratorToolVersion`)
 
-Any change that alters the C# emitted for CQL libraries requires bumping `LibrarySetCSharpCodeGenerator.GeneratorToolVersion` (hardcoded in `Cql/CodeGeneration.NET/_CODE GENERATOR VERSION_.cs`) — and this is broader than it sounds: it also covers `Cql.Compiler` changes that make `CqlOperatorsBinder` emit different `ICqlOperators` calls (different overload, generic args, or conversions), and `ICqlOperators` signature changes that flow into call sites. Use semver on the 4-part version: major for changes needing new `LibraryInstanceInvoker` support, minor for non-breaking additions, patch for bug fixes that don't change the generated API. Check that the current `LibraryInstanceInvoker_<major>_<minor>.SupportsVersion` (via `MinSupportedGeneratorToolVersion`/`FirstUnsupportedGeneratorToolVersion` in `Cql/Cql.Invocation/Toolkit/Internal/LibraryInvoker.<major>.<minor>.cs`, e.g. `LibraryInvoker.5.0.cs`) covers the new version, and add a new invoker if a major bump needs one. **Regenerate every checked-in `*.g.cs` file** (`CoreTests/CSharp`, demo library sets, etc.) in the same PR — the version is embedded via `GeneratedCodeAttribute` and must match.
+Any change that alters the C# emitted for CQL libraries requires bumping `LibrarySetCSharpCodeGenerator.GeneratorToolVersion` (hardcoded in `Cql/CodeGeneration.NET/_CODE GENERATOR VERSION_.cs`) — and this is broader than it sounds: it also covers `Cql.Compiler` changes that make `CqlOperatorsBinder` emit different `ICqlOperators` calls (different overload, generic args, or conversions), and `ICqlOperators` signature changes that flow into call sites. Use semver on the 4-part version: major for changes needing new `LibraryInstanceInvoker` support, minor for non-breaking additions, patch for bug fixes that don't change the generated API. Check that the current `LibraryInstanceInvoker_<major>_<minor>.SupportsVersion` (via `MinSupportedGeneratorToolVersion`/`FirstUnsupportedGeneratorToolVersion` in `Cql/Cql.Invocation/Toolkit/Internal/LibraryInvoker.<major>.<minor>.cs`, e.g. `LibraryInvoker.5.0.cs`) covers the new version, and add a new invoker if a major bump needs one. **Regenerate every checked-in `*.g.cs` file** (`CoreTests/CSharp`, demo library sets, etc.) in the same PR, then **commit only the files whose content actually changed** — `git checkout` the ones whose sole difference is the embedded `GeneratedCodeAttribute` version header. Checked-in generated files therefore carry a mix of versions, which is fine and intentional: the version is an internal marker, the invoker toolkit accepts any version inside the supported range (see `SupportsVersion` above), and the golden tests normalize it away before comparing. Keeping header-only churn out of the commit is what makes the PR diff reviewable — a real change to one library shouldn't hide inside ninety files that differ by one line each.
 
 ## Release notes
 
@@ -76,3 +79,4 @@ Task-specific workflows live under `.claude/skills/` and load on demand — invo
 - `pickup-github-ticket` — resolving a ticket number/URL to a branch and picking up work
 - `cut-release-notes` — turning `vnext-release-notes.md` into a versioned release note
 - `generate-elm-from-cql` — regenerating ELM JSON after adding CQL test input files
+- `generate-svg-from-mermaid` — adding/editing a Mermaid diagram and rendering it to a committed `.svg`

@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "5.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       } ],
@@ -1215,11 +1215,11 @@
                   "annotation" : [ ],
                   "choice" : [ {
                      "type" : "NamedTypeSpecifier",
-                     "name" : "{http://hl7.org/fhir}Procedure",
+                     "name" : "{http://hl7.org/fhir}Condition",
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
-                     "name" : "{http://hl7.org/fhir}Condition",
+                     "name" : "{http://hl7.org/fhir}Procedure",
                      "annotation" : [ ]
                   } ]
                }
@@ -1236,11 +1236,11 @@
                      "annotation" : [ ],
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
-                        "name" : "{http://hl7.org/fhir}Procedure",
+                        "name" : "{http://hl7.org/fhir}Condition",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
-                        "name" : "{http://hl7.org/fhir}Condition",
+                        "name" : "{http://hl7.org/fhir}Procedure",
                         "annotation" : [ ]
                      } ]
                   }
@@ -1253,11 +1253,11 @@
                      "annotation" : [ ],
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
-                        "name" : "{http://hl7.org/fhir}Procedure",
+                        "name" : "{http://hl7.org/fhir}Condition",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
-                        "name" : "{http://hl7.org/fhir}Condition",
+                        "name" : "{http://hl7.org/fhir}Procedure",
                         "annotation" : [ ]
                      } ]
                   }
@@ -1269,11 +1269,11 @@
                      "annotation" : [ ],
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
-                        "name" : "{http://hl7.org/fhir}Procedure",
+                        "name" : "{http://hl7.org/fhir}Condition",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
-                        "name" : "{http://hl7.org/fhir}Condition",
+                        "name" : "{http://hl7.org/fhir}Procedure",
                         "annotation" : [ ]
                      } ]
                   }
@@ -1442,7 +1442,7 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}dateTime",
+                                       "name" : "{http://hl7.org/fhir}Age",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -1450,7 +1450,15 @@
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}Range",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
                                        "name" : "{http://hl7.org/fhir}Timing",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}dateTime",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -1459,14 +1467,6 @@
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{http://hl7.org/fhir}string",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}Age",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}Range",
                                        "annotation" : [ ]
                                     } ]
                                  } ],
@@ -1481,7 +1481,7 @@
                                        "annotation" : [ ],
                                        "choice" : [ {
                                           "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}dateTime",
+                                          "name" : "{http://hl7.org/fhir}Age",
                                           "annotation" : [ ]
                                        }, {
                                           "type" : "NamedTypeSpecifier",
@@ -1489,15 +1489,15 @@
                                           "annotation" : [ ]
                                        }, {
                                           "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}string",
-                                          "annotation" : [ ]
-                                       }, {
-                                          "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}Age",
-                                          "annotation" : [ ]
-                                       }, {
-                                          "type" : "NamedTypeSpecifier",
                                           "name" : "{http://hl7.org/fhir}Range",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "type" : "NamedTypeSpecifier",
+                                          "name" : "{http://hl7.org/fhir}dateTime",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "type" : "NamedTypeSpecifier",
+                                          "name" : "{http://hl7.org/fhir}string",
                                           "annotation" : [ ]
                                        } ]
                                     }
@@ -1544,11 +1544,11 @@
                         "annotation" : [ ],
                         "choice" : [ {
                            "type" : "NamedTypeSpecifier",
-                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "annotation" : [ ]
                         }, {
                            "type" : "NamedTypeSpecifier",
-                           "name" : "{http://hl7.org/fhir}Condition",
+                           "name" : "{http://hl7.org/fhir}Procedure",
                            "annotation" : [ ]
                         } ]
                      }
@@ -1711,11 +1711,11 @@
                         "annotation" : [ ],
                         "choice" : [ {
                            "type" : "NamedTypeSpecifier",
-                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "annotation" : [ ]
                         }, {
                            "type" : "NamedTypeSpecifier",
-                           "name" : "{http://hl7.org/fhir}Condition",
+                           "name" : "{http://hl7.org/fhir}Procedure",
                            "annotation" : [ ]
                         } ]
                      }
@@ -1777,11 +1777,11 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Procedure",
+                              "name" : "{http://hl7.org/fhir}Condition",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Condition",
+                              "name" : "{http://hl7.org/fhir}Procedure",
                               "annotation" : [ ]
                            } ]
                         }
@@ -1799,11 +1799,11 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Procedure",
+                                 "name" : "{http://hl7.org/fhir}Condition",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Condition",
+                                 "name" : "{http://hl7.org/fhir}Procedure",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -2171,7 +2171,7 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}dateTime",
+                                    "name" : "{http://hl7.org/fhir}Age",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -2179,7 +2179,15 @@
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}Range",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
                                     "name" : "{http://hl7.org/fhir}Timing",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}dateTime",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -2188,14 +2196,6 @@
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{http://hl7.org/fhir}string",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}Age",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}Range",
                                     "annotation" : [ ]
                                  } ]
                               } ],
@@ -2210,15 +2210,15 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}dateTime",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
                                        "name" : "{http://hl7.org/fhir}Period",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{http://hl7.org/fhir}Timing",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}dateTime",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -2406,23 +2406,15 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Quantity",
-                                 "annotation" : [ ]
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
                                  "name" : "{http://hl7.org/fhir}CodeableConcept",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}string",
+                                 "name" : "{http://hl7.org/fhir}Period",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}boolean",
-                                 "annotation" : [ ]
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}integer",
+                                 "name" : "{http://hl7.org/fhir}Quantity",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -2438,7 +2430,7 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}time",
+                                 "name" : "{http://hl7.org/fhir}boolean",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -2446,7 +2438,15 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Period",
+                                 "name" : "{http://hl7.org/fhir}integer",
+                                 "annotation" : [ ]
+                              }, {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}string",
+                                 "annotation" : [ ]
+                              }, {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}time",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -2860,7 +2860,7 @@
                                           "annotation" : [ ],
                                           "choice" : [ {
                                              "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}dateTime",
+                                             "name" : "{http://hl7.org/fhir}Age",
                                              "annotation" : [ ]
                                           }, {
                                              "type" : "NamedTypeSpecifier",
@@ -2868,7 +2868,15 @@
                                              "annotation" : [ ]
                                           }, {
                                              "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}Range",
+                                             "annotation" : [ ]
+                                          }, {
+                                             "type" : "NamedTypeSpecifier",
                                              "name" : "{http://hl7.org/fhir}Timing",
+                                             "annotation" : [ ]
+                                          }, {
+                                             "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}dateTime",
                                              "annotation" : [ ]
                                           }, {
                                              "type" : "NamedTypeSpecifier",
@@ -2877,14 +2885,6 @@
                                           }, {
                                              "type" : "NamedTypeSpecifier",
                                              "name" : "{http://hl7.org/fhir}string",
-                                             "annotation" : [ ]
-                                          }, {
-                                             "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}Age",
-                                             "annotation" : [ ]
-                                          }, {
-                                             "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}Range",
                                              "annotation" : [ ]
                                           } ]
                                        } ],
@@ -2899,15 +2899,15 @@
                                              "annotation" : [ ],
                                              "choice" : [ {
                                                 "type" : "NamedTypeSpecifier",
-                                                "name" : "{http://hl7.org/fhir}dateTime",
-                                                "annotation" : [ ]
-                                             }, {
-                                                "type" : "NamedTypeSpecifier",
                                                 "name" : "{http://hl7.org/fhir}Period",
                                                 "annotation" : [ ]
                                              }, {
                                                 "type" : "NamedTypeSpecifier",
                                                 "name" : "{http://hl7.org/fhir}Timing",
+                                                "annotation" : [ ]
+                                             }, {
+                                                "type" : "NamedTypeSpecifier",
+                                                "name" : "{http://hl7.org/fhir}dateTime",
                                                 "annotation" : [ ]
                                              }, {
                                                 "type" : "NamedTypeSpecifier",
@@ -2971,7 +2971,7 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}dateTime",
+                                    "name" : "{http://hl7.org/fhir}Age",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -2979,7 +2979,15 @@
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}Range",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
                                     "name" : "{http://hl7.org/fhir}Timing",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}dateTime",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -2988,14 +2996,6 @@
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{http://hl7.org/fhir}string",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}Age",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}Range",
                                     "annotation" : [ ]
                                  } ]
                               } ],
@@ -3010,15 +3010,15 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}dateTime",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
                                        "name" : "{http://hl7.org/fhir}Period",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{http://hl7.org/fhir}Timing",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}dateTime",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -3206,23 +3206,15 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Quantity",
-                                 "annotation" : [ ]
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
                                  "name" : "{http://hl7.org/fhir}CodeableConcept",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}string",
+                                 "name" : "{http://hl7.org/fhir}Period",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}boolean",
-                                 "annotation" : [ ]
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}integer",
+                                 "name" : "{http://hl7.org/fhir}Quantity",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -3238,7 +3230,7 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}time",
+                                 "name" : "{http://hl7.org/fhir}boolean",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -3246,7 +3238,15 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Period",
+                                 "name" : "{http://hl7.org/fhir}integer",
+                                 "annotation" : [ ]
+                              }, {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}string",
+                                 "annotation" : [ ]
+                              }, {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}time",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -3601,7 +3601,7 @@
                   "annotation" : [ ],
                   "choice" : [ {
                      "type" : "NamedTypeSpecifier",
-                     "name" : "{http://hl7.org/fhir}dateTime",
+                     "name" : "{http://hl7.org/fhir}Age",
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
@@ -3609,7 +3609,15 @@
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
+                     "name" : "{http://hl7.org/fhir}Range",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
                      "name" : "{http://hl7.org/fhir}Timing",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{http://hl7.org/fhir}dateTime",
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
@@ -3618,14 +3626,6 @@
                   }, {
                      "type" : "NamedTypeSpecifier",
                      "name" : "{http://hl7.org/fhir}string",
-                     "annotation" : [ ]
-                  }, {
-                     "type" : "NamedTypeSpecifier",
-                     "name" : "{http://hl7.org/fhir}Age",
-                     "annotation" : [ ]
-                  }, {
-                     "type" : "NamedTypeSpecifier",
-                     "name" : "{http://hl7.org/fhir}Range",
                      "annotation" : [ ]
                   } ]
                } ],
@@ -3639,7 +3639,7 @@
                      "annotation" : [ ],
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
-                        "name" : "{http://hl7.org/fhir}dateTime",
+                        "name" : "{http://hl7.org/fhir}Age",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
@@ -3647,7 +3647,15 @@
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
+                        "name" : "{http://hl7.org/fhir}Range",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "NamedTypeSpecifier",
                         "name" : "{http://hl7.org/fhir}Timing",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{http://hl7.org/fhir}dateTime",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
@@ -3656,14 +3664,6 @@
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "name" : "{http://hl7.org/fhir}string",
-                        "annotation" : [ ]
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{http://hl7.org/fhir}Age",
-                        "annotation" : [ ]
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{http://hl7.org/fhir}Range",
                         "annotation" : [ ]
                      } ]
                   }
@@ -3683,7 +3683,7 @@
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1206",
-                        "name" : "{http://hl7.org/fhir}dateTime",
+                        "name" : "{http://hl7.org/fhir}Age",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
@@ -3693,35 +3693,35 @@
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1208",
-                        "name" : "{http://hl7.org/fhir}Timing",
+                        "name" : "{http://hl7.org/fhir}Range",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1209",
-                        "name" : "{http://hl7.org/fhir}instant",
+                        "name" : "{http://hl7.org/fhir}Timing",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1210",
-                        "name" : "{http://hl7.org/fhir}string",
+                        "name" : "{http://hl7.org/fhir}dateTime",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1211",
-                        "name" : "{http://hl7.org/fhir}Age",
+                        "name" : "{http://hl7.org/fhir}instant",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1212",
-                        "name" : "{http://hl7.org/fhir}Range",
+                        "name" : "{http://hl7.org/fhir}string",
                         "annotation" : [ ]
                      } ]
                   },
                   "choice" : [ {
                      "type" : "NamedTypeSpecifier",
-                     "locator" : "122:45-122:57",
-                     "resultTypeName" : "{http://hl7.org/fhir}dateTime",
-                     "name" : "{http://hl7.org/fhir}dateTime",
+                     "locator" : "122:113-122:120",
+                     "resultTypeName" : "{http://hl7.org/fhir}Age",
+                     "name" : "{http://hl7.org/fhir}Age",
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
@@ -3731,9 +3731,21 @@
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
+                     "locator" : "122:123-122:132",
+                     "resultTypeName" : "{http://hl7.org/fhir}Range",
+                     "name" : "{http://hl7.org/fhir}Range",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
                      "locator" : "122:73-122:83",
                      "resultTypeName" : "{http://hl7.org/fhir}Timing",
                      "name" : "{http://hl7.org/fhir}Timing",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
+                     "locator" : "122:45-122:57",
+                     "resultTypeName" : "{http://hl7.org/fhir}dateTime",
+                     "name" : "{http://hl7.org/fhir}dateTime",
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
@@ -3746,18 +3758,6 @@
                      "locator" : "122:100-122:110",
                      "resultTypeName" : "{http://hl7.org/fhir}string",
                      "name" : "{http://hl7.org/fhir}string",
-                     "annotation" : [ ]
-                  }, {
-                     "type" : "NamedTypeSpecifier",
-                     "locator" : "122:113-122:120",
-                     "resultTypeName" : "{http://hl7.org/fhir}Age",
-                     "name" : "{http://hl7.org/fhir}Age",
-                     "annotation" : [ ]
-                  }, {
-                     "type" : "NamedTypeSpecifier",
-                     "locator" : "122:123-122:132",
-                     "resultTypeName" : "{http://hl7.org/fhir}Range",
-                     "name" : "{http://hl7.org/fhir}Range",
                      "annotation" : [ ]
                   } ]
                }
@@ -3957,7 +3957,7 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}dateTime",
+                                    "name" : "{http://hl7.org/fhir}Age",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -3965,7 +3965,15 @@
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}Range",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
                                     "name" : "{http://hl7.org/fhir}Timing",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}dateTime",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -3974,14 +3982,6 @@
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{http://hl7.org/fhir}string",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}Age",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}Range",
                                     "annotation" : [ ]
                                  } ]
                               } ],
@@ -3996,15 +3996,15 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}dateTime",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
                                        "name" : "{http://hl7.org/fhir}Period",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{http://hl7.org/fhir}Timing",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}dateTime",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -4192,23 +4192,15 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Quantity",
-                                 "annotation" : [ ]
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
                                  "name" : "{http://hl7.org/fhir}CodeableConcept",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}string",
+                                 "name" : "{http://hl7.org/fhir}Period",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}boolean",
-                                 "annotation" : [ ]
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}integer",
+                                 "name" : "{http://hl7.org/fhir}Quantity",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -4224,7 +4216,7 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}time",
+                                 "name" : "{http://hl7.org/fhir}boolean",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -4232,7 +4224,15 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Period",
+                                 "name" : "{http://hl7.org/fhir}integer",
+                                 "annotation" : [ ]
+                              }, {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}string",
+                                 "annotation" : [ ]
+                              }, {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}time",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -4278,7 +4278,7 @@
                   "annotation" : [ ],
                   "choice" : [ {
                      "type" : "NamedTypeSpecifier",
-                     "name" : "{http://hl7.org/fhir}dateTime",
+                     "name" : "{http://hl7.org/fhir}Age",
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
@@ -4286,7 +4286,15 @@
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
+                     "name" : "{http://hl7.org/fhir}Range",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
                      "name" : "{http://hl7.org/fhir}Timing",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{http://hl7.org/fhir}dateTime",
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
@@ -4295,14 +4303,6 @@
                   }, {
                      "type" : "NamedTypeSpecifier",
                      "name" : "{http://hl7.org/fhir}string",
-                     "annotation" : [ ]
-                  }, {
-                     "type" : "NamedTypeSpecifier",
-                     "name" : "{http://hl7.org/fhir}Age",
-                     "annotation" : [ ]
-                  }, {
-                     "type" : "NamedTypeSpecifier",
-                     "name" : "{http://hl7.org/fhir}Range",
                      "annotation" : [ ]
                   } ]
                } ],
@@ -4316,7 +4316,7 @@
                      "annotation" : [ ],
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
-                        "name" : "{http://hl7.org/fhir}dateTime",
+                        "name" : "{http://hl7.org/fhir}Age",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
@@ -4324,7 +4324,15 @@
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
+                        "name" : "{http://hl7.org/fhir}Range",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "NamedTypeSpecifier",
                         "name" : "{http://hl7.org/fhir}Timing",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{http://hl7.org/fhir}dateTime",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
@@ -4333,14 +4341,6 @@
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "name" : "{http://hl7.org/fhir}string",
-                        "annotation" : [ ]
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{http://hl7.org/fhir}Age",
-                        "annotation" : [ ]
-                     }, {
-                        "type" : "NamedTypeSpecifier",
-                        "name" : "{http://hl7.org/fhir}Range",
                         "annotation" : [ ]
                      } ]
                   }
@@ -4360,7 +4360,7 @@
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1364",
-                        "name" : "{http://hl7.org/fhir}dateTime",
+                        "name" : "{http://hl7.org/fhir}Age",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
@@ -4370,35 +4370,35 @@
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1366",
-                        "name" : "{http://hl7.org/fhir}Timing",
+                        "name" : "{http://hl7.org/fhir}Range",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1367",
-                        "name" : "{http://hl7.org/fhir}instant",
+                        "name" : "{http://hl7.org/fhir}Timing",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1368",
-                        "name" : "{http://hl7.org/fhir}string",
+                        "name" : "{http://hl7.org/fhir}dateTime",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1369",
-                        "name" : "{http://hl7.org/fhir}Age",
+                        "name" : "{http://hl7.org/fhir}instant",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1370",
-                        "name" : "{http://hl7.org/fhir}Range",
+                        "name" : "{http://hl7.org/fhir}string",
                         "annotation" : [ ]
                      } ]
                   },
                   "choice" : [ {
                      "type" : "NamedTypeSpecifier",
-                     "locator" : "125:49-125:61",
-                     "resultTypeName" : "{http://hl7.org/fhir}dateTime",
-                     "name" : "{http://hl7.org/fhir}dateTime",
+                     "locator" : "125:117-125:124",
+                     "resultTypeName" : "{http://hl7.org/fhir}Age",
+                     "name" : "{http://hl7.org/fhir}Age",
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
@@ -4408,9 +4408,21 @@
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
+                     "locator" : "125:127-125:136",
+                     "resultTypeName" : "{http://hl7.org/fhir}Range",
+                     "name" : "{http://hl7.org/fhir}Range",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
                      "locator" : "125:77-125:87",
                      "resultTypeName" : "{http://hl7.org/fhir}Timing",
                      "name" : "{http://hl7.org/fhir}Timing",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
+                     "locator" : "125:49-125:61",
+                     "resultTypeName" : "{http://hl7.org/fhir}dateTime",
+                     "name" : "{http://hl7.org/fhir}dateTime",
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
@@ -4423,18 +4435,6 @@
                      "locator" : "125:104-125:114",
                      "resultTypeName" : "{http://hl7.org/fhir}string",
                      "name" : "{http://hl7.org/fhir}string",
-                     "annotation" : [ ]
-                  }, {
-                     "type" : "NamedTypeSpecifier",
-                     "locator" : "125:117-125:124",
-                     "resultTypeName" : "{http://hl7.org/fhir}Age",
-                     "name" : "{http://hl7.org/fhir}Age",
-                     "annotation" : [ ]
-                  }, {
-                     "type" : "NamedTypeSpecifier",
-                     "locator" : "125:127-125:136",
-                     "resultTypeName" : "{http://hl7.org/fhir}Range",
-                     "name" : "{http://hl7.org/fhir}Range",
                      "annotation" : [ ]
                   } ]
                }
@@ -4687,7 +4687,7 @@
                                           "annotation" : [ ],
                                           "choice" : [ {
                                              "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}dateTime",
+                                             "name" : "{http://hl7.org/fhir}Age",
                                              "annotation" : [ ]
                                           }, {
                                              "type" : "NamedTypeSpecifier",
@@ -4695,7 +4695,15 @@
                                              "annotation" : [ ]
                                           }, {
                                              "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}Range",
+                                             "annotation" : [ ]
+                                          }, {
+                                             "type" : "NamedTypeSpecifier",
                                              "name" : "{http://hl7.org/fhir}Timing",
+                                             "annotation" : [ ]
+                                          }, {
+                                             "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}dateTime",
                                              "annotation" : [ ]
                                           }, {
                                              "type" : "NamedTypeSpecifier",
@@ -4704,14 +4712,6 @@
                                           }, {
                                              "type" : "NamedTypeSpecifier",
                                              "name" : "{http://hl7.org/fhir}string",
-                                             "annotation" : [ ]
-                                          }, {
-                                             "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}Age",
-                                             "annotation" : [ ]
-                                          }, {
-                                             "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}Range",
                                              "annotation" : [ ]
                                           } ]
                                        } ],
@@ -4726,15 +4726,15 @@
                                              "annotation" : [ ],
                                              "choice" : [ {
                                                 "type" : "NamedTypeSpecifier",
-                                                "name" : "{http://hl7.org/fhir}dateTime",
-                                                "annotation" : [ ]
-                                             }, {
-                                                "type" : "NamedTypeSpecifier",
                                                 "name" : "{http://hl7.org/fhir}Period",
                                                 "annotation" : [ ]
                                              }, {
                                                 "type" : "NamedTypeSpecifier",
                                                 "name" : "{http://hl7.org/fhir}Timing",
+                                                "annotation" : [ ]
+                                             }, {
+                                                "type" : "NamedTypeSpecifier",
+                                                "name" : "{http://hl7.org/fhir}dateTime",
                                                 "annotation" : [ ]
                                              }, {
                                                 "type" : "NamedTypeSpecifier",
@@ -4797,7 +4797,7 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}dateTime",
+                                    "name" : "{http://hl7.org/fhir}Age",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -4805,7 +4805,15 @@
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}Range",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
                                     "name" : "{http://hl7.org/fhir}Timing",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}dateTime",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -4814,14 +4822,6 @@
                                  }, {
                                     "type" : "NamedTypeSpecifier",
                                     "name" : "{http://hl7.org/fhir}string",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}Age",
-                                    "annotation" : [ ]
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}Range",
                                     "annotation" : [ ]
                                  } ]
                               } ],
@@ -4836,15 +4836,15 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}dateTime",
-                                       "annotation" : [ ]
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
                                        "name" : "{http://hl7.org/fhir}Period",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
                                        "name" : "{http://hl7.org/fhir}Timing",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}dateTime",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -5032,23 +5032,15 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Quantity",
-                                 "annotation" : [ ]
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
                                  "name" : "{http://hl7.org/fhir}CodeableConcept",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}string",
+                                 "name" : "{http://hl7.org/fhir}Period",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}boolean",
-                                 "annotation" : [ ]
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}integer",
+                                 "name" : "{http://hl7.org/fhir}Quantity",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -5064,7 +5056,7 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}time",
+                                 "name" : "{http://hl7.org/fhir}boolean",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -5072,7 +5064,15 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Period",
+                                 "name" : "{http://hl7.org/fhir}integer",
+                                 "annotation" : [ ]
+                              }, {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}string",
+                                 "annotation" : [ ]
+                              }, {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}time",
                                  "annotation" : [ ]
                               } ]
                            }

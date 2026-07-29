@@ -1,11 +1,12 @@
-﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Compiler.CodeModel;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class LibrarySetCSharpCodeGenerator
 {
+    // Writes individual definitions (value sets, concepts, code systems, codes, and lambdas)
+    // into the generated library class.
     private class DefinitionWriter
     {
         private readonly LambdaDefinitionWriter _lambdaDefinitionWriter;

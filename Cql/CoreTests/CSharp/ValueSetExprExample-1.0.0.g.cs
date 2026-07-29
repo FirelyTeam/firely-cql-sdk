@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("ValueSetExprExample", "1.0.0")]
 public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetExprExample_1_0_0>
 {
@@ -76,39 +76,27 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     private CqlValueSet ValueSetA_Compute(CqlContext context)
     {
-
-        CqlValueSet a_() {
-
-            bool b_() {
-                string d_ = this.ChosenSubCategory(context);
-                bool? e_ = context.Operators.Equal(d_, "1");
-                return e_ ?? false;
-            }
-
-
-            bool c_() {
-                string f_ = this.ChosenSubCategory(context);
-                bool? g_ = context.Operators.Equal(f_, "2");
-                return g_ ?? false;
-            }
-
-            if (b_())
+        string a_ = this.ChosenSubCategory(context);
+        bool? b_ = context.Operators.Equal(a_, "1");
+        if (b_ ?? false)
+        {
+            CqlValueSet c_ = this.ValueSet_A_1(context);
+            return c_;
+        }
+        else
+        {
+            string d_ = this.ChosenSubCategory(context);
+            bool? e_ = context.Operators.Equal(d_, "2");
+            if (e_ ?? false)
             {
-                CqlValueSet h_ = this.ValueSet_A_1(context);
-                return h_;
-            }
-            else if (c_())
-            {
-                CqlValueSet i_ = this.ValueSet_A_2(context);
-                return i_;
+                CqlValueSet f_ = this.ValueSet_A_2(context);
+                return f_;
             }
             else
             {
                 return default;
-            };
+            }
         }
-
-        return a_();
     }
 
 
@@ -120,39 +108,27 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     private CqlValueSet ValueSetB_Compute(CqlContext context)
     {
-
-        CqlValueSet a_() {
-
-            bool b_() {
-                string d_ = this.ChosenSubCategory(context);
-                bool? e_ = context.Operators.Equal(d_, "1");
-                return e_ ?? false;
-            }
-
-
-            bool c_() {
-                string f_ = this.ChosenSubCategory(context);
-                bool? g_ = context.Operators.Equal(f_, "2");
-                return g_ ?? false;
-            }
-
-            if (b_())
+        string a_ = this.ChosenSubCategory(context);
+        bool? b_ = context.Operators.Equal(a_, "1");
+        if (b_ ?? false)
+        {
+            CqlValueSet c_ = this.ValueSet_B_1(context);
+            return c_;
+        }
+        else
+        {
+            string d_ = this.ChosenSubCategory(context);
+            bool? e_ = context.Operators.Equal(d_, "2");
+            if (e_ ?? false)
             {
-                CqlValueSet h_ = this.ValueSet_B_1(context);
-                return h_;
-            }
-            else if (c_())
-            {
-                CqlValueSet i_ = this.ValueSet_B_2(context);
-                return i_;
+                CqlValueSet f_ = this.ValueSet_B_2(context);
+                return f_;
             }
             else
             {
                 return default;
-            };
+            }
         }
-
-        return a_();
     }
 
 
@@ -164,39 +140,27 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     private string Result_Compute(CqlContext context)
     {
-
-        string a_() {
-
-            bool b_() {
-                CqlCode d_ = this.ChosenCode(context);
-                CqlValueSet e_ = this.ValueSetA(context);
-                bool? f_ = context.Operators.CodeInValueSet(d_, e_);
-                return f_ ?? false;
-            }
-
-
-            bool c_() {
-                CqlCode g_ = this.ChosenCode(context);
-                CqlValueSet h_ = this.ValueSetB(context);
-                bool? i_ = context.Operators.CodeInValueSet(g_, h_);
-                return i_ ?? false;
-            }
-
-            if (b_())
-            {
-                return "a";
-            }
-            else if (c_())
+        CqlCode a_ = this.ChosenCode(context);
+        CqlValueSet b_ = this.ValueSetA(context);
+        bool? c_ = context.Operators.CodeInValueSet(a_, b_);
+        if (c_ ?? false)
+        {
+            return "a";
+        }
+        else
+        {
+            CqlCode d_ = this.ChosenCode(context);
+            CqlValueSet e_ = this.ValueSetB(context);
+            bool? f_ = context.Operators.CodeInValueSet(d_, e_);
+            if (f_ ?? false)
             {
                 return "b";
             }
             else
             {
                 return default;
-            };
+            }
         }
-
-        return a_();
     }
 
 

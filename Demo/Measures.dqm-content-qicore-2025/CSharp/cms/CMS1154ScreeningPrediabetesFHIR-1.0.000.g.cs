@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("CMS1154ScreeningPrediabetesFHIR", "1.0.000")]
 public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingleton<CMS1154ScreeningPrediabetesFHIR_1_0_000>
 {
@@ -167,27 +167,23 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             CodeableConcept c_ = C?.VerificationStatus;
             CqlConcept d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
             bool? e_ = context.Operators.Not((bool?)(d_ is null));
-            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
-            CqlCode h_ = this.confirmed(context);
-            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
-            bool? j_ = context.Operators.Equivalent(g_, i_);
-            CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
-            CqlCode m_ = this.unconfirmed(context);
+            CqlCode f_ = this.confirmed(context);
+            CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
+            bool? h_ = context.Operators.Equivalent(d_, g_);
+            CqlCode i_ = this.unconfirmed(context);
+            CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
+            bool? k_ = context.Operators.Equivalent(d_, j_);
+            bool? l_ = context.Operators.Or(h_, k_);
+            CqlCode m_ = this.provisional(context);
             CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
-            bool? o_ = context.Operators.Equivalent(l_, n_);
-            bool? p_ = context.Operators.Or(j_, o_);
-            CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
-            CqlCode s_ = this.provisional(context);
-            CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
-            bool? u_ = context.Operators.Equivalent(r_, t_);
-            bool? v_ = context.Operators.Or(p_, u_);
-            CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
-            CqlCode y_ = this.differential(context);
-            CqlConcept z_ = context.Operators.ConvertCodeToConcept(y_);
-            bool? aa_ = context.Operators.Equivalent(x_, z_);
-            bool? ab_ = context.Operators.Or(v_, aa_);
-            bool? ac_ = context.Operators.Implies(e_, ab_);
-            return ac_;
+            bool? o_ = context.Operators.Equivalent(d_, n_);
+            bool? p_ = context.Operators.Or(l_, o_);
+            CqlCode q_ = this.differential(context);
+            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
+            bool? s_ = context.Operators.Equivalent(d_, r_);
+            bool? t_ = context.Operators.Or(p_, s_);
+            bool? u_ = context.Operators.Implies(e_, t_);
+            return u_;
         }
 
         IEnumerable<Condition> b_ = context.Operators.Where<Condition>(conditions, a_);
@@ -205,26 +201,26 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Advanced_Illness(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
-        CqlValueSet f_ = this.Limited_Life_Expectancy(context);
-        IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
-        IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition>, j_ as IEnumerable<Condition>);
-        IEnumerable<Condition> l_ = this.verified(context, k_);
+        IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        CqlValueSet e_ = this.Limited_Life_Expectancy(context);
+        IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
+        IEnumerable<Condition> j_ = this.verified(context, i_);
 
-        bool? m_(Condition AdvancedIllness) {
-            DataType o_ = AdvancedIllness?.Onset;
-            object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-            CqlDateTime r_ = context.Operators.End(q_);
-            bool? s_ = context.Operators.Before(p_ as CqlDateTime, r_, "day");
-            return s_;
+        bool? k_(Condition AdvancedIllness) {
+            DataType m_ = AdvancedIllness?.Onset;
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+            CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
+            CqlDateTime p_ = context.Operators.End(o_);
+            bool? q_ = context.Operators.Before(n_ as CqlDateTime, p_, "day");
+            return q_;
         }
 
-        IEnumerable<Condition> n_ = context.Operators.Where<Condition>(l_, m_);
-        return n_;
+        IEnumerable<Condition> l_ = context.Operators.Where<Condition>(j_, k_);
+        return l_;
     }
 
 
@@ -304,15 +300,9 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 35);
-        Date k_ = a_?.BirthDateElement;
-        string l_ = k_?.Value;
-        CqlDate m_ = context.Operators.ConvertStringToDate(l_);
-        CqlDateTime o_ = context.Operators.Start(e_);
-        CqlDate p_ = context.Operators.DateFrom(o_);
-        int? q_ = context.Operators.CalculateAgeAt(m_, p_, "year");
-        bool? r_ = context.Operators.LessOrEqual(q_, 70);
-        bool? s_ = context.Operators.And(i_, r_);
-        return s_;
+        bool? j_ = context.Operators.LessOrEqual(h_, 70);
+        bool? k_ = context.Operators.And(i_, j_);
+        return k_;
     }
 
 
@@ -547,7 +537,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
             DataType i_ = PregnantObservation?.Effective;
             CqlDateTime j_ = context.Operators.LateBoundProperty<CqlDateTime>(i_, "value");
-            CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_ as object);
+            CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             bool? m_ = context.Operators.Overlaps(k_, l_, "day");
             bool? n_ = context.Operators.And(h_, m_);
@@ -570,19 +560,19 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Pregnancy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
-        IEnumerable<Condition> f_ = this.verified(context, e_);
+        IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> e_ = this.verified(context, d_);
 
-        bool? g_(Condition PregnancyDx) {
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyDx);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            bool? k_ = context.Operators.Overlaps(i_, j_, "day");
-            return k_;
+        bool? f_(Condition PregnancyDx) {
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyDx);
+            CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
+            bool? j_ = context.Operators.Overlaps(h_, i_, "day");
+            return j_;
         }
 
-        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
-        return h_;
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        return g_;
     }
 
 
@@ -598,9 +588,8 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlDateTime b_ = context.Operators.Start(a_);
         CqlQuantity c_ = context.Operators.Quantity(2m, "years");
         CqlDateTime d_ = context.Operators.Subtract(b_, c_);
-        CqlDateTime f_ = context.Operators.Start(a_);
-        CqlInterval<CqlDateTime> g_ = context.Operators.Interval(d_, f_, true, false);
-        return g_;
+        CqlInterval<CqlDateTime> e_ = context.Operators.Interval(d_, b_, true, false);
+        return e_;
     }
 
 
@@ -614,19 +603,19 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Prediabetes__Borderline_Diabetes_(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
-        IEnumerable<Condition> f_ = this.verified(context, e_);
+        IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> e_ = this.verified(context, d_);
 
-        bool? g_(Condition PriorPrediabetes) {
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PriorPrediabetes);
-            CqlInterval<CqlDateTime> j_ = this.Look_Back_Period(context);
-            bool? k_ = context.Operators.Overlaps(i_, j_, "day");
-            return k_;
+        bool? f_(Condition PriorPrediabetes) {
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PriorPrediabetes);
+            CqlInterval<CqlDateTime> i_ = this.Look_Back_Period(context);
+            bool? j_ = context.Operators.Overlaps(h_, i_, "day");
+            return j_;
         }
 
-        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
-        return h_;
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        return g_;
     }
 
 
@@ -640,19 +629,19 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     {
         CqlValueSet a_ = this.Diabetes(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
-        IEnumerable<Condition> f_ = this.verified(context, e_);
+        IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> e_ = this.verified(context, d_);
 
-        bool? g_(Condition PriorDiabetes) {
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PriorDiabetes);
-            CqlInterval<CqlDateTime> j_ = this.Look_Back_Period(context);
-            bool? k_ = context.Operators.Overlaps(i_, j_, "day");
-            return k_;
+        bool? f_(Condition PriorDiabetes) {
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PriorDiabetes);
+            CqlInterval<CqlDateTime> i_ = this.Look_Back_Period(context);
+            bool? j_ = context.Operators.Overlaps(h_, i_, "day");
+            return j_;
         }
 
-        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
-        return h_;
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        return g_;
     }
 
 

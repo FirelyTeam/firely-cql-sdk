@@ -175,7 +175,7 @@ Maven project descriptor used exclusively to download the Java CQL-to-ELM toolin
 
 > **Note:** The Maven groupId changed from `info.cqframework` to `org.cqframework` starting with upstream version `4.0.0`. The upstream [cqframework/clinical_quality_language](https://github.com/cqframework/clinical_quality_language) project rewrote its Java codebase in Kotlin (Kotlin Multiplatform, targeting JVM/JS/Wasm) around that release and renamed the groupId as part of that migration. The CLI is still distributed as a JVM application and invoked the same way (`java -classpath ... org.cqframework.cql.cql2elm.cli.Main`) — only the groupId, and the language the tool itself is implemented in, changed. Upgrading from `3.29.0` to `4.0.0` produced no changes to ELM output beyond the `translatorVersion` annotation field and a couple of inconsequential JSON key reorderings (verified by diffing regenerated output against the pre-upgrade baseline for every checked-in ELM fixture in this repo).
 
-The version is pinned in `Java-Dependencies-Vars.ps1` / `Java-Dependencies-Vars.sh` (currently `4.0.0`). When updating the version you must keep it consistent across:
+The version is pinned in `Java-Dependencies-Vars.ps1` / `Java-Dependencies-Vars.sh` (currently `5.0.0`). When updating the version you must keep it consistent across:
 - `pom.xml`
 - `Java-Dependencies-Vars.ps1`
 - `Java-Dependencies-Vars.sh`

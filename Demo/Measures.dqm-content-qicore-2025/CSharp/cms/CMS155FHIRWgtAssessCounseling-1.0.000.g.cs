@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS155FHIRWgtAssessCounseling", "1.0.000")]
 public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleton<CMS155FHIRWgtAssessCounseling_1_0_000>
 {
@@ -239,19 +239,19 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     {
         CqlValueSet a_ = this.Pregnancy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
-        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> e_ = Status_1_15_000.Instance.verified(context, d_);
 
-        bool? g_(Condition PregnancyDiag) {
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyDiag);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            bool? k_ = context.Operators.Overlaps(i_, j_, (string)default);
-            return k_;
+        bool? f_(Condition PregnancyDiag) {
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyDiag);
+            CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
+            bool? j_ = context.Operators.Overlaps(h_, i_, (string)default);
+            return j_;
         }
 
-        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
-        return h_;
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        return g_;
     }
 
 
@@ -392,71 +392,57 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
         bool? d_(Procedure NutritionCounseling) {
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
-
-            object h_() {
-
-                bool k_() {
-                    DataType o_ = NutritionCounseling?.Performed;
-                    object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                    bool q_ = p_ is CqlDateTime;
-                    return q_;
-                }
-
-
-                bool l_() {
-                    DataType r_ = NutritionCounseling?.Performed;
-                    object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                    bool t_ = s_ is CqlInterval<CqlDateTime>;
-                    return t_;
-                }
-
-
-                bool m_() {
-                    DataType u_ = NutritionCounseling?.Performed;
-                    object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    bool w_ = v_ is CqlQuantity;
-                    return w_;
-                }
-
-
-                bool n_() {
-                    DataType x_ = NutritionCounseling?.Performed;
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    bool z_ = y_ is CqlInterval<CqlQuantity>;
-                    return z_;
-                }
-
-                if (k_())
+            object h_;
+            DataType k_ = NutritionCounseling?.Performed;
+            object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
+            bool m_ = l_ is CqlDateTime;
+            if (m_)
+            {
+                DataType n_ = NutritionCounseling?.Performed;
+                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+                h_ = o_ as CqlDateTime;
+            }
+            else
+            {
+                DataType p_ = NutritionCounseling?.Performed;
+                object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+                bool r_ = q_ is CqlQuantity;
+                if (r_)
                 {
-                    DataType aa_ = NutritionCounseling?.Performed;
-                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    return (ab_ as CqlDateTime) as object;
-                }
-                else if (l_())
-                {
-                    DataType ac_ = NutritionCounseling?.Performed;
-                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    return (ad_ as CqlInterval<CqlDateTime>) as object;
-                }
-                else if (m_())
-                {
-                    DataType ae_ = NutritionCounseling?.Performed;
-                    object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                    return (af_ as CqlQuantity) as object;
-                }
-                else if (n_())
-                {
-                    DataType ag_ = NutritionCounseling?.Performed;
-                    object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                    return (ah_ as CqlInterval<CqlQuantity>) as object;
+                    DataType s_ = NutritionCounseling?.Performed;
+                    object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                    h_ = t_ as CqlQuantity;
                 }
                 else
                 {
-                    return null;
-                };
+                    DataType u_ = NutritionCounseling?.Performed;
+                    object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
+                    bool w_ = v_ is CqlInterval<CqlDateTime>;
+                    if (w_)
+                    {
+                        DataType x_ = NutritionCounseling?.Performed;
+                        object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                        h_ = y_ as CqlInterval<CqlDateTime>;
+                    }
+                    else
+                    {
+                        DataType z_ = NutritionCounseling?.Performed;
+                        object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                        bool ab_ = aa_ is CqlInterval<CqlQuantity>;
+                        if (ab_)
+                        {
+                            DataType ac_ = NutritionCounseling?.Performed;
+                            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                            h_ = ad_ as CqlInterval<CqlQuantity>;
+                        }
+                        else
+                        {
+                            h_ = null;
+                        }
+                    }
+                }
             }
-
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_());
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
             bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
             return j_;
         }
@@ -481,71 +467,57 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
         bool? d_(Procedure ActivityCounseling) {
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
-
-            object h_() {
-
-                bool k_() {
-                    DataType o_ = ActivityCounseling?.Performed;
-                    object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                    bool q_ = p_ is CqlDateTime;
-                    return q_;
-                }
-
-
-                bool l_() {
-                    DataType r_ = ActivityCounseling?.Performed;
-                    object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                    bool t_ = s_ is CqlInterval<CqlDateTime>;
-                    return t_;
-                }
-
-
-                bool m_() {
-                    DataType u_ = ActivityCounseling?.Performed;
-                    object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    bool w_ = v_ is CqlQuantity;
-                    return w_;
-                }
-
-
-                bool n_() {
-                    DataType x_ = ActivityCounseling?.Performed;
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    bool z_ = y_ is CqlInterval<CqlQuantity>;
-                    return z_;
-                }
-
-                if (k_())
+            object h_;
+            DataType k_ = ActivityCounseling?.Performed;
+            object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
+            bool m_ = l_ is CqlDateTime;
+            if (m_)
+            {
+                DataType n_ = ActivityCounseling?.Performed;
+                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+                h_ = o_ as CqlDateTime;
+            }
+            else
+            {
+                DataType p_ = ActivityCounseling?.Performed;
+                object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+                bool r_ = q_ is CqlQuantity;
+                if (r_)
                 {
-                    DataType aa_ = ActivityCounseling?.Performed;
-                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    return (ab_ as CqlDateTime) as object;
-                }
-                else if (l_())
-                {
-                    DataType ac_ = ActivityCounseling?.Performed;
-                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    return (ad_ as CqlInterval<CqlDateTime>) as object;
-                }
-                else if (m_())
-                {
-                    DataType ae_ = ActivityCounseling?.Performed;
-                    object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                    return (af_ as CqlQuantity) as object;
-                }
-                else if (n_())
-                {
-                    DataType ag_ = ActivityCounseling?.Performed;
-                    object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                    return (ah_ as CqlInterval<CqlQuantity>) as object;
+                    DataType s_ = ActivityCounseling?.Performed;
+                    object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                    h_ = t_ as CqlQuantity;
                 }
                 else
                 {
-                    return null;
-                };
+                    DataType u_ = ActivityCounseling?.Performed;
+                    object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
+                    bool w_ = v_ is CqlInterval<CqlDateTime>;
+                    if (w_)
+                    {
+                        DataType x_ = ActivityCounseling?.Performed;
+                        object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                        h_ = y_ as CqlInterval<CqlDateTime>;
+                    }
+                    else
+                    {
+                        DataType z_ = ActivityCounseling?.Performed;
+                        object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                        bool ab_ = aa_ is CqlInterval<CqlQuantity>;
+                        if (ab_)
+                        {
+                            DataType ac_ = ActivityCounseling?.Performed;
+                            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                            h_ = ad_ as CqlInterval<CqlQuantity>;
+                        }
+                        else
+                        {
+                            h_ = null;
+                        }
+                    }
+                }
             }
-
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_());
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
             bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
             return j_;
         }

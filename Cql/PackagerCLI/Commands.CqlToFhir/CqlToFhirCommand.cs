@@ -25,6 +25,7 @@ public record CqlToFhirCommand
     DirectoryInfo? Measures,
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
+    string? MeasureGroupCodeSystem,
     string? CSharpNamespace,
     bool? JsonPretty,
     bool? ExitOnError,
@@ -122,6 +123,14 @@ public record CqlToFhirCommand
             (Used with --fhir)
             """),
 
+        Option<string>(
+            "--measure-group-code-system",
+            """
+            The code system url used for the group codes in FHIR measures.
+            When set, each measure group's id is also output as a coding on Measure.group.code with this system and the group id as its code.
+            (Used with --fhir or --measures)
+            """),
+
         Option<DateTimeOffset>(
             "--override-utc-date-time",
             """
@@ -174,6 +183,7 @@ public record CqlToFhirCommand
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
         (CSharpNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
+        (MeasureGroupCodeSystem, [PackagingOptions.ConfigSection, nameof(PackagingOptions.MeasureGroupCodeSystem)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),

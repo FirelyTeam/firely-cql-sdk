@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS74FHIRDentalCariesPrevention", "1.0.000")]
 public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingleton<CMS74FHIRDentalCariesPrevention_1_0_000>
 {
@@ -165,71 +165,57 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
         IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
 
         bool? d_(Procedure FluorideApplication) {
-
-            object k_() {
-
-                bool p_() {
-                    DataType t_ = FluorideApplication?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    bool v_ = u_ is CqlDateTime;
-                    return v_;
-                }
-
-
-                bool q_() {
-                    DataType w_ = FluorideApplication?.Performed;
-                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                    bool y_ = x_ is CqlInterval<CqlDateTime>;
-                    return y_;
-                }
-
-
-                bool r_() {
-                    DataType z_ = FluorideApplication?.Performed;
-                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    bool ab_ = aa_ is CqlQuantity;
-                    return ab_;
-                }
-
-
-                bool s_() {
-                    DataType ac_ = FluorideApplication?.Performed;
-                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlInterval<CqlQuantity>;
-                    return ae_;
-                }
-
-                if (p_())
+            object k_;
+            DataType p_ = FluorideApplication?.Performed;
+            object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+            bool r_ = q_ is CqlDateTime;
+            if (r_)
+            {
+                DataType s_ = FluorideApplication?.Performed;
+                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                k_ = t_ as CqlDateTime;
+            }
+            else
+            {
+                DataType u_ = FluorideApplication?.Performed;
+                object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
+                bool w_ = v_ is CqlQuantity;
+                if (w_)
                 {
-                    DataType af_ = FluorideApplication?.Performed;
-                    object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                    return (ag_ as CqlDateTime) as object;
-                }
-                else if (q_())
-                {
-                    DataType ah_ = FluorideApplication?.Performed;
-                    object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                    return (ai_ as CqlInterval<CqlDateTime>) as object;
-                }
-                else if (r_())
-                {
-                    DataType aj_ = FluorideApplication?.Performed;
-                    object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    return (ak_ as CqlQuantity) as object;
-                }
-                else if (s_())
-                {
-                    DataType al_ = FluorideApplication?.Performed;
-                    object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                    return (am_ as CqlInterval<CqlQuantity>) as object;
+                    DataType x_ = FluorideApplication?.Performed;
+                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                    k_ = y_ as CqlQuantity;
                 }
                 else
                 {
-                    return null;
-                };
+                    DataType z_ = FluorideApplication?.Performed;
+                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                    bool ab_ = aa_ is CqlInterval<CqlDateTime>;
+                    if (ab_)
+                    {
+                        DataType ac_ = FluorideApplication?.Performed;
+                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                        k_ = ad_ as CqlInterval<CqlDateTime>;
+                    }
+                    else
+                    {
+                        DataType ae_ = FluorideApplication?.Performed;
+                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
+                        bool ag_ = af_ is CqlInterval<CqlQuantity>;
+                        if (ag_)
+                        {
+                            DataType ah_ = FluorideApplication?.Performed;
+                            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                            k_ = ai_ as CqlInterval<CqlQuantity>;
+                        }
+                        else
+                        {
+                            k_ = null;
+                        }
+                    }
+                }
             }
-
-            CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_());
+            CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_);
             CqlDateTime m_ = context.Operators.End(l_);
             CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
             bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
@@ -239,74 +225,60 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
         IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
 
         CqlDate f_(Procedure FluorideApplication) {
-
-            object an_() {
-
-                bool ar_() {
+            object aj_;
+            DataType an_ = FluorideApplication?.Performed;
+            object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
+            bool ap_ = ao_ is CqlDateTime;
+            if (ap_)
+            {
+                DataType aq_ = FluorideApplication?.Performed;
+                object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
+                aj_ = ar_ as CqlDateTime;
+            }
+            else
+            {
+                DataType as_ = FluorideApplication?.Performed;
+                object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
+                bool au_ = at_ is CqlQuantity;
+                if (au_)
+                {
                     DataType av_ = FluorideApplication?.Performed;
                     object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                    bool ax_ = aw_ is CqlDateTime;
-                    return ax_;
-                }
-
-
-                bool as_() {
-                    DataType ay_ = FluorideApplication?.Performed;
-                    object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                    bool ba_ = az_ is CqlInterval<CqlDateTime>;
-                    return ba_;
-                }
-
-
-                bool at_() {
-                    DataType bb_ = FluorideApplication?.Performed;
-                    object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                    bool bd_ = bc_ is CqlQuantity;
-                    return bd_;
-                }
-
-
-                bool au_() {
-                    DataType be_ = FluorideApplication?.Performed;
-                    object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                    bool bg_ = bf_ is CqlInterval<CqlQuantity>;
-                    return bg_;
-                }
-
-                if (ar_())
-                {
-                    DataType bh_ = FluorideApplication?.Performed;
-                    object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                    return (bi_ as CqlDateTime) as object;
-                }
-                else if (as_())
-                {
-                    DataType bj_ = FluorideApplication?.Performed;
-                    object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                    return (bk_ as CqlInterval<CqlDateTime>) as object;
-                }
-                else if (at_())
-                {
-                    DataType bl_ = FluorideApplication?.Performed;
-                    object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    return (bm_ as CqlQuantity) as object;
-                }
-                else if (au_())
-                {
-                    DataType bn_ = FluorideApplication?.Performed;
-                    object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                    return (bo_ as CqlInterval<CqlQuantity>) as object;
+                    aj_ = aw_ as CqlQuantity;
                 }
                 else
                 {
-                    return null;
-                };
+                    DataType ax_ = FluorideApplication?.Performed;
+                    object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
+                    bool az_ = ay_ is CqlInterval<CqlDateTime>;
+                    if (az_)
+                    {
+                        DataType ba_ = FluorideApplication?.Performed;
+                        object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
+                        aj_ = bb_ as CqlInterval<CqlDateTime>;
+                    }
+                    else
+                    {
+                        DataType bc_ = FluorideApplication?.Performed;
+                        object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
+                        bool be_ = bd_ is CqlInterval<CqlQuantity>;
+                        if (be_)
+                        {
+                            DataType bf_ = FluorideApplication?.Performed;
+                            object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
+                            aj_ = bg_ as CqlInterval<CqlQuantity>;
+                        }
+                        else
+                        {
+                            aj_ = null;
+                        }
+                    }
+                }
             }
-
-            CqlInterval<CqlDateTime> ao_ = QICoreCommon_4_0_000.Instance.toInterval(context, an_());
-            CqlDateTime ap_ = context.Operators.End(ao_);
-            CqlDate aq_ = context.Operators.DateFrom(ap_);
-            return aq_;
+            CqlInterval<CqlDateTime> ak_ = QICoreCommon_4_0_000.Instance.toInterval(context, aj_);
+            CqlDateTime al_ = context.Operators.End(ak_);
+            CqlDate am_ = context.Operators.DateFrom(al_);
+            return am_;
         }
 
         IEnumerable<CqlDate> g_ = context.Operators.Select<Procedure, CqlDate>(e_, f_);

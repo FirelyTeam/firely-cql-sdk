@@ -16,15 +16,15 @@ namespace Hl7.Cql.Runtime;
 /// <remarks>
 /// <para>
 /// CQL is a case-sensitive language, so library identifiers must be compared case-sensitively.
-/// (spec/condensed/03-developersguide.md §3.4.1 "Case-Sensitivity":
+/// (spec/cql/condensed/03-developersguide.md §3.4.1 "Case-Sensitivity":
 /// "CQL is a case-sensitive language. This means that case is considered when matching
 /// keywords and identifiers in the language.")
 /// </para>
 /// <para>
 /// Version specifiers must match exactly — they are opaque strings, not semantic versions to normalize.
-/// (spec/condensed/03-developersguide.md §3.2 "Libraries":
+/// (spec/cql/condensed/03-developersguide.md §3.2 "Libraries":
 /// "If the reference includes a version specifier, the library with that version specifier must be used.")
-/// (spec/condensed/04-logicalspecification.md §2.1.5 "VersionedIdentifier":
+/// (spec/cql/condensed/04-logicalspecification.md §2.1.5 "VersionedIdentifier":
 /// "the actual version of the instance of interest in this set")
 /// </para>
 /// <para>
