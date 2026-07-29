@@ -2371,27 +2371,61 @@ namespace Hl7.Cql.Operators
         public CqlInterval<T>? Union<T>(CqlInterval<T>? left, CqlInterval<T>? right)
         {
             if (left == null || right == null) return null;
-            else
+
+            // Detecting intervals that meet (see #1359) requires the point-type specific
+            // ToClosed and Successor overloads; dispatch on the runtime point type.
+            object? unioned = (left, right) switch
             {
-                if (Comparer.Compare(left.low!, right.low!, null) <= 0)
-                {
-                    if (Comparer.Compare(left.high!, right.low!, null) >= 0)
-                    {
-                        if (Comparer.Compare(left.high!, right.high!, null) < 0) return new CqlInterval<T>(left.low, right.high, left.lowClosed, right.highClosed);
-                        else return left;
-                    }
-                    else return null;
-                }
-                else
-                {
-                    if (Comparer.Compare(right.high!, left.low!, null) >= 0)
-                    {
-                        if (Comparer.Compare(left.high!, left.high!, null) > 0) return new CqlInterval<T>(right.low, left.high, right.lowClosed, left.highClosed);
-                        else return right;
-                    }
-                    else return null;
-                }
-            }
+                (CqlInterval<int?> l, CqlInterval<int?> r) => (object?)IntervalUnionHelper(l, r, ToClosed, Successor),
+                (CqlInterval<long?> l, CqlInterval<long?> r) => IntervalUnionHelper(l, r, ToClosed, Successor),
+                (CqlInterval<decimal?> l, CqlInterval<decimal?> r) => IntervalUnionHelper(l, r, ToClosed, Successor),
+                (CqlInterval<CqlQuantity?> l, CqlInterval<CqlQuantity?> r) => IntervalUnionHelper(l, r, ToClosed, Successor),
+                (CqlInterval<CqlDate?> l, CqlInterval<CqlDate?> r) => IntervalUnionHelper(l, r, ToClosed, Successor),
+                (CqlInterval<CqlDateTime?> l, CqlInterval<CqlDateTime?> r) => IntervalUnionHelper(l, r, ToClosed, Successor),
+                (CqlInterval<CqlTime?> l, CqlInterval<CqlTime?> r) => IntervalUnionHelper(l, r, ToClosed, Successor),
+                _ => IntervalUnionHelper(left, right, static interval => interval, successor: null),
+            };
+            return (CqlInterval<T>?)unioned;
+        }
+
+        private CqlInterval<T>? IntervalUnionHelper<T>(
+            CqlInterval<T>? left,
+            CqlInterval<T>? right,
+            Func<CqlInterval<T>?, CqlInterval<T>?> toClosed,
+            Func<T, T>? successor)
+        {
+            if (left == null || right == null) return null;
+            left = toClosed(left)!;
+            right = toClosed(right)!;
+
+            // Order the intervals so that 'first' starts on or before 'second';
+            // a null low boundary is the minimum value.
+            var (first, second) =
+                Comparer.Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, null) <= 0
+                    ? (left, right)
+                    : (right, left);
+
+            // The union exists when the intervals overlap or meet. A null high boundary is
+            // the maximum value, which trivially overlaps; otherwise the intervals meet when
+            // the successor of the first interval's high boundary reaches the second
+            // interval's low boundary. The successor is only computed when the overlap check
+            // fails, so it can never be asked for the successor of the maximum value.
+            var secondLow = second.low ?? MinValue<T>()!;
+            bool overlapsOrMeets =
+                first.high is not { } firstHigh
+                || Comparer.Compare(firstHigh, secondLow, null) >= 0
+                || (successor is not null && Comparer.Compare(successor(firstHigh)!, secondLow, null) == 0);
+
+            if (!overlapsOrMeets)
+                return null;
+
+            // The result runs from the first interval's low boundary to the later of the
+            // two high boundaries; a null high boundary is the maximum value.
+            var highSide = first.high is { } high
+                ? second.high is { } otherHigh && Comparer.Compare(high, otherHigh, null) >= 0 ? first : second
+                : first;
+
+            return new CqlInterval<T>(first.low, highSide.high, first.lowClosed, highSide.highClosed);
         }
 
         #endregion
