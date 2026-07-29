@@ -1,7 +1,13 @@
 # Toolkit Services Dependency Diagrams
-These diagrams represent the internal dependencies of the CQL SDK toolkit services.
-They use mermaid syntax to visualize the relationships between various components of the CQL SDK.
-For the best viewing experience, it is recommended to view these diagrams in the [online mermaid editor](https://www.mermaidchart.com/).
+These diagrams represent the internal dependencies of the CQL SDK toolkit services, plus one
+structural diagram of the code-model IR (not a dependency graph — see its own section below).
+
+Each diagram is authored as a Mermaid flowchart (grouped into `subgraph` boxes per project, with each
+type shown as a title + one-line description) and rendered to a `.svg` ahead of time (see
+[tools/mermaid/](../tools/mermaid/)) rather than relying on GitHub's inline Mermaid renderer, which
+does not reliably support every Mermaid feature used here (`subgraph` grouping, HTML node labels,
+multi-target `style` directives). If you edit a diagram, edit its `.mmd` source file and regenerate
+the `.svg` — see [tools/mermaid/README.md](../tools/mermaid/README.md).
 
 ## ElmToolkitServices Dependency Diagram
 
@@ -13,86 +19,9 @@ Services for compiling ELM to C# code and .NET assemblies.
 * All others are singleton services
 * Classes are grouped by their respective projects
 
-```mermaid
-%%{init: {
-    'themeVariables':{  
-      'lineColor': '#888',
-      'lineWidth': 4
-}}}%%
+Mermaid source: [dependency-diagrams.elm-toolkit-services.mmd](diagrams/dependency-diagrams.elm-toolkit-services.mmd)
 
-classDiagram
-
-    direction LR
-
-    namespace Compiler {
-        class LibrarySetCodeBuilder { }    
-        class LibraryCodeBuilder { }    
-        class CodeBuilder { }    
-        class CodeBuilderSettings { }    
-        class TupleBuilderCache { }
-        class CqlContextBinder { }
-        class CqlOperatorsBinder { }       
-        class LibraryPreprocessorBuilder { }
-    }
-
-    namespace CodeGeneration {
-        class TypeToCSharpConverter { }
-        class LibrarySetCSharpCodeGenerator { }
-        class AssemblyCompiler { }
-        class ICacheKeyGenerator { }
-        class DeterministicIdGenerator { }
-    }
-
-    namespace Abstraction {
-        class TypeResolver { }
-    }
-
-    namespace Runtime {
-        class BaseTypeResolver { }
-        class TypeConverter { }
-    }
-
-    namespace Fhir {
-        class FhirTypeResolver { }
-        class ModelInspector { }
-    }
-
-    %% Style Scoped Types as Cyan
-    style LibrarySetCodeBuilder fill:#055
-    style LibraryCodeBuilder fill:#055
-    style CodeBuilder fill:#055
-    style TupleBuilderCache fill:#055
-    
-    %% Inheritance  
-    BaseTypeResolver --> TypeResolver : inherits
-    FhirTypeResolver --> BaseTypeResolver : inherits
-    DeterministicIdGenerator --> ICacheKeyGenerator : implements
-    
-    %% Dependencies                                                 
-    LibraryCodeBuilder ..> LibrarySetCodeBuilder : injected
-    LibraryPreprocessorBuilder ..> LibrarySetCodeBuilder : injected
-    CodeBuilder ..> LibraryCodeBuilder : injected
-    LibraryPreprocessorBuilder ..> LibraryCodeBuilder : injected
-
-    TypeResolver ..> CodeBuilder : injected
-    CqlOperatorsBinder ..> CodeBuilder : injected
-    TupleBuilderCache ..> CodeBuilder : injected
-    CqlContextBinder ..> CodeBuilder : injected
-    CodeBuilderSettings ..> CodeBuilder : injected
-    TypeConverter ..> CodeBuilder : injected
-
-    TypeResolver ..> CqlOperatorsBinder : injected
-    TypeConverter ..> CqlOperatorsBinder : injected
-
-    ModelInspector ..> TypeConverter : injected  
-    ModelInspector ..> FhirTypeResolver : injected  
-
-    TypeToCSharpConverter ..> LibrarySetCSharpCodeGenerator : injected
-    TypeResolver ..> LibrarySetCSharpCodeGenerator : injected
-    ICacheKeyGenerator ..> LibrarySetCSharpCodeGenerator : created
-
-    TypeResolver ..> AssemblyCompiler : injected
-```
+![ElmToolkitServices Dependency Diagram](diagrams/dependency-diagrams.elm-toolkit-services.svg)
 
 ## PackagingToolkitServices Dependency Diagram
 
@@ -102,46 +31,13 @@ Services for packaging CQL libraries as FHIR Library resources.
 * Excludes Logger and Options for clarity
 * All services are singleton services
 * Classes are grouped by their respective projects
+* `ResourceCanonicalBuilder` is a delegate, not a class — shown as a class here only for diagram simplicity
+* `CqlTypeToFhirTypeMapper` is registered in this container but is never DI-injected anywhere; `ResourcePackager` builds its own instance manually from its injected `TypeResolver`
+* `ModelInspector` is an external type from the Firely .NET SDK (`Hl7.Fhir.Introspection`), not source declared in this repo
 
-```mermaid
-%%{init: {
-    'themeVariables':{  
-      'lineColor': '#888',
-      'lineWidth': 4
-}}}%%
+Mermaid source: [dependency-diagrams.packaging-toolkit-services.mmd](diagrams/dependency-diagrams.packaging-toolkit-services.mmd)
 
-classDiagram
-
-    direction LR
-
-    namespace Packaging {
-        class ResourcePackager { }
-        class ResourceCanonicalBuilder { }
-    }
-
-    namespace Abstraction {
-        class TypeResolver { }
-    }
-
-    namespace Runtime {
-        class BaseTypeResolver { }
-    }
-
-    namespace Fhir {
-        class FhirTypeResolver { }
-        class ModelInspector { }
-    }
-
-    %% Inheritance  
-    BaseTypeResolver --> TypeResolver : inherits
-    FhirTypeResolver --> BaseTypeResolver : inherits
-    
-    %% Dependencies                                                 
-    TypeResolver ..> ResourcePackager : injected
-    ResourceCanonicalBuilder ..> ResourcePackager : injected
-    
-    ModelInspector ..> FhirTypeResolver : injected
-```
+![PackagingToolkitServices Dependency Diagram](diagrams/dependency-diagrams.packaging-toolkit-services.svg)
 
 ## CqlToolkitServices Dependency Diagram
 
@@ -149,41 +45,29 @@ Services for translating CQL to ELM format.
 
 **Remarks:**
 * Excludes Logger and Options for clarity
-* All services are singleton services except LibraryVisitor (scoped) and ExpressionVisitor (transient factory)
+* All services are singleton services except `LibraryVisitor` (scoped); `LibraryVisitor.DefinitionVisitor`, `ExpressionVisitor` and `TypeSpecifierVisitor` (transient factories, created per-`LibraryBuilder` via a `Func<LibraryBuilder, T>` factory delegate); and `LocalIdentifierProvider` (plain transient)
 * Classes are grouped by their respective projects
+* `DefinitionVisitor` below is the nested class `LibraryVisitor.DefinitionVisitor`
+* `BuiltinModelProvider` is the concrete `IModelProvider` implementation actually registered by this toolkit
 
-```mermaid
-%%{init: {
-    'themeVariables':{  
-      'lineColor': '#888',
-      'lineWidth': 4
-}}}%%
+Mermaid source: [dependency-diagrams.cql-toolkit-services.mmd](diagrams/dependency-diagrams.cql-toolkit-services.mmd)
 
-classDiagram
+![CqlToolkitServices Dependency Diagram](diagrams/dependency-diagrams.cql-toolkit-services.svg)
 
-    direction LR
+## CodeModel Expression Types
 
-    namespace CqlToElm {
-        class CqlToElmConverter { }
-        class LibraryBuilderProvider { }
-        class LibraryVisitor { }
-        class ExpressionVisitor { }
-        class ILibraryProvider { }
-    }
+The `Hl7.Cql.Compiler.CodeModel` types that make up the typed C# code-model IR (intermediate
+representation) built by `CodeBuilder` and printed to C# source by the emitter — see
+[cql-engine-architecture.md](cql-engine-architecture.md) for where this fits in the overall
+CQL→ELM→C#→assembly pipeline.
 
-    namespace Model {
-        class ModelInfo { }
-        class IModelProvider { }
-    }
+**Remarks:**
+* Unlike the toolkit-service diagrams above (DI dependency graphs), this shows structural composition — which node types exist and what kind of child expressions they hold
+* Grouped by conceptual category, not by project — every type here lives in `Hl7.Cql.Compiler.CodeModel`
+* All 19 concrete types inherit directly from the abstract `CodeExpression` base (not drawn as 19 identical edges — noted on the `CodeExpression` card instead)
+* Every "child expression" slot named in a card's description is typed as the abstract `CodeExpression` base, so any of the 19 concrete types may appear there — only the few relationships that require one *specific* concrete type are drawn as edges
+* Excludes `CodeExpressionExtensions` and `CodeTypeRules` (static helper/validation utilities, not IR node types)
 
-    %% Style Scoped Types as Cyan
-    style LibraryVisitor fill:#055
-    
-    %% Dependencies                                                 
-    IModelProvider ..> LibraryVisitor : injected
-    ILibraryProvider ..> LibraryVisitor : injected
-    
-    ModelInfo ..> IModelProvider : configured
-    
-    LibraryBuilderProvider --> ILibraryProvider : implements
-```
+Mermaid source: [dependency-diagrams.codemodel-expressions.mmd](diagrams/dependency-diagrams.codemodel-expressions.mmd)
+
+![CodeModel Expression Types Diagram](diagrams/dependency-diagrams.codemodel-expressions.svg)

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("Hospice", "6.18.000")]
 public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
 {
@@ -198,71 +198,57 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
         IEnumerable<Procedure> ad_ = Status_1_15_000.Instance.isInterventionPerformed(context, ac_);
 
         bool? ae_(Procedure HospicePerformed) {
-
-            object ca_() {
-
-                bool ce_() {
-                    DataType ci_ = HospicePerformed?.Performed;
-                    object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                    bool ck_ = cj_ is CqlDateTime;
-                    return ck_;
-                }
-
-
-                bool cf_() {
-                    DataType cl_ = HospicePerformed?.Performed;
-                    object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                    bool cn_ = cm_ is CqlInterval<CqlDateTime>;
-                    return cn_;
-                }
-
-
-                bool cg_() {
-                    DataType co_ = HospicePerformed?.Performed;
-                    object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
-                    bool cq_ = cp_ is CqlQuantity;
-                    return cq_;
-                }
-
-
-                bool ch_() {
-                    DataType cr_ = HospicePerformed?.Performed;
-                    object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                    bool ct_ = cs_ is CqlInterval<CqlQuantity>;
-                    return ct_;
-                }
-
-                if (ce_())
+            object ca_;
+            DataType ce_ = HospicePerformed?.Performed;
+            object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
+            bool cg_ = cf_ is CqlDateTime;
+            if (cg_)
+            {
+                DataType ch_ = HospicePerformed?.Performed;
+                object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
+                ca_ = ci_ as CqlDateTime;
+            }
+            else
+            {
+                DataType cj_ = HospicePerformed?.Performed;
+                object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
+                bool cl_ = ck_ is CqlQuantity;
+                if (cl_)
                 {
-                    DataType cu_ = HospicePerformed?.Performed;
-                    object cv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cu_);
-                    return cv_ as CqlDateTime;
-                }
-                else if (cf_())
-                {
-                    DataType cw_ = HospicePerformed?.Performed;
-                    object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
-                    return cx_ as CqlInterval<CqlDateTime>;
-                }
-                else if (cg_())
-                {
-                    DataType cy_ = HospicePerformed?.Performed;
-                    object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-                    return cz_ as CqlQuantity;
-                }
-                else if (ch_())
-                {
-                    DataType da_ = HospicePerformed?.Performed;
-                    object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-                    return db_ as CqlInterval<CqlQuantity>;
+                    DataType cm_ = HospicePerformed?.Performed;
+                    object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
+                    ca_ = cn_ as CqlQuantity;
                 }
                 else
                 {
-                    return null;
+                    DataType co_ = HospicePerformed?.Performed;
+                    object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
+                    bool cq_ = cp_ is CqlInterval<CqlDateTime>;
+                    if (cq_)
+                    {
+                        DataType cr_ = HospicePerformed?.Performed;
+                        object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
+                        ca_ = cs_ as CqlInterval<CqlDateTime>;
+                    }
+                    else
+                    {
+                        DataType ct_ = HospicePerformed?.Performed;
+                        object cu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ct_);
+                        bool cv_ = cu_ is CqlInterval<CqlQuantity>;
+                        if (cv_)
+                        {
+                            DataType cw_ = HospicePerformed?.Performed;
+                            object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
+                            ca_ = cx_ as CqlInterval<CqlQuantity>;
+                        }
+                        else
+                        {
+                            ca_ = null;
+                        }
+                    }
                 }
             }
-
-            CqlInterval<CqlDateTime> cb_ = QICoreCommon_4_0_000.Instance.toInterval(context, ca_());
+            CqlInterval<CqlDateTime> cb_ = QICoreCommon_4_0_000.Instance.toInterval(context, ca_);
             CqlInterval<CqlDateTime> cc_ = this.Measurement_Period(context);
             bool? cd_ = context.Operators.Overlaps(cb_, cc_, "day");
             return cd_;
@@ -278,10 +264,10 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
         IEnumerable<Condition> am_ = Status_1_15_000.Instance.verified(context, al_);
 
         bool? an_(Condition HospiceCareDiagnosis) {
-            CqlInterval<CqlDateTime> dc_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HospiceCareDiagnosis);
-            CqlInterval<CqlDateTime> dd_ = this.Measurement_Period(context);
-            bool? de_ = context.Operators.Overlaps(dc_, dd_, "day");
-            return de_;
+            CqlInterval<CqlDateTime> cy_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HospiceCareDiagnosis);
+            CqlInterval<CqlDateTime> cz_ = this.Measurement_Period(context);
+            bool? da_ = context.Operators.Overlaps(cy_, cz_, "day");
+            return da_;
         }
 
         IEnumerable<Condition> ao_ = context.Operators.Where<Condition>(am_, an_);

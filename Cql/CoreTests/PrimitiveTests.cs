@@ -215,7 +215,8 @@ namespace CoreTests
         {
             var interval = new CqlInterval<decimal?>(1, 10, true, true);
             var quantity = new CqlQuantity(1.5m, null);
-            List<decimal?> expected = [1, 2.5m, 4, 5.5m, 7, 8.5m, 10];
+            // The candidate starting at 10 ends at 11.49999999, past the upper boundary.
+            List<decimal?> expected = [1, 2.5m, 4, 5.5m, 7, 8.5m];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
@@ -232,7 +233,8 @@ namespace CoreTests
         {
             var interval = new CqlInterval<long?>(1, 10, true, true);
             var quantity = new CqlQuantity(4, null);
-            List<long?> expected = [1, 5, 9];
+            // The candidate starting at 9 ends at 12, past the upper boundary.
+            List<long?> expected = [1, 5];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
@@ -260,14 +262,18 @@ namespace CoreTests
         }
 
         /// <summary>
-        /// expand Interval[1.0, 10.0] per 1
+        /// expand Interval[1, 10] per 1, with Decimal boundaries of scale 0
         /// </summary>
         [TestMethod]
         public void Expand_Interval_Decimal_Quantity_Integer()
         {
             var interval = new CqlInterval<decimal?>(1, 10, true, true);
             var quantity = new CqlQuantity(1, "1");
-            List<decimal?> expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            // The scale-0 boundaries are not finer than per's scale, so no truncation applies and the
+            // candidate starting at 10 ends at 10.99999999, past the upper boundary. The scale-1 literal
+            // case (expand Interval[1.0, 10.0] per 1 '1') truncates and keeps 10; it is pinned by
+            // ExpandCollapseTest.ExpandSingleDecimalIntervalPer1.
+            List<decimal?> expected = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
@@ -439,7 +445,8 @@ namespace CoreTests
         {
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 3, 1), true, true);
             var quantity = new CqlQuantity(3, "month");
-            List<CqlDate> expected = [new CqlDate(2022, 1, 1)];
+            // Boundaries more precise than per are truncated to per's precision, so [@2022-01, @2022-03] is expanded.
+            List<CqlDate> expected = [new CqlDate(2022, 1, null)];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
@@ -456,11 +463,8 @@ namespace CoreTests
         {
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true);
             var quantity = new CqlQuantity(2, "years");
-            List<CqlDate> expected =
-            [
-                new CqlDate(2022, 1, 1),
-                new CqlDate(2024, 1, 1)
-            ];
+            // Boundaries truncated to year precision; the candidate starting at @2024 ends at @2025, past the upper boundary.
+            List<CqlDate> expected = [new CqlDate(2022, null, null)];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
@@ -477,13 +481,13 @@ namespace CoreTests
         {
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 2, 1), true, true);
             var quantity = new CqlQuantity(1, "week");
+            // The candidate starting at @2022-01-29 ends at @2022-02-04, past the upper boundary.
             List<CqlDate> expected =
             [
                 new CqlDate(2022, 1, 1),
                 new CqlDate(2022, 1, 8),
                 new CqlDate(2022, 1, 15),
-                new CqlDate(2022, 1, 22),
-                new CqlDate(2022, 1, 29)
+                new CqlDate(2022, 1, 22)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -704,12 +708,13 @@ namespace CoreTests
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
             var quantity = new CqlQuantity(1, "day");
+            // Boundaries more precise than per are truncated to day precision, so the whole range fits.
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 2, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 3, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 4, 12, 0, 0, 0, 0, 0)
+                new CqlDateTime(2022, 1, 1, null, null, null, null, null, null),
+                new CqlDateTime(2022, 1, 2, null, null, null, null, null, null),
+                new CqlDateTime(2022, 1, 3, null, null, null, null, null, null),
+                new CqlDateTime(2022, 1, 4, null, null, null, null, null, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -730,7 +735,8 @@ namespace CoreTests
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
             var quantity = new CqlQuantity(3, "month");
-            List<CqlDateTime> expected = [start];
+            // Boundaries more precise than per are truncated to per's precision, so [@2022-01, @2022-03] is expanded.
+            List<CqlDateTime> expected = [new CqlDateTime(2022, 1, null, null, null, null, null, null, null)];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
@@ -750,11 +756,8 @@ namespace CoreTests
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
             var quantity = new CqlQuantity(2, "years");
-            List<CqlDateTime> expected =
-            [
-                new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2024, 1, 1, 12, 0, 0, 0, 0, 0)
-            ];
+            // Boundaries truncated to year precision; the candidate starting at @2024 ends at @2025, past the upper boundary.
+            List<CqlDateTime> expected = [new CqlDateTime(2022, null, null, null, null, null, null, null, null)];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
@@ -774,13 +777,13 @@ namespace CoreTests
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
             var quantity = new CqlQuantity(1, "week");
+            // Boundaries truncated to day precision; the candidate starting at @2022-01-29 ends at @2022-02-04, past the upper boundary.
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 8, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 15, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 22, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 29, 12, 0, 0, 0, 0, 0)
+                new CqlDateTime(2022, 1, 1, null, null, null, null, null, null),
+                new CqlDateTime(2022, 1, 8, null, null, null, null, null, null),
+                new CqlDateTime(2022, 1, 15, null, null, null, null, null, null),
+                new CqlDateTime(2022, 1, 22, null, null, null, null, null, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -801,11 +804,12 @@ namespace CoreTests
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
             var quantity = new CqlQuantity(2, "minutes");
+            // Boundaries more precise than per are truncated to minute precision, so the whole range fits.
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 2, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 4, 0, 0, 0, 0)
+                new CqlDateTime(2022, 1, 1, 0, 0, null, null, 0, 0),
+                new CqlDateTime(2022, 1, 1, 0, 2, null, null, 0, 0),
+                new CqlDateTime(2022, 1, 1, 0, 4, null, null, 0, 0)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -826,12 +830,12 @@ namespace CoreTests
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
             var quantity = new CqlQuantity(2, "hours");
+            // Boundaries truncated to hour precision; the candidate starting at @T06 ends at @T07, past the upper boundary.
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 2, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 4, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 6, 0, 0, 0, 0, 0)
+                new CqlDateTime(2022, 1, 1, 0, null, null, null, 0, 0),
+                new CqlDateTime(2022, 1, 1, 2, null, null, null, 0, 0),
+                new CqlDateTime(2022, 1, 1, 4, null, null, null, 0, 0)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -852,11 +856,11 @@ namespace CoreTests
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
             var quantity = new CqlQuantity(3, "second");
+            // Boundaries truncated to second precision; the candidate starting at :06 ends at :08, past the upper boundary.
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 0, 3, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 0, 6, 0, 0, 0)
+                new CqlDateTime(2022, 1, 1, 0, 0, 0, null, 0, 0),
+                new CqlDateTime(2022, 1, 1, 0, 0, 3, null, 0, 0)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -877,6 +881,7 @@ namespace CoreTests
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
             var quantity = new CqlQuantity(500, "milliseconds");
+            // The candidate starting at @2022-01-01T00:00:03.000 ends at @2022-01-01T00:00:03.499, past the upper boundary.
             List<CqlDateTime> expected =
             [
                 new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0),
@@ -884,8 +889,7 @@ namespace CoreTests
                 new CqlDateTime(2022, 1, 1, 0, 0, 1, 0, 0, 0),
                 new CqlDateTime(2022, 1, 1, 0, 0, 1, 500, 0, 0),
                 new CqlDateTime(2022, 1, 1, 0, 0, 2, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 0, 2, 500, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 0, 3, 0, 0, 0)
+                new CqlDateTime(2022, 1, 1, 0, 0, 2, 500, 0, 0)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1050,13 +1054,13 @@ namespace CoreTests
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
             var quantity = new CqlQuantity(30, "minutes");
+            // The candidate starting at @T12:00 ends at @T12:29, past the upper boundary.
             List<CqlTime> expected =
             [
                 new CqlTime(10, 0, null, null, null, null),
                 new CqlTime(10, 30, null, null, null, null),
                 new CqlTime(11, 0, null, null, null, null),
-                new CqlTime(11, 30, null, null, null, null),
-                new CqlTime(12, 0, null, null, null, null)
+                new CqlTime(11, 30, null, null, null, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1102,11 +1106,8 @@ namespace CoreTests
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
             var quantity = new CqlQuantity(5, "seconds");
-            List<CqlTime> expected =
-            [
-                new CqlTime(10, 0, 0, null, null, null),
-                new CqlTime(10, 0, 5, null, null, null)
-            ];
+            // The candidate starting at @T10:00:05 ends at @T10:00:09, past the upper boundary.
+            List<CqlTime> expected = [new CqlTime(10, 0, 0, null, null, null)];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
@@ -1126,11 +1127,11 @@ namespace CoreTests
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
             var quantity = new CqlQuantity(5, "millisecond");
+            // The candidate starting at @T10:00:00.010 ends at @T10:00:00.014, past the upper boundary.
             List<CqlTime> expected =
             [
                 new CqlTime(10, 0, 0, 0, null, null),
-                new CqlTime(10, 0, 0, 5, null, null),
-                new CqlTime(10, 0, 0, 10, null, null)
+                new CqlTime(10, 0, 0, 5, null, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1270,11 +1271,11 @@ namespace CoreTests
         {
             List<CqlInterval<decimal?>> interval = [new CqlInterval<decimal?>(10.0m, 12.0m, true, true)];
             var quantity = new CqlQuantity(1.0m, "1");
+            // Without truncation the candidate starting at 12.0 ends at 12.99999999, past the upper boundary.
             CqlInterval<decimal>[] expected =
             [
                 new CqlInterval<decimal>(10.0m, 10.99999999m, true, true),
-                new CqlInterval<decimal>(11.0m, 11.99999999m, true, true),
-                new CqlInterval<decimal>(12.0m, 12.99999999m, true, true)
+                new CqlInterval<decimal>(11.0m, 11.99999999m, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1300,6 +1301,7 @@ namespace CoreTests
         {
             List<CqlInterval<decimal?>> interval = [new CqlInterval<decimal?>(1, 10, true, true)];
             var quantity = new CqlQuantity(1.5m, null);
+            // The candidate starting at 10 ends at 11.49999999, past the upper boundary.
             CqlInterval<decimal>[] expected =
             [
                 new CqlInterval<decimal>(1,2.49999999m, true, true),
@@ -1307,8 +1309,7 @@ namespace CoreTests
                 new CqlInterval<decimal>(4,5.49999999m, true, true),
                 new CqlInterval<decimal>(5.5m, 6.99999999m, true, true),
                 new CqlInterval<decimal>(7,8.49999999m, true, true),
-                new CqlInterval<decimal>(8.5m, 9.99999999m, true, true),
-                new CqlInterval<decimal>(10,11.49999999m, true, true)
+                new CqlInterval<decimal>(8.5m, 9.99999999m, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1623,6 +1624,7 @@ namespace CoreTests
                 new CqlInterval<decimal?>(5, 10, true, true)
             ];
             var quantity = new CqlQuantity(1, "1");
+            // Same-scale boundaries are not truncated, so the candidate starting at 10 ends past the upper boundary.
             CqlInterval<decimal>[] expected =
             [
                 new CqlInterval<decimal>(1,1.99999999m, true, true),
@@ -1633,14 +1635,14 @@ namespace CoreTests
                 new CqlInterval<decimal>(6,6.99999999m, true, true),
                 new CqlInterval<decimal>(7,7.99999999m, true, true),
                 new CqlInterval<decimal>(8,8.99999999m, true, true),
-                new CqlInterval<decimal>(9,9.99999999m, true, true),
-                new CqlInterval<decimal>(10,10.99999999m, true, true)
+                new CqlInterval<decimal>(9,9.99999999m, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
+            Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
             {
                 var actual = expand[i];
@@ -1742,23 +1744,23 @@ namespace CoreTests
                 new CqlInterval<decimal?>(7, 10, true, true)
             ];
             var quantity = new CqlQuantity(1, "1");
+            // The candidates starting at each upper boundary end past it, so they are not contributed.
             CqlInterval<decimal>[] expected =
             [
                 new CqlInterval<decimal>(1,1.99999999m, true, true),
                 new CqlInterval<decimal>(2,2.99999999m, true, true),
                 new CqlInterval<decimal>(3,3.99999999m, true, true),
                 new CqlInterval<decimal>(4,4.99999999m, true, true),
-                new CqlInterval<decimal>(5,5.99999999m, true, true),
                 new CqlInterval<decimal>(7,7.99999999m, true, true),
                 new CqlInterval<decimal>(8,8.99999999m, true, true),
-                new CqlInterval<decimal>(9,9.99999999m, true, true),
-                new CqlInterval<decimal>(10,10.99999999m, true, true)
+                new CqlInterval<decimal>(9,9.99999999m, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
+            Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
             {
                 var actual = expand[i];
@@ -1914,9 +1916,10 @@ namespace CoreTests
             List<CqlInterval<CqlDate>> interval =
                 [new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 3, 1), true, true)];
             var quantity = new CqlQuantity(3, "month");
+            // Boundaries more precise than per are truncated to per's precision, so [@2022-01, @2022-03] is expanded.
             CqlInterval<CqlDate>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 3, 31), true, true)
+                new CqlInterval<CqlDate>(new CqlDate(2022, 1, null), new CqlDate(2022, 3, null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1943,10 +1946,10 @@ namespace CoreTests
             List<CqlInterval<CqlDate>> interval =
                 [new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)];
             var quantity = new CqlQuantity(2, "years");
+            // Boundaries truncated to year precision; the candidate starting at @2024 ends at @2025, past the upper boundary.
             CqlInterval<CqlDate>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2023, 12, 31), true, true),
-                 new CqlInterval<CqlDate>(new CqlDate(2024, 1, 1), new CqlDate(2025, 12, 31), true, true)
+                new CqlInterval<CqlDate>(new CqlDate(2022, null, null), new CqlDate(2023, null, null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1973,13 +1976,13 @@ namespace CoreTests
             List<CqlInterval<CqlDate>> interval =
                 [new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 2, 1), true, true)];
             var quantity = new CqlQuantity(1, "week");
+            // The candidate starting at @2022-01-29 ends at @2022-02-04, past the upper boundary.
             CqlInterval<CqlDate>[] expected =
             [
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 7), true, true),
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 8), new CqlDate(2022, 1, 14), true, true),
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 15), new CqlDate(2022, 1, 21), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 22), new CqlDate(2022, 1, 28), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 29), new CqlDate(2022, 2, 4), true, true)
+                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 22), new CqlDate(2022, 1, 28), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2156,20 +2159,21 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(bStart, bEnd, true, true)
             ];
             var quantity = new CqlQuantity(1, "month");
+            // Boundaries more precise than per are truncated to month precision, so every month of the collapsed range fits.
             CqlInterval<CqlDate>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022,1,1),new CqlDate(2022,1,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,2,1),new CqlDate(2022,2,28), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,3,1),new CqlDate(2022,3,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,4,1),new CqlDate(2022,4,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,5,1),new CqlDate(2022,5,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,6,1),new CqlDate(2022,6,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,7,1),new CqlDate(2022,7,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,8,1),new CqlDate(2022,8,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,9,1),new CqlDate(2022,9,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,10,1),new CqlDate(2022,10,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,11,1),new CqlDate(2022,11,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,12,1),new CqlDate(2022,12,31), true, true)
+                new CqlInterval<CqlDate>(new CqlDate(2022,1,null),new CqlDate(2022,1,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,2,null),new CqlDate(2022,2,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,3,null),new CqlDate(2022,3,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,4,null),new CqlDate(2022,4,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,5,null),new CqlDate(2022,5,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,6,null),new CqlDate(2022,6,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,7,null),new CqlDate(2022,7,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,8,null),new CqlDate(2022,8,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,9,null),new CqlDate(2022,9,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,10,null),new CqlDate(2022,10,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,11,null),new CqlDate(2022,11,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,12,null),new CqlDate(2022,12,null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2205,19 +2209,20 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(bStart, bEnd, true, true)
             ];
             var quantity = new CqlQuantity(1, "month");
+            // Boundaries more precise than per are truncated to month precision, so every month of both ranges fits.
             CqlInterval<CqlDate>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022,1,1),new CqlDate(2022,1,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,2,1),new CqlDate(2022,2,28), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,3,1),new CqlDate(2022,3,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,4,1),new CqlDate(2022,4,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,5,1),new CqlDate(2022,5,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,7,1),new CqlDate(2022,7,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,8,1),new CqlDate(2022,8,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,9,1),new CqlDate(2022,9,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,10,1),new CqlDate(2022,10,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,11,1),new CqlDate(2022,11,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,12,1),new CqlDate(2022,12,31), true, true)
+                new CqlInterval<CqlDate>(new CqlDate(2022,1,null),new CqlDate(2022,1,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,2,null),new CqlDate(2022,2,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,3,null),new CqlDate(2022,3,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,4,null),new CqlDate(2022,4,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,5,null),new CqlDate(2022,5,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,7,null),new CqlDate(2022,7,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,8,null),new CqlDate(2022,8,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,9,null),new CqlDate(2022,9,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,10,null),new CqlDate(2022,10,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,11,null),new CqlDate(2022,11,null), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2022,12,null),new CqlDate(2022,12,null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2246,6 +2251,7 @@ namespace CoreTests
 
             List<CqlInterval<CqlDate>> interval = [new CqlInterval<CqlDate>(aStart, aEnd, true, true)];
             var quantity = new CqlQuantity(31, "days");
+            // The candidate starting at @2022-12-08 ends at @2023-01-07, past the upper boundary.
             CqlInterval<CqlDate>[] expected =
             [
                 new CqlInterval<CqlDate>(new CqlDate(2022,1,1),new CqlDate(2022,1,31), true, true),
@@ -2258,8 +2264,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(new CqlDate(2022,8,6),new CqlDate(2022,9,5), true, true),
                 new CqlInterval<CqlDate>(new CqlDate(2022,9,6),new CqlDate(2022,10,6), true, true),
                 new CqlInterval<CqlDate>(new CqlDate(2022,10,7),new CqlDate(2022,11,6), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,11,7),new CqlDate(2022,12,7), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,12,8),new CqlDate(2023,1,7), true, true)
+                new CqlInterval<CqlDate>(new CqlDate(2022,11,7),new CqlDate(2022,12,7), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2378,12 +2383,13 @@ namespace CoreTests
 
             List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
             var quantity = new CqlQuantity(1, "day");
+            // Boundaries more precise than per are truncated to day precision, so the whole range fits.
             CqlInterval<CqlDateTime>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,1,2,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,2,12,0,0,0,0,0),new CqlDateTime(2022,1,3,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,3,12,0,0,0,0,0),new CqlDateTime(2022,1,4,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,4,12,0,0,0,0,0),new CqlDateTime(2022,1,5,11,59,59,999,0,0),true,true)
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,null,null,null,null,null,null),new CqlDateTime(2022,1,1,null,null,null,null,null,null),true,true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,2,null,null,null,null,null,null),new CqlDateTime(2022,1,2,null,null,null,null,null,null),true,true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,3,null,null,null,null,null,null),new CqlDateTime(2022,1,3,null,null,null,null,null,null),true,true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,4,null,null,null,null,null,null),new CqlDateTime(2022,1,4,null,null,null,null,null,null),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2412,9 +2418,10 @@ namespace CoreTests
 
             List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
             var quantity = new CqlQuantity(3, "month");
+            // Boundaries more precise than per are truncated to per's precision, so [@2022-01, @2022-03] is expanded.
             CqlInterval<CqlDateTime>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,4,1,11,59,59,999,0,0),true,true)
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,null,null,null,null,null,null,null),new CqlDateTime(2022,3,null,null,null,null,null,null,null),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2443,10 +2450,10 @@ namespace CoreTests
 
             List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
             var quantity = new CqlQuantity(2, "years");
+            // Boundaries truncated to year precision; the candidate starting at @2024 ends at @2025, past the upper boundary.
             CqlInterval<CqlDateTime>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2024,1,1,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2024,1,1,12,0,0,0,0,0),new CqlDateTime(2026,1,1,11,59,59,999,0,0),true,true)
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,null,null,null,null,null,null,null,null),new CqlDateTime(2023,null,null,null,null,null,null,null,null),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2475,13 +2482,13 @@ namespace CoreTests
 
             List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
             var quantity = new CqlQuantity(1, "week");
+            // Boundaries truncated to day precision; the candidate starting at @2022-01-29 ends at @2022-02-04, past the upper boundary.
             CqlInterval<CqlDateTime>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,1,8,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,8,12,0,0,0,0,0),new CqlDateTime(2022,1,15,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,15,12,0,0,0,0,0),new CqlDateTime(2022,1,22,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,22,12,0,0,0,0,0),new CqlDateTime(2022,1,29,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,29,12,0,0,0,0,0),new CqlDateTime(2022,2,5,11,59,59,999,0,0),true,true)
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,null,null,null,null,null,null),new CqlDateTime(2022,1,7,null,null,null,null,null,null),true,true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,8,null,null,null,null,null,null),new CqlDateTime(2022,1,14,null,null,null,null,null,null),true,true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,15,null,null,null,null,null,null),new CqlDateTime(2022,1,21,null,null,null,null,null,null),true,true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,22,null,null,null,null,null,null),new CqlDateTime(2022,1,28,null,null,null,null,null,null),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2510,11 +2517,12 @@ namespace CoreTests
 
             List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
             var quantity = new CqlQuantity(2, "minutes");
+            // Boundaries more precise than per are truncated to minute precision, so the whole range fits.
             CqlInterval<CqlDateTime>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,0,1,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,2,0,0,0,0),new CqlDateTime(2022,1,1,0,3,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,4,0,0,0,0),new CqlDateTime(2022,1,1,0,5,59,999,0,0),true,true)
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,null,null,0,0),new CqlDateTime(2022,1,1,0,1,null,null,0,0),true,true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,2,null,null,0,0),new CqlDateTime(2022,1,1,0,3,null,null,0,0),true,true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,4,null,null,0,0),new CqlDateTime(2022,1,1,0,5,null,null,0,0),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2543,12 +2551,12 @@ namespace CoreTests
 
             List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
             var quantity = new CqlQuantity(2, "hours");
+            // Boundaries truncated to hour precision; the candidate starting at @T06 ends at @T07, past the upper boundary.
             CqlInterval<CqlDateTime>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,1,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,2,0,0,0,0,0),new CqlDateTime(2022,1,1,3,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,4,0,0,0,0,0),new CqlDateTime(2022,1,1,5,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,6,0,0,0,0,0),new CqlDateTime(2022,1,1,7,59,59,999,0,0),true,true)
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,null,null,null,0,0),new CqlDateTime(2022,1,1,1,null,null,null,0,0),true,true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,2,null,null,null,0,0),new CqlDateTime(2022,1,1,3,null,null,null,0,0),true,true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,4,null,null,null,0,0),new CqlDateTime(2022,1,1,5,null,null,null,0,0),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2577,11 +2585,11 @@ namespace CoreTests
 
             List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
             var quantity = new CqlQuantity(3, "seconds");
+            // Boundaries truncated to second precision; the candidate starting at :06 ends at :08, past the upper boundary.
             CqlInterval<CqlDateTime>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,0,0,2,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,3,0,0,0),new CqlDateTime(2022,1,1,0,0,5,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,6,0,0,0),new CqlDateTime(2022,1,1,0,0,8,999,0,0),true,true)
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,null,0,0),new CqlDateTime(2022,1,1,0,0,2,null,0,0),true,true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,3,null,0,0),new CqlDateTime(2022,1,1,0,0,5,null,0,0),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2610,6 +2618,7 @@ namespace CoreTests
 
             List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
             var quantity = new CqlQuantity(500, "milliseconds");
+            // The candidate starting at @2022-01-01T00:00:03.000 ends past the upper boundary.
             CqlInterval<CqlDateTime>[] expected =
             [
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,0,0,0,499,0,0),true,true),
@@ -2617,8 +2626,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,1,0,0,0),new CqlDateTime(2022,1,1,0,0,1,499,0,0),true,true),
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,1,500,0,0),new CqlDateTime(2022,1,1,0,0,1,999,0,0),true,true),
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,2,0,0,0),new CqlDateTime(2022,1,1,0,0,2,499,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,2,500,0,0),new CqlDateTime(2022,1,1,0,0,2,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,3,0,0,0),new CqlDateTime(2022,1,1,0,0,3,499,0,0),true,true)
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,2,500,0,0),new CqlDateTime(2022,1,1,0,0,2,999,0,0),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2654,20 +2662,21 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(bStart, bEnd, true, true)
             ];
             var quantity = new CqlQuantity(1, "month");
+            // Boundaries more precise than per are truncated to month precision, so every month of the collapsed range fits.
             CqlInterval<CqlDateTime>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,2,1,0,0,0,0,0,0),new CqlDateTime(2022,2,28,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,3,1,0,0,0,0,0,0),new CqlDateTime(2022,3,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,4,1,0,0,0,0,0,0),new CqlDateTime(2022,4,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,5,1,0,0,0,0,0,0),new CqlDateTime(2022,5,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,6,1,0,0,0,0,0,0),new CqlDateTime(2022,6,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,7,1,0,0,0,0,0,0),new CqlDateTime(2022,7,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,8,1,0,0,0,0,0,0),new CqlDateTime(2022,8,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,9,1,0,0,0,0,0,0),new CqlDateTime(2022,9,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,10,1,0,0,0,0,0,0),new CqlDateTime(2022,10,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,11,1,0,0,0,0,0,0),new CqlDateTime(2022,11,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,12,1,0,0,0,0,0,0),new CqlDateTime(2022,12,31,23,59,59,999,0,0), true, true)
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,null,null,null,null,null,null,null),new CqlDateTime(2022,1,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,2,null,null,null,null,null,null,null),new CqlDateTime(2022,2,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,3,null,null,null,null,null,null,null),new CqlDateTime(2022,3,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,4,null,null,null,null,null,null,null),new CqlDateTime(2022,4,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,5,null,null,null,null,null,null,null),new CqlDateTime(2022,5,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,6,null,null,null,null,null,null,null),new CqlDateTime(2022,6,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,7,null,null,null,null,null,null,null),new CqlDateTime(2022,7,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,8,null,null,null,null,null,null,null),new CqlDateTime(2022,8,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,9,null,null,null,null,null,null,null),new CqlDateTime(2022,9,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,10,null,null,null,null,null,null,null),new CqlDateTime(2022,10,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,11,null,null,null,null,null,null,null),new CqlDateTime(2022,11,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,12,null,null,null,null,null,null,null),new CqlDateTime(2022,12,null,null,null,null,null,null,null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2703,19 +2712,20 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(bStart, bEnd, true, true)
             ];
             var quantity = new CqlQuantity(1, "month");
+            // Boundaries more precise than per are truncated to month precision, so every month of both ranges fits.
             CqlInterval<CqlDateTime>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,2,1,0,0,0,0,0,0),new CqlDateTime(2022,2,28,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,3,1,0,0,0,0,0,0),new CqlDateTime(2022,3,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,4,1,0,0,0,0,0,0),new CqlDateTime(2022,4,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,5,1,0,0,0,0,0,0),new CqlDateTime(2022,5,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,7,1,0,0,0,0,0,0),new CqlDateTime(2022,7,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,8,1,0,0,0,0,0,0),new CqlDateTime(2022,8,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,9,1,0,0,0,0,0,0),new CqlDateTime(2022,9,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,10,1,0,0,0,0,0,0),new CqlDateTime(2022,10,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,11,1,0,0,0,0,0,0),new CqlDateTime(2022,11,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,12,1,0,0,0,0,0,0),new CqlDateTime(2022,12,31,23,59,59,999,0,0), true, true)
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,null,null,null,null,null,null,null),new CqlDateTime(2022,1,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,2,null,null,null,null,null,null,null),new CqlDateTime(2022,2,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,3,null,null,null,null,null,null,null),new CqlDateTime(2022,3,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,4,null,null,null,null,null,null,null),new CqlDateTime(2022,4,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,5,null,null,null,null,null,null,null),new CqlDateTime(2022,5,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,7,null,null,null,null,null,null,null),new CqlDateTime(2022,7,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,8,null,null,null,null,null,null,null),new CqlDateTime(2022,8,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,9,null,null,null,null,null,null,null),new CqlDateTime(2022,9,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,10,null,null,null,null,null,null,null),new CqlDateTime(2022,10,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,11,null,null,null,null,null,null,null),new CqlDateTime(2022,11,null,null,null,null,null,null,null), true, true),
+                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,12,null,null,null,null,null,null,null),new CqlDateTime(2022,12,null,null,null,null,null,null,null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -3073,21 +3083,23 @@ namespace CoreTests
                 new CqlInterval<CqlTime>(bStart, bEnd, true, true)
             ];
             var quantity = new CqlQuantity(1, "hour");
+            // Boundaries more precise than per are truncated to the hour, so the collapsed range expands to whole hours.
             CqlInterval<CqlTime>[] expected =
             [
-                new CqlInterval<CqlTime>(new CqlTime(10,0,0,0,null,null),new CqlTime(10,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(11,0,0,0,null,null),new CqlTime(11,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(12,0,0,0,null,null),new CqlTime(12,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(13,0,0,0,null,null),new CqlTime(13,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(14,0,0,0,null,null),new CqlTime(14,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(15,0,0,0,null,null),new CqlTime(15,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(16,0,0,0,null,null),new CqlTime(16,59,59,999,null,null), true, true)
+                new CqlInterval<CqlTime>(new CqlTime(10,null,null,null,null,null),new CqlTime(10,null,null,null,null,null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(11,null,null,null,null,null),new CqlTime(11,null,null,null,null,null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(12,null,null,null,null,null),new CqlTime(12,null,null,null,null,null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(13,null,null,null,null,null),new CqlTime(13,null,null,null,null,null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(14,null,null,null,null,null),new CqlTime(14,null,null,null,null,null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(15,null,null,null,null,null),new CqlTime(15,null,null,null,null,null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(16,null,null,null,null,null),new CqlTime(16,null,null,null,null,null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
+            Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
             {
                 var actual = expand[i];
@@ -3116,20 +3128,22 @@ namespace CoreTests
                 new CqlInterval<CqlTime>(bStart, bEnd, true, true)
             ];
             var quantity = new CqlQuantity(1, "hour");
+            // Boundaries more precise than per are truncated to the hour, so both ranges expand to whole hours.
             CqlInterval<CqlTime>[] expected =
             [
-                new CqlInterval<CqlTime>(new CqlTime(10,0,0,0,null,null),new CqlTime(10,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(11,0,0,0,null,null),new CqlTime(11,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(12,0,0,0,null,null),new CqlTime(12,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(14,0,0,0,null,null),new CqlTime(14,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(15,0,0,0,null,null),new CqlTime(15,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(16,0,0,0,null,null),new CqlTime(16,59,59,999,null,null), true, true)
+                new CqlInterval<CqlTime>(new CqlTime(10,null,null,null,null,null),new CqlTime(10,null,null,null,null,null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(11,null,null,null,null,null),new CqlTime(11,null,null,null,null,null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(12,null,null,null,null,null),new CqlTime(12,null,null,null,null,null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(14,null,null,null,null,null),new CqlTime(14,null,null,null,null,null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(15,null,null,null,null,null),new CqlTime(15,null,null,null,null,null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(16,null,null,null,null,null),new CqlTime(16,null,null,null,null,null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
+            Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
             {
                 var actual = expand[i];

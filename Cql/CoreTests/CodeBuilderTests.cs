@@ -249,6 +249,123 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Interval_WithChoiceTypedOperands_AnchorsPointType()
+        {
+            // Mirrors CMS1173 (issue #1350): the interval's ELM point type is
+            // Choice<DateTime, Interval<DateTime>> (e.g. resulting from FHIRHelpers.ToValue)
+            // and the operands are choice-typed, i.e. object in C#. With no type to anchor
+            // overload resolution on, the binder used to pick Interval(CqlDate, ...)
+            // arbitrarily and emit casts that threw InvalidCastException at runtime.
+            var choiceType = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
+                new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "DateTime"),
+                new Hl7.Cql.Elm.IntervalTypeSpecifier
+                {
+                    pointType = new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "DateTime"),
+                });
+
+            Hl7.Cql.Elm.Expression AsChoice() =>
+                new Hl7.Cql.Elm.As { asTypeSpecifier = choiceType, operand = new Hl7.Cql.Elm.Now() };
+
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "ChoiceIntervalTest", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings =
+                [
+                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
+                ],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "ChoiceInterval",
+                        context = "Patient",
+                        expression = new Hl7.Cql.Elm.Interval
+                        {
+                            low = AsChoice(),
+                            high = AsChoice(),
+                            lowClosed = true,
+                            highClosed = true,
+                            resultTypeSpecifier = new Hl7.Cql.Elm.IntervalTypeSpecifier { pointType = choiceType },
+                        },
+                    },
+                ],
+            };
+
+            var result = InvokeLibrary(elmLibrary, "ChoiceInterval");
+
+            Assert.IsInstanceOfType<Hl7.Cql.Primitives.CqlInterval<object>>(result);
+            var interval = (Hl7.Cql.Primitives.CqlInterval<object>)result;
+            Assert.IsInstanceOfType<Hl7.Cql.Primitives.CqlDateTime>(interval.low);
+            Assert.IsInstanceOfType<Hl7.Cql.Primitives.CqlDateTime>(interval.high);
+        }
+
+        [TestMethod]
+        public void Interval_WithChoiceTypedOperandAndNonNullableOperand_AnchorsNullablePointType()
+        {
+            // The point type anchored on the other operand can be a non-nullable value type:
+            // NegateLiteral translates Negate(2147483648) to an int-typed constant, not int?,
+            // and an ELM node without a result type of its own is not converted afterwards.
+            // 'as int' is not legal C# (CodeCast rejects it), so the anchored type has to be
+            // lifted to int? before the choice-typed operand is converted.
+            var integerChoiceType = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
+                Hl7.Cql.Elm.SystemTypes.IntegerType,
+                new Hl7.Cql.Elm.IntervalTypeSpecifier { pointType = Hl7.Cql.Elm.SystemTypes.IntegerType });
+
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "ChoiceIntervalIntTest", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings =
+                [
+                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
+                ],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "ChoiceIntervalWithIntLow",
+                        context = "Patient",
+                        expression = new Hl7.Cql.Elm.Interval
+                        {
+                            low = new Hl7.Cql.Elm.Negate
+                            {
+                                operand = new Hl7.Cql.Elm.Literal
+                                {
+                                    value = "2147483648",
+                                    valueType = Hl7.Cql.Elm.SystemTypes.IntegerType.name,
+                                    resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name,
+                                },
+                            },
+                            high = new Hl7.Cql.Elm.As
+                            {
+                                asTypeSpecifier = integerChoiceType,
+                                operand = new Hl7.Cql.Elm.Literal
+                                {
+                                    value = "5",
+                                    valueType = Hl7.Cql.Elm.SystemTypes.IntegerType.name,
+                                    resultTypeSpecifier = Hl7.Cql.Elm.SystemTypes.IntegerType,
+                                    resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name,
+                                },
+                                resultTypeSpecifier = integerChoiceType,
+                            },
+                            lowClosed = true,
+                            highClosed = true,
+                            resultTypeSpecifier = new Hl7.Cql.Elm.IntervalTypeSpecifier { pointType = integerChoiceType },
+                        },
+                    },
+                ],
+            };
+
+            var result = InvokeLibrary(elmLibrary, "ChoiceIntervalWithIntLow");
+
+            Assert.IsInstanceOfType<Hl7.Cql.Primitives.CqlInterval<object>>(result);
+            var interval = (Hl7.Cql.Primitives.CqlInterval<object>)result;
+            Assert.AreEqual(int.MinValue, interval.low);
+            Assert.AreEqual(5, interval.high);
+        }
+
+        [TestMethod]
         public void ChoiceType_WithDifferentTypes_MapsToObject()
         {
             var definitions = ProcessLibraryWithChoiceResult(

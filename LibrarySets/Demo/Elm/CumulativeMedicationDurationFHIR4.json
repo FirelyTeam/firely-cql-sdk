@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "5.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       } ],
@@ -3896,11 +3896,11 @@
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Range",
+                              "name" : "{http://hl7.org/fhir}Period",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Period",
+                              "name" : "{http://hl7.org/fhir}Range",
                               "annotation" : [ ]
                            } ]
                         },
@@ -5518,11 +5518,11 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}dateTime",
+                                    "name" : "{http://hl7.org/fhir}Period",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}Period",
+                                    "name" : "{http://hl7.org/fhir}dateTime",
                                     "annotation" : [ ]
                                  } ]
                               },
@@ -6697,7 +6697,7 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "name" : "{http://hl7.org/fhir}MedicationAdministration",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
@@ -6705,7 +6705,7 @@
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
                               "annotation" : [ ]
                            } ]
                         }
@@ -6752,7 +6752,7 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -6760,7 +6760,7 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -6786,7 +6786,7 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "name" : "{http://hl7.org/fhir}MedicationAdministration",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
@@ -6794,7 +6794,7 @@
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
                               "annotation" : [ ]
                            } ]
                         }
@@ -6841,7 +6841,7 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -6849,7 +6849,7 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -6875,7 +6875,7 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "name" : "{http://hl7.org/fhir}MedicationAdministration",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
@@ -6883,7 +6883,7 @@
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
                               "annotation" : [ ]
                            } ]
                         }
@@ -6930,7 +6930,7 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -6938,7 +6938,7 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -6981,7 +6981,7 @@
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1763",
-                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "name" : "{http://hl7.org/fhir}MedicationAdministration",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
@@ -6991,15 +6991,15 @@
                      }, {
                         "type" : "NamedTypeSpecifier",
                         "localId" : "1765",
-                        "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
                         "annotation" : [ ]
                      } ]
                   },
                   "choice" : [ {
                      "type" : "NamedTypeSpecifier",
-                     "locator" : "344:54-344:72",
-                     "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
-                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                     "locator" : "346:5-346:30",
+                     "resultTypeName" : "{http://hl7.org/fhir}MedicationAdministration",
+                     "name" : "{http://hl7.org/fhir}MedicationAdministration",
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
@@ -7009,9 +7009,9 @@
                      "annotation" : [ ]
                   }, {
                      "type" : "NamedTypeSpecifier",
-                     "locator" : "346:5-346:30",
-                     "resultTypeName" : "{http://hl7.org/fhir}MedicationAdministration",
-                     "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                     "locator" : "344:54-344:72",
+                     "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
                      "annotation" : [ ]
                   } ]
                }
@@ -7114,7 +7114,7 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -7122,7 +7122,7 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -7140,7 +7140,7 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -7148,7 +7148,7 @@
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
                                     "annotation" : [ ]
                                  } ]
                               }
@@ -7173,7 +7173,7 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -7181,7 +7181,7 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            }
@@ -7229,7 +7229,7 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
@@ -7237,7 +7237,7 @@
                                  "annotation" : [ ]
                               }, {
                                  "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
                                  "annotation" : [ ]
                               } ]
                            } ],
@@ -7251,7 +7251,7 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -7259,7 +7259,7 @@
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
                                     "annotation" : [ ]
                                  } ]
                               }
@@ -7326,7 +7326,7 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -7334,7 +7334,7 @@
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
                                     "annotation" : [ ]
                                  } ]
                               }
@@ -7352,7 +7352,7 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -7360,7 +7360,7 @@
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
                                        "annotation" : [ ]
                                     } ]
                                  }
@@ -7399,7 +7399,7 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -7407,7 +7407,7 @@
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
                                        "annotation" : [ ]
                                     } ]
                                  }
@@ -7435,7 +7435,7 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -7443,7 +7443,7 @@
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
                                        "annotation" : [ ]
                                     } ]
                                  }
@@ -7492,7 +7492,7 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
@@ -7500,7 +7500,7 @@
                                     "annotation" : [ ]
                                  }, {
                                     "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
                                     "annotation" : [ ]
                                  } ]
                               } ],
@@ -7514,7 +7514,7 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "name" : "{http://hl7.org/fhir}MedicationAdministration",
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
@@ -7522,7 +7522,7 @@
                                        "annotation" : [ ]
                                     }, {
                                        "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
                                        "annotation" : [ ]
                                     } ]
                                  }
@@ -7551,7 +7551,7 @@
                         "choice" : [ {
                            "type" : "NamedTypeSpecifier",
                            "localId" : "1846",
-                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "name" : "{http://hl7.org/fhir}MedicationAdministration",
                            "annotation" : [ ]
                         }, {
                            "type" : "NamedTypeSpecifier",
@@ -7561,7 +7561,7 @@
                         }, {
                            "type" : "NamedTypeSpecifier",
                            "localId" : "1848",
-                           "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
                            "annotation" : [ ]
                         } ]
                      }
@@ -7577,7 +7577,7 @@
                         "choice" : [ {
                            "type" : "NamedTypeSpecifier",
                            "localId" : "1841",
-                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "name" : "{http://hl7.org/fhir}MedicationAdministration",
                            "annotation" : [ ]
                         }, {
                            "type" : "NamedTypeSpecifier",
@@ -7587,15 +7587,15 @@
                         }, {
                            "type" : "NamedTypeSpecifier",
                            "localId" : "1843",
-                           "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
                            "annotation" : [ ]
                         } ]
                      },
                      "choice" : [ {
                         "type" : "NamedTypeSpecifier",
-                        "locator" : "366:72-366:90",
-                        "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
-                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "locator" : "368:5-368:30",
+                        "resultTypeName" : "{http://hl7.org/fhir}MedicationAdministration",
+                        "name" : "{http://hl7.org/fhir}MedicationAdministration",
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
@@ -7605,9 +7605,9 @@
                         "annotation" : [ ]
                      }, {
                         "type" : "NamedTypeSpecifier",
-                        "locator" : "368:5-368:30",
-                        "resultTypeName" : "{http://hl7.org/fhir}MedicationAdministration",
-                        "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                        "locator" : "366:72-366:90",
+                        "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
                         "annotation" : [ ]
                      } ]
                   }
