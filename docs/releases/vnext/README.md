@@ -6,8 +6,9 @@ conflicts (see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)
 
 ## When to add one
 
-Same trigger as before: any breaking change, feature, or fix worth calling out in the release notes
-must be recorded in the same PR that introduces it — not deferred to release time. See the root
+Same trigger as before: any breaking change must be recorded in the same PR that introduces it —
+not deferred to release time. Features and fixes can also be tracked here when they're worth
+calling out in the release notes. See the root
 [CLAUDE.md](../../../CLAUDE.md) / [copilot-instructions](../../../.github/copilot-instructions/04-development-guidelines.md)
 for the exact rule.
 

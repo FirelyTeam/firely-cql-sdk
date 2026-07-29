@@ -18,8 +18,7 @@ Full process (authoritative source): [Creating Tags and Releases](https://github
    - Glob `docs/releases/vnext/*.md` (excluding `README.md`). Fold each fragment's `## Breaking Changes`/`## Features`/`## Fixes` bullets into the matching section of the new document, then delete the fragment file.
    - Also fold in any bullets still sitting directly in `docs/releases/vnext-release-notes.md` below its section headers — transitional content from PRs that predate the fragment convention (see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)).
 9. Reset for the next cycle:
-   - Delete every fragment file under `docs/releases/vnext/` (except `README.md`).
-   - **If** `vnext-release-notes.md` had no directly-authored content left to fold in this time (the transitional file has fully drained), the transition is complete: replace `vnext-release-notes.md` with a short pointer doc — "Pending release notes are tracked as individual files under `docs/releases/vnext/`, one per PR. See that folder for everything accumulated since the last release." — instead of resetting it to the template, and remove the "transitional exception" wording from `CLAUDE.md` and copilot-instructions §4.5.1 (bump the copilot-instructions changelog for that removal, same as any other rule change there).
+   - **If** `vnext-release-notes.md` had no directly-authored content to fold in at the start of step 8, the transition is complete: replace `vnext-release-notes.md` with a short pointer doc — "Pending release notes are tracked as individual files under `docs/releases/vnext/`, one per PR. See that folder for everything accumulated since the last release." — instead of resetting it to the template, and remove the "transitional exception" wording from `CLAUDE.md` and copilot-instructions §4.5.1 (bump the copilot-instructions changelog for that removal, same as any other rule change there).
    - **Otherwise** (there was still transitional content to fold in this cut), just reset `vnext-release-notes.md` back to the empty template below, ready for the next cycle:
 
      ```md
@@ -32,4 +31,4 @@ Full process (authoritative source): [Creating Tags and Releases](https://github
      ## Fixes
      ```
 
-Note: breaking changes should already be landing as `docs/releases/vnext/` fragments as part of the PRs that introduce them (see root [CLAUDE.md](../../../CLAUDE.md)) — this skill is about turning that accumulated content into a versioned release, not about discovering breaking changes from scratch.
+Note: release-note-worthy breaking changes should already be landing as `docs/releases/vnext/` fragments as part of the PRs that introduce them, and features/fixes can be too (see root [CLAUDE.md](../../../CLAUDE.md)) — this skill is about turning that accumulated content into a versioned release, not about discovering entries from scratch.
