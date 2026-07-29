@@ -2314,7 +2314,7 @@ namespace Hl7.Cql.Operators
             bool overlapsOrMeets =
                 first.high is not { } firstHigh
                 || Comparer.Compare(firstHigh, secondLow, null) >= 0
-                || (successor is not null && Comparer.Compare(successor(firstHigh)!, secondLow, null) >= 0);
+                || (successor is not null && Comparer.Compare(successor(firstHigh)!, secondLow, null) == 0);
 
             if (!overlapsOrMeets)
                 return null;

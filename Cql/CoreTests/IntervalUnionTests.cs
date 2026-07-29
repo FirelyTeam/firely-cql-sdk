@@ -25,6 +25,9 @@ namespace CoreTests
         private static ICqlOperators Sut() => FhirCqlContext.WithDataSource().Operators;
 
         private static CqlInterval<int?> Ints(int? low, int? high) => new(low, high, true, true);
+        private static CqlInterval<decimal?> Decimals(decimal? low, decimal? high) => new(low, high, true, true);
+        private static CqlInterval<CqlQuantity?> Quantities(decimal? low, decimal? high, string unit = "mg") =>
+            new(new CqlQuantity(low, unit), new CqlQuantity(high, unit), true, true);
 
         private static CqlDate Date(int y, int m, int d) => new(y, m, d);
 
@@ -60,6 +63,36 @@ namespace CoreTests
             Assert.IsNotNull(result);
             Assert.AreEqual(Date(2026, 1, 1), result.low);
             Assert.AreEqual(Date(2026, 1, 2), result.high);
+        }
+
+        [TestMethod]
+        public void Union_MeetingDecimalIntervals_Merges()
+        {
+            var result = Sut().Union(Decimals(2m, 2m), Decimals(2.00000001m, 3m));
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2m, result.low);
+            Assert.AreEqual(3m, result.high);
+        }
+
+        [TestMethod]
+        public void Union_MeetingQuantityIntervals_Merges()
+        {
+            var result = Sut().Union(Quantities(2m, 2m), Quantities(2.00000001m, 3m));
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.low);
+            Assert.IsNotNull(result.high);
+            Assert.AreEqual(2m, result.low.value);
+            Assert.AreEqual(3m, result.high.value);
+            Assert.AreEqual("mg", result.low.unit);
+            Assert.AreEqual("mg", result.high.unit);
+        }
+
+        [TestMethod]
+        public void Union_DecimalIntervals_WithGap_ReturnsNull()
+        {
+            Assert.IsNull(Sut().Union(Decimals(2m, 2m), Decimals(2.00000002m, 3m)));
         }
 
         [TestMethod]
