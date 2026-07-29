@@ -26,4 +26,34 @@ internal static class CqlComparerSharedMethods
             0    => true,
             _    => false,
         };
+
+    /// <summary>
+    /// Returns <paramref name="value"/> with the trailing zeros stripped from its scale, so that
+    /// decimals which are equal but differently scaled (<c>1.0m</c> and <c>1.00m</c>) share a
+    /// single representation.
+    /// </summary>
+    /// <remarks>
+    /// Hashing call sites must normalize through this before combining a decimal into a hash code:
+    /// CQL comparison ignores scale, so scale alone must never place two equal values in different
+    /// buckets, and the hash must not depend on <see cref="decimal.GetHashCode"/> doing its own
+    /// unscaling.
+    /// </remarks>
+    public static decimal NormalizeDecimalScale(decimal value)
+    {
+        // Dropping one decimal place at a time via decimal.Round and keeping the result only while
+        // it still equals the input is exact -- Round lowers the scale but leaves the value alone
+        // when the digit it drops is a zero. Bits[3] bits 16-23 hold the scale.
+        var scale = (byte)(decimal.GetBits(value)[3] >> 16);
+        while (scale > 0)
+        {
+            var rounded = decimal.Round(value, scale - 1);
+            if (rounded != value)
+                break;
+
+            value = rounded;
+            scale--;
+        }
+
+        return value;
+    }
 }
