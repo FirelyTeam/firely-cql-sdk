@@ -6,9 +6,9 @@ description: Run the Firely.Cql.Sdk.Integration.Runner benchmark project against
 # Run Integration Runner Benchmarks
 
 The benchmark harness lives in the `Firely.Cql.Sdk.Integration.Runner` submodule at
-`submodules/Firely.Cql.Sdk.Integration.Runner`, not in this repo directly — everything
-below runs from inside that submodule. It uses BenchmarkDotNet to time
-`RunGeneratedIntegrationTestCase` (one CMS/HEDIS test case per invocation) and exports
+`submodules/Firely.Cql.Sdk.Integration.Runner`, not in this repo directly — the commands
+below assume you're running from this repo's root (so paths start with `submodules/...`).
+It uses BenchmarkDotNet to time `RunGeneratedIntegrationTestCase` (one CMS/HEDIS test case per invocation) and exports
 results that get compared against files checked into
 `IntegrationRunner.Benchmarks/baselines/`.
 
