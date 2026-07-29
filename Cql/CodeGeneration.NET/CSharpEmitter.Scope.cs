@@ -140,7 +140,7 @@ internal partial class CSharpEmitter
                     return HoistLocalFunction(lambda);
 
                 case CodeConditional conditional:
-                    return LinearizeConditional(conditional);
+                    return LinearizeConditional(conditional, tailPosition);
 
                 case CodeIfChain chain:
                     return LinearizeIfChain(chain, tailPosition);
@@ -255,13 +255,12 @@ internal partial class CSharpEmitter
             return new Atom(functionName, functionLocal);
         }
 
-        private Atom LinearizeConditional(CodeConditional conditional)
+        private Atom? LinearizeConditional(CodeConditional conditional, bool tailPosition)
         {
-            // Mirrors the old SimplifyExpressionsVisitor.VisitConditional: a "simple"
-            // conditional (IfFalse is not itself a conditional, and neither branch would
-            // hoist anything) is returned UNVISITED — its entire subtree, the test included
-            // (however complex), prints as one inline ternary. Everything else flattens the
-            // else-chain into statement form.
+            // A "simple" conditional (IfFalse is not itself a conditional, and neither branch
+            // would hoist anything) prints as one inline ternary — its entire subtree, the
+            // test included (however complex). Everything else flattens the else-chain into
+            // native if/else statement form.
             if (conditional.IfFalse is not CodeConditional
                 && IsInlineOnly(conditional.IfTrue)
                 && IsInlineOnly(conditional.IfFalse))
@@ -269,10 +268,6 @@ internal partial class CSharpEmitter
                 return new Atom(_emitter.PrintInlineConditional(conditional, _emitter.PrintFullyInline), conditional);
             }
 
-            // Flatten the else-if chain (old: ToCwt) and emit in the old pipeline's form: a
-            // zero-parameter local function containing the if/else chain, invoked where the
-            // value is needed. (A native if/else chain would be cleaner — post-parity
-            // cleanup, see docs/linq-expression-removal-plan.md.)
             var cases = new List<(CodeExpression When, CodeExpression Then)>();
             CodeExpression current = conditional;
             while (current is CodeConditional c)
@@ -282,7 +277,7 @@ internal partial class CSharpEmitter
                 // folded link collapses into its surviving branch instead of becoming a case.
                 current = FoldConstantTest(c.IfFalse);
             }
-            return HoistConditionalFunction(conditional.Type, cases, current);
+            return LinearizeConditionalStatements(conditional.Type, cases, current, tailPosition);
         }
 
         /// <summary>
@@ -312,80 +307,113 @@ internal partial class CSharpEmitter
             };
 
         private Atom? LinearizeIfChain(CodeIfChain chain, bool tailPosition) =>
-            HoistConditionalFunction(chain.Type, chain.Cases, chain.Else);
+            LinearizeConditionalStatements(chain.Type, chain.Cases, chain.Else, tailPosition);
 
         /// <summary>
-        /// Emits a multi-branch conditional in the old pipeline's exact form: a hoisted
-        /// zero-parameter local function (opening brace on the signature line, a trailing
-        /// <c>;</c> after the final else block — quirks of the old CaseWhenThen printing,
-        /// preserved for golden parity) whose branches <c>return</c>, invoked as
-        /// <c>name()</c> wherever the value is needed.
+        /// Emits a multi-branch conditional as native if/else statements. In tail position
+        /// the branch blocks <c>return</c> directly and no atom is returned; otherwise a
+        /// result local is declared up front, every branch block assigns it (or throws), and
+        /// that local is the conditional's value.
+        ///
+        /// <para>Conditions within the old isSimpleWhen budget (at most one hoist-worth of
+        /// complexity, see <see cref="ConditionPrintsInline"/>) print fully inline, giving
+        /// flat <c>else if</c> chains for the common case. A condition that needs its own
+        /// statements may only evaluate after all earlier conditions have tested false, so
+        /// the chain nests instead: the remainder moves into the <c>else</c> block, where
+        /// the condition's statements print before a fresh <c>if</c>. This preserves the
+        /// as-late-as-possible evaluation the old pipeline got from wrapping such conditions
+        /// (and the whole chain) in zero-argument local functions — without the functions.</para>
         /// </summary>
-        private Atom HoistConditionalFunction(
+        private Atom? LinearizeConditionalStatements(
             Type resultType,
+            IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
+            CodeExpression @else,
+            bool tailPosition)
+        {
+            if (tailPosition)
+            {
+                _statements.Add(() => RenderChain(resultName: null, cases, @else));
+                return null;
+            }
+
+            var resultLocal = new CodeLocal(resultType);
+            var resultName = AllocateName(null);
+            _emitter._assignedNames[resultLocal] = resultName;
+
+            // Declared without an initializer; the compiler's definite-assignment analysis
+            // verifies every branch of the chain below assigns it (or throws).
+            _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharp(resultType)} {resultName};");
+            _statements.Add(() => RenderChain(resultName, cases, @else));
+            return new Atom(resultName, resultLocal);
+        }
+
+        /// <summary>Renders deferred (like every hoisted interior — see <c>_statements</c>),
+        /// so nested scopes allocate their names in block order.</summary>
+        private string RenderChain(
+            string? resultName,
             IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
             CodeExpression @else)
         {
-            // The function's own name participates in this scope's naming sequence now; the
-            // interior renders deferred, like every hoisted function — see _statements.
-            var functionLocal = new CodeLocal(resultType);
-            var functionName = AllocateName(null);
-            _emitter._assignedNames[functionLocal] = functionName;
+            var isb = new IndentedStringBuilder();
+            EmitChainLevel(isb, resultName, cases, 0, @else);
+            return isb.ToString().TrimEnd('\r', '\n');
+        }
 
-            _statements.Add(() =>
+        private void EmitChainLevel(
+            IndentedStringBuilder isb,
+            string? resultName,
+            IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
+            int start,
+            CodeExpression @else)
+        {
+            var first = true;
+            for (int i = start; i < cases.Count; i++)
             {
-                // The whole if/else chain lives inside the function's own scope: hoisted
-                // when-functions and branch statements belong to it, and evaluation stays
-                // deferred until the function is invoked — the old lambda-wrap semantics.
-                var functionScope = CreateNested([]);
+                var (when, then) = cases[i];
 
-                // Every case's when-condition is visited — and, for complex ones, hoisted into
-                // its own zero-parameter local function — BEFORE any if/else-if statement
-                // prints. This mirrors the old VisitCaseWhenThenExpression, which ran
-                // visitCase (and so every when-lambda) for ALL cases via one shared block
-                // visitor, collecting their hoisted statements up front, before the
-                // CaseWhenThenExpression was rendered into its block.
-                var tests = cases.Select(c => functionScope.PrintWhen(c.When)).ToList();
-
-                var isb = new IndentedStringBuilder();
-                isb.AppendLine(""); // the old writer's blank line before the function definition
-                isb.AppendLine($"{_emitter._typeToCSharpConverter.ToCSharp(resultType)} {functionName}() {{");
-                using (isb.Indent())
+                string test;
+                if (ConditionPrintsInline(when))
                 {
-                    functionScope.WriteStatements(isb); // all when-functions hoisted by PrintWhen, up front
-
-                    bool first = true;
-                    for (int i = 0; i < cases.Count; i++)
-                    {
-                        isb.AppendLine(first ? $"if ({tests[i]})" : $"else if ({tests[i]})");
-                        EmitBranchBlock(isb, cases[i].Then);
-                        first = false;
-                    }
-                    isb.AppendLine("else");
-                    EmitBranchBlock(isb, @else);
+                    test = _emitter.PrintFullyInline(when);
                 }
-                isb.AppendLine("}");
-                return isb;
-            });
+                else if (first)
+                {
+                    // The first condition at a nesting level can put its statements right
+                    // here — nothing needs to run before them at this level.
+                    var testScope = CreateNested([]);
+                    var atom = testScope.Linearize(when)!;
+                    testScope.WriteStatements(isb);
+                    test = atom.Code;
+                }
+                else
+                {
+                    // A later condition's statements may only run after all earlier
+                    // conditions tested false: continue the chain nested in the else.
+                    isb.AppendLine("else");
+                    isb.AppendLine("{");
+                    using (isb.Indent())
+                        EmitChainLevel(isb, resultName, cases, i, @else);
+                    isb.AppendLine("}");
+                    return;
+                }
 
-            return new Atom($"{functionName}()", functionLocal);
+                isb.AppendLine(first ? $"if ({test})" : $"else if ({test})");
+                EmitBranchBlock(isb, resultName, then);
+                first = false;
+            }
+
+            isb.AppendLine("else");
+            EmitBranchBlock(isb, resultName, @else);
         }
 
         /// <summary>
-        /// Prints a when-condition following the old isSimpleWhen rule: conditions that would
-        /// hoist at most one statement print fully inline; more complex ones are wrapped in a
-        /// hoisted zero-parameter function and invoked, keeping their evaluation as late as
-        /// possible (a later case's condition must not evaluate before the earlier cases have
-        /// been tested).
+        /// Whether a condition prints fully inline in its <c>if</c>/<c>else if</c> — the old
+        /// isSimpleWhen rule: at most one hoist-worth of complexity (a single call, type
+        /// test or null-conditional access, plus pass-through wrappers). Conditions above
+        /// the budget get statement form instead.
         /// </summary>
-        private string PrintWhen(CodeExpression when)
-        {
-            if (CountSpineNodes(when) <= 1)
-                return _emitter.PrintFullyInline(when);
-
-            var atom = HoistLocalFunction(new CodeLambda([], when));
-            return $"{atom.Code}()";
-        }
+        private static bool ConditionPrintsInline(CodeExpression when) =>
+            CountSpineNodes(when) <= 1;
 
         /// <summary>The number of statements linearizing <paramref name="node"/> would hoist —
         /// the IR equivalent of the old trial visit's assignment count.</summary>
@@ -438,19 +466,24 @@ internal partial class CSharpEmitter
             };
 
         /// <summary>
-        /// Emits <c>{ …hoisted…; return value; }</c> for a branch of the conditional
-        /// function.
+        /// Emits a branch block of an if/else chain: hoisted statements, then either
+        /// <c>return value;</c> (tail position, <paramref name="resultName"/> null) or
+        /// <c>resultName = value;</c> — or a bare <c>throw</c> when the branch's value is a
+        /// throw-expression (neither <c>return throw …</c> nor <c>x = throw …;</c> is wanted
+        /// here; the throwing branch needs no assignment for definite assignment).
         /// </summary>
-        private void EmitBranchBlock(IndentedStringBuilder isb, CodeExpression value)
+        private void EmitBranchBlock(IndentedStringBuilder isb, string? resultName, CodeExpression value)
         {
             isb.AppendLine("{");
             using (isb.Indent())
             {
                 var branchScope = CreateNested([]);
-                var atom = branchScope.Linearize(value, tailPosition: true);
+                var atom = branchScope.Linearize(value, tailPosition: resultName is null);
                 branchScope.WriteStatements(isb);
                 if (atom is not null)
-                    isb.AppendLine(TailStatement(atom));
+                    isb.AppendLine(resultName is null || atom.Node is CodeThrow
+                        ? TailStatement(atom)
+                        : $"{resultName} = {atom.Code};");
             }
             isb.AppendLine("}");
         }

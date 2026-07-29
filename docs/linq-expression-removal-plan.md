@@ -296,12 +296,20 @@ Deferred to post-merge cleanup, landing as develop PRs:
   renumbering — plus a real win: the burned-letter keying had *blocked* deduplication of
   identical parent expressions, so dropping it collapses previously-duplicated pure
   computations (52 statements in CMS56; 1,028 across the HEDIS 2025 corpus).
-- Replace the hoisted zero-parameter local functions for conditional chains with native
-  `if`/`else` statements (an old-writer shape kept for golden parity). Output-changing:
-  regenerated goldens are the review artifact. Note (Ewout, 2026-07-23): the old
-  writer's hoisting thresholds and inline shapes were readability heuristics, not
-  contracts — where a simpler linearization rule keeps or improves readability, prefer it
-  over faithfully replicating the old behavior.
+- ~~Replace the hoisted zero-parameter local functions for conditional chains with native
+  `if`/`else` statements (an old-writer shape kept for golden parity).~~ Done — under the
+  readability license (Ewout, 2026-07-23: the old writer's hoisting thresholds and inline
+  shapes were heuristics, not contracts). Statement-form conditionals declare a result
+  local and assign it per branch (or `return` directly in tail position, dropping the
+  wrapper entirely); conditions within the old isSimpleWhen budget still print inline in
+  flat `else if` chains, while conditions needing their own statements continue the chain
+  nested in the `else` block — preserving as-late-as-possible evaluation without the
+  zero-argument when-functions, which are gone too. Generator version → 5.1.5.0; the
+  HEDIS 2025 corpus got 13,285 lines (−4.2%) shorter. Known, accepted semantic deltas
+  (pure computations only, adjudicated by the full runtime suites and integration tests):
+  a conditional's interior now evaluates at its linearization position rather than
+  deferred to the consumer statement, so error/`Message` side-effect timing can shift in
+  shapes like the lazy side of a coalesce.
 - Remove the remaining `NOTE(phase4)` markers as each is resolved (the phase-3 markers
   left with #1341's fix; the two `phase3-review` remarks were downgraded to plain design
   notes, since both document deliberate, guarded deviations).
