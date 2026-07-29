@@ -5,6 +5,8 @@ Utility scripts for the Firely CQL SDK.
 ## Directory Structure
 
 - **condense_spec/** - CQL Specification HTML to Markdown converter
+- **mermaid/** - Mermaid diagram-to-SVG export scripts
+- **dqic_sync/** - Compares the vendored CQL conformance test suite against the official upstream suite
 - **XsdToCSharpConverter/** - XSD to C# code generation tool
 - **XsdToCSharpConverterTests/** - Tests for XSD converter
 
@@ -34,6 +36,48 @@ python3 tools/condense_spec/fetch_fhir_page.py <url> [<url> ...]
 **Documentation:** See [tools/condense_spec/README.md](condense_spec/README.md) for complete details.
 
 **Created in:** PR for "Experimental - Using AI to verify codebase conformance with CQL spec"; extended in [#1389](https://github.com/FirelyTeam/firely-cql-sdk/issues/1389) to add the FHIR fetch tool
+
+### mermaid
+
+Renders Mermaid diagrams (`.mmd` source files, or inline `` ```mermaid `` fences in a markdown file)
+to `.svg`, so docs embed a pre-rendered image instead of relying on the host's inline Mermaid
+renderer — GitHub's renderer does not reliably support every Mermaid feature used in this repo's
+diagrams (`classDiagram` `namespace` blocks, multi-target `style` directives, custom
+`<<stereotype>>` annotations).
+
+**Location:** `tools/mermaid/`
+
+**Purpose:** Keeps Mermaid diagram source (`.mmd`) and its rendered `.svg` artifact in sync as a
+committed pair, instead of shipping diagrams as raw fenced code blocks that may not render.
+
+**Usage:**
+```bash
+pwsh tools/mermaid/export-mermaid-svg.ps1 -MarkdownPath <doc.md> -SourcePath <diagram.mmd> -OutputDir <dir>
+tools/mermaid/export-mermaid-svg.sh --markdown-path <doc.md> --source-path <diagram.mmd> --output-dir <dir>
+```
+
+**Documentation:** See [tools/mermaid/README.md](mermaid/README.md) for complete details, and the
+[generate-svg-from-mermaid](../.claude/skills/generate-svg-from-mermaid/SKILL.md) skill for the
+authoring workflow.
+
+**Created in:** [#1399](https://github.com/FirelyTeam/firely-cql-sdk/issues/1399); adapted from
+[firely-dqm-libraries](https://github.com/FirelyTeam/firely-dqm-libraries/blob/main/devops/export-mermaid-svg.ps1).
+### dqic_sync
+
+Compares `Cql/CqlToElmTests/Input/DQIC/*.xml` against the official CQL test suite
+(https://cql.hl7.org/tests.zip) and produces a markdown report of missing/added/modified tests, for
+manual review — it does not modify any test files itself.
+
+**Location:** `tools/dqic_sync/`
+
+**Usage:**
+```bash
+python3 tools/dqic_sync/compare_dqic_tests.py --report-path /tmp/dqic-report.md
+```
+
+**Documentation:** See [tools/dqic_sync/README.md](dqic_sync/README.md) for complete details.
+
+**Created in:** [#1389](https://github.com/FirelyTeam/firely-cql-sdk/issues/1389)
 
 ---
 

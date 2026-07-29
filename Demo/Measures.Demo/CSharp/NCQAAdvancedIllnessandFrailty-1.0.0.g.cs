@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("NCQAAdvancedIllnessandFrailty", "1.0.0")]
 public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<NCQAAdvancedIllnessandFrailty_1_0_0>
 {
@@ -290,41 +290,31 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     private IEnumerable<CqlDate> Outpatient_Encounters_or_Discharges_with_Advanced_Illness_Compute(CqlContext context)
     {
-
-        IEnumerable<CqlDate> a_() {
-
-            bool b_() {
-                IEnumerable<CqlDate> c_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
-                IEnumerable<CqlDate> d_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
-                IEnumerable<CqlDate> e_ = context.Operators.Union<CqlDate>(c_, d_);
-                bool? f_ = context.Operators.Not((bool?)(e_ is null));
-                return f_ ?? false;
-            }
-
-            if (b_())
-            {
-                IEnumerable<CqlDate> g_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
-                IEnumerable<CqlDate> h_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
-                IEnumerable<CqlDate> i_ = context.Operators.Union<CqlDate>(g_, h_);
-                return i_;
-            }
-            else if ((this.Outpatient_Encounters_with_Advanced_Illness(context)) is null)
-            {
-                IEnumerable<CqlDate> j_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
-                return j_;
-            }
-            else if ((this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context)) is null)
-            {
-                IEnumerable<CqlDate> k_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
-                return k_;
-            }
-            else
-            {
-                return null as IEnumerable<CqlDate>;
-            }
+        IEnumerable<CqlDate> a_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
+        IEnumerable<CqlDate> b_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
+        IEnumerable<CqlDate> c_ = context.Operators.Union<CqlDate>(a_, b_);
+        bool? d_ = context.Operators.Not((bool?)(c_ is null));
+        if (d_ ?? false)
+        {
+            IEnumerable<CqlDate> e_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
+            IEnumerable<CqlDate> f_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
+            IEnumerable<CqlDate> g_ = context.Operators.Union<CqlDate>(e_, f_);
+            return g_;
         }
-
-        return a_();
+        else if ((this.Outpatient_Encounters_with_Advanced_Illness(context)) is null)
+        {
+            IEnumerable<CqlDate> h_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
+            return h_;
+        }
+        else if ((this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context)) is null)
+        {
+            IEnumerable<CqlDate> i_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
+            return i_;
+        }
+        else
+        {
+            return null as IEnumerable<CqlDate>;
+        }
     }
 
 

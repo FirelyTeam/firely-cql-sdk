@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS1017FHIRHHFI", "1.0.000")]
 public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRHHFI_1_0_000>
 {
@@ -930,27 +930,19 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 FhirString al_ = ak_?.ReferenceElement;
                 string am_ = al_?.Value;
                 string an_ = QICoreCommon_4_0_000.Instance.getId(context, am_);
-
-                Id ao_() {
-
-                    bool bi_() {
-                        Patient bj_ = this.Patient(context);
-                        bool bk_ = bj_ is Resource;
-                        return bk_;
-                    }
-
-                    if (bi_())
-                    {
-                        Patient bl_ = this.Patient(context);
-                        return (bl_ as Resource).IdElement;
-                    }
-                    else
-                    {
-                        return default;
-                    }
+                Id ao_;
+                Patient bi_ = this.Patient(context);
+                bool bj_ = bi_ is Resource;
+                if (bj_)
+                {
+                    Patient bk_ = this.Patient(context);
+                    ao_ = (bk_ as Resource).IdElement;
                 }
-
-                string ap_ = (ao_())?.Value;
+                else
+                {
+                    ao_ = default;
+                }
+                string ap_ = ao_?.Value;
                 bool? aq_ = context.Operators.Equal(an_, ap_);
                 bool? ar_ = context.Operators.And(aj_, aq_);
                 bool? as_ = context.Operators.Or(ai_, ar_);
@@ -1109,27 +1101,19 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 FhirString al_ = ak_?.ReferenceElement;
                 string am_ = al_?.Value;
                 string an_ = QICoreCommon_4_0_000.Instance.getId(context, am_);
-
-                Id ao_() {
-
-                    bool bi_() {
-                        Patient bj_ = this.Patient(context);
-                        bool bk_ = bj_ is Resource;
-                        return bk_;
-                    }
-
-                    if (bi_())
-                    {
-                        Patient bl_ = this.Patient(context);
-                        return (bl_ as Resource).IdElement;
-                    }
-                    else
-                    {
-                        return default;
-                    }
+                Id ao_;
+                Patient bi_ = this.Patient(context);
+                bool bj_ = bi_ is Resource;
+                if (bj_)
+                {
+                    Patient bk_ = this.Patient(context);
+                    ao_ = (bk_ as Resource).IdElement;
                 }
-
-                string ap_ = (ao_())?.Value;
+                else
+                {
+                    ao_ = default;
+                }
+                string ap_ = ao_?.Value;
                 bool? aq_ = context.Operators.Equal(an_, ap_);
                 bool? ar_ = context.Operators.And(aj_, aq_);
                 bool? as_ = context.Operators.Or(ai_, ar_);
@@ -1219,27 +1203,19 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 FhirString al_ = ak_?.ReferenceElement;
                 string am_ = al_?.Value;
                 string an_ = QICoreCommon_4_0_000.Instance.getId(context, am_);
-
-                Id ao_() {
-
-                    bool bi_() {
-                        Patient bj_ = this.Patient(context);
-                        bool bk_ = bj_ is Resource;
-                        return bk_;
-                    }
-
-                    if (bi_())
-                    {
-                        Patient bl_ = this.Patient(context);
-                        return (bl_ as Resource).IdElement;
-                    }
-                    else
-                    {
-                        return default;
-                    }
+                Id ao_;
+                Patient bi_ = this.Patient(context);
+                bool bj_ = bi_ is Resource;
+                if (bj_)
+                {
+                    Patient bk_ = this.Patient(context);
+                    ao_ = (bk_ as Resource).IdElement;
                 }
-
-                string ap_ = (ao_())?.Value;
+                else
+                {
+                    ao_ = default;
+                }
+                string ap_ = ao_?.Value;
                 bool? aq_ = context.Operators.Equal(an_, ap_);
                 bool? ar_ = context.Operators.And(aj_, aq_);
                 bool? as_ = context.Operators.Or(ai_, ar_);
@@ -1329,27 +1305,19 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 FhirString al_ = ak_?.ReferenceElement;
                 string am_ = al_?.Value;
                 string an_ = QICoreCommon_4_0_000.Instance.getId(context, am_);
-
-                Id ao_() {
-
-                    bool bi_() {
-                        Patient bj_ = this.Patient(context);
-                        bool bk_ = bj_ is Resource;
-                        return bk_;
-                    }
-
-                    if (bi_())
-                    {
-                        Patient bl_ = this.Patient(context);
-                        return (bl_ as Resource).IdElement;
-                    }
-                    else
-                    {
-                        return default;
-                    }
+                Id ao_;
+                Patient bi_ = this.Patient(context);
+                bool bj_ = bi_ is Resource;
+                if (bj_)
+                {
+                    Patient bk_ = this.Patient(context);
+                    ao_ = (bk_ as Resource).IdElement;
                 }
-
-                string ap_ = (ao_())?.Value;
+                else
+                {
+                    ao_ = default;
+                }
+                string ap_ = ao_?.Value;
                 bool? aq_ = context.Operators.Equal(an_, ap_);
                 bool? ar_ = context.Operators.And(aj_, aq_);
                 bool? as_ = context.Operators.Or(ai_, ar_);
@@ -1439,27 +1407,19 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 FhirString al_ = ak_?.ReferenceElement;
                 string am_ = al_?.Value;
                 string an_ = QICoreCommon_4_0_000.Instance.getId(context, am_);
-
-                Id ao_() {
-
-                    bool bi_() {
-                        Patient bj_ = this.Patient(context);
-                        bool bk_ = bj_ is Resource;
-                        return bk_;
-                    }
-
-                    if (bi_())
-                    {
-                        Patient bl_ = this.Patient(context);
-                        return (bl_ as Resource).IdElement;
-                    }
-                    else
-                    {
-                        return default;
-                    }
+                Id ao_;
+                Patient bi_ = this.Patient(context);
+                bool bj_ = bi_ is Resource;
+                if (bj_)
+                {
+                    Patient bk_ = this.Patient(context);
+                    ao_ = (bk_ as Resource).IdElement;
                 }
-
-                string ap_ = (ao_())?.Value;
+                else
+                {
+                    ao_ = default;
+                }
+                string ap_ = ao_?.Value;
                 bool? aq_ = context.Operators.Equal(an_, ap_);
                 bool? ar_ = context.Operators.And(aj_, aq_);
                 bool? as_ = context.Operators.Or(ai_, ar_);
@@ -1549,27 +1509,19 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 FhirString al_ = ak_?.ReferenceElement;
                 string am_ = al_?.Value;
                 string an_ = QICoreCommon_4_0_000.Instance.getId(context, am_);
-
-                Id ao_() {
-
-                    bool bi_() {
-                        Patient bj_ = this.Patient(context);
-                        bool bk_ = bj_ is Resource;
-                        return bk_;
-                    }
-
-                    if (bi_())
-                    {
-                        Patient bl_ = this.Patient(context);
-                        return (bl_ as Resource).IdElement;
-                    }
-                    else
-                    {
-                        return default;
-                    }
+                Id ao_;
+                Patient bi_ = this.Patient(context);
+                bool bj_ = bi_ is Resource;
+                if (bj_)
+                {
+                    Patient bk_ = this.Patient(context);
+                    ao_ = (bk_ as Resource).IdElement;
                 }
-
-                string ap_ = (ao_())?.Value;
+                else
+                {
+                    ao_ = default;
+                }
+                string ap_ = ao_?.Value;
                 bool? aq_ = context.Operators.Equal(an_, ap_);
                 bool? ar_ = context.Operators.And(aj_, aq_);
                 bool? as_ = context.Operators.Or(ai_, ar_);

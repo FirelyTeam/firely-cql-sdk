@@ -53,6 +53,11 @@ internal partial class CqlOperators
         var rit = right!.GetEnumerator();
         using var ritd = lit as IDisposable;
 
+        // Three-valued conjunction over the element comparisons: any false makes the lists known
+        // unequal, and short-circuits; otherwise any null element comparison (values that are
+        // neither equal nor known unequal, e.g. quantities whose units share no base unit) makes
+        // the result null rather than true.
+        bool hasNullComparison = false;
         while (lit.MoveNext())
         {
             if (!rit.MoveNext())
@@ -69,14 +74,19 @@ internal partial class CqlOperators
                     or (not null, null):
                     return false;
 
-                case (not null, not null) when Comparer.Equals(lv!, rv!, null) is false:
-                    return false;
+                case (not null, not null):
+                    switch (Comparer.Equals(lv!, rv!, null))
+                    {
+                        case false: return false;
+                        case null: hasNullComparison = true; break;
+                    }
+                    break;
             }
         }
         if (rit.MoveNext()) // the 2nd list is longer than the 1st.
             return false;
 
-        return true;
+        return hasNullComparison ? null : true;
     }
 
     public bool? NotEqual(object? left, object? right)
