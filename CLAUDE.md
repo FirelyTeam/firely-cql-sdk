@@ -68,7 +68,7 @@ Any change that alters the C# emitted for CQL libraries requires bumping `Librar
 
 ## Release notes
 
-Any breaking change (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in [docs/releases/vnext-release-notes.md](docs/releases/vnext-release-notes.md) in the same PR that introduces it — not deferred to release time. See the `cut-release-notes` skill for the full release-cutting procedure.
+Any breaking change (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in the same PR that introduces it — not deferred to release time. Add a new fragment file under [docs/releases/vnext/](docs/releases/vnext/README.md) (one file per PR, see that folder's README for the naming/format convention) rather than editing the shared `vnext-release-notes.md` directly, which causes merge conflicts between parallel PRs (see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)). **Transitional exception:** a PR that already added its entry directly to `vnext-release-notes.md` before this convention existed doesn't need to move it — only write new entries as fragments. See the `cut-release-notes` skill for the full release-cutting procedure, including how fragments get consolidated.
 
 ## Skills
 
