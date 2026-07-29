@@ -27,7 +27,7 @@ namespace Hl7.Cql.CqlToElm.Test
             { "NotEqual123AndABC",  "Equal is not defined for two disparate list types." },
             { "NotEqual123AndString123",  "Equal is not defined for two disparate list types." },
 
-            { "CodeToConcept1", "The expectation requires ListPromotion to be enabled to evaluate properly." },
+            { "CodeToConcept1", "Requires ListPromotion to be enabled; without it translation reports an error because Code cannot be converted to the List<Code> type of Concept.codes." },
 
             { "Decimal10Pow28ToZeroOneStepDecimalMaxValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
             { "DecimalPos10Pow28ToZeroOneStepDecimalMaxValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
