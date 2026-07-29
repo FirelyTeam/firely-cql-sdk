@@ -26,22 +26,14 @@ namespace Hl7.Cql.CqlToElm.Test
             { "NotEqual123AndABC",  "Equal is not defined for two disparate list types." },
             { "NotEqual123AndString123",  "Equal is not defined for two disparate list types." },
 
-<<<<<<< HEAD
-            { "CodeToConcept1", "Expectation throws NotImplementedException in VisitInstanceSelector: coercing 'codes:' from a single Code needs ListPromotion." },
-=======
             { "CodeToConcept1", "Requires ListPromotion to be enabled; without it translation reports an error because Code cannot be converted to the List<Code> type of Concept.codes." },
->>>>>>> origin/develop
 
             { "Decimal10Pow28ToZeroOneStepDecimalMaxValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
             { "DecimalPos10Pow28ToZeroOneStepDecimalMaxValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
             { "DecimalNeg10Pow28ToZeroOneStepDecimalMinValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
 
-<<<<<<< HEAD
-            { "ExpandPer0D1", "Compiles, but hangs at runtime: Expand of an integer interval with a decimal per loops forever." },
-=======
             { "ExpandPer0D1", "Throws NotSupportedException: a fractional per over integer intervals would produce Decimal intervals (value-dependent typing); the reference Java translator rejects this expression at compile time." },
             { "ExpandIntervalPer2", "Not working" },
->>>>>>> origin/develop
 
             { "TestExceptNull", "This is ambiguous with every valid interval overload." }
         };
