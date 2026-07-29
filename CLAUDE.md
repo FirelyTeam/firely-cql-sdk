@@ -80,3 +80,4 @@ Task-specific workflows live under `.claude/skills/` and load on demand — invo
 - `cut-release-notes` — turning `vnext-release-notes.md` into a versioned release note
 - `generate-elm-from-cql` — regenerating ELM JSON after adding CQL test input files
 - `generate-svg-from-mermaid` — adding/editing a Mermaid diagram and rendering it to a committed `.svg`
+- `run-integration-benchmarks` — running the Integration Runner submodule's BenchmarkDotNet project and comparing against its committed baselines (INTERNAL USE ONLY)

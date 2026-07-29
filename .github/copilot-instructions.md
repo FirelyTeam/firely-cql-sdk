@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.9.0
+**Version:** 3.10.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,8 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.10.0
+  - Added 5.5 (Running Integration Runner Benchmarks): links to the new `run-integration-benchmarks` skill for running the `Firely.Cql.Sdk.Integration.Runner` submodule's BenchmarkDotNet project, appending a dated baseline file, and comparing medians against the most recent prior baseline.
 - 3.9.0
   - Added a new rule (4.4.11) requiring Mermaid diagrams to be pre-rendered to `.svg` and embedded as an image rather than left as a raw fenced code block, since GitHub's inline renderer doesn't reliably support `classDiagram` `namespace`/`style`/`<<stereotype>>` syntax used in this repo's diagrams; mechanics live in the new `generate-svg-from-mermaid` skill (also mirrored into `CLAUDE.md`).
 - 3.8.1
