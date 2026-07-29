@@ -275,8 +275,8 @@ public class CqlComparersTests
 
     /// <summary>
     /// Incommensurable units canonicalize to different base metrics. Equivalence must report false
-    /// rather than signalling an error (contrast <c>CompareValues</c>, which throws
-    /// <see cref="NotSupportedException"/> for units it cannot canonicalize at all).
+    /// (contrast <c>CompareValues</c>, which answers null for the same operands -- see the #1417
+    /// tests at the bottom of this file).
     /// </summary>
     [TestMethod]
     public void CqlQuantity_IncommensurableUnits_IsNotEquivalent_AndDoesNotThrow()
@@ -295,7 +295,7 @@ public class CqlComparersTests
 
     /// <summary>
     /// A unit that isn't valid UCUM at all cannot be canonicalized; equivalence must still report
-    /// false instead of throwing.
+    /// false.
     /// </summary>
     [TestMethod]
     public void CqlQuantity_UncanonicalizableUnit_IsNotEquivalent_AndDoesNotThrow()
@@ -469,5 +469,147 @@ public class CqlComparersTests
         ])!.ToList();
 
         Assert.AreEqual(1, scaleDeduplicated.Count);
+    }
+
+    // Regression tests for #1417: CqlQuantityCqlComparer.CompareValues canonicalized each quantity
+    // independently and then compared only the canonicalized values. TryCanonicalize succeeds for
+    // any valid UCUM unit, so quantities measuring different base quantities were compared as if
+    // both were dimensionless: 1 'cm' = 0.01 'g' returned true, and ordering across dimensions
+    // returned a numeric answer. CompareValues now requires the canonical units to agree -- the
+    // same guard EquivalentValues got in #1415 -- and answers null when they do not, per §9.B:
+    // "Attempting to operate on quantities with invalid units will result in a null."
+
+    /// <summary>
+    /// The case from the issue. Both units canonicalize, but to different base metrics, so there is
+    /// no dimension in which to compare them and the comparison is unknown. Real measure logic hits
+    /// this on dirty clinical data (CMS144 compares a <c>'%'</c> against a <c>'/min'</c>), so it
+    /// must degrade to null rather than abort the evaluation.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_IncommensurableUnits_ComparisonIsNull()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, "cm");
+        var y = new CqlQuantity(0.01m, "g");
+
+        Assert.IsNull(comparers.Equals(x, y, null));
+        Assert.IsNull(comparers.Compare(x, y, null));
+
+        // Ordering across dimensions, which used to answer 0/-1/1 off the canonicalized values.
+        Assert.IsNull(comparers.Compare(new CqlQuantity(1m, "cm"), new CqlQuantity(1m, "g"), null));
+
+        // The CMS shapes that regressed when this path threw instead of answering null.
+        Assert.IsNull(comparers.Compare(new CqlQuantity(1m, "%"), new CqlQuantity(50m, "/min"), null));
+        Assert.IsNull(comparers.Compare(new CqlQuantity(40m, "cm"), new CqlQuantity(37m, "weeks"), null));
+
+        // A unit that is not valid UCUM at all cannot be canonicalized either, and §9.B's "invalid
+        // units" sentence covers it: also null, where this used to throw NotSupportedException.
+        Assert.IsNull(comparers.Compare(new CqlQuantity(1m, "cm"), new CqlQuantity(1m, "widgets"), null));
+    }
+
+    /// <summary>
+    /// Equivalence is never null ("this operator will always return true or false"), so the same
+    /// incommensurable operands that make a comparison null make equivalence false -- the spec's
+    /// own example is <c>3.5 'cm2' ~ 3.5 'cm'</c>.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_IncommensurableUnits_IsNotEquivalent()
+    {
+        var comparers = new CqlComparers();
+
+        Assert.IsFalse(comparers.Equivalent(new CqlQuantity(3.5m, "cm2"), new CqlQuantity(3.5m, "cm"), null));
+        Assert.IsFalse(comparers.Equivalent(new CqlQuantity(1m, "%"), new CqlQuantity(50m, "/min"), null));
+        Assert.IsFalse(comparers.Equivalent(new CqlQuantity(40m, "cm"), new CqlQuantity(37m, "weeks"), null));
+    }
+
+    /// <summary>
+    /// Convertible units are unaffected: equality and ordering both still canonicalize and compare.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_ConvertibleUnits_ComparisonUnchanged()
+    {
+        var comparers = new CqlComparers();
+
+        Assert.AreEqual(true, comparers.Equals(new CqlQuantity(1m, "cm"), new CqlQuantity(0.01m, "m"), null));
+        Assert.AreEqual(0, comparers.Compare(new CqlQuantity(1m, "cm"), new CqlQuantity(0.01m, "m"), null));
+
+        Assert.AreEqual(-1, comparers.Compare(new CqlQuantity(1m, "cm"), new CqlQuantity(1m, "m"), null));
+        Assert.AreEqual(1, comparers.Compare(new CqlQuantity(1m, "m"), new CqlQuantity(1m, "cm"), null));
+    }
+
+    /// <summary>
+    /// An interval's comparer answers equivalence by borrowing its own comparison implementation
+    /// (<c>CqlComparerEquivalentImplementation.Compare</c>), so an interval over incommensurable
+    /// quantities reaches <c>CqlQuantityCqlComparer.CompareValues</c> along an equivalence path and
+    /// gets the null back. Equivalence cannot be null, and a null comparison between two operands
+    /// already known non-null means incomparable, so it maps to false -- before this fix these
+    /// intervals were equivalent, comparing 0.01 'm' against 0.01 'g' as bare numbers. Interval
+    /// equality propagates the null, like the scalar case.
+    /// </summary>
+    [TestMethod]
+    public void CqlIntervalOfQuantity_IncommensurableBounds_IsNotEquivalent_AndComparesNull()
+    {
+        // Interval comparers are registered by the operators, not by the bare CqlComparers ctor.
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        var centimeters = new CqlInterval<CqlQuantity>(new CqlQuantity(1m, "cm"), new CqlQuantity(2m, "cm"), true, true);
+        var grams = new CqlInterval<CqlQuantity>(new CqlQuantity(0.01m, "g"), new CqlQuantity(0.02m, "g"), true, true);
+        var meters = new CqlInterval<CqlQuantity>(new CqlQuantity(0.01m, "m"), new CqlQuantity(0.02m, "m"), true, true);
+
+        Assert.AreEqual(false, operators.Equivalent(centimeters, grams));
+        Assert.IsNull(operators.Equal(centimeters, grams));
+
+        // Convertible bounds unchanged.
+        Assert.AreEqual(true, operators.Equivalent(centimeters, meters));
+        Assert.AreEqual(true, operators.Equal(centimeters, meters));
+    }
+
+    /// <summary>
+    /// A list of quantities: equivalence propagates the element-level false, and <c>ListEqual</c>
+    /// propagates a null element comparison as null -- the lists are neither equal nor known
+    /// unequal, matching the scalar and interval cases above. A known-unequal element still wins
+    /// over an unknown one: false short-circuits the three-valued conjunction.
+    /// </summary>
+    [TestMethod]
+    public void CqlListOfQuantity_IncommensurableElements_EquivalenceIsFalse_AndEqualityIsNull()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        CqlQuantity[] centimeters = [new CqlQuantity(1m, "cm")];
+        CqlQuantity[] grams = [new CqlQuantity(0.01m, "g")];
+
+        Assert.AreEqual(false, operators.Equivalent(centimeters, grams));
+        Assert.IsNull(operators.ListEqual(centimeters, grams));
+        Assert.IsNull(operators.ListNotEqual(centimeters, grams));
+
+        // False beats null in the conjunction: a known-unequal element makes the lists unequal
+        // even when another element comparison is unknown.
+        CqlQuantity[] mixedLeft = [new CqlQuantity(1m, "cm"), new CqlQuantity(1m, "cm")];
+        CqlQuantity[] mixedRight = [new CqlQuantity(0.01m, "g"), new CqlQuantity(2m, "cm")];
+        Assert.AreEqual(false, operators.ListEqual(mixedLeft, mixedRight));
+    }
+
+    /// <summary>
+    /// Collateral to the above: <c>CqlComparisonToEquivalence</c> is shared with
+    /// <see cref="CqlDate"/>/<see cref="CqlTime"/>/<see cref="CqlDateTime"/>, which reach it with a
+    /// null when the operands are specified to different precisions. It used to map null to true,
+    /// so those were equivalent; §9.B says the opposite -- "if one input has a value for a given
+    /// precision and the other does not, the comparison stops and the result is false, rather than
+    /// null" -- and gives <c>@2012-01-01 ~ @2012-01-01T12</c> as a false example.
+    /// </summary>
+    [TestMethod]
+    public void CqlDateTime_DifferingPrecision_IsNotEquivalent()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        var dateOnly = new CqlDateTime(2012, 1, 1, null, null, null, null, null, null);
+        var withHour = new CqlDateTime(2012, 1, 1, 12, null, null, null, null, null);
+
+        Assert.AreEqual(false, operators.Equivalent(dateOnly, withHour));
+        Assert.AreEqual(true, operators.Equivalent(dateOnly, new CqlDateTime(2012, 1, 1, null, null, null, null, null, null)));
+
+        Assert.AreEqual(false, operators.Equivalent(new CqlDate(2012, 1, null), new CqlDate(2012, 1, 1)));
+        Assert.AreEqual(true, operators.Equivalent(new CqlDate(2012, 1, 1), new CqlDate(2012, 1, 1)));
     }
 }
