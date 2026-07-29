@@ -232,4 +232,119 @@ public class CqlComparersTests
         Assert.AreNotEqual(0, comparers.Compare(x, y, null));
         Assert.AreEqual(false, comparers.Equals(x, y, null));
     }
+
+    // Regression tests for #1415: CqlQuantityCqlComparer.EquivalentValues used to return false as
+    // soon as the two units weren't textually equivalent, even though CompareValues (and therefore
+    // = and the comparison operators) already canonicalized via UCUM. Spec §9.B requires quantity
+    // equivalence to consider unit conversion.
+    // Note: GetHashCodeValue still hashes CqlQuantity.ToString(), so two quantities that are now
+    // equivalent (or equal) via unit conversion hash differently. That inconsistency predates this
+    // fix -- it applies equally to the = path -- and is deliberately left alone here.
+
+    /// <summary>
+    /// Different but convertible units with the same magnitude are equivalent -- the spec's own
+    /// example (`100 'cm' ~ 1 'm'`), here in the form the XmlTest suite exercises it.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_ConvertibleUnitsSameMagnitude_IsEquivalent()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, "cm");
+        var y = new CqlQuantity(0.01m, "m");
+
+        Assert.IsTrue(comparers.Equivalent(x, y, null));
+
+        // The Compare-based paths already handled this; assert they still agree.
+        Assert.AreEqual(true, comparers.Equals(x, y, null));
+        Assert.AreEqual(0, comparers.Compare(x, y, null));
+    }
+
+    /// <summary>
+    /// Convertible units, but the magnitudes differ once canonicalized -- the fallback must compare
+    /// the canonicalized values, not just report equivalence because the units are commensurable.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_ConvertibleUnitsDifferentMagnitude_IsNotEquivalent()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(2m, "cm");
+        var y = new CqlQuantity(0.01m, "m");
+
+        Assert.IsFalse(comparers.Equivalent(x, y, null));
+    }
+
+    /// <summary>
+    /// Incommensurable units canonicalize to different base metrics. Equivalence must report false
+    /// rather than signalling an error (contrast <c>CompareValues</c>, which throws
+    /// <see cref="NotSupportedException"/> for units it cannot canonicalize at all).
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_IncommensurableUnits_IsNotEquivalent_AndDoesNotThrow()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, "cm");
+        var y = new CqlQuantity(1m, "g");
+
+        Assert.IsFalse(comparers.Equivalent(x, y, null));
+
+        // Numerically equal canonicalized values across different base metrics must not be
+        // mistaken for equivalence: 1 'cm' canonicalizes to 0.01 'm', 0.01 'g' to 0.01 'g'.
+        Assert.IsFalse(comparers.Equivalent(x, new CqlQuantity(0.01m, "g"), null));
+    }
+
+    /// <summary>
+    /// A unit that isn't valid UCUM at all cannot be canonicalized; equivalence must still report
+    /// false instead of throwing.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_UncanonicalizableUnit_IsNotEquivalent_AndDoesNotThrow()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, "widgets");
+        var y = new CqlQuantity(1m, "m");
+
+        Assert.IsFalse(comparers.Equivalent(x, y, null));
+    }
+
+    /// <summary>
+    /// Spec §9.B lists UCUM definite-time durations as equivalent to their calendar-duration
+    /// counterparts (`1 year ~ 1 'a'`). Before the #1415 fix these returned false -- the unit
+    /// comparer treats 'year'/'a' as plain strings -- so it is the canonicalizing fallback (via
+    /// Ucum.CalendarDurationMapping) that makes them equivalent.
+    /// </summary>
+    [DataTestMethod]
+    [DataRow("year", "a")]
+    [DataRow("month", "mo")]
+    [DataRow("week", "wk")]
+    [DataRow("day", "d")]
+    [DataRow("hour", "h")]
+    [DataRow("minute", "min")]
+    [DataRow("second", "s")]
+    [DataRow("millisecond", "ms")]
+    public void CqlQuantity_CalendarDurationAndUcumCounterpart_IsEquivalent(string calendarUnit, string ucumUnit)
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, calendarUnit);
+        var y = new CqlQuantity(1m, ucumUnit);
+
+        Assert.IsTrue(comparers.Equivalent(x, y, null));
+    }
+
+    /// <summary>
+    /// The default unit `'1'` short-circuits ahead of the canonicalizing fallback, comparing the
+    /// values directly. Unaffected by the #1415 fix.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_DefaultUnit_ComparesValuesDirectly()
+    {
+        var comparers = new CqlComparers();
+
+        Assert.IsTrue(comparers.Equivalent(new CqlQuantity(1m, "1"), new CqlQuantity(1m, "cm"), null));
+        Assert.IsFalse(comparers.Equivalent(new CqlQuantity(2m, "1"), new CqlQuantity(1m, "cm"), null));
+    }
 }

@@ -12,7 +12,6 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         internal static Dictionary<string, string> DoesNotCompile = new()
         {
-            { "EquivEqCM1M01", "Mixed unit equivalence is not supported." },
             { "Multiply1CMBy2CM", "Unit arithmetic is not supported." },
             { "TruncatedDivide10d1ByNeg3D1Quantity", "Unit arithmetic is not supported." },
 
