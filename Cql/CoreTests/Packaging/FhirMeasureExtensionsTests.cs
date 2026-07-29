@@ -54,7 +54,10 @@ public class FhirMeasureExtensionsTests
         .. extra,
     ];
 
-    private static FhirMeasure CreateMeasure(params ExpressionDef[] statements)
+    private static FhirMeasure CreateMeasure(params ExpressionDef[] statements) =>
+        CreateMeasure(measureGroupCodeSystem: null, statements);
+
+    private static FhirMeasure CreateMeasure(string? measureGroupCodeSystem, params ExpressionDef[] statements)
     {
         var elmLibrary = new ElmLibrary
         {
@@ -62,7 +65,7 @@ public class FhirMeasureExtensionsTests
             statements = statements,
         };
         var fhirLibrary = new FhirLibrary { Id = "StratifierExample-1.0.0", Name = "StratifierExample" };
-        var created = fhirLibrary.TryCreateMeasure(elmLibrary, out var fhirMeasure, CanonicalBuilder, TestDate);
+        var created = fhirLibrary.TryCreateMeasure(elmLibrary, out var fhirMeasure, CanonicalBuilder, TestDate, measureGroupCodeSystem);
         created.Should().BeTrue();
         return fhirMeasure!;
     }
@@ -272,5 +275,90 @@ public class FhirMeasureExtensionsTests
         var measure = CreateMeasure(BaseStatements());
 
         measure.Group.Should().OnlyContain(g => g.Stratifier.Count == 0);
+    }
+
+    [TestMethod]
+    public void MeasureGroupCodeSystem_SetsGroupCodeWithGroupIdAsCode()
+    {
+        const string system = "https://example.org/fhir/CodeSystem/measure-group";
+
+        var measure = CreateMeasure(system, BaseStatements());
+
+        foreach (var rate in new[] { "RateA", "RateB" })
+        {
+            var group = measure.Group.Single(g => g.ElementId == rate);
+            var coding = group.Code!.Coding.Should().ContainSingle().Subject;
+            coding.System.Should().Be(system);
+            coding.Code.Should().Be(rate);
+        }
+    }
+
+    [TestMethod]
+    public void MeasureGroupCodeSystem_AlsoAppliesToGroupsCreatedByStratifiers()
+    {
+        const string system = "https://example.org/fhir/CodeSystem/measure-group";
+
+        var measure = CreateMeasure(system, BaseStatements(
+            Def("Region Stratifier",
+                CreateTag("group", "RateC"),
+                CreateTag("stratifier", "Region"))));
+
+        var group = measure.Group.Single(g => g.ElementId == "RateC");
+        var coding = group.Code!.Coding.Should().ContainSingle().Subject;
+        coding.System.Should().Be(system);
+        coding.Code.Should().Be("RateC");
+    }
+
+    [TestMethod]
+    public void NoMeasureGroupCodeSystem_LeavesGroupCodeUnset()
+    {
+        var measure = CreateMeasure(BaseStatements());
+
+        measure.Group.Should().OnlyContain(g => g.Code == null);
+    }
+
+    [TestMethod]
+    [DataRow("Rate\tA", DisplayName = "tab")]
+    [DataRow("Rate  A", DisplayName = "double space")]
+    [DataRow(" RateA", DisplayName = "leading space")]
+    [DataRow("RateA ", DisplayName = "trailing space")]
+    public void MeasureGroupCodeSystem_GroupIdViolatingFhirCodeConstraints_Throws(string groupId)
+    {
+        const string system = "https://example.org/fhir/CodeSystem/measure-group";
+
+        var act = () => CreateMeasure(system, BaseStatements(
+            Def("Region Stratifier",
+                CreateTag("group", groupId),
+                CreateTag("stratifier", "Region"))));
+
+        act.Should().Throw<InvalidOperationException>()
+           .WithMessage($"*'{groupId}'*FHIR code*");
+    }
+
+    [TestMethod]
+    public void MeasureGroupCodeSystem_GroupIdWithSingleInternalSpaces_IsAccepted()
+    {
+        const string system = "https://example.org/fhir/CodeSystem/measure-group";
+
+        var measure = CreateMeasure(system, BaseStatements(
+            Def("Region Stratifier",
+                CreateTag("group", "Rate C"),
+                CreateTag("stratifier", "Region"))));
+
+        var group = measure.Group.Single(g => g.ElementId == "Rate C");
+        group.Code!.Coding.Single().Code.Should().Be("Rate C");
+    }
+
+    [TestMethod]
+    public void NoMeasureGroupCodeSystem_GroupIdViolatingFhirCodeConstraints_IsNotValidated()
+    {
+        // Without a code system the group id is never emitted as a FHIR code,
+        // so the code datatype constraints don't apply.
+        var measure = CreateMeasure(BaseStatements(
+            Def("Region Stratifier",
+                CreateTag("group", "Rate\tC"),
+                CreateTag("stratifier", "Region"))));
+
+        measure.Group.Single(g => g.ElementId == "Rate\tC").Code.Should().BeNull();
     }
 }
