@@ -39,8 +39,10 @@ partial class CqlComparers
             }
 
             // If no direct comparison is possible, normalize the units using UCUM and
-            // redo the comparison.
-            if (x.TryCanonicalize(out var left1) && y.TryCanonicalize(out var right1))
+            // redo the comparison. The dimension guard (left1.unit == right1.unit) ensures
+            // that incommensurable quantities whose canonical values happen to be numerically
+            // equal do not compare as equal while landing in different hash buckets (#1417).
+            if (x.TryCanonicalize(out var left1) && y.TryCanonicalize(out var right1) && left1!.unit == right1!.unit)
             {
                 var valueComparison = ValueComparer.Compare(left1!.value!, right1!.value!, precision);
                 return valueComparison;
@@ -92,9 +94,6 @@ partial class CqlComparers
             //     unequal — so no consistent hash exists for the '1' case.
             //   Rounding-based equivalence: EquivalentValues rounds to the least-precise operand,
             //     which is also non-transitive (0.15 ~ 0.2, 0.2 ~ 0.24, 0.15 !~ 0.24).
-            //   Dimension-blind equality (#1417): until that bug is fixed, CompareValues returns 0
-            //     for incommensurable units after canonicalization; once #1417 lands the hash will
-            //     naturally agree with the corrected equality.
             //
             // Skip canonicalization for null/wildcard units: these can never benefit from unit
             // conversion (null has no UCUM meaning, '1' is already documented as unhashable above).
