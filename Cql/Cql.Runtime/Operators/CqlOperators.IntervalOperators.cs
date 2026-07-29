@@ -1809,12 +1809,15 @@ namespace Hl7.Cql.Operators
             left = toClosed(left!)!;
             right = toClosed(right!)!;
 
+            // A null closed low boundary is the minimum value and a null closed high boundary
+            // the maximum (see #1356: these substitutions used to be inverted, so intervals
+            // with an unbounded end never overlapped after anything).
             bool? startsBeforeEnd = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.high, right.highClosed)
                 ? RangeLessOrEqual(LowBoundaryRange(left), HighBoundaryRange(right), precision)
-                : Comparer.Compare(left.low ?? MaxValue<T>()!, right.high ?? MinValue<T>()!, precision) <= 0;
+                : Comparer.Compare(left.low ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) <= 0;
             bool? endsAfterEnd = IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.high, right.highClosed)
                 ? RangeGreaterThan(HighBoundaryRange(left), HighBoundaryRange(right), precision)
-                : Comparer.Compare(left.high ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) > 0;
+                : Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, precision) > 0;
 
             return AndAllowingUnknown(startsBeforeEnd, endsAfterEnd);
         }
