@@ -33,13 +33,8 @@ namespace Hl7.Cql.CqlToElm.Test
             { "DecimalNeg10Pow28ToZeroOneStepDecimalMinValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
 
             { "ExpandPer0D1", "Throws NotSupportedException: a fractional per over integer intervals would produce Decimal intervals (value-dependent typing); the reference Java translator rejects this expression at compile time." },
-            { "ExpandIntervalPer2", "Not working" },
 
-            { "TestExceptNull", "This is ambiguous with every valid interval overload." },
-
-            { "DescendentsEmptyList", "Not implemented" },
-
-            { "ReplaceMatchesSpaces", "The first argument should have four backslashes instead of 2" }
+            { "TestExceptNull", "This is ambiguous with every valid interval overload." }
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
@@ -55,18 +50,7 @@ namespace Hl7.Cql.CqlToElm.Test
             { "DateTimeUncertain", "We don't support uncertainty" },
             { "DecimalMaxValue", "Our implementation returns a larger value" },
             { "DecimalMinValue", "Our implementation returns a smaller value" },
-            { "DecimalNegOneStep", "Power returns integers, not decimals" },
-            { "DecimalNegTenStep", "Power returns integers, not decimals" },
-            { "DecimalNegTwoStep", "Power returns integers, not decimals" },
-            { "DecimalOneStep", "Power returns integers, not decimals" },
-            { "DecimalPosOneStep", "Power returns integers, not decimals" },
-            { "DecimalPosTenStep", "Power returns integers, not decimals" },
-            { "DecimalPosTwoStep", "Power returns integers, not decimals" },
-            { "DecimalTenStep", "Power returns integers, not decimals" },
-            { "DecimalTwoStep", "Power returns integers, not decimals" },
-            { "Power2ToNeg2", "Power returns integers, not decimals" },
-            { "ProperContainsTimeNull", "There is no spec language justifying null instead of false" },
-            { "ProperInTimeNull", "There is no spec language justifying null instead of false" },
+            { "ReplaceMatchesSpaces", "Returns 'All\\$that...': .NET keeps backslash escapes in the Regex.Replace substitution literally, unlike Java's Matcher." },
             { "SortDatesAsc", "Sort tests shouldn't contain differing precision" },
             { "SortDatesDesc", "Sort tests shouldn't contain differing precision" },
         };
