@@ -164,6 +164,41 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void ExpandLongIntervalPer3()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[1L, 10L] } per 3 '1'");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<CqlInterval<long?>>>(expand, lib);
+            result.Should().NotBeNull();
+            // The candidate starting at 10 would end at 12, past the upper boundary.
+            result!.Select(i => (i!.low, i.high)).Should().Equal(
+                (1L, 3L),
+                (4L, 6L),
+                (7L, 9L));
+        }
+
+        [TestMethod]
+        public void ExpandSingleLongIntervalPer3()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand Interval[1L, 10L] per 3 '1'");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<long?>>(expand, lib);
+            result.Should().NotBeNull();
+            // The point form returns the starting point of each interval the list form would contribute.
+            result!.Should().Equal(1L, 4L, 7L);
+        }
+
+        [TestMethod]
+        public void ExpandLongIntervalNarrowerThanPer()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[1L, 10L] } per 20 '1'");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            var result = Run<IEnumerable<CqlInterval<long?>>>(expand, lib);
+            // The only candidate, [1, 20], ends past the upper boundary.
+            result.Should().NotBeNull().And.BeEmpty();
+        }
+
+        [TestMethod]
         public void ExpandDateIntervalPer3DaysDoesNotDivide()
         {
             var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[@2018-01-01, @2018-01-04] } per 3 days");
