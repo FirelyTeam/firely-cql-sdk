@@ -75,6 +75,7 @@ Reads pre-built ELM JSON files and converts them to one or more outputs.
 | `--libraries <dir>` | | FHIR Libraries-only output (use with `--measures`; mutually exclusive with `--fhir`) |
 | `--measures <dir>` | | FHIR Measures-only output (use with `--libraries`; mutually exclusive with `--fhir`) |
 | `--canonical-root-url <url>` | | Root canonical URL embedded in generated FHIR resources |
+| `--measure-group-code-system <url>` | | Code system URL for `Measure.group.code`; when set, each group's id is also emitted as a coding with this system and the group id as its code |
 | `--override-utc-date-time <dt>` | | Override the timestamp written into FHIR resources (e.g. `1970-01-01T00:00:00Z` for reproducible builds) |
 | `--json-pretty` | | Emit pretty-printed JSON for FHIR output |
 | `--cs-namespace <ns>` | | C# namespace for generated code (e.g. `MyCompany.MyCqlLibraries`) |
@@ -113,6 +114,7 @@ Reads CQL source files, compiles them to ELM in-process, then continues the same
 | `--libraries <dir>` | | FHIR Libraries-only output (use with `--measures`; mutually exclusive with `--fhir`) |
 | `--measures <dir>` | | FHIR Measures-only output (use with `--libraries`; mutually exclusive with `--fhir`) |
 | `--canonical-root-url <url>` | | Root canonical URL embedded in generated FHIR resources |
+| `--measure-group-code-system <url>` | | Code system URL for `Measure.group.code`; when set, each group's id is also emitted as a coding with this system and the group id as its code |
 | `--override-utc-date-time <dt>` | | Override the timestamp in generated FHIR resources |
 | `--json-pretty` | | Emit pretty-printed JSON for FHIR and ELM output |
 | `--cs-namespace <ns>` | | C# namespace for generated code |

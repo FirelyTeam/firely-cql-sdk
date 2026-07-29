@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS22FHIRPCSBPScreeningFollowUp", "1.0.000")]
 public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingleton<CMS22FHIRPCSBPScreeningFollowUp_1_0_000>
 {
@@ -288,31 +288,23 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
             bool? f_(Condition Hypertension) {
-
-                CqlInterval<CqlDateTime> i_() {
-
-                    bool o_() {
-                        CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypertension as Condition);
-                        CqlDateTime q_ = context.Operators.Start(p_);
-                        return q_ is null;
-                    }
-
-                    if (o_())
-                    {
-                        return default;
-                    }
-                    else
-                    {
-                        CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypertension as Condition);
-                        CqlDateTime s_ = context.Operators.Start(r_);
-                        CqlInterval<CqlDateTime> t_ = context.Operators.Interval(s_, s_, true, true);
-                        return t_;
-                    }
+                CqlInterval<CqlDateTime> i_;
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypertension as Condition);
+                CqlDateTime p_ = context.Operators.Start(o_);
+                if (p_ is null)
+                {
+                    i_ = default;
                 }
-
+                else
+                {
+                    CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypertension as Condition);
+                    CqlDateTime r_ = context.Operators.Start(q_);
+                    CqlInterval<CqlDateTime> s_ = context.Operators.Interval(r_, r_, true, true);
+                    i_ = s_;
+                }
                 Period j_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
-                bool? l_ = context.Operators.SameOrBefore(i_(), k_, "day");
+                bool? l_ = context.Operators.SameOrBefore(i_, k_, "day");
                 bool? m_ = this.isVerified(context, Hypertension as Condition);
                 bool? n_ = context.Operators.And(l_, m_);
                 return n_;
@@ -2002,11 +1994,9 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
         IEnumerable<ServiceRequest> f_ = context.Operators.Where<ServiceRequest>(d_, e_);
 
         bool? g_(ServiceRequest WeeksRescreen) {
-            CqlValueSet ap_ = this.Pharmacologic_Therapy_for_Hypertension(context);
-            IEnumerable<MedicationRequest> aq_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ap_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> ar_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> ap_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-            bool? as_(MedicationRequest MR) {
+            bool? aq_(MedicationRequest MR) {
                 IEnumerable<Medication> ay_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? az_(Medication M) {
@@ -2028,8 +2018,10 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return bb_;
             }
 
-            IEnumerable<MedicationRequest> at_ = context.Operators.Where<MedicationRequest>(ar_, as_);
-            IEnumerable<MedicationRequest> au_ = context.Operators.Union<MedicationRequest>(aq_, at_);
+            IEnumerable<MedicationRequest> ar_ = context.Operators.Where<MedicationRequest>(ap_, aq_);
+            CqlValueSet as_ = this.Pharmacologic_Therapy_for_Hypertension(context);
+            IEnumerable<MedicationRequest> at_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, as_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> au_ = context.Operators.Union<MedicationRequest>(ar_, at_);
 
             bool? av_(MedicationRequest Medications) {
                 FhirDateTime bm_ = Medications?.AuthoredOnElement;

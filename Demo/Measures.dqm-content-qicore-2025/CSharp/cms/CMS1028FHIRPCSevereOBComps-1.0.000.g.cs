@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS1028FHIRPCSevereOBComps", "1.0.000")]
 public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<CMS1028FHIRPCSevereOBComps_1_0_000>
 {
@@ -545,71 +545,57 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 EventStatus? n_ = m_?.Value;
                 string o_ = context.Operators.Convert<string>(n_);
                 bool? p_ = context.Operators.Equal(o_, "completed");
-
-                object q_() {
-
-                    bool w_() {
-                        DataType aa_ = SMMProcedures?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlDateTime;
-                        return ac_;
-                    }
-
-
-                    bool x_() {
-                        DataType ad_ = SMMProcedures?.Performed;
-                        object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                        bool af_ = ae_ is CqlInterval<CqlDateTime>;
-                        return af_;
-                    }
-
-
-                    bool y_() {
-                        DataType ag_ = SMMProcedures?.Performed;
-                        object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        bool ai_ = ah_ is CqlQuantity;
-                        return ai_;
-                    }
-
-
-                    bool z_() {
-                        DataType aj_ = SMMProcedures?.Performed;
-                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        bool al_ = ak_ is CqlInterval<CqlQuantity>;
-                        return al_;
-                    }
-
-                    if (w_())
+                object q_;
+                DataType w_ = SMMProcedures?.Performed;
+                object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                bool y_ = x_ is CqlDateTime;
+                if (y_)
+                {
+                    DataType z_ = SMMProcedures?.Performed;
+                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                    q_ = aa_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType ab_ = SMMProcedures?.Performed;
+                    object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
+                    bool ad_ = ac_ is CqlQuantity;
+                    if (ad_)
                     {
-                        DataType am_ = SMMProcedures?.Performed;
-                        object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        return an_ as CqlDateTime;
-                    }
-                    else if (x_())
-                    {
-                        DataType ao_ = SMMProcedures?.Performed;
-                        object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        return ap_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (y_())
-                    {
-                        DataType aq_ = SMMProcedures?.Performed;
-                        object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                        return ar_ as CqlQuantity;
-                    }
-                    else if (z_())
-                    {
-                        DataType as_ = SMMProcedures?.Performed;
-                        object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
-                        return at_ as CqlInterval<CqlQuantity>;
+                        DataType ae_ = SMMProcedures?.Performed;
+                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
+                        q_ = af_ as CqlQuantity;
                     }
                     else
                     {
-                        return null;
+                        DataType ag_ = SMMProcedures?.Performed;
+                        object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+                        bool ai_ = ah_ is CqlInterval<CqlDateTime>;
+                        if (ai_)
+                        {
+                            DataType aj_ = SMMProcedures?.Performed;
+                            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                            q_ = ak_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            DataType al_ = SMMProcedures?.Performed;
+                            object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+                            bool an_ = am_ is CqlInterval<CqlQuantity>;
+                            if (an_)
+                            {
+                                DataType ao_ = SMMProcedures?.Performed;
+                                object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
+                                q_ = ap_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                q_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_());
+                CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
                 CqlDateTime s_ = context.Operators.Start(r_);
                 CqlInterval<CqlDateTime> t_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
                 bool? u_ = context.Operators.In<CqlDateTime>(s_, t_, (string)default);
@@ -671,71 +657,57 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 EventStatus? j_ = i_?.Value;
                 string k_ = context.Operators.Convert<string>(j_);
                 bool? l_ = context.Operators.Equal(k_, "completed");
-
-                object m_() {
-
-                    bool s_() {
-                        DataType w_ = BloodTransfusion?.Performed;
-                        object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                        bool y_ = x_ is CqlDateTime;
-                        return y_;
-                    }
-
-
-                    bool t_() {
-                        DataType z_ = BloodTransfusion?.Performed;
-                        object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        bool ab_ = aa_ is CqlInterval<CqlDateTime>;
-                        return ab_;
-                    }
-
-
-                    bool u_() {
-                        DataType ac_ = BloodTransfusion?.Performed;
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        bool ae_ = ad_ is CqlQuantity;
-                        return ae_;
-                    }
-
-
-                    bool v_() {
-                        DataType af_ = BloodTransfusion?.Performed;
-                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        bool ah_ = ag_ is CqlInterval<CqlQuantity>;
-                        return ah_;
-                    }
-
-                    if (s_())
+                object m_;
+                DataType s_ = BloodTransfusion?.Performed;
+                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                bool u_ = t_ is CqlDateTime;
+                if (u_)
+                {
+                    DataType v_ = BloodTransfusion?.Performed;
+                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+                    m_ = w_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType x_ = BloodTransfusion?.Performed;
+                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                    bool z_ = y_ is CqlQuantity;
+                    if (z_)
                     {
-                        DataType ai_ = BloodTransfusion?.Performed;
-                        object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                        return aj_ as CqlDateTime;
-                    }
-                    else if (t_())
-                    {
-                        DataType ak_ = BloodTransfusion?.Performed;
-                        object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        return al_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (u_())
-                    {
-                        DataType am_ = BloodTransfusion?.Performed;
-                        object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        return an_ as CqlQuantity;
-                    }
-                    else if (v_())
-                    {
-                        DataType ao_ = BloodTransfusion?.Performed;
-                        object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        return ap_ as CqlInterval<CqlQuantity>;
+                        DataType aa_ = BloodTransfusion?.Performed;
+                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                        m_ = ab_ as CqlQuantity;
                     }
                     else
                     {
-                        return null;
+                        DataType ac_ = BloodTransfusion?.Performed;
+                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                        bool ae_ = ad_ is CqlInterval<CqlDateTime>;
+                        if (ae_)
+                        {
+                            DataType af_ = BloodTransfusion?.Performed;
+                            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                            m_ = ag_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            DataType ah_ = BloodTransfusion?.Performed;
+                            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                            bool aj_ = ai_ is CqlInterval<CqlQuantity>;
+                            if (aj_)
+                            {
+                                DataType ak_ = BloodTransfusion?.Performed;
+                                object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+                                m_ = al_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                m_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_());
+                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
                 CqlDateTime o_ = context.Operators.Start(n_);
                 CqlInterval<CqlDateTime> p_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
                 bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, (string)default);
@@ -789,71 +761,57 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 EventStatus? j_ = i_?.Value;
                 string k_ = context.Operators.Convert<string>(j_);
                 bool? l_ = context.Operators.Equal(k_, "completed");
-
-                object m_() {
-
-                    bool s_() {
-                        DataType w_ = Hysterectomy?.Performed;
-                        object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                        bool y_ = x_ is CqlDateTime;
-                        return y_;
-                    }
-
-
-                    bool t_() {
-                        DataType z_ = Hysterectomy?.Performed;
-                        object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        bool ab_ = aa_ is CqlInterval<CqlDateTime>;
-                        return ab_;
-                    }
-
-
-                    bool u_() {
-                        DataType ac_ = Hysterectomy?.Performed;
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        bool ae_ = ad_ is CqlQuantity;
-                        return ae_;
-                    }
-
-
-                    bool v_() {
-                        DataType af_ = Hysterectomy?.Performed;
-                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        bool ah_ = ag_ is CqlInterval<CqlQuantity>;
-                        return ah_;
-                    }
-
-                    if (s_())
+                object m_;
+                DataType s_ = Hysterectomy?.Performed;
+                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                bool u_ = t_ is CqlDateTime;
+                if (u_)
+                {
+                    DataType v_ = Hysterectomy?.Performed;
+                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+                    m_ = w_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType x_ = Hysterectomy?.Performed;
+                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                    bool z_ = y_ is CqlQuantity;
+                    if (z_)
                     {
-                        DataType ai_ = Hysterectomy?.Performed;
-                        object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                        return aj_ as CqlDateTime;
-                    }
-                    else if (t_())
-                    {
-                        DataType ak_ = Hysterectomy?.Performed;
-                        object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        return al_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (u_())
-                    {
-                        DataType am_ = Hysterectomy?.Performed;
-                        object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        return an_ as CqlQuantity;
-                    }
-                    else if (v_())
-                    {
-                        DataType ao_ = Hysterectomy?.Performed;
-                        object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        return ap_ as CqlInterval<CqlQuantity>;
+                        DataType aa_ = Hysterectomy?.Performed;
+                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                        m_ = ab_ as CqlQuantity;
                     }
                     else
                     {
-                        return null;
+                        DataType ac_ = Hysterectomy?.Performed;
+                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                        bool ae_ = ad_ is CqlInterval<CqlDateTime>;
+                        if (ae_)
+                        {
+                            DataType af_ = Hysterectomy?.Performed;
+                            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                            m_ = ag_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            DataType ah_ = Hysterectomy?.Performed;
+                            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                            bool aj_ = ai_ is CqlInterval<CqlQuantity>;
+                            if (aj_)
+                            {
+                                DataType ak_ = Hysterectomy?.Performed;
+                                object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+                                m_ = al_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                m_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_());
+                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
                 CqlDateTime o_ = context.Operators.Start(n_);
                 CqlInterval<CqlDateTime> p_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
                 bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, (string)default);
@@ -909,71 +867,57 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 EventStatus? i_ = h_?.Value;
                 string j_ = context.Operators.Convert<string>(i_);
                 bool? k_ = context.Operators.Equal(j_, "completed");
-
-                object l_() {
-
-                    bool r_() {
-                        DataType v_ = ConvTrachVentProcedures?.Performed;
-                        object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                        bool x_ = w_ is CqlDateTime;
-                        return x_;
-                    }
-
-
-                    bool s_() {
-                        DataType y_ = ConvTrachVentProcedures?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        bool aa_ = z_ is CqlInterval<CqlDateTime>;
-                        return aa_;
-                    }
-
-
-                    bool t_() {
-                        DataType ab_ = ConvTrachVentProcedures?.Performed;
-                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlQuantity;
-                        return ad_;
-                    }
-
-
-                    bool u_() {
-                        DataType ae_ = ConvTrachVentProcedures?.Performed;
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlInterval<CqlQuantity>;
-                        return ag_;
-                    }
-
-                    if (r_())
+                object l_;
+                DataType r_ = ConvTrachVentProcedures?.Performed;
+                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+                bool t_ = s_ is CqlDateTime;
+                if (t_)
+                {
+                    DataType u_ = ConvTrachVentProcedures?.Performed;
+                    object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
+                    l_ = v_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType w_ = ConvTrachVentProcedures?.Performed;
+                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                    bool y_ = x_ is CqlQuantity;
+                    if (y_)
                     {
-                        DataType ah_ = ConvTrachVentProcedures?.Performed;
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        return ai_ as CqlDateTime;
-                    }
-                    else if (s_())
-                    {
-                        DataType aj_ = ConvTrachVentProcedures?.Performed;
-                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        return ak_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (t_())
-                    {
-                        DataType al_ = ConvTrachVentProcedures?.Performed;
-                        object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        return am_ as CqlQuantity;
-                    }
-                    else if (u_())
-                    {
-                        DataType an_ = ConvTrachVentProcedures?.Performed;
-                        object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        return ao_ as CqlInterval<CqlQuantity>;
+                        DataType z_ = ConvTrachVentProcedures?.Performed;
+                        object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                        l_ = aa_ as CqlQuantity;
                     }
                     else
                     {
-                        return null;
+                        DataType ab_ = ConvTrachVentProcedures?.Performed;
+                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
+                        bool ad_ = ac_ is CqlInterval<CqlDateTime>;
+                        if (ad_)
+                        {
+                            DataType ae_ = ConvTrachVentProcedures?.Performed;
+                            object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
+                            l_ = af_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            DataType ag_ = ConvTrachVentProcedures?.Performed;
+                            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+                            bool ai_ = ah_ is CqlInterval<CqlQuantity>;
+                            if (ai_)
+                            {
+                                DataType aj_ = ConvTrachVentProcedures?.Performed;
+                                object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                                l_ = ak_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                l_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_());
+                CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_);
                 CqlDateTime n_ = context.Operators.Start(m_);
                 CqlInterval<CqlDateTime> o_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
                 bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, (string)default);
@@ -1108,71 +1052,57 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 EventStatus? o_ = n_?.Value;
                 string p_ = context.Operators.Convert<string>(o_);
                 bool? q_ = context.Operators.Equal(p_, "completed");
-
-                object r_() {
-
-                    bool x_() {
-                        DataType ab_ = SMMProcedures?.Performed;
-                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlDateTime;
-                        return ad_;
-                    }
-
-
-                    bool y_() {
-                        DataType ae_ = SMMProcedures?.Performed;
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlInterval<CqlDateTime>;
-                        return ag_;
-                    }
-
-
-                    bool z_() {
-                        DataType ah_ = SMMProcedures?.Performed;
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        bool aj_ = ai_ is CqlQuantity;
-                        return aj_;
-                    }
-
-
-                    bool aa_() {
-                        DataType ak_ = SMMProcedures?.Performed;
-                        object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        bool am_ = al_ is CqlInterval<CqlQuantity>;
-                        return am_;
-                    }
-
-                    if (x_())
+                object r_;
+                DataType x_ = SMMProcedures?.Performed;
+                object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                bool z_ = y_ is CqlDateTime;
+                if (z_)
+                {
+                    DataType aa_ = SMMProcedures?.Performed;
+                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                    r_ = ab_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType ac_ = SMMProcedures?.Performed;
+                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                    bool ae_ = ad_ is CqlQuantity;
+                    if (ae_)
                     {
-                        DataType an_ = SMMProcedures?.Performed;
-                        object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                        return ao_ as CqlDateTime;
-                    }
-                    else if (y_())
-                    {
-                        DataType ap_ = SMMProcedures?.Performed;
-                        object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        return aq_ as CqlInterval<CqlDateTime>;
-                    }
-                    else if (z_())
-                    {
-                        DataType ar_ = SMMProcedures?.Performed;
-                        object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                        return as_ as CqlQuantity;
-                    }
-                    else if (aa_())
-                    {
-                        DataType at_ = SMMProcedures?.Performed;
-                        object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        return au_ as CqlInterval<CqlQuantity>;
+                        DataType af_ = SMMProcedures?.Performed;
+                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                        r_ = ag_ as CqlQuantity;
                     }
                     else
                     {
-                        return null;
+                        DataType ah_ = SMMProcedures?.Performed;
+                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                        bool aj_ = ai_ is CqlInterval<CqlDateTime>;
+                        if (aj_)
+                        {
+                            DataType ak_ = SMMProcedures?.Performed;
+                            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+                            r_ = al_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            DataType am_ = SMMProcedures?.Performed;
+                            object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
+                            bool ao_ = an_ is CqlInterval<CqlQuantity>;
+                            if (ao_)
+                            {
+                                DataType ap_ = SMMProcedures?.Performed;
+                                object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
+                                r_ = aq_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                r_ = null;
+                            }
+                        }
                     }
                 }
-
-                CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_());
+                CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
                 CqlDateTime t_ = context.Operators.Start(s_);
                 CqlInterval<CqlDateTime> u_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, Encounter);
                 bool? v_ = context.Operators.In<CqlDateTime>(t_, u_, (string)default);
@@ -1220,202 +1150,160 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     [CqlFunctionDefinition("sOCDxCategory")]
     public string sOCDxCategory(CqlContext context, CqlConcept Dx)
     {
-
-        string a_() {
-
-            bool b_() {
-                CqlValueSet s_ = this.Acute_Heart_Failure(context);
-                bool? t_ = context.Operators.ConceptInValueSet(Dx, s_);
-                return t_ ?? false;
-            }
-
-
-            bool c_() {
-                CqlValueSet u_ = this.Acute_Myocardial_Infarction(context);
-                bool? v_ = context.Operators.ConceptInValueSet(Dx, u_);
-                return v_ ?? false;
-            }
-
-
-            bool d_() {
-                CqlValueSet w_ = this.Acute_Renal_Failure(context);
-                bool? x_ = context.Operators.ConceptInValueSet(Dx, w_);
-                return x_ ?? false;
-            }
-
-
-            bool e_() {
-                CqlValueSet y_ = this.Acute_Respiratory_Distress_Syndrome(context);
-                bool? z_ = context.Operators.ConceptInValueSet(Dx, y_);
-                return z_ ?? false;
-            }
-
-
-            bool f_() {
-                CqlValueSet aa_ = this.Air_and_Thrombotic_Embolism(context);
-                bool? ab_ = context.Operators.ConceptInValueSet(Dx, aa_);
-                return ab_ ?? false;
-            }
-
-
-            bool g_() {
-                CqlValueSet ac_ = this.Amniotic_Fluid_Embolism(context);
-                bool? ad_ = context.Operators.ConceptInValueSet(Dx, ac_);
-                return ad_ ?? false;
-            }
-
-
-            bool h_() {
-                CqlValueSet ae_ = this.Aortic_Aneurysm(context);
-                bool? af_ = context.Operators.ConceptInValueSet(Dx, ae_);
-                return af_ ?? false;
-            }
-
-
-            bool i_() {
-                CqlValueSet ag_ = this.Cardiac_Arrest_Ventricular_Fibrillation(context);
-                bool? ah_ = context.Operators.ConceptInValueSet(Dx, ag_);
-                return ah_ ?? false;
-            }
-
-
-            bool j_() {
-                CqlValueSet ai_ = this.Disseminated_Intravascular_Coagulation(context);
-                bool? aj_ = context.Operators.ConceptInValueSet(Dx, ai_);
-                return aj_ ?? false;
-            }
-
-
-            bool k_() {
-                CqlValueSet ak_ = this.Eclampsia(context);
-                bool? al_ = context.Operators.ConceptInValueSet(Dx, ak_);
-                return al_ ?? false;
-            }
-
-
-            bool l_() {
-                CqlValueSet am_ = this.Heart_Failure_Cardiac_Arrest_Related_to_Procedure_or_Surgery(context);
-                bool? an_ = context.Operators.ConceptInValueSet(Dx, am_);
-                return an_ ?? false;
-            }
-
-
-            bool m_() {
-                CqlValueSet ao_ = this.Puerperal_Cerebrovascular_Disorder(context);
-                bool? ap_ = context.Operators.ConceptInValueSet(Dx, ao_);
-                return ap_ ?? false;
-            }
-
-
-            bool n_() {
-                CqlValueSet aq_ = this.Pulmonary_Edema(context);
-                bool? ar_ = context.Operators.ConceptInValueSet(Dx, aq_);
-                return ar_ ?? false;
-            }
-
-
-            bool o_() {
-                CqlValueSet as_ = this.Sepsis(context);
-                bool? at_ = context.Operators.ConceptInValueSet(Dx, as_);
-                return at_ ?? false;
-            }
-
-
-            bool p_() {
-                CqlValueSet au_ = this.Severe_Anesthesia_Complications(context);
-                bool? av_ = context.Operators.ConceptInValueSet(Dx, au_);
-                return av_ ?? false;
-            }
-
-
-            bool q_() {
-                CqlValueSet aw_ = this.Shock(context);
-                bool? ax_ = context.Operators.ConceptInValueSet(Dx, aw_);
-                return ax_ ?? false;
-            }
-
-
-            bool r_() {
-                CqlValueSet ay_ = this.Sickle_Cell_Disease_with_Crisis(context);
-                bool? az_ = context.Operators.ConceptInValueSet(Dx, ay_);
-                return az_ ?? false;
-            }
-
-            if (b_())
-            {
-                return "Acute Heart Failure";
-            }
-            else if (c_())
+        CqlValueSet a_ = this.Acute_Heart_Failure(context);
+        bool? b_ = context.Operators.ConceptInValueSet(Dx, a_);
+        if (b_ ?? false)
+        {
+            return "Acute Heart Failure";
+        }
+        else
+        {
+            CqlValueSet c_ = this.Acute_Myocardial_Infarction(context);
+            bool? d_ = context.Operators.ConceptInValueSet(Dx, c_);
+            if (d_ ?? false)
             {
                 return "Acute Myocardial Infarction";
             }
-            else if (d_())
-            {
-                return "Acute Renal Failure";
-            }
-            else if (e_())
-            {
-                return "Acute Respiratory Distress Syndrome";
-            }
-            else if (f_())
-            {
-                return "Air and Thrombotic Embolism";
-            }
-            else if (g_())
-            {
-                return "Amniotic Fluid Embolism";
-            }
-            else if (h_())
-            {
-                return "Aortic Aneurysm";
-            }
-            else if (i_())
-            {
-                return "Cardiac Arrest Ventricular Fibrillation";
-            }
-            else if (j_())
-            {
-                return "Disseminated Intravascular Coagulation";
-            }
-            else if (k_())
-            {
-                return "Eclampsia";
-            }
-            else if (l_())
-            {
-                return "Heart Failure Cardiac Arrest Related to Procedure or Surgery";
-            }
-            else if (m_())
-            {
-                return "Puerperal Cerebrovascular Disorder";
-            }
-            else if (n_())
-            {
-                return "Pulmonary Edema";
-            }
-            else if (o_())
-            {
-                return "Sepsis";
-            }
-            else if (p_())
-            {
-                return "Severe Anesthesia Complications";
-            }
-            else if (q_())
-            {
-                return "Shock";
-            }
-            else if (r_())
-            {
-                return "Sickle Cell Disease with Crisis";
-            }
             else
             {
-                return default;
+                CqlValueSet e_ = this.Acute_Renal_Failure(context);
+                bool? f_ = context.Operators.ConceptInValueSet(Dx, e_);
+                if (f_ ?? false)
+                {
+                    return "Acute Renal Failure";
+                }
+                else
+                {
+                    CqlValueSet g_ = this.Acute_Respiratory_Distress_Syndrome(context);
+                    bool? h_ = context.Operators.ConceptInValueSet(Dx, g_);
+                    if (h_ ?? false)
+                    {
+                        return "Acute Respiratory Distress Syndrome";
+                    }
+                    else
+                    {
+                        CqlValueSet i_ = this.Air_and_Thrombotic_Embolism(context);
+                        bool? j_ = context.Operators.ConceptInValueSet(Dx, i_);
+                        if (j_ ?? false)
+                        {
+                            return "Air and Thrombotic Embolism";
+                        }
+                        else
+                        {
+                            CqlValueSet k_ = this.Amniotic_Fluid_Embolism(context);
+                            bool? l_ = context.Operators.ConceptInValueSet(Dx, k_);
+                            if (l_ ?? false)
+                            {
+                                return "Amniotic Fluid Embolism";
+                            }
+                            else
+                            {
+                                CqlValueSet m_ = this.Aortic_Aneurysm(context);
+                                bool? n_ = context.Operators.ConceptInValueSet(Dx, m_);
+                                if (n_ ?? false)
+                                {
+                                    return "Aortic Aneurysm";
+                                }
+                                else
+                                {
+                                    CqlValueSet o_ = this.Cardiac_Arrest_Ventricular_Fibrillation(context);
+                                    bool? p_ = context.Operators.ConceptInValueSet(Dx, o_);
+                                    if (p_ ?? false)
+                                    {
+                                        return "Cardiac Arrest Ventricular Fibrillation";
+                                    }
+                                    else
+                                    {
+                                        CqlValueSet q_ = this.Disseminated_Intravascular_Coagulation(context);
+                                        bool? r_ = context.Operators.ConceptInValueSet(Dx, q_);
+                                        if (r_ ?? false)
+                                        {
+                                            return "Disseminated Intravascular Coagulation";
+                                        }
+                                        else
+                                        {
+                                            CqlValueSet s_ = this.Eclampsia(context);
+                                            bool? t_ = context.Operators.ConceptInValueSet(Dx, s_);
+                                            if (t_ ?? false)
+                                            {
+                                                return "Eclampsia";
+                                            }
+                                            else
+                                            {
+                                                CqlValueSet u_ = this.Heart_Failure_Cardiac_Arrest_Related_to_Procedure_or_Surgery(context);
+                                                bool? v_ = context.Operators.ConceptInValueSet(Dx, u_);
+                                                if (v_ ?? false)
+                                                {
+                                                    return "Heart Failure Cardiac Arrest Related to Procedure or Surgery";
+                                                }
+                                                else
+                                                {
+                                                    CqlValueSet w_ = this.Puerperal_Cerebrovascular_Disorder(context);
+                                                    bool? x_ = context.Operators.ConceptInValueSet(Dx, w_);
+                                                    if (x_ ?? false)
+                                                    {
+                                                        return "Puerperal Cerebrovascular Disorder";
+                                                    }
+                                                    else
+                                                    {
+                                                        CqlValueSet y_ = this.Pulmonary_Edema(context);
+                                                        bool? z_ = context.Operators.ConceptInValueSet(Dx, y_);
+                                                        if (z_ ?? false)
+                                                        {
+                                                            return "Pulmonary Edema";
+                                                        }
+                                                        else
+                                                        {
+                                                            CqlValueSet aa_ = this.Sepsis(context);
+                                                            bool? ab_ = context.Operators.ConceptInValueSet(Dx, aa_);
+                                                            if (ab_ ?? false)
+                                                            {
+                                                                return "Sepsis";
+                                                            }
+                                                            else
+                                                            {
+                                                                CqlValueSet ac_ = this.Severe_Anesthesia_Complications(context);
+                                                                bool? ad_ = context.Operators.ConceptInValueSet(Dx, ac_);
+                                                                if (ad_ ?? false)
+                                                                {
+                                                                    return "Severe Anesthesia Complications";
+                                                                }
+                                                                else
+                                                                {
+                                                                    CqlValueSet ae_ = this.Shock(context);
+                                                                    bool? af_ = context.Operators.ConceptInValueSet(Dx, ae_);
+                                                                    if (af_ ?? false)
+                                                                    {
+                                                                        return "Shock";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        CqlValueSet ag_ = this.Sickle_Cell_Disease_with_Crisis(context);
+                                                                        bool? ah_ = context.Operators.ConceptInValueSet(Dx, ag_);
+                                                                        if (ah_ ?? false)
+                                                                        {
+                                                                            return "Sickle Cell Disease with Crisis";
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            return default;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-
-        return a_();
     }
 
 
@@ -1487,71 +1375,57 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             EventStatus? i_ = h_?.Value;
             string j_ = context.Operators.Convert<string>(i_);
             bool? k_ = context.Operators.Equal(j_, "completed");
-
-            object l_() {
-
-                bool r_() {
-                    DataType v_ = SMMProcedures?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlDateTime;
-                    return x_;
-                }
-
-
-                bool s_() {
-                    DataType y_ = SMMProcedures?.Performed;
-                    object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    bool aa_ = z_ is CqlInterval<CqlDateTime>;
-                    return aa_;
-                }
-
-
-                bool t_() {
-                    DataType ab_ = SMMProcedures?.Performed;
-                    object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    bool ad_ = ac_ is CqlQuantity;
-                    return ad_;
-                }
-
-
-                bool u_() {
-                    DataType ae_ = SMMProcedures?.Performed;
-                    object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                    bool ag_ = af_ is CqlInterval<CqlQuantity>;
-                    return ag_;
-                }
-
-                if (r_())
+            object l_;
+            DataType r_ = SMMProcedures?.Performed;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            bool t_ = s_ is CqlDateTime;
+            if (t_)
+            {
+                DataType u_ = SMMProcedures?.Performed;
+                object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
+                l_ = v_ as CqlDateTime;
+            }
+            else
+            {
+                DataType w_ = SMMProcedures?.Performed;
+                object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                bool y_ = x_ is CqlQuantity;
+                if (y_)
                 {
-                    DataType ah_ = SMMProcedures?.Performed;
-                    object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                    return ai_ as CqlDateTime;
-                }
-                else if (s_())
-                {
-                    DataType aj_ = SMMProcedures?.Performed;
-                    object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    return ak_ as CqlInterval<CqlDateTime>;
-                }
-                else if (t_())
-                {
-                    DataType al_ = SMMProcedures?.Performed;
-                    object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                    return am_ as CqlQuantity;
-                }
-                else if (u_())
-                {
-                    DataType an_ = SMMProcedures?.Performed;
-                    object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                    return ao_ as CqlInterval<CqlQuantity>;
+                    DataType z_ = SMMProcedures?.Performed;
+                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                    l_ = aa_ as CqlQuantity;
                 }
                 else
                 {
-                    return null;
+                    DataType ab_ = SMMProcedures?.Performed;
+                    object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
+                    bool ad_ = ac_ is CqlInterval<CqlDateTime>;
+                    if (ad_)
+                    {
+                        DataType ae_ = SMMProcedures?.Performed;
+                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
+                        l_ = af_ as CqlInterval<CqlDateTime>;
+                    }
+                    else
+                    {
+                        DataType ag_ = SMMProcedures?.Performed;
+                        object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+                        bool ai_ = ah_ is CqlInterval<CqlQuantity>;
+                        if (ai_)
+                        {
+                            DataType aj_ = SMMProcedures?.Performed;
+                            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                            l_ = ak_ as CqlInterval<CqlQuantity>;
+                        }
+                        else
+                        {
+                            l_ = null;
+                        }
+                    }
                 }
             }
-
-            CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_());
+            CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_);
             CqlDateTime n_ = context.Operators.Start(m_);
             CqlInterval<CqlDateTime> o_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TheEncounter);
             bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, (string)default);
@@ -1567,80 +1441,62 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     [CqlFunctionDefinition("sOCProcedureCategory")]
     public string sOCProcedureCategory(CqlContext context, Procedure TheProcedure)
     {
-
-        string a_() {
-
-            bool b_() {
-                CodeableConcept g_ = TheProcedure?.Code;
-                CqlConcept h_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, g_);
-                CqlValueSet i_ = this.Blood_Transfusion(context);
-                bool? j_ = context.Operators.ConceptInValueSet(h_, i_);
-                return j_ ?? false;
-            }
-
-
-            bool c_() {
-                CodeableConcept k_ = TheProcedure?.Code;
-                CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_);
-                CqlValueSet m_ = this.Conversion_of_Cardiac_Rhythm(context);
-                bool? n_ = context.Operators.ConceptInValueSet(l_, m_);
-                return n_ ?? false;
-            }
-
-
-            bool d_() {
-                CodeableConcept o_ = TheProcedure?.Code;
-                CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-                CqlValueSet q_ = this.Hysterectomy(context);
-                bool? r_ = context.Operators.ConceptInValueSet(p_, q_);
-                return r_ ?? false;
-            }
-
-
-            bool e_() {
-                CodeableConcept s_ = TheProcedure?.Code;
-                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                CqlValueSet u_ = this.Tracheostomy(context);
-                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                return v_ ?? false;
-            }
-
-
-            bool f_() {
-                CodeableConcept w_ = TheProcedure?.Code;
-                CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
-                CqlValueSet y_ = this.Ventilation(context);
-                bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
-                return z_ ?? false;
-            }
-
-            if (b_())
-            {
-                return "Blood Transfusion";
-            }
-            else if (c_())
+        CodeableConcept a_ = TheProcedure?.Code;
+        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
+        CqlValueSet c_ = this.Blood_Transfusion(context);
+        bool? d_ = context.Operators.ConceptInValueSet(b_, c_);
+        if (d_ ?? false)
+        {
+            return "Blood Transfusion";
+        }
+        else
+        {
+            CodeableConcept e_ = TheProcedure?.Code;
+            CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
+            CqlValueSet g_ = this.Conversion_of_Cardiac_Rhythm(context);
+            bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
+            if (h_ ?? false)
             {
                 return "Conversion of cardiac rhythm";
             }
-            else if (d_())
-            {
-                return "Hysterectomy";
-            }
-            else if (e_())
-            {
-                return "Tracheostomy";
-            }
-            else if (f_())
-            {
-                return "Ventilation";
-            }
             else
             {
-                return default;
+                CodeableConcept i_ = TheProcedure?.Code;
+                CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, i_);
+                CqlValueSet k_ = this.Hysterectomy(context);
+                bool? l_ = context.Operators.ConceptInValueSet(j_, k_);
+                if (l_ ?? false)
+                {
+                    return "Hysterectomy";
+                }
+                else
+                {
+                    CodeableConcept m_ = TheProcedure?.Code;
+                    CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
+                    CqlValueSet o_ = this.Tracheostomy(context);
+                    bool? p_ = context.Operators.ConceptInValueSet(n_, o_);
+                    if (p_ ?? false)
+                    {
+                        return "Tracheostomy";
+                    }
+                    else
+                    {
+                        CodeableConcept q_ = TheProcedure?.Code;
+                        CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
+                        CqlValueSet s_ = this.Ventilation(context);
+                        bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
+                        if (t_ ?? false)
+                        {
+                            return "Ventilation";
+                        }
+                        else
+                        {
+                            return default;
+                        }
+                    }
+                }
             }
         }
-
-        return a_();
     }
 
 

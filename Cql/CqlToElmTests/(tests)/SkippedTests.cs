@@ -33,7 +33,7 @@ namespace Hl7.Cql.CqlToElm.Test
             { "DecimalPos10Pow28ToZeroOneStepDecimalMaxValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
             { "DecimalNeg10Pow28ToZeroOneStepDecimalMinValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
 
-            { "ExpandPer0D1", "Not working" },
+            { "ExpandPer0D1", "Throws NotSupportedException: a fractional per over integer intervals would produce Decimal intervals (value-dependent typing); the reference Java translator rejects this expression at compile time." },
             { "ExpandIntervalPer2", "Not working" },
 
             { "TestExceptNull", "This is ambiguous with every valid interval overload." },

@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "5.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       } ],
@@ -1903,37 +1903,9 @@
                            }
                         } ],
                         "operand" : [ {
-                           "type" : "Retrieve",
-                           "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                           "codeProperty" : "medication",
-                           "codeComparator" : "in",
-                           "annotation" : [ ],
-                           "codes" : {
-                              "type" : "ValueSetRef",
-                              "locator" : "81:34-81:73",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                              "name" : "Antibiotic Medications for Pharyngitis",
-                              "preserve" : true,
-                              "annotation" : [ ]
-                           },
-                           "include" : [ ],
-                           "codeFilter" : [ ],
-                           "dateFilter" : [ ],
-                           "otherFilter" : [ ]
-                        }, {
                            "type" : "Query",
                            "locator" : "81:14-81:74",
                            "annotation" : [ ],
-                           "resultTypeSpecifier" : {
-                              "type" : "ListTypeSpecifier",
-                              "annotation" : [ ],
-                              "elementType" : {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "annotation" : [ ]
-                              }
-                           },
                            "source" : [ {
                               "locator" : "81:14-81:74",
                               "alias" : "MR",
@@ -2063,6 +2035,35 @@
                                  } ]
                               }
                            } ]
+                        }, {
+                           "type" : "Retrieve",
+                           "locator" : "81:14-81:74",
+                           "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                           "codeProperty" : "medication",
+                           "codeComparator" : "in",
+                           "annotation" : [ ],
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "annotation" : [ ]
+                              }
+                           },
+                           "codes" : {
+                              "type" : "ValueSetRef",
+                              "locator" : "81:34-81:73",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Antibiotic Medications for Pharyngitis",
+                              "preserve" : true,
+                              "annotation" : [ ]
+                           },
+                           "include" : [ ],
+                           "codeFilter" : [ ],
+                           "dateFilter" : [ ],
+                           "otherFilter" : [ ]
                         } ]
                      } ]
                   },
@@ -2131,6 +2132,10 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}Timing",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "annotation" : [ ]
                                  }, {
@@ -2153,10 +2158,6 @@
                                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                        "annotation" : [ ]
                                     }
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}Timing",
-                                    "annotation" : [ ]
                                  } ]
                               } ],
                               "operand" : [ {
@@ -2195,6 +2196,10 @@
                                     "annotation" : [ ],
                                     "choice" : [ {
                                        "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}Timing",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "annotation" : [ ]
                                     }, {
@@ -2217,10 +2222,6 @@
                                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                           "annotation" : [ ]
                                        }
-                                    }, {
-                                       "type" : "NamedTypeSpecifier",
-                                       "name" : "{http://hl7.org/fhir}Timing",
-                                       "annotation" : [ ]
                                     } ]
                                  }
                               } ]
@@ -3408,37 +3409,9 @@
                               }
                            } ],
                            "operand" : [ {
-                              "type" : "Retrieve",
-                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                              "codeProperty" : "medication",
-                              "codeComparator" : "in",
-                              "annotation" : [ ],
-                              "codes" : {
-                                 "type" : "ValueSetRef",
-                                 "locator" : "76:154-76:193",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                 "name" : "Antibiotic Medications for Pharyngitis",
-                                 "preserve" : true,
-                                 "annotation" : [ ]
-                              },
-                              "include" : [ ],
-                              "codeFilter" : [ ],
-                              "dateFilter" : [ ],
-                              "otherFilter" : [ ]
-                           }, {
                               "type" : "Query",
                               "locator" : "76:134-76:194",
                               "annotation" : [ ],
-                              "resultTypeSpecifier" : {
-                                 "type" : "ListTypeSpecifier",
-                                 "annotation" : [ ],
-                                 "elementType" : {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                    "annotation" : [ ]
-                                 }
-                              },
                               "source" : [ {
                                  "locator" : "76:134-76:194",
                                  "alias" : "MR",
@@ -3568,6 +3541,35 @@
                                     } ]
                                  }
                               } ]
+                           }, {
+                              "type" : "Retrieve",
+                              "locator" : "76:134-76:194",
+                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                              "codeProperty" : "medication",
+                              "codeComparator" : "in",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "elementType" : {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "codes" : {
+                                 "type" : "ValueSetRef",
+                                 "locator" : "76:154-76:193",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Antibiotic Medications for Pharyngitis",
+                                 "preserve" : true,
+                                 "annotation" : [ ]
+                              },
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
                            } ]
                         } ]
                      } ]
@@ -3883,7 +3885,7 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
@@ -3891,35 +3893,27 @@
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}String",
-                              "annotation" : [ ]
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "annotation" : [ ]
                            }, {
-                              "type" : "IntervalTypeSpecifier",
-                              "annotation" : [ ],
-                              "pointType" : {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "annotation" : [ ]
-                              }
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
                               "name" : "{urn:hl7-org:elm-types:r1}Ratio",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}Time",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
                               "annotation" : [ ]
                            }, {
                               "type" : "NamedTypeSpecifier",
-                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "name" : "{urn:hl7-org:elm-types:r1}Time",
                               "annotation" : [ ]
                            }, {
                               "type" : "IntervalTypeSpecifier",
@@ -3927,6 +3921,14 @@
                               "pointType" : {
                                  "type" : "NamedTypeSpecifier",
                                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "type" : "IntervalTypeSpecifier",
+                              "annotation" : [ ],
+                              "pointType" : {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "annotation" : [ ]
                               }
                            } ]
@@ -4081,6 +4083,10 @@
                            "annotation" : [ ],
                            "choice" : [ {
                               "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Timing",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
                               "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "annotation" : [ ]
                            }, {
@@ -4103,10 +4109,6 @@
                                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "annotation" : [ ]
                               }
-                           }, {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}Timing",
-                              "annotation" : [ ]
                            } ]
                         } ],
                         "operand" : [ {
@@ -4120,6 +4122,14 @@
                               "annotation" : [ ],
                               "choice" : [ {
                                  "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}Timing",
+                                 "annotation" : [ ]
+                              }, {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "annotation" : [ ]
+                              }, {
+                                 "type" : "NamedTypeSpecifier",
                                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "annotation" : [ ]
                               }, {
@@ -4130,14 +4140,6 @@
                                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "annotation" : [ ]
                                  }
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}Timing",
-                                 "annotation" : [ ]
-                              }, {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                 "annotation" : [ ]
                               } ]
                            },
                            "signature" : [ ],
