@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "5.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       } ],
@@ -691,37 +691,9 @@
                         }
                      } ],
                      "operand" : [ {
-                        "type" : "Retrieve",
-                        "dataType" : "{http://hl7.org/fhir}MedicationAdministration",
-                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration",
-                        "codeProperty" : "medication",
-                        "codeComparator" : "in",
-                        "annotation" : [ ],
-                        "codes" : {
-                           "type" : "ValueSetRef",
-                           "locator" : "33:32-33:45",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                           "name" : "Opioids, All",
-                           "preserve" : true,
-                           "annotation" : [ ]
-                        },
-                        "include" : [ ],
-                        "codeFilter" : [ ],
-                        "dateFilter" : [ ],
-                        "otherFilter" : [ ]
-                     }, {
                         "type" : "Query",
                         "locator" : "33:3-33:46",
                         "annotation" : [ ],
-                        "resultTypeSpecifier" : {
-                           "type" : "ListTypeSpecifier",
-                           "annotation" : [ ],
-                           "elementType" : {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationAdministration",
-                              "annotation" : [ ]
-                           }
-                        },
                         "source" : [ {
                            "locator" : "33:3-33:46",
                            "alias" : "MR",
@@ -851,6 +823,35 @@
                               } ]
                            }
                         } ]
+                     }, {
+                        "type" : "Retrieve",
+                        "locator" : "33:3-33:46",
+                        "dataType" : "{http://hl7.org/fhir}MedicationAdministration",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "codes" : {
+                           "type" : "ValueSetRef",
+                           "locator" : "33:32-33:45",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Opioids, All",
+                           "preserve" : true,
+                           "annotation" : [ ]
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      } ]
                   }
                } ],
@@ -1044,6 +1045,10 @@
                                  "annotation" : [ ],
                                  "choice" : [ {
                                     "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}Timing",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
                                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "annotation" : [ ]
                                  }, {
@@ -1066,10 +1071,6 @@
                                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                        "annotation" : [ ]
                                     }
-                                 }, {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}Timing",
-                                    "annotation" : [ ]
                                  } ]
                               } ],
                               "operand" : [ {
@@ -1349,6 +1350,10 @@
                                              "annotation" : [ ],
                                              "choice" : [ {
                                                 "type" : "NamedTypeSpecifier",
+                                                "name" : "{http://hl7.org/fhir}Timing",
+                                                "annotation" : [ ]
+                                             }, {
+                                                "type" : "NamedTypeSpecifier",
                                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                 "annotation" : [ ]
                                              }, {
@@ -1371,10 +1376,6 @@
                                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                    "annotation" : [ ]
                                                 }
-                                             }, {
-                                                "type" : "NamedTypeSpecifier",
-                                                "name" : "{http://hl7.org/fhir}Timing",
-                                                "annotation" : [ ]
                                              } ]
                                           } ],
                                           "operand" : [ {
@@ -1576,37 +1577,9 @@
                         }
                      } ],
                      "operand" : [ {
-                        "type" : "Retrieve",
-                        "dataType" : "{http://hl7.org/fhir}MedicationAdministration",
-                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration",
-                        "codeProperty" : "medication",
-                        "codeComparator" : "in",
-                        "annotation" : [ ],
-                        "codes" : {
-                           "type" : "ValueSetRef",
-                           "locator" : "37:32-37:50",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                           "name" : "Opioid Antagonist",
-                           "preserve" : true,
-                           "annotation" : [ ]
-                        },
-                        "include" : [ ],
-                        "codeFilter" : [ ],
-                        "dateFilter" : [ ],
-                        "otherFilter" : [ ]
-                     }, {
                         "type" : "Query",
                         "locator" : "37:3-37:51",
                         "annotation" : [ ],
-                        "resultTypeSpecifier" : {
-                           "type" : "ListTypeSpecifier",
-                           "annotation" : [ ],
-                           "elementType" : {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationAdministration",
-                              "annotation" : [ ]
-                           }
-                        },
                         "source" : [ {
                            "locator" : "37:3-37:51",
                            "alias" : "MR",
@@ -1736,6 +1709,35 @@
                               } ]
                            }
                         } ]
+                     }, {
+                        "type" : "Retrieve",
+                        "locator" : "37:3-37:51",
+                        "dataType" : "{http://hl7.org/fhir}MedicationAdministration",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}MedicationAdministration",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "codes" : {
+                           "type" : "ValueSetRef",
+                           "locator" : "37:32-37:50",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Opioid Antagonist",
+                           "preserve" : true,
+                           "annotation" : [ ]
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      } ]
                   }
                } ],
@@ -2135,6 +2137,10 @@
                                           "annotation" : [ ],
                                           "choice" : [ {
                                              "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}Timing",
+                                             "annotation" : [ ]
+                                          }, {
+                                             "type" : "NamedTypeSpecifier",
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                              "annotation" : [ ]
                                           }, {
@@ -2157,10 +2163,6 @@
                                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                 "annotation" : [ ]
                                              }
-                                          }, {
-                                             "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}Timing",
-                                             "annotation" : [ ]
                                           } ]
                                        } ],
                                        "operand" : [ {
@@ -2319,6 +2321,10 @@
                                        "annotation" : [ ],
                                        "choice" : [ {
                                           "type" : "NamedTypeSpecifier",
+                                          "name" : "{http://hl7.org/fhir}Timing",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "type" : "NamedTypeSpecifier",
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                           "annotation" : [ ]
                                        }, {
@@ -2341,10 +2347,6 @@
                                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                              "annotation" : [ ]
                                           }
-                                       }, {
-                                          "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}Timing",
-                                          "annotation" : [ ]
                                        } ]
                                     } ],
                                     "operand" : [ {
@@ -2458,6 +2460,10 @@
                                        "annotation" : [ ],
                                        "choice" : [ {
                                           "type" : "NamedTypeSpecifier",
+                                          "name" : "{http://hl7.org/fhir}Timing",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "type" : "NamedTypeSpecifier",
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                           "annotation" : [ ]
                                        }, {
@@ -2480,10 +2486,6 @@
                                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                              "annotation" : [ ]
                                           }
-                                       }, {
-                                          "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}Timing",
-                                          "annotation" : [ ]
                                        } ]
                                     } ],
                                     "operand" : [ {
@@ -2611,6 +2613,10 @@
                                        "annotation" : [ ],
                                        "choice" : [ {
                                           "type" : "NamedTypeSpecifier",
+                                          "name" : "{http://hl7.org/fhir}Timing",
+                                          "annotation" : [ ]
+                                       }, {
+                                          "type" : "NamedTypeSpecifier",
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                           "annotation" : [ ]
                                        }, {
@@ -2633,10 +2639,6 @@
                                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                              "annotation" : [ ]
                                           }
-                                       }, {
-                                          "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}Timing",
-                                          "annotation" : [ ]
                                        } ]
                                     } ],
                                     "operand" : [ {
@@ -2733,6 +2735,10 @@
                                              "annotation" : [ ],
                                              "choice" : [ {
                                                 "type" : "NamedTypeSpecifier",
+                                                "name" : "{http://hl7.org/fhir}Timing",
+                                                "annotation" : [ ]
+                                             }, {
+                                                "type" : "NamedTypeSpecifier",
                                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                 "annotation" : [ ]
                                              }, {
@@ -2755,10 +2761,6 @@
                                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                    "annotation" : [ ]
                                                 }
-                                             }, {
-                                                "type" : "NamedTypeSpecifier",
-                                                "name" : "{http://hl7.org/fhir}Timing",
-                                                "annotation" : [ ]
                                              } ]
                                           } ],
                                           "operand" : [ {
@@ -2836,6 +2838,10 @@
                                           "annotation" : [ ],
                                           "choice" : [ {
                                              "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}Timing",
+                                             "annotation" : [ ]
+                                          }, {
+                                             "type" : "NamedTypeSpecifier",
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                              "annotation" : [ ]
                                           }, {
@@ -2858,10 +2864,6 @@
                                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                 "annotation" : [ ]
                                              }
-                                          }, {
-                                             "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}Timing",
-                                             "annotation" : [ ]
                                           } ]
                                        } ],
                                        "operand" : [ {
@@ -2950,6 +2952,10 @@
                                           "annotation" : [ ],
                                           "choice" : [ {
                                              "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}Timing",
+                                             "annotation" : [ ]
+                                          }, {
+                                             "type" : "NamedTypeSpecifier",
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                              "annotation" : [ ]
                                           }, {
@@ -2972,10 +2978,6 @@
                                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                 "annotation" : [ ]
                                              }
-                                          }, {
-                                             "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}Timing",
-                                             "annotation" : [ ]
                                           } ]
                                        } ],
                                        "operand" : [ {

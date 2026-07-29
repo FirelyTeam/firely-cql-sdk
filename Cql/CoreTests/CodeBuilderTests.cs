@@ -249,6 +249,123 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Interval_WithChoiceTypedOperands_AnchorsPointType()
+        {
+            // Mirrors CMS1173 (issue #1350): the interval's ELM point type is
+            // Choice<DateTime, Interval<DateTime>> (e.g. resulting from FHIRHelpers.ToValue)
+            // and the operands are choice-typed, i.e. object in C#. With no type to anchor
+            // overload resolution on, the binder used to pick Interval(CqlDate, ...)
+            // arbitrarily and emit casts that threw InvalidCastException at runtime.
+            var choiceType = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
+                new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "DateTime"),
+                new Hl7.Cql.Elm.IntervalTypeSpecifier
+                {
+                    pointType = new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "DateTime"),
+                });
+
+            Hl7.Cql.Elm.Expression AsChoice() =>
+                new Hl7.Cql.Elm.As { asTypeSpecifier = choiceType, operand = new Hl7.Cql.Elm.Now() };
+
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "ChoiceIntervalTest", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings =
+                [
+                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
+                ],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "ChoiceInterval",
+                        context = "Patient",
+                        expression = new Hl7.Cql.Elm.Interval
+                        {
+                            low = AsChoice(),
+                            high = AsChoice(),
+                            lowClosed = true,
+                            highClosed = true,
+                            resultTypeSpecifier = new Hl7.Cql.Elm.IntervalTypeSpecifier { pointType = choiceType },
+                        },
+                    },
+                ],
+            };
+
+            var result = InvokeLibrary(elmLibrary, "ChoiceInterval");
+
+            Assert.IsInstanceOfType<Hl7.Cql.Primitives.CqlInterval<object>>(result);
+            var interval = (Hl7.Cql.Primitives.CqlInterval<object>)result;
+            Assert.IsInstanceOfType<Hl7.Cql.Primitives.CqlDateTime>(interval.low);
+            Assert.IsInstanceOfType<Hl7.Cql.Primitives.CqlDateTime>(interval.high);
+        }
+
+        [TestMethod]
+        public void Interval_WithChoiceTypedOperandAndNonNullableOperand_AnchorsNullablePointType()
+        {
+            // The point type anchored on the other operand can be a non-nullable value type:
+            // NegateLiteral translates Negate(2147483648) to an int-typed constant, not int?,
+            // and an ELM node without a result type of its own is not converted afterwards.
+            // 'as int' is not legal C# (CodeCast rejects it), so the anchored type has to be
+            // lifted to int? before the choice-typed operand is converted.
+            var integerChoiceType = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
+                Hl7.Cql.Elm.SystemTypes.IntegerType,
+                new Hl7.Cql.Elm.IntervalTypeSpecifier { pointType = Hl7.Cql.Elm.SystemTypes.IntegerType });
+
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "ChoiceIntervalIntTest", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings =
+                [
+                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
+                ],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "ChoiceIntervalWithIntLow",
+                        context = "Patient",
+                        expression = new Hl7.Cql.Elm.Interval
+                        {
+                            low = new Hl7.Cql.Elm.Negate
+                            {
+                                operand = new Hl7.Cql.Elm.Literal
+                                {
+                                    value = "2147483648",
+                                    valueType = Hl7.Cql.Elm.SystemTypes.IntegerType.name,
+                                    resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name,
+                                },
+                            },
+                            high = new Hl7.Cql.Elm.As
+                            {
+                                asTypeSpecifier = integerChoiceType,
+                                operand = new Hl7.Cql.Elm.Literal
+                                {
+                                    value = "5",
+                                    valueType = Hl7.Cql.Elm.SystemTypes.IntegerType.name,
+                                    resultTypeSpecifier = Hl7.Cql.Elm.SystemTypes.IntegerType,
+                                    resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name,
+                                },
+                                resultTypeSpecifier = integerChoiceType,
+                            },
+                            lowClosed = true,
+                            highClosed = true,
+                            resultTypeSpecifier = new Hl7.Cql.Elm.IntervalTypeSpecifier { pointType = integerChoiceType },
+                        },
+                    },
+                ],
+            };
+
+            var result = InvokeLibrary(elmLibrary, "ChoiceIntervalWithIntLow");
+
+            Assert.IsInstanceOfType<Hl7.Cql.Primitives.CqlInterval<object>>(result);
+            var interval = (Hl7.Cql.Primitives.CqlInterval<object>)result;
+            Assert.AreEqual(int.MinValue, interval.low);
+            Assert.AreEqual(5, interval.high);
+        }
+
+        [TestMethod]
         public void ChoiceType_WithDifferentTypes_MapsToObject()
         {
             var definitions = ProcessLibraryWithChoiceResult(
@@ -258,6 +375,106 @@ namespace CoreTests
 
             var (_, lambda) = definitions.SelectDefinitionsByLibraryName("ChoiceTypeTest-1.0.0").Single();
             Assert.AreEqual(typeof(IEnumerable<object>), lambda.ReturnType);
+        }
+
+        [TestMethod]
+        public void Union_OfCompatibleTuplesWithDifferentElementTypes_KeepsAllElements()
+        {
+            // Regression test for https://github.com/FirelyTeam/firely-cql-sdk/issues/1354:
+            // a union of two structurally compatible tuple lists whose element types differ
+            // (here FHIR.dateTime vs System.DateTime) was bound as
+            // Union<object>(left as IEnumerable<object>, right as IEnumerable<object>).
+            // The C# code generator lowers the compiler-generated tuple types to value
+            // tuples, for which IEnumerable<T> covariance does not apply, so both casts
+            // yielded null at runtime and the whole define silently evaluated to empty.
+            var stringType = new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "String");
+            var dateTimeType = new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "DateTime");
+            var fhirDateTimeType = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "dateTime");
+
+            Hl7.Cql.Elm.TupleTypeSpecifier TupleTypeWith(Hl7.Cql.Elm.TypeSpecifier whenType) => new()
+            {
+                element =
+                [
+                    new Hl7.Cql.Elm.TupleElementDefinition { name = "id", elementType = stringType },
+                    new Hl7.Cql.Elm.TupleElementDefinition { name = "when", elementType = whenType },
+                ],
+            };
+
+            Hl7.Cql.Elm.List TupleListWith(string id, Hl7.Cql.Elm.TypeSpecifier whenType)
+            {
+                var tupleType = TupleTypeWith(whenType);
+                return new Hl7.Cql.Elm.List
+                {
+                    resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = tupleType },
+                    element =
+                    [
+                        new Hl7.Cql.Elm.Tuple
+                        {
+                            resultTypeSpecifier = tupleType,
+                            element =
+                            [
+                                new Hl7.Cql.Elm.TupleElement
+                                {
+                                    name = "id",
+                                    value = new Hl7.Cql.Elm.Literal
+                                    {
+                                        value = id,
+                                        valueType = new System.Xml.XmlQualifiedName("{urn:hl7-org:elm-types:r1}String"),
+                                        resultTypeSpecifier = stringType,
+                                    },
+                                },
+                                new Hl7.Cql.Elm.TupleElement
+                                {
+                                    name = "when",
+                                    value = new Hl7.Cql.Elm.Null { resultTypeSpecifier = whenType },
+                                },
+                            ],
+                        },
+                    ],
+                };
+            }
+
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "TupleUnionTest", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings =
+                [
+                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
+                ],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "MixedTupleUnion",
+                        context = "Unfiltered",
+                        expression = new Hl7.Cql.Elm.Union
+                        {
+                            resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = TupleTypeWith(dateTimeType) },
+                            operand =
+                            [
+                                TupleListWith("a", fhirDateTimeType),
+                                TupleListWith("b", dateTimeType),
+                            ],
+                        },
+                    },
+                ],
+            };
+
+            var result = InvokeLibrary(elmLibrary, "MixedTupleUnion");
+
+            Assert.IsNotNull(result, "The union of two compatible tuple lists must not evaluate to null.");
+            var items = ((System.Collections.IEnumerable)result).Cast<object>().Where(item => item is not null).ToList();
+            Assert.AreEqual(2, items.Count);
+
+            // Both elements must have been converted to a single tuple type whose second
+            // item is the id; the generated code represents tuples as value tuples.
+            var ids = items
+                      .Select(item => item.GetType().GetField("Item2")?.GetValue(item) as string
+                                      ?? item.GetType().GetProperty("id")?.GetValue(item) as string)
+                      .OrderBy(id => id)
+                      .ToList();
+            CollectionAssert.AreEqual(new List<string> { "a", "b" }, ids);
         }
 
         private static CqlDefinitionDictionary ProcessLibraryWithChoiceResult(

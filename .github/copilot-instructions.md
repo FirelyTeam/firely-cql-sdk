@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.8.1
+**Version:** 3.9.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,8 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.9.0
+  - Added a new rule (4.4.11) requiring Mermaid diagrams to be pre-rendered to `.svg` and embedded as an image rather than left as a raw fenced code block, since GitHub's inline renderer doesn't reliably support `classDiagram` `namespace`/`style`/`<<stereotype>>` syntax used in this repo's diagrams; mechanics live in the new `generate-svg-from-mermaid` skill (also mirrored into `CLAUDE.md`).
 - 3.8.1
   - Simplified 5.1.4's CI skip-pattern description: `build/azure-pipelines.yml` now uses a single `^.*\.md$` pattern for all markdown files instead of separate entries per instruction-file location.
 - 3.8.0

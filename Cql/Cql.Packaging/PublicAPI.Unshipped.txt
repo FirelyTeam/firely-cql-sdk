@@ -1,1 +1,3 @@
 #nullable enable
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.MeasureGroupCodeSystem.get -> string?
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.MeasureGroupCodeSystem.init -> void
