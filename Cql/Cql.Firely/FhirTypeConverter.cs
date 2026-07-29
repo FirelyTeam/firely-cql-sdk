@@ -145,7 +145,8 @@ namespace Hl7.Cql.Fhir
             add((M.Integer c) => new M.PositiveInt(c.Value));
             add((M.Code c) => c.Value);
             add((M.Code c) => new CqlCode { code = c.Value });
-            add((M.Coding c) => new CqlCode { code = c.Code, system = c.System, version = c.Version, display = c.Display });
+            if (!hasCodingToCqlCodeConversion())
+                add((M.Coding c) => new CqlCode(c.Code, c.System, c.Version, c.Display));
             add((M.Date f) => f.TryToSystemDate(out var date) ? new CqlDate(date!.Years!.Value, date.Months, date.Days) : null);
             add((M.Date f) => f.TryToSystemDate(out var date) ? new CqlDateTime(date!.Years!.Value, date.Months, date.Days, 0, 0, 0, 0, 0, 0) : null);
             add((M.Date f) => f.ToString());
@@ -188,6 +189,19 @@ namespace Hl7.Cql.Fhir
             {
                 foreach (Type t in tos) converter.AddConversion(typeof(M.Parameters.ParameterComponent), t,
                     f => converter.Convert(((M.Parameters.ParameterComponent)f).Value, t)!);
+            }
+
+            bool hasCodingToCqlCodeConversion()
+            {
+                try
+                {
+                    _ = converter.Convert<CqlCode>(new M.Coding());
+                    return true;
+                }
+                catch (InvalidOperationException)
+                {
+                    return false;
+                }
             }
 
             // This is our implementation of FHIRHelpers.ToString() for the basic datatypes,

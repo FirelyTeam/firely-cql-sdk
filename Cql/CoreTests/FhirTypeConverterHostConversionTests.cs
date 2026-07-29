@@ -125,6 +125,16 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertCqlCodeToFhir_Null_WhenCodeIsEmptyAndNoMetadata()
+        {
+            var code = new CqlCode { code = "" };
+
+            var converted = FhirTypeConverter.ConvertCqlCodeToFhir(code);
+
+            Assert.IsNull(converted);
+        }
+
+        [TestMethod]
         public void ConvertCqlCodeToFhir_Coding_WhenSystemPopulated()
         {
             var code = new CqlCode("123", "http://example.org", "1.0", "Example display");
@@ -136,6 +146,36 @@ namespace CoreTests
             Assert.AreEqual("123", coding.Code);
             Assert.AreEqual("http://example.org", coding.System);
             Assert.AreEqual("1.0", coding.Version);
+            Assert.AreEqual("Example display", coding.Display);
+        }
+
+        [TestMethod]
+        public void ConvertCqlCodeToFhir_Coding_WhenOnlyVersionPopulated()
+        {
+            var code = new CqlCode { code = "123", version = "1.0" };
+
+            var converted = FhirTypeConverter.ConvertCqlCodeToFhir(code);
+
+            var coding = converted as Coding;
+            Assert.IsNotNull(coding);
+            Assert.AreEqual("123", coding.Code);
+            Assert.IsNull(coding.System);
+            Assert.AreEqual("1.0", coding.Version);
+            Assert.IsNull(coding.Display);
+        }
+
+        [TestMethod]
+        public void ConvertCqlCodeToFhir_Coding_WhenOnlyDisplayPopulated()
+        {
+            var code = new CqlCode { code = "123", display = "Example display" };
+
+            var converted = FhirTypeConverter.ConvertCqlCodeToFhir(code);
+
+            var coding = converted as Coding;
+            Assert.IsNotNull(coding);
+            Assert.AreEqual("123", coding.Code);
+            Assert.IsNull(coding.System);
+            Assert.IsNull(coding.Version);
             Assert.AreEqual("Example display", coding.Display);
         }
 

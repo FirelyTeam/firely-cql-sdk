@@ -104,8 +104,8 @@ namespace Hl7.Cql.Iso8601
         /// <param name="osMinute">The minute component of the date, or <see langword ="null"/>.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public DateTimeIso8601(int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, bool strict = false) :
-            this(Format(year, month, day, hour, minute, second, ms, osHour, osMinute, DateTimePrecision.Millisecond),
-                year, month, day, hour, minute, second, ms, osHour, osMinute, strict)
+            this(Format(year, month, day, hour, minute, second, ms, osHour, NormalizeOffsetMinute(osHour, osMinute), DateTimePrecision.Millisecond),
+                year, month, day, hour, minute, second, ms, osHour, NormalizeOffsetMinute(osHour, osMinute), strict)
         {
         }
 
@@ -117,8 +117,8 @@ namespace Hl7.Cql.Iso8601
         /// <param name="precision">The desired precision for this ISO date time.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real date times.</param>
         public DateTimeIso8601(DateTimeOffset dto, DateTimePrecision precision, bool strict = false) :
-            this(Format(dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, dto.Offset.Minutes, precision),
-                dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, dto.Offset.Minutes, strict, precision)
+            this(Format(dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, NormalizeOffsetMinute(dto.Offset.Hours, dto.Offset.Minutes), precision),
+                dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, NormalizeOffsetMinute(dto.Offset.Hours, dto.Offset.Minutes), strict, precision)
         {
         }
 
@@ -274,8 +274,7 @@ namespace Hl7.Cql.Iso8601
                             }
                             // set the timezone if time precision is desired
                             OffsetHour = osHour;
-                            if (osHour < 0 && osMinute > 0)
-                                osMinute *= -1;
+                            osMinute = NormalizeOffsetMinute(osHour, osMinute);
                             OffsetMinute = osMinute;
 
                         }
@@ -298,6 +297,14 @@ namespace Hl7.Cql.Iso8601
                 RationalOffset = (decimal)offset.TotalHours;
             String = @string;
         }
+
+        private static int? NormalizeOffsetMinute(int? offsetHour, int? offsetMinute) =>
+            (offsetHour, offsetMinute) switch
+            {
+                (< 0, > 0) => -offsetMinute,
+                (> 0, < 0) => -offsetMinute,
+                _ => offsetMinute
+            };
 
         public override string ToString() => String;
         public override bool Equals(object? obj) => Equals(String, obj?.ToString());

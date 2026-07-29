@@ -104,11 +104,31 @@ public class Iso8601OffsetTests
     }
 
     [TestMethod]
+    public void DateTimeIso8601_NegativeOffsetWithoutHours_RendersSign()
+    {
+        var dateTime = new DateTimeIso8601(2024, 1, 1, 10, 30, 0, null, 0, -30);
+
+        Assert.AreEqual(new TimeSpan(0, -30, 0), dateTime.DateTimeOffset.Offset);
+        Assert.AreEqual("2024-01-01T10:30:00-00:30", dateTime.ToString());
+    }
+
+    [TestMethod]
     public void DateTimeIso8601_PositiveOffsetWithoutHours_RendersSign()
     {
         var dateTime = new DateTimeIso8601(2024, 1, 1, 10, 30, 0, null, 0, 30);
 
         Assert.AreEqual(new TimeSpan(0, 30, 0), dateTime.DateTimeOffset.Offset);
         Assert.AreEqual("2024-01-01T10:30:00+00:30", dateTime.ToString());
+    }
+
+    [TestMethod]
+    public void TimeIso8601_PositiveHourNegativeMinute_NormalizesToPositiveOffset()
+    {
+        var time = new TimeIso8601(10, 30, 0, null, 5, -30);
+
+        Assert.AreEqual(new TimeSpan(5, 30, 0), time.Offset);
+        Assert.AreEqual(5, time.OffsetHour);
+        Assert.AreEqual(30, time.OffsetMinute);
+        Assert.AreEqual("10:30:00+05:30", time.ToString());
     }
 }
