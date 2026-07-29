@@ -33,7 +33,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "DecimalNeg10Pow28ToZeroOneStepDecimalMinValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
 
             { "ExpandPer0D1", "Throws NotSupportedException: a fractional per over integer intervals would produce Decimal intervals (value-dependent typing); the reference Java translator rejects this expression at compile time." },
-            { "ExpandIntervalPer2", "Not working" },
 
             { "TestExceptNull", "This is ambiguous with every valid interval overload." }
         };
@@ -51,7 +50,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "DateTimeUncertain", "We don't support uncertainty" },
             { "DecimalMaxValue", "Our implementation returns a larger value" },
             { "DecimalMinValue", "Our implementation returns a smaller value" },
-            { "EquivEqCM1M01", "Returns false: CqlQuantityCqlComparer.EquivalentValues does not canonicalize UCUM units like CompareValues does." },
             { "ReplaceMatchesSpaces", "Returns 'All\\$that...': .NET keeps backslash escapes in the Regex.Replace substitution literally, unlike Java's Matcher." },
             { "SortDatesAsc", "Sort tests shouldn't contain differing precision" },
             { "SortDatesDesc", "Sort tests shouldn't contain differing precision" },
