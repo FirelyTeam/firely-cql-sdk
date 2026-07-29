@@ -368,6 +368,13 @@ namespace Hl7.Cql.Fhir
         /// the successor of an open low bound and the predecessor of an open high bound, stepping by <paramref name="step"/> -
         /// the same minimum precision value the engine's ToClosed() applies for the interval's point type.
         /// </summary>
+        /// <remarks>
+        /// The step is applied in <c>decimal</c> arithmetic. This intentionally diverges from the engine's
+        /// <c>Successor</c>/<c>Predecessor</c> for Integer and Long, which use unchecked integer arithmetic and wrap
+        /// at <c>int.MaxValue</c>/<c>long.MaxValue</c>. FHIR <c>Quantity</c> values are <c>decimal</c>-based, so
+        /// representing <c>int.MaxValue + 1</c> as 2147483648 is more meaningful than wrapping to <c>int.MinValue</c>.
+        /// These boundary values are practically unreachable in real CQL expressions.
+        /// </remarks>
         private static M.Range NumericIntervalToRange(decimal? low, decimal? high, bool? lowClosed, bool? highClosed, decimal step)
         {
             var range = new M.Range();

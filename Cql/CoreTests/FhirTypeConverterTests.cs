@@ -700,6 +700,23 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertCqlDecimalInterval_Range_ConvertsOpenLowBoundToClosed()
+        {
+            // Open low bound: successor of 1.05 is 1.05 + MinDecimalPrecisionValue = 1.05000001.
+            var decimalInterval = new CqlInterval<decimal?>(
+                1.05m, 4.0m, false, true
+            );
+            var converted = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(decimalInterval);
+
+            Assert.IsNotNull(converted);
+
+            Assert.AreEqual(1.05000001m, converted.Low.Value);
+            Assert.AreEqual(8, QuantityPrecisionOf(converted.Low));
+            Assert.AreEqual(4.0m, converted.High.Value);
+            Assert.AreEqual(1, QuantityPrecisionOf(converted.High));
+        }
+
+        [TestMethod]
         public void ConvertCqlIntInterval_Range()
         {
             var quantityInterval = new CqlInterval<int?>(
@@ -734,6 +751,32 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertCqlIntInterval_Range_OmitsBoundForNullLowEndpoint()
+        {
+            var intInterval = new CqlInterval<int?>(null, 10, false, true);
+            var converted = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(intInterval);
+
+            Assert.IsNotNull(converted);
+
+            Assert.IsNull(converted.Low);
+            Assert.AreEqual(10, converted.High.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted.High));
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntInterval_Range_OmitsBoundForNullHighEndpoint()
+        {
+            var intInterval = new CqlInterval<int?>(1, null, true, false);
+            var converted = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(intInterval);
+
+            Assert.IsNotNull(converted);
+
+            Assert.AreEqual(1, converted.Low.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted.Low));
+            Assert.IsNull(converted.High);
+        }
+
+        [TestMethod]
         public void ConvertCqlLongInterval_Range()
         {
             var longInterval = new CqlInterval<long?>(
@@ -762,7 +805,35 @@ namespace CoreTests
             Assert.IsNotNull(converted);
 
             Assert.AreEqual(2, converted.Low.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted.Low));
             Assert.AreEqual(9, converted.High.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted.High));
+        }
+
+        [TestMethod]
+        public void ConvertCqlLongInterval_Range_OmitsBoundForNullLowEndpoint()
+        {
+            var longInterval = new CqlInterval<long?>(null, 10L, false, true);
+            var converted = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(longInterval);
+
+            Assert.IsNotNull(converted);
+
+            Assert.IsNull(converted.Low);
+            Assert.AreEqual(10, converted.High.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted.High));
+        }
+
+        [TestMethod]
+        public void ConvertCqlLongInterval_Range_OmitsBoundForNullHighEndpoint()
+        {
+            var longInterval = new CqlInterval<long?>(1L, null, true, false);
+            var converted = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(longInterval);
+
+            Assert.IsNotNull(converted);
+
+            Assert.AreEqual(1, converted.Low.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted.Low));
+            Assert.IsNull(converted.High);
         }
 
         [TestMethod]
@@ -777,6 +848,37 @@ namespace CoreTests
 
             Assert.IsNull(converted.Low);
             Assert.AreEqual(3.99999999m, converted.High.Value);
+        }
+
+        [TestMethod]
+        public void ConvertCqlInterval_Range_OmitsBoundForNullHighEndpoint()
+        {
+            var decimalInterval = new CqlInterval<decimal?>(1.0m, null, true, false);
+            var converted = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(decimalInterval);
+
+            Assert.IsNotNull(converted);
+
+            Assert.AreEqual(1.0m, converted.Low.Value);
+            Assert.AreEqual(1, QuantityPrecisionOf(converted.Low));
+            Assert.IsNull(converted.High);
+        }
+
+        [TestMethod]
+        public void ConvertCqlInterval_Range_BothBoundsNull_ReturnsEmptyRange()
+        {
+            var decimalInterval = new CqlInterval<decimal?>(null, null, false, false);
+            var converted = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(decimalInterval);
+
+            Assert.IsNotNull(converted);
+            Assert.IsNull(converted.Low);
+            Assert.IsNull(converted.High);
+        }
+
+        [TestMethod]
+        public void ConvertNullCqlDecimalInterval_Range_ReturnsNull()
+        {
+            var converted = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>((CqlInterval<decimal?>)null!);
+            Assert.IsNull(converted);
         }
 
         [TestMethod]
