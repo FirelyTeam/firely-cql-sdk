@@ -98,6 +98,7 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 ## 6.0. Appendix: Version History
 
 - 3.10.0
+  - Updated 4.5.1: release-note entries now go in a new fragment file under `docs/releases/vnext/` (one per PR) instead of directly editing the shared `vnext-release-notes.md`, which caused recurring merge conflicts between parallel PRs. Transitional exception noted for PRs that already added a direct entry before this convention existed. See `docs/releases/vnext/README.md` for the naming/format convention and [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432) for the full rationale; mirrored into `CLAUDE.md`.
   - Added 5.5 (Running Integration Runner Benchmarks): links to the new `run-integration-benchmarks` skill for running the `Firely.Cql.Sdk.Integration.Runner` submodule's BenchmarkDotNet project, appending a dated baseline file, and comparing medians against the most recent prior baseline.
 - 3.9.0
   - Added a new rule (4.4.11) requiring Mermaid diagrams to be pre-rendered to `.svg` and embedded as an image rather than left as a raw fenced code block, since GitHub's inline renderer doesn't reliably support `classDiagram` `namespace`/`style`/`<<stereotype>>` syntax used in this repo's diagrams; mechanics live in the new `generate-svg-from-mermaid` skill (also mirrored into `CLAUDE.md`).

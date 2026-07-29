@@ -179,6 +179,6 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 4.5. Release Notes
 
-4.5.1 **Any breaking change** (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in [docs/releases/vnext-release-notes.md](../../docs/releases/vnext-release-notes.md) in the same PR that introduces it — not deferred to release time.
+4.5.1 **Any breaking change** (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in the same PR that introduces it — not deferred to release time. Add a new fragment file under [docs/releases/vnext/](../../docs/releases/vnext/README.md) (one file per PR — see that folder's README for the naming/format convention) rather than editing the shared `vnext-release-notes.md` directly, which causes merge conflicts between parallel PRs ([#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)). **Transitional exception:** a PR that already added its entry directly to `vnext-release-notes.md` before this convention existed doesn't need to move it — only write new entries as fragments.
 
-4.5.2 For the full procedure to turn that accumulated content into a versioned release note (template, README version sync, resetting vnext-release-notes.md), follow [cut-release-notes](../../.claude/skills/cut-release-notes/SKILL.md).
+4.5.2 For the full procedure to turn that accumulated content into a versioned release note (template, README version sync, consolidating and clearing `docs/releases/vnext/` fragments), follow [cut-release-notes](../../.claude/skills/cut-release-notes/SKILL.md).
