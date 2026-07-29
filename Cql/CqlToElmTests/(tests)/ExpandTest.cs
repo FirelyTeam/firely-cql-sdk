@@ -82,6 +82,30 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void ExpandLongIntervalPer0()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[1L, 10L] } per 0");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            Run(expand, lib).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ExpandDateTimeIntervalPer0Milliseconds()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[@2023-01-01T00:00:00.000Z, @2023-01-01T00:00:00.001Z] } per 0 milliseconds");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            Run(expand, lib).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ExpandTimeIntervalPer0Milliseconds()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[@T00:00:00.000, @T00:00:00.001] } per 0 milliseconds");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            Run(expand, lib).Should().BeNull();
+        }
+
+        [TestMethod]
         public void ExpandDecimalIntervalPer0D5()
         {
             var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand { Interval[1.0, 2.0] } per 0.5");
@@ -108,6 +132,46 @@ namespace Hl7.Cql.CqlToElm.Test
         public void ExpandSingleIntegerIntervalPer0()
         {
             var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand Interval[1, 10] per 0");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            Run(expand, lib).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ExpandSingleDecimalIntervalPerNegative()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand Interval[1.0, 2.0] per -1");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            Run(expand, lib).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ExpandSingleLongIntervalPer0()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand Interval[1L, 10L] per 0");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            Run(expand, lib).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ExpandSingleDateIntervalPer0Days()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand Interval[@2018-01-01, @2018-01-04] per 0 days");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            Run(expand, lib).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ExpandSingleDateTimeIntervalPer0Milliseconds()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand Interval[@2023-01-01T00:00:00.000Z, @2023-01-01T00:00:00.001Z] per 0 milliseconds");
+            var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
+            Run(expand, lib).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void ExpandSingleTimeIntervalPer0Milliseconds()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("expand Interval[@T00:00:00.000, @T00:00:00.001] per 0 milliseconds");
             var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
             Run(expand, lib).Should().BeNull();
         }
