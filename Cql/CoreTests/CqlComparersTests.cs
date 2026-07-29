@@ -417,21 +417,31 @@ public class CqlComparersTests
     }
 
     /// <summary>
-    /// Quantities that are not equal are still allowed to collide, but the everyday cases must not:
-    /// a different magnitude in the same unit, and the same magnitude in an incommensurable unit.
+    /// Quantities that are not equal should be kept as separate elements by <c>Distinct</c>.
+    /// Verifies semantic behavior (via <c>Distinct</c>) rather than asserting hash inequality —
+    /// hash functions are permitted to collide, and asserting inequality would over-specify
+    /// and risk flakiness.
     /// </summary>
     [TestMethod]
-    public void CqlQuantity_UnequalQuantities_HashCodesDiffer()
+    public void CqlQuantity_UnequalQuantities_AreNotDeduplicated()
     {
-        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
 
-        Assert.AreNotEqual(
-            comparers.GetHashCode(new CqlQuantity(1.0m, "cm")),
-            comparers.GetHashCode(new CqlQuantity(1.01m, "cm")));
+        // Different magnitude in the same unit must not be collapsed.
+        var differentMagnitude = operators.Distinct<CqlQuantity>(
+        [
+            new CqlQuantity(1.0m, "cm"),
+            new CqlQuantity(1.01m, "cm"),
+        ])!.ToList();
+        Assert.AreEqual(2, differentMagnitude.Count);
 
-        Assert.AreNotEqual(
-            comparers.GetHashCode(new CqlQuantity(1m, "cm")),
-            comparers.GetHashCode(new CqlQuantity(1m, "g")));
+        // Incommensurable units (cm vs g) must not be collapsed.
+        var incommensurable = operators.Distinct<CqlQuantity>(
+        [
+            new CqlQuantity(1m, "cm"),
+            new CqlQuantity(1m, "g"),
+        ])!.ToList();
+        Assert.AreEqual(2, incommensurable.Count);
     }
 
     /// <summary>
