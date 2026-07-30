@@ -33,6 +33,7 @@ CompositeDataSource["<b>CompositeDataSource</b><br/><div style='text-align:left;
 IValueSetDictionary["<b>IValueSetDictionary</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstraction for value-set membership lookups during CQL evaluation.</div>"]
 HashValueSetDictionary["<b>HashValueSetDictionary</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Default in-memory IValueSetDictionary backed by a dictionary of code sets.</div>"]
 DefaultUcumMetricService["<b>DefaultUcumMetricService</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(internal) Default IMetricService that wraps FhirMetricService from Fhir.Metrics 1.4.0, used when FhirCqlContextOptions.MetricService is null.</div>"]
+UcumConversionExtensionsDefault["<b>UcumConversionExtensions.Default</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Static default IMetricService accessor used when the runtime is created without a custom metric-service override.</div>"]
 end
 
 subgraph Abstractions["Cql.Abstractions"]
@@ -60,6 +61,7 @@ CompositeDataSource -->|implements| IDataSource
 HashValueSetDictionary -->|implements| IValueSetDictionary
 DefaultUcumMetricService -->|implements| IMetricService
 FhirMetricService -.->|wrapped by| DefaultUcumMetricService
+UcumConversionExtensionsDefault -.->|returns| DefaultUcumMetricService
 
 FhirCqlContextOptions -.->|read by| FhirCqlContext
 ModelInspector -.->|injected| FhirTypeConverter
@@ -69,6 +71,9 @@ FhirTypeConverter -.->|creates| TypeConverter
 IMetricService -.->|injected| CqlComparers
 IMetricService -.->|injected| UnitConverter
 IMetricService -.->|injected| CqlOperators
+UcumConversionExtensionsDefault -.->|fallback| CqlComparers
+UcumConversionExtensionsDefault -.->|fallback| UnitConverter
+UcumConversionExtensionsDefault -.->|fallback| CqlOperators
 
 FhirTypeResolver -.->|injected| CqlOperators
 TypeConverter -.->|injected| CqlOperators
@@ -80,7 +85,3 @@ FhirEnumComparer -.->|injected| CqlOperators
 
 FhirCqlContext -.->|creates| CqlContext
 ICqlOperators -.->|injected| CqlContext
-
-style IMetricService fill:#AFEEEE
-style TypeConverter fill:#AFEEEE
-style ModelInspector fill:#AFEEEE
