@@ -46,11 +46,15 @@ namespace Hl7.Cql.Operators
         {
             if (argument?.value == null || low?.value == null || high?.value == null)
                 return null;
-            else if (argument.unit != low.unit && argument.unit != high.unit)
-                throw new NotSupportedException("Only like quantity units are comparable.");
             else
-                return Between(argument.value, low.value, high.value);
-
+            {
+                var lowCompare = Comparer.Compare(argument, low, null);
+                var highCompare = Comparer.Compare(argument, high, null);
+                if (lowCompare == null || highCompare == null)
+                    return null;
+                else
+                    return lowCompare >= 0 && highCompare <= 0;
+            }
         }
 
         public bool? Between(CqlDate? argument, CqlDate? low, CqlDate? high)

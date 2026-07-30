@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -8,36 +8,39 @@
 
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
+using M = global::Fhir.Metrics;
 
 namespace CoreTests
 {
     [TestClass]
     public class UcumTests
     {
+        private static readonly M.IMetricService Service = UcumConversionExtensions.Default;
+
         [TestMethod]
         public void NormalizesPrefixes()
         {
             var q = new CqlQuantity(3.14M, "kg");
-            var success = q.TryCanonicalize(out var canonical);
+            var success = q.TryCanonicalize(Service, out var canonical);
             success.Should().BeTrue();
             canonical.unit.Should().Be("g");
             canonical.value.Should().Be(3.14M * 1000.0M);
 
             q = new CqlQuantity(2.5M, "h");
-            success = q.TryCanonicalize(out canonical);
+            success = q.TryCanonicalize(Service, out canonical);
             success.Should().BeTrue();
             canonical.unit.Should().Be("s");
             canonical.value.Should().Be(2.5M * 60.0M * 60.0M);
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void ConvertsUnits()
         {
             var q = new CqlQuantity(3.14M, "kg");
-            var success = q.TryConvert("g", out var converted);
+            var success = q.TryConvert("g", Service, out var converted);
             success.Should().BeTrue();
             converted.unit.Should().Be("g");
-            converted.value.Should().Be(3.14M * 1000.0M * 1000.0M);
+            converted.value.Should().Be(3.14M * 1000.0M);
         }
 
         #region Calendar Duration Unit Conversions (FHIR simplification)
@@ -54,7 +57,7 @@ namespace CoreTests
         public void ConvertCalendarDuration_CqlToUcum(string cqlUnit, string ucumUnit)
         {
             var q = new CqlQuantity(1m, cqlUnit);
-            var success = q.TryConvert(ucumUnit, out var converted);
+            var success = q.TryConvert(ucumUnit, Service, out var converted);
             success.Should().BeTrue();
             converted.Should().NotBeNull();
             converted!.value.Should().Be(1m);
@@ -67,7 +70,7 @@ namespace CoreTests
             // Test that converting from "day" to something that's not "d" doesn't use the calendar mapping
             // and falls back to standard UCUM conversion (which would fail for this case)
             var q = new CqlQuantity(1m, "day");
-            var success = q.TryConvert("hour", out var converted);
+            var success = q.TryConvert("hour", Service, out var converted);
 
             // This should fail because "day" is not a valid UCUM unit for the standard conversion path
             success.Should().BeFalse();
@@ -90,7 +93,7 @@ namespace CoreTests
         public void ConvertCalendarDuration_PluralCqlToUcum(string cqlUnit, string ucumUnit)
         {
             var q = new CqlQuantity(5m, cqlUnit);
-            var success = q.TryConvert(ucumUnit, out var converted);
+            var success = q.TryConvert(ucumUnit, Service, out var converted);
             success.Should().BeTrue();
             converted.Should().NotBeNull();
             converted!.value.Should().Be(5m);
@@ -109,7 +112,7 @@ namespace CoreTests
         public void CanonicalizeCalendarDuration_PluralForm(string pluralUnit, string ucumUnit)
         {
             var q = new CqlQuantity(10m, pluralUnit);
-            var success = q.TryCanonicalize(out var canonical);
+            var success = q.TryCanonicalize(Service, out var canonical);
             success.Should().BeTrue();
             canonical.Should().NotBeNull();
             // All time units should canonicalize to seconds
@@ -126,15 +129,15 @@ namespace CoreTests
         {
             var q1 = new CqlQuantity(7m, singular);
             var q2 = new CqlQuantity(7m, plural);
-            
-            var success1 = q1.TryCanonicalize(out var canonical1);
-            var success2 = q2.TryCanonicalize(out var canonical2);
-            
+
+            var success1 = q1.TryCanonicalize(Service, out var canonical1);
+            var success2 = q2.TryCanonicalize(Service, out var canonical2);
+
             success1.Should().BeTrue();
             success2.Should().BeTrue();
             canonical1.Should().NotBeNull();
             canonical2.Should().NotBeNull();
-            
+
             // Both should canonicalize to the same unit and value
             canonical1!.unit.Should().Be(canonical2!.unit);
             canonical1.value.Should().Be(canonical2.value);
@@ -144,7 +147,7 @@ namespace CoreTests
         public void ConvertCalendarDuration_PreservesDecimalPrecision_Plural()
         {
             var q = new CqlQuantity(37.5m, "weeks");
-            var success = q.TryConvert("wk", out var converted);
+            var success = q.TryConvert("wk", Service, out var converted);
             success.Should().BeTrue();
             converted.Should().NotBeNull();
             converted!.value.Should().Be(37.5m);

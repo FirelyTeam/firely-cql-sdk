@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Fhir.Metrics;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 
@@ -19,12 +20,15 @@ partial class CqlComparers
     /// </summary>
     private class CqlQuantityCqlComparer(
         CqlComparers valueComparer,
-        ICqlComparer<string> unitComparer) :
+        ICqlComparer<string> unitComparer,
+        IMetricService? metricService = null) :
         CqlComparer<CqlQuantity>(CqlComparerEqualsImplementation.Compare)
     {
         private CqlComparers ValueComparer { get; } = valueComparer ?? throw new ArgumentNullException(nameof(valueComparer));
 
         private ICqlComparer<string> UnitComparer { get; } = unitComparer ?? throw new ArgumentNullException(nameof(unitComparer));
+
+        private IMetricService MetricService { get; } = metricService ?? UcumConversionExtensions.Default;
 
         protected override int? CompareValues(
             CqlQuantity x,
@@ -38,13 +42,12 @@ partial class CqlComparers
                 return valueComparison;
             }
 
-            // If no direct comparison is possible, normalize the units using UCUM and
             // redo the comparison. TryCanonicalize succeeds for any valid UCUM unit, so the
             // canonical units have to agree before the values may be compared: quantities of
             // different base metrics are incommensurable, and comparing their canonical values
             // would answer as if both were dimensionless (1 'cm' = 0.01 'g').
-            if (x.TryCanonicalize(out var left1)
-                && y.TryCanonicalize(out var right1)
+            if (x.TryCanonicalize(MetricService, out var left1)
+                && y.TryCanonicalize(MetricService, out var right1)
                 && left1!.unit == right1!.unit)
             {
                 var valueComparison = ValueComparer.Compare(left1.value!, right1.value!, precision);
@@ -80,8 +83,8 @@ partial class CqlComparers
             // never may -- it "will always return true or false": units that cannot be
             // canonicalized, or that canonicalize to different base metrics (incommensurable), are
             // simply not equivalent (spec example: 3.5 'cm2' ~ 3.5 'cm' is false).
-            if (x.TryCanonicalize(out var left1)
-                && y.TryCanonicalize(out var right1)
+            if (x.TryCanonicalize(MetricService, out var left1)
+                && y.TryCanonicalize(MetricService, out var right1)
                 && left1!.unit == right1!.unit)
             {
                 var valueComparison = ValueComparer.Equivalent(left1.value, right1.value, precision);
@@ -107,13 +110,10 @@ partial class CqlComparers
             //     unequal — so no consistent hash exists for the '1' case.
             //   Rounding-based equivalence: EquivalentValues rounds to the least-precise operand,
             //     which is also non-transitive (0.15 ~ 0.2, 0.2 ~ 0.24, 0.15 !~ 0.24).
-            //   Dimension-blind equality (#1417): until that bug is fixed, CompareValues returns 0
-            //     for incommensurable units after canonicalization; once #1417 lands the hash will
-            //     naturally agree with the corrected equality.
             //
             // Skip canonicalization for null/wildcard units: these can never benefit from unit
             // conversion (null has no UCUM meaning, '1' is already documented as unhashable above).
-            if (value.unit != null && value.unit != "1" && value.TryCanonicalize(out var canonical))
+            if (value.unit != null && value.unit != "1" && value.TryCanonicalize(MetricService, out var canonical))
                 return combine(canonical!.value, canonical.unit);
 
             // A unit UCUM cannot canonicalize -- and a quantity whose value or unit is null, which
@@ -123,5 +123,6 @@ partial class CqlComparers
             static int combine(decimal? quantityValue, string? unit) =>
                 HashCode.Combine(quantityValue is { } v ? NormalizeDecimalScale(v) : (decimal?)null, unit);
         }
+
     }
 }

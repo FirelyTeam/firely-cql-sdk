@@ -54,6 +54,20 @@ Mermaid source: [dependency-diagrams.cql-toolkit-services.mmd](diagrams/dependen
 
 ![CqlToolkitServices Dependency Diagram](diagrams/dependency-diagrams.cql-toolkit-services.svg)
 
+## Runtime Services Dependency Diagram
+
+Services and construction flow for CQL runtime evaluation in the FHIR binding (`FhirCqlContext`).
+
+**Remarks:**
+* Unlike the three toolkit diagrams above, this layer is not represented by a DI container registration class; the graph shows factory-time construction and injection wiring from `FhirCqlContext.CreateOperators`
+* Excludes Logger and options members not used for runtime operator construction
+* The diagram highlights `FhirCqlContextOptions.MetricService` (`IMetricService`) and the default fallback path via `UcumConversionExtensions.Default`/`DefaultUcumMetricService`
+* No scoped-vs-singleton color convention is applied here because lifetime is a mix of per-context construction and static defaults rather than explicit container scopes
+
+Mermaid source: [dependency-diagrams.runtime-services.mmd](diagrams/dependency-diagrams.runtime-services.mmd)
+
+![Runtime Services Dependency Diagram](diagrams/dependency-diagrams.runtime-services.svg)
+
 ## CodeModel Expression Types
 
 The `Hl7.Cql.Compiler.CodeModel` types that make up the typed C# code-model IR (intermediate

@@ -22,6 +22,7 @@ This package enables CQL expressions to work with FHIR resources and data types 
 
 - **Hl7.Cql.Runtime**: Core CQL runtime components
 - **Hl7.Fhir.R4**: Firely's FHIR R4 .NET SDK
+- **Fhir.Metrics**: Open-source UCUM unit conversion library
 
 ## Further Reading
 
