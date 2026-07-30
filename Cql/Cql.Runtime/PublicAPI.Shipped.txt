@@ -724,3 +724,4 @@ Hl7.Cql.Runtime.CqlContext.GetOrCompute<T>(long cacheKey, System.Func<Hl7.Cql.Ru
 Hl7.Cql.Runtime.CqlContext.UseNewCache(int initialCapacity = 1024) -> void
 const Hl7.Cql.Runtime.CqlContext.CacheInitialCapacity = 1024 -> int
 const Hl7.Cql.Runtime.CqlContext.MinimumCacheInitialCapacity = 16 -> int
+Hl7.Cql.Runtime.CqlLibraryVersion.CompareTo(Hl7.Cql.Runtime.CqlLibraryVersion other) -> int

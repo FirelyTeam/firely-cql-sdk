@@ -166,3 +166,5 @@ virtual Hl7.Cql.Packaging.Toolkit.Extensions.SaveFhirResourcesToDirectoriesOptio
 virtual Hl7.Cql.Packaging.Toolkit.Extensions.SaveFhirResourcesToDirectoriesOptions.EqualityContract.get -> System.Type!
 virtual Hl7.Cql.Packaging.Toolkit.Extensions.SaveFhirResourcesToDirectoriesOptions.Equals(Hl7.Cql.Packaging.Toolkit.Extensions.SaveFhirResourcesToDirectoriesOptions? other) -> bool
 virtual Hl7.Cql.Packaging.Toolkit.Extensions.SaveFhirResourcesToDirectoriesOptions.PrintMembers(System.Text.StringBuilder! builder) -> bool
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.MeasureGroupCodeSystem.get -> string?
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.MeasureGroupCodeSystem.init -> void
