@@ -11,51 +11,77 @@ flowchart TB
 
 subgraph Firely["Cql.Firely"]
 direction TB
-FhirCqlContext["<b>FhirCqlContext</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Factory entry point that creates a runtime CqlContext for FHIR model evaluation from a Bundle or IDataSource.</div>"]
-FhirCqlContextOptions["<b>FhirCqlContextOptions</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Runtime configuration surface for context creation, including optional overrides for TypeConverter and IMetricService.</div>"]
-FhirTypeConverter["<b>FhirTypeConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Factory/caching helper that builds the runtime TypeConverter for FHIR-to-CQL and CQL-to-FHIR conversions.</div>"]
-FhirTypeResolver["<b>FhirTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Runtime type resolver used by CqlOperators to bind model/member types during evaluation.</div>"]
+FhirCqlContext["<b>FhirCqlContext</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Static factory that creates a CqlContext wired for FHIR model binding, reading all configuration from FhirCqlContextOptions.</div>"]
+FhirCqlContextOptions["<b>FhirCqlContextOptions</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Configuration for FhirCqlContext: MetricService (optional IMetricService override), OverrideTypeConverter, OverrideModelInspector, OverrideFhirTypeConverterCacheSize, ResourceIdComparer, CodeInOperatorType, OverrideRetrieveProfileFilter.</div>"]
+FhirTypeConverter["<b>FhirTypeConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Static factory that creates a TypeConverter with all FHIR type conversions registered, backed by a ModelInspector (defaulting to ModelInfo.ModelInspector).</div>"]
+FhirTypeResolver["<b>FhirTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>BaseTypeResolver extended with FHIR resource/type mappings; FhirCqlContext always uses the FhirTypeResolver.Default singleton (backed by ModelInfo.ModelInspector).</div>"]
+BundleDataSource["<b>BundleDataSource</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>IDataSource backed by a FHIR Bundle POCO; created by FhirCqlContext.ForBundle when a bundle is supplied.</div>"]
+FhirEnumComparer["<b>FhirEnumComparer</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>ICqlComparer for FHIR enumeration types; injected into CqlOperators as the enumComparer parameter.</div>"]
 end
 
 subgraph Runtime["Cql.Runtime"]
 direction TB
-CqlContext["<b>CqlContext</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Execution context that holds ICqlOperators and parameter values for evaluating compiled CQL definitions.</div>"]
-CqlOperators["<b>CqlOperators</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Core runtime implementation of ICqlOperators used by generated expression delegates at evaluation time.</div>"]
-TypeConverter["<b>TypeConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Value-conversion engine used by CqlOperators for runtime coercions and type conversions.</div>"]
-CqlComparers["<b>CqlComparers</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Runtime comparer registry used by CqlOperators for CQL ordering/equality semantics, including quantity comparison.</div>"]
-UnitConverter["<b>UnitConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Runtime unit-conversion service used by CqlOperators for quantity conversion checks and explicit conversions.</div>"]
+CqlContext["<b>CqlContext</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Runtime execution context: holds the ICqlOperators implementation plus the input parameter dictionary for one CQL evaluation run.</div>"]
+ICqlOperators["<b>ICqlOperators</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Primary CQL runtime interface — all generated CQL libraries call through it for arithmetic, comparison, type-conversion, and data-access operations.</div>"]
+CqlOperators["<b>CqlOperators</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>ICqlOperators implementation: dispatches arithmetic/comparison to CqlComparers and UnitConverter, routes cross-unit quantity operations through IMetricService, and delegates retrieves to IDataSource.</div>"]
+CqlComparers["<b>CqlComparers</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>ICqlComparer implementation that dispatches to per-type comparers; its CqlQuantityCqlComparer uses IMetricService for cross-unit quantity comparisons.</div>"]
+UnitConverter["<b>UnitConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>IUnitConverter implementation that builds and caches unit-conversion functions on demand via IMetricService.TryConvertTo.</div>"]
+IUnitConverter["<b>IUnitConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstraction for unit-conversion functions; injected into CqlOperators for ConvertQuantity and CanConvertQuantity operations.</div>"]
+TypeConverter["<b>TypeConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Runtime value-conversion engine used to coerce values between CQL/.NET types.</div>"]
+IDataSource["<b>IDataSource</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstraction for the runtime data-access layer (retrieves, filters, and lookups over any backing store).</div>"]
+CompositeDataSource["<b>CompositeDataSource</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Empty IDataSource used as the default when no data source is supplied (all retrieves return empty).</div>"]
+IValueSetDictionary["<b>IValueSetDictionary</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstraction for value-set membership lookups during CQL evaluation.</div>"]
+HashValueSetDictionary["<b>HashValueSetDictionary</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Default in-memory IValueSetDictionary backed by a dictionary of code sets.</div>"]
+DefaultUcumMetricService["<b>DefaultUcumMetricService</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(internal) Default IMetricService that wraps FhirMetricService from Fhir.Metrics 1.4.0, used when FhirCqlContextOptions.MetricService is null.</div>"]
+UcumConversionExtensionsDefault["<b>UcumConversionExtensions.Default</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Static default IMetricService accessor used when the runtime is created without a custom metric-service override.</div>"]
 end
 
-subgraph Metrics["Fhir.Metrics + UCUM wrapper"]
+subgraph Abstractions["Cql.Abstractions"]
 direction TB
-IMetricService["<b>IMetricService</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Metric/UCUM abstraction injected into runtime quantity arithmetic and conversions.</div>"]
-UcumDefault["<b>UcumConversionExtensions.Default</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Static default IMetricService provider used when no custom metric service is injected.</div>"]
-DefaultUcumMetricService["<b>DefaultUcumMetricService</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Internal default IMetricService implementation used by UcumConversionExtensions.Default.</div>"]
-FhirMetricService["<b>FhirMetricService</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Open-source Fhir.Metrics implementation that performs UCUM canonicalization, conversion, compare, add, subtract, multiply, and divide.</div>"]
+ICqlComparer["<b>ICqlComparer</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Core comparison/equivalence abstraction: compare(x, y, precision) → int?, equals(x, y, precision) → bool?.</div>"]
 end
 
-FhirCqlContextOptions -.->|configured| FhirCqlContext
-FhirCqlContextOptions -.->|override| TypeConverter
-FhirCqlContextOptions -.->|injects| IMetricService
+subgraph FhirMetrics["Fhir.Metrics (external)"]
+direction TB
+IMetricService["<b>IMetricService</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>UCUM unit-arithmetic interface: TryAdd, TrySubtract, TryMultiply, TryDivide, TryCompare, TryCanonicalize, TryConvertTo. Supplied via FhirCqlContextOptions.MetricService.</div>"]
+FhirMetricService["<b>FhirMetricService</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Concrete UCUM implementation (Fhir.Metrics 1.4.0) backed by the full UCUM unit registry; wrapped by DefaultUcumMetricService.</div>"]
+end
 
-FhirTypeConverter -.->|created| TypeConverter
-FhirTypeResolver -.->|injected| CqlOperators
-TypeConverter -.->|injected| CqlOperators
-CqlComparers -.->|injected| CqlOperators
-UnitConverter -.->|injected| CqlOperators
-IMetricService -.->|injected| CqlOperators
+subgraph FirelySDK["Firely .NET SDK (external)"]
+direction TB
+ModelInspector["<b>ModelInspector</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(external) Firely .NET SDK type (Hl7.Fhir.Introspection) that reflects over FHIR POCO classes to expose their type/property metadata.</div>"]
+end
 
-FhirCqlContext -.->|creates| CqlComparers
-FhirCqlContext -.->|creates| UnitConverter
-FhirCqlContext -.->|creates| CqlOperators
-CqlOperators -.->|injected| CqlContext
-FhirCqlContext -.->|creates| CqlContext
+CqlOperators -->|implements| ICqlOperators
+CqlComparers -->|implements| ICqlComparer
+FhirEnumComparer -->|implements| ICqlComparer
+UnitConverter -->|implements| IUnitConverter
+BundleDataSource -->|implements| IDataSource
+CompositeDataSource -->|implements| IDataSource
+HashValueSetDictionary -->|implements| IValueSetDictionary
+DefaultUcumMetricService -->|implements| IMetricService
+FhirMetricService -.->|wrapped by| DefaultUcumMetricService
+UcumConversionExtensionsDefault -.->|returns| DefaultUcumMetricService
+
+FhirCqlContextOptions -.->|read by| FhirCqlContext
+ModelInspector -.->|injected| FhirTypeConverter
+ModelInspector -.->|injected| FhirTypeResolver
+FhirTypeConverter -.->|creates| TypeConverter
 
 IMetricService -.->|injected| CqlComparers
 IMetricService -.->|injected| UnitConverter
-UcumDefault -.->|fallback| CqlComparers
-UcumDefault -.->|fallback| UnitConverter
-UcumDefault -.->|fallback| CqlOperators
-UcumDefault -.->|instance| DefaultUcumMetricService
-DefaultUcumMetricService -->|implements| IMetricService
-DefaultUcumMetricService -.->|delegates| FhirMetricService
+IMetricService -.->|injected| CqlOperators
+UcumConversionExtensionsDefault -.->|fallback| CqlComparers
+UcumConversionExtensionsDefault -.->|fallback| UnitConverter
+UcumConversionExtensionsDefault -.->|fallback| CqlOperators
+
+FhirTypeResolver -.->|injected| CqlOperators
+TypeConverter -.->|injected| CqlOperators
+ICqlComparer -.->|injected| CqlOperators
+IUnitConverter -.->|injected| CqlOperators
+IDataSource -.->|injected| CqlOperators
+IValueSetDictionary -.->|injected| CqlOperators
+FhirEnumComparer -.->|injected| CqlOperators
+
+FhirCqlContext -.->|creates| CqlContext
+ICqlOperators -.->|injected| CqlContext
