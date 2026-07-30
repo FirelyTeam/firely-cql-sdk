@@ -20,7 +20,7 @@ for the exact rule.
 
 `<PR-number>-<short-slug>.md`, e.g. `1433-release-note-fragments.md` — use the **PR** number. The
 PR number is available as soon as the PR is opened, which is well before merge and early enough for
-the fragment to be added. If a draft has not been opened as a PR yet, use a slug-only name unlikely
+the fragment to be added. If no PR has been opened yet (the work is still only on a branch), use a slug-only name unlikely
 to collide, e.g. `add-benchmark-skill.md`; rename it to `<PR-number>-<slug>.md` once the PR exists.
 
 `README.md` is reserved and is never treated as a fragment.
