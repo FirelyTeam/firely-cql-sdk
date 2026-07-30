@@ -71,3 +71,18 @@ CQL→ELM→C#→assembly pipeline.
 Mermaid source: [dependency-diagrams.codemodel-expressions.mmd](diagrams/dependency-diagrams.codemodel-expressions.mmd)
 
 ![CodeModel Expression Types Diagram](diagrams/dependency-diagrams.codemodel-expressions.svg)
+
+## Runtime Services Dependency Diagram
+
+Services wired together by `FhirCqlContext` for a FHIR-backed CQL evaluation run.
+
+**Remarks:**
+* Shows the manual construction performed by `FhirCqlContext.ForBundle`/`WithDataSource` — not a DI container
+* Cyan classes (`IMetricService`, `TypeConverter`, `ModelInspector`) are the configurable injection points exposed via `FhirCqlContextOptions`; all others are concrete types constructed internally
+* `IMetricService` (from `Fhir.Metrics`) flows into three places: directly into `CqlOperators` for cross-unit quantity arithmetic, into `CqlComparers` for quantity comparison, and into `UnitConverter` for unit-conversion-function caching
+* `DefaultUcumMetricService` (internal, in `Cql.Runtime`) wraps `FhirMetricService` from `Fhir.Metrics` 1.4.0 and is used when `FhirCqlContextOptions.MetricService` is `null`
+* `FhirTypeResolver.Default` and `FhirEnumComparer.Default` are static singletons; all other instances are created fresh per `FhirCqlContext.ForBundle`/`WithDataSource` call
+
+Mermaid source: [dependency-diagrams.runtime-services.mmd](diagrams/dependency-diagrams.runtime-services.mmd)
+
+![Runtime Services Dependency Diagram](diagrams/dependency-diagrams.runtime-services.svg)
