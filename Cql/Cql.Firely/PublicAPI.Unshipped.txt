@@ -1,13 +1,1 @@
 #nullable enable
-Hl7.Cql.Fhir.FhirCqlContextOptions.MetricService.get -> Fhir.Metrics.IMetricService?
-Hl7.Cql.Fhir.FhirCqlContextOptions.MetricService.init -> void
-static Hl7.Cql.Fhir.FhirTypeConverter.ConvertCqlCodeToFhir(this Hl7.Cql.Conversion.TypeConverter! converter, Hl7.Cql.Primitives.CqlCode? code) -> Hl7.Fhir.Model.DataType?
-static Hl7.Cql.Fhir.FhirTypeConverter.ConvertPeriodToCqlInterval(this Hl7.Cql.Conversion.TypeConverter! converter, Hl7.Fhir.Model.Period? period, string? cqlPointTypeName) -> object?
-Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideRetrieveProfileFilter.get -> Hl7.Cql.Fhir.IRetrieveProfileFilter?
-Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideRetrieveProfileFilter.init -> void
-Hl7.Cql.Fhir.IRetrieveProfileFilter
-Hl7.Cql.Fhir.IRetrieveProfileFilter.GetFilter(string! templateId) -> System.Predicate<Hl7.Fhir.Model.Resource!>?
-Hl7.Cql.Fhir.QICoreRetrieveProfileFilter
-Hl7.Cql.Fhir.QICoreRetrieveProfileFilter.GetFilter(string! templateId) -> System.Predicate<Hl7.Fhir.Model.Resource!>?
-Hl7.Cql.Fhir.QICoreRetrieveProfileFilter.QICoreRetrieveProfileFilter() -> void
-static readonly Hl7.Cql.Fhir.QICoreRetrieveProfileFilter.Default -> Hl7.Cql.Fhir.QICoreRetrieveProfileFilter!
