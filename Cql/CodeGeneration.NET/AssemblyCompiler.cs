@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Collections.Concurrent;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
@@ -25,7 +26,8 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             "System.Text.RegularExpressions.dll", // IMPORTANT!
             "System.Linq.dll",
-            "System.Linq.Expressions.dll", // IMPORTANT!
+            // System.Linq.Expressions.dll is intentionally omitted: generated C# no longer uses
+            // expression trees — the IR pipeline emits plain C# methods and delegates directly.
 
             "System.IO.dll",
             "System.Net.Primitives.dll",
@@ -47,6 +49,16 @@ namespace Hl7.Cql.CodeGeneration.NET
             "System.ComponentModel.Annotations.dll",
             "System.ComponentModel.TypeConverter.dll",
         ];
+
+        /// <summary>
+        /// Cache of <see cref="MetadataReference"/> instances per assembly file path. Creating a
+        /// metadata reference parses the assembly metadata, which is expensive when compiling many
+        /// small libraries in a row (e.g. one per test assertion), so cache them process-wide.
+        /// </summary>
+        private static readonly ConcurrentDictionary<string, MetadataReference> MetadataReferenceCache = new();
+
+        private static MetadataReference GetOrCreateMetadataReference(string assemblyPath) =>
+            MetadataReferenceCache.GetOrAdd(assemblyPath, static path => MetadataReference.CreateFromFile(path));
 
         private readonly Lazy<Assembly[]> _referencesLazy;
 
@@ -81,15 +93,51 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
-            return librariesWithCSharp
+
+            // Materialized once: librariesWithCSharp is a lazy, side-effecting iterator in the
+            // real ElmToolkit pipeline (it generates each library's C# and logs on every
+            // enumeration), so it must not be enumerated more than once here.
+            var materialized = librariesWithCSharp.ToList();
+
+            // Looked up by identifier so a dependency can be compiled on demand regardless of
+            // where it falls in the original enumeration order (see firely-cql-sdk#1373:
+            // relying on that order alone to already guarantee "dependencies come before
+            // dependents" turned out not to hold reliably -- ElmToolkit builds this sequence
+            // from an ImmutableDictionary.Values enumeration, whose order is hash-bucket-driven
+            // and varies per process, not insertion-stable).
+            var sourceByIdentifier = materialized.ToDictionary(t => t.library.VersionedLibraryIdentifier, t => t);
+            var currentlyCompiling = new HashSet<CqlVersionedLibraryIdentifier>();
+
+            AssemblyBinaryWithSourceCode CompileWithDependenciesFirst(CqlVersionedLibraryIdentifier identifier)
+            {
+                if (results.TryGetValue(identifier, out var existing))
+                    return existing;
+
+                if (!currentlyCompiling.Add(identifier))
+                    throw new InvalidOperationException($"Circular dependency detected involving library '{identifier}'.");
+
+                try
+                {
+                    if (!sourceByIdentifier.TryGetValue(identifier, out var self))
+                        throw new InvalidOperationException(
+                            $"No C# source was generated for library '{identifier}', but it's a declared dependency of another library.");
+
+                    foreach (var dependency in librarySet.GetLibraryDependencies(identifier))
+                        CompileWithDependenciesFirst(dependency.VersionedLibraryIdentifier);
+
+                    var compiled = CompileNode(self.csharp, results, librarySet, self.library, assemblyReferences, debugSymbolsFormat);
+                    results[identifier] = compiled;
+                    return compiled;
+                }
+                finally
+                {
+                    currentlyCompiling.Remove(identifier);
+                }
+            }
+
+            return materialized
                 .TrySelect(
-                    t =>
-                    {
-                        var (library, cSharp) = t;
-                        var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugSymbolsFormat);
-                        results.Add(library.VersionedLibraryIdentifier, assemblyBinaryWithSourceCode);
-                        return (library, assemblyBinaryWithSourceCode);
-                    },
+                    t => (t.library, assemblyBinaryWithSourceCode: CompileWithDependenciesFirst(t.library.VersionedLibraryIdentifier)),
                     buildExceptionHandlingStrategy,
                     allowInvalidCSharp ? YieldWithoutAssemblyBinary : null);
 
@@ -137,11 +185,26 @@ namespace Hl7.Cql.CodeGeneration.NET
             var metadataReferences = new List<MetadataReference>();
             AddNetCoreReferences(metadataReferences);
             foreach (var asm in assemblyReferences)
-                metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
+                metadataReferences.Add(GetOrCreateMetadataReference(asm.Location));
 
             foreach (var libraryDependency in librarySet.GetLibraryDependencies(libraryVersionedIdentifier!))
+            {
                 if (assemblies.TryGetValue(libraryDependency.VersionedLibraryIdentifier, out var referencedDll))
+                {
                     metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.AssemblyBytes!));
+                }
+                else
+                {
+                    // Should be structurally unreachable: CompileEachLibraryToAssemblies compiles
+                    // dependencies before dependents via recursive memoization (CompileWithDependenciesFirst),
+                    // not by trusting a pre-computed enumeration order. Fail loudly rather than silently
+                    // drop the reference (which used to surface later as a confusing unrelated CS0103 --
+                    // see firely-cql-sdk#1373).
+                    throw new InvalidOperationException(
+                        $"Library '{libraryVersionedIdentifier}' depends on '{libraryDependency.VersionedLibraryIdentifier}', " +
+                        "which has not been compiled yet.");
+                }
+            }
 
             var assemblyInfoSourceString = CreateAssemblyInfoSourceString(library);
             var assemblyInfoSourcePath = "AssemblyInfo.cs";
@@ -238,7 +301,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                          ?? throw new InvalidOperationException($"Couldn't identify system file path for the System assembly");
 
             foreach (var assemblyFileName in AssemblyFileNames)
-                metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, assemblyFileName)));
+                metadataReferences.Add(GetOrCreateMetadataReference(Path.Combine(rtPath, assemblyFileName)));
 
         }
     }

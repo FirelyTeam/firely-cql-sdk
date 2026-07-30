@@ -16,6 +16,12 @@ namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {
+        /// <summary>
+        /// The minimum precision value for the Decimal type (10^-8), which <see cref="Successor(decimal?)"/> adds to,
+        /// and <see cref="Predecessor(decimal?)"/> subtracts from, its argument (CQL spec §9.B).
+        /// </summary>
+        internal const decimal MinDecimalPrecisionValue = 0.00000001m;
+
         #region Abs
 
         public int? Abs(int? argument)
@@ -109,7 +115,14 @@ namespace Hl7.Cql.Operators
                 if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
                     return new CqlQuantity(Add(left.value, right.value), left.unit);
 
-                return TryUcumBinaryOp(left.value.Value, leftUnit, right.value.Value, rightUnit, MetricServiceExtensions.TryAdd, "Add");
+                return TryUcumBinaryOp(
+                    left.value.Value,
+                    leftUnit,
+                    right.value.Value,
+                    rightUnit,
+                    MetricServiceExtensions.TryAdd,
+                    "Add",
+                    preferMostGranularResultUnit: true);
             }
             else
                 return new CqlQuantity(Add(left.value, right.value), left.unit);
@@ -510,12 +523,10 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.value == null || right.value == null)
                 return null;
-            else if (left.unit != "1" && right.unit != "1")
-            {
-                return TryUcumBinaryOp(left.value.Value, left.unit!, right.value.Value, right.unit!, MetricServiceExtensions.TryMultiply, "Multiply");
-            }
+            else if (left.unit == null || right.unit == null)
+                return null;
             else
-                return new CqlQuantity(Multiply(left.value, right.value), "1");
+                return TryUcumBinaryOp(left.value.Value, left.unit, right.value.Value, right.unit, MetricServiceExtensions.TryMultiply, "Multiply");
         }
         #endregion
 
@@ -659,7 +670,7 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null)
                 return null;
-            else return argument - 0.00000001m;
+            else return argument - MinDecimalPrecisionValue;
         }
         public CqlQuantity? Predecessor(CqlQuantity? argument)
         {
@@ -817,7 +828,14 @@ namespace Hl7.Cql.Operators
                 if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
                     return new CqlQuantity(Subtract(left.value, right.value), left.unit);
 
-                return TryUcumBinaryOp(left.value.Value, leftUnit, right.value.Value, rightUnit, MetricServiceExtensions.TrySubtract, "Subtract");
+                return TryUcumBinaryOp(
+                    left.value.Value,
+                    leftUnit,
+                    right.value.Value,
+                    rightUnit,
+                    MetricServiceExtensions.TrySubtract,
+                    "Subtract",
+                    preferMostGranularResultUnit: true);
             }
             else return new CqlQuantity(Subtract(left.value, right.value), left.unit);
         }
@@ -832,7 +850,8 @@ namespace Hl7.Cql.Operators
             decimal leftValue, string leftUnit,
             decimal rightValue, string rightUnit,
             MetricBinaryOp tryOp,
-            string opName)
+            string opName,
+            bool preferMostGranularResultUnit = false)
         {
             try
             {
@@ -840,7 +859,15 @@ namespace Hl7.Cql.Operators
                         (leftValue, leftUnit, UcumConversionExtensions.UcumSystemUrl),
                         (rightValue, rightUnit, UcumConversionExtensions.UcumSystemUrl),
                         out var result))
+                {
+                    if (preferMostGranularResultUnit
+                        && TryExpressResultInMostGranularUnit(result!.Value, leftUnit, rightUnit, out var granularResult))
+                    {
+                        result = granularResult;
+                    }
+
                     return new CqlQuantity(result!.Value.Item1, result.Value.Item2);
+                }
             }
             catch (NotImplementedException)
             {
@@ -850,6 +877,34 @@ namespace Hl7.Cql.Operators
 
             throw new NotSupportedException(
                 $"Arithmetic on quantities with incompatible units {leftUnit} and {rightUnit} is not supported.");
+        }
+
+        private bool TryExpressResultInMostGranularUnit(
+            (decimal value, string unit, string? codesystem) result,
+            string leftUnit,
+            string rightUnit,
+            out (decimal value, string unit, string? codesystem) convertedResult)
+        {
+            convertedResult = result;
+
+            if (leftUnit == rightUnit)
+                return false;
+
+            if (!MetricServiceExtensions.TryCanonicalize(MetricService, (1m, leftUnit, UcumConversionExtensions.UcumSystemUrl), out var canonicalLeft)
+                || !MetricServiceExtensions.TryCanonicalize(MetricService, (1m, rightUnit, UcumConversionExtensions.UcumSystemUrl), out var canonicalRight)
+                || canonicalLeft!.Value.Item2 != canonicalRight!.Value.Item2)
+            {
+                return false;
+            }
+
+            string targetUnit = canonicalLeft.Value.Item1 <= canonicalRight.Value.Item1 ? leftUnit : rightUnit;
+            if (MetricServiceExtensions.TryConvertTo(MetricService, result, targetUnit, out var converted))
+            {
+                convertedResult = converted!.Value;
+                return true;
+            }
+
+            return false;
         }
 
         #endregion
@@ -873,7 +928,7 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null)
                 return null;
-            else return argument + 0.00000001m;
+            else return argument + MinDecimalPrecisionValue;
         }
         public CqlQuantity? Successor(CqlQuantity? argument)
         {
@@ -942,33 +997,6 @@ namespace Hl7.Cql.Operators
             else
                 return new CqlQuantity(TruncatedDivide(left.value, right.value), "1");
         }
-        private static void CompareNormalizedUnits(string? leftUnit, string? rightUnit)
-        {
-            string normalizedLeftUnit = leftUnit ?? string.Empty;
-            string normalizedRightUnit = rightUnit ?? string.Empty;
-
-            if (!string.IsNullOrEmpty(leftUnit) && leftUnit.EndsWith("s"))
-            {
-                var singularLeft = leftUnit.Substring(0, leftUnit.Length - 1);
-                if (Units.DatePrecisionToCqlUnits.TryGetValue(singularLeft, out _ ))
-                {
-                    normalizedLeftUnit = singularLeft;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(rightUnit) && rightUnit.EndsWith("s"))
-            {
-                var singularRight = rightUnit.Substring(0, rightUnit.Length - 1);
-                if (Units.DatePrecisionToCqlUnits.TryGetValue(singularRight, out _))
-                {
-                    normalizedRightUnit = singularRight;
-                }
-            }
-
-            if (normalizedLeftUnit != normalizedRightUnit)
-                throw new NotSupportedException("Mixed unit arithmetic is not supported.");
-        }
-
         #endregion
     }
 }

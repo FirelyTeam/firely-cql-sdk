@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("CMS177FHIRChildMDDSuicideAssmt", "1.0.000")]
 public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISingleton<CMS177FHIRChildMDDSuicideAssmt_1_0_000>
 {
@@ -208,25 +208,25 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             IEnumerable<Condition> aj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
             bool? ak_(Condition MDDConditionProb) {
-                List<ResourceReference> at_ = ValidEncounter?.ReasonReference;
-                bool? au_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)at_, MDDConditionProb);
-                return au_;
+                List<ResourceReference> as_ = ValidEncounter?.ReasonReference;
+                bool? at_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)as_, MDDConditionProb);
+                return at_;
             }
 
             IEnumerable<Condition> al_ = context.Operators.Where<Condition>(aj_, ak_);
-            IEnumerable<Condition> an_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+            IEnumerable<Condition> am_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
 
-            bool? ao_(Condition MDDEncDx) {
-                List<ResourceReference> av_ = ValidEncounter?.ReasonReference;
-                bool? aw_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)av_, MDDEncDx);
-                return aw_;
+            bool? an_(Condition MDDEncDx) {
+                List<ResourceReference> au_ = ValidEncounter?.ReasonReference;
+                bool? av_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)au_, MDDEncDx);
+                return av_;
             }
 
-            IEnumerable<Condition> ap_ = context.Operators.Where<Condition>(an_, ao_);
-            IEnumerable<object> aq_ = context.Operators.Union<object>(al_ as IEnumerable<object>, ap_ as IEnumerable<object>);
-            bool? ar_ = context.Operators.Exists<object>(aq_);
-            bool? as_ = context.Operators.And(ah_, ar_);
-            return as_;
+            IEnumerable<Condition> ao_ = context.Operators.Where<Condition>(am_, an_);
+            IEnumerable<Condition> ap_ = context.Operators.Union<Condition>(al_ as IEnumerable<Condition>, ao_ as IEnumerable<Condition>);
+            bool? aq_ = context.Operators.Exists<Condition>(ap_);
+            bool? ar_ = context.Operators.And(ah_, aq_);
+            return ar_;
         }
 
         IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
@@ -330,15 +330,9 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             CqlDate j_ = context.Operators.DateFrom(i_);
             int? k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
             bool? l_ = context.Operators.GreaterOrEqual(k_, 6);
-            Date n_ = d_?.BirthDateElement;
-            string o_ = n_?.Value;
-            CqlDate p_ = context.Operators.ConvertStringToDate(o_);
-            CqlDateTime r_ = context.Operators.Start(h_);
-            CqlDate s_ = context.Operators.DateFrom(r_);
-            int? t_ = context.Operators.CalculateAgeAt(p_, s_, "year");
-            bool? u_ = context.Operators.LessOrEqual(t_, 16);
-            bool? v_ = context.Operators.And(l_, u_);
-            return v_;
+            bool? m_ = context.Operators.LessOrEqual(k_, 16);
+            bool? n_ = context.Operators.And(l_, m_);
+            return n_;
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -369,95 +363,80 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     {
         IEnumerable<Encounter> a_ = this.Major_Depressive_Disorder_Encounter(context);
 
-        IEnumerable<Encounter> b_(Encounter MDDEncounter) {
+        bool? b_(Encounter MDDEncounter) {
             CqlCode d_ = this.Suicide_risk_assessment__procedure_(context);
             IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
             IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
             bool? g_(Procedure SuicideRiskAssessmentProcedure) {
-                Code<EventStatus> k_ = SuicideRiskAssessmentProcedure?.StatusElement;
-                EventStatus? l_ = k_?.Value;
-                string m_ = context.Operators.Convert<string>(l_);
-                bool? n_ = context.Operators.Equal(m_, "completed");
-                Period o_ = MDDEncounter?.Period;
-                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
-
-                object q_() {
-
-                    bool u_() {
-                        DataType y_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        bool aa_ = z_ is CqlDateTime;
-                        return aa_;
-                    }
-
-
-                    bool v_() {
+                Code<EventStatus> j_ = SuicideRiskAssessmentProcedure?.StatusElement;
+                EventStatus? k_ = j_?.Value;
+                string l_ = context.Operators.Convert<string>(k_);
+                bool? m_ = context.Operators.Equal(l_, "completed");
+                Period n_ = MDDEncounter?.Period;
+                CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+                object p_;
+                DataType t_ = SuicideRiskAssessmentProcedure?.Performed;
+                object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                bool v_ = u_ is CqlDateTime;
+                if (v_)
+                {
+                    DataType w_ = SuicideRiskAssessmentProcedure?.Performed;
+                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                    p_ = x_ as CqlDateTime;
+                }
+                else
+                {
+                    DataType y_ = SuicideRiskAssessmentProcedure?.Performed;
+                    object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
+                    bool aa_ = z_ is CqlQuantity;
+                    if (aa_)
+                    {
                         DataType ab_ = SuicideRiskAssessmentProcedure?.Performed;
                         object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlInterval<CqlDateTime>;
-                        return ad_;
-                    }
-
-
-                    bool w_() {
-                        DataType ae_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlQuantity;
-                        return ag_;
-                    }
-
-
-                    bool x_() {
-                        DataType ah_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        bool aj_ = ai_ is CqlInterval<CqlQuantity>;
-                        return aj_;
-                    }
-
-                    if (u_())
-                    {
-                        DataType ak_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        return (al_ as CqlDateTime) as object;
-                    }
-                    else if (v_())
-                    {
-                        DataType am_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        return (an_ as CqlInterval<CqlDateTime>) as object;
-                    }
-                    else if (w_())
-                    {
-                        DataType ao_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        return (ap_ as CqlQuantity) as object;
-                    }
-                    else if (x_())
-                    {
-                        DataType aq_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                        return (ar_ as CqlInterval<CqlQuantity>) as object;
+                        p_ = ac_ as CqlQuantity;
                     }
                     else
                     {
-                        return null;
-                    };
+                        DataType ad_ = SuicideRiskAssessmentProcedure?.Performed;
+                        object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+                        bool af_ = ae_ is CqlInterval<CqlDateTime>;
+                        if (af_)
+                        {
+                            DataType ag_ = SuicideRiskAssessmentProcedure?.Performed;
+                            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+                            p_ = ah_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            DataType ai_ = SuicideRiskAssessmentProcedure?.Performed;
+                            object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+                            bool ak_ = aj_ is CqlInterval<CqlQuantity>;
+                            if (ak_)
+                            {
+                                DataType al_ = SuicideRiskAssessmentProcedure?.Performed;
+                                object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+                                p_ = am_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                p_ = null;
+                            }
+                        }
+                    }
                 }
-
-                CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_());
-                bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, r_, (string)default);
-                bool? t_ = context.Operators.And(n_, s_);
-                return t_;
+                CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_);
+                bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, (string)default);
+                bool? s_ = context.Operators.And(m_, r_);
+                return s_;
             }
 
             IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
-            Encounter i_(Procedure SuicideRiskAssessmentProcedure) => MDDEncounter;
-            IEnumerable<Encounter> j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
-            return j_;
+            bool? i_ = context.Operators.Exists<Procedure>(h_);
+            return i_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
@@ -472,40 +451,39 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     {
         IEnumerable<Encounter> a_ = this.Major_Depressive_Disorder_Encounter(context);
 
-        IEnumerable<Encounter> b_(Encounter MDDEncounter) {
+        bool? b_(Encounter MDDEncounter) {
             CqlCode d_ = this.Suicide_risk_assessment__procedure_(context);
             IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
             IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
-            IEnumerable<CqlCode> h_ = context.Operators.ToList<CqlCode>(d_);
-            IEnumerable<Observation> i_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-            IEnumerable<object> j_ = context.Operators.Union<object>(f_ as IEnumerable<object>, i_ as IEnumerable<object>);
+            IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
+            IEnumerable<Observation> h_ = context.Operators.Union<Observation>(f_ as IEnumerable<Observation>, g_ as IEnumerable<Observation>);
 
-            bool? k_(object ObservationSuicideRiskAssmt) {
-                Period o_ = MDDEncounter?.Period;
-                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
-                object q_ = context.Operators.LateBoundProperty<object>(ObservationSuicideRiskAssmt, "effective");
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
-                bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, s_, (string)default);
-                object u_ = context.Operators.LateBoundProperty<object>(ObservationSuicideRiskAssmt, "status");
-                string v_ = context.Operators.LateBoundProperty<string>(u_, "value");
-                string[] w_ = [
+            bool? i_(Observation ObservationSuicideRiskAssmt) {
+                Period l_ = MDDEncounter?.Period;
+                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
+                DataType n_ = ObservationSuicideRiskAssmt?.Effective;
+                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+                CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
+                bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, (string)default);
+                Code<ObservationStatus> r_ = ObservationSuicideRiskAssmt?.StatusElement;
+                ObservationStatus? s_ = r_?.Value;
+                string t_ = context.Operators.Convert<string>(s_);
+                string[] u_ = [
                     "final",
                     "corrected",
                     "amended",
                 ];
-                bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
-                bool? y_ = context.Operators.And(t_, x_);
-                return y_;
+                bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
+                bool? w_ = context.Operators.And(q_, v_);
+                return w_;
             }
 
-            IEnumerable<object> l_ = context.Operators.Where<object>(j_, k_);
-            Encounter m_(object ObservationSuicideRiskAssmt) => MDDEncounter;
-            IEnumerable<Encounter> n_ = context.Operators.Select<object, Encounter>(l_, m_);
-            return n_;
+            IEnumerable<Observation> j_ = context.Operators.Where<Observation>(h_, i_);
+            bool? k_ = context.Operators.Exists<Observation>(j_);
+            return k_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 

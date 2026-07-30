@@ -106,10 +106,8 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void AssertExists(Exists exists, bool? expected)
         {
-            var lambda = CreateElmToolkit().Lambda(exists);
-            var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
-            var result = dg.DynamicInvoke(ctx);
+            var result = Run(exists, CreateTempLibrary(), ctx);
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(bool?));
             Assert.AreEqual(result, expected);

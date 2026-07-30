@@ -11,10 +11,14 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Compiler;
 
 /// <summary>
-/// Facilitates binding to <see cref="CqlContext"/> methods.
+/// Facilitates binding to <see cref="CqlContext"/> methods. See the remarks on
+/// <see cref="CqlOperatorsBinder"/>.
 /// </summary>
 internal class CqlContextBinder
 {
+    private static readonly MethodInfo ResolveParameterMethod =
+        typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!;
+
     /// <summary>
     /// Creates an expression which resolves a parameter in the CQL context,
     /// by binding to calling <see cref="CqlContext.ResolveParameter"/>.
@@ -23,16 +27,15 @@ internal class CqlContextBinder
     /// <param name="parameterName">The name of the parameter.</param>
     /// <param name="defaultValue">The default value of the parameter.</param>
     /// <returns>The resolved parameter expression.</returns>
-    public virtual Expression ResolveParameter(
+    public virtual CodeExpression ResolveParameter(
         string libraryKey,
         string parameterName,
-        Expression defaultValue) =>
-        Expression.Call(
-            CqlExpressions.ParameterExpression,
-            nameof(CqlContext.ResolveParameter),
-            null,
-            Expression.Constant(libraryKey),
-            Expression.Constant(parameterName),
+        CodeExpression defaultValue) =>
+        new CodeInvoke(
+            CodeContextParameter.Instance,
+            ResolveParameterMethod,
+            new CodeConstant(libraryKey, typeof(string)),
+            new CodeConstant(parameterName, typeof(string)),
             defaultValue
         );
 }

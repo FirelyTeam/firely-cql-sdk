@@ -18,73 +18,76 @@
 parameters:
   - name: dotNetCoreVersion
     type: string
-    default: '10.0.x'
+    default: "10.0.x"
   - name: multiTargetTestProjects
     type: string
-    default: ''
+    default: ""
   - name: net10IntegrationTestProjects
     type: string
-    default: ''
+    default: ""
+  - name: hedisIntegrationTestProjects
+    type: string
+    default: ""
   - name: buildConfiguration
     type: string
-    default: 'Release'
+    default: "Release"
   - name: checkoutSubmodules
     type: string
-    default: 'false'
+    default: "false"
   - name: useVersionSuffix
     type: boolean
     default: true
   - name: azureServiceConnectionForSigning
     type: string
-    default: ''
+    default: ""
   - name: trustedSigningAccountEndpoint
     type: string
-    default: ''
+    default: ""
   - name: trustedSigningAccountName
     type: string
-    default: ''
+    default: ""
   - name: certificateProfileName
     type: string
-    default: ''
+    default: ""
   - name: signingKeyFileName
     type: string
-    default: ''
+    default: ""
   - name: filesForSigning
     type: string
-    default: ''
+    default: ""
   - name: filesToExcludeForSigning
     type: string
-    default: ''
+    default: ""
   - name: nuGetServiceConnections
     type: string
-    default: ''
+    default: ""
   - name: shouldSign
     type: boolean
     default: false
   - name: buildStageDependsOn
     type: string
-    default: ''
+    default: ""
   - name: buildStageCondition
     type: string
-    default: 'succeeded()'
+    default: "succeeded()"
   - name: testConsoleLoggerVerbosity
     type: string
-    default: 'normal'
+    default: "normal"
 
 stages:
   # ============================================================================
   # BUILD STAGE - Builds, signs (if enabled), packages, and publishes artifacts
   # ============================================================================
   - stage: Build
-    displayName: 'Build, Sign & Package'
+    displayName: "Build, Sign & Package"
     ${{ if ne(parameters.buildStageDependsOn, '') }}:
       dependsOn: ${{ parameters.buildStageDependsOn }}
     condition: ${{ parameters.buildStageCondition }}
     jobs:
       - job: BuildSignPackage
-        displayName: 'Build, Sign & Package'
+        displayName: "Build, Sign & Package"
         pool:
-          vmImage: 'windows-latest'
+          vmImage: "windows-latest"
         variables:
           JAVA_CACHE_KEY: 'java-deps | "$(Agent.OS)" | Demo/Cql/Build/pom.xml'
         steps:
@@ -93,27 +96,33 @@ stages:
 
           # Install .NET SDKs
           - task: UseDotNet@2
-            displayName: 'Install .NET 8 SDK'
+            displayName: "Install .NET 8 SDK"
             inputs:
-              packageType: 'sdk'
-              version: '8.0.x'
+              packageType: "sdk"
+              version: "8.0.x"
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
           - task: UseDotNet@2
-            displayName: 'Install .NET 10 SDK'
+            displayName: "Install .NET 10 SDK"
             inputs:
-              packageType: 'sdk'
-              version: '${{ parameters.dotNetCoreVersion }}'
+              packageType: "sdk"
+              version: "${{ parameters.dotNetCoreVersion }}"
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
           - task: NuGetAuthenticate@1
-            displayName: 'NuGet Authenticate'
+            displayName: "NuGet Authenticate"
             inputs:
-              nuGetServiceConnections: '${{ parameters.nuGetServiceConnections }}'
+              nuGetServiceConnections: "${{ parameters.nuGetServiceConnections }}"
+
+          # Ensure the cache path exists even when CqlToolingEnabled is false (the default)
+          # and the Java dependency download never runs -- Cache@2's post-job tar step
+          # fails outright if the directory it's asked to cache doesn't exist at all.
+          - pwsh: New-Item -ItemType Directory -Force -Path "$(Build.SourcesDirectory)/Demo/Cql/Build/target/dependency" | Out-Null
+            displayName: "Ensure Java dependency cache path exists"
 
           # Cache Java dependencies to avoid re-downloading on each build
           - task: Cache@2
-            displayName: 'Cache Java Dependencies'
+            displayName: "Cache Java Dependencies"
             inputs:
               key: $(JAVA_CACHE_KEY)
               path: $(Build.SourcesDirectory)/Demo/Cql/Build/target/dependency
@@ -121,46 +130,46 @@ stages:
                 java-deps | "$(Agent.OS)"
 
           - task: DotNetCoreCLI@2
-            displayName: 'Restore solution'
+            displayName: "Restore solution"
             inputs:
-              command: 'restore'
-              projects: 'Cql-Sdk-All.sln'
-              feedsToUse: 'config'
-              nugetConfigPath: 'NuGet.config'
+              command: "restore"
+              projects: "Cql-Sdk-All.sln"
+              feedsToUse: "config"
+              nugetConfigPath: "NuGet.config"
 
           - task: DotNetCoreCLI@2
-            displayName: 'Build solution'
+            displayName: "Build solution"
             inputs:
-              command: 'build'
-              projects: 'Cql-Sdk-All.sln'
+              command: "build"
+              projects: "Cql-Sdk-All.sln"
               ${{ if eq(parameters.useVersionSuffix, true) }}:
-                arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore /p:VersionSuffix=$(Build.BuildNumber)'
+                arguments: "--configuration ${{ parameters.buildConfiguration }} --no-restore /p:VersionSuffix=$(Build.BuildNumber)"
               ${{ else }}:
-                arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
+                arguments: "--configuration ${{ parameters.buildConfiguration }} --no-restore"
 
           # Package solution (NuGet packages already restored, no need to restore again)
           - task: DotNetCoreCLI@2
-            displayName: 'Package solution'
+            displayName: "Package solution"
             inputs:
-              command: 'pack'
-              packagesToPack: 'Cql-Sdk.slnf'
-              configuration: '${{ parameters.buildConfiguration }}'
-              packDirectory: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
+              command: "pack"
+              packagesToPack: "Cql-Sdk.slnf"
+              configuration: "${{ parameters.buildConfiguration }}"
+              packDirectory: "$(Build.ArtifactStagingDirectory)/NuGetPackages"
               nobuild: true
               ${{ if eq(parameters.useVersionSuffix, true) }}:
-                buildProperties: 'VersionSuffix=$(Build.BuildNumber)'
+                buildProperties: "VersionSuffix=$(Build.BuildNumber)"
               includesymbols: true
               includesource: true
 
           # Sign NuGet packages with Azure Trusted Signing (controlled by shouldSign parameter)
           - ${{ if eq(parameters.shouldSign, true) }}:
-            - template: codesign-nuget-package-using-trusted-signing.yml@templates
-              parameters:
-                azureServiceConnection: '${{ parameters.azureServiceConnectionForSigning }}'
-                trustedSigningAccountEndpoint: '${{ parameters.trustedSigningAccountEndpoint }}'
-                trustedSigningAccountName: '${{ parameters.trustedSigningAccountName }}'
-                certificateProfileName: '${{ parameters.certificateProfileName }}'
-                packagePaths: $(Build.ArtifactStagingDirectory)/NuGetPackages/*.nupkg
+              - template: codesign-nuget-package-using-trusted-signing.yml@templates
+                parameters:
+                  azureServiceConnection: "${{ parameters.azureServiceConnectionForSigning }}"
+                  trustedSigningAccountEndpoint: "${{ parameters.trustedSigningAccountEndpoint }}"
+                  trustedSigningAccountName: "${{ parameters.trustedSigningAccountName }}"
+                  certificateProfileName: "${{ parameters.certificateProfileName }}"
+                  packagePaths: $(Build.ArtifactStagingDirectory)/NuGetPackages/*.nupkg
 
           # Publish test projects for test stage (Vonk-style: self-contained output for direct DLL testing)
           # Uses 'dotnet publish' so all dependencies are in the output directory,
@@ -173,6 +182,10 @@ stages:
               foreach ($proj in $projects) {
                 $proj = $proj.Trim()
                 if (-not $proj) { continue }
+                if ($proj -match 'Benchmark') {
+                  Write-Error "Benchmark project '$proj' is not allowed in multiTargetTestProjects."
+                  exit 1
+                }
                 Write-Host "##[section]Publishing $proj for net8.0"
                 dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net8.0 --property:PublishDir=$stagingRoot/net8.0
                 if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net8.0"; exit 1 }
@@ -196,21 +209,21 @@ stages:
                   Write-Host "  $subdir : $count files, $([math]::Round($size, 2)) MB"
                 }
               }
-            displayName: 'Publish test projects for test stage'
-            workingDirectory: '$(Build.SourcesDirectory)'
+            displayName: "Publish test projects for test stage"
+            workingDirectory: "$(Build.SourcesDirectory)"
 
           - task: PublishPipelineArtifact@1
-            displayName: 'Publish Test Output Artifacts'
+            displayName: "Publish Test Output Artifacts"
             inputs:
-              targetPath: '$(Build.ArtifactStagingDirectory)/TestPublishOutput'
-              artifact: 'TestPublishOutput'
-              publishLocation: 'pipeline'
+              targetPath: "$(Build.ArtifactStagingDirectory)/TestPublishOutput"
+              artifact: "TestPublishOutput"
+              publishLocation: "pipeline"
 
           # Stage bin/obj directories for integration tests (they need source tree + --no-build on csproj)
           - task: PowerShell@2
-            displayName: 'Stage build outputs for integration test artifact'
+            displayName: "Stage build outputs for integration test artifact"
             inputs:
-              targetType: 'inline'
+              targetType: "inline"
               script: |
                 $sourceRoot = "$(Build.SourcesDirectory)"
                 $stagingRoot = "$(Build.ArtifactStagingDirectory)/BuildOutput"
@@ -227,150 +240,215 @@ stages:
                 Write-Host "Total artifact size: $([math]::Round($size, 2)) MB"
 
           - task: PublishPipelineArtifact@1
-            displayName: 'Publish Build Output (for integration tests)'
+            displayName: "Publish Build Output (for integration tests)"
             inputs:
-              targetPath: '$(Build.ArtifactStagingDirectory)/BuildOutput'
-              artifact: 'BuildOutput'
-              publishLocation: 'pipeline'
+              targetPath: "$(Build.ArtifactStagingDirectory)/BuildOutput"
+              artifact: "BuildOutput"
+              publishLocation: "pipeline"
 
           # Publish NuGet packages
           - task: PublishBuildArtifacts@1
-            displayName: 'Publish NuGet packages'
+            displayName: "Publish NuGet packages"
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
-              ArtifactName: 'NuGetPackages'
-              publishLocation: 'Container'
+              PathtoPublish: "$(Build.ArtifactStagingDirectory)/NuGetPackages"
+              ArtifactName: "NuGetPackages"
+              publishLocation: "Container"
 
   # ============================================================================
   # TEST STAGE - Download artifacts and run tests in parallel
   # ============================================================================
   - stage: Test
-    displayName: 'Test'
+    displayName: "Test"
     dependsOn: Build
     jobs:
       - job: TestNet8
-        displayName: 'Test on .NET 8'
+        displayName: "Test on .NET 8"
         pool:
-          vmImage: 'windows-latest'
+          vmImage: "windows-latest"
         steps:
           # Checkout for source tree access (LibrarySetsDirs uses FindParentDirectoryContaining)
           - checkout: self
 
           - task: UseDotNet@2
-            displayName: 'Install .NET 8 SDK'
+            displayName: "Install .NET 8 SDK"
             inputs:
-              packageType: 'sdk'
-              version: '8.0.x'
+              packageType: "sdk"
+              version: "8.0.x"
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
           - task: DownloadPipelineArtifact@2
-            displayName: 'Download Test Publish Output'
+            displayName: "Download Test Publish Output"
             inputs:
-              buildType: 'current'
-              artifactName: 'TestPublishOutput'
-              targetPath: '$(Build.SourcesDirectory)/TestPublishOutput'
+              buildType: "current"
+              artifactName: "TestPublishOutput"
+              targetPath: "$(Build.SourcesDirectory)/TestPublishOutput"
 
           - task: DotNetCoreCLI@2
-            displayName: 'Run tests on .NET 8'
+            displayName: "Run tests on .NET 8"
             inputs:
               command: test
-              projects: '$(Build.SourcesDirectory)/TestPublishOutput/net8.0/*Tests.dll'
+              projects: "$(Build.SourcesDirectory)/TestPublishOutput/net8.0/*Tests.dll"
               arguments: '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
-              testRunTitle: 'Tests on .NET 8'
+              testRunTitle: "Tests on .NET 8"
 
           - task: PublishCodeCoverageResults@2
-            displayName: 'Publish .NET 8 code coverage'
+            displayName: "Publish .NET 8 code coverage"
             condition: succeededOrFailed()
             inputs:
-              summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+              summaryFileLocation: "$(Agent.TempDirectory)/**/coverage.cobertura.xml"
 
       - job: TestNet10
-        displayName: 'Test on .NET 10'
+        displayName: "Test on .NET 10"
         pool:
-          vmImage: 'windows-latest'
+          vmImage: "windows-latest"
         steps:
           # Checkout for source tree access (LibrarySetsDirs uses FindParentDirectoryContaining)
           - checkout: self
 
           - task: UseDotNet@2
-            displayName: 'Install .NET 10 SDK'
+            displayName: "Install .NET 10 SDK"
             inputs:
-              packageType: 'sdk'
-              version: '${{ parameters.dotNetCoreVersion }}'
+              packageType: "sdk"
+              version: "${{ parameters.dotNetCoreVersion }}"
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
           - task: DownloadPipelineArtifact@2
-            displayName: 'Download Test Publish Output'
+            displayName: "Download Test Publish Output"
             inputs:
-              buildType: 'current'
-              artifactName: 'TestPublishOutput'
-              targetPath: '$(Build.SourcesDirectory)/TestPublishOutput'
+              buildType: "current"
+              artifactName: "TestPublishOutput"
+              targetPath: "$(Build.SourcesDirectory)/TestPublishOutput"
 
           - task: DotNetCoreCLI@2
-            displayName: 'Run tests on .NET 10'
+            displayName: "Run tests on .NET 10"
             inputs:
               command: test
-              projects: '$(Build.SourcesDirectory)/TestPublishOutput/net10.0/*Tests.dll'
+              projects: "$(Build.SourcesDirectory)/TestPublishOutput/net10.0/*Tests.dll"
               arguments: '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
-              testRunTitle: 'Tests on .NET 10'
+              testRunTitle: "Tests on .NET 10"
 
           - task: PublishCodeCoverageResults@2
-            displayName: 'Publish .NET 10 code coverage'
+            displayName: "Publish .NET 10 code coverage"
             condition: succeededOrFailed()
             inputs:
-              summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+              summaryFileLocation: "$(Agent.TempDirectory)/**/coverage.cobertura.xml"
 
       - job: TestIntegrationNet10
-        displayName: 'Integration Tests on .NET 10'
+        displayName: "Integration Tests on .NET 10"
         pool:
-          vmImage: 'windows-latest'
+          vmImage: "windows-latest"
         steps:
           # Integration tests need source tree (FindParentDirectoryContaining for CMS Resources)
           - checkout: self
             submodules: ${{ parameters.checkoutSubmodules }}
 
           - task: UseDotNet@2
-            displayName: 'Install .NET 10 SDK'
+            displayName: "Install .NET 10 SDK"
             inputs:
-              packageType: 'sdk'
-              version: '${{ parameters.dotNetCoreVersion }}'
+              packageType: "sdk"
+              version: "${{ parameters.dotNetCoreVersion }}"
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
           # Download bin/obj from build stage
           - task: DownloadPipelineArtifact@2
-            displayName: 'Download Build Artifacts'
+            displayName: "Download Build Artifacts"
             inputs:
-              buildType: 'current'
-              artifactName: 'BuildOutput'
-              targetPath: '$(Build.SourcesDirectory)'
+              buildType: "current"
+              artifactName: "BuildOutput"
+              targetPath: "$(Build.SourcesDirectory)"
+
+          - pwsh: |
+              $projects = "${{ parameters.net10IntegrationTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
+              foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not $proj) { continue }
+                if ($proj -match 'Benchmark') {
+                  Write-Error "Benchmark project '$proj' is not allowed in net10IntegrationTestProjects."
+                  exit 1
+                }
+              }
+            displayName: "Guard: prevent benchmark projects in integration test list"
 
           - task: DotNetCoreCLI@2
-            displayName: 'Run integration tests on .NET 10'
+            displayName: "Run integration tests on .NET 10"
             inputs:
               command: test
-              projects: '${{ parameters.net10IntegrationTestProjects }}'
+              projects: "${{ parameters.net10IntegrationTestProjects }}"
               arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
-              testRunTitle: 'Integration Tests on .NET 10'
+              testRunTitle: "Integration Tests on .NET 10"
 
           - task: PublishCodeCoverageResults@2
-            displayName: 'Publish integration test code coverage'
+            displayName: "Publish integration test code coverage"
             condition: succeededOrFailed()
             inputs:
-              summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+              summaryFileLocation: "$(Agent.TempDirectory)/**/coverage.cobertura.xml"
+
+      - job: TestHedisNet10
+        displayName: "HEDIS 2025 Golden Parity Tests on .NET 10"
+        pool:
+          vmImage: "windows-latest"
+        steps:
+          # Needs source tree (FindParentDirectoryContaining for the vendored HEDIS corpus)
+          - checkout: self
+            submodules: ${{ parameters.checkoutSubmodules }}
+
+          - task: UseDotNet@2
+            displayName: "Install .NET 10 SDK"
+            inputs:
+              packageType: "sdk"
+              version: "${{ parameters.dotNetCoreVersion }}"
+              installationPath: $(Agent.ToolsDirectory)/dotnet
+
+          # Download bin/obj from build stage
+          - task: DownloadPipelineArtifact@2
+            displayName: "Download Build Artifacts"
+            inputs:
+              buildType: "current"
+              artifactName: "BuildOutput"
+              targetPath: "$(Build.SourcesDirectory)"
+
+          - pwsh: |
+              $projects = "${{ parameters.hedisIntegrationTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
+              foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not $proj) { continue }
+                if ($proj -match 'Benchmark') {
+                  Write-Error "Benchmark project '$proj' is not allowed in hedisIntegrationTestProjects."
+                  exit 1
+                }
+              }
+            displayName: "Guard: prevent benchmark projects in HEDIS test list"
+
+          - task: DotNetCoreCLI@2
+            displayName: "Run HEDIS 2025 golden-parity tests on .NET 10"
+            inputs:
+              command: test
+              projects: "${{ parameters.hedisIntegrationTestProjects }}"
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
+              testRunTitle: "HEDIS 2025 Golden Parity Tests on .NET 10"
+
+          - task: PublishCodeCoverageResults@2
+            displayName: "Publish HEDIS 2025 test code coverage"
+            condition: succeededOrFailed()
+            inputs:
+              summaryFileLocation: "$(Agent.TempDirectory)/**/coverage.cobertura.xml"
+
       # Compare test results across frameworks
       - job: CompareTestResults
-        displayName: 'Compare Test Results Across Frameworks'
+        displayName: "Compare Test Results Across Frameworks"
         dependsOn:
           - TestNet8
           - TestNet10
           - TestIntegrationNet10
+          - TestHedisNet10
         condition: succeededOrFailed()
         pool:
-          vmImage: 'windows-latest'
+          vmImage: "windows-latest"
         variables:
           net8Status: $[ dependencies.TestNet8.result ]
           net10Status: $[ dependencies.TestNet10.result ]
           integrationStatus: $[ dependencies.TestIntegrationNet10.result ]
+          hedisStatus: $[ dependencies.TestHedisNet10.result ]
         steps:
           - powershell: |
               Write-Host "##[section]Multi-Framework Test Comparison Report"
@@ -378,11 +456,12 @@ stages:
               Write-Host "This pipeline built, tested, and signed the SDK against both .NET 8 (LTS) and .NET 10 (LTS)"
               Write-Host "to verify identical behavior across frameworks."
               Write-Host ""
-              
+
               $net8Status = "$(net8Status)"
               $net10Status = "$(net10Status)"
               $integrationStatus = "$(integrationStatus)"
-              
+              $hedisStatus = "$(hedisStatus)"
+
               Write-Host "Test Results:"
               Write-Host "  .NET 8:  $net8Status"
               Write-Host "  .NET 10: $net10Status"
@@ -390,17 +469,22 @@ stages:
               Write-Host "Integration Test Results:"
               Write-Host "  .NET 10: $integrationStatus"
               Write-Host ""
-              
-              if ($net8Status -eq "Succeeded" -and $net10Status -eq "Succeeded" -and $integrationStatus -eq "Succeeded") {
-                  Write-Host "##[section]✅ SUCCESS: All tests pass on both .NET 8 and .NET 10, including integration tests"
+              Write-Host "HEDIS 2025 Golden Parity Results:"
+              Write-Host "  .NET 10: $hedisStatus"
+              Write-Host ""
+
+              if ($net8Status -eq "Succeeded" -and $net10Status -eq "Succeeded" -and $integrationStatus -eq "Succeeded" -and $hedisStatus -eq "Succeeded") {
+                  Write-Host "##[section]✅ SUCCESS: All tests pass on both .NET 8 and .NET 10, including integration and HEDIS 2025 tests"
                   Write-Host "The SDK exhibits identical behavior across both LTS frameworks."
               } elseif ($net8Status -ne $net10Status) {
                   Write-Host "##[warning]⚠️ WARNING: Test results differ between .NET 8 and .NET 10!"
                   Write-Host "This may indicate a framework-specific issue that needs investigation."
               } elseif ($integrationStatus -ne "Succeeded") {
                   Write-Host "##[warning]⚠️ WARNING: Integration tests failed on .NET 10"
+              } elseif ($hedisStatus -ne "Succeeded") {
+                  Write-Host "##[warning]⚠️ WARNING: HEDIS 2025 golden-parity tests failed on .NET 10"
               } else {
                   Write-Host "##[error]❌ FAILURE: Tests failed"
               }
-            displayName: 'Compare results'
+            displayName: "Compare results"
             condition: always()

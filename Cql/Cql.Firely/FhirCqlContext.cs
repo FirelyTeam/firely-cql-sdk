@@ -89,14 +89,15 @@ namespace Hl7.Cql.Fhir
             DateTimeOffset? now = null,
             FhirCqlContextOptions? options = null)
         {
-            IDataSource source = CreateDataSource(bundle, valueSets);
+            IDataSource source = CreateDataSource(bundle, valueSets, options);
             CqlContext result = WithDataSource(source, parameters, valueSets, now, options);
             return result;
         }
 
-        private static IDataSource CreateDataSource(Bundle? bundle, IValueSetDictionary? valueSets) =>
+        private static IDataSource CreateDataSource(Bundle? bundle, IValueSetDictionary? valueSets, FhirCqlContextOptions? options) =>
             bundle is not null ?
-                new BundleDataSource(bundle, valueSets ?? new HashValueSetDictionary()) :
+                new BundleDataSource(bundle, valueSets ?? new HashValueSetDictionary(),
+                    profileFilter: options?.OverrideRetrieveProfileFilter) :
                 new CompositeDataSource();
 
         /// <summary>

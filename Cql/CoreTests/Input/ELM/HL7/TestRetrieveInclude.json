@@ -1,10 +1,10 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.29.0",
+         "type" : "CqlToElmInfo",
+         "translatorVersion" : "5.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
-         "signatureLevel" : "All",
-         "type" : "CqlToElmInfo"
+         "signatureLevel" : "All"
       } ],
       "identifier" : {
          "id" : "TestRetrieveInclude",
@@ -89,23 +89,23 @@
                "type" : "ListTypeSpecifier",
                "annotation" : [ ],
                "elementType" : {
-                  "name" : "{http://hl7.org/fhir}Observation",
                   "type" : "NamedTypeSpecifier",
+                  "name" : "{http://hl7.org/fhir}Observation",
                   "annotation" : [ ]
                }
             },
             "expression" : {
+               "type" : "Retrieve",
                "locator" : "12:25-12:39",
                "dataType" : "{http://hl7.org/fhir}Observation",
                "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
-               "type" : "Retrieve",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",
                   "annotation" : [ ],
                   "elementType" : {
-                     "name" : "{http://hl7.org/fhir}Observation",
                      "type" : "NamedTypeSpecifier",
+                     "name" : "{http://hl7.org/fhir}Observation",
                      "annotation" : [ ]
                   }
                },

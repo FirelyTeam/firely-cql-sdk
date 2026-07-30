@@ -8,6 +8,7 @@
 		<RR23LibrarySetDir>$(CqlSolutionDir)/LibrarySets/RR23/</RR23LibrarySetDir>
 		<DemoLibrarySetDir>$(CqlSolutionDir)/LibrarySets/Demo/</DemoLibrarySetDir>
 		<NcqaBuildArtifactsDir>$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/</NcqaBuildArtifactsDir>
+		<Hedis2025StagingDir>D:/firely-dqm-libraries/workspace/HEDIS/2025/staging</Hedis2025StagingDir>
 		<MeasuresAuthoringDemoDir>$(CqlSolutionDir)/Demo/Measures.Authoring/</MeasuresAuthoringDemoDir>
 		<MeasuresDemoDir>$(CqlSolutionDir)/Demo/Measures.Demo/</MeasuresDemoDir>
 		<MeasuresDqmContentQiCoreDemoDir>$(CqlSolutionDir)/Demo/Measures.dqm-content-qicore-2025/</MeasuresDqmContentQiCoreDemoDir>

@@ -6,15 +6,21 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Exceptions;
 using Hl7.Cql.Abstractions.Infrastructure;
-
+using Hl7.Cql.Exceptions;
+using Hl7.Cql.Operators;
 
 namespace Hl7.Cql.Compiler;
 
+/// <summary>
+/// Overload resolution (<see cref="ResolveMethodInfoWithPotentialArgumentConversions"/>):
+/// candidate scoring, generic inference, and the trailing-null precision retry. See the
+/// remarks on <see cref="CqlOperatorsBinder"/>.
+/// </summary>
 #pragma warning disable CS1591
-internal partial class CqlOperatorsBinder
+partial class CqlOperatorsBinder
 {
+    // Reflection cache of ICqlOperators method metadata used during overload resolution.
     private static readonly CqlOperatorsMethodsCache ICqlOperatorsMethods = new();
 
     ///  <summary>
@@ -44,16 +50,16 @@ internal partial class CqlOperatorsBinder
     ///  <param name="genericTypeArguments">When binding to a generic method definition, these are the type arguments.</param>
     ///  <param name="throwError">Whether to throw an error if no method overload could be found. This is the default behavior. Otherwise, returns the tuple with method as null.</param>
     ///  <exception cref="ArgumentException">If no method overload is discovered, and if <paramref name="throwError"/> is <c>true</c>.</exception>
-    private (MethodInfo? method, Expression[] arguments) ResolveMethodInfoWithPotentialArgumentConversions(
+    private (MethodInfo? method, CodeExpression[] arguments) ResolveMethodInfoWithPotentialArgumentConversions(
         string methodName,
-        Expression[] methodArguments,
+        CodeExpression[] methodArguments,
         Type[] genericTypeArguments,
         bool throwError = true)
     {
         if (_logger.IsEnabled(LogLevel.Debug))
-            _logger.LogDebug("Resolving method overload for {input}", new StringBuilder().AppendCSharp(methodName, methodArguments, genericTypeArguments, Defaults.MethodCSharpFormat));
+            _logger.LogDebug("Resolving method overload for {input}", FormatMethodCall(methodName, methodArguments, genericTypeArguments));
 
-        (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates =
+        (MethodInfo method, CodeExpression[] arguments, TypeConversion[] conversionMethods)[] candidates =
             ResolveMethodInfosWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments).ToArray();
 
         var candidate = candidates switch
@@ -89,7 +95,7 @@ internal partial class CqlOperatorsBinder
             case (method: null, throwError: true):
                 throw new CannotBindToCqlOperatorError(
                         methodName,
-                        methodArguments,
+                        methodArguments.SelectToArray(a => a.Type),
                         genericTypeArguments,
                         ICqlOperatorsMethods.GetMethodsByName(methodName),
                         Defaults.MethodCSharpFormat)
@@ -101,8 +107,8 @@ internal partial class CqlOperatorsBinder
                 return default;
         }
 
-        (MethodInfo? method, Expression[] arguments, TypeConversion[] conversionMethods) PickCandidate(
-            (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates)
+        (MethodInfo? method, CodeExpression[] arguments, TypeConversion[] conversionMethods) PickCandidate(
+            (MethodInfo method, CodeExpression[] arguments, TypeConversion[] conversionMethods)[] candidates)
         {
             if (methodArguments.Length > 0)
             {
@@ -111,13 +117,13 @@ internal partial class CqlOperatorsBinder
 
                 StringBuilder sbInput = new();
                 sbInput.Append(Defaults.NextItem);
-                sbInput.AppendCSharp(methodName, methodArguments, genericTypeArguments);
+                sbInput.Append(FormatMethodCall(methodName, methodArguments, genericTypeArguments));
 
                 StringBuilder sbCandidatesAndScore = new();
                 foreach (var ((method, methodArguments, _), score) in scoredCandidates)
                 {
                     sbCandidatesAndScore.Append(Defaults.NextItem);
-                    sbCandidatesAndScore.AppendCSharp(method.Name, methodArguments, genericTypeArguments);
+                    sbCandidatesAndScore.Append(FormatMethodCall(method.Name, methodArguments, genericTypeArguments));
                     sbCandidatesAndScore.Append(" (");
                     sbCandidatesAndScore.Append(score);
                     sbCandidatesAndScore.Append(')');
@@ -134,7 +140,7 @@ internal partial class CqlOperatorsBinder
             throw new InvalidOperationException("");
         }
 
-        double Score((MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods) candidate)
+        double Score((MethodInfo method, CodeExpression[] arguments, TypeConversion[] conversionMethods) candidate)
         {
             var score =
                 PadWhenEmpty( // Cannot get average of empty list
@@ -162,13 +168,13 @@ internal partial class CqlOperatorsBinder
         }
     }
 
-    private IEnumerable<(MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)>
+    private IEnumerable<(MethodInfo method, CodeExpression[] arguments, TypeConversion[] conversionMethods)>
         ResolveMethodInfosWithPotentialArgumentConversions(
             string methodName,
-            Expression[] arguments,
+            CodeExpression[] arguments,
             Type[] genericTypeArguments)
     {
-        Expression[] args = arguments; // So we don't modify the original array
+        CodeExpression[] args = arguments; // So we don't modify the original array
 
         if (genericTypeArguments.Length > 0)
         {
@@ -226,7 +232,13 @@ internal partial class CqlOperatorsBinder
                              argIndexForGenericMethod++) // Try to get generic type from argument up to the second one
                         {
                             var argType = args[argIndexForGenericMethod].Type;
-                            var parameterType = methodParameters[i].ParameterType;
+                            // The parameter must be the one in the probed argument's position —
+                            // indexing with the outer retry-pass index here was a long-standing
+                            // bug (#1341) that made the genericity probe check the wrong
+                            // parameter while probing argument 1, missing candidate type
+                            // arguments (and with them, bindings) for overload shapes whose
+                            // generic parameter sits in the second position.
+                            var parameterType = methodParameters[argIndexForGenericMethod].ParameterType;
                             var argIsGeneric = argType.IsGenericType;
                             var paramIsGeneric = parameterType.IsGenericMethodParameter;
 
@@ -273,7 +285,7 @@ internal partial class CqlOperatorsBinder
             }
 
             // Handles precision cases where the last argument might be supplied or not
-            if (i <= 0 && args[^1] is ConstantExpression { Value: null })
+            if (i <= 0 && args[^1] is CodeConstant { Value: null })
                 args = args[..^1];
             else
                 break;
@@ -281,10 +293,10 @@ internal partial class CqlOperatorsBinder
 
         bool TryBindArguments(
             ParameterInfo[] parameters,
-            out Expression[] bindArgs,
+            out CodeExpression[] bindArgs,
             out TypeConversion[] bindConversions)
         {
-            bindArgs = new Expression[args.Length];
+            bindArgs = new CodeExpression[args.Length];
             bindConversions = new TypeConversion[args.Length];
 
             for (int i = 0; i < args.Length; i++)
@@ -300,13 +312,41 @@ internal partial class CqlOperatorsBinder
         }
     }
 
-    private static MethodCallExpression BindToDirectMethod(
+    private static CodeInvoke BindToDirectMethod(
         string methodName,
-        params Expression[] arguments) =>
-        Expression.Call(CqlExpressions.Operators_PropertyExpression, methodName, null, arguments);
+        params CodeExpression[] arguments)
+    {
+        // Resolves by name + argument count only (CodeInvoke requires an already-resolved
+        // MethodInfo). Every current call site (ResolveValueSet, FlattenLateBoundList, and the
+        // ConvertXToY family selected via CqlOperators.ConversionFunctionName) has exactly one
+        // overload under that name; a genuinely overloaded name would need real overload
+        // resolution — the ambiguity guard below throws rather than guessing.
+        var candidates = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(methodName, arguments.Length);
+        var method = candidates.Count switch
+        {
+            1 => candidates.Single(),
+            0 => throw new InvalidOperationException($"No method named '{methodName}' with {arguments.Length} parameter(s) was found on {nameof(ICqlOperators)}."),
+            _ => throw new InvalidOperationException($"Method name '{methodName}' with {arguments.Length} parameter(s) is ambiguous on {nameof(ICqlOperators)}; direct binding requires a unique overload by name and arity.")
+        };
+        return new CodeInvoke(OperatorsReceiver, method, arguments);
+    }
 
-    private static MethodCallExpression BindToDirectMethod(
+    private static CodeInvoke BindToDirectMethod(
         MethodInfo method,
-        params Expression[] expressions) =>
-        Expression.Call(CqlExpressions.Operators_PropertyExpression, method, expressions);
+        params CodeExpression[] expressions) =>
+        new(OperatorsReceiver, method, expressions);
+
+    /// <summary>
+    /// Minimal, IR-side replacement for the old <c>StringBuilder.AppendCSharp(string, Expression[], Type[])</c>
+    /// extension (which formatted from <c>Expression.Type</c>), used only for debug logging and
+    /// error messages. Produces e.g. <c>"MethodName&lt;T1&gt;(Type1, Type2)"</c>.
+    /// </summary>
+    private static string FormatMethodCall(string methodName, CodeExpression[] args, Type[] genericTypeArguments)
+    {
+        var typeArgsStr = genericTypeArguments.Length == 0
+            ? ""
+            : $"<{string.Join(", ", genericTypeArguments.Select(t => t.ToCSharpString(Defaults.TypeCSharpFormat)))}>";
+        var argsStr = string.Join(", ", args.Select(a => a.Type.ToCSharpString(Defaults.TypeCSharpFormat)));
+        return $"{methodName}{typeArgsStr}({argsStr})";
+    }
 }

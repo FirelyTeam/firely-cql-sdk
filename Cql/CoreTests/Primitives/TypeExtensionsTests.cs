@@ -57,6 +57,19 @@ public class TypeExtensionsTests
     }
 
     [TestMethod]
+    public void IsCqlValueTuple_ShouldReturnTrue_WhenTypeIsNullableCqlValueTuple()
+    {
+        // Arrange
+        Type type = typeof(ValueTuple<CqlTupleMetadata, int>?);
+
+        // Act
+        bool result = type.IsCqlValueTuple();
+
+        // Assert
+        Assert.IsTrue(result);
+    }
+
+    [TestMethod]
     public void IsCqlValueTuple_ShouldReturnFalse_WhenTypeIsNotCqlValueTuple()
     {
         // Arrange

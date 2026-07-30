@@ -102,7 +102,7 @@ Hl7.Cql.Operators.ICqlOperators.Ceiling(decimal? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Ceiling(int? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Ceiling(long? argument) -> long?
 Hl7.Cql.Operators.ICqlOperators.Children(object! o) -> System.Collections.Generic.IEnumerable<object!>!
-Hl7.Cql.Operators.ICqlOperators.Coalesce<T>(System.Collections.Generic.IEnumerable<T!>? source) -> T?
+Hl7.Cql.Operators.ICqlOperators.Coalesce<T>(System.Collections.Generic.IEnumerable<T>? source) -> T?
 Hl7.Cql.Operators.ICqlOperators.CoalesceValueTypes<T>(System.Collections.Generic.IEnumerable<T?>? source) -> T?
 Hl7.Cql.Operators.ICqlOperators.CodeInList(Hl7.Cql.Primitives.CqlCode? element, System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? argument) -> bool?
 Hl7.Cql.Operators.ICqlOperators.CodeInValueSet(Hl7.Cql.Primitives.CqlCode? code, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
@@ -712,7 +712,6 @@ virtual Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler.Invoke(Hl7.Cql.Runtime.Pars
 ~override Hl7.Cql.Runtime.DefinitionSignature.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.Parsing.CqlParseError.Equals(object obj) -> bool
 Hl7.Cql.Runtime.CqlContext.DontUseCaching() -> void
-Hl7.Cql.Runtime.CqlContext.UseNewCache() -> void
 Hl7.Cql.Runtime.Defaults
 static Hl7.Cql.Runtime.Defaults.EnumerationOptionsRecurseSubdirectories.get -> System.IO.EnumerationOptions!
 Hl7.Cql.Runtime.IO.DirectoryPostProcessingStrategy
@@ -722,3 +721,6 @@ Hl7.Cql.Toolkit.SubdirectoryPreserver.SubdirectoryPreserver() -> void
 
 
 Hl7.Cql.Runtime.CqlContext.GetOrCompute<T>(long cacheKey, System.Func<Hl7.Cql.Runtime.CqlContext!, T>! factory) -> T
+Hl7.Cql.Runtime.CqlContext.UseNewCache(int initialCapacity = 1024) -> void
+const Hl7.Cql.Runtime.CqlContext.CacheInitialCapacity = 1024 -> int
+const Hl7.Cql.Runtime.CqlContext.MinimumCacheInitialCapacity = 16 -> int

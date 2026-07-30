@@ -157,7 +157,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 }
                                 else
                                 {
-                                    throw new NotImplementedException();
+                                    // CoercionResult only carries a cost, so the diagnostic is composed here.
+                                    return new Instance()
+                                        .AddError($"The value for element {elementName} of type '{elementExpression.resultTypeSpecifier}' cannot be converted to the declared type '{elementType}'.")
+                                        .WithLocator(context.Locator())
+                                        .WithResultType(type);
                                 }
                             }
                         }

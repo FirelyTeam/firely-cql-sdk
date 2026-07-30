@@ -109,11 +109,11 @@ public class CqlQuantityTests
     }
 
     /// <summary>
-    /// Adding commensurable UCUM quantities (kg + g) delegates to IMetricService.TryAdd,
-    /// which canonicalises both operands and returns the result in canonical units.
+    /// Adding commensurable UCUM quantities (kg + g) delegates to IMetricService.TryAdd.
+    /// The result is re-expressed to the most granular unit of the inputs.
     /// </summary>
-    [TestMethod, Ignore("Requires a full IMetricService implementation (e.g. Firely.UCUM); the default FhirMetricService does not implement TryAdd.")]
-    public void Add_CommensurableUcumUnits_ReturnsSumInCanonicalUnit()
+    [TestMethod]
+    public void Add_CommensurableUcumUnits_ReturnsSumInMostGranularUnit()
     {
         var ops = GetOperators();
         var result = ops.Add(new CqlQuantity(1m, "kg"), new CqlQuantity(500m, "g"));
@@ -121,6 +121,22 @@ public class CqlQuantityTests
         // FhirMetricService canonicalises kg and g to g; 1 kg = 1000 g + 500 g = 1500 g
         Assert.AreEqual(1500m, result!.value);
         Assert.AreEqual("g", result.unit);
+    }
+
+    [TestMethod]
+    public void Add_CommensurableUcumUnits_PrefersMostGranularUnitInBothOrders()
+    {
+        var ops = GetOperators();
+
+        var mgPlusG = ops.Add(new CqlQuantity(1m, "mg"), new CqlQuantity(2m, "g"));
+        Assert.IsNotNull(mgPlusG);
+        Assert.AreEqual(2001m, mgPlusG!.value);
+        Assert.AreEqual("mg", mgPlusG.unit);
+
+        var gPlusMg = ops.Add(new CqlQuantity(2m, "g"), new CqlQuantity(1m, "mg"));
+        Assert.IsNotNull(gPlusMg);
+        Assert.AreEqual(2001m, gPlusMg!.value);
+        Assert.AreEqual("mg", gPlusMg.unit);
     }
 
     [TestMethod]
@@ -188,11 +204,11 @@ public class CqlQuantityTests
     }
 
     /// <summary>
-    /// Subtracting commensurable UCUM quantities (kg - g) delegates to IMetricService.TrySubtract,
-    /// which canonicalises both operands and returns the result in canonical units.
+    /// Subtracting commensurable UCUM quantities (kg - g) delegates to IMetricService.TrySubtract.
+    /// The result is re-expressed to the most granular unit of the inputs.
     /// </summary>
-    [TestMethod, Ignore("Requires a full IMetricService implementation (e.g. Firely.UCUM); the default FhirMetricService does not implement TrySubtract.")]
-    public void Subtract_CommensurableUcumUnits_ReturnsDifferenceInCanonicalUnit()
+    [TestMethod]
+    public void Subtract_CommensurableUcumUnits_ReturnsDifferenceInMostGranularUnit()
     {
         var ops = GetOperators();
         var result = ops.Subtract(new CqlQuantity(2m, "kg"), new CqlQuantity(500m, "g"));
@@ -200,6 +216,22 @@ public class CqlQuantityTests
         // FhirMetricService canonicalises kg and g to g; 2 kg = 2000 g - 500 g = 1500 g
         Assert.AreEqual(1500m, result!.value);
         Assert.AreEqual("g", result.unit);
+    }
+
+    [TestMethod]
+    public void Subtract_CommensurableUcumUnits_PrefersMostGranularUnitInBothOrders()
+    {
+        var ops = GetOperators();
+
+        var mgMinusG = ops.Subtract(new CqlQuantity(1m, "mg"), new CqlQuantity(2m, "g"));
+        Assert.IsNotNull(mgMinusG);
+        Assert.AreEqual(-1999m, mgMinusG!.value);
+        Assert.AreEqual("mg", mgMinusG.unit);
+
+        var gMinusMg = ops.Subtract(new CqlQuantity(2m, "g"), new CqlQuantity(1m, "mg"));
+        Assert.IsNotNull(gMinusMg);
+        Assert.AreEqual(1999m, gMinusMg!.value);
+        Assert.AreEqual("mg", gMinusMg.unit);
     }
 
     [TestMethod]
@@ -296,6 +328,13 @@ public class CqlQuantityTests
     }
 
     [TestMethod]
+    public void Between_CqlQuantity_IncompatibleDimensions_ReturnsFalse()
+    {
+        var ops = GetOperators();
+        Assert.IsFalse(ops.Between(new CqlQuantity(5m, "kg"), new CqlQuantity(1m, "s"), new CqlQuantity(10m, "kg")));
+    }
+
+    [TestMethod]
     public void Between_CqlQuantity_NullArgument_ReturnsNull()
     {
         var ops = GetOperators();
@@ -389,12 +428,12 @@ public class CqlQuantityTests
         var result1 = ops.Multiply(unitedQuantity, scalarQuantity);
         Assert.IsNotNull(result1);
         Assert.AreEqual(12m, result1.value);
-        Assert.AreEqual(UCUMUnits.Default, result1.unit);
+        Assert.AreEqual("mg", result1.unit);
 
         var result2 = ops.Multiply(scalarQuantity, unitedQuantity);
         Assert.IsNotNull(result2);
         Assert.AreEqual(12m, result2.value);
-        Assert.AreEqual(UCUMUnits.Default, result2.unit);
+        Assert.AreEqual("mg", result2.unit);
     }
 
     [TestMethod]

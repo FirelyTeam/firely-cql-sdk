@@ -4,7 +4,7 @@ High-level APIs for invoking CQL libraries from .NET applications.
 
 ## Overview
 
-This package is the **recommended entry point** for applications that need to execute CQL logic. It wraps the full compilation pipeline (CQL → ELM → LINQ Expressions → .NET Assembly) and exposes a clean API for invoking definitions, functions, and enumerating results.
+This package is the **recommended entry point** for applications that need to execute CQL logic. It wraps the full compilation pipeline (CQL → ELM → typed IR → C# source → .NET Assembly) and exposes a clean API for invoking definitions, functions, and enumerating results.
 
 ### Why use the Invocation Toolkit instead of calling libraries directly?
 

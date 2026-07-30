@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("FHIRHelpers", "4.0.1")]
 public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
 {
@@ -35,151 +35,121 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
     [CqlFunctionDefinition("ToInterval")]
     public CqlInterval<CqlDateTime> ToInterval(CqlContext context, Period period)
     {
-
-        CqlInterval<CqlDateTime> a_() {
-            if (period is null)
-            {
-                return null as CqlInterval<CqlDateTime>;
-            }
-            else
-            {
-                FhirDateTime b_ = period?.StartElement;
-                CqlDateTime c_ = context.Operators.Convert<CqlDateTime>(b_);
-                FhirDateTime d_ = period?.EndElement;
-                CqlDateTime e_ = context.Operators.Convert<CqlDateTime>(d_);
-                CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, true, true);
-                return f_;
-            };
+        if (period is null)
+        {
+            return null as CqlInterval<CqlDateTime>;
         }
-
-        return a_();
+        else
+        {
+            FhirDateTime a_ = period?.StartElement;
+            CqlDateTime b_ = context.Operators.Convert<CqlDateTime>(a_);
+            FhirDateTime c_ = period?.EndElement;
+            CqlDateTime d_ = context.Operators.Convert<CqlDateTime>(c_);
+            CqlInterval<CqlDateTime> e_ = context.Operators.Interval(b_, d_, true, true);
+            return e_;
+        }
     }
 
 
     [CqlFunctionDefinition("ToInterval")]
     public CqlInterval<CqlQuantity> ToInterval(CqlContext context, Range range)
     {
-
-        CqlInterval<CqlQuantity> a_() {
-            if (range is null)
-            {
-                return null as CqlInterval<CqlQuantity>;
-            }
-            else
-            {
-                Quantity b_ = range?.Low;
-                CqlQuantity c_ = this.ToQuantity(context, b_ as Quantity);
-                Quantity d_ = range?.High;
-                CqlQuantity e_ = this.ToQuantity(context, d_ as Quantity);
-                CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, true, true);
-                return f_;
-            };
+        if (range is null)
+        {
+            return null as CqlInterval<CqlQuantity>;
         }
-
-        return a_();
+        else
+        {
+            Quantity a_ = range?.Low;
+            CqlQuantity b_ = this.ToQuantity(context, a_ as Quantity);
+            Quantity c_ = range?.High;
+            CqlQuantity d_ = this.ToQuantity(context, c_ as Quantity);
+            CqlInterval<CqlQuantity> e_ = context.Operators.Interval(b_, d_, true, true);
+            return e_;
+        }
     }
 
 
     [CqlFunctionDefinition("ToQuantity")]
     public CqlQuantity ToQuantity(CqlContext context, Quantity quantity)
     {
-
-        CqlQuantity a_() {
-            if (quantity is null)
-            {
-                return null as CqlQuantity;
-            }
-            else
-            {
-                FhirDecimal b_ = quantity?.ValueElement;
-                decimal? c_ = b_?.Value;
-                FhirString d_ = quantity?.UnitElement;
-                string e_ = d_?.Value;
-                return new CqlQuantity(c_, e_);
-            };
+        if (quantity is null)
+        {
+            return null as CqlQuantity;
         }
-
-        return a_();
+        else
+        {
+            FhirDecimal a_ = quantity?.ValueElement;
+            decimal? b_ = a_?.Value;
+            FhirString c_ = quantity?.UnitElement;
+            string d_ = c_?.Value;
+            return new CqlQuantity(b_, d_);
+        }
     }
 
 
     [CqlFunctionDefinition("ToRatio")]
     public CqlRatio ToRatio(CqlContext context, Ratio ratio)
     {
-
-        CqlRatio a_() {
-            if (ratio is null)
-            {
-                return null as CqlRatio;
-            }
-            else
-            {
-                Quantity b_ = ratio?.Numerator;
-                CqlQuantity c_ = this.ToQuantity(context, b_);
-                Quantity d_ = ratio?.Denominator;
-                CqlQuantity e_ = this.ToQuantity(context, d_);
-                return new CqlRatio(c_, e_);
-            };
+        if (ratio is null)
+        {
+            return null as CqlRatio;
         }
-
-        return a_();
+        else
+        {
+            Quantity a_ = ratio?.Numerator;
+            CqlQuantity b_ = this.ToQuantity(context, a_);
+            Quantity c_ = ratio?.Denominator;
+            CqlQuantity d_ = this.ToQuantity(context, c_);
+            return new CqlRatio(b_, d_);
+        }
     }
 
 
     [CqlFunctionDefinition("ToCode")]
     public CqlCode ToCode(CqlContext context, Coding coding)
     {
-
-        CqlCode a_() {
-            if (coding is null)
-            {
-                return null as CqlCode;
-            }
-            else
-            {
-                Code b_ = coding?.CodeElement;
-                string c_ = b_?.Value;
-                FhirUri d_ = coding?.SystemElement;
-                string e_ = d_?.Value;
-                FhirString f_ = coding?.VersionElement;
-                string g_ = f_?.Value;
-                FhirString h_ = coding?.DisplayElement;
-                string i_ = h_?.Value;
-                return new CqlCode(c_, e_, g_, i_);
-            };
+        if (coding is null)
+        {
+            return null as CqlCode;
         }
-
-        return a_();
+        else
+        {
+            Code a_ = coding?.CodeElement;
+            string b_ = a_?.Value;
+            FhirUri c_ = coding?.SystemElement;
+            string d_ = c_?.Value;
+            FhirString e_ = coding?.VersionElement;
+            string f_ = e_?.Value;
+            FhirString g_ = coding?.DisplayElement;
+            string h_ = g_?.Value;
+            return new CqlCode(b_, d_, f_, h_);
+        }
     }
 
 
     [CqlFunctionDefinition("ToConcept")]
     public CqlConcept ToConcept(CqlContext context, CodeableConcept concept)
     {
-
-        CqlConcept a_() {
-            if (concept is null)
-            {
-                return null as CqlConcept;
-            }
-            else
-            {
-                List<Coding> b_ = concept?.Coding;
-
-                CqlCode c_(Coding C) {
-                    CqlCode h_ = this.ToCode(context, C);
-                    return h_;
-                }
-
-                IEnumerable<CqlCode> d_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)b_, c_);
-                IEnumerable<CqlCode> e_ = context.Operators.Distinct<CqlCode>(d_);
-                FhirString f_ = concept?.TextElement;
-                string g_ = f_?.Value;
-                return new CqlConcept(e_, g_);
-            };
+        if (concept is null)
+        {
+            return null as CqlConcept;
         }
+        else
+        {
+            List<Coding> a_ = concept?.Coding;
 
-        return a_();
+            CqlCode b_(Coding C) {
+                CqlCode g_ = this.ToCode(context, C);
+                return g_;
+            }
+
+            IEnumerable<CqlCode> c_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)a_, b_);
+            IEnumerable<CqlCode> d_ = context.Operators.Distinct<CqlCode>(c_);
+            FhirString e_ = concept?.TextElement;
+            string f_ = e_?.Value;
+            return new CqlConcept(d_, f_);
+        }
     }
 
 

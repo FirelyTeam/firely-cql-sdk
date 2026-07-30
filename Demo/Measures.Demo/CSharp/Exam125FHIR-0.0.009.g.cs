@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("Exam125FHIR", "0.0.009")]
 public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_009>
 {
@@ -176,7 +176,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
             bool? j_ = context.Operators.Equal(i_, "finished");
             CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
             Period l_ = TelehealthEncounter?.Period;
-            CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, l_ as object);
+            CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, l_);
             bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, (string)default);
             bool? o_ = context.Operators.And(j_, n_);
             return o_;
@@ -225,16 +225,16 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(51, 74, true, false);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        Code<AdministrativeGender> l_ = a_?.GenderElement;
-        string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
-        bool? n_ = context.Operators.Equal(m_, "female");
-        bool? o_ = context.Operators.And(j_, n_);
-        IEnumerable<Encounter> p_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
-        IEnumerable<Encounter> q_ = this.Telehealth_Services(context);
-        IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(p_, q_);
-        bool? s_ = context.Operators.Exists<Encounter>(r_);
-        bool? t_ = context.Operators.And(o_, s_);
-        return t_;
+        Code<AdministrativeGender> k_ = a_?.GenderElement;
+        string l_ = FHIRHelpers_4_0_001.Instance.ToString(context, k_);
+        bool? m_ = context.Operators.Equal(l_, "female");
+        bool? n_ = context.Operators.And(j_, m_);
+        IEnumerable<Encounter> o_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
+        IEnumerable<Encounter> p_ = this.Telehealth_Services(context);
+        IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(o_, p_);
+        bool? r_ = context.Operators.Exists<Encounter>(q_);
+        bool? s_ = context.Operators.And(n_, r_);
+        return s_;
     }
 
 
@@ -529,14 +529,12 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
             CqlDateTime n_ = context.Operators.End(m_);
             CqlQuantity o_ = context.Operators.Quantity(27m, "months");
             CqlDateTime p_ = context.Operators.Subtract(n_, o_);
-            CqlDateTime r_ = context.Operators.End(m_);
-            CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
-            bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, (string)default);
-            CqlDateTime v_ = context.Operators.End(m_);
-            bool? w_ = context.Operators.Not((bool?)(v_ is null));
-            bool? x_ = context.Operators.And(t_, w_);
-            bool? y_ = context.Operators.And(i_, x_);
-            return y_;
+            CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, true);
+            bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
+            bool? s_ = context.Operators.Not((bool?)(n_ is null));
+            bool? t_ = context.Operators.And(r_, s_);
+            bool? u_ = context.Operators.And(i_, t_);
+            return u_;
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -573,14 +571,12 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
             CqlDateTime n_ = context.Operators.End(m_);
             CqlQuantity o_ = context.Operators.Quantity(27m, "months");
             CqlDateTime p_ = context.Operators.Subtract(n_, o_);
-            CqlDateTime r_ = context.Operators.End(m_);
-            CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
-            bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, (string)default);
-            CqlDateTime v_ = context.Operators.End(m_);
-            bool? w_ = context.Operators.Not((bool?)(v_ is null));
-            bool? x_ = context.Operators.And(t_, w_);
-            bool? y_ = context.Operators.And(i_, x_);
-            return y_;
+            CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, true);
+            bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
+            bool? s_ = context.Operators.Not((bool?)(n_ is null));
+            bool? t_ = context.Operators.And(r_, s_);
+            bool? u_ = context.Operators.And(i_, t_);
+            return u_;
         }
 
         IEnumerable<DiagnosticReport> d_ = context.Operators.Where<DiagnosticReport>(b_, c_);
@@ -653,14 +649,12 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
             CqlDateTime o_ = context.Operators.End(n_);
             CqlQuantity p_ = context.Operators.Quantity(27m, "months");
             CqlDateTime q_ = context.Operators.Subtract(o_, p_);
-            CqlDateTime s_ = context.Operators.End(n_);
-            CqlInterval<CqlDateTime> t_ = context.Operators.Interval(q_, s_, true, true);
-            bool? u_ = context.Operators.In<CqlDateTime>(m_, t_, (string)default);
-            CqlDateTime w_ = context.Operators.End(n_);
-            bool? x_ = context.Operators.Not((bool?)(w_ is null));
-            bool? y_ = context.Operators.And(u_, x_);
-            bool? z_ = context.Operators.And(j_, y_);
-            return z_;
+            CqlInterval<CqlDateTime> r_ = context.Operators.Interval(q_, o_, true, true);
+            bool? s_ = context.Operators.In<CqlDateTime>(m_, r_, (string)default);
+            bool? t_ = context.Operators.Not((bool?)(o_ is null));
+            bool? u_ = context.Operators.And(s_, t_);
+            bool? v_ = context.Operators.And(j_, u_);
+            return v_;
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -698,14 +692,12 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
             CqlDateTime o_ = context.Operators.End(n_);
             CqlQuantity p_ = context.Operators.Quantity(27m, "months");
             CqlDateTime q_ = context.Operators.Subtract(o_, p_);
-            CqlDateTime s_ = context.Operators.End(n_);
-            CqlInterval<CqlDateTime> t_ = context.Operators.Interval(q_, s_, true, true);
-            bool? u_ = context.Operators.In<CqlDateTime>(m_, t_, (string)default);
-            CqlDateTime w_ = context.Operators.End(n_);
-            bool? x_ = context.Operators.Not((bool?)(w_ is null));
-            bool? y_ = context.Operators.And(u_, x_);
-            bool? z_ = context.Operators.And(j_, y_);
-            return z_;
+            CqlInterval<CqlDateTime> r_ = context.Operators.Interval(q_, o_, true, true);
+            bool? s_ = context.Operators.In<CqlDateTime>(m_, r_, (string)default);
+            bool? t_ = context.Operators.Not((bool?)(o_ is null));
+            bool? u_ = context.Operators.And(s_, t_);
+            bool? v_ = context.Operators.And(j_, u_);
+            return v_;
         }
 
         IEnumerable<DiagnosticReport> d_ = context.Operators.Where<DiagnosticReport>(b_, c_);

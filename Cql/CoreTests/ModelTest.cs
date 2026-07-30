@@ -55,6 +55,28 @@ namespace CoreTests
             Assert.AreEqual(age, 29);
         }
 
+        [TestMethod]
+        public void Coalesce_NonNullableValueType_Throws()
+        {
+            // Coalesce<T> requires T to be a reference type or Nullable<U> (#1313);
+            // non-nullable value types cannot represent null and must throw.
+            var ops = CqlOperators.Create(new UnitTestTypeResolver());
+
+            var act = () => ops.Coalesce<int>([1, 2]);
+
+            act.Should().Throw<ArgumentException>().WithMessage("*non-nullable value type*");
+        }
+
+        [TestMethod]
+        public void Coalesce_NullableValueType_ReturnsFirstNonNullOrNull()
+        {
+            var ops = CqlOperators.Create(new UnitTestTypeResolver());
+
+            ops.Coalesce<int?>([null, 42, 7]).Should().Be(42);
+            ops.Coalesce<int?>([null, null]).Should().BeNull();
+            ops.Coalesce<int?>(null).Should().BeNull();
+        }
+
         private class UnitTestPatient
         {
             public DateIso8601 birthDate { get; set; }

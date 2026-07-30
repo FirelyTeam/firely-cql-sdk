@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR", "0.0.008")]
 public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008 : ILibrary, ISingleton<PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008>
 {
@@ -194,7 +194,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         bool? x_(Encounter ValidEncounter) {
             CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
             Period aa_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, aa_ as object);
+            CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, aa_);
             bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, (string)default);
             Code<Encounter.EncounterStatus> ad_ = ValidEncounter?.StatusElement;
             string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_);
@@ -225,18 +225,13 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "month");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 6);
-        Date k_ = a_?.BirthDateElement;
-        string l_ = k_?.Value;
-        CqlDate m_ = context.Operators.ConvertStringToDate(l_);
-        CqlDateTime o_ = context.Operators.Start(e_);
-        CqlDate p_ = context.Operators.DateFrom(o_);
-        int? q_ = context.Operators.CalculateAgeAt(m_, p_, "year");
-        bool? r_ = context.Operators.Less(q_, 20);
-        bool? s_ = context.Operators.And(i_, r_);
-        IEnumerable<Encounter> t_ = this.Qualifying_Encounters(context);
-        bool? u_ = context.Operators.Exists<Encounter>(t_);
-        bool? v_ = context.Operators.And(s_, u_);
-        return v_;
+        int? j_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+        bool? k_ = context.Operators.Less(j_, 20);
+        bool? l_ = context.Operators.And(i_, k_);
+        IEnumerable<Encounter> m_ = this.Qualifying_Encounters(context);
+        bool? n_ = context.Operators.Exists<Encounter>(m_);
+        bool? o_ = context.Operators.And(l_, n_);
+        return o_;
     }
 
 
@@ -283,15 +278,10 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "month");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 6);
-        Date k_ = a_?.BirthDateElement;
-        string l_ = k_?.Value;
-        CqlDate m_ = context.Operators.ConvertStringToDate(l_);
-        CqlDateTime o_ = context.Operators.Start(e_);
-        CqlDate p_ = context.Operators.DateFrom(o_);
-        int? q_ = context.Operators.CalculateAgeAt(m_, p_, "year");
-        bool? r_ = context.Operators.LessOrEqual(q_, 4);
-        bool? s_ = context.Operators.And(i_, r_);
-        return s_;
+        int? j_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+        bool? k_ = context.Operators.LessOrEqual(j_, 4);
+        bool? l_ = context.Operators.And(i_, k_);
+        return l_;
     }
 
 

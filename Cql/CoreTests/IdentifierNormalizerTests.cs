@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -34,7 +34,6 @@ public class IdentifierNormalizerTests
     [TestMethod]
     public void Normalize_SpecialCharacters_ReplacedCorrectly()
     {
-        // Test cases based on old ExpressionBuilderContext.NormalizeIdentifier behavior
         IdentifierNormalizer.Normalize("param with spaces").Should().Be("param_with_spaces");
         IdentifierNormalizer.Normalize("param.with.dots").Should().Be("param_with_dots");
         IdentifierNormalizer.Normalize("param,with,commas").Should().Be("param_with_commas");

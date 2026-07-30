@@ -1,16 +1,15 @@
 # Hl7.Cql.Compiler
 
-A support package for HL7.Cql that translates ELM into C# expression trees and can emit those expression trees into either runtime Delegates or C# source code.
+A support package for HL7.Cql that translates ELM into a typed intermediate representation (IR) and can emit that IR as C# source code.
 
 ## Overview
 
-This package provides the compilation infrastructure that converts ELM (Expression Logical Model) representations into executable .NET code. It serves as the bridge between the logical CQL expressions and their runtime execution.
+This package provides the compilation infrastructure that converts ELM (Expression Logical Model) representations into C# source code. It serves as the bridge between the logical CQL expressions and the generated C# that is later compiled into a .NET assembly.
 
 ## Key Features
 
-- **ELM to Expression Trees**: Converts ELM JSON into .NET Expression objects
-- **C# Code Generation**: Emits human-readable C# source code from expression trees
-- **Runtime Delegate Creation**: Compiles expressions into executable delegates for immediate execution
+- **ELM to Typed IR**: Converts ELM JSON into a small set of typed IR nodes (carrying `System.Type`) that model C# code constructs
+- **C# Code Generation**: Emits human-readable C# source code directly from the typed IR
 - **Operator Binding**: Maps CQL operators to their .NET runtime implementations
 - **Expression Building Context**: Manages compilation state and dependencies
 

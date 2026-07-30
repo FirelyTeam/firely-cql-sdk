@@ -170,10 +170,12 @@ Maven project descriptor used exclusively to download the Java CQL-to-ELM toolin
 
 | Artifact | Purpose |
 |----------|---------|
-| `info.cqframework:cql-to-elm-cli` | Java CQL-to-ELM command-line interface |
-| `info.cqframework:elm-fhir` | ELM-to-FHIR conversion support |
+| `org.cqframework:cql-to-elm-cli` | CQL-to-ELM command-line interface |
+| `org.cqframework:elm-fhir` | ELM-to-FHIR conversion support |
 
-The version is pinned in `Java-Dependencies-Vars.ps1` / `Java-Dependencies-Vars.sh` (currently `3.29.0`). When updating the version you must keep it consistent across:
+> **Note:** The Maven groupId changed from `info.cqframework` to `org.cqframework` starting with upstream version `4.0.0`. The upstream [cqframework/clinical_quality_language](https://github.com/cqframework/clinical_quality_language) project rewrote its Java codebase in Kotlin (Kotlin Multiplatform, targeting JVM/JS/Wasm) around that release and renamed the groupId as part of that migration. The CLI is still distributed as a JVM application and invoked the same way (`java -classpath ... org.cqframework.cql.cql2elm.cli.Main`) — only the groupId, and the language the tool itself is implemented in, changed. Upgrading from `3.29.0` to `4.0.0` produced no changes to ELM output beyond the `translatorVersion` annotation field and a couple of inconsequential JSON key reorderings (verified by diffing regenerated output against the pre-upgrade baseline for every checked-in ELM fixture in this repo).
+
+The version is pinned in `Java-Dependencies-Vars.ps1` / `Java-Dependencies-Vars.sh` (currently `5.0.0`). When updating the version you must keep it consistent across:
 - `pom.xml`
 - `Java-Dependencies-Vars.ps1`
 - `Java-Dependencies-Vars.sh`
@@ -186,4 +188,4 @@ Maven downloads JARs on first build into `Demo/Cql/Build/target/dependency/` and
 - [Demo projects](demo-projects.md) — the `Demo/` projects that use this pipeline, and how to configure a measure project
 - [CQL Packager Reference](cql-packager.md) — all `cql-package` commands, options, and examples
 - [Getting Started](getting-started.md) — prerequisites and first steps
-- [cqframework/clinical_quality_language](https://github.com/cqframework/clinical_quality_language) — upstream Java CQL-to-ELM tool
+- [cqframework/clinical_quality_language](https://github.com/cqframework/clinical_quality_language) — upstream CQL-to-ELM tool (Kotlin-based as of `4.0.0`, still runs on the JVM)

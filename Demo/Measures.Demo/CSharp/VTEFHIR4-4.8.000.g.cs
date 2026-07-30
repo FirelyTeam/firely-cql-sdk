@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("VTEFHIR4", "4.8.000")]
 public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
 {
@@ -125,10 +125,10 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlContext context, CqlDateTime StartValue)
     {
         CqlDate a_ = context.Operators.DateFrom(StartValue);
-        CqlQuantity c_ = context.Operators.Quantity(1m, "day");
-        CqlDate d_ = context.Operators.Add(a_, c_);
-        CqlInterval<CqlDate> e_ = context.Operators.Interval(a_, d_, true, true);
-        return e_;
+        CqlQuantity b_ = context.Operators.Quantity(1m, "day");
+        CqlDate c_ = context.Operators.Add(a_, b_);
+        CqlInterval<CqlDate> d_ = context.Operators.Interval(a_, c_, true, true);
+        return d_;
     }
 
 

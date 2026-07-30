@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("CMS1056FHIRCTClinical", "1.0.000")]
 public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS1056FHIRCTClinical_1_0_000>
 {
@@ -160,12 +160,12 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
             Date s_ = r_?.BirthDateElement;
             string t_ = s_?.Value;
             CqlDate u_ = context.Operators.ConvertStringToDate(t_);
-            CqlDateTime w_ = context.Operators.Start(o_);
-            CqlDate x_ = context.Operators.DateFrom(w_);
-            int? y_ = context.Operators.CalculateAgeAt(u_, x_, "year");
-            bool? z_ = context.Operators.GreaterOrEqual(y_, 18);
-            bool? aa_ = context.Operators.And(q_, z_);
-            return aa_;
+            CqlDateTime v_ = context.Operators.Start(o_);
+            CqlDate w_ = context.Operators.DateFrom(v_);
+            int? x_ = context.Operators.CalculateAgeAt(u_, w_, "year");
+            bool? y_ = context.Operators.GreaterOrEqual(x_, 18);
+            bool? z_ = context.Operators.And(q_, y_);
+            return z_;
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);

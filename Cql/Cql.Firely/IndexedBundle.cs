@@ -48,12 +48,9 @@ namespace Hl7.Cql.Fhir
 
             foreach (var candidate in candidates)
             {
-                if (candidate is ICoded codedCandidate)
-                {
-                    var codings = codedCandidate.ToCodings();
-                    foreach (var coding in codings)
-                        if (filter(coding)) yield return candidate;
-                }
+                // Yield each candidate at most once, even when multiple codings match the filter.
+                if (candidate is ICoded codedCandidate && codedCandidate.ToCodings().Any(coding => filter(coding)))
+                    yield return candidate;
             }
         }
 
@@ -63,9 +60,9 @@ namespace Hl7.Cql.Fhir
 
             foreach (var candidate in candidates)
             {
-                var codings = getCodes.Invoke(candidate);
-                foreach (var coding in codings)
-                    if (filter(coding)) yield return candidate;
+                // Yield each candidate at most once, even when multiple codings match the filter.
+                if (getCodes.Invoke(candidate).Any(coding => filter(coding)))
+                    yield return candidate;
             }
         }
 

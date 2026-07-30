@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
 [CqlLibrary("HybridHWRFHIR", "1.3.005")]
 public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_1_3_005>
 {
@@ -226,141 +226,123 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
             IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
             bool? h_(Encounter LastED) {
-                Period ag_ = LastED?.Period;
-                CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ag_);
-                CqlDateTime ai_ = context.Operators.End(ah_);
-                CqlValueSet aj_ = this.Observation_Services(context);
-                IEnumerable<Encounter> ak_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+                Period ae_ = LastED?.Period;
+                CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ae_);
+                CqlDateTime ag_ = context.Operators.End(af_);
+                CqlValueSet ah_ = this.Observation_Services(context);
+                IEnumerable<Encounter> ai_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ah_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
-                bool? al_(Encounter LastObs) {
-                    Period cc_ = LastObs?.Period;
+                bool? aj_(Encounter LastObs) {
+                    Period bq_ = LastObs?.Period;
+                    CqlInterval<CqlDateTime> br_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bq_);
+                    CqlDateTime bs_ = context.Operators.End(br_);
+                    Period bt_ = Visit?.Period;
+                    CqlInterval<CqlDateTime> bu_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bt_);
+                    CqlDateTime bv_ = context.Operators.Start(bu_);
+                    CqlQuantity bw_ = context.Operators.Quantity(1m, "hour");
+                    CqlDateTime bx_ = context.Operators.Subtract(bv_, bw_);
+                    CqlInterval<CqlDateTime> by_ = context.Operators.Interval(bx_, bv_, true, true);
+                    bool? bz_ = context.Operators.In<CqlDateTime>(bs_, by_, (string)default);
+                    bool? ca_ = context.Operators.Not((bool?)(bv_ is null));
+                    bool? cb_ = context.Operators.And(bz_, ca_);
+                    return cb_;
+                }
+
+                IEnumerable<Encounter> ak_ = context.Operators.Where<Encounter>(ai_, aj_);
+
+                object al_(Encounter @this) {
+                    Period cc_ = @this?.Period;
                     CqlInterval<CqlDateTime> cd_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cc_);
                     CqlDateTime ce_ = context.Operators.End(cd_);
-                    Period cf_ = Visit?.Period;
+                    return ce_;
+                }
+
+                IEnumerable<Encounter> am_ = context.Operators.SortBy<Encounter>(ak_, al_, System.ComponentModel.ListSortDirection.Ascending);
+                Encounter an_ = context.Operators.Last<Encounter>(am_);
+                Period ao_ = an_?.Period;
+                CqlInterval<CqlDateTime> ap_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ao_);
+                CqlDateTime aq_ = context.Operators.Start(ap_);
+                Period ar_ = Visit?.Period;
+                CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ar_);
+                CqlDateTime at_ = context.Operators.Start(as_);
+                CqlQuantity au_ = context.Operators.Quantity(1m, "hour");
+                CqlDateTime av_ = context.Operators.Subtract(aq_ ?? at_, au_);
+
+                bool? aw_(Encounter LastObs) {
+                    Period cf_ = LastObs?.Period;
                     CqlInterval<CqlDateTime> cg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cf_);
-                    CqlDateTime ch_ = context.Operators.Start(cg_);
-                    CqlQuantity ci_ = context.Operators.Quantity(1m, "hour");
-                    CqlDateTime cj_ = context.Operators.Subtract(ch_, ci_);
-                    CqlInterval<CqlDateTime> cl_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cf_);
-                    CqlDateTime cm_ = context.Operators.Start(cl_);
-                    CqlInterval<CqlDateTime> cn_ = context.Operators.Interval(cj_, cm_, true, true);
-                    bool? co_ = context.Operators.In<CqlDateTime>(ce_, cn_, (string)default);
-                    CqlInterval<CqlDateTime> cq_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cf_);
-                    CqlDateTime cr_ = context.Operators.Start(cq_);
-                    bool? cs_ = context.Operators.Not((bool?)(cr_ is null));
-                    bool? ct_ = context.Operators.And(co_, cs_);
+                    CqlDateTime ch_ = context.Operators.End(cg_);
+                    Period ci_ = Visit?.Period;
+                    CqlInterval<CqlDateTime> cj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ci_);
+                    CqlDateTime ck_ = context.Operators.Start(cj_);
+                    CqlQuantity cl_ = context.Operators.Quantity(1m, "hour");
+                    CqlDateTime cm_ = context.Operators.Subtract(ck_, cl_);
+                    CqlInterval<CqlDateTime> cn_ = context.Operators.Interval(cm_, ck_, true, true);
+                    bool? co_ = context.Operators.In<CqlDateTime>(ch_, cn_, (string)default);
+                    bool? cp_ = context.Operators.Not((bool?)(ck_ is null));
+                    bool? cq_ = context.Operators.And(co_, cp_);
+                    return cq_;
+                }
+
+                IEnumerable<Encounter> ax_ = context.Operators.Where<Encounter>(ai_, aw_);
+
+                object ay_(Encounter @this) {
+                    Period cr_ = @this?.Period;
+                    CqlInterval<CqlDateTime> cs_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cr_);
+                    CqlDateTime ct_ = context.Operators.End(cs_);
                     return ct_;
                 }
 
-                IEnumerable<Encounter> am_ = context.Operators.Where<Encounter>(ak_, al_);
+                IEnumerable<Encounter> az_ = context.Operators.SortBy<Encounter>(ax_, ay_, System.ComponentModel.ListSortDirection.Ascending);
+                Encounter ba_ = context.Operators.Last<Encounter>(az_);
+                Period bb_ = ba_?.Period;
+                CqlInterval<CqlDateTime> bc_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bb_);
+                CqlDateTime bd_ = context.Operators.Start(bc_);
+                CqlInterval<CqlDateTime> be_ = context.Operators.Interval(av_, bd_ ?? at_, true, true);
+                bool? bf_ = context.Operators.In<CqlDateTime>(ag_, be_, (string)default);
 
-                object an_(Encounter @this) {
-                    Period cu_ = @this?.Period;
+                bool? bg_(Encounter LastObs) {
+                    Period cu_ = LastObs?.Period;
                     CqlInterval<CqlDateTime> cv_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cu_);
                     CqlDateTime cw_ = context.Operators.End(cv_);
-                    return cw_;
-                }
-
-                IEnumerable<Encounter> ao_ = context.Operators.SortBy<Encounter>(am_, an_, System.ComponentModel.ListSortDirection.Ascending);
-                Encounter ap_ = context.Operators.Last<Encounter>(ao_);
-                Period aq_ = ap_?.Period;
-                CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, aq_);
-                CqlDateTime as_ = context.Operators.Start(ar_);
-                Period at_ = Visit?.Period;
-                CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, at_);
-                CqlDateTime av_ = context.Operators.Start(au_);
-                CqlQuantity aw_ = context.Operators.Quantity(1m, "hour");
-                CqlDateTime ax_ = context.Operators.Subtract(as_ ?? av_, aw_);
-                IEnumerable<Encounter> az_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-
-                bool? ba_(Encounter LastObs) {
-                    Period cx_ = LastObs?.Period;
+                    Period cx_ = Visit?.Period;
                     CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cx_);
-                    CqlDateTime cz_ = context.Operators.End(cy_);
-                    Period da_ = Visit?.Period;
-                    CqlInterval<CqlDateTime> db_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, da_);
-                    CqlDateTime dc_ = context.Operators.Start(db_);
-                    CqlQuantity dd_ = context.Operators.Quantity(1m, "hour");
-                    CqlDateTime de_ = context.Operators.Subtract(dc_, dd_);
-                    CqlInterval<CqlDateTime> dg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, da_);
-                    CqlDateTime dh_ = context.Operators.Start(dg_);
-                    CqlInterval<CqlDateTime> di_ = context.Operators.Interval(de_, dh_, true, true);
-                    bool? dj_ = context.Operators.In<CqlDateTime>(cz_, di_, (string)default);
-                    CqlInterval<CqlDateTime> dl_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, da_);
-                    CqlDateTime dm_ = context.Operators.Start(dl_);
-                    bool? dn_ = context.Operators.Not((bool?)(dm_ is null));
-                    bool? do_ = context.Operators.And(dj_, dn_);
-                    return do_;
+                    CqlDateTime cz_ = context.Operators.Start(cy_);
+                    CqlQuantity da_ = context.Operators.Quantity(1m, "hour");
+                    CqlDateTime db_ = context.Operators.Subtract(cz_, da_);
+                    CqlInterval<CqlDateTime> dc_ = context.Operators.Interval(db_, cz_, true, true);
+                    bool? dd_ = context.Operators.In<CqlDateTime>(cw_, dc_, (string)default);
+                    bool? de_ = context.Operators.Not((bool?)(cz_ is null));
+                    bool? df_ = context.Operators.And(dd_, de_);
+                    return df_;
                 }
 
-                IEnumerable<Encounter> bb_ = context.Operators.Where<Encounter>(az_, ba_);
+                IEnumerable<Encounter> bh_ = context.Operators.Where<Encounter>(ai_, bg_);
 
-                object bc_(Encounter @this) {
-                    Period dp_ = @this?.Period;
-                    CqlInterval<CqlDateTime> dq_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dp_);
-                    CqlDateTime dr_ = context.Operators.End(dq_);
-                    return dr_;
+                object bi_(Encounter @this) {
+                    Period dg_ = @this?.Period;
+                    CqlInterval<CqlDateTime> dh_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dg_);
+                    CqlDateTime di_ = context.Operators.End(dh_);
+                    return di_;
                 }
 
-                IEnumerable<Encounter> bd_ = context.Operators.SortBy<Encounter>(bb_, bc_, System.ComponentModel.ListSortDirection.Ascending);
-                Encounter be_ = context.Operators.Last<Encounter>(bd_);
-                Period bf_ = be_?.Period;
-                CqlInterval<CqlDateTime> bg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bf_);
-                CqlDateTime bh_ = context.Operators.Start(bg_);
-                CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, at_);
-                CqlDateTime bk_ = context.Operators.Start(bj_);
-                CqlInterval<CqlDateTime> bl_ = context.Operators.Interval(ax_, bh_ ?? bk_, true, true);
-                bool? bm_ = context.Operators.In<CqlDateTime>(ai_, bl_, (string)default);
-                IEnumerable<Encounter> bo_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-
-                bool? bp_(Encounter LastObs) {
-                    Period ds_ = LastObs?.Period;
-                    CqlInterval<CqlDateTime> dt_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ds_);
-                    CqlDateTime du_ = context.Operators.End(dt_);
-                    Period dv_ = Visit?.Period;
-                    CqlInterval<CqlDateTime> dw_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dv_);
-                    CqlDateTime dx_ = context.Operators.Start(dw_);
-                    CqlQuantity dy_ = context.Operators.Quantity(1m, "hour");
-                    CqlDateTime dz_ = context.Operators.Subtract(dx_, dy_);
-                    CqlInterval<CqlDateTime> eb_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dv_);
-                    CqlDateTime ec_ = context.Operators.Start(eb_);
-                    CqlInterval<CqlDateTime> ed_ = context.Operators.Interval(dz_, ec_, true, true);
-                    bool? ee_ = context.Operators.In<CqlDateTime>(du_, ed_, (string)default);
-                    CqlInterval<CqlDateTime> eg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dv_);
-                    CqlDateTime eh_ = context.Operators.Start(eg_);
-                    bool? ei_ = context.Operators.Not((bool?)(eh_ is null));
-                    bool? ej_ = context.Operators.And(ee_, ei_);
-                    return ej_;
-                }
-
-                IEnumerable<Encounter> bq_ = context.Operators.Where<Encounter>(bo_, bp_);
-
-                object br_(Encounter @this) {
-                    Period ek_ = @this?.Period;
-                    CqlInterval<CqlDateTime> el_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ek_);
-                    CqlDateTime em_ = context.Operators.End(el_);
-                    return em_;
-                }
-
-                IEnumerable<Encounter> bs_ = context.Operators.SortBy<Encounter>(bq_, br_, System.ComponentModel.ListSortDirection.Ascending);
-                Encounter bt_ = context.Operators.Last<Encounter>(bs_);
-                Period bu_ = bt_?.Period;
-                CqlInterval<CqlDateTime> bv_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bu_);
-                CqlDateTime bw_ = context.Operators.Start(bv_);
-                CqlInterval<CqlDateTime> by_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, at_);
-                CqlDateTime bz_ = context.Operators.Start(by_);
-                bool? ca_ = context.Operators.Not((bool?)((bw_ ?? bz_) is null));
-                bool? cb_ = context.Operators.And(bm_, ca_);
-                return cb_;
+                IEnumerable<Encounter> bj_ = context.Operators.SortBy<Encounter>(bh_, bi_, System.ComponentModel.ListSortDirection.Ascending);
+                Encounter bk_ = context.Operators.Last<Encounter>(bj_);
+                Period bl_ = bk_?.Period;
+                CqlInterval<CqlDateTime> bm_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bl_);
+                CqlDateTime bn_ = context.Operators.Start(bm_);
+                bool? bo_ = context.Operators.Not((bool?)((bn_ ?? at_) is null));
+                bool? bp_ = context.Operators.And(bf_, bo_);
+                return bp_;
             }
 
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
 
             object j_(Encounter @this) {
-                Period en_ = @this?.Period;
-                CqlInterval<CqlDateTime> eo_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, en_);
-                CqlDateTime ep_ = context.Operators.End(eo_);
-                return ep_;
+                Period dj_ = @this?.Period;
+                CqlInterval<CqlDateTime> dk_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dj_);
+                CqlDateTime dl_ = context.Operators.End(dk_);
+                return dl_;
             }
 
             IEnumerable<Encounter> k_ = context.Operators.SortBy<Encounter>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
@@ -372,32 +354,28 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
             IEnumerable<Encounter> q_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
             bool? r_(Encounter LastObs) {
-                Period eq_ = LastObs?.Period;
-                CqlInterval<CqlDateTime> er_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, eq_);
-                CqlDateTime es_ = context.Operators.End(er_);
-                Period et_ = Visit?.Period;
-                CqlInterval<CqlDateTime> eu_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, et_);
-                CqlDateTime ev_ = context.Operators.Start(eu_);
-                CqlQuantity ew_ = context.Operators.Quantity(1m, "hour");
-                CqlDateTime ex_ = context.Operators.Subtract(ev_, ew_);
-                CqlInterval<CqlDateTime> ez_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, et_);
-                CqlDateTime fa_ = context.Operators.Start(ez_);
-                CqlInterval<CqlDateTime> fb_ = context.Operators.Interval(ex_, fa_, true, true);
-                bool? fc_ = context.Operators.In<CqlDateTime>(es_, fb_, (string)default);
-                CqlInterval<CqlDateTime> fe_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, et_);
-                CqlDateTime ff_ = context.Operators.Start(fe_);
-                bool? fg_ = context.Operators.Not((bool?)(ff_ is null));
-                bool? fh_ = context.Operators.And(fc_, fg_);
-                return fh_;
+                Period dm_ = LastObs?.Period;
+                CqlInterval<CqlDateTime> dn_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dm_);
+                CqlDateTime do_ = context.Operators.End(dn_);
+                Period dp_ = Visit?.Period;
+                CqlInterval<CqlDateTime> dq_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dp_);
+                CqlDateTime dr_ = context.Operators.Start(dq_);
+                CqlQuantity ds_ = context.Operators.Quantity(1m, "hour");
+                CqlDateTime dt_ = context.Operators.Subtract(dr_, ds_);
+                CqlInterval<CqlDateTime> du_ = context.Operators.Interval(dt_, dr_, true, true);
+                bool? dv_ = context.Operators.In<CqlDateTime>(do_, du_, (string)default);
+                bool? dw_ = context.Operators.Not((bool?)(dr_ is null));
+                bool? dx_ = context.Operators.And(dv_, dw_);
+                return dx_;
             }
 
             IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
 
             object t_(Encounter @this) {
-                Period fi_ = @this?.Period;
-                CqlInterval<CqlDateTime> fj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, fi_);
-                CqlDateTime fk_ = context.Operators.End(fj_);
-                return fk_;
+                Period dy_ = @this?.Period;
+                CqlInterval<CqlDateTime> dz_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dy_);
+                CqlDateTime ea_ = context.Operators.End(dz_);
+                return ea_;
             }
 
             IEnumerable<Encounter> u_ = context.Operators.SortBy<Encounter>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
@@ -408,10 +386,9 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
             Period z_ = Visit?.Period;
             CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, z_);
             CqlDateTime ab_ = context.Operators.Start(aa_);
-            CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, z_);
-            CqlDateTime ae_ = context.Operators.End(ad_);
-            CqlInterval<CqlDateTime> af_ = context.Operators.Interval(o_ ?? y_ ?? ab_, ae_, true, true);
-            return af_;
+            CqlDateTime ac_ = context.Operators.End(aa_);
+            CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(o_ ?? y_ ?? ab_, ac_, true, true);
+            return ad_;
         }
 
         IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
@@ -470,13 +447,12 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
             Date ab_ = aa_?.BirthDateElement;
             string ac_ = ab_?.Value;
             CqlDate ad_ = context.Operators.ConvertStringToDate(ac_);
-            CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
-            CqlDateTime ag_ = context.Operators.Start(af_);
-            CqlDate ah_ = context.Operators.DateFrom(ag_);
-            int? ai_ = context.Operators.CalculateAgeAt(ad_, ah_, "year");
-            bool? aj_ = context.Operators.GreaterOrEqual(ai_, 65);
-            bool? ak_ = context.Operators.And(z_, aj_);
-            return ak_;
+            CqlDateTime ae_ = context.Operators.Start(v_);
+            CqlDate af_ = context.Operators.DateFrom(ae_);
+            int? ag_ = context.Operators.CalculateAgeAt(ad_, af_, "year");
+            bool? ah_ = context.Operators.GreaterOrEqual(ag_, 65);
+            bool? ai_ = context.Operators.And(z_, ah_);
+            return ai_;
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?> i_ = context.Operators.Where<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?>(g_, h_);
@@ -518,42 +494,38 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                 CqlInterval<CqlDateTime> af_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ae_);
                 CqlDateTime ag_ = context.Operators.Start(af_);
                 bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-                CqlInterval<CqlDateTime> aj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ae_);
+                Period ai_ = Encounter?.Period;
+                CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ai_);
                 CqlDateTime ak_ = context.Operators.Start(aj_);
-                Period al_ = Encounter?.Period;
-                CqlInterval<CqlDateTime> am_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, al_);
-                CqlDateTime an_ = context.Operators.Start(am_);
-                CqlQuantity ao_ = context.Operators.Quantity(1440m, "minutes");
-                CqlDateTime ap_ = context.Operators.Subtract(an_, ao_);
-                CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, al_);
-                CqlDateTime as_ = context.Operators.Start(ar_);
-                CqlQuantity at_ = context.Operators.Quantity(120m, "minutes");
-                CqlDateTime au_ = context.Operators.Add(as_, at_);
-                CqlInterval<CqlDateTime> av_ = context.Operators.Interval(ap_, au_, true, true);
-                bool? aw_ = context.Operators.In<CqlDateTime>(ak_, av_, (string)default);
-                bool? ax_ = context.Operators.And(ah_, aw_);
-                Code<ObservationStatus> ay_ = Exam?.StatusElement;
-                string az_ = FHIRHelpers_4_0_001.Instance.ToString(context, ay_);
-                string[] ba_ = [
+                CqlQuantity al_ = context.Operators.Quantity(1440m, "minutes");
+                CqlDateTime am_ = context.Operators.Subtract(ak_, al_);
+                CqlQuantity an_ = context.Operators.Quantity(120m, "minutes");
+                CqlDateTime ao_ = context.Operators.Add(ak_, an_);
+                CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(am_, ao_, true, true);
+                bool? aq_ = context.Operators.In<CqlDateTime>(ag_, ap_, (string)default);
+                bool? ar_ = context.Operators.And(ah_, aq_);
+                Code<ObservationStatus> as_ = Exam?.StatusElement;
+                string at_ = FHIRHelpers_4_0_001.Instance.ToString(context, as_);
+                string[] au_ = [
                     "final",
                     "amended",
                     "preliminary",
                 ];
-                bool? bb_ = context.Operators.In<string>(az_, (IEnumerable<string>)ba_);
-                bool? bc_ = context.Operators.And(ax_, bb_);
-                DataType bd_ = Exam?.Value;
-                bool? be_ = context.Operators.Not((bool?)(bd_ is null));
-                bool? bf_ = context.Operators.And(bc_, be_);
-                return bf_;
+                bool? av_ = context.Operators.In<string>(at_, (IEnumerable<string>)au_);
+                bool? aw_ = context.Operators.And(ar_, av_);
+                DataType ax_ = Exam?.Value;
+                bool? ay_ = context.Operators.Not((bool?)(ax_ is null));
+                bool? az_ = context.Operators.And(aw_, ay_);
+                return az_;
             }
 
             IEnumerable<Observation> l_ = context.Operators.Where<Observation>(ExamList, k_);
 
             object m_(Observation @this) {
-                DataType bg_ = @this?.Effective;
-                CqlInterval<CqlDateTime> bh_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bg_);
-                CqlDateTime bi_ = context.Operators.Start(bh_);
-                return bi_;
+                DataType ba_ = @this?.Effective;
+                CqlInterval<CqlDateTime> bb_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ba_);
+                CqlDateTime bc_ = context.Operators.Start(bb_);
+                return bc_;
             }
 
             IEnumerable<Observation> n_ = context.Operators.SortBy<Observation>(l_, m_, System.ComponentModel.ListSortDirection.Ascending);
@@ -565,46 +537,42 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
             string t_ = context.Operators.Concatenate(s_ ?? "", ",");
 
             bool? u_(Observation Exam) {
-                DataType bj_ = Exam?.Effective;
-                CqlInterval<CqlDateTime> bk_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bj_);
-                CqlDateTime bl_ = context.Operators.Start(bk_);
-                bool? bm_ = context.Operators.Not((bool?)(bl_ is null));
-                CqlInterval<CqlDateTime> bo_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bj_);
-                CqlDateTime bp_ = context.Operators.Start(bo_);
-                Period bq_ = Encounter?.Period;
-                CqlInterval<CqlDateTime> br_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bq_);
-                CqlDateTime bs_ = context.Operators.Start(br_);
-                CqlQuantity bt_ = context.Operators.Quantity(1440m, "minutes");
-                CqlDateTime bu_ = context.Operators.Subtract(bs_, bt_);
-                CqlInterval<CqlDateTime> bw_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bq_);
-                CqlDateTime bx_ = context.Operators.Start(bw_);
-                CqlQuantity by_ = context.Operators.Quantity(120m, "minutes");
-                CqlDateTime bz_ = context.Operators.Add(bx_, by_);
-                CqlInterval<CqlDateTime> ca_ = context.Operators.Interval(bu_, bz_, true, true);
-                bool? cb_ = context.Operators.In<CqlDateTime>(bp_, ca_, (string)default);
-                bool? cc_ = context.Operators.And(bm_, cb_);
-                Code<ObservationStatus> cd_ = Exam?.StatusElement;
-                string ce_ = FHIRHelpers_4_0_001.Instance.ToString(context, cd_);
-                string[] cf_ = [
+                DataType bd_ = Exam?.Effective;
+                CqlInterval<CqlDateTime> be_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bd_);
+                CqlDateTime bf_ = context.Operators.Start(be_);
+                bool? bg_ = context.Operators.Not((bool?)(bf_ is null));
+                Period bh_ = Encounter?.Period;
+                CqlInterval<CqlDateTime> bi_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bh_);
+                CqlDateTime bj_ = context.Operators.Start(bi_);
+                CqlQuantity bk_ = context.Operators.Quantity(1440m, "minutes");
+                CqlDateTime bl_ = context.Operators.Subtract(bj_, bk_);
+                CqlQuantity bm_ = context.Operators.Quantity(120m, "minutes");
+                CqlDateTime bn_ = context.Operators.Add(bj_, bm_);
+                CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(bl_, bn_, true, true);
+                bool? bp_ = context.Operators.In<CqlDateTime>(bf_, bo_, (string)default);
+                bool? bq_ = context.Operators.And(bg_, bp_);
+                Code<ObservationStatus> br_ = Exam?.StatusElement;
+                string bs_ = FHIRHelpers_4_0_001.Instance.ToString(context, br_);
+                string[] bt_ = [
                     "final",
                     "amended",
                     "preliminary",
                 ];
-                bool? cg_ = context.Operators.In<string>(ce_, (IEnumerable<string>)cf_);
-                bool? ch_ = context.Operators.And(cc_, cg_);
-                DataType ci_ = Exam?.Value;
-                bool? cj_ = context.Operators.Not((bool?)(ci_ is null));
-                bool? ck_ = context.Operators.And(ch_, cj_);
-                return ck_;
+                bool? bu_ = context.Operators.In<string>(bs_, (IEnumerable<string>)bt_);
+                bool? bv_ = context.Operators.And(bq_, bu_);
+                DataType bw_ = Exam?.Value;
+                bool? bx_ = context.Operators.Not((bool?)(bw_ is null));
+                bool? by_ = context.Operators.And(bv_, bx_);
+                return by_;
             }
 
             IEnumerable<Observation> v_ = context.Operators.Where<Observation>(ExamList, u_);
 
             object w_(Observation @this) {
-                DataType cl_ = @this?.Effective;
-                CqlInterval<CqlDateTime> cm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, cl_);
-                CqlDateTime cn_ = context.Operators.Start(cm_);
-                return cn_;
+                DataType bz_ = @this?.Effective;
+                CqlInterval<CqlDateTime> ca_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bz_);
+                CqlDateTime cb_ = context.Operators.Start(ca_);
+                return cb_;
             }
 
             IEnumerable<Observation> x_ = context.Operators.SortBy<Observation>(v_, w_, System.ComponentModel.ListSortDirection.Ascending);
@@ -641,41 +609,37 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                 CqlInterval<CqlDateTime> af_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ae_);
                 CqlDateTime ag_ = context.Operators.Start(af_);
                 bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-                CqlInterval<CqlDateTime> aj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ae_);
+                Period ai_ = Encounter?.Period;
+                CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ai_);
                 CqlDateTime ak_ = context.Operators.Start(aj_);
-                Period al_ = Encounter?.Period;
-                CqlInterval<CqlDateTime> am_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, al_);
-                CqlDateTime an_ = context.Operators.Start(am_);
-                CqlQuantity ao_ = context.Operators.Quantity(1440m, "minutes");
-                CqlDateTime ap_ = context.Operators.Subtract(an_, ao_);
-                CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, al_);
-                CqlDateTime as_ = context.Operators.Start(ar_);
-                CqlDateTime au_ = context.Operators.Add(as_, ao_);
-                CqlInterval<CqlDateTime> av_ = context.Operators.Interval(ap_, au_, true, true);
-                bool? aw_ = context.Operators.In<CqlDateTime>(ak_, av_, (string)default);
-                bool? ax_ = context.Operators.And(ah_, aw_);
-                Code<ObservationStatus> ay_ = Exam?.StatusElement;
-                string az_ = FHIRHelpers_4_0_001.Instance.ToString(context, ay_);
-                string[] ba_ = [
+                CqlQuantity al_ = context.Operators.Quantity(1440m, "minutes");
+                CqlDateTime am_ = context.Operators.Subtract(ak_, al_);
+                CqlDateTime an_ = context.Operators.Add(ak_, al_);
+                CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(am_, an_, true, true);
+                bool? ap_ = context.Operators.In<CqlDateTime>(ag_, ao_, (string)default);
+                bool? aq_ = context.Operators.And(ah_, ap_);
+                Code<ObservationStatus> ar_ = Exam?.StatusElement;
+                string as_ = FHIRHelpers_4_0_001.Instance.ToString(context, ar_);
+                string[] at_ = [
                     "final",
                     "amended",
                     "preliminary",
                 ];
-                bool? bb_ = context.Operators.In<string>(az_, (IEnumerable<string>)ba_);
-                bool? bc_ = context.Operators.And(ax_, bb_);
-                DataType bd_ = Exam?.Value;
-                bool? be_ = context.Operators.Not((bool?)(bd_ is null));
-                bool? bf_ = context.Operators.And(bc_, be_);
-                return bf_;
+                bool? au_ = context.Operators.In<string>(as_, (IEnumerable<string>)at_);
+                bool? av_ = context.Operators.And(aq_, au_);
+                DataType aw_ = Exam?.Value;
+                bool? ax_ = context.Operators.Not((bool?)(aw_ is null));
+                bool? ay_ = context.Operators.And(av_, ax_);
+                return ay_;
             }
 
             IEnumerable<Observation> l_ = context.Operators.Where<Observation>(ExamList, k_);
 
             object m_(Observation @this) {
-                DataType bg_ = @this?.Effective;
-                CqlInterval<CqlDateTime> bh_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bg_);
-                CqlDateTime bi_ = context.Operators.Start(bh_);
-                return bi_;
+                DataType az_ = @this?.Effective;
+                CqlInterval<CqlDateTime> ba_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, az_);
+                CqlDateTime bb_ = context.Operators.Start(ba_);
+                return bb_;
             }
 
             IEnumerable<Observation> n_ = context.Operators.SortBy<Observation>(l_, m_, System.ComponentModel.ListSortDirection.Ascending);
@@ -687,45 +651,41 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
             string t_ = context.Operators.Concatenate(s_ ?? "", ",");
 
             bool? u_(Observation Exam) {
-                DataType bj_ = Exam?.Effective;
-                CqlInterval<CqlDateTime> bk_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bj_);
-                CqlDateTime bl_ = context.Operators.Start(bk_);
-                bool? bm_ = context.Operators.Not((bool?)(bl_ is null));
-                CqlInterval<CqlDateTime> bo_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bj_);
-                CqlDateTime bp_ = context.Operators.Start(bo_);
-                Period bq_ = Encounter?.Period;
-                CqlInterval<CqlDateTime> br_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bq_);
-                CqlDateTime bs_ = context.Operators.Start(br_);
-                CqlQuantity bt_ = context.Operators.Quantity(1440m, "minutes");
-                CqlDateTime bu_ = context.Operators.Subtract(bs_, bt_);
-                CqlInterval<CqlDateTime> bw_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bq_);
-                CqlDateTime bx_ = context.Operators.Start(bw_);
-                CqlDateTime bz_ = context.Operators.Add(bx_, bt_);
-                CqlInterval<CqlDateTime> ca_ = context.Operators.Interval(bu_, bz_, true, true);
-                bool? cb_ = context.Operators.In<CqlDateTime>(bp_, ca_, (string)default);
-                bool? cc_ = context.Operators.And(bm_, cb_);
-                Code<ObservationStatus> cd_ = Exam?.StatusElement;
-                string ce_ = FHIRHelpers_4_0_001.Instance.ToString(context, cd_);
-                string[] cf_ = [
+                DataType bc_ = Exam?.Effective;
+                CqlInterval<CqlDateTime> bd_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bc_);
+                CqlDateTime be_ = context.Operators.Start(bd_);
+                bool? bf_ = context.Operators.Not((bool?)(be_ is null));
+                Period bg_ = Encounter?.Period;
+                CqlInterval<CqlDateTime> bh_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bg_);
+                CqlDateTime bi_ = context.Operators.Start(bh_);
+                CqlQuantity bj_ = context.Operators.Quantity(1440m, "minutes");
+                CqlDateTime bk_ = context.Operators.Subtract(bi_, bj_);
+                CqlDateTime bl_ = context.Operators.Add(bi_, bj_);
+                CqlInterval<CqlDateTime> bm_ = context.Operators.Interval(bk_, bl_, true, true);
+                bool? bn_ = context.Operators.In<CqlDateTime>(be_, bm_, (string)default);
+                bool? bo_ = context.Operators.And(bf_, bn_);
+                Code<ObservationStatus> bp_ = Exam?.StatusElement;
+                string bq_ = FHIRHelpers_4_0_001.Instance.ToString(context, bp_);
+                string[] br_ = [
                     "final",
                     "amended",
                     "preliminary",
                 ];
-                bool? cg_ = context.Operators.In<string>(ce_, (IEnumerable<string>)cf_);
-                bool? ch_ = context.Operators.And(cc_, cg_);
-                DataType ci_ = Exam?.Value;
-                bool? cj_ = context.Operators.Not((bool?)(ci_ is null));
-                bool? ck_ = context.Operators.And(ch_, cj_);
-                return ck_;
+                bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
+                bool? bt_ = context.Operators.And(bo_, bs_);
+                DataType bu_ = Exam?.Value;
+                bool? bv_ = context.Operators.Not((bool?)(bu_ is null));
+                bool? bw_ = context.Operators.And(bt_, bv_);
+                return bw_;
             }
 
             IEnumerable<Observation> v_ = context.Operators.Where<Observation>(ExamList, u_);
 
             object w_(Observation @this) {
-                DataType cl_ = @this?.Effective;
-                CqlInterval<CqlDateTime> cm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, cl_);
-                CqlDateTime cn_ = context.Operators.Start(cm_);
-                return cn_;
+                DataType bx_ = @this?.Effective;
+                CqlInterval<CqlDateTime> by_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bx_);
+                CqlDateTime bz_ = context.Operators.Start(by_);
+                return bz_;
             }
 
             IEnumerable<Observation> x_ = context.Operators.SortBy<Observation>(v_, w_, System.ComponentModel.ListSortDirection.Ascending);
@@ -760,38 +720,36 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
             bool? k_(Observation Lab) {
                 Instant ad_ = Lab?.IssuedElement;
                 bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
-                CqlDateTime ag_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ad_);
-                Period ah_ = Encounter?.Period;
-                CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ah_);
-                CqlDateTime aj_ = context.Operators.Start(ai_);
-                CqlQuantity ak_ = context.Operators.Quantity(1440m, "minutes");
-                CqlDateTime al_ = context.Operators.Subtract(aj_, ak_);
-                CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ah_);
-                CqlDateTime ao_ = context.Operators.Start(an_);
-                CqlDateTime aq_ = context.Operators.Add(ao_, ak_);
-                CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(al_, aq_, true, true);
-                bool? as_ = context.Operators.In<CqlDateTime>(ag_, ar_, (string)default);
-                bool? at_ = context.Operators.And(ae_, as_);
-                Code<ObservationStatus> au_ = Lab?.StatusElement;
-                string av_ = FHIRHelpers_4_0_001.Instance.ToString(context, au_);
-                string[] aw_ = [
+                CqlDateTime af_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ad_);
+                Period ag_ = Encounter?.Period;
+                CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ag_);
+                CqlDateTime ai_ = context.Operators.Start(ah_);
+                CqlQuantity aj_ = context.Operators.Quantity(1440m, "minutes");
+                CqlDateTime ak_ = context.Operators.Subtract(ai_, aj_);
+                CqlDateTime al_ = context.Operators.Add(ai_, aj_);
+                CqlInterval<CqlDateTime> am_ = context.Operators.Interval(ak_, al_, true, true);
+                bool? an_ = context.Operators.In<CqlDateTime>(af_, am_, (string)default);
+                bool? ao_ = context.Operators.And(ae_, an_);
+                Code<ObservationStatus> ap_ = Lab?.StatusElement;
+                string aq_ = FHIRHelpers_4_0_001.Instance.ToString(context, ap_);
+                string[] ar_ = [
                     "final",
                     "amended",
                     "preliminary",
                 ];
-                bool? ax_ = context.Operators.In<string>(av_, (IEnumerable<string>)aw_);
-                bool? ay_ = context.Operators.And(at_, ax_);
-                DataType az_ = Lab?.Value;
-                bool? ba_ = context.Operators.Not((bool?)(az_ is null));
-                bool? bb_ = context.Operators.And(ay_, ba_);
-                return bb_;
+                bool? as_ = context.Operators.In<string>(aq_, (IEnumerable<string>)ar_);
+                bool? at_ = context.Operators.And(ao_, as_);
+                DataType au_ = Lab?.Value;
+                bool? av_ = context.Operators.Not((bool?)(au_ is null));
+                bool? aw_ = context.Operators.And(at_, av_);
+                return aw_;
             }
 
             IEnumerable<Observation> l_ = context.Operators.Where<Observation>(LabList, k_);
 
             object m_(Observation @this) {
-                Instant bc_ = @this?.IssuedElement;
-                return bc_;
+                Instant ax_ = @this?.IssuedElement;
+                return ax_;
             }
 
             IEnumerable<Observation> n_ = context.Operators.SortBy<Observation>(l_, m_, System.ComponentModel.ListSortDirection.Ascending);
@@ -803,40 +761,38 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
             string t_ = context.Operators.Concatenate(s_ ?? "", ",");
 
             bool? u_(Observation Lab) {
-                Instant bd_ = Lab?.IssuedElement;
-                bool? be_ = context.Operators.Not((bool?)(bd_ is null));
-                CqlDateTime bg_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, bd_);
-                Period bh_ = Encounter?.Period;
-                CqlInterval<CqlDateTime> bi_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bh_);
-                CqlDateTime bj_ = context.Operators.Start(bi_);
-                CqlQuantity bk_ = context.Operators.Quantity(1440m, "minutes");
-                CqlDateTime bl_ = context.Operators.Subtract(bj_, bk_);
-                CqlInterval<CqlDateTime> bn_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bh_);
-                CqlDateTime bo_ = context.Operators.Start(bn_);
-                CqlDateTime bq_ = context.Operators.Add(bo_, bk_);
-                CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bl_, bq_, true, true);
-                bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, (string)default);
-                bool? bt_ = context.Operators.And(be_, bs_);
-                Code<ObservationStatus> bu_ = Lab?.StatusElement;
-                string bv_ = FHIRHelpers_4_0_001.Instance.ToString(context, bu_);
-                string[] bw_ = [
+                Instant ay_ = Lab?.IssuedElement;
+                bool? az_ = context.Operators.Not((bool?)(ay_ is null));
+                CqlDateTime ba_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ay_);
+                Period bb_ = Encounter?.Period;
+                CqlInterval<CqlDateTime> bc_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bb_);
+                CqlDateTime bd_ = context.Operators.Start(bc_);
+                CqlQuantity be_ = context.Operators.Quantity(1440m, "minutes");
+                CqlDateTime bf_ = context.Operators.Subtract(bd_, be_);
+                CqlDateTime bg_ = context.Operators.Add(bd_, be_);
+                CqlInterval<CqlDateTime> bh_ = context.Operators.Interval(bf_, bg_, true, true);
+                bool? bi_ = context.Operators.In<CqlDateTime>(ba_, bh_, (string)default);
+                bool? bj_ = context.Operators.And(az_, bi_);
+                Code<ObservationStatus> bk_ = Lab?.StatusElement;
+                string bl_ = FHIRHelpers_4_0_001.Instance.ToString(context, bk_);
+                string[] bm_ = [
                     "final",
                     "amended",
                     "preliminary",
                 ];
-                bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string>)bw_);
-                bool? by_ = context.Operators.And(bt_, bx_);
-                DataType bz_ = Lab?.Value;
-                bool? ca_ = context.Operators.Not((bool?)(bz_ is null));
-                bool? cb_ = context.Operators.And(by_, ca_);
-                return cb_;
+                bool? bn_ = context.Operators.In<string>(bl_, (IEnumerable<string>)bm_);
+                bool? bo_ = context.Operators.And(bj_, bn_);
+                DataType bp_ = Lab?.Value;
+                bool? bq_ = context.Operators.Not((bool?)(bp_ is null));
+                bool? br_ = context.Operators.And(bo_, bq_);
+                return br_;
             }
 
             IEnumerable<Observation> v_ = context.Operators.Where<Observation>(LabList, u_);
 
             object w_(Observation @this) {
-                Instant cc_ = @this?.IssuedElement;
-                return cc_;
+                Instant bs_ = @this?.IssuedElement;
+                return bs_;
             }
 
             IEnumerable<Observation> x_ = context.Operators.SortBy<Observation>(v_, w_, System.ComponentModel.ListSortDirection.Ascending);

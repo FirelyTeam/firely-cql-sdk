@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
 public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleton<SupplementalDataElementsFHIR4_2_0_000>
 {
@@ -60,39 +60,31 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
-
-        IEnumerable<Extension> a_() {
-
-            bool m_() {
-                Patient n_ = this.Patient(context);
-                bool o_ = n_ is DomainResource;
-                return o_;
-            }
-
-            if (m_())
-            {
-                Patient p_ = this.Patient(context);
-                return (IEnumerable<Extension>)((p_ as DomainResource).Extension);
-            }
-            else
-            {
-                return default;
-            };
+        IEnumerable<Extension> a_;
+        Patient m_ = this.Patient(context);
+        bool n_ = m_ is DomainResource;
+        if (n_)
+        {
+            Patient o_ = this.Patient(context);
+            a_ = (IEnumerable<Extension>)((o_ as DomainResource).Extension);
         }
-
+        else
+        {
+            a_ = default;
+        }
 
         bool? b_(Extension Extension) {
-            FhirUri q_ = Extension?.UrlElement;
-            string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
-            bool? s_ = context.Operators.Equal(r_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
-            return s_;
+            FhirUri p_ = Extension?.UrlElement;
+            string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_);
+            bool? r_ = context.Operators.Equal(q_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+            return r_;
         }
 
-        IEnumerable<Extension> c_ = context.Operators.Where<Extension>(a_(), b_);
+        IEnumerable<Extension> c_ = context.Operators.Where<Extension>(a_, b_);
 
         IEnumerable<Extension> d_(Extension Extension) {
-            List<Extension> t_ = Extension?.Extension;
-            return (IEnumerable<Extension>)t_;
+            List<Extension> s_ = Extension?.Extension;
+            return (IEnumerable<Extension>)s_;
         }
 
         IEnumerable<IEnumerable<Extension>> e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
@@ -100,20 +92,19 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         IEnumerable<Extension> g_ = context.Operators.Flatten<Extension>(f_);
 
         bool? h_(Extension E) {
-            FhirUri u_ = E?.UrlElement;
-            string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-            bool? w_ = context.Operators.Equal(v_, "ombCategory");
-            string y_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-            bool? z_ = context.Operators.Equal(y_, "detailed");
-            bool? aa_ = context.Operators.Or(w_, z_);
-            return aa_;
+            FhirUri t_ = E?.UrlElement;
+            string u_ = FHIRHelpers_4_0_001.Instance.ToString(context, t_);
+            bool? v_ = context.Operators.Equal(u_, "ombCategory");
+            bool? w_ = context.Operators.Equal(u_, "detailed");
+            bool? x_ = context.Operators.Or(v_, w_);
+            return x_;
         }
 
         IEnumerable<Extension> i_ = context.Operators.Where<Extension>(g_, h_);
 
         Coding j_(Extension E) {
-            DataType ab_ = E?.Value;
-            return ab_ as Coding;
+            DataType y_ = E?.Value;
+            return y_ as Coding;
         }
 
         IEnumerable<Coding> k_ = context.Operators.Select<Extension, Coding>(i_, j_);
@@ -154,39 +145,31 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
-
-        IEnumerable<Extension> a_() {
-
-            bool m_() {
-                Patient n_ = this.Patient(context);
-                bool o_ = n_ is DomainResource;
-                return o_;
-            }
-
-            if (m_())
-            {
-                Patient p_ = this.Patient(context);
-                return (IEnumerable<Extension>)((p_ as DomainResource).Extension);
-            }
-            else
-            {
-                return default;
-            };
+        IEnumerable<Extension> a_;
+        Patient m_ = this.Patient(context);
+        bool n_ = m_ is DomainResource;
+        if (n_)
+        {
+            Patient o_ = this.Patient(context);
+            a_ = (IEnumerable<Extension>)((o_ as DomainResource).Extension);
         }
-
+        else
+        {
+            a_ = default;
+        }
 
         bool? b_(Extension Extension) {
-            FhirUri q_ = Extension?.UrlElement;
-            string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
-            bool? s_ = context.Operators.Equal(r_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
-            return s_;
+            FhirUri p_ = Extension?.UrlElement;
+            string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_);
+            bool? r_ = context.Operators.Equal(q_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+            return r_;
         }
 
-        IEnumerable<Extension> c_ = context.Operators.Where<Extension>(a_(), b_);
+        IEnumerable<Extension> c_ = context.Operators.Where<Extension>(a_, b_);
 
         IEnumerable<Extension> d_(Extension Extension) {
-            List<Extension> t_ = Extension?.Extension;
-            return (IEnumerable<Extension>)t_;
+            List<Extension> s_ = Extension?.Extension;
+            return (IEnumerable<Extension>)s_;
         }
 
         IEnumerable<IEnumerable<Extension>> e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
@@ -194,20 +177,19 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         IEnumerable<Extension> g_ = context.Operators.Flatten<Extension>(f_);
 
         bool? h_(Extension E) {
-            FhirUri u_ = E?.UrlElement;
-            string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-            bool? w_ = context.Operators.Equal(v_, "ombCategory");
-            string y_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-            bool? z_ = context.Operators.Equal(y_, "detailed");
-            bool? aa_ = context.Operators.Or(w_, z_);
-            return aa_;
+            FhirUri t_ = E?.UrlElement;
+            string u_ = FHIRHelpers_4_0_001.Instance.ToString(context, t_);
+            bool? v_ = context.Operators.Equal(u_, "ombCategory");
+            bool? w_ = context.Operators.Equal(u_, "detailed");
+            bool? x_ = context.Operators.Or(v_, w_);
+            return x_;
         }
 
         IEnumerable<Extension> i_ = context.Operators.Where<Extension>(g_, h_);
 
         Coding j_(Extension E) {
-            DataType ab_ = E?.Value;
-            return ab_ as Coding;
+            DataType y_ = E?.Value;
+            return y_ as Coding;
         }
 
         IEnumerable<Coding> k_ = context.Operators.Select<Extension, Coding>(i_, j_);
@@ -224,41 +206,29 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
-
-        CqlCode a_() {
-
-            bool b_() {
-                Patient d_ = this.Patient(context);
-                Code<AdministrativeGender> e_ = d_?.GenderElement;
-                string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
-                bool? g_ = context.Operators.Equal(f_, "male");
-                return g_ ?? false;
-            }
-
-
-            bool c_() {
-                Patient h_ = this.Patient(context);
-                Code<AdministrativeGender> i_ = h_?.GenderElement;
-                string j_ = FHIRHelpers_4_0_001.Instance.ToString(context, i_);
-                bool? k_ = context.Operators.Equal(j_, "female");
-                return k_ ?? false;
-            }
-
-            if (b_())
-            {
-                return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", default, "Male");
-            }
-            else if (c_())
+        Patient a_ = this.Patient(context);
+        Code<AdministrativeGender> b_ = a_?.GenderElement;
+        string c_ = FHIRHelpers_4_0_001.Instance.ToString(context, b_);
+        bool? d_ = context.Operators.Equal(c_, "male");
+        if (d_ ?? false)
+        {
+            return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", default, "Male");
+        }
+        else
+        {
+            Patient e_ = this.Patient(context);
+            Code<AdministrativeGender> f_ = e_?.GenderElement;
+            string g_ = FHIRHelpers_4_0_001.Instance.ToString(context, f_);
+            bool? h_ = context.Operators.Equal(g_, "female");
+            if (h_ ?? false)
             {
                 return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", default, "Female");
             }
             else
             {
                 return default;
-            };
+            }
         }
-
-        return a_();
     }
 
 

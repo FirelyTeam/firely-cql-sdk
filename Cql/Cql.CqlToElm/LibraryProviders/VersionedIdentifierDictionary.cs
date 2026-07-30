@@ -14,7 +14,10 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
     {
         internal VersionedIdentifierDictionary(StringComparer? idComparer = null)
         {
-            Versions = new(idComparer ?? StringComparer.OrdinalIgnoreCase);
+            // CQL is a case-sensitive language (spec/cql/condensed/03-developersguide.md SS3.4.1),
+            // so library identifiers must be matched case-sensitively - matching
+            // CqlLibrarySemantics.CompareIds, used everywhere else for the same comparison.
+            Versions = new(idComparer ?? StringComparer.Ordinal);
         }
 
         internal Dictionary<string, SortedList<string, List<T>>> Versions;
@@ -23,7 +26,8 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
         {
             if (Versions.TryGetValue(id, out var versions))
             {
-                var ts = versions.First();
+                // versions is sorted ascending by VersionComparer, so the latest is the last entry.
+                var ts = versions.Last();
                 if (ts.Value.Count == 1)
                 {
                     version = ts.Key;
@@ -58,7 +62,8 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
         {
             if (Versions.TryGetValue(id, out var versions))
             {
-                var ts = versions.First();
+                // versions is sorted ascending by VersionComparer, so the latest is the last entry.
+                var ts = versions.Last();
                 if (ts.Value.Count == 1)
                     return true;
             }

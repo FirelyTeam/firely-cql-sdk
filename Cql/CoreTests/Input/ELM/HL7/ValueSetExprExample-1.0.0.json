@@ -1,10 +1,10 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.29.0",
+         "type" : "CqlToElmInfo",
+         "translatorVersion" : "5.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
-         "signatureLevel" : "All",
-         "type" : "CqlToElmInfo"
+         "signatureLevel" : "All"
       } ],
       "identifier" : {
          "id" : "ValueSetExprExample",
@@ -35,18 +35,18 @@
             "accessLevel" : "Public",
             "annotation" : [ ],
             "default" : {
+               "type" : "Literal",
                "locator" : "10:46-10:48",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "1",
-               "type" : "Literal",
                "annotation" : [ ]
             },
             "parameterTypeSpecifier" : {
+               "type" : "NamedTypeSpecifier",
                "locator" : "10:31-10:36",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "name" : "{urn:hl7-org:elm-types:r1}String",
-               "type" : "NamedTypeSpecifier",
                "annotation" : [ ]
             }
          }, {
@@ -56,38 +56,38 @@
             "accessLevel" : "Public",
             "annotation" : [ ],
             "default" : {
+               "type" : "Instance",
                "locator" : "12:37-15:1",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "classType" : "{urn:hl7-org:elm-types:r1}Code",
-               "type" : "Instance",
                "annotation" : [ ],
                "element" : [ {
                   "name" : "code",
                   "value" : {
+                     "type" : "Literal",
                      "locator" : "13:11-13:17",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "A-1-A",
-                     "type" : "Literal",
                      "annotation" : [ ]
                   }
                }, {
                   "name" : "system",
                   "value" : {
+                     "type" : "Literal",
                      "locator" : "14:13-14:44",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "http://fire.ly/CodeSystem/Test",
-                     "type" : "Literal",
                      "annotation" : [ ]
                   }
                } ]
             },
             "parameterTypeSpecifier" : {
+               "type" : "NamedTypeSpecifier",
                "locator" : "12:24-12:27",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "{urn:hl7-org:elm-types:r1}Code",
-               "type" : "NamedTypeSpecifier",
                "annotation" : [ ]
             }
          } ]
@@ -136,65 +136,65 @@
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
+               "type" : "Case",
                "locator" : "18:5-22:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-               "type" : "Case",
                "annotation" : [ ],
                "comparand" : {
+                  "type" : "ParameterRef",
                   "locator" : "18:10-18:28",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "ChosenSubCategory",
-                  "type" : "ParameterRef",
                   "annotation" : [ ]
                },
                "caseItem" : [ {
                   "locator" : "19:7-19:34",
                   "annotation" : [ ],
                   "when" : {
+                     "type" : "Literal",
                      "locator" : "19:12-19:14",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "1",
-                     "type" : "Literal",
                      "annotation" : [ ]
                   },
                   "then" : {
+                     "type" : "ValueSetRef",
                      "locator" : "19:21-19:34",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "ValueSet-A-1",
                      "preserve" : true,
-                     "type" : "ValueSetRef",
                      "annotation" : [ ]
                   }
                }, {
                   "locator" : "20:7-20:34",
                   "annotation" : [ ],
                   "when" : {
+                     "type" : "Literal",
                      "locator" : "20:12-20:14",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "2",
-                     "type" : "Literal",
                      "annotation" : [ ]
                   },
                   "then" : {
+                     "type" : "ValueSetRef",
                      "locator" : "20:21-20:34",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "ValueSet-A-2",
                      "preserve" : true,
-                     "type" : "ValueSetRef",
                      "annotation" : [ ]
                   }
                } ],
                "else" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "As",
+                  "asType" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "annotation" : [ ],
                   "signature" : [ ],
                   "operand" : {
+                     "type" : "Null",
                      "locator" : "21:10-21:13",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                     "type" : "Null",
                      "annotation" : [ ]
                   }
                }
@@ -207,65 +207,65 @@
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
+               "type" : "Case",
                "locator" : "25:5-29:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-               "type" : "Case",
                "annotation" : [ ],
                "comparand" : {
+                  "type" : "ParameterRef",
                   "locator" : "25:10-25:28",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "ChosenSubCategory",
-                  "type" : "ParameterRef",
                   "annotation" : [ ]
                },
                "caseItem" : [ {
                   "locator" : "26:9-26:36",
                   "annotation" : [ ],
                   "when" : {
+                     "type" : "Literal",
                      "locator" : "26:14-26:16",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "1",
-                     "type" : "Literal",
                      "annotation" : [ ]
                   },
                   "then" : {
+                     "type" : "ValueSetRef",
                      "locator" : "26:23-26:36",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "ValueSet-B-1",
                      "preserve" : true,
-                     "type" : "ValueSetRef",
                      "annotation" : [ ]
                   }
                }, {
                   "locator" : "27:9-27:36",
                   "annotation" : [ ],
                   "when" : {
+                     "type" : "Literal",
                      "locator" : "27:14-27:16",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "2",
-                     "type" : "Literal",
                      "annotation" : [ ]
                   },
                   "then" : {
+                     "type" : "ValueSetRef",
                      "locator" : "27:23-27:36",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "ValueSet-B-2",
                      "preserve" : true,
-                     "type" : "ValueSetRef",
                      "annotation" : [ ]
                   }
                } ],
                "else" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "As",
+                  "asType" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "annotation" : [ ],
                   "signature" : [ ],
                   "operand" : {
+                     "type" : "Null",
                      "locator" : "28:10-28:13",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                     "type" : "Null",
                      "annotation" : [ ]
                   }
                }
@@ -278,100 +278,100 @@
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
+               "type" : "Case",
                "locator" : "32:5-36:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-               "type" : "Case",
                "annotation" : [ ],
                "caseItem" : [ {
                   "locator" : "33:9-33:49",
                   "annotation" : [ ],
                   "when" : {
+                     "type" : "InValueSet",
                      "locator" : "33:14-33:40",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "InValueSet",
                      "annotation" : [ ],
                      "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "annotation" : [ ]
                      }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "annotation" : [ ]
                      } ],
                      "code" : {
+                        "type" : "ParameterRef",
                         "locator" : "33:14-33:25",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                         "name" : "ChosenCode",
-                        "type" : "ParameterRef",
                         "annotation" : [ ]
                      },
                      "valuesetExpression" : {
+                        "type" : "ExpressionRef",
                         "locator" : "33:30-33:40",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "name" : "ValueSetA",
-                        "type" : "ExpressionRef",
                         "annotation" : [ ]
                      }
                   },
                   "then" : {
+                     "type" : "Literal",
                      "locator" : "33:47-33:49",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "a",
-                     "type" : "Literal",
                      "annotation" : [ ]
                   }
                }, {
                   "locator" : "34:9-34:49",
                   "annotation" : [ ],
                   "when" : {
+                     "type" : "InValueSet",
                      "locator" : "34:14-34:40",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "InValueSet",
                      "annotation" : [ ],
                      "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "annotation" : [ ]
                      }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "annotation" : [ ]
                      } ],
                      "code" : {
+                        "type" : "ParameterRef",
                         "locator" : "34:14-34:25",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                         "name" : "ChosenCode",
-                        "type" : "ParameterRef",
                         "annotation" : [ ]
                      },
                      "valuesetExpression" : {
+                        "type" : "ExpressionRef",
                         "locator" : "34:30-34:40",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "name" : "ValueSetB",
-                        "type" : "ExpressionRef",
                         "annotation" : [ ]
                      }
                   },
                   "then" : {
+                     "type" : "Literal",
                      "locator" : "34:47-34:49",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "b",
-                     "type" : "Literal",
                      "annotation" : [ ]
                   }
                } ],
                "else" : {
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "annotation" : [ ],
                   "signature" : [ ],
                   "operand" : {
+                     "type" : "Null",
                      "locator" : "35:10-35:13",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                     "type" : "Null",
                      "annotation" : [ ]
                   }
                }

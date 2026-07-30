@@ -38,10 +38,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(predecessor.operand, typeof(Literal));
 
 
-                var lambda = CreateElmToolkit().Lambda(predecessor);
-                var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
-                var result = dg.DynamicInvoke(ctx);
+                var result = Run(predecessor, library, ctx);
                 Assert.IsNotNull(result);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(1, result);
@@ -71,10 +69,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(predecessor.operand, typeof(As));
 
 
-                var lambda = CreateElmToolkit().Lambda(predecessor);
-                var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
-                var result = dg.DynamicInvoke(ctx);
+                var result = Run(predecessor, library, ctx);
                 Assert.IsNull(result);
             }
         }

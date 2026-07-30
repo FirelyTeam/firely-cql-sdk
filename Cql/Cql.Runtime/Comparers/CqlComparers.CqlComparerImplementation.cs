@@ -59,9 +59,22 @@ partial class CqlComparers : CqlComparer<object>
 
     private ICqlComparer? SelectComparer(object x, Type xType)
     {
-        ICqlComparer? comparer = null;
-
         if (Comparers.TryGetValue(xType, out var c)) return c;
+
+        var comparer = SelectComparerUncached(x, xType);
+
+        // Memoize a comparer resolved via the BaseType walk (below) onto the originally-queried
+        // type, so later comparisons of this exact type hit the dictionary directly instead of
+        // re-walking the inheritance chain every time.
+        if (comparer is not null)
+            Comparers.TryAdd(xType, comparer);
+
+        return comparer;
+    }
+
+    private ICqlComparer? SelectComparerUncached(object x, Type xType)
+    {
+        ICqlComparer? comparer = null;
 
         if (xType.IsGenericType)
         {
@@ -82,7 +95,7 @@ partial class CqlComparers : CqlComparer<object>
             comparer = listComparer;
         }
 
-        if(comparer is null && xType.BaseType is not null)
+        if (comparer is null && xType.BaseType is not null)
             comparer = SelectComparer(x, xType.BaseType);
 
         return comparer;
@@ -91,8 +104,12 @@ partial class CqlComparers : CqlComparer<object>
     private bool ShouldSwapTypes(Type xType, Type yType)
     {
         Debug.Assert(xType != yType, "xType and yType must not be the same.");
-        var shouldSwapTypes = _shouldTypeSwapPredicates.Any(p => p.ShouldSwap(xType, yType));
-        return shouldSwapTypes;
+        foreach (var p in _shouldTypeSwapPredicates)
+        {
+            if (p.ShouldSwap(xType, yType))
+                return true;
+        }
+        return false;
     }
 
     protected override bool EquivalentValues(
@@ -173,21 +190,20 @@ partial class CqlComparers : CqlComparer<object>
     {
         var xType = GetKeyTypeForComparers(value);
 
-        if (Comparers.TryGetValue(xType, out var comparer))
+        // Always resolve through SelectComparer -- the exact same resolution Compare/Equals/
+        // Equivalent use (direct registration, generic-factory registrations like KeyValuePair<,>,
+        // and the BaseType walk), memoized the same way. Deliberately NOT special-cased with a
+        // direct Comparers.TryGetValue check here first: SelectComparer's Compare-path memoization
+        // can populate Comparers[xType] with ListEqualComparer for any IEnumerable type (e.g.
+        // List<int>) the first time it's merely Compared/Equals-checked, before it's ever hashed --
+        // a direct-hit fast path here would then serve that memoized entry for GetHashCode too,
+        // which only works correctly if the resolved comparer's own GetHashCodeValue is consistent
+        // with its Equals (true for ListEqualComparer, which computes a structural hash -- but this
+        // single, unconditional call site is what guarantees that invariant instead of relying on
+        // callers to special-case IEnumerable before it can be poisoned by memoization).
+        if (SelectComparer(value, xType) is { } resolvedComparer)
         {
-            return comparer.GetHashCode(value);
-        }
-
-        if (value is IEnumerable<object> enumerable)
-        {
-            int hash = typeof(IEnumerable).GetHashCode();
-            var i = 1;
-            foreach (var x in enumerable)
-            {
-                hash ^= i ^ GetHashCode(x);
-            }
-
-            return hash;
+            return resolvedComparer.GetHashCode(value);
         }
 
         throw new ArgumentException($"Cannot generate a hash code for {xType.Name}", nameof(value));
