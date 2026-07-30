@@ -140,11 +140,10 @@ public class CqlQuantityTests
     }
 
     [TestMethod]
-    [ExpectedException(typeof(NotSupportedException))]
-    public void Add_IncompatibleUnits_Throws()
+    public void Add_IncompatibleUnits_ReturnsNull()
     {
         var ops = GetOperators();
-        ops.Add(new CqlQuantity(1m, "kg"), new CqlQuantity(1m, "s"));
+        Assert.IsNull(ops.Add(new CqlQuantity(1m, "kg"), new CqlQuantity(1m, "s")));
     }
 
     [TestMethod]
@@ -235,11 +234,10 @@ public class CqlQuantityTests
     }
 
     [TestMethod]
-    [ExpectedException(typeof(NotSupportedException))]
-    public void Subtract_IncompatibleUnits_Throws()
+    public void Subtract_IncompatibleUnits_ReturnsNull()
     {
         var ops = GetOperators();
-        ops.Subtract(new CqlQuantity(1m, "kg"), new CqlQuantity(1m, "s"));
+        Assert.IsNull(ops.Subtract(new CqlQuantity(1m, "kg"), new CqlQuantity(1m, "s")));
     }
 
     #endregion
@@ -268,6 +266,23 @@ public class CqlQuantityTests
         Assert.IsNotNull(result);
         Assert.AreEqual(1m, result.value);
         Assert.AreEqual("days", result.unit);
+    }
+
+    [TestMethod]
+    public void Modulo_CommensurableUcumUnits_ReturnsRemainderWithLeftUnit()
+    {
+        var ops = GetOperators();
+        var result = ops.Modulo(new CqlQuantity(7000m, "g"), new CqlQuantity(3m, "kg"));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(1000m, result!.value);
+        Assert.AreEqual("g", result.unit);
+    }
+
+    [TestMethod]
+    public void Modulo_IncompatibleUnits_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Modulo(new CqlQuantity(7m, "kg"), new CqlQuantity(3m, "s")));
     }
 
     [TestMethod]
@@ -408,6 +423,13 @@ public class CqlQuantityTests
     }
 
     [TestMethod]
+    public void Divide_IncompatibleUnits_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Divide(new CqlQuantity(6m, "kg"), new CqlQuantity(2m, "not-a-unit")));
+    }
+
+    [TestMethod]
     public void Divide_NullLeft_ReturnsNull()
     {
         var ops = GetOperators();
@@ -460,6 +482,13 @@ public class CqlQuantityTests
     }
 
     [TestMethod]
+    public void Multiply_IncompatibleUnits_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Multiply(new CqlQuantity(3m, "kg"), new CqlQuantity(2m, "not-a-unit")));
+    }
+
+    [TestMethod]
     public void Multiply_NullLeft_ReturnsNull()
     {
         var ops = GetOperators();
@@ -482,6 +511,13 @@ public class CqlQuantityTests
     {
         var ops = GetOperators();
         Assert.IsNull(ops.CanConvertQuantity(new CqlQuantity(1m, "kg"), null));
+    }
+
+    [TestMethod]
+    public void CanConvertQuantity_NullQuantityValue_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.CanConvertQuantity(new CqlQuantity(null, "kg"), "g"));
     }
 
     [TestMethod]
@@ -516,6 +552,54 @@ public class CqlQuantityTests
     {
         var ops = GetOperators();
         Assert.IsFalse(ops.CanConvertQuantity(new CqlQuantity(1m, "kg"), "s"));
+    }
+
+    #endregion
+
+    #region TruncatedDivide
+
+    [TestMethod]
+    public void TruncatedDivide_SameUnit_ReturnsTruncatedQuotientWithUnitOne()
+    {
+        var ops = GetOperators();
+        var result = ops.TruncatedDivide(new CqlQuantity(5m, "mg"), new CqlQuantity(2m, "mg"));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(2m, result!.value);
+        Assert.AreEqual(UCUMUnits.Default, result.unit);
+    }
+
+    [TestMethod]
+    public void TruncatedDivide_ByScalar_ReturnsTruncatedQuotientWithLeftUnit()
+    {
+        var ops = GetOperators();
+        var result = ops.TruncatedDivide(new CqlQuantity(5m, "mg"), new CqlQuantity(2m, UCUMUnits.Default));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(2m, result!.value);
+        Assert.AreEqual("mg", result.unit);
+    }
+
+    [TestMethod]
+    public void TruncatedDivide_CommensurableUcumUnits_ReturnsTruncatedQuotient()
+    {
+        var ops = GetOperators();
+        var result = ops.TruncatedDivide(new CqlQuantity(5m, "g"), new CqlQuantity(2m, "kg"));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(0m, result!.value);
+        Assert.AreEqual(string.Empty, result.unit);
+    }
+
+    [TestMethod]
+    public void TruncatedDivide_IncompatibleUnits_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.TruncatedDivide(new CqlQuantity(6m, "kg"), new CqlQuantity(2m, "not-a-unit")));
+    }
+
+    [TestMethod]
+    public void TruncatedDivide_NullArgument_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.TruncatedDivide(null, new CqlQuantity(2m, "mg")));
     }
 
     #endregion

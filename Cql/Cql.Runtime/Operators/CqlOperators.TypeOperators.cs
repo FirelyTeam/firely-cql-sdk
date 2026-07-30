@@ -219,7 +219,7 @@ namespace Hl7.Cql.Operators
 
         public bool? CanConvertQuantity(CqlQuantity? argument, string? unit)
         {
-            if (argument == null || unit == null) return null;
+            if (argument == null || argument.value == null || unit == null) return null;
             try
             {
                 return UnitConverter.ChangeUnits(argument, unit) is not null;

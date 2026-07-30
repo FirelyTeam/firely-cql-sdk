@@ -486,13 +486,22 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.value == null || right.value == null)
                 return null;
+            else if (right.value == 0m)
+                return null;
             else if (left.unit != right.unit)
             {
                 string leftUnit = left.unit ?? string.Empty;
                 string rightUnit = right.unit ?? string.Empty;
                 if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
                     return new CqlQuantity(Modulo(left.value, right.value), left.unit);
-                throw new NotSupportedException($"Modulo of quantities with incompatible units {left.unit} and {right.unit} is not supported.");
+
+                if (right.TryConvert(leftUnit, MetricService, out var rightInLeftUnit)
+                    && rightInLeftUnit?.value is { } rightValue)
+                {
+                    return new CqlQuantity(Modulo(left.value, rightValue), left.unit);
+                }
+
+                return null;
             }
             else
                 return new CqlQuantity(Modulo(left.value, right.value), left.unit);
@@ -881,8 +890,7 @@ namespace Hl7.Cql.Operators
                     $"The configured IMetricService does not implement {opName} for units {leftUnit} and {rightUnit}. Inject a full IMetricService implementation to enable cross-unit arithmetic.");
             }
 
-            throw new NotSupportedException(
-                $"Arithmetic on quantities with incompatible units {leftUnit} and {rightUnit} is not supported.");
+            return null;
         }
 
         private bool TryExpressResultInMostGranularUnit(
@@ -998,10 +1006,20 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.value == null || right.value == null || right.value == 0m)
                 return null;
-            else if (left.unit != "1" && right.unit != "1")
-                throw new NotSupportedException("Unit arithmetic is not supported.");
+            else if (left.unit == null || right.unit == null)
+                return null;
+            else if (left.unit == right.unit)
+                return new CqlQuantity(TruncatedDivide(left.value.Value, right.value.Value), UCUMUnits.Default);
+            else if (right.unit == UCUMUnits.Default)
+                return new CqlQuantity(TruncatedDivide(left.value.Value, right.value.Value), left.unit);
             else
-                return new CqlQuantity(TruncatedDivide(left.value, right.value), "1");
+            {
+                var divided = TryUcumBinaryOp(left.value.Value, left.unit, right.value.Value, right.unit, MetricServiceExtensions.TryDivide, "TruncatedDivide");
+                if (divided?.value == null)
+                    return null;
+
+                return new CqlQuantity(Math.Truncate(divided.value.Value), divided.unit);
+            }
         }
         #endregion
     }
