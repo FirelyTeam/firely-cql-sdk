@@ -858,11 +858,11 @@ namespace Hl7.Cql.Operators
             var highBoundary = interval.high!.Value;
             var perValue = per.value ?? 1m;
             var usesDefaultDecimalUnit = string.IsNullOrEmpty(per.unit) || per.unit == UCUMUnits.Unary;
-            var perScale = DecimalScale(perValue);
+            var perScale = perValue.Scale;
 
             // Boundaries more precise than per are truncated to per's scale, which may broaden the input range.
             var needsTruncation = usesDefaultDecimalUnit
-                && (DecimalScale(listItem) > perScale || DecimalScale(highBoundary) > perScale);
+                && (listItem.Scale > perScale || highBoundary.Scale > perScale);
 
             if (needsTruncation)
             {

@@ -156,6 +156,8 @@ namespace Hl7.Cql.Packaging
                             return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(FHIRAllTypes.Decimal));
                         case CqlPrimitiveType.Integer:
                             return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(FHIRAllTypes.Integer));
+                        case CqlPrimitiveType.Long:
+                            return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(CqlPrimitiveType.Long));
                         case CqlPrimitiveType.Quantity:
                             return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(FHIRAllTypes.Quantity));
                         case CqlPrimitiveType.Ratio:

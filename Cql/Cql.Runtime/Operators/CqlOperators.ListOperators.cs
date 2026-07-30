@@ -380,11 +380,11 @@ namespace Hl7.Cql.Operators
                     var highBoundary = interval.high!.Value;
                     var perValue = per.value ?? 1m;
                     var usesDefaultDecimalUnit = string.IsNullOrEmpty(per.unit) || per.unit == UCUMUnits.Unary;
-                    var perScale = DecimalScale(perValue);
+                    var perScale = perValue.Scale;
 
                     // Boundaries more precise than per are truncated to per's scale, which may broaden the input range.
                     var needsTruncation = usesDefaultDecimalUnit
-                        && (DecimalScale(listItem) > perScale || DecimalScale(highBoundary) > perScale);
+                        && (listItem.Scale > perScale || highBoundary.Scale > perScale);
 
                     if (needsTruncation)
                     {
@@ -633,12 +633,6 @@ namespace Hl7.Cql.Operators
                     new CqlTime(time.Hour, time.Minute, time.Second, null, time.OffsetHour, time.OffsetMinute)
             };
         }
-
-        /// <summary>
-        /// The number of digits after the decimal point.
-        /// </summary>
-        private static int DecimalScale(decimal value) =>
-            BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
 
         /// <summary>
         /// One unit at the given scale, e.g. a scale of 2 yields 0.01.

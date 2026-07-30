@@ -28,8 +28,9 @@ partial class CqlComparers
             [DisallowNull] decimal? y,
             string? precision)
         {
-            var @thisPrecision = GetPrecision(x.Value);
-            var otherPrecision = GetPrecision(y.Value);
+            // Decimal.Scale is the number of digits after the decimal point, counting trailing zeros.
+            var @thisPrecision = x.Value.Scale;
+            var otherPrecision = y.Value.Scale;
             if (@thisPrecision < otherPrecision)
                 y = decimal.Round(y.Value, thisPrecision);
             else if (thisPrecision > otherPrecision)
@@ -37,9 +38,6 @@ partial class CqlComparers
             var areEqual = x == y;
             return areEqual;
         }
-
-        private static int GetPrecision(decimal value) =>
-            BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
 
         private static decimal TruncateDigits(decimal value, int places)
         {
