@@ -525,6 +525,12 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.unit == null || right.unit == null)
                 return null;
+            else if (left.unit == UCUMUnits.Default && right.unit == UCUMUnits.Default)
+                return new CqlQuantity(Multiply(left.value, right.value), UCUMUnits.Default);
+            else if (left.unit == UCUMUnits.Default)
+                return new CqlQuantity(Multiply(left.value, right.value), right.unit);
+            else if (right.unit == UCUMUnits.Default)
+                return new CqlQuantity(Multiply(left.value, right.value), left.unit);
             else
                 return TryUcumBinaryOp(left.value.Value, left.unit, right.value.Value, right.unit, MetricServiceExtensions.TryMultiply, "Multiply");
         }
