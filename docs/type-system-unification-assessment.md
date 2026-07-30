@@ -37,7 +37,7 @@ product family.
 | Capability | Cql.Primitives (here) | ElementModel.Types (SDK 6.3) |
 |---|---|---|
 | `Interval<T>` with open/closed bounds | first-class; **186 signature references in ICqlOperators** | **absent entirely** |
-| UCUM canonicalization/conversion | yes (Fhir.Metrics 1.3), incl. the CQL calendar-unit shim | none — Quantity comparison requires exact unit equality (doc-comment overstates) |
+| UCUM canonicalization/conversion | yes (Fhir.Metrics 1.4), incl. the CQL calendar-unit shim | none — Quantity comparison requires exact unit equality (doc-comment overstates) |
 | Code/Concept CQL semantics | records with defined equality | explicitly none; `Parse` throws `NotImplementedException` |
 | Ratio ordering/equivalence | present | absent (structural `==` only) |
 | Sub-second comparison | spec-shaped | deliberately simplified (second+ms collapsed; documented) |

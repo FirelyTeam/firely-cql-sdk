@@ -97,6 +97,8 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 4.4.2 **When adding dependencies, also update the README's Dependencies section**
 
+4.4.2.1 **When bumping an existing package version, update the version number in the root `README.md`'s "External Dependencies" table** — sub-project READMEs don't state version numbers, so the root README's versioned table is the only consumer-visible record and silently drifts after version bumps. Also scan `docs/` for any design or assessment doc that mentions a version number for the same package.
+
 4.4.3 Document experimental features clearly in preview projects
 
 4.4.4 Maintain clear separation between stable and experimental examples
