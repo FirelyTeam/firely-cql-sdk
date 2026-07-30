@@ -68,7 +68,7 @@ Any change that alters the C# emitted for CQL libraries requires bumping `Librar
 
 ## Release notes
 
-Any breaking change (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in the same PR that introduces it — not deferred to release time. Add a new fragment file under [docs/releases/vnext/](docs/releases/vnext/README.md) (one file per PR, see that folder's README for the naming/format convention) rather than editing the shared `vnext-release-notes.md` directly, which causes merge conflicts between parallel PRs (see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)). **Transitional exception:** a PR that already added its entry directly to `vnext-release-notes.md` before this convention existed doesn't need to move it — only write new entries as fragments. See the `cut-release-notes` skill for the full release-cutting procedure, including how fragments get consolidated.
+Any breaking change (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in the same PR that introduces it — not deferred to release time. Add a new fragment file under [docs/releases/vnext/](docs/releases/vnext/README.md) (one file per PR, see that folder's README for the naming/format convention) rather than editing the shared `vnext-release-notes.md` directly, which causes merge conflicts between parallel PRs (see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)). **Transitional exception:** a PR that already added its entry directly to `vnext-release-notes.md` before this convention existed doesn't need to move it — only write new entries as fragments. When cutting a release, **both** sources must be fully consolidated into the versioned release notes and then cleared — the fragment files deleted and `vnext-release-notes.md` reset (or replaced with a pointer once the transition is complete). See the `cut-release-notes` skill for the full procedure.
 
 ## Skills
 
@@ -77,7 +77,7 @@ Task-specific workflows live under `.claude/skills/` and load on demand — invo
 - `write-pr-description` — updating a PR description from the full branch history
 - `file-github-issue` — issue formatting conventions
 - `pickup-github-ticket` — resolving a ticket number/URL to a branch and picking up work
-- `cut-release-notes` — turning `vnext-release-notes.md` into a versioned release note
+- `cut-release-notes` — consolidating all pending release-note content (fragment files under `docs/releases/vnext/` plus any transitional content still in `vnext-release-notes.md`) into a versioned release note, then clearing both sources
 - `generate-elm-from-cql` — regenerating ELM JSON after adding CQL test input files
 - `generate-svg-from-mermaid` — adding/editing a Mermaid diagram and rendering it to a committed `.svg`
 - `run-integration-benchmarks` — running the Integration Runner submodule's BenchmarkDotNet project and comparing against its committed baselines (INTERNAL USE ONLY)
