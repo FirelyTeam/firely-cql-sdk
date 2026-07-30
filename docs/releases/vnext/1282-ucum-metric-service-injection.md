@@ -6,4 +6,5 @@
 
 - Quantity `Multiply` by a scalar (`'1'`) now preserves the non-`'1'` operand unit instead of incorrectly collapsing the result unit to `'1'` (#1282).
 - Quantity `Between` now returns `null` for dimension-incompatible comparisons instead of producing a boolean result from incompatible units (#1282).
-- `DefaultUcumMetricService.TryConvertTo` now delegates directly to `Fhir.Metrics` (the temporary workaround is removed), and `Fhir.Metrics` is updated from `1.3.1` to `1.4.0` (#1282, closes #1296).
+- `CanConvertQuantity` now correctly checks convertibility (instead of always returning `false` for non-null inputs) by evaluating unit conversion through `UnitConverter.ChangeUnits` (#1282).
+- `DefaultUcumMetricService.TryConvertTo` now delegates directly to `Fhir.Metrics` (the temporary workaround is removed); `Fhir.Metrics` is updated from `1.3.0` to `1.4.0` in existing references, and this PR adds a new `Fhir.Metrics` reference in `Cql.Firely` (#1282, closes #1296).
