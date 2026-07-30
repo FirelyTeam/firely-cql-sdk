@@ -1,8 +1,8 @@
 # vNext release note fragments
 
-This folder holds one release-note fragment file per pull request, instead of everyone editing the
-single shared [`docs/releases/vnext-release-notes.md`](../vnext-release-notes.md) and hitting merge
-conflicts (see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)).
+This folder holds one release-note fragment file per pull request, instead of everyone editing a
+single shared file and hitting merge conflicts
+(see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)).
 
 ## When to add one
 
@@ -11,10 +11,6 @@ not deferred to release time. Features and fixes can also be tracked here when t
 calling out in the release notes. See the root
 [CLAUDE.md](../../../CLAUDE.md) / [copilot-instructions](../../../.github/copilot-instructions/04-development-guidelines.md)
 for the exact rule.
-
-> **Transitional note** (see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)): a PR
-> that already added its entry directly to `vnext-release-notes.md` before this folder existed does
-> not need to move it here. Only entries not yet written should use this folder.
 
 ## Naming
 
@@ -27,7 +23,7 @@ to collide, e.g. `add-benchmark-skill.md`; rename it to `<PR-number>-<slug>.md` 
 
 ## Format
 
-Exactly the same structure as `vnext-release-notes.md` itself, scoped to only the section(s) this PR
+Each fragment file uses the same section headings as the versioned release notes, scoped to only the section(s) this PR
 needs:
 
 ```md
