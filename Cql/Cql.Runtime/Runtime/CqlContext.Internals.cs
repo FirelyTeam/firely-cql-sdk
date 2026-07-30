@@ -30,7 +30,7 @@ public interface ICqlContextInternals
     /// Gets the total number of calls to GetOrCompute.
     /// </summary>
     /// <remarks>
-    /// This counter is reset when <see cref="CqlContext.UseNewCache(int)"/> or <see cref="CqlContext.DontUseCaching"/> is called.
+    /// This counter is reset when <see cref="CqlContext.UseNewCache(int)"/> (or its <see cref="CqlContext.UseNewCache(int, int)"/> overload) or <see cref="CqlContext.DontUseCaching"/> is called.
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     long CacheCallCount { get; }
@@ -39,7 +39,7 @@ public interface ICqlContextInternals
     /// Gets the number of times the factory function was invoked (cache misses).
     /// </summary>
     /// <remarks>
-    /// This counter is reset when <see cref="CqlContext.UseNewCache(int)"/> or <see cref="CqlContext.DontUseCaching"/> is called.
+    /// This counter is reset when <see cref="CqlContext.UseNewCache(int)"/> (or its <see cref="CqlContext.UseNewCache(int, int)"/> overload) or <see cref="CqlContext.DontUseCaching"/> is called.
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     long CacheMisses { get; }
@@ -49,7 +49,7 @@ public interface ICqlContextInternals
     /// </summary>
     /// <remarks>
     /// Cache hits = Total calls to GetOrCompute - Factory invocations (cache misses).
-    /// This counter is reset when <see cref="CqlContext.UseNewCache(int)"/> or <see cref="CqlContext.DontUseCaching"/> is called.
+    /// This counter is reset when <see cref="CqlContext.UseNewCache(int)"/> (or its <see cref="CqlContext.UseNewCache(int, int)"/> overload) or <see cref="CqlContext.DontUseCaching"/> is called.
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     long CacheHits { get; }
@@ -65,7 +65,7 @@ partial class CqlContext : ICqlContextInternals
     /// Gets the total number of calls to GetOrCompute.
     /// </summary>
     /// <remarks>
-    /// This counter is reset when <see cref="UseNewCache(int)"/> or <see cref="DontUseCaching"/> is called.
+    /// This counter is reset when <see cref="UseNewCache(int)"/> (or its <see cref="UseNewCache(int, int)"/> overload) or <see cref="DontUseCaching"/> is called.
     /// </remarks>
     long ICqlContextInternals.CacheCallCount => _cacheCallCount;
 
@@ -73,7 +73,7 @@ partial class CqlContext : ICqlContextInternals
     /// Gets the number of times the factory function was invoked (cache misses).
     /// </summary>
     /// <remarks>
-    /// This counter is reset when <see cref="UseNewCache(int)"/> or <see cref="DontUseCaching"/> is called.
+    /// This counter is reset when <see cref="UseNewCache(int)"/> (or its <see cref="UseNewCache(int, int)"/> overload) or <see cref="DontUseCaching"/> is called.
     /// </remarks>
     long ICqlContextInternals.CacheMisses => _cacheFactoryInvocations;
 
@@ -82,7 +82,7 @@ partial class CqlContext : ICqlContextInternals
     /// </summary>
     /// <remarks>
     /// Cache hits = Total calls to GetOrCompute - Factory invocations (cache misses).
-    /// This counter is reset when <see cref="UseNewCache(int)"/> or <see cref="DontUseCaching"/> is called.
+    /// This counter is reset when <see cref="UseNewCache(int)"/> (or its <see cref="UseNewCache(int, int)"/> overload) or <see cref="DontUseCaching"/> is called.
     /// </remarks>
     long ICqlContextInternals.CacheHits => _cacheCallCount - _cacheFactoryInvocations;
 
