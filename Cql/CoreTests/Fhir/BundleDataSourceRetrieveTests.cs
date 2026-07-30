@@ -312,5 +312,41 @@ namespace CoreTests.Fhir
             dr.Retrieve<Observation>(ByCodes(null, new CqlCode("x", "HTTP://NU.NL"))).Should().BeEmpty();
             dr.Retrieve<Observation>(ByCodes(null, new CqlCode("x", NuSystem))).Select(o => o.Id).Should().Equal("obs-x");
         }
+
+        [TestMethod]
+        public async System.Threading.Tasks.Task RetrieveByCodesOnPrimaryCodePath_ConcurrentAccessToSameCacheKey_YieldsConsistentResults()
+        {
+            var dr = BuildDataSource();
+            var expected = new[] { "obs-x" };
+            const int threadCount = 32;
+
+            var tasks = Enumerable.Range(0, threadCount).Select(_ => System.Threading.Tasks.Task.Run(() =>
+                dr.Retrieve<Observation>(ByCodes(null, new CqlCode("x", NuSystem)))
+                  .Select(o => o.Id)
+                  .ToList()));
+
+            var results = await System.Threading.Tasks.Task.WhenAll(tasks);
+
+            foreach (var result in results)
+                result.Should().Equal(expected);
+        }
+
+        [TestMethod]
+        public async System.Threading.Tasks.Task RetrieveByCodesOnCodeProperty_ConcurrentAccessToSameCacheKey_YieldsConsistentResults()
+        {
+            var dr = BuildDataSource();
+            var expected = new[] { "obs-x" };
+            const int threadCount = 32;
+
+            var tasks = Enumerable.Range(0, threadCount).Select(_ => System.Threading.Tasks.Task.Run(() =>
+                dr.Retrieve<Observation>(ByCodes(Prop("Observation", "code"), new CqlCode("x", NuSystem)))
+                  .Select(o => o.Id)
+                  .ToList()));
+
+            var results = await System.Threading.Tasks.Task.WhenAll(tasks);
+
+            foreach (var result in results)
+                result.Should().Equal(expected);
+        }
     }
 }

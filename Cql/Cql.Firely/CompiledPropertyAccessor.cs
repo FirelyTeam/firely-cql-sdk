@@ -82,5 +82,3 @@ namespace Hl7.Cql.Fhir
         }
     }
 }
-
-#nullable disable
