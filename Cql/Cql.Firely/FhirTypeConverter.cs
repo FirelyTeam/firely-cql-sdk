@@ -156,11 +156,15 @@ namespace Hl7.Cql.Fhir
             add((M.Quantity f) => new CqlQuantity(f.Value, f.Unit));
             add((M.Quantity f) => f.Value);
             add((M.Quantity f) => (int?)f.Value);
+            // Like the Quantity->int? conversion above, a fractional value is truncated towards zero
+            // (the C# decimal->long conversion), and a value outside the range of long throws an OverflowException.
+            add((M.Quantity f) => (long?)f.Value);
             add((M.Period f) => new CqlInterval<CqlDateTime>(converter.Convert<CqlDateTime>(f.StartElement), converter.Convert<CqlDateTime>(f.EndElement), lowClosed: true, highClosed: true));
             add((M.Period f) => new CqlInterval<CqlDate>(converter.Convert<CqlDate>(f.StartElement), converter.Convert<CqlDate>(f.EndElement), lowClosed: true, highClosed: true));
             add((M.Range f) => new CqlInterval<CqlQuantity>(converter.Convert<CqlQuantity>(f.Low), converter.Convert<CqlQuantity>(f.High), lowClosed: true, highClosed: true));
             add((M.Range f) => new CqlInterval<decimal?>(converter.Convert<decimal?>(f.Low), converter.Convert<decimal?>(f.High), lowClosed: true, highClosed: true));
             add((M.Range f) => new CqlInterval<int?>(converter.Convert<int?>(f.Low), converter.Convert<int?>(f.High), lowClosed: true, highClosed: true));
+            add((M.Range f) => new CqlInterval<long?>(converter.Convert<long?>(f.Low), converter.Convert<long?>(f.High), lowClosed: true, highClosed: true));
 
             add((M.Id id) => id.Value);
 
@@ -435,6 +439,27 @@ namespace Hl7.Cql.Fhir
             {
                 nameof(CqlPrimitiveType.Date) => converter.Convert<CqlInterval<CqlDate>>(period),
                 _ => converter.Convert<CqlInterval<CqlDateTime>>(period)
+            };
+
+        /// <summary>
+        /// Converts a FHIR <see cref="M.Range"/> to a CQL interval, using the CQL point type name
+        /// (typically taken from the cqf-cqlType extension on a Library parameter, e.g. "Integer" or "Long")
+        /// to disambiguate the otherwise ambiguous Range mapping.
+        /// </summary>
+        /// <param name="converter">the type converter</param>
+        /// <param name="range">the range to convert, or <see langword="null"/></param>
+        /// <param name="cqlPointTypeName">the CQL point type name; "Integer", "Decimal" and "Long" yield an
+        /// Interval&lt;Integer&gt;, Interval&lt;Decimal&gt; and Interval&lt;Long&gt; of the Range's unit-less Quantity values,
+        /// anything else - including an absent hint - the widest reading, an Interval&lt;Quantity&gt;</param>
+        /// <returns>a <see cref="CqlInterval{T}"/> of <see cref="int"/>, <see cref="decimal"/>, <see cref="long"/> or
+        /// <see cref="CqlQuantity"/>, or <see langword="null"/> when <paramref name="range"/> is <see langword="null"/></returns>
+        public static object? ConvertRangeToCqlInterval(this TypeConverter converter, M.Range? range, string? cqlPointTypeName) =>
+            cqlPointTypeName switch
+            {
+                nameof(CqlPrimitiveType.Integer) => converter.Convert<CqlInterval<int?>>(range),
+                nameof(CqlPrimitiveType.Decimal) => converter.Convert<CqlInterval<decimal?>>(range),
+                nameof(CqlPrimitiveType.Long) => converter.Convert<CqlInterval<long?>>(range),
+                _ => converter.Convert<CqlInterval<CqlQuantity>>(range)
             };
 
         /// <summary>

@@ -1,1 +1,2 @@
 #nullable enable
+static Hl7.Cql.Fhir.FhirTypeConverter.ConvertRangeToCqlInterval(this Hl7.Cql.Conversion.TypeConverter! converter, Hl7.Fhir.Model.Range? range, string? cqlPointTypeName) -> object?
