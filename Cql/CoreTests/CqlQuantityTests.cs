@@ -328,10 +328,10 @@ public class CqlQuantityTests
     }
 
     [TestMethod]
-    public void Between_CqlQuantity_IncompatibleDimensions_ReturnsFalse()
+    public void Between_CqlQuantity_IncompatibleDimensions_ReturnsNull()
     {
         var ops = GetOperators();
-        Assert.IsFalse(ops.Between(new CqlQuantity(5m, "kg"), new CqlQuantity(1m, "s"), new CqlQuantity(10m, "kg")));
+        Assert.IsNull(ops.Between(new CqlQuantity(5m, "kg"), new CqlQuantity(1m, "s"), new CqlQuantity(10m, "kg")));
     }
 
     [TestMethod]
@@ -434,6 +434,19 @@ public class CqlQuantityTests
         Assert.IsNotNull(result2);
         Assert.AreEqual(12m, result2.value);
         Assert.AreEqual("mg", result2.unit);
+    }
+
+    [TestMethod]
+    public void Multiply_TwoScalars_ReturnsScalarProduct()
+    {
+        var ops = GetOperators();
+        var left = new CqlQuantity(3m, UCUMUnits.Default);
+        var right = new CqlQuantity(4m, UCUMUnits.Default);
+
+        var result = ops.Multiply(left, right);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(12m, result.value);
+        Assert.AreEqual(UCUMUnits.Default, result.unit);
     }
 
     [TestMethod]

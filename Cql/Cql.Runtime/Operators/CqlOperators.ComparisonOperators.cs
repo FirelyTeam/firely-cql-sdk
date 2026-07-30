@@ -46,10 +46,15 @@ namespace Hl7.Cql.Operators
         {
             if (argument?.value == null || low?.value == null || high?.value == null)
                 return null;
-            else if (Comparer.Compare(argument, low, null) >= 0 && Comparer.Compare(argument, high, null) <= 0)
-                return true;
             else
-                return false;
+            {
+                var lowCompare = Comparer.Compare(argument, low, null);
+                var highCompare = Comparer.Compare(argument, high, null);
+                if (lowCompare == null || highCompare == null)
+                    return null;
+                else
+                    return lowCompare >= 0 && highCompare <= 0;
+            }
         }
 
         public bool? Between(CqlDate? argument, CqlDate? low, CqlDate? high)
