@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "5.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       } ],
@@ -1295,37 +1295,9 @@
                                                                }
                                                             } ],
                                                             "operand" : [ {
-                                                               "type" : "Retrieve",
-                                                               "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                               "codeProperty" : "medication",
-                                                               "codeComparator" : "in",
-                                                               "annotation" : [ ],
-                                                               "codes" : {
-                                                                  "type" : "ValueSetRef",
-                                                                  "locator" : "84:31-84:43",
-                                                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                                  "name" : "Atomoxetine",
-                                                                  "preserve" : true,
-                                                                  "annotation" : [ ]
-                                                               },
-                                                               "include" : [ ],
-                                                               "codeFilter" : [ ],
-                                                               "dateFilter" : [ ],
-                                                               "otherFilter" : [ ]
-                                                            }, {
                                                                "type" : "Query",
                                                                "locator" : "84:11-84:44",
                                                                "annotation" : [ ],
-                                                               "resultTypeSpecifier" : {
-                                                                  "type" : "ListTypeSpecifier",
-                                                                  "annotation" : [ ],
-                                                                  "elementType" : {
-                                                                     "type" : "NamedTypeSpecifier",
-                                                                     "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                                     "annotation" : [ ]
-                                                                  }
-                                                               },
                                                                "source" : [ {
                                                                   "locator" : "84:11-84:44",
                                                                   "alias" : "MR",
@@ -1455,6 +1427,35 @@
                                                                      } ]
                                                                   }
                                                                } ]
+                                                            }, {
+                                                               "type" : "Retrieve",
+                                                               "locator" : "84:11-84:44",
+                                                               "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                               "codeProperty" : "medication",
+                                                               "codeComparator" : "in",
+                                                               "annotation" : [ ],
+                                                               "resultTypeSpecifier" : {
+                                                                  "type" : "ListTypeSpecifier",
+                                                                  "annotation" : [ ],
+                                                                  "elementType" : {
+                                                                     "type" : "NamedTypeSpecifier",
+                                                                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                                     "annotation" : [ ]
+                                                                  }
+                                                               },
+                                                               "codes" : {
+                                                                  "type" : "ValueSetRef",
+                                                                  "locator" : "84:31-84:43",
+                                                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                                  "name" : "Atomoxetine",
+                                                                  "preserve" : true,
+                                                                  "annotation" : [ ]
+                                                               },
+                                                               "include" : [ ],
+                                                               "codeFilter" : [ ],
+                                                               "dateFilter" : [ ],
+                                                               "otherFilter" : [ ]
                                                             } ]
                                                          }, {
                                                             "type" : "Union",
@@ -1487,37 +1488,9 @@
                                                                }
                                                             } ],
                                                             "operand" : [ {
-                                                               "type" : "Retrieve",
-                                                               "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                               "codeProperty" : "medication",
-                                                               "codeComparator" : "in",
-                                                               "annotation" : [ ],
-                                                               "codes" : {
-                                                                  "type" : "ValueSetRef",
-                                                                  "locator" : "85:33-85:43",
-                                                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                                  "name" : "Clonidine",
-                                                                  "preserve" : true,
-                                                                  "annotation" : [ ]
-                                                               },
-                                                               "include" : [ ],
-                                                               "codeFilter" : [ ],
-                                                               "dateFilter" : [ ],
-                                                               "otherFilter" : [ ]
-                                                            }, {
                                                                "type" : "Query",
                                                                "locator" : "85:13-85:44",
                                                                "annotation" : [ ],
-                                                               "resultTypeSpecifier" : {
-                                                                  "type" : "ListTypeSpecifier",
-                                                                  "annotation" : [ ],
-                                                                  "elementType" : {
-                                                                     "type" : "NamedTypeSpecifier",
-                                                                     "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                                     "annotation" : [ ]
-                                                                  }
-                                                               },
                                                                "source" : [ {
                                                                   "locator" : "85:13-85:44",
                                                                   "alias" : "MR",
@@ -1647,6 +1620,35 @@
                                                                      } ]
                                                                   }
                                                                } ]
+                                                            }, {
+                                                               "type" : "Retrieve",
+                                                               "locator" : "85:13-85:44",
+                                                               "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                               "codeProperty" : "medication",
+                                                               "codeComparator" : "in",
+                                                               "annotation" : [ ],
+                                                               "resultTypeSpecifier" : {
+                                                                  "type" : "ListTypeSpecifier",
+                                                                  "annotation" : [ ],
+                                                                  "elementType" : {
+                                                                     "type" : "NamedTypeSpecifier",
+                                                                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                                     "annotation" : [ ]
+                                                                  }
+                                                               },
+                                                               "codes" : {
+                                                                  "type" : "ValueSetRef",
+                                                                  "locator" : "85:33-85:43",
+                                                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                                  "name" : "Clonidine",
+                                                                  "preserve" : true,
+                                                                  "annotation" : [ ]
+                                                               },
+                                                               "include" : [ ],
+                                                               "codeFilter" : [ ],
+                                                               "dateFilter" : [ ],
+                                                               "otherFilter" : [ ]
                                                             } ]
                                                          } ]
                                                       }, {
@@ -1680,37 +1682,9 @@
                                                             }
                                                          } ],
                                                          "operand" : [ {
-                                                            "type" : "Retrieve",
-                                                            "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                            "codeProperty" : "medication",
-                                                            "codeComparator" : "in",
-                                                            "annotation" : [ ],
-                                                            "codes" : {
-                                                               "type" : "ValueSetRef",
-                                                               "locator" : "86:33-86:52",
-                                                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                               "name" : "Dexmethylphenidate",
-                                                               "preserve" : true,
-                                                               "annotation" : [ ]
-                                                            },
-                                                            "include" : [ ],
-                                                            "codeFilter" : [ ],
-                                                            "dateFilter" : [ ],
-                                                            "otherFilter" : [ ]
-                                                         }, {
                                                             "type" : "Query",
                                                             "locator" : "86:13-86:53",
                                                             "annotation" : [ ],
-                                                            "resultTypeSpecifier" : {
-                                                               "type" : "ListTypeSpecifier",
-                                                               "annotation" : [ ],
-                                                               "elementType" : {
-                                                                  "type" : "NamedTypeSpecifier",
-                                                                  "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                                  "annotation" : [ ]
-                                                               }
-                                                            },
                                                             "source" : [ {
                                                                "locator" : "86:13-86:53",
                                                                "alias" : "MR",
@@ -1840,6 +1814,35 @@
                                                                   } ]
                                                                }
                                                             } ]
+                                                         }, {
+                                                            "type" : "Retrieve",
+                                                            "locator" : "86:13-86:53",
+                                                            "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                            "codeProperty" : "medication",
+                                                            "codeComparator" : "in",
+                                                            "annotation" : [ ],
+                                                            "resultTypeSpecifier" : {
+                                                               "type" : "ListTypeSpecifier",
+                                                               "annotation" : [ ],
+                                                               "elementType" : {
+                                                                  "type" : "NamedTypeSpecifier",
+                                                                  "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                                  "annotation" : [ ]
+                                                               }
+                                                            },
+                                                            "codes" : {
+                                                               "type" : "ValueSetRef",
+                                                               "locator" : "86:33-86:52",
+                                                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                               "name" : "Dexmethylphenidate",
+                                                               "preserve" : true,
+                                                               "annotation" : [ ]
+                                                            },
+                                                            "include" : [ ],
+                                                            "codeFilter" : [ ],
+                                                            "dateFilter" : [ ],
+                                                            "otherFilter" : [ ]
                                                          } ]
                                                       } ]
                                                    }, {
@@ -1873,37 +1876,9 @@
                                                          }
                                                       } ],
                                                       "operand" : [ {
-                                                         "type" : "Retrieve",
-                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                         "codeProperty" : "medication",
-                                                         "codeComparator" : "in",
-                                                         "annotation" : [ ],
-                                                         "codes" : {
-                                                            "type" : "ValueSetRef",
-                                                            "locator" : "87:33-87:51",
-                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                            "name" : "Dextroamphetamine",
-                                                            "preserve" : true,
-                                                            "annotation" : [ ]
-                                                         },
-                                                         "include" : [ ],
-                                                         "codeFilter" : [ ],
-                                                         "dateFilter" : [ ],
-                                                         "otherFilter" : [ ]
-                                                      }, {
                                                          "type" : "Query",
                                                          "locator" : "87:13-87:52",
                                                          "annotation" : [ ],
-                                                         "resultTypeSpecifier" : {
-                                                            "type" : "ListTypeSpecifier",
-                                                            "annotation" : [ ],
-                                                            "elementType" : {
-                                                               "type" : "NamedTypeSpecifier",
-                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                               "annotation" : [ ]
-                                                            }
-                                                         },
                                                          "source" : [ {
                                                             "locator" : "87:13-87:52",
                                                             "alias" : "MR",
@@ -2033,6 +2008,35 @@
                                                                } ]
                                                             }
                                                          } ]
+                                                      }, {
+                                                         "type" : "Retrieve",
+                                                         "locator" : "87:13-87:52",
+                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                         "codeProperty" : "medication",
+                                                         "codeComparator" : "in",
+                                                         "annotation" : [ ],
+                                                         "resultTypeSpecifier" : {
+                                                            "type" : "ListTypeSpecifier",
+                                                            "annotation" : [ ],
+                                                            "elementType" : {
+                                                               "type" : "NamedTypeSpecifier",
+                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                               "annotation" : [ ]
+                                                            }
+                                                         },
+                                                         "codes" : {
+                                                            "type" : "ValueSetRef",
+                                                            "locator" : "87:33-87:51",
+                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                            "name" : "Dextroamphetamine",
+                                                            "preserve" : true,
+                                                            "annotation" : [ ]
+                                                         },
+                                                         "include" : [ ],
+                                                         "codeFilter" : [ ],
+                                                         "dateFilter" : [ ],
+                                                         "otherFilter" : [ ]
                                                       } ]
                                                    } ]
                                                 }, {
@@ -2066,37 +2070,9 @@
                                                       }
                                                    } ],
                                                    "operand" : [ {
-                                                      "type" : "Retrieve",
-                                                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                      "codeProperty" : "medication",
-                                                      "codeComparator" : "in",
-                                                      "annotation" : [ ],
-                                                      "codes" : {
-                                                         "type" : "ValueSetRef",
-                                                         "locator" : "88:33-88:50",
-                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                         "name" : "Lisdexamfetamine",
-                                                         "preserve" : true,
-                                                         "annotation" : [ ]
-                                                      },
-                                                      "include" : [ ],
-                                                      "codeFilter" : [ ],
-                                                      "dateFilter" : [ ],
-                                                      "otherFilter" : [ ]
-                                                   }, {
                                                       "type" : "Query",
                                                       "locator" : "88:13-88:51",
                                                       "annotation" : [ ],
-                                                      "resultTypeSpecifier" : {
-                                                         "type" : "ListTypeSpecifier",
-                                                         "annotation" : [ ],
-                                                         "elementType" : {
-                                                            "type" : "NamedTypeSpecifier",
-                                                            "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                            "annotation" : [ ]
-                                                         }
-                                                      },
                                                       "source" : [ {
                                                          "locator" : "88:13-88:51",
                                                          "alias" : "MR",
@@ -2226,6 +2202,35 @@
                                                             } ]
                                                          }
                                                       } ]
+                                                   }, {
+                                                      "type" : "Retrieve",
+                                                      "locator" : "88:13-88:51",
+                                                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                      "codeProperty" : "medication",
+                                                      "codeComparator" : "in",
+                                                      "annotation" : [ ],
+                                                      "resultTypeSpecifier" : {
+                                                         "type" : "ListTypeSpecifier",
+                                                         "annotation" : [ ],
+                                                         "elementType" : {
+                                                            "type" : "NamedTypeSpecifier",
+                                                            "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                            "annotation" : [ ]
+                                                         }
+                                                      },
+                                                      "codes" : {
+                                                         "type" : "ValueSetRef",
+                                                         "locator" : "88:33-88:50",
+                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                         "name" : "Lisdexamfetamine",
+                                                         "preserve" : true,
+                                                         "annotation" : [ ]
+                                                      },
+                                                      "include" : [ ],
+                                                      "codeFilter" : [ ],
+                                                      "dateFilter" : [ ],
+                                                      "otherFilter" : [ ]
                                                    } ]
                                                 } ]
                                              }, {
@@ -2259,41 +2264,9 @@
                                                    }
                                                 } ],
                                                 "operand" : [ {
-                                                   "type" : "Retrieve",
-                                                   "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                   "codeProperty" : "medication",
-                                                   "codeComparator" : "~",
-                                                   "annotation" : [ ],
-                                                   "codes" : {
-                                                      "type" : "ToList",
-                                                      "annotation" : [ ],
-                                                      "signature" : [ ],
-                                                      "operand" : {
-                                                         "type" : "CodeRef",
-                                                         "locator" : "89:33-89:80",
-                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                                                         "name" : "methamphetamine hydrochloride 5 MG Oral Tablet",
-                                                         "annotation" : [ ]
-                                                      }
-                                                   },
-                                                   "include" : [ ],
-                                                   "codeFilter" : [ ],
-                                                   "dateFilter" : [ ],
-                                                   "otherFilter" : [ ]
-                                                }, {
                                                    "type" : "Query",
                                                    "locator" : "89:13-89:81",
                                                    "annotation" : [ ],
-                                                   "resultTypeSpecifier" : {
-                                                      "type" : "ListTypeSpecifier",
-                                                      "annotation" : [ ],
-                                                      "elementType" : {
-                                                         "type" : "NamedTypeSpecifier",
-                                                         "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                         "annotation" : [ ]
-                                                      }
-                                                   },
                                                    "source" : [ {
                                                       "locator" : "89:13-89:81",
                                                       "alias" : "MR",
@@ -2435,6 +2408,39 @@
                                                          } ]
                                                       }
                                                    } ]
+                                                }, {
+                                                   "type" : "Retrieve",
+                                                   "locator" : "89:13-89:81",
+                                                   "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                   "codeProperty" : "medication",
+                                                   "codeComparator" : "~",
+                                                   "annotation" : [ ],
+                                                   "resultTypeSpecifier" : {
+                                                      "type" : "ListTypeSpecifier",
+                                                      "annotation" : [ ],
+                                                      "elementType" : {
+                                                         "type" : "NamedTypeSpecifier",
+                                                         "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                         "annotation" : [ ]
+                                                      }
+                                                   },
+                                                   "codes" : {
+                                                      "type" : "ToList",
+                                                      "annotation" : [ ],
+                                                      "signature" : [ ],
+                                                      "operand" : {
+                                                         "type" : "CodeRef",
+                                                         "locator" : "89:33-89:80",
+                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                                                         "name" : "methamphetamine hydrochloride 5 MG Oral Tablet",
+                                                         "annotation" : [ ]
+                                                      }
+                                                   },
+                                                   "include" : [ ],
+                                                   "codeFilter" : [ ],
+                                                   "dateFilter" : [ ],
+                                                   "otherFilter" : [ ]
                                                 } ]
                                              } ]
                                           }, {
@@ -2468,37 +2474,9 @@
                                                 }
                                              } ],
                                              "operand" : [ {
-                                                "type" : "Retrieve",
-                                                "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                "codeProperty" : "medication",
-                                                "codeComparator" : "in",
-                                                "annotation" : [ ],
-                                                "codes" : {
-                                                   "type" : "ValueSetRef",
-                                                   "locator" : "90:33-90:49",
-                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                   "name" : "Methylphenidate",
-                                                   "preserve" : true,
-                                                   "annotation" : [ ]
-                                                },
-                                                "include" : [ ],
-                                                "codeFilter" : [ ],
-                                                "dateFilter" : [ ],
-                                                "otherFilter" : [ ]
-                                             }, {
                                                 "type" : "Query",
                                                 "locator" : "90:13-90:50",
                                                 "annotation" : [ ],
-                                                "resultTypeSpecifier" : {
-                                                   "type" : "ListTypeSpecifier",
-                                                   "annotation" : [ ],
-                                                   "elementType" : {
-                                                      "type" : "NamedTypeSpecifier",
-                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                      "annotation" : [ ]
-                                                   }
-                                                },
                                                 "source" : [ {
                                                    "locator" : "90:13-90:50",
                                                    "alias" : "MR",
@@ -2628,6 +2606,35 @@
                                                       } ]
                                                    }
                                                 } ]
+                                             }, {
+                                                "type" : "Retrieve",
+                                                "locator" : "90:13-90:50",
+                                                "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                "codeProperty" : "medication",
+                                                "codeComparator" : "in",
+                                                "annotation" : [ ],
+                                                "resultTypeSpecifier" : {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "annotation" : [ ],
+                                                   "elementType" : {
+                                                      "type" : "NamedTypeSpecifier",
+                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "annotation" : [ ]
+                                                   }
+                                                },
+                                                "codes" : {
+                                                   "type" : "ValueSetRef",
+                                                   "locator" : "90:33-90:49",
+                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                   "name" : "Methylphenidate",
+                                                   "preserve" : true,
+                                                   "annotation" : [ ]
+                                                },
+                                                "include" : [ ],
+                                                "codeFilter" : [ ],
+                                                "dateFilter" : [ ],
+                                                "otherFilter" : [ ]
                                              } ]
                                           } ]
                                        }, {
@@ -2661,37 +2668,9 @@
                                              }
                                           } ],
                                           "operand" : [ {
-                                             "type" : "Retrieve",
-                                             "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                             "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                             "codeProperty" : "medication",
-                                             "codeComparator" : "in",
-                                             "annotation" : [ ],
-                                             "codes" : {
-                                                "type" : "ValueSetRef",
-                                                "locator" : "91:33-91:56",
-                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                "name" : "Guanfacine Medications",
-                                                "preserve" : true,
-                                                "annotation" : [ ]
-                                             },
-                                             "include" : [ ],
-                                             "codeFilter" : [ ],
-                                             "dateFilter" : [ ],
-                                             "otherFilter" : [ ]
-                                          }, {
                                              "type" : "Query",
                                              "locator" : "91:13-91:57",
                                              "annotation" : [ ],
-                                             "resultTypeSpecifier" : {
-                                                "type" : "ListTypeSpecifier",
-                                                "annotation" : [ ],
-                                                "elementType" : {
-                                                   "type" : "NamedTypeSpecifier",
-                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                   "annotation" : [ ]
-                                                }
-                                             },
                                              "source" : [ {
                                                 "locator" : "91:13-91:57",
                                                 "alias" : "MR",
@@ -2821,6 +2800,35 @@
                                                    } ]
                                                 }
                                              } ]
+                                          }, {
+                                             "type" : "Retrieve",
+                                             "locator" : "91:13-91:57",
+                                             "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                             "codeProperty" : "medication",
+                                             "codeComparator" : "in",
+                                             "annotation" : [ ],
+                                             "resultTypeSpecifier" : {
+                                                "type" : "ListTypeSpecifier",
+                                                "annotation" : [ ],
+                                                "elementType" : {
+                                                   "type" : "NamedTypeSpecifier",
+                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "annotation" : [ ]
+                                                }
+                                             },
+                                             "codes" : {
+                                                "type" : "ValueSetRef",
+                                                "locator" : "91:33-91:56",
+                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                "name" : "Guanfacine Medications",
+                                                "preserve" : true,
+                                                "annotation" : [ ]
+                                             },
+                                             "include" : [ ],
+                                             "codeFilter" : [ ],
+                                             "dateFilter" : [ ],
+                                             "otherFilter" : [ ]
                                           } ]
                                        } ]
                                     }, {
@@ -2854,37 +2862,9 @@
                                           }
                                        } ],
                                        "operand" : [ {
-                                          "type" : "Retrieve",
-                                          "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                          "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                          "codeProperty" : "medication",
-                                          "codeComparator" : "in",
-                                          "annotation" : [ ],
-                                          "codes" : {
-                                             "type" : "ValueSetRef",
-                                             "locator" : "92:33-92:44",
-                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                             "name" : "Viloxazine",
-                                             "preserve" : true,
-                                             "annotation" : [ ]
-                                          },
-                                          "include" : [ ],
-                                          "codeFilter" : [ ],
-                                          "dateFilter" : [ ],
-                                          "otherFilter" : [ ]
-                                       }, {
                                           "type" : "Query",
                                           "locator" : "92:13-92:45",
                                           "annotation" : [ ],
-                                          "resultTypeSpecifier" : {
-                                             "type" : "ListTypeSpecifier",
-                                             "annotation" : [ ],
-                                             "elementType" : {
-                                                "type" : "NamedTypeSpecifier",
-                                                "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "annotation" : [ ]
-                                             }
-                                          },
                                           "source" : [ {
                                              "locator" : "92:13-92:45",
                                              "alias" : "MR",
@@ -3014,6 +2994,35 @@
                                                 } ]
                                              }
                                           } ]
+                                       }, {
+                                          "type" : "Retrieve",
+                                          "locator" : "92:13-92:45",
+                                          "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                          "codeProperty" : "medication",
+                                          "codeComparator" : "in",
+                                          "annotation" : [ ],
+                                          "resultTypeSpecifier" : {
+                                             "type" : "ListTypeSpecifier",
+                                             "annotation" : [ ],
+                                             "elementType" : {
+                                                "type" : "NamedTypeSpecifier",
+                                                "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                "annotation" : [ ]
+                                             }
+                                          },
+                                          "codes" : {
+                                             "type" : "ValueSetRef",
+                                             "locator" : "92:33-92:44",
+                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                             "name" : "Viloxazine",
+                                             "preserve" : true,
+                                             "annotation" : [ ]
+                                          },
+                                          "include" : [ ],
+                                          "codeFilter" : [ ],
+                                          "dateFilter" : [ ],
+                                          "otherFilter" : [ ]
                                        } ]
                                     } ]
                                  } ]
@@ -3417,37 +3426,9 @@
                                                          }
                                                       } ],
                                                       "operand" : [ {
-                                                         "type" : "Retrieve",
-                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                         "codeProperty" : "medication",
-                                                         "codeComparator" : "in",
-                                                         "annotation" : [ ],
-                                                         "codes" : {
-                                                            "type" : "ValueSetRef",
-                                                            "locator" : "95:37-95:49",
-                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                            "name" : "Atomoxetine",
-                                                            "preserve" : true,
-                                                            "annotation" : [ ]
-                                                         },
-                                                         "include" : [ ],
-                                                         "codeFilter" : [ ],
-                                                         "dateFilter" : [ ],
-                                                         "otherFilter" : [ ]
-                                                      }, {
                                                          "type" : "Query",
                                                          "locator" : "95:17-95:50",
                                                          "annotation" : [ ],
-                                                         "resultTypeSpecifier" : {
-                                                            "type" : "ListTypeSpecifier",
-                                                            "annotation" : [ ],
-                                                            "elementType" : {
-                                                               "type" : "NamedTypeSpecifier",
-                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                               "annotation" : [ ]
-                                                            }
-                                                         },
                                                          "source" : [ {
                                                             "locator" : "95:17-95:50",
                                                             "alias" : "MR",
@@ -3577,6 +3558,35 @@
                                                                } ]
                                                             }
                                                          } ]
+                                                      }, {
+                                                         "type" : "Retrieve",
+                                                         "locator" : "95:17-95:50",
+                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                         "codeProperty" : "medication",
+                                                         "codeComparator" : "in",
+                                                         "annotation" : [ ],
+                                                         "resultTypeSpecifier" : {
+                                                            "type" : "ListTypeSpecifier",
+                                                            "annotation" : [ ],
+                                                            "elementType" : {
+                                                               "type" : "NamedTypeSpecifier",
+                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                               "annotation" : [ ]
+                                                            }
+                                                         },
+                                                         "codes" : {
+                                                            "type" : "ValueSetRef",
+                                                            "locator" : "95:37-95:49",
+                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                            "name" : "Atomoxetine",
+                                                            "preserve" : true,
+                                                            "annotation" : [ ]
+                                                         },
+                                                         "include" : [ ],
+                                                         "codeFilter" : [ ],
+                                                         "dateFilter" : [ ],
+                                                         "otherFilter" : [ ]
                                                       } ]
                                                    }, {
                                                       "type" : "Union",
@@ -3609,37 +3619,9 @@
                                                          }
                                                       } ],
                                                       "operand" : [ {
-                                                         "type" : "Retrieve",
-                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                         "codeProperty" : "medication",
-                                                         "codeComparator" : "in",
-                                                         "annotation" : [ ],
-                                                         "codes" : {
-                                                            "type" : "ValueSetRef",
-                                                            "locator" : "96:35-96:45",
-                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                            "name" : "Clonidine",
-                                                            "preserve" : true,
-                                                            "annotation" : [ ]
-                                                         },
-                                                         "include" : [ ],
-                                                         "codeFilter" : [ ],
-                                                         "dateFilter" : [ ],
-                                                         "otherFilter" : [ ]
-                                                      }, {
                                                          "type" : "Query",
                                                          "locator" : "96:15-96:46",
                                                          "annotation" : [ ],
-                                                         "resultTypeSpecifier" : {
-                                                            "type" : "ListTypeSpecifier",
-                                                            "annotation" : [ ],
-                                                            "elementType" : {
-                                                               "type" : "NamedTypeSpecifier",
-                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                               "annotation" : [ ]
-                                                            }
-                                                         },
                                                          "source" : [ {
                                                             "locator" : "96:15-96:46",
                                                             "alias" : "MR",
@@ -3769,6 +3751,35 @@
                                                                } ]
                                                             }
                                                          } ]
+                                                      }, {
+                                                         "type" : "Retrieve",
+                                                         "locator" : "96:15-96:46",
+                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                         "codeProperty" : "medication",
+                                                         "codeComparator" : "in",
+                                                         "annotation" : [ ],
+                                                         "resultTypeSpecifier" : {
+                                                            "type" : "ListTypeSpecifier",
+                                                            "annotation" : [ ],
+                                                            "elementType" : {
+                                                               "type" : "NamedTypeSpecifier",
+                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                               "annotation" : [ ]
+                                                            }
+                                                         },
+                                                         "codes" : {
+                                                            "type" : "ValueSetRef",
+                                                            "locator" : "96:35-96:45",
+                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                            "name" : "Clonidine",
+                                                            "preserve" : true,
+                                                            "annotation" : [ ]
+                                                         },
+                                                         "include" : [ ],
+                                                         "codeFilter" : [ ],
+                                                         "dateFilter" : [ ],
+                                                         "otherFilter" : [ ]
                                                       } ]
                                                    } ]
                                                 }, {
@@ -3802,37 +3813,9 @@
                                                       }
                                                    } ],
                                                    "operand" : [ {
-                                                      "type" : "Retrieve",
-                                                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                      "codeProperty" : "medication",
-                                                      "codeComparator" : "in",
-                                                      "annotation" : [ ],
-                                                      "codes" : {
-                                                         "type" : "ValueSetRef",
-                                                         "locator" : "97:35-97:54",
-                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                         "name" : "Dexmethylphenidate",
-                                                         "preserve" : true,
-                                                         "annotation" : [ ]
-                                                      },
-                                                      "include" : [ ],
-                                                      "codeFilter" : [ ],
-                                                      "dateFilter" : [ ],
-                                                      "otherFilter" : [ ]
-                                                   }, {
                                                       "type" : "Query",
                                                       "locator" : "97:15-97:55",
                                                       "annotation" : [ ],
-                                                      "resultTypeSpecifier" : {
-                                                         "type" : "ListTypeSpecifier",
-                                                         "annotation" : [ ],
-                                                         "elementType" : {
-                                                            "type" : "NamedTypeSpecifier",
-                                                            "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                            "annotation" : [ ]
-                                                         }
-                                                      },
                                                       "source" : [ {
                                                          "locator" : "97:15-97:55",
                                                          "alias" : "MR",
@@ -3962,6 +3945,35 @@
                                                             } ]
                                                          }
                                                       } ]
+                                                   }, {
+                                                      "type" : "Retrieve",
+                                                      "locator" : "97:15-97:55",
+                                                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                      "codeProperty" : "medication",
+                                                      "codeComparator" : "in",
+                                                      "annotation" : [ ],
+                                                      "resultTypeSpecifier" : {
+                                                         "type" : "ListTypeSpecifier",
+                                                         "annotation" : [ ],
+                                                         "elementType" : {
+                                                            "type" : "NamedTypeSpecifier",
+                                                            "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                            "annotation" : [ ]
+                                                         }
+                                                      },
+                                                      "codes" : {
+                                                         "type" : "ValueSetRef",
+                                                         "locator" : "97:35-97:54",
+                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                         "name" : "Dexmethylphenidate",
+                                                         "preserve" : true,
+                                                         "annotation" : [ ]
+                                                      },
+                                                      "include" : [ ],
+                                                      "codeFilter" : [ ],
+                                                      "dateFilter" : [ ],
+                                                      "otherFilter" : [ ]
                                                    } ]
                                                 } ]
                                              }, {
@@ -3995,37 +4007,9 @@
                                                    }
                                                 } ],
                                                 "operand" : [ {
-                                                   "type" : "Retrieve",
-                                                   "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                   "codeProperty" : "medication",
-                                                   "codeComparator" : "in",
-                                                   "annotation" : [ ],
-                                                   "codes" : {
-                                                      "type" : "ValueSetRef",
-                                                      "locator" : "98:35-98:53",
-                                                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                      "name" : "Dextroamphetamine",
-                                                      "preserve" : true,
-                                                      "annotation" : [ ]
-                                                   },
-                                                   "include" : [ ],
-                                                   "codeFilter" : [ ],
-                                                   "dateFilter" : [ ],
-                                                   "otherFilter" : [ ]
-                                                }, {
                                                    "type" : "Query",
                                                    "locator" : "98:15-98:54",
                                                    "annotation" : [ ],
-                                                   "resultTypeSpecifier" : {
-                                                      "type" : "ListTypeSpecifier",
-                                                      "annotation" : [ ],
-                                                      "elementType" : {
-                                                         "type" : "NamedTypeSpecifier",
-                                                         "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                         "annotation" : [ ]
-                                                      }
-                                                   },
                                                    "source" : [ {
                                                       "locator" : "98:15-98:54",
                                                       "alias" : "MR",
@@ -4155,6 +4139,35 @@
                                                          } ]
                                                       }
                                                    } ]
+                                                }, {
+                                                   "type" : "Retrieve",
+                                                   "locator" : "98:15-98:54",
+                                                   "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                   "codeProperty" : "medication",
+                                                   "codeComparator" : "in",
+                                                   "annotation" : [ ],
+                                                   "resultTypeSpecifier" : {
+                                                      "type" : "ListTypeSpecifier",
+                                                      "annotation" : [ ],
+                                                      "elementType" : {
+                                                         "type" : "NamedTypeSpecifier",
+                                                         "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                         "annotation" : [ ]
+                                                      }
+                                                   },
+                                                   "codes" : {
+                                                      "type" : "ValueSetRef",
+                                                      "locator" : "98:35-98:53",
+                                                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                      "name" : "Dextroamphetamine",
+                                                      "preserve" : true,
+                                                      "annotation" : [ ]
+                                                   },
+                                                   "include" : [ ],
+                                                   "codeFilter" : [ ],
+                                                   "dateFilter" : [ ],
+                                                   "otherFilter" : [ ]
                                                 } ]
                                              } ]
                                           }, {
@@ -4188,37 +4201,9 @@
                                                 }
                                              } ],
                                              "operand" : [ {
-                                                "type" : "Retrieve",
-                                                "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                "codeProperty" : "medication",
-                                                "codeComparator" : "in",
-                                                "annotation" : [ ],
-                                                "codes" : {
-                                                   "type" : "ValueSetRef",
-                                                   "locator" : "99:35-99:52",
-                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                   "name" : "Lisdexamfetamine",
-                                                   "preserve" : true,
-                                                   "annotation" : [ ]
-                                                },
-                                                "include" : [ ],
-                                                "codeFilter" : [ ],
-                                                "dateFilter" : [ ],
-                                                "otherFilter" : [ ]
-                                             }, {
                                                 "type" : "Query",
                                                 "locator" : "99:15-99:53",
                                                 "annotation" : [ ],
-                                                "resultTypeSpecifier" : {
-                                                   "type" : "ListTypeSpecifier",
-                                                   "annotation" : [ ],
-                                                   "elementType" : {
-                                                      "type" : "NamedTypeSpecifier",
-                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                      "annotation" : [ ]
-                                                   }
-                                                },
                                                 "source" : [ {
                                                    "locator" : "99:15-99:53",
                                                    "alias" : "MR",
@@ -4348,6 +4333,35 @@
                                                       } ]
                                                    }
                                                 } ]
+                                             }, {
+                                                "type" : "Retrieve",
+                                                "locator" : "99:15-99:53",
+                                                "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                "codeProperty" : "medication",
+                                                "codeComparator" : "in",
+                                                "annotation" : [ ],
+                                                "resultTypeSpecifier" : {
+                                                   "type" : "ListTypeSpecifier",
+                                                   "annotation" : [ ],
+                                                   "elementType" : {
+                                                      "type" : "NamedTypeSpecifier",
+                                                      "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "annotation" : [ ]
+                                                   }
+                                                },
+                                                "codes" : {
+                                                   "type" : "ValueSetRef",
+                                                   "locator" : "99:35-99:52",
+                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                   "name" : "Lisdexamfetamine",
+                                                   "preserve" : true,
+                                                   "annotation" : [ ]
+                                                },
+                                                "include" : [ ],
+                                                "codeFilter" : [ ],
+                                                "dateFilter" : [ ],
+                                                "otherFilter" : [ ]
                                              } ]
                                           } ]
                                        }, {
@@ -4381,41 +4395,9 @@
                                              }
                                           } ],
                                           "operand" : [ {
-                                             "type" : "Retrieve",
-                                             "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                             "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                             "codeProperty" : "medication",
-                                             "codeComparator" : "~",
-                                             "annotation" : [ ],
-                                             "codes" : {
-                                                "type" : "ToList",
-                                                "annotation" : [ ],
-                                                "signature" : [ ],
-                                                "operand" : {
-                                                   "type" : "CodeRef",
-                                                   "locator" : "100:35-100:82",
-                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                                                   "name" : "methamphetamine hydrochloride 5 MG Oral Tablet",
-                                                   "annotation" : [ ]
-                                                }
-                                             },
-                                             "include" : [ ],
-                                             "codeFilter" : [ ],
-                                             "dateFilter" : [ ],
-                                             "otherFilter" : [ ]
-                                          }, {
                                              "type" : "Query",
                                              "locator" : "100:15-100:83",
                                              "annotation" : [ ],
-                                             "resultTypeSpecifier" : {
-                                                "type" : "ListTypeSpecifier",
-                                                "annotation" : [ ],
-                                                "elementType" : {
-                                                   "type" : "NamedTypeSpecifier",
-                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                   "annotation" : [ ]
-                                                }
-                                             },
                                              "source" : [ {
                                                 "locator" : "100:15-100:83",
                                                 "alias" : "MR",
@@ -4557,6 +4539,39 @@
                                                    } ]
                                                 }
                                              } ]
+                                          }, {
+                                             "type" : "Retrieve",
+                                             "locator" : "100:15-100:83",
+                                             "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                             "codeProperty" : "medication",
+                                             "codeComparator" : "~",
+                                             "annotation" : [ ],
+                                             "resultTypeSpecifier" : {
+                                                "type" : "ListTypeSpecifier",
+                                                "annotation" : [ ],
+                                                "elementType" : {
+                                                   "type" : "NamedTypeSpecifier",
+                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "annotation" : [ ]
+                                                }
+                                             },
+                                             "codes" : {
+                                                "type" : "ToList",
+                                                "annotation" : [ ],
+                                                "signature" : [ ],
+                                                "operand" : {
+                                                   "type" : "CodeRef",
+                                                   "locator" : "100:35-100:82",
+                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                                                   "name" : "methamphetamine hydrochloride 5 MG Oral Tablet",
+                                                   "annotation" : [ ]
+                                                }
+                                             },
+                                             "include" : [ ],
+                                             "codeFilter" : [ ],
+                                             "dateFilter" : [ ],
+                                             "otherFilter" : [ ]
                                           } ]
                                        } ]
                                     }, {
@@ -4590,37 +4605,9 @@
                                           }
                                        } ],
                                        "operand" : [ {
-                                          "type" : "Retrieve",
-                                          "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                          "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                          "codeProperty" : "medication",
-                                          "codeComparator" : "in",
-                                          "annotation" : [ ],
-                                          "codes" : {
-                                             "type" : "ValueSetRef",
-                                             "locator" : "101:35-101:51",
-                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                             "name" : "Methylphenidate",
-                                             "preserve" : true,
-                                             "annotation" : [ ]
-                                          },
-                                          "include" : [ ],
-                                          "codeFilter" : [ ],
-                                          "dateFilter" : [ ],
-                                          "otherFilter" : [ ]
-                                       }, {
                                           "type" : "Query",
                                           "locator" : "101:15-101:52",
                                           "annotation" : [ ],
-                                          "resultTypeSpecifier" : {
-                                             "type" : "ListTypeSpecifier",
-                                             "annotation" : [ ],
-                                             "elementType" : {
-                                                "type" : "NamedTypeSpecifier",
-                                                "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                "annotation" : [ ]
-                                             }
-                                          },
                                           "source" : [ {
                                              "locator" : "101:15-101:52",
                                              "alias" : "MR",
@@ -4750,6 +4737,35 @@
                                                 } ]
                                              }
                                           } ]
+                                       }, {
+                                          "type" : "Retrieve",
+                                          "locator" : "101:15-101:52",
+                                          "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                          "codeProperty" : "medication",
+                                          "codeComparator" : "in",
+                                          "annotation" : [ ],
+                                          "resultTypeSpecifier" : {
+                                             "type" : "ListTypeSpecifier",
+                                             "annotation" : [ ],
+                                             "elementType" : {
+                                                "type" : "NamedTypeSpecifier",
+                                                "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                "annotation" : [ ]
+                                             }
+                                          },
+                                          "codes" : {
+                                             "type" : "ValueSetRef",
+                                             "locator" : "101:35-101:51",
+                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                             "name" : "Methylphenidate",
+                                             "preserve" : true,
+                                             "annotation" : [ ]
+                                          },
+                                          "include" : [ ],
+                                          "codeFilter" : [ ],
+                                          "dateFilter" : [ ],
+                                          "otherFilter" : [ ]
                                        } ]
                                     } ]
                                  }, {
@@ -4783,37 +4799,9 @@
                                        }
                                     } ],
                                     "operand" : [ {
-                                       "type" : "Retrieve",
-                                       "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                       "codeProperty" : "medication",
-                                       "codeComparator" : "in",
-                                       "annotation" : [ ],
-                                       "codes" : {
-                                          "type" : "ValueSetRef",
-                                          "locator" : "102:35-102:58",
-                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                          "name" : "Guanfacine Medications",
-                                          "preserve" : true,
-                                          "annotation" : [ ]
-                                       },
-                                       "include" : [ ],
-                                       "codeFilter" : [ ],
-                                       "dateFilter" : [ ],
-                                       "otherFilter" : [ ]
-                                    }, {
                                        "type" : "Query",
                                        "locator" : "102:15-102:59",
                                        "annotation" : [ ],
-                                       "resultTypeSpecifier" : {
-                                          "type" : "ListTypeSpecifier",
-                                          "annotation" : [ ],
-                                          "elementType" : {
-                                             "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                             "annotation" : [ ]
-                                          }
-                                       },
                                        "source" : [ {
                                           "locator" : "102:15-102:59",
                                           "alias" : "MR",
@@ -4943,6 +4931,35 @@
                                              } ]
                                           }
                                        } ]
+                                    }, {
+                                       "type" : "Retrieve",
+                                       "locator" : "102:15-102:59",
+                                       "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                       "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                       "codeProperty" : "medication",
+                                       "codeComparator" : "in",
+                                       "annotation" : [ ],
+                                       "resultTypeSpecifier" : {
+                                          "type" : "ListTypeSpecifier",
+                                          "annotation" : [ ],
+                                          "elementType" : {
+                                             "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "annotation" : [ ]
+                                          }
+                                       },
+                                       "codes" : {
+                                          "type" : "ValueSetRef",
+                                          "locator" : "102:35-102:58",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                          "name" : "Guanfacine Medications",
+                                          "preserve" : true,
+                                          "annotation" : [ ]
+                                       },
+                                       "include" : [ ],
+                                       "codeFilter" : [ ],
+                                       "dateFilter" : [ ],
+                                       "otherFilter" : [ ]
                                     } ]
                                  } ]
                               }, {
@@ -4976,37 +4993,9 @@
                                     }
                                  } ],
                                  "operand" : [ {
-                                    "type" : "Retrieve",
-                                    "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                    "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                    "codeProperty" : "medication",
-                                    "codeComparator" : "in",
-                                    "annotation" : [ ],
-                                    "codes" : {
-                                       "type" : "ValueSetRef",
-                                       "locator" : "103:35-103:46",
-                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                       "name" : "Viloxazine",
-                                       "preserve" : true,
-                                       "annotation" : [ ]
-                                    },
-                                    "include" : [ ],
-                                    "codeFilter" : [ ],
-                                    "dateFilter" : [ ],
-                                    "otherFilter" : [ ]
-                                 }, {
                                     "type" : "Query",
                                     "locator" : "103:15-103:47",
                                     "annotation" : [ ],
-                                    "resultTypeSpecifier" : {
-                                       "type" : "ListTypeSpecifier",
-                                       "annotation" : [ ],
-                                       "elementType" : {
-                                          "type" : "NamedTypeSpecifier",
-                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                          "annotation" : [ ]
-                                       }
-                                    },
                                     "source" : [ {
                                        "locator" : "103:15-103:47",
                                        "alias" : "MR",
@@ -5136,6 +5125,35 @@
                                           } ]
                                        }
                                     } ]
+                                 }, {
+                                    "type" : "Retrieve",
+                                    "locator" : "103:15-103:47",
+                                    "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                    "codeProperty" : "medication",
+                                    "codeComparator" : "in",
+                                    "annotation" : [ ],
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "elementType" : {
+                                          "type" : "NamedTypeSpecifier",
+                                          "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                          "annotation" : [ ]
+                                       }
+                                    },
+                                    "codes" : {
+                                       "type" : "ValueSetRef",
+                                       "locator" : "103:35-103:46",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                       "name" : "Viloxazine",
+                                       "preserve" : true,
+                                       "annotation" : [ ]
+                                    },
+                                    "include" : [ ],
+                                    "codeFilter" : [ ],
+                                    "dateFilter" : [ ],
+                                    "otherFilter" : [ ]
                                  } ]
                               } ]
                            } ]
@@ -8691,37 +8709,9 @@
                                                          }
                                                       } ],
                                                       "operand" : [ {
-                                                         "type" : "Retrieve",
-                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                         "codeProperty" : "medication",
-                                                         "codeComparator" : "in",
-                                                         "annotation" : [ ],
-                                                         "codes" : {
-                                                            "type" : "ValueSetRef",
-                                                            "locator" : "178:35-178:47",
-                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                            "name" : "Atomoxetine",
-                                                            "preserve" : true,
-                                                            "annotation" : [ ]
-                                                         },
-                                                         "include" : [ ],
-                                                         "codeFilter" : [ ],
-                                                         "dateFilter" : [ ],
-                                                         "otherFilter" : [ ]
-                                                      }, {
                                                          "type" : "Query",
                                                          "locator" : "178:15-178:48",
                                                          "annotation" : [ ],
-                                                         "resultTypeSpecifier" : {
-                                                            "type" : "ListTypeSpecifier",
-                                                            "annotation" : [ ],
-                                                            "elementType" : {
-                                                               "type" : "NamedTypeSpecifier",
-                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                               "annotation" : [ ]
-                                                            }
-                                                         },
                                                          "source" : [ {
                                                             "locator" : "178:15-178:48",
                                                             "alias" : "MR",
@@ -8851,6 +8841,35 @@
                                                                } ]
                                                             }
                                                          } ]
+                                                      }, {
+                                                         "type" : "Retrieve",
+                                                         "locator" : "178:15-178:48",
+                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                         "codeProperty" : "medication",
+                                                         "codeComparator" : "in",
+                                                         "annotation" : [ ],
+                                                         "resultTypeSpecifier" : {
+                                                            "type" : "ListTypeSpecifier",
+                                                            "annotation" : [ ],
+                                                            "elementType" : {
+                                                               "type" : "NamedTypeSpecifier",
+                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                               "annotation" : [ ]
+                                                            }
+                                                         },
+                                                         "codes" : {
+                                                            "type" : "ValueSetRef",
+                                                            "locator" : "178:35-178:47",
+                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                            "name" : "Atomoxetine",
+                                                            "preserve" : true,
+                                                            "annotation" : [ ]
+                                                         },
+                                                         "include" : [ ],
+                                                         "codeFilter" : [ ],
+                                                         "dateFilter" : [ ],
+                                                         "otherFilter" : [ ]
                                                       } ]
                                                    } ]
                                                 }
@@ -9201,37 +9220,9 @@
                                                          }
                                                       } ],
                                                       "operand" : [ {
-                                                         "type" : "Retrieve",
-                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                         "codeProperty" : "medication",
-                                                         "codeComparator" : "in",
-                                                         "annotation" : [ ],
-                                                         "codes" : {
-                                                            "type" : "ValueSetRef",
-                                                            "locator" : "187:41-187:51",
-                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                            "name" : "Clonidine",
-                                                            "preserve" : true,
-                                                            "annotation" : [ ]
-                                                         },
-                                                         "include" : [ ],
-                                                         "codeFilter" : [ ],
-                                                         "dateFilter" : [ ],
-                                                         "otherFilter" : [ ]
-                                                      }, {
                                                          "type" : "Query",
                                                          "locator" : "187:21-187:52",
                                                          "annotation" : [ ],
-                                                         "resultTypeSpecifier" : {
-                                                            "type" : "ListTypeSpecifier",
-                                                            "annotation" : [ ],
-                                                            "elementType" : {
-                                                               "type" : "NamedTypeSpecifier",
-                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                               "annotation" : [ ]
-                                                            }
-                                                         },
                                                          "source" : [ {
                                                             "locator" : "187:21-187:52",
                                                             "alias" : "MR",
@@ -9361,6 +9352,35 @@
                                                                } ]
                                                             }
                                                          } ]
+                                                      }, {
+                                                         "type" : "Retrieve",
+                                                         "locator" : "187:21-187:52",
+                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                         "codeProperty" : "medication",
+                                                         "codeComparator" : "in",
+                                                         "annotation" : [ ],
+                                                         "resultTypeSpecifier" : {
+                                                            "type" : "ListTypeSpecifier",
+                                                            "annotation" : [ ],
+                                                            "elementType" : {
+                                                               "type" : "NamedTypeSpecifier",
+                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                               "annotation" : [ ]
+                                                            }
+                                                         },
+                                                         "codes" : {
+                                                            "type" : "ValueSetRef",
+                                                            "locator" : "187:41-187:51",
+                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                            "name" : "Clonidine",
+                                                            "preserve" : true,
+                                                            "annotation" : [ ]
+                                                         },
+                                                         "include" : [ ],
+                                                         "codeFilter" : [ ],
+                                                         "dateFilter" : [ ],
+                                                         "otherFilter" : [ ]
                                                       } ]
                                                    } ]
                                                 }
@@ -9740,37 +9760,9 @@
                                                          }
                                                       } ],
                                                       "operand" : [ {
-                                                         "type" : "Retrieve",
-                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                         "codeProperty" : "medication",
-                                                         "codeComparator" : "in",
-                                                         "annotation" : [ ],
-                                                         "codes" : {
-                                                            "type" : "ValueSetRef",
-                                                            "locator" : "196:41-196:60",
-                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                            "name" : "Dexmethylphenidate",
-                                                            "preserve" : true,
-                                                            "annotation" : [ ]
-                                                         },
-                                                         "include" : [ ],
-                                                         "codeFilter" : [ ],
-                                                         "dateFilter" : [ ],
-                                                         "otherFilter" : [ ]
-                                                      }, {
                                                          "type" : "Query",
                                                          "locator" : "196:21-196:61",
                                                          "annotation" : [ ],
-                                                         "resultTypeSpecifier" : {
-                                                            "type" : "ListTypeSpecifier",
-                                                            "annotation" : [ ],
-                                                            "elementType" : {
-                                                               "type" : "NamedTypeSpecifier",
-                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                               "annotation" : [ ]
-                                                            }
-                                                         },
                                                          "source" : [ {
                                                             "locator" : "196:21-196:61",
                                                             "alias" : "MR",
@@ -9900,6 +9892,35 @@
                                                                } ]
                                                             }
                                                          } ]
+                                                      }, {
+                                                         "type" : "Retrieve",
+                                                         "locator" : "196:21-196:61",
+                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                         "codeProperty" : "medication",
+                                                         "codeComparator" : "in",
+                                                         "annotation" : [ ],
+                                                         "resultTypeSpecifier" : {
+                                                            "type" : "ListTypeSpecifier",
+                                                            "annotation" : [ ],
+                                                            "elementType" : {
+                                                               "type" : "NamedTypeSpecifier",
+                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                               "annotation" : [ ]
+                                                            }
+                                                         },
+                                                         "codes" : {
+                                                            "type" : "ValueSetRef",
+                                                            "locator" : "196:41-196:60",
+                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                            "name" : "Dexmethylphenidate",
+                                                            "preserve" : true,
+                                                            "annotation" : [ ]
+                                                         },
+                                                         "include" : [ ],
+                                                         "codeFilter" : [ ],
+                                                         "dateFilter" : [ ],
+                                                         "otherFilter" : [ ]
                                                       } ]
                                                    } ]
                                                 }
@@ -10250,37 +10271,9 @@
                                                          }
                                                       } ],
                                                       "operand" : [ {
-                                                         "type" : "Retrieve",
-                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                         "codeProperty" : "medication",
-                                                         "codeComparator" : "in",
-                                                         "annotation" : [ ],
-                                                         "codes" : {
-                                                            "type" : "ValueSetRef",
-                                                            "locator" : "205:41-205:59",
-                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                            "name" : "Dextroamphetamine",
-                                                            "preserve" : true,
-                                                            "annotation" : [ ]
-                                                         },
-                                                         "include" : [ ],
-                                                         "codeFilter" : [ ],
-                                                         "dateFilter" : [ ],
-                                                         "otherFilter" : [ ]
-                                                      }, {
                                                          "type" : "Query",
                                                          "locator" : "205:21-205:60",
                                                          "annotation" : [ ],
-                                                         "resultTypeSpecifier" : {
-                                                            "type" : "ListTypeSpecifier",
-                                                            "annotation" : [ ],
-                                                            "elementType" : {
-                                                               "type" : "NamedTypeSpecifier",
-                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                               "annotation" : [ ]
-                                                            }
-                                                         },
                                                          "source" : [ {
                                                             "locator" : "205:21-205:60",
                                                             "alias" : "MR",
@@ -10410,6 +10403,35 @@
                                                                } ]
                                                             }
                                                          } ]
+                                                      }, {
+                                                         "type" : "Retrieve",
+                                                         "locator" : "205:21-205:60",
+                                                         "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                         "codeProperty" : "medication",
+                                                         "codeComparator" : "in",
+                                                         "annotation" : [ ],
+                                                         "resultTypeSpecifier" : {
+                                                            "type" : "ListTypeSpecifier",
+                                                            "annotation" : [ ],
+                                                            "elementType" : {
+                                                               "type" : "NamedTypeSpecifier",
+                                                               "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                               "annotation" : [ ]
+                                                            }
+                                                         },
+                                                         "codes" : {
+                                                            "type" : "ValueSetRef",
+                                                            "locator" : "205:41-205:59",
+                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                            "name" : "Dextroamphetamine",
+                                                            "preserve" : true,
+                                                            "annotation" : [ ]
+                                                         },
+                                                         "include" : [ ],
+                                                         "codeFilter" : [ ],
+                                                         "dateFilter" : [ ],
+                                                         "otherFilter" : [ ]
                                                       } ]
                                                    } ]
                                                 }
@@ -10790,37 +10812,9 @@
                                                       }
                                                    } ],
                                                    "operand" : [ {
-                                                      "type" : "Retrieve",
-                                                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                      "codeProperty" : "medication",
-                                                      "codeComparator" : "in",
-                                                      "annotation" : [ ],
-                                                      "codes" : {
-                                                         "type" : "ValueSetRef",
-                                                         "locator" : "214:41-214:58",
-                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                         "name" : "Lisdexamfetamine",
-                                                         "preserve" : true,
-                                                         "annotation" : [ ]
-                                                      },
-                                                      "include" : [ ],
-                                                      "codeFilter" : [ ],
-                                                      "dateFilter" : [ ],
-                                                      "otherFilter" : [ ]
-                                                   }, {
                                                       "type" : "Query",
                                                       "locator" : "214:21-214:59",
                                                       "annotation" : [ ],
-                                                      "resultTypeSpecifier" : {
-                                                         "type" : "ListTypeSpecifier",
-                                                         "annotation" : [ ],
-                                                         "elementType" : {
-                                                            "type" : "NamedTypeSpecifier",
-                                                            "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                            "annotation" : [ ]
-                                                         }
-                                                      },
                                                       "source" : [ {
                                                          "locator" : "214:21-214:59",
                                                          "alias" : "MR",
@@ -10950,6 +10944,35 @@
                                                             } ]
                                                          }
                                                       } ]
+                                                   }, {
+                                                      "type" : "Retrieve",
+                                                      "locator" : "214:21-214:59",
+                                                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                      "codeProperty" : "medication",
+                                                      "codeComparator" : "in",
+                                                      "annotation" : [ ],
+                                                      "resultTypeSpecifier" : {
+                                                         "type" : "ListTypeSpecifier",
+                                                         "annotation" : [ ],
+                                                         "elementType" : {
+                                                            "type" : "NamedTypeSpecifier",
+                                                            "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                            "annotation" : [ ]
+                                                         }
+                                                      },
+                                                      "codes" : {
+                                                         "type" : "ValueSetRef",
+                                                         "locator" : "214:41-214:58",
+                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                         "name" : "Lisdexamfetamine",
+                                                         "preserve" : true,
+                                                         "annotation" : [ ]
+                                                      },
+                                                      "include" : [ ],
+                                                      "codeFilter" : [ ],
+                                                      "dateFilter" : [ ],
+                                                      "otherFilter" : [ ]
                                                    } ]
                                                 } ]
                                              }
@@ -11300,37 +11323,9 @@
                                                       }
                                                    } ],
                                                    "operand" : [ {
-                                                      "type" : "Retrieve",
-                                                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                      "codeProperty" : "medication",
-                                                      "codeComparator" : "in",
-                                                      "annotation" : [ ],
-                                                      "codes" : {
-                                                         "type" : "ValueSetRef",
-                                                         "locator" : "223:41-223:57",
-                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                         "name" : "Methylphenidate",
-                                                         "preserve" : true,
-                                                         "annotation" : [ ]
-                                                      },
-                                                      "include" : [ ],
-                                                      "codeFilter" : [ ],
-                                                      "dateFilter" : [ ],
-                                                      "otherFilter" : [ ]
-                                                   }, {
                                                       "type" : "Query",
                                                       "locator" : "223:21-223:58",
                                                       "annotation" : [ ],
-                                                      "resultTypeSpecifier" : {
-                                                         "type" : "ListTypeSpecifier",
-                                                         "annotation" : [ ],
-                                                         "elementType" : {
-                                                            "type" : "NamedTypeSpecifier",
-                                                            "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                            "annotation" : [ ]
-                                                         }
-                                                      },
                                                       "source" : [ {
                                                          "locator" : "223:21-223:58",
                                                          "alias" : "MR",
@@ -11460,6 +11455,35 @@
                                                             } ]
                                                          }
                                                       } ]
+                                                   }, {
+                                                      "type" : "Retrieve",
+                                                      "locator" : "223:21-223:58",
+                                                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                      "codeProperty" : "medication",
+                                                      "codeComparator" : "in",
+                                                      "annotation" : [ ],
+                                                      "resultTypeSpecifier" : {
+                                                         "type" : "ListTypeSpecifier",
+                                                         "annotation" : [ ],
+                                                         "elementType" : {
+                                                            "type" : "NamedTypeSpecifier",
+                                                            "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                            "annotation" : [ ]
+                                                         }
+                                                      },
+                                                      "codes" : {
+                                                         "type" : "ValueSetRef",
+                                                         "locator" : "223:41-223:57",
+                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                         "name" : "Methylphenidate",
+                                                         "preserve" : true,
+                                                         "annotation" : [ ]
+                                                      },
+                                                      "include" : [ ],
+                                                      "codeFilter" : [ ],
+                                                      "dateFilter" : [ ],
+                                                      "otherFilter" : [ ]
                                                    } ]
                                                 } ]
                                              }
@@ -11840,37 +11864,9 @@
                                                    }
                                                 } ],
                                                 "operand" : [ {
-                                                   "type" : "Retrieve",
-                                                   "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                   "codeProperty" : "medication",
-                                                   "codeComparator" : "in",
-                                                   "annotation" : [ ],
-                                                   "codes" : {
-                                                      "type" : "ValueSetRef",
-                                                      "locator" : "232:41-232:64",
-                                                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                      "name" : "Guanfacine Medications",
-                                                      "preserve" : true,
-                                                      "annotation" : [ ]
-                                                   },
-                                                   "include" : [ ],
-                                                   "codeFilter" : [ ],
-                                                   "dateFilter" : [ ],
-                                                   "otherFilter" : [ ]
-                                                }, {
                                                    "type" : "Query",
                                                    "locator" : "232:21-232:65",
                                                    "annotation" : [ ],
-                                                   "resultTypeSpecifier" : {
-                                                      "type" : "ListTypeSpecifier",
-                                                      "annotation" : [ ],
-                                                      "elementType" : {
-                                                         "type" : "NamedTypeSpecifier",
-                                                         "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                         "annotation" : [ ]
-                                                      }
-                                                   },
                                                    "source" : [ {
                                                       "locator" : "232:21-232:65",
                                                       "alias" : "MR",
@@ -12000,6 +11996,35 @@
                                                          } ]
                                                       }
                                                    } ]
+                                                }, {
+                                                   "type" : "Retrieve",
+                                                   "locator" : "232:21-232:65",
+                                                   "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                   "codeProperty" : "medication",
+                                                   "codeComparator" : "in",
+                                                   "annotation" : [ ],
+                                                   "resultTypeSpecifier" : {
+                                                      "type" : "ListTypeSpecifier",
+                                                      "annotation" : [ ],
+                                                      "elementType" : {
+                                                         "type" : "NamedTypeSpecifier",
+                                                         "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                         "annotation" : [ ]
+                                                      }
+                                                   },
+                                                   "codes" : {
+                                                      "type" : "ValueSetRef",
+                                                      "locator" : "232:41-232:64",
+                                                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                      "name" : "Guanfacine Medications",
+                                                      "preserve" : true,
+                                                      "annotation" : [ ]
+                                                   },
+                                                   "include" : [ ],
+                                                   "codeFilter" : [ ],
+                                                   "dateFilter" : [ ],
+                                                   "otherFilter" : [ ]
                                                 } ]
                                              } ]
                                           }
@@ -12350,41 +12375,9 @@
                                                    }
                                                 } ],
                                                 "operand" : [ {
-                                                   "type" : "Retrieve",
-                                                   "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                                   "codeProperty" : "medication",
-                                                   "codeComparator" : "~",
-                                                   "annotation" : [ ],
-                                                   "codes" : {
-                                                      "type" : "ToList",
-                                                      "annotation" : [ ],
-                                                      "signature" : [ ],
-                                                      "operand" : {
-                                                         "type" : "CodeRef",
-                                                         "locator" : "241:41-241:88",
-                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                                                         "name" : "methamphetamine hydrochloride 5 MG Oral Tablet",
-                                                         "annotation" : [ ]
-                                                      }
-                                                   },
-                                                   "include" : [ ],
-                                                   "codeFilter" : [ ],
-                                                   "dateFilter" : [ ],
-                                                   "otherFilter" : [ ]
-                                                }, {
                                                    "type" : "Query",
                                                    "locator" : "241:21-241:89",
                                                    "annotation" : [ ],
-                                                   "resultTypeSpecifier" : {
-                                                      "type" : "ListTypeSpecifier",
-                                                      "annotation" : [ ],
-                                                      "elementType" : {
-                                                         "type" : "NamedTypeSpecifier",
-                                                         "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                         "annotation" : [ ]
-                                                      }
-                                                   },
                                                    "source" : [ {
                                                       "locator" : "241:21-241:89",
                                                       "alias" : "MR",
@@ -12526,6 +12519,39 @@
                                                          } ]
                                                       }
                                                    } ]
+                                                }, {
+                                                   "type" : "Retrieve",
+                                                   "locator" : "241:21-241:89",
+                                                   "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                                   "codeProperty" : "medication",
+                                                   "codeComparator" : "~",
+                                                   "annotation" : [ ],
+                                                   "resultTypeSpecifier" : {
+                                                      "type" : "ListTypeSpecifier",
+                                                      "annotation" : [ ],
+                                                      "elementType" : {
+                                                         "type" : "NamedTypeSpecifier",
+                                                         "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                         "annotation" : [ ]
+                                                      }
+                                                   },
+                                                   "codes" : {
+                                                      "type" : "ToList",
+                                                      "annotation" : [ ],
+                                                      "signature" : [ ],
+                                                      "operand" : {
+                                                         "type" : "CodeRef",
+                                                         "locator" : "241:41-241:88",
+                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                                                         "name" : "methamphetamine hydrochloride 5 MG Oral Tablet",
+                                                         "annotation" : [ ]
+                                                      }
+                                                   },
+                                                   "include" : [ ],
+                                                   "codeFilter" : [ ],
+                                                   "dateFilter" : [ ],
+                                                   "otherFilter" : [ ]
                                                 } ]
                                              } ]
                                           }
@@ -12878,37 +12904,9 @@
                                              }
                                           } ],
                                           "operand" : [ {
-                                             "type" : "Retrieve",
-                                             "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                                             "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                                             "codeProperty" : "medication",
-                                             "codeComparator" : "in",
-                                             "annotation" : [ ],
-                                             "codes" : {
-                                                "type" : "ValueSetRef",
-                                                "locator" : "250:41-250:52",
-                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                                "name" : "Viloxazine",
-                                                "preserve" : true,
-                                                "annotation" : [ ]
-                                             },
-                                             "include" : [ ],
-                                             "codeFilter" : [ ],
-                                             "dateFilter" : [ ],
-                                             "otherFilter" : [ ]
-                                          }, {
                                              "type" : "Query",
                                              "locator" : "250:21-250:53",
                                              "annotation" : [ ],
-                                             "resultTypeSpecifier" : {
-                                                "type" : "ListTypeSpecifier",
-                                                "annotation" : [ ],
-                                                "elementType" : {
-                                                   "type" : "NamedTypeSpecifier",
-                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                                   "annotation" : [ ]
-                                                }
-                                             },
                                              "source" : [ {
                                                 "locator" : "250:21-250:53",
                                                 "alias" : "MR",
@@ -13038,6 +13036,35 @@
                                                    } ]
                                                 }
                                              } ]
+                                          }, {
+                                             "type" : "Retrieve",
+                                             "locator" : "250:21-250:53",
+                                             "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                                             "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                                             "codeProperty" : "medication",
+                                             "codeComparator" : "in",
+                                             "annotation" : [ ],
+                                             "resultTypeSpecifier" : {
+                                                "type" : "ListTypeSpecifier",
+                                                "annotation" : [ ],
+                                                "elementType" : {
+                                                   "type" : "NamedTypeSpecifier",
+                                                   "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                                   "annotation" : [ ]
+                                                }
+                                             },
+                                             "codes" : {
+                                                "type" : "ValueSetRef",
+                                                "locator" : "250:41-250:52",
+                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                                "name" : "Viloxazine",
+                                                "preserve" : true,
+                                                "annotation" : [ ]
+                                             },
+                                             "include" : [ ],
+                                             "codeFilter" : [ ],
+                                             "dateFilter" : [ ],
+                                             "otherFilter" : [ ]
                                           } ]
                                        } ]
                                     }

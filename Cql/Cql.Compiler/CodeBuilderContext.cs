@@ -260,7 +260,7 @@ internal partial class CodeBuilderContext
             Slice e              => [e.source, e.startIndex, e.endIndex],
             Date e               => [e.year, e.month, e.day],
             DateTime e           => [e.year, e.month, e.day, e.hour, e.minute, e.second, e.millisecond, e.timezoneOffset],
-            Interval e           => [e.low, e.high, (object)e.lowClosedExpression ?? e.lowClosed, (object)e.highClosedExpression ?? e.highClosed],
+            Interval e           => IntervalArgs(e),
             LastPositionOf e     => [e.@string, e.pattern],
             PositionOf e         => [e.pattern, e.@string],
             Quantity e           => [e.value, e.unit], // http://unitsofmeasure.org
@@ -307,6 +307,43 @@ internal partial class CodeBuilderContext
                 $"Collapse expects a list of intervals, but got {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)}");
         }
 
+        object?[] IntervalArgs(Interval e)
+        {
+            // Translate through object so absent endpoints become object-typed nulls,
+            // as they did before this method existed.
+            var low = TranslateArg((object?)e.low);
+            var high = TranslateArg((object?)e.high);
+
+            // ELM may type an interval's points as a choice (e.g. the
+            // Choice<DateTime, Interval<DateTime>> resulting from FHIRHelpers.ToValue), which
+            // surfaces here as operands of type object. Without a type to anchor overload
+            // resolution on, the binder would arbitrarily pick an element type and emit casts
+            // that fail at runtime (see #1350). Anchor the point type on the other operand's
+            // static type, or on the single choice alternative that is a valid interval point
+            // type, and convert the choice-typed operands with 'as' semantics.
+            if (low.Type == typeof(object) || high.Type == typeof(object))
+            {
+                // The anchored type is lifted to its nullable form: 'as' requires a
+                // null-assignable target, and an operand's static type can be a non-nullable
+                // value type (e.g. the int from NegateLiteral's -2147483648 special case).
+                // The Interval factory overloads take nullable points anyway.
+                var pointType =
+                    (IsIntervalPointType(low.Type) ? low.Type
+                        : IsIntervalPointType(high.Type) ? high.Type
+                        : SingleIntervalPointTypeFromChoice(e))?.MakeNullable();
+
+                if (pointType is not null)
+                {
+                    if (low.Type == typeof(object))
+                        low = low.NewTypeAsExpression(pointType);
+                    if (high.Type == typeof(object))
+                        high = high.NewTypeAsExpression(pointType);
+                }
+            }
+
+            return [low, high, (object)e.lowClosedExpression ?? e.lowClosed, (object)e.highClosedExpression ?? e.highClosed];
+        }
+
         object?[] Contains(Contains e)
         {
             if (TranslateArgs(e.operand) is [{ } left, { } right, ..])
@@ -336,9 +373,43 @@ internal partial class CodeBuilderContext
             if (TranslateArgs(e.operand) is [{ } left, { } right, ..])
             {
                 if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftListElemType
-                    && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType
-                    && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElemType, rightListElemType, _typeConverter))
-                    return [left, right];
+                    && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType)
+                {
+                    if (leftListElemType == rightListElemType)
+                        return [left, right];
+
+                    // The operands materialize as different element types (e.g. structurally
+                    // equivalent tuple types whose elements need a conversion). Perform the
+                    // union over a single element type: prefer the declared result type,
+                    // falling back to either operand's type. Both operands must convert *to*
+                    // that type - the check is directional because a symmetric compatibility
+                    // check would accept operands for which only the reverse conversion
+                    // exists. A union over IEnumerable<object> is not an option for
+                    // tuple-typed elements, since the cast cannot survive the value-tuple
+                    // lowering performed by the C# code generator (see #1354).
+                    var declaredType = TypeFor(e, throwIfNotFound: false) is { } declared
+                                       && _typeResolver.IsListType(declared)
+                        ? declared
+                        : null;
+
+                    foreach (var unionType in (Type?[]) [declaredType, left.Type, right.Type])
+                    {
+                        if (unionType is null
+                            || _typeResolver.GetListElementType(unionType, throwError: false) is not { } unionElemType)
+                            continue;
+
+                        if (!ElmTupleTypeUtility.CanConvertForUnionOperation(leftListElemType, unionElemType, _typeConverter)
+                            || !ElmTupleTypeUtility.CanConvertForUnionOperation(rightListElemType, unionElemType, _typeConverter))
+                            continue;
+
+                        if (leftListElemType != unionElemType)
+                            left = ChangeType(left, unionType, throwOnError: true);
+                        if (rightListElemType != unionElemType)
+                            right = ChangeType(right, unionType, throwOnError: true);
+
+                        return [left, right];
+                    }
+                }
 
                 if (left.Type.IsCqlInterval(out var leftPointType)
                     && right.Type.IsCqlInterval(out var rightPointType)
@@ -348,6 +419,54 @@ internal partial class CodeBuilderContext
 
             throw this.NewExpressionBuildingException($"Union expects two arguments of the same list or interval type.");
         }
+    }
+
+    /// <summary>
+    /// Returns whether the type is one of the point types supported by the
+    /// <see cref="ICqlOperators"/> Interval factory overloads.
+    /// </summary>
+    private bool IsIntervalPointType(Type type)
+    {
+        if (type == typeof(object))
+            return false;
+
+        var underlying = Nullable.GetUnderlyingType(type) ?? type;
+        return underlying == typeof(int)
+               || underlying == typeof(long)
+               || underlying == typeof(decimal)
+               || type == _typeResolver.QuantityType
+               || type == _typeResolver.DateType
+               || type == _typeResolver.DateTimeType
+               || type == _typeResolver.TimeType;
+    }
+
+    /// <summary>
+    /// When an interval's ELM point type is a choice, returns the single choice alternative
+    /// that is a valid interval point type, or <see langword="null"/> when there is none or
+    /// more than one.
+    /// </summary>
+    private Type? SingleIntervalPointTypeFromChoice(Interval e)
+    {
+        if (e.resultTypeSpecifier is not IntervalTypeSpecifier
+            {
+                pointType: ChoiceTypeSpecifier { choice: { Length: > 0 } alternatives }
+            })
+            return null;
+
+        Type? single = null;
+        foreach (var alternative in alternatives)
+        {
+            var type = TypeFor(alternative, throwIfNotFound: false);
+            if (type is null || !IsIntervalPointType(type))
+                continue;
+
+            if (single is not null && single != type)
+                return null;
+
+            single = type;
+        }
+
+        return single;
     }
 
     /// <summary>

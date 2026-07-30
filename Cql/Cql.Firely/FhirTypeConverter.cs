@@ -163,6 +163,13 @@ namespace Hl7.Cql.Fhir
 
             add((M.Id id) => id.Value);
 
+            // Mirror the FHIRHelpers ToCode/ToConcept conversions, which the CQL type system
+            // treats as implicit FHIR-to-System conversions.
+            add((M.Coding c) => new CqlCode(c.Code, c.System, c.Version, c.Display));
+            add((M.CodeableConcept cc) => new CqlConcept(
+                cc.Coding?.Select(c => new CqlCode(c.Code, c.System, c.Version, c.Display)).ToList(),
+                cc.Text));
+
             add((M.PositiveInt pi) => new M.Integer(pi.Value));
             add((M.PositiveInt pi) => pi.ToString());
             add((M.UnsignedInt ui) => new M.Integer(ui.Value));

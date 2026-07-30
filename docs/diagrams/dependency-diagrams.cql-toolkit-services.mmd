@@ -1,0 +1,75 @@
+%%{init: {
+    'layout': 'elk',
+    'themeVariables':{
+      'lineColor': '#333',
+      'lineWidth': 4
+    },
+    'themeCSS': '.edgeLabel, .edgeLabel p, .edgeLabel rect, .labelBkg { background: transparent !important; background-color: transparent !important; fill: transparent !important; }'
+}}%%
+
+flowchart TB
+
+subgraph CqlToElm
+direction TB
+CqlToElmConverter["<b>CqlToElmConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Entry point that parses CQL source text and drives translation into an ELM Library.</div>"]
+LibraryBuilderProvider["<b>LibraryBuilderProvider</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>ILibraryProvider implementation that resolves an included library, translating it from CQL on demand if not already built.</div>"]
+LibraryVisitor["<b>LibraryVisitor</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>ANTLR visitor that walks a parsed CQL library (using/include/parameter/code/valueset/concept definitions and statements) into a LibraryBuilder.</div>"]
+DefinitionVisitor["<b>DefinitionVisitor</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>LibraryVisitor's nested visitor for CQL definitions (include, codesystem, valueset, code, concept, parameter, expression/function/context definitions).</div>"]
+ExpressionVisitor["<b>ExpressionVisitor</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>ANTLR visitor that translates CQL expression syntax into ELM Expression nodes.</div>"]
+TypeSpecifierVisitor["<b>TypeSpecifierVisitor</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>ANTLR visitor that translates CQL type-specifier syntax (Interval&lt;T&gt;, Choice&lt;...&gt;, etc.) into ELM TypeSpecifiers.</div>"]
+ILibraryProvider["<b>ILibraryProvider</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstraction for resolving an included library by name/version during translation.</div>"]
+IModelProvider["<b>IModelProvider</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstraction for looking up a data model's types and conversion functions by URI/name.</div>"]
+CoercionProvider["<b>CoercionProvider</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Implements CQL's implicit-conversion/coercion-cost rules between expression types.</div>"]
+ElmFactory["<b>ElmFactory</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Builds ELM invocation/function-reference nodes for a resolved operator or function call.</div>"]
+SystemLibrary["<b>SystemLibrary</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>The built-in ELM Library containing every CQL-spec system operator/function definition.</div>"]
+StreamInspector["<b>StreamInspector</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Detects whether an input stream is CQL text or ELM JSON/XML and identifies its library.</div>"]
+InvocationBuilder["<b>InvocationBuilder</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Builds the implicit-cast expression chain for a function/operator call's arguments, per the CQL conversion-precedence rules.</div>"]
+LocalIdentifierProvider["<b>LocalIdentifierProvider</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Generates unique local identifiers used while building ELM expression trees.</div>"]
+MessageProvider["<b>MessageProvider</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Produces localized diagnostic/error messages for the CQL-to-ELM translator.</div>"]
+BuiltinModelProvider["<b>BuiltinModelProvider</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Default IModelProvider implementation backed by an in-memory set of registered ModelInfos.</div>"]
+end
+
+subgraph Model
+direction TB
+ModelInfo["<b>ModelInfo</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Generated ELM modelInfo schema class describing a data model's available types and conversion functions (e.g. the FHIR or System model).</div>"]
+end
+
+style LibraryVisitor fill:#AFEEEE
+
+BuiltinModelProvider -->|implements| IModelProvider
+LibraryBuilderProvider -->|implements| ILibraryProvider
+
+SystemLibrary -.->|injected| LibraryVisitor
+IModelProvider -.->|injected| LibraryVisitor
+LocalIdentifierProvider -.->|injected| LibraryVisitor
+
+IModelProvider -.->|injected| DefinitionVisitor
+ILibraryProvider -.->|injected| DefinitionVisitor
+CoercionProvider -.->|injected| DefinitionVisitor
+MessageProvider -.->|injected| DefinitionVisitor
+InvocationBuilder -.->|injected| DefinitionVisitor
+
+IModelProvider -.->|injected| ExpressionVisitor
+CoercionProvider -.->|injected| ExpressionVisitor
+ElmFactory -.->|injected| ExpressionVisitor
+MessageProvider -.->|injected| ExpressionVisitor
+InvocationBuilder -.->|injected| ExpressionVisitor
+
+MessageProvider -.->|injected| TypeSpecifierVisitor
+
+IModelProvider -.->|injected| InvocationBuilder
+CoercionProvider -.->|injected| InvocationBuilder
+ElmFactory -.->|injected| InvocationBuilder
+MessageProvider -.->|injected| InvocationBuilder
+
+IModelProvider -.->|injected| CoercionProvider
+
+CoercionProvider -.->|injected| ElmFactory
+MessageProvider -.->|injected| ElmFactory
+
+DefinitionVisitor -.->|created| LibraryVisitor
+ExpressionVisitor -.->|created| DefinitionVisitor
+TypeSpecifierVisitor -.->|created| DefinitionVisitor
+TypeSpecifierVisitor -.->|created| ExpressionVisitor
+
+ModelInfo -.->|configured| BuiltinModelProvider

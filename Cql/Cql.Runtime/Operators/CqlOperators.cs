@@ -117,26 +117,49 @@ namespace Hl7.Cql.Operators
         {
             if (source == null || string.IsNullOrWhiteSpace(propertyName))
                 return (T)(object)null!;
-            var type = source.GetType();
 
-            // Mirror the design-time behavior in CodeBuilderContext.PropertyHelper:
-            // for properties such as FhirDateTime.value, use the source object itself and
-            // convert it (e.g. FhirDateTime -> CqlDateTime) rather than reading and parsing
-            // the primitive string value. Without this, a late-bound access - which happens
-            // when the source is an element reached through a choice or union type surfaced
-            // as 'object' - silently yields null because the raw string value is not
-            // assignable to T.
-            if (TypeResolver.ShouldUseSourceObject(type, propertyName))
-                return ConvertOrNull<T>(source);
-
-            var property = type.GetProperty(propertyName);
-            if (property == null)
+            object? propertyValue;
+            if (source is System.Runtime.CompilerServices.ITuple valueTuple
+                && valueTuple.Length > 0
+                && valueTuple[0] is CqlTupleMetadata tupleMetadata)
             {
-                property = TypeResolver.GetProperty(type, propertyName);
-                if (property == null)
-                    return (T)(object)null!;
+                // The C# code generator lowers compiler-generated tuple types to value tuples
+                // whose first item is a CqlTupleMetadata carrying the element names. Value
+                // tuples have no named properties, so resolve the access against that metadata.
+                propertyValue = null;
+                for (int i = 0; i < tupleMetadata.ItemNames.Count && i + 1 < valueTuple.Length; i++)
+                {
+                    if (string.Equals(tupleMetadata.ItemNames[i], propertyName, StringComparison.Ordinal))
+                    {
+                        propertyValue = valueTuple[i + 1];
+                        break;
+                    }
+                }
             }
-            var propertyValue = property.GetValue(source);
+            else
+            {
+                var type = source.GetType();
+
+                // Mirror the design-time behavior in CodeBuilderContext.PropertyHelper:
+                // for properties such as FhirDateTime.value, use the source object itself and
+                // convert it (e.g. FhirDateTime -> CqlDateTime) rather than reading and parsing
+                // the primitive string value. Without this, a late-bound access - which happens
+                // when the source is an element reached through a choice or union type surfaced
+                // as 'object' - silently yields null because the raw string value is not
+                // assignable to T.
+                if (TypeResolver.ShouldUseSourceObject(type, propertyName))
+                    return ConvertOrNull<T>(source);
+
+                var property = type.GetProperty(propertyName);
+                if (property == null)
+                {
+                    property = TypeResolver.GetProperty(type, propertyName);
+                    if (property == null)
+                        return (T)(object)null!;
+                }
+                propertyValue = property.GetValue(source);
+            }
+
             if (propertyValue == null)
                 return (T)(object)null!;
             if (typeof(T).IsAssignableFrom(propertyValue.GetType()))

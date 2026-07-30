@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "5.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       } ],
@@ -2865,37 +2865,9 @@
                               }
                            } ],
                            "operand" : [ {
-                              "type" : "Retrieve",
-                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                              "codeProperty" : "medication",
-                              "codeComparator" : "in",
-                              "annotation" : [ ],
-                              "codes" : {
-                                 "type" : "ValueSetRef",
-                                 "locator" : "68:139-68:194",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                 "name" : "Antibiotic Medications for Upper Respiratory Infection",
-                                 "preserve" : true,
-                                 "annotation" : [ ]
-                              },
-                              "include" : [ ],
-                              "codeFilter" : [ ],
-                              "dateFilter" : [ ],
-                              "otherFilter" : [ ]
-                           }, {
                               "type" : "Query",
                               "locator" : "68:119-68:195",
                               "annotation" : [ ],
-                              "resultTypeSpecifier" : {
-                                 "type" : "ListTypeSpecifier",
-                                 "annotation" : [ ],
-                                 "elementType" : {
-                                    "type" : "NamedTypeSpecifier",
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                    "annotation" : [ ]
-                                 }
-                              },
                               "source" : [ {
                                  "locator" : "68:119-68:195",
                                  "alias" : "MR",
@@ -3025,6 +2997,35 @@
                                     } ]
                                  }
                               } ]
+                           }, {
+                              "type" : "Retrieve",
+                              "locator" : "68:119-68:195",
+                              "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                              "codeProperty" : "medication",
+                              "codeComparator" : "in",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "elementType" : {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "codes" : {
+                                 "type" : "ValueSetRef",
+                                 "locator" : "68:139-68:194",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Antibiotic Medications for Upper Respiratory Infection",
+                                 "preserve" : true,
+                                 "annotation" : [ ]
+                              },
+                              "include" : [ ],
+                              "codeFilter" : [ ],
+                              "dateFilter" : [ ],
+                              "otherFilter" : [ ]
                            } ]
                         } ]
                      } ]
@@ -3457,37 +3458,9 @@
                            }
                         } ],
                         "operand" : [ {
-                           "type" : "Retrieve",
-                           "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                           "codeProperty" : "medication",
-                           "codeComparator" : "in",
-                           "annotation" : [ ],
-                           "codes" : {
-                              "type" : "ValueSetRef",
-                              "locator" : "106:37-106:92",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                              "name" : "Antibiotic Medications for Upper Respiratory Infection",
-                              "preserve" : true,
-                              "annotation" : [ ]
-                           },
-                           "include" : [ ],
-                           "codeFilter" : [ ],
-                           "dateFilter" : [ ],
-                           "otherFilter" : [ ]
-                        }, {
                            "type" : "Query",
                            "locator" : "106:17-106:93",
                            "annotation" : [ ],
-                           "resultTypeSpecifier" : {
-                              "type" : "ListTypeSpecifier",
-                              "annotation" : [ ],
-                              "elementType" : {
-                                 "type" : "NamedTypeSpecifier",
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "annotation" : [ ]
-                              }
-                           },
                            "source" : [ {
                               "locator" : "106:17-106:93",
                               "alias" : "MR",
@@ -3617,6 +3590,35 @@
                                  } ]
                               }
                            } ]
+                        }, {
+                           "type" : "Retrieve",
+                           "locator" : "106:17-106:93",
+                           "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                           "codeProperty" : "medication",
+                           "codeComparator" : "in",
+                           "annotation" : [ ],
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "annotation" : [ ]
+                              }
+                           },
+                           "codes" : {
+                              "type" : "ValueSetRef",
+                              "locator" : "106:37-106:92",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Antibiotic Medications for Upper Respiratory Infection",
+                              "preserve" : true,
+                              "annotation" : [ ]
+                           },
+                           "include" : [ ],
+                           "codeFilter" : [ ],
+                           "dateFilter" : [ ],
+                           "otherFilter" : [ ]
                         } ]
                      } ]
                   },
