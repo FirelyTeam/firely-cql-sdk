@@ -21,20 +21,35 @@ namespace Hl7.Cql.Fhir
 
         /// <summary>
         /// Returns a getter for <paramref name="property"/>. The getter returns <see langword="null"/> when the
-        /// instance passed to it is not of the property's declaring type.
+        /// instance passed to it is not of the property's declaring type, and always for an indexer property,
+        /// which has no value of its own to read.
         /// </summary>
         public static Func<object, object?> For(PropertyInfo property) =>
             Accessors.GetOrAdd(property, Compile);
 
+        /// <summary>
+        /// Returns a stable identity for <paramref name="property"/>: the getter it resolves to, so that separate
+        /// <see cref="PropertyInfo"/> instances describing the same property share one identity. Wrappers such as
+        /// <see cref="FhirModelPropertyInfo"/> are created anew on every lookup and do not implement value
+        /// equality, so caches keyed by the instance itself would neither hit nor stay bounded.
+        /// </summary>
+        internal static MemberInfo GetterIdentity(PropertyInfo property) =>
+            property.GetGetMethod(nonPublic: true) ?? (MemberInfo)property;
+
         private static Func<object, object?> Compile(PropertyInfo property)
         {
-            // Only an instance getter on a closed type without index parameters can be compiled;
-            // anything else keeps using reflection.
+            if (property.GetIndexParameters().Length > 0)
+                return _ => null;
+
+            // Only an instance getter on a closed type can be compiled; anything else keeps using reflection,
+            // guarded like the compiled getter: an instance that is not of the property's declaring type yields
+            // no value rather than an exception, since callers filter over a heterogeneous set of resources.
             if (property.GetGetMethod(nonPublic: false) is not { IsStatic: false } getter
-                || property.DeclaringType is not { ContainsGenericParameters: false } declaringType
-                || property.GetIndexParameters().Length > 0)
+                || property.DeclaringType is not { ContainsGenericParameters: false } declaringType)
             {
-                return property.GetValue;
+                return instance => property.DeclaringType is { } type && type.IsInstanceOfType(instance)
+                    ? property.GetValue(instance)
+                    : null;
             }
 
             var instance = Expression.Parameter(typeof(object), "instance");
@@ -61,11 +76,9 @@ namespace Hl7.Cql.Fhir
             public static readonly GetterIdentityComparer Instance = new();
 
             public bool Equals(PropertyInfo? x, PropertyInfo? y) =>
-                x is null || y is null ? ReferenceEquals(x, y) : Identity(x).Equals(Identity(y));
+                x is null || y is null ? ReferenceEquals(x, y) : GetterIdentity(x).Equals(GetterIdentity(y));
 
-            public int GetHashCode(PropertyInfo obj) => Identity(obj).GetHashCode();
-
-            private static MemberInfo Identity(PropertyInfo property) => property.GetGetMethod(nonPublic: true) ?? (MemberInfo)property;
+            public int GetHashCode(PropertyInfo obj) => GetterIdentity(obj).GetHashCode();
         }
     }
 }

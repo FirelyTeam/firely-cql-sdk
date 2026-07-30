@@ -42,8 +42,10 @@ namespace Hl7.Cql.Fhir
         // base types as well, and the primary code path is determined by the type being retrieved.
         private readonly ConcurrentDictionary<Type, CodedResource[]> _codedByType = new();
 
-        // Idem, for retrieves that specify the property holding the codes.
-        private readonly ConcurrentDictionary<(Type Type, PropertyInfo Property), CodedResource[]> _codedByProperty = new();
+        // Idem, for retrieves that specify the property holding the codes. Keyed by the getter the property
+        // resolves to rather than the PropertyInfo instance: FhirModelPropertyInfo wrappers are created anew on
+        // every lookup without value equality, so instance keys would neither hit nor keep this cache bounded.
+        private readonly ConcurrentDictionary<(Type Type, MemberInfo Property), CodedResource[]> _codedByProperty = new();
 
         private readonly record struct CodedResource(Resource Resource, Coding[] Codings);
 
@@ -60,7 +62,7 @@ namespace Hl7.Cql.Fhir
 
         public IEnumerable<T> FilterByType<T>(Predicate<Coding> filter, PropertyInfo codeProperty, Func<T, IEnumerable<Coding>> getCodes) =>
             Filter<T>(
-                _codedByProperty.GetOrAdd((typeof(T), codeProperty), (_, state) => state.Self.ExtractCodings(state.GetCodes), (Self: this, GetCodes: getCodes)),
+                _codedByProperty.GetOrAdd((typeof(T), CompiledPropertyAccessor.GetterIdentity(codeProperty)), (_, state) => state.Self.ExtractCodings(state.GetCodes), (Self: this, GetCodes: getCodes)),
                 filter
             );
 
