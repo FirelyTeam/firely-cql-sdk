@@ -35,6 +35,10 @@ namespace Hl7.Cql.Fhir
             options ??= FhirCqlContextOptions.Default;
             ICqlOperators cqlOperators = CreateOperators(dataSource, valueSets, now, options);
             CqlContext cqlContext = new CqlContext(cqlOperators, parameters);
+
+            if (options.EvaluationCache is { } evaluationCache)
+                cqlContext.UseNewCache(evaluationCache.InitialCapacity, evaluationCache.ConcurrencyLevel);
+
             return cqlContext;
         }
 

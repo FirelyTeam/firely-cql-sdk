@@ -343,4 +343,52 @@ public class CacheTest
         var ex = Assert.ThrowsException<ArgumentOutOfRangeException>(() => ctx.UseNewCache(initialCapacity));
         Assert.AreEqual("initialCapacity", ex.ParamName);
     }
+
+    [DataTestMethod]
+    [DataRow(0)]
+    [DataRow(-1)]
+    [DataRow(int.MinValue)]
+    public void Cache_UseNewCacheWithTooSmallConcurrencyLevel_ShouldThrow(int concurrencyLevel)
+    {
+        // Arrange
+        var ctx = FhirCqlContext.ForBundle();
+
+        // Act & Assert
+        var ex = Assert.ThrowsException<ArgumentOutOfRangeException>(
+            () => ctx.UseNewCache(CqlContext.CacheInitialCapacity, concurrencyLevel));
+        Assert.AreEqual("concurrencyLevel", ex.ParamName);
+    }
+
+    [DataTestMethod]
+    [DataRow(CqlContext.SequentialCacheConcurrencyLevel)]
+    [DataRow(2)]
+    [DataRow(64)]
+    public void Cache_UseNewCacheWithConcurrencyLevel_ShouldCacheResults(int concurrencyLevel)
+    {
+        // Arrange
+        var ctx = FhirCqlContext.ForBundle();
+        ctx.UseNewCache(CqlContext.CacheInitialCapacity, concurrencyLevel);
+        var lib = CqlNestedTupleTest_1_0_0.Instance;
+
+        // Act - Call the same expression twice
+        var result1 = lib.Result(ctx);
+        var result2 = lib.Result(ctx);
+
+        // Assert - The concurrency level does not affect what is cached
+        Assert.AreEqual(result1, result2);
+        Assert.AreEqual(1, ((ICqlContextInternals)ctx).CacheMisses, "Should have 1 miss");
+        Assert.AreEqual(1, ((ICqlContextInternals)ctx).CacheHits, "Should have 1 hit");
+    }
+
+    [TestMethod]
+    public void Cache_UseNewCacheWithConcurrencyLevelAndTooSmallCapacity_ShouldThrow()
+    {
+        // Arrange
+        var ctx = FhirCqlContext.ForBundle();
+
+        // Act & Assert
+        var ex = Assert.ThrowsException<ArgumentOutOfRangeException>(
+            () => ctx.UseNewCache(CqlContext.MinimumCacheInitialCapacity - 1, concurrencyLevel: 4));
+        Assert.AreEqual("initialCapacity", ex.ParamName);
+    }
 }

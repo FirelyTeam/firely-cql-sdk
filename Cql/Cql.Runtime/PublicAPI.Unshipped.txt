@@ -1,1 +1,11 @@
 #nullable enable
+Hl7.Cql.Runtime.CqlContext.UseNewCache(int initialCapacity, int concurrencyLevel) -> void
+Hl7.Cql.Runtime.EvaluationCacheProfile
+Hl7.Cql.Runtime.EvaluationCacheProfile.ConcurrencyLevel.get -> int
+Hl7.Cql.Runtime.EvaluationCacheProfile.ConcurrencyLevel.init -> void
+Hl7.Cql.Runtime.EvaluationCacheProfile.EvaluationCacheProfile() -> void
+Hl7.Cql.Runtime.EvaluationCacheProfile.InitialCapacity.get -> int
+Hl7.Cql.Runtime.EvaluationCacheProfile.InitialCapacity.init -> void
+const Hl7.Cql.Runtime.CqlContext.SequentialCacheConcurrencyLevel = 1 -> int
+static Hl7.Cql.Runtime.EvaluationCacheProfile.Concurrent.get -> Hl7.Cql.Runtime.EvaluationCacheProfile!
+static Hl7.Cql.Runtime.EvaluationCacheProfile.Sequential.get -> Hl7.Cql.Runtime.EvaluationCacheProfile!
