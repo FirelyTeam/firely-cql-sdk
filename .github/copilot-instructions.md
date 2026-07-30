@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.11.0
+**Version:** 3.12.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,8 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.12.0
+  - Completed Phase 2 of the fragment-file convention ([#1445](https://github.com/FirelyTeam/firely-cql-sdk/issues/1445)): replaced `docs/releases/vnext-release-notes.md` with a static pointer doc; dropped the "Transitional exception" sentence from §4.5.1 and the dual-source description from §4.5.2; updated the `cut-release-notes` skill to remove the transitional callout and the `vnext-release-notes.md` sweep step; fragment files under `docs/releases/vnext/` are now the sole pending-content source. Mirrored into `CLAUDE.md`.
 - 3.11.0
   - Updated 4.5.1 and 4.5.2: made explicit that when cutting a release, **both** pending-content sources must be consolidated and cleared — the `docs/releases/vnext/` fragment files (deleted) and `vnext-release-notes.md` (reset or replaced with a pointer). Also updated the `cut-release-notes` skill reference in 4.5.2 to name both sources, and added a prominent transitional-phase callout to the `cut-release-notes` skill itself. Mirrored into `CLAUDE.md`.
   - Updated 4.2 (fragment-file naming): fragment files are now named `<PR-number>-<short-slug>.md` instead of `<issue-number>-<short-slug>.md`; the "known at branch creation" rationale removed. `docs/releases/vnext/README.md` is the canonical source; 4.5.1 delegates to it.
