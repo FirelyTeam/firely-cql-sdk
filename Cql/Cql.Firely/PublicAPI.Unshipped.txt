@@ -1,4 +1,6 @@
 #nullable enable
+static Hl7.Cql.Fhir.FhirTypeConverter.ConvertCqlCodeToFhir(this Hl7.Cql.Conversion.TypeConverter! converter, Hl7.Cql.Primitives.CqlCode? code) -> Hl7.Fhir.Model.DataType?
+static Hl7.Cql.Fhir.FhirTypeConverter.ConvertPeriodToCqlInterval(this Hl7.Cql.Conversion.TypeConverter! converter, Hl7.Fhir.Model.Period? period, string? cqlPointTypeName) -> object?
 Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideRetrieveProfileFilter.get -> Hl7.Cql.Fhir.IRetrieveProfileFilter?
 Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideRetrieveProfileFilter.init -> void
 Hl7.Cql.Fhir.IRetrieveProfileFilter
