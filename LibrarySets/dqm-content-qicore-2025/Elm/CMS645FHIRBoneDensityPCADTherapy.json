@@ -2,7 +2,7 @@
    "library" : {
       "annotation" : [ {
          "type" : "CqlToElmInfo",
-         "translatorVersion" : "4.0.0",
+         "translatorVersion" : "5.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All"
       } ],
@@ -580,37 +580,9 @@
                         }
                      } ],
                      "operand" : [ {
-                        "type" : "Retrieve",
-                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                        "codeProperty" : "medication",
-                        "codeComparator" : "in",
-                        "annotation" : [ ],
-                        "codes" : {
-                           "type" : "ValueSetRef",
-                           "locator" : "96:23-96:69",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                           "name" : "Androgen Deprivation Therapy for Urology Care",
-                           "preserve" : true,
-                           "annotation" : [ ]
-                        },
-                        "include" : [ ],
-                        "codeFilter" : [ ],
-                        "dateFilter" : [ ],
-                        "otherFilter" : [ ]
-                     }, {
                         "type" : "Query",
                         "locator" : "96:3-96:70",
                         "annotation" : [ ],
-                        "resultTypeSpecifier" : {
-                           "type" : "ListTypeSpecifier",
-                           "annotation" : [ ],
-                           "elementType" : {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
-                              "annotation" : [ ]
-                           }
-                        },
                         "source" : [ {
                            "locator" : "96:3-96:70",
                            "alias" : "MR",
@@ -740,6 +712,35 @@
                               } ]
                            }
                         } ]
+                     }, {
+                        "type" : "Retrieve",
+                        "locator" : "96:3-96:70",
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "codes" : {
+                           "type" : "ValueSetRef",
+                           "locator" : "96:23-96:69",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Androgen Deprivation Therapy for Urology Care",
+                           "preserve" : true,
+                           "annotation" : [ ]
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      } ]
                   }
                } ],
@@ -886,7 +887,7 @@
                                              "annotation" : [ ],
                                              "pointType" : {
                                                 "type" : "NamedTypeSpecifier",
-                                                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                 "annotation" : [ ]
                                              }
                                           }, {
@@ -894,7 +895,7 @@
                                              "annotation" : [ ],
                                              "pointType" : {
                                                 "type" : "NamedTypeSpecifier",
-                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                 "annotation" : [ ]
                                              }
                                           } ]
@@ -919,7 +920,7 @@
                                                 "annotation" : [ ],
                                                 "pointType" : {
                                                    "type" : "NamedTypeSpecifier",
-                                                   "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                    "annotation" : [ ]
                                                 }
                                              }, {
@@ -927,7 +928,7 @@
                                                 "annotation" : [ ],
                                                 "pointType" : {
                                                    "type" : "NamedTypeSpecifier",
-                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                    "annotation" : [ ]
                                                 }
                                              } ]
@@ -1121,6 +1122,10 @@
                                           "annotation" : [ ],
                                           "choice" : [ {
                                              "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}Timing",
+                                             "annotation" : [ ]
+                                          }, {
+                                             "type" : "NamedTypeSpecifier",
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                              "annotation" : [ ]
                                           }, {
@@ -1143,10 +1148,6 @@
                                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                 "annotation" : [ ]
                                              }
-                                          }, {
-                                             "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}Timing",
-                                             "annotation" : [ ]
                                           } ]
                                        } ],
                                        "operand" : [ {
@@ -1166,7 +1167,7 @@
                                                 "annotation" : [ ],
                                                 "pointType" : {
                                                    "type" : "NamedTypeSpecifier",
-                                                   "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                    "annotation" : [ ]
                                                 }
                                              }, {
@@ -1174,7 +1175,7 @@
                                                 "annotation" : [ ],
                                                 "pointType" : {
                                                    "type" : "NamedTypeSpecifier",
-                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                    "annotation" : [ ]
                                                 }
                                              } ]
@@ -1835,37 +1836,9 @@
                         }
                      } ],
                      "operand" : [ {
-                        "type" : "Retrieve",
-                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
-                        "codeProperty" : "medication",
-                        "codeComparator" : "in",
-                        "annotation" : [ ],
-                        "codes" : {
-                           "type" : "ValueSetRef",
-                           "locator" : "121:23-121:69",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                           "name" : "Androgen Deprivation Therapy for Urology Care",
-                           "preserve" : true,
-                           "annotation" : [ ]
-                        },
-                        "include" : [ ],
-                        "codeFilter" : [ ],
-                        "dateFilter" : [ ],
-                        "otherFilter" : [ ]
-                     }, {
                         "type" : "Query",
                         "locator" : "121:3-121:70",
                         "annotation" : [ ],
-                        "resultTypeSpecifier" : {
-                           "type" : "ListTypeSpecifier",
-                           "annotation" : [ ],
-                           "elementType" : {
-                              "type" : "NamedTypeSpecifier",
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
-                              "annotation" : [ ]
-                           }
-                        },
                         "source" : [ {
                            "locator" : "121:3-121:70",
                            "alias" : "MR",
@@ -1995,6 +1968,35 @@
                               } ]
                            }
                         } ]
+                     }, {
+                        "type" : "Retrieve",
+                        "locator" : "121:3-121:70",
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "codes" : {
+                           "type" : "ValueSetRef",
+                           "locator" : "121:23-121:69",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Androgen Deprivation Therapy for Urology Care",
+                           "preserve" : true,
+                           "annotation" : [ ]
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      } ]
                   }
                } ],
@@ -2141,7 +2143,7 @@
                                              "annotation" : [ ],
                                              "pointType" : {
                                                 "type" : "NamedTypeSpecifier",
-                                                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                 "annotation" : [ ]
                                              }
                                           }, {
@@ -2149,7 +2151,7 @@
                                              "annotation" : [ ],
                                              "pointType" : {
                                                 "type" : "NamedTypeSpecifier",
-                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                 "annotation" : [ ]
                                              }
                                           } ]
@@ -2174,7 +2176,7 @@
                                                 "annotation" : [ ],
                                                 "pointType" : {
                                                    "type" : "NamedTypeSpecifier",
-                                                   "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                    "annotation" : [ ]
                                                 }
                                              }, {
@@ -2182,7 +2184,7 @@
                                                 "annotation" : [ ],
                                                 "pointType" : {
                                                    "type" : "NamedTypeSpecifier",
-                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                    "annotation" : [ ]
                                                 }
                                              } ]
@@ -2376,6 +2378,10 @@
                                           "annotation" : [ ],
                                           "choice" : [ {
                                              "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}Timing",
+                                             "annotation" : [ ]
+                                          }, {
+                                             "type" : "NamedTypeSpecifier",
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                              "annotation" : [ ]
                                           }, {
@@ -2398,10 +2404,6 @@
                                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                 "annotation" : [ ]
                                              }
-                                          }, {
-                                             "type" : "NamedTypeSpecifier",
-                                             "name" : "{http://hl7.org/fhir}Timing",
-                                             "annotation" : [ ]
                                           } ]
                                        } ],
                                        "operand" : [ {
@@ -2421,7 +2423,7 @@
                                                 "annotation" : [ ],
                                                 "pointType" : {
                                                    "type" : "NamedTypeSpecifier",
-                                                   "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                    "annotation" : [ ]
                                                 }
                                              }, {
@@ -2429,7 +2431,7 @@
                                                 "annotation" : [ ],
                                                 "pointType" : {
                                                    "type" : "NamedTypeSpecifier",
-                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                    "annotation" : [ ]
                                                 }
                                              } ]
@@ -5214,6 +5216,10 @@
                                              "annotation" : [ ],
                                              "choice" : [ {
                                                 "type" : "NamedTypeSpecifier",
+                                                "name" : "{http://hl7.org/fhir}Timing",
+                                                "annotation" : [ ]
+                                             }, {
+                                                "type" : "NamedTypeSpecifier",
                                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                 "annotation" : [ ]
                                              }, {
@@ -5236,10 +5242,6 @@
                                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                    "annotation" : [ ]
                                                 }
-                                             }, {
-                                                "type" : "NamedTypeSpecifier",
-                                                "name" : "{http://hl7.org/fhir}Timing",
-                                                "annotation" : [ ]
                                              } ]
                                           } ],
                                           "operand" : [ {
@@ -5253,6 +5255,14 @@
                                                 "annotation" : [ ],
                                                 "choice" : [ {
                                                    "type" : "NamedTypeSpecifier",
+                                                   "name" : "{http://hl7.org/fhir}Timing",
+                                                   "annotation" : [ ]
+                                                }, {
+                                                   "type" : "NamedTypeSpecifier",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "annotation" : [ ]
+                                                }, {
+                                                   "type" : "NamedTypeSpecifier",
                                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                    "annotation" : [ ]
                                                 }, {
@@ -5263,14 +5273,6 @@
                                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                       "annotation" : [ ]
                                                    }
-                                                }, {
-                                                   "type" : "NamedTypeSpecifier",
-                                                   "name" : "{http://hl7.org/fhir}Timing",
-                                                   "annotation" : [ ]
-                                                }, {
-                                                   "type" : "NamedTypeSpecifier",
-                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                   "annotation" : [ ]
                                                 } ]
                                              },
                                              "signature" : [ ],
@@ -5443,6 +5445,10 @@
                                              "annotation" : [ ],
                                              "choice" : [ {
                                                 "type" : "NamedTypeSpecifier",
+                                                "name" : "{http://hl7.org/fhir}Timing",
+                                                "annotation" : [ ]
+                                             }, {
+                                                "type" : "NamedTypeSpecifier",
                                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                 "annotation" : [ ]
                                              }, {
@@ -5465,10 +5471,6 @@
                                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                                                    "annotation" : [ ]
                                                 }
-                                             }, {
-                                                "type" : "NamedTypeSpecifier",
-                                                "name" : "{http://hl7.org/fhir}Timing",
-                                                "annotation" : [ ]
                                              } ]
                                           } ],
                                           "operand" : [ {
@@ -5482,6 +5484,14 @@
                                                 "annotation" : [ ],
                                                 "choice" : [ {
                                                    "type" : "NamedTypeSpecifier",
+                                                   "name" : "{http://hl7.org/fhir}Timing",
+                                                   "annotation" : [ ]
+                                                }, {
+                                                   "type" : "NamedTypeSpecifier",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "annotation" : [ ]
+                                                }, {
+                                                   "type" : "NamedTypeSpecifier",
                                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                    "annotation" : [ ]
                                                 }, {
@@ -5492,14 +5502,6 @@
                                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                                       "annotation" : [ ]
                                                    }
-                                                }, {
-                                                   "type" : "NamedTypeSpecifier",
-                                                   "name" : "{http://hl7.org/fhir}Timing",
-                                                   "annotation" : [ ]
-                                                }, {
-                                                   "type" : "NamedTypeSpecifier",
-                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                   "annotation" : [ ]
                                                 } ]
                                              },
                                              "signature" : [ ],

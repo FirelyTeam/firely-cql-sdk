@@ -14,6 +14,7 @@ or implementation guides; this table is per-page ground truth.
 | https://build.fhir.org/ig/HL7/cqf-measures/measure-conformance.html | 2026-07-21 | `ig-hl7-cqf-measures-measure-conformance.md` |
 | https://hl7.org/fhir/R4/library-definitions.html | 2026-07-21 | `fhir-r4-library-definitions.md` |
 | https://hl7.org/fhir/R4/measure-definitions.html | 2026-07-21 | `fhir-r4-measure-definitions.md` |
+| https://hl7.org/fhir/uv/cql/conformance.html | 2026-07-24 | `fhir-uv-cql-conformance.md` |
 
 ## Adding or refreshing a page
 

@@ -9,6 +9,7 @@
 #nullable enable
 
 using Hl7.Cql.Comparers;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 
 namespace CoreTests;
@@ -231,5 +232,384 @@ public class CqlComparersTests
 
         Assert.AreNotEqual(0, comparers.Compare(x, y, null));
         Assert.AreEqual(false, comparers.Equals(x, y, null));
+    }
+
+    // Regression tests for #1415: CqlQuantityCqlComparer.EquivalentValues used to return false as
+    // soon as the two units weren't textually equivalent, even though CompareValues (and therefore
+    // = and the comparison operators) already canonicalized via UCUM. Spec §9.B requires quantity
+    // equivalence to consider unit conversion. The matching hash code fix is #1418, tested below.
+
+    /// <summary>
+    /// Different but convertible units with the same magnitude are equivalent -- the spec's own
+    /// example (`100 'cm' ~ 1 'm'`), here in the form the XmlTest suite exercises it.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_ConvertibleUnitsSameMagnitude_IsEquivalent()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, "cm");
+        var y = new CqlQuantity(0.01m, "m");
+
+        Assert.IsTrue(comparers.Equivalent(x, y, null));
+
+        // The Compare-based paths already handled this; assert they still agree.
+        Assert.AreEqual(true, comparers.Equals(x, y, null));
+        Assert.AreEqual(0, comparers.Compare(x, y, null));
+    }
+
+    /// <summary>
+    /// Convertible units, but the magnitudes differ once canonicalized -- the fallback must compare
+    /// the canonicalized values, not just report equivalence because the units are commensurable.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_ConvertibleUnitsDifferentMagnitude_IsNotEquivalent()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(2m, "cm");
+        var y = new CqlQuantity(0.01m, "m");
+
+        Assert.IsFalse(comparers.Equivalent(x, y, null));
+    }
+
+    /// <summary>
+    /// Incommensurable units canonicalize to different base metrics. Equivalence must report false
+    /// (contrast <c>CompareValues</c>, which answers null for the same operands -- see the #1417
+    /// tests at the bottom of this file).
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_IncommensurableUnits_IsNotEquivalent_AndDoesNotThrow()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, "cm");
+        var y = new CqlQuantity(1m, "g");
+
+        Assert.IsFalse(comparers.Equivalent(x, y, null));
+
+        // Numerically equal canonicalized values across different base metrics must not be
+        // mistaken for equivalence: 1 'cm' canonicalizes to 0.01 'm', 0.01 'g' to 0.01 'g'.
+        Assert.IsFalse(comparers.Equivalent(x, new CqlQuantity(0.01m, "g"), null));
+    }
+
+    /// <summary>
+    /// A unit that isn't valid UCUM at all cannot be canonicalized; equivalence must still report
+    /// false.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_UncanonicalizableUnit_IsNotEquivalent_AndDoesNotThrow()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, "widgets");
+        var y = new CqlQuantity(1m, "m");
+
+        Assert.IsFalse(comparers.Equivalent(x, y, null));
+    }
+
+    /// <summary>
+    /// Spec §9.B lists UCUM definite-time durations as equivalent to their calendar-duration
+    /// counterparts (`1 year ~ 1 'a'`). Before the #1415 fix these returned false -- the unit
+    /// comparer treats 'year'/'a' as plain strings -- so it is the canonicalizing fallback (via
+    /// Ucum.CalendarDurationMapping) that makes them equivalent.
+    /// </summary>
+    [DataTestMethod]
+    [DataRow("year", "a")]
+    [DataRow("month", "mo")]
+    [DataRow("week", "wk")]
+    [DataRow("day", "d")]
+    [DataRow("hour", "h")]
+    [DataRow("minute", "min")]
+    [DataRow("second", "s")]
+    [DataRow("millisecond", "ms")]
+    public void CqlQuantity_CalendarDurationAndUcumCounterpart_IsEquivalent(string calendarUnit, string ucumUnit)
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, calendarUnit);
+        var y = new CqlQuantity(1m, ucumUnit);
+
+        Assert.IsTrue(comparers.Equivalent(x, y, null));
+    }
+
+    /// <summary>
+    /// The default unit `'1'` short-circuits ahead of the canonicalizing fallback, comparing the
+    /// values directly. Unaffected by the #1415 fix.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_DefaultUnit_ComparesValuesDirectly()
+    {
+        var comparers = new CqlComparers();
+
+        Assert.IsTrue(comparers.Equivalent(new CqlQuantity(1m, "1"), new CqlQuantity(1m, "cm"), null));
+        Assert.IsFalse(comparers.Equivalent(new CqlQuantity(2m, "1"), new CqlQuantity(1m, "cm"), null));
+    }
+
+    // Regression tests for #1418: GetHashCodeValue used to hash CqlQuantity.ToString(), which
+    // disagrees with both Equals and Equivalent. Quantities that differ only by unit conversion
+    // (1 'cm' / 0.01 'm') or by decimal scale (1.0 'cm' / 1.00 'cm') compare equal yet hashed into
+    // different buckets, so the HashSet-backed operators (Distinct, Union, Except) failed to
+    // deduplicate them. Unit conversion and scale are the whole of what a hash can cover here:
+    // equivalence rounds both operands to the least precise of the two, which is non-transitive
+    // (0.15 ~ 0.2 and 0.2 ~ 0.24, but 0.15 !~ 0.24) and so has no consistent hash, and the '1' unit
+    // compares equal against every other unit.
+
+    /// <summary>
+    /// The case from the issue: convertible units, equal per both <c>=</c> and <c>~</c>, so the
+    /// hash codes must agree too.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_ConvertibleUnitsSameMagnitude_HashCodesAgree()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, "cm");
+        var y = new CqlQuantity(0.01m, "m");
+
+        Assert.AreEqual(true, comparers.Equals(x, y, null));
+        Assert.AreEqual(comparers.GetHashCode(x), comparers.GetHashCode(y));
+    }
+
+    /// <summary>
+    /// Trailing zeros are not part of a decimal's value, and CQL comparison ignores them, so
+    /// same-unit quantities differing only in scale must hash alike -- <c>decimal.ToString()</c>
+    /// preserves the scale, which is how the old <c>ToString()</c>-based hash broke this.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_SameUnitDifferentDecimalScale_HashCodesAgree()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1.0m, "cm");
+        var y = new CqlQuantity(1.00m, "cm");
+
+        Assert.AreEqual(true, comparers.Equals(x, y, null));
+        Assert.AreEqual(comparers.GetHashCode(x), comparers.GetHashCode(y));
+    }
+
+    /// <summary>
+    /// A unit UCUM cannot canonicalize takes the fallback path, which must still scale-normalize
+    /// the value and must not throw. Quantities with a null value or unit reach
+    /// <c>GetHashCodeValue</c> too -- the comparer's <c>IsNull</c> only rejects a null
+    /// <see cref="CqlQuantity"/> reference, not a null <c>value</c>/<c>unit</c>.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_UncanonicalizableOrPartlyNull_HashesWithoutThrowing()
+    {
+        var comparers = new CqlComparers();
+
+        Assert.AreEqual(
+            comparers.GetHashCode(new CqlQuantity(1.0m, "widgets")),
+            comparers.GetHashCode(new CqlQuantity(1.00m, "widgets")));
+
+        Assert.AreEqual(
+            comparers.GetHashCode(new CqlQuantity(null, "widgets")),
+            comparers.GetHashCode(new CqlQuantity(null, "widgets")));
+
+        Assert.AreEqual(
+            comparers.GetHashCode(new CqlQuantity(1.0m, null)),
+            comparers.GetHashCode(new CqlQuantity(1.00m, null)));
+
+        Assert.AreEqual(
+            comparers.GetHashCode(new CqlQuantity(null, null)),
+            comparers.GetHashCode(new CqlQuantity(null, null)));
+    }
+
+    /// <summary>
+    /// Quantities that are not equal should be kept as separate elements by <c>Distinct</c>.
+    /// Verifies semantic behavior (via <c>Distinct</c>) rather than asserting hash inequality —
+    /// hash functions are permitted to collide, and asserting inequality would over-specify
+    /// and risk flakiness.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_UnequalQuantities_AreNotDeduplicated()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        // Different magnitude in the same unit must not be collapsed.
+        var differentMagnitude = operators.Distinct<CqlQuantity>(
+        [
+            new CqlQuantity(1.0m, "cm"),
+            new CqlQuantity(1.01m, "cm"),
+        ])!.ToList();
+        Assert.AreEqual(2, differentMagnitude.Count);
+
+        // Incommensurable units (cm vs g) must not be collapsed.
+        var incommensurable = operators.Distinct<CqlQuantity>(
+        [
+            new CqlQuantity(1m, "cm"),
+            new CqlQuantity(1m, "g"),
+        ])!.ToList();
+        Assert.AreEqual(2, incommensurable.Count);
+    }
+
+    /// <summary>
+    /// End-to-end: <c>Distinct</c> puts every element through a <see cref="HashSet{T}"/> keyed on
+    /// the runtime comparer, so it only collapses unit-converted duplicates once the hash agrees
+    /// with equality.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_Distinct_DeduplicatesAcrossUnitConversionAndScale()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        var deduplicated = operators.Distinct<CqlQuantity>(
+        [
+            new CqlQuantity(1m, "cm"),
+            new CqlQuantity(0.01m, "m"),
+        ])!.ToList();
+
+        Assert.AreEqual(1, deduplicated.Count);
+
+        var scaleDeduplicated = operators.Distinct<CqlQuantity>(
+        [
+            new CqlQuantity(1.0m, "cm"),
+            new CqlQuantity(1.00m, "cm"),
+        ])!.ToList();
+
+        Assert.AreEqual(1, scaleDeduplicated.Count);
+    }
+
+    // Regression tests for #1417: CqlQuantityCqlComparer.CompareValues canonicalized each quantity
+    // independently and then compared only the canonicalized values. TryCanonicalize succeeds for
+    // any valid UCUM unit, so quantities measuring different base quantities were compared as if
+    // both were dimensionless: 1 'cm' = 0.01 'g' returned true, and ordering across dimensions
+    // returned a numeric answer. CompareValues now requires the canonical units to agree -- the
+    // same guard EquivalentValues got in #1415 -- and answers null when they do not, per §9.B:
+    // "Attempting to operate on quantities with invalid units will result in a null."
+
+    /// <summary>
+    /// The case from the issue. Both units canonicalize, but to different base metrics, so there is
+    /// no dimension in which to compare them and the comparison is unknown. Real measure logic hits
+    /// this on dirty clinical data (CMS144 compares a <c>'%'</c> against a <c>'/min'</c>), so it
+    /// must degrade to null rather than abort the evaluation.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_IncommensurableUnits_ComparisonIsNull()
+    {
+        var comparers = new CqlComparers();
+
+        var x = new CqlQuantity(1m, "cm");
+        var y = new CqlQuantity(0.01m, "g");
+
+        Assert.IsNull(comparers.Equals(x, y, null));
+        Assert.IsNull(comparers.Compare(x, y, null));
+
+        // Ordering across dimensions, which used to answer 0/-1/1 off the canonicalized values.
+        Assert.IsNull(comparers.Compare(new CqlQuantity(1m, "cm"), new CqlQuantity(1m, "g"), null));
+
+        // The CMS shapes that regressed when this path threw instead of answering null.
+        Assert.IsNull(comparers.Compare(new CqlQuantity(1m, "%"), new CqlQuantity(50m, "/min"), null));
+        Assert.IsNull(comparers.Compare(new CqlQuantity(40m, "cm"), new CqlQuantity(37m, "weeks"), null));
+
+        // A unit that is not valid UCUM at all cannot be canonicalized either, and §9.B's "invalid
+        // units" sentence covers it: also null, where this used to throw NotSupportedException.
+        Assert.IsNull(comparers.Compare(new CqlQuantity(1m, "cm"), new CqlQuantity(1m, "widgets"), null));
+    }
+
+    /// <summary>
+    /// Equivalence is never null ("this operator will always return true or false"), so the same
+    /// incommensurable operands that make a comparison null make equivalence false -- the spec's
+    /// own example is <c>3.5 'cm2' ~ 3.5 'cm'</c>.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_IncommensurableUnits_IsNotEquivalent()
+    {
+        var comparers = new CqlComparers();
+
+        Assert.IsFalse(comparers.Equivalent(new CqlQuantity(3.5m, "cm2"), new CqlQuantity(3.5m, "cm"), null));
+        Assert.IsFalse(comparers.Equivalent(new CqlQuantity(1m, "%"), new CqlQuantity(50m, "/min"), null));
+        Assert.IsFalse(comparers.Equivalent(new CqlQuantity(40m, "cm"), new CqlQuantity(37m, "weeks"), null));
+    }
+
+    /// <summary>
+    /// Convertible units are unaffected: equality and ordering both still canonicalize and compare.
+    /// </summary>
+    [TestMethod]
+    public void CqlQuantity_ConvertibleUnits_ComparisonUnchanged()
+    {
+        var comparers = new CqlComparers();
+
+        Assert.AreEqual(true, comparers.Equals(new CqlQuantity(1m, "cm"), new CqlQuantity(0.01m, "m"), null));
+        Assert.AreEqual(0, comparers.Compare(new CqlQuantity(1m, "cm"), new CqlQuantity(0.01m, "m"), null));
+
+        Assert.AreEqual(-1, comparers.Compare(new CqlQuantity(1m, "cm"), new CqlQuantity(1m, "m"), null));
+        Assert.AreEqual(1, comparers.Compare(new CqlQuantity(1m, "m"), new CqlQuantity(1m, "cm"), null));
+    }
+
+    /// <summary>
+    /// An interval's comparer answers equivalence by borrowing its own comparison implementation
+    /// (<c>CqlComparerEquivalentImplementation.Compare</c>), so an interval over incommensurable
+    /// quantities reaches <c>CqlQuantityCqlComparer.CompareValues</c> along an equivalence path and
+    /// gets the null back. Equivalence cannot be null, and a null comparison between two operands
+    /// already known non-null means incomparable, so it maps to false -- before this fix these
+    /// intervals were equivalent, comparing 0.01 'm' against 0.01 'g' as bare numbers. Interval
+    /// equality propagates the null, like the scalar case.
+    /// </summary>
+    [TestMethod]
+    public void CqlIntervalOfQuantity_IncommensurableBounds_IsNotEquivalent_AndComparesNull()
+    {
+        // Interval comparers are registered by the operators, not by the bare CqlComparers ctor.
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        var centimeters = new CqlInterval<CqlQuantity>(new CqlQuantity(1m, "cm"), new CqlQuantity(2m, "cm"), true, true);
+        var grams = new CqlInterval<CqlQuantity>(new CqlQuantity(0.01m, "g"), new CqlQuantity(0.02m, "g"), true, true);
+        var meters = new CqlInterval<CqlQuantity>(new CqlQuantity(0.01m, "m"), new CqlQuantity(0.02m, "m"), true, true);
+
+        Assert.AreEqual(false, operators.Equivalent(centimeters, grams));
+        Assert.IsNull(operators.Equal(centimeters, grams));
+
+        // Convertible bounds unchanged.
+        Assert.AreEqual(true, operators.Equivalent(centimeters, meters));
+        Assert.AreEqual(true, operators.Equal(centimeters, meters));
+    }
+
+    /// <summary>
+    /// A list of quantities: equivalence propagates the element-level false, and <c>ListEqual</c>
+    /// propagates a null element comparison as null -- the lists are neither equal nor known
+    /// unequal, matching the scalar and interval cases above. A known-unequal element still wins
+    /// over an unknown one: false short-circuits the three-valued conjunction.
+    /// </summary>
+    [TestMethod]
+    public void CqlListOfQuantity_IncommensurableElements_EquivalenceIsFalse_AndEqualityIsNull()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        CqlQuantity[] centimeters = [new CqlQuantity(1m, "cm")];
+        CqlQuantity[] grams = [new CqlQuantity(0.01m, "g")];
+
+        Assert.AreEqual(false, operators.Equivalent(centimeters, grams));
+        Assert.IsNull(operators.ListEqual(centimeters, grams));
+        Assert.IsNull(operators.ListNotEqual(centimeters, grams));
+
+        // False beats null in the conjunction: a known-unequal element makes the lists unequal
+        // even when another element comparison is unknown.
+        CqlQuantity[] mixedLeft = [new CqlQuantity(1m, "cm"), new CqlQuantity(1m, "cm")];
+        CqlQuantity[] mixedRight = [new CqlQuantity(0.01m, "g"), new CqlQuantity(2m, "cm")];
+        Assert.AreEqual(false, operators.ListEqual(mixedLeft, mixedRight));
+    }
+
+    /// <summary>
+    /// Collateral to the above: <c>CqlComparisonToEquivalence</c> is shared with
+    /// <see cref="CqlDate"/>/<see cref="CqlTime"/>/<see cref="CqlDateTime"/>, which reach it with a
+    /// null when the operands are specified to different precisions. It used to map null to true,
+    /// so those were equivalent; §9.B says the opposite -- "if one input has a value for a given
+    /// precision and the other does not, the comparison stops and the result is false, rather than
+    /// null" -- and gives <c>@2012-01-01 ~ @2012-01-01T12</c> as a false example.
+    /// </summary>
+    [TestMethod]
+    public void CqlDateTime_DifferingPrecision_IsNotEquivalent()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        var dateOnly = new CqlDateTime(2012, 1, 1, null, null, null, null, null, null);
+        var withHour = new CqlDateTime(2012, 1, 1, 12, null, null, null, null, null);
+
+        Assert.AreEqual(false, operators.Equivalent(dateOnly, withHour));
+        Assert.AreEqual(true, operators.Equivalent(dateOnly, new CqlDateTime(2012, 1, 1, null, null, null, null, null, null)));
+
+        Assert.AreEqual(false, operators.Equivalent(new CqlDate(2012, 1, null), new CqlDate(2012, 1, 1)));
+        Assert.AreEqual(true, operators.Equivalent(new CqlDate(2012, 1, 1), new CqlDate(2012, 1, 1)));
     }
 }

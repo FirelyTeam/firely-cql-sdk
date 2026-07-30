@@ -180,10 +180,9 @@ public class CSharpEmitterTests
     {
         var test = new CodeLocal(typeof(bool), "c");
         // The true branch needs its own hoisted statement, so the conditional can no longer
-        // print as a single-expression ternary and must flatten into the old pipeline's
-        // CaseWhenThen form instead: a hoisted zero-parameter local function containing the
-        // if/else chain (branches `return`), invoked where the value is needed (see
-        // HoistConditionalFunction in CSharpEmitter.Scope.cs).
+        // print as a single-expression ternary and flattens into native if/else statement
+        // form; in tail position the branches return directly (see
+        // LinearizeConditionalStatements in CSharpEmitter.Scope.cs).
         var ifTrue = new CodeInvoke(null, MathAbsInt, new CodeConstant(-5, typeof(int)));
         var ifFalse = new CodeConstant(2, typeof(int));
         var conditional = new CodeConditional(test, ifTrue, ifFalse, typeof(int));
@@ -193,20 +192,15 @@ public class CSharpEmitterTests
 
         var expected =
             "{\n" +
-            "\n" +
-            "    int a_() {\n" +
-            "        if (c)\n" +
-            "        {\n" +
-            "            int b_ = Math.Abs(-5);\n" +
-            "            return b_;\n" +
-            "        }\n" +
-            "        else\n" +
-            "        {\n" +
-            "            return 2;\n" +
-            "        }\n" +
+            "    if (c)\n" +
+            "    {\n" +
+            "        int a_ = Math.Abs(-5);\n" +
+            "        return a_;\n" +
             "    }\n" +
-            "\n" +
-            "    return a_();\n" +
+            "    else\n" +
+            "    {\n" +
+            "        return 2;\n" +
+            "    }\n" +
             "}";
         Assert.AreEqual(expected, actual);
     }
@@ -239,20 +233,15 @@ public class CSharpEmitterTests
 
         var expected =
             "{\n" +
-            "\n" +
-            "    int a_() {\n" +
-            "        if ((this.Foo(context)) ?? false)\n" +
-            "        {\n" +
-            "            int b_ = Math.Abs(-5);\n" +
-            "            return b_;\n" +
-            "        }\n" +
-            "        else\n" +
-            "        {\n" +
-            "            return 2;\n" +
-            "        }\n" +
+            "    if ((this.Foo(context)) ?? false)\n" +
+            "    {\n" +
+            "        int a_ = Math.Abs(-5);\n" +
+            "        return a_;\n" +
             "    }\n" +
-            "\n" +
-            "    return a_();\n" +
+            "    else\n" +
+            "    {\n" +
+            "        return 2;\n" +
+            "    }\n" +
             "}";
         Assert.AreEqual(expected, EmitBody(lambda));
     }
@@ -281,22 +270,17 @@ public class CSharpEmitterTests
 
         var expected =
             "{\n" +
-            "\n" +
-            "    int a_() {\n" +
-            "        if ((c\n" +
-            "            ? string.IsNullOrEmpty(s)\n" +
-            "            : false))\n" +
-            "        {\n" +
-            "            int b_ = Math.Abs(-5);\n" +
-            "            return b_;\n" +
-            "        }\n" +
-            "        else\n" +
-            "        {\n" +
-            "            return 2;\n" +
-            "        }\n" +
+            "    if ((c\n" +
+            "        ? string.IsNullOrEmpty(s)\n" +
+            "        : false))\n" +
+            "    {\n" +
+            "        int a_ = Math.Abs(-5);\n" +
+            "        return a_;\n" +
             "    }\n" +
-            "\n" +
-            "    return a_();\n" +
+            "    else\n" +
+            "    {\n" +
+            "        return 2;\n" +
+            "    }\n" +
             "}";
         Assert.AreEqual(expected, EmitBody(lambda));
     }
@@ -304,10 +288,9 @@ public class CSharpEmitterTests
     [TestMethod]
     public void IfChain_TailPosition_PrintsReturningIfElseChain()
     {
-        // If-chains flatten into the same hoisted-local-function CaseWhenThen form as a
-        // compound conditional (see HoistConditionalFunction in CSharpEmitter.Scope.cs);
-        // here neither the "when" (a bare local) nor either branch (bare constants) hoists
-        // anything, so the function body is just the if/else chain itself.
+        // If-chains flatten into the same native if/else statement form as a compound
+        // conditional (see LinearizeConditionalStatements in CSharpEmitter.Scope.cs); in
+        // tail position the branches return directly, with no result local.
         var when = new CodeLocal(typeof(bool), "w");
         var chain = new CodeIfChain(
             [(when, new CodeConstant(1, typeof(int)))],
@@ -317,19 +300,89 @@ public class CSharpEmitterTests
 
         var expected =
             "{\n" +
-            "\n" +
-            "    int a_() {\n" +
-            "        if (w)\n" +
-            "        {\n" +
-            "            return 1;\n" +
-            "        }\n" +
-            "        else\n" +
+            "    if (w)\n" +
+            "    {\n" +
+            "        return 1;\n" +
+            "    }\n" +
+            "    else\n" +
+            "    {\n" +
+            "        return 2;\n" +
+            "    }\n" +
+            "}";
+        Assert.AreEqual(expected, EmitBody(lambda));
+    }
+
+    [TestMethod]
+    public void Conditional_NonTailPosition_AssignsDeclaredResultLocal()
+    {
+        // A statement-form conditional whose value feeds a later expression declares a
+        // result local up front and assigns it in every branch; the consumer references the
+        // local. (The result local's name allocates when the conditional is linearized, the
+        // consumer's when it hoists, and branch interiors render deferred — hence c_ inside
+        // the branch after b_ outside it, the block-before-interior naming convention.)
+        var c = new CodeLocal(typeof(bool), "c");
+        var conditional = new CodeConditional(c,
+            new CodeInvoke(null, MathAbsInt, new CodeConstant(-5, typeof(int))),
+            new CodeConstant(2, typeof(int)), typeof(int));
+        var outer = new CodeInvoke(null, MathAbsInt, conditional);
+        var lambda = new CodeLambda([c], outer);
+
+        var expected =
+            "{\n" +
+            "    int a_;\n" +
+            "    if (c)\n" +
+            "    {\n" +
+            "        int c_ = Math.Abs(-5);\n" +
+            "        a_ = c_;\n" +
+            "    }\n" +
+            "    else\n" +
+            "    {\n" +
+            "        a_ = 2;\n" +
+            "    }\n" +
+            "    int b_ = Math.Abs(a_);\n" +
+            "    return b_;\n" +
+            "}";
+        Assert.AreEqual(expected, EmitBody(lambda));
+    }
+
+    [TestMethod]
+    public void IfChain_LaterConditionWithStatements_NestsInElse()
+    {
+        // A later condition above the inline budget (two calls here) may only evaluate after
+        // all earlier conditions tested false, so the chain continues nested inside the else
+        // block — the condition's statements print there, before a fresh if. (The old
+        // pipeline got this laziness by wrapping such conditions in zero-argument bool
+        // functions.)
+        var concat = typeof(string).GetMethod(nameof(string.Concat), [typeof(string), typeof(string)])!;
+        var isNullOrEmpty = typeof(string).GetMethod(nameof(string.IsNullOrEmpty), [typeof(string)])!;
+        var w = new CodeLocal(typeof(bool), "w");
+        var s = new CodeLocal(typeof(string), "s");
+        var when2 = new CodeInvoke(null, isNullOrEmpty, new CodeInvoke(null, concat, s, s));
+        var chain = new CodeIfChain(
+            [(w, new CodeConstant(1, typeof(int))), (when2, new CodeConstant(2, typeof(int)))],
+            new CodeConstant(3, typeof(int)),
+            typeof(int));
+        var lambda = new CodeLambda([w, s], chain);
+
+        var expected =
+            "{\n" +
+            "    if (w)\n" +
+            "    {\n" +
+            "        return 1;\n" +
+            "    }\n" +
+            "    else\n" +
+            "    {\n" +
+            "        string a_ = string.Concat(s, s);\n" +
+            "        bool b_ = string.IsNullOrEmpty(a_);\n" +
+            "        if (b_)\n" +
             "        {\n" +
             "            return 2;\n" +
             "        }\n" +
+            "        else\n" +
+            "        {\n" +
+            "            return 3;\n" +
+            "        }\n" +
             "    }\n" +
-            "\n" +
-            "    return a_();\n" +
             "}";
         Assert.AreEqual(expected, EmitBody(lambda));
     }

@@ -145,8 +145,6 @@ namespace Hl7.Cql.Fhir
             add((M.Integer c) => new M.PositiveInt(c.Value));
             add((M.Code c) => c.Value);
             add((M.Code c) => new CqlCode { code = c.Value });
-            if (!hasCodingToCqlCodeConversion())
-                add((M.Coding c) => new CqlCode(c.Code, c.System, c.Version, c.Display));
             add((M.Date f) => f.TryToSystemDate(out var date) ? new CqlDate(date!.Years!.Value, date.Months, date.Days) : null);
             add((M.Date f) => f.TryToSystemDate(out var date) ? new CqlDateTime(date!.Years!.Value, date.Months, date.Days, 0, 0, 0, 0, 0, 0) : null);
             add((M.Date f) => f.ToString());
@@ -165,6 +163,13 @@ namespace Hl7.Cql.Fhir
             add((M.Range f) => new CqlInterval<int?>(converter.Convert<int?>(f.Low), converter.Convert<int?>(f.High), lowClosed: true, highClosed: true));
 
             add((M.Id id) => id.Value);
+
+            // Mirror the FHIRHelpers ToCode/ToConcept conversions, which the CQL type system
+            // treats as implicit FHIR-to-System conversions.
+            add((M.Coding c) => new CqlCode(c.Code, c.System, c.Version, c.Display));
+            add((M.CodeableConcept cc) => new CqlConcept(
+                cc.Coding?.Select(c => new CqlCode(c.Code, c.System, c.Version, c.Display)).ToList(),
+                cc.Text));
 
             add((M.PositiveInt pi) => new M.Integer(pi.Value));
             add((M.PositiveInt pi) => pi.ToString());
@@ -189,19 +194,6 @@ namespace Hl7.Cql.Fhir
             {
                 foreach (Type t in tos) converter.AddConversion(typeof(M.Parameters.ParameterComponent), t,
                     f => converter.Convert(((M.Parameters.ParameterComponent)f).Value, t)!);
-            }
-
-            bool hasCodingToCqlCodeConversion()
-            {
-                try
-                {
-                    _ = converter.Convert<CqlCode>(new M.Coding());
-                    return true;
-                }
-                catch (InvalidOperationException)
-                {
-                    return false;
-                }
             }
 
             // This is our implementation of FHIRHelpers.ToString() for the basic datatypes,
@@ -313,44 +305,15 @@ namespace Hl7.Cql.Fhir
                     return range;
                 }
             });
-            converter.AddConversion((CqlInterval<decimal?> interval) =>
-            {
-                if (interval is null)
-                    return null;
-                else
-                {
-                    var range = new M.Range();
-                    if (interval.low is { } low)
-                    {
-                        range.Low = new M.Quantity(low, "1");
-                    }
-
-                    if (interval.high is { } high)
-                    {
-                        range.High = new M.Quantity(high, "1");
-                    }
-                    return range;
-                }
-            });
-            converter.AddConversion((CqlInterval<int?> interval) =>
-            {
-                if (interval is null)
-                    return null;
-                else
-                {
-                    var range = new M.Range();
-                    if (interval.low is { } low)
-                    {
-                        range.Low = new M.Quantity(low, "1");
-                    }
-
-                    if (interval.high is { } high)
-                    {
-                        range.High = new M.Quantity(high, "1");
-                    }
-                    return range;
-                }
-            });
+            converter.AddConversion((CqlInterval<decimal?> interval) => interval is null
+                ? null
+                : NumericIntervalToRange(interval.low, interval.high, interval.lowClosed, interval.highClosed, CqlOperators.MinDecimalPrecisionValue));
+            converter.AddConversion((CqlInterval<int?> interval) => interval is null
+                ? null
+                : NumericIntervalToRange(interval.low, interval.high, interval.lowClosed, interval.highClosed, 1m));
+            converter.AddConversion((CqlInterval<long?> interval) => interval is null
+                ? null
+                : NumericIntervalToRange(interval.low, interval.high, interval.lowClosed, interval.highClosed, 1m));
             converter.AddConversion((CqlInterval<CqlDateTime> interval) =>
             {
                 if (interval is null)
@@ -473,6 +436,54 @@ namespace Hl7.Cql.Fhir
                 nameof(CqlPrimitiveType.Date) => converter.Convert<CqlInterval<CqlDate>>(period),
                 _ => converter.Convert<CqlInterval<CqlDateTime>>(period)
             };
+
+        /// <summary>
+        /// The extension conveying the number of digits after the decimal point of a Quantity's value, used by
+        /// the CQL IG's FHIR type mapping to make the precision of a value explicit.
+        /// </summary>
+        internal const string QuantityPrecisionExtensionUrl = "http://hl7.org/fhir/StructureDefinition/quantity-precision";
+
+        /// <summary>
+        /// Converts an interval of Integer, Decimal or Long to a FHIR Range of unit-less Quantities (FHIR-56226).
+        /// FHIR Range bounds are always inclusive, so an open endpoint is emitted as its closed equivalent, i.e.
+        /// the successor of an open low bound and the predecessor of an open high bound, stepping by <paramref name="step"/> -
+        /// the same minimum precision value the engine's ToClosed() applies for the interval's point type.
+        /// </summary>
+        /// <remarks>
+        /// The step is applied in <c>decimal</c> arithmetic. This intentionally diverges from the engine's
+        /// <c>Successor</c>/<c>Predecessor</c> for Integer and Long, which use unchecked integer arithmetic and wrap
+        /// at <c>int.MaxValue</c>/<c>long.MaxValue</c>. FHIR <c>Quantity</c> values are <c>decimal</c>-based, so
+        /// representing <c>int.MaxValue + 1</c> as 2147483648 is more meaningful than wrapping to <c>int.MinValue</c>.
+        /// These boundary values are practically unreachable in real CQL expressions.
+        /// </remarks>
+        private static M.Range NumericIntervalToRange(decimal? low, decimal? high, bool? lowClosed, bool? highClosed, decimal step)
+        {
+            var range = new M.Range();
+            if (low is { } l)
+            {
+                range.Low = UnitlessQuantity((lowClosed ?? false) ? l : l + step);
+            }
+
+            if (high is { } h)
+            {
+                range.High = UnitlessQuantity((highClosed ?? false) ? h : h - step);
+            }
+            return range;
+        }
+
+        /// <summary>
+        /// Creates the unit-less (UCUM <c>1</c>) Quantity used for the bounds of a Range converted from an interval
+        /// of Integer, Decimal or Long. The <see cref="QuantityPrecisionExtensionUrl"/> extension is always added, so
+        /// that the number of digits after the decimal point does not depend on a serializer preserving trailing zeros.
+        /// </summary>
+        private static M.Quantity UnitlessQuantity(decimal value)
+        {
+            var quantity = new M.Quantity(value, "1");
+            // The extension's value is the bound's number of digits after the decimal point, which is exactly
+            // Decimal.Scale (so 1.50m yields 2, and the trailing zero survives even if the serializer drops it).
+            quantity.Extension.Add(new M.Extension(QuantityPrecisionExtensionUrl, new M.Integer(value.Scale)));
+            return quantity;
+        }
 
         internal static TypeConverter ConvertSystemTypes(this TypeConverter converter)
         {

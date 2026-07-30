@@ -434,3 +434,4 @@ Examples/**/output/
 
 # Spec source files (original HTML with CSS/JS/images, ~40MB) — see spec/cql/README.md
 spec/cql/source/
+submodules/Firely.Cql.Sdk.Integration.Runner

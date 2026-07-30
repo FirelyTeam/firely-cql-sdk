@@ -115,6 +115,25 @@ public class CqlTypeToFhirTypeMapperTests
     }
 
     [TestMethod]
+    public void TypeEntryFor_CqlPrimitiveTypeIntervalWithLongElementType_ReturnsFhirRange()
+    {
+        // Arrange
+        var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+        var mapper = new CqlTypeToFhirTypeMapper(typeResolver);
+        var elementType = new CqlTypeToFhirMapping(FHIRAllTypes.String, CqlPrimitiveType.Long);
+
+        // Act
+        var result = mapper.TypeEntryFor(CqlPrimitiveType.Interval, elementType);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(FHIRAllTypes.Range, result.FhirType);
+        Assert.AreEqual(CqlPrimitiveType.Interval, result.CqlType);
+        Assert.IsNotNull(result.ElementType);
+        Assert.AreEqual(CqlPrimitiveType.Long, result.ElementType.CqlType);
+    }
+
+    [TestMethod]
     public void TypeEntryFor_CqlPrimitiveTypeIntervalWithTimeElementType_ReturnsFhirPeriodAndDateTimeElement()
     {
         // Arrange

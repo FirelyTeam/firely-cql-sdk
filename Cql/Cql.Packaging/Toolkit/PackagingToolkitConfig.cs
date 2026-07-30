@@ -28,6 +28,14 @@ public record PackagingToolkitConfig(
     public IReadOnlyDictionary<CqlLibraryIdentifier, string> FixedLibraryCanonicals { get; init; }
         = FixedLibraryCanonicals ?? CreateDefaultFixedLibraryCanonicals();
 
+    /// <summary>
+    /// The code system URL used for <c>Measure.group.code</c>. When set, each measure group's id is
+    /// also emitted as a coding with this system and the group id as its code. When <see langword="null"/>
+    /// (the default), no <c>Measure.group.code</c> is emitted; an empty or whitespace-only value is
+    /// treated the same as <see langword="null"/>.
+    /// </summary>
+    public string? MeasureGroupCodeSystem { get; init; }
+
     private static ReadOnlyDictionary<CqlLibraryIdentifier, string> CreateDefaultFixedLibraryCanonicals() =>
         new Dictionary<CqlLibraryIdentifier, string> { { (CqlLibraryIdentifier)"FHIRHelpers", "http://hl7.org/fhir/uv/cql/Library/FHIRHelpers" } }
             .AsReadOnly();

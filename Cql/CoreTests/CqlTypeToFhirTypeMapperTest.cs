@@ -87,6 +87,18 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void CqlIntervalOfLong_MapToFhirType()
+        {
+            var cqlType = typeof(CqlInterval<long>);
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(cqlType);
+            Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.Range, typeEntry.FhirType.Value);
+            Assert.AreEqual(CqlPrimitiveType.Long, typeEntry.ElementType.CqlType.Value);
+        }
+
+        [TestMethod]
         public void CqlIntervalOfTime_MapToFhirType()
         {
             var cqlType = typeof(CqlInterval<CqlTime>);
