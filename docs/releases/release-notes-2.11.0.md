@@ -4,7 +4,7 @@
 
 > **Upgrading?** Here is the short version:
 >
-> - **Breaking changes:** Generated C# shape changed (`GeneratorToolVersion` `5.1.5.0` → `5.1.7.0`), and FHIR serialization for `Interval<Integer|Decimal|Long>` mapped to `Range` changed per FHIR-56226.
+> - **Breaking changes:** Generated C# shape changed (`GeneratorToolVersion` `5.1.2.0` → `5.1.7.0`), and FHIR serialization for `Interval<Integer|Decimal|Long>` mapped to `Range` changed per FHIR-56226.
 > - **Required migrations:** Regenerate checked-in generated C# libraries, and update any tests/consumers that assert exact `Range` endpoint/precision output for interval results.
 > - **Highlights:** Quantity semantics now align much more closely with CQL §9.B (unit conversion in `~`, null semantics for invalid/incommensurable operations, and hash/equality consistency).
 
@@ -51,7 +51,7 @@
 
 #### Potentially Breaking
 
-- Generated C# changed shape and `GeneratorToolVersion` advanced from `5.1.5.0` to `5.1.7.0`; consumers with checked-in generated C# should regenerate.
+- Generated C# changed shape and `GeneratorToolVersion` advanced from `5.1.2.0` to `5.1.7.0`; consumers with checked-in generated C# should regenerate.
 - `Interval<Integer>` / `Interval<Decimal>` serialization to FHIR `Range` now always emits `quantity-precision` extension on bounds and converts open bounds to their closed equivalents at engine minimum precision; `Interval<Long>` now serializes as unit-less (`UCUM '1'`) `Range` (#1402).
 - Quantity equality/order comparisons (`=`, `<`, `>`, `<=`, `>=`, `between`) now return `null` for incompatible dimensions/invalid units instead of treating canonicalized values as directly comparable (e.g. `1 'cm'` vs `0.01 'g'`) (#1417).
 - Quantity equivalence (`~`) now performs UCUM conversion and never returns `null`; incommensurable units evaluate `false` (#1415, #1417).
