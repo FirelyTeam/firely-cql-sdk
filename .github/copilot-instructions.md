@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.10.0
+**Version:** 3.11.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,9 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.11.0
+  - Updated 4.5.1 and 4.5.2: made explicit that when cutting a release, **both** pending-content sources must be consolidated and cleared — the `docs/releases/vnext/` fragment files (deleted) and `vnext-release-notes.md` (reset or replaced with a pointer). Also updated the `cut-release-notes` skill reference in 4.5.2 to name both sources, and added a prominent transitional-phase callout to the `cut-release-notes` skill itself. Mirrored into `CLAUDE.md`.
+  - Updated 4.2 (fragment-file naming): fragment files are now named `<PR-number>-<short-slug>.md` instead of `<issue-number>-<short-slug>.md`; the "known at branch creation" rationale removed. `docs/releases/vnext/README.md` is the canonical source; 4.5.1 delegates to it.
 - 3.10.0
   - Updated 4.5.1: release-note entries now go in a new fragment file under `docs/releases/vnext/` (one per PR) instead of directly editing the shared `vnext-release-notes.md`, which caused recurring merge conflicts between parallel PRs. Transitional exception noted for PRs that already added a direct entry before this convention existed. See `docs/releases/vnext/README.md` for the naming/format convention and [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432) for the full rationale; mirrored into `CLAUDE.md`.
   - Added 5.5 (Running Integration Runner Benchmarks): links to the new `run-integration-benchmarks` skill for running the `Firely.Cql.Sdk.Integration.Runner` submodule's BenchmarkDotNet project, appending a dated baseline file, and comparing medians against the most recent prior baseline.

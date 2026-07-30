@@ -7,6 +7,12 @@ description: Prepare a versioned release notes document for the Firely CQL SDK, 
 
 Full process (authoritative source): [Creating Tags and Releases](https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases) wiki page. This skill covers everything up to and including the version-bump PR — creating the git tag, the GitHub Release, and approving the NuGet/GitHub Packages deploy are separate, permission-gated steps for a release manager, not something to do as part of this skill.
 
+> **Transitional phase — two pending-content sources:** During the transition from the old single-file approach to the per-PR fragment convention, pending release-note content lives in **two** places:
+> - `docs/releases/vnext/*.md` (excluding `README.md`) — fragment files added by PRs that use the new convention (see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432))
+> - `docs/releases/vnext-release-notes.md` — bullets still there from PRs that predated the convention
+>
+> **Both must be fully consolidated and cleared** when cutting a release — no content left behind in either place.
+
 1. Use [docs/releases/release-notes-template.md](../../../docs/releases/release-notes-template.md) as the structure and guidance — follow its `tl;dr` format, product-area grouping, and "Common Items To Check" list.
 2. Base the notes on every commit since the previous release tag, and incorporate all relevant content already drafted as fragment files under [docs/releases/vnext/](../../../docs/releases/vnext/README.md), plus (transitionally, see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)) any content still directly in [docs/releases/vnext-release-notes.md](../../../docs/releases/vnext-release-notes.md) from PRs that predate the fragment convention.
 3. Call out exact public type/member/property/method names for API changes. For dependency version bumps, name the version property (e.g. `FirelyNetVersion`) and the old/new value.
