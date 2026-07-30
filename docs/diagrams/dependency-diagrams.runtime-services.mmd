@@ -1,0 +1,91 @@
+%%{init: {
+    'layout': 'elk',
+    'themeVariables':{
+      'lineColor': '#333',
+      'lineWidth': 4
+    },
+    'themeCSS': '.edgeLabel, .edgeLabel p, .edgeLabel rect, .labelBkg { background: transparent !important; background-color: transparent !important; fill: transparent !important; }'
+}}%%
+
+flowchart TB
+
+subgraph FhirProject ["Cql.Firely"]
+direction TB
+FhirCqlContext["<b>FhirCqlContext</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Static factory that constructs a CqlContext from a FHIR Bundle or IDataSource, wiring together all runtime services controlled by FhirCqlContextOptions.</div>"]
+FhirCqlContextOptions["<b>FhirCqlContextOptions</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Per-evaluation configuration: optional overrides for TypeConverter, ModelInspector, IMetricService, IRetrieveProfileFilter, resource-id comparer, and code equality semantics.</div>"]
+FhirTypeConverter["<b>FhirTypeConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Static factory producing a TypeConverter with FHIR POCO ↔ CQL value conversions and an optional LRU CqlDateTime cache.</div>"]
+FhirTypeResolver["<b>FhirTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>BaseTypeResolver extended with FHIR resource and POCO type mappings, built from a Firely SDK ModelInspector.</div>"]
+FhirEnumComparer["<b>FhirEnumComparer</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>ICqlComparer for FHIR-typed enum values (Code&lt;T&gt;), used as the enum-equality comparer inside CqlOperators.</div>"]
+BundleDataSource["<b>BundleDataSource</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>IDataSource backed by a FHIR Bundle; filters resources by type and optionally by QICore profile URL via IRetrieveProfileFilter.</div>"]
+IRetrieveProfileFilter["<b>IRetrieveProfileFilter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Maps a CQL retrieve template-id to a Resource predicate for BundleDataSource filtering; default is QICoreRetrieveProfileFilter.</div>"]
+QICoreRetrieveProfileFilter["<b>QICoreRetrieveProfileFilter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>IRetrieveProfileFilter with hard-coded filters for QICore 6.0.0 negation and positive-counterpart profiles.</div>"]
+end
+
+subgraph RuntimeProject ["Cql.Runtime"]
+direction TB
+CqlContext["<b>CqlContext</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Runtime execution context: holds the ICqlOperators instance and the parameter dictionary for one CQL evaluation run.</div>"]
+CqlOperators["<b>CqlOperators</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>ICqlOperators implementation: the evaluation core that carries out every CQL operator call, wiring together all injected services.</div>"]
+ICqlOperators["<b>ICqlOperators</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Contract for all CQL operator implementations; generated C# library classes call its methods at evaluation time.</div>"]
+TypeConverter["<b>TypeConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Runtime value-conversion engine that coerces values between CQL and .NET types; provided by FhirTypeConverter.Create.</div>"]
+BaseTypeResolver["<b>BaseTypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>TypeResolver implementation that maps CQL System types to their .NET equivalents.</div>"]
+CqlComparers["<b>CqlComparers</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Aggregate ICqlComparer: handles equality, comparison, and equivalence across all CQL value types including UCUM-normalized quantities.</div>"]
+IUnitConverter["<b>IUnitConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstraction for changing a CqlQuantity's units; used by CqlOperators for unit-conversion arithmetic.</div>"]
+UnitConverter["<b>UnitConverter</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>IUnitConverter with built-in calendar and length-unit conversions; falls back to UCUM for other units. Default singleton is UnitConverter.Default.</div>"]
+IDataSource["<b>IDataSource</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstraction for retrieving FHIR resources by .NET type and optional code/value-set filters.</div>"]
+IValueSetDictionary["<b>IValueSetDictionary</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstraction for resolving a CqlValueSet to an IValueSetFacade for code-membership checks at evaluation time.</div>"]
+DefaultUcumMetricService["<b>DefaultUcumMetricService</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Default IMetricService adapter: wraps FhirMetricService from Fhir.Metrics for full UCUM canonicalization and cross-unit arithmetic.</div>"]
+end
+
+subgraph AbstractionProject ["Cql.Abstractions"]
+direction TB
+TypeResolver["<b>TypeResolver</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Abstract base defining how ELM type specifiers map to .NET Types and how property access resolves on runtime values.</div>"]
+end
+
+subgraph FhirSDKProject ["Firely .NET SDK (external)"]
+direction TB
+ModelInspector["<b>ModelInspector</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(external) Hl7.Fhir.Introspection type that reflects over FHIR POCO classes to expose their type and property metadata.</div>"]
+end
+
+subgraph FhirMetricsProject ["Fhir.Metrics (external)"]
+direction TB
+IMetricService["<b>IMetricService</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(external) Interface for UCUM quantity arithmetic (canonicalization and unit conversion); injectable via FhirCqlContextOptions.MetricService.</div>"]
+FhirMetricService["<b>FhirMetricService</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(external) FhirMetricService from Fhir.Metrics 1.4.0: implements IMetricService using the full UCUM system-of-units for Add, Subtract, Divide, Convert, and Canonicalize operations.</div>"]
+end
+
+style FhirCqlContextOptions fill:#AFEEEE
+style CqlContext fill:#AFEEEE
+style CqlOperators fill:#AFEEEE
+style CqlComparers fill:#AFEEEE
+style BundleDataSource fill:#AFEEEE
+
+CqlOperators -->|implements| ICqlOperators
+UnitConverter -->|implements| IUnitConverter
+BaseTypeResolver -->|inherits| TypeResolver
+FhirTypeResolver -->|inherits| BaseTypeResolver
+DefaultUcumMetricService -->|implements| IMetricService
+FhirMetricService -->|implements| IMetricService
+QICoreRetrieveProfileFilter -->|implements| IRetrieveProfileFilter
+BundleDataSource -->|implements| IDataSource
+
+FhirCqlContext -.->|configured by| FhirCqlContextOptions
+FhirCqlContext -.->|creates| CqlContext
+FhirCqlContext -.->|creates| CqlOperators
+FhirCqlContext -.->|creates| CqlComparers
+FhirCqlContext -.->|creates| BundleDataSource
+
+FhirTypeConverter -.->|creates| TypeConverter
+ModelInspector -.->|injected| FhirTypeConverter
+ModelInspector -.->|injected| FhirTypeResolver
+
+TypeConverter -.->|injected| CqlOperators
+FhirTypeResolver -.->|injected| CqlOperators
+IDataSource -.->|injected| CqlOperators
+CqlComparers -.->|injected| CqlOperators
+IValueSetDictionary -.->|injected| CqlOperators
+IUnitConverter -.->|injected| CqlOperators
+FhirEnumComparer -.->|injected| CqlOperators
+IMetricService -.->|injected| CqlOperators
+
+CqlOperators -.->|injected| CqlContext
+IRetrieveProfileFilter -.->|injected| BundleDataSource
+FhirMetricService -.->|wrapped by| DefaultUcumMetricService

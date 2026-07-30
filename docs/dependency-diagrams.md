@@ -1,6 +1,7 @@
 # Toolkit Services Dependency Diagrams
-These diagrams represent the internal dependencies of the CQL SDK toolkit services, plus one
-structural diagram of the code-model IR (not a dependency graph — see its own section below).
+These diagrams represent the internal dependencies of the CQL SDK toolkit services and the runtime
+evaluation layer, plus one structural diagram of the code-model IR (not a dependency graph — see its
+own section below).
 
 Each diagram is authored as a Mermaid flowchart (grouped into `subgraph` boxes per project, with each
 type shown as a title + one-line description) and rendered to a `.svg` ahead of time (see
@@ -53,6 +54,24 @@ Services for translating CQL to ELM format.
 Mermaid source: [dependency-diagrams.cql-toolkit-services.mmd](diagrams/dependency-diagrams.cql-toolkit-services.mmd)
 
 ![CqlToolkitServices Dependency Diagram](diagrams/dependency-diagrams.cql-toolkit-services.svg)
+
+## RuntimeServices Dependency Diagram
+
+Services constructed and wired together by `FhirCqlContext` when building a `CqlContext` for one
+CQL evaluation run.
+
+**Remarks:**
+* Unlike the toolkit-service diagrams above (DI container service graphs), this shows the factory-based construction flow: `FhirCqlContext` is a static factory, not a DI-registered service
+* Cyan classes indicate per-evaluation instances (created fresh per `FhirCqlContext.ForBundle` / `WithDataSource` call)
+* All other classes are singleton defaults (static default instances reused across calls)
+* Classes are grouped by their respective projects
+* `FhirCqlContext` itself is a static class — it is shown only to illustrate construction flow and is not a node in any DI container
+* `ModelInspector` is an external type from the Firely .NET SDK (`Hl7.Fhir.Introspection`), not source declared in this repo
+* `IMetricService` / `FhirMetricService` are external types from the `Fhir.Metrics` NuGet package (version 1.4.0+); `DefaultUcumMetricService` is an internal adapter in `Cql.Runtime` that wraps `FhirMetricService`; a custom `IMetricService` can be injected via `FhirCqlContextOptions.MetricService`
+
+Mermaid source: [dependency-diagrams.runtime-services.mmd](diagrams/dependency-diagrams.runtime-services.mmd)
+
+![RuntimeServices Dependency Diagram](diagrams/dependency-diagrams.runtime-services.svg)
 
 ## CodeModel Expression Types
 
