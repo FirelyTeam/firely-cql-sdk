@@ -303,6 +303,26 @@ public class LibrarySetInvokerPoolTests
     }
 
     [TestMethod]
+    public void CreateLibrarySetInvoker_WhenLoadingFails_UnloadsTheAssemblyLoadContext()
+    {
+        // A failed load leaves no LibrarySetInvoker owning the context, and cooperative unloading does
+        // not begin until Unload() is called - so without unwinding, the context stays resident for the
+        // life of the process. Pooling makes retries after a failure more likely.
+        const string librarySetName = "corrupt-binary-unwind-test";
+        var toolkit = new InvocationToolkit()
+            .AddAssemblyBinaries([new AssemblyBinary([0x00, 0x01, 0x02, 0x03])]);
+
+        var act = () => toolkit.CreateLibrarySetInvoker(librarySetName);
+
+        act.Should().Throw<Exception>("a corrupt assembly cannot be loaded");
+        // Initiating an unload removes a context from AssemblyLoadContext.All, so one that is still
+        // listed here is one whose unload was never started.
+        AssemblyLoadContext.All.Should().NotContain(
+            context => context.Name == librarySetName,
+            "a failed load must initiate unloading of the context it created");
+    }
+
+    [TestMethod]
     public void GetOrCreate_AfterDispose_Throws()
     {
         var pool = new LibrarySetInvokerPool();

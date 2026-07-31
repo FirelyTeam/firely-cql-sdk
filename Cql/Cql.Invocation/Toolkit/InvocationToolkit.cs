@@ -127,24 +127,39 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
 
         var alc = new AssemblyLoadContext(librarySetName, true);
 
-        AssemblyBinaries
-            .TryForEach(t =>
-                {
-                    var (assembly, debugSymbols) = t;
-                    var asm = alc.LoadFromBytes(assembly!, debugSymbols);
-                    _services.Logger.LogInformation("Loaded assembly {assemblyName}", asm.FullName);
-                },
-                errorStrategy => errorStrategy
-                    .SetContinuation(BatchProcessExceptionContinuation)
-                    .AddLoggerExceptionHandler(
-                        _services.Logger,
-                        (assemblyBinary, logMessage) => logMessage("Unable to load an assembly from the binary containing {byteLength} byte(s).", assemblyBinary.AssemblyBytes!.Length)));
+        try
+        {
+            AssemblyBinaries
+                .TryForEach(t =>
+                    {
+                        var (assembly, debugSymbols) = t;
+                        var asm = alc.LoadFromBytes(assembly!, debugSymbols);
+                        _services.Logger.LogInformation("Loaded assembly {assemblyName}", asm.FullName);
+                    },
+                    errorStrategy => errorStrategy
+                        .SetContinuation(BatchProcessExceptionContinuation)
+                        .AddLoggerExceptionHandler(
+                            _services.Logger,
+                            (assemblyBinary, logMessage) => logMessage("Unable to load an assembly from the binary containing {byteLength} byte(s).", assemblyBinary.AssemblyBytes!.Length)));
 
-        return new LibrarySetInvoker(
-            alc,
-            LoggerFactory,
-            BatchProcessExceptionContinuation,
-            librarySetName,
-            isPoolOwned);
+            return new LibrarySetInvoker(
+                alc,
+                LoggerFactory,
+                BatchProcessExceptionContinuation,
+                librarySetName,
+                isPoolOwned);
+        }
+        catch
+        {
+            // No LibrarySetInvoker took ownership of the context, so nothing else will ever unload it.
+            // Unloading a collectible context is cooperative and does not even begin until Unload() is
+            // called, so without this a failed load leaves the context - and any assemblies that did
+            // load into it - resident for the lifetime of the process.
+            _services.Logger.LogDebug(
+                "Unloading the assembly load context for {name} after a failed load.",
+                librarySetName);
+            alc.Unload();
+            throw;
+        }
     }
 }
