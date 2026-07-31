@@ -114,10 +114,12 @@ namespace Hl7.Cql.Fhir
         /// for the same subject - can build the source once with this method, keep it, and hand it to
         /// <see cref="WithDataSource"/> for every evaluation. The index and its caches are then built once instead
         /// of once per evaluation.</para>
-        /// <para>The returned source holds no value sets of its own: <see cref="WithDataSource"/> binds the value
-        /// sets it is given to a lightweight view over the same index, so evaluations that must resolve value sets
-        /// through different (for instance request-scoped) terminology are free to share one source. Sharing is
-        /// safe: the index is read-only once built and supports any number of concurrent readers.</para>
+        /// <para>The returned source is bound to an empty value set dictionary, so retrieving from it directly
+        /// resolves every value set as empty. Pass it to <see cref="WithDataSource"/> together with value sets
+        /// instead: the context then gets a lightweight view over the same index that resolves value set membership
+        /// through those value sets, so evaluations that must resolve value sets through different (for instance
+        /// request-scoped) terminology are free to share one source. Sharing is safe: the index is read-only once
+        /// built and supports any number of concurrent readers.</para>
         /// </remarks>
         /// <param name="bundle">The bundle to index. It is assumed not to change for as long as the returned source is used.</param>
         /// <param name="options">Options to create the source with, of which <see cref="FhirCqlContextOptions.OverrideRetrieveProfileFilter"/> applies here.</param>
@@ -134,9 +136,12 @@ namespace Hl7.Cql.Fhir
         /// Factory method for creating a setup of the engine with the given <see cref="IDataSource"/>.
         /// </summary>
         /// <remarks>
-        /// A source obtained from <see cref="DataSourceForBundle"/> is not used directly: the context gets a
-        /// lightweight view over it that shares its index over the bundle but resolves value sets through
-        /// <paramref name="valueSets"/>, so the same source can serve evaluations with different value sets.
+        /// When <paramref name="source"/> is bundle-backed (such as one obtained from
+        /// <see cref="DataSourceForBundle"/>) and <paramref name="valueSets"/> is not <see langword="null"/>, the
+        /// source is not used directly: the context gets a lightweight view over it that shares its index over the
+        /// bundle but resolves value sets through <paramref name="valueSets"/>, so the same source can serve
+        /// evaluations with different value sets. Without <paramref name="valueSets"/>, the source is used as-is,
+        /// including the value sets it was constructed with.
         /// </remarks>
         public static CqlContext WithDataSource(
             IDataSource? source = null,

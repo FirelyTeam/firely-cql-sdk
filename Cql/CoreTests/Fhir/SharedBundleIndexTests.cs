@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable enable
+
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
@@ -55,13 +57,13 @@ namespace CoreTests.Fhir
         {
             private readonly HashSet<string> _members = [.. members];
 
-            public bool IsCodeInValueSet(string valueSetUri, CqlCode code) => IsCodeInValueSet(valueSetUri, code.code, code.system);
+            public bool IsCodeInValueSet(string valueSetUri, CqlCode code) => code.code is { } bareCode && IsCodeInValueSet(valueSetUri, bareCode, code.system);
 
             public bool IsCodeInValueSet(string valueSetUri, string code) => _members.Contains(code);
 
-            public bool IsCodeInValueSet(string valueSetUri, string code, string system) => _members.Contains(code);
+            public bool IsCodeInValueSet(string valueSetUri, string code, string? system) => _members.Contains(code);
 
-            public bool TryGetCodesInValueSet(string valueSetUri, out IEnumerable<CqlCode> codes)
+            public bool TryGetCodesInValueSet(string valueSetUri, out IEnumerable<CqlCode>? codes)
             {
                 codes = _members.Select(code => new CqlCode(code, NuSystem)).ToList();
                 return true;
@@ -93,7 +95,7 @@ namespace CoreTests.Fhir
         {
             var source = BuildDataSource();
 
-            Assert.ThrowsException<ArgumentNullException>(() => source.WithValueSets(null));
+            Assert.ThrowsException<ArgumentNullException>(() => source.WithValueSets(null!));
         }
 
         [TestMethod]
@@ -158,7 +160,7 @@ namespace CoreTests.Fhir
         [TestMethod]
         public void DataSourceForBundle_NullBundle_Throws()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => FhirCqlContext.DataSourceForBundle(null));
+            Assert.ThrowsException<ArgumentNullException>(() => FhirCqlContext.DataSourceForBundle(null!));
         }
 
         [TestMethod]
