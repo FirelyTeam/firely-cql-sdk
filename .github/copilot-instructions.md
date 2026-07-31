@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.12.0
+**Version:** 3.13.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,9 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.13.0
+  - Broadened 1.8.1 (acceptance-criteria tracking): criteria are now ticked off automatically at every point where a checklist's truth may have changed — after pushing work, after a follow-up commit addressing review comments, and when reviewing a PR (including someone else's) — not only when first pushing. The `sync-acceptance-criteria` skill gains a "When to run this" section covering the three triggers plus how to resolve the linked issue when a PR uses `Refs` rather than `Fixes`. Mirrored into `CLAUDE.md`.
+  - Expanded the `resolve-pr-review-comments` skill (referenced from 1.9.1): step 4 now states what a reply must contain before a thread is resolved (commit SHA, what changed, the test that pins it, how it was verified), asks for one commit per comment, and adds guidance for a comment that turns out to be wrong — give the concrete evidence in place of a SHA rather than resolving with a bare "this is incorrect" ([#1463](https://github.com/FirelyTeam/firely-cql-sdk/issues/1463)).
 - 3.12.0
   - Completed Phase 2 of the fragment-file convention ([#1445](https://github.com/FirelyTeam/firely-cql-sdk/issues/1445)): replaced `docs/releases/vnext-release-notes.md` with a static pointer doc; dropped the "Transitional exception" sentence from §4.5.1 and the dual-source description from §4.5.2; updated the `cut-release-notes` skill to remove the transitional callout and the `vnext-release-notes.md` sweep step; fragment files under `docs/releases/vnext/` are now the sole pending-content source. Mirrored into `CLAUDE.md`.
 - 3.11.0
