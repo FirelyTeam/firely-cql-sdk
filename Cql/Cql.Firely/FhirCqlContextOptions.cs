@@ -8,6 +8,7 @@
 using Fhir.Metrics;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Conversion;
+using Hl7.Cql.Runtime;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 
@@ -79,5 +80,20 @@ namespace Hl7.Cql.Fhir
         /// template id to disable profile-based retrieve filtering.
         /// </summary>
         public IRetrieveProfileFilter? OverrideRetrieveProfileFilter { get; init; }
+
+        /// <summary>
+        /// When not <see langword="null"/>, the created context memoizes definition/expression results in a cache
+        /// created from this profile. When <see langword="null"/>, the context is created without a cache and every
+        /// reference to a definition re-evaluates it.
+        /// </summary>
+        /// <remarks>
+        /// A cached context returns the results computed against the data the context was created with, so only
+        /// enable this for a context whose data does not change while it is being evaluated. Use
+        /// <see cref="EvaluationCacheProfile.Concurrent"/> when several threads evaluate definitions over one
+        /// context; that also requires the thread-safety contract documented on <see cref="CqlContext"/>:
+        /// definitions and parameters fully populated before the fan-out and not mutated during it, and a data
+        /// source and value set implementation that tolerate concurrent reads.
+        /// </remarks>
+        public EvaluationCacheProfile? EvaluationCache { get; init; }
     }
 }

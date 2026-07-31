@@ -62,6 +62,20 @@ Parallel.For(0, 10, i =>
 });
 ```
 
+### Sharing One Context Across Threads
+
+One `CqlContext` may also be shared by threads that evaluate definitions concurrently. Size its cache for the expected degree of parallelism, so that concurrent cache misses are not serialized on a single write lock (reads are lock-free at any level):
+
+```csharp
+context.UseNewCache(CqlContext.CacheInitialCapacity, Environment.ProcessorCount);
+```
+
+Sharing a context requires the following, which is documented in full on `CqlContext`:
+
+- `Definitions` and `Parameters` are fully populated before the evaluation fans out, and are not mutated while it runs — both are ordinary, non-concurrent collections
+- The data source and value set implementations tolerate concurrent reads, and the data behind them does not change during the evaluation
+- Callers accept that two threads missing on the same definition may both evaluate it; the value losing the race is discarded, which is harmless because CQL expression bodies are pure
+
 ## Usage
 
 This package is used by the CQL compiler and other runtime components to execute CQL logic. It provides the foundational runtime services needed for CQL evaluation.

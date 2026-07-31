@@ -235,5 +235,255 @@ namespace CoreTests
 
             Assert.IsInstanceOfType(converted, typeof(CqlInterval<CqlDateTime>));
         }
+
+        [TestMethod]
+        public void ConvertPeriodToCqlInterval_WrappedDateHint_ReturnsIntervalOfCqlDate()
+        {
+            var period = new Period(new FhirDateTime(2024, 1, 1), new FhirDateTime(2024, 12, 31));
+
+            var converted = FhirTypeConverter.ConvertPeriodToCqlInterval(period, "Interval<Date>");
+
+            Assert.IsInstanceOfType(converted, typeof(CqlInterval<CqlDate>));
+        }
+
+        [TestMethod]
+        public void Convert_Range_CqlLongInterval()
+        {
+            // 5000000000 does not fit an Integer, which is what makes the Long reading of a Range necessary.
+            var range = new Hl7.Fhir.Model.Range
+            {
+                Low = new Quantity { Value = 1, Unit = "1" },
+                High = new Quantity { Value = 5000000000m, Unit = "1" }
+            };
+
+            var converted = FhirTypeConverter.Convert<CqlInterval<long?>>(range);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual(1L, converted.low);
+            Assert.AreEqual(5000000000L, converted.high);
+        }
+
+        [TestMethod]
+        public void Convert_Range_CqlLongInterval_BoundsAreClosed()
+        {
+            var range = new Hl7.Fhir.Model.Range
+            {
+                Low = new Quantity { Value = 1, Unit = "1" },
+                High = new Quantity { Value = 10, Unit = "1" }
+            };
+
+            var converted = FhirTypeConverter.Convert<CqlInterval<long?>>(range);
+
+            Assert.IsNotNull(converted);
+            Assert.IsTrue(converted.lowClosed);
+            Assert.IsTrue(converted.highClosed);
+        }
+
+        [TestMethod]
+        public void Convert_Range_CqlLongInterval_OmitsBoundForAbsentLowBound()
+        {
+            var range = new Hl7.Fhir.Model.Range { High = new Quantity { Value = 10, Unit = "1" } };
+
+            var converted = FhirTypeConverter.Convert<CqlInterval<long?>>(range);
+
+            Assert.IsNotNull(converted);
+            Assert.IsNull(converted.low);
+            Assert.AreEqual(10L, converted.high);
+        }
+
+        [TestMethod]
+        public void Convert_Range_CqlLongInterval_OmitsBoundForAbsentHighBound()
+        {
+            var range = new Hl7.Fhir.Model.Range { Low = new Quantity { Value = 1, Unit = "1" } };
+
+            var converted = FhirTypeConverter.Convert<CqlInterval<long?>>(range);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual(1L, converted.low);
+            Assert.IsNull(converted.high);
+        }
+
+        [TestMethod]
+        public void Convert_Range_CqlLongInterval_OmitsBoundForBoundWithoutValue()
+        {
+            var range = new Hl7.Fhir.Model.Range { Low = new Quantity { Unit = "1" }, High = new Quantity { Unit = "1" } };
+
+            var converted = FhirTypeConverter.Convert<CqlInterval<long?>>(range);
+
+            Assert.IsNotNull(converted);
+            Assert.IsNull(converted.low);
+            Assert.IsNull(converted.high);
+        }
+
+        [TestMethod]
+        public void Convert_Range_CqlLongInterval_TruncatesFractionalBoundsTowardsZero()
+        {
+            // Same semantics as the Integer reading of a Range: the C# decimal->integral conversion
+            // rounds towards zero.
+            var range = new Hl7.Fhir.Model.Range
+            {
+                Low = new Quantity { Value = -2.7m, Unit = "1" },
+                High = new Quantity { Value = 10.9m, Unit = "1" }
+            };
+
+            var convertedLong = FhirTypeConverter.Convert<CqlInterval<long?>>(range);
+            var convertedInt = FhirTypeConverter.Convert<CqlInterval<int?>>(range);
+
+            Assert.IsNotNull(convertedLong);
+            Assert.AreEqual(-2L, convertedLong.low);
+            Assert.AreEqual(10L, convertedLong.high);
+
+            Assert.IsNotNull(convertedInt);
+            Assert.AreEqual(-2, convertedInt.low);
+            Assert.AreEqual(10, convertedInt.high);
+        }
+
+        [TestMethod]
+        public void Convert_Range_CqlLongInterval_ThrowsForBoundOutsideLongRange()
+        {
+            // Also the behaviour of the Integer reading for a value outside its range.
+            var range = new Hl7.Fhir.Model.Range { Low = new Quantity { Value = 20000000000000000000m, Unit = "1" } };
+
+            Assert.ThrowsExactly<OverflowException>(() => FhirTypeConverter.Convert<CqlInterval<long?>>(range));
+        }
+
+        [TestMethod]
+        public void Convert_Range_CqlLongInterval_ThrowsForBoundBelowLongRange()
+        {
+            var range = new Hl7.Fhir.Model.Range { Low = new Quantity { Value = -20000000000000000000m, Unit = "1" } };
+
+            Assert.ThrowsExactly<OverflowException>(() => FhirTypeConverter.Convert<CqlInterval<long?>>(range));
+        }
+
+        [TestMethod]
+        public void RoundTrip_CqlLongInterval_Range_PreservesBounds()
+        {
+            var interval = new CqlInterval<long?>(1L, 5000000000L, lowClosed: true, highClosed: true);
+
+            var range = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(interval);
+            var roundTripped = FhirTypeConverter.Convert<CqlInterval<long?>>(range);
+
+            Assert.IsNotNull(roundTripped);
+            Assert.AreEqual(interval.low, roundTripped.low);
+            Assert.AreEqual(interval.high, roundTripped.high);
+            Assert.IsTrue(roundTripped.lowClosed);
+            Assert.IsTrue(roundTripped.highClosed);
+        }
+
+        [TestMethod]
+        public void RoundTrip_CqlLongInterval_Range_ReadsBoundsCarryingTheQuantityPrecisionExtension()
+        {
+            var interval = new CqlInterval<long?>(1L, 10L, lowClosed: true, highClosed: true);
+
+            var range = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(interval);
+
+            Assert.IsNotNull(range);
+            Assert.IsNotNull(range.Low.GetExtension(Hl7.Cql.Fhir.FhirTypeConverter.QuantityPrecisionExtensionUrl));
+            Assert.IsNotNull(range.High.GetExtension(Hl7.Cql.Fhir.FhirTypeConverter.QuantityPrecisionExtensionUrl));
+
+            var roundTripped = FhirTypeConverter.Convert<CqlInterval<long?>>(range);
+
+            Assert.IsNotNull(roundTripped);
+            Assert.AreEqual(1L, roundTripped.low);
+            Assert.AreEqual(10L, roundTripped.high);
+        }
+
+        [TestMethod]
+        public void RoundTrip_CqlLongInterval_Range_ExpressesOpenBoundsAsTheirClosedEquivalent()
+        {
+            var interval = new CqlInterval<long?>(1L, 10L, lowClosed: false, highClosed: false);
+
+            var range = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(interval);
+            var roundTripped = FhirTypeConverter.Convert<CqlInterval<long?>>(range);
+
+            Assert.IsNotNull(roundTripped);
+            Assert.AreEqual(2L, roundTripped.low);
+            Assert.AreEqual(9L, roundTripped.high);
+            Assert.IsTrue(roundTripped.lowClosed);
+            Assert.IsTrue(roundTripped.highClosed);
+        }
+
+        [TestMethod]
+        public void RoundTrip_CqlLongInterval_Range_OmitsAbsentBound()
+        {
+            var interval = new CqlInterval<long?>(null, 5000000000L, lowClosed: true, highClosed: true);
+
+            var range = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(interval);
+            var roundTripped = FhirTypeConverter.Convert<CqlInterval<long?>>(range);
+
+            Assert.IsNotNull(roundTripped);
+            Assert.IsNull(roundTripped.low);
+            Assert.AreEqual(5000000000L, roundTripped.high);
+        }
+
+        [TestMethod]
+        public void ConvertRangeToCqlInterval_IntegerHint_ReturnsIntervalOfInteger()
+        {
+            var converted = FhirTypeConverter.ConvertRangeToCqlInterval(UnitlessRange(), "Integer");
+
+            Assert.IsInstanceOfType(converted, typeof(CqlInterval<int?>));
+        }
+
+        [TestMethod]
+        public void ConvertRangeToCqlInterval_DecimalHint_ReturnsIntervalOfDecimal()
+        {
+            var converted = FhirTypeConverter.ConvertRangeToCqlInterval(UnitlessRange(), "Decimal");
+
+            Assert.IsInstanceOfType(converted, typeof(CqlInterval<decimal?>));
+        }
+
+        [TestMethod]
+        public void ConvertRangeToCqlInterval_LongHint_ReturnsIntervalOfLong()
+        {
+            var converted = FhirTypeConverter.ConvertRangeToCqlInterval(UnitlessRange(), "Long");
+
+            Assert.IsInstanceOfType(converted, typeof(CqlInterval<long?>));
+        }
+
+        [TestMethod]
+        public void ConvertRangeToCqlInterval_WrappedLongHint_ReturnsIntervalOfLong()
+        {
+            var converted = FhirTypeConverter.ConvertRangeToCqlInterval(UnitlessRange(), "Interval<Long>");
+
+            Assert.IsInstanceOfType(converted, typeof(CqlInterval<long?>));
+        }
+
+        [TestMethod]
+        public void ConvertRangeToCqlInterval_NoHint_ReturnsIntervalOfCqlQuantity()
+        {
+            var converted = FhirTypeConverter.ConvertRangeToCqlInterval(UnitlessRange(), null);
+
+            Assert.IsInstanceOfType(converted, typeof(CqlInterval<CqlQuantity>));
+        }
+
+        [TestMethod]
+        public void ConvertRangeToCqlInterval_EmptyHint_ReturnsIntervalOfCqlQuantity()
+        {
+            var converted = FhirTypeConverter.ConvertRangeToCqlInterval(UnitlessRange(), "");
+
+            Assert.IsInstanceOfType(converted, typeof(CqlInterval<CqlQuantity>));
+        }
+
+        [TestMethod]
+        public void ConvertRangeToCqlInterval_UnrecognizedHint_ReturnsIntervalOfCqlQuantity()
+        {
+            var converted = FhirTypeConverter.ConvertRangeToCqlInterval(UnitlessRange(), "Quantity");
+
+            Assert.IsInstanceOfType(converted, typeof(CqlInterval<CqlQuantity>));
+        }
+
+        [TestMethod]
+        public void ConvertRangeToCqlInterval_NullRange_ReturnsNull()
+        {
+            Assert.IsNull(FhirTypeConverter.ConvertRangeToCqlInterval(null, "Long"));
+            Assert.IsNull(FhirTypeConverter.ConvertRangeToCqlInterval(null, null));
+        }
+
+        private static Hl7.Fhir.Model.Range UnitlessRange() =>
+            new()
+            {
+                Low = new Quantity { Value = 1, Unit = "1" },
+                High = new Quantity { Value = 10, Unit = "1" }
+            };
     }
 }
