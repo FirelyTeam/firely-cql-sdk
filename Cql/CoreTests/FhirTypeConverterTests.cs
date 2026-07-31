@@ -592,6 +592,176 @@ namespace CoreTests
             Assert.AreEqual(1, isoTime.Millisecond);
         }
 
+        private const string TimePrecisionExtensionUrl = Hl7.Cql.Fhir.FhirTypeConverter.TimePrecisionExtensionUrl;
+
+        private static string? GetTimePrecisionCode(Element element) =>
+            (element.GetExtension(TimePrecisionExtensionUrl)?.Value as Code)?.Value;
+
+        [TestMethod]
+        public void ConvertCqlTime_HourPrecision_PadsAndAddsTimePrecisionExtension()
+        {
+            var time = new CqlTime(10, null, null, null, null, null);
+            var converted = FhirTypeConverter.Convert<Time>(time);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("10:00:00", converted.Value);
+            Assert.AreEqual("h", GetTimePrecisionCode(converted));
+        }
+
+        [TestMethod]
+        public void ConvertCqlTime_MinutePrecision_PadsAndAddsTimePrecisionExtension()
+        {
+            var time = new CqlTime(10, 30, null, null, null, null);
+            var converted = FhirTypeConverter.Convert<Time>(time);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("10:30:00", converted.Value);
+            Assert.AreEqual("min", GetTimePrecisionCode(converted));
+        }
+
+        [TestMethod]
+        public void ConvertCqlTime_SecondPrecision_NoTimePrecisionExtension()
+        {
+            var time = new CqlTime(10, 30, 15, null, null, null);
+            var converted = FhirTypeConverter.Convert<Time>(time);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("10:30:15", converted.Value);
+            Assert.IsNull(GetTimePrecisionCode(converted));
+        }
+
+        [TestMethod]
+        public void ConvertCqlDateTime_HourPrecision_PadsAndAddsTimePrecisionExtension()
+        {
+            var dateTime = new CqlDateTime(2014, 2, 1, 10, null, null, null, null, null);
+            var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("2014-02-01T10:00:00", converted.Value);
+            Assert.AreEqual("h", GetTimePrecisionCode(converted));
+        }
+
+        [TestMethod]
+        public void ConvertCqlDateTime_MinutePrecisionWithOffset_PadsAndAddsTimePrecisionExtension()
+        {
+            var dateTime = new CqlDateTime(2014, 2, 1, 10, 30, null, null, 1, 30);
+            var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("2014-02-01T10:30:00+01:30", converted.Value);
+            Assert.AreEqual("min", GetTimePrecisionCode(converted));
+        }
+
+        [TestMethod]
+        public void ConvertCqlDateTime_HourPrecisionUtc_PadsAndAddsTimePrecisionExtension()
+        {
+            var dateTime = new CqlDateTime(2014, 2, 1, 10, null, null, null, 0, 0);
+            var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("2014-02-01T10:00:00Z", converted.Value);
+            Assert.AreEqual("h", GetTimePrecisionCode(converted));
+        }
+
+        [TestMethod]
+        public void ConvertCqlDateTime_DayPrecision_UnchangedWithoutTimePrecisionExtension()
+        {
+            var dateTime = new CqlDateTime(2014, 2, 1, null, null, null, null, null, null);
+            var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("2014-02-01", converted.Value);
+            Assert.IsNull(GetTimePrecisionCode(converted));
+        }
+
+        [TestMethod]
+        public void ConvertFhirTime_TimePrecisionExtension_RestoresPartialPrecision()
+        {
+            var fhirTime = new Time("10:00:00");
+            fhirTime.AddExtension(TimePrecisionExtensionUrl, new Code("h"));
+            var converted = FhirTypeConverter.Convert<CqlTime>(fhirTime);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual(DateTimePrecision.Hour, converted.Precision);
+            Assert.AreEqual(10, converted.Value.Hour);
+            Assert.IsNull(converted.Value.Minute);
+
+            fhirTime = new Time("10:30:00");
+            fhirTime.AddExtension(TimePrecisionExtensionUrl, new Code("min"));
+            converted = FhirTypeConverter.Convert<CqlTime>(fhirTime);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual(DateTimePrecision.Minute, converted.Precision);
+            Assert.AreEqual(30, converted.Value.Minute);
+            Assert.IsNull(converted.Value.Second);
+        }
+
+        [TestMethod]
+        public void ConvertFhirDateTime_TimePrecisionExtension_RestoresPartialPrecision()
+        {
+            var fhirDateTime = new FhirDateTime("2014-02-01T10:00:00Z");
+            fhirDateTime.AddExtension(TimePrecisionExtensionUrl, new Code("h"));
+            var converted = FhirTypeConverter.Convert<CqlDateTime>(fhirDateTime);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual(DateTimePrecision.Hour, converted.Precision);
+            Assert.AreEqual(10, converted.Value.Hour);
+            Assert.IsNull(converted.Value.Minute);
+            Assert.AreEqual(0, converted.Value.OffsetHour);
+        }
+
+        [TestMethod]
+        public void ConvertFhirDateTime_TimePrecisionExtension_DoesNotPolluteDateTimeCache()
+        {
+            var converter = Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector, cacheSize: 128);
+
+            var adorned = new FhirDateTime("2014-02-01T10:00:00Z");
+            adorned.AddExtension(TimePrecisionExtensionUrl, new Code("h"));
+            var partial = converter.Convert<CqlDateTime>(adorned);
+            Assert.AreEqual(DateTimePrecision.Hour, partial!.Precision);
+
+            // The same lexical value without the extension must not be served from a cache entry
+            // keyed only by the string, and vice versa.
+            var unadorned = new FhirDateTime("2014-02-01T10:00:00Z");
+            var full = converter.Convert<CqlDateTime>(unadorned);
+            Assert.AreEqual(DateTimePrecision.Second, full!.Precision);
+
+            partial = converter.Convert<CqlDateTime>(adorned);
+            Assert.AreEqual(DateTimePrecision.Hour, partial!.Precision);
+        }
+
+        [TestMethod]
+        public void ConvertCqlDateTimeInterval_PartialPrecisionBounds_PadsPeriodWithTimePrecisionExtension()
+        {
+            var interval = new CqlInterval<CqlDateTime>(
+                new CqlDateTime(2014, 2, 1, 10, null, null, null, null, null),
+                new CqlDateTime(2014, 2, 1, 12, 30, null, null, null, null),
+                lowClosed: true, highClosed: true);
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("2014-02-01T10:00:00", converted.Start);
+            Assert.AreEqual("h", GetTimePrecisionCode(converted.StartElement));
+            Assert.AreEqual("2014-02-01T12:30:00", converted.End);
+            Assert.AreEqual("min", GetTimePrecisionCode(converted.EndElement));
+        }
+
+        [TestMethod]
+        public void ConvertCqlTimeInterval_PartialPrecisionBounds_PadsPeriodWithTimePrecisionExtension()
+        {
+            var interval = new CqlInterval<CqlTime>(
+                new CqlTime(10, null, null, null, null, null),
+                new CqlTime(12, 30, null, null, null, null),
+                lowClosed: true, highClosed: true);
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("0001-01-01T10:00:00", converted.Start);
+            Assert.AreEqual("h", GetTimePrecisionCode(converted.StartElement));
+            Assert.AreEqual("0001-01-01T12:30:00", converted.End);
+            Assert.AreEqual("min", GetTimePrecisionCode(converted.EndElement));
+        }
+
 
         [TestMethod]
         public void ConvertCqlQuantity_Quantity()

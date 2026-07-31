@@ -81,14 +81,18 @@ namespace CoreTests
         [TestMethod]
         public void ConvertCqlIntervalOfTime_Period_PreservesPrecisionAndAbsentOffset()
         {
-            // A time with minute precision and no timezone offset keeps both characteristics.
+            // A time with minute precision and no timezone offset stays offset-free; the seconds are
+            // zero-padded to produce a valid FHIR dateTime, with the original precision preserved in
+            // the time-precision extension.
             var low = new CqlTime(10, 30, null, null, null, null);
             var interval = new CqlInterval<CqlTime>(low, null, lowClosed: true, highClosed: true);
 
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T10:30", converted.Start);
+            Assert.AreEqual("0001-01-01T10:30:00", converted.Start);
+            var precisionExtension = converted.StartElement.GetExtension(Hl7.Cql.Fhir.FhirTypeConverter.TimePrecisionExtensionUrl);
+            Assert.AreEqual("min", (precisionExtension?.Value as Code)?.Value);
         }
 
         [TestMethod]

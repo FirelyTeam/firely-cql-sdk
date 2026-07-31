@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Conversion;
+using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Operators;
 using Hl7.Fhir.Introspection;
@@ -148,7 +149,7 @@ namespace Hl7.Cql.Fhir
             add((M.Date f) => f.TryToSystemDate(out var date) ? new CqlDate(date!.Years!.Value, date.Months, date.Days) : null);
             add((M.Date f) => f.TryToSystemDate(out var date) ? new CqlDateTime(date!.Years!.Value, date.Months, date.Days, 0, 0, 0, 0, 0, 0) : null);
             add((M.Date f) => f.ToString());
-            add((M.Time f) => f.TryToSystemTime(out var time) ? new CqlTime(time!.Hours!.Value, time.Minutes, time.Seconds, time.Millis, null, null) : null);
+            add((M.Time f) => FhirTimeToCqlTime(f));
             add((M.Time f) => f.ToString());
             add((M.FhirDateTime f) => FhirDateTimeToCqlDateTimeViaCaching(f));
             add((M.FhirDateTime f) => f.ToString());
@@ -215,20 +216,18 @@ namespace Hl7.Cql.Fhir
                 if (f.Value is null)
                     return null;
 
+                // A time-precision extension changes the resulting value, so such values cannot
+                // share the string-keyed cache with unadorned ones.
+                if (GetDeclaredTimePrecision(f) is { } declaredPrecision)
+                    return FhirDateTimeToCqlDateTime(f, declaredPrecision);
+
                 if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
                     return datetime;
 
-                if (!f.TryToSystemDateTime(out var dt))
-                    return null;
-
-                var cqlDateTime = new CqlDateTime(
-                    dt!.Years!.Value, dt.Months,
-                    dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
-                    dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
-
-                dateTimes?.Insert(f.Value, cqlDateTime);
+                var cqlDateTime = FhirDateTimeToCqlDateTime(f, declaredPrecision: null);
+                if (cqlDateTime is not null)
+                    dateTimes?.Insert(f.Value, cqlDateTime);
                 return cqlDateTime;
-
             }
         }
 
@@ -282,9 +281,9 @@ namespace Hl7.Cql.Fhir
         internal static TypeConverter ConvertCqlPrimitivesToFhir(this TypeConverter converter)
         {
             converter.AddConversion((CqlDate f) => new M.Date(f.ToString()));
-            converter.AddConversion((CqlDateTime f) => new M.FhirDateTime(f.ToString()));
+            converter.AddConversion((CqlDateTime f) => CqlDateTimeToFhirDateTime(f));
             converter.AddConversion((CqlDate f) => new M.FhirDateTime(f.ToString()));
-            converter.AddConversion((CqlTime f) => new M.Time(f.ToString()));
+            converter.AddConversion((CqlTime f) => CqlTimeToFhirTime(f));
             converter.AddConversion((CqlQuantity f) => f.value is not null ? new M.Quantity(f.value.Value, f.unit ?? "1", Hl7.Fhir.ElementModel.Types.Quantity.UCUM) : null);
             converter.AddConversion((CqlInterval<CqlQuantity>? interval) =>
             {
@@ -323,12 +322,12 @@ namespace Hl7.Cql.Fhir
                     var period = new M.Period();
                     if (interval.low is { } low)
                     {
-                        period.Start = low.ToString();
+                        period.StartElement = CqlDateTimeToFhirDateTime(low);
                     }
 
                     if (interval.high is { } high)
                     {
-                        period.End = high.ToString();
+                        period.EndElement = CqlDateTimeToFhirDateTime(high);
                     }
                     return period;
                 }
@@ -387,6 +386,106 @@ namespace Hl7.Cql.Fhir
             return converter;
         }
 
+        /// <summary>
+        /// The extension conveying the actual precision of a time or dateTime value whose trailing time
+        /// components were zero-padded to satisfy FHIR's lexical rules, used by the CQL IG's FHIR type
+        /// mapping for partial-precision System.Time and System.DateTime values. Its value is a UCUM
+        /// time-duration code ("h" for hour precision, "min" for minute precision).
+        /// </summary>
+        internal const string TimePrecisionExtensionUrl = "http://hl7.org/fhir/StructureDefinition/time-precision";
+
+        // FHIR time requires all of hh:mm:ss, and FHIR dateTime requires minutes and seconds once hours
+        // are present, but CQL permits hour- and minute-precision values. Values at second precision or
+        // finer round-trip through their ISO 8601 string unchanged; coarser values get their missing
+        // components zero-padded, with the original precision recorded in the time-precision extension.
+        private static M.Time CqlTimeToFhirTime(CqlTime time)
+        {
+            var t = time.Value;
+            if (t.Precision >= DateTimePrecision.Second)
+                return new M.Time(time.ToString());
+
+            var fhirTime = new M.Time(FormatPaddedTime(t.Hour, t.Minute, t.OffsetHour, t.OffsetMinute));
+            AddTimePrecisionExtension(fhirTime, t.Precision);
+            return fhirTime;
+        }
+
+        private static M.FhirDateTime CqlDateTimeToFhirDateTime(CqlDateTime dateTime)
+        {
+            var dt = dateTime.Value;
+            if (dt.Precision is not (DateTimePrecision.Hour or DateTimePrecision.Minute))
+                return new M.FhirDateTime(dateTime.ToString());
+
+            var padded = FormattableString.Invariant($"{dt.Year:D4}-{dt.Month!.Value:D2}-{dt.Day!.Value:D2}T")
+                + FormatPaddedTime(dt.Hour!.Value, dt.Minute, dt.OffsetHour, dt.OffsetMinute);
+            var fhirDateTime = new M.FhirDateTime(padded);
+            AddTimePrecisionExtension(fhirDateTime, dt.Precision);
+            return fhirDateTime;
+        }
+
+        private static string FormatPaddedTime(int hour, int? minute, int? offsetHour, int? offsetMinute)
+        {
+            var offset = (offsetHour, offsetMinute ?? 0) switch
+            {
+                (null, _) => "",
+                (0, 0) => "Z",
+                ({ } oh, { } om) => FormattableString.Invariant($"{(oh < 0 || om < 0 ? '-' : '+')}{Math.Abs(oh):D2}:{Math.Abs(om):D2}")
+            };
+            return FormattableString.Invariant($"{hour:D2}:{minute ?? 0:D2}:00{offset}");
+        }
+
+        private static void AddTimePrecisionExtension(M.PrimitiveType element, DateTimePrecision precision) =>
+            element.Extension.Add(new M.Extension(TimePrecisionExtensionUrl,
+                new M.Code(precision == DateTimePrecision.Hour ? "h" : "min")));
+
+        /// <summary>
+        /// Reads the precision declared by a <see cref="TimePrecisionExtensionUrl"/> extension, or
+        /// <see langword="null"/> when the extension is absent or carries a code that does not describe
+        /// a partial time (coarser precisions are natively representable and never need the extension).
+        /// </summary>
+        private static DateTimePrecision? GetDeclaredTimePrecision(M.PrimitiveType element) =>
+            element.GetExtensionValue<M.Code>(TimePrecisionExtensionUrl)?.Value switch
+            {
+                "h" => DateTimePrecision.Hour,
+                "min" => DateTimePrecision.Minute,
+                "s" => DateTimePrecision.Second,
+                _ => null
+            };
+
+        // The inverse of CqlTimeToFhirTime: a time-precision extension marks zero-padded components,
+        // so drop them to restore the value's original partial precision.
+        private static CqlTime? FhirTimeToCqlTime(M.Time f)
+        {
+            if (!f.TryToSystemTime(out var time))
+                return null;
+
+            var hours = time!.Hours!.Value;
+            return GetDeclaredTimePrecision(f) switch
+            {
+                DateTimePrecision.Hour => new CqlTime(hours, null, null, null, null, null),
+                DateTimePrecision.Minute => new CqlTime(hours, time.Minutes, null, null, null, null),
+                DateTimePrecision.Second => new CqlTime(hours, time.Minutes, time.Seconds, null, null, null),
+                _ => new CqlTime(hours, time.Minutes, time.Seconds, time.Millis, null, null)
+            };
+        }
+
+        // The inverse of CqlDateTimeToFhirDateTime; declaredPrecision comes from the time-precision
+        // extension and truncates the zero-padded components it marks.
+        private static CqlDateTime? FhirDateTimeToCqlDateTime(M.FhirDateTime f, DateTimePrecision? declaredPrecision)
+        {
+            if (!f.TryToSystemDateTime(out var dt))
+                return null;
+
+            var offsetHours = dt!.HasOffset ? dt.Offset!.Value.Hours : (int?)null;
+            var offsetMinutes = dt.HasOffset ? dt.Offset!.Value.Minutes : (int?)null;
+            return declaredPrecision switch
+            {
+                DateTimePrecision.Hour => new CqlDateTime(dt.Years!.Value, dt.Months, dt.Days, dt.Hours, null, null, null, offsetHours, offsetMinutes),
+                DateTimePrecision.Minute => new CqlDateTime(dt.Years!.Value, dt.Months, dt.Days, dt.Hours, dt.Minutes, null, null, offsetHours, offsetMinutes),
+                DateTimePrecision.Second => new CqlDateTime(dt.Years!.Value, dt.Months, dt.Days, dt.Hours, dt.Minutes, dt.Seconds, null, offsetHours, offsetMinutes),
+                _ => new CqlDateTime(dt.Years!.Value, dt.Months, dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis, offsetHours, offsetMinutes)
+            };
+        }
+
         // CQL Time values have no date component; anchor them on the minimum FHIR date
         // (0001-01-01) so they can be represented within a Period.
         // The value is composed from the time's ISO 8601 string rather than built from a
@@ -395,13 +494,21 @@ namespace Hl7.Cql.Fhir
         // no DateTimeOffset representation (the UTC instant it denotes precedes
         // DateTime.MinValue, e.g. 0001-01-01T00:30:00+02:00), even though it is a perfectly
         // valid FHIR dateTime.
+        // Hour- and minute-precision times are zero-padded and marked with the time-precision
+        // extension, like in CqlTimeToFhirTime.
         private static M.FhirDateTime CqlTimeToFhirDateTime(CqlTime time)
         {
-            var timePart = time.Value.ToString();
+            var t = time.Value;
+            var timePart = t.Precision >= DateTimePrecision.Second
+                ? t.ToString()
+                : FormatPaddedTime(t.Hour, t.Minute, t.OffsetHour, t.OffsetMinute);
             // ISO 8601 renders a zero offset as 'Z'; rewrite it to the equivalent explicit form.
             if (timePart.EndsWith('Z'))
                 timePart = timePart[..^1] + "+00:00";
-            return new M.FhirDateTime("0001-01-01T" + timePart);
+            var fhirDateTime = new M.FhirDateTime("0001-01-01T" + timePart);
+            if (t.Precision < DateTimePrecision.Second)
+                AddTimePrecisionExtension(fhirDateTime, t.Precision);
+            return fhirDateTime;
         }
 
         /// <summary>
