@@ -14,7 +14,7 @@ description: Address code review comments (e.g. from Copilot's automated PR revi
    - the **test** that pins it, if one was added or changed,
    - and how the fix was **verified**, when that's not obvious (e.g. "confirmed the test fails with the fix reverted").
 
-   `gh api repos/<owner>/<repo>/pulls/<n>/comments/<comment-id>/replies -f body="Fixed in <sha> — ..."`
+   `gh api repos/<owner>/<repo>/pulls/<n>/comments/<comment-id>/replies -X POST -f body="Fixed in <sha> — ..."`
 
    **If a comment was refuted rather than fixed** (per step 2), there is no SHA to cite, so give the concrete evidence in its place: the build result, an existing in-repo precedent, or the passing test that disproves the claim. Say plainly that you're leaving the code as-is and why. Never resolve a refuted thread with a bare "this is incorrect".
 5. **Mark the conversation resolved** — this does not happen automatically just by pushing a fix or replying. Look up the review thread's node ID (not the comment ID) via GraphQL, since only GraphQL can resolve threads:
