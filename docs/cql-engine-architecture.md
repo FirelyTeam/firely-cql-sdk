@@ -115,6 +115,25 @@ public class MyDataSource : IDataSource
 var ctx = FhirCqlContext.ForBundle(bundle, dataSource: new MyDataSource());
 ```
 
+### How do I evaluate the same bundle many times?
+
+`FhirCqlContext.ForBundle(...)` indexes the bundle's entries anew for every context it creates. A host that evaluates
+the same, unchanging bundle repeatedly - for instance once per measure group for the same subject - can build the data
+source once with `FhirCqlContext.DataSourceForBundle(...)` and pass it to `FhirCqlContext.WithDataSource(...)` per
+evaluation:
+
+```csharp
+// once per bundle
+var dataSource = FhirCqlContext.DataSourceForBundle(bundle);
+
+// per evaluation, each with its own value sets
+var ctx = FhirCqlContext.WithDataSource(dataSource, valueSets: scopedValueSets);
+```
+
+Each context gets a lightweight view over the shared index that resolves value sets through the `IValueSetDictionary`
+passed to `WithDataSource`, so evaluations backed by different (for instance request-scoped) terminology can share one
+data source. The index is read-only once built and supports any number of concurrent readers.
+
 ### How do I change the way a CQL operator behaves?
 
 Implement `ICqlOperators` (or wrap an existing `CqlOperators` instance) and supply it to the `CqlContext` constructor:

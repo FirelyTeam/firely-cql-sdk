@@ -105,8 +105,39 @@ namespace Hl7.Cql.Fhir
                 new CompositeDataSource();
 
         /// <summary>
+        /// Factory method for creating a reusable <see cref="IDataSource"/> over the given <see cref="Bundle"/>,
+        /// which can be evaluated against repeatedly through <see cref="WithDataSource"/>.
+        /// </summary>
+        /// <remarks>
+        /// <para>Indexing a bundle costs a pass over its entries, and the retrieves fill caches derived from it.
+        /// A host that evaluates the same, unchanging bundle more than once - for instance once per measure group
+        /// for the same subject - can build the source once with this method, keep it, and hand it to
+        /// <see cref="WithDataSource"/> for every evaluation. The index and its caches are then built once instead
+        /// of once per evaluation.</para>
+        /// <para>The returned source holds no value sets of its own: <see cref="WithDataSource"/> binds the value
+        /// sets it is given to a lightweight view over the same index, so evaluations that must resolve value sets
+        /// through different (for instance request-scoped) terminology are free to share one source. Sharing is
+        /// safe: the index is read-only once built and supports any number of concurrent readers.</para>
+        /// </remarks>
+        /// <param name="bundle">The bundle to index. It is assumed not to change for as long as the returned source is used.</param>
+        /// <param name="options">Options to create the source with, of which <see cref="FhirCqlContextOptions.OverrideRetrieveProfileFilter"/> applies here.</param>
+        /// <exception cref="ArgumentNullException">When <paramref name="bundle"/> is <see langword="null"/>.</exception>
+        public static IDataSource DataSourceForBundle(
+            Bundle bundle,
+            FhirCqlContextOptions? options = null) =>
+            new BundleDataSource(
+                bundle ?? throw new ArgumentNullException(nameof(bundle)),
+                new HashValueSetDictionary(),
+                profileFilter: options?.OverrideRetrieveProfileFilter);
+
+        /// <summary>
         /// Factory method for creating a setup of the engine with the given <see cref="IDataSource"/>.
         /// </summary>
+        /// <remarks>
+        /// A source obtained from <see cref="DataSourceForBundle"/> is not used directly: the context gets a
+        /// lightweight view over it that shares its index over the bundle but resolves value sets through
+        /// <paramref name="valueSets"/>, so the same source can serve evaluations with different value sets.
+        /// </remarks>
         public static CqlContext WithDataSource(
             IDataSource? source = null,
             IDictionary<string, object>? parameters = null,
@@ -114,7 +145,10 @@ namespace Hl7.Cql.Fhir
             DateTimeOffset? now = null,
             FhirCqlContextOptions? options = null)
         {
-            CqlContext result = CreateContext(source, parameters, valueSets, now, options);
+            IDataSource? boundSource = source is BundleDataSource bundleSource && valueSets is not null
+                ? bundleSource.WithValueSets(valueSets)
+                : source;
+            CqlContext result = CreateContext(boundSource, parameters, valueSets, now, options);
             return result;
         }
     }
