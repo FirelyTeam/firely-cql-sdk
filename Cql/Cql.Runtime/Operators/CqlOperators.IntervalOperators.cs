@@ -1071,27 +1071,62 @@ namespace Hl7.Cql.Operators
 
         public CqlInterval<T>? Intersect<T>(CqlInterval<T>? left, CqlInterval<T>? right)
         {
-            if (left == null
-               || right == null
-               || left.low == null
-               || left.high == null
-               || right.low == null
-               || right.high == null)
+            if (left == null || right == null)
                 return null;
 
-            var leftLow = left.low ?? MinValue<T>();
-            var leftHigh = left.high ?? MaxValue<T>();
-            var rightLow = right.low ?? MinValue<T>();
-            var rightHigh = right.high ?? MaxValue<T>();
-            if (Comparer.Compare(leftLow!, rightHigh!, null) > 0 || Comparer.Compare(rightLow!, leftHigh!, null) > 0) return null;
+            // A null closed boundary is the minimum/maximum value of the point type; a null
+            // open boundary is unknown and only nulls out comparisons that depend on it.
+            var leftLowUnknown = IsUnknownBoundary(left.low, left.lowClosed);
+            var leftHighUnknown = IsUnknownBoundary(left.high, left.highClosed);
+            var rightLowUnknown = IsUnknownBoundary(right.low, right.lowClosed);
+            var rightHighUnknown = IsUnknownBoundary(right.high, right.highClosed);
+
+            // Null when the arguments do not overlap, or when an unknown boundary makes it
+            // impossible to establish that they do.
+            bool? leftStartsAfterRightEnds = leftLowUnknown || rightHighUnknown
+                ? RangeGreaterThan(LowBoundaryRange(left), HighBoundaryRange(right), null)
+                : Comparer.Compare(left.low ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, null) > 0;
+            bool? rightStartsAfterLeftEnds = rightLowUnknown || leftHighUnknown
+                ? RangeGreaterThan(LowBoundaryRange(right), HighBoundaryRange(left), null)
+                : Comparer.Compare(right.low ?? MinValue<T>()!, left.high ?? MaxValue<T>()!, null) > 0;
+            if (leftStartsAfterRightEnds != false || rightStartsAfterLeftEnds != false)
+                return null;
+
+            T? LowValue;
+            bool LowValueClosed;
+            T? HighValue;
+            bool HighValueClosed;
+
+            // The result low is the larger of the lows. When an unknown boundary is involved
+            // and the comparison is indeterminate, the result low is itself unknown.
+            if (leftLowUnknown || rightLowUnknown)
+            {
+                var leftLowGreaterOrEqual = RangeGreaterOrEqual(LowBoundaryRange(left), LowBoundaryRange(right), null);
+                var rightLowGreaterOrEqual = RangeGreaterOrEqual(LowBoundaryRange(right), LowBoundaryRange(left), null);
+                if (leftLowGreaterOrEqual == true && rightLowGreaterOrEqual == true)
+                {
+                    LowValue = left.low;
+                    LowValueClosed = (left.lowClosed ?? false) && (right.lowClosed ?? false);
+                }
+                else if (leftLowGreaterOrEqual == true)
+                {
+                    LowValue = left.low;
+                    LowValueClosed = left.lowClosed ?? false;
+                }
+                else if (rightLowGreaterOrEqual == true)
+                {
+                    LowValue = right.low;
+                    LowValueClosed = right.lowClosed ?? false;
+                }
+                else
+                {
+                    LowValue = default;
+                    LowValueClosed = false;
+                }
+            }
             else
             {
-                T LowValue;
-                bool LowValueClosed;
-                T HighValue;
-                bool HighValueClosed;
-
-                var leftCompare = Comparer.Compare(leftLow!, rightLow!, null);
+                var leftCompare = Comparer.Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, null);
                 if (leftCompare > 0)
                 {
                     LowValue = left.low;
@@ -1107,8 +1142,37 @@ namespace Hl7.Cql.Operators
                     LowValue = right.low;
                     LowValueClosed = right.lowClosed ?? false;
                 }
+            }
 
-                var rightCompare = Comparer.Compare(leftHigh!, rightHigh!, null);
+            // The result high is the smaller of the highs, with the same unknown handling.
+            if (leftHighUnknown || rightHighUnknown)
+            {
+                var leftHighLessOrEqual = RangeLessOrEqual(HighBoundaryRange(left), HighBoundaryRange(right), null);
+                var rightHighLessOrEqual = RangeLessOrEqual(HighBoundaryRange(right), HighBoundaryRange(left), null);
+                if (leftHighLessOrEqual == true && rightHighLessOrEqual == true)
+                {
+                    HighValue = left.high;
+                    HighValueClosed = (left.highClosed ?? false) && (right.highClosed ?? false);
+                }
+                else if (leftHighLessOrEqual == true)
+                {
+                    HighValue = left.high;
+                    HighValueClosed = left.highClosed ?? false;
+                }
+                else if (rightHighLessOrEqual == true)
+                {
+                    HighValue = right.high;
+                    HighValueClosed = right.highClosed ?? false;
+                }
+                else
+                {
+                    HighValue = default;
+                    HighValueClosed = false;
+                }
+            }
+            else
+            {
+                var rightCompare = Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, null);
                 if (rightCompare < 0)
                 {
                     HighValue = left.high;
@@ -1124,9 +1188,9 @@ namespace Hl7.Cql.Operators
                     HighValue = right.high;
                     HighValueClosed = right.highClosed ?? false;
                 }
-
-                return new CqlInterval<T>(LowValue, HighValue, LowValueClosed, HighValueClosed);
             }
+
+            return new CqlInterval<T>(LowValue, HighValue, LowValueClosed, HighValueClosed);
         }
 
         #endregion

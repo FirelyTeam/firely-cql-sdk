@@ -3390,14 +3390,108 @@ namespace CoreTests
             var result = ops.IntervalIncludesInterval(lhs, rhs, null);
             Assert.IsNull(result);
         }
+        // Interval[1, 10] intersect Interval[5, null) returns Interval[5, null):
+        // the start is certain, the end is unknown (spec 05, Interval Operators).
         [TestMethod]
-        public void TestIntersectNull()
+        public void TestIntersectOpenNullHighBoundary()
         {
             var lhs = new CqlInterval<int?>(1, 10, true, true);
             var rhs = new CqlInterval<int?>(5, null, true, false);
             var ops = GetNewContext().Operators;
             var result = ops.Intersect(lhs, rhs);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(5, result.low);
+            Assert.IsTrue(result.lowClosed ?? false);
+            Assert.IsNull(result.high);
+            Assert.IsFalse(result.highClosed ?? false);
+        }
+
+        // Interval[1, 10] intersect Interval[5, null] returns Interval[5, 10]:
+        // a null closed boundary is the maximum value of the point type.
+        [TestMethod]
+        public void TestIntersectClosedNullHighBoundary()
+        {
+            var lhs = new CqlInterval<int?>(1, 10, true, true);
+            var rhs = new CqlInterval<int?>(5, null, true, true);
+            var ops = GetNewContext().Operators;
+            var result = ops.Intersect(lhs, rhs);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(5, result.low);
+            Assert.IsTrue(result.lowClosed ?? false);
+            Assert.AreEqual(10, result.high);
+            Assert.IsTrue(result.highClosed ?? false);
+        }
+
+        // Interval(null, 10] intersect Interval[5, 20] returns Interval(null, 10]:
+        // the end is certain, the start is unknown.
+        [TestMethod]
+        public void TestIntersectOpenNullLowBoundary()
+        {
+            var lhs = new CqlInterval<int?>(null, 10, false, true);
+            var rhs = new CqlInterval<int?>(5, 20, true, true);
+            var ops = GetNewContext().Operators;
+            var result = ops.Intersect(lhs, rhs);
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.low);
+            Assert.IsFalse(result.lowClosed ?? false);
+            Assert.AreEqual(10, result.high);
+            Assert.IsTrue(result.highClosed ?? false);
+        }
+
+        // Interval[null, 10] intersect Interval[5, 20] returns Interval[5, 10]:
+        // a null closed boundary is the minimum value of the point type.
+        [TestMethod]
+        public void TestIntersectClosedNullLowBoundary()
+        {
+            var lhs = new CqlInterval<int?>(null, 10, true, true);
+            var rhs = new CqlInterval<int?>(5, 20, true, true);
+            var ops = GetNewContext().Operators;
+            var result = ops.Intersect(lhs, rhs);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(5, result.low);
+            Assert.IsTrue(result.lowClosed ?? false);
+            Assert.AreEqual(10, result.high);
+            Assert.IsTrue(result.highClosed ?? false);
+        }
+
+        // Interval[1, null) intersect Interval[5, 10] returns null: whether the
+        // intervals overlap at all depends on the unknown boundary.
+        [TestMethod]
+        public void TestIntersectIndeterminateOverlapIsNull()
+        {
+            var lhs = new CqlInterval<int?>(1, null, true, false);
+            var rhs = new CqlInterval<int?>(5, 10, true, true);
+            var ops = GetNewContext().Operators;
+            var result = ops.Intersect(lhs, rhs);
             Assert.IsNull(result);
+        }
+
+        // Interval[1, 3] intersect Interval[5, null) returns null: the intervals are
+        // disjoint regardless of the unknown boundary.
+        [TestMethod]
+        public void TestIntersectDisjointWithUnknownBoundaryIsNull()
+        {
+            var lhs = new CqlInterval<int?>(1, 3, true, true);
+            var rhs = new CqlInterval<int?>(5, null, true, false);
+            var ops = GetNewContext().Operators;
+            var result = ops.Intersect(lhs, rhs);
+            Assert.IsNull(result);
+        }
+
+        // Interval[1, null) intersect Interval[1, 10] returns Interval[1, null):
+        // the shared start makes the overlap certain even though the end is unknown.
+        [TestMethod]
+        public void TestIntersectCertainOverlapWithUnknownHighBoundary()
+        {
+            var lhs = new CqlInterval<int?>(1, null, true, false);
+            var rhs = new CqlInterval<int?>(1, 10, true, true);
+            var ops = GetNewContext().Operators;
+            var result = ops.Intersect(lhs, rhs);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.low);
+            Assert.IsTrue(result.lowClosed ?? false);
+            Assert.IsNull(result.high);
+            Assert.IsFalse(result.highClosed ?? false);
         }
 
         // { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59
