@@ -233,6 +233,16 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertPeriodToCqlInterval_WrappedDateHint_ReturnsIntervalOfCqlDate()
+        {
+            var period = new Period(new FhirDateTime(2024, 1, 1), new FhirDateTime(2024, 12, 31));
+
+            var converted = FhirTypeConverter.ConvertPeriodToCqlInterval(period, "Interval<Date>");
+
+            Assert.IsInstanceOfType(converted, typeof(CqlInterval<CqlDate>));
+        }
+
+        [TestMethod]
         public void Convert_Range_CqlLongInterval()
         {
             // 5000000000 does not fit an Integer, which is what makes the Long reading of a Range necessary.
@@ -334,6 +344,14 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Convert_Range_CqlLongInterval_ThrowsForBoundBelowLongRange()
+        {
+            var range = new Hl7.Fhir.Model.Range { Low = new Quantity { Value = -20000000000000000000m, Unit = "1" } };
+
+            Assert.ThrowsExactly<OverflowException>(() => FhirTypeConverter.Convert<CqlInterval<long?>>(range));
+        }
+
+        [TestMethod]
         public void RoundTrip_CqlLongInterval_Range_PreservesBounds()
         {
             var interval = new CqlInterval<long?>(1L, 5000000000L, lowClosed: true, highClosed: true);
@@ -414,6 +432,14 @@ namespace CoreTests
         public void ConvertRangeToCqlInterval_LongHint_ReturnsIntervalOfLong()
         {
             var converted = FhirTypeConverter.ConvertRangeToCqlInterval(UnitlessRange(), "Long");
+
+            Assert.IsInstanceOfType(converted, typeof(CqlInterval<long?>));
+        }
+
+        [TestMethod]
+        public void ConvertRangeToCqlInterval_WrappedLongHint_ReturnsIntervalOfLong()
+        {
+            var converted = FhirTypeConverter.ConvertRangeToCqlInterval(UnitlessRange(), "Interval<Long>");
 
             Assert.IsInstanceOfType(converted, typeof(CqlInterval<long?>));
         }

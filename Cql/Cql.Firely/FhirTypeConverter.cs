@@ -426,41 +426,59 @@ namespace Hl7.Cql.Fhir
             };
 
         /// <summary>
-        /// Converts a FHIR <see cref="M.Period"/> to a CQL interval, using the CQL point type name
-        /// (typically taken from the cqf-cqlType extension on a Library parameter, e.g. "Date" or "DateTime")
+        /// Converts a FHIR <see cref="M.Period"/> to a CQL interval, using the CQL type name
+        /// (typically the cqf-cqlType extension value from a Library parameter, e.g. "Interval&lt;Date&gt;" or
+        /// "Interval&lt;DateTime&gt;")
         /// to disambiguate the otherwise ambiguous Period mapping.
         /// </summary>
         /// <param name="converter">the type converter</param>
         /// <param name="period">the period to convert, or <see langword="null"/></param>
-        /// <param name="cqlPointTypeName">the CQL point type name; "Date" yields an Interval&lt;Date&gt;, anything else an Interval&lt;DateTime&gt;</param>
+        /// <param name="cqlPointTypeName">the CQL type name; "Interval&lt;Date&gt;" (and the bare "Date" for callers that
+        /// already strip the wrapper) yields an Interval&lt;Date&gt;, anything else an Interval&lt;DateTime&gt;</param>
         /// <returns>a <see cref="CqlInterval{CqlDate}"/> or <see cref="CqlInterval{CqlDateTime}"/>, or <see langword="null"/> when <paramref name="period"/> is <see langword="null"/></returns>
         public static object? ConvertPeriodToCqlInterval(this TypeConverter converter, M.Period? period, string? cqlPointTypeName) =>
-            cqlPointTypeName switch
+            GetCqlIntervalPointTypeName(cqlPointTypeName) switch
             {
                 nameof(CqlPrimitiveType.Date) => converter.Convert<CqlInterval<CqlDate>>(period),
                 _ => converter.Convert<CqlInterval<CqlDateTime>>(period)
             };
 
         /// <summary>
-        /// Converts a FHIR <see cref="M.Range"/> to a CQL interval, using the CQL point type name
-        /// (typically taken from the cqf-cqlType extension on a Library parameter, e.g. "Integer" or "Long")
+        /// Converts a FHIR <see cref="M.Range"/> to a CQL interval, using the CQL type name
+        /// (typically the cqf-cqlType extension value from a Library parameter, e.g. "Interval&lt;Integer&gt;" or
+        /// "Interval&lt;Long&gt;")
         /// to disambiguate the otherwise ambiguous Range mapping.
         /// </summary>
         /// <param name="converter">the type converter</param>
         /// <param name="range">the range to convert, or <see langword="null"/></param>
-        /// <param name="cqlPointTypeName">the CQL point type name; "Integer", "Decimal" and "Long" yield an
-        /// Interval&lt;Integer&gt;, Interval&lt;Decimal&gt; and Interval&lt;Long&gt; of the Range's unit-less Quantity values,
-        /// anything else - including an absent hint - the widest reading, an Interval&lt;Quantity&gt;</param>
+        /// <param name="cqlPointTypeName">the CQL type name; "Interval&lt;Integer&gt;", "Interval&lt;Decimal&gt;" and
+        /// "Interval&lt;Long&gt;" (and the corresponding bare point type names for callers that already strip the wrapper)
+        /// yield an Interval&lt;Integer&gt;, Interval&lt;Decimal&gt; and Interval&lt;Long&gt; of the Range's unit-less Quantity
+        /// values, anything else - including an absent hint - the widest reading, an Interval&lt;Quantity&gt;</param>
         /// <returns>a <see cref="CqlInterval{T}"/> of <see cref="int"/>, <see cref="decimal"/>, <see cref="long"/> or
         /// <see cref="CqlQuantity"/>, or <see langword="null"/> when <paramref name="range"/> is <see langword="null"/></returns>
         public static object? ConvertRangeToCqlInterval(this TypeConverter converter, M.Range? range, string? cqlPointTypeName) =>
-            cqlPointTypeName switch
+            GetCqlIntervalPointTypeName(cqlPointTypeName) switch
             {
                 nameof(CqlPrimitiveType.Integer) => converter.Convert<CqlInterval<int?>>(range),
                 nameof(CqlPrimitiveType.Decimal) => converter.Convert<CqlInterval<decimal?>>(range),
                 nameof(CqlPrimitiveType.Long) => converter.Convert<CqlInterval<long?>>(range),
                 _ => converter.Convert<CqlInterval<CqlQuantity>>(range)
             };
+
+        private static string? GetCqlIntervalPointTypeName(string? cqlPointTypeName)
+        {
+            if (cqlPointTypeName is null)
+                return null;
+
+            var trimmed = cqlPointTypeName.Trim();
+            const string intervalPrefix = "Interval<";
+
+            return trimmed.StartsWith(intervalPrefix, StringComparison.Ordinal)
+                && trimmed.EndsWith('>')
+                ? trimmed[intervalPrefix.Length..^1].Trim()
+                : trimmed;
+        }
 
         /// <summary>
         /// The extension conveying the number of digits after the decimal point of a Quantity's value, used by
