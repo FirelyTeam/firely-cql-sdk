@@ -394,7 +394,9 @@ namespace Hl7.Cql.Fhir
         /// The extension conveying the actual precision of a time or dateTime value whose trailing time
         /// components were zero-padded to satisfy FHIR's lexical rules, used by the CQL IG's FHIR type
         /// mapping for partial-precision System.Time and System.DateTime values. Its value is a UCUM
-        /// time-duration code ("h" for hour precision, "min" for minute precision).
+        /// time-duration code: "h", "min", "s" or "ms". This converter only ever pads (and therefore
+        /// emits) hour- and minute-precision values — second precision and finer is natively valid
+        /// FHIR — but all four codes are honored when reading values produced by other emitters.
         /// </summary>
         internal const string TimePrecisionExtensionUrl = "http://hl7.org/fhir/StructureDefinition/time-precision";
 
@@ -439,12 +441,20 @@ namespace Hl7.Cql.Fhir
 
         private static void AddTimePrecisionExtension(M.PrimitiveType element, DateTimePrecision precision) =>
             element.Extension.Add(new M.Extension(TimePrecisionExtensionUrl,
-                new M.Code(precision == DateTimePrecision.Hour ? "h" : "min")));
+                new M.Code(precision switch
+                {
+                    DateTimePrecision.Hour => "h",
+                    DateTimePrecision.Minute => "min",
+                    DateTimePrecision.Second => "s",
+                    DateTimePrecision.Millisecond => "ms",
+                    _ => throw new ArgumentOutOfRangeException(nameof(precision), precision,
+                        "Only time-component precisions can be conveyed by the time-precision extension.")
+                })));
 
         /// <summary>
         /// Reads the precision declared by a <see cref="TimePrecisionExtensionUrl"/> extension, or
         /// <see langword="null"/> when the extension is absent or carries a code that does not describe
-        /// a partial time (coarser precisions are natively representable and never need the extension).
+        /// a time component (coarser precisions are natively representable and never need the extension).
         /// </summary>
         private static DateTimePrecision? GetDeclaredTimePrecision(M.PrimitiveType element) =>
             element.GetExtensionValue<M.Code>(TimePrecisionExtensionUrl)?.Value switch
@@ -452,6 +462,7 @@ namespace Hl7.Cql.Fhir
                 "h" => DateTimePrecision.Hour,
                 "min" => DateTimePrecision.Minute,
                 "s" => DateTimePrecision.Second,
+                "ms" => DateTimePrecision.Millisecond,
                 _ => null
             };
 

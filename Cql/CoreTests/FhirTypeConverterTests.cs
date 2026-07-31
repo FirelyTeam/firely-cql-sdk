@@ -697,6 +697,28 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertFhirTime_SecondAndMillisecondPrecisionCodes_Honored()
+        {
+            // "s" marks padded milliseconds; "ms" declares the value complete.
+            var fhirTime = new Time("10:30:15.123");
+            fhirTime.AddExtension(TimePrecisionExtensionUrl, new Code("s"));
+            var converted = FhirTypeConverter.Convert<CqlTime>(fhirTime);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual(DateTimePrecision.Second, converted.Precision);
+            Assert.AreEqual(15, converted.Value.Second);
+            Assert.IsNull(converted.Value.Millisecond);
+
+            fhirTime = new Time("10:30:15.123");
+            fhirTime.AddExtension(TimePrecisionExtensionUrl, new Code("ms"));
+            converted = FhirTypeConverter.Convert<CqlTime>(fhirTime);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual(DateTimePrecision.Millisecond, converted.Precision);
+            Assert.AreEqual(123, converted.Value.Millisecond);
+        }
+
+        [TestMethod]
         public void ConvertFhirDateTime_TimePrecisionExtension_RestoresPartialPrecision()
         {
             var fhirDateTime = new FhirDateTime("2014-02-01T10:00:00Z");
