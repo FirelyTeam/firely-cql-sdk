@@ -113,7 +113,15 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// which must be disposed when no longer in use,
     /// so that the loaded assemblies may unload from the
     /// application domain.</returns>
-    public LibrarySetInvoker CreateLibrarySetInvoker(string librarySetName = "")
+    public LibrarySetInvoker CreateLibrarySetInvoker(string librarySetName = "") =>
+        CreateLibrarySetInvoker(librarySetName, isPoolOwned: false);
+
+    /// <summary>
+    /// Creates a new instance of <see cref="LibrarySetInvoker"/>, optionally marking it as owned by a
+    /// <see cref="LibrarySetInvokerPool"/> so that its <see cref="LibrarySetInvoker.Dispose"/> becomes
+    /// inert and the pool controls when the assemblies unload.
+    /// </summary>
+    internal LibrarySetInvoker CreateLibrarySetInvoker(string librarySetName, bool isPoolOwned)
     {
         _services.Logger.LogDebug("Creating LibrarySetInvoker {name}", librarySetName);
 
@@ -136,6 +144,7 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
             alc,
             LoggerFactory,
             BatchProcessExceptionContinuation,
-            librarySetName);
+            librarySetName,
+            isPoolOwned);
     }
 }

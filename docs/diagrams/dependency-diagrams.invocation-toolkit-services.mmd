@@ -1,0 +1,58 @@
+%%{init: {
+    'layout': 'elk',
+    'themeVariables':{
+      'lineColor': '#333',
+      'lineWidth': 4
+    },
+    'themeCSS': '.edgeLabel, .edgeLabel p, .edgeLabel rect, .labelBkg { background: transparent !important; background-color: transparent !important; fill: transparent !important; }'
+}}%%
+
+flowchart TB
+
+subgraph Invocation["Cql.Invocation"]
+direction TB
+InvocationToolkit["<b>InvocationToolkit</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Builder that accumulates AssemblyBinary instances (from files, directories or FHIR Library resources) and creates a LibrarySetInvoker from them. Short-lived: the ElmToolkit/CqlToolkit convenience paths construct a fresh one per call.</div>"]
+LibrarySetInvokerPool["<b>LibrarySetInvokerPool</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Opt-in, consumer-owned pool that reuses LibrarySetInvoker instances across evaluations, keyed on assembly-binary content. Owns the lifetime of what it hands out: LRU eviction unloads the assembly load context and releases the invoker graph.</div>"]
+LibrarySetInvokerPoolOptions["<b>LibrarySetInvokerPoolOptions</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Pool settings: Capacity (how many distinct library sets to keep loaded, a soft target) and MaxPendingUnloads (warn when this many evicted contexts remain unreclaimed).</div>"]
+LibrarySetInvokerPoolStatistics["<b>LibrarySetInvokerPoolStatistics</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Snapshot of pool activity: Hits, Misses, Entries and PendingUnloads. PendingUnloads is the leak signal — a climbing value means something is holding evicted library sets alive.</div>"]
+LibrarySetInvokerPoolKey["<b>LibrarySetInvokerPoolKey</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(internal) Pool identity: a sorted SHA-256 hash over the assembly and debug-symbol bytes, plus the library set name and exception-continuation policy. Needed because AssemblyBinary's record equality is reference identity over its byte arrays.</div>"]
+LibrarySetInvoker["<b>LibrarySetInvoker</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Owns one collectible AssemblyLoadContext and the invoker graph reflected out of it. Dispose unloads the context and releases the graph; when a pool owns the instance, Dispose is inert and the pool decides when to unload.</div>"]
+LibraryInvoker["<b>LibraryInvoker</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>One CQL library within the set, exposing its definitions. Holds a back-reference to its LibrarySetInvoker, so retaining one keeps the whole assembly load context alive.</div>"]
+DefinitionInvoker["<b>DefinitionInvoker</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>One CQL definition, invoked through a delegate bound once to the generated library method. Also back-references its LibraryInvoker.</div>"]
+end
+
+subgraph CodeGeneration["CodeGeneration.NET"]
+direction TB
+AssemblyBinary["<b>AssemblyBinary</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A compiled CQL library: assembly bytes plus optional debug-symbol bytes. Record equality compares the byte arrays by reference, which is why the pool derives a content hash instead.</div>"]
+end
+
+subgraph Runtime["Cql.Runtime"]
+direction TB
+CqlContext["<b>CqlContext</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Per-evaluation state, supplied by the caller on every invocation. A pooled invoker is shared, so each concurrent evaluation must bring its own context.</div>"]
+ILibrary["<b>ILibrary</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>Interface implemented by every generated CQL library class. Instances are process-wide singletons living inside the collectible assembly load context.</div>"]
+end
+
+subgraph DotNet["System.Runtime.Loader"]
+direction TB
+AssemblyLoadContext["<b>AssemblyLoadContext</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>(external) Collectible load context holding the generated assemblies. Unload only initiates unloading — the context is reclaimed once nothing references it, and collectible contexts never use ReadyToRun, so every method is JIT-compiled per context.</div>"]
+end
+
+AssemblyBinary -.->|accumulated by| InvocationToolkit
+InvocationToolkit -.->|creates| LibrarySetInvoker
+InvocationToolkit -.->|loads binaries into| AssemblyLoadContext
+LibrarySetInvoker -->|owns| AssemblyLoadContext
+
+LibrarySetInvokerPoolOptions -.->|configures| LibrarySetInvokerPool
+LibrarySetInvokerPool -.->|reports| LibrarySetInvokerPoolStatistics
+LibrarySetInvokerPool -.->|keys entries by| LibrarySetInvokerPoolKey
+AssemblyBinary -.->|hashed into| LibrarySetInvokerPoolKey
+LibrarySetInvokerPool -.->|creates via| InvocationToolkit
+LibrarySetInvokerPool -->|owns lifetime of| LibrarySetInvoker
+
+LibrarySetInvoker -->|contains| LibraryInvoker
+LibraryInvoker -->|contains| DefinitionInvoker
+LibraryInvoker -.->|back-references| LibrarySetInvoker
+DefinitionInvoker -.->|back-references| LibraryInvoker
+DefinitionInvoker -.->|bound to| ILibrary
+
+CqlContext -.->|passed per call| DefinitionInvoker

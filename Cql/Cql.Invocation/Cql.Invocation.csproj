@@ -30,6 +30,7 @@
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="CqlSdkExamplesPreview" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>
