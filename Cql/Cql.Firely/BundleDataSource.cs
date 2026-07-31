@@ -39,6 +39,7 @@ namespace Hl7.Cql.Fhir
             ValueSets = valueSets ?? throw new ArgumentNullException(nameof(valueSets));
             _codeComparer = codeComparer ?? DefaultStringComparer.Value;
             _systemComparer = systemComparer ?? DefaultStringComparer.Value;
+            _usesDefaultComparers = ReferenceEquals(_codeComparer, DefaultStringComparer.Value) && ReferenceEquals(_systemComparer, DefaultStringComparer.Value);
             _profileFilter = profileFilter ?? QICoreRetrieveProfileFilter.Default;
             Bundle = bundle is not null ? new IndexedBundle(bundle.Entry) : throw new ArgumentNullException(nameof(bundle));
         }
@@ -51,6 +52,7 @@ namespace Hl7.Cql.Fhir
 
         private readonly ICqlComparer<string> _codeComparer;
         private readonly ICqlComparer<string> _systemComparer;
+        private readonly bool _usesDefaultComparers;
         private readonly IRetrieveProfileFilter _profileFilter;
 
 #if VNEXT
@@ -84,9 +86,12 @@ namespace Hl7.Cql.Fhir
         /// <inheritdoc/>
         private IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?> allowedCodes, PropertyInfo? codeProperty = null) where T : class
         {
-            Predicate<Coding> filter = allowedCodes is IValueSetFacade valueSet ?
-                c => c.Code is { } code && valueSet.IsCodeInValueSet(code, c.System)
-                : listFilter;
+            Predicate<Coding> filter = allowedCodes switch
+            {
+                IValueSetFacade valueSet => c => c.Code is { } code && valueSet.IsCodeInValueSet(code, c.System),
+                _ when _usesDefaultComparers => BuildSetFilter(allowedCodes),
+                _ => listFilter
+            };
 
             return ExecuteFilter<T>(filter, codeProperty);
 
@@ -94,6 +99,46 @@ namespace Hl7.Cql.Fhir
                 allowed is not null &&
                 _systemComparer.Equivalent(l.System, allowed.system, null) &&
                 _codeComparer.Equivalent(l.Code, allowed.code, null));
+        }
+
+        /// <summary>
+        /// Builds a filter that looks the coding up in a set, which is equivalent to scanning
+        /// <paramref name="allowedCodes"/> with the default comparers, but does not grow with the number of codes.
+        /// </summary>
+        /// <remarks>
+        /// The default comparers consider two strings equivalent when both are null, or when neither is null and
+        /// their Unicode normalized forms are equal ignoring case. The set reproduces that: keys hold the
+        /// normalized system and code, a null system or code stays null and so only matches another null, and
+        /// the keys are compared case-insensitively.
+        /// </remarks>
+        private static Predicate<Coding> BuildSetFilter(IEnumerable<CqlCode?> allowedCodes)
+        {
+            var codes = new HashSet<(string? System, string? Code)>(CodeKeyComparer.Instance);
+
+            foreach (var allowed in allowedCodes)
+            {
+                if (allowed is not null)
+                    codes.Add((normalize(allowed.system), normalize(allowed.code)));
+            }
+
+            return coding => codes.Contains((normalize(coding.System), normalize(coding.Code)));
+
+            static string? normalize(string? value) => value?.Normalize();
+        }
+
+        private sealed class CodeKeyComparer : IEqualityComparer<(string? System, string? Code)>
+        {
+            public static readonly CodeKeyComparer Instance = new();
+
+            public bool Equals((string? System, string? Code) x, (string? System, string? Code) y) =>
+                StringComparer.OrdinalIgnoreCase.Equals(x.System, y.System) &&
+                StringComparer.OrdinalIgnoreCase.Equals(x.Code, y.Code);
+
+            public int GetHashCode((string? System, string? Code) obj) =>
+                HashCode.Combine(
+                    obj.System is null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(obj.System),
+                    obj.Code is null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(obj.Code)
+                );
         }
 
         /// <inheritdoc/>
@@ -115,19 +160,17 @@ namespace Hl7.Cql.Fhir
             }
             else
             {
-                IEnumerable<Coding> getCodedValues(T instance)
-                {
-                    var objectResult = codeProperty!.GetValue(instance);
+                var getValue = CompiledPropertyAccessor.For(codeProperty);
 
-                    return objectResult switch
+                return Bundle.FilterByType<T>(filter, codeProperty, getCodedValues);
+
+                IEnumerable<Coding> getCodedValues(T instance) =>
+                    getValue(instance) switch
                     {
                         IEnumerable<DataType> idt => idt.ToCodings(),
                         DataType dt => dt.ToCodings(),
                         _ => []
                     };
-                }
-
-                return Bundle.FilterByType<T>(filter, getCodedValues);
             }
         }
     }
