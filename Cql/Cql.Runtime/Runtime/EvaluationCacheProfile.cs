@@ -33,7 +33,8 @@ public sealed class EvaluationCacheProfile
     /// <summary>
     /// The number of threads expected to write to the cache concurrently, passed to
     /// <see cref="CqlContext.UseNewCache(int,int)"/>. Must be at least
-    /// <see cref="CqlContext.SequentialCacheConcurrencyLevel"/>. Cache reads are lock-free at any level; a
+    /// <see cref="CqlContext.SequentialCacheConcurrencyLevel"/> and at most
+    /// <see cref="CqlContext.MaximumCacheConcurrencyLevel"/>. Cache reads are lock-free at any level; a
     /// higher level keeps concurrent cache misses from serializing on a single write lock.
     /// </summary>
     public int ConcurrencyLevel { get; init; } = CqlContext.SequentialCacheConcurrencyLevel;

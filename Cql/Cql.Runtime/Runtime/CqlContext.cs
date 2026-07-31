@@ -156,10 +156,11 @@ namespace Hl7.Cql.Runtime
         /// Sizing this to (an upper bound of) the number of definitions/expressions expected to be cached during
         /// the evaluation avoids internal resizing of the cache. Must be at least <see cref="MinimumCacheInitialCapacity"/>.</param>
         /// <param name="concurrencyLevel">The number of threads expected to write to the cache concurrently.
-        /// Must be at least <see cref="SequentialCacheConcurrencyLevel"/>.</param>
+        /// Must be at least <see cref="SequentialCacheConcurrencyLevel"/> and at most
+        /// <see cref="MaximumCacheConcurrencyLevel"/>.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="initialCapacity"/> is less than
-        /// <see cref="MinimumCacheInitialCapacity"/>, or <paramref name="concurrencyLevel"/> is less than
-        /// <see cref="SequentialCacheConcurrencyLevel"/>.</exception>
+        /// <see cref="MinimumCacheInitialCapacity"/>, or <paramref name="concurrencyLevel"/> is outside the range
+        /// [<see cref="SequentialCacheConcurrencyLevel"/>, <see cref="MaximumCacheConcurrencyLevel"/>].</exception>
         /// <remarks>
         /// <para>Call this method to clear any cached data and ensure that future operations do not use stale
         /// information.</para>
@@ -185,6 +186,12 @@ namespace Hl7.Cql.Runtime
                     nameof(concurrencyLevel),
                     concurrencyLevel,
                     $"The cache concurrency level must be at least {SequentialCacheConcurrencyLevel}.");
+
+            if (concurrencyLevel > MaximumCacheConcurrencyLevel)
+                throw new ArgumentOutOfRangeException(
+                    nameof(concurrencyLevel),
+                    concurrencyLevel,
+                    $"The cache concurrency level must be at most {MaximumCacheConcurrencyLevel}.");
 
             // Pre-size the cache to avoid repeated resizes, which acquire all internal locks and dominated the
             // write cost with the default settings. A cache populated by mostly-sequential definition evaluation
@@ -213,6 +220,15 @@ namespace Hl7.Cql.Runtime
         /// <see cref="UseNewCache(int,int)"/>. At this level every cache write goes through one internal lock.
         /// </summary>
         public const int SequentialCacheConcurrencyLevel = 1;
+
+        /// <summary>
+        /// The largest cache concurrency level accepted by <see cref="UseNewCache(int,int)"/>. Values above this
+        /// are rejected to prevent runaway memory use: the underlying <see cref="ConcurrentDictionary{TKey,TValue}"/>
+        /// allocates an internal lock array proportional to the concurrency level, so an oversized value sourced
+        /// from external configuration would otherwise cause an <see cref="OutOfMemoryException"/> instead of a
+        /// clean <see cref="ArgumentOutOfRangeException"/>.
+        /// </summary>
+        public const int MaximumCacheConcurrencyLevel = 1024;
 
         /// <summary>
         /// Disables caching for subsequent operations by resetting the cache state.

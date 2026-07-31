@@ -391,4 +391,56 @@ public class CacheTest
             () => ctx.UseNewCache(CqlContext.MinimumCacheInitialCapacity - 1, concurrencyLevel: 4));
         Assert.AreEqual("initialCapacity", ex.ParamName);
     }
+
+    [DataTestMethod]
+    [DataRow(CqlContext.MaximumCacheConcurrencyLevel + 1)]
+    [DataRow(int.MaxValue)]
+    public void Cache_UseNewCacheWithTooLargeConcurrencyLevel_ShouldThrow(int concurrencyLevel)
+    {
+        // Arrange
+        var ctx = FhirCqlContext.ForBundle();
+
+        // Act & Assert — an unchecked value would reach ConcurrentDictionary's constructor and
+        // cause OutOfMemoryException instead of the clean ArgumentOutOfRangeException.
+        var ex = Assert.ThrowsException<ArgumentOutOfRangeException>(
+            () => ctx.UseNewCache(CqlContext.CacheInitialCapacity, concurrencyLevel));
+        Assert.AreEqual("concurrencyLevel", ex.ParamName);
+    }
+
+    /// <summary>
+    /// Regression test: <see cref="CqlContext.UseNewCache(int)"/> must delegate to
+    /// <see cref="CqlContext.UseNewCache(int,int)"/> with
+    /// <see cref="CqlContext.SequentialCacheConcurrencyLevel"/> (= 1).  If someone accidentally
+    /// changes the delegation to use e.g. <see cref="Environment.ProcessorCount"/>, the two-arg
+    /// overload's upper-bound guard will throw on the highest boundary value only when ProcessorCount
+    /// exceeds MaximumCacheConcurrencyLevel, so this test catches the mistake by verifying the
+    /// one-arg overload succeeds with the same capacity/statistics as an explicit sequential call.
+    /// </summary>
+    [TestMethod]
+    public void Cache_UseNewCacheOneArgOverload_DelegatesToSequentialConcurrencyLevel()
+    {
+        var lib = CqlNestedTupleTest_1_0_0.Instance;
+
+        // Context created via the 1-arg overload
+        var ctxOneArg = FhirCqlContext.ForBundle();
+        ctxOneArg.UseNewCache(CqlContext.CacheInitialCapacity);
+        lib.Result(ctxOneArg); // miss
+        lib.Result(ctxOneArg); // hit
+
+        // Context created via the explicit-sequential 2-arg overload — must be identical
+        var ctxTwoArg = FhirCqlContext.ForBundle();
+        ctxTwoArg.UseNewCache(CqlContext.CacheInitialCapacity, CqlContext.SequentialCacheConcurrencyLevel);
+        lib.Result(ctxTwoArg); // miss
+        lib.Result(ctxTwoArg); // hit
+
+        var internalsOneArg = (ICqlContextInternals)ctxOneArg;
+        var internalsTwoArg = (ICqlContextInternals)ctxTwoArg;
+
+        Assert.AreEqual(internalsTwoArg.CacheCallCount, internalsOneArg.CacheCallCount,
+            "1-arg overload must produce the same CacheCallCount as the sequential 2-arg overload.");
+        Assert.AreEqual(internalsTwoArg.CacheMisses, internalsOneArg.CacheMisses,
+            "1-arg overload must produce the same CacheMisses as the sequential 2-arg overload.");
+        Assert.AreEqual(internalsTwoArg.CacheHits, internalsOneArg.CacheHits,
+            "1-arg overload must produce the same CacheHits as the sequential 2-arg overload.");
+    }
 }
