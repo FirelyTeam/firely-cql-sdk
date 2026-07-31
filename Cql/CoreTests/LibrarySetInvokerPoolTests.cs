@@ -169,10 +169,12 @@ public class LibrarySetInvokerPoolTests
         foreach (var thread in threads)
             thread.Join();
 
-        // Assert - one load, and everybody got the same instance. A tolerate-and-discard race would
-        // have created a second assembly load context that nothing would ever unload.
+        // Assert - one load, and everybody got the very same instance. Reference identity is the
+        // point: a tolerate-and-discard race would have created a second assembly load context that
+        // nothing would ever unload, and two such invokers could still look structurally equivalent.
         failures.Should().BeEmpty();
-        observed.Should().AllBeEquivalentTo(observed[0]);
+        observed.Should().OnlyContain(invoker => ReferenceEquals(invoker, observed[0]));
+        observed.Distinct(ReferenceEqualityComparer.Instance).Should().HaveCount(1);
         pool.Statistics.Misses.Should().Be(1);
         pool.Statistics.Entries.Should().Be(1);
     }
