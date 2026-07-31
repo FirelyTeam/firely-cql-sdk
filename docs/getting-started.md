@@ -112,6 +112,10 @@ See the **[Examples project](../Examples/CqlSdkExamples/)** for complete, runnab
 - **400–410**: Loading and invoking from FHIR resource directories
 - **500**: Extending SDK functionality
 
+If you are running the same CQL repeatedly — evaluating a measure over a population, for instance — read
+**[Caching strategies](caching-strategies.md)** before you tune anything. It covers which of the SDK's
+caches to reach for, what each one costs, and how they interact.
+
 ## How CQL Execution Works
 
 The SDK follows a pipeline from CQL source to .NET execution results:

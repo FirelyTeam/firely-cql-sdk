@@ -53,6 +53,8 @@ Three rules apply when pooling:
 
 A pooled invoker is safe to share between concurrently evaluating threads, provided each evaluation uses its own `CqlContext`.
 
+See **[Caching strategies](../../docs/caching-strategies.md)** for how pooling relates to the SDK's other caches — in particular per-context evaluation caching, which solves a different problem and composes with pooling.
+
 ## Usage
 
 ### Invoke inline CQL
