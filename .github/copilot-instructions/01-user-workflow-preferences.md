@@ -96,7 +96,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 1.8. Acceptance Criteria Tracking
 
-1.8.1 After pushing work that completes one or more acceptance-criteria checkboxes in a linked issue or the PR body, tick them off before reporting the task done — follow the shared procedure in [sync-acceptance-criteria](../../.claude/skills/sync-acceptance-criteria/SKILL.md).
+1.8.1 Tick off acceptance-criteria checkboxes in a PR's linked issue (and the PR body) automatically, whenever their truth may have changed: after pushing work, after a follow-up commit that addresses review comments, and when reviewing a PR — including someone else's. Do it before reporting the review or the task done — follow the shared procedure in [sync-acceptance-criteria](../../.claude/skills/sync-acceptance-criteria/SKILL.md).
 
 ## 1.9. PR Review Comment Handling
 
