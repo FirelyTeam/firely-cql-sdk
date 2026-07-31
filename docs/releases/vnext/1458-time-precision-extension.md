@@ -11,4 +11,4 @@
   and FHIR `dateTime` requires minutes and seconds once hours are present). Values at second
   precision or finer, and date-only `DateTime` values, are unaffected. In the FHIR-to-CQL
   direction, a `time`/`dateTime` carrying the extension is truncated back to its declared
-  precision, so padded values round-trip to the original partial-precision value (#1456).
+  precision, so padded values round-trip to the original partial-precision value (#1458, closes #1456).
