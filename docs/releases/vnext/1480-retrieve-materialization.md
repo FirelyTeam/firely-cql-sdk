@@ -10,9 +10,9 @@
   change while it is being evaluated, so each of those walks reproduced the same answer. The cast, the code
   filter and the profile filter now run eagerly, once, at retrieve time, and the retrieve hands back the
   materialized result; the uncoded per-type cast is additionally cached per bundle, so repeated retrieves of
-  the same type over the same bundle share one read-only list. The cache is keyed by resource type, so it is
-  bounded by the number of resource types the bundle contains, and it lives no longer than the bundle itself
-  (#1477).
+  the same type over the same bundle share one read-only list. The cache is keyed by the requested resource type, so it
+  holds at most one entry per distinct type retrieved (a type absent from the bundle caches one shared empty
+  list), and it lives no longer than the bundle itself (#1477).
 
   This is a behavior-preserving change: every retrieve shape returns the same elements in the same order as
   before. The trade is memory — a retrieve's result list stays alive for the duration of the evaluation
