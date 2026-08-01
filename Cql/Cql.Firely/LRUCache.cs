@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2024, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -6,118 +6,46 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable enable
+
+using Hl7.Cql.Runtime;
+
 namespace Hl7.Cql.Fhir
 {
-    internal class LRUValue<T>
-    {
-        public T Value;
-        public LRUValue<T>? NextLRU;
-        public LRUValue<T>? PrevLRU;
-        public string Key;
-
-        public LRUValue(string key, T value)
-        {
-            Value = value;
-            Key = key;
-        }
-    }
-
+    /// <summary>
+    /// A bounded cache of parsed values keyed by their source string, approximately least-recently-used.
+    /// </summary>
+    /// <remarks>
+    /// Backed by <see cref="TwoGenerationCache{TKey,TValue}"/> so that reads never take a lock. The previous
+    /// implementation guarded a linked-list LRU with one lock around every read and write; the default instance
+    /// is process-wide and sits on the <c>FhirDateTime</c> → <c>CqlDateTime</c> conversion, which runs per value
+    /// during an evaluation, so that lock was acquired for every date an evaluation touched — across all
+    /// concurrently evaluating threads.
+    /// </remarks>
     internal class LRUCache<T>
     {
-        private Dictionary<string, LRUValue<T>> Cache;
-        private LRUValue<T>? Head;
-        private LRUValue<T>? Tail;
-        private int Count;
-        private int Capacity;
+        // Read by tests through reflection as the cache's configured capacity - keep the name and type.
+        private readonly int Capacity;
+
+        private readonly TwoGenerationCache<string, T> _cache;
 
         public LRUCache(int capacity)
         {
-            Cache = new Dictionary<string, LRUValue<T>>();
-            Count = 0;
             Capacity = capacity;
-        }
-
-        public void Touch(LRUValue<T> val)
-        {
-            if(val.PrevLRU != null)
-            {
-                val.PrevLRU.NextLRU = val.NextLRU;
-                if(val == Tail)
-                {
-                    Tail = val.PrevLRU;
-                }
-            }
-            if(val.NextLRU != null)
-            {
-                val.NextLRU.PrevLRU = val.PrevLRU;
-            }
-
-            if(Head != null)
-            {
-                Head.PrevLRU = val;
-                val.NextLRU = Head;
-                Head = val;
-                val.PrevLRU = null;
-            }
+            _cache = new TwoGenerationCache<string, T>(Math.Max(capacity, 2), StringComparer.Ordinal);
         }
 
         public void Insert(string key, T item)
         {
             if (item == null) return;
 
-
-            lock (Cache)
-            {
-                if (Cache.ContainsKey(key))
-                {
-                    Touch(Cache[key]);
-                    return;
-                }
-
-
-                if (Head == null)
-                {
-                    Head = new LRUValue<T>(key, item);
-                    Tail = Head;
-                    Cache[key] = Head;
-                    Count++;
-                    return;
-                }
-
-                // NOTE(agw): theoretically Tail should never be null here if Count > 0
-                if (Count > Capacity && Tail != null)
-                {
-                    Cache.Remove(Tail.Key, out var _);
-
-                    Tail.Value = item;
-                    Tail.Key = key;
-
-                    Cache[key] = Tail;
-                    Touch(Tail);
-                }
-                else
-                {
-                    var newValue = new LRUValue<T>(key, item);
-                    Head.PrevLRU = newValue;
-                    newValue.NextLRU = Head;
-                    Head = newValue;
-
-                    Cache[key] = newValue;
-                    Count++;
-                }
-            }
+            _cache.Set(key, item);
         }
 
         public bool TryGetValue(string key, [MaybeNullWhen(false)] out T value)
         {
-            lock (Cache)
-            {
-                if (key != null && Cache.TryGetValue(key, out var lruValue))
-                {
-                    value = lruValue.Value;
-                    return true;
-                }
-            }
+            if (key != null)
+                return _cache.TryGetValue(key, out value);
 
             value = default;
             return false;

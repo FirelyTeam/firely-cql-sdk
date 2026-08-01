@@ -169,8 +169,24 @@ namespace Hl7.Cql.Conversion
         {
             private static readonly M.FhirMetricService _fhirService = new();
 
+            /// <summary>
+            /// Canonicalization results, bounded. Canonicalizing re-parses the unit expression into its metric
+            /// axes on every call, and quantity comparison — including the hashing behind the set-based
+            /// operators — canonicalizes per value, so an evaluation asks the same questions over and over.
+            /// The answer is a pure function of the input tuple. A failed canonicalization is cached as
+            /// <see langword="null"/>, since invalid units are re-probed just as often as valid ones.
+            /// </summary>
+            private static readonly Runtime.TwoGenerationCache<
+                (string value, string unit, string? codesystem),
+                (string value, string unit, string? codesystem)?> _canonicalCache = new(capacity: 8192);
+
             public bool TryCanonicalize((string value, string unit, string? codesystem) quantity, out (string value, string unit, string? codesystem)? canonical)
-                => _fhirService.TryCanonicalize(quantity, out canonical);
+            {
+                canonical = _canonicalCache.GetOrAdd(
+                    quantity,
+                    static q => _fhirService.TryCanonicalize(q, out var c) ? c : null);
+                return canonical is not null;
+            }
 
             public bool TryConvertTo((string value, string unit, string? codesystem) quantity, string targetUnit, out (string value, string unit, string? codesystem)? result)
                 => _fhirService.TryConvertTo(quantity, targetUnit, out result);
