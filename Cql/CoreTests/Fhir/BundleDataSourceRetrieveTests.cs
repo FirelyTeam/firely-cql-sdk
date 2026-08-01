@@ -348,5 +348,35 @@ namespace CoreTests.Fhir
             foreach (var result in results)
                 result.Should().Equal(expected);
         }
+
+        /// <summary>
+        /// A retrieve is walked repeatedly - a cached definition read from several expressions, the inner source of
+        /// a cross join - and must answer the same both times without asking the filter again, which it can only do
+        /// by having decided membership up front.
+        /// </summary>
+        [TestMethod]
+        public void RetrieveByCodes_IsDecidedOnceAndYieldsTheSameResultOnEveryWalk()
+        {
+            var dr = BuildDataSource();
+
+            var observations = dr.Retrieve<Observation>(ByCodes(Prop("Observation", "code"), new CqlCode("x", NuSystem)));
+
+            observations.Select(o => o.Id).Should().Equal("obs-x");
+            observations.Select(o => o.Id).Should().Equal("obs-x");
+
+            observations.Should().BeAssignableTo<IReadOnlyCollection<Observation>>(
+                "a retrieve hands back its matches, not a query that decides them again on every walk");
+        }
+
+        [TestMethod]
+        public void RetrieveWithoutParameters_YieldsTheSameResultOnEveryWalk()
+        {
+            var dr = BuildDataSource();
+
+            var patients = dr.Retrieve<Patient>(null);
+
+            patients.Select(p => p.Id).Should().Equal("pat");
+            patients.Select(p => p.Id).Should().Equal("pat");
+        }
     }
 }
