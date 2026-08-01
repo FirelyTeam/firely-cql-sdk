@@ -8,9 +8,11 @@
 
 #nullable enable
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 
 namespace CoreTests;
@@ -136,4 +138,51 @@ public class AgeOperatorTests
         Assert.AreEqual(44, operators.AgeAt(AsOf, "year"));
         Assert.AreEqual(ageFirst, operators.Age("year"));
     }
+
+    #region A type resolver that cannot name the patient
+
+    /// <summary>
+    /// A model binding that has no patient type at all is a programming error, not missing data, and must still be
+    /// reported as one — and must name the member that came back empty.
+    /// </summary>
+    [TestMethod]
+    public void AgeOperators_WithoutAPatientType_Throw()
+    {
+        var operators = CqlOperators.Create(new IncompleteTypeResolver { HasPatientType = false });
+
+        Assert.ThrowsException<InvalidOperationException>(() => operators.AgeAt(AsOf, "year"))
+              .Message.Should().Contain(nameof(TypeResolver.PatientType));
+        Assert.ThrowsException<InvalidOperationException>(() => operators.Age("year"))
+              .Message.Should().Contain(nameof(TypeResolver.PatientType));
+    }
+
+    [TestMethod]
+    public void AgeOperators_WithoutABirthDateProperty_Throw()
+    {
+        var operators = CqlOperators.Create(new IncompleteTypeResolver { HasPatientType = true });
+
+        Assert.ThrowsException<InvalidOperationException>(() => operators.AgeAt(AsOf, "year"))
+              .Message.Should().Contain(nameof(TypeResolver.PatientBirthDateProperty));
+        Assert.ThrowsException<InvalidOperationException>(() => operators.Age("year"))
+              .Message.Should().Contain(nameof(TypeResolver.PatientBirthDateProperty));
+    }
+
+    private sealed class IncompleteTypeResolver : BaseTypeResolver
+    {
+        public bool HasPatientType { get; init; }
+
+        internal override Type? PatientType => HasPatientType ? typeof(Patient) : null;
+
+        internal override PropertyInfo? PatientBirthDateProperty => null;
+
+        internal override IEnumerable<Assembly> ModelAssemblies => throw new NotImplementedException();
+
+        internal override IEnumerable<string> ModelNamespaces => throw new NotImplementedException();
+
+        internal override PropertyInfo? GetPrimaryCodePath(string typeSpecifier) => throw new NotImplementedException();
+
+        internal override bool ShouldUseSourceObject(Type type, string propertyName) => true;
+    }
+
+    #endregion
 }
