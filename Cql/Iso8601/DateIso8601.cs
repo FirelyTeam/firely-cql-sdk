@@ -39,7 +39,14 @@ namespace Hl7.Cql.Iso8601
         /// </summary>
         public DateTimeOffset DateTimeOffset { get; }
 
-        private readonly string String;
+        // Formatted lazily: most instances - the intermediates of date arithmetic, comparisons and
+        // FHIR-to-CQL conversions - are never rendered as text, and eager formatting (a StringBuilder and
+        // one small string per component) dominated construction cost. Parsing still stores the original
+        // literal, keeping parse/format roundtrips byte-identical. The ??= race is benign: both threads
+        // compute the same string.
+        private string? _string;
+
+        private string String => _string ??= Format(Year, Month, Day, DateTimePrecision.Day);
 
         /// <summary>
         /// The regular expression used to parse ISO 8601 dates.
@@ -54,7 +61,7 @@ namespace Hl7.Cql.Iso8601
         /// <param name="day">The day component of the date, or <see langword ="null"/>.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public DateIso8601(int year, int? month, int? day, bool strict = false) :
-            this(Format(year, month, day, DateTimePrecision.Day),
+            this(null,
                 year, month, day, strict)
         {
         }
@@ -67,12 +74,12 @@ namespace Hl7.Cql.Iso8601
         /// <param name="precision">The desired precision for this ISO date.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public DateIso8601(DateTimeOffset dto, DateTimePrecision precision, bool strict = false) :
-            this(Format(dto.Year, dto.Month, dto.Day, precision),
+            this(null,
                 dto.Year, dto.Month, dto.Day, strict, precision)
         {
         }
 
-        internal DateIso8601(string @string, int year, int? month, int? day,
+        internal DateIso8601(string? @string, int year, int? month, int? day,
             bool strict = false, DateTimePrecision precision = DateTimePrecision.Unknown)
         {
             if (year == 0)
@@ -146,7 +153,7 @@ namespace Hl7.Cql.Iso8601
                 default,
                 default,
                 default);
-            String = @string;
+            _string = @string;
         }
 
         public override string ToString() => String;

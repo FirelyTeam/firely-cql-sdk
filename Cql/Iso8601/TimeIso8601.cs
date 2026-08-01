@@ -97,7 +97,15 @@ namespace Hl7.Cql.Iso8601
         /// </summary>
         public DateTimeOffset BaseDateTime { get; }
 
-        private readonly string String;
+        // Formatted lazily: most instances - the intermediates of date arithmetic, comparisons and
+        // FHIR-to-CQL conversions - are never rendered as text, and eager formatting (a StringBuilder and
+        // one small string per component) dominated construction cost. Parsing still stores the original
+        // literal, keeping parse/format roundtrips byte-identical. The ??= race is benign: both threads
+        // compute the same string.
+        private string? _string;
+
+        private string String => _string ??=
+            Format(Hour, Minute, Second, Millisecond, OffsetHour, OffsetMinute, DateTimePrecision.Millisecond);
 
         /// <summary>
         /// The regular expression used to parse ISO 8601 date times.
@@ -115,7 +123,7 @@ namespace Hl7.Cql.Iso8601
         /// <param name="osMinutes">The minute component of the time, or <see langword ="null"/>.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public TimeIso8601(int hour, int? minute, int? second, int? ms, int? osHours, int? osMinutes, bool strict = false) :
-            this(Format(hour, minute, second, ms, osHours, NormalizeOffsetMinute(osHours, osMinutes), DateTimePrecision.Millisecond),
+            this(null,
                hour, minute, second, ms, osHours, NormalizeOffsetMinute(osHours, osMinutes), strict)
         {
         }
@@ -130,15 +138,12 @@ namespace Hl7.Cql.Iso8601
         /// <param name="precision">The desired precision for this ISO time.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real date times.</param>
         public TimeIso8601(TimeSpan span, int? offsetHours, int? offsetMinutes, DateTimePrecision precision, bool strict = false) :
-            this(Format(span.Hours, span.Minutes, span.Seconds, span.Milliseconds,
-                offsetHours,
-                NormalizeOffsetMinute(offsetHours, offsetMinutes),
-                precision),
+            this(null,
                 span.Hours, span.Minutes, span.Seconds, span.Milliseconds, offsetHours, NormalizeOffsetMinute(offsetHours, offsetMinutes), strict, precision)
         {
         }
 
-        internal TimeIso8601(string @string, int hour, int? minute, int? second, int? ms, int? osHour, int? osMinute,
+        internal TimeIso8601(string? @string, int hour, int? minute, int? second, int? ms, int? osHour, int? osMinute,
             bool strict = false, DateTimePrecision precision = DateTimePrecision.Unknown)
         {
             if (strict)
@@ -241,7 +246,7 @@ namespace Hl7.Cql.Iso8601
             DateTimeOffset = BaseDateTime.Add(TimeSpan);
             DateTimeOffsetUtc = DateTimeOffset.ToUniversalTime();
 
-            String = @string;
+            _string = @string;
         }
 
         private static int? NormalizeOffsetMinute(int? offsetHour, int? offsetMinute) =>

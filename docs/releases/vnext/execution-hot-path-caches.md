@@ -12,3 +12,12 @@
 
 Combined with the operator sweep, CPU for that 900-case slice drops from 1.31–1.40 s (develop, bracketing runs)
 to 1.19 s, with allocation down from 715 MB to 691 MB.
+
+- The ISO 8601 date/time primitives (`DateTimeIso8601`, `DateIso8601`, `TimeIso8601`) no longer format their text
+  representation eagerly in the constructor. Most instances — the intermediates of date arithmetic, comparisons
+  and FHIR-to-CQL conversions — are never rendered as text, yet each construction paid a `StringBuilder` and one
+  small string per component. The text form is now computed on first use and cached; parsing still stores the
+  original literal, so parse/format roundtrips stay byte-identical (pinned by a 154-case golden test captured
+  from the eager implementation). Constructing a full `CqlDateTime` drops from 1232 ns / 2864 B to 545 ns / 792 B,
+  and a `CqlDateTime.Add` — paid per date operation in measure logic — from 1095 ns / 2912 B to 313 ns / 840 B.
+  Over the 900-case CMS harness this removes ~66 MB (−9.6%) of steady-state allocation.

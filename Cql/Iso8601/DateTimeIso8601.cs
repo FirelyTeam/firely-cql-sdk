@@ -74,7 +74,15 @@ namespace Hl7.Cql.Iso8601
         /// </summary>
         public DateTimeOffset DateTimeOffsetUtc { get; set; }
 
-        private readonly string String;
+        // Formatted lazily: most instances - the intermediates of date arithmetic, comparisons and
+        // FHIR-to-CQL conversions - are never rendered as text, and eager formatting (a StringBuilder and
+        // one small string per component) dominated construction cost. Parsing still stores the original
+        // literal, keeping parse/format roundtrips byte-identical. The ??= race is benign: both threads
+        // compute the same string.
+        private string? _string;
+
+        private string String => _string ??=
+            Format(Year, Month, Day, Hour, Minute, Second, Millisecond, OffsetHour, OffsetMinute, DateTimePrecision.Millisecond);
 
         /// <summary>
         /// The regular expression used to parse ISO 8601 date times.
@@ -104,7 +112,7 @@ namespace Hl7.Cql.Iso8601
         /// <param name="osMinute">The minute component of the date, or <see langword ="null"/>.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public DateTimeIso8601(int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, bool strict = false) :
-            this(Format(year, month, day, hour, minute, second, ms, osHour, NormalizeOffsetMinute(osHour, osMinute), DateTimePrecision.Millisecond),
+            this(null,
                 year, month, day, hour, minute, second, ms, osHour, NormalizeOffsetMinute(osHour, osMinute), strict)
         {
         }
@@ -117,7 +125,7 @@ namespace Hl7.Cql.Iso8601
         /// <param name="precision">The desired precision for this ISO date time.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real date times.</param>
         public DateTimeIso8601(DateTimeOffset dto, DateTimePrecision precision, bool strict = false) :
-            this(Format(dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, NormalizeOffsetMinute(dto.Offset.Hours, dto.Offset.Minutes), precision),
+            this(null,
                 dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, NormalizeOffsetMinute(dto.Offset.Hours, dto.Offset.Minutes), strict, precision)
         {
         }
@@ -134,7 +142,7 @@ namespace Hl7.Cql.Iso8601
         {
         }
 
-        internal DateTimeIso8601(string @string, int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? osHour, int? osMinute,
+        internal DateTimeIso8601(string? @string, int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? osHour, int? osMinute,
             bool strict = false, DateTimePrecision precision = DateTimePrecision.Unknown)
         {
             if (year == 0)
@@ -295,7 +303,7 @@ namespace Hl7.Cql.Iso8601
             DateTimeOffsetUtc = DateTimeOffset.ToUniversalTime();
             if (OffsetHour != null)
                 RationalOffset = (decimal)offset.TotalHours;
-            String = @string;
+            _string = @string;
         }
 
         private static int? NormalizeOffsetMinute(int? offsetHour, int? offsetMinute) =>
