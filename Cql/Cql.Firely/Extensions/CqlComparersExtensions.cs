@@ -93,13 +93,20 @@ namespace Hl7.Cql.Fhir.Extensions
         /// <returns></returns>
         public static CqlComparers CompareResourcesById(this CqlComparers comparers, StringComparer idComparer)
         {
-            var derivedFromResource = typeof(Patient).Assembly.GetTypes().Where(t => typeof(Resource).IsAssignableFrom(t));
             var resourceIdComparer = new ResourceIdCqlComparer(new StringCqlComparer(idComparer));
-            foreach (var type in derivedFromResource)
+            foreach (var type in ResourceTypes.Value)
             {
                 comparers.Register(type, resourceIdComparer);
             }
             return comparers;
         }
+
+        /// <summary>
+        /// Every resource type in the model assembly. Enumerating the assembly's types to find them is a fixed cost
+        /// that does not depend on the evaluation, so it is paid once rather than on every context that opts into
+        /// comparing resources by id.
+        /// </summary>
+        private static readonly Lazy<Type[]> ResourceTypes = new(() =>
+            typeof(Patient).Assembly.GetTypes().Where(t => typeof(Resource).IsAssignableFrom(t)).ToArray());
     }
 }
