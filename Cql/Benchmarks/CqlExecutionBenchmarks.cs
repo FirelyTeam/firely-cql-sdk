@@ -172,10 +172,36 @@ public class CqlExecutionBenchmarks
     }
 
     /// <summary>
-    /// Comparing a coded element against a string literal, the <c>Encounter.status = 'finished'</c> shape.
+    /// Comparing a coded element against a string literal — <c>Encounter.status = 'finished'</c> — in the shape the
+    /// code generator actually emits for it: convert the enum behind the element to its FHIR wire literal, then
+    /// compare two strings.
     /// </summary>
-    [Benchmark(Description = "Coded element compared to a string literal")]
+    /// <remarks>
+    /// Deliberately not <see cref="ICqlOperators.EnumEqualsString"/>, which reads like the operator for this and is
+    /// measured separately below. No generated library calls it — the generator emits the two-step form instead —
+    /// so measuring it would say nothing about what an evaluation spends here.
+    /// </remarks>
+    [Benchmark(Description = "Coded element compared to a string literal (generated shape)")]
     public int CodedElementEqualsString()
+    {
+        var count = 0;
+        foreach (var coded in _codedElements)
+        {
+            var literal = _operators.Convert<string>(coded);
+            if (_operators.Equal(literal, "finished") == true)
+                count++;
+        }
+
+        return count;
+    }
+
+    /// <summary>
+    /// The same comparison through <see cref="ICqlOperators.EnumEqualsString"/>, which routes it to the enum
+    /// comparer in one step. Nothing the generator emits reaches this operator today; it is measured so that the
+    /// path stays covered for hosts calling <see cref="ICqlOperators"/> directly.
+    /// </summary>
+    [Benchmark(Description = "Coded element compared to a string literal (EnumEqualsString)")]
+    public int CodedElementEnumEqualsString()
     {
         var count = 0;
         foreach (var coded in _codedElements)

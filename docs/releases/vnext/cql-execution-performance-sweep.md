@@ -29,8 +29,12 @@ in CQL-to-ELM translation or code generation is affected, and no generated C# ch
 - The age operators (`AgeInYears`, `AgeInYearsAt` and friends) no longer resolve the model's patient mapping and
   close the retrieve over the patient type by reflection on every call. This is the largest single win: measure
   logic evaluates these per element of a query, not once per patient.
-- Comparing a coded element against a string literal (`Encounter.status = 'finished'`) reads the enum member's FHIR
-  wire literal from a memo rather than from its attribute on every comparison.
+- Comparing a coded element against a string literal (`Encounter.status = 'finished'`) is generated as a conversion
+  of the enum behind the element to its FHIR wire literal followed by a string comparison, and the conversion is
+  what the type-converter memo above removes the per-comparison cost from — resolving it used to read a
+  `FhirEnumeration` attribute every time. `ICqlOperators.EnumEqualsString`, which routes the same comparison
+  through the enum comparer in one step, benefits separately from a memo of the wire literal; no generated library
+  calls that operator today, but hosts driving `ICqlOperators` directly may.
 - `sort` and `sort by` return a fully evaluated list. A lazy result re-ran the whole sort — and, for `sort by`, the
   sort expression for every element — each time it was walked, and evaluated the sort expression three times per
   element even on the first walk.
@@ -38,13 +42,17 @@ in CQL-to-ELM translation or code generation is affected, and no generated C# ch
   the contained one.
 - `Avg`, `GeometricMean`, `Median`, `Collapse`, `Tail` and `properly includes` each walk their arguments once.
 
-Measured with the new `CqlExecutionBenchmarks`, over 200 resources, on .NET 10:
+Measured with the new `CqlExecutionBenchmarks`, over 200 resources, on .NET 10, from one before/after pair of runs:
 
-| Operator shape                                       | Before      | After      |
-| ---------------------------------------------------- | ----------- | ---------- |
-| Age operator, per element                            | 13.4 µs     | 0.23 µs    |
-| Coded element compared to a string literal           | 1.22 µs     | 0.019 µs   |
-| `includes` over two 200-element lists                | 666 µs      | 16 µs      |
-| Late-bound property access, per element              | 0.89 µs     | 0.12 µs    |
-| Code-filtered retrieve read by 8 expressions         | 176 µs      | 23 µs      |
-| `sort by` whose result is walked twice               | 200 µs      | 83 µs      |
+| Operator shape                                        | Before   | After    |
+| ----------------------------------------------------- | -------- | -------- |
+| Age operator, per element                             | 13.2 µs  | 0.23 µs  |
+| Coded element vs. string literal, per element         | 2.60 µs  | 0.058 µs |
+| `includes` over two 200-element lists                 | 672 µs   | 16 µs    |
+| Late-bound property access, per element               | 0.90 µs  | 0.12 µs  |
+| Code-filtered retrieve read by 8 expressions          | 172 µs   | 26 µs    |
+| `sort by` whose result is walked twice                | 181 µs   | 92 µs    |
+
+The coded-element row measures the two-step form the code generator emits, not
+`ICqlOperators.EnumEqualsString` — the benchmark carries both, and the operator no generated library calls is
+labelled as such.
