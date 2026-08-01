@@ -108,14 +108,16 @@ namespace Hl7.Cql.Operators
             if (argument == null) return null;
             else
             {
-                decimal product = 0;
+                // Seeding with the multiplicative identity keeps a genuine 0 element in the product. The previous
+                // "product == 0 means uninitialized" idiom dropped such an element while still counting it, so a
+                // list containing a zero got a non-zero geometric mean.
+                decimal product = 1m;
                 var nonNullCount = 0;
                 foreach (decimal? d in argument)
                 {
                     if (d != null)
                     {
-                        if (product == 0) product = d.Value;
-                        else product *= d.Value;
+                        product *= d.Value;
                         nonNullCount++;
                     }
                 }
@@ -238,7 +240,7 @@ namespace Hl7.Cql.Operators
         }
 
         private static List<T> SortedNonNullValues<T>(IEnumerable<T?> source)
-            where T : struct
+            where T : struct, IComparable<T>
         {
             var values = new List<T>();
             foreach (var value in source)
@@ -247,8 +249,10 @@ namespace Hl7.Cql.Operators
                     values.Add(value.Value);
             }
 
-            values.Sort();
-            return values;
+            // OrderBy rather than List<T>.Sort: the in-place sort is unstable, and for decimals two equal values
+            // can differ in scale (1.0m vs 1.000m), so an unstable sort could change which representation the
+            // median reports depending on input size and layout.
+            return values.OrderBy(static v => v).ToList();
         }
 
 

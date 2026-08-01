@@ -100,6 +100,35 @@ public class AggregateOperatorTests
         Assert.IsNull(operators.Median(Array.Empty<long?>()));
     }
 
+    /// <summary>
+    /// The sort behind Median must be stable: <c>4.0m</c> and <c>4.00m</c> are equal to the comparer but differ in
+    /// scale, so which representation the median reports depends on the sort preserving input order of equal values.
+    /// The expectation is computed with the documented-stable <c>OrderBy</c>; an unstable in-place sort reorders the
+    /// equal middle run of this input and reports a different scale.
+    /// </summary>
+    [TestMethod]
+    public void Median_Decimal_EqualValuesWithDifferentScales_KeepsInputOrder()
+    {
+        var rng = new Random(0);
+        var values = new List<decimal?>();
+        for (var i = 0; i < 101; i++)
+        {
+            var value = rng.Next(1, 6);
+            var scale = rng.Next(0, 20);
+            var text = scale == 0 ? value.ToString() : value + "." + new string('0', scale);
+            values.Add(decimal.Parse(text, System.Globalization.CultureInfo.InvariantCulture));
+        }
+
+        var stableReference = values.Where(v => v.HasValue).Select(v => v!.Value).OrderBy(v => v).ToList();
+        var expected = stableReference[stableReference.Count >> 1];
+
+        var median = Operators().Median(values);
+
+        Assert.AreEqual(
+            expected.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            median!.Value.ToString(System.Globalization.CultureInfo.InvariantCulture));
+    }
+
     [TestMethod]
     public void Median_AllNulls_IsNull()
     {
@@ -138,6 +167,16 @@ public class AggregateOperatorTests
     public void GeometricMean_WithInterleavedNulls_RootsByTheNonNullCount()
     {
         Assert.AreEqual(4m, Operators().GeometricMean(new decimal?[] { 2.0m, null, 8.0m, null }));
+    }
+
+    /// <summary>
+    /// A genuine zero element makes the product — and so the geometric mean — zero. The product loop used to treat
+    /// a zero product as "not yet initialized" and dropped the element while still counting it.
+    /// </summary>
+    [TestMethod]
+    public void GeometricMean_WithZero_IsZero()
+    {
+        Assert.AreEqual(0m, Operators().GeometricMean(new decimal?[] { 0m, 4m, 9m }));
     }
 
     [TestMethod]

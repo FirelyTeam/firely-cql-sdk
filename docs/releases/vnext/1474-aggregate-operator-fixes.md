@@ -9,6 +9,9 @@
   made `GeometricMean({ 2.0, null, 8.0, null })` return `2.0` instead of `4.0`. As a side effect of the corrected
   exponent, an input whose only non-null value is negative (e.g. `{ -16.0, null }`) now returns that value where it
   previously threw an `OverflowException` (`Math.Pow` of a negative base with a fractional exponent is `NaN`) (#1472).
+- `GeometricMean` of a list containing a genuine `0` returns `0`. The product loop treated a zero product as
+  "not yet initialized" and dropped the element while still counting it, so `GeometricMean({ 0.0, 4.0, 9.0 })`
+  returned `3.3019...` instead of `0` (#1474).
 
 ## Improvements
 
