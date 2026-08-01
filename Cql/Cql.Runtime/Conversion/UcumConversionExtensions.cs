@@ -169,8 +169,20 @@ namespace Hl7.Cql.Conversion
         {
             private static readonly M.FhirMetricService _fhirService = new();
 
+            // PROBE ONLY - unbounded, for measurement.
+            private static readonly System.Collections.Concurrent.ConcurrentDictionary<
+                (string value, string unit, string? codesystem),
+                (string value, string unit, string? codesystem)?> _canonicalCache = new();
+
+            public static int CacheSize => _canonicalCache.Count;
+
             public bool TryCanonicalize((string value, string unit, string? codesystem) quantity, out (string value, string unit, string? codesystem)? canonical)
-                => _fhirService.TryCanonicalize(quantity, out canonical);
+            {
+                canonical = _canonicalCache.GetOrAdd(
+                    quantity,
+                    static q => _fhirService.TryCanonicalize(q, out var c) ? c : null);
+                return canonical is not null;
+            }
 
             public bool TryConvertTo((string value, string unit, string? codesystem) quantity, string targetUnit, out (string value, string unit, string? codesystem)? result)
                 => _fhirService.TryConvertTo(quantity, targetUnit, out result);
