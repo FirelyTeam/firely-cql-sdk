@@ -197,6 +197,36 @@ public class AggregateOperatorTests
         Assert.IsNull(Operators().GeometricMean(null!));
     }
 
+    /// <summary>
+    /// A negative product with a fractional root has no real value, and the spec's <c>Power</c> rule (§9.B) says a
+    /// result that cannot be represented is null — not an <c>OverflowException</c> from casting <c>NaN</c>.
+    /// </summary>
+    [TestMethod]
+    public void GeometricMean_NegativeProductWithFractionalRoot_IsNull()
+    {
+        Assert.IsNull(Operators().GeometricMean(new decimal?[] { -2.0m, 8.0m }));
+    }
+
+    /// <summary>
+    /// A product that overflows <c>Decimal</c> cannot be represented either, so the result is null rather than an
+    /// <c>OverflowException</c> escaping the operator.
+    /// </summary>
+    [TestMethod]
+    public void GeometricMean_ProductOverflow_IsNull()
+    {
+        Assert.IsNull(Operators().GeometricMean(new decimal?[] { decimal.MaxValue, 2.0m }));
+    }
+
+    /// <summary>
+    /// A single non-null negative value is its own geometric mean: the exponent is <c>1.0</c>, so nothing fractional
+    /// is asked of a negative base and the value is representable.
+    /// </summary>
+    [TestMethod]
+    public void GeometricMean_SingleNegativeValue_IsTheValue()
+    {
+        Assert.AreEqual(-16.0m, Operators().GeometricMean(new decimal?[] { -16.0m, null }));
+    }
+
     #endregion
 
     #region Avg

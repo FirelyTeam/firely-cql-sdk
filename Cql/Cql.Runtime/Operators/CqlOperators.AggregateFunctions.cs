@@ -113,13 +113,23 @@ namespace Hl7.Cql.Operators
                 // list containing a zero got a non-zero geometric mean.
                 decimal product = 1m;
                 var nonNullCount = 0;
-                foreach (decimal? d in argument)
+                try
                 {
-                    if (d != null)
+                    foreach (decimal? d in argument)
                     {
-                        product *= d.Value;
-                        nonNullCount++;
+                        if (d != null)
+                        {
+                            product *= d.Value;
+                            nonNullCount++;
+                        }
                     }
+                }
+                catch (OverflowException)
+                {
+                    // The product itself is outside Decimal's range, so Product(X) cannot be represented and neither
+                    // can Power of it. Per the spec (§9.B) Power: if the result cannot be represented, the result is
+                    // null.
+                    return null;
                 }
                 if (nonNullCount == 0) return null;
                 else
@@ -128,7 +138,20 @@ namespace Hl7.Cql.Operators
                     // of non-null elements - which the loop above already has, where reading argument.Count() here
                     // both walked the source a second time and counted the nulls the product skipped.
                     double count = 1.0 / nonNullCount;
-                    return (decimal)Math.Pow((double)product, count);
+                    double result = Math.Pow((double)product, count);
+                    // Per the spec (§9.B) Power: if the result cannot be represented, the result is null. A negative
+                    // product under a fractional root has no real value (Math.Pow gives NaN), and a result outside
+                    // Decimal's range is not representable either; both are null rather than an OverflowException
+                    // out of the cast.
+                    if (double.IsNaN(result) || double.IsInfinity(result)) return null;
+                    try
+                    {
+                        return (decimal)result;
+                    }
+                    catch (OverflowException)
+                    {
+                        return null;
+                    }
                 }
             }
         }
