@@ -16,48 +16,78 @@ namespace Hl7.Cql.Operators
 
         #region Age
 
-        public int? Age(string precision)
-        {
-            var patientType = TypeResolver.PatientType
-                ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientType)}");
-            var birthDateProperty = TypeResolver.PatientBirthDateProperty
-                ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
-            var method = typeof(IDataSource)
-                .GetMethod(nameof(IDataSource.Retrieve))!
-                .MakeGenericMethod(patientType);
-            var patients = method.Invoke(DataSource, [null]) as IEnumerable<object>;
-            var patientsArray = patients?.ToArray() ?? Array.Empty<object>();
-            if (patientsArray.Length == 1)
-            {
-                var birthDate = birthDateProperty.GetValue(patientsArray[0]);
-                var asDate = TypeConverter.Convert<CqlDate>(birthDate);
-                return CalculateAge(asDate, precision);
-            }
-            else return null;
-        }
+        public int? Age(string precision) =>
+            PatientBirthDate() is { } birthDate ? CalculateAge(birthDate, precision) : null;
 
         #endregion
 
         #region AgeAt
 
-        public int? AgeAt(CqlDate? asOf, string precision)
+        public int? AgeAt(CqlDate? asOf, string precision) =>
+            PatientBirthDate() is { } birthDate ? CalculateAgeAt(birthDate, asOf, precision) : null;
+
+        #endregion
+
+        #region Patient birth date
+
+        /// <summary>
+        /// Retrieves the patient in context and reads their birth date, or returns <see langword="null"/> when the
+        /// data source does not hold exactly one patient.
+        /// </summary>
+        /// <remarks>
+        /// The age operators run per element of a query, not once per patient, so the retrieve they need is bound
+        /// once through <see cref="_retrievePatients"/> rather than resolved and closed over the patient type by
+        /// reflection on every call.
+        /// </remarks>
+        private CqlDate? PatientBirthDate()
         {
-            var patientType = TypeResolver.PatientType
+            _ = TypeResolver.PatientType
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientType)}");
             var birthDateProperty = TypeResolver.PatientBirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
-            var method = typeof(IDataSource)
+
+            var patients = (_retrievePatients ??= BuildPatientRetriever())(DataSource);
+            if (patients is null)
+                return null;
+
+            // The context is a single patient; anything else has no age to speak of. Counting as we go avoids
+            // buffering the retrieve into an array only to look at its length.
+            object? patient = null;
+            var count = 0;
+            foreach (var candidate in patients)
+            {
+                if (++count > 1)
+                    return null;
+                patient = candidate;
+            }
+
+            if (count != 1)
+                return null;
+
+            return TypeConverter.Convert<CqlDate>(birthDateProperty.GetValue(patient));
+        }
+
+        private Func<IDataSource, IEnumerable<object>?>? _retrievePatients;
+
+        private Func<IDataSource, IEnumerable<object>?> BuildPatientRetriever()
+        {
+            var patientType = TypeResolver.PatientType
+                ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientType)}");
+
+            var retrieve = typeof(IDataSource)
                 .GetMethod(nameof(IDataSource.Retrieve))!
                 .MakeGenericMethod(patientType);
-            var patients = method.Invoke(DataSource, [null]) as IEnumerable<object>;
-            var patientsArray = patients?.ToArray() ?? Array.Empty<object>();
-            if (patientsArray.Length == 1)
-            {
-                var birthDate = birthDateProperty.GetValue(patientsArray[0]);
-                var asDate = TypeConverter.Convert<CqlDate>(birthDate);
-                return CalculateAgeAt(asDate, asOf, precision);
-            }
-            else return null;
+
+            var dataSource = Expression.Parameter(typeof(IDataSource), "dataSource");
+            var call = Expression.Call(dataSource, retrieve, Expression.Constant(null, typeof(RetrieveParameters)));
+
+            // IEnumerable<T> is covariant, so the retrieve's result is already an IEnumerable<object> for any
+            // reference patient type - which IDataSource.Retrieve's constraint guarantees.
+            return Expression
+                .Lambda<Func<IDataSource, IEnumerable<object>?>>(
+                    Expression.Convert(call, typeof(IEnumerable<object>)),
+                    dataSource)
+                .Compile();
         }
 
         #endregion

@@ -22,6 +22,7 @@ namespace Hl7.Cql.Fhir
         public FhirTypeResolver(ModelInspector inspector)
         {
             Inspector = inspector;
+            _patientType = new Lazy<Type?>(() => Inspector.PatientMapping?.NativeType);
 
             AddTypesFromInspector();
             // Fix lack of inheritance in the SDK
@@ -108,9 +109,18 @@ namespace Hl7.Cql.Fhir
             return type == typeof(FhirDateTime) && propertyName == "value";
         }
 
-        internal override Type? PatientType => Inspector.PatientMapping?.NativeType;
+        /// <remarks>
+        /// Resolved once. Asking the inspector for its patient mapping searches its class mappings and allocates
+        /// while doing so, and the age operators - which need the patient type - run per element of a query, not
+        /// once per patient. Neither the inspector nor its mappings change over the lifetime of this resolver.
+        /// </remarks>
+        internal override Type? PatientType => _patientType.Value;
 
-        internal override PropertyInfo? PatientBirthDateProperty => typeof(IPatient).GetProperty(nameof(IPatient.BirthDate));
+        private readonly Lazy<Type?> _patientType;
+
+        internal override PropertyInfo? PatientBirthDateProperty => BirthDateProperty;
+
+        private static readonly PropertyInfo? BirthDateProperty = typeof(IPatient).GetProperty(nameof(IPatient.BirthDate));
 
         internal ModelInspector Inspector { get; }
 
