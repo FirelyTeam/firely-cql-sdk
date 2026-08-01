@@ -16,6 +16,14 @@ namespace Hl7.Cql.Primitives
         public const int DaysPerWeek = 7;
         public const double DaysPerWeekDouble = 7.0d;
 
+        /// <summary>
+        /// The proleptic Gregorian calendar the date arithmetic below is defined against. It carries no state that
+        /// the queries made of it can change, so one instance serves every call - where constructing one per call
+        /// put an allocation in front of every "years between" an evaluation computes, and measure logic computes
+        /// one per element of a query.
+        /// </summary>
+        private static readonly GregorianCalendar Calendar = new();
+
 
         /// <summary>
         /// Returns the number of boundaries crossed for the specified precision between this and the argument.
@@ -130,7 +138,7 @@ namespace Hl7.Cql.Primitives
             if (low is not {} firstDto || high is not {} secondDto  || precision == null)
                 return null;
 
-            var calendar = new GregorianCalendar();
+            var calendar = Calendar;
             switch (precision)
             {
                 // https://cql.hl7.org/09-b-cqlreference.html#difference

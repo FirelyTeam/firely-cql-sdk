@@ -149,6 +149,7 @@ namespace Hl7.Cql.Operators
             else
             {
                 var type = source.GetType();
+                var access = ResolveLateBoundProperty(type, propertyName);
 
                 // Mirror the design-time behavior in CodeBuilderContext.PropertyHelper:
                 // for properties such as FhirDateTime.value, use the source object itself and
@@ -157,16 +158,12 @@ namespace Hl7.Cql.Operators
                 // when the source is an element reached through a choice or union type surfaced
                 // as 'object' - silently yields null because the raw string value is not
                 // assignable to T.
-                if (TypeResolver.ShouldUseSourceObject(type, propertyName))
+                if (access.UseSourceObject)
                     return ConvertOrNull<T>(source);
 
-                var property = type.GetProperty(propertyName);
-                if (property == null)
-                {
-                    property = TypeResolver.GetProperty(type, propertyName);
-                    if (property == null)
-                        return (T)(object)null!;
-                }
+                if (access.Property is not { } property)
+                    return (T)(object)null!;
+
                 propertyValue = property.GetValue(source);
             }
 
@@ -183,6 +180,36 @@ namespace Hl7.Cql.Operators
             }
             else return ConvertOrNull<T>(propertyValue);
         }
+
+        /// <summary>
+        /// How a late-bound access to <c>propertyName</c> on a given runtime type is served: from the source object
+        /// itself, from a property, or not at all.
+        /// </summary>
+        private readonly record struct LateBoundPropertyAccess(bool UseSourceObject, PropertyInfo? Property);
+
+        /// <summary>
+        /// Resolutions of <see cref="LateBoundProperty{T}"/>, memoized per (runtime type, property name).
+        /// Resolving one means a reflection lookup on the type and, failing that, a walk through the type resolver's
+        /// model metadata that allocates a wrapper <see cref="PropertyInfo"/> — per access, for an operator that
+        /// runs once per element of a query. The answer only depends on the type, the name and this instance's
+        /// <see cref="TypeResolver"/>, none of which change over the lifetime of these operators.
+        /// </summary>
+        private readonly ConcurrentDictionary<(Type Type, string PropertyName), LateBoundPropertyAccess> _lateBoundProperties = new();
+
+        private LateBoundPropertyAccess ResolveLateBoundProperty(Type type, string propertyName) =>
+            _lateBoundProperties.GetOrAdd(
+                (type, propertyName),
+                static (key, self) =>
+                {
+                    if (self.TypeResolver.ShouldUseSourceObject(key.Type, key.PropertyName))
+                        return new LateBoundPropertyAccess(UseSourceObject: true, Property: null);
+
+                    var property = key.Type.GetProperty(key.PropertyName)
+                                   ?? self.TypeResolver.GetProperty(key.Type, key.PropertyName);
+
+                    return new LateBoundPropertyAccess(UseSourceObject: false, Property: property);
+                },
+                this);
 
         private T ConvertOrNull<T>(object? value)
         {

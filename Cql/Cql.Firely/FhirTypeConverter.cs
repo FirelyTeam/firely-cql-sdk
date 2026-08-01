@@ -611,7 +611,10 @@ namespace Hl7.Cql.Fhir
                     var systemAndCode = ((ICoded)code).ToCodings().Single();
                     return new CqlCode(systemAndCode.Code, systemAndCode.System);
                 });
-                converter.AddConversion(codeOfEnumType, nullableEnumType, code => code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
+                // Resolve the property once, at registration: the conversion runs per value during an evaluation,
+                // and a GetProperty lookup on every one of those is pure overhead.
+                var objectValueProperty = codeOfEnumType.GetProperty("ObjectValue")!;
+                converter.AddConversion(codeOfEnumType, nullableEnumType, code => objectValueProperty.GetValue(code)!);
                 converter.AddConversion(codeOfEnumType, typeof(string), code =>
                 {
                     var systemAndCode = ((ICoded)code).ToCodings().Single();

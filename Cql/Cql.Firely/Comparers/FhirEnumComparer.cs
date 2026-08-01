@@ -43,17 +43,30 @@ namespace Hl7.Cql.Fhir.Comparers
             return null;
         }
 
-        private static int CompareEnumToString(object @enum, string value)
-        {
-            var enumType = @enum.GetType();
-            var enumStringValue = Enum.GetName(@enum.GetType(), @enum)!;
-            var memberInfo = enumType.GetMember(enumStringValue).Single();
-            var literalAttribute = memberInfo.GetCustomAttribute<EnumLiteralAttribute>();
-            if (literalAttribute != null)
+        private static int CompareEnumToString(object @enum, string value) =>
+            string.Compare(LiteralOf(@enum), value, StringComparison.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// The FHIR wire literal of an enum member (e.g. <c>Encounter.EncounterStatus.InProgress</c> to
+        /// <c>"in-progress"</c>), falling back to the member's own name when it carries no
+        /// <see cref="EnumLiteralAttribute"/>.
+        /// </summary>
+        /// <remarks>
+        /// Memoized per enum member. Comparing a FHIR coded element against a string literal - <c>Encounter.status
+        /// = 'finished'</c> and friends - is among the most common things measure logic does, once per element of a
+        /// query, and reading the attribute means a member lookup plus attribute instantiation each time. There are
+        /// only as many entries as there are enum members in the model, and boxed enum values compare by value, so
+        /// the same member always finds its entry.
+        /// </remarks>
+        private static readonly ConcurrentDictionary<object, string> Literals = new();
+
+        private static string LiteralOf(object @enum) =>
+            Literals.GetOrAdd(@enum, static e =>
             {
-                return string.Compare(literalAttribute.Literal, value, StringComparison.OrdinalIgnoreCase);
-            }
-            else return string.Compare(enumStringValue, value, StringComparison.OrdinalIgnoreCase);
-        }
+                var enumType = e.GetType();
+                var enumStringValue = Enum.GetName(enumType, e)!;
+                var memberInfo = enumType.GetMember(enumStringValue).Single();
+                return memberInfo.GetCustomAttribute<EnumLiteralAttribute>()?.Literal ?? enumStringValue;
+            });
     }
 }

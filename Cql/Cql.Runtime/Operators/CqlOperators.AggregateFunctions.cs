@@ -75,17 +75,20 @@ namespace Hl7.Cql.Operators
                 return null;
             else
             {
-                var noNulls = argument
-                    .Where(x => x.HasValue)
-                    .Select(x => x!.Value);
-
-                if (!noNulls.Any())
-                    return null;
-
+                // One walk of the source: the emptiness test, the total and the count all come out of the same
+                // pass, where the Where/Select query behind them was walked three times.
                 decimal total = 0;
-                foreach (decimal val in noNulls)
-                    total += val;
-                return total / noNulls.Count();
+                var count = 0;
+                foreach (var value in argument)
+                {
+                    if (value.HasValue)
+                    {
+                        total += value.Value;
+                        count++;
+                    }
+                }
+
+                return count == 0 ? null : total / count;
             }
         }
 
@@ -106,20 +109,23 @@ namespace Hl7.Cql.Operators
             else
             {
                 decimal product = 0;
-                bool AllNull = true;
+                var nonNullCount = 0;
                 foreach (decimal? d in argument)
                 {
                     if (d != null)
                     {
                         if (product == 0) product = d.Value;
                         else product *= d.Value;
-                        AllNull = false;
+                        nonNullCount++;
                     }
                 }
-                if (AllNull == true) return null;
+                if (nonNullCount == 0) return null;
                 else
                 {
-                    double count = 1.0 / argument.Count();
+                    // The spec (§9.B) defines this as Power(Product(X), 1 / Count(X)), and CQL's Count is the number
+                    // of non-null elements - which the loop above already has, where reading argument.Count() here
+                    // both walked the source a second time and counted the nulls the product skipped.
+                    double count = 1.0 / nonNullCount;
                     return (decimal)Math.Pow((double)product, count);
                 }
             }
@@ -181,121 +187,68 @@ namespace Hl7.Cql.Operators
 
 
 
+        // The three overloads share one shape: collect the non-null values in a single pass, sort them in place,
+        // and read the middle out of that sorted list by index. Reading the odd-length median out of the original
+        // source instead - as this used to - walks the source a second time and indexes into a sequence that is
+        // neither sorted nor stripped of its nulls, so it returns an arbitrary element rather than the median.
+
         public decimal? Median(IEnumerable<decimal?> source)
         {
             if (source == null)
-            {
                 return null;
-            }
-            else
-            {
-                var nonNull = source.Where(d => d.HasValue).ToList();
-                if (nonNull.Count == 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    var sortedList = nonNull
-                        .Select(d => d!.Value)
-                        .OrderBy(d => d)
-                        .ToList();
-                    // check if the 1 bit is set or not.  if not, number is even
-                    var isEven = (sortedList.Count & 1) == 0;
-                    // shift by 1 to divide by 2
-                    var middle = sortedList.Count() >> 1;
-                    if (isEven)
-                    {
-                        var a = sortedList.ElementAt(middle);
-                        var b = sortedList.ElementAt(middle - 1);
-                        // can't shift decimals so use division
-                        return (a + b) / 2m;
-                    }
-                    else
-                    {
-                        return source.ElementAt(middle);
-                    }
 
-                }
-            }
+            var sorted = SortedNonNullValues(source);
+            if (sorted.Count == 0)
+                return null;
+
+            // check if the 1 bit is set or not.  if not, number is even
+            var isEven = (sorted.Count & 1) == 0;
+            // shift by 1 to divide by 2
+            var middle = sorted.Count >> 1;
+            // can't shift decimals so use division
+            return isEven ? (sorted[middle] + sorted[middle - 1]) / 2m : sorted[middle];
         }
 
         public int? Median(IEnumerable<int?> source)
         {
             if (source == null)
-            {
                 return null;
-            }
-            else
-            {
-                var nonNull = source.Where(d => d.HasValue).ToList();
-                if (nonNull.Count == 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    var sortedList = nonNull
-                        .Select(d => d!.Value)
-                        .OrderBy(d => d)
-                        .ToList();
-                    // check if the 1 bit is set or not.  if not, number is even
-                    var isEven = (sortedList.Count & 1) == 0;
-                    // shift by 1 to divide by 2
-                    var middle = sortedList.Count() >> 1;
-                    if (isEven)
-                    {
-                        var a = sortedList.ElementAt(middle);
-                        var b = sortedList.ElementAt(middle - 1);
-                        // can't shift decimals so use division
-                        return (a + b) / 2;
-                    }
-                    else
-                    {
-                        return source.ElementAt(middle);
-                    }
 
-                }
-            }
+            var sorted = SortedNonNullValues(source);
+            if (sorted.Count == 0)
+                return null;
+
+            var isEven = (sorted.Count & 1) == 0;
+            var middle = sorted.Count >> 1;
+            return isEven ? (sorted[middle] + sorted[middle - 1]) / 2 : sorted[middle];
         }
 
         public long? Median(IEnumerable<long?> source)
         {
             if (source == null)
-            {
                 return null;
-            }
-            else
-            {
-                var nonNull = source.Where(d => d.HasValue).ToList();
-                if (nonNull.Count == 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    var sortedList = nonNull
-                        .Select(d => d!.Value)
-                        .OrderBy(d => d)
-                        .ToList();
-                    // check if the 1 bit is set or not.  if not, number is even
-                    var isEven = (sortedList.Count & 1) == 0;
-                    // shift by 1 to divide by 2
-                    var middle = sortedList.Count() >> 1;
-                    if (isEven)
-                    {
-                        var a = sortedList.ElementAt(middle);
-                        var b = sortedList.ElementAt(middle - 1);
-                        // can't shift decimals so use division
-                        return (a + b) / 2L;
-                    }
-                    else
-                    {
-                        return source.ElementAt(middle);
-                    }
 
-                }
+            var sorted = SortedNonNullValues(source);
+            if (sorted.Count == 0)
+                return null;
+
+            var isEven = (sorted.Count & 1) == 0;
+            var middle = sorted.Count >> 1;
+            return isEven ? (sorted[middle] + sorted[middle - 1]) / 2L : sorted[middle];
+        }
+
+        private static List<T> SortedNonNullValues<T>(IEnumerable<T?> source)
+            where T : struct
+        {
+            var values = new List<T>();
+            foreach (var value in source)
+            {
+                if (value.HasValue)
+                    values.Add(value.Value);
             }
+
+            values.Sort();
+            return values;
         }
 
 

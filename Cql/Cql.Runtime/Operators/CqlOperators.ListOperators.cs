@@ -30,7 +30,8 @@ namespace Hl7.Cql.Operators
                 return false;
             }
 
-            foreach (var i in list.Cast<object?>())
+            // Comparer takes object, so the elements need no Cast<object?> iterator in front of the loop.
+            foreach (var i in list)
                 if (Comparer.Compare(item, i, null) == 0)
                     return true;
             return false;
@@ -736,17 +737,22 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null) return null;
 
+            // Index the containing list once instead of scanning it per element of the contained list, which
+            // otherwise costs left.Count * right.Count comparisons. The set uses the same comparer the scan did,
+            // and null is tracked separately because the comparer's hash code is not defined for it.
+            var seen = new HashSet<object>(EqualityComparer);
+            var seenNull = false;
+            foreach (var t in left)
+            {
+                if (t is null)
+                    seenNull = true;
+                else
+                    seen.Add(t);
+            }
+
             foreach (var element in right)
             {
-                var found = false;
-                foreach (var t in left)
-                {
-                    if (EqualityComparer.Equals(element!, t!))
-                    {
-                        found = true;
-                        break;
-                    }
-                }
+                var found = element is null ? seenNull : seen.Contains(element);
                 if (!found)
                     return false;
             }
@@ -896,10 +902,15 @@ namespace Hl7.Cql.Operators
         {
             if (left is null || right is null) return null;
 
-            var includes = ListIncludedInList(right, left);
+            // Both the inclusion test and the size comparison need every element of both lists, so a lazily
+            // produced argument is materialized once here rather than produced again for the size comparison.
+            var leftItems = left as ICollection<T> ?? left.ToList();
+            var rightItems = right as ICollection<T> ?? right.ToList();
+
+            var includes = ListIncludedInList(rightItems, leftItems);
             if (includes != true) return includes;
 
-            return left.Count() > right.Count();
+            return leftItems.Count > rightItems.Count;
         }
 
         #endregion
@@ -965,10 +976,10 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null)
                 return null;
-            else if (argument.Count() == 0)
-                return new List<T>();
-            else
-                return ListSkip(argument, 1);
+
+            // Skip(1) already yields nothing for an empty list, so the emptiness test only needs to know whether
+            // there is a first element - not how many there are, which Count() walks the whole list to find out.
+            return ListSkip(argument, 1);
         }
 
         public IEnumerable<T>? ListTake<T>(IEnumerable<T> argument, int? number)
@@ -1015,57 +1026,89 @@ namespace Hl7.Cql.Operators
         #region Sort
 
 
+        // Both sorts return a fully evaluated list. A lazy OrderBy would re-run the whole sort — and, for SortBy,
+        // re-evaluate the sort expression for every element — each time the result is walked, and a sorted list is
+        // typically walked more than once. It would also keep re-reading the source, which callers are free to
+        // consider consumed once the operator has returned.
+
         public IEnumerable<T>? ListSort<T>(IEnumerable<T>? source, ListSortDirection order)
         {
             if (source == null)
                 return null;
 
-            var nullRecords = source.Where(w => w == null);
-            var nonNullRecords = source.Where(w => w != null);
+            if (order is not (ListSortDirection.Ascending or ListSortDirection.Descending))
+                throw new NotSupportedException($"Unknown sort order {order}");
 
+            // CQL orders nulls first ascending and last descending. Partitioning in one pass avoids walking the
+            // source twice, which for a lazily produced source means producing it twice.
+            var nullRecords = new List<T>();
+            var nonNullRecords = new List<object>();
+            foreach (var item in source)
+            {
+                if (item == null)
+                    nullRecords.Add(item);
+                else
+                    nonNullRecords.Add(item);
+            }
+
+            // OrderBy rather than List.Sort: it is a stable sort, so elements the comparer considers equal keep
+            // their input order, and descending is its exact reverse - the ordering this operator has always had.
+            var ordered = nonNullRecords.OrderBy(t => t, DataComparer);
+
+            var result = new List<T>(nonNullRecords.Count + nullRecords.Count);
             if (order == ListSortDirection.Ascending)
             {
-                var ordered = nonNullRecords
-                    .Cast<object>()
-                    .OrderBy(t => t, DataComparer)
-                    .Cast<T>()
-                    .ToList();
-                return nullRecords.Concat(ordered);
+                result.AddRange(nullRecords);
+                foreach (var item in ordered)
+                    result.Add((T)item);
             }
-            else if (order == ListSortDirection.Descending)
+            else
             {
-                var ordered = nonNullRecords
-                    .Cast<object>()
-                    .OrderBy(t => t, DataComparer)
-                    .Reverse()
-                    .Cast<T>()
-                    .ToList();
-                return ordered.Concat(nullRecords);
+                foreach (var item in ordered.Reverse())
+                    result.Add((T)item);
+                result.AddRange(nullRecords);
             }
-            else throw new NotSupportedException($"Unknown sort order {order}");
+
+            return result;
         }
 
         public IEnumerable<T>? SortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order)
         {
             if (source == null)
                 return null;
+
+            if (order is not (ListSortDirection.Ascending or ListSortDirection.Descending))
+                throw new NotSupportedException($"Unknown sort order {order}");
+
+            // The sort expression is evaluated once per element and its result kept alongside the element. Splitting
+            // the source into null and non-null keys with two Where clauses, each calling the expression again,
+            // evaluated it three times per element - and once more per element on every later walk of the result.
+            var nullRecords = new List<T>();
+            var keyed = new List<(object Key, T Value)>();
+            foreach (var item in source)
+            {
+                var key = sortByExpr(item);
+                if (key == null)
+                    nullRecords.Add(item);
+                else
+                    keyed.Add((key, item));
+            }
+
+            // OrderBy/OrderByDescending rather than List.Sort: they are stable sorts, so elements whose keys the
+            // comparer considers equal keep their input order - the ordering this operator has always had.
+            var ordered = order == ListSortDirection.Ascending
+                ? keyed.OrderBy(k => k.Key, DataComparer)
+                : keyed.OrderByDescending(k => k.Key, DataComparer);
+
+            var result = new List<T>(keyed.Count + nullRecords.Count);
             if (order == ListSortDirection.Ascending)
-            {
-                var nullRecords = source.Where(s => sortByExpr(s) == null);
-                var nonNullRecords = source.Where(s => sortByExpr(s) != null);
-                var ordered = nonNullRecords.OrderBy(source => sortByExpr(source), DataComparer);
-                var result = nullRecords.Concat(ordered);
-                return result;
-            }
-            else if (order == ListSortDirection.Descending)
-            {
-                var nullRecords = source.Where(s => sortByExpr(s) == null);
-                var nonNullRecords = source.Where(s => sortByExpr(s) != null);
-                var ordered = nonNullRecords.OrderByDescending(source => sortByExpr(source), DataComparer);
-                var result = ordered.Concat(nullRecords);
-                return result;
-            }
-            else throw new NotSupportedException($"Unknown sort order {order}");
+                result.AddRange(nullRecords);
+            foreach (var (_, value) in ordered)
+                result.Add(value);
+            if (order == ListSortDirection.Descending)
+                result.AddRange(nullRecords);
+
+            return result;
         }
 
         #endregion

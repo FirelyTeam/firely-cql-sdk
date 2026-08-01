@@ -51,7 +51,7 @@ internal partial class CqlOperators
         using var litd = lit as IDisposable;
 
         var rit = right!.GetEnumerator();
-        using var ritd = lit as IDisposable;
+        using var ritd = rit as IDisposable;
 
         // Three-valued conjunction over the element comparisons: any false makes the lists known
         // unequal, and short-circuits; otherwise any null element comparison (values that are
@@ -143,7 +143,7 @@ internal partial class CqlOperators
         using var litd = lit as IDisposable;
 
         var rit = right!.GetEnumerator();
-        using var ritd = lit as IDisposable;
+        using var ritd = rit as IDisposable;
 
         while (lit.MoveNext())
         {

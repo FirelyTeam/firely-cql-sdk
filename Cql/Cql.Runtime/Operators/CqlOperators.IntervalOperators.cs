@@ -339,12 +339,11 @@ namespace Hl7.Cql.Operators
             Func<CqlInterval<T?>?, CqlInterval<T?>?, string?, bool?> meets, Func<CqlInterval<T?>?, CqlInterval<T?>?> toClosed)
         {
             if (intervals == null) return null;
-            var count = 0;
-            if (intervals is IList<T> list)
-                count = list.Count;
-            else if (intervals is T[] array)
-                count = array.Length;
-            else count = intervals.Count();
+            // TryGetNonEnumeratedCount covers the list and array cases without walking the input, where the type
+            // tests this replaced asked about IList<T>/T[] - the point type, not the interval type the input
+            // actually holds - and so always fell through to a full Count() walk.
+            if (!intervals.TryGetNonEnumeratedCount(out var count))
+                count = intervals.Count();
             if (count == 0)
                 return new CqlInterval<T?>[0];
 
@@ -372,28 +371,23 @@ namespace Hl7.Cql.Operators
                 else return null;
             };
 
-            var result = new List<CqlInterval<T?>?>();
-            while (queue.Count > 0)
+            // Walk the sorted intervals by index. Taking them off the front of the list instead shifts every
+            // remaining element down one slot per interval, which costs a quadratic amount of copying on a long
+            // list for no gain - the list is read strictly front to back either way.
+            var result = new List<CqlInterval<T?>?>(queue.Count);
+            foreach (var next in queue)
             {
-                var firstInQueue = queue[0];
-                queue.RemoveAt(0);
-                if (result.Count > 0)
+                if (result.Count == 0)
                 {
-                    var lastResult = result[^1];
-                    var combined = TryCombine(lastResult, firstInQueue);
-                    if (combined == null)
-                    {
-                        result.Add(firstInQueue);
-                    }
-                    else
-                    {
-                        result[^1] = combined;
-                    }
+                    result.Add(next);
+                    continue;
                 }
+
+                var combined = TryCombine(result[^1], next);
+                if (combined == null)
+                    result.Add(next);
                 else
-                {
-                    result.Add(firstInQueue);
-                }
+                    result[^1] = combined;
             }
             return result;
 

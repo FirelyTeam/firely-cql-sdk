@@ -43,5 +43,12 @@ internal class StringCqlComparer(StringComparer stringComparer) : CqlComparer<st
     }
 
     /// <inheritdoc/>
-    protected override int GetHashCodeValue(string value) => value.GetHashCode();
+    /// <remarks>
+    /// Hashes the same normalized string <see cref="EqualsValues"/> compares, using the same
+    /// <see cref="System.StringComparer"/>. Hashing the raw value instead would put two strings this comparer
+    /// considers equal — differing only in Unicode normalization form, or in case for a case-insensitive comparer —
+    /// in different buckets of the hash-based operators (<c>distinct</c>, <c>union</c>, <c>except</c>,
+    /// <c>includes</c>), which would then report them as distinct.
+    /// </remarks>
+    protected override int GetHashCodeValue(string value) => StringComparer.GetHashCode(value.Normalize());
 }
