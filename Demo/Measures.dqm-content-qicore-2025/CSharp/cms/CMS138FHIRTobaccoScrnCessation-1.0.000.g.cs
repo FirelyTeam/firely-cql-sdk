@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("CMS138FHIRTobaccoScrnCessation", "1.0.000")]
 public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISingleton<CMS138FHIRTobaccoScrnCessation_1_0_000>
 {
@@ -219,46 +219,44 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             List<CodeableConcept> aq_ = E?.Type;
 
             CqlConcept ar_(CodeableConcept @this) {
-                CqlConcept aw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return aw_;
+                CqlConcept av_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return av_;
             }
 
-            IEnumerable<CqlConcept> as_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)aq_, ar_);
 
-            bool? at_(CqlConcept T) {
-                CqlCode ax_ = this.Health_behavior_intervention__individual__face_to_face__initial_30_minutes(context);
-                CqlConcept ay_ = context.Operators.ConvertCodeToConcept(ax_);
-                bool? az_ = context.Operators.Equivalent(T, ay_);
-                return az_;
+            bool? as_(CqlConcept T) {
+                CqlCode aw_ = this.Health_behavior_intervention__individual__face_to_face__initial_30_minutes(context);
+                CqlConcept ax_ = context.Operators.ConvertCodeToConcept(aw_);
+                bool? ay_ = context.Operators.Equivalent(T, ax_);
+                return ay_;
             }
 
-            IEnumerable<CqlConcept> au_ = context.Operators.Where<CqlConcept>(as_, at_);
-            bool? av_ = context.Operators.Exists<CqlConcept>(au_);
-            return av_;
+            IEnumerable<CqlConcept> at_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)aq_, ar_, as_);
+            bool? au_ = context.Operators.Exists<CqlConcept>(at_);
+            return au_;
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
         bool? d_(Encounter E) {
-            List<CodeableConcept> ba_ = E?.Type;
+            List<CodeableConcept> az_ = E?.Type;
 
-            CqlConcept bb_(CodeableConcept @this) {
-                CqlConcept bg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return bg_;
+            CqlConcept ba_(CodeableConcept @this) {
+                CqlConcept be_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return be_;
             }
 
-            IEnumerable<CqlConcept> bc_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ba_, bb_);
 
-            bool? bd_(CqlConcept T) {
-                CqlCode bh_ = this.Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(context);
-                CqlConcept bi_ = context.Operators.ConvertCodeToConcept(bh_);
-                bool? bj_ = context.Operators.Equivalent(T, bi_);
-                return bj_;
+            bool? bb_(CqlConcept T) {
+                CqlCode bf_ = this.Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(context);
+                CqlConcept bg_ = context.Operators.ConvertCodeToConcept(bf_);
+                bool? bh_ = context.Operators.Equivalent(T, bg_);
+                return bh_;
             }
 
-            IEnumerable<CqlConcept> be_ = context.Operators.Where<CqlConcept>(bc_, bd_);
-            bool? bf_ = context.Operators.Exists<CqlConcept>(be_);
-            return bf_;
+            IEnumerable<CqlConcept> bc_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)az_, ba_, bb_);
+            bool? bd_ = context.Operators.Exists<CqlConcept>(bc_);
+            return bd_;
         }
 
         IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(a_, d_);
@@ -299,11 +297,11 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> an_ = Status_1_15_000.Instance.isEncounterPerformed(context, am_);
 
         bool? ao_(Encounter OfficeBasedEncounter) {
-            CqlInterval<CqlDateTime> bk_ = this.Measurement_Period(context);
-            Period bl_ = OfficeBasedEncounter?.Period;
-            CqlInterval<CqlDateTime> bm_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bl_);
-            bool? bn_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bk_, bm_, "day");
-            return bn_;
+            CqlInterval<CqlDateTime> bi_ = this.Measurement_Period(context);
+            Period bj_ = OfficeBasedEncounter?.Period;
+            CqlInterval<CqlDateTime> bk_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bj_);
+            bool? bl_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bi_, bk_, "day");
+            return bl_;
         }
 
         IEnumerable<Encounter> ap_ = context.Operators.Where<Encounter>(an_, ao_);
@@ -344,22 +342,21 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             List<CodeableConcept> ah_ = E?.Type;
 
             CqlConcept ai_(CodeableConcept @this) {
-                CqlConcept an_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return an_;
+                CqlConcept am_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return am_;
             }
 
-            IEnumerable<CqlConcept> aj_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ah_, ai_);
 
-            bool? ak_(CqlConcept T) {
-                CqlCode ao_ = this.Unlisted_preventive_medicine_service(context);
-                CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
-                bool? aq_ = context.Operators.Equivalent(T, ap_);
-                return aq_;
+            bool? aj_(CqlConcept T) {
+                CqlCode an_ = this.Unlisted_preventive_medicine_service(context);
+                CqlConcept ao_ = context.Operators.ConvertCodeToConcept(an_);
+                bool? ap_ = context.Operators.Equivalent(T, ao_);
+                return ap_;
             }
 
-            IEnumerable<CqlConcept> al_ = context.Operators.Where<CqlConcept>(aj_, ak_);
-            bool? am_ = context.Operators.Exists<CqlConcept>(al_);
-            return am_;
+            IEnumerable<CqlConcept> ak_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ah_, ai_, aj_);
+            bool? al_ = context.Operators.Exists<CqlConcept>(ak_);
+            return al_;
         }
 
         IEnumerable<Encounter> v_ = context.Operators.Where<Encounter>(t_, u_);
@@ -367,25 +364,24 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> x_ = context.Operators.Union<Encounter>(q_, w_);
 
         bool? y_(Encounter E) {
-            List<CodeableConcept> ar_ = E?.Type;
+            List<CodeableConcept> aq_ = E?.Type;
 
-            CqlConcept as_(CodeableConcept @this) {
-                CqlConcept ax_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return ax_;
+            CqlConcept ar_(CodeableConcept @this) {
+                CqlConcept av_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return av_;
             }
 
-            IEnumerable<CqlConcept> at_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ar_, as_);
 
-            bool? au_(CqlConcept T) {
-                CqlCode ay_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure(context);
-                CqlConcept az_ = context.Operators.ConvertCodeToConcept(ay_);
-                bool? ba_ = context.Operators.Equivalent(T, az_);
-                return ba_;
+            bool? as_(CqlConcept T) {
+                CqlCode aw_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure(context);
+                CqlConcept ax_ = context.Operators.ConvertCodeToConcept(aw_);
+                bool? ay_ = context.Operators.Equivalent(T, ax_);
+                return ay_;
             }
 
-            IEnumerable<CqlConcept> av_ = context.Operators.Where<CqlConcept>(at_, au_);
-            bool? aw_ = context.Operators.Exists<CqlConcept>(av_);
-            return aw_;
+            IEnumerable<CqlConcept> at_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)aq_, ar_, as_);
+            bool? au_ = context.Operators.Exists<CqlConcept>(at_);
+            return au_;
         }
 
         IEnumerable<Encounter> z_ = context.Operators.Where<Encounter>(t_, y_);
@@ -396,11 +392,11 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> ae_ = Status_1_15_000.Instance.isEncounterPerformed(context, ad_);
 
         bool? af_(Encounter PreventiveEncounter) {
-            CqlInterval<CqlDateTime> bb_ = this.Measurement_Period(context);
-            Period bc_ = PreventiveEncounter?.Period;
-            CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bc_);
-            bool? be_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bb_, bd_, "day");
-            return be_;
+            CqlInterval<CqlDateTime> az_ = this.Measurement_Period(context);
+            Period ba_ = PreventiveEncounter?.Period;
+            CqlInterval<CqlDateTime> bb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ba_);
+            bool? bc_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(az_, bb_, "day");
+            return bc_;
         }
 
         IEnumerable<Encounter> ag_ = context.Operators.Where<Encounter>(ae_, af_);
@@ -710,22 +706,21 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             IEnumerable<Medication> j_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? k_(Medication M) {
-                object n_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object o_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
-                string q_ = context.Operators.Last<string>(p_);
-                bool? r_ = context.Operators.Equal(n_, q_);
-                CodeableConcept s_ = M?.Code;
-                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                CqlValueSet u_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
-                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                bool? w_ = context.Operators.And(r_, v_);
-                return w_;
+                object m_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object n_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> o_ = context.Operators.Split((string)n_, "/");
+                string p_ = context.Operators.Last<string>(o_);
+                bool? q_ = context.Operators.Equal(m_, p_);
+                CodeableConcept r_ = M?.Code;
+                CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
+                CqlValueSet t_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
+                bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
+                bool? v_ = context.Operators.And(q_, u_);
+                return v_;
             }
 
-            IEnumerable<Medication> l_ = context.Operators.Where<Medication>(j_, k_);
-            bool? m_ = context.Operators.Exists<Medication>(l_);
-            return m_;
+            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            return l_;
         }
 
         IEnumerable<MedicationRequest> c_ = context.Operators.Where<MedicationRequest>(a_, b_);
@@ -735,34 +730,33 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> g_ = Status_1_15_000.Instance.isMedicationOrder(context, f_);
 
         bool? h_(MedicationRequest CessationPharmacotherapyOrdered) {
-            FhirDateTime x_ = CessationPharmacotherapyOrdered?.AuthoredOnElement;
-            CqlDateTime y_ = context.Operators.Convert<CqlDateTime>(x_);
-            CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
-            CqlDateTime aa_ = context.Operators.Start(z_);
-            CqlQuantity ab_ = context.Operators.Quantity(6m, "months");
-            CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
-            CqlDateTime ad_ = context.Operators.End(z_);
-            CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(ac_, ad_, true, true);
-            bool? af_ = context.Operators.In<CqlDateTime>(y_, ae_, "day");
-            IEnumerable<Task> ag_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
+            FhirDateTime w_ = CessationPharmacotherapyOrdered?.AuthoredOnElement;
+            CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
+            CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            CqlQuantity aa_ = context.Operators.Quantity(6m, "months");
+            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
+            CqlDateTime ac_ = context.Operators.End(y_);
+            CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(ab_, ac_, true, true);
+            bool? ae_ = context.Operators.In<CqlDateTime>(x_, ad_, "day");
+            IEnumerable<Task> af_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
-            bool? ah_(Task TaskReject) {
-                ResourceReference am_ = TaskReject?.Focus;
-                bool? an_ = QICoreCommon_4_0_000.Instance.references(context, am_, CessationPharmacotherapyOrdered);
-                CodeableConcept ao_ = TaskReject?.Code;
-                CqlConcept ap_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ao_);
-                CqlCode aq_ = this.fulfill(context);
-                CqlConcept ar_ = context.Operators.ConvertCodeToConcept(aq_);
-                bool? as_ = context.Operators.Equivalent(ap_, ar_);
-                bool? at_ = context.Operators.And(an_, as_);
-                return at_;
+            bool? ag_(Task TaskReject) {
+                ResourceReference ak_ = TaskReject?.Focus;
+                bool? al_ = QICoreCommon_4_0_000.Instance.references(context, ak_, CessationPharmacotherapyOrdered);
+                CodeableConcept am_ = TaskReject?.Code;
+                CqlConcept an_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, am_);
+                CqlCode ao_ = this.fulfill(context);
+                CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
+                bool? aq_ = context.Operators.Equivalent(an_, ap_);
+                bool? ar_ = context.Operators.And(al_, aq_);
+                return ar_;
             }
 
-            IEnumerable<Task> ai_ = context.Operators.Where<Task>(ag_, ah_);
-            bool? aj_ = context.Operators.Exists<Task>(ai_);
-            bool? ak_ = context.Operators.Not(aj_);
-            bool? al_ = context.Operators.And(af_, ak_);
-            return al_;
+            bool? ah_ = context.Operators.WhereAny<Task>(af_, ag_);
+            bool? ai_ = context.Operators.Not(ah_);
+            bool? aj_ = context.Operators.And(ae_, ai_);
+            return aj_;
         }
 
         IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
@@ -784,22 +778,21 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             IEnumerable<Medication> j_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? k_(Medication M) {
-                object n_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object o_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
-                string q_ = context.Operators.Last<string>(p_);
-                bool? r_ = context.Operators.Equal(n_, q_);
-                CodeableConcept s_ = M?.Code;
-                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                CqlValueSet u_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
-                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                bool? w_ = context.Operators.And(r_, v_);
-                return w_;
+                object m_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object n_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> o_ = context.Operators.Split((string)n_, "/");
+                string p_ = context.Operators.Last<string>(o_);
+                bool? q_ = context.Operators.Equal(m_, p_);
+                CodeableConcept r_ = M?.Code;
+                CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
+                CqlValueSet t_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
+                bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
+                bool? v_ = context.Operators.And(q_, u_);
+                return v_;
             }
 
-            IEnumerable<Medication> l_ = context.Operators.Where<Medication>(j_, k_);
-            bool? m_ = context.Operators.Exists<Medication>(l_);
-            return m_;
+            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            return l_;
         }
 
         IEnumerable<MedicationRequest> c_ = context.Operators.Where<MedicationRequest>(a_, b_);
@@ -809,22 +802,22 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> g_ = Status_1_15_000.Instance.isMedicationActive(context, f_);
 
         bool? h_(MedicationRequest TakingCessationPharmacotherapy) {
-            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
-            CqlDateTime y_ = context.Operators.Start(x_);
-            CqlQuantity z_ = context.Operators.Quantity(6m, "months");
-            CqlDateTime aa_ = context.Operators.Subtract(y_, z_);
-            CqlDateTime ab_ = context.Operators.End(x_);
-            CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(aa_, ab_, true, true);
-            CqlInterval<CqlDate> ad_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, TakingCessationPharmacotherapy);
-            CqlDate ae_ = ad_?.low;
-            CqlDateTime af_ = context.Operators.ConvertDateToDateTime(ae_);
-            CqlDate ag_ = ad_?.high;
-            CqlDateTime ah_ = context.Operators.ConvertDateToDateTime(ag_);
-            bool? ai_ = ad_?.lowClosed;
-            bool? aj_ = ad_?.highClosed;
-            CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(af_, ah_, ai_, aj_);
-            bool? al_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ac_, ak_, "day");
-            return al_;
+            CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
+            CqlDateTime x_ = context.Operators.Start(w_);
+            CqlQuantity y_ = context.Operators.Quantity(6m, "months");
+            CqlDateTime z_ = context.Operators.Subtract(x_, y_);
+            CqlDateTime aa_ = context.Operators.End(w_);
+            CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(z_, aa_, true, true);
+            CqlInterval<CqlDate> ac_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, TakingCessationPharmacotherapy);
+            CqlDate ad_ = ac_?.low;
+            CqlDateTime ae_ = context.Operators.ConvertDateToDateTime(ad_);
+            CqlDate af_ = ac_?.high;
+            CqlDateTime ag_ = context.Operators.ConvertDateToDateTime(af_);
+            bool? ah_ = ac_?.lowClosed;
+            bool? ai_ = ac_?.highClosed;
+            CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ae_, ag_, ah_, ai_);
+            bool? ak_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ab_, aj_, "day");
+            return ak_;
         }
 
         IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);

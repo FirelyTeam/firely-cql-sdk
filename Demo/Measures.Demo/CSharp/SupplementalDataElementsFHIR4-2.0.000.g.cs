@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
 public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleton<SupplementalDataElementsFHIR4_2_0_000>
 {
@@ -61,12 +61,12 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
         IEnumerable<Extension> a_;
-        Patient m_ = this.Patient(context);
-        bool n_ = m_ is DomainResource;
-        if (n_)
+        Patient k_ = this.Patient(context);
+        bool l_ = k_ is DomainResource;
+        if (l_)
         {
-            Patient o_ = this.Patient(context);
-            a_ = (IEnumerable<Extension>)((o_ as DomainResource).Extension);
+            Patient m_ = this.Patient(context);
+            a_ = (IEnumerable<Extension>)((m_ as DomainResource).Extension);
         }
         else
         {
@@ -74,42 +74,40 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         }
 
         bool? b_(Extension Extension) {
-            FhirUri p_ = Extension?.UrlElement;
-            string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_);
-            bool? r_ = context.Operators.Equal(q_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
-            return r_;
+            FhirUri n_ = Extension?.UrlElement;
+            string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
+            bool? p_ = context.Operators.Equal(o_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+            return p_;
         }
 
-        IEnumerable<Extension> c_ = context.Operators.Where<Extension>(a_, b_);
 
-        IEnumerable<Extension> d_(Extension Extension) {
-            List<Extension> s_ = Extension?.Extension;
-            return (IEnumerable<Extension>)s_;
+        IEnumerable<Extension> c_(Extension Extension) {
+            List<Extension> q_ = Extension?.Extension;
+            return (IEnumerable<Extension>)q_;
         }
 
-        IEnumerable<IEnumerable<Extension>> e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
-        IEnumerable<IEnumerable<Extension>> f_ = context.Operators.Distinct<IEnumerable<Extension>>(e_);
-        IEnumerable<Extension> g_ = context.Operators.Flatten<Extension>(f_);
+        IEnumerable<IEnumerable<Extension>> d_ = context.Operators.WhereSelect<Extension, IEnumerable<Extension>>(a_, b_, c_);
+        IEnumerable<IEnumerable<Extension>> e_ = context.Operators.Distinct<IEnumerable<Extension>>(d_);
+        IEnumerable<Extension> f_ = context.Operators.Flatten<Extension>(e_);
 
-        bool? h_(Extension E) {
-            FhirUri t_ = E?.UrlElement;
-            string u_ = FHIRHelpers_4_0_001.Instance.ToString(context, t_);
-            bool? v_ = context.Operators.Equal(u_, "ombCategory");
-            bool? w_ = context.Operators.Equal(u_, "detailed");
-            bool? x_ = context.Operators.Or(v_, w_);
-            return x_;
+        bool? g_(Extension E) {
+            FhirUri r_ = E?.UrlElement;
+            string s_ = FHIRHelpers_4_0_001.Instance.ToString(context, r_);
+            bool? t_ = context.Operators.Equal(s_, "ombCategory");
+            bool? u_ = context.Operators.Equal(s_, "detailed");
+            bool? v_ = context.Operators.Or(t_, u_);
+            return v_;
         }
 
-        IEnumerable<Extension> i_ = context.Operators.Where<Extension>(g_, h_);
 
-        Coding j_(Extension E) {
-            DataType y_ = E?.Value;
-            return y_ as Coding;
+        Coding h_(Extension E) {
+            DataType w_ = E?.Value;
+            return w_ as Coding;
         }
 
-        IEnumerable<Coding> k_ = context.Operators.Select<Extension, Coding>(i_, j_);
-        IEnumerable<Coding> l_ = context.Operators.Distinct<Coding>(k_);
-        return l_;
+        IEnumerable<Coding> i_ = context.Operators.WhereSelect<Extension, Coding>(f_, g_, h_);
+        IEnumerable<Coding> j_ = context.Operators.Distinct<Coding>(i_);
+        return j_;
     }
 
 
@@ -125,15 +123,14 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         IEnumerable<Coverage> b_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Coverage"));
 
         (CqlTupleMetadata, CodeableConcept code, Period period)? c_(Coverage Payer) {
-            CodeableConcept f_ = Payer?.Type;
-            Period g_ = Payer?.Period;
-            (CqlTupleMetadata, CodeableConcept code, Period period)? h_ = (CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO, f_, g_);
-            return h_;
+            CodeableConcept e_ = Payer?.Type;
+            Period f_ = Payer?.Period;
+            (CqlTupleMetadata, CodeableConcept code, Period period)? g_ = (CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO, e_, f_);
+            return g_;
         }
 
-        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> d_ = context.Operators.Select<Coverage, (CqlTupleMetadata, CodeableConcept code, Period period)?>(b_, c_);
-        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> e_ = context.Operators.Distinct<(CqlTupleMetadata, CodeableConcept code, Period period)?>(d_);
-        return e_;
+        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> d_ = context.Operators.SelectDistinct<Coverage, (CqlTupleMetadata, CodeableConcept code, Period period)?>(b_, c_);
+        return d_;
     }
 
 
@@ -146,12 +143,12 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
         IEnumerable<Extension> a_;
-        Patient m_ = this.Patient(context);
-        bool n_ = m_ is DomainResource;
-        if (n_)
+        Patient k_ = this.Patient(context);
+        bool l_ = k_ is DomainResource;
+        if (l_)
         {
-            Patient o_ = this.Patient(context);
-            a_ = (IEnumerable<Extension>)((o_ as DomainResource).Extension);
+            Patient m_ = this.Patient(context);
+            a_ = (IEnumerable<Extension>)((m_ as DomainResource).Extension);
         }
         else
         {
@@ -159,42 +156,40 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         }
 
         bool? b_(Extension Extension) {
-            FhirUri p_ = Extension?.UrlElement;
-            string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_);
-            bool? r_ = context.Operators.Equal(q_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
-            return r_;
+            FhirUri n_ = Extension?.UrlElement;
+            string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
+            bool? p_ = context.Operators.Equal(o_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+            return p_;
         }
 
-        IEnumerable<Extension> c_ = context.Operators.Where<Extension>(a_, b_);
 
-        IEnumerable<Extension> d_(Extension Extension) {
-            List<Extension> s_ = Extension?.Extension;
-            return (IEnumerable<Extension>)s_;
+        IEnumerable<Extension> c_(Extension Extension) {
+            List<Extension> q_ = Extension?.Extension;
+            return (IEnumerable<Extension>)q_;
         }
 
-        IEnumerable<IEnumerable<Extension>> e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
-        IEnumerable<IEnumerable<Extension>> f_ = context.Operators.Distinct<IEnumerable<Extension>>(e_);
-        IEnumerable<Extension> g_ = context.Operators.Flatten<Extension>(f_);
+        IEnumerable<IEnumerable<Extension>> d_ = context.Operators.WhereSelect<Extension, IEnumerable<Extension>>(a_, b_, c_);
+        IEnumerable<IEnumerable<Extension>> e_ = context.Operators.Distinct<IEnumerable<Extension>>(d_);
+        IEnumerable<Extension> f_ = context.Operators.Flatten<Extension>(e_);
 
-        bool? h_(Extension E) {
-            FhirUri t_ = E?.UrlElement;
-            string u_ = FHIRHelpers_4_0_001.Instance.ToString(context, t_);
-            bool? v_ = context.Operators.Equal(u_, "ombCategory");
-            bool? w_ = context.Operators.Equal(u_, "detailed");
-            bool? x_ = context.Operators.Or(v_, w_);
-            return x_;
+        bool? g_(Extension E) {
+            FhirUri r_ = E?.UrlElement;
+            string s_ = FHIRHelpers_4_0_001.Instance.ToString(context, r_);
+            bool? t_ = context.Operators.Equal(s_, "ombCategory");
+            bool? u_ = context.Operators.Equal(s_, "detailed");
+            bool? v_ = context.Operators.Or(t_, u_);
+            return v_;
         }
 
-        IEnumerable<Extension> i_ = context.Operators.Where<Extension>(g_, h_);
 
-        Coding j_(Extension E) {
-            DataType y_ = E?.Value;
-            return y_ as Coding;
+        Coding h_(Extension E) {
+            DataType w_ = E?.Value;
+            return w_ as Coding;
         }
 
-        IEnumerable<Coding> k_ = context.Operators.Select<Extension, Coding>(i_, j_);
-        IEnumerable<Coding> l_ = context.Operators.Distinct<Coding>(k_);
-        return l_;
+        IEnumerable<Coding> i_ = context.Operators.WhereSelect<Extension, Coding>(f_, g_, h_);
+        IEnumerable<Coding> j_ = context.Operators.Distinct<Coding>(i_);
+        return j_;
     }
 
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR", "0.0.015")]
 public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibrary, ISingleton<DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015>
 {
@@ -226,16 +226,15 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
         IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
         bool? r_(Condition Diabetes) {
-            CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Diabetes);
-            CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
-            bool? x_ = context.Operators.Overlaps(v_, w_, (string)default);
-            return x_;
+            CqlInterval<CqlDateTime> u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Diabetes);
+            CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
+            bool? w_ = context.Operators.Overlaps(u_, v_, (string)default);
+            return w_;
         }
 
-        IEnumerable<Condition> s_ = context.Operators.Where<Condition>(q_, r_);
-        bool? t_ = context.Operators.Exists<Condition>(s_);
-        bool? u_ = context.Operators.And(o_, t_);
-        return u_;
+        bool? s_ = context.Operators.WhereAny<Condition>(q_, r_);
+        bool? t_ = context.Operators.And(o_, s_);
+        return t_;
     }
 
 
@@ -340,26 +339,25 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
         IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
         bool? c_(Observation NoHbA1c) {
-            Code<ObservationStatus> g_ = NoHbA1c?.StatusElement;
-            string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
-            string[] i_ = [
+            Code<ObservationStatus> f_ = NoHbA1c?.StatusElement;
+            string g_ = FHIRHelpers_4_0_001.Instance.ToString(context, f_);
+            string[] h_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
-            DataType k_ = NoHbA1c?.Effective;
-            CqlDateTime l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, k_);
-            CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
-            bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, (string)default);
-            bool? o_ = context.Operators.And(j_, n_);
-            return o_;
+            bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
+            DataType j_ = NoHbA1c?.Effective;
+            CqlDateTime k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, j_);
+            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+            bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, (string)default);
+            bool? n_ = context.Operators.And(i_, m_);
+            return n_;
         }
 
-        IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-        bool? e_ = context.Operators.Exists<Observation>(d_);
-        bool? f_ = context.Operators.Not(e_);
-        return f_;
+        bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
+        bool? e_ = context.Operators.Not(d_);
+        return e_;
     }
 
 

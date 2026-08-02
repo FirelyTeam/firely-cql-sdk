@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR", "0.0.008")]
 public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008 : ILibrary, ISingleton<PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008>
 {
@@ -341,20 +341,19 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 
         bool? c_(Procedure FluorideApplication) {
-            CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
-            DataType g_ = FluorideApplication?.Performed;
-            CqlInterval<CqlDateTime> h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, g_);
-            bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, (string)default);
-            Code<EventStatus> j_ = FluorideApplication?.StatusElement;
-            string k_ = FHIRHelpers_4_0_001.Instance.ToString(context, j_);
-            bool? l_ = context.Operators.Equal(k_, "completed");
-            bool? m_ = context.Operators.And(i_, l_);
-            return m_;
+            CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
+            DataType f_ = FluorideApplication?.Performed;
+            CqlInterval<CqlDateTime> g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, f_);
+            bool? h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, (string)default);
+            Code<EventStatus> i_ = FluorideApplication?.StatusElement;
+            string j_ = FHIRHelpers_4_0_001.Instance.ToString(context, i_);
+            bool? k_ = context.Operators.Equal(j_, "completed");
+            bool? l_ = context.Operators.And(h_, k_);
+            return l_;
         }
 
-        IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
-        bool? e_ = context.Operators.Exists<Procedure>(d_);
-        return e_;
+        bool? d_ = context.Operators.WhereAny<Procedure>(b_, c_);
+        return d_;
     }
 
 

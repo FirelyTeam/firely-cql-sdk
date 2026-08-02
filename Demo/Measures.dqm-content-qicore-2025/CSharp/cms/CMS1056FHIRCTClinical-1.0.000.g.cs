@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("CMS1056FHIRCTClinical", "1.0.000")]
 public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS1056FHIRCTClinical_1_0_000>
 {
@@ -240,17 +240,16 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
         IEnumerable<Observation> a_ = this.Patients_with_Qualifying_CTScan_with_Values(context);
 
         bool? b_(Observation CTScanWithValues) {
-            DataType e_ = CTScanWithValues?.Value;
-            object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
-            IReadOnlyList<CqlCode> g_ = (f_ as CqlConcept)?.codes;
-            CqlCode h_ = this.Full_Body(context);
-            bool? i_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)g_, h_);
-            return i_;
+            DataType d_ = CTScanWithValues?.Value;
+            object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
+            IReadOnlyList<CqlCode> f_ = (e_ as CqlConcept)?.codes;
+            CqlCode g_ = this.Full_Body(context);
+            bool? h_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)f_, g_);
+            return h_;
         }
 
-        IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
-        bool? d_ = context.Operators.Exists<Observation>(c_);
-        return d_;
+        bool? c_ = context.Operators.WhereAny<Observation>(a_, b_);
+        return c_;
     }
 
 
@@ -265,13 +264,12 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
         IEnumerable<Observation> a_ = this.Patients_with_Qualifying_CTScan_with_Values(context);
 
         bool? b_(Observation CTScanWithValues) {
-            bool? e_ = AlaraCommonFunctions_1_10_000.Instance.ctScanQualifies(context, CTScanWithValues);
-            return e_;
+            bool? d_ = AlaraCommonFunctions_1_10_000.Instance.ctScanQualifies(context, CTScanWithValues);
+            return d_;
         }
 
-        IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
-        bool? d_ = context.Operators.Exists<Observation>(c_);
-        return d_;
+        bool? c_ = context.Operators.WhereAny<Observation>(a_, b_);
+        return c_;
     }
 
 

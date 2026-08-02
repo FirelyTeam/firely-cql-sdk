@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("CMS131FHIRDiabetesEyeExam", "1.0.000")]
 public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CMS131FHIRDiabetesEyeExam_1_0_000>
 {
@@ -218,16 +218,15 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         IEnumerable<Condition> r_ = Status_1_15_000.Instance.verified(context, q_);
 
         bool? s_(Condition DiabetesDx) {
-            CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDx);
-            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
-            bool? y_ = context.Operators.Overlaps(w_, x_, "day");
-            return y_;
+            CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDx);
+            CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
+            bool? x_ = context.Operators.Overlaps(v_, w_, "day");
+            return x_;
         }
 
-        IEnumerable<Condition> t_ = context.Operators.Where<Condition>(r_, s_);
-        bool? u_ = context.Operators.Exists<Condition>(t_);
-        bool? v_ = context.Operators.And(m_, u_);
-        return v_;
+        bool? t_ = context.Operators.WhereAny<Condition>(r_, s_);
+        bool? u_ = context.Operators.And(m_, t_);
+        return u_;
     }
 
 
@@ -260,17 +259,16 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
 
         bool? g_(Condition BilateralAbsenceEyes) {
-            CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BilateralAbsenceEyes);
-            CqlDateTime k_ = context.Operators.Start(j_);
-            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-            CqlDateTime m_ = context.Operators.End(l_);
-            bool? n_ = context.Operators.SameOrBefore(k_, m_, "day");
-            return n_;
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BilateralAbsenceEyes);
+            CqlDateTime j_ = context.Operators.Start(i_);
+            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
+            CqlDateTime l_ = context.Operators.End(k_);
+            bool? m_ = context.Operators.SameOrBefore(j_, l_, "day");
+            return m_;
         }
 
-        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
-        bool? i_ = context.Operators.Exists<Condition>(h_);
-        return i_;
+        bool? h_ = context.Operators.WhereAny<Condition>(f_, g_);
+        return h_;
     }
 
 
@@ -310,15 +308,14 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         IEnumerable<Condition> e_ = Status_1_15_000.Instance.verified(context, d_);
 
         bool? f_(Condition Retinopathy) {
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Retinopathy);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            bool? k_ = context.Operators.Overlaps(i_, j_, "day");
-            return k_;
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Retinopathy);
+            CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
+            bool? j_ = context.Operators.Overlaps(h_, i_, "day");
+            return j_;
         }
 
-        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
-        bool? h_ = context.Operators.Exists<Condition>(g_);
-        return h_;
+        bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
+        return g_;
     }
 
 
@@ -335,17 +332,16 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         IEnumerable<Observation> c_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, b_);
 
         bool? d_(Observation RetinalExam) {
-            CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
-            DataType h_ = RetinalExam?.Effective;
-            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-            CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
-            bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
-            return k_;
+            CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
+            DataType g_ = RetinalExam?.Effective;
+            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
+            bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
+            return j_;
         }
 
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
-        bool? f_ = context.Operators.Exists<Observation>(e_);
-        return f_;
+        bool? e_ = context.Operators.WhereAny<Observation>(c_, d_);
+        return e_;
     }
 
 
@@ -362,22 +358,21 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         IEnumerable<Observation> c_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, b_);
 
         bool? d_(Observation RetinalExam) {
-            CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
-            CqlDateTime h_ = context.Operators.Start(g_);
-            CqlQuantity i_ = context.Operators.Quantity(1m, "year");
-            CqlDateTime j_ = context.Operators.Subtract(h_, i_);
-            CqlDateTime k_ = context.Operators.End(g_);
-            CqlInterval<CqlDateTime> l_ = context.Operators.Interval(j_, k_, true, true);
-            DataType m_ = RetinalExam?.Effective;
-            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
-            return p_;
+            CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
+            CqlDateTime g_ = context.Operators.Start(f_);
+            CqlQuantity h_ = context.Operators.Quantity(1m, "year");
+            CqlDateTime i_ = context.Operators.Subtract(g_, h_);
+            CqlDateTime j_ = context.Operators.End(f_);
+            CqlInterval<CqlDateTime> k_ = context.Operators.Interval(i_, j_, true, true);
+            DataType l_ = RetinalExam?.Effective;
+            object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
+            CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
+            bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, "day");
+            return o_;
         }
 
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
-        bool? f_ = context.Operators.Exists<Observation>(e_);
-        return f_;
+        bool? e_ = context.Operators.WhereAny<Observation>(c_, d_);
+        return e_;
     }
 
 
@@ -395,22 +390,21 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
 
         bool? e_(Observation AutonomousEyeExam) {
-            DataType h_ = AutonomousEyeExam?.Value;
-            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-            CqlValueSet j_ = this.Autonomous_Eye_Exam_Result_or_Finding(context);
-            bool? k_ = context.Operators.ConceptInValueSet(i_ as CqlConcept, j_);
-            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-            DataType m_ = AutonomousEyeExam?.Effective;
-            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
-            bool? q_ = context.Operators.And(k_, p_);
-            return q_;
+            DataType g_ = AutonomousEyeExam?.Value;
+            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            CqlValueSet i_ = this.Autonomous_Eye_Exam_Result_or_Finding(context);
+            bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, i_);
+            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
+            DataType l_ = AutonomousEyeExam?.Effective;
+            object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
+            CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
+            bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, "day");
+            bool? p_ = context.Operators.And(j_, o_);
+            return p_;
         }
 
-        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-        bool? g_ = context.Operators.Exists<Observation>(f_);
-        return g_;
+        bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
+        return f_;
     }
 
 
@@ -428,22 +422,21 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
 
         bool? e_(Observation LeftEyeRetinopathy) {
-            DataType h_ = LeftEyeRetinopathy?.Value;
-            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-            CqlValueSet j_ = this.Diabetic_Retinopathy_Severity_Level(context);
-            bool? k_ = context.Operators.ConceptInValueSet(i_ as CqlConcept, j_);
-            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-            DataType m_ = LeftEyeRetinopathy?.Effective;
-            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
-            bool? q_ = context.Operators.And(k_, p_);
-            return q_;
+            DataType g_ = LeftEyeRetinopathy?.Value;
+            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            CqlValueSet i_ = this.Diabetic_Retinopathy_Severity_Level(context);
+            bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, i_);
+            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
+            DataType l_ = LeftEyeRetinopathy?.Effective;
+            object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
+            CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
+            bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, "day");
+            bool? p_ = context.Operators.And(j_, o_);
+            return p_;
         }
 
-        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-        bool? g_ = context.Operators.Exists<Observation>(f_);
-        return g_;
+        bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
+        return f_;
     }
 
 
@@ -461,22 +454,21 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
 
         bool? e_(Observation RightEyeRetinopathy) {
-            DataType h_ = RightEyeRetinopathy?.Value;
-            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-            CqlValueSet j_ = this.Diabetic_Retinopathy_Severity_Level(context);
-            bool? k_ = context.Operators.ConceptInValueSet(i_ as CqlConcept, j_);
-            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-            DataType m_ = RightEyeRetinopathy?.Effective;
-            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
-            bool? q_ = context.Operators.And(k_, p_);
-            return q_;
+            DataType g_ = RightEyeRetinopathy?.Value;
+            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            CqlValueSet i_ = this.Diabetic_Retinopathy_Severity_Level(context);
+            bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, i_);
+            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
+            DataType l_ = RightEyeRetinopathy?.Effective;
+            object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
+            CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
+            bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, "day");
+            bool? p_ = context.Operators.And(j_, o_);
+            return p_;
         }
 
-        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-        bool? g_ = context.Operators.Exists<Observation>(f_);
-        return g_;
+        bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
+        return f_;
     }
 
 
@@ -494,29 +486,28 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
 
         bool? e_(Observation RightEyeNoRetinopathy) {
-            DataType h_ = RightEyeNoRetinopathy?.Value;
-            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-            CqlCode j_ = this.No_apparent_retinopathy(context);
-            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-            bool? l_ = context.Operators.Equivalent(i_ as CqlConcept, k_);
-            CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
-            CqlDateTime n_ = context.Operators.Start(m_);
-            CqlQuantity o_ = context.Operators.Quantity(1m, "year");
-            CqlDateTime p_ = context.Operators.Subtract(n_, o_);
-            CqlDateTime q_ = context.Operators.End(m_);
-            CqlDateTime r_ = context.Operators.Subtract(q_, o_);
-            CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
-            DataType t_ = RightEyeNoRetinopathy?.Effective;
-            object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-            CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_);
-            bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(s_, v_, "day");
-            bool? x_ = context.Operators.And(l_, w_);
-            return x_;
+            DataType g_ = RightEyeNoRetinopathy?.Value;
+            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            CqlCode i_ = this.No_apparent_retinopathy(context);
+            CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
+            bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
+            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+            CqlDateTime m_ = context.Operators.Start(l_);
+            CqlQuantity n_ = context.Operators.Quantity(1m, "year");
+            CqlDateTime o_ = context.Operators.Subtract(m_, n_);
+            CqlDateTime p_ = context.Operators.End(l_);
+            CqlDateTime q_ = context.Operators.Subtract(p_, n_);
+            CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
+            DataType s_ = RightEyeNoRetinopathy?.Effective;
+            object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+            CqlInterval<CqlDateTime> u_ = QICoreCommon_4_0_000.Instance.toInterval(context, t_);
+            bool? v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, "day");
+            bool? w_ = context.Operators.And(k_, v_);
+            return w_;
         }
 
-        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-        bool? g_ = context.Operators.Exists<Observation>(f_);
-        return g_;
+        bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
+        return f_;
     }
 
 
@@ -534,29 +525,28 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
 
         bool? e_(Observation LeftEyeNoRetinopathy) {
-            DataType h_ = LeftEyeNoRetinopathy?.Value;
-            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-            CqlCode j_ = this.No_apparent_retinopathy(context);
-            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-            bool? l_ = context.Operators.Equivalent(i_ as CqlConcept, k_);
-            CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
-            CqlDateTime n_ = context.Operators.Start(m_);
-            CqlQuantity o_ = context.Operators.Quantity(1m, "year");
-            CqlDateTime p_ = context.Operators.Subtract(n_, o_);
-            CqlDateTime q_ = context.Operators.End(m_);
-            CqlDateTime r_ = context.Operators.Subtract(q_, o_);
-            CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
-            DataType t_ = LeftEyeNoRetinopathy?.Effective;
-            object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-            CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_);
-            bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(s_, v_, "day");
-            bool? x_ = context.Operators.And(l_, w_);
-            return x_;
+            DataType g_ = LeftEyeNoRetinopathy?.Value;
+            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            CqlCode i_ = this.No_apparent_retinopathy(context);
+            CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
+            bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
+            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+            CqlDateTime m_ = context.Operators.Start(l_);
+            CqlQuantity n_ = context.Operators.Quantity(1m, "year");
+            CqlDateTime o_ = context.Operators.Subtract(m_, n_);
+            CqlDateTime p_ = context.Operators.End(l_);
+            CqlDateTime q_ = context.Operators.Subtract(p_, n_);
+            CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
+            DataType s_ = LeftEyeNoRetinopathy?.Effective;
+            object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+            CqlInterval<CqlDateTime> u_ = QICoreCommon_4_0_000.Instance.toInterval(context, t_);
+            bool? v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, "day");
+            bool? w_ = context.Operators.And(k_, v_);
+            return w_;
         }
 
-        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-        bool? g_ = context.Operators.Exists<Observation>(f_);
-        return g_;
+        bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
+        return f_;
     }
 
 

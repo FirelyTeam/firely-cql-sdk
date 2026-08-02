@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("CMS124FHIRCervicalCancerScreen", "1.0.000")]
 public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISingleton<CMS124FHIRCervicalCancerScreen_1_0_000>
 {
@@ -173,12 +173,12 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
         CqlInterval<int?> i_ = context.Operators.Interval(24, 64, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
         List<Extension> k_;
-        Patient v_ = this.Patient(context);
-        bool w_ = v_ is DomainResource;
-        if (w_)
+        Patient u_ = this.Patient(context);
+        bool v_ = u_ is DomainResource;
+        if (v_)
         {
-            Patient x_ = this.Patient(context);
-            k_ = (x_ as DomainResource).Extension;
+            Patient w_ = this.Patient(context);
+            k_ = (w_ as DomainResource).Extension;
         }
         else
         {
@@ -186,27 +186,26 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
         }
 
         bool? l_(Extension @this) {
-            FhirUri y_ = @this?.UrlElement;
-            string z_ = FHIRHelpers_4_4_000.Instance.ToString(context, y_);
-            bool? aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+            FhirUri x_ = @this?.UrlElement;
+            string y_ = FHIRHelpers_4_4_000.Instance.ToString(context, x_);
+            bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+            return z_;
+        }
+
+
+        DataType m_(Extension @this) {
+            DataType aa_ = @this?.Value;
             return aa_;
         }
 
-        IEnumerable<Extension> m_ = context.Operators.Where<Extension>((IEnumerable<Extension>)k_, l_);
-
-        DataType n_(Extension @this) {
-            DataType ab_ = @this?.Value;
-            return ab_;
-        }
-
-        IEnumerable<DataType> o_ = context.Operators.Select<Extension, DataType>(m_, n_);
-        DataType p_ = context.Operators.SingletonFrom<DataType>(o_);
-        bool? q_ = context.Operators.Equal(p_, "248152002");
-        bool? r_ = context.Operators.And(j_, q_);
-        IEnumerable<Encounter> s_ = this.Qualifying_Encounters(context);
-        bool? t_ = context.Operators.Exists<Encounter>(s_);
-        bool? u_ = context.Operators.And(r_, t_);
-        return u_;
+        IEnumerable<DataType> n_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)k_, l_, m_);
+        DataType o_ = context.Operators.SingletonFrom<DataType>(n_);
+        bool? p_ = context.Operators.Equal(o_, "248152002");
+        bool? q_ = context.Operators.And(j_, p_);
+        IEnumerable<Encounter> r_ = this.Qualifying_Encounters(context);
+        bool? s_ = context.Operators.Exists<Encounter>(r_);
+        bool? t_ = context.Operators.And(q_, s_);
+        return t_;
     }
 
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("Antibiotic", "1.11.000")]
 public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_000>
 {
@@ -55,31 +55,29 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
 
         bool? a_(Encounter episode) {
 
-            bool? f_(Condition comcondition) {
-                CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, comcondition as Condition);
-                CqlDateTime j_ = context.Operators.Start(i_);
-                CqlDate k_ = context.Operators.DateFrom(j_);
-                Period l_ = episode?.Period;
-                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                CqlDateTime n_ = context.Operators.Start(m_);
-                CqlDate o_ = context.Operators.DateFrom(n_);
-                CqlQuantity p_ = context.Operators.Quantity(1m, "year");
-                CqlDate q_ = context.Operators.Subtract(o_, p_);
-                CqlInterval<CqlDate> r_ = context.Operators.Interval(q_, o_, true, true);
-                bool? s_ = context.Operators.In<CqlDate>(k_, r_, (string)default);
-                return s_;
+            bool? e_(Condition comcondition) {
+                CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, comcondition as Condition);
+                CqlDateTime h_ = context.Operators.Start(g_);
+                CqlDate i_ = context.Operators.DateFrom(h_);
+                Period j_ = episode?.Period;
+                CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
+                CqlDateTime l_ = context.Operators.Start(k_);
+                CqlDate m_ = context.Operators.DateFrom(l_);
+                CqlQuantity n_ = context.Operators.Quantity(1m, "year");
+                CqlDate o_ = context.Operators.Subtract(m_, n_);
+                CqlInterval<CqlDate> p_ = context.Operators.Interval(o_, m_, true, true);
+                bool? q_ = context.Operators.In<CqlDate>(i_, p_, (string)default);
+                return q_;
             }
 
-            IEnumerable<Condition> g_ = context.Operators.Where<Condition>(comorbidConditions, f_);
-            bool? h_ = context.Operators.Exists<Condition>(g_);
-            return h_;
+            bool? f_ = context.Operators.WhereAny<Condition>(comorbidConditions, e_);
+            return f_;
         }
 
-        IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(episodes, a_);
-        Encounter c_(Encounter episode) => episode;
-        IEnumerable<Encounter> d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
-        IEnumerable<Encounter> e_ = context.Operators.Distinct<Encounter>(d_);
-        return e_;
+        Encounter b_(Encounter episode) => episode;
+        IEnumerable<Encounter> c_ = context.Operators.WhereSelect<Encounter, Encounter>(episodes, a_, b_);
+        IEnumerable<Encounter> d_ = context.Operators.Distinct<Encounter>(c_);
+        return d_;
     }
 
 
@@ -89,31 +87,29 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
 
         bool? a_(Encounter episode) {
 
-            bool? f_(Condition competcondition) {
-                CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, competcondition as Condition);
-                CqlDateTime j_ = context.Operators.Start(i_);
-                Period k_ = episode?.Period;
-                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                CqlDateTime m_ = context.Operators.Start(l_);
-                CqlQuantity n_ = context.Operators.Quantity(3m, "days");
-                CqlDateTime o_ = context.Operators.Add(m_, n_);
-                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
-                bool? q_ = context.Operators.In<CqlDateTime>(j_, p_, "day");
-                bool? r_ = context.Operators.Not((bool?)(m_ is null));
-                bool? s_ = context.Operators.And(q_, r_);
-                return s_;
+            bool? e_(Condition competcondition) {
+                CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, competcondition as Condition);
+                CqlDateTime h_ = context.Operators.Start(g_);
+                Period i_ = episode?.Period;
+                CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                CqlDateTime k_ = context.Operators.Start(j_);
+                CqlQuantity l_ = context.Operators.Quantity(3m, "days");
+                CqlDateTime m_ = context.Operators.Add(k_, l_);
+                CqlInterval<CqlDateTime> n_ = context.Operators.Interval(k_, m_, true, true);
+                bool? o_ = context.Operators.In<CqlDateTime>(h_, n_, "day");
+                bool? p_ = context.Operators.Not((bool?)(k_ is null));
+                bool? q_ = context.Operators.And(o_, p_);
+                return q_;
             }
 
-            IEnumerable<Condition> g_ = context.Operators.Where<Condition>(competingConditions, f_);
-            bool? h_ = context.Operators.Exists<Condition>(g_);
-            return h_;
+            bool? f_ = context.Operators.WhereAny<Condition>(competingConditions, e_);
+            return f_;
         }
 
-        IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(episodes, a_);
-        Encounter c_(Encounter episode) => episode;
-        IEnumerable<Encounter> d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
-        IEnumerable<Encounter> e_ = context.Operators.Distinct<Encounter>(d_);
-        return e_;
+        Encounter b_(Encounter episode) => episode;
+        IEnumerable<Encounter> c_ = context.Operators.WhereSelect<Encounter, Encounter>(episodes, a_, b_);
+        IEnumerable<Encounter> d_ = context.Operators.Distinct<Encounter>(c_);
+        return d_;
     }
 
 
@@ -124,23 +120,22 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
         bool? a_(Encounter episode) {
 
             bool? c_(MedicationRequest ActiveMedication) {
-                CqlInterval<CqlDate> f_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ActiveMedication);
-                Period g_ = episode?.Period;
-                CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
-                CqlDateTime i_ = context.Operators.Start(h_);
-                CqlDate j_ = context.Operators.DateFrom(i_);
-                CqlQuantity k_ = context.Operators.Quantity(30m, "days");
-                CqlDate l_ = context.Operators.Subtract(j_, k_);
-                CqlQuantity m_ = context.Operators.Quantity(1m, "day");
-                CqlDate n_ = context.Operators.Subtract(j_, m_);
-                CqlInterval<CqlDate> o_ = context.Operators.Interval(l_, n_, true, true);
-                bool? p_ = context.Operators.Overlaps(f_, o_, "day");
-                return p_;
+                CqlInterval<CqlDate> e_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ActiveMedication);
+                Period f_ = episode?.Period;
+                CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, f_);
+                CqlDateTime h_ = context.Operators.Start(g_);
+                CqlDate i_ = context.Operators.DateFrom(h_);
+                CqlQuantity j_ = context.Operators.Quantity(30m, "days");
+                CqlDate k_ = context.Operators.Subtract(i_, j_);
+                CqlQuantity l_ = context.Operators.Quantity(1m, "day");
+                CqlDate m_ = context.Operators.Subtract(i_, l_);
+                CqlInterval<CqlDate> n_ = context.Operators.Interval(k_, m_, true, true);
+                bool? o_ = context.Operators.Overlaps(e_, n_, "day");
+                return o_;
             }
 
-            IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(antibioticMedications, c_);
-            bool? e_ = context.Operators.Exists<MedicationRequest>(d_);
-            return e_;
+            bool? d_ = context.Operators.WhereAny<MedicationRequest>(antibioticMedications, c_);
+            return d_;
         }
 
         IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(episodes, a_);

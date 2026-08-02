@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("CMS1154ScreeningPrediabetesFHIR", "1.0.000")]
 public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingleton<CMS1154ScreeningPrediabetesFHIR_1_0_000>
 {
@@ -378,14 +378,13 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         IEnumerable<CqlCode> b_ = a_?.codes;
 
         bool? c_(CqlCode C) {
-            CqlCode f_ = this.Asian(context);
-            bool? g_ = context.Operators.Equivalent(C, f_);
-            return g_;
+            CqlCode e_ = this.Asian(context);
+            bool? f_ = context.Operators.Equivalent(C, e_);
+            return f_;
         }
 
-        IEnumerable<CqlCode> d_ = context.Operators.Where<CqlCode>(b_, c_);
-        bool? e_ = context.Operators.Exists<CqlCode>(d_);
-        return e_;
+        bool? d_ = context.Operators.WhereAny<CqlCode>(b_, c_);
+        return d_;
     }
 
 
@@ -531,22 +530,21 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-pregnancystatus"));
 
         bool? b_(Observation PregnantObservation) {
-            DataType e_ = PregnantObservation?.Value;
-            CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_ as CodeableConcept);
-            CqlValueSet g_ = this.Pregnancy(context);
-            bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
-            DataType i_ = PregnantObservation?.Effective;
-            CqlDateTime j_ = context.Operators.LateBoundProperty<CqlDateTime>(i_, "value");
-            CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
-            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-            bool? m_ = context.Operators.Overlaps(k_, l_, "day");
-            bool? n_ = context.Operators.And(h_, m_);
-            return n_;
+            DataType d_ = PregnantObservation?.Value;
+            CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_ as CodeableConcept);
+            CqlValueSet f_ = this.Pregnancy(context);
+            bool? g_ = context.Operators.ConceptInValueSet(e_, f_);
+            DataType h_ = PregnantObservation?.Effective;
+            CqlDateTime i_ = context.Operators.LateBoundProperty<CqlDateTime>(h_, "value");
+            CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
+            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
+            bool? l_ = context.Operators.Overlaps(j_, k_, "day");
+            bool? m_ = context.Operators.And(g_, l_);
+            return m_;
         }
 
-        IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
-        bool? d_ = context.Operators.Exists<Observation>(c_);
-        return d_;
+        bool? c_ = context.Operators.WhereAny<Observation>(a_, b_);
+        return c_;
     }
 
 
@@ -657,27 +655,26 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
         bool? c_(Observation LabTestPerformed) {
-            CqlInterval<CqlDateTime> f_ = this.Look_Back_Period(context);
-            DataType g_ = LabTestPerformed?.Effective;
-            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.ToInterval(context, h_);
-            bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
-            Code<ObservationStatus> k_ = LabTestPerformed?.StatusElement;
-            ObservationStatus? l_ = k_?.Value;
-            string m_ = context.Operators.Convert<string>(l_);
-            string[] n_ = [
+            CqlInterval<CqlDateTime> e_ = this.Look_Back_Period(context);
+            DataType f_ = LabTestPerformed?.Effective;
+            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.ToInterval(context, g_);
+            bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
+            Code<ObservationStatus> j_ = LabTestPerformed?.StatusElement;
+            ObservationStatus? k_ = j_?.Value;
+            string l_ = context.Operators.Convert<string>(k_);
+            string[] m_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
-            bool? p_ = context.Operators.And(j_, o_);
-            return p_;
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            bool? o_ = context.Operators.And(i_, n_);
+            return o_;
         }
 
-        IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-        bool? e_ = context.Operators.Exists<Observation>(d_);
-        return e_;
+        bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
+        return d_;
     }
 
 

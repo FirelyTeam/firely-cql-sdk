@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("Status", "1.15.000")]
 public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
 {
@@ -291,23 +291,22 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             List<CodeableConcept> h_ = O?.Category;
 
             CqlConcept i_(CodeableConcept @this) {
-                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return o_;
+                CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return n_;
             }
 
-            IEnumerable<CqlConcept> j_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_);
 
-            bool? k_(CqlConcept ObservationCategory) {
-                CqlCode p_ = this.imaging(context);
-                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-                bool? r_ = context.Operators.Equivalent(ObservationCategory, q_);
-                return r_;
+            bool? j_(CqlConcept ObservationCategory) {
+                CqlCode o_ = this.imaging(context);
+                CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+                bool? q_ = context.Operators.Equivalent(ObservationCategory, p_);
+                return q_;
             }
 
-            IEnumerable<CqlConcept> l_ = context.Operators.Where<CqlConcept>(j_, k_);
-            bool? m_ = context.Operators.Exists<CqlConcept>(l_);
-            bool? n_ = context.Operators.And(g_, m_);
-            return n_;
+            IEnumerable<CqlConcept> k_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_, j_);
+            bool? l_ = context.Operators.Exists<CqlConcept>(k_);
+            bool? m_ = context.Operators.And(g_, l_);
+            return m_;
         }
 
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
@@ -506,23 +505,22 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             List<CodeableConcept> h_ = O?.Category;
 
             CqlConcept i_(CodeableConcept @this) {
-                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return o_;
+                CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return n_;
             }
 
-            IEnumerable<CqlConcept> j_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_);
 
-            bool? k_(CqlConcept ObservationCategory) {
-                CqlCode p_ = this.exam(context);
-                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-                bool? r_ = context.Operators.Equivalent(ObservationCategory, q_);
-                return r_;
+            bool? j_(CqlConcept ObservationCategory) {
+                CqlCode o_ = this.exam(context);
+                CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+                bool? q_ = context.Operators.Equivalent(ObservationCategory, p_);
+                return q_;
             }
 
-            IEnumerable<CqlConcept> l_ = context.Operators.Where<CqlConcept>(j_, k_);
-            bool? m_ = context.Operators.Exists<CqlConcept>(l_);
-            bool? n_ = context.Operators.And(g_, m_);
-            return n_;
+            IEnumerable<CqlConcept> k_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_, j_);
+            bool? l_ = context.Operators.Exists<CqlConcept>(k_);
+            bool? m_ = context.Operators.And(g_, l_);
+            return m_;
         }
 
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);

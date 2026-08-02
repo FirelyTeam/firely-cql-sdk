@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("FHIRHelpers", "4.3.000")]
 public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_000>
 {
@@ -355,15 +355,14 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
             List<Coding> a_ = concept?.Coding;
 
             CqlCode b_(Coding C) {
-                CqlCode g_ = this.ToCode(context, C);
-                return g_;
+                CqlCode f_ = this.ToCode(context, C);
+                return f_;
             }
 
-            IEnumerable<CqlCode> c_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)a_, b_);
-            IEnumerable<CqlCode> d_ = context.Operators.Distinct<CqlCode>(c_);
-            FhirString e_ = concept?.TextElement;
-            string f_ = e_?.Value;
-            return new CqlConcept(d_, f_);
+            IEnumerable<CqlCode> c_ = context.Operators.SelectDistinct<Coding, CqlCode>((IEnumerable<Coding>)a_, b_);
+            FhirString d_ = concept?.TextElement;
+            string e_ = d_?.Value;
+            return new CqlConcept(c_, e_);
         }
     }
 

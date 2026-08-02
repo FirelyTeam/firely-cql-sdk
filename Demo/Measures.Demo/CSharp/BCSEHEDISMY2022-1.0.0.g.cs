@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("BCSEHEDISMY2022", "1.0.0")]
 public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY2022_1_0_0>
 {
@@ -585,17 +585,16 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
         bool? c_(Observation Mammogram) {
-            DataType f_ = Mammogram?.Effective;
-            CqlInterval<CqlDateTime> g_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, f_);
-            CqlDateTime h_ = context.Operators.End(g_);
-            CqlInterval<CqlDateTime> i_ = this.Participation_Period(context);
-            bool? j_ = context.Operators.In<CqlDateTime>(h_, i_, (string)default);
-            return j_;
+            DataType e_ = Mammogram?.Effective;
+            CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, e_);
+            CqlDateTime g_ = context.Operators.End(f_);
+            CqlInterval<CqlDateTime> h_ = this.Participation_Period(context);
+            bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, (string)default);
+            return i_;
         }
 
-        IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-        bool? e_ = context.Operators.Exists<Observation>(d_);
-        return e_;
+        bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
+        return d_;
     }
 
 

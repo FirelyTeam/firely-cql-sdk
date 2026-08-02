@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("CMS149FHIRDementiaCognitiveAssess", "1.0.000")]
 public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISingleton<CMS149FHIRDementiaCognitiveAssess_1_0_000>
 {
@@ -212,29 +212,28 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
 
             bool? h_(Condition Dementia) {
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                Period l_ = EncounterAssessCognition?.Period;
-                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, "day");
-                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Dementia);
-                bool? p_ = context.Operators.Overlaps(o_, m_, "day");
-                bool? q_ = context.Operators.And(n_, p_);
-                DataType r_ = Dementia?.Abatement;
-                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                CqlInterval<CqlDateTime> t_ = QICoreCommon_4_0_000.Instance.toInterval(context, s_);
-                CqlDateTime u_ = context.Operators.End(t_);
-                CqlDateTime v_ = context.Operators.End(k_);
-                bool? w_ = context.Operators.After(u_, v_, "day");
-                bool? x_ = context.Operators.Or((bool?)(s_ is null), w_);
-                bool? y_ = context.Operators.And(q_, x_);
-                bool? z_ = this.isVerified(context, Dementia);
-                bool? aa_ = context.Operators.And(y_, z_);
-                return aa_;
+                CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
+                Period k_ = EncounterAssessCognition?.Period;
+                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, "day");
+                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Dementia);
+                bool? o_ = context.Operators.Overlaps(n_, l_, "day");
+                bool? p_ = context.Operators.And(m_, o_);
+                DataType q_ = Dementia?.Abatement;
+                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
+                CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
+                CqlDateTime t_ = context.Operators.End(s_);
+                CqlDateTime u_ = context.Operators.End(j_);
+                bool? v_ = context.Operators.After(t_, u_, "day");
+                bool? w_ = context.Operators.Or((bool?)(r_ is null), v_);
+                bool? x_ = context.Operators.And(p_, w_);
+                bool? y_ = this.isVerified(context, Dementia);
+                bool? z_ = context.Operators.And(x_, y_);
+                return z_;
             }
 
-            IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
-            bool? j_ = context.Operators.Exists<Condition>(i_);
-            return j_;
+            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            return i_;
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -322,44 +321,43 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             IEnumerable<Encounter> j_ = this.Dementia_Encounter_During_Measurement_Period(context);
 
             bool? k_(Encounter EncounterDementia) {
-                DataType n_ = CognitiveAssessment?.Effective;
-                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-                CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
-                CqlDateTime q_ = context.Operators.Start(p_);
-                Period r_ = EncounterDementia?.Period;
-                CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-                CqlDateTime t_ = context.Operators.End(s_);
-                CqlQuantity u_ = context.Operators.Quantity(12m, "months");
-                CqlDateTime v_ = context.Operators.Subtract(t_, u_);
-                CqlInterval<CqlDateTime> w_ = context.Operators.Interval(v_, t_, true, true);
-                bool? x_ = context.Operators.In<CqlDateTime>(q_, w_, "day");
-                bool? y_ = context.Operators.Not((bool?)(t_ is null));
-                bool? z_ = context.Operators.And(x_, y_);
-                return z_;
+                DataType m_ = CognitiveAssessment?.Effective;
+                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
+                CqlDateTime p_ = context.Operators.Start(o_);
+                Period q_ = EncounterDementia?.Period;
+                CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
+                CqlDateTime s_ = context.Operators.End(r_);
+                CqlQuantity t_ = context.Operators.Quantity(12m, "months");
+                CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+                CqlInterval<CqlDateTime> v_ = context.Operators.Interval(u_, s_, true, true);
+                bool? w_ = context.Operators.In<CqlDateTime>(p_, v_, "day");
+                bool? x_ = context.Operators.Not((bool?)(s_ is null));
+                bool? y_ = context.Operators.And(w_, x_);
+                return y_;
             }
 
-            IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
-            bool? m_ = context.Operators.Exists<Encounter>(l_);
-            return m_;
+            bool? l_ = context.Operators.WhereAny<Encounter>(j_, k_);
+            return l_;
         }
 
         IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
 
         bool? h_(Observation CognitiveAssessment) {
-            DataType aa_ = CognitiveAssessment?.Value;
-            object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-            bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
-            Code<ObservationStatus> ad_ = CognitiveAssessment?.StatusElement;
-            ObservationStatus? ae_ = ad_?.Value;
-            string af_ = context.Operators.Convert<string>(ae_);
-            string[] ag_ = [
+            DataType z_ = CognitiveAssessment?.Value;
+            object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+            bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
+            Code<ObservationStatus> ac_ = CognitiveAssessment?.StatusElement;
+            ObservationStatus? ad_ = ac_?.Value;
+            string ae_ = context.Operators.Convert<string>(ad_);
+            string[] af_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
-            bool? ai_ = context.Operators.And(ac_, ah_);
-            return ai_;
+            bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
+            bool? ah_ = context.Operators.And(ab_, ag_);
+            return ah_;
         }
 
         IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -399,46 +397,44 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             IEnumerable<Encounter> j_ = this.Dementia_Encounter_During_Measurement_Period(context);
 
             bool? k_(Encounter EncounterDementia) {
-                Instant n_ = NoCognitiveAssessment?.IssuedElement;
-                DateTimeOffset? o_ = n_?.Value;
-                CqlDateTime p_ = context.Operators.Convert<CqlDateTime>(o_);
-                Period q_ = EncounterDementia?.Period;
-                CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
-                bool? s_ = context.Operators.In<CqlDateTime>(p_, r_, "day");
-                return s_;
+                Instant m_ = NoCognitiveAssessment?.IssuedElement;
+                DateTimeOffset? n_ = m_?.Value;
+                CqlDateTime o_ = context.Operators.Convert<CqlDateTime>(n_);
+                Period p_ = EncounterDementia?.Period;
+                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
+                bool? r_ = context.Operators.In<CqlDateTime>(o_, q_, "day");
+                return r_;
             }
 
-            IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
-            bool? m_ = context.Operators.Exists<Encounter>(l_);
-            return m_;
+            bool? l_ = context.Operators.WhereAny<Encounter>(j_, k_);
+            return l_;
         }
 
         IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
 
         bool? h_(Observation NoCognitiveAssessment) {
 
-            bool? t_(Extension @this) {
-                FhirUri ab_ = @this?.UrlElement;
-                string ac_ = FHIRHelpers_4_4_000.Instance.ToString(context, ab_);
-                bool? ad_ = context.Operators.Equal(ac_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
-                return ad_;
+            bool? s_(Extension @this) {
+                FhirUri z_ = @this?.UrlElement;
+                string aa_ = FHIRHelpers_4_4_000.Instance.ToString(context, z_);
+                bool? ab_ = context.Operators.Equal(aa_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                return ab_;
             }
 
-            IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoCognitiveAssessment is DomainResource
+
+            object t_(Extension @this) {
+                DataType ac_ = @this?.Value;
+                return ac_;
+            }
+
+            IEnumerable<object> u_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(NoCognitiveAssessment is DomainResource
                 ? (NoCognitiveAssessment as DomainResource).Extension
-                : default), t_);
-
-            object v_(Extension @this) {
-                DataType ae_ = @this?.Value;
-                return ae_;
-            }
-
-            IEnumerable<object> w_ = context.Operators.Select<Extension, object>(u_, v_);
-            object x_ = context.Operators.SingletonFrom<object>(w_);
-            CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_ as CodeableConcept);
-            CqlValueSet z_ = this.Patient_Reason(context);
-            bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
-            return aa_;
+                : default), s_, t_);
+            object v_ = context.Operators.SingletonFrom<object>(u_);
+            CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_ as CodeableConcept);
+            CqlValueSet x_ = this.Patient_Reason(context);
+            bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+            return y_;
         }
 
         IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);

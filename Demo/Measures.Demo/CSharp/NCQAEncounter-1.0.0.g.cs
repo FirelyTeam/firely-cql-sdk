@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("NCQAEncounter", "1.0.0")]
 public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_0_0>
 {
@@ -24,34 +24,31 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
         List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 
         FhirString b_(Encounter.DiagnosisComponent D) {
-            ResourceReference i_ = D?.Condition;
-            FhirString j_ = i_?.ReferenceElement;
+            ResourceReference g_ = D?.Condition;
+            FhirString h_ = g_?.ReferenceElement;
+            return h_;
+        }
+
+        IEnumerable<FhirString> c_ = context.Operators.SelectDistinct<Encounter.DiagnosisComponent, FhirString>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
+
+        bool? d_(FhirString CRef) {
+
+            bool? i_(Condition C) {
+                Id k_ = C?.IdElement;
+                string l_ = FHIRHelpers_4_0_001.Instance.ToString(context, k_);
+                string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, CRef);
+                string n_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, m_);
+                bool? o_ = context.Operators.Equal(l_, n_);
+                return o_;
+            }
+
+            bool? j_ = context.Operators.WhereAny<Condition>(Conditions, i_);
             return j_;
         }
 
-        IEnumerable<FhirString> c_ = context.Operators.Select<Encounter.DiagnosisComponent, FhirString>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
-        IEnumerable<FhirString> d_ = context.Operators.Distinct<FhirString>(c_);
-
-        bool? e_(FhirString CRef) {
-
-            bool? k_(Condition C) {
-                Id n_ = C?.IdElement;
-                string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
-                string p_ = FHIRHelpers_4_0_001.Instance.ToString(context, CRef);
-                string q_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, p_);
-                bool? r_ = context.Operators.Equal(o_, q_);
-                return r_;
-            }
-
-            IEnumerable<Condition> l_ = context.Operators.Where<Condition>(Conditions, k_);
-            bool? m_ = context.Operators.Exists<Condition>(l_);
-            return m_;
-        }
-
-        IEnumerable<bool?> f_ = context.Operators.Select<FhirString, bool?>(d_, e_);
-        IEnumerable<bool?> g_ = context.Operators.Distinct<bool?>(f_);
-        bool? h_ = context.Operators.AnyTrue(g_);
-        return h_;
+        IEnumerable<bool?> e_ = context.Operators.SelectDistinct<FhirString, bool?>(c_, d_);
+        bool? f_ = context.Operators.AnyTrue(e_);
+        return f_;
     }
 
 
@@ -61,11 +58,11 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
         List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 
         bool? b_(Encounter.DiagnosisComponent D) {
-            PositiveInt j_ = D?.RankElement;
-            Integer k_ = context.Operators.Convert<Integer>(j_);
-            int? l_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, k_);
-            bool? m_ = context.Operators.Equal(l_, 1);
-            return m_;
+            PositiveInt i_ = D?.RankElement;
+            Integer j_ = context.Operators.Convert<Integer>(i_);
+            int? k_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, j_);
+            bool? l_ = context.Operators.Equal(k_, 1);
+            return l_;
         }
 
         IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
@@ -76,26 +73,24 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 
         bool? f_(Encounter.DiagnosisComponent PrincipalDiagnosis) {
 
-            bool? n_(Condition C) {
-                Id q_ = C?.IdElement;
-                string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
-                ResourceReference s_ = PrincipalDiagnosis?.Condition;
-                FhirString t_ = s_?.ReferenceElement;
-                string u_ = FHIRHelpers_4_0_001.Instance.ToString(context, t_);
-                string v_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, u_);
-                bool? w_ = context.Operators.Equal(r_, v_);
-                return w_;
+            bool? m_(Condition C) {
+                Id o_ = C?.IdElement;
+                string p_ = FHIRHelpers_4_0_001.Instance.ToString(context, o_);
+                ResourceReference q_ = PrincipalDiagnosis?.Condition;
+                FhirString r_ = q_?.ReferenceElement;
+                string s_ = FHIRHelpers_4_0_001.Instance.ToString(context, r_);
+                string t_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, s_);
+                bool? u_ = context.Operators.Equal(p_, t_);
+                return u_;
             }
 
-            IEnumerable<Condition> o_ = context.Operators.Where<Condition>(Conditions, n_);
-            bool? p_ = context.Operators.Exists<Condition>(o_);
-            return p_;
+            bool? n_ = context.Operators.WhereAny<Condition>(Conditions, m_);
+            return n_;
         }
 
-        IEnumerable<bool?> g_ = context.Operators.Select<Encounter.DiagnosisComponent, bool?>((IEnumerable<Encounter.DiagnosisComponent>)e_, f_);
-        IEnumerable<bool?> h_ = context.Operators.Distinct<bool?>(g_);
-        bool? i_ = context.Operators.SingletonFrom<bool?>(h_);
-        return i_;
+        IEnumerable<bool?> g_ = context.Operators.SelectDistinct<Encounter.DiagnosisComponent, bool?>((IEnumerable<Encounter.DiagnosisComponent>)e_, f_);
+        bool? h_ = context.Operators.SingletonFrom<bool?>(g_);
+        return h_;
     }
 
 
@@ -105,16 +100,15 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
         IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, Enc);
 
         bool? b_(Encounter EncounterPeriod) {
-            Period e_ = EncounterPeriod?.Period;
-            CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, e_);
-            CqlDateTime g_ = context.Operators.End(f_);
-            bool? h_ = context.Operators.In<CqlDateTime>(g_, timeperiod, (string)default);
-            return h_;
+            Period d_ = EncounterPeriod?.Period;
+            CqlInterval<CqlDateTime> e_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, d_);
+            CqlDateTime f_ = context.Operators.End(e_);
+            bool? g_ = context.Operators.In<CqlDateTime>(f_, timeperiod, (string)default);
+            return g_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        bool? d_ = context.Operators.Exists<Encounter>(c_);
-        return d_;
+        bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
+        return c_;
     }
 
 

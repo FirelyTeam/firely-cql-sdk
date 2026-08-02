@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.8.0")]
 [CqlLibrary("CMS75FHIRChildrenDentalDecay", "1.0.000")]
 public partial class CMS75FHIRChildrenDentalDecay_1_0_000 : ILibrary, ISingleton<CMS75FHIRChildrenDentalDecay_1_0_000>
 {
@@ -154,15 +154,14 @@ public partial class CMS75FHIRChildrenDentalDecay_1_0_000 : ILibrary, ISingleton
         IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
 
         bool? e_(Condition DentalCaries) {
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DentalCaries);
-            CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
-            bool? j_ = context.Operators.Overlaps(h_, i_, "day");
-            return j_;
+            CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DentalCaries);
+            CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
+            bool? i_ = context.Operators.Overlaps(g_, h_, "day");
+            return i_;
         }
 
-        IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
-        bool? g_ = context.Operators.Exists<Condition>(f_);
-        return g_;
+        bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
+        return f_;
     }
 
 
