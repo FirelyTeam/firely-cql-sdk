@@ -177,8 +177,25 @@ public class CqlOperatorsBinderFusionTests
         Assert.AreSame(firstSelector, inner.Arguments[1]);
         Assert.AreSame(predicate, inner.Arguments[2]);
 
-        // Nothing unfused is left in the chain.
-        Assert.IsInstanceOfType<CodeConstant>(inner.Arguments[0]);
+        // Nothing unfused is left in the chain: the only two operator calls are the fused pair
+        // above, and every argument they carry is a leaf (the source constant and the three
+        // lambdas) rather than a surviving Where/Select.
+        var operatorCalls = OperatorCallsIn(outer).ToList();
+        CollectionAssert.AreEqual(
+            new[] { nameof(ICqlOperators.SelectDistinct), nameof(ICqlOperators.SelectWhere) },
+            operatorCalls.Select(c => c.Method.Name).ToArray());
+    }
+
+    /// <summary>Walks the operator calls reachable through argument positions, outermost first.</summary>
+    private static IEnumerable<CodeInvoke> OperatorCallsIn(CodeExpression expression)
+    {
+        if (expression is not CodeInvoke invoke)
+            yield break;
+
+        yield return invoke;
+        foreach (var argument in invoke.Arguments)
+            foreach (var nested in OperatorCallsIn(argument))
+                yield return nested;
     }
 
     #endregion
@@ -239,6 +256,95 @@ public class CqlOperatorsBinderFusionTests
 
         Assert.AreEqual(nameof(ICqlOperators.Exists), call.Method.Name);
         Assert.AreSame(source, call.Arguments.Single());
+    }
+
+    #endregion
+
+    #region Declines — these are correctness guards, not missed optimizations
+
+    /// <summary>
+    /// A producer wrapped in a conversion must not fuse. The fused call takes the producer's own
+    /// source and lambda, so it would have to re-derive the conversion the binder inserted around
+    /// the producer's <em>result</em> — and there is no general way to push a result conversion
+    /// back through the fused operator. Declining is the only safe answer.
+    /// </summary>
+    [TestMethod]
+    public void CastWrappedProducer_DoesNotFuse()
+    {
+        var binder = CreateBinder();
+        var source = IntSource();
+        var predicate = Predicate(typeof(int?));
+
+        var where = binder.BindToMethod(nameof(ICqlOperators.Where), [source, predicate], []);
+        var castWhere = new CodeCast(where, typeof(IEnumerable<int?>), CodeCastKind.Cast);
+
+        var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.Exists), [castWhere], []));
+
+        Assert.AreEqual(nameof(ICqlOperators.Exists), call.Method.Name);
+        Assert.AreSame(castWhere, call.Arguments.Single());
+        // The Where under the cast is untouched.
+        Assert.AreEqual(nameof(ICqlOperators.Where), AssertOperatorsInvoke(castWhere.Operand).Method.Name);
+    }
+
+    /// <summary>
+    /// A null-conditional producer (<c>x?.Where(…)</c>) must not fuse: it short-circuits to null on
+    /// a null receiver, which the fused operator — an ordinary call on the same receiver — would
+    /// not reproduce.
+    /// </summary>
+    [TestMethod]
+    public void NullConditionalProducer_DoesNotFuse()
+    {
+        var binder = CreateBinder();
+        var source = IntSource();
+        var predicate = Predicate(typeof(int?));
+
+        var where = (CodeInvoke)binder.BindToMethod(nameof(ICqlOperators.Where), [source, predicate], []);
+        // Same receiver instance and same method — the only difference from the fusable case is
+        // the null-conditional flag, so this isolates that one guard.
+        var nullConditionalWhere = new CodeInvoke(
+            where.Receiver,
+            where.Method,
+            nullConditional: true,
+            [.. where.Arguments]);
+
+        var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.Exists), [nullConditionalWhere], []));
+
+        Assert.AreEqual(nameof(ICqlOperators.Exists), call.Method.Name);
+        Assert.AreSame(nullConditionalWhere, call.Arguments.Single());
+    }
+
+    /// <summary>
+    /// A legal but mismatched generic pair must not fuse. <c>Distinct&lt;object&gt;</c> over
+    /// <c>Select&lt;int?, string&gt;</c> is a well-formed binding (<c>IEnumerable&lt;string&gt;</c>
+    /// converts covariantly to <c>IEnumerable&lt;object&gt;</c>), but the consumer's element type is
+    /// not the producer's projection type, so <c>SelectDistinct&lt;int?, object&gt;</c> would be the
+    /// wrong operator.
+    ///
+    /// <para>Two independent guards cover this, and the assertions below record which one actually
+    /// fires: because a covariant conversion is not an exact type match, the binder wraps the
+    /// producer in a cast and the "producer must be the argument node" guard catches it first. The
+    /// generic-argument cross-check in the <c>Fuse…</c> helpers is the backstop behind it, for
+    /// callers that hand the fused rewrite an unwrapped mismatched pair.</para>
+    /// </summary>
+    [TestMethod]
+    public void MismatchedGenericPair_DoesNotFuse()
+    {
+        var binder = CreateBinder();
+        var source = IntSource();
+        var selector = SelectorToString(typeof(int?));
+
+        var select = (CodeInvoke)binder.BindToMethod(nameof(ICqlOperators.Select), [source, selector], []);
+        CollectionAssert.AreEqual(new[] { typeof(int?), typeof(string) }, select.Method.GetGenericArguments());
+
+        var call = AssertOperatorsInvoke(
+            binder.BindToMethod(nameof(ICqlOperators.Distinct), [select], [typeof(object)]));
+
+        Assert.AreEqual(nameof(ICqlOperators.Distinct), call.Method.Name);
+        CollectionAssert.AreEqual(new[] { typeof(object) }, call.Method.GetGenericArguments());
+
+        var cast = call.Arguments.Single() as CodeCast;
+        Assert.IsNotNull(cast, "Expected the covariant conversion to wrap the producer in a cast.");
+        Assert.AreSame(select, cast.Operand);
     }
 
     #endregion

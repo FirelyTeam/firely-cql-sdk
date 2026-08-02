@@ -26,12 +26,26 @@ namespace Hl7.Cql.Compiler;
 ///
 /// <para><b>Where this lives, and why.</b> Fusion runs on the IR, at the moment
 /// <see cref="CqlOperatorsBinder.BindToMethod"/> finishes building the consumer's
-/// <see cref="CodeInvoke"/> — every <see cref="ICqlOperators"/> call the compiler emits is built
-/// there, so there is exactly one place to hook and nothing can slip past it. Because the IR is
-/// built bottom-up, the producer has already been bound (and possibly fused itself) by the time
-/// its consumer is bound, which makes the rewrite reach a fixpoint for free: a
-/// <c>Select→Where→Select→Distinct</c> chain collapses to <c>SelectWhere</c> + <c>SelectDistinct</c>
-/// without a second sweep.</para>
+/// <see cref="CodeInvoke"/>. Every operator call the expression builder produces is routed through
+/// there, which makes it the one place to hook. Two internal helpers construct a
+/// <see cref="CodeInvoke"/> without going through it — the boxing <c>Select</c> in
+/// <c>ToObjectEnumerable</c> and the conversion call in <c>CqlOperatorsBinder.Conversions.cs</c> —
+/// and neither costs a fusion: what matters is that the <em>consumer</em> is bound through
+/// <c>BindToMethod</c>, and both of those produce nodes that are only ever consumed by a call that
+/// is.</para>
+///
+/// <para><b>Fixpoint.</b> The IR is built bottom-up, so the producer is fully bound before its
+/// consumer is built and each consumer sees the final form of its source. That is enough to
+/// collapse chains in one sweep: <c>Select→Where→Select→Distinct</c> becomes <c>SelectWhere</c> +
+/// <c>SelectDistinct</c>. Note that a fused node is never itself a recognized producer — only
+/// <c>Where</c> and <c>Select</c> are — so fusion never cascades into a fused node, and the result
+/// is stable rather than merely converged.</para>
+///
+/// <para><b>Greedy, not globally optimal.</b> Because the rewrite fires in bind order, the
+/// innermost fusable pair wins. <c>Exists(Where(Select(s, f), p))</c> fuses the inner pair first
+/// and settles as <c>Exists(SelectWhere(s, f, p))</c> rather than <c>WhereAny</c> over a
+/// <c>Select</c>; either way exactly one intermediate list disappears, so the payoff is the same.
+/// This is by design, not a missed case.</para>
 ///
 /// <para><b>Single use is structural.</b> Fusion is only sound when the producer's result is
 /// consumed exactly once. Here the producer *is* the consumer's source argument node, and a tree
@@ -43,9 +57,14 @@ namespace Hl7.Cql.Compiler;
 /// <para><b>Conservatism.</b> The producer has to be the argument node itself. If overload
 /// resolution wrapped it in a conversion (a cast or a <c>Convert…</c> call), the pattern does not
 /// match and nothing is rewritten — a fused call would have to re-derive that conversion, and
-/// getting it silently wrong is worse than not fusing. The generic arguments of the fused call are
-/// taken from the two original calls and cross-checked against each other; a mismatch also
-/// declines the rewrite.</para>
+/// getting it silently wrong is worse than not fusing. A null-conditional producer
+/// (<c>x?.Where(…)</c>) is likewise skipped: its result type and its short-circuit on a null
+/// receiver are not what the fused operator would reproduce. The generic arguments of the fused
+/// call are taken from the two original calls and cross-checked against each other; a mismatch
+/// declines the rewrite, as does any failure to close the fused generic method or to accept the
+/// original argument nodes. Each of these declines is pinned by a test in
+/// <c>CqlOperatorsBinderFusionTests</c> — a regression in one is a miscompile, not a lost
+/// optimization.</para>
 ///
 /// <para>Semantics are unchanged by construction: the fused operators are non-short-circuiting and
 /// invoke the same lambdas over the same elements as the composition they replace (see
@@ -132,7 +151,7 @@ partial class CqlOperatorsBinder
         if (exists.Method.GetGenericArguments()[0] != t)
             return null;
 
-        return TryBuild(WhereAnyMethod.MakeGenericMethod(t), where.Arguments[0], where.Arguments[1]);
+        return TryBuild(WhereAnyMethod, [t], [where.Arguments[0], where.Arguments[1]]);
     }
 
     /// <summary><c>Select&lt;T, TR&gt;(Where&lt;T&gt;(s, p), f)</c> → <c>WhereSelect&lt;T, TR&gt;(s, p, f)</c>.</summary>
@@ -145,10 +164,9 @@ partial class CqlOperatorsBinder
         var tr = selectTypeArguments[1];
 
         return TryBuild(
-            WhereSelectMethod.MakeGenericMethod(t, tr),
-            where.Arguments[0],
-            where.Arguments[1],
-            select.Arguments[1]);
+            WhereSelectMethod,
+            [t, tr],
+            [where.Arguments[0], where.Arguments[1], select.Arguments[1]]);
     }
 
     /// <summary><c>Where&lt;TR&gt;(Select&lt;T, TR&gt;(s, f), p)</c> → <c>SelectWhere&lt;T, TR&gt;(s, f, p)</c>.</summary>
@@ -160,10 +178,9 @@ partial class CqlOperatorsBinder
             return null;
 
         return TryBuild(
-            SelectWhereMethod.MakeGenericMethod(t, tr),
-            select.Arguments[0],
-            select.Arguments[1],
-            where.Arguments[1]);
+            SelectWhereMethod,
+            [t, tr],
+            [select.Arguments[0], select.Arguments[1], where.Arguments[1]]);
     }
 
     /// <summary><c>Distinct&lt;TR&gt;(Select&lt;T, TR&gt;(s, f))</c> → <c>SelectDistinct&lt;T, TR&gt;(s, f)</c>.</summary>
@@ -175,22 +192,23 @@ partial class CqlOperatorsBinder
             return null;
 
         return TryBuild(
-            SelectDistinctMethod.MakeGenericMethod(t, tr),
-            select.Arguments[0],
-            select.Arguments[1]);
+            SelectDistinctMethod,
+            [t, tr],
+            [select.Arguments[0], select.Arguments[1]]);
     }
 
     /// <summary>
-    /// Builds the fused call, declining the rewrite (rather than failing the compilation) if the
-    /// original argument nodes do not satisfy the fused method's signature. The composed form the
-    /// caller already holds is always a valid fallback, so a shape we did not anticipate costs a
-    /// missed optimization and nothing else.
+    /// Closes the fused generic method over <paramref name="typeArguments"/> and builds the call,
+    /// declining the rewrite (rather than failing the compilation) if either step rejects what we
+    /// handed it — an unsatisfiable generic constraint as much as an argument that does not fit the
+    /// fused signature. The composed form the caller already holds is always a valid fallback, so a
+    /// shape we did not anticipate costs a missed optimization and nothing else.
     /// </summary>
-    private static CodeInvoke? TryBuild(MethodInfo fusedMethod, params CodeExpression[] arguments)
+    private static CodeInvoke? TryBuild(MethodInfo fusedMethod, Type[] typeArguments, CodeExpression[] arguments)
     {
         try
         {
-            return new CodeInvoke(OperatorsReceiver, fusedMethod, arguments);
+            return new CodeInvoke(OperatorsReceiver, fusedMethod.MakeGenericMethod(typeArguments), arguments);
         }
         catch (ArgumentException)
         {
