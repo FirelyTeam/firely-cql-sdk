@@ -1,4 +1,8 @@
 #nullable enable
+Hl7.Cql.Operators.ICqlOperators.SelectDistinct<T, TR>(System.Collections.Generic.IEnumerable<T?>? source, System.Func<T?, TR>! select) -> System.Collections.Generic.IEnumerable<TR>?
+Hl7.Cql.Operators.ICqlOperators.SelectWhere<T, TR>(System.Collections.Generic.IEnumerable<T?>? source, System.Func<T?, TR>! select, System.Func<TR, bool?>! lambda) -> System.Collections.Generic.IEnumerable<TR>?
+Hl7.Cql.Operators.ICqlOperators.WhereAny<T>(System.Collections.Generic.IEnumerable<T>? source, System.Func<T, bool?>! lambda) -> bool?
+Hl7.Cql.Operators.ICqlOperators.WhereSelect<T, TR>(System.Collections.Generic.IEnumerable<T>? source, System.Func<T, bool?>! lambda, System.Func<T?, TR>! select) -> System.Collections.Generic.IEnumerable<TR>?
 Hl7.Cql.Runtime.CqlContext.UseNewCache(int initialCapacity, int concurrencyLevel) -> void
 Hl7.Cql.Runtime.EvaluationCacheProfile
 Hl7.Cql.Runtime.EvaluationCacheProfile.ConcurrencyLevel.get -> int

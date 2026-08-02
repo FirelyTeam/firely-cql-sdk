@@ -522,8 +522,10 @@ namespace Hl7.Cql.Operators
         bool?                                    SamePrecision(CqlDateTime? left, CqlDateTime? right);
         bool?                                    SamePrecision(CqlTime? left, CqlTime? right);
         IEnumerable<TR>?                         Select<T, TR>(IEnumerable<T?>? source, Func<T?, TR> select);
+        IEnumerable<TR>?                         SelectDistinct<T, TR>(IEnumerable<T?>? source, Func<T?, TR> select);
         IEnumerable<TResult>?                    SelectMany<TSource, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> collectionSelector);
         IEnumerable<TResult>?                    SelectManyResults<TSource, TCollection, TResult>(IEnumerable<TSource>? source,Func<TSource, IEnumerable<TCollection>> collectionSelector,Func<TSource, TCollection, TResult> resultSelector);
+        IEnumerable<TR>?                         SelectWhere<T, TR>(IEnumerable<T?>? source, Func<T?, TR> select, Func<TR, bool?> lambda);
         T?                                       SingletonFrom<T>(IEnumerable<T>? source);
         IEnumerable<T>?                          Slice<T>(IEnumerable<T>? source,int? startIndex,int? endIndex);
         IEnumerable<T>?                          SortBy<T>(IEnumerable<T>? source,Func<T, object> sortByExpr,ListSortDirection order);
@@ -596,6 +598,8 @@ namespace Hl7.Cql.Operators
         CqlQuantity?                             Variance(IEnumerable<CqlQuantity?>? argument);
         decimal?                                 Variance(IEnumerable<decimal?>? argument);
         IEnumerable<T>?                          Where<T>(IEnumerable<T>? source, Func<T, bool?> lambda);
+        bool?                                    WhereAny<T>(IEnumerable<T>? source, Func<T, bool?> lambda);
+        IEnumerable<TR>?                         WhereSelect<T, TR>(IEnumerable<T>? source, Func<T, bool?> lambda, Func<T?, TR> select);
         CqlQuantity?                             Width(CqlInterval<CqlQuantity?>? @this);
         decimal?                                 Width(CqlInterval<decimal?>? @this);
         int?                                     Width(CqlInterval<int?>? @this);
