@@ -21,7 +21,16 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// </summary>
 public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
 {
-    private readonly AssemblyLoadContext _alc;
+    /// <summary>
+    /// The assembly load context holding this library set's assemblies, released when it is unloaded.
+    /// </summary>
+    /// <remarks>
+    /// Not <see langword="readonly"/>, and set to <see langword="null"/> by <see cref="Unload"/>, because
+    /// this is the last strong reference to the load context that this object holds. Keeping it would mean
+    /// a retained invoker pinned the context — and the JIT-compiled code and memory mappings behind it —
+    /// no matter that the invoker graph had been released.
+    /// </remarks>
+    private AssemblyLoadContext? _alc;
 
     /// <summary>
     /// When <see langword="true"/>, a pool owns this instance's lifetime and <see cref="Dispose"/> is
@@ -65,8 +74,9 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
         LoggerFactory = loggerFactory;
         BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         LibrarySetName = librarySetName;
+        // Reads the parameter rather than the field, so the field's nullability stays confined to Unload.
         _libraryInvokers =
-            _alc.Assemblies
+            alc.Assemblies
                 .SelectMany(a => a.GetTypes())
                 .SelectWhereNotNull(libraryType =>
                 {
@@ -105,39 +115,53 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
     }
 
     /// <summary>
-    /// The assembly load context holding this library set's assemblies, so that
-    /// <see cref="LibrarySetInvokerPool"/> can hold a weak reference to it and report how many evicted
-    /// contexts have not been reclaimed yet.
+    /// The assembly load context holding this library set's assemblies, or <see langword="null"/> once it
+    /// has been unloaded. Only used by tests that need to observe the context before it is released;
+    /// <see cref="LibrarySetInvokerPool"/> takes the context from <see cref="Unload"/>'s return value.
     /// </summary>
-    internal AssemblyLoadContext AssemblyLoadContext => _alc;
+    internal AssemblyLoadContext? AssemblyLoadContext => _alc;
 
     /// <summary>
-    /// Unloads the assembly load context and releases the invoker graph.
+    /// Unloads the assembly load context, releasing both the invoker graph and this object's reference to
+    /// the context itself.
     /// </summary>
+    /// <returns>The context that was unloaded, or <see langword="null"/> if it had already been unloaded.</returns>
     /// <remarks>
     /// <para>
-    /// Clearing <see cref="LibraryInvokers"/> is not housekeeping, it is what makes unloading
-    /// possible. <see cref="AssemblyLoadContext.Unload"/> only <em>initiates</em> unloading; the
-    /// context is reclaimed once nothing references it any more. Every value in that dictionary holds
-    /// the generated library singleton and delegates bound into the generated assembly, so leaving it
-    /// populated keeps the context - and its JIT-compiled code, which on Linux costs two memory
-    /// mappings per region - resident for as long as this object is reachable.
+    /// Releasing both references is what makes unloading possible.
+    /// <see cref="AssemblyLoadContext.Unload"/> only <em>initiates</em> unloading; the context is reclaimed
+    /// once nothing references it any more. Every value in the invoker dictionary holds the generated
+    /// library singleton and delegates bound into the generated assembly, and <c>_alc</c> references the
+    /// context directly, so leaving either in place keeps the context — and its JIT-compiled code, which
+    /// on Linux costs two memory mappings per region — resident for as long as this object is reachable.
+    /// </para>
+    /// <para>
+    /// Note this does <em>not</em> make every retained object harmless. A caller holding a
+    /// <see cref="LibraryInvoker"/> or <see cref="DefinitionInvoker"/> still roots the context through the
+    /// generated library instance and the bound delegate it holds directly, which is why those must not be
+    /// retained beyond the library set.
     /// </para>
     /// <para>
     /// Marked <see cref="MethodImplOptions.NoInlining"/> so that stack slots the JIT may introduce for
-    /// the graph do not keep it alive for the enclosing frame's lifetime.
+    /// the graph or the context do not keep them alive for the enclosing frame's lifetime.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.NoInlining)]
-    internal void Unload()
+    internal AssemblyLoadContext? Unload()
     {
         // Unloading twice was an access violation before .NET 8.0.0 (dotnet/runtime#91283), and is
         // pointless afterwards, so only the first caller gets through.
         if (Interlocked.Exchange(ref _unloadInitiated, 1) != 0)
-            return;
+            return null;
 
-        _libraryInvokers = ImmutableDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker>.Empty;
-        _alc.Unload();
+        // Released with a store fence so that a reader which observes this empty sentinel is also
+        // guaranteed to observe the _unloadInitiated write above it. See the LibraryInvokers getter.
+        Volatile.Write(ref _libraryInvokers, ImmutableDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker>.Empty);
+
+        var alc = _alc!;
+        _alc = null;
+        alc.Unload();
+        return alc;
     }
 
     /// <summary>
@@ -156,8 +180,15 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
         [DebuggerStepThrough]
         get
         {
-            ObjectDisposedException.ThrowIf(_unloadInitiated != 0, this);
-            return _libraryInvokers;
+            // Read the graph BEFORE the flag, both with acquire semantics. Unload writes the flag first
+            // and the empty sentinel second, so observing the sentinel here guarantees the flag write is
+            // visible too, and the check below throws. Reading the flag first would permit the opposite
+            // interleaving on a weakly-ordered architecture such as arm64 — a stale flag paired with the
+            // fresh sentinel — and this getter would then return an empty library set instead of
+            // throwing, which is precisely the silent wrong answer it exists to prevent.
+            var libraryInvokers = Volatile.Read(ref _libraryInvokers);
+            ObjectDisposedException.ThrowIf(Volatile.Read(ref _unloadInitiated) != 0, this);
+            return libraryInvokers;
         }
     }
 

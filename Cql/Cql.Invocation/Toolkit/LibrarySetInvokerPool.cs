@@ -129,10 +129,13 @@ public sealed class LibrarySetInvokerPool : IDisposable
         ArgumentNullException.ThrowIfNull(toolkit);
         ArgumentNullException.ThrowIfNull(librarySetName);
 
-        var key = LibrarySetInvokerPoolKey.Create(
-            toolkit.AssemblyBinaries,
-            librarySetName,
-            toolkit.BatchProcessExceptionContinuation);
+        // Snapshot the inputs once, and derive the key and load the assemblies from that same snapshot.
+        // Re-reading the toolkit when the lazy value is forced would let a concurrent AddAssemblyBinaries
+        // file this entry under a key that no longer describes what was loaded.
+        var assemblyBinaries = toolkit.AssemblyBinaries;
+        var continuation = toolkit.BatchProcessExceptionContinuation;
+
+        var key = LibrarySetInvokerPoolKey.Create(assemblyBinaries, librarySetName, continuation);
 
         Lazy<LibrarySetInvoker> lazyInvoker;
         List<LibrarySetInvoker> evicted;
@@ -156,7 +159,11 @@ public sealed class LibrarySetInvokerPool : IDisposable
                 // once. Tolerating a duplicate load instead would leak the losing context: nothing
                 // would ever unload it.
                 lazyInvoker = new Lazy<LibrarySetInvoker>(
-                    () => toolkit.CreateLibrarySetInvoker(librarySetName, isPoolOwned: true),
+                    () => toolkit.CreateLibrarySetInvoker(
+                        librarySetName,
+                        isPoolOwned: true,
+                        assemblyBinaries,
+                        continuation),
                     LazyThreadSafetyMode.ExecutionAndPublication);
                 _entries[key] = new PoolEntry(lazyInvoker, _leastRecentlyUsed.AddFirst(key));
                 evicted = CollectEvictions();
@@ -301,27 +308,40 @@ public sealed class LibrarySetInvokerPool : IDisposable
 
         foreach (var invoker in evicted)
         {
-            lock (_gate)
-                _pendingUnloads.Add(new WeakReference<AssemblyLoadContext>(invoker.AssemblyLoadContext, trackResurrection: true));
-
             _logger.LogDebug("Unloading evicted library set {name}.", invoker.LibrarySetName);
-            invoker.Unload();
+
+            // Take the context from Unload()'s return value rather than reading it beforehand. Unload
+            // drops the invoker's own reference to the context, so reading it first would put a second
+            // strong reference in this frame and defeat the release. A null return means another thread
+            // already unloaded this invoker and recorded the context, so there is nothing to track.
+            if (invoker.Unload() is { } assemblyLoadContext)
+                lock (_gate)
+                    _pendingUnloads.Add(new WeakReference<AssemblyLoadContext>(assemblyLoadContext, trackResurrection: true));
         }
 
         evicted.Clear();
-        WarnIfTooManyPendingUnloads();
+        PruneAndWarn();
     }
 
-    private void WarnIfTooManyPendingUnloads()
+    /// <summary>
+    /// Drops the weak references whose assembly load contexts have been reclaimed, and warns if too
+    /// many remain alive.
+    /// </summary>
+    /// <remarks>
+    /// The prune is unconditional, and must stay that way. <see cref="CountPendingUnloads"/> is the only
+    /// thing that removes entries, and its other caller is <see cref="Statistics"/> — which is purely
+    /// diagnostic and may never be read. Gating the prune on
+    /// <see cref="LibrarySetInvokerPoolOptions.MaxPendingUnloads"/> (whose default is 0) would therefore
+    /// let this list, and the long GC handle behind every entry in it, grow by one per eviction for the
+    /// lifetime of the process — an unbounded leak inside the type that exists to prevent one.
+    /// </remarks>
+    private void PruneAndWarn()
     {
-        if (_options.MaxPendingUnloads <= 0)
-            return;
-
         int pending;
         lock (_gate)
             pending = CountPendingUnloads();
 
-        if (pending > _options.MaxPendingUnloads)
+        if (_options.MaxPendingUnloads > 0 && pending > _options.MaxPendingUnloads)
             _logger.LogWarning(
                 "{pending} evicted library sets have not been reclaimed, above the configured maximum of {max}. "
                 + "Something is most likely holding on to an evicted library set - a retained LibraryInvoker or "

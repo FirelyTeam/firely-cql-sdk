@@ -6,10 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-#nullable enable
-
+using System.Collections;
 using System.Collections.Concurrent;
-using System.Runtime.CompilerServices;
 using System.Runtime.Loader;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
@@ -21,6 +19,8 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
+
+#nullable enable
 
 namespace CoreTests;
 
@@ -252,13 +252,57 @@ public class LibrarySetInvokerPoolTests
 
         var evicted = pool.GetOrCreate(BuildToolkit(_libraryBinaries));
         Evaluate(evicted).Should().Be("42|hello world");
-        var weakContext = new WeakReference<AssemblyLoadContext>(evicted.AssemblyLoadContext, trackResurrection: true);
+        // Non-null: nothing has evicted this entry yet, so its context has not been released.
+        var weakContext = new WeakReference<AssemblyLoadContext>(evicted.AssemblyLoadContext!, trackResurrection: true);
 
         // Evicts the first entry, because capacity is 1.
         pool.GetOrCreate(BuildToolkit(_otherLibraryBinaries));
         pool.Statistics.Entries.Should().Be(1);
 
         return (weakContext, pool);
+    }
+
+    [TestMethod]
+    public void Eviction_WhileAConsumerStillHoldsTheInvoker_StillReleasesTheAssemblyLoadContext()
+    {
+        // This is what releasing the invoker graph in Unload() actually buys, and the only test that
+        // detects its removal. Unload() alone merely *initiates* unloading: while a consumer holds the
+        // invoker, its LibraryInvokers dictionary transitively roots the generated library singletons and
+        // the delegates bound into the assemblies, so the context stays resident. Clearing the graph is
+        // what breaks that chain. Note the invoker deliberately stays strongly referenced across the GC
+        // loop below — that is the whole point.
+        var (weakContext, heldInvoker, pool) = EvictWhileKeepingTheInvokerAlive();
+
+        using (pool)
+        {
+            var collected = CollectUntil(() => !weakContext.TryGetTarget(out _));
+
+            // Keep the invoker alive until after the assertion, so the test cannot pass for the trivial
+            // reason that the invoker itself became unreachable.
+            GC.KeepAlive(heldInvoker);
+            collected.Should().BeTrue(
+                "clearing the invoker graph must let the assembly load context go even while a consumer "
+                + "still holds the evicted invoker");
+        }
+    }
+
+    /// <summary>
+    /// Fills a capacity-1 pool, evicts the first entry, and returns the evicted invoker together with a
+    /// weak reference to its assembly load context — so the caller holds the invoker but not the context.
+    /// </summary>
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static (WeakReference<AssemblyLoadContext>, LibrarySetInvoker, LibrarySetInvokerPool) EvictWhileKeepingTheInvokerAlive()
+    {
+        var pool = new LibrarySetInvokerPool(new LibrarySetInvokerPoolOptions(Capacity: 1));
+
+        var evicted = pool.GetOrCreate(BuildToolkit(_libraryBinaries), "held");
+        Evaluate(evicted).Should().Be("42|hello world");
+        // Non-null: nothing has evicted this entry yet, so its context has not been released.
+        var weakContext = new WeakReference<AssemblyLoadContext>(evicted.AssemblyLoadContext!, trackResurrection: true);
+
+        pool.GetOrCreate(BuildToolkit(_otherLibraryBinaries), "evictor");
+
+        return (weakContext, evicted, pool);
     }
 
     [TestMethod]
@@ -276,6 +320,84 @@ public class LibrarySetInvokerPoolTests
         var act = () => Evaluate(invoker);
 
         act.Should().Throw<ObjectDisposedException>();
+    }
+
+    [TestMethod]
+    public void Eviction_EvictsTheLeastRecentlyUsedEntry_NotTheMostRecentlyUsed()
+    {
+        // Capacity 1 cannot detect a recency bug, because there is only ever one candidate: walking the
+        // list from the wrong end, or dropping the recency touch on the hit path, would look identical.
+        // Capacity 2 with an interleaved re-request distinguishes them. Three distinct library set names
+        // over the same binaries give three distinct keys.
+        using var pool = new LibrarySetInvokerPool(new LibrarySetInvokerPoolOptions(Capacity: 2));
+
+        var a = pool.GetOrCreate(BuildToolkit(_libraryBinaries), "A");
+        var b = pool.GetOrCreate(BuildToolkit(_libraryBinaries), "B");
+
+        // Touching A makes B the least recently used.
+        pool.GetOrCreate(BuildToolkit(_libraryBinaries), "A").Should().BeSameAs(a);
+
+        // Adding a third key must therefore evict B, not A.
+        pool.GetOrCreate(BuildToolkit(_libraryBinaries), "C");
+
+        pool.GetOrCreate(BuildToolkit(_libraryBinaries), "A").Should().BeSameAs(
+            a,
+            "A was used more recently than B, so it must have survived eviction");
+
+        var usingEvictedB = () => b.LibraryInvokers;
+        usingEvictedB.Should().Throw<ObjectDisposedException>("B was the least recently used entry");
+    }
+
+    [TestMethod]
+    public void Statistics_PendingUnloads_CountsEvictedContextsThatAreStillAlive()
+    {
+        using var pool = new LibrarySetInvokerPool(new LibrarySetInvokerPoolOptions(Capacity: 1));
+
+        var evicted = pool.GetOrCreate(BuildToolkit(_libraryBinaries), "A");
+        pool.Statistics.PendingUnloads.Should().Be(0, "nothing has been evicted yet");
+
+        pool.GetOrCreate(BuildToolkit(_libraryBinaries), "B");
+
+        // Holding the evicted invoker keeps its context alive, so it must still be reported as pending.
+        // This is the signal a host is told to alarm on, so a value stuck at 0 would hide the leak it
+        // exists to surface.
+        pool.Statistics.PendingUnloads.Should().Be(1);
+        GC.KeepAlive(evicted);
+    }
+
+    [TestMethod]
+    public void UnloadEvicted_PrunesReclaimedContexts_WithoutNeedingAStatisticsRead()
+    {
+        // Reading Statistics prunes as a side effect, so a test that inspects it cannot tell whether
+        // eviction pruned. Read the private list directly instead: on the default options
+        // (MaxPendingUnloads = 0) an eviction-time prune is the only thing keeping this bounded, and
+        // without it the list — and the long GC handle behind every entry — grows once per eviction for
+        // the lifetime of the process.
+        using var pool = new LibrarySetInvokerPool(new LibrarySetInvokerPoolOptions(Capacity: 1));
+
+        for (var i = 0; i < 8; i++)
+        {
+            pool.GetOrCreate(BuildToolkit(_libraryBinaries), $"set-{i}");
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+        }
+
+        PendingUnloadsListCount(pool).Should().BeLessThan(
+            8,
+            "evicting must prune contexts that have already been reclaimed, without relying on a "
+            + "consumer reading the diagnostic Statistics property");
+    }
+
+    /// <summary>
+    /// Reads the count of <c>_pendingUnloads</c> without going through <see cref="LibrarySetInvokerPool.Statistics"/>,
+    /// which would prune as a side effect and so mask what is being tested.
+    /// </summary>
+    private static int PendingUnloadsListCount(LibrarySetInvokerPool pool)
+    {
+        var field = typeof(LibrarySetInvokerPool)
+            .GetField("_pendingUnloads", BindingFlags.Instance | BindingFlags.NonPublic)!;
+        return ((ICollection)field.GetValue(pool)!).Count;
     }
 
     [TestMethod]

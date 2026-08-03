@@ -121,7 +121,25 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// <see cref="LibrarySetInvokerPool"/> so that its <see cref="LibrarySetInvoker.Dispose"/> becomes
     /// inert and the pool controls when the assemblies unload.
     /// </summary>
-    internal LibrarySetInvoker CreateLibrarySetInvoker(string librarySetName, bool isPoolOwned)
+    internal LibrarySetInvoker CreateLibrarySetInvoker(string librarySetName, bool isPoolOwned) =>
+        CreateLibrarySetInvoker(librarySetName, isPoolOwned, AssemblyBinaries, BatchProcessExceptionContinuation);
+
+    /// <summary>
+    /// Creates a <see cref="LibrarySetInvoker"/> from an explicit snapshot of the inputs rather than from
+    /// this toolkit's current state.
+    /// </summary>
+    /// <remarks>
+    /// <see cref="LibrarySetInvokerPool"/> needs this: it derives its cache key from the toolkit's inputs
+    /// and only loads them later, when the entry's lazy value is forced. Re-reading the toolkit at that
+    /// point would let a concurrent <see cref="AddAssemblyBinaries"/> (or a continuation change) file an
+    /// entry under a key that no longer describes what was loaded, so the pool passes the same snapshot to
+    /// both. <see cref="AssemblyBinaries"/> is already immutable, so the snapshot costs nothing.
+    /// </remarks>
+    internal LibrarySetInvoker CreateLibrarySetInvoker(
+        string librarySetName,
+        bool isPoolOwned,
+        AssemblyBinaryReadOnlyHashSet assemblyBinaries,
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation)
     {
         _services.Logger.LogDebug("Creating LibrarySetInvoker {name}", librarySetName);
 
@@ -129,7 +147,7 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
 
         try
         {
-            AssemblyBinaries
+            assemblyBinaries
                 .TryForEach(t =>
                     {
                         var (assembly, debugSymbols) = t;
@@ -137,7 +155,7 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
                         _services.Logger.LogInformation("Loaded assembly {assemblyName}", asm.FullName);
                     },
                     errorStrategy => errorStrategy
-                        .SetContinuation(BatchProcessExceptionContinuation)
+                        .SetContinuation(batchProcessExceptionContinuation)
                         .AddLoggerExceptionHandler(
                             _services.Logger,
                             (assemblyBinary, logMessage) => logMessage("Unable to load an assembly from the binary containing {byteLength} byte(s).", assemblyBinary.AssemblyBytes!.Length)));
@@ -145,7 +163,7 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
             return new LibrarySetInvoker(
                 alc,
                 LoggerFactory,
-                BatchProcessExceptionContinuation,
+                batchProcessExceptionContinuation,
                 librarySetName,
                 isPoolOwned);
         }

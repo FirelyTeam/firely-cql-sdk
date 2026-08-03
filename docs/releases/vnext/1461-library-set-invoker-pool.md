@@ -2,11 +2,11 @@
 
 - Using a `LibrarySetInvoker` after it has been disposed now throws `ObjectDisposedException` from
   `LibrarySetInvoker.LibraryInvokers` instead of returning a populated dictionary. `Dispose()` now
-  releases the invoker graph, which is what allows the underlying `AssemblyLoadContext` — and the
-  memory mappings for its JIT-compiled code — to actually be reclaimed while something still
-  references the invoker. Returning an empty dictionary instead of throwing would have turned that
-  release into silently wrong results, so post-dispose access fails loudly. Code that only used an
-  invoker within its `using` scope is unaffected. (#1440)
+  releases both the invoker graph and the invoker's own reference to its `AssemblyLoadContext`, which is
+  what allows that context — and the memory mappings for its JIT-compiled code — to actually be
+  reclaimed while something still references the invoker. Returning an empty dictionary instead of
+  throwing would have turned that release into silently wrong results, so post-dispose access fails
+  loudly. Code that only used an invoker within its `using` scope is unaffected. (#1440)
 
 ## Features
 
@@ -43,6 +43,12 @@
   owned by a `LibrarySetInvokerPool`, and log that they were ignored. A pooled instance is shared, so
   either operation would otherwise reconfigure — or unload the assemblies out from under — every other
   consumer of that pool entry. (#1440)
+- `InvocationToolkit.CreateLibrarySetInvoker` no longer leaks the `AssemblyLoadContext` it created when
+  loading the library set fails. With the default `Throw` continuation an unloadable assembly binary — or
+  the reflection walk over the loaded types — escaped before a `LibrarySetInvoker` took ownership of the
+  context, and unloading a collectible context is cooperative, so nothing ever started it: the context and
+  whatever assemblies had already loaded into it stayed resident for the lifetime of the process. The
+  failure path now unloads the context before rethrowing. (#1440)
 
 ## Documentation
 
