@@ -85,6 +85,9 @@
     <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/CodeGen/CodeGen.csproj" />
     <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025.GoldenTests/Hedis2025.GoldenTests.csproj" />
     <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner.Benchmarks/IntegrationRunner.Benchmarks.csproj" />
+    <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner.Harness/IntegrationRunner.Harness.csproj" />
+    <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner.Measurement/IntegrationRunner.Measurement.csproj" />
+    <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner.Verify/IntegrationRunner.Verify.csproj" />
     <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj" />
   </Folder>
   <Folder Name="/Tests/">
