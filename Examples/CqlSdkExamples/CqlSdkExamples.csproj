@@ -30,10 +30,11 @@
 
 		<Compile Remove="**\input\**\*.g.cs" />
 		<!--
-		  Generated C# an example WROTE must be excluded too, not just what it reads. Several examples
-		  save .g.cs into their own output\cs directory, and the default glob would then compile it into
-		  this project on the next build - producing duplicate types and members, since the same library
-		  is already compiled from input. Without this, running the examples breaks the following build.
+		  Exclude generated C# that an example writes, not only what it reads. Several examples save
+		  .g.cs into their own output\cs directory, and without this the default glob compiles that
+		  output into this project on the next build. It then fails with duplicate types and members,
+		  because the same libraries are already compiled from input - so running the examples would
+		  break the following build.
 		-->
 		<Compile Remove="**\output\**\*.g.cs" />
 		<Compile Remove="bin\**;obj\**" />

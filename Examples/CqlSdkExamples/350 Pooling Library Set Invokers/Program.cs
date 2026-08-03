@@ -22,7 +22,7 @@ partial class Program
 {
     void PoolingLibrarySetInvokers()
     {
-        // Only warnings and above, so the pool's own behaviour is easy to see. Drop this to
+        // Only warnings and above, so the pool's own behavior is easy to see. Drop this to
         // Information and the "Loaded assembly ..." lines make the point on their own: they appear
         // for the first request and never again.
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole().SetMinimumLevel(LogLevel.Warning));
@@ -36,12 +36,16 @@ partial class Program
 
         // Compile once to assembly binaries. Normally these come from packaged FHIR Library
         // resources; here we build them inline so the example is self-contained.
-        var assemblyBinaries =
+        //
+        // Held as the tuples GetElmToAssemblyResults returns, whose assembly bytes are non-nullable,
+        // rather than as AssemblyBinary - whose AssemblyBytes property is typed nullable, so cloning
+        // through it would need a null-forgiving operator that this way we avoid entirely.
+        var compiled =
             new CqlToolkit(loggerFactory)
                 .AddCqlLibraries(cql)
                 .CompileToAssemblies()
                 .GetElmToAssemblyResults()
-                .Select(result => new AssemblyBinary(result.assemblyBinary, result.debugSymbolsBinary))
+                .Select(result => (result.assemblyBinary, result.debugSymbolsBinary))
                 .ToList();
 
         // A fresh toolkit over *copies* of the bytes, to show the pool keys on their content rather
@@ -49,9 +53,9 @@ partial class Program
         InvocationToolkit CreateToolkit() =>
             new InvocationToolkit(loggerFactory)
                 .AddAssemblyBinaries(
-                    assemblyBinaries.Select(binary => new AssemblyBinary(
-                        (byte[])binary.AssemblyBytes!.Clone(),
-                        (byte[]?)binary.DebugSymbolsBytes?.Clone())));
+                    compiled.Select(binary => new AssemblyBinary(
+                        (byte[])binary.assemblyBinary.Clone(),
+                        (byte[]?)binary.debugSymbolsBinary?.Clone())));
 
         Console.WriteLine("=== Pooling LibrarySetInvokers ===\n");
 

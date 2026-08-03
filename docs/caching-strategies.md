@@ -97,7 +97,7 @@ Pooling and evaluation caching combine naturally, but sharing a **context** betw
 
 The simpler alternative, and the one to prefer unless you have measured a reason not to, is **one `CqlContext` per evaluation over a shared pooled invoker**. A pooled `LibrarySetInvoker` is safe to share between concurrently evaluating threads; the per-evaluation state all lives in the context.
 
-**One interaction to be aware of.** Some list operators evaluate lazily, so a cached result can hold a reference into the generated assemblies. A long-lived cached context therefore keeps its library set's load context alive. If you pool invokers *and* keep contexts alive well beyond their evaluation, either materialise those results or call `DontUseCaching()` before the context outlives its evaluation.
+**One interaction to be aware of.** Some list operators evaluate lazily, so a cached result can hold a reference into the generated assemblies. A long-lived cached context therefore keeps its library set's load context alive. If you pool invokers *and* keep contexts alive well beyond their evaluation, either materialize those results or call `DontUseCaching()` before the context outlives its evaluation.
 
 ## 6. Further reading
 
