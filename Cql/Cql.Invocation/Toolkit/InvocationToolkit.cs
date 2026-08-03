@@ -113,29 +113,71 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// which must be disposed when no longer in use,
     /// so that the loaded assemblies may unload from the
     /// application domain.</returns>
-    public LibrarySetInvoker CreateLibrarySetInvoker(string librarySetName = "")
+    public LibrarySetInvoker CreateLibrarySetInvoker(string librarySetName = "") =>
+        CreateLibrarySetInvoker(librarySetName, isPoolOwned: false);
+
+    /// <summary>
+    /// Creates a new instance of <see cref="LibrarySetInvoker"/>, optionally marking it as owned by a
+    /// <see cref="LibrarySetInvokerPool"/> so that its <see cref="LibrarySetInvoker.Dispose"/> becomes
+    /// inert and the pool controls when the assemblies unload.
+    /// </summary>
+    internal LibrarySetInvoker CreateLibrarySetInvoker(string librarySetName, bool isPoolOwned) =>
+        CreateLibrarySetInvoker(librarySetName, isPoolOwned, AssemblyBinaries, BatchProcessExceptionContinuation);
+
+    /// <summary>
+    /// Creates a <see cref="LibrarySetInvoker"/> from an explicit snapshot of the inputs rather than from
+    /// this toolkit's current state.
+    /// </summary>
+    /// <remarks>
+    /// <see cref="LibrarySetInvokerPool"/> needs this: it derives its cache key from the toolkit's inputs
+    /// and only loads them later, when the entry's lazy value is forced. Re-reading the toolkit at that
+    /// point would let a concurrent <see cref="AddAssemblyBinaries"/> (or a continuation change) file an
+    /// entry under a key that no longer describes what was loaded, so the pool passes the same snapshot to
+    /// both. <see cref="AssemblyBinaries"/> is already immutable, so the snapshot costs nothing.
+    /// </remarks>
+    internal LibrarySetInvoker CreateLibrarySetInvoker(
+        string librarySetName,
+        bool isPoolOwned,
+        AssemblyBinaryReadOnlyHashSet assemblyBinaries,
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation)
     {
         _services.Logger.LogDebug("Creating LibrarySetInvoker {name}", librarySetName);
 
         var alc = new AssemblyLoadContext(librarySetName, true);
 
-        AssemblyBinaries
-            .TryForEach(t =>
-                {
-                    var (assembly, debugSymbols) = t;
-                    var asm = alc.LoadFromBytes(assembly!, debugSymbols);
-                    _services.Logger.LogInformation("Loaded assembly {assemblyName}", asm.FullName);
-                },
-                errorStrategy => errorStrategy
-                    .SetContinuation(BatchProcessExceptionContinuation)
-                    .AddLoggerExceptionHandler(
-                        _services.Logger,
-                        (assemblyBinary, logMessage) => logMessage("Unable to load an assembly from the binary containing {byteLength} byte(s).", assemblyBinary.AssemblyBytes!.Length)));
+        try
+        {
+            assemblyBinaries
+                .TryForEach(t =>
+                    {
+                        var (assembly, debugSymbols) = t;
+                        var asm = alc.LoadFromBytes(assembly!, debugSymbols);
+                        _services.Logger.LogInformation("Loaded assembly {assemblyName}", asm.FullName);
+                    },
+                    errorStrategy => errorStrategy
+                        .SetContinuation(batchProcessExceptionContinuation)
+                        .AddLoggerExceptionHandler(
+                            _services.Logger,
+                            (assemblyBinary, logMessage) => logMessage("Unable to load an assembly from the binary containing {byteLength} byte(s).", assemblyBinary.AssemblyBytes!.Length)));
 
-        return new LibrarySetInvoker(
-            alc,
-            LoggerFactory,
-            BatchProcessExceptionContinuation,
-            librarySetName);
+            return new LibrarySetInvoker(
+                alc,
+                LoggerFactory,
+                batchProcessExceptionContinuation,
+                librarySetName,
+                isPoolOwned);
+        }
+        catch
+        {
+            // No LibrarySetInvoker took ownership of the context, so nothing else will ever unload it.
+            // Unloading a collectible context is cooperative and does not even begin until Unload() is
+            // called, so without this a failed load leaves the context - and any assemblies that did
+            // load into it - resident for the lifetime of the process.
+            _services.Logger.LogDebug(
+                "Unloading the assembly load context for {name} after a failed load.",
+                librarySetName);
+            alc.Unload();
+            throw;
+        }
     }
 }
