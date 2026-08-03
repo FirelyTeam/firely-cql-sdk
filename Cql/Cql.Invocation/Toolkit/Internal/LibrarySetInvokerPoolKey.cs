@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Buffers.Binary;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -42,10 +41,15 @@ internal readonly record struct LibrarySetInvokerPoolKey(
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Hashing is proportional to the total size of the assemblies, and the pool's intended hot path is
-    /// one <see cref="LibrarySetInvokerPool.GetOrCreate"/> per subject over an unchanged toolkit - so
-    /// without this every hit would re-run SHA-256 over multi-megabyte binaries just to discover it
-    /// already had the answer. Memoizing turns a repeat call over the same set into a lookup.
+    /// Hashing costs time proportional to the total size of the assemblies, and the pool is built to be
+    /// called over and over for the same library set, so without memoizing every hit would re-run
+    /// SHA-256 over multi-megabyte binaries just to discover it already had the answer.
+    /// </para>
+    /// <para>
+    /// This table is the short-circuit for a consumer that reuses one toolkit: it turns the whole
+    /// derivation into a single lookup. It deliberately is <em>not</em> the only memo, because a consumer
+    /// that builds a fresh toolkit per call would never hit it - see <see cref="ArrayHashes"/>, which
+    /// covers that case.
     /// </para>
     /// <para>
     /// Keying on reference identity is sound because the set is immutable and replaced wholesale:
@@ -101,32 +105,53 @@ internal readonly record struct LibrarySetInvokerPoolKey(
     /// Hashes one binary's assembly bytes and debug symbol bytes.
     /// </summary>
     /// <remarks>
+    /// <para>
     /// Debug symbols are deliberately part of the identity. Excluding them would let two entries
     /// with identical assemblies but different symbols share one pooled invoker, silently serving
     /// whichever symbols happened to be loaded first - observable in stack traces. Including them can
-    /// only ever cost a redundant cache miss, which is the safe direction to err in, and hashing
-    /// them costs microseconds against the price of loading an assembly.
+    /// only ever cost a redundant cache miss, which is the safe direction to err in.
+    /// </para>
+    /// <para>
+    /// The two arrays are hashed separately and their hashes combined, rather than hashed together as
+    /// one stream, so that <see cref="ArrayHashes"/> can memoize each array on its own. Combining is
+    /// unambiguous without length prefixes because every component is either fixed-length hex or the
+    /// <see cref="AbsentArray"/> marker, and neither can contain the separator.
+    /// </para>
     /// </remarks>
-    private static string HashAssemblyBinary(AssemblyBinary assemblyBinary)
-    {
-        using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
-        AppendLengthPrefixed(hash, assemblyBinary.AssemblyBytes);
-        AppendLengthPrefixed(hash, assemblyBinary.DebugSymbolsBytes);
-        return Convert.ToHexString(hash.GetHashAndReset());
-    }
+    private static string HashAssemblyBinary(AssemblyBinary assemblyBinary) =>
+        $"{HashArray(assemblyBinary.AssemblyBytes)}:{HashArray(assemblyBinary.DebugSymbolsBytes)}";
 
     /// <summary>
-    /// Appends a length prefix and then the bytes, so that concatenation is unambiguous: without the
-    /// prefix, <c>([1], [2, 3])</c> and <c>([1, 2], [3])</c> would hash identically. A
-    /// <see langword="null"/> array is distinguished from an empty one by a length of -1.
+    /// Hashes already computed for individual byte arrays, keyed on array identity.
     /// </summary>
-    private static void AppendLengthPrefixed(IncrementalHash hash, byte[]? bytes)
-    {
-        Span<byte> lengthPrefix = stackalloc byte[sizeof(int)];
-        BinaryPrimitives.WriteInt32LittleEndian(lengthPrefix, bytes?.Length ?? -1);
-        hash.AppendData(lengthPrefix);
+    /// <remarks>
+    /// <para>
+    /// This is the memo that matters for the pool's real hot path. A consumer evaluating one library set
+    /// per subject typically builds a fresh <see cref="InvocationToolkit"/> per call - so
+    /// <see cref="ContentHashes"/>, keyed on the set instance, never gets a hit - while the underlying
+    /// <see cref="byte"/> arrays come from a per-run artifact cache and are the same objects every time.
+    /// Keying on the arrays therefore collapses ~10,000 full hash passes over multi-megabyte assemblies
+    /// into one pass per distinct array, leaving each later call to hash only a handful of hex strings.
+    /// </para>
+    /// <para>
+    /// Sound for the same reason the pool's whole design is: the binaries are treated as immutable once
+    /// handed to a toolkit, so the same array always has the same content. Weak keys so that arrays the
+    /// consumer has dropped do not stay alive, and are not themselves a leak.
+    /// </para>
+    /// </remarks>
+    private static readonly ConditionalWeakTable<byte[], string> ArrayHashes = new();
 
-        if (bytes is { Length: > 0 })
-            hash.AppendData(bytes);
-    }
+    /// <summary>
+    /// Stands in for a <see langword="null"/> array, so that absent debug symbols are distinguished from
+    /// present-but-empty ones (which hash to the SHA-256 of zero bytes, a real 64-character hex string).
+    /// </summary>
+    private const string AbsentArray = "absent";
+
+    /// <summary>
+    /// Returns the memoized SHA-256 of one array, computing it on first use.
+    /// </summary>
+    private static string HashArray(byte[]? bytes) =>
+        bytes is null
+            ? AbsentArray
+            : ArrayHashes.GetValue(bytes, static array => Convert.ToHexString(SHA256.HashData(array)));
 }

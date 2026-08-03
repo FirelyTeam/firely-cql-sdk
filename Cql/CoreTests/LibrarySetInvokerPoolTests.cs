@@ -162,6 +162,35 @@ public class LibrarySetInvokerPoolTests
             + "library set as far as the pool is concerned");
     }
 
+    [TestMethod]
+    public void PoolKey_ContentHash_ReusesArrayHashesAcrossFreshToolkitsOverTheSameArrays()
+    {
+        // The hot path this pool exists for builds a fresh toolkit per call - one Library/$evaluate per
+        // subject - so the set-instance memo never hits, and only a memo keyed on the byte arrays keeps
+        // each call from re-hashing megabytes. The arrays are what a consumer holds stable (typically a
+        // per-run artifact cache), so sharing those must be enough.
+        //
+        // Asserted by membership rather than by timing: both arrays being present in the memo is what
+        // makes the next call a lookup instead of another pass over the bytes. Note that asserting the
+        // memo merely "did not grow" would be vacuous - bypassing it entirely also never grows it.
+        var assemblyBytes = new byte[] { 1, 2, 3, 4 };
+        var symbolBytes = new byte[] { 5, 6 };
+        var binaries = new[] { new AssemblyBinary(assemblyBytes, symbolBytes) };
+
+        var first = LibrarySetInvokerPoolKey.Create(
+            BuildToolkitSharingArrays(binaries).AssemblyBinaries, "set", BatchProcessExceptionContinuation.Throw);
+
+        IsArrayHashMemoized(assemblyBytes).Should().BeTrue(
+            "the assembly bytes must be hashed once and remembered, so that a fresh toolkit over the "
+            + "same array does not re-hash megabytes on every call");
+        IsArrayHashMemoized(symbolBytes).Should().BeTrue("debug symbols are part of the identity too");
+
+        // And a fresh toolkit over those same arrays still derives the same key from the memo.
+        var again = LibrarySetInvokerPoolKey.Create(
+            BuildToolkitSharingArrays(binaries).AssemblyBinaries, "set", BatchProcessExceptionContinuation.Throw);
+        again.Should().Be(first);
+    }
+
     #endregion Content-based reuse
 
     #region Concurrency
@@ -177,6 +206,17 @@ public class LibrarySetInvokerPoolTests
         var failures = new ConcurrentBag<Exception>();
         var threads = new Thread[threadCount];
 
+        // Counts loads that actually happened, rather than inferring it from the result. The pool's own
+        // Misses counter cannot serve: it counts threads that found no entry, not assembly loads, so it
+        // reads 1 even if the entry's factory then ran on every thread. CreateLibrarySetInvoker logs
+        // once per invocation, before it creates the context, so this counts real loads.
+        var loads = 0;
+        var loadCounter = new CallbackLoggerFactory(message =>
+        {
+            if (message.Contains("Creating LibrarySetInvoker"))
+                Interlocked.Increment(ref loads);
+        });
+
         // Act
         for (var i = 0; i < threadCount; i++)
         {
@@ -185,7 +225,7 @@ public class LibrarySetInvokerPoolTests
             {
                 try
                 {
-                    var toolkit = BuildToolkit(_libraryBinaries);
+                    var toolkit = BuildToolkit(_libraryBinaries, loggerFactory: loadCounter);
                     startGate.SignalAndWait();
                     observed[index] = pool.GetOrCreate(toolkit);
                 }
@@ -200,10 +240,18 @@ public class LibrarySetInvokerPoolTests
         foreach (var thread in threads)
             thread.Join();
 
-        // Assert - one load, and everybody got the very same instance. Reference identity is the
-        // point: a tolerate-and-discard race would have created a second assembly load context that
-        // nothing would ever unload, and two such invokers could still look structurally equivalent.
+        // Assert - the library set was loaded exactly once, and everybody got the very same instance.
+        //
+        // Counting loads is the assertion that actually guards the leak. Reference identity alone does
+        // not: a LazyThreadSafetyMode.PublicationOnly entry runs the factory on every racing thread and
+        // publishes one winner, so identity, Distinct(), Misses and Entries would all still hold while
+        // each discarded load left an assembly load context nothing will ever unload. Verified by
+        // mutation - switching the pool to PublicationOnly leaves every other assertion here green.
         failures.Should().BeEmpty();
+        loads.Should().Be(
+            1,
+            "concurrent misses on one key must collapse to a single load; every discarded load is an "
+            + "assembly load context that nothing owns and nothing will ever unload");
         observed.Should().OnlyContain(invoker => ReferenceEquals(invoker, observed[0]));
         observed.Distinct(ReferenceEqualityComparer.Instance).Should().HaveCount(1);
         pool.Statistics.Misses.Should().Be(1);
@@ -666,6 +714,26 @@ public class LibrarySetInvokerPoolTests
                 binaries.Select(binary => new AssemblyBinary(
                     (byte[])binary.AssemblyBytes!.Clone(),
                     (byte[]?)binary.DebugSymbolsBytes?.Clone())));
+
+    /// <summary>
+    /// Builds a toolkit over the <em>same</em> byte arrays rather than copies, which is what a consumer
+    /// reusing a per-run artifact cache does. <see cref="BuildToolkit"/> clones deliberately, to prove
+    /// content-based keying; this one shares, to exercise the per-array hash memo.
+    /// </summary>
+    private static InvocationToolkit BuildToolkitSharingArrays(IReadOnlyList<AssemblyBinary> binaries) =>
+        new InvocationToolkit().AddAssemblyBinaries(binaries);
+
+    /// <summary>
+    /// Whether <c>LibrarySetInvokerPoolKey</c>'s private per-array hash memo holds this exact array.
+    /// Reflection because memoizing is an implementation detail whose only effect is not doing the work
+    /// twice; membership of the specific array is the one direct observation of it.
+    /// </summary>
+    private static bool IsArrayHashMemoized(byte[] array)
+    {
+        var field = typeof(LibrarySetInvokerPoolKey)
+            .GetField("ArrayHashes", BindingFlags.Static | BindingFlags.NonPublic)!;
+        return ((ConditionalWeakTable<byte[], string>)field.GetValue(null)!).TryGetValue(array, out _);
+    }
 
     /// <summary>
     /// An <see cref="ILoggerFactory"/> that runs a callback for every message logged, so a test can

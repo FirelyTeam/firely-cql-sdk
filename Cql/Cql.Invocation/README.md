@@ -45,10 +45,11 @@ var result = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(
 
 Entries are keyed on the **content** of the assembly binaries, so rebuilding an equivalent `InvocationToolkit` from freshly read bytes still hits the pool.
 
-Two rules apply when pooling:
+Three rules apply when pooling:
 
 - **The pool owns the invokers it returns — do not dispose them.** A returned invoker is shared with every other caller for the same library set, so `Dispose()` on a pooled invoker is a deliberate no-op. Likewise `SetBatchProcessExceptionContinuation` is ignored on a pooled instance: request the continuation you want from the pool and you will get an instance that already has it.
 - **Do not retain a `LibraryInvoker` or `DefinitionInvoker` beyond the point where you are done with its library set.** Both reach their library set through a back-reference, so holding one keeps the whole assembly load context alive even after the pool has evicted it. `LibrarySetInvokerPool.Statistics.PendingUnloads` is the signal to watch: a value that keeps climbing means something is doing this.
+- **Size `Capacity` to at least the number of library sets in concurrent use.** Eviction unloads a library set without waiting for its users, so an instance evicted while a consumer still holds it throws `ObjectDisposedException` on next use rather than returning results from unloaded assemblies. That is the one failure mode an adopter can only avoid by configuration, and with capacity at or above the number of distinct hot library sets it is unreachable.
 
 A pooled invoker is safe to share between concurrently evaluating threads, provided each evaluation uses its own `CqlContext`.
 
