@@ -39,15 +39,28 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
     private readonly bool _isPoolOwned;
 
     /// <summary>
-    /// 0 until the assembly load context has been unloaded, then 1. Guards against unloading twice.
+    /// 0 until the assembly load context has been unloaded, then 1. Its only job is to let exactly one
+    /// caller through <see cref="Unload"/>, so that the context is never unloaded twice.
     /// </summary>
+    /// <remarks>
+    /// Deliberately <em>not</em> what <see cref="LibraryInvokers"/> tests to decide whether the library
+    /// set is still usable - see the remarks on <see cref="_libraryInvokers"/>.
+    /// </remarks>
     private int _unloadInitiated;
 
     /// <summary>
-    /// The invoker graph, cleared when the assembly load context is unloaded so that the generated
-    /// assemblies actually become collectable. See the remarks on <see cref="Dispose"/>.
+    /// The invoker graph, or <see langword="null"/> once the assembly load context has been unloaded, so
+    /// that the generated assemblies actually become collectable. See the remarks on <see cref="Dispose"/>.
     /// </summary>
-    private IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> _libraryInvokers;
+    /// <remarks>
+    /// <see langword="null"/> <em>is</em> the unloaded sentinel, rather than an empty dictionary guarded
+    /// by <see cref="_unloadInitiated"/>. That makes <see cref="LibraryInvokers"/> a single atomic
+    /// reference read: a racing reader gets either the live graph or the exception. Testing a separate
+    /// flag and then reading this field would leave a window in which the flag was still stale and the
+    /// field already cleared, and the getter would hand back a library set containing no libraries -
+    /// precisely the silently-wrong-results outcome it exists to prevent.
+    /// </remarks>
+    private IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker>? _libraryInvokers;
 
     /// <summary>
     /// Gets the minimum generator tool version that this invoker supports for executing generated code.
@@ -154,9 +167,9 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
         if (Interlocked.Exchange(ref _unloadInitiated, 1) != 0)
             return null;
 
-        // Released with a store fence so that a reader which observes this empty sentinel is also
-        // guaranteed to observe the _unloadInitiated write above it. See the LibraryInvokers getter.
-        Volatile.Write(ref _libraryInvokers, ImmutableDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker>.Empty);
+        // Clearing the graph is what releases it; null is the sentinel LibraryInvokers reads. Written
+        // with a store fence so a concurrent reader sees it promptly rather than a cached field value.
+        Volatile.Write(ref _libraryInvokers, null);
 
         var alc = _alc!;
         _alc = null;
@@ -178,18 +191,11 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
     public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> LibraryInvokers
     {
         [DebuggerStepThrough]
-        get
-        {
-            // Read the graph BEFORE the flag, both with acquire semantics. Unload writes the flag first
-            // and the empty sentinel second, so observing the sentinel here guarantees the flag write is
-            // visible too, and the check below throws. Reading the flag first would permit the opposite
-            // interleaving on a weakly-ordered architecture such as arm64 — a stale flag paired with the
-            // fresh sentinel — and this getter would then return an empty library set instead of
-            // throwing, which is precisely the silent wrong answer it exists to prevent.
-            var libraryInvokers = Volatile.Read(ref _libraryInvokers);
-            ObjectDisposedException.ThrowIf(Volatile.Read(ref _unloadInitiated) != 0, this);
-            return libraryInvokers;
-        }
+        // One atomic read, deliberately: the field is itself the unloaded sentinel, so a reader racing
+        // Unload gets either the live graph or the exception, never an empty library set. See the
+        // remarks on _libraryInvokers for why this is not a flag test followed by a field read.
+        get => Volatile.Read(ref _libraryInvokers)
+               ?? throw new ObjectDisposedException(nameof(LibrarySetInvoker));
     }
 
     /// <inheritdoc />

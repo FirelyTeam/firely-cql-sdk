@@ -18,6 +18,7 @@ using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Hl7.Cql.Invocation.Toolkit.Internal;
 using Hl7.Cql.Runtime;
 
 #nullable enable
@@ -48,6 +49,12 @@ public class LibrarySetInvokerPoolTests
         """;
 
     private static readonly ElmToolkitConfig ElmToolkitConfig = new();
+
+    /// <summary>
+    /// How long a test waits on a thread it has deliberately parked. Generous, because it only ever
+    /// elapses when the code under test has deadlocked - in which case failing beats hanging the run.
+    /// </summary>
+    private static readonly TimeSpan HookTimeout = TimeSpan.FromSeconds(30);
 
     private static IReadOnlyList<AssemblyBinary> _libraryBinaries = null!;
     private static IReadOnlyList<AssemblyBinary> _otherLibraryBinaries = null!;
@@ -129,6 +136,30 @@ public class LibrarySetInvokerPoolTests
         var invoker = pool.GetOrCreate(BuildToolkit(_libraryBinaries));
 
         Evaluate(invoker).Should().Be("42|hello world");
+    }
+
+    [TestMethod]
+    public void PoolKey_ContentHash_IsMemoizedPerSetInstanceButStaysContentBased()
+    {
+        // The content hash is memoized on the identity of the immutable binary set, so that a pool hit
+        // does not re-run SHA-256 over multi-megabyte assemblies on the one-call-per-subject hot path.
+        // The risk that buys is regressing the key back to identity comparison, which would defeat the
+        // whole point of hashing content - so both halves are pinned here.
+        var toolkit = BuildToolkit(_libraryBinaries);
+        var equivalentToolkit = BuildToolkit(_libraryBinaries);
+
+        var first = LibrarySetInvokerPoolKey.Create(
+            toolkit.AssemblyBinaries, "set", BatchProcessExceptionContinuation.Throw);
+        var repeated = LibrarySetInvokerPoolKey.Create(
+            toolkit.AssemblyBinaries, "set", BatchProcessExceptionContinuation.Throw);
+        var equivalent = LibrarySetInvokerPoolKey.Create(
+            equivalentToolkit.AssemblyBinaries, "set", BatchProcessExceptionContinuation.Throw);
+
+        repeated.Should().Be(first, "a repeat call over the same set instance must be stable");
+        equivalent.Should().Be(
+            first,
+            "the key must stay content-based: two distinct sets holding equal bytes are the same "
+            + "library set as far as the pool is concerned");
     }
 
     #endregion Content-based reuse
@@ -457,6 +488,63 @@ public class LibrarySetInvokerPoolTests
         act.Should().Throw<ObjectDisposedException>();
     }
 
+    [TestMethod]
+    public void Dispose_RacingAnInFlightLoad_UnloadsTheOrphanedContextAndThrows()
+    {
+        // Loading happens outside the pool lock, and Dispose skips entries whose Lazy has not completed
+        // yet - so a dispose landing mid-load leaves the finished invoker known to nobody: the pool has
+        // dropped the entry, and the invoker's own Dispose() is inert because it is pool-owned. Nothing
+        // would ever unload that context, which is a permanent leak of exactly the class this pool
+        // exists to prevent, and worse than not pooling, since the caller cannot unload it either.
+        //
+        // Deterministic rather than timing-based: the toolkit's logger fires inside the load, after the
+        // entry is registered and the lock released, so the loading thread parks exactly in the window.
+        const string librarySetName = "dispose-race";
+        var pool = new LibrarySetInvokerPool();
+
+        using var loadReachedTheHook = new ManualResetEventSlim();
+        using var disposeCompleted = new ManualResetEventSlim();
+
+        var toolkit = BuildToolkit(
+            _libraryBinaries,
+            loggerFactory: new CallbackLoggerFactory(message =>
+            {
+                if (!message.Contains("Creating LibrarySetInvoker"))
+                    return;
+
+                loadReachedTheHook.Set();
+                disposeCompleted.Wait(HookTimeout);
+            }));
+
+        Exception? thrown = null;
+        var loader = new Thread(() =>
+        {
+            try
+            {
+                pool.GetOrCreate(toolkit, librarySetName);
+            }
+            catch (Exception exception)
+            {
+                thrown = exception;
+            }
+        });
+        loader.Start();
+
+        loadReachedTheHook.Wait(HookTimeout).Should().BeTrue("the load must reach the hook inside the pool");
+        pool.Dispose();
+        disposeCompleted.Set();
+        loader.Join(HookTimeout).Should().BeTrue("the loading thread must finish");
+
+        thrown.Should().BeOfType<ObjectDisposedException>(
+            "a load completing after the pool was disposed must not hand out an invoker the pool no "
+            + "longer tracks");
+        // Initiating an unload removes a context from AssemblyLoadContext.All, so one still listed here
+        // is precisely one whose unload never started. Deterministic, and needs no GC.
+        AssemblyLoadContext.All.Should().NotContain(
+            context => context.Name == librarySetName,
+            "the orphaned context must be unloaded rather than leaked for the life of the process");
+    }
+
     #endregion Eviction and unloading
 
     #region Pooled-instance ownership
@@ -571,12 +659,43 @@ public class LibrarySetInvokerPoolTests
     /// </summary>
     private static InvocationToolkit BuildToolkit(
         IReadOnlyList<AssemblyBinary> binaries,
-        BatchProcessExceptionContinuation continuation = BatchProcessExceptionContinuation.Throw) =>
-        new InvocationToolkit(batchProcessExceptionContinuation: continuation)
+        BatchProcessExceptionContinuation continuation = BatchProcessExceptionContinuation.Throw,
+        ILoggerFactory? loggerFactory = null) =>
+        new InvocationToolkit(loggerFactory, continuation)
             .AddAssemblyBinaries(
                 binaries.Select(binary => new AssemblyBinary(
                     (byte[])binary.AssemblyBytes!.Clone(),
                     (byte[]?)binary.DebugSymbolsBytes?.Clone())));
+
+    /// <summary>
+    /// An <see cref="ILoggerFactory"/> that runs a callback for every message logged, so a test can
+    /// suspend a thread at a known point inside the SDK. <c>CreateLibrarySetInvoker</c> logs before it
+    /// creates the assembly load context, which makes it a usable hook for the window between a pool
+    /// entry being registered and its load completing.
+    /// </summary>
+    private sealed class CallbackLoggerFactory(Action<string> onMessage) : ILoggerFactory
+    {
+        public ILogger CreateLogger(string categoryName) => new CallbackLogger(onMessage);
+
+        public void AddProvider(ILoggerProvider provider) { }
+
+        public void Dispose() { }
+
+        private sealed class CallbackLogger(Action<string> onMessage) : ILogger
+        {
+            public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+
+            public bool IsEnabled(LogLevel logLevel) => true;
+
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception? exception,
+                Func<TState, Exception?, string> formatter) =>
+                onMessage(formatter(state, exception));
+        }
+    }
 
     private static string Evaluate(LibrarySetInvoker invoker)
     {

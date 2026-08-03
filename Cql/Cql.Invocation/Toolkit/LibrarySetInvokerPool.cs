@@ -185,7 +185,33 @@ public sealed class LibrarySetInvokerPool : IDisposable
         }
 
         UnloadEvicted(evicted);
+
+        // The pool can have been disposed while that load ran outside the lock. CollectAll() skips
+        // entries whose Lazy had not completed yet and clears the dictionary, so this invoker is no
+        // longer known to the pool and nothing else will ever unload it - and its own Dispose() is
+        // inert, because it was created with isPoolOwned: true. Left alone that is a permanent context
+        // leak of exactly the class this type exists to prevent, and worse than not pooling at all,
+        // since the caller has no way to unload it either. So unload it here and fail the call, which
+        // is also the documented contract: GetOrCreate throws once the pool is disposed.
+        //
+        // The opposite interleaving needs no handling: if Dispose takes the lock after this check, it
+        // sees IsValueCreated true and unloads the entry itself.
+        if (DisposedDuringLoad())
+        {
+            UnloadEvicted([invoker]);
+            throw new ObjectDisposedException(nameof(LibrarySetInvokerPool));
+        }
+
         return invoker;
+    }
+
+    /// <summary>
+    /// Whether the pool was disposed while a load ran outside <see cref="_gate"/>.
+    /// </summary>
+    private bool DisposedDuringLoad()
+    {
+        lock (_gate)
+            return _disposed;
     }
 
     /// <summary>
@@ -293,7 +319,8 @@ public sealed class LibrarySetInvokerPool : IDisposable
     }
 
     /// <summary>
-    /// Unloads evicted library sets and records their assembly load contexts so that
+    /// Unloads library sets the pool has given up - evicted, dropped by <see cref="Dispose"/>, or
+    /// orphaned by a dispose that raced their load - and records their assembly load contexts so that
     /// <see cref="Statistics"/> can report ones that have not been reclaimed.
     /// </summary>
     /// <remarks>
@@ -308,7 +335,7 @@ public sealed class LibrarySetInvokerPool : IDisposable
 
         foreach (var invoker in evicted)
         {
-            _logger.LogDebug("Unloading evicted library set {name}.", invoker.LibrarySetName);
+            _logger.LogDebug("Unloading library set {name}.", invoker.LibrarySetName);
 
             // Take the context from Unload()'s return value rather than reading it beforehand. Unload
             // drops the invoker's own reference to the context, so reading it first would put a second

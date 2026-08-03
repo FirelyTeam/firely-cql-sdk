@@ -7,6 +7,7 @@
  */
 
 using System.Buffers.Binary;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using Hl7.Cql.CodeGeneration.NET;
@@ -37,13 +38,44 @@ internal readonly record struct LibrarySetInvokerPoolKey(
     BatchProcessExceptionContinuation Continuation)
 {
     /// <summary>
+    /// Content hashes already computed, keyed on the identity of the set they were computed from.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Hashing is proportional to the total size of the assemblies, and the pool's intended hot path is
+    /// one <see cref="LibrarySetInvokerPool.GetOrCreate"/> per subject over an unchanged toolkit - so
+    /// without this every hit would re-run SHA-256 over multi-megabyte binaries just to discover it
+    /// already had the answer. Memoizing turns a repeat call over the same set into a lookup.
+    /// </para>
+    /// <para>
+    /// Keying on reference identity is sound because the set is immutable and replaced wholesale:
+    /// <c>InvocationToolkit.AddAssemblyBinaries</c> builds a new immutable set and swaps the field, so a
+    /// given instance's content never changes. A <see cref="ConditionalWeakTable{TKey,TValue}"/> rather
+    /// than a dictionary so that a set the consumer has dropped does not stay alive - and its entry
+    /// leak - for the life of the process.
+    /// </para>
+    /// </remarks>
+    private static readonly ConditionalWeakTable<AssemblyBinaryReadOnlyHashSet, string> ContentHashes = new();
+
+    /// <summary>
     /// Derives a key from the inputs <see cref="InvocationToolkit.CreateLibrarySetInvoker(string)"/> would use.
     /// </summary>
     public static LibrarySetInvokerPoolKey Create(
         AssemblyBinaryReadOnlyHashSet assemblyBinaries,
         string librarySetName,
         BatchProcessExceptionContinuation continuation) =>
-        new(ComputeContentHash(assemblyBinaries), librarySetName, continuation);
+        new(GetOrComputeContentHash(assemblyBinaries), librarySetName, continuation);
+
+    /// <summary>
+    /// Returns the memoized content hash for this set instance, computing it on first use.
+    /// </summary>
+    /// <remarks>
+    /// Under contention <see cref="ConditionalWeakTable{TKey,TValue}.GetValue"/> may run the factory
+    /// more than once and keep one result. That is harmless here: hashing is pure, so every racing
+    /// caller computes the same string.
+    /// </remarks>
+    private static string GetOrComputeContentHash(AssemblyBinaryReadOnlyHashSet assemblyBinaries) =>
+        ContentHashes.GetValue(assemblyBinaries, static set => ComputeContentHash(set));
 
     /// <summary>
     /// Hashes each assembly binary on its own, then hashes the <em>sorted</em> per-binary hashes.
