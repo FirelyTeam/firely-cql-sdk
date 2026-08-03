@@ -29,6 +29,13 @@
 		<None Remove="bin\**\input\**;obj\**\input\**" />
 
 		<Compile Remove="**\input\**\*.g.cs" />
+		<!--
+		  Generated C# an example WROTE must be excluded too, not just what it reads. Several examples
+		  save .g.cs into their own output\cs directory, and the default glob would then compile it into
+		  this project on the next build - producing duplicate types and members, since the same library
+		  is already compiled from input. Without this, running the examples breaks the following build.
+		-->
+		<Compile Remove="**\output\**\*.g.cs" />
 		<Compile Remove="bin\**;obj\**" />
 
 		<None Include="**\input\**\*.g.cs">

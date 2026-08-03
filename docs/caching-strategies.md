@@ -37,10 +37,11 @@ var result = invoker.InvokeLibraryDefinition(context, libraryIdentifier, "Numera
 
 Entries are keyed on the **content** of the assembly binaries, so rebuilding an equivalent `InvocationToolkit` from freshly read bytes still hits the pool.
 
-**Two rules.** The pool owns what it returns:
+**Three rules.** The pool owns what it returns:
 
 - **Do not dispose a pooled invoker.** It is shared with every other caller for the same library set; `Dispose()` on a pooled instance is deliberately a no-op so one caller cannot unload the assemblies out from under the others. Likewise `SetBatchProcessExceptionContinuation` is ignored on a pooled instance — ask the pool for the policy you want instead.
 - **Do not retain a `LibraryInvoker` or `DefinitionInvoker`** beyond the point where you are done with its library set. Each reaches its library set through a back-reference, so holding one keeps the whole load context alive even after the pool has evicted it.
+- **Size `Capacity` to at least the number of library sets in concurrent use.** Eviction unloads a library set without waiting for its users, so an invoker that is evicted while you still hold it throws `ObjectDisposedException` on next use rather than quietly returning results from unloaded assemblies. That is deliberate — an empty library set would be a silently wrong answer — but it makes capacity a correctness setting, not just a tuning one. It is the one failure mode you can only avoid by configuration, and at or above the number of distinct hot library sets it is unreachable.
 
 **What to monitor.** `LibrarySetInvokerPoolStatistics.PendingUnloads` counts evicted load contexts that have not been reclaimed. A value that keeps climbing means something is violating the second rule. `Hits`/`Misses` tell you whether `Capacity` is large enough: size it to the number of library sets evaluated concurrently, because a pool that thrashes between more library sets than it can hold misses on every request.
 
