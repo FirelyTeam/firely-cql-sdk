@@ -81,8 +81,8 @@ public class FhirMeasureExtensionsTests
         var group = measure.Group.Single(g => g.ElementId == "RateA");
         var container = group.Stratifier.Should().ContainSingle().Subject;
         container.ElementId.Should().Be("RateA-Stratifier");
-        container.Code!.Text.Should().Be("RateA-Stratifier");
-        container.Description.Should().Be("RateA-Stratifier");
+        container.Code.Should().BeNull("a stratifier with components must not also have a code (FHIR stratifier invariant)");
+        container.Description.Should().BeNull("a stratifier with components must not also have a description (FHIR stratifier invariant)");
         container.Criteria.Should().BeNull("the container stratifier only holds components");
 
         var component = container.Component.Should().ContainSingle().Subject;
@@ -267,6 +267,32 @@ public class FhirMeasureExtensionsTests
         var component = group.Stratifier.Single().Component.Single();
         component.Criteria.Expression_.Should().Be("Denominator Stratifier",
             "the definition should also contribute a stratifier component");
+    }
+
+    [TestMethod]
+    public void GeneratedStratifiers_SatisfyFhirStratifierInvariant()
+    {
+        // FHIR invariant on Measure.group.stratifier:
+        // (code | description | criteria).exists() xor component.exists()
+        var measure = CreateMeasure(BaseStatements(
+            Def("Region Stratifier",
+                CreateTag("group", "RateA"),
+                CreateTag("group", "RateB"),
+                CreateTag("stratifier", "Region")),
+            Def("Age Band Stratifier",
+                CreateTag("group", "RateA"),
+                CreateTag("stratifier", "AgeBand"),
+                CreateTag("description", "Stratifies by age band"))));
+
+        var stratifiers = measure.Group.SelectMany(g => g.Stratifier).ToList();
+        stratifiers.Should().NotBeEmpty();
+        foreach (var stratifier in stratifiers)
+        {
+            var hasOwnContent = stratifier.Code != null || stratifier.Description != null || stratifier.Criteria != null;
+            var hasComponents = stratifier.Component.Count > 0;
+            (hasOwnContent ^ hasComponents).Should().BeTrue(
+                "stratifier {0} must have either code/description/criteria or components, never both", stratifier.ElementId);
+        }
     }
 
     [TestMethod]

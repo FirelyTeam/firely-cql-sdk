@@ -231,11 +231,12 @@ internal static partial class FhirMeasureExtensions
         if (existing != null)
             return existing;
 
+        // Only the element id is set: the FHIR invariant on Measure.group.stratifier
+        // ((code | description | criteria).exists() xor component.exists()) forbids
+        // code/description/criteria on a stratifier that holds components.
         var container = new FhirMeasure.StratifierComponent
         {
             ElementId = id,
-            Code = new CodeableConcept { Text = id },
-            Description = id,
         };
         group.Stratifier.Add(container);
         return container;

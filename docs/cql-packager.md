@@ -216,7 +216,10 @@ ELM `annotation` element. See `LibrarySets/Demo/Cql/MeasureExample.cql` for a co
 
 All stratifier-tagged definitions of a group collapse into a single container stratifier
 (`<group>-Stratifier`) whose dimensions are `stratifier.component` entries — including when a group
-has only one dimension. Each component gets id `<group>-StratifierComponent-<value>`, a text-only
+has only one dimension. The container carries only its element id — no `code`, `description`, or
+`criteria` — because the FHIR invariant on `Measure.group.stratifier`
+(`(code | description | criteria).exists() xor component.exists()`) forbids combining them with
+components. Each component gets id `<group>-StratifierComponent-<value>`, a text-only
 code with the `@stratifier` value, and a `text/cql-identifier` criteria referencing the definition.
 The definition's return value is the stratum value for the subject; any CQL type is allowed.
 
