@@ -43,7 +43,7 @@ var librarySetInvoker = pool.GetOrCreate(invocationToolkit, "HEDIS");
 var result = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(bundle), libraryIdentifier, "Numerator");
 ```
 
-Entries are keyed on the **content** of the assembly binaries, so rebuilding an equivalent `InvocationToolkit` from freshly read bytes still hits the pool.
+Entries are keyed on the **content** of the assembly binaries together with the **library set name** passed to `GetOrCreate` (and the exception-continuation policy), so rebuilding an equivalent `InvocationToolkit` from freshly read bytes still hits the pool — provided the name is stable for a given library set. A name that varies per request misses every time, and at a small `Capacity` evicts on every call as well, which is worse than not pooling.
 
 Three rules apply when pooling:
 
@@ -52,6 +52,8 @@ Three rules apply when pooling:
 - **Size `Capacity` to at least the number of library sets in concurrent use.** Eviction unloads a library set without waiting for its users, so an instance evicted while a consumer still holds it throws `ObjectDisposedException` on next use rather than returning results from unloaded assemblies. That is the one failure mode an adopter can only avoid by configuration, and with capacity at or above the number of distinct hot library sets it is unreachable.
 
 A pooled invoker is safe to share between concurrently evaluating threads, provided each evaluation uses its own `CqlContext`.
+
+See **[Caching strategies](../../docs/caching-strategies.md)** for how pooling relates to the SDK's other caches — in particular per-context evaluation caching, which solves a different problem and composes with pooling.
 
 ## Usage
 

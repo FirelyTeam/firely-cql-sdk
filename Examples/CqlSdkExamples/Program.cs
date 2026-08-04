@@ -30,6 +30,7 @@ internal partial class Program
             case "320": InvokingCqlHelloWorldWithParameter(); return;
             case "330": InvokingCqlHelloWorldWithFunctionArgument(); return;
             case "340": CachingExample(); return;
+            case "350": PoolingLibrarySetInvokers(); return;
             case "400": InvokingFromAllFhirResourcesInDirectory(); return;
             case "410": InvokingFromFhirResourceAndDependenciesInDirectory(); return;
             case "500": ExtendingFunctionalityLogLibraryStatements(); return;
