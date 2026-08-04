@@ -13,7 +13,7 @@ Evaluating CQL goes through roughly four stages. Each has its own cache:
 | Translate CQL → ELM → C# → assembly | Package once, ship the assemblies | Build time | n/a — see [cql-packager.md](cql-packager.md) |
 | Load assemblies + JIT-compile them | [`LibrarySetInvokerPool`](#2-library-set-pooling-across-evaluations) | Process | **off** |
 | Evaluate a definition | [`CqlContext` evaluation cache](#3-evaluation-caching-within-one-context) | One `CqlContext` | **off** |
-| Convert FHIR ↔ CQL values | [FHIR type-converter cache](#4-fhir-type-conversion-caching) | Process | on, unbounded |
+| Convert `FhirDateTime` → `CqlDateTime` | [FHIR type-converter LRU](#4-fhir-datetime-conversion-caching) | Process | on, 10,000 entries |
 | Extract codings from a bundle for retrieves | Automatic, inside `BundleDataSource` | One bundle | on |
 
 The last one needs no configuration: retrieves over a `Bundle` extract each resource's codings once per bundle and reuse them. It is listed only so you know it is already handled.
@@ -35,7 +35,7 @@ var invoker = pool.GetOrCreate(invocationToolkit, "HEDIS");
 var result = invoker.InvokeLibraryDefinition(context, libraryIdentifier, "Numerator");
 ```
 
-Entries are keyed on the **content** of the assembly binaries, so rebuilding an equivalent `InvocationToolkit` from freshly read bytes still hits the pool.
+Entries are keyed on the **content** of the assembly binaries together with the **library set name** you pass to `GetOrCreate`, so rebuilding an equivalent `InvocationToolkit` from freshly read bytes still hits the pool — but the name has to be stable for a given library set. A name that varies per request (`$"HEDIS-{subjectId}"`, say — which reads naturally, since the parameter also names the load context for diagnostics) misses every single time, and at a small `Capacity` it then evicts on every call too: loading, unloading and re-JIT-compiling per request, which is worse than not pooling at all. The exception-continuation policy is part of the key as well.
 
 **Three rules.** The pool owns what it returns:
 
@@ -66,11 +66,13 @@ context.UseNewCache(CqlContext.CacheInitialCapacity,    // sized for concurrent 
 …or, preferably, when the context is created:
 
 ```csharp
-var options = new FhirCqlContextOptions { EvaluationCache = EvaluationCacheProfile.Concurrent };
+var options = new FhirCqlContextOptions { EvaluationCache = EvaluationCacheProfile.Sequential };
 var context = FhirCqlContext.ForBundle(bundle, options: options);
 ```
 
-`EvaluationCacheProfile.Sequential` is the default shape; `EvaluationCacheProfile.Concurrent` sizes the cache for one writer per processor. `ConcurrencyLevel` only affects how many internal locks cache *writes* spread over — reads are lock-free at any level — so raise it when several threads evaluate over one context, and leave it alone otherwise.
+Use `EvaluationCacheProfile.Concurrent` instead only when several threads evaluate over the **same** context — see [5](#5-sharing-one-context-across-threads). Under the pattern this page recommends (one context per evaluation over a shared pooled invoker) exactly one thread ever writes to a given context's cache, so `Sequential` is the right profile.
+
+`EvaluationCacheProfile.Sequential` is the default shape; `EvaluationCacheProfile.Concurrent` sizes the cache for one writer per processor. `ConcurrencyLevel` only affects how many internal locks cache *writes* spread over — reads are lock-free at any level — so raise it when several threads evaluate over one context, and leave it alone otherwise. It is not free: the level is passed straight to `new ConcurrentDictionary<long, object?>(concurrencyLevel, …)`, which allocates a lock array of that size, so `Concurrent` on a 64-core host costs 64 locks per context.
 
 **Scope and lifetime.** The cache belongs to the `CqlContext`, so it lives exactly as long as that context, and two contexts never share cached results. `DontUseCaching()` disables it; calling `UseNewCache()` again replaces it, which is how you invalidate.
 
@@ -78,14 +80,15 @@ var context = FhirCqlContext.ForBundle(bundle, options: options);
 
 Runnable example: **340 Caching Example**.
 
-## 4. FHIR type-conversion caching
+## 4. FHIR date/time conversion caching
 
-Converting between FHIR POCOs and CQL values is cached process-wide. This is on by default and unbounded. To bound it, set a size:
+Converting `FhirDateTime` values to `CqlDateTime` is memoized in a process-wide LRU cache. It is on by default, **bounded at 10,000 entries**, and shared by every context that uses the default model and cache size. No other FHIR ↔ CQL conversion is cached — the cache holds only `FhirDateTime` → `CqlDateTime` and its `.DateOnly` projection.
 
-- at context creation, via `FhirCqlContextOptions.OverrideFhirTypeConverterCacheSize`;
-- at compile time, via `ElmToolkitConfig.LRUCacheSize` (`0`, the default, means unbounded).
+To change the bound, set `FhirCqlContextOptions.OverrideFhirTypeConverterCacheSize` at context creation. Note that `0` **disables** the cache rather than unbounding it, and any value other than the default gets its own converter and cache instance rather than the shared default pair.
 
-You normally do not need to touch either. Bound it if you are memory-constrained and converting a very wide variety of values.
+You normally do not need to touch this. Lower it only if you are memory-constrained; raise it if you evaluate over data with far more than 10,000 distinct date/time values and see the conversion cost.
+
+`ElmToolkitConfig.LRUCacheSize` is **not** this cache. It configures a `TypeConverter` registered in the compiler's own service container for ELM → C# code generation, and has no effect on the converter a runtime `FhirCqlContext` builds.
 
 ## 5. Sharing one context across threads
 

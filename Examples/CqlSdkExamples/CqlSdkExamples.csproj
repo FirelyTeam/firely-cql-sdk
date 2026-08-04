@@ -28,15 +28,20 @@
 		</None>
 		<None Remove="bin\**\input\**;obj\**\input\**" />
 
-		<Compile Remove="**\input\**\*.g.cs" />
 		<!--
-		  Exclude generated C# that an example writes, not only what it reads. Several examples save
-		  .g.cs into their own output\cs directory, and without this the default glob compiles that
-		  output into this project on the next build. It then fails with duplicate types and members,
-		  because the same libraries are already compiled from input - so running the examples would
-		  break the following build.
+		  This project compiles no generated C#, wherever it sits. Examples both read .g.cs (from
+		  input\cs) and write it (220, 221 and 222 save into their own output\cs), and the default glob
+		  would compile it into this project - failing with CS0579 plus a run of CS0111/CS0102, because
+		  the same libraries are already compiled from input. The written files are gitignored, so the
+		  break appears out of nowhere and does not show in `git status`.
+
+		  Deliberately one rule keyed on the .g.cs suffix rather than one per directory name: an
+		  exclusion listing `input` and `output` has to be kept in step with wherever examples happen to
+		  write next, and the example that saves to `generated\` reintroduces exactly this break. The
+		  tracked .g.cs files under 230's input\cs are None-included below for copy-to-output, not
+		  compiled, so nothing needs them on the Compile item.
 		-->
-		<Compile Remove="**\output\**\*.g.cs" />
+		<Compile Remove="**\*.g.cs" />
 		<Compile Remove="bin\**;obj\**" />
 
 		<None Include="**\input\**\*.g.cs">

@@ -43,7 +43,7 @@ var librarySetInvoker = pool.GetOrCreate(invocationToolkit, "HEDIS");
 var result = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(bundle), libraryIdentifier, "Numerator");
 ```
 
-Entries are keyed on the **content** of the assembly binaries, so rebuilding an equivalent `InvocationToolkit` from freshly read bytes still hits the pool.
+Entries are keyed on the **content** of the assembly binaries together with the **library set name** passed to `GetOrCreate` (and the exception-continuation policy), so rebuilding an equivalent `InvocationToolkit` from freshly read bytes still hits the pool — provided the name is stable for a given library set. A name that varies per request misses every time, and at a small `Capacity` evicts on every call as well, which is worse than not pooling.
 
 Three rules apply when pooling:
 

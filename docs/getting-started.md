@@ -146,6 +146,7 @@ See the **[Demo Projects](demo-projects.md)** guide for the project structure, p
 ## Further Reading
 
 * [CQL Engine Architecture](cql-engine-architecture.md) — internal design and key classes
+* [Caching strategies](caching-strategies.md) — which cache to reach for, what each one costs, and how they interact
 * [Toolkit Services Dependency Diagrams](dependency-diagrams.md) — service dependency graphs
 * [Demo Projects](demo-projects.md) — project structure and how to configure a measure project
 * [CQL Build Pipeline](build-pipeline.md) — build scripts, Java CQL-to-ELM tooling, PackagerCLI, and MSBuild targets

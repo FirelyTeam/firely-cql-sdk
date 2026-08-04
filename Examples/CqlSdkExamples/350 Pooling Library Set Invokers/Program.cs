@@ -103,7 +103,9 @@ partial class Program
         {
             var context = FhirCqlContext.WithDataSource(); // one context per evaluation
             var result = shared.InvokeLibraryDefinition(context, cql.LibraryIdentifier, "Answer");
-            Console.WriteLine($"   Thread {i}: Answer = {result}");
+            // The real thread id, not the loop index: Parallel.For may run several iterations on the
+            // invoking thread, so printing `i` as a thread would claim concurrency that did not happen.
+            Console.WriteLine($"   Evaluation {i} on thread {Environment.CurrentManagedThreadId}: Answer = {result}");
         });
         Console.WriteLine();
 
@@ -117,7 +119,9 @@ partial class Program
         Console.WriteLine("Key Points:");
         Console.WriteLine("- Pooling is opt-in; CreateLibrarySetInvoker still loads per call");
         Console.WriteLine("- Create one pool and keep it; ask it for an invoker per request");
-        Console.WriteLine("- Entries are keyed on assembly-binary content, not object identity");
+        Console.WriteLine("- Entries are keyed on assembly-binary content, not object identity - but the");
+        Console.WriteLine("  library set name you pass to GetOrCreate is part of the key too, so keep it");
+        Console.WriteLine("  stable: a name that varies per request misses every time, and then evicts too");
         Console.WriteLine("- Do NOT dispose a pooled invoker - it is shared, so Dispose() is a no-op");
         Console.WriteLine("- Do NOT retain a LibraryInvoker or DefinitionInvoker past the library set:");
         Console.WriteLine("  each reaches its library set through a back-reference, so holding one keeps");
