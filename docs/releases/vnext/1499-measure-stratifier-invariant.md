@@ -6,4 +6,4 @@
   `Measure.group.stratifier`
   (`(code | description | criteria).exists() xor component.exists()`), so the previous
   output failed validation. The container now carries only its element id
-  (`<group>-Stratifier`); the components are unchanged.
+  (`<group>-Stratifier`); the components are unchanged. (#1499)
