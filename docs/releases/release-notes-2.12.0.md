@@ -46,6 +46,10 @@
 - **`InvocationToolkit Services Dependency Diagram`** added to `docs/dependency-diagrams.md`, covering `InvocationToolkit`, `LibrarySetInvoker`, the invoker graph, and the new pool types. (#1440)
 - `docs/releases/vnext-release-notes.md` is now a static pointer doc; fragment files under `docs/releases/vnext/` are the sole pending-content source going forward. (#1445)
 
+#### Dependency Updates
+
+- `FirelyNetVersion` remains unchanged in this release.
+
 #### Fixes
 
 - `LibrarySetInvoker.Dispose()` is now idempotent; previously it called `AssemblyLoadContext.Unload()` unconditionally on every call, which was an access violation before .NET 8.0.0. (#1440)
