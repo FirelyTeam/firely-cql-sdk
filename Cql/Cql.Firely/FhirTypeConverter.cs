@@ -404,13 +404,17 @@ namespace Hl7.Cql.Fhir
         // are present, but CQL permits hour- and minute-precision values. Values at second precision or
         // finer round-trip through their ISO 8601 string unchanged; coarser values get their missing
         // components zero-padded, with the original precision recorded in the time-precision extension.
+        // An absent offset stays absent here — the UTC default applies to dateTime only. A CqlTime that
+        // does carry an offset is vestigial, unreachable from CQL source because CQL's Time type has no
+        // timezone; such an offset passes through verbatim even though FHIR time forbids one. That
+        // pass-through is out of scope for the dateTime offset rule (#1506).
         private static M.Time CqlTimeToFhirTime(CqlTime time)
         {
             var t = time.Value;
             if (t.Precision >= DateTimePrecision.Second)
                 return new M.Time(time.ToString());
 
-            var fhirTime = new M.Time(FormatPaddedTime(t.Hour, t.Minute, t.OffsetHour, t.OffsetMinute));
+            var fhirTime = new M.Time(FormatPaddedTime(t.Hour, t.Minute, t.OffsetHour, t.OffsetMinute, assumeUtcWhenNoOffset: false));
             AddTimePrecisionExtension(fhirTime, t.Precision);
             return fhirTime;
         }
@@ -418,26 +422,51 @@ namespace Hl7.Cql.Fhir
         private static M.FhirDateTime CqlDateTimeToFhirDateTime(CqlDateTime dateTime)
         {
             var dt = dateTime.Value;
-            if (dt.Precision is not (DateTimePrecision.Hour or DateTimePrecision.Minute))
+
+            // A date-only value stays offset-free — FHIR forbids an offset without a time, and a CQL
+            // value coarser than hour precision cannot carry one either.
+            if (dt.Precision < DateTimePrecision.Hour)
                 return new M.FhirDateTime(dateTime.ToString());
 
-            var padded = FormattableString.Invariant($"{dt.Year:D4}-{dt.Month!.Value:D2}-{dt.Day!.Value:D2}T")
-                + FormatPaddedTime(dt.Hour!.Value, dt.Minute, dt.OffsetHour, dt.OffsetMinute);
-            var fhirDateTime = new M.FhirDateTime(padded);
-            AddTimePrecisionExtension(fhirDateTime, dt.Precision);
-            return fhirDateTime;
+            // Hour and minute precision need the seconds (and, at hour precision, the minutes) padded,
+            // and the precision they lose recorded in the time-precision extension.
+            if (dt.Precision is DateTimePrecision.Hour or DateTimePrecision.Minute)
+            {
+                var padded = FormattableString.Invariant($"{dt.Year:D4}-{dt.Month!.Value:D2}-{dt.Day!.Value:D2}T")
+                    + FormatPaddedTime(dt.Hour!.Value, dt.Minute, dt.OffsetHour, dt.OffsetMinute, assumeUtcWhenNoOffset: true);
+                var fhirDateTime = new M.FhirDateTime(padded);
+                AddTimePrecisionExtension(fhirDateTime, dt.Precision);
+                return fhirDateTime;
+            }
+
+            // Second precision and finer is already lexically valid FHIR apart from the offset, which
+            // the ISO 8601 string may leave out.
+            return new M.FhirDateTime(dateTime.ToString() + FormatOffsetOmittedFromIso8601(dt.OffsetHour, dt.OffsetMinute));
         }
 
-        private static string FormatPaddedTime(int hour, int? minute, int? offsetHour, int? offsetMinute)
-        {
-            var offset = (offsetHour, offsetMinute ?? 0) switch
+        private static string FormatPaddedTime(int hour, int? minute, int? offsetHour, int? offsetMinute, bool assumeUtcWhenNoOffset) =>
+            FormattableString.Invariant($"{hour:D2}:{minute ?? 0:D2}:00{FormatOffset(offsetHour, offsetMinute, assumeUtcWhenNoOffset)}");
+
+        // DateTimeIso8601 and TimeIso8601 render an offset only when its hour component is present, so
+        // the offset of a value carrying minutes alone — constructible because neither type validates
+        // that pairing outside strict mode — is missing from their string and has to be appended, as
+        // does the UTC default standing in for an entirely absent offset.
+        private static string FormatOffsetOmittedFromIso8601(int? offsetHour, int? offsetMinute) =>
+            offsetHour is null ? FormatOffset(offsetHour, offsetMinute, assumeUtcWhenNoOffset: true) : "";
+
+        // A FHIR dateTime with hours and minutes SHALL carry a timezone offset, so a CQL value without
+        // one is read as UTC (assumeUtcWhenNoOffset); FHIR time has no offset concept and keeps it absent.
+        // An offset counts as absent only when both of its components are: a minutes-only offset is a
+        // real offset against a zero hour component, and carries its own sign.
+        // A zero offset is always rendered as 'Z', the form ISO 8601 uses for it as well.
+        private static string FormatOffset(int? offsetHour, int? offsetMinute, bool assumeUtcWhenNoOffset) =>
+            (offsetHour, offsetMinute) switch
             {
-                (null, _) => "",
-                (0, 0) => "Z",
-                ({ } oh, { } om) => FormattableString.Invariant($"{(oh < 0 || om < 0 ? '-' : '+')}{Math.Abs(oh):D2}:{Math.Abs(om):D2}")
+                (null, null) => assumeUtcWhenNoOffset ? "Z" : "",
+                (null or 0, null or 0) => "Z",
+                var (oh, om) => FormattableString.Invariant(
+                    $"{(oh < 0 || om < 0 ? '-' : '+')}{Math.Abs(oh ?? 0):D2}:{Math.Abs(om ?? 0):D2}")
             };
-            return FormattableString.Invariant($"{hour:D2}:{minute ?? 0:D2}:00{offset}");
-        }
 
         private static void AddTimePrecisionExtension(M.PrimitiveType element, DateTimePrecision precision) =>
             element.Extension.Add(new M.Extension(TimePrecisionExtensionUrl,
@@ -504,22 +533,19 @@ namespace Hl7.Cql.Fhir
         // CQL Time values have no date component; anchor them on the minimum FHIR date
         // (0001-01-01) so they can be represented within a Period.
         // The value is composed from the time's ISO 8601 string rather than built from a
-        // DateTimeOffset: the string keeps the time's original precision and omits the offset
-        // when the time has none, and the minimum date combined with a positive UTC offset has
-        // no DateTimeOffset representation (the UTC instant it denotes precedes
-        // DateTime.MinValue, e.g. 0001-01-01T00:30:00+02:00), even though it is a perfectly
-        // valid FHIR dateTime.
+        // DateTimeOffset: the string keeps the time's original precision, and the minimum date
+        // combined with a positive UTC offset has no DateTimeOffset representation (the UTC
+        // instant it denotes precedes DateTime.MinValue, e.g. 0001-01-01T00:30:00+02:00), even
+        // though it is a perfectly valid FHIR dateTime.
         // Hour- and minute-precision times are zero-padded and marked with the time-precision
-        // extension, like in CqlTimeToFhirTime.
+        // extension, like in CqlTimeToFhirTime. Unlike a FHIR time, the resulting dateTime must
+        // carry an offset, so a time without one is read as UTC.
         private static M.FhirDateTime CqlTimeToFhirDateTime(CqlTime time)
         {
             var t = time.Value;
             var timePart = t.Precision >= DateTimePrecision.Second
-                ? t.ToString()
-                : FormatPaddedTime(t.Hour, t.Minute, t.OffsetHour, t.OffsetMinute);
-            // ISO 8601 renders a zero offset as 'Z'; rewrite it to the equivalent explicit form.
-            if (timePart.EndsWith('Z'))
-                timePart = timePart[..^1] + "+00:00";
+                ? t.ToString() + FormatOffsetOmittedFromIso8601(t.OffsetHour, t.OffsetMinute)
+                : FormatPaddedTime(t.Hour, t.Minute, t.OffsetHour, t.OffsetMinute, assumeUtcWhenNoOffset: true);
             var fhirDateTime = new M.FhirDateTime("0001-01-01T" + timePart);
             if (t.Precision < DateTimePrecision.Second)
                 AddTimePrecisionExtension(fhirDateTime, t.Precision);

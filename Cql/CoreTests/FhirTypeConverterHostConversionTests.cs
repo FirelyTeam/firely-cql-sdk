@@ -33,8 +33,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T10:30:00+00:00", converted.Start);
-            Assert.AreEqual("0001-01-01T16:45:15.123+00:00", converted.End);
+            Assert.AreEqual("0001-01-01T10:30:00Z", converted.Start);
+            Assert.AreEqual("0001-01-01T16:45:15.123Z", converted.End);
         }
 
         [TestMethod]
@@ -79,20 +79,75 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void ConvertCqlIntervalOfTime_Period_PreservesPrecisionAndAbsentOffset()
+        public void ConvertCqlIntervalOfTime_Period_PreservesPrecisionAndPadsAndAssumesUtc()
         {
-            // A time with minute precision and no timezone offset stays offset-free; the seconds are
-            // zero-padded to produce a valid FHIR dateTime, with the original precision preserved in
-            // the time-precision extension.
+            // A time with minute precision and no timezone offset is read as UTC — a FHIR dateTime
+            // with a time component must carry an offset — and its seconds are zero-padded, with the
+            // original precision preserved in the time-precision extension.
             var low = new CqlTime(10, 30, null, null, null, null);
             var interval = new CqlInterval<CqlTime>(low, null, lowClosed: true, highClosed: true);
 
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T10:30:00", converted.Start);
+            Assert.AreEqual("0001-01-01T10:30:00Z", converted.Start);
             var precisionExtension = converted.StartElement.GetExtension(Hl7.Cql.Fhir.FhirTypeConverter.TimePrecisionExtensionUrl);
             Assert.AreEqual("min", (precisionExtension?.Value as Code)?.Value);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfTime_Period_AssumesUtcForSecondPrecisionWithoutOffset()
+        {
+            var low = new CqlTime(10, 30, 15, null, null, null);
+            var high = new CqlTime(16, 45, 15, 123, null, null);
+            var interval = new CqlInterval<CqlTime>(low, high, lowClosed: true, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("0001-01-01T10:30:15Z", converted.Start);
+            Assert.AreEqual("0001-01-01T16:45:15.123Z", converted.End);
+            Assert.IsNull(converted.StartElement.GetExtension(Hl7.Cql.Fhir.FhirTypeConverter.TimePrecisionExtensionUrl));
+            Assert.IsNull(converted.EndElement.GetExtension(Hl7.Cql.Fhir.FhirTypeConverter.TimePrecisionExtensionUrl));
+        }
+
+        [TestMethod]
+        public void ConvertCqlTime_Time_KeepsAbsentOffsetAbsent()
+        {
+            // FHIR time has no timezone offset concept, so the UTC default applied to dateTime values
+            // must not leak into it.
+            Assert.AreEqual("10:00:00", FhirTypeConverter.Convert<Time>(new CqlTime(10, null, null, null, null, null))!.Value);
+            Assert.AreEqual("10:30:00", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, null, null, null, null))!.Value);
+            Assert.AreEqual("10:30:15", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, 15, null, null, null))!.Value);
+            Assert.AreEqual("10:30:15.123", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, 15, 123, null, null))!.Value);
+        }
+
+        [TestMethod]
+        public void ConvertCqlTime_Time_PassesAVestigialOffsetThrough()
+        {
+            // A CqlTime carrying an offset cannot arise from CQL source — CQL's Time type has no
+            // timezone — and FHIR time forbids one, so these assertions pin the pre-existing
+            // pass-through of an artificially constructed offset rather than endorse its output.
+            Assert.AreEqual("10:30:00Z", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, null, null, 0, 0))!.Value);
+            Assert.AreEqual("10:30:00+02:00", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, null, null, 2, 0))!.Value);
+            Assert.AreEqual("10:30:15+02:00", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, 15, null, 2, 0))!.Value);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfTime_Period_RendersAMinutesOnlyOffset()
+        {
+            // CqlTime's constructor does not validate that an offset minute is paired with an offset
+            // hour, so a 30-minute offset is a real offset that must not be flattened to UTC.
+            var interval = new CqlInterval<CqlTime>(
+                new CqlTime(10, 30, null, null, null, 30),
+                new CqlTime(12, 30, 15, null, null, -30),
+                lowClosed: true, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("0001-01-01T10:30:00+00:30", converted.Start);
+            Assert.AreEqual("0001-01-01T12:30:15-00:30", converted.End);
         }
 
         [TestMethod]
