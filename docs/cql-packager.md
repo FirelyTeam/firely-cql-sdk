@@ -220,8 +220,18 @@ has only one dimension. The container carries only its element id — no `code`,
 `criteria` — because the FHIR invariant on `Measure.group.stratifier`
 (`(code | description | criteria).exists() xor component.exists()`) forbids combining them with
 components. Each component gets id `<group>-StratifierComponent-<value>`, a text-only
-code with the `@stratifier` value, and a `text/cql-identifier` criteria referencing the definition.
+code with the `@stratifier` value (`stratifier.component.code.text`), a description
+(`stratifier.component.description`), and a `text/cql-identifier` criteria referencing the definition.
 The definition's return value is the stratum value for the subject; any CQL type is allowed.
+
+A consumer identifying or displaying a stratification should key on the component
+`code`/`description` fields, not the container, which has no human-readable label.
+
+Because the dimensions are modelled as `component` entries (following the R4 base spec comment:
+"Stratifiers are defined either as a single criteria, or as a set of component criteria"), the stratum
+value reported in a `MeasureReport` is the **combination** of all the group's dimension values — one
+composite stratification per group, not one independent stratification per `@stratifier` tag (see also
+CQF Measures IG conformance requirement 3.17).
 
 ```cql
 /*

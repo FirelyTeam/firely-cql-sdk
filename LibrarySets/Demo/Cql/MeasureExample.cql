@@ -49,3 +49,12 @@ define "Numerator 1":
 */
 define "Numerator 2":
 	false
+
+/*
+* @group: 1
+* @group: 2
+* @stratifier: Gender
+* @description: Stratifies by patient gender
+*/
+define "Gender Stratifier":
+	Patient.gender

@@ -224,20 +224,25 @@ internal static partial class FhirMeasureExtensions
         }
     }
 
-    private static FhirMeasure.StratifierComponent GetOrCreateStratifier(FhirMeasure.GroupComponent group)
+    /// <summary>
+    /// Returns the existing stratifier container for <paramref name="group"/>, or creates a new one
+    /// and adds <paramref name="firstComponent"/> to it.  The container is never added to the group
+    /// without at least one component: a componentless stratifier satisfies neither side of the FHIR
+    /// invariant <c>(code | description | criteria).exists() xor component.exists()</c> and is
+    /// therefore invalid.  Do not add <c>code</c>, <c>description</c>, or <c>criteria</c> to the
+    /// container; the invariant forbids combining them with components.
+    /// </summary>
+    private static FhirMeasure.StratifierComponent GetOrCreateStratifier(
+        FhirMeasure.GroupComponent group,
+        FhirMeasure.ComponentComponent firstComponent)
     {
         var id = $"{group.ElementId}-Stratifier";
         var existing = group.Stratifier.FirstOrDefault(s => s.ElementId == id);
         if (existing != null)
             return existing;
 
-        // Only the element id is set: the FHIR invariant on Measure.group.stratifier
-        // ((code | description | criteria).exists() xor component.exists()) forbids
-        // code/description/criteria on a stratifier that holds components.
-        var container = new FhirMeasure.StratifierComponent
-        {
-            ElementId = id,
-        };
+        var container = new FhirMeasure.StratifierComponent { ElementId = id };
+        container.Component.Add(firstComponent);
         group.Stratifier.Add(container);
         return container;
     }
@@ -276,13 +281,9 @@ internal static partial class FhirMeasureExtensions
             foreach (var tuple in tuples)
             {
                 var group = GetOrCreateGroup(fhirMeasure, tuple.Group, measureGroupCodeSystem);
-                var container = GetOrCreateStratifier(group);
 
                 var componentId = $"{tuple.Group}-StratifierComponent-{tuple.Stratifier}";
-                if (container.Component.Any(c => c.ElementId == componentId))
-                    throw new InvalidOperationException($"Stratifier component {componentId} is defined twice for this measure.");
-
-                container.Component.Add(new FhirMeasure.ComponentComponent
+                var component = new FhirMeasure.ComponentComponent
                 {
                     ElementId = componentId,
                     Code = new CodeableConcept { Text = tuple.Stratifier },
@@ -292,7 +293,19 @@ internal static partial class FhirMeasureExtensions
                         Language = "text/cql-identifier",
                         ExpressionElement = new FhirString(def.name)
                     }
-                });
+                };
+
+                var stratifierId = $"{tuple.Group}-Stratifier";
+                var existing = group.Stratifier.FirstOrDefault(s => s.ElementId == stratifierId);
+                if (existing != null && existing.Component.Any(c => c.ElementId == componentId))
+                    throw new InvalidOperationException($"Stratifier component {componentId} is defined twice for this measure.");
+
+                var container = GetOrCreateStratifier(group, component);
+
+                // GetOrCreateStratifier added component when it created a new container.
+                // For an existing container, we still need to add the component.
+                if (existing != null)
+                    container.Component.Add(component);
             }
         }
     }

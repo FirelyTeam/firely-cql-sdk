@@ -1,3 +1,11 @@
+## Breaking Changes
+
+- Generated `Measure` resources no longer set `code` or `description` on the container stratifier
+  (`<group>-Stratifier`). Re-packaging an unchanged CQL library now produces different
+  `Measure.group.stratifier` JSON than previous versions: any tool or test that diffs or asserts on
+  the generated output will observe the removal. The per-component `code`, `description`, and
+  `criteria` values are unchanged. (#1499)
+
 ## Fixes
 
 - Generated `Measure` resources no longer set `code` and `description` on the container

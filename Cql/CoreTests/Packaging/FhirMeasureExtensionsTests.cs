@@ -10,6 +10,7 @@
 
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging;
+using Hl7.FhirPath;
 using ElmAnnotation = Hl7.Cql.Elm.Annotation;
 using ElmLibrary = Hl7.Cql.Elm.Library;
 using FhirLibrary = Hl7.Fhir.Model.Library;
@@ -272,8 +273,10 @@ public class FhirMeasureExtensionsTests
     [TestMethod]
     public void GeneratedStratifiers_SatisfyFhirStratifierInvariant()
     {
-        // FHIR invariant on Measure.group.stratifier:
-        // (code | description | criteria).exists() xor component.exists()
+        // FHIR invariant mea-1 on Measure.group.stratifier:
+        // group.stratifier.all((code | description | criteria).exists() xor component.exists())
+        const string Mea1 = "group.stratifier.all((code | description | criteria).exists() xor component.exists())";
+
         var measure = CreateMeasure(BaseStatements(
             Def("Region Stratifier",
                 CreateTag("group", "RateA"),
@@ -284,14 +287,41 @@ public class FhirMeasureExtensionsTests
                 CreateTag("stratifier", "AgeBand"),
                 CreateTag("description", "Stratifies by age band"))));
 
+        // Assert the literal FHIR invariant using the FhirPath engine.
+        new FhirPathCompiler().Compile(Mea1).Predicate(measure, new EvaluationContext())
+            .Should().BeTrue("generated Measure must satisfy the FHIR stratifier invariant mea-1");
+
+        // Targeted assertions so a failure identifies which half broke.
         var stratifiers = measure.Group.SelectMany(g => g.Stratifier).ToList();
         stratifiers.Should().NotBeEmpty();
         foreach (var stratifier in stratifiers)
         {
-            var hasOwnContent = stratifier.Code != null || stratifier.Description != null || stratifier.Criteria != null;
-            var hasComponents = stratifier.Component.Count > 0;
-            (hasOwnContent ^ hasComponents).Should().BeTrue(
-                "stratifier {0} must have either code/description/criteria or components, never both", stratifier.ElementId);
+            stratifier.Code.Should().BeNull(
+                "stratifier {0}: container must not carry code when it has components (mea-1)", stratifier.ElementId);
+            stratifier.Description.Should().BeNull(
+                "stratifier {0}: container must not carry description when it has components (mea-1)", stratifier.ElementId);
+            stratifier.Criteria.Should().BeNull(
+                "stratifier {0}: container must not carry criteria when it has components (mea-1)", stratifier.ElementId);
+            stratifier.Component.Should().NotBeEmpty(
+                "stratifier {0}: container must have at least one component", stratifier.ElementId);
+        }
+    }
+
+    [TestMethod]
+    public void NewStratifierContainer_AlwaysHasAtLeastOneComponent()
+    {
+        // A componentless stratifier satisfies neither side of mea-1 and is therefore invalid.
+        // GetOrCreateStratifier takes the first component so the container is never added empty.
+        var measure = CreateMeasure(BaseStatements(
+            Def("Region Stratifier",
+                CreateTag("group", "RateA"),
+                CreateTag("stratifier", "Region"))));
+
+        foreach (var group in measure.Group)
+        foreach (var stratifier in group.Stratifier)
+        {
+            stratifier.Component.Should().NotBeEmpty(
+                "stratifier {0} must contain at least one component immediately after creation", stratifier.ElementId);
         }
     }
 
