@@ -296,16 +296,17 @@ internal static partial class FhirMeasureExtensions
                 };
 
                 var stratifierId = $"{tuple.Group}-Stratifier";
-                var existing = group.Stratifier.FirstOrDefault(s => s.ElementId == stratifierId);
-                if (existing != null && existing.Component.Any(c => c.ElementId == componentId))
-                    throw new InvalidOperationException($"Stratifier component {componentId} is defined twice for this measure.");
-
+                var isNew = group.Stratifier.All(s => s.ElementId != stratifierId);
                 var container = GetOrCreateStratifier(group, component);
 
-                // GetOrCreateStratifier added component when it created a new container.
-                // For an existing container, we still need to add the component.
-                if (existing != null)
+                // GetOrCreateStratifier adds component when it creates a new container.
+                // For an existing container, check for duplicates then add.
+                if (!isNew)
+                {
+                    if (container.Component.Any(c => c.ElementId == componentId))
+                        throw new InvalidOperationException($"Stratifier component {componentId} is defined twice for this measure.");
                     container.Component.Add(component);
+                }
             }
         }
     }
