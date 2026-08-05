@@ -219,9 +219,20 @@ All stratifier-tagged definitions of a group collapse into a single container st
 has only one dimension. The container carries only its element id — no `code`, `description`, or
 `criteria` — because the FHIR invariant on `Measure.group.stratifier`
 (`(code | description | criteria).exists() xor component.exists()`) forbids combining them with
-components. Each component gets id `<group>-StratifierComponent-<value>`, a text-only
-code with the `@stratifier` value, and a `text/cql-identifier` criteria referencing the definition.
+components. The human-readable labels therefore live on the components: each component gets id
+`<group>-StratifierComponent-<value>`, a text-only code with the `@stratifier` value (and the
+`@description` value as its description), and a `text/cql-identifier` criteria referencing the
+definition — display or key on `stratifier.component.code`/`.description`, not on the container.
 The definition's return value is the stratum value for the subject; any CQL type is allowed.
+
+Because the dimensions are modelled as components of one stratifier, they form a single
+**composite** stratification: a `MeasureReport` stratum is the combination of all the group's
+dimension values (one `stratum.component` per dimension), not one independent stratification per
+`@stratifier` tag. This is how FHIR defines multi-component stratifiers ("Stratifiers are defined
+either as a single criteria, or as a set of component criteria") — see the
+[Measure resource definitions](https://hl7.org/fhir/R4/measure-definitions.html) and the
+[CQF Measures IG measure conformance page](https://hl7.org/fhir/us/cqfmeasures/measure-conformance.html)
+(both mirrored under [/spec/fhir/condensed/](../spec/fhir/README.md)).
 
 ```cql
 /*

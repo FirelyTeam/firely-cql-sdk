@@ -10,6 +10,7 @@
 
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging;
+using Hl7.FhirPath;
 using ElmAnnotation = Hl7.Cql.Elm.Annotation;
 using ElmLibrary = Hl7.Cql.Elm.Library;
 using FhirLibrary = Hl7.Fhir.Model.Library;
@@ -269,11 +270,17 @@ public class FhirMeasureExtensionsTests
             "the definition should also contribute a stratifier component");
     }
 
+    /// <summary>
+    /// The FHIR R4 invariant mea-1 on Measure ("Stratifier SHALL be either a single
+    /// criteria or a set of criteria components"), evaluated as the literal FhirPath
+    /// expression rather than a hand-rolled C# translation of it.
+    /// </summary>
+    private const string StratifierInvariant =
+        "group.stratifier.all((code | description | criteria).exists() xor component.exists())";
+
     [TestMethod]
     public void GeneratedStratifiers_SatisfyFhirStratifierInvariant()
     {
-        // FHIR invariant on Measure.group.stratifier:
-        // (code | description | criteria).exists() xor component.exists()
         var measure = CreateMeasure(BaseStatements(
             Def("Region Stratifier",
                 CreateTag("group", "RateA"),
@@ -284,15 +291,21 @@ public class FhirMeasureExtensionsTests
                 CreateTag("stratifier", "AgeBand"),
                 CreateTag("description", "Stratifies by age band"))));
 
+        new FhirPathCompiler().Compile(StratifierInvariant)
+            .Predicate(measure, new EvaluationContext())
+            .Should().BeTrue("generated measures must satisfy invariant mea-1: {0}", StratifierInvariant);
+
+        // Targeted halves of the invariant, so a failure identifies which side broke:
+        // the container carries no own content, while every component is fully populated.
         var stratifiers = measure.Group.SelectMany(g => g.Stratifier).ToList();
         stratifiers.Should().NotBeEmpty();
-        foreach (var stratifier in stratifiers)
-        {
-            var hasOwnContent = stratifier.Code != null || stratifier.Description != null || stratifier.Criteria != null;
-            var hasComponents = stratifier.Component.Count > 0;
-            (hasOwnContent ^ hasComponents).Should().BeTrue(
-                "stratifier {0} must have either code/description/criteria or components, never both", stratifier.ElementId);
-        }
+        stratifiers.Should().OnlyContain(s => s.Code == null && s.Description == null && s.Criteria == null,
+            "container stratifiers must not carry code/description/criteria");
+        stratifiers.Should().OnlyContain(s => s.Component.Count > 0,
+            "a container with no components would satisfy neither side of the invariant's xor");
+        stratifiers.SelectMany(s => s.Component).Should().OnlyContain(
+            c => c.Code != null && c.Description != null && c.Criteria != null,
+            "the stratification's meaning lives on the components");
     }
 
     [TestMethod]
