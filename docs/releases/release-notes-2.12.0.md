@@ -88,16 +88,19 @@
    ```csharp
    // Before (one load context per evaluation)
    using var invoker = toolkit.CreateLibrarySetInvoker(librarySetName);
+   ```
 
+   ```csharp
    // After (assemblies loaded and JIT-compiled once; invoker is shared)
-   var pool = new LibrarySetInvokerPool();          // keep this long-lived
+   // Keep pool long-lived (e.g. singleton); dispose it at application shutdown.
+   var pool = new LibrarySetInvokerPool();
    var invoker = pool.GetOrCreate(toolkit, librarySetName);
    ```
 
 4. To enable memoization for `FhirCqlContext.ForBundle` / `FhirCqlContext.WithDataSource`, set `EvaluationCache` on the options:
 
    ```csharp
-   var ctx = FhirCqlContext.ForBundle(bundle, new FhirCqlContextOptions
+   var ctx = FhirCqlContext.ForBundle(bundle, options: new FhirCqlContextOptions
    {
        EvaluationCache = EvaluationCacheProfile.Sequential   // or .Concurrent for multi-threaded use
    });
