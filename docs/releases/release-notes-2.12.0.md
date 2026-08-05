@@ -40,8 +40,8 @@
 #### Improvements
 
 - **Indexed coding cache in `BundleDataSource`:** retrieves with a code or value set filter over a `Bundle` no longer redo per-resource work on every call. `BundleDataSource` extracts codings once per retrieved type/code-property pair, compiles getters instead of using reflection, and matches explicit code lists via a set lookup. (#1450, #1451)
-- **Opt-in evaluation cache profiles:** `FhirCqlContextOptions.EvaluationCache` and `CqlContext.UseNewCache(int, int)` let callers opt contexts into memoization; the existing single-argument `UseNewCache(int)` overload is unchanged. The `CqlContext` documentation now specifies the contract for sharing a context between concurrent threads. (#1452, #1453)
-- **FHIR `Range`-to-`Interval` conversions:** `FhirTypeConverter` can now read a FHIR `Range` as `Interval<Long>` (bounds read from `Quantity` values, inclusive, fractional parts truncated). `ConvertRangeToCqlInterval` picks the CQL type from a type-name hint (e.g. from the `cqf-cqlType` extension). A single FHIR `Quantity` can also be read as a CQL `Long`. (#1454, #1455)
+- **Opt-in evaluation cache profiles:** `FhirCqlContextOptions.EvaluationCache` and `CqlContext.UseNewCache(int, int)` let callers opt contexts into memoization; the existing single-argument `UseNewCache(int)` overload is unchanged. The `CqlContext` documentation now specifies the contract for sharing one context across concurrent threads: `Definitions` and `Parameters` must be fully populated before fan-out and must not be mutated during it; the cache may evaluate a definition more than once (bounded, harmless because CQL expressions are pure); data source and value set implementations must tolerate concurrent reads. (#1452, #1453)
+- **FHIR `Range`-to-`Interval` conversions:** `FhirTypeConverter` can now read a FHIR `Range` as `Interval<Long>` (bounds read from `Quantity` values, inclusive, fractional parts truncated). `ConvertRangeToCqlInterval` picks the CQL type from a type-name hint (e.g. `Interval<Integer>`, `Interval<Long>`, `Interval<Decimal>` from the `cqf-cqlType` extension, or the wrapped `Interval<...>` format emitted by the SDK packager); an absent or unrecognized hint yields the widest reading, `Interval<Quantity>`. A single FHIR `Quantity` can also be read as a CQL `Long`. **Both `ConvertRangeToCqlInterval` and the pre-existing `ConvertPeriodToCqlInterval` now recognize the wrapped `Interval<...>` format**, closing the round-trip for intervals packaged by the SDK. (#1454, #1455)
 - **`LibrarySetInvokerPool`:** reuses `LibrarySetInvoker` instances across evaluations of the same library set, loading and JIT-compiling assemblies only once. Pool entries are keyed on a sorted SHA-256 hash of the assembly/symbol bytes plus the library-set name and exception-continuation policy. Addresses a production failure mode where collectible load contexts accumulated faster than they were reclaimed, eventually exceeding the kernel's `vm.max_map_count`. (#1440, #1461)
 - **`InvocationToolkit Services Dependency Diagram`** added to `docs/dependency-diagrams.md`, covering `InvocationToolkit`, `LibrarySetInvoker`, the invoker graph, and the new pool types. (#1440)
 - `docs/releases/vnext-release-notes.md` is now a static pointer doc; fragment files under `docs/releases/vnext/` are the sole pending-content source going forward. (#1445)
@@ -67,7 +67,14 @@
 
 #### Fixes
 
-- Generated `Measure` resources no longer set `code` and `description` on a container stratifier that holds `@stratifier` components, fixing the FHIR invariant violation. (#1499)
+- Generated `Measure` resources now satisfy FHIR invariant `mea-1`: previously every Measure using `@stratifier` components failed validation because the container stratifier also carried `code` and `description`. (#1499)
+
+---
+
+### Demo Projects and Build Tooling
+
+#### Fixes
+
 - CQL-to-ELM generation (`CqlToolingEnabled`) now works on Linux/macOS: the Java classpath wildcard in `Demo/Cql/Build/CqlTooling.Targets.xml` is quoted so Unix shells no longer expand it before `java` sees it. (#1499)
 
 ---
@@ -76,8 +83,27 @@
 
 1. If you access `LibrarySetInvoker.LibraryInvokers`, ensure that access is inside the invoker's `using` scope (or before any `Dispose()` call).
 2. If you assert on the shape of Packager-generated `Measure` JSON (e.g. in snapshot tests), update your expected output to omit `code` and `description` from container `Measure.group.stratifier` entries; those fields now appear only on `stratifier.component`.
-3. To opt into the new `LibrarySetInvokerPool`, replace per-evaluation `InvocationToolkit.CreateLibrarySetInvoker(...)` calls with `pool.GetOrCreate(toolkit, librarySetName)`, where `pool` is a long-lived `LibrarySetInvokerPool` instance.
-4. To enable memoization for `FhirCqlContext.ForBundle` / `FhirCqlContext.WithDataSource`, set `FhirCqlContextOptions.EvaluationCache` to `EvaluationCacheProfile.Sequential` (single-threaded) or `EvaluationCacheProfile.Concurrent` (multi-threaded).
+3. To opt into the new `LibrarySetInvokerPool`, replace per-evaluation `CreateLibrarySetInvoker` calls with a long-lived pool:
+
+   ```csharp
+   // Before (one load context per evaluation)
+   using var invoker = toolkit.CreateLibrarySetInvoker(librarySetName);
+
+   // After (assemblies loaded and JIT-compiled once; invoker is shared)
+   var pool = new LibrarySetInvokerPool();          // keep this long-lived
+   var invoker = pool.GetOrCreate(toolkit, librarySetName);
+   ```
+
+4. To enable memoization for `FhirCqlContext.ForBundle` / `FhirCqlContext.WithDataSource`, set `EvaluationCache` on the options:
+
+   ```csharp
+   var ctx = FhirCqlContext.ForBundle(bundle, new FhirCqlContextOptions
+   {
+       EvaluationCache = EvaluationCacheProfile.Sequential   // or .Concurrent for multi-threaded use
+   });
+   ```
+
+   When using `EvaluationCacheProfile.Concurrent` (or `UseNewCache(int, int)` directly): populate `Definitions` and `Parameters` fully before fanning out across threads, and do not mutate them during evaluation. The cache may evaluate a definition more than once (bounded, harmless because CQL expressions are pure). Your data source and value set implementations must tolerate concurrent reads.
 
 ---
 
