@@ -112,7 +112,7 @@ public class MyDataSource : IDataSource
     }
 }
 
-var ctx = FhirCqlContext.ForBundle(bundle, dataSource: new MyDataSource());
+var ctx = FhirCqlContext.WithDataSource(new MyDataSource());
 ```
 
 ### How do I evaluate the same bundle many times?

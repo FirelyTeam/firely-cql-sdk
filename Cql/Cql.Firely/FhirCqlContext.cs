@@ -114,12 +114,18 @@ namespace Hl7.Cql.Fhir
         /// for the same subject - can build the source once with this method, keep it, and hand it to
         /// <see cref="WithDataSource"/> for every evaluation. The index and its caches are then built once instead
         /// of once per evaluation.</para>
-        /// <para>The returned source is bound to an empty value set dictionary, so retrieving from it directly
-        /// resolves every value set as empty. Pass it to <see cref="WithDataSource"/> together with value sets
-        /// instead: the context then gets a lightweight view over the same index that resolves value set membership
-        /// through those value sets, so evaluations that must resolve value sets through different (for instance
-        /// request-scoped) terminology are free to share one source. Sharing is safe: the index is read-only once
+        /// <para>The returned source <b>must not</b> be used to retrieve resources directly: it is bound to a sentinel
+        /// value-set dictionary that throws on any value-set operation to prevent a forgotten rebind from silently
+        /// returning empty results. Pass it to <see cref="WithDataSource"/> together with an
+        /// <see cref="IValueSetDictionary"/> instead: the context then gets a lightweight view over the same index
+        /// that resolves value set membership through those value sets, so evaluations backed by different (for
+        /// instance request-scoped) terminology can share one source. Sharing is safe: the index is read-only once
         /// built and supports any number of concurrent readers.</para>
+        /// <para><b>Memory contract:</b> the returned source retains both the index and the coding caches derived
+        /// from it for its entire lifetime. The caches grow with the number of distinct retrieve shapes executed
+        /// against the source; they are never trimmed. A host that caches sources should scope the cache to the
+        /// subject or request (not a process-lifetime dictionary). See GitHub issue #1460 for background on
+        /// process-lifetime retention in this area.</para>
         /// </remarks>
         /// <param name="bundle">The bundle to index. It is assumed not to change for as long as the returned source is used.</param>
         /// <param name="options">Options to create the source with, of which <see cref="FhirCqlContextOptions.OverrideRetrieveProfileFilter"/> applies here.</param>
@@ -129,7 +135,7 @@ namespace Hl7.Cql.Fhir
             FhirCqlContextOptions? options = null) =>
             new BundleDataSource(
                 bundle ?? throw new ArgumentNullException(nameof(bundle)),
-                new HashValueSetDictionary(),
+                BundleDataSource.UnboundSentinel,
                 profileFilter: options?.OverrideRetrieveProfileFilter);
 
         /// <summary>
@@ -138,10 +144,13 @@ namespace Hl7.Cql.Fhir
         /// <remarks>
         /// When <paramref name="source"/> is bundle-backed (such as one obtained from
         /// <see cref="DataSourceForBundle"/>) and <paramref name="valueSets"/> is not <see langword="null"/>, the
-        /// source is not used directly: the context gets a lightweight view over it that shares its index over the
-        /// bundle but resolves value sets through <paramref name="valueSets"/>, so the same source can serve
-        /// evaluations with different value sets. Without <paramref name="valueSets"/>, the source is used as-is,
-        /// including the value sets it was constructed with.
+        /// source is rebound: the context gets a lightweight view over it that shares its index but resolves
+        /// value sets through <paramref name="valueSets"/>. When <paramref name="source"/> is a
+        /// <see cref="CompositeDataSource"/>, each bundle-backed component within it is rebound the same way.
+        /// Without <paramref name="valueSets"/>, every source is used as-is (including any value sets it was
+        /// constructed with). When <paramref name="options"/>.<see cref="FhirCqlContextOptions.OverrideRetrieveProfileFilter"/>
+        /// is non-<see langword="null"/> and a bundle-backed source is rebound, the supplied filter takes precedence
+        /// over the one the source was originally built with; otherwise the source's own filter is kept.
         /// </remarks>
         public static CqlContext WithDataSource(
             IDataSource? source = null,
@@ -150,11 +159,28 @@ namespace Hl7.Cql.Fhir
             DateTimeOffset? now = null,
             FhirCqlContextOptions? options = null)
         {
-            IDataSource? boundSource = source is BundleDataSource bundleSource && valueSets is not null
-                ? bundleSource.WithValueSets(valueSets)
-                : source;
+            IDataSource? boundSource = RebindValueSets(source, valueSets, options?.OverrideRetrieveProfileFilter);
             CqlContext result = CreateContext(boundSource, parameters, valueSets, now, options);
             return result;
+        }
+
+        private static IDataSource? RebindValueSets(IDataSource? source, IValueSetDictionary? valueSets, IRetrieveProfileFilter? profileFilter)
+        {
+            if (valueSets is null)
+                return source;
+
+            if (source is BundleDataSource bundleSource)
+                return bundleSource.WithValueSets(valueSets, profileFilter);
+
+            if (source is CompositeDataSource composite)
+            {
+                var rebound = composite.DataSources
+                    .Select(s => s is BundleDataSource bs ? bs.WithValueSets(valueSets, profileFilter) : s)
+                    .ToArray();
+                return new CompositeDataSource(rebound);
+            }
+
+            return source;
         }
     }
 }
