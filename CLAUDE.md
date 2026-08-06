@@ -60,7 +60,7 @@ A similar mirror for FHIR spec pages actually used by this repo (e.g. `Measure`/
 
 A test that pins the exact text of something the SDK emits answers "did the output change?", never "is the output correct?" — and when the expectation written first is itself wrong, the assertion turns a defect into a defended invariant. So wherever the emitted format has an independent checker, assert against it as well as against the string: the string pins the shape, the checker pins the validity. A validator, a parser, or a round-trip back through the reader all serve; pick whichever the format already has.
 
-For FHIR primitives that checker is `Hl7.Fhir.Model.<Type>.IsValidValue(value)` (`FhirDateTime`, `Time`, `Date`, `Instant`, …), a public static on the already-referenced `Hl7.Fhir.Base` — one line per emission point. Two invalid values reached `develop` behind passing string assertions: `Time("10:30:00Z")`, where FHIR `time` forbids a timezone offset, and a time-bearing `dateTime` with no offset, which FHIR requires once hours and minutes are present (see [#1508](https://github.com/FirelyTeam/firely-cql-sdk/issues/1508)).
+For FHIR primitives that checker is `Hl7.Fhir.Model.<Type>.IsValidValue(value)` (`FhirDateTime`, `Time`, `Date`, `Instant`, …), a public static on the already-referenced `Hl7.Fhir.Base` — one line per emission point.
 
 "Pre-existing" and "out of scope" are reasons not to *fix* invalid output in the change at hand. They are never reasons to write a test asserting the invalid output is correct, or a comment claiming an invariant the code does not hold — quarantine it with a comment pointing at the tracking issue instead.
 
