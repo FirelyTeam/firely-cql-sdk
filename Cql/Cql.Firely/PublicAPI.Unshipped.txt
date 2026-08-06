@@ -1,1 +1,2 @@
 #nullable enable
+static Hl7.Cql.Fhir.FhirCqlContext.DataSourceForBundle(Hl7.Fhir.Model.Bundle! bundle, Hl7.Cql.Fhir.FhirCqlContextOptions? options = null) -> Hl7.Cql.Operators.IDataSource!
