@@ -48,11 +48,17 @@ namespace Hl7.Cql.Fhir
             DateTimeOffset? now,
             FhirCqlContextOptions options)
         {
+            // A CQL value without a timezone offset takes the offset of the evaluation request — the 'now'
+            // argument — when it has to be emitted as a time-bearing FHIR dateTime, which FHIR requires to
+            // carry one. Absent both an override and a 'now', the converter falls back to UTC, matching the
+            // UTC evaluation timestamp CqlOperators synthesizes for a null 'now'.
+            var converterTimezoneOffset = options.OverrideConverterTimezoneOffset ?? now?.Offset;
             var typeConverter =
                 options.OverrideTypeConverter
                 ?? FhirTypeConverter.Create(
                     options.OverrideModelInspector ?? ModelInfo.ModelInspector,
-                    options.OverrideFhirTypeConverterCacheSize ?? FhirTypeConverter.DefaultCacheSize);
+                    options.OverrideFhirTypeConverterCacheSize ?? FhirTypeConverter.DefaultCacheSize,
+                    converterTimezoneOffset);
             DateTimeIso8601? nowIso8601 = now is null ? null : new DateTimeIso8601(now.Value, DateTimePrecision.Millisecond);
             var metricService = options.MetricService;
             CqlComparers comparers = new CqlComparers(metricService);
