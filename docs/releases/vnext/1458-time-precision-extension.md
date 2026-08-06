@@ -32,8 +32,9 @@
   offset, UTC by default (`@2014-02-01T10:30` becomes `2014-02-01T10:30:00Z`; see the note below), a
   zero offset renders as `Z` on every path (previously the boundaries of a
   `Period` converted from an `Interval<Time>` rendered it as `+00:00`), and an explicit non-zero
-  offset is preserved as `±hh:mm`. Date-only `dateTime` values stay offset-free — FHIR forbids an
-  offset without a time.
+  offset on a `DateTime` value is preserved as `±hh:mm` (the boundaries of a `Period` converted
+  from an `Interval<Time>` always anchor in UTC instead — see the exceptions note below).
+  Date-only `dateTime` values stay offset-free — FHIR forbids an offset without a time.
 
   **Note:** Per the CQL specification (§2 Author's Guide) an absent timezone offset is the timezone
   offset of the evaluation request, and that is the offset an offset-less CQL value is emitted with:
@@ -49,14 +50,15 @@
   restored from the time-precision extension (#1458, closes #1506).
 
   **Two exceptions keep UTC.** The `dateTime` boundaries of a `Period` converted from an
-  `Interval<Time>` are anchored on the synthetic minimum date `0001-01-01`, and an offset-less
-  boundary always renders `Z` there: a positive request offset would put every time of day earlier
-  than it before the earliest instant FHIR and .NET can represent (`0001-01-01T00:30:00+02:00` is not
-  a readable value), and the specification's default is about `DateTime` values anyway — a CQL `Time`
-  has no timezone to default. A `DateTime` value at the very edge of the representable range keeps
-  UTC for the same reason, i.e. one on `0001-01-01` whose time of day is earlier than a positive
-  request offset, or one on `9999-12-31` that a negative request offset would push past midnight.
-  An explicit offset on such a value is still rendered as-is.
+  `Interval<Time>` are anchored on the synthetic minimum date `0001-01-01` and always render `Z`:
+  a non-UTC offset would put every time of day earlier than a positive offset before the earliest
+  instant FHIR and .NET can represent (`0001-01-01T00:30:00+02:00` is not a readable value), and the
+  specification's default is about `DateTime` values anyway — a CQL `Time` has no timezone to
+  default. That covers a vestigial offset carried by the `CqlTime` itself too: it is dropped on this
+  path, exactly as on the FHIR `time` path below. A `DateTime` value at the very edge of the
+  representable range keeps UTC for the same reason, i.e. one on `0001-01-01` whose time of day is
+  earlier than a positive request offset, or one on `9999-12-31` that a negative request offset
+  would push past midnight; an explicit offset on a `DateTime` value is still rendered as-is.
 
 - FHIR `time` output no longer carries a timezone offset: a vestigial offset on a `CqlTime`
   (unreachable from CQL source, since CQL's `Time` type has no timezone concept) is now dropped
