@@ -11,6 +11,7 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
+using M = Hl7.Fhir.Model;
 
 namespace CoreTests
 {
@@ -38,44 +39,23 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void ConvertCqlIntervalOfTime_Period_KeepsOffsetsThatUnderflowTheMinimumFhirDate()
+        public void ConvertCqlIntervalOfTime_Period_DropsVestigialOffset()
         {
-            // 0001-01-01T00:30:00+02:00 denotes a UTC instant before DateTime.MinValue, so it has no
-            // DateTimeOffset representation — but it is a valid FHIR dateTime and must convert.
+            // CqlTime has no timezone concept; a vestigial offset cannot arise from CQL source.
+            // A non-UTC offset passed through would render 0001-01-01T00:30:00+02:00 — an instant
+            // before year 1 that FhirDateTime.IsValidValue rejects and the SDK cannot read back.
+            // All boundaries therefore carry Z regardless of any offset on the CqlTime.
             var low = new CqlTime(0, 30, 0, null, 2, 0);
-            var high = new CqlTime(1, 0, 0, null, 2, 0);
+            var high = new CqlTime(1, 0, 0, null, -5, 30);
             var interval = new CqlInterval<CqlTime>(low, high, lowClosed: true, highClosed: true);
 
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T00:30:00+02:00", converted.Start);
-            Assert.AreEqual("0001-01-01T01:00:00+02:00", converted.End);
-        }
-
-        [TestMethod]
-        public void ConvertCqlIntervalOfTime_Period_RendersNegativeOffsets()
-        {
-            var low = new CqlTime(10, 30, 0, null, -5, 0);
-            var interval = new CqlInterval<CqlTime>(low, null, lowClosed: true, highClosed: true);
-
-            var converted = FhirTypeConverter.Convert<Period>(interval);
-
-            Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T10:30:00-05:00", converted.Start);
-            Assert.IsNull(converted.End);
-        }
-
-        [TestMethod]
-        public void ConvertCqlIntervalOfTime_Period_RendersNegativeOffsetsWithMinutes()
-        {
-            var low = new CqlTime(10, 30, 0, null, -5, 30);
-            var interval = new CqlInterval<CqlTime>(low, null, lowClosed: true, highClosed: true);
-
-            var converted = FhirTypeConverter.Convert<Period>(interval);
-
-            Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T10:30:00-05:30", converted.Start);
+            Assert.AreEqual("0001-01-01T00:30:00Z", converted.Start);
+            Assert.AreEqual("0001-01-01T01:00:00Z", converted.End);
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.Start), $"Start is not valid FHIR dateTime: {converted.Start}");
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.End), $"End is not valid FHIR dateTime: {converted.End}");
         }
 
         [TestMethod]
@@ -135,10 +115,11 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void ConvertCqlIntervalOfTime_Period_RendersAMinutesOnlyOffset()
+        public void ConvertCqlIntervalOfTime_Period_DropsMinutesOnlyVestigialOffset()
         {
             // CqlTime's constructor does not validate that an offset minute is paired with an offset
-            // hour, so a 30-minute offset is a real offset that must not be flattened to UTC.
+            // hour; a minutes-only offset is still a vestigial offset that must be dropped,
+            // exactly as a full hh:mm offset is.
             var interval = new CqlInterval<CqlTime>(
                 new CqlTime(10, 30, null, null, null, 30),
                 new CqlTime(12, 30, 15, null, null, -30),
@@ -147,8 +128,10 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T10:30:00+00:30", converted.Start);
-            Assert.AreEqual("0001-01-01T12:30:15-00:30", converted.End);
+            Assert.AreEqual("0001-01-01T10:30:00Z", converted.Start);
+            Assert.AreEqual("0001-01-01T12:30:15Z", converted.End);
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.Start), $"Start is not valid FHIR dateTime: {converted.Start}");
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.End), $"End is not valid FHIR dateTime: {converted.End}");
         }
 
         [TestMethod]

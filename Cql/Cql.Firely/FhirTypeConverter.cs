@@ -701,14 +701,17 @@ namespace Hl7.Cql.Fhir
         // The value is composed from the time's ISO 8601 string rather than built from a
         // DateTimeOffset, so that the string keeps the time's original precision.
         // Hour- and minute-precision times are zero-padded and marked with the time-precision
-        // extension, like in CqlTimeToFhirTime. A vestigial explicit offset on the CqlTime still
-        // renders as-is.
+        // extension, like in CqlTimeToFhirTime. Any vestigial explicit offset on the CqlTime is
+        // dropped — CQL's Time type has no timezone concept, and passing a non-UTC offset through
+        // can produce an instant before year 1 (e.g. 0001-01-01T00:30:00+02:00) which
+        // FhirDateTime.IsValidValue rejects; the anchor always carries Z.
         private static M.FhirDateTime CqlTimeToFhirDateTime(CqlTime time)
         {
             var t = time.Value;
+            var noOffset = new TimeIso8601(t.Hour, t.Minute, t.Second, t.Millisecond, null, null);
             var timePart = t.Precision >= DateTimePrecision.Second
-                ? t.ToString() + FormatOffsetOmittedFromIso8601(t.OffsetHour, t.OffsetMinute, Utc)
-                : FormatPaddedTime(t.Hour, t.Minute, t.OffsetHour, t.OffsetMinute, Utc);
+                ? noOffset.ToString() + Utc
+                : FormatPaddedTime(t.Hour, t.Minute, null, null, Utc);
             var fhirDateTime = new M.FhirDateTime("0001-01-01T" + timePart);
             if (t.Precision < DateTimePrecision.Second)
                 AddTimePrecisionExtension(fhirDateTime, t.Precision);

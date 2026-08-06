@@ -1132,8 +1132,10 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void ConvertCqlTimeInterval_Period_ExplicitBoundaryOffsets_AreNeverReplacedByTheDefault()
+        public void ConvertCqlTimeInterval_Period_DropsVestigialBoundaryOffsets()
         {
+            // CqlTime has no timezone concept; vestigial offsets are always dropped regardless of the
+            // default — all anchored dateTime boundaries carry Z.
             var interval = new CqlInterval<CqlTime>(
                 new CqlTime(10, 30, 15, null, 5, 0),
                 new CqlTime(12, 30, 15, null, 0, 0),
@@ -1143,10 +1145,10 @@ namespace CoreTests
             Assert.IsNotNull(converted);
             AssertIsValidFhirDateTime(converted.Start);
             AssertIsValidFhirDateTime(converted.End);
-            Assert.AreEqual("0001-01-01T10:30:15+05:00", converted.Start);
+            Assert.AreEqual("0001-01-01T10:30:15Z", converted.Start);
             Assert.AreEqual("0001-01-01T12:30:15Z", converted.End);
 
-            // A minutes-only offset is a real offset against a zero hour component, so it too is kept.
+            // A minutes-only offset is also a vestigial offset and is dropped.
             var minutesOnly = new CqlInterval<CqlTime>(
                 new CqlTime(new TimeIso8601(10, 30, 15, null, null, 30)),
                 new CqlTime(new TimeIso8601(12, 30, null, null, null, 30)),
@@ -1156,8 +1158,8 @@ namespace CoreTests
             Assert.IsNotNull(convertedMinutesOnly);
             AssertIsValidFhirDateTime(convertedMinutesOnly.Start);
             AssertIsValidFhirDateTime(convertedMinutesOnly.End);
-            Assert.AreEqual("0001-01-01T10:30:15+00:30", convertedMinutesOnly.Start);
-            Assert.AreEqual("0001-01-01T12:30:00+00:30", convertedMinutesOnly.End);
+            Assert.AreEqual("0001-01-01T10:30:15Z", convertedMinutesOnly.Start);
+            Assert.AreEqual("0001-01-01T12:30:00Z", convertedMinutesOnly.End);
             Assert.AreEqual("min", GetTimePrecisionCode(convertedMinutesOnly.EndElement));
         }
 
