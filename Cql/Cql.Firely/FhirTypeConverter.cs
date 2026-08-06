@@ -708,9 +708,10 @@ namespace Hl7.Cql.Fhir
         private static M.FhirDateTime CqlTimeToFhirDateTime(CqlTime time)
         {
             var t = time.Value;
-            var noOffset = new TimeIso8601(t.Hour, t.Minute, t.Second, t.Millisecond, null, null);
+            // The offset-free rebuild is what strips a vestigial offset from the second-or-finer
+            // string; the padded path composes its own text and must not pay for it.
             var timePart = t.Precision >= DateTimePrecision.Second
-                ? noOffset.ToString() + Utc
+                ? new TimeIso8601(t.Hour, t.Minute, t.Second, t.Millisecond, null, null).ToString() + Utc
                 : FormatPaddedTime(t.Hour, t.Minute, null, null, Utc);
             var fhirDateTime = new M.FhirDateTime("0001-01-01T" + timePart);
             if (t.Precision < DateTimePrecision.Second)
