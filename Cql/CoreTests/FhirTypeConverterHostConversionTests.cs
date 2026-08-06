@@ -123,14 +123,14 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void ConvertCqlTime_Time_PassesAVestigialOffsetThrough()
+        public void ConvertCqlTime_Time_DropsVestigialOffset()
         {
             // A CqlTime carrying an offset cannot arise from CQL source — CQL's Time type has no
-            // timezone — and FHIR time forbids one, so these assertions pin the pre-existing
-            // pass-through of an artificially constructed offset rather than endorse its output.
-            Assert.AreEqual("10:30:00Z", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, null, null, 0, 0))!.Value);
-            Assert.AreEqual("10:30:00+02:00", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, null, null, 2, 0))!.Value);
-            Assert.AreEqual("10:30:15+02:00", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, 15, null, 2, 0))!.Value);
+            // timezone — and FHIR time forbids a timezone offset (R4: "A time zone SHALL NOT be
+            // present"), so an artificially constructed offset is unconditionally dropped.
+            Assert.AreEqual("10:30:00", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, null, null, 0, 0))!.Value);
+            Assert.AreEqual("10:30:00", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, null, null, 2, 0))!.Value);
+            Assert.AreEqual("10:30:15", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, 15, null, 2, 0))!.Value);
         }
 
         [TestMethod]

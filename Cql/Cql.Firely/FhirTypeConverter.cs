@@ -404,21 +404,32 @@ namespace Hl7.Cql.Fhir
         // are present, but CQL permits hour- and minute-precision values. Values at second precision or
         // finer round-trip through their ISO 8601 string unchanged; coarser values get their missing
         // components zero-padded, with the original precision recorded in the time-precision extension.
-        // An absent offset stays absent here — the UTC default applies to dateTime only. A CqlTime that
-        // does carry an offset is vestigial, unreachable from CQL source because CQL's Time type has no
-        // timezone; such an offset passes through verbatim even though FHIR time forbids one. That
-        // pass-through is out of scope for the dateTime offset rule (#1506).
+        // FHIR time forbids a timezone offset (R4: "A time zone SHALL NOT be present"), so any offset
+        // on a CqlTime — which is vestigial and unreachable from CQL source because CQL's Time type has
+        // no timezone concept — is unconditionally dropped.
         private static M.Time CqlTimeToFhirTime(CqlTime time)
         {
             var t = time.Value;
             if (t.Precision >= DateTimePrecision.Second)
-                return new M.Time(time.ToString());
+            {
+                // Build a TimeIso8601 without offset to prevent any vestigial offset from leaking into
+                // the FHIR value.
+                var noOffset = new TimeIso8601(t.Hour, t.Minute, t.Second, t.Millisecond, null, null);
+                return new M.Time(noOffset.ToString());
+            }
 
-            var fhirTime = new M.Time(FormatPaddedTime(t.Hour, t.Minute, t.OffsetHour, t.OffsetMinute, assumeUtcWhenNoOffset: false));
+            var fhirTime = new M.Time(FormatPaddedTime(t.Hour, t.Minute, null, null, assumeUtcWhenNoOffset: false));
             AddTimePrecisionExtension(fhirTime, t.Precision);
             return fhirTime;
         }
 
+        // FHIR R4 requires a timezone offset on every dateTime that carries a time component ("if hours
+        // and minutes are specified, a time zone SHALL be populated"). A CQL value without an explicit
+        // offset is emitted with UTC as a stand-in. Note: the CQL specification (§2 Author's Guide)
+        // states that an absent offset defaults to the evaluation-request's timezone, not UTC; the SDK
+        // uses UTC because the evaluation-request offset is not yet threaded into the type converter.
+        // Values returned via the FHIR→CQL direction therefore acquire a UTC offset in place of "no
+        // offset"; their precision is still correctly restored from the time-precision extension.
         private static M.FhirDateTime CqlDateTimeToFhirDateTime(CqlDateTime dateTime)
         {
             var dt = dateTime.Value;
@@ -463,9 +474,7 @@ namespace Hl7.Cql.Fhir
             (offsetHour, offsetMinute) switch
             {
                 (null, null) => assumeUtcWhenNoOffset ? "Z" : "",
-                (null or 0, null or 0) => "Z",
-                var (oh, om) => FormattableString.Invariant(
-                    $"{(oh < 0 || om < 0 ? '-' : '+')}{Math.Abs(oh ?? 0):D2}:{Math.Abs(om ?? 0):D2}")
+                var (oh, om) => DateTimeIso8601.FormatKnownOffset(oh ?? 0, om ?? 0)
             };
 
         private static void AddTimePrecisionExtension(M.PrimitiveType element, DateTimePrecision precision) =>

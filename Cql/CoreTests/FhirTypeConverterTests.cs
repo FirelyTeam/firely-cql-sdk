@@ -597,6 +597,21 @@ namespace CoreTests
         private static string? GetTimePrecisionCode(Element element) =>
             (element.GetExtension(TimePrecisionExtensionUrl)?.Value as Code)?.Value;
 
+        // These helpers use the Firely primitive validators as a real oracle: they enforce the same
+        // rules as FHIR validators, and any emission test that would otherwise pin an invalid value
+        // will fail here instead.
+        private static void AssertIsValidFhirTime(string? value)
+        {
+            Assert.IsNotNull(value, "Expected a non-null FHIR time value");
+            Assert.IsTrue(Time.IsValidValue(value), $"'{value}' is not a valid FHIR time value");
+        }
+
+        private static void AssertIsValidFhirDateTime(string? value)
+        {
+            Assert.IsNotNull(value, "Expected a non-null FHIR dateTime value");
+            Assert.IsTrue(FhirDateTime.IsValidValue(value), $"'{value}' is not a valid FHIR dateTime value");
+        }
+
         [TestMethod]
         public void ConvertCqlTime_HourPrecision_PadsAndAddsTimePrecisionExtension()
         {
@@ -604,6 +619,7 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Time>(time);
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirTime(converted.Value);
             Assert.AreEqual("10:00:00", converted.Value);
             Assert.AreEqual("h", GetTimePrecisionCode(converted));
         }
@@ -615,6 +631,7 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Time>(time);
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirTime(converted.Value);
             Assert.AreEqual("10:30:00", converted.Value);
             Assert.AreEqual("min", GetTimePrecisionCode(converted));
         }
@@ -626,6 +643,7 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Time>(time);
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirTime(converted.Value);
             Assert.AreEqual("10:30:15", converted.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
@@ -637,6 +655,7 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirDateTime(converted.Value);
             Assert.AreEqual("2014-02-01T10:00:00Z", converted.Value);
             Assert.AreEqual("h", GetTimePrecisionCode(converted));
         }
@@ -648,6 +667,7 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirDateTime(converted.Value);
             Assert.AreEqual("2014-02-01T10:30:00Z", converted.Value);
             Assert.AreEqual("min", GetTimePrecisionCode(converted));
         }
@@ -659,6 +679,7 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirDateTime(converted.Value);
             Assert.AreEqual("2014-02-01T10:30:15Z", converted.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
@@ -670,6 +691,7 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirDateTime(converted.Value);
             Assert.AreEqual("2014-02-01T10:30:15.123Z", converted.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
@@ -677,25 +699,31 @@ namespace CoreTests
         [TestMethod]
         public void ConvertCqlDateTime_ZeroOffset_RendersZuluOnEveryPath()
         {
-            Assert.AreEqual("2014-02-01T10:00:00Z",
-                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, null, null, null, 0, 0))!.Value);
-            Assert.AreEqual("2014-02-01T10:30:00Z",
-                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, null, null, 0, 0))!.Value);
-            Assert.AreEqual("2014-02-01T10:30:15Z",
-                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, 15, null, 0, 0))!.Value);
-            Assert.AreEqual("2014-02-01T10:30:15.123Z",
-                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, 15, 123, 0, 0))!.Value);
+            string?[] values = [
+                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, null, null, null, 0, 0))!.Value,
+                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, null, null, 0, 0))!.Value,
+                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, 15, null, 0, 0))!.Value,
+                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, 15, 123, 0, 0))!.Value,
+            ];
+            foreach (var v in values) AssertIsValidFhirDateTime(v);
+            Assert.AreEqual("2014-02-01T10:00:00Z", values[0]);
+            Assert.AreEqual("2014-02-01T10:30:00Z", values[1]);
+            Assert.AreEqual("2014-02-01T10:30:15Z", values[2]);
+            Assert.AreEqual("2014-02-01T10:30:15.123Z", values[3]);
         }
 
         [TestMethod]
         public void ConvertCqlDateTime_ExplicitOffset_PreservedOnEveryPath()
         {
-            Assert.AreEqual("2014-02-01T10:00:00-05:00",
-                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, null, null, null, -5, 0))!.Value);
-            Assert.AreEqual("2014-02-01T10:30:15+02:00",
-                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, 15, null, 2, 0))!.Value);
-            Assert.AreEqual("2014-02-01T10:30:15.123-05:30",
-                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, 15, 123, -5, 30))!.Value);
+            string?[] values = [
+                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, null, null, null, -5, 0))!.Value,
+                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, 15, null, 2, 0))!.Value,
+                FhirTypeConverter.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, 15, 123, -5, 30))!.Value,
+            ];
+            foreach (var v in values) AssertIsValidFhirDateTime(v);
+            Assert.AreEqual("2014-02-01T10:00:00-05:00", values[0]);
+            Assert.AreEqual("2014-02-01T10:30:15+02:00", values[1]);
+            Assert.AreEqual("2014-02-01T10:30:15.123-05:30", values[2]);
         }
 
         [TestMethod]
@@ -704,15 +732,18 @@ namespace CoreTests
             // CqlDateTime's component constructor is strict and rejects an offset minute without an
             // offset hour, but its DateTimeIso8601 constructor accepts a non-strict value that pairs
             // them that way; such a 30-minute offset is real and must not be flattened to UTC.
-            Assert.AreEqual("2014-02-01T10:30:00+00:30",
+            string?[] values = [
                 FhirTypeConverter.Convert<FhirDateTime>(
-                    new CqlDateTime(new DateTimeIso8601(2014, 2, 1, 10, 30, null, null, null, 30)))!.Value);
-            Assert.AreEqual("2014-02-01T10:30:15+00:30",
+                    new CqlDateTime(new DateTimeIso8601(2014, 2, 1, 10, 30, null, null, null, 30)))!.Value,
                 FhirTypeConverter.Convert<FhirDateTime>(
-                    new CqlDateTime(new DateTimeIso8601(2014, 2, 1, 10, 30, 15, null, null, 30)))!.Value);
-            Assert.AreEqual("2014-02-01T10:30:15.123-00:30",
+                    new CqlDateTime(new DateTimeIso8601(2014, 2, 1, 10, 30, 15, null, null, 30)))!.Value,
                 FhirTypeConverter.Convert<FhirDateTime>(
-                    new CqlDateTime(new DateTimeIso8601(2014, 2, 1, 10, 30, 15, 123, null, -30)))!.Value);
+                    new CqlDateTime(new DateTimeIso8601(2014, 2, 1, 10, 30, 15, 123, null, -30)))!.Value,
+            ];
+            foreach (var v in values) AssertIsValidFhirDateTime(v);
+            Assert.AreEqual("2014-02-01T10:30:00+00:30", values[0]);
+            Assert.AreEqual("2014-02-01T10:30:15+00:30", values[1]);
+            Assert.AreEqual("2014-02-01T10:30:15.123-00:30", values[2]);
         }
 
         [TestMethod]
@@ -722,6 +753,7 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirDateTime(converted.Value);
             Assert.AreEqual("2014-02-01T10:30:00+01:30", converted.Value);
             Assert.AreEqual("min", GetTimePrecisionCode(converted));
         }
@@ -733,6 +765,7 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirDateTime(converted.Value);
             Assert.AreEqual("2014-02-01T10:00:00Z", converted.Value);
             Assert.AreEqual("h", GetTimePrecisionCode(converted));
         }
@@ -744,6 +777,21 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirDateTime(converted.Value);
+            Assert.AreEqual("2014-02-01", converted.Value);
+            Assert.IsNull(GetTimePrecisionCode(converted));
+        }
+
+        [TestMethod]
+        public void ConvertCqlDateTime_DayPrecisionWithOffset_StaysOffsetFree()
+        {
+            // A day-precision CqlDateTime carrying an offset is unusual but constructible; FHIR forbids
+            // an offset without a time component, so the output must stay offset-free.
+            var dateTime = new CqlDateTime(new DateTimeIso8601(2014, 2, 1, null, null, null, null, 2, 0));
+            var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
+
+            Assert.IsNotNull(converted);
+            AssertIsValidFhirDateTime(converted.Value);
             Assert.AreEqual("2014-02-01", converted.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
@@ -755,6 +803,7 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirDateTime(converted.Value);
             Assert.AreEqual("2014", converted.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
@@ -766,6 +815,7 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(new CqlDate(2014, 2, 1));
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirDateTime(converted.Value);
             Assert.AreEqual("2014-02-01", converted.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
@@ -779,6 +829,7 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
+            AssertIsValidFhirDateTime(converted.Value);
             Assert.AreEqual("2014-02-01T10:30:00Z", converted.Value);
 
             var roundTripped = FhirTypeConverter.Convert<CqlDateTime>(converted);
