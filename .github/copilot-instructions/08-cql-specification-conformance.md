@@ -9,7 +9,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 - [8.1. Authoritative Specification Source](#81-authoritative-specification-source)
 - [8.2. When to Check Specification](#82-when-to-check-specification)
 - [8.3. Specification Location](#83-specification-location)
-- [8.4. Validating Emitted FHIR](#84-validating-emitted-fhir)
+- [8.4. Validating Emitted Output](#84-validating-emitted-output)
 
 ## 8.1. Authoritative Specification Source
 
@@ -55,14 +55,16 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 8.3.8 **Conformance reports**: See `/spec/report/README.md` — findings are tracked as GitHub issues under epic [#1193](https://github.com/FirelyTeam/firely-cql-sdk/issues/1193), not as markdown reports in this folder
 
-## 8.4. Validating Emitted FHIR
+## 8.4. Validating Emitted Output
 
-8.4.1 **CRITICAL**: A test that pins the text of a FHIR primitive the SDK emits (`FhirDateTime`, `Time`, `Date`, `Instant`) must also assert `Hl7.Fhir.Model.<Type>.IsValidValue(value)`
+8.4.1 **CRITICAL**: Where the format of something the SDK emits has an independent checker, a test that pins its exact text must assert against that checker as well as against the string
 
-8.4.2 An exact-string assertion pins whatever the converter currently produces, including lexically invalid FHIR, so on its own it cannot tell a correct value from a malformed one
+8.4.2 A string assertion answers "did the output change?", never "is the output correct?"; when the expectation written first is itself wrong, the assertion turns a defect into a defended invariant
 
-8.4.3 Two invalid outputs reached `develop` behind passing string assertions: `Time("10:30:00Z")` (FHIR `time` forbids a timezone offset) and a time-bearing `dateTime` with no offset (FHIR requires one once hours and minutes are present) — see [#1508](https://github.com/FirelyTeam/firely-cql-sdk/issues/1508)
+8.4.3 The string pins the shape and the checker pins the validity — a validator, a parser, or a round-trip back through the reader all serve; use whichever the format already has
 
-8.4.4 `IsValidValue` is a public static on the already-referenced `Hl7.Fhir.Base`; it costs one line per emission point
+8.4.4 **For FHIR primitives** the checker is `Hl7.Fhir.Model.<Type>.IsValidValue(value)` (`FhirDateTime`, `Time`, `Date`, `Instant`, …), a public static on the already-referenced `Hl7.Fhir.Base`, costing one line per emission point
 
-8.4.5 **DO NOT** write a test asserting that invalid output is correct, or a comment claiming an invariant the code does not hold — "pre-existing" and "out of scope" justify not fixing invalid output in the change at hand, never pinning it; quarantine it with a comment pointing at the tracking issue instead
+8.4.5 Two invalid values reached `develop` behind passing string assertions: `Time("10:30:00Z")`, where FHIR `time` forbids a timezone offset, and a time-bearing `dateTime` with no offset, which FHIR requires once hours and minutes are present — see [#1508](https://github.com/FirelyTeam/firely-cql-sdk/issues/1508)
+
+8.4.6 **DO NOT** write a test asserting that invalid output is correct, or a comment claiming an invariant the code does not hold — "pre-existing" and "out of scope" justify not fixing invalid output in the change at hand, never pinning it; quarantine it with a comment pointing at the tracking issue instead
