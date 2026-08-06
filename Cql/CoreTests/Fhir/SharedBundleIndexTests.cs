@@ -185,6 +185,32 @@ namespace CoreTests.Fhir
                  .Select(o => o.Id).Should().Equal("obs-x");
         }
 
+        [TestMethod]
+        public void WithValueSets_CloneInheritsUsesDefaultComparersFlag()
+        {
+            // White-box: _usesDefaultComparers must be copied to the clone.  If it is not, the fast
+            // BuildSetFilter path is silently skipped and every retrieve-by-codes call regresses to
+            // the O(n) listFilter, undoing the #1451 optimisation.
+            var usesDefaultComparersField = typeof(BundleDataSource)
+                .GetField("_usesDefaultComparers", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!;
+
+            // Default-comparer source: field must be true on both the original and the clone.
+            var defaultSource = BuildDataSource();
+            var defaultClone = defaultSource.WithValueSets(new StubValueSets());
+            usesDefaultComparersField.GetValue(defaultSource).Should().Be(true);
+            usesDefaultComparersField.GetValue(defaultClone).Should().Be(true,
+                "clone of a default-comparer source must also use the fast set-filter path");
+
+            // Non-default-comparer source: field must be false on both the original and the clone.
+            var caseSensitiveComparer = new StringCqlComparer(StringComparer.Ordinal);
+            var customSource = new BundleDataSource(BuildBundle(), new HashValueSetDictionary(),
+                codeComparer: caseSensitiveComparer, systemComparer: caseSensitiveComparer);
+            var customClone = customSource.WithValueSets(new StubValueSets());
+            usesDefaultComparersField.GetValue(customSource).Should().Be(false);
+            usesDefaultComparersField.GetValue(customClone).Should().Be(false,
+                "clone of a non-default-comparer source must NOT switch to the fast set-filter path");
+        }
+
         // ─── retrieve by code property (_codedByProperty) ────────────────────────────
 
         [TestMethod]
@@ -312,6 +338,34 @@ namespace CoreTests.Fhir
 
             // The bundle part has been rebound; value-set retrieve must work.
             ctx.Operators.Retrieve<Observation>(ByValueSet()).Select(o => o.Id).Should().Equal("obs-x");
+        }
+
+        [TestMethod]
+        public void WithDataSource_NestedCompositeContainingBundleDataSource_RebindsValueSetsRecursively()
+        {
+            // Bundle source nested two levels deep: composite(composite(bundleSource)).
+            var bundleSource = FhirCqlContext.DataSourceForBundle(BuildBundle());
+            var inner = new CompositeDataSource(bundleSource);
+            var outer = new CompositeDataSource(inner);
+
+            var ctx = FhirCqlContext.WithDataSource(outer, valueSets: new StubValueSets("x"));
+
+            // Rebinding must recurse through the nested composite to reach the bundle source.
+            ctx.Operators.Retrieve<Observation>(ByValueSet()).Select(o => o.Id).Should().Equal("obs-x");
+        }
+
+        [TestMethod]
+        public void WithDataSource_CompositeWithNoBundleSource_ReturnsSameCompositeInstance()
+        {
+            // A composite that contains no BundleDataSource should be returned unchanged.
+            var nonBundleSource = new CompositeDataSource(); // empty — no BundleDataSource
+            var outer = new CompositeDataSource(nonBundleSource);
+
+            var ctx = FhirCqlContext.WithDataSource(outer, valueSets: new StubValueSets("x"));
+
+            // The outer composite must be the same instance (no new CompositeDataSource allocated).
+            var dataSource = (CompositeDataSource)((CqlOperators)ctx.Operators).DataSource!;
+            dataSource.Should().BeSameAs(outer);
         }
 
         // ─── concurrency ─────────────────────────────────────────────────────────────

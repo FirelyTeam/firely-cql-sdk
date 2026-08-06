@@ -124,7 +124,8 @@ namespace Hl7.Cql.Fhir
         /// <para><b>Memory contract:</b> the returned source retains both the index and the coding caches derived
         /// from it for its entire lifetime. The caches grow with the number of distinct retrieve shapes executed
         /// against the source; they are never trimmed. A host that caches sources should scope the cache to the
-        /// subject or request (not a process-lifetime dictionary). See GitHub issue #1460 for background on
+        /// subject or request (not a process-lifetime dictionary). See
+        /// <see href="https://github.com/FirelyTeam/firely-cql-sdk/issues/1460">GitHub issue #1460</see> for background on
         /// process-lifetime retention in this area.</para>
         /// </remarks>
         /// <param name="bundle">The bundle to index. It is assumed not to change for as long as the returned source is used.</param>
@@ -146,7 +147,9 @@ namespace Hl7.Cql.Fhir
         /// <see cref="DataSourceForBundle"/>) and <paramref name="valueSets"/> is not <see langword="null"/>, the
         /// source is rebound: the context gets a lightweight view over it that shares its index but resolves
         /// value sets through <paramref name="valueSets"/>. When <paramref name="source"/> is a
-        /// <see cref="CompositeDataSource"/>, each bundle-backed component within it is rebound the same way.
+        /// <see cref="CompositeDataSource"/>, each bundle-backed component within it is rebound the same way,
+        /// recursively through any nested composites; the composite itself is reused unchanged if none of its
+        /// components required rebinding.
         /// Without <paramref name="valueSets"/>, every source is used as-is (including any value sets it was
         /// constructed with). When <paramref name="options"/>.<see cref="FhirCqlContextOptions.OverrideRetrieveProfileFilter"/>
         /// is non-<see langword="null"/> and a bundle-backed source is rebound, the supplied filter takes precedence
@@ -174,10 +177,18 @@ namespace Hl7.Cql.Fhir
 
             if (source is CompositeDataSource composite)
             {
-                var rebound = composite.DataSources
-                    .Select(s => s is BundleDataSource bs ? bs.WithValueSets(valueSets, profileFilter) : s)
-                    .ToArray();
-                return new CompositeDataSource(rebound);
+                var sources = composite.DataSources;
+                IDataSource[]? rebound = null;
+                for (var i = 0; i < sources.Length; i++)
+                {
+                    var child = RebindValueSets(sources[i], valueSets, profileFilter);
+                    if (child is not null && !ReferenceEquals(child, sources[i]))
+                    {
+                        rebound ??= (IDataSource[])sources.Clone();
+                        rebound[i] = child;
+                    }
+                }
+                return rebound is null ? composite : new CompositeDataSource(rebound);
             }
 
             return source;
