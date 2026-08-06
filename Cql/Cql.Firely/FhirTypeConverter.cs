@@ -427,9 +427,10 @@ namespace Hl7.Cql.Fhir
         // and minutes are specified, a time zone SHALL be populated"). A CQL value without an explicit
         // offset is emitted with UTC as a stand-in. Note: the CQL specification (§2 Author's Guide)
         // states that an absent offset defaults to the evaluation-request's timezone, not UTC; the SDK
-        // uses UTC because the evaluation-request offset is not yet threaded into the type converter.
-        // Values returned via the FHIR→CQL direction therefore acquire a UTC offset in place of "no
-        // offset"; their precision is still correctly restored from the time-precision extension.
+        // uses UTC because the evaluation-request offset is not yet threaded into the type converter
+        // (tracked in #1507). Values returned via the FHIR→CQL direction therefore acquire a UTC offset
+        // in place of "no offset"; their precision is still correctly restored from the time-precision
+        // extension.
         private static M.FhirDateTime CqlDateTimeToFhirDateTime(CqlDateTime dateTime)
         {
             var dt = dateTime.Value;
