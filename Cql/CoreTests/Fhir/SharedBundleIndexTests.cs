@@ -192,7 +192,7 @@ namespace CoreTests.Fhir
             // BuildSetFilter path is silently skipped and every retrieve-by-codes call regresses to
             // the O(n) listFilter, undoing the #1451 optimisation.
             var usesDefaultComparersField = typeof(BundleDataSource)
-                .GetField("_usesDefaultComparers", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!;
+                .GetField("_usesDefaultComparers", BindingFlags.NonPublic | BindingFlags.Instance)!;
 
             // Default-comparer source: field must be true on both the original and the clone.
             var defaultSource = BuildDataSource();
@@ -382,7 +382,7 @@ namespace CoreTests.Fhir
 
             // All 8 threads rendezvous at the barrier before hitting the first retrieve, so they race
             // for the same cache keys simultaneously and exercise the concurrent GetOrAdd paths.
-            using var barrier = new System.Threading.Barrier(TaskCount);
+            using var barrier = new Barrier(TaskCount);
 
             var tasks = Enumerable.Range(0, TaskCount)
                 .Select(index => Task.Run(() =>
