@@ -324,13 +324,16 @@ namespace CoreTests.Fhir
             var knowsY = source.WithValueSets(new StubValueSets("y"));
             var codePropertyParams = ByCodeProperty(new CqlCode("x", NuSystem));
 
-            // Gate all 8 tasks so they start retrieves simultaneously, exercising concurrent cache access.
-            using var gate = new System.Threading.ManualResetEventSlim(false);
+            const int TaskCount = 8;
 
-            var tasks = Enumerable.Range(0, 8)
+            // All 8 threads rendezvous at the barrier before hitting the first retrieve, so they race
+            // for the same cache keys simultaneously and exercise the concurrent GetOrAdd paths.
+            using var barrier = new System.Threading.Barrier(TaskCount);
+
+            var tasks = Enumerable.Range(0, TaskCount)
                 .Select(index => Task.Run(() =>
                 {
-                    gate.Wait();
+                    barrier.SignalAndWait();
 
                     var (dataSource, expectedVs) = index % 2 == 0 ? (knowsX, "obs-x") : (knowsY, "obs-y");
 
@@ -343,7 +346,6 @@ namespace CoreTests.Fhir
                 }))
                 .ToArray();
 
-            gate.Set();
             Task.WaitAll(tasks);
         }
     }

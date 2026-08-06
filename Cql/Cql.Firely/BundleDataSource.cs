@@ -87,7 +87,10 @@ namespace Hl7.Cql.Fhir
         {
             if (valueSets is null) throw new ArgumentNullException(nameof(valueSets));
 
-            return ReferenceEquals(valueSets, ValueSets) && profileFilter is null ? this : new BundleDataSource(this, valueSets, profileFilter);
+            return ReferenceEquals(valueSets, ValueSets) &&
+                   (profileFilter is null || ReferenceEquals(profileFilter, _profileFilter))
+                ? this
+                : new BundleDataSource(this, valueSets, profileFilter);
         }
 
         private static readonly Lazy<ICqlComparer<string>> DefaultStringComparer = new(() =>
