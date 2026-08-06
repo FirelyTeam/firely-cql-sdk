@@ -61,7 +61,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 8.4.2 An exact-string assertion pins whatever the converter currently produces, including lexically invalid FHIR, so on its own it cannot tell a correct value from a malformed one
 
-8.4.3 Two invalid outputs reached `develop` behind passing string assertions: `Time("10:30:00Z")` (FHIR `time` forbids a timezone offset) and a time-bearing `dateTime` with no offset (FHIR requires one once hours and minutes are present) — see [#1506](https://github.com/FirelyTeam/firely-cql-sdk/issues/1506)
+8.4.3 Two invalid outputs reached `develop` behind passing string assertions: `Time("10:30:00Z")` (FHIR `time` forbids a timezone offset) and a time-bearing `dateTime` with no offset (FHIR requires one once hours and minutes are present) — see [#1508](https://github.com/FirelyTeam/firely-cql-sdk/issues/1508)
 
 8.4.4 `IsValidValue` is a public static on the already-referenced `Hl7.Fhir.Base`; it costs one line per emission point
 
