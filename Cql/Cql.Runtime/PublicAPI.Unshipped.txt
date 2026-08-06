@@ -3,14 +3,3 @@ Hl7.Cql.Operators.ICqlOperators.SelectDistinct<T, TR>(System.Collections.Generic
 Hl7.Cql.Operators.ICqlOperators.SelectWhere<T, TR>(System.Collections.Generic.IEnumerable<T?>? source, System.Func<T?, TR>! select, System.Func<TR, bool?>! lambda) -> System.Collections.Generic.IEnumerable<TR>?
 Hl7.Cql.Operators.ICqlOperators.WhereAny<T>(System.Collections.Generic.IEnumerable<T>? source, System.Func<T, bool?>! lambda) -> bool?
 Hl7.Cql.Operators.ICqlOperators.WhereSelect<T, TR>(System.Collections.Generic.IEnumerable<T>? source, System.Func<T, bool?>! lambda, System.Func<T?, TR>! select) -> System.Collections.Generic.IEnumerable<TR>?
-Hl7.Cql.Runtime.CqlContext.UseNewCache(int initialCapacity, int concurrencyLevel) -> void
-Hl7.Cql.Runtime.EvaluationCacheProfile
-Hl7.Cql.Runtime.EvaluationCacheProfile.ConcurrencyLevel.get -> int
-Hl7.Cql.Runtime.EvaluationCacheProfile.ConcurrencyLevel.init -> void
-Hl7.Cql.Runtime.EvaluationCacheProfile.EvaluationCacheProfile() -> void
-Hl7.Cql.Runtime.EvaluationCacheProfile.InitialCapacity.get -> int
-Hl7.Cql.Runtime.EvaluationCacheProfile.InitialCapacity.init -> void
-const Hl7.Cql.Runtime.CqlContext.MaximumCacheConcurrencyLevel = 1024 -> int
-const Hl7.Cql.Runtime.CqlContext.SequentialCacheConcurrencyLevel = 1 -> int
-static Hl7.Cql.Runtime.EvaluationCacheProfile.Concurrent.get -> Hl7.Cql.Runtime.EvaluationCacheProfile!
-static Hl7.Cql.Runtime.EvaluationCacheProfile.Sequential.get -> Hl7.Cql.Runtime.EvaluationCacheProfile!

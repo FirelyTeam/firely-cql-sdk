@@ -224,21 +224,27 @@ internal static partial class FhirMeasureExtensions
         }
     }
 
-    private static FhirMeasure.StratifierComponent GetOrCreateStratifier(FhirMeasure.GroupComponent group)
+    private static void AddStratifierComponent(FhirMeasure.GroupComponent group, FhirMeasure.ComponentComponent component)
     {
         var id = $"{group.ElementId}-Stratifier";
-        var existing = group.Stratifier.FirstOrDefault(s => s.ElementId == id);
-        if (existing != null)
-            return existing;
+        var container = group.Stratifier.FirstOrDefault(s => s.ElementId == id);
+        if (container?.Component.Any(c => c.ElementId == component.ElementId) == true)
+            throw new InvalidOperationException($"Stratifier component {component.ElementId} is defined twice for this measure.");
 
-        var container = new FhirMeasure.StratifierComponent
+        if (container == null)
         {
-            ElementId = id,
-            Code = new CodeableConcept { Text = id },
-            Description = id,
-        };
-        group.Stratifier.Add(container);
-        return container;
+            // Only the element id is set: the FHIR invariant on Measure.group.stratifier
+            // ((code | description | criteria).exists() xor component.exists()) forbids
+            // code/description/criteria on a stratifier that holds components — and a
+            // container with no components satisfies neither side of the xor, so the
+            // container is only ever created together with its first component.
+            container = new FhirMeasure.StratifierComponent
+            {
+                ElementId = id,
+            };
+            group.Stratifier.Add(container);
+        }
+        container.Component.Add(component);
     }
 
     private static void AnnotateMeasureStratifiers(FhirMeasure fhirMeasure, ElmLibrary library, string? measureGroupCodeSystem)
@@ -275,13 +281,9 @@ internal static partial class FhirMeasureExtensions
             foreach (var tuple in tuples)
             {
                 var group = GetOrCreateGroup(fhirMeasure, tuple.Group, measureGroupCodeSystem);
-                var container = GetOrCreateStratifier(group);
 
                 var componentId = $"{tuple.Group}-StratifierComponent-{tuple.Stratifier}";
-                if (container.Component.Any(c => c.ElementId == componentId))
-                    throw new InvalidOperationException($"Stratifier component {componentId} is defined twice for this measure.");
-
-                container.Component.Add(new FhirMeasure.ComponentComponent
+                AddStratifierComponent(group, new FhirMeasure.ComponentComponent
                 {
                     ElementId = componentId,
                     Code = new CodeableConcept { Text = tuple.Stratifier },
