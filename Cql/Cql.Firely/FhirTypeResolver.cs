@@ -7,6 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
@@ -21,7 +22,8 @@ namespace Hl7.Cql.Fhir
         /// <nodoc />
         public FhirTypeResolver(ModelInspector inspector)
         {
-            Inspector = inspector;
+            _inspector = inspector;
+            _patientType = new Lazy<Type?>(() => _inspector.PatientMapping?.NativeType);
 
             AddTypesFromInspector();
             // Fix lack of inheritance in the SDK
@@ -37,7 +39,7 @@ namespace Hl7.Cql.Fhir
         }
 
 
-        internal override IEnumerable<Assembly> ModelAssemblies => Inspector.ClassMappings.Select(cm => cm.NativeType.Assembly).Distinct();
+        internal override IEnumerable<Assembly> ModelAssemblies => _inspector.ClassMappings.Select(cm => cm.NativeType.Assembly).Distinct();
         internal override IEnumerable<string> ModelNamespaces => new[] { "Hl7.Fhir.Model" };
 
         internal override IEnumerable<(string alias, string type)> Aliases => base.Aliases
@@ -63,7 +65,7 @@ namespace Hl7.Cql.Fhir
             }
             else
             {
-                var cm = Inspector.FindClassMapping(type);
+                var cm = _inspector.FindClassMapping(type);
                 if (cm != null)
                 {
                     if (propertyName == "value" && cm.PrimitiveValueProperty is { } valueProp)
@@ -108,13 +110,24 @@ namespace Hl7.Cql.Fhir
             return type == typeof(FhirDateTime) && propertyName == "value";
         }
 
-        internal override Type? PatientType => Inspector.PatientMapping?.NativeType;
+        /// <remarks>
+        /// Resolved once. Asking the inspector for its patient mapping searches its class mappings and allocates
+        /// while doing so, and the age operators - which need the patient type - run per element of a query, not
+        /// once per patient. Neither the inspector nor its mappings change over the lifetime of this resolver.
+        /// </remarks>
+        internal override Type? PatientType => _patientType.Value;
 
-        internal override PropertyInfo? PatientBirthDateProperty => typeof(IPatient).GetProperty(nameof(IPatient.BirthDate));
+        private readonly Lazy<Type?> _patientType;
 
-        internal ModelInspector Inspector { get; }
+        internal override PropertyInfo? PatientBirthDateProperty => BirthDateProperty;
 
-        internal IDictionary<Type, string> TypeSpecifiers { get; } = new Dictionary<Type, string>();
+        // The FHIR patient model always exposes BirthDate; the nullable override type is inherited from BaseTypeResolver.
+        private static readonly PropertyInfo BirthDateProperty =
+            ReflectionUtility.PropertyOf(() => default(IPatient)!.BirthDate);
+
+        private readonly ModelInspector _inspector;
+
+        private readonly IDictionary<Type, string> _typeSpecifiers = new Dictionary<Type, string>();
 
         private void adjust()
         {
@@ -127,16 +140,16 @@ namespace Hl7.Cql.Fhir
 
         private void AddTypesFromInspector()
         {
-            var classes = Inspector.ClassMappings.Select(cm => ($"{{http://hl7.org/fhir}}{cm.Name}", cm.NativeType));
+            var classes = _inspector.ClassMappings.Select(cm => ($"{{http://hl7.org/fhir}}{cm.Name}", cm.NativeType));
 
             // Ignore the valuesets, we have to resolve via bindings for now.
             foreach (var (name, type) in classes)
             {
                 Types.TryAdd(name, type);
-                TypeSpecifiers.TryAdd(type, name);
+                _typeSpecifiers.TryAdd(type, name);
             }
 
-            var bindings = from cm in Inspector.ClassMappings
+            var bindings = from cm in _inspector.ClassMappings
                            from pm in cm.PropertyMappings
                            orderby pm.BindingName
                            where pm.BindingName is not null
@@ -149,7 +162,7 @@ namespace Hl7.Cql.Fhir
                     binding.Name.Replace("-", "_");
 
                 Types.TryAdd(bindingName, binding.Type);
-                TypeSpecifiers.TryAdd(binding.Type, bindingName);
+                _typeSpecifiers.TryAdd(binding.Type, bindingName);
 
             }
         }
