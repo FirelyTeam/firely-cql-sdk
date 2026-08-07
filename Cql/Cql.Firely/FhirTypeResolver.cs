@@ -121,6 +121,7 @@ namespace Hl7.Cql.Fhir
 
         internal override PropertyInfo? PatientBirthDateProperty => BirthDateProperty;
 
+        // The FHIR patient model always exposes BirthDate; the nullable override type is inherited from BaseTypeResolver.
         private static readonly PropertyInfo BirthDateProperty =
             ReflectionUtility.PropertyOf(() => default(IPatient)!.BirthDate);
 
