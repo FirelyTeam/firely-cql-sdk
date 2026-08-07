@@ -171,9 +171,10 @@ public class AgeOperatorTests
     {
         public bool HasPatientType { get; init; }
 
-        internal override Type? PatientType => HasPatientType ? typeof(Patient) : null;
-
-        internal override PropertyInfo? PatientBirthDateProperty => null;
+        internal override PatientTypeInfo CreatePatientTypeInfo() =>
+            new PatientTypeInfo(
+                resolveType: () => HasPatientType ? typeof(Patient) : null,
+                resolveBirthDateProperty: _ => null);
 
         internal override IEnumerable<Assembly> ModelAssemblies => throw new NotImplementedException();
 
