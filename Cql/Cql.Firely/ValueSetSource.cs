@@ -166,8 +166,6 @@ public class ValueSetSource : IValueSetDictionary
     // the code, so merely *mentioning* them in this method would make the compiler allocate their
     // display class on entry - before any early return could skip it. The unresolved path therefore
     // lives in its own method, which keeps the resolved path allocation-free.
-    // Measured: 208 B/call for the lambdas-as-arguments form, 32 B/call with an early return in this
-    // method (the hoisted display class), 0 B/call with the slow path extracted as below.
 
     /// <inheritdoc />
     public bool IsCodeInValueSet(string valueSetUri, CqlCode code) =>
