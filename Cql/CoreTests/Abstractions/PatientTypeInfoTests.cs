@@ -21,7 +21,7 @@ public class PatientTypeInfoTests
     {
         var typeCounter = 0;
         var birthDateCounter = 0;
-        var expectedGetter = (Func<object, object?>)(_ => null);
+        var expectedGetter = (Func<object, object?>)(patient => ((TestPatient)patient).BirthDate);
 
         var patientTypeInfo = new PatientTypeInfo(
             resolveType: () =>
