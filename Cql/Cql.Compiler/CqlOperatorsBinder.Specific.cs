@@ -221,7 +221,7 @@ partial class CqlOperatorsBinder
         {
             var declaringType = pi!.DeclaringType;
             var propName = pi.Name;
-            var method = typeof(Type).GetMethod(nameof(Type.GetProperty), [typeof(string)])!;
+            var method = ReflectionUtility.MethodOf(() => default(Type)!.GetProperty(default(string)!));
             var typeOf = new CodeConstant(declaringType, typeof(Type));
             codePropertyExpression = new CodeInvoke(typeOf, method, new CodeConstant(propName, typeof(string)));
         }
@@ -237,7 +237,9 @@ partial class CqlOperatorsBinder
         CodeExpression codeProperty,
         CodeExpression templateId)
     {
-        var forType = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.Retrieve))!.MakeGenericMethod(resourceType);
+        var forType = ReflectionUtility
+            .GenericMethodDefinitionOf(() => default(ICqlOperators)!.Retrieve<object>(default!))
+            .MakeGenericMethod(resourceType);
         CodeExpression codeExpression = new CodeConstant(null, typeof(IEnumerable<CqlCode>));
         CodeExpression valuesetExpression = new CodeConstant(null, typeof(CqlValueSet));
 

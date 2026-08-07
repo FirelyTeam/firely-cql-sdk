@@ -228,6 +228,46 @@
                "value" : "false",
                "annotation" : [ ]
             }
+         }, {
+            "locator" : "58:1-59:21",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "name" : "Gender Stratifier",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "group",
+                  "value" : "1"
+               }, {
+                  "name" : "stratifier",
+                  "value" : "Gender"
+               }, {
+                  "name" : "description",
+                  "value" : "Stratifies by the patient's administrative gender"
+               } ]
+            } ],
+            "expression" : {
+               "type" : "Property",
+               "locator" : "59:2-59:21",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "path" : "value",
+               "annotation" : [ ],
+               "source" : {
+                  "type" : "Property",
+                  "locator" : "59:2-59:15",
+                  "resultTypeName" : "{http://hl7.org/fhir}AdministrativeGender",
+                  "path" : "gender",
+                  "annotation" : [ ],
+                  "source" : {
+                     "type" : "ExpressionRef",
+                     "locator" : "59:2-59:8",
+                     "resultTypeName" : "{http://hl7.org/fhir}Patient",
+                     "name" : "Patient",
+                     "annotation" : [ ]
+                  }
+               }
+            }
          } ]
       }
    }
