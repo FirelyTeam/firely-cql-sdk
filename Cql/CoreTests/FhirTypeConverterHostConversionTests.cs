@@ -11,6 +11,7 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
+using M = Hl7.Fhir.Model;
 
 namespace CoreTests
 {
@@ -33,62 +34,104 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T10:30:00+00:00", converted.Start);
-            Assert.AreEqual("0001-01-01T16:45:15.123+00:00", converted.End);
+            Assert.AreEqual("0001-01-01T10:30:00Z", converted.Start);
+            Assert.AreEqual("0001-01-01T16:45:15.123Z", converted.End);
         }
 
         [TestMethod]
-        public void ConvertCqlIntervalOfTime_Period_KeepsOffsetsThatUnderflowTheMinimumFhirDate()
+        public void ConvertCqlIntervalOfTime_Period_DropsVestigialOffset()
         {
-            // 0001-01-01T00:30:00+02:00 denotes a UTC instant before DateTime.MinValue, so it has no
-            // DateTimeOffset representation — but it is a valid FHIR dateTime and must convert.
+            // CqlTime has no timezone concept; a vestigial offset cannot arise from CQL source.
+            // A non-UTC offset passed through would render 0001-01-01T00:30:00+02:00 — an instant
+            // before year 1 that FhirDateTime.IsValidValue rejects and the SDK cannot read back.
+            // All boundaries therefore carry Z regardless of any offset on the CqlTime.
             var low = new CqlTime(0, 30, 0, null, 2, 0);
-            var high = new CqlTime(1, 0, 0, null, 2, 0);
+            var high = new CqlTime(1, 0, 0, null, -5, 30);
             var interval = new CqlInterval<CqlTime>(low, high, lowClosed: true, highClosed: true);
 
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T00:30:00+02:00", converted.Start);
-            Assert.AreEqual("0001-01-01T01:00:00+02:00", converted.End);
+            Assert.AreEqual("0001-01-01T00:30:00Z", converted.Start);
+            Assert.AreEqual("0001-01-01T01:00:00Z", converted.End);
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.Start), $"Start is not valid FHIR dateTime: {converted.Start}");
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.End), $"End is not valid FHIR dateTime: {converted.End}");
         }
 
         [TestMethod]
-        public void ConvertCqlIntervalOfTime_Period_RendersNegativeOffsets()
+        public void ConvertCqlIntervalOfTime_Period_PreservesPrecisionAndPadsAndAnchorsInUtc()
         {
-            var low = new CqlTime(10, 30, 0, null, -5, 0);
-            var interval = new CqlInterval<CqlTime>(low, null, lowClosed: true, highClosed: true);
-
-            var converted = FhirTypeConverter.Convert<Period>(interval);
-
-            Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T10:30:00-05:00", converted.Start);
-            Assert.IsNull(converted.End);
-        }
-
-        [TestMethod]
-        public void ConvertCqlIntervalOfTime_Period_RendersNegativeOffsetsWithMinutes()
-        {
-            var low = new CqlTime(10, 30, 0, null, -5, 30);
-            var interval = new CqlInterval<CqlTime>(low, null, lowClosed: true, highClosed: true);
-
-            var converted = FhirTypeConverter.Convert<Period>(interval);
-
-            Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T10:30:00-05:30", converted.Start);
-        }
-
-        [TestMethod]
-        public void ConvertCqlIntervalOfTime_Period_PreservesPrecisionAndAbsentOffset()
-        {
-            // A time with minute precision and no timezone offset keeps both characteristics.
+            // A time with minute precision and no timezone offset is anchored in UTC — a FHIR dateTime
+            // with a time component must carry an offset, and a Time has none to default — and its
+            // seconds are zero-padded, with the original precision preserved in the time-precision
+            // extension.
             var low = new CqlTime(10, 30, null, null, null, null);
             var interval = new CqlInterval<CqlTime>(low, null, lowClosed: true, highClosed: true);
 
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T10:30", converted.Start);
+            Assert.AreEqual("0001-01-01T10:30:00Z", converted.Start);
+            var precisionExtension = converted.StartElement.GetExtension(Hl7.Cql.Fhir.FhirTypeConverter.TimePrecisionExtensionUrl);
+            Assert.AreEqual("min", (precisionExtension?.Value as Code)?.Value);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfTime_Period_AnchorsSecondPrecisionWithoutOffsetInUtc()
+        {
+            var low = new CqlTime(10, 30, 15, null, null, null);
+            var high = new CqlTime(16, 45, 15, 123, null, null);
+            var interval = new CqlInterval<CqlTime>(low, high, lowClosed: true, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("0001-01-01T10:30:15Z", converted.Start);
+            Assert.AreEqual("0001-01-01T16:45:15.123Z", converted.End);
+            Assert.IsNull(converted.StartElement.GetExtension(Hl7.Cql.Fhir.FhirTypeConverter.TimePrecisionExtensionUrl));
+            Assert.IsNull(converted.EndElement.GetExtension(Hl7.Cql.Fhir.FhirTypeConverter.TimePrecisionExtensionUrl));
+        }
+
+        [TestMethod]
+        public void ConvertCqlTime_Time_KeepsAbsentOffsetAbsent()
+        {
+            // FHIR time has no timezone offset concept, so the default offset applied to dateTime
+            // values must not leak into it.
+            Assert.AreEqual("10:00:00", FhirTypeConverter.Convert<Time>(new CqlTime(10, null, null, null, null, null))!.Value);
+            Assert.AreEqual("10:30:00", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, null, null, null, null))!.Value);
+            Assert.AreEqual("10:30:15", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, 15, null, null, null))!.Value);
+            Assert.AreEqual("10:30:15.123", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, 15, 123, null, null))!.Value);
+        }
+
+        [TestMethod]
+        public void ConvertCqlTime_Time_DropsVestigialOffset()
+        {
+            // A CqlTime carrying an offset cannot arise from CQL source — CQL's Time type has no
+            // timezone — and FHIR time forbids a timezone offset (R4: "A time zone SHALL NOT be
+            // present"), so an artificially constructed offset is unconditionally dropped.
+            Assert.AreEqual("10:30:00", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, null, null, 0, 0))!.Value);
+            Assert.AreEqual("10:30:00", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, null, null, 2, 0))!.Value);
+            Assert.AreEqual("10:30:15", FhirTypeConverter.Convert<Time>(new CqlTime(10, 30, 15, null, 2, 0))!.Value);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfTime_Period_DropsMinutesOnlyVestigialOffset()
+        {
+            // CqlTime's constructor does not validate that an offset minute is paired with an offset
+            // hour; a minutes-only offset is still a vestigial offset that must be dropped,
+            // exactly as a full hh:mm offset is.
+            var interval = new CqlInterval<CqlTime>(
+                new CqlTime(10, 30, null, null, null, 30),
+                new CqlTime(12, 30, 15, null, null, -30),
+                lowClosed: true, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("0001-01-01T10:30:00Z", converted.Start);
+            Assert.AreEqual("0001-01-01T12:30:15Z", converted.End);
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.Start), $"Start is not valid FHIR dateTime: {converted.Start}");
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.End), $"End is not valid FHIR dateTime: {converted.End}");
         }
 
         [TestMethod]
@@ -473,6 +516,75 @@ namespace CoreTests
         {
             Assert.IsNull(FhirTypeConverter.ConvertRangeToCqlInterval(null, "Long"));
             Assert.IsNull(FhirTypeConverter.ConvertRangeToCqlInterval(null, null));
+        }
+
+        // The converter FhirCqlContext builds is not exposed on the context, but the operators it wires
+        // it into are: ICqlOperators.Convert<T> delegates straight to that converter, so these tests
+        // exercise the full CreateOperators wiring.
+        private static string? ConvertOffsetLessDateTimeThroughContext(
+            DateTimeOffset? now,
+            FhirCqlContextOptions? options = null) =>
+            FhirCqlContext.WithDataSource(now: now, options: options)
+                .Operators
+                .Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, null, null, null, null))
+                ?.Value;
+
+        [TestMethod]
+        public void CreateOperators_EvaluationRequestOffset_IsTheDefaultForOffsetLessValues()
+        {
+            var now = new DateTimeOffset(2024, 6, 1, 9, 0, 0, TimeSpan.FromHours(2));
+
+            Assert.AreEqual("2014-02-01T10:30:00+02:00", ConvertOffsetLessDateTimeThroughContext(now));
+        }
+
+        [TestMethod]
+        public void CreateOperators_NoEvaluationRequestTimestamp_DefaultsToUtc()
+        {
+            // CqlOperators synthesizes a UTC evaluation timestamp when 'now' is omitted, so UTC is the
+            // matching converter default rather than a deviation from the specification.
+            Assert.AreEqual("2014-02-01T10:30:00Z", ConvertOffsetLessDateTimeThroughContext(now: null));
+        }
+
+        [TestMethod]
+        public void CreateOperators_OverrideConverterTimezoneOffset_WinsOverTheEvaluationRequestOffset()
+        {
+            var now = new DateTimeOffset(2024, 6, 1, 9, 0, 0, TimeSpan.FromHours(2));
+            var options = new FhirCqlContextOptions { OverrideConverterTimezoneOffset = TimeSpan.FromHours(-5) };
+
+            Assert.AreEqual("2014-02-01T10:30:00-05:00", ConvertOffsetLessDateTimeThroughContext(now, options));
+        }
+
+        [TestMethod]
+        public void CreateOperators_OverrideTypeConverter_IgnoresTheEvaluationRequestOffset()
+        {
+            // A wholesale converter override is used as-is, offsets and all.
+            var now = new DateTimeOffset(2024, 6, 1, 9, 0, 0, TimeSpan.FromHours(2));
+            var options = new FhirCqlContextOptions { OverrideTypeConverter = FhirTypeConverter };
+
+            Assert.AreEqual("2014-02-01T10:30:00Z", ConvertOffsetLessDateTimeThroughContext(now, options));
+        }
+
+        [TestMethod]
+        public void CreateOperators_ZeroOverrideConverterTimezoneOffset_EmitsUtc()
+        {
+            // An explicitly requested UTC is a request, not an absent override, so it beats the
+            // evaluation request timestamp's own offset.
+            var now = new DateTimeOffset(2024, 6, 1, 9, 0, 0, TimeSpan.FromHours(2));
+            var options = new FhirCqlContextOptions { OverrideConverterTimezoneOffset = TimeSpan.Zero };
+
+            Assert.AreEqual("2014-02-01T10:30:00Z", ConvertOffsetLessDateTimeThroughContext(now, options));
+        }
+
+        [TestMethod]
+        public void OverrideConverterTimezoneOffset_SubMinuteOrOutOfRange_ThrowsAtOptionsConstruction()
+        {
+            var tooWide = Assert.ThrowsExactly<ArgumentOutOfRangeException>(
+                () => new FhirCqlContextOptions { OverrideConverterTimezoneOffset = TimeSpan.FromHours(15) });
+            var subMinute = Assert.ThrowsExactly<ArgumentOutOfRangeException>(
+                () => new FhirCqlContextOptions { OverrideConverterTimezoneOffset = TimeSpan.FromSeconds(90) });
+
+            Assert.AreEqual(nameof(FhirCqlContextOptions.OverrideConverterTimezoneOffset), tooWide.ParamName);
+            Assert.AreEqual(nameof(FhirCqlContextOptions.OverrideConverterTimezoneOffset), subMinute.ParamName);
         }
 
         private static Hl7.Fhir.Model.Range UnitlessRange() =>

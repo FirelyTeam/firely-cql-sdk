@@ -108,9 +108,13 @@ var results = invoker
 
 See the **[Examples project](../Examples/CqlSdkExamples/)** for complete, runnable samples:
 - **210–251**: Packaging CQL/ELM into FHIR Library resources
-- **310–340**: Invoking CQL definitions, parameters, functions, and caching
+- **310–350**: Invoking CQL definitions, parameters, functions, caching, and pooling library sets
 - **400–410**: Loading and invoking from FHIR resource directories
 - **500**: Extending SDK functionality
+
+If you are running the same CQL repeatedly — evaluating a measure over a population, for instance — read
+**[Caching strategies](caching-strategies.md)** before you tune anything. It covers which of the SDK's
+caches to reach for, what each one costs, and how they interact.
 
 ## How CQL Execution Works
 
@@ -142,6 +146,7 @@ See the **[Demo Projects](demo-projects.md)** guide for the project structure, p
 ## Further Reading
 
 * [CQL Engine Architecture](cql-engine-architecture.md) — internal design and key classes
+* [Caching strategies](caching-strategies.md) — which cache to reach for, what each one costs, and how they interact
 * [Toolkit Services Dependency Diagrams](dependency-diagrams.md) — service dependency graphs
 * [Demo Projects](demo-projects.md) — project structure and how to configure a measure project
 * [CQL Build Pipeline](build-pipeline.md) — build scripts, Java CQL-to-ELM tooling, PackagerCLI, and MSBuild targets
