@@ -6,8 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Fhir;
 using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Fhir;
 using Hl7.Fhir.Model;
 
 namespace CoreTests.Fhir

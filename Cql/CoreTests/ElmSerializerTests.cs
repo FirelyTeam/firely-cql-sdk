@@ -6,9 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Elm.Serialization;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Fhir.Model;
 using Annotation = Hl7.Cql.Elm.Annotation;
 using Library = Hl7.Cql.Elm.Library;
