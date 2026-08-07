@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
