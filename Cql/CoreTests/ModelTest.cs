@@ -98,9 +98,10 @@ namespace CoreTests
 
         private class UnitTestTypeResolver : BaseTypeResolver
         {
-            internal override Type PatientType => typeof(UnitTestPatient);
-
-            internal override PropertyInfo PatientBirthDateProperty => ReflectionUtility.PropertyOf(() => default(UnitTestPatient)!.birthDate);
+            internal override PatientTypeInfo CreatePatientTypeInfo() =>
+                new PatientTypeInfo(
+                    resolveType: () => typeof(UnitTestPatient),
+                    resolveBirthDateProperty: _ => ReflectionUtility.PropertyOf(() => default(UnitTestPatient)!.birthDate));
 
             internal override IEnumerable<Assembly> ModelAssemblies => throw new NotImplementedException();
 

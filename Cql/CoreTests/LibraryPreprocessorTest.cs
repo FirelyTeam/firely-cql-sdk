@@ -104,9 +104,10 @@ namespace CoreTests
 
     internal class TestTypeResolver : BaseTypeResolver
     {
-        internal override Type PatientType => typeof(object);
-
-        internal override PropertyInfo? PatientBirthDateProperty => null;
+        internal override PatientTypeInfo CreatePatientTypeInfo() =>
+            new PatientTypeInfo(
+                resolveType: () => typeof(object),
+                resolveBirthDateProperty: _ => null);
 
         internal override IEnumerable<Assembly> ModelAssemblies => [];
 
