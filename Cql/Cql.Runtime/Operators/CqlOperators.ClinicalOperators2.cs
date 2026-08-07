@@ -36,17 +36,17 @@ namespace Hl7.Cql.Operators
         /// </summary>
         /// <remarks>
         /// The age operators run per element of a query, not once per patient, so the retrieve they need is bound
-        /// once through <see cref="_retrievePatients"/> rather than resolved and closed over the patient type by
+        /// once through <see cref="PatientRetrievers"/> rather than resolved and closed over the patient type by
         /// reflection on every call.
         /// </remarks>
         private CqlDate? PatientBirthDate()
         {
-            _ = TypeResolver.PatientType
+            var patientType = TypeResolver.PatientType
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientType)}");
             var birthDateProperty = TypeResolver.PatientBirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
 
-            var patients = (_retrievePatients ??= BuildPatientRetriever())(DataSource);
+            var patients = PatientRetrievers.GetOrAdd(patientType, static type => BuildPatientRetriever(type))(DataSource);
             if (patients is null)
                 return null;
 
@@ -67,13 +67,10 @@ namespace Hl7.Cql.Operators
             return TypeConverter.Convert<CqlDate>(birthDateProperty.GetValue(patient));
         }
 
-        private Func<IDataSource, IEnumerable<object>?>? _retrievePatients;
+        private static readonly ConcurrentDictionary<Type, Func<IDataSource, IEnumerable<object>?>> PatientRetrievers = new();
 
-        private Func<IDataSource, IEnumerable<object>?> BuildPatientRetriever()
+        private static Func<IDataSource, IEnumerable<object>?> BuildPatientRetriever(Type patientType)
         {
-            var patientType = TypeResolver.PatientType
-                ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientType)}");
-
             var retrieve = typeof(IDataSource)
                 .GetMethod(nameof(IDataSource.Retrieve))!
                 .MakeGenericMethod(patientType);

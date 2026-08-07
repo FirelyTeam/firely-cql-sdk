@@ -31,19 +31,13 @@ public class AgeOperatorBenchmarks
     /// <summary>
     /// How many times the operator is evaluated, i.e. how many elements the surrounding query has.
     /// </summary>
-    [Params(200)]
+    [Params(1, 10, 200)]
     public int Calls { get; set; }
 
     [GlobalSetup]
     public void Setup()
     {
-        var bundle = new Bundle { Type = Bundle.BundleType.Collection };
-        bundle.Entry.Add(new Bundle.EntryComponent
-        {
-            Resource = new Patient { Id = "patient", BirthDate = "1980-05-17" }
-        });
-
-        _operators = FhirCqlContext.ForBundle(bundle).Operators;
+        _operators = CreateOperators();
         _asOf = new CqlDate(2024, 6, 1);
     }
 
@@ -65,5 +59,27 @@ public class AgeOperatorBenchmarks
             total += _operators.Age("year") ?? 0;
 
         return total;
+    }
+
+    [Benchmark(Description = "AgeAt, context setup + query elements")]
+    public int AgeAtWithContextSetup()
+    {
+        var operators = CreateOperators();
+        var total = 0;
+        for (var i = 0; i < Calls; i++)
+            total += operators.AgeAt(_asOf, "year") ?? 0;
+
+        return total;
+    }
+
+    private static ICqlOperators CreateOperators()
+    {
+        var bundle = new Bundle { Type = Bundle.BundleType.Collection };
+        bundle.Entry.Add(new Bundle.EntryComponent
+        {
+            Resource = new Patient { Id = "patient", BirthDate = "1980-05-17" }
+        });
+
+        return FhirCqlContext.ForBundle(bundle).Operators;
     }
 }
