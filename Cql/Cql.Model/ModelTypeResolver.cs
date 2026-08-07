@@ -7,6 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Model
@@ -20,14 +21,13 @@ namespace Hl7.Cql.Model
         protected ModelTypeResolver(ModelInfo model)
         {
             Model = model;
-            patientType = new Lazy<Type?>(GetPatientType);
-            patientBirthDate = new Lazy<PropertyInfo?>(GetPatientBirthdate);
         }
 
         public ModelInfo Model { get; }
 
-        internal override Type? PatientType => patientType.Value;
-        private readonly Lazy<Type?> patientType;
+        internal override PatientTypeInfo CreatePatientTypeInfo() =>
+            new PatientTypeInfo(resolveType: GetPatientType, resolveBirthDateProperty: GetPatientBirthdate);
+
         private Type? GetPatientType()
         {
             if (!string.IsNullOrWhiteSpace(Model.patientClassName))
@@ -48,6 +48,9 @@ namespace Hl7.Cql.Model
             }
             else return null;
         }
+
+        private PropertyInfo? GetPatientBirthdate(Type patientType) =>
+            GetProperty(patientType, Model.patientBirthDatePropertyName);
 
         private readonly IDictionary<string, ClassInfo> ClassInfo = new Dictionary<string, ClassInfo>();
         private readonly IDictionary<string, PropertyInfo?> Properties = new Dictionary<string, PropertyInfo?>();
@@ -70,19 +73,6 @@ namespace Hl7.Cql.Model
                 Properties.Add(typeSpecifier, propertyInfo);
                 return propertyInfo;
             }
-        }
-
-        internal override PropertyInfo? PatientBirthDateProperty => patientBirthDate.Value;
-        private readonly Lazy<PropertyInfo?> patientBirthDate;
-        private PropertyInfo? GetPatientBirthdate()
-        {
-            var patientType = PatientType;
-            if (patientType != null)
-            {
-                var property = GetProperty(patientType, Model.patientBirthDatePropertyName);
-                return property;
-            }
-            else return null;
         }
     }
 }
