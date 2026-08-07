@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
@@ -17,7 +18,7 @@ namespace Hl7.Cql.Compiler;
 internal class CqlContextBinder
 {
     private static readonly MethodInfo ResolveParameterMethod =
-        typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!;
+        ReflectionUtility.MethodOf(() => default(CqlContext)!.ResolveParameter(default!, default!, default!));
 
     /// <summary>
     /// Creates an expression which resolves a parameter in the CQL context,

@@ -54,12 +54,29 @@ Mermaid source: [dependency-diagrams.cql-toolkit-services.mmd](diagrams/dependen
 
 ![CqlToolkitServices Dependency Diagram](diagrams/dependency-diagrams.cql-toolkit-services.svg)
 
+## InvocationToolkit Services Dependency Diagram
+
+Construction and ownership flow for loading generated CQL assemblies and invoking their definitions,
+including the opt-in `LibrarySetInvokerPool`.
+
+**Remarks:**
+* `InvocationToolkit` is the only toolkit without an internal DI container, so — like the runtime diagram below — this graph shows construction and ownership wiring rather than container registrations
+* Pooling is opt-in: without a `LibrarySetInvokerPool`, `InvocationToolkit.CreateLibrarySetInvoker` creates a fresh collectible `AssemblyLoadContext` and reloads every assembly on each call
+* Solid edges are ownership/containment, dashed edges are creation, configuration or per-call flow
+* The `back-references` edges are drawn deliberately: they are why retaining a `LibraryInvoker` or `DefinitionInvoker` keeps a whole assembly load context alive, which is the one way a consumer can defeat the pool
+* `LibrarySetInvokerPoolKey` is internal, and is shown because the content hash it derives is what makes pooling work across separately-built toolkits
+* No scoped-vs-singleton color convention is applied here, for the same reason as the runtime diagram below
+
+Mermaid source: [dependency-diagrams.invocation-toolkit-services.mmd](diagrams/dependency-diagrams.invocation-toolkit-services.mmd)
+
+![InvocationToolkit Services Dependency Diagram](diagrams/dependency-diagrams.invocation-toolkit-services.svg)
+
 ## Runtime Services Dependency Diagram
 
 Services and construction flow for CQL runtime evaluation in the FHIR binding (`FhirCqlContext`).
 
 **Remarks:**
-* Unlike the three toolkit diagrams above, this layer is not represented by a DI container registration class; the graph shows factory-time construction and injection wiring from `FhirCqlContext.CreateOperators`
+* Unlike the three DI-container toolkit diagrams above (`ElmToolkitServices`, `PackagingToolkitServices`, `CqlToolkitServices`), this layer is not represented by a DI container registration class; the graph shows factory-time construction and injection wiring from `FhirCqlContext.CreateOperators`
 * Excludes Logger and options members not used for runtime operator construction
 * The diagram highlights `FhirCqlContextOptions.MetricService` (`IMetricService`) and the default fallback path via `UcumConversionExtensions.Default`/`DefaultUcumMetricService`
 * No scoped-vs-singleton color convention is applied here because lifetime is a mix of per-context construction and static defaults rather than explicit container scopes

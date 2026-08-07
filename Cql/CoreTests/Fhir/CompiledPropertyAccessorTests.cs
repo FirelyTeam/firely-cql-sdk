@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Fhir;
 using Hl7.Fhir.Model;
 
@@ -18,7 +19,7 @@ namespace CoreTests.Fhir
         {
             public string Value { private get; set; } = "hidden";
 
-            public static PropertyInfo Property => typeof(NonPublicGetter).GetProperty(nameof(Value))!;
+            public static PropertyInfo Property => ReflectionUtility.PropertyOf(() => default(NonPublicGetter)!.Value);
         }
 
         private class Indexed
@@ -31,7 +32,7 @@ namespace CoreTests.Fhir
         [TestMethod]
         public void For_CompiledGetter_ReturnsNullForInstanceOfUnrelatedType()
         {
-            var getter = CompiledPropertyAccessor.For(typeof(Observation).GetProperty(nameof(Observation.Code))!);
+            var getter = CompiledPropertyAccessor.For(ReflectionUtility.PropertyOf(() => default(Observation)!.Code));
 
             getter(new Patient()).Should().BeNull();
         }
