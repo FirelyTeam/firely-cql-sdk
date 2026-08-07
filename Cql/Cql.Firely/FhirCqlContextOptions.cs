@@ -64,7 +64,28 @@ namespace Hl7.Cql.Fhir
         public ModelInspector? OverrideModelInspector { get; init; }
 
         /// <summary>
-        /// The default <see cref="TypeConverter"/> to use is <see cref="FhirTypeConverter.Create(ModelInspector,Nullable{int})"/>, unless otherwise overridden here.
+        /// The timezone offset the <see cref="TypeConverter"/> uses when a CQL value without an offset has to be
+        /// emitted as a FHIR <c>dateTime</c> carrying a time component, which FHIR requires to have an offset.
+        /// When <see langword="null"/>, the offset of the <c>now</c> argument — the timestamp of the evaluation
+        /// request — is used; when that is <see langword="null"/> too, UTC is used, which matches the UTC
+        /// evaluation timestamp the engine synthesizes when <c>now</c> is omitted. Must be a whole number of
+        /// minutes within ±14:00.
+        /// </summary>
+        /// <remarks>Changing this value, will create a new <see cref="TypeConverter"/>, unless a custom one was provided in <see cref="OverrideTypeConverter"/>.</remarks>
+        /// <exception cref="ArgumentOutOfRangeException">The value is not a whole number of minutes within ±14:00.</exception>
+        public TimeSpan? OverrideConverterTimezoneOffset
+        {
+            get => _overrideConverterTimezoneOffset;
+            // Validated here rather than where the converter is built, so an unusable offset is reported
+            // against this property, at the point the options are constructed.
+            init => _overrideConverterTimezoneOffset =
+                FhirTypeConverter.ValidateDefaultTimezoneOffset(value, nameof(OverrideConverterTimezoneOffset));
+        }
+
+        private readonly TimeSpan? _overrideConverterTimezoneOffset;
+
+        /// <summary>
+        /// The default <see cref="TypeConverter"/> to use is <see cref="FhirTypeConverter.Create(ModelInspector,Nullable{int},Nullable{TimeSpan})"/>, unless otherwise overridden here.
         /// </summary>
         public TypeConverter? OverrideTypeConverter { get; init; }
 
