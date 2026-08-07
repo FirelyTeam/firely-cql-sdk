@@ -41,6 +41,8 @@ public class PatientTypeInfoTests
         _ = patientTypeInfo.BirthDateProperty;
         _ = patientTypeInfo.BirthDateProperty;
 
+        patientTypeInfo.Type.Should().Be(typeof(TestPatient));
+        patientTypeInfo.BirthDateProperty.Should().BeSameAs(expectedBirthDateProperty);
         typeCounter.Should().Be(1);
         birthDateCounter.Should().Be(1);
     }
