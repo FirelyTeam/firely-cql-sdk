@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
@@ -99,7 +100,7 @@ namespace CoreTests
         {
             internal override Type PatientType => typeof(UnitTestPatient);
 
-            internal override PropertyInfo PatientBirthDateProperty => typeof(UnitTestPatient).GetProperty(nameof(UnitTestPatient.birthDate));
+            internal override PropertyInfo PatientBirthDateProperty => ReflectionUtility.PropertyOf(() => default(UnitTestPatient)!.birthDate);
 
             internal override IEnumerable<Assembly> ModelAssemblies => throw new NotImplementedException();
 
