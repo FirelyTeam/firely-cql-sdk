@@ -119,9 +119,9 @@ namespace Hl7.Cql.Fhir
             new PatientTypeInfo(
                 resolveType: () => _inspector.PatientMapping?.NativeType,
                 // The FHIR patient model always exposes BirthDate; the patient type argument is not needed.
-                resolveBirthDateProperty: _ => s_birthDateProperty);
+                resolveBirthDateProperty: _ => BirthDateProperty);
 
-        private static readonly PropertyInfo s_birthDateProperty =
+        private static readonly PropertyInfo BirthDateProperty =
             ReflectionUtility.PropertyOf(() => default(IPatient)!.BirthDate);
 
         private readonly ModelInspector _inspector;

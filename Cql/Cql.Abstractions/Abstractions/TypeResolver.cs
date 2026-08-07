@@ -167,6 +167,11 @@ namespace Hl7.Cql.Abstractions
         internal abstract Type? PatientType { get; }
 
         /// <summary>
+        /// Gets the memoized patient type and birth-date property used by the age operators.
+        /// </summary>
+        internal abstract PatientTypeInfo PatientTypeInfo { get; }
+
+        /// <summary>
         /// Gets the property on <see cref="PatientType"/> that represents the patient's birthdate.
         /// </summary>
         /// <remarks>

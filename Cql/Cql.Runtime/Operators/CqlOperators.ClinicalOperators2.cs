@@ -42,9 +42,10 @@ namespace Hl7.Cql.Operators
         /// </remarks>
         private CqlDate? PatientBirthDate()
         {
-            var patientType = TypeResolver.PatientType
+            var patientTypeInfo = TypeResolver.PatientTypeInfo;
+            var patientType = patientTypeInfo.Type
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientType)}");
-            var birthDateProperty = TypeResolver.PatientBirthDateProperty
+            var birthDateProperty = patientTypeInfo.BirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
 
             var patients = PatientRetrievers.GetOrAdd(patientType, static type => BuildPatientRetriever(type))(DataSource);
