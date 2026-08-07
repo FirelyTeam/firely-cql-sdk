@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
@@ -98,9 +98,10 @@ namespace CoreTests
 
         private class UnitTestTypeResolver : BaseTypeResolver
         {
-            internal override Type PatientType => typeof(UnitTestPatient);
-
-            internal override PropertyInfo PatientBirthDateProperty => ReflectionUtility.PropertyOf(() => default(UnitTestPatient)!.birthDate);
+            internal override PatientTypeInfo CreatePatientTypeInfo() =>
+                new PatientTypeInfo(
+                    resolveType: () => typeof(UnitTestPatient),
+                    resolveBirthDateGetter: _ => patient => ((UnitTestPatient)patient).birthDate);
 
             internal override IEnumerable<Assembly> ModelAssemblies => throw new NotImplementedException();
 

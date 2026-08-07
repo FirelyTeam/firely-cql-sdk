@@ -7,7 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
@@ -23,7 +23,6 @@ namespace Hl7.Cql.Fhir
         public FhirTypeResolver(ModelInspector inspector)
         {
             _inspector = inspector;
-            _patientType = new Lazy<Type?>(() => _inspector.PatientMapping?.NativeType);
 
             AddTypesFromInspector();
             // Fix lack of inheritance in the SDK
@@ -111,19 +110,19 @@ namespace Hl7.Cql.Fhir
         }
 
         /// <remarks>
-        /// Resolved once. Asking the inspector for its patient mapping searches its class mappings and allocates
-        /// while doing so, and the age operators - which need the patient type - run per element of a query, not
-        /// once per patient. Neither the inspector nor its mappings change over the lifetime of this resolver.
+        /// Memoized via <see cref="PatientTypeInfo"/> in <see cref="BaseTypeResolver"/>. Asking the inspector for its
+        /// patient mapping searches its class mappings and allocates while doing so; neither the inspector nor its
+        /// mappings change over the lifetime of this resolver.
         /// </remarks>
-        internal override Type? PatientType => _patientType.Value;
+        internal override PatientTypeInfo CreatePatientTypeInfo() =>
+            new PatientTypeInfo(
+                resolveType: () => _inspector.PatientMapping?.NativeType,
+                // Every FHIR patient type implements IPatient, so the birth date is an interface call rather than
+                // anything resolved by reflection; the patient type argument is not needed.
+                resolveBirthDateGetter: _ => BirthDateGetter);
 
-        private readonly Lazy<Type?> _patientType;
-
-        internal override PropertyInfo? PatientBirthDateProperty => BirthDateProperty;
-
-        // The FHIR patient model always exposes BirthDate; the nullable override type is inherited from BaseTypeResolver.
-        private static readonly PropertyInfo BirthDateProperty =
-            ReflectionUtility.PropertyOf(() => default(IPatient)!.BirthDate);
+        private static readonly Func<object, object?> BirthDateGetter =
+            static patient => (patient as IPatient)?.BirthDate;
 
         private readonly ModelInspector _inspector;
 
