@@ -108,7 +108,7 @@ namespace CoreTests
         internal override PatientTypeInfo CreatePatientTypeInfo() =>
             new PatientTypeInfo(
                 resolveType: () => typeof(object),
-                resolveBirthDateProperty: _ => null);
+                resolveBirthDateGetter: _ => null);
 
         internal override IEnumerable<Assembly> ModelAssemblies => [];
 

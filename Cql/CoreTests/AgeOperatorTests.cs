@@ -139,6 +139,32 @@ public class AgeOperatorTests
         Assert.AreEqual(ageFirst, operators.Age("year"));
     }
 
+    /// <summary>
+    /// The birth-date resolve must happen only once across repeated age-operator calls, not once per call —
+    /// that is the point of the memoization. A retrieve that counted more than once would mean the memoization
+    /// had been bypassed.
+    /// </summary>
+    [TestMethod]
+    public void AgeAt_CalledRepeatedly_RetrievesPatientOnce()
+    {
+        var retrieveCount = 0;
+        var countingDataSource = new CountingDataSource(
+            delegate { retrieveCount++; return [PatientBornOn("1980-05-17")]; });
+
+        var operators = FhirCqlContext.WithDataSource(source: countingDataSource).Operators;
+
+        for (var i = 0; i < 5; i++)
+            operators.AgeAt(AsOf, "year");
+
+        retrieveCount.Should().Be(1);
+    }
+
+    private sealed class CountingDataSource(Func<IEnumerable<object>> retrieve) : IDataSource
+    {
+        public IEnumerable<T>? Retrieve<T>(RetrieveParameters? parameters = null) where T : class =>
+            retrieve().OfType<T>();
+    }
+
     #region A type resolver that cannot name the patient
 
     /// <summary>
@@ -157,14 +183,14 @@ public class AgeOperatorTests
     }
 
     [TestMethod]
-    public void AgeOperators_WithoutABirthDateProperty_Throw()
+    public void AgeOperators_WithoutABirthDateGetter_Throw()
     {
         var operators = CqlOperators.Create(new IncompleteTypeResolver { HasPatientType = true });
 
         Assert.ThrowsException<InvalidOperationException>(() => operators.AgeAt(AsOf, "year"))
-              .Message.Should().Contain(nameof(TypeResolver.PatientBirthDateProperty));
+              .Message.Should().Contain(nameof(TypeResolver.PatientBirthDateGetter));
         Assert.ThrowsException<InvalidOperationException>(() => operators.Age("year"))
-              .Message.Should().Contain(nameof(TypeResolver.PatientBirthDateProperty));
+              .Message.Should().Contain(nameof(TypeResolver.PatientBirthDateGetter));
     }
 
     private sealed class IncompleteTypeResolver : BaseTypeResolver
@@ -174,7 +200,7 @@ public class AgeOperatorTests
         internal override PatientTypeInfo CreatePatientTypeInfo() =>
             new PatientTypeInfo(
                 resolveType: () => HasPatientType ? typeof(Patient) : null,
-                resolveBirthDateProperty: _ => null);
+                resolveBirthDateGetter: _ => null);
 
         internal override IEnumerable<Assembly> ModelAssemblies => throw new NotImplementedException();
 

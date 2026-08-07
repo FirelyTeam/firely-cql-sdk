@@ -172,12 +172,13 @@ namespace Hl7.Cql.Abstractions
         internal abstract PatientTypeInfo PatientTypeInfo { get; }
 
         /// <summary>
-        /// Gets the property on <see cref="PatientType"/> that represents the patient's birthdate.
+        /// Gets a getter reading the birth date off a patient instance, or <see langword="null"/> if the model has
+        /// no birth-date concept.
         /// </summary>
         /// <remarks>
         /// This is defined on CQL models to allow for the implementation of age operators.
         /// </remarks>
-        internal abstract PropertyInfo? PatientBirthDateProperty { get; }
+        internal abstract Func<object, object?>? PatientBirthDateGetter { get; }
 
         /// <summary>
         /// Gets the assemblies that contain types that this type resolver resolves for

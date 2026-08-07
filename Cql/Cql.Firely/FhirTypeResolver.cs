@@ -8,7 +8,6 @@
  */
 
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
@@ -118,11 +117,12 @@ namespace Hl7.Cql.Fhir
         internal override PatientTypeInfo CreatePatientTypeInfo() =>
             new PatientTypeInfo(
                 resolveType: () => _inspector.PatientMapping?.NativeType,
-                // The FHIR patient model always exposes BirthDate; the patient type argument is not needed.
-                resolveBirthDateProperty: _ => BirthDateProperty);
+                // Every FHIR patient type implements IPatient, so the birth date is an interface call rather than
+                // anything resolved by reflection; the patient type argument is not needed.
+                resolveBirthDateGetter: _ => BirthDateGetter);
 
-        private static readonly PropertyInfo BirthDateProperty =
-            ReflectionUtility.PropertyOf(() => default(IPatient)!.BirthDate);
+        private static readonly Func<object, object?> BirthDateGetter =
+            static patient => (patient as IPatient)?.BirthDate;
 
         private readonly ModelInspector _inspector;
 

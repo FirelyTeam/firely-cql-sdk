@@ -26,7 +26,7 @@ namespace Hl7.Cql.Model
         public ModelInfo Model { get; }
 
         internal override PatientTypeInfo CreatePatientTypeInfo() =>
-            new PatientTypeInfo(resolveType: GetPatientType, resolveBirthDateProperty: GetPatientBirthdate);
+            new PatientTypeInfo(resolveType: GetPatientType, resolveBirthDateGetter: GetPatientBirthdateGetter);
 
         private Type? GetPatientType()
         {
@@ -49,8 +49,10 @@ namespace Hl7.Cql.Model
             else return null;
         }
 
-        private PropertyInfo? GetPatientBirthdate(Type patientType) =>
-            GetProperty(patientType, Model.patientBirthDatePropertyName);
+        private Func<object, object?>? GetPatientBirthdateGetter(Type patientType) =>
+            GetProperty(patientType, Model.patientBirthDatePropertyName) is { } property
+                ? patient => property.GetValue(patient)
+                : null;
 
         private readonly IDictionary<string, ClassInfo> ClassInfo = new Dictionary<string, ClassInfo>();
         private readonly IDictionary<string, PropertyInfo?> Properties = new Dictionary<string, PropertyInfo?>();

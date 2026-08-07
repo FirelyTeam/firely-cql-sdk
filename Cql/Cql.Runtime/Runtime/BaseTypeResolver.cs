@@ -103,7 +103,7 @@ namespace Hl7.Cql.Runtime
         /// <summary>
         /// Creates the <see cref="PatientTypeInfo"/> collaborator for this resolver. Evaluated on the first access of
         /// <see cref="TypeResolver.PatientTypeInfo"/>, or of <see cref="TypeResolver.PatientType"/> or
-        /// <see cref="TypeResolver.PatientBirthDateProperty"/>, both of which read through it. A concurrent first access
+        /// <see cref="TypeResolver.PatientBirthDateGetter"/>, both of which read through it. A concurrent first access
         /// may evaluate this more than once, in which case one result wins and the others are discarded; implementations
         /// must therefore be free of side effects.
         /// </summary>
@@ -116,7 +116,7 @@ namespace Hl7.Cql.Runtime
         internal sealed override Type? PatientType => PatientTypeInfo.Type;
 
         /// <inheritdoc/>
-        internal sealed override PropertyInfo? PatientBirthDateProperty => PatientTypeInfo.BirthDateProperty;
+        internal sealed override Func<object, object?>? PatientBirthDateGetter => PatientTypeInfo.BirthDateGetter;
 
         /// <inheritdoc/>
         internal sealed override PropertyInfo? GetProperty(Type type, string propertyName)

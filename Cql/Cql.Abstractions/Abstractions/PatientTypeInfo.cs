@@ -11,33 +11,36 @@
 namespace Hl7.Cql.Abstractions
 {
     /// <summary>
-    /// Holds the memoized patient type and birth-date property for a type resolver.
+    /// Holds the memoized patient type and birth-date accessor for a type resolver.
     /// Both lookups are evaluated at most once, on first access.
     /// </summary>
     internal sealed class PatientTypeInfo
     {
         private readonly Lazy<Type?> _type;
-        private readonly Lazy<PropertyInfo?> _birthDateProperty;
+        private readonly Lazy<Func<object, object?>?> _birthDateGetter;
 
         /// <param name="resolveType">Strategy that returns the patient .NET type, or <see langword="null"/> if the model has no patient concept.</param>
-        /// <param name="resolveBirthDateProperty">
-        /// Strategy that returns the birth-date <see cref="PropertyInfo"/> given the resolved patient type.
-        /// Receives the resolved patient type as its argument; only invoked when that type is non-null.
+        /// <param name="resolveBirthDateGetter">
+        /// Strategy that returns a getter reading the birth date off a patient instance, given the resolved patient
+        /// type. Receives the resolved patient type as its argument; only invoked when that type is non-null.
         /// </param>
-        internal PatientTypeInfo(Func<Type?> resolveType, Func<Type, PropertyInfo?> resolveBirthDateProperty)
+        internal PatientTypeInfo(Func<Type?> resolveType, Func<Type, Func<object, object?>?> resolveBirthDateGetter)
         {
             _type = new Lazy<Type?>(resolveType);
-            _birthDateProperty = new Lazy<PropertyInfo?>(() =>
+            _birthDateGetter = new Lazy<Func<object, object?>?>(() =>
             {
                 var patientType = _type.Value;
-                return patientType is not null ? resolveBirthDateProperty(patientType) : null;
+                return patientType is not null ? resolveBirthDateGetter(patientType) : null;
             });
         }
 
         /// <summary>Gets the patient .NET type, or <see langword="null"/> if the model has no patient concept.</summary>
         internal Type? Type => _type.Value;
 
-        /// <summary>Gets the birth-date property on <see cref="Type"/>, or <see langword="null"/> if <see cref="Type"/> is null or the property is absent.</summary>
-        internal PropertyInfo? BirthDateProperty => _birthDateProperty.Value;
+        /// <summary>
+        /// Gets a getter that reads the birth date off a patient instance, or <see langword="null"/> if
+        /// <see cref="Type"/> is null or the model has no birth-date property.
+        /// </summary>
+        internal Func<object, object?>? BirthDateGetter => _birthDateGetter.Value;
     }
 }

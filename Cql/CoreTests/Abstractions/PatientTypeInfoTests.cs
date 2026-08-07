@@ -9,7 +9,6 @@
 #nullable enable
 
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Compiler.Infrastructure;
 
 namespace CoreTests.Abstractions;
 
@@ -22,7 +21,7 @@ public class PatientTypeInfoTests
     {
         var typeCounter = 0;
         var birthDateCounter = 0;
-        var expectedBirthDateProperty = ReflectionUtility.PropertyOf(() => default(TestPatient)!.BirthDate);
+        var expectedGetter = (Func<object, object?>)(_ => null);
 
         var patientTypeInfo = new PatientTypeInfo(
             resolveType: () =>
@@ -30,37 +29,37 @@ public class PatientTypeInfoTests
                 typeCounter++;
                 return typeof(TestPatient);
             },
-            resolveBirthDateProperty: _ =>
+            resolveBirthDateGetter: _ =>
             {
                 birthDateCounter++;
-                return expectedBirthDateProperty;
+                return expectedGetter;
             });
 
         _ = patientTypeInfo.Type;
         _ = patientTypeInfo.Type;
-        _ = patientTypeInfo.BirthDateProperty;
-        _ = patientTypeInfo.BirthDateProperty;
+        _ = patientTypeInfo.BirthDateGetter;
+        _ = patientTypeInfo.BirthDateGetter;
 
         patientTypeInfo.Type.Should().Be(typeof(TestPatient));
-        patientTypeInfo.BirthDateProperty.Should().BeSameAs(expectedBirthDateProperty);
+        patientTypeInfo.BirthDateGetter.Should().BeSameAs(expectedGetter);
         typeCounter.Should().Be(1);
         birthDateCounter.Should().Be(1);
     }
 
     [TestMethod]
-    public void BirthDateProperty_IsNullWithoutInvokingResolver_WhenPatientTypeIsNull()
+    public void BirthDateGetter_IsNullWithoutInvokingResolver_WhenPatientTypeIsNull()
     {
         var birthDateCounter = 0;
 
         var patientTypeInfo = new PatientTypeInfo(
             resolveType: () => null,
-            resolveBirthDateProperty: _ =>
+            resolveBirthDateGetter: _ =>
             {
                 birthDateCounter++;
-                return ReflectionUtility.PropertyOf(() => default(TestPatient)!.BirthDate);
+                return _ => null;
             });
 
-        patientTypeInfo.BirthDateProperty.Should().BeNull();
+        patientTypeInfo.BirthDateGetter.Should().BeNull();
         birthDateCounter.Should().Be(0);
     }
 
