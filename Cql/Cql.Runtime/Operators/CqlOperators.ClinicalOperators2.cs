@@ -67,6 +67,7 @@ namespace Hl7.Cql.Operators
             return TypeConverter.Convert<CqlDate>(birthDateProperty.GetValue(patient));
         }
 
+        // The model's patient type is expected to be stable and low-cardinality for the process lifetime.
         private static readonly ConcurrentDictionary<Type, Func<IDataSource, IEnumerable<object>?>> PatientRetrievers = new();
 
         private static Func<IDataSource, IEnumerable<object>?> BuildPatientRetriever(Type patientType)
