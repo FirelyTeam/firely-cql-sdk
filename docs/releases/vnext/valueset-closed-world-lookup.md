@@ -36,3 +36,11 @@
   ~3.8 ms the rest of the evaluation takes. Evaluation against a *remote* terminology server was not
   practical at all at that call volume. A run with no terminology service attached is unaffected: it
   already short-circuited before the round-trip.
+
+- A membership test against an already-loaded value set no longer allocates. The three
+  `IsCodeInValueSet` overloads passed two capturing lambdas to a shared helper, so every call built
+  a closure and two delegates — 208 bytes — even though the resolved path invokes neither. Moving
+  the unresolved path into its own method keeps the resolved path allocation-free (an early return
+  in the same method is not enough: the compiler creates the display class on entry, before the
+  return is reached — 32 bytes/call remain). Measured over the NCQA AIS-E deck at ~126 membership
+  tests per patient: 22.3 KB less allocated per patient, roughly 6% of evaluation allocation.
