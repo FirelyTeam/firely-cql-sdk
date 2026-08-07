@@ -7,6 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Operators
@@ -69,12 +70,12 @@ namespace Hl7.Cql.Operators
 
         // The model's patient type is expected to be stable and low-cardinality for the process lifetime.
         private static readonly ConcurrentDictionary<Type, Func<IDataSource, IEnumerable<object>?>> PatientRetrievers = new();
+        private static readonly MethodInfo RetrieveDefinition =
+            ReflectionUtility.GenericMethodDefinitionOf(() => default(IDataSource)!.Retrieve<object>(default));
 
         private static Func<IDataSource, IEnumerable<object>?> BuildPatientRetriever(Type patientType)
         {
-            var retrieve = typeof(IDataSource)
-                .GetMethod(nameof(IDataSource.Retrieve))!
-                .MakeGenericMethod(patientType);
+            var retrieve = RetrieveDefinition.MakeGenericMethod(patientType);
 
             var dataSource = Expression.Parameter(typeof(IDataSource), "dataSource");
             var call = Expression.Call(dataSource, retrieve, Expression.Constant(null, typeof(RetrieveParameters)));

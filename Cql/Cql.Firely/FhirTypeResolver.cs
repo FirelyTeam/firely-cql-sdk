@@ -7,6 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
@@ -120,7 +121,8 @@ namespace Hl7.Cql.Fhir
 
         internal override PropertyInfo? PatientBirthDateProperty => BirthDateProperty;
 
-        private static readonly PropertyInfo? BirthDateProperty = typeof(IPatient).GetProperty(nameof(IPatient.BirthDate));
+        private static readonly PropertyInfo BirthDateProperty =
+            ReflectionUtility.PropertyOf(() => default(IPatient)!.BirthDate);
 
         internal ModelInspector Inspector { get; }
 
