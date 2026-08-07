@@ -159,7 +159,6 @@ namespace Hl7.Cql.Fhir
                     binding.Name.Replace("-", "_");
 
                 Types.TryAdd(bindingName, binding.Type);
-
             }
         }
     }
