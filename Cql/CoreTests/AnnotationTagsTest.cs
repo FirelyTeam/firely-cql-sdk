@@ -7,7 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions;
-using static System.Reflection.BindingFlags;
+using Hl7.Cql.Compiler.Infrastructure;
 
 namespace CoreTests;
 
@@ -21,7 +21,7 @@ public class AnnotationTagsTest
         // This test will be removed once the original test is implemented.
         // Also remove RR23.cql from Input\ELM\Hl7, then regenerate the ELM, then C# code.
 
-        var methodInfo = typeof(RR23_1_0_0).GetMethod(nameof(RR23_1_0_0.Injury_due_to_falling_rock_within_measurement_period), Public|Instance)!;
+        var methodInfo = ReflectionUtility.MethodOf(() => default(RR23_1_0_0)!.Injury_due_to_falling_rock_within_measurement_period(default!));
         methodInfo.Should().NotBeNull("Method not found.");
 
         CqlTagAttribute[] attribute = (CqlTagAttribute[])methodInfo.GetCustomAttributes<CqlTagAttribute>();
