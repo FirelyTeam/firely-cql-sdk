@@ -127,8 +127,6 @@ namespace Hl7.Cql.Fhir
 
         private readonly ModelInspector _inspector;
 
-        private readonly IDictionary<Type, string> _typeSpecifiers = new Dictionary<Type, string>();
-
         private void adjust()
         {
             Types["{http://hl7.org/fhir}positiveInt"] = typeof(Hl7.Fhir.Model.Integer);
@@ -146,7 +144,6 @@ namespace Hl7.Cql.Fhir
             foreach (var (name, type) in classes)
             {
                 Types.TryAdd(name, type);
-                _typeSpecifiers.TryAdd(type, name);
             }
 
             var bindings = from cm in _inspector.ClassMappings
@@ -162,8 +159,6 @@ namespace Hl7.Cql.Fhir
                     binding.Name.Replace("-", "_");
 
                 Types.TryAdd(bindingName, binding.Type);
-                _typeSpecifiers.TryAdd(binding.Type, bindingName);
-
             }
         }
     }
