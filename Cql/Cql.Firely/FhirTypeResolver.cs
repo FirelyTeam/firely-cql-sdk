@@ -125,9 +125,9 @@ namespace Hl7.Cql.Fhir
         private static readonly PropertyInfo BirthDateProperty =
             ReflectionUtility.PropertyOf(() => default(IPatient)!.BirthDate);
 
-        internal ModelInspector Inspector { get; }
+        private ModelInspector Inspector { get; }
 
-        internal IDictionary<Type, string> TypeSpecifiers { get; } = new Dictionary<Type, string>();
+        private IDictionary<Type, string> TypeSpecifiers { get; } = new Dictionary<Type, string>();
 
         private void adjust()
         {
