@@ -144,20 +144,14 @@ public class ValueSetSource : IValueSetDictionary
 
         var present = CountConcepts(expansion.Contains);
 
-        // Add(ValueSet) rejects a missing Url before reaching here, but an empty one gets through,
-        // and this reads as the only identifier in a failure a caller has to act on.
-        var identifier = !string.IsNullOrEmpty(vs.Url) ? vs.Url
-            : !string.IsNullOrEmpty(vs.Id) ? $"id {vs.Id}"
-            : "<unidentified>";
-
         if (expansion.Offset is > 0)
             throw new InvalidOperationException(
-                $"ValueSet '{identifier}' carries a partial expansion (offset {expansion.Offset}); " +
+                $"ValueSet '{vs.Url}' carries a partial expansion (offset {expansion.Offset}); " +
                 "only a completely expanded value set can be cached.");
 
         if (expansion.Total is { } total && total > present)
             throw new InvalidOperationException(
-                $"ValueSet '{identifier}' carries a partial expansion ({present} of {total} concepts); " +
+                $"ValueSet '{vs.Url}' carries a partial expansion ({present} of {total} concepts); " +
                 "only a completely expanded value set can be cached.");
     }
 
