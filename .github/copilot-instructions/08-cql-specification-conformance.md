@@ -65,4 +65,4 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 8.4.4 **For FHIR primitives** the checker is `Hl7.Fhir.Model.<Type>.IsValidValue(value)` (`FhirDateTime`, `Time`, `Date`, `Instant`, …), a public static on the already-referenced `Hl7.Fhir.Base`, costing one line per emission point
 
-8.4.6 **DO NOT** write a test asserting that invalid output is correct, or a comment claiming an invariant the code does not hold — "pre-existing" and "out of scope" justify not fixing invalid output in the change at hand, never pinning it; quarantine it with a comment pointing at the tracking issue instead
+8.4.5 **DO NOT** write a test asserting that invalid output is correct, or a comment claiming an invariant the code does not hold — "pre-existing" and "out of scope" justify not fixing invalid output in the change at hand, never pinning it; quarantine it with a comment pointing at the tracking issue instead
