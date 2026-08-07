@@ -101,10 +101,11 @@ namespace Hl7.Cql.Runtime
         private PatientTypeInfo? _patientTypeInfo;
 
         /// <summary>
-        /// Creates the <see cref="PatientTypeInfo"/> collaborator for this resolver.
-        /// Called once per resolver, on the first access of <see cref="TypeResolver.PatientTypeInfo"/>. A concurrent
-        /// first access may evaluate it more than once, in which case one result wins and the others are discarded;
-        /// implementations must therefore be free of side effects.
+        /// Creates the <see cref="PatientTypeInfo"/> collaborator for this resolver. Evaluated on the first access of
+        /// <see cref="TypeResolver.PatientTypeInfo"/>, or of <see cref="TypeResolver.PatientType"/> or
+        /// <see cref="TypeResolver.PatientBirthDateProperty"/>, both of which read through it. A concurrent first access
+        /// may evaluate this more than once, in which case one result wins and the others are discarded; implementations
+        /// must therefore be free of side effects.
         /// </summary>
         internal abstract PatientTypeInfo CreatePatientTypeInfo();
 
