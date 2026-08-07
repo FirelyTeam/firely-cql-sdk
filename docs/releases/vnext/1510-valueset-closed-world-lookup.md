@@ -1,6 +1,6 @@
 ## Breaking changes
 
-- `ValueSetSource` no longer consults the external terminology service when the value set itself
+- `ValueSetSource` no longer consults the external terminology service when the value set itself is
   resolved. A resolved value set carries a complete expansion, so a code that is not in it is not a
   member — previously every such miss was re-asked as a `$validate-code` call. The terminology
   service is now consulted only for a value set that can be neither found in the cache nor loaded

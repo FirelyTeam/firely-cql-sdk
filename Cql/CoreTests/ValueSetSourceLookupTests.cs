@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2026, Firely, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+#nullable enable
+
 using Hl7.Cql.Fhir;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Specification.Terminology;
@@ -30,7 +40,7 @@ public class ValueSetSourceLookupTests
     {
         var spy = new SpyTerminologyService();
         var source = new ValueSetSource(resourceResolver: null, termService: spy);
-        if (seed is not null) await source.Add(seed);
+        await source.Add(seed);
         return (source, spy);
     }
 
@@ -88,7 +98,7 @@ public class ValueSetSourceLookupTests
     public async Task PartialExpansion_ByTotal_IsRejected()
     {
         var partial = KnownValueSetWithCodes("111", "222");
-        partial.Expansion.Total = 500; // server says there are 500 concepts; we hold 2
+        partial.Expansion!.Total = 500; // server says there are 500 concepts; we hold 2
 
         var source = new ValueSetSource();
 
@@ -100,7 +110,7 @@ public class ValueSetSourceLookupTests
     public async Task PartialExpansion_ByOffset_IsRejected()
     {
         var partial = KnownValueSetWithCodes("111", "222");
-        partial.Expansion.Offset = 100; // this is page 2 of a larger expansion
+        partial.Expansion!.Offset = 100; // this is page 2 of a larger expansion
 
         var source = new ValueSetSource();
 
@@ -112,7 +122,7 @@ public class ValueSetSourceLookupTests
     public async Task CompleteExpansion_WithMatchingTotal_IsAccepted()
     {
         var complete = KnownValueSetWithCodes("111", "222");
-        complete.Expansion.Total = 2;
+        complete.Expansion!.Total = 2;
 
         var source = new ValueSetSource();
         await source.Add(complete);
@@ -157,7 +167,7 @@ public class ValueSetSourceLookupTests
         public int Calls { get; private set; }
 
         public System.Threading.Tasks.Task<Parameters> ValueSetValidateCode(
-            Parameters parameters, string id = null, bool useGet = false)
+            Parameters parameters, string? id = null, bool useGet = false)
         {
             Calls++;
             var result = new Parameters();
@@ -166,11 +176,11 @@ public class ValueSetSourceLookupTests
         }
 
         public System.Threading.Tasks.Task<Parameters> CodeSystemValidateCode(
-            Parameters parameters, string id = null, bool useGet = false) =>
+            Parameters parameters, string? id = null, bool useGet = false) =>
             throw new NotSupportedException();
 
         public System.Threading.Tasks.Task<Parameters> Subsumes(
-            Parameters parameters, string id = null, bool useGet = false) =>
+            Parameters parameters, string? id = null, bool useGet = false) =>
             throw new NotSupportedException();
     }
 }

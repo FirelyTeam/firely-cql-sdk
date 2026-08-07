@@ -144,14 +144,20 @@ public class ValueSetSource : IValueSetDictionary
 
         var present = CountConcepts(expansion.Contains);
 
+        // Add(ValueSet) rejects a missing Url before reaching here, but an empty one gets through,
+        // and this reads as the only identifier in a failure a caller has to act on.
+        var identifier = !string.IsNullOrEmpty(vs.Url) ? vs.Url
+            : !string.IsNullOrEmpty(vs.Id) ? $"id {vs.Id}"
+            : "<unidentified>";
+
         if (expansion.Offset is > 0)
             throw new InvalidOperationException(
-                $"ValueSet '{vs.Url}' carries a partial expansion (offset {expansion.Offset}); " +
+                $"ValueSet '{identifier}' carries a partial expansion (offset {expansion.Offset}); " +
                 "only a completely expanded value set can be cached.");
 
         if (expansion.Total is { } total && total > present)
             throw new InvalidOperationException(
-                $"ValueSet '{vs.Url}' carries a partial expansion ({present} of {total} concepts); " +
+                $"ValueSet '{identifier}' carries a partial expansion ({present} of {total} concepts); " +
                 "only a completely expanded value set can be cached.");
     }
 
@@ -205,10 +211,9 @@ public class ValueSetSource : IValueSetDictionary
         Predicate<IValueSetFacade> @internal,
         Action<ValidateCodeParameters> external)
     {
-        // Fast path: a warm cache hit does not need the sync-over-async machinery in Load.
-        var resolved = _valueSets.TryGetValue(valueSetUri, out var cached)
-            ? cached
-            : TaskHelper.Await(() => Load(valueSetUri));
+        // Every caller reaches this only after missing the cache, and Load re-checks it anyway,
+        // so there is no warm path left to shortcut here.
+        var resolved = TaskHelper.Await(() => Load(valueSetUri));
 
         // A resolved value set carries a complete expansion (an expansion that could not be
         // completed throws in Add and is never cached), so it answers definitively: a miss
