@@ -227,8 +227,10 @@ public class FusedOperatorTests
     /// <summary>
     /// The documented, accepted nuance of the single-pass fused forms: per element the predicate
     /// and the selector interleave (<c>p(x₁), f(x₁), p(x₂)…</c>) where the composition runs every
-    /// <c>p</c> first and only then every <c>f</c>. No invocation is added or skipped — the
-    /// per-lambda traces are identical, only their relative order changes.
+    /// <c>p</c> first and only then every <c>f</c>. While both lambdas run to completion no
+    /// invocation is added or skipped — the per-lambda traces are identical, only their relative
+    /// order changes. Once one of them throws the interleaving does become observable; see
+    /// <see cref="WhereSelect_PredicateThrows_SelectorHasAlreadyRunForPrecedingElements"/>.
     /// </summary>
     [TestMethod]
     public void WhereSelect_LambdaInterleavingIsTheOnlyDelta()
@@ -452,6 +454,59 @@ public class FusedOperatorTests
 
         Assert.AreEqual(expected, actual);
         Assert.AreEqual(typeof(InvalidOperationException), actual.type);
+    }
+
+    #endregion
+
+    #region Interleaving is observable when a lambda throws
+
+    /// <summary>
+    /// The exception itself is the same, but the work done before it is not. The composition runs
+    /// the predicate over the whole source before the selector sees anything, so a predicate that
+    /// throws leaves the selector uninvoked; the single-pass fused form has already projected every
+    /// element that passed the predicate ahead of the failing one, together with whatever side
+    /// effects that projection carries. This test pins the <em>fused</em> behaviour — the behaviour
+    /// generated code gets — deliberately, rather than asserting parity that does not hold here.
+    /// </summary>
+    [TestMethod]
+    public void WhereSelect_PredicateThrows_SelectorHasAlreadyRunForPrecedingElements()
+    {
+        var op = Operators();
+        var source = new List<string?> { "a", "b" };
+        Func<string?, bool?> boom = x => x == "b" ? throw new InvalidOperationException("boom-" + x) : true;
+
+        var fused = new List<string>();
+        Func<string?, int?> fusedSelector = x => { fused.Add("f:" + x); return x?.Length; };
+        Catch(() => op.WhereSelect(source, boom, fusedSelector));
+
+        var composed = new List<string>();
+        Func<string?, int?> composedSelector = x => { composed.Add("f:" + x); return x?.Length; };
+        Catch(() => op.Select(op.Where(source, boom), composedSelector));
+
+        CollectionAssert.AreEqual(new[] { "f:a" }, fused);
+        CollectionAssert.AreEqual(Array.Empty<string>(), composed);
+    }
+
+    /// <summary>Symmetric to <see cref="WhereSelect_PredicateThrows_SelectorHasAlreadyRunForPrecedingElements"/>:
+    /// a selector that throws leaves the composition's predicate uninvoked, while the fused form has
+    /// already tested every projection produced ahead of the failing element.</summary>
+    [TestMethod]
+    public void SelectWhere_SelectorThrows_PredicateHasAlreadyRunForPrecedingElements()
+    {
+        var op = Operators();
+        var source = new List<string?> { "a", "b" };
+        Func<string?, int?> boom = x => x == "b" ? throw new InvalidOperationException("boom-" + x) : x?.Length;
+
+        var fused = new List<string>();
+        Func<int?, bool?> fusedPredicate = x => { fused.Add("p:" + x); return true; };
+        Catch(() => op.SelectWhere(source, boom, fusedPredicate));
+
+        var composed = new List<string>();
+        Func<int?, bool?> composedPredicate = x => { composed.Add("p:" + x); return true; };
+        Catch(() => op.Where(op.Select(source, boom), composedPredicate));
+
+        CollectionAssert.AreEqual(new[] { "p:1" }, fused);
+        CollectionAssert.AreEqual(Array.Empty<string>(), composed);
     }
 
     #endregion

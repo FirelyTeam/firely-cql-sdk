@@ -8,6 +8,7 @@
 
 #nullable enable
 
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Operators;
 
 namespace Hl7.Cql.Compiler;
@@ -50,9 +51,13 @@ namespace Hl7.Cql.Compiler;
 /// <para><b>Single use is structural.</b> Fusion is only sound when the producer's result is
 /// consumed exactly once. Here the producer *is* the consumer's source argument node, and a tree
 /// node has exactly one parent — so nesting is the single-use proof, no aliasing analysis needed.
-/// This is also why the producer must sit in the <em>source</em> position specifically: a
-/// <c>Where</c> result appearing as, say, <c>Except</c>'s second argument is a different value
-/// with a different consumer contract, and must not fuse.</para>
+/// This is also why the producer must sit in the <em>source</em> position specifically: a producer
+/// consumed as some other argument is a different value with a different consumer contract, and
+/// must not fuse. That check is defence-in-depth: all four fusable consumers take their list in
+/// argument 0 and declare nothing but a lambda beside it, so a list-typed producer in a non-source
+/// argument is rejected by <see cref="CodeInvoke"/>'s own assignability check before fusion ever
+/// sees it. It is written out so that adding a fused operator whose source is elsewhere does not
+/// silently mis-fuse.</para>
 ///
 /// <para><b>Conservatism.</b> The producer has to be the argument node itself. If overload
 /// resolution wrapped it in a conversion (a cast or a <c>Convert…</c> call), the pattern does not
@@ -72,23 +77,14 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 partial class CqlOperatorsBinder
 {
-    private static readonly MethodInfo WhereMethod = ICqlOperatorsMethod(nameof(ICqlOperators.Where), 2);
-    private static readonly MethodInfo SelectMethod = ICqlOperatorsMethod(nameof(ICqlOperators.Select), 2);
-    private static readonly MethodInfo ExistsMethod = ICqlOperatorsMethod(nameof(ICqlOperators.Exists), 1);
-    private static readonly MethodInfo DistinctMethod = ICqlOperatorsMethod(nameof(ICqlOperators.Distinct), 1);
-    private static readonly MethodInfo WhereAnyMethod = ICqlOperatorsMethod(nameof(ICqlOperators.WhereAny), 2);
-    private static readonly MethodInfo WhereSelectMethod = ICqlOperatorsMethod(nameof(ICqlOperators.WhereSelect), 3);
-    private static readonly MethodInfo SelectWhereMethod = ICqlOperatorsMethod(nameof(ICqlOperators.SelectWhere), 3);
-    private static readonly MethodInfo SelectDistinctMethod = ICqlOperatorsMethod(nameof(ICqlOperators.SelectDistinct), 2);
-
-    private static MethodInfo ICqlOperatorsMethod(string name, int parameterCount)
-    {
-        var candidates = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(name, parameterCount);
-        return candidates.Count == 1
-            ? candidates.Single()
-            : throw new InvalidOperationException(
-                $"Operator fusion expects exactly one {nameof(ICqlOperators)}.{name} overload with {parameterCount} parameter(s), found {candidates.Count}.");
-    }
+    private static readonly MethodInfo WhereMethod = ReflectionUtility.GenericMethodDefinitionOf(() => default(ICqlOperators)!.Where<object>(default!, default!));
+    private static readonly MethodInfo SelectMethod = ReflectionUtility.GenericMethodDefinitionOf(() => default(ICqlOperators)!.Select<object, object>(default!, default!));
+    private static readonly MethodInfo ExistsMethod = ReflectionUtility.GenericMethodDefinitionOf(() => default(ICqlOperators)!.Exists<object>(default!));
+    private static readonly MethodInfo DistinctMethod = ReflectionUtility.GenericMethodDefinitionOf(() => default(ICqlOperators)!.Distinct<object>(default!));
+    private static readonly MethodInfo WhereAnyMethod = ReflectionUtility.GenericMethodDefinitionOf(() => default(ICqlOperators)!.WhereAny<object>(default!, default!));
+    private static readonly MethodInfo WhereSelectMethod = ReflectionUtility.GenericMethodDefinitionOf(() => default(ICqlOperators)!.WhereSelect<object, object>(default!, default!, default!));
+    private static readonly MethodInfo SelectWhereMethod = ReflectionUtility.GenericMethodDefinitionOf(() => default(ICqlOperators)!.SelectWhere<object, object>(default!, default!, default!));
+    private static readonly MethodInfo SelectDistinctMethod = ReflectionUtility.GenericMethodDefinitionOf(() => default(ICqlOperators)!.SelectDistinct<object, object>(default!, default!));
 
     /// <summary>
     /// Returns the fused equivalent of <paramref name="expression"/> when it is one of the four

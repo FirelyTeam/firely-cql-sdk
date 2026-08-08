@@ -17,12 +17,15 @@
   been regenerated (#1484).
 
   Each fused operator is non-short-circuiting by construction: it invokes the same lambdas over the
-  same elements, in the same relative order, as the composition it replaces, so results, `Message`
-  side effects and exception surfaces are unchanged. One documented nuance: single-pass
-  `WhereSelect`/`SelectWhere` interleave the two lambdas per element (`p(x₁), f(x₁), p(x₂)…`)
-  instead of running all `p` and then all `f`. No evaluation is added or skipped; only if *two
-  different lambdas would both throw* can the surfacing exception differ. No observable difference
-  showed up on the measurement corpus.
+  same elements, in the same relative order, as the composition it replaces, so as long as every
+  lambda runs to completion the results, `Message` side effects and exception surfaces are
+  unchanged. One documented nuance: single-pass `WhereSelect`/`SelectWhere` interleave the two
+  lambdas per element (`p(x₁), f(x₁), p(x₂)…`) instead of running all `p` and then all `f`. That
+  becomes observable when one of the two lambdas throws. The same exception still surfaces, but the
+  composition would have finished the first lambda over the whole source before starting the second,
+  so it never reaches the second at all — whereas the fused form has already invoked it for the
+  elements preceding the failure, including any `Message` side effects it carries. No observable
+  difference showed up on the measurement corpus.
 
   Measured on a prototype of this change over the dqm-content-qicore-2025 corpus (1,340 fusions
   across 86 of 89 libraries), in an order-balanced steady-state A/B — 900 cases × 100 reps, medians

@@ -203,12 +203,13 @@ public class CqlOperatorsBinderFusionTests
     #region Negative cases
 
     /// <summary>
-    /// Fusion is only sound for a producer consumed as the consumer's <em>source</em>. A
-    /// <c>Where</c> result sitting in <c>Except</c>'s second argument is a different value with a
-    /// different contract, and must be left alone.
+    /// A <c>Where</c> result feeding an operator that has no fused equivalent stays a
+    /// composition, wherever in the argument list it sits. This pins the consumer half of the
+    /// match — <c>Except</c> is not one of the four fusable consumers — not the source-position
+    /// guard, which <see cref="ProducerInANonSourceArgument_IsUnrepresentableInTheIR"/> covers.
     /// </summary>
     [TestMethod]
-    public void WhereResultAsNonSourceArgument_DoesNotFuse()
+    public void WhereResultConsumedByNonFusableOperator_DoesNotFuse()
     {
         var binder = CreateBinder();
         var left = IntSource();
@@ -220,11 +221,53 @@ public class CqlOperatorsBinderFusionTests
 
         Assert.AreEqual(nameof(ICqlOperators.Except), call.Method.Name);
         Assert.AreSame(left, call.Arguments[0]);
-        // The Where call survives untouched in the non-source position.
+        // The Where call survives untouched.
         var producer = AssertOperatorsInvoke(call.Arguments[1]);
         Assert.AreEqual(nameof(ICqlOperators.Where), producer.Method.Name);
         Assert.AreSame(right, producer.Arguments[0]);
         Assert.AreSame(predicate, producer.Arguments[1]);
+    }
+
+    /// <summary>
+    /// Fusion is only sound for a producer consumed as the consumer's <em>source</em>, so
+    /// <c>Fuse</c> looks for the producer at argument 0 and nowhere else. That check is
+    /// defence-in-depth against a future fusable consumer, not a live branch, and this test
+    /// records why: all four fusable consumers take their list in position 0, and the only other
+    /// parameter any of them declares is a lambda. A list-typed producer therefore cannot occupy
+    /// a non-source argument of a fusable consumer — <see cref="CodeInvoke"/>'s constructor
+    /// rejects the assignment, so the shape is unrepresentable in the IR rather than merely
+    /// unreachable through the binder.
+    ///
+    /// <para>If a fused operator is ever added whose source is not argument 0, or whose second
+    /// list parameter is a list, the assertions below stop holding and the source-position guard
+    /// becomes load-bearing — at which point this test should be replaced by one that drives that
+    /// shape through the binder.</para>
+    /// </summary>
+    [TestMethod]
+    public void ProducerInANonSourceArgument_IsUnrepresentableInTheIR()
+    {
+        var binder = CreateBinder();
+        var source = IntSource();
+        var selector = SelectorToString(typeof(int?));
+        var predicate = Predicate(typeof(int?));
+
+        var where = (CodeInvoke)binder.BindToMethod(nameof(ICqlOperators.Where), [source, predicate], []);
+        var select = (CodeInvoke)binder.BindToMethod(nameof(ICqlOperators.Select), [source, selector], []);
+
+        // Exists and Distinct have no non-source argument at all.
+        var exists = (CodeInvoke)binder.BindToMethod(nameof(ICqlOperators.Exists), [source], []);
+        var distinct = (CodeInvoke)binder.BindToMethod(nameof(ICqlOperators.Distinct), [source], []);
+        Assert.AreEqual(1, exists.Method.GetParameters().Length);
+        Assert.AreEqual(1, distinct.Method.GetParameters().Length);
+
+        // Select's and Where's second parameter is a delegate, so a producer cannot be passed
+        // there: the IR refuses to build the call.
+        Assert.ThrowsException<ArgumentException>(
+            () => new CodeInvoke(select.Receiver, select.Method, source, where),
+            "Select's second parameter is a lambda; a Where result must not be assignable to it.");
+        Assert.ThrowsException<ArgumentException>(
+            () => new CodeInvoke(where.Receiver, where.Method, source, select),
+            "Where's second parameter is a lambda; a Select result must not be assignable to it.");
     }
 
     /// <summary>

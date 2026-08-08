@@ -22,13 +22,26 @@ namespace Hl7.Cql.Operators
     /// intermediate list.
     /// <para>
     /// Every one of them is deliberately NON-short-circuiting: the predicate and/or selector is
-    /// invoked for exactly the same elements, in the same relative order, as the composed form, so
-    /// that null-source handling, null-element handling, thrown exceptions and
-    /// <see cref="ICqlOperators.Message{T}"/> side effects are preserved. The only thing removed is
-    /// the intermediate materialization. Note in particular that <see cref="WhereAny{T}"/> does not
+    /// invoked for exactly the same elements, in the same relative order, as the composed form.
+    /// While every lambda runs to completion that makes the two forms indistinguishable — same
+    /// result, same null-source and null-element handling, same
+    /// <see cref="ICqlOperators.Message{T}"/> side effects — and the only thing removed is the
+    /// intermediate materialization. Note in particular that <see cref="WhereAny{T}"/> does not
     /// stop at the first satisfying element even though <see cref="CqlOperators.Exists{T}"/> does:
     /// in the composed form <c>Where</c> has already evaluated the predicate over the whole source
     /// before <c>Exists</c> ever looks at the result.
+    /// </para>
+    /// <para>
+    /// A throwing lambda is the one case where the two forms diverge, and only in the two-lambda
+    /// operators. The composed form runs the first lambda over the whole source before the second
+    /// one sees anything, so an exception out of the first leaves the second uninvoked; the fused
+    /// operators interleave the two per element, so the other lambda has already run for the
+    /// elements preceding the failure — with whatever side effects it carries. Over
+    /// <c>["a", "b"]</c> with a predicate that throws on <c>"b"</c>,
+    /// <c>Select(Where(s, p), f)</c> invokes the selector for nothing while
+    /// <see cref="WhereSelect{T,TR}"/> has already invoked it for <c>"a"</c>;
+    /// <see cref="SelectWhere{T,TR}"/> is symmetric for a throwing selector. The exception that
+    /// surfaces is the same one either way — what differs is the work already done when it does.
     /// </para>
     /// <para>
     /// The result lists are intentionally not presized from the source's count: all of these
