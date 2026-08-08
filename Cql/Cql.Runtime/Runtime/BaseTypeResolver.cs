@@ -9,6 +9,8 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 
+#nullable enable
+
 namespace Hl7.Cql.Runtime
 {
     /// <summary>
@@ -95,6 +97,26 @@ namespace Hl7.Cql.Runtime
             pointType is not null
                 ? typeof(CqlInterval<>).MakeGenericType(pointType)
                 : throw new ArgumentNullException(nameof(pointType));
+
+        private PatientTypeInfo? _patientTypeInfo;
+
+        /// <summary>
+        /// Creates the <see cref="PatientTypeInfo"/> collaborator for this resolver. Evaluated on the first access of
+        /// <see cref="TypeResolver.PatientTypeInfo"/>, or of <see cref="TypeResolver.PatientType"/> or
+        /// <see cref="TypeResolver.PatientBirthDateGetter"/>, both of which read through it. A concurrent first access
+        /// may evaluate this more than once, in which case one result wins and the others are discarded; implementations
+        /// must therefore be free of side effects.
+        /// </summary>
+        internal abstract PatientTypeInfo CreatePatientTypeInfo();
+
+        /// <inheritdoc/>
+        internal sealed override PatientTypeInfo PatientTypeInfo => _patientTypeInfo ??= CreatePatientTypeInfo();
+
+        /// <inheritdoc/>
+        internal sealed override Type? PatientType => PatientTypeInfo.Type;
+
+        /// <inheritdoc/>
+        internal sealed override Func<object, object?>? PatientBirthDateGetter => PatientTypeInfo.BirthDateGetter;
 
         /// <inheritdoc/>
         internal sealed override PropertyInfo? GetProperty(Type type, string propertyName)
