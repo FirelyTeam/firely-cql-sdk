@@ -125,8 +125,34 @@ namespace CoreTests.Fhir
             return valueSets;
         }
 
-        private static BundleDataSource DataSource(Fixture fixture, IValueSetDictionary? valueSets = null) =>
-            new(fixture.Bundle, valueSets ?? ValueSets());
+        private static BundleDataSource DataSource(
+            Fixture fixture,
+            IValueSetDictionary? valueSets = null,
+            IRetrieveProfileFilter? profileFilter = null) =>
+            new(fixture.Bundle, valueSets ?? ValueSets(), profileFilter: profileFilter);
+
+        /// <summary>
+        /// An <see cref="IRetrieveProfileFilter"/> that records how often the profile predicate was applied to an
+        /// instance. Everything else is delegated to <see cref="QICoreRetrieveProfileFilter.Default"/>, so the
+        /// retrieve keeps exactly the results it has without the counter.
+        /// </summary>
+        private sealed class CountingProfileFilter(IRetrieveProfileFilter inner) : IRetrieveProfileFilter
+        {
+            /// <summary>The number of instances the profile predicate was applied to.</summary>
+            public int FilterApplications { get; private set; }
+
+            public Predicate<Resource>? GetFilter(string templateId)
+            {
+                if (inner.GetFilter(templateId) is not { } filter)
+                    return null;
+
+                return resource =>
+                {
+                    FilterApplications++;
+                    return filter(resource);
+                };
+            }
+        }
 
         /// <summary>
         /// An <see cref="IValueSetDictionary"/> that records how often membership was asked for. Everything
@@ -401,6 +427,36 @@ namespace CoreTests.Fhir
 
             checksAfterFirstWalk.Should().BeGreaterThan(0);
             counting.MembershipChecks.Should().Be(checksAfterFirstWalk);
+        }
+
+        /// <summary>
+        /// NEW BEHAVIOR - fails against <c>develop</c>. The profile filter is the third eager path: on
+        /// <c>develop</c> it is a lazy <c>Where</c>, so every walk of the retrieve result re-applies the profile
+        /// predicate to each candidate. Counting the applications is what distinguishes the two, as the elements
+        /// a <c>Where</c> chain yields are identical.
+        /// </summary>
+        [TestMethod]
+        public void Materialized_ProfileFilteredRetrieveEnumeratedTwice_AppliesTheProfileFilterOnlyOnce()
+        {
+            var fixture = new Fixture();
+            var counting = new CountingProfileFilter(QICoreRetrieveProfileFilter.Default);
+            var dr = DataSource(fixture, profileFilter: counting);
+
+            // qicore-observationcancelled keeps only cancelled observations.
+            var results = dr.Retrieve<Observation>(new RetrieveParameters(null, null, null, CancelledObservationProfile));
+
+            var firstWalk = results.ToList();
+            var applicationsAfterFirstWalk = counting.FilterApplications;
+
+            var secondWalk = results.ToList();
+
+            // The filter really ran - otherwise "no extra applications" would be vacuously true.
+            applicationsAfterFirstWalk.Should().BeGreaterThan(0);
+            counting.FilterApplications.Should().Be(applicationsAfterFirstWalk,
+                "the bundle is immutable during an evaluation, so the profile decision is made once and the result reused");
+
+            secondWalk.Should().Equal(firstWalk, ReferenceEquals);
+            firstWalk.Should().Equal(new[] { fixture.ObsY }, ReferenceEquals);
         }
 
         #endregion
