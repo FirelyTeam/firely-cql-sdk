@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Compiler;
@@ -112,9 +113,8 @@ internal class TupleBuilderCache : IDisposable
     {
         var fieldBuilder = myTypeBuilder.DefineField($"_{normalizedName}", type, FieldAttributes.Private);
         var propertyBuilder = myTypeBuilder.DefineProperty(normalizedName, PropertyAttributes.None, type, null);
-        var customAttributeBuilder = new CustomAttributeBuilder(typeof(CqlDefinitionAttribute).GetConstructor([
-            typeof(string)
-        ])!, [cqlName]);
+        var customAttributeBuilder = new CustomAttributeBuilder(
+            ReflectionUtility.ConstructorOf(() => new CqlDefinitionAttribute(default!)), [cqlName]);
         propertyBuilder.SetCustomAttribute(customAttributeBuilder);
         MethodAttributes attributes = MethodAttributes.Public
                                       | MethodAttributes.SpecialName

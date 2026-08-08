@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Elm.Serialization;
 using Hl7.Fhir.Model;
@@ -189,7 +190,7 @@ namespace CoreTests
             includeDef.mediaType.Should().Be("application/elm+xml");
 
             // Verify the DataType attribute is present (anyURI)
-            var property = typeof(IncludeDef).GetProperty("mediaType");
+            var property = ReflectionUtility.PropertyOf(() => default(IncludeDef)!.mediaType);
             var xmlAttr = property!.GetCustomAttributes(typeof(System.Xml.Serialization.XmlAttributeAttribute), false)
                 .Cast<System.Xml.Serialization.XmlAttributeAttribute>()
                 .FirstOrDefault();
@@ -214,7 +215,7 @@ namespace CoreTests
             codeDef.accessLevel.Should().Be(AccessModifier.Public);
 
             // Verify DefaultValueAttribute is present with enum value (not string)
-            var property = typeof(CodeDef).GetProperty("accessLevel");
+            var property = ReflectionUtility.PropertyOf(() => default(CodeDef)!.accessLevel);
             var defaultAttr = property!.GetCustomAttributes(typeof(System.ComponentModel.DefaultValueAttribute), false)
                 .Cast<System.ComponentModel.DefaultValueAttribute>()
                 .FirstOrDefault();
@@ -227,7 +228,7 @@ namespace CoreTests
         public void XmlElementAttribute_AnnotationArray_GeneratesCorrectly()
         {
             // Element.annotation is a direct array property that should have XmlElementAttribute
-            var property = typeof(Hl7.Cql.Elm.Element).GetProperty("annotation");
+            var property = ReflectionUtility.PropertyOf(() => default(Hl7.Cql.Elm.Element)!.annotation);
             property.Should().NotBeNull();
 
             var xmlElemAttr = property!.GetCustomAttributes(typeof(System.Xml.Serialization.XmlElementAttribute), false)

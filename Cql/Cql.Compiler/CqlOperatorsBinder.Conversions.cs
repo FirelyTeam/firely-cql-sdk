@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
@@ -26,7 +27,7 @@ partial class CqlOperatorsBinder
     /// <see cref="ICqlOperators"/> call.
     /// </summary>
     private static CodeExpression OperatorsReceiver { get; } =
-        new CodeProperty(CodeContextParameter.Instance, typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!);
+        new CodeProperty(CodeContextParameter.Instance, ReflectionUtility.PropertyOf(() => default(CqlContext)!.Operators));
 
     /// <summary>
     /// Tries to convert the given <paramref name="expression"/> to the specified type <paramref name="to"/>.

@@ -452,24 +452,24 @@ namespace Hl7.Cql.Iso8601
                             }
                         }
                         if (osHour.HasValue)
-                        {
-                            var offsetHour = osHour.Value;
-                            var offsetMinute = osMinute ?? 0;
-                            if (offsetHour == 0 && offsetMinute == 0)
-                                sb.Append('Z');
-                            else
-                            {
-                                // Either component can carry the sign; the offset is signed as a whole.
-                                sb.Append(offsetHour < 0 || offsetMinute < 0 ? '-' : '+');
-                                sb.Append(Math.Abs(offsetHour).ToString("D2", CultureInfo.InvariantCulture));
-                                sb.Append(':');
-                                sb.Append(Math.Abs(offsetMinute).ToString("D2", CultureInfo.InvariantCulture));
-                            }
-                        }
+                            sb.Append(FormatKnownOffset(osHour.Value, osMinute ?? 0));
                     }
                 }
             }
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Formats a known (non-null) timezone offset as an ISO 8601 offset string, rendering a
+        /// zero offset as <c>Z</c> and a non-zero offset as <c>±hh:mm</c>. Either component can
+        /// carry the sign; the offset is signed as a whole.
+        /// </summary>
+        internal static string FormatKnownOffset(int offsetHour, int offsetMinute)
+        {
+            if (offsetHour == 0 && offsetMinute == 0)
+                return "Z";
+            return FormattableString.Invariant(
+                $"{(offsetHour < 0 || offsetMinute < 0 ? '-' : '+')}{Math.Abs(offsetHour):D2}:{Math.Abs(offsetMinute):D2}");
         }
 
     }
