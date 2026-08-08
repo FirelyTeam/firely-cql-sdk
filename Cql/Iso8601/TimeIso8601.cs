@@ -359,20 +359,7 @@ namespace Hl7.Cql.Iso8601
                 }
             }
             if (osHour.HasValue)
-            {
-                var offsetHour = osHour.Value;
-                var offsetMinute = osMinute ?? 0;
-                if (offsetHour == 0 && offsetMinute == 0)
-                    sb.Append('Z');
-                else
-                {
-                    // Either component can carry the sign; the offset is signed as a whole.
-                    sb.Append(offsetHour < 0 || offsetMinute < 0 ? '-' : '+');
-                    sb.Append(Math.Abs(offsetHour).ToString("D2", CultureInfo.InvariantCulture));
-                    sb.Append(':');
-                    sb.Append(Math.Abs(offsetMinute).ToString("D2", CultureInfo.InvariantCulture));
-                }
-            }
+                sb.Append(DateTimeIso8601.FormatKnownOffset(osHour.Value, osMinute ?? 0));
             return sb.ToString();
         }
 

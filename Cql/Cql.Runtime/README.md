@@ -76,6 +76,8 @@ Sharing a context requires the following, which is documented in full on `CqlCon
 - The data source and value set implementations tolerate concurrent reads, and the data behind them does not change during the evaluation
 - Callers accept that two threads missing on the same definition may both evaluate it; the value losing the race is discarded, which is harmless because CQL expression bodies are pure
 
+Sharing a context is the more demanding option. Prefer one `CqlContext` per evaluation over a shared pooled `LibrarySetInvoker` unless you have measured a reason not to — see **[Caching strategies](../../docs/caching-strategies.md)** for the trade-off and for how the SDK's caches relate.
+
 ## Usage
 
 This package is used by the CQL compiler and other runtime components to execute CQL logic. It provides the foundational runtime services needed for CQL evaluation.

@@ -189,7 +189,10 @@ static string PrettyPrintJson(string json)
 		<JavaCommand>java</JavaCommand>
 		<!-- <JavaCommand>java -Djakarta.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.XMLBindingContextFactory</JavaCommand> -->
 
-		<ClassPath>-classpath $(TargetDependencies)/* org.cqframework.cql.cql2elm.cli.Main</ClassPath>
+		<!-- The classpath wildcard must be quoted so Unix shells pass it through for java
+		     to expand itself; unquoted, sh expands it and the first extra jar path is
+		     misread as the main class. Quotes are harmless on Windows. -->
+		<ClassPath>-classpath "$(TargetDependencies)/*" org.cqframework.cql.cql2elm.cli.Main</ClassPath>
 		<JavaOutputFile>$(MSBuildProjectDirectory)/elm-build.log</JavaOutputFile>
 		<JavaArgs>-input $(CqlDirectory) -f JSON -output $(ElmDirectory) -locators true -result-types true -signatures All</JavaArgs>
 		<JavaCLI>"$(JavaCommand)" $(ClassPath) $(JavaArgs)</JavaCLI>

@@ -12,11 +12,11 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
 [CqlLibrary("MeasureExample", "0.0.1")]
 public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_0_0_1>
 {
-    #region Functions and Expressions (6)
+    #region Functions and Expressions (7)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -103,6 +103,25 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
 
     private bool? Numerator_2_Compute(CqlContext context) =>
     false;
+
+
+    [CqlExpressionDefinition("Gender Stratifier")]
+    [CqlTag("group", "1")]
+    [CqlTag("stratifier", "Gender")]
+    [CqlTag("description", "Stratifies by the patient's administrative gender")]
+    public string Gender_Stratifier(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_Gender_Stratifier, Gender_Stratifier_Compute);
+
+    private const long _cacheIndex_Gender_Stratifier = -8144273202348602151L;
+
+    private string Gender_Stratifier_Compute(CqlContext context)
+    {
+        Patient a_ = this.Patient(context);
+        Code<AdministrativeGender> b_ = a_?.GenderElement;
+        AdministrativeGender? c_ = b_?.Value;
+        string d_ = context.Operators.Convert<string>(c_);
+        return d_;
+    }
 
 
     #endregion Functions and Expressions
