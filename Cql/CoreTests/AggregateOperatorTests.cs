@@ -90,6 +90,45 @@ public class AggregateOperatorTests
         Assert.AreEqual(5L, Operators().Median(new long?[] { 2L, 4L, 8L, 6L }));
     }
 
+    /// <summary>
+    /// The even-count midpoint of two values near the type's maximum must not overflow: summing the two middle
+    /// values first wraps in C#'s default unchecked context, which turns the median of two maxima into a negative
+    /// value.
+    /// </summary>
+    [TestMethod]
+    public void Median_Integer_EvenCountOfLargeValues_DoesNotOverflow()
+    {
+        Assert.AreEqual(int.MaxValue, Operators().Median(new int?[] { int.MaxValue, int.MaxValue }));
+    }
+
+    [TestMethod]
+    public void Median_Long_EvenCountOfLargeValues_DoesNotOverflow()
+    {
+        Assert.AreEqual(long.MaxValue, Operators().Median(new long?[] { long.MaxValue, long.MaxValue }));
+    }
+
+    /// <summary>
+    /// The two most negative values have the same problem in the other direction. A pair whose midpoint is not a
+    /// whole number keeps truncating towards zero, which is what dividing the sum of the two middle values does.
+    /// </summary>
+    [TestMethod]
+    public void Median_Integer_EvenCountOfNegativeValues_DoesNotOverflowAndTruncatesTowardsZero()
+    {
+        var operators = Operators();
+
+        Assert.AreEqual(int.MinValue, operators.Median(new int?[] { int.MinValue, int.MinValue }));
+        Assert.AreEqual(-2, operators.Median(new int?[] { -3, -2 }));
+    }
+
+    [TestMethod]
+    public void Median_Long_EvenCountOfNegativeValues_DoesNotOverflowAndTruncatesTowardsZero()
+    {
+        var operators = Operators();
+
+        Assert.AreEqual(long.MinValue, operators.Median(new long?[] { long.MinValue, long.MinValue }));
+        Assert.AreEqual(-2L, operators.Median(new long?[] { -3L, -2L }));
+    }
+
     [TestMethod]
     public void Median_EmptySource_IsNull()
     {

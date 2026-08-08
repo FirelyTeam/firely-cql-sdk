@@ -124,11 +124,14 @@ namespace Hl7.Cql.Operators
                         }
                     }
                 }
-                catch (OverflowException)
+                catch (OverflowException e)
                 {
                     // The product itself is outside Decimal's range, so Product(X) cannot be represented and neither
                     // can Power of it. Per the spec (§9.B) Power: if the result cannot be represented, the result is
-                    // null.
+                    // null. The geometric mean of such a list can still be representable - the product is
+                    // accumulated in Decimal - so the message keeps the null visible in the evaluation log rather
+                    // than letting it pass as an ordinary result.
+                    Message(new { argument, e }, "CqlOperators.AggregateFunctions.GeometricMean", "Warning", "Ignored overflow errors from decimal geometric mean product, returned null.");
                     return null;
                 }
                 if (nonNullCount == 0) return null;
@@ -143,13 +146,18 @@ namespace Hl7.Cql.Operators
                     // product under a fractional root has no real value (Math.Pow gives NaN), and a result outside
                     // Decimal's range is not representable either; both are null rather than an OverflowException
                     // out of the cast.
-                    if (double.IsNaN(result) || double.IsInfinity(result)) return null;
+                    if (double.IsNaN(result) || double.IsInfinity(result))
+                    {
+                        Message(new { argument, product, result }, "CqlOperators.AggregateFunctions.GeometricMean", "Warning", "Geometric mean result cannot be represented as decimal; returning null.");
+                        return null;
+                    }
                     try
                     {
                         return (decimal)result;
                     }
-                    catch (OverflowException)
+                    catch (OverflowException e)
                     {
+                        Message(new { argument, product, result, e }, "CqlOperators.AggregateFunctions.GeometricMean", "Warning", "Decimal overflow in geometric mean result; returning null.");
                         return null;
                     }
                 }
@@ -212,10 +220,13 @@ namespace Hl7.Cql.Operators
 
 
 
-        // The three overloads share one shape: collect the non-null values in a single pass, sort them in place,
-        // and read the middle out of that sorted list by index. Reading the odd-length median out of the original
-        // source instead - as this used to - walks the source a second time and indexes into a sequence that is
-        // neither sorted nor stripped of its nulls, so it returns an arbitrary element rather than the median.
+        // The three overloads share one shape: collect the non-null values in a single pass, sort them into a new
+        // list, and read the middle out of that sorted list by index. Reading the odd-length median out of the
+        // original source instead - as this used to - walks the source a second time and indexes into a sequence
+        // that is neither sorted nor stripped of its nulls, so it returns an arbitrary element rather than the
+        // median. The even-count midpoint of the Integer and Long overloads is taken in a wider type: summing the
+        // two middle values first overflows for values near the type's maximum, which wraps silently in C#'s
+        // default unchecked context and turns the median of two large values into a negative one.
 
         public decimal? Median(IEnumerable<decimal?> source)
         {
@@ -245,7 +256,9 @@ namespace Hl7.Cql.Operators
 
             var isEven = (sorted.Count & 1) == 0;
             var middle = sorted.Count >> 1;
-            return isEven ? (sorted[middle] + sorted[middle - 1]) / 2 : sorted[middle];
+            // long holds the sum of any two int values, so the midpoint truncates towards zero exactly as an int
+            // division of a non-overflowing sum does.
+            return isEven ? (int)(((long)sorted[middle] + sorted[middle - 1]) / 2L) : sorted[middle];
         }
 
         public long? Median(IEnumerable<long?> source)
@@ -259,7 +272,9 @@ namespace Hl7.Cql.Operators
 
             var isEven = (sorted.Count & 1) == 0;
             var middle = sorted.Count >> 1;
-            return isEven ? (sorted[middle] + sorted[middle - 1]) / 2L : sorted[middle];
+            // decimal holds the sum of any two long values exactly, and the cast back truncates towards zero exactly
+            // as a long division of a non-overflowing sum does.
+            return isEven ? (long)(((decimal)sorted[middle] + sorted[middle - 1]) / 2m) : sorted[middle];
         }
 
         private static List<T> SortedNonNullValues<T>(IEnumerable<T?> source)
