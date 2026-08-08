@@ -24,10 +24,16 @@ namespace CoreTests.Fhir;
 /// with the same <c>ResourceIdCqlComparer</c> built from the caller's <see cref="StringComparer"/>,
 /// only the enumeration of the model assembly moves from per-call to once-per-process. So there is
 /// no fail-first proof for any test here: every one of them passes on <c>develop</c> too, and that
-/// is exactly the point. They exist to pin the registration semantics the hoist must preserve, so
-/// that a future change to how the type list is computed (filtered differently, cached per
-/// instance, restricted to concrete types, ...) shows up as a test failure rather than as a silent
-/// change in which resources compare equal.
+/// is exactly the point. They exist to pin the registration semantics the hoist must preserve.
+/// <para>
+/// Two ways of breaking those semantics do fail here: a type list that loses types a runtime
+/// instance can have, and a comparer that stops being built per call from the caller's
+/// <see cref="StringComparer"/> -- by hoisting the comparer into the static alongside the type list,
+/// for instance. A change that only drops types no runtime instance can ever have (restricting the
+/// sweep to concrete types, say) is invisible to these tests, and so is moving the type list from a
+/// process-wide cache to a per-instance one: both leave every observable registration identical,
+/// which is why neither is claimed as covered.
+/// </para>
 /// </remarks>
 [TestClass]
 [TestCategory("UnitTest")]
@@ -144,12 +150,15 @@ public class CompareResourcesByIdTests
     }
 
     /// <summary>
-    /// Opting in twice on the same instance is idempotent: the second call re-registers the same
-    /// types, replacing the comparers with ones built from the newly supplied
-    /// <see cref="StringComparer"/>.
+    /// Opting in twice on the same instance replaces the comparers of the types the sweep registers
+    /// with ones built from the newly supplied <see cref="StringComparer"/>. This holds for the
+    /// registered types themselves; a type that was resolved through its base type instead keeps the
+    /// comparer it first resolved to, which
+    /// <see cref="CalledTwiceOnSameInstance_KeepsTheComparerATypeAlreadyResolvedThroughItsBaseType"/>
+    /// pins.
     /// </summary>
     [TestMethod]
-    public void CalledTwiceOnSameInstance_LastRegistrationWins()
+    public void CalledTwiceOnSameInstance_LastRegistrationWinsForTheRegisteredTypes()
     {
         var comparers = new CqlComparers();
 
@@ -163,6 +172,31 @@ public class CompareResourcesByIdTests
 
         // Ids that differ by more than case stay unequal under either comparer.
         Assert.AreEqual(false, comparers.Equals(lower, new Patient { Id = "abd" }, null));
+    }
+
+    /// <summary>
+    /// The counterpart of <see cref="CalledTwiceOnSameInstance_LastRegistrationWinsForTheRegisteredTypes"/>:
+    /// a type the sweep never registers resolves through its base type, and that resolution is memoized
+    /// onto the type itself. The memoized entry is not replaced, so a later opt-in with a different
+    /// <see cref="StringComparer"/> reaches the base type but not the type that already resolved.
+    /// Recorded because it makes "last registration wins" true of the registered types only.
+    /// </summary>
+    [TestMethod]
+    public void CalledTwiceOnSameInstance_KeepsTheComparerATypeAlreadyResolvedThroughItsBaseType()
+    {
+        var comparers = new CqlComparers();
+        var lower = new DerivedPatient { Id = "abc" };
+        var upper = new DerivedPatient { Id = "ABC" };
+
+        comparers.CompareResourcesById(StringComparer.Ordinal);
+        // Resolves DerivedPatient through Patient and memoizes the case-sensitive comparer onto it.
+        Assert.AreEqual(false, comparers.Equals(lower, upper, null));
+
+        comparers.CompareResourcesById(StringComparer.OrdinalIgnoreCase);
+
+        Assert.AreEqual(false, comparers.Equals(lower, upper, null));
+        // Patient itself is registered by the sweep, so it does pick up the new comparer.
+        Assert.AreEqual(true, comparers.Equals(new Patient { Id = "abc" }, new Patient { Id = "ABC" }, null));
     }
 
     /// <summary>
