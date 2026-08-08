@@ -7,7 +7,7 @@
   state-management change, not a behavioral one. Reference identity of the returned `CqlDateTime` was the
   cache's only observable effect and was never part of the contract; nothing in the runtime depends on it
   (the reference-equality checks in the comparer bridges are fast paths in front of value comparison, and
-  `CqlDateTime.Equals`/`GetHashCode` are value-based). (#1487, closes #1483)
+  `CqlDateTime.Equals`/`GetHashCode` are value-based). (#1487, #1525)
 
   The trade was measured in [#1483](https://github.com/FirelyTeam/firely-cql-sdk/issues/1483) over a
   900-case corpus: the cache bought roughly **39.5 MB of avoided allocation** per corpus run and no
@@ -54,9 +54,14 @@
   | Removed | Replacement |
   | --- | --- |
   | `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector, int? cacheSize = null)` | `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector)` |
-  | `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector, int? cacheSize, TimeSpan? defaultTimezoneOffset)` | `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector, TimeSpan? defaultTimezoneOffset)` |
+  | `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector, int? cacheSize, TimeSpan? defaultTimezoneOffset)` † | `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector, TimeSpan? defaultTimezoneOffset)` |
   | `Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideFhirTypeConverterCacheSize` | none — remove the initializer |
   | `Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.LRUCacheSize` (record parameter and property) | none — remove the argument or `with` initializer |
+
+  † This overload never appeared in a released version — it was added alongside
+  `OverrideConverterTimezoneOffset` within this same unreleased window, so an upgrade from one release
+  to the next cannot break on it. Only code built against unreleased `develop` needs the change. The
+  other three rows are part of the released public API surface.
 
   **Migration:** drop the `cacheSize` argument and the two settings. `FhirTypeConverter.Create(model, 0)`
   and `FhirTypeConverter.Create(model, 10_000)` both become `FhirTypeConverter.Create(model)`; a call that
@@ -66,4 +71,4 @@
   ever a cache bound, no call needs a behavioral substitute — the conversions it guarded are unchanged.
 
   The `ArgumentOutOfRangeException` a negative `cacheSize` used to raise disappears with the parameter.
-  Validation of `defaultTimezoneOffset` (a whole number of minutes within ±14:00) is unchanged. (#1487)
+  Validation of `defaultTimezoneOffset` (a whole number of minutes within ±14:00) is unchanged. (#1487, #1525)
