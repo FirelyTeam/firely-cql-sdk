@@ -13,16 +13,26 @@
   900-case corpus: the cache bought roughly **39.5 MB of avoided allocation** per corpus run and no
   measurable CPU or wall-clock benefit, while the cache-consult path (`FhirDateTimeToCqlDateTimeViaCaching`
   — hashing and looking up the ISO 8601 string on every conversion) cost about **8.6 % of active CPU**.
-  Removing it therefore leaves CPU flat or better and raises allocation by roughly what the cache was
-  saving, all of it short-lived gen0 garbage. It also removes process-wide mutable state keyed by patient
-  data and deletes a tuning knob that no caller could usefully set. A `ConditionalWeakTable`-based
-  replacement was considered and explicitly rejected as out of scope in #1483.
+  Removing it also removes process-wide mutable state keyed by patient data and deletes a tuning knob
+  that no caller could usefully set. A `ConditionalWeakTable`-based replacement was considered and
+  explicitly rejected as out of scope in #1483.
 
-  This trade holds with the lazy ISO 8601 formatting of
-  [#1482](https://github.com/FirelyTeam/firely-cql-sdk/issues/1482) in place; that change is what makes
-  building a `CqlDateTime` cheap enough for the cache to stop paying for itself.
+  The corpus A/B for this exact change (2,851 cases, 62 measures, lazy ISO 8601 formatting of
+  [#1482](https://github.com/FirelyTeam/firely-cql-sdk/issues/1482) in both arms, cache presence the only
+  delta, 48 order-balanced runs) measured, cache-removed vs cache-present:
 
-  <!-- A/B numbers to be filled from the measurement run for this change -->
+  - **Results byte-identical**: the per-case oracle fingerprints of both arms match over the whole corpus.
+  - **Allocation +83.1 MB per corpus run (+11.3 %, +29 KB/case)** — unanimous across all 24 rounds, and
+    **entirely gen0**: +5 gen0 collections, zero change in gen1, zero gen2 in either arm, +5 ms of total
+    GC pause on a ~1.9 s run.
+  - **CPU and wall lean 1.5–6 % slower without the cache** — direction consistent across order-balanced
+    and mirrored sequences, magnitude noise-sensitive (19 of 24 rounds positive). This does **not**
+    reproduce #1483's "no measurable CPU benefit" for the cache on this corpus: with the cache gone,
+    every conversion constructs instead of hitting a string lookup, and on this corpus the construction
+    is measurably the more expensive of the two even with lazy formatting in place.
+
+  The removal therefore stands on the state-management and simplicity grounds, and on the allocation
+  being strictly short-lived gen0 garbage — not on a CPU win, which this measurement did not show.
 
 - `TypeConverter` instances are still shared: one is built per (model, default timezone offset) pair, since
   building one reflects over every FHIR enum. The memoization key previously also included the cache size;
