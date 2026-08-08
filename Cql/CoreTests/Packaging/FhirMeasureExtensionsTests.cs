@@ -10,6 +10,7 @@
 
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging;
+using Hl7.FhirPath;
 using ElmAnnotation = Hl7.Cql.Elm.Annotation;
 using ElmLibrary = Hl7.Cql.Elm.Library;
 using FhirLibrary = Hl7.Fhir.Model.Library;
@@ -81,8 +82,8 @@ public class FhirMeasureExtensionsTests
         var group = measure.Group.Single(g => g.ElementId == "RateA");
         var container = group.Stratifier.Should().ContainSingle().Subject;
         container.ElementId.Should().Be("RateA-Stratifier");
-        container.Code!.Text.Should().Be("RateA-Stratifier");
-        container.Description.Should().Be("RateA-Stratifier");
+        container.Code.Should().BeNull("a stratifier with components must not also have a code (FHIR stratifier invariant)");
+        container.Description.Should().BeNull("a stratifier with components must not also have a description (FHIR stratifier invariant)");
         container.Criteria.Should().BeNull("the container stratifier only holds components");
 
         var component = container.Component.Should().ContainSingle().Subject;
@@ -267,6 +268,44 @@ public class FhirMeasureExtensionsTests
         var component = group.Stratifier.Single().Component.Single();
         component.Criteria.Expression_.Should().Be("Denominator Stratifier",
             "the definition should also contribute a stratifier component");
+    }
+
+    /// <summary>
+    /// The FHIR R4 invariant mea-1 on Measure ("Stratifier SHALL be either a single
+    /// criteria or a set of criteria components"), evaluated as the literal FhirPath
+    /// expression rather than a hand-rolled C# translation of it.
+    /// </summary>
+    private const string StratifierInvariant =
+        "group.stratifier.all((code | description | criteria).exists() xor component.exists())";
+
+    [TestMethod]
+    public void GeneratedStratifiers_SatisfyFhirStratifierInvariant()
+    {
+        var measure = CreateMeasure(BaseStatements(
+            Def("Region Stratifier",
+                CreateTag("group", "RateA"),
+                CreateTag("group", "RateB"),
+                CreateTag("stratifier", "Region")),
+            Def("Age Band Stratifier",
+                CreateTag("group", "RateA"),
+                CreateTag("stratifier", "AgeBand"),
+                CreateTag("description", "Stratifies by age band"))));
+
+        new FhirPathCompiler().Compile(StratifierInvariant)
+            .Predicate(measure, new EvaluationContext())
+            .Should().BeTrue("generated measures must satisfy invariant mea-1: {0}", StratifierInvariant);
+
+        // Targeted halves of the invariant, so a failure identifies which side broke:
+        // the container carries no own content, while every component is fully populated.
+        var stratifiers = measure.Group.SelectMany(g => g.Stratifier).ToList();
+        stratifiers.Should().NotBeEmpty();
+        stratifiers.Should().OnlyContain(s => s.Code == null && s.Description == null && s.Criteria == null,
+            "container stratifiers must not carry code/description/criteria");
+        stratifiers.Should().OnlyContain(s => s.Component.Count > 0,
+            "a container with no components would satisfy neither side of the invariant's xor");
+        stratifiers.SelectMany(s => s.Component).Should().OnlyContain(
+            c => c.Code != null && c.Description != null && c.Criteria != null,
+            "the stratification's meaning lives on the components");
     }
 
     [TestMethod]

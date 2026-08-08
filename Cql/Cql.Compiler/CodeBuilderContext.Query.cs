@@ -713,8 +713,8 @@ partial class CodeBuilderContext
                     var memberArrayElement = property.PropertyType.GetElementType()!;
                     if (valueEnumerableElement == memberArrayElement)
                     {
-                        var toArrayMethod = typeof(Enumerable)
-                                            .GetMethod(nameof(Enumerable.ToArray))!
+                        var toArrayMethod = ReflectionUtility
+                                            .GenericMethodDefinitionOf(() => Enumerable.ToArray(default(IEnumerable<object>)!))
                                             .MakeGenericMethod(valueEnumerableElement);
                         var callToArray = new CodeInvoke(null, toArrayMethod, value);
                         return (memberInfo, callToArray);
@@ -727,8 +727,8 @@ partial class CodeBuilderContext
                         var callSelectMethod = BindCqlOperator(nameof(ICqlOperators.Select), [
                             value, selectLambda
                         ]);
-                        var toArrayMethod = typeof(Enumerable)
-                                            .GetMethod(nameof(Enumerable.ToArray))!
+                        var toArrayMethod = ReflectionUtility
+                                            .GenericMethodDefinitionOf(() => Enumerable.ToArray(default(IEnumerable<object>)!))
                                             .MakeGenericMethod(memberArrayElement);
                         var callToArray = new CodeInvoke(null, toArrayMethod, callSelectMethod);
                         return (memberInfo, callToArray);
@@ -772,8 +772,7 @@ partial class CodeBuilderContext
 
                 if (enumValueValue.Type == typeof(string)) //@ TODO: Cast - Instance
                 {
-                    var methodInfo = typeof(Enum).GetMethod(nameof(Enum.Parse), new[] { typeof(Type), typeof(string), typeof(bool) })
-                                     ?? throw this.NewExpressionBuildingException($"Could not find Enum.Parse method.");
+                    var methodInfo = ReflectionUtility.MethodOf(() => Enum.Parse(default(Type)!, default(string)!, default(bool)));
 
                     var callEnumParse = new CodeInvoke(null, methodInfo, new CodeConstant(instanceType, typeof(Type)), enumValueValue, new CodeConstant(true, typeof(bool)));
                     return callEnumParse;
@@ -800,7 +799,7 @@ partial class CodeBuilderContext
 
                 if (enumValueValue.Type == typeof(string)) //@ TODO: Cast - Instance
                 {
-                    var enumParseMethod = typeof(Enum).GetMethod(nameof(Enum.Parse), new[] { typeof(Type), typeof(string), typeof(bool) });
+                    var enumParseMethod = ReflectionUtility.MethodOf(() => Enum.Parse(default(Type)!, default(string)!, default(bool)));
 
                     var genericType = instanceType.GenericTypeArguments[0];
                     var constructorInfo = instanceType.GetConstructor(new[] { genericType })
@@ -951,7 +950,7 @@ partial class CodeBuilderContext
         }
 
         if (tupleType == typeof(object))
-            return new CodeNew(typeof(object).GetConstructor(Type.EmptyTypes)!);
+            return new CodeNew(ReflectionUtility.ConstructorOf(() => new object()));
 
         return new CodeTupleInit(tupleType, []);
     }
