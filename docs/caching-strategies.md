@@ -13,7 +13,7 @@ Evaluating CQL goes through roughly four stages. Each has its own cache:
 | Translate CQL → ELM → C# → assembly | Package once, ship the assemblies | Build time | n/a — see [cql-packager.md](cql-packager.md) |
 | Load assemblies + JIT-compile them | [`LibrarySetInvokerPool`](#2-library-set-pooling-across-evaluations) | Process | **off** |
 | Evaluate a definition | [`CqlContext` evaluation cache](#3-evaluation-caching-within-one-context) | One `CqlContext` | **off** |
-| Convert `FhirDateTime` → `CqlDateTime` | [FHIR type-converter LRU](#4-fhir-datetime-conversion-caching) | Process | on, 10,000 entries |
+| Convert `FhirDateTime` → `CqlDateTime` | [None — the conversion is not cached](#4-fhir-datetime-conversion-not-cached) | n/a | n/a |
 | Extract codings from a bundle for retrieves | Automatic, inside `BundleDataSource` | One bundle | on |
 
 The last one needs no configuration: retrieves over a `Bundle` extract each resource's codings once per bundle and reuse them. It is listed only so you know it is already handled.
@@ -80,15 +80,13 @@ Use `EvaluationCacheProfile.Concurrent` instead only when several threads evalua
 
 Runnable example: **340 Caching Example**.
 
-## 4. FHIR date/time conversion caching
+## 4. FHIR date/time conversion (not cached)
 
-Converting `FhirDateTime` values to `CqlDateTime` is memoized in a process-wide LRU cache. It is on by default, **bounded at 10,000 entries**, and shared by every context that uses the default model and cache size. No other FHIR ↔ CQL conversion is cached — the cache holds only `FhirDateTime` → `CqlDateTime` and its `.DateOnly` projection.
+Converting `FhirDateTime` values to `CqlDateTime` is not memoized, and there is nothing to configure. Every conversion parses the value and builds a fresh `CqlDateTime`; the result depends only on the FHIR value, so converting the same value twice yields equal results.
 
-To change the bound, set `FhirCqlContextOptions.OverrideFhirTypeConverterCacheSize` at context creation. Note that `0` **disables** the cache rather than unbounding it, and any value other than the default gets its own converter and cache instance rather than the shared default pair.
+What *is* reused is the `TypeConverter` itself. One is built per (model, default timezone offset) pair and shared by every context that asks for that pair, because building one reflects over every FHIR enum. `FhirCqlContextOptions.OverrideModelInspector` and `FhirCqlContextOptions.OverrideConverterTimezoneOffset` select the pair; `OverrideTypeConverter` bypasses the sharing entirely.
 
-You normally do not need to touch this. Lower it only if you are memory-constrained; raise it if you evaluate over data with far more than 10,000 distinct date/time values and see the conversion cost.
-
-`ElmToolkitConfig.LRUCacheSize` is **not** this cache. It configures a `TypeConverter` registered in the compiler's own service container for ELM → C# code generation, and has no effect on the converter a runtime `FhirCqlContext` builds.
+Measurement is the reason there is no conversion cache. A process-wide LRU over this conversion saved no measurable wall-clock time, while consulting it — hashing and looking up the ISO 8601 string on every conversion — cost about 8.6 % of active CPU on the conversion path. Removing it trades a modest, gen0-only allocation increase for less work per conversion, and drops process-wide mutable state keyed by patient data. See [#1483](https://github.com/FirelyTeam/firely-cql-sdk/issues/1483) and [#1487](https://github.com/FirelyTeam/firely-cql-sdk/issues/1487).
 
 ## 5. Sharing one context across threads
 

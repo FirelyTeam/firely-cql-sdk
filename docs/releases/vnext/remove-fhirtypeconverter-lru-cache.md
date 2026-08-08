@@ -1,0 +1,50 @@
+## Improvements
+
+- `FhirTypeConverter` no longer memoizes `FhirDateTime` → `CqlDateTime` conversions in a process-wide LRU
+  cache. The cache and its tuning knobs are gone; every conversion parses the FHIR value and builds a fresh
+  `CqlDateTime`. Conversion **results are unchanged** — including partial precisions restored from the
+  time-precision extension and every shape of timezone offset — so this is a performance and
+  state-management change, not a behavioral one. Reference identity of the returned `CqlDateTime` was the
+  cache's only observable effect and was never part of the contract; nothing in the runtime depends on it
+  (the reference-equality checks in the comparer bridges are fast paths in front of value comparison, and
+  `CqlDateTime.Equals`/`GetHashCode` are value-based). (#1487, closes #1483)
+
+  The trade was measured in [#1483](https://github.com/FirelyTeam/firely-cql-sdk/issues/1483) over a
+  900-case corpus: the cache bought roughly **39.5 MB of avoided allocation** per corpus run and no
+  measurable CPU or wall-clock benefit, while the cache-consult path (`FhirDateTimeToCqlDateTimeViaCaching`
+  — hashing and looking up the ISO 8601 string on every conversion) cost about **8.6 % of active CPU**.
+  Removing it therefore leaves CPU flat or better and raises allocation by roughly what the cache was
+  saving, all of it short-lived gen0 garbage. It also removes process-wide mutable state keyed by patient
+  data and deletes a tuning knob that no caller could usefully set. A `ConditionalWeakTable`-based
+  replacement was considered and explicitly rejected as out of scope in #1483.
+
+  This trade holds with the lazy ISO 8601 formatting of
+  [#1482](https://github.com/FirelyTeam/firely-cql-sdk/issues/1482) in place; that change is what makes
+  building a `CqlDateTime` cheap enough for the cache to stop paying for itself.
+
+  <!-- A/B numbers to be filled from the measurement run for this change -->
+
+- `TypeConverter` instances are still shared: one is built per (model, default timezone offset) pair, since
+  building one reflects over every FHIR enum. The memoization key previously also included the cache size;
+  with the cache gone, two callers that differ only in a model and offset match now get the same converter.
+
+## Potentially Breaking
+
+- Removed the FHIR date/time conversion cache size from the public API. The following members are gone:
+
+  | Removed | Replacement |
+  | --- | --- |
+  | `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector, int? cacheSize = null)` | `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector)` |
+  | `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector, int? cacheSize, TimeSpan? defaultTimezoneOffset)` | `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector, TimeSpan? defaultTimezoneOffset)` |
+  | `Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideFhirTypeConverterCacheSize` | none — remove the initializer |
+  | `Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.LRUCacheSize` (record parameter and property) | none — remove the argument or `with` initializer |
+
+  **Migration:** drop the `cacheSize` argument and the two settings. `FhirTypeConverter.Create(model, 0)`
+  and `FhirTypeConverter.Create(model, 10_000)` both become `FhirTypeConverter.Create(model)`; a call that
+  passed a default timezone offset drops only its middle argument. `ElmToolkitConfig` is a positional
+  record, so a caller constructing it positionally past `AllowInvalidCSharp` must drop the cache-size
+  argument; named/`with` initializers only need the `LRUCacheSize` entry removed. Since the value was only
+  ever a cache bound, no call needs a behavioral substitute — the conversions it guarded are unchanged.
+
+  The `ArgumentOutOfRangeException` a negative `cacheSize` used to raise disappears with the parameter.
+  Validation of `defaultTimezoneOffset` (a whole number of minutes within ±14:00) is unchanged. (#1487)

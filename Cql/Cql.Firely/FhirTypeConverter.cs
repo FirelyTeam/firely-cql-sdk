@@ -23,97 +23,77 @@ namespace Hl7.Cql.Fhir
     /// </summary>
     public static class FhirTypeConverter
     {
-        internal const int DefaultCacheSize = 10_000;
-
         internal static bool DisableReuseForBenchmarks = false;
-        private static readonly LRUCache<CqlDateTime> DefaultDateTimesCache = new(DefaultCacheSize);
         private static readonly Lazy<TypeConverter> DefaultLazy = new(() => CreateImpl(M.ModelInfo.ModelInspector));
-        private static readonly Lazy<TypeConverter> DefaultWithCacheLazy = new(() => CreateImpl(M.ModelInfo.ModelInspector, DefaultCacheSize));
 
         /// <summary>
         /// Singleton for the default configuration of this TypeConverter
         /// </summary>
         public static TypeConverter Default => DefaultLazy.Value;
 
-        /// <summary>
-        /// Singleton for the default configuration of this TypeConverter with an LRU cache of 10000
-        /// </summary>
-        internal static TypeConverter DefaultWithCache => DefaultWithCacheLazy.Value;
+        private static readonly ConcurrentDictionary<(ModelInspector, (int, int)?), WeakReference<TypeConverter>> ConverterCache = new ();
 
-        private static readonly ConcurrentDictionary<(ModelInspector, int?, (int, int)?), WeakReference<TypeConverter>> ConverterCache = new ();
-
-        // Converters over the default model are held strongly, keyed by the cache size and default
-        // timezone offset that distinguish them: building one reflects over every FHIR enum, and a
-        // service creating a context per request on a host that is not on UTC would otherwise rebuild
-        // it whenever a garbage collection clears the weak cache. The offsets in play come from host
-        // timezones, so the live set is one or two entries; the bound keeps an unusual caller from
-        // pinning memory, and anything past it falls back to the weak cache. A caller-supplied
-        // ModelInspector stays weakly cached — the user's model is never pinned.
+        // Converters over the default model are held strongly, keyed by the default timezone offset that
+        // distinguishes them: building one reflects over every FHIR enum, and a service creating a context
+        // per request on a host that is not on UTC would otherwise rebuild it whenever a garbage collection
+        // clears the weak cache. The offsets in play come from host timezones, so the live set is one or two
+        // entries; the bound keeps an unusual caller from pinning memory, and anything past it falls back to
+        // the weak cache. A caller-supplied ModelInspector stays weakly cached — the user's model is never
+        // pinned.
         private const int MaxStronglyCachedConverters = 64;
-        private static readonly ConcurrentDictionary<(int CacheSize, (int, int)? Offset), TypeConverter> DefaultModelConverterCache = new();
+        private static readonly ConcurrentDictionary<(int Hours, int Minutes), TypeConverter> DefaultModelConverterCache = new();
 
         /// <summary>
         /// Allows for the creation of a converter with the specified model
         /// </summary>
         /// <param name="model">the model</param>
-        /// <param name="cacheSize">the size of the LRU cache</param>
         /// <returns>the type converter</returns>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="cacheSize"/> is negative.</exception>
-        // RS0027 wants the overload carrying optional parameters to be the one with the most parameters. This
-        // overload has shipped with its default and cannot grow a parameter without breaking binary compatibility,
-        // so the default timezone offset is offered through a separate, fully explicit overload instead.
-#pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
-        public static TypeConverter Create(ModelInspector model, int? cacheSize = null) =>
-            Create(model, cacheSize, defaultTimezoneOffset: null);
-#pragma warning restore RS0027
+        public static TypeConverter Create(ModelInspector model) =>
+            Create(model, defaultTimezoneOffset: null);
 
         /// <summary>
         /// Allows for the creation of a converter with the specified model and default timezone offset.
         /// </summary>
         /// <param name="model">the model</param>
-        /// <param name="cacheSize">the size of the LRU cache</param>
         /// <param name="defaultTimezoneOffset">the timezone offset used when a CQL value without one has to be
         /// emitted as a FHIR <c>dateTime</c> carrying a time component, which FHIR requires to have an offset;
         /// <see langword="null"/> means UTC. Per the CQL specification (§2 Author's Guide) this is the timezone
         /// offset of the evaluation request. It must be a whole number of minutes within ±14:00, and never applies
         /// to a FHIR <c>time</c> (which forbids an offset) or to a date-only <c>dateTime</c>.</param>
         /// <returns>the type converter</returns>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="cacheSize"/> is negative, or
-        /// <paramref name="defaultTimezoneOffset"/> is not a whole number of minutes within ±14:00.</exception>
-        public static TypeConverter Create(ModelInspector model, int? cacheSize, TimeSpan? defaultTimezoneOffset)
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="defaultTimezoneOffset"/> is not a whole
+        /// number of minutes within ±14:00.</exception>
+        public static TypeConverter Create(ModelInspector model, TimeSpan? defaultTimezoneOffset)
         {
             var offset = NormalizeDefaultTimezoneOffset(defaultTimezoneOffset);
 
             if (DisableReuseForBenchmarks)
-                return CreateImpl(model, cacheSize ?? 0, offset);
+                return CreateImpl(model, offset);
 
-            return (cacheSize ?? 0) switch
+            return (model == M.ModelInfo.ModelInspector, offset) switch
             {
-                < 0 => throw new ArgumentOutOfRangeException(nameof(cacheSize), cacheSize, "CacheSize cannot be negative."),
-                0 when model == M.ModelInfo.ModelInspector && offset is null                => Default,
-                DefaultCacheSize when model == M.ModelInfo.ModelInspector && offset is null => DefaultWithCache,
-                { } size when model == M.ModelInfo.ModelInspector                           => GetOrCreateDefaultModelConverter(size, offset),
-                { } size                                                                    => GetOrCreateConverter(model, size, offset)
+                (true, null)      => Default,
+                (true, { } o)     => GetOrCreateDefaultModelConverter(o),
+                _                 => GetOrCreateConverter(model, offset)
             };
 
-            static TypeConverter GetOrCreateDefaultModelConverter(int cacheSize, (int Hours, int Minutes)? defaultTimezoneOffset)
+            static TypeConverter GetOrCreateDefaultModelConverter((int Hours, int Minutes) defaultTimezoneOffset)
             {
-                var key = (cacheSize, ((int, int)?)defaultTimezoneOffset);
-                if (DefaultModelConverterCache.TryGetValue(key, out var converter))
+                if (DefaultModelConverterCache.TryGetValue(defaultTimezoneOffset, out var converter))
                     return converter;
 
                 if (DefaultModelConverterCache.Count >= MaxStronglyCachedConverters)
-                    return GetOrCreateConverter(M.ModelInfo.ModelInspector, cacheSize, defaultTimezoneOffset);
+                    return GetOrCreateConverter(M.ModelInfo.ModelInspector, defaultTimezoneOffset);
 
                 // Racing callers may both build; the loser's converter is simply discarded, exactly as
                 // in the weak cache below.
-                return DefaultModelConverterCache.GetOrAdd(key,
-                    static k => CreateImpl(M.ModelInfo.ModelInspector, k.CacheSize, k.Offset));
+                return DefaultModelConverterCache.GetOrAdd(defaultTimezoneOffset,
+                    static k => CreateImpl(M.ModelInfo.ModelInspector, k));
             }
 
-            static TypeConverter GetOrCreateConverter(ModelInspector model, int cacheSize, (int Hours, int Minutes)? defaultTimezoneOffset)
+            static TypeConverter GetOrCreateConverter(ModelInspector model, (int Hours, int Minutes)? defaultTimezoneOffset)
             {
-                var key = (model, (int?)cacheSize, ((int, int)?)defaultTimezoneOffset);
+                var key = (model, ((int, int)?)defaultTimezoneOffset);
                 if (ConverterCache.TryGetValue(key, out var weakRef) && weakRef.TryGetTarget(out var converter))
                 {
                     return converter;
@@ -129,7 +109,7 @@ namespace Hl7.Cql.Fhir
                         ConverterCache.TryRemove(entry);
                 }
 
-                var newConverter = CreateImpl(model, cacheSize, defaultTimezoneOffset);
+                var newConverter = CreateImpl(model, defaultTimezoneOffset);
                 ConverterCache[key] = new WeakReference<TypeConverter>(newConverter);
                 return newConverter;
             }
@@ -172,39 +152,16 @@ namespace Hl7.Cql.Fhir
             return (offset.Hours, offset.Minutes);
         }
 
-        private static readonly ConcurrentDictionary<int, WeakReference<LRUCache<CqlDateTime>>> LRUCacheCache = new();
-
         private static TypeConverter CreateImpl(
             ModelInspector model,
-            int cacheSize = 0,
             (int Hours, int Minutes)? defaultTimezoneOffset = null)
         {
-            LRUCache<CqlDateTime>? dateTimesCache = cacheSize switch
-            {
-                < 0 => throw new ArgumentOutOfRangeException(nameof(cacheSize), cacheSize, "CacheSize cannot be negative."),
-                0                         => null,
-                DefaultCacheSize => DefaultDateTimesCache,
-                _                         => GetOrCreateLRUCache(cacheSize)
-            };
-
-            static LRUCache<CqlDateTime> GetOrCreateLRUCache(int cacheSize)
-            {
-                if (LRUCacheCache.TryGetValue(cacheSize, out var weakRef) && weakRef.TryGetTarget(out var lruCache))
-                {
-                    return lruCache;
-                }
-
-                var newLRUCache = new LRUCache<CqlDateTime>(cacheSize);
-                LRUCacheCache[cacheSize] = new WeakReference<LRUCache<CqlDateTime>>(newLRUCache);
-                return newLRUCache;
-            }
-
             var converter = TypeConverter
                             .Create()
                             .ConvertDataTypeChoices()
                             .CreateQuantityConversions()
                             .ConvertSystemTypes()
-                            .ConvertFhirToCqlPrimitives(dateTimesCache)
+                            .ConvertFhirToCqlPrimitives()
                             .ConvertCqlPrimitivesToFhir(defaultTimezoneOffset)
                             .ConvertCodeTypes(model)
                             .ConvertEnumToStrings()
@@ -224,9 +181,7 @@ namespace Hl7.Cql.Fhir
             return converter;
         }
 
-        internal static TypeConverter ConvertFhirToCqlPrimitives(
-            this TypeConverter converter,
-            LRUCache<CqlDateTime>? dateTimes = null)
+        internal static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
         {
             HashSet<Type> toTypes = new();
 
@@ -251,9 +206,9 @@ namespace Hl7.Cql.Fhir
             add((M.Date f) => f.ToString());
             add((M.Time f) => FhirTimeToCqlTime(f));
             add((M.Time f) => f.ToString());
-            add((M.FhirDateTime f) => FhirDateTimeToCqlDateTimeViaCaching(f));
+            add((M.FhirDateTime f) => FhirDateTimeToCqlDateTime(f));
             add((M.FhirDateTime f) => f.ToString());
-            add((M.FhirDateTime f) => FhirDateTimeToCqlDateTimeViaCaching(f)?.DateOnly);
+            add((M.FhirDateTime f) => FhirDateTimeToCqlDateTime(f)?.DateOnly);
             add((M.Quantity f) => new CqlQuantity(f.Value, f.Unit));
             add((M.Quantity f) => f.Value);
             add((M.Quantity f) => (int?)f.Value);
@@ -313,25 +268,6 @@ namespace Hl7.Cql.Fhir
                     M.PrimitiveType pt => pt.JsonValue?.ToString(),
                     _ => throw new InvalidCastException($"Cannot cast a FHIR value of type {dt.TypeName} to a string")
                 };
-            }
-
-            CqlDateTime? FhirDateTimeToCqlDateTimeViaCaching(M.FhirDateTime f)
-            {
-                if (f.Value is null)
-                    return null;
-
-                // A time-precision extension changes the resulting value, so such values cannot
-                // share the string-keyed cache with unadorned ones.
-                if (GetDeclaredTimePrecision(f) is { } declaredPrecision)
-                    return FhirDateTimeToCqlDateTime(f, declaredPrecision);
-
-                if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
-                    return datetime;
-
-                var cqlDateTime = FhirDateTimeToCqlDateTime(f, declaredPrecision: null);
-                if (cqlDateTime is not null)
-                    dateTimes?.Insert(f.Value, cqlDateTime);
-                return cqlDateTime;
             }
         }
 
@@ -669,6 +605,11 @@ namespace Hl7.Cql.Fhir
                 _ => new CqlTime(hours, time.Minutes, time.Seconds, time.Millis, null, null)
             };
         }
+
+        // The conversion registered for FhirDateTime: the precision a time-precision extension declares,
+        // when there is one, is part of the resulting value, so it is read per value.
+        private static CqlDateTime? FhirDateTimeToCqlDateTime(M.FhirDateTime f) =>
+            f.Value is null ? null : FhirDateTimeToCqlDateTime(f, GetDeclaredTimePrecision(f));
 
         // The inverse of CqlDateTimeToFhirDateTime; declaredPrecision comes from the time-precision
         // extension and truncates the zero-padded components it marks.

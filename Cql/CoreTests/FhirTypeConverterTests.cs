@@ -903,17 +903,17 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void ConvertFhirDateTime_TimePrecisionExtension_DoesNotPolluteDateTimeCache()
+        public void ConvertFhirDateTime_TimePrecisionExtension_DoesNotAffectUnadornedValues()
         {
-            var converter = Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector, cacheSize: 128);
+            var converter = Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
             var adorned = new FhirDateTime("2014-02-01T10:00:00Z");
             adorned.AddExtension(TimePrecisionExtensionUrl, new Code("h"));
             var partial = converter.Convert<CqlDateTime>(adorned);
             Assert.AreEqual(DateTimePrecision.Hour, partial!.Precision);
 
-            // The same lexical value without the extension must not be served from a cache entry
-            // keyed only by the string, and vice versa.
+            // The precision the extension declares belongs to the value carrying it: the same lexical
+            // value without the extension keeps its full precision, and vice versa.
             var unadorned = new FhirDateTime("2014-02-01T10:00:00Z");
             var full = converter.Convert<CqlDateTime>(unadorned);
             Assert.AreEqual(DateTimePrecision.Second, full!.Precision);
@@ -986,13 +986,13 @@ namespace CoreTests
         // tests build one directly with a non-zero offset, which is what FhirCqlContext threads in from
         // the 'now' argument.
         private static readonly TypeConverter ConverterWithPlusTwo =
-            Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector, cacheSize: null, TimeSpan.FromHours(2));
+            Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector, TimeSpan.FromHours(2));
 
         private static readonly TypeConverter ConverterWithMinusFive =
-            Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector, cacheSize: null, TimeSpan.FromHours(-5));
+            Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector, TimeSpan.FromHours(-5));
 
         private static readonly TypeConverter ConverterWithMinusFiveThirty =
-            Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector, cacheSize: null, TimeSpan.FromHours(-5.5));
+            Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector, TimeSpan.FromHours(-5.5));
 
         [TestMethod]
         public void ConvertCqlDateTime_WithoutOffset_TakesTheDefaultTimezoneOffsetOnEveryPath()
@@ -1200,16 +1200,16 @@ namespace CoreTests
         {
             var model = Hl7.Fhir.Model.ModelInfo.ModelInspector;
             Assert.ThrowsExactly<ArgumentOutOfRangeException>(
-                () => Hl7.Cql.Fhir.FhirTypeConverter.Create(model, null, TimeSpan.FromSeconds(90)));
+                () => Hl7.Cql.Fhir.FhirTypeConverter.Create(model, TimeSpan.FromSeconds(90)));
             Assert.ThrowsExactly<ArgumentOutOfRangeException>(
-                () => Hl7.Cql.Fhir.FhirTypeConverter.Create(model, null, TimeSpan.FromMilliseconds(1)));
+                () => Hl7.Cql.Fhir.FhirTypeConverter.Create(model, TimeSpan.FromMilliseconds(1)));
             Assert.ThrowsExactly<ArgumentOutOfRangeException>(
-                () => Hl7.Cql.Fhir.FhirTypeConverter.Create(model, null, TimeSpan.FromHours(15)));
+                () => Hl7.Cql.Fhir.FhirTypeConverter.Create(model, TimeSpan.FromHours(15)));
             Assert.ThrowsExactly<ArgumentOutOfRangeException>(
-                () => Hl7.Cql.Fhir.FhirTypeConverter.Create(model, null, TimeSpan.FromHours(-15)));
+                () => Hl7.Cql.Fhir.FhirTypeConverter.Create(model, TimeSpan.FromHours(-15)));
             // ±14:00 is the widest offset FHIR admits, and is accepted.
-            Assert.IsNotNull(Hl7.Cql.Fhir.FhirTypeConverter.Create(model, null, TimeSpan.FromHours(14)));
-            Assert.IsNotNull(Hl7.Cql.Fhir.FhirTypeConverter.Create(model, null, TimeSpan.FromHours(-14)));
+            Assert.IsNotNull(Hl7.Cql.Fhir.FhirTypeConverter.Create(model, TimeSpan.FromHours(14)));
+            Assert.IsNotNull(Hl7.Cql.Fhir.FhirTypeConverter.Create(model, TimeSpan.FromHours(-14)));
         }
 
         [TestMethod]
@@ -1219,22 +1219,22 @@ namespace CoreTests
 
             // A zero offset renders exactly like no default at all, so it must not cost a second converter.
             Assert.AreSame(
-                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, 128, null),
-                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, 128, TimeSpan.Zero));
+                Hl7.Cql.Fhir.FhirTypeConverter.Create(model),
+                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, TimeSpan.Zero));
             Assert.AreSame(
-                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, null, null),
-                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, null, TimeSpan.Zero));
+                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, null),
+                Hl7.Cql.Fhir.FhirTypeConverter.Create(model));
 
             Assert.AreSame(
-                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, 128, TimeSpan.FromHours(2)),
-                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, 128, TimeSpan.FromHours(2)));
+                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, TimeSpan.FromHours(2)),
+                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, TimeSpan.FromHours(2)));
 
             Assert.AreNotSame(
-                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, 128, TimeSpan.FromHours(2)),
-                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, 128, TimeSpan.FromHours(3)));
+                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, TimeSpan.FromHours(2)),
+                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, TimeSpan.FromHours(3)));
             Assert.AreNotSame(
-                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, 128, null),
-                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, 128, TimeSpan.FromHours(2)));
+                Hl7.Cql.Fhir.FhirTypeConverter.Create(model),
+                Hl7.Cql.Fhir.FhirTypeConverter.Create(model, TimeSpan.FromHours(2)));
         }
 
         [TestMethod]
@@ -1251,7 +1251,6 @@ namespace CoreTests
             Assert.IsTrue(weakRef.TryGetTarget(out var survivor), "the converter was not held across a full GC");
             Assert.AreSame(survivor, Hl7.Cql.Fhir.FhirTypeConverter.Create(
                 Hl7.Fhir.Model.ModelInfo.ModelInspector,
-                Hl7.Cql.Fhir.FhirTypeConverter.DefaultCacheSize,
                 TimeSpan.FromHours(2)));
         }
 
@@ -1261,7 +1260,6 @@ namespace CoreTests
         private static WeakReference<TypeConverter> CreateConverterWithoutRooting(TimeSpan offset) =>
             new(Hl7.Cql.Fhir.FhirTypeConverter.Create(
                 Hl7.Fhir.Model.ModelInfo.ModelInspector,
-                Hl7.Cql.Fhir.FhirTypeConverter.DefaultCacheSize,
                 offset));
 
 
