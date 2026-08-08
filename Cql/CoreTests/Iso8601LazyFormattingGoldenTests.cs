@@ -83,8 +83,8 @@ public class Iso8601LazyFormattingGoldenTests
                 failures.Add($"{line} => '{actual}' (expected '{expected}')");
         }
 
-        Assert.AreEqual(ExpectedRowCount, rows, "The golden corpus changed size - rows were added or lost unintentionally.");
-
+        // Report the diverged rows before checking the row count: someone who both adds a row and changes the
+        // formatting needs the list of divergences, and a size mismatch reported first would hide it.
         if (failures.Count > 0)
         {
             var shown = string.Join(Environment.NewLine, failures.Take(10));
@@ -92,6 +92,8 @@ public class Iso8601LazyFormattingGoldenTests
                 shown += $"{Environment.NewLine}... and {failures.Count - 10} more";
             Assert.Fail($"{failures.Count} of {rows} golden rows diverged:{Environment.NewLine}{shown}");
         }
+
+        Assert.AreEqual(ExpectedRowCount, rows, "The golden corpus changed size - rows were added or lost unintentionally.");
     }
 
     /// <summary>
