@@ -25,14 +25,23 @@
   - **Allocation +83.1 MB per corpus run (+11.3 %, +29 KB/case)** — unanimous across all 24 rounds, and
     **entirely gen0**: +5 gen0 collections, zero change in gen1, zero gen2 in either arm, +5 ms of total
     GC pause on a ~1.9 s run.
-  - **CPU and wall lean 1.5–6 % slower without the cache** — direction consistent across order-balanced
-    and mirrored sequences, magnitude noise-sensitive (19 of 24 rounds positive). This does **not**
-    reproduce #1483's "no measurable CPU benefit" for the cache on this corpus: with the cache gone,
-    every conversion constructs instead of hitting a string lookup, and on this corpus the construction
-    is measurably the more expensive of the two even with lazy formatting in place.
+  - **Sequentially (dop 1), CPU and wall lean 1.5–6 % slower without the cache** — direction consistent
+    across order-balanced and mirrored sequences, magnitude noise-sensitive (19 of 24 rounds positive).
+    This does **not** reproduce #1483's "no measurable CPU benefit" for the cache on this corpus: with
+    the cache gone, every conversion constructs instead of hitting a string lookup, and sequentially the
+    construction is measurably the more expensive of the two even with lazy formatting in place.
+  - **Under concurrent execution the penalty evaporates.** The cache serializes every conversion on one
+    process-wide `lock` — taken on reads as well as inserts — and at dop 4/8 that lock is measurably
+    contended in the cached arm (a median of 2.5–12 monitor-contention events per repetition, versus
+    ~zero without the cache). The wall gap shrinks from +5.7 % at dop 1 to +1.15 % at dop 4 and +0.39 %
+    at dop 8 — inside the noise floor, so at dop ≥ 4 the two arms are indistinguishable in wall and CPU,
+    with the uncached arm scaling marginally better from its own sequential baseline (×2.71 vs ×2.59 at
+    dop 4). The allocation regression is dop-independent (+10.8…+11.6 % at every dop), confirming the
+    parallel runs do the same work.
 
-  The removal therefore stands on the state-management and simplicity grounds, and on the allocation
-  being strictly short-lived gen0 garbage — not on a CPU win, which this measurement did not show.
+  The removal therefore stands on the state-management and simplicity grounds, on the allocation being
+  strictly short-lived gen0 garbage, and on eliminating a lock that concurrent evaluation measurably
+  contends — not on a CPU win, which neither the sequential nor the parallel measurement showed.
 
 - `TypeConverter` instances are still shared: one is built per (model, default timezone offset) pair, since
   building one reflects over every FHIR enum. The memoization key previously also included the cache size;
