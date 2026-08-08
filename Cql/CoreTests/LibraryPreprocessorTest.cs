@@ -8,6 +8,7 @@
 
 #nullable enable
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Elm;
@@ -104,9 +105,10 @@ namespace CoreTests
 
     internal class TestTypeResolver : BaseTypeResolver
     {
-        internal override Type PatientType => typeof(object);
-
-        internal override PropertyInfo? PatientBirthDateProperty => null;
+        internal override PatientTypeInfo CreatePatientTypeInfo() =>
+            new PatientTypeInfo(
+                resolveType: () => typeof(object),
+                resolveBirthDateGetter: _ => null);
 
         internal override IEnumerable<Assembly> ModelAssemblies => [];
 

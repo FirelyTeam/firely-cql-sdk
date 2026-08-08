@@ -11,6 +11,17 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir
 {
+    /// <summary>
+    /// An index over the entries of a bundle, grouping the resources by type so that a retrieve does not have to
+    /// scan every entry.
+    /// </summary>
+    /// <remarks>
+    /// The index is complete once the constructor returns and the bundle it indexes is assumed to be immutable, so
+    /// an instance supports any number of concurrent readers and may be shared by several
+    /// <see cref="BundleDataSource"/>s. The coding caches the retrieves fill on demand are concurrent dictionaries;
+    /// two threads racing for the same key may both extract the codings, but they extract the same ones and only
+    /// one result is kept.
+    /// </remarks>
     internal class IndexedBundle
     {
         public IndexedBundle(IEnumerable<Bundle.EntryComponent> entries)

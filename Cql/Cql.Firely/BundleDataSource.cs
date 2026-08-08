@@ -17,8 +17,15 @@ namespace Hl7.Cql.Fhir
     /// <summary>
     /// A <see cref="IDataSource"/> that uses POCO Bundles as a source of information.
     /// </summary>
-    /// <remarks>A simple model that assumes the Bundles contain all the information about a
-    /// patient, e.g. as the result of a $everything operation.</remarks>
+    /// <remarks>
+    /// <para>A simple model that assumes the Bundles contain all the information about a
+    /// patient, e.g. as the result of a $everything operation.</para>
+    /// <para>The index built over the bundle is complete once the constructor returns and is read-only from then on,
+    /// so it supports any number of concurrent readers. <see cref="WithValueSets"/> hands out an extra source over
+    /// that same index: the index for a bundle can be built once and reused by cheap, short-lived sources that each
+    /// bind their own <see cref="IValueSetDictionary"/>. An individual source is only as thread-safe as the value
+    /// sets it is bound to, so a source bound to scoped value sets must not outlive or leave that scope.</para>
+    /// </remarks>
     internal class BundleDataSource : IDataSource
     {
         /// <summary>
@@ -44,10 +51,76 @@ namespace Hl7.Cql.Fhir
             Bundle = bundle is not null ? new IndexedBundle(bundle.Entry) : throw new ArgumentNullException(nameof(bundle));
         }
 
+        /// <summary>
+        /// Construct a source over the index of <paramref name="source"/>, binding different value sets
+        /// and an optional profile filter override.
+        /// </summary>
+        private BundleDataSource(BundleDataSource source, IValueSetDictionary valueSets, IRetrieveProfileFilter? profileFilter)
+        {
+            ValueSets = valueSets;
+            _codeComparer = source._codeComparer;
+            _systemComparer = source._systemComparer;
+            _usesDefaultComparers = source._usesDefaultComparers;
+            _profileFilter = profileFilter ?? source._profileFilter;
+            Bundle = source.Bundle;
+        }
+
+        /// <summary>
+        /// Returns a source that shares this source's index over the bundle, but resolves value set membership
+        /// through <paramref name="valueSets"/>, and optionally applies a different profile filter.
+        /// </summary>
+        /// <remarks>
+        /// Building the index is the expensive part of constructing a source and the result is immutable, so the
+        /// returned source is cheap and needs no pass over the bundle's entries. Any number of them may read from
+        /// the shared index concurrently. The returned source captures <paramref name="valueSets"/> permanently and
+        /// is therefore bound to the lifetime of those value sets, while the source it was cloned from is not.
+        /// When <paramref name="profileFilter"/> is <see langword="null"/> the source's own filter is kept;
+        /// otherwise the supplied filter takes precedence.
+        /// </remarks>
+        /// <param name="valueSets">The value sets the returned source resolves value set membership through.</param>
+        /// <param name="profileFilter">
+        /// An optional profile filter override. When non-<see langword="null"/>, replaces the filter on this source
+        /// for the returned clone; when <see langword="null"/>, the source's own filter is inherited.
+        /// </param>
+        /// <exception cref="ArgumentNullException">When <paramref name="valueSets"/> is <see langword="null"/>.</exception>
+        public BundleDataSource WithValueSets(IValueSetDictionary valueSets, IRetrieveProfileFilter? profileFilter = null)
+        {
+            if (valueSets is null) throw new ArgumentNullException(nameof(valueSets));
+
+            return ReferenceEquals(valueSets, ValueSets) &&
+                   (profileFilter is null || ReferenceEquals(profileFilter, _profileFilter))
+                ? this
+                : new BundleDataSource(this, valueSets, profileFilter);
+        }
+
         private static readonly Lazy<ICqlComparer<string>> DefaultStringComparer = new(() =>
             new StringCqlComparer(StringComparer.OrdinalIgnoreCase));
 
-        private IndexedBundle Bundle { get; init; }
+        /// <summary>
+        /// A sentinel value-set dictionary that throws on use so that a source created by
+        /// <see cref="FhirCqlContext.DataSourceForBundle"/> fails loudly when it is used without first
+        /// being passed to <see cref="FhirCqlContext.WithDataSource"/> with actual value sets.
+        /// </summary>
+        internal static readonly IValueSetDictionary UnboundSentinel = new UnboundValueSetDictionary();
+
+        private sealed class UnboundValueSetDictionary : IValueSetDictionary
+        {
+            private static InvalidOperationException Fail() => new(
+                "This data source was created by FhirCqlContext.DataSourceForBundle and holds no value sets. " +
+                "Pass it to FhirCqlContext.WithDataSource together with an IValueSetDictionary before use.");
+
+            public bool IsCodeInValueSet(string valueSetUri, CqlCode code) => throw Fail();
+            public bool IsCodeInValueSet(string valueSetUri, string code) => throw Fail();
+            public bool IsCodeInValueSet(string valueSetUri, string code, string? system) => throw Fail();
+            public bool TryGetCodesInValueSet(string valueSetUri, out IEnumerable<CqlCode>? codes) => throw Fail();
+        }
+
+        /// <summary>
+        /// The index over the bundle's entries, shared with every source created from this one through
+        /// <see cref="WithValueSets"/>.
+        /// </summary>
+        internal IndexedBundle Bundle { get; }
+
         private IValueSetDictionary ValueSets { get; }
 
         private readonly ICqlComparer<string> _codeComparer;

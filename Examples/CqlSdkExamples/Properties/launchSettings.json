@@ -52,6 +52,10 @@
       "commandName": "Project",
       "commandLineArgs": "340"
     },
+    "350 Pooling Library Set Invokers": {
+      "commandName": "Project",
+      "commandLineArgs": "350"
+    },
     "400 Invoke from all FHIR Resources in Directory": {
       "commandName": "Project",
       "commandLineArgs": "400"

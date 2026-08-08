@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.13.0
+**Version:** 3.14.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -96,6 +96,13 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 - Use [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md) and [05-build-and-test.md](copilot-instructions/05-build-and-test.md) for detailed enforcement rules.
 
 ## 6.0. Appendix: Version History
+
+- Section-number references in entries below refer to the numbering as it existed in that version; later inserted sections may have renumbered those headings.
+
+- 3.14.0
+  - Added reflection guidance as a new numbered section in [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md): `4.4. Reflection` now requires using [`ReflectionUtility`](../Cql/Cql.Abstractions/Abstractions/Infrastructure/ReflectionUtility.cs) (`MethodOf`/`PropertyOf`/`ConstructorOf`/`GenericMethodDefinitionOf`) instead of string-based `GetMethod`/`GetProperty`, and clarifies why `nameof`-inside-string-lookup is insufficient.
+  - Renumbered the following sections in [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md), including item prefixes and TOC entries: `4.4 Documentation` -> `4.5`, `4.5 Release Notes` -> `4.6`.
+  - Added review-workflow conventions in [01-user-workflow-preferences.md](copilot-instructions/01-user-workflow-preferences.md) and mirrored in [CLAUDE.md](../CLAUDE.md): reviewers do not push commits to PRs under review, instruction-file convention updates are filed and applied by `@copilot`, and `@copilot` dispatch/verification rules (comment-based dispatch with fully specified asks, plus multi-channel verification and precise `since` timestamps).
 
 - 3.13.0
   - Broadened 1.8.1 (acceptance-criteria tracking): criteria are now ticked off automatically at every point where a checklist's truth may have changed — after pushing work, after a follow-up commit addressing review comments, and when reviewing a PR (including someone else's) — not only when first pushing. The `sync-acceptance-criteria` skill gains a "When to run this" section covering the three triggers plus how to resolve the linked issue when a PR uses `Refs` rather than `Fixes`. Mirrored into `CLAUDE.md`.

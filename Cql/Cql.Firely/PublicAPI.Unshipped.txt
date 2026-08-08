@@ -1,4 +1,5 @@
 #nullable enable
-Hl7.Cql.Fhir.FhirCqlContextOptions.EvaluationCache.get -> Hl7.Cql.Runtime.EvaluationCacheProfile?
-Hl7.Cql.Fhir.FhirCqlContextOptions.EvaluationCache.init -> void
-static Hl7.Cql.Fhir.FhirTypeConverter.ConvertRangeToCqlInterval(this Hl7.Cql.Conversion.TypeConverter! converter, Hl7.Fhir.Model.Range? range, string? cqlPointTypeName) -> object?
+Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideConverterTimezoneOffset.get -> System.TimeSpan?
+Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideConverterTimezoneOffset.init -> void
+static Hl7.Cql.Fhir.FhirCqlContext.DataSourceForBundle(Hl7.Fhir.Model.Bundle! bundle, Hl7.Cql.Fhir.FhirCqlContextOptions? options = null) -> Hl7.Cql.Operators.IDataSource!
+static Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Introspection.ModelInspector! model, int? cacheSize, System.TimeSpan? defaultTimezoneOffset) -> Hl7.Cql.Conversion.TypeConverter!
