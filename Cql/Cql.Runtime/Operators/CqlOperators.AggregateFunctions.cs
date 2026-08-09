@@ -75,17 +75,20 @@ namespace Hl7.Cql.Operators
                 return null;
             else
             {
-                var noNulls = argument
-                    .Where(x => x.HasValue)
-                    .Select(x => x!.Value);
-
-                if (!noNulls.Any())
-                    return null;
-
+                // One walk of the source: the emptiness test, the total and the count all come out of the same
+                // pass, where the Where/Select query behind them was walked three times.
                 decimal total = 0;
-                foreach (decimal val in noNulls)
-                    total += val;
-                return total / noNulls.Count();
+                var count = 0;
+                foreach (var value in argument)
+                {
+                    if (value.HasValue)
+                    {
+                        total += value.Value;
+                        count++;
+                    }
+                }
+
+                return count == 0 ? null : total / count;
             }
         }
 
@@ -105,22 +108,58 @@ namespace Hl7.Cql.Operators
             if (argument == null) return null;
             else
             {
-                decimal product = 0;
-                bool AllNull = true;
-                foreach (decimal? d in argument)
+                // Seeding with the multiplicative identity keeps a genuine 0 element in the product. The previous
+                // "product == 0 means uninitialized" idiom dropped such an element while still counting it, so a
+                // list containing a zero got a non-zero geometric mean.
+                decimal product = 1m;
+                var nonNullCount = 0;
+                try
                 {
-                    if (d != null)
+                    foreach (decimal? d in argument)
                     {
-                        if (product == 0) product = d.Value;
-                        else product *= d.Value;
-                        AllNull = false;
+                        if (d != null)
+                        {
+                            product *= d.Value;
+                            nonNullCount++;
+                        }
                     }
                 }
-                if (AllNull == true) return null;
+                catch (OverflowException e)
+                {
+                    // The product itself is outside Decimal's range, so Product(X) cannot be represented and neither
+                    // can Power of it. Per the spec (§9.B) Power: if the result cannot be represented, the result is
+                    // null. The geometric mean of such a list can still be representable - the product is
+                    // accumulated in Decimal - so the message keeps the null visible in the evaluation log rather
+                    // than letting it pass as an ordinary result.
+                    Message(new { argument, e }, "CqlOperators.AggregateFunctions.GeometricMean", "Warning", "Ignored overflow errors from decimal geometric mean product, returned null.");
+                    return null;
+                }
+                if (nonNullCount == 0) return null;
                 else
                 {
-                    double count = 1.0 / argument.Count();
-                    return (decimal)Math.Pow((double)product, count);
+                    // The spec (§9.B) defines this as Power(Product(X), 1 / Count(X)), and CQL's Count is the number
+                    // of non-null elements - which the loop above already has, where reading argument.Count() here
+                    // both walked the source a second time and counted the nulls the product skipped.
+                    double count = 1.0 / nonNullCount;
+                    double result = Math.Pow((double)product, count);
+                    // Per the spec (§9.B) Power: if the result cannot be represented, the result is null. A negative
+                    // product under a fractional root has no real value (Math.Pow gives NaN), and a result outside
+                    // Decimal's range is not representable either; both are null rather than an OverflowException
+                    // out of the cast.
+                    if (double.IsNaN(result) || double.IsInfinity(result))
+                    {
+                        Message(new { argument, product, result }, "CqlOperators.AggregateFunctions.GeometricMean", "Warning", "Geometric mean result cannot be represented as decimal; returning null.");
+                        return null;
+                    }
+                    try
+                    {
+                        return (decimal)result;
+                    }
+                    catch (OverflowException e)
+                    {
+                        Message(new { argument, product, result, e }, "CqlOperators.AggregateFunctions.GeometricMean", "Warning", "Decimal overflow in geometric mean result; returning null.");
+                        return null;
+                    }
                 }
             }
         }
@@ -181,121 +220,77 @@ namespace Hl7.Cql.Operators
 
 
 
+        // The three overloads share one shape: collect the non-null values in a single pass, sort them into a new
+        // list, and read the middle out of that sorted list by index. Reading the odd-length median out of the
+        // original source instead - as this used to - walks the source a second time and indexes into a sequence
+        // that is neither sorted nor stripped of its nulls, so it returns an arbitrary element rather than the
+        // median. The even-count midpoint of the Integer and Long overloads is taken in a wider type: summing the
+        // two middle values first overflows for values near the type's maximum, which wraps silently in C#'s
+        // default unchecked context and turns the median of two large values into a negative one.
+
         public decimal? Median(IEnumerable<decimal?> source)
         {
             if (source == null)
-            {
                 return null;
-            }
-            else
-            {
-                var nonNull = source.Where(d => d.HasValue).ToList();
-                if (nonNull.Count == 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    var sortedList = nonNull
-                        .Select(d => d!.Value)
-                        .OrderBy(d => d)
-                        .ToList();
-                    // check if the 1 bit is set or not.  if not, number is even
-                    var isEven = (sortedList.Count & 1) == 0;
-                    // shift by 1 to divide by 2
-                    var middle = sortedList.Count() >> 1;
-                    if (isEven)
-                    {
-                        var a = sortedList.ElementAt(middle);
-                        var b = sortedList.ElementAt(middle - 1);
-                        // can't shift decimals so use division
-                        return (a + b) / 2m;
-                    }
-                    else
-                    {
-                        return source.ElementAt(middle);
-                    }
 
-                }
-            }
+            var sorted = SortedNonNullValues(source);
+            if (sorted.Count == 0)
+                return null;
+
+            // check if the 1 bit is set or not.  if not, number is even
+            var isEven = (sorted.Count & 1) == 0;
+            // shift by 1 to divide by 2
+            var middle = sorted.Count >> 1;
+            // can't shift decimals so use division
+            return isEven ? (sorted[middle] + sorted[middle - 1]) / 2m : sorted[middle];
         }
 
         public int? Median(IEnumerable<int?> source)
         {
             if (source == null)
-            {
                 return null;
-            }
-            else
-            {
-                var nonNull = source.Where(d => d.HasValue).ToList();
-                if (nonNull.Count == 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    var sortedList = nonNull
-                        .Select(d => d!.Value)
-                        .OrderBy(d => d)
-                        .ToList();
-                    // check if the 1 bit is set or not.  if not, number is even
-                    var isEven = (sortedList.Count & 1) == 0;
-                    // shift by 1 to divide by 2
-                    var middle = sortedList.Count() >> 1;
-                    if (isEven)
-                    {
-                        var a = sortedList.ElementAt(middle);
-                        var b = sortedList.ElementAt(middle - 1);
-                        // can't shift decimals so use division
-                        return (a + b) / 2;
-                    }
-                    else
-                    {
-                        return source.ElementAt(middle);
-                    }
 
-                }
-            }
+            var sorted = SortedNonNullValues(source);
+            if (sorted.Count == 0)
+                return null;
+
+            var isEven = (sorted.Count & 1) == 0;
+            var middle = sorted.Count >> 1;
+            // long holds the sum of any two int values, so the midpoint truncates towards zero exactly as an int
+            // division of a non-overflowing sum does.
+            return isEven ? (int)(((long)sorted[middle] + sorted[middle - 1]) / 2L) : sorted[middle];
         }
 
         public long? Median(IEnumerable<long?> source)
         {
             if (source == null)
-            {
                 return null;
-            }
-            else
-            {
-                var nonNull = source.Where(d => d.HasValue).ToList();
-                if (nonNull.Count == 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    var sortedList = nonNull
-                        .Select(d => d!.Value)
-                        .OrderBy(d => d)
-                        .ToList();
-                    // check if the 1 bit is set or not.  if not, number is even
-                    var isEven = (sortedList.Count & 1) == 0;
-                    // shift by 1 to divide by 2
-                    var middle = sortedList.Count() >> 1;
-                    if (isEven)
-                    {
-                        var a = sortedList.ElementAt(middle);
-                        var b = sortedList.ElementAt(middle - 1);
-                        // can't shift decimals so use division
-                        return (a + b) / 2L;
-                    }
-                    else
-                    {
-                        return source.ElementAt(middle);
-                    }
 
-                }
+            var sorted = SortedNonNullValues(source);
+            if (sorted.Count == 0)
+                return null;
+
+            var isEven = (sorted.Count & 1) == 0;
+            var middle = sorted.Count >> 1;
+            // decimal holds the sum of any two long values exactly, and the cast back truncates towards zero exactly
+            // as a long division of a non-overflowing sum does.
+            return isEven ? (long)(((decimal)sorted[middle] + sorted[middle - 1]) / 2m) : sorted[middle];
+        }
+
+        private static List<T> SortedNonNullValues<T>(IEnumerable<T?> source)
+            where T : struct, IComparable<T>
+        {
+            var values = new List<T>();
+            foreach (var value in source)
+            {
+                if (value.HasValue)
+                    values.Add(value.Value);
             }
+
+            // OrderBy rather than List<T>.Sort: the in-place sort is unstable, and for decimals two equal values
+            // can differ in scale (1.0m vs 1.000m), so an unstable sort could change which representation the
+            // median reports depending on input size and layout.
+            return values.OrderBy(static v => v).ToList();
         }
 
 
