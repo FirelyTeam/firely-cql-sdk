@@ -509,5 +509,50 @@ public class FusedOperatorTests
         CollectionAssert.AreEqual(Array.Empty<string>(), composed);
     }
 
+    /// <summary>
+    /// When both lambdas would throw, on different elements, the exception that surfaces is itself
+    /// no longer shared: the composition finishes the predicate over the whole source before the
+    /// selector sees anything, so the predicate's throw on the later element wins, while the
+    /// single-pass fused form reaches the selector's throw on the earlier element first. This is
+    /// the one case where the two forms differ in more than the work done before the failure.
+    /// </summary>
+    [TestMethod]
+    public void WhereSelect_BothLambdasThrow_FusedSurfacesTheSelectorsThrowFromTheEarlierElement()
+    {
+        var op = Operators();
+        var source = new List<string?> { "a", "b" };
+        Func<string?, bool?> predicate = x => x == "b" ? throw new InvalidOperationException("predicate-boom") : true;
+        Func<string?, int?> selector = x => x == "a" ? throw new InvalidOperationException("selector-boom") : x?.Length;
+
+        var composed = Catch(() => op.Select(op.Where(source, predicate), selector));
+        var fused = Catch(() => op.WhereSelect(source, predicate, selector));
+
+        Assert.AreEqual(typeof(InvalidOperationException), composed.type);
+        Assert.AreEqual("predicate-boom", composed.message, "the composition never reaches the selector.");
+        Assert.AreEqual(typeof(InvalidOperationException), fused.type);
+        Assert.AreEqual("selector-boom", fused.message, "the fused pass reaches the selector's throw first.");
+    }
+
+    /// <summary>Symmetric to <see cref="WhereSelect_BothLambdasThrow_FusedSurfacesTheSelectorsThrowFromTheEarlierElement"/>:
+    /// the composition finishes the selector over the whole source first, so the selector's throw on
+    /// the later element wins, while the fused form reaches the predicate's throw on the projection
+    /// of the earlier element first.</summary>
+    [TestMethod]
+    public void SelectWhere_BothLambdasThrow_FusedSurfacesThePredicatesThrowFromTheEarlierElement()
+    {
+        var op = Operators();
+        var source = new List<string?> { "a", "bb" };
+        Func<string?, int?> selector = x => x == "bb" ? throw new InvalidOperationException("selector-boom") : x?.Length;
+        Func<int?, bool?> predicate = x => x == 1 ? throw new InvalidOperationException("predicate-boom") : true;
+
+        var composed = Catch(() => op.Where(op.Select(source, selector), predicate));
+        var fused = Catch(() => op.SelectWhere(source, selector, predicate));
+
+        Assert.AreEqual(typeof(InvalidOperationException), composed.type);
+        Assert.AreEqual("selector-boom", composed.message, "the composition never reaches the predicate.");
+        Assert.AreEqual(typeof(InvalidOperationException), fused.type);
+        Assert.AreEqual("predicate-boom", fused.message, "the fused pass reaches the predicate's throw first.");
+    }
+
     #endregion
 }

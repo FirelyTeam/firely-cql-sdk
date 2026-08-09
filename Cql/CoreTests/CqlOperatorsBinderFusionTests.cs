@@ -204,9 +204,13 @@ public class CqlOperatorsBinderFusionTests
 
     /// <summary>
     /// A <c>Where</c> result feeding an operator that has no fused equivalent stays a
-    /// composition, wherever in the argument list it sits. This pins the consumer half of the
-    /// match — <c>Except</c> is not one of the four fusable consumers — not the source-position
-    /// guard, which <see cref="ProducerInANonSourceArgument_IsUnrepresentableInTheIR"/> covers.
+    /// composition, wherever in the argument list it sits. <c>Fuse</c> declines this shape at
+    /// whichever of its structural checks fires first — here that is argument 0 being a plain
+    /// source constant rather than an operators call, so the consumer/producer pairing is never
+    /// consulted. What this test pins is therefore the outcome, that a non-fusable consumer is
+    /// left alone, and not any one check: the consumer half of the match is pinned by
+    /// <see cref="WhereOverWhere_HasNoFusedEquivalent_AndIsLeftAlone"/>, the source-position guard
+    /// by <see cref="ProducerInANonSourceArgument_IsUnrepresentableInTheIR"/>.
     /// </summary>
     [TestMethod]
     public void WhereResultConsumedByNonFusableOperator_DoesNotFuse()

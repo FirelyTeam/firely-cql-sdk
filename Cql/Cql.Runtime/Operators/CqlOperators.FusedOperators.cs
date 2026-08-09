@@ -40,8 +40,14 @@ namespace Hl7.Cql.Operators
     /// <c>["a", "b"]</c> with a predicate that throws on <c>"b"</c>,
     /// <c>Select(Where(s, p), f)</c> invokes the selector for nothing while
     /// <see cref="WhereSelect{T,TR}"/> has already invoked it for <c>"a"</c>;
-    /// <see cref="SelectWhere{T,TR}"/> is symmetric for a throwing selector. The exception that
-    /// surfaces is the same one either way — what differs is the work already done when it does.
+    /// <see cref="SelectWhere{T,TR}"/> is symmetric for a throwing selector. As long as only one of
+    /// the two lambdas ever throws, the exception that surfaces is the same one either way and all
+    /// that differs is the work already done when it does. Only if both would throw, on different
+    /// elements, can the surfacing exception itself differ: the fused form surfaces whichever throw
+    /// its single pass reaches first, which need not be the one the composition reaches. Extend the
+    /// example above with a selector that also throws, on <c>"a"</c>, and
+    /// <see cref="WhereSelect{T,TR}"/> surfaces the selector's exception where
+    /// <c>Select(Where(s, p), f)</c> still surfaces the predicate's.
     /// </para>
     /// <para>
     /// The result lists are intentionally not presized from the source's count: all of these
