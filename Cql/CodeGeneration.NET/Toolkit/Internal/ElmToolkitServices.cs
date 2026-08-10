@@ -16,7 +16,6 @@ using Hl7.Cql.Runtime.Logging;
 using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 
@@ -63,7 +62,7 @@ internal readonly record struct ElmToolkitServices(
         services.TryAddSingleton(sp =>
         {
             var modelInspector = sp.GetRequiredService<ModelInspector>();
-            var logger = sp.GetLogger<TypeConverter>();
+            var logger = sp.GetLogger<Hl7.Cql.Conversion.TypeConverter>();
             var converter = FhirTypeConverter
                             .Create(modelInspector)
                             .UseLogger(logger);

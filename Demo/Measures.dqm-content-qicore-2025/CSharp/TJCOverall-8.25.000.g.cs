@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
 [CqlLibrary("TJCOverall", "8.25.000")]
 public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_000>
 {
@@ -249,68 +249,67 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             IEnumerable<object> d_ = this.Intervention_Comfort_Measures(context);
 
             bool? e_(object ComfortMeasure) {
-                object h_;
-                object o_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                bool q_ = p_ is CqlDateTime;
-                if (q_)
+                object g_;
+                object n_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+                bool p_ = o_ is CqlDateTime;
+                if (p_)
                 {
-                    object r_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                    object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                    h_ = s_ as CqlDateTime;
+                    object q_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                    object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
+                    g_ = r_ as CqlDateTime;
                 }
                 else
                 {
-                    object t_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    bool v_ = u_ is CqlQuantity;
-                    if (v_)
+                    object s_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                    object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                    bool u_ = t_ is CqlQuantity;
+                    if (u_)
                     {
-                        object w_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                        h_ = x_ as CqlQuantity;
+                        object v_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                        object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+                        g_ = w_ as CqlQuantity;
                     }
                     else
                     {
-                        object y_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        bool aa_ = z_ is CqlInterval<CqlDateTime>;
-                        if (aa_)
+                        object x_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                        object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                        bool z_ = y_ is CqlInterval<CqlDateTime>;
+                        if (z_)
                         {
-                            object ab_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                            h_ = ac_ as CqlInterval<CqlDateTime>;
+                            object aa_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                            object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                            g_ = ab_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            object ad_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            bool af_ = ae_ is CqlInterval<CqlQuantity>;
-                            if (af_)
+                            object ac_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                            bool ae_ = ad_ is CqlInterval<CqlQuantity>;
+                            if (ae_)
                             {
-                                object ag_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                                object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                                h_ = ah_ as CqlInterval<CqlQuantity>;
+                                object af_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                                object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                                g_ = ag_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                h_ = null;
+                                g_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
-                CqlDateTime j_ = context.Operators.Start(i_);
-                object k_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
-                CqlDateTime l_ = context.Operators.LateBoundProperty<CqlDateTime>(k_, "value");
-                CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, IschemicStrokeEncounter);
-                bool? n_ = context.Operators.In<CqlDateTime>(j_ ?? l_, m_, (string)default);
-                return n_;
+                CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
+                CqlDateTime i_ = context.Operators.Start(h_);
+                object j_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
+                CqlDateTime k_ = context.Operators.LateBoundProperty<CqlDateTime>(j_, "value");
+                CqlInterval<CqlDateTime> l_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, IschemicStrokeEncounter);
+                bool? m_ = context.Operators.In<CqlDateTime>(i_ ?? k_, l_, (string)default);
+                return m_;
             }
 
-            IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-            bool? g_ = context.Operators.Exists<object>(f_);
-            return g_;
+            bool? f_ = context.Operators.WhereAny<object>(d_, e_);
+            return f_;
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
