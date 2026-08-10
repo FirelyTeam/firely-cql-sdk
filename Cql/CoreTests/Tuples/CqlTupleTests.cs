@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-#nullable enable
 using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Primitives;
 

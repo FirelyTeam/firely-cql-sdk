@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -21,7 +21,6 @@ using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Invocation.Toolkit.Internal;
 using Hl7.Cql.Runtime;
 
-#nullable enable
 
 namespace CoreTests;
 
