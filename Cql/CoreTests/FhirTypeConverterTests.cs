@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable enable
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
@@ -64,12 +65,12 @@ namespace CoreTests
 
             Assert.IsTrue(converted is CqlDateTime);
 
-            Assert.AreEqual(2024, converted.Value.Year);
-            Assert.AreEqual(12, converted.Value.Month);
-            Assert.AreEqual(31, converted.Value.Day);
-            Assert.AreEqual(12, converted.Value.Hour);
-            Assert.AreEqual(10, converted.Value.Minute);
-            Assert.AreEqual(10, converted.Value.Second);
+            Assert.AreEqual(2024, converted!.Value.Year);
+            Assert.AreEqual(12, converted!.Value.Month);
+            Assert.AreEqual(31, converted!.Value.Day);
+            Assert.AreEqual(12, converted!.Value.Hour);
+            Assert.AreEqual(10, converted!.Value.Minute);
+            Assert.AreEqual(10, converted!.Value.Second);
         }
 
         [TestMethod]
@@ -94,7 +95,7 @@ namespace CoreTests
                 Value = new Integer(1),
             };
             var converted = FhirTypeConverter.Convert<UnsignedInt>(parameter);
-            Assert.AreEqual(1,converted.Value);
+            Assert.AreEqual(1,converted!.Value);
         }
 
         [TestMethod]
@@ -106,7 +107,7 @@ namespace CoreTests
                 Value = new Integer(1),
             };
             var converted = FhirTypeConverter.Convert<PositiveInt>(parameter);
-            Assert.AreEqual(1, converted.Value);
+            Assert.AreEqual(1, converted!.Value);
         }
 
         [TestMethod]
@@ -182,9 +183,9 @@ namespace CoreTests
 
             Assert.IsTrue(converted is CqlDate);
 
-            Assert.AreEqual(2022, converted.Value.Year);
-            Assert.AreEqual(1, converted.Value.Month);
-            Assert.AreEqual(1, converted.Value.Day);
+            Assert.AreEqual(2022, converted!.Value.Year);
+            Assert.AreEqual(1, converted!.Value.Month);
+            Assert.AreEqual(1, converted!.Value.Day);
         }
 
 
@@ -203,9 +204,9 @@ namespace CoreTests
 
             Assert.IsTrue(converted is CqlDate);
 
-            Assert.AreEqual(DateTime.Now.Year, converted.Value.Year);
-            Assert.AreEqual(DateTime.Now.Month, converted.Value.Month);
-            Assert.AreEqual(DateTime.Now.Day, converted.Value.Day);
+            Assert.AreEqual(DateTime.Now.Year, converted!.Value.Year);
+            Assert.AreEqual(DateTime.Now.Month, converted!.Value.Month);
+            Assert.AreEqual(DateTime.Now.Day, converted!.Value.Day);
         }
 
 
@@ -227,9 +228,9 @@ namespace CoreTests
 
             Assert.IsTrue(converted is CqlDate);
 
-            Assert.AreEqual(expected.Year, converted.Value.Year);
-            Assert.AreEqual(expected.Month, converted.Value.Month);
-            Assert.AreEqual(expected.Day, converted.Value.Day);
+            Assert.AreEqual(expected.Year, converted!.Value.Year);
+            Assert.AreEqual(expected.Month, converted!.Value.Month);
+            Assert.AreEqual(expected.Day, converted!.Value.Day);
         }
 
         [Ignore, TestMethod]
@@ -249,9 +250,9 @@ namespace CoreTests
 
             Assert.IsTrue(converted is CqlDate);
 
-            Assert.AreEqual(expected.Year, converted.Value.Year);
-            Assert.AreEqual(expected.Month, converted.Value.Month);
-            Assert.AreEqual(expected.Day, converted.Value.Day);
+            Assert.AreEqual(expected.Year, converted!.Value.Year);
+            Assert.AreEqual(expected.Month, converted!.Value.Month);
+            Assert.AreEqual(expected.Day, converted!.Value.Day);
         }
 
 
@@ -270,13 +271,13 @@ namespace CoreTests
 
             Assert.IsTrue(converted is CqlDateTime);
 
-            Assert.AreEqual(2022, converted.Value.Year);
-            Assert.AreEqual(1, converted.Value.Month);
-            Assert.AreEqual(1, converted.Value.Day);
-            Assert.AreEqual(1, converted.Value.Hour);
-            Assert.AreEqual(1, converted.Value.Minute);
-            Assert.AreEqual(1, converted.Value.Second);
-            Assert.AreEqual(1, converted.Value.Millisecond);
+            Assert.AreEqual(2022, converted!.Value.Year);
+            Assert.AreEqual(1, converted!.Value.Month);
+            Assert.AreEqual(1, converted!.Value.Day);
+            Assert.AreEqual(1, converted!.Value.Hour);
+            Assert.AreEqual(1, converted!.Value.Minute);
+            Assert.AreEqual(1, converted!.Value.Second);
+            Assert.AreEqual(1, converted!.Value.Millisecond);
         }
 
         [Ignore, TestMethod]
@@ -294,9 +295,9 @@ namespace CoreTests
 
             Assert.IsTrue(converted is CqlDateTime);
 
-            Assert.AreEqual(DateTime.Now.Year, converted.Value.Year);
-            Assert.AreEqual(DateTime.Now.Month, converted.Value.Month);
-            Assert.AreEqual(DateTime.Now.Day, converted.Value.Day);
+            Assert.AreEqual(DateTime.Now.Year, converted!.Value.Year);
+            Assert.AreEqual(DateTime.Now.Month, converted!.Value.Month);
+            Assert.AreEqual(DateTime.Now.Day, converted!.Value.Day);
         }
 
         [TestMethod]
@@ -312,10 +313,10 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.Value.Hour);
-            Assert.AreEqual(1, converted.Value.Minute);
-            Assert.AreEqual(1, converted.Value.Second);
-            Assert.AreEqual(1, converted.Value.Millisecond);
+            Assert.AreEqual(1, converted!.Value.Hour);
+            Assert.AreEqual(1, converted!.Value.Minute);
+            Assert.AreEqual(1, converted!.Value.Second);
+            Assert.AreEqual(1, converted!.Value.Millisecond);
         }
 
         [TestMethod]
@@ -325,8 +326,8 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
             Assert.AreEqual("14:30:00.000", converted.ToString());
-            Assert.IsNull(converted.Value.OffsetHour);
-            Assert.IsNull(converted.Value.OffsetMinute);
+            Assert.IsNull(converted!.Value.OffsetHour);
+            Assert.IsNull(converted!.Value.OffsetMinute);
         }
 
         [TestMethod]
@@ -359,16 +360,16 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(2022, converted.low.Value.Year);
-            Assert.AreEqual(1, converted.low.Value.Month);
-            Assert.AreEqual(1, converted.low.Value.Day);
+            Assert.AreEqual(2022, converted!.low.Value.Year);
+            Assert.AreEqual(1, converted!.low.Value.Month);
+            Assert.AreEqual(1, converted!.low.Value.Day);
 
-            Assert.AreEqual(2022, converted.high.Value.Year);
-            Assert.AreEqual(3, converted.high.Value.Month);
-            Assert.AreEqual(31, converted.high.Value.Day);
+            Assert.AreEqual(2022, converted!.high.Value.Year);
+            Assert.AreEqual(3, converted!.high.Value.Month);
+            Assert.AreEqual(31, converted!.high.Value.Day);
 
-            Assert.AreEqual(true, converted.lowClosed);
-            Assert.AreEqual(true, converted.highClosed);
+            Assert.AreEqual(true, converted!.lowClosed);
+            Assert.AreEqual(true, converted!.highClosed);
         }
 
         [Ignore, TestMethod]
@@ -385,16 +386,16 @@ namespace CoreTests
             Assert.IsNotNull(converted);
 
 
-            Assert.AreEqual(DateTime.Now.Year, converted.low.Value.Year);
-            Assert.AreEqual(1, converted.low.Value.Month);
-            Assert.AreEqual(1, converted.low.Value.Day);
+            Assert.AreEqual(DateTime.Now.Year, converted!.low.Value.Year);
+            Assert.AreEqual(1, converted!.low.Value.Month);
+            Assert.AreEqual(1, converted!.low.Value.Day);
 
-            Assert.AreEqual(DateTime.Now.Year, converted.high.Value.Year);
-            Assert.AreEqual(12, converted.high.Value.Month);
-            Assert.AreEqual(31, converted.high.Value.Day);
+            Assert.AreEqual(DateTime.Now.Year, converted!.high.Value.Year);
+            Assert.AreEqual(12, converted!.high.Value.Month);
+            Assert.AreEqual(31, converted!.high.Value.Day);
 
-            Assert.AreEqual(true, converted.lowClosed);
-            Assert.AreEqual(true, converted.highClosed);
+            Assert.AreEqual(true, converted!.lowClosed);
+            Assert.AreEqual(true, converted!.highClosed);
         }
 
 
@@ -412,16 +413,16 @@ namespace CoreTests
             Assert.IsNotNull(converted);
 
 
-            Assert.AreEqual(2022, converted.low.Value.Year);
-            Assert.AreEqual(1, converted.low.Value.Month);
-            Assert.AreEqual(1, converted.low.Value.Day);
+            Assert.AreEqual(2022, converted!.low.Value.Year);
+            Assert.AreEqual(1, converted!.low.Value.Month);
+            Assert.AreEqual(1, converted!.low.Value.Day);
 
-            Assert.AreEqual(2022, converted.high.Value.Year);
-            Assert.AreEqual(3, converted.high.Value.Month);
-            Assert.AreEqual(31, converted.high.Value.Day);
+            Assert.AreEqual(2022, converted!.high.Value.Year);
+            Assert.AreEqual(3, converted!.high.Value.Month);
+            Assert.AreEqual(31, converted!.high.Value.Day);
 
-            Assert.AreEqual(true, converted.lowClosed);
-            Assert.AreEqual(true, converted.highClosed);
+            Assert.AreEqual(true, converted!.lowClosed);
+            Assert.AreEqual(true, converted!.highClosed);
         }
 
         [Ignore, TestMethod]
@@ -438,16 +439,16 @@ namespace CoreTests
             Assert.IsNotNull(converted);
 
 
-            Assert.AreEqual(DateTime.Now.Year, converted.low.Value.Year);
-            Assert.AreEqual(1, converted.low.Value.Month);
-            Assert.AreEqual(1, converted.low.Value.Day);
+            Assert.AreEqual(DateTime.Now.Year, converted!.low.Value.Year);
+            Assert.AreEqual(1, converted!.low.Value.Month);
+            Assert.AreEqual(1, converted!.low.Value.Day);
 
-            Assert.AreEqual(DateTime.Now.Year, converted.high.Value.Year);
-            Assert.AreEqual(12, converted.high.Value.Month);
-            Assert.AreEqual(31, converted.high.Value.Day);
+            Assert.AreEqual(DateTime.Now.Year, converted!.high.Value.Year);
+            Assert.AreEqual(12, converted!.high.Value.Month);
+            Assert.AreEqual(31, converted!.high.Value.Day);
 
-            Assert.AreEqual(true, converted.lowClosed);
-            Assert.AreEqual(true, converted.highClosed);
+            Assert.AreEqual(true, converted!.lowClosed);
+            Assert.AreEqual(true, converted!.highClosed);
         }
 
         [TestMethod]
@@ -466,16 +467,16 @@ namespace CoreTests
             Assert.IsNotNull(converted);
 
 
-            Assert.AreEqual(2022, converted.low.Value.Year);
-            Assert.AreEqual(1, converted.low.Value.Month);
-            Assert.AreEqual(1, converted.low.Value.Day);
+            Assert.AreEqual(2022, converted!.low.Value.Year);
+            Assert.AreEqual(1, converted!.low.Value.Month);
+            Assert.AreEqual(1, converted!.low.Value.Day);
 
-            Assert.AreEqual(2022, converted.high.Value.Year);
-            Assert.AreEqual(3, converted.high.Value.Month);
-            Assert.AreEqual(31, converted.high.Value.Day);
+            Assert.AreEqual(2022, converted!.high.Value.Year);
+            Assert.AreEqual(3, converted!.high.Value.Month);
+            Assert.AreEqual(31, converted!.high.Value.Day);
 
-            Assert.AreEqual(true, converted.lowClosed);
-            Assert.AreEqual(true, converted.highClosed);
+            Assert.AreEqual(true, converted!.lowClosed);
+            Assert.AreEqual(true, converted!.highClosed);
         }
 
 
@@ -496,8 +497,8 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.low.value);
-            Assert.AreEqual(10, converted.high.value);
+            Assert.AreEqual(1, converted!.low.value);
+            Assert.AreEqual(10, converted!.high.value);
         }
 
         [TestMethod]
@@ -508,11 +509,11 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.IsTrue(DateIso8601.TryParse(converted.Value, out var isoDate));
+            Assert.IsTrue(DateIso8601.TryParse(converted!.Value!, out var isoDate));
 
-            Assert.AreEqual(2022, isoDate.Year);
-            Assert.AreEqual(1, isoDate.Month);
-            Assert.AreEqual(1, isoDate.Day);
+            Assert.AreEqual(2022, isoDate!.Year);
+            Assert.AreEqual(1, isoDate!.Month);
+            Assert.AreEqual(1, isoDate!.Day);
         }
 
         [TestMethod]
@@ -523,16 +524,16 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.IsTrue(DateTimeIso8601.TryParse(converted.Value, out var isoDateTime));
+            Assert.IsTrue(DateTimeIso8601.TryParse(converted!.Value!, out var isoDateTime));
 
 
-            Assert.AreEqual(2022, isoDateTime.Year);
-            Assert.AreEqual(1, isoDateTime.Month);
-            Assert.AreEqual(1, isoDateTime.Day);
-            Assert.AreEqual(1, isoDateTime.Hour);
-            Assert.AreEqual(1, isoDateTime.Minute);
-            Assert.AreEqual(1, isoDateTime.Second);
-            Assert.AreEqual(1, isoDateTime.Millisecond);
+            Assert.AreEqual(2022, isoDateTime!.Year);
+            Assert.AreEqual(1, isoDateTime!.Month);
+            Assert.AreEqual(1, isoDateTime!.Day);
+            Assert.AreEqual(1, isoDateTime!.Hour);
+            Assert.AreEqual(1, isoDateTime!.Minute);
+            Assert.AreEqual(1, isoDateTime!.Second);
+            Assert.AreEqual(1, isoDateTime!.Millisecond);
         }
 
         [TestMethod]
@@ -542,15 +543,15 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<CqlDateTime>(date);
 
             Assert.IsNotNull(converted);
-            var isoDateTime = converted.Value;
+            var isoDateTime = converted!.Value;
             Assert.IsNotNull(isoDateTime);
 
-            Assert.AreEqual(2022, isoDateTime.Year);
-            Assert.AreEqual(1, isoDateTime.Month);
-            Assert.AreEqual(1, isoDateTime.Day);
-            Assert.AreEqual(1, isoDateTime.Hour);
-            Assert.AreEqual(1, isoDateTime.Minute);
-            Assert.AreEqual(1, isoDateTime.Second);
+            Assert.AreEqual(2022, isoDateTime!.Year);
+            Assert.AreEqual(1, isoDateTime!.Month);
+            Assert.AreEqual(1, isoDateTime!.Day);
+            Assert.AreEqual(1, isoDateTime!.Hour);
+            Assert.AreEqual(1, isoDateTime!.Minute);
+            Assert.AreEqual(1, isoDateTime!.Second);
 
             var nullDateTime = new FhirDateTime(null);
             var nullConverted = FhirTypeConverter.Convert<CqlDateTime>(nullDateTime);
@@ -565,15 +566,15 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<CqlDateTime>(date);
 
             Assert.IsNotNull(converted);
-            var isoDateTime = converted.Value;
+            var isoDateTime = converted!.Value;
             Assert.IsNotNull(isoDateTime);
 
-            Assert.AreEqual(2022, isoDateTime.Year);
-            Assert.AreEqual(1, isoDateTime.Month);
-            Assert.AreEqual(1, isoDateTime.Day);
-            Assert.AreEqual(0, isoDateTime.Hour);
-            Assert.AreEqual(0, isoDateTime.Minute);
-            Assert.AreEqual(0, isoDateTime.Second);
+            Assert.AreEqual(2022, isoDateTime!.Year);
+            Assert.AreEqual(1, isoDateTime!.Month);
+            Assert.AreEqual(1, isoDateTime!.Day);
+            Assert.AreEqual(0, isoDateTime!.Hour);
+            Assert.AreEqual(0, isoDateTime!.Minute);
+            Assert.AreEqual(0, isoDateTime!.Second);
         }
 
         [TestMethod]
@@ -584,18 +585,18 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.IsTrue(TimeIso8601.TryParse(converted.Value, out var isoTime));
+            Assert.IsTrue(TimeIso8601.TryParse(converted!.Value!, out var isoTime));
 
-            Assert.AreEqual(1, isoTime.Hour);
-            Assert.AreEqual(1, isoTime.Minute);
-            Assert.AreEqual(1, isoTime.Second);
-            Assert.AreEqual(1, isoTime.Millisecond);
+            Assert.AreEqual(1, isoTime!.Hour);
+            Assert.AreEqual(1, isoTime!.Minute);
+            Assert.AreEqual(1, isoTime!.Second);
+            Assert.AreEqual(1, isoTime!.Millisecond);
         }
 
         private const string TimePrecisionExtensionUrl = Hl7.Cql.Fhir.FhirTypeConverter.TimePrecisionExtensionUrl;
 
-        private static string? GetTimePrecisionCode(Element element) =>
-            (element.GetExtension(TimePrecisionExtensionUrl)?.Value as Code)?.Value;
+        private static string? GetTimePrecisionCode(Element? element) =>
+            (element?.GetExtension(TimePrecisionExtensionUrl)?.Value as Code)?.Value;
 
         // These helpers use the Firely primitive validators as a real oracle: they enforce the same
         // rules as FHIR validators, and any emission test that would otherwise pin an invalid value
@@ -603,13 +604,13 @@ namespace CoreTests
         private static void AssertIsValidFhirTime(string? value)
         {
             Assert.IsNotNull(value, "Expected a non-null FHIR time value");
-            Assert.IsTrue(Time.IsValidValue(value), $"'{value}' is not a valid FHIR time value");
+            Assert.IsTrue(Time.IsValidValue(value!), $"'{value}' is not a valid FHIR time value");
         }
 
         private static void AssertIsValidFhirDateTime(string? value)
         {
             Assert.IsNotNull(value, "Expected a non-null FHIR dateTime value");
-            Assert.IsTrue(FhirDateTime.IsValidValue(value), $"'{value}' is not a valid FHIR dateTime value");
+            Assert.IsTrue(FhirDateTime.IsValidValue(value!), $"'{value}' is not a valid FHIR dateTime value");
         }
 
         [TestMethod]
@@ -619,8 +620,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Time>(time);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirTime(converted.Value);
-            Assert.AreEqual("10:00:00", converted.Value);
+            AssertIsValidFhirTime(converted!.Value);
+            Assert.AreEqual("10:00:00", converted!.Value);
             Assert.AreEqual("h", GetTimePrecisionCode(converted));
         }
 
@@ -631,8 +632,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Time>(time);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirTime(converted.Value);
-            Assert.AreEqual("10:30:00", converted.Value);
+            AssertIsValidFhirTime(converted!.Value);
+            Assert.AreEqual("10:30:00", converted!.Value);
             Assert.AreEqual("min", GetTimePrecisionCode(converted));
         }
 
@@ -643,8 +644,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Time>(time);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirTime(converted.Value);
-            Assert.AreEqual("10:30:15", converted.Value);
+            AssertIsValidFhirTime(converted!.Value);
+            Assert.AreEqual("10:30:15", converted!.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
 
@@ -655,8 +656,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Value);
-            Assert.AreEqual("2014-02-01T10:00:00Z", converted.Value);
+            AssertIsValidFhirDateTime(converted!.Value);
+            Assert.AreEqual("2014-02-01T10:00:00Z", converted!.Value);
             Assert.AreEqual("h", GetTimePrecisionCode(converted));
         }
 
@@ -667,8 +668,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Value);
-            Assert.AreEqual("2014-02-01T10:30:00Z", converted.Value);
+            AssertIsValidFhirDateTime(converted!.Value);
+            Assert.AreEqual("2014-02-01T10:30:00Z", converted!.Value);
             Assert.AreEqual("min", GetTimePrecisionCode(converted));
         }
 
@@ -679,8 +680,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Value);
-            Assert.AreEqual("2014-02-01T10:30:15Z", converted.Value);
+            AssertIsValidFhirDateTime(converted!.Value);
+            Assert.AreEqual("2014-02-01T10:30:15Z", converted!.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
 
@@ -691,8 +692,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Value);
-            Assert.AreEqual("2014-02-01T10:30:15.123Z", converted.Value);
+            AssertIsValidFhirDateTime(converted!.Value);
+            Assert.AreEqual("2014-02-01T10:30:15.123Z", converted!.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
 
@@ -753,8 +754,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Value);
-            Assert.AreEqual("2014-02-01T10:30:00+01:30", converted.Value);
+            AssertIsValidFhirDateTime(converted!.Value);
+            Assert.AreEqual("2014-02-01T10:30:00+01:30", converted!.Value);
             Assert.AreEqual("min", GetTimePrecisionCode(converted));
         }
 
@@ -765,8 +766,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Value);
-            Assert.AreEqual("2014-02-01T10:00:00Z", converted.Value);
+            AssertIsValidFhirDateTime(converted!.Value);
+            Assert.AreEqual("2014-02-01T10:00:00Z", converted!.Value);
             Assert.AreEqual("h", GetTimePrecisionCode(converted));
         }
 
@@ -777,8 +778,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Value);
-            Assert.AreEqual("2014-02-01", converted.Value);
+            AssertIsValidFhirDateTime(converted!.Value);
+            Assert.AreEqual("2014-02-01", converted!.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
 
@@ -791,8 +792,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Value);
-            Assert.AreEqual("2014-02-01", converted.Value);
+            AssertIsValidFhirDateTime(converted!.Value);
+            Assert.AreEqual("2014-02-01", converted!.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
 
@@ -803,8 +804,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Value);
-            Assert.AreEqual("2014", converted.Value);
+            AssertIsValidFhirDateTime(converted!.Value);
+            Assert.AreEqual("2014", converted!.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
 
@@ -815,8 +816,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(new CqlDate(2014, 2, 1));
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Value);
-            Assert.AreEqual("2014-02-01", converted.Value);
+            AssertIsValidFhirDateTime(converted!.Value);
+            Assert.AreEqual("2014-02-01", converted!.Value);
             Assert.IsNull(GetTimePrecisionCode(converted));
         }
 
@@ -829,8 +830,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<FhirDateTime>(dateTime);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Value);
-            Assert.AreEqual("2014-02-01T10:30:00Z", converted.Value);
+            AssertIsValidFhirDateTime(converted!.Value);
+            Assert.AreEqual("2014-02-01T10:30:00Z", converted!.Value);
 
             var roundTripped = FhirTypeConverter.Convert<CqlDateTime>(converted);
 
@@ -853,8 +854,8 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
             Assert.AreEqual(DateTimePrecision.Hour, converted.Precision);
-            Assert.AreEqual(10, converted.Value.Hour);
-            Assert.IsNull(converted.Value.Minute);
+            Assert.AreEqual(10, converted!.Value.Hour);
+            Assert.IsNull(converted!.Value.Minute);
 
             fhirTime = new Time("10:30:00");
             fhirTime.AddExtension(TimePrecisionExtensionUrl, new Code("min"));
@@ -862,8 +863,8 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
             Assert.AreEqual(DateTimePrecision.Minute, converted.Precision);
-            Assert.AreEqual(30, converted.Value.Minute);
-            Assert.IsNull(converted.Value.Second);
+            Assert.AreEqual(30, converted!.Value.Minute);
+            Assert.IsNull(converted!.Value.Second);
         }
 
         [TestMethod]
@@ -876,8 +877,8 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
             Assert.AreEqual(DateTimePrecision.Second, converted.Precision);
-            Assert.AreEqual(15, converted.Value.Second);
-            Assert.IsNull(converted.Value.Millisecond);
+            Assert.AreEqual(15, converted!.Value.Second);
+            Assert.IsNull(converted!.Value.Millisecond);
 
             fhirTime = new Time("10:30:15.123");
             fhirTime.AddExtension(TimePrecisionExtensionUrl, new Code("ms"));
@@ -885,7 +886,7 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
             Assert.AreEqual(DateTimePrecision.Millisecond, converted.Precision);
-            Assert.AreEqual(123, converted.Value.Millisecond);
+            Assert.AreEqual(123, converted!.Value.Millisecond);
         }
 
         [TestMethod]
@@ -897,9 +898,9 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
             Assert.AreEqual(DateTimePrecision.Hour, converted.Precision);
-            Assert.AreEqual(10, converted.Value.Hour);
-            Assert.IsNull(converted.Value.Minute);
-            Assert.AreEqual(0, converted.Value.OffsetHour);
+            Assert.AreEqual(10, converted!.Value.Hour);
+            Assert.IsNull(converted!.Value.Minute);
+            Assert.AreEqual(0, converted!.Value.OffsetHour);
         }
 
         [TestMethod]
@@ -932,10 +933,10 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("2014-02-01T10:00:00Z", converted.Start);
-            Assert.AreEqual("h", GetTimePrecisionCode(converted.StartElement));
-            Assert.AreEqual("2014-02-01T12:30:00Z", converted.End);
-            Assert.AreEqual("min", GetTimePrecisionCode(converted.EndElement));
+            Assert.AreEqual("2014-02-01T10:00:00Z", converted!.Start);
+            Assert.AreEqual("h", GetTimePrecisionCode(converted!.StartElement));
+            Assert.AreEqual("2014-02-01T12:30:00Z", converted!.End);
+            Assert.AreEqual("min", GetTimePrecisionCode(converted!.EndElement));
         }
 
         [TestMethod]
@@ -948,8 +949,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("2014-02-01T10:30:15Z", converted.Start);
-            Assert.AreEqual("2014-02-01T12:30:15-05:00", converted.End);
+            Assert.AreEqual("2014-02-01T10:30:15Z", converted!.Start);
+            Assert.AreEqual("2014-02-01T12:30:15-05:00", converted!.End);
         }
 
         [TestMethod]
@@ -962,10 +963,10 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T10:00:00Z", converted.Start);
-            Assert.AreEqual("h", GetTimePrecisionCode(converted.StartElement));
-            Assert.AreEqual("0001-01-01T12:30:00Z", converted.End);
-            Assert.AreEqual("min", GetTimePrecisionCode(converted.EndElement));
+            Assert.AreEqual("0001-01-01T10:00:00Z", converted!.Start);
+            Assert.AreEqual("h", GetTimePrecisionCode(converted!.StartElement));
+            Assert.AreEqual("0001-01-01T12:30:00Z", converted!.End);
+            Assert.AreEqual("min", GetTimePrecisionCode(converted!.EndElement));
         }
 
         [TestMethod]
@@ -978,8 +979,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("0001-01-01T10:00:00Z", converted.Start);
-            Assert.AreEqual("0001-01-01T12:30:15Z", converted.End);
+            Assert.AreEqual("0001-01-01T10:00:00Z", converted!.Start);
+            Assert.AreEqual("0001-01-01T12:30:15Z", converted!.End);
         }
 
         // The offset a converter applies to an offset-less CQL value is the evaluation request's; these
@@ -1016,7 +1017,7 @@ namespace CoreTests
         [TestMethod]
         public void ConvertCqlDateTime_ExplicitOffset_WinsOverTheDefaultTimezoneOffset()
         {
-            string[] values = [
+            string?[] values = [
                 ConverterWithPlusTwo.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, null, null, null, -5, 0))!.Value,
                 ConverterWithPlusTwo.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, 15, null, -5, 0))!.Value,
                 // A zero offset is an explicit offset, and still renders as 'Z' under a non-zero default.
@@ -1033,7 +1034,7 @@ namespace CoreTests
         [TestMethod]
         public void ConvertCqlDateTime_NegativeHalfHourDefault_RendersTheSignedOffset()
         {
-            string[] values = [
+            string?[] values = [
                 ConverterWithMinusFiveThirty.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, null, null, null, null, null))!.Value,
                 ConverterWithMinusFiveThirty.Convert<FhirDateTime>(new CqlDateTime(2014, 2, 1, 10, 30, 15, 123, null, null))!.Value,
             ];
@@ -1061,7 +1062,7 @@ namespace CoreTests
         public void ConvertCqlTime_Time_HasNoOffsetUnderADefaultTimezoneOffset()
         {
             // FHIR time SHALL NOT carry a timezone offset, so the default must not leak into it.
-            string[] values = [
+            string?[] values = [
                 ConverterWithPlusTwo.Convert<Time>(new CqlTime(10, null, null, null, null, null))!.Value,
                 ConverterWithPlusTwo.Convert<Time>(new CqlTime(10, 30, null, null, null, null))!.Value,
                 ConverterWithPlusTwo.Convert<Time>(new CqlTime(10, 30, 15, null, null, null))!.Value,
@@ -1084,11 +1085,11 @@ namespace CoreTests
             var converted = ConverterWithPlusTwo.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Start);
-            AssertIsValidFhirDateTime(converted.End);
-            Assert.AreEqual("2014-02-01T10:00:00+02:00", converted.Start);
-            Assert.AreEqual("h", GetTimePrecisionCode(converted.StartElement));
-            Assert.AreEqual("2014-02-01T12:30:15+02:00", converted.End);
+            AssertIsValidFhirDateTime(converted!.Start);
+            AssertIsValidFhirDateTime(converted!.End);
+            Assert.AreEqual("2014-02-01T10:00:00+02:00", converted!.Start);
+            Assert.AreEqual("h", GetTimePrecisionCode(converted!.StartElement));
+            Assert.AreEqual("2014-02-01T12:30:15+02:00", converted!.End);
         }
 
         [TestMethod]
@@ -1103,11 +1104,11 @@ namespace CoreTests
             var converted = ConverterWithPlusTwo.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Start);
-            AssertIsValidFhirDateTime(converted.End);
-            Assert.AreEqual("0001-01-01T10:00:00Z", converted.Start);
-            Assert.AreEqual("h", GetTimePrecisionCode(converted.StartElement));
-            Assert.AreEqual("0001-01-01T12:30:15.123Z", converted.End);
+            AssertIsValidFhirDateTime(converted!.Start);
+            AssertIsValidFhirDateTime(converted!.End);
+            Assert.AreEqual("0001-01-01T10:00:00Z", converted!.Start);
+            Assert.AreEqual("h", GetTimePrecisionCode(converted!.StartElement));
+            Assert.AreEqual("0001-01-01T12:30:15.123Z", converted!.End);
         }
 
         [TestMethod]
@@ -1122,13 +1123,13 @@ namespace CoreTests
             var converted = ConverterWithPlusTwo.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Start);
-            AssertIsValidFhirDateTime(converted.End);
-            Assert.AreEqual("0001-01-01T00:00:00Z", converted.Start);
-            Assert.AreEqual("0001-01-01T01:30:00Z", converted.End);
+            AssertIsValidFhirDateTime(converted!.Start);
+            AssertIsValidFhirDateTime(converted!.End);
+            Assert.AreEqual("0001-01-01T00:00:00Z", converted!.Start);
+            Assert.AreEqual("0001-01-01T01:30:00Z", converted!.End);
 
-            Assert.IsNotNull(ConverterWithPlusTwo.Convert<CqlDateTime>(converted.StartElement));
-            Assert.IsNotNull(ConverterWithPlusTwo.Convert<CqlDateTime>(converted.EndElement));
+            Assert.IsNotNull(ConverterWithPlusTwo.Convert<CqlDateTime>(converted!.StartElement));
+            Assert.IsNotNull(ConverterWithPlusTwo.Convert<CqlDateTime>(converted!.EndElement));
         }
 
         [TestMethod]
@@ -1143,10 +1144,10 @@ namespace CoreTests
             var converted = ConverterWithPlusTwo.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            AssertIsValidFhirDateTime(converted.Start);
-            AssertIsValidFhirDateTime(converted.End);
-            Assert.AreEqual("0001-01-01T10:30:15Z", converted.Start);
-            Assert.AreEqual("0001-01-01T12:30:15Z", converted.End);
+            AssertIsValidFhirDateTime(converted!.Start);
+            AssertIsValidFhirDateTime(converted!.End);
+            Assert.AreEqual("0001-01-01T10:30:15Z", converted!.Start);
+            Assert.AreEqual("0001-01-01T12:30:15Z", converted!.End);
 
             // A minutes-only offset is also a vestigial offset and is dropped.
             var minutesOnly = new CqlInterval<CqlTime>(
@@ -1273,7 +1274,7 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.Value);
+            Assert.AreEqual(1, converted!.Value);
             Assert.AreEqual("oranges", converted.Unit);
         }
 
@@ -1285,7 +1286,7 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.Value);
+            Assert.AreEqual(1, converted!.Value);
         }
 
         [TestMethod]
@@ -1296,7 +1297,7 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.Value);
+            Assert.AreEqual(1, converted!.Value);
         }
 
         [TestMethod]
@@ -1310,11 +1311,11 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.Low.Value);
-            Assert.AreEqual("oranges", converted.Low.Unit);
+            Assert.AreEqual(1, converted!.Low!.Value);
+            Assert.AreEqual("oranges", converted!.Low.Unit);
 
-            Assert.AreEqual(10, converted.High.Value);
-            Assert.AreEqual("oranges", converted.High.Unit);
+            Assert.AreEqual(10, converted!.High!.Value);
+            Assert.AreEqual("oranges", converted!.High.Unit);
         }
 
         [TestMethod]
@@ -1327,14 +1328,14 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.Low.Value);
-            Assert.AreEqual("1", converted.Low.Unit);
-            Assert.AreEqual(Hl7.Fhir.ElementModel.Types.Quantity.UCUM, converted.Low.System);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.Low));
-            Assert.AreEqual(10, converted.High.Value);
-            Assert.AreEqual("1", converted.High.Unit);
-            Assert.AreEqual(Hl7.Fhir.ElementModel.Types.Quantity.UCUM, converted.High.System);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.High));
+            Assert.AreEqual(1, converted!.Low!.Value);
+            Assert.AreEqual("1", converted!.Low.Unit);
+            Assert.AreEqual(Hl7.Fhir.ElementModel.Types.Quantity.UCUM, converted!.Low.System);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.Low));
+            Assert.AreEqual(10, converted!.High!.Value);
+            Assert.AreEqual("1", converted!.High.Unit);
+            Assert.AreEqual(Hl7.Fhir.ElementModel.Types.Quantity.UCUM, converted!.High.System);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.High));
         }
 
         [TestMethod]
@@ -1347,10 +1348,10 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1.0m, converted.Low.Value);
-            Assert.AreEqual(1, QuantityPrecisionOf(converted.Low));
-            Assert.AreEqual(10.000m, converted.High.Value);
-            Assert.AreEqual(3, QuantityPrecisionOf(converted.High));
+            Assert.AreEqual(1.0m, converted!.Low!.Value);
+            Assert.AreEqual(1, QuantityPrecisionOf(converted!.Low));
+            Assert.AreEqual(10.000m, converted!.High!.Value);
+            Assert.AreEqual(3, QuantityPrecisionOf(converted!.High));
         }
 
         [TestMethod]
@@ -1365,10 +1366,10 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1.0m, converted.Low.Value);
-            Assert.AreEqual(1, QuantityPrecisionOf(converted.Low));
-            Assert.AreEqual(3.99999999m, converted.High.Value);
-            Assert.AreEqual(8, QuantityPrecisionOf(converted.High));
+            Assert.AreEqual(1.0m, converted!.Low!.Value);
+            Assert.AreEqual(1, QuantityPrecisionOf(converted!.Low));
+            Assert.AreEqual(3.99999999m, converted!.High!.Value);
+            Assert.AreEqual(8, QuantityPrecisionOf(converted!.High));
         }
 
         [TestMethod]
@@ -1382,10 +1383,10 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1.05000001m, converted.Low.Value);
-            Assert.AreEqual(8, QuantityPrecisionOf(converted.Low));
-            Assert.AreEqual(4.0m, converted.High.Value);
-            Assert.AreEqual(1, QuantityPrecisionOf(converted.High));
+            Assert.AreEqual(1.05000001m, converted!.Low!.Value);
+            Assert.AreEqual(8, QuantityPrecisionOf(converted!.Low));
+            Assert.AreEqual(4.0m, converted!.High!.Value);
+            Assert.AreEqual(1, QuantityPrecisionOf(converted!.High));
         }
 
         [TestMethod]
@@ -1398,12 +1399,12 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.Low.Value);
-            Assert.AreEqual("1", converted.Low.Unit);
-            Assert.AreEqual(Hl7.Fhir.ElementModel.Types.Quantity.UCUM, converted.Low.System);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.Low));
-            Assert.AreEqual(10, converted.High.Value);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.High));
+            Assert.AreEqual(1, converted!.Low!.Value);
+            Assert.AreEqual("1", converted!.Low.Unit);
+            Assert.AreEqual(Hl7.Fhir.ElementModel.Types.Quantity.UCUM, converted!.Low.System);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.Low));
+            Assert.AreEqual(10, converted!.High!.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.High));
         }
 
         [TestMethod]
@@ -1416,10 +1417,10 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(2, converted.Low.Value);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.Low));
-            Assert.AreEqual(9, converted.High.Value);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.High));
+            Assert.AreEqual(2, converted!.Low!.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.Low));
+            Assert.AreEqual(9, converted!.High!.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.High));
         }
 
         [TestMethod]
@@ -1430,9 +1431,9 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.IsNull(converted.Low);
-            Assert.AreEqual(10, converted.High.Value);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.High));
+            Assert.IsNull(converted!.Low);
+            Assert.AreEqual(10, converted!.High!.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.High));
         }
 
         [TestMethod]
@@ -1443,9 +1444,9 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.Low.Value);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.Low));
-            Assert.IsNull(converted.High);
+            Assert.AreEqual(1, converted!.Low!.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.Low));
+            Assert.IsNull(converted!.High);
         }
 
         [TestMethod]
@@ -1458,12 +1459,12 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.Low.Value);
-            Assert.AreEqual("1", converted.Low.Unit);
-            Assert.AreEqual(Hl7.Fhir.ElementModel.Types.Quantity.UCUM, converted.Low.System);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.Low));
-            Assert.AreEqual(10, converted.High.Value);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.High));
+            Assert.AreEqual(1, converted!.Low!.Value);
+            Assert.AreEqual("1", converted!.Low.Unit);
+            Assert.AreEqual(Hl7.Fhir.ElementModel.Types.Quantity.UCUM, converted!.Low.System);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.Low));
+            Assert.AreEqual(10, converted!.High!.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.High));
         }
 
         [TestMethod]
@@ -1476,10 +1477,10 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(2, converted.Low.Value);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.Low));
-            Assert.AreEqual(9, converted.High.Value);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.High));
+            Assert.AreEqual(2, converted!.Low!.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.Low));
+            Assert.AreEqual(9, converted!.High!.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.High));
         }
 
         [TestMethod]
@@ -1490,9 +1491,9 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.IsNull(converted.Low);
-            Assert.AreEqual(10, converted.High.Value);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.High));
+            Assert.IsNull(converted!.Low);
+            Assert.AreEqual(10, converted!.High!.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.High));
         }
 
         [TestMethod]
@@ -1503,9 +1504,9 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.Low.Value);
-            Assert.AreEqual(0, QuantityPrecisionOf(converted.Low));
-            Assert.IsNull(converted.High);
+            Assert.AreEqual(1, converted!.Low!.Value);
+            Assert.AreEqual(0, QuantityPrecisionOf(converted!.Low));
+            Assert.IsNull(converted!.High);
         }
 
         [TestMethod]
@@ -1518,8 +1519,8 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.IsNull(converted.Low);
-            Assert.AreEqual(3.99999999m, converted.High.Value);
+            Assert.IsNull(converted!.Low);
+            Assert.AreEqual(3.99999999m, converted!.High!.Value);
         }
 
         [TestMethod]
@@ -1530,9 +1531,9 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1.0m, converted.Low.Value);
-            Assert.AreEqual(1, QuantityPrecisionOf(converted.Low));
-            Assert.IsNull(converted.High);
+            Assert.AreEqual(1.0m, converted!.Low!.Value);
+            Assert.AreEqual(1, QuantityPrecisionOf(converted!.Low));
+            Assert.IsNull(converted!.High);
         }
 
         [TestMethod]
@@ -1542,8 +1543,8 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(decimalInterval);
 
             Assert.IsNotNull(converted);
-            Assert.IsNull(converted.Low);
-            Assert.IsNull(converted.High);
+            Assert.IsNull(converted!.Low);
+            Assert.IsNull(converted!.High);
         }
 
         [TestMethod]
@@ -1567,10 +1568,10 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1.0m, converted.Low.Value);
-            Assert.AreEqual(1, QuantityPrecisionOf(converted.Low));
-            Assert.AreEqual(3.99999999m, converted.High.Value);
-            Assert.AreEqual(8, QuantityPrecisionOf(converted.High));
+            Assert.AreEqual(1.0m, converted!.Low!.Value);
+            Assert.AreEqual(1, QuantityPrecisionOf(converted!.Low));
+            Assert.AreEqual(3.99999999m, converted!.High!.Value);
+            Assert.AreEqual(8, QuantityPrecisionOf(converted!.High));
         }
 
         private static int? QuantityPrecisionOf(Quantity quantity) =>
@@ -1584,8 +1585,8 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.low.Value);
-            Assert.AreEqual(10, converted.high.Value);
+            Assert.AreEqual(1, converted!.low!.Value);
+            Assert.AreEqual(10, converted!.high!.Value);
         }
 
         [TestMethod]
@@ -1596,8 +1597,8 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.low.Value);
-            Assert.AreEqual(10, converted.high.Value);
+            Assert.AreEqual(1, converted!.low!.Value);
+            Assert.AreEqual(10, converted!.high!.Value);
         }
 
 
@@ -1611,11 +1612,11 @@ namespace CoreTests
 
             Assert.IsNotNull(converted);
 
-            Assert.AreEqual(1, converted.Numerator.Value);
-            Assert.AreEqual("widgets", converted.Numerator.Unit);
+            Assert.AreEqual(1, converted!.Numerator!.Value);
+            Assert.AreEqual("widgets", converted!.Numerator.Unit);
 
-            Assert.AreEqual(10, converted.Denominator.Value);
-            Assert.AreEqual("widgets", converted.Denominator.Unit);
+            Assert.AreEqual(10, converted!.Denominator!.Value);
+            Assert.AreEqual("widgets", converted!.Denominator.Unit);
         }
 
 
@@ -1626,10 +1627,10 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Coding>(code);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("123", converted.Code);
-            Assert.AreEqual("http://example.org", converted.System);
-            Assert.AreEqual("1.0", converted.Version);
-            Assert.AreEqual("Example display", converted.Display);
+            Assert.AreEqual("123", converted!.Code);
+            Assert.AreEqual("http://example.org", converted!.System);
+            Assert.AreEqual("1.0", converted!.Version);
+            Assert.AreEqual("Example display", converted!.Display);
         }
 
         [TestMethod]
@@ -1644,13 +1645,13 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<CodeableConcept>(concept);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("Concept display", converted.Text);
-            Assert.AreEqual(2, converted.Coding.Count);
-            Assert.AreEqual("123", converted.Coding[0].Code);
-            Assert.AreEqual("http://example.org", converted.Coding[0].System);
-            Assert.AreEqual("First", converted.Coding[0].Display);
-            Assert.AreEqual("456", converted.Coding[1].Code);
-            Assert.AreEqual("Second", converted.Coding[1].Display);
+            Assert.AreEqual("Concept display", converted!.Text);
+            Assert.AreEqual(2, converted!.Coding.Count);
+            Assert.AreEqual("123", converted!.Coding[0].Code);
+            Assert.AreEqual("http://example.org", converted!.Coding[0].System);
+            Assert.AreEqual("First", converted!.Coding[0].Display);
+            Assert.AreEqual("456", converted!.Coding[1].Code);
+            Assert.AreEqual("Second", converted!.Coding[1].Display);
         }
 
         [TestMethod]
@@ -1660,9 +1661,9 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<CodeableConcept>(concept);
 
             Assert.IsNotNull(converted);
-            Assert.AreEqual("Concept display", converted.Text);
-            Assert.IsNotNull(converted.Coding);
-            Assert.AreEqual(0, converted.Coding.Count);
+            Assert.AreEqual("Concept display", converted!.Text);
+            Assert.IsNotNull(converted!.Coding);
+            Assert.AreEqual(0, converted!.Coding.Count);
         }
 
 
@@ -1677,25 +1678,25 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.IsTrue(DateTimeIso8601.TryParse(converted.Start, out var start));
-            Assert.IsTrue(DateTimeIso8601.TryParse(converted.End, out var end));
+            Assert.IsTrue(DateTimeIso8601.TryParse(converted!.Start!, out var start));
+            Assert.IsTrue(DateTimeIso8601.TryParse(converted!.End!, out var end));
 
 
-            Assert.AreEqual(2022, start.Year);
-            Assert.AreEqual(1, start.Month);
-            Assert.AreEqual(1, start.Day);
-            Assert.AreEqual(1, start.Hour);
-            Assert.AreEqual(1, start.Minute);
-            Assert.AreEqual(1, start.Second);
-            Assert.AreEqual(1, start.Millisecond);
+            Assert.AreEqual(2022, start!.Year);
+            Assert.AreEqual(1, start!.Month);
+            Assert.AreEqual(1, start!.Day);
+            Assert.AreEqual(1, start!.Hour);
+            Assert.AreEqual(1, start!.Minute);
+            Assert.AreEqual(1, start!.Second);
+            Assert.AreEqual(1, start!.Millisecond);
 
-            Assert.AreEqual(2022, end.Year);
-            Assert.AreEqual(3, end.Month);
-            Assert.AreEqual(31, end.Day);
-            Assert.AreEqual(1, end.Hour);
-            Assert.AreEqual(1, end.Minute);
-            Assert.AreEqual(1, end.Second);
-            Assert.AreEqual(1, end.Millisecond);
+            Assert.AreEqual(2022, end!.Year);
+            Assert.AreEqual(3, end!.Month);
+            Assert.AreEqual(31, end!.Day);
+            Assert.AreEqual(1, end!.Hour);
+            Assert.AreEqual(1, end!.Minute);
+            Assert.AreEqual(1, end!.Second);
+            Assert.AreEqual(1, end!.Millisecond);
         }
 
         [TestMethod]
@@ -1709,24 +1710,24 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<Period>(interval);
 
             Assert.IsNotNull(converted);
-            Assert.IsTrue(DateTimeIso8601.TryParse(converted.Start, out var start));
-            Assert.IsTrue(DateTimeIso8601.TryParse(converted.End, out var end));
+            Assert.IsTrue(DateTimeIso8601.TryParse(converted!.Start!, out var start));
+            Assert.IsTrue(DateTimeIso8601.TryParse(converted!.End!, out var end));
 
-            Assert.AreEqual(2022, start.Year);
-            Assert.AreEqual(1, start.Month);
-            Assert.AreEqual(1, start.Day);
-            Assert.IsNull(start.Hour);
-            Assert.IsNull(start.Minute);
-            Assert.IsNull(start.Second);
-            Assert.IsNull(start.Millisecond);
+            Assert.AreEqual(2022, start!.Year);
+            Assert.AreEqual(1, start!.Month);
+            Assert.AreEqual(1, start!.Day);
+            Assert.IsNull(start!.Hour);
+            Assert.IsNull(start!.Minute);
+            Assert.IsNull(start!.Second);
+            Assert.IsNull(start!.Millisecond);
 
-            Assert.AreEqual(2022, end.Year);
-            Assert.AreEqual(3, end.Month);
-            Assert.AreEqual(31, end.Day);
-            Assert.IsNull(end.Hour);
-            Assert.IsNull(end.Minute);
-            Assert.IsNull(end.Second);
-            Assert.IsNull(end.Millisecond);
+            Assert.AreEqual(2022, end!.Year);
+            Assert.AreEqual(3, end!.Month);
+            Assert.AreEqual(31, end!.Day);
+            Assert.IsNull(end!.Hour);
+            Assert.IsNull(end!.Minute);
+            Assert.IsNull(end!.Second);
+            Assert.IsNull(end!.Millisecond);
         }
 
         [TestMethod]
@@ -1736,12 +1737,12 @@ namespace CoreTests
             var converted = FhirTypeConverter.Convert<CqlDate>(date);
 
             Assert.IsNotNull(converted);
-            var isoDateTime = converted.Value;
+            var isoDateTime = converted!.Value;
             Assert.IsNotNull(isoDateTime);
 
-            Assert.AreEqual(2022, isoDateTime.Year);
-            Assert.AreEqual(1, isoDateTime.Month);
-            Assert.AreEqual(1, isoDateTime.Day);
+            Assert.AreEqual(2022, isoDateTime!.Year);
+            Assert.AreEqual(1, isoDateTime!.Month);
+            Assert.AreEqual(1, isoDateTime!.Day);
 
             var nullDateTime = new FhirDateTime(null);
             var nullConverted = FhirTypeConverter.Convert<CqlDateTime>(nullDateTime);

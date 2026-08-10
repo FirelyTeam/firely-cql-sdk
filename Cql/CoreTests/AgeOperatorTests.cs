@@ -161,7 +161,7 @@ public class AgeOperatorTests
 
     private sealed class CountingDataSource(Func<IEnumerable<object>> retrieve) : IDataSource
     {
-        public IEnumerable<T>? Retrieve<T>(RetrieveParameters? parameters = null) where T : class =>
+        public IEnumerable<T> Retrieve<T>(RetrieveParameters? parameters = null) where T : class =>
             retrieve().OfType<T>();
     }
 

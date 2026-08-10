@@ -118,7 +118,7 @@ public class FusedOperatorTests
         var op = Operators();
 
         var composedTrace = new Trace();
-        var expected = op.Exists(op.Where(source, composedTrace.Predicate(predicate)));
+        var expected = op.Exists(op.Where(source, composedTrace.Predicate(predicate))!);
 
         var fusedTrace = new Trace();
         var actual = op.WhereAny(source, fusedTrace.Predicate(predicate));
@@ -410,7 +410,7 @@ public class FusedOperatorTests
         var op = Operators();
         Func<string?, bool?> boom = x => x == "bb" ? throw new InvalidOperationException("boom-" + x) : true;
 
-        var expected = Catch(() => op.Exists(op.Where(WithNulls, boom)));
+        var expected = Catch(() => op.Exists(op.Where(WithNulls, boom)!));
         var actual = Catch(() => op.WhereAny(WithNulls, boom));
 
         Assert.AreEqual(expected, actual);

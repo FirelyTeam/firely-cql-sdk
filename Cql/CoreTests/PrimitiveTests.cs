@@ -1195,7 +1195,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand(interval, null)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -1226,7 +1226,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -1253,7 +1253,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -1280,7 +1280,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -1314,7 +1314,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -1343,7 +1343,7 @@ namespace CoreTests
             ];
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -1395,7 +1395,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -1421,7 +1421,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -1474,7 +1474,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -1526,7 +1526,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -1566,7 +1566,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -1599,7 +1599,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -1640,7 +1640,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -1681,7 +1681,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -1720,7 +1720,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -1758,7 +1758,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -1798,7 +1798,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -1832,7 +1832,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, null)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -1863,7 +1863,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, null)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -1894,7 +1894,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -1924,7 +1924,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -1954,7 +1954,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -1987,7 +1987,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2012,7 +2012,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!;
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2029,7 +2029,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!;
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2046,7 +2046,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!;
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2063,7 +2063,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!;
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2089,7 +2089,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2117,7 +2117,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!;
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2136,7 +2136,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!;
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2178,7 +2178,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2227,7 +2227,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2269,7 +2269,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDate?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2307,7 +2307,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, null)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2340,7 +2340,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, null)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2367,7 +2367,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, quantity)!;
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2394,7 +2394,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2426,7 +2426,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2458,7 +2458,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2493,7 +2493,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2527,7 +2527,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2561,7 +2561,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2594,7 +2594,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2631,7 +2631,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2681,7 +2681,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2730,7 +2730,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlDateTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2764,7 +2764,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, null)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2795,7 +2795,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, null)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2827,7 +2827,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, null)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.IsTrue(expected.Length == expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -2854,7 +2854,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, quantity)!;
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2873,7 +2873,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, quantity)!;
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2892,7 +2892,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, perQuantity);
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, perQuantity)!;
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2911,7 +2911,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, quantity)!;
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2930,7 +2930,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity);
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, quantity)!;
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.Count() == 0);
         }
@@ -2958,7 +2958,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -2990,7 +2990,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -3021,7 +3021,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -3053,7 +3053,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             for (var i = 0; i < expand.Length; i++)
             {
@@ -3097,7 +3097,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -3141,7 +3141,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -3174,7 +3174,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand((IEnumerable<CqlInterval<CqlTime?>?>)(object)interval, quantity)!.ToArray();
             Assert.IsNotNull(expand);
             Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
@@ -3201,7 +3201,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var sameOrBefore = fcq.SameOrBefore(thru2022, thru2023, null);
+            var sameOrBefore = fcq.SameOrBefore((CqlInterval<CqlDate?>)(object)thru2022, (CqlInterval<CqlDate?>)(object)thru2023, null);
 
             Assert.AreEqual(true, sameOrBefore);
         }
@@ -3217,7 +3217,7 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var sameOrBefore = fcq.SameOrBefore(thru2022, thru2023, null);
+            var sameOrBefore = fcq.SameOrBefore((CqlInterval<CqlDate?>)(object)thru2022, (CqlInterval<CqlDate?>)(object)thru2023, null);
 
             Assert.IsNotNull(sameOrBefore);
             Assert.IsTrue(sameOrBefore ?? false);
@@ -3232,7 +3232,7 @@ namespace CoreTests
             List<int?> items = [1, 2, null, 4, 5];
             var ascending = rtx.Operators
                 .ListSort(items, ListSortDirection.Ascending)
-                .ToArray();
+                !.ToArray();
             Assert.AreEqual(null, ascending[0]);
             Assert.AreEqual(1, ascending[1]);
             Assert.AreEqual(2, ascending[2]);
@@ -3241,7 +3241,7 @@ namespace CoreTests
 
             var descending = rtx.Operators
                 .ListSort(items, ListSortDirection.Descending)
-                .ToArray();
+                !.ToArray();
             Assert.AreEqual(5, descending[0]);
             Assert.AreEqual(4, descending[1]);
             Assert.AreEqual(2, descending[2]);
@@ -3253,7 +3253,7 @@ namespace CoreTests
         public void Sort_Lists_Dates_Containing_Null()
         {
             var rtx = GetNewContext();
-            List<CqlDate> items =
+            List<CqlDate?> items =
             [
                 new CqlDate(2022, 12, 01),
                 null,
@@ -3261,14 +3261,14 @@ namespace CoreTests
             ];
             var ascending = rtx.Operators
                 .ListSort(items, ListSortDirection.Ascending)
-                .ToArray();
+                !.ToArray();
             Assert.AreEqual(null, ascending[0]);
             Assert.AreEqual(new CqlDate(2022, 05, 01), ascending[1]);
             Assert.AreEqual(new CqlDate(2022, 12, 01), ascending[2]);
 
             var descending = rtx.Operators
                 .ListSort(items, ListSortDirection.Descending)
-                .ToArray();
+                !.ToArray();
             Assert.AreEqual(new CqlDate(2022, 12, 01), descending[0]);
             Assert.AreEqual(new CqlDate(2022, 05, 01), descending[1]);
             Assert.AreEqual(null, descending[2]);
@@ -3293,7 +3293,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(new CqlDate(2023, 2, 18), new CqlDate(2023, 2, 28), true, true)
             ];
 
-            var collapsed = rtx.Operators.Collapse(intervals, null).ToArray();
+            var collapsed = rtx.Operators.Collapse((IEnumerable<CqlInterval<CqlDate?>?>)(object)intervals, null)!.ToArray();
             var result = rtx.Operators.Comparer.Compare(expected!, collapsed!, null);
             if (result != 0)
                 throw new AssertFailedException($"Expected {expected}; actual {collapsed}");
@@ -3320,7 +3320,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(new CqlDate(2023, 10, 2), null, true, true)
             ];
 
-            var collapsed = rtx.Operators.Collapse(intervals, null).ToArray();
+            var collapsed = rtx.Operators.Collapse((IEnumerable<CqlInterval<CqlDate?>?>)(object)intervals, null)!.ToArray();
             var result = rtx.Operators.Comparer.Compare(expected!, collapsed!, null);
             if (result != 0)
                 throw new AssertFailedException($"Expected {expected}; actual {collapsed}");
@@ -3351,23 +3351,23 @@ namespace CoreTests
             var rtx = GetNewContext();
 
             var meets = rtx.Operators.Meets(
-                new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 1, 1), new CqlDate(2023, 4, 1), true, true),
+                (CqlInterval<CqlDate?>)(object)new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 31), true, true),
+                (CqlInterval<CqlDate?>)(object)new CqlInterval<CqlDate>(new CqlDate(2023, 1, 1), new CqlDate(2023, 4, 1), true, true),
                 null);
             Assert.IsNotNull(meets);
             Assert.IsTrue(meets ?? false);
 
             meets = rtx.Operators.Meets(
-                new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 1, 1), null, true, true),
+                (CqlInterval<CqlDate?>)(object)new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 31), true, true),
+                (CqlInterval<CqlDate?>)(object)new CqlInterval<CqlDate>(new CqlDate(2023, 1, 1), null, true, true),
                 null);
             Assert.IsNotNull(meets);
             Assert.IsTrue(meets ?? false);
 
             // Interval[null, 2022-12-31] meets Interval[2024-01-01, null] returns false
             meets = rtx.Operators.Meets(
-                new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 7, 1), null, true, true),
+                (CqlInterval<CqlDate?>)(object)new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 31), true, true),
+                (CqlInterval<CqlDate?>)(object)new CqlInterval<CqlDate>(new CqlDate(2023, 7, 1), null, true, true),
                 null);
             Assert.IsNotNull(meets);
             Assert.IsFalse(meets ?? false);
@@ -3387,7 +3387,7 @@ namespace CoreTests
                 true,
                 true);
             var ops = GetNewContext().Operators;
-            var result = ops.IntervalIncludesInterval(lhs, rhs, null);
+            var result = ops.IntervalIncludesInterval(lhs, rhs, null!);
             Assert.IsNull(result);
         }
         [TestMethod]
@@ -3420,8 +3420,8 @@ namespace CoreTests
         public void UnionListNullAndListNull()
         {
             var ops = GetNewContext().Operators;
-            var result = ops.Union<object>(new object[] { null }, new object[] { null });
-            var equal = ops.Equal(result, new object[] { null });
+            var result = ops.Union<object?>(new object?[] { null }, new object?[] { null });
+            var equal = ops.Equal(result, new object?[] { null });
             Assert.IsTrue(equal);
         }
 
@@ -3432,7 +3432,7 @@ namespace CoreTests
             var noon = new CqlTime(12, 0, 0, 0, null, null);
             var x = new CqlTime(21, 59, 59, 999, null, null);
             var interval = new CqlInterval<CqlTime>(noon, x, true, true);
-            var result = ops.IntervalProperlyIncludesElement(interval, noon, null);
+            var result = ops.IntervalProperlyIncludesElement(interval, noon, null!);
             Assert.IsFalse(result);
         }
 
@@ -3442,7 +3442,7 @@ namespace CoreTests
             var ops = GetNewContext().Operators;
             var lhs = new CqlInterval<int?>(null, null, true, true);
             var rhs = new CqlInterval<int?>(1, 10, true, true);
-            var result = ops.IntervalProperlyIncludedInInterval(lhs, rhs, null);
+            var result = ops.IntervalProperlyIncludedInInterval(lhs, rhs, null!);
             Assert.IsNull(result);
 
         }
@@ -3849,7 +3849,7 @@ namespace CoreTests
         {
             var rtx = GetNewContext();
             var inputList = null as List<int>;
-            var skippedList = rtx.Operators.ListSkip(inputList, 2);
+            var skippedList = rtx.Operators.ListSkip(inputList!, 2);
             Assert.IsNull(skippedList);
         }
 
@@ -3880,7 +3880,7 @@ namespace CoreTests
         {
             var rtx = GetNewContext();
             var inputList = null as List<int>;
-            var takenList = rtx.Operators.ListTake(inputList, 2);
+            var takenList = rtx.Operators.ListTake(inputList!, 2);
             Assert.IsNull(takenList);
         }
 

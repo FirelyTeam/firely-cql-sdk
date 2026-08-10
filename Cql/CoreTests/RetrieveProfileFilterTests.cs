@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable enable
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
@@ -40,7 +41,7 @@ namespace CoreTests
             where T : class
         {
             var ctx = FhirCqlContext.ForBundle(bundle, options: options);
-            return ctx.Operators.Retrieve<T>(new RetrieveParameters(null, null, null, templateId));
+            return ctx.Operators.Retrieve<T>(new RetrieveParameters(null, null, null, templateId))!;
         }
 
         [TestMethod]
