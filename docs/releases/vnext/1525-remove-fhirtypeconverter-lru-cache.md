@@ -47,9 +47,12 @@
   building one reflects over every FHIR enum. The memoization key previously also included the cache size;
   with the cache gone, two callers that differ only in a model and offset match now get the same converter.
 
-## Potentially Breaking
+## Breaking changes
 
-- Removed the FHIR date/time conversion cache size from the public API. The following members are gone:
+- Removed the FHIR date/time conversion cache size from the public API **now**, rather than keeping it as an
+  obsolete accepted-and-ignored shim until the next major. The surface was judged too small and niche to carry as
+  maintenance-only API, and with the cache no longer providing a meaningful performance benefit there is no reason
+  to preserve the knob. The following members are gone:
 
   | Removed | Replacement |
   | --- | --- |
