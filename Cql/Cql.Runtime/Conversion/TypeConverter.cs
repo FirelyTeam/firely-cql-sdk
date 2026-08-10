@@ -35,9 +35,6 @@ namespace Hl7.Cql.Conversion
     {
         private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> _converters = new();
         private readonly List<ITypeConverterEntry> _customConverters = [];
-        private readonly HashSet<string> _conversionsAvailable = new();
-        private readonly HashSet<string> _conversionsUsed = new();
-        private ILogger<TypeConverter>? _logger;
 
         /// <summary>
         /// Memoizes which conversion — a registered <see cref="ITypeConverterEntry"/>, a registered delegate, or none
@@ -49,15 +46,6 @@ namespace Hl7.Cql.Conversion
         /// <see langword="null"/> entry into a real conversion.
         /// </summary>
         private readonly ConcurrentDictionary<(Type From, Type To), Func<object, object?>?> _resolvedConversions = new();
-
-        /// <summary>
-        /// Add a logger to the TypeConverter.
-        /// </summary>
-        internal TypeConverter UseLogger(ILogger<TypeConverter> logger)
-        {
-            _logger = logger;
-            return this;
-        }
 
         /// <summary>
         /// Creates a TypeConverter with an empty set of conversions.
@@ -82,14 +70,8 @@ namespace Hl7.Cql.Conversion
         /// <param name="from">The source type.</param>
         /// <param name="to">The desired type.</param>
         /// <returns><see langword="true"/> if this converter is able to convert <paramref name="from"/> to <paramref name="to"/>.</returns>
-        internal bool CanConvert(Type from, Type to)
-        {
-            if (ResolveConversion(from, to) is null)
-                return false;
-
-            RecordConversionUsed(from, to);
-            return true;
-        }
+        internal bool CanConvert(Type from, Type to) =>
+            ResolveConversion(from, to) is not null;
 
         /// <summary>
         /// Returns the conversion registered for the given pair, or <see langword="null"/> when there is none.
@@ -112,20 +94,6 @@ namespace Hl7.Cql.Conversion
                 return convert;
 
             return null;
-        }
-
-        /// <summary>
-        /// Notes that a conversion was asked for, which <see cref="LogFinalConverters"/> reports as the used half of
-        /// the registered conversions. Building the entry formats both type names, so it only happens when there is a
-        /// logger to report it to — at evaluation time there is none, and conversions run per value.
-        /// </summary>
-        private void RecordConversionUsed(Type from, Type to)
-        {
-            if (_logger is null)
-                return;
-
-            lock (_conversionsUsed)
-                _conversionsUsed.Add(TypesToString((from, to)));
         }
 
         /// <summary>
@@ -267,64 +235,9 @@ namespace Hl7.Cql.Conversion
             return this;
         }
 
-        internal virtual void CaptureAvailableConverters()
-        {
-            if (_logger is null)
-                return;
-
-            _conversionsAvailable.AddRange(
-                _converters
-                    .SelectMany(kv => kv.Value, ((kvFrom, kvTo) => (From: kvFrom.Key, To: kvTo.Key)))
-                    .Select(TypesToString));
-        }
-
-        private void LogFinalConverters()
-        {
-            if (_logger is null)
-                return;
-
-            var lines = string.Concat(
-                _conversionsAvailable
-                    .Order()
-                    .Select((line,i) => (line,i:i+1,used: _conversionsUsed.Contains(line)))
-                    .OrderBy(o => o.used).ThenBy(o => o.i)
-                    .Select(t => $"\n\t{t.i,5}. {(t.used ? "[x]" : "[_]")} {t.line}"));
-
-            _logger.LogDebug(
-                "TypeConverter conversions usage ({unusedCount} unused, and {usedCount} used. {totalCount} in total):{lines}",
-                _conversionsAvailable.Count - _conversionsUsed.Count,
-                _conversionsUsed.Count,
-                _conversionsAvailable.Count,
-                lines);
-        }
-
-        private static readonly TypeCSharpFormat TypeCSharpFormat = new(
-            NoNamespaces: true,
-            UseKeywords: false);
-
-        private static string TypesToString((Type From, Type To) t) =>
-            $"{TypeToString(t.From)} --> {TypeToString(t.To)}";
-
-        private static string TypeToString(Type t) =>
-            string.Concat(
-                t.Namespace!
-                 .Replace("Hl7.Fhir.Model", "fhir ")
-                 .Replace("Hl7.Cql.Primitives", "cql ")
-                 .Replace("Hl7.Cql.Iso8601", "iso8601 ")
-                 .Replace("System", "sys "),
-                t switch
-                {
-                    { IsEnum: true }      => "enum ",
-                    { IsValueType: true } => "struct ",
-                    _                     => ""
-                },
-                t.ToCSharpString(TypeCSharpFormat));
-
         /// <inheritdoc />
         void IDisposable.Dispose()
         {
-            // if (_logger is not null)
-            //     LogFinalConverters();
         }
     }
 }
