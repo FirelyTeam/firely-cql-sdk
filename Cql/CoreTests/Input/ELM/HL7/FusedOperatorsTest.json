@@ -1,0 +1,621 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "type" : "CqlToElmInfo",
+         "translatorVersion" : "5.0.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "signatureLevel" : "All"
+      } ],
+      "identifier" : {
+         "id" : "FusedOperatorsTest",
+         "version" : "1.0.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "3:1-3:41",
+            "name" : "Numbers",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "type" : "List",
+               "locator" : "3:19-3:41",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "annotation" : [ ]
+                  }
+               },
+               "element" : [ {
+                  "type" : "Literal",
+                  "locator" : "3:21",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "Literal",
+                  "locator" : "3:24",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "Literal",
+                  "locator" : "3:27",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "3",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "Literal",
+                  "locator" : "3:30",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "4",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "Literal",
+                  "locator" : "3:33",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "5",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "Literal",
+                  "locator" : "3:36",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "Literal",
+                  "locator" : "3:39",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "3",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "5:1-5:61",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "AnyGreaterThanFour",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Exists",
+               "locator" : "5:30-5:61",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "annotation" : [ ]
+                  }
+               } ],
+               "operand" : {
+                  "type" : "Query",
+                  "locator" : "5:37-5:61",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "source" : [ {
+                     "locator" : "5:38-5:48",
+                     "alias" : "N",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "annotation" : [ ]
+                        }
+                     },
+                     "expression" : {
+                        "type" : "ExpressionRef",
+                        "locator" : "5:38-5:46",
+                        "name" : "Numbers",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "annotation" : [ ]
+                           }
+                        }
+                     }
+                  } ],
+                  "let" : [ ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "type" : "Greater",
+                     "locator" : "5:50-5:60",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "annotation" : [ ],
+                     "signature" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     } ],
+                     "operand" : [ {
+                        "type" : "AliasRef",
+                        "locator" : "5:56",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "name" : "N",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "Literal",
+                        "locator" : "5:60",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "annotation" : [ ]
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "locator" : "7:1-7:71",
+            "name" : "TenTimesEvens",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "type" : "Query",
+               "locator" : "7:25-7:71",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "annotation" : [ ]
+                  }
+               },
+               "source" : [ {
+                  "locator" : "7:25-7:35",
+                  "alias" : "N",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "expression" : {
+                     "type" : "ExpressionRef",
+                     "locator" : "7:25-7:33",
+                     "name" : "Numbers",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "annotation" : [ ]
+                        }
+                     }
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ ],
+               "where" : {
+                  "type" : "Equal",
+                  "locator" : "7:37-7:53",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ],
+                  "signature" : [ {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "annotation" : [ ]
+                  } ],
+                  "operand" : [ {
+                     "type" : "Modulo",
+                     "locator" : "7:43-7:49",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "annotation" : [ ],
+                     "signature" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     } ],
+                     "operand" : [ {
+                        "type" : "AliasRef",
+                        "locator" : "7:43",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "name" : "N",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "Literal",
+                        "locator" : "7:49",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "annotation" : [ ]
+                     } ]
+                  }, {
+                     "type" : "Literal",
+                     "locator" : "7:53",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "annotation" : [ ]
+                  } ]
+               },
+               "return" : {
+                  "locator" : "7:55-7:71",
+                  "distinct" : false,
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "expression" : {
+                     "type" : "Multiply",
+                     "locator" : "7:66-7:71",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "annotation" : [ ],
+                     "signature" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     } ],
+                     "operand" : [ {
+                        "type" : "AliasRef",
+                        "locator" : "7:66",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "name" : "N",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "Literal",
+                        "locator" : "7:70-7:71",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "10",
+                        "annotation" : [ ]
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "locator" : "9:1-9:69",
+            "name" : "DoublesOverSix",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "type" : "Query",
+               "locator" : "9:26-9:69",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "annotation" : [ ]
+                  }
+               },
+               "source" : [ {
+                  "locator" : "9:26-9:57",
+                  "alias" : "D",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "expression" : {
+                     "type" : "Query",
+                     "locator" : "9:26-9:55",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "annotation" : [ ]
+                        }
+                     },
+                     "source" : [ {
+                        "locator" : "9:27-9:37",
+                        "alias" : "N",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "expression" : {
+                           "type" : "ExpressionRef",
+                           "locator" : "9:27-9:35",
+                           "name" : "Numbers",
+                           "annotation" : [ ],
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
+                              "elementType" : {
+                                 "type" : "NamedTypeSpecifier",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "annotation" : [ ]
+                              }
+                           }
+                        }
+                     } ],
+                     "let" : [ ],
+                     "relationship" : [ ],
+                     "return" : {
+                        "locator" : "9:39-9:54",
+                        "distinct" : false,
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "expression" : {
+                           "type" : "Multiply",
+                           "locator" : "9:50-9:54",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "annotation" : [ ],
+                           "signature" : [ {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "annotation" : [ ]
+                           } ],
+                           "operand" : [ {
+                              "type" : "AliasRef",
+                              "locator" : "9:50",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "name" : "N",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "Literal",
+                              "locator" : "9:54",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ ],
+               "where" : {
+                  "type" : "Greater",
+                  "locator" : "9:59-9:69",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ],
+                  "signature" : [ {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "annotation" : [ ]
+                  } ],
+                  "operand" : [ {
+                     "type" : "AliasRef",
+                     "locator" : "9:65",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "name" : "D",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "Literal",
+                     "locator" : "9:69",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "6",
+                     "annotation" : [ ]
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "11:1-11:50",
+            "name" : "DistinctSquares",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "type" : "Query",
+               "locator" : "11:27-11:50",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "annotation" : [ ]
+                  }
+               },
+               "source" : [ {
+                  "locator" : "11:27-11:37",
+                  "alias" : "N",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "expression" : {
+                     "type" : "ExpressionRef",
+                     "locator" : "11:27-11:35",
+                     "name" : "Numbers",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "annotation" : [ ]
+                        }
+                     }
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ ],
+               "return" : {
+                  "locator" : "11:39-11:50",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "expression" : {
+                     "type" : "Multiply",
+                     "locator" : "11:46-11:50",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "annotation" : [ ],
+                     "signature" : [ {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation" : [ ]
+                     } ],
+                     "operand" : [ {
+                        "type" : "AliasRef",
+                        "locator" : "11:46",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "name" : "N",
+                        "annotation" : [ ]
+                     }, {
+                        "type" : "AliasRef",
+                        "locator" : "11:50",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "name" : "N",
+                        "annotation" : [ ]
+                     } ]
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+

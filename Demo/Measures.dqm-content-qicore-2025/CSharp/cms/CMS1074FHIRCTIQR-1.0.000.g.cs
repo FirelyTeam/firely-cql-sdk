@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
 [CqlLibrary("CMS1074FHIRCTIQR", "1.0.000")]
 public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIRCTIQR_1_0_000>
 {
@@ -190,33 +190,32 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
             IEnumerable<Encounter> f_ = this.Qualifying_Inpatient_Encounters(context);
 
             bool? g_(Encounter InpatientEncounters) {
-                Code<ObservationStatus> j_ = CTScan?.StatusElement;
-                ObservationStatus? k_ = j_?.Value;
-                string l_ = context.Operators.Convert<string>(k_);
-                string[] m_ = [
+                Code<ObservationStatus> i_ = CTScan?.StatusElement;
+                ObservationStatus? j_ = i_?.Value;
+                string k_ = context.Operators.Convert<string>(j_);
+                string[] l_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-                DataType o_ = CTScan?.Effective;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_);
-                CqlDateTime r_ = context.Operators.Start(q_);
-                Period s_ = InpatientEncounters?.Period;
-                CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, s_);
-                bool? u_ = context.Operators.In<CqlDateTime>(r_, t_, (string)default);
-                bool? v_ = context.Operators.And(n_, u_);
-                CqlDateTime w_ = context.Operators.End(q_);
-                CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
-                bool? y_ = context.Operators.In<CqlDateTime>(w_, x_, "day");
-                bool? z_ = context.Operators.And(v_, y_);
-                return z_;
+                bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
+                DataType n_ = CTScan?.Effective;
+                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+                CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
+                CqlDateTime q_ = context.Operators.Start(p_);
+                Period r_ = InpatientEncounters?.Period;
+                CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
+                bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, (string)default);
+                bool? u_ = context.Operators.And(m_, t_);
+                CqlDateTime v_ = context.Operators.End(p_);
+                CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
+                bool? x_ = context.Operators.In<CqlDateTime>(v_, w_, "day");
+                bool? y_ = context.Operators.And(u_, x_);
+                return y_;
             }
 
-            IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
-            bool? i_ = context.Operators.Exists<Encounter>(h_);
-            return i_;
+            bool? h_ = context.Operators.WhereAny<Encounter>(f_, g_);
+            return h_;
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);

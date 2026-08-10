@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
 [CqlLibrary("CMS349FHIRHIVScreening", "1.1.000")]
 public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS349FHIRHIVScreening_1_1_000>
 {
@@ -197,41 +197,40 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
         IEnumerable<Observation> f_ = context.Operators.Union<Observation>(b_, e_);
 
         bool? g_(Observation HIVTest) {
-            DataType j_ = HIVTest?.Value;
-            object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
-            bool? l_ = context.Operators.Not((bool?)(k_ is null));
-            Patient m_ = this.Patient(context);
-            Date n_ = m_?.BirthDateElement;
-            string o_ = n_?.Value;
-            CqlDate p_ = context.Operators.ConvertStringToDate(o_);
-            DataType q_ = HIVTest?.Effective;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
-            CqlDateTime t_ = context.Operators.Start(s_);
-            CqlDate u_ = context.Operators.DateFrom(t_);
-            int? v_ = context.Operators.CalculateAgeAt(p_, u_, "year");
-            CqlInterval<int?> w_ = context.Operators.Interval(15, 65, true, true);
-            bool? x_ = context.Operators.In<int?>(v_, w_, (string)default);
-            bool? y_ = context.Operators.And(l_, x_);
-            CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
-            CqlDateTime aa_ = context.Operators.End(z_);
-            bool? ab_ = context.Operators.Before(t_, aa_, "day");
-            bool? ac_ = context.Operators.And(y_, ab_);
-            Code<ObservationStatus> ad_ = HIVTest?.StatusElement;
-            ObservationStatus? ae_ = ad_?.Value;
-            string af_ = context.Operators.Convert<string>(ae_);
-            bool? ag_ = context.Operators.Equal(af_, "final");
-            bool? ah_ = context.Operators.Equal(af_, "amended");
-            bool? ai_ = context.Operators.Or(ag_, ah_);
-            bool? aj_ = context.Operators.Equal(af_, "corrected");
-            bool? ak_ = context.Operators.Or(ai_, aj_);
-            bool? al_ = context.Operators.And(ac_, ak_);
-            return al_;
+            DataType i_ = HIVTest?.Value;
+            object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+            bool? k_ = context.Operators.Not((bool?)(j_ is null));
+            Patient l_ = this.Patient(context);
+            Date m_ = l_?.BirthDateElement;
+            string n_ = m_?.Value;
+            CqlDate o_ = context.Operators.ConvertStringToDate(n_);
+            DataType p_ = HIVTest?.Effective;
+            object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+            CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
+            CqlDateTime s_ = context.Operators.Start(r_);
+            CqlDate t_ = context.Operators.DateFrom(s_);
+            int? u_ = context.Operators.CalculateAgeAt(o_, t_, "year");
+            CqlInterval<int?> v_ = context.Operators.Interval(15, 65, true, true);
+            bool? w_ = context.Operators.In<int?>(u_, v_, (string)default);
+            bool? x_ = context.Operators.And(k_, w_);
+            CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
+            CqlDateTime z_ = context.Operators.End(y_);
+            bool? aa_ = context.Operators.Before(s_, z_, "day");
+            bool? ab_ = context.Operators.And(x_, aa_);
+            Code<ObservationStatus> ac_ = HIVTest?.StatusElement;
+            ObservationStatus? ad_ = ac_?.Value;
+            string ae_ = context.Operators.Convert<string>(ad_);
+            bool? af_ = context.Operators.Equal(ae_, "final");
+            bool? ag_ = context.Operators.Equal(ae_, "amended");
+            bool? ah_ = context.Operators.Or(af_, ag_);
+            bool? ai_ = context.Operators.Equal(ae_, "corrected");
+            bool? aj_ = context.Operators.Or(ah_, ai_);
+            bool? ak_ = context.Operators.And(ab_, aj_);
+            return ak_;
         }
 
-        IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
-        bool? i_ = context.Operators.Exists<Observation>(h_);
-        return i_;
+        bool? h_ = context.Operators.WhereAny<Observation>(f_, g_);
+        return h_;
     }
 
 
@@ -289,19 +288,18 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
         IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
 
         bool? e_(Condition HIVDiagnosis) {
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDiagnosis);
-            CqlDateTime i_ = context.Operators.Start(h_);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            CqlDateTime k_ = context.Operators.Start(j_);
-            bool? l_ = context.Operators.Before(i_, k_, "day");
-            bool? m_ = this.isVerified(context, HIVDiagnosis);
-            bool? n_ = context.Operators.And(l_, m_);
-            return n_;
+            CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDiagnosis);
+            CqlDateTime h_ = context.Operators.Start(g_);
+            CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
+            CqlDateTime j_ = context.Operators.Start(i_);
+            bool? k_ = context.Operators.Before(h_, j_, "day");
+            bool? l_ = this.isVerified(context, HIVDiagnosis);
+            bool? m_ = context.Operators.And(k_, l_);
+            return m_;
         }
 
-        IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
-        bool? g_ = context.Operators.Exists<Condition>(f_);
-        return g_;
+        bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
+        return f_;
     }
 
 
