@@ -62,12 +62,7 @@ internal readonly record struct ElmToolkitServices(
         services.TryAddSingleton(sp =>
         {
             var modelInspector = sp.GetRequiredService<ModelInspector>();
-            var logger = sp.GetLogger<Hl7.Cql.Conversion.TypeConverter>();
-            var converter = FhirTypeConverter
-                            .Create(modelInspector)
-                            .UseLogger(logger);
-            converter.CaptureAvailableConverters();
-            return converter;
+            return FhirTypeConverter.Create(modelInspector);
         });
 
         services.TryAddSingleton<LibraryPreprocessorBuilder>();
