@@ -57,7 +57,6 @@ namespace Hl7.Cql.Fhir
                 options.OverrideTypeConverter
                 ?? FhirTypeConverter.Create(
                     options.OverrideModelInspector ?? ModelInfo.ModelInspector,
-                    options.OverrideFhirTypeConverterCacheSize ?? FhirTypeConverter.DefaultCacheSize,
                     converterTimezoneOffset);
             DateTimeIso8601? nowIso8601 = now is null ? null : new DateTimeIso8601(now.Value, DateTimePrecision.Millisecond);
             var metricService = options.MetricService;

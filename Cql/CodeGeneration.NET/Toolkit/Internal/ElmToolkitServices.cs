@@ -16,7 +16,6 @@ using Hl7.Cql.Runtime.Logging;
 using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 
@@ -43,7 +42,7 @@ internal readonly record struct ElmToolkitServices(
         ElmToolkitConfig config)
     {
         var codeBuilderSettings = config.ToCodeBuilderSettings();
-        AddCqlCompilerServices(services, config.LRUCacheSize, codeBuilderSettings);
+        AddCqlCompilerServices(services, codeBuilderSettings);
         services.TryAddSingleton<TypeToCSharpConverter>();
         services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
         services.TryAddSingleton<AssemblyCompiler>();
@@ -54,7 +53,6 @@ internal readonly record struct ElmToolkitServices(
     /// </remarks>
     public static IServiceCollection AddCqlCompilerServices(
         IServiceCollection services,
-        int lruCacheSize = 0,
         CodeBuilderSettings? codeBuilderSettings = null)
     {
         codeBuilderSettings ??= CodeBuilderSettings.Default;
@@ -64,12 +62,7 @@ internal readonly record struct ElmToolkitServices(
         services.TryAddSingleton(sp =>
         {
             var modelInspector = sp.GetRequiredService<ModelInspector>();
-            var logger = sp.GetLogger<TypeConverter>();
-            var converter = FhirTypeConverter
-                            .Create(modelInspector, lruCacheSize)
-                            .UseLogger(logger);
-            converter.CaptureAvailableConverters();
-            return converter;
+            return FhirTypeConverter.Create(modelInspector);
         });
 
         services.TryAddSingleton<LibraryPreprocessorBuilder>();
