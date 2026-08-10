@@ -42,7 +42,7 @@ internal readonly record struct ElmToolkitServices(
         ElmToolkitConfig config)
     {
         var codeBuilderSettings = config.ToCodeBuilderSettings();
-        AddCqlCompilerServices(services, config.LRUCacheSize, codeBuilderSettings);
+        AddCqlCompilerServices(services, codeBuilderSettings);
         services.TryAddSingleton<TypeToCSharpConverter>();
         services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
         services.TryAddSingleton<AssemblyCompiler>();
@@ -53,7 +53,6 @@ internal readonly record struct ElmToolkitServices(
     /// </remarks>
     public static IServiceCollection AddCqlCompilerServices(
         IServiceCollection services,
-        int lruCacheSize = 0,
         CodeBuilderSettings? codeBuilderSettings = null)
     {
         codeBuilderSettings ??= CodeBuilderSettings.Default;
@@ -63,7 +62,7 @@ internal readonly record struct ElmToolkitServices(
         services.TryAddSingleton(sp =>
         {
             var modelInspector = sp.GetRequiredService<ModelInspector>();
-            return FhirTypeConverter.Create(modelInspector, lruCacheSize);
+            return FhirTypeConverter.Create(modelInspector);
         });
 
         services.TryAddSingleton<LibraryPreprocessorBuilder>();

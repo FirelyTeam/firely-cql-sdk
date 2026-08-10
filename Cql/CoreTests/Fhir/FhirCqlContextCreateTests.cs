@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -9,8 +9,9 @@
 #nullable enable
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
-using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
+using Hl7.Fhir.Introspection;
+using Hl7.Fhir.Specification;
 
 namespace CoreTests.Fhir;
 
@@ -18,45 +19,16 @@ namespace CoreTests.Fhir;
 [TestClass]
 public class FhirCqlContextCreateTests
 {
-    private static LRUCache<CqlDateTime> CacheForFhirTypeConverterDefaultWithCache = null!;
-
-    [ClassInitialize]
-    public static void ClassInitialize(TestContext context)
-    {
-        CacheForFhirTypeConverterDefaultWithCache = FhirTypeConverter.DefaultWithCache.GetLRUCache().Value;
-    }
-
     [TestMethod]
-    public void CacheForFhirTypeConverterDefault_ShouldBeNull()
-    {
-        FhirTypeConverter.Default.GetLRUCache().HasValue.Should().BeFalse();
-    }
-
-    [TestMethod]
-    public void CacheForFhirTypeConverterDefaultWithCache_ShouldHaveCapacityOf10000()
-    {
-        CacheForFhirTypeConverterDefaultWithCache.GetCapacity().Should().Be(10000);
-    }
-
-
-    [TestMethod]
-    public void CreateContext_WithDefaultOptions_ShouldHaveFhirTypeConverterWithCache()
+    public void CreateContext_WithDefaultOptions_ShouldHaveDefaultFhirTypeConverter()
     {
         var context = CreateCqlContext();
-        var typeConverter = context.GetCqlOperators().TypeConverter;
-        typeConverter.Should().BeSameAs(FhirTypeConverter.DefaultWithCache);
-    }
-
-    [TestMethod]
-    public void CreateContext_WithZeroCacheSizeOptions_ShouldHaveFhirTypeConverterWithoutCache()
-    {
-        var context = CreateCqlContext(new FhirCqlContextOptions { OverrideFhirTypeConverterCacheSize = 0 });
         var typeConverter = context.GetCqlOperators().TypeConverter;
         typeConverter.Should().BeSameAs(FhirTypeConverter.Default);
     }
 
     [TestMethod]
-    public void CreateContextTwice_WithDefaultOptions_ShouldBeSameFhirTypeConverterWithCache()
+    public void CreateContextTwice_WithDefaultOptions_ShouldBeSameFhirTypeConverter()
     {
         var typeConverter1 = FhirCqlContext.CreateContext().GetCqlOperators().TypeConverter;
         var typeConverter2 = FhirCqlContext.CreateContext().GetCqlOperators().TypeConverter;
@@ -64,20 +36,27 @@ public class FhirCqlContextCreateTests
     }
 
     [TestMethod]
-    public void CreateContext_WithCacheSizeOptions_ShouldHaveFhirTypeConverterWithoutCache()
+    public void CreateContextTwice_WithTheSameTimezoneOffset_ShouldBeSameFhirTypeConverter()
     {
-        var context = CreateCqlContext(new FhirCqlContextOptions { OverrideFhirTypeConverterCacheSize = 13 });
-        var typeConverter = context.GetCqlOperators().TypeConverter;
-        var lruCacheCapacity = typeConverter.GetLRUCache().Value.GetCapacity();
-        lruCacheCapacity.Should().Be(13);
+        // Converters are memoized by (model, default timezone offset); building one reflects over every
+        // FHIR enum, so two contexts that ask for the same pair must share one.
+        var options = new FhirCqlContextOptions { OverrideConverterTimezoneOffset = TimeSpan.FromHours(2) };
+        var typeConverter1 = CreateCqlContext(options).GetCqlOperators().TypeConverter;
+        var typeConverter2 = CreateCqlContext(options).GetCqlOperators().TypeConverter;
+        typeConverter1.Should().BeSameAs(typeConverter2);
+        typeConverter1.Should().NotBeSameAs(FhirTypeConverter.Default);
     }
 
     [TestMethod]
-    public void CreateContextTwice_WithCacheSizeOptions_ShouldBeSameCache()
+    public void CreateContext_WithACustomModelInspector_ShouldBeMemoizedPerModel()
     {
-        var typeConverterLRUCache1 = CreateCqlContext(new FhirCqlContextOptions { OverrideFhirTypeConverterCacheSize = 13 }).GetCqlOperators().TypeConverter.GetLRUCache().Value;
-        var typeConverterLRUCache2 = CreateCqlContext(new FhirCqlContextOptions { OverrideFhirTypeConverterCacheSize = 13 }).GetCqlOperators().TypeConverter.GetLRUCache().Value;
-        typeConverterLRUCache1.Should().BeSameAs(typeConverterLRUCache2);
+        var model = new ModelInspector(FhirRelease.R4);
+        var typeConverter1 = CreateCqlContext(new FhirCqlContextOptions { OverrideModelInspector = model })
+            .GetCqlOperators().TypeConverter;
+        var typeConverter2 = CreateCqlContext(new FhirCqlContextOptions { OverrideModelInspector = model })
+            .GetCqlOperators().TypeConverter;
+        typeConverter1.Should().BeSameAs(typeConverter2);
+        typeConverter1.Should().NotBeSameAs(FhirTypeConverter.Default);
     }
 
     protected static CqlContext CreateCqlContext(
