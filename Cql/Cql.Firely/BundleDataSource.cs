@@ -135,6 +135,12 @@ namespace Hl7.Cql.Fhir
         public event EventHandler? DataChanged;
 #endif
 
+        /// <inheritdoc/>
+        /// <remarks>
+        /// The result is fully evaluated before it is returned. Callers walk a retrieve repeatedly — a cached
+        /// definition read from several expressions, the inner source of a cross join — and this bundle's contents
+        /// do not change during an evaluation, so a lazy result would keep re-deciding the same membership question.
+        /// </remarks>
         public IEnumerable<T> Retrieve<T>(RetrieveParameters? parameters) where T : class
         {
             var result = parameters switch
@@ -148,16 +154,23 @@ namespace Hl7.Cql.Fhir
             return ApplyProfileFilter(result, parameters?.TemplateId);
         }
 
-        private IEnumerable<T> ApplyProfileFilter<T>(IEnumerable<T> source, string? templateId) where T : class
+        private IReadOnlyList<T> ApplyProfileFilter<T>(IReadOnlyList<T> source, string? templateId) where T : class
         {
             if (templateId is null || _profileFilter.GetFilter(templateId) is not { } filter)
                 return source;
 
-            return source.Where(instance => instance is not Resource resource || filter(resource));
+            List<T>? kept = null;
+            foreach (var instance in source)
+            {
+                if (instance is not Resource resource || filter(resource))
+                    (kept ??= []).Add(instance);
+            }
+
+            return (IReadOnlyList<T>?)kept ?? [];
         }
 
         /// <inheritdoc/>
-        private IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?> allowedCodes, PropertyInfo? codeProperty = null) where T : class
+        private IReadOnlyList<T> RetrieveByCodes<T>(IEnumerable<CqlCode?> allowedCodes, PropertyInfo? codeProperty = null) where T : class
         {
             Predicate<Coding> filter = allowedCodes switch
             {
@@ -215,14 +228,14 @@ namespace Hl7.Cql.Fhir
         }
 
         /// <inheritdoc/>
-        private IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet valueSet, PropertyInfo? codeProperty = null) where T : class
+        private IReadOnlyList<T> RetrieveByValueSet<T>(CqlValueSet valueSet, PropertyInfo? codeProperty = null) where T : class
         {
             return valueSet.id != null ?
                        ExecuteFilter<T>(c => c.Code is {} code && ValueSets.IsCodeInValueSet(valueSet.id, code, c.System), codeProperty) :
                        Bundle.FilterByType<T>();
         }
 
-        private IEnumerable<T> ExecuteFilter<T>(Predicate<Coding> filter, PropertyInfo? codeProperty) where T : class
+        private IReadOnlyList<T> ExecuteFilter<T>(Predicate<Coding> filter, PropertyInfo? codeProperty) where T : class
         {
             if (codeProperty is null)
             {

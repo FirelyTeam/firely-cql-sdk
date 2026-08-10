@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
 [CqlLibrary("CervicalCancerScreeningFHIR", "0.0.005")]
 public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<CervicalCancerScreeningFHIR_0_0_005>
 {
@@ -336,31 +336,30 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             List<CodeableConcept> i_ = CervicalCytology?.Category;
 
             bool? j_(CodeableConcept CervicalCytologyCategory) {
-                CqlCode ab_ = this.laboratory(context);
-                CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, CervicalCytologyCategory);
-                IReadOnlyList<CqlCode> ad_ = ac_?.codes;
-                bool? ae_ = context.Operators.In<CqlCode>(ab_, (IEnumerable<CqlCode>)ad_);
-                return ae_;
+                CqlCode aa_ = this.laboratory(context);
+                CqlConcept ab_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, CervicalCytologyCategory);
+                IReadOnlyList<CqlCode> ac_ = ab_?.codes;
+                bool? ad_ = context.Operators.In<CqlCode>(aa_, (IEnumerable<CqlCode>)ac_);
+                return ad_;
             }
 
-            IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
-            bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
-            bool? m_ = context.Operators.And(h_, l_);
-            DataType n_ = CervicalCytology?.Effective;
-            CqlDateTime o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, n_);
-            CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-            CqlDateTime q_ = context.Operators.End(p_);
-            CqlQuantity r_ = context.Operators.Quantity(3m, "years");
-            CqlDateTime s_ = context.Operators.Subtract(q_, r_);
-            CqlInterval<CqlDateTime> t_ = context.Operators.Interval(s_, q_, true, true);
-            bool? u_ = context.Operators.In<CqlDateTime>(o_, t_, (string)default);
-            bool? v_ = context.Operators.Not((bool?)(q_ is null));
-            bool? w_ = context.Operators.And(u_, v_);
-            bool? x_ = context.Operators.And(m_, w_);
-            DataType y_ = CervicalCytology?.Value;
-            bool? z_ = context.Operators.Not((bool?)(y_ is null));
-            bool? aa_ = context.Operators.And(x_, z_);
-            return aa_;
+            bool? k_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
+            bool? l_ = context.Operators.And(h_, k_);
+            DataType m_ = CervicalCytology?.Effective;
+            CqlDateTime n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, m_);
+            CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
+            CqlDateTime p_ = context.Operators.End(o_);
+            CqlQuantity q_ = context.Operators.Quantity(3m, "years");
+            CqlDateTime r_ = context.Operators.Subtract(p_, q_);
+            CqlInterval<CqlDateTime> s_ = context.Operators.Interval(r_, p_, true, true);
+            bool? t_ = context.Operators.In<CqlDateTime>(n_, s_, (string)default);
+            bool? u_ = context.Operators.Not((bool?)(p_ is null));
+            bool? v_ = context.Operators.And(t_, u_);
+            bool? w_ = context.Operators.And(l_, v_);
+            DataType x_ = CervicalCytology?.Value;
+            bool? y_ = context.Operators.Not((bool?)(x_ is null));
+            bool? z_ = context.Operators.And(w_, y_);
+            return z_;
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -391,41 +390,40 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             List<CodeableConcept> i_ = HPVTest?.Category;
 
             bool? j_(CodeableConcept HPVTestCategory) {
-                CqlCode al_ = this.laboratory(context);
-                CqlConcept am_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, HPVTestCategory);
-                IReadOnlyList<CqlCode> an_ = am_?.codes;
-                bool? ao_ = context.Operators.In<CqlCode>(al_, (IEnumerable<CqlCode>)an_);
-                return ao_;
+                CqlCode ak_ = this.laboratory(context);
+                CqlConcept al_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, HPVTestCategory);
+                IReadOnlyList<CqlCode> am_ = al_?.codes;
+                bool? an_ = context.Operators.In<CqlCode>(ak_, (IEnumerable<CqlCode>)am_);
+                return an_;
             }
 
-            IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
-            bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
-            bool? m_ = context.Operators.And(h_, l_);
-            Patient n_ = this.Patient(context);
-            Date o_ = n_?.BirthDateElement;
-            string p_ = o_?.Value;
-            CqlDate q_ = context.Operators.ConvertStringToDate(p_);
-            DataType r_ = HPVTest?.Effective;
-            CqlInterval<CqlDateTime> s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, r_);
-            CqlDateTime t_ = context.Operators.Start(s_);
-            CqlDate u_ = context.Operators.DateFrom(t_);
-            int? v_ = context.Operators.CalculateAgeAt(q_, u_, "year");
-            bool? w_ = context.Operators.GreaterOrEqual(v_, 30);
-            bool? x_ = context.Operators.And(m_, w_);
-            CqlDateTime y_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, r_);
-            CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
-            CqlDateTime aa_ = context.Operators.End(z_);
-            CqlQuantity ab_ = context.Operators.Quantity(5m, "years");
-            CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
-            CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(ac_, aa_, true, true);
-            bool? ae_ = context.Operators.In<CqlDateTime>(y_, ad_, (string)default);
-            bool? af_ = context.Operators.Not((bool?)(aa_ is null));
-            bool? ag_ = context.Operators.And(ae_, af_);
-            bool? ah_ = context.Operators.And(x_, ag_);
-            DataType ai_ = HPVTest?.Value;
-            bool? aj_ = context.Operators.Not((bool?)(ai_ is null));
-            bool? ak_ = context.Operators.And(ah_, aj_);
-            return ak_;
+            bool? k_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
+            bool? l_ = context.Operators.And(h_, k_);
+            Patient m_ = this.Patient(context);
+            Date n_ = m_?.BirthDateElement;
+            string o_ = n_?.Value;
+            CqlDate p_ = context.Operators.ConvertStringToDate(o_);
+            DataType q_ = HPVTest?.Effective;
+            CqlInterval<CqlDateTime> r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, q_);
+            CqlDateTime s_ = context.Operators.Start(r_);
+            CqlDate t_ = context.Operators.DateFrom(s_);
+            int? u_ = context.Operators.CalculateAgeAt(p_, t_, "year");
+            bool? v_ = context.Operators.GreaterOrEqual(u_, 30);
+            bool? w_ = context.Operators.And(l_, v_);
+            CqlDateTime x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, q_);
+            CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
+            CqlDateTime z_ = context.Operators.End(y_);
+            CqlQuantity aa_ = context.Operators.Quantity(5m, "years");
+            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
+            CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(ab_, z_, true, true);
+            bool? ad_ = context.Operators.In<CqlDateTime>(x_, ac_, (string)default);
+            bool? ae_ = context.Operators.Not((bool?)(z_ is null));
+            bool? af_ = context.Operators.And(ad_, ae_);
+            bool? ag_ = context.Operators.And(w_, af_);
+            DataType ah_ = HPVTest?.Value;
+            bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
+            bool? aj_ = context.Operators.And(ag_, ai_);
+            return aj_;
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -471,16 +469,15 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
         List<CodeableConcept> a_ = observation?.Category;
 
         bool? b_(CodeableConcept category) {
-            CqlCode e_ = this.laboratory(context);
-            CqlConcept f_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, category);
-            IReadOnlyList<CqlCode> g_ = f_?.codes;
-            bool? h_ = context.Operators.In<CqlCode>(e_, (IEnumerable<CqlCode>)g_);
-            return h_;
+            CqlCode d_ = this.laboratory(context);
+            CqlConcept e_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, category);
+            IReadOnlyList<CqlCode> f_ = e_?.codes;
+            bool? g_ = context.Operators.In<CqlCode>(d_, (IEnumerable<CqlCode>)f_);
+            return g_;
         }
 
-        IEnumerable<CodeableConcept> c_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)a_, b_);
-        bool? d_ = context.Operators.Exists<CodeableConcept>(c_);
-        return d_;
+        bool? c_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)a_, b_);
+        return c_;
     }
 
 

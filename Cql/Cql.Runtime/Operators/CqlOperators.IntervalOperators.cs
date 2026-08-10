@@ -339,18 +339,17 @@ namespace Hl7.Cql.Operators
             Func<CqlInterval<T?>?, CqlInterval<T?>?, string?, bool?> meets, Func<CqlInterval<T?>?, CqlInterval<T?>?> toClosed)
         {
             if (intervals == null) return null;
-            var count = 0;
-            if (intervals is IList<T> list)
-                count = list.Count;
-            else if (intervals is T[] array)
-                count = array.Length;
-            else count = intervals.Count();
+            // The type tests this replaced asked about IList<T>/T[] - the point type, not the CqlInterval<T?>
+            // element type the sequence actually holds - so they could never match and were dead code. Count()
+            // already short-circuits on ICollection<T>, so this is a readability fix, not a faster path.
+            if (!intervals.TryGetNonEnumeratedCount(out var count))
+                count = intervals.Count();
             if (count == 0)
                 return new CqlInterval<T?>[0];
 
             // need null check on i because i!.low! causes HL7 unit test TestCollapseNull_Test to fail since i is null
-            var queue = SortBy(intervals, i => i == null ? null! : i.low!, ListSortDirection.Ascending)?.ToList();
-            if (queue is null || queue.Count == 0) return null;
+            var sorted = SortBy(intervals, i => i == null ? null! : i.low!, ListSortDirection.Ascending)?.ToList();
+            if (sorted is null || sorted.Count == 0) return null;
 
             CqlInterval<T?>? TryCombine(CqlInterval<T?>? x, CqlInterval<T?>? y)
             {
@@ -372,28 +371,23 @@ namespace Hl7.Cql.Operators
                 else return null;
             };
 
-            var result = new List<CqlInterval<T?>?>();
-            while (queue.Count > 0)
+            // Walk the sorted intervals front to back, merging into the interval most recently added to the
+            // result. Taking them off the front of the list instead shifts every remaining element down one slot
+            // per interval, which costs a quadratic amount of copying for no gain - the visit order is the same.
+            var result = new List<CqlInterval<T?>?>(sorted.Count);
+            foreach (var next in sorted)
             {
-                var firstInQueue = queue[0];
-                queue.RemoveAt(0);
-                if (result.Count > 0)
+                if (result.Count == 0)
                 {
-                    var lastResult = result[^1];
-                    var combined = TryCombine(lastResult, firstInQueue);
-                    if (combined == null)
-                    {
-                        result.Add(firstInQueue);
-                    }
-                    else
-                    {
-                        result[^1] = combined;
-                    }
+                    result.Add(next);
+                    continue;
                 }
+
+                var combined = TryCombine(result[^1], next);
+                if (combined == null)
+                    result.Add(next);
                 else
-                {
-                    result.Add(firstInQueue);
-                }
+                    result[^1] = combined;
             }
             return result;
 

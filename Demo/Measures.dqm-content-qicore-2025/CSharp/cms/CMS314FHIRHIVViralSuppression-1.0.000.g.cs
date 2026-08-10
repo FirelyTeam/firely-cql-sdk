@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
 [CqlLibrary("CMS314FHIRHIVViralSuppression", "1.0.000")]
 public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleton<CMS314FHIRHIVViralSuppression_1_0_000>
 {
@@ -171,21 +171,20 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
         IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
 
         bool? e_(Condition HIVDx) {
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDx);
-            CqlDateTime i_ = context.Operators.Start(h_);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            CqlDateTime k_ = context.Operators.Start(j_);
-            CqlQuantity l_ = context.Operators.Quantity(90m, "days");
-            CqlDateTime m_ = context.Operators.Add(k_, l_);
-            bool? n_ = context.Operators.Before(i_, m_, "day");
-            bool? o_ = this.isVerified(context, HIVDx);
-            bool? p_ = context.Operators.And(n_, o_);
-            return p_;
+            CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDx);
+            CqlDateTime h_ = context.Operators.Start(g_);
+            CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
+            CqlDateTime j_ = context.Operators.Start(i_);
+            CqlQuantity k_ = context.Operators.Quantity(90m, "days");
+            CqlDateTime l_ = context.Operators.Add(j_, k_);
+            bool? m_ = context.Operators.Before(h_, l_, "day");
+            bool? n_ = this.isVerified(context, HIVDx);
+            bool? o_ = context.Operators.And(m_, n_);
+            return o_;
         }
 
-        IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
-        bool? g_ = context.Operators.Exists<Condition>(f_);
-        return g_;
+        bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
+        return f_;
     }
 
 
@@ -231,25 +230,24 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
         IEnumerable<Encounter> af_ = context.Operators.Union<Encounter>(ac_, ae_);
 
         bool? ag_(Encounter QualifyingEncounter) {
-            CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
-            CqlDateTime ak_ = context.Operators.Start(aj_);
-            CqlQuantity al_ = context.Operators.Quantity(240m, "days");
-            CqlDateTime am_ = context.Operators.Add(ak_, al_);
-            CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ak_, am_, true, true);
-            Period ao_ = QualifyingEncounter?.Period;
-            CqlInterval<CqlDateTime> ap_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ao_);
-            bool? aq_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(an_, ap_, "day");
-            Code<Encounter.EncounterStatus> ar_ = QualifyingEncounter?.StatusElement;
-            Encounter.EncounterStatus? as_ = ar_?.Value;
-            Code<Encounter.EncounterStatus> at_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(as_);
-            bool? au_ = context.Operators.Equal(at_, "finished");
-            bool? av_ = context.Operators.And(aq_, au_);
-            return av_;
+            CqlInterval<CqlDateTime> ai_ = this.Measurement_Period(context);
+            CqlDateTime aj_ = context.Operators.Start(ai_);
+            CqlQuantity ak_ = context.Operators.Quantity(240m, "days");
+            CqlDateTime al_ = context.Operators.Add(aj_, ak_);
+            CqlInterval<CqlDateTime> am_ = context.Operators.Interval(aj_, al_, true, true);
+            Period an_ = QualifyingEncounter?.Period;
+            CqlInterval<CqlDateTime> ao_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, an_);
+            bool? ap_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(am_, ao_, "day");
+            Code<Encounter.EncounterStatus> aq_ = QualifyingEncounter?.StatusElement;
+            Encounter.EncounterStatus? ar_ = aq_?.Value;
+            Code<Encounter.EncounterStatus> as_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ar_);
+            bool? at_ = context.Operators.Equal(as_, "finished");
+            bool? au_ = context.Operators.And(ap_, at_);
+            return au_;
         }
 
-        IEnumerable<Encounter> ah_ = context.Operators.Where<Encounter>(af_, ag_);
-        bool? ai_ = context.Operators.Exists<Encounter>(ah_);
-        return ai_;
+        bool? ah_ = context.Operators.WhereAny<Encounter>(af_, ag_);
+        return ah_;
     }
 
 

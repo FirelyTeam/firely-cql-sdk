@@ -5,6 +5,7 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+using System.Collections.ObjectModel;
 using Hl7.Fhir.Model;
 
 #nullable enable
@@ -60,31 +61,55 @@ namespace Hl7.Cql.Fhir
 
         private readonly record struct CodedResource(Resource Resource, Coding[] Codings);
 
-        public IEnumerable<T> FilterByType<T>() =>
-            _byType.TryGetValue(typeof(T), out var resources)
-                ? resources.Cast<T>()
+        // The resources of a retrieved type, cast once and reused. A retrieve that has no code filter hands its
+        // result straight to the caller, which may walk it repeatedly (a cached definition read from several
+        // expressions, the inner source of a cross join), and casting an entire bundle-sized list per walk is
+        // pure overhead over this (immutable) bundle. Holds the read-only wrapper rather than the array - see
+        // TypedResources. The value type is object because the wrapper's element type differs per entry.
+        private readonly ConcurrentDictionary<Type, object> _typedByType = new();
+
+        public IReadOnlyList<T> FilterByType<T>() =>
+            (IReadOnlyList<T>)_typedByType.GetOrAdd(typeof(T), static (_, self) => self.TypedResources<T>(), this);
+
+        // The cached instance is handed to callers verbatim, and IDataSource is public, so the array itself must
+        // not escape: a consumer casting the result back to T[] and sorting or overwriting it in place would
+        // corrupt every later retrieve of that type over this bundle. Wrapping is one allocation per type, and
+        // the wrapper is what gets cached, so repeated retrieves still hand back the same instance.
+        private ReadOnlyCollection<T> TypedResources<T>()
+        {
+            T[] typed = _byType.TryGetValue(typeof(T), out var resources)
+                ? resources.Cast<T>().ToArray()
                 : [];
 
-        public IEnumerable<T> FilterByType<T>(Predicate<Coding> filter) =>
+            return Array.AsReadOnly(typed);
+        }
+
+        public IReadOnlyList<T> FilterByType<T>(Predicate<Coding> filter) =>
             Filter<T>(
                 _codedByType.GetOrAdd(typeof(T), static (_, self) => self.ExtractCodings<T>(static candidate => candidate is ICoded coded ? coded.ToCodings() : []), this),
                 filter
             );
 
-        public IEnumerable<T> FilterByType<T>(Predicate<Coding> filter, PropertyInfo codeProperty, Func<T, IEnumerable<Coding>> getCodes) =>
+        public IReadOnlyList<T> FilterByType<T>(Predicate<Coding> filter, PropertyInfo codeProperty, Func<T, IEnumerable<Coding>> getCodes) =>
             Filter<T>(
                 _codedByProperty.GetOrAdd((typeof(T), CompiledPropertyAccessor.GetterIdentity(codeProperty)), (_, state) => state.Self.ExtractCodings(state.GetCodes), (Self: this, GetCodes: getCodes)),
                 filter
             );
 
-        private static IEnumerable<T> Filter<T>(CodedResource[] candidates, Predicate<Coding> filter)
+        // Runs the filter now rather than returning a lazy sequence that re-runs it on every walk: a retrieve
+        // typically feeds a definition whose value is cached and then read many times, and the codings the filter
+        // tests are fixed for this (immutable) bundle, so re-running it can only produce the same answer again.
+        private static IReadOnlyList<T> Filter<T>(CodedResource[] candidates, Predicate<Coding> filter)
         {
+            List<T>? matches = null;
             foreach (var candidate in candidates)
             {
-                // Yield each candidate at most once, even when multiple codings match the filter.
+                // Include each candidate at most once, even when multiple codings match the filter.
                 if (Array.Exists(candidate.Codings, filter))
-                    yield return (T)(object)candidate.Resource;
+                    (matches ??= []).Add((T)(object)candidate.Resource);
             }
+
+            return (IReadOnlyList<T>?)matches ?? [];
         }
 
         private CodedResource[] ExtractCodings<T>(Func<T, IEnumerable<Coding>> getCodes) =>
