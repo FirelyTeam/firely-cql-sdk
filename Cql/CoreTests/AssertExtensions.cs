@@ -5,6 +5,7 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+#nullable enable
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 

@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable enable
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.Fhir;
@@ -73,7 +74,8 @@ namespace CoreTests
             var ctx = GetNewContext(bundle);
 
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>("Simple retrieve", ctx);
-            Assert.AreEqual(0, result!.Count());
+            Assert.IsNotNull(result, "Simple retrieve returned null.");
+            Assert.AreEqual(0, result.Count());
 
             bundle.Entry.Add(new Bundle.EntryComponent
             {
@@ -81,7 +83,8 @@ namespace CoreTests
             });
             ctx = GetNewContext(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>("Simple retrieve", ctx);
-            Assert.AreEqual(1, result!.Count());
+            Assert.IsNotNull(result, "Simple retrieve returned null.");
+            Assert.AreEqual(1, result.Count());
 
             bundle = new Bundle();
             bundle.Entry.Add(new Bundle.EntryComponent

@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable enable
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Fhir;
@@ -1194,8 +1195,9 @@ namespace CoreTests
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null)!.ToArray();
-            Assert.IsNotNull(expand);
+            var expanded = fcq.Expand(interval, null);
+            Assert.IsNotNull(expanded, "Expand returned null.");
+            var expand = expanded.ToArray();
             for (var i = 0; i < expand.Length; i++)
             {
                 var actual = expand[i];
