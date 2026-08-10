@@ -35,18 +35,17 @@ namespace Hl7.Cql.Conversion
     {
         private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> _converters = new();
         private readonly List<ITypeConverterEntry> _customConverters = [];
-        private readonly HashSet<string> _conversionsAvailable = new();
-        private readonly HashSet<string> _conversionsUsed = new();
-        private ILogger<TypeConverter>? _logger;
 
         /// <summary>
-        /// Add a logger to the TypeConverter.
+        /// Memoizes which conversion — a registered <see cref="ITypeConverterEntry"/>, a registered delegate, or none
+        /// at all — applies to a (from, to) pair. Resolving that from scratch means scanning
+        /// <see cref="_customConverters"/> before consulting <see cref="_converters"/>, which is pure overhead on the
+        /// second and every later conversion of the same pair — and conversions run per value during an evaluation.
+        /// A <see langword="null"/> entry records that no conversion exists, so repeated probing (<see cref="CanConvert"/>)
+        /// costs one lookup as well. Registering a conversion clears the memo, since it can turn a
+        /// <see langword="null"/> entry into a real conversion.
         /// </summary>
-        internal TypeConverter UseLogger(ILogger<TypeConverter> logger)
-        {
-            _logger = logger;
-            return this;
-        }
+        private readonly ConcurrentDictionary<(Type From, Type To), Func<object, object?>?> _resolvedConversions = new();
 
         /// <summary>
         /// Creates a TypeConverter with an empty set of conversions.
@@ -71,24 +70,30 @@ namespace Hl7.Cql.Conversion
         /// <param name="from">The source type.</param>
         /// <param name="to">The desired type.</param>
         /// <returns><see langword="true"/> if this converter is able to convert <paramref name="from"/> to <paramref name="to"/>.</returns>
-        internal bool CanConvert(Type from, Type to)
+        internal bool CanConvert(Type from, Type to) =>
+            ResolveConversion(from, to) is not null;
+
+        /// <summary>
+        /// Returns the conversion registered for the given pair, or <see langword="null"/> when there is none.
+        /// </summary>
+        private Func<object, object?>? ResolveConversion(Type from, Type to) =>
+            _resolvedConversions.GetOrAdd(
+                (from, to),
+                static (key, self) => self.ResolveConversionUncached(key.From, key.To),
+                this);
+
+        private Func<object, object?>? ResolveConversionUncached(Type from, Type to)
         {
-            if (_customConverters.SingleOrDefault(converter => converter.Handles(from, to)) is not null)
-            {
-                _conversionsUsed.Add(TypesToString((from, to)));
-                return true;
-            }
+            // A custom converter wins over a registered delegate, the order Convert has always applied.
+            // SingleOrDefault (rather than FirstOrDefault) keeps rejecting a pair two custom converters both claim.
+            if (_customConverters.SingleOrDefault(converter => converter.Handles(from, to)) is { } customConverter)
+                return instance => customConverter.Convert(instance, to);
 
-            if (_converters.TryGetValue(from, out var toDictionary))
-            {
-                if (toDictionary.TryGetValue(to, out _))
-                {
-                    _conversionsUsed.Add(TypesToString((from, to)));
-                    return true;
-                }
-            }
+            if (_converters.TryGetValue(from, out var toDictionary)
+                && toDictionary.TryGetValue(to, out var convert))
+                return convert;
 
-            return false;
+            return null;
         }
 
         /// <summary>
@@ -118,11 +123,7 @@ namespace Hl7.Cql.Conversion
             if (fromType.IsAssignableTo(to))
                 return from;
 
-            if(_customConverters.SingleOrDefault(converter => converter.Handles(fromType, to)) is {} subConverter)
-                return subConverter.Convert(from, to);
-
-            if (_converters.TryGetValue(fromType, out var toDictionary) &&
-                toDictionary.TryGetValue(to, out Func<object, object>? convert))
+            if (ResolveConversion(fromType, to) is { } convert)
                 return convert(from);
 
             throw new InvalidOperationException($"No conversion from {fromType} to {to} is defined.");
@@ -146,13 +147,18 @@ namespace Hl7.Cql.Conversion
                 throw new ArgumentException($"Conversion from {from} to {to} is already defined.");
             else
                 toDictionary.Add(to, conversion);
+
+            _resolvedConversions.Clear();
         }
 
         /// <summary>
         /// Adds a new converter function.
         /// </summary>
-        internal void AddConverter(ITypeConverterEntry converter) =>
+        internal void AddConverter(ITypeConverterEntry converter)
+        {
             _customConverters.Add(converter);
+            _resolvedConversions.Clear();
+        }
 
         /// <summary>
         /// Adds a new function for converting  <typeparamref name="TFrom"/> to <typeparamref name="TTo"/>.
@@ -171,6 +177,8 @@ namespace Hl7.Cql.Conversion
             if (toDictionary.TryGetValue(typeof(TTo), out Func<object, object>? existing))
                 throw new ArgumentException($"Conversion from {typeof(TFrom)} to {typeof(TTo)} is already defined.");
             else toDictionary.Add(typeof(TTo), x => conversion((TFrom)x)!);
+
+            _resolvedConversions.Clear();
         }
 
 
@@ -227,64 +235,9 @@ namespace Hl7.Cql.Conversion
             return this;
         }
 
-        internal virtual void CaptureAvailableConverters()
-        {
-            if (_logger is null)
-                return;
-
-            _conversionsAvailable.AddRange(
-                _converters
-                    .SelectMany(kv => kv.Value, ((kvFrom, kvTo) => (From: kvFrom.Key, To: kvTo.Key)))
-                    .Select(TypesToString));
-        }
-
-        private void LogFinalConverters()
-        {
-            if (_logger is null)
-                return;
-
-            var lines = string.Concat(
-                _conversionsAvailable
-                    .Order()
-                    .Select((line,i) => (line,i:i+1,used: _conversionsUsed.Contains(line)))
-                    .OrderBy(o => o.used).ThenBy(o => o.i)
-                    .Select(t => $"\n\t{t.i,5}. {(t.used ? "[x]" : "[_]")} {t.line}"));
-
-            _logger.LogDebug(
-                "TypeConverter conversions usage ({unusedCount} unused, and {usedCount} used. {totalCount} in total):{lines}",
-                _conversionsAvailable.Count - _conversionsUsed.Count,
-                _conversionsUsed.Count,
-                _conversionsAvailable.Count,
-                lines);
-        }
-
-        private static readonly TypeCSharpFormat TypeCSharpFormat = new(
-            NoNamespaces: true,
-            UseKeywords: false);
-
-        private static string TypesToString((Type From, Type To) t) =>
-            $"{TypeToString(t.From)} --> {TypeToString(t.To)}";
-
-        private static string TypeToString(Type t) =>
-            string.Concat(
-                t.Namespace!
-                 .Replace("Hl7.Fhir.Model", "fhir ")
-                 .Replace("Hl7.Cql.Primitives", "cql ")
-                 .Replace("Hl7.Cql.Iso8601", "iso8601 ")
-                 .Replace("System", "sys "),
-                t switch
-                {
-                    { IsEnum: true }      => "enum ",
-                    { IsValueType: true } => "struct ",
-                    _                     => ""
-                },
-                t.ToCSharpString(TypeCSharpFormat));
-
         /// <inheritdoc />
         void IDisposable.Dispose()
         {
-            // if (_logger is not null)
-            //     LogFinalConverters();
         }
     }
 }

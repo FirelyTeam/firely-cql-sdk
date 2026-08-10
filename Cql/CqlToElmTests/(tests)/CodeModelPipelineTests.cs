@@ -17,7 +17,6 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Microsoft.Extensions.Logging.Abstractions;
-using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
@@ -61,9 +60,7 @@ public class CodeModelPipelineTests : Base
     {
         var typeResolver = FhirTypeResolver.Default;
         var typeConverter = FhirTypeConverter
-            .Create(Hl7.Fhir.Model.ModelInfo.ModelInspector)
-            .UseLogger(NullLogger<TypeConverter>.Instance);
-        typeConverter.CaptureAvailableConverters();
+            .Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
         var tupleBuilderCache = new TupleBuilderCache(NullLogger<TupleBuilderCache>.Instance);
         var libraryPreprocessorBuilder = new LibraryPreprocessorBuilder(NullLoggerFactory.Instance);
