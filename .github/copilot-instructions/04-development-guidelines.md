@@ -33,9 +33,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ### 4.1.3. For EXISTING Files
 
-4.1.3.1 **DO NOT modify existing copyright headers** in files that already have them
-4.1.3.2 Leave existing headers exactly as they are (e.g., "NCQA and contributors" should remain unchanged)
-4.1.3.3 **When making changes to a file and Firely is not listed as contributor, add it as "Firely, NCQA and contributors"**
+4.1.3.1 **Never modify an existing file's header** — if Firely isn't already listed as a contributor there, leave it as-is.
 
 ### 4.1.4. Header Guidelines
 
@@ -46,8 +44,6 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 4.1.4.3 Place header at the very top of the file, after any `#pragma` directives if present
 
 4.1.4.4 Generated files (\*.g.cs) do not require headers
-
-4.1.4.5 **Never update or modify existing copyright headers in existing files**
 
 ## 4.2. Making Changes
 

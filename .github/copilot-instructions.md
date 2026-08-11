@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.15.0
+**Version:** 3.15.1
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -98,6 +98,10 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 ## 6.0. Appendix: Version History
 
 - Section-number references in entries below refer to the numbering as it existed in that version; later inserted sections may have renumbered those headings.
+
+- 3.15.1
+  - Clarified the copyright-header rule in [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md): existing file headers are never modified, even when they omit Firely, and the duplicate prohibition was consolidated into a single rule ([#1545](https://github.com/FirelyTeam/firely-cql-sdk/issues/1545)).
+  - Mirrored the same prohibition wording into [CLAUDE.md](../CLAUDE.md) so the Copilot and Claude instruction sets agree.
 
 - 3.15.0
   - Added 1.6.2 to [01-user-workflow-preferences.md](copilot-instructions/01-user-workflow-preferences.md): when an issue is too stale to act on because the code or symbols it names no longer exist, close it and file a fresh superseding issue, cross-referenced in both directions, rather than keeping the stale issue open with a rewrite note ([#1529](https://github.com/FirelyTeam/firely-cql-sdk/issues/1529)).
