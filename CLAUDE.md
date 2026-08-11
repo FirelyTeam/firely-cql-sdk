@@ -92,7 +92,7 @@ Any breaking change (public API, generated C# output, Packager CLI behavior, bui
 Task-specific workflows live under `.claude/skills/` and load on demand — invoke them (or let them trigger) rather than expecting this always-loaded file to cover the steps:
 
 - `write-pr-description` — updating a PR description from the full branch history
-- `file-github-issue` — issue formatting conventions
+- `file-github-issue` — issue formatting conventions, and superseding a stale issue with a fresh one
 - `pickup-github-ticket` — resolving a ticket number/URL to a branch and picking up work
 - `cut-release-notes` — consolidating all pending release-note content (fragment files under `docs/releases/vnext/`) into a versioned release note, then deleting the fragments
 - `generate-elm-from-cql` — regenerating ELM JSON after adding CQL test input files

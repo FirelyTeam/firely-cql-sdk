@@ -93,6 +93,8 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 1.6.1 Follow the shared procedure in [file-github-issue](../../.claude/skills/file-github-issue/SKILL.md) for issue body formatting, drafting, and section conventions.
 
+1.6.2 When an issue is too stale to act on — the code or symbols it names no longer exist — close it and file a fresh superseding issue, cross-referenced in both directions, instead of keeping the stale one open with a "needs rewriting" note. The procedure is in [file-github-issue](../../.claude/skills/file-github-issue/SKILL.md).
+
 ## 1.7. Ticket Pickup Workflow
 
 1.7.1 Follow the shared procedure in [pickup-github-ticket](../../.claude/skills/pickup-github-ticket/SKILL.md) for resolving a ticket number/URL to a branch and picking up the work.
