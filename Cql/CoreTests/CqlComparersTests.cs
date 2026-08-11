@@ -601,6 +601,23 @@ public class CqlComparersTests
         Assert.AreEqual(1, deduplicated.Count);
     }
 
+    [TestMethod]
+    public void Tuple_EmptyTuple_HashesWithoutThrowing()
+    {
+        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        var empty = new ValueTuple();
+
+        // Must not throw; the base Compare short-circuits via EqualityComparer<T>.Default.Equals
+        // before calling CompareValues, so two empty ValueTuples compare as equal (0), not null.
+        _ = comparers.GetHashCode(empty);
+        Assert.AreEqual(0, comparers.Compare(empty, empty, null));
+
+        // Equal → deduplicated to 1.
+        var deduplicated = operators.Distinct<ValueTuple>([empty, empty])!.ToList();
+        Assert.AreEqual(1, deduplicated.Count);
+    }
+
     // Regression tests for #1417: CqlQuantityCqlComparer.CompareValues canonicalized each quantity
     // independently and then compared only the canonicalized values. TryCanonicalize succeeds for
     // any valid UCUM unit, so quantities measuring different base quantities were compared as if

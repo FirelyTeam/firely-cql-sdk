@@ -88,6 +88,13 @@ partial class CqlComparers
 
         protected override int GetHashCodeValue(ITuple value)
         {
+            // This comparer is registered for ITuple (CqlComparers.cs:59), so System.ValueTuple
+            // (Length == 0) can reach here.  CompareValues returns null for zero-length tuples,
+            // meaning no two empty tuples are ever equal, so any deterministic hash satisfies the
+            // contract — keep hashing total, as the base default was before this override.
+            if (value.Length == 0)
+                return GetHashCodeForNull();
+
             var hash = new HashCode();
             // Slot 0 is CqlTupleMetadata (type identity), which is not registered in CqlComparers.
             // Hash it directly; tuple members start at slot 1 and are hashed via MemberComparer.
