@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable disable
+
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Elm.Serialization;

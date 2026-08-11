@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable enable
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Primitives;
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;

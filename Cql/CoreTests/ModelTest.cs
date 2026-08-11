@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable disable
+
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Model;
