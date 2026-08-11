@@ -89,6 +89,8 @@ partial class CqlComparers
         protected override int GetHashCodeValue(ITuple value)
         {
             var hash = new HashCode();
+            // Slot 0 is CqlTupleMetadata (type identity), which is not registered in CqlComparers.
+            // Hash it directly; tuple members start at slot 1 and are hashed via MemberComparer.
             hash.Add(value[0]);
             for (int i = 1; i < value.Length; i++)
                 hash.Add(value[i] is null ? 0 : MemberComparer.GetHashCode(value[i]!));
