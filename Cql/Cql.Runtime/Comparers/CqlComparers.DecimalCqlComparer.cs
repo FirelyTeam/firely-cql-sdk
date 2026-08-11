@@ -39,6 +39,9 @@ partial class CqlComparers
             return areEqual;
         }
 
+        // Hashes intentionally align with CompareValues (CQL equality semantics), not
+        // EquivalentValues. EquivalentValues rounds to the least precise operand, which is
+        // non-transitive and therefore has no consistent hash.
         protected override int GetHashCodeValue([DisallowNull] decimal? value) =>
             TruncateDigits(value ?? 0, MaxDecimalDigits).GetHashCode();
 

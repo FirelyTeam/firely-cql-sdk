@@ -71,8 +71,11 @@ namespace Hl7.Cql.Comparers
 
         protected override int GetHashCodeValue(CqlInterval<T> value)
         {
-            var low = value.lowClosed ?? false ? value.low : Successor(value.low);
-            var high = value.highClosed ?? false ? value.high : Predecessor(value.high);
+            // Hashes align with CompareValues at default precision by hashing the same normalized
+            // boundaries. Precision-specific comparisons (e.g. date/day precision) cannot be
+            // represented here because GetHashCode has no precision parameter.
+            var low = (value.lowClosed ?? false) ? value.low : Successor(value.low);
+            var high = (value.highClosed ?? false) ? value.high : Predecessor(value.high);
 
             return HashCode.Combine(
                 low is null ? GetHashCodeForNull() : PointComparer.GetHashCode(low),
