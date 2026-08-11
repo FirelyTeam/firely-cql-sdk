@@ -54,8 +54,8 @@ namespace CoreTests
             Assert.IsNotNull(converted);
             Assert.AreEqual("0001-01-01T00:30:00Z", converted.Start);
             Assert.AreEqual("0001-01-01T01:00:00Z", converted.End);
-            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.Start), $"Start is not valid FHIR dateTime: {converted.Start}");
-            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.End), $"End is not valid FHIR dateTime: {converted.End}");
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.Start!), $"Start is not valid FHIR dateTime: {converted.Start}");
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.End!), $"End is not valid FHIR dateTime: {converted.End}");
         }
 
         [TestMethod]
@@ -130,8 +130,8 @@ namespace CoreTests
             Assert.IsNotNull(converted);
             Assert.AreEqual("0001-01-01T10:30:00Z", converted.Start);
             Assert.AreEqual("0001-01-01T12:30:15Z", converted.End);
-            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.Start), $"Start is not valid FHIR dateTime: {converted.Start}");
-            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.End), $"End is not valid FHIR dateTime: {converted.End}");
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.Start!), $"Start is not valid FHIR dateTime: {converted.Start}");
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(converted.End!), $"End is not valid FHIR dateTime: {converted.End}");
         }
 
         [TestMethod]

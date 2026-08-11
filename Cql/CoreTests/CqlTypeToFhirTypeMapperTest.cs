@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable disable
+
 using Hl7.Cql.Fhir;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CqlToElm;

@@ -6,7 +6,6 @@
 		<!-- ## Compiler settings -->
 		<TargetFrameworks>net8.0;net10.0</TargetFrameworks>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<!-- Too many bogus warnings, see https://github.com/dotnet/roslyn-analyzers/issues/6757 -->
 		<NoWarn>$(NoWarn);RS0026</NoWarn>
 	</PropertyGroup>

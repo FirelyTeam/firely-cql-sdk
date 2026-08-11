@@ -244,7 +244,7 @@ public class CqlOperatorsBinderTests
         // Regression test (#1307/#1313): exact HEDIS 2025 shape that previously failed with
         // CS0452.
         var binder = CreateBinder();
-        IEnumerable<(CqlTupleMetadata, bool? isInpatient, bool? isEdVisit, CqlInterval<CqlDate> inpatientPeriod, CqlDate historyReferenceDate, CqlDate episodeDate)?> source =
+        IEnumerable<(CqlTupleMetadata, bool? isInpatient, bool? isEdVisit, CqlInterval<CqlDate>? inpatientPeriod, CqlDate historyReferenceDate, CqlDate episodeDate)?> source =
         [
             (new CqlTupleMetadata(), true, false, null, new CqlDate(2026, 6, 11), new CqlDate(2026, 6, 12)),
             null
@@ -252,7 +252,7 @@ public class CqlOperatorsBinderTests
 
         var sourceConstant = new CodeConstant(
             source,
-            typeof(IEnumerable<(CqlTupleMetadata, bool? isInpatient, bool? isEdVisit, CqlInterval<CqlDate> inpatientPeriod, CqlDate historyReferenceDate, CqlDate episodeDate)?>));
+            typeof(IEnumerable<(CqlTupleMetadata, bool? isInpatient, bool? isEdVisit, CqlInterval<CqlDate>? inpatientPeriod, CqlDate historyReferenceDate, CqlDate episodeDate)?>));
 
         var call = AssertOperatorsInvoke(binder.BindToMethod(nameof(ICqlOperators.Coalesce), [sourceConstant], []));
 

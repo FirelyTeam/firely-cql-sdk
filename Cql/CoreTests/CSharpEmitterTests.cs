@@ -39,7 +39,7 @@ internal sealed class CSharpEmitterTestTuple : TupleBaseType
 {
     public int? A { get; set; }
 
-    public string B { get; set; }
+    public string B { get; set; } = null!;
 }
 
 /// <summary>Helper invoked by the local-function test so an <see cref="CodeLambda"/> has a real

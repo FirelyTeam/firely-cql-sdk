@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable disable
+
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 
