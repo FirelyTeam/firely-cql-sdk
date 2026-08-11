@@ -43,5 +43,5 @@ internal class StringCqlComparer(StringComparer stringComparer) : CqlComparer<st
     }
 
     /// <inheritdoc/>
-    protected override int GetHashCodeValue(string value) => value.GetHashCode();
+    protected override int GetHashCodeValue(string value) => StringComparer.GetHashCode(value.Normalize());
 }

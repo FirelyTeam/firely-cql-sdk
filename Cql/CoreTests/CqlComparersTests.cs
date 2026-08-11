@@ -10,6 +10,7 @@
 
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 
 namespace CoreTests;
@@ -469,6 +470,81 @@ public class CqlComparersTests
         ])!.ToList();
 
         Assert.AreEqual(1, scaleDeduplicated.Count);
+    }
+
+    [TestMethod]
+    public void String_NormallyEquivalentUnicode_HashCodesAgree_AndDistinctDeduplicates()
+    {
+        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        var precomposed = "caf\u00E9";
+        var decomposed = "cafe\u0301";
+
+        Assert.AreEqual(0, comparers.Compare(precomposed, decomposed, null));
+        Assert.AreEqual(true, comparers.Equals(precomposed, decomposed, null));
+        Assert.AreEqual(comparers.GetHashCode(precomposed), comparers.GetHashCode(decomposed));
+
+        var deduplicated = operators.Distinct<string>(
+        [
+            precomposed,
+            decomposed,
+        ])!.ToList();
+
+        Assert.AreEqual(1, deduplicated.Count);
+    }
+
+    [TestMethod]
+    public void String_OrdinalIgnoreCaseComparer_HashCodesAgreeWhenEqual()
+    {
+        var comparer = new StringCqlComparer(StringComparer.OrdinalIgnoreCase);
+        var lower = "abc";
+        var upper = "ABC";
+
+        Assert.AreEqual(0, comparer.Compare(lower, upper, null));
+        Assert.AreEqual(true, comparer.Equals(lower, upper, null));
+        Assert.AreEqual(comparer.GetHashCode(lower), comparer.GetHashCode(upper));
+    }
+
+    [TestMethod]
+    public void Decimal_EqualAfterCqlTruncation_HashCodesAgree_AndDistinctDeduplicates()
+    {
+        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        const decimal a = 0.123456789m;
+        const decimal b = 0.123456781m;
+
+        Assert.AreEqual(0, comparers.Compare(a, b, null));
+        Assert.AreEqual(true, comparers.Equals(a, b, null));
+        Assert.AreEqual(comparers.GetHashCode(a), comparers.GetHashCode(b));
+
+        var deduplicated = operators.Distinct<decimal>(
+        [
+            a,
+            b,
+        ])!.ToList();
+
+        Assert.AreEqual(1, deduplicated.Count);
+    }
+
+    [TestMethod]
+    public void Interval_BoundaryNormalizedEquality_HashCodesAgree_AndDistinctDeduplicates()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        var comparers = new CqlComparers().AddIntervalComparisons(operators);
+        var openHigh = new CqlInterval<int?>(1, 5, true, false);
+        var closedHigh = new CqlInterval<int?>(1, 4, true, true);
+
+        Assert.AreEqual(0, comparers.Compare(openHigh, closedHigh, null));
+        Assert.AreEqual(true, comparers.Equals(openHigh, closedHigh, null));
+        Assert.AreEqual(comparers.GetHashCode(openHigh), comparers.GetHashCode(closedHigh));
+
+        var deduplicated = operators.Distinct<CqlInterval<int?>>(
+        [
+            openHigh,
+            closedHigh,
+        ])!.ToList();
+
+        Assert.AreEqual(1, deduplicated.Count);
     }
 
     // Regression tests for #1417: CqlQuantityCqlComparer.CompareValues canonicalized each quantity

@@ -39,6 +39,9 @@ partial class CqlComparers
             return areEqual;
         }
 
+        protected override int GetHashCodeValue([DisallowNull] decimal? value) =>
+            TruncateDigits(value ?? 0, MaxDecimalDigits).GetHashCode();
+
         private static decimal TruncateDigits(decimal value, int places)
         {
             var integral = Math.Truncate(value);
