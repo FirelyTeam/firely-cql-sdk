@@ -89,9 +89,13 @@ partial class CqlComparers
         protected override int GetHashCodeValue(ITuple value)
         {
             // This comparer is registered for ITuple (CqlComparers.cs:59), so System.ValueTuple
-            // (Length == 0) can reach here.  CompareValues returns null for zero-length tuples,
-            // meaning no two empty tuples are ever equal, so any deterministic hash satisfies the
-            // contract — keep hashing total, as the base default was before this override.
+            // (Length == 0) can reach here and value[0] would throw.  GetHashCodeForNull() returns
+            // typeof(T).GetHashCode() — a per-type constant — so every zero-length tuple gets the
+            // same hash.  CompareValuesShared short-circuits via EqualityComparer<T>.Default.Equals
+            // before CompareValues is reached, so two empty tuples compare equal (0); equal values
+            // must hash identically, and a type-level constant satisfies that precisely because it
+            // is the same value for every instance.  Using anything "deterministic per instance"
+            // instead would silently break the contract.
             if (value.Length == 0)
                 return GetHashCodeForNull();
 
