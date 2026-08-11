@@ -20,7 +20,7 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 
 ## Code conventions (non-obvious ones)
 
-- **Copyright headers** (`*.cs`, not `*.g.cs`): **Never modify an existing file's header** — if Firely isn't already listed as a contributor there, leave it as-is.
+- **Copyright headers** (`*.cs`, not `*.g.cs`): For new files, use the standard header shown in [.github/copilot-instructions/04-development-guidelines.md](.github/copilot-instructions/04-development-guidelines.md). **Never modify an existing file's header** — if Firely isn't already listed as a contributor there, leave it as-is.
 - **`InternalsVisibleTo`** goes in the `.csproj` (`<InternalsVisibleTo Include="ProjectName" Key="$(LibraryPKHash)" />`), never in `AssemblyInfo.cs`.
 - New internal-only utility types/files should stay `internal`, not `public` — only expose what's meant for external consumption.
 - Every new `.cs` file needs its own `#nullable enable` directive after the header, even though nullable is enabled globally in props — this repo wants it explicit per file.
