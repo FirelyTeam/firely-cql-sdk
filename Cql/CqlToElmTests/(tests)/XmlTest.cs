@@ -96,8 +96,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             Expression equal = Equals(expression, expectation);
             // Runs through the real ELM -> IR -> C# -> assembly pipeline (Base.Run), same as
-            // every other test in this suite. CodeLambda has no Compile(), so this path also
-            // covers the long-standing TODO below to execute via the AssemblyCompiler.
+            // every other test in this suite, so evaluation happens via the AssemblyCompiler.
             var equalResult = (bool?)Run(equal, CreateTempLibrary(), CqlContext);
             if (equalResult != true)
             {
