@@ -130,27 +130,23 @@ namespace Test
             DirectoryInfo elmDirectory,
             string lib,
             string version,
-            LogLevel logLevel = LogLevel.Error,
-            int cacheSize = 0)
+            LogLevel logLevel = LogLevel.Error)
         {
             var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole().SetMinimumLevel(logLevel));
 
-            return CreateLibrarySetInvokerFromElmLibraryFile(elmDirectory, lib, version, cacheSize, loggerFactory);
+            return CreateLibrarySetInvokerFromElmLibraryFile(elmDirectory, lib, version, loggerFactory);
         }
 
         private static LibrarySetInvoker CreateLibrarySetInvokerFromElmLibraryFile(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
-            int cacheSize,
-            ILoggerFactory? loggerFactory = null)
+            ILoggerFactory? loggerFactory)
         {
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
 
             var config = ElmToolkitConfig.Default;
-            if (cacheSize != 0)
-                config = config with { LRUCacheSize = cacheSize };
 
             if (Debugger.IsAttached)
                 config = config with { DebugSymbolsFormat = DebugSymbolsFormat.Embedded };

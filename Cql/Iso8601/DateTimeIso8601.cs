@@ -74,7 +74,24 @@ namespace Hl7.Cql.Iso8601
         /// </summary>
         public DateTimeOffset DateTimeOffsetUtc { get; set; }
 
-        private readonly string String;
+        // Formatted lazily: most instances - the intermediates of date arithmetic, comparisons and
+        // FHIR-to-CQL conversions - are never rendered as text, and eager formatting (a StringBuilder and
+        // one small string per component) dominated construction cost. Parsing still stores the original
+        // literal, keeping parse/format roundtrips byte-identical. The ??= race is benign: both threads
+        // compute the same string.
+        private string? _string;
+
+        // The precision the eager implementation passed to Format(...) from whichever constructor ran.
+        // This is deliberately NOT the same thing as Precision: under strict validation, or with an
+        // explicit DateTimePrecision.Unknown, the eager code formatted at the precision *argument* while
+        // Precision was derived from which components have values. Reproducing the argument exactly is
+        // what keeps ToString()/Equals/GetHashCode byte-identical to the eager implementation. Whether that
+        // divergence is the intended contract is tracked separately, in issue #1524. The parse
+        // path leaves this at its default: it stores the original literal in _string, so Format never runs.
+        private readonly DateTimePrecision _stringPrecision;
+
+        private string String => _string ??=
+            Format(Year, Month, Day, Hour, Minute, Second, Millisecond, OffsetHour, OffsetMinute, _stringPrecision);
 
         /// <summary>
         /// The regular expression used to parse ISO 8601 date times.
@@ -104,9 +121,10 @@ namespace Hl7.Cql.Iso8601
         /// <param name="osMinute">The minute component of the date, or <see langword ="null"/>.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public DateTimeIso8601(int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, bool strict = false) :
-            this(Format(year, month, day, hour, minute, second, ms, osHour, NormalizeOffsetMinute(osHour, osMinute), DateTimePrecision.Millisecond),
+            this(null,
                 year, month, day, hour, minute, second, ms, osHour, NormalizeOffsetMinute(osHour, osMinute), strict)
         {
+            _stringPrecision = DateTimePrecision.Millisecond;
         }
 
         /// <summary>
@@ -117,9 +135,10 @@ namespace Hl7.Cql.Iso8601
         /// <param name="precision">The desired precision for this ISO date time.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real date times.</param>
         public DateTimeIso8601(DateTimeOffset dto, DateTimePrecision precision, bool strict = false) :
-            this(Format(dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, NormalizeOffsetMinute(dto.Offset.Hours, dto.Offset.Minutes), precision),
+            this(null,
                 dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, NormalizeOffsetMinute(dto.Offset.Hours, dto.Offset.Minutes), strict, precision)
         {
+            _stringPrecision = precision;
         }
 
         /// <summary>
@@ -132,9 +151,11 @@ namespace Hl7.Cql.Iso8601
         public DateTimeIso8601(DateIso8601 date, TimeIso8601? time = null, bool strict = false) :
             this(date.Year, date.Month, date.Day, time?.Hour, time?.Minute, time?.Second, time?.Millisecond, time?.OffsetHour, time?.OffsetMinute, strict)
         {
+            // _stringPrecision is set to Millisecond by the constructor chained to above, which is
+            // the precision the eager implementation formatted this overload at.
         }
 
-        internal DateTimeIso8601(string @string, int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? osHour, int? osMinute,
+        internal DateTimeIso8601(string? @string, int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? osHour, int? osMinute,
             bool strict = false, DateTimePrecision precision = DateTimePrecision.Unknown)
         {
             if (year == 0)
@@ -295,7 +316,7 @@ namespace Hl7.Cql.Iso8601
             DateTimeOffsetUtc = DateTimeOffset.ToUniversalTime();
             if (OffsetHour != null)
                 RationalOffset = (decimal)offset.TotalHours;
-            String = @string;
+            _string = @string;
         }
 
         private static int? NormalizeOffsetMinute(int? offsetHour, int? offsetMinute) =>
@@ -452,24 +473,24 @@ namespace Hl7.Cql.Iso8601
                             }
                         }
                         if (osHour.HasValue)
-                        {
-                            var offsetHour = osHour.Value;
-                            var offsetMinute = osMinute ?? 0;
-                            if (offsetHour == 0 && offsetMinute == 0)
-                                sb.Append('Z');
-                            else
-                            {
-                                // Either component can carry the sign; the offset is signed as a whole.
-                                sb.Append(offsetHour < 0 || offsetMinute < 0 ? '-' : '+');
-                                sb.Append(Math.Abs(offsetHour).ToString("D2", CultureInfo.InvariantCulture));
-                                sb.Append(':');
-                                sb.Append(Math.Abs(offsetMinute).ToString("D2", CultureInfo.InvariantCulture));
-                            }
-                        }
+                            sb.Append(FormatKnownOffset(osHour.Value, osMinute ?? 0));
                     }
                 }
             }
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Formats a known (non-null) timezone offset as an ISO 8601 offset string, rendering a
+        /// zero offset as <c>Z</c> and a non-zero offset as <c>±hh:mm</c>. Either component can
+        /// carry the sign; the offset is signed as a whole.
+        /// </summary>
+        internal static string FormatKnownOffset(int offsetHour, int offsetMinute)
+        {
+            if (offsetHour == 0 && offsetMinute == 0)
+                return "Z";
+            return FormattableString.Invariant(
+                $"{(offsetHour < 0 || offsetMinute < 0 ? '-' : '+')}{Math.Abs(offsetHour):D2}:{Math.Abs(offsetMinute):D2}");
         }
 
     }

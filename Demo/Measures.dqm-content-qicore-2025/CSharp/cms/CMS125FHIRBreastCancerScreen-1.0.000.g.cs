@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
 [CqlLibrary("CMS125FHIRBreastCancerScreen", "1.0.000")]
 public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton<CMS125FHIRBreastCancerScreen_1_0_000>
 {
@@ -130,12 +130,12 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         CqlInterval<int?> i_ = context.Operators.Interval(42, 74, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
         List<Extension> k_;
-        Patient v_ = this.Patient(context);
-        bool w_ = v_ is DomainResource;
-        if (w_)
+        Patient u_ = this.Patient(context);
+        bool v_ = u_ is DomainResource;
+        if (v_)
         {
-            Patient x_ = this.Patient(context);
-            k_ = (x_ as DomainResource).Extension;
+            Patient w_ = this.Patient(context);
+            k_ = (w_ as DomainResource).Extension;
         }
         else
         {
@@ -143,27 +143,26 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         }
 
         bool? l_(Extension @this) {
-            FhirUri y_ = @this?.UrlElement;
-            string z_ = FHIRHelpers_4_4_000.Instance.ToString(context, y_);
-            bool? aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+            FhirUri x_ = @this?.UrlElement;
+            string y_ = FHIRHelpers_4_4_000.Instance.ToString(context, x_);
+            bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+            return z_;
+        }
+
+
+        DataType m_(Extension @this) {
+            DataType aa_ = @this?.Value;
             return aa_;
         }
 
-        IEnumerable<Extension> m_ = context.Operators.Where<Extension>((IEnumerable<Extension>)k_, l_);
-
-        DataType n_(Extension @this) {
-            DataType ab_ = @this?.Value;
-            return ab_;
-        }
-
-        IEnumerable<DataType> o_ = context.Operators.Select<Extension, DataType>(m_, n_);
-        DataType p_ = context.Operators.SingletonFrom<DataType>(o_);
-        bool? q_ = context.Operators.Equal(p_, "248152002");
-        bool? r_ = context.Operators.And(j_, q_);
-        IEnumerable<Encounter> s_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
-        bool? t_ = context.Operators.Exists<Encounter>(s_);
-        bool? u_ = context.Operators.And(r_, t_);
-        return u_;
+        IEnumerable<DataType> n_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)k_, l_, m_);
+        DataType o_ = context.Operators.SingletonFrom<DataType>(n_);
+        bool? p_ = context.Operators.Equal(o_, "248152002");
+        bool? q_ = context.Operators.And(j_, p_);
+        IEnumerable<Encounter> r_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
+        bool? s_ = context.Operators.Exists<Encounter>(r_);
+        bool? t_ = context.Operators.And(q_, s_);
+        return t_;
     }
 
 
@@ -201,22 +200,21 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             List<CodeableConcept> o_ = UnilateralMastectomyDiagnosis?.BodySite;
 
             CqlConcept p_(CodeableConcept @this) {
-                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return u_;
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return t_;
             }
 
-            IEnumerable<CqlConcept> q_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)o_, p_);
 
-            bool? r_(CqlConcept S) {
-                CqlCode v_ = this.Right__qualifier_value_(context);
-                CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-                bool? x_ = context.Operators.Equivalent(S, w_);
-                return x_;
+            bool? q_(CqlConcept S) {
+                CqlCode u_ = this.Right__qualifier_value_(context);
+                CqlConcept v_ = context.Operators.ConvertCodeToConcept(u_);
+                bool? w_ = context.Operators.Equivalent(S, v_);
+                return w_;
             }
 
-            IEnumerable<CqlConcept> s_ = context.Operators.Where<CqlConcept>(q_, r_);
-            bool? t_ = context.Operators.Exists<CqlConcept>(s_);
-            return t_;
+            IEnumerable<CqlConcept> r_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)o_, p_, q_);
+            bool? s_ = context.Operators.Exists<CqlConcept>(r_);
+            return s_;
         }
 
         IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
@@ -224,12 +222,12 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         IEnumerable<Condition> l_ = Status_1_15_000.Instance.verified(context, k_);
 
         bool? m_(Condition RightMastectomy) {
-            CqlInterval<CqlDateTime> y_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, RightMastectomy);
-            CqlDateTime z_ = context.Operators.Start(y_);
-            CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
-            CqlDateTime ab_ = context.Operators.End(aa_);
-            bool? ac_ = context.Operators.SameOrBefore(z_, ab_, (string)default);
-            return ac_;
+            CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, RightMastectomy);
+            CqlDateTime y_ = context.Operators.Start(x_);
+            CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            bool? ab_ = context.Operators.SameOrBefore(y_, aa_, (string)default);
+            return ab_;
         }
 
         IEnumerable<Condition> n_ = context.Operators.Where<Condition>(l_, m_);
@@ -334,22 +332,21 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             List<CodeableConcept> o_ = UnilateralMastectomyDiagnosis?.BodySite;
 
             CqlConcept p_(CodeableConcept @this) {
-                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return u_;
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return t_;
             }
 
-            IEnumerable<CqlConcept> q_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)o_, p_);
 
-            bool? r_(CqlConcept S) {
-                CqlCode v_ = this.Left__qualifier_value_(context);
-                CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-                bool? x_ = context.Operators.Equivalent(S, w_);
-                return x_;
+            bool? q_(CqlConcept S) {
+                CqlCode u_ = this.Left__qualifier_value_(context);
+                CqlConcept v_ = context.Operators.ConvertCodeToConcept(u_);
+                bool? w_ = context.Operators.Equivalent(S, v_);
+                return w_;
             }
 
-            IEnumerable<CqlConcept> s_ = context.Operators.Where<CqlConcept>(q_, r_);
-            bool? t_ = context.Operators.Exists<CqlConcept>(s_);
-            return t_;
+            IEnumerable<CqlConcept> r_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)o_, p_, q_);
+            bool? s_ = context.Operators.Exists<CqlConcept>(r_);
+            return s_;
         }
 
         IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
@@ -357,12 +354,12 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         IEnumerable<Condition> l_ = Status_1_15_000.Instance.verified(context, k_);
 
         bool? m_(Condition LeftMastectomy) {
-            CqlInterval<CqlDateTime> y_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LeftMastectomy);
-            CqlDateTime z_ = context.Operators.Start(y_);
-            CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
-            CqlDateTime ab_ = context.Operators.End(aa_);
-            bool? ac_ = context.Operators.SameOrBefore(z_, ab_, (string)default);
-            return ac_;
+            CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LeftMastectomy);
+            CqlDateTime y_ = context.Operators.Start(x_);
+            CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            bool? ab_ = context.Operators.SameOrBefore(y_, aa_, (string)default);
+            return ab_;
         }
 
         IEnumerable<Condition> n_ = context.Operators.Where<Condition>(l_, m_);
@@ -618,21 +615,20 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         IEnumerable<Observation> c_ = Status_1_15_000.Instance.isDiagnosticStudyPerformed(context, b_);
 
         bool? d_(Observation Mammogram) {
-            DataType g_ = Mammogram?.Effective;
-            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
-            CqlDateTime j_ = context.Operators.End(i_);
-            CqlDateTime k_ = this.October_1_Two_Years_Prior_to_the_Measurement_Period(context);
-            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-            CqlDateTime m_ = context.Operators.End(l_);
-            CqlInterval<CqlDateTime> n_ = context.Operators.Interval(k_, m_, true, true);
-            bool? o_ = context.Operators.In<CqlDateTime>(j_, n_, "day");
-            return o_;
+            DataType f_ = Mammogram?.Effective;
+            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
+            CqlDateTime i_ = context.Operators.End(h_);
+            CqlDateTime j_ = this.October_1_Two_Years_Prior_to_the_Measurement_Period(context);
+            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
+            CqlDateTime l_ = context.Operators.End(k_);
+            CqlInterval<CqlDateTime> m_ = context.Operators.Interval(j_, l_, true, true);
+            bool? n_ = context.Operators.In<CqlDateTime>(i_, m_, "day");
+            return n_;
         }
 
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
-        bool? f_ = context.Operators.Exists<Observation>(e_);
-        return f_;
+        bool? e_ = context.Operators.WhereAny<Observation>(c_, d_);
+        return e_;
     }
 
 

@@ -88,7 +88,11 @@ internal partial class CqlOperatorsBinder(
             _                                        => BindToBestMethodOverload(methodName, args, typeArgs)!,
             // @formatter:on
         };
-        return result;
+
+        // Collapse an immediately-consumed Where/Select producer into its consumer where the pair
+        // has a fused single-pass equivalent (see CqlOperatorsBinder.Fusion.cs). Binding is
+        // bottom-up, so this reaches a fixpoint over chains without a second pass.
+        return Fuse(result);
 
         CodeExpression? Width(CodeExpression[] args) =>
             args is [{ Type:{} t }] && t == typeof(CqlInterval<object>)
