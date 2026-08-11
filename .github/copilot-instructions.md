@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.14.0
+**Version:** 3.15.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -98,6 +98,11 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 ## 6.0. Appendix: Version History
 
 - Section-number references in entries below refer to the numbering as it existed in that version; later inserted sections may have renumbered those headings.
+
+- 3.15.0
+  - Added 1.6.2 to [01-user-workflow-preferences.md](copilot-instructions/01-user-workflow-preferences.md): when an issue is too stale to act on because the code or symbols it names no longer exist, close it and file a fresh superseding issue, cross-referenced in both directions, rather than keeping the stale issue open with a rewrite note ([#1529](https://github.com/FirelyTeam/firely-cql-sdk/issues/1529)).
+  - Expanded the [file-github-issue](.claude/skills/file-github-issue/SKILL.md) skill with a new `Superseding a stale issue` section covering the canonical mechanics, including `develop` verification, bidirectional cross-references, `not planned` closure of the superseded issue, and emitted-C# acceptance criteria.
+  - Mirrored the skill pointer into [CLAUDE.md](../CLAUDE.md), and documented [#48](https://github.com/FirelyTeam/firely-cql-sdk/issues/48) -> [#1528](https://github.com/FirelyTeam/firely-cql-sdk/issues/1528) as the worked example for refiling a stale issue in current terms.
 
 - 3.14.0
   - Added reflection guidance as a new numbered section in [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md): `4.4. Reflection` now requires using [`ReflectionUtility`](../Cql/Cql.Abstractions/Abstractions/Infrastructure/ReflectionUtility.cs) (`MethodOf`/`PropertyOf`/`ConstructorOf`/`GenericMethodDefinitionOf`) instead of string-based `GetMethod`/`GetProperty`, and clarifies why `nameof`-inside-string-lookup is insufficient.
