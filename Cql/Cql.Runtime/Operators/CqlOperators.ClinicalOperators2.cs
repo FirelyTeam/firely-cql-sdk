@@ -17,14 +17,14 @@ namespace Hl7.Cql.Operators
 
         #region Age
 
-        public int? Age(string precision) =>
+        public int? Age(string? precision) =>
             PatientBirthDate() is { } birthDate ? CalculateAge(birthDate, precision) : null;
 
         #endregion
 
         #region AgeAt
 
-        public int? AgeAt(CqlDate? asOf, string precision) =>
+        public int? AgeAt(CqlDate? asOf, string? precision) =>
             PatientBirthDate() is { } birthDate ? CalculateAgeAt(birthDate, asOf, precision) : null;
 
         #endregion
@@ -110,16 +110,16 @@ namespace Hl7.Cql.Operators
 
         #region CalculateAge
 
-        public int? CalculateAge(CqlDate? birthDate, string precision) =>
+        public int? CalculateAge(CqlDate? birthDate, string? precision) =>
             CalculateAgeAt(birthDate, Today(), precision);
-        public int? CalculateAge(CqlDateTime? birthDate, string precision) =>
+        public int? CalculateAge(CqlDateTime? birthDate, string? precision) =>
             CalculateAgeAt(birthDate, Now(), precision);
 
         #endregion
 
         #region CalculateAgeAt
 
-        public int? CalculateAgeAt(CqlDate? birthDate, CqlDate? asOf, string precision)
+        public int? CalculateAgeAt(CqlDate? birthDate, CqlDate? asOf, string? precision)
         {
             if (asOf == null)
                 return null;
@@ -128,7 +128,7 @@ namespace Hl7.Cql.Operators
             var durr = DurationBetween(birthDate, asOf, precision);
             return durr;
         }
-        public int? CalculateAgeAt(CqlDateTime? birthDate, CqlDateTime? asOf, string precision)
+        public int? CalculateAgeAt(CqlDateTime? birthDate, CqlDateTime? asOf, string? precision)
         {
             if (asOf == null)
                 return null;

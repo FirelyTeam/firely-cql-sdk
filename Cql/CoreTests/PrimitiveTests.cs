@@ -3388,7 +3388,7 @@ namespace CoreTests
                 true,
                 true);
             var ops = GetNewContext().Operators;
-            var result = ops.IntervalIncludesInterval(lhs, rhs, null!);
+            var result = ops.IntervalIncludesInterval(lhs, rhs, null);
             Assert.IsNull(result);
         }
         [TestMethod]
@@ -3433,7 +3433,7 @@ namespace CoreTests
             var noon = new CqlTime(12, 0, 0, 0, null, null);
             var x = new CqlTime(21, 59, 59, 999, null, null);
             var interval = new CqlInterval<CqlTime>(noon, x, true, true);
-            var result = ops.IntervalProperlyIncludesElement(interval, noon, null!);
+            var result = ops.IntervalProperlyIncludesElement(interval, noon, null);
             Assert.IsFalse(result);
         }
 
@@ -3443,7 +3443,7 @@ namespace CoreTests
             var ops = GetNewContext().Operators;
             var lhs = new CqlInterval<int?>(null, null, true, true);
             var rhs = new CqlInterval<int?>(1, 10, true, true);
-            var result = ops.IntervalProperlyIncludedInInterval(lhs, rhs, null!);
+            var result = ops.IntervalProperlyIncludedInInterval(lhs, rhs, null);
             Assert.IsNull(result);
 
         }
