@@ -134,7 +134,6 @@ stages:
             inputs:
               command: "restore"
               projects: "Cql-Sdk-All.sln"
-              restoreArguments: "-p:Configuration=${{ parameters.buildConfiguration }}"
               feedsToUse: "config"
               nugetConfigPath: "NuGet.config"
 

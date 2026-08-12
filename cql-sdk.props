@@ -8,6 +8,10 @@
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
 		<!-- Too many bogus warnings, see https://github.com/dotnet/roslyn-analyzers/issues/6757 -->
 		<NoWarn>$(NoWarn);RS0026</NoWarn>
+		<!-- The PublicAPI analyzer is always referenced so Release/CI enforce it regardless of how
+		     restore was invoked (#1558). Its drift rules are silenced outside Release so an
+		     in-progress refactor does not fail the local dev loop. -->
+		<NoWarn Condition="'$(Configuration)' != 'Release'">$(NoWarn);RS0016;RS0017</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup
@@ -41,8 +45,7 @@
 		<None Include="..\..\README.md" Pack="true" PackagePath=""/>
 	</ItemGroup>
 
-	<ItemGroup
-		Condition="'$(Configuration)' == 'Release'">
+	<ItemGroup>
 
 		<PackageReference
 			Include="Microsoft.SourceLink.GitHub"
