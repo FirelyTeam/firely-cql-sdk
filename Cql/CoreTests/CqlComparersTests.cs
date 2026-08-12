@@ -10,6 +10,7 @@
 
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 
 namespace CoreTests;
@@ -469,6 +470,152 @@ public class CqlComparersTests
         ])!.ToList();
 
         Assert.AreEqual(1, scaleDeduplicated.Count);
+    }
+
+    [TestMethod]
+    public void String_NormallyEquivalentUnicode_HashCodesAgree_AndDistinctDeduplicates()
+    {
+        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        var precomposed = "caf\u00E9";
+        var decomposed = "cafe\u0301";
+
+        Assert.AreEqual(0, comparers.Compare(precomposed, decomposed, null));
+        Assert.IsTrue(comparers.Equals(precomposed, decomposed, null) is true);
+        Assert.AreEqual(comparers.GetHashCode(precomposed), comparers.GetHashCode(decomposed));
+
+        var deduplicated = operators.Distinct<string>(
+        [
+            precomposed,
+            decomposed,
+        ])!.ToList();
+
+        Assert.AreEqual(1, deduplicated.Count);
+    }
+
+    [TestMethod]
+    public void String_OrdinalIgnoreCaseComparer_HashCodesAgreeWhenEqual()
+    {
+        var comparer = new StringCqlComparer(StringComparer.OrdinalIgnoreCase);
+        var lower = "abc";
+        var upper = "ABC";
+
+        Assert.AreEqual(0, comparer.Compare(lower, upper, null));
+        Assert.IsTrue(comparer.Equals(lower, upper, null) is true);
+        Assert.AreEqual(comparer.GetHashCode(lower), comparer.GetHashCode(upper));
+    }
+
+    [TestMethod]
+    public void String_InvalidUnicode_HashesWithoutThrowing()
+    {
+        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        var invalid = "\uD800";
+
+        var hash = comparers.GetHashCode(invalid);
+        Assert.AreEqual(hash, comparers.GetHashCode(invalid));
+
+        var deduplicated = operators.Distinct<string>(
+        [
+            invalid,
+            invalid,
+        ])!.ToList();
+
+        Assert.AreEqual(1, deduplicated.Count);
+    }
+
+    [TestMethod]
+    public void Decimal_EqualAfterCqlTruncation_HashCodesAgree_AndDistinctDeduplicates()
+    {
+        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        const decimal a = 0.123456789m;
+        const decimal b = 0.123456781m;
+
+        Assert.AreEqual(0, comparers.Compare(a, b, null));
+        Assert.IsTrue(comparers.Equals(a, b, null) is true);
+        Assert.AreEqual(comparers.GetHashCode(a), comparers.GetHashCode(b));
+
+        var deduplicated = operators.Distinct<decimal>(
+        [
+            a,
+            b,
+        ])!.ToList();
+
+        Assert.AreEqual(1, deduplicated.Count);
+    }
+
+    [TestMethod]
+    public void Interval_BoundaryNormalizedEquality_HashCodesAgree_AndDistinctDeduplicates()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        var comparers = new CqlComparers().AddIntervalComparisons(operators);
+        var openHigh = new CqlInterval<int?>(1, 5, true, false);
+        var closedHigh = new CqlInterval<int?>(1, 4, true, true);
+
+        Assert.AreEqual(0, comparers.Compare(openHigh, closedHigh, null));
+        Assert.IsTrue(comparers.Equals(openHigh, closedHigh, null) is true);
+        Assert.AreEqual(comparers.GetHashCode(openHigh), comparers.GetHashCode(closedHigh));
+
+        var deduplicated = operators.Distinct<CqlInterval<int?>>(
+        [
+            openHigh,
+            closedHigh,
+        ])!.ToList();
+
+        Assert.AreEqual(1, deduplicated.Count);
+    }
+
+    [TestMethod]
+    public void Interval_OpenNullLowBoundary_HashesWithoutThrowing_AndMatchesEqualInterval()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        var comparers = new CqlComparers().AddIntervalComparisons(operators);
+        var left = new CqlInterval<int?>(null, 5, false, true);
+        var right = new CqlInterval<int?>(null, 5, false, true);
+
+        Assert.AreEqual(0, comparers.Compare(left, right, null));
+        Assert.IsTrue(comparers.Equals(left, right, null) is true);
+        Assert.AreEqual(comparers.GetHashCode(left), comparers.GetHashCode(right));
+    }
+
+    [TestMethod]
+    public void Tuple_DecimalMembersEqualByCql_HashCodesAgree_AndDistinctDeduplicates()
+    {
+        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        var metadata = new CqlTupleMetadata([typeof(decimal?)], ["x"]);
+        (CqlTupleMetadata, decimal? x) left = (metadata, 0.123456789m);
+        (CqlTupleMetadata, decimal? x) right = (metadata, 0.123456781m);
+
+        Assert.AreEqual(0, comparers.Compare(left, right, null));
+        Assert.IsTrue(comparers.Equals(left, right, null) is true);
+        Assert.AreEqual(comparers.GetHashCode(left), comparers.GetHashCode(right));
+
+        var deduplicated = operators.Distinct<(CqlTupleMetadata, decimal? x)>(
+        [
+            left,
+            right,
+        ])!.ToList();
+
+        Assert.AreEqual(1, deduplicated.Count);
+    }
+
+    [TestMethod]
+    public void Tuple_EmptyTuple_HashesWithoutThrowing()
+    {
+        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        var empty = new ValueTuple();
+
+        // Must not throw; the base Compare short-circuits via EqualityComparer<T>.Default.Equals
+        // before calling CompareValues, so two empty ValueTuples compare as equal (0), not null.
+        _ = comparers.GetHashCode(empty);
+        Assert.AreEqual(0, comparers.Compare(empty, empty, null));
+
+        // Equal → deduplicated to 1.
+        var deduplicated = operators.Distinct<ValueTuple>([empty, empty])!.ToList();
+        Assert.AreEqual(1, deduplicated.Count);
     }
 
     // Regression tests for #1417: CqlQuantityCqlComparer.CompareValues canonicalized each quantity
