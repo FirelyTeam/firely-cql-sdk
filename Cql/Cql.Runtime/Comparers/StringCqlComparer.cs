@@ -43,5 +43,17 @@ internal class StringCqlComparer(StringComparer stringComparer) : CqlComparer<st
     }
 
     /// <inheritdoc/>
-    protected override int GetHashCodeValue(string value) => value.GetHashCode();
+    protected override int GetHashCodeValue(string value)
+    {
+        try
+        {
+            return StringComparer.GetHashCode(value.Normalize());
+        }
+        catch (ArgumentException)
+        {
+            // Invalid Unicode cannot be normalized. Keep hashing total and deterministic for
+            // hash-based operators by falling back to the raw string hash.
+            return StringComparer.GetHashCode(value);
+        }
+    }
 }
