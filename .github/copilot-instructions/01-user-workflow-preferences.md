@@ -122,3 +122,5 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 1.10.6 A completed `@copilot` session with an unchanged head SHA means no code changes were applied; that outcome may leave no review/comment, so timeline events are required evidence.
 
 1.10.7 Any `since` filter used for follow-up verification must use the exact timestamp of the triggering event, never a rounded or approximate time.
+
+1.10.8 When picking up a PR for review, report ahead/behind counts from `git rev-list --left-right --count <branch>...origin/<base>` (first count is ahead, second is behind), and report PR mergeability (`mergeable`, plus `mergeStateStatus` when available), then ask whether to merge the base into it before reviewing — do not decide unilaterally. Reviewing a stale branch means reviewing against a world that has moved, but a base merge re-triggers CI and can surface conflicts mid-review, so the call is the user's. If the branch is 0 behind, say so and carry on.
