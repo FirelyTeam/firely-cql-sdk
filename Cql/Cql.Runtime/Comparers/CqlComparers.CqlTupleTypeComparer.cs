@@ -83,5 +83,17 @@ partial class CqlComparers
 
             return true;
         }
+
+        protected override int GetHashCodeValue(ITuple value)
+        {
+            if (value.Length == 0 || value[0] is not CqlTupleMetadata metadata)
+                return GetHashCodeForNull();
+
+            var hash = metadata.GetHashCode();
+            for (var i = 1; i < value.Length; i++)
+                hash = HashCode.Combine(hash, memberComparer.GetHashCode(value[i]));
+
+            return hash;
+        }
     }
 }

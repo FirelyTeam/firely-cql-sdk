@@ -3429,6 +3429,21 @@ namespace CoreTests
             result.Single().Should().BeSameAs(leftConcept);
         }
 
+        [TestMethod]
+        public void IntersectList_TupleWithCqlEqualQuantityMembers_ReturnsMatchingElement()
+        {
+            var ops = GetNewContext().Operators;
+            var metadata = new CqlTupleMetadata([typeof(CqlQuantity)], ["value"]);
+            (CqlTupleMetadata, CqlQuantity?) leftTuple = (metadata, new CqlQuantity(1m, "g"));
+            (CqlTupleMetadata, CqlQuantity?) rightTuple = (metadata, new CqlQuantity(1000m, "mg"));
+
+            var result = ops.Intersect([leftTuple], [rightTuple]);
+
+            result.Should().NotBeNull();
+            result!.Should().HaveCount(1);
+            result.Single().Should().Be(leftTuple);
+        }
+
         // { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59
         [TestMethod]
         public void ProperContainsTimeNull()
