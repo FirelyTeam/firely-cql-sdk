@@ -98,7 +98,7 @@ namespace Hl7.Cql.Operators
 
         #region After
 
-        public bool? After(CqlInterval<int?>? left, CqlInterval<int?>? right, string? precision) =>
+        public bool? After(CqlInterval<int?>? left, CqlInterval<int?>? right, string precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
         public bool? After(CqlInterval<long?>? left, CqlInterval<long?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);

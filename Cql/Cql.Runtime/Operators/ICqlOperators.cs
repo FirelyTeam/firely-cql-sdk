@@ -54,7 +54,7 @@ namespace Hl7.Cql.Operators
         bool?                                    After(CqlInterval<CqlTime?>? left,CqlTime? right,string? precision);
         bool?                                    After(CqlInterval<decimal?>? left,CqlInterval<decimal?>? right,string? precision);
         bool?                                    After(CqlInterval<decimal?>? left,decimal? right,string? precision);
-        bool?                                    After(CqlInterval<int?>? left,CqlInterval<int?>? right,string? precision);
+        bool?                                    After(CqlInterval<int?>? left,CqlInterval<int?>? right,string precision);
         bool?                                    After(CqlInterval<int?>? left,int? right,string? precision);
         bool?                                    After(CqlInterval<long?>? left,CqlInterval<long?>? right,string? precision);
         bool?                                    After(CqlInterval<long?>? left,long? right,string? precision);
