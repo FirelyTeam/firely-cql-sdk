@@ -820,7 +820,7 @@ namespace Hl7.Cql.Operators
             {
                 var result = left
                     .Cast<object>()
-                    .Intersect(right.Cast<object>())
+                    .Intersect(right.Cast<object>(), EqualityComparer)
                     .Cast<T>()
                     .ToList();
                 return result;
