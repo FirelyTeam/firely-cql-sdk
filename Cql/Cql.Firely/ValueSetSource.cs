@@ -95,6 +95,13 @@ public class ValueSetSource : IValueSetDictionary
                 await expander.ExpandAsync(vs).ConfigureAwait(false);
             }
 
+            // A cached value set answers membership questions definitively, so a partial
+            // expansion must not be cached: it would turn "this page does not contain the
+            // code" into "this value set does not contain the code". An expansion we build
+            // ourselves is always complete (the expander throws otherwise); one that arrived
+            // with the resource may be a page of a larger result.
+            EnsureCompleteExpansion(vs);
+
             var codes = ToCodes(vs.Expansion!.Contains);
             return new InMemoryValueSet(codes);
         }
@@ -125,23 +132,70 @@ public class ValueSetSource : IValueSetDictionary
         return _valueSets.GetOrAdd(canonical, _ => new InMemoryValueSet(codes));
     }
 
+    /// <summary>
+    /// Rejects an expansion that is only a page of a larger result, identified by a non-zero
+    /// <c>offset</c> or a <c>total</c> that exceeds the number of concepts actually present.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">The expansion is partial.</exception>
+    private static void EnsureCompleteExpansion(ValueSet vs)
+    {
+        var expansion = vs.Expansion;
+        if (expansion is null) return;
+
+        var present = CountConcepts(expansion.Contains);
+
+        if (expansion.Offset is > 0)
+            throw new InvalidOperationException(
+                $"ValueSet '{vs.Url}' carries a partial expansion (offset {expansion.Offset}); " +
+                "only a completely expanded value set can be cached.");
+
+        if (expansion.Total is { } total && total > present)
+            throw new InvalidOperationException(
+                $"ValueSet '{vs.Url}' carries a partial expansion ({present} of {total} concepts); " +
+                "only a completely expanded value set can be cached.");
+    }
+
+    private static int CountConcepts(IEnumerable<ValueSet.ContainsComponent>? contains) =>
+        contains?.Sum(c => 1 + CountConcepts(c.Contains)) ?? 0;
+
     private IEnumerable<CqlCode> ToCodes(IEnumerable<ValueSet.ContainsComponent> expansion) =>
         expansion.SelectMany(c => ToCodes(c.Contains).Prepend(Intern(new CqlCode(c.Code, c.System, c.Version, c.Display))));
 
+    // A membership test against an already-loaded value set is the overwhelmingly common case, and
+    // it needs neither of the lambdas that CheckInternalAndExternalTs takes. Those lambdas capture
+    // the code, so merely *mentioning* them in this method would make the compiler allocate their
+    // display class on entry - before any early return could skip it. The unresolved path therefore
+    // lives in its own method, which keeps the resolved path allocation-free.
+
     /// <inheritdoc />
     public bool IsCodeInValueSet(string valueSetUri, CqlCode code) =>
+        _valueSets.TryGetValue(valueSetUri, out var cached)
+            ? cached.IsCodeInValueSet(code)
+            : ResolveThenCheck(valueSetUri, code);
+
+    private bool ResolveThenCheck(string valueSetUri, CqlCode code) =>
         CheckInternalAndExternalTs(valueSetUri,
             vs => vs.IsCodeInValueSet(code),
             pb => pb.WithCoding(new Coding(code.system, code.code, code.display) { Version = code.version }));
 
     /// <inheritdoc />
     public bool IsCodeInValueSet(string valueSetUri, string code) =>
+        _valueSets.TryGetValue(valueSetUri, out var cached)
+            ? cached.IsCodeInValueSet(code)
+            : ResolveThenCheck(valueSetUri, code);
+
+    private bool ResolveThenCheck(string valueSetUri, string code) =>
         CheckInternalAndExternalTs(valueSetUri,
                                    vs => vs.IsCodeInValueSet(code),
                                    pb => pb.WithCode(code));
 
     /// <inheritdoc />
     public bool IsCodeInValueSet(string valueSetUri, string code, string? system) =>
+        _valueSets.TryGetValue(valueSetUri, out var cached)
+            ? cached.IsCodeInValueSet(code, system)
+            : ResolveThenCheck(valueSetUri, code, system);
+
+    private bool ResolveThenCheck(string valueSetUri, string code, string? system) =>
         CheckInternalAndExternalTs(valueSetUri,
                                    vs => vs.IsCodeInValueSet(code, system),
                                    pb => pb.WithCode(code, system));
@@ -151,16 +205,17 @@ public class ValueSetSource : IValueSetDictionary
         Predicate<IValueSetFacade> @internal,
         Action<ValidateCodeParameters> external)
     {
-        // Fast path: a warm cache hit does not need the sync-over-async machinery in Load.
-        if (_valueSets.TryGetValue(valueSetUri, out var cached))
-        {
-            if (@internal(cached)) return true;
-        }
-        else if (TaskHelper.Await(() => Load(valueSetUri)) is { } vs && @internal(vs))
-        {
-            return true;
-        }
+        // Every caller reaches this only after missing the cache, and Load re-checks it anyway,
+        // so there is no warm path left to shortcut here.
+        var resolved = TaskHelper.Await(() => Load(valueSetUri));
 
+        // A resolved value set carries a complete expansion (an expansion that could not be
+        // completed throws in Add and is never cached), so it answers definitively: a miss
+        // means "this code is not in this value set", not "ask someone else".
+        if (resolved is not null)
+            return @internal(resolved);
+
+        // Only an *unknown* value set is worth a terminology round-trip.
         if (_termService is null) return false;
 
         var parameters = new ValidateCodeParameters()
