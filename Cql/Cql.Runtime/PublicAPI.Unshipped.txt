@@ -1,5 +1,37 @@
 #nullable enable
+Hl7.Cql.Operators.ICqlOperators.Age(string? precision) -> int?
+Hl7.Cql.Operators.ICqlOperators.AgeAt(Hl7.Cql.Primitives.CqlDate? asOf, string? precision) -> int?
+Hl7.Cql.Operators.ICqlOperators.CalculateAge(Hl7.Cql.Primitives.CqlDate? birthDate, string? precision) -> int?
+Hl7.Cql.Operators.ICqlOperators.CalculateAge(Hl7.Cql.Primitives.CqlDateTime? birthDate, string? precision) -> int?
+Hl7.Cql.Operators.ICqlOperators.CalculateAgeAt(Hl7.Cql.Primitives.CqlDate? birthDate, Hl7.Cql.Primitives.CqlDate? asOf, string? precision) -> int?
+Hl7.Cql.Operators.ICqlOperators.CalculateAgeAt(Hl7.Cql.Primitives.CqlDateTime? birthDate, Hl7.Cql.Primitives.CqlDateTime? asOf, string? precision) -> int?
+Hl7.Cql.Operators.ICqlOperators.ElementProperlyIncludedInInterval(Hl7.Cql.Primitives.CqlDate! left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate!>? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.ElementProperlyIncludedInInterval(Hl7.Cql.Primitives.CqlDateTime! left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime!>? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.ElementProperlyIncludedInInterval(Hl7.Cql.Primitives.CqlTime! left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime!>? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.IntervalIncludedIn<T>(Hl7.Cql.Primitives.CqlInterval<T>? smaller, Hl7.Cql.Primitives.CqlInterval<T>? larger, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.IntervalIncludesInterval<T>(Hl7.Cql.Primitives.CqlInterval<T>? larger, Hl7.Cql.Primitives.CqlInterval<T>? smaller, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludedInInterval<T>(Hl7.Cql.Primitives.CqlInterval<T>? left, Hl7.Cql.Primitives.CqlInterval<T>? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludesElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate!>? left, Hl7.Cql.Primitives.CqlDate! right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludesElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime!>? left, Hl7.Cql.Primitives.CqlDateTime! right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludesElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime!>? left, Hl7.Cql.Primitives.CqlTime! right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludesInterval<T>(Hl7.Cql.Primitives.CqlInterval<T>? left, Hl7.Cql.Primitives.CqlInterval<T>? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.SelectDistinct<T, TR>(System.Collections.Generic.IEnumerable<T?>? source, System.Func<T?, TR>! select) -> System.Collections.Generic.IEnumerable<TR>?
 Hl7.Cql.Operators.ICqlOperators.SelectWhere<T, TR>(System.Collections.Generic.IEnumerable<T?>? source, System.Func<T?, TR>! select, System.Func<TR, bool?>! lambda) -> System.Collections.Generic.IEnumerable<TR>?
 Hl7.Cql.Operators.ICqlOperators.WhereAny<T>(System.Collections.Generic.IEnumerable<T>? source, System.Func<T, bool?>! lambda) -> bool?
 Hl7.Cql.Operators.ICqlOperators.WhereSelect<T, TR>(System.Collections.Generic.IEnumerable<T>? source, System.Func<T, bool?>! lambda, System.Func<T?, TR>! select) -> System.Collections.Generic.IEnumerable<TR>?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.Age(string! precision) -> int?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.AgeAt(Hl7.Cql.Primitives.CqlDate? asOf, string! precision) -> int?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.CalculateAge(Hl7.Cql.Primitives.CqlDate? birthDate, string! precision) -> int?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.CalculateAge(Hl7.Cql.Primitives.CqlDateTime? birthDate, string! precision) -> int?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.CalculateAgeAt(Hl7.Cql.Primitives.CqlDate? birthDate, Hl7.Cql.Primitives.CqlDate? asOf, string! precision) -> int?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.CalculateAgeAt(Hl7.Cql.Primitives.CqlDateTime? birthDate, Hl7.Cql.Primitives.CqlDateTime? asOf, string! precision) -> int?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.ElementProperlyIncludedInInterval(Hl7.Cql.Primitives.CqlDate! left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate!>? right, string! precision) -> bool?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.ElementProperlyIncludedInInterval(Hl7.Cql.Primitives.CqlDateTime! left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime!>? right, string! precision) -> bool?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.ElementProperlyIncludedInInterval(Hl7.Cql.Primitives.CqlTime! left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime!>? right, string! precision) -> bool?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.IntervalIncludedIn<T>(Hl7.Cql.Primitives.CqlInterval<T>? smaller, Hl7.Cql.Primitives.CqlInterval<T>? larger, string! precision) -> bool?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.IntervalIncludesInterval<T>(Hl7.Cql.Primitives.CqlInterval<T>? larger, Hl7.Cql.Primitives.CqlInterval<T>? smaller, string! precision) -> bool?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludedInInterval<T>(Hl7.Cql.Primitives.CqlInterval<T>? left, Hl7.Cql.Primitives.CqlInterval<T>? right, string! precision) -> bool?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludesElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate!>? left, Hl7.Cql.Primitives.CqlDate! right, string! precision) -> bool?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludesElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime!>? left, Hl7.Cql.Primitives.CqlDateTime! right, string! precision) -> bool?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludesElement(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime!>? left, Hl7.Cql.Primitives.CqlTime! right, string! precision) -> bool?
+*REMOVED*Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludesInterval<T>(Hl7.Cql.Primitives.CqlInterval<T>? left, Hl7.Cql.Primitives.CqlInterval<T>? right, string! precision) -> bool?
