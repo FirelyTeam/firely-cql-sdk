@@ -16,6 +16,8 @@ partial class CqlComparers
     private class CqlTupleTypeComparer(CqlComparers memberComparer) :
         CqlComparer<ITuple?>(CqlComparerEqualsImplementation.Compare)
     {
+        private CqlComparers MemberComparer { get; } = memberComparer ?? throw new ArgumentNullException(nameof(memberComparer));
+
         protected override int? CompareValues(
             ITuple x,
             ITuple y,
@@ -49,7 +51,7 @@ partial class CqlComparers
                     continue;           // both null → equal for this element
                 }
 
-                var compare = memberComparer.Compare(x[i], y[i], precision);
+                var compare = MemberComparer.Compare(x[i], y[i], precision);
                 if (compare is null)
                     hasNull = true;
                 else if (compare is not 0)
@@ -76,12 +78,35 @@ partial class CqlComparers
             // Compare the items on the tuple
             for (int i = 1; i < x.Length; i++)
             {
-                var equivalent = memberComparer.Equivalent(x[i], y[i], precision);
+                var equivalent = MemberComparer.Equivalent(x[i], y[i], precision);
                 if (!equivalent)
                     return false;
             }
 
             return true;
+        }
+
+        protected override int GetHashCodeValue(ITuple value)
+        {
+            // This comparer is registered for ITuple (CqlComparers.cs:59), so System.ValueTuple
+            // (Length == 0) can reach here and value[0] would throw.  GetHashCodeForNull() returns
+            // typeof(T).GetHashCode() — a per-type constant — so every zero-length tuple gets the
+            // same hash.  CompareValuesShared short-circuits via EqualityComparer<T>.Default.Equals
+            // before CompareValues is reached, so two empty tuples compare equal (0); equal values
+            // must hash identically, and a type-level constant satisfies that precisely because it
+            // is the same value for every instance.  Using anything "deterministic per instance"
+            // instead would silently break the contract.
+            if (value.Length == 0)
+                return GetHashCodeForNull();
+
+            var hash = new HashCode();
+            // Slot 0 is CqlTupleMetadata (type identity), which is not registered in CqlComparers.
+            // Hash it directly; tuple members start at slot 1 and are hashed via MemberComparer.
+            hash.Add(value[0]);
+            for (int i = 1; i < value.Length; i++)
+                hash.Add(value[i] is null ? 0 : MemberComparer.GetHashCode(value[i]!));
+
+            return hash.ToHashCode();
         }
     }
 }

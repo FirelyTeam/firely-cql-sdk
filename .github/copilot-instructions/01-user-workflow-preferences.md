@@ -15,6 +15,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 - [1.7. Ticket Pickup Workflow](#17-ticket-pickup-workflow)
 - [1.8. Acceptance Criteria Tracking](#18-acceptance-criteria-tracking)
 - [1.9. PR Review Comment Handling](#19-pr-review-comment-handling)
+- [1.10. PR Review Boundaries and `@copilot` Dispatch](#110-pr-review-boundaries-and-copilot-dispatch)
 
 ## 1.1. Discuss Before Implementing
 
@@ -68,6 +69,8 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 1.3.8 **Keep the Claude Code instructions in sync**: when adding, removing, or changing a rule here (or in a sub-document), check whether the root [CLAUDE.md](../../CLAUDE.md) or a `.claude/skills/` file states the same rule and needs the equivalent update, and vice versa. A universal convention or gotcha should not exist in one file and not the other; a task-specific workflow should have exactly one canonical copy (in `.claude/skills/`) with the other file linking to it, not restating it.
 
+1.3.9 When a new convention needs to be recorded in `CLAUDE.md` or `.github/copilot-instructions/`, file an issue and have `@copilot` make that instruction-file change on a branch rather than editing instruction files ad hoc in a local working copy.
+
 ## 1.4. Terminal and Command Execution
 
 1.4.1 **CRITICAL - PowerShell Non-Interactive Mode**: When running PowerShell commands via `run_in_terminal`, **ALWAYS** use non-interactive mode by adding the `-NonInteractive` flag (e.g., `pwsh -NonInteractive -Command "..."`) to prevent commands from hanging waiting for user input
@@ -90,6 +93,8 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 1.6.1 Follow the shared procedure in [file-github-issue](../../.claude/skills/file-github-issue/SKILL.md) for issue body formatting, drafting, and section conventions.
 
+1.6.2 When an issue is too stale to act on — the code or symbols it names no longer exist — close it and file a fresh superseding issue, cross-referenced in both directions, instead of keeping the stale one open with a "needs rewriting" note. The procedure is in [file-github-issue](../../.claude/skills/file-github-issue/SKILL.md).
+
 ## 1.7. Ticket Pickup Workflow
 
 1.7.1 Follow the shared procedure in [pickup-github-ticket](../../.claude/skills/pickup-github-ticket/SKILL.md) for resolving a ticket number/URL to a branch and picking up the work.
@@ -101,3 +106,19 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 ## 1.9. PR Review Comment Handling
 
 1.9.1 After fixing a review comment (e.g. from Copilot's automated PR review) and pushing the fix, mark that conversation resolved — this does not happen automatically. Follow the shared procedure in [resolve-pr-review-comments](../../.claude/skills/resolve-pr-review-comments/SKILL.md).
+
+## 1.10. PR Review Boundaries and `@copilot` Dispatch
+
+1.10.1 While reviewing someone else's PR, do not commit to that PR branch. Findings go to the author (or `@copilot`) to apply.
+
+1.10.2 The consequence is not only procedural: if a reviewer commits to the branch being reviewed, that reviewer has now contributed code to the PR, so their review is no longer eligible as approval and a second reviewer is required.
+
+1.10.3 An `@copilot` mention in a review body is not a reliable dispatch mechanism. Post the ask as a PR comment tagging `@copilot`, and include the full request in that comment: exact file path, concrete before/after change, and rationale.
+
+1.10.4 Do not send pointer-only asks (for example "apply item 11") that rely on context elsewhere; restate all required edits in the dispatch comment itself.
+
+1.10.5 When verifying whether `@copilot` work landed, check all channels: issue comments (`issues/<n>/comments`), PR reviews (`pulls/<n>/reviews`), inline PR comments (`pulls/<n>/comments`), and timeline events (`issues/<n>/timeline`, including `copilot_work_started`/`copilot_work_finished`).
+
+1.10.6 A completed `@copilot` session with an unchanged head SHA means no code changes were applied; that outcome may leave no review/comment, so timeline events are required evidence.
+
+1.10.7 Any `since` filter used for follow-up verification must use the exact timestamp of the triggering event, never a rounded or approximate time.

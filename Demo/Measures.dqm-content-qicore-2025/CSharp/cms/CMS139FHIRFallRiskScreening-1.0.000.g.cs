@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
 [CqlLibrary("CMS139FHIRFallRiskScreening", "1.0.000")]
 public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<CMS139FHIRFallRiskScreening_1_0_000>
 {
@@ -302,17 +302,16 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<
         IEnumerable<Observation> c_ = Status_1_15_000.Instance.isAssessmentPerformed(context, b_);
 
         bool? d_(Observation FallsScreening) {
-            CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
-            DataType h_ = FallsScreening?.Effective;
-            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-            CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
-            bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
-            return k_;
+            CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
+            DataType g_ = FallsScreening?.Effective;
+            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
+            bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
+            return j_;
         }
 
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
-        bool? f_ = context.Operators.Exists<Observation>(e_);
-        return f_;
+        bool? e_ = context.Operators.WhereAny<Observation>(c_, d_);
+        return e_;
     }
 
 

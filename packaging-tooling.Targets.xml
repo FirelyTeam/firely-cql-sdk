@@ -1,4 +1,4 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
 
 	<Import Project="$(CqlToolingTargetsDir)CqlTooling.Targets.xml" />
 	<Import Project="$(CqlToolingTargetsDir)ElmTooling.Targets.xml" />

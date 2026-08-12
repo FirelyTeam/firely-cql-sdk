@@ -52,12 +52,6 @@ namespace Hl7.Cql.Fhir
         }
 
         /// <summary>
-        /// The default LRU cache to use is in the <see cref="FhirTypeConverter"/> is <c>10000</c>, unless otherwise overridden here.
-        /// </summary>
-        /// <remarks>Changing this value, will create a new <see cref="TypeConverter"/>, unless a custom one was provided in <see cref="OverrideTypeConverter"/>.</remarks>
-        public int? OverrideFhirTypeConverterCacheSize { get; init; }
-
-        /// <summary>
         /// The default <see cref="ModelInspector"/> to use is <see cref="ModelInfo.ModelInspector"/>, unless otherwise overridden here.
         /// </summary>
         /// <remarks>Changing this value, will create a new <see cref="TypeConverter"/>, unless a custom one was provided in <see cref="OverrideTypeConverter"/>.</remarks>
@@ -85,7 +79,7 @@ namespace Hl7.Cql.Fhir
         private readonly TimeSpan? _overrideConverterTimezoneOffset;
 
         /// <summary>
-        /// The default <see cref="TypeConverter"/> to use is <see cref="FhirTypeConverter.Create(ModelInspector,Nullable{int},Nullable{TimeSpan})"/>, unless otherwise overridden here.
+        /// The default <see cref="TypeConverter"/> to use is <see cref="FhirTypeConverter.Create(ModelInspector,Nullable{TimeSpan})"/>, unless otherwise overridden here.
         /// </summary>
         public TypeConverter? OverrideTypeConverter { get; init; }
 

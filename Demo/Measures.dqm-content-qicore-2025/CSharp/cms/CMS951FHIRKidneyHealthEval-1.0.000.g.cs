@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
 [CqlLibrary("CMS951FHIRKidneyHealthEval", "1.0.000")]
 public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<CMS951FHIRKidneyHealthEval_1_0_000>
 {
@@ -182,29 +182,28 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
 
         bool? e_(Condition DiabetesDiagnosis) {
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
-            CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
-            bool? j_ = context.Operators.OverlapsBefore(h_, i_, "day");
-            CodeableConcept k_ = DiabetesDiagnosis?.VerificationStatus;
-            CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_);
-            bool? m_ = context.Operators.Not((bool?)(l_ is null));
-            CqlCode n_ = QICoreCommon_4_0_000.Instance.refuted(context);
-            CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
-            bool? p_ = context.Operators.Equivalent(l_, o_);
-            bool? q_ = context.Operators.Not(p_);
-            CqlCode r_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-            CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
-            bool? t_ = context.Operators.Equivalent(l_, s_);
-            bool? u_ = context.Operators.Not(t_);
-            bool? v_ = context.Operators.And(q_, u_);
-            bool? w_ = context.Operators.Implies(m_, v_);
-            bool? x_ = context.Operators.And(j_, w_);
-            return x_;
+            CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
+            CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
+            bool? i_ = context.Operators.OverlapsBefore(g_, h_, "day");
+            CodeableConcept j_ = DiabetesDiagnosis?.VerificationStatus;
+            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
+            bool? l_ = context.Operators.Not((bool?)(k_ is null));
+            CqlCode m_ = QICoreCommon_4_0_000.Instance.refuted(context);
+            CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
+            bool? o_ = context.Operators.Equivalent(k_, n_);
+            bool? p_ = context.Operators.Not(o_);
+            CqlCode q_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
+            bool? s_ = context.Operators.Equivalent(k_, r_);
+            bool? t_ = context.Operators.Not(s_);
+            bool? u_ = context.Operators.And(p_, t_);
+            bool? v_ = context.Operators.Implies(l_, u_);
+            bool? w_ = context.Operators.And(i_, v_);
+            return w_;
         }
 
-        IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
-        bool? g_ = context.Operators.Exists<Condition>(f_);
-        return g_;
+        bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
+        return f_;
     }
 
 
@@ -238,21 +237,20 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
 
         bool? u_(Encounter ValidEncounter) {
-            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
-            Period y_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
-            bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
-            Code<Encounter.EncounterStatus> ab_ = ValidEncounter?.StatusElement;
-            Encounter.EncounterStatus? ac_ = ab_?.Value;
-            Code<Encounter.EncounterStatus> ad_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ac_);
-            bool? ae_ = context.Operators.Equal(ad_, "finished");
-            bool? af_ = context.Operators.And(aa_, ae_);
-            return af_;
+            CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
+            Period x_ = ValidEncounter?.Period;
+            CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, x_);
+            bool? z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, y_, "day");
+            Code<Encounter.EncounterStatus> aa_ = ValidEncounter?.StatusElement;
+            Encounter.EncounterStatus? ab_ = aa_?.Value;
+            Code<Encounter.EncounterStatus> ac_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ab_);
+            bool? ad_ = context.Operators.Equal(ac_, "finished");
+            bool? ae_ = context.Operators.And(z_, ad_);
+            return ae_;
         }
 
-        IEnumerable<Encounter> v_ = context.Operators.Where<Encounter>(t_, u_);
-        bool? w_ = context.Operators.Exists<Encounter>(v_);
-        return w_;
+        bool? v_ = context.Operators.WhereAny<Encounter>(t_, u_);
+        return v_;
     }
 
 
@@ -314,29 +312,28 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         IEnumerable<Condition> i_ = context.Operators.Union<Condition>(d_, h_);
 
         bool? j_(Condition CKDOrESRD) {
-            CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, CKDOrESRD);
-            CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-            bool? o_ = context.Operators.Overlaps(m_, n_, "day");
-            CodeableConcept p_ = CKDOrESRD?.VerificationStatus;
-            CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
-            bool? r_ = context.Operators.Not((bool?)(q_ is null));
-            CqlCode s_ = QICoreCommon_4_0_000.Instance.refuted(context);
-            CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
-            bool? u_ = context.Operators.Equivalent(q_, t_);
-            bool? v_ = context.Operators.Not(u_);
-            CqlCode w_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-            CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
-            bool? y_ = context.Operators.Equivalent(q_, x_);
-            bool? z_ = context.Operators.Not(y_);
-            bool? aa_ = context.Operators.And(v_, z_);
-            bool? ab_ = context.Operators.Implies(r_, aa_);
-            bool? ac_ = context.Operators.And(o_, ab_);
-            return ac_;
+            CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, CKDOrESRD);
+            CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
+            bool? n_ = context.Operators.Overlaps(l_, m_, "day");
+            CodeableConcept o_ = CKDOrESRD?.VerificationStatus;
+            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
+            bool? q_ = context.Operators.Not((bool?)(p_ is null));
+            CqlCode r_ = QICoreCommon_4_0_000.Instance.refuted(context);
+            CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
+            bool? t_ = context.Operators.Equivalent(p_, s_);
+            bool? u_ = context.Operators.Not(t_);
+            CqlCode v_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+            CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
+            bool? x_ = context.Operators.Equivalent(p_, w_);
+            bool? y_ = context.Operators.Not(x_);
+            bool? z_ = context.Operators.And(u_, y_);
+            bool? aa_ = context.Operators.Implies(q_, z_);
+            bool? ab_ = context.Operators.And(n_, aa_);
+            return ab_;
         }
 
-        IEnumerable<Condition> k_ = context.Operators.Where<Condition>(i_, j_);
-        bool? l_ = context.Operators.Exists<Condition>(k_);
-        return l_;
+        bool? k_ = context.Operators.WhereAny<Condition>(i_, j_);
+        return k_;
     }
 
 
@@ -369,31 +366,30 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
         bool? c_(Observation eGFRTest) {
-            CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
-            DataType g_ = eGFRTest?.Effective;
-            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
-            bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
-            DataType k_ = eGFRTest?.Value;
-            object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
-            bool? m_ = context.Operators.Not((bool?)(l_ is null));
-            bool? n_ = context.Operators.And(j_, m_);
-            Code<ObservationStatus> o_ = eGFRTest?.StatusElement;
-            ObservationStatus? p_ = o_?.Value;
-            string q_ = context.Operators.Convert<string>(p_);
-            string[] r_ = [
+            CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
+            DataType f_ = eGFRTest?.Effective;
+            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
+            bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
+            DataType j_ = eGFRTest?.Value;
+            object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
+            bool? l_ = context.Operators.Not((bool?)(k_ is null));
+            bool? m_ = context.Operators.And(i_, l_);
+            Code<ObservationStatus> n_ = eGFRTest?.StatusElement;
+            ObservationStatus? o_ = n_?.Value;
+            string p_ = context.Operators.Convert<string>(o_);
+            string[] q_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
-            bool? t_ = context.Operators.And(n_, s_);
-            return t_;
+            bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
+            bool? s_ = context.Operators.And(m_, r_);
+            return s_;
         }
 
-        IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-        bool? e_ = context.Operators.Exists<Observation>(d_);
-        return e_;
+        bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
+        return d_;
     }
 
 
@@ -409,34 +405,33 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
         bool? c_(Observation uACRTest) {
-            CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
-            DataType g_ = uACRTest?.Effective;
-            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
-            bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
-            Code<ObservationStatus> k_ = uACRTest?.StatusElement;
-            ObservationStatus? l_ = k_?.Value;
-            string m_ = context.Operators.Convert<string>(l_);
-            string[] n_ = [
+            CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
+            DataType f_ = uACRTest?.Effective;
+            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
+            bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
+            Code<ObservationStatus> j_ = uACRTest?.StatusElement;
+            ObservationStatus? k_ = j_?.Value;
+            string l_ = context.Operators.Convert<string>(k_);
+            string[] m_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
-            bool? p_ = context.Operators.And(j_, o_);
-            DataType q_ = uACRTest?.Value;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            bool s_ = r_ is CqlQuantity;
-            CqlValueSet t_ = this.Undetectable_Lab_Result_Value(context);
-            bool? u_ = context.Operators.ConceptInValueSet(r_ as CqlConcept, t_);
-            bool? v_ = context.Operators.Or(s_ as bool?, u_);
-            bool? w_ = context.Operators.And(p_, v_);
-            return w_;
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            bool? o_ = context.Operators.And(i_, n_);
+            DataType p_ = uACRTest?.Value;
+            object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+            bool r_ = q_ is CqlQuantity;
+            CqlValueSet s_ = this.Undetectable_Lab_Result_Value(context);
+            bool? t_ = context.Operators.ConceptInValueSet(q_ as CqlConcept, s_);
+            bool? u_ = context.Operators.Or(r_ as bool?, t_);
+            bool? v_ = context.Operators.And(o_, u_);
+            return v_;
         }
 
-        IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-        bool? e_ = context.Operators.Exists<Observation>(d_);
-        return e_;
+        bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
+        return d_;
     }
 
 
@@ -531,40 +526,38 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         IEnumerable<ValueTuple<Observation, Observation>> c_ = context.Operators.CrossJoin<Observation, Observation>(a_, b_);
 
         (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? d_(ValueTuple<Observation, Observation> _valueTuple) {
-            (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? l_ = (CqlTupleMetadata_CELfNSUeJXKBGCPWLEBSIIJ, _valueTuple.Item1, _valueTuple.Item2);
-            return l_;
+            (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? j_ = (CqlTupleMetadata_CELfNSUeJXKBGCPWLEBSIIJ, _valueTuple.Item1, _valueTuple.Item2);
+            return j_;
         }
 
-        IEnumerable<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?> e_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(c_, d_);
 
-        bool? f_((CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? tuple_celfnsuejxkbgcpwlebsiij) {
-            DataType m_ = tuple_celfnsuejxkbgcpwlebsiij?.UrineCreatinineTest?.Effective;
-            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-            CqlDateTime p_ = context.Operators.Start(o_);
-            CqlQuantity q_ = context.Operators.Quantity(4m, "days");
-            CqlDateTime r_ = context.Operators.Subtract(p_, q_);
-            CqlDateTime s_ = context.Operators.End(o_);
-            CqlDateTime t_ = context.Operators.Add(s_, q_);
-            CqlInterval<CqlDateTime> u_ = context.Operators.Interval(r_, t_, true, true);
-            DataType v_ = tuple_celfnsuejxkbgcpwlebsiij?.UrineAlbuminTest?.Effective;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
-            bool? y_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, x_, (string)default);
-            return y_;
+        bool? e_((CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? tuple_celfnsuejxkbgcpwlebsiij) {
+            DataType k_ = tuple_celfnsuejxkbgcpwlebsiij?.UrineCreatinineTest?.Effective;
+            object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
+            CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_);
+            CqlDateTime n_ = context.Operators.Start(m_);
+            CqlQuantity o_ = context.Operators.Quantity(4m, "days");
+            CqlDateTime p_ = context.Operators.Subtract(n_, o_);
+            CqlDateTime q_ = context.Operators.End(m_);
+            CqlDateTime r_ = context.Operators.Add(q_, o_);
+            CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
+            DataType t_ = tuple_celfnsuejxkbgcpwlebsiij?.UrineAlbuminTest?.Effective;
+            object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+            CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_);
+            bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(s_, v_, (string)default);
+            return w_;
         }
 
-        IEnumerable<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?> g_ = context.Operators.Where<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(e_, f_);
+        IEnumerable<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?> f_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(c_, d_, e_);
 
-        (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? h_((CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? tuple_celfnsuejxkbgcpwlebsiij) {
-            (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? z_ = (CqlTupleMetadata_CELfNSUeJXKBGCPWLEBSIIJ, tuple_celfnsuejxkbgcpwlebsiij?.UrineAlbuminTest, tuple_celfnsuejxkbgcpwlebsiij?.UrineCreatinineTest);
-            return z_;
+        (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? g_((CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? tuple_celfnsuejxkbgcpwlebsiij) {
+            (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? x_ = (CqlTupleMetadata_CELfNSUeJXKBGCPWLEBSIIJ, tuple_celfnsuejxkbgcpwlebsiij?.UrineAlbuminTest, tuple_celfnsuejxkbgcpwlebsiij?.UrineCreatinineTest);
+            return x_;
         }
 
-        IEnumerable<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?> i_ = context.Operators.Select<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?, (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(g_, h_);
-        IEnumerable<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?> j_ = context.Operators.Distinct<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(i_);
-        bool? k_ = context.Operators.Exists<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(j_);
-        return k_;
+        IEnumerable<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?> h_ = context.Operators.SelectDistinct<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?, (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(f_, g_);
+        bool? i_ = context.Operators.Exists<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(h_);
+        return i_;
     }
 
 

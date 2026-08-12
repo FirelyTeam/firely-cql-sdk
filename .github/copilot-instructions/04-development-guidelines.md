@@ -9,8 +9,9 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 - [4.1. File Headers](#41-file-headers)
 - [4.2. Making Changes](#42-making-changes)
 - [4.3. Project References](#43-project-references)
-- [4.4. Documentation](#44-documentation)
-- [4.5. Release Notes](#45-release-notes)
+- [4.4. Reflection](#44-reflection)
+- [4.5. Documentation](#45-documentation)
+- [4.6. Release Notes](#46-release-notes)
 
 ## 4.1. File Headers
 
@@ -32,9 +33,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ### 4.1.3. For EXISTING Files
 
-4.1.3.1 **DO NOT modify existing copyright headers** in files that already have them
-4.1.3.2 Leave existing headers exactly as they are (e.g., "NCQA and contributors" should remain unchanged)
-4.1.3.3 **When making changes to a file and Firely is not listed as contributor, add it as "Firely, NCQA and contributors"**
+4.1.3.1 **Never modify an existing file's header** — if Firely isn't already listed as a contributor there, leave it as-is.
 
 ### 4.1.4. Header Guidelines
 
@@ -45,8 +44,6 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 4.1.4.3 Place header at the very top of the file, after any `#pragma` directives if present
 
 4.1.4.4 Generated files (\*.g.cs) do not require headers
-
-4.1.4.5 **Never update or modify existing copyright headers in existing files**
 
 ## 4.2. Making Changes
 
@@ -91,96 +88,106 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 4.3.3 Always validate that internal access is truly needed
 
-## 4.4. Documentation
+## 4.4. Reflection
 
-4.4.1 Update README files when adding new projects or significant features
+4.4.1 Use [`ReflectionUtility`](../../Cql/Cql.Abstractions/Abstractions/Infrastructure/ReflectionUtility.cs) (`MethodOf`, `PropertyOf`, `ConstructorOf`, `GenericMethodDefinitionOf`) instead of `typeof(X).GetMethod("Name")` / `GetProperty("Name")`.
 
-4.4.2 **When adding dependencies, also update the README's Dependencies section**
+4.4.2 The expression form is compiler-verified, rename-safe, and returns a non-null result or throws with the offending expression, so `!` and string-lookup null-guards disappear.
 
-4.4.2.1 **When bumping an existing package version, update the version number in the root `README.md`'s "External Dependencies" table** — sub-project READMEs don't state version numbers, so the root README's versioned table is the only consumer-visible record and silently drifts after version bumps. Also scan `docs/` for any design or assessment doc that mentions a version number for the same package.
+4.4.3 `nameof(X.Member)` inside a string lookup is **not** a substitute — it survives a rename but still resolves by string at run time and still cannot notice an added overload or a changed signature.
 
-4.4.3 Document experimental features clearly in preview projects
+4.4.4 `ReflectionUtility` is `internal` to `HL7.Cql.Abstractions`, whose `.csproj` grants `InternalsVisibleTo` to every SDK assembly and to `CoreTests`; if a project genuinely cannot see it, add the `InternalsVisibleTo` entry per 4.3 rather than falling back to a string lookup.
 
-4.4.4 Maintain clear separation between stable and experimental examples
+## 4.5. Documentation
 
-4.4.5 **IMPORTANT: Do not add C# code samples in Usage sections for internal-only projects**
-4.4.5.1 If a project is primarily used internally or through higher-level APIs, avoid providing code examples
+4.5.1 Update README files when adding new projects or significant features
 
-4.4.5.2 Only include code samples for packages that have clear public usage patterns designed for direct consumer use
+4.5.2 **When adding dependencies, also update the README's Dependencies section**
 
-4.4.5.3 Remove any placeholder or comment-only code blocks from documentation
+4.5.2.1 **When bumping an existing package version, update the version number in the root `README.md`'s "External Dependencies" table** — sub-project READMEs don't state version numbers, so the root README's versioned table is the only consumer-visible record and silently drifts after version bumps. Also scan `docs/` for any design or assessment doc that mentions a version number for the same package.
 
-4.4.5.4 Internal packages should describe what they do but not show how to use them directly
+4.5.3 Document experimental features clearly in preview projects
 
-4.4.6 **ALWAYS use Markdown hyperlinks when referencing other documents** — never use plain text file names or paths for cross-document references
-4.4.6.1 Every reference to another document (README, guide, spec, etc.) must be a clickable Markdown link: `[Display Text](relative/path/to/file.md)`
+4.5.4 Maintain clear separation between stable and experimental examples
 
-4.4.6.2 Use relative paths from the referencing file's location (e.g., `[build/README.md](../build/README.md)` from `docs/`, or `[README.md](README.md)` for a sibling file)
+4.5.5 **IMPORTANT: Do not add C# code samples in Usage sections for internal-only projects**
+4.5.5.1 If a project is primarily used internally or through higher-level APIs, avoid providing code examples
 
-4.4.6.3 When updating a document, scan all references to other files and ensure they are hyperlinked
+4.5.5.2 Only include code samples for packages that have clear public usage patterns designed for direct consumer use
 
-4.4.6.4 When renaming or moving a document, update all hyperlinks that point to it across the repository
+4.5.5.3 Remove any placeholder or comment-only code blocks from documentation
 
-4.4.6.5 Never leave plain-text file path references where document links are intended
+4.5.5.4 Internal packages should describe what they do but not show how to use them directly
 
-4.4.7 **Core documentation rules**
+4.5.6 **ALWAYS use Markdown hyperlinks when referencing other documents** — never use plain text file names or paths for cross-document references
+4.5.6.1 Every reference to another document (README, guide, spec, etc.) must be a clickable Markdown link: `[Display Text](relative/path/to/file.md)`
 
-4.4.7.1 Use file paths that exist in the repository
+4.5.6.2 Use relative paths from the referencing file's location (e.g., `[build/README.md](../build/README.md)` from `docs/`, or `[README.md](README.md)` for a sibling file)
 
-4.4.7.2 Include working command examples
+4.5.6.3 When updating a document, scan all references to other files and ensure they are hyperlinked
 
-4.4.7.3 Keep version numbers and dates current
+4.5.6.4 When renaming or moving a document, update all hyperlinks that point to it across the repository
 
-4.4.7.4 Mark completed items with ✅ where applicable
+4.5.6.5 Never leave plain-text file path references where document links are intended
 
-4.4.7.5 Add `Recent Updates` sections using `YYYY-MM-DD` dates when relevant
+4.5.7 **Core documentation rules**
 
-4.4.7.6 Use relative links between docs
+4.5.7.1 Use file paths that exist in the repository
 
-4.4.8 **Heading numbering standards**
+4.5.7.2 Include working command examples
 
-4.4.8.1 All documentation headings must use hierarchical numbering (`# 1.`, `## 1.1.`, `### 1.1.1.`)
+4.5.7.3 Keep version numbers and dates current
 
-4.4.8.2 Renumber sequentially whenever adding, removing, or reordering sections
+4.5.7.4 Mark completed items with ✅ where applicable
 
-4.4.8.3 Avoid unnumbered headings
+4.5.7.5 Add `Recent Updates` sections using `YYYY-MM-DD` dates when relevant
 
-4.4.8.4 In `.github/copilot-instructions.md` and its sub-documents, preserve strict numbering integrity
+4.5.7.6 Use relative links between docs
 
-4.4.8.5 Never introduce duplicated heading numbers or stale TOC/rule references after edits
+4.5.8 **Heading numbering standards**
 
-4.4.8.6 In `.github/copilot-instructions.md` and its sub-documents, cap heading numbering at three segments maximum (for example `# 1.`, `## 1.1.`, `### 1.1.1.`)
+4.5.8.1 All documentation headings must use hierarchical numbering (`# 1.`, `## 1.1.`, `### 1.1.1.`)
 
-4.4.8.7 Do not create headings deeper than `###` in copilot instruction docs
+4.5.8.2 Renumber sequentially whenever adding, removing, or reordering sections
 
-4.4.8.8 If more detail is needed, keep deeper numbering in body text or lists (for example `1.1.1.1`) instead of adding deeper headings
+4.5.8.3 Avoid unnumbered headings
 
-4.4.9 **TOC consistency**
+4.5.8.4 In `.github/copilot-instructions.md` and its sub-documents, preserve strict numbering integrity
 
-4.4.9.1 Keep TOC format consistent in top-level docs with TOCs (for example `README.md`, `docs/getting-started.md`)
+4.5.8.5 Never introduce duplicated heading numbers or stale TOC/rule references after edits
 
-4.4.9.2 Use TOC heading style `## 1.0. Table of Contents`
+4.5.8.6 In `.github/copilot-instructions.md` and its sub-documents, cap heading numbering at three segments maximum (for example `# 1.`, `## 1.1.`, `### 1.1.1.`)
 
-4.4.9.3 Prefer a single flat bullet list of links (avoid nested TOC subsection bullets unless required)
+4.5.8.7 Do not create headings deeper than `###` in copilot instruction docs
 
-4.4.9.4 Update TOC entries in the same edit whenever sections move or change
+4.5.8.8 If more detail is needed, keep deeper numbering in body text or lists (for example `1.1.1.1`) instead of adding deeper headings
 
-4.4.10 **Parent-document link for nested docs**
+4.5.9 **TOC consistency**
 
-4.4.10.1 Nested documents should include a `Parent document:` link near the top
+4.5.9.1 Keep TOC format consistent in top-level docs with TOCs (for example `README.md`, `docs/getting-started.md`)
 
-4.4.10.2 Use the nearest meaningful parent, not only the immediate folder container
+4.5.9.2 Use TOC heading style `## 1.0. Table of Contents`
 
-4.4.10.3 Keep the parent link above main content
+4.5.9.3 Prefer a single flat bullet list of links (avoid nested TOC subsection bullets unless required)
 
-4.4.11 **Mermaid diagrams**
+4.5.9.4 Update TOC entries in the same edit whenever sections move or change
 
-4.4.11.1 Pre-render every Mermaid diagram to `.svg` and embed it as an image — never leave a raw `` ```mermaid `` fenced block as the only way to view it. GitHub's inline renderer doesn't reliably support `classDiagram` `namespace` blocks, multi-target `style` directives, or custom `<<stereotype>>` annotations, which this repo's diagrams use, and can silently fail to render them.
+4.5.10 **Parent-document link for nested docs**
 
-4.4.11.2 For the full authoring workflow (file layout/naming, embedding, editing, migrating an old inline diagram), follow [generate-svg-from-mermaid](../../.claude/skills/generate-svg-from-mermaid/SKILL.md).
+4.5.10.1 Nested documents should include a `Parent document:` link near the top
 
-## 4.5. Release Notes
+4.5.10.2 Use the nearest meaningful parent, not only the immediate folder container
 
-4.5.1 **Any breaking change** (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in the same PR that introduces it — not deferred to release time. Add a new fragment file under [docs/releases/vnext/](../../docs/releases/vnext/README.md) (one file per PR — see that folder's README for the naming/format convention) rather than editing `vnext-release-notes.md` (now a static pointer doc — not directly editable), which causes merge conflicts between parallel PRs ([#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)).
+4.5.10.3 Keep the parent link above main content
 
-4.5.2 For the full procedure to turn that accumulated content into a versioned release note (template, README version sync, consolidating and clearing the `docs/releases/vnext/` fragment files), follow [cut-release-notes](../../.claude/skills/cut-release-notes/SKILL.md).
+4.5.11 **Mermaid diagrams**
+
+4.5.11.1 Pre-render every Mermaid diagram to `.svg` and embed it as an image — never leave a raw `` ```mermaid `` fenced block as the only way to view it. GitHub's inline renderer doesn't reliably support `classDiagram` `namespace` blocks, multi-target `style` directives, or custom `<<stereotype>>` annotations, which this repo's diagrams use, and can silently fail to render them.
+
+4.5.11.2 For the full authoring workflow (file layout/naming, embedding, editing, migrating an old inline diagram), follow [generate-svg-from-mermaid](../../.claude/skills/generate-svg-from-mermaid/SKILL.md).
+
+## 4.6. Release Notes
+
+4.6.1 **Any breaking change** (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in the same PR that introduces it — not deferred to release time. Add a new fragment file under [docs/releases/vnext/](../../docs/releases/vnext/README.md) (one file per PR — see that folder's README for the naming/format convention) rather than editing `vnext-release-notes.md` (now a static pointer doc — not directly editable), which causes merge conflicts between parallel PRs ([#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)).
+
+4.6.2 For the full procedure to turn that accumulated content into a versioned release note (template, README version sync, consolidating and clearing the `docs/releases/vnext/` fragment files), follow [cut-release-notes](../../.claude/skills/cut-release-notes/SKILL.md).

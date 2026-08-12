@@ -13,14 +13,19 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 - Prefer the GitHub CLI (`gh`) over raw HTTP/browser steps for issue/PR lookup and edits. If it's missing, install and authenticate it first.
 - Tick off acceptance-criteria checkboxes in a PR's linked issue (and the PR body) automatically, whenever their truth may have changed: after pushing work, after a follow-up commit that addresses review comments, and when reviewing a PR — including someone else's. Do it before reporting the review or the task done — see the `sync-acceptance-criteria` skill.
 - After fixing a review comment and pushing the fix, mark that conversation resolved (it doesn't happen automatically) — see the `resolve-pr-review-comments` skill.
+- While reviewing someone else's PR, never commit to that PR branch. Send findings to the author (or `@copilot`) to apply instead; if a reviewer pushes code, that reviewer has now contributed to the branch and the review is no longer eligible as approval, so a second reviewer becomes required.
+- When requesting `@copilot` to apply PR changes, post a PR comment (not only a review body mention) that includes the complete ask in that comment: exact file path, concrete before/after change, and rationale. Do not post pointer-only asks like "apply item 11."
+- When checking whether `@copilot` work landed, check all channels: issue comments, PR reviews, inline PR comments, and timeline events (`copilot_work_started`/`copilot_work_finished`). If a session finished and head SHA did not change, nothing was applied. Any `since` filter must use the real source event timestamp, not an approximate rounded time.
+- When a convention change is needed in `CLAUDE.md` or `.github/copilot-instructions/`, file an issue and have `@copilot` apply it on a branch instead of editing instruction files ad hoc in a local working copy.
 
 ## Code conventions (non-obvious ones)
 
-- **Copyright headers** (`*.cs`, not `*.g.cs`): new files get the standard header with the current year and "Firely, NCQA and contributors". **Never modify an existing file's header** — if Firely isn't already listed as a contributor there, leave it as-is; only new files get the full attribution line.
+- **Copyright headers** (`*.cs`, not `*.g.cs`): For new files, use the standard header shown in [.github/copilot-instructions/04-development-guidelines.md](.github/copilot-instructions/04-development-guidelines.md). **Never modify an existing file's header** — if Firely isn't already listed as a contributor there, leave it as-is.
 - **`InternalsVisibleTo`** goes in the `.csproj` (`<InternalsVisibleTo Include="ProjectName" Key="$(LibraryPKHash)" />`), never in `AssemblyInfo.cs`.
 - New internal-only utility types/files should stay `internal`, not `public` — only expose what's meant for external consumption.
 - Every new `.cs` file needs its own `#nullable enable` directive after the header, even though nullable is enabled globally in props — this repo wants it explicit per file.
 - Check `GlobalUsings.cs` before adding a `using` — don't duplicate what's already global.
+- **Reflection goes through [`ReflectionUtility`](Cql/Cql.Abstractions/Abstractions/Infrastructure/ReflectionUtility.cs)**, not string-based lookups. Use `MethodOf(() => x.Method(…))`, `PropertyOf(() => x.Prop)`, `ConstructorOf(() => new T(…))` and `GenericMethodDefinitionOf(() => x.Generic<T>(…))` instead of `typeof(X).GetMethod("Name")` / `GetProperty("Name")`. The expression form is checked by the compiler, follows renames, and returns a non-null result or throws with the offending expression in the message — so it also removes the `!` and the null-guard that string lookups drag along. The class is `internal` to `HL7.Cql.Abstractions`, which grants `InternalsVisibleTo` to every SDK assembly (`Hl7.Cql.Runtime`, `Hl7.Cql.Fhir`, `Hl7.Cql.Compiler`, …) plus `CoreTests`, so it is available essentially everywhere. `nameof` in a `GetMethod`/`GetProperty` call is not a substitute: it survives renames but still resolves by string at run time and still cannot see an overload change.
 - Naming: `CqlSdk` prefix for example projects, `Hl7.Cql` namespace prefix for core SDK assemblies.
 - Project docs (READMEs, `docs/`) use hierarchical heading numbers (`# 1.`, `## 1.1.`, `### 1.1.1.`) and always cross-reference other documents with real Markdown links (`[label](relative/path.md)`), never a bare filename. Internal-only packages should describe what they do in their README but skip usage code samples (only packages meant for direct consumer use get those).
 - **Mermaid diagrams** in markdown docs must be pre-rendered to `.svg` and embedded as an image, not left as a raw `` ```mermaid `` fenced block — GitHub's inline renderer doesn't reliably support `classDiagram` `namespace` blocks, multi-target `style` directives, or custom `<<stereotype>>` annotations, which this repo's diagrams use. See the `generate-svg-from-mermaid` skill.
@@ -56,6 +61,14 @@ These are **not interchangeable**. `Library.Name` is the canonical identifier us
 
 A similar mirror for FHIR spec pages actually used by this repo (e.g. `Measure`/`Library` resource definitions, Quality Measure IG conformance) lives at `/spec/fhir/condensed/`, fetched on demand per-page via `tools/condense_spec/fetch_fhir_page.py <url>` rather than vendored wholesale — see `/spec/fhir/README.md` for which pages are cached and when they were last fetched.
 
+## Validating emitted output
+
+A test that pins the exact text of something the SDK emits answers "did the output change?", never "is the output correct?" — and when the expectation written first is itself wrong, the assertion turns a defect into a defended invariant. So wherever the emitted format has an independent checker, assert against it as well as against the string: the string pins the shape, the checker pins the validity. A validator, a parser, or a round-trip back through the reader all serve; pick whichever the format already has.
+
+For FHIR primitives that checker is `Hl7.Fhir.Model.<Type>.IsValidValue(value)` (`FhirDateTime`, `Time`, `Date`, `Instant`, …), a public static on the already-referenced `Hl7.Fhir.Base` — one line per emission point.
+
+"Pre-existing" and "out of scope" are reasons not to *fix* invalid output in the change at hand. They are never reasons to write a test asserting the invalid output is correct, or a comment claiming an invariant the code does not hold — quarantine it with a comment pointing at the tracking issue instead.
+
 ## Build
 
 - Build `Cql-Sdk.slnf`, not `Cql-Sdk-All.sln` — the `.sln` includes submodules you likely don't have access to.
@@ -79,7 +92,7 @@ Any breaking change (public API, generated C# output, Packager CLI behavior, bui
 Task-specific workflows live under `.claude/skills/` and load on demand — invoke them (or let them trigger) rather than expecting this always-loaded file to cover the steps:
 
 - `write-pr-description` — updating a PR description from the full branch history
-- `file-github-issue` — issue formatting conventions
+- `file-github-issue` — issue formatting conventions, and superseding a stale issue with a fresh one
 - `pickup-github-ticket` — resolving a ticket number/URL to a branch and picking up work
 - `cut-release-notes` — consolidating all pending release-note content (fragment files under `docs/releases/vnext/`) into a versioned release note, then deleting the fragments
 - `generate-elm-from-cql` — regenerating ELM JSON after adding CQL test input files

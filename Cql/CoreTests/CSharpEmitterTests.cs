@@ -10,6 +10,7 @@
 
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler.CodeModel;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Primitives;
 
 namespace CoreTests;
@@ -38,7 +39,7 @@ internal sealed class CSharpEmitterTestTuple : TupleBaseType
 {
     public int? A { get; set; }
 
-    public string B { get; set; }
+    public string B { get; set; } = null!;
 }
 
 /// <summary>Helper invoked by the local-function test so an <see cref="CodeLambda"/> has a real
@@ -80,7 +81,7 @@ public class CSharpEmitterTests
         CreateEmitter().EmitBodyBlock(lambda).Replace("\r\n", "\n");
 
     private static readonly MethodInfo MathAbsInt =
-        typeof(Math).GetMethod(nameof(Math.Abs), [typeof(int)])!;
+        ReflectionUtility.MethodOf(() => Math.Abs(default(int)));
 
     [TestMethod]
     public void TrivialConstantBody_EmitsReturnStatement()
@@ -142,7 +143,7 @@ public class CSharpEmitterTests
     [TestMethod]
     public void LocalFunction_LambdaArgumentPrintsAsLocalFunction()
     {
-        var applyFunc = typeof(CSharpEmitterTestHelpers).GetMethod(nameof(CSharpEmitterTestHelpers.ApplyFunc))!;
+        var applyFunc = ReflectionUtility.MethodOf(() => CSharpEmitterTestHelpers.ApplyFunc(default!, default));
         var p = new CodeLocal(typeof(int), "n");
         // Casts are pass-through, so the function body returns the cast inline; the
         // function's own generated name comes first in the a_, b_, ... sequence. The body
@@ -258,7 +259,7 @@ public class CSharpEmitterTests
         // CodeConditional => 1 arm in CSharpEmitter.Scope.cs). Found via the HEDIS 2025
         // corpus (TRC_Elements/IET_Elements/AISE_Reporting/HEDIS's
         // "if (((X) ?? false ? A : B))" when-conditions).
-        var isNullOrEmpty = typeof(string).GetMethod(nameof(string.IsNullOrEmpty), [typeof(string)])!;
+        var isNullOrEmpty = ReflectionUtility.MethodOf(() => string.IsNullOrEmpty(default!));
         var c = new CodeLocal(typeof(bool), "c");
         var s = new CodeLocal(typeof(string), "s");
         // Non-simple: the true branch is a call, which would hoist if linearized.
@@ -353,8 +354,8 @@ public class CSharpEmitterTests
         // block — the condition's statements print there, before a fresh if. (The old
         // pipeline got this laziness by wrapping such conditions in zero-argument bool
         // functions.)
-        var concat = typeof(string).GetMethod(nameof(string.Concat), [typeof(string), typeof(string)])!;
-        var isNullOrEmpty = typeof(string).GetMethod(nameof(string.IsNullOrEmpty), [typeof(string)])!;
+        var concat = ReflectionUtility.MethodOf(() => string.Concat(default!, default!));
+        var isNullOrEmpty = ReflectionUtility.MethodOf(() => string.IsNullOrEmpty(default!));
         var w = new CodeLocal(typeof(bool), "w");
         var s = new CodeLocal(typeof(string), "s");
         var when2 = new CodeInvoke(null, isNullOrEmpty, new CodeInvoke(null, concat, s, s));
@@ -390,7 +391,7 @@ public class CSharpEmitterTests
     [TestMethod]
     public void Property_Instance_NullConditional_And_Static()
     {
-        var stringLength = typeof(string).GetProperty(nameof(string.Length))!;
+        var stringLength = ReflectionUtility.PropertyOf(() => default(string)!.Length);
         var x = new CodeLocal(typeof(string), "x");
 
         var instance = new CodeProperty(x, stringLength, nullConditional: false);
@@ -405,7 +406,7 @@ public class CSharpEmitterTests
             "{\n    int? a_ = x?.Length;\n    return a_;\n}",
             EmitBody(new CodeLambda([x], nullConditional)));
 
-        var newLine = typeof(Environment).GetProperty(nameof(Environment.NewLine))!;
+        var newLine = ReflectionUtility.PropertyOf(() => Environment.NewLine);
         var staticProperty = new CodeProperty(null, newLine);
         Assert.AreEqual(
             "{\n    return Environment.NewLine;\n}",
@@ -571,7 +572,7 @@ public class CSharpEmitterTests
                 new CodeConstant(true, typeof(bool?)),
                 new CodeInvoke(
                     null,
-                    typeof(CSharpEmitterTestHelpers).GetMethod(nameof(CSharpEmitterTestHelpers.IdentityBool))!,
+                    ReflectionUtility.MethodOf(() => CSharpEmitterTestHelpers.IdentityBool(default)),
                     new CodeConstant(false, typeof(bool?)))),
             new CodeConstant(false, typeof(bool?)));
         Assert.AreEqual(
@@ -604,15 +605,15 @@ public class CSharpEmitterTests
     [TestMethod]
     public void ObjectCreation_NewAndMemberInit()
     {
-        var listCtor = typeof(List<int>).GetConstructor([typeof(int)])!;
+        var listCtor = ReflectionUtility.ConstructorOf(() => new List<int>(default(int)));
         var @new = new CodeNew(listCtor, new CodeConstant(4, typeof(int)));
         Assert.AreEqual(
             "{\n    return new List<int>(4);\n}",
             EmitBody(new CodeLambda([], @new)));
 
-        var widgetCtor = typeof(CSharpEmitterTestWidget).GetConstructor(Type.EmptyTypes)!;
+        var widgetCtor = ReflectionUtility.ConstructorOf(() => new CSharpEmitterTestWidget());
         var widgetNew = new CodeNew(widgetCtor);
-        var countProperty = typeof(CSharpEmitterTestWidget).GetProperty(nameof(CSharpEmitterTestWidget.Count))!;
+        var countProperty = ReflectionUtility.PropertyOf(() => default(CSharpEmitterTestWidget)!.Count);
         var memberInit = new CodeMemberInit(widgetNew, [(countProperty, new CodeConstant(7, typeof(int)))]);
         // LambdaDefinitionWriter.BuildMemberInitExpression prints a multi-line block: "new
         // Type" (no parens — that form is never routed through BuildNewExpression/PrintNew),
@@ -752,7 +753,7 @@ public class CSharpEmitterTests
     [TestMethod]
     public void Invoke_NullConditional_PrintsQuestionDot_AndWrapsValueReturnType()
     {
-        var indexOf = typeof(string).GetMethod(nameof(string.IndexOf), [typeof(char)])!;
+        var indexOf = ReflectionUtility.MethodOf(() => default(string)!.IndexOf(default(char)));
         var s = new CodeLocal(typeof(string), "s");
         var call = new CodeInvoke(s, indexOf, nullConditional: true, new CodeConstant('x', typeof(char)));
 
@@ -800,7 +801,7 @@ public class CSharpEmitterTests
         // parameter prints it verbatim, shadowing the ancestor — the old pipeline never
         // renamed parameters, so HEDIS PCR_Details' Select over "stay" tuples inside a
         // "stay" lambda prints both as "stay". (See AllocateName in CSharpEmitter.Scope.cs.)
-        var applyFunc = typeof(CSharpEmitterTestHelpers).GetMethod(nameof(CSharpEmitterTestHelpers.ApplyFunc))!;
+        var applyFunc = ReflectionUtility.MethodOf(() => CSharpEmitterTestHelpers.ApplyFunc(default!, default));
         var outer = new CodeLocal(typeof(int), "stay");
         var inner = new CodeLocal(typeof(int), "stay");
         var innerLambda = new CodeLambda([inner], new CodeCast(inner, typeof(int?), CodeCastKind.Cast));
