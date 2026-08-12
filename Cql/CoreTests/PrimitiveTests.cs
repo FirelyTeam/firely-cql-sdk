@@ -3401,6 +3401,49 @@ namespace CoreTests
             Assert.IsNull(result);
         }
 
+        [TestMethod]
+        public void IntersectList_QuantityWithConvertibleUnits_ReturnsMatchingElement()
+        {
+            var ops = GetNewContext().Operators;
+            var leftQuantity = new CqlQuantity(1m, "g");
+            var rightQuantity = new CqlQuantity(1000m, "mg");
+
+            var result = ops.Intersect([leftQuantity], [rightQuantity]);
+
+            result.Should().NotBeNull();
+            result!.Should().HaveCount(1);
+            result.Single().Should().BeSameAs(leftQuantity);
+        }
+
+        [TestMethod]
+        public void IntersectList_ConceptWithDistinctCodeLists_ReturnsMatchingElement()
+        {
+            var ops = GetNewContext().Operators;
+            var leftConcept = new CqlConcept([new CqlCode("A", "sys"), new CqlCode("B", "sys")], null);
+            var rightConcept = new CqlConcept([new CqlCode("A", "sys"), new CqlCode("B", "sys")], null);
+
+            var result = ops.Intersect([leftConcept], [rightConcept]);
+
+            result.Should().NotBeNull();
+            result!.Should().HaveCount(1);
+            result.Single().Should().BeSameAs(leftConcept);
+        }
+
+        [TestMethod]
+        public void IntersectList_TupleWithCqlEqualQuantityMembers_ReturnsMatchingElement()
+        {
+            var ops = GetNewContext().Operators;
+            var metadata = new CqlTupleMetadata([typeof(CqlQuantity)], ["value"]);
+            (CqlTupleMetadata, CqlQuantity?) leftTuple = (metadata, new CqlQuantity(1m, "g"));
+            (CqlTupleMetadata, CqlQuantity?) rightTuple = (metadata, new CqlQuantity(1000m, "mg"));
+
+            var result = ops.Intersect([leftTuple], [rightTuple]);
+
+            result.Should().NotBeNull();
+            result!.Should().HaveCount(1);
+            result.Single().Should().Be(leftTuple);
+        }
+
         // { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59
         [TestMethod]
         public void ProperContainsTimeNull()
