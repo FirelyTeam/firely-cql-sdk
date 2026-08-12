@@ -1021,7 +1021,7 @@ namespace Hl7.Cql.Operators
         public bool? IntervalIncludesElement<T>(CqlInterval<T>? interval, T t, string? precision) =>
             In(t, interval, precision);
 
-        public bool? IntervalIncludesInterval<T>(CqlInterval<T>? larger, CqlInterval<T>? smaller, string precision)
+        public bool? IntervalIncludesInterval<T>(CqlInterval<T>? larger, CqlInterval<T>? smaller, string? precision)
         {
             if (larger == null || smaller == null)
                 return null;
@@ -1056,7 +1056,7 @@ namespace Hl7.Cql.Operators
 
         #region Included In
 
-        public bool? IntervalIncludedIn<T>(CqlInterval<T>? smaller, CqlInterval<T>? larger, string precision) =>
+        public bool? IntervalIncludedIn<T>(CqlInterval<T>? smaller, CqlInterval<T>? larger, string? precision) =>
             IntervalIncludesInterval(larger, smaller, precision);
 
         #endregion
@@ -1863,7 +1863,7 @@ namespace Hl7.Cql.Operators
 
         #region Properly Includes/Included In
 
-        public bool? IntervalProperlyIncludedInInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string precision)
+        public bool? IntervalProperlyIncludedInInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string? precision)
         {
             if (left == null)
                 return null;
@@ -1889,7 +1889,7 @@ namespace Hl7.Cql.Operators
             return true;
         }
 
-        public bool? IntervalProperlyIncludesInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string precision) =>
+        public bool? IntervalProperlyIncludesInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string? precision) =>
             IntervalProperlyIncludedInInterval(right, left, precision);
 
         public bool? ElementProperlyIncludedInInterval<T>(T left, CqlInterval<T>? right)
@@ -1909,7 +1909,7 @@ namespace Hl7.Cql.Operators
             return true;
         }
 
-        public bool? ElementProperlyIncludedInInterval(CqlDate left, CqlInterval<CqlDate>? right, string precision)
+        public bool? ElementProperlyIncludedInInterval(CqlDate left, CqlInterval<CqlDate>? right, string? precision)
         {
             if (left == null || right == null || right.low == null || right.high == null)
                 return null;
@@ -1934,7 +1934,7 @@ namespace Hl7.Cql.Operators
         }
 
 
-        public bool? ElementProperlyIncludedInInterval(CqlDateTime left, CqlInterval<CqlDateTime>? right, string precision)
+        public bool? ElementProperlyIncludedInInterval(CqlDateTime left, CqlInterval<CqlDateTime>? right, string? precision)
         {
             if (left == null || right == null || right.low == null || right.high == null)
                 return null;
@@ -1958,7 +1958,7 @@ namespace Hl7.Cql.Operators
             return true;
         }
 
-        public bool? ElementProperlyIncludedInInterval(CqlTime left, CqlInterval<CqlTime>? right, string precision)
+        public bool? ElementProperlyIncludedInInterval(CqlTime left, CqlInterval<CqlTime>? right, string? precision)
         {
             if (left == null || right == null || right.low == null || right.high == null)
                 return null;
@@ -1987,13 +1987,13 @@ namespace Hl7.Cql.Operators
         public bool? IntervalProperlyIncludesElement<T>(CqlInterval<T>? left, T right) =>
             ElementProperlyIncludedInInterval(right, left);
 
-        public bool? IntervalProperlyIncludesElement(CqlInterval<CqlDate>? left, CqlDate right, string precision) =>
+        public bool? IntervalProperlyIncludesElement(CqlInterval<CqlDate>? left, CqlDate right, string? precision) =>
             ElementProperlyIncludedInInterval(right, left, precision);
 
-        public bool? IntervalProperlyIncludesElement(CqlInterval<CqlDateTime>? left, CqlDateTime right, string precision) =>
+        public bool? IntervalProperlyIncludesElement(CqlInterval<CqlDateTime>? left, CqlDateTime right, string? precision) =>
             ElementProperlyIncludedInInterval(right, left, precision);
 
-        public bool? IntervalProperlyIncludesElement(CqlInterval<CqlTime>? left, CqlTime right, string precision) =>
+        public bool? IntervalProperlyIncludesElement(CqlInterval<CqlTime>? left, CqlTime right, string? precision) =>
             ElementProperlyIncludedInInterval(right, left, precision);
 
 
