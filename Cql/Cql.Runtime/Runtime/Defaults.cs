@@ -14,6 +14,11 @@ namespace Hl7.Cql.Runtime;
 public static class Defaults
 {
     /// <summary>
+    /// Temporary probe member used to validate CI analyzer enforcement.
+    /// </summary>
+    public const int PublicApiDriftProbe = 1;
+
+    /// <summary>
     /// Gets the default enumeration options that recurse into subdirectories.
     /// </summary>
     public static EnumerationOptions EnumerationOptionsRecurseSubdirectories { get; } = new()
