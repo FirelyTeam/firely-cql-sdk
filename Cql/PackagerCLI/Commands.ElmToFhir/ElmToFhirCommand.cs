@@ -26,7 +26,7 @@ internal record ElmToFhirCommand
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
     string? MeasureGroupCodeSystem,
-    string? CSharpNamespace,
+    string? CsNamespace, // named for System.CommandLine's kebab->Pascal binding of --cs-namespace; the config key stays CSharpNamespace
     bool? JsonPretty,
     bool? ExitOnError,
     bool? FlattenDirHierarchy,
@@ -157,6 +157,8 @@ internal record ElmToFhirCommand
             """
             The C# namespace to use for generated code.
             (Used with --cs or --dll)
+            Configuration home: Elm:CSharpGeneratingConfig:CSharpNamespace. The flat
+            Elm:CSharpNamespace key is obsolete and remains only as a fallback.
             """),
 
         Option<bool>(
@@ -184,7 +186,7 @@ internal record ElmToFhirCommand
         (Measures, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.MeasuresOutDir)]),
         (FlattenDirHierarchy, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FlattenDirHierarchy)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
-        (CSharpNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
+        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpGeneratingConfig), nameof(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (MeasureGroupCodeSystem, [PackagingOptions.ConfigSection, nameof(PackagingOptions.MeasureGroupCodeSystem)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),

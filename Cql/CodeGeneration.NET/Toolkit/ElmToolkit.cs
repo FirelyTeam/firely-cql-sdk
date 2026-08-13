@@ -135,7 +135,9 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         using var servicesScope = _services.CreateScopedState();
 
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
-        var cSharpNamespace = Config.CSharpNamespace;
+        // The nested config is the canonical home; the flat shipped property remains a
+        // functional fallback for existing consumers (see ElmToolkitConfig.CSharpNamespace).
+        var cSharpNamespace = Config.CSharpGeneratingConfig.CSharpNamespace ?? Config.CSharpNamespace;
         var debugInformationFormat = Config.DebugSymbolsFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         ElmLibrary[] libraries = _artifactsById.Values.Select(selector: v => v.InputElmLibrary).ToArray();

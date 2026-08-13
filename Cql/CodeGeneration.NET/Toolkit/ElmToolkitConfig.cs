@@ -27,7 +27,9 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// When <see langword="true"/>, the generated C# code may contain syntax errors or other issues that prevent it from compiling,
 /// but may be useful for debugging or testing purposes.
 /// </param>
-/// <param name="CSharpNamespace">The C# namespace to use for generated code. If <see langword="null"/> or empty, no namespace is generated.</param>
+/// <param name="CSharpNamespace">The C# namespace to use for generated code. If <see langword="null"/> or empty, no namespace is generated.
+/// Superseded: this setting's canonical home is <see cref="Toolkit.CSharpGeneratingConfig.CSharpNamespace"/> (a value set there wins);
+/// this flat property remains as a backwards-compatible fallback and will be removed at the next major release.</param>
 public record ElmToolkitConfig(
     DebugSymbolsFormat DebugSymbolsFormat = DebugSymbolsFormat.None,
     bool AllowScopeRedefinition = true,
