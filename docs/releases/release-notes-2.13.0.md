@@ -18,7 +18,7 @@
 - `Hl7.Cql.Fhir.FhirCqlContext.DataSourceForBundle(Bundle bundle, FhirCqlContextOptions? options = null)`.
 - `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector model)`.
 - `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector model, TimeSpan? defaultTimezoneOffset)`.
-- New fused list operators on `Hl7.Cql.Operators.ICqlOperators` (these combine chained `where`/`select` operations into one pass):
+- New fused list operators on `Hl7.Cql.Operators.ICqlOperators`, each replacing a two-pass `Where`/`Select` composition with a single pass over the source (see *Operator fusion* under Improvements):
   - `bool? WhereAny<T>(IEnumerable<T>? source, Func<T, bool?> lambda)`
   - `IEnumerable<TR>? WhereSelect<T, TR>(IEnumerable<T>? source, Func<T, bool?> lambda, Func<T?, TR> select)`
   - `IEnumerable<TR>? SelectWhere<T, TR>(IEnumerable<T?>? source, Func<T?, TR> select, Func<TR, bool?> lambda)`
@@ -34,7 +34,7 @@
 - Bundle retrieves are materialized once per retrieve shape over bundle-backed sources, avoiding repeated re-evaluation of the same filter pipeline. (#1480)
 - Resource-type enumeration for id-based FHIR comparer registration is now process-level lazy initialization instead of per-call reflection sweeps. (#1481)
 - ISO8601 string formatting for date/time primitives moved to lazy computation, reducing construction-time allocations. (#1482)
-- Codegen/runtime now fuse select/where patterns into single-pass list operators (combining chained operations into one pass), removing intermediate list materialization in those cases. (#1490)
+- **Operator fusion**: where the generated C# previously built an intermediate list only to walk it once and discard it, the compiler now emits a single *fused* operator that does the work in one pass. Four immediately-consumed `Where`/`Select` chains are recognised: `Exists(Where(s, p))` becomes `WhereAny(s, p)`, `Select(Where(s, p), f)` becomes `WhereSelect(s, p, f)`, `Where(Select(s, f), p)` becomes `SelectWhere(s, f, p)`, and `Distinct(Select(s, f))` becomes `SelectDistinct(s, f)`. Each fused operator invokes the same lambdas over the same elements in the same relative order as the composition it replaces, so results, `Message` side effects and exception surfaces are unchanged — with one nuance: the fused form interleaves the two lambdas per element rather than running one to completion over the whole source before the other, so if *both* lambdas would throw, on different elements, the exception that surfaces can differ from the one the composition would have surfaced. (#1490)
 - Value-set membership checks for resolved value sets now avoid terminology-service fallback round-trips, including code-only checks. (#1510)
 - List `Intersect` now uses CQL equality semantics (same comparer path as `Except`/`Union`/`Distinct`) for value-equal non-reference-equal values. (#1553)
 - `TypeConverter` instances are memoized per (model, default timezone offset) pair rather than per (model, cache size, offset); with the cache gone, two callers differing only in a matching model and offset now receive the same converter instance. (#1525)
@@ -117,7 +117,7 @@
    - `FhirTypeConverter.Create(model, cacheSize)` -> `FhirTypeConverter.Create(model)`
    - `FhirCqlContextOptions.OverrideFhirTypeConverterCacheSize` -> remove
    - `ElmToolkitConfig.LRUCacheSize` argument/initializer -> remove
-3. If you implement `ICqlOperators`, update the 16 affected method signatures to `string? precision`, and implement the four new fused list operators (`WhereAny`, `WhereSelect`, `SelectWhere`, `SelectDistinct`) that combine chained `where`/`select` work into one pass.
+3. If you implement `ICqlOperators`, update the 16 affected method signatures to `string? precision`, and implement the four new fused list operators (`WhereAny`, `WhereSelect`, `SelectWhere`, `SelectDistinct`).
 4. If you rely on value-set fallback to external terminology for locally resolved sets, move to complete expansions or leave those value sets unresolved so service routing still applies.
 5. If you have tests/assertions over emitted FHIR time/dateTime lexical forms, update expected output for precision-padding and timezone emission behavior.
 
