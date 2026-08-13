@@ -1,7 +1,1 @@
 #nullable enable
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.Deconstruct(out Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat DebugSymbolsFormat, out bool AllowScopeRedefinition, out bool AllowUnresolvedExternals, out bool AllowInvalidCSharp, out string? CSharpNamespace) -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.ElmToolkitConfig(Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat DebugSymbolsFormat = Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat.None, bool AllowScopeRedefinition = true, bool AllowUnresolvedExternals = true, bool AllowInvalidCSharp = false, string? CSharpNamespace = null) -> void
-*REMOVED*Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.Deconstruct(out Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat DebugSymbolsFormat, out bool AllowScopeRedefinition, out bool AllowUnresolvedExternals, out bool AllowInvalidCSharp, out int LRUCacheSize, out string? CSharpNamespace) -> void
-*REMOVED*Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.ElmToolkitConfig(Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat DebugSymbolsFormat = Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat.None, bool AllowScopeRedefinition = true, bool AllowUnresolvedExternals = true, bool AllowInvalidCSharp = false, int LRUCacheSize = 0, string? CSharpNamespace = null) -> void
-*REMOVED*Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.LRUCacheSize.get -> int
-*REMOVED*Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.LRUCacheSize.init -> void

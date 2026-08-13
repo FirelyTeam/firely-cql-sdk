@@ -7,8 +7,6 @@ Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics.Equivalent = 1 -> Hl7
 Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorType.get -> Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics
 Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorType.init -> void
 Hl7.Cql.Fhir.FhirCqlContextOptions.FhirCqlContextOptions() -> void
-Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideFhirTypeConverterCacheSize.get -> int?
-Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideFhirTypeConverterCacheSize.init -> void
 Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideModelInspector.get -> Hl7.Fhir.Introspection.ModelInspector?
 Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideModelInspector.init -> void
 Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideTypeConverter.get -> Hl7.Cql.Conversion.TypeConverter?
@@ -37,7 +35,6 @@ Hl7.Cql.Fhir.ValueSetSource.ValueSetSource(Hl7.Fhir.Specification.Source.IAsyncR
 override Hl7.Cql.Fhir.FhirTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
 static Hl7.Cql.Fhir.FhirCqlContext.ForBundle(Hl7.Fhir.Model.Bundle? bundle = null, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.ValueSets.IValueSetDictionary? valueSets = null, System.DateTimeOffset? now = null, Hl7.Cql.Fhir.FhirCqlContextOptions? options = null) -> Hl7.Cql.Runtime.CqlContext!
 static Hl7.Cql.Fhir.FhirCqlContext.WithDataSource(Hl7.Cql.Operators.IDataSource? source = null, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.ValueSets.IValueSetDictionary? valueSets = null, System.DateTimeOffset? now = null, Hl7.Cql.Fhir.FhirCqlContextOptions? options = null) -> Hl7.Cql.Runtime.CqlContext!
-static Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Introspection.ModelInspector! model, int? cacheSize = null) -> Hl7.Cql.Conversion.TypeConverter!
 static Hl7.Cql.Fhir.Serialization.Extensions.FhirDeserializationExtensions.DeserializeJsonToFhir<TDomainResource>(this string! jsonString, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureOptions = null) -> TDomainResource!
 static Hl7.Cql.Fhir.Serialization.Extensions.FhirDeserializationExtensions.DeserializeJsonToFhir<TDomainResource>(this System.IO.Stream! jsonStream, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureOptions = null) -> TDomainResource!
 static Hl7.Cql.Fhir.Serialization.Extensions.FhirDeserializationExtensions.DeserializeJsonToFhir<TDomainResource>(this System.ReadOnlySpan<char> jsonCharSpan, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureOptions = null) -> TDomainResource!
@@ -65,3 +62,8 @@ static readonly Hl7.Cql.Fhir.QICoreRetrieveProfileFilter.Default -> Hl7.Cql.Fhir
 Hl7.Cql.Fhir.FhirCqlContextOptions.EvaluationCache.get -> Hl7.Cql.Runtime.EvaluationCacheProfile?
 Hl7.Cql.Fhir.FhirCqlContextOptions.EvaluationCache.init -> void
 static Hl7.Cql.Fhir.FhirTypeConverter.ConvertRangeToCqlInterval(this Hl7.Cql.Conversion.TypeConverter! converter, Hl7.Fhir.Model.Range? range, string? cqlPointTypeName) -> object?
+Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideConverterTimezoneOffset.get -> System.TimeSpan?
+Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideConverterTimezoneOffset.init -> void
+static Hl7.Cql.Fhir.FhirCqlContext.DataSourceForBundle(Hl7.Fhir.Model.Bundle! bundle, Hl7.Cql.Fhir.FhirCqlContextOptions? options = null) -> Hl7.Cql.Operators.IDataSource!
+static Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Introspection.ModelInspector! model) -> Hl7.Cql.Conversion.TypeConverter!
+static Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Introspection.ModelInspector! model, System.TimeSpan? defaultTimezoneOffset) -> Hl7.Cql.Conversion.TypeConverter!
