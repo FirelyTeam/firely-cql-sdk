@@ -61,7 +61,7 @@ partial class LibrarySetCSharpCodeGenerator
                     LibrarySetWriter.TypeToCSharpConverter,
                     LibrarySetWriter.TupleMetadataBuilder,
                     LibraryName),
-                LibrarySetWriter.Settings);
+                LibrarySetWriter.CSharpGeneratingConfig);
 
             AppendUsings();
             AppendNamespaceFileScope();

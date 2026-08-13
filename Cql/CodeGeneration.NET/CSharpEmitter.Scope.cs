@@ -451,11 +451,11 @@ internal partial class CSharpEmitter
             // In tail position (resultName null) every case branch exits via return or
             // throw, so the chain MAY print guard-clause style: plain sequential ifs, no
             // else — falling past an if is provably "the test failed", one nesting level
-            // saved. Opt-in via CSharpCodeGeneratorSettings.PreferFlattenElseBlocks; the
+            // saved. Opt-in via CSharpGeneratingConfig.PreferFlattenElseBlocks; the
             // default keeps the if/else chain. The assign form always keeps if/else: its
             // branches assign and fall through, so the else is what guarantees exactly one
             // branch runs.
-            var guardStyle = resultName is null && _emitter._settings.PreferFlattenElseBlocks;
+            var guardStyle = resultName is null && _emitter._csharpGeneratingConfig.PreferFlattenElseBlocks;
 
             var first = true;
             for (int i = start; i < cases.Count; i++)

@@ -17,7 +17,8 @@
 
 ## Features
 
-- New `ElmToolkitConfig.CSharpPreferFlattenElseBlocks` (default `false`): when enabled, generated
-  conditionals whose branches all exit print guard-clause style — plain sequential `if` blocks with
-  the final value flat after them — instead of `if`/`else` chains. Formatting only; emitted
-  behavior is identical.
+- New `ElmToolkitConfig.CSharpGeneratingConfig` groups C#-generation formatting settings; its
+  `PreferFlattenElseBlocks` (default `false`) prints generated conditionals whose branches all exit
+  guard-clause style — plain sequential `if` blocks with the final value flat after them — instead
+  of `if`/`else` chains. Formatting only; emitted behavior is identical. Configurable from the CQL
+  packager's `appsettings.json` under `Elm:CSharpGeneratingConfig:PreferFlattenElseBlocks`.

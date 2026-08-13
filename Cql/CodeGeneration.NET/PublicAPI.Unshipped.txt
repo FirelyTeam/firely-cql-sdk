@@ -1,3 +1,17 @@
 #nullable enable
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.CSharpPreferFlattenElseBlocks.get -> bool
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.CSharpPreferFlattenElseBlocks.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.CSharpGeneratingConfig() -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.CSharpGeneratingConfig(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig! original) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.Equals(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig? other) -> bool
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.PreferFlattenElseBlocks.get -> bool
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.PreferFlattenElseBlocks.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.CSharpGeneratingConfig.get -> Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig!
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.CSharpGeneratingConfig.init -> void
+override Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.Equals(object? obj) -> bool
+override Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.GetHashCode() -> int
+override Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.ToString() -> string!
+static Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.Default.get -> Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig!
+static Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.operator !=(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig? left, Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig? right) -> bool
+static Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.operator ==(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig? left, Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig? right) -> bool
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.EqualityContract.get -> System.Type!
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.PrintMembers(System.Text.StringBuilder! builder) -> bool

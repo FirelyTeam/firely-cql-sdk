@@ -15,7 +15,7 @@ partial class LibrarySetCSharpCodeGenerator
         string? @namespace = null)
     {
         public TupleMetadataBuilder TupleMetadataBuilder { get; } = new();
-        public CSharpCodeGeneratorSettings Settings => librarySetCSharpCodeGenerator.Settings;
+        public Toolkit.CSharpGeneratingConfig CSharpGeneratingConfig => librarySetCSharpCodeGenerator.CSharpGeneratingConfig;
         public TypeToCSharpConverter TypeToCSharpConverter => librarySetCSharpCodeGenerator._typeToCSharpConverter;
         public IReadOnlyList<(string alias, string type)> AliasedUsings => librarySetCSharpCodeGenerator._aliasedUsings;
         public HashSet<string> Usings => librarySetCSharpCodeGenerator._usings;

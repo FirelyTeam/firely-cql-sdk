@@ -30,18 +30,18 @@ internal partial class LibrarySetCSharpCodeGenerator
     public LibrarySetCSharpCodeGenerator(
         TypeResolver typeResolver,
         TypeToCSharpConverter typeToCSharpConverter,
-        CSharpCodeGeneratorSettings? settings = null)
+        Toolkit.CSharpGeneratingConfig? csharpGeneratingConfig = null)
     {
         _typeToCSharpConverter = typeToCSharpConverter;
         _usings = BuildUsings(typeResolver);
         _aliasedUsings = typeResolver.Aliases.ToList();
-        Settings = settings ?? CSharpCodeGeneratorSettings.Default;
+        CSharpGeneratingConfig = csharpGeneratingConfig ?? Toolkit.CSharpGeneratingConfig.Default;
     }
 
     /// <summary>
     /// Gets the formatting settings this generator emits with.
     /// </summary>
-    internal CSharpCodeGeneratorSettings Settings { get; }
+    internal Toolkit.CSharpGeneratingConfig CSharpGeneratingConfig { get; }
 
     /// <summary>
     /// Gets the product of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear

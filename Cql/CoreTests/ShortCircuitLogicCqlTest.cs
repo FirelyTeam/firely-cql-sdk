@@ -232,7 +232,7 @@ public class ShortCircuitLogicCqlTest
     }
 
     /// <summary>
-    /// <see cref="ElmToolkitConfig.CSharpPreferFlattenElseBlocks"/> flattens tail-position
+    /// <see cref="CSharpGeneratingConfig.PreferFlattenElseBlocks"/> flattens tail-position
     /// chains (branches that return) to guard-clause style; assign-form chains — like the
     /// guard inside <c>GuardInConditionalTest</c>, which produces a value for an if-test —
     /// keep their <c>else</c> in both modes, since there the else is what guarantees exactly
@@ -244,7 +244,7 @@ public class ShortCircuitLogicCqlTest
     public void GeneratedCSharp_PreferFlattenElseBlocks_FlattensTailChains()
     {
         var withElse = GenerateFixtureCSharp(ElmToolkitConfig.Default);
-        var flattened = GenerateFixtureCSharp(ElmToolkitConfig.Default with { CSharpPreferFlattenElseBlocks = true });
+        var flattened = GenerateFixtureCSharp(ElmToolkitConfig.Default with { CSharpGeneratingConfig = new CSharpGeneratingConfig { PreferFlattenElseBlocks = true } });
 
         var withElseCount = CountElseKeywords(withElse);
         var flattenedCount = CountElseKeywords(flattened);
