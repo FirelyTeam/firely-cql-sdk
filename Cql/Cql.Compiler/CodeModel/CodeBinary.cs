@@ -28,6 +28,14 @@ internal enum CodeBinaryOp
 
     /// <summary><c>a &amp;&amp; b</c></summary>
     AndAlso,
+
+    /// <summary><c>a &amp; b</c> over <c>bool?</c> operands — C#'s lifted <c>&amp;</c> is
+    /// exactly CQL's three-valued <c>and</c> (false dominates, null propagates).</summary>
+    BoolAnd,
+
+    /// <summary><c>a | b</c> over <c>bool?</c> operands — C#'s lifted <c>|</c> is
+    /// exactly CQL's three-valued <c>or</c> (true dominates, null propagates).</summary>
+    BoolOr,
 }
 
 /// <summary>
@@ -42,6 +50,7 @@ internal sealed class CodeBinary : CodeExpression
             CodeBinaryOp.Coalesce => ValidateCoalesce(left, right),
             CodeBinaryOp.Equal or CodeBinaryOp.NotEqual => typeof(bool),
             CodeBinaryOp.OrElse or CodeBinaryOp.AndAlso => ValidateLogical(op, left, right),
+            CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr => ValidateLiftedLogical(op, left, right),
             _ => throw new ArgumentException($"Unknown binary operator {op}.")
         };
 
@@ -70,6 +79,16 @@ internal sealed class CodeBinary : CodeExpression
         if (left.Type != typeof(bool) || right.Type != typeof(bool))
             throw new ArgumentException($"Operands of {op} must be bool, got {left.Type} and {right.Type}.");
         return typeof(bool);
+    }
+
+    private static Type ValidateLiftedLogical(CodeBinaryOp op, CodeExpression left, CodeExpression right)
+    {
+        if (left.Type != typeof(bool) && left.Type != typeof(bool?)
+            || right.Type != typeof(bool) && right.Type != typeof(bool?))
+            throw new ArgumentException($"Operands of {op} must be bool or bool?, got {left.Type} and {right.Type}.");
+
+        // The lifted operator yields bool? as soon as either operand is nullable.
+        return left.Type == typeof(bool?) || right.Type == typeof(bool?) ? typeof(bool?) : typeof(bool);
     }
 
     public CodeBinaryOp Op { get; }

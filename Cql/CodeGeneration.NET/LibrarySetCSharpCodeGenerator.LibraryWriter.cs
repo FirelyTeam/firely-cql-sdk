@@ -60,7 +60,8 @@ partial class LibrarySetCSharpCodeGenerator
                 new CSharpNamingConventions(
                     LibrarySetWriter.TypeToCSharpConverter,
                     LibrarySetWriter.TupleMetadataBuilder,
-                    LibraryName));
+                    LibraryName),
+                LibrarySetWriter.Settings);
 
             AppendUsings();
             AppendNamespaceFileScope();

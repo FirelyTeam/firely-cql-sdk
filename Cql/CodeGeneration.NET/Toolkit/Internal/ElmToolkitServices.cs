@@ -43,6 +43,8 @@ internal readonly record struct ElmToolkitServices(
     {
         var codeBuilderSettings = config.ToCodeBuilderSettings();
         AddCqlCompilerServices(services, codeBuilderSettings);
+        services.TryAddSingleton(new CSharpCodeGeneratorSettings(
+            PreferFlattenElseBlocks: config.CSharpPreferFlattenElseBlocks));
         services.TryAddSingleton<TypeToCSharpConverter>();
         services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
         services.TryAddSingleton<AssemblyCompiler>();

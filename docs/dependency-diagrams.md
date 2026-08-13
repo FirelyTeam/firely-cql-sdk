@@ -95,8 +95,8 @@ CQL→ELM→C#→assembly pipeline.
 **Remarks:**
 * Unlike the toolkit-service diagrams above (DI dependency graphs), this shows structural composition — which node types exist and what kind of child expressions they hold
 * Grouped by conceptual category, not by project — every type here lives in `Hl7.Cql.Compiler.CodeModel`
-* All 19 concrete types inherit directly from the abstract `CodeExpression` base (not drawn as 19 identical edges — noted on the `CodeExpression` card instead)
-* Every "child expression" slot named in a card's description is typed as the abstract `CodeExpression` base, so any of the 19 concrete types may appear there — only the few relationships that require one *specific* concrete type are drawn as edges
+* All 21 concrete types inherit directly from the abstract `CodeExpression` base (not drawn as 21 identical edges — noted on the `CodeExpression` card instead)
+* Every "child expression" slot named in a card's description is typed as the abstract `CodeExpression` base, so any of the 21 concrete types may appear there — only the few relationships that require one *specific* concrete type are drawn as edges
 * Excludes `CodeExpressionExtensions` and `CodeTypeRules` (static helper/validation utilities, not IR node types)
 
 Mermaid source: [dependency-diagrams.codemodel-expressions.mmd](diagrams/dependency-diagrams.codemodel-expressions.mmd)

@@ -41,6 +41,16 @@ public record ElmToolkitConfig(
     public static ElmToolkitConfig Default { get; } = new();
 
     /// <summary>
+    /// When <see langword="true"/>, a generated conditional whose branches all exit (every
+    /// branch returns or throws — e.g. the short-circuit form of CQL's <c>and</c>/<c>or</c>
+    /// in tail position) prints guard-clause style: plain sequential <c>if</c> blocks with
+    /// the final value flat after them, instead of an <c>if</c>/<c>else</c> chain. Purely a
+    /// formatting choice — the emitted behavior is identical. The default is
+    /// <see langword="false"/>: <c>else</c> blocks are kept.
+    /// </summary>
+    public bool CSharpPreferFlattenElseBlocks { get; init; } = false;
+
+    /// <summary>
     /// Allows a child scope to redefine an existing parent scope. Default is <see langword="true" />.
     /// </summary>
     /// <remarks>

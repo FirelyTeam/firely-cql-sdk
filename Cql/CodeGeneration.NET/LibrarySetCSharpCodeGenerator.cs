@@ -29,12 +29,19 @@ internal partial class LibrarySetCSharpCodeGenerator
     /// </summary>
     public LibrarySetCSharpCodeGenerator(
         TypeResolver typeResolver,
-        TypeToCSharpConverter typeToCSharpConverter)
+        TypeToCSharpConverter typeToCSharpConverter,
+        CSharpCodeGeneratorSettings? settings = null)
     {
         _typeToCSharpConverter = typeToCSharpConverter;
         _usings = BuildUsings(typeResolver);
         _aliasedUsings = typeResolver.Aliases.ToList();
+        Settings = settings ?? CSharpCodeGeneratorSettings.Default;
     }
+
+    /// <summary>
+    /// Gets the formatting settings this generator emits with.
+    /// </summary>
+    internal CSharpCodeGeneratorSettings Settings { get; }
 
     /// <summary>
     /// Gets the product of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear

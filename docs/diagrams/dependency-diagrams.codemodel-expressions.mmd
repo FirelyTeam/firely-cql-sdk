@@ -9,7 +9,7 @@
 
 flowchart TB
 
-CodeExpression["<b>CodeExpression</b><br/><div style='text-align:left; max-width:300px; overflow-wrap:anywhere;'>Abstract base for every code-model IR node below (all 19 inherit from it directly). Carries the .NET Type the printed C# expression will have. Every child-expression slot named below is typed as this base, so any node type can nest inside any other.</div>"]
+CodeExpression["<b>CodeExpression</b><br/><div style='text-align:left; max-width:300px; overflow-wrap:anywhere;'>Abstract base for every code-model IR node below (all 21 inherit from it directly). Carries the .NET Type the printed C# expression will have. Every child-expression slot named below is typed as this base, so any node type can nest inside any other.</div>"]
 
 subgraph "Literals & Variables"
 direction TB
@@ -21,15 +21,17 @@ end
 
 subgraph "Operators & Type Tests"
 direction TB
-CodeBinary["<b>CodeBinary</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A binary operator application (??, ==, !=, ||, &amp;&amp;) over a Left and Right child expression -- CQL's arithmetic/logic instead goes through ICqlOperators calls.</div>"]
+CodeBinary["<b>CodeBinary</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A binary operator application (??, ==, !=, ||, &amp;&amp;, and the lifted &amp; and | over bool?, whose C# semantics are exactly CQL's three-valued and/or) over a Left and Right child expression -- CQL's arithmetic and remaining logic go through ICqlOperators calls.</div>"]
+CodeUnary["<b>CodeUnary</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A unary operator application over an Operand expression -- currently the lifted ! over bool?, whose C# semantics are exactly CQL's three-valued not.</div>"]
 CodeCast["<b>CodeCast</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A type conversion of an Operand expression: an explicit cast (T)x or a safe cast x as T.</div>"]
 CodeTypeIs["<b>CodeTypeIs</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A runtime type test of an Operand expression, printed as a C# is pattern.</div>"]
 end
 
 subgraph "Control Flow"
 direction TB
-CodeConditional["<b>CodeConditional</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A two-way conditional over a Test, IfTrue and IfFalse expression, printed as a ternary a ? b : c when simple.</div>"]
+CodeConditional["<b>CodeConditional</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A two-way conditional over a Test, IfTrue and IfFalse expression, printed as a ternary a ? b : c when simple. May carry an origin tag, printed as a comment tracing the construct back to its CQL source (e.g. the short-circuit guards lowered from and/or).</div>"]
 CodeIfChain["<b>CodeIfChain</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A multi-way conditional over a list of (When, Then) case expressions plus an Else expression, printed as an if / else if / else statement chain.</div>"]
+CodeLet["<b>CodeLet</b><br/><div style='text-align:left; max-width:280px; overflow-wrap:anywhere;'>A let-binding: evaluates a Value expression exactly once into a Local, then evaluates a Body that may reference the local any number of times. Statement-shaped; the emitter hoists the value ahead of the body. Introduced for the short-circuit lowering of and/or, whose guard and merge both read the left operand.</div>"]
 end
 
 subgraph Calls
@@ -65,11 +67,12 @@ end
 %% Only the relationships that name a SPECIFIC concrete type are drawn as edges -- every
 %% child-expression slot named in the descriptions above is generically typed CodeExpression
 %% (any node type may appear there), so drawing all of those would just be ~30 identical edges
-%% converging on one box. These three are the exceptions: a real constructor-level constraint
+%% converging on one box. These four are the exceptions: a real constructor-level constraint
 %% on which concrete type may appear.
 CodeLambda -.->|Parameters| CodeLocal
 CodeMemberInit -.->|New| CodeNew
 CodeDefinitionCall -.->|"Arguments[0]"| CodeContextParameter
+CodeLet -.->|Local| CodeLocal
 
 %% Invisible layout-only links: with almost no real edges between categories, ELK has nothing
 %% to infer a top-to-bottom order from and packs the subgraphs into a wide row instead. These
@@ -77,13 +80,14 @@ CodeDefinitionCall -.->|"Arguments[0]"| CodeContextParameter
 %% Order matters: a real edge's source category must come BEFORE its target category in this
 %% chain, or ELK treats it as a backward edge and produces a scrambled, non-monotonic layout
 %% (seen when this chain started at CodeExpression instead of ending there). Functions (source
-%% of the Parameters edge) and Calls (source of the Arguments[0] edge) both target Literals &
-%% Variables, so both are placed immediately before it here to keep those two edges short.
+%% of the Parameters edge), Calls (source of the Arguments[0] edge) and Control Flow (source
+%% of the Local edge) all target Literals & Variables, so all three are placed immediately
+%% before it here to keep those edges short.
 CodeExpression ~~~ CodeLambda
 CodeLambda ~~~ CodeInvoke
-CodeInvoke ~~~ CodeConstant
+CodeInvoke ~~~ CodeConditional
+CodeConditional ~~~ CodeConstant
 CodeConstant ~~~ CodeNew
 CodeNew ~~~ CodeProperty
 CodeProperty ~~~ CodeBinary
-CodeBinary ~~~ CodeConditional
-CodeConditional ~~~ CodeThrow
+CodeBinary ~~~ CodeThrow

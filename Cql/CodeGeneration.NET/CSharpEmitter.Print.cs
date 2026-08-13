@@ -79,6 +79,7 @@ internal partial class CSharpEmitter
             CodeCast cast => PrintCast(cast, child),
             CodeTypeIs typeIs => PrintTypeIs(typeIs, child),
             CodeBinary binary => PrintBinary(binary, child),
+            CodeUnary unary => PrintUnary(unary, child),
             CodeNew @new => PrintNew(@new, child),
             CodeMemberInit memberInit => PrintMemberInit(memberInit, child),
             CodeTupleInit tupleInit => PrintTupleInit(tupleInit, child),
@@ -198,6 +199,8 @@ internal partial class CSharpEmitter
             CodeLambda lambda => PrintInlineLambda(lambda),
             CodeIfChain => throw new NotSupportedException(
                 "An if-chain cannot print as an inline expression; this subtree should not have been classified inline-only."),
+            CodeLet => throw new NotSupportedException(
+                "A let-binding cannot print as an inline expression; this subtree should not have been classified inline-only."),
             _ => PrintShallow(node, child => new Atom(PrintFullyInline(child), child)),
         };
     }
@@ -208,6 +211,11 @@ internal partial class CSharpEmitter
     /// </summary>
     internal string PrintInlineConditional(CodeConditional conditional, Func<CodeExpression, string> print)
     {
+        // The inline form prints only the origin tag (block-commented, since it sits inside
+        // an expression); the "right operand skipped..." detail is reserved for the
+        // statement form, where the control flow it explains is spelled out.
+        var originPrefix = conditional.OriginTag is null ? "" : $"/* {conditional.OriginTag} */ ";
+
         var isb = new IndentedStringBuilder();
         isb.Append("(");
         isb.AppendLine(print(conditional.Test));
@@ -232,9 +240,9 @@ internal partial class CSharpEmitter
         // writer's HEDIS 2025 output — 13 and 5 of 382 libraries respectively — because the
         // truth is carried by the node types, not by the shape of the printed literals.
         if (conditional.IfTrue.Type != conditional.Type || conditional.IfFalse.Type != conditional.Type)
-            return $"({_typeToCSharpConverter.ToCSharp(conditional.Type)}){isb}";
+            return $"{originPrefix}({_typeToCSharpConverter.ToCSharp(conditional.Type)}){isb}";
 
-        return isb;
+        return $"{originPrefix}{isb}";
     }
 
     private string PrintInlineLambda(CodeLambda lambda)
@@ -427,14 +435,32 @@ internal partial class CSharpEmitter
             // pattern (CS8505) — the old writer's rule.
             CodeBinaryOp.Equal when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is null",
             CodeBinaryOp.NotEqual when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is not null",
+            // The short-circuit guards (the only builder of Equal against a bool constant)
+            // print as constant patterns: same lowering as the lifted == (a HasValue +
+            // GetValueOrDefault check, null => false), but the pattern form states the
+            // three-valued intent — "has a value and it is false" — directly.
+            CodeBinaryOp.Equal when right is "false" or "true" && binary.Left.Type == typeof(bool?) => $"{left} is {right}",
             CodeBinaryOp.Equal => $"{left} == {right}",
             CodeBinaryOp.NotEqual => $"{left} != {right}",
             CodeBinaryOp.Coalesce => $"{left} ?? {right}",
             CodeBinaryOp.OrElse => $"{left} || {right}",
             CodeBinaryOp.AndAlso => $"{left} && {right}",
+            // Unlike the ops above, BOTH operands parenthesize: these ops are new (no old
+            // writer output to stay byte-identical with), and C#'s & and | bind looser than
+            // == but tighter than ?? — an unparenthesized right operand that printed as a
+            // coalesce ("a & x ?? y") would silently re-associate to "(a & x) ?? y".
+            CodeBinaryOp.BoolAnd => $"{left} & {right.ParenthesizeIfNeeded()}",
+            CodeBinaryOp.BoolOr => $"{left} | {right.ParenthesizeIfNeeded()}",
             _ => throw new NotSupportedException($"Don't know how to print binary operator {binary.Op}."),
         };
     }
+
+    private string PrintUnary(CodeUnary unary, Func<CodeExpression, Atom> child) =>
+        unary.Op switch
+        {
+            CodeUnaryOp.Not => $"!{child(unary.Operand).Code.ParenthesizeIfNeeded()}",
+            _ => throw new NotSupportedException($"Don't know how to print unary operator {unary.Op}."),
+        };
 
     private static CodeExpression SimplifyCoalesceLeft(CodeExpression expression)
     {

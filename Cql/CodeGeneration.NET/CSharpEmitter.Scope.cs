@@ -145,6 +145,9 @@ internal partial class CSharpEmitter
                 case CodeIfChain chain:
                     return LinearizeIfChain(chain, tailPosition);
 
+                case CodeLet let:
+                    return LinearizeLet(let, tailPosition);
+
                 // Pass-through composites: printed inline over their (spine-linearized)
                 // children instead of being hoisted into a local. This mirrors the old
                 // SimplifyExpressionsVisitor's dispatch exactly — Constant/Parameter/New/
@@ -155,7 +158,8 @@ internal partial class CSharpEmitter
                     or CodeCast
                     or CodeNew
                     or CodeThrow
-                    or CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce }:
+                    or CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr }
+                    or CodeUnary:
                 {
                     var (printed, keyPrinted) = PrintBoth(node);
                     return new Atom(printed, keyPrinted, node);
@@ -277,8 +281,17 @@ internal partial class CSharpEmitter
                 // folded link collapses into its surviving branch instead of becoming a case.
                 current = FoldConstantTest(c.IfFalse);
             }
-            return LinearizeConditionalStatements(conditional.Type, cases, current, tailPosition);
+            return LinearizeConditionalStatements(conditional.Type, cases, current, tailPosition, OriginComment(conditional));
         }
+
+        /// <summary>The <c>// tag: detail</c> comment for a lowered conditional's statement
+        /// form, or null when the conditional carries no origin (if/case constructs).</summary>
+        private static string? OriginComment(CodeConditional conditional) =>
+            conditional.OriginTag is null
+                ? null
+                : conditional.OriginDetail is null
+                    ? $"// {conditional.OriginTag}"
+                    : $"// {conditional.OriginTag}: {conditional.OriginDetail}";
 
         /// <summary>
         /// True when linearizing <paramref name="node"/> would hoist no statements — the IR
@@ -297,8 +310,9 @@ internal partial class CSharpEmitter
                 CodeCast c => IsInlineOnly(c.Operand),
                 CodeNew n => n.Arguments.All(IsInlineOnly),
                 CodeThrow t => IsInlineOnly(t.Exception),
-                CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce } b =>
+                CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr } b =>
                     IsInlineOnly(b.Left) && IsInlineOnly(b.Right),
+                CodeUnary u => IsInlineOnly(u.Operand),
                 CodeConditional nested =>
                     nested.IfFalse is not CodeConditional
                     && IsInlineOnly(nested.IfTrue)
@@ -308,6 +322,30 @@ internal partial class CSharpEmitter
 
         private Atom? LinearizeIfChain(CodeIfChain chain, bool tailPosition) =>
             LinearizeConditionalStatements(chain.Type, chain.Cases, chain.Else, tailPosition);
+
+        /// <summary>
+        /// Binds the let's value to its local exactly once, then linearizes the body. The
+        /// binding must survive any number of references from the body — including from
+        /// positions that print fully inline, which would otherwise re-print (re-evaluate)
+        /// the value expression — so any value whose linearized atom is not already a plain
+        /// variable or constant reference is forced into a hoisted local, even shapes
+        /// (a coalesce, a property access, a simple ternary) that Linearize normally
+        /// passes through inline.
+        /// </summary>
+        private Atom? LinearizeLet(CodeLet let, bool tailPosition)
+        {
+            var valueAtom = Linearize(let.Value)!;
+            if (valueAtom.Node is not (CodeLocal or CodeConstant or CodeContextParameter))
+                valueAtom = Hoist(valueAtom.Code, valueAtom.KeyCode, let.Value);
+
+            // Locals resolve by reference identity through the emitter-wide name map, so
+            // nested branch scopes see the binding. Rendering is sequential even for deferred
+            // interiors, so re-linearizing the same let (e.g. duplicated into two branches)
+            // rebinding this entry is safe: each render resolves the body right after its
+            // own assignment.
+            _emitter._assignedNames[let.Local] = valueAtom.Code;
+            return Linearize(let.Body, tailPosition);
+        }
 
         /// <summary>
         /// Emits a multi-branch conditional as native if/else statements. In tail position
@@ -328,10 +366,13 @@ internal partial class CSharpEmitter
             Type resultType,
             IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
             CodeExpression @else,
-            bool tailPosition)
+            bool tailPosition,
+            string? originComment = null)
         {
             if (tailPosition)
             {
+                if (originComment is not null)
+                    _statements.Add(() => originComment);
                 _statements.Add(() => RenderChain(resultName: null, cases, @else));
                 return null;
             }
@@ -343,6 +384,8 @@ internal partial class CSharpEmitter
             // Declared without an initializer; the compiler's definite-assignment analysis
             // verifies every branch of the chain below assigns it (or throws).
             _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharp(resultType)} {resultName};");
+            if (originComment is not null)
+                _statements.Add(() => originComment);
             _statements.Add(() => RenderChain(resultName, cases, @else));
             return new Atom(resultName, resultLocal);
         }
@@ -366,6 +409,15 @@ internal partial class CSharpEmitter
             int start,
             CodeExpression @else)
         {
+            // In tail position (resultName null) every case branch exits via return or
+            // throw, so the chain MAY print guard-clause style: plain sequential ifs, no
+            // else — falling past an if is provably "the test failed", one nesting level
+            // saved. Opt-in via CSharpCodeGeneratorSettings.PreferFlattenElseBlocks; the
+            // default keeps the if/else chain. The assign form always keeps if/else: its
+            // branches assign and fall through, so the else is what guarantees exactly one
+            // branch runs.
+            var guardStyle = resultName is null && _emitter._settings.PreferFlattenElseBlocks;
+
             var first = true;
             for (int i = start; i < cases.Count; i++)
             {
@@ -376,10 +428,12 @@ internal partial class CSharpEmitter
                 {
                     test = _emitter.PrintFullyInline(when);
                 }
-                else if (first)
+                else if (first || guardStyle)
                 {
                     // The first condition at a nesting level can put its statements right
-                    // here — nothing needs to run before them at this level.
+                    // here — nothing needs to run before them at this level. In guard style
+                    // that holds for every condition: control only falls past the previous
+                    // if when its test failed, so as-late-as-possible evaluation is intact.
                     var testScope = CreateNested([]);
                     var atom = testScope.Linearize(when)!;
                     testScope.WriteStatements(isb);
@@ -397,9 +451,20 @@ internal partial class CSharpEmitter
                     return;
                 }
 
-                isb.AppendLine(first ? $"if ({test})" : $"else if ({test})");
+                isb.AppendLine(first || guardStyle ? $"if ({test})" : $"else if ({test})");
                 EmitBranchBlock(isb, resultName, then);
                 first = false;
+            }
+
+            if (guardStyle)
+            {
+                // Flat final value: hoisted statements and the return print at this level.
+                var elseScope = CreateNested([]);
+                var atom = elseScope.Linearize(@else, tailPosition: true);
+                elseScope.WriteStatements(isb);
+                if (atom is not null)
+                    isb.AppendLine(TailStatement(atom));
+                return;
             }
 
             isb.AppendLine("else");
@@ -432,8 +497,9 @@ internal partial class CSharpEmitter
                 CodeCast c => CountSpineNodes(c.Operand),
                 CodeNew n => n.Arguments.Sum(CountSpineNodes),
                 CodeThrow t => CountSpineNodes(t.Exception),
-                CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce } b =>
+                CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr } b =>
                     CountSpineNodes(b.Left) + CountSpineNodes(b.Right),
+                CodeUnary u => CountSpineNodes(u.Operand),
                 CodeConditional c when
                     c.IfFalse is not CodeConditional && IsInlineOnly(c.IfTrue) && IsInlineOnly(c.IfFalse) => 0,
                 // A NON-simple conditional still counts exactly ONE hoist as a when-condition:

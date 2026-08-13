@@ -15,7 +15,13 @@ namespace Hl7.Cql.Compiler.CodeModel;
 /// </summary>
 internal sealed class CodeConditional : CodeExpression
 {
-    public CodeConditional(CodeExpression test, CodeExpression ifTrue, CodeExpression ifFalse, Type type)
+    public CodeConditional(
+        CodeExpression test,
+        CodeExpression ifTrue,
+        CodeExpression ifFalse,
+        Type type,
+        string? originTag = null,
+        string? originDetail = null)
     {
         // bool, not bool?: the builder coerces CQL's three-valued logic to bool before
         // testing, exactly as it had to for Expression.Condition.
@@ -28,6 +34,8 @@ internal sealed class CodeConditional : CodeExpression
         IfTrue = ifTrue;
         IfFalse = ifFalse;
         Type = type;
+        OriginTag = originTag;
+        OriginDetail = originDetail;
     }
 
     public CodeExpression Test { get; }
@@ -37,6 +45,22 @@ internal sealed class CodeConditional : CodeExpression
     public CodeExpression IfFalse { get; }
 
     public override Type Type { get; }
+
+    /// <summary>
+    /// Short tag naming the CQL construct this conditional was lowered from, including its
+    /// source locator when the ELM carries one — e.g. <c>"and (CQL 33:5-33:57)"</c>. Printed
+    /// as a comment so a reader can trace the generated control flow back to the CQL. Null
+    /// for conditionals that ARE the source construct (<c>if</c>/<c>case</c>), which need no
+    /// tracing help.
+    /// </summary>
+    public string? OriginTag { get; }
+
+    /// <summary>
+    /// One-line explanation appended to <see cref="OriginTag"/> in the statement form
+    /// (<c>// and (CQL 33:5-33:57): right operand skipped when left is false</c>). The inline
+    /// ternary form prints only the tag, block-commented.
+    /// </summary>
+    public string? OriginDetail { get; }
 }
 
 /// <summary>

@@ -361,6 +361,150 @@ partial class CodeBuilderContext
 
     #endregion
 
+    #region LogicalOperators
+
+    // CQL's and/or/not use Kleene three-valued logic (spec §3.4.4 Nullological Operators and
+    // the truth tables in §9.B), which is exactly the semantics C# gives the lifted &, | and
+    // ! operators on bool? — so these lower to native operators instead of ICqlOperators
+    // calls. and/or additionally short-circuit: the right operand's evaluation stays inside
+    // a conditional branch entered only when the left operand hasn't already decided the
+    // result (left == false for and, left == true for or). A null left decides NOTHING —
+    // null and false is false — so null must not short-circuit; an implementation shortcut
+    // like `left != true` would be a correctness bug (#1514).
+    //
+    // Xor and Implies deliberately stay on the name-based ICqlOperators path: neither can
+    // skip its right operand (both operands always matter), so there is nothing to gain.
+
+    protected CodeExpression And(And and) =>
+        ShortCircuitBinary(and, CodeBinaryOp.BoolAnd, decidingValue: false);
+
+    protected CodeExpression Or(Or or) =>
+        ShortCircuitBinary(or, CodeBinaryOp.BoolOr, decidingValue: true);
+
+    protected CodeExpression Not(Not not)
+    {
+        var operand = TranslateBoolArg(not.operand
+            ?? throw this.NewExpressionBuildingException("Not has no operand."));
+
+        // not <constant> folds — and MUST fold, see HonestBoolOperand: `!true` would print
+        // as a non-nullable bool while the IR type says bool?.
+        if (TryGetBoolConstant(operand, out var constant))
+            return NullableBoolConstant(constant is null ? null : !constant);
+
+        return new CodeUnary(CodeUnaryOp.Not, operand);
+    }
+
+    private CodeExpression ShortCircuitBinary(Elm.BinaryExpression binary, CodeBinaryOp op, bool decidingValue)
+    {
+        if (binary.operand is not [{ } leftElement, { } rightElement])
+            throw this.NewExpressionBuildingException($"{binary.GetType().Name} expects exactly two operands.");
+
+        var left = TranslateBoolArg(leftElement);
+        var right = TranslateBoolArg(rightElement);
+
+        // Constant operands fold over the Kleene table where a single operand already fixes
+        // the outcome (the deciding constant absorbs; its dual passes the other operand
+        // through unchanged). Real CQL rarely writes `true and X`, but the CqlToElmTests XML
+        // harness wraps every case in constant-operand and/or shapes, and folding also keeps
+        // this lowering out of PrintConstant's blind spot (see HonestBoolOperand below).
+        if (TryGetBoolConstant(left, out var leftConstant))
+        {
+            if (leftConstant == decidingValue)
+                return NullableBoolConstant(decidingValue); // false and X => false (skipping X is what this whole lowering is for)
+            if (leftConstant == !decidingValue)
+                return right;                               // true and X => X
+            // A null left decides nothing (null and false = false): merge without a guard —
+            // a guard could never skip anyway, since null must not short-circuit.
+            return new CodeBinary(op, HonestBoolOperand(left), HonestBoolOperand(right));
+        }
+
+        if (TryGetBoolConstant(right, out var rightConstant) && rightConstant == !decidingValue)
+            return left;                                    // X and true => X (left still evaluated)
+
+        // A right operand that is already an evaluated value costs nothing to re-read, so
+        // the combine emits without a guard: x_ & y_.
+        if (IsEvaluatedValue(right))
+            return new CodeBinary(op, left, HonestBoolOperand(right));
+
+        // let a = left; a == deciding ? deciding : a <op> right
+        // The left operand binds to a local once (both the guard and the combine read it),
+        // and the conditional keeps the right operand inside the non-deciding branch. The
+        // emitter prints this as a lazy ternary or an if/else block — either form
+        // short-circuits without allocating (contrast the Lazy<bool?> overloads, which cost
+        // a Lazy plus a closure per operand).
+        var operatorName = op == CodeBinaryOp.BoolAnd ? "and" : "or";
+        var originTag = binary.locator is { Length: > 0 } locator
+            ? $"CQL '{operatorName}' ({locator})"
+            : $"CQL '{operatorName}'";
+
+        var local = new CodeLocal(typeof(bool?));
+        var guard = new CodeBinary(CodeBinaryOp.Equal, local, new CodeConstant(decidingValue, typeof(bool?)));
+        var conditional = new CodeConditional(
+            guard,
+            new CodeConstant(decidingValue, typeof(bool?)),
+            new CodeBinary(op, local, right),
+            typeof(bool?),
+            originTag,
+            originDetail: $"right operand skipped when left is {(decidingValue ? "true" : "false")}");
+        return new CodeLet(local, left, conditional);
+    }
+
+    private CodeExpression TranslateBoolArg(object element)
+    {
+        var expression = TranslateArg(element);
+        return expression.Type == typeof(bool?)
+            ? expression
+            : expression.NewAssignToTypeExpression(typeof(bool?));
+    }
+
+    private static bool IsEvaluatedValue(CodeExpression node) =>
+        node switch
+        {
+            CodeConstant or CodeLocal or CodeContextParameter => true,
+            CodeCast cast => IsEvaluatedValue(cast.Operand),
+            _ => false,
+        };
+
+    /// <summary>The operand's boolean value when it is a (possibly cast-wrapped) bool/bool?
+    /// constant; <paramref name="value"/> is null for a null-valued constant.</summary>
+    private static bool TryGetBoolConstant(CodeExpression node, out bool? value)
+    {
+        switch (node)
+        {
+            case CodeConstant { Value: bool b }:
+                value = b;
+                return true;
+            case CodeConstant { Value: null } constant
+                when constant.Type == typeof(bool?) || constant.Type == typeof(bool) || constant.Type == typeof(object):
+                value = null;
+                return true;
+            case CodeCast cast:
+                return TryGetBoolConstant(cast.Operand, out value);
+            default:
+                value = null;
+                return false;
+        }
+    }
+
+    private static CodeExpression NullableBoolConstant(bool? value) =>
+        new CodeConstant(value, typeof(bool?));
+
+    /// <summary>
+    /// Makes a merge operand print with the type the IR says it has. A bool? CONSTANT prints
+    /// as a bare bool literal (<c>true</c>, or <c>default</c> for null), so a merge over two
+    /// such operands would print as non-nullable bool — and downstream prints that trust the
+    /// IR type (an <c>is null</c> pattern needs a nullable operand; a bare <c>default</c> has
+    /// no type at all in an operator position) produce illegal C#. An explicit cast keeps the
+    /// printed type honest. Non-constant operands already print as bool? — either genuinely
+    /// so, or via the cast <see cref="TranslateBoolArg"/> wrapped them in.
+    /// </summary>
+    private static CodeExpression HonestBoolOperand(CodeExpression node) =>
+        TryGetBoolConstant(node, out _) && node is not CodeCast
+            ? new CodeCast(node, typeof(bool?), CodeCastKind.Cast)
+            : node;
+
+    #endregion
+
     #region Type Operators
 
     protected CodeExpression As(As @as) //@ TODO: Cast - As
