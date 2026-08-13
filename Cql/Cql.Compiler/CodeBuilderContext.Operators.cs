@@ -478,6 +478,13 @@ partial class CodeBuilderContext
                 when constant.Type == typeof(bool?) || constant.Type == typeof(bool) || constant.Type == typeof(object):
                 value = null;
                 return true;
+            case CodeDefault @default
+                when @default.Type == typeof(bool?) || @default.Type == typeof(bool) || @default.Type == typeof(object):
+                // default(bool?) is a null constant in all but name; without this case a
+                // CodeDefault operand escapes the mandatory fold and prints as a bare
+                // 'null'/'default' literal in an operator position (CS8310).
+                value = null;
+                return true;
             case CodeCast cast:
                 return TryGetBoolConstant(cast.Operand, out value);
             default:
@@ -498,10 +505,20 @@ partial class CodeBuilderContext
     /// printed type honest. Non-constant operands already print as bool? — either genuinely
     /// so, or via the cast <see cref="TranslateBoolArg"/> wrapped them in.
     /// </summary>
-    private static CodeExpression HonestBoolOperand(CodeExpression node) =>
-        TryGetBoolConstant(node, out _) && node is not CodeCast
-            ? new CodeCast(node, typeof(bool?), CodeCastKind.Cast)
-            : node;
+    private static CodeExpression HonestBoolOperand(CodeExpression node)
+    {
+        if (!TryGetBoolConstant(node, out var value))
+            return node;
+
+        // A null-valued constant cannot keep a (bool?) cast: PrintCast collapses any cast
+        // over a null CodeConstant back to the bare literal ('default'), which is illegal in
+        // an operator position (CS8310). `null as bool?` over a CodeDefault survives printing
+        // with its type intact. true/false constants keep the explicit cast.
+        if (value is null)
+            return new CodeCast(new CodeDefault(typeof(bool?)), typeof(bool?), CodeCastKind.As);
+
+        return node is CodeCast ? node : new CodeCast(node, typeof(bool?), CodeCastKind.Cast);
+    }
 
     #endregion
 

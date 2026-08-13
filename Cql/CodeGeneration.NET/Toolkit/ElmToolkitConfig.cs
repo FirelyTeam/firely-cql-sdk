@@ -43,11 +43,16 @@ public record ElmToolkitConfig(
     public static ElmToolkitConfig Default { get; } = new();
 
     /// <summary>
-    /// Settings controlling how the C# code generator formats the code it emits — purely
-    /// formatting choices; the emitted behavior is identical. Grouped in their own type so
-    /// future C#-generation options compose here rather than accumulating on this record.
+    /// Settings controlling how the C# code generator formats and names the code it emits.
+    /// The CQL semantics of the output are identical across any values, though
+    /// <see cref="Toolkit.CSharpGeneratingConfig.CSharpNamespace"/> changes the generated
+    /// types' identities. Grouped in their own type so future C#-generation options compose
+    /// here rather than accumulating on this record.
     /// </summary>
-    public CSharpGeneratingConfig CSharpGeneratingConfig { get; init; } = CSharpGeneratingConfig.Default;
+    public CSharpGeneratingConfig CSharpGeneratingConfig { get; init; } = new();
+    // ^ deliberately NOT CSharpGeneratingConfig.Default: the configuration binder binds
+    //   nested complex properties IN PLACE through their init setters, so initializing with
+    //   the shared static would let one options bind mutate the process-wide Default.
 
     /// <summary>
     /// Allows a child scope to redefine an existing parent scope. Default is <see langword="true" />.

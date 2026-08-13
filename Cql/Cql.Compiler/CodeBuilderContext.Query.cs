@@ -442,7 +442,10 @@ partial class CodeBuilderContext
             var callWhereOnSource = BindCqlOperator(nameof(ICqlOperators.Where), source, whereLambda);
             var exists = BindCqlOperator(nameof(ICqlOperators.Exists), callWhereOnSource);
             if (with is Without)
-                exists = BindCqlOperator(nameof(ICqlOperators.Not), exists);
+                // Lowered like ELM 'not' (see Not in CodeBuilderContext.Operators.cs) so the
+                // operator ledger's 'generated code no longer calls ICqlOperators.Not' holds
+                // for without clauses too.
+                exists = new CodeUnary(CodeUnaryOp.Not, exists);
             return new CodeLambda([rootScopeParameter], exists);
         }
     }

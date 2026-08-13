@@ -378,10 +378,14 @@ internal partial class CSharpEmitter
                 valueAtom = Hoist(valueAtom.Code, valueAtom.KeyCode, let.Value);
 
             // Locals resolve by reference identity through the emitter-wide name map, so
-            // nested branch scopes see the binding. Rendering is sequential even for deferred
-            // interiors, so re-linearizing the same let (e.g. duplicated into two branches)
-            // rebinding this entry is safe: each render resolves the body right after its
-            // own assignment.
+            // nested branch scopes see the binding. CAUTION: the binding is a single mutable
+            // slot. Re-linearizing the SAME CodeLet instance is safe only when every read of
+            // the binding happens after the rebind that produced it — true for eager bodies
+            // and for sequential renders that re-run LinearizeLet themselves, but NOT for a
+            // deferred chain render whose body was bound earlier and whose read happens after
+            // a different scope rebound the local (a builder currently never shares CodeLet
+            // instances; query-let splicing could — see the follow-up issue from #1565's
+            // review before introducing sharing).
             _emitter._assignedNames[let.Local] = valueAtom.Code;
             return Linearize(let.Body, tailPosition);
         }

@@ -205,7 +205,11 @@ public class ShortCircuitLogicCqlTest
             Library.GuardedAnd(context, false);
         var allocated = GC.GetAllocatedBytesForCurrentThread() - before;
 
-        Assert.AreEqual(0, allocated, "the skip path of a short-circuited 'and' must not allocate.");
+        // Sub-1-byte-per-iteration bound rather than exactly 0: the invariant is that the
+        // SKIP PATH allocates nothing per call; an exact-0 assert would also fail on any
+        // single runtime-internal allocation landing on this thread (tiering, instrumented
+        // collectors), which is not a regression in the generated code.
+        Assert.IsTrue(allocated < 1_000, $"the skip path of a short-circuited 'and' must not allocate (measured {allocated} bytes over 1000 calls).");
     }
 
     /// <summary>
@@ -251,15 +255,15 @@ public class ShortCircuitLogicCqlTest
 
         Assert.IsTrue(withElseCount > 0, "The default must keep else blocks.");
         Assert.IsTrue(flattenedCount < withElseCount,
-            $"With CSharpPreferNoElseBlocks, tail-position chains must print guard-clause style (default: {withElseCount} else, flattened: {flattenedCount}).");
+            $"With CSharpGeneratingConfig.PreferNoElseBlocks, tail-position chains must print guard-clause style (default: {withElseCount} else, flattened: {flattenedCount}).");
 
         // The tail-position truth-table defines flatten completely; what remains is exactly
         // the assign-form guard(s), which must keep the else in both modes.
         var tailDefine = ExtractComputeMethod(flattened, "TrueAndTrue_Compute");
-        Assert.IsFalse(tailDefine.Contains("else"), "A tail-position guard must flatten to guard-clause style.");
+        Assert.AreEqual(0, CountElseKeywords(tailDefine), "A tail-position guard must flatten to guard-clause style.");
 
         var assignDefine = ExtractComputeMethod(flattened, "GuardInConditionalTest_Compute");
-        StringAssert.Contains(assignDefine, "else", "An assign-form guard must keep its else even when flattening.");
+        Assert.IsTrue(CountElseKeywords(assignDefine) > 0, "An assign-form guard must keep its else even when flattening.");
     }
 
     private static int CountElseKeywords(string code) =>
@@ -267,7 +271,10 @@ public class ShortCircuitLogicCqlTest
 
     private static string ExtractComputeMethod(string code, string methodName)
     {
-        var start = code.IndexOf(methodName, StringComparison.Ordinal);
+        // Anchor on the DEFINITION ("name(") — the GetOrCompute wrapper references the method
+        // as a bare method group ("name)"), which a plain IndexOf(name) would find first and
+        // widen the slice over the wrapper and cache field.
+        var start = code.IndexOf(methodName + "(", StringComparison.Ordinal);
         Assert.IsTrue(start >= 0, $"Method {methodName} not found in generated code.");
         var end = code.IndexOf("[CqlExpressionDefinition", start, StringComparison.Ordinal);
         return end < 0 ? code[start..] : code[start..end];

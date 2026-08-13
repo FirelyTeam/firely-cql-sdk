@@ -13,8 +13,10 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// <summary>
 /// Settings controlling how the C# code generator formats the code it emits, exposed as
 /// <see cref="ElmToolkitConfig.CSharpGeneratingConfig"/> and bindable from the CQL packager's
-/// <c>appsettings.json</c> under <c>Elm:CSharpGeneratingConfig</c>. Behavior-neutral by
-/// contract: two runs differing only in these settings produce code with identical semantics.
+/// <c>appsettings.json</c> under <c>Elm:CSharpGeneratingConfig</c>. These settings never
+/// change what the generated code COMPUTES — CQL semantics are identical across any values —
+/// but <see cref="CSharpNamespace"/> does change the generated types' identities (their
+/// namespace), so two runs differing in it are not binary-interchangeable.
 /// </summary>
 public record CSharpGeneratingConfig
 {

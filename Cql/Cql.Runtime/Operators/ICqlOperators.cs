@@ -69,10 +69,10 @@ namespace Hl7.Cql.Operators
         TAccumulate?                             Aggregate<TSource, TAccumulate>(IEnumerable<TSource?>? source,Func<TAccumulate?, TSource?, TAccumulate?> lambda,TAccumulate? seed);
         bool?                                    AllTrue(IEnumerable<bool?> argument);
         bool?                                    AllTrue(IEnumerable<Lazy<bool?>> argument);
-        /// <remarks>As of code generator 5.2.2.0, generated C# no longer calls this method:
+        /// <remarks>As of code generator 5.3.0.0, generated C# no longer calls this method:
         /// CQL <c>and</c> lowers to the lifted <c>&amp;</c> operator behind a short-circuit
         /// guard (#1514). It remains on this interface for libraries generated before
-        /// 5.2.2.0 and as the reference implementation the lowering is tested against — see
+        /// 5.3.0.0 and as the reference implementation the lowering is tested against — see
         /// <c>docs/generated-code-operator-ledger.md</c> for the retirement policy.</remarks>
         bool?                                    And(bool? left, bool? right);
         /// <remarks>No code generator version has ever emitted calls to the
@@ -80,9 +80,9 @@ namespace Hl7.Cql.Operators
         /// redundant before they were ever bound. See
         /// <c>docs/generated-code-operator-ledger.md</c>.</remarks>
         bool?                                    And(bool? left, Lazy<bool?> right);
-        /// <remarks><inheritdoc cref="And(bool?, Lazy{bool?})" path="/remarks"/></remarks>
+        /// <inheritdoc cref="And(bool?, Lazy{bool?})" path="/remarks"/>
         bool?                                    And(Lazy<bool?> left, bool? right);
-        /// <remarks><inheritdoc cref="And(bool?, Lazy{bool?})" path="/remarks"/></remarks>
+        /// <inheritdoc cref="And(bool?, Lazy{bool?})" path="/remarks"/>
         bool?                                    And(Lazy<bool?> left, Lazy<bool?> right);
         bool?                                    AnyTrue(IEnumerable<bool?> argument);
         bool?                                    AnyTrue(IEnumerable<Lazy<bool?>> argument);
@@ -449,9 +449,9 @@ namespace Hl7.Cql.Operators
         decimal?                                 Negate(decimal? argument);
         int?                                     Negate(int? argument);
         long?                                    Negate(long? argument);
-        /// <remarks>As of code generator 5.2.2.0, generated C# no longer calls this method:
+        /// <remarks>As of code generator 5.3.0.0, generated C# no longer calls this method:
         /// CQL <c>not</c> lowers to the lifted <c>!</c> operator (#1514). It remains on this
-        /// interface for libraries generated before 5.2.2.0 and as the reference
+        /// interface for libraries generated before 5.3.0.0 and as the reference
         /// implementation the lowering is tested against — see
         /// <c>docs/generated-code-operator-ledger.md</c> for the retirement policy.</remarks>
         bool?                                    Not(bool? @this);
@@ -459,13 +459,13 @@ namespace Hl7.Cql.Operators
         bool?                                    NotEquivalent(object? left, object? right);
         object                                   NotSupported();
         CqlDateTime                              Now();
-        /// <remarks>As of code generator 5.2.2.0, generated C# no longer calls this method:
+        /// <remarks>As of code generator 5.3.0.0, generated C# no longer calls this method:
         /// CQL <c>or</c> lowers to the lifted <c>|</c> operator behind a short-circuit guard
-        /// (#1514). It remains on this interface for libraries generated before 5.2.2.0 and
+        /// (#1514). It remains on this interface for libraries generated before 5.3.0.0 and
         /// as the reference implementation the lowering is tested against — see
         /// <c>docs/generated-code-operator-ledger.md</c> for the retirement policy.</remarks>
         bool?                                    Or(bool? left, bool? right);
-        /// <remarks><inheritdoc cref="And(bool?, Lazy{bool?})" path="/remarks"/></remarks>
+        /// <inheritdoc cref="And(bool?, Lazy{bool?})" path="/remarks"/>
         bool?                                    Or(Lazy<bool?> left, Lazy<bool?> right);
         bool?                                    Overlaps(CqlInterval<CqlDate?> left,CqlInterval<CqlDate?> right,string? precision);
         bool?                                    Overlaps(CqlInterval<CqlDateTime?> left,CqlInterval<CqlDateTime?> right,string? precision);

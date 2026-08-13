@@ -427,19 +427,22 @@ internal partial class CSharpEmitter
             // nullable operand. IsNull(<non-null-constant>) is always false and
             // IsNull(<null constant>) is always true, so these fold directly to the boolean
             // literal instead of emitting the (potentially illegal) pattern text. This is only
-            // reachable from IsNull (the sole builder of CodeBinaryOp.Equal), so binary.Left is
-            // never a boxing-cast-wrapped constant here.
+            // reachable from IsNull (the sole builder of Equal-against-null; the short-circuit
+            // guards below compare against bool constants), so binary.Left is never a
+            // boxing-cast-wrapped constant here.
             CodeBinaryOp.Equal when right is "null" or "default" && binary.Left is CodeConstant { Value: ValueType } => "false",
             CodeBinaryOp.Equal when right is "null" or "default" && binary.Left is CodeConstant { Value: null } => "true",
             // "default" rewrites to "null" in patterns: a default literal is not a legal
             // pattern (CS8505) — the old writer's rule.
             CodeBinaryOp.Equal when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is null",
             CodeBinaryOp.NotEqual when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is not null",
-            // The short-circuit guards (the only builder of Equal against a bool constant)
-            // print as constant patterns: same lowering as the lifted == (a HasValue +
-            // GetValueOrDefault check, null => false), but the pattern form states the
-            // three-valued intent — "has a value and it is false" — directly.
-            CodeBinaryOp.Equal when right is "false" or "true" && binary.Left.Type == typeof(bool?) => $"{left} is {right}",
+            // The short-circuit guards print as constant patterns: same lowering as the
+            // lifted == (a HasValue + GetValueOrDefault check, null => false), but the
+            // pattern form states the three-valued intent — "has a value and it is false" —
+            // directly. Keyed on the IR node (a bool-valued constant), not on the printed
+            // text, so a right operand that merely PRINTS as "true"/"false" (e.g. a folded
+            // is-null comparison) cannot switch a lifted == into a pattern match.
+            CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool b } && binary.Left.Type == typeof(bool?) => $"{left} is {(b ? "true" : "false")}",
             CodeBinaryOp.Equal => $"{left} == {right}",
             CodeBinaryOp.NotEqual => $"{left} != {right}",
             CodeBinaryOp.Coalesce => $"{left} ?? {right}",

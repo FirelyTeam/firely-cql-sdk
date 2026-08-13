@@ -137,7 +137,12 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
         // The nested config is the canonical home; the flat shipped property remains a
         // functional fallback for existing consumers (see ElmToolkitConfig.CSharpNamespace).
-        var cSharpNamespace = Config.CSharpGeneratingConfig.CSharpNamespace ?? Config.CSharpNamespace;
+        // IsNullOrEmpty, not ??: a JSON `null` in an appsettings file binds as "" (the JSON
+        // configuration provider has no null), and empty also means "no namespace" here — a
+        // bare ?? would let the shipped appsettings' null entry mask a legacy flat value.
+        var cSharpNamespace = !string.IsNullOrEmpty(Config.CSharpGeneratingConfig.CSharpNamespace)
+            ? Config.CSharpGeneratingConfig.CSharpNamespace
+            : Config.CSharpNamespace;
         var debugInformationFormat = Config.DebugSymbolsFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         ElmLibrary[] libraries = _artifactsById.Values.Select(selector: v => v.InputElmLibrary).ToArray();
