@@ -4,9 +4,9 @@
 
 > **Upgrading?** Here is the short version:
 >
-> - **Breaking changes:** FHIR time/dateTime conversion behavior was tightened to emit valid FHIR time-bearing values (including timezone handling), value-set membership now follows closed-world semantics when a value set is resolved locally, and several public API members were removed/changed (notably `FhirTypeConverter` cache-size knobs and `ICqlOperators` precision nullability signatures); `Median`/`GeometricMean` now return spec-correct values for inputs that previously produced wrong ones, so aggregate results over affected data will change.
+> - **Breaking changes:** FHIR time/dateTime conversion behavior was corrected to stop emitting invalid FHIR values and now emit valid FHIR time-bearing values (including timezone handling), value-set membership now follows closed-world semantics when a value set is resolved locally, and several public API members were removed/changed (notably `FhirTypeConverter` cache-size knobs and `ICqlOperators` precision nullability signatures); `Median`/`GeometricMean` now return spec-correct values for inputs that previously produced wrong ones, so aggregate results over affected data will change.
 > - **Required migrations:** Remove `cacheSize`/`LRUCacheSize` usage from `FhirTypeConverter.Create(...)`, `FhirCqlContextOptions`, and `ElmToolkitConfig`; update custom `ICqlOperators` implementations to the nullable `string? precision` signatures; and regenerate checked-in generated C# with tool version `5.2.1.0`.
-> - **Highlights:** Better evaluation/runtime throughput (type-conversion resolution, collapse, retrieve materialization, age operators, lazy ISO8601 formatting, shared bundle indexing, operator fusion) plus CQL-equality correctness fixes for set operators.
+> - **Highlights:** Better evaluation/runtime throughput (type-conversion resolution, collapse, retrieve materialization, age operators, lazy ISO8601 formatting, shared bundle indexing, and single-pass fused operators that combine chained `where`/`select` work) plus CQL-equality correctness fixes for set operators.
 
 ---
 
@@ -18,7 +18,7 @@
 - `Hl7.Cql.Fhir.FhirCqlContext.DataSourceForBundle(Bundle bundle, FhirCqlContextOptions? options = null)`.
 - `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector model)`.
 - `Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector model, TimeSpan? defaultTimezoneOffset)`.
-- New fused list operators on `Hl7.Cql.Operators.ICqlOperators`:
+- New fused list operators on `Hl7.Cql.Operators.ICqlOperators` (these combine chained `where`/`select` operations into one pass):
   - `bool? WhereAny<T>(IEnumerable<T>? source, Func<T, bool?> lambda)`
   - `IEnumerable<TR>? WhereSelect<T, TR>(IEnumerable<T>? source, Func<T, bool?> lambda, Func<T?, TR> select)`
   - `IEnumerable<TR>? SelectWhere<T, TR>(IEnumerable<T?>? source, Func<T?, TR> select, Func<TR, bool?> lambda)`
@@ -34,7 +34,7 @@
 - Bundle retrieves are materialized once per retrieve shape over bundle-backed sources, avoiding repeated re-evaluation of the same filter pipeline. (#1480)
 - Resource-type enumeration for id-based FHIR comparer registration is now process-level lazy initialization instead of per-call reflection sweeps. (#1481)
 - ISO8601 string formatting for date/time primitives moved to lazy computation, reducing construction-time allocations. (#1482)
-- Codegen/runtime now fuse select/where patterns into single-pass list operators, removing intermediate list materialization in those cases. (#1490)
+- Codegen/runtime now fuse select/where patterns into single-pass list operators (combining chained operations into one pass), removing intermediate list materialization in those cases. (#1490)
 - Value-set membership checks for resolved value sets now avoid terminology-service fallback round-trips, including code-only checks. (#1510)
 - List `Intersect` now uses CQL equality semantics (same comparer path as `Except`/`Union`/`Distinct`) for value-equal non-reference-equal values. (#1553)
 - `TypeConverter` instances are memoized per (model, default timezone offset) pair rather than per (model, cache size, offset); with the cache gone, two callers differing only in a matching model and offset now receive the same converter instance. (#1525)
@@ -54,7 +54,7 @@
 
 #### Potentially Breaking
 
-- FHIR conversion output is now normalized to valid FHIR lexical forms for partial-precision time/dateTime and timezone handling. This includes zero-padding missing minute/second components, extension-based precision round-tripping, and timezone emission rules for time-bearing dateTimes. (#1458)
+- FHIR conversion output now corrects previously invalid partial-precision time/dateTime output to valid FHIR lexical forms, including timezone handling. This includes zero-padding missing minute/second components, extension-based precision round-tripping, and timezone emission rules for time-bearing dateTimes. (#1458)
 - Value-set membership now follows closed-world semantics when a value set is already resolved/expanded locally; unresolved misses are no longer automatically validated remotely. `ValueSetSource.Add` now rejects partial expansions. (#1510)
 - Removed cache-size API surface:
   - `*REMOVED* Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInspector model, int? cacheSize = null)`
@@ -117,7 +117,7 @@
    - `FhirTypeConverter.Create(model, cacheSize)` -> `FhirTypeConverter.Create(model)`
    - `FhirCqlContextOptions.OverrideFhirTypeConverterCacheSize` -> remove
    - `ElmToolkitConfig.LRUCacheSize` argument/initializer -> remove
-3. If you implement `ICqlOperators`, update the 16 affected method signatures to `string? precision`, and implement the four new fused list operators (`WhereAny`, `WhereSelect`, `SelectWhere`, `SelectDistinct`).
+3. If you implement `ICqlOperators`, update the 16 affected method signatures to `string? precision`, and implement the four new fused list operators (`WhereAny`, `WhereSelect`, `SelectWhere`, `SelectDistinct`) that combine chained `where`/`select` work into one pass.
 4. If you rely on value-set fallback to external terminology for locally resolved sets, move to complete expansions or leave those value sets unresolved so service routing still applies.
 5. If you have tests/assertions over emitted FHIR time/dateTime lexical forms, update expected output for precision-padding and timezone emission behavior.
 
