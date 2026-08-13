@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("MeasureExample", "0.0.1")]
 public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_0_0_1>
 {
@@ -74,10 +74,16 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     private bool? Denominator_Compute(CqlContext context)
     {
         bool? a_ = this.Initial_population(context);
-        bool? b_ = this.Exclusion(context);
-        bool? c_ = context.Operators.Not(b_);
-        bool? d_ = context.Operators.And(a_, c_);
-        return d_;
+        // CQL 'and' (28:2-29:20): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            bool? b_ = this.Exclusion(context);
+            return a_ & !b_;
+        }
     }
 
 

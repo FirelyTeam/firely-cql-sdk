@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("CMS143FHIRPOAGOpticNerveEval", "1.0.000")]
 public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton<CMS143FHIRPOAGOpticNerveEval_1_0_000>
 {
@@ -190,18 +190,33 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             Period r_ = QualifyingEncounter?.Period;
             CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
             bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, "day");
-            Code<Encounter.EncounterStatus> u_ = QualifyingEncounter?.StatusElement;
-            Encounter.EncounterStatus? v_ = u_?.Value;
-            Code<Encounter.EncounterStatus> w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
-            bool? x_ = context.Operators.Equal(w_, "finished");
-            bool? y_ = context.Operators.And(t_, x_);
-            Coding z_ = QualifyingEncounter?.Class;
-            CqlCode aa_ = FHIRHelpers_4_4_000.Instance.ToCode(context, z_);
-            CqlCode ab_ = this.@virtual(context);
-            bool? ac_ = context.Operators.Equivalent(aa_, ab_);
-            bool? ad_ = context.Operators.Not(ac_);
-            bool? ae_ = context.Operators.And(y_, ad_);
-            return ae_;
+            bool? u_;
+            // CQL 'and' (53:11-54:49): right operand skipped when left is false
+            if (t_ is false)
+            {
+                u_ = false;
+            }
+            else
+            {
+                Code<Encounter.EncounterStatus> v_ = QualifyingEncounter?.StatusElement;
+                Encounter.EncounterStatus? w_ = v_?.Value;
+                Code<Encounter.EncounterStatus> x_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(w_);
+                bool? y_ = context.Operators.Equal(x_, "finished");
+                u_ = t_ & y_;
+            }
+            // CQL 'and' (53:5-55:48): right operand skipped when left is false
+            if (u_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Coding z_ = QualifyingEncounter?.Class;
+                CqlCode aa_ = FHIRHelpers_4_4_000.Instance.ToCode(context, z_);
+                CqlCode ab_ = this.@virtual(context);
+                bool? ac_ = context.Operators.Equivalent(aa_, ab_);
+                return u_ & !ac_;
+            }
         }
 
         IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
@@ -214,24 +229,56 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
     {
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
-        bool? c_ = context.Operators.Not((bool?)(b_ is null));
-        CqlCode d_ = QICoreCommon_4_0_000.Instance.confirmed(context);
-        CqlConcept e_ = context.Operators.ConvertCodeToConcept(d_);
-        bool? f_ = context.Operators.Equivalent(b_, e_);
-        CqlCode g_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-        CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-        bool? i_ = context.Operators.Equivalent(b_, h_);
-        bool? j_ = context.Operators.Or(f_, i_);
-        CqlCode k_ = QICoreCommon_4_0_000.Instance.provisional(context);
-        CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-        bool? m_ = context.Operators.Equivalent(b_, l_);
-        bool? n_ = context.Operators.Or(j_, m_);
-        CqlCode o_ = QICoreCommon_4_0_000.Instance.differential(context);
-        CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-        bool? q_ = context.Operators.Equivalent(b_, p_);
-        bool? r_ = context.Operators.Or(n_, q_);
-        bool? s_ = context.Operators.Implies(c_, r_);
-        return s_;
+        CqlCode c_ = QICoreCommon_4_0_000.Instance.confirmed(context);
+        CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
+        bool? e_ = context.Operators.Equivalent(b_, d_);
+        bool? f_;
+        // CQL 'or' (99:54-100:66): right operand skipped when left is true
+        if (e_ is true)
+        {
+            f_ = true;
+        }
+        else
+        {
+            CodeableConcept j_ = condition?.VerificationStatus;
+            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
+            CqlCode l_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+            CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
+            bool? n_ = context.Operators.Equivalent(k_, m_);
+            f_ = e_ | n_;
+        }
+        bool? g_;
+        // CQL 'or' (99:54-101:66): right operand skipped when left is true
+        if (f_ is true)
+        {
+            g_ = true;
+        }
+        else
+        {
+            CodeableConcept o_ = condition?.VerificationStatus;
+            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
+            CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
+            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
+            bool? s_ = context.Operators.Equivalent(p_, r_);
+            g_ = f_ | s_;
+        }
+        bool? h_;
+        // CQL 'or' (99:52-103:3): right operand skipped when left is true
+        if (g_ is true)
+        {
+            h_ = true;
+        }
+        else
+        {
+            CodeableConcept t_ = condition?.VerificationStatus;
+            CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+            CqlCode v_ = QICoreCommon_4_0_000.Instance.differential(context);
+            CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
+            bool? x_ = context.Operators.Equivalent(u_, w_);
+            h_ = g_ | x_;
+        }
+        bool? i_ = context.Operators.Implies(!((bool?)(b_ is null)), h_);
+        return i_;
     }
 
 
@@ -256,9 +303,16 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 Period k_ = ValidQualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
                 bool? m_ = context.Operators.Overlaps(j_, l_, "day");
-                bool? n_ = this.isVerified(context, PrimaryOpenAngleGlaucoma);
-                bool? o_ = context.Operators.And(m_, n_);
-                return o_;
+                // CQL 'and' (65:17-66:51): right operand skipped when left is false
+                if (m_ is false)
+                {
+                    return false;
+                }
+                else
+                {
+                    bool? n_ = this.isVerified(context, PrimaryOpenAngleGlaucoma);
+                    return m_ & n_;
+                }
             }
 
             bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
@@ -287,10 +341,17 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 18);
-        IEnumerable<Encounter> j_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
-        bool? k_ = context.Operators.Exists<Encounter>(j_);
-        bool? l_ = context.Operators.And(i_, k_);
-        return l_;
+        // CQL 'and' (58:3-59:54): right operand skipped when left is false
+        if (i_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            IEnumerable<Encounter> j_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
+            bool? k_ = context.Operators.Exists<Encounter>(j_);
+            return i_ & k_;
+        }
     }
 
 
@@ -439,10 +500,17 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
     {
         IEnumerable<Observation> a_ = this.Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio(context);
         bool? b_ = context.Operators.Exists<Observation>(a_);
-        IEnumerable<Observation> c_ = this.Medical_Reason_for_Not_Performing_Optic_Disc_Exam(context);
-        bool? d_ = context.Operators.Exists<Observation>(c_);
-        bool? e_ = context.Operators.Or(b_, d_);
-        return e_;
+        // CQL 'or' (44:3-45:65): right operand skipped when left is true
+        if (b_ is true)
+        {
+            return true;
+        }
+        else
+        {
+            IEnumerable<Observation> c_ = this.Medical_Reason_for_Not_Performing_Optic_Disc_Exam(context);
+            bool? d_ = context.Operators.Exists<Observation>(c_);
+            return b_ | d_;
+        }
     }
 
 
@@ -479,18 +547,25 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
         bool? e_(Observation CupToDiscExamPerformed) {
             DataType p_ = CupToDiscExamPerformed?.Value;
             object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
-            bool? r_ = context.Operators.Not((bool?)(q_ is null));
-            Code<ObservationStatus> s_ = CupToDiscExamPerformed?.StatusElement;
-            ObservationStatus? t_ = s_?.Value;
-            string u_ = context.Operators.Convert<string>(t_);
-            string[] v_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
-            bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
-            bool? x_ = context.Operators.And(r_, w_);
-            return x_;
+            bool? r_ = !((bool?)(q_ is null));
+            // CQL 'and' (72:5-73:78): right operand skipped when left is false
+            if (r_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Code<ObservationStatus> s_ = CupToDiscExamPerformed?.StatusElement;
+                ObservationStatus? t_ = s_?.Value;
+                string u_ = context.Operators.Convert<string>(t_);
+                string[] v_ = [
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
+                bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
+                return r_ & w_;
+            }
         }
 
         IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
@@ -531,18 +606,25 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
         bool? e_(Observation OpticDiscExamPerformed) {
             DataType p_ = OpticDiscExamPerformed?.Value;
             object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
-            bool? r_ = context.Operators.Not((bool?)(q_ is null));
-            Code<ObservationStatus> s_ = OpticDiscExamPerformed?.StatusElement;
-            ObservationStatus? t_ = s_?.Value;
-            string u_ = context.Operators.Convert<string>(t_);
-            string[] v_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
-            bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
-            bool? x_ = context.Operators.And(r_, w_);
-            return x_;
+            bool? r_ = !((bool?)(q_ is null));
+            // CQL 'and' (79:5-80:78): right operand skipped when left is false
+            if (r_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Code<ObservationStatus> s_ = OpticDiscExamPerformed?.StatusElement;
+                ObservationStatus? t_ = s_?.Value;
+                string u_ = context.Operators.Convert<string>(t_);
+                string[] v_ = [
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
+                bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
+                return r_ & w_;
+            }
         }
 
         IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
@@ -560,10 +642,17 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
     {
         IEnumerable<Observation> a_ = this.Cup_to_Disc_Ratio_Performed_with_Result(context);
         bool? b_ = context.Operators.Exists<Observation>(a_);
-        IEnumerable<Observation> c_ = this.Optic_Disc_Exam_Performed_with_Result(context);
-        bool? d_ = context.Operators.Exists<Observation>(c_);
-        bool? e_ = context.Operators.And(b_, d_);
-        return e_;
+        // CQL 'and' (83:3-84:54): right operand skipped when left is false
+        if (b_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            IEnumerable<Observation> c_ = this.Optic_Disc_Exam_Performed_with_Result(context);
+            bool? d_ = context.Operators.Exists<Observation>(c_);
+            return b_ & d_;
+        }
     }
 
 

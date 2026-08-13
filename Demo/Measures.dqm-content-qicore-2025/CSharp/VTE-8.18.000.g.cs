@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("VTE", "8.18.000")]
 public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 {
@@ -76,32 +76,38 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
             IEnumerable<Condition> e_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, E);
 
             bool? f_(Condition @this) {
-                CodeableConcept o_ = @this?.Code;
-                CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-                bool? q_ = context.Operators.Not((bool?)(p_ is null));
-                return q_;
+                CodeableConcept j_ = @this?.Code;
+                CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
+                return !((bool?)(k_ is null));
             }
 
 
             CqlConcept g_(Condition @this) {
-                CodeableConcept r_ = @this?.Code;
-                CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
-                return s_;
+                CodeableConcept l_ = @this?.Code;
+                CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
+                return m_;
             }
 
             IEnumerable<CqlConcept> h_ = context.Operators.WhereSelect<Condition, CqlConcept>(e_, f_, g_);
             bool? i_ = context.Operators.ConceptsInValueSet(h_, DiagnosisValueSet);
-            List<CodeableConcept> j_ = E?.ReasonCode;
-
-            CqlConcept k_(CodeableConcept @this) {
-                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return t_;
+            // CQL 'or' (42:13-43:43): right operand skipped when left is true
+            if (i_ is true)
+            {
+                return true;
             }
+            else
+            {
+                List<CodeableConcept> n_ = E?.ReasonCode;
 
-            IEnumerable<CqlConcept> l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
-            bool? m_ = context.Operators.ConceptsInValueSet(l_, DiagnosisValueSet);
-            bool? n_ = context.Operators.Or(i_, m_);
-            return n_;
+                CqlConcept o_(CodeableConcept @this) {
+                    CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                    return r_;
+                }
+
+                IEnumerable<CqlConcept> p_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)n_, o_);
+                bool? q_ = context.Operators.ConceptsInValueSet(p_, DiagnosisValueSet);
+                return i_ | q_;
+            }
         }
 
         IEnumerable<bool?> c_ = context.Operators.SelectDistinct<Encounter, bool?>((IEnumerable<Encounter>)a_, b_);
@@ -123,14 +129,31 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
         bool? b_(Encounter InpatientEncounter) {
             CqlValueSet d_ = this.Obstetrical_or_Pregnancy_Related_Conditions(context);
             bool? e_ = this.hasEncDiagnosisOf(context, InpatientEncounter, d_);
-            CqlValueSet f_ = this.Venous_Thromboembolism(context);
-            bool? g_ = this.hasEncDiagnosisOf(context, InpatientEncounter, f_);
-            bool? h_ = context.Operators.Or(e_, g_);
-            CqlValueSet i_ = this.Obstetrics_VTE(context);
-            bool? j_ = this.hasEncDiagnosisOf(context, InpatientEncounter, i_);
-            bool? k_ = context.Operators.Or(h_, j_);
-            bool? l_ = context.Operators.Not(k_);
-            return l_;
+            bool? f_;
+            // CQL 'or' (25:14-26:78): right operand skipped when left is true
+            if (e_ is true)
+            {
+                f_ = true;
+            }
+            else
+            {
+                CqlValueSet h_ = this.Venous_Thromboembolism(context);
+                bool? i_ = this.hasEncDiagnosisOf(context, InpatientEncounter, h_);
+                f_ = e_ | i_;
+            }
+            bool? g_;
+            // CQL 'or' (25:13-28:13): right operand skipped when left is true
+            if (f_ is true)
+            {
+                g_ = true;
+            }
+            else
+            {
+                CqlValueSet j_ = this.Obstetrics_VTE(context);
+                bool? k_ = this.hasEncDiagnosisOf(context, InpatientEncounter, j_);
+                g_ = f_ | k_;
+            }
+            return !g_;
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -209,25 +232,32 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
             DataType f_ = e_?.Procedure;
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             bool? h_ = context.Operators.ConceptInValueSet(g_ as CqlConcept, DiagnosisValueSet);
-            IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-
-            bool? j_(Procedure P) {
-                Claim.ProcedureComponent q_ = CQMCommon_4_1_000.Instance.principalProcedure(context, E);
-                DataType r_ = q_?.Procedure;
-                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                Id t_ = P?.IdElement;
-                string u_ = t_?.Value;
-                bool? v_ = QICoreCommon_4_0_000.Instance.references(context, s_ as ResourceReference, u_);
-                return v_;
+            // CQL 'or' (51:13-52:39): right operand skipped when left is true
+            if (h_ is true)
+            {
+                return true;
             }
+            else
+            {
+                IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
-            IEnumerable<Procedure> k_ = context.Operators.Where<Procedure>(i_, j_);
-            Procedure l_ = context.Operators.SingletonFrom<Procedure>(k_);
-            CodeableConcept m_ = l_?.Code;
-            CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
-            bool? o_ = context.Operators.ConceptInValueSet(n_, DiagnosisValueSet);
-            bool? p_ = context.Operators.Or(h_, o_);
-            return p_;
+                bool? j_(Procedure P) {
+                    Claim.ProcedureComponent p_ = CQMCommon_4_1_000.Instance.principalProcedure(context, E);
+                    DataType q_ = p_?.Procedure;
+                    object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
+                    Id s_ = P?.IdElement;
+                    string t_ = s_?.Value;
+                    bool? u_ = QICoreCommon_4_0_000.Instance.references(context, r_ as ResourceReference, t_);
+                    return u_;
+                }
+
+                IEnumerable<Procedure> k_ = context.Operators.Where<Procedure>(i_, j_);
+                Procedure l_ = context.Operators.SingletonFrom<Procedure>(k_);
+                CodeableConcept m_ = l_?.Code;
+                CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
+                bool? o_ = context.Operators.ConceptInValueSet(n_, DiagnosisValueSet);
+                return h_ | o_;
+            }
         }
 
         IEnumerable<bool?> c_ = context.Operators.SelectDistinct<Encounter, bool?>((IEnumerable<Encounter>)a_, b_);

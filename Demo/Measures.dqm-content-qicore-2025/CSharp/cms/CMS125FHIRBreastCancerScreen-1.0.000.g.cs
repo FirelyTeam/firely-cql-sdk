@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("CMS125FHIRBreastCancerScreen", "1.0.000")]
 public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton<CMS125FHIRBreastCancerScreen_1_0_000>
 {
@@ -129,40 +129,56 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(42, 74, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        List<Extension> k_;
-        Patient u_ = this.Patient(context);
-        bool v_ = u_ is DomainResource;
-        if (v_)
+        bool? k_;
+        // CQL 'and' (34:3-37:33): right operand skipped when left is false
+        if (j_ is false)
         {
-            Patient w_ = this.Patient(context);
-            k_ = (w_ as DomainResource).Extension;
+            k_ = false;
         }
         else
         {
-            k_ = default;
+            List<Extension> l_;
+            Patient r_ = this.Patient(context);
+            bool s_ = r_ is DomainResource;
+            if (s_)
+            {
+                Patient t_ = this.Patient(context);
+                l_ = (t_ as DomainResource).Extension;
+            }
+            else
+            {
+                l_ = default;
+            }
+
+            bool? m_(Extension @this) {
+                FhirUri u_ = @this?.UrlElement;
+                string v_ = FHIRHelpers_4_4_000.Instance.ToString(context, u_);
+                bool? w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+                return w_;
+            }
+
+
+            DataType n_(Extension @this) {
+                DataType x_ = @this?.Value;
+                return x_;
+            }
+
+            IEnumerable<DataType> o_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)l_, m_, n_);
+            DataType p_ = context.Operators.SingletonFrom<DataType>(o_);
+            bool? q_ = context.Operators.Equal(p_, "248152002");
+            k_ = j_ & q_;
         }
-
-        bool? l_(Extension @this) {
-            FhirUri x_ = @this?.UrlElement;
-            string y_ = FHIRHelpers_4_4_000.Instance.ToString(context, x_);
-            bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-            return z_;
+        // CQL 'and' (34:3-38:64): right operand skipped when left is false
+        if (k_ is false)
+        {
+            return false;
         }
-
-
-        DataType m_(Extension @this) {
-            DataType aa_ = @this?.Value;
-            return aa_;
+        else
+        {
+            IEnumerable<Encounter> y_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
+            bool? z_ = context.Operators.Exists<Encounter>(y_);
+            return k_ & z_;
         }
-
-        IEnumerable<DataType> n_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)k_, l_, m_);
-        DataType o_ = context.Operators.SingletonFrom<DataType>(n_);
-        bool? p_ = context.Operators.Equal(o_, "248152002");
-        bool? q_ = context.Operators.And(j_, p_);
-        IEnumerable<Encounter> r_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
-        bool? s_ = context.Operators.Exists<Encounter>(r_);
-        bool? t_ = context.Operators.And(q_, s_);
-        return t_;
     }
 
 
@@ -556,31 +572,110 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        IEnumerable<Condition> b_ = this.Right_Mastectomy_Diagnosis(context);
-        bool? c_ = context.Operators.Exists<Condition>(b_);
-        IEnumerable<Procedure> d_ = this.Right_Mastectomy_Procedure(context);
-        bool? e_ = context.Operators.Exists<Procedure>(d_);
-        bool? f_ = context.Operators.Or(c_, e_);
-        IEnumerable<Condition> g_ = this.Left_Mastectomy_Diagnosis(context);
-        bool? h_ = context.Operators.Exists<Condition>(g_);
-        IEnumerable<Procedure> i_ = this.Left_Mastectomy_Procedure(context);
-        bool? j_ = context.Operators.Exists<Procedure>(i_);
-        bool? k_ = context.Operators.Or(h_, j_);
-        bool? l_ = context.Operators.And(f_, k_);
-        bool? m_ = context.Operators.Or(a_, l_);
-        IEnumerable<Condition> n_ = this.Bilateral_Mastectomy_Diagnosis(context);
-        bool? o_ = context.Operators.Exists<Condition>(n_);
-        bool? p_ = context.Operators.Or(m_, o_);
-        IEnumerable<Procedure> q_ = this.Bilateral_Mastectomy_Procedure(context);
-        bool? r_ = context.Operators.Exists<Procedure>(q_);
-        bool? s_ = context.Operators.Or(p_, r_);
-        bool? t_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
-        bool? u_ = context.Operators.Or(s_, t_);
-        bool? v_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
-        bool? w_ = context.Operators.Or(u_, v_);
-        bool? x_ = PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
-        bool? y_ = context.Operators.Or(w_, x_);
-        return y_;
+        bool? b_;
+        // CQL 'or' (44:3-51:5): right operand skipped when left is true
+        if (a_ is true)
+        {
+            b_ = true;
+        }
+        else
+        {
+            IEnumerable<Condition> g_ = this.Right_Mastectomy_Diagnosis(context);
+            bool? h_ = context.Operators.Exists<Condition>(g_);
+            bool? i_;
+            // CQL 'or' (45:10-47:7): right operand skipped when left is true
+            if (h_ is true)
+            {
+                i_ = true;
+            }
+            else
+            {
+                IEnumerable<Procedure> k_ = this.Right_Mastectomy_Procedure(context);
+                bool? l_ = context.Operators.Exists<Procedure>(k_);
+                i_ = h_ | l_;
+            }
+            bool? j_;
+            // CQL 'and' (45:8-51:5): right operand skipped when left is false
+            if (i_ is false)
+            {
+                j_ = false;
+            }
+            else
+            {
+                IEnumerable<Condition> m_ = this.Left_Mastectomy_Diagnosis(context);
+                bool? n_ = context.Operators.Exists<Condition>(m_);
+                bool? o_;
+                // CQL 'or' (48:13-50:9): right operand skipped when left is true
+                if (n_ is true)
+                {
+                    o_ = true;
+                }
+                else
+                {
+                    IEnumerable<Procedure> p_ = this.Left_Mastectomy_Procedure(context);
+                    bool? q_ = context.Operators.Exists<Procedure>(p_);
+                    o_ = n_ | q_;
+                }
+                j_ = i_ & o_;
+            }
+            b_ = a_ | j_;
+        }
+        bool? c_;
+        // CQL 'or' (44:3-52:46): right operand skipped when left is true
+        if (b_ is true)
+        {
+            c_ = true;
+        }
+        else
+        {
+            IEnumerable<Condition> r_ = this.Bilateral_Mastectomy_Diagnosis(context);
+            bool? s_ = context.Operators.Exists<Condition>(r_);
+            c_ = b_ | s_;
+        }
+        bool? d_;
+        // CQL 'or' (44:3-53:46): right operand skipped when left is true
+        if (c_ is true)
+        {
+            d_ = true;
+        }
+        else
+        {
+            IEnumerable<Procedure> t_ = this.Bilateral_Mastectomy_Procedure(context);
+            bool? u_ = context.Operators.Exists<Procedure>(t_);
+            d_ = c_ | u_;
+        }
+        bool? e_;
+        // CQL 'or' (44:3-54:73): right operand skipped when left is true
+        if (d_ is true)
+        {
+            e_ = true;
+        }
+        else
+        {
+            bool? v_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
+            e_ = d_ | v_;
+        }
+        bool? f_;
+        // CQL 'or' (44:3-55:74): right operand skipped when left is true
+        if (e_ is true)
+        {
+            f_ = true;
+        }
+        else
+        {
+            bool? w_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
+            f_ = e_ | w_;
+        }
+        // CQL 'or' (44:3-56:69): right operand skipped when left is true
+        if (f_ is true)
+        {
+            return true;
+        }
+        else
+        {
+            bool? x_ = PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
+            return f_ | x_;
+        }
     }
 
 

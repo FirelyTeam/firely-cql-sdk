@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("CMS165FHIRControllingHighBP", "1.0.000")]
 public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<CMS165FHIRControllingHighBP_1_0_000>
 {
@@ -167,13 +167,29 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(18, 85, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        IEnumerable<Condition> k_ = this.Essential_Hypertension_Diagnosis(context);
-        bool? l_ = context.Operators.Exists<Condition>(k_);
-        bool? m_ = context.Operators.And(j_, l_);
-        IEnumerable<Encounter> n_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
-        bool? o_ = context.Operators.Exists<Encounter>(n_);
-        bool? p_ = context.Operators.And(m_, o_);
-        return p_;
+        bool? k_;
+        // CQL 'and' (36:3-39:49): right operand skipped when left is false
+        if (j_ is false)
+        {
+            k_ = false;
+        }
+        else
+        {
+            IEnumerable<Condition> l_ = this.Essential_Hypertension_Diagnosis(context);
+            bool? m_ = context.Operators.Exists<Condition>(l_);
+            k_ = j_ & m_;
+        }
+        // CQL 'and' (36:3-40:64): right operand skipped when left is false
+        if (k_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            IEnumerable<Encounter> n_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
+            bool? o_ = context.Operators.Exists<Encounter>(n_);
+            return k_ & o_;
+        }
     }
 
 
@@ -346,22 +362,74 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        IEnumerable<Condition> b_ = this.Pregnancy_or_Renal_Diagnosis(context);
-        bool? c_ = context.Operators.Exists<Condition>(b_);
-        bool? d_ = context.Operators.Or(a_, c_);
-        IEnumerable<Procedure> e_ = this.End_Stage_Renal_Disease_Procedures(context);
-        bool? f_ = context.Operators.Exists<Procedure>(e_);
-        bool? g_ = context.Operators.Or(d_, f_);
-        IEnumerable<Encounter> h_ = this.End_Stage_Renal_Disease_Encounter(context);
-        bool? i_ = context.Operators.Exists<Encounter>(h_);
-        bool? j_ = context.Operators.Or(g_, i_);
-        bool? k_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(context);
-        bool? l_ = context.Operators.Or(j_, k_);
-        bool? m_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
-        bool? n_ = context.Operators.Or(l_, m_);
-        bool? o_ = PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
-        bool? p_ = context.Operators.Or(n_, o_);
-        return p_;
+        bool? b_;
+        // CQL 'or' (52:3-53:48): right operand skipped when left is true
+        if (a_ is true)
+        {
+            b_ = true;
+        }
+        else
+        {
+            IEnumerable<Condition> g_ = this.Pregnancy_or_Renal_Diagnosis(context);
+            bool? h_ = context.Operators.Exists<Condition>(g_);
+            b_ = a_ | h_;
+        }
+        bool? c_;
+        // CQL 'or' (52:3-54:54): right operand skipped when left is true
+        if (b_ is true)
+        {
+            c_ = true;
+        }
+        else
+        {
+            IEnumerable<Procedure> i_ = this.End_Stage_Renal_Disease_Procedures(context);
+            bool? j_ = context.Operators.Exists<Procedure>(i_);
+            c_ = b_ | j_;
+        }
+        bool? d_;
+        // CQL 'or' (52:3-55:53): right operand skipped when left is true
+        if (c_ is true)
+        {
+            d_ = true;
+        }
+        else
+        {
+            IEnumerable<Encounter> k_ = this.End_Stage_Renal_Disease_Encounter(context);
+            bool? l_ = context.Operators.Exists<Encounter>(k_);
+            d_ = c_ | l_;
+        }
+        bool? e_;
+        // CQL 'or' (52:3-56:105): right operand skipped when left is true
+        if (d_ is true)
+        {
+            e_ = true;
+        }
+        else
+        {
+            bool? m_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(context);
+            e_ = d_ | m_;
+        }
+        bool? f_;
+        // CQL 'or' (52:3-57:74): right operand skipped when left is true
+        if (e_ is true)
+        {
+            f_ = true;
+        }
+        else
+        {
+            bool? n_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
+            f_ = e_ | n_;
+        }
+        // CQL 'or' (52:3-58:69): right operand skipped when left is true
+        if (f_ is true)
+        {
+            return true;
+        }
+        else
+        {
+            bool? o_ = PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
+            return f_ | o_;
+        }
     }
 
 
@@ -448,14 +516,21 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 "SS",
             ];
             bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
-            bool? ak_ = context.Operators.Not(aj_);
-            DataType al_ = BloodPressure?.Effective;
-            object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-            CqlDateTime an_ = QICoreCommon_4_0_000.Instance.latest(context, am_);
-            CqlInterval<CqlDateTime> ao_ = this.Measurement_Period(context);
-            bool? ap_ = context.Operators.In<CqlDateTime>(an_, ao_, "day");
-            bool? aq_ = context.Operators.And(ak_, ap_);
-            return aq_;
+            bool? ak_ = !aj_;
+            // CQL 'and' (121:9-122:83): right operand skipped when left is false
+            if (ak_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                DataType al_ = BloodPressure?.Effective;
+                object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+                CqlDateTime an_ = QICoreCommon_4_0_000.Instance.latest(context, am_);
+                CqlInterval<CqlDateTime> ao_ = this.Measurement_Period(context);
+                bool? ap_ = context.Operators.In<CqlDateTime>(an_, ao_, "day");
+                return ak_ & ap_;
+            }
         }
 
         IEnumerable<Observation> h_ = context.Operators.Where<Observation>(b_, g_);
@@ -649,9 +724,16 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     private bool? Numerator_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Systolic_Blood_Pressure_Less_Than_140(context);
-        bool? b_ = this.Has_Diastolic_Blood_Pressure_Less_Than_90(context);
-        bool? c_ = context.Operators.And(a_, b_);
-        return c_;
+        // CQL 'and' (83:3-84:51): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            bool? b_ = this.Has_Diastolic_Blood_Pressure_Less_Than_90(context);
+            return a_ & b_;
+        }
     }
 
 

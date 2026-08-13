@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR", "0.0.008")]
 public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008 : ILibrary, ISingleton<PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008>
 {
@@ -196,11 +196,18 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             Period aa_ = ValidEncounter?.Period;
             CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, aa_);
             bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, (string)default);
-            Code<Encounter.EncounterStatus> ad_ = ValidEncounter?.StatusElement;
-            string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_);
-            bool? af_ = context.Operators.Equal(ae_, "finished");
-            bool? ag_ = context.Operators.And(ac_, af_);
-            return ag_;
+            // CQL 'and' (55:15-56:54): right operand skipped when left is false
+            if (ac_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Code<Encounter.EncounterStatus> ad_ = ValidEncounter?.StatusElement;
+                string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_);
+                bool? af_ = context.Operators.Equal(ae_, "finished");
+                return ac_ & af_;
+            }
         }
 
         IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
@@ -225,13 +232,36 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "month");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 6);
-        int? j_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        bool? k_ = context.Operators.Less(j_, 20);
-        bool? l_ = context.Operators.And(i_, k_);
-        IEnumerable<Encounter> m_ = this.Qualifying_Encounters(context);
-        bool? n_ = context.Operators.Exists<Encounter>(m_);
-        bool? o_ = context.Operators.And(l_, n_);
-        return o_;
+        bool? j_;
+        // CQL 'and' (74:3-75:81): right operand skipped when left is false
+        if (i_ is false)
+        {
+            j_ = false;
+        }
+        else
+        {
+            Patient k_ = this.Patient(context);
+            Date l_ = k_?.BirthDateElement;
+            string m_ = l_?.Value;
+            CqlDate n_ = context.Operators.ConvertStringToDate(m_);
+            CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
+            CqlDateTime p_ = context.Operators.Start(o_);
+            CqlDate q_ = context.Operators.DateFrom(p_);
+            int? r_ = context.Operators.CalculateAgeAt(n_, q_, "year");
+            bool? s_ = context.Operators.Less(r_, 20);
+            j_ = i_ & s_;
+        }
+        // CQL 'and' (74:3-77:52): right operand skipped when left is false
+        if (j_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            IEnumerable<Encounter> t_ = this.Qualifying_Encounters(context);
+            bool? u_ = context.Operators.Exists<Encounter>(t_);
+            return j_ & u_;
+        }
     }
 
 
@@ -278,10 +308,24 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "month");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 6);
-        int? j_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        bool? k_ = context.Operators.LessOrEqual(j_, 4);
-        bool? l_ = context.Operators.And(i_, k_);
-        return l_;
+        // CQL 'and' (59:3-60:81): right operand skipped when left is false
+        if (i_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            Patient j_ = this.Patient(context);
+            Date k_ = j_?.BirthDateElement;
+            string l_ = k_?.Value;
+            CqlDate m_ = context.Operators.ConvertStringToDate(l_);
+            CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
+            CqlDateTime o_ = context.Operators.Start(n_);
+            CqlDate p_ = context.Operators.DateFrom(o_);
+            int? q_ = context.Operators.CalculateAgeAt(m_, p_, "year");
+            bool? r_ = context.Operators.LessOrEqual(q_, 4);
+            return i_ & r_;
+        }
     }
 
 
@@ -345,11 +389,18 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             DataType f_ = FluorideApplication?.Performed;
             CqlInterval<CqlDateTime> g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, f_);
             bool? h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, (string)default);
-            Code<EventStatus> i_ = FluorideApplication?.StatusElement;
-            string j_ = FHIRHelpers_4_0_001.Instance.ToString(context, i_);
-            bool? k_ = context.Operators.Equal(j_, "completed");
-            bool? l_ = context.Operators.And(h_, k_);
-            return l_;
+            // CQL 'and' (70:17-71:62): right operand skipped when left is false
+            if (h_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Code<EventStatus> i_ = FluorideApplication?.StatusElement;
+                string j_ = FHIRHelpers_4_0_001.Instance.ToString(context, i_);
+                bool? k_ = context.Operators.Equal(j_, "completed");
+                return h_ & k_;
+            }
         }
 
         bool? d_ = context.Operators.WhereAny<Procedure>(b_, c_);

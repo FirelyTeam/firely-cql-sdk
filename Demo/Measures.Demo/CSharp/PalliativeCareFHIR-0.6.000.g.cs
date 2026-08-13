@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("PalliativeCareFHIR", "0.6.000")]
 public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<PalliativeCareFHIR_0_6_000>
 {
@@ -102,74 +102,120 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
         IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
         bool? d_(Observation PalliativeAssessment) {
-            Code<ObservationStatus> p_ = PalliativeAssessment?.StatusElement;
-            string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_);
-            string[] r_ = [
+            Code<ObservationStatus> g_ = PalliativeAssessment?.StatusElement;
+            string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
+            string[] i_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
-            List<CodeableConcept> t_ = PalliativeAssessment?.Category;
-
-            bool? u_(CodeableConcept PalliativeAssessmentCategory) {
-                CqlCode ac_ = this.survey(context);
-                CqlConcept ad_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, PalliativeAssessmentCategory);
-                IReadOnlyList<CqlCode> ae_ = ad_?.codes;
-                bool? af_ = context.Operators.In<CqlCode>(ac_, (IEnumerable<CqlCode>)ae_);
-                return af_;
+            bool? j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
+            bool? k_;
+            // CQL 'and' (23:21-26:17): right operand skipped when left is false
+            if (j_ is false)
+            {
+                k_ = false;
             }
+            else
+            {
+                List<CodeableConcept> l_ = PalliativeAssessment?.Category;
 
-            bool? v_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)t_, u_);
-            bool? w_ = context.Operators.And(s_, v_);
-            DataType x_ = PalliativeAssessment?.Effective;
-            CqlInterval<CqlDateTime> y_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, x_);
-            CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
-            bool? aa_ = context.Operators.Overlaps(y_, z_, (string)default);
-            bool? ab_ = context.Operators.And(w_, aa_);
-            return ab_;
+                bool? m_(CodeableConcept PalliativeAssessmentCategory) {
+                    CqlCode o_ = this.survey(context);
+                    CqlConcept p_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, PalliativeAssessmentCategory);
+                    IReadOnlyList<CqlCode> q_ = p_?.codes;
+                    bool? r_ = context.Operators.In<CqlCode>(o_, (IEnumerable<CqlCode>)q_);
+                    return r_;
+                }
+
+                bool? n_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)l_, m_);
+                k_ = j_ & n_;
+            }
+            // CQL 'and' (23:15-27:112): right operand skipped when left is false
+            if (k_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                DataType s_ = PalliativeAssessment?.Effective;
+                CqlInterval<CqlDateTime> t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, s_);
+                CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
+                bool? v_ = context.Operators.Overlaps(t_, u_, (string)default);
+                return k_ & v_;
+            }
         }
 
         bool? e_ = context.Operators.WhereAny<Observation>(c_, d_);
-        CqlValueSet f_ = this.Palliative_Care_Encounter(context);
-        IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-
-        bool? h_(Encounter PalliativeEncounter) {
-            Code<Encounter.EncounterStatus> ag_ = PalliativeEncounter?.StatusElement;
-            string ah_ = FHIRHelpers_4_0_001.Instance.ToString(context, ag_);
-            bool? ai_ = context.Operators.Equal(ah_, "finished");
-            Period aj_ = PalliativeEncounter?.Period;
-            CqlInterval<CqlDateTime> ak_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, aj_);
-            CqlInterval<CqlDateTime> al_ = this.Measurement_Period(context);
-            bool? am_ = context.Operators.Overlaps(ak_, al_, (string)default);
-            bool? an_ = context.Operators.And(ai_, am_);
-            return an_;
+        bool? f_;
+        // CQL 'or' (22:3-32:13): right operand skipped when left is true
+        if (e_ is true)
+        {
+            f_ = true;
         }
+        else
+        {
+            CqlValueSet w_ = this.Palliative_Care_Encounter(context);
+            IEnumerable<Encounter> x_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, w_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
-        bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
-        bool? j_ = context.Operators.Or(e_, i_);
-        CqlValueSet k_ = this.Palliative_Care_Intervention(context);
-        IEnumerable<Procedure> l_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+            bool? y_(Encounter PalliativeEncounter) {
+                Code<Encounter.EncounterStatus> aa_ = PalliativeEncounter?.StatusElement;
+                string ab_ = FHIRHelpers_4_0_001.Instance.ToString(context, aa_);
+                bool? ac_ = context.Operators.Equal(ab_, "finished");
+                // CQL 'and' (30:17-31:110): right operand skipped when left is false
+                if (ac_ is false)
+                {
+                    return false;
+                }
+                else
+                {
+                    Period ad_ = PalliativeEncounter?.Period;
+                    CqlInterval<CqlDateTime> ae_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ad_);
+                    CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
+                    bool? ag_ = context.Operators.Overlaps(ae_, af_, (string)default);
+                    return ac_ & ag_;
+                }
+            }
 
-        bool? m_(Procedure PalliativeIntervention) {
-            Code<EventStatus> ao_ = PalliativeIntervention?.StatusElement;
-            string ap_ = FHIRHelpers_4_0_001.Instance.ToString(context, ao_);
-            string[] aq_ = [
-                "completed",
-                "in-progress",
-            ];
-            bool? ar_ = context.Operators.In<string>(ap_, (IEnumerable<string>)aq_);
-            DataType as_ = PalliativeIntervention?.Performed;
-            CqlInterval<CqlDateTime> at_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, as_);
-            CqlInterval<CqlDateTime> au_ = this.Measurement_Period(context);
-            bool? av_ = context.Operators.Overlaps(at_, au_, (string)default);
-            bool? aw_ = context.Operators.And(ar_, av_);
-            return aw_;
+            bool? z_ = context.Operators.WhereAny<Encounter>(x_, y_);
+            f_ = e_ | z_;
         }
+        // CQL 'or' (22:3-36:13): right operand skipped when left is true
+        if (f_ is true)
+        {
+            return true;
+        }
+        else
+        {
+            CqlValueSet ah_ = this.Palliative_Care_Intervention(context);
+            IEnumerable<Procedure> ai_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, ah_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 
-        bool? n_ = context.Operators.WhereAny<Procedure>(l_, m_);
-        bool? o_ = context.Operators.Or(j_, n_);
-        return o_;
+            bool? aj_(Procedure PalliativeIntervention) {
+                Code<EventStatus> al_ = PalliativeIntervention?.StatusElement;
+                string am_ = FHIRHelpers_4_0_001.Instance.ToString(context, al_);
+                string[] an_ = [
+                    "completed",
+                    "in-progress",
+                ];
+                bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
+                // CQL 'and' (34:17-35:116): right operand skipped when left is false
+                if (ao_ is false)
+                {
+                    return false;
+                }
+                else
+                {
+                    DataType ap_ = PalliativeIntervention?.Performed;
+                    CqlInterval<CqlDateTime> aq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ap_);
+                    CqlInterval<CqlDateTime> ar_ = this.Measurement_Period(context);
+                    bool? as_ = context.Operators.Overlaps(aq_, ar_, (string)default);
+                    return ao_ & as_;
+                }
+            }
+
+            bool? ak_ = context.Operators.WhereAny<Procedure>(ai_, aj_);
+            return f_ | ak_;
+        }
     }
 
 

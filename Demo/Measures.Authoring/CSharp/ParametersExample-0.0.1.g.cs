@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
 public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersExample_0_0_1>
 {
@@ -87,20 +87,44 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             Code<AdministrativeGender> f_ = P?.GenderElement;
             string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
             bool? h_ = context.Operators.Equal(g_, "male");
-            FhirBoolean i_ = P?.ActiveElement;
-            bool? j_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, i_);
-            bool? k_ = context.Operators.IsTrue(j_);
-            bool? l_ = context.Operators.And(h_, k_);
-            DataType m_ = P?.Deceased;
-            bool? n_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, m_ as FhirBoolean);
-            bool? o_ = context.Operators.Not(n_);
-            bool? p_ = context.Operators.And(l_, o_);
-            CodeableConcept q_ = P?.MaritalStatus;
-            CqlConcept r_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, q_);
-            CqlValueSet s_ = this.Marital_Status(context);
-            bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
-            bool? u_ = context.Operators.And(p_, t_);
-            return u_;
+            bool? i_;
+            // CQL 'and' (18:11-19:26): right operand skipped when left is false
+            if (h_ is false)
+            {
+                i_ = false;
+            }
+            else
+            {
+                FhirBoolean k_ = P?.ActiveElement;
+                bool? l_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, k_);
+                bool? m_ = context.Operators.IsTrue(l_);
+                i_ = h_ & m_;
+            }
+            bool? j_;
+            // CQL 'and' (18:11-20:25): right operand skipped when left is false
+            if (i_ is false)
+            {
+                j_ = false;
+            }
+            else
+            {
+                DataType n_ = P?.Deceased;
+                bool? o_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, n_ as FhirBoolean);
+                j_ = i_ & !o_;
+            }
+            // CQL 'and' (18:5-21:45): right operand skipped when left is false
+            if (j_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                CodeableConcept p_ = P?.MaritalStatus;
+                CqlConcept q_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, p_);
+                CqlValueSet r_ = this.Marital_Status(context);
+                bool? s_ = context.Operators.ConceptInValueSet(q_, r_);
+                return j_ & s_;
+            }
         }
 
         IEnumerable<Patient> d_ = context.Operators.Where<Patient>((IEnumerable<Patient>)b_, c_);

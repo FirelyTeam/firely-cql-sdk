@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("CMS149FHIRDementiaCognitiveAssess", "1.0.000")]
 public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISingleton<CMS149FHIRDementiaCognitiveAssess_1_0_000>
 {
@@ -156,12 +156,19 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             Period ad_ = EncounterAssessCognition?.Period;
             CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
             bool? af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ac_, ae_, "day");
-            Code<Encounter.EncounterStatus> ag_ = EncounterAssessCognition?.StatusElement;
-            Encounter.EncounterStatus? ah_ = ag_?.Value;
-            Code<Encounter.EncounterStatus> ai_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ah_);
-            bool? aj_ = context.Operators.Equivalent(ai_, "finished");
-            bool? ak_ = context.Operators.And(af_, aj_);
-            return ak_;
+            // CQL 'and' (81:5-82:54): right operand skipped when left is false
+            if (af_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Code<Encounter.EncounterStatus> ag_ = EncounterAssessCognition?.StatusElement;
+                Encounter.EncounterStatus? ah_ = ag_?.Value;
+                Code<Encounter.EncounterStatus> ai_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ah_);
+                bool? aj_ = context.Operators.Equivalent(ai_, "finished");
+                return af_ & aj_;
+            }
         }
 
         IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
@@ -174,24 +181,56 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
     {
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
-        bool? c_ = context.Operators.Not((bool?)(b_ is null));
-        CqlCode d_ = QICoreCommon_4_0_000.Instance.confirmed(context);
-        CqlConcept e_ = context.Operators.ConvertCodeToConcept(d_);
-        bool? f_ = context.Operators.Equivalent(b_, e_);
-        CqlCode g_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-        CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-        bool? i_ = context.Operators.Equivalent(b_, h_);
-        bool? j_ = context.Operators.Or(f_, i_);
-        CqlCode k_ = QICoreCommon_4_0_000.Instance.provisional(context);
-        CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-        bool? m_ = context.Operators.Equivalent(b_, l_);
-        bool? n_ = context.Operators.Or(j_, m_);
-        CqlCode o_ = QICoreCommon_4_0_000.Instance.differential(context);
-        CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-        bool? q_ = context.Operators.Equivalent(b_, p_);
-        bool? r_ = context.Operators.Or(n_, q_);
-        bool? s_ = context.Operators.Implies(c_, r_);
-        return s_;
+        CqlCode c_ = QICoreCommon_4_0_000.Instance.confirmed(context);
+        CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
+        bool? e_ = context.Operators.Equivalent(b_, d_);
+        bool? f_;
+        // CQL 'or' (92:54-93:66): right operand skipped when left is true
+        if (e_ is true)
+        {
+            f_ = true;
+        }
+        else
+        {
+            CodeableConcept j_ = condition?.VerificationStatus;
+            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
+            CqlCode l_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+            CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
+            bool? n_ = context.Operators.Equivalent(k_, m_);
+            f_ = e_ | n_;
+        }
+        bool? g_;
+        // CQL 'or' (92:54-94:66): right operand skipped when left is true
+        if (f_ is true)
+        {
+            g_ = true;
+        }
+        else
+        {
+            CodeableConcept o_ = condition?.VerificationStatus;
+            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
+            CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
+            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
+            bool? s_ = context.Operators.Equivalent(p_, r_);
+            g_ = f_ | s_;
+        }
+        bool? h_;
+        // CQL 'or' (92:52-96:3): right operand skipped when left is true
+        if (g_ is true)
+        {
+            h_ = true;
+        }
+        else
+        {
+            CodeableConcept t_ = condition?.VerificationStatus;
+            CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+            CqlCode v_ = QICoreCommon_4_0_000.Instance.differential(context);
+            CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
+            bool? x_ = context.Operators.Equivalent(u_, w_);
+            h_ = g_ | x_;
+        }
+        bool? i_ = context.Operators.Implies(!((bool?)(b_ is null)), h_);
+        return i_;
     }
 
 
@@ -216,20 +255,60 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 Period k_ = EncounterAssessCognition?.Period;
                 CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
                 bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, "day");
-                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Dementia);
-                bool? o_ = context.Operators.Overlaps(n_, l_, "day");
-                bool? p_ = context.Operators.And(m_, o_);
-                DataType q_ = Dementia?.Abatement;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
-                CqlDateTime t_ = context.Operators.End(s_);
-                CqlDateTime u_ = context.Operators.End(j_);
-                bool? v_ = context.Operators.After(t_, u_, "day");
-                bool? w_ = context.Operators.Or((bool?)(r_ is null), v_);
-                bool? x_ = context.Operators.And(p_, w_);
-                bool? y_ = this.isVerified(context, Dementia);
-                bool? z_ = context.Operators.And(x_, y_);
-                return z_;
+                bool? n_;
+                // CQL 'and' (64:17-65:91): right operand skipped when left is false
+                if (m_ is false)
+                {
+                    n_ = false;
+                }
+                else
+                {
+                    CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Dementia);
+                    Period q_ = EncounterAssessCognition?.Period;
+                    CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
+                    bool? s_ = context.Operators.Overlaps(p_, r_, "day");
+                    n_ = m_ & s_;
+                }
+                bool? o_;
+                // CQL 'and' (64:17-68:9): right operand skipped when left is false
+                if (n_ is false)
+                {
+                    o_ = false;
+                }
+                else
+                {
+                    DataType t_ = Dementia?.Abatement;
+                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                    bool? v_ = (bool?)(u_ is null);
+                    bool? w_;
+                    // CQL 'or' (66:13-68:9): right operand skipped when left is true
+                    if (v_ is true)
+                    {
+                        w_ = true;
+                    }
+                    else
+                    {
+                        DataType x_ = Dementia?.Abatement;
+                        object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                        CqlInterval<CqlDateTime> z_ = QICoreCommon_4_0_000.Instance.toInterval(context, y_);
+                        CqlDateTime aa_ = context.Operators.End(z_);
+                        CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
+                        CqlDateTime ac_ = context.Operators.End(ab_);
+                        bool? ad_ = context.Operators.After(aa_, ac_, "day");
+                        w_ = v_ | ad_;
+                    }
+                    o_ = n_ & w_;
+                }
+                // CQL 'and' (64:17-69:35): right operand skipped when left is false
+                if (o_ is false)
+                {
+                    return false;
+                }
+                else
+                {
+                    bool? ae_ = this.isVerified(context, Dementia);
+                    return o_ & ae_;
+                }
             }
 
             bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
@@ -259,12 +338,19 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             Period h_ = ValidEncounter?.Period;
             CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
             bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
-            Code<Encounter.EncounterStatus> k_ = ValidEncounter?.StatusElement;
-            Encounter.EncounterStatus? l_ = k_?.Value;
-            Code<Encounter.EncounterStatus> m_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(l_);
-            bool? n_ = context.Operators.Equal(m_, "finished");
-            bool? o_ = context.Operators.And(j_, n_);
-            return o_;
+            // CQL 'and' (101:5-102:44): right operand skipped when left is false
+            if (j_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Code<Encounter.EncounterStatus> k_ = ValidEncounter?.StatusElement;
+                Encounter.EncounterStatus? l_ = k_?.Value;
+                Code<Encounter.EncounterStatus> m_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(l_);
+                bool? n_ = context.Operators.Equal(m_, "finished");
+                return j_ & n_;
+            }
         }
 
         IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
@@ -282,11 +368,18 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
     {
         IEnumerable<Encounter> a_ = this.Dementia_Encounter_During_Measurement_Period(context);
         bool? b_ = context.Operators.Exists<Encounter>(a_);
-        IEnumerable<Encounter> c_ = this.Qualifying_Encounter_During_Measurement_Period(context);
-        int? d_ = context.Operators.Count<Encounter>(c_);
-        bool? e_ = context.Operators.GreaterOrEqual(d_, 2);
-        bool? f_ = context.Operators.And(b_, e_);
-        return f_;
+        // CQL 'and' (37:3-38:72): right operand skipped when left is false
+        if (b_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            IEnumerable<Encounter> c_ = this.Qualifying_Encounter_During_Measurement_Period(context);
+            int? d_ = context.Operators.Count<Encounter>(c_);
+            bool? e_ = context.Operators.GreaterOrEqual(d_, 2);
+            return b_ & e_;
+        }
     }
 
 
@@ -332,9 +425,18 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 CqlDateTime u_ = context.Operators.Subtract(s_, t_);
                 CqlInterval<CqlDateTime> v_ = context.Operators.Interval(u_, s_, true, true);
                 bool? w_ = context.Operators.In<CqlDateTime>(p_, v_, "day");
-                bool? x_ = context.Operators.Not((bool?)(s_ is null));
-                bool? y_ = context.Operators.And(w_, x_);
-                return y_;
+                // CQL 'and' (56:17-56:137): right operand skipped when left is false
+                if (w_ is false)
+                {
+                    return false;
+                }
+                else
+                {
+                    Period x_ = EncounterDementia?.Period;
+                    CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, x_);
+                    CqlDateTime z_ = context.Operators.End(y_);
+                    return w_ & (!((bool?)(z_ is null)));
+                }
             }
 
             bool? l_ = context.Operators.WhereAny<Encounter>(j_, k_);
@@ -344,20 +446,27 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
         IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
 
         bool? h_(Observation CognitiveAssessment) {
-            DataType z_ = CognitiveAssessment?.Value;
-            object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-            bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
-            Code<ObservationStatus> ac_ = CognitiveAssessment?.StatusElement;
-            ObservationStatus? ad_ = ac_?.Value;
-            string ae_ = context.Operators.Convert<string>(ad_);
-            string[] af_ = [
-                "final",
-                "amended",
-                "corrected",
-            ];
-            bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
-            bool? ah_ = context.Operators.And(ab_, ag_);
-            return ah_;
+            DataType aa_ = CognitiveAssessment?.Value;
+            object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+            bool? ac_ = !((bool?)(ab_ is null));
+            // CQL 'and' (57:5-58:75): right operand skipped when left is false
+            if (ac_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Code<ObservationStatus> ad_ = CognitiveAssessment?.StatusElement;
+                ObservationStatus? ae_ = ad_?.Value;
+                string af_ = context.Operators.Convert<string>(ae_);
+                string[] ag_ = [
+                    "final",
+                    "amended",
+                    "corrected",
+                ];
+                bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
+                return ac_ & ah_;
+            }
         }
 
         IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);

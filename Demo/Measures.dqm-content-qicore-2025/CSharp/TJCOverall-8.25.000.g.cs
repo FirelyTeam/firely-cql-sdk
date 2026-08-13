@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("TJCOverall", "8.25.000")]
 public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_000>
 {
@@ -107,11 +107,20 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             CqlDate l_ = context.Operators.DateFrom(k_);
             int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
             bool? n_ = context.Operators.GreaterOrEqual(m_, 18);
-            CqlDateTime o_ = context.Operators.End(j_);
-            CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-            bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, "day");
-            bool? r_ = context.Operators.And(n_, q_);
-            return r_;
+            // CQL 'and' (25:9-26:80): right operand skipped when left is false
+            if (n_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Period o_ = NonElectiveEncounter?.Period;
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
+                CqlDateTime q_ = context.Operators.End(p_);
+                CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+                bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
+                return n_ & s_;
+            }
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -156,19 +165,65 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
             CqlValueSet g_ = this.Discharge_To_Acute_Care_Facility(context);
             bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
-            CqlValueSet i_ = this.Left_Against_Medical_Advice(context);
-            bool? j_ = context.Operators.ConceptInValueSet(f_, i_);
-            bool? k_ = context.Operators.Or(h_, j_);
-            CqlValueSet l_ = this.Patient_Expired(context);
-            bool? m_ = context.Operators.ConceptInValueSet(f_, l_);
-            bool? n_ = context.Operators.Or(k_, m_);
-            CqlValueSet o_ = this.Discharged_to_Home_for_Hospice_Care(context);
-            bool? p_ = context.Operators.ConceptInValueSet(f_, o_);
-            bool? q_ = context.Operators.Or(n_, p_);
-            CqlValueSet r_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
-            bool? s_ = context.Operators.ConceptInValueSet(f_, r_);
-            bool? t_ = context.Operators.Or(q_, s_);
-            return t_;
+            bool? i_;
+            // CQL 'or' (35:11-36:47): right operand skipped when left is true
+            if (h_ is true)
+            {
+                i_ = true;
+            }
+            else
+            {
+                Encounter.HospitalizationComponent l_ = IschemicStrokeEncounter?.Hospitalization;
+                CodeableConcept m_ = l_?.DischargeDisposition;
+                CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
+                CqlValueSet o_ = this.Left_Against_Medical_Advice(context);
+                bool? p_ = context.Operators.ConceptInValueSet(n_, o_);
+                i_ = h_ | p_;
+            }
+            bool? j_;
+            // CQL 'or' (35:11-37:35): right operand skipped when left is true
+            if (i_ is true)
+            {
+                j_ = true;
+            }
+            else
+            {
+                Encounter.HospitalizationComponent q_ = IschemicStrokeEncounter?.Hospitalization;
+                CodeableConcept r_ = q_?.DischargeDisposition;
+                CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
+                CqlValueSet t_ = this.Patient_Expired(context);
+                bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
+                j_ = i_ | u_;
+            }
+            bool? k_;
+            // CQL 'or' (35:11-38:55): right operand skipped when left is true
+            if (j_ is true)
+            {
+                k_ = true;
+            }
+            else
+            {
+                Encounter.HospitalizationComponent v_ = IschemicStrokeEncounter?.Hospitalization;
+                CodeableConcept w_ = v_?.DischargeDisposition;
+                CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
+                CqlValueSet y_ = this.Discharged_to_Home_for_Hospice_Care(context);
+                bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
+                k_ = j_ | z_;
+            }
+            // CQL 'or' (35:4-39:71): right operand skipped when left is true
+            if (k_ is true)
+            {
+                return true;
+            }
+            else
+            {
+                Encounter.HospitalizationComponent aa_ = IschemicStrokeEncounter?.Hospitalization;
+                CodeableConcept ab_ = aa_?.DischargeDisposition;
+                CqlConcept ac_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ab_);
+                CqlValueSet ad_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
+                bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
+                return k_ | ae_;
+            }
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -198,35 +253,42 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 "on-hold",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            Code<RequestIntent> o_ = ComfortCare?.IntentElement;
-            RequestIntent? p_ = o_?.Value;
-            Code<RequestIntent> q_ = context.Operators.Convert<Code<RequestIntent>>(p_);
-            string r_ = context.Operators.Convert<string>(q_);
-            string[] s_ = [
-                "order",
-                "original-order",
-                "reflex-order",
-                "filler-order",
-                "instance-order",
-            ];
-            bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
-            bool? u_ = context.Operators.And(n_, t_);
-            return u_;
+            // CQL 'and' (48:5-49:111): right operand skipped when left is false
+            if (n_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Code<RequestIntent> o_ = ComfortCare?.IntentElement;
+                RequestIntent? p_ = o_?.Value;
+                Code<RequestIntent> q_ = context.Operators.Convert<Code<RequestIntent>>(p_);
+                string r_ = context.Operators.Convert<string>(q_);
+                string[] s_ = [
+                    "order",
+                    "original-order",
+                    "reflex-order",
+                    "filler-order",
+                    "instance-order",
+                ];
+                bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
+                return n_ & t_;
+            }
         }
 
         IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
         IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
         bool? f_(Procedure ComfortCarePerformed) {
-            Code<EventStatus> v_ = ComfortCarePerformed?.StatusElement;
-            EventStatus? w_ = v_?.Value;
-            string x_ = context.Operators.Convert<string>(w_);
-            string[] y_ = [
+            Code<EventStatus> u_ = ComfortCarePerformed?.StatusElement;
+            EventStatus? v_ = u_?.Value;
+            string w_ = context.Operators.Convert<string>(v_);
+            string[] x_ = [
                 "completed",
                 "in-progress",
             ];
-            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
-            return z_;
+            bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
+            return y_;
         }
 
         IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);

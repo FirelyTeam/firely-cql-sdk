@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("VTEFHIR4", "4.8.000")]
 public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
 {
@@ -90,29 +90,36 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
             List<CodeableConcept> i_ = h_?.Type;
 
             CqlConcept j_(CodeableConcept X) {
-                CqlConcept t_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
-                return t_;
+                CqlConcept n_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
+                return n_;
             }
 
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
             CqlValueSet l_ = this.Intensive_Care_Unit(context);
             bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
-            Period n_ = Encounter?.Period;
-            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
-            Period p_ = HospitalLocation?.Period;
-            CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, p_);
-            bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, (string)default);
-            bool? s_ = context.Operators.And(m_, r_);
-            return s_;
+            // CQL 'and' (23:6-24:57): right operand skipped when left is false
+            if (m_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Period o_ = Encounter?.Period;
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, o_);
+                Period q_ = HospitalLocation?.Period;
+                CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, q_);
+                bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, r_, (string)default);
+                return m_ & s_;
+            }
         }
 
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
 
         object d_(Encounter.LocationComponent @this) {
-            Period u_ = @this?.Period;
-            CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
-            CqlDateTime w_ = context.Operators.Start(v_);
-            return w_;
+            Period t_ = @this?.Period;
+            CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, t_);
+            CqlDateTime v_ = context.Operators.Start(u_);
+            return v_;
         }
 
         IEnumerable<Encounter.LocationComponent> e_ = context.Operators.SortBy<Encounter.LocationComponent>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);

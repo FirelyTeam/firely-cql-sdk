@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("NCQACQLBase", "1.0.0")]
 public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 {
@@ -155,14 +155,13 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 bool? e_(CqlInterval<CqlDate> I) {
 
                     bool? h_(CqlInterval<CqlDate> J) {
-                        bool? l_ = context.Operators.IntervalProperlyIncludesInterval<CqlDate>(J, I, (string)default);
-                        return l_;
+                        bool? k_ = context.Operators.IntervalProperlyIncludesInterval<CqlDate>(J, I, (string)default);
+                        return k_;
                     }
 
                     IEnumerable<bool?> i_ = context.Operators.SelectDistinct<CqlInterval<CqlDate>, bool?>(intervals, h_);
                     bool? j_ = context.Operators.AnyTrue(i_);
-                    bool? k_ = context.Operators.Not(j_);
-                    return k_;
+                    return !j_;
                 }
 
                 IEnumerable<CqlInterval<CqlDate>> f_ = context.Operators.Where<CqlInterval<CqlDate>>(intervals, e_);
@@ -196,14 +195,13 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 bool? e_(CqlInterval<CqlDateTime> I) {
 
                     bool? h_(CqlInterval<CqlDateTime> J) {
-                        bool? l_ = context.Operators.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, (string)default);
-                        return l_;
+                        bool? k_ = context.Operators.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, (string)default);
+                        return k_;
                     }
 
                     IEnumerable<bool?> i_ = context.Operators.SelectDistinct<CqlInterval<CqlDateTime>, bool?>(intervals, h_);
                     bool? j_ = context.Operators.AnyTrue(i_);
-                    bool? k_ = context.Operators.Not(j_);
-                    return k_;
+                    return !j_;
                 }
 
                 IEnumerable<CqlInterval<CqlDateTime>> f_ = context.Operators.Where<CqlInterval<CqlDateTime>>(intervals, e_);

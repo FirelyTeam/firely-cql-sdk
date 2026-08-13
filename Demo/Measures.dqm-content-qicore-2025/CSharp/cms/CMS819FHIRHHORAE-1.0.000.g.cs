@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("CMS819FHIRHHORAE", "1.0.000")]
 public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRHHORAE_1_0_000>
 {
@@ -107,16 +107,34 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             CqlDate l_ = context.Operators.DateFrom(k_);
             int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
             bool? n_ = context.Operators.GreaterOrEqual(m_, 18);
-            CqlDateTime o_ = context.Operators.End(j_);
-            CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-            bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, "day");
-            bool? r_ = context.Operators.And(n_, q_);
-            Code<Encounter.EncounterStatus> s_ = InpatientEncounter?.StatusElement;
-            Encounter.EncounterStatus? t_ = s_?.Value;
-            Code<Encounter.EncounterStatus> u_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(t_);
-            bool? v_ = context.Operators.Equal(u_, "finished");
-            bool? w_ = context.Operators.And(r_, v_);
-            return w_;
+            bool? o_;
+            // CQL 'and' (42:11-43:75): right operand skipped when left is false
+            if (n_ is false)
+            {
+                o_ = false;
+            }
+            else
+            {
+                Period p_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
+                CqlDateTime r_ = context.Operators.End(q_);
+                CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
+                bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
+                o_ = n_ & t_;
+            }
+            // CQL 'and' (42:5-44:48): right operand skipped when left is false
+            if (o_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Code<Encounter.EncounterStatus> u_ = InpatientEncounter?.StatusElement;
+                Encounter.EncounterStatus? v_ = u_?.Value;
+                Code<Encounter.EncounterStatus> w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
+                bool? x_ = context.Operators.Equal(w_, "finished");
+                return o_ & x_;
+            }
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -143,12 +161,19 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                 IEnumerable<string> n_ = context.Operators.Split((string)m_, "/");
                 string o_ = context.Operators.Last<string>(n_);
                 bool? p_ = context.Operators.Equal(l_, o_);
-                CodeableConcept q_ = M?.Code;
-                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                CqlValueSet s_ = this.Opioids__All(context);
-                bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
-                bool? u_ = context.Operators.And(p_, t_);
-                return u_;
+                // CQL 'and': right operand skipped when left is false
+                if (p_ is false)
+                {
+                    return false;
+                }
+                else
+                {
+                    CodeableConcept q_ = M?.Code;
+                    CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
+                    CqlValueSet s_ = this.Opioids__All(context);
+                    bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
+                    return p_ & t_;
+                }
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -161,11 +186,11 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
         IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(c_, e_);
 
         bool? g_(MedicationAdministration Opioids) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> v_ = Opioids?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? w_ = v_?.Value;
-            string x_ = context.Operators.Convert<string>(w_);
-            bool? y_ = context.Operators.Equal(x_, "completed");
-            return y_;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> u_ = Opioids?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? v_ = u_?.Value;
+            string w_ = context.Operators.Convert<string>(v_);
+            bool? x_ = context.Operators.Equal(w_, "completed");
+            return x_;
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
@@ -193,36 +218,49 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                 CqlDateTime j_ = context.Operators.Start(i_);
                 CqlInterval<CqlDateTime> k_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
                 bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, (string)default);
-                List<Encounter.LocationComponent> m_ = InpatientEncounter?.Location;
+                // CQL 'and' (61:17-65:9): right operand skipped when left is false
+                if (l_ is false)
+                {
+                    return false;
+                }
+                else
+                {
+                    List<Encounter.LocationComponent> m_ = InpatientEncounter?.Location;
 
-                bool? n_(Encounter.LocationComponent EncounterLocation) {
-                    ResourceReference r_ = EncounterLocation?.Location;
-                    Location s_ = CQMCommon_4_1_000.Instance.getLocation(context, r_);
-                    List<CodeableConcept> t_ = s_?.Type;
+                    bool? n_(Encounter.LocationComponent EncounterLocation) {
+                        ResourceReference p_ = EncounterLocation?.Location;
+                        Location q_ = CQMCommon_4_1_000.Instance.getLocation(context, p_);
+                        List<CodeableConcept> r_ = q_?.Type;
 
-                    CqlConcept u_(CodeableConcept @this) {
-                        CqlConcept ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                        return ag_;
+                        CqlConcept s_(CodeableConcept @this) {
+                            CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                            return w_;
+                        }
+
+                        IEnumerable<CqlConcept> t_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)r_, s_);
+                        CqlValueSet u_ = this.Operating_Room_Suite(context);
+                        bool? v_ = context.Operators.ConceptsInValueSet(t_, u_);
+                        // CQL 'and' (63:13-64:93): right operand skipped when left is false
+                        if (v_ is false)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            DataType x_ = OpioidGiven?.Effective;
+                            object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                            CqlInterval<CqlDateTime> z_ = QICoreCommon_4_0_000.Instance.toInterval(context, y_);
+                            CqlDateTime aa_ = context.Operators.Start(z_);
+                            Period ab_ = EncounterLocation?.Period;
+                            CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ab_);
+                            bool? ad_ = context.Operators.In<CqlDateTime>(aa_, ac_, (string)default);
+                            return v_ & ad_;
+                        }
                     }
 
-                    IEnumerable<CqlConcept> v_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)t_, u_);
-                    CqlValueSet w_ = this.Operating_Room_Suite(context);
-                    bool? x_ = context.Operators.ConceptsInValueSet(v_, w_);
-                    DataType y_ = OpioidGiven?.Effective;
-                    object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.toInterval(context, z_);
-                    CqlDateTime ab_ = context.Operators.Start(aa_);
-                    Period ac_ = EncounterLocation?.Period;
-                    CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ac_);
-                    bool? ae_ = context.Operators.In<CqlDateTime>(ab_, ad_, (string)default);
-                    bool? af_ = context.Operators.And(x_, ae_);
-                    return af_;
+                    bool? o_ = context.Operators.WhereAny<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)m_, n_);
+                    return l_ & !o_;
                 }
-
-                bool? o_ = context.Operators.WhereAny<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)m_, n_);
-                bool? p_ = context.Operators.Not(o_);
-                bool? q_ = context.Operators.And(l_, p_);
-                return q_;
             }
 
             bool? f_ = context.Operators.WhereAny<MedicationAdministration>(d_, e_);
@@ -279,12 +317,19 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                 IEnumerable<string> n_ = context.Operators.Split((string)m_, "/");
                 string o_ = context.Operators.Last<string>(n_);
                 bool? p_ = context.Operators.Equal(l_, o_);
-                CodeableConcept q_ = M?.Code;
-                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                CqlValueSet s_ = this.Opioid_Antagonist(context);
-                bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
-                bool? u_ = context.Operators.And(p_, t_);
-                return u_;
+                // CQL 'and': right operand skipped when left is false
+                if (p_ is false)
+                {
+                    return false;
+                }
+                else
+                {
+                    CodeableConcept q_ = M?.Code;
+                    CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
+                    CqlValueSet s_ = this.Opioid_Antagonist(context);
+                    bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
+                    return p_ & t_;
+                }
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -297,11 +342,11 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
         IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(c_, e_);
 
         bool? g_(MedicationAdministration AntagonistGiven) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> v_ = AntagonistGiven?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? w_ = v_?.Value;
-            string x_ = context.Operators.Convert<string>(w_);
-            bool? y_ = context.Operators.Equal(x_, "completed");
-            return y_;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> u_ = AntagonistGiven?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? v_ = u_?.Value;
+            string w_ = context.Operators.Convert<string>(v_);
+            bool? x_ = context.Operators.Equal(w_, "completed");
+            return x_;
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
@@ -335,59 +380,120 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             List<Encounter.LocationComponent> k_ = tuple_htckrtcfdeaiwittzheehxihp?.InpatientHospitalization?.Location;
 
             bool? l_(Encounter.LocationComponent EncounterLocation) {
-                ResourceReference ap_ = EncounterLocation?.Location;
-                Location aq_ = CQMCommon_4_1_000.Instance.getLocation(context, ap_);
-                List<CodeableConcept> ar_ = aq_?.Type;
+                ResourceReference o_ = EncounterLocation?.Location;
+                Location p_ = CQMCommon_4_1_000.Instance.getLocation(context, o_);
+                List<CodeableConcept> q_ = p_?.Type;
 
-                CqlConcept as_(CodeableConcept @this) {
-                    CqlConcept be_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                    return be_;
+                CqlConcept r_(CodeableConcept @this) {
+                    CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                    return v_;
                 }
 
-                IEnumerable<CqlConcept> at_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ar_, as_);
-                CqlValueSet au_ = this.Operating_Room_Suite(context);
-                bool? av_ = context.Operators.ConceptsInValueSet(at_, au_);
-                DataType aw_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Effective;
-                object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                CqlInterval<CqlDateTime> ay_ = QICoreCommon_4_0_000.Instance.toInterval(context, ax_);
-                CqlDateTime az_ = context.Operators.Start(ay_);
-                Period ba_ = EncounterLocation?.Period;
-                CqlInterval<CqlDateTime> bb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ba_);
-                bool? bc_ = context.Operators.In<CqlDateTime>(az_, bb_, (string)default);
-                bool? bd_ = context.Operators.And(av_, bc_);
-                return bd_;
+                IEnumerable<CqlConcept> s_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)q_, r_);
+                CqlValueSet t_ = this.Operating_Room_Suite(context);
+                bool? u_ = context.Operators.ConceptsInValueSet(s_, t_);
+                // CQL 'and' (81:9-82:109): right operand skipped when left is false
+                if (u_ is false)
+                {
+                    return false;
+                }
+                else
+                {
+                    DataType w_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Effective;
+                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                    CqlInterval<CqlDateTime> y_ = QICoreCommon_4_0_000.Instance.toInterval(context, x_);
+                    CqlDateTime z_ = context.Operators.Start(y_);
+                    Period aa_ = EncounterLocation?.Period;
+                    CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aa_);
+                    bool? ac_ = context.Operators.In<CqlDateTime>(z_, ab_, (string)default);
+                    return u_ & ac_;
+                }
             }
 
             bool? m_ = context.Operators.WhereAny<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)k_, l_);
-            bool? n_ = context.Operators.Not(m_);
-            DataType o_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Effective;
-            object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-            CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_);
-            CqlDateTime r_ = context.Operators.Start(q_);
-            CqlInterval<CqlDateTime> s_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, tuple_htckrtcfdeaiwittzheehxihp?.InpatientHospitalization);
-            bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, (string)default);
-            DataType u_ = tuple_htckrtcfdeaiwittzheehxihp?.OpioidGiven?.Effective;
-            object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-            CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.toInterval(context, v_);
-            CqlDateTime x_ = context.Operators.Start(w_);
-            bool? y_ = context.Operators.In<CqlDateTime>(x_, s_, (string)default);
-            bool? z_ = context.Operators.And(t_, y_);
-            CqlDateTime aa_ = context.Operators.End(w_);
-            CqlQuantity ab_ = context.Operators.Quantity(12m, "hours");
-            CqlDateTime ac_ = context.Operators.Subtract(r_, ab_);
-            CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(ac_, r_, true, false);
-            bool? ae_ = context.Operators.In<CqlDateTime>(aa_, ad_, (string)default);
-            bool? af_ = context.Operators.Not((bool?)(r_ is null));
-            bool? ag_ = context.Operators.And(ae_, af_);
-            bool? ah_ = context.Operators.And(z_, ag_);
-            MedicationAdministration.DosageComponent ai_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Dosage;
-            CodeableConcept aj_ = ai_?.Route;
-            CqlConcept ak_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aj_);
-            CqlValueSet al_ = this.Routes_of_Administration_for_Opioid_Antagonists(context);
-            bool? am_ = context.Operators.ConceptInValueSet(ak_, al_);
-            bool? an_ = context.Operators.And(ah_, am_);
-            bool? ao_ = context.Operators.And(n_, an_);
-            return ao_;
+            bool? n_ = !m_;
+            // CQL 'and' (80:5-88:7): right operand skipped when left is false
+            if (n_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                DataType ad_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Effective;
+                object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+                CqlInterval<CqlDateTime> af_ = QICoreCommon_4_0_000.Instance.toInterval(context, ae_);
+                CqlDateTime ag_ = context.Operators.Start(af_);
+                CqlInterval<CqlDateTime> ah_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, tuple_htckrtcfdeaiwittzheehxihp?.InpatientHospitalization);
+                bool? ai_ = context.Operators.In<CqlDateTime>(ag_, ah_, (string)default);
+                bool? aj_;
+                // CQL 'and' (84:13-85:124): right operand skipped when left is false
+                if (ai_ is false)
+                {
+                    aj_ = false;
+                }
+                else
+                {
+                    DataType am_ = tuple_htckrtcfdeaiwittzheehxihp?.OpioidGiven?.Effective;
+                    object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
+                    CqlInterval<CqlDateTime> ao_ = QICoreCommon_4_0_000.Instance.toInterval(context, an_);
+                    CqlDateTime ap_ = context.Operators.Start(ao_);
+                    CqlInterval<CqlDateTime> aq_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, tuple_htckrtcfdeaiwittzheehxihp?.InpatientHospitalization);
+                    bool? ar_ = context.Operators.In<CqlDateTime>(ap_, aq_, (string)default);
+                    aj_ = ai_ & ar_;
+                }
+                bool? ak_;
+                // CQL 'and' (84:13-86:145): right operand skipped when left is false
+                if (aj_ is false)
+                {
+                    ak_ = false;
+                }
+                else
+                {
+                    DataType as_ = tuple_htckrtcfdeaiwittzheehxihp?.OpioidGiven?.Effective;
+                    object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
+                    CqlInterval<CqlDateTime> au_ = QICoreCommon_4_0_000.Instance.toInterval(context, at_);
+                    CqlDateTime av_ = context.Operators.End(au_);
+                    DataType aw_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Effective;
+                    object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
+                    CqlInterval<CqlDateTime> ay_ = QICoreCommon_4_0_000.Instance.toInterval(context, ax_);
+                    CqlDateTime az_ = context.Operators.Start(ay_);
+                    CqlQuantity ba_ = context.Operators.Quantity(12m, "hours");
+                    CqlDateTime bb_ = context.Operators.Subtract(az_, ba_);
+                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(bb_, az_, true, false);
+                    bool? bd_ = context.Operators.In<CqlDateTime>(av_, bc_, (string)default);
+                    bool? be_;
+                    // CQL 'and' (86:15-86:145): right operand skipped when left is false
+                    if (bd_ is false)
+                    {
+                        be_ = false;
+                    }
+                    else
+                    {
+                        DataType bf_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Effective;
+                        object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
+                        CqlInterval<CqlDateTime> bh_ = QICoreCommon_4_0_000.Instance.toInterval(context, bg_);
+                        CqlDateTime bi_ = context.Operators.Start(bh_);
+                        be_ = bd_ & (!((bool?)(bi_ is null)));
+                    }
+                    ak_ = aj_ & be_;
+                }
+                bool? al_;
+                // CQL 'and' (84:11-88:7): right operand skipped when left is false
+                if (ak_ is false)
+                {
+                    al_ = false;
+                }
+                else
+                {
+                    MedicationAdministration.DosageComponent bj_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Dosage;
+                    CodeableConcept bk_ = bj_?.Route;
+                    CqlConcept bl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bk_);
+                    CqlValueSet bm_ = this.Routes_of_Administration_for_Opioid_Antagonists(context);
+                    bool? bn_ = context.Operators.ConceptInValueSet(bl_, bm_);
+                    al_ = ak_ & bn_;
+                }
+                return n_ & al_;
+            }
         }
 
         IEnumerable<(CqlTupleMetadata, MedicationAdministration NonEnteralOpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter InpatientHospitalization)?> g_ = context.Operators.SelectWhere<ValueTuple<MedicationAdministration, MedicationAdministration, Encounter>, (CqlTupleMetadata, MedicationAdministration NonEnteralOpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter InpatientHospitalization)?>(d_, e_, f_);

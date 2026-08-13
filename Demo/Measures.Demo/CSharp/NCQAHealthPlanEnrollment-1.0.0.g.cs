@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("NCQAHealthPlanEnrollment", "1.0.0")]
 public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAHealthPlanEnrollment_1_0_0>
 {
@@ -69,18 +69,25 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
             CqlDate l_ = context.Operators.Add(i_, j_);
             CqlInterval<CqlDate> m_ = context.Operators.Interval(k_, l_, true, true);
             bool? n_ = context.Operators.In<CqlDate>(h_, m_, (string)default);
-            bool? o_ = context.Operators.Not((bool?)(i_ is null));
-            bool? p_ = context.Operators.And(n_, o_);
-            return p_;
+            // CQL 'and' (24:5-25:55): right operand skipped when left is false
+            if (n_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                CqlDate o_ = context.Operators.Start(tuple_banhuzxcqbuklngedwddhjyv?.Coverage2);
+                return n_ & (!((bool?)(o_ is null)));
+            }
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?> d_ = context.Operators.SelectWhere<ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>>, (CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?>(a_, b_, c_);
 
         CqlInterval<CqlDate> e_((CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)? tuple_banhuzxcqbuklngedwddhjyv) {
-            CqlDate q_ = context.Operators.Start(tuple_banhuzxcqbuklngedwddhjyv?.Coverage1);
-            CqlDate r_ = context.Operators.End(tuple_banhuzxcqbuklngedwddhjyv?.Coverage2);
-            CqlInterval<CqlDate> s_ = context.Operators.Interval(q_, r_, true, true);
-            return s_;
+            CqlDate p_ = context.Operators.Start(tuple_banhuzxcqbuklngedwddhjyv?.Coverage1);
+            CqlDate q_ = context.Operators.End(tuple_banhuzxcqbuklngedwddhjyv?.Coverage2);
+            CqlInterval<CqlDate> r_ = context.Operators.Interval(p_, q_, true, true);
+            return r_;
         }
 
         IEnumerable<CqlInterval<CqlDate>> f_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?, CqlInterval<CqlDate>>(d_, e_);
@@ -125,14 +132,13 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
         bool? c_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this) {
             IEnumerable<CqlInterval<CqlDate>> l_ = @this?.CollapsedFinal;
-            bool? m_ = context.Operators.Not((bool?)(l_ is null));
-            return m_;
+            return !((bool?)(l_ is null));
         }
 
 
         IEnumerable<CqlInterval<CqlDate>> d_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this) {
-            IEnumerable<CqlInterval<CqlDate>> n_ = @this?.CollapsedFinal;
-            return n_;
+            IEnumerable<CqlInterval<CqlDate>> m_ = @this?.CollapsedFinal;
+            return m_;
         }
 
         IEnumerable<IEnumerable<CqlInterval<CqlDate>>> e_ = context.Operators.WhereSelect<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(b_, c_, d_);
@@ -143,14 +149,30 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         ];
 
         bool? i_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? GapsInEnrollment) {
-            int? o_ = GapsInEnrollment?.Interval_Count;
-            bool? p_ = context.Operators.LessOrEqual(o_, 1);
-            int? q_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
-            bool? r_ = context.Operators.LessOrEqual(q_, AllowedGapDays);
-            bool? s_ = context.Operators.And(p_, r_);
-            bool? t_ = this.Anchor_Date_Criteria(context, Coverage, AnchorDate, participationPeriod);
-            bool? u_ = context.Operators.And(s_, t_);
-            return u_;
+            int? n_ = GapsInEnrollment?.Interval_Count;
+            bool? o_ = context.Operators.LessOrEqual(n_, 1);
+            bool? p_;
+            // CQL 'and' (48:14-49:79): right operand skipped when left is false
+            if (o_ is false)
+            {
+                p_ = false;
+            }
+            else
+            {
+                int? q_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
+                bool? r_ = context.Operators.LessOrEqual(q_, AllowedGapDays);
+                p_ = o_ & r_;
+            }
+            // CQL 'and' (48:12-51:5): right operand skipped when left is false
+            if (p_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                bool? s_ = this.Anchor_Date_Criteria(context, Coverage, AnchorDate, participationPeriod);
+                return p_ & s_;
+            }
         }
 
         IEnumerable<bool?> j_ = context.Operators.SelectDistinct<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)h_, i_);
@@ -171,13 +193,31 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
                 CqlCode i_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
                 CqlCode j_ = NCQATerminology_1_0_0.Instance.managed_care_policy(context);
                 bool? k_ = context.Operators.Equivalent(i_, j_);
-                CqlCode l_ = NCQATerminology_1_0_0.Instance.retiree_health_program(context);
-                bool? m_ = context.Operators.Equivalent(i_, l_);
-                bool? n_ = context.Operators.Or(k_, m_);
-                CqlCode o_ = NCQATerminology_1_0_0.Instance.subsidized_health_program(context);
-                bool? p_ = context.Operators.Equivalent(i_, o_);
-                bool? q_ = context.Operators.Or(n_, p_);
-                return q_;
+                bool? l_;
+                // CQL 'or' (56:15-57:86): right operand skipped when left is true
+                if (k_ is true)
+                {
+                    l_ = true;
+                }
+                else
+                {
+                    CqlCode m_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
+                    CqlCode n_ = NCQATerminology_1_0_0.Instance.retiree_health_program(context);
+                    bool? o_ = context.Operators.Equivalent(m_, n_);
+                    l_ = k_ | o_;
+                }
+                // CQL 'or' (56:7-59:7): right operand skipped when left is true
+                if (l_ is true)
+                {
+                    return true;
+                }
+                else
+                {
+                    CqlCode p_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
+                    CqlCode q_ = NCQATerminology_1_0_0.Instance.subsidized_health_program(context);
+                    bool? r_ = context.Operators.Equivalent(p_, q_);
+                    return l_ | r_;
+                }
             }
 
             bool? h_ = context.Operators.WhereAny<Coding>((IEnumerable<Coding>)f_, g_);
@@ -185,12 +225,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         }
 
         IEnumerable<Coverage> b_ = context.Operators.Where<Coverage>(Coverage, a_);
-
-        bool? c_(Coverage HPCoverageResource) {
-            bool? r_ = context.Operators.Not((bool?)(HPCoverageResource is null));
-            return r_;
-        }
-
+        bool? c_(Coverage HPCoverageResource) => !((bool?)(HPCoverageResource is null));
         IEnumerable<Coverage> d_ = context.Operators.Where<Coverage>(b_, c_);
         return d_;
     }
@@ -205,70 +240,63 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
             bool? b_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this) {
                 IEnumerable<CqlInterval<CqlDate>> h_ = @this?.CollapsedFinal;
-                bool? i_ = context.Operators.Not((bool?)(h_ is null));
-                return i_;
+                return !((bool?)(h_ is null));
             }
 
 
             IEnumerable<CqlInterval<CqlDate>> c_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this) {
-                IEnumerable<CqlInterval<CqlDate>> j_ = @this?.CollapsedFinal;
-                return j_;
+                IEnumerable<CqlInterval<CqlDate>> i_ = @this?.CollapsedFinal;
+                return i_;
             }
 
             IEnumerable<IEnumerable<CqlInterval<CqlDate>>> d_ = context.Operators.WhereSelect<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(a_, b_, c_);
             IEnumerable<CqlInterval<CqlDate>> e_ = context.Operators.Flatten<CqlInterval<CqlDate>>(d_);
 
             bool? f_(CqlInterval<CqlDate> FinalInterval) {
-                bool? k_ = context.Operators.In<CqlDate>(AnchorDate, FinalInterval, (string)default);
-                return k_;
+                bool? j_ = context.Operators.In<CqlDate>(AnchorDate, FinalInterval, (string)default);
+                return j_;
             }
 
             bool? g_ = context.Operators.WhereAny<CqlInterval<CqlDate>>(e_, f_);
             return g_;
         }
+        else if ((!(context.Operators.In<CqlDate>(AnchorDate, participationPeriod, (string)default))) ?? false)
+        {
+
+            bool? k_(Coverage @this) {
+                Period p_ = @this?.Period;
+                return !((bool?)(p_ is null));
+            }
+
+
+            Period l_(Coverage @this) {
+                Period q_ = @this?.Period;
+                return q_;
+            }
+
+            IEnumerable<Period> m_ = context.Operators.WhereSelect<Coverage, Period>(Coverage, k_, l_);
+
+            bool? n_(Period Cperiod) {
+                CqlInterval<CqlDateTime> r_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, Cperiod);
+                CqlDateTime s_ = context.Operators.Start(r_);
+                CqlDate t_ = context.Operators.DateFrom(s_);
+                CqlDateTime u_ = context.Operators.End(r_);
+                CqlDate v_ = context.Operators.DateFrom(u_);
+                CqlInterval<CqlDate> w_ = context.Operators.Interval(t_, v_, true, true);
+                bool? x_ = context.Operators.In<CqlDate>(AnchorDate, w_, (string)default);
+                return x_;
+            }
+
+            bool? o_ = context.Operators.WhereAny<Period>(m_, n_);
+            return o_;
+        }
+        else if (AnchorDate is null)
+        {
+            return true;
+        }
         else
         {
-            bool? l_ = context.Operators.In<CqlDate>(AnchorDate, participationPeriod, (string)default);
-            bool? m_ = context.Operators.Not(l_);
-            if (m_ ?? false)
-            {
-
-                bool? n_(Coverage @this) {
-                    Period s_ = @this?.Period;
-                    bool? t_ = context.Operators.Not((bool?)(s_ is null));
-                    return t_;
-                }
-
-
-                Period o_(Coverage @this) {
-                    Period u_ = @this?.Period;
-                    return u_;
-                }
-
-                IEnumerable<Period> p_ = context.Operators.WhereSelect<Coverage, Period>(Coverage, n_, o_);
-
-                bool? q_(Period Cperiod) {
-                    CqlInterval<CqlDateTime> v_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, Cperiod);
-                    CqlDateTime w_ = context.Operators.Start(v_);
-                    CqlDate x_ = context.Operators.DateFrom(w_);
-                    CqlDateTime y_ = context.Operators.End(v_);
-                    CqlDate z_ = context.Operators.DateFrom(y_);
-                    CqlInterval<CqlDate> aa_ = context.Operators.Interval(x_, z_, true, true);
-                    bool? ab_ = context.Operators.In<CqlDate>(AnchorDate, aa_, (string)default);
-                    return ab_;
-                }
-
-                bool? r_ = context.Operators.WhereAny<Period>(p_, q_);
-                return r_;
-            }
-            else if (AnchorDate is null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
     }
 
@@ -281,14 +309,13 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
         bool? c_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this) {
             IEnumerable<CqlInterval<CqlDate>> l_ = @this?.CollapsedFinal;
-            bool? m_ = context.Operators.Not((bool?)(l_ is null));
-            return m_;
+            return !((bool?)(l_ is null));
         }
 
 
         IEnumerable<CqlInterval<CqlDate>> d_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this) {
-            IEnumerable<CqlInterval<CqlDate>> n_ = @this?.CollapsedFinal;
-            return n_;
+            IEnumerable<CqlInterval<CqlDate>> m_ = @this?.CollapsedFinal;
+            return m_;
         }
 
         IEnumerable<IEnumerable<CqlInterval<CqlDate>>> e_ = context.Operators.WhereSelect<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(b_, c_, d_);
@@ -299,14 +326,30 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         ];
 
         bool? i_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? GapsInEnrollment) {
-            int? o_ = GapsInEnrollment?.Interval_Count;
-            bool? p_ = context.Operators.LessOrEqual(o_, 1);
-            int? q_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
-            bool? r_ = context.Operators.LessOrEqual(q_, AllowedGapDays);
-            bool? s_ = context.Operators.And(p_, r_);
-            bool? t_ = this.Anchor_Date_Criteria(context, PharmCoverage, AnchorDate, participationPeriod);
-            bool? u_ = context.Operators.And(s_, t_);
-            return u_;
+            int? n_ = GapsInEnrollment?.Interval_Count;
+            bool? o_ = context.Operators.LessOrEqual(n_, 1);
+            bool? p_;
+            // CQL 'and' (64:14-65:79): right operand skipped when left is false
+            if (o_ is false)
+            {
+                p_ = false;
+            }
+            else
+            {
+                int? q_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
+                bool? r_ = context.Operators.LessOrEqual(q_, AllowedGapDays);
+                p_ = o_ & r_;
+            }
+            // CQL 'and' (64:12-67:5): right operand skipped when left is false
+            if (p_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                bool? s_ = this.Anchor_Date_Criteria(context, PharmCoverage, AnchorDate, participationPeriod);
+                return p_ & s_;
+            }
         }
 
         IEnumerable<bool?> j_ = context.Operators.SelectDistinct<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)h_, i_);
@@ -335,12 +378,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         }
 
         IEnumerable<Coverage> b_ = context.Operators.Where<Coverage>(Coverage, a_);
-
-        bool? c_(Coverage pharmacyCoverageResource) {
-            bool? l_ = context.Operators.Not((bool?)(pharmacyCoverageResource is null));
-            return l_;
-        }
-
+        bool? c_(Coverage pharmacyCoverageResource) => !((bool?)(pharmacyCoverageResource is null));
         IEnumerable<Coverage> d_ = context.Operators.Where<Coverage>(b_, c_);
         return d_;
     }
@@ -354,14 +392,13 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
         bool? c_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this) {
             IEnumerable<CqlInterval<CqlDate>> l_ = @this?.CollapsedFinal;
-            bool? m_ = context.Operators.Not((bool?)(l_ is null));
-            return m_;
+            return !((bool?)(l_ is null));
         }
 
 
         IEnumerable<CqlInterval<CqlDate>> d_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this) {
-            IEnumerable<CqlInterval<CqlDate>> n_ = @this?.CollapsedFinal;
-            return n_;
+            IEnumerable<CqlInterval<CqlDate>> m_ = @this?.CollapsedFinal;
+            return m_;
         }
 
         IEnumerable<IEnumerable<CqlInterval<CqlDate>>> e_ = context.Operators.WhereSelect<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(b_, c_, d_);
@@ -372,14 +409,30 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         ];
 
         bool? i_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? GapsInEnrollment) {
-            int? o_ = GapsInEnrollment?.Interval_Count;
-            bool? p_ = context.Operators.LessOrEqual(o_, 1);
-            int? q_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
-            bool? r_ = context.Operators.LessOrEqual(q_, AllowedGapDays);
-            bool? s_ = context.Operators.And(p_, r_);
-            bool? t_ = this.Anchor_Date_Criteria(context, MHCoverage, AnchorDate, participationPeriod);
-            bool? u_ = context.Operators.And(s_, t_);
-            return u_;
+            int? n_ = GapsInEnrollment?.Interval_Count;
+            bool? o_ = context.Operators.LessOrEqual(n_, 1);
+            bool? p_;
+            // CQL 'and' (78:14-79:79): right operand skipped when left is false
+            if (o_ is false)
+            {
+                p_ = false;
+            }
+            else
+            {
+                int? q_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
+                bool? r_ = context.Operators.LessOrEqual(q_, AllowedGapDays);
+                p_ = o_ & r_;
+            }
+            // CQL 'and' (78:12-81:5): right operand skipped when left is false
+            if (p_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                bool? s_ = this.Anchor_Date_Criteria(context, MHCoverage, AnchorDate, participationPeriod);
+                return p_ & s_;
+            }
         }
 
         IEnumerable<bool?> j_ = context.Operators.SelectDistinct<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)h_, i_);
@@ -408,12 +461,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         }
 
         IEnumerable<Coverage> b_ = context.Operators.Where<Coverage>(Coverage, a_);
-
-        bool? c_(Coverage mentalHealthCoverageResource) {
-            bool? l_ = context.Operators.Not((bool?)(mentalHealthCoverageResource is null));
-            return l_;
-        }
-
+        bool? c_(Coverage mentalHealthCoverageResource) => !((bool?)(mentalHealthCoverageResource is null));
         IEnumerable<Coverage> d_ = context.Operators.Where<Coverage>(b_, c_);
         return d_;
     }

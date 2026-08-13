@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("CMS155FHIRWgtAssessCounseling", "1.0.000")]
 public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleton<CMS155FHIRWgtAssessCounseling_1_0_000>
 {
@@ -209,10 +209,17 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(3, 17, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        IEnumerable<Encounter> k_ = this.Qualifying_Encounters(context);
-        bool? l_ = context.Operators.Exists<Encounter>(k_);
-        bool? m_ = context.Operators.And(j_, l_);
-        return m_;
+        // CQL 'and' (40:3-43:38): right operand skipped when left is false
+        if (j_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            IEnumerable<Encounter> k_ = this.Qualifying_Encounters(context);
+            bool? l_ = context.Operators.Exists<Encounter>(k_);
+            return j_ & l_;
+        }
     }
 
 
@@ -264,10 +271,17 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        IEnumerable<Condition> b_ = this.Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(context);
-        bool? c_ = context.Operators.Exists<Condition>(b_);
-        bool? d_ = context.Operators.Or(a_, c_);
-        return d_;
+        // CQL 'or' (49:3-50:69): right operand skipped when left is true
+        if (a_ is true)
+        {
+            return true;
+        }
+        else
+        {
+            IEnumerable<Condition> b_ = this.Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(context);
+            bool? c_ = context.Operators.Exists<Condition>(b_);
+            return a_ | c_;
+        }
     }
 
 
@@ -288,11 +302,17 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
             bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
-            DataType j_ = BMIPercentile?.Value;
-            CqlQuantity k_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, j_ as Quantity);
-            bool? l_ = context.Operators.Not((bool?)(k_ is null));
-            bool? m_ = context.Operators.And(i_, l_);
-            return m_;
+            // CQL 'and' (104:5-105:41): right operand skipped when left is false
+            if (i_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                DataType j_ = BMIPercentile?.Value;
+                CqlQuantity k_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, j_ as Quantity);
+                return i_ & (!((bool?)(k_ is null)));
+            }
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -317,11 +337,17 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
             bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
-            DataType j_ = HeightExam?.Value;
-            CqlQuantity k_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, j_ as Quantity);
-            bool? l_ = context.Operators.Not((bool?)(k_ is null));
-            bool? m_ = context.Operators.And(i_, l_);
-            return m_;
+            // CQL 'and' (94:5-95:38): right operand skipped when left is false
+            if (i_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                DataType j_ = HeightExam?.Value;
+                CqlQuantity k_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, j_ as Quantity);
+                return i_ & (!((bool?)(k_ is null)));
+            }
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -346,11 +372,17 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
             bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
-            DataType j_ = WeightExam?.Value;
-            CqlQuantity k_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, j_ as Quantity);
-            bool? l_ = context.Operators.Not((bool?)(k_ is null));
-            bool? m_ = context.Operators.And(i_, l_);
-            return m_;
+            // CQL 'and' (99:5-100:38): right operand skipped when left is false
+            if (i_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                DataType j_ = WeightExam?.Value;
+                CqlQuantity k_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, j_ as Quantity);
+                return i_ & (!((bool?)(k_ is null)));
+            }
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -368,13 +400,29 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     {
         IEnumerable<Observation> a_ = this.BMI_Percentile_in_Measurement_Period(context);
         bool? b_ = context.Operators.Exists<Observation>(a_);
-        IEnumerable<Observation> c_ = this.Height_in_Measurement_Period(context);
-        bool? d_ = context.Operators.Exists<Observation>(c_);
-        bool? e_ = context.Operators.And(b_, d_);
-        IEnumerable<Observation> f_ = this.Weight_in_Measurement_Period(context);
-        bool? g_ = context.Operators.Exists<Observation>(f_);
-        bool? h_ = context.Operators.And(e_, g_);
-        return h_;
+        bool? c_;
+        // CQL 'and' (59:3-60:45): right operand skipped when left is false
+        if (b_ is false)
+        {
+            c_ = false;
+        }
+        else
+        {
+            IEnumerable<Observation> d_ = this.Height_in_Measurement_Period(context);
+            bool? e_ = context.Operators.Exists<Observation>(d_);
+            c_ = b_ & e_;
+        }
+        // CQL 'and' (59:3-61:45): right operand skipped when left is false
+        if (c_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            IEnumerable<Observation> f_ = this.Weight_in_Measurement_Period(context);
+            bool? g_ = context.Operators.Exists<Observation>(f_);
+            return c_ & g_;
+        }
     }
 
 

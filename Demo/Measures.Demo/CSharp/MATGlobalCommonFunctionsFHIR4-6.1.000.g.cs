@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("MATGlobalCommonFunctionsFHIR4", "6.1.000")]
 public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleton<MATGlobalCommonFunctionsFHIR4_6_1_000>
 {
@@ -275,16 +275,34 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "finished");
-            Period h_ = EncounterInpatient?.Period;
-            CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, h_);
-            int? j_ = this.LengthInDays(context, i_);
-            bool? k_ = context.Operators.LessOrEqual(j_, 120);
-            bool? l_ = context.Operators.And(g_, k_);
-            CqlDateTime m_ = context.Operators.End(i_);
-            CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-            bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, (string)default);
-            bool? p_ = context.Operators.And(l_, o_);
-            return p_;
+            bool? h_;
+            // CQL 'and' (73:15-74:64): right operand skipped when left is false
+            if (g_ is false)
+            {
+                h_ = false;
+            }
+            else
+            {
+                Period i_ = EncounterInpatient?.Period;
+                CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, i_);
+                int? k_ = this.LengthInDays(context, j_);
+                bool? l_ = context.Operators.LessOrEqual(k_, 120);
+                h_ = g_ & l_;
+            }
+            // CQL 'and' (73:9-75:71): right operand skipped when left is false
+            if (h_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Period m_ = EncounterInpatient?.Period;
+                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, m_);
+                CqlDateTime o_ = context.Operators.End(n_);
+                CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
+                bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, (string)default);
+                return h_ & q_;
+            }
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -302,29 +320,47 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             Code<Encounter.EncounterStatus> h_ = EDVisit?.StatusElement;
             string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
             bool? j_ = context.Operators.Equal(i_, "finished");
-            Period k_ = EDVisit?.Period;
-            CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
-            CqlDateTime m_ = context.Operators.End(l_);
-            Period n_ = TheEncounter?.Period;
-            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
-            CqlDateTime p_ = context.Operators.Start(o_);
-            CqlQuantity q_ = context.Operators.Quantity(1m, "hour");
-            CqlDateTime r_ = context.Operators.Subtract(p_, q_);
-            CqlInterval<CqlDateTime> s_ = context.Operators.Interval(r_, p_, true, true);
-            bool? t_ = context.Operators.In<CqlDateTime>(m_, s_, (string)default);
-            bool? u_ = context.Operators.Not((bool?)(p_ is null));
-            bool? v_ = context.Operators.And(t_, u_);
-            bool? w_ = context.Operators.And(j_, v_);
-            return w_;
+            // CQL 'and' (85:7-86:112): right operand skipped when left is false
+            if (j_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Period k_ = EDVisit?.Period;
+                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
+                CqlDateTime m_ = context.Operators.End(l_);
+                Period n_ = TheEncounter?.Period;
+                CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
+                CqlDateTime p_ = context.Operators.Start(o_);
+                CqlQuantity q_ = context.Operators.Quantity(1m, "hour");
+                CqlDateTime r_ = context.Operators.Subtract(p_, q_);
+                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(r_, p_, true, true);
+                bool? t_ = context.Operators.In<CqlDateTime>(m_, s_, (string)default);
+                bool? u_;
+                // CQL 'and' (86:13-86:112): right operand skipped when left is false
+                if (t_ is false)
+                {
+                    u_ = false;
+                }
+                else
+                {
+                    Period v_ = TheEncounter?.Period;
+                    CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, v_);
+                    CqlDateTime x_ = context.Operators.Start(w_);
+                    u_ = t_ & (!((bool?)(x_ is null)));
+                }
+                return j_ & u_;
+            }
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 
         object e_(Encounter @this) {
-            Period x_ = @this?.Period;
-            CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, x_);
-            CqlDateTime z_ = context.Operators.End(y_);
-            return z_;
+            Period y_ = @this?.Period;
+            CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, y_);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            return aa_;
         }
 
         IEnumerable<Encounter> f_ = context.Operators.SortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
@@ -468,28 +504,37 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 IEnumerable<Encounter> ah_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
                 bool? ai_(Encounter LastObs) {
-                    Period bp_ = LastObs?.Period;
-                    CqlInterval<CqlDateTime> bq_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bp_);
-                    CqlDateTime br_ = context.Operators.End(bq_);
-                    Period bs_ = Visit?.Period;
-                    CqlInterval<CqlDateTime> bt_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bs_);
-                    CqlDateTime bu_ = context.Operators.Start(bt_);
-                    CqlQuantity bv_ = context.Operators.Quantity(1m, "hour");
-                    CqlDateTime bw_ = context.Operators.Subtract(bu_, bv_);
-                    CqlInterval<CqlDateTime> bx_ = context.Operators.Interval(bw_, bu_, true, true);
-                    bool? by_ = context.Operators.In<CqlDateTime>(br_, bx_, (string)default);
-                    bool? bz_ = context.Operators.Not((bool?)(bu_ is null));
-                    bool? ca_ = context.Operators.And(by_, bz_);
-                    return ca_;
+                    Period bf_ = LastObs?.Period;
+                    CqlInterval<CqlDateTime> bg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bf_);
+                    CqlDateTime bh_ = context.Operators.End(bg_);
+                    Period bi_ = Visit?.Period;
+                    CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bi_);
+                    CqlDateTime bk_ = context.Operators.Start(bj_);
+                    CqlQuantity bl_ = context.Operators.Quantity(1m, "hour");
+                    CqlDateTime bm_ = context.Operators.Subtract(bk_, bl_);
+                    CqlInterval<CqlDateTime> bn_ = context.Operators.Interval(bm_, bk_, true, true);
+                    bool? bo_ = context.Operators.In<CqlDateTime>(bh_, bn_, (string)default);
+                    // CQL 'and' (178:7-178:81): right operand skipped when left is false
+                    if (bo_ is false)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        Period bp_ = Visit?.Period;
+                        CqlInterval<CqlDateTime> bq_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bp_);
+                        CqlDateTime br_ = context.Operators.Start(bq_);
+                        return bo_ & (!((bool?)(br_ is null)));
+                    }
                 }
 
                 IEnumerable<Encounter> aj_ = context.Operators.Where<Encounter>(ah_, ai_);
 
                 object ak_(Encounter @this) {
-                    Period cb_ = @this?.Period;
-                    CqlInterval<CqlDateTime> cc_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cb_);
-                    CqlDateTime cd_ = context.Operators.End(cc_);
-                    return cd_;
+                    Period bs_ = @this?.Period;
+                    CqlInterval<CqlDateTime> bt_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bs_);
+                    CqlDateTime bu_ = context.Operators.End(bt_);
+                    return bu_;
                 }
 
                 IEnumerable<Encounter> al_ = context.Operators.SortBy<Encounter>(aj_, ak_, System.ComponentModel.ListSortDirection.Ascending);
@@ -504,28 +549,37 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlDateTime au_ = context.Operators.Subtract(ap_ ?? as_, at_);
 
                 bool? av_(Encounter LastObs) {
-                    Period ce_ = LastObs?.Period;
-                    CqlInterval<CqlDateTime> cf_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ce_);
-                    CqlDateTime cg_ = context.Operators.End(cf_);
-                    Period ch_ = Visit?.Period;
-                    CqlInterval<CqlDateTime> ci_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ch_);
-                    CqlDateTime cj_ = context.Operators.Start(ci_);
-                    CqlQuantity ck_ = context.Operators.Quantity(1m, "hour");
-                    CqlDateTime cl_ = context.Operators.Subtract(cj_, ck_);
-                    CqlInterval<CqlDateTime> cm_ = context.Operators.Interval(cl_, cj_, true, true);
-                    bool? cn_ = context.Operators.In<CqlDateTime>(cg_, cm_, (string)default);
-                    bool? co_ = context.Operators.Not((bool?)(cj_ is null));
-                    bool? cp_ = context.Operators.And(cn_, co_);
-                    return cp_;
+                    Period bv_ = LastObs?.Period;
+                    CqlInterval<CqlDateTime> bw_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bv_);
+                    CqlDateTime bx_ = context.Operators.End(bw_);
+                    Period by_ = Visit?.Period;
+                    CqlInterval<CqlDateTime> bz_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, by_);
+                    CqlDateTime ca_ = context.Operators.Start(bz_);
+                    CqlQuantity cb_ = context.Operators.Quantity(1m, "hour");
+                    CqlDateTime cc_ = context.Operators.Subtract(ca_, cb_);
+                    CqlInterval<CqlDateTime> cd_ = context.Operators.Interval(cc_, ca_, true, true);
+                    bool? ce_ = context.Operators.In<CqlDateTime>(bx_, cd_, (string)default);
+                    // CQL 'and' (178:7-178:81): right operand skipped when left is false
+                    if (ce_ is false)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        Period cf_ = Visit?.Period;
+                        CqlInterval<CqlDateTime> cg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cf_);
+                        CqlDateTime ch_ = context.Operators.Start(cg_);
+                        return ce_ & (!((bool?)(ch_ is null)));
+                    }
                 }
 
                 IEnumerable<Encounter> aw_ = context.Operators.Where<Encounter>(ah_, av_);
 
                 object ax_(Encounter @this) {
-                    Period cq_ = @this?.Period;
-                    CqlInterval<CqlDateTime> cr_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cq_);
-                    CqlDateTime cs_ = context.Operators.End(cr_);
-                    return cs_;
+                    Period ci_ = @this?.Period;
+                    CqlInterval<CqlDateTime> cj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ci_);
+                    CqlDateTime ck_ = context.Operators.End(cj_);
+                    return ck_;
                 }
 
                 IEnumerable<Encounter> ay_ = context.Operators.SortBy<Encounter>(aw_, ax_, System.ComponentModel.ListSortDirection.Ascending);
@@ -535,49 +589,69 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlDateTime bc_ = context.Operators.Start(bb_);
                 CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(au_, bc_ ?? as_, true, true);
                 bool? be_ = context.Operators.In<CqlDateTime>(af_, bd_, (string)default);
-
-                bool? bf_(Encounter LastObs) {
-                    Period ct_ = LastObs?.Period;
-                    CqlInterval<CqlDateTime> cu_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ct_);
-                    CqlDateTime cv_ = context.Operators.End(cu_);
-                    Period cw_ = Visit?.Period;
-                    CqlInterval<CqlDateTime> cx_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cw_);
-                    CqlDateTime cy_ = context.Operators.Start(cx_);
-                    CqlQuantity cz_ = context.Operators.Quantity(1m, "hour");
-                    CqlDateTime da_ = context.Operators.Subtract(cy_, cz_);
-                    CqlInterval<CqlDateTime> db_ = context.Operators.Interval(da_, cy_, true, true);
-                    bool? dc_ = context.Operators.In<CqlDateTime>(cv_, db_, (string)default);
-                    bool? dd_ = context.Operators.Not((bool?)(cy_ is null));
-                    bool? de_ = context.Operators.And(dc_, dd_);
-                    return de_;
+                // CQL 'and' (183:7-183:69): right operand skipped when left is false
+                if (be_ is false)
+                {
+                    return false;
                 }
+                else
+                {
+                    CqlValueSet cl_ = this.Observation_Services(context);
+                    IEnumerable<Encounter> cm_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, cl_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
-                IEnumerable<Encounter> bg_ = context.Operators.Where<Encounter>(ah_, bf_);
+                    bool? cn_(Encounter LastObs) {
+                        Period cy_ = LastObs?.Period;
+                        CqlInterval<CqlDateTime> cz_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cy_);
+                        CqlDateTime da_ = context.Operators.End(cz_);
+                        Period db_ = Visit?.Period;
+                        CqlInterval<CqlDateTime> dc_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, db_);
+                        CqlDateTime dd_ = context.Operators.Start(dc_);
+                        CqlQuantity de_ = context.Operators.Quantity(1m, "hour");
+                        CqlDateTime df_ = context.Operators.Subtract(dd_, de_);
+                        CqlInterval<CqlDateTime> dg_ = context.Operators.Interval(df_, dd_, true, true);
+                        bool? dh_ = context.Operators.In<CqlDateTime>(da_, dg_, (string)default);
+                        // CQL 'and' (178:7-178:81): right operand skipped when left is false
+                        if (dh_ is false)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            Period di_ = Visit?.Period;
+                            CqlInterval<CqlDateTime> dj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, di_);
+                            CqlDateTime dk_ = context.Operators.Start(dj_);
+                            return dh_ & (!((bool?)(dk_ is null)));
+                        }
+                    }
 
-                object bh_(Encounter @this) {
-                    Period df_ = @this?.Period;
-                    CqlInterval<CqlDateTime> dg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, df_);
-                    CqlDateTime dh_ = context.Operators.End(dg_);
-                    return dh_;
+                    IEnumerable<Encounter> co_ = context.Operators.Where<Encounter>(cm_, cn_);
+
+                    object cp_(Encounter @this) {
+                        Period dl_ = @this?.Period;
+                        CqlInterval<CqlDateTime> dm_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dl_);
+                        CqlDateTime dn_ = context.Operators.End(dm_);
+                        return dn_;
+                    }
+
+                    IEnumerable<Encounter> cq_ = context.Operators.SortBy<Encounter>(co_, cp_, System.ComponentModel.ListSortDirection.Ascending);
+                    Encounter cr_ = context.Operators.Last<Encounter>(cq_);
+                    Period cs_ = cr_?.Period;
+                    CqlInterval<CqlDateTime> ct_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cs_);
+                    CqlDateTime cu_ = context.Operators.Start(ct_);
+                    Period cv_ = Visit?.Period;
+                    CqlInterval<CqlDateTime> cw_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cv_);
+                    CqlDateTime cx_ = context.Operators.Start(cw_);
+                    return be_ & (!((bool?)((cu_ ?? cx_) is null)));
                 }
-
-                IEnumerable<Encounter> bi_ = context.Operators.SortBy<Encounter>(bg_, bh_, System.ComponentModel.ListSortDirection.Ascending);
-                Encounter bj_ = context.Operators.Last<Encounter>(bi_);
-                Period bk_ = bj_?.Period;
-                CqlInterval<CqlDateTime> bl_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bk_);
-                CqlDateTime bm_ = context.Operators.Start(bl_);
-                bool? bn_ = context.Operators.Not((bool?)((bm_ ?? as_) is null));
-                bool? bo_ = context.Operators.And(be_, bn_);
-                return bo_;
             }
 
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
 
             object i_(Encounter @this) {
-                Period di_ = @this?.Period;
-                CqlInterval<CqlDateTime> dj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, di_);
-                CqlDateTime dk_ = context.Operators.End(dj_);
-                return dk_;
+                Period do_ = @this?.Period;
+                CqlInterval<CqlDateTime> dp_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, do_);
+                CqlDateTime dq_ = context.Operators.End(dp_);
+                return dq_;
             }
 
             IEnumerable<Encounter> j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
@@ -589,28 +663,37 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
             bool? q_(Encounter LastObs) {
-                Period dl_ = LastObs?.Period;
-                CqlInterval<CqlDateTime> dm_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dl_);
-                CqlDateTime dn_ = context.Operators.End(dm_);
-                Period do_ = Visit?.Period;
-                CqlInterval<CqlDateTime> dp_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, do_);
-                CqlDateTime dq_ = context.Operators.Start(dp_);
-                CqlQuantity dr_ = context.Operators.Quantity(1m, "hour");
-                CqlDateTime ds_ = context.Operators.Subtract(dq_, dr_);
-                CqlInterval<CqlDateTime> dt_ = context.Operators.Interval(ds_, dq_, true, true);
-                bool? du_ = context.Operators.In<CqlDateTime>(dn_, dt_, (string)default);
-                bool? dv_ = context.Operators.Not((bool?)(dq_ is null));
-                bool? dw_ = context.Operators.And(du_, dv_);
-                return dw_;
+                Period dr_ = LastObs?.Period;
+                CqlInterval<CqlDateTime> ds_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dr_);
+                CqlDateTime dt_ = context.Operators.End(ds_);
+                Period du_ = Visit?.Period;
+                CqlInterval<CqlDateTime> dv_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, du_);
+                CqlDateTime dw_ = context.Operators.Start(dv_);
+                CqlQuantity dx_ = context.Operators.Quantity(1m, "hour");
+                CqlDateTime dy_ = context.Operators.Subtract(dw_, dx_);
+                CqlInterval<CqlDateTime> dz_ = context.Operators.Interval(dy_, dw_, true, true);
+                bool? ea_ = context.Operators.In<CqlDateTime>(dt_, dz_, (string)default);
+                // CQL 'and' (178:7-178:81): right operand skipped when left is false
+                if (ea_ is false)
+                {
+                    return false;
+                }
+                else
+                {
+                    Period eb_ = Visit?.Period;
+                    CqlInterval<CqlDateTime> ec_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, eb_);
+                    CqlDateTime ed_ = context.Operators.Start(ec_);
+                    return ea_ & (!((bool?)(ed_ is null)));
+                }
             }
 
             IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
 
             object s_(Encounter @this) {
-                Period dx_ = @this?.Period;
-                CqlInterval<CqlDateTime> dy_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dx_);
-                CqlDateTime dz_ = context.Operators.End(dy_);
-                return dz_;
+                Period ee_ = @this?.Period;
+                CqlInterval<CqlDateTime> ef_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ee_);
+                CqlDateTime eg_ = context.Operators.End(ef_);
+                return eg_;
             }
 
             IEnumerable<Encounter> t_ = context.Operators.SortBy<Encounter>(r_, s_, System.ComponentModel.ListSortDirection.Ascending);
@@ -808,33 +891,55 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         CqlCode c_ = this.active(context);
         CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
         bool? e_ = context.Operators.Equivalent(b_, d_);
-        CqlCode f_ = this.recurrence(context);
-        CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
-        bool? h_ = context.Operators.Equivalent(b_, g_);
-        bool? i_ = context.Operators.Or(e_, h_);
-        CqlCode j_ = this.relapse(context);
-        CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-        bool? l_ = context.Operators.Equivalent(b_, k_);
-        bool? m_ = context.Operators.Or(i_, l_);
-        if (m_ ?? false)
+        bool? f_;
+        // CQL 'or' (259:6-260:46): right operand skipped when left is true
+        if (e_ is true)
         {
-            DataType n_ = condition?.Onset;
-            CqlInterval<CqlDateTime> o_ = this.Normalize_Interval(context, n_);
-            CqlDateTime p_ = context.Operators.Start(o_);
-            CqlInterval<CqlDateTime> q_ = this.Normalize_Abatement(context, condition);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
-            return s_;
+            f_ = true;
         }
         else
         {
-            DataType t_ = condition?.Onset;
-            CqlInterval<CqlDateTime> u_ = this.Normalize_Interval(context, t_);
-            CqlDateTime v_ = context.Operators.Start(u_);
-            CqlInterval<CqlDateTime> w_ = this.Normalize_Abatement(context, condition);
-            CqlDateTime x_ = context.Operators.End(w_);
-            CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, true, false);
-            return y_;
+            CodeableConcept h_ = condition?.ClinicalStatus;
+            CqlConcept i_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, h_);
+            CqlCode j_ = this.recurrence(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(i_, k_);
+            f_ = e_ | l_;
+        }
+        bool? g_;
+        // CQL 'or' (259:6-261:43): right operand skipped when left is true
+        if (f_ is true)
+        {
+            g_ = true;
+        }
+        else
+        {
+            CodeableConcept m_ = condition?.ClinicalStatus;
+            CqlConcept n_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, m_);
+            CqlCode o_ = this.relapse(context);
+            CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+            bool? q_ = context.Operators.Equivalent(n_, p_);
+            g_ = f_ | q_;
+        }
+        if (g_ ?? false)
+        {
+            DataType r_ = condition?.Onset;
+            CqlInterval<CqlDateTime> s_ = this.Normalize_Interval(context, r_);
+            CqlDateTime t_ = context.Operators.Start(s_);
+            CqlInterval<CqlDateTime> u_ = this.Normalize_Abatement(context, condition);
+            CqlDateTime v_ = context.Operators.End(u_);
+            CqlInterval<CqlDateTime> w_ = context.Operators.Interval(t_, v_, true, true);
+            return w_;
+        }
+        else
+        {
+            DataType x_ = condition?.Onset;
+            CqlInterval<CqlDateTime> y_ = this.Normalize_Interval(context, x_);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            CqlInterval<CqlDateTime> aa_ = this.Normalize_Abatement(context, condition);
+            CqlDateTime ab_ = context.Operators.End(aa_);
+            CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(z_, ab_, true, false);
+            return ac_;
         }
     }
 
@@ -1128,11 +1233,21 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     public bool? HasStart(CqlContext context, CqlInterval<CqlDateTime> period)
     {
         CqlDateTime a_ = context.Operators.Start(period);
-        CqlDateTime b_ = context.Operators.MinValue<CqlDateTime>();
-        bool? c_ = context.Operators.Equal(a_, b_);
-        bool? d_ = context.Operators.Or((bool?)(a_ is null), c_);
-        bool? e_ = context.Operators.Not(d_);
-        return e_;
+        bool? b_ = (bool?)(a_ is null);
+        bool? c_;
+        // CQL 'or' (354:7-356:3): right operand skipped when left is true
+        if (b_ is true)
+        {
+            c_ = true;
+        }
+        else
+        {
+            CqlDateTime d_ = context.Operators.Start(period);
+            CqlDateTime e_ = context.Operators.MinValue<CqlDateTime>();
+            bool? f_ = context.Operators.Equal(d_, e_);
+            c_ = b_ | f_;
+        }
+        return !c_;
     }
 
 
@@ -1140,11 +1255,21 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     public bool? HasEnd(CqlContext context, CqlInterval<CqlDateTime> period)
     {
         CqlDateTime a_ = context.Operators.End(period);
-        CqlDateTime b_ = context.Operators.MaxValue<CqlDateTime>();
-        bool? c_ = context.Operators.Equal(a_, b_);
-        bool? d_ = context.Operators.Or((bool?)(a_ is null), c_);
-        bool? e_ = context.Operators.Not(d_);
-        return e_;
+        bool? b_ = (bool?)(a_ is null);
+        bool? c_;
+        // CQL 'or' (360:7-364:3): right operand skipped when left is true
+        if (b_ is true)
+        {
+            c_ = true;
+        }
+        else
+        {
+            CqlDateTime d_ = context.Operators.End(period);
+            CqlDateTime e_ = context.Operators.MaxValue<CqlDateTime>();
+            bool? f_ = context.Operators.Equal(d_, e_);
+            c_ = b_ | f_;
+        }
+        return !c_;
     }
 
 

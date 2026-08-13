@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("TJCOverallFHIR", "1.8.000")]
 public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHIR_1_8_000>
 {
@@ -142,11 +142,20 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, e_);
             int? g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.LengthInDays(context, f_);
             bool? h_ = context.Operators.LessOrEqual(g_, 120);
-            CqlDateTime i_ = context.Operators.End(f_);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
-            bool? l_ = context.Operators.And(h_, k_);
-            return l_;
+            // CQL 'and' (61:21-62:92): right operand skipped when left is false
+            if (h_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                Period i_ = NonElectiveEncounter?.Period;
+                CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, i_);
+                CqlDateTime k_ = context.Operators.End(j_);
+                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+                bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
+                return h_ & m_;
+            }
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -170,10 +179,20 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             CqlConcept f_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, e_);
             CqlValueSet g_ = this.Hemorrhagic_Stroke(context);
             bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
-            CqlValueSet i_ = this.Ischemic_Stroke(context);
-            bool? j_ = context.Operators.ConceptInValueSet(f_, i_);
-            bool? k_ = context.Operators.Or(h_, j_);
-            return k_;
+            // CQL 'or' (42:23-43:100): right operand skipped when left is true
+            if (h_ is true)
+            {
+                return true;
+            }
+            else
+            {
+                Condition i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.PrincipalDiagnosis(context, NonElectiveEncounter);
+                CodeableConcept j_ = i_?.Code;
+                CqlConcept k_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, j_);
+                CqlValueSet l_ = this.Ischemic_Stroke(context);
+                bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
+                return h_ | m_;
+            }
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -256,19 +275,65 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             CqlConcept f_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, e_);
             CqlValueSet g_ = this.Discharge_To_Acute_Care_Facility(context);
             bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
-            CqlValueSet i_ = this.Left_Against_Medical_Advice(context);
-            bool? j_ = context.Operators.ConceptInValueSet(f_, i_);
-            bool? k_ = context.Operators.Or(h_, j_);
-            CqlValueSet l_ = this.Patient_Expired(context);
-            bool? m_ = context.Operators.ConceptInValueSet(f_, l_);
-            bool? n_ = context.Operators.Or(k_, m_);
-            CqlValueSet o_ = this.Discharged_to_Home_for_Hospice_Care(context);
-            bool? p_ = context.Operators.ConceptInValueSet(f_, o_);
-            bool? q_ = context.Operators.Or(n_, p_);
-            CqlValueSet r_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
-            bool? s_ = context.Operators.ConceptInValueSet(f_, r_);
-            bool? t_ = context.Operators.Or(q_, s_);
-            return t_;
+            bool? i_;
+            // CQL 'or' (51:27-52:117): right operand skipped when left is true
+            if (h_ is true)
+            {
+                i_ = true;
+            }
+            else
+            {
+                Encounter.HospitalizationComponent l_ = IschemicStrokeEncounter?.Hospitalization;
+                CodeableConcept m_ = l_?.DischargeDisposition;
+                CqlConcept n_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, m_);
+                CqlValueSet o_ = this.Left_Against_Medical_Advice(context);
+                bool? p_ = context.Operators.ConceptInValueSet(n_, o_);
+                i_ = h_ | p_;
+            }
+            bool? j_;
+            // CQL 'or' (51:27-53:105): right operand skipped when left is true
+            if (i_ is true)
+            {
+                j_ = true;
+            }
+            else
+            {
+                Encounter.HospitalizationComponent q_ = IschemicStrokeEncounter?.Hospitalization;
+                CodeableConcept r_ = q_?.DischargeDisposition;
+                CqlConcept s_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, r_);
+                CqlValueSet t_ = this.Patient_Expired(context);
+                bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
+                j_ = i_ | u_;
+            }
+            bool? k_;
+            // CQL 'or' (51:27-54:125): right operand skipped when left is true
+            if (j_ is true)
+            {
+                k_ = true;
+            }
+            else
+            {
+                Encounter.HospitalizationComponent v_ = IschemicStrokeEncounter?.Hospitalization;
+                CodeableConcept w_ = v_?.DischargeDisposition;
+                CqlConcept x_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, w_);
+                CqlValueSet y_ = this.Discharged_to_Home_for_Hospice_Care(context);
+                bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
+                k_ = j_ | z_;
+            }
+            // CQL 'or' (51:21-55:141): right operand skipped when left is true
+            if (k_ is true)
+            {
+                return true;
+            }
+            else
+            {
+                Encounter.HospitalizationComponent aa_ = IschemicStrokeEncounter?.Hospitalization;
+                CodeableConcept ab_ = aa_?.DischargeDisposition;
+                CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ab_);
+                CqlValueSet ad_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
+                bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
+                return k_ | ae_;
+            }
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);

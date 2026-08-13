@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("BCSEHEDISMY2022", "1.0.0")]
 public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY2022_1_0_0>
 {
@@ -188,18 +188,44 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         CqlDate h_ = context.Operators.Subtract(d_, g_);
         CqlInterval<CqlDate> i_ = context.Operators.Interval(f_, h_, true, true);
         bool? j_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, d_, i_, 0);
-        CqlDateTime k_ = context.Operators.Start(b_);
-        CqlDate l_ = context.Operators.DateFrom(k_);
-        CqlQuantity m_ = context.Operators.Quantity(1m, "year");
-        CqlDate n_ = context.Operators.Subtract(l_, m_);
-        CqlDate o_ = context.Operators.Subtract(d_, m_);
-        CqlInterval<CqlDate> p_ = context.Operators.Interval(n_, o_, true, true);
-        bool? q_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, d_, p_, 45);
-        bool? r_ = context.Operators.And(j_, q_);
-        CqlInterval<CqlDate> s_ = context.Operators.Interval(l_, d_, true, true);
-        bool? t_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, d_, s_, 45);
-        bool? u_ = context.Operators.And(r_, t_);
-        return u_;
+        bool? k_;
+        // CQL 'and' (41:3-46:47): right operand skipped when left is false
+        if (j_ is false)
+        {
+            k_ = false;
+        }
+        else
+        {
+            IEnumerable<Coverage> l_ = this.Member_Coverage(context);
+            CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
+            CqlDateTime n_ = context.Operators.End(m_);
+            CqlDate o_ = context.Operators.DateFrom(n_);
+            CqlDateTime p_ = context.Operators.Start(m_);
+            CqlDate q_ = context.Operators.DateFrom(p_);
+            CqlQuantity r_ = context.Operators.Quantity(1m, "year");
+            CqlDate s_ = context.Operators.Subtract(q_, r_);
+            CqlDate t_ = context.Operators.Subtract(o_, r_);
+            CqlInterval<CqlDate> u_ = context.Operators.Interval(s_, t_, true, true);
+            bool? v_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, l_, o_, u_, 45);
+            k_ = j_ & v_;
+        }
+        // CQL 'and' (41:3-49:38): right operand skipped when left is false
+        if (k_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            IEnumerable<Coverage> w_ = this.Member_Coverage(context);
+            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+            CqlDateTime y_ = context.Operators.End(x_);
+            CqlDate z_ = context.Operators.DateFrom(y_);
+            CqlDateTime aa_ = context.Operators.Start(x_);
+            CqlDate ab_ = context.Operators.DateFrom(aa_);
+            CqlInterval<CqlDate> ac_ = context.Operators.Interval(ab_, z_, true, true);
+            bool? ad_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, w_, z_, ac_, 45);
+            return k_ & ad_;
+        }
     }
 
 
@@ -221,14 +247,31 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(52, 74, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        Code<AdministrativeGender> k_ = a_?.GenderElement;
-        AdministrativeGender? l_ = k_?.Value;
-        string m_ = context.Operators.Convert<string>(l_);
-        bool? n_ = context.Operators.Equal(m_, "female");
-        bool? o_ = context.Operators.And(j_, n_);
-        bool? p_ = this.Enrolled_During_Participation_Period(context);
-        bool? q_ = context.Operators.And(o_, p_);
-        return q_;
+        bool? k_;
+        // CQL 'and' (34:3-37:39): right operand skipped when left is false
+        if (j_ is false)
+        {
+            k_ = false;
+        }
+        else
+        {
+            Patient l_ = this.Patient(context);
+            Code<AdministrativeGender> m_ = l_?.GenderElement;
+            AdministrativeGender? n_ = m_?.Value;
+            string o_ = context.Operators.Convert<string>(n_);
+            bool? p_ = context.Operators.Equal(o_, "female");
+            k_ = j_ & p_;
+        }
+        // CQL 'and' (34:3-38:46): right operand skipped when left is false
+        if (k_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            bool? q_ = this.Enrolled_During_Participation_Period(context);
+            return k_ & q_;
+        }
     }
 
 
@@ -534,22 +577,65 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     {
         IEnumerable<Condition> a_ = this.Right_Mastectomy_Diagnosis(context);
         bool? b_ = context.Operators.Exists<Condition>(a_);
-        IEnumerable<Procedure> c_ = this.Right_Mastectomy_Procedure(context);
-        bool? d_ = context.Operators.Exists<Procedure>(c_);
-        bool? e_ = context.Operators.Or(b_, d_);
-        IEnumerable<Condition> f_ = this.Left_Mastectomy_Diagnosis(context);
-        bool? g_ = context.Operators.Exists<Condition>(f_);
-        IEnumerable<Procedure> h_ = this.Left_Mastectomy_Procedure(context);
-        bool? i_ = context.Operators.Exists<Procedure>(h_);
-        bool? j_ = context.Operators.Or(g_, i_);
-        bool? k_ = context.Operators.And(e_, j_);
-        IEnumerable<Condition> l_ = this.Bilateral_Mastectomy_Diagnosis(context);
-        bool? m_ = context.Operators.Exists<Condition>(l_);
-        bool? n_ = context.Operators.Or(k_, m_);
-        IEnumerable<Procedure> o_ = this.Bilateral_Mastectomy_Procedure(context);
-        bool? p_ = context.Operators.Exists<Procedure>(o_);
-        bool? q_ = context.Operators.Or(n_, p_);
-        return q_;
+        bool? c_;
+        // CQL 'or' (72:5-74:5): right operand skipped when left is true
+        if (b_ is true)
+        {
+            c_ = true;
+        }
+        else
+        {
+            IEnumerable<Procedure> f_ = this.Right_Mastectomy_Procedure(context);
+            bool? g_ = context.Operators.Exists<Procedure>(f_);
+            c_ = b_ | g_;
+        }
+        bool? d_;
+        // CQL 'and' (72:3-78:3): right operand skipped when left is false
+        if (c_ is false)
+        {
+            d_ = false;
+        }
+        else
+        {
+            IEnumerable<Condition> h_ = this.Left_Mastectomy_Diagnosis(context);
+            bool? i_ = context.Operators.Exists<Condition>(h_);
+            bool? j_;
+            // CQL 'or' (75:11-77:7): right operand skipped when left is true
+            if (i_ is true)
+            {
+                j_ = true;
+            }
+            else
+            {
+                IEnumerable<Procedure> k_ = this.Left_Mastectomy_Procedure(context);
+                bool? l_ = context.Operators.Exists<Procedure>(k_);
+                j_ = i_ | l_;
+            }
+            d_ = c_ & j_;
+        }
+        bool? e_;
+        // CQL 'or' (72:3-79:46): right operand skipped when left is true
+        if (d_ is true)
+        {
+            e_ = true;
+        }
+        else
+        {
+            IEnumerable<Condition> m_ = this.Bilateral_Mastectomy_Diagnosis(context);
+            bool? n_ = context.Operators.Exists<Condition>(m_);
+            e_ = d_ | n_;
+        }
+        // CQL 'or' (72:3-80:46): right operand skipped when left is true
+        if (e_ is true)
+        {
+            return true;
+        }
+        else
+        {
+            IEnumerable<Procedure> o_ = this.Bilateral_Mastectomy_Procedure(context);
+            bool? p_ = context.Operators.Exists<Procedure>(o_);
+            return e_ | p_;
+        }
     }
 
 
@@ -562,14 +648,39 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     private bool? Exclusions_Compute(CqlContext context)
     {
         bool? a_ = NCQAHospice_1_0_0.Instance.Hospice_Intervention_or_Encounter(context);
-        bool? b_ = this.Mastectomy_Exclusion(context);
-        bool? c_ = context.Operators.Or(a_, b_);
-        bool? d_ = NCQAAdvancedIllnessandFrailty_1_0_0.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
-        bool? e_ = context.Operators.Or(c_, d_);
-        CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
-        bool? g_ = NCQAPalliativeCare_1_0_0.Instance.Palliative_Care_Overlapping_Period(context, f_);
-        bool? h_ = context.Operators.Or(e_, g_);
-        return h_;
+        bool? b_;
+        // CQL 'or' (66:3-67:29): right operand skipped when left is true
+        if (a_ is true)
+        {
+            b_ = true;
+        }
+        else
+        {
+            bool? d_ = this.Mastectomy_Exclusion(context);
+            b_ = a_ | d_;
+        }
+        bool? c_;
+        // CQL 'or' (66:3-68:96): right operand skipped when left is true
+        if (b_ is true)
+        {
+            c_ = true;
+        }
+        else
+        {
+            bool? e_ = NCQAAdvancedIllnessandFrailty_1_0_0.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
+            c_ = b_ | e_;
+        }
+        // CQL 'or' (66:3-69:83): right operand skipped when left is true
+        if (c_ is true)
+        {
+            return true;
+        }
+        else
+        {
+            CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
+            bool? g_ = NCQAPalliativeCare_1_0_0.Instance.Palliative_Care_Overlapping_Period(context, f_);
+            return c_ | g_;
+        }
     }
 
 

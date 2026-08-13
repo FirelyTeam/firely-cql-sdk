@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("CMS50FHIRReceiptofSpecialistReport", "1.0.000")]
 public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISingleton<CMS50FHIRReceiptofSpecialistReport_1_0_000>
 {
@@ -165,12 +165,19 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
             Encounter.EncounterStatus? u_ = t_?.Value;
             Code<Encounter.EncounterStatus> v_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(u_);
             bool? w_ = context.Operators.Equal(v_, "finished");
-            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
-            Period y_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
-            bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
-            bool? ab_ = context.Operators.And(w_, aa_);
-            return ab_;
+            // CQL 'and' (62:7-63:68): right operand skipped when left is false
+            if (w_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+                Period y_ = ValidEncounter?.Period;
+                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
+                bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
+                return w_ & aa_;
+            }
         }
 
         bool? s_ = context.Operators.WhereAny<Encounter>(q_, r_);
@@ -296,30 +303,46 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 "completed",
             ];
             bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
-            Code<RequestIntent> n_ = ReferralOrder?.IntentElement;
-            RequestIntent? o_ = n_?.Value;
-            Code<RequestIntent> p_ = context.Operators.Convert<Code<RequestIntent>>(o_);
-            bool? q_ = context.Operators.Equal(p_, "order");
-            bool? r_ = context.Operators.And(m_, q_);
-            FhirDateTime s_ = ReferralOrder?.AuthoredOnElement;
-            CqlDateTime t_ = context.Operators.Convert<CqlDateTime>(s_);
-            CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
-            CqlDateTime v_ = context.Operators.Start(u_);
-            int? w_ = context.Operators.DateTimeComponentFrom(v_, "year");
-            CqlDate x_ = context.Operators.Date(w_, 10, 31);
-            CqlDateTime y_ = context.Operators.ConvertDateToDateTime(x_);
-            CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, true, true);
-            bool? aa_ = context.Operators.In<CqlDateTime>(t_, z_, "day");
-            bool? ab_ = context.Operators.And(r_, aa_);
-            return ab_;
+            bool? n_;
+            // CQL 'and' (80:13-81:42): right operand skipped when left is false
+            if (m_ is false)
+            {
+                n_ = false;
+            }
+            else
+            {
+                Code<RequestIntent> o_ = ReferralOrder?.IntentElement;
+                RequestIntent? p_ = o_?.Value;
+                Code<RequestIntent> q_ = context.Operators.Convert<Code<RequestIntent>>(p_);
+                bool? r_ = context.Operators.Equal(q_, "order");
+                n_ = m_ & r_;
+            }
+            // CQL 'and' (80:7-82:145): right operand skipped when left is false
+            if (n_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                FhirDateTime s_ = ReferralOrder?.AuthoredOnElement;
+                CqlDateTime t_ = context.Operators.Convert<CqlDateTime>(s_);
+                CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
+                CqlDateTime v_ = context.Operators.Start(u_);
+                int? w_ = context.Operators.DateTimeComponentFrom(v_, "year");
+                CqlDate x_ = context.Operators.Date(w_, 10, 31);
+                CqlDateTime y_ = context.Operators.ConvertDateToDateTime(x_);
+                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, true, true);
+                bool? aa_ = context.Operators.In<CqlDateTime>(t_, z_, "day");
+                return n_ & aa_;
+            }
         }
 
         IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
 
         object e_(ServiceRequest @this) {
-            FhirDateTime ac_ = @this?.AuthoredOnElement;
-            CqlDateTime ad_ = context.Operators.Convert<CqlDateTime>(ac_);
-            return ad_;
+            FhirDateTime ab_ = @this?.AuthoredOnElement;
+            CqlDateTime ac_ = context.Operators.Convert<CqlDateTime>(ab_);
+            return ac_;
         }
 
         IEnumerable<ServiceRequest> f_ = context.Operators.SortBy<ServiceRequest>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
@@ -337,12 +360,27 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     private bool? Initial_Population_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Encounter_during_Measurement_Period(context);
-        bool? b_ = this.Has_Intervention_during_Measurement_Period(context);
-        bool? c_ = context.Operators.Or(a_, b_);
-        ServiceRequest d_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
-        bool? e_ = context.Operators.Not((bool?)(d_ is null));
-        bool? f_ = context.Operators.And(c_, e_);
-        return f_;
+        bool? b_;
+        // CQL 'or' (50:3-52:3): right operand skipped when left is true
+        if (a_ is true)
+        {
+            b_ = true;
+        }
+        else
+        {
+            bool? c_ = this.Has_Intervention_during_Measurement_Period(context);
+            b_ = a_ | c_;
+        }
+        // CQL 'and' (50:3-53:81): right operand skipped when left is false
+        if (b_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            ServiceRequest d_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
+            return b_ & (!((bool?)(d_ is null)));
+        }
     }
 
 
@@ -432,30 +470,76 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
             bool? h_(ServiceRequest FirstReferral) {
                 ResourceReference j_ = ConsultantReportObtained?.Focus;
                 bool? k_ = QICoreCommon_4_0_000.Instance.references(context, j_, FirstReferral);
-                List<ResourceReference> l_ = ConsultantReportObtained?.BasedOn;
-                bool? m_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)l_, FirstReferral);
-                bool? n_ = context.Operators.Or(k_, m_);
-                Period o_ = ConsultantReportObtained?.ExecutionPeriod;
-                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
-                CqlDateTime q_ = context.Operators.End(p_);
-                FhirDateTime r_ = FirstReferral?.AuthoredOnElement;
-                CqlDateTime s_ = context.Operators.Convert<CqlDateTime>(r_);
-                bool? t_ = context.Operators.After(q_, s_, (string)default);
-                bool? u_ = context.Operators.And(n_, t_);
-                CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
-                bool? w_ = context.Operators.In<CqlDateTime>(q_, v_, "day");
-                bool? x_ = context.Operators.And(u_, w_);
-                Code<Task.TaskStatus> y_ = ConsultantReportObtained?.StatusElement;
-                Task.TaskStatus? z_ = y_?.Value;
-                string aa_ = context.Operators.Convert<string>(z_);
-                bool? ab_ = context.Operators.Equal(aa_, "completed");
-                bool? ac_ = context.Operators.And(x_, ab_);
-                CodeableConcept ad_ = ConsultantReportObtained?.ReasonCode;
-                CqlConcept ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ad_);
-                CqlValueSet af_ = this.Consultant_Report(context);
-                bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
-                bool? ah_ = context.Operators.And(ac_, ag_);
-                return ah_;
+                bool? l_;
+                // CQL 'or' (94:19-96:9): right operand skipped when left is true
+                if (k_ is true)
+                {
+                    l_ = true;
+                }
+                else
+                {
+                    List<ResourceReference> p_ = ConsultantReportObtained?.BasedOn;
+                    bool? q_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)p_, FirstReferral);
+                    l_ = k_ | q_;
+                }
+                bool? m_;
+                // CQL 'and' (94:19-97:90): right operand skipped when left is false
+                if (l_ is false)
+                {
+                    m_ = false;
+                }
+                else
+                {
+                    Period r_ = ConsultantReportObtained?.ExecutionPeriod;
+                    CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
+                    CqlDateTime t_ = context.Operators.End(s_);
+                    FhirDateTime u_ = FirstReferral?.AuthoredOnElement;
+                    CqlDateTime v_ = context.Operators.Convert<CqlDateTime>(u_);
+                    bool? w_ = context.Operators.After(t_, v_, (string)default);
+                    m_ = l_ & w_;
+                }
+                bool? n_;
+                // CQL 'and' (94:19-98:94): right operand skipped when left is false
+                if (m_ is false)
+                {
+                    n_ = false;
+                }
+                else
+                {
+                    Period x_ = ConsultantReportObtained?.ExecutionPeriod;
+                    CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, x_);
+                    CqlDateTime z_ = context.Operators.End(y_);
+                    CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
+                    bool? ab_ = context.Operators.In<CqlDateTime>(z_, aa_, "day");
+                    n_ = m_ & ab_;
+                }
+                bool? o_;
+                // CQL 'and' (94:19-99:59): right operand skipped when left is false
+                if (n_ is false)
+                {
+                    o_ = false;
+                }
+                else
+                {
+                    Code<Task.TaskStatus> ac_ = ConsultantReportObtained?.StatusElement;
+                    Task.TaskStatus? ad_ = ac_?.Value;
+                    string ae_ = context.Operators.Convert<string>(ad_);
+                    bool? af_ = context.Operators.Equal(ae_, "completed");
+                    o_ = n_ & af_;
+                }
+                // CQL 'and' (94:19-100:72): right operand skipped when left is false
+                if (o_ is false)
+                {
+                    return false;
+                }
+                else
+                {
+                    CodeableConcept ag_ = ConsultantReportObtained?.ReasonCode;
+                    CqlConcept ah_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ag_);
+                    CqlValueSet ai_ = this.Consultant_Report(context);
+                    bool? aj_ = context.Operators.ConceptInValueSet(ah_, ai_);
+                    return o_ & aj_;
+                }
             }
 
             bool? i_ = context.Operators.WhereAny<ServiceRequest>((IEnumerable<ServiceRequest>)g_, h_);

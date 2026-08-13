@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
@@ -107,10 +107,17 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         CqlDateTime e_ = context.Operators.Start(d_);
         int? f_ = context.Operators.CalculateAgeAt(c_, e_, "year");
         bool? g_ = context.Operators.GreaterOrEqual(f_, 16);
-        IEnumerable<Condition> h_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
-        bool? i_ = context.Operators.Exists<Condition>(h_);
-        bool? j_ = context.Operators.And(g_, i_);
-        return j_;
+        // CQL 'and' (32:2-32:117): right operand skipped when left is false
+        if (g_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            IEnumerable<Condition> h_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
+            bool? i_ = context.Operators.Exists<Condition>(h_);
+            return g_ & i_;
+        }
     }
 
 
@@ -202,30 +209,43 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             DataType e_ = d_?.Item;
             CqlCode f_ = this.Tiny_Umbrella(context);
             bool? g_ = context.Operators.Equivalent(e_, f_);
-            Condition h_ = this.Latest_injury_due_to_falling_rock(context);
-            Condition[] i_ = [
-                h_,
-            ];
-
-            bool? j_(Condition C) {
-                DataType o_ = C?.Onset;
-                CqlDateTime p_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, o_ as FhirDateTime);
-                DataType q_ = SD?.Occurrence;
-                CqlDateTime r_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, q_ as FhirDateTime);
-                CqlQuantity s_ = context.Operators.Quantity(7m, "days");
-                CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-                CqlInterval<CqlDateTime> u_ = context.Operators.Interval(t_, r_, true, false);
-                bool? v_ = context.Operators.In<CqlDateTime>(p_, u_, (string)default);
-                bool? w_ = context.Operators.Not((bool?)((q_ as FhirDateTime) is null));
-                bool? x_ = context.Operators.And(v_, w_);
-                return x_;
+            // CQL 'and' (68:6-69:141): right operand skipped when left is false
+            if (g_ is false)
+            {
+                return false;
             }
+            else
+            {
+                Condition h_ = this.Latest_injury_due_to_falling_rock(context);
+                Condition[] i_ = [
+                    h_,
+                ];
 
-            IEnumerable<Condition> k_ = context.Operators.Where<Condition>((IEnumerable<Condition>)i_, j_);
-            Condition l_ = context.Operators.SingletonFrom<Condition>(k_);
-            bool? m_ = context.Operators.Not((bool?)(l_ is null));
-            bool? n_ = context.Operators.And(g_, m_);
-            return n_;
+                bool? j_(Condition C) {
+                    DataType m_ = C?.Onset;
+                    CqlDateTime n_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, m_ as FhirDateTime);
+                    DataType o_ = SD?.Occurrence;
+                    CqlDateTime p_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, o_ as FhirDateTime);
+                    CqlQuantity q_ = context.Operators.Quantity(7m, "days");
+                    CqlDateTime r_ = context.Operators.Subtract(p_, q_);
+                    CqlInterval<CqlDateTime> s_ = context.Operators.Interval(r_, p_, true, false);
+                    bool? t_ = context.Operators.In<CqlDateTime>(n_, s_, (string)default);
+                    // CQL 'and' (69:51-69:127): right operand skipped when left is false
+                    if (t_ is false)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        DataType u_ = SD?.Occurrence;
+                        return t_ & (!((bool?)((u_ as FhirDateTime) is null)));
+                    }
+                }
+
+                IEnumerable<Condition> k_ = context.Operators.Where<Condition>((IEnumerable<Condition>)i_, j_);
+                Condition l_ = context.Operators.SingletonFrom<Condition>(k_);
+                return g_ & (!((bool?)(l_ is null)));
+            }
         }
 
         IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_, b_);

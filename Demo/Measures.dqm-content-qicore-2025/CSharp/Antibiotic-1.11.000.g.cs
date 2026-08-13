@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("Antibiotic", "1.11.000")]
 public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_000>
 {
@@ -97,9 +97,18 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
                 CqlDateTime m_ = context.Operators.Add(k_, l_);
                 CqlInterval<CqlDateTime> n_ = context.Operators.Interval(k_, m_, true, true);
                 bool? o_ = context.Operators.In<CqlDateTime>(h_, n_, "day");
-                bool? p_ = context.Operators.Not((bool?)(k_ is null));
-                bool? q_ = context.Operators.And(o_, p_);
-                return q_;
+                // CQL 'and' (22:19-22:119): right operand skipped when left is false
+                if (o_ is false)
+                {
+                    return false;
+                }
+                else
+                {
+                    Period p_ = episode?.Period;
+                    CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
+                    CqlDateTime r_ = context.Operators.Start(q_);
+                    return o_ & (!((bool?)(r_ is null)));
+                }
             }
 
             bool? f_ = context.Operators.WhereAny<Condition>(competingConditions, e_);

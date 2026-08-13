@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("CMS122FHIRDiabetesAssessGT9Pct", "1.0.000")]
 public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISingleton<CMS122FHIRDiabetesAssessGT9Pct_1_0_000>
 {
@@ -379,25 +379,41 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        IEnumerable<Encounter> k_ = this.Qualifying_Encounters(context);
-        bool? l_ = context.Operators.Exists<Encounter>(k_);
-        bool? m_ = context.Operators.And(j_, l_);
-        CqlValueSet n_ = this.Diabetes(context);
-        IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        Condition p_(Condition X) => X as Condition;
-        IEnumerable<Condition> q_ = context.Operators.Select<Condition, Condition>(o_, p_);
-        IEnumerable<Condition> r_ = Status_1_15_000.Instance.verified(context, q_);
-
-        bool? s_(Condition DiabetesDiagnosis) {
-            CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
-            CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
-            bool? x_ = context.Operators.Overlaps(v_, w_, "day");
-            return x_;
+        bool? k_;
+        // CQL 'and' (52:3-55:38): right operand skipped when left is false
+        if (j_ is false)
+        {
+            k_ = false;
         }
+        else
+        {
+            IEnumerable<Encounter> l_ = this.Qualifying_Encounters(context);
+            bool? m_ = context.Operators.Exists<Encounter>(l_);
+            k_ = j_ & m_;
+        }
+        // CQL 'and' (52:3-58:5): right operand skipped when left is false
+        if (k_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            CqlValueSet n_ = this.Diabetes(context);
+            IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+            Condition p_(Condition X) => X as Condition;
+            IEnumerable<Condition> q_ = context.Operators.Select<Condition, Condition>(o_, p_);
+            IEnumerable<Condition> r_ = Status_1_15_000.Instance.verified(context, q_);
 
-        bool? t_ = context.Operators.WhereAny<Condition>(r_, s_);
-        bool? u_ = context.Operators.And(m_, t_);
-        return u_;
+            bool? s_(Condition DiabetesDiagnosis) {
+                CqlInterval<CqlDateTime> u_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
+                CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
+                bool? w_ = context.Operators.Overlaps(u_, v_, "day");
+                return w_;
+            }
+
+            bool? t_ = context.Operators.WhereAny<Condition>(r_, s_);
+            return k_ & t_;
+        }
     }
 
 
@@ -423,13 +439,38 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        bool? b_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
-        bool? c_ = context.Operators.Or(a_, b_);
-        bool? d_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
-        bool? e_ = context.Operators.Or(c_, d_);
-        bool? f_ = PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
-        bool? g_ = context.Operators.Or(e_, f_);
-        return g_;
+        bool? b_;
+        // CQL 'or' (64:3-65:74): right operand skipped when left is true
+        if (a_ is true)
+        {
+            b_ = true;
+        }
+        else
+        {
+            bool? d_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
+            b_ = a_ | d_;
+        }
+        bool? c_;
+        // CQL 'or' (64:3-66:73): right operand skipped when left is true
+        if (b_ is true)
+        {
+            c_ = true;
+        }
+        else
+        {
+            bool? e_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
+            c_ = b_ | e_;
+        }
+        // CQL 'or' (64:3-67:69): right operand skipped when left is true
+        if (c_ is true)
+        {
+            return true;
+        }
+        else
+        {
+            bool? f_ = PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
+            return c_ | f_;
+        }
     }
 
 
@@ -648,11 +689,19 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
     private bool? Has_Most_Recent_Glycemic_Status_Assessment_Without_Result_Compute(CqlContext context)
     {
         Observation a_ = this.Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day(context);
-        bool? b_ = context.Operators.Not((bool?)(a_ is null));
-        DataType c_ = a_?.Value;
-        object d_ = FHIRHelpers_4_4_000.Instance.ToValue(context, c_);
-        bool? e_ = context.Operators.And(b_, (bool?)(d_ is null));
-        return e_;
+        bool? b_ = !((bool?)(a_ is null));
+        // CQL 'and' (133:3-134:84): right operand skipped when left is false
+        if (b_ is false)
+        {
+            return false;
+        }
+        else
+        {
+            Observation c_ = this.Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day(context);
+            DataType d_ = c_?.Value;
+            object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
+            return b_ & ((bool?)(e_ is null));
+        }
     }
 
 
@@ -683,8 +732,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
     {
         IEnumerable<Observation> a_ = this.Glycemic_Status_Assessment(context);
         bool? b_ = context.Operators.Exists<Observation>(a_);
-        bool? c_ = context.Operators.Not(b_);
-        return c_;
+        return !b_;
     }
 
 
@@ -697,11 +745,27 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
     private bool? Numerator_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Most_Recent_Glycemic_Status_Assessment_Without_Result(context);
-        bool? b_ = this.Has_Most_Recent_Elevated_Glycemic_Status_Assessment(context);
-        bool? c_ = context.Operators.Or(a_, b_);
-        bool? d_ = this.Has_No_Record_Of_Glycemic_Status_Assessment(context);
-        bool? e_ = context.Operators.Or(c_, d_);
-        return e_;
+        bool? b_;
+        // CQL 'or' (70:3-71:60): right operand skipped when left is true
+        if (a_ is true)
+        {
+            b_ = true;
+        }
+        else
+        {
+            bool? c_ = this.Has_Most_Recent_Elevated_Glycemic_Status_Assessment(context);
+            b_ = a_ | c_;
+        }
+        // CQL 'or' (70:3-72:52): right operand skipped when left is true
+        if (b_ is true)
+        {
+            return true;
+        }
+        else
+        {
+            bool? d_ = this.Has_No_Record_Of_Glycemic_Status_Assessment(context);
+            return b_ | d_;
+        }
     }
 
 

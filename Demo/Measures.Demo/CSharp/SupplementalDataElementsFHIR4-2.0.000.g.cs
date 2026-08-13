@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
 public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleton<SupplementalDataElementsFHIR4_2_0_000>
 {
@@ -94,15 +94,24 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             FhirUri r_ = E?.UrlElement;
             string s_ = FHIRHelpers_4_0_001.Instance.ToString(context, r_);
             bool? t_ = context.Operators.Equal(s_, "ombCategory");
-            bool? u_ = context.Operators.Equal(s_, "detailed");
-            bool? v_ = context.Operators.Or(t_, u_);
-            return v_;
+            // CQL 'or' (25:7-26:29): right operand skipped when left is true
+            if (t_ is true)
+            {
+                return true;
+            }
+            else
+            {
+                FhirUri u_ = E?.UrlElement;
+                string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
+                bool? w_ = context.Operators.Equal(v_, "detailed");
+                return t_ | w_;
+            }
         }
 
 
         Coding h_(Extension E) {
-            DataType w_ = E?.Value;
-            return w_ as Coding;
+            DataType x_ = E?.Value;
+            return x_ as Coding;
         }
 
         IEnumerable<Coding> i_ = context.Operators.WhereSelect<Extension, Coding>(f_, g_, h_);
@@ -176,15 +185,24 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             FhirUri r_ = E?.UrlElement;
             string s_ = FHIRHelpers_4_0_001.Instance.ToString(context, r_);
             bool? t_ = context.Operators.Equal(s_, "ombCategory");
-            bool? u_ = context.Operators.Equal(s_, "detailed");
-            bool? v_ = context.Operators.Or(t_, u_);
-            return v_;
+            // CQL 'or' (42:7-43:29): right operand skipped when left is true
+            if (t_ is true)
+            {
+                return true;
+            }
+            else
+            {
+                FhirUri u_ = E?.UrlElement;
+                string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
+                bool? w_ = context.Operators.Equal(v_, "detailed");
+                return t_ | w_;
+            }
         }
 
 
         Coding h_(Extension E) {
-            DataType w_ = E?.Value;
-            return w_ as Coding;
+            DataType x_ = E?.Value;
+            return x_ as Coding;
         }
 
         IEnumerable<Coding> i_ = context.Operators.WhereSelect<Extension, Coding>(f_, g_, h_);
