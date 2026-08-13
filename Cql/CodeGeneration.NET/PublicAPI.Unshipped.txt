@@ -1,8 +1,9 @@
 #nullable enable
 Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig!
 Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.CSharpGeneratingConfig() -> void
 Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.CSharpGeneratingConfig(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig! original) -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.Equals(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig? other) -> bool
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.Equals(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig? other) -> bool
 Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.PreferFlattenElseBlocks.get -> bool
 Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.PreferFlattenElseBlocks.init -> void
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.CSharpGeneratingConfig.get -> Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig!

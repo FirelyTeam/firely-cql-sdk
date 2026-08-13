@@ -23,6 +23,13 @@
     "JsonPretty": false, // --json-pretty
     "DebugSymbolsFormat": "None", // --debug-symbols : "None", "PortablePdb", "Embedded"
     "CSharpNamespace": null, // --cs-namespace : The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries")
+    "CSharpGeneratingConfig": {
+      // Formatting of the generated C#; never affects its behavior.
+      // When true, a generated conditional whose branches all exit (return or throw) prints
+      // guard-clause style - plain sequential ifs, final value flat - instead of an if/else
+      // chain. Default: false (else blocks are kept).
+      "PreferFlattenElseBlocks": false
+    },
     "SkipFiles": [
       // JSON Files that are skipped during the packaging process.
       // See the specific profile appsettings e.g. Hl7.Cql.Packager.appsettings.CMSMeasures.json
