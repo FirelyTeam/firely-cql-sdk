@@ -232,7 +232,7 @@ public class ShortCircuitLogicCqlTest
     }
 
     /// <summary>
-    /// <see cref="CSharpGeneratingConfig.PreferFlattenElseBlocks"/> flattens tail-position
+    /// <see cref="CSharpGeneratingConfig.PreferNoElseBlocks"/> flattens tail-position
     /// chains (branches that return) to guard-clause style; assign-form chains — like the
     /// guard inside <c>GuardInConditionalTest</c>, which produces a value for an if-test —
     /// keep their <c>else</c> in both modes, since there the else is what guarantees exactly
@@ -241,17 +241,17 @@ public class ShortCircuitLogicCqlTest
     /// Formatting only — both variants go through <c>CompileToAssemblies</c>.
     /// </summary>
     [TestMethod]
-    public void GeneratedCSharp_PreferFlattenElseBlocks_FlattensTailChains()
+    public void GeneratedCSharp_PreferNoElseBlocks_FlattensTailChains()
     {
         var withElse = GenerateFixtureCSharp(ElmToolkitConfig.Default);
-        var flattened = GenerateFixtureCSharp(ElmToolkitConfig.Default with { CSharpGeneratingConfig = new CSharpGeneratingConfig { PreferFlattenElseBlocks = true } });
+        var flattened = GenerateFixtureCSharp(ElmToolkitConfig.Default with { CSharpGeneratingConfig = new CSharpGeneratingConfig { PreferNoElseBlocks = true } });
 
         var withElseCount = CountElseKeywords(withElse);
         var flattenedCount = CountElseKeywords(flattened);
 
         Assert.IsTrue(withElseCount > 0, "The default must keep else blocks.");
         Assert.IsTrue(flattenedCount < withElseCount,
-            $"With CSharpPreferFlattenElseBlocks, tail-position chains must print guard-clause style (default: {withElseCount} else, flattened: {flattenedCount}).");
+            $"With CSharpPreferNoElseBlocks, tail-position chains must print guard-clause style (default: {withElseCount} else, flattened: {flattenedCount}).");
 
         // The tail-position truth-table defines flatten completely; what remains is exactly
         // the assign-form guard(s), which must keep the else in both modes.

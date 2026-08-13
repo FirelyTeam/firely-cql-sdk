@@ -33,7 +33,7 @@
       // When true, a generated conditional whose branches all exit (return or throw) prints
       // guard-clause style - plain sequential ifs, final value flat - instead of an if/else
       // chain. Default: false (else blocks are kept).
-      "PreferFlattenElseBlocks": false
+      "PreferNoElseBlocks": false
     },
     "SkipFiles": [
       // JSON Files that are skipped during the packaging process.

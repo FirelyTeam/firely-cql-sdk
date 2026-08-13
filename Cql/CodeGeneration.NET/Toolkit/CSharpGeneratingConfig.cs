@@ -30,7 +30,7 @@ public record CSharpGeneratingConfig
     /// the final value flat after them, instead of an <c>if</c>/<c>else</c> chain. The
     /// default is <see langword="false"/>: <c>else</c> blocks are kept.
     /// </summary>
-    public bool PreferFlattenElseBlocks { get; init; } = false;
+    public bool PreferNoElseBlocks { get; init; } = false;
 
     /// <summary>
     /// The C# namespace to use for generated code. If <see langword="null"/> or empty, no
