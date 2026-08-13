@@ -55,3 +55,10 @@ define "NullOrMessage": "NullDef" or "MessageTrue"
 // must not allocate. (A function, not a define, so memoization does not cache it away.)
 
 define function "GuardedAnd"(leftOperand Boolean): leftOperand and "MessageTrue"
+
+// A guarded 'and' inside the TEST of a conditional whose branches are simple: without the
+// statement-shape veto in the emitter's inline classification, the conditional prints as an
+// inline ternary and the guard's let-binding reaches PrintFullyInline, which cannot print it
+// (found via the HEDIS 2025 corpus compile guard).
+
+define "GuardInConditionalTest": if "TrueDef" and "MessageTrue" then 1 else 2

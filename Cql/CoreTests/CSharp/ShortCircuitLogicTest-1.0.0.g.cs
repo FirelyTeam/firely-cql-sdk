@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ShortCircuitLogicTest", "1.0.0")]
 public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCircuitLogicTest_1_0_0>
 {
-    #region Functions and Expressions (30)
+    #region Functions and Expressions (31)
 
     [CqlExpressionDefinition("TrueDef")]
     public bool? TrueDef(CqlContext context) =>
@@ -596,6 +596,37 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
         {
             bool? a_ = this.MessageTrue(context);
             return leftOperand & a_;
+        }
+    }
+
+
+    [CqlExpressionDefinition("GuardInConditionalTest")]
+    public int? GuardInConditionalTest(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_GuardInConditionalTest, GuardInConditionalTest_Compute);
+
+    private const long _cacheIndex_GuardInConditionalTest = -1700372608085352039L;
+
+    private int? GuardInConditionalTest_Compute(CqlContext context)
+    {
+        bool? a_ = this.TrueDef(context);
+        bool? b_;
+        // CQL 'and' (64:37-64:63): right operand skipped when left is false
+        if (a_ is false)
+        {
+            b_ = false;
+        }
+        else
+        {
+            bool? c_ = this.MessageTrue(context);
+            b_ = a_ & c_;
+        }
+        if (b_ ?? false)
+        {
+            return 1;
+        }
+        else
+        {
+            return 2;
         }
     }
 

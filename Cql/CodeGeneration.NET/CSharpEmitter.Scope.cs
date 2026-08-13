@@ -264,10 +264,15 @@ internal partial class CSharpEmitter
             // A "simple" conditional (IfFalse is not itself a conditional, and neither branch
             // would hoist anything) prints as one inline ternary — its entire subtree, the
             // test included (however complex). Everything else flattens the else-chain into
-            // native if/else statement form.
+            // native if/else statement form. A statement-shaped node (a let, an if-chain)
+            // anywhere in the TEST vetoes the inline form: the branches are checked by
+            // IsInlineOnly, but the test prints fully inline "however complex", and those
+            // nodes have no inline print (found via the HEDIS 2025 corpus: an and/or guard's
+            // CodeLet inside the test of an if-expression with simple branches).
             if (conditional.IfFalse is not CodeConditional
                 && IsInlineOnly(conditional.IfTrue)
-                && IsInlineOnly(conditional.IfFalse))
+                && IsInlineOnly(conditional.IfFalse)
+                && !ContainsStatementShape(conditional.Test))
             {
                 return new Atom(_emitter.PrintInlineConditional(conditional, _emitter.PrintFullyInline), conditional);
             }
@@ -316,8 +321,42 @@ internal partial class CSharpEmitter
                 CodeConditional nested =>
                     nested.IfFalse is not CodeConditional
                     && IsInlineOnly(nested.IfTrue)
-                    && IsInlineOnly(nested.IfFalse),
+                    && IsInlineOnly(nested.IfFalse)
+                    // The old trial visit left a nested simple conditional's test unexamined;
+                    // that stays, EXCEPT for statement-shaped nodes (lets, if-chains), which
+                    // the old pipeline could never put inside a test and which cannot print
+                    // inline.
+                    && !ContainsStatementShape(nested.Test),
                 _ => false,
+            };
+
+        /// <summary>
+        /// True when the subtree contains a node with no inline print form — a let-binding or
+        /// an if-chain — anywhere <see cref="CSharpEmitter.PrintFullyInline"/> would reach it,
+        /// including conditional TESTS (which the inline-only classification deliberately
+        /// leaves unexamined otherwise) and inline lambda bodies.
+        /// </summary>
+        private static bool ContainsStatementShape(CodeExpression node) =>
+            node switch
+            {
+                CodeLet or CodeIfChain => true,
+                CodeConstant or CodeDefault or CodeContextParameter or CodeLocal => false,
+                CodeProperty p => p.Receiver is { } r && ContainsStatementShape(r),
+                CodeCast c => ContainsStatementShape(c.Operand),
+                CodeTypeIs t => ContainsStatementShape(t.Operand),
+                CodeUnary u => ContainsStatementShape(u.Operand),
+                CodeBinary b => ContainsStatementShape(b.Left) || ContainsStatementShape(b.Right),
+                CodeThrow t => ContainsStatementShape(t.Exception),
+                CodeNew n => n.Arguments.Any(ContainsStatementShape),
+                CodeNewArray a => a.Items.Any(ContainsStatementShape),
+                CodeNewArrayBounds b => ContainsStatementShape(b.Length),
+                CodeMemberInit m => ContainsStatementShape(m.New) || m.Bindings.Any(binding => ContainsStatementShape(binding.Value)),
+                CodeTupleInit t => t.Elements.Any(element => ContainsStatementShape(element.Value)),
+                CodeInvoke i => (i.Receiver is { } receiver && ContainsStatementShape(receiver)) || i.Arguments.Any(ContainsStatementShape),
+                CodeDefinitionCall d => d.Arguments.Any(ContainsStatementShape),
+                CodeLambda l => ContainsStatementShape(l.Body),
+                CodeConditional c => ContainsStatementShape(c.Test) || ContainsStatementShape(c.IfTrue) || ContainsStatementShape(c.IfFalse),
+                _ => true, // unknown node type: assume the worst so it hoists instead of throwing mid-print
             };
 
         private Atom? LinearizeIfChain(CodeIfChain chain, bool tailPosition) =>
@@ -500,6 +539,9 @@ internal partial class CSharpEmitter
                 CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr } b =>
                     CountSpineNodes(b.Left) + CountSpineNodes(b.Right),
                 CodeUnary u => CountSpineNodes(u.Operand),
+                // A conditional containing a statement-shaped node anywhere (test included)
+                // cannot print as isSimpleWhen's raw inline ternary — force statement form.
+                CodeConditional c when ContainsStatementShape(c) => 2,
                 CodeConditional c when
                     c.IfFalse is not CodeConditional && IsInlineOnly(c.IfTrue) && IsInlineOnly(c.IfFalse) => 0,
                 // A NON-simple conditional still counts exactly ONE hoist as a when-condition:

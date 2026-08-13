@@ -1046,6 +1046,63 @@
                   "annotation" : [ ]
                }
             } ]
+         }, {
+            "locator" : "64:1-64:77",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "GuardInConditionalTest",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "If",
+               "locator" : "64:34-64:77",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "annotation" : [ ],
+               "condition" : {
+                  "type" : "And",
+                  "locator" : "64:37-64:63",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ],
+                  "signature" : [ {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "annotation" : [ ]
+                  } ],
+                  "operand" : [ {
+                     "type" : "ExpressionRef",
+                     "locator" : "64:37-64:45",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "name" : "TrueDef",
+                     "annotation" : [ ]
+                  }, {
+                     "type" : "ExpressionRef",
+                     "locator" : "64:51-64:63",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "name" : "MessageTrue",
+                     "annotation" : [ ]
+                  } ]
+               },
+               "then" : {
+                  "type" : "Literal",
+                  "locator" : "64:70",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "annotation" : [ ]
+               },
+               "else" : {
+                  "type" : "Literal",
+                  "locator" : "64:77",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "annotation" : [ ]
+               }
+            }
          } ]
       }
    }

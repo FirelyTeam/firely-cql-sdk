@@ -161,6 +161,28 @@ public class ShortCircuitLogicCqlTest
         Assert.AreEqual(1, messages, "null does NOT decide 'or' (null or false = null); the right operand must be evaluated.");
     }
 
+    /// <summary>
+    /// A guarded <c>and</c> inside the TEST of a conditional with simple branches: the emitter
+    /// must not classify that conditional as an inline ternary, because the guard's
+    /// let-binding has no inline print form (HEDIS-corpus regression; the fixture define
+    /// exists to keep a public repro). Value-wise: <c>true and Message(true, ...)</c> is
+    /// true — the right operand runs (true does not decide <c>and</c>) — so the result is 1
+    /// and the message fires exactly once.
+    /// </summary>
+    [TestMethod]
+    public void GuardInConditionalTest_PrintsAsStatements_AndEvaluates()
+    {
+        var context = Context();
+        var messages = 0;
+        context.MessageReceived += (_, e) =>
+        {
+            if (e.Code == "ShortCircuitLogicTest.RightEvaluated")
+                messages++;
+        };
+        Assert.AreEqual(1, Library.GuardInConditionalTest(context));
+        Assert.AreEqual(1, messages);
+    }
+
     #endregion
 
     /// <summary>
@@ -211,19 +233,44 @@ public class ShortCircuitLogicCqlTest
 
     /// <summary>
     /// <see cref="ElmToolkitConfig.CSharpPreferFlattenElseBlocks"/> flattens tail-position
-    /// chains to guard-clause style. This fixture's only conditionals are the short-circuit
-    /// guards, so with the option on the output contains no <c>else</c> at all; the default
-    /// keeps the <c>else</c> chains. Formatting only — both variants must compile (both go
-    /// through <c>CompileToAssemblies</c>).
+    /// chains (branches that return) to guard-clause style; assign-form chains — like the
+    /// guard inside <c>GuardInConditionalTest</c>, which produces a value for an if-test —
+    /// keep their <c>else</c> in both modes, since there the else is what guarantees exactly
+    /// one branch assigns. So the flattened output has strictly fewer <c>else</c> blocks
+    /// than the default, and the truth-table defines (tail position) lose theirs entirely.
+    /// Formatting only — both variants go through <c>CompileToAssemblies</c>.
     /// </summary>
     [TestMethod]
     public void GeneratedCSharp_PreferFlattenElseBlocks_FlattensTailChains()
     {
         var withElse = GenerateFixtureCSharp(ElmToolkitConfig.Default);
-        StringAssert.Contains(withElse, "else", "The default must keep else blocks.");
-
         var flattened = GenerateFixtureCSharp(ElmToolkitConfig.Default with { CSharpPreferFlattenElseBlocks = true });
-        Assert.IsFalse(flattened.Contains("else"), "With CSharpPreferFlattenElseBlocks, every tail-position chain must print guard-clause style.");
+
+        var withElseCount = CountElseKeywords(withElse);
+        var flattenedCount = CountElseKeywords(flattened);
+
+        Assert.IsTrue(withElseCount > 0, "The default must keep else blocks.");
+        Assert.IsTrue(flattenedCount < withElseCount,
+            $"With CSharpPreferFlattenElseBlocks, tail-position chains must print guard-clause style (default: {withElseCount} else, flattened: {flattenedCount}).");
+
+        // The tail-position truth-table defines flatten completely; what remains is exactly
+        // the assign-form guard(s), which must keep the else in both modes.
+        var tailDefine = ExtractComputeMethod(flattened, "TrueAndTrue_Compute");
+        Assert.IsFalse(tailDefine.Contains("else"), "A tail-position guard must flatten to guard-clause style.");
+
+        var assignDefine = ExtractComputeMethod(flattened, "GuardInConditionalTest_Compute");
+        StringAssert.Contains(assignDefine, "else", "An assign-form guard must keep its else even when flattening.");
+    }
+
+    private static int CountElseKeywords(string code) =>
+        System.Text.RegularExpressions.Regex.Matches(code, @"\belse\b").Count;
+
+    private static string ExtractComputeMethod(string code, string methodName)
+    {
+        var start = code.IndexOf(methodName, StringComparison.Ordinal);
+        Assert.IsTrue(start >= 0, $"Method {methodName} not found in generated code.");
+        var end = code.IndexOf("[CqlExpressionDefinition", start, StringComparison.Ordinal);
+        return end < 0 ? code[start..] : code[start..end];
     }
 
     private static string GenerateFixtureCSharp(ElmToolkitConfig config)
