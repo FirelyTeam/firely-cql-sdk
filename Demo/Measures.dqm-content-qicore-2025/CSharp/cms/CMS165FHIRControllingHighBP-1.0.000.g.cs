@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS165FHIRControllingHighBP", "1.0.000")]
 public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<CMS165FHIRControllingHighBP_1_0_000>
 {
@@ -474,40 +474,39 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             IEnumerable<Encounter> o_ = Status_1_15_000.Instance.isEncounterPerformed(context, n_);
 
             bool? p_(Encounter DisqualifyingEncounter) {
-                DataType s_ = BloodPressure?.Effective;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                CqlDateTime u_ = QICoreCommon_4_0_000.Instance.latest(context, t_);
-                Period v_ = DisqualifyingEncounter?.Period;
-                CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, v_);
-                bool? x_ = context.Operators.In<CqlDateTime>(u_, w_, "day");
-                return x_;
+                DataType r_ = BloodPressure?.Effective;
+                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+                CqlDateTime t_ = QICoreCommon_4_0_000.Instance.latest(context, s_);
+                Period u_ = DisqualifyingEncounter?.Period;
+                CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
+                bool? w_ = context.Operators.In<CqlDateTime>(t_, v_, "day");
+                return w_;
             }
 
             bool? q_ = context.Operators.WhereAny<Encounter>(o_, p_);
-            bool? r_ = context.Operators.Not(q_);
-            return r_;
+            return !q_;
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
         bool? e_(Observation BloodPressure) {
-            DataType y_ = BloodPressure?.Effective;
-            object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-            CqlDateTime aa_ = QICoreCommon_4_0_000.Instance.latest(context, z_);
-            CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
-            bool? ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, "day");
-            return ac_;
+            DataType x_ = BloodPressure?.Effective;
+            object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+            CqlDateTime z_ = QICoreCommon_4_0_000.Instance.latest(context, y_);
+            CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
+            bool? ab_ = context.Operators.In<CqlDateTime>(z_, aa_, "day");
+            return ab_;
         }
 
         IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 
         bool? g_(Observation BloodPressure) {
-            ResourceReference ad_ = BloodPressure?.Encounter;
-            Encounter ae_ = this.getEncounter(context, ad_);
-            Coding af_ = ae_?.Class;
-            CqlCode ag_ = FHIRHelpers_4_4_000.Instance.ToCode(context, af_);
-            string ah_ = ag_?.code;
-            string[] ai_ = [
+            ResourceReference ac_ = BloodPressure?.Encounter;
+            Encounter ad_ = this.getEncounter(context, ac_);
+            Coding ae_ = ad_?.Class;
+            CqlCode af_ = FHIRHelpers_4_4_000.Instance.ToCode(context, ae_);
+            string ag_ = af_?.code;
+            string[] ah_ = [
                 "EMER",
                 "IMP",
                 "ACUTE",
@@ -515,21 +514,21 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 "PRENC",
                 "SS",
             ];
-            bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
-            bool? ak_ = !aj_;
+            bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
+            bool? aj_ = !ai_;
             // CQL 'and' (121:9-122:83): right operand skipped when left is false
-            if (ak_ is false)
+            if (aj_ is false)
             {
                 return false;
             }
             else
             {
-                DataType al_ = BloodPressure?.Effective;
-                object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                CqlDateTime an_ = QICoreCommon_4_0_000.Instance.latest(context, am_);
-                CqlInterval<CqlDateTime> ao_ = this.Measurement_Period(context);
-                bool? ap_ = context.Operators.In<CqlDateTime>(an_, ao_, "day");
-                return ak_ & ap_;
+                DataType ak_ = BloodPressure?.Effective;
+                object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+                CqlDateTime am_ = QICoreCommon_4_0_000.Instance.latest(context, al_);
+                CqlInterval<CqlDateTime> an_ = this.Measurement_Period(context);
+                bool? ao_ = context.Operators.In<CqlDateTime>(am_, an_, "day");
+                return aj_ & ao_;
             }
         }
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("NCQAClaims", "1.0.0")]
 public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 {
@@ -2915,15 +2915,14 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     IEnumerable<Claim> bk_ = LineItemDefinition?.NonacuteInpatientLineItems;
 
                     bool? bl_(Claim nonAcuteInpatientStay) {
-                        Id bo_ = inpatientStay?.IdElement;
-                        Id bp_ = nonAcuteInpatientStay?.IdElement;
-                        bool? bq_ = context.Operators.Equal(bo_, bp_);
-                        return bq_;
+                        Id bn_ = inpatientStay?.IdElement;
+                        Id bo_ = nonAcuteInpatientStay?.IdElement;
+                        bool? bp_ = context.Operators.Equal(bn_, bo_);
+                        return bp_;
                     }
 
                     bool? bm_ = context.Operators.WhereAny<Claim>(bk_, bl_);
-                    bool? bn_ = context.Operators.Not(bm_);
-                    return bn_;
+                    return !bm_;
                 }
 
                 IEnumerable<Claim> bc_ = context.Operators.Where<Claim>(ax_, bb_);

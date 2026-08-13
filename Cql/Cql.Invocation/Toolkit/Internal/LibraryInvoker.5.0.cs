@@ -43,8 +43,13 @@ internal sealed class LibraryInstanceInvoker_5_0 : LibraryInstanceInvoker
     /// shape (the <c>Instance</c> property, <c>ILibrary</c>, <c>CqlDefinitionAttribute</c>, the
     /// definition method signatures) is exactly as before - so the existing invoker keeps
     /// working and no new one is needed.
+    /// <para>Widened from 5.3.0.0 to 5.4.0.0 for generator version 5.3.0.0 (short-circuit
+    /// and/or/not lowering, #1514). Also a minor bump for the same reason: and/or/not now
+    /// compile to lifted C# operators behind guard control flow instead of
+    /// <c>ICqlOperators</c> calls, but the library shape this invoker binds to is
+    /// unchanged.</para>
     /// </remarks>
-    public static readonly Version FirstUnsupportedGeneratorToolVersion = new(5,3,0,0);
+    public static readonly Version FirstUnsupportedGeneratorToolVersion = new(5,4,0,0);
 
     public override IReadOnlyDictionary<DefinitionSignature, DefinitionInvoker> Definitions { get; }
 

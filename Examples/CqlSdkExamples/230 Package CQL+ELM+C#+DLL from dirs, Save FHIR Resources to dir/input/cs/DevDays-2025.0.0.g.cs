@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("DevDays", "2025.0.0")]
 public partial class DevDays_2025_0_0 : ILibrary, ISingleton<DevDays_2025_0_0>
 {
@@ -87,19 +87,26 @@ public partial class DevDays_2025_0_0 : ILibrary, ISingleton<DevDays_2025_0_0>
             List<Coding> e_ = d_?.Coding;
 
             bool? f_(Coding coding) {
-                CqlCode m_ = FHIRHelpers_4_0_001.Instance.ToCode(context, coding);
-                CqlCode n_ = this.Sucked_into_jet_engine(context);
-                bool? o_ = context.Operators.Equivalent(m_, n_);
-                return o_;
+                CqlCode h_ = FHIRHelpers_4_0_001.Instance.ToCode(context, coding);
+                CqlCode i_ = this.Sucked_into_jet_engine(context);
+                bool? j_ = context.Operators.Equivalent(h_, i_);
+                return j_;
             }
 
             bool? g_ = context.Operators.WhereAny<Coding>((IEnumerable<Coding>)e_, f_);
-            DataType h_ = c?.Onset;
-            CqlDateTime i_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, h_ as FhirDateTime);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, (string)default);
-            bool? l_ = context.Operators.And(g_, k_);
-            return l_;
+            // CQL 'and' (18:2-20:37): right operand skipped when left is false
+            if (g_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                DataType k_ = c?.Onset;
+                CqlDateTime l_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, k_ as FhirDateTime);
+                CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
+                bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, (string)default);
+                return g_ & n_;
+            }
         }
 
         IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
@@ -122,19 +129,26 @@ public partial class DevDays_2025_0_0 : ILibrary, ISingleton<DevDays_2025_0_0>
             List<Coding> e_ = d_?.Coding;
 
             bool? f_(Coding coding) {
-                CqlCode m_ = FHIRHelpers_4_0_001.Instance.ToCode(context, coding);
-                CqlCode n_ = this.Sucked_into_jet_engine__subsequent_encounter(context);
-                bool? o_ = context.Operators.Equivalent(m_, n_);
-                return o_;
+                CqlCode h_ = FHIRHelpers_4_0_001.Instance.ToCode(context, coding);
+                CqlCode i_ = this.Sucked_into_jet_engine__subsequent_encounter(context);
+                bool? j_ = context.Operators.Equivalent(h_, i_);
+                return j_;
             }
 
             bool? g_ = context.Operators.WhereAny<Coding>((IEnumerable<Coding>)e_, f_);
-            DataType h_ = c?.Onset;
-            CqlDateTime i_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, h_ as FhirDateTime);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, (string)default);
-            bool? l_ = context.Operators.And(g_, k_);
-            return l_;
+            // CQL 'and' (24:2-26:37): right operand skipped when left is false
+            if (g_ is false)
+            {
+                return false;
+            }
+            else
+            {
+                DataType k_ = c?.Onset;
+                CqlDateTime l_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, k_ as FhirDateTime);
+                CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
+                bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, (string)default);
+                return g_ & n_;
+            }
         }
 
         IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);

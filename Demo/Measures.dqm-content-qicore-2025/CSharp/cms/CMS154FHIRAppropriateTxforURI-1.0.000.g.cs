@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS154FHIRAppropriateTxforURI", "1.0.000")]
 public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleton<CMS154FHIRAppropriateTxforURI_1_0_000>
 {
@@ -496,31 +496,31 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             IEnumerable<MedicationRequest> f_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
             bool? g_(MedicationRequest MR) {
-                IEnumerable<Medication> p_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+                IEnumerable<Medication> o_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-                bool? q_(Medication M) {
-                    object s_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                    object t_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string> u_ = context.Operators.Split((string)t_, "/");
-                    string v_ = context.Operators.Last<string>(u_);
-                    bool? w_ = context.Operators.Equal(s_, v_);
+                bool? p_(Medication M) {
+                    object r_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                    object s_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                    IEnumerable<string> t_ = context.Operators.Split((string)s_, "/");
+                    string u_ = context.Operators.Last<string>(t_);
+                    bool? v_ = context.Operators.Equal(r_, u_);
                     // CQL 'and': right operand skipped when left is false
-                    if (w_ is false)
+                    if (v_ is false)
                     {
                         return false;
                     }
                     else
                     {
-                        CodeableConcept x_ = M?.Code;
-                        CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
-                        CqlValueSet z_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
-                        bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
-                        return w_ & aa_;
+                        CodeableConcept w_ = M?.Code;
+                        CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
+                        CqlValueSet y_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
+                        bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
+                        return v_ & z_;
                     }
                 }
 
-                bool? r_ = context.Operators.WhereAny<Medication>(p_, q_);
-                return r_;
+                bool? q_ = context.Operators.WhereAny<Medication>(o_, p_);
+                return q_;
             }
 
             IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
@@ -530,32 +530,31 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             IEnumerable<MedicationRequest> l_ = Status_1_15_000.Instance.isMedicationOrder(context, k_);
 
             bool? m_(MedicationRequest OrderedAntibiotic) {
-                FhirDateTime ab_ = OrderedAntibiotic?.AuthoredOnElement;
-                CqlDateTime ac_ = context.Operators.Convert<CqlDateTime>(ab_);
-                Period ad_ = EncounterWithURI?.Period;
-                CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
-                CqlDateTime af_ = context.Operators.Start(ae_);
-                CqlQuantity ag_ = context.Operators.Quantity(3m, "days");
-                CqlDateTime ah_ = context.Operators.Add(af_, ag_);
-                CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(af_, ah_, true, true);
-                bool? aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, (string)default);
+                FhirDateTime aa_ = OrderedAntibiotic?.AuthoredOnElement;
+                CqlDateTime ab_ = context.Operators.Convert<CqlDateTime>(aa_);
+                Period ac_ = EncounterWithURI?.Period;
+                CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ac_);
+                CqlDateTime ae_ = context.Operators.Start(ad_);
+                CqlQuantity af_ = context.Operators.Quantity(3m, "days");
+                CqlDateTime ag_ = context.Operators.Add(ae_, af_);
+                CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ae_, ag_, true, true);
+                bool? ai_ = context.Operators.In<CqlDateTime>(ab_, ah_, (string)default);
                 // CQL 'and' (107:17-107:104): right operand skipped when left is false
-                if (aj_ is false)
+                if (ai_ is false)
                 {
                     return false;
                 }
                 else
                 {
-                    Period ak_ = EncounterWithURI?.Period;
-                    CqlInterval<CqlDateTime> al_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ak_);
-                    CqlDateTime am_ = context.Operators.Start(al_);
-                    return aj_ & (!((bool?)(am_ is null)));
+                    Period aj_ = EncounterWithURI?.Period;
+                    CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
+                    CqlDateTime al_ = context.Operators.Start(ak_);
+                    return ai_ & (!((bool?)(al_ is null)));
                 }
             }
 
             bool? n_ = context.Operators.WhereAny<MedicationRequest>(l_, m_);
-            bool? o_ = context.Operators.Not(n_);
-            return o_;
+            return !n_;
         }
 
         Encounter c_(Encounter EncounterWithURI) => EncounterWithURI;

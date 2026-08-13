@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("HospitalHarmSevereHypoglycemiaFHIR", "0.0.012")]
 public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISingleton<HospitalHarmSevereHypoglycemiaFHIR_0_0_012>
 {
@@ -423,110 +423,109 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 IEnumerable<Observation> aq_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ap_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
                 bool? ar_(Observation FollowupBloodGlucoseLab) {
-                    DataType au_ = FollowupBloodGlucoseLab?.Effective;
-                    CqlInterval<CqlDateTime> av_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, au_);
-                    CqlDateTime aw_ = context.Operators.Start(av_);
-                    CqlInterval<CqlDateTime> ax_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                    bool? ay_ = context.Operators.In<CqlDateTime>(aw_, ax_, (string)default);
-                    bool? az_;
+                    DataType at_ = FollowupBloodGlucoseLab?.Effective;
+                    CqlInterval<CqlDateTime> au_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, at_);
+                    CqlDateTime av_ = context.Operators.Start(au_);
+                    CqlInterval<CqlDateTime> aw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
+                    bool? ax_ = context.Operators.In<CqlDateTime>(av_, aw_, (string)default);
+                    bool? ay_;
                     // CQL 'and' (75:21-76:179): right operand skipped when left is false
+                    if (ax_ is false)
+                    {
+                        ay_ = false;
+                    }
+                    else
+                    {
+                        DataType bb_ = FollowupBloodGlucoseLab?.Effective;
+                        CqlInterval<CqlDateTime> bc_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bb_);
+                        CqlDateTime bd_ = context.Operators.Start(bc_);
+                        DataType be_ = BloodGlucoseLab?.Effective;
+                        CqlInterval<CqlDateTime> bf_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, be_);
+                        CqlDateTime bg_ = context.Operators.Start(bf_);
+                        CqlQuantity bh_ = context.Operators.Quantity(5m, "minutes");
+                        CqlDateTime bi_ = context.Operators.Add(bg_, bh_);
+                        CqlInterval<CqlDateTime> bj_ = context.Operators.Interval(bg_, bi_, false, true);
+                        bool? bk_ = context.Operators.In<CqlDateTime>(bd_, bj_, (string)default);
+                        bool? bl_;
+                        // CQL 'and' (76:17-76:179): right operand skipped when left is false
+                        if (bk_ is false)
+                        {
+                            bl_ = false;
+                        }
+                        else
+                        {
+                            DataType bm_ = BloodGlucoseLab?.Effective;
+                            CqlInterval<CqlDateTime> bn_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bm_);
+                            CqlDateTime bo_ = context.Operators.Start(bn_);
+                            bl_ = bk_ & (!((bool?)(bo_ is null)));
+                        }
+                        ay_ = ax_ & bl_;
+                    }
+                    bool? az_;
+                    // CQL 'and' (75:21-77:56): right operand skipped when left is false
                     if (ay_ is false)
                     {
                         az_ = false;
                     }
                     else
                     {
-                        DataType bc_ = FollowupBloodGlucoseLab?.Effective;
-                        CqlInterval<CqlDateTime> bd_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bc_);
-                        CqlDateTime be_ = context.Operators.Start(bd_);
-                        DataType bf_ = BloodGlucoseLab?.Effective;
-                        CqlInterval<CqlDateTime> bg_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bf_);
-                        CqlDateTime bh_ = context.Operators.Start(bg_);
-                        CqlQuantity bi_ = context.Operators.Quantity(5m, "minutes");
-                        CqlDateTime bj_ = context.Operators.Add(bh_, bi_);
-                        CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(bh_, bj_, false, true);
-                        bool? bl_ = context.Operators.In<CqlDateTime>(be_, bk_, (string)default);
-                        bool? bm_;
-                        // CQL 'and' (76:17-76:179): right operand skipped when left is false
-                        if (bl_ is false)
-                        {
-                            bm_ = false;
-                        }
-                        else
-                        {
-                            DataType bn_ = BloodGlucoseLab?.Effective;
-                            CqlInterval<CqlDateTime> bo_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bn_);
-                            CqlDateTime bp_ = context.Operators.Start(bo_);
-                            bm_ = bl_ & (!((bool?)(bp_ is null)));
-                        }
-                        az_ = ay_ & bm_;
+                        Code<ObservationStatus> bp_ = FollowupBloodGlucoseLab?.StatusElement;
+                        string bq_ = FHIRHelpers_4_0_001.Instance.ToString(context, bp_);
+                        bool? br_ = context.Operators.Equal(bq_, "final");
+                        az_ = ay_ & br_;
                     }
                     bool? ba_;
-                    // CQL 'and' (75:21-77:56): right operand skipped when left is false
+                    // CQL 'and' (75:21-78:61): right operand skipped when left is false
                     if (az_ is false)
                     {
                         ba_ = false;
                     }
                     else
                     {
-                        Code<ObservationStatus> bq_ = FollowupBloodGlucoseLab?.StatusElement;
-                        string br_ = FHIRHelpers_4_0_001.Instance.ToString(context, bq_);
-                        bool? bs_ = context.Operators.Equal(br_, "final");
-                        ba_ = az_ & bs_;
-                    }
-                    bool? bb_;
-                    // CQL 'and' (75:21-78:61): right operand skipped when left is false
-                    if (ba_ is false)
-                    {
-                        bb_ = false;
-                    }
-                    else
-                    {
-                        Code<ObservationStatus> bt_ = FollowupBloodGlucoseLab?.StatusElement;
-                        string bu_ = FHIRHelpers_4_0_001.Instance.ToString(context, bt_);
-                        bool? bv_ = context.Operators.Equal(bu_, "cancelled");
-                        bb_ = ba_ & !bv_;
+                        Code<ObservationStatus> bs_ = FollowupBloodGlucoseLab?.StatusElement;
+                        string bt_ = FHIRHelpers_4_0_001.Instance.ToString(context, bs_);
+                        bool? bu_ = context.Operators.Equal(bt_, "cancelled");
+                        ba_ = az_ & !bu_;
                     }
                     // CQL 'and' (75:21-79:58): right operand skipped when left is false
-                    if (bb_ is false)
+                    if (ba_ is false)
                     {
                         return false;
                     }
                     else
                     {
-                        DataType bw_ = FollowupBloodGlucoseLab?.Value;
-                        CqlQuantity bx_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, bw_ as Quantity);
-                        CqlQuantity by_ = context.Operators.Quantity(80m, "mg/dL");
-                        bool? bz_ = context.Operators.Greater(bx_, by_);
-                        return bb_ & bz_;
+                        DataType bv_ = FollowupBloodGlucoseLab?.Value;
+                        CqlQuantity bw_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, bv_ as Quantity);
+                        CqlQuantity bx_ = context.Operators.Quantity(80m, "mg/dL");
+                        bool? by_ = context.Operators.Greater(bw_, bx_);
+                        return ba_ & by_;
                     }
                 }
 
                 bool? as_ = context.Operators.WhereAny<Observation>(aq_, ar_);
-                bool? at_ = context.Operators.Not(as_);
-                return at_;
+                return !as_;
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
 
             bool? j_(Observation BloodGlucoseLab) {
-                DataType ca_ = BloodGlucoseLab?.Effective;
-                CqlInterval<CqlDateTime> cb_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ca_);
-                CqlDateTime cc_ = context.Operators.Start(cb_);
-                CqlInterval<CqlDateTime> cd_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                bool? ce_ = context.Operators.In<CqlDateTime>(cc_, cd_, (string)default);
+                DataType bz_ = BloodGlucoseLab?.Effective;
+                CqlInterval<CqlDateTime> ca_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bz_);
+                CqlDateTime cb_ = context.Operators.Start(ca_);
+                CqlInterval<CqlDateTime> cc_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
+                bool? cd_ = context.Operators.In<CqlDateTime>(cb_, cc_, (string)default);
                 // CQL 'and' (80:9-81:48): right operand skipped when left is false
-                if (ce_ is false)
+                if (cd_ is false)
                 {
                     return false;
                 }
                 else
                 {
-                    DataType cf_ = BloodGlucoseLab?.Value;
-                    CqlQuantity cg_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, cf_ as Quantity);
-                    CqlQuantity ch_ = context.Operators.Quantity(40m, "mg/dL");
-                    bool? ci_ = context.Operators.Less(cg_, ch_);
-                    return ce_ & ci_;
+                    DataType ce_ = BloodGlucoseLab?.Value;
+                    CqlQuantity cf_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ce_ as Quantity);
+                    CqlQuantity cg_ = context.Operators.Quantity(40m, "mg/dL");
+                    bool? ch_ = context.Operators.Less(cf_, cg_);
+                    return cd_ & ch_;
                 }
             }
 

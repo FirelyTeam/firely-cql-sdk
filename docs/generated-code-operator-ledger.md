@@ -32,9 +32,9 @@ checks generated truth tables against `ICqlOperators.And`/`Or`/`Not`).
 
 | `ICqlOperators` member(s) | Not called since | Lowered to | Notes |
 |---|---|---|---|
-| `And(bool?, bool?)` | 5.2.2.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `&` behind a short-circuit guard | Reference implementation for the lowering's conformance tests |
-| `Or(bool?, bool?)` | 5.2.2.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `\|` behind a short-circuit guard | Reference implementation for the lowering's conformance tests |
-| `Not(bool?)` | 5.2.2.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `!` | Reference implementation for the lowering's conformance tests |
+| `And(bool?, bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `&` behind a short-circuit guard | Reference implementation for the lowering's conformance tests |
+| `Or(bool?, bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `\|` behind a short-circuit guard | Reference implementation for the lowering's conformance tests |
+| `Not(bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `!` | Reference implementation for the lowering's conformance tests |
 | `And`/`Or` `Lazy<bool?>` overloads (3 + 1) | never emitted | — | Shipped as public API but no generator version ever bound them; the short-circuit guard made them redundant ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) |
 | scalar coalesce (no dedicated member) | predates this ledger | native `??` | CQL's scalar `Coalesce(a, b, …)` has emitted C# `??` chains since the IR pipeline; the **list** overload `Coalesce<T>(IEnumerable<T>)` for `Coalesce({…})` is still bound and called |
 
