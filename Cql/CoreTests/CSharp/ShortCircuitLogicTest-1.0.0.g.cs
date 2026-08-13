@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ShortCircuitLogicTest", "1.0.0")]
 public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCircuitLogicTest_1_0_0>
 {
-    #region Functions and Expressions (31)
+    #region Functions and Expressions (34)
 
     [CqlExpressionDefinition("TrueDef")]
     public bool? TrueDef(CqlContext context) =>
@@ -629,6 +629,36 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
             return 2;
         }
     }
+
+
+    [CqlExpressionDefinition("OrTrueCollapses")]
+    public bool? OrTrueCollapses(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_OrTrueCollapses, OrTrueCollapses_Compute);
+
+    private const long _cacheIndex_OrTrueCollapses = -45510771611941422L;
+
+    private bool? OrTrueCollapses_Compute(CqlContext context) =>
+    true;
+
+
+    [CqlExpressionDefinition("AndFalseCollapses")]
+    public bool? AndFalseCollapses(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_AndFalseCollapses, AndFalseCollapses_Compute);
+
+    private const long _cacheIndex_AndFalseCollapses = 6354837902464382135L;
+
+    private bool? AndFalseCollapses_Compute(CqlContext context) =>
+    false;
+
+
+    [CqlExpressionDefinition("NestedOrTrueCollapses")]
+    public bool? NestedOrTrueCollapses(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_NestedOrTrueCollapses, NestedOrTrueCollapses_Compute);
+
+    private const long _cacheIndex_NestedOrTrueCollapses = 4518757540788178114L;
+
+    private bool? NestedOrTrueCollapses_Compute(CqlContext context) =>
+    true;
 
 
     #endregion Functions and Expressions

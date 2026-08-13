@@ -62,3 +62,12 @@ define function "GuardedAnd"(leftOperand Boolean): leftOperand and "MessageTrue"
 // (found via the HEDIS 2025 corpus compile guard).
 
 define "GuardInConditionalTest": if "TrueDef" and "MessageTrue" then 1 else 2
+
+// Deciding CONSTANT operands fold at build time, on either side, cascading: an `or true`
+// (or `and false`) erases the whole chain including left operands and their side effects
+// (spec-permitted; disclosed in the release note). These must compile to constants with
+// no Message ever raised.
+
+define "OrTrueCollapses": "MessageTrue" or true
+define "AndFalseCollapses": "MessageTrue" and false
+define "NestedOrTrueCollapses": "FalseDef" or ("NullDef" or ("MessageTrue" or true))

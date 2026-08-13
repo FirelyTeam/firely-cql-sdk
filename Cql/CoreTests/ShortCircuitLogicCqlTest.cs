@@ -183,6 +183,28 @@ public class ShortCircuitLogicCqlTest
         Assert.AreEqual(1, messages);
     }
 
+    /// <summary>
+    /// Deciding constant operands fold at build time on either side, cascading through
+    /// nested chains: `X or true` collapses to `true` (Kleene: even `null or true` is true),
+    /// erasing the left operand and its side effects entirely — permitted, since CQL does
+    /// not prescribe evaluation of logical operands, and disclosed in the release note.
+    /// </summary>
+    [TestMethod]
+    public void DecidingConstantOperands_CollapseWholeChains()
+    {
+        var (orResult, orMessages) = RunCountingMessages(Library.OrTrueCollapses);
+        Assert.AreEqual(true, orResult);
+        Assert.AreEqual(0, orMessages, "X or true folds to true at build time; X must not be evaluated.");
+
+        var (andResult, andMessages) = RunCountingMessages(Library.AndFalseCollapses);
+        Assert.AreEqual(false, andResult);
+        Assert.AreEqual(0, andMessages, "X and false folds to false at build time; X must not be evaluated.");
+
+        var (nestedResult, nestedMessages) = RunCountingMessages(Library.NestedOrTrueCollapses);
+        Assert.AreEqual(true, nestedResult);
+        Assert.AreEqual(0, nestedMessages, "the fold cascades: e1 or (e2 or (e3 or true)) collapses outright.");
+    }
+
     #endregion
 
     /// <summary>

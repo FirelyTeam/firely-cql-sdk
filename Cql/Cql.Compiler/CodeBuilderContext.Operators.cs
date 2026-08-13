@@ -418,8 +418,21 @@ partial class CodeBuilderContext
             return new CodeBinary(op, HonestBoolOperand(left), HonestBoolOperand(right));
         }
 
-        if (TryGetBoolConstant(right, out var rightConstant) && rightConstant == !decidingValue)
-            return left;                                    // X and true => X (left still evaluated)
+        if (TryGetBoolConstant(right, out var rightConstant))
+        {
+            if (rightConstant == decidingValue)
+                return NullableBoolConstant(decidingValue); // X and false => false; X or true => true.
+                                                            // Erases the LEFT operand too - value-exact
+                                                            // for all of Kleene (even null or true = true),
+                                                            // spec-permitted (evaluation of logical operands
+                                                            // is not prescribed), and consistent with the
+                                                            // left-deciding fold above; folds cascade, so
+                                                            // e1 or (e2 or true) collapses to true outright.
+            if (rightConstant == !decidingValue)
+                return left;                                // X and true => X (left still evaluated)
+            // null-valued right constant: not foldable (false or null = null but true or null = true);
+            // falls through to the guard-free merge below.
+        }
 
         // A right operand that is already an evaluated value costs nothing to re-read, so
         // the combine emits without a guard: x_ & y_.
