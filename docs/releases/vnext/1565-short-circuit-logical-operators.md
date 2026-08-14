@@ -17,6 +17,12 @@
   generated libraries keep working unchanged. (#1514)
 - The generated short-circuit guards carry traceability comments naming the operator and its CQL
   source span, e.g. `// CQL 'and' (33:5-33:57): right operand skipped when left is false`.
+- The Packager CLI's `--cs-namespace` option now takes effect. It had been silently ignored since
+  its introduction (its value never reached the configuration key), so generated code always ended
+  up without a namespace; anyone who passed it will now get the namespace they asked for — which
+  changes the generated types' identities and is why this is listed as potentially breaking.
+  (The `CqlToFhirCommand.CSharpNamespace` record property was renamed to `CsNamespace` as part of
+  this fix, to match System.CommandLine's kebab-to-Pascal option binding.)
 
 ## New Public API
 
@@ -25,3 +31,7 @@
   guard-clause style — plain sequential `if` blocks with the final value flat after them — instead
   of `if`/`else` chains. Formatting only; emitted behavior is identical. Configurable from the CQL
   packager's `appsettings.json` under `Elm:CSharpGeneratingConfig:PreferNoElseBlocks`.
+- `CSharpGeneratingConfig.CSharpNamespace` is the new canonical home of the generated-code
+  namespace setting (packager key `Elm:CSharpGeneratingConfig:CSharpNamespace`). The flat
+  `ElmToolkitConfig.CSharpNamespace` keeps working as a backwards-compatible fallback — a value in
+  the nested config wins — and will be removed at the next major release.

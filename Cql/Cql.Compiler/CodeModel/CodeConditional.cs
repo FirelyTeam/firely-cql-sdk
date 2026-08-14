@@ -48,7 +48,7 @@ internal sealed class CodeConditional : CodeExpression
 
     /// <summary>
     /// Short tag naming the CQL construct this conditional was lowered from, including its
-    /// source locator when the ELM carries one — e.g. <c>"and (CQL 33:5-33:57)"</c>. Printed
+    /// source locator when the ELM carries one — e.g. <c>"CQL 'and' (33:5-33:57)"</c>. Printed
     /// as a comment so a reader can trace the generated control flow back to the CQL. Null
     /// for conditionals that ARE the source construct (<c>if</c>/<c>case</c>), which need no
     /// tracing help.
@@ -57,7 +57,7 @@ internal sealed class CodeConditional : CodeExpression
 
     /// <summary>
     /// One-line explanation appended to <see cref="OriginTag"/> in the statement form
-    /// (<c>// and (CQL 33:5-33:57): right operand skipped when left is false</c>). The inline
+    /// (<c>// CQL 'and' (33:5-33:57): right operand skipped when left is false</c>). The inline
     /// ternary form prints only the tag, block-commented.
     /// </summary>
     public string? OriginDetail { get; }
