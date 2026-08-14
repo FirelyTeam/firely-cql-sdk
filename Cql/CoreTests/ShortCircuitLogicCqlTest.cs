@@ -205,6 +205,67 @@ public class ShortCircuitLogicCqlTest
         Assert.AreEqual(0, nestedMessages, "the fold cascades: e1 or (e2 or (e3 or true)) collapses outright.");
     }
 
+    /// <summary>
+    /// The UNGUARDED merge path: function parameters are already-evaluated values, so
+    /// MergeAnd/MergeOr compile to plain lifted operators with no guard, and AndNotY to the
+    /// inline-ternary guard form. All nine combinations, against the runtime oracle.
+    /// </summary>
+    [TestMethod]
+    public void MergePath_TruthTables_AgreeWithRuntimeOperators()
+    {
+        var ops = Context().Operators;
+        bool?[] values = [true, false, null];
+        foreach (var x in values)
+        {
+            foreach (var y in values)
+            {
+                Assert.AreEqual(ops.And(x, y), Library.MergeAnd(Context(), x, y), $"merge and: x={x}, y={y}");
+                Assert.AreEqual(ops.Or(x, y), Library.MergeOr(Context(), x, y), $"merge or: x={x}, y={y}");
+                Assert.AreEqual(ops.And(x, ops.Not(y)), Library.AndNotY(Context(), x, y), $"and-not: x={x}, y={y}");
+            }
+        }
+    }
+
+    /// <summary>
+    /// The fold matrix beyond the right-deciding collapse: left-deciding constants skip the
+    /// right operand at build time; neutral constants reduce to the other operand, which
+    /// still evaluates (with its side effects); a null CONSTANT left merges guard-free and
+    /// the right operand always runs — this define is also the committed regression test for
+    /// the CS8310 shape (`null as bool?` must print legally in operator position).
+    /// </summary>
+    [TestMethod]
+    public void ConstantFoldMatrix_SkipsAndKeepsTheRightOperands()
+    {
+        var (r1, m1) = RunCountingMessages(Library.FalseConstAndMessage);
+        Assert.AreEqual(false, r1);
+        Assert.AreEqual(0, m1, "false-and folds at build time; the right operand must not be evaluated.");
+
+        var (r2, m2) = RunCountingMessages(Library.TrueConstOrMessage);
+        Assert.AreEqual(true, r2);
+        Assert.AreEqual(0, m2, "true-or folds at build time; the right operand must not be evaluated.");
+
+        var (r3, m3) = RunCountingMessages(Library.AndTrueKeepsLeft);
+        Assert.AreEqual(true, r3);
+        Assert.AreEqual(1, m3, "X and true reduces to X; X must still be evaluated.");
+
+        var (r4, m4) = RunCountingMessages(Library.OrFalseKeepsLeft);
+        Assert.AreEqual(true, r4);
+        Assert.AreEqual(1, m4, "X or false reduces to X; X must still be evaluated.");
+
+        var (r5, m5) = RunCountingMessages(Library.NullConstAndMessage);
+        Assert.IsNull(r5); // null and true = null
+        Assert.AreEqual(1, m5, "a null constant left decides nothing; the right operand must be evaluated.");
+
+        Assert.IsNull(Library.NotNullConst(Context()));
+    }
+
+    /// <summary>CQL's without clause lowers through the same not-lowering (lifted !).</summary>
+    [TestMethod]
+    public void WithoutClause_EvaluatesCorrectly()
+    {
+        Assert.AreEqual(true, Library.WithoutClause(Context()));
+    }
+
     #endregion
 
     /// <summary>
@@ -246,6 +307,7 @@ public class ShortCircuitLogicCqlTest
         var generated = GenerateFixtureCSharp(ElmToolkitConfig.Default);
 
         StringAssert.Contains(generated, "// CQL 'and' (", "Expected origin-tagged 'and' guards.");
+        StringAssert.Contains(generated, "/* CQL 'and' (", "Expected the inline-ternary guard form (AndNotY) with its block-comment tag.");
         StringAssert.Contains(generated, "// CQL 'or' (", "Expected origin-tagged 'or' guards.");
         StringAssert.Contains(generated, "right operand skipped when left is false", "Expected the 'and' guard explanation.");
         StringAssert.Contains(generated, "right operand skipped when left is true", "Expected the 'or' guard explanation.");
@@ -300,6 +362,27 @@ public class ShortCircuitLogicCqlTest
         Assert.IsTrue(start >= 0, $"Method {methodName} not found in generated code.");
         var end = code.IndexOf("[CqlExpressionDefinition", start, StringComparison.Ordinal);
         return end < 0 ? code[start..] : code[start..end];
+    }
+
+    /// <summary>
+    /// CSharpNamespace precedence: the nested config is canonical, the shipped flat property
+    /// is a working fallback, and an EMPTY nested value (what a JSON `null` binds to — the
+    /// JSON provider has no null) must also fall back rather than masking the flat value.
+    /// </summary>
+    [TestMethod]
+    public void CSharpNamespace_NestedWins_FlatAndEmptyFallBack()
+    {
+        StringAssert.Contains(
+            GenerateFixtureCSharp(new ElmToolkitConfig(CSharpNamespace: "Flat.Ns") { CSharpGeneratingConfig = new() { CSharpNamespace = "Nested.Ns" } }),
+            "namespace Nested.Ns;", "the nested config must win over the flat property.");
+
+        StringAssert.Contains(
+            GenerateFixtureCSharp(new ElmToolkitConfig(CSharpNamespace: "Flat.Ns")),
+            "namespace Flat.Ns;", "the flat shipped property must remain a working fallback.");
+
+        StringAssert.Contains(
+            GenerateFixtureCSharp(new ElmToolkitConfig(CSharpNamespace: "Flat.Ns") { CSharpGeneratingConfig = new() { CSharpNamespace = "" } }),
+            "namespace Flat.Ns;", "an empty nested value (JSON null binds as \"\") must fall back to the flat property.");
     }
 
     private static string GenerateFixtureCSharp(ElmToolkitConfig config)

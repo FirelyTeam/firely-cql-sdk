@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ShortCircuitLogicTest", "1.0.0")]
 public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCircuitLogicTest_1_0_0>
 {
-    #region Functions and Expressions (34)
+    #region Functions and Expressions (44)
 
     [CqlExpressionDefinition("TrueDef")]
     public bool? TrueDef(CqlContext context) =>
@@ -659,6 +659,124 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
 
     private bool? NestedOrTrueCollapses_Compute(CqlContext context) =>
     true;
+
+
+    [CqlFunctionDefinition("MergeAnd")]
+    public bool? MergeAnd(CqlContext context, bool? x, bool? y) =>
+    x & y;
+
+
+    [CqlFunctionDefinition("MergeOr")]
+    public bool? MergeOr(CqlContext context, bool? x, bool? y) =>
+    x | y;
+
+
+    [CqlFunctionDefinition("AndNotY")]
+    public bool? AndNotY(CqlContext context, bool? x, bool? y) =>
+    /* CQL 'and' (82:50-82:62) */ (x is false
+        ? false
+        : x & !y);
+
+
+    [CqlExpressionDefinition("FalseConstAndMessage")]
+    public bool? FalseConstAndMessage(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_FalseConstAndMessage, FalseConstAndMessage_Compute);
+
+    private const long _cacheIndex_FalseConstAndMessage = 2613768124339659917L;
+
+    private bool? FalseConstAndMessage_Compute(CqlContext context) =>
+    false;
+
+
+    [CqlExpressionDefinition("TrueConstOrMessage")]
+    public bool? TrueConstOrMessage(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_TrueConstOrMessage, TrueConstOrMessage_Compute);
+
+    private const long _cacheIndex_TrueConstOrMessage = 3019385558053115511L;
+
+    private bool? TrueConstOrMessage_Compute(CqlContext context) =>
+    true;
+
+
+    [CqlExpressionDefinition("AndTrueKeepsLeft")]
+    public bool? AndTrueKeepsLeft(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_AndTrueKeepsLeft, AndTrueKeepsLeft_Compute);
+
+    private const long _cacheIndex_AndTrueKeepsLeft = 9093478079636794288L;
+
+    private bool? AndTrueKeepsLeft_Compute(CqlContext context)
+    {
+        bool? a_ = this.MessageTrue(context);
+        return a_;
+    }
+
+
+    [CqlExpressionDefinition("OrFalseKeepsLeft")]
+    public bool? OrFalseKeepsLeft(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_OrFalseKeepsLeft, OrFalseKeepsLeft_Compute);
+
+    private const long _cacheIndex_OrFalseKeepsLeft = 7554220517132620559L;
+
+    private bool? OrFalseKeepsLeft_Compute(CqlContext context)
+    {
+        bool? a_ = this.MessageTrue(context);
+        return a_;
+    }
+
+
+    [CqlExpressionDefinition("NullConstAndMessage")]
+    public bool? NullConstAndMessage(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_NullConstAndMessage, NullConstAndMessage_Compute);
+
+    private const long _cacheIndex_NullConstAndMessage = -9212526098572984584L;
+
+    private bool? NullConstAndMessage_Compute(CqlContext context)
+    {
+        bool? a_ = this.MessageTrue(context);
+        return (null as bool?) & a_;
+    }
+
+
+    [CqlExpressionDefinition("NotNullConst")]
+    public bool? NotNullConst(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_NotNullConst, NotNullConst_Compute);
+
+    private const long _cacheIndex_NotNullConst = -6326138193603489337L;
+
+    private bool? NotNullConst_Compute(CqlContext context) =>
+    default;
+
+
+    [CqlExpressionDefinition("WithoutClause")]
+    public bool? WithoutClause(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_WithoutClause, WithoutClause_Compute);
+
+    private const long _cacheIndex_WithoutClause = -1923006382463484928L;
+
+    private bool? WithoutClause_Compute(CqlContext context)
+    {
+        int?[] a_ = [
+            1,
+            2,
+        ];
+
+        bool? b_(int? A) {
+            int?[] d_ = [
+                2,
+            ];
+
+            bool? e_(int? B) {
+                bool? g_ = context.Operators.Equal(A, B);
+                return g_;
+            }
+
+            bool? f_ = context.Operators.WhereAny<int?>((IEnumerable<int?>)d_, e_);
+            return !f_;
+        }
+
+        bool? c_ = context.Operators.WhereAny<int?>((IEnumerable<int?>)a_, b_);
+        return c_;
+    }
 
 
     #endregion Functions and Expressions

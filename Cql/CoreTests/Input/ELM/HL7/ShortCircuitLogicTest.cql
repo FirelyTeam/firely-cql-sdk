@@ -71,3 +71,30 @@ define "GuardInConditionalTest": if "TrueDef" and "MessageTrue" then 1 else 2
 define "OrTrueCollapses": "MessageTrue" or true
 define "AndFalseCollapses": "MessageTrue" and false
 define "NestedOrTrueCollapses": "FalseDef" or ("NullDef" or ("MessageTrue" or true))
+
+// Unguarded merge path: function parameters are already-evaluated values, so these compile
+// to plain lifted operators (x & y / x | y) with no guard - the merge itself needs its own
+// truth-table coverage. AndNotY additionally forces the inline-ternary guard form
+// (right operand is non-trivial but its combine is inline-only).
+
+define function "MergeAnd"(x Boolean, y Boolean): x and y
+define function "MergeOr"(x Boolean, y Boolean): x or y
+define function "AndNotY"(x Boolean, y Boolean): x and (not y)
+
+// Fold matrix beyond the right-deciding collapse: left-deciding constants skip the right
+// operand at build time; neutral constants reduce to the other operand, which still
+// evaluates; a null CONSTANT left merges without a guard (the right operand always runs)
+// and prints legally (`null as bool?` - the CS8310 regression shape); not of a null
+// constant folds to null.
+
+define "FalseConstAndMessage": false and "MessageTrue"
+define "TrueConstOrMessage": true or "MessageTrue"
+define "AndTrueKeepsLeft": "MessageTrue" and true
+define "OrFalseKeepsLeft": "MessageTrue" or false
+define "NullConstAndMessage": (null as Boolean) and "MessageTrue"
+define "NotNullConst": not (null as Boolean)
+
+// The without query clause lowers through the same not-lowering (lifted !), per the
+// operator ledger.
+
+define "WithoutClause": exists (({ 1, 2 }) A without ({ 2 }) B such that A = B)
