@@ -157,8 +157,7 @@ internal record ElmToFhirCommand
             """
             The C# namespace to use for generated code.
             (Used with --cs or --dll)
-            Configuration home: Elm:CSharpGeneratingConfig:CSharpNamespace. The flat
-            Elm:CSharpNamespace key is obsolete and remains only as a fallback.
+            Configuration home: Elm:CSharpGeneratingConfig:CSharpNamespace.
             """),
 
         Option<bool>(

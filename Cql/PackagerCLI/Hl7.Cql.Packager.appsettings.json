@@ -22,7 +22,6 @@
     "AllowInvalidCSharp": true,
     "JsonPretty": false, // --json-pretty
     "DebugSymbolsFormat": "None", // --debug-symbols : "None", "PortablePdb", "Embedded"
-    "CSharpNamespace": null, // OBSOLETE location, kept as a fallback: use Elm:CSharpGeneratingConfig:CSharpNamespace instead (a value there wins)
     "CSharpGeneratingConfig": {
       // Settings of the C# code generator.
 

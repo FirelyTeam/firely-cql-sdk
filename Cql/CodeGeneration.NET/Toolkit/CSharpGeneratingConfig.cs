@@ -36,9 +36,7 @@ public record CSharpGeneratingConfig
 
     /// <summary>
     /// The C# namespace to use for generated code. If <see langword="null"/> or empty, no
-    /// namespace is generated. This is the canonical home of the setting; the flat
-    /// <see cref="ElmToolkitConfig.CSharpNamespace"/> remains as a fallback for backwards
-    /// compatibility and loses to a value set here.
+    /// namespace is generated.
     /// </summary>
     public string? CSharpNamespace { get; init; } = null;
 }

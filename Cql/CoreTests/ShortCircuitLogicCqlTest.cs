@@ -365,24 +365,26 @@ public class ShortCircuitLogicCqlTest
     }
 
     /// <summary>
-    /// CSharpNamespace precedence: the nested config is canonical, the shipped flat property
-    /// is a working fallback, and an EMPTY nested value (what a JSON `null` binds to — the
-    /// JSON provider has no null) must also fall back rather than masking the flat value.
+    /// <see cref="CSharpGeneratingConfig.CSharpNamespace"/> is the only namespace setting
+    /// (the flat <c>ElmToolkitConfig.CSharpNamespace</c> was removed — a breaking change in
+    /// this PR's release note): a value wraps the generated code in that namespace; null
+    /// (the default) and empty (what a JSON <c>null</c> binds to — the JSON configuration
+    /// provider has no null) both produce namespace-less code.
     /// </summary>
     [TestMethod]
-    public void CSharpNamespace_NestedWins_FlatAndEmptyFallBack()
+    public void CSharpNamespace_FromCSharpGeneratingConfig()
     {
         StringAssert.Contains(
-            GenerateFixtureCSharp(new ElmToolkitConfig(CSharpNamespace: "Flat.Ns") { CSharpGeneratingConfig = new() { CSharpNamespace = "Nested.Ns" } }),
-            "namespace Nested.Ns;", "the nested config must win over the flat property.");
+            GenerateFixtureCSharp(ElmToolkitConfig.Default with { CSharpGeneratingConfig = new() { CSharpNamespace = "My.Ns" } }),
+            "namespace My.Ns;", "a namespace set in CSharpGeneratingConfig must be emitted.");
 
-        StringAssert.Contains(
-            GenerateFixtureCSharp(new ElmToolkitConfig(CSharpNamespace: "Flat.Ns")),
-            "namespace Flat.Ns;", "the flat shipped property must remain a working fallback.");
+        Assert.IsFalse(
+            GenerateFixtureCSharp(ElmToolkitConfig.Default).Contains("namespace "),
+            "the default (null) must emit namespace-less code.");
 
-        StringAssert.Contains(
-            GenerateFixtureCSharp(new ElmToolkitConfig(CSharpNamespace: "Flat.Ns") { CSharpGeneratingConfig = new() { CSharpNamespace = "" } }),
-            "namespace Flat.Ns;", "an empty nested value (JSON null binds as \"\") must fall back to the flat property.");
+        Assert.IsFalse(
+            GenerateFixtureCSharp(ElmToolkitConfig.Default with { CSharpGeneratingConfig = new() { CSharpNamespace = "" } }).Contains("namespace "),
+            "an empty value (JSON null binds as \"\") must emit namespace-less code.");
     }
 
     private static string GenerateFixtureCSharp(ElmToolkitConfig config)
