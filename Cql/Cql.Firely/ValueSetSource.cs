@@ -41,6 +41,14 @@ namespace Hl7.Cql.Fhir;
 /// bounds and no invalidation of its own.
 /// </para>
 /// <para>
+/// The memo therefore treats an instance as read-only from the moment it is first added: identity
+/// stands in for content, which holds exactly as long as the content does not change behind the
+/// identity. That is not an assumption this class invents - a resolver that hands the same instance
+/// to many consumers already forbids mutating it, since every consumer, cache or no cache, would
+/// observe the edit. A host that does rework a resolved valueset must hand out a copy (the FHIR SDK's
+/// <c>DeepCopy</c>), which as a fresh instance simply builds its own facade.
+/// </para>
+/// <para>
 /// A valueset that arrives without an expansion is expanded here instead, and that expansion depends
 /// on the CodeSystems and valuesets this source's resolver can reach - things the instance alone does
 /// not determine - so its facade stays in the per-source layer only. That expansion is written into
@@ -58,7 +66,16 @@ public class ValueSetSource : IValueSetDictionary
     /// from a <see cref="ValueSet"/> that already carries its expansion, memoized against that
     /// instance under a weak key.
     /// </summary>
-    private static readonly ConditionalWeakTable<ValueSet, InMemoryValueSet> _facadesByInstance = new();
+    /// <remarks>
+    /// The value is a <see cref="Lazy{T}"/> rather than the facade itself because
+    /// <see cref="ConditionalWeakTable{TKey,TValue}.GetValue"/> does not serialize its factory: under
+    /// contention it may run the factory on several threads and keep one result (see the note on
+    /// <c>LibrarySetInvokerPoolKey.GetOrComputeContentHash</c>). Racing the factory is fine when it is
+    /// cheap and pure, but this factory is the expensive materialization the memo exists to avoid, so
+    /// the table races only on creating the wrapper and every caller then awaits the single build
+    /// inside the one retained <see cref="Lazy{T}"/>.
+    /// </remarks>
+    private static readonly ConditionalWeakTable<ValueSet, Lazy<InMemoryValueSet>> _facadesByInstance = new();
 
     private readonly ConcurrentDictionary<CqlCode, CqlCode> _internHash;
 
@@ -125,12 +142,9 @@ public class ValueSetSource : IValueSetDictionary
         async Task<InMemoryValueSet> build(ValueSet vs)
         {
             // An instance that arrives with its expansion already determines the facade completely, so
-            // the build is a pure function of the instance and can be memoized against it. GetValue runs
-            // the factory under the table's per-key lock, so sources racing on the same instance
-            // materialize its codes once; and it stores nothing when the factory throws, so a partial
-            // expansion is never memoized and keeps throwing on every attempt.
+            // the build is a pure function of the instance and can be memoized against it.
             if (vs.HasExpansion)
-                return _facadesByInstance.GetValue(vs, BuildFromExpansion);
+                return GetOrBuildMemoized(vs);
 
             // Without an expansion we have to compute one, and what that yields depends on the
             // CodeSystems and valuesets this source's resolver can reach. The memo key cannot see any
@@ -139,6 +153,35 @@ public class ValueSetSource : IValueSetDictionary
             await expander.ExpandAsync(vs).ConfigureAwait(false);
 
             return BuildFromExpansion(vs);
+        }
+    }
+
+    /// <summary>
+    /// Returns the memoized facade for an expansion-carrying <see cref="ValueSet"/> instance,
+    /// building it exactly once per instance across all sources.
+    /// </summary>
+    /// <remarks>
+    /// Sources racing on the same instance meet inside one retained <see cref="Lazy{T}"/> (see the
+    /// remarks on <see cref="_facadesByInstance"/>), so exactly one of them runs the build and the
+    /// others wait for its result. A build that throws - a partial expansion - must not stick,
+    /// though: <see cref="Lazy{T}"/> caches the exception, so the entry is dropped from the table on
+    /// failure and the next attempt starts fresh. Concurrent waiters on the failed build still get its
+    /// cached exception, which is correct - they were asking about the same instance in the same
+    /// state. After a successful build the <see cref="Lazy{T}"/> releases its factory, so a memoized
+    /// entry holds no reference to whichever source built it.
+    /// </remarks>
+    private InMemoryValueSet GetOrBuildMemoized(ValueSet vs)
+    {
+        var lazyFacade = _facadesByInstance.GetValue(vs, v => new Lazy<InMemoryValueSet>(() => BuildFromExpansion(v)));
+
+        try
+        {
+            return lazyFacade.Value;
+        }
+        catch
+        {
+            _facadesByInstance.Remove(vs);
+            throw;
         }
     }
 

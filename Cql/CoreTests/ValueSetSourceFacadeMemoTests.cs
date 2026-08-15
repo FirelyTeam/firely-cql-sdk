@@ -172,6 +172,35 @@ public class ValueSetSourceFacadeMemoTests
         await AssertRejectsPartialExpansion(() => sourceB.Add(partial));
     }
 
+    [TestMethod]
+    public async Task FailedBuild_DoesNotOutliveTheFailure()
+    {
+        // The memo holds a Lazy, and a Lazy caches its exception - so a failed build has to be
+        // evicted, or the instance would keep throwing the *old* exception even after its expansion
+        // became complete. This pins the eviction: complete the expansion, and Add succeeds.
+        var vs = ExpandedValueSet("http://example.org/ValueSet/healed", "111", "222");
+        vs.Expansion!.Total = 500;
+
+        var source = new ValueSetSource();
+        await AssertRejectsPartialExpansion(() => source.Add(vs));
+
+        vs.Expansion!.Total = 2;
+
+        var facade = await source.Add(vs);
+        Assert.IsTrue(facade.IsCodeInValueSet("111", CodeSystem));
+    }
+
+    [TestMethod]
+    public async Task ConcurrentSources_ConvergeOnOneFacade()
+    {
+        var vs = ExpandedValueSet("http://example.org/ValueSet/contended", "111", "222");
+
+        var facades = await Task.WhenAll(Enumerable.Range(0, 16).Select(_ => Task.Run(() => new ValueSetSource().Add(vs))));
+
+        foreach (var facade in facades)
+            Assert.AreSame(facades[0], facade, "every source racing on the same instance must end up with the single retained facade.");
+    }
+
     private static async Task AssertRejectsPartialExpansion(Func<Task<IValueSetFacade>> add)
     {
         var ex = await Assert.ThrowsExceptionAsync<InvalidOperationException>(add);
