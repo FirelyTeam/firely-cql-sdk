@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using System.Runtime.CompilerServices;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
@@ -20,10 +21,44 @@ namespace Hl7.Cql.Fhir;
 /// <summary>
 /// Implementation of <see cref="IValueSetDictionary"/> that uses a <see cref="IResourceResolver"/> as a terminology source.
 /// </summary>
-/// <remarks>Aggresively caches the loaded valuesets to improve performance.</remarks>
+/// <remarks>
+/// <para>
+/// Aggressively caches the loaded valuesets to improve performance, in two layers.
+/// </para>
+/// <para>
+/// The first layer is per-source: a dictionary from canonical to facade, which is what every query
+/// method looks in. It alone determines what this source answers.
+/// </para>
+/// <para>
+/// The second layer is process-wide: a memo of facades keyed on the <see cref="ValueSet"/>
+/// <c>instance</c>, for instances that already carry an expansion. Building a facade from an
+/// expansion is a pure function of that instance, so two sources handed the same object can share
+/// the result instead of each materializing and hashing every code in the expansion again. The memo
+/// only ever hits when the resolver returns the same object again: a host with an instance-stable
+/// resolver (a conformance cache, for instance) hits it on every request, while a host without one
+/// loses nothing, since a fresh instance simply builds the way it always did. Entries are held under
+/// weak keys, so they live exactly as long as the host keeps the instance alive - the memo needs no
+/// bounds and no invalidation of its own.
+/// </para>
+/// <para>
+/// A valueset that arrives without an expansion is expanded here instead, and that expansion depends
+/// on the CodeSystems and valuesets this source's resolver can reach - things the instance alone does
+/// not determine - so its facade stays in the per-source layer only. That expansion is written into
+/// the caller's instance, so a later <see cref="Add(ValueSet)"/> of the very same instance does see an
+/// expansion and does take the memo path. This adds no staleness beyond the in-place mutation itself,
+/// which already leaves every source handed that instance looking at the same frozen expansion.
+/// </para>
+/// </remarks>
 public class ValueSetSource : IValueSetDictionary
 {
     private static readonly IEqualityComparer<CqlCode> OrdinalIgnoreCaseEqualityComparer = CqlCodeCqlComparer.OrdinalIgnoreCase.ToEqualityComparer();
+
+    /// <summary>
+    /// The process-wide, second cache layer described in the remarks on this class: the facade built
+    /// from a <see cref="ValueSet"/> that already carries its expansion, memoized against that
+    /// instance under a weak key.
+    /// </summary>
+    private static readonly ConditionalWeakTable<ValueSet, InMemoryValueSet> _facadesByInstance = new();
 
     private readonly ConcurrentDictionary<CqlCode, CqlCode> _internHash;
 
@@ -89,22 +124,49 @@ public class ValueSetSource : IValueSetDictionary
 
         async Task<InMemoryValueSet> build(ValueSet vs)
         {
-            if (!vs.HasExpansion)
-            {
-                var expander = BuildExpander();
-                await expander.ExpandAsync(vs).ConfigureAwait(false);
-            }
+            // An instance that arrives with its expansion already determines the facade completely, so
+            // the build is a pure function of the instance and can be memoized against it. GetValue runs
+            // the factory under the table's per-key lock, so sources racing on the same instance
+            // materialize its codes once; and it stores nothing when the factory throws, so a partial
+            // expansion is never memoized and keeps throwing on every attempt.
+            if (vs.HasExpansion)
+                return _facadesByInstance.GetValue(vs, BuildFromExpansion);
 
-            // A cached value set answers membership questions definitively, so a partial
-            // expansion must not be cached: it would turn "this page does not contain the
-            // code" into "this value set does not contain the code". An expansion we build
-            // ourselves is always complete (the expander throws otherwise); one that arrived
-            // with the resource may be a page of a larger result.
-            EnsureCompleteExpansion(vs);
+            // Without an expansion we have to compute one, and what that yields depends on the
+            // CodeSystems and valuesets this source's resolver can reach. The memo key cannot see any
+            // of that, so this facade stays private to this source.
+            var expander = BuildExpander();
+            await expander.ExpandAsync(vs).ConfigureAwait(false);
 
-            var codes = ToCodes(vs.Expansion!.Contains);
-            return new InMemoryValueSet(codes);
+            return BuildFromExpansion(vs);
         }
+    }
+
+    /// <summary>
+    /// Builds the immutable facade for a <see cref="ValueSet"/> that holds an expansion.
+    /// </summary>
+    /// <remarks>
+    /// The codes are interned into this source's table (see <see cref="Intern"/>), so a memoized facade
+    /// can hand out <see cref="CqlCode"/> instances owned by whichever source happened to build it
+    /// first. That is harmless: membership of a <see cref="CqlCode"/> is decided by a comparer and
+    /// never by reference, so a shared instance answers exactly as a private one would - interning is
+    /// a memory optimization, not part of the semantics. What it does mean is that two facades held by
+    /// one source need not intern into the same table, so the same code reached through two of its
+    /// valuesets is not guaranteed to be one object; compare codes with a comparer, never by reference.
+    /// The codes are materialized here rather than left as a deferred query, so the facade that comes
+    /// out holds a reference neither to this source nor to <paramref name="vs"/>.
+    /// </remarks>
+    private InMemoryValueSet BuildFromExpansion(ValueSet vs)
+    {
+        // A cached value set answers membership questions definitively, so a partial
+        // expansion must not be cached: it would turn "this page does not contain the
+        // code" into "this value set does not contain the code". An expansion we build
+        // ourselves is always complete (the expander throws otherwise); one that arrived
+        // with the resource may be a page of a larger result.
+        EnsureCompleteExpansion(vs);
+
+        var codes = ToCodes(vs.Expansion!.Contains).ToList();
+        return new InMemoryValueSet(codes);
     }
 
     /// <summary>
