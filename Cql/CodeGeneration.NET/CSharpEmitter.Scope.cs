@@ -300,7 +300,18 @@ internal partial class CSharpEmitter
                 && IsInlineOnly(conditional.IfFalse)
                 && !ContainsStatementShape(conditional.Test))
             {
-                return new Atom(_emitter.PrintInlineConditional(conditional, _emitter.PrintFullyInline), conditional);
+                // The origin tag is an annotation, not part of the value, so it is rendered into
+                // Code but kept OUT of KeyCode: it embeds the CQL source span, and two
+                // structurally identical guards written at different spans would otherwise key
+                // differently and never deduplicate — a comment silently disabling
+                // common-subexpression elimination.
+                return new Atom(
+                    _emitter.PrintInlineConditional(conditional, node => _emitter.PrintFullyInline(node)),
+                    _emitter.PrintInlineConditional(
+                        conditional,
+                        node => _emitter.PrintFullyInline(node, includeOriginTags: false),
+                        includeOriginTag: false),
+                    conditional);
             }
 
             var cases = new List<(CodeExpression When, CodeExpression Then)>();

@@ -186,7 +186,11 @@ internal partial class CSharpEmitter
     /// included. Used for "simple" conditionals, which the old pipeline returned unvisited
     /// so their whole subtree (the test included, however complex) printed inline.
     /// </summary>
-    internal string PrintFullyInline(CodeExpression node)
+    /// <param name="includeOriginTags">When <see langword="false"/>, every origin tag in the
+    /// subtree is omitted. Used for dedup keys: a tag names a CQL source span, so leaving it in
+    /// would make two structurally identical subexpressions written at different spans key
+    /// differently and never deduplicate.</param>
+    internal string PrintFullyInline(CodeExpression node, bool includeOriginTags = true)
     {
         node = FoldConstantTest(node);
         return node switch
@@ -195,13 +199,13 @@ internal partial class CSharpEmitter
             CodeLocal local => _assignedNames.TryGetValue(local, out var name)
                 ? name
                 : throw new InvalidOperationException($"Local '{local}' is used before it is introduced."),
-            CodeConditional conditional => PrintInlineConditional(conditional, PrintFullyInline),
-            CodeLambda lambda => PrintInlineLambda(lambda),
+            CodeConditional conditional => PrintInlineConditional(conditional, n => PrintFullyInline(n, includeOriginTags), includeOriginTags),
+            CodeLambda lambda => PrintInlineLambda(lambda, includeOriginTags),
             CodeIfChain => throw new NotSupportedException(
                 "An if-chain cannot print as an inline expression; this subtree should not have been classified inline-only."),
             CodeLet => throw new NotSupportedException(
                 "A let-binding cannot print as an inline expression; this subtree should not have been classified inline-only."),
-            _ => PrintShallow(node, child => new Atom(PrintFullyInline(child), child)),
+            _ => PrintShallow(node, child => new Atom(PrintFullyInline(child, includeOriginTags), child)),
         };
     }
 
@@ -209,12 +213,17 @@ internal partial class CSharpEmitter
     /// The old writer's ternary format (BuildConditionalExpression): open paren, test on its
     /// own line, indented <c>? ifTrue</c> / <c>: ifFalse)</c> lines.
     /// </summary>
-    internal string PrintInlineConditional(CodeConditional conditional, Func<CodeExpression, string> print)
+    internal string PrintInlineConditional(
+        CodeConditional conditional,
+        Func<CodeExpression, string> print,
+        bool includeOriginTag = true)
     {
         // The inline form prints only the origin tag (block-commented, since it sits inside
         // an expression); the "right operand skipped..." detail is reserved for the
         // statement form, where the control flow it explains is spelled out.
-        var originPrefix = conditional.OriginTag is null ? "" : $"/* {conditional.OriginTag} */ ";
+        var originPrefix = conditional.OriginTag is null || !includeOriginTag
+            ? ""
+            : $"/* {conditional.OriginTag} */ ";
 
         var isb = new IndentedStringBuilder();
         isb.Append("(");
@@ -245,7 +254,7 @@ internal partial class CSharpEmitter
         return $"{originPrefix}{isb}";
     }
 
-    private string PrintInlineLambda(CodeLambda lambda)
+    private string PrintInlineLambda(CodeLambda lambda, bool includeOriginTags = true)
     {
         // Parameters of an inline lambda print their name hints verbatim — exactly like the
         // old writer, which printed a LambdaExpression's parameter names as-is with no
@@ -261,7 +270,7 @@ internal partial class CSharpEmitter
         }
         var parameters = string.Join(", ", lambda.Parameters.Select(p => _assignedNames[p]));
         var parameterList = lambda.Parameters.Count == 1 ? parameters : $"({parameters})";
-        return $"{parameterList} => {PrintFullyInline(lambda.Body)}";
+        return $"{parameterList} => {PrintFullyInline(lambda.Body, includeOriginTags)}";
     }
 
     private string PrintDefinitionCall(CodeDefinitionCall call, Func<CodeExpression, Atom> child)
