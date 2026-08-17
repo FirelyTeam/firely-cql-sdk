@@ -101,17 +101,15 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             }
             else
             {
-                FhirUri u_ = E?.UrlElement;
-                string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-                bool? w_ = context.Operators.Equal(v_, "detailed");
-                return t_ | w_;
+                bool? u_ = context.Operators.Equal(s_, "detailed");
+                return t_ | u_;
             }
         }
 
 
         Coding h_(Extension E) {
-            DataType x_ = E?.Value;
-            return x_ as Coding;
+            DataType v_ = E?.Value;
+            return v_ as Coding;
         }
 
         IEnumerable<Coding> i_ = context.Operators.WhereSelect<Extension, Coding>(f_, g_, h_);
@@ -192,17 +190,15 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             }
             else
             {
-                FhirUri u_ = E?.UrlElement;
-                string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-                bool? w_ = context.Operators.Equal(v_, "detailed");
-                return t_ | w_;
+                bool? u_ = context.Operators.Equal(s_, "detailed");
+                return t_ | u_;
             }
         }
 
 
         Coding h_(Extension E) {
-            DataType x_ = E?.Value;
-            return x_ as Coding;
+            DataType v_ = E?.Value;
+            return v_ as Coding;
         }
 
         IEnumerable<Coding> i_ = context.Operators.WhereSelect<Extension, Coding>(f_, g_, h_);

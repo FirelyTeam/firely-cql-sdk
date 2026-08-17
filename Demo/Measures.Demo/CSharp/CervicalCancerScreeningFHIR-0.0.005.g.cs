@@ -242,11 +242,10 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
         }
         else
         {
-            Patient l_ = this.Patient(context);
-            Code<AdministrativeGender> m_ = l_?.GenderElement;
-            string n_ = FHIRHelpers_4_0_001.Instance.ToString(context, m_);
-            bool? o_ = context.Operators.Equal(n_, "female");
-            k_ = j_ & o_;
+            Code<AdministrativeGender> l_ = a_?.GenderElement;
+            string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
+            bool? n_ = context.Operators.Equal(m_, "female");
+            k_ = j_ & n_;
         }
         // CQL 'and' (44:3-46:48): right operand skipped when left is false
         if (k_ is false)
@@ -255,9 +254,9 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
         }
         else
         {
-            IEnumerable<Encounter> p_ = this.Qualifying_Encounters(context);
-            bool? q_ = context.Operators.Exists<Encounter>(p_);
-            return k_ & q_;
+            IEnumerable<Encounter> o_ = this.Qualifying_Encounters(context);
+            bool? p_ = context.Operators.Exists<Encounter>(o_);
+            return k_ & p_;
         }
     }
 
@@ -425,9 +424,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
-                    CqlDateTime ab_ = context.Operators.End(aa_);
-                    z_ = y_ & (!((bool?)(ab_ is null)));
+                    z_ = y_ & (!((bool?)(u_ is null)));
                 }
                 j_ = i_ & z_;
             }
@@ -438,8 +435,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             }
             else
             {
-                DataType ac_ = CervicalCytology?.Value;
-                return j_ & (!((bool?)(ac_ is null)));
+                DataType aa_ = CervicalCytology?.Value;
+                return j_ & (!((bool?)(aa_ is null)));
             }
         }
 
@@ -533,9 +530,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> al_ = this.Measurement_Period(context);
-                    CqlDateTime am_ = context.Operators.End(al_);
-                    ak_ = aj_ & (!((bool?)(am_ is null)));
+                    ak_ = aj_ & (!((bool?)(af_ is null)));
                 }
                 k_ = j_ & ak_;
             }
@@ -546,8 +541,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             }
             else
             {
-                DataType an_ = HPVTest?.Value;
-                return k_ & (!((bool?)(an_ is null)));
+                DataType al_ = HPVTest?.Value;
+                return k_ & (!((bool?)(al_ is null)));
             }
         }
 
@@ -669,9 +664,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-                    CqlDateTime s_ = context.Operators.End(r_);
-                    q_ = p_ & (!((bool?)(s_ is null)));
+                    q_ = p_ & (!((bool?)(l_ is null)));
                 }
                 g_ = f_ & q_;
             }
@@ -682,8 +675,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             }
             else
             {
-                DataType t_ = CervicalCytology?.Value;
-                return g_ & (!((bool?)(t_ is null)));
+                DataType r_ = CervicalCytology?.Value;
+                return g_ & (!((bool?)(r_ is null)));
             }
         }
 
@@ -768,9 +761,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
-                    CqlDateTime ad_ = context.Operators.End(ac_);
-                    ab_ = aa_ & (!((bool?)(ad_ is null)));
+                    ab_ = aa_ & (!((bool?)(w_ is null)));
                 }
                 h_ = g_ & ab_;
             }
@@ -781,8 +772,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             }
             else
             {
-                DataType ae_ = HPVTest?.Value;
-                return h_ & (!((bool?)(ae_ is null)));
+                DataType ac_ = HPVTest?.Value;
+                return h_ & (!((bool?)(ac_ is null)));
             }
         }
 

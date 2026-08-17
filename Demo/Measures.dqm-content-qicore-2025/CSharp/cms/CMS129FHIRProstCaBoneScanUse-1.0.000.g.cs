@@ -208,12 +208,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         }
         else
         {
-            CodeableConcept j_ = condition?.VerificationStatus;
-            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
-            CqlCode l_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-            CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
-            bool? n_ = context.Operators.Equivalent(k_, m_);
-            f_ = e_ | n_;
+            CqlCode j_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(b_, k_);
+            f_ = e_ | l_;
         }
         bool? g_;
         // CQL 'or' (143:54-145:66): right operand skipped when left is true
@@ -223,12 +221,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         }
         else
         {
-            CodeableConcept o_ = condition?.VerificationStatus;
-            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-            CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
-            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-            bool? s_ = context.Operators.Equivalent(p_, r_);
-            g_ = f_ | s_;
+            CqlCode m_ = QICoreCommon_4_0_000.Instance.provisional(context);
+            CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
+            bool? o_ = context.Operators.Equivalent(b_, n_);
+            g_ = f_ | o_;
         }
         bool? h_;
         // CQL 'or' (143:52-147:3): right operand skipped when left is true
@@ -238,12 +234,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         }
         else
         {
-            CodeableConcept t_ = condition?.VerificationStatus;
-            CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-            CqlCode v_ = QICoreCommon_4_0_000.Instance.differential(context);
-            CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-            bool? x_ = context.Operators.Equivalent(u_, w_);
-            h_ = g_ | x_;
+            CqlCode p_ = QICoreCommon_4_0_000.Instance.differential(context);
+            CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+            bool? r_ = context.Operators.Equivalent(b_, q_);
+            h_ = g_ | r_;
         }
         bool? i_ = context.Operators.Implies(!((bool?)(b_ is null)), h_);
         return i_;
@@ -571,12 +565,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             }
             else
             {
-                DataType bi_ = LastProstateCancerStaging?.Value;
-                object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
-                CqlCode bk_ = this.American_Joint_Committee_on_Cancer_cT1b__qualifier_value_(context);
-                CqlConcept bl_ = context.Operators.ConvertCodeToConcept(bk_);
-                bool? bm_ = context.Operators.Equivalent(bj_ as CqlConcept, bl_);
-                bg_ = bf_ | bm_;
+                CqlCode bi_ = this.American_Joint_Committee_on_Cancer_cT1b__qualifier_value_(context);
+                CqlConcept bj_ = context.Operators.ConvertCodeToConcept(bi_);
+                bool? bk_ = context.Operators.Equivalent(bc_ as CqlConcept, bj_);
+                bg_ = bf_ | bk_;
             }
             bool? bh_;
             // CQL 'or' (125:13-127:104): right operand skipped when left is true
@@ -586,12 +578,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             }
             else
             {
-                DataType bn_ = LastProstateCancerStaging?.Value;
-                object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                CqlCode bp_ = this.American_Joint_Committee_on_Cancer_cT1c__qualifier_value_(context);
-                CqlConcept bq_ = context.Operators.ConvertCodeToConcept(bp_);
-                bool? br_ = context.Operators.Equivalent(bo_ as CqlConcept, bq_);
-                bh_ = bg_ | br_;
+                CqlCode bl_ = this.American_Joint_Committee_on_Cancer_cT1c__qualifier_value_(context);
+                CqlConcept bm_ = context.Operators.ConvertCodeToConcept(bl_);
+                bool? bn_ = context.Operators.Equivalent(bc_ as CqlConcept, bm_);
+                bh_ = bg_ | bn_;
             }
             // CQL 'or' (125:5-129:5): right operand skipped when left is true
             if (bh_ is true)
@@ -600,12 +590,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             }
             else
             {
-                DataType bs_ = LastProstateCancerStaging?.Value;
-                object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                CqlCode bu_ = this.American_Joint_Committee_on_Cancer_cT2a__qualifier_value_(context);
-                CqlConcept bv_ = context.Operators.ConvertCodeToConcept(bu_);
-                bool? bw_ = context.Operators.Equivalent(bt_ as CqlConcept, bv_);
-                return bh_ | bw_;
+                CqlCode bo_ = this.American_Joint_Committee_on_Cancer_cT2a__qualifier_value_(context);
+                CqlConcept bp_ = context.Operators.ConvertCodeToConcept(bo_);
+                bool? bq_ = context.Operators.Equivalent(bc_ as CqlConcept, bp_);
+                return bh_ | bq_;
             }
         }
 

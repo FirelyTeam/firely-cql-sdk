@@ -436,39 +436,38 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             }
             else
             {
-                IEnumerable<MedicationRequest> r_ = this.Opioid_At_Discharge(context);
 
-                bool? s_(MedicationRequest OpioidDischargeMedications) {
-                    FhirDateTime u_ = OpioidDischargeMedications?.AuthoredOnElement;
-                    CqlDateTime v_ = context.Operators.Convert<CqlDateTime>(u_);
-                    Period w_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
-                    bool? y_ = context.Operators.In<CqlDateTime>(v_, x_, "day");
+                bool? r_(MedicationRequest OpioidDischargeMedications) {
+                    FhirDateTime t_ = OpioidDischargeMedications?.AuthoredOnElement;
+                    CqlDateTime u_ = context.Operators.Convert<CqlDateTime>(t_);
+                    Period v_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, v_);
+                    bool? x_ = context.Operators.In<CqlDateTime>(u_, w_, "day");
                     // CQL 'and' (78:11-81:13): right operand skipped when left is false
-                    if (y_ is false)
+                    if (x_ is false)
                     {
                         return false;
                     }
                     else
                     {
-                        IEnumerable<MedicationRequest> z_ = this.Benzodiazepine_At_Discharge(context);
+                        IEnumerable<MedicationRequest> y_ = this.Benzodiazepine_At_Discharge(context);
 
-                        bool? aa_(MedicationRequest BenzodiazepineDischargeMedication) {
-                            FhirDateTime ac_ = BenzodiazepineDischargeMedication?.AuthoredOnElement;
-                            CqlDateTime ad_ = context.Operators.Convert<CqlDateTime>(ac_);
-                            Period ae_ = InpatientEncounter?.Period;
-                            CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ae_);
-                            bool? ag_ = context.Operators.In<CqlDateTime>(ad_, af_, "day");
-                            return ag_;
+                        bool? z_(MedicationRequest BenzodiazepineDischargeMedication) {
+                            FhirDateTime ab_ = BenzodiazepineDischargeMedication?.AuthoredOnElement;
+                            CqlDateTime ac_ = context.Operators.Convert<CqlDateTime>(ab_);
+                            Period ad_ = InpatientEncounter?.Period;
+                            CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
+                            bool? af_ = context.Operators.In<CqlDateTime>(ac_, ae_, "day");
+                            return af_;
                         }
 
-                        bool? ab_ = context.Operators.WhereAny<MedicationRequest>(z_, aa_);
-                        return y_ & ab_;
+                        bool? aa_ = context.Operators.WhereAny<MedicationRequest>(y_, z_);
+                        return x_ & aa_;
                     }
                 }
 
-                bool? t_ = context.Operators.WhereAny<MedicationRequest>(r_, s_);
-                return j_ | t_;
+                bool? s_ = context.Operators.WhereAny<MedicationRequest>(d_, r_);
+                return j_ | s_;
             }
         }
 
@@ -508,22 +507,21 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 IEnumerable<Condition> j_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, QualifyingEncounter);
 
                 bool? k_(Condition @this) {
-                    CodeableConcept p_ = @this?.Code;
-                    CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
-                    return !((bool?)(q_ is null));
+                    CodeableConcept o_ = @this?.Code;
+                    CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
+                    return !((bool?)(p_ is null));
                 }
 
 
                 CqlConcept l_(Condition @this) {
-                    CodeableConcept r_ = @this?.Code;
-                    CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
-                    return s_;
+                    CodeableConcept q_ = @this?.Code;
+                    CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
+                    return r_;
                 }
 
                 IEnumerable<CqlConcept> m_ = context.Operators.WhereSelect<Condition, CqlConcept>(j_, k_, l_);
-                CqlValueSet n_ = this.Cancer_Related_Pain(context);
-                bool? o_ = context.Operators.ConceptsInValueSet(m_, n_);
-                return h_ | o_;
+                bool? n_ = context.Operators.ConceptsInValueSet(m_, g_);
+                return h_ | n_;
             }
         }
 
@@ -549,12 +547,10 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
         }
         else
         {
-            CodeableConcept j_ = condition?.VerificationStatus;
-            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
-            CqlCode l_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-            CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
-            bool? n_ = context.Operators.Equivalent(k_, m_);
-            f_ = e_ | n_;
+            CqlCode j_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(b_, k_);
+            f_ = e_ | l_;
         }
         bool? g_;
         // CQL 'or' (165:54-167:66): right operand skipped when left is true
@@ -564,12 +560,10 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
         }
         else
         {
-            CodeableConcept o_ = condition?.VerificationStatus;
-            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-            CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
-            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-            bool? s_ = context.Operators.Equivalent(p_, r_);
-            g_ = f_ | s_;
+            CqlCode m_ = QICoreCommon_4_0_000.Instance.provisional(context);
+            CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
+            bool? o_ = context.Operators.Equivalent(b_, n_);
+            g_ = f_ | o_;
         }
         bool? h_;
         // CQL 'or' (165:52-169:3): right operand skipped when left is true
@@ -579,12 +573,10 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
         }
         else
         {
-            CodeableConcept t_ = condition?.VerificationStatus;
-            CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-            CqlCode v_ = QICoreCommon_4_0_000.Instance.differential(context);
-            CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-            bool? x_ = context.Operators.Equivalent(u_, w_);
-            h_ = g_ | x_;
+            CqlCode p_ = QICoreCommon_4_0_000.Instance.differential(context);
+            CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+            bool? r_ = context.Operators.Equivalent(b_, q_);
+            h_ = g_ | r_;
         }
         bool? i_ = context.Operators.Implies(!((bool?)(b_ is null)), h_);
         return i_;
@@ -769,11 +761,9 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 }
                 else
                 {
-                    FhirDateTime ak_ = MedicationTreatment?.AuthoredOnElement;
-                    CqlDateTime al_ = context.Operators.Convert<CqlDateTime>(ak_);
-                    CqlInterval<CqlDateTime> am_ = this.Measurement_Period(context);
-                    bool? an_ = context.Operators.In<CqlDateTime>(al_, am_, "day");
-                    p_ = o_ & an_;
+                    CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
+                    bool? al_ = context.Operators.In<CqlDateTime>(l_, ak_, "day");
+                    p_ = o_ & al_;
                 }
                 // CQL 'and' (120:19-122:58): right operand skipped when left is false
                 if (p_ is false)
@@ -782,15 +772,15 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 }
                 else
                 {
-                    Code<EventStatus> ao_ = MAT?.StatusElement;
-                    EventStatus? ap_ = ao_?.Value;
-                    string aq_ = context.Operators.Convert<string>(ap_);
-                    string[] ar_ = [
+                    Code<EventStatus> am_ = MAT?.StatusElement;
+                    EventStatus? an_ = am_?.Value;
+                    string ao_ = context.Operators.Convert<string>(an_);
+                    string[] ap_ = [
                         "completed",
                         "in-progress",
                     ];
-                    bool? as_ = context.Operators.In<string>(aq_, (IEnumerable<string>)ar_);
-                    return p_ & as_;
+                    bool? aq_ = context.Operators.In<string>(ao_, (IEnumerable<string>)ap_);
+                    return p_ & aq_;
                 }
             }
 
@@ -801,41 +791,40 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
         IEnumerable<MedicationRequest> c_ = context.Operators.Where<MedicationRequest>(a_, b_);
 
         bool? d_(MedicationRequest MedicationTreatment) {
-            CqlValueSet at_ = this.Opioid_Use_Disorder(context);
-            IEnumerable<Condition> au_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, at_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+            CqlValueSet ar_ = this.Opioid_Use_Disorder(context);
+            IEnumerable<Condition> as_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ar_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
-            bool? av_(Condition OUD) {
-                FhirDateTime ax_ = MedicationTreatment?.AuthoredOnElement;
-                CqlDateTime ay_ = context.Operators.Convert<CqlDateTime>(ax_);
-                CqlInterval<CqlDateTime> az_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OUD as Condition);
-                bool? ba_ = context.Operators.In<CqlDateTime>(ay_, az_, "day");
-                bool? bb_;
+            bool? at_(Condition OUD) {
+                FhirDateTime av_ = MedicationTreatment?.AuthoredOnElement;
+                CqlDateTime aw_ = context.Operators.Convert<CqlDateTime>(av_);
+                CqlInterval<CqlDateTime> ax_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OUD as Condition);
+                bool? ay_ = context.Operators.In<CqlDateTime>(aw_, ax_, "day");
+                bool? az_;
                 // CQL 'and' (126:21-127:79): right operand skipped when left is false
-                if (ba_ is false)
+                if (ay_ is false)
                 {
-                    bb_ = false;
+                    az_ = false;
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> bc_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OUD as Condition);
-                    CqlInterval<CqlDateTime> bd_ = this.Measurement_Period(context);
-                    bool? be_ = context.Operators.Overlaps(bc_, bd_, "day");
-                    bb_ = ba_ & be_;
+                    CqlInterval<CqlDateTime> ba_ = this.Measurement_Period(context);
+                    bool? bb_ = context.Operators.Overlaps(ax_, ba_, "day");
+                    az_ = ay_ & bb_;
                 }
                 // CQL 'and' (126:21-128:34): right operand skipped when left is false
-                if (bb_ is false)
+                if (az_ is false)
                 {
                     return false;
                 }
                 else
                 {
-                    bool? bf_ = this.isVerified(context, OUD as Condition);
-                    return bb_ & bf_;
+                    bool? bc_ = this.isVerified(context, OUD as Condition);
+                    return az_ & bc_;
                 }
             }
 
-            bool? aw_ = context.Operators.WhereAny<Condition>(au_, av_);
-            return aw_;
+            bool? au_ = context.Operators.WhereAny<Condition>(as_, at_);
+            return au_;
         }
 
         IEnumerable<MedicationRequest> e_ = context.Operators.Where<MedicationRequest>(a_, d_);
@@ -1081,12 +1070,9 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 }
                 else
                 {
-                    Encounter.HospitalizationComponent bv_ = InpatientEncounter?.Hospitalization;
-                    CodeableConcept bw_ = bv_?.DischargeDisposition;
-                    CqlConcept bx_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bw_);
-                    CqlValueSet by_ = this.Hospice_Care_Referral_or_Admission(context);
-                    bool? bz_ = context.Operators.ConceptInValueSet(bx_, by_);
-                    bs_ = br_ | bz_;
+                    CqlValueSet bv_ = this.Hospice_Care_Referral_or_Admission(context);
+                    bool? bw_ = context.Operators.ConceptInValueSet(bp_, bv_);
+                    bs_ = br_ | bw_;
                 }
                 bool? bt_;
                 // CQL 'or' (111:12-113:89): right operand skipped when left is true
@@ -1096,12 +1082,9 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 }
                 else
                 {
-                    Encounter.HospitalizationComponent ca_ = InpatientEncounter?.Hospitalization;
-                    CodeableConcept cb_ = ca_?.DischargeDisposition;
-                    CqlConcept cc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cb_);
-                    CqlValueSet cd_ = this.Patient_Expired(context);
-                    bool? ce_ = context.Operators.ConceptInValueSet(cc_, cd_);
-                    bt_ = bs_ | ce_;
+                    CqlValueSet bx_ = this.Patient_Expired(context);
+                    bool? by_ = context.Operators.ConceptInValueSet(bp_, bx_);
+                    bt_ = bs_ | by_;
                 }
                 bool? bu_;
                 // CQL 'or' (111:10-115:7): right operand skipped when left is true
@@ -1111,12 +1094,9 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 }
                 else
                 {
-                    Encounter.HospitalizationComponent cf_ = InpatientEncounter?.Hospitalization;
-                    CodeableConcept cg_ = cf_?.DischargeDisposition;
-                    CqlConcept ch_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cg_);
-                    CqlValueSet ci_ = this.Left_Against_Medical_Advice(context);
-                    bool? cj_ = context.Operators.ConceptInValueSet(ch_, ci_);
-                    bu_ = bt_ | cj_;
+                    CqlValueSet bz_ = this.Left_Against_Medical_Advice(context);
+                    bool? ca_ = context.Operators.ConceptInValueSet(bp_, bz_);
+                    bu_ = bt_ | ca_;
                 }
                 return k_ | bu_;
             }

@@ -198,9 +198,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     }
                     else
                     {
-                        DataType w_ = SD?.Occurrence;
-                        CqlDateTime x_ = context.Operators.LateBoundProperty<CqlDateTime>(w_, "value");
-                        return v_ & (!((bool?)(x_ is null)));
+                        return v_ & (!((bool?)(r_ is null)));
                     }
                 }
 

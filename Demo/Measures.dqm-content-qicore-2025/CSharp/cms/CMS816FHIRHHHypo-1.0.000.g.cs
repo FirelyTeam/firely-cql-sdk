@@ -102,12 +102,10 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
             }
             else
             {
-                Period p_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
-                CqlDateTime r_ = context.Operators.End(q_);
-                CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
-                o_ = n_ & t_;
+                CqlDateTime p_ = context.Operators.End(j_);
+                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
+                bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
+                o_ = n_ & r_;
             }
             // CQL 'and' (58:5-60:48): right operand skipped when left is false
             if (o_ is false)
@@ -116,11 +114,11 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
             }
             else
             {
-                Code<Encounter.EncounterStatus> u_ = InpatientEncounter?.StatusElement;
-                Encounter.EncounterStatus? v_ = u_?.Value;
-                Code<Encounter.EncounterStatus> w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
-                bool? x_ = context.Operators.Equal(w_, "finished");
-                return o_ & x_;
+                Code<Encounter.EncounterStatus> s_ = InpatientEncounter?.StatusElement;
+                Encounter.EncounterStatus? t_ = s_?.Value;
+                Code<Encounter.EncounterStatus> u_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(t_);
+                bool? v_ = context.Operators.Equal(u_, "finished");
+                return o_ & v_;
             }
         }
 

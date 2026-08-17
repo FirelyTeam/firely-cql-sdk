@@ -240,11 +240,10 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
         }
         else
         {
-            Patient l_ = this.Patient(context);
-            Code<AdministrativeGender> m_ = l_?.GenderElement;
-            string n_ = FHIRHelpers_4_0_001.Instance.ToString(context, m_);
-            bool? o_ = context.Operators.Equal(n_, "female");
-            k_ = j_ & o_;
+            Code<AdministrativeGender> l_ = a_?.GenderElement;
+            string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
+            bool? n_ = context.Operators.Equal(m_, "female");
+            k_ = j_ & n_;
         }
         // CQL 'and' (58:3-62:19): right operand skipped when left is false
         if (k_ is false)
@@ -253,11 +252,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
         }
         else
         {
-            IEnumerable<Encounter> p_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
-            IEnumerable<Encounter> q_ = this.Telehealth_Services(context);
-            IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(p_, q_);
-            bool? s_ = context.Operators.Exists<Encounter>(r_);
-            return k_ & s_;
+            IEnumerable<Encounter> o_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
+            IEnumerable<Encounter> p_ = this.Telehealth_Services(context);
+            IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(o_, p_);
+            bool? r_ = context.Operators.Exists<Encounter>(q_);
+            return k_ & r_;
         }
     }
 
@@ -679,9 +678,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                    CqlDateTime t_ = context.Operators.End(s_);
-                    r_ = q_ & (!((bool?)(t_ is null)));
+                    r_ = q_ & (!((bool?)(m_ is null)));
                 }
                 return h_ & r_;
             }
@@ -737,9 +734,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                    CqlDateTime t_ = context.Operators.End(s_);
-                    r_ = q_ & (!((bool?)(t_ is null)));
+                    r_ = q_ & (!((bool?)(m_ is null)));
                 }
                 return h_ & r_;
             }
@@ -862,9 +857,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
-                    CqlDateTime u_ = context.Operators.End(t_);
-                    s_ = r_ & (!((bool?)(u_ is null)));
+                    s_ = r_ & (!((bool?)(n_ is null)));
                 }
                 return i_ & s_;
             }
@@ -921,9 +914,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
-                    CqlDateTime u_ = context.Operators.End(t_);
-                    s_ = r_ & (!((bool?)(u_ is null)));
+                    s_ = r_ & (!((bool?)(n_ is null)));
                 }
                 return i_ & s_;
             }

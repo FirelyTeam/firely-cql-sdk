@@ -205,12 +205,10 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         }
         else
         {
-            CodeableConcept j_ = condition?.VerificationStatus;
-            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
-            CqlCode l_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-            CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
-            bool? n_ = context.Operators.Equivalent(k_, m_);
-            f_ = e_ | n_;
+            CqlCode j_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(b_, k_);
+            f_ = e_ | l_;
         }
         bool? g_;
         // CQL 'or' (216:54-218:66): right operand skipped when left is true
@@ -220,12 +218,10 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         }
         else
         {
-            CodeableConcept o_ = condition?.VerificationStatus;
-            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-            CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
-            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-            bool? s_ = context.Operators.Equivalent(p_, r_);
-            g_ = f_ | s_;
+            CqlCode m_ = QICoreCommon_4_0_000.Instance.provisional(context);
+            CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
+            bool? o_ = context.Operators.Equivalent(b_, n_);
+            g_ = f_ | o_;
         }
         bool? h_;
         // CQL 'or' (216:52-220:3): right operand skipped when left is true
@@ -235,12 +231,10 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         }
         else
         {
-            CodeableConcept t_ = condition?.VerificationStatus;
-            CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-            CqlCode v_ = QICoreCommon_4_0_000.Instance.differential(context);
-            CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-            bool? x_ = context.Operators.Equivalent(u_, w_);
-            h_ = g_ | x_;
+            CqlCode p_ = QICoreCommon_4_0_000.Instance.differential(context);
+            CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+            bool? r_ = context.Operators.Equivalent(b_, q_);
+            h_ = g_ | r_;
         }
         bool? i_ = context.Operators.Implies(!((bool?)(b_ is null)), h_);
         return i_;
@@ -610,12 +604,10 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 }
                 else
                 {
-                    DataType o_ = StagingObservation?.Value;
-                    object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                    CqlCode q_ = this.American_Joint_Committee_on_Cancer_cTis__qualifier_value_(context);
-                    CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-                    bool? s_ = context.Operators.Equivalent(p_ as CqlConcept, r_);
-                    l_ = k_ | s_;
+                    CqlCode o_ = this.American_Joint_Committee_on_Cancer_cTis__qualifier_value_(context);
+                    CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+                    bool? q_ = context.Operators.Equivalent(h_ as CqlConcept, p_);
+                    l_ = k_ | q_;
                 }
                 bool? m_;
                 // CQL 'or' (179:15-181:111): right operand skipped when left is true
@@ -625,12 +617,10 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 }
                 else
                 {
-                    DataType t_ = StagingObservation?.Value;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    CqlCode v_ = this.American_Joint_Committee_on_Cancer_cTa__qualifier_value_(context);
-                    CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-                    bool? x_ = context.Operators.Equivalent(u_ as CqlConcept, w_);
-                    m_ = l_ | x_;
+                    CqlCode r_ = this.American_Joint_Committee_on_Cancer_cTa__qualifier_value_(context);
+                    CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
+                    bool? t_ = context.Operators.Equivalent(h_ as CqlConcept, s_);
+                    m_ = l_ | t_;
                 }
                 bool? n_;
                 // CQL 'or' (179:13-183:9): right operand skipped when left is true
@@ -640,12 +630,10 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 }
                 else
                 {
-                    DataType y_ = StagingObservation?.Value;
-                    object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    CqlCode aa_ = this.Carcinoma_in_situ_of_bladder(context);
-                    CqlConcept ab_ = context.Operators.ConvertCodeToConcept(aa_);
-                    bool? ac_ = context.Operators.Equivalent(z_ as CqlConcept, ab_);
-                    n_ = m_ | ac_;
+                    CqlCode u_ = this.Carcinoma_in_situ_of_bladder(context);
+                    CqlConcept v_ = context.Operators.ConvertCodeToConcept(u_);
+                    bool? w_ = context.Operators.Equivalent(h_ as CqlConcept, v_);
+                    n_ = m_ | w_;
                 }
                 f_ = e_ & n_;
             }
@@ -656,16 +644,16 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                Code<ObservationStatus> ad_ = StagingObservation?.StatusElement;
-                ObservationStatus? ae_ = ad_?.Value;
-                string af_ = context.Operators.Convert<string>(ae_);
-                string[] ag_ = [
+                Code<ObservationStatus> x_ = StagingObservation?.StatusElement;
+                ObservationStatus? y_ = x_?.Value;
+                string z_ = context.Operators.Convert<string>(y_);
+                string[] aa_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
-                return f_ & ah_;
+                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
+                return f_ & ab_;
             }
         }
 
@@ -965,9 +953,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                         }
                         else
                         {
-                            DataType cm_ = ActiveTuberculosis?.Abatement;
-                            object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
-                            br_ = bq_ | ((bool?)(cn_ is null));
+                            br_ = bq_ | ((bool?)(bm_ is null));
                         }
                         aq_ = ap_ & br_;
                     }
@@ -982,8 +968,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
         bool? g_(Condition ActiveTuberculosis) {
-            bool? co_ = this.isVerified(context, ActiveTuberculosis);
-            return co_;
+            bool? cm_ = this.isVerified(context, ActiveTuberculosis);
+            return cm_;
         }
 
         IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
@@ -2767,13 +2753,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 }
                 else
                 {
-                    DataType dd_ = BCG?.Effective;
-                    object de_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dd_);
-                    CqlInterval<CqlDateTime> df_ = QICoreCommon_4_0_000.Instance.toInterval(context, de_);
-                    CqlDateTime dg_ = context.Operators.Start(df_);
-                    CqlInterval<CqlDateTime> dh_ = this.Measurement_Period(context);
-                    bool? di_ = context.Operators.In<CqlDateTime>(dg_, dh_, "day");
-                    return ar_ & di_;
+                    CqlInterval<CqlDateTime> dd_ = this.Measurement_Period(context);
+                    bool? de_ = context.Operators.In<CqlDateTime>(ag_, dd_, "day");
+                    return ar_ & de_;
                 }
             }
 
@@ -2784,25 +2766,25 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
 
         bool? i_(MedicationAdministration BCG) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> dj_ = BCG?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? dk_ = dj_?.Value;
-            string dl_ = context.Operators.Convert<string>(dk_);
-            string[] dm_ = [
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> df_ = BCG?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? dg_ = df_?.Value;
+            string dh_ = context.Operators.Convert<string>(dg_);
+            string[] di_ = [
                 "in-progress",
                 "completed",
             ];
-            bool? dn_ = context.Operators.In<string>(dl_, (IEnumerable<string>)dm_);
-            return dn_;
+            bool? dj_ = context.Operators.In<string>(dh_, (IEnumerable<string>)di_);
+            return dj_;
         }
 
         IEnumerable<MedicationAdministration> j_ = context.Operators.Where<MedicationAdministration>(h_, i_);
 
         object k_(MedicationAdministration @this) {
-            DataType do_ = @this?.Effective;
-            object dp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, do_);
-            CqlInterval<CqlDateTime> dq_ = QICoreCommon_4_0_000.Instance.toInterval(context, dp_);
-            CqlDateTime dr_ = context.Operators.Start(dq_);
-            return dr_;
+            DataType dk_ = @this?.Effective;
+            object dl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dk_);
+            CqlInterval<CqlDateTime> dm_ = QICoreCommon_4_0_000.Instance.toInterval(context, dl_);
+            CqlDateTime dn_ = context.Operators.Start(dm_);
+            return dn_;
         }
 
         IEnumerable<MedicationAdministration> l_ = context.Operators.SortBy<MedicationAdministration>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);

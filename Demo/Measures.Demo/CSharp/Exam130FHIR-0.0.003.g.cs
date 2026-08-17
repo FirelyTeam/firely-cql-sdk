@@ -994,75 +994,73 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             }
             else
             {
-                CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
-                CqlDateTime p_ = context.Operators.End(o_);
-                return n_ & (!((bool?)(p_ is null)));
+                return n_ & (!((bool?)(j_ is null)));
             }
         }
 
 
         (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? d_(Observation FitDNA) {
-            DataType q_ = FitDNA?.Effective;
-            CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, q_);
-            DataType s_ = FitDNA?.Value;
-            IEnumerable<Coding> t_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(s_, "coding");
+            DataType o_ = FitDNA?.Effective;
+            CqlDateTime p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, o_);
+            DataType q_ = FitDNA?.Value;
+            IEnumerable<Coding> r_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(q_, "coding");
 
-            bool? u_(Coding @this) {
-                FhirString ak_ = @this?.DisplayElement;
+            bool? s_(Coding @this) {
+                FhirString ai_ = @this?.DisplayElement;
+                return !((bool?)(ai_ is null));
+            }
+
+
+            FhirString t_(Coding @this) {
+                FhirString aj_ = @this?.DisplayElement;
+                return aj_;
+            }
+
+            IEnumerable<FhirString> u_ = context.Operators.WhereSelect<Coding, FhirString>(r_, s_, t_);
+            List<CodeableConcept> v_ = FitDNA?.Category;
+
+            bool? w_(CodeableConcept @this) {
+                List<Coding> ak_ = @this?.Coding;
                 return !((bool?)(ak_ is null));
             }
 
 
-            FhirString v_(Coding @this) {
-                FhirString al_ = @this?.DisplayElement;
+            List<Coding> x_(CodeableConcept @this) {
+                List<Coding> al_ = @this?.Coding;
                 return al_;
             }
 
-            IEnumerable<FhirString> w_ = context.Operators.WhereSelect<Coding, FhirString>(t_, u_, v_);
-            List<CodeableConcept> x_ = FitDNA?.Category;
+            IEnumerable<List<Coding>> y_ = context.Operators.WhereSelect<CodeableConcept, List<Coding>>((IEnumerable<CodeableConcept>)v_, w_, x_);
+            IEnumerable<Coding> z_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)y_);
 
-            bool? y_(CodeableConcept @this) {
-                List<Coding> am_ = @this?.Coding;
+            bool? aa_(Coding @this) {
+                Code am_ = @this?.CodeElement;
                 return !((bool?)(am_ is null));
             }
 
 
-            List<Coding> z_(CodeableConcept @this) {
-                List<Coding> an_ = @this?.Coding;
+            Code ab_(Coding @this) {
+                Code an_ = @this?.CodeElement;
                 return an_;
             }
 
-            IEnumerable<List<Coding>> aa_ = context.Operators.WhereSelect<CodeableConcept, List<Coding>>((IEnumerable<CodeableConcept>)x_, y_, z_);
-            IEnumerable<Coding> ab_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)aa_);
+            IEnumerable<Code> ac_ = context.Operators.WhereSelect<Coding, Code>(z_, aa_, ab_);
 
-            bool? ac_(Coding @this) {
-                Code ao_ = @this?.CodeElement;
+            bool? ad_(Code @this) {
+                string ao_ = @this?.Value;
                 return !((bool?)(ao_ is null));
             }
 
 
-            Code ad_(Coding @this) {
-                Code ap_ = @this?.CodeElement;
+            string ae_(Code @this) {
+                string ap_ = @this?.Value;
                 return ap_;
             }
 
-            IEnumerable<Code> ae_ = context.Operators.WhereSelect<Coding, Code>(ab_, ac_, ad_);
-
-            bool? af_(Code @this) {
-                string aq_ = @this?.Value;
-                return !((bool?)(aq_ is null));
-            }
-
-
-            string ag_(Code @this) {
-                string ar_ = @this?.Value;
-                return ar_;
-            }
-
-            IEnumerable<string> ah_ = context.Operators.WhereSelect<Code, string>(ae_, af_, ag_);
-            Code<ObservationStatus> ai_ = FitDNA?.StatusElement;
-            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? aj_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, r_, w_, ah_, ai_);
-            return aj_;
+            IEnumerable<string> af_ = context.Operators.WhereSelect<Code, string>(ac_, ad_, ae_);
+            Code<ObservationStatus> ag_ = FitDNA?.StatusElement;
+            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ah_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, p_, u_, af_, ag_);
+            return ah_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> e_ = context.Operators.WhereSelect<Observation, (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(b_, c_, d_);
@@ -1173,9 +1171,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
-                    CqlDateTime al_ = context.Operators.End(ak_);
-                    aj_ = ai_ & (!((bool?)(al_ is null)));
+                    aj_ = ai_ & (!((bool?)(ae_ is null)));
                 }
                 return j_ & aj_;
             }
@@ -1288,9 +1284,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
-                    CqlDateTime al_ = context.Operators.End(ak_);
-                    aj_ = ai_ & (!((bool?)(al_ is null)));
+                    aj_ = ai_ & (!((bool?)(ae_ is null)));
                 }
                 return j_ & aj_;
             }
@@ -1385,9 +1379,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
-                    CqlDateTime ag_ = context.Operators.End(af_);
-                    ae_ = ad_ & (!((bool?)(ag_ is null)));
+                    ae_ = ad_ & (!((bool?)(z_ is null)));
                 }
                 return h_ & ae_;
             }
@@ -1453,9 +1445,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
-                    CqlDateTime v_ = context.Operators.End(u_);
-                    t_ = s_ & (!((bool?)(v_ is null)));
+                    t_ = s_ & (!((bool?)(o_ is null)));
                 }
                 return j_ & t_;
             }
@@ -1494,17 +1484,15 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             }
             else
             {
-                CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-                CqlDateTime q_ = context.Operators.End(p_);
-                return o_ & (!((bool?)(q_ is null)));
+                return o_ & (!((bool?)(k_ is null)));
             }
         }
 
 
         CqlDateTime d_(Observation Colonography) {
-            DataType r_ = Colonography?.Effective;
-            CqlDateTime s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, r_);
-            return s_;
+            DataType p_ = Colonography?.Effective;
+            CqlDateTime q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, p_);
+            return q_;
         }
 
         IEnumerable<CqlDateTime> e_ = context.Operators.WhereSelect<Observation, CqlDateTime>(b_, c_, d_);
@@ -1558,9 +1546,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                    CqlDateTime t_ = context.Operators.End(s_);
-                    r_ = q_ & (!((bool?)(t_ is null)));
+                    r_ = q_ & (!((bool?)(m_ is null)));
                 }
                 return h_ & r_;
             }
@@ -1617,9 +1603,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
-                    CqlDateTime u_ = context.Operators.End(t_);
-                    s_ = r_ & (!((bool?)(u_ is null)));
+                    s_ = r_ & (!((bool?)(n_ is null)));
                 }
                 return i_ & s_;
             }
@@ -1658,17 +1642,15 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             }
             else
             {
-                CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-                CqlDateTime q_ = context.Operators.End(p_);
-                return o_ & (!((bool?)(q_ is null)));
+                return o_ & (!((bool?)(k_ is null)));
             }
         }
 
 
         CqlDateTime d_(Procedure FlexibleSigmoidoscopy) {
-            DataType r_ = FlexibleSigmoidoscopy?.Performed;
-            CqlDateTime s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, r_);
-            return s_;
+            DataType p_ = FlexibleSigmoidoscopy?.Performed;
+            CqlDateTime q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, p_);
+            return q_;
         }
 
         IEnumerable<CqlDateTime> e_ = context.Operators.WhereSelect<Procedure, CqlDateTime>(b_, c_, d_);
@@ -1716,9 +1698,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-                    CqlDateTime s_ = context.Operators.End(r_);
-                    q_ = p_ & (!((bool?)(s_ is null)));
+                    q_ = p_ & (!((bool?)(l_ is null)));
                 }
                 return g_ & q_;
             }
@@ -1769,9 +1749,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                    CqlDateTime t_ = context.Operators.End(s_);
-                    r_ = q_ & (!((bool?)(t_ is null)));
+                    r_ = q_ & (!((bool?)(m_ is null)));
                 }
                 return h_ & r_;
             }
@@ -1810,17 +1788,15 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             }
             else
             {
-                CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-                CqlDateTime q_ = context.Operators.End(p_);
-                return o_ & (!((bool?)(q_ is null)));
+                return o_ & (!((bool?)(k_ is null)));
             }
         }
 
 
         CqlDateTime d_(Procedure Colonoscopy) {
-            DataType r_ = Colonoscopy?.Performed;
-            CqlDateTime s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, r_);
-            return s_;
+            DataType p_ = Colonoscopy?.Performed;
+            CqlDateTime q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, p_);
+            return q_;
         }
 
         IEnumerable<CqlDateTime> e_ = context.Operators.WhereSelect<Procedure, CqlDateTime>(b_, c_, d_);
@@ -1868,9 +1844,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-                    CqlDateTime s_ = context.Operators.End(r_);
-                    q_ = p_ & (!((bool?)(s_ is null)));
+                    q_ = p_ & (!((bool?)(l_ is null)));
                 }
                 return g_ & q_;
             }
@@ -1921,9 +1895,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                    CqlDateTime t_ = context.Operators.End(s_);
-                    r_ = q_ & (!((bool?)(t_ is null)));
+                    r_ = q_ & (!((bool?)(m_ is null)));
                 }
                 return h_ & r_;
             }

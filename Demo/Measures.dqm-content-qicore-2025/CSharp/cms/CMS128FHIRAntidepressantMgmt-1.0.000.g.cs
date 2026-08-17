@@ -259,24 +259,23 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MajorDepression);
                 CqlDateTime k_ = context.Operators.Start(j_);
                 CqlDate l_ = context.Operators.DateFrom(k_);
-                CqlDate m_ = this.IPSD(context);
-                CqlQuantity n_ = context.Operators.Quantity(60m, "days");
-                CqlDate o_ = context.Operators.Subtract(m_, n_);
-                CqlDate p_ = context.Operators.Add(m_, n_);
-                CqlInterval<CqlDate> q_ = context.Operators.Interval(o_, p_, true, true);
-                bool? r_ = context.Operators.In<CqlDate>(l_, q_, (string)default);
-                bool? s_;
+                CqlQuantity m_ = context.Operators.Quantity(60m, "days");
+                CqlDate n_ = context.Operators.Subtract(h_, m_);
+                CqlDate o_ = context.Operators.Add(h_, m_);
+                CqlInterval<CqlDate> p_ = context.Operators.Interval(n_, o_, true, true);
+                bool? q_ = context.Operators.In<CqlDate>(l_, p_, (string)default);
+                bool? r_;
                 // CQL 'and' (44:13-44:94): right operand skipped when left is false
-                if (r_ is false)
+                if (q_ is false)
                 {
-                    s_ = false;
+                    r_ = false;
                 }
                 else
                 {
-                    CqlDate t_ = this.IPSD(context);
-                    s_ = r_ & (!((bool?)(t_ is null)));
+                    CqlDate s_ = this.IPSD(context);
+                    r_ = q_ & (!((bool?)(s_ is null)));
                 }
-                return i_ & s_;
+                return i_ & r_;
             }
         }
 
@@ -342,8 +341,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             }
             else
             {
-                CqlDate aq_ = this.IPSD(context);
-                return ap_ & (!((bool?)(aq_ is null)));
+                return ap_ & (!((bool?)(ak_ is null)));
             }
         }
 
@@ -478,12 +476,11 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     bool? ae_ = y_?.highClosed;
                     CqlInterval<CqlDateTime> af_ = context.Operators.Interval(aa_, ac_, ad_, ae_);
                     CqlInterval<CqlDate> ag_ = CQMCommon_4_1_000.Instance.ToDateInterval(context, af_);
-                    CqlDate ah_ = this.IPSD(context);
-                    CqlQuantity ai_ = context.Operators.Quantity(105m, "days");
-                    CqlDate aj_ = context.Operators.Subtract(ah_, ai_);
-                    CqlInterval<CqlDate> ak_ = context.Operators.Interval(aj_, ah_, true, false);
-                    bool? al_ = context.Operators.Overlaps(ag_, ak_, (string)default);
-                    return x_ & al_;
+                    CqlQuantity ah_ = context.Operators.Quantity(105m, "days");
+                    CqlDate ai_ = context.Operators.Subtract(w_, ah_);
+                    CqlInterval<CqlDate> aj_ = context.Operators.Interval(ai_, w_, true, false);
+                    bool? ak_ = context.Operators.Overlaps(ag_, aj_, (string)default);
+                    return x_ & ak_;
                 }
             }
 

@@ -240,16 +240,9 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         }
         else
         {
-            Patient k_ = this.Patient(context);
-            Date l_ = k_?.BirthDateElement;
-            string m_ = l_?.Value;
-            CqlDate n_ = context.Operators.ConvertStringToDate(m_);
-            CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
-            CqlDateTime p_ = context.Operators.Start(o_);
-            CqlDate q_ = context.Operators.DateFrom(p_);
-            int? r_ = context.Operators.CalculateAgeAt(n_, q_, "year");
-            bool? s_ = context.Operators.Less(r_, 20);
-            j_ = i_ & s_;
+            int? k_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+            bool? l_ = context.Operators.Less(k_, 20);
+            j_ = i_ & l_;
         }
         // CQL 'and' (74:3-77:52): right operand skipped when left is false
         if (j_ is false)
@@ -258,9 +251,9 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         }
         else
         {
-            IEnumerable<Encounter> t_ = this.Qualifying_Encounters(context);
-            bool? u_ = context.Operators.Exists<Encounter>(t_);
-            return j_ & u_;
+            IEnumerable<Encounter> m_ = this.Qualifying_Encounters(context);
+            bool? n_ = context.Operators.Exists<Encounter>(m_);
+            return j_ & n_;
         }
     }
 
@@ -315,16 +308,9 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         }
         else
         {
-            Patient j_ = this.Patient(context);
-            Date k_ = j_?.BirthDateElement;
-            string l_ = k_?.Value;
-            CqlDate m_ = context.Operators.ConvertStringToDate(l_);
-            CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-            CqlDateTime o_ = context.Operators.Start(n_);
-            CqlDate p_ = context.Operators.DateFrom(o_);
-            int? q_ = context.Operators.CalculateAgeAt(m_, p_, "year");
-            bool? r_ = context.Operators.LessOrEqual(q_, 4);
-            return i_ & r_;
+            int? j_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+            bool? k_ = context.Operators.LessOrEqual(j_, 4);
+            return i_ & k_;
         }
     }
 

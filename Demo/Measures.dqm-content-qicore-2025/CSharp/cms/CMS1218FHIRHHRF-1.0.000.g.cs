@@ -364,10 +364,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                         }
                         else
                         {
-                            Period bc_ = ElectiveEncounter?.Period;
-                            CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bc_);
-                            CqlDateTime be_ = context.Operators.Start(bd_);
-                            bb_ = ba_ & (!((bool?)(be_ is null)));
+                            bb_ = ba_ & (!((bool?)(aw_ is null)));
                         }
                         return aq_ & bb_;
                     }
@@ -444,22 +441,21 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 IEnumerable<Condition> k_ = this.encounterReason(context, ElectiveEncounter);
 
                 bool? l_(Condition @this) {
-                    CodeableConcept q_ = @this?.Code;
-                    CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                    return !((bool?)(r_ is null));
+                    CodeableConcept p_ = @this?.Code;
+                    CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
+                    return !((bool?)(q_ is null));
                 }
 
 
                 CqlConcept m_(Condition @this) {
-                    CodeableConcept s_ = @this?.Code;
-                    CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                    return t_;
+                    CodeableConcept r_ = @this?.Code;
+                    CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
+                    return s_;
                 }
 
                 IEnumerable<CqlConcept> n_ = context.Operators.WhereSelect<Condition, CqlConcept>(k_, l_, m_);
-                CqlValueSet o_ = this.Obstetrical_Or_Pregnancy_Related_Conditions(context);
-                bool? p_ = context.Operators.ConceptsInValueSet(n_, o_);
-                i_ = h_ | p_;
+                bool? o_ = context.Operators.ConceptsInValueSet(n_, g_);
+                i_ = h_ | o_;
             }
             return !i_;
         }
@@ -527,9 +523,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     }
                     else
                     {
-                        CqlInterval<CqlDateTime> ab_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservationAndOutpatientSurgeryService(context, ElectiveEncounter);
-                        CqlDateTime ac_ = context.Operators.Start(ab_);
-                        aa_ = z_ & (!((bool?)(ac_ is null)));
+                        aa_ = z_ & (!((bool?)(v_ is null)));
                     }
                     return l_ & aa_;
                 }
@@ -601,22 +595,21 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 IEnumerable<Condition> j_ = this.encounterReason(context, EncounterWithSurgery);
 
                 bool? k_(Condition @this) {
-                    CodeableConcept p_ = @this?.Code;
-                    CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
-                    return !((bool?)(q_ is null));
+                    CodeableConcept o_ = @this?.Code;
+                    CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
+                    return !((bool?)(p_ is null));
                 }
 
 
                 CqlConcept l_(Condition @this) {
-                    CodeableConcept r_ = @this?.Code;
-                    CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
-                    return s_;
+                    CodeableConcept q_ = @this?.Code;
+                    CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
+                    return r_;
                 }
 
                 IEnumerable<CqlConcept> m_ = context.Operators.WhereSelect<Condition, CqlConcept>(j_, k_, l_);
-                CqlValueSet n_ = this.Degenerative_Neurological_Disorder(context);
-                bool? o_ = context.Operators.ConceptsInValueSet(m_, n_);
-                return h_ | o_;
+                bool? n_ = context.Operators.ConceptsInValueSet(m_, g_);
+                return h_ | n_;
             }
         }
 
@@ -1060,22 +1053,21 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 IEnumerable<Condition> j_ = this.encounterReason(context, EncounterWithSurgery);
 
                 bool? k_(Condition @this) {
-                    CodeableConcept p_ = @this?.Code;
-                    CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
-                    return !((bool?)(q_ is null));
+                    CodeableConcept o_ = @this?.Code;
+                    CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
+                    return !((bool?)(p_ is null));
                 }
 
 
                 CqlConcept l_(Condition @this) {
-                    CodeableConcept r_ = @this?.Code;
-                    CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
-                    return s_;
+                    CodeableConcept q_ = @this?.Code;
+                    CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
+                    return r_;
                 }
 
                 IEnumerable<CqlConcept> m_ = context.Operators.WhereSelect<Condition, CqlConcept>(j_, k_, l_);
-                CqlValueSet n_ = this.Neuromuscular_Disorder(context);
-                bool? o_ = context.Operators.ConceptsInValueSet(m_, n_);
-                return h_ | o_;
+                bool? n_ = context.Operators.ConceptsInValueSet(m_, g_);
+                return h_ | n_;
             }
         }
 
@@ -4703,25 +4695,23 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                         IEnumerable<Procedure> ch_ = this.Extubation_During_General_Anesthesia(context);
 
                         bool? ci_(Procedure @this) {
-                            string co_ = (@this is Resource
+                            string cm_ = (@this is Resource
                                 ? (@this as Resource).IdElement
                                 : default)?.Value;
-                            return !((bool?)(co_ is null));
+                            return !((bool?)(cm_ is null));
                         }
 
 
                         string cj_(Procedure @this) {
-                            string cp_ = (@this is Resource
+                            string cn_ = (@this is Resource
                                 ? (@this as Resource).IdElement
                                 : default)?.Value;
-                            return cp_;
+                            return cn_;
                         }
 
                         IEnumerable<string> ck_ = context.Operators.WhereSelect<Procedure, string>(ch_, ci_, cj_);
-                        Id cl_ = Extubation?.IdElement;
-                        string cm_ = cl_?.Value;
-                        bool? cn_ = context.Operators.Contains<string>(ck_, cm_);
-                        ce_ = cd_ & !cn_;
+                        bool? cl_ = context.Operators.Contains<string>(ck_, cc_);
+                        ce_ = cd_ & !cl_;
                     }
                     p_ = o_ & !ce_;
                 }
@@ -4732,8 +4722,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 }
                 else
                 {
-                    bool? cq_ = this.isNotAtProceduralHospitalLocation(context, EncounterWithSurgery);
-                    return p_ & cq_;
+                    bool? co_ = this.isNotAtProceduralHospitalLocation(context, EncounterWithSurgery);
+                    return p_ & co_;
                 }
             }
 
@@ -8048,13 +8038,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 }
                 else
                 {
-                    DataType t_ = SMStatus?.Effective;
-                    CqlDateTime u_ = context.Operators.LateBoundProperty<CqlDateTime>(t_, "value");
-                    CqlDateTime v_ = QICoreCommon_4_0_000.Instance.latest(context, u_);
-                    CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.toInterval(context, v_);
-                    CqlInterval<CqlDateTime> x_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservationAndOutpatientSurgeryService(context, QualifyingEncounter);
-                    bool? y_ = context.Operators.Before(w_, x_, (string)default);
-                    s_ = r_ | y_;
+                    bool? t_ = context.Operators.Before(q_, m_, (string)default);
+                    s_ = r_ | t_;
                 }
                 l_ = k_ & s_;
             }
@@ -8065,11 +8050,11 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             }
             else
             {
-                DataType z_ = SMStatus?.Value;
-                object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                CqlValueSet ab_ = this.Smoking_Status(context);
-                bool? ac_ = context.Operators.ConceptInValueSet(aa_ as CqlConcept, ab_);
-                return l_ & ac_;
+                DataType u_ = SMStatus?.Value;
+                object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
+                CqlValueSet w_ = this.Smoking_Status(context);
+                bool? x_ = context.Operators.ConceptInValueSet(v_ as CqlConcept, w_);
+                return l_ & x_;
             }
         }
 

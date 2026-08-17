@@ -325,21 +325,31 @@ public class ShortCircuitLogicCqlTest
     /// assign a result local, like the guard inside <c>GuardInConditionalTest</c> that produces
     /// a value for an if-test). There is no guard-clause variant: the assign form needs the
     /// <c>else</c> to guarantee exactly one branch runs, and the tail form matches it.
+    /// <para>Both assertions match the guard's OWN <c>if</c>/<c>else</c>, anchored on its origin
+    /// comment. Counting <c>else</c> keywords over the whole method cannot fail here: the
+    /// assign-form fixture also contains the CQL <c>if</c>'s own else, which would keep the
+    /// count above zero even if the guard stopped emitting one.</para>
     /// </summary>
     [TestMethod]
     public void GeneratedCSharp_GuardChainsKeepElseBlocks()
     {
         var generated = GenerateFixtureCSharp(ElmToolkitConfig.Default);
 
-        var tailDefine = ExtractComputeMethod(generated, "TrueAndTrue_Compute");
-        Assert.IsTrue(CountElseKeywords(tailDefine) > 0, "A tail-position guard must keep its else block.");
+        StringAssert.Matches(
+            ExtractComputeMethod(generated, "TrueAndTrue_Compute"),
+            GuardFollowedByElse("return false;"),
+            "A tail-position guard must keep its else block.");
 
-        var assignDefine = ExtractComputeMethod(generated, "GuardInConditionalTest_Compute");
-        Assert.IsTrue(CountElseKeywords(assignDefine) > 0, "An assign-form guard must keep its else block.");
+        StringAssert.Matches(
+            ExtractComputeMethod(generated, "GuardInConditionalTest_Compute"),
+            GuardFollowedByElse(@"\w+ = false;"),
+            "An assign-form guard must keep its else block.");
     }
 
-    private static int CountElseKeywords(string code) =>
-        System.Text.RegularExpressions.Regex.Matches(code, @"\belse\b").Count;
+    /// <summary>The guard's own if/else: origin comment, <c>if (x is false)</c>, the deciding
+    /// branch (<paramref name="decidingStatement"/>), its closing brace, then <c>else</c>.</summary>
+    private static System.Text.RegularExpressions.Regex GuardFollowedByElse(string decidingStatement) =>
+        new($@"// CQL 'and' \([^)]*\): right operand skipped when left is false\s*\r?\n\s*if \(\w+ is false\)\s*\r?\n\s*\{{\s*\r?\n\s*{decidingStatement}\s*\r?\n\s*\}}\s*\r?\n\s*else\b");
 
     private static string ExtractComputeMethod(string code, string methodName)
     {

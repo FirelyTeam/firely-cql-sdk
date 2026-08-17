@@ -454,27 +454,19 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
         }
         else
         {
-            Patient q_ = this.Patient(context);
-            Date r_ = q_?.BirthDateElement;
-            string s_ = r_?.Value;
-            CqlDate t_ = context.Operators.ConvertStringToDate(s_);
-            CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
-            CqlDateTime v_ = context.Operators.End(u_);
-            CqlDate w_ = context.Operators.DateFrom(v_);
-            int? x_ = context.Operators.CalculateAgeAt(t_, w_, "year");
-            bool? y_ = context.Operators.GreaterOrEqual(x_, 81);
-            bool? z_;
+            bool? q_ = context.Operators.GreaterOrEqual(h_, 81);
+            bool? r_;
             // CQL 'and' (42:8-44:5): right operand skipped when left is false
-            if (y_ is false)
+            if (q_ is false)
             {
-                z_ = false;
+                r_ = false;
             }
             else
             {
-                bool? aa_ = this.Has_Criteria_Indicating_Frailty(context);
-                z_ = y_ & aa_;
+                bool? s_ = this.Has_Criteria_Indicating_Frailty(context);
+                r_ = q_ & s_;
             }
-            return l_ | z_;
+            return l_ | r_;
         }
     }
 

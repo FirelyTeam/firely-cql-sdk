@@ -697,10 +697,9 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
         }
         else
         {
-            Observation c_ = this.Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day(context);
-            DataType d_ = c_?.Value;
-            object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
-            return b_ & ((bool?)(e_ is null));
+            DataType c_ = a_?.Value;
+            object d_ = FHIRHelpers_4_4_000.Instance.ToValue(context, c_);
+            return b_ & ((bool?)(d_ is null));
         }
     }
 

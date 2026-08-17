@@ -31,10 +31,20 @@ internal partial class CSharpEmitter
         private readonly List<Func<string>> _statements = [];
         private readonly Dictionary<string, Atom> _dedup = [];
 
-        private Scope(CSharpEmitter emitter, VariableNameGenerator names)
+        // Dedup entries of an ENCLOSING scope whose locals are already declared textually
+        // above this scope's block, so this scope may reuse them instead of recomputing the
+        // same value. Lookup only — a new hoist always lands in _dedup, never here. Null for
+        // the root scope and for a hoisted local function's body (see HoistLocalFunction).
+        private readonly IReadOnlyDictionary<string, Atom>? _inheritedDedup;
+
+        private Scope(
+            CSharpEmitter emitter,
+            VariableNameGenerator names,
+            IReadOnlyDictionary<string, Atom>? inheritedDedup = null)
         {
             _emitter = emitter;
             _names = names;
+            _inheritedDedup = inheritedDedup;
         }
 
         public static Scope CreateRoot(CSharpEmitter emitter, IReadOnlyList<CodeLocal> parameters)
@@ -47,14 +57,17 @@ internal partial class CSharpEmitter
             return scope;
         }
 
-        private Scope CreateNested(IReadOnlyList<CodeLocal> parameters)
+        private Scope CreateNested(
+            IReadOnlyList<CodeLocal> parameters,
+            IReadOnlyDictionary<string, Atom>? inheritedDedup = null)
         {
             var nested = new Scope(
                 _emitter,
                 // The GENERATED letter sequence must never collide with a hint name visible in
                 // this lineage: the old VariableNameGenerator.Reserved list, threaded the same
                 // way (ForNewScope conses the new scope's names onto a copy of the parent's).
-                _names.ForNewScope(parameters.Select(p => p.NameHint).OfType<string>()));
+                _names.ForNewScope(parameters.Select(p => p.NameHint).OfType<string>()),
+                inheritedDedup);
             nested.NameParameters(parameters);
             return nested;
         }
@@ -203,6 +216,15 @@ internal partial class CSharpEmitter
             if (_dedup.TryGetValue(dedupKey, out var existing))
                 return existing;
 
+            // An enclosing scope may already hold this value in a local that is declared above
+            // this block and still in scope here — reuse it rather than recomputing. Without
+            // this, every branch and test block of a lowered conditional recomputed whatever
+            // its enclosing scope had already hoisted (a retrieve, a ToInterval chain), which
+            // is how the short-circuit lowering came to ADD hundreds of operator calls to the
+            // corpora while skipping right operands.
+            if (_inheritedDedup is not null && _inheritedDedup.TryGetValue(dedupKey, out var inherited))
+                return inherited;
+
             var local = new CodeLocal(node.Type);
             var name = AllocateName(null);
             _emitter._assignedNames[local] = name;
@@ -224,6 +246,10 @@ internal partial class CSharpEmitter
 
             _statements.Add(() =>
             {
+                // Deliberately NO inherited dedup: a local function may be declared before the
+                // enclosing local it would reuse (use-before-declaration), and reaching out to
+                // an enclosing local turns it into captured closure state — an allocation the
+                // guard form exists to avoid.
                 var nested = CreateNested(lambda.Parameters);
                 var result = nested.Linearize(lambda.Body, tailPosition: true);
 
@@ -412,11 +438,18 @@ internal partial class CSharpEmitter
             bool tailPosition,
             string? originComment = null)
         {
+            // Snapshot NOW, at queue time, not when the chain renders: everything this scope
+            // has hoisted so far is declared above the chain and therefore in scope inside
+            // every branch and test block, but anything it hoists AFTER the chain is declared
+            // BELOW it, and reusing one of those from inside a branch would be a
+            // use-before-declaration.
+            var visibleDedup = new Dictionary<string, Atom>(_dedup);
+
             if (tailPosition)
             {
                 if (originComment is not null)
                     _statements.Add(() => originComment);
-                _statements.Add(() => RenderChain(resultName: null, cases, @else));
+                _statements.Add(() => RenderChain(resultName: null, cases, @else, visibleDedup));
                 return null;
             }
 
@@ -429,7 +462,7 @@ internal partial class CSharpEmitter
             _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharp(resultType)} {resultName};");
             if (originComment is not null)
                 _statements.Add(() => originComment);
-            _statements.Add(() => RenderChain(resultName, cases, @else));
+            _statements.Add(() => RenderChain(resultName, cases, @else, visibleDedup));
             return new Atom(resultName, resultLocal);
         }
 
@@ -438,10 +471,11 @@ internal partial class CSharpEmitter
         private string RenderChain(
             string? resultName,
             IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
-            CodeExpression @else)
+            CodeExpression @else,
+            IReadOnlyDictionary<string, Atom> visibleDedup)
         {
             var isb = new IndentedStringBuilder();
-            EmitChainLevel(isb, resultName, cases, 0, @else);
+            EmitChainLevel(isb, resultName, cases, 0, @else, visibleDedup);
             return isb.ToString().TrimEnd('\r', '\n');
         }
 
@@ -450,7 +484,8 @@ internal partial class CSharpEmitter
             string? resultName,
             IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
             int start,
-            CodeExpression @else)
+            CodeExpression @else,
+            IReadOnlyDictionary<string, Atom> visibleDedup)
         {
             // Both forms print an if/else chain. The assign form needs one — its branches
             // assign and fall through, so the else is what guarantees exactly one of them
@@ -470,7 +505,7 @@ internal partial class CSharpEmitter
                 {
                     // The first condition at a nesting level can put its statements right
                     // here — nothing needs to run before them at this level.
-                    var testScope = CreateNested([]);
+                    var testScope = CreateNested([], visibleDedup);
                     var atom = testScope.Linearize(when)!;
                     testScope.WriteStatements(isb);
                     test = atom.Code;
@@ -482,18 +517,18 @@ internal partial class CSharpEmitter
                     isb.AppendLine("else");
                     isb.AppendLine("{");
                     using (isb.Indent())
-                        EmitChainLevel(isb, resultName, cases, i, @else);
+                        EmitChainLevel(isb, resultName, cases, i, @else, visibleDedup);
                     isb.AppendLine("}");
                     return;
                 }
 
                 isb.AppendLine(first ? $"if ({test})" : $"else if ({test})");
-                EmitBranchBlock(isb, resultName, then);
+                EmitBranchBlock(isb, resultName, then, visibleDedup);
                 first = false;
             }
 
             isb.AppendLine("else");
-            EmitBranchBlock(isb, resultName, @else);
+            EmitBranchBlock(isb, resultName, @else, visibleDedup);
         }
 
         /// <summary>
@@ -566,12 +601,16 @@ internal partial class CSharpEmitter
         /// throw-expression (neither <c>return throw …</c> nor <c>x = throw …;</c> is wanted
         /// here; the throwing branch needs no assignment for definite assignment).
         /// </summary>
-        private void EmitBranchBlock(IndentedStringBuilder isb, string? resultName, CodeExpression value)
+        private void EmitBranchBlock(
+            IndentedStringBuilder isb,
+            string? resultName,
+            CodeExpression value,
+            IReadOnlyDictionary<string, Atom> visibleDedup)
         {
             isb.AppendLine("{");
             using (isb.Indent())
             {
-                var branchScope = CreateNested([]);
+                var branchScope = CreateNested([], visibleDedup);
                 var atom = branchScope.Linearize(value, tailPosition: resultName is null);
                 branchScope.WriteStatements(isb);
                 if (atom is not null)

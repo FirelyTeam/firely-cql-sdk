@@ -237,8 +237,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     }
                     else
                     {
-                        DataType u_ = SD?.Occurrence;
-                        return t_ & (!((bool?)((u_ as FhirDateTime) is null)));
+                        return t_ & (!((bool?)((o_ as FhirDateTime) is null)));
                     }
                 }
 

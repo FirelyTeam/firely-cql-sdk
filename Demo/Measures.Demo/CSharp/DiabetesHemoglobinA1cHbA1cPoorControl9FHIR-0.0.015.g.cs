@@ -341,9 +341,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
         }
         else
         {
-            Observation c_ = this.Most_Recent_HbA1c(context);
-            DataType d_ = c_?.Value;
-            return b_ & ((bool?)(d_ is null));
+            DataType c_ = a_?.Value;
+            return b_ & ((bool?)(c_ is null));
         }
     }
 

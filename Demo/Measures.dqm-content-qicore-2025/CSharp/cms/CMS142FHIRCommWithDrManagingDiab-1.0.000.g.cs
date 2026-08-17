@@ -262,12 +262,10 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         }
         else
         {
-            CodeableConcept j_ = condition?.VerificationStatus;
-            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
-            CqlCode l_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-            CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
-            bool? n_ = context.Operators.Equivalent(k_, m_);
-            f_ = e_ | n_;
+            CqlCode j_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(b_, k_);
+            f_ = e_ | l_;
         }
         bool? g_;
         // CQL 'or' (148:54-150:66): right operand skipped when left is true
@@ -277,12 +275,10 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         }
         else
         {
-            CodeableConcept o_ = condition?.VerificationStatus;
-            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-            CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
-            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-            bool? s_ = context.Operators.Equivalent(p_, r_);
-            g_ = f_ | s_;
+            CqlCode m_ = QICoreCommon_4_0_000.Instance.provisional(context);
+            CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
+            bool? o_ = context.Operators.Equivalent(b_, n_);
+            g_ = f_ | o_;
         }
         bool? h_;
         // CQL 'or' (148:52-152:3): right operand skipped when left is true
@@ -292,12 +288,10 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         }
         else
         {
-            CodeableConcept t_ = condition?.VerificationStatus;
-            CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-            CqlCode v_ = QICoreCommon_4_0_000.Instance.differential(context);
-            CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-            bool? x_ = context.Operators.Equivalent(u_, w_);
-            h_ = g_ | x_;
+            CqlCode p_ = QICoreCommon_4_0_000.Instance.differential(context);
+            CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+            bool? r_ = context.Operators.Equivalent(b_, q_);
+            h_ = g_ | r_;
         }
         bool? i_ = context.Operators.Implies(!((bool?)(b_ is null)), h_);
         return i_;
@@ -487,11 +481,9 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 }
                 else
                 {
-                    FhirDateTime p_ = LevelOfSeverityCommunicated?.SentElement;
-                    CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
-                    CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-                    bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
-                    return o_ & s_;
+                    CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
+                    bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, "day");
+                    return o_ & q_;
                 }
             }
 
@@ -502,11 +494,11 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         IEnumerable<Communication> d_ = context.Operators.Where<Communication>(b_, c_);
 
         bool? e_(Communication LevelOfSeverityCommunicated) {
-            Code<EventStatus> t_ = LevelOfSeverityCommunicated?.StatusElement;
-            EventStatus? u_ = t_?.Value;
-            string v_ = context.Operators.Convert<string>(u_);
-            bool? w_ = context.Operators.Equal(v_, "completed");
-            return w_;
+            Code<EventStatus> r_ = LevelOfSeverityCommunicated?.StatusElement;
+            EventStatus? s_ = r_?.Value;
+            string t_ = context.Operators.Convert<string>(s_);
+            bool? u_ = context.Operators.Equal(t_, "completed");
+            return u_;
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -542,11 +534,9 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 }
                 else
                 {
-                    FhirDateTime p_ = MacularEdemaAbsentCommunicated?.SentElement;
-                    CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
-                    CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-                    bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
-                    return o_ & s_;
+                    CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
+                    bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, "day");
+                    return o_ & q_;
                 }
             }
 
@@ -557,11 +547,11 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         IEnumerable<Communication> d_ = context.Operators.Where<Communication>(b_, c_);
 
         bool? e_(Communication MacularEdemaAbsentCommunicated) {
-            Code<EventStatus> t_ = MacularEdemaAbsentCommunicated?.StatusElement;
-            EventStatus? u_ = t_?.Value;
-            string v_ = context.Operators.Convert<string>(u_);
-            bool? w_ = context.Operators.Equal(v_, "completed");
-            return w_;
+            Code<EventStatus> r_ = MacularEdemaAbsentCommunicated?.StatusElement;
+            EventStatus? s_ = r_?.Value;
+            string t_ = context.Operators.Convert<string>(s_);
+            bool? u_ = context.Operators.Equal(t_, "completed");
+            return u_;
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -597,11 +587,9 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 }
                 else
                 {
-                    FhirDateTime p_ = MacularEdemaPresentCommunicated?.SentElement;
-                    CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
-                    CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-                    bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, (string)default);
-                    return o_ & s_;
+                    CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
+                    bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
+                    return o_ & q_;
                 }
             }
 
@@ -612,11 +600,11 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         IEnumerable<Communication> d_ = context.Operators.Where<Communication>(b_, c_);
 
         bool? e_(Communication MacularEdemaPresentCommunicated) {
-            Code<EventStatus> t_ = MacularEdemaPresentCommunicated?.StatusElement;
-            EventStatus? u_ = t_?.Value;
-            string v_ = context.Operators.Convert<string>(u_);
-            bool? w_ = context.Operators.Equal(v_, "completed");
-            return w_;
+            Code<EventStatus> r_ = MacularEdemaPresentCommunicated?.StatusElement;
+            EventStatus? s_ = r_?.Value;
+            string t_ = context.Operators.Convert<string>(s_);
+            bool? u_ = context.Operators.Equal(t_, "completed");
+            return u_;
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -719,11 +707,9 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                CodeableConcept aa_ = LevelOfSeverityNotCommunicated?.StatusReason;
-                CqlConcept ab_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aa_);
-                CqlValueSet ac_ = this.Patient_Reason(context);
-                bool? ad_ = context.Operators.ConceptInValueSet(ab_, ac_);
-                return z_ | ad_;
+                CqlValueSet aa_ = this.Patient_Reason(context);
+                bool? ab_ = context.Operators.ConceptInValueSet(x_, aa_);
+                return z_ | ab_;
             }
         }
 
@@ -791,11 +777,9 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                CodeableConcept aa_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
-                CqlConcept ab_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aa_);
-                CqlValueSet ac_ = this.Patient_Reason(context);
-                bool? ad_ = context.Operators.ConceptInValueSet(ab_, ac_);
-                return z_ | ad_;
+                CqlValueSet aa_ = this.Patient_Reason(context);
+                bool? ab_ = context.Operators.ConceptInValueSet(x_, aa_);
+                return z_ | ab_;
             }
         }
 
@@ -863,11 +847,9 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                CodeableConcept aa_ = MacularEdemaPresentNotCommunicated?.StatusReason;
-                CqlConcept ab_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aa_);
-                CqlValueSet ac_ = this.Patient_Reason(context);
-                bool? ad_ = context.Operators.ConceptInValueSet(ab_, ac_);
-                return z_ | ad_;
+                CqlValueSet aa_ = this.Patient_Reason(context);
+                bool? ab_ = context.Operators.ConceptInValueSet(x_, aa_);
+                return z_ | ab_;
             }
         }
 

@@ -513,22 +513,21 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     IEnumerable<Condition> o_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, DeliveryEncounter);
 
                     bool? p_(Condition @this) {
-                        CodeableConcept u_ = @this?.Code;
-                        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
-                        return !((bool?)(v_ is null));
+                        CodeableConcept t_ = @this?.Code;
+                        CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+                        return !((bool?)(u_ is null));
                     }
 
 
                     CqlConcept q_(Condition @this) {
-                        CodeableConcept w_ = @this?.Code;
-                        CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
-                        return x_;
+                        CodeableConcept v_ = @this?.Code;
+                        CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                        return w_;
                     }
 
                     IEnumerable<CqlConcept> r_ = context.Operators.WhereSelect<Condition, CqlConcept>(o_, p_, q_);
-                    CqlValueSet s_ = this._20_to_42_Plus_Weeks_Gestation(context);
-                    bool? t_ = context.Operators.ConceptsInValueSet(r_, s_);
-                    m_ = l_ | t_;
+                    bool? s_ = context.Operators.ConceptsInValueSet(r_, k_);
+                    m_ = l_ | s_;
                 }
                 return f_ & m_;
             }
@@ -1031,22 +1030,21 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 IEnumerable<Condition> r_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, SOCEncounter);
 
                 bool? s_(Condition @this) {
-                    CodeableConcept x_ = @this?.Code;
-                    CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
-                    return !((bool?)(y_ is null));
+                    CodeableConcept w_ = @this?.Code;
+                    CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
+                    return !((bool?)(x_ is null));
                 }
 
 
                 CqlConcept t_(Condition @this) {
-                    CodeableConcept z_ = @this?.Code;
-                    CqlConcept aa_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, z_);
-                    return aa_;
+                    CodeableConcept y_ = @this?.Code;
+                    CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
+                    return z_;
                 }
 
                 IEnumerable<CqlConcept> u_ = context.Operators.WhereSelect<Condition, CqlConcept>(r_, s_, t_);
-                CqlValueSet v_ = this.Placenta_Increta_or_Percreta(context);
-                bool? w_ = context.Operators.ConceptsInValueSet(u_, v_);
-                p_ = o_ | w_;
+                bool? v_ = context.Operators.ConceptsInValueSet(u_, n_);
+                p_ = o_ | v_;
             }
             // CQL 'and' (148:7-153:9): right operand skipped when left is false
             if (p_ is false)
@@ -1055,31 +1053,31 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             }
             else
             {
-                IEnumerable<Encounter> ab_ = this.Delivery_Encounters_With_Blood_Transfusion(context);
-                bool? ac_ = context.Operators.Exists<Encounter>(ab_);
-                bool? ad_;
+                IEnumerable<Encounter> aa_ = this.Delivery_Encounters_With_Blood_Transfusion(context);
+                bool? ab_ = context.Operators.Exists<Encounter>(aa_);
+                bool? ac_;
                 // CQL 'or' (151:13-153:9): right operand skipped when left is true
-                if (ac_ is true)
+                if (ab_ is true)
                 {
-                    ad_ = true;
+                    ac_ = true;
                 }
                 else
                 {
-                    IEnumerable<Encounter> ae_ = this.Delivery_Encounters_With_Hysterectomy(context);
-                    bool? af_ = context.Operators.Exists<Encounter>(ae_);
-                    ad_ = ac_ | af_;
+                    IEnumerable<Encounter> ad_ = this.Delivery_Encounters_With_Hysterectomy(context);
+                    bool? ae_ = context.Operators.Exists<Encounter>(ad_);
+                    ac_ = ab_ | ae_;
                 }
-                return p_ & ad_;
+                return p_ & ac_;
             }
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
         bool? d_(Encounter SOCEncounter) {
-            CqlValueSet ag_ = this.Severe_Maternal_Morbidity_Diagnoses(context);
-            CqlValueSet ah_ = this.Present_on_Admission_is_No_or_Unable_To_Determine(context);
-            bool? ai_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, SOCEncounter, ag_, ah_);
-            return ai_;
+            CqlValueSet af_ = this.Severe_Maternal_Morbidity_Diagnoses(context);
+            CqlValueSet ag_ = this.Present_on_Admission_is_No_or_Unable_To_Determine(context);
+            bool? ah_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, SOCEncounter, af_, ag_);
+            return ah_;
         }
 
         IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(a_, d_);
@@ -1436,17 +1434,16 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     Condition r_ = CQMCommon_4_1_000.Instance.getCondition(context, Complication as ResourceReference);
                     CodeableConcept s_ = r_?.Code;
                     CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                    CqlValueSet u_ = this.Severe_Maternal_Morbidity_Diagnoses(context);
-                    bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                    return q_ | v_;
+                    bool? u_ = context.Operators.ConceptInValueSet(t_, p_);
+                    return q_ | u_;
                 }
             }
 
 
             (CqlTupleMetadata, object code, string SOCDxCategory)? k_(object Complication) {
-                string w_ = this.sOCDxCategory(context, Complication as CqlConcept);
-                (CqlTupleMetadata, object code, string SOCDxCategory)? x_ = (CqlTupleMetadata_FiRiQVZbDYjPPThNBPPBDcKQI, Complication, w_);
-                return x_;
+                string v_ = this.sOCDxCategory(context, Complication as CqlConcept);
+                (CqlTupleMetadata, object code, string SOCDxCategory)? w_ = (CqlTupleMetadata_FiRiQVZbDYjPPThNBPPBDcKQI, Complication, v_);
+                return w_;
             }
 
             IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> l_ = context.Operators.WhereSelect<object, (CqlTupleMetadata, object code, string SOCDxCategory)?>(i_, j_, k_);
@@ -1772,22 +1769,21 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 IEnumerable<Condition> r_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, SOCExcludingTransfusion);
 
                 bool? s_(Condition @this) {
-                    CodeableConcept x_ = @this?.Code;
-                    CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
-                    return !((bool?)(y_ is null));
+                    CodeableConcept w_ = @this?.Code;
+                    CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
+                    return !((bool?)(x_ is null));
                 }
 
 
                 CqlConcept t_(Condition @this) {
-                    CodeableConcept z_ = @this?.Code;
-                    CqlConcept aa_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, z_);
-                    return aa_;
+                    CodeableConcept y_ = @this?.Code;
+                    CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
+                    return z_;
                 }
 
                 IEnumerable<CqlConcept> u_ = context.Operators.WhereSelect<Condition, CqlConcept>(r_, s_, t_);
-                CqlValueSet v_ = this.Placenta_Increta_or_Percreta(context);
-                bool? w_ = context.Operators.ConceptsInValueSet(u_, v_);
-                p_ = o_ | w_;
+                bool? v_ = context.Operators.ConceptsInValueSet(u_, n_);
+                p_ = o_ | v_;
             }
             // CQL 'and' (250:7-255:9): right operand skipped when left is false
             if (p_ is false)
@@ -1796,31 +1792,31 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             }
             else
             {
-                IEnumerable<Encounter> ab_ = this.Delivery_Encounters_With_Blood_Transfusion(context);
-                bool? ac_ = context.Operators.Exists<Encounter>(ab_);
-                bool? ad_;
+                IEnumerable<Encounter> aa_ = this.Delivery_Encounters_With_Blood_Transfusion(context);
+                bool? ab_ = context.Operators.Exists<Encounter>(aa_);
+                bool? ac_;
                 // CQL 'or' (253:13-255:9): right operand skipped when left is true
-                if (ac_ is true)
+                if (ab_ is true)
                 {
-                    ad_ = true;
+                    ac_ = true;
                 }
                 else
                 {
-                    IEnumerable<Encounter> ae_ = this.Delivery_Encounters_With_Hysterectomy(context);
-                    bool? af_ = context.Operators.Exists<Encounter>(ae_);
-                    ad_ = ac_ | af_;
+                    IEnumerable<Encounter> ad_ = this.Delivery_Encounters_With_Hysterectomy(context);
+                    bool? ae_ = context.Operators.Exists<Encounter>(ad_);
+                    ac_ = ab_ | ae_;
                 }
-                return p_ & ad_;
+                return p_ & ac_;
             }
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
         bool? d_(Encounter SOCExcludingTransfusion) {
-            CqlValueSet ag_ = this.Severe_Maternal_Morbidity_Diagnoses(context);
-            CqlValueSet ah_ = this.Present_on_Admission_is_No_or_Unable_To_Determine(context);
-            bool? ai_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, SOCExcludingTransfusion, ag_, ah_);
-            return ai_;
+            CqlValueSet af_ = this.Severe_Maternal_Morbidity_Diagnoses(context);
+            CqlValueSet ag_ = this.Present_on_Admission_is_No_or_Unable_To_Determine(context);
+            bool? ah_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, SOCExcludingTransfusion, af_, ag_);
+            return ah_;
         }
 
         IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(a_, d_);
@@ -2340,9 +2336,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             else
             {
                 CqlValueSet g_ = this.Placenta_Increta_or_Percreta(context);
-                CqlValueSet h_ = this.Present_On_Admission_is_Yes_or_Exempt(context);
-                bool? i_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, TwentyWeeksPlusEncounter, g_, h_);
-                return f_ | i_;
+                bool? h_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, TwentyWeeksPlusEncounter, g_, e_);
+                return f_ | h_;
             }
         }
 
@@ -2526,74 +2521,72 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             }
             else
             {
-                int? j_ = PCMaternal_5_25_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
-                bool? k_ = (bool?)(j_ is null);
-                bool? l_;
+                bool? j_ = (bool?)(g_ is null);
+                bool? k_;
                 // CQL 'and' (390:12-394:9): right operand skipped when left is false
-                if (k_ is false)
+                if (j_ is false)
                 {
-                    l_ = false;
+                    k_ = false;
                 }
                 else
                 {
-                    CqlQuantity m_ = PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
-                    CqlQuantity n_ = context.Operators.Quantity(20m, "weeks");
-                    bool? o_ = context.Operators.GreaterOrEqual(m_, n_);
-                    bool? p_;
+                    CqlQuantity l_ = PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
+                    CqlQuantity m_ = context.Operators.Quantity(20m, "weeks");
+                    bool? n_ = context.Operators.GreaterOrEqual(l_, m_);
+                    bool? o_;
                     // CQL 'and' (391:17-393:13): right operand skipped when left is false
-                    if (o_ is false)
+                    if (n_ is false)
                     {
-                        p_ = false;
+                        o_ = false;
                     }
                     else
                     {
-                        CqlQuantity q_ = PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
-                        CqlQuantity r_ = context.Operators.Quantity(36m, "weeks");
-                        bool? s_ = context.Operators.LessOrEqual(q_, r_);
-                        p_ = o_ & s_;
+                        CqlQuantity p_ = context.Operators.Quantity(36m, "weeks");
+                        bool? q_ = context.Operators.LessOrEqual(l_, p_);
+                        o_ = n_ & q_;
                     }
-                    l_ = k_ & p_;
+                    k_ = j_ & o_;
                 }
-                return i_ | l_;
+                return i_ | k_;
             }
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
         bool? d_(Encounter DeliveryEncounter) {
-            int? t_ = PCMaternal_5_25_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
-            bool? u_ = (bool?)(t_ is null);
-            bool? v_;
+            int? r_ = PCMaternal_5_25_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
+            bool? s_ = (bool?)(r_ is null);
+            bool? t_;
             // CQL 'and' (399:15-400:25): right operand skipped when left is false
-            if (u_ is false)
+            if (s_ is false)
             {
-                v_ = false;
+                t_ = false;
             }
             else
             {
-                CqlQuantity w_ = PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
-                v_ = u_ & ((bool?)(w_ is null));
+                CqlQuantity u_ = PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
+                t_ = s_ & ((bool?)(u_ is null));
             }
             // CQL 'and' (399:9-403:11): right operand skipped when left is false
-            if (v_ is false)
+            if (t_ is false)
             {
                 return false;
             }
             else
             {
-                IEnumerable<Claim.DiagnosisComponent> x_ = CQMCommon_4_1_000.Instance.claimDiagnosis(context, DeliveryEncounter);
+                IEnumerable<Claim.DiagnosisComponent> v_ = CQMCommon_4_1_000.Instance.claimDiagnosis(context, DeliveryEncounter);
 
-                bool? y_(Claim.DiagnosisComponent CDiagnosis) {
-                    CodeableConcept aa_ = CDiagnosis?.OnAdmission;
-                    CqlConcept ab_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aa_);
-                    CqlCode ac_ = this.POA_Y(context);
-                    CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
-                    bool? ae_ = context.Operators.Equivalent(ab_, ad_);
-                    return ae_;
+                bool? w_(Claim.DiagnosisComponent CDiagnosis) {
+                    CodeableConcept y_ = CDiagnosis?.OnAdmission;
+                    CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
+                    CqlCode aa_ = this.POA_Y(context);
+                    CqlConcept ab_ = context.Operators.ConvertCodeToConcept(aa_);
+                    bool? ac_ = context.Operators.Equivalent(z_, ab_);
+                    return ac_;
                 }
 
-                bool? z_ = context.Operators.WhereAny<Claim.DiagnosisComponent>(x_, y_);
-                return v_ & z_;
+                bool? x_ = context.Operators.WhereAny<Claim.DiagnosisComponent>(v_, w_);
+                return t_ & x_;
             }
         }
 

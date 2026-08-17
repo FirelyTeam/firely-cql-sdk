@@ -383,25 +383,22 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                     }
                     else
                     {
-                        DataType ar_ = MostRecentPriorHeartRate?.Effective;
+                        DataType ar_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Effective;
                         object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
                         CqlInterval<CqlDateTime> at_ = QICoreCommon_4_0_000.Instance.toInterval(context, as_);
-                        DataType au_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Effective;
-                        object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        CqlInterval<CqlDateTime> aw_ = QICoreCommon_4_0_000.Instance.toInterval(context, av_);
-                        bool? ax_ = context.Operators.Before(at_, aw_, (string)default);
-                        return aq_ & ax_;
+                        bool? au_ = context.Operators.Before(ap_, at_, (string)default);
+                        return aq_ & au_;
                     }
                 }
 
                 IEnumerable<Observation> ad_ = context.Operators.Where<Observation>(ab_, ac_);
 
                 object ae_(Observation @this) {
-                    DataType ay_ = @this?.Effective;
-                    object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                    CqlInterval<CqlDateTime> ba_ = QICoreCommon_4_0_000.Instance.toInterval(context, az_);
-                    CqlDateTime bb_ = context.Operators.Start(ba_);
-                    return bb_;
+                    DataType av_ = @this?.Effective;
+                    object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
+                    CqlInterval<CqlDateTime> ax_ = QICoreCommon_4_0_000.Instance.toInterval(context, aw_);
+                    CqlDateTime ay_ = context.Operators.Start(ax_);
+                    return ay_;
                 }
 
                 IEnumerable<Observation> af_ = context.Operators.SortBy<Observation>(ad_, ae_, System.ComponentModel.ListSortDirection.Ascending);
@@ -469,17 +466,16 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             }
             else
             {
-                List<CodeableConcept> u_ = NoBetaBlockerOrdered?.ReasonCode;
 
-                CqlConcept v_(CodeableConcept @this) {
-                    CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                    return z_;
+                CqlConcept u_(CodeableConcept @this) {
+                    CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                    return y_;
                 }
 
-                IEnumerable<CqlConcept> w_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)u_, v_);
-                CqlValueSet x_ = this.Patient_Reason(context);
-                bool? y_ = context.Operators.ConceptsInValueSet(w_, x_);
-                return s_ | y_;
+                IEnumerable<CqlConcept> v_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)o_, u_);
+                CqlValueSet w_ = this.Patient_Reason(context);
+                bool? x_ = context.Operators.ConceptsInValueSet(v_, w_);
+                return s_ | x_;
             }
         }
 
@@ -505,12 +501,10 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         }
         else
         {
-            CodeableConcept h_ = allergyIntolerance?.VerificationStatus;
-            CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
-            CqlCode j_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
-            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-            bool? l_ = context.Operators.Equivalent(i_, k_);
-            f_ = e_ | l_;
+            CqlCode h_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(b_, i_);
+            f_ = e_ | j_;
         }
         bool? g_ = context.Operators.Implies(!((bool?)(b_ is null)), f_);
         return g_;

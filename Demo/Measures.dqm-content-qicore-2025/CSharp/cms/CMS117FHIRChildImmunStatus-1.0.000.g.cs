@@ -799,12 +799,9 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime t_ = QICoreCommon_4_0_000.Instance.earliest(context, s_);
                 CqlDate u_ = context.Operators.DateFrom(t_);
                 CqlDateTime v_ = context.Operators.ConvertDateToDateTime(u_);
-                CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination2 as CqlDate);
-                CqlDateTime x_ = QICoreCommon_4_0_000.Instance.earliest(context, w_);
-                CqlQuantity y_ = context.Operators.Quantity(1m, "day");
-                CqlDateTime z_ = context.Operators.Add(x_, y_);
-                bool? aa_ = context.Operators.SameOrAfter(v_, z_, "day");
-                r_ = q_ & aa_;
+                CqlDateTime w_ = context.Operators.Add(j_, o_);
+                bool? x_ = context.Operators.SameOrAfter(v_, w_, "day");
+                r_ = q_ & x_;
             }
             // CQL 'and' (212:5-214:106): right operand skipped when left is false
             if (r_ is false)
@@ -813,16 +810,15 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             }
             else
             {
-                CqlDateTime ab_ = context.Operators.ConvertDateToDateTime(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination4 as CqlDate);
-                CqlDateTime ac_ = QICoreCommon_4_0_000.Instance.earliest(context, ab_);
-                CqlDate ad_ = context.Operators.DateFrom(ac_);
-                CqlDateTime ae_ = context.Operators.ConvertDateToDateTime(ad_);
-                CqlDateTime af_ = context.Operators.ConvertDateToDateTime(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination3 as CqlDate);
-                CqlDateTime ag_ = QICoreCommon_4_0_000.Instance.earliest(context, af_);
-                CqlQuantity ah_ = context.Operators.Quantity(1m, "day");
-                CqlDateTime ai_ = context.Operators.Add(ag_, ah_);
-                bool? aj_ = context.Operators.SameOrAfter(ae_, ai_, "day");
-                return r_ & aj_;
+                CqlDateTime y_ = context.Operators.ConvertDateToDateTime(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination4 as CqlDate);
+                CqlDateTime z_ = QICoreCommon_4_0_000.Instance.earliest(context, y_);
+                CqlDate aa_ = context.Operators.DateFrom(z_);
+                CqlDateTime ab_ = context.Operators.ConvertDateToDateTime(aa_);
+                CqlDateTime ac_ = context.Operators.ConvertDateToDateTime(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination3 as CqlDate);
+                CqlDateTime ad_ = QICoreCommon_4_0_000.Instance.earliest(context, ac_);
+                CqlDateTime ae_ = context.Operators.Add(ad_, o_);
+                bool? af_ = context.Operators.SameOrAfter(ab_, ae_, "day");
+                return r_ & af_;
             }
         }
 
@@ -966,23 +962,19 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime r_ = context.Operators.ConvertDateToDateTime(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination3 as CqlDate);
                 CqlDateTime s_ = QICoreCommon_4_0_000.Instance.earliest(context, r_);
                 CqlDate t_ = context.Operators.DateFrom(s_);
-                CqlDateTime u_ = context.Operators.ConvertDateToDateTime(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination2 as CqlDate);
-                CqlDateTime v_ = QICoreCommon_4_0_000.Instance.earliest(context, u_);
-                CqlDate w_ = context.Operators.DateFrom(v_);
-                CqlQuantity x_ = context.Operators.Quantity(1m, "day");
-                CqlDate y_ = context.Operators.Add(w_, x_);
-                bool? z_ = context.Operators.SameOrAfter(t_, y_, (string)default);
-                return q_ & z_;
+                CqlDate u_ = context.Operators.Add(k_, o_);
+                bool? v_ = context.Operators.SameOrAfter(t_, u_, (string)default);
+                return q_ & v_;
             }
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?> e_ = context.Operators.SelectWhere<ValueTuple<CqlDate, CqlDate, CqlDate>, (CqlTupleMetadata, CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?>(b_, c_, d_);
 
         CqlDate f_((CqlTupleMetadata, CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)? tuple_cnghazroxajthpiccbiajbrxv) {
-            CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination1 as CqlDate);
-            CqlDateTime ab_ = QICoreCommon_4_0_000.Instance.earliest(context, aa_);
-            CqlDate ac_ = context.Operators.DateFrom(ab_);
-            return ac_;
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination1 as CqlDate);
+            CqlDateTime x_ = QICoreCommon_4_0_000.Instance.earliest(context, w_);
+            CqlDate y_ = context.Operators.DateFrom(x_);
+            return y_;
         }
 
         IEnumerable<CqlDate> g_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?, CqlDate>(e_, f_);
@@ -1416,34 +1408,31 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             }
             else
             {
-                IEnumerable<CqlDate> q_ = this.Hib_4_Dose_Immunizations_or_Procedures(context);
-                int? r_ = context.Operators.Count<CqlDate>(q_);
-                bool? s_ = context.Operators.Greater(r_, 0);
-                bool? t_ = context.Operators.IsFalse(s_);
-                bool? u_;
+                bool? q_ = context.Operators.IsFalse(f_);
+                bool? r_;
                 // CQL 'and' (315:12-322:9): right operand skipped when left is false
-                if (t_ is false)
+                if (q_ is false)
                 {
-                    u_ = false;
+                    r_ = false;
                 }
                 else
                 {
-                    IEnumerable<CqlDate> v_ = this.Hib_3_or_4_Dose_Immunizations(context);
+                    IEnumerable<CqlDate> s_ = this.Hib_3_or_4_Dose_Immunizations(context);
 
-                    CqlDate w_(CqlDate HibVaccinations) {
-                        CqlDateTime ab_ = context.Operators.ConvertDateToDateTime(HibVaccinations as CqlDate);
-                        CqlDateTime ac_ = QICoreCommon_4_0_000.Instance.earliest(context, ab_);
-                        CqlDate ad_ = context.Operators.DateFrom(ac_);
-                        return ad_;
+                    CqlDate t_(CqlDate HibVaccinations) {
+                        CqlDateTime y_ = context.Operators.ConvertDateToDateTime(HibVaccinations as CqlDate);
+                        CqlDateTime z_ = QICoreCommon_4_0_000.Instance.earliest(context, y_);
+                        CqlDate aa_ = context.Operators.DateFrom(z_);
+                        return aa_;
                     }
 
-                    IEnumerable<CqlDate> x_ = context.Operators.SelectDistinct<CqlDate, CqlDate>(v_, w_);
-                    IEnumerable<CqlDate> y_ = context.Operators.Distinct<CqlDate>(x_);
-                    int? z_ = context.Operators.Count<CqlDate>(y_);
-                    bool? aa_ = context.Operators.GreaterOrEqual(z_, 3);
-                    u_ = t_ & aa_;
+                    IEnumerable<CqlDate> u_ = context.Operators.SelectDistinct<CqlDate, CqlDate>(s_, t_);
+                    IEnumerable<CqlDate> v_ = context.Operators.Distinct<CqlDate>(u_);
+                    int? w_ = context.Operators.Count<CqlDate>(v_);
+                    bool? x_ = context.Operators.GreaterOrEqual(w_, 3);
+                    r_ = q_ & x_;
                 }
-                return g_ | u_;
+                return g_ | r_;
             }
         }
 
@@ -1581,23 +1570,19 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime r_ = context.Operators.ConvertDateToDateTime(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination3 as CqlDate);
                 CqlDateTime s_ = QICoreCommon_4_0_000.Instance.earliest(context, r_);
                 CqlDate t_ = context.Operators.DateFrom(s_);
-                CqlDateTime u_ = context.Operators.ConvertDateToDateTime(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination2 as CqlDate);
-                CqlDateTime v_ = QICoreCommon_4_0_000.Instance.earliest(context, u_);
-                CqlDate w_ = context.Operators.DateFrom(v_);
-                CqlQuantity x_ = context.Operators.Quantity(1m, "day");
-                CqlDate y_ = context.Operators.Add(w_, x_);
-                bool? z_ = context.Operators.SameOrAfter(t_, y_, (string)default);
-                return q_ & z_;
+                CqlDate u_ = context.Operators.Add(k_, o_);
+                bool? v_ = context.Operators.SameOrAfter(t_, u_, (string)default);
+                return q_ & v_;
             }
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?> e_ = context.Operators.SelectWhere<ValueTuple<CqlDate, CqlDate, CqlDate>, (CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?>(b_, c_, d_);
 
         CqlDate f_((CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)? tuple_eztgahauwggsdgadcgqnnipgw) {
-            CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination1 as CqlDate);
-            CqlDateTime ab_ = QICoreCommon_4_0_000.Instance.earliest(context, aa_);
-            CqlDate ac_ = context.Operators.DateFrom(ab_);
-            return ac_;
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination1 as CqlDate);
+            CqlDateTime x_ = QICoreCommon_4_0_000.Instance.earliest(context, w_);
+            CqlDate y_ = context.Operators.DateFrom(x_);
+            return y_;
         }
 
         IEnumerable<CqlDate> g_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?, CqlDate>(e_, f_);
@@ -1687,16 +1672,12 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             }
             else
             {
-                CqlDateTime t_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination1 as CqlDate);
+                CqlDateTime t_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.NewBornVaccine3 as CqlDate);
                 CqlDateTime u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_);
                 CqlDate v_ = context.Operators.DateFrom(u_);
-                CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.NewBornVaccine3 as CqlDate);
-                CqlDateTime x_ = QICoreCommon_4_0_000.Instance.earliest(context, w_);
-                CqlDate y_ = context.Operators.DateFrom(x_);
-                CqlQuantity z_ = context.Operators.Quantity(1m, "day");
-                CqlDate aa_ = context.Operators.Add(y_, z_);
-                bool? ab_ = context.Operators.SameOrAfter(v_, aa_, (string)default);
-                s_ = r_ & ab_;
+                CqlDate w_ = context.Operators.Add(v_, p_);
+                bool? x_ = context.Operators.SameOrAfter(o_, w_, (string)default);
+                s_ = r_ & x_;
             }
             // CQL 'and' (390:5-392:114): right operand skipped when left is false
             if (s_ is false)
@@ -1705,26 +1686,22 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             }
             else
             {
-                CqlDateTime ac_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination2 as CqlDate);
-                CqlDateTime ad_ = QICoreCommon_4_0_000.Instance.earliest(context, ac_);
-                CqlDate ae_ = context.Operators.DateFrom(ad_);
-                CqlDateTime af_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.NewBornVaccine3 as CqlDate);
-                CqlDateTime ag_ = QICoreCommon_4_0_000.Instance.earliest(context, af_);
-                CqlDate ah_ = context.Operators.DateFrom(ag_);
-                CqlQuantity ai_ = context.Operators.Quantity(1m, "day");
-                CqlDate aj_ = context.Operators.Add(ah_, ai_);
-                bool? ak_ = context.Operators.SameOrAfter(ae_, aj_, (string)default);
-                return s_ & ak_;
+                CqlDateTime y_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.NewBornVaccine3 as CqlDate);
+                CqlDateTime z_ = QICoreCommon_4_0_000.Instance.earliest(context, y_);
+                CqlDate aa_ = context.Operators.DateFrom(z_);
+                CqlDate ab_ = context.Operators.Add(aa_, p_);
+                bool? ac_ = context.Operators.SameOrAfter(l_, ab_, (string)default);
+                return s_ & ac_;
             }
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?> f_ = context.Operators.SelectWhere<ValueTuple<CqlDate, CqlDate, CqlDate>, (CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?>(c_, d_, e_);
 
         CqlDate g_((CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)? tuple_hdfambzgbwdpfetgqnfbceeeg) {
-            CqlDateTime al_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination1 as CqlDate);
-            CqlDateTime am_ = QICoreCommon_4_0_000.Instance.earliest(context, al_);
-            CqlDate an_ = context.Operators.DateFrom(am_);
-            return an_;
+            CqlDateTime ad_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination1 as CqlDate);
+            CqlDateTime ae_ = QICoreCommon_4_0_000.Instance.earliest(context, ad_);
+            CqlDate af_ = context.Operators.DateFrom(ae_);
+            return af_;
         }
 
         IEnumerable<CqlDate> h_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?, CqlDate>(f_, g_);
@@ -1964,13 +1941,9 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime s_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination3 as CqlDate);
                 CqlDateTime t_ = QICoreCommon_4_0_000.Instance.earliest(context, s_);
                 CqlDate u_ = context.Operators.DateFrom(t_);
-                CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination2 as CqlDate);
-                CqlDateTime w_ = QICoreCommon_4_0_000.Instance.earliest(context, v_);
-                CqlDate x_ = context.Operators.DateFrom(w_);
-                CqlQuantity y_ = context.Operators.Quantity(1m, "day");
-                CqlDate z_ = context.Operators.Add(x_, y_);
-                bool? aa_ = context.Operators.SameOrAfter(u_, z_, (string)default);
-                r_ = q_ & aa_;
+                CqlDate v_ = context.Operators.Add(k_, o_);
+                bool? w_ = context.Operators.SameOrAfter(u_, v_, (string)default);
+                r_ = q_ & w_;
             }
             // CQL 'and' (430:5-432:125): right operand skipped when left is false
             if (r_ is false)
@@ -1979,26 +1952,25 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             }
             else
             {
-                CqlDateTime ab_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination4 as CqlDate);
-                CqlDateTime ac_ = QICoreCommon_4_0_000.Instance.earliest(context, ab_);
-                CqlDate ad_ = context.Operators.DateFrom(ac_);
-                CqlDateTime ae_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination3 as CqlDate);
-                CqlDateTime af_ = QICoreCommon_4_0_000.Instance.earliest(context, ae_);
-                CqlDate ag_ = context.Operators.DateFrom(af_);
-                CqlQuantity ah_ = context.Operators.Quantity(1m, "day");
-                CqlDate ai_ = context.Operators.Add(ag_, ah_);
-                bool? aj_ = context.Operators.SameOrAfter(ad_, ai_, (string)default);
-                return r_ & aj_;
+                CqlDateTime x_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination4 as CqlDate);
+                CqlDateTime y_ = QICoreCommon_4_0_000.Instance.earliest(context, x_);
+                CqlDate z_ = context.Operators.DateFrom(y_);
+                CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination3 as CqlDate);
+                CqlDateTime ab_ = QICoreCommon_4_0_000.Instance.earliest(context, aa_);
+                CqlDate ac_ = context.Operators.DateFrom(ab_);
+                CqlDate ad_ = context.Operators.Add(ac_, o_);
+                bool? ae_ = context.Operators.SameOrAfter(z_, ad_, (string)default);
+                return r_ & ae_;
             }
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?> e_ = context.Operators.SelectWhere<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, (CqlTupleMetadata, CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?>(b_, c_, d_);
 
         CqlDate f_((CqlTupleMetadata, CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)? tuple_ddpdeojhpyesfhgcocbnoippp) {
-            CqlDateTime ak_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination1 as CqlDate);
-            CqlDateTime al_ = QICoreCommon_4_0_000.Instance.earliest(context, ak_);
-            CqlDate am_ = context.Operators.DateFrom(al_);
-            return am_;
+            CqlDateTime af_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination1 as CqlDate);
+            CqlDateTime ag_ = QICoreCommon_4_0_000.Instance.earliest(context, af_);
+            CqlDate ah_ = context.Operators.DateFrom(ag_);
+            return ah_;
         }
 
         IEnumerable<CqlDate> g_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?, CqlDate>(e_, f_);
@@ -2318,34 +2290,31 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             }
             else
             {
-                IEnumerable<CqlDate> q_ = this.Rotavirus_3_Dose_Immunizations_or_Procedures(context);
-                int? r_ = context.Operators.Count<CqlDate>(q_);
-                bool? s_ = context.Operators.Greater(r_, 0);
-                bool? t_ = context.Operators.IsFalse(s_);
-                bool? u_;
+                bool? q_ = context.Operators.IsFalse(f_);
+                bool? r_;
                 // CQL 'and' (484:12-489:9): right operand skipped when left is false
-                if (t_ is false)
+                if (q_ is false)
                 {
-                    u_ = false;
+                    r_ = false;
                 }
                 else
                 {
-                    IEnumerable<CqlDate> v_ = this.Rotavirus_2_or_3_Dose_Immunizations(context);
+                    IEnumerable<CqlDate> s_ = this.Rotavirus_2_or_3_Dose_Immunizations(context);
 
-                    CqlDate w_(CqlDate RotavirusVaccinations) {
-                        CqlDateTime ab_ = context.Operators.ConvertDateToDateTime(RotavirusVaccinations as CqlDate);
-                        CqlDateTime ac_ = QICoreCommon_4_0_000.Instance.earliest(context, ab_);
-                        CqlDate ad_ = context.Operators.DateFrom(ac_);
-                        return ad_;
+                    CqlDate t_(CqlDate RotavirusVaccinations) {
+                        CqlDateTime y_ = context.Operators.ConvertDateToDateTime(RotavirusVaccinations as CqlDate);
+                        CqlDateTime z_ = QICoreCommon_4_0_000.Instance.earliest(context, y_);
+                        CqlDate aa_ = context.Operators.DateFrom(z_);
+                        return aa_;
                     }
 
-                    IEnumerable<CqlDate> x_ = context.Operators.SelectDistinct<CqlDate, CqlDate>(v_, w_);
-                    IEnumerable<CqlDate> y_ = context.Operators.Distinct<CqlDate>(x_);
-                    int? z_ = context.Operators.Count<CqlDate>(y_);
-                    bool? aa_ = context.Operators.GreaterOrEqual(z_, 2);
-                    u_ = t_ & aa_;
+                    IEnumerable<CqlDate> u_ = context.Operators.SelectDistinct<CqlDate, CqlDate>(s_, t_);
+                    IEnumerable<CqlDate> v_ = context.Operators.Distinct<CqlDate>(u_);
+                    int? w_ = context.Operators.Count<CqlDate>(v_);
+                    bool? x_ = context.Operators.GreaterOrEqual(w_, 2);
+                    r_ = q_ & x_;
                 }
-                return g_ | u_;
+                return g_ | r_;
             }
         }
 

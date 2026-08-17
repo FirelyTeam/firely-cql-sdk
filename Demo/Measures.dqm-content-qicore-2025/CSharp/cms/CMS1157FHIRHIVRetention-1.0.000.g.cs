@@ -124,12 +124,10 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
         }
         else
         {
-            CodeableConcept j_ = condition?.VerificationStatus;
-            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
-            CqlCode l_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-            CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
-            bool? n_ = context.Operators.Equivalent(k_, m_);
-            f_ = e_ | n_;
+            CqlCode j_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(b_, k_);
+            f_ = e_ | l_;
         }
         bool? g_;
         // CQL 'or' (96:54-98:66): right operand skipped when left is true
@@ -139,12 +137,10 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
         }
         else
         {
-            CodeableConcept o_ = condition?.VerificationStatus;
-            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-            CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
-            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-            bool? s_ = context.Operators.Equivalent(p_, r_);
-            g_ = f_ | s_;
+            CqlCode m_ = QICoreCommon_4_0_000.Instance.provisional(context);
+            CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
+            bool? o_ = context.Operators.Equivalent(b_, n_);
+            g_ = f_ | o_;
         }
         bool? h_;
         // CQL 'or' (96:52-100:3): right operand skipped when left is true
@@ -154,12 +150,10 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
         }
         else
         {
-            CodeableConcept t_ = condition?.VerificationStatus;
-            CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-            CqlCode v_ = QICoreCommon_4_0_000.Instance.differential(context);
-            CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-            bool? x_ = context.Operators.Equivalent(u_, w_);
-            h_ = g_ | x_;
+            CqlCode p_ = QICoreCommon_4_0_000.Instance.differential(context);
+            CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+            bool? r_ = context.Operators.Equivalent(b_, q_);
+            h_ = g_ | r_;
         }
         bool? i_ = context.Operators.Implies(!((bool?)(b_ is null)), h_);
         return i_;
@@ -373,11 +367,9 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 {
                     CqlInterval<CqlDateTime> ay_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDiagnosis);
                     CqlDateTime az_ = context.Operators.Start(ay_);
-                    Period ba_ = ValidEncounter?.Period;
-                    CqlInterval<CqlDateTime> bb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ba_);
-                    CqlDateTime bc_ = context.Operators.Start(bb_);
-                    bool? bd_ = context.Operators.SameOrBefore(az_, bc_, "day");
-                    at_ = as_ & bd_;
+                    CqlDateTime ba_ = context.Operators.Start(aq_);
+                    bool? bb_ = context.Operators.SameOrBefore(az_, ba_, "day");
+                    at_ = as_ & bb_;
                 }
                 // CQL 'and' (53:19-56:41): right operand skipped when left is false
                 if (at_ is false)
@@ -386,8 +378,8 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 }
                 else
                 {
-                    bool? be_ = this.isVerified(context, HIVDiagnosis);
-                    return at_ & be_;
+                    bool? bc_ = this.isVerified(context, HIVDiagnosis);
+                    return at_ & bc_;
                 }
             }
 
@@ -464,17 +456,11 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                     }
                     else
                     {
-                        Period ad_ = EncounterWithHIV?.Period;
-                        CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
-                        CqlDateTime af_ = context.Operators.Start(ae_);
-                        DataType ag_ = ViralLoadTest?.Effective;
-                        object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        CqlInterval<CqlDateTime> ai_ = QICoreCommon_4_0_000.Instance.toInterval(context, ah_);
-                        CqlDateTime aj_ = context.Operators.End(ai_);
-                        CqlQuantity ak_ = context.Operators.Quantity(90m, "days");
-                        CqlDateTime al_ = context.Operators.Add(aj_, ak_);
-                        bool? am_ = context.Operators.SameOrAfter(af_, al_, "day");
-                        ac_ = ab_ | am_;
+                        CqlDateTime ad_ = context.Operators.Start(x_);
+                        CqlDateTime ae_ = context.Operators.End(u_);
+                        CqlDateTime af_ = context.Operators.Add(ae_, z_);
+                        bool? ag_ = context.Operators.SameOrAfter(ad_, af_, "day");
+                        ac_ = ab_ | ag_;
                     }
                     return m_ & ac_;
                 }

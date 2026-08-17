@@ -380,47 +380,47 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
             else
             {
                 object ad_;
-                DataType al_ = CataractSurgery?.Performed;
-                object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                bool an_ = am_ is CqlDateTime;
-                if (an_)
+                DataType ak_ = CataractSurgery?.Performed;
+                object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+                bool am_ = al_ is CqlDateTime;
+                if (am_)
                 {
-                    DataType ao_ = CataractSurgery?.Performed;
-                    object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    ad_ = ap_ as CqlDateTime;
+                    DataType an_ = CataractSurgery?.Performed;
+                    object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
+                    ad_ = ao_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType aq_ = CataractSurgery?.Performed;
-                    object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                    bool as_ = ar_ is CqlQuantity;
-                    if (as_)
+                    DataType ap_ = CataractSurgery?.Performed;
+                    object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
+                    bool ar_ = aq_ is CqlQuantity;
+                    if (ar_)
                     {
-                        DataType at_ = CataractSurgery?.Performed;
-                        object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        ad_ = au_ as CqlQuantity;
+                        DataType as_ = CataractSurgery?.Performed;
+                        object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
+                        ad_ = at_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType av_ = CataractSurgery?.Performed;
-                        object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                        bool ax_ = aw_ is CqlInterval<CqlDateTime>;
-                        if (ax_)
+                        DataType au_ = CataractSurgery?.Performed;
+                        object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
+                        bool aw_ = av_ is CqlInterval<CqlDateTime>;
+                        if (aw_)
                         {
-                            DataType ay_ = CataractSurgery?.Performed;
-                            object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                            ad_ = az_ as CqlInterval<CqlDateTime>;
+                            DataType ax_ = CataractSurgery?.Performed;
+                            object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
+                            ad_ = ay_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType ba_ = CataractSurgery?.Performed;
-                            object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                            bool bc_ = bb_ is CqlInterval<CqlQuantity>;
-                            if (bc_)
+                            DataType az_ = CataractSurgery?.Performed;
+                            object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
+                            bool bb_ = ba_ is CqlInterval<CqlQuantity>;
+                            if (bb_)
                             {
-                                DataType bd_ = CataractSurgery?.Performed;
-                                object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                                ad_ = be_ as CqlInterval<CqlQuantity>;
+                                DataType bc_ = CataractSurgery?.Performed;
+                                object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
+                                ad_ = bd_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -431,12 +431,11 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 }
                 CqlInterval<CqlDateTime> ae_ = QICoreCommon_4_0_000.Instance.toInterval(context, ad_);
                 CqlDateTime af_ = context.Operators.Start(ae_);
-                CqlInterval<CqlDateTime> ag_ = this.Measurement_Period(context);
-                CqlDateTime ah_ = context.Operators.End(ag_);
-                CqlQuantity ai_ = context.Operators.Quantity(92m, "days");
-                CqlDateTime aj_ = context.Operators.Subtract(ah_, ai_);
-                bool? ak_ = context.Operators.SameOrBefore(af_, aj_, "day");
-                i_ = h_ & ak_;
+                CqlDateTime ag_ = context.Operators.End(e_);
+                CqlQuantity ah_ = context.Operators.Quantity(92m, "days");
+                CqlDateTime ai_ = context.Operators.Subtract(ag_, ah_);
+                bool? aj_ = context.Operators.SameOrBefore(af_, ai_, "day");
+                i_ = h_ & aj_;
             }
             // CQL 'and' (86:5-88:46): right operand skipped when left is false
             if (i_ is false)
@@ -445,11 +444,11 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
             }
             else
             {
-                Code<EventStatus> bf_ = CataractSurgery?.StatusElement;
-                EventStatus? bg_ = bf_?.Value;
-                string bh_ = context.Operators.Convert<string>(bg_);
-                bool? bi_ = context.Operators.Equal(bh_, "completed");
-                return i_ & bi_;
+                Code<EventStatus> be_ = CataractSurgery?.StatusElement;
+                EventStatus? bf_ = be_?.Value;
+                string bg_ = context.Operators.Convert<string>(bf_);
+                bool? bh_ = context.Operators.Equal(bg_, "completed");
+                return i_ & bh_;
             }
         }
 
@@ -516,12 +515,10 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
         }
         else
         {
-            CodeableConcept j_ = condition?.VerificationStatus;
-            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
-            CqlCode l_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-            CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
-            bool? n_ = context.Operators.Equivalent(k_, m_);
-            f_ = e_ | n_;
+            CqlCode j_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(b_, k_);
+            f_ = e_ | l_;
         }
         bool? g_;
         // CQL 'or' (277:54-279:66): right operand skipped when left is true
@@ -531,12 +528,10 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
         }
         else
         {
-            CodeableConcept o_ = condition?.VerificationStatus;
-            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-            CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
-            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-            bool? s_ = context.Operators.Equivalent(p_, r_);
-            g_ = f_ | s_;
+            CqlCode m_ = QICoreCommon_4_0_000.Instance.provisional(context);
+            CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
+            bool? o_ = context.Operators.Equivalent(b_, n_);
+            g_ = f_ | o_;
         }
         bool? h_;
         // CQL 'or' (277:52-281:3): right operand skipped when left is true
@@ -546,12 +541,10 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
         }
         else
         {
-            CodeableConcept t_ = condition?.VerificationStatus;
-            CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-            CqlCode v_ = QICoreCommon_4_0_000.Instance.differential(context);
-            CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-            bool? x_ = context.Operators.Equivalent(u_, w_);
-            h_ = g_ | x_;
+            CqlCode p_ = QICoreCommon_4_0_000.Instance.differential(context);
+            CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+            bool? r_ = context.Operators.Equivalent(b_, q_);
+            h_ = g_ | r_;
         }
         bool? i_ = context.Operators.Implies(!((bool?)(b_ is null)), h_);
         return i_;

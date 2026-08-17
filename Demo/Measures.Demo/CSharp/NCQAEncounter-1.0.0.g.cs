@@ -127,11 +127,10 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
             }
             else
             {
-                Coding f_ = E?.Class;
-                CqlCode g_ = FHIRHelpers_4_0_001.Instance.ToCode(context, f_);
-                CqlCode h_ = NCQATerminology_1_0_0.Instance.@virtual(context);
-                bool? i_ = context.Operators.Equivalent(g_, h_);
-                return e_ & i_;
+                CqlCode f_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
+                CqlCode g_ = NCQATerminology_1_0_0.Instance.@virtual(context);
+                bool? h_ = context.Operators.Equivalent(f_, g_);
+                return e_ & h_;
             }
         }
 
@@ -155,25 +154,24 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
             }
             else
             {
-                Coding f_ = E?.Class;
-                CqlCode g_ = FHIRHelpers_4_0_001.Instance.ToCode(context, f_);
-                CqlCode h_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
-                bool? i_ = context.Operators.Equivalent(g_, h_);
-                bool? j_;
+                CqlCode f_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
+                CqlCode g_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
+                bool? h_ = context.Operators.Equivalent(f_, g_);
+                bool? i_;
                 // CQL 'or' (40:11-42:7): right operand skipped when left is true
-                if (i_ is true)
+                if (h_ is true)
                 {
-                    j_ = true;
+                    i_ = true;
                 }
                 else
                 {
-                    Coding k_ = E?.Class;
-                    CqlCode l_ = FHIRHelpers_4_0_001.Instance.ToCode(context, k_);
-                    CqlCode m_ = NCQATerminology_1_0_0.Instance.home_health(context);
-                    bool? n_ = context.Operators.Equivalent(l_, m_);
-                    j_ = i_ | n_;
+                    Coding j_ = E?.Class;
+                    CqlCode k_ = FHIRHelpers_4_0_001.Instance.ToCode(context, j_);
+                    CqlCode l_ = NCQATerminology_1_0_0.Instance.home_health(context);
+                    bool? m_ = context.Operators.Equivalent(k_, l_);
+                    i_ = h_ | m_;
                 }
-                return e_ & j_;
+                return e_ & i_;
             }
         }
 
@@ -197,11 +195,10 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
             }
             else
             {
-                Coding f_ = E?.Class;
-                CqlCode g_ = FHIRHelpers_4_0_001.Instance.ToCode(context, f_);
-                CqlCode h_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
-                bool? i_ = context.Operators.Equivalent(g_, h_);
-                return e_ & i_;
+                CqlCode f_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
+                CqlCode g_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
+                bool? h_ = context.Operators.Equivalent(f_, g_);
+                return e_ & h_;
             }
         }
 

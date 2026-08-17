@@ -534,12 +534,9 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     }
                     else
                     {
-                        Encounter.HospitalizationComponent at_ = InpatientEncounter?.Hospitalization;
-                        CodeableConcept au_ = at_?.DischargeDisposition;
-                        CqlConcept av_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, au_);
-                        CqlValueSet aw_ = this.Hospice_Care_Referral_or_Admission(context);
-                        bool? ax_ = context.Operators.ConceptInValueSet(av_, aw_);
-                        as_ = ar_ | ax_;
+                        CqlValueSet at_ = this.Hospice_Care_Referral_or_Admission(context);
+                        bool? au_ = context.Operators.ConceptInValueSet(ap_, at_);
+                        as_ = ar_ | au_;
                     }
                     // CQL 'or' (85:33-87:113): right operand skipped when left is true
                     if (as_ is true)
@@ -548,12 +545,9 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     }
                     else
                     {
-                        Encounter.HospitalizationComponent ay_ = InpatientEncounter?.Hospitalization;
-                        CodeableConcept az_ = ay_?.DischargeDisposition;
-                        CqlConcept ba_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, az_);
-                        CqlValueSet bb_ = this.Patient_Expired(context);
-                        bool? bc_ = context.Operators.ConceptInValueSet(ba_, bb_);
-                        return as_ | bc_;
+                        CqlValueSet av_ = this.Patient_Expired(context);
+                        bool? aw_ = context.Operators.ConceptInValueSet(ap_, av_);
+                        return as_ | aw_;
                     }
                 }
 

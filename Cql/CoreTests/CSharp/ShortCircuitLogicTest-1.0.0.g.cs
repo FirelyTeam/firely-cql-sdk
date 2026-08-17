@@ -64,8 +64,7 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
         }
         else
         {
-            bool? b_ = this.TrueDef(context);
-            return a_ & b_;
+            return a_ & a_;
         }
     }
 
@@ -152,8 +151,7 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
         }
         else
         {
-            bool? b_ = this.FalseDef(context);
-            return a_ & b_;
+            return a_ & a_;
         }
     }
 
@@ -240,8 +238,7 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
         }
         else
         {
-            bool? b_ = this.NullDef(context);
-            return a_ & b_;
+            return a_ & a_;
         }
     }
 
@@ -262,8 +259,7 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
         }
         else
         {
-            bool? b_ = this.TrueDef(context);
-            return a_ | b_;
+            return a_ | a_;
         }
     }
 
@@ -350,8 +346,7 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
         }
         else
         {
-            bool? b_ = this.FalseDef(context);
-            return a_ | b_;
+            return a_ | a_;
         }
     }
 
@@ -438,8 +433,7 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
         }
         else
         {
-            bool? b_ = this.NullDef(context);
-            return a_ | b_;
+            return a_ | a_;
         }
     }
 

@@ -329,11 +329,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             }
             else
             {
-                CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, tuple_figmirinmncaavfkbmahdktce?.URI);
-                Period t_ = tuple_figmirinmncaavfkbmahdktce?.QualifyingEncounters?.Period;
-                CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
-                bool? v_ = context.Operators.OverlapsBefore(s_, u_, (string)default);
-                return r_ | v_;
+                bool? s_ = context.Operators.OverlapsBefore(n_, q_, (string)default);
+                return r_ | s_;
             }
         }
 
@@ -546,10 +543,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 }
                 else
                 {
-                    Period aj_ = EncounterWithURI?.Period;
-                    CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
-                    CqlDateTime al_ = context.Operators.Start(ak_);
-                    return ai_ & (!((bool?)(al_ is null)));
+                    return ai_ & (!((bool?)(ae_ is null)));
                 }
             }
 
@@ -591,16 +585,9 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             }
             else
             {
-                Patient o_ = this.Patient(context);
-                Date p_ = o_?.BirthDateElement;
-                string q_ = p_?.Value;
-                CqlDate r_ = context.Operators.ConvertStringToDate(q_);
-                CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                CqlDateTime t_ = context.Operators.Start(s_);
-                CqlDate u_ = context.Operators.DateFrom(t_);
-                int? v_ = context.Operators.CalculateAgeAt(r_, u_, "year");
-                bool? w_ = context.Operators.LessOrEqual(v_, 17);
-                return n_ & w_;
+                int? o_ = context.Operators.CalculateAgeAt(i_, l_, "year");
+                bool? p_ = context.Operators.LessOrEqual(o_, 17);
+                return n_ & p_;
             }
         }
 

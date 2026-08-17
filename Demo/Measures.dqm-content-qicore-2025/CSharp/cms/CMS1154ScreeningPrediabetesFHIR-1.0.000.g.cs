@@ -177,12 +177,10 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             }
             else
             {
-                CodeableConcept l_ = C?.VerificationStatus;
-                CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
-                CqlCode n_ = this.unconfirmed(context);
-                CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
-                bool? p_ = context.Operators.Equivalent(m_, o_);
-                h_ = g_ | p_;
+                CqlCode l_ = this.unconfirmed(context);
+                CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
+                bool? n_ = context.Operators.Equivalent(d_, m_);
+                h_ = g_ | n_;
             }
             bool? i_;
             // CQL 'or' (42:54-44:47): right operand skipped when left is true
@@ -192,12 +190,10 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             }
             else
             {
-                CodeableConcept q_ = C?.VerificationStatus;
-                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                CqlCode s_ = this.provisional(context);
-                CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
-                bool? u_ = context.Operators.Equivalent(r_, t_);
-                i_ = h_ | u_;
+                CqlCode o_ = this.provisional(context);
+                CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+                bool? q_ = context.Operators.Equivalent(d_, p_);
+                i_ = h_ | q_;
             }
             bool? j_;
             // CQL 'or' (42:52-46:5): right operand skipped when left is true
@@ -207,12 +203,10 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             }
             else
             {
-                CodeableConcept v_ = C?.VerificationStatus;
-                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
-                CqlCode x_ = this.differential(context);
-                CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
-                bool? z_ = context.Operators.Equivalent(w_, y_);
-                j_ = i_ | z_;
+                CqlCode r_ = this.differential(context);
+                CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
+                bool? t_ = context.Operators.Equivalent(d_, s_);
+                j_ = i_ | t_;
             }
             bool? k_ = context.Operators.Implies(!((bool?)(d_ is null)), j_);
             return k_;
@@ -353,16 +347,8 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         }
         else
         {
-            Patient j_ = this.Patient(context);
-            Date k_ = j_?.BirthDateElement;
-            string l_ = k_?.Value;
-            CqlDate m_ = context.Operators.ConvertStringToDate(l_);
-            CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-            CqlDateTime o_ = context.Operators.Start(n_);
-            CqlDate p_ = context.Operators.DateFrom(o_);
-            int? q_ = context.Operators.CalculateAgeAt(m_, p_, "year");
-            bool? r_ = context.Operators.LessOrEqual(q_, 70);
-            return i_ & r_;
+            bool? j_ = context.Operators.LessOrEqual(h_, 70);
+            return i_ & j_;
         }
     }
 

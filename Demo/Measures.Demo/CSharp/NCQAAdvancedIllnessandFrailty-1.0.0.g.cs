@@ -604,27 +604,19 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         }
         else
         {
-            Patient u_ = this.Patient(context);
-            Date v_ = u_?.BirthDateElement;
-            string w_ = v_?.Value;
-            CqlDate x_ = context.Operators.ConvertStringToDate(w_);
-            CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
-            CqlDateTime z_ = context.Operators.End(y_);
-            CqlDate aa_ = context.Operators.DateFrom(z_);
-            int? ab_ = context.Operators.CalculateAgeAt(x_, aa_, "year");
-            bool? ac_ = context.Operators.GreaterOrEqual(ab_, 81);
-            bool? ad_;
+            bool? u_ = context.Operators.GreaterOrEqual(h_, 81);
+            bool? v_;
             // CQL 'and' (40:8-44:5): right operand skipped when left is false
-            if (ac_ is false)
+            if (u_ is false)
             {
-                ad_ = false;
+                v_ = false;
             }
             else
             {
-                bool? ae_ = this.Has_Criteria_Indicating_Frailty(context);
-                ad_ = ac_ & ae_;
+                bool? w_ = this.Has_Criteria_Indicating_Frailty(context);
+                v_ = u_ & w_;
             }
-            return l_ | ad_;
+            return l_ | v_;
         }
     }
 

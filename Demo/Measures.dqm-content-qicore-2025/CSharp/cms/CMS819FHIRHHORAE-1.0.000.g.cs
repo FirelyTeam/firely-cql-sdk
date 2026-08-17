@@ -115,12 +115,10 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             }
             else
             {
-                Period p_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
-                CqlDateTime r_ = context.Operators.End(q_);
-                CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
-                o_ = n_ & t_;
+                CqlDateTime p_ = context.Operators.End(j_);
+                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
+                bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
+                o_ = n_ & r_;
             }
             // CQL 'and' (42:5-44:48): right operand skipped when left is false
             if (o_ is false)
@@ -129,11 +127,11 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             }
             else
             {
-                Code<Encounter.EncounterStatus> u_ = InpatientEncounter?.StatusElement;
-                Encounter.EncounterStatus? v_ = u_?.Value;
-                Code<Encounter.EncounterStatus> w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
-                bool? x_ = context.Operators.Equal(w_, "finished");
-                return o_ & x_;
+                Code<Encounter.EncounterStatus> s_ = InpatientEncounter?.StatusElement;
+                Encounter.EncounterStatus? t_ = s_?.Value;
+                Code<Encounter.EncounterStatus> u_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(t_);
+                bool? v_ = context.Operators.Equal(u_, "finished");
+                return o_ & v_;
             }
         }
 
@@ -437,9 +435,8 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
                     CqlInterval<CqlDateTime> ao_ = QICoreCommon_4_0_000.Instance.toInterval(context, an_);
                     CqlDateTime ap_ = context.Operators.Start(ao_);
-                    CqlInterval<CqlDateTime> aq_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, tuple_htckrtcfdeaiwittzheehxihp?.InpatientHospitalization);
-                    bool? ar_ = context.Operators.In<CqlDateTime>(ap_, aq_, (string)default);
-                    aj_ = ai_ & ar_;
+                    bool? aq_ = context.Operators.In<CqlDateTime>(ap_, ah_, (string)default);
+                    aj_ = ai_ & aq_;
                 }
                 bool? ak_;
                 // CQL 'and' (84:13-86:145): right operand skipped when left is false
@@ -449,33 +446,29 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                 }
                 else
                 {
-                    DataType as_ = tuple_htckrtcfdeaiwittzheehxihp?.OpioidGiven?.Effective;
-                    object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
-                    CqlInterval<CqlDateTime> au_ = QICoreCommon_4_0_000.Instance.toInterval(context, at_);
-                    CqlDateTime av_ = context.Operators.End(au_);
-                    DataType aw_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Effective;
-                    object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                    CqlInterval<CqlDateTime> ay_ = QICoreCommon_4_0_000.Instance.toInterval(context, ax_);
-                    CqlDateTime az_ = context.Operators.Start(ay_);
-                    CqlQuantity ba_ = context.Operators.Quantity(12m, "hours");
-                    CqlDateTime bb_ = context.Operators.Subtract(az_, ba_);
-                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(bb_, az_, true, false);
-                    bool? bd_ = context.Operators.In<CqlDateTime>(av_, bc_, (string)default);
-                    bool? be_;
+                    DataType ar_ = tuple_htckrtcfdeaiwittzheehxihp?.OpioidGiven?.Effective;
+                    object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
+                    CqlInterval<CqlDateTime> at_ = QICoreCommon_4_0_000.Instance.toInterval(context, as_);
+                    CqlDateTime au_ = context.Operators.End(at_);
+                    CqlQuantity av_ = context.Operators.Quantity(12m, "hours");
+                    CqlDateTime aw_ = context.Operators.Subtract(ag_, av_);
+                    CqlInterval<CqlDateTime> ax_ = context.Operators.Interval(aw_, ag_, true, false);
+                    bool? ay_ = context.Operators.In<CqlDateTime>(au_, ax_, (string)default);
+                    bool? az_;
                     // CQL 'and' (86:15-86:145): right operand skipped when left is false
-                    if (bd_ is false)
+                    if (ay_ is false)
                     {
-                        be_ = false;
+                        az_ = false;
                     }
                     else
                     {
-                        DataType bf_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Effective;
-                        object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
-                        CqlInterval<CqlDateTime> bh_ = QICoreCommon_4_0_000.Instance.toInterval(context, bg_);
-                        CqlDateTime bi_ = context.Operators.Start(bh_);
-                        be_ = bd_ & (!((bool?)(bi_ is null)));
+                        DataType ba_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Effective;
+                        object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
+                        CqlInterval<CqlDateTime> bc_ = QICoreCommon_4_0_000.Instance.toInterval(context, bb_);
+                        CqlDateTime bd_ = context.Operators.Start(bc_);
+                        az_ = ay_ & (!((bool?)(bd_ is null)));
                     }
-                    ak_ = aj_ & be_;
+                    ak_ = aj_ & az_;
                 }
                 bool? al_;
                 // CQL 'and' (84:11-88:7): right operand skipped when left is false
@@ -485,12 +478,12 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                 }
                 else
                 {
-                    MedicationAdministration.DosageComponent bj_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Dosage;
-                    CodeableConcept bk_ = bj_?.Route;
-                    CqlConcept bl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bk_);
-                    CqlValueSet bm_ = this.Routes_of_Administration_for_Opioid_Antagonists(context);
-                    bool? bn_ = context.Operators.ConceptInValueSet(bl_, bm_);
-                    al_ = ak_ & bn_;
+                    MedicationAdministration.DosageComponent be_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Dosage;
+                    CodeableConcept bf_ = be_?.Route;
+                    CqlConcept bg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bf_);
+                    CqlValueSet bh_ = this.Routes_of_Administration_for_Opioid_Antagonists(context);
+                    bool? bi_ = context.Operators.ConceptInValueSet(bg_, bh_);
+                    al_ = ak_ & bi_;
                 }
                 return n_ & al_;
             }

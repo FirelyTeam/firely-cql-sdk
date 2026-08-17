@@ -76,18 +76,17 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
             }
             else
             {
-                CqlDate o_ = context.Operators.Start(tuple_banhuzxcqbuklngedwddhjyv?.Coverage2);
-                return n_ & (!((bool?)(o_ is null)));
+                return n_ & (!((bool?)(i_ is null)));
             }
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?> d_ = context.Operators.SelectWhere<ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>>, (CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?>(a_, b_, c_);
 
         CqlInterval<CqlDate> e_((CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)? tuple_banhuzxcqbuklngedwddhjyv) {
-            CqlDate p_ = context.Operators.Start(tuple_banhuzxcqbuklngedwddhjyv?.Coverage1);
-            CqlDate q_ = context.Operators.End(tuple_banhuzxcqbuklngedwddhjyv?.Coverage2);
-            CqlInterval<CqlDate> r_ = context.Operators.Interval(p_, q_, true, true);
-            return r_;
+            CqlDate o_ = context.Operators.Start(tuple_banhuzxcqbuklngedwddhjyv?.Coverage1);
+            CqlDate p_ = context.Operators.End(tuple_banhuzxcqbuklngedwddhjyv?.Coverage2);
+            CqlInterval<CqlDate> q_ = context.Operators.Interval(o_, p_, true, true);
+            return q_;
         }
 
         IEnumerable<CqlInterval<CqlDate>> f_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?, CqlInterval<CqlDate>>(d_, e_);
@@ -201,10 +200,9 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
                 }
                 else
                 {
-                    CqlCode m_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
-                    CqlCode n_ = NCQATerminology_1_0_0.Instance.retiree_health_program(context);
-                    bool? o_ = context.Operators.Equivalent(m_, n_);
-                    l_ = k_ | o_;
+                    CqlCode m_ = NCQATerminology_1_0_0.Instance.retiree_health_program(context);
+                    bool? n_ = context.Operators.Equivalent(i_, m_);
+                    l_ = k_ | n_;
                 }
                 // CQL 'or' (56:7-59:7): right operand skipped when left is true
                 if (l_ is true)
@@ -213,10 +211,9 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
                 }
                 else
                 {
-                    CqlCode p_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
-                    CqlCode q_ = NCQATerminology_1_0_0.Instance.subsidized_health_program(context);
-                    bool? r_ = context.Operators.Equivalent(p_, q_);
-                    return l_ | r_;
+                    CqlCode o_ = NCQATerminology_1_0_0.Instance.subsidized_health_program(context);
+                    bool? p_ = context.Operators.Equivalent(i_, o_);
+                    return l_ | p_;
                 }
             }
 

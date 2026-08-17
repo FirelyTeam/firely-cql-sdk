@@ -663,19 +663,18 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         }
         else
         {
-            bool? e_ = this.Has_Left_Eye_Retinopathy(context);
-            bool? f_;
+            bool? e_;
             // CQL 'and' (135:8-137:5): right operand skipped when left is false
-            if (e_ is false)
+            if (a_ is false)
             {
-                f_ = false;
+                e_ = false;
             }
             else
             {
-                bool? g_ = this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context);
-                f_ = e_ & g_;
+                bool? f_ = this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context);
+                e_ = a_ & f_;
             }
-            c_ = b_ | f_;
+            c_ = b_ | e_;
         }
         // CQL 'or' (132:3-140:5): right operand skipped when left is true
         if (c_ is true)
@@ -684,19 +683,19 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         }
         else
         {
-            bool? h_ = this.Has_Right_Eye_Retinopathy(context);
-            bool? i_;
+            bool? g_ = this.Has_Right_Eye_Retinopathy(context);
+            bool? h_;
             // CQL 'and' (138:8-140:5): right operand skipped when left is false
-            if (h_ is false)
+            if (g_ is false)
             {
-                i_ = false;
+                h_ = false;
             }
             else
             {
-                bool? j_ = this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context);
-                i_ = h_ & j_;
+                bool? i_ = this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context);
+                h_ = g_ & i_;
             }
-            return c_ | i_;
+            return c_ | h_;
         }
     }
 
@@ -751,20 +750,19 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         }
         else
         {
-            bool? g_ = this.Diabetic_Retinopathy_Overlapping_Measurement_Period(context);
-            bool? h_ = !g_;
-            bool? i_;
+            bool? g_ = !a_;
+            bool? h_;
             // CQL 'and' (74:8-76:5): right operand skipped when left is false
-            if (h_ is false)
+            if (g_ is false)
             {
-                i_ = false;
+                h_ = false;
             }
             else
             {
-                bool? j_ = this.Retinal_Exam_in_Measurement_Period_or_Year_Prior(context);
-                i_ = h_ & j_;
+                bool? i_ = this.Retinal_Exam_in_Measurement_Period_or_Year_Prior(context);
+                h_ = g_ & i_;
             }
-            c_ = b_ | i_;
+            c_ = b_ | h_;
         }
         bool? d_;
         // CQL 'or' (71:3-77:50): right operand skipped when left is true
@@ -774,8 +772,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         }
         else
         {
-            bool? k_ = this.Autonomous_Eye_Exam_in_Measurement_Period(context);
-            d_ = c_ | k_;
+            bool? j_ = this.Autonomous_Eye_Exam_in_Measurement_Period(context);
+            d_ = c_ | j_;
         }
         bool? e_;
         // CQL 'or' (71:3-78:83): right operand skipped when left is true
@@ -785,8 +783,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         }
         else
         {
-            bool? l_ = this.Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(context);
-            e_ = d_ | l_;
+            bool? k_ = this.Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(context);
+            e_ = d_ | k_;
         }
         // CQL 'or' (71:3-79:78): right operand skipped when left is true
         if (e_ is true)
@@ -795,8 +793,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         }
         else
         {
-            bool? m_ = this.Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior(context);
-            return e_ | m_;
+            bool? l_ = this.Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior(context);
+            return e_ | l_;
         }
     }
 

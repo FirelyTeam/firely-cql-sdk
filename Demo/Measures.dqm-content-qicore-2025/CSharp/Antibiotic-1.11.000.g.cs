@@ -104,10 +104,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
                 }
                 else
                 {
-                    Period p_ = episode?.Period;
-                    CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
-                    CqlDateTime r_ = context.Operators.Start(q_);
-                    return o_ & (!((bool?)(r_ is null)));
+                    return o_ & (!((bool?)(k_ is null)));
                 }
             }
 

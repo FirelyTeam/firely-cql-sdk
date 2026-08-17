@@ -198,42 +198,40 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         }
         else
         {
-            CodeableConcept d_ = condition?.VerificationStatus;
-            CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
-            CqlCode f_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-            CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
-            bool? h_ = context.Operators.Equivalent(e_, g_);
-            bool? i_;
+            CqlCode d_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+            CqlConcept e_ = context.Operators.ConvertCodeToConcept(d_);
+            bool? f_ = context.Operators.Equivalent(b_, e_);
+            bool? g_;
             // CQL 'or' (177:14-178:64): right operand skipped when left is true
-            if (h_ is true)
+            if (f_ is true)
             {
-                i_ = true;
+                g_ = true;
             }
             else
             {
-                CodeableConcept k_ = condition?.VerificationStatus;
-                CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_);
-                CqlCode m_ = QICoreCommon_4_0_000.Instance.refuted(context);
-                CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
-                bool? o_ = context.Operators.Equivalent(l_, n_);
-                i_ = h_ | o_;
+                CodeableConcept i_ = condition?.VerificationStatus;
+                CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, i_);
+                CqlCode k_ = QICoreCommon_4_0_000.Instance.refuted(context);
+                CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
+                bool? m_ = context.Operators.Equivalent(j_, l_);
+                g_ = f_ | m_;
             }
-            bool? j_;
+            bool? h_;
             // CQL 'or' (177:12-180:5): right operand skipped when left is true
-            if (i_ is true)
+            if (g_ is true)
             {
-                j_ = true;
+                h_ = true;
             }
             else
             {
-                CodeableConcept p_ = condition?.VerificationStatus;
-                CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
-                CqlCode r_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-                CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
-                bool? t_ = context.Operators.Equivalent(q_, s_);
-                j_ = i_ | t_;
+                CodeableConcept n_ = condition?.VerificationStatus;
+                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
+                CqlCode p_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+                bool? r_ = context.Operators.Equivalent(o_, q_);
+                h_ = g_ | r_;
             }
-            return c_ | !j_;
+            return c_ | !h_;
         }
     }
 
@@ -723,9 +721,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
-                    CqlDateTime s_ = context.Operators.Start(r_);
-                    return q_ & (!((bool?)(s_ is null)));
+                    return q_ & (!((bool?)(m_ is null)));
                 }
             }
 
@@ -736,8 +732,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> c_ = context.Operators.Where<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(a_, b_);
 
         object d_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? @this) {
-            CqlDateTime t_ = @this?.effectiveDatetime;
-            return t_;
+            CqlDateTime r_ = @this?.effectiveDatetime;
+            return r_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> e_ = context.Operators.SortBy<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
@@ -857,9 +853,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> u_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
-                    CqlDateTime v_ = context.Operators.Start(u_);
-                    return t_ & (!((bool?)(v_ is null)));
+                    return t_ & (!((bool?)(p_ is null)));
                 }
             }
 
@@ -870,8 +864,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
         bool? g_(Condition UrinaryRetention) {
-            bool? w_ = this.verificationStatusIsNotInvalid(context, UrinaryRetention);
-            return w_;
+            bool? u_ = this.verificationStatusIsNotInvalid(context, UrinaryRetention);
+            return u_;
         }
 
         IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
@@ -962,11 +956,10 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MorbidObesityDiagnosis);
-                    CqlDateTime q_ = context.Operators.Start(p_);
-                    CqlDateTime r_ = FollowUpUSSAssessment?.effectiveDatetime;
-                    bool? s_ = context.Operators.SameOrBefore(q_, r_, (string)default);
-                    return o_ & s_;
+                    CqlDateTime p_ = context.Operators.Start(m_);
+                    CqlDateTime q_ = FollowUpUSSAssessment?.effectiveDatetime;
+                    bool? r_ = context.Operators.SameOrBefore(p_, q_, (string)default);
+                    return o_ & r_;
                 }
             }
 
@@ -977,8 +970,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
         bool? g_(Condition MorbidObesityDiagnosis) {
-            bool? t_ = this.verificationStatusIsNotInvalid(context, MorbidObesityDiagnosis);
-            return t_;
+            bool? s_ = this.verificationStatusIsNotInvalid(context, MorbidObesityDiagnosis);
+            return s_;
         }
 
         IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);

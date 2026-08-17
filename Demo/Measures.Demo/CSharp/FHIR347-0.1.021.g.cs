@@ -815,35 +815,33 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
         }
         else
         {
-            CqlValueSet v_ = this.Hospice_Care_Ambulatory(context);
-            IEnumerable<Procedure> w_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, v_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-            CqlValueSet x_ = this.Palliative_or_Hospice_Care(context);
-            IEnumerable<Procedure> y_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-            IEnumerable<Procedure> z_ = context.Operators.Union<Procedure>(w_, y_);
+            IEnumerable<Procedure> v_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+            IEnumerable<Procedure> w_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+            IEnumerable<Procedure> x_ = context.Operators.Union<Procedure>(v_, w_);
 
-            bool? aa_(Procedure PalliativeOrHospiceCarePerformed) {
-                DataType ac_ = PalliativeOrHospiceCarePerformed?.Performed;
-                CqlInterval<CqlDateTime> ad_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ac_);
-                CqlDateTime ae_ = context.Operators.Start(ad_);
-                CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
-                CqlDateTime ag_ = context.Operators.End(af_);
-                bool? ah_ = context.Operators.SameOrBefore(ae_, ag_, (string)default);
+            bool? y_(Procedure PalliativeOrHospiceCarePerformed) {
+                DataType aa_ = PalliativeOrHospiceCarePerformed?.Performed;
+                CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, aa_);
+                CqlDateTime ac_ = context.Operators.Start(ab_);
+                CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
+                CqlDateTime ae_ = context.Operators.End(ad_);
+                bool? af_ = context.Operators.SameOrBefore(ac_, ae_, (string)default);
                 // CQL 'and' (201:9-203:67): right operand skipped when left is false
-                if (ah_ is false)
+                if (af_ is false)
                 {
                     return false;
                 }
                 else
                 {
-                    Code<EventStatus> ai_ = PalliativeOrHospiceCarePerformed?.StatusElement;
-                    string aj_ = FHIRHelpers_4_0_001.Instance.ToString(context, ai_);
-                    bool? ak_ = context.Operators.Equal(aj_, "completed");
-                    return ah_ & ak_;
+                    Code<EventStatus> ag_ = PalliativeOrHospiceCarePerformed?.StatusElement;
+                    string ah_ = FHIRHelpers_4_0_001.Instance.ToString(context, ag_);
+                    bool? ai_ = context.Operators.Equal(ah_, "completed");
+                    return af_ & ai_;
                 }
             }
 
-            bool? ab_ = context.Operators.WhereAny<Procedure>(z_, aa_);
-            h_ = g_ | ab_;
+            bool? z_ = context.Operators.WhereAny<Procedure>(x_, y_);
+            h_ = g_ | z_;
         }
         // CQL 'or' (192:3-209:5): right operand skipped when left is true
         if (h_ is true)
@@ -852,33 +850,33 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
         }
         else
         {
-            CqlCode al_ = this.Encounter_for_palliative_care(context);
-            IEnumerable<CqlCode> am_ = context.Operators.ToList<CqlCode>(al_);
-            IEnumerable<Encounter> an_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, am_, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+            CqlCode aj_ = this.Encounter_for_palliative_care(context);
+            IEnumerable<CqlCode> ak_ = context.Operators.ToList<CqlCode>(aj_);
+            IEnumerable<Encounter> al_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, ak_, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
-            bool? ao_(Encounter PalliativeEncounter) {
-                Period aq_ = PalliativeEncounter?.Period;
-                CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, aq_);
-                CqlDateTime as_ = context.Operators.Start(ar_);
-                CqlInterval<CqlDateTime> at_ = this.Measurement_Period(context);
-                CqlDateTime au_ = context.Operators.End(at_);
-                bool? av_ = context.Operators.SameOrBefore(as_, au_, (string)default);
+            bool? am_(Encounter PalliativeEncounter) {
+                Period ao_ = PalliativeEncounter?.Period;
+                CqlInterval<CqlDateTime> ap_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ao_);
+                CqlDateTime aq_ = context.Operators.Start(ap_);
+                CqlInterval<CqlDateTime> ar_ = this.Measurement_Period(context);
+                CqlDateTime as_ = context.Operators.End(ar_);
+                bool? at_ = context.Operators.SameOrBefore(aq_, as_, (string)default);
                 // CQL 'and' (206:9-208:53): right operand skipped when left is false
-                if (av_ is false)
+                if (at_ is false)
                 {
                     return false;
                 }
                 else
                 {
-                    Code<Encounter.EncounterStatus> aw_ = PalliativeEncounter?.StatusElement;
-                    string ax_ = FHIRHelpers_4_0_001.Instance.ToString(context, aw_);
-                    bool? ay_ = context.Operators.Equal(ax_, "finished");
-                    return av_ & ay_;
+                    Code<Encounter.EncounterStatus> au_ = PalliativeEncounter?.StatusElement;
+                    string av_ = FHIRHelpers_4_0_001.Instance.ToString(context, au_);
+                    bool? aw_ = context.Operators.Equal(av_, "finished");
+                    return at_ & aw_;
                 }
             }
 
-            bool? ap_ = context.Operators.WhereAny<Encounter>(an_, ao_);
-            return h_ | ap_;
+            bool? an_ = context.Operators.WhereAny<Encounter>(al_, am_);
+            return h_ | an_;
         }
     }
 

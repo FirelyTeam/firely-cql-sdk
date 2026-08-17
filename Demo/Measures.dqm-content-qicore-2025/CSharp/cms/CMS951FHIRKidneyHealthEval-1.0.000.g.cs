@@ -206,12 +206,10 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 }
                 else
                 {
-                    CodeableConcept r_ = DiabetesDiagnosis?.VerificationStatus;
-                    CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
-                    CqlCode t_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-                    CqlConcept u_ = context.Operators.ConvertCodeToConcept(t_);
-                    bool? v_ = context.Operators.Equivalent(s_, u_);
-                    p_ = o_ & !v_;
+                    CqlCode r_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+                    CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
+                    bool? t_ = context.Operators.Equivalent(k_, s_);
+                    p_ = o_ & !t_;
                 }
                 bool? q_ = context.Operators.Implies(!((bool?)(k_ is null)), p_);
                 return i_ & q_;
@@ -375,12 +373,10 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 }
                 else
                 {
-                    CodeableConcept w_ = CKDOrESRD?.VerificationStatus;
-                    CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
-                    CqlCode y_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-                    CqlConcept z_ = context.Operators.ConvertCodeToConcept(y_);
-                    bool? aa_ = context.Operators.Equivalent(x_, z_);
-                    u_ = t_ & !aa_;
+                    CqlCode w_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+                    CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
+                    bool? y_ = context.Operators.Equivalent(p_, x_);
+                    u_ = t_ & !y_;
                 }
                 bool? v_ = context.Operators.Implies(!((bool?)(p_ is null)), u_);
                 return n_ & v_;
@@ -534,11 +530,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 }
                 else
                 {
-                    DataType u_ = uACRTest?.Value;
-                    object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    CqlValueSet w_ = this.Undetectable_Lab_Result_Value(context);
-                    bool? x_ = context.Operators.ConceptInValueSet(v_ as CqlConcept, w_);
-                    t_ = s_ | x_;
+                    CqlValueSet u_ = this.Undetectable_Lab_Result_Value(context);
+                    bool? v_ = context.Operators.ConceptInValueSet(q_ as CqlConcept, u_);
+                    t_ = s_ | v_;
                 }
                 return j_ & t_;
             }

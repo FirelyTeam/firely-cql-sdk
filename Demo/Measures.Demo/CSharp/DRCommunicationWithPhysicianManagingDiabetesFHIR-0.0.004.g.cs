@@ -415,11 +415,9 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 }
                 else
                 {
-                    CodeableConcept an_ = LevelOfSeverityNotCommunicated?.StatusReason;
-                    CqlConcept ao_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, an_);
-                    CqlValueSet ap_ = this.Patient_Reason(context);
-                    bool? aq_ = context.Operators.ConceptInValueSet(ao_, ap_);
-                    am_ = al_ | aq_;
+                    CqlValueSet an_ = this.Patient_Reason(context);
+                    bool? ao_ = context.Operators.ConceptInValueSet(aj_, an_);
+                    am_ = al_ | ao_;
                 }
                 return ad_ & am_;
             }
@@ -524,11 +522,9 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 }
                 else
                 {
-                    CodeableConcept ao_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
-                    CqlConcept ap_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ao_);
-                    CqlValueSet aq_ = this.Patient_Reason(context);
-                    bool? ar_ = context.Operators.ConceptInValueSet(ap_, aq_);
-                    an_ = am_ | ar_;
+                    CqlValueSet ao_ = this.Patient_Reason(context);
+                    bool? ap_ = context.Operators.ConceptInValueSet(ak_, ao_);
+                    an_ = am_ | ap_;
                 }
                 return ae_ & an_;
             }
@@ -632,11 +628,9 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 }
                 else
                 {
-                    CodeableConcept an_ = MacularEdemaPresentNotCommunicated?.StatusReason;
-                    CqlConcept ao_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, an_);
-                    CqlValueSet ap_ = this.Patient_Reason(context);
-                    bool? aq_ = context.Operators.ConceptInValueSet(ao_, ap_);
-                    am_ = al_ | aq_;
+                    CqlValueSet an_ = this.Patient_Reason(context);
+                    bool? ao_ = context.Operators.ConceptInValueSet(aj_, an_);
+                    am_ = al_ | ao_;
                 }
                 return ad_ & am_;
             }

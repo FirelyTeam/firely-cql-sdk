@@ -47,12 +47,9 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             }
             else
             {
-                CodeableConcept h_ = MedicalClaim?.Type;
-                CqlConcept i_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, h_);
-                IReadOnlyList<CqlCode> j_ = i_?.codes;
-                CqlCode k_ = NCQATerminology_1_0_0.Instance.Institutional(context);
-                bool? l_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
-                return g_ | l_;
+                CqlCode h_ = NCQATerminology_1_0_0.Instance.Institutional(context);
+                bool? i_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, h_);
+                return g_ | i_;
             }
         }
 
@@ -96,12 +93,9 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             }
             else
             {
-                CodeableConcept h_ = MedicalResponse?.Type;
-                CqlConcept i_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, h_);
-                IReadOnlyList<CqlCode> j_ = i_?.codes;
-                CqlCode k_ = NCQATerminology_1_0_0.Instance.Institutional(context);
-                bool? l_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
-                return g_ | l_;
+                CqlCode h_ = NCQATerminology_1_0_0.Instance.Institutional(context);
+                bool? i_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, h_);
+                return g_ | i_;
             }
         }
 
@@ -1662,31 +1656,30 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     }
                     else
                     {
-                        List<ClaimResponse.AdjudicationComponent> an_ = ResponseItem?.Adjudication;
 
-                        bool? ao_(ClaimResponse.AdjudicationComponent @this) {
+                        bool? an_(ClaimResponse.AdjudicationComponent @this) {
+                            Money as_ = @this?.Amount;
+                            return !((bool?)(as_ is null));
+                        }
+
+
+                        Money ao_(ClaimResponse.AdjudicationComponent @this) {
                             Money at_ = @this?.Amount;
-                            return !((bool?)(at_ is null));
+                            return at_;
                         }
 
+                        IEnumerable<Money> ap_ = context.Operators.WhereSelect<ClaimResponse.AdjudicationComponent, Money>((IEnumerable<ClaimResponse.AdjudicationComponent>)w_, an_, ao_);
 
-                        Money ap_(ClaimResponse.AdjudicationComponent @this) {
-                            Money au_ = @this?.Amount;
-                            return au_;
+                        bool? aq_(Money DollarAmount) {
+                            FhirDecimal au_ = DollarAmount?.ValueElement;
+                            decimal? av_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, au_);
+                            decimal? aw_ = context.Operators.ConvertIntegerToDecimal(0);
+                            bool? ax_ = context.Operators.Greater(av_, aw_);
+                            return ax_;
                         }
 
-                        IEnumerable<Money> aq_ = context.Operators.WhereSelect<ClaimResponse.AdjudicationComponent, Money>((IEnumerable<ClaimResponse.AdjudicationComponent>)an_, ao_, ap_);
-
-                        bool? ar_(Money DollarAmount) {
-                            FhirDecimal av_ = DollarAmount?.ValueElement;
-                            decimal? aw_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, av_);
-                            decimal? ax_ = context.Operators.ConvertIntegerToDecimal(0);
-                            bool? ay_ = context.Operators.Greater(aw_, ax_);
-                            return ay_;
-                        }
-
-                        bool? as_ = context.Operators.WhereAny<Money>(aq_, ar_);
-                        return af_ & as_;
+                        bool? ar_ = context.Operators.WhereAny<Money>(ap_, aq_);
+                        return af_ & ar_;
                     }
                 }
 

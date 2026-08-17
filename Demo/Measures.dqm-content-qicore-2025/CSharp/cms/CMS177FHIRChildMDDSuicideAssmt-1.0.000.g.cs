@@ -369,16 +369,8 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             }
             else
             {
-                Patient m_ = this.Patient(context);
-                Date n_ = m_?.BirthDateElement;
-                string o_ = n_?.Value;
-                CqlDate p_ = context.Operators.ConvertStringToDate(o_);
-                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-                CqlDateTime r_ = context.Operators.Start(q_);
-                CqlDate s_ = context.Operators.DateFrom(r_);
-                int? t_ = context.Operators.CalculateAgeAt(p_, s_, "year");
-                bool? u_ = context.Operators.LessOrEqual(t_, 16);
-                return l_ & u_;
+                bool? m_ = context.Operators.LessOrEqual(k_, 16);
+                return l_ & m_;
             }
         }
 

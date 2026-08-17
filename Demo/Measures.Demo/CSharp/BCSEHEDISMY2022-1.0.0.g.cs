@@ -196,18 +196,14 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         }
         else
         {
-            IEnumerable<Coverage> l_ = this.Member_Coverage(context);
-            CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
-            CqlDateTime n_ = context.Operators.End(m_);
-            CqlDate o_ = context.Operators.DateFrom(n_);
-            CqlDateTime p_ = context.Operators.Start(m_);
-            CqlDate q_ = context.Operators.DateFrom(p_);
-            CqlQuantity r_ = context.Operators.Quantity(1m, "year");
-            CqlDate s_ = context.Operators.Subtract(q_, r_);
-            CqlDate t_ = context.Operators.Subtract(o_, r_);
-            CqlInterval<CqlDate> u_ = context.Operators.Interval(s_, t_, true, true);
-            bool? v_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, l_, o_, u_, 45);
-            k_ = j_ & v_;
+            CqlDateTime l_ = context.Operators.Start(b_);
+            CqlDate m_ = context.Operators.DateFrom(l_);
+            CqlQuantity n_ = context.Operators.Quantity(1m, "year");
+            CqlDate o_ = context.Operators.Subtract(m_, n_);
+            CqlDate p_ = context.Operators.Subtract(d_, n_);
+            CqlInterval<CqlDate> q_ = context.Operators.Interval(o_, p_, true, true);
+            bool? r_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, d_, q_, 45);
+            k_ = j_ & r_;
         }
         // CQL 'and' (41:3-49:38): right operand skipped when left is false
         if (k_ is false)
@@ -216,15 +212,11 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         }
         else
         {
-            IEnumerable<Coverage> w_ = this.Member_Coverage(context);
-            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
-            CqlDateTime y_ = context.Operators.End(x_);
-            CqlDate z_ = context.Operators.DateFrom(y_);
-            CqlDateTime aa_ = context.Operators.Start(x_);
-            CqlDate ab_ = context.Operators.DateFrom(aa_);
-            CqlInterval<CqlDate> ac_ = context.Operators.Interval(ab_, z_, true, true);
-            bool? ad_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, w_, z_, ac_, 45);
-            return k_ & ad_;
+            CqlDateTime s_ = context.Operators.Start(b_);
+            CqlDate t_ = context.Operators.DateFrom(s_);
+            CqlInterval<CqlDate> u_ = context.Operators.Interval(t_, d_, true, true);
+            bool? v_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, d_, u_, 45);
+            return k_ & v_;
         }
     }
 
@@ -255,12 +247,11 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         }
         else
         {
-            Patient l_ = this.Patient(context);
-            Code<AdministrativeGender> m_ = l_?.GenderElement;
-            AdministrativeGender? n_ = m_?.Value;
-            string o_ = context.Operators.Convert<string>(n_);
-            bool? p_ = context.Operators.Equal(o_, "female");
-            k_ = j_ & p_;
+            Code<AdministrativeGender> l_ = a_?.GenderElement;
+            AdministrativeGender? m_ = l_?.Value;
+            string n_ = context.Operators.Convert<string>(m_);
+            bool? o_ = context.Operators.Equal(n_, "female");
+            k_ = j_ & o_;
         }
         // CQL 'and' (34:3-38:46): right operand skipped when left is false
         if (k_ is false)
@@ -269,8 +260,8 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         }
         else
         {
-            bool? q_ = this.Enrolled_During_Participation_Period(context);
-            return k_ & q_;
+            bool? p_ = this.Enrolled_During_Participation_Period(context);
+            return k_ & p_;
         }
     }
 

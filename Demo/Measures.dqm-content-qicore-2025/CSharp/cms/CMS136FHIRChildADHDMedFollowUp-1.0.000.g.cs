@@ -1031,8 +1031,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             }
             else
             {
-                CqlDate m_ = this.IPSD(context);
-                return l_ & (!((bool?)(m_ is null)));
+                return l_ & (!((bool?)(h_ is null)));
             }
         }
 
@@ -1066,16 +1065,11 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         }
         else
         {
-            Patient m_ = this.Patient(context);
-            Date n_ = m_?.BirthDateElement;
-            string o_ = n_?.Value;
-            CqlDate p_ = context.Operators.ConvertStringToDate(o_);
-            CqlInterval<CqlDateTime> q_ = this.Intake_Period(context);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlDate s_ = context.Operators.DateFrom(r_);
-            int? t_ = context.Operators.CalculateAgeAt(p_, s_, "year");
-            bool? u_ = context.Operators.LessOrEqual(t_, 12);
-            j_ = i_ & u_;
+            CqlDateTime m_ = context.Operators.End(e_);
+            CqlDate n_ = context.Operators.DateFrom(m_);
+            int? o_ = context.Operators.CalculateAgeAt(d_, n_, "year");
+            bool? p_ = context.Operators.LessOrEqual(o_, 12);
+            j_ = i_ & p_;
         }
         bool? k_;
         // CQL 'and' (49:3-53:37): right operand skipped when left is false
@@ -1085,9 +1079,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         }
         else
         {
-            IEnumerable<Encounter> v_ = this.Qualifying_Encounter(context);
-            bool? w_ = context.Operators.Exists<Encounter>(v_);
-            k_ = j_ & w_;
+            IEnumerable<Encounter> q_ = this.Qualifying_Encounter(context);
+            bool? r_ = context.Operators.Exists<Encounter>(q_);
+            k_ = j_ & r_;
         }
         bool? l_;
         // CQL 'and' (49:3-54:75): right operand skipped when left is false
@@ -1097,8 +1091,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         }
         else
         {
-            CqlDate x_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period(context);
-            l_ = k_ & (!((bool?)(x_ is null)));
+            CqlDate s_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period(context);
+            l_ = k_ & (!((bool?)(s_ is null)));
         }
         // CQL 'and' (49:3-55:85): right operand skipped when left is false
         if (l_ is false)
@@ -1107,9 +1101,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         }
         else
         {
-            IEnumerable<Encounter> y_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase(context);
-            bool? z_ = context.Operators.Exists<Encounter>(y_);
-            return l_ & !z_;
+            IEnumerable<Encounter> t_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase(context);
+            bool? u_ = context.Operators.Exists<Encounter>(t_);
+            return l_ & !u_;
         }
     }
 
@@ -1278,8 +1272,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             }
             else
             {
-                CqlDate n_ = this.IPSD(context);
-                return m_ & (!((bool?)(n_ is null)));
+                return m_ & (!((bool?)(i_ is null)));
             }
         }
 
@@ -1967,8 +1960,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             }
             else
             {
-                CqlDate m_ = this.IPSD(context);
-                return l_ & (!((bool?)(m_ is null)));
+                return l_ & (!((bool?)(h_ is null)));
             }
         }
 
@@ -2002,16 +1994,11 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         }
         else
         {
-            Patient n_ = this.Patient(context);
-            Date o_ = n_?.BirthDateElement;
-            string p_ = o_?.Value;
-            CqlDate q_ = context.Operators.ConvertStringToDate(p_);
-            CqlInterval<CqlDateTime> r_ = this.Intake_Period(context);
-            CqlDateTime s_ = context.Operators.End(r_);
-            CqlDate t_ = context.Operators.DateFrom(s_);
-            int? u_ = context.Operators.CalculateAgeAt(q_, t_, "year");
-            bool? v_ = context.Operators.LessOrEqual(u_, 12);
-            j_ = i_ & v_;
+            CqlDateTime n_ = context.Operators.End(e_);
+            CqlDate o_ = context.Operators.DateFrom(n_);
+            int? p_ = context.Operators.CalculateAgeAt(d_, o_, "year");
+            bool? q_ = context.Operators.LessOrEqual(p_, 12);
+            j_ = i_ & q_;
         }
         bool? k_;
         // CQL 'and' (158:3-162:37): right operand skipped when left is false
@@ -2021,9 +2008,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         }
         else
         {
-            IEnumerable<Encounter> w_ = this.Qualifying_Encounter(context);
-            bool? x_ = context.Operators.Exists<Encounter>(w_);
-            k_ = j_ & x_;
+            IEnumerable<Encounter> r_ = this.Qualifying_Encounter(context);
+            bool? s_ = context.Operators.Exists<Encounter>(r_);
+            k_ = j_ & s_;
         }
         bool? l_;
         // CQL 'and' (158:3-163:75): right operand skipped when left is false
@@ -2033,8 +2020,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         }
         else
         {
-            CqlDate y_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period(context);
-            l_ = k_ & (!((bool?)(y_ is null)));
+            CqlDate t_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period(context);
+            l_ = k_ & (!((bool?)(t_ is null)));
         }
         bool? m_;
         // CQL 'and' (158:3-164:83): right operand skipped when left is false
@@ -2044,8 +2031,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         }
         else
         {
-            bool? z_ = this.Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days(context);
-            m_ = l_ & z_;
+            bool? u_ = this.Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days(context);
+            m_ = l_ & u_;
         }
         // CQL 'and' (158:3-165:103): right operand skipped when left is false
         if (m_ is false)
@@ -2054,9 +2041,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         }
         else
         {
-            IEnumerable<Encounter> aa_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase(context);
-            bool? ab_ = context.Operators.Exists<Encounter>(aa_);
-            return m_ & !ab_;
+            IEnumerable<Encounter> v_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase(context);
+            bool? w_ = context.Operators.Exists<Encounter>(v_);
+            return m_ & !w_;
         }
     }
 

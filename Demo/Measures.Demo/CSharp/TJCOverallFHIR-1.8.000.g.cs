@@ -149,12 +149,10 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             }
             else
             {
-                Period i_ = NonElectiveEncounter?.Period;
-                CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, i_);
-                CqlDateTime k_ = context.Operators.End(j_);
-                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-                bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
-                return h_ & m_;
+                CqlDateTime i_ = context.Operators.End(f_);
+                CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
+                bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
+                return h_ & k_;
             }
         }
 
@@ -186,12 +184,9 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             }
             else
             {
-                Condition i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.PrincipalDiagnosis(context, NonElectiveEncounter);
-                CodeableConcept j_ = i_?.Code;
-                CqlConcept k_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, j_);
-                CqlValueSet l_ = this.Ischemic_Stroke(context);
-                bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
-                return h_ | m_;
+                CqlValueSet i_ = this.Ischemic_Stroke(context);
+                bool? j_ = context.Operators.ConceptInValueSet(f_, i_);
+                return h_ | j_;
             }
         }
 
@@ -283,12 +278,9 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             }
             else
             {
-                Encounter.HospitalizationComponent l_ = IschemicStrokeEncounter?.Hospitalization;
-                CodeableConcept m_ = l_?.DischargeDisposition;
-                CqlConcept n_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, m_);
-                CqlValueSet o_ = this.Left_Against_Medical_Advice(context);
-                bool? p_ = context.Operators.ConceptInValueSet(n_, o_);
-                i_ = h_ | p_;
+                CqlValueSet l_ = this.Left_Against_Medical_Advice(context);
+                bool? m_ = context.Operators.ConceptInValueSet(f_, l_);
+                i_ = h_ | m_;
             }
             bool? j_;
             // CQL 'or' (51:27-53:105): right operand skipped when left is true
@@ -298,12 +290,9 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             }
             else
             {
-                Encounter.HospitalizationComponent q_ = IschemicStrokeEncounter?.Hospitalization;
-                CodeableConcept r_ = q_?.DischargeDisposition;
-                CqlConcept s_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, r_);
-                CqlValueSet t_ = this.Patient_Expired(context);
-                bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
-                j_ = i_ | u_;
+                CqlValueSet n_ = this.Patient_Expired(context);
+                bool? o_ = context.Operators.ConceptInValueSet(f_, n_);
+                j_ = i_ | o_;
             }
             bool? k_;
             // CQL 'or' (51:27-54:125): right operand skipped when left is true
@@ -313,12 +302,9 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             }
             else
             {
-                Encounter.HospitalizationComponent v_ = IschemicStrokeEncounter?.Hospitalization;
-                CodeableConcept w_ = v_?.DischargeDisposition;
-                CqlConcept x_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, w_);
-                CqlValueSet y_ = this.Discharged_to_Home_for_Hospice_Care(context);
-                bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
-                k_ = j_ | z_;
+                CqlValueSet p_ = this.Discharged_to_Home_for_Hospice_Care(context);
+                bool? q_ = context.Operators.ConceptInValueSet(f_, p_);
+                k_ = j_ | q_;
             }
             // CQL 'or' (51:21-55:141): right operand skipped when left is true
             if (k_ is true)
@@ -327,12 +313,9 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             }
             else
             {
-                Encounter.HospitalizationComponent aa_ = IschemicStrokeEncounter?.Hospitalization;
-                CodeableConcept ab_ = aa_?.DischargeDisposition;
-                CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ab_);
-                CqlValueSet ad_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
-                bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
-                return k_ | ae_;
+                CqlValueSet r_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
+                bool? s_ = context.Operators.ConceptInValueSet(f_, r_);
+                return k_ | s_;
             }
         }
 

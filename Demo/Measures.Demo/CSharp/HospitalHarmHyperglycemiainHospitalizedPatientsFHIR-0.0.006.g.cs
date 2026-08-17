@@ -464,33 +464,19 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             CqlQuantity h_ = context.Operators.Multiply(e_, g_);
             CqlDateTime i_ = context.Operators.Add(d_, h_);
             CqlDateTime j_;
-            CqlDateTime m_ = context.Operators.Start(Period);
-            CqlQuantity n_ = context.Operators.Quantity(24m, "hours");
-            int? o_ = context.Operators.Subtract(DayIndex, 1);
-            CqlQuantity p_ = context.Operators.ConvertIntegerToQuantity(o_);
-            CqlQuantity q_ = context.Operators.Multiply(n_, p_);
-            CqlDateTime r_ = context.Operators.Add(m_, q_);
-            CqlDateTime s_ = context.Operators.End(Period);
-            int? t_ = context.Operators.DurationBetween(r_, s_, "hour");
-            bool? u_ = context.Operators.Less(t_, 24);
-            if (u_ ?? false)
+            CqlDateTime m_ = context.Operators.End(Period);
+            int? n_ = context.Operators.DurationBetween(i_, m_, "hour");
+            bool? o_ = context.Operators.Less(n_, 24);
+            if (o_ ?? false)
             {
-                CqlDateTime v_ = context.Operators.Start(Period);
-                CqlQuantity w_ = context.Operators.Quantity(24m, "hours");
-                int? x_ = context.Operators.Subtract(DayIndex, 1);
-                CqlQuantity y_ = context.Operators.ConvertIntegerToQuantity(x_);
-                CqlQuantity z_ = context.Operators.Multiply(w_, y_);
-                CqlDateTime aa_ = context.Operators.Add(v_, z_);
-                j_ = aa_;
+                j_ = i_;
             }
             else
             {
-                CqlDateTime ab_ = context.Operators.Start(Period);
-                CqlQuantity ac_ = context.Operators.Quantity(24m, "hours");
-                CqlQuantity ad_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
-                CqlQuantity ae_ = context.Operators.Multiply(ac_, ad_);
-                CqlDateTime af_ = context.Operators.Add(ab_, ae_);
-                j_ = af_;
+                CqlQuantity p_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
+                CqlQuantity q_ = context.Operators.Multiply(e_, p_);
+                CqlDateTime r_ = context.Operators.Add(d_, q_);
+                j_ = r_;
             }
             CqlInterval<CqlDateTime> k_ = context.Operators.Interval(i_, j_, true, false);
             (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? l_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, k_);

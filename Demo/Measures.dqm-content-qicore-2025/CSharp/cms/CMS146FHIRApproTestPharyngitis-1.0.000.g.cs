@@ -359,9 +359,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 }
                 else
                 {
-                    FhirDateTime ai_ = AntibioticOrdered?.AuthoredOnElement;
-                    CqlDateTime aj_ = context.Operators.Convert<CqlDateTime>(ai_);
-                    return ah_ & (!((bool?)(aj_ is null)));
+                    return ah_ & (!((bool?)(ad_ is null)));
                 }
             }
 
