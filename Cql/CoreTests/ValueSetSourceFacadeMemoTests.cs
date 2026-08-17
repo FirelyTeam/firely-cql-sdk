@@ -18,23 +18,27 @@ namespace CoreTests;
 
 /// <summary>
 /// Building the facade for a <see cref="ValueSet"/> that already carries its expansion is a pure
-/// function of that instance, so <see cref="ValueSetSource"/> memoizes it process-wide against the
-/// instance. These tests pin what that memo does and - just as importantly - what it does not key on.
+/// function of that expansion, so <see cref="ValueSetSource"/> memoizes it process-wide against the
+/// <see cref="ValueSet.ExpansionComponent"/>. These tests pin what that memo does and - just as
+/// importantly - what it does not key on.
 /// </summary>
 [TestClass]
 public class ValueSetSourceFacadeMemoTests
 {
     private const string CodeSystem = "http://snomed.info/sct";
 
+    private static ValueSet.ExpansionComponent ExpansionOf(params string[] codes) =>
+        new()
+        {
+            Contains = codes.Select(c => new ValueSet.ContainsComponent { System = CodeSystem, Code = c }).ToList()
+        };
+
     private static ValueSet ExpandedValueSet(string url, params string[] codes) =>
         new()
         {
             Url = url,
             Status = PublicationStatus.Active,
-            Expansion = new ValueSet.ExpansionComponent
-            {
-                Contains = codes.Select(c => new ValueSet.ContainsComponent { System = CodeSystem, Code = c }).ToList()
-            }
+            Expansion = ExpansionOf(codes)
         };
 
     /// <summary>A valueset that has to be expanded, by pulling in an already expanded one.</summary>
@@ -58,7 +62,7 @@ public class ValueSetSourceFacadeMemoTests
         var facadeB = await new ValueSetSource().Add(vs);
 
         Assert.AreSame(facadeA, facadeB,
-            "an expansion-carrying instance determines its facade completely, so the second source must reuse the first one's build.");
+            "the expansion an instance carries determines its facade completely, so the second source must reuse the first one's build.");
     }
 
     [TestMethod]
@@ -85,10 +89,48 @@ public class ValueSetSourceFacadeMemoTests
     }
 
     [TestMethod]
+    public async Task InstancesSharingOneExpansion_ShareTheSameFacade()
+    {
+        // The facade is a pure function of the expansion, so the valueset it was reached through does
+        // not matter - two instances (here even two canonicals) holding one component get one facade.
+        // That is intended, not incidental: nothing but the expansion's concepts feeds into the build.
+        var expansion = ExpansionOf("111", "222");
+        var first = new ValueSet { Url = "http://example.org/ValueSet/sharing-a", Status = PublicationStatus.Active, Expansion = expansion };
+        var second = new ValueSet { Url = "http://example.org/ValueSet/sharing-b", Status = PublicationStatus.Active, Expansion = expansion };
+
+        var facadeA = await new ValueSetSource().Add(first);
+        var facadeB = await new ValueSetSource().Add(second);
+
+        Assert.AreSame(facadeA, facadeB);
+    }
+
+    [TestMethod]
+    public async Task ReplacedExpansion_BuildsAFacadeFromTheNewExpansion()
+    {
+        // What keying on the expansion rather than on the valueset buys: a host that recomputes an
+        // expansion into a *new* component on an instance it retains gets a new key, and therefore a
+        // facade reflecting the replacement instead of the snapshot taken from the component before it.
+        var vs = ExpandedValueSet("http://example.org/ValueSet/replaced", "111");
+
+        var facadeBefore = await new ValueSetSource().Add(vs);
+        Assert.IsTrue(facadeBefore.IsCodeInValueSet("111", CodeSystem));
+
+        vs.Expansion = ExpansionOf("222");
+
+        // The source that already answered for this canonical keeps its own answer - its per-source
+        // dictionary is the only thing its queries consult - so the rebuild shows in a fresh source.
+        var facadeAfter = await new ValueSetSource().Add(vs);
+
+        Assert.AreNotSame(facadeBefore, facadeAfter);
+        Assert.IsTrue(facadeAfter.IsCodeInValueSet("222", CodeSystem));
+        Assert.IsFalse(facadeAfter.IsCodeInValueSet("111", CodeSystem));
+    }
+
+    [TestMethod]
     public async Task StructurallyIdenticalInstances_DoNotShareAFacade()
     {
-        // The memo is keyed on object identity, never on content: two equal-looking valuesets may
-        // still have been loaded from different places, and nothing here proves they agree.
+        // The memo is keyed on the expansion's object identity, never on its content: two equal-looking
+        // valuesets may still have been loaded from different places, and nothing here proves they agree.
         const string url = "http://example.org/ValueSet/twins";
         var first = ExpandedValueSet(url, "111", "222");
         var second = ExpandedValueSet(url, "111", "222");
@@ -176,15 +218,19 @@ public class ValueSetSourceFacadeMemoTests
     public async Task FailedBuild_DoesNotOutliveTheFailure()
     {
         // The memo holds a Lazy, and a Lazy caches its exception - so a failed build has to be
-        // evicted, or the instance would keep throwing the *old* exception even after its expansion
-        // became complete. This pins the eviction: complete the expansion, and Add succeeds.
+        // evicted, or the expansion would keep throwing the *old* exception even after it became
+        // complete. Eviction is the only thing that can make the retry succeed here, because the
+        // healing edit deliberately leaves the key alone: Total moves on the very same
+        // ExpansionComponent, so no new key can be doing the work instead.
         var vs = ExpandedValueSet("http://example.org/ValueSet/healed", "111", "222");
-        vs.Expansion!.Total = 500;
+        var expansion = vs.Expansion!;
+        expansion.Total = 500;
 
         var source = new ValueSetSource();
         await AssertRejectsPartialExpansion(() => source.Add(vs));
 
-        vs.Expansion!.Total = 2;
+        expansion.Total = 2;
+        Assert.AreSame(expansion, vs.Expansion, "the memo key has to be unchanged, or this passes without any eviction.");
 
         var facade = await source.Add(vs);
         Assert.IsTrue(facade.IsCodeInValueSet("111", CodeSystem));
@@ -199,7 +245,7 @@ public class ValueSetSourceFacadeMemoTests
         var facades = await Task.WhenAll(Enumerable.Range(0, 16).Select(_ => Task.Run(() => new ValueSetSource().Add(vs))));
 
         foreach (var facade in facades)
-            Assert.AreSame(facades[0], facade, "every source racing on the same instance must end up with the single retained facade.");
+            Assert.AreSame(facades[0], facade, "every source racing on the same expansion must end up with the single retained facade.");
 
         Assert.AreEqual(1, Volatile.Read(ref ValueSetSource.BuildFromExpansionCount) - before,
             "the Lazy exists so exactly one racer runs the expensive build; agreeing on one result is what the bare table already did.");

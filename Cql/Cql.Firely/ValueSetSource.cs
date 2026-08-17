@@ -30,35 +30,51 @@ namespace Hl7.Cql.Fhir;
 /// method looks in. It alone determines what this source answers.
 /// </para>
 /// <para>
-/// The second layer is process-wide: a memo of facades keyed on the <see cref="ValueSet"/>
-/// <c>instance</c>, for instances that already carry an expansion. Building a facade from an
-/// expansion is a pure function of that instance, so two sources handed the same object can share
-/// the result instead of each materializing and hashing every code in the expansion again. The memo
-/// only ever hits when the resolver returns the same object again: a host with an instance-stable
-/// resolver (a conformance cache, for instance) hits it on every request, while a host without one
-/// loses nothing, since a fresh instance simply builds the way it always did. Entries are held under
-/// weak keys, so they live exactly as long as the host keeps the instance alive - the memo needs no
-/// bounds and no invalidation of its own.
+/// The second layer is process-wide: a memo of facades keyed on the
+/// <see cref="ValueSet.ExpansionComponent"/> a valueset carries. Building a facade is a pure function
+/// of that expansion - nothing else about the valueset feeds into it - so two sources handed the same
+/// component can share the result instead of each materializing and hashing every code in it again.
+/// The memo only ever hits when the resolver returns the same expansion object again: a host with an
+/// instance-stable resolver (a conformance cache, for instance) hits it on every request, while a host
+/// without one loses nothing, since a fresh instance carries a fresh expansion and simply builds the
+/// way it always did. Entries are held under weak keys, so they live exactly as long as the host keeps
+/// the expansion alive - the memo needs no bounds and no invalidation of its own.
 /// </para>
 /// <para>
-/// The memo therefore treats an instance as read-only from the moment it is first added: identity
-/// stands in for content, which holds exactly as long as the content does not change behind the
-/// identity. That is not an assumption this class invents - a resolver that hands the same instance
-/// to many consumers already forbids mutating it, since every consumer, cache or no cache, would
-/// observe the edit. This class is itself one such mutator: the expansion it computes is written into
-/// the caller's instance (see below), which is the one edit to a resolved valueset the SDK performs on
-/// its own. A host that does rework a resolved valueset must hand out a copy (the FHIR SDK's
-/// <c>DeepCopy</c>), which as a fresh instance simply builds its own facade.
+/// Keying on the expansion rather than on the valueset instance is what makes the contract tractable,
+/// and that contract is:
 /// </para>
+/// <list type="bullet">
+/// <item>
+/// A memoized facade is a snapshot of the expansion as it looked when the facade was built from it.
+/// </item>
+/// <item>
+/// <em>Replacing</em> <see cref="ValueSet.Expansion"/> on a retained instance is honored: the
+/// replacement is a different key, so the next <see cref="Add(ValueSet)"/> builds a facade from it.
+/// Handing out a copy of the whole valueset (the FHIR SDK's <c>DeepCopy</c>) works for the same reason.
+/// </item>
+/// <item>
+/// Editing an expansion <em>in place</em> after a facade was successfully built from it - appending to
+/// <c>Contains</c>, moving <c>Total</c> - is not observed, because the key did not change and the
+/// facade built from it is retained. That is not an assumption this class invents: a resolver that
+/// hands the same expansion to many consumers already forbids editing it, since every consumer, cache
+/// or no cache, would be looking at whatever the last writer left behind.
+/// </item>
+/// <item>
+/// Editing an expansion after a build <em>failed</em> on it - a partial expansion completed after the
+/// fact - is honored, because a failed build retains nothing: the entry is evicted and the next
+/// attempt reads the expansion afresh (see <see cref="GetOrBuildMemoized"/>).
+/// </item>
+/// </list>
 /// <para>
 /// A valueset that arrives without an expansion is expanded here instead, and that expansion depends
-/// on the CodeSystems and valuesets this source's resolver can reach - things the instance alone does
-/// not determine - so its facade stays in the per-source layer only. That expansion is written into
-/// the caller's instance, so a later <see cref="Add(ValueSet)"/> of the very same instance does see an
-/// expansion and does take the memo path. This adds no staleness beyond the in-place mutation itself,
-/// which already leaves every source handed that instance looking at the same frozen expansion. Mutation
-/// after a failed build is still honored because the failed entry is evicted; mutation after a
-/// successful build is not, because that cached facade is retained.
+/// on the CodeSystems and valuesets this source's resolver can reach - things the valueset alone does
+/// not determine - so its facade stays in the per-source layer only. The expander writes what it
+/// computed into the caller's instance, which is the one edit to a resolved valueset the SDK performs
+/// on its own; a later <see cref="Add(ValueSet)"/> of that same instance therefore does see an
+/// expansion and does take the memo path, keyed on the component just written. That adds no staleness
+/// beyond the in-place mutation itself, which already leaves every source handed that instance looking
+/// at the same frozen expansion.
 /// </para>
 /// </remarks>
 public class ValueSetSource : IValueSetDictionary
@@ -67,10 +83,11 @@ public class ValueSetSource : IValueSetDictionary
 
     /// <summary>
     /// The process-wide, second cache layer described in the remarks on this class: the facade built
-    /// from a <see cref="ValueSet"/> that already carries its expansion, memoized against that
-    /// instance under a weak key.
+    /// from the <see cref="ValueSet.ExpansionComponent"/> a resolved valueset carries, memoized against
+    /// that component under a weak key.
     /// </summary>
     /// <remarks>
+    /// <para>
     /// The value is a <see cref="Lazy{T}"/> rather than the facade itself because
     /// <see cref="ConditionalWeakTable{TKey,TValue}.GetValue"/> does not serialize its factory: under
     /// contention it may run the factory on several threads and keep one result (see the note on
@@ -78,8 +95,17 @@ public class ValueSetSource : IValueSetDictionary
     /// cheap and pure, but this factory is the expensive materialization the memo exists to avoid, so
     /// the table races only on creating the wrapper and every caller then awaits the single build
     /// inside the one retained <see cref="Lazy{T}"/>.
+    /// </para>
+    /// <para>
+    /// That factory closes over the valueset the expansion was reached through - it needs its
+    /// <see cref="ValueSet.Url"/> for error messages - and hence over the key itself, since the
+    /// valueset holds the expansion. Inside a <see cref="ConditionalWeakTable{TKey,TValue}"/> that is
+    /// harmless: the table links a value to its key through a <c>DependentHandle</c>, so an entry whose
+    /// key is unreachable from outside the table is collected no matter what its value points at. A
+    /// <see cref="Lazy{T}"/> that has built successfully releases its factory anyway.
+    /// </para>
     /// </remarks>
-    private static readonly ConditionalWeakTable<ValueSet, Lazy<InMemoryValueSet>> FacadesByInstance = new();
+    private static readonly ConditionalWeakTable<ValueSet.ExpansionComponent, Lazy<InMemoryValueSet>> FacadesByExpansion = new();
 
     /// <summary>
     /// Counts calls to <see cref="BuildFromExpansion"/>, so tests can pin that racing sources run the
@@ -151,8 +177,8 @@ public class ValueSetSource : IValueSetDictionary
 
         async Task<InMemoryValueSet> build(ValueSet vs)
         {
-            // An instance that arrives with its expansion already determines the facade completely, so
-            // the build is a pure function of the instance and can be memoized against it.
+            // An expansion that arrives with the valueset determines the facade completely, so the
+            // build is a pure function of that expansion and can be memoized against it.
             if (vs.HasExpansion)
                 return GetOrBuildMemoized(vs);
 
@@ -167,22 +193,28 @@ public class ValueSetSource : IValueSetDictionary
     }
 
     /// <summary>
-    /// Returns the memoized facade for an expansion-carrying <see cref="ValueSet"/> instance,
-    /// building it exactly once per instance across all sources.
+    /// Returns the memoized facade for the expansion carried by <paramref name="vs"/>, building it
+    /// exactly once per <see cref="ValueSet.ExpansionComponent"/> across all sources.
     /// </summary>
     /// <remarks>
-    /// Sources racing on the same instance meet inside one retained <see cref="Lazy{T}"/> (see the
-    /// remarks on <see cref="FacadesByInstance"/>), so exactly one of them runs the build and the
-    /// others wait for its result. A build that throws - a partial expansion - must not stick,
-    /// though: <see cref="Lazy{T}"/> caches the exception, so the entry is dropped from the table on
-    /// failure and the next attempt starts fresh. Concurrent waiters on the failed build still get its
-    /// cached exception, which is correct - they were asking about the same instance in the same
-    /// state. After a successful build the <see cref="Lazy{T}"/> releases its factory, so a memoized
-    /// entry holds no reference to whichever source built it.
+    /// Only reached where <see cref="ValueSet.HasExpansion"/> holds, which is exactly where
+    /// <see cref="ValueSet.Expansion"/> - the key - is non-null. Sources racing on the same expansion
+    /// meet inside one retained <see cref="Lazy{T}"/> (see the remarks on
+    /// <see cref="FacadesByExpansion"/>), so exactly one of them runs the build and the others wait for
+    /// its result. A build that throws - a partial expansion - must not stick, though:
+    /// <see cref="Lazy{T}"/> caches the exception, so the entry is dropped from the table on failure and
+    /// the next attempt starts fresh. Concurrent waiters on the failed build still get its cached
+    /// exception, which is correct - they were asking about the same expansion in the same state. After
+    /// a successful build the <see cref="Lazy{T}"/> releases its factory, so a memoized entry holds no
+    /// reference to whichever source built it, nor to the valueset it was reached through.
     /// </remarks>
     private InMemoryValueSet GetOrBuildMemoized(ValueSet vs)
     {
-        var lazyFacade = FacadesByInstance.GetValue(vs, v => new Lazy<InMemoryValueSet>(() => BuildFromExpansion(v)));
+        var expansion = vs.Expansion!;
+
+        // The factory keeps vs, not just the expansion, so a partial expansion can name the valueset
+        // it came from in its error message.
+        var lazyFacade = FacadesByExpansion.GetValue(expansion, _ => new Lazy<InMemoryValueSet>(() => BuildFromExpansion(vs)));
 
         try
         {
@@ -192,8 +224,8 @@ public class ValueSetSource : IValueSetDictionary
         {
             // Another thread may already have replaced the failed entry with a fresh one; evicting
             // that would throw away a good build. Only drop the wrapper that actually failed.
-            if (FacadesByInstance.TryGetValue(vs, out var current) && ReferenceEquals(current, lazyFacade))
-                FacadesByInstance.Remove(vs);
+            if (FacadesByExpansion.TryGetValue(expansion, out var current) && ReferenceEquals(current, lazyFacade))
+                FacadesByExpansion.Remove(expansion);
             throw;
         }
     }
@@ -214,7 +246,8 @@ public class ValueSetSource : IValueSetDictionary
     /// intern into the same table, so the same code reached through two of its valuesets is not
     /// guaranteed to be one object; compare codes with a comparer, never by reference.
     /// The codes are materialized here rather than left as a deferred query, so the facade that comes
-    /// out holds a reference neither to this source nor to <paramref name="vs"/>.
+    /// out holds a reference neither to this source nor to <paramref name="vs"/> - it is the snapshot of
+    /// the expansion that the memo hands to every later caller, not a window onto it.
     /// </remarks>
     private InMemoryValueSet BuildFromExpansion(ValueSet vs)
     {
