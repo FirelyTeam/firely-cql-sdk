@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS1028FHIRPCSevereOBComps", "1.0.000")]
 public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<CMS1028FHIRPCSevereOBComps_1_0_000>
 {
@@ -449,7 +449,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return h_;
             }
 
-            return /* CQL 'and' (177:5-178:75) */ ((CqlBoolean)((bool?)(d_ is null))
+            return /* CQL 'and' (177:5-178:75) */ ((CqlBoolean)(d_ is null)
                 && e_());
         }
 
@@ -509,8 +509,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     || k_());
             }
 
-            return /* CQL 'and' (218:5-222:7) */ (/* CQL 'and' (218:11-219:67) */ ((CqlBoolean)((bool?)(d_ is null))
-                && (bool?)((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null))
+            return /* CQL 'and' (218:5-222:7) */ (/* CQL 'and' (218:11-219:67) */ ((CqlBoolean)(d_ is null)
+                && ((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null))
                 && e_());
         }
 
@@ -2389,7 +2389,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                         && p_());
                 }
 
-                return /* CQL 'and' (390:12-394:9) */ ((CqlBoolean)((bool?)(k_ is null))
+                return /* CQL 'and' (390:12-394:9) */ ((CqlBoolean)(k_ is null)
                     && l_());
             }
 
@@ -2418,8 +2418,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return x_;
             }
 
-            return /* CQL 'and' (399:9-403:11) */ (/* CQL 'and' (399:15-400:25) */ ((CqlBoolean)((bool?)(t_ is null))
-                && (bool?)((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null))
+            return /* CQL 'and' (399:9-403:11) */ (/* CQL 'and' (399:15-400:25) */ ((CqlBoolean)(t_ is null)
+                && ((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null))
                 && u_());
         }
 

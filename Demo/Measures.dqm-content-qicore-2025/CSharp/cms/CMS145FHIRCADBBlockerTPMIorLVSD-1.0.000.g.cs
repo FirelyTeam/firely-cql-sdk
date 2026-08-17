@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS145FHIRCADBBlockerTPMIorLVSD", "1.0.000")]
 public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingleton<CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000>
 {
@@ -1645,7 +1645,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         return w_;
                     }
 
-                    return /* CQL 'or' (377:14-379:11) */ ((CqlBoolean)((bool?)(q_ is null))
+                    return /* CQL 'or' (377:14-379:11) */ ((CqlBoolean)(q_ is null)
                         || r_());
                 }
 
@@ -1663,7 +1663,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         return ae_;
                     }
 
-                    return /* CQL 'or' (380:14-382:11) */ ((CqlBoolean)((bool?)(y_ is null))
+                    return /* CQL 'or' (380:14-382:11) */ ((CqlBoolean)(y_ is null)
                         || z_());
                 }
 

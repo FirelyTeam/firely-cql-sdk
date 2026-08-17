@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS122FHIRDiabetesAssessGT9Pct", "1.0.000")]
 public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISingleton<CMS122FHIRDiabetesAssessGT9Pct_1_0_000>
 {
@@ -627,7 +627,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             Observation c_ = this.Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day(context);
             DataType d_ = c_?.Value;
             object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
-            return (bool?)(e_ is null);
+            return e_ is null;
         }
 
         return /* CQL 'and' (133:3-134:84) */ ((CqlBoolean)(!((bool?)(a_ is null)))

@@ -13,7 +13,7 @@
   destroying the skip. Such functions are only ever called, never converted to a delegate, so
   Roslyn gives them a struct closure passed by `ref` and they do not allocate — preserving the
   property that ruled out the `Lazy<bool?>` runtime overloads. (#1514)
-- `GeneratorToolVersion` is now **5.3.2.0**. Previously generated libraries keep working unchanged:
+- `GeneratorToolVersion` is now **5.3.3.0**. Previously generated libraries keep working unchanged:
   the invoker toolkit accepts any version in `[5.1.0.0, 5.4.0.0)`. (#1514)
 
 ## Other
@@ -32,3 +32,8 @@
   operand's own `operator true`/`operator false`, so a `bool?` left operand has no `&&` at all.
   Right operands that bind looser than `&&` (an `is` pattern, a coalesce — 9 sites) are now
   parenthesised explicitly, having previously relied on the discarded cast's parentheses. (#1514)
+- Converting to `CqlBoolean` no longer routes through `bool?` first (57 sites): a plain `bool` from a
+  pattern such as `x is null` converts to `CqlBoolean` directly, so `(CqlBoolean)(b_ is null)` is
+  emitted rather than `(CqlBoolean)((bool?)(b_ is null))`. The same removal reaches inside the local
+  functions that hold larger operands, whose bodies now `return b_ is null;` instead of
+  `return (bool?)(b_ is null);`. (#1514)

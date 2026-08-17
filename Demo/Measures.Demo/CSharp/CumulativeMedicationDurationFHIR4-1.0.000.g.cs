@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CumulativeMedicationDurationFHIR4", "1.0.000")]
 public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISingleton<CumulativeMedicationDurationFHIR4_1_0_000>
 {
@@ -557,7 +557,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 return u_;
             }
 
-            if ((!((bool?)(/* CQL 'or' (177:14-177:84) */ ((CqlBoolean)((bool?)(k_ is null))
+            if ((!((bool?)(/* CQL 'or' (177:14-177:84) */ ((CqlBoolean)(k_ is null)
                 || l_())))) ?? false)
             {
                 CqlDateTime v_ = context.Operators.Start(j_);
@@ -831,8 +831,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
         bool? e_(object M) {
             bool n_ = M is MedicationDispense;
-            return /* CQL 'or' (378:13-378:74) */ ((CqlBoolean)(n_ as bool?)
-                || ((M is MedicationAdministration) as bool?));
+            return /* CQL 'or' (378:13-378:74) */ ((CqlBoolean)n_
+                || (M is MedicationAdministration));
         }
 
 

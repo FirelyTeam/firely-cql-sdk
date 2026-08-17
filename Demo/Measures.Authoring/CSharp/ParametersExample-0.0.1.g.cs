@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
 public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersExample_0_0_1>
 {
@@ -91,7 +91,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             CqlBoolean i_() {
                 FhirBoolean l_ = P?.ActiveElement;
                 bool? m_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, l_);
-                return (bool?)(/* CQL 'is true' (19:11-19:26) */ m_ is true);
+                return /* CQL 'is true' (19:11-19:26) */ m_ is true;
             }
 
 

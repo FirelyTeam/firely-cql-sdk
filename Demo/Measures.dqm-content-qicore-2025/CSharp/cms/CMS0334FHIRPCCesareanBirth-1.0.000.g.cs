@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS0334FHIRPCCesareanBirth", "1.0.000")]
 public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<CMS0334FHIRPCCesareanBirth_1_0_000>
 {
@@ -154,7 +154,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 return h_;
             }
 
-            return /* CQL 'and' (42:5-43:71) */ ((CqlBoolean)((bool?)(d_ is null))
+            return /* CQL 'and' (42:5-43:71) */ ((CqlBoolean)(d_ is null)
                 && e_());
         }
 
@@ -214,8 +214,8 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     || k_());
             }
 
-            return /* CQL 'and' (54:5-58:7) */ (/* CQL 'and' (54:11-55:21) */ ((CqlBoolean)((bool?)(d_ is null))
-                && (bool?)((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null))
+            return /* CQL 'and' (54:5-58:7) */ (/* CQL 'and' (54:11-55:21) */ ((CqlBoolean)(d_ is null)
+                && ((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null))
                 && e_());
         }
 

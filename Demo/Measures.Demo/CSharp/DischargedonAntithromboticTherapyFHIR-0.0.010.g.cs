@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.0.010")]
 public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, ISingleton<DischargedonAntithromboticTherapyFHIR_0_0_010>
 {
@@ -213,7 +213,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 return ap_;
             }
 
-            return /* CQL 'and' (82:5-91:52) */ (/* CQL 'and' (82:11-90:74) */ (/* CQL 'and' (82:11-89:7) */ (/* CQL 'and' (82:11-85:7) */ ((CqlBoolean)((bool?)(/* CQL 'is true' (82:11-82:56) */ f_ is true))
+            return /* CQL 'and' (82:5-91:52) */ (/* CQL 'and' (82:11-90:74) */ (/* CQL 'and' (82:11-89:7) */ (/* CQL 'and' (82:11-85:7) */ ((CqlBoolean)(/* CQL 'is true' (82:11-82:56) */ f_ is true)
                 && g_())
                 && h_())
                 && i_())

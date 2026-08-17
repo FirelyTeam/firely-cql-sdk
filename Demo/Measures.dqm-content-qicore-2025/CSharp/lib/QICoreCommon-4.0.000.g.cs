@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("QICoreCommon", "4.0.000")]
 public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_0_000>
 {
@@ -1401,7 +1401,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             return e_;
         }
 
-        return !((bool?)(/* CQL 'or' (528:7-530:3) */ ((CqlBoolean)((bool?)(a_ is null))
+        return !((bool?)(/* CQL 'or' (528:7-530:3) */ ((CqlBoolean)(a_ is null)
             || b_())));
     }
 
@@ -1419,7 +1419,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             return e_;
         }
 
-        return !((bool?)(/* CQL 'or' (537:7-539:3) */ ((CqlBoolean)((bool?)(a_ is null))
+        return !((bool?)(/* CQL 'or' (537:7-539:3) */ ((CqlBoolean)(a_ is null)
             || b_())));
     }
 
@@ -1438,7 +1438,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             return e_;
         }
 
-        return !((bool?)(/* CQL 'or' (547:7-550:3) */ ((CqlBoolean)((bool?)(a_ is null))
+        return !((bool?)(/* CQL 'or' (547:7-550:3) */ ((CqlBoolean)(a_ is null)
             || b_())));
     }
 
@@ -1456,7 +1456,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             return e_;
         }
 
-        return !((bool?)(/* CQL 'or' (557:7-560:3) */ ((CqlBoolean)((bool?)(a_ is null))
+        return !((bool?)(/* CQL 'or' (557:7-560:3) */ ((CqlBoolean)(a_ is null)
             || b_())));
     }
 

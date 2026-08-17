@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS1154ScreeningPrediabetesFHIR", "1.0.000")]
 public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingleton<CMS1154ScreeningPrediabetesFHIR_1_0_000>
 {
@@ -376,7 +376,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
         return /* CQL 'and' (104:3-107:62) */ (/* CQL 'or' (104:3-106:3) */ ((CqlBoolean)b_
             || c_())
-            && (bool?)(/* CQL 'is true' (107:9-107:62) */ (this.Aged_35_to_70_at_Start_of_Measurement_Period(context)) is true));
+            && (/* CQL 'is true' (107:9-107:62) */ (this.Aged_35_to_70_at_Start_of_Measurement_Period(context)) is true));
     }
 
 

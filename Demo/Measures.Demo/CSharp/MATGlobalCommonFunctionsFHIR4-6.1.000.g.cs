@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("MATGlobalCommonFunctionsFHIR4", "6.1.000")]
 public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleton<MATGlobalCommonFunctionsFHIR4_6_1_000>
 {
@@ -1201,7 +1201,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             return e_;
         }
 
-        return !((bool?)(/* CQL 'or' (354:7-356:3) */ ((CqlBoolean)((bool?)(a_ is null))
+        return !((bool?)(/* CQL 'or' (354:7-356:3) */ ((CqlBoolean)(a_ is null)
             || b_())));
     }
 
@@ -1218,7 +1218,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             return e_;
         }
 
-        return !((bool?)(/* CQL 'or' (360:7-364:3) */ ((CqlBoolean)((bool?)(a_ is null))
+        return !((bool?)(/* CQL 'or' (360:7-364:3) */ ((CqlBoolean)(a_ is null)
             || b_())));
     }
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS117FHIRChildImmunStatus", "1.0.000")]
 public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<CMS117FHIRChildImmunStatus_1_0_000>
 {
@@ -1369,7 +1369,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                     return aa_;
                 }
 
-                return /* CQL 'and' (315:12-322:9) */ ((CqlBoolean)((bool?)(/* CQL 'is false' (315:14-315:33) */ t_ is false))
+                return /* CQL 'and' (315:12-322:9) */ ((CqlBoolean)(/* CQL 'is false' (315:14-315:33) */ t_ is false)
                     && u_());
             }
 
@@ -2246,7 +2246,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                     return aa_;
                 }
 
-                return /* CQL 'and' (484:12-489:9) */ ((CqlBoolean)((bool?)(/* CQL 'is false' (484:14-484:34) */ t_ is false))
+                return /* CQL 'and' (484:12-489:9) */ ((CqlBoolean)(/* CQL 'is false' (484:14-484:34) */ t_ is false)
                     && u_());
             }
 

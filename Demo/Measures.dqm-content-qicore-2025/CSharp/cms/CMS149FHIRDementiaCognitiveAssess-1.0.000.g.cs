@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS149FHIRDementiaCognitiveAssess", "1.0.000")]
 public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISingleton<CMS149FHIRDementiaCognitiveAssess_1_0_000>
 {
@@ -273,7 +273,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                         return ac_;
                     }
 
-                    return /* CQL 'or' (66:13-68:9) */ ((CqlBoolean)((bool?)(u_ is null))
+                    return /* CQL 'or' (66:13-68:9) */ ((CqlBoolean)(u_ is null)
                         || v_());
                 }
 

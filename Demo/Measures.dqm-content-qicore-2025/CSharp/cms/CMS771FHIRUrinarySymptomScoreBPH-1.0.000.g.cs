@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS771FHIRUrinarySymptomScoreBPH", "1.0.000")]
 public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingleton<CMS771FHIRUrinarySymptomScoreBPH_1_0_000>
 {
@@ -216,7 +216,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 || j_())));
         }
 
-        return /* CQL 'or' (176:3-180:5) */ ((CqlBoolean)((bool?)(b_ is null))
+        return /* CQL 'or' (176:3-180:5) */ ((CqlBoolean)(b_ is null)
             || c_());
     }
 

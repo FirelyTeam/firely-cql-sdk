@@ -568,10 +568,13 @@ partial class CodeBuilderContext
     /// available: C# builds those from a type's own <c>operator false</c>/<c>operator true</c>, and
     /// <c>bool?</c> has none and cannot be given any (extension operators are accepted as
     /// declarations but the compiler will not use them to synthesise <c>&amp;&amp;</c>).
-    /// <para>Unwraps a <c>(bool?)</c> cast placed over an expression that is ALREADY a
-    /// <see cref="CqlBoolean"/>, so a nested chain stays in the type instead of round-tripping
+    /// <para>Steps over an intervening <c>(bool?)</c> cast, because converting to
+    /// <see cref="CqlBoolean"/> does not need the nullable hop. Two shapes reach here: the operand
+    /// is ALREADY a <see cref="CqlBoolean"/> (a nested chain, which would otherwise round-trip
     /// through <c>bool?</c> at every level — <c>a &amp;&amp; b &amp;&amp; c</c>, not
-    /// <c>(CqlBoolean)(bool?)(a &amp;&amp; b) &amp;&amp; c</c>.</para>
+    /// <c>(CqlBoolean)(bool?)(a &amp;&amp; b) &amp;&amp; c</c>), or it is a plain <c>bool</c> from a
+    /// pattern such as <c>x is null</c>, which converts to <see cref="CqlBoolean"/> directly —
+    /// <c>(CqlBoolean)(b_ is null)</c>, not <c>(CqlBoolean)((bool?)(b_ is null))</c>.</para>
     /// </summary>
     private static CodeExpression AsCqlBoolean(CodeExpression operand)
     {
@@ -580,9 +583,12 @@ partial class CodeBuilderContext
 
         if (operand is CodeCast { Type: var castType, Operand: { } inner }
             && castType == typeof(bool?)
-            && inner.Type == typeof(CqlBoolean))
+            && inner.Type is var innerType
+            && (innerType == typeof(CqlBoolean) || innerType == typeof(bool)))
         {
-            return inner;
+            return innerType == typeof(CqlBoolean)
+                       ? inner
+                       : new CodeCast(inner, typeof(CqlBoolean), CodeCastKind.Cast);
         }
 
         return new CodeCast(operand, typeof(CqlBoolean), CodeCastKind.Cast);

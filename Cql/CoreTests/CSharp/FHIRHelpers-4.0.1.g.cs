@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("FHIRHelpers", "4.0.1")]
 public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
 {
@@ -201,7 +201,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 return j_;
             }
 
-            if (((bool?)(/* CQL 'or' (35:14-36:92) */ (/* CQL 'or' (35:14-35:91) */ ((CqlBoolean)((bool?)(b_ is null))
+            if (((bool?)(/* CQL 'or' (35:14-36:92) */ (/* CQL 'or' (35:14-35:91) */ ((CqlBoolean)(b_ is null)
                 || c_())
                 || d_()))) ?? false)
             {
@@ -264,7 +264,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 return i_;
             }
 
-            if (((bool?)(/* CQL 'or' (46:14-47:92) */ (/* CQL 'or' (46:14-46:91) */ ((CqlBoolean)((bool?)(a_ is null))
+            if (((bool?)(/* CQL 'or' (46:14-47:92) */ (/* CQL 'or' (46:14-46:91) */ ((CqlBoolean)(a_ is null)
                 || b_())
                 || c_()))) ?? false)
             {

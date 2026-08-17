@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.0.004")]
 public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : ILibrary, ISingleton<DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004>
 {
@@ -377,7 +377,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 Extension z_ = this.GetModifierExtension(context, LevelOfSeverityNotCommunicated, "qicore-notDone");
                 DataType aa_ = z_?.Value;
                 bool? ab_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, aa_ as FhirBoolean);
-                return (bool?)(/* CQL 'is true' (110:11-110:96) */ ab_ is true);
+                return /* CQL 'is true' (110:11-110:96) */ ab_ is true;
             }
 
 
@@ -469,7 +469,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 Extension aa_ = this.GetModifierExtension(context, MacularEdemaAbsentNotCommunicated, "qicore-notDone");
                 DataType ab_ = aa_?.Value;
                 bool? ac_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, ab_ as FhirBoolean);
-                return (bool?)(/* CQL 'is true' (100:11-100:99) */ ac_ is true);
+                return /* CQL 'is true' (100:11-100:99) */ ac_ is true;
             }
 
 
@@ -560,7 +560,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 Extension z_ = this.GetModifierExtension(context, MacularEdemaPresentNotCommunicated, "qicore-notDone");
                 DataType aa_ = z_?.Value;
                 bool? ab_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, aa_ as FhirBoolean);
-                return (bool?)(/* CQL 'is true' (120:11-120:100) */ ab_ is true);
+                return /* CQL 'is true' (120:11-120:100) */ ab_ is true;
             }
 
 
