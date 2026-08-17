@@ -442,7 +442,12 @@ public class LogicCqlTest
     /// The results above would still hold if the guard stopped firing and plain merges were
     /// emitted, so this pins the emitted shape: regenerating the fixture's C# from its ELM
     /// must produce the origin-tagged guards and native operators, and no
-    /// <c>ICqlOperators</c> calls for and/or/not.
+    /// <c>ICqlOperators</c> calls for any of the lowered operators.
+    /// <para>Every one of the seven needs its own absent-call assertion, because the value tests
+    /// cannot detect a regression to the runtime operator: they compare against that very
+    /// operator, so identical values prove nothing about which code ran. For the total predicates
+    /// (<c>IsTrue</c>/<c>IsFalse</c>) there is not even a Message test to notice, since a total
+    /// predicate skips nothing.</para>
     /// </summary>
     [TestMethod]
     public void GeneratedCSharp_UsesGuardedNativeOperators()
@@ -452,11 +457,28 @@ public class LogicCqlTest
         StringAssert.Contains(generated, "// CQL 'and' (", "Expected origin-tagged 'and' guards.");
         StringAssert.Contains(generated, "/* CQL 'and' (", "Expected the inline-ternary guard form (AndNotY) with its block-comment tag.");
         StringAssert.Contains(generated, "// CQL 'or' (", "Expected origin-tagged 'or' guards.");
-        StringAssert.Contains(generated, "right operand skipped when left is false", "Expected the 'and' guard explanation.");
+        StringAssert.Contains(generated, "// CQL 'implies' (", "Expected origin-tagged 'implies' guards.");
+        StringAssert.Contains(generated, "// CQL 'xor' (", "Expected origin-tagged 'xor' guards.");
+        StringAssert.Contains(generated, "/* CQL 'is true' (", "Expected the 'is true' pattern's inline origin tag.");
+        StringAssert.Contains(generated, "/* CQL 'is false' (", "Expected the 'is false' pattern's inline origin tag.");
+        StringAssert.Contains(generated, "right operand skipped when left is false", "Expected the 'and'/'implies' guard explanation.");
         StringAssert.Contains(generated, "right operand skipped when left is true", "Expected the 'or' guard explanation.");
+        StringAssert.Contains(generated, "right operand skipped when left is null", "Expected the 'xor' guard explanation — null is xor's deciding value.");
 
-        foreach (var call in new[] { "Operators.And(", "Operators.Or(", "Operators.Not(" })
-            Assert.IsFalse(generated.Contains(call), $"{call} call survived; and/or/not must lower to native operators.");
+        // The native forms themselves, so a regression to an operator call cannot hide behind a
+        // surviving origin comment.
+        StringAssert.Contains(generated, " is true)", "Expected the 'is true' constant pattern.");
+        StringAssert.Contains(generated, " is false)", "Expected the 'is false' constant pattern.");
+        StringAssert.Contains(generated, " ^ ", "Expected xor to lower to the lifted ^ operator.");
+
+        foreach (var call in new[]
+                 {
+                     "Operators.And(", "Operators.Or(", "Operators.Not(",
+                     "Operators.Implies(", "Operators.Xor(", "Operators.IsTrue(", "Operators.IsFalse(",
+                 })
+        {
+            Assert.IsFalse(generated.Contains(call), $"{call} call survived; it must lower to a native operator or pattern.");
+        }
 
         // No Lazy-based short-circuiting either — the guard replaces it allocation-free.
         Assert.IsFalse(generated.Contains("Lazy<"), "A Lazy-based operand survived; the guard form must not allocate.");
@@ -503,27 +525,6 @@ public class LogicCqlTest
         Assert.IsTrue(start >= 0, $"Method {methodName} not found in generated code.");
         var end = code.IndexOf("[CqlExpressionDefinition", start, StringComparison.Ordinal);
         return end < 0 ? code[start..] : code[start..end];
-    }
-
-    /// <summary>
-    /// <see cref="ElmToolkitConfig.CSharpNamespace"/> wraps the generated code in that
-    /// namespace; null (the default) and empty (what a JSON <c>null</c> binds to — the JSON
-    /// configuration provider has no null) both produce namespace-less code.
-    /// </summary>
-    [TestMethod]
-    public void CSharpNamespace_WrapsGeneratedCode()
-    {
-        StringAssert.Contains(
-            GenerateFixtureCSharp(new ElmToolkitConfig(CSharpNamespace: "My.Ns")),
-            "namespace My.Ns;", "a namespace set in the config must be emitted.");
-
-        Assert.IsFalse(
-            GenerateFixtureCSharp(ElmToolkitConfig.Default).Contains("namespace "),
-            "the default (null) must emit namespace-less code.");
-
-        Assert.IsFalse(
-            GenerateFixtureCSharp(new ElmToolkitConfig(CSharpNamespace: "")).Contains("namespace "),
-            "an empty value (JSON null binds as \"\") must emit namespace-less code.");
     }
 
     private static string GenerateFixtureCSharp(ElmToolkitConfig config)

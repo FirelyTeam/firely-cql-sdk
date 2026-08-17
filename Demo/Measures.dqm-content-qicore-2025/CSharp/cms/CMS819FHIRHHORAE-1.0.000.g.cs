@@ -462,11 +462,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                     }
                     else
                     {
-                        DataType ba_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Effective;
-                        object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                        CqlInterval<CqlDateTime> bc_ = QICoreCommon_4_0_000.Instance.toInterval(context, bb_);
-                        CqlDateTime bd_ = context.Operators.Start(bc_);
-                        az_ = ay_ & (!((bool?)(bd_ is null)));
+                        az_ = ay_ & (!((bool?)(ag_ is null)));
                     }
                     ak_ = aj_ & az_;
                 }
@@ -478,12 +474,12 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                 }
                 else
                 {
-                    MedicationAdministration.DosageComponent be_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Dosage;
-                    CodeableConcept bf_ = be_?.Route;
-                    CqlConcept bg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bf_);
-                    CqlValueSet bh_ = this.Routes_of_Administration_for_Opioid_Antagonists(context);
-                    bool? bi_ = context.Operators.ConceptInValueSet(bg_, bh_);
-                    al_ = ak_ & bi_;
+                    MedicationAdministration.DosageComponent ba_ = tuple_htckrtcfdeaiwittzheehxihp?.NonEnteralOpioidAntagonistGiven?.Dosage;
+                    CodeableConcept bb_ = ba_?.Route;
+                    CqlConcept bc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bb_);
+                    CqlValueSet bd_ = this.Routes_of_Administration_for_Opioid_Antagonists(context);
+                    bool? be_ = context.Operators.ConceptInValueSet(bc_, bd_);
+                    al_ = ak_ & be_;
                 }
                 return n_ & al_;
             }

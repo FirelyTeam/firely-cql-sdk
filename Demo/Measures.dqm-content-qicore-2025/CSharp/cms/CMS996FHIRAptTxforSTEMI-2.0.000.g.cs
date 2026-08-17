@@ -533,14 +533,12 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         }
                         else
                         {
-                            CodeableConcept v_ = ThrombolyticAllergy?.VerificationStatus;
-                            CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
-                            CqlCode x_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
-                            CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
-                            bool? z_ = context.Operators.Equivalent(w_, y_);
-                            u_ = t_ | z_;
+                            CqlCode v_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
+                            CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
+                            bool? x_ = context.Operators.Equivalent(o_, w_);
+                            u_ = t_ | x_;
                         }
-                        q_ = !p_ | u_;
+                        q_ = /* CQL 'implies' (160:13-163:9) */ !p_ | u_;
                     }
                     m_ = l_ & q_;
                 }
@@ -551,25 +549,25 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 }
                 else
                 {
-                    DataType aa_ = ThrombolyticAllergy?.Onset;
-                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    CqlInterval<CqlDateTime> ac_ = QICoreCommon_4_0_000.Instance.toInterval(context, ab_);
-                    Period ad_ = EDwSTEMI?.Period;
-                    CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
-                    bool? af_ = context.Operators.Overlaps(ac_, ae_, (string)default);
-                    bool? ag_;
+                    DataType y_ = ThrombolyticAllergy?.Onset;
+                    object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
+                    CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.toInterval(context, z_);
+                    Period ab_ = EDwSTEMI?.Period;
+                    CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ab_);
+                    bool? ad_ = context.Operators.Overlaps(aa_, ac_, (string)default);
+                    bool? ae_;
                     // CQL 'or' (164:13-166:9): right operand skipped when left is true
-                    if (af_ is true)
+                    if (ad_ is true)
                     {
-                        ag_ = true;
+                        ae_ = true;
                     }
                     else
                     {
-                        CqlDateTime ah_ = context.Operators.End(ae_);
-                        bool? ai_ = context.Operators.Before(ab_ as CqlDateTime, ah_, (string)default);
-                        ag_ = af_ | ai_;
+                        CqlDateTime af_ = context.Operators.End(ac_);
+                        bool? ag_ = context.Operators.Before(z_ as CqlDateTime, af_, (string)default);
+                        ae_ = ad_ | ag_;
                     }
-                    return m_ & ag_;
+                    return m_ & ae_;
                 }
             }
 
@@ -919,10 +917,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     }
                     else
                     {
-                        Period av_ = EDwithSTEMI?.Period;
-                        CqlInterval<CqlDateTime> aw_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, av_);
-                        CqlDateTime ax_ = context.Operators.Start(aw_);
-                        au_ = at_ & (!((bool?)(ax_ is null)));
+                        au_ = at_ & (!((bool?)(ap_ is null)));
                     }
                     return ao_ | au_;
                 }
@@ -1254,10 +1249,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     }
                     else
                     {
-                        Period bo_ = EDwithSTEMI?.Period;
-                        CqlInterval<CqlDateTime> bp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bo_);
-                        CqlDateTime bq_ = context.Operators.Start(bp_);
-                        at_ = as_ & (!((bool?)(bq_ is null)));
+                        at_ = as_ & (!((bool?)(ao_ is null)));
                     }
                     q_ = p_ | at_;
                 }
@@ -1268,11 +1260,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 }
                 else
                 {
-                    Code<EventStatus> br_ = AirwayProcedure?.StatusElement;
-                    EventStatus? bs_ = br_?.Value;
-                    string bt_ = context.Operators.Convert<string>(bs_);
-                    bool? bu_ = context.Operators.Equal(bt_, "completed");
-                    return q_ & bu_;
+                    Code<EventStatus> bo_ = AirwayProcedure?.StatusElement;
+                    EventStatus? bp_ = bo_?.Value;
+                    string bq_ = context.Operators.Convert<string>(bp_);
+                    bool? br_ = context.Operators.Equal(bq_, "completed");
+                    return q_ & br_;
                 }
             }
 

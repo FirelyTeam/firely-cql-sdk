@@ -385,10 +385,10 @@ partial class CodeBuilderContext
     // and §4 Logical Specification). See Implies below for the two ways it differs from and/or.
 
     protected CodeExpression And(And and) =>
-        ShortCircuitBinary(and, CodeBinaryOp.BoolAnd, decidingValue: false);
+        ShortCircuitBinary(and, CodeBinaryOp.BoolAnd, decidingValue: false, cqlName: "and");
 
     protected CodeExpression Or(Or or) =>
-        ShortCircuitBinary(or, CodeBinaryOp.BoolOr, decidingValue: true);
+        ShortCircuitBinary(or, CodeBinaryOp.BoolOr, decidingValue: true, cqlName: "or");
 
     protected CodeExpression Not(Not not)
     {
@@ -425,27 +425,25 @@ partial class CodeBuilderContext
         var left = TranslateBoolArg(leftElement);
         var right = TranslateBoolArg(rightElement);
 
+        var originTag = OriginTagFor("implies", implies.locator);
+        const string originDetail = "right operand skipped when left is false";
+
         if (TryGetBoolConstant(left, out var leftConstant))
         {
             if (leftConstant is false)
-                return NullableBoolConstant(true);  // false implies X => true (X never evaluated)
+                return NullableBoolConstant(true);           // false implies X => true (X never evaluated)
             if (leftConstant is true)
-                return right;                       // true implies X => X
-            return ImpliesMerge(left, right);       // a null left decides nothing: null implies true is true
+                return right;                                // true implies X => X
+            return ImpliesMerge(left, right, originTag);     // a null left decides nothing: null implies true is true
         }
 
         if (TryGetBoolConstant(right, out var rightConstant) && rightConstant is true)
-            return NullableBoolConstant(true);      // X implies true => true, erasing the left operand
+            return NullableBoolConstant(true);               // X implies true => true, erasing the left operand
 
         // A false or null right constant is NOT deciding (true implies false is false, but
         // false implies false is true), and is free to re-read, so both merge without a guard.
         if (IsEvaluatedValue(right))
-            return ImpliesMerge(left, right);
-
-        var originTag = implies.locator is { Length: > 0 } locator
-            ? $"CQL 'implies' ({locator})"
-            : "CQL 'implies'";
-        const string originDetail = "right operand skipped when left is false";
+            return ImpliesMerge(left, right, originTag);
 
         // Same non-nullable-left shortcut as and/or: a left operand that cannot be null decides
         // by itself, so no local and no merge — where control falls through, left is true, and
@@ -468,7 +466,7 @@ partial class CodeBuilderContext
         var conditional = new CodeConditional(
             guard,
             NullableBoolConstant(true),
-            ImpliesMerge(local, right),
+            ImpliesMerge(local, right, originTag),
             typeof(bool?),
             originTag,
             originDetail);
@@ -515,13 +513,12 @@ partial class CodeBuilderContext
                 : left;                                 // X xor false => X
         }
 
-        // A left operand that cannot be null can never decide xor, so there is nothing to guard:
-        // emit the merge straight out. (Contrast and/or/implies, where a non-nullable left operand
-        // is exactly the case that decides on its own.)
-        if (left is CodeCast { Operand.Type: var innerType } && innerType == typeof(bool))
-            return new CodeBinary(CodeBinaryOp.BoolXor, left, HonestBoolOperand(right), originTag);
-
-        if (IsEvaluatedValue(right))
+        // No guard is needed when either there is nothing to decide or nothing to skip: a left
+        // operand that cannot be null can never decide xor (contrast and/or/implies, where a
+        // non-nullable left operand is exactly the case that decides on its own), and a right
+        // operand that is already an evaluated value costs nothing to re-read.
+        var leftCannotBeNull = left is CodeCast { Operand.Type: var innerType } && innerType == typeof(bool);
+        if (leftCannotBeNull || IsEvaluatedValue(right))
             return new CodeBinary(CodeBinaryOp.BoolXor, left, HonestBoolOperand(right), originTag);
 
         var local = new CodeLocal(typeof(bool?));
@@ -544,12 +541,16 @@ partial class CodeBuilderContext
     /// lifts it to <c>bool?</c>, exactly as it does for <c>IsNull</c>.
     /// </summary>
     protected CodeExpression IsTrue(IsTrue isTrue) =>
-        BoolConstantPattern(isTrue.operand, value: true, nameof(IsTrue));
+        BoolConstantPattern(isTrue, isTrue.operand, value: true, nameof(IsTrue));
 
     protected CodeExpression IsFalse(IsFalse isFalse) =>
-        BoolConstantPattern(isFalse.operand, value: false, nameof(IsFalse));
+        BoolConstantPattern(isFalse, isFalse.operand, value: false, nameof(IsFalse));
 
-    private CodeExpression BoolConstantPattern(Elm.Expression? operandElement, bool value, string operatorName)
+    private CodeExpression BoolConstantPattern(
+        Elm.Element element,
+        Elm.Expression? operandElement,
+        bool value,
+        string operatorName)
     {
         var operand = TranslateBoolArg(operandElement
             ?? throw this.NewExpressionBuildingException($"{operatorName} has no operand."));
@@ -564,8 +565,10 @@ partial class CodeBuilderContext
             operand,
             new CodeConstant(value, typeof(bool?)),
             // The CQL reads "X is true" / "X is false", so the tag names that syntax rather than
-            // the ELM operator name.
-            OriginTagFor(value ? "is true" : "is false", (operandElement as Elm.Element)?.locator));
+            // the ELM operator name. The locator must come from the IsTrue/IsFalse ELEMENT, not
+            // its operand: the operand's span covers only "X", and an operand that carries no
+            // locator would leave the tag with no span at all.
+            OriginTagFor(value ? "is true" : "is false", element.locator));
     }
 
     /// <summary>The <c>CQL '&lt;name&gt;' (locator)</c> tag a lowered operator carries so a reader
@@ -584,19 +587,26 @@ partial class CodeBuilderContext
             : new CodeUnary(CodeUnaryOp.Not, operand);
 
     /// <summary><c>!left | right</c> — Kleene implication over C#'s lifted operators.</summary>
-    private static CodeExpression ImpliesMerge(CodeExpression left, CodeExpression right) =>
+    private static CodeExpression ImpliesMerge(CodeExpression left, CodeExpression right, string originTag) =>
         new CodeBinary(
             CodeBinaryOp.BoolOr,
             new CodeUnary(CodeUnaryOp.Not, HonestBoolOperand(left)),
-            HonestBoolOperand(right));
+            HonestBoolOperand(right),
+            originTag);
 
-    private CodeExpression ShortCircuitBinary(Elm.BinaryExpression binary, CodeBinaryOp op, bool decidingValue)
+    private CodeExpression ShortCircuitBinary(
+        Elm.BinaryExpression binary,
+        CodeBinaryOp op,
+        bool decidingValue,
+        string cqlName)
     {
         if (binary.operand is not [{ } leftElement, { } rightElement])
             throw this.NewExpressionBuildingException($"{binary.GetType().Name} expects exactly two operands.");
 
         var left = TranslateBoolArg(leftElement);
         var right = TranslateBoolArg(rightElement);
+
+        var originTag = OriginTagFor(cqlName, binary.locator);
 
         // Constant operands fold over the Kleene table where a single operand already fixes
         // the outcome (the deciding constant absorbs; its dual passes the other operand
@@ -611,7 +621,7 @@ partial class CodeBuilderContext
                 return right;                               // true and X => X
             // A null left decides nothing (null and false = false): merge without a guard —
             // a guard could never skip anyway, since null must not short-circuit.
-            return new CodeBinary(op, HonestBoolOperand(left), HonestBoolOperand(right));
+            return new CodeBinary(op, HonestBoolOperand(left), HonestBoolOperand(right), originTag);
         }
 
         if (TryGetBoolConstant(right, out var rightConstant))
@@ -633,12 +643,7 @@ partial class CodeBuilderContext
         // A right operand that is already an evaluated value costs nothing to re-read, so
         // the combine emits without a guard: x_ & y_.
         if (IsEvaluatedValue(right))
-            return new CodeBinary(op, left, HonestBoolOperand(right));
-
-        var operatorName = op == CodeBinaryOp.BoolAnd ? "and" : "or";
-        var originTag = binary.locator is { Length: > 0 } locator
-            ? $"CQL '{operatorName}' ({locator})"
-            : $"CQL '{operatorName}'";
+            return new CodeBinary(op, left, HonestBoolOperand(right), originTag);
         var originDetail = $"right operand skipped when left is {(decidingValue ? "true" : "false")}";
 
         // A left operand whose UNDERLYING type is non-nullable bool cannot evaluate to null, so

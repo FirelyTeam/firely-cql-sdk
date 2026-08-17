@@ -9,15 +9,21 @@
   effects of a skipped operand no longer occur: a runtime error it would have thrown no longer
   surfaces, and a `Message()` call inside it no longer raises `MessageReceived`. The CQL
   specification permits this (evaluation of logical operands is not prescribed). (#1514)
-- Side effects can also move in the *other* direction, in a small number of shapes. A guarded
-  branch reuses values its enclosing block already computed, but a few positions cannot — a
-  hoisted local function's body deliberately does not reach out to an enclosing local, and a
-  guard test that prints inline is not itself hoisted — so a subexpression shared between the two
-  operands may be evaluated twice there. Measured across the checked-in corpora the net effect is
-  at or below the previous output for every operator (`Operators.Start` is 2 calls fewer,
-  `End`/`Retrieve<` 4 more each, out of 1187/798/2311), and the repeats are property reads and
-  cheap accessors rather than retrieves. Where such a subexpression contains a `Message()`, that
-  message can be raised more than once. (#1514)
+- Side effects can also move in the *other* direction for a minority of expressions, and that is a
+  real increase rather than a theoretical one. Sibling branches of a guard cannot share a hoisted
+  local the way straight-line code could, so a subexpression both operands need is emitted in each
+  branch; the same applies where a guard test prints inline, and inside a hoisted local function,
+  whose body deliberately does not reach out to an enclosing local (that would turn it into
+  captured closure state). Counted over all checked-in generated code, eleven operators end up with
+  **more** calls than before — `ConvertIntegerToDecimal` 199 → 225, `ConvertDateToDateTime`
+  268 → 283, `DateFrom` 498 → 503, `LateBoundProperty` 603 → 607, `Exists` and `WhereAny` +2 each,
+  and `Convert`, `Equal`, `Equivalent`, `Interval` and **`Message`** +1 each — 60 additional calls
+  in total. Eight operators end up with fewer (`Start` 1189 → 1176, `Subtract`/`Multiply`/`End`
+  −10 each, and others), 75 calls in total, and `Retrieve<` lands at exactly its previous count, so
+  no additional FHIR retrieve is emitted anywhere. Net across everything except the operators this
+  change eliminates outright: 15 fewer calls. Note the extra `Message` site: where a repeated
+  subexpression contains a `Message()`, that message can be raised more than once. Generated code
+  also grows, roughly 24k net lines across the corpora, for the same branching reason. (#1514)
 - `xor` now short-circuits too — on a **null** left operand, which makes it the odd one out.
   Its null row is constant ("if either or both arguments are null, the result is null"), so a null
   left operand decides the result and the right operand is skipped; a `true` or `false` left
@@ -35,8 +41,7 @@
   the specification calls this skip out explicitly: "implies may use short-circuit evaluation in
   the case that the first operand evaluates to false" (§9.B). A `true` or `null` left operand
   still evaluates the right operand (`null implies true` is `true`). The same side-effect
-  disclosure applies: an error or `Message()` in a skipped right operand no longer occurs.
-  `xor` is unchanged — every row of its truth table varies with the right operand. (#1514)
+  disclosure applies: an error or `Message()` in a skipped right operand no longer occurs. (#1514)
 - `and`/`or`/`not` now compile to C#'s lifted `&`/`|`/`!` operators over `bool?` — whose semantics
   are exactly CQL's three-valued logic — instead of `ICqlOperators.And`/`Or`/`Not` calls. Those
   runtime methods (including the `Lazy<bool?>` overloads) remain public API but are no longer

@@ -213,12 +213,10 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                CodeableConcept j_ = condition?.VerificationStatus;
-                CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
-                CqlCode l_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-                CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
-                bool? n_ = context.Operators.Equivalent(k_, m_);
-                g_ = f_ | n_;
+                CqlCode j_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+                CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+                bool? l_ = context.Operators.Equivalent(b_, k_);
+                g_ = f_ | l_;
             }
             bool? h_;
             // CQL 'or' (216:54-218:66): right operand skipped when left is true
@@ -228,12 +226,10 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                CodeableConcept o_ = condition?.VerificationStatus;
-                CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-                CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
-                CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-                bool? s_ = context.Operators.Equivalent(p_, r_);
-                h_ = g_ | s_;
+                CqlCode m_ = QICoreCommon_4_0_000.Instance.provisional(context);
+                CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
+                bool? o_ = context.Operators.Equivalent(b_, n_);
+                h_ = g_ | o_;
             }
             bool? i_;
             // CQL 'or' (216:52-220:3): right operand skipped when left is true
@@ -243,14 +239,12 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                CodeableConcept t_ = condition?.VerificationStatus;
-                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                CqlCode v_ = QICoreCommon_4_0_000.Instance.differential(context);
-                CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-                bool? x_ = context.Operators.Equivalent(u_, w_);
-                i_ = h_ | x_;
+                CqlCode p_ = QICoreCommon_4_0_000.Instance.differential(context);
+                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+                bool? r_ = context.Operators.Equivalent(b_, q_);
+                i_ = h_ | r_;
             }
-            return !c_ | i_;
+            return /* CQL 'implies' (216:3-220:3) */ !c_ | i_;
         }
     }
 
@@ -286,18 +280,14 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
                 CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
                 CqlInterval<CqlDateTime> p_;
-                CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-                CqlDateTime s_ = context.Operators.End(r_);
-                if (s_ is null)
+                if (j_ is null)
                 {
                     p_ = default;
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
-                    CqlDateTime u_ = context.Operators.End(t_);
-                    CqlInterval<CqlDateTime> v_ = context.Operators.Interval(u_, u_, true, true);
-                    p_ = v_;
+                    CqlInterval<CqlDateTime> r_ = context.Operators.Interval(j_, j_, true, true);
+                    p_ = r_;
                 }
                 bool? q_ = context.Operators.Before(o_, p_, "day");
                 l_ = k_ | q_;
@@ -309,8 +299,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                bool? w_ = this.isVerified(context, BladderCancer);
-                return l_ & w_;
+                bool? s_ = this.isVerified(context, BladderCancer);
+                return l_ & s_;
             }
         }
 

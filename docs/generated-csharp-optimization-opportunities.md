@@ -47,13 +47,14 @@ exact native equivalent.
 The binder/emitter know every operand type statically. Where a native C# construct has
 *exactly* CQL semantics, emit it instead of the operator call:
 
-- ~~`Operators.And/Or/Not` on `bool?` → `&`, `|`, `!`~~ — **delivered** in
+- ~~`Operators.And/Or/Not/Xor/Implies` on `bool?` → `&`, `|`, `!`, `^`, `!l | r`, and
+  `IsTrue`/`IsFalse` → `is true`/`is false`~~ — **delivered** in
   [#1565](https://github.com/FirelyTeam/firely-cql-sdk/pull/1565) (`GeneratorToolVersion`
-  5.3.0.0), which also short-circuits `and`/`or`: C#'s lifted `&`/`|` on `bool?` **are** Kleene
-  three-valued logic, so `Operators.And/Or/Not(` no longer appear in any regenerated corpus.
-  `Xor` stays — every row of its table varies with the right operand. `Implies` is still open
-  and is the remaining win here: the spec explicitly permits skipping its right operand when the
-  left is false ([#1571](https://github.com/FirelyTeam/firely-cql-sdk/issues/1571)).
+  5.3.0.0), which also short-circuits `and`, `or`, `implies` and `xor`: C#'s lifted operators on
+  `bool?` **are** Kleene three-valued logic, so none of those members appear in any regenerated
+  corpus. Each decides on a different value — `false` for `and`/`implies`, `true` for `or`, and
+  `null` for `xor`, whose null row is the constant one. The whole logical and nullological family
+  is now lowered; nothing remains open in this bullet.
 - `Operators.Equal` on primitives → `==` (lifted equality matches CQL for non-null; CQL's
   null-propagating equality needs the `HasValue` guard below).
 - Comparisons (`Greater[OrEqual]`, `Less[OrEqual]`) on `int?/long?/decimal?`: NOT a direct

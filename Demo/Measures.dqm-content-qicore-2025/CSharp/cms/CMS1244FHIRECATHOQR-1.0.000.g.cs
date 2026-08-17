@@ -275,10 +275,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     }
                     else
                     {
-                        Period w_ = EDEvalManagementInMP?.Period;
-                        CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
-                        CqlDateTime y_ = context.Operators.Start(x_);
-                        v_ = u_ & (!((bool?)(y_ is null)));
+                        v_ = u_ & (!((bool?)(q_ is null)));
                     }
                     return m_ | v_;
                 }
@@ -539,10 +536,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     }
                     else
                     {
-                        Period w_ = EDEncounter?.Period;
-                        CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
-                        CqlDateTime y_ = context.Operators.Start(x_);
-                        v_ = u_ & (!((bool?)(y_ is null)));
+                        v_ = u_ & (!((bool?)(q_ is null)));
                     }
                     return m_ | v_;
                 }

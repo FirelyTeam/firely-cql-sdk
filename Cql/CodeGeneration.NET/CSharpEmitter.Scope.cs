@@ -171,7 +171,7 @@ internal partial class CSharpEmitter
                     or CodeCast
                     or CodeNew
                     or CodeThrow
-                    or CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr }
+                    or CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr or CodeBinaryOp.BoolXor }
                     or CodeUnary:
                 {
                     var (printed, keyPrinted) = PrintBoth(node);
@@ -355,7 +355,7 @@ internal partial class CSharpEmitter
                 CodeCast c => IsInlineOnly(c.Operand),
                 CodeNew n => n.Arguments.All(IsInlineOnly),
                 CodeThrow t => IsInlineOnly(t.Exception),
-                CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr } b =>
+                CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr or CodeBinaryOp.BoolXor } b =>
                     IsInlineOnly(b.Left) && IsInlineOnly(b.Right),
                 CodeUnary u => IsInlineOnly(u.Operand),
                 CodeConditional nested =>
@@ -470,7 +470,22 @@ internal partial class CSharpEmitter
             // every branch and test block, but anything it hoists AFTER the chain is declared
             // BELOW it, and reusing one of those from inside a branch would be a
             // use-before-declaration.
-            var visibleDedup = new Dictionary<string, Atom>(_dedup);
+            //
+            // Seeded from what this scope itself inherited, so visibility passes all the way
+            // DOWN a nest of chains rather than one level: an ancestor's locals are declared
+            // above the chain that encloses this block, so they are just as visible here. Copying
+            // only _dedup would make a guard nested two levels deep recompute what the outermost
+            // scope had already hoisted — which is what the residual duplicated retrieves were.
+            var visibleDedup = _inheritedDedup is null
+                ? new Dictionary<string, Atom>(_dedup)
+                : new Dictionary<string, Atom>(_inheritedDedup);
+            if (_inheritedDedup is not null)
+            {
+                // This scope's own hoists win: a nearer declaration shadows nothing, but it is
+                // the one whose name is guaranteed still in scope at the deepest level.
+                foreach (var (key, atom) in _dedup)
+                    visibleDedup[key] = atom;
+            }
 
             if (tailPosition)
             {
@@ -584,7 +599,7 @@ internal partial class CSharpEmitter
                 CodeCast c => CountSpineNodes(c.Operand),
                 CodeNew n => n.Arguments.Sum(CountSpineNodes),
                 CodeThrow t => CountSpineNodes(t.Exception),
-                CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr } b =>
+                CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr or CodeBinaryOp.BoolXor } b =>
                     CountSpineNodes(b.Left) + CountSpineNodes(b.Right),
                 CodeUnary u => CountSpineNodes(u.Operand),
                 // A conditional containing a statement-shaped node anywhere (test included)

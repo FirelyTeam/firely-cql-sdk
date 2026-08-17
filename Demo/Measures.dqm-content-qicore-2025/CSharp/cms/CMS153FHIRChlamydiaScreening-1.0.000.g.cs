@@ -675,12 +675,10 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         else
         {
             List<Extension> m_;
-            Patient s_ = this.Patient(context);
-            bool t_ = s_ is DomainResource;
-            if (t_)
+            bool s_ = a_ is DomainResource;
+            if (s_)
             {
-                Patient u_ = this.Patient(context);
-                m_ = (u_ as DomainResource).Extension;
+                m_ = (a_ as DomainResource).Extension;
             }
             else
             {
@@ -688,16 +686,16 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             }
 
             bool? n_(Extension @this) {
-                FhirUri v_ = @this?.UrlElement;
-                string w_ = FHIRHelpers_4_4_000.Instance.ToString(context, v_);
-                bool? x_ = context.Operators.Equal(w_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-                return x_;
+                FhirUri t_ = @this?.UrlElement;
+                string u_ = FHIRHelpers_4_4_000.Instance.ToString(context, t_);
+                bool? v_ = context.Operators.Equal(u_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+                return v_;
             }
 
 
             DataType o_(Extension @this) {
-                DataType y_ = @this?.Value;
-                return y_;
+                DataType w_ = @this?.Value;
+                return w_;
             }
 
             IEnumerable<DataType> p_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)m_, n_, o_);
@@ -713,9 +711,9 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         }
         else
         {
-            IEnumerable<Encounter> z_ = this.Qualifying_Encounters(context);
-            bool? aa_ = context.Operators.Exists<Encounter>(z_);
-            l_ = k_ & aa_;
+            IEnumerable<Encounter> x_ = this.Qualifying_Encounters(context);
+            bool? y_ = context.Operators.Exists<Encounter>(x_);
+            l_ = k_ & y_;
         }
         // CQL 'and' (59:3-71:5): right operand skipped when left is false
         if (l_ is false)
@@ -724,74 +722,74 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         }
         else
         {
-            bool? ab_ = this.Has_Assessments_Identifying_Sexual_Activity(context);
-            bool? ac_;
+            bool? z_ = this.Has_Assessments_Identifying_Sexual_Activity(context);
+            bool? aa_;
             // CQL 'or' (64:11-65:58): right operand skipped when left is true
+            if (z_ is true)
+            {
+                aa_ = true;
+            }
+            else
+            {
+                bool? ag_ = this.Has_Diagnoses_Identifying_Sexual_Activity(context);
+                aa_ = z_ | ag_;
+            }
+            bool? ab_;
+            // CQL 'or' (64:11-66:53): right operand skipped when left is true
+            if (aa_ is true)
+            {
+                ab_ = true;
+            }
+            else
+            {
+                bool? ah_ = this.Has_Active_Contraceptive_Medications(context);
+                ab_ = aa_ | ah_;
+            }
+            bool? ac_;
+            // CQL 'or' (64:11-67:54): right operand skipped when left is true
             if (ab_ is true)
             {
                 ac_ = true;
             }
             else
             {
-                bool? ai_ = this.Has_Diagnoses_Identifying_Sexual_Activity(context);
+                bool? ai_ = this.Has_Ordered_Contraceptive_Medications(context);
                 ac_ = ab_ | ai_;
             }
             bool? ad_;
-            // CQL 'or' (64:11-66:53): right operand skipped when left is true
+            // CQL 'or' (64:11-68:65): right operand skipped when left is true
             if (ac_ is true)
             {
                 ad_ = true;
             }
             else
             {
-                bool? aj_ = this.Has_Active_Contraceptive_Medications(context);
+                bool? aj_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity(context);
                 ad_ = ac_ | aj_;
             }
             bool? ae_;
-            // CQL 'or' (64:11-67:54): right operand skipped when left is true
+            // CQL 'or' (64:11-69:67): right operand skipped when left is true
             if (ad_ is true)
             {
                 ae_ = true;
             }
             else
             {
-                bool? ak_ = this.Has_Ordered_Contraceptive_Medications(context);
+                bool? ak_ = this.Has_Diagnostic_Studies_Identifying_Sexual_Activity(context);
                 ae_ = ad_ | ak_;
             }
             bool? af_;
-            // CQL 'or' (64:11-68:65): right operand skipped when left is true
+            // CQL 'or' (64:9-71:5): right operand skipped when left is true
             if (ae_ is true)
             {
                 af_ = true;
             }
             else
             {
-                bool? al_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity(context);
+                bool? al_ = this.Has_Procedures_Identifying_Sexual_Activity(context);
                 af_ = ae_ | al_;
             }
-            bool? ag_;
-            // CQL 'or' (64:11-69:67): right operand skipped when left is true
-            if (af_ is true)
-            {
-                ag_ = true;
-            }
-            else
-            {
-                bool? am_ = this.Has_Diagnostic_Studies_Identifying_Sexual_Activity(context);
-                ag_ = af_ | am_;
-            }
-            bool? ah_;
-            // CQL 'or' (64:9-71:5): right operand skipped when left is true
-            if (ag_ is true)
-            {
-                ah_ = true;
-            }
-            else
-            {
-                bool? an_ = this.Has_Procedures_Identifying_Sexual_Activity(context);
-                ah_ = ag_ | an_;
-            }
-            return l_ & ah_;
+            return l_ & af_;
         }
     }
 

@@ -514,11 +514,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     }
                     else
                     {
-                        FhirDateTime aa_ = OrderMedication1?.AuthoredOnElement;
-                        CqlDateTime ab_ = context.Operators.Convert<CqlDateTime>(aa_);
-                        CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
-                        bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, (string)default);
-                        y_ = x_ & ad_;
+                        y_ = x_ & l_;
                     }
                     bool? z_;
                     // CQL 'and' (253:12-256:9): right operand skipped when left is false
@@ -528,9 +524,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     }
                     else
                     {
-                        CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
-                        bool? af_ = context.Operators.In<CqlDateTime>(u_, ae_, (string)default);
-                        z_ = y_ & af_;
+                        bool? aa_ = context.Operators.In<CqlDateTime>(u_, k_, (string)default);
+                        z_ = y_ & aa_;
                     }
                     n_ = m_ | z_;
                 }
@@ -541,75 +536,69 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 }
                 else
                 {
-                    CqlDate ag_ = context.Operators.DateFrom(j_);
-                    FhirDateTime ah_ = OrderMedication2?.AuthoredOnElement;
-                    CqlDateTime ai_ = context.Operators.Convert<CqlDateTime>(ah_);
-                    CqlDate aj_ = context.Operators.DateFrom(ai_);
-                    bool? ak_ = context.Operators.Equivalent(ag_, aj_);
-                    bool? al_;
+                    CqlDate ab_ = context.Operators.DateFrom(j_);
+                    FhirDateTime ac_ = OrderMedication2?.AuthoredOnElement;
+                    CqlDateTime ad_ = context.Operators.Convert<CqlDateTime>(ac_);
+                    CqlDate ae_ = context.Operators.DateFrom(ad_);
+                    bool? af_ = context.Operators.Equivalent(ab_, ae_);
+                    bool? ag_;
                     // CQL 'and' (257:14-258:71): right operand skipped when left is false
-                    if (ak_ is false)
+                    if (af_ is false)
                     {
-                        al_ = false;
+                        ag_ = false;
                     }
                     else
                     {
-                        FhirDateTime ap_ = OrderMedication1?.AuthoredOnElement;
-                        CqlDateTime aq_ = context.Operators.Convert<CqlDateTime>(ap_);
-                        CqlInterval<CqlDateTime> ar_ = this.Measurement_Period(context);
-                        bool? as_ = context.Operators.In<CqlDateTime>(aq_, ar_, (string)default);
-                        al_ = ak_ & as_;
+                        ag_ = af_ & l_;
                     }
-                    bool? am_;
+                    bool? ah_;
                     // CQL 'and' (257:14-259:146): right operand skipped when left is false
-                    if (al_ is false)
+                    if (ag_ is false)
                     {
-                        am_ = false;
+                        ah_ = false;
+                    }
+                    else
+                    {
+                        CqlInterval<CqlDate> ak_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OrderMedication1);
+                        CqlDate al_ = context.Operators.Start(ak_);
+                        CqlDateTime am_ = context.Operators.ConvertDateToDateTime(al_);
+                        CqlDate an_ = context.Operators.DateFrom(am_);
+                        CqlInterval<CqlDate> ao_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OrderMedication2);
+                        CqlDate ap_ = context.Operators.Start(ao_);
+                        CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(ap_);
+                        CqlDate ar_ = context.Operators.DateFrom(aq_);
+                        bool? as_ = context.Operators.Equivalent(an_, ar_);
+                        ah_ = ag_ & !as_;
+                    }
+                    bool? ai_;
+                    // CQL 'and' (257:14-260:97): right operand skipped when left is false
+                    if (ah_ is false)
+                    {
+                        ai_ = false;
                     }
                     else
                     {
                         CqlInterval<CqlDate> at_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OrderMedication1);
                         CqlDate au_ = context.Operators.Start(at_);
                         CqlDateTime av_ = context.Operators.ConvertDateToDateTime(au_);
-                        CqlDate aw_ = context.Operators.DateFrom(av_);
+                        bool? aw_ = context.Operators.In<CqlDateTime>(av_, k_, (string)default);
+                        ai_ = ah_ & aw_;
+                    }
+                    bool? aj_;
+                    // CQL 'and' (257:12-262:9): right operand skipped when left is false
+                    if (ai_ is false)
+                    {
+                        aj_ = false;
+                    }
+                    else
+                    {
                         CqlInterval<CqlDate> ax_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OrderMedication2);
                         CqlDate ay_ = context.Operators.Start(ax_);
                         CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
-                        CqlDate ba_ = context.Operators.DateFrom(az_);
-                        bool? bb_ = context.Operators.Equivalent(aw_, ba_);
-                        am_ = al_ & !bb_;
+                        bool? ba_ = context.Operators.In<CqlDateTime>(az_, k_, (string)default);
+                        aj_ = ai_ & ba_;
                     }
-                    bool? an_;
-                    // CQL 'and' (257:14-260:97): right operand skipped when left is false
-                    if (am_ is false)
-                    {
-                        an_ = false;
-                    }
-                    else
-                    {
-                        CqlInterval<CqlDate> bc_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OrderMedication1);
-                        CqlDate bd_ = context.Operators.Start(bc_);
-                        CqlDateTime be_ = context.Operators.ConvertDateToDateTime(bd_);
-                        CqlInterval<CqlDateTime> bf_ = this.Measurement_Period(context);
-                        bool? bg_ = context.Operators.In<CqlDateTime>(be_, bf_, (string)default);
-                        an_ = am_ & bg_;
-                    }
-                    bool? ao_;
-                    // CQL 'and' (257:12-262:9): right operand skipped when left is false
-                    if (an_ is false)
-                    {
-                        ao_ = false;
-                    }
-                    else
-                    {
-                        CqlInterval<CqlDate> bh_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OrderMedication2);
-                        CqlDate bi_ = context.Operators.Start(bh_);
-                        CqlDateTime bj_ = context.Operators.ConvertDateToDateTime(bi_);
-                        CqlInterval<CqlDateTime> bk_ = this.Measurement_Period(context);
-                        bool? bl_ = context.Operators.In<CqlDateTime>(bj_, bk_, (string)default);
-                        ao_ = an_ & bl_;
-                    }
-                    return n_ | ao_;
+                    return n_ | aj_;
                 }
             }
 
@@ -2240,8 +2229,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             }
             else
             {
-                bool? d_ = this.Numerator_2(context);
-                c_ = b_ & !d_;
+                c_ = b_ & !a_;
             }
             return a_ | c_;
         }

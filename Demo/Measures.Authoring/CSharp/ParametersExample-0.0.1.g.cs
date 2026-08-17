@@ -97,7 +97,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             {
                 FhirBoolean k_ = P?.ActiveElement;
                 bool? l_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, k_);
-                i_ = h_ & ((bool?)(/* CQL 'is true' */ l_ is true));
+                i_ = h_ & ((bool?)(/* CQL 'is true' (19:11-19:26) */ l_ is true));
             }
             bool? j_;
             // CQL 'and' (18:11-20:25): right operand skipped when left is false

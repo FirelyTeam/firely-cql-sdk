@@ -165,11 +165,9 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
                 }
                 else
                 {
-                    Coding j_ = E?.Class;
-                    CqlCode k_ = FHIRHelpers_4_0_001.Instance.ToCode(context, j_);
-                    CqlCode l_ = NCQATerminology_1_0_0.Instance.home_health(context);
-                    bool? m_ = context.Operators.Equivalent(k_, l_);
-                    i_ = h_ | m_;
+                    CqlCode j_ = NCQATerminology_1_0_0.Instance.home_health(context);
+                    bool? k_ = context.Operators.Equivalent(f_, j_);
+                    i_ = h_ | k_;
                 }
                 return e_ & i_;
             }

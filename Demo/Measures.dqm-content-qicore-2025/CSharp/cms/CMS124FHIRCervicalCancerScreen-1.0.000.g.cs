@@ -181,12 +181,10 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
         else
         {
             List<Extension> l_;
-            Patient r_ = this.Patient(context);
-            bool s_ = r_ is DomainResource;
-            if (s_)
+            bool r_ = a_ is DomainResource;
+            if (r_)
             {
-                Patient t_ = this.Patient(context);
-                l_ = (t_ as DomainResource).Extension;
+                l_ = (a_ as DomainResource).Extension;
             }
             else
             {
@@ -194,16 +192,16 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
             }
 
             bool? m_(Extension @this) {
-                FhirUri u_ = @this?.UrlElement;
-                string v_ = FHIRHelpers_4_4_000.Instance.ToString(context, u_);
-                bool? w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-                return w_;
+                FhirUri s_ = @this?.UrlElement;
+                string t_ = FHIRHelpers_4_4_000.Instance.ToString(context, s_);
+                bool? u_ = context.Operators.Equal(t_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+                return u_;
             }
 
 
             DataType n_(Extension @this) {
-                DataType x_ = @this?.Value;
-                return x_;
+                DataType v_ = @this?.Value;
+                return v_;
             }
 
             IEnumerable<DataType> o_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)l_, m_, n_);
@@ -218,9 +216,9 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
         }
         else
         {
-            IEnumerable<Encounter> y_ = this.Qualifying_Encounters(context);
-            bool? z_ = context.Operators.Exists<Encounter>(y_);
-            return k_ & z_;
+            IEnumerable<Encounter> w_ = this.Qualifying_Encounters(context);
+            bool? x_ = context.Operators.Exists<Encounter>(w_);
+            return k_ & x_;
         }
     }
 

@@ -380,7 +380,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     bool? al_ = context.Operators.WhereAny<Encounter>(aj_, ak_);
                     x_ = w_ & !al_;
                 }
-                return !j_ | x_;
+                return /* CQL 'implies' (203:5-210:7) */ !j_ | x_;
             }
         }
 

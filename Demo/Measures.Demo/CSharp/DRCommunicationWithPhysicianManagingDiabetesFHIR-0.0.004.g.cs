@@ -393,7 +393,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 Extension ae_ = this.GetModifierExtension(context, LevelOfSeverityNotCommunicated, "qicore-notDone");
                 DataType af_ = ae_?.Value;
                 bool? ag_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, af_ as FhirBoolean);
-                ad_ = ac_ & ((bool?)(/* CQL 'is true' */ ag_ is true));
+                ad_ = ac_ & ((bool?)(/* CQL 'is true' (110:11-110:96) */ ag_ is true));
             }
             // CQL 'and' (109:5-113:7): right operand skipped when left is false
             if (ad_ is false)
@@ -499,7 +499,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 Extension af_ = this.GetModifierExtension(context, MacularEdemaAbsentNotCommunicated, "qicore-notDone");
                 DataType ag_ = af_?.Value;
                 bool? ah_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, ag_ as FhirBoolean);
-                ae_ = ad_ & ((bool?)(/* CQL 'is true' */ ah_ is true));
+                ae_ = ad_ & ((bool?)(/* CQL 'is true' (100:11-100:99) */ ah_ is true));
             }
             // CQL 'and' (99:5-103:7): right operand skipped when left is false
             if (ae_ is false)
@@ -604,7 +604,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 Extension ae_ = this.GetModifierExtension(context, MacularEdemaPresentNotCommunicated, "qicore-notDone");
                 DataType af_ = ae_?.Value;
                 bool? ag_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, af_ as FhirBoolean);
-                ad_ = ac_ & ((bool?)(/* CQL 'is true' */ ag_ is true));
+                ad_ = ac_ & ((bool?)(/* CQL 'is true' (120:11-120:100) */ ag_ is true));
             }
             // CQL 'and' (119:5-123:7): right operand skipped when left is false
             if (ad_ is false)

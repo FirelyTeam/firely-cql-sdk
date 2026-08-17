@@ -506,7 +506,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                         bool? aa_ = context.Operators.Equivalent(s_, z_);
                         x_ = w_ & !aa_;
                     }
-                    return !o_ | x_;
+                    return /* CQL 'implies' (80:9-83:9) */ !o_ | x_;
                 }
             }
 

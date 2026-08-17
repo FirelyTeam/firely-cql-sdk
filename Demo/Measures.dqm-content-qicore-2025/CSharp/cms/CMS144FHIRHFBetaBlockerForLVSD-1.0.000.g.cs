@@ -509,14 +509,12 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             }
             else
             {
-                CodeableConcept h_ = allergyIntolerance?.VerificationStatus;
-                CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
-                CqlCode j_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
-                CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-                bool? l_ = context.Operators.Equivalent(i_, k_);
-                g_ = f_ | l_;
+                CqlCode h_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
+                CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+                bool? j_ = context.Operators.Equivalent(b_, i_);
+                g_ = f_ | j_;
             }
-            return !c_ | g_;
+            return /* CQL 'implies' (185:3-187:3) */ !c_ | g_;
         }
     }
 

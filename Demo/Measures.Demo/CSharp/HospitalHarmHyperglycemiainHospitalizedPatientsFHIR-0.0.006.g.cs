@@ -702,11 +702,10 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                     else
                     {
                         IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> v_ = EncounterWithResultDays?.relevantDays;
-                        int? w_ = EncounterDay?.dayIndex;
-                        int? x_ = context.Operators.Subtract(w_, 2);
-                        (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? y_ = context.Operators.Indexer<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(v_, x_);
-                        bool? z_ = y_?.hasElevatedResult;
-                        t_ = s_ & z_;
+                        int? w_ = context.Operators.Subtract(n_, 2);
+                        (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? x_ = context.Operators.Indexer<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(v_, w_);
+                        bool? y_ = x_?.hasElevatedResult;
+                        t_ = s_ & y_;
                     }
                     bool? u_;
                     // CQL 'and' (78:24-81:21): right operand skipped when left is false
@@ -716,12 +715,11 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                     }
                     else
                     {
-                        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> aa_ = EncounterWithResultDays?.relevantDays;
-                        int? ab_ = EncounterDay?.dayIndex;
-                        int? ac_ = context.Operators.Subtract(ab_, 3);
-                        (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? ad_ = context.Operators.Indexer<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(aa_, ac_);
-                        bool? ae_ = ad_?.hasElevatedResult;
-                        u_ = t_ & ae_;
+                        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> z_ = EncounterWithResultDays?.relevantDays;
+                        int? aa_ = context.Operators.Subtract(n_, 3);
+                        (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? ab_ = context.Operators.Indexer<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(z_, aa_);
+                        bool? ac_ = ab_?.hasElevatedResult;
+                        u_ = t_ & ac_;
                     }
                     q_ = p_ | u_;
                 }

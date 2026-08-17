@@ -272,8 +272,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 }
                 else
                 {
-                    CqlDate s_ = this.IPSD(context);
-                    r_ = q_ & (!((bool?)(s_ is null)));
+                    r_ = q_ & (!((bool?)(h_ is null)));
                 }
                 return i_ & r_;
             }

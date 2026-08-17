@@ -136,7 +136,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         bool? c_(MedicationRequest NoAntithromboticDischarge) {
             FhirBoolean e_ = NoAntithromboticDischarge?.DoNotPerformElement;
             bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
-            bool? g_ = (bool?)(/* CQL 'is true' */ f_ is true);
+            bool? g_ = (bool?)(/* CQL 'is true' (82:11-82:56) */ f_ is true);
             bool? h_;
             // CQL 'and' (82:11-85:7): right operand skipped when left is false
             if (g_ is false)
@@ -289,7 +289,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         bool? c_(MedicationRequest Pharmacological) {
             FhirBoolean e_ = Pharmacological?.DoNotPerformElement;
             bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
-            bool? g_ = !((bool?)(/* CQL 'is true' */ f_ is true));
+            bool? g_ = !((bool?)(/* CQL 'is true' (95:11-95:50) */ f_ is true));
             bool? h_;
             // CQL 'and' (95:11-99:7): right operand skipped when left is false
             if (g_ is false)
@@ -446,7 +446,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         bool? c_(MedicationRequest Antithrombotic) {
             FhirBoolean e_ = Antithrombotic?.DoNotPerformElement;
             bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
-            bool? g_ = !((bool?)(/* CQL 'is true' */ f_ is true));
+            bool? g_ = !((bool?)(/* CQL 'is true' (72:11-72:49) */ f_ is true));
             bool? h_;
             // CQL 'and' (72:11-76:7): right operand skipped when left is false
             if (g_ is false)

@@ -209,12 +209,10 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                CodeableConcept i_ = condition?.VerificationStatus;
-                CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, i_);
-                CqlCode k_ = QICoreCommon_4_0_000.Instance.refuted(context);
-                CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-                bool? m_ = context.Operators.Equivalent(j_, l_);
-                g_ = f_ | m_;
+                CqlCode i_ = QICoreCommon_4_0_000.Instance.refuted(context);
+                CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
+                bool? k_ = context.Operators.Equivalent(b_, j_);
+                g_ = f_ | k_;
             }
             bool? h_;
             // CQL 'or' (177:12-180:5): right operand skipped when left is true
@@ -224,12 +222,10 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                CodeableConcept n_ = condition?.VerificationStatus;
-                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
-                CqlCode p_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-                bool? r_ = context.Operators.Equivalent(o_, q_);
-                h_ = g_ | r_;
+                CqlCode l_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+                CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
+                bool? n_ = context.Operators.Equivalent(b_, m_);
+                h_ = g_ | n_;
             }
             return c_ | !h_;
         }

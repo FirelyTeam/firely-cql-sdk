@@ -1408,7 +1408,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             }
             else
             {
-                bool? q_ = (bool?)(/* CQL 'is false' (315:14-315:24) */ f_ is false);
+                bool? q_ = (bool?)(/* CQL 'is false' (315:14-315:33) */ f_ is false);
                 bool? r_;
                 // CQL 'and' (315:12-322:9): right operand skipped when left is false
                 if (q_ is false)
@@ -2290,7 +2290,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             }
             else
             {
-                bool? q_ = (bool?)(/* CQL 'is false' (484:14-484:25) */ f_ is false);
+                bool? q_ = (bool?)(/* CQL 'is false' (484:14-484:34) */ f_ is false);
                 bool? r_;
                 // CQL 'and' (484:12-489:9): right operand skipped when left is false
                 if (q_ is false)

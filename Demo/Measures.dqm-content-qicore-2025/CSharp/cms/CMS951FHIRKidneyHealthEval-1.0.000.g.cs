@@ -215,14 +215,12 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     }
                     else
                     {
-                        CodeableConcept s_ = DiabetesDiagnosis?.VerificationStatus;
-                        CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                        CqlCode u_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-                        CqlConcept v_ = context.Operators.ConvertCodeToConcept(u_);
-                        bool? w_ = context.Operators.Equivalent(t_, v_);
-                        r_ = q_ & !w_;
+                        CqlCode s_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+                        CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
+                        bool? u_ = context.Operators.Equivalent(k_, t_);
+                        r_ = q_ & !u_;
                     }
-                    m_ = !l_ | r_;
+                    m_ = /* CQL 'implies' (64:11-67:7) */ !l_ | r_;
                 }
                 return i_ & m_;
             }
@@ -394,14 +392,12 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     }
                     else
                     {
-                        CodeableConcept x_ = CKDOrESRD?.VerificationStatus;
-                        CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
-                        CqlCode z_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-                        CqlConcept aa_ = context.Operators.ConvertCodeToConcept(z_);
-                        bool? ab_ = context.Operators.Equivalent(y_, aa_);
-                        w_ = v_ & !ab_;
+                        CqlCode x_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+                        CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
+                        bool? z_ = context.Operators.Equivalent(p_, y_);
+                        w_ = v_ & !z_;
                     }
-                    r_ = !q_ | w_;
+                    r_ = /* CQL 'implies' (77:11-80:7) */ !q_ | w_;
                 }
                 return n_ & r_;
             }

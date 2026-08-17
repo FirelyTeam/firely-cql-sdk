@@ -493,7 +493,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         }
         else
         {
-            return !a_ | a_;
+            return /* CQL 'implies' (47:27-47:53) */ !a_ | a_;
         }
     }
 
@@ -515,7 +515,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.FalseDef(context);
-            return !a_ | b_;
+            return /* CQL 'implies' (48:28-48:55) */ !a_ | b_;
         }
     }
 
@@ -537,7 +537,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.NullDef(context);
-            return !a_ | b_;
+            return /* CQL 'implies' (49:27-49:53) */ !a_ | b_;
         }
     }
 
@@ -559,7 +559,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.TrueDef(context);
-            return !a_ | b_;
+            return /* CQL 'implies' (50:28-50:55) */ !a_ | b_;
         }
     }
 
@@ -580,7 +580,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         }
         else
         {
-            return !a_ | a_;
+            return /* CQL 'implies' (51:29-51:57) */ !a_ | a_;
         }
     }
 
@@ -602,7 +602,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.NullDef(context);
-            return !a_ | b_;
+            return /* CQL 'implies' (52:28-52:55) */ !a_ | b_;
         }
     }
 
@@ -624,7 +624,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.TrueDef(context);
-            return !a_ | b_;
+            return /* CQL 'implies' (53:27-53:53) */ !a_ | b_;
         }
     }
 
@@ -646,7 +646,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.FalseDef(context);
-            return !a_ | b_;
+            return /* CQL 'implies' (54:28-54:55) */ !a_ | b_;
         }
     }
 
@@ -667,7 +667,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         }
         else
         {
-            return !a_ | a_;
+            return /* CQL 'implies' (55:27-55:53) */ !a_ | a_;
         }
     }
 
@@ -688,8 +688,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         }
         else
         {
-            bool? b_ = a_ ^ a_;
-            return b_;
+            return a_ ^ a_;
         }
     }
 
@@ -711,8 +710,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.FalseDef(context);
-            bool? c_ = a_ ^ b_;
-            return c_;
+            return a_ ^ b_;
         }
     }
 
@@ -734,8 +732,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.NullDef(context);
-            bool? c_ = a_ ^ b_;
-            return c_;
+            return a_ ^ b_;
         }
     }
 
@@ -757,8 +754,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.TrueDef(context);
-            bool? c_ = a_ ^ b_;
-            return c_;
+            return a_ ^ b_;
         }
     }
 
@@ -779,8 +775,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         }
         else
         {
-            bool? b_ = a_ ^ a_;
-            return b_;
+            return a_ ^ a_;
         }
     }
 
@@ -802,8 +797,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.NullDef(context);
-            bool? c_ = a_ ^ b_;
-            return c_;
+            return a_ ^ b_;
         }
     }
 
@@ -825,8 +819,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.TrueDef(context);
-            bool? c_ = a_ ^ b_;
-            return c_;
+            return a_ ^ b_;
         }
     }
 
@@ -848,8 +841,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.FalseDef(context);
-            bool? c_ = a_ ^ b_;
-            return c_;
+            return a_ ^ b_;
         }
     }
 
@@ -870,8 +862,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         }
         else
         {
-            bool? b_ = a_ ^ a_;
-            return b_;
+            return a_ ^ a_;
         }
     }
 
@@ -885,7 +876,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     private bool? IsTrueOfTrue_Compute(CqlContext context)
     {
         bool? a_ = this.TrueDef(context);
-        return (bool?)(/* CQL 'is true' (74:24-74:32) */ a_ is true);
+        return (bool?)(/* CQL 'is true' (74:24-74:40) */ a_ is true);
     }
 
 
@@ -898,7 +889,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     private bool? IsTrueOfFalse_Compute(CqlContext context)
     {
         bool? a_ = this.FalseDef(context);
-        return (bool?)(/* CQL 'is true' (75:25-75:34) */ a_ is true);
+        return (bool?)(/* CQL 'is true' (75:25-75:42) */ a_ is true);
     }
 
 
@@ -911,7 +902,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     private bool? IsTrueOfNull_Compute(CqlContext context)
     {
         bool? a_ = this.NullDef(context);
-        return (bool?)(/* CQL 'is true' (76:24-76:32) */ a_ is true);
+        return (bool?)(/* CQL 'is true' (76:24-76:40) */ a_ is true);
     }
 
 
@@ -924,7 +915,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     private bool? IsFalseOfTrue_Compute(CqlContext context)
     {
         bool? a_ = this.TrueDef(context);
-        return (bool?)(/* CQL 'is false' (77:25-77:33) */ a_ is false);
+        return (bool?)(/* CQL 'is false' (77:25-77:42) */ a_ is false);
     }
 
 
@@ -937,7 +928,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     private bool? IsFalseOfFalse_Compute(CqlContext context)
     {
         bool? a_ = this.FalseDef(context);
-        return (bool?)(/* CQL 'is false' (78:26-78:35) */ a_ is false);
+        return (bool?)(/* CQL 'is false' (78:26-78:44) */ a_ is false);
     }
 
 
@@ -950,7 +941,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     private bool? IsFalseOfNull_Compute(CqlContext context)
     {
         bool? a_ = this.NullDef(context);
-        return (bool?)(/* CQL 'is false' (79:25-79:33) */ a_ is false);
+        return (bool?)(/* CQL 'is false' (79:25-79:42) */ a_ is false);
     }
 
 
@@ -1072,7 +1063,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.MessageTrue(context);
-            return !a_ | b_;
+            return /* CQL 'implies' (96:31-96:62) */ !a_ | b_;
         }
     }
 
@@ -1094,7 +1085,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.MessageTrue(context);
-            return !a_ | b_;
+            return /* CQL 'implies' (97:30-97:60) */ !a_ | b_;
         }
     }
 
@@ -1116,7 +1107,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.MessageTrue(context);
-            return !a_ | b_;
+            return /* CQL 'implies' (98:30-98:60) */ !a_ | b_;
         }
     }
 
@@ -1138,8 +1129,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.MessageTrue(context);
-            bool? c_ = a_ ^ b_;
-            return c_;
+            return a_ ^ b_;
         }
     }
 
@@ -1161,8 +1151,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.MessageTrue(context);
-            bool? c_ = a_ ^ b_;
-            return c_;
+            return a_ ^ b_;
         }
     }
 
@@ -1184,8 +1173,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
         else
         {
             bool? b_ = this.MessageTrue(context);
-            bool? c_ = a_ ^ b_;
-            return c_;
+            return a_ ^ b_;
         }
     }
 
@@ -1279,12 +1267,12 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     [CqlFunctionDefinition("MergeAnd")]
     public bool? MergeAnd(CqlContext context, bool? x, bool? y) =>
-    x & y;
+    /* CQL 'and' (137:51-137:57) */ x & y;
 
 
     [CqlFunctionDefinition("MergeOr")]
     public bool? MergeOr(CqlContext context, bool? x, bool? y) =>
-    x | y;
+    /* CQL 'or' (138:50-138:55) */ x | y;
 
 
     [CqlFunctionDefinition("AndNotY")]
@@ -1349,7 +1337,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     private bool? NullConstAndMessage_Compute(CqlContext context)
     {
         bool? a_ = this.MessageTrue(context);
-        return (null as bool?) & a_;
+        return /* CQL 'and' (151:31-151:65) */ (null as bool?) & a_;
     }
 
 

@@ -302,7 +302,17 @@ namespace Hl7.Cql.Operators
         CqlDateTime?                             HighBoundary(CqlDateTime? input, int? precision);
         CqlTime?                                 HighBoundary(CqlTime? input, int? precision);
         decimal?                                 HighBoundary(decimal? input, int? precision);
+        /// <remarks>As of code generator 5.3.0.0, generated C# no longer calls this method:
+        /// CQL <c>implies</c> lowers to <c>!left | right</c> behind a short-circuit guard, since
+        /// the specification permits skipping the right operand when the left is false (#1514).
+        /// It remains on this interface for libraries generated before 5.3.0.0 and as the
+        /// reference implementation the lowering is tested against — see
+        /// <c>docs/generated-code-operator-ledger.md</c> for the retirement policy.</remarks>
         bool?                                    Implies(bool? left, bool? right);
+        /// <remarks>No code generator version has ever emitted calls to the
+        /// <see cref="Lazy{T}"/> overloads; the short-circuit lowering (#1514) made them
+        /// redundant before they were ever bound. See
+        /// <c>docs/generated-code-operator-ledger.md</c>.</remarks>
         bool?                                    Implies(Lazy<bool?> left, Lazy<bool?> right);
         bool?                                    In<T>(T? t, CqlInterval<T>? interval,string? precision);
         bool?                                    In<T>(T? element, IEnumerable<T?>? argument);
@@ -345,6 +355,13 @@ namespace Hl7.Cql.Operators
         /// a non-null value (true or false), which is then boxed to <c>bool?</c>. If the argument is null, returns false.</para>
         /// </remarks>
         /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#isfalse">CQL Specification §9.B - IsFalse</seealso>
+        /// <remarks>As of code generator 5.3.0.0, generated C# no longer calls this method: CQL
+        /// <c>is false</c> lowers to the <c>is false</c> constant pattern (#1514). Note this
+        /// member returns <c>bool?</c> for operator-binding uniformity even though it never
+        /// returns null (spec §9.B); the lowering produces a non-nullable <c>bool</c>. It remains
+        /// on this interface for libraries generated before 5.3.0.0 and as the reference
+        /// implementation the lowering is tested against — see
+        /// <c>docs/generated-code-operator-ledger.md</c> for the retirement policy.</remarks>
         bool?                                    IsFalse(bool? b);
 
         /// <summary>
@@ -379,6 +396,13 @@ namespace Hl7.Cql.Operators
         /// a non-null value (true or false), which is then boxed to <c>bool?</c>. If the argument is null, returns false.</para>
         /// </remarks>
         /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#istrue">CQL Specification §9.B - IsTrue</seealso>
+        /// <remarks>As of code generator 5.3.0.0, generated C# no longer calls this method: CQL
+        /// <c>is true</c> lowers to the <c>is true</c> constant pattern (#1514). Note this member
+        /// returns <c>bool?</c> for operator-binding uniformity even though it never returns null
+        /// (spec §9.B); the lowering produces a non-nullable <c>bool</c>. It remains on this
+        /// interface for libraries generated before 5.3.0.0 and as the reference implementation
+        /// the lowering is tested against — see
+        /// <c>docs/generated-code-operator-ledger.md</c> for the retirement policy.</remarks>
         bool?                                    IsTrue(bool? b);
         T?                                       Last<T>(IEnumerable<T> enumerable);
         int?                                     LastPositionOf(string? argument, string? pattern);
@@ -626,7 +650,14 @@ namespace Hl7.Cql.Operators
         decimal?                                 Width(CqlInterval<decimal?>? @this);
         int?                                     Width(CqlInterval<int?>? @this);
         long?                                    Width(CqlInterval<long?>? @this);
+        /// <remarks>As of code generator 5.3.0.0, generated C# no longer calls this method:
+        /// CQL <c>xor</c> lowers to the lifted <c>^</c> operator behind a short-circuit guard on a
+        /// NULL left operand — xor's null row is constant, so null decides it (#1514). It remains
+        /// on this interface for libraries generated before 5.3.0.0 and as the reference
+        /// implementation the lowering is tested against — see
+        /// <c>docs/generated-code-operator-ledger.md</c> for the retirement policy.</remarks>
         bool?                                    Xor(bool? left, bool? right);
+        /// <inheritdoc cref="Implies(Lazy{bool?}, Lazy{bool?})" path="/remarks"/>
         bool?                                    Xor(Lazy<bool?> left, Lazy<bool?> right);
 
         // @formatter on

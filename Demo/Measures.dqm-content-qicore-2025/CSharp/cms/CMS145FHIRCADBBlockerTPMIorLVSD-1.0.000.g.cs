@@ -1030,7 +1030,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 {
                     FhirBoolean u_ = Order?.DoNotPerformElement;
                     bool? v_ = u_?.Value;
-                    return j_ & (!((bool?)(/* CQL 'is true' (396:15-396:32) */ v_ is true)));
+                    return j_ & (!((bool?)(/* CQL 'is true' (396:15-396:44) */ v_ is true)));
                 }
             }
             else if (Order is MedicationRequest)

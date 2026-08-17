@@ -29,9 +29,6 @@ verified against (e.g. `CoreTests/LogicCqlTest.GeneratedCode_AgreesWithRuntimeOp
 checks generated truth tables against `ICqlOperators.And`/`Or`/`Not`/`Implies`/`Xor`, and
 `IsTrue`/`IsFalse` against theirs).
 
-| `Xor(bool?, bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `^` behind a short-circuit guard | Reference implementation for the lowering's conformance tests. The one operator whose deciding value is **null**, not a bool: its null row is constant ("If either or both arguments are null, the result is null", §4), so a null left operand decides it |
-| `IsTrue(bool?)` / `IsFalse(bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | `is true` / `is false` constant patterns | Total predicates — a null argument yields false, never null — so no guard is involved. Note both interface members return `bool?` deliberately, for operator-binding uniformity; the lowering produces `bool` and is lifted at the call site |
-
 ## 1.2. Ledger
 
 | `ICqlOperators` member(s) | Not called since | Lowered to | Notes |
@@ -40,7 +37,9 @@ checks generated truth tables against `ICqlOperators.And`/`Or`/`Not`/`Implies`/`
 | `Or(bool?, bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `\|` behind a short-circuit guard | Reference implementation for the lowering's conformance tests |
 | `Not(bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `!` | Reference implementation for the lowering's conformance tests |
 | `Implies(bool?, bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | `!left \| right` behind a short-circuit guard | Reference implementation for the lowering's conformance tests. The spec permits the skip explicitly, unlike `and`/`or`: "implies may use short-circuit evaluation in the case that the first operand evaluates to false" (§9.B) |
-| `And`/`Or` `Lazy<bool?>` overloads (3 + 1) | never emitted | — | Shipped as public API but no generator version ever bound them; the short-circuit guard made them redundant ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) |
+| `Xor(bool?, bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `^` behind a short-circuit guard | Reference implementation for the lowering's conformance tests. The one operator whose deciding value is **null**, not a bool: its null row is constant ("If either or both arguments are null, the result is null", §4), so a null left operand decides it |
+| `IsTrue(bool?)` / `IsFalse(bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | `is true` / `is false` constant patterns | Total predicates — a null argument yields false, never null — so no guard is involved. Both interface members return `bool?` deliberately, for operator-binding uniformity; the lowering produces `bool`, lifted at the call site |
+| `And`/`Or`/`Implies`/`Xor` `Lazy<bool?>` overloads | never emitted | — | Shipped as public API but no generator version ever bound them; the short-circuit guard made them redundant ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) |
 | scalar coalesce (no dedicated member) | predates this ledger | native `??` | CQL's scalar `Coalesce(a, b, …)` has emitted C# `??` chains since the IR pipeline; the **list** overload `Coalesce<T>(IEnumerable<T>)` for `Coalesce({…})` is still bound and called |
 
 ## 1.3. When adding a row

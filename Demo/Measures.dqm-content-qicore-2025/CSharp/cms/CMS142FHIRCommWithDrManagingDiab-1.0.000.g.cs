@@ -270,12 +270,10 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                CodeableConcept j_ = condition?.VerificationStatus;
-                CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
-                CqlCode l_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-                CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
-                bool? n_ = context.Operators.Equivalent(k_, m_);
-                g_ = f_ | n_;
+                CqlCode j_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+                CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+                bool? l_ = context.Operators.Equivalent(b_, k_);
+                g_ = f_ | l_;
             }
             bool? h_;
             // CQL 'or' (148:54-150:66): right operand skipped when left is true
@@ -285,12 +283,10 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                CodeableConcept o_ = condition?.VerificationStatus;
-                CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-                CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
-                CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-                bool? s_ = context.Operators.Equivalent(p_, r_);
-                h_ = g_ | s_;
+                CqlCode m_ = QICoreCommon_4_0_000.Instance.provisional(context);
+                CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
+                bool? o_ = context.Operators.Equivalent(b_, n_);
+                h_ = g_ | o_;
             }
             bool? i_;
             // CQL 'or' (148:52-152:3): right operand skipped when left is true
@@ -300,14 +296,12 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             }
             else
             {
-                CodeableConcept t_ = condition?.VerificationStatus;
-                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                CqlCode v_ = QICoreCommon_4_0_000.Instance.differential(context);
-                CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-                bool? x_ = context.Operators.Equivalent(u_, w_);
-                i_ = h_ | x_;
+                CqlCode p_ = QICoreCommon_4_0_000.Instance.differential(context);
+                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+                bool? r_ = context.Operators.Equivalent(b_, q_);
+                i_ = h_ | r_;
             }
-            return !c_ | i_;
+            return /* CQL 'implies' (148:3-152:3) */ !c_ | i_;
         }
     }
 

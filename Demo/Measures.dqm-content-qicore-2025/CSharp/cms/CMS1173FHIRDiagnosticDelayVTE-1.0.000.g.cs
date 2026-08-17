@@ -341,12 +341,10 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
             }
             else
             {
-                CodeableConcept j_ = condition?.VerificationStatus;
-                CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
-                CqlCode l_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-                CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
-                bool? n_ = context.Operators.Equivalent(k_, m_);
-                g_ = f_ | n_;
+                CqlCode j_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+                CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+                bool? l_ = context.Operators.Equivalent(b_, k_);
+                g_ = f_ | l_;
             }
             bool? h_;
             // CQL 'or' (202:54-204:66): right operand skipped when left is true
@@ -356,12 +354,10 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
             }
             else
             {
-                CodeableConcept o_ = condition?.VerificationStatus;
-                CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-                CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
-                CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-                bool? s_ = context.Operators.Equivalent(p_, r_);
-                h_ = g_ | s_;
+                CqlCode m_ = QICoreCommon_4_0_000.Instance.provisional(context);
+                CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
+                bool? o_ = context.Operators.Equivalent(b_, n_);
+                h_ = g_ | o_;
             }
             bool? i_;
             // CQL 'or' (202:52-206:3): right operand skipped when left is true
@@ -371,14 +367,12 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
             }
             else
             {
-                CodeableConcept t_ = condition?.VerificationStatus;
-                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                CqlCode v_ = QICoreCommon_4_0_000.Instance.differential(context);
-                CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-                bool? x_ = context.Operators.Equivalent(u_, w_);
-                i_ = h_ | x_;
+                CqlCode p_ = QICoreCommon_4_0_000.Instance.differential(context);
+                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+                bool? r_ = context.Operators.Equivalent(b_, q_);
+                i_ = h_ | r_;
             }
-            return !c_ | i_;
+            return /* CQL 'implies' (202:3-206:3) */ !c_ | i_;
         }
     }
 
@@ -589,9 +583,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 }
                 else
                 {
-                    DataType ab_ = tuple_bundjkpliiuyymiejivrqjjcd?.VTEStudy?.Effective;
-                    object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    z_ = y_ & (!((bool?)(ac_ is null)));
+                    z_ = y_ & (!((bool?)(m_ is null)));
                 }
                 bool? aa_;
                 // CQL 'or' (107:11-109:7): right operand skipped when left is true
@@ -601,22 +593,20 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 }
                 else
                 {
-                    DataType ad_ = tuple_bundjkpliiuyymiejivrqjjcd?.VTEStudy?.Effective;
-                    object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                    CqlDateTime af_ = context.Operators.Add(ae_ as CqlDateTime, v_);
-                    CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ae_ as CqlDateTime, af_ as CqlDateTime, false, true);
-                    bool? ah_ = context.Operators.In<CqlDateTime>(u_, ag_, (string)default);
-                    bool? ai_;
+                    CqlDateTime ab_ = context.Operators.Add(m_ as CqlDateTime, v_);
+                    CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(m_ as CqlDateTime, ab_ as CqlDateTime, false, true);
+                    bool? ad_ = context.Operators.In<CqlDateTime>(u_, ac_, (string)default);
+                    bool? ae_;
                     // CQL 'and' (108:14-108:86): right operand skipped when left is false
-                    if (ah_ is false)
+                    if (ad_ is false)
                     {
-                        ai_ = false;
+                        ae_ = false;
                     }
                     else
                     {
-                        ai_ = ah_ & (!((bool?)(ae_ is null)));
+                        ae_ = ad_ & (!((bool?)(m_ is null)));
                     }
-                    aa_ = z_ | ai_;
+                    aa_ = z_ | ae_;
                 }
                 s_ = r_ & aa_;
             }
@@ -627,26 +617,24 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
             }
             else
             {
-                Period aj_ = tuple_bundjkpliiuyymiejivrqjjcd?.IndexPCP?.Period;
-                CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
-                CqlDateTime al_ = context.Operators.Start(ak_);
-                CqlQuantity am_ = context.Operators.Quantity(30m, "days");
-                CqlDateTime an_ = context.Operators.Subtract(m_ as CqlDateTime, am_);
-                CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(an_, m_ as CqlDateTime, true, true);
-                bool? ap_ = context.Operators.In<CqlDateTime>(al_, ao_, (string)default);
-                bool? aq_;
+                Period af_ = tuple_bundjkpliiuyymiejivrqjjcd?.IndexPCP?.Period;
+                CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, af_);
+                CqlDateTime ah_ = context.Operators.Start(ag_);
+                CqlQuantity ai_ = context.Operators.Quantity(30m, "days");
+                CqlDateTime aj_ = context.Operators.Subtract(m_ as CqlDateTime, ai_);
+                CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(aj_, m_ as CqlDateTime, true, true);
+                bool? al_ = context.Operators.In<CqlDateTime>(ah_, ak_, (string)default);
+                bool? am_;
                 // CQL 'and' (110:11-110:80): right operand skipped when left is false
-                if (ap_ is false)
+                if (al_ is false)
                 {
-                    aq_ = false;
+                    am_ = false;
                 }
                 else
                 {
-                    DataType ar_ = tuple_bundjkpliiuyymiejivrqjjcd?.VTEStudy?.Effective;
-                    object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    aq_ = ap_ & (!((bool?)(as_ is null)));
+                    am_ = al_ & (!((bool?)(m_ is null)));
                 }
-                return s_ & aq_;
+                return s_ & am_;
             }
         }
 
