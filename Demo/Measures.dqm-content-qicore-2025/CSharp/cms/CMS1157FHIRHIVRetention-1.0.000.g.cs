@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS1157FHIRHIVRetention", "1.0.000")]
 public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1157FHIRHIVRetention_1_0_000>
 {
@@ -113,58 +113,51 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
     {
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
-        bool? c_ = !((bool?)(b_ is null));
-        // CQL 'implies' (96:3-100:3): right operand skipped when left is false
-        if (c_ is false)
-        {
-            return true;
+
+        CqlBoolean c_() {
+            CodeableConcept d_ = condition?.VerificationStatus;
+            CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
+            CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
+            CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
+            bool? h_ = context.Operators.Equivalent(e_, g_);
+
+            CqlBoolean i_() {
+                CodeableConcept l_ = condition?.VerificationStatus;
+                CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
+                CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+                CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
+                bool? p_ = context.Operators.Equivalent(m_, o_);
+                return p_;
+            }
+
+
+            CqlBoolean j_() {
+                CodeableConcept q_ = condition?.VerificationStatus;
+                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
+                CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
+                CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
+                bool? u_ = context.Operators.Equivalent(r_, t_);
+                return u_;
+            }
+
+
+            CqlBoolean k_() {
+                CodeableConcept v_ = condition?.VerificationStatus;
+                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
+                CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
+                bool? z_ = context.Operators.Equivalent(w_, y_);
+                return z_;
+            }
+
+            return /* CQL 'or' (96:52-100:3) */ (/* CQL 'or' (96:54-98:66) */ (/* CQL 'or' (96:54-97:66) */ ((CqlBoolean)h_
+                || i_())
+                || j_())
+                || k_());
         }
-        else
-        {
-            CqlCode d_ = QICoreCommon_4_0_000.Instance.confirmed(context);
-            CqlConcept e_ = context.Operators.ConvertCodeToConcept(d_);
-            bool? f_ = context.Operators.Equivalent(b_, e_);
-            bool? g_;
-            // CQL 'or' (96:54-97:66): right operand skipped when left is true
-            if (f_ is true)
-            {
-                g_ = true;
-            }
-            else
-            {
-                CqlCode j_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-                CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-                bool? l_ = context.Operators.Equivalent(b_, k_);
-                g_ = f_ | l_;
-            }
-            bool? h_;
-            // CQL 'or' (96:54-98:66): right operand skipped when left is true
-            if (g_ is true)
-            {
-                h_ = true;
-            }
-            else
-            {
-                CqlCode m_ = QICoreCommon_4_0_000.Instance.provisional(context);
-                CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
-                bool? o_ = context.Operators.Equivalent(b_, n_);
-                h_ = g_ | o_;
-            }
-            bool? i_;
-            // CQL 'or' (96:52-100:3): right operand skipped when left is true
-            if (h_ is true)
-            {
-                i_ = true;
-            }
-            else
-            {
-                CqlCode p_ = QICoreCommon_4_0_000.Instance.differential(context);
-                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-                bool? r_ = context.Operators.Equivalent(b_, q_);
-                i_ = h_ | r_;
-            }
-            return !c_ | i_;
-        }
+
+        return /* CQL 'implies' (96:3-100:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
+            || c_());
     }
 
 
@@ -189,16 +182,8 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
             CqlQuantity k_ = context.Operators.Quantity(240m, "days");
             CqlDateTime l_ = context.Operators.Add(j_, k_);
             bool? m_ = context.Operators.SameOrBefore(h_, l_, "day");
-            // CQL 'and' (62:7-63:32): right operand skipped when left is false
-            if (m_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                bool? n_ = this.isVerified(context, HIVDx);
-                return m_ & n_;
-            }
+            return /* CQL 'and' (62:7-63:32) */ ((CqlBoolean)m_
+                && this.isVerified(context, HIVDx));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -273,16 +258,8 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
     private bool? Initial_Population_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period(context);
-        // CQL 'and' (29:3-30:78): right operand skipped when left is false
-        if (a_ is false)
-        {
-            return false;
-        }
-        else
-        {
-            bool? b_ = this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period(context);
-            return a_ & b_;
-        }
+        return /* CQL 'and' (29:3-30:78) */ ((CqlBoolean)a_
+            && this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period(context));
     }
 
 
@@ -351,44 +328,30 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 Period ap_ = ValidEncounter?.Period;
                 CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ap_);
                 bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, "day");
-                bool? as_;
-                // CQL 'and' (53:19-54:48): right operand skipped when left is false
-                if (ar_ is false)
-                {
-                    as_ = false;
-                }
-                else
-                {
+
+                CqlBoolean as_() {
                     Code<Encounter.EncounterStatus> au_ = ValidEncounter?.StatusElement;
                     Encounter.EncounterStatus? av_ = au_?.Value;
                     Code<Encounter.EncounterStatus> aw_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(av_);
                     bool? ax_ = context.Operators.Equal(aw_, "finished");
-                    as_ = ar_ & ax_;
+                    return ax_;
                 }
-                bool? at_;
-                // CQL 'and' (53:19-55:107): right operand skipped when left is false
-                if (as_ is false)
-                {
-                    at_ = false;
-                }
-                else
-                {
+
+
+                CqlBoolean at_() {
                     CqlInterval<CqlDateTime> ay_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDiagnosis);
                     CqlDateTime az_ = context.Operators.Start(ay_);
-                    CqlDateTime ba_ = context.Operators.Start(aq_);
-                    bool? bb_ = context.Operators.SameOrBefore(az_, ba_, "day");
-                    at_ = as_ & bb_;
+                    Period ba_ = ValidEncounter?.Period;
+                    CqlInterval<CqlDateTime> bb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ba_);
+                    CqlDateTime bc_ = context.Operators.Start(bb_);
+                    bool? bd_ = context.Operators.SameOrBefore(az_, bc_, "day");
+                    return bd_;
                 }
-                // CQL 'and' (53:19-56:41): right operand skipped when left is false
-                if (at_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    bool? bc_ = this.isVerified(context, HIVDiagnosis);
-                    return at_ & bc_;
-                }
+
+                return /* CQL 'and' (53:19-56:41) */ (/* CQL 'and' (53:19-55:107) */ (/* CQL 'and' (53:19-54:48) */ ((CqlBoolean)ar_
+                    && as_())
+                    && at_())
+                    && this.isVerified(context, HIVDiagnosis));
             }
 
             bool? an_ = context.Operators.WhereAny<Condition>(al_, am_);
@@ -424,54 +387,50 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                     "corrected",
                 ];
                 bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
-                bool? m_;
-                // CQL 'and' (69:17-70:85): right operand skipped when left is false
-                if (l_ is false)
-                {
-                    m_ = false;
+
+                CqlBoolean m_() {
+                    CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
+                    DataType p_ = ViralLoadTest?.Effective;
+                    object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+                    CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
+                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, "day");
+                    return s_;
                 }
-                else
-                {
-                    CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-                    DataType o_ = ViralLoadTest?.Effective;
-                    object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                    CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_);
-                    bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, "day");
-                    m_ = l_ & r_;
-                }
-                // CQL 'and' (69:17-73:9): right operand skipped when left is false
-                if (m_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    DataType s_ = ViralLoadTest?.Effective;
-                    object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                    CqlInterval<CqlDateTime> u_ = QICoreCommon_4_0_000.Instance.toInterval(context, t_);
-                    CqlDateTime v_ = context.Operators.Start(u_);
-                    Period w_ = EncounterWithHIV?.Period;
-                    CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
-                    CqlDateTime y_ = context.Operators.End(x_);
-                    CqlQuantity z_ = context.Operators.Quantity(90m, "days");
-                    CqlDateTime aa_ = context.Operators.Add(y_, z_);
-                    bool? ab_ = context.Operators.SameOrAfter(v_, aa_, "day");
-                    bool? ac_;
-                    // CQL 'or' (71:13-73:9): right operand skipped when left is true
-                    if (ab_ is true)
-                    {
-                        ac_ = true;
+
+
+                CqlBoolean n_() {
+                    DataType t_ = ViralLoadTest?.Effective;
+                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                    CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_);
+                    CqlDateTime w_ = context.Operators.Start(v_);
+                    Period x_ = EncounterWithHIV?.Period;
+                    CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, x_);
+                    CqlDateTime z_ = context.Operators.End(y_);
+                    CqlQuantity aa_ = context.Operators.Quantity(90m, "days");
+                    CqlDateTime ab_ = context.Operators.Add(z_, aa_);
+                    bool? ac_ = context.Operators.SameOrAfter(w_, ab_, "day");
+
+                    CqlBoolean ad_() {
+                        Period ae_ = EncounterWithHIV?.Period;
+                        CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ae_);
+                        CqlDateTime ag_ = context.Operators.Start(af_);
+                        DataType ah_ = ViralLoadTest?.Effective;
+                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                        CqlInterval<CqlDateTime> aj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ai_);
+                        CqlDateTime ak_ = context.Operators.End(aj_);
+                        CqlQuantity al_ = context.Operators.Quantity(90m, "days");
+                        CqlDateTime am_ = context.Operators.Add(ak_, al_);
+                        bool? an_ = context.Operators.SameOrAfter(ag_, am_, "day");
+                        return an_;
                     }
-                    else
-                    {
-                        CqlDateTime ad_ = context.Operators.Start(x_);
-                        CqlDateTime ae_ = context.Operators.End(u_);
-                        CqlDateTime af_ = context.Operators.Add(ae_, z_);
-                        bool? ag_ = context.Operators.SameOrAfter(ad_, af_, "day");
-                        ac_ = ab_ | ag_;
-                    }
-                    return m_ & ac_;
+
+                    return /* CQL 'or' (71:13-73:9) */ ((CqlBoolean)ac_
+                        || ad_());
                 }
+
+                return /* CQL 'and' (69:17-73:9) */ (/* CQL 'and' (69:17-70:85) */ ((CqlBoolean)l_
+                    && m_())
+                    && n_());
             }
 
             bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -498,14 +457,8 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
 
             bool? e_(Encounter AnotherEncounterWithHIV) {
                 bool? g_ = context.Operators.Equivalent(EncounterWithHIV, AnotherEncounterWithHIV);
-                bool? h_ = !g_;
-                // CQL 'and' (92:17-93:109): right operand skipped when left is false
-                if (h_ is false)
-                {
-                    return false;
-                }
-                else
-                {
+
+                CqlBoolean h_() {
                     Period i_ = AnotherEncounterWithHIV?.Period;
                     CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
                     CqlDateTime k_ = context.Operators.Start(j_);
@@ -515,8 +468,11 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                     CqlQuantity o_ = context.Operators.Quantity(90m, "days");
                     CqlDateTime p_ = context.Operators.Add(n_, o_);
                     bool? q_ = context.Operators.SameOrAfter(k_, p_, "day");
-                    return h_ & q_;
+                    return q_;
                 }
+
+                return /* CQL 'and' (92:17-93:109) */ ((CqlBoolean)!g_
+                    && h_());
             }
 
             bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
@@ -537,16 +493,8 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
     private bool? Numerator_Compute(CqlContext context)
     {
         bool? a_ = this.Has_One_Encounter_With_HIV_and_One_Viral_Load_Test_At_Least_90_Days_Apart(context);
-        // CQL 'or' (36:3-37:59): right operand skipped when left is true
-        if (a_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            bool? b_ = this.Has_Two_Encounters_With_HIV_At_Least_90_Days_Apart(context);
-            return a_ | b_;
-        }
+        return /* CQL 'or' (36:3-37:59) */ ((CqlBoolean)a_
+            || this.Has_Two_Encounters_With_HIV_At_Least_90_Days_Apart(context));
     }
 
 

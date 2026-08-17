@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS146FHIRApproTestPharyngitis", "1.0.000")]
 public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISingleton<CMS146FHIRApproTestPharyngitis_1_0_000>
 {
@@ -316,19 +316,17 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                     IEnumerable<string> r_ = context.Operators.Split((string)q_, "/");
                     string s_ = context.Operators.Last<string>(r_);
                     bool? t_ = context.Operators.Equal(p_, s_);
-                    // CQL 'and': right operand skipped when left is false
-                    if (t_ is false)
-                    {
-                        return false;
+
+                    CqlBoolean u_() {
+                        CodeableConcept v_ = M?.Code;
+                        CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                        CqlValueSet x_ = this.Antibiotic_Medications_for_Pharyngitis(context);
+                        bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+                        return y_;
                     }
-                    else
-                    {
-                        CodeableConcept u_ = M?.Code;
-                        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
-                        CqlValueSet w_ = this.Antibiotic_Medications_for_Pharyngitis(context);
-                        bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
-                        return t_ & x_;
-                    }
+
+                    return /* CQL 'and' */ ((CqlBoolean)t_
+                        && u_());
                 }
 
                 bool? o_ = context.Operators.WhereAny<Medication>(m_, n_);
@@ -342,25 +340,25 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
             IEnumerable<MedicationRequest> j_ = Status_1_15_000.Instance.isMedicationOrder(context, i_);
 
             bool? k_(MedicationRequest AntibioticOrdered) {
-                Period y_ = EDOrAmbulatoryVisit?.Period;
-                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
-                CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.toInterval(context, z_);
-                CqlDateTime ab_ = context.Operators.Start(aa_);
-                FhirDateTime ac_ = AntibioticOrdered?.AuthoredOnElement;
-                CqlDateTime ad_ = context.Operators.Convert<CqlDateTime>(ac_);
-                CqlQuantity ae_ = context.Operators.Quantity(3m, "days");
-                CqlDateTime af_ = context.Operators.Subtract(ad_, ae_);
-                CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(af_, ad_, true, true);
-                bool? ah_ = context.Operators.In<CqlDateTime>(ab_, ag_, "day");
-                // CQL 'and' (82:17-82:128): right operand skipped when left is false
-                if (ah_ is false)
-                {
-                    return false;
+                Period z_ = EDOrAmbulatoryVisit?.Period;
+                CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
+                CqlInterval<CqlDateTime> ab_ = QICoreCommon_4_0_000.Instance.toInterval(context, aa_);
+                CqlDateTime ac_ = context.Operators.Start(ab_);
+                FhirDateTime ad_ = AntibioticOrdered?.AuthoredOnElement;
+                CqlDateTime ae_ = context.Operators.Convert<CqlDateTime>(ad_);
+                CqlQuantity af_ = context.Operators.Quantity(3m, "days");
+                CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
+                CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ag_, ae_, true, true);
+                bool? ai_ = context.Operators.In<CqlDateTime>(ac_, ah_, "day");
+
+                CqlBoolean aj_() {
+                    FhirDateTime ak_ = AntibioticOrdered?.AuthoredOnElement;
+                    CqlDateTime al_ = context.Operators.Convert<CqlDateTime>(ak_);
+                    return !((bool?)(al_ is null));
                 }
-                else
-                {
-                    return ah_ & (!((bool?)(ad_ is null)));
-                }
+
+                return /* CQL 'and' (82:17-82:128) */ ((CqlBoolean)ai_
+                    && aj_());
             }
 
             bool? l_ = context.Operators.WhereAny<MedicationRequest>(j_, k_);
@@ -519,19 +517,17 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 IEnumerable<string> ai_ = context.Operators.Split((string)ah_, "/");
                 string aj_ = context.Operators.Last<string>(ai_);
                 bool? ak_ = context.Operators.Equal(ag_, aj_);
-                // CQL 'and': right operand skipped when left is false
-                if (ak_ is false)
-                {
-                    return false;
+
+                CqlBoolean al_() {
+                    CodeableConcept am_ = M?.Code;
+                    CqlConcept an_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, am_);
+                    CqlValueSet ao_ = this.Antibiotic_Medications_for_Pharyngitis(context);
+                    bool? ap_ = context.Operators.ConceptInValueSet(an_, ao_);
+                    return ap_;
                 }
-                else
-                {
-                    CodeableConcept al_ = M?.Code;
-                    CqlConcept am_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, al_);
-                    CqlValueSet an_ = this.Antibiotic_Medications_for_Pharyngitis(context);
-                    bool? ao_ = context.Operators.ConceptInValueSet(am_, an_);
-                    return ak_ & ao_;
-                }
+
+                return /* CQL 'and' */ ((CqlBoolean)ak_
+                    && al_());
             }
 
             bool? af_ = context.Operators.WhereAny<Medication>(ad_, ae_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS131FHIRDiabetesEyeExam", "1.0.000")]
 public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CMS131FHIRDiabetesEyeExam_1_0_000>
 {
@@ -208,41 +208,35 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        bool? k_;
-        // CQL 'and' (41:3-44:42): right operand skipped when left is false
-        if (j_ is false)
-        {
-            k_ = false;
-        }
-        else
-        {
-            IEnumerable<Encounter> l_ = this.Qualifying_Encounters(context);
-            bool? m_ = context.Operators.Exists<Encounter>(l_);
-            k_ = j_ & m_;
-        }
-        // CQL 'and' (41:3-47:5): right operand skipped when left is false
-        if (k_ is false)
-        {
-            return false;
-        }
-        else
-        {
-            CqlValueSet n_ = this.Diabetes(context);
-            IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            Condition p_(Condition X) => X as Condition;
-            IEnumerable<Condition> q_ = context.Operators.Select<Condition, Condition>(o_, p_);
-            IEnumerable<Condition> r_ = Status_1_15_000.Instance.verified(context, q_);
 
-            bool? s_(Condition DiabetesDx) {
-                CqlInterval<CqlDateTime> u_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDx);
-                CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
-                bool? w_ = context.Operators.Overlaps(u_, v_, "day");
-                return w_;
+        CqlBoolean k_() {
+            IEnumerable<Encounter> m_ = this.Qualifying_Encounters(context);
+            bool? n_ = context.Operators.Exists<Encounter>(m_);
+            return n_;
+        }
+
+
+        CqlBoolean l_() {
+            CqlValueSet o_ = this.Diabetes(context);
+            IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+            Condition q_(Condition X) => X as Condition;
+            IEnumerable<Condition> r_ = context.Operators.Select<Condition, Condition>(p_, q_);
+            IEnumerable<Condition> s_ = Status_1_15_000.Instance.verified(context, r_);
+
+            bool? t_(Condition DiabetesDx) {
+                CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDx);
+                CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
+                bool? x_ = context.Operators.Overlaps(v_, w_, "day");
+                return x_;
             }
 
-            bool? t_ = context.Operators.WhereAny<Condition>(r_, s_);
-            return k_ & t_;
+            bool? u_ = context.Operators.WhereAny<Condition>(s_, t_);
+            return u_;
         }
+
+        return /* CQL 'and' (41:3-47:5) */ (/* CQL 'and' (41:3-44:42) */ ((CqlBoolean)j_
+            && k_())
+            && l_());
     }
 
 
@@ -297,49 +291,11 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        bool? b_;
-        // CQL 'or' (64:3-65:73): right operand skipped when left is true
-        if (a_ is true)
-        {
-            b_ = true;
-        }
-        else
-        {
-            bool? e_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
-            b_ = a_ | e_;
-        }
-        bool? c_;
-        // CQL 'or' (64:3-66:74): right operand skipped when left is true
-        if (b_ is true)
-        {
-            c_ = true;
-        }
-        else
-        {
-            bool? f_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
-            c_ = b_ | f_;
-        }
-        bool? d_;
-        // CQL 'or' (64:3-67:69): right operand skipped when left is true
-        if (c_ is true)
-        {
-            d_ = true;
-        }
-        else
-        {
-            bool? g_ = PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
-            d_ = c_ | g_;
-        }
-        // CQL 'or' (64:3-68:34): right operand skipped when left is true
-        if (d_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            bool? h_ = this.Bilateral_Absence_of_Eyes(context);
-            return d_ | h_;
-        }
+        return /* CQL 'or' (64:3-68:34) */ (/* CQL 'or' (64:3-67:69) */ (/* CQL 'or' (64:3-66:74) */ (/* CQL 'or' (64:3-65:73) */ ((CqlBoolean)a_
+            || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context))
+            || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context))
+            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))
+            || this.Bilateral_Absence_of_Eyes(context));
     }
 
 
@@ -444,20 +400,18 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlValueSet i_ = this.Autonomous_Eye_Exam_Result_or_Finding(context);
             bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, i_);
-            // CQL 'and' (83:5-84:87): right operand skipped when left is false
-            if (j_ is false)
-            {
-                return false;
+
+            CqlBoolean k_() {
+                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+                DataType m_ = AutonomousEyeExam?.Effective;
+                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
+                bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
+                return p_;
             }
-            else
-            {
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                DataType l_ = AutonomousEyeExam?.Effective;
-                object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
-                bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, "day");
-                return j_ & o_;
-            }
+
+            return /* CQL 'and' (83:5-84:87) */ ((CqlBoolean)j_
+                && k_());
         }
 
         bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
@@ -483,20 +437,18 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlValueSet i_ = this.Diabetic_Retinopathy_Severity_Level(context);
             bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, i_);
-            // CQL 'and' (113:5-114:88): right operand skipped when left is false
-            if (j_ is false)
-            {
-                return false;
+
+            CqlBoolean k_() {
+                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+                DataType m_ = LeftEyeRetinopathy?.Effective;
+                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
+                bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
+                return p_;
             }
-            else
-            {
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                DataType l_ = LeftEyeRetinopathy?.Effective;
-                object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
-                bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, "day");
-                return j_ & o_;
-            }
+
+            return /* CQL 'and' (113:5-114:88) */ ((CqlBoolean)j_
+                && k_());
         }
 
         bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
@@ -522,20 +474,18 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlValueSet i_ = this.Diabetic_Retinopathy_Severity_Level(context);
             bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, i_);
-            // CQL 'and' (123:5-124:89): right operand skipped when left is false
-            if (j_ is false)
-            {
-                return false;
+
+            CqlBoolean k_() {
+                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+                DataType m_ = RightEyeRetinopathy?.Effective;
+                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
+                bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
+                return p_;
             }
-            else
-            {
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                DataType l_ = RightEyeRetinopathy?.Effective;
-                object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
-                bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, "day");
-                return j_ & o_;
-            }
+
+            return /* CQL 'and' (123:5-124:89) */ ((CqlBoolean)j_
+                && k_());
         }
 
         bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
@@ -562,26 +512,24 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             CqlCode i_ = this.No_apparent_retinopathy(context);
             CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
             bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
-            // CQL 'and' (118:5-119:157): right operand skipped when left is false
-            if (k_ is false)
-            {
-                return false;
+
+            CqlBoolean l_() {
+                CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
+                CqlDateTime n_ = context.Operators.Start(m_);
+                CqlQuantity o_ = context.Operators.Quantity(1m, "year");
+                CqlDateTime p_ = context.Operators.Subtract(n_, o_);
+                CqlDateTime q_ = context.Operators.End(m_);
+                CqlDateTime r_ = context.Operators.Subtract(q_, o_);
+                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
+                DataType t_ = RightEyeNoRetinopathy?.Effective;
+                object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_);
+                bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(s_, v_, "day");
+                return w_;
             }
-            else
-            {
-                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-                CqlDateTime m_ = context.Operators.Start(l_);
-                CqlQuantity n_ = context.Operators.Quantity(1m, "year");
-                CqlDateTime o_ = context.Operators.Subtract(m_, n_);
-                CqlDateTime p_ = context.Operators.End(l_);
-                CqlDateTime q_ = context.Operators.Subtract(p_, n_);
-                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
-                DataType s_ = RightEyeNoRetinopathy?.Effective;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                CqlInterval<CqlDateTime> u_ = QICoreCommon_4_0_000.Instance.toInterval(context, t_);
-                bool? v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, "day");
-                return k_ & v_;
-            }
+
+            return /* CQL 'and' (118:5-119:157) */ ((CqlBoolean)k_
+                && l_());
         }
 
         bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
@@ -608,26 +556,24 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             CqlCode i_ = this.No_apparent_retinopathy(context);
             CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
             bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
-            // CQL 'and' (108:5-109:156): right operand skipped when left is false
-            if (k_ is false)
-            {
-                return false;
+
+            CqlBoolean l_() {
+                CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
+                CqlDateTime n_ = context.Operators.Start(m_);
+                CqlQuantity o_ = context.Operators.Quantity(1m, "year");
+                CqlDateTime p_ = context.Operators.Subtract(n_, o_);
+                CqlDateTime q_ = context.Operators.End(m_);
+                CqlDateTime r_ = context.Operators.Subtract(q_, o_);
+                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
+                DataType t_ = LeftEyeNoRetinopathy?.Effective;
+                object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_);
+                bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(s_, v_, "day");
+                return w_;
             }
-            else
-            {
-                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-                CqlDateTime m_ = context.Operators.Start(l_);
-                CqlQuantity n_ = context.Operators.Quantity(1m, "year");
-                CqlDateTime o_ = context.Operators.Subtract(m_, n_);
-                CqlDateTime p_ = context.Operators.End(l_);
-                CqlDateTime q_ = context.Operators.Subtract(p_, n_);
-                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
-                DataType s_ = LeftEyeNoRetinopathy?.Effective;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                CqlInterval<CqlDateTime> u_ = QICoreCommon_4_0_000.Instance.toInterval(context, t_);
-                bool? v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, "day");
-                return k_ & v_;
-            }
+
+            return /* CQL 'and' (108:5-109:156) */ ((CqlBoolean)k_
+                && l_());
         }
 
         bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
@@ -644,59 +590,24 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
     private bool? Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Left_Eye_Retinopathy(context);
-        bool? b_;
-        // CQL 'and' (132:3-134:3): right operand skipped when left is false
-        if (a_ is false)
-        {
-            b_ = false;
+
+        CqlBoolean b_() {
+            bool? d_ = this.Has_Left_Eye_Retinopathy(context);
+            return /* CQL 'and' (135:8-137:5) */ ((CqlBoolean)d_
+                && this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context));
         }
-        else
-        {
-            bool? d_ = this.Has_Right_Eye_Retinopathy(context);
-            b_ = a_ & d_;
+
+
+        CqlBoolean c_() {
+            bool? e_ = this.Has_Right_Eye_Retinopathy(context);
+            return /* CQL 'and' (138:8-140:5) */ ((CqlBoolean)e_
+                && this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context));
         }
-        bool? c_;
-        // CQL 'or' (132:3-137:5): right operand skipped when left is true
-        if (b_ is true)
-        {
-            c_ = true;
-        }
-        else
-        {
-            bool? e_;
-            // CQL 'and' (135:8-137:5): right operand skipped when left is false
-            if (a_ is false)
-            {
-                e_ = false;
-            }
-            else
-            {
-                bool? f_ = this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context);
-                e_ = a_ & f_;
-            }
-            c_ = b_ | e_;
-        }
-        // CQL 'or' (132:3-140:5): right operand skipped when left is true
-        if (c_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            bool? g_ = this.Has_Right_Eye_Retinopathy(context);
-            bool? h_;
-            // CQL 'and' (138:8-140:5): right operand skipped when left is false
-            if (g_ is false)
-            {
-                h_ = false;
-            }
-            else
-            {
-                bool? i_ = this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context);
-                h_ = g_ & i_;
-            }
-            return c_ | h_;
-        }
+
+        return /* CQL 'or' (132:3-140:5) */ (/* CQL 'or' (132:3-137:5) */ (/* CQL 'and' (132:3-134:3) */ ((CqlBoolean)a_
+            && this.Has_Right_Eye_Retinopathy(context))
+            || b_())
+            || c_());
     }
 
 
@@ -709,16 +620,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
     private bool? Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context);
-        // CQL 'and' (127:3-129:3): right operand skipped when left is false
-        if (a_ is false)
-        {
-            return false;
-        }
-        else
-        {
-            bool? b_ = this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context);
-            return a_ & b_;
-        }
+        return /* CQL 'and' (127:3-129:3) */ ((CqlBoolean)a_
+            && this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context));
     }
 
 
@@ -731,71 +634,19 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
     private bool? Numerator_Compute(CqlContext context)
     {
         bool? a_ = this.Diabetic_Retinopathy_Overlapping_Measurement_Period(context);
-        bool? b_;
-        // CQL 'and' (71:3-73:3): right operand skipped when left is false
-        if (a_ is false)
-        {
-            b_ = false;
+
+        CqlBoolean b_() {
+            bool? c_ = this.Diabetic_Retinopathy_Overlapping_Measurement_Period(context);
+            return /* CQL 'and' (74:8-76:5) */ ((CqlBoolean)!c_
+                && this.Retinal_Exam_in_Measurement_Period_or_Year_Prior(context));
         }
-        else
-        {
-            bool? f_ = this.Retinal_Exam_in_Measurement_Period(context);
-            b_ = a_ & f_;
-        }
-        bool? c_;
-        // CQL 'or' (71:3-76:5): right operand skipped when left is true
-        if (b_ is true)
-        {
-            c_ = true;
-        }
-        else
-        {
-            bool? g_ = !a_;
-            bool? h_;
-            // CQL 'and' (74:8-76:5): right operand skipped when left is false
-            if (g_ is false)
-            {
-                h_ = false;
-            }
-            else
-            {
-                bool? i_ = this.Retinal_Exam_in_Measurement_Period_or_Year_Prior(context);
-                h_ = g_ & i_;
-            }
-            c_ = b_ | h_;
-        }
-        bool? d_;
-        // CQL 'or' (71:3-77:50): right operand skipped when left is true
-        if (c_ is true)
-        {
-            d_ = true;
-        }
-        else
-        {
-            bool? j_ = this.Autonomous_Eye_Exam_in_Measurement_Period(context);
-            d_ = c_ | j_;
-        }
-        bool? e_;
-        // CQL 'or' (71:3-78:83): right operand skipped when left is true
-        if (d_ is true)
-        {
-            e_ = true;
-        }
-        else
-        {
-            bool? k_ = this.Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(context);
-            e_ = d_ | k_;
-        }
-        // CQL 'or' (71:3-79:78): right operand skipped when left is true
-        if (e_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            bool? l_ = this.Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior(context);
-            return e_ | l_;
-        }
+
+        return /* CQL 'or' (71:3-79:78) */ (/* CQL 'or' (71:3-78:83) */ (/* CQL 'or' (71:3-77:50) */ (/* CQL 'or' (71:3-76:5) */ (/* CQL 'and' (71:3-73:3) */ ((CqlBoolean)a_
+            && this.Retinal_Exam_in_Measurement_Period(context))
+            || b_())
+            || this.Autonomous_Eye_Exam_in_Measurement_Period(context))
+            || this.Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(context))
+            || this.Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior(context));
     }
 
 

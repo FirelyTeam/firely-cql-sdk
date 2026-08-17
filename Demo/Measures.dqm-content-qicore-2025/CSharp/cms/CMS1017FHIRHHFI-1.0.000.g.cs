@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS1017FHIRHHFI", "1.0.000")]
 public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRHHFI_1_0_000>
 {
@@ -191,25 +191,23 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             CqlInterval<CqlDateTime> d_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
             int? e_ = CQMCommon_4_1_000.Instance.lengthInDays(context, d_);
             bool? f_ = context.Operators.LessOrEqual(e_, 120);
-            // CQL 'and' (49:5-50:74): right operand skipped when left is false
-            if (f_ is false)
-            {
-                return false;
+
+            CqlBoolean g_() {
+                Patient h_ = this.Patient(context);
+                Date i_ = h_?.BirthDateElement;
+                string j_ = i_?.Value;
+                CqlDate k_ = context.Operators.ConvertStringToDate(j_);
+                Period l_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
+                CqlDateTime n_ = context.Operators.Start(m_);
+                CqlDate o_ = context.Operators.DateFrom(n_);
+                int? p_ = context.Operators.CalculateAgeAt(k_, o_, "year");
+                bool? q_ = context.Operators.GreaterOrEqual(p_, 18);
+                return q_;
             }
-            else
-            {
-                Patient g_ = this.Patient(context);
-                Date h_ = g_?.BirthDateElement;
-                string i_ = h_?.Value;
-                CqlDate j_ = context.Operators.ConvertStringToDate(i_);
-                Period k_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                CqlDateTime m_ = context.Operators.Start(l_);
-                CqlDate n_ = context.Operators.DateFrom(m_);
-                int? o_ = context.Operators.CalculateAgeAt(j_, n_, "year");
-                bool? p_ = context.Operators.GreaterOrEqual(o_, 18);
-                return f_ & p_;
-            }
+
+            return /* CQL 'and' (49:5-50:74) */ ((CqlBoolean)f_
+                && g_());
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -284,39 +282,38 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             List<CodeableConcept> d_ = QualifyingFall?.ReasonCode;
 
             CqlConcept e_(CodeableConcept @this) {
-                CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return i_;
+                CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return j_;
             }
 
             IEnumerable<CqlConcept> f_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)d_, e_);
             CqlValueSet g_ = this.Inpatient_Falls(context);
             bool? h_ = context.Operators.ConceptsInValueSet(f_, g_);
-            // CQL 'or' (94:5-95:73): right operand skipped when left is true
-            if (h_ is true)
-            {
-                return true;
-            }
-            else
-            {
-                IEnumerable<Condition> j_ = this.encountersDiagnosis(context, QualifyingFall);
 
-                bool? k_(Condition @this) {
-                    CodeableConcept o_ = @this?.Code;
-                    CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-                    return !((bool?)(p_ is null));
-                }
+            CqlBoolean i_() {
+                IEnumerable<Condition> k_ = this.encountersDiagnosis(context, QualifyingFall);
 
-
-                CqlConcept l_(Condition @this) {
+                bool? l_(Condition @this) {
                     CodeableConcept q_ = @this?.Code;
                     CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                    return r_;
+                    return !((bool?)(r_ is null));
                 }
 
-                IEnumerable<CqlConcept> m_ = context.Operators.WhereSelect<Condition, CqlConcept>(j_, k_, l_);
-                bool? n_ = context.Operators.ConceptsInValueSet(m_, g_);
-                return h_ | n_;
+
+                CqlConcept m_(Condition @this) {
+                    CodeableConcept s_ = @this?.Code;
+                    CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                    return t_;
+                }
+
+                IEnumerable<CqlConcept> n_ = context.Operators.WhereSelect<Condition, CqlConcept>(k_, l_, m_);
+                CqlValueSet o_ = this.Inpatient_Falls(context);
+                bool? p_ = context.Operators.ConceptsInValueSet(n_, o_);
+                return p_;
             }
+
+            return /* CQL 'or' (94:5-95:73) */ ((CqlBoolean)h_
+                || i_());
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -382,114 +379,97 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             FinancialResourceStatusCodes? h_ = g_?.Value;
             Code<FinancialResourceStatusCodes> i_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(h_);
             bool? j_ = context.Operators.Equal(i_, "active");
-            bool? k_;
-            // CQL 'and' (300:13-301:27): right operand skipped when left is false
-            if (j_ is false)
-            {
-                k_ = false;
-            }
-            else
-            {
-                Code<ClaimUseCode> l_ = C?.UseElement;
-                ClaimUseCode? m_ = l_?.Value;
-                Code<ClaimUseCode> n_ = context.Operators.Convert<Code<ClaimUseCode>>(m_);
-                bool? o_ = context.Operators.Equal(n_, "claim");
-                k_ = j_ & o_;
-            }
-            // CQL 'and' (300:7-304:9): right operand skipped when left is false
-            if (k_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                List<Claim.ItemComponent> p_ = C?.Item;
 
-                bool? q_(Claim.ItemComponent I) {
-                    List<ResourceReference> s_ = I?.Encounter;
-                    bool? t_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)s_, encounter);
-                    return t_;
+            CqlBoolean k_() {
+                Code<ClaimUseCode> m_ = C?.UseElement;
+                ClaimUseCode? n_ = m_?.Value;
+                Code<ClaimUseCode> o_ = context.Operators.Convert<Code<ClaimUseCode>>(n_);
+                bool? p_ = context.Operators.Equal(o_, "claim");
+                return p_;
+            }
+
+
+            CqlBoolean l_() {
+                List<Claim.ItemComponent> q_ = C?.Item;
+
+                bool? r_(Claim.ItemComponent I) {
+                    List<ResourceReference> t_ = I?.Encounter;
+                    bool? u_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)t_, encounter);
+                    return u_;
                 }
 
-                bool? r_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)p_, q_);
-                return k_ & r_;
+                bool? s_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)q_, r_);
+                return s_;
             }
+
+            return /* CQL 'and' (300:7-304:9) */ (/* CQL 'and' (300:13-301:27) */ ((CqlBoolean)j_
+                && k_())
+                && l_());
         }
 
 
         IEnumerable<Claim.DiagnosisComponent> c_(Claim C) {
-            List<Claim.DiagnosisComponent> u_ = C?.Diagnosis;
+            List<Claim.DiagnosisComponent> v_ = C?.Diagnosis;
 
-            bool? v_(Claim.DiagnosisComponent D) {
-                List<Claim.ItemComponent> x_ = C?.Item;
+            bool? w_(Claim.DiagnosisComponent D) {
+                List<Claim.ItemComponent> y_ = C?.Item;
 
-                bool? y_(Claim.ItemComponent I) {
-                    List<ResourceReference> ab_ = I?.Encounter;
-                    bool? ac_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)ab_, encounter);
-                    // CQL 'and' (307:13-308:51): right operand skipped when left is false
-                    if (ac_ is false)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        PositiveInt ad_ = D?.SequenceElement;
-                        int? ae_ = ad_?.Value;
-                        List<PositiveInt> af_ = I?.DiagnosisSequenceElement;
+                bool? z_(Claim.ItemComponent I) {
+                    List<ResourceReference> ad_ = I?.Encounter;
+                    bool? ae_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)ad_, encounter);
 
-                        int? ag_(PositiveInt @this) {
-                            int? aj_ = @this?.Value;
-                            return aj_;
+                    CqlBoolean af_() {
+                        PositiveInt ag_ = D?.SequenceElement;
+                        int? ah_ = ag_?.Value;
+                        List<PositiveInt> ai_ = I?.DiagnosisSequenceElement;
+
+                        int? aj_(PositiveInt @this) {
+                            int? am_ = @this?.Value;
+                            return am_;
                         }
 
-                        IEnumerable<int?> ah_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)af_, ag_);
-                        bool? ai_ = context.Operators.In<int?>(ae_, ah_);
-                        return ac_ & ai_;
+                        IEnumerable<int?> ak_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)ai_, aj_);
+                        bool? al_ = context.Operators.In<int?>(ah_, ak_);
+                        return al_;
                     }
+
+                    return /* CQL 'and' (307:13-308:51) */ ((CqlBoolean)ae_
+                        && af_());
                 }
 
-                bool? z_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)x_, y_);
-                bool? aa_;
-                // CQL 'and' (306:15-312:11): right operand skipped when left is false
-                if (z_ is false)
-                {
-                    aa_ = false;
-                }
-                else
-                {
-                    CodeableConcept ak_ = D?.OnAdmission;
-                    CqlConcept al_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ak_);
-                    bool? am_ = (bool?)(al_ is null);
-                    bool? an_;
-                    // CQL 'or' (310:15-312:11): right operand skipped when left is true
-                    if (am_ is true)
-                    {
-                        an_ = true;
+                bool? aa_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)y_, z_);
+
+                CqlBoolean ab_() {
+                    CodeableConcept an_ = D?.OnAdmission;
+                    CqlConcept ao_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, an_);
+
+                    CqlBoolean ap_() {
+                        CodeableConcept aq_ = D?.OnAdmission;
+                        CqlConcept ar_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aq_);
+                        CqlValueSet as_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
+                        bool? at_ = context.Operators.ConceptInValueSet(ar_, as_);
+                        return at_;
                     }
-                    else
-                    {
-                        CqlValueSet ao_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
-                        bool? ap_ = context.Operators.ConceptInValueSet(al_, ao_);
-                        an_ = am_ | ap_;
-                    }
-                    aa_ = z_ & an_;
+
+                    return /* CQL 'or' (310:15-312:11) */ ((CqlBoolean)(ao_ is null)
+                        || ap_());
                 }
-                // CQL 'and' (306:9-313:46): right operand skipped when left is false
-                if (aa_ is false)
-                {
-                    return false;
+
+
+                CqlBoolean ac_() {
+                    DataType au_ = D?.Diagnosis;
+                    object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
+                    bool? aw_ = context.Operators.ConceptInValueSet(av_ as CqlConcept, diagnosisValueSet);
+                    return aw_;
                 }
-                else
-                {
-                    DataType aq_ = D?.Diagnosis;
-                    object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                    bool? as_ = context.Operators.ConceptInValueSet(ar_ as CqlConcept, diagnosisValueSet);
-                    return aa_ & as_;
-                }
+
+                return /* CQL 'and' (306:9-313:46) */ (/* CQL 'and' (306:15-312:11) */ ((CqlBoolean)aa_
+                    && ab_())
+                    && ac_());
             }
 
-            IEnumerable<Claim.DiagnosisComponent> w_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)u_, v_);
-            return w_;
+            IEnumerable<Claim.DiagnosisComponent> x_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)v_, w_);
+            return x_;
         }
 
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.WhereSelect<Claim, IEnumerable<Claim.DiagnosisComponent>>(a_, b_, c_);
@@ -536,46 +516,40 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             bool? e_(Claim.DiagnosisComponent MajorFallOccurred) {
                 CodeableConcept g_ = MajorFallOccurred?.OnAdmission;
                 CqlConcept h_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, g_);
-                bool? i_ = (bool?)(h_ is null);
-                bool? j_;
-                // CQL 'or' (76:15-78:9): right operand skipped when left is true
-                if (i_ is true)
-                {
-                    j_ = true;
+
+                CqlBoolean i_() {
+                    CodeableConcept k_ = MajorFallOccurred?.OnAdmission;
+                    CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_);
+                    CqlValueSet m_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
+                    bool? n_ = context.Operators.ConceptInValueSet(l_, m_);
+                    return n_;
                 }
-                else
-                {
-                    CqlValueSet k_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
-                    bool? l_ = context.Operators.ConceptInValueSet(h_, k_);
-                    j_ = i_ | l_;
-                }
-                // CQL 'and' (76:9-81:11): right operand skipped when left is false
-                if (j_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    DataType m_ = MajorFallOccurred?.Diagnosis;
-                    object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                    CqlValueSet o_ = this.Major_Injuries(context);
-                    bool? p_ = context.Operators.ConceptInValueSet(n_ as CqlConcept, o_);
-                    bool? q_;
-                    // CQL 'or' (79:15-81:11): right operand skipped when left is true
-                    if (p_ is true)
-                    {
-                        q_ = true;
+
+
+                CqlBoolean j_() {
+                    DataType o_ = MajorFallOccurred?.Diagnosis;
+                    object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
+                    CqlValueSet q_ = this.Major_Injuries(context);
+                    bool? r_ = context.Operators.ConceptInValueSet(p_ as CqlConcept, q_);
+
+                    CqlBoolean s_() {
+                        DataType t_ = MajorFallOccurred?.Diagnosis;
+                        object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                        Condition v_ = CQMCommon_4_1_000.Instance.getCondition(context, u_ as ResourceReference);
+                        CodeableConcept w_ = v_?.Code;
+                        CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
+                        CqlValueSet y_ = this.Major_Injuries(context);
+                        bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
+                        return z_;
                     }
-                    else
-                    {
-                        Condition r_ = CQMCommon_4_1_000.Instance.getCondition(context, n_ as ResourceReference);
-                        CodeableConcept s_ = r_?.Code;
-                        CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                        bool? u_ = context.Operators.ConceptInValueSet(t_, o_);
-                        q_ = p_ | u_;
-                    }
-                    return j_ & q_;
+
+                    return /* CQL 'or' (79:15-81:11) */ ((CqlBoolean)r_
+                        || s_());
                 }
+
+                return /* CQL 'and' (76:9-81:11) */ (/* CQL 'or' (76:15-78:9) */ ((CqlBoolean)(h_ is null)
+                    || i_())
+                    && j_());
             }
 
             bool? f_ = context.Operators.WhereAny<Claim.DiagnosisComponent>(d_, e_);
@@ -603,46 +577,40 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             bool? e_(Claim.DiagnosisComponent ModerateFallOccurred) {
                 CodeableConcept g_ = ModerateFallOccurred?.OnAdmission;
                 CqlConcept h_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, g_);
-                bool? i_ = (bool?)(h_ is null);
-                bool? j_;
-                // CQL 'or' (65:15-67:9): right operand skipped when left is true
-                if (i_ is true)
-                {
-                    j_ = true;
+
+                CqlBoolean i_() {
+                    CodeableConcept k_ = ModerateFallOccurred?.OnAdmission;
+                    CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_);
+                    CqlValueSet m_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
+                    bool? n_ = context.Operators.ConceptInValueSet(l_, m_);
+                    return n_;
                 }
-                else
-                {
-                    CqlValueSet k_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
-                    bool? l_ = context.Operators.ConceptInValueSet(h_, k_);
-                    j_ = i_ | l_;
-                }
-                // CQL 'and' (65:9-70:11): right operand skipped when left is false
-                if (j_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    DataType m_ = ModerateFallOccurred?.Diagnosis;
-                    object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                    CqlValueSet o_ = this.Moderate_Injuries(context);
-                    bool? p_ = context.Operators.ConceptInValueSet(n_ as CqlConcept, o_);
-                    bool? q_;
-                    // CQL 'or' (68:15-70:11): right operand skipped when left is true
-                    if (p_ is true)
-                    {
-                        q_ = true;
+
+
+                CqlBoolean j_() {
+                    DataType o_ = ModerateFallOccurred?.Diagnosis;
+                    object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
+                    CqlValueSet q_ = this.Moderate_Injuries(context);
+                    bool? r_ = context.Operators.ConceptInValueSet(p_ as CqlConcept, q_);
+
+                    CqlBoolean s_() {
+                        DataType t_ = ModerateFallOccurred?.Diagnosis;
+                        object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                        Condition v_ = CQMCommon_4_1_000.Instance.getCondition(context, u_ as ResourceReference);
+                        CodeableConcept w_ = v_?.Code;
+                        CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
+                        CqlValueSet y_ = this.Moderate_Injuries(context);
+                        bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
+                        return z_;
                     }
-                    else
-                    {
-                        Condition r_ = CQMCommon_4_1_000.Instance.getCondition(context, n_ as ResourceReference);
-                        CodeableConcept s_ = r_?.Code;
-                        CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                        bool? u_ = context.Operators.ConceptInValueSet(t_, o_);
-                        q_ = p_ | u_;
-                    }
-                    return j_ & q_;
+
+                    return /* CQL 'or' (68:15-70:11) */ ((CqlBoolean)r_
+                        || s_());
                 }
+
+                return /* CQL 'and' (65:9-70:11) */ (/* CQL 'or' (65:15-67:9) */ ((CqlBoolean)(h_ is null)
+                    || i_())
+                    && j_());
             }
 
             bool? f_ = context.Operators.WhereAny<Claim.DiagnosisComponent>(d_, e_);
@@ -737,36 +705,30 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 CqlDateTime l_ = context.Operators.Start(k_);
                 CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
                 bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, (string)default);
-                bool? o_;
-                // CQL 'and' (116:17-117:33): right operand skipped when left is false
-                if (n_ is false)
-                {
-                    o_ = false;
+
+                CqlBoolean o_() {
+                    DataType q_ = BMI?.Value;
+                    CqlQuantity r_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, q_ as Quantity);
+                    return !((bool?)(r_ is null));
                 }
-                else
-                {
-                    DataType p_ = BMI?.Value;
-                    CqlQuantity q_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, p_ as Quantity);
-                    o_ = n_ & (!((bool?)(q_ is null)));
-                }
-                // CQL 'and' (116:17-118:61): right operand skipped when left is false
-                if (o_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    Code<ObservationStatus> r_ = BMI?.StatusElement;
-                    ObservationStatus? s_ = r_?.Value;
-                    string t_ = context.Operators.Convert<string>(s_);
-                    string[] u_ = [
+
+
+                CqlBoolean p_() {
+                    Code<ObservationStatus> s_ = BMI?.StatusElement;
+                    ObservationStatus? t_ = s_?.Value;
+                    string u_ = context.Operators.Convert<string>(t_);
+                    string[] v_ = [
                         "final",
                         "amended",
                         "corrected",
                     ];
-                    bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
-                    return o_ & v_;
+                    bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
+                    return w_;
                 }
+
+                return /* CQL 'and' (116:17-118:61) */ (/* CQL 'and' (116:17-117:33) */ ((CqlBoolean)n_
+                    && o_())
+                    && p_());
             }
 
             bool? h_ = context.Operators.WhereAny<Encounter>(f_, g_);
@@ -775,9 +737,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
 
         CqlQuantity c_(Observation BMI) {
-            DataType w_ = BMI?.Value;
-            CqlQuantity x_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, w_ as Quantity);
-            return x_ as CqlQuantity;
+            DataType x_ = BMI?.Value;
+            CqlQuantity y_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, x_ as Quantity);
+            return y_ as CqlQuantity;
         }
 
         IEnumerable<CqlQuantity> d_ = context.Operators.WhereSelect<Observation, CqlQuantity>(a_, b_, c_);
@@ -806,197 +768,179 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 FinancialResourceStatusCodes? af_ = ae_?.Value;
                 Code<FinancialResourceStatusCodes> ag_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(af_);
                 bool? ah_ = context.Operators.Equal(ag_, "active");
-                bool? ai_;
-                // CQL 'and' (125:15-126:29): right operand skipped when left is false
-                if (ah_ is false)
-                {
-                    ai_ = false;
-                }
-                else
-                {
-                    Code<ClaimUseCode> aj_ = C?.UseElement;
-                    ClaimUseCode? ak_ = aj_?.Value;
-                    Code<ClaimUseCode> al_ = context.Operators.Convert<Code<ClaimUseCode>>(ak_);
-                    bool? am_ = context.Operators.Equal(al_, "claim");
-                    ai_ = ah_ & am_;
-                }
-                // CQL 'and' (125:9-129:11): right operand skipped when left is false
-                if (ai_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    List<Claim.ItemComponent> an_ = C?.Item;
 
-                    bool? ao_(Claim.ItemComponent ClaimItem) {
-                        List<ResourceReference> aq_ = ClaimItem?.Encounter;
-                        bool? ar_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)aq_, InpatientEncounter);
-                        return ar_;
+                CqlBoolean ai_() {
+                    Code<ClaimUseCode> ak_ = C?.UseElement;
+                    ClaimUseCode? al_ = ak_?.Value;
+                    Code<ClaimUseCode> am_ = context.Operators.Convert<Code<ClaimUseCode>>(al_);
+                    bool? an_ = context.Operators.Equal(am_, "claim");
+                    return an_;
+                }
+
+
+                CqlBoolean aj_() {
+                    List<Claim.ItemComponent> ao_ = C?.Item;
+
+                    bool? ap_(Claim.ItemComponent ClaimItem) {
+                        List<ResourceReference> ar_ = ClaimItem?.Encounter;
+                        bool? as_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)ar_, InpatientEncounter);
+                        return as_;
                     }
 
-                    bool? ap_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)an_, ao_);
-                    return ai_ & ap_;
+                    bool? aq_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ao_, ap_);
+                    return aq_;
                 }
+
+                return /* CQL 'and' (125:9-129:11) */ (/* CQL 'and' (125:15-126:29) */ ((CqlBoolean)ah_
+                    && ai_())
+                    && aj_());
             }
 
             IEnumerable<Claim> h_ = context.Operators.Where<Claim>(f_, g_);
 
             bool? i_(Claim @this) {
-                List<Claim.DiagnosisComponent> as_ = @this?.Diagnosis;
-                return !((bool?)(as_ is null));
+                List<Claim.DiagnosisComponent> at_ = @this?.Diagnosis;
+                return !((bool?)(at_ is null));
             }
 
 
             List<Claim.DiagnosisComponent> j_(Claim @this) {
-                List<Claim.DiagnosisComponent> at_ = @this?.Diagnosis;
-                return at_;
+                List<Claim.DiagnosisComponent> au_ = @this?.Diagnosis;
+                return au_;
             }
 
             IEnumerable<List<Claim.DiagnosisComponent>> k_ = context.Operators.WhereSelect<Claim, List<Claim.DiagnosisComponent>>(h_, i_, j_);
             IEnumerable<Claim.DiagnosisComponent> l_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent>>)k_);
 
             bool? m_(Claim C) {
-                Code<FinancialResourceStatusCodes> au_ = C?.StatusElement;
-                FinancialResourceStatusCodes? av_ = au_?.Value;
-                Code<FinancialResourceStatusCodes> aw_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(av_);
-                bool? ax_ = context.Operators.Equal(aw_, "active");
-                bool? ay_;
-                // CQL 'and' (125:15-126:29): right operand skipped when left is false
-                if (ax_ is false)
-                {
-                    ay_ = false;
-                }
-                else
-                {
-                    Code<ClaimUseCode> az_ = C?.UseElement;
-                    ClaimUseCode? ba_ = az_?.Value;
-                    Code<ClaimUseCode> bb_ = context.Operators.Convert<Code<ClaimUseCode>>(ba_);
-                    bool? bc_ = context.Operators.Equal(bb_, "claim");
-                    ay_ = ax_ & bc_;
-                }
-                // CQL 'and' (125:9-129:11): right operand skipped when left is false
-                if (ay_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    List<Claim.ItemComponent> bd_ = C?.Item;
+                Code<FinancialResourceStatusCodes> av_ = C?.StatusElement;
+                FinancialResourceStatusCodes? aw_ = av_?.Value;
+                Code<FinancialResourceStatusCodes> ax_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(aw_);
+                bool? ay_ = context.Operators.Equal(ax_, "active");
 
-                    bool? be_(Claim.ItemComponent ClaimItem) {
-                        List<ResourceReference> bg_ = ClaimItem?.Encounter;
-                        bool? bh_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bg_, InpatientEncounter);
-                        return bh_;
+                CqlBoolean az_() {
+                    Code<ClaimUseCode> bb_ = C?.UseElement;
+                    ClaimUseCode? bc_ = bb_?.Value;
+                    Code<ClaimUseCode> bd_ = context.Operators.Convert<Code<ClaimUseCode>>(bc_);
+                    bool? be_ = context.Operators.Equal(bd_, "claim");
+                    return be_;
+                }
+
+
+                CqlBoolean ba_() {
+                    List<Claim.ItemComponent> bf_ = C?.Item;
+
+                    bool? bg_(Claim.ItemComponent ClaimItem) {
+                        List<ResourceReference> bi_ = ClaimItem?.Encounter;
+                        bool? bj_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bi_, InpatientEncounter);
+                        return bj_;
                     }
 
-                    bool? bf_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bd_, be_);
-                    return ay_ & bf_;
+                    bool? bh_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bf_, bg_);
+                    return bh_;
                 }
+
+                return /* CQL 'and' (125:9-129:11) */ (/* CQL 'and' (125:15-126:29) */ ((CqlBoolean)ay_
+                    && az_())
+                    && ba_());
             }
 
             IEnumerable<Claim> n_ = context.Operators.Where<Claim>(f_, m_);
 
             bool? o_(Claim @this) {
-                List<Claim.DiagnosisComponent> bi_ = @this?.Diagnosis;
-                return !((bool?)(bi_ is null));
+                List<Claim.DiagnosisComponent> bk_ = @this?.Diagnosis;
+                return !((bool?)(bk_ is null));
             }
 
 
             List<Claim.DiagnosisComponent> p_(Claim @this) {
-                List<Claim.DiagnosisComponent> bj_ = @this?.Diagnosis;
-                return bj_;
+                List<Claim.DiagnosisComponent> bl_ = @this?.Diagnosis;
+                return bl_;
             }
 
             IEnumerable<List<Claim.DiagnosisComponent>> q_ = context.Operators.WhereSelect<Claim, List<Claim.DiagnosisComponent>>(n_, o_, p_);
             IEnumerable<Claim.DiagnosisComponent> r_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent>>)q_);
 
             bool? s_(Claim.DiagnosisComponent @this) {
-                PositiveInt bk_ = @this?.SequenceElement;
-                int? bl_ = bk_?.Value;
-                return !((bool?)(bl_ is null));
+                PositiveInt bm_ = @this?.SequenceElement;
+                int? bn_ = bm_?.Value;
+                return !((bool?)(bn_ is null));
             }
 
 
             int? t_(Claim.DiagnosisComponent @this) {
-                PositiveInt bm_ = @this?.SequenceElement;
-                int? bn_ = bm_?.Value;
-                return bn_;
+                PositiveInt bo_ = @this?.SequenceElement;
+                int? bp_ = bo_?.Value;
+                return bp_;
             }
 
             IEnumerable<int?> u_ = context.Operators.WhereSelect<Claim.DiagnosisComponent, int?>(r_, s_, t_);
 
             bool? v_(Claim C) {
-                Code<FinancialResourceStatusCodes> bo_ = C?.StatusElement;
-                FinancialResourceStatusCodes? bp_ = bo_?.Value;
-                Code<FinancialResourceStatusCodes> bq_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(bp_);
-                bool? br_ = context.Operators.Equal(bq_, "active");
-                bool? bs_;
-                // CQL 'and' (125:15-126:29): right operand skipped when left is false
-                if (br_ is false)
-                {
-                    bs_ = false;
-                }
-                else
-                {
-                    Code<ClaimUseCode> bt_ = C?.UseElement;
-                    ClaimUseCode? bu_ = bt_?.Value;
-                    Code<ClaimUseCode> bv_ = context.Operators.Convert<Code<ClaimUseCode>>(bu_);
-                    bool? bw_ = context.Operators.Equal(bv_, "claim");
-                    bs_ = br_ & bw_;
-                }
-                // CQL 'and' (125:9-129:11): right operand skipped when left is false
-                if (bs_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    List<Claim.ItemComponent> bx_ = C?.Item;
+                Code<FinancialResourceStatusCodes> bq_ = C?.StatusElement;
+                FinancialResourceStatusCodes? br_ = bq_?.Value;
+                Code<FinancialResourceStatusCodes> bs_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(br_);
+                bool? bt_ = context.Operators.Equal(bs_, "active");
 
-                    bool? by_(Claim.ItemComponent ClaimItem) {
-                        List<ResourceReference> ca_ = ClaimItem?.Encounter;
-                        bool? cb_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)ca_, InpatientEncounter);
-                        return cb_;
+                CqlBoolean bu_() {
+                    Code<ClaimUseCode> bw_ = C?.UseElement;
+                    ClaimUseCode? bx_ = bw_?.Value;
+                    Code<ClaimUseCode> by_ = context.Operators.Convert<Code<ClaimUseCode>>(bx_);
+                    bool? bz_ = context.Operators.Equal(by_, "claim");
+                    return bz_;
+                }
+
+
+                CqlBoolean bv_() {
+                    List<Claim.ItemComponent> ca_ = C?.Item;
+
+                    bool? cb_(Claim.ItemComponent ClaimItem) {
+                        List<ResourceReference> cd_ = ClaimItem?.Encounter;
+                        bool? ce_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)cd_, InpatientEncounter);
+                        return ce_;
                     }
 
-                    bool? bz_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bx_, by_);
-                    return bs_ & bz_;
+                    bool? cc_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ca_, cb_);
+                    return cc_;
                 }
+
+                return /* CQL 'and' (125:9-129:11) */ (/* CQL 'and' (125:15-126:29) */ ((CqlBoolean)bt_
+                    && bu_())
+                    && bv_());
             }
 
             IEnumerable<Claim> w_ = context.Operators.Where<Claim>(f_, v_);
 
             bool? x_(Claim @this) {
-                List<Claim.DiagnosisComponent> cc_ = @this?.Diagnosis;
-                return !((bool?)(cc_ is null));
+                List<Claim.DiagnosisComponent> cf_ = @this?.Diagnosis;
+                return !((bool?)(cf_ is null));
             }
 
 
             List<Claim.DiagnosisComponent> y_(Claim @this) {
-                List<Claim.DiagnosisComponent> cd_ = @this?.Diagnosis;
-                return cd_;
+                List<Claim.DiagnosisComponent> cg_ = @this?.Diagnosis;
+                return cg_;
             }
 
             IEnumerable<List<Claim.DiagnosisComponent>> z_ = context.Operators.WhereSelect<Claim, List<Claim.DiagnosisComponent>>(w_, x_, y_);
             IEnumerable<Claim.DiagnosisComponent> aa_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent>>)z_);
 
             bool? ab_(Claim.DiagnosisComponent Diag) {
-                CodeableConcept ce_ = Diag?.OnAdmission;
-                CqlConcept cf_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ce_);
-                CqlValueSet cg_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-                bool? ch_ = context.Operators.ConceptInValueSet(cf_, cg_);
-                // CQL 'or' (139:9-140:102): right operand skipped when left is true
-                if (ch_ is true)
-                {
-                    return true;
+                CodeableConcept ch_ = Diag?.OnAdmission;
+                CqlConcept ci_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ch_);
+                CqlValueSet cj_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? ck_ = context.Operators.ConceptInValueSet(ci_, cj_);
+
+                CqlBoolean cl_() {
+                    CodeableConcept cm_ = Diag?.OnAdmission;
+                    CqlConcept cn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cm_);
+                    CqlValueSet co_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
+                    bool? cp_ = context.Operators.ConceptInValueSet(cn_, co_);
+                    return cp_;
                 }
-                else
-                {
-                    CqlValueSet ci_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
-                    bool? cj_ = context.Operators.ConceptInValueSet(cf_, ci_);
-                    return ch_ | cj_;
-                }
+
+                return /* CQL 'or' (139:9-140:102) */ ((CqlBoolean)ck_
+                    || cl_());
             }
 
             IEnumerable<Claim.DiagnosisComponent> ac_ = context.Operators.Where<Claim.DiagnosisComponent>(aa_, ab_);
@@ -1023,17 +967,16 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             CqlValueSet d_ = this.Abnormal_Weight_Loss(context);
             CqlValueSet e_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
             bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientEncounter, d_, e_);
-            // CQL 'or' (145:5-146:127): right operand skipped when left is true
-            if (f_ is true)
-            {
-                return true;
+
+            CqlBoolean g_() {
+                CqlValueSet h_ = this.Malnutrition(context);
+                CqlValueSet i_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                bool? j_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientEncounter, h_, i_);
+                return j_;
             }
-            else
-            {
-                CqlValueSet g_ = this.Malnutrition(context);
-                bool? h_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientEncounter, g_, e_);
-                return f_ | h_;
-            }
+
+            return /* CQL 'or' (145:5-146:127) */ ((CqlBoolean)f_
+                || g_());
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1063,19 +1006,17 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
                     string r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
-                    // CQL 'and': right operand skipped when left is false
-                    if (s_ is false)
-                    {
-                        return false;
+
+                    CqlBoolean t_() {
+                        CodeableConcept u_ = M?.Code;
+                        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
+                        CqlValueSet w_ = this.Anticoagulants_for_All_Indications(context);
+                        bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                        return x_;
                     }
-                    else
-                    {
-                        CodeableConcept t_ = M?.Code;
-                        CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                        CqlValueSet v_ = this.Anticoagulants_for_All_Indications(context);
-                        bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                        return s_ & w_;
-                    }
+
+                    return /* CQL 'and' */ ((CqlBoolean)s_
+                        && t_());
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1088,97 +1029,76 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest Anticoagulants) {
-                Code<MedicationRequest.MedicationrequestStatus> x_ = Anticoagulants?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? y_ = x_?.Value;
-                string z_ = context.Operators.Convert<string>(y_);
-                string[] aa_ = [
+                Code<MedicationRequest.MedicationrequestStatus> y_ = Anticoagulants?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
+                string aa_ = context.Operators.Convert<string>(z_);
+                string[] ab_ = [
                     "active",
                     "completed",
                 ];
-                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
-                bool? ac_;
-                // CQL 'and' (151:17-156:9): right operand skipped when left is false
-                if (ab_ is false)
-                {
-                    ac_ = false;
-                }
-                else
-                {
-                    Code<MedicationRequest.MedicationRequestIntent> ae_ = Anticoagulants?.IntentElement;
-                    MedicationRequest.MedicationRequestIntent? af_ = ae_?.Value;
-                    string ag_ = context.Operators.Convert<string>(af_);
-                    bool? ah_ = context.Operators.Equal(ag_, "order");
-                    bool? ai_;
-                    // CQL 'or' (152:13-156:9): right operand skipped when left is true
-                    if (ah_ is true)
-                    {
-                        ai_ = true;
-                    }
-                    else
-                    {
-                        bool? aj_ = context.Operators.Equal(ag_, "plan");
-                        bool? ak_;
-                        // CQL 'and' (153:16-155:13): right operand skipped when left is false
-                        if (aj_ is false)
-                        {
-                            ak_ = false;
-                        }
-                        else
-                        {
-                            ResourceReference al_ = Anticoagulants?.Subject;
-                            FhirString am_ = al_?.ReferenceElement;
-                            string an_ = am_?.Value;
-                            string ao_ = QICoreCommon_4_0_000.Instance.getId(context, an_);
-                            Id ap_;
-                            Patient as_ = this.Patient(context);
-                            bool at_ = as_ is Resource;
-                            if (at_)
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+
+                CqlBoolean ad_() {
+                    Code<MedicationRequest.MedicationRequestIntent> af_ = Anticoagulants?.IntentElement;
+                    MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                    string ah_ = context.Operators.Convert<string>(ag_);
+                    bool? ai_ = context.Operators.Equal(ah_, "order");
+
+                    CqlBoolean aj_() {
+                        Code<MedicationRequest.MedicationRequestIntent> ak_ = Anticoagulants?.IntentElement;
+                        MedicationRequest.MedicationRequestIntent? al_ = ak_?.Value;
+                        string am_ = context.Operators.Convert<string>(al_);
+                        bool? an_ = context.Operators.Equal(am_, "plan");
+
+                        CqlBoolean ao_() {
+                            ResourceReference ap_ = Anticoagulants?.Subject;
+                            FhirString aq_ = ap_?.ReferenceElement;
+                            string ar_ = aq_?.Value;
+                            string as_ = QICoreCommon_4_0_000.Instance.getId(context, ar_);
+                            Id at_;
+                            Patient aw_ = this.Patient(context);
+                            bool ax_ = aw_ is Resource;
+                            if (ax_)
                             {
-                                ap_ = (as_ as Resource).IdElement;
+                                at_ = (aw_ as Resource).IdElement;
                             }
                             else
                             {
-                                ap_ = default;
+                                at_ = default;
                             }
-                            string aq_ = ap_?.Value;
-                            bool? ar_ = context.Operators.Equal(ao_, aq_);
-                            ak_ = aj_ & ar_;
+                            string au_ = at_?.Value;
+                            bool? av_ = context.Operators.Equal(as_, au_);
+                            return av_;
                         }
-                        ai_ = ah_ | ak_;
+
+                        return /* CQL 'and' (153:16-155:13) */ ((CqlBoolean)an_
+                            && ao_());
                     }
-                    ac_ = ab_ & ai_;
+
+                    return /* CQL 'or' (152:13-156:9) */ ((CqlBoolean)ai_
+                        || aj_());
                 }
-                bool? ad_;
-                // CQL 'and' (151:17-157:42): right operand skipped when left is false
-                if (ac_ is false)
-                {
-                    ad_ = false;
+
+
+                CqlBoolean ae_() {
+                    CqlInterval<CqlDate> ay_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, Anticoagulants);
+                    CqlDate az_ = ay_?.low;
+                    CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                    CqlDate bb_ = ay_?.high;
+                    CqlDateTime bc_ = context.Operators.ConvertDateToDateTime(bb_);
+                    bool? bd_ = ay_?.lowClosed;
+                    bool? be_ = ay_?.highClosed;
+                    CqlInterval<CqlDateTime> bf_ = context.Operators.Interval(ba_, bc_, bd_, be_);
+                    Period bg_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> bh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bg_);
+                    bool? bi_ = context.Operators.OverlapsBefore(bf_, bh_, "day");
+                    return bi_;
                 }
-                else
-                {
-                    bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest);
-                    ad_ = ac_ & au_;
-                }
-                // CQL 'and' (151:17-158:103): right operand skipped when left is false
-                if (ad_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    CqlInterval<CqlDate> av_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, Anticoagulants);
-                    CqlDate aw_ = av_?.low;
-                    CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
-                    CqlDate ay_ = av_?.high;
-                    CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
-                    bool? ba_ = av_?.lowClosed;
-                    bool? bb_ = av_?.highClosed;
-                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, az_, ba_, bb_);
-                    Period bd_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
-                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, "day");
-                    return ad_ & bf_;
-                }
+
+                return /* CQL 'and' (151:17-158:103) */ (/* CQL 'and' (151:17-157:42) */ (/* CQL 'and' (151:17-156:9) */ ((CqlBoolean)ac_
+                    && ad_())
+                    && QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest))
+                    && ae_());
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1212,19 +1132,17 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
                     string r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
-                    // CQL 'and': right operand skipped when left is false
-                    if (s_ is false)
-                    {
-                        return false;
+
+                    CqlBoolean t_() {
+                        CodeableConcept u_ = M?.Code;
+                        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
+                        CqlValueSet w_ = this.Anticoagulants_for_All_Indications(context);
+                        bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                        return x_;
                     }
-                    else
-                    {
-                        CodeableConcept t_ = M?.Code;
-                        CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                        CqlValueSet v_ = this.Anticoagulants_for_All_Indications(context);
-                        bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                        return s_ & w_;
-                    }
+
+                    return /* CQL 'and' */ ((CqlBoolean)s_
+                        && t_());
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1237,29 +1155,27 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationAdministration> i_ = context.Operators.Union<MedicationAdministration>(f_, h_);
 
             bool? j_(MedicationAdministration Anticoagulants) {
-                DataType x_ = Anticoagulants?.Effective;
-                object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                CqlInterval<CqlDateTime> z_ = QICoreCommon_4_0_000.Instance.toInterval(context, y_);
-                CqlDateTime aa_ = context.Operators.Start(z_);
-                CqlInterval<CqlDateTime> ab_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
-                bool? ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, (string)default);
-                // CQL 'and' (163:17-164:67): right operand skipped when left is false
-                if (ac_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    Code<MedicationAdministration.MedicationAdministrationStatusCodes> ad_ = Anticoagulants?.StatusElement;
-                    MedicationAdministration.MedicationAdministrationStatusCodes? ae_ = ad_?.Value;
-                    string af_ = context.Operators.Convert<string>(ae_);
-                    string[] ag_ = [
+                DataType y_ = Anticoagulants?.Effective;
+                object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
+                CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.toInterval(context, z_);
+                CqlDateTime ab_ = context.Operators.Start(aa_);
+                CqlInterval<CqlDateTime> ac_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
+                bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, (string)default);
+
+                CqlBoolean ae_() {
+                    Code<MedicationAdministration.MedicationAdministrationStatusCodes> af_ = Anticoagulants?.StatusElement;
+                    MedicationAdministration.MedicationAdministrationStatusCodes? ag_ = af_?.Value;
+                    string ah_ = context.Operators.Convert<string>(ag_);
+                    string[] ai_ = [
                         "in-progress",
                         "completed",
                     ];
-                    bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
-                    return ac_ & ah_;
+                    bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
+                    return aj_;
                 }
+
+                return /* CQL 'and' (163:17-164:67) */ ((CqlBoolean)ad_
+                    && ae_());
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationAdministration>(i_, j_);
@@ -1293,19 +1209,17 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
                     string r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
-                    // CQL 'and': right operand skipped when left is false
-                    if (s_ is false)
-                    {
-                        return false;
+
+                    CqlBoolean t_() {
+                        CodeableConcept u_ = M?.Code;
+                        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
+                        CqlValueSet w_ = this.Antidepressants(context);
+                        bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                        return x_;
                     }
-                    else
-                    {
-                        CodeableConcept t_ = M?.Code;
-                        CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                        CqlValueSet v_ = this.Antidepressants(context);
-                        bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                        return s_ & w_;
-                    }
+
+                    return /* CQL 'and' */ ((CqlBoolean)s_
+                        && t_());
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1318,97 +1232,76 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest AntidepressantMed) {
-                Code<MedicationRequest.MedicationrequestStatus> x_ = AntidepressantMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? y_ = x_?.Value;
-                string z_ = context.Operators.Convert<string>(y_);
-                string[] aa_ = [
+                Code<MedicationRequest.MedicationrequestStatus> y_ = AntidepressantMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
+                string aa_ = context.Operators.Convert<string>(z_);
+                string[] ab_ = [
                     "active",
                     "completed",
                 ];
-                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
-                bool? ac_;
-                // CQL 'and' (169:17-174:9): right operand skipped when left is false
-                if (ab_ is false)
-                {
-                    ac_ = false;
-                }
-                else
-                {
-                    Code<MedicationRequest.MedicationRequestIntent> ae_ = AntidepressantMed?.IntentElement;
-                    MedicationRequest.MedicationRequestIntent? af_ = ae_?.Value;
-                    string ag_ = context.Operators.Convert<string>(af_);
-                    bool? ah_ = context.Operators.Equal(ag_, "order");
-                    bool? ai_;
-                    // CQL 'or' (170:13-174:9): right operand skipped when left is true
-                    if (ah_ is true)
-                    {
-                        ai_ = true;
-                    }
-                    else
-                    {
-                        bool? aj_ = context.Operators.Equal(ag_, "plan");
-                        bool? ak_;
-                        // CQL 'and' (171:16-173:13): right operand skipped when left is false
-                        if (aj_ is false)
-                        {
-                            ak_ = false;
-                        }
-                        else
-                        {
-                            ResourceReference al_ = AntidepressantMed?.Subject;
-                            FhirString am_ = al_?.ReferenceElement;
-                            string an_ = am_?.Value;
-                            string ao_ = QICoreCommon_4_0_000.Instance.getId(context, an_);
-                            Id ap_;
-                            Patient as_ = this.Patient(context);
-                            bool at_ = as_ is Resource;
-                            if (at_)
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+
+                CqlBoolean ad_() {
+                    Code<MedicationRequest.MedicationRequestIntent> af_ = AntidepressantMed?.IntentElement;
+                    MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                    string ah_ = context.Operators.Convert<string>(ag_);
+                    bool? ai_ = context.Operators.Equal(ah_, "order");
+
+                    CqlBoolean aj_() {
+                        Code<MedicationRequest.MedicationRequestIntent> ak_ = AntidepressantMed?.IntentElement;
+                        MedicationRequest.MedicationRequestIntent? al_ = ak_?.Value;
+                        string am_ = context.Operators.Convert<string>(al_);
+                        bool? an_ = context.Operators.Equal(am_, "plan");
+
+                        CqlBoolean ao_() {
+                            ResourceReference ap_ = AntidepressantMed?.Subject;
+                            FhirString aq_ = ap_?.ReferenceElement;
+                            string ar_ = aq_?.Value;
+                            string as_ = QICoreCommon_4_0_000.Instance.getId(context, ar_);
+                            Id at_;
+                            Patient aw_ = this.Patient(context);
+                            bool ax_ = aw_ is Resource;
+                            if (ax_)
                             {
-                                ap_ = (as_ as Resource).IdElement;
+                                at_ = (aw_ as Resource).IdElement;
                             }
                             else
                             {
-                                ap_ = default;
+                                at_ = default;
                             }
-                            string aq_ = ap_?.Value;
-                            bool? ar_ = context.Operators.Equal(ao_, aq_);
-                            ak_ = aj_ & ar_;
+                            string au_ = at_?.Value;
+                            bool? av_ = context.Operators.Equal(as_, au_);
+                            return av_;
                         }
-                        ai_ = ah_ | ak_;
+
+                        return /* CQL 'and' (171:16-173:13) */ ((CqlBoolean)an_
+                            && ao_());
                     }
-                    ac_ = ab_ & ai_;
+
+                    return /* CQL 'or' (170:13-174:9) */ ((CqlBoolean)ai_
+                        || aj_());
                 }
-                bool? ad_;
-                // CQL 'and' (169:17-175:45): right operand skipped when left is false
-                if (ac_ is false)
-                {
-                    ad_ = false;
+
+
+                CqlBoolean ae_() {
+                    CqlInterval<CqlDate> ay_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AntidepressantMed);
+                    CqlDate az_ = ay_?.low;
+                    CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                    CqlDate bb_ = ay_?.high;
+                    CqlDateTime bc_ = context.Operators.ConvertDateToDateTime(bb_);
+                    bool? bd_ = ay_?.lowClosed;
+                    bool? be_ = ay_?.highClosed;
+                    CqlInterval<CqlDateTime> bf_ = context.Operators.Interval(ba_, bc_, bd_, be_);
+                    Period bg_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> bh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bg_);
+                    bool? bi_ = context.Operators.OverlapsBefore(bf_, bh_, "day");
+                    return bi_;
                 }
-                else
-                {
-                    bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest);
-                    ad_ = ac_ & au_;
-                }
-                // CQL 'and' (169:17-176:106): right operand skipped when left is false
-                if (ad_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    CqlInterval<CqlDate> av_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AntidepressantMed);
-                    CqlDate aw_ = av_?.low;
-                    CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
-                    CqlDate ay_ = av_?.high;
-                    CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
-                    bool? ba_ = av_?.lowClosed;
-                    bool? bb_ = av_?.highClosed;
-                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, az_, ba_, bb_);
-                    Period bd_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
-                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, "day");
-                    return ad_ & bf_;
-                }
+
+                return /* CQL 'and' (169:17-176:106) */ (/* CQL 'and' (169:17-175:45) */ (/* CQL 'and' (169:17-174:9) */ ((CqlBoolean)ac_
+                    && ad_())
+                    && QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest))
+                    && ae_());
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1442,19 +1335,17 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
                     string r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
-                    // CQL 'and': right operand skipped when left is false
-                    if (s_ is false)
-                    {
-                        return false;
+
+                    CqlBoolean t_() {
+                        CodeableConcept u_ = M?.Code;
+                        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
+                        CqlValueSet w_ = this.Antihypertensives(context);
+                        bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                        return x_;
                     }
-                    else
-                    {
-                        CodeableConcept t_ = M?.Code;
-                        CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                        CqlValueSet v_ = this.Antihypertensives(context);
-                        bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                        return s_ & w_;
-                    }
+
+                    return /* CQL 'and' */ ((CqlBoolean)s_
+                        && t_());
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1467,97 +1358,76 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest BPMed) {
-                Code<MedicationRequest.MedicationrequestStatus> x_ = BPMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? y_ = x_?.Value;
-                string z_ = context.Operators.Convert<string>(y_);
-                string[] aa_ = [
+                Code<MedicationRequest.MedicationrequestStatus> y_ = BPMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
+                string aa_ = context.Operators.Convert<string>(z_);
+                string[] ab_ = [
                     "active",
                     "completed",
                 ];
-                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
-                bool? ac_;
-                // CQL 'and' (181:17-186:9): right operand skipped when left is false
-                if (ab_ is false)
-                {
-                    ac_ = false;
-                }
-                else
-                {
-                    Code<MedicationRequest.MedicationRequestIntent> ae_ = BPMed?.IntentElement;
-                    MedicationRequest.MedicationRequestIntent? af_ = ae_?.Value;
-                    string ag_ = context.Operators.Convert<string>(af_);
-                    bool? ah_ = context.Operators.Equal(ag_, "order");
-                    bool? ai_;
-                    // CQL 'or' (182:13-186:9): right operand skipped when left is true
-                    if (ah_ is true)
-                    {
-                        ai_ = true;
-                    }
-                    else
-                    {
-                        bool? aj_ = context.Operators.Equal(ag_, "plan");
-                        bool? ak_;
-                        // CQL 'and' (183:16-185:13): right operand skipped when left is false
-                        if (aj_ is false)
-                        {
-                            ak_ = false;
-                        }
-                        else
-                        {
-                            ResourceReference al_ = BPMed?.Subject;
-                            FhirString am_ = al_?.ReferenceElement;
-                            string an_ = am_?.Value;
-                            string ao_ = QICoreCommon_4_0_000.Instance.getId(context, an_);
-                            Id ap_;
-                            Patient as_ = this.Patient(context);
-                            bool at_ = as_ is Resource;
-                            if (at_)
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+
+                CqlBoolean ad_() {
+                    Code<MedicationRequest.MedicationRequestIntent> af_ = BPMed?.IntentElement;
+                    MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                    string ah_ = context.Operators.Convert<string>(ag_);
+                    bool? ai_ = context.Operators.Equal(ah_, "order");
+
+                    CqlBoolean aj_() {
+                        Code<MedicationRequest.MedicationRequestIntent> ak_ = BPMed?.IntentElement;
+                        MedicationRequest.MedicationRequestIntent? al_ = ak_?.Value;
+                        string am_ = context.Operators.Convert<string>(al_);
+                        bool? an_ = context.Operators.Equal(am_, "plan");
+
+                        CqlBoolean ao_() {
+                            ResourceReference ap_ = BPMed?.Subject;
+                            FhirString aq_ = ap_?.ReferenceElement;
+                            string ar_ = aq_?.Value;
+                            string as_ = QICoreCommon_4_0_000.Instance.getId(context, ar_);
+                            Id at_;
+                            Patient aw_ = this.Patient(context);
+                            bool ax_ = aw_ is Resource;
+                            if (ax_)
                             {
-                                ap_ = (as_ as Resource).IdElement;
+                                at_ = (aw_ as Resource).IdElement;
                             }
                             else
                             {
-                                ap_ = default;
+                                at_ = default;
                             }
-                            string aq_ = ap_?.Value;
-                            bool? ar_ = context.Operators.Equal(ao_, aq_);
-                            ak_ = aj_ & ar_;
+                            string au_ = at_?.Value;
+                            bool? av_ = context.Operators.Equal(as_, au_);
+                            return av_;
                         }
-                        ai_ = ah_ | ak_;
+
+                        return /* CQL 'and' (183:16-185:13) */ ((CqlBoolean)an_
+                            && ao_());
                     }
-                    ac_ = ab_ & ai_;
+
+                    return /* CQL 'or' (182:13-186:9) */ ((CqlBoolean)ai_
+                        || aj_());
                 }
-                bool? ad_;
-                // CQL 'and' (181:17-187:33): right operand skipped when left is false
-                if (ac_ is false)
-                {
-                    ad_ = false;
+
+
+                CqlBoolean ae_() {
+                    CqlInterval<CqlDate> ay_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, BPMed);
+                    CqlDate az_ = ay_?.low;
+                    CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                    CqlDate bb_ = ay_?.high;
+                    CqlDateTime bc_ = context.Operators.ConvertDateToDateTime(bb_);
+                    bool? bd_ = ay_?.lowClosed;
+                    bool? be_ = ay_?.highClosed;
+                    CqlInterval<CqlDateTime> bf_ = context.Operators.Interval(ba_, bc_, bd_, be_);
+                    Period bg_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> bh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bg_);
+                    bool? bi_ = context.Operators.OverlapsBefore(bf_, bh_, "day");
+                    return bi_;
                 }
-                else
-                {
-                    bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest);
-                    ad_ = ac_ & au_;
-                }
-                // CQL 'and' (181:17-188:94): right operand skipped when left is false
-                if (ad_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    CqlInterval<CqlDate> av_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, BPMed);
-                    CqlDate aw_ = av_?.low;
-                    CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
-                    CqlDate ay_ = av_?.high;
-                    CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
-                    bool? ba_ = av_?.lowClosed;
-                    bool? bb_ = av_?.highClosed;
-                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, az_, ba_, bb_);
-                    Period bd_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
-                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, "day");
-                    return ad_ & bf_;
-                }
+
+                return /* CQL 'and' (181:17-188:94) */ (/* CQL 'and' (181:17-187:33) */ (/* CQL 'and' (181:17-186:9) */ ((CqlBoolean)ac_
+                    && ad_())
+                    && QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest))
+                    && ae_());
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1591,19 +1461,17 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
                     string r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
-                    // CQL 'and': right operand skipped when left is false
-                    if (s_ is false)
-                    {
-                        return false;
+
+                    CqlBoolean t_() {
+                        CodeableConcept u_ = M?.Code;
+                        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
+                        CqlValueSet w_ = this.Central_Nervous_System_Depressants(context);
+                        bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                        return x_;
                     }
-                    else
-                    {
-                        CodeableConcept t_ = M?.Code;
-                        CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                        CqlValueSet v_ = this.Central_Nervous_System_Depressants(context);
-                        bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                        return s_ & w_;
-                    }
+
+                    return /* CQL 'and' */ ((CqlBoolean)s_
+                        && t_());
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1616,97 +1484,76 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest CNSMed) {
-                Code<MedicationRequest.MedicationrequestStatus> x_ = CNSMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? y_ = x_?.Value;
-                string z_ = context.Operators.Convert<string>(y_);
-                string[] aa_ = [
+                Code<MedicationRequest.MedicationrequestStatus> y_ = CNSMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
+                string aa_ = context.Operators.Convert<string>(z_);
+                string[] ab_ = [
                     "active",
                     "completed",
                 ];
-                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
-                bool? ac_;
-                // CQL 'and' (193:17-198:9): right operand skipped when left is false
-                if (ab_ is false)
-                {
-                    ac_ = false;
-                }
-                else
-                {
-                    Code<MedicationRequest.MedicationRequestIntent> ae_ = CNSMed?.IntentElement;
-                    MedicationRequest.MedicationRequestIntent? af_ = ae_?.Value;
-                    string ag_ = context.Operators.Convert<string>(af_);
-                    bool? ah_ = context.Operators.Equal(ag_, "order");
-                    bool? ai_;
-                    // CQL 'or' (194:13-198:9): right operand skipped when left is true
-                    if (ah_ is true)
-                    {
-                        ai_ = true;
-                    }
-                    else
-                    {
-                        bool? aj_ = context.Operators.Equal(ag_, "plan");
-                        bool? ak_;
-                        // CQL 'and' (195:16-197:13): right operand skipped when left is false
-                        if (aj_ is false)
-                        {
-                            ak_ = false;
-                        }
-                        else
-                        {
-                            ResourceReference al_ = CNSMed?.Subject;
-                            FhirString am_ = al_?.ReferenceElement;
-                            string an_ = am_?.Value;
-                            string ao_ = QICoreCommon_4_0_000.Instance.getId(context, an_);
-                            Id ap_;
-                            Patient as_ = this.Patient(context);
-                            bool at_ = as_ is Resource;
-                            if (at_)
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+
+                CqlBoolean ad_() {
+                    Code<MedicationRequest.MedicationRequestIntent> af_ = CNSMed?.IntentElement;
+                    MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                    string ah_ = context.Operators.Convert<string>(ag_);
+                    bool? ai_ = context.Operators.Equal(ah_, "order");
+
+                    CqlBoolean aj_() {
+                        Code<MedicationRequest.MedicationRequestIntent> ak_ = CNSMed?.IntentElement;
+                        MedicationRequest.MedicationRequestIntent? al_ = ak_?.Value;
+                        string am_ = context.Operators.Convert<string>(al_);
+                        bool? an_ = context.Operators.Equal(am_, "plan");
+
+                        CqlBoolean ao_() {
+                            ResourceReference ap_ = CNSMed?.Subject;
+                            FhirString aq_ = ap_?.ReferenceElement;
+                            string ar_ = aq_?.Value;
+                            string as_ = QICoreCommon_4_0_000.Instance.getId(context, ar_);
+                            Id at_;
+                            Patient aw_ = this.Patient(context);
+                            bool ax_ = aw_ is Resource;
+                            if (ax_)
                             {
-                                ap_ = (as_ as Resource).IdElement;
+                                at_ = (aw_ as Resource).IdElement;
                             }
                             else
                             {
-                                ap_ = default;
+                                at_ = default;
                             }
-                            string aq_ = ap_?.Value;
-                            bool? ar_ = context.Operators.Equal(ao_, aq_);
-                            ak_ = aj_ & ar_;
+                            string au_ = at_?.Value;
+                            bool? av_ = context.Operators.Equal(as_, au_);
+                            return av_;
                         }
-                        ai_ = ah_ | ak_;
+
+                        return /* CQL 'and' (195:16-197:13) */ ((CqlBoolean)an_
+                            && ao_());
                     }
-                    ac_ = ab_ & ai_;
+
+                    return /* CQL 'or' (194:13-198:9) */ ((CqlBoolean)ai_
+                        || aj_());
                 }
-                bool? ad_;
-                // CQL 'and' (193:17-199:34): right operand skipped when left is false
-                if (ac_ is false)
-                {
-                    ad_ = false;
+
+
+                CqlBoolean ae_() {
+                    CqlInterval<CqlDate> ay_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, CNSMed);
+                    CqlDate az_ = ay_?.low;
+                    CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                    CqlDate bb_ = ay_?.high;
+                    CqlDateTime bc_ = context.Operators.ConvertDateToDateTime(bb_);
+                    bool? bd_ = ay_?.lowClosed;
+                    bool? be_ = ay_?.highClosed;
+                    CqlInterval<CqlDateTime> bf_ = context.Operators.Interval(ba_, bc_, bd_, be_);
+                    Period bg_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> bh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bg_);
+                    bool? bi_ = context.Operators.OverlapsBefore(bf_, bh_, "day");
+                    return bi_;
                 }
-                else
-                {
-                    bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest);
-                    ad_ = ac_ & au_;
-                }
-                // CQL 'and' (193:17-200:95): right operand skipped when left is false
-                if (ad_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    CqlInterval<CqlDate> av_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, CNSMed);
-                    CqlDate aw_ = av_?.low;
-                    CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
-                    CqlDate ay_ = av_?.high;
-                    CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
-                    bool? ba_ = av_?.lowClosed;
-                    bool? bb_ = av_?.highClosed;
-                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, az_, ba_, bb_);
-                    Period bd_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
-                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, "day");
-                    return ad_ & bf_;
-                }
+
+                return /* CQL 'and' (193:17-200:95) */ (/* CQL 'and' (193:17-199:34) */ (/* CQL 'and' (193:17-198:9) */ ((CqlBoolean)ac_
+                    && ad_())
+                    && QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest))
+                    && ae_());
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1740,19 +1587,17 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
                     string r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
-                    // CQL 'and': right operand skipped when left is false
-                    if (s_ is false)
-                    {
-                        return false;
+
+                    CqlBoolean t_() {
+                        CodeableConcept u_ = M?.Code;
+                        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
+                        CqlValueSet w_ = this.Diuretics(context);
+                        bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                        return x_;
                     }
-                    else
-                    {
-                        CodeableConcept t_ = M?.Code;
-                        CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                        CqlValueSet v_ = this.Diuretics(context);
-                        bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                        return s_ & w_;
-                    }
+
+                    return /* CQL 'and' */ ((CqlBoolean)s_
+                        && t_());
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1765,97 +1610,76 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest DiureticMed) {
-                Code<MedicationRequest.MedicationrequestStatus> x_ = DiureticMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? y_ = x_?.Value;
-                string z_ = context.Operators.Convert<string>(y_);
-                string[] aa_ = [
+                Code<MedicationRequest.MedicationrequestStatus> y_ = DiureticMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
+                string aa_ = context.Operators.Convert<string>(z_);
+                string[] ab_ = [
                     "active",
                     "completed",
                 ];
-                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
-                bool? ac_;
-                // CQL 'and' (205:17-210:9): right operand skipped when left is false
-                if (ab_ is false)
-                {
-                    ac_ = false;
-                }
-                else
-                {
-                    Code<MedicationRequest.MedicationRequestIntent> ae_ = DiureticMed?.IntentElement;
-                    MedicationRequest.MedicationRequestIntent? af_ = ae_?.Value;
-                    string ag_ = context.Operators.Convert<string>(af_);
-                    bool? ah_ = context.Operators.Equal(ag_, "order");
-                    bool? ai_;
-                    // CQL 'or' (206:13-210:9): right operand skipped when left is true
-                    if (ah_ is true)
-                    {
-                        ai_ = true;
-                    }
-                    else
-                    {
-                        bool? aj_ = context.Operators.Equal(ag_, "plan");
-                        bool? ak_;
-                        // CQL 'and' (207:16-209:13): right operand skipped when left is false
-                        if (aj_ is false)
-                        {
-                            ak_ = false;
-                        }
-                        else
-                        {
-                            ResourceReference al_ = DiureticMed?.Subject;
-                            FhirString am_ = al_?.ReferenceElement;
-                            string an_ = am_?.Value;
-                            string ao_ = QICoreCommon_4_0_000.Instance.getId(context, an_);
-                            Id ap_;
-                            Patient as_ = this.Patient(context);
-                            bool at_ = as_ is Resource;
-                            if (at_)
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+
+                CqlBoolean ad_() {
+                    Code<MedicationRequest.MedicationRequestIntent> af_ = DiureticMed?.IntentElement;
+                    MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                    string ah_ = context.Operators.Convert<string>(ag_);
+                    bool? ai_ = context.Operators.Equal(ah_, "order");
+
+                    CqlBoolean aj_() {
+                        Code<MedicationRequest.MedicationRequestIntent> ak_ = DiureticMed?.IntentElement;
+                        MedicationRequest.MedicationRequestIntent? al_ = ak_?.Value;
+                        string am_ = context.Operators.Convert<string>(al_);
+                        bool? an_ = context.Operators.Equal(am_, "plan");
+
+                        CqlBoolean ao_() {
+                            ResourceReference ap_ = DiureticMed?.Subject;
+                            FhirString aq_ = ap_?.ReferenceElement;
+                            string ar_ = aq_?.Value;
+                            string as_ = QICoreCommon_4_0_000.Instance.getId(context, ar_);
+                            Id at_;
+                            Patient aw_ = this.Patient(context);
+                            bool ax_ = aw_ is Resource;
+                            if (ax_)
                             {
-                                ap_ = (as_ as Resource).IdElement;
+                                at_ = (aw_ as Resource).IdElement;
                             }
                             else
                             {
-                                ap_ = default;
+                                at_ = default;
                             }
-                            string aq_ = ap_?.Value;
-                            bool? ar_ = context.Operators.Equal(ao_, aq_);
-                            ak_ = aj_ & ar_;
+                            string au_ = at_?.Value;
+                            bool? av_ = context.Operators.Equal(as_, au_);
+                            return av_;
                         }
-                        ai_ = ah_ | ak_;
+
+                        return /* CQL 'and' (207:16-209:13) */ ((CqlBoolean)an_
+                            && ao_());
                     }
-                    ac_ = ab_ & ai_;
+
+                    return /* CQL 'or' (206:13-210:9) */ ((CqlBoolean)ai_
+                        || aj_());
                 }
-                bool? ad_;
-                // CQL 'and' (205:17-211:39): right operand skipped when left is false
-                if (ac_ is false)
-                {
-                    ad_ = false;
+
+
+                CqlBoolean ae_() {
+                    CqlInterval<CqlDate> ay_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DiureticMed);
+                    CqlDate az_ = ay_?.low;
+                    CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                    CqlDate bb_ = ay_?.high;
+                    CqlDateTime bc_ = context.Operators.ConvertDateToDateTime(bb_);
+                    bool? bd_ = ay_?.lowClosed;
+                    bool? be_ = ay_?.highClosed;
+                    CqlInterval<CqlDateTime> bf_ = context.Operators.Interval(ba_, bc_, bd_, be_);
+                    Period bg_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> bh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bg_);
+                    bool? bi_ = context.Operators.OverlapsBefore(bf_, bh_, "day");
+                    return bi_;
                 }
-                else
-                {
-                    bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest);
-                    ad_ = ac_ & au_;
-                }
-                // CQL 'and' (205:17-212:100): right operand skipped when left is false
-                if (ad_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    CqlInterval<CqlDate> av_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DiureticMed);
-                    CqlDate aw_ = av_?.low;
-                    CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
-                    CqlDate ay_ = av_?.high;
-                    CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
-                    bool? ba_ = av_?.lowClosed;
-                    bool? bb_ = av_?.highClosed;
-                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, az_, ba_, bb_);
-                    Period bd_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
-                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, "day");
-                    return ad_ & bf_;
-                }
+
+                return /* CQL 'and' (205:17-212:100) */ (/* CQL 'and' (205:17-211:39) */ (/* CQL 'and' (205:17-210:9) */ ((CqlBoolean)ac_
+                    && ad_())
+                    && QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest))
+                    && ae_());
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1889,19 +1713,17 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
                     string r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
-                    // CQL 'and': right operand skipped when left is false
-                    if (s_ is false)
-                    {
-                        return false;
+
+                    CqlBoolean t_() {
+                        CodeableConcept u_ = M?.Code;
+                        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
+                        CqlValueSet w_ = this.Opioids(context);
+                        bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                        return x_;
                     }
-                    else
-                    {
-                        CodeableConcept t_ = M?.Code;
-                        CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                        CqlValueSet v_ = this.Opioids(context);
-                        bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                        return s_ & w_;
-                    }
+
+                    return /* CQL 'and' */ ((CqlBoolean)s_
+                        && t_());
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1914,97 +1736,76 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest OpioidMed) {
-                Code<MedicationRequest.MedicationrequestStatus> x_ = OpioidMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? y_ = x_?.Value;
-                string z_ = context.Operators.Convert<string>(y_);
-                string[] aa_ = [
+                Code<MedicationRequest.MedicationrequestStatus> y_ = OpioidMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
+                string aa_ = context.Operators.Convert<string>(z_);
+                string[] ab_ = [
                     "active",
                     "completed",
                 ];
-                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
-                bool? ac_;
-                // CQL 'and' (217:17-222:9): right operand skipped when left is false
-                if (ab_ is false)
-                {
-                    ac_ = false;
-                }
-                else
-                {
-                    Code<MedicationRequest.MedicationRequestIntent> ae_ = OpioidMed?.IntentElement;
-                    MedicationRequest.MedicationRequestIntent? af_ = ae_?.Value;
-                    string ag_ = context.Operators.Convert<string>(af_);
-                    bool? ah_ = context.Operators.Equal(ag_, "order");
-                    bool? ai_;
-                    // CQL 'or' (218:13-222:9): right operand skipped when left is true
-                    if (ah_ is true)
-                    {
-                        ai_ = true;
-                    }
-                    else
-                    {
-                        bool? aj_ = context.Operators.Equal(ag_, "plan");
-                        bool? ak_;
-                        // CQL 'and' (219:16-221:13): right operand skipped when left is false
-                        if (aj_ is false)
-                        {
-                            ak_ = false;
-                        }
-                        else
-                        {
-                            ResourceReference al_ = OpioidMed?.Subject;
-                            FhirString am_ = al_?.ReferenceElement;
-                            string an_ = am_?.Value;
-                            string ao_ = QICoreCommon_4_0_000.Instance.getId(context, an_);
-                            Id ap_;
-                            Patient as_ = this.Patient(context);
-                            bool at_ = as_ is Resource;
-                            if (at_)
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+
+                CqlBoolean ad_() {
+                    Code<MedicationRequest.MedicationRequestIntent> af_ = OpioidMed?.IntentElement;
+                    MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                    string ah_ = context.Operators.Convert<string>(ag_);
+                    bool? ai_ = context.Operators.Equal(ah_, "order");
+
+                    CqlBoolean aj_() {
+                        Code<MedicationRequest.MedicationRequestIntent> ak_ = OpioidMed?.IntentElement;
+                        MedicationRequest.MedicationRequestIntent? al_ = ak_?.Value;
+                        string am_ = context.Operators.Convert<string>(al_);
+                        bool? an_ = context.Operators.Equal(am_, "plan");
+
+                        CqlBoolean ao_() {
+                            ResourceReference ap_ = OpioidMed?.Subject;
+                            FhirString aq_ = ap_?.ReferenceElement;
+                            string ar_ = aq_?.Value;
+                            string as_ = QICoreCommon_4_0_000.Instance.getId(context, ar_);
+                            Id at_;
+                            Patient aw_ = this.Patient(context);
+                            bool ax_ = aw_ is Resource;
+                            if (ax_)
                             {
-                                ap_ = (as_ as Resource).IdElement;
+                                at_ = (aw_ as Resource).IdElement;
                             }
                             else
                             {
-                                ap_ = default;
+                                at_ = default;
                             }
-                            string aq_ = ap_?.Value;
-                            bool? ar_ = context.Operators.Equal(ao_, aq_);
-                            ak_ = aj_ & ar_;
+                            string au_ = at_?.Value;
+                            bool? av_ = context.Operators.Equal(as_, au_);
+                            return av_;
                         }
-                        ai_ = ah_ | ak_;
+
+                        return /* CQL 'and' (219:16-221:13) */ ((CqlBoolean)an_
+                            && ao_());
                     }
-                    ac_ = ab_ & ai_;
+
+                    return /* CQL 'or' (218:13-222:9) */ ((CqlBoolean)ai_
+                        || aj_());
                 }
-                bool? ad_;
-                // CQL 'and' (217:17-223:37): right operand skipped when left is false
-                if (ac_ is false)
-                {
-                    ad_ = false;
+
+
+                CqlBoolean ae_() {
+                    CqlInterval<CqlDate> ay_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OpioidMed);
+                    CqlDate az_ = ay_?.low;
+                    CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                    CqlDate bb_ = ay_?.high;
+                    CqlDateTime bc_ = context.Operators.ConvertDateToDateTime(bb_);
+                    bool? bd_ = ay_?.lowClosed;
+                    bool? be_ = ay_?.highClosed;
+                    CqlInterval<CqlDateTime> bf_ = context.Operators.Interval(ba_, bc_, bd_, be_);
+                    Period bg_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> bh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bg_);
+                    bool? bi_ = context.Operators.OverlapsBefore(bf_, bh_, "day");
+                    return bi_;
                 }
-                else
-                {
-                    bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest);
-                    ad_ = ac_ & au_;
-                }
-                // CQL 'and' (217:17-224:98): right operand skipped when left is false
-                if (ad_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    CqlInterval<CqlDate> av_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OpioidMed);
-                    CqlDate aw_ = av_?.low;
-                    CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
-                    CqlDate ay_ = av_?.high;
-                    CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
-                    bool? ba_ = av_?.lowClosed;
-                    bool? bb_ = av_?.highClosed;
-                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, az_, ba_, bb_);
-                    Period bd_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
-                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, "day");
-                    return ad_ & bf_;
-                }
+
+                return /* CQL 'and' (217:17-224:98) */ (/* CQL 'and' (217:17-223:37) */ (/* CQL 'and' (217:17-222:9) */ ((CqlBoolean)ac_
+                    && ad_())
+                    && QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest))
+                    && ae_());
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);

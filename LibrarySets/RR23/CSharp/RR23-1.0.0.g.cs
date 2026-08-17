@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
@@ -107,17 +107,15 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         CqlDateTime e_ = context.Operators.Start(d_);
         int? f_ = context.Operators.CalculateAgeAt(c_, e_, "year");
         bool? g_ = context.Operators.GreaterOrEqual(f_, 16);
-        // CQL 'and' (32:2-32:117): right operand skipped when left is false
-        if (g_ is false)
-        {
-            return false;
+
+        CqlBoolean h_() {
+            IEnumerable<Condition> i_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
+            bool? j_ = context.Operators.Exists<Condition>(i_);
+            return j_;
         }
-        else
-        {
-            IEnumerable<Condition> h_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
-            bool? i_ = context.Operators.Exists<Condition>(h_);
-            return g_ & i_;
-        }
+
+        return /* CQL 'and' (32:2-32:117) */ ((CqlBoolean)g_
+            && h_());
     }
 
 
@@ -209,42 +207,33 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             DataType e_ = d_?.Item;
             CqlCode f_ = this.Tiny_Umbrella(context);
             bool? g_ = context.Operators.Equivalent(e_, f_);
-            // CQL 'and' (68:6-69:141): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                Condition h_ = this.Latest_injury_due_to_falling_rock(context);
-                Condition[] i_ = [
-                    h_,
+
+            CqlBoolean h_() {
+                Condition i_ = this.Latest_injury_due_to_falling_rock(context);
+                Condition[] j_ = [
+                    i_,
                 ];
 
-                bool? j_(Condition C) {
-                    DataType m_ = C?.Onset;
-                    CqlDateTime n_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, m_ as FhirDateTime);
-                    DataType o_ = SD?.Occurrence;
-                    CqlDateTime p_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, o_ as FhirDateTime);
-                    CqlQuantity q_ = context.Operators.Quantity(7m, "days");
-                    CqlDateTime r_ = context.Operators.Subtract(p_, q_);
-                    CqlInterval<CqlDateTime> s_ = context.Operators.Interval(r_, p_, true, false);
-                    bool? t_ = context.Operators.In<CqlDateTime>(n_, s_, (string)default);
-                    // CQL 'and' (69:51-69:127): right operand skipped when left is false
-                    if (t_ is false)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return t_ & (!((bool?)((o_ as FhirDateTime) is null)));
-                    }
+                bool? k_(Condition C) {
+                    DataType n_ = C?.Onset;
+                    CqlDateTime o_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, n_ as FhirDateTime);
+                    DataType p_ = SD?.Occurrence;
+                    CqlDateTime q_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, p_ as FhirDateTime);
+                    CqlQuantity r_ = context.Operators.Quantity(7m, "days");
+                    CqlDateTime s_ = context.Operators.Subtract(q_, r_);
+                    CqlInterval<CqlDateTime> t_ = context.Operators.Interval(s_, q_, true, false);
+                    bool? u_ = context.Operators.In<CqlDateTime>(o_, t_, (string)default);
+                    return /* CQL 'and' (69:51-69:127) */ ((CqlBoolean)u_
+                        && !((bool?)((SD?.Occurrence as FhirDateTime) is null)));
                 }
 
-                IEnumerable<Condition> k_ = context.Operators.Where<Condition>((IEnumerable<Condition>)i_, j_);
-                Condition l_ = context.Operators.SingletonFrom<Condition>(k_);
-                return g_ & (!((bool?)(l_ is null)));
+                IEnumerable<Condition> l_ = context.Operators.Where<Condition>((IEnumerable<Condition>)j_, k_);
+                Condition m_ = context.Operators.SingletonFrom<Condition>(l_);
+                return !((bool?)(m_ is null));
             }
+
+            return /* CQL 'and' (68:6-69:141) */ ((CqlBoolean)g_
+                && h_());
         }
 
         IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_, b_);

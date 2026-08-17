@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Compiler.CodeModel;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -61,7 +62,7 @@ internal partial class CSharpEmitter
         _assignedNames.Clear();
 
         var scope = Scope.CreateRoot(this, lambda.Parameters);
-        var result = scope.Linearize(lambda.Body, tailPosition: true);
+        var result = scope.Linearize(BodyWithoutRootBoolConversion(lambda), tailPosition: true);
 
         var isb = new IndentedStringBuilder();
         isb.AppendLine("{");
@@ -82,6 +83,47 @@ internal partial class CSharpEmitter
         result.Node is CodeThrow ? $"{result.Code};" : $"return {result.Code};";
 
     /// <summary>
+    /// The body to linearize for a member or local function, with the builder's outbound
+    /// <see cref="CqlBoolean"/>-to-<c>bool?</c> conversion dropped when it sits at the ROOT.
+    ///
+    /// <para>At the root it is always redundant, because the declared return type is computed
+    /// from the un-unwrapped <c>Lambda.Body.Type</c> — by the scaffolding writer for a member,
+    /// by <c>HoistLocalFunction</c> for a local function — so it stays <c>bool?</c> either way,
+    /// and <c>return</c>-ing a <see cref="CqlBoolean"/> into a <c>bool?</c> signature converts
+    /// implicitly. Dropping it at print time rather than in the builder is exactly what keeps
+    /// the signature intact: only the printed body changes.</para>
+    ///
+    /// <para>Only at the root. Everywhere else the same conversion is load-bearing and must
+    /// stay, because <c>?? false</c>, a lifted <c>!</c> and the null patterns each genuinely
+    /// need a <c>bool?</c> and have no implicit conversion to fall back on (see #1514).</para>
+    /// </summary>
+    private static CodeExpression BodyWithoutRootBoolConversion(CodeLambda lambda) =>
+        lambda.Body is CodeCast { Type: var castType, Operand: { Type: var operandType } inner }
+        && castType == typeof(bool?)
+        && operandType == typeof(CqlBoolean)
+            ? inner
+            : lambda.Body;
+
+    /// <summary>
+    /// The expression under an inbound <see cref="CqlBoolean"/> conversion the builder added.
+    ///
+    /// <para>Redundant in every position that can absorb the conversion implicitly, of which there
+    /// are two: a local function's body, whose <c>return</c> converts into a
+    /// <see cref="CqlBoolean"/>-declared signature; and a short-circuit operator's RIGHT operand,
+    /// because overload resolution for the user-defined <c>&amp;</c>/<c>|</c> backing
+    /// <c>&amp;&amp;</c>/<c>||</c> applies an implicit conversion to that operand.</para>
+    ///
+    /// <para>Not the LEFT operand, which is not a matter of taste: C# synthesises
+    /// <c>&amp;&amp;</c>/<c>||</c> from the left operand's own <c>operator true</c>/
+    /// <c>operator false</c>, so a <c>bool?</c> left operand has no <c>&amp;&amp;</c> at all and its
+    /// conversion is load-bearing.</para>
+    /// </summary>
+    private static CodeExpression UnwrapCqlBooleanConversion(CodeExpression node) =>
+        node is CodeCast { Type: var castType, Operand: { } inner } && castType == typeof(CqlBoolean)
+            ? inner
+            : node;
+
+    /// <summary>
     /// Emits the body of a definition as a single C# expression when it linearizes without
     /// hoisting any statements (e.g. a constant body), for the scaffolding writer's
     /// expression-bodied (<c>=> expr;</c>) member form. Returns <see langword="null"/> when
@@ -94,7 +136,7 @@ internal partial class CSharpEmitter
         _assignedNames.Clear();
 
         var scope = Scope.CreateRoot(this, lambda.Parameters);
-        var result = scope.Linearize(lambda.Body, tailPosition: true);
+        var result = scope.Linearize(BodyWithoutRootBoolConversion(lambda), tailPosition: true);
         return scope.HasStatements || result is null ? null : result.Code;
     }
 
