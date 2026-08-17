@@ -17,10 +17,3 @@
   generated libraries keep working unchanged. (#1514)
 - The generated short-circuit guards carry traceability comments naming the operator and its CQL
   source span, e.g. `// CQL 'and' (33:5-33:57): right operand skipped when left is false`.
-- The Packager CLI's `--cs-namespace` option now takes effect. It had been silently ignored since
-  its introduction (its value never reached the configuration key), so generated code always ended
-  up without a namespace; anyone who passed it will now get the namespace they asked for — which
-  changes the generated types' identities and is why this is listed as potentially breaking.
-  (The `CqlToFhirCommand.CSharpNamespace` record property was renamed to `CsNamespace` as part of
-  this fix, to match System.CommandLine's kebab-to-Pascal option binding. The configuration key it
-  feeds is unchanged: `Elm:CSharpNamespace`, bound to `ElmToolkitConfig.CSharpNamespace`.)
