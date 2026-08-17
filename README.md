@@ -30,6 +30,7 @@ The release notes at [firely-cql-sdk/releases](https://github.com/FirelyTeam/fir
 - The [Toolkit Services Dependency Diagrams](docs/dependency-diagrams.md) showing the internal dependencies of the CQL SDK toolkit services.
 - The [Technical README](docs/technical-readme.md) for maintainers contains implementation details, conditional compilation, and multi-targeting information.
 - The [Demo Projects and CQL Build Pipeline](docs/demo-projects.md) guide covering the build scripts, Java CQL-to-ELM tooling, and PackagerCLI MSBuild targets used by the Demo projects.
+- The [Generated-code operator ledger](docs/generated-code-operator-ledger.md) recording which `ICqlOperators` members generated code has stopped calling, and the policy for retiring them — consult it before removing any operator in a major release.
 
 ### Quick Start: Invoking CQL
 

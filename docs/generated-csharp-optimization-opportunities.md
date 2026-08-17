@@ -35,6 +35,11 @@ return j_;
 Every operation is an interface-dispatched call on `ICqlOperators`, even where C# has an
 exact native equivalent.
 
+> **Note (2026-08):** this snippet is the *pre-#1565* output, kept because it motivates the whole
+> catalogue. The last line no longer generates: `and`/`or`/`not` now lower to native `&`/`|`/`!`
+> and `and`/`or` short-circuit, so this define ends in a guarded `g_ & i_` instead. See
+> [class 1](#1-native-operator-lowering-highest-impact-widest-reach) for what remains.
+
 ## Opportunity classes, by expected impact
 
 ### 1. Native-operator lowering (highest impact, widest reach)
@@ -42,8 +47,13 @@ exact native equivalent.
 The binder/emitter know every operand type statically. Where a native C# construct has
 *exactly* CQL semantics, emit it instead of the operator call:
 
-- `Operators.And/Or/Not/Xor` on `bool?` → `&`, `|`, `!`, `^`: C#'s lifted `&`/`|` on
-  `bool?` **are** Kleene three-valued logic — a zero-risk, zero-cost replacement.
+- ~~`Operators.And/Or/Not` on `bool?` → `&`, `|`, `!`~~ — **delivered** in
+  [#1565](https://github.com/FirelyTeam/firely-cql-sdk/pull/1565) (`GeneratorToolVersion`
+  5.3.0.0), which also short-circuits `and`/`or`: C#'s lifted `&`/`|` on `bool?` **are** Kleene
+  three-valued logic, so `Operators.And/Or/Not(` no longer appear in any regenerated corpus.
+  `Xor` stays — every row of its table varies with the right operand. `Implies` is still open
+  and is the remaining win here: the spec explicitly permits skipping its right operand when the
+  left is false ([#1571](https://github.com/FirelyTeam/firely-cql-sdk/issues/1571)).
 - `Operators.Equal` on primitives → `==` (lifted equality matches CQL for non-null; CQL's
   null-propagating equality needs the `HasValue` guard below).
 - Comparisons (`Greater[OrEqual]`, `Less[OrEqual]`) on `int?/long?/decimal?`: NOT a direct

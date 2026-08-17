@@ -9,6 +9,15 @@
   effects of a skipped operand no longer occur: a runtime error it would have thrown no longer
   surfaces, and a `Message()` call inside it no longer raises `MessageReceived`. The CQL
   specification permits this (evaluation of logical operands is not prescribed). (#1514)
+- Side effects can also move in the *other* direction, in a small number of shapes. A guarded
+  branch reuses values its enclosing block already computed, but a few positions cannot — a
+  hoisted local function's body deliberately does not reach out to an enclosing local, and a
+  guard test that prints inline is not itself hoisted — so a subexpression shared between the two
+  operands may be evaluated twice there. Measured across the checked-in corpora the net effect is
+  at or below the previous output for every operator (`Operators.Start` is 2 calls fewer,
+  `End`/`Retrieve<` 4 more each, out of 1187/798/2311), and the repeats are property reads and
+  cheap accessors rather than retrieves. Where such a subexpression contains a `Message()`, that
+  message can be raised more than once. (#1514)
 - `and`/`or`/`not` now compile to C#'s lifted `&`/`|`/`!` operators over `bool?` — whose semantics
   are exactly CQL's three-valued logic — instead of `ICqlOperators.And`/`Or`/`Not` calls. Those
   runtime methods (including the `Lazy<bool?>` overloads) remain public API but are no longer

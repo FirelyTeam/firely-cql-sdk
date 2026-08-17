@@ -363,8 +363,9 @@ partial class CodeBuilderContext
 
     #region LogicalOperators
 
-    // CQL's and/or/not use Kleene three-valued logic (spec §3.4.4 Nullological Operators and
-    // the truth tables in §9.B), which is exactly the semantics C# gives the lifted &, | and
+    // CQL's and/or/not use Kleene three-valued logic (spec §9.B Logical Operators carries the
+    // truth tables; §9.B Nullological Operators is a DIFFERENT section, covering
+    // Null/IsNull/IsTrue/IsFalse/Coalesce), which is exactly the semantics C# gives the lifted &, | and
     // ! operators on bool? — so these lower to native operators instead of ICqlOperators
     // calls. and/or additionally short-circuit: the right operand's evaluation stays inside
     // a conditional branch entered only when the left operand hasn't already decided the
@@ -372,8 +373,15 @@ partial class CodeBuilderContext
     // null and false is false — so null must not short-circuit; an implementation shortcut
     // like `left != true` would be a correctness bug (#1514).
     //
-    // Xor and Implies deliberately stay on the name-based ICqlOperators path: neither can
-    // skip its right operand (both operands always matter), so there is nothing to gain.
+    // Xor stays on the name-based ICqlOperators path because it genuinely cannot skip: every
+    // xor row varies with the right operand.
+    //
+    // Implies stays too, but that is a DEFERRAL, not an impossibility — the spec says outright
+    // that "implies may use short-circuit evaluation in the case that the first operand
+    // evaluates to false" (§9.B Logical Operators, and §4 Logical Specification), and
+    // `false implies X` is true for every X: exactly the deciding-left-operand shape
+    // ShortCircuitBinary already implements. The corpora still hold ~37 Implies call sites that
+    // evaluate both operands. Tracked in #1571.
 
     protected CodeExpression And(And and) =>
         ShortCircuitBinary(and, CodeBinaryOp.BoolAnd, decidingValue: false);
