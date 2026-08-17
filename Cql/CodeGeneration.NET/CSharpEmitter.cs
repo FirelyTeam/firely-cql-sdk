@@ -34,7 +34,6 @@ internal partial class CSharpEmitter
 {
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
     private readonly ICSharpNamingConventions _namingConventions;
-    private readonly Toolkit.CSharpGeneratingConfig _csharpGeneratingConfig;
 
     private readonly Dictionary<CodeLocal, string> _assignedNames = new(ReferenceEqualityComparer.Instance);
 
@@ -42,16 +41,12 @@ internal partial class CSharpEmitter
     /// <param name="namingConventions">The generated-class naming conventions the printed
     /// bodies must agree with (see <see cref="ICSharpNamingConventions"/>); provided by the
     /// library scaffolding writer.</param>
-    /// <param name="csharpGeneratingConfig">Formatting settings;
-    /// <see cref="Toolkit.CSharpGeneratingConfig.Default"/> when omitted.</param>
     public CSharpEmitter(
         TypeToCSharpConverter typeToCSharpConverter,
-        ICSharpNamingConventions namingConventions,
-        Toolkit.CSharpGeneratingConfig? csharpGeneratingConfig = null)
+        ICSharpNamingConventions namingConventions)
     {
         _typeToCSharpConverter = typeToCSharpConverter;
         _namingConventions = namingConventions;
-        _csharpGeneratingConfig = csharpGeneratingConfig ?? Toolkit.CSharpGeneratingConfig.Default;
     }
 
     /// <summary>

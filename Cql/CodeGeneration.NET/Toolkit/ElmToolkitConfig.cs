@@ -27,28 +27,18 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// When <see langword="true"/>, the generated C# code may contain syntax errors or other issues that prevent it from compiling,
 /// but may be useful for debugging or testing purposes.
 /// </param>
+/// <param name="CSharpNamespace">The C# namespace to use for generated code. If <see langword="null"/> or empty, no namespace is generated.</param>
 public record ElmToolkitConfig(
     DebugSymbolsFormat DebugSymbolsFormat = DebugSymbolsFormat.None,
     bool AllowScopeRedefinition = true,
     bool AllowUnresolvedExternals = true,
-    bool AllowInvalidCSharp = false)
+    bool AllowInvalidCSharp = false,
+    string? CSharpNamespace = null)
 {
     /// <summary>
     /// Gets the default configuration settings.
     /// </summary>
     public static ElmToolkitConfig Default { get; } = new();
-
-    /// <summary>
-    /// Settings controlling how the C# code generator formats and names the code it emits.
-    /// The CQL semantics of the output are identical across any values, though
-    /// <see cref="Toolkit.CSharpGeneratingConfig.CSharpNamespace"/> changes the generated
-    /// types' identities. Grouped in their own type so future C#-generation options compose
-    /// here rather than accumulating on this record.
-    /// </summary>
-    public CSharpGeneratingConfig CSharpGeneratingConfig { get; init; } = new();
-    // ^ deliberately NOT CSharpGeneratingConfig.Default: the configuration binder binds
-    //   nested complex properties IN PLACE through their init setters, so initializing with
-    //   the shared static would let one options bind mutate the process-wide Default.
 
     /// <summary>
     /// Allows a child scope to redefine an existing parent scope. Default is <see langword="true" />.

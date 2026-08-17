@@ -157,7 +157,6 @@ internal record ElmToFhirCommand
             """
             The C# namespace to use for generated code.
             (Used with --cs or --dll)
-            Configuration home: Elm:CSharpGeneratingConfig:CSharpNamespace.
             """),
 
         Option<bool>(
@@ -185,7 +184,7 @@ internal record ElmToFhirCommand
         (Measures, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.MeasuresOutDir)]),
         (FlattenDirHierarchy, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FlattenDirHierarchy)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
-        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpGeneratingConfig), nameof(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.CSharpNamespace)]),
+        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (MeasureGroupCodeSystem, [PackagingOptions.ConfigSection, nameof(PackagingOptions.MeasureGroupCodeSystem)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),

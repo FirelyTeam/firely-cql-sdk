@@ -135,7 +135,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         using var servicesScope = _services.CreateScopedState();
 
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
-        var cSharpNamespace = Config.CSharpGeneratingConfig.CSharpNamespace;
+        var cSharpNamespace = Config.CSharpNamespace;
         var debugInformationFormat = Config.DebugSymbolsFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         ElmLibrary[] libraries = _artifactsById.Values.Select(selector: v => v.InputElmLibrary).ToArray();

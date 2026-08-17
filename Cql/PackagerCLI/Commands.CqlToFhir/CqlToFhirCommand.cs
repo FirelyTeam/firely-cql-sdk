@@ -159,7 +159,6 @@ public record CqlToFhirCommand
             """
             The C# namespace to use for generated code.
             (Used with --cs or --dll)
-            Configuration home: Elm:CSharpGeneratingConfig:CSharpNamespace.
             """),
 
         Option<bool>(
@@ -182,7 +181,7 @@ public record CqlToFhirCommand
         (Measures, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.MeasuresOutDir)]),
         (FlattenDirHierarchy, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FlattenDirHierarchy)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
-        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpGeneratingConfig), nameof(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpGeneratingConfig.CSharpNamespace)]),
+        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (MeasureGroupCodeSystem, [PackagingOptions.ConfigSection, nameof(PackagingOptions.MeasureGroupCodeSystem)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),

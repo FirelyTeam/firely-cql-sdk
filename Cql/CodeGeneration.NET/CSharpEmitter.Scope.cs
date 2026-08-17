@@ -452,15 +452,10 @@ internal partial class CSharpEmitter
             int start,
             CodeExpression @else)
         {
-            // In tail position (resultName null) every case branch exits via return or
-            // throw, so the chain MAY print guard-clause style: plain sequential ifs, no
-            // else — falling past an if is provably "the test failed", one nesting level
-            // saved. Opt-in via CSharpGeneratingConfig.PreferNoElseBlocks; the
-            // default keeps the if/else chain. The assign form always keeps if/else: its
-            // branches assign and fall through, so the else is what guarantees exactly one
-            // branch runs.
-            var guardStyle = resultName is null && _emitter._csharpGeneratingConfig.PreferNoElseBlocks;
-
+            // Both forms print an if/else chain. The assign form needs one — its branches
+            // assign and fall through, so the else is what guarantees exactly one of them
+            // runs — and the tail form (resultName null, every branch returning or throwing)
+            // keeps it too, so a single shape covers both.
             var first = true;
             for (int i = start; i < cases.Count; i++)
             {
@@ -471,12 +466,10 @@ internal partial class CSharpEmitter
                 {
                     test = _emitter.PrintFullyInline(when);
                 }
-                else if (first || guardStyle)
+                else if (first)
                 {
                     // The first condition at a nesting level can put its statements right
-                    // here — nothing needs to run before them at this level. In guard style
-                    // that holds for every condition: control only falls past the previous
-                    // if when its test failed, so as-late-as-possible evaluation is intact.
+                    // here — nothing needs to run before them at this level.
                     var testScope = CreateNested([]);
                     var atom = testScope.Linearize(when)!;
                     testScope.WriteStatements(isb);
@@ -494,20 +487,9 @@ internal partial class CSharpEmitter
                     return;
                 }
 
-                isb.AppendLine(first || guardStyle ? $"if ({test})" : $"else if ({test})");
+                isb.AppendLine(first ? $"if ({test})" : $"else if ({test})");
                 EmitBranchBlock(isb, resultName, then);
                 first = false;
-            }
-
-            if (guardStyle)
-            {
-                // Flat final value: hoisted statements and the return print at this level.
-                var elseScope = CreateNested([]);
-                var atom = elseScope.Linearize(@else, tailPosition: true);
-                elseScope.WriteStatements(isb);
-                if (atom is not null)
-                    isb.AppendLine(TailStatement(atom));
-                return;
             }
 
             isb.AppendLine("else");

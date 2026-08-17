@@ -320,34 +320,22 @@ public class ShortCircuitLogicCqlTest
     }
 
     /// <summary>
-    /// <see cref="CSharpGeneratingConfig.PreferNoElseBlocks"/> flattens tail-position
-    /// chains (branches that return) to guard-clause style; assign-form chains — like the
-    /// guard inside <c>GuardInConditionalTest</c>, which produces a value for an if-test —
-    /// keep their <c>else</c> in both modes, since there the else is what guarantees exactly
-    /// one branch assigns. So the flattened output has strictly fewer <c>else</c> blocks
-    /// than the default, and the truth-table defines (tail position) lose theirs entirely.
-    /// Formatting only — both variants go through <c>CompileToAssemblies</c>.
+    /// An emitted guard is always an <c>if</c>/<c>else</c> chain — in tail position (every
+    /// branch returns, as in the truth-table defines) as well as in assign form (the branches
+    /// assign a result local, like the guard inside <c>GuardInConditionalTest</c> that produces
+    /// a value for an if-test). There is no guard-clause variant: the assign form needs the
+    /// <c>else</c> to guarantee exactly one branch runs, and the tail form matches it.
     /// </summary>
     [TestMethod]
-    public void GeneratedCSharp_PreferNoElseBlocks_FlattensTailChains()
+    public void GeneratedCSharp_GuardChainsKeepElseBlocks()
     {
-        var withElse = GenerateFixtureCSharp(ElmToolkitConfig.Default);
-        var flattened = GenerateFixtureCSharp(ElmToolkitConfig.Default with { CSharpGeneratingConfig = new CSharpGeneratingConfig { PreferNoElseBlocks = true } });
+        var generated = GenerateFixtureCSharp(ElmToolkitConfig.Default);
 
-        var withElseCount = CountElseKeywords(withElse);
-        var flattenedCount = CountElseKeywords(flattened);
+        var tailDefine = ExtractComputeMethod(generated, "TrueAndTrue_Compute");
+        Assert.IsTrue(CountElseKeywords(tailDefine) > 0, "A tail-position guard must keep its else block.");
 
-        Assert.IsTrue(withElseCount > 0, "The default must keep else blocks.");
-        Assert.IsTrue(flattenedCount < withElseCount,
-            $"With CSharpGeneratingConfig.PreferNoElseBlocks, tail-position chains must print guard-clause style (default: {withElseCount} else, flattened: {flattenedCount}).");
-
-        // The tail-position truth-table defines flatten completely; what remains is exactly
-        // the assign-form guard(s), which must keep the else in both modes.
-        var tailDefine = ExtractComputeMethod(flattened, "TrueAndTrue_Compute");
-        Assert.AreEqual(0, CountElseKeywords(tailDefine), "A tail-position guard must flatten to guard-clause style.");
-
-        var assignDefine = ExtractComputeMethod(flattened, "GuardInConditionalTest_Compute");
-        Assert.IsTrue(CountElseKeywords(assignDefine) > 0, "An assign-form guard must keep its else even when flattening.");
+        var assignDefine = ExtractComputeMethod(generated, "GuardInConditionalTest_Compute");
+        Assert.IsTrue(CountElseKeywords(assignDefine) > 0, "An assign-form guard must keep its else block.");
     }
 
     private static int CountElseKeywords(string code) =>
@@ -365,25 +353,23 @@ public class ShortCircuitLogicCqlTest
     }
 
     /// <summary>
-    /// <see cref="CSharpGeneratingConfig.CSharpNamespace"/> is the only namespace setting
-    /// (the flat <c>ElmToolkitConfig.CSharpNamespace</c> was removed — a breaking change in
-    /// this PR's release note): a value wraps the generated code in that namespace; null
-    /// (the default) and empty (what a JSON <c>null</c> binds to — the JSON configuration
-    /// provider has no null) both produce namespace-less code.
+    /// <see cref="ElmToolkitConfig.CSharpNamespace"/> wraps the generated code in that
+    /// namespace; null (the default) and empty (what a JSON <c>null</c> binds to — the JSON
+    /// configuration provider has no null) both produce namespace-less code.
     /// </summary>
     [TestMethod]
-    public void CSharpNamespace_FromCSharpGeneratingConfig()
+    public void CSharpNamespace_WrapsGeneratedCode()
     {
         StringAssert.Contains(
-            GenerateFixtureCSharp(ElmToolkitConfig.Default with { CSharpGeneratingConfig = new() { CSharpNamespace = "My.Ns" } }),
-            "namespace My.Ns;", "a namespace set in CSharpGeneratingConfig must be emitted.");
+            GenerateFixtureCSharp(new ElmToolkitConfig(CSharpNamespace: "My.Ns")),
+            "namespace My.Ns;", "a namespace set in the config must be emitted.");
 
         Assert.IsFalse(
             GenerateFixtureCSharp(ElmToolkitConfig.Default).Contains("namespace "),
             "the default (null) must emit namespace-less code.");
 
         Assert.IsFalse(
-            GenerateFixtureCSharp(ElmToolkitConfig.Default with { CSharpGeneratingConfig = new() { CSharpNamespace = "" } }).Contains("namespace "),
+            GenerateFixtureCSharp(new ElmToolkitConfig(CSharpNamespace: "")).Contains("namespace "),
             "an empty value (JSON null binds as \"\") must emit namespace-less code.");
     }
 

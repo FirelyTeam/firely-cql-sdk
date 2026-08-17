@@ -22,21 +22,5 @@
   up without a namespace; anyone who passed it will now get the namespace they asked for — which
   changes the generated types' identities and is why this is listed as potentially breaking.
   (The `CqlToFhirCommand.CSharpNamespace` record property was renamed to `CsNamespace` as part of
-  this fix, to match System.CommandLine's kebab-to-Pascal option binding.)
-- **Breaking**: the `ElmToolkitConfig.CSharpNamespace` positional parameter/property is removed.
-  The setting now lives exclusively at `CSharpGeneratingConfig.CSharpNamespace`
-  (`ElmToolkitConfig.CSharpGeneratingConfig.CSharpNamespace`; packager key
-  `Elm:CSharpGeneratingConfig:CSharpNamespace`). Code constructing `ElmToolkitConfig` with a
-  `CSharpNamespace` argument or reading the property must move to the nested config, and the
-  packager's flat `Elm:CSharpNamespace` appsettings key is no longer read.
-
-## New Public API
-
-- New `ElmToolkitConfig.CSharpGeneratingConfig` groups C#-generation formatting settings; its
-  `PreferNoElseBlocks` (default `false`) prints generated conditionals whose branches all exit
-  guard-clause style — plain sequential `if` blocks with the final value flat after them — instead
-  of `if`/`else` chains. Formatting only; emitted behavior is identical. Configurable from the CQL
-  packager's `appsettings.json` under `Elm:CSharpGeneratingConfig:PreferNoElseBlocks`.
-- `CSharpGeneratingConfig.CSharpNamespace` is the new — and only — home of the generated-code
-  namespace setting (packager key `Elm:CSharpGeneratingConfig:CSharpNamespace`); see the breaking
-  entry above for the removal of the flat property it replaces.
+  this fix, to match System.CommandLine's kebab-to-Pascal option binding. The configuration key it
+  feeds is unchanged: `Elm:CSharpNamespace`, bound to `ElmToolkitConfig.CSharpNamespace`.)
