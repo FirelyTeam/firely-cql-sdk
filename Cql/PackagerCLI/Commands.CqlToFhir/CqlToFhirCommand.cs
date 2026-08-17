@@ -12,7 +12,7 @@ using Hl7.Cql.Packager.Options;
 namespace Hl7.Cql.Packager.Commands.CqlToFhir;
 
 [UsedImplicitly]
-public record CqlToFhirCommand
+internal record CqlToFhirCommand
 (
     // Do not rename these properties, they must match the command line options e.g. --cql maps to Cql, etc
     DirectoryInfo Cql,
@@ -28,7 +28,6 @@ public record CqlToFhirCommand
     string? MeasureGroupCodeSystem,
     string? CsNamespace,
     bool? JsonPretty,
-    bool? ExitOnError,
     bool? FlattenDirHierarchy,
     DebugSymbolsFormat? DebugSymbols)
 {
@@ -185,7 +184,6 @@ public record CqlToFhirCommand
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (MeasureGroupCodeSystem, [PackagingOptions.ConfigSection, nameof(PackagingOptions.MeasureGroupCodeSystem)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
-        (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
     ];
 }

@@ -26,6 +26,13 @@ public class PackagerCliCommandBindingTests
     private static CqlToFhirCommand? capturedCqlCommand;
     private static ElmToFhirCommand? capturedElmCommand;
 
+    [TestInitialize]
+    public void ResetCapturedCommands()
+    {
+        capturedCqlCommand = null;
+        capturedElmCommand = null;
+    }
+
     [TestMethod]
     public void CsNamespaceOption_BindsToElmCSharpNamespaceConfig_ForCqlCommand()
     {
@@ -112,16 +119,18 @@ public class PackagerCliCommandBindingTests
                 .Select(p => NormalizeName(p.Name!))
                 .ToHashSet(StringComparer.Ordinal);
 
-            foreach (var option in options)
-            {
-                var longAlias = option.Aliases.Single(a => a.StartsWith("--", StringComparison.Ordinal));
-                var normalizedOptionName = NormalizeName(longAlias);
+            var optionNames = options
+                .Select(option =>
+                {
+                    var longAliases = option.Aliases.Where(a => a.StartsWith("--", StringComparison.Ordinal)).ToArray();
+                    longAliases.Should().ContainSingle($"option aliases on {commandType.Name} should include exactly one long alias");
+                    return NormalizeName(longAliases[0]);
+                })
+                .ToHashSet(StringComparer.Ordinal);
 
-                constructorParameterNames
-                    .Contains(normalizedOptionName)
-                    .Should()
-                    .BeTrue($"option '{longAlias}' on {commandType.Name} must bind to a constructor parameter by normalized name");
-            }
+            optionNames.Should().BeEquivalentTo(
+                constructorParameterNames,
+                $"every option on {commandType.Name} must bind to a constructor parameter and every constructor parameter must be settable from an option");
         }
     }
 
