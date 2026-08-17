@@ -193,33 +193,33 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
         }
         else
         {
-            FhirUri b_ = quantity?.SystemElement;
-            bool? c_ = (bool?)(b_ is null);
-            bool? d_;
+            bool? b_;
             // CQL 'or' (35:14-35:91): right operand skipped when left is true
-            if (c_ is true)
+            if (quantity?.SystemElement is null)
             {
-                d_ = true;
+                b_ = true;
             }
             else
             {
-                string f_ = b_?.Value;
-                bool? g_ = context.Operators.Equal(f_, "http://unitsofmeasure.org");
-                d_ = c_ | g_;
+                FhirUri d_ = quantity?.SystemElement;
+                string e_ = d_?.Value;
+                bool? f_ = context.Operators.Equal(e_, "http://unitsofmeasure.org");
+                b_ = f_;
             }
-            bool? e_;
+            bool? c_;
             // CQL 'or' (35:14-36:92): right operand skipped when left is true
-            if (d_ is true)
+            if (b_ is true)
             {
-                e_ = true;
+                c_ = true;
             }
             else
             {
-                string h_ = b_?.Value;
+                FhirUri g_ = quantity?.SystemElement;
+                string h_ = g_?.Value;
                 bool? i_ = context.Operators.Equal(h_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
-                e_ = d_ | i_;
+                c_ = b_ | i_;
             }
-            if (e_ ?? false)
+            if (c_ ?? false)
             {
                 FhirDecimal j_ = quantity?.ValueElement;
                 decimal? k_ = j_?.Value;
@@ -264,33 +264,33 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
         }
         else
         {
-            FhirUri a_ = quantity?.SystemElement;
-            bool? b_ = (bool?)(a_ is null);
-            bool? c_;
+            bool? a_;
             // CQL 'or' (46:14-46:91): right operand skipped when left is true
-            if (b_ is true)
+            if (quantity?.SystemElement is null)
             {
-                c_ = true;
+                a_ = true;
             }
             else
             {
-                string e_ = a_?.Value;
-                bool? f_ = context.Operators.Equal(e_, "http://unitsofmeasure.org");
-                c_ = b_ | f_;
+                FhirUri c_ = quantity?.SystemElement;
+                string d_ = c_?.Value;
+                bool? e_ = context.Operators.Equal(d_, "http://unitsofmeasure.org");
+                a_ = e_;
             }
-            bool? d_;
+            bool? b_;
             // CQL 'or' (46:14-47:92): right operand skipped when left is true
-            if (c_ is true)
+            if (a_ is true)
             {
-                d_ = true;
+                b_ = true;
             }
             else
             {
-                string g_ = a_?.Value;
+                FhirUri f_ = quantity?.SystemElement;
+                string g_ = f_?.Value;
                 bool? h_ = context.Operators.Equal(g_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
-                d_ = c_ | h_;
+                b_ = a_ | h_;
             }
-            if (d_ ?? false)
+            if (b_ ?? false)
             {
                 FhirDecimal i_ = quantity?.ValueElement;
                 decimal? j_ = i_?.Value;

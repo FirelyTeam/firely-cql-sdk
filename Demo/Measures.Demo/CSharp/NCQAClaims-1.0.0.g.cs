@@ -1372,29 +1372,18 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         ];
 
         (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? c_((CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? MedicalClaimAndResponse) {
-            IEnumerable<ClaimResponse> j_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-            bool? k_ = (bool?)(j_ is null);
-            bool? l_;
-            // CQL 'and' (262:15-264:5): right operand skipped when left is false
-            if (k_ is false)
-            {
-                l_ = false;
-            }
-            else
-            {
-                IEnumerable<Claim> m_ = MedicalClaimAndResponse?.MedicalClaim;
-                l_ = k_ & ((bool?)(m_ is null));
-            }
-            if (l_ ?? false)
+            if ((/* CQL 'and' (262:15-264:5) */ (!(MedicalClaimAndResponse?.MedicalClaimResponse is null)
+                ? false
+                : (bool?)(MedicalClaimAndResponse?.MedicalClaim is null))) ?? false)
             {
                 return null as (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
             }
             else
             {
-                IEnumerable<ClaimResponse> n_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-                IEnumerable<Claim> o_ = MedicalClaimAndResponse?.MedicalClaim;
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? p_ = this.Get_Corresponding_Claim_for_Services_and_Conditions(context, n_, o_, ProductOrServiceValueSet, DiagnosisValueSet);
-                return p_;
+                IEnumerable<ClaimResponse> j_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+                IEnumerable<Claim> k_ = MedicalClaimAndResponse?.MedicalClaim;
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? l_ = this.Get_Corresponding_Claim_for_Services_and_Conditions(context, j_, k_, ProductOrServiceValueSet, DiagnosisValueSet);
+                return l_;
             }
         }
 
@@ -1827,29 +1816,18 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         ];
 
         (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? c_((CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? MedicalClaimAndResponse) {
-            IEnumerable<ClaimResponse> f_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-            bool? g_ = (bool?)(f_ is null);
-            bool? h_;
-            // CQL 'and' (270:15-272:5): right operand skipped when left is false
-            if (g_ is false)
-            {
-                h_ = false;
-            }
-            else
-            {
-                IEnumerable<Claim> i_ = MedicalClaimAndResponse?.MedicalClaim;
-                h_ = g_ & ((bool?)(i_ is null));
-            }
-            if (h_ ?? false)
+            if ((/* CQL 'and' (270:15-272:5) */ (!(MedicalClaimAndResponse?.MedicalClaimResponse is null)
+                ? false
+                : (bool?)(MedicalClaimAndResponse?.MedicalClaim is null))) ?? false)
             {
                 return null as (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
             }
             else
             {
-                IEnumerable<ClaimResponse> j_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-                IEnumerable<Claim> k_ = MedicalClaimAndResponse?.MedicalClaim;
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? l_ = this.Get_Corresponding_Claim_for_Services_or_Conditions(context, j_, k_, ProductOrServiceValueSet, DiagnosisValueSet);
-                return l_;
+                IEnumerable<ClaimResponse> f_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+                IEnumerable<Claim> g_ = MedicalClaimAndResponse?.MedicalClaim;
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? h_ = this.Get_Corresponding_Claim_for_Services_or_Conditions(context, f_, g_, ProductOrServiceValueSet, DiagnosisValueSet);
+                return h_;
             }
         }
 
@@ -2185,29 +2163,18 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         ];
 
         (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? c_((CqlTupleMetadata, IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? MedicalClaimAndResponse) {
-            IEnumerable<ClaimResponse> f_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-            bool? g_ = (bool?)(f_ is null);
-            bool? h_;
-            // CQL 'and' (277:15-279:5): right operand skipped when left is false
-            if (g_ is false)
-            {
-                h_ = false;
-            }
-            else
-            {
-                IEnumerable<Claim> i_ = MedicalClaimAndResponse?.MedicalClaim;
-                h_ = g_ & ((bool?)(i_ is null));
-            }
-            if (h_ ?? false)
+            if ((/* CQL 'and' (277:15-279:5) */ (!(MedicalClaimAndResponse?.MedicalClaimResponse is null)
+                ? false
+                : (bool?)(MedicalClaimAndResponse?.MedicalClaim is null))) ?? false)
             {
                 return null as (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
             }
             else
             {
-                IEnumerable<ClaimResponse> j_ = MedicalClaimAndResponse?.MedicalClaimResponse;
-                IEnumerable<Claim> k_ = MedicalClaimAndResponse?.MedicalClaim;
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? l_ = this.Get_Corresponding_Claim_for_Services_Only(context, j_, k_, ProductOrServiceValueSet);
-                return l_;
+                IEnumerable<ClaimResponse> f_ = MedicalClaimAndResponse?.MedicalClaimResponse;
+                IEnumerable<Claim> g_ = MedicalClaimAndResponse?.MedicalClaim;
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? h_ = this.Get_Corresponding_Claim_for_Services_Only(context, f_, g_, ProductOrServiceValueSet);
+                return h_;
             }
         }
 
@@ -2460,29 +2427,18 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
         ];
 
         (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? c_((CqlTupleMetadata, IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? PharmacyClaimAndResponse) {
-            IEnumerable<ClaimResponse> f_ = PharmacyClaimAndResponse?.PharmacyClaimResponse;
-            bool? g_ = (bool?)(f_ is null);
-            bool? h_;
-            // CQL 'and' (284:15-286:5): right operand skipped when left is false
-            if (g_ is false)
-            {
-                h_ = false;
-            }
-            else
-            {
-                IEnumerable<Claim> i_ = PharmacyClaimAndResponse?.PharmacyClaim;
-                h_ = g_ & ((bool?)(i_ is null));
-            }
-            if (h_ ?? false)
+            if ((/* CQL 'and' (284:15-286:5) */ (!(PharmacyClaimAndResponse?.PharmacyClaimResponse is null)
+                ? false
+                : (bool?)(PharmacyClaimAndResponse?.PharmacyClaim is null))) ?? false)
             {
                 return null as (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?;
             }
             else
             {
-                IEnumerable<ClaimResponse> j_ = PharmacyClaimAndResponse?.PharmacyClaimResponse;
-                IEnumerable<Claim> k_ = PharmacyClaimAndResponse?.PharmacyClaim;
-                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? l_ = this.Get_Corresponding_Claim_for_Pharmacy_Services(context, j_, k_, ProductOrServiceValueSet);
-                return l_;
+                IEnumerable<ClaimResponse> f_ = PharmacyClaimAndResponse?.PharmacyClaimResponse;
+                IEnumerable<Claim> g_ = PharmacyClaimAndResponse?.PharmacyClaim;
+                (CqlTupleMetadata, IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? h_ = this.Get_Corresponding_Claim_for_Pharmacy_Services(context, f_, g_, ProductOrServiceValueSet);
+                return h_;
             }
         }
 

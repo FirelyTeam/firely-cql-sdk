@@ -411,7 +411,13 @@ internal partial class CSharpEmitter
         private Atom? LinearizeLet(CodeLet let, bool tailPosition)
         {
             var valueAtom = Linearize(let.Value)!;
-            if (valueAtom.Node is not (CodeLocal or CodeConstant or CodeContextParameter))
+            // A CONSTANT is deliberately not exempt from the hoist, unlike a local or the
+            // context parameter: Linearize folds a constant-test conditional to its surviving
+            // branch, so a value like `if true then A else B` arrives here as a constant, and
+            // binding the local straight to that literal makes the guard print as a
+            // constant-vs-constant test (`true is false`) — dead code Roslyn flags as an
+            // always-false pattern. Hoisting keeps the guard reading a variable.
+            if (valueAtom.Node is not (CodeLocal or CodeContextParameter))
                 valueAtom = Hoist(valueAtom.Code, valueAtom.KeyCode, let.Value);
 
             // Locals resolve by reference identity through the emitter-wide name map, so

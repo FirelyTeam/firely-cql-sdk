@@ -439,17 +439,44 @@ partial class CodeBuilderContext
         if (IsEvaluatedValue(right))
             return new CodeBinary(op, left, HonestBoolOperand(right));
 
+        var operatorName = op == CodeBinaryOp.BoolAnd ? "and" : "or";
+        var originTag = binary.locator is { Length: > 0 } locator
+            ? $"CQL '{operatorName}' ({locator})"
+            : $"CQL '{operatorName}'";
+        var originDetail = $"right operand skipped when left is {(decidingValue ? "true" : "false")}";
+
+        // A left operand whose UNDERLYING type is non-nullable bool cannot evaluate to null, so
+        // it decides on its own and needs neither a local nor a merge: test it directly, and let
+        // the non-deciding branch BE the right operand. Where control reaches that branch the
+        // left operand is known to be !deciding, and !deciding is the identity for the operator
+        // (false or X = X, true and X = X), so `left op right` there would only re-read a value
+        // whose contribution is nothing. Soundness rests on the TYPE, not on a list of node
+        // shapes: a bool? left operand may be null, and null decides nothing, which is exactly
+        // why the guarded form below must keep the merge.
+        // ...and only when repeating it is free. The test prints fully inline, so anything the
+        // right operand derives from the same receiver re-derives it instead of reading a shared
+        // local — measured at +14 accessor calls (Start/End/SingletonFrom/LateBoundProperty)
+        // across the corpora when calls were allowed here. Property chains stay eligible: they
+        // are side-effect free and cost nothing worth a local.
+        if (left is CodeCast { Operand: { } nonNullableLeft }
+            && nonNullableLeft.Type == typeof(bool)
+            && IsFreeToRepeat(nonNullableLeft))
+        {
+            return new CodeConditional(
+                decidingValue ? nonNullableLeft : new CodeUnary(CodeUnaryOp.Not, nonNullableLeft),
+                NullableBoolConstant(decidingValue),
+                right,
+                typeof(bool?),
+                originTag,
+                originDetail);
+        }
+
         // let a = left; a == deciding ? deciding : a <op> right
         // The left operand binds to a local once (both the guard and the combine read it),
         // and the conditional keeps the right operand inside the non-deciding branch. The
         // emitter prints this as a lazy ternary or an if/else block — either form
         // short-circuits without allocating (contrast the Lazy<bool?> overloads, which cost
         // a Lazy plus a closure per operand).
-        var operatorName = op == CodeBinaryOp.BoolAnd ? "and" : "or";
-        var originTag = binary.locator is { Length: > 0 } locator
-            ? $"CQL '{operatorName}' ({locator})"
-            : $"CQL '{operatorName}'";
-
         var local = new CodeLocal(typeof(bool?));
         var guard = new CodeBinary(CodeBinaryOp.Equal, local, new CodeConstant(decidingValue, typeof(bool?)));
         var conditional = new CodeConditional(
@@ -458,7 +485,7 @@ partial class CodeBuilderContext
             new CodeBinary(op, local, right),
             typeof(bool?),
             originTag,
-            originDetail: $"right operand skipped when left is {(decidingValue ? "true" : "false")}");
+            originDetail);
         return new CodeLet(local, left, conditional);
     }
 
@@ -473,8 +500,32 @@ partial class CodeBuilderContext
     private static bool IsEvaluatedValue(CodeExpression node) =>
         node switch
         {
-            CodeConstant or CodeLocal or CodeContextParameter => true,
+            // CodeDefault belongs here for the same reason TryGetBoolConstant accepts it:
+            // default(bool?) is a null constant in all but name. Without it, a default-shaped
+            // right operand reached the guard path and got a let, a conditional and a hoisted
+            // local built around a compile-time constant — and was the one merge operand never
+            // passed through HonestBoolOperand.
+            CodeConstant or CodeDefault or CodeLocal or CodeContextParameter => true,
             CodeCast cast => IsEvaluatedValue(cast.Operand),
+            _ => false,
+        };
+
+    /// <summary>
+    /// Whether evaluating this subtree twice costs nothing observable — reads of locals,
+    /// parameters, constants and property chains, plus the operators over them. Deliberately
+    /// whitelist-shaped with a <see langword="false"/> default: an unrecognized node (a call, an
+    /// aggregate, a retrieve, or a node type added later) must be assumed to do real work, which
+    /// keeps the guarded form that binds it to a local exactly once.
+    /// </summary>
+    private static bool IsFreeToRepeat(CodeExpression node) =>
+        node switch
+        {
+            CodeConstant or CodeDefault or CodeLocal or CodeContextParameter => true,
+            CodeProperty p => p.Receiver is null || IsFreeToRepeat(p.Receiver),
+            CodeCast c => IsFreeToRepeat(c.Operand),
+            CodeTypeIs t => IsFreeToRepeat(t.Operand),
+            CodeUnary u => IsFreeToRepeat(u.Operand),
+            CodeBinary b => IsFreeToRepeat(b.Left) && IsFreeToRepeat(b.Right),
             _ => false,
         };
 

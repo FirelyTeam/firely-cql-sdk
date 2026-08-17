@@ -870,24 +870,22 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
         IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(c_);
 
         bool? e_(object M) {
-            bool n_ = M is MedicationDispense;
-            bool? o_ = n_ as bool?;
             // CQL 'or' (378:13-378:74): right operand skipped when left is true
-            if (o_ is true)
+            if (M is MedicationDispense)
             {
                 return true;
             }
             else
             {
-                bool p_ = M is MedicationAdministration;
-                return o_ | (p_ as bool?);
+                bool n_ = M is MedicationAdministration;
+                return n_ as bool?;
             }
         }
 
 
         CqlInterval<CqlDateTime> f_(object M) {
-            CqlInterval<CqlDateTime> q_ = this.MedicationPeriod(context, M);
-            return q_;
+            CqlInterval<CqlDateTime> o_ = this.MedicationPeriod(context, M);
+            return o_;
         }
 
         IEnumerable<CqlInterval<CqlDateTime>> g_ = context.Operators.WhereSelect<object, CqlInterval<CqlDateTime>>(Medications, e_, f_);
