@@ -122,7 +122,40 @@ public readonly struct CqlBoolean : IEquatable<CqlBoolean>
     /// <param name="value">The operand.</param>
     public static bool operator false(CqlBoolean value) => value._state == FalseState;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// CQL's <c>=</c>: null propagates, so comparing anything with <see cref="Null"/> yields
+    /// <see cref="Null"/> rather than a definite answer — <c>null = null</c> is unknown, not true.
+    /// Defined as the negation of <see cref="op_ExclusiveOr"/>, which is already exactly
+    /// "differs from", so the two cannot drift apart.
+    ///
+    /// <para><b>This deliberately does NOT agree with <see cref="Equals(CqlBoolean)"/>, and the
+    /// asymmetry is the point.</b> <c>Equals</c> answers "is this the same state", which is what a
+    /// dictionary or a test assertion needs and must stay two-valued and reflexive;
+    /// <c>==</c> answers CQL's question, which is three-valued. <c>SqlBoolean</c> — the type this
+    /// one is modelled on — draws the line in the same place, for the same reason.</para>
+    ///
+    /// <para>Without these operators <c>a == b</c> would still compile, silently resolving through
+    /// the implicit <c>bool?</c> conversion on both sides and answering <see langword="true"/> for
+    /// two nulls. Declaring them replaces an accidental answer with the specified one.</para>
+    /// </summary>
+    /// <param name="left">The left operand.</param>
+    /// <param name="right">The right operand.</param>
+    public static CqlBoolean operator ==(CqlBoolean left, CqlBoolean right) => !(left ^ right);
+
+    /// <summary>CQL's <c>!=</c>, which for Booleans is exactly <c>xor</c>: null propagates.
+    /// See <see cref="op_Equality"/> for why this does not agree with
+    /// <see cref="Equals(CqlBoolean)"/>.</summary>
+    /// <param name="left">The left operand.</param>
+    /// <param name="right">The right operand.</param>
+    public static CqlBoolean operator !=(CqlBoolean left, CqlBoolean right) => left ^ right;
+
+    /// <summary>
+    /// State equality: two-valued and reflexive, so <see cref="Null"/> equals itself. This is what
+    /// hashing and collection lookup require, and it is deliberately NOT what <c>==</c> means here
+    /// — see <see cref="op_Equality"/>.
+    /// </summary>
+    /// <param name="other">The value to compare with.</param>
+    /// <returns><see langword="true"/> when both hold the same state.</returns>
     public bool Equals(CqlBoolean other) => _state == other._state;
 
     /// <inheritdoc/>

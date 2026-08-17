@@ -173,6 +173,53 @@ public class CqlBooleanTests
         Assert.AreEqual(true, fromTrueValue);
     }
 
+    /// <summary>
+    /// <c>==</c> and <c>!=</c> are CQL's <c>=</c> and <c>!=</c>: three-valued, so null propagates
+    /// and comparing with <see cref="CqlBoolean.Null"/> yields <see cref="CqlBoolean.Null"/>.
+    /// Verified against the same <see cref="ICqlOperators"/> oracle the other tables use, so the
+    /// operators cannot drift from the runtime the SDK is verified against.
+    /// </summary>
+    [TestMethod]
+    public void EqualityOperators_MatchRuntimeOperator()
+    {
+        foreach (var left in Values)
+        foreach (var right in Values)
+        {
+            bool? equal = (CqlBoolean)left == (CqlBoolean)right;
+            Assert.AreEqual(Operators.Equal(left, right), equal, $"{left} = {right}");
+
+            bool? notEqual = (CqlBoolean)left != (CqlBoolean)right;
+            Assert.AreEqual(Operators.Not(Operators.Equal(left, right)), notEqual, $"{left} != {right}");
+        }
+    }
+
+    /// <summary>
+    /// <c>==</c> and <see cref="CqlBoolean.Equals(CqlBoolean)"/> deliberately disagree about null,
+    /// and that is the whole reason both exist: <c>Equals</c> answers "same state" and must stay
+    /// two-valued and reflexive for hashing and collection lookup, while <c>==</c> answers CQL's
+    /// question, where null is unknown and never equal to anything — including itself.
+    /// <para>Pinned because it is exactly the kind of asymmetry a later "consistency" cleanup would
+    /// remove without realising it is specified.</para>
+    /// </summary>
+    [TestMethod]
+    public void Equals_IsReflexiveOnNull_WhereEqualityOperatorIsNot()
+    {
+        // Two separately-obtained unknowns rather than one field compared with itself, which the
+        // compiler rejects outright (CS1718) — and which would prove less anyway.
+        var oneNull = (CqlBoolean)(bool?)null;
+        var anotherNull = default(CqlBoolean);
+
+        Assert.IsTrue(oneNull.Equals(anotherNull), "Equals must be reflexive so hashing works.");
+        Assert.AreEqual(oneNull.GetHashCode(), anotherNull.GetHashCode());
+
+        bool? viaOperator = oneNull == anotherNull;
+        Assert.IsNull(viaOperator, "CQL's = on two nulls is unknown, not true.");
+
+        // And the operator must not have been quietly resolved through the bool? conversions,
+        // which would have answered `true` here rather than null.
+        Assert.AreEqual(Operators.Equal(null, null), viaOperator);
+    }
+
     /// <summary>The default value of the struct is the unknown value, not false.</summary>
     [TestMethod]
     public void Default_IsNull()

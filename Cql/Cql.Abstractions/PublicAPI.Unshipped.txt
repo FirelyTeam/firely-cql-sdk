@@ -10,7 +10,9 @@ static Hl7.Cql.Primitives.CqlBoolean.implicit operator Hl7.Cql.Primitives.CqlBoo
 static Hl7.Cql.Primitives.CqlBoolean.implicit operator Hl7.Cql.Primitives.CqlBoolean(bool? value) -> Hl7.Cql.Primitives.CqlBoolean
 static Hl7.Cql.Primitives.CqlBoolean.implicit operator bool?(Hl7.Cql.Primitives.CqlBoolean value) -> bool?
 static Hl7.Cql.Primitives.CqlBoolean.operator !(Hl7.Cql.Primitives.CqlBoolean value) -> Hl7.Cql.Primitives.CqlBoolean
+static Hl7.Cql.Primitives.CqlBoolean.operator !=(Hl7.Cql.Primitives.CqlBoolean left, Hl7.Cql.Primitives.CqlBoolean right) -> Hl7.Cql.Primitives.CqlBoolean
 static Hl7.Cql.Primitives.CqlBoolean.operator &(Hl7.Cql.Primitives.CqlBoolean left, Hl7.Cql.Primitives.CqlBoolean right) -> Hl7.Cql.Primitives.CqlBoolean
+static Hl7.Cql.Primitives.CqlBoolean.operator ==(Hl7.Cql.Primitives.CqlBoolean left, Hl7.Cql.Primitives.CqlBoolean right) -> Hl7.Cql.Primitives.CqlBoolean
 static Hl7.Cql.Primitives.CqlBoolean.operator ^(Hl7.Cql.Primitives.CqlBoolean left, Hl7.Cql.Primitives.CqlBoolean right) -> Hl7.Cql.Primitives.CqlBoolean
 static Hl7.Cql.Primitives.CqlBoolean.operator false(Hl7.Cql.Primitives.CqlBoolean value) -> bool
 static Hl7.Cql.Primitives.CqlBoolean.operator true(Hl7.Cql.Primitives.CqlBoolean value) -> bool
