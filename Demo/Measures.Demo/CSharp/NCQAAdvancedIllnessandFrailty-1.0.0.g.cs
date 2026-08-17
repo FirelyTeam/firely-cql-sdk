@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("NCQAAdvancedIllnessandFrailty", "1.0.0")]
 public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<NCQAAdvancedIllnessandFrailty_1_0_0>
 {
@@ -177,10 +177,10 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             return af_;
         }
 
-        return (bool?)(/* CQL 'or' (58:3-69:5) */ (/* CQL 'or' (58:3-66:5) */ (/* CQL 'or' (58:3-63:5) */ ((CqlBoolean)d_
+        return /* CQL 'or' (58:3-69:5) */ (/* CQL 'or' (58:3-66:5) */ (/* CQL 'or' (58:3-63:5) */ ((CqlBoolean)d_
             || e_())
             || f_())
-            || g_()));
+            || g_());
     }
 
 
@@ -233,8 +233,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 return am_;
             }
 
-            return (bool?)(/* CQL 'and' (96:5-98:34) */ ((CqlBoolean)y_
-                && z_()));
+            return /* CQL 'and' (96:5-98:34) */ ((CqlBoolean)y_
+                && z_());
         }
 
 
@@ -392,8 +392,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 return v_;
             }
 
-            return (bool?)(/* CQL 'and' (116:7-118:36) */ ((CqlBoolean)h_
-                && i_()));
+            return /* CQL 'and' (116:7-118:36) */ ((CqlBoolean)h_
+                && i_());
         }
 
         bool? e_ = context.Operators.WhereAny<Encounter>(c_, d_);
@@ -469,8 +469,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                     return x_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)s_
-                    && t_()));
+                return /* CQL 'and' */ ((CqlBoolean)s_
+                    && t_());
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -545,10 +545,10 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)));
         }
 
-        return (bool?)(/* CQL 'or' (30:3-44:5) */ (/* CQL 'and' (30:3-39:3) */ (/* CQL 'and' (30:5-33:43) */ ((CqlBoolean)j_
+        return /* CQL 'or' (30:3-44:5) */ (/* CQL 'and' (30:3-39:3) */ (/* CQL 'and' (30:5-33:43) */ ((CqlBoolean)j_
             && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)))
             && k_())
-            || l_()));
+            || l_());
     }
 
 
@@ -578,9 +578,9 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 || (CqlBoolean)(this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period(context)));
         }
 
-        return (bool?)(/* CQL 'and' (47:3-55:5) */ (/* CQL 'and' (47:3-50:41) */ ((CqlBoolean)i_
+        return /* CQL 'and' (47:3-55:5) */ (/* CQL 'and' (47:3-50:41) */ ((CqlBoolean)i_
             && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)))
-            && j_()));
+            && j_());
     }
 
 

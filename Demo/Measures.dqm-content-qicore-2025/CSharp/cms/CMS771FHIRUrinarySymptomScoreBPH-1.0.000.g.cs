@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS771FHIRUrinarySymptomScoreBPH", "1.0.000")]
 public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingleton<CMS771FHIRUrinarySymptomScoreBPH_1_0_000>
 {
@@ -169,9 +169,9 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 return r_;
             }
 
-            return (bool?)(/* CQL 'and' (107:7-109:46) */ (/* CQL 'and' (107:13-108:45) */ ((CqlBoolean)h_
+            return /* CQL 'and' (107:7-109:46) */ (/* CQL 'and' (107:13-108:45) */ ((CqlBoolean)h_
                 && i_())
-                && j_()));
+                && j_());
         }
 
         bool? d_ = context.Operators.WhereAny<Encounter>(b_, c_);
@@ -216,8 +216,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 || j_())));
         }
 
-        return (bool?)(/* CQL 'or' (176:3-180:5) */ ((CqlBoolean)((bool?)(b_ is null))
-            || c_()));
+        return /* CQL 'or' (176:3-180:5) */ ((CqlBoolean)((bool?)(b_ is null))
+            || c_());
     }
 
 
@@ -244,8 +244,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             CqlDateTime p_ = context.Operators.Subtract(n_, o_);
             CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, true);
             bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
-            return (bool?)(/* CQL 'and' (146:7-147:60) */ ((CqlBoolean)r_
-                && (CqlBoolean)(this.verificationStatusIsNotInvalid(context, NewBPHDiagnosis))));
+            return /* CQL 'and' (146:7-147:60) */ ((CqlBoolean)r_
+                && (CqlBoolean)(this.verificationStatusIsNotInvalid(context, NewBPHDiagnosis)));
         }
 
         IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
@@ -286,9 +286,9 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     private bool? Initial_Population_Compute(CqlContext context)
     {
         bool? a_ = this.Patient_is_Male(context);
-        return (bool?)(/* CQL 'and' (30:3-32:38) */ (/* CQL 'and' (30:3-31:34) */ ((CqlBoolean)a_
+        return /* CQL 'and' (30:3-32:38) */ (/* CQL 'and' (30:3-31:34) */ ((CqlBoolean)a_
             && (CqlBoolean)(this.Has_Qualifying_Encounter(context)))
-            && (CqlBoolean)(this.Has_Qualifying_BPH_Diagnosis(context))));
+            && (CqlBoolean)(this.Has_Qualifying_BPH_Diagnosis(context)));
     }
 
 
@@ -321,8 +321,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 return !((bool?)(o_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (83:5-84:42) */ ((CqlBoolean)l_
-                && m_()));
+            return /* CQL 'and' (83:5-84:42) */ ((CqlBoolean)l_
+                && m_());
         }
 
 
@@ -396,8 +396,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 return !((bool?)(o_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (98:5-99:43) */ ((CqlBoolean)l_
-                && m_()));
+            return /* CQL 'and' (98:5-99:43) */ ((CqlBoolean)l_
+                && m_());
         }
 
 
@@ -515,9 +515,9 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                     return !((bool?)(be_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (93:9-95:45) */ (/* CQL 'and' (93:15-94:73) */ ((CqlBoolean)an_
+                return /* CQL 'and' (93:9-95:45) */ (/* CQL 'and' (93:15-94:73) */ ((CqlBoolean)an_
                     && ao_())
-                    && ap_()));
+                    && ap_());
             }
 
             IEnumerable<Observation> x_ = context.Operators.Where<Observation>(v_, w_);
@@ -615,8 +615,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                     return !((bool?)(t_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (133:19-133:134) */ ((CqlBoolean)q_
-                    && r_()));
+                return /* CQL 'and' (133:19-133:134) */ ((CqlBoolean)q_
+                    && r_());
             }
 
             bool? j_ = context.Operators.WhereAny<Condition>((IEnumerable<Condition>)h_, i_);
@@ -688,9 +688,9 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     private bool? Denominator_Compute(CqlContext context)
     {
         bool? a_ = this.Initial_Population(context);
-        return (bool?)(/* CQL 'and' (35:3-37:86) */ (/* CQL 'and' (35:3-36:86) */ ((CqlBoolean)a_
+        return /* CQL 'and' (35:3-37:86) */ (/* CQL 'and' (35:3-36:86) */ ((CqlBoolean)a_
             && (CqlBoolean)(!((bool?)((this.Urinary_Symptom_Score_Within_1_Month_After_Initial_BPH_Diagnosis(context)) is null))))
-            && (CqlBoolean)(!((bool?)((this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(context)) is null)))));
+            && (CqlBoolean)(!((bool?)((this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(context)) is null))));
     }
 
 
@@ -729,8 +729,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                     return !((bool?)(w_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (120:17-120:148) */ ((CqlBoolean)t_
-                    && u_()));
+                return /* CQL 'and' (120:17-120:148) */ ((CqlBoolean)t_
+                    && u_());
             }
 
             bool? l_ = context.Operators.WhereAny<Condition>((IEnumerable<Condition>)j_, k_);
@@ -786,8 +786,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                     return x_;
                 }
 
-                return (bool?)(/* CQL 'and' (140:17-141:55) */ ((CqlBoolean)s_
-                    && t_()));
+                return /* CQL 'and' (140:17-141:55) */ ((CqlBoolean)s_
+                    && t_());
             }
 
             bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
@@ -832,8 +832,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                     return t_;
                 }
 
-                return (bool?)(/* CQL 'and' (155:17-156:117) */ ((CqlBoolean)o_
-                    && p_()));
+                return /* CQL 'and' (155:17-156:117) */ ((CqlBoolean)o_
+                    && p_());
             }
 
             bool? l_ = context.Operators.WhereAny<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>((IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>)j_, k_);
@@ -909,10 +909,10 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                     return af_;
                 }
 
-                return (bool?)(/* CQL 'and' (168:19-171:97) */ (/* CQL 'and' (168:19-170:79) */ (/* CQL 'and' (168:19-169:67) */ ((CqlBoolean)n_
+                return /* CQL 'and' (168:19-171:97) */ (/* CQL 'and' (168:19-170:79) */ (/* CQL 'and' (168:19-169:67) */ ((CqlBoolean)n_
                     && o_())
                     && p_())
-                    && q_()));
+                    && q_());
             }
 
             bool? j_ = context.Operators.WhereAny<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>((IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>)h_, i_);
@@ -944,8 +944,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     {
         IEnumerable<Condition> a_ = this.Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment(context);
         bool? b_ = context.Operators.Exists<Condition>(a_);
-        return (bool?)(/* CQL 'or' (113:3-114:120) */ ((CqlBoolean)b_
-            || (CqlBoolean)(this.BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment(context))));
+        return /* CQL 'or' (113:3-114:120) */ ((CqlBoolean)b_
+            || (CqlBoolean)(this.BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment(context)));
     }
 
 
@@ -959,9 +959,9 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     {
         IEnumerable<Condition> a_ = this.Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis(context);
         bool? b_ = context.Operators.Exists<Condition>(a_);
-        return (bool?)(/* CQL 'or' (40:3-42:129) */ (/* CQL 'or' (40:3-41:111) */ ((CqlBoolean)b_
+        return /* CQL 'or' (40:3-42:129) */ (/* CQL 'or' (40:3-41:111) */ ((CqlBoolean)b_
             || (CqlBoolean)(!((bool?)((this.Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization(context)) is null))))
-            || (CqlBoolean)(this.Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment(context))));
+            || (CqlBoolean)(this.Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment(context)));
     }
 
 

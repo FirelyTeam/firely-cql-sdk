@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS1218FHIRHHRF", "1.0.000")]
 public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRHHRF_1_0_000>
 {
@@ -344,8 +344,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                                 && bc_());
                         }
 
-                        return (bool?)(/* CQL 'and' (208:11-209:97) */ ((CqlBoolean)aq_
-                            && ar_()));
+                        return /* CQL 'and' (208:11-209:97) */ ((CqlBoolean)aq_
+                            && ar_());
                     }
 
                     bool? am_ = context.Operators.WhereAny<Encounter>(ak_, al_);
@@ -357,10 +357,10 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     && y_());
             }
 
-            return (bool?)(/* CQL 'implies' (203:5-210:7) */ ((CqlBoolean)(!((bool?)(/* CQL 'and' (203:11-205:48) */ (/* CQL 'and' (203:11-204:74) */ ((CqlBoolean)h_
+            return /* CQL 'implies' (203:5-210:7) */ ((CqlBoolean)(!((bool?)(/* CQL 'and' (203:11-205:48) */ (/* CQL 'and' (203:11-204:74) */ ((CqlBoolean)h_
                 && i_())
                 && j_()))))
-                || k_()));
+                || k_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -499,9 +499,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                         && ab_());
                 }
 
-                return (bool?)(/* CQL 'and' (90:17-92:166) */ (/* CQL 'and' (90:17-91:143) */ ((CqlBoolean)k_
+                return /* CQL 'and' (90:17-92:166) */ (/* CQL 'and' (90:17-91:143) */ ((CqlBoolean)k_
                     && l_())
-                    && m_()));
+                    && m_());
             }
 
             bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -583,8 +583,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return p_;
             }
 
-            return (bool?)(/* CQL 'or' (96:5-97:94) */ ((CqlBoolean)h_
-                || i_()));
+            return /* CQL 'or' (96:5-97:94) */ ((CqlBoolean)h_
+                || i_());
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -685,8 +685,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 EventStatus? i_ = h_?.Value;
                 string j_ = context.Operators.Convert<string>(i_);
                 bool? k_ = context.Operators.Equal(j_, "completed");
-                return (bool?)(/* CQL 'and' (102:17-103:83) */ ((CqlBoolean)k_
-                    && (CqlBoolean)(this.startsDuringHospitalization(context, HeadNeckProcedures, EncounterWithSurgery))));
+                return /* CQL 'and' (102:17-103:83) */ ((CqlBoolean)k_
+                    && (CqlBoolean)(this.startsDuringHospitalization(context, HeadNeckProcedures, EncounterWithSurgery)));
             }
 
             bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -708,8 +708,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             EventStatus? h_ = g_?.Value;
             string i_ = context.Operators.Convert<string>(h_);
             bool? j_ = context.Operators.Equal(i_, "completed");
-            return (bool?)(/* CQL 'and' (646:7-647:71) */ ((CqlBoolean)j_
-                && (CqlBoolean)(this.startsDuringHospitalization(context, anesthesia, QualifyingEncounter))));
+            return /* CQL 'and' (646:7-647:71) */ ((CqlBoolean)j_
+                && (CqlBoolean)(this.startsDuringHospitalization(context, anesthesia, QualifyingEncounter)));
         }
 
         IEnumerable<Procedure> c_ = context.Operators.Where<Procedure>(a_, b_);
@@ -891,9 +891,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return u_;
                 }
 
-                return (bool?)(/* CQL 'and' (108:17-110:76) */ (/* CQL 'and' (108:17-109:175) */ ((CqlBoolean)k_
+                return /* CQL 'and' (108:17-110:76) */ (/* CQL 'and' (108:17-109:175) */ ((CqlBoolean)k_
                     && l_())
-                    && (CqlBoolean)(this.startsDuringHospitalization(context, Ventilation, EncounterWithSurgery))));
+                    && (CqlBoolean)(this.startsDuringHospitalization(context, Ventilation, EncounterWithSurgery)));
             }
 
             bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -949,8 +949,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return p_;
             }
 
-            return (bool?)(/* CQL 'or' (114:5-115:82) */ ((CqlBoolean)h_
-                || i_()));
+            return /* CQL 'or' (114:5-115:82) */ ((CqlBoolean)h_
+                || i_());
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1127,9 +1127,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return bg_;
                 }
 
-                return (bool?)(/* CQL 'and' (121:17-123:57) */ (/* CQL 'and' (121:17-122:109) */ ((CqlBoolean)n_
+                return /* CQL 'and' (121:17-123:57) */ (/* CQL 'and' (121:17-122:109) */ ((CqlBoolean)n_
                     && o_())
-                    && p_()));
+                    && p_());
             }
 
             bool? i_ = context.Operators.WhereAny<Observation>(g_, h_);
@@ -1297,9 +1297,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return di_;
                 }
 
-                return (bool?)(/* CQL 'and' (125:17-127:51) */ (/* CQL 'and' (125:17-126:103) */ ((CqlBoolean)bp_
+                return /* CQL 'and' (125:17-127:51) */ (/* CQL 'and' (125:17-126:103) */ ((CqlBoolean)bp_
                     && bq_())
-                    && br_()));
+                    && br_());
             }
 
             bool? bk_ = context.Operators.WhereAny<Observation>(bi_, bj_);
@@ -1480,9 +1480,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return be_;
                 }
 
-                return (bool?)(/* CQL 'and' (133:17-135:50) */ (/* CQL 'and' (133:17-134:123) */ ((CqlBoolean)l_
+                return /* CQL 'and' (133:17-135:50) */ (/* CQL 'and' (133:17-134:123) */ ((CqlBoolean)l_
                     && m_())
-                    && n_()));
+                    && n_());
             }
 
             bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -1746,9 +1746,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return p_;
                 }
 
-                return (bool?)(/* CQL 'and' (222:17-224:117) */ (/* CQL 'and' (222:17-223:84) */ ((CqlBoolean)k_
+                return /* CQL 'and' (222:17-224:117) */ (/* CQL 'and' (222:17-223:84) */ ((CqlBoolean)k_
                     && (CqlBoolean)(this.startsDuringHospitalization(context, TracheostomySurgery, EncounterWithSurgery)))
-                    && l_()));
+                    && l_());
             }
 
             bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -1861,9 +1861,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return r_;
                 }
 
-                return (bool?)(/* CQL 'and' (230:17-232:117) */ (/* CQL 'and' (230:17-231:84) */ ((CqlBoolean)k_
+                return /* CQL 'and' (230:17-232:117) */ (/* CQL 'and' (230:17-231:84) */ ((CqlBoolean)k_
                     && (CqlBoolean)(this.startsDuringHospitalization(context, TracheostomySurgery, EncounterWithSurgery)))
-                    && l_()));
+                    && l_());
             }
 
             bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -2088,8 +2088,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             return !((bool?)(ak_ is null));
         }
 
-        return (bool?)(/* CQL 'and' (676:3-676:148) */ ((CqlBoolean)m_
-            && n_()));
+        return /* CQL 'and' (676:3-676:148) */ ((CqlBoolean)m_
+            && n_());
     }
 
 
@@ -2185,8 +2185,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return r_;
             }
 
-            return (bool?)(/* CQL 'and' (653:7-654:98) */ ((CqlBoolean)j_
-                && k_()));
+            return /* CQL 'and' (653:7-654:98) */ ((CqlBoolean)j_
+                && k_());
         }
 
         IEnumerable<Procedure> c_ = context.Operators.Where<Procedure>(a_, b_);
@@ -2291,9 +2291,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return t_;
                 }
 
-                return (bool?)(/* CQL 'and' (688:19-690:59) */ (/* CQL 'and' (688:19-689:49) */ ((CqlBoolean)h_
+                return /* CQL 'and' (688:19-690:59) */ (/* CQL 'and' (688:19-689:49) */ ((CqlBoolean)h_
                     && i_())
-                    && j_()));
+                    && j_());
             }
 
             bool? f_ = context.Operators.WhereAny<Location>(d_, e_);
@@ -2411,9 +2411,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return v_;
             }
 
-            return (bool?)(/* CQL 'and' (251:5-253:105) */ (/* CQL 'and' (251:11-252:83) */ ((CqlBoolean)o_
+            return /* CQL 'and' (251:5-253:105) */ (/* CQL 'and' (251:11-252:83) */ ((CqlBoolean)o_
                 && (CqlBoolean)(this.startsDuringHospitalization(context, tuple_fccbecjtombnskgdhjbefdudj?.ProceduralIntubation, tuple_fccbecjtombnskgdhjbefdudj?.EncounterWithSurgery)))
-                && p_()));
+                && p_());
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure ProceduralIntubation, Procedure Anesthesia)?> h_ = context.Operators.SelectWhere<ValueTuple<Encounter, Procedure, Procedure>, (CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure ProceduralIntubation, Procedure Anesthesia)?>(e_, f_, g_);
@@ -2594,12 +2594,12 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return !ax_;
                 }
 
-                return (bool?)(/* CQL 'and' (156:17-161:100) */ (/* CQL 'and' (156:17-160:120) */ (/* CQL 'and' (156:17-159:152) */ (/* CQL 'and' (156:17-158:83) */ (/* CQL 'and' (156:17-157:94) */ ((CqlBoolean)k_
+                return /* CQL 'and' (156:17-161:100) */ (/* CQL 'and' (156:17-160:120) */ (/* CQL 'and' (156:17-159:152) */ (/* CQL 'and' (156:17-158:83) */ (/* CQL 'and' (156:17-157:94) */ ((CqlBoolean)k_
                     && (CqlBoolean)(this.starts30DaysOrLessAfterFirstAnesthesia(context, EndotrachealTubeIn, EncounterWithSurgery)))
                     && (CqlBoolean)(this.startsDuringHospitalization(context, EndotrachealTubeIn, EncounterWithSurgery)))
                     && l_())
                     && m_())
-                    && n_()));
+                    && n_());
             }
 
             bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -2955,12 +2955,12 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return bl_;
             }
 
-            return (bool?)(/* CQL 'and' (170:5-175:94) */ (/* CQL 'and' (170:11-174:122) */ (/* CQL 'and' (170:11-173:74) */ (/* CQL 'and' (170:11-172:74) */ (/* CQL 'and' (170:11-171:85) */ ((CqlBoolean)o_
+            return /* CQL 'and' (170:5-175:94) */ (/* CQL 'and' (170:11-174:122) */ (/* CQL 'and' (170:11-173:74) */ (/* CQL 'and' (170:11-172:74) */ (/* CQL 'and' (170:11-171:85) */ ((CqlBoolean)o_
                 && (CqlBoolean)(this.starts30DaysOrLessAfterFirstAnesthesia(context, tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation, tuple_qajmwefzjrlyudjfgicwdhsi?.EncounterWithSurgery)))
                 && (CqlBoolean)(this.startsDuringHospitalization(context, tuple_qajmwefzjrlyudjfgicwdhsi?.Ventilation, tuple_qajmwefzjrlyudjfgicwdhsi?.EncounterWithSurgery)))
                 && p_())
                 && q_())
-                && r_()));
+                && r_());
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Ventilation, object OxygenSupport)?> h_ = context.Operators.SelectWhere<ValueTuple<Encounter, Procedure, object>, (CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Ventilation, object OxygenSupport)?>(e_, f_, g_);
@@ -3312,10 +3312,10 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return bo_;
             }
 
-            return (bool?)(/* CQL 'and' (272:5-275:155) */ (/* CQL 'and' (272:11-274:100) */ (/* CQL 'and' (272:11-273:73) */ ((CqlBoolean)p_
+            return /* CQL 'and' (272:5-275:155) */ (/* CQL 'and' (272:11-274:100) */ (/* CQL 'and' (272:11-273:73) */ ((CqlBoolean)p_
                 && (CqlBoolean)(this.startsDuringHospitalization(context, tuple_bmexejitjfqtagoadebdecoag?.Extubation, tuple_bmexejitjfqtagoadebdecoag?.EncounterWithSurgery)))
                 && q_())
-                && r_()));
+                && r_());
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Extubation, object OxygenSupport)?> i_ = context.Operators.SelectWhere<ValueTuple<Encounter, Procedure, object>, (CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Extubation, object OxygenSupport)?>(f_, g_, h_);
@@ -3432,9 +3432,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return w_;
             }
 
-            return (bool?)(/* CQL 'and' (261:5-263:95) */ (/* CQL 'and' (261:11-262:73) */ ((CqlBoolean)p_
+            return /* CQL 'and' (261:5-263:95) */ (/* CQL 'and' (261:11-262:73) */ ((CqlBoolean)p_
                 && (CqlBoolean)(this.startsDuringHospitalization(context, tuple_ekminbgfrptfmgtchtshrgjuc?.Extubation, tuple_ekminbgfrptfmgtchtshrgjuc?.EncounterWithSurgery)))
-                && q_()));
+                && q_());
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Extubation, Procedure Anesthesia)?> i_ = context.Operators.SelectWhere<ValueTuple<Encounter, Procedure, Procedure>, (CqlTupleMetadata, Encounter EncounterWithSurgery, Procedure Extubation, Procedure Anesthesia)?>(f_, g_, h_);
@@ -3470,8 +3470,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return n_;
                 }
 
-                return (bool?)(/* CQL 'and' (681:19-682:49) */ ((CqlBoolean)h_
-                    && i_()));
+                return /* CQL 'and' (681:19-682:49) */ ((CqlBoolean)h_
+                    && i_());
             }
 
             bool? f_ = context.Operators.WhereAny<Location>(d_, e_);
@@ -3641,12 +3641,12 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                         && ar_())));
                 }
 
-                return (bool?)(/* CQL 'and' (181:17-188:70) */ (/* CQL 'and' (181:17-187:9) */ (/* CQL 'and' (181:17-184:155) */ (/* CQL 'and' (181:17-183:86) */ (/* CQL 'and' (181:17-182:71) */ ((CqlBoolean)l_
+                return /* CQL 'and' (181:17-188:70) */ (/* CQL 'and' (181:17-187:9) */ (/* CQL 'and' (181:17-184:155) */ (/* CQL 'and' (181:17-183:86) */ (/* CQL 'and' (181:17-182:71) */ ((CqlBoolean)l_
                     && (CqlBoolean)(this.isDuringHospitalization(context, Extubation, EncounterWithSurgery)))
                     && (CqlBoolean)(this.starts30DaysOrLessAfterFirstAnesthesia(context, Extubation, EncounterWithSurgery)))
                     && m_())
                     && n_())
-                    && (CqlBoolean)(this.isNotAtProceduralHospitalLocation(context, EncounterWithSurgery))));
+                    && (CqlBoolean)(this.isNotAtProceduralHospitalLocation(context, EncounterWithSurgery)));
             }
 
             bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
@@ -3958,13 +3958,13 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return !ci_;
                 }
 
-                return (bool?)(/* CQL 'and' (193:17-199:70) */ (/* CQL 'and' (193:17-198:210) */ (/* CQL 'and' (193:17-197:76) */ (/* CQL 'and' (193:17-196:87) */ (/* CQL 'and' (193:17-195:155) */ (/* CQL 'and' (193:17-194:155) */ ((CqlBoolean)k_
+                return /* CQL 'and' (193:17-199:70) */ (/* CQL 'and' (193:17-198:210) */ (/* CQL 'and' (193:17-197:76) */ (/* CQL 'and' (193:17-196:87) */ (/* CQL 'and' (193:17-195:155) */ (/* CQL 'and' (193:17-194:155) */ ((CqlBoolean)k_
                     && l_())
                     && m_())
                     && (CqlBoolean)(this.starts30DaysOrLessAfterFirstAnesthesia(context, Ventilation, EncounterWithSurgery)))
                     && (CqlBoolean)(this.startsDuringHospitalization(context, Ventilation, EncounterWithSurgery)))
                     && n_())
-                    && (CqlBoolean)(this.isNotAtProceduralHospitalLocation(context, EncounterWithSurgery))));
+                    && (CqlBoolean)(this.isNotAtProceduralHospitalLocation(context, EncounterWithSurgery)));
             }
 
             bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -4033,9 +4033,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return z_;
                 }
 
-                return (bool?)(/* CQL 'and' (738:9-742:11) */ (/* CQL 'and' (738:15-739:29) */ ((CqlBoolean)q_
+                return /* CQL 'and' (738:9-742:11) */ (/* CQL 'and' (738:15-739:29) */ ((CqlBoolean)q_
                     && r_())
-                    && s_()));
+                    && s_());
             }
 
             IEnumerable<Claim> g_ = context.Operators.Where<Claim>(e_, f_);
@@ -4087,9 +4087,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                         return bh_;
                     }
 
-                    return (bool?)(/* CQL 'and' (738:9-742:11) */ (/* CQL 'and' (738:15-739:29) */ ((CqlBoolean)ay_
+                    return /* CQL 'and' (738:9-742:11) */ (/* CQL 'and' (738:15-739:29) */ ((CqlBoolean)ay_
                         && az_())
-                        && ba_()));
+                        && ba_());
                 }
 
                 IEnumerable<Claim> ai_ = context.Operators.Where<Claim>(ag_, ah_);
@@ -4151,8 +4151,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return !((bool?)(bx_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (748:7-749:37) */ ((CqlBoolean)at_
-                    && au_()));
+                return /* CQL 'and' (748:7-749:37) */ ((CqlBoolean)at_
+                    && au_());
             }
 
             IEnumerable<Claim.DiagnosisComponent> m_ = context.Operators.Where<Claim.DiagnosisComponent>(k_, l_);
@@ -4222,9 +4222,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return t_;
                 }
 
-                return (bool?)(/* CQL 'and' (288:17-290:68) */ (/* CQL 'and' (288:17-289:72) */ ((CqlBoolean)o_
+                return /* CQL 'and' (288:17-290:68) */ (/* CQL 'and' (288:17-289:72) */ ((CqlBoolean)o_
                     && (CqlBoolean)(this.startsDuringHospitalization(context, ASAclass, QualifyingEncounter)))
-                    && p_()));
+                    && p_());
             }
 
             bool? j_ = context.Operators.WhereAny<Encounter>(h_, i_);
@@ -4285,9 +4285,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return w_;
                 }
 
-                return (bool?)(/* CQL 'and' (296:17-298:61) */ (/* CQL 'and' (296:17-297:33) */ ((CqlBoolean)n_
+                return /* CQL 'and' (296:17-298:61) */ (/* CQL 'and' (296:17-297:33) */ ((CqlBoolean)n_
                     && o_())
-                    && p_()));
+                    && p_());
             }
 
             bool? h_ = context.Operators.WhereAny<Encounter>(f_, g_);
@@ -4345,9 +4345,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     return ad_;
                 }
 
-                return (bool?)(/* CQL 'and' (723:11-727:13) */ (/* CQL 'and' (723:17-724:31) */ ((CqlBoolean)u_
+                return /* CQL 'and' (723:11-727:13) */ (/* CQL 'and' (723:17-724:31) */ ((CqlBoolean)u_
                     && v_())
-                    && w_()));
+                    && w_());
             }
 
             IEnumerable<Claim> h_ = context.Operators.Where<Claim>(f_, g_);
@@ -4422,8 +4422,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             EventStatus? k_ = j_?.Value;
             string l_ = context.Operators.Convert<string>(k_);
             bool? m_ = context.Operators.Equal(l_, "completed");
-            return (bool?)(/* CQL 'and' (305:5-306:74) */ ((CqlBoolean)m_
-                && (CqlBoolean)(this.startsDuringHospitalization(context, tuple_bbumigfyezrerewminccecat?.TheProcedure, tuple_bbumigfyezrerewminccecat?.QualifyingEncounter))));
+            return /* CQL 'and' (305:5-306:74) */ ((CqlBoolean)m_
+                && (CqlBoolean)(this.startsDuringHospitalization(context, tuple_bbumigfyezrerewminccecat?.TheProcedure, tuple_bbumigfyezrerewminccecat?.QualifyingEncounter)));
         }
 
         IEnumerable<(CqlTupleMetadata, Procedure TheProcedure, Encounter QualifyingEncounter)?> f_ = context.Operators.SelectWhere<ValueTuple<Procedure, Encounter>, (CqlTupleMetadata, Procedure TheProcedure, Encounter QualifyingEncounter)?>(c_, d_, e_);
@@ -4498,8 +4498,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (491:7-492:81) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstAlbuminTest, QualifyingEncounter))));
+            return /* CQL 'and' (491:7-492:81) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstAlbuminTest, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -4572,8 +4572,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         CqlDateTime c_ = QICoreCommon_4_0_000.Instance.earliest(context, b_);
         CqlInterval<CqlDateTime> d_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservationAndOutpatientSurgeryService(context, encounter);
         bool? e_ = context.Operators.In<CqlDateTime>(c_, d_, (string)default);
-        return (bool?)(/* CQL 'and' (704:3-705:36) */ ((CqlBoolean)e_
-            && (CqlBoolean)(!((bool?)(((IEnumerable<ResourceReference>)procedure?.PartOf) is null)))));
+        return /* CQL 'and' (704:3-705:36) */ ((CqlBoolean)e_
+            && (CqlBoolean)(!((bool?)(((IEnumerable<ResourceReference>)procedure?.PartOf) is null))));
     }
 
 
@@ -4617,8 +4617,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             return !((bool?)(k_ is null));
         }
 
-        return (bool?)(/* CQL 'and' (700:3-701:37) */ ((CqlBoolean)d_
-            && e_()));
+        return /* CQL 'and' (700:3-701:37) */ ((CqlBoolean)d_
+            && e_());
     }
 
 
@@ -4661,8 +4661,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (498:7-499:84) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstArterialpHTest, QualifyingEncounter))));
+            return /* CQL 'and' (498:7-499:84) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstArterialpHTest, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -4746,8 +4746,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (505:7-506:77) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstASTTest, QualifyingEncounter))));
+            return /* CQL 'and' (505:7-506:77) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstASTTest, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -4831,8 +4831,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (512:7-513:85) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstBicarbonateTest, QualifyingEncounter))));
+            return /* CQL 'and' (512:7-513:85) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstBicarbonateTest, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -4916,8 +4916,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (519:7-520:83) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstBilirubinTest, QualifyingEncounter))));
+            return /* CQL 'and' (519:7-520:83) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstBilirubinTest, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -5001,8 +5001,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (635:7-636:73) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstBUN, QualifyingEncounter))));
+            return /* CQL 'and' (635:7-636:73) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstBUN, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -5103,9 +5103,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return !((bool?)(w_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (526:7-528:43) */ (/* CQL 'and' (526:13-527:115) */ ((CqlBoolean)m_
+            return /* CQL 'and' (526:7-528:43) */ (/* CQL 'and' (526:13-527:115) */ ((CqlBoolean)m_
                 && n_())
-                && o_()));
+                && o_());
         }
 
         IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
@@ -5182,9 +5182,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return !((bool?)(x_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (534:7-536:46) */ (/* CQL 'and' (534:13-535:109) */ ((CqlBoolean)o_
+            return /* CQL 'and' (534:7-536:46) */ (/* CQL 'and' (534:13-535:109) */ ((CqlBoolean)o_
                 && p_())
-                && q_()));
+                && q_());
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -5243,8 +5243,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (542:7-543:87) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstCarbonDioxideTest, QualifyingEncounter))));
+            return /* CQL 'and' (542:7-543:87) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstCarbonDioxideTest, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -5328,8 +5328,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (549:7-550:84) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstCreatinineTest, QualifyingEncounter))));
+            return /* CQL 'and' (549:7-550:84) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstCreatinineTest, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -5431,9 +5431,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return !((bool?)(x_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (556:7-558:45) */ (/* CQL 'and' (556:13-557:108) */ ((CqlBoolean)o_
+            return /* CQL 'and' (556:7-558:45) */ (/* CQL 'and' (556:13-557:108) */ ((CqlBoolean)o_
                 && p_())
-                && q_()));
+                && q_());
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -5492,8 +5492,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (564:7-565:84) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstHematocritTest, QualifyingEncounter))));
+            return /* CQL 'and' (564:7-565:84) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstHematocritTest, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -5577,8 +5577,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (571:7-572:84) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstHemoglobinTest, QualifyingEncounter))));
+            return /* CQL 'and' (571:7-572:84) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstHemoglobinTest, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -5662,8 +5662,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (578:7-579:84) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstLeukocyteCount, QualifyingEncounter))));
+            return /* CQL 'and' (578:7-579:84) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstLeukocyteCount, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -5747,8 +5747,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (585:7-586:80) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstOxygenTest, QualifyingEncounter))));
+            return /* CQL 'and' (585:7-586:80) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstOxygenTest, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -5832,8 +5832,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (592:7-593:83) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstPlateletCount, QualifyingEncounter))));
+            return /* CQL 'and' (592:7-593:83) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstPlateletCount, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -5935,9 +5935,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return !((bool?)(x_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (599:7-601:46) */ (/* CQL 'and' (599:13-600:109) */ ((CqlBoolean)o_
+            return /* CQL 'and' (599:7-601:46) */ (/* CQL 'and' (599:13-600:109) */ ((CqlBoolean)o_
                 && p_())
-                && q_()));
+                && q_());
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -5996,8 +5996,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (607:7-608:80) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstSodiumTest, QualifyingEncounter))));
+            return /* CQL 'and' (607:7-608:80) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstSodiumTest, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -6090,8 +6090,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return q_;
             }
 
-            return (bool?)(/* CQL 'and' (618:7-619:103) */ ((CqlBoolean)k_
-                && l_()));
+            return /* CQL 'and' (618:7-619:103) */ ((CqlBoolean)k_
+                && l_());
         }
 
 
@@ -6190,8 +6190,8 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 "corrected",
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-            return (bool?)(/* CQL 'and' (628:7-629:78) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstWBCCount, QualifyingEncounter))));
+            return /* CQL 'and' (628:7-629:78) */ ((CqlBoolean)n_
+                && (CqlBoolean)(this.isEarliestDuringHospitalization(context, FirstWBCCount, QualifyingEncounter)));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -6282,9 +6282,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             EventStatus? k_ = j_?.Value;
             string l_ = context.Operators.Convert<string>(k_);
             bool? m_ = context.Operators.Equal(l_, "completed");
-            return (bool?)(/* CQL 'and' (459:5-461:74) */ (/* CQL 'and' (459:11-460:63) */ ((CqlBoolean)m_
+            return /* CQL 'and' (459:5-461:74) */ (/* CQL 'and' (459:11-460:63) */ ((CqlBoolean)m_
                 && (CqlBoolean)(!((bool?)((this.rank(context, tuple_bbumigfyezrerewminccecat?.TheProcedure, tuple_bbumigfyezrerewminccecat?.QualifyingEncounter)) is null))))
-                && (CqlBoolean)(this.startsDuringHospitalization(context, tuple_bbumigfyezrerewminccecat?.TheProcedure, tuple_bbumigfyezrerewminccecat?.QualifyingEncounter))));
+                && (CqlBoolean)(this.startsDuringHospitalization(context, tuple_bbumigfyezrerewminccecat?.TheProcedure, tuple_bbumigfyezrerewminccecat?.QualifyingEncounter)));
         }
 
         IEnumerable<(CqlTupleMetadata, Procedure TheProcedure, Encounter QualifyingEncounter)?> f_ = context.Operators.SelectWhere<ValueTuple<Procedure, Encounter>, (CqlTupleMetadata, Procedure TheProcedure, Encounter QualifyingEncounter)?>(c_, d_, e_);
@@ -6390,9 +6390,9 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return ad_;
             }
 
-            return (bool?)(/* CQL 'and' (661:7-665:57) */ (/* CQL 'and' (661:13-664:9) */ ((CqlBoolean)k_
+            return /* CQL 'and' (661:7-665:57) */ (/* CQL 'and' (661:13-664:9) */ ((CqlBoolean)k_
                 && l_())
-                && m_()));
+                && m_());
         }
 
         IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);

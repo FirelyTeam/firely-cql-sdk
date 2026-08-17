@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS951FHIRKidneyHealthEval", "1.0.000")]
 public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<CMS951FHIRKidneyHealthEval_1_0_000>
 {
@@ -214,8 +214,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     || m_());
             }
 
-            return (bool?)(/* CQL 'and' (63:5-67:7) */ ((CqlBoolean)i_
-                && j_()));
+            return /* CQL 'and' (63:5-67:7) */ ((CqlBoolean)i_
+                && j_());
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -266,8 +266,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 return ae_;
             }
 
-            return (bool?)(/* CQL 'and' (90:7-91:46) */ ((CqlBoolean)z_
-                && aa_()));
+            return /* CQL 'and' (90:7-91:46) */ ((CqlBoolean)z_
+                && aa_());
         }
 
         bool? v_ = context.Operators.WhereAny<Encounter>(t_, u_);
@@ -293,9 +293,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(18, 85, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        return (bool?)(/* CQL 'and' (45:3-47:56) */ (/* CQL 'and' (45:3-46:66) */ ((CqlBoolean)j_
+        return /* CQL 'and' (45:3-47:56) */ (/* CQL 'and' (45:3-46:66) */ ((CqlBoolean)j_
             && (CqlBoolean)(this.Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period(context)))
-            && (CqlBoolean)(this.Has_Outpatient_Visit_During_Measurement_Period(context))));
+            && (CqlBoolean)(this.Has_Outpatient_Visit_During_Measurement_Period(context)));
     }
 
 
@@ -363,8 +363,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     || r_());
             }
 
-            return (bool?)(/* CQL 'and' (76:5-80:7) */ ((CqlBoolean)n_
-                && o_()));
+            return /* CQL 'and' (76:5-80:7) */ ((CqlBoolean)n_
+                && o_());
         }
 
         bool? k_ = context.Operators.WhereAny<Condition>(i_, j_);
@@ -381,9 +381,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = this.Has_CKD_Stage_5_Or_ESRD_Diagnosis_Overlaps_Measurement_Period(context);
-        return (bool?)(/* CQL 'or' (53:3-55:69) */ (/* CQL 'or' (53:3-54:37) */ ((CqlBoolean)a_
+        return /* CQL 'or' (53:3-55:69) */ (/* CQL 'or' (53:3-54:37) */ ((CqlBoolean)a_
             || (CqlBoolean)(Hospice_6_18_000.Instance.Has_Hospice_Services(context)))
-            || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))));
+            || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context)));
     }
 
 
@@ -425,9 +425,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 return r_;
             }
 
-            return (bool?)(/* CQL 'and' (102:7-104:66) */ (/* CQL 'and' (102:13-103:38) */ ((CqlBoolean)i_
+            return /* CQL 'and' (102:7-104:66) */ (/* CQL 'and' (102:13-103:38) */ ((CqlBoolean)i_
                 && j_())
-                && k_()));
+                && k_());
         }
 
         bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -484,9 +484,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     || t_());
             }
 
-            return (bool?)(/* CQL 'and' (109:7-113:9) */ (/* CQL 'and' (109:13-110:66) */ ((CqlBoolean)i_
+            return /* CQL 'and' (109:7-113:9) */ (/* CQL 'and' (109:13-110:66) */ ((CqlBoolean)i_
                 && j_())
-                && k_()));
+                && k_());
         }
 
         bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -532,9 +532,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 return r_;
             }
 
-            return (bool?)(/* CQL 'and' (127:5-129:67) */ (/* CQL 'and' (127:11-128:39) */ ((CqlBoolean)i_
+            return /* CQL 'and' (127:5-129:67) */ (/* CQL 'and' (127:11-128:39) */ ((CqlBoolean)i_
                 && j_())
-                && k_()));
+                && k_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -580,9 +580,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 return r_;
             }
 
-            return (bool?)(/* CQL 'and' (133:5-135:70) */ (/* CQL 'and' (133:11-134:42) */ ((CqlBoolean)i_
+            return /* CQL 'and' (133:5-135:70) */ (/* CQL 'and' (133:11-134:42) */ ((CqlBoolean)i_
                 && j_())
-                && k_()));
+                && k_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -654,8 +654,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 || (CqlBoolean)(this.Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart(context)));
         }
 
-        return (bool?)(/* CQL 'and' (95:3-98:5) */ ((CqlBoolean)a_
-            && b_()));
+        return /* CQL 'and' (95:3-98:5) */ ((CqlBoolean)a_
+            && b_());
     }
 
 

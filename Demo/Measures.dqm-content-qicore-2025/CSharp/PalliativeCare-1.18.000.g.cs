@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("PalliativeCare", "1.18.000")]
 public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCare_1_18_000>
 {
@@ -196,10 +196,10 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
             return al_;
         }
 
-        return (bool?)(/* CQL 'or' (22:3-34:5) */ (/* CQL 'or' (22:3-31:5) */ (/* CQL 'or' (22:3-28:5) */ ((CqlBoolean)f_
+        return /* CQL 'or' (22:3-34:5) */ (/* CQL 'or' (22:3-31:5) */ (/* CQL 'or' (22:3-28:5) */ ((CqlBoolean)f_
             || g_())
             || h_())
-            || i_()));
+            || i_());
     }
 
 

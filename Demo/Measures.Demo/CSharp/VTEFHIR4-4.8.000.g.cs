@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("VTEFHIR4", "4.8.000")]
 public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
 {
@@ -107,8 +107,8 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
                 return t_;
             }
 
-            return (bool?)(/* CQL 'and' (23:6-24:57) */ ((CqlBoolean)m_
-                && n_()));
+            return /* CQL 'and' (23:6-24:57) */ ((CqlBoolean)m_
+                && n_());
         }
 
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);

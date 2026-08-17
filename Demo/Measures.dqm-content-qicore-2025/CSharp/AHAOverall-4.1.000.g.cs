@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("AHAOverall", "4.1.000")]
 public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_000>
 {
@@ -202,8 +202,8 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 || k_());
         }
 
-        return (bool?)(/* CQL 'implies' (166:3-170:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_()));
+        return /* CQL 'implies' (166:3-170:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
+            || c_());
     }
 
 
@@ -234,8 +234,8 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 || i_());
         }
 
-        return (bool?)(/* CQL 'implies' (249:3-251:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_()));
+        return /* CQL 'implies' (249:3-251:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
+            || c_());
     }
 
 
@@ -273,8 +273,8 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 Period m_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                 bool? o_ = context.Operators.Overlaps(l_, n_, "day");
-                return (bool?)(/* CQL 'and' (44:17-45:39) */ ((CqlBoolean)o_
-                    && (CqlBoolean)(this.isVerified(context, HeartFailure))));
+                return /* CQL 'and' (44:17-45:39) */ ((CqlBoolean)o_
+                    && (CqlBoolean)(this.isVerified(context, HeartFailure)));
             }
 
             bool? k_ = context.Operators.WhereAny<Condition>(i_, j_);
@@ -288,8 +288,8 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             Period q_ = QualifyingEncounter?.Period;
             CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
             bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, r_, "day");
-            return (bool?)(/* CQL 'and' (46:5-47:53) */ ((CqlBoolean)s_
-                && (CqlBoolean)(this.isEncounterFinished(context, QualifyingEncounter))));
+            return /* CQL 'and' (46:5-47:53) */ ((CqlBoolean)s_
+                && (CqlBoolean)(this.isEncounterFinished(context, QualifyingEncounter)));
         }
 
         IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
@@ -328,8 +328,8 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 return ac_;
             }
 
-            return (bool?)(/* CQL 'and' (134:7-135:74) */ ((CqlBoolean)w_
-                && x_()));
+            return /* CQL 'and' (134:7-135:74) */ ((CqlBoolean)w_
+                && x_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -607,8 +607,8 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             Period e_ = ValidEncounter?.Period;
             CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
             bool? g_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(d_, f_, "day");
-            return (bool?)(/* CQL 'and' (102:5-103:48) */ ((CqlBoolean)g_
-                && (CqlBoolean)(this.isEncounterFinished(context, ValidEncounter))));
+            return /* CQL 'and' (102:5-103:48) */ ((CqlBoolean)g_
+                && (CqlBoolean)(this.isEncounterFinished(context, ValidEncounter)));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -745,9 +745,9 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             return x_;
         }
 
-        return (bool?)(/* CQL 'and' (154:3-159:51) */ (/* CQL 'and' (154:3-158:5) */ ((CqlBoolean)i_
+        return /* CQL 'and' (154:3-159:51) */ (/* CQL 'and' (154:3-158:5) */ ((CqlBoolean)i_
             && j_())
-            && k_()));
+            && k_());
     }
 
 
@@ -809,18 +809,18 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                         return af_;
                     }
 
-                    return (bool?)(/* CQL 'and' (187:13-188:58) */ ((CqlBoolean)z_
-                        && aa_()));
+                    return /* CQL 'and' (187:13-188:58) */ ((CqlBoolean)z_
+                        && aa_());
                 }
 
                 bool? x_ = context.Operators.WhereAny<Task>(v_, w_);
                 return !x_;
             }
 
-            return (bool?)(/* CQL 'and' (183:7-189:9) */ (/* CQL 'and' (183:13-185:119) */ (/* CQL 'and' (183:13-184:65) */ ((CqlBoolean)h_
+            return /* CQL 'and' (183:7-189:9) */ (/* CQL 'and' (183:13-185:119) */ (/* CQL 'and' (183:13-184:65) */ ((CqlBoolean)h_
                 && i_())
                 && j_())
-                && k_()));
+                && k_());
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -886,18 +886,18 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                         return af_;
                     }
 
-                    return (bool?)(/* CQL 'and' (201:13-202:58) */ ((CqlBoolean)z_
-                        && aa_()));
+                    return /* CQL 'and' (201:13-202:58) */ ((CqlBoolean)z_
+                        && aa_());
                 }
 
                 bool? x_ = context.Operators.WhereAny<Task>(v_, w_);
                 return !x_;
             }
 
-            return (bool?)(/* CQL 'and' (197:7-203:9) */ (/* CQL 'and' (197:13-199:119) */ (/* CQL 'and' (197:13-198:65) */ ((CqlBoolean)h_
+            return /* CQL 'and' (197:7-203:9) */ (/* CQL 'and' (197:13-199:119) */ (/* CQL 'and' (197:13-198:65) */ ((CqlBoolean)h_
                 && i_())
                 && j_())
-                && k_()));
+                && k_());
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -916,8 +916,8 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             Period e_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
             CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
             bool? g_ = context.Operators.Overlaps(d_, f_, "day");
-            return (bool?)(/* CQL 'and' (211:7-212:36) */ ((CqlBoolean)g_
-                && (CqlBoolean)(this.isVerified(context, Condition))));
+            return /* CQL 'and' (211:7-212:36) */ ((CqlBoolean)g_
+                && (CqlBoolean)(this.isVerified(context, Condition)));
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -937,8 +937,8 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             Period e_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
             CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
             bool? g_ = context.Operators.OverlapsAfter(d_, f_, "day");
-            return (bool?)(/* CQL 'and' (221:7-222:36) */ ((CqlBoolean)g_
-                && (CqlBoolean)(this.isVerified(context, Condition))));
+            return /* CQL 'and' (221:7-222:36) */ ((CqlBoolean)g_
+                && (CqlBoolean)(this.isVerified(context, Condition)));
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -1003,8 +1003,8 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 return s_;
             }
 
-            return (bool?)(/* CQL 'and' (231:7-232:42) */ ((CqlBoolean)h_
-                && i_()));
+            return /* CQL 'and' (231:7-232:42) */ ((CqlBoolean)h_
+                && i_());
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -1030,8 +1030,8 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             Period k_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
             CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
             bool? m_ = context.Operators.OverlapsAfter(j_, l_, "day");
-            return (bool?)(/* CQL 'and' (241:7-242:45) */ ((CqlBoolean)m_
-                && (CqlBoolean)(this.isVerified(context, AllergyIntolerance))));
+            return /* CQL 'and' (241:7-242:45) */ ((CqlBoolean)m_
+                && (CqlBoolean)(this.isVerified(context, AllergyIntolerance)));
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -1156,18 +1156,18 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                         return bf_;
                     }
 
-                    return (bool?)(/* CQL 'and' (267:13-268:58) */ ((CqlBoolean)az_
-                        && ba_()));
+                    return /* CQL 'and' (267:13-268:58) */ ((CqlBoolean)az_
+                        && ba_());
                 }
 
                 bool? ax_ = context.Operators.WhereAny<Task>(av_, aw_);
                 return !ax_;
             }
 
-            return (bool?)(/* CQL 'and' (259:7-269:9) */ (/* CQL 'and' (259:13-265:119) */ (/* CQL 'and' (259:13-264:65) */ ((CqlBoolean)v_
+            return /* CQL 'and' (259:7-269:9) */ (/* CQL 'and' (259:13-265:119) */ (/* CQL 'and' (259:13-264:65) */ ((CqlBoolean)v_
                 && w_())
                 && x_())
-                && y_()));
+                && y_());
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -1203,8 +1203,8 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 return o_;
             }
 
-            return (bool?)(/* CQL 'and' (278:7-279:78) */ ((CqlBoolean)i_
-                && j_()));
+            return /* CQL 'and' (278:7-279:78) */ ((CqlBoolean)i_
+                && j_());
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);

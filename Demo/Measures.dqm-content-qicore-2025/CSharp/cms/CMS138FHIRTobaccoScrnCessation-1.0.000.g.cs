@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS138FHIRTobaccoScrnCessation", "1.0.000")]
 public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISingleton<CMS138FHIRTobaccoScrnCessation_1_0_000>
 {
@@ -437,8 +437,8 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 || n_());
         }
 
-        return (bool?)(/* CQL 'and' (64:3-67:5) */ ((CqlBoolean)i_
-            && j_()));
+        return /* CQL 'and' (64:3-67:5) */ ((CqlBoolean)i_
+            && j_());
     }
 
 
@@ -514,8 +514,8 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_2_Compute(CqlContext context)
     {
         bool? a_ = this.Initial_Population(context);
-        return (bool?)(/* CQL 'and' (57:3-58:78) */ ((CqlBoolean)a_
-            && (CqlBoolean)(!((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null)))));
+        return /* CQL 'and' (57:3-58:78) */ ((CqlBoolean)a_
+            && (CqlBoolean)(!((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null))));
     }
 
 
@@ -591,8 +591,8 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     private bool? Numerator_1_Compute(CqlContext context)
     {
         Observation a_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User(context);
-        return (bool?)(/* CQL 'or' (70:3-71:77) */ ((CqlBoolean)(!((bool?)(a_ is null)))
-            || (CqlBoolean)(!((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null)))));
+        return /* CQL 'or' (70:3-71:77) */ ((CqlBoolean)(!((bool?)(a_ is null)))
+            || (CqlBoolean)(!((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null))));
     }
 
 
@@ -711,8 +711,8 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                     return v_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)q_
-                    && r_()));
+                return /* CQL 'and' */ ((CqlBoolean)q_
+                    && r_());
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -752,16 +752,16 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                         return aq_;
                     }
 
-                    return (bool?)(/* CQL 'and' (109:11-110:43) */ ((CqlBoolean)ak_
-                        && al_()));
+                    return /* CQL 'and' (109:11-110:43) */ ((CqlBoolean)ak_
+                        && al_());
                 }
 
                 bool? ai_ = context.Operators.WhereAny<Task>(ag_, ah_);
                 return !ai_;
             }
 
-            return (bool?)(/* CQL 'and' (107:5-111:7) */ ((CqlBoolean)ae_
-                && af_()));
+            return /* CQL 'and' (107:5-111:7) */ ((CqlBoolean)ae_
+                && af_());
         }
 
         IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
@@ -797,8 +797,8 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                     return v_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)q_
-                    && r_()));
+                return /* CQL 'and' */ ((CqlBoolean)q_
+                    && r_());
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -859,9 +859,9 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             return h_;
         }
 
-        return (bool?)(/* CQL 'or' (74:3-76:60) */ (/* CQL 'or' (74:3-75:57) */ ((CqlBoolean)b_
+        return /* CQL 'or' (74:3-76:60) */ (/* CQL 'or' (74:3-75:57) */ ((CqlBoolean)b_
             || c_())
-            || d_()));
+            || d_());
     }
 
 
@@ -904,8 +904,8 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 && d_());
         }
 
-        return (bool?)(/* CQL 'or' (79:3-85:5) */ ((CqlBoolean)(!((bool?)(a_ is null)))
-            || b_()));
+        return /* CQL 'or' (79:3-85:5) */ ((CqlBoolean)(!((bool?)(a_ is null)))
+            || b_());
     }
 
 

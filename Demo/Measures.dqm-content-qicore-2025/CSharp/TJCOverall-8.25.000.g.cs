@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("TJCOverall", "8.25.000")]
 public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_000>
 {
@@ -117,8 +117,8 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 return t_;
             }
 
-            return (bool?)(/* CQL 'and' (25:9-26:80) */ ((CqlBoolean)n_
-                && o_()));
+            return /* CQL 'and' (25:9-26:80) */ ((CqlBoolean)n_
+                && o_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -203,11 +203,11 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 return af_;
             }
 
-            return (bool?)(/* CQL 'or' (35:4-39:71) */ (/* CQL 'or' (35:11-38:55) */ (/* CQL 'or' (35:11-37:35) */ (/* CQL 'or' (35:11-36:47) */ ((CqlBoolean)h_
+            return /* CQL 'or' (35:4-39:71) */ (/* CQL 'or' (35:11-38:55) */ (/* CQL 'or' (35:11-37:35) */ (/* CQL 'or' (35:11-36:47) */ ((CqlBoolean)h_
                 || i_())
                 || j_())
                 || k_())
-                || l_()));
+                || l_());
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -254,8 +254,8 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 return u_;
             }
 
-            return (bool?)(/* CQL 'and' (48:5-49:111) */ ((CqlBoolean)n_
-                && o_()));
+            return /* CQL 'and' (48:5-49:111) */ ((CqlBoolean)n_
+                && o_());
         }
 
         IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);

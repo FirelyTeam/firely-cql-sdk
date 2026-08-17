@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("NCQAClaims", "1.0.0")]
 public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 {
@@ -50,8 +50,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 return m_;
             }
 
-            return (bool?)(/* CQL 'or' (14:5-16:5) */ ((CqlBoolean)g_
-                || h_()));
+            return /* CQL 'or' (14:5-16:5) */ ((CqlBoolean)g_
+                || h_());
         }
 
         IEnumerable<Claim> b_ = context.Operators.Where<Claim>(claim, a_);
@@ -97,8 +97,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 return m_;
             }
 
-            return (bool?)(/* CQL 'or' (24:5-26:5) */ ((CqlBoolean)g_
-                || h_()));
+            return /* CQL 'or' (24:5-26:5) */ ((CqlBoolean)g_
+                || h_());
         }
 
         IEnumerable<ClaimResponse> b_ = context.Operators.Where<ClaimResponse>(claimResponse, a_);
@@ -190,8 +190,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             return an_;
                         }
 
-                        return (bool?)(/* CQL 'and' (45:11-51:11) */ ((CqlBoolean)ae_
-                            && af_()));
+                        return /* CQL 'and' (45:11-51:11) */ ((CqlBoolean)ae_
+                            && af_());
                     }
 
                     IEnumerable<Claim.ItemComponent> z_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)x_, y_);
@@ -341,8 +341,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             return ar_;
                         }
 
-                        return (bool?)(/* CQL 'or' (74:11-79:13) */ ((CqlBoolean)ab_
-                            || ac_()));
+                        return /* CQL 'or' (74:11-79:13) */ ((CqlBoolean)ab_
+                            || ac_());
                     }
 
                     IEnumerable<Claim.ItemComponent> w_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)u_, v_);
@@ -911,8 +911,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 return ci_;
                             }
 
-                            return (bool?)(/* CQL 'or' (173:13-179:13) */ ((CqlBoolean)bp_
-                                || bq_()));
+                            return /* CQL 'or' (173:13-179:13) */ ((CqlBoolean)bp_
+                                || bq_());
                         }
 
                         IEnumerable<Claim> bc_ = context.Operators.Where<Claim>((IEnumerable<Claim>)ba_, bb_);
@@ -1090,8 +1090,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             return bf_;
                         }
 
-                        return (bool?)(/* CQL 'or' (204:11-209:13) */ ((CqlBoolean)ak_
-                            || al_()));
+                        return /* CQL 'or' (204:11-209:13) */ ((CqlBoolean)ak_
+                            || al_());
                     }
 
                     IEnumerable<Claim> z_ = context.Operators.Where<Claim>((IEnumerable<Claim>)x_, y_);
@@ -1147,8 +1147,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                         return cp_;
                                     }
 
-                                    return (bool?)(/* CQL 'and' (217:19-220:21) */ ((CqlBoolean)ck_
-                                        && cl_()));
+                                    return /* CQL 'and' (217:19-220:21) */ ((CqlBoolean)ck_
+                                        && cl_());
                                 }
 
                                 bool? cg_ = context.Operators.WhereAny<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)ce_, cf_);
@@ -1265,8 +1265,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             return ad_;
                         }
 
-                        return (bool?)(/* CQL 'and' (244:13-247:15) */ ((CqlBoolean)y_
-                            && z_()));
+                        return /* CQL 'and' (244:13-247:15) */ ((CqlBoolean)y_
+                            && z_());
                     }
 
                     bool? u_ = context.Operators.WhereAny<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)s_, t_);
@@ -1432,8 +1432,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 return ao_;
                             }
 
-                            return (bool?)(/* CQL 'and' (313:29-314:79) */ ((CqlBoolean)ag_
-                                && ah_()));
+                            return /* CQL 'and' (313:29-314:79) */ ((CqlBoolean)ag_
+                                && ah_());
                         }
 
                         bool? y_ = context.Operators.WhereAny<ClaimResponse.ItemComponent>(w_, x_);
@@ -1635,8 +1635,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         return at_;
                     }
 
-                    return (bool?)(/* CQL 'and' (434:13-440:13) */ ((CqlBoolean)af_
-                        && ag_()));
+                    return /* CQL 'and' (434:13-440:13) */ ((CqlBoolean)af_
+                        && ag_());
                 }
 
                 IEnumerable<ClaimResponse.ItemComponent> u_ = context.Operators.Where<ClaimResponse.ItemComponent>((IEnumerable<ClaimResponse.ItemComponent>)s_, t_);
@@ -1738,8 +1738,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 return ag_;
             }
 
-            return (bool?)(/* CQL 'and' (446:5-451:7) */ ((CqlBoolean)n_
-                && o_()));
+            return /* CQL 'and' (446:5-451:7) */ ((CqlBoolean)n_
+                && o_());
         }
 
 
@@ -1852,8 +1852,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 return ao_;
                             }
 
-                            return (bool?)(/* CQL 'and' (342:29-343:79) */ ((CqlBoolean)ag_
-                                && ah_()));
+                            return /* CQL 'and' (342:29-343:79) */ ((CqlBoolean)ag_
+                                && ah_());
                         }
 
                         bool? y_ = context.Operators.WhereAny<ClaimResponse.ItemComponent>(w_, x_);
@@ -2041,8 +2041,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 return ag_;
             }
 
-            return (bool?)(/* CQL 'or' (464:5-469:7) */ ((CqlBoolean)n_
-                || o_()));
+            return /* CQL 'or' (464:5-469:7) */ ((CqlBoolean)n_
+                || o_());
         }
 
 
@@ -2190,8 +2190,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 return ao_;
                             }
 
-                            return (bool?)(/* CQL 'and' (371:29-372:79) */ ((CqlBoolean)ag_
-                                && ah_()));
+                            return /* CQL 'and' (371:29-372:79) */ ((CqlBoolean)ag_
+                                && ah_());
                         }
 
                         bool? y_ = context.Operators.WhereAny<ClaimResponse.ItemComponent>(w_, x_);
@@ -2459,8 +2459,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 return ao_;
                             }
 
-                            return (bool?)(/* CQL 'and' (400:29-401:79) */ ((CqlBoolean)ag_
-                                && ah_()));
+                            return /* CQL 'and' (400:29-401:79) */ ((CqlBoolean)ag_
+                                && ah_());
                         }
 
                         bool? y_ = context.Operators.WhereAny<ClaimResponse.ItemComponent>(w_, x_);
@@ -2772,8 +2772,8 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         return at_;
                     }
 
-                    return (bool?)(/* CQL 'or' (535:11-541:13) */ ((CqlBoolean)ag_
-                        || ah_()));
+                    return /* CQL 'or' (535:11-541:13) */ ((CqlBoolean)ag_
+                        || ah_());
                 }
 
                 IEnumerable<Claim> ad_ = context.Operators.Where<Claim>(ab_, ac_);
@@ -2974,9 +2974,9 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             return !((bool?)(cj_ is null));
                         }
 
-                        return (bool?)(/* CQL 'and' (579:19-581:49) */ (/* CQL 'and' (579:25-580:73) */ ((CqlBoolean)ca_
+                        return /* CQL 'and' (579:19-581:49) */ (/* CQL 'and' (579:25-580:73) */ ((CqlBoolean)ca_
                             && cb_())
-                            && cc_()));
+                            && cc_());
                     }
 
 
@@ -3009,9 +3009,9 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             return (bool?)(cw_ is null);
                         }
 
-                        return (bool?)(/* CQL 'and' (585:19-587:45) */ (/* CQL 'and' (585:25-586:73) */ ((CqlBoolean)cn_
+                        return /* CQL 'and' (585:19-587:45) */ (/* CQL 'and' (585:25-586:73) */ ((CqlBoolean)cn_
                             && co_())
-                            && cp_()));
+                            && cp_());
                     }
 
                     Identifier bv_(Identifier l) => l;
@@ -3257,9 +3257,9 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             return !((bool?)(cl_ is null));
                         }
 
-                        return (bool?)(/* CQL 'and' (635:19-637:49) */ (/* CQL 'and' (635:25-636:73) */ ((CqlBoolean)cc_
+                        return /* CQL 'and' (635:19-637:49) */ (/* CQL 'and' (635:25-636:73) */ ((CqlBoolean)cc_
                             && cd_())
-                            && ce_()));
+                            && ce_());
                     }
 
 
@@ -3292,9 +3292,9 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             return (bool?)(cy_ is null);
                         }
 
-                        return (bool?)(/* CQL 'and' (641:19-643:45) */ (/* CQL 'and' (641:25-642:73) */ ((CqlBoolean)cp_
+                        return /* CQL 'and' (641:19-643:45) */ (/* CQL 'and' (641:25-642:73) */ ((CqlBoolean)cp_
                             && cq_())
-                            && cr_()));
+                            && cr_());
                     }
 
                     Identifier bx_(Identifier l) => l;

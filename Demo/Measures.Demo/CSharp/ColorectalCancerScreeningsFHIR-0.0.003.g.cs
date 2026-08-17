@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("ColorectalCancerScreeningsFHIR", "0.0.003")]
 public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISingleton<ColorectalCancerScreeningsFHIR_0_0_003>
 {
@@ -277,8 +277,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 return o_;
             }
 
-            return (bool?)(/* CQL 'and' (74:13-75:104) */ ((CqlBoolean)j_
-                && k_()));
+            return /* CQL 'and' (74:13-75:104) */ ((CqlBoolean)j_
+                && k_());
         }
 
         IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
@@ -333,8 +333,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             return o_;
         }
 
-        return (bool?)(/* CQL 'and' (83:3-86:5) */ ((CqlBoolean)j_
-            && k_()));
+        return /* CQL 'and' (83:3-86:5) */ ((CqlBoolean)j_
+            && k_());
     }
 
 
@@ -402,8 +402,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 return n_;
             }
 
-            return (bool?)(/* CQL 'and' (110:13-112:41) */ ((CqlBoolean)g_
-                && h_()));
+            return /* CQL 'and' (110:13-112:41) */ ((CqlBoolean)g_
+                && h_());
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -481,13 +481,13 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 && (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context)));
         }
 
-        return (bool?)(/* CQL 'or' (93:3-101:73) */ (/* CQL 'or' (93:3-100:13) */ (/* CQL 'or' (93:3-97:92) */ (/* CQL 'or' (93:3-96:49) */ (/* CQL 'or' (93:3-95:49) */ (/* CQL 'or' (93:3-94:42) */ ((CqlBoolean)a_
+        return /* CQL 'or' (93:3-101:73) */ (/* CQL 'or' (93:3-100:13) */ (/* CQL 'or' (93:3-97:92) */ (/* CQL 'or' (93:3-96:49) */ (/* CQL 'or' (93:3-95:49) */ (/* CQL 'or' (93:3-94:42) */ ((CqlBoolean)a_
             || b_())
             || c_())
             || d_())
             || (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)))
             || e_())
-            || (CqlBoolean)(PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context))));
+            || (CqlBoolean)(PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context)));
     }
 
 
@@ -658,10 +658,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 return ad_;
             }
 
-            return (bool?)(/* CQL 'and' (137:13-141:87) */ (/* CQL 'and' (137:19-140:47) */ (/* CQL 'and' (137:19-139:83) */ ((CqlBoolean)h_
+            return /* CQL 'and' (137:13-141:87) */ (/* CQL 'and' (137:19-140:47) */ (/* CQL 'and' (137:19-139:83) */ ((CqlBoolean)h_
                 && i_())
                 && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
-                && j_()));
+                && j_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -741,10 +741,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 return ad_;
             }
 
-            return (bool?)(/* CQL 'and' (146:13-150:94) */ (/* CQL 'and' (146:19-149:47) */ (/* CQL 'and' (146:19-148:83) */ ((CqlBoolean)h_
+            return /* CQL 'and' (146:13-150:94) */ (/* CQL 'and' (146:19-149:47) */ (/* CQL 'and' (146:19-148:83) */ ((CqlBoolean)h_
                 && i_())
                 && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
-                && j_()));
+                && j_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -811,9 +811,9 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 return y_;
             }
 
-            return (bool?)(/* CQL 'and' (156:13-162:94) */ (/* CQL 'and' (159:15-161:47) */ ((CqlBoolean)g_
+            return /* CQL 'and' (156:13-162:94) */ (/* CQL 'and' (159:15-161:47) */ ((CqlBoolean)g_
                 && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
-                && h_()));
+                && h_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -850,9 +850,9 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 return m_;
             }
 
-            return (bool?)(/* CQL 'and' (167:13-171:94) */ (/* CQL 'and' (167:19-170:47) */ ((CqlBoolean)!h_
+            return /* CQL 'and' (167:13-171:94) */ (/* CQL 'and' (167:19-170:47) */ ((CqlBoolean)!h_
                 && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
-                && i_()));
+                && i_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -887,8 +887,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 return !((bool?)(q_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (179:5-180:33) */ ((CqlBoolean)n_
-                && o_()));
+            return /* CQL 'and' (179:5-180:33) */ ((CqlBoolean)n_
+                && o_());
         }
 
 
@@ -1046,10 +1046,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                     && ai_());
             }
 
-            return (bool?)(/* CQL 'and' (191:13-196:41) */ (/* CQL 'and' (191:19-194:42) */ (/* CQL 'and' (191:19-193:78) */ ((CqlBoolean)h_
+            return /* CQL 'and' (191:13-196:41) */ (/* CQL 'and' (191:19-194:42) */ (/* CQL 'and' (191:19-193:78) */ ((CqlBoolean)h_
                 && i_())
                 && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
-                && j_()));
+                && j_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1141,10 +1141,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                     && ai_());
             }
 
-            return (bool?)(/* CQL 'and' (201:13-206:48) */ (/* CQL 'and' (201:19-204:42) */ (/* CQL 'and' (201:19-203:78) */ ((CqlBoolean)h_
+            return /* CQL 'and' (201:13-206:48) */ (/* CQL 'and' (201:19-204:42) */ (/* CQL 'and' (201:19-203:78) */ ((CqlBoolean)h_
                 && i_())
                 && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
-                && j_()));
+                && j_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1223,9 +1223,9 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                     && ad_());
             }
 
-            return (bool?)(/* CQL 'and' (212:13-219:48) */ (/* CQL 'and' (215:15-217:42) */ ((CqlBoolean)g_
+            return /* CQL 'and' (212:13-219:48) */ (/* CQL 'and' (215:15-217:42) */ ((CqlBoolean)g_
                 && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
-                && h_()));
+                && h_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1274,9 +1274,9 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                     && r_());
             }
 
-            return (bool?)(/* CQL 'and' (224:13-229:48) */ (/* CQL 'and' (224:19-227:42) */ ((CqlBoolean)!h_
+            return /* CQL 'and' (224:13-229:48) */ (/* CQL 'and' (224:19-227:42) */ ((CqlBoolean)!h_
                 && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
-                && i_()));
+                && i_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1312,8 +1312,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 return !((bool?)(r_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (238:13-239:41) */ ((CqlBoolean)o_
-                && p_()));
+            return /* CQL 'and' (238:13-239:41) */ ((CqlBoolean)o_
+                && p_());
         }
 
 
@@ -1372,8 +1372,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                     && s_());
             }
 
-            return (bool?)(/* CQL 'and' (244:13-246:41) */ ((CqlBoolean)h_
-                && i_()));
+            return /* CQL 'and' (244:13-246:41) */ ((CqlBoolean)h_
+                && i_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1424,8 +1424,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                     && s_());
             }
 
-            return (bool?)(/* CQL 'and' (251:13-253:41) */ ((CqlBoolean)!h_
-                && i_()));
+            return /* CQL 'and' (251:13-253:41) */ ((CqlBoolean)!h_
+                && i_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1461,8 +1461,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 return !((bool?)(r_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (262:5-263:33) */ ((CqlBoolean)o_
-                && p_()));
+            return /* CQL 'and' (262:5-263:33) */ ((CqlBoolean)o_
+                && p_());
         }
 
 
@@ -1515,8 +1515,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                     && r_());
             }
 
-            return (bool?)(/* CQL 'and' (268:13-270:41) */ ((CqlBoolean)g_
-                && h_()));
+            return /* CQL 'and' (268:13-270:41) */ ((CqlBoolean)g_
+                && h_());
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1561,8 +1561,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                     && r_());
             }
 
-            return (bool?)(/* CQL 'and' (275:13-277:41) */ ((CqlBoolean)!g_
-                && h_()));
+            return /* CQL 'and' (275:13-277:41) */ ((CqlBoolean)!g_
+                && h_());
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1598,8 +1598,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 return !((bool?)(r_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (286:5-287:33) */ ((CqlBoolean)o_
-                && p_()));
+            return /* CQL 'and' (286:5-287:33) */ ((CqlBoolean)o_
+                && p_());
         }
 
 
@@ -1652,8 +1652,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                     && r_());
             }
 
-            return (bool?)(/* CQL 'and' (292:13-294:41) */ ((CqlBoolean)g_
-                && h_()));
+            return /* CQL 'and' (292:13-294:41) */ ((CqlBoolean)g_
+                && h_());
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1698,8 +1698,8 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                     && r_());
             }
 
-            return (bool?)(/* CQL 'and' (299:13-301:41) */ ((CqlBoolean)!g_
-                && h_()));
+            return /* CQL 'and' (299:13-301:41) */ ((CqlBoolean)!g_
+                && h_());
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1745,11 +1745,11 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             return n_;
         }
 
-        return (bool?)(/* CQL 'or' (304:3-308:49) */ (/* CQL 'or' (304:3-307:63) */ (/* CQL 'or' (304:3-306:56) */ (/* CQL 'or' (304:3-305:57) */ ((CqlBoolean)b_
+        return /* CQL 'or' (304:3-308:49) */ (/* CQL 'or' (304:3-307:63) */ (/* CQL 'or' (304:3-306:56) */ (/* CQL 'or' (304:3-305:57) */ ((CqlBoolean)b_
             || c_())
             || d_())
             || e_())
-            || f_()));
+            || f_());
     }
 
 
@@ -1762,10 +1762,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
     private bool? Final_Numerator_Population_Compute(CqlContext context)
     {
         bool? a_ = this.Numerator(context);
-        return (bool?)(/* CQL 'and' (312:3-315:34) */ (/* CQL 'and' (312:3-314:19) */ (/* CQL 'and' (312:3-313:26) */ ((CqlBoolean)a_
+        return /* CQL 'and' (312:3-315:34) */ (/* CQL 'and' (312:3-314:19) */ (/* CQL 'and' (312:3-313:26) */ ((CqlBoolean)a_
             && (CqlBoolean)(this.Initial_Population(context)))
             && (CqlBoolean)(this.Denominator(context)))
-            && (CqlBoolean)(!(this.Denominator_Exclusions(context)))));
+            && (CqlBoolean)(!(this.Denominator_Exclusions(context))));
     }
 
 

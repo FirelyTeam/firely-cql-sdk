@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS816FHIRHHHypo", "1.0.000")]
 public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRHHHypo_1_0_000>
 {
@@ -113,9 +113,9 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
                 return y_;
             }
 
-            return (bool?)(/* CQL 'and' (58:5-60:48) */ (/* CQL 'and' (58:11-59:75) */ ((CqlBoolean)n_
+            return /* CQL 'and' (58:5-60:48) */ (/* CQL 'and' (58:11-59:75) */ ((CqlBoolean)n_
                 && o_())
-                && p_()));
+                && p_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -151,8 +151,8 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
                     return u_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)p_
-                    && q_()));
+                return /* CQL 'and' */ ((CqlBoolean)p_
+                    && q_());
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -412,10 +412,10 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
                     && ar_());
             }
 
-            return (bool?)(/* CQL 'and' (40:5-43:90) */ (/* CQL 'and' (40:11-42:40) */ (/* CQL 'and' (40:11-41:67) */ ((CqlBoolean)o_
+            return /* CQL 'and' (40:5-43:90) */ (/* CQL 'and' (40:11-42:40) */ (/* CQL 'and' (40:11-41:67) */ ((CqlBoolean)o_
                 && p_())
                 && q_())
-                && r_()));
+                && r_());
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter InpatientHospitalization, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?> h_ = context.Operators.SelectWhere<ValueTuple<Encounter, MedicationAdministration, Observation>, (CqlTupleMetadata, Encounter InpatientHospitalization, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?>(e_, f_, g_);
@@ -670,13 +670,13 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
                 return bw_;
             }
 
-            return (bool?)(/* CQL 'and' (86:5-91:48) */ (/* CQL 'and' (86:11-90:75) */ (/* CQL 'and' (86:11-89:53) */ (/* CQL 'and' (86:11-88:100) */ (/* CQL 'and' (86:11-87:92) */ (/* CQL 'and' (86:11-86:73) */ ((CqlBoolean)u_
+            return /* CQL 'and' (86:5-91:48) */ (/* CQL 'and' (86:11-90:75) */ (/* CQL 'and' (86:11-89:53) */ (/* CQL 'and' (86:11-88:100) */ (/* CQL 'and' (86:11-87:92) */ (/* CQL 'and' (86:11-86:73) */ ((CqlBoolean)u_
                 && v_())
                 && w_())
                 && x_())
                 && y_())
                 && z_())
-                && aa_()));
+                && aa_());
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter InpatientHospitalization, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?> h_ = context.Operators.SelectWhere<ValueTuple<Encounter, Observation, Observation>, (CqlTupleMetadata, Encounter InpatientHospitalization, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?>(e_, f_, g_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("BreastCancerScreeningsFHIR", "0.0.009")]
 public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<BreastCancerScreeningsFHIR_0_0_009>
 {
@@ -183,8 +183,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 return o_;
             }
 
-            return (bool?)(/* CQL 'and' (50:19-51:110) */ ((CqlBoolean)j_
-                && k_()));
+            return /* CQL 'and' (50:19-51:110) */ ((CqlBoolean)j_
+                && k_());
         }
 
         IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
@@ -248,9 +248,9 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
             return t_;
         }
 
-        return (bool?)(/* CQL 'and' (58:3-62:19) */ (/* CQL 'and' (58:3-59:47) */ ((CqlBoolean)j_
+        return /* CQL 'and' (58:3-62:19) */ (/* CQL 'and' (58:3-59:47) */ ((CqlBoolean)j_
             && k_())
-            && l_()));
+            && l_());
     }
 
 
@@ -337,8 +337,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 return n_;
             }
 
-            return (bool?)(/* CQL 'and' (154:19-156:47) */ ((CqlBoolean)g_
-                && h_()));
+            return /* CQL 'and' (154:19-156:47) */ ((CqlBoolean)g_
+                && h_());
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -416,8 +416,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 return n_;
             }
 
-            return (bool?)(/* CQL 'and' (168:19-170:47) */ ((CqlBoolean)g_
-                && h_()));
+            return /* CQL 'and' (168:19-170:47) */ ((CqlBoolean)g_
+                && h_());
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -476,8 +476,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 return n_;
             }
 
-            return (bool?)(/* CQL 'and' (179:19-181:47) */ ((CqlBoolean)g_
-                && h_()));
+            return /* CQL 'and' (179:19-181:47) */ ((CqlBoolean)g_
+                && h_());
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -554,13 +554,13 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 && (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context)));
         }
 
-        return (bool?)(/* CQL 'or' (68:3-83:17) */ (/* CQL 'or' (68:5-81:21) */ (/* CQL 'or' (68:5-78:104) */ (/* CQL 'or' (68:5-77:62) */ (/* CQL 'or' (68:5-76:62) */ (/* CQL 'or' (68:5-75:21) */ ((CqlBoolean)a_
+        return /* CQL 'or' (68:3-83:17) */ (/* CQL 'or' (68:5-81:21) */ (/* CQL 'or' (68:5-78:104) */ (/* CQL 'or' (68:5-77:62) */ (/* CQL 'or' (68:5-76:62) */ (/* CQL 'or' (68:5-75:21) */ ((CqlBoolean)a_
             || b_())
             || c_())
             || d_())
             || (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)))
             || e_())
-            || (CqlBoolean)(PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context))));
+            || (CqlBoolean)(PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context)));
     }
 
 
@@ -607,8 +607,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     && s_());
             }
 
-            return (bool?)(/* CQL 'and' (111:21-114:23) */ ((CqlBoolean)h_
-                && i_()));
+            return /* CQL 'and' (111:21-114:23) */ ((CqlBoolean)h_
+                && i_());
         }
 
         bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -659,8 +659,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     && s_());
             }
 
-            return (bool?)(/* CQL 'and' (129:21-132:23) */ ((CqlBoolean)h_
-                && i_()));
+            return /* CQL 'and' (129:21-132:23) */ ((CqlBoolean)h_
+                && i_());
         }
 
         bool? d_ = context.Operators.WhereAny<DiagnosticReport>(b_, c_);
@@ -677,8 +677,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     private bool? Numerator_Compute(CqlContext context)
     {
         bool? a_ = this.Observation_with_status(context);
-        return (bool?)(/* CQL 'or' (98:3-99:38) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Diagnostic_Report_with_status(context))));
+        return /* CQL 'or' (98:3-99:38) */ ((CqlBoolean)a_
+            || (CqlBoolean)(this.Diagnostic_Report_with_status(context)));
     }
 
 
@@ -691,10 +691,10 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     private bool? Final_Numerator_Population_Compute(CqlContext context)
     {
         bool? a_ = this.Numerator(context);
-        return (bool?)(/* CQL 'and' (103:3-106:34) */ (/* CQL 'and' (103:3-105:19) */ (/* CQL 'and' (103:3-104:26) */ ((CqlBoolean)a_
+        return /* CQL 'and' (103:3-106:34) */ (/* CQL 'and' (103:3-105:19) */ (/* CQL 'and' (103:3-104:26) */ ((CqlBoolean)a_
             && (CqlBoolean)(this.Initial_Population(context)))
             && (CqlBoolean)(this.Denominator(context)))
-            && (CqlBoolean)(!(this.Denominator_Exclusions(context)))));
+            && (CqlBoolean)(!(this.Denominator_Exclusions(context))));
     }
 
 
@@ -741,8 +741,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     && s_());
             }
 
-            return (bool?)(/* CQL 'and' (120:21-123:23) */ ((CqlBoolean)!h_
-                && i_()));
+            return /* CQL 'and' (120:21-123:23) */ ((CqlBoolean)!h_
+                && i_());
         }
 
         bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -793,8 +793,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     && s_());
             }
 
-            return (bool?)(/* CQL 'and' (138:21-141:23) */ ((CqlBoolean)!h_
-                && i_()));
+            return /* CQL 'and' (138:21-141:23) */ ((CqlBoolean)!h_
+                && i_());
         }
 
         bool? d_ = context.Operators.WhereAny<DiagnosticReport>(b_, c_);

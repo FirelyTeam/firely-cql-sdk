@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.0.010")]
 public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, ISingleton<DischargedonAntithromboticTherapyFHIR_0_0_010>
 {
@@ -185,8 +185,8 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                         return ai_;
                     }
 
-                    return (bool?)(/* CQL 'or' (87:11-88:63) */ ((CqlBoolean)ad_
-                        || ae_()));
+                    return /* CQL 'or' (87:11-88:63) */ ((CqlBoolean)ad_
+                        || ae_());
                 }
 
                 bool? z_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)x_, y_);
@@ -213,11 +213,11 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 return ap_;
             }
 
-            return (bool?)(/* CQL 'and' (82:5-91:52) */ (/* CQL 'and' (82:11-90:74) */ (/* CQL 'and' (82:11-89:7) */ (/* CQL 'and' (82:11-85:7) */ ((CqlBoolean)((bool?)(/* CQL 'is true' (82:11-82:56) */ f_ is true))
+            return /* CQL 'and' (82:5-91:52) */ (/* CQL 'and' (82:11-90:74) */ (/* CQL 'and' (82:11-89:7) */ (/* CQL 'and' (82:11-85:7) */ ((CqlBoolean)((bool?)(/* CQL 'is true' (82:11-82:56) */ f_ is true))
                 && g_())
                 && h_())
                 && i_())
-                && j_()));
+                && j_());
         }
 
         IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(b_, c_);
@@ -288,8 +288,8 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                         return u_;
                     }
 
-                    return (bool?)(/* CQL 'or' (97:11-98:63) */ ((CqlBoolean)p_
-                        || q_()));
+                    return /* CQL 'or' (97:11-98:63) */ ((CqlBoolean)p_
+                        || q_());
                 }
 
                 bool? l_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)j_, k_);
@@ -316,10 +316,10 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 return ab_;
             }
 
-            return (bool?)(/* CQL 'and' (95:5-101:42) */ (/* CQL 'and' (95:11-100:61) */ (/* CQL 'and' (95:11-99:7) */ ((CqlBoolean)(!((bool?)(/* CQL 'is true' (95:11-95:50) */ f_ is true)))
+            return /* CQL 'and' (95:5-101:42) */ (/* CQL 'and' (95:11-100:61) */ (/* CQL 'and' (95:11-99:7) */ ((CqlBoolean)(!((bool?)(/* CQL 'is true' (95:11-95:50) */ f_ is true)))
                 && g_())
                 && h_())
-                && i_()));
+                && i_());
         }
 
         IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(b_, c_);
@@ -433,8 +433,8 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                         return u_;
                     }
 
-                    return (bool?)(/* CQL 'or' (74:11-75:63) */ ((CqlBoolean)p_
-                        || q_()));
+                    return /* CQL 'or' (74:11-75:63) */ ((CqlBoolean)p_
+                        || q_());
                 }
 
                 bool? l_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)j_, k_);
@@ -461,10 +461,10 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 return ab_;
             }
 
-            return (bool?)(/* CQL 'and' (72:5-78:41) */ (/* CQL 'and' (72:11-77:60) */ (/* CQL 'and' (72:11-76:7) */ ((CqlBoolean)(!((bool?)(/* CQL 'is true' (72:11-72:49) */ f_ is true)))
+            return /* CQL 'and' (72:5-78:41) */ (/* CQL 'and' (72:11-77:60) */ (/* CQL 'and' (72:11-76:7) */ ((CqlBoolean)(!((bool?)(/* CQL 'is true' (72:11-72:49) */ f_ is true)))
                 && g_())
                 && h_())
-                && i_()));
+                && i_());
         }
 
         IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(b_, c_);

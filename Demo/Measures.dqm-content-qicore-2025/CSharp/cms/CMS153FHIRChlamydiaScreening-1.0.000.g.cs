@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS153FHIRChlamydiaScreening", "1.0.000")]
 public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton<CMS153FHIRChlamydiaScreening_1_0_000>
 {
@@ -311,8 +311,8 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 return q_;
             }
 
-            return (bool?)(/* CQL 'and' (170:7-171:102) */ ((CqlBoolean)k_
-                && l_()));
+            return /* CQL 'and' (170:7-171:102) */ ((CqlBoolean)k_
+                && l_());
         }
 
         bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
@@ -384,8 +384,8 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     return v_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)q_
-                    && r_()));
+                return /* CQL 'and' */ ((CqlBoolean)q_
+                    && r_());
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -445,8 +445,8 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     return v_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)q_
-                    && r_()));
+                return /* CQL 'and' */ ((CqlBoolean)q_
+                    && r_());
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -527,8 +527,8 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         }
 
         bool? e_ = context.Operators.WhereAny<ServiceRequest>(c_, d_);
-        return (bool?)(/* CQL 'or' (112:3-115:75) */ ((CqlBoolean)e_
-            || (CqlBoolean)(this.Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy(context))));
+        return /* CQL 'or' (112:3-115:75) */ ((CqlBoolean)e_
+            || (CqlBoolean)(this.Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy(context)));
     }
 
 
@@ -688,10 +688,10 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 || (CqlBoolean)(this.Has_Procedures_Identifying_Sexual_Activity(context)));
         }
 
-        return (bool?)(/* CQL 'and' (59:3-71:5) */ (/* CQL 'and' (59:3-63:42) */ (/* CQL 'and' (59:3-62:33) */ ((CqlBoolean)j_
+        return /* CQL 'and' (59:3-71:5) */ (/* CQL 'and' (59:3-63:42) */ (/* CQL 'and' (59:3-62:33) */ ((CqlBoolean)j_
             && k_())
             && l_())
-            && m_()));
+            && m_());
     }
 
 
@@ -747,8 +747,8 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     return !((bool?)(ai_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (143:21-143:136) */ ((CqlBoolean)ad_
-                    && ae_()));
+                return /* CQL 'and' (143:21-143:136) */ ((CqlBoolean)ad_
+                    && ae_());
             }
 
             bool? r_ = context.Operators.WhereAny<ServiceRequest>(p_, q_);
@@ -789,8 +789,8 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                         return bj_;
                     }
 
-                    return (bool?)(/* CQL 'and' */ ((CqlBoolean)be_
-                        && bf_()));
+                    return /* CQL 'and' */ ((CqlBoolean)be_
+                        && bf_());
                 }
 
                 bool? az_ = context.Operators.WhereAny<Medication>(ax_, ay_);
@@ -825,8 +825,8 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     return !((bool?)(ca_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (148:21-148:145) */ ((CqlBoolean)bv_
-                    && bw_()));
+                return /* CQL 'and' (148:21-148:145) */ ((CqlBoolean)bv_
+                    && bw_());
             }
 
             bool? aw_ = context.Operators.WhereAny<MedicationRequest>(au_, av_);
@@ -873,8 +873,8 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 && (CqlBoolean)(!(this.Has_Procedures_Identifying_Sexual_Activity(context))));
         }
 
-        return (bool?)(/* CQL 'or' (129:3-138:5) */ ((CqlBoolean)a_
-            || b_()));
+        return /* CQL 'or' (129:3-138:5) */ ((CqlBoolean)a_
+            || b_());
     }
 
 
@@ -928,8 +928,8 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 return !((bool?)(p_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (154:7-155:43) */ ((CqlBoolean)i_
-                && j_()));
+            return /* CQL 'and' (154:7-155:43) */ ((CqlBoolean)i_
+                && j_());
         }
 
         bool? e_ = context.Operators.WhereAny<Observation>(c_, d_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS122FHIRDiabetesAssessGT9Pct", "1.0.000")]
 public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISingleton<CMS122FHIRDiabetesAssessGT9Pct_1_0_000>
 {
@@ -405,9 +405,9 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             return u_;
         }
 
-        return (bool?)(/* CQL 'and' (52:3-58:5) */ (/* CQL 'and' (52:3-55:38) */ ((CqlBoolean)j_
+        return /* CQL 'and' (52:3-58:5) */ (/* CQL 'and' (52:3-55:38) */ ((CqlBoolean)j_
             && k_())
-            && l_()));
+            && l_());
     }
 
 
@@ -433,10 +433,10 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        return (bool?)(/* CQL 'or' (64:3-67:69) */ (/* CQL 'or' (64:3-66:73) */ (/* CQL 'or' (64:3-65:74) */ ((CqlBoolean)a_
+        return /* CQL 'or' (64:3-67:69) */ (/* CQL 'or' (64:3-66:73) */ (/* CQL 'or' (64:3-65:74) */ ((CqlBoolean)a_
             || (CqlBoolean)(AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context)))
             || (CqlBoolean)(AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context)))
-            || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))));
+            || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context)));
     }
 
 
@@ -630,8 +630,8 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             return (bool?)(e_ is null);
         }
 
-        return (bool?)(/* CQL 'and' (133:3-134:84) */ ((CqlBoolean)(!((bool?)(a_ is null)))
-            && b_()));
+        return /* CQL 'and' (133:3-134:84) */ ((CqlBoolean)(!((bool?)(a_ is null)))
+            && b_());
     }
 
 
@@ -675,9 +675,9 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
     private bool? Numerator_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Most_Recent_Glycemic_Status_Assessment_Without_Result(context);
-        return (bool?)(/* CQL 'or' (70:3-72:52) */ (/* CQL 'or' (70:3-71:60) */ ((CqlBoolean)a_
+        return /* CQL 'or' (70:3-72:52) */ (/* CQL 'or' (70:3-71:60) */ ((CqlBoolean)a_
             || (CqlBoolean)(this.Has_Most_Recent_Elevated_Glycemic_Status_Assessment(context)))
-            || (CqlBoolean)(this.Has_No_Record_Of_Glycemic_Status_Assessment(context))));
+            || (CqlBoolean)(this.Has_No_Record_Of_Glycemic_Status_Assessment(context)));
     }
 
 

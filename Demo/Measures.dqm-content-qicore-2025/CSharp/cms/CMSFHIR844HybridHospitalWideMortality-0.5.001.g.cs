@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMSFHIR844HybridHospitalWideMortality", "0.5.001")]
 public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, ISingleton<CMSFHIR844HybridHospitalWideMortality_0_5_001>
 {
@@ -183,10 +183,10 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return ak_;
                 }
 
-                return (bool?)(/* CQL 'and' (40:17-43:77) */ (/* CQL 'and' (40:17-42:90) */ (/* CQL 'and' (40:17-41:50) */ ((CqlBoolean)n_
+                return /* CQL 'and' (40:17-43:77) */ (/* CQL 'and' (40:17-42:90) */ (/* CQL 'and' (40:17-41:50) */ ((CqlBoolean)n_
                     && o_())
                     && p_())
-                    && q_()));
+                    && q_());
             }
 
             bool? k_ = context.Operators.WhereAny<Coverage>(i_, j_);
@@ -253,9 +253,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(aj_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (48:9-50:43) */ (/* CQL 'and' (48:15-49:71) */ ((CqlBoolean)aa_
+                return /* CQL 'and' (48:9-50:43) */ (/* CQL 'and' (48:15-49:71) */ ((CqlBoolean)aa_
                     && ab_())
-                    && ac_()));
+                    && ac_());
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -299,9 +299,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(ba_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (48:9-50:43) */ (/* CQL 'and' (48:15-49:71) */ ((CqlBoolean)ar_
+                return /* CQL 'and' (48:9-50:43) */ (/* CQL 'and' (48:15-49:71) */ ((CqlBoolean)ar_
                     && as_())
-                    && at_()));
+                    && at_());
             }
 
             IEnumerable<Observation> o_ = context.Operators.Where<Observation>(f_, n_);
@@ -369,9 +369,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(aj_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (62:9-64:41) */ (/* CQL 'and' (62:15-63:69) */ ((CqlBoolean)aa_
+                return /* CQL 'and' (62:9-64:41) */ (/* CQL 'and' (62:15-63:69) */ ((CqlBoolean)aa_
                     && ab_())
-                    && ac_()));
+                    && ac_());
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -415,9 +415,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(ba_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (62:9-64:41) */ (/* CQL 'and' (62:15-63:69) */ ((CqlBoolean)ar_
+                return /* CQL 'and' (62:9-64:41) */ (/* CQL 'and' (62:15-63:69) */ ((CqlBoolean)ar_
                     && as_())
-                    && at_()));
+                    && at_());
             }
 
             IEnumerable<Observation> o_ = context.Operators.Where<Observation>(f_, n_);
@@ -486,9 +486,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(ak_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (76:9-78:44) */ (/* CQL 'and' (76:15-77:72) */ ((CqlBoolean)ab_
+                return /* CQL 'and' (76:9-78:44) */ (/* CQL 'and' (76:15-77:72) */ ((CqlBoolean)ab_
                     && ac_())
-                    && ad_()));
+                    && ad_());
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -532,9 +532,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(bb_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (76:9-78:44) */ (/* CQL 'and' (76:15-77:72) */ ((CqlBoolean)as_
+                return /* CQL 'and' (76:9-78:44) */ (/* CQL 'and' (76:15-77:72) */ ((CqlBoolean)as_
                     && at_())
-                    && au_()));
+                    && au_());
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -616,9 +616,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(ao_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (90:9-92:44) */ (/* CQL 'and' (90:15-91:62) */ ((CqlBoolean)ad_
+                return /* CQL 'and' (90:9-92:44) */ (/* CQL 'and' (90:15-91:62) */ ((CqlBoolean)ad_
                     && ae_())
-                    && af_()));
+                    && af_());
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -694,9 +694,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(bs_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (90:9-92:44) */ (/* CQL 'and' (90:15-91:62) */ ((CqlBoolean)bh_
+                return /* CQL 'and' (90:9-92:44) */ (/* CQL 'and' (90:15-91:62) */ ((CqlBoolean)bh_
                     && bi_())
-                    && bj_()));
+                    && bj_());
             }
 
             IEnumerable<Observation> r_ = context.Operators.Where<Observation>(f_, q_);
@@ -790,9 +790,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(an_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (106:9-108:46) */ (/* CQL 'and' (106:15-107:74) */ ((CqlBoolean)aa_
+                return /* CQL 'and' (106:9-108:46) */ (/* CQL 'and' (106:15-107:74) */ ((CqlBoolean)aa_
                     && ab_())
-                    && ac_()));
+                    && ac_());
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -862,9 +862,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(bi_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (106:9-108:46) */ (/* CQL 'and' (106:15-107:74) */ ((CqlBoolean)av_
+                return /* CQL 'and' (106:9-108:46) */ (/* CQL 'and' (106:15-107:74) */ ((CqlBoolean)av_
                     && aw_())
-                    && ax_()));
+                    && ax_());
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -959,9 +959,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(an_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (120:9-122:45) */ (/* CQL 'and' (120:15-121:73) */ ((CqlBoolean)aa_
+                return /* CQL 'and' (120:9-122:45) */ (/* CQL 'and' (120:15-121:73) */ ((CqlBoolean)aa_
                     && ab_())
-                    && ac_()));
+                    && ac_());
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -1031,9 +1031,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(bi_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (120:9-122:45) */ (/* CQL 'and' (120:15-121:73) */ ((CqlBoolean)av_
+                return /* CQL 'and' (120:9-122:45) */ (/* CQL 'and' (120:15-121:73) */ ((CqlBoolean)av_
                     && aw_())
-                    && ax_()));
+                    && ax_());
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -1128,9 +1128,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(an_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (134:9-136:45) */ (/* CQL 'and' (134:15-135:73) */ ((CqlBoolean)aa_
+                return /* CQL 'and' (134:9-136:45) */ (/* CQL 'and' (134:15-135:73) */ ((CqlBoolean)aa_
                     && ab_())
-                    && ac_()));
+                    && ac_());
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -1200,9 +1200,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(bi_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (134:9-136:45) */ (/* CQL 'and' (134:15-135:73) */ ((CqlBoolean)av_
+                return /* CQL 'and' (134:9-136:45) */ (/* CQL 'and' (134:15-135:73) */ ((CqlBoolean)av_
                     && aw_())
-                    && ax_()));
+                    && ax_());
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -1297,9 +1297,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(an_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (148:9-150:43) */ (/* CQL 'and' (148:15-149:71) */ ((CqlBoolean)aa_
+                return /* CQL 'and' (148:9-150:43) */ (/* CQL 'and' (148:15-149:71) */ ((CqlBoolean)aa_
                     && ab_())
-                    && ac_()));
+                    && ac_());
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -1369,9 +1369,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(bi_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (148:9-150:43) */ (/* CQL 'and' (148:15-149:71) */ ((CqlBoolean)av_
+                return /* CQL 'and' (148:9-150:43) */ (/* CQL 'and' (148:15-149:71) */ ((CqlBoolean)av_
                     && aw_())
-                    && ax_()));
+                    && ax_());
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -1466,9 +1466,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(an_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (162:9-164:41) */ (/* CQL 'and' (162:15-163:69) */ ((CqlBoolean)aa_
+                return /* CQL 'and' (162:9-164:41) */ (/* CQL 'and' (162:15-163:69) */ ((CqlBoolean)aa_
                     && ab_())
-                    && ac_()));
+                    && ac_());
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -1538,9 +1538,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(bi_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (162:9-164:41) */ (/* CQL 'and' (162:15-163:69) */ ((CqlBoolean)av_
+                return /* CQL 'and' (162:9-164:41) */ (/* CQL 'and' (162:15-163:69) */ ((CqlBoolean)av_
                     && aw_())
-                    && ax_()));
+                    && ax_());
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -1635,9 +1635,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(an_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (176:9-178:49) */ (/* CQL 'and' (176:15-177:77) */ ((CqlBoolean)aa_
+                return /* CQL 'and' (176:9-178:49) */ (/* CQL 'and' (176:15-177:77) */ ((CqlBoolean)aa_
                     && ab_())
-                    && ac_()));
+                    && ac_());
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -1707,9 +1707,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return !((bool?)(bi_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (176:9-178:49) */ (/* CQL 'and' (176:15-177:77) */ ((CqlBoolean)av_
+                return /* CQL 'and' (176:9-178:49) */ (/* CQL 'and' (176:15-177:77) */ ((CqlBoolean)av_
                     && aw_())
-                    && ax_()));
+                    && ax_());
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -1808,10 +1808,10 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return av_;
                 }
 
-                return (bool?)(/* CQL 'and' (191:9-195:49) */ (/* CQL 'and' (191:15-194:68) */ (/* CQL 'or' (191:15-193:9) */ ((CqlBoolean)t_
+                return /* CQL 'and' (191:9-195:49) */ (/* CQL 'and' (191:15-194:68) */ (/* CQL 'or' (191:15-193:9) */ ((CqlBoolean)t_
                     || u_())
                     && v_())
-                    && w_()));
+                    && w_());
             }
 
 
@@ -1948,9 +1948,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                         return cz_;
                     }
 
-                    return (bool?)(/* CQL 'and' (203:11-206:54) */ (/* CQL 'or' (203:17-205:11) */ ((CqlBoolean)br_
+                    return /* CQL 'and' (203:11-206:54) */ (/* CQL 'or' (203:17-205:11) */ ((CqlBoolean)br_
                         || bs_())
-                        && bt_()));
+                        && bt_());
                 }
 
 
@@ -2010,8 +2010,8 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 return bk_;
             }
 
-            return (bool?)(/* CQL 'or' (189:5-213:7) */ ((CqlBoolean)m_
-                || n_()));
+            return /* CQL 'or' (189:5-213:7) */ ((CqlBoolean)m_
+                || n_());
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);

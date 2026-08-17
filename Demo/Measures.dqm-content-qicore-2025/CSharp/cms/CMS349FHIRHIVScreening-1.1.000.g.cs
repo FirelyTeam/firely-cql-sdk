@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS349FHIRHIVScreening", "1.1.000")]
 public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS349FHIRHIVScreening_1_1_000>
 {
@@ -139,8 +139,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                 return y_;
             }
 
-            return (bool?)(/* CQL 'and' (52:5-53:39) */ ((CqlBoolean)t_
-                && u_()));
+            return /* CQL 'and' (52:5-53:39) */ ((CqlBoolean)t_
+                && u_());
         }
 
         IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
@@ -173,8 +173,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
             return m_;
         }
 
-        return (bool?)(/* CQL 'and' (27:3-28:38) */ ((CqlBoolean)j_
-            && k_()));
+        return /* CQL 'and' (27:3-28:38) */ ((CqlBoolean)j_
+            && k_());
     }
 
 
@@ -267,10 +267,10 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                     || al_());
             }
 
-            return (bool?)(/* CQL 'and' (61:5-67:7) */ (/* CQL 'and' (61:11-63:91) */ (/* CQL 'and' (61:11-62:93) */ ((CqlBoolean)(!((bool?)(j_ is null)))
+            return /* CQL 'and' (61:5-67:7) */ (/* CQL 'and' (61:11-63:91) */ (/* CQL 'and' (61:11-62:93) */ ((CqlBoolean)(!((bool?)(j_ is null)))
                 && k_())
                 && l_())
-                && m_()));
+                && m_());
         }
 
         bool? h_ = context.Operators.WhereAny<Observation>(f_, g_);
@@ -340,8 +340,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                 || k_());
         }
 
-        return (bool?)(/* CQL 'implies' (87:3-91:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_()));
+        return /* CQL 'implies' (87:3-91:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
+            || c_());
     }
 
 
@@ -364,8 +364,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
             CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
             CqlDateTime j_ = context.Operators.Start(i_);
             bool? k_ = context.Operators.Before(h_, j_, "day");
-            return (bool?)(/* CQL 'and' (39:7-40:39) */ ((CqlBoolean)k_
-                && (CqlBoolean)(this.isVerified(context, HIVDiagnosis))));
+            return /* CQL 'and' (39:7-40:39) */ ((CqlBoolean)k_
+                && (CqlBoolean)(this.isVerified(context, HIVDiagnosis)));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);

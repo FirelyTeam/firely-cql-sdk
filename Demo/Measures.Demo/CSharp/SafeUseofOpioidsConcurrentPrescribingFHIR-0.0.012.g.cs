@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("SafeUseofOpioidsConcurrentPrescribingFHIR", "0.0.012")]
 public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrary, ISingleton<SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012>
 {
@@ -132,8 +132,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 return q_;
             }
 
-            return (bool?)(/* CQL 'and' (31:28-32:71) */ ((CqlBoolean)m_
-                && n_()));
+            return /* CQL 'and' (31:28-32:71) */ ((CqlBoolean)m_
+                && n_());
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -176,8 +176,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         return ah_;
                     }
 
-                    return (bool?)(/* CQL 'and' */ ((CqlBoolean)ac_
-                        && ad_()));
+                    return /* CQL 'and' */ ((CqlBoolean)ac_
+                        && ad_());
                 }
 
                 bool? v_ = context.Operators.WhereAny<Medication>(t_, u_);
@@ -209,8 +209,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         return aw_;
                     }
 
-                    return (bool?)(/* CQL 'and' */ ((CqlBoolean)ar_
-                        && as_()));
+                    return /* CQL 'and' */ ((CqlBoolean)ar_
+                        && as_());
                 }
 
                 bool? ak_ = context.Operators.WhereAny<Medication>(ai_, aj_);
@@ -260,9 +260,9 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     return bq_;
                 }
 
-                return (bool?)(/* CQL 'and' (51:39-52:143) */ (/* CQL 'and' (51:39-52:80) */ ((CqlBoolean)bi_
+                return /* CQL 'and' (51:39-52:143) */ (/* CQL 'and' (51:39-52:80) */ ((CqlBoolean)bi_
                     && bj_())
-                    && bk_()));
+                    && bk_());
             }
 
             bool? s_ = context.Operators.WhereAny<MedicationRequest>(q_, r_);
@@ -461,8 +461,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         return ac_;
                     }
 
-                    return (bool?)(/* CQL 'and' (78:33-79:81) */ ((CqlBoolean)y_
-                        && z_()));
+                    return /* CQL 'and' (78:33-79:81) */ ((CqlBoolean)y_
+                        && z_());
                 }
 
                 bool? t_ = context.Operators.WhereAny<ServiceRequest>(r_, s_);
@@ -517,19 +517,19 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         return bf_;
                     }
 
-                    return (bool?)(/* CQL 'or' (85:33-87:113) */ (/* CQL 'or' (85:39-86:132) */ ((CqlBoolean)at_
+                    return /* CQL 'or' (85:33-87:113) */ (/* CQL 'or' (85:39-86:132) */ ((CqlBoolean)at_
                         || au_())
-                        || av_()));
+                        || av_());
                 }
 
                 bool? ao_ = context.Operators.WhereAny<Encounter>(am_, an_);
                 return ao_;
             }
 
-            return (bool?)(/* CQL 'or' (73:27-88:29) */ (/* CQL 'or' (73:33-83:29) */ (/* CQL 'or' (73:33-80:29) */ ((CqlBoolean)i_
+            return /* CQL 'or' (73:27-88:29) */ (/* CQL 'or' (73:33-83:29) */ (/* CQL 'or' (73:33-80:29) */ ((CqlBoolean)i_
                 || j_())
                 || k_())
-                || l_()));
+                || l_());
         }
 
         Encounter c_(Encounter InpatientEncounter) => InpatientEncounter;

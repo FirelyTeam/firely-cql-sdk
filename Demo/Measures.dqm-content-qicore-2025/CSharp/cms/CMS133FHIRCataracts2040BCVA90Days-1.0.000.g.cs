@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS133FHIRCataracts2040BCVA90Days", "1.0.000")]
 public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISingleton<CMS133FHIRCataracts2040BCVA90Days_1_0_000>
 {
@@ -414,9 +414,9 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 return ah_;
             }
 
-            return (bool?)(/* CQL 'and' (86:5-88:46) */ (/* CQL 'and' (86:11-87:115) */ ((CqlBoolean)h_
+            return /* CQL 'and' (86:5-88:46) */ (/* CQL 'and' (86:11-87:115) */ ((CqlBoolean)h_
                 && i_())
-                && j_()));
+                && j_());
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -514,8 +514,8 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 || k_());
         }
 
-        return (bool?)(/* CQL 'implies' (277:3-281:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_()));
+        return /* CQL 'implies' (277:3-281:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
+            || c_());
     }
 
 
@@ -845,8 +845,8 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 }
                 CqlInterval<CqlDateTime> jv_ = QICoreCommon_4_0_000.Instance.toInterval(context, ju_);
                 bool? jw_ = context.Operators.OverlapsBefore(jt_, jv_, "day");
-                return (bool?)(/* CQL 'and' (260:17-261:44) */ ((CqlBoolean)jw_
-                    && (CqlBoolean)(this.isVerified(context, ComorbidDiagnosis))));
+                return /* CQL 'and' (260:17-261:44) */ ((CqlBoolean)jw_
+                    && (CqlBoolean)(this.isVerified(context, ComorbidDiagnosis)));
             }
 
             bool? js_ = context.Operators.WhereAny<Condition>(jq_, jr_);
@@ -1040,10 +1040,10 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                     return bf_;
                 }
 
-                return (bool?)(/* CQL 'and' (267:17-269:89) */ (/* CQL 'and' (267:17-268:83) */ (/* CQL 'and' (267:17-267:152) */ ((CqlBoolean)y_
+                return /* CQL 'and' (267:17-269:89) */ (/* CQL 'and' (267:17-268:83) */ (/* CQL 'and' (267:17-267:152) */ ((CqlBoolean)y_
                     && z_())
                     && aa_())
-                    && ab_()));
+                    && ab_());
             }
 
             bool? k_ = context.Operators.WhereAny<Observation>(i_, j_);

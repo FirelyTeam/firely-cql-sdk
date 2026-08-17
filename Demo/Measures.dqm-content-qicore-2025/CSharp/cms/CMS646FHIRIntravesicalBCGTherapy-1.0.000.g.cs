@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS646FHIRIntravesicalBCGTherapy", "1.0.000")]
 public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingleton<CMS646FHIRIntravesicalBCGTherapy_1_0_000>
 {
@@ -237,8 +237,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 || k_());
         }
 
-        return (bool?)(/* CQL 'implies' (216:3-220:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_()));
+        return /* CQL 'implies' (216:3-220:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
+            || c_());
     }
 
 
@@ -282,9 +282,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 return q_;
             }
 
-            return (bool?)(/* CQL 'and' (149:5-152:38) */ (/* CQL 'or' (149:11-151:5) */ ((CqlBoolean)k_
+            return /* CQL 'and' (149:5-152:38) */ (/* CQL 'or' (149:11-151:5) */ ((CqlBoolean)k_
                 || l_())
-                && (CqlBoolean)(this.isVerified(context, BladderCancer))));
+                && (CqlBoolean)(this.isVerified(context, BladderCancer)));
         }
 
         IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
@@ -584,9 +584,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 return ah_;
             }
 
-            return (bool?)(/* CQL 'and' (178:7-184:76) */ (/* CQL 'and' (178:13-183:9) */ ((CqlBoolean)(!((bool?)(d_ is null)))
+            return /* CQL 'and' (178:7-184:76) */ (/* CQL 'and' (178:13-183:9) */ ((CqlBoolean)(!((bool?)(d_ is null)))
                 && e_())
-                && f_()));
+                && f_());
         }
 
         bool? c_ = context.Operators.WhereAny<Observation>(a_, b_);
@@ -628,9 +628,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 return r_;
             }
 
-            return (bool?)(/* CQL 'and' (141:7-143:46) */ (/* CQL 'and' (141:13-142:45) */ ((CqlBoolean)h_
+            return /* CQL 'and' (141:7-143:46) */ (/* CQL 'and' (141:13-142:45) */ ((CqlBoolean)h_
                 && i_())
-                && j_()));
+                && j_());
         }
 
         bool? d_ = context.Operators.WhereAny<Encounter>(b_, c_);
@@ -647,8 +647,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     private bool? Initial_Population_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG(context);
-        return (bool?)(/* CQL 'and' (39:3-40:34) */ ((CqlBoolean)a_
-            && (CqlBoolean)(this.Has_Qualifying_Encounter(context))));
+        return /* CQL 'and' (39:3-40:34) */ ((CqlBoolean)a_
+            && (CqlBoolean)(this.Has_Qualifying_Encounter(context)));
     }
 
 
@@ -825,8 +825,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                         && ad_());
                 }
 
-                return (bool?)(/* CQL 'or' (80:17-86:7) */ ((CqlBoolean)p_
-                    || q_()));
+                return /* CQL 'or' (80:17-86:7) */ ((CqlBoolean)p_
+                    || q_());
             }
 
             bool? l_ = context.Operators.WhereAny<Procedure>((IEnumerable<Procedure>)j_, k_);
@@ -873,8 +873,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     return w_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)r_
-                    && s_()));
+                return /* CQL 'and' */ ((CqlBoolean)r_
+                    && s_());
             }
 
             bool? m_ = context.Operators.WhereAny<Medication>(k_, l_);
@@ -1057,8 +1057,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 return co_;
             }
 
-            return (bool?)(/* CQL 'and' (212:5-213:49) */ ((CqlBoolean)cj_
-                && ck_()));
+            return /* CQL 'and' (212:5-213:49) */ ((CqlBoolean)cj_
+                && ck_());
         }
 
         IEnumerable<MedicationRequest> j_ = context.Operators.Where<MedicationRequest>(h_, i_);
@@ -1245,8 +1245,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     return !((bool?)(as_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (92:17-92:142) */ ((CqlBoolean)w_
-                    && x_()));
+                return /* CQL 'and' (92:17-92:142) */ ((CqlBoolean)w_
+                    && x_());
             }
 
             bool? j_ = context.Operators.WhereAny<Procedure>((IEnumerable<Procedure>)h_, i_);
@@ -1387,8 +1387,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     return aq_;
                 }
 
-                return (bool?)(/* CQL 'or' (106:19-108:9) */ ((CqlBoolean)ab_
-                    || ac_()));
+                return /* CQL 'or' (106:19-108:9) */ ((CqlBoolean)ab_
+                    || ac_());
             }
 
             bool? v_ = context.Operators.WhereAny<Procedure>((IEnumerable<Procedure>)t_, u_);
@@ -1435,8 +1435,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     return af_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)aa_
-                    && ab_()));
+                return /* CQL 'and' */ ((CqlBoolean)aa_
+                    && ab_());
             }
 
             bool? v_ = context.Operators.WhereAny<Medication>(t_, u_);
@@ -1637,8 +1637,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     return !((bool?)(ck_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (120:21-120:123) */ ((CqlBoolean)bk_
-                    && bl_()));
+                return /* CQL 'and' (120:21-120:123) */ ((CqlBoolean)bk_
+                    && bl_());
             }
 
             bool? aj_ = context.Operators.WhereAny<Procedure>((IEnumerable<Procedure>)ah_, ai_);
@@ -1665,8 +1665,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 return da_;
             }
 
-            return (bool?)(/* CQL 'and' (121:9-122:43) */ ((CqlBoolean)cv_
-                && cw_()));
+            return /* CQL 'and' (121:9-122:43) */ ((CqlBoolean)cv_
+                && cw_());
         }
 
         IEnumerable<MedicationRequest> j_ = context.Operators.Where<MedicationRequest>(h_, i_);
@@ -1842,8 +1842,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     return !((bool?)(en_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (126:23-126:147) */ ((CqlBoolean)dr_
-                    && ds_()));
+                return /* CQL 'and' (126:23-126:147) */ ((CqlBoolean)dr_
+                    && ds_());
             }
 
             bool? de_ = context.Operators.WhereAny<Procedure>((IEnumerable<Procedure>)dc_, dd_);
@@ -1895,11 +1895,11 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             return h_;
         }
 
-        return (bool?)(/* CQL 'or' (46:3-50:76) */ (/* CQL 'or' (46:3-49:90) */ (/* CQL 'or' (46:3-48:31) */ (/* CQL 'or' (46:3-47:39) */ ((CqlBoolean)b_
+        return /* CQL 'or' (46:3-50:76) */ (/* CQL 'or' (46:3-49:90) */ (/* CQL 'or' (46:3-48:31) */ (/* CQL 'or' (46:3-47:39) */ ((CqlBoolean)b_
             || c_())
             || d_())
             || (CqlBoolean)(this.Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging(context)))
-            || (CqlBoolean)(this.Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging(context))));
+            || (CqlBoolean)(this.Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging(context)));
     }
 
 
@@ -2065,8 +2065,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     return !((bool?)(au_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (157:17-157:126) */ ((CqlBoolean)aa_
-                    && ab_()));
+                return /* CQL 'and' (157:17-157:126) */ ((CqlBoolean)aa_
+                    && ab_());
             }
 
             bool? k_ = context.Operators.WhereAny<Procedure>((IEnumerable<Procedure>)i_, j_);
@@ -2136,8 +2136,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     return z_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)u_
-                    && v_()));
+                return /* CQL 'and' */ ((CqlBoolean)u_
+                    && v_());
             }
 
             bool? p_ = context.Operators.WhereAny<Medication>(n_, o_);
@@ -2294,9 +2294,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     return bu_;
                 }
 
-                return (bool?)(/* CQL 'and' (167:19-168:82) */ (/* CQL 'and' (167:19-167:139) */ ((CqlBoolean)ar_
+                return /* CQL 'and' (167:19-168:82) */ (/* CQL 'and' (167:19-167:139) */ ((CqlBoolean)ar_
                     && as_())
-                    && at_()));
+                    && at_());
             }
 
             bool? ad_ = context.Operators.WhereAny<Procedure>((IEnumerable<Procedure>)ab_, ac_);

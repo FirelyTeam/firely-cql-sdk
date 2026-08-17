@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS104FHIRSTKDCAntithrombotic", "1.0.000")]
 public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleton<CMS104FHIRSTKDCAntithrombotic_1_0_000>
 {
@@ -144,8 +144,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                         return x_;
                     }
 
-                    return (bool?)(/* CQL 'and' */ ((CqlBoolean)s_
-                        && t_()));
+                    return /* CQL 'and' */ ((CqlBoolean)s_
+                        && t_());
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -216,19 +216,19 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                             return bc_;
                         }
 
-                        return (bool?)(/* CQL 'and' (41:13-42:58) */ ((CqlBoolean)aw_
-                            && ax_()));
+                        return /* CQL 'and' (41:13-42:58) */ ((CqlBoolean)aw_
+                            && ax_());
                     }
 
                     bool? au_ = context.Operators.WhereAny<Task>(as_, at_);
                     return !au_;
                 }
 
-                return (bool?)(/* CQL 'and' (34:17-43:9) */ (/* CQL 'and' (34:17-39:84) */ (/* CQL 'and' (34:17-38:9) */ (/* CQL 'and' (34:17-35:125) */ ((CqlBoolean)ac_
+                return /* CQL 'and' (34:17-43:9) */ (/* CQL 'and' (34:17-39:84) */ (/* CQL 'and' (34:17-38:9) */ (/* CQL 'and' (34:17-35:125) */ ((CqlBoolean)ac_
                     && ad_())
                     && ae_())
                     && af_())
-                    && ag_()));
+                    && ag_());
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -314,11 +314,11 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return an_;
             }
 
-            return (bool?)(/* CQL 'and' (56:7-63:127) */ (/* CQL 'and' (56:13-62:73) */ (/* CQL 'and' (56:13-61:9) */ (/* CQL 'or' (56:13-58:7) */ ((CqlBoolean)r_
+            return /* CQL 'and' (56:7-63:127) */ (/* CQL 'and' (56:13-62:73) */ (/* CQL 'and' (56:13-61:9) */ (/* CQL 'or' (56:13-58:7) */ ((CqlBoolean)r_
                 || s_())
                 && t_())
                 && u_())
-                && v_()));
+                && v_());
         }
 
         IEnumerable<MedicationRequest> e_ = context.Operators.Where<MedicationRequest>(c_, d_);
@@ -342,8 +342,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     return ba_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)av_
-                    && aw_()));
+                return /* CQL 'and' */ ((CqlBoolean)av_
+                    && aw_());
             }
 
             bool? aq_ = context.Operators.WhereAny<Medication>(ao_, ap_);
@@ -402,10 +402,10 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     return cb_;
                 }
 
-                return (bool?)(/* CQL 'and' (67:21-72:56) */ (/* CQL 'and' (67:21-71:72) */ (/* CQL 'and' (67:21-70:13) */ ((CqlBoolean)bf_
+                return /* CQL 'and' (67:21-72:56) */ (/* CQL 'and' (67:21-71:72) */ (/* CQL 'and' (67:21-70:13) */ ((CqlBoolean)bf_
                     && bg_())
                     && bh_())
-                    && bi_()));
+                    && bi_());
             }
 
             bool? bd_ = context.Operators.WhereAny<Task>(bb_, bc_);
@@ -477,8 +477,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     return u_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)p_
-                    && q_()));
+                return /* CQL 'and' */ ((CqlBoolean)p_
+                    && q_());
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -521,10 +521,10 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return ah_;
             }
 
-            return (bool?)(/* CQL 'and' (82:5-86:132) */ (/* CQL 'and' (82:11-85:78) */ (/* CQL 'or' (82:11-84:5) */ ((CqlBoolean)v_
+            return /* CQL 'and' (82:5-86:132) */ (/* CQL 'and' (82:11-85:78) */ (/* CQL 'or' (82:11-84:5) */ ((CqlBoolean)v_
                 || (CqlBoolean)(QICoreCommon_4_0_000.Instance.isDischarge(context, PharmacologicalContraindications as MedicationRequest)))
                 && w_())
-                && x_()));
+                && x_());
         }
 
         IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);

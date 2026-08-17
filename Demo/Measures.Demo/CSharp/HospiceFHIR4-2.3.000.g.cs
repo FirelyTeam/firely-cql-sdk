@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("HospiceFHIR4", "2.3.000")]
 public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_3_000>
 {
@@ -132,9 +132,9 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                 return ac_;
             }
 
-            return (bool?)(/* CQL 'and' (23:16-28:105) */ (/* CQL 'and' (23:22-27:19) */ ((CqlBoolean)i_
+            return /* CQL 'and' (23:16-28:105) */ (/* CQL 'and' (23:22-27:19) */ ((CqlBoolean)i_
                 && j_())
-                && k_()));
+                && k_());
         }
 
         bool? d_ = context.Operators.WhereAny<Encounter>(b_, c_);
@@ -168,9 +168,9 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                     return at_;
                 }
 
-                return (bool?)(/* CQL 'and' (32:21-34:108) */ (/* CQL 'and' (32:27-33:53) */ ((CqlBoolean)ak_
+                return /* CQL 'and' (32:21-34:108) */ (/* CQL 'and' (32:27-33:53) */ ((CqlBoolean)ak_
                     && al_())
-                    && am_()));
+                    && am_());
             }
 
             bool? ag_ = context.Operators.WhereAny<ServiceRequest>(ae_, af_);
@@ -195,17 +195,17 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                     return bf_;
                 }
 
-                return (bool?)(/* CQL 'and' (38:21-39:111) */ ((CqlBoolean)ba_
-                    && bb_()));
+                return /* CQL 'and' (38:21-39:111) */ ((CqlBoolean)ba_
+                    && bb_());
             }
 
             bool? ax_ = context.Operators.WhereAny<Procedure>(av_, aw_);
             return ax_;
         }
 
-        return (bool?)(/* CQL 'or' (21:3-40:17) */ (/* CQL 'or' (21:3-35:17) */ ((CqlBoolean)d_
+        return /* CQL 'or' (21:3-40:17) */ (/* CQL 'or' (21:3-35:17) */ ((CqlBoolean)d_
             || e_())
-            || f_()));
+            || f_());
     }
 
 

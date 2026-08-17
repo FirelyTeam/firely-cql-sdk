@@ -543,6 +543,41 @@ public class LogicCqlTest
             "xor must keep its branching guard, since null is its deciding value and C# has no ^^.");
     }
 
+    /// <summary>
+    /// A <c>bool?</c>-declared body does not re-cast its <see cref="CqlBoolean"/> result: the
+    /// conversion is implicit at the <c>return</c>, so <c>return (bool?)(…)</c> at the root is
+    /// pure noise and must not come back.
+    ///
+    /// <para>Pinned at BOTH levels, because they are separate emitter paths that regressed
+    /// independently while this was built: a definition body
+    /// (<c>EmitBodyBlock</c>/<c>TryEmitExpressionBody</c>) and a hoisted local function
+    /// (<c>HoistLocalFunction</c>). Correctness is already guaranteed by the corpus compiling
+    /// at all — this only guards the readability, which nothing else would catch.</para>
+    ///
+    /// <para>The complementary half — that the conversion SURVIVES where it is load-bearing —
+    /// is what <c>NullXorMessage_Compute</c> above still asserts via its <c>?? false</c> guard.</para>
+    /// </summary>
+    [TestMethod]
+    public void GeneratedCSharp_DoesNotReCastCqlBooleanAtBodyRoot()
+    {
+        var generated = LogicTestFixture.DefaultCSharp;
+
+        foreach (var method in new[] { "TrueAndTrue_Compute", "TrueOrTrue_Compute", "NullImpliesTrue_Compute" })
+        {
+            var body = ExtractComputeMethod(generated, method);
+            StringAssert.Contains(body, "(CqlBoolean)", $"{method} must still lower through CqlBoolean.");
+            Assert.IsFalse(
+                body.Contains("return (bool?)("),
+                $"{method} re-casts its CqlBoolean result to bool?; the root conversion is implicit at the return.");
+        }
+
+        // A local function declared bool? must likewise return its CqlBoolean body uncast. Any
+        // corpus method is fine for this — it is the emitter path, not the CQL, being pinned.
+        Assert.IsFalse(
+            System.Text.RegularExpressions.Regex.IsMatch(generated, @"bool\? \w+_\([^)]*\)[^;]*\{[^}]*return \(bool\?\)\(/\* CQL '(and|or|implies)'"),
+            "A bool?-declared local function re-casts its CqlBoolean result; the conversion is implicit at its return.");
+    }
+
     private static string ExtractComputeMethod(string code, string methodName)
     {
         // Anchor on the DEFINITION ("name(") — the GetOrCompute wrapper references the method

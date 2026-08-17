@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("DevDays", "2023.0.0")]
 public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 {
@@ -103,8 +103,8 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
                 return o_;
             }
 
-            return (bool?)(/* CQL 'and' (18:3-20:57) */ ((CqlBoolean)g_
-                && h_()));
+            return /* CQL 'and' (18:3-20:57) */ ((CqlBoolean)g_
+                && h_());
         }
 
         IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
@@ -143,8 +143,8 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
                 return o_;
             }
 
-            return (bool?)(/* CQL 'and' (24:3-26:57) */ ((CqlBoolean)g_
-                && h_()));
+            return /* CQL 'and' (24:3-26:57) */ ((CqlBoolean)g_
+                && h_());
         }
 
         IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);

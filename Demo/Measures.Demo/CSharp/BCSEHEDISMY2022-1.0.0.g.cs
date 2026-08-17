@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("BCSEHEDISMY2022", "1.0.0")]
 public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY2022_1_0_0>
 {
@@ -217,9 +217,9 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             return ae_;
         }
 
-        return (bool?)(/* CQL 'and' (41:3-49:38) */ (/* CQL 'and' (41:3-46:47) */ ((CqlBoolean)j_
+        return /* CQL 'and' (41:3-49:38) */ (/* CQL 'and' (41:3-46:47) */ ((CqlBoolean)j_
             && k_())
-            && l_()));
+            && l_());
     }
 
 
@@ -251,9 +251,9 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             return p_;
         }
 
-        return (bool?)(/* CQL 'and' (34:3-38:46) */ (/* CQL 'and' (34:3-37:39) */ ((CqlBoolean)j_
+        return /* CQL 'and' (34:3-38:46) */ (/* CQL 'and' (34:3-37:39) */ ((CqlBoolean)j_
             && k_())
-            && (CqlBoolean)(this.Enrolled_During_Participation_Period(context))));
+            && (CqlBoolean)(this.Enrolled_During_Participation_Period(context)));
     }
 
 
@@ -595,11 +595,11 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             return q_;
         }
 
-        return (bool?)(/* CQL 'or' (72:3-80:46) */ (/* CQL 'or' (72:3-79:46) */ (/* CQL 'and' (72:3-78:3) */ (/* CQL 'or' (72:5-74:5) */ ((CqlBoolean)b_
+        return /* CQL 'or' (72:3-80:46) */ (/* CQL 'or' (72:3-79:46) */ (/* CQL 'and' (72:3-78:3) */ (/* CQL 'or' (72:5-74:5) */ ((CqlBoolean)b_
             || c_())
             && d_())
             || e_())
-            || f_()));
+            || f_());
     }
 
 
@@ -619,10 +619,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             return d_;
         }
 
-        return (bool?)(/* CQL 'or' (66:3-69:83) */ (/* CQL 'or' (66:3-68:96) */ (/* CQL 'or' (66:3-67:29) */ ((CqlBoolean)a_
+        return /* CQL 'or' (66:3-69:83) */ (/* CQL 'or' (66:3-68:96) */ (/* CQL 'or' (66:3-67:29) */ ((CqlBoolean)a_
             || (CqlBoolean)(this.Mastectomy_Exclusion(context)))
             || (CqlBoolean)(NCQAAdvancedIllnessandFrailty_1_0_0.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)))
-            || b_()));
+            || b_());
     }
 
 

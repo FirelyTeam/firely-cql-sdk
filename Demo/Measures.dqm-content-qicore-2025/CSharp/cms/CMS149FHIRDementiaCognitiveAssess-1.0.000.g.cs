@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS149FHIRDementiaCognitiveAssess", "1.0.000")]
 public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISingleton<CMS149FHIRDementiaCognitiveAssess_1_0_000>
 {
@@ -165,8 +165,8 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 return ak_;
             }
 
-            return (bool?)(/* CQL 'and' (81:5-82:54) */ ((CqlBoolean)af_
-                && ag_()));
+            return /* CQL 'and' (81:5-82:54) */ ((CqlBoolean)af_
+                && ag_());
         }
 
         IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
@@ -222,8 +222,8 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 || k_());
         }
 
-        return (bool?)(/* CQL 'implies' (92:3-96:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_()));
+        return /* CQL 'implies' (92:3-96:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
+            || c_());
     }
 
 
@@ -277,10 +277,10 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                         || v_());
                 }
 
-                return (bool?)(/* CQL 'and' (64:17-69:35) */ (/* CQL 'and' (64:17-68:9) */ (/* CQL 'and' (64:17-65:91) */ ((CqlBoolean)m_
+                return /* CQL 'and' (64:17-69:35) */ (/* CQL 'and' (64:17-68:9) */ (/* CQL 'and' (64:17-65:91) */ ((CqlBoolean)m_
                     && n_())
                     && o_())
-                    && (CqlBoolean)(this.isVerified(context, Dementia))));
+                    && (CqlBoolean)(this.isVerified(context, Dementia)));
             }
 
             bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
@@ -319,8 +319,8 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 return o_;
             }
 
-            return (bool?)(/* CQL 'and' (101:5-102:44) */ ((CqlBoolean)j_
-                && k_()));
+            return /* CQL 'and' (101:5-102:44) */ ((CqlBoolean)j_
+                && k_());
         }
 
         IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
@@ -346,8 +346,8 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             return f_;
         }
 
-        return (bool?)(/* CQL 'and' (37:3-38:72) */ ((CqlBoolean)b_
-            && c_()));
+        return /* CQL 'and' (37:3-38:72) */ ((CqlBoolean)b_
+            && c_());
     }
 
 
@@ -401,8 +401,8 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                     return !((bool?)(aa_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (56:17-56:137) */ ((CqlBoolean)w_
-                    && x_()));
+                return /* CQL 'and' (56:17-56:137) */ ((CqlBoolean)w_
+                    && x_());
             }
 
             bool? l_ = context.Operators.WhereAny<Encounter>(j_, k_);
@@ -428,8 +428,8 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 return ai_;
             }
 
-            return (bool?)(/* CQL 'and' (57:5-58:75) */ ((CqlBoolean)(!((bool?)(ac_ is null)))
-                && ad_()));
+            return /* CQL 'and' (57:5-58:75) */ ((CqlBoolean)(!((bool?)(ac_ is null)))
+                && ad_());
         }
 
         IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);

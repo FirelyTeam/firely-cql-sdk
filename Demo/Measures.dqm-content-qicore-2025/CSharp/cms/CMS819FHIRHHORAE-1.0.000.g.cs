@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS819FHIRHHORAE", "1.0.000")]
 public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRHHORAE_1_0_000>
 {
@@ -126,9 +126,9 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                 return y_;
             }
 
-            return (bool?)(/* CQL 'and' (42:5-44:48) */ (/* CQL 'and' (42:11-43:75) */ ((CqlBoolean)n_
+            return /* CQL 'and' (42:5-44:48) */ (/* CQL 'and' (42:11-43:75) */ ((CqlBoolean)n_
                 && o_())
-                && p_()));
+                && p_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -164,8 +164,8 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                     return u_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)p_
-                    && q_()));
+                return /* CQL 'and' */ ((CqlBoolean)p_
+                    && q_());
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -239,16 +239,16 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                             return af_;
                         }
 
-                        return (bool?)(/* CQL 'and' (63:13-64:93) */ ((CqlBoolean)w_
-                            && x_()));
+                        return /* CQL 'and' (63:13-64:93) */ ((CqlBoolean)w_
+                            && x_());
                     }
 
                     bool? p_ = context.Operators.WhereAny<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)n_, o_);
                     return !p_;
                 }
 
-                return (bool?)(/* CQL 'and' (61:17-65:9) */ ((CqlBoolean)l_
-                    && m_()));
+                return /* CQL 'and' (61:17-65:9) */ ((CqlBoolean)l_
+                    && m_());
             }
 
             bool? f_ = context.Operators.WhereAny<MedicationAdministration>(d_, e_);
@@ -314,8 +314,8 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                     return u_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)p_
-                    && q_()));
+                return /* CQL 'and' */ ((CqlBoolean)p_
+                    && q_());
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -390,8 +390,8 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                     return ad_;
                 }
 
-                return (bool?)(/* CQL 'and' (81:9-82:109) */ ((CqlBoolean)u_
-                    && v_()));
+                return /* CQL 'and' (81:9-82:109) */ ((CqlBoolean)u_
+                    && v_());
             }
 
             bool? m_ = context.Operators.WhereAny<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)k_, l_);
@@ -457,8 +457,8 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                     && am_());
             }
 
-            return (bool?)(/* CQL 'and' (80:5-88:7) */ ((CqlBoolean)!m_
-                && n_()));
+            return /* CQL 'and' (80:5-88:7) */ ((CqlBoolean)!m_
+                && n_());
         }
 
         IEnumerable<(CqlTupleMetadata, MedicationAdministration NonEnteralOpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter InpatientHospitalization)?> g_ = context.Operators.SelectWhere<ValueTuple<MedicationAdministration, MedicationAdministration, Encounter>, (CqlTupleMetadata, MedicationAdministration NonEnteralOpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter InpatientHospitalization)?>(d_, e_, f_);

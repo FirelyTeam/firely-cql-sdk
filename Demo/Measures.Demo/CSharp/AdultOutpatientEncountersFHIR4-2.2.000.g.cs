@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("AdultOutpatientEncountersFHIR4", "2.2.000")]
 public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISingleton<AdultOutpatientEncountersFHIR4_2_2_000>
 {
@@ -109,8 +109,8 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
                 return x_;
             }
 
-            return (bool?)(/* CQL 'and' (26:19-27:100) */ ((CqlBoolean)s_
-                && t_()));
+            return /* CQL 'and' (26:19-27:100) */ ((CqlBoolean)s_
+                && t_());
         }
 
         IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);

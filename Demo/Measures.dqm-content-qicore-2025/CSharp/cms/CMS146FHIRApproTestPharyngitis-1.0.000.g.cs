@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS146FHIRApproTestPharyngitis", "1.0.000")]
 public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISingleton<CMS146FHIRApproTestPharyngitis_1_0_000>
 {
@@ -325,8 +325,8 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                         return y_;
                     }
 
-                    return (bool?)(/* CQL 'and' */ ((CqlBoolean)t_
-                        && u_()));
+                    return /* CQL 'and' */ ((CqlBoolean)t_
+                        && u_());
                 }
 
                 bool? o_ = context.Operators.WhereAny<Medication>(m_, n_);
@@ -357,8 +357,8 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                     return !((bool?)(al_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (82:17-82:128) */ ((CqlBoolean)ai_
-                    && aj_()));
+                return /* CQL 'and' (82:17-82:128) */ ((CqlBoolean)ai_
+                    && aj_());
             }
 
             bool? l_ = context.Operators.WhereAny<MedicationRequest>(j_, k_);
@@ -526,8 +526,8 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                     return ap_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)ak_
-                    && al_()));
+                return /* CQL 'and' */ ((CqlBoolean)ak_
+                    && al_());
             }
 
             bool? af_ = context.Operators.WhereAny<Medication>(ad_, ae_);

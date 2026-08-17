@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("VTE", "8.18.000")]
 public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 {
@@ -104,8 +104,8 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
                 return r_;
             }
 
-            return (bool?)(/* CQL 'or' (42:13-43:43) */ ((CqlBoolean)i_
-                || j_()));
+            return /* CQL 'or' (42:13-43:43) */ ((CqlBoolean)i_
+                || j_());
         }
 
         IEnumerable<bool?> c_ = context.Operators.SelectDistinct<Encounter, bool?>((IEnumerable<Encounter>)a_, b_);
@@ -244,8 +244,8 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
                 return p_;
             }
 
-            return (bool?)(/* CQL 'or' (51:13-52:39) */ ((CqlBoolean)h_
-                || i_()));
+            return /* CQL 'or' (51:13-52:39) */ ((CqlBoolean)h_
+                || i_());
         }
 
         IEnumerable<bool?> c_ = context.Operators.SelectDistinct<Encounter, bool?>((IEnumerable<Encounter>)a_, b_);

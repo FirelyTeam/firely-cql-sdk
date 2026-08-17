@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS144FHIRHFBetaBlockerForLVSD", "1.0.000")]
 public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISingleton<CMS144FHIRHFBetaBlockerForLVSD_1_0_000>
 {
@@ -155,8 +155,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             return d_;
         }
 
-        return (bool?)(/* CQL 'and' (37:3-38:95) */ ((CqlBoolean)a_
-            && b_()));
+        return /* CQL 'and' (37:3-38:95) */ ((CqlBoolean)a_
+            && b_());
     }
 
 
@@ -169,10 +169,10 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = AHAOverall_4_1_000.Instance.Has_Heart_Transplant(context);
-        return (bool?)(/* CQL 'or' (41:3-44:61) */ (/* CQL 'or' (41:3-43:47) */ (/* CQL 'or' (41:3-42:47) */ ((CqlBoolean)a_
+        return /* CQL 'or' (41:3-44:61) */ (/* CQL 'or' (41:3-43:47) */ (/* CQL 'or' (41:3-42:47) */ ((CqlBoolean)a_
             || (CqlBoolean)(AHAOverall_4_1_000.Instance.Has_Heart_Transplant_Complications(context)))
             || (CqlBoolean)(AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device(context)))
-            || (CqlBoolean)(AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device_Complications(context))));
+            || (CqlBoolean)(AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device_Complications(context)));
     }
 
 
@@ -225,8 +225,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                     return u_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)p_
-                    && q_()));
+                return /* CQL 'and' */ ((CqlBoolean)p_
+                    && q_());
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -257,8 +257,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     private bool? Numerator_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Beta_Blocker_Therapy_for_LVSD_Ordered(context);
-        return (bool?)(/* CQL 'or' (47:3-48:58) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(context))));
+        return /* CQL 'or' (47:3-48:58) */ ((CqlBoolean)a_
+            || (CqlBoolean)(this.Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(context)));
     }
 
 
@@ -333,8 +333,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                         return az_;
                     }
 
-                    return (bool?)(/* CQL 'and' (126:11-127:103) */ ((CqlBoolean)ar_
-                        && as_()));
+                    return /* CQL 'and' (126:11-127:103) */ ((CqlBoolean)ar_
+                        && as_());
                 }
 
                 IEnumerable<Observation> ae_ = context.Operators.Where<Observation>(ac_, ad_);
@@ -356,10 +356,10 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                 return al_;
             }
 
-            return (bool?)(/* CQL 'and' (130:7-133:44) */ (/* CQL 'and' (130:13-132:39) */ (/* CQL 'and' (130:13-131:67) */ ((CqlBoolean)p_
+            return /* CQL 'and' (130:7-133:44) */ (/* CQL 'and' (130:13-132:39) */ (/* CQL 'and' (130:13-131:67) */ ((CqlBoolean)p_
                 && q_())
                 && r_())
-                && s_()));
+                && s_());
         }
 
         IEnumerable<(CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?> f_ = context.Operators.SelectWhere<ValueTuple<Observation, Encounter>, (CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?>(c_, d_, e_);
@@ -425,8 +425,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                 return z_;
             }
 
-            return (bool?)(/* CQL 'or' (174:7-176:7) */ ((CqlBoolean)s_
-                || t_()));
+            return /* CQL 'or' (174:7-176:7) */ ((CqlBoolean)s_
+                || t_());
         }
 
         bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
@@ -461,8 +461,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                 || i_());
         }
 
-        return (bool?)(/* CQL 'implies' (185:3-187:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_()));
+        return /* CQL 'implies' (185:3-187:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
+            || c_());
     }
 
 
@@ -481,8 +481,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? e_(Condition ArrhythmiaAlias) {
             bool? g_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, ArrhythmiaAlias);
-            return (bool?)(/* CQL 'and' (147:7-148:42) */ ((CqlBoolean)g_
-                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, ArrhythmiaAlias))));
+            return /* CQL 'and' (147:7-148:42) */ ((CqlBoolean)g_
+                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, ArrhythmiaAlias)));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -505,8 +505,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? e_(Condition HypotensionAlias) {
             bool? g_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, HypotensionAlias);
-            return (bool?)(/* CQL 'and' (93:7-94:43) */ ((CqlBoolean)g_
-                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, HypotensionAlias))));
+            return /* CQL 'and' (93:7-94:43) */ ((CqlBoolean)g_
+                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, HypotensionAlias)));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -529,8 +529,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? e_(Condition AsthmaAlias) {
             bool? g_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, AsthmaAlias);
-            return (bool?)(/* CQL 'and' (154:7-155:38) */ ((CqlBoolean)g_
-                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, AsthmaAlias))));
+            return /* CQL 'and' (154:7-155:38) */ ((CqlBoolean)g_
+                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, AsthmaAlias)));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -558,8 +558,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? j_(Condition BetaBlockerAllergyOrIntoleranceDiagnosis) {
             bool? l_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, BetaBlockerAllergyOrIntoleranceDiagnosis);
-            return (bool?)(/* CQL 'and' (110:7-111:67) */ ((CqlBoolean)l_
-                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, BetaBlockerAllergyOrIntoleranceDiagnosis))));
+            return /* CQL 'and' (110:7-111:67) */ ((CqlBoolean)l_
+                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, BetaBlockerAllergyOrIntoleranceDiagnosis)));
         }
 
         bool? k_ = context.Operators.WhereAny<Condition>(i_, j_);
@@ -582,8 +582,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? e_(Condition BradycardiaAlias) {
             bool? g_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, BradycardiaAlias);
-            return (bool?)(/* CQL 'and' (117:7-118:43) */ ((CqlBoolean)g_
-                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, BradycardiaAlias))));
+            return /* CQL 'and' (117:7-118:43) */ ((CqlBoolean)g_
+                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, BradycardiaAlias)));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -608,8 +608,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? g_(AllergyIntolerance BetaBlockerAllergyIntolerance) {
             bool? i_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, BetaBlockerAllergyIntolerance);
-            return (bool?)(/* CQL 'and' (140:7-141:56) */ ((CqlBoolean)i_
-                && (CqlBoolean)(this.isVerified(context, BetaBlockerAllergyIntolerance))));
+            return /* CQL 'and' (140:7-141:56) */ ((CqlBoolean)i_
+                && (CqlBoolean)(this.isVerified(context, BetaBlockerAllergyIntolerance)));
         }
 
         bool? h_ = context.Operators.WhereAny<AllergyIntolerance>(f_, g_);
@@ -632,8 +632,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? e_(Condition AtrioventricularBlockAlias) {
             bool? g_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, AtrioventricularBlockAlias);
-            return (bool?)(/* CQL 'and' (161:7-162:53) */ ((CqlBoolean)g_
-                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, AtrioventricularBlockAlias))));
+            return /* CQL 'and' (161:7-162:53) */ ((CqlBoolean)g_
+                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, AtrioventricularBlockAlias)));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -656,8 +656,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? e_(Condition CardiacPacerDiagnosis) {
             bool? g_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, CardiacPacerDiagnosis);
-            return (bool?)(/* CQL 'and' (100:7-101:48) */ ((CqlBoolean)g_
-                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, CardiacPacerDiagnosis))));
+            return /* CQL 'and' (100:7-101:48) */ ((CqlBoolean)g_
+                && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, CardiacPacerDiagnosis)));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -753,9 +753,9 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     private bool? Atrioventricular_Block_without_Cardiac_Pacer_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Atrioventricular_Block_Diagnosis(context);
-        return (bool?)(/* CQL 'and' (74:3-76:48) */ (/* CQL 'and' (74:3-75:52) */ ((CqlBoolean)a_
+        return /* CQL 'and' (74:3-76:48) */ (/* CQL 'and' (74:3-75:52) */ ((CqlBoolean)a_
             && (CqlBoolean)(!(this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ(context))))
-            && (CqlBoolean)(!(this.Has_Cardiac_Pacer_Device_Implanted(context)))));
+            && (CqlBoolean)(!(this.Has_Cardiac_Pacer_Device_Implanted(context))));
     }
 
 
@@ -768,7 +768,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Consecutive_Heart_Rates_Less_than_50(context);
-        return (bool?)(/* CQL 'or' (51:3-59:53) */ (/* CQL 'or' (51:3-58:70) */ (/* CQL 'or' (51:3-57:34) */ (/* CQL 'or' (51:3-56:72) */ (/* CQL 'or' (51:3-55:29) */ (/* CQL 'or' (51:3-54:34) */ (/* CQL 'or' (51:3-53:33) */ (/* CQL 'or' (51:3-52:77) */ ((CqlBoolean)a_
+        return /* CQL 'or' (51:3-59:53) */ (/* CQL 'or' (51:3-58:70) */ (/* CQL 'or' (51:3-57:34) */ (/* CQL 'or' (51:3-56:72) */ (/* CQL 'or' (51:3-55:29) */ (/* CQL 'or' (51:3-54:34) */ (/* CQL 'or' (51:3-53:33) */ (/* CQL 'or' (51:3-52:77) */ ((CqlBoolean)a_
             || (CqlBoolean)(this.Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(context)))
             || (CqlBoolean)(this.Has_Arrhythmia_Diagnosis(context)))
             || (CqlBoolean)(this.Has_Hypotension_Diagnosis(context)))
@@ -776,7 +776,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             || (CqlBoolean)(this.Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy(context)))
             || (CqlBoolean)(this.Has_Bradycardia_Diagnosis(context)))
             || (CqlBoolean)(this.Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient(context)))
-            || (CqlBoolean)(this.Atrioventricular_Block_without_Cardiac_Pacer(context))));
+            || (CqlBoolean)(this.Atrioventricular_Block_without_Cardiac_Pacer(context)));
     }
 
 

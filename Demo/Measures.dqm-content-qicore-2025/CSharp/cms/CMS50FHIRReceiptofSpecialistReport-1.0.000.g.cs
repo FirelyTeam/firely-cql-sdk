@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS50FHIRReceiptofSpecialistReport", "1.0.000")]
 public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISingleton<CMS50FHIRReceiptofSpecialistReport_1_0_000>
 {
@@ -174,8 +174,8 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 return ab_;
             }
 
-            return (bool?)(/* CQL 'and' (62:7-63:68) */ ((CqlBoolean)w_
-                && x_()));
+            return /* CQL 'and' (62:7-63:68) */ ((CqlBoolean)w_
+                && x_());
         }
 
         bool? s_ = context.Operators.WhereAny<Encounter>(q_, r_);
@@ -310,9 +310,9 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 return ab_;
             }
 
-            return (bool?)(/* CQL 'and' (80:7-82:145) */ (/* CQL 'and' (80:13-81:42) */ ((CqlBoolean)m_
+            return /* CQL 'and' (80:7-82:145) */ (/* CQL 'and' (80:13-81:42) */ ((CqlBoolean)m_
                 && n_())
-                && o_()));
+                && o_());
         }
 
         IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
@@ -338,9 +338,9 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     private bool? Initial_Population_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Encounter_during_Measurement_Period(context);
-        return (bool?)(/* CQL 'and' (50:3-53:81) */ (/* CQL 'or' (50:3-52:3) */ ((CqlBoolean)a_
+        return /* CQL 'and' (50:3-53:81) */ (/* CQL 'or' (50:3-52:3) */ ((CqlBoolean)a_
             || (CqlBoolean)(this.Has_Intervention_during_Measurement_Period(context)))
-            && (CqlBoolean)(!((bool?)((this.First_Referral_during_First_10_Months_of_Measurement_Period(context)) is null)))));
+            && (CqlBoolean)(!((bool?)((this.First_Referral_during_First_10_Months_of_Measurement_Period(context)) is null))));
     }
 
 
@@ -476,12 +476,12 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                     return ak_;
                 }
 
-                return (bool?)(/* CQL 'and' (94:19-100:72) */ (/* CQL 'and' (94:19-99:59) */ (/* CQL 'and' (94:19-98:94) */ (/* CQL 'and' (94:19-97:90) */ (/* CQL 'or' (94:19-96:9) */ ((CqlBoolean)k_
+                return /* CQL 'and' (94:19-100:72) */ (/* CQL 'and' (94:19-99:59) */ (/* CQL 'and' (94:19-98:94) */ (/* CQL 'and' (94:19-97:90) */ (/* CQL 'or' (94:19-96:9) */ ((CqlBoolean)k_
                     || l_())
                     && m_())
                     && n_())
                     && o_())
-                    && p_()));
+                    && p_());
             }
 
             bool? i_ = context.Operators.WhereAny<ServiceRequest>((IEnumerable<ServiceRequest>)g_, h_);

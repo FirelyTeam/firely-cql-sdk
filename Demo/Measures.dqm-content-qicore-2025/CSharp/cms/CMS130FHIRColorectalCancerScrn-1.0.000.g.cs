@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS130FHIRColorectalCancerScrn", "1.0.000")]
 public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISingleton<CMS130FHIRColorectalCancerScrn_1_0_000>
 {
@@ -161,8 +161,8 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             return m_;
         }
 
-        return (bool?)(/* CQL 'and' (40:3-43:64) */ ((CqlBoolean)j_
-            && k_()));
+        return /* CQL 'and' (40:3-43:64) */ ((CqlBoolean)j_
+            && k_());
     }
 
 
@@ -292,12 +292,12 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             return g_;
         }
 
-        return (bool?)(/* CQL 'or' (49:3-54:69) */ (/* CQL 'or' (49:3-53:74) */ (/* CQL 'or' (49:3-52:73) */ (/* CQL 'or' (49:3-51:41) */ (/* CQL 'or' (49:3-50:34) */ ((CqlBoolean)a_
+        return /* CQL 'or' (49:3-54:69) */ (/* CQL 'or' (49:3-53:74) */ (/* CQL 'or' (49:3-52:73) */ (/* CQL 'or' (49:3-51:41) */ (/* CQL 'or' (49:3-50:34) */ ((CqlBoolean)a_
             || b_())
             || c_())
             || (CqlBoolean)(AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context)))
             || (CqlBoolean)(AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context)))
-            || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))));
+            || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context)));
     }
 
 
@@ -351,8 +351,8 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 return l_;
             }
 
-            return (bool?)(/* CQL 'and' (65:5-66:83) */ ((CqlBoolean)(!((bool?)(g_ is null)))
-                && h_()));
+            return /* CQL 'and' (65:5-66:83) */ ((CqlBoolean)(!((bool?)(g_ is null)))
+                && h_());
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -415,8 +415,8 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 return q_;
             }
 
-            return (bool?)(/* CQL 'and' (102:5-103:132) */ ((CqlBoolean)(!((bool?)(g_ is null)))
-                && h_()));
+            return /* CQL 'and' (102:5-103:132) */ ((CqlBoolean)(!((bool?)(g_ is null)))
+                && h_());
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -626,11 +626,11 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             return n_;
         }
 
-        return (bool?)(/* CQL 'or' (57:3-61:37) */ (/* CQL 'or' (57:3-60:41) */ (/* CQL 'or' (57:3-59:48) */ (/* CQL 'or' (57:3-58:49) */ ((CqlBoolean)b_
+        return /* CQL 'or' (57:3-61:37) */ (/* CQL 'or' (57:3-60:41) */ (/* CQL 'or' (57:3-59:48) */ (/* CQL 'or' (57:3-58:49) */ ((CqlBoolean)b_
             || c_())
             || d_())
             || e_())
-            || f_()));
+            || f_());
     }
 
 

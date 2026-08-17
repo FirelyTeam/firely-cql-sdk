@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
@@ -114,8 +114,8 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             return j_;
         }
 
-        return (bool?)(/* CQL 'and' (32:2-32:117) */ ((CqlBoolean)g_
-            && h_()));
+        return /* CQL 'and' (32:2-32:117) */ ((CqlBoolean)g_
+            && h_());
     }
 
 
@@ -223,8 +223,8 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     CqlDateTime s_ = context.Operators.Subtract(q_, r_);
                     CqlInterval<CqlDateTime> t_ = context.Operators.Interval(s_, q_, true, false);
                     bool? u_ = context.Operators.In<CqlDateTime>(o_, t_, (string)default);
-                    return (bool?)(/* CQL 'and' (69:51-69:127) */ ((CqlBoolean)u_
-                        && (CqlBoolean)(!((bool?)((SD?.Occurrence as FhirDateTime) is null)))));
+                    return /* CQL 'and' (69:51-69:127) */ ((CqlBoolean)u_
+                        && (CqlBoolean)(!((bool?)((SD?.Occurrence as FhirDateTime) is null))));
                 }
 
                 IEnumerable<Condition> l_ = context.Operators.Where<Condition>((IEnumerable<Condition>)j_, k_);
@@ -232,8 +232,8 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                 return !((bool?)(m_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (68:6-69:141) */ ((CqlBoolean)g_
-                && h_()));
+            return /* CQL 'and' (68:6-69:141) */ ((CqlBoolean)g_
+                && h_());
         }
 
         IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_, b_);

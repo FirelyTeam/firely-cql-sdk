@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("PCMaternal", "5.25.000")]
 public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_000>
 {
@@ -172,9 +172,9 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                         return bz_;
                     }
 
-                    return (bool?)(/* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ ((CqlBoolean)bq_
+                    return /* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ ((CqlBoolean)bq_
                         && br_())
-                        && bs_()));
+                        && bs_());
                 }
 
                 IEnumerable<Encounter> aj_ = context.Operators.Where<Encounter>(ah_, ai_);
@@ -225,9 +225,9 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                         return cv_;
                     }
 
-                    return (bool?)(/* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ ((CqlBoolean)cm_
+                    return /* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ ((CqlBoolean)cm_
                         && cn_())
-                        && co_()));
+                        && co_());
                 }
 
                 IEnumerable<Encounter> aw_ = context.Operators.Where<Encounter>(ah_, av_);
@@ -279,9 +279,9 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                             return ee_;
                         }
 
-                        return (bool?)(/* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ ((CqlBoolean)dv_
+                        return /* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ ((CqlBoolean)dv_
                             && dw_())
-                            && dx_()));
+                            && dx_());
                     }
 
                     IEnumerable<Encounter> dc_ = context.Operators.Where<Encounter>(da_, db_);
@@ -313,9 +313,9 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     return el_;
                 }
 
-                return (bool?)(/* CQL 'and' (60:9-61:48) */ (/* CQL 'and' (60:15-60:79) */ ((CqlBoolean)be_
+                return /* CQL 'and' (60:9-61:48) */ (/* CQL 'and' (60:15-60:79) */ ((CqlBoolean)be_
                     && bf_())
-                    && bg_()));
+                    && bg_());
             }
 
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
@@ -363,9 +363,9 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     return fh_;
                 }
 
-                return (bool?)(/* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ ((CqlBoolean)ey_
+                return /* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ ((CqlBoolean)ey_
                     && ez_())
-                    && fa_()));
+                    && fa_());
             }
 
             IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
@@ -460,8 +460,8 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     return q_;
                 }
 
-                return (bool?)(/* CQL 'and' (27:27-28:138) */ ((CqlBoolean)k_
-                    && l_()));
+                return /* CQL 'and' (27:27-28:138) */ ((CqlBoolean)k_
+                    && l_());
             }
 
             bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -553,10 +553,10 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 return af_;
             }
 
-            return (bool?)(/* CQL 'and' (93:7-96:107) */ (/* CQL 'and' (93:13-95:112) */ (/* CQL 'and' (93:13-94:72) */ ((CqlBoolean)(!((bool?)((l_ as CqlDateTime) is null)))
+            return /* CQL 'and' (93:7-96:107) */ (/* CQL 'and' (93:13-95:112) */ (/* CQL 'and' (93:13-94:72) */ ((CqlBoolean)(!((bool?)((l_ as CqlDateTime) is null)))
                 && m_())
                 && n_())
-                && o_()));
+                && o_());
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -664,9 +664,9 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     && (CqlBoolean)(!((bool?)((this.lastTimeOfDelivery(context, TheEncounter)) is null))));
             }
 
-            return (bool?)(/* CQL 'and' (72:7-74:123) */ (/* CQL 'and' (72:13-73:81) */ ((CqlBoolean)(!((bool?)((l_ as CqlDateTime) is null)))
+            return /* CQL 'and' (72:7-74:123) */ (/* CQL 'and' (72:13-73:81) */ ((CqlBoolean)(!((bool?)((l_ as CqlDateTime) is null)))
                 && m_())
-                && n_()));
+                && n_());
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -874,11 +874,11 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     && aj_());
             }
 
-            return (bool?)(/* CQL 'or' (81:64-87:52) */ (/* CQL 'and' (82:3-84:76) */ (/* CQL 'and' (82:4-83:47) */ (/* CQL 'and' (82:4-82:77) */ ((CqlBoolean)p_
+            return /* CQL 'or' (81:64-87:52) */ (/* CQL 'and' (82:3-84:76) */ (/* CQL 'and' (82:4-83:47) */ (/* CQL 'and' (82:4-82:77) */ ((CqlBoolean)p_
                 && (CqlBoolean)(!((bool?)((this.lastTimeOfDelivery(context, TheEncounter)) is null))))
                 && q_())
                 && r_())
-                || s_()));
+                || s_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);

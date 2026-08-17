@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS154FHIRAppropriateTxforURI", "1.0.000")]
 public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleton<CMS154FHIRAppropriateTxforURI_1_0_000>
 {
@@ -331,8 +331,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 return w_;
             }
 
-            return (bool?)(/* CQL 'or' (78:5-79:79) */ ((CqlBoolean)r_
-                || s_()));
+            return /* CQL 'or' (78:5-79:79) */ ((CqlBoolean)r_
+                || s_());
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?> j_ = context.Operators.SelectWhere<ValueTuple<Encounter, Condition>, (CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?>(g_, h_, i_);
@@ -444,8 +444,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                     return av_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)aq_
-                    && ar_()));
+                return /* CQL 'and' */ ((CqlBoolean)aq_
+                    && ar_());
             }
 
             bool? al_ = context.Operators.WhereAny<Medication>(aj_, ak_);
@@ -509,8 +509,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                         return aa_;
                     }
 
-                    return (bool?)(/* CQL 'and' */ ((CqlBoolean)v_
-                        && w_()));
+                    return /* CQL 'and' */ ((CqlBoolean)v_
+                        && w_());
                 }
 
                 bool? q_ = context.Operators.WhereAny<Medication>(o_, p_);
@@ -541,8 +541,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                     return !((bool?)(an_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (107:17-107:104) */ ((CqlBoolean)aj_
-                    && ak_()));
+                return /* CQL 'and' (107:17-107:104) */ ((CqlBoolean)aj_
+                    && ak_());
             }
 
             bool? n_ = context.Operators.WhereAny<MedicationRequest>(l_, m_);
@@ -590,8 +590,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 return x_;
             }
 
-            return (bool?)(/* CQL 'and' (112:5-113:69) */ ((CqlBoolean)n_
-                && o_()));
+            return /* CQL 'and' (112:5-113:69) */ ((CqlBoolean)n_
+                && o_());
         }
 
         Encounter c_(Encounter EncounterWithURI) => EncounterWithURI;

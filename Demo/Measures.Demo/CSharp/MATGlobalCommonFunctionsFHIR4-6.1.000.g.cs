@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("MATGlobalCommonFunctionsFHIR4", "6.1.000")]
 public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleton<MATGlobalCommonFunctionsFHIR4_6_1_000>
 {
@@ -294,9 +294,9 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 return r_;
             }
 
-            return (bool?)(/* CQL 'and' (73:9-75:71) */ (/* CQL 'and' (73:15-74:64) */ ((CqlBoolean)g_
+            return /* CQL 'and' (73:9-75:71) */ (/* CQL 'and' (73:15-74:64) */ ((CqlBoolean)g_
                 && h_())
-                && i_()));
+                && i_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -338,8 +338,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     && v_());
             }
 
-            return (bool?)(/* CQL 'and' (85:7-86:112) */ ((CqlBoolean)j_
-                && k_()));
+            return /* CQL 'and' (85:7-86:112) */ ((CqlBoolean)j_
+                && k_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -510,8 +510,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                         return !((bool?)(bt_ is null));
                     }
 
-                    return (bool?)(/* CQL 'and' (178:7-178:81) */ ((CqlBoolean)bp_
-                        && bq_()));
+                    return /* CQL 'and' (178:7-178:81) */ ((CqlBoolean)bp_
+                        && bq_());
                 }
 
                 IEnumerable<Encounter> aj_ = context.Operators.Where<Encounter>(ah_, ai_);
@@ -553,8 +553,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                         return !((bool?)(ck_ is null));
                     }
 
-                    return (bool?)(/* CQL 'and' (178:7-178:81) */ ((CqlBoolean)cg_
-                        && ch_()));
+                    return /* CQL 'and' (178:7-178:81) */ ((CqlBoolean)cg_
+                        && ch_());
                 }
 
                 IEnumerable<Encounter> aw_ = context.Operators.Where<Encounter>(ah_, av_);
@@ -597,8 +597,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                             return !((bool?)(do_ is null));
                         }
 
-                        return (bool?)(/* CQL 'and' (178:7-178:81) */ ((CqlBoolean)dk_
-                            && dl_()));
+                        return /* CQL 'and' (178:7-178:81) */ ((CqlBoolean)dk_
+                            && dl_());
                     }
 
                     IEnumerable<Encounter> cr_ = context.Operators.Where<Encounter>(cp_, cq_);
@@ -621,8 +621,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     return !((bool?)((cx_ ?? da_) is null));
                 }
 
-                return (bool?)(/* CQL 'and' (183:7-183:69) */ ((CqlBoolean)be_
-                    && bf_()));
+                return /* CQL 'and' (183:7-183:69) */ ((CqlBoolean)be_
+                    && bf_());
             }
 
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
@@ -661,8 +661,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     return !((bool?)(ei_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (178:7-178:81) */ ((CqlBoolean)ee_
-                    && ef_()));
+                return /* CQL 'and' (178:7-178:81) */ ((CqlBoolean)ee_
+                    && ef_());
             }
 
             IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);

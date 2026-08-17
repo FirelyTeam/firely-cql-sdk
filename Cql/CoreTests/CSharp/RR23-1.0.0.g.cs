@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
@@ -193,8 +193,8 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                         return !((bool?)(z_ is null));
                     }
 
-                    return (bool?)(/* CQL 'and' (48:52-48:126) */ ((CqlBoolean)w_
-                        && x_()));
+                    return /* CQL 'and' (48:52-48:126) */ ((CqlBoolean)w_
+                        && x_());
                 }
 
                 IEnumerable<Condition> n_ = context.Operators.Where<Condition>((IEnumerable<Condition>)l_, m_);
@@ -202,8 +202,8 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                 return !((bool?)(o_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (47:7-48:140) */ ((CqlBoolean)i_
-                && j_()));
+            return /* CQL 'and' (47:7-48:140) */ ((CqlBoolean)i_
+                && j_());
         }
 
         IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_, b_);

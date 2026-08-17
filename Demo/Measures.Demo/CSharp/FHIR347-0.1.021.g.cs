@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("FHIR347", "0.1.021")]
 public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
 {
@@ -271,8 +271,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 return as_;
             }
 
-            return (bool?)(/* CQL 'and' (100:13-101:51) */ ((CqlBoolean)ao_
-                && ap_()));
+            return /* CQL 'and' (100:13-101:51) */ ((CqlBoolean)ao_
+                && ap_());
         }
 
         IEnumerable<Procedure> ac_ = context.Operators.Where<Procedure>(aa_, ab_);
@@ -326,8 +326,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 return ag_;
             }
 
-            return (bool?)(/* CQL 'and' (180:9-181:46) */ ((CqlBoolean)ac_
-                && ad_()));
+            return /* CQL 'and' (180:9-181:46) */ ((CqlBoolean)ac_
+                && ad_());
         }
 
         IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
@@ -352,8 +352,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             return e_;
         }
 
-        return (bool?)(/* CQL 'and' (78:3-79:63) */ ((CqlBoolean)b_
-            && c_()));
+        return /* CQL 'and' (78:3-79:63) */ ((CqlBoolean)b_
+            && c_());
     }
 
 
@@ -431,9 +431,9 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 return t_;
             }
 
-            return (bool?)(/* CQL 'and' (150:9-152:73) */ (/* CQL 'and' (150:15-151:97) */ ((CqlBoolean)h_
+            return /* CQL 'and' (150:9-152:73) */ (/* CQL 'and' (150:15-151:97) */ ((CqlBoolean)h_
                 && i_())
-                && j_()));
+                && j_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -491,9 +491,9 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             return !i_;
         }
 
-        return (bool?)(/* CQL 'and' (159:3-162:84) */ (/* CQL 'and' (159:3-161:47) */ ((CqlBoolean)a_
+        return /* CQL 'and' (159:3-162:84) */ (/* CQL 'and' (159:3-161:47) */ ((CqlBoolean)a_
             && b_())
-            && c_()));
+            && c_());
     }
 
 
@@ -513,8 +513,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             return d_;
         }
 
-        return (bool?)(/* CQL 'and' (82:3-83:63) */ ((CqlBoolean)a_
-            && b_()));
+        return /* CQL 'and' (82:3-83:63) */ ((CqlBoolean)a_
+            && b_());
     }
 
 
@@ -592,11 +592,11 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             return !r_;
         }
 
-        return (bool?)(/* CQL 'and' (165:3-169:51) */ (/* CQL 'and' (165:3-168:60) */ (/* CQL 'and' (165:3-167:82) */ (/* CQL 'and' (165:3-166:32) */ ((CqlBoolean)i_
+        return /* CQL 'and' (165:3-169:51) */ (/* CQL 'and' (165:3-168:60) */ (/* CQL 'and' (165:3-167:82) */ (/* CQL 'and' (165:3-166:32) */ ((CqlBoolean)i_
             && (CqlBoolean)(this.Has_Diabetes_Diagnosis(context)))
             && j_())
             && k_())
-            && l_()));
+            && l_());
     }
 
 
@@ -616,8 +616,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             return d_;
         }
 
-        return (bool?)(/* CQL 'and' (86:3-87:63) */ ((CqlBoolean)a_
-            && b_()));
+        return /* CQL 'and' (86:3-87:63) */ ((CqlBoolean)a_
+            && b_());
     }
 
 
@@ -753,9 +753,9 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 return w_;
             }
 
-            return (bool?)(/* CQL 'and' (194:7-197:57) */ (/* CQL 'and' (194:13-196:87) */ ((CqlBoolean)n_
+            return /* CQL 'and' (194:7-197:57) */ (/* CQL 'and' (194:13-196:87) */ ((CqlBoolean)n_
                 && o_())
-                && p_()));
+                && p_());
         }
 
         bool? g_ = context.Operators.WhereAny<ServiceRequest>(e_, f_);
@@ -782,8 +782,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     return an_;
                 }
 
-                return (bool?)(/* CQL 'and' (201:9-203:67) */ ((CqlBoolean)aj_
-                    && ak_()));
+                return /* CQL 'and' (201:9-203:67) */ ((CqlBoolean)aj_
+                    && ak_());
             }
 
             bool? ad_ = context.Operators.WhereAny<Procedure>(ab_, ac_);
@@ -811,17 +811,17 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     return bc_;
                 }
 
-                return (bool?)(/* CQL 'and' (206:9-208:53) */ ((CqlBoolean)ay_
-                    && az_()));
+                return /* CQL 'and' (206:9-208:53) */ ((CqlBoolean)ay_
+                    && az_());
             }
 
             bool? as_ = context.Operators.WhereAny<Encounter>(aq_, ar_);
             return as_;
         }
 
-        return (bool?)(/* CQL 'or' (192:3-209:5) */ (/* CQL 'or' (192:3-204:5) */ ((CqlBoolean)g_
+        return /* CQL 'or' (192:3-209:5) */ (/* CQL 'or' (192:3-204:5) */ ((CqlBoolean)g_
             || h_())
-            || i_()));
+            || i_());
     }
 
 
@@ -935,12 +935,12 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Allergy_to_Statin(context);
-        return (bool?)(/* CQL 'or' (105:3-110:43) */ (/* CQL 'or' (105:3-109:31) */ (/* CQL 'or' (105:3-108:50) */ (/* CQL 'or' (105:3-107:53) */ (/* CQL 'or' (105:3-106:67) */ ((CqlBoolean)a_
+        return /* CQL 'or' (105:3-110:43) */ (/* CQL 'or' (105:3-109:31) */ (/* CQL 'or' (105:3-108:50) */ (/* CQL 'or' (105:3-107:53) */ (/* CQL 'or' (105:3-106:67) */ ((CqlBoolean)a_
             || (CqlBoolean)(this.Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care(context)))
             || (CqlBoolean)(this.Has_Hepatitis_or_Liver_Disease_Diagnosis(context)))
             || (CqlBoolean)(this.Has_Statin_Associated_Muscle_Symptoms(context)))
             || (CqlBoolean)(this.Has_ESRD_Diagnosis(context)))
-            || (CqlBoolean)(this.Has_Adverse_Reaction_to_Statin(context))));
+            || (CqlBoolean)(this.Has_Adverse_Reaction_to_Statin(context)));
     }
 
 
@@ -1005,8 +1005,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     return ai_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)ad_
-                    && ae_()));
+                return /* CQL 'and' */ ((CqlBoolean)ad_
+                    && ae_());
             }
 
             bool? w_ = context.Operators.WhereAny<Medication>(u_, v_);
@@ -1038,8 +1038,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     return ax_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)as_
-                    && at_()));
+                return /* CQL 'and' */ ((CqlBoolean)as_
+                    && at_());
             }
 
             bool? al_ = context.Operators.WhereAny<Medication>(aj_, ak_);
@@ -1072,8 +1072,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     return bm_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)bh_
-                    && bi_()));
+                return /* CQL 'and' */ ((CqlBoolean)bh_
+                    && bi_());
             }
 
             bool? ba_ = context.Operators.WhereAny<Medication>(ay_, az_);
@@ -1109,9 +1109,9 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 return bz_;
             }
 
-            return (bool?)(/* CQL 'and' (187:9-189:42) */ (/* CQL 'and' (187:15-188:61) */ ((CqlBoolean)bq_
+            return /* CQL 'and' (187:9-189:42) */ (/* CQL 'and' (187:15-188:61) */ ((CqlBoolean)bq_
                 && br_())
-                && bs_()));
+                && bs_());
         }
 
         IEnumerable<MedicationRequest> t_ = context.Operators.Where<MedicationRequest>(r_, s_);
@@ -1151,8 +1151,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     return ai_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)ad_
-                    && ae_()));
+                return /* CQL 'and' */ ((CqlBoolean)ad_
+                    && ae_());
             }
 
             bool? w_ = context.Operators.WhereAny<Medication>(u_, v_);
@@ -1184,8 +1184,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     return ax_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)as_
-                    && at_()));
+                return /* CQL 'and' */ ((CqlBoolean)as_
+                    && at_());
             }
 
             bool? al_ = context.Operators.WhereAny<Medication>(aj_, ak_);
@@ -1218,8 +1218,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     return bm_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)bh_
-                    && bi_()));
+                return /* CQL 'and' */ ((CqlBoolean)bh_
+                    && bi_());
             }
 
             bool? ba_ = context.Operators.WhereAny<Medication>(ay_, az_);
@@ -1286,8 +1286,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 return ch_;
             }
 
-            return (bool?)(/* CQL 'and' (215:5-218:58) */ ((CqlBoolean)bs_
-                && bt_()));
+            return /* CQL 'and' (215:5-218:58) */ ((CqlBoolean)bs_
+                && bt_());
         }
 
         IEnumerable<MedicationRequest> t_ = context.Operators.Where<MedicationRequest>(r_, s_);
@@ -1312,8 +1312,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             return e_;
         }
 
-        return (bool?)(/* CQL 'or' (155:3-156:76) */ ((CqlBoolean)b_
-            || c_()));
+        return /* CQL 'or' (155:3-156:76) */ ((CqlBoolean)b_
+            || c_());
     }
 
 

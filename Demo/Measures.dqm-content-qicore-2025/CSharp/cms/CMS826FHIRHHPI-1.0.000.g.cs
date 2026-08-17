@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS826FHIRHHPI", "1.0.000")]
 public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHPI_1_0_000>
 {
@@ -195,9 +195,9 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                 return y_;
             }
 
-            return (bool?)(/* CQL 'and' (55:5-57:48) */ (/* CQL 'and' (55:11-56:75) */ ((CqlBoolean)n_
+            return /* CQL 'and' (55:5-57:48) */ (/* CQL 'and' (55:11-56:75) */ ((CqlBoolean)n_
                 && o_())
-                && p_()));
+                && p_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -297,9 +297,9 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             }
         }
 
-        return (bool?)(/* CQL 'and' (136:3-141:19) */ (/* CQL 'and' (136:3-137:72) */ ((CqlBoolean)e_
+        return /* CQL 'and' (136:3-141:19) */ (/* CQL 'and' (136:3-137:72) */ ((CqlBoolean)e_
             && f_())
-            && g_()));
+            && g_());
     }
 
 

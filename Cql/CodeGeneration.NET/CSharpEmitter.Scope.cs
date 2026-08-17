@@ -297,10 +297,12 @@ internal partial class CSharpEmitter
                 // an enclosing local turns it into captured closure state — an allocation the
                 // guard form exists to avoid.
                 var nested = CreateNested(lambda.Parameters);
-                var result = nested.Linearize(lambda.Body, tailPosition: true);
+                var result = nested.Linearize(BodyWithoutRootBoolConversion(lambda), tailPosition: true);
 
                 var parameterList = string.Join(", ",
                     lambda.Parameters.Select(p => $"{_emitter._typeToCSharpConverter.ToCSharp(p.Type)} {_emitter._assignedNames[p]}"));
+                // Deliberately lambda.Body.Type, NOT the unwrapped body's: the declared type must
+                // stay bool? so only the printed body loses the conversion.
                 var returnType = _emitter._typeToCSharpConverter.ToCSharp(declaredReturnType ?? lambda.Body.Type);
 
                 // A body that linearizes without hoisting any statement prints expression-

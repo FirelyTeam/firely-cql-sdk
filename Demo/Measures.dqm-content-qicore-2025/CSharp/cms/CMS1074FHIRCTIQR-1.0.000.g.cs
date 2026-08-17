@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS1074FHIRCTIQR", "1.0.000")]
 public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIRCTIQR_1_0_000>
 {
@@ -123,9 +123,9 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
                 return x_;
             }
 
-            return (bool?)(/* CQL 'and' (25:5-27:69) */ (/* CQL 'and' (25:11-26:75) */ ((CqlBoolean)h_
+            return /* CQL 'and' (25:5-27:69) */ (/* CQL 'and' (25:11-26:75) */ ((CqlBoolean)h_
                 && i_())
-                && j_()));
+                && j_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -233,9 +233,9 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
                     return ab_;
                 }
 
-                return (bool?)(/* CQL 'and' (64:17-66:83) */ (/* CQL 'and' (64:17-65:84) */ ((CqlBoolean)m_
+                return /* CQL 'and' (64:17-66:83) */ (/* CQL 'and' (64:17-65:84) */ ((CqlBoolean)m_
                     && n_())
-                    && o_()));
+                    && o_());
             }
 
             bool? h_ = context.Operators.WhereAny<Encounter>(f_, g_);
@@ -266,9 +266,9 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
                 return !((bool?)(g_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (57:5-59:34) */ (/* CQL 'and' (57:11-58:50) */ ((CqlBoolean)(!((bool?)(d_ is null)))
+            return /* CQL 'and' (57:5-59:34) */ (/* CQL 'and' (57:11-58:50) */ ((CqlBoolean)(!((bool?)(d_ is null)))
                 && (CqlBoolean)(!((bool?)((AlaraCommonFunctions_1_10_000.Instance.sizeAdjustedValue(context, CTScan)) is null))))
-                && e_()));
+                && e_());
         }
 
         IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);

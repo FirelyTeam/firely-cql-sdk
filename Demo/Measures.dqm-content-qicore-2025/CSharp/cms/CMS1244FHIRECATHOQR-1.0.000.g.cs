@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS1244FHIRECATHOQR", "1.0.000")]
 public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244FHIRECATHOQR_1_0_000>
 {
@@ -160,8 +160,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return n_;
             }
 
-            return (bool?)(/* CQL 'and' (113:5-114:51) */ ((CqlBoolean)i_
-                && j_()));
+            return /* CQL 'and' (113:5-114:51) */ ((CqlBoolean)i_
+                && j_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -200,8 +200,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return p_;
             }
 
-            return (bool?)(/* CQL 'and' (143:7-144:56) */ ((CqlBoolean)i_
-                && j_()));
+            return /* CQL 'and' (143:7-144:56) */ ((CqlBoolean)i_
+                && j_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -272,10 +272,10 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                         && ai_());
                 }
 
-                return (bool?)(/* CQL 'or' (150:9-154:9) */ (/* CQL 'or' (150:17-152:73) */ (/* CQL 'or' (150:17-151:73) */ ((CqlBoolean)k_
+                return /* CQL 'or' (150:9-154:9) */ (/* CQL 'or' (150:17-152:73) */ (/* CQL 'or' (150:17-151:73) */ ((CqlBoolean)k_
                     || l_())
                     || m_())
-                    || n_()));
+                    || n_());
             }
 
             bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
@@ -364,9 +364,9 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     return ag_;
                 }
 
-                return (bool?)(/* CQL 'or' (222:11-225:11) */ (/* CQL 'or' (222:17-223:48) */ ((CqlBoolean)y_
+                return /* CQL 'or' (222:11-225:11) */ (/* CQL 'or' (222:17-223:48) */ ((CqlBoolean)y_
                     || z_())
-                    || aa_()));
+                    || aa_());
             }
 
             IEnumerable<CqlConcept> s_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)p_, q_, r_);
@@ -438,9 +438,9 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     || ax_());
             }
 
-            return (bool?)(/* CQL 'and' (221:7-232:9) */ (/* CQL 'and' (221:13-227:48) */ ((CqlBoolean)t_
+            return /* CQL 'and' (221:7-232:9) */ (/* CQL 'and' (221:13-227:48) */ ((CqlBoolean)t_
                 && u_())
-                && v_()));
+                && v_());
         }
 
 
@@ -522,10 +522,10 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                         && ai_());
                 }
 
-                return (bool?)(/* CQL 'or' (160:17-164:7) */ (/* CQL 'or' (160:19-162:62) */ (/* CQL 'or' (160:19-161:62) */ ((CqlBoolean)k_
+                return /* CQL 'or' (160:17-164:7) */ (/* CQL 'or' (160:19-162:62) */ (/* CQL 'or' (160:19-161:62) */ ((CqlBoolean)k_
                     || l_())
                     || m_())
-                    || n_()));
+                    || n_());
             }
 
             bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
@@ -578,8 +578,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return !((bool?)(s_ is null));
             }
 
-            return (bool?)(/* CQL 'and' (259:7-260:48) */ ((CqlBoolean)n_
-                && o_()));
+            return /* CQL 'and' (259:7-260:48) */ ((CqlBoolean)n_
+                && o_());
         }
 
 
@@ -668,8 +668,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return r_;
             }
 
-            return (bool?)(/* CQL 'and' (200:7-201:39) */ ((CqlBoolean)m_
-                && n_()));
+            return /* CQL 'and' (200:7-201:39) */ ((CqlBoolean)m_
+                && n_());
         }
 
 
@@ -770,11 +770,11 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return al_;
             }
 
-            return (bool?)(/* CQL 'and' (275:7-278:52) */ (/* CQL 'and' (275:13-277:74) */ (/* CQL 'and' (275:13-276:88) */ (/* CQL 'and' (275:13-275:108) */ ((CqlBoolean)p_
+            return /* CQL 'and' (275:7-278:52) */ (/* CQL 'and' (275:13-277:74) */ (/* CQL 'and' (275:13-276:88) */ (/* CQL 'and' (275:13-275:108) */ ((CqlBoolean)p_
                 && q_())
                 && r_())
                 && s_())
-                && t_()));
+                && t_());
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -841,9 +841,9 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     return ag_;
                 }
 
-                return (bool?)(/* CQL 'or' (240:11-243:11) */ (/* CQL 'or' (240:17-241:48) */ ((CqlBoolean)y_
+                return /* CQL 'or' (240:11-243:11) */ (/* CQL 'or' (240:17-241:48) */ ((CqlBoolean)y_
                     || z_())
-                    || aa_()));
+                    || aa_());
             }
 
             IEnumerable<CqlConcept> s_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)p_, q_, r_);
@@ -915,9 +915,9 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     || ax_());
             }
 
-            return (bool?)(/* CQL 'and' (239:7-251:9) */ (/* CQL 'and' (239:13-246:42) */ ((CqlBoolean)t_
+            return /* CQL 'and' (239:7-251:9) */ (/* CQL 'and' (239:13-246:42) */ ((CqlBoolean)t_
                 && u_())
-                && v_()));
+                && v_());
         }
 
 
@@ -995,8 +995,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return u_;
             }
 
-            return (bool?)(/* CQL 'and' (187:7-188:70) */ ((CqlBoolean)o_
-                && p_()));
+            return /* CQL 'and' (187:7-188:70) */ ((CqlBoolean)o_
+                && p_());
         }
 
 
@@ -1278,8 +1278,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     return q_;
                 }
 
-                return (bool?)(/* CQL 'and' (138:17-139:46) */ ((CqlBoolean)l_
-                    && m_()));
+                return /* CQL 'and' (138:17-139:46) */ ((CqlBoolean)l_
+                    && m_());
             }
 
             bool? g_ = context.Operators.WhereAny<Encounter>(e_, f_);

@@ -46,7 +46,8 @@
   are exactly CQL's three-valued logic — instead of `ICqlOperators.And`/`Or`/`Not` calls. Those
   runtime methods (including the `Lazy<bool?>` overloads) remain public API but are no longer
   referenced by generated code; their lifecycle is tracked in the
-  [generated-code operator ledger](../../generated-code-operator-ledger.md). `GeneratorToolVersion` is now 5.3.0.0; previously
-  generated libraries keep working unchanged. (#1514)
+  [generated-code operator ledger](../../generated-code-operator-ledger.md). `GeneratorToolVersion` was bumped
+  (see [1574-cqlboolean-lowering.md](1574-cqlboolean-lowering.md) for the version this stack lands
+  on); previously generated libraries keep working unchanged. (#1514)
 - The generated short-circuit guards carry traceability comments naming the operator and its CQL
   source span, e.g. `// CQL 'and' (33:5-33:57): right operand skipped when left is false`.

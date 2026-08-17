@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS177FHIRChildMDDSuicideAssmt", "1.0.000")]
 public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISingleton<CMS177FHIRChildMDDSuicideAssmt_1_0_000>
 {
@@ -234,9 +234,9 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                 return ar_;
             }
 
-            return (bool?)(/* CQL 'and' (80:5-88:7) */ (/* CQL 'and' (80:11-81:66) */ ((CqlBoolean)ac_
+            return /* CQL 'and' (80:5-88:7) */ (/* CQL 'and' (80:11-81:66) */ ((CqlBoolean)ac_
                 && ad_())
-                && ae_()));
+                && ae_());
         }
 
         IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
@@ -305,9 +305,9 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                 return an_;
             }
 
-            return (bool?)(/* CQL 'and' (99:5-101:77) */ (/* CQL 'and' (99:11-100:66) */ ((CqlBoolean)ac_
+            return /* CQL 'and' (99:5-101:77) */ (/* CQL 'and' (99:11-100:66) */ ((CqlBoolean)ac_
                 && ad_())
-                && ae_()));
+                && ae_());
         }
 
         IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
@@ -364,8 +364,8 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                 return v_;
             }
 
-            return (bool?)(/* CQL 'and' (43:5-45:5) */ ((CqlBoolean)l_
-                && m_()));
+            return /* CQL 'and' (43:5-45:5) */ ((CqlBoolean)l_
+                && m_());
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -451,8 +451,8 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                     return r_;
                 }
 
-                return (bool?)(/* CQL 'and' (57:17-58:94) */ ((CqlBoolean)l_
-                    && m_()));
+                return /* CQL 'and' (57:17-58:94) */ ((CqlBoolean)l_
+                    && m_());
             }
 
             bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
@@ -502,8 +502,8 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                     return v_;
                 }
 
-                return (bool?)(/* CQL 'and' (64:17-65:85) */ ((CqlBoolean)p_
-                    && q_()));
+                return /* CQL 'and' (64:17-65:85) */ ((CqlBoolean)p_
+                    && q_());
             }
 
             bool? j_ = context.Operators.WhereAny<Observation>(h_, i_);

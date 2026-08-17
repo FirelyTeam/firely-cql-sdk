@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("TestRetrieve", "1.0.1")]
 public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_1>
 {
@@ -148,8 +148,8 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
             return e_;
         }
 
-        return (bool?)(/* CQL 'or' (33:5-33:57) */ ((CqlBoolean)b_
-            || c_()));
+        return /* CQL 'or' (33:5-33:57) */ ((CqlBoolean)b_
+            || c_());
     }
 
 

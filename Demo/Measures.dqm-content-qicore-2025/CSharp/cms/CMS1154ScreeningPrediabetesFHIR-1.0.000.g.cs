@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS1154ScreeningPrediabetesFHIR", "1.0.000")]
 public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingleton<CMS1154ScreeningPrediabetesFHIR_1_0_000>
 {
@@ -209,8 +209,8 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
                     || m_());
             }
 
-            return (bool?)(/* CQL 'implies' (42:5-46:5) */ ((CqlBoolean)(!(!((bool?)(d_ is null))))
-                || e_()));
+            return /* CQL 'implies' (42:5-46:5) */ ((CqlBoolean)(!(!((bool?)(d_ is null))))
+                || e_());
         }
 
         IEnumerable<Condition> b_ = context.Operators.Where<Condition>(conditions, a_);
@@ -277,8 +277,8 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
                 return n_;
             }
 
-            return (bool?)(/* CQL 'and' (81:5-82:44) */ ((CqlBoolean)i_
-                && j_()));
+            return /* CQL 'and' (81:5-82:44) */ ((CqlBoolean)i_
+                && j_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -311,8 +311,8 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
                 return m_;
             }
 
-            return (bool?)(/* CQL 'and' (100:5-101:41) */ ((CqlBoolean)h_
-                && i_()));
+            return /* CQL 'and' (100:5-101:41) */ ((CqlBoolean)h_
+                && i_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -351,8 +351,8 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             return s_;
         }
 
-        return (bool?)(/* CQL 'and' (145:3-145:75) */ ((CqlBoolean)i_
-            && j_()));
+        return /* CQL 'and' (145:3-145:75) */ ((CqlBoolean)i_
+            && j_());
     }
 
 
@@ -374,9 +374,9 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             return f_;
         }
 
-        return (bool?)(/* CQL 'and' (104:3-107:62) */ (/* CQL 'or' (104:3-106:3) */ ((CqlBoolean)b_
+        return /* CQL 'and' (104:3-107:62) */ (/* CQL 'or' (104:3-106:3) */ ((CqlBoolean)b_
             || c_())
-            && (CqlBoolean)((bool?)(/* CQL 'is true' (107:9-107:62) */ (this.Aged_35_to_70_at_Start_of_Measurement_Period(context)) is true))));
+            && (CqlBoolean)((bool?)(/* CQL 'is true' (107:9-107:62) */ (this.Aged_35_to_70_at_Start_of_Measurement_Period(context)) is true)));
     }
 
 
@@ -467,8 +467,8 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlQuantity c_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, b_ as Quantity);
         CqlQuantity d_ = context.Operators.Quantity(25m, "kg/m2");
         bool? e_ = context.Operators.GreaterOrEqual(c_, d_);
-        return (bool?)(/* CQL 'and' (89:3-90:30) */ ((CqlBoolean)e_
-            && (CqlBoolean)(this.Patient_is_not_Asian(context))));
+        return /* CQL 'and' (89:3-90:30) */ ((CqlBoolean)e_
+            && (CqlBoolean)(this.Patient_is_not_Asian(context)));
     }
 
 
@@ -485,8 +485,8 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlQuantity c_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, b_ as Quantity);
         CqlQuantity d_ = context.Operators.Quantity(23m, "kg/m2");
         bool? e_ = context.Operators.GreaterOrEqual(c_, d_);
-        return (bool?)(/* CQL 'and' (85:3-86:26) */ ((CqlBoolean)e_
-            && (CqlBoolean)(this.Patient_is_Asian(context))));
+        return /* CQL 'and' (85:3-86:26) */ ((CqlBoolean)e_
+            && (CqlBoolean)(this.Patient_is_Asian(context)));
     }
 
 
@@ -506,8 +506,8 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
                 || (CqlBoolean)(this.Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian(context)));
         }
 
-        return (bool?)(/* CQL 'and' (93:3-96:5) */ ((CqlBoolean)a_
-            && b_()));
+        return /* CQL 'and' (93:3-96:5) */ ((CqlBoolean)a_
+            && b_());
     }
 
 
@@ -555,8 +555,8 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
                 return o_;
             }
 
-            return (bool?)(/* CQL 'and' (61:5-62:72) */ ((CqlBoolean)i_
-                && j_()));
+            return /* CQL 'and' (61:5-62:72) */ ((CqlBoolean)i_
+                && j_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -603,8 +603,8 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
                 return m_;
             }
 
-            return (bool?)(/* CQL 'and' (69:7-70:93) */ ((CqlBoolean)g_
-                && h_()));
+            return /* CQL 'and' (69:7-70:93) */ ((CqlBoolean)g_
+                && h_());
         }
 
         bool? c_ = context.Operators.WhereAny<Observation>(a_, b_);
@@ -738,8 +738,8 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
                 return o_;
             }
 
-            return (bool?)(/* CQL 'and' (131:7-132:74) */ ((CqlBoolean)i_
-                && j_()));
+            return /* CQL 'and' (131:7-132:74) */ ((CqlBoolean)i_
+                && j_());
         }
 
         bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -784,12 +784,12 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             return m_;
         }
 
-        return (bool?)(/* CQL 'or' (116:3-121:78) */ (/* CQL 'or' (116:3-120:70) */ (/* CQL 'or' (116:3-119:67) */ (/* CQL 'or' (116:3-118:63) */ (/* CQL 'or' (116:3-117:65) */ ((CqlBoolean)a_
+        return /* CQL 'or' (116:3-121:78) */ (/* CQL 'or' (116:3-120:70) */ (/* CQL 'or' (116:3-119:67) */ (/* CQL 'or' (116:3-118:63) */ (/* CQL 'or' (116:3-117:65) */ ((CqlBoolean)a_
             || b_())
             || c_())
             || d_())
             || e_())
-            || (CqlBoolean)(this.Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period(context))));
+            || (CqlBoolean)(this.Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period(context)));
     }
 
 

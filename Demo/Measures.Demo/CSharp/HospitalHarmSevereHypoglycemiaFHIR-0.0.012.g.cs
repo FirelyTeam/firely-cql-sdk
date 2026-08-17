@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("HospitalHarmSevereHypoglycemiaFHIR", "0.0.012")]
 public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISingleton<HospitalHarmSevereHypoglycemiaFHIR_0_0_012>
 {
@@ -166,8 +166,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 return m_;
             }
 
-            return (bool?)(/* CQL 'and' (40:19-41:90) */ ((CqlBoolean)g_
-                && h_()));
+            return /* CQL 'and' (40:19-41:90) */ ((CqlBoolean)g_
+                && h_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -234,8 +234,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                     return w_;
                 }
 
-                return (bool?)(/* CQL 'and' */ ((CqlBoolean)r_
-                    && s_()));
+                return /* CQL 'and' */ ((CqlBoolean)r_
+                    && s_());
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -257,8 +257,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 return !ad_;
             }
 
-            return (bool?)(/* CQL 'and' (63:5-64:45) */ ((CqlBoolean)z_
-                && aa_()));
+            return /* CQL 'and' (63:5-64:45) */ ((CqlBoolean)z_
+                && aa_());
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
@@ -385,11 +385,11 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         return ap_;
                     }
 
-                    return (bool?)(/* CQL 'and' (70:21-73:152) */ (/* CQL 'and' (70:21-72:53) */ (/* CQL 'and' (70:21-71:48) */ (/* CQL 'and' (70:21-70:182) */ ((CqlBoolean)x_
+                    return /* CQL 'and' (70:21-73:152) */ (/* CQL 'and' (70:21-72:53) */ (/* CQL 'and' (70:21-71:48) */ (/* CQL 'and' (70:21-70:182) */ ((CqlBoolean)x_
                         && y_())
                         && z_())
                         && aa_())
-                        && ab_()));
+                        && ab_());
                 }
 
                 bool? n_ = context.Operators.WhereAny<MedicationAdministration>(l_, m_);
@@ -457,11 +457,11 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         return ca_;
                     }
 
-                    return (bool?)(/* CQL 'and' (75:21-79:58) */ (/* CQL 'and' (75:21-78:61) */ (/* CQL 'and' (75:21-77:56) */ (/* CQL 'and' (75:21-76:179) */ ((CqlBoolean)ay_
+                    return /* CQL 'and' (75:21-79:58) */ (/* CQL 'and' (75:21-78:61) */ (/* CQL 'and' (75:21-77:56) */ (/* CQL 'and' (75:21-76:179) */ ((CqlBoolean)ay_
                         && az_())
                         && ba_())
                         && bb_())
-                        && bc_()));
+                        && bc_());
                 }
 
                 bool? at_ = context.Operators.WhereAny<Observation>(ar_, as_);
@@ -485,8 +485,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                     return ck_;
                 }
 
-                return (bool?)(/* CQL 'and' (80:9-81:48) */ ((CqlBoolean)cf_
-                    && cg_()));
+                return /* CQL 'and' (80:9-81:48) */ ((CqlBoolean)cf_
+                    && cg_());
             }
 
             bool? k_ = context.Operators.WhereAny<Observation>(i_, j_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("CMS68FHIRDocumentationCurrentMeds", "1.0.000")]
 public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISingleton<CMS68FHIRDocumentationCurrentMeds_1_0_000>
 {
@@ -160,8 +160,8 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                 return m_;
             }
 
-            return (bool?)(/* CQL 'and' (38:5-39:66) */ ((CqlBoolean)h_
-                && i_()));
+            return /* CQL 'and' (38:5-39:66) */ ((CqlBoolean)h_
+                && i_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -304,9 +304,9 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                     return ai_;
                 }
 
-                return (bool?)(/* CQL 'and' (47:17-49:54) */ (/* CQL 'and' (47:17-48:69) */ ((CqlBoolean)n_
+                return /* CQL 'and' (47:17-49:54) */ (/* CQL 'and' (47:17-48:69) */ ((CqlBoolean)n_
                     && o_())
-                    && p_()));
+                    && p_());
             }
 
             bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
@@ -388,9 +388,9 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                     return af_;
                 }
 
-                return (bool?)(/* CQL 'and' (54:17-58:9) */ (/* CQL 'and' (54:17-55:56) */ ((CqlBoolean)q_
+                return /* CQL 'and' (54:17-58:9) */ (/* CQL 'and' (54:17-55:56) */ ((CqlBoolean)q_
                     && r_())
-                    && s_()));
+                    && s_());
             }
 
             bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);

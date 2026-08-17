@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("PalliativeCareFHIR", "0.6.000")]
 public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<PalliativeCareFHIR_0_6_000>
 {
@@ -135,9 +135,9 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                 return x_;
             }
 
-            return (bool?)(/* CQL 'and' (23:15-27:112) */ (/* CQL 'and' (23:21-26:17) */ ((CqlBoolean)k_
+            return /* CQL 'and' (23:15-27:112) */ (/* CQL 'and' (23:21-26:17) */ ((CqlBoolean)k_
                 && l_())
-                && m_()));
+                && m_());
         }
 
         bool? e_ = context.Operators.WhereAny<Observation>(c_, d_);
@@ -159,8 +159,8 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                     return aj_;
                 }
 
-                return (bool?)(/* CQL 'and' (30:17-31:110) */ ((CqlBoolean)ae_
-                    && af_()));
+                return /* CQL 'and' (30:17-31:110) */ ((CqlBoolean)ae_
+                    && af_());
             }
 
             bool? ab_ = context.Operators.WhereAny<Encounter>(z_, aa_);
@@ -189,17 +189,17 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                     return aw_;
                 }
 
-                return (bool?)(/* CQL 'and' (34:17-35:116) */ ((CqlBoolean)ar_
-                    && as_()));
+                return /* CQL 'and' (34:17-35:116) */ ((CqlBoolean)ar_
+                    && as_());
             }
 
             bool? an_ = context.Operators.WhereAny<Procedure>(al_, am_);
             return an_;
         }
 
-        return (bool?)(/* CQL 'or' (22:3-36:13) */ (/* CQL 'or' (22:3-32:13) */ ((CqlBoolean)e_
+        return /* CQL 'or' (22:3-36:13) */ (/* CQL 'or' (22:3-32:13) */ ((CqlBoolean)e_
             || f_())
-            || g_()));
+            || g_());
     }
 
 

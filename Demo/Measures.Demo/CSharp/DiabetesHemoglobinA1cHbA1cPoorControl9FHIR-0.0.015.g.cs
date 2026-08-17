@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR", "0.0.015")]
 public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibrary, ISingleton<DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015>
 {
@@ -195,8 +195,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 return l_;
             }
 
-            return (bool?)(/* CQL 'and' (72:37-73:127) */ ((CqlBoolean)g_
-                && h_()));
+            return /* CQL 'and' (72:37-73:127) */ ((CqlBoolean)g_
+                && h_());
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -247,9 +247,9 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             return t_;
         }
 
-        return (bool?)(/* CQL 'and' (63:3-68:41) */ (/* CQL 'and' (63:3-65:62) */ ((CqlBoolean)j_
+        return /* CQL 'and' (63:3-68:41) */ (/* CQL 'and' (63:3-65:62) */ ((CqlBoolean)j_
             && k_())
-            && l_()));
+            && l_());
     }
 
 
@@ -295,8 +295,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 return p_;
             }
 
-            return (bool?)(/* CQL 'and' (83:41-84:112) */ ((CqlBoolean)k_
-                && l_()));
+            return /* CQL 'and' (83:41-84:112) */ ((CqlBoolean)k_
+                && l_());
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -330,8 +330,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             return (bool?)(d_ is null);
         }
 
-        return (bool?)(/* CQL 'and' (59:3-60:69) */ ((CqlBoolean)(!((bool?)(a_ is null)))
-            && b_()));
+        return /* CQL 'and' (59:3-60:69) */ ((CqlBoolean)(!((bool?)(a_ is null)))
+            && b_());
     }
 
 
@@ -381,8 +381,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 return m_;
             }
 
-            return (bool?)(/* CQL 'and' (77:41-78:109) */ ((CqlBoolean)h_
-                && i_()));
+            return /* CQL 'and' (77:41-78:109) */ ((CqlBoolean)h_
+                && i_());
         }
 
         bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -399,9 +399,9 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     private bool? Numerator_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Most_Recent_HbA1c_Without_Result(context);
-        return (bool?)(/* CQL 'or' (51:3-53:63) */ (/* CQL 'or' (51:3-52:71) */ ((CqlBoolean)a_
+        return /* CQL 'or' (51:3-53:63) */ (/* CQL 'or' (51:3-52:71) */ ((CqlBoolean)a_
             || (CqlBoolean)(this.Has_Most_Recent_Elevated_HbA1c(context)))
-            || (CqlBoolean)(this.Has_No_Record_Of_HbA1c(context))));
+            || (CqlBoolean)(this.Has_No_Record_Of_HbA1c(context)));
     }
 
 
@@ -429,10 +429,10 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 && (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context)));
         }
 
-        return (bool?)(/* CQL 'or' (89:3-93:93) */ (/* CQL 'or' (89:3-92:110) */ (/* CQL 'or' (89:3-90:112) */ ((CqlBoolean)a_
+        return /* CQL 'or' (89:3-93:93) */ (/* CQL 'or' (89:3-92:110) */ (/* CQL 'or' (89:3-90:112) */ ((CqlBoolean)a_
             || (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)))
             || b_())
-            || (CqlBoolean)(PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context))));
+            || (CqlBoolean)(PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context)));
     }
 
 

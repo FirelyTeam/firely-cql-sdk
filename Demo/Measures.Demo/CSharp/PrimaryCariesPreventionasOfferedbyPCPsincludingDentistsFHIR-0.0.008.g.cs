@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR", "0.0.008")]
 public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008 : ILibrary, ISingleton<PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008>
 {
@@ -204,8 +204,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                 return ag_;
             }
 
-            return (bool?)(/* CQL 'and' (55:15-56:54) */ ((CqlBoolean)ac_
-                && ad_()));
+            return /* CQL 'and' (55:15-56:54) */ ((CqlBoolean)ac_
+                && ad_());
         }
 
         IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
@@ -251,9 +251,9 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             return v_;
         }
 
-        return (bool?)(/* CQL 'and' (74:3-77:52) */ (/* CQL 'and' (74:3-75:81) */ ((CqlBoolean)i_
+        return /* CQL 'and' (74:3-77:52) */ (/* CQL 'and' (74:3-75:81) */ ((CqlBoolean)i_
             && j_())
-            && k_()));
+            && k_());
     }
 
 
@@ -314,8 +314,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             return s_;
         }
 
-        return (bool?)(/* CQL 'and' (59:3-60:81) */ ((CqlBoolean)i_
-            && j_()));
+        return /* CQL 'and' (59:3-60:81) */ ((CqlBoolean)i_
+            && j_());
     }
 
 
@@ -387,8 +387,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                 return l_;
             }
 
-            return (bool?)(/* CQL 'and' (70:17-71:62) */ ((CqlBoolean)h_
-                && i_()));
+            return /* CQL 'and' (70:17-71:62) */ ((CqlBoolean)h_
+                && i_());
         }
 
         bool? d_ = context.Operators.WhereAny<Procedure>(b_, c_);
