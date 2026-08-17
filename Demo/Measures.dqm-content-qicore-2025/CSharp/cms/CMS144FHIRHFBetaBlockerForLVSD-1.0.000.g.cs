@@ -490,24 +490,34 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     {
         CodeableConcept a_ = allergyIntolerance?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
-        CqlCode c_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
-        CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
-        bool? e_ = context.Operators.Equivalent(b_, d_);
-        bool? f_;
-        // CQL 'or' (185:61-187:3): right operand skipped when left is true
-        if (e_ is true)
+        bool? c_ = !((bool?)(b_ is null));
+        // CQL 'implies' (185:3-187:3): right operand skipped when left is false
+        if (c_ is false)
         {
-            f_ = true;
+            return true;
         }
         else
         {
-            CqlCode h_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
-            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
-            bool? j_ = context.Operators.Equivalent(b_, i_);
-            f_ = e_ | j_;
+            CqlCode d_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
+            CqlConcept e_ = context.Operators.ConvertCodeToConcept(d_);
+            bool? f_ = context.Operators.Equivalent(b_, e_);
+            bool? g_;
+            // CQL 'or' (185:61-187:3): right operand skipped when left is true
+            if (f_ is true)
+            {
+                g_ = true;
+            }
+            else
+            {
+                CodeableConcept h_ = allergyIntolerance?.VerificationStatus;
+                CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
+                CqlCode j_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
+                CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+                bool? l_ = context.Operators.Equivalent(i_, k_);
+                g_ = f_ | l_;
+            }
+            return !c_ | g_;
         }
-        bool? g_ = context.Operators.Implies(!((bool?)(b_ is null)), f_);
-        return g_;
     }
 
 

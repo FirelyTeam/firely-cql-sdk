@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ShortCircuitLogicTest", "1.0.0")]
 public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCircuitLogicTest_1_0_0>
 {
-    #region Functions and Expressions (44)
+    #region Functions and Expressions (56)
 
     [CqlExpressionDefinition("TrueDef")]
     public bool? TrueDef(CqlContext context) =>
@@ -477,6 +477,201 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
     }
 
 
+    [CqlExpressionDefinition("TrueImpliesTrue")]
+    public bool? TrueImpliesTrue(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_TrueImpliesTrue, TrueImpliesTrue_Compute);
+
+    private const long _cacheIndex_TrueImpliesTrue = 467546881030773344L;
+
+    private bool? TrueImpliesTrue_Compute(CqlContext context)
+    {
+        bool? a_ = this.TrueDef(context);
+        // CQL 'implies' (47:27-47:53): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return true;
+        }
+        else
+        {
+            return !a_ | a_;
+        }
+    }
+
+
+    [CqlExpressionDefinition("TrueImpliesFalse")]
+    public bool? TrueImpliesFalse(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_TrueImpliesFalse, TrueImpliesFalse_Compute);
+
+    private const long _cacheIndex_TrueImpliesFalse = -1097953122463145083L;
+
+    private bool? TrueImpliesFalse_Compute(CqlContext context)
+    {
+        bool? a_ = this.TrueDef(context);
+        // CQL 'implies' (48:28-48:55): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return true;
+        }
+        else
+        {
+            bool? b_ = this.FalseDef(context);
+            return !a_ | b_;
+        }
+    }
+
+
+    [CqlExpressionDefinition("TrueImpliesNull")]
+    public bool? TrueImpliesNull(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_TrueImpliesNull, TrueImpliesNull_Compute);
+
+    private const long _cacheIndex_TrueImpliesNull = 3350382714373498219L;
+
+    private bool? TrueImpliesNull_Compute(CqlContext context)
+    {
+        bool? a_ = this.TrueDef(context);
+        // CQL 'implies' (49:27-49:53): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return true;
+        }
+        else
+        {
+            bool? b_ = this.NullDef(context);
+            return !a_ | b_;
+        }
+    }
+
+
+    [CqlExpressionDefinition("FalseImpliesTrue")]
+    public bool? FalseImpliesTrue(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_FalseImpliesTrue, FalseImpliesTrue_Compute);
+
+    private const long _cacheIndex_FalseImpliesTrue = -4974360173652851006L;
+
+    private bool? FalseImpliesTrue_Compute(CqlContext context)
+    {
+        bool? a_ = this.FalseDef(context);
+        // CQL 'implies' (50:28-50:55): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return true;
+        }
+        else
+        {
+            bool? b_ = this.TrueDef(context);
+            return !a_ | b_;
+        }
+    }
+
+
+    [CqlExpressionDefinition("FalseImpliesFalse")]
+    public bool? FalseImpliesFalse(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_FalseImpliesFalse, FalseImpliesFalse_Compute);
+
+    private const long _cacheIndex_FalseImpliesFalse = -930170386479517076L;
+
+    private bool? FalseImpliesFalse_Compute(CqlContext context)
+    {
+        bool? a_ = this.FalseDef(context);
+        // CQL 'implies' (51:29-51:57): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return true;
+        }
+        else
+        {
+            return !a_ | a_;
+        }
+    }
+
+
+    [CqlExpressionDefinition("FalseImpliesNull")]
+    public bool? FalseImpliesNull(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_FalseImpliesNull, FalseImpliesNull_Compute);
+
+    private const long _cacheIndex_FalseImpliesNull = 4959945025528471588L;
+
+    private bool? FalseImpliesNull_Compute(CqlContext context)
+    {
+        bool? a_ = this.FalseDef(context);
+        // CQL 'implies' (52:28-52:55): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return true;
+        }
+        else
+        {
+            bool? b_ = this.NullDef(context);
+            return !a_ | b_;
+        }
+    }
+
+
+    [CqlExpressionDefinition("NullImpliesTrue")]
+    public bool? NullImpliesTrue(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_NullImpliesTrue, NullImpliesTrue_Compute);
+
+    private const long _cacheIndex_NullImpliesTrue = 3520360141529197013L;
+
+    private bool? NullImpliesTrue_Compute(CqlContext context)
+    {
+        bool? a_ = this.NullDef(context);
+        // CQL 'implies' (53:27-53:53): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return true;
+        }
+        else
+        {
+            bool? b_ = this.TrueDef(context);
+            return !a_ | b_;
+        }
+    }
+
+
+    [CqlExpressionDefinition("NullImpliesFalse")]
+    public bool? NullImpliesFalse(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_NullImpliesFalse, NullImpliesFalse_Compute);
+
+    private const long _cacheIndex_NullImpliesFalse = -607803731650961575L;
+
+    private bool? NullImpliesFalse_Compute(CqlContext context)
+    {
+        bool? a_ = this.NullDef(context);
+        // CQL 'implies' (54:28-54:55): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return true;
+        }
+        else
+        {
+            bool? b_ = this.FalseDef(context);
+            return !a_ | b_;
+        }
+    }
+
+
+    [CqlExpressionDefinition("NullImpliesNull")]
+    public bool? NullImpliesNull(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_NullImpliesNull, NullImpliesNull_Compute);
+
+    private const long _cacheIndex_NullImpliesNull = -5479413561624497055L;
+
+    private bool? NullImpliesNull_Compute(CqlContext context)
+    {
+        bool? a_ = this.NullDef(context);
+        // CQL 'implies' (55:27-55:53): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return true;
+        }
+        else
+        {
+            return !a_ | a_;
+        }
+    }
+
+
     [CqlExpressionDefinition("MessageTrue")]
     public bool? MessageTrue(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_MessageTrue, MessageTrue_Compute);
@@ -499,7 +694,7 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
     private bool? FalseAndMessage_Compute(CqlContext context)
     {
         bool? a_ = this.FalseDef(context);
-        // CQL 'and' (48:27-48:54): right operand skipped when left is false
+        // CQL 'and' (63:27-63:54): right operand skipped when left is false
         if (a_ is false)
         {
             return false;
@@ -521,7 +716,7 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
     private bool? NullAndMessage_Compute(CqlContext context)
     {
         bool? a_ = this.NullDef(context);
-        // CQL 'and' (49:26-49:52): right operand skipped when left is false
+        // CQL 'and' (64:26-64:52): right operand skipped when left is false
         if (a_ is false)
         {
             return false;
@@ -543,7 +738,7 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
     private bool? TrueOrMessage_Compute(CqlContext context)
     {
         bool? a_ = this.TrueDef(context);
-        // CQL 'or' (50:25-50:50): right operand skipped when left is true
+        // CQL 'or' (65:25-65:50): right operand skipped when left is true
         if (a_ is true)
         {
             return true;
@@ -565,7 +760,7 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
     private bool? NullOrMessage_Compute(CqlContext context)
     {
         bool? a_ = this.NullDef(context);
-        // CQL 'or' (51:25-51:50): right operand skipped when left is true
+        // CQL 'or' (66:25-66:50): right operand skipped when left is true
         if (a_ is true)
         {
             return true;
@@ -578,10 +773,76 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
     }
 
 
+    [CqlExpressionDefinition("FalseImpliesMessage")]
+    public bool? FalseImpliesMessage(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_FalseImpliesMessage, FalseImpliesMessage_Compute);
+
+    private const long _cacheIndex_FalseImpliesMessage = 6341856730686540862L;
+
+    private bool? FalseImpliesMessage_Compute(CqlContext context)
+    {
+        bool? a_ = this.FalseDef(context);
+        // CQL 'implies' (72:31-72:62): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return true;
+        }
+        else
+        {
+            bool? b_ = this.MessageTrue(context);
+            return !a_ | b_;
+        }
+    }
+
+
+    [CqlExpressionDefinition("TrueImpliesMessage")]
+    public bool? TrueImpliesMessage(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_TrueImpliesMessage, TrueImpliesMessage_Compute);
+
+    private const long _cacheIndex_TrueImpliesMessage = 2912160462594916813L;
+
+    private bool? TrueImpliesMessage_Compute(CqlContext context)
+    {
+        bool? a_ = this.TrueDef(context);
+        // CQL 'implies' (73:30-73:60): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return true;
+        }
+        else
+        {
+            bool? b_ = this.MessageTrue(context);
+            return !a_ | b_;
+        }
+    }
+
+
+    [CqlExpressionDefinition("NullImpliesMessage")]
+    public bool? NullImpliesMessage(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_NullImpliesMessage, NullImpliesMessage_Compute);
+
+    private const long _cacheIndex_NullImpliesMessage = 1207869899109621914L;
+
+    private bool? NullImpliesMessage_Compute(CqlContext context)
+    {
+        bool? a_ = this.NullDef(context);
+        // CQL 'implies' (74:30-74:60): right operand skipped when left is false
+        if (a_ is false)
+        {
+            return true;
+        }
+        else
+        {
+            bool? b_ = this.MessageTrue(context);
+            return !a_ | b_;
+        }
+    }
+
+
     [CqlFunctionDefinition("GuardedAnd")]
     public bool? GuardedAnd(CqlContext context, bool? leftOperand)
     {
-        // CQL 'and' (57:52-57:80): right operand skipped when left is false
+        // CQL 'and' (80:52-80:80): right operand skipped when left is false
         if (leftOperand is false)
         {
             return false;
@@ -604,7 +865,7 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
     {
         bool? a_ = this.TrueDef(context);
         bool? b_;
-        // CQL 'and' (64:37-64:63): right operand skipped when left is false
+        // CQL 'and' (87:37-87:63): right operand skipped when left is false
         if (a_ is false)
         {
             b_ = false;
@@ -667,7 +928,7 @@ public partial class ShortCircuitLogicTest_1_0_0 : ILibrary, ISingleton<ShortCir
 
     [CqlFunctionDefinition("AndNotY")]
     public bool? AndNotY(CqlContext context, bool? x, bool? y) =>
-    /* CQL 'and' (82:50-82:62) */ (x is false
+    /* CQL 'and' (105:50-105:62) */ (x is false
         ? false
         : x & !y);
 

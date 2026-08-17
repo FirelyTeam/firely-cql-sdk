@@ -173,6 +173,7 @@ internal partial class CodeBuilderContext
                     Is e               => Is(e),
                     IsNull e           => IsNull(e),
                     List e             => List(e),
+                    Implies e          => Implies(e),
                     Literal e          => Literal(e),
                     Message e          => Message(e),
                     Not e              => Not(e),
@@ -207,6 +208,9 @@ internal partial class CodeBuilderContext
                     ExpandValueSet e => _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.CreateValueSetFacade), TranslateArgs(GetBindArgs(element)),
                                                                          TranslateTypes(GetTypeArgs(element))),
 
+                    // Xor is deliberately NOT here: every row of its truth table varies with the
+                    // right operand, so it has nothing to skip and no native C# equivalent worth
+                    // the detour (see CodeBuilderContext.Operators.cs).
                     // All other Elm types matches on type name to the ICqlOperators method name
                     _ => _cqlOperatorsBinder.BindToMethod(element.GetType().Name, TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
                     //@formatter:on

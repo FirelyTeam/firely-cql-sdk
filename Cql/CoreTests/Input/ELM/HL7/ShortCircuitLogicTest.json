@@ -786,7 +786,322 @@
                }
             }
          }, {
-            "locator" : "46:1-46:121",
+            "locator" : "47:1-47:53",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "TrueImpliesTrue",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Implies",
+               "locator" : "47:27-47:53",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               } ],
+               "operand" : [ {
+                  "type" : "ExpressionRef",
+                  "locator" : "47:27-47:35",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "TrueDef",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "ExpressionRef",
+                  "locator" : "47:45-47:53",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "TrueDef",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "48:1-48:55",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "TrueImpliesFalse",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Implies",
+               "locator" : "48:28-48:55",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               } ],
+               "operand" : [ {
+                  "type" : "ExpressionRef",
+                  "locator" : "48:28-48:36",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "TrueDef",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "ExpressionRef",
+                  "locator" : "48:46-48:55",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "FalseDef",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "49:1-49:53",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "TrueImpliesNull",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Implies",
+               "locator" : "49:27-49:53",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               } ],
+               "operand" : [ {
+                  "type" : "ExpressionRef",
+                  "locator" : "49:27-49:35",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "TrueDef",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "ExpressionRef",
+                  "locator" : "49:45-49:53",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "NullDef",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "50:1-50:55",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "FalseImpliesTrue",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Implies",
+               "locator" : "50:28-50:55",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               } ],
+               "operand" : [ {
+                  "type" : "ExpressionRef",
+                  "locator" : "50:28-50:37",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "FalseDef",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "ExpressionRef",
+                  "locator" : "50:47-50:55",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "TrueDef",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "51:1-51:57",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "FalseImpliesFalse",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Implies",
+               "locator" : "51:29-51:57",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               } ],
+               "operand" : [ {
+                  "type" : "ExpressionRef",
+                  "locator" : "51:29-51:38",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "FalseDef",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "ExpressionRef",
+                  "locator" : "51:48-51:57",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "FalseDef",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "52:1-52:55",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "FalseImpliesNull",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Implies",
+               "locator" : "52:28-52:55",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               } ],
+               "operand" : [ {
+                  "type" : "ExpressionRef",
+                  "locator" : "52:28-52:37",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "FalseDef",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "ExpressionRef",
+                  "locator" : "52:47-52:55",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "NullDef",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "53:1-53:53",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "NullImpliesTrue",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Implies",
+               "locator" : "53:27-53:53",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               } ],
+               "operand" : [ {
+                  "type" : "ExpressionRef",
+                  "locator" : "53:27-53:35",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "NullDef",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "ExpressionRef",
+                  "locator" : "53:45-53:53",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "TrueDef",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "54:1-54:55",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "NullImpliesFalse",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Implies",
+               "locator" : "54:28-54:55",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               } ],
+               "operand" : [ {
+                  "type" : "ExpressionRef",
+                  "locator" : "54:28-54:36",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "NullDef",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "ExpressionRef",
+                  "locator" : "54:46-54:55",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "FalseDef",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "55:1-55:53",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "NullImpliesNull",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Implies",
+               "locator" : "55:27-55:53",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               } ],
+               "operand" : [ {
+                  "type" : "ExpressionRef",
+                  "locator" : "55:27-55:35",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "NullDef",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "ExpressionRef",
+                  "locator" : "55:45-55:53",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "NullDef",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "61:1-61:121",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "MessageTrue",
             "context" : "Unfiltered",
@@ -794,7 +1109,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "Message",
-               "locator" : "46:23-46:121",
+               "locator" : "61:23-61:121",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -820,7 +1135,7 @@
                } ],
                "source" : {
                   "type" : "Literal",
-                  "locator" : "46:31-46:34",
+                  "locator" : "61:31-61:34",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -828,7 +1143,7 @@
                },
                "condition" : {
                   "type" : "Literal",
-                  "locator" : "46:37-46:40",
+                  "locator" : "61:37-61:40",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -836,7 +1151,7 @@
                },
                "code" : {
                   "type" : "Literal",
-                  "locator" : "46:43-46:80",
+                  "locator" : "61:43-61:80",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "ShortCircuitLogicTest.RightEvaluated",
@@ -844,7 +1159,7 @@
                },
                "severity" : {
                   "type" : "Literal",
-                  "locator" : "46:83-46:89",
+                  "locator" : "61:83-61:89",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Trace",
@@ -852,7 +1167,7 @@
                },
                "message" : {
                   "type" : "Literal",
-                  "locator" : "46:92-46:120",
+                  "locator" : "61:92-61:120",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "right operand was evaluated",
@@ -860,7 +1175,7 @@
                }
             }
          }, {
-            "locator" : "48:1-48:54",
+            "locator" : "63:1-63:54",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FalseAndMessage",
             "context" : "Unfiltered",
@@ -868,7 +1183,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "And",
-               "locator" : "48:27-48:54",
+               "locator" : "63:27-63:54",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -882,20 +1197,20 @@
                } ],
                "operand" : [ {
                   "type" : "ExpressionRef",
-                  "locator" : "48:27-48:36",
+                  "locator" : "63:27-63:36",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "FalseDef",
                   "annotation" : [ ]
                }, {
                   "type" : "ExpressionRef",
-                  "locator" : "48:42-48:54",
+                  "locator" : "63:42-63:54",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "MessageTrue",
                   "annotation" : [ ]
                } ]
             }
          }, {
-            "locator" : "49:1-49:52",
+            "locator" : "64:1-64:52",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullAndMessage",
             "context" : "Unfiltered",
@@ -903,7 +1218,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "And",
-               "locator" : "49:26-49:52",
+               "locator" : "64:26-64:52",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -917,20 +1232,20 @@
                } ],
                "operand" : [ {
                   "type" : "ExpressionRef",
-                  "locator" : "49:26-49:34",
+                  "locator" : "64:26-64:34",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "NullDef",
                   "annotation" : [ ]
                }, {
                   "type" : "ExpressionRef",
-                  "locator" : "49:40-49:52",
+                  "locator" : "64:40-64:52",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "MessageTrue",
                   "annotation" : [ ]
                } ]
             }
          }, {
-            "locator" : "50:1-50:50",
+            "locator" : "65:1-65:50",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TrueOrMessage",
             "context" : "Unfiltered",
@@ -938,7 +1253,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "Or",
-               "locator" : "50:25-50:50",
+               "locator" : "65:25-65:50",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -952,20 +1267,20 @@
                } ],
                "operand" : [ {
                   "type" : "ExpressionRef",
-                  "locator" : "50:25-50:33",
+                  "locator" : "65:25-65:33",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "TrueDef",
                   "annotation" : [ ]
                }, {
                   "type" : "ExpressionRef",
-                  "locator" : "50:38-50:50",
+                  "locator" : "65:38-65:50",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "MessageTrue",
                   "annotation" : [ ]
                } ]
             }
          }, {
-            "locator" : "51:1-51:50",
+            "locator" : "66:1-66:50",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullOrMessage",
             "context" : "Unfiltered",
@@ -973,7 +1288,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "Or",
-               "locator" : "51:25-51:50",
+               "locator" : "66:25-66:50",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -987,13 +1302,118 @@
                } ],
                "operand" : [ {
                   "type" : "ExpressionRef",
-                  "locator" : "51:25-51:33",
+                  "locator" : "66:25-66:33",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "NullDef",
                   "annotation" : [ ]
                }, {
                   "type" : "ExpressionRef",
-                  "locator" : "51:38-51:50",
+                  "locator" : "66:38-66:50",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "MessageTrue",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "72:1-72:62",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "FalseImpliesMessage",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Implies",
+               "locator" : "72:31-72:62",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               } ],
+               "operand" : [ {
+                  "type" : "ExpressionRef",
+                  "locator" : "72:31-72:40",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "FalseDef",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "ExpressionRef",
+                  "locator" : "72:50-72:62",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "MessageTrue",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "73:1-73:60",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "TrueImpliesMessage",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Implies",
+               "locator" : "73:30-73:60",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               } ],
+               "operand" : [ {
+                  "type" : "ExpressionRef",
+                  "locator" : "73:30-73:38",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "TrueDef",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "ExpressionRef",
+                  "locator" : "73:48-73:60",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "MessageTrue",
+                  "annotation" : [ ]
+               } ]
+            }
+         }, {
+            "locator" : "74:1-74:60",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "NullImpliesMessage",
+            "context" : "Unfiltered",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Implies",
+               "locator" : "74:30-74:60",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "annotation" : [ ]
+               } ],
+               "operand" : [ {
+                  "type" : "ExpressionRef",
+                  "locator" : "74:30-74:38",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "NullDef",
+                  "annotation" : [ ]
+               }, {
+                  "type" : "ExpressionRef",
+                  "locator" : "74:48-74:60",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "MessageTrue",
                   "annotation" : [ ]
@@ -1001,7 +1421,7 @@
             }
          }, {
             "type" : "FunctionDef",
-            "locator" : "57:1-57:80",
+            "locator" : "80:1-80:80",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "GuardedAnd",
             "context" : "Unfiltered",
@@ -1009,7 +1429,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "And",
-               "locator" : "57:52-57:80",
+               "locator" : "80:52-80:80",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1023,13 +1443,13 @@
                } ],
                "operand" : [ {
                   "type" : "OperandRef",
-                  "locator" : "57:52-57:62",
+                  "locator" : "80:52-80:62",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "leftOperand",
                   "annotation" : [ ]
                }, {
                   "type" : "ExpressionRef",
-                  "locator" : "57:68-57:80",
+                  "locator" : "80:68-80:80",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "MessageTrue",
                   "annotation" : [ ]
@@ -1040,14 +1460,14 @@
                "annotation" : [ ],
                "operandTypeSpecifier" : {
                   "type" : "NamedTypeSpecifier",
-                  "locator" : "57:42-57:48",
+                  "locator" : "80:42-80:48",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "annotation" : [ ]
                }
             } ]
          }, {
-            "locator" : "64:1-64:77",
+            "locator" : "87:1-87:77",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "GuardInConditionalTest",
             "context" : "Unfiltered",
@@ -1055,12 +1475,12 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "If",
-               "locator" : "64:34-64:77",
+               "locator" : "87:34-87:77",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "annotation" : [ ],
                "condition" : {
                   "type" : "And",
-                  "locator" : "64:37-64:63",
+                  "locator" : "87:37-87:63",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "annotation" : [ ],
                   "signature" : [ {
@@ -1074,13 +1494,13 @@
                   } ],
                   "operand" : [ {
                      "type" : "ExpressionRef",
-                     "locator" : "64:37-64:45",
+                     "locator" : "87:37-87:45",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "TrueDef",
                      "annotation" : [ ]
                   }, {
                      "type" : "ExpressionRef",
-                     "locator" : "64:51-64:63",
+                     "locator" : "87:51-87:63",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "MessageTrue",
                      "annotation" : [ ]
@@ -1088,7 +1508,7 @@
                },
                "then" : {
                   "type" : "Literal",
-                  "locator" : "64:70",
+                  "locator" : "87:70",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
@@ -1096,7 +1516,7 @@
                },
                "else" : {
                   "type" : "Literal",
-                  "locator" : "64:77",
+                  "locator" : "87:77",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
@@ -1104,7 +1524,7 @@
                }
             }
          }, {
-            "locator" : "71:1-71:47",
+            "locator" : "94:1-94:47",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "OrTrueCollapses",
             "context" : "Unfiltered",
@@ -1112,7 +1532,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "Or",
-               "locator" : "71:27-71:47",
+               "locator" : "94:27-94:47",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1126,13 +1546,13 @@
                } ],
                "operand" : [ {
                   "type" : "ExpressionRef",
-                  "locator" : "71:27-71:39",
+                  "locator" : "94:27-94:39",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "MessageTrue",
                   "annotation" : [ ]
                }, {
                   "type" : "Literal",
-                  "locator" : "71:44-71:47",
+                  "locator" : "94:44-94:47",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -1140,7 +1560,7 @@
                } ]
             }
          }, {
-            "locator" : "72:1-72:51",
+            "locator" : "95:1-95:51",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "AndFalseCollapses",
             "context" : "Unfiltered",
@@ -1148,7 +1568,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "And",
-               "locator" : "72:29-72:51",
+               "locator" : "95:29-95:51",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1162,13 +1582,13 @@
                } ],
                "operand" : [ {
                   "type" : "ExpressionRef",
-                  "locator" : "72:29-72:41",
+                  "locator" : "95:29-95:41",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "MessageTrue",
                   "annotation" : [ ]
                }, {
                   "type" : "Literal",
-                  "locator" : "72:47-72:51",
+                  "locator" : "95:47-95:51",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -1176,7 +1596,7 @@
                } ]
             }
          }, {
-            "locator" : "73:1-73:84",
+            "locator" : "96:1-96:84",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NestedOrTrueCollapses",
             "context" : "Unfiltered",
@@ -1184,7 +1604,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "Or",
-               "locator" : "73:33-73:84",
+               "locator" : "96:33-96:84",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1198,13 +1618,13 @@
                } ],
                "operand" : [ {
                   "type" : "ExpressionRef",
-                  "locator" : "73:33-73:42",
+                  "locator" : "96:33-96:42",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "FalseDef",
                   "annotation" : [ ]
                }, {
                   "type" : "Or",
-                  "locator" : "73:47-73:84",
+                  "locator" : "96:47-96:84",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "annotation" : [ ],
                   "signature" : [ {
@@ -1218,13 +1638,13 @@
                   } ],
                   "operand" : [ {
                      "type" : "ExpressionRef",
-                     "locator" : "73:48-73:56",
+                     "locator" : "96:48-96:56",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "NullDef",
                      "annotation" : [ ]
                   }, {
                      "type" : "Or",
-                     "locator" : "73:61-73:83",
+                     "locator" : "96:61-96:83",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "annotation" : [ ],
                      "signature" : [ {
@@ -1238,13 +1658,13 @@
                      } ],
                      "operand" : [ {
                         "type" : "ExpressionRef",
-                        "locator" : "73:62-73:74",
+                        "locator" : "96:62-96:74",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "MessageTrue",
                         "annotation" : [ ]
                      }, {
                         "type" : "Literal",
-                        "locator" : "73:79-73:82",
+                        "locator" : "96:79-96:82",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "value" : "true",
@@ -1255,7 +1675,7 @@
             }
          }, {
             "type" : "FunctionDef",
-            "locator" : "80:1-80:57",
+            "locator" : "103:1-103:57",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "MergeAnd",
             "context" : "Unfiltered",
@@ -1263,7 +1683,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "And",
-               "locator" : "80:51-80:57",
+               "locator" : "103:51-103:57",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1277,13 +1697,13 @@
                } ],
                "operand" : [ {
                   "type" : "OperandRef",
-                  "locator" : "80:51",
+                  "locator" : "103:51",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "x",
                   "annotation" : [ ]
                }, {
                   "type" : "OperandRef",
-                  "locator" : "80:57",
+                  "locator" : "103:57",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "y",
                   "annotation" : [ ]
@@ -1294,7 +1714,7 @@
                "annotation" : [ ],
                "operandTypeSpecifier" : {
                   "type" : "NamedTypeSpecifier",
-                  "locator" : "80:30-80:36",
+                  "locator" : "103:30-103:36",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "annotation" : [ ]
@@ -1304,7 +1724,7 @@
                "annotation" : [ ],
                "operandTypeSpecifier" : {
                   "type" : "NamedTypeSpecifier",
-                  "locator" : "80:41-80:47",
+                  "locator" : "103:41-103:47",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "annotation" : [ ]
@@ -1312,7 +1732,7 @@
             } ]
          }, {
             "type" : "FunctionDef",
-            "locator" : "81:1-81:55",
+            "locator" : "104:1-104:55",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "MergeOr",
             "context" : "Unfiltered",
@@ -1320,7 +1740,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "Or",
-               "locator" : "81:50-81:55",
+               "locator" : "104:50-104:55",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1334,13 +1754,13 @@
                } ],
                "operand" : [ {
                   "type" : "OperandRef",
-                  "locator" : "81:50",
+                  "locator" : "104:50",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "x",
                   "annotation" : [ ]
                }, {
                   "type" : "OperandRef",
-                  "locator" : "81:55",
+                  "locator" : "104:55",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "y",
                   "annotation" : [ ]
@@ -1351,7 +1771,7 @@
                "annotation" : [ ],
                "operandTypeSpecifier" : {
                   "type" : "NamedTypeSpecifier",
-                  "locator" : "81:29-81:35",
+                  "locator" : "104:29-104:35",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "annotation" : [ ]
@@ -1361,7 +1781,7 @@
                "annotation" : [ ],
                "operandTypeSpecifier" : {
                   "type" : "NamedTypeSpecifier",
-                  "locator" : "81:40-81:46",
+                  "locator" : "104:40-104:46",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "annotation" : [ ]
@@ -1369,7 +1789,7 @@
             } ]
          }, {
             "type" : "FunctionDef",
-            "locator" : "82:1-82:62",
+            "locator" : "105:1-105:62",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "AndNotY",
             "context" : "Unfiltered",
@@ -1377,7 +1797,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "And",
-               "locator" : "82:50-82:62",
+               "locator" : "105:50-105:62",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1391,13 +1811,13 @@
                } ],
                "operand" : [ {
                   "type" : "OperandRef",
-                  "locator" : "82:50",
+                  "locator" : "105:50",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "x",
                   "annotation" : [ ]
                }, {
                   "type" : "Not",
-                  "locator" : "82:56-82:62",
+                  "locator" : "105:56-105:62",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "annotation" : [ ],
                   "signature" : [ {
@@ -1407,7 +1827,7 @@
                   } ],
                   "operand" : {
                      "type" : "OperandRef",
-                     "locator" : "82:61",
+                     "locator" : "105:61",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "y",
                      "annotation" : [ ]
@@ -1419,7 +1839,7 @@
                "annotation" : [ ],
                "operandTypeSpecifier" : {
                   "type" : "NamedTypeSpecifier",
-                  "locator" : "82:29-82:35",
+                  "locator" : "105:29-105:35",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "annotation" : [ ]
@@ -1429,14 +1849,14 @@
                "annotation" : [ ],
                "operandTypeSpecifier" : {
                   "type" : "NamedTypeSpecifier",
-                  "locator" : "82:40-82:46",
+                  "locator" : "105:40-105:46",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "annotation" : [ ]
                }
             } ]
          }, {
-            "locator" : "90:1-90:54",
+            "locator" : "113:1-113:54",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FalseConstAndMessage",
             "context" : "Unfiltered",
@@ -1444,7 +1864,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "And",
-               "locator" : "90:32-90:54",
+               "locator" : "113:32-113:54",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1458,21 +1878,21 @@
                } ],
                "operand" : [ {
                   "type" : "Literal",
-                  "locator" : "90:32-90:36",
+                  "locator" : "113:32-113:36",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
                   "annotation" : [ ]
                }, {
                   "type" : "ExpressionRef",
-                  "locator" : "90:42-90:54",
+                  "locator" : "113:42-113:54",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "MessageTrue",
                   "annotation" : [ ]
                } ]
             }
          }, {
-            "locator" : "91:1-91:50",
+            "locator" : "114:1-114:50",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TrueConstOrMessage",
             "context" : "Unfiltered",
@@ -1480,7 +1900,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "Or",
-               "locator" : "91:30-91:50",
+               "locator" : "114:30-114:50",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1494,21 +1914,21 @@
                } ],
                "operand" : [ {
                   "type" : "Literal",
-                  "locator" : "91:30-91:33",
+                  "locator" : "114:30-114:33",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "annotation" : [ ]
                }, {
                   "type" : "ExpressionRef",
-                  "locator" : "91:38-91:50",
+                  "locator" : "114:38-114:50",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "MessageTrue",
                   "annotation" : [ ]
                } ]
             }
          }, {
-            "locator" : "92:1-92:49",
+            "locator" : "115:1-115:49",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "AndTrueKeepsLeft",
             "context" : "Unfiltered",
@@ -1516,7 +1936,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "And",
-               "locator" : "92:28-92:49",
+               "locator" : "115:28-115:49",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1530,13 +1950,13 @@
                } ],
                "operand" : [ {
                   "type" : "ExpressionRef",
-                  "locator" : "92:28-92:40",
+                  "locator" : "115:28-115:40",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "MessageTrue",
                   "annotation" : [ ]
                }, {
                   "type" : "Literal",
-                  "locator" : "92:46-92:49",
+                  "locator" : "115:46-115:49",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -1544,7 +1964,7 @@
                } ]
             }
          }, {
-            "locator" : "93:1-93:49",
+            "locator" : "116:1-116:49",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "OrFalseKeepsLeft",
             "context" : "Unfiltered",
@@ -1552,7 +1972,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "Or",
-               "locator" : "93:28-93:49",
+               "locator" : "116:28-116:49",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1566,13 +1986,13 @@
                } ],
                "operand" : [ {
                   "type" : "ExpressionRef",
-                  "locator" : "93:28-93:40",
+                  "locator" : "116:28-116:40",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "MessageTrue",
                   "annotation" : [ ]
                }, {
                   "type" : "Literal",
-                  "locator" : "93:45-93:49",
+                  "locator" : "116:45-116:49",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -1580,7 +2000,7 @@
                } ]
             }
          }, {
-            "locator" : "94:1-94:65",
+            "locator" : "117:1-117:65",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullConstAndMessage",
             "context" : "Unfiltered",
@@ -1588,7 +2008,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "And",
-               "locator" : "94:31-94:65",
+               "locator" : "117:31-117:65",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1602,34 +2022,34 @@
                } ],
                "operand" : [ {
                   "type" : "As",
-                  "locator" : "94:31-94:47",
+                  "locator" : "117:31-117:47",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "strict" : false,
                   "annotation" : [ ],
                   "signature" : [ ],
                   "operand" : {
                      "type" : "Null",
-                     "locator" : "94:32-94:35",
+                     "locator" : "117:32-117:35",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "annotation" : [ ]
                   },
                   "asTypeSpecifier" : {
                      "type" : "NamedTypeSpecifier",
-                     "locator" : "94:40-94:46",
+                     "locator" : "117:40-117:46",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "annotation" : [ ]
                   }
                }, {
                   "type" : "ExpressionRef",
-                  "locator" : "94:53-94:65",
+                  "locator" : "117:53-117:65",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "MessageTrue",
                   "annotation" : [ ]
                } ]
             }
          }, {
-            "locator" : "95:1-95:44",
+            "locator" : "118:1-118:44",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NotNullConst",
             "context" : "Unfiltered",
@@ -1637,7 +2057,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "Not",
-               "locator" : "95:24-95:44",
+               "locator" : "118:24-118:44",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1647,20 +2067,20 @@
                } ],
                "operand" : {
                   "type" : "As",
-                  "locator" : "95:28-95:44",
+                  "locator" : "118:28-118:44",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "strict" : false,
                   "annotation" : [ ],
                   "signature" : [ ],
                   "operand" : {
                      "type" : "Null",
-                     "locator" : "95:29-95:32",
+                     "locator" : "118:29-118:32",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "annotation" : [ ]
                   },
                   "asTypeSpecifier" : {
                      "type" : "NamedTypeSpecifier",
-                     "locator" : "95:37-95:43",
+                     "locator" : "118:37-118:43",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "annotation" : [ ]
@@ -1668,7 +2088,7 @@
                }
             }
          }, {
-            "locator" : "100:1-100:79",
+            "locator" : "123:1-123:79",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "WithoutClause",
             "context" : "Unfiltered",
@@ -1676,7 +2096,7 @@
             "annotation" : [ ],
             "expression" : {
                "type" : "Exists",
-               "locator" : "100:25-100:79",
+               "locator" : "123:25-123:79",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "annotation" : [ ],
                "signature" : [ {
@@ -1690,7 +2110,7 @@
                } ],
                "operand" : {
                   "type" : "Query",
-                  "locator" : "100:32-100:79",
+                  "locator" : "123:32-123:79",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -1702,7 +2122,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "100:33-100:44",
+                     "locator" : "123:33-123:44",
                      "alias" : "A",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -1716,7 +2136,7 @@
                      },
                      "expression" : {
                         "type" : "List",
-                        "locator" : "100:33-100:42",
+                        "locator" : "123:33-123:42",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -1729,14 +2149,14 @@
                         },
                         "element" : [ {
                            "type" : "Literal",
-                           "locator" : "100:36",
+                           "locator" : "123:36",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "annotation" : [ ]
                         }, {
                            "type" : "Literal",
-                           "locator" : "100:39",
+                           "locator" : "123:39",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
@@ -1747,7 +2167,7 @@
                   "let" : [ ],
                   "relationship" : [ {
                      "type" : "Without",
-                     "locator" : "100:46-100:78",
+                     "locator" : "123:46-123:78",
                      "alias" : "B",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -1761,7 +2181,7 @@
                      },
                      "expression" : {
                         "type" : "List",
-                        "locator" : "100:54-100:60",
+                        "locator" : "123:54-123:60",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -1774,7 +2194,7 @@
                         },
                         "element" : [ {
                            "type" : "Literal",
-                           "locator" : "100:57",
+                           "locator" : "123:57",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
@@ -1783,7 +2203,7 @@
                      },
                      "suchThat" : {
                         "type" : "Equal",
-                        "locator" : "100:74-100:78",
+                        "locator" : "123:74-123:78",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "annotation" : [ ],
                         "signature" : [ {
@@ -1797,13 +2217,13 @@
                         } ],
                         "operand" : [ {
                            "type" : "AliasRef",
-                           "locator" : "100:74",
+                           "locator" : "123:74",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "A",
                            "annotation" : [ ]
                         }, {
                            "type" : "AliasRef",
-                           "locator" : "100:78",
+                           "locator" : "123:78",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "B",
                            "annotation" : [ ]

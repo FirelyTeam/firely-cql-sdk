@@ -374,14 +374,12 @@ partial class CodeBuilderContext
     // like `left != true` would be a correctness bug (#1514).
     //
     // Xor stays on the name-based ICqlOperators path because it genuinely cannot skip: every
-    // xor row varies with the right operand.
+    // xor row varies with the right operand, and C# has no lifted ^ over bool? matching Kleene.
     //
-    // Implies stays too, but that is a DEFERRAL, not an impossibility — the spec says outright
-    // that "implies may use short-circuit evaluation in the case that the first operand
-    // evaluates to false" (§9.B Logical Operators, and §4 Logical Specification), and
-    // `false implies X` is true for every X: exactly the deciding-left-operand shape
-    // ShortCircuitBinary already implements. The corpora still hold ~37 Implies call sites that
-    // evaluate both operands. Tracked in #1571.
+    // Implies short-circuits too — the spec calls that skip out EXPLICITLY, unlike and/or where
+    // it merely declines to prescribe evaluation ("Note that implies may use short-circuit
+    // evaluation in the case that the first operand evaluates to false", §9.B Logical Operators
+    // and §4 Logical Specification). See Implies below for the two ways it differs from and/or.
 
     protected CodeExpression And(And and) =>
         ShortCircuitBinary(and, CodeBinaryOp.BoolAnd, decidingValue: false);
@@ -401,6 +399,85 @@ partial class CodeBuilderContext
 
         return new CodeUnary(CodeUnaryOp.Not, operand);
     }
+
+    /// <summary>
+    /// Lowers <c>implies</c> to the same guarded shape as and/or, with two differences that keep
+    /// it out of <see cref="ShortCircuitBinary"/>:
+    /// <list type="number">
+    /// <item>its deciding LEFT value and its deciding RESULT differ — <c>false implies X</c> is
+    /// <see langword="true"/> for every X, where and/or both yield the value they tested for;</item>
+    /// <item>C# has no implies operator, so the merge is <c>!left | right</c>, which IS Kleene
+    /// implication: <c>true implies X</c> = X, <c>false implies X</c> = true,
+    /// <c>null implies true</c> = true, and null otherwise.</item>
+    /// </list>
+    /// The right-operand folds differ for the same reason: <c>X implies true</c> is true for
+    /// every X (so it absorbs), but <c>X implies false</c> is <c>not X</c> rather than X, so it
+    /// is not a pass-through and falls to the merge.
+    /// </summary>
+    protected CodeExpression Implies(Implies implies)
+    {
+        if (implies.operand is not [{ } leftElement, { } rightElement])
+            throw this.NewExpressionBuildingException("Implies expects exactly two operands.");
+
+        var left = TranslateBoolArg(leftElement);
+        var right = TranslateBoolArg(rightElement);
+
+        if (TryGetBoolConstant(left, out var leftConstant))
+        {
+            if (leftConstant is false)
+                return NullableBoolConstant(true);  // false implies X => true (X never evaluated)
+            if (leftConstant is true)
+                return right;                       // true implies X => X
+            return ImpliesMerge(left, right);       // a null left decides nothing: null implies true is true
+        }
+
+        if (TryGetBoolConstant(right, out var rightConstant) && rightConstant is true)
+            return NullableBoolConstant(true);      // X implies true => true, erasing the left operand
+
+        // A false or null right constant is NOT deciding (true implies false is false, but
+        // false implies false is true), and is free to re-read, so both merge without a guard.
+        if (IsEvaluatedValue(right))
+            return ImpliesMerge(left, right);
+
+        var originTag = implies.locator is { Length: > 0 } locator
+            ? $"CQL 'implies' ({locator})"
+            : "CQL 'implies'";
+        const string originDetail = "right operand skipped when left is false";
+
+        // Same non-nullable-left shortcut as and/or: a left operand that cannot be null decides
+        // by itself, so no local and no merge — where control falls through, left is true, and
+        // true implies X is X.
+        if (left is CodeCast { Operand: { } nonNullableLeft }
+            && nonNullableLeft.Type == typeof(bool)
+            && IsFreeToRepeat(nonNullableLeft))
+        {
+            return new CodeConditional(
+                new CodeUnary(CodeUnaryOp.Not, nonNullableLeft),
+                NullableBoolConstant(true),
+                right,
+                typeof(bool?),
+                originTag,
+                originDetail);
+        }
+
+        var local = new CodeLocal(typeof(bool?));
+        var guard = new CodeBinary(CodeBinaryOp.Equal, local, new CodeConstant(false, typeof(bool?)));
+        var conditional = new CodeConditional(
+            guard,
+            NullableBoolConstant(true),
+            ImpliesMerge(local, right),
+            typeof(bool?),
+            originTag,
+            originDetail);
+        return new CodeLet(local, left, conditional);
+    }
+
+    /// <summary><c>!left | right</c> — Kleene implication over C#'s lifted operators.</summary>
+    private static CodeExpression ImpliesMerge(CodeExpression left, CodeExpression right) =>
+        new CodeBinary(
+            CodeBinaryOp.BoolOr,
+            new CodeUnary(CodeUnaryOp.Not, HonestBoolOperand(left)),
+            HonestBoolOperand(right));
 
     private CodeExpression ShortCircuitBinary(Elm.BinaryExpression binary, CodeBinaryOp op, bool decidingValue)
     {

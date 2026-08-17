@@ -194,25 +194,37 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             {
                 CodeableConcept j_ = DiabetesDiagnosis?.VerificationStatus;
                 CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
-                CqlCode l_ = QICoreCommon_4_0_000.Instance.refuted(context);
-                CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
-                bool? n_ = context.Operators.Equivalent(k_, m_);
-                bool? o_ = !n_;
-                bool? p_;
-                // CQL 'and' (64:70-66:9): right operand skipped when left is false
-                if (o_ is false)
+                bool? l_ = !((bool?)(k_ is null));
+                bool? m_;
+                // CQL 'implies' (64:11-67:7): right operand skipped when left is false
+                if (l_ is false)
                 {
-                    p_ = false;
+                    m_ = true;
                 }
                 else
                 {
-                    CqlCode r_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-                    CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
-                    bool? t_ = context.Operators.Equivalent(k_, s_);
-                    p_ = o_ & !t_;
+                    CqlCode n_ = QICoreCommon_4_0_000.Instance.refuted(context);
+                    CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
+                    bool? p_ = context.Operators.Equivalent(k_, o_);
+                    bool? q_ = !p_;
+                    bool? r_;
+                    // CQL 'and' (64:70-66:9): right operand skipped when left is false
+                    if (q_ is false)
+                    {
+                        r_ = false;
+                    }
+                    else
+                    {
+                        CodeableConcept s_ = DiabetesDiagnosis?.VerificationStatus;
+                        CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                        CqlCode u_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+                        CqlConcept v_ = context.Operators.ConvertCodeToConcept(u_);
+                        bool? w_ = context.Operators.Equivalent(t_, v_);
+                        r_ = q_ & !w_;
+                    }
+                    m_ = !l_ | r_;
                 }
-                bool? q_ = context.Operators.Implies(!((bool?)(k_ is null)), p_);
-                return i_ & q_;
+                return i_ & m_;
             }
         }
 
@@ -361,25 +373,37 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             {
                 CodeableConcept o_ = CKDOrESRD?.VerificationStatus;
                 CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
-                CqlCode q_ = QICoreCommon_4_0_000.Instance.refuted(context);
-                CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
-                bool? s_ = context.Operators.Equivalent(p_, r_);
-                bool? t_ = !s_;
-                bool? u_;
-                // CQL 'and' (77:62-79:9): right operand skipped when left is false
-                if (t_ is false)
+                bool? q_ = !((bool?)(p_ is null));
+                bool? r_;
+                // CQL 'implies' (77:11-80:7): right operand skipped when left is false
+                if (q_ is false)
                 {
-                    u_ = false;
+                    r_ = true;
                 }
                 else
                 {
-                    CqlCode w_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-                    CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
-                    bool? y_ = context.Operators.Equivalent(p_, x_);
-                    u_ = t_ & !y_;
+                    CqlCode s_ = QICoreCommon_4_0_000.Instance.refuted(context);
+                    CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
+                    bool? u_ = context.Operators.Equivalent(p_, t_);
+                    bool? v_ = !u_;
+                    bool? w_;
+                    // CQL 'and' (77:62-79:9): right operand skipped when left is false
+                    if (v_ is false)
+                    {
+                        w_ = false;
+                    }
+                    else
+                    {
+                        CodeableConcept x_ = CKDOrESRD?.VerificationStatus;
+                        CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
+                        CqlCode z_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+                        CqlConcept aa_ = context.Operators.ConvertCodeToConcept(z_);
+                        bool? ab_ = context.Operators.Equivalent(y_, aa_);
+                        w_ = v_ & !ab_;
+                    }
+                    r_ = !q_ | w_;
                 }
-                bool? v_ = context.Operators.Implies(!((bool?)(p_ is null)), u_);
-                return n_ & v_;
+                return n_ & r_;
             }
         }
 

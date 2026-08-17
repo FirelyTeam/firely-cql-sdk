@@ -513,24 +513,36 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 {
                     CodeableConcept n_ = ThrombolyticAllergy?.VerificationStatus;
                     CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
-                    CqlCode p_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
-                    CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-                    bool? r_ = context.Operators.Equivalent(o_, q_);
-                    bool? s_;
-                    // CQL 'or' (160:74-162:11): right operand skipped when left is true
-                    if (r_ is true)
+                    bool? p_ = !((bool?)(o_ is null));
+                    bool? q_;
+                    // CQL 'implies' (160:13-163:9): right operand skipped when left is false
+                    if (p_ is false)
                     {
-                        s_ = true;
+                        q_ = true;
                     }
                     else
                     {
-                        CqlCode u_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
-                        CqlConcept v_ = context.Operators.ConvertCodeToConcept(u_);
-                        bool? w_ = context.Operators.Equivalent(o_, v_);
-                        s_ = r_ | w_;
+                        CqlCode r_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
+                        CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
+                        bool? t_ = context.Operators.Equivalent(o_, s_);
+                        bool? u_;
+                        // CQL 'or' (160:74-162:11): right operand skipped when left is true
+                        if (t_ is true)
+                        {
+                            u_ = true;
+                        }
+                        else
+                        {
+                            CodeableConcept v_ = ThrombolyticAllergy?.VerificationStatus;
+                            CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                            CqlCode x_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
+                            CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
+                            bool? z_ = context.Operators.Equivalent(w_, y_);
+                            u_ = t_ | z_;
+                        }
+                        q_ = !p_ | u_;
                     }
-                    bool? t_ = context.Operators.Implies(!((bool?)(o_ is null)), s_);
-                    m_ = l_ & t_;
+                    m_ = l_ & q_;
                 }
                 // CQL 'and' (159:17-166:9): right operand skipped when left is false
                 if (m_ is false)
@@ -539,25 +551,25 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 }
                 else
                 {
-                    DataType x_ = ThrombolyticAllergy?.Onset;
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    CqlInterval<CqlDateTime> z_ = QICoreCommon_4_0_000.Instance.toInterval(context, y_);
-                    Period aa_ = EDwSTEMI?.Period;
-                    CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aa_);
-                    bool? ac_ = context.Operators.Overlaps(z_, ab_, (string)default);
-                    bool? ad_;
+                    DataType aa_ = ThrombolyticAllergy?.Onset;
+                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                    CqlInterval<CqlDateTime> ac_ = QICoreCommon_4_0_000.Instance.toInterval(context, ab_);
+                    Period ad_ = EDwSTEMI?.Period;
+                    CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
+                    bool? af_ = context.Operators.Overlaps(ac_, ae_, (string)default);
+                    bool? ag_;
                     // CQL 'or' (164:13-166:9): right operand skipped when left is true
-                    if (ac_ is true)
+                    if (af_ is true)
                     {
-                        ad_ = true;
+                        ag_ = true;
                     }
                     else
                     {
-                        CqlDateTime ae_ = context.Operators.End(ab_);
-                        bool? af_ = context.Operators.Before(y_ as CqlDateTime, ae_, (string)default);
-                        ad_ = ac_ | af_;
+                        CqlDateTime ah_ = context.Operators.End(ae_);
+                        bool? ai_ = context.Operators.Before(ab_ as CqlDateTime, ah_, (string)default);
+                        ag_ = af_ | ai_;
                     }
-                    return m_ & ad_;
+                    return m_ & ag_;
                 }
             }
 

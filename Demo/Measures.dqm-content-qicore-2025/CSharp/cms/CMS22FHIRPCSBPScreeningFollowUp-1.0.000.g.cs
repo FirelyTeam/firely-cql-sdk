@@ -267,50 +267,64 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
     {
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
-        CqlCode c_ = QICoreCommon_4_0_000.Instance.confirmed(context);
-        CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
-        bool? e_ = context.Operators.Equivalent(b_, d_);
-        bool? f_;
-        // CQL 'or' (408:54-409:66): right operand skipped when left is true
-        if (e_ is true)
+        bool? c_ = !((bool?)(b_ is null));
+        // CQL 'implies' (408:3-412:3): right operand skipped when left is false
+        if (c_ is false)
         {
-            f_ = true;
+            return true;
         }
         else
         {
-            CqlCode j_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-            bool? l_ = context.Operators.Equivalent(b_, k_);
-            f_ = e_ | l_;
+            CqlCode d_ = QICoreCommon_4_0_000.Instance.confirmed(context);
+            CqlConcept e_ = context.Operators.ConvertCodeToConcept(d_);
+            bool? f_ = context.Operators.Equivalent(b_, e_);
+            bool? g_;
+            // CQL 'or' (408:54-409:66): right operand skipped when left is true
+            if (f_ is true)
+            {
+                g_ = true;
+            }
+            else
+            {
+                CodeableConcept j_ = condition?.VerificationStatus;
+                CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
+                CqlCode l_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+                CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
+                bool? n_ = context.Operators.Equivalent(k_, m_);
+                g_ = f_ | n_;
+            }
+            bool? h_;
+            // CQL 'or' (408:54-410:66): right operand skipped when left is true
+            if (g_ is true)
+            {
+                h_ = true;
+            }
+            else
+            {
+                CodeableConcept o_ = condition?.VerificationStatus;
+                CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
+                CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
+                CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
+                bool? s_ = context.Operators.Equivalent(p_, r_);
+                h_ = g_ | s_;
+            }
+            bool? i_;
+            // CQL 'or' (408:52-412:3): right operand skipped when left is true
+            if (h_ is true)
+            {
+                i_ = true;
+            }
+            else
+            {
+                CodeableConcept t_ = condition?.VerificationStatus;
+                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+                CqlCode v_ = QICoreCommon_4_0_000.Instance.differential(context);
+                CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
+                bool? x_ = context.Operators.Equivalent(u_, w_);
+                i_ = h_ | x_;
+            }
+            return !c_ | i_;
         }
-        bool? g_;
-        // CQL 'or' (408:54-410:66): right operand skipped when left is true
-        if (f_ is true)
-        {
-            g_ = true;
-        }
-        else
-        {
-            CqlCode m_ = QICoreCommon_4_0_000.Instance.provisional(context);
-            CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
-            bool? o_ = context.Operators.Equivalent(b_, n_);
-            g_ = f_ | o_;
-        }
-        bool? h_;
-        // CQL 'or' (408:52-412:3): right operand skipped when left is true
-        if (g_ is true)
-        {
-            h_ = true;
-        }
-        else
-        {
-            CqlCode p_ = QICoreCommon_4_0_000.Instance.differential(context);
-            CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-            bool? r_ = context.Operators.Equivalent(b_, q_);
-            h_ = g_ | r_;
-        }
-        bool? i_ = context.Operators.Implies(!((bool?)(b_ is null)), h_);
-        return i_;
     }
 
 

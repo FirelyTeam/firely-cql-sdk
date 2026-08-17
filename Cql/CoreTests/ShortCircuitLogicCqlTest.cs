@@ -76,6 +76,27 @@ public class ShortCircuitLogicCqlTest
     }
 
     /// <summary>
+    /// <c>implies</c>: the only one of these operators whose skip the spec calls out explicitly
+    /// ("implies may use short-circuit evaluation in the case that the first operand evaluates
+    /// to false"). Note the deciding left value and the deciding RESULT differ — every
+    /// <c>false implies X</c> is <see langword="true"/> — and that <c>null implies true</c> is
+    /// true while <c>null implies false</c> is null, so null decides nothing here either.
+    /// </summary>
+    [TestMethod]
+    public void Implies_TruthTable()
+    {
+        Assert.AreEqual(true, Library.TrueImpliesTrue(Context()));
+        Assert.AreEqual(false, Library.TrueImpliesFalse(Context()));
+        Assert.IsNull(Library.TrueImpliesNull(Context()));
+        Assert.AreEqual(true, Library.FalseImpliesTrue(Context()));
+        Assert.AreEqual(true, Library.FalseImpliesFalse(Context()));
+        Assert.AreEqual(true, Library.FalseImpliesNull(Context()));
+        Assert.AreEqual(true, Library.NullImpliesTrue(Context()));
+        Assert.IsNull(Library.NullImpliesFalse(Context()));
+        Assert.IsNull(Library.NullImpliesNull(Context()));
+    }
+
+    /// <summary>
     /// The generated code must agree with the runtime operators it no longer calls — the
     /// runtime implementation is the reference the lowering is checked against.
     /// </summary>
@@ -97,6 +118,12 @@ public class ShortCircuitLogicCqlTest
             { Library.FalseOrTrue, Library.FalseOrFalse, Library.FalseOrNull },
             { Library.NullOrTrue, Library.NullOrFalse, Library.NullOrNull },
         };
+        var generatedImplies = new Func<CqlContext, bool?>[,]
+        {
+            { Library.TrueImpliesTrue, Library.TrueImpliesFalse, Library.TrueImpliesNull },
+            { Library.FalseImpliesTrue, Library.FalseImpliesFalse, Library.FalseImpliesNull },
+            { Library.NullImpliesTrue, Library.NullImpliesFalse, Library.NullImpliesNull },
+        };
 
         for (var l = 0; l < 3; l++)
         {
@@ -104,6 +131,7 @@ public class ShortCircuitLogicCqlTest
             {
                 Assert.AreEqual(ops.And(values[l], values[r]), generatedAnd[l, r](Context()), $"and: left={values[l]}, right={values[r]}");
                 Assert.AreEqual(ops.Or(values[l], values[r]), generatedOr[l, r](Context()), $"or: left={values[l]}, right={values[r]}");
+                Assert.AreEqual(ops.Implies(values[l], values[r]), generatedImplies[l, r](Context()), $"implies: left={values[l]}, right={values[r]}");
             }
         }
 
@@ -159,6 +187,30 @@ public class ShortCircuitLogicCqlTest
         var (result, messages) = RunCountingMessages(Library.NullOrMessage);
         Assert.AreEqual(true, result); // null or true = true
         Assert.AreEqual(1, messages, "null does NOT decide 'or' (null or false = null); the right operand must be evaluated.");
+    }
+
+    [TestMethod]
+    public void FalseImpliesMessage_SkipsRightOperand()
+    {
+        var (result, messages) = RunCountingMessages(Library.FalseImpliesMessage);
+        Assert.AreEqual(true, result); // false implies X is true for every X
+        Assert.AreEqual(0, messages, "false decides 'implies'; the right operand must not be evaluated.");
+    }
+
+    [TestMethod]
+    public void TrueImpliesMessage_EvaluatesRightOperand()
+    {
+        var (result, messages) = RunCountingMessages(Library.TrueImpliesMessage);
+        Assert.AreEqual(true, result); // true implies X = X
+        Assert.AreEqual(1, messages, "true does NOT decide 'implies' — the result IS the right operand.");
+    }
+
+    [TestMethod]
+    public void NullImpliesMessage_EvaluatesRightOperand()
+    {
+        var (result, messages) = RunCountingMessages(Library.NullImpliesMessage);
+        Assert.AreEqual(true, result); // null implies true = true
+        Assert.AreEqual(1, messages, "null does NOT decide 'implies' (null implies true is true); the right operand must be evaluated.");
     }
 
     /// <summary>

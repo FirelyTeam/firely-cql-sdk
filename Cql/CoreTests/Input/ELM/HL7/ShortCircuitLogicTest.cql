@@ -39,6 +39,21 @@ define "NotTrue": not "TrueDef"
 define "NotFalse": not "FalseDef"
 define "NotNull": not "NullDef"
 
+// implies — the spec permits short-circuiting this one EXPLICITLY ("implies may use
+// short-circuit evaluation in the case that the first operand evaluates to false"). Note the
+// deciding left value (false) and the deciding result (true) differ, unlike and/or, and that
+// the merge is `not left or right`: null implies true is true, but null implies false is null.
+
+define "TrueImpliesTrue": "TrueDef" implies "TrueDef"
+define "TrueImpliesFalse": "TrueDef" implies "FalseDef"
+define "TrueImpliesNull": "TrueDef" implies "NullDef"
+define "FalseImpliesTrue": "FalseDef" implies "TrueDef"
+define "FalseImpliesFalse": "FalseDef" implies "FalseDef"
+define "FalseImpliesNull": "FalseDef" implies "NullDef"
+define "NullImpliesTrue": "NullDef" implies "TrueDef"
+define "NullImpliesFalse": "NullDef" implies "FalseDef"
+define "NullImpliesNull": "NullDef" implies "NullDef"
+
 // Skip evidence: the right operand raises a CQL Message, observable through the context's
 // MessageReceived event. A deciding left operand must suppress it; a null left operand must
 // not (null and false is false — the right operand still matters).
@@ -49,6 +64,14 @@ define "FalseAndMessage": "FalseDef" and "MessageTrue"
 define "NullAndMessage": "NullDef" and "MessageTrue"
 define "TrueOrMessage": "TrueDef" or "MessageTrue"
 define "NullOrMessage": "NullDef" or "MessageTrue"
+
+// implies skips on a FALSE left operand (false implies X is true for every X); true and null
+// left operands must still evaluate the right — null implies true is true, so null decides
+// nothing here either.
+
+define "FalseImpliesMessage": "FalseDef" implies "MessageTrue"
+define "TrueImpliesMessage": "TrueDef" implies "MessageTrue"
+define "NullImpliesMessage": "NullDef" implies "MessageTrue"
 
 // Allocation probe target: a function whose right operand needs evaluation, so the guarded
 // form is emitted. Called directly with left = false/true from the test; the skipped path

@@ -166,50 +166,64 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         bool? a_(Condition C) {
             CodeableConcept c_ = C?.VerificationStatus;
             CqlConcept d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
-            CqlCode e_ = this.confirmed(context);
-            CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
-            bool? g_ = context.Operators.Equivalent(d_, f_);
-            bool? h_;
-            // CQL 'or' (42:54-43:47): right operand skipped when left is true
-            if (g_ is true)
+            bool? e_ = !((bool?)(d_ is null));
+            // CQL 'implies' (42:5-46:5): right operand skipped when left is false
+            if (e_ is false)
             {
-                h_ = true;
+                return true;
             }
             else
             {
-                CqlCode l_ = this.unconfirmed(context);
-                CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
-                bool? n_ = context.Operators.Equivalent(d_, m_);
-                h_ = g_ | n_;
+                CqlCode f_ = this.confirmed(context);
+                CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
+                bool? h_ = context.Operators.Equivalent(d_, g_);
+                bool? i_;
+                // CQL 'or' (42:54-43:47): right operand skipped when left is true
+                if (h_ is true)
+                {
+                    i_ = true;
+                }
+                else
+                {
+                    CodeableConcept l_ = C?.VerificationStatus;
+                    CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
+                    CqlCode n_ = this.unconfirmed(context);
+                    CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
+                    bool? p_ = context.Operators.Equivalent(m_, o_);
+                    i_ = h_ | p_;
+                }
+                bool? j_;
+                // CQL 'or' (42:54-44:47): right operand skipped when left is true
+                if (i_ is true)
+                {
+                    j_ = true;
+                }
+                else
+                {
+                    CodeableConcept q_ = C?.VerificationStatus;
+                    CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
+                    CqlCode s_ = this.provisional(context);
+                    CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
+                    bool? u_ = context.Operators.Equivalent(r_, t_);
+                    j_ = i_ | u_;
+                }
+                bool? k_;
+                // CQL 'or' (42:52-46:5): right operand skipped when left is true
+                if (j_ is true)
+                {
+                    k_ = true;
+                }
+                else
+                {
+                    CodeableConcept v_ = C?.VerificationStatus;
+                    CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                    CqlCode x_ = this.differential(context);
+                    CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
+                    bool? z_ = context.Operators.Equivalent(w_, y_);
+                    k_ = j_ | z_;
+                }
+                return !e_ | k_;
             }
-            bool? i_;
-            // CQL 'or' (42:54-44:47): right operand skipped when left is true
-            if (h_ is true)
-            {
-                i_ = true;
-            }
-            else
-            {
-                CqlCode o_ = this.provisional(context);
-                CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-                bool? q_ = context.Operators.Equivalent(d_, p_);
-                i_ = h_ | q_;
-            }
-            bool? j_;
-            // CQL 'or' (42:52-46:5): right operand skipped when left is true
-            if (i_ is true)
-            {
-                j_ = true;
-            }
-            else
-            {
-                CqlCode r_ = this.differential(context);
-                CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
-                bool? t_ = context.Operators.Equivalent(d_, s_);
-                j_ = i_ | t_;
-            }
-            bool? k_ = context.Operators.Implies(!((bool?)(d_ is null)), j_);
-            return k_;
         }
 
         IEnumerable<Condition> b_ = context.Operators.Where<Condition>(conditions, a_);

@@ -476,31 +476,38 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 }
                 else
                 {
-                    CodeableConcept x_ = PriorTPA?.VerificationStatus;
-                    CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
-                    o_ = n_ & (!((bool?)(y_ is null)));
+                    CodeableConcept p_ = PriorTPA?.VerificationStatus;
+                    CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
+                    o_ = n_ & (!((bool?)(q_ is null)));
                 }
-                CodeableConcept p_ = PriorTPA?.VerificationStatus;
-                CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
-                CqlCode r_ = QICoreCommon_4_0_000.Instance.refuted(context);
-                CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
-                bool? t_ = context.Operators.Equivalent(q_, s_);
-                bool? u_ = !t_;
-                bool? v_;
-                // CQL 'and' (81:63-83:9): right operand skipped when left is false
-                if (u_ is false)
+                // CQL 'implies' (80:9-83:9): right operand skipped when left is false
+                if (o_ is false)
                 {
-                    v_ = false;
+                    return true;
                 }
                 else
                 {
-                    CqlCode z_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-                    CqlConcept aa_ = context.Operators.ConvertCodeToConcept(z_);
-                    bool? ab_ = context.Operators.Equivalent(q_, aa_);
-                    v_ = u_ & !ab_;
+                    CodeableConcept r_ = PriorTPA?.VerificationStatus;
+                    CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
+                    CqlCode t_ = QICoreCommon_4_0_000.Instance.refuted(context);
+                    CqlConcept u_ = context.Operators.ConvertCodeToConcept(t_);
+                    bool? v_ = context.Operators.Equivalent(s_, u_);
+                    bool? w_ = !v_;
+                    bool? x_;
+                    // CQL 'and' (81:63-83:9): right operand skipped when left is false
+                    if (w_ is false)
+                    {
+                        x_ = false;
+                    }
+                    else
+                    {
+                        CqlCode y_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+                        CqlConcept z_ = context.Operators.ConvertCodeToConcept(y_);
+                        bool? aa_ = context.Operators.Equivalent(s_, z_);
+                        x_ = w_ & !aa_;
+                    }
+                    return !o_ | x_;
                 }
-                bool? w_ = context.Operators.Implies(o_, v_);
-                return w_;
             }
 
             bool? j_ = context.Operators.WhereAny<Condition>(h_, i_);
@@ -510,18 +517,18 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
         bool? d_(Encounter IschemicStrokeEncounter) {
-            IEnumerable<Condition> ac_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, IschemicStrokeEncounter);
+            IEnumerable<Condition> ab_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, IschemicStrokeEncounter);
 
-            bool? ad_(Condition EncounterDiagnosis) {
-                CodeableConcept af_ = EncounterDiagnosis?.Code;
-                CqlConcept ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, af_);
-                CqlValueSet ah_ = this.Intravenous_or_Intraarterial_Thrombolytic_tPA_Therapy_Prior_to_Arrival(context);
-                bool? ai_ = context.Operators.ConceptInValueSet(ag_, ah_);
-                return ai_;
+            bool? ac_(Condition EncounterDiagnosis) {
+                CodeableConcept ae_ = EncounterDiagnosis?.Code;
+                CqlConcept af_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ae_);
+                CqlValueSet ag_ = this.Intravenous_or_Intraarterial_Thrombolytic_tPA_Therapy_Prior_to_Arrival(context);
+                bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
+                return ah_;
             }
 
-            bool? ae_ = context.Operators.WhereAny<Condition>(ac_, ad_);
-            return ae_;
+            bool? ad_ = context.Operators.WhereAny<Condition>(ab_, ac_);
+            return ad_;
         }
 
         IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(a_, d_);

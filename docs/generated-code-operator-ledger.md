@@ -26,7 +26,11 @@ Concretely, a method in this ledger may be removed only when **all** of the foll
 
 Until then, the methods stay: they double as the executable specification the lowering is
 verified against (e.g. `CoreTests/ShortCircuitLogicCqlTest.GeneratedCode_AgreesWithRuntimeOperators`
-checks generated truth tables against `ICqlOperators.And`/`Or`/`Not`).
+checks generated truth tables against `ICqlOperators.And`/`Or`/`Not`/`Implies`).
+
+`Xor(bool?, bool?)` is deliberately **not** in this ledger: every row of its truth table varies
+with the right operand, so it has nothing to short-circuit, and C# has no lifted `^` over `bool?`
+matching CQL's three-valued semantics. Generated code still calls it.
 
 ## 1.2. Ledger
 
@@ -35,6 +39,7 @@ checks generated truth tables against `ICqlOperators.And`/`Or`/`Not`).
 | `And(bool?, bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `&` behind a short-circuit guard | Reference implementation for the lowering's conformance tests |
 | `Or(bool?, bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `\|` behind a short-circuit guard | Reference implementation for the lowering's conformance tests |
 | `Not(bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `!` | Reference implementation for the lowering's conformance tests |
+| `Implies(bool?, bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | `!left \| right` behind a short-circuit guard | Reference implementation for the lowering's conformance tests. The spec permits the skip explicitly, unlike `and`/`or`: "implies may use short-circuit evaluation in the case that the first operand evaluates to false" (§9.B) |
 | `And`/`Or` `Lazy<bool?>` overloads (3 + 1) | never emitted | — | Shipped as public API but no generator version ever bound them; the short-circuit guard made them redundant ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) |
 | scalar coalesce (no dedicated member) | predates this ledger | native `??` | CQL's scalar `Coalesce(a, b, …)` has emitted C# `??` chains since the IR pipeline; the **list** overload `Coalesce<T>(IEnumerable<T>)` for `Coalesce({…})` is still bound and called |
 
