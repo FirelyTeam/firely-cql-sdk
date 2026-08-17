@@ -235,9 +235,21 @@ static string PrettyPrintJson(string json)
       Overwrite="true"
       Encoding="Unicode"/>
 
-		<!-- Reformat the generated ELM JSON, since the Kotlin-based CLI only emits compact JSON -->
+		<!--
+		Reformat the generated ELM JSON, since the Kotlin-based CLI only emits compact JSON.
+
+		Globbed from $(ElmDirectory), deliberately NOT derived from @(CqlFiles): this target
+		declares Inputs/Outputs, so when only some CQL files are stale MSBuild runs it with
+		@(CqlFiles) FILTERED to just those. The two steps above are not filtered — Delete uses
+		a fresh directory glob, and the CLI is invoked with -input/-output DIRECTORIES — so a
+		partial run rewrites every ELM file compact while a @(CqlFiles)-derived list would
+		pretty-print only the stale one, leaving the rest minified. That reads as a colossal
+		formatting diff (~52k lines across 14 files for a one-file edit) which is easy to
+		commit unnoticed and easy to mistake for data loss. Keep all three steps agreed on
+		"the whole directory".
+		-->
 		<ItemGroup>
-			<GeneratedElmFiles Include="@(CqlFiles->'$(ElmDirectory)/%(FileName).json')" />
+			<GeneratedElmFiles Include="$(ElmDirectory)/*.json" />
 		</ItemGroup>
 
 		<PrettyPrintJsonFiles Files="@(GeneratedElmFiles)" />
