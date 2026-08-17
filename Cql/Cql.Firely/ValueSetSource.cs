@@ -41,6 +41,18 @@ namespace Hl7.Cql.Fhir;
 /// the expansion alive - the memo needs no bounds and no invalidation of its own.
 /// </para>
 /// <para>
+/// Being a process-wide static under weak keys, rather than a cache the host configures and injects, is
+/// what buys that inherited invalidation. An entry lives exactly as long as the resolver keeps the
+/// expansion it was keyed on alive, so when a host's conformance cache evicts or replaces a valueset,
+/// the expansion arriving in its place misses the memo and the entry built from the old one dies with
+/// the object it hung on: there is nothing to wire up, nothing to clear, and no state in which a stale
+/// facade is served for a canonical. A host that wants lifetime and scoping under its own control does
+/// not need the memo to offer them - it can seed each source through
+/// <see cref="Add(string, IEnumerable{CqlCode})"/> with a facade it holds onto, which reuses the hashed
+/// contents rather than rebuilding them (see <see cref="InMemoryValueSet"/>) - at the price of owning
+/// the invalidation that such a lifetime brings with it.
+/// </para>
+/// <para>
 /// Keying on the expansion rather than on the valueset instance is what makes the contract tractable,
 /// and that contract is:
 /// </para>
@@ -93,19 +105,30 @@ public class ValueSetSource : IValueSetDictionary
     /// contention it may run the factory on several threads and keep one result (see the note on
     /// <c>LibrarySetInvokerPoolKey.GetOrComputeContentHash</c>). Racing the factory is fine when it is
     /// cheap and pure, but this factory is the expensive materialization the memo exists to avoid, so
-    /// the table races only on creating the wrapper and every caller then awaits the single build
+    /// the table races only on creating the wrapper and every caller then joins the single build
     /// inside the one retained <see cref="Lazy{T}"/>.
     /// </para>
     /// <para>
-    /// That factory closes over the valueset the expansion was reached through - it needs its
+    /// What that wrapper holds is a <see cref="Task{TResult}"/>, started with <c>Task.Run</c>, so the
+    /// racers that lose await the build instead of blocking a thread on it.
+    /// <see cref="Add(ValueSet)"/> is reached from <c>Parallel.ForEachAsync</c> and from a server's
+    /// request path, where a cold valueset would otherwise park every racer but one on a pool thread and
+    /// have the pool inject more to replace them. The price is one <c>Task.Run</c> per cold build, paid
+    /// once per expansion; the lazy's own lock is held only long enough to start that task.
+    /// </para>
+    /// <para>
+    /// The factory closes over the valueset the expansion was reached through - it needs its
     /// <see cref="ValueSet.Url"/> for error messages - and hence over the key itself, since the
     /// valueset holds the expansion. Inside a <see cref="ConditionalWeakTable{TKey,TValue}"/> that is
     /// harmless: the table links a value to its key through a <c>DependentHandle</c>, so an entry whose
-    /// key is unreachable from outside the table is collected no matter what its value points at. A
-    /// <see cref="Lazy{T}"/> that has built successfully releases its factory anyway.
+    /// key is unreachable from outside the table is collected no matter what its value points at. The
+    /// closure does not outlive the build either: a <see cref="Lazy{T}"/> drops its factory once it has
+    /// produced its value, and a task drops its delegate once it settles - both so that holding the
+    /// cached object alive does not also hold its closure alive - which leaves an entry that is the
+    /// facade and no path back to the source that happened to build it.
     /// </para>
     /// </remarks>
-    private static readonly ConditionalWeakTable<ValueSet.ExpansionComponent, Lazy<InMemoryValueSet>> FacadesByExpansion = new();
+    private static readonly ConditionalWeakTable<ValueSet.ExpansionComponent, Lazy<Task<InMemoryValueSet>>> FacadesByExpansion = new();
 
     /// <summary>
     /// Counts calls to <see cref="BuildFromExpansion"/>, so tests can pin that racing sources run the
@@ -180,7 +203,7 @@ public class ValueSetSource : IValueSetDictionary
             // An expansion that arrives with the valueset determines the facade completely, so the
             // build is a pure function of that expansion and can be memoized against it.
             if (vs.HasExpansion)
-                return GetOrBuildMemoized(vs);
+                return await GetOrBuildMemoized(vs).ConfigureAwait(false);
 
             // Without an expansion we have to compute one, and what that yields depends on the
             // CodeSystems and valuesets this source's resolver can reach. The memo key cannot see any
@@ -200,25 +223,27 @@ public class ValueSetSource : IValueSetDictionary
     /// Only reached where <see cref="ValueSet.HasExpansion"/> holds, which is exactly where
     /// <see cref="ValueSet.Expansion"/> - the key - is non-null. Sources racing on the same expansion
     /// meet inside one retained <see cref="Lazy{T}"/> (see the remarks on
-    /// <see cref="FacadesByExpansion"/>), so exactly one of them runs the build and the others wait for
-    /// its result. A build that throws - a partial expansion - must not stick, though:
-    /// <see cref="Lazy{T}"/> caches the exception, so the entry is dropped from the table on failure and
-    /// the next attempt starts fresh. Concurrent waiters on the failed build still get its cached
-    /// exception, which is correct - they were asking about the same expansion in the same state. After
-    /// a successful build the <see cref="Lazy{T}"/> releases its factory, so a memoized entry holds no
-    /// reference to whichever source built it, nor to the valueset it was reached through.
+    /// <see cref="FacadesByExpansion"/>), so exactly one of them runs the build and the others await its
+    /// task. A build that fails - a partial expansion - must not stick, though: the
+    /// <see cref="Lazy{T}"/> retains the faulted task just as surely as it would have retained a thrown
+    /// exception, so the entry is dropped from the table on failure and the next attempt starts fresh.
+    /// Concurrent awaiters of the failed build still observe its fault, which is correct - they were
+    /// asking about the same expansion in the same state.
     /// </remarks>
-    private InMemoryValueSet GetOrBuildMemoized(ValueSet vs)
+    private async Task<InMemoryValueSet> GetOrBuildMemoized(ValueSet vs)
     {
         var expansion = vs.Expansion!;
 
-        // The factory keeps vs, not just the expansion, so a partial expansion can name the valueset
-        // it came from in its error message.
-        var lazyFacade = FacadesByExpansion.GetValue(expansion, _ => new Lazy<InMemoryValueSet>(() => BuildFromExpansion(vs)));
+        // The factory keeps vs, not just the expansion, so a partial expansion can name the valueset it
+        // came from in its error message. Task.Run is spelled out in full because Hl7.Fhir.Model, which
+        // this file has in scope, carries a Task resource of its own.
+        var lazyFacade = FacadesByExpansion.GetValue(
+            expansion,
+            _ => new Lazy<Task<InMemoryValueSet>>(() => System.Threading.Tasks.Task.Run(() => BuildFromExpansion(vs))));
 
         try
         {
-            return lazyFacade.Value;
+            return await lazyFacade.Value.ConfigureAwait(false);
         }
         catch
         {

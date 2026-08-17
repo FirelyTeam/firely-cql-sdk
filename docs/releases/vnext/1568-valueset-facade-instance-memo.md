@@ -13,7 +13,9 @@
   builds the way it always did. Entries are held under weak keys, so they live exactly as long as the
   host keeps the expansion alive — there are no bounds to tune and no invalidation to perform. Each
   `ValueSetSource` still keeps its own canonical-to-facade dictionary, which remains the only thing its
-  query methods consult; the memo spares the build, not the lookup.
+  query methods consult; the memo spares the build, not the lookup. Sources racing on the same expansion
+  converge on a single build and await it rather than blocking a thread each on it, which matters on a
+  request path where a cold value set would otherwise park every racer but one.
 
   The memoized facade is a snapshot of the expansion as it looked when the facade was built from it.
   *Replacing* a value set's `expansion` is honored, because the replacement is a different key: the next
