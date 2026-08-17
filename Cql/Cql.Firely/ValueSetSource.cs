@@ -45,7 +45,9 @@ namespace Hl7.Cql.Fhir;
 /// stands in for content, which holds exactly as long as the content does not change behind the
 /// identity. That is not an assumption this class invents - a resolver that hands the same instance
 /// to many consumers already forbids mutating it, since every consumer, cache or no cache, would
-/// observe the edit. A host that does rework a resolved valueset must hand out a copy (the FHIR SDK's
+/// observe the edit. This class is itself one such mutator: the expansion it computes is written into
+/// the caller's instance (see below), which is the one edit to a resolved valueset the SDK performs on
+/// its own. A host that does rework a resolved valueset must hand out a copy (the FHIR SDK's
 /// <c>DeepCopy</c>), which as a fresh instance simply builds its own facade.
 /// </para>
 /// <para>
@@ -54,7 +56,9 @@ namespace Hl7.Cql.Fhir;
 /// not determine - so its facade stays in the per-source layer only. That expansion is written into
 /// the caller's instance, so a later <see cref="Add(ValueSet)"/> of the very same instance does see an
 /// expansion and does take the memo path. This adds no staleness beyond the in-place mutation itself,
-/// which already leaves every source handed that instance looking at the same frozen expansion.
+/// which already leaves every source handed that instance looking at the same frozen expansion. Mutation
+/// after a failed build is still honored because the failed entry is evicted; mutation after a
+/// successful build is not, because that cached facade is retained.
 /// </para>
 /// </remarks>
 public class ValueSetSource : IValueSetDictionary
@@ -75,7 +79,13 @@ public class ValueSetSource : IValueSetDictionary
     /// the table races only on creating the wrapper and every caller then awaits the single build
     /// inside the one retained <see cref="Lazy{T}"/>.
     /// </remarks>
-    private static readonly ConditionalWeakTable<ValueSet, Lazy<InMemoryValueSet>> _facadesByInstance = new();
+    private static readonly ConditionalWeakTable<ValueSet, Lazy<InMemoryValueSet>> FacadesByInstance = new();
+
+    /// <summary>
+    /// Counts calls to <see cref="BuildFromExpansion"/>, so tests can pin that racing sources run the
+    /// build exactly once rather than merely agreeing on one result.
+    /// </summary>
+    internal static int BuildFromExpansionCount;
 
     private readonly ConcurrentDictionary<CqlCode, CqlCode> _internHash;
 
@@ -162,7 +172,7 @@ public class ValueSetSource : IValueSetDictionary
     /// </summary>
     /// <remarks>
     /// Sources racing on the same instance meet inside one retained <see cref="Lazy{T}"/> (see the
-    /// remarks on <see cref="_facadesByInstance"/>), so exactly one of them runs the build and the
+    /// remarks on <see cref="FacadesByInstance"/>), so exactly one of them runs the build and the
     /// others wait for its result. A build that throws - a partial expansion - must not stick,
     /// though: <see cref="Lazy{T}"/> caches the exception, so the entry is dropped from the table on
     /// failure and the next attempt starts fresh. Concurrent waiters on the failed build still get its
@@ -172,7 +182,7 @@ public class ValueSetSource : IValueSetDictionary
     /// </remarks>
     private InMemoryValueSet GetOrBuildMemoized(ValueSet vs)
     {
-        var lazyFacade = _facadesByInstance.GetValue(vs, v => new Lazy<InMemoryValueSet>(() => BuildFromExpansion(v)));
+        var lazyFacade = FacadesByInstance.GetValue(vs, v => new Lazy<InMemoryValueSet>(() => BuildFromExpansion(v)));
 
         try
         {
@@ -180,7 +190,10 @@ public class ValueSetSource : IValueSetDictionary
         }
         catch
         {
-            _facadesByInstance.Remove(vs);
+            // Another thread may already have replaced the failed entry with a fresh one; evicting
+            // that would throw away a good build. Only drop the wrapper that actually failed.
+            if (FacadesByInstance.TryGetValue(vs, out var current) && ReferenceEquals(current, lazyFacade))
+                FacadesByInstance.Remove(vs);
             throw;
         }
     }
@@ -191,16 +204,22 @@ public class ValueSetSource : IValueSetDictionary
     /// <remarks>
     /// The codes are interned into this source's table (see <see cref="Intern"/>), so a memoized facade
     /// can hand out <see cref="CqlCode"/> instances owned by whichever source happened to build it
-    /// first. That is harmless: membership of a <see cref="CqlCode"/> is decided by a comparer and
-    /// never by reference, so a shared instance answers exactly as a private one would - interning is
-    /// a memory optimization, not part of the semantics. What it does mean is that two facades held by
-    /// one source need not intern into the same table, so the same code reached through two of its
-    /// valuesets is not guaranteed to be one object; compare codes with a comparer, never by reference.
+    /// first. Membership <em>through <see cref="IValueSetFacade"/></em> is decided by a comparer and
+    /// never by reference, so a shared facade answers those queries exactly as a private one would.
+    /// Interning is not equally inert on the <see cref="IEnumerable{T}"/> surface:
+    /// <see cref="CqlCode"/> is a record, so LINQ over the facade compares ordinal and case-sensitively,
+    /// while the intern table uses <see cref="CqlCodeCqlComparer.OrdinalIgnoreCase"/> - interning has
+    /// been collapsing case-variant codes into one object, and a memoized facade no longer interns into
+    /// the source that reads it. What it does mean is that two facades held by one source need not
+    /// intern into the same table, so the same code reached through two of its valuesets is not
+    /// guaranteed to be one object; compare codes with a comparer, never by reference.
     /// The codes are materialized here rather than left as a deferred query, so the facade that comes
     /// out holds a reference neither to this source nor to <paramref name="vs"/>.
     /// </remarks>
     private InMemoryValueSet BuildFromExpansion(ValueSet vs)
     {
+        Interlocked.Increment(ref BuildFromExpansionCount);
+
         // A cached value set answers membership questions definitively, so a partial
         // expansion must not be cached: it would turn "this page does not contain the
         // code" into "this value set does not contain the code". An expansion we build
@@ -247,17 +266,19 @@ public class ValueSetSource : IValueSetDictionary
         var expansion = vs.Expansion;
         if (expansion is null) return;
 
-        var present = CountConcepts(expansion.Contains);
-
         if (expansion.Offset is > 0)
             throw new InvalidOperationException(
                 $"ValueSet '{vs.Url}' carries a partial expansion (offset {expansion.Offset}); " +
                 "only a completely expanded value set can be cached.");
 
-        if (expansion.Total is { } total && total > present)
-            throw new InvalidOperationException(
-                $"ValueSet '{vs.Url}' carries a partial expansion ({present} of {total} concepts); " +
-                "only a completely expanded value set can be cached.");
+        if (expansion.Total is { } total)
+        {
+            var present = CountConcepts(expansion.Contains);
+            if (total > present)
+                throw new InvalidOperationException(
+                    $"ValueSet '{vs.Url}' carries a partial expansion ({present} of {total} concepts); " +
+                    "only a completely expanded value set can be cached.");
+        }
     }
 
     private static int CountConcepts(IEnumerable<ValueSet.ContainsComponent>? contains) =>

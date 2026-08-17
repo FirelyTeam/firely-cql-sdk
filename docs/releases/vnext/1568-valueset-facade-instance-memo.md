@@ -20,4 +20,10 @@
   stays private to that source and never enters the memo. A partial expansion is not memoized either:
   it throws, as before, on every attempt.
 
+  Building a facade is now eager: the expansion's codes are materialized when the value set is added,
+  rather than on first query. For a value set that is resolved because something needs it this is a
+  small win (the code list is walked once instead of up to three times), but a caller that bulk-loads
+  value sets it never queries (`Add(IEnumerable<ValueSet>)`, `ToValueSetDictionary`) now pays for those
+  up front.
+
   There is no public API change.

@@ -194,11 +194,15 @@ public class ValueSetSourceFacadeMemoTests
     public async Task ConcurrentSources_ConvergeOnOneFacade()
     {
         var vs = ExpandedValueSet("http://example.org/ValueSet/contended", "111", "222");
+        var before = Volatile.Read(ref ValueSetSource.BuildFromExpansionCount);
 
         var facades = await Task.WhenAll(Enumerable.Range(0, 16).Select(_ => Task.Run(() => new ValueSetSource().Add(vs))));
 
         foreach (var facade in facades)
             Assert.AreSame(facades[0], facade, "every source racing on the same instance must end up with the single retained facade.");
+
+        Assert.AreEqual(1, Volatile.Read(ref ValueSetSource.BuildFromExpansionCount) - before,
+            "the Lazy exists so exactly one racer runs the expensive build; agreeing on one result is what the bare table already did.");
     }
 
     private static async Task AssertRejectsPartialExpansion(Func<Task<IValueSetFacade>> add)
