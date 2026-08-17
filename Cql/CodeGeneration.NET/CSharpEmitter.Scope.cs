@@ -277,6 +277,7 @@ internal partial class CSharpEmitter
             return atom;
         }
 
+        /// <param name="lambda">The body and parameters to emit as a local function.</param>
         /// <param name="declaredReturnType">Overrides the return type the function is DECLARED with,
         /// where the body's own type converts to it implicitly. Used for a short-circuit operand,
         /// whose function returns <see cref="CqlBoolean"/> over a <c>bool?</c> body: the implicit

@@ -70,6 +70,8 @@ internal partial class CSharpEmitter
     /// Prints a compound node one level deep: children are rendered via
     /// <paramref name="child"/> (which linearizes them to simple expressions first).
     /// </summary>
+    /// <param name="node">The compound node to print.</param>
+    /// <param name="child">Renders a child node, linearizing it to a simple expression first.</param>
     /// <param name="includeOriginTags">When <see langword="false"/>, origin tags are omitted —
     /// see <see cref="PrintFullyInline"/>: a tag embeds a CQL source span, so leaving it in a
     /// dedup key would stop two structurally identical subexpressions from deduplicating.</param>
@@ -189,6 +191,7 @@ internal partial class CSharpEmitter
     /// included. Used for "simple" conditionals, which the old pipeline returned unvisited
     /// so their whole subtree (the test included, however complex) printed inline.
     /// </summary>
+    /// <param name="node">The root of the subtree to print inline.</param>
     /// <param name="includeOriginTags">When <see langword="false"/>, every origin tag in the
     /// subtree is omitted. Used for dedup keys: a tag names a CQL source span, so leaving it in
     /// would make two structurally identical subexpressions written at different spans key
