@@ -62,6 +62,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.MultiPackager" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
