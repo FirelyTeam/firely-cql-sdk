@@ -25,12 +25,12 @@ Concretely, a method in this ledger may be removed only when **all** of the foll
    conformance tests, or the tests have been repointed at a preserved copy.
 
 Until then, the methods stay: they double as the executable specification the lowering is
-verified against (e.g. `CoreTests/ShortCircuitLogicCqlTest.GeneratedCode_AgreesWithRuntimeOperators`
-checks generated truth tables against `ICqlOperators.And`/`Or`/`Not`/`Implies`).
+verified against (e.g. `CoreTests/LogicCqlTest.GeneratedCode_AgreesWithRuntimeOperators`
+checks generated truth tables against `ICqlOperators.And`/`Or`/`Not`/`Implies`/`Xor`, and
+`IsTrue`/`IsFalse` against theirs).
 
-`Xor(bool?, bool?)` is deliberately **not** in this ledger: every row of its truth table varies
-with the right operand, so it has nothing to short-circuit, and C# has no lifted `^` over `bool?`
-matching CQL's three-valued semantics. Generated code still calls it.
+| `Xor(bool?, bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | lifted `^` behind a short-circuit guard | Reference implementation for the lowering's conformance tests. The one operator whose deciding value is **null**, not a bool: its null row is constant ("If either or both arguments are null, the result is null", §4), so a null left operand decides it |
+| `IsTrue(bool?)` / `IsFalse(bool?)` | 5.3.0.0 ([#1514](https://github.com/FirelyTeam/firely-cql-sdk/issues/1514)) | `is true` / `is false` constant patterns | Total predicates — a null argument yields false, never null — so no guard is involved. Note both interface members return `bool?` deliberately, for operator-binding uniformity; the lowering produces `bool` and is lifted at the call site |
 
 ## 1.2. Ledger
 

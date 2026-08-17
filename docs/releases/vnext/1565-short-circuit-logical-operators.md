@@ -18,6 +18,17 @@
   `End`/`Retrieve<` 4 more each, out of 1187/798/2311), and the repeats are property reads and
   cheap accessors rather than retrieves. Where such a subexpression contains a `Message()`, that
   message can be raised more than once. (#1514)
+- `xor` now short-circuits too — on a **null** left operand, which makes it the odd one out.
+  Its null row is constant ("if either or both arguments are null, the result is null"), so a null
+  left operand decides the result and the right operand is skipped; a `true` or `false` left
+  operand decides nothing and still evaluates the right (`false xor X` is `X`, `true xor X` is
+  `not X`). A null constant on either side folds to `null` at build time, erasing the other
+  operand. It lowers to C#'s lifted `^`, which propagates null exactly as CQL requires, instead of
+  an `ICqlOperators.Xor` call. Same skipped-side-effect disclosure as `and`/`or`. (#1514)
+- `IsTrue`/`IsFalse` now compile to the `is true`/`is false` constant patterns instead of
+  `ICqlOperators` calls. No behavior change: they are total predicates, so a null argument still
+  yields `false` and there is nothing to short-circuit. `ICqlOperators.IsTrue`/`IsFalse` keep
+  returning `bool?` for operator-binding uniformity and remain public API. (#1514)
 - `implies` now short-circuits as well, and lowers to `!left | right` (which is exactly Kleene
   implication) instead of an `ICqlOperators.Implies` call. Its right operand is skipped when the
   left operand is false, since `false implies X` is `true` for every `X` — and unlike `and`/`or`,

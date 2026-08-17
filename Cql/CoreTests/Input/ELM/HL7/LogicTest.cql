@@ -1,4 +1,4 @@
-library ShortCircuitLogicTest version '1.0.0'
+library LogicTest version '1.0.0'
 
 // The full Kleene truth tables for and/or/not (CQL spec §9.B), evaluated through generated
 // C# rather than through ICqlOperators directly. The operand definitions below are
@@ -54,11 +54,35 @@ define "NullImpliesTrue": "NullDef" implies "TrueDef"
 define "NullImpliesFalse": "NullDef" implies "FalseDef"
 define "NullImpliesNull": "NullDef" implies "NullDef"
 
+// xor — the odd one out: its NULL row is constant ("if either or both arguments are null, the
+// result is null"), so null is xor's deciding value where and/or/implies all decide on a bool.
+// Neither true nor false decides: they reduce (false xor X is X, true xor X is not X).
+
+define "TrueXorTrue": "TrueDef" xor "TrueDef"
+define "TrueXorFalse": "TrueDef" xor "FalseDef"
+define "TrueXorNull": "TrueDef" xor "NullDef"
+define "FalseXorTrue": "FalseDef" xor "TrueDef"
+define "FalseXorFalse": "FalseDef" xor "FalseDef"
+define "FalseXorNull": "FalseDef" xor "NullDef"
+define "NullXorTrue": "NullDef" xor "TrueDef"
+define "NullXorFalse": "NullDef" xor "FalseDef"
+define "NullXorNull": "NullDef" xor "NullDef"
+
+// IsTrue/IsFalse are total predicates - never null, since a null argument yields false - so they
+// lower to the `is true`/`is false` constant patterns the guards already print.
+
+define "IsTrueOfTrue": "TrueDef" is true
+define "IsTrueOfFalse": "FalseDef" is true
+define "IsTrueOfNull": "NullDef" is true
+define "IsFalseOfTrue": "TrueDef" is false
+define "IsFalseOfFalse": "FalseDef" is false
+define "IsFalseOfNull": "NullDef" is false
+
 // Skip evidence: the right operand raises a CQL Message, observable through the context's
 // MessageReceived event. A deciding left operand must suppress it; a null left operand must
 // not (null and false is false — the right operand still matters).
 
-define "MessageTrue": Message(true, true, 'ShortCircuitLogicTest.RightEvaluated', 'Trace', 'right operand was evaluated')
+define "MessageTrue": Message(true, true, 'LogicTest.RightEvaluated', 'Trace', 'right operand was evaluated')
 
 define "FalseAndMessage": "FalseDef" and "MessageTrue"
 define "NullAndMessage": "NullDef" and "MessageTrue"
@@ -72,6 +96,16 @@ define "NullOrMessage": "NullDef" or "MessageTrue"
 define "FalseImpliesMessage": "FalseDef" implies "MessageTrue"
 define "TrueImpliesMessage": "TrueDef" implies "MessageTrue"
 define "NullImpliesMessage": "NullDef" implies "MessageTrue"
+
+// xor skips only on a NULL left operand; true and false both still need the right operand.
+
+define "NullXorMessage": "NullDef" xor "MessageTrue"
+define "TrueXorMessage": "TrueDef" xor "MessageTrue"
+define "FalseXorMessage": "FalseDef" xor "MessageTrue"
+
+// A null CONSTANT on either side of xor erases the other operand at build time.
+
+define "XorNullConstCollapses": "MessageTrue" xor (null as Boolean)
 
 // Allocation probe target: a function whose right operand needs evaluation, so the guarded
 // form is emitted. Called directly with left = false/true from the test; the skipped path

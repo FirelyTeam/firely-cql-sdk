@@ -398,8 +398,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         else
         {
             bool? g_ = this.Aged_35_to_70_at_Start_of_Measurement_Period(context);
-            bool? h_ = context.Operators.IsTrue(g_);
-            return c_ & h_;
+            return c_ & ((bool?)(/* CQL 'is true' (107:9-107:54) */ g_ is true));
         }
     }
 

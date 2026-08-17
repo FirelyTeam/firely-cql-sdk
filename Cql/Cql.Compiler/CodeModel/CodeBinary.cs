@@ -36,6 +36,12 @@ internal enum CodeBinaryOp
     /// <summary><c>a | b</c> over <c>bool?</c> operands — C#'s lifted <c>|</c> is
     /// exactly CQL's three-valued <c>or</c> (true dominates, null propagates).</summary>
     BoolOr,
+
+    /// <summary><c>a ^ b</c> over <c>bool?</c> operands — CQL's <c>xor</c>. Where lifted
+    /// <c>&amp;</c>/<c>|</c> are SPECIAL three-valued operators in C# (a deciding operand wins
+    /// over a null one), <c>^</c> is an ordinary null-propagating lifted operator: null if
+    /// either operand is null. That is exactly what CQL's xor specifies.</summary>
+    BoolXor,
 }
 
 /// <summary>
@@ -43,14 +49,16 @@ internal enum CodeBinaryOp
 /// </summary>
 internal sealed class CodeBinary : CodeExpression
 {
-    public CodeBinary(CodeBinaryOp op, CodeExpression left, CodeExpression right)
+    public CodeBinary(CodeBinaryOp op, CodeExpression left, CodeExpression right, string? originTag = null)
     {
+        OriginTag = originTag;
+
         Type = op switch
         {
             CodeBinaryOp.Coalesce => ValidateCoalesce(left, right),
             CodeBinaryOp.Equal or CodeBinaryOp.NotEqual => typeof(bool),
             CodeBinaryOp.OrElse or CodeBinaryOp.AndAlso => ValidateLogical(op, left, right),
-            CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr => ValidateLiftedLogical(op, left, right),
+            CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr or CodeBinaryOp.BoolXor => ValidateLiftedLogical(op, left, right),
             _ => throw new ArgumentException($"Unknown binary operator {op}.")
         };
 
@@ -98,4 +106,13 @@ internal sealed class CodeBinary : CodeExpression
     public CodeExpression Right { get; }
 
     public override Type Type { get; }
+
+    /// <summary>
+    /// Short tag naming the CQL construct this operator was lowered from, including its source
+    /// locator — e.g. <c>"CQL 'xor' (33:5-33:57)"</c>. Printed as a block comment before the
+    /// expression so a reader can trace a native operator back to the CQL that produced it,
+    /// exactly as <see cref="CodeConditional.OriginTag"/> does for the guarded forms. Null for
+    /// the binaries the builder emits as plumbing (null checks, coalesces), which need no tracing.
+    /// </summary>
+    public string? OriginTag { get; }
 }

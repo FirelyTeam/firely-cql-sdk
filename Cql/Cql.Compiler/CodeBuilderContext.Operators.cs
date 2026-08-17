@@ -373,8 +373,11 @@ partial class CodeBuilderContext
     // null and false is false — so null must not short-circuit; an implementation shortcut
     // like `left != true` would be a correctness bug (#1514).
     //
-    // Xor stays on the name-based ICqlOperators path because it genuinely cannot skip: every
-    // xor row varies with the right operand, and C# has no lifted ^ over bool? matching Kleene.
+    // Xor short-circuits on a NULL left operand, which is the odd one out here: its null row is
+    // constant ("If either or both arguments are null, the result is null", §4 Logical
+    // Specification), so null is its deciding value where and/or/implies all decide on a bool.
+    // See Xor below. IsTrue/IsFalse lower to `is true`/`is false` constant patterns — total
+    // predicates, never null.
     //
     // Implies short-circuits too — the spec calls that skip out EXPLICITLY, unlike and/or where
     // it merely declines to prescribe evaluation ("Note that implies may use short-circuit
@@ -471,6 +474,114 @@ partial class CodeBuilderContext
             originDetail);
         return new CodeLet(local, left, conditional);
     }
+
+    /// <summary>
+    /// <c>xor</c> is the one operator here whose deciding value is <see langword="null"/> rather
+    /// than a bool: "If either or both arguments are null, the result is null" (§4 Logical
+    /// Specification), so its whole null ROW is constant and a null left operand decides it.
+    /// That is why it cannot go through <see cref="ShortCircuitBinary"/>, which is typed on a
+    /// <see cref="bool"/> deciding value. The merge is C#'s lifted <c>^</c>, which propagates
+    /// null exactly as CQL requires.
+    /// <para>Neither non-null left value decides, so unlike and/or/implies there is no
+    /// "constant absorbs" fold on a true/false operand — those REDUCE instead:
+    /// <c>false xor X</c> is <c>X</c> and <c>true xor X</c> is <c>not X</c>, either way still
+    /// evaluating X.</para>
+    /// </summary>
+    protected CodeExpression Xor(Xor xor)
+    {
+        if (xor.operand is not [{ } leftElement, { } rightElement])
+            throw this.NewExpressionBuildingException("Xor expects exactly two operands.");
+
+        var left = TranslateBoolArg(leftElement);
+        var right = TranslateBoolArg(rightElement);
+
+        var originTag = OriginTagFor("xor", xor.locator);
+
+        if (TryGetBoolConstant(left, out var leftConstant))
+        {
+            if (leftConstant is null)
+                return NullableBoolConstant(null);      // null xor X => null (X never evaluated)
+            return leftConstant is true
+                ? NotOperand(right)                     // true xor X => not X
+                : right;                                // false xor X => X
+        }
+
+        if (TryGetBoolConstant(right, out var rightConstant))
+        {
+            if (rightConstant is null)
+                return NullableBoolConstant(null);      // X xor null => null, erasing the left operand
+            return rightConstant is true
+                ? NotOperand(left)                      // X xor true => not X
+                : left;                                 // X xor false => X
+        }
+
+        // A left operand that cannot be null can never decide xor, so there is nothing to guard:
+        // emit the merge straight out. (Contrast and/or/implies, where a non-nullable left operand
+        // is exactly the case that decides on its own.)
+        if (left is CodeCast { Operand.Type: var innerType } && innerType == typeof(bool))
+            return new CodeBinary(CodeBinaryOp.BoolXor, left, HonestBoolOperand(right), originTag);
+
+        if (IsEvaluatedValue(right))
+            return new CodeBinary(CodeBinaryOp.BoolXor, left, HonestBoolOperand(right), originTag);
+
+        var local = new CodeLocal(typeof(bool?));
+        var guard = new CodeBinary(CodeBinaryOp.Equal, local, new CodeConstant(null, typeof(bool?)));
+        var conditional = new CodeConditional(
+            guard,
+            HonestBoolOperand(NullableBoolConstant(null)),
+            new CodeBinary(CodeBinaryOp.BoolXor, local, right),
+            typeof(bool?),
+            originTag,
+            originDetail: "right operand skipped when left is null");
+        return new CodeLet(local, left, conditional);
+    }
+
+    /// <summary>
+    /// <c>IsTrue</c>/<c>IsFalse</c>: total predicates, never null — "if the argument evaluates to
+    /// false or null, the result is false" (§4 Logical Specification) — so they are C#'s
+    /// <c>is true</c>/<c>is false</c> constant patterns, the same shape the short-circuit guards
+    /// already print. The returned node is <see cref="bool"/>; the caller's result-type conversion
+    /// lifts it to <c>bool?</c>, exactly as it does for <c>IsNull</c>.
+    /// </summary>
+    protected CodeExpression IsTrue(IsTrue isTrue) =>
+        BoolConstantPattern(isTrue.operand, value: true, nameof(IsTrue));
+
+    protected CodeExpression IsFalse(IsFalse isFalse) =>
+        BoolConstantPattern(isFalse.operand, value: false, nameof(IsFalse));
+
+    private CodeExpression BoolConstantPattern(Elm.Expression? operandElement, bool value, string operatorName)
+    {
+        var operand = TranslateBoolArg(operandElement
+            ?? throw this.NewExpressionBuildingException($"{operatorName} has no operand."));
+
+        // A constant operand folds. Note `constant == value` gives the right answer for the null
+        // case too: IsTrue(null) and IsFalse(null) are both false, never null.
+        if (TryGetBoolConstant(operand, out var constant))
+            return NullableBoolConstant(constant == value);
+
+        return new CodeBinary(
+            CodeBinaryOp.Equal,
+            operand,
+            new CodeConstant(value, typeof(bool?)),
+            // The CQL reads "X is true" / "X is false", so the tag names that syntax rather than
+            // the ELM operator name.
+            OriginTagFor(value ? "is true" : "is false", (operandElement as Elm.Element)?.locator));
+    }
+
+    /// <summary>The <c>CQL '&lt;name&gt;' (locator)</c> tag a lowered operator carries so a reader
+    /// can trace the generated C# back to its CQL, with the locator omitted when the ELM has
+    /// none.</summary>
+    private static string OriginTagFor(string cqlName, string? locator) =>
+        locator is { Length: > 0 }
+            ? $"CQL '{cqlName}' ({locator})"
+            : $"CQL '{cqlName}'";
+
+    /// <summary>Negation with the same constant folding <see cref="Not"/> applies — a folded
+    /// <c>!true</c> must not print as a non-nullable bool literal (see HonestBoolOperand).</summary>
+    private static CodeExpression NotOperand(CodeExpression operand) =>
+        TryGetBoolConstant(operand, out var constant)
+            ? NullableBoolConstant(constant is null ? null : !constant)
+            : new CodeUnary(CodeUnaryOp.Not, operand);
 
     /// <summary><c>!left | right</c> — Kleene implication over C#'s lifted operators.</summary>
     private static CodeExpression ImpliesMerge(CodeExpression left, CodeExpression right) =>

@@ -393,8 +393,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 Extension ae_ = this.GetModifierExtension(context, LevelOfSeverityNotCommunicated, "qicore-notDone");
                 DataType af_ = ae_?.Value;
                 bool? ag_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, af_ as FhirBoolean);
-                bool? ah_ = context.Operators.IsTrue(ag_);
-                ad_ = ac_ & ah_;
+                ad_ = ac_ & ((bool?)(/* CQL 'is true' */ ag_ is true));
             }
             // CQL 'and' (109:5-113:7): right operand skipped when left is false
             if (ad_ is false)
@@ -403,23 +402,23 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             }
             else
             {
-                CodeableConcept ai_ = LevelOfSeverityNotCommunicated?.StatusReason;
-                CqlConcept aj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ai_);
-                CqlValueSet ak_ = this.Medical_Reason(context);
-                bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
-                bool? am_;
+                CodeableConcept ah_ = LevelOfSeverityNotCommunicated?.StatusReason;
+                CqlConcept ai_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ah_);
+                CqlValueSet aj_ = this.Medical_Reason(context);
+                bool? ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
+                bool? al_;
                 // CQL 'or' (111:11-113:7): right operand skipped when left is true
-                if (al_ is true)
+                if (ak_ is true)
                 {
-                    am_ = true;
+                    al_ = true;
                 }
                 else
                 {
-                    CqlValueSet an_ = this.Patient_Reason(context);
-                    bool? ao_ = context.Operators.ConceptInValueSet(aj_, an_);
-                    am_ = al_ | ao_;
+                    CqlValueSet am_ = this.Patient_Reason(context);
+                    bool? an_ = context.Operators.ConceptInValueSet(ai_, am_);
+                    al_ = ak_ | an_;
                 }
-                return ad_ & am_;
+                return ad_ & al_;
             }
         }
 
@@ -500,8 +499,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 Extension af_ = this.GetModifierExtension(context, MacularEdemaAbsentNotCommunicated, "qicore-notDone");
                 DataType ag_ = af_?.Value;
                 bool? ah_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, ag_ as FhirBoolean);
-                bool? ai_ = context.Operators.IsTrue(ah_);
-                ae_ = ad_ & ai_;
+                ae_ = ad_ & ((bool?)(/* CQL 'is true' */ ah_ is true));
             }
             // CQL 'and' (99:5-103:7): right operand skipped when left is false
             if (ae_ is false)
@@ -510,23 +508,23 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             }
             else
             {
-                CodeableConcept aj_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
-                CqlConcept ak_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, aj_);
-                CqlValueSet al_ = this.Medical_Reason(context);
-                bool? am_ = context.Operators.ConceptInValueSet(ak_, al_);
-                bool? an_;
+                CodeableConcept ai_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
+                CqlConcept aj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ai_);
+                CqlValueSet ak_ = this.Medical_Reason(context);
+                bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
+                bool? am_;
                 // CQL 'or' (101:11-103:7): right operand skipped when left is true
-                if (am_ is true)
+                if (al_ is true)
                 {
-                    an_ = true;
+                    am_ = true;
                 }
                 else
                 {
-                    CqlValueSet ao_ = this.Patient_Reason(context);
-                    bool? ap_ = context.Operators.ConceptInValueSet(ak_, ao_);
-                    an_ = am_ | ap_;
+                    CqlValueSet an_ = this.Patient_Reason(context);
+                    bool? ao_ = context.Operators.ConceptInValueSet(aj_, an_);
+                    am_ = al_ | ao_;
                 }
-                return ae_ & an_;
+                return ae_ & am_;
             }
         }
 
@@ -606,8 +604,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 Extension ae_ = this.GetModifierExtension(context, MacularEdemaPresentNotCommunicated, "qicore-notDone");
                 DataType af_ = ae_?.Value;
                 bool? ag_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, af_ as FhirBoolean);
-                bool? ah_ = context.Operators.IsTrue(ag_);
-                ad_ = ac_ & ah_;
+                ad_ = ac_ & ((bool?)(/* CQL 'is true' */ ag_ is true));
             }
             // CQL 'and' (119:5-123:7): right operand skipped when left is false
             if (ad_ is false)
@@ -616,23 +613,23 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             }
             else
             {
-                CodeableConcept ai_ = MacularEdemaPresentNotCommunicated?.StatusReason;
-                CqlConcept aj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ai_);
-                CqlValueSet ak_ = this.Medical_Reason(context);
-                bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
-                bool? am_;
+                CodeableConcept ah_ = MacularEdemaPresentNotCommunicated?.StatusReason;
+                CqlConcept ai_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ah_);
+                CqlValueSet aj_ = this.Medical_Reason(context);
+                bool? ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
+                bool? al_;
                 // CQL 'or' (121:11-123:7): right operand skipped when left is true
-                if (al_ is true)
+                if (ak_ is true)
                 {
-                    am_ = true;
+                    al_ = true;
                 }
                 else
                 {
-                    CqlValueSet an_ = this.Patient_Reason(context);
-                    bool? ao_ = context.Operators.ConceptInValueSet(aj_, an_);
-                    am_ = al_ | ao_;
+                    CqlValueSet am_ = this.Patient_Reason(context);
+                    bool? an_ = context.Operators.ConceptInValueSet(ai_, am_);
+                    al_ = ak_ | an_;
                 }
-                return ad_ & am_;
+                return ad_ & al_;
             }
         }
 

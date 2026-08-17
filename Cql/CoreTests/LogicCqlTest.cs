@@ -17,23 +17,27 @@ using Hl7.Cql.Runtime;
 namespace CoreTests;
 
 /// <summary>
-/// End-to-end coverage for the short-circuit lowering of <c>and</c>/<c>or</c>/<c>not</c>
-/// (issue #1514): CQL in <c>Input/ELM/HL7/ShortCircuitLogicTest.cql</c> whose generated C#
-/// contains the guarded control-flow form, executed here for its real results.
+/// End-to-end coverage for the native lowering of CQL's logical and nullological operators
+/// (issue #1514): CQL in <c>Input/ELM/HL7/LogicTest.cql</c> whose generated C# contains the
+/// lowered form, executed here for its real results. Covers <c>and</c>, <c>or</c>, <c>not</c>,
+/// <c>implies</c> and <c>xor</c> — the four of those that short-circuit, plus <c>not</c> — and
+/// the <c>IsTrue</c>/<c>IsFalse</c> patterns, which lower natively but have nothing to skip.
 ///
 /// <para>The truth-table tests pin CQL's three-valued logic (spec §9.B) through generated
 /// code rather than through <c>ICqlOperators</c> directly — the operands are expression refs,
 /// so every combination goes through the guard. The Message tests are the observable evidence
-/// that the right operand is skipped exactly when the left operand decides the result
-/// (<c>false</c> for <c>and</c>, <c>true</c> for <c>or</c>) and is NOT skipped on
-/// <c>null</c> — <c>null and false</c> is <c>false</c>, so a null left operand must still
-/// evaluate the right.</para>
+/// that the right operand is skipped exactly when the left operand decides the result, and each
+/// operator decides on a different value: <c>false</c> for <c>and</c> and <c>implies</c>,
+/// <c>true</c> for <c>or</c>, and <c>null</c> for <c>xor</c> — the only one where null decides.
+/// For and/or/implies a null left operand must NOT skip (<c>null and false</c> is <c>false</c>,
+/// <c>null implies true</c> is <c>true</c>), and for xor neither bool value may skip
+/// (<c>false xor X</c> is <c>X</c>).</para>
 /// </summary>
 [TestClass]
 [TestCategory("UnitTest")]
-public class ShortCircuitLogicCqlTest
+public class LogicCqlTest
 {
-    private static ShortCircuitLogicTest_1_0_0 Library => ShortCircuitLogicTest_1_0_0.Instance;
+    private static LogicTest_1_0_0 Library => LogicTest_1_0_0.Instance;
 
     private static CqlContext Context() => FhirCqlContext.ForBundle();
 
@@ -97,6 +101,41 @@ public class ShortCircuitLogicCqlTest
     }
 
     /// <summary>
+    /// <c>xor</c> is the odd one out: its NULL row is constant ("if either or both arguments are
+    /// null, the result is null"), so <see langword="null"/> is xor's deciding value where
+    /// and/or/implies all decide on a bool. Neither <c>true</c> nor <c>false</c> decides — they
+    /// reduce, so the right operand is still evaluated.
+    /// </summary>
+    [TestMethod]
+    public void Xor_TruthTable()
+    {
+        Assert.AreEqual(false, Library.TrueXorTrue(Context()));
+        Assert.AreEqual(true, Library.TrueXorFalse(Context()));
+        Assert.IsNull(Library.TrueXorNull(Context()));
+        Assert.AreEqual(true, Library.FalseXorTrue(Context()));
+        Assert.AreEqual(false, Library.FalseXorFalse(Context()));
+        Assert.IsNull(Library.FalseXorNull(Context()));
+        Assert.IsNull(Library.NullXorTrue(Context()));
+        Assert.IsNull(Library.NullXorFalse(Context()));
+        Assert.IsNull(Library.NullXorNull(Context()));
+    }
+
+    /// <summary>
+    /// <c>IsTrue</c>/<c>IsFalse</c> are total: a null argument yields <see langword="false"/>,
+    /// never null. They lower to the <c>is true</c>/<c>is false</c> constant patterns.
+    /// </summary>
+    [TestMethod]
+    public void IsTrue_IsFalse_TruthTables()
+    {
+        Assert.AreEqual(true, Library.IsTrueOfTrue(Context()));
+        Assert.AreEqual(false, Library.IsTrueOfFalse(Context()));
+        Assert.AreEqual(false, Library.IsTrueOfNull(Context()));
+        Assert.AreEqual(false, Library.IsFalseOfTrue(Context()));
+        Assert.AreEqual(true, Library.IsFalseOfFalse(Context()));
+        Assert.AreEqual(false, Library.IsFalseOfNull(Context()));
+    }
+
+    /// <summary>
     /// The generated code must agree with the runtime operators it no longer calls — the
     /// runtime implementation is the reference the lowering is checked against.
     /// </summary>
@@ -124,6 +163,12 @@ public class ShortCircuitLogicCqlTest
             { Library.FalseImpliesTrue, Library.FalseImpliesFalse, Library.FalseImpliesNull },
             { Library.NullImpliesTrue, Library.NullImpliesFalse, Library.NullImpliesNull },
         };
+        var generatedXor = new Func<CqlContext, bool?>[,]
+        {
+            { Library.TrueXorTrue, Library.TrueXorFalse, Library.TrueXorNull },
+            { Library.FalseXorTrue, Library.FalseXorFalse, Library.FalseXorNull },
+            { Library.NullXorTrue, Library.NullXorFalse, Library.NullXorNull },
+        };
 
         for (var l = 0; l < 3; l++)
         {
@@ -132,7 +177,16 @@ public class ShortCircuitLogicCqlTest
                 Assert.AreEqual(ops.And(values[l], values[r]), generatedAnd[l, r](Context()), $"and: left={values[l]}, right={values[r]}");
                 Assert.AreEqual(ops.Or(values[l], values[r]), generatedOr[l, r](Context()), $"or: left={values[l]}, right={values[r]}");
                 Assert.AreEqual(ops.Implies(values[l], values[r]), generatedImplies[l, r](Context()), $"implies: left={values[l]}, right={values[r]}");
+                Assert.AreEqual(ops.Xor(values[l], values[r]), generatedXor[l, r](Context()), $"xor: left={values[l]}, right={values[r]}");
             }
+        }
+
+        var generatedIsTrue = new[] { Library.IsTrueOfTrue, Library.IsTrueOfFalse, Library.IsTrueOfNull };
+        var generatedIsFalse = new[] { Library.IsFalseOfTrue, Library.IsFalseOfFalse, Library.IsFalseOfNull };
+        for (var i = 0; i < 3; i++)
+        {
+            Assert.AreEqual(ops.IsTrue(values[i]), generatedIsTrue[i](Context()), $"IsTrue: {values[i]}");
+            Assert.AreEqual(ops.IsFalse(values[i]), generatedIsFalse[i](Context()), $"IsFalse: {values[i]}");
         }
 
         Assert.AreEqual(ops.Not(true), Library.NotTrue(Context()));
@@ -150,7 +204,7 @@ public class ShortCircuitLogicCqlTest
         var messages = 0;
         context.MessageReceived += (_, e) =>
         {
-            if (e.Code == "ShortCircuitLogicTest.RightEvaluated")
+            if (e.Code == "LogicTest.RightEvaluated")
                 messages++;
         };
         var result = definition(context);
@@ -213,6 +267,43 @@ public class ShortCircuitLogicCqlTest
         Assert.AreEqual(1, messages, "null does NOT decide 'implies' (null implies true is true); the right operand must be evaluated.");
     }
 
+    [TestMethod]
+    public void NullXorMessage_SkipsRightOperand()
+    {
+        var (result, messages) = RunCountingMessages(Library.NullXorMessage);
+        Assert.IsNull(result); // null xor X is null for every X
+        Assert.AreEqual(0, messages, "null decides 'xor'; the right operand must not be evaluated.");
+    }
+
+    [TestMethod]
+    public void TrueXorMessage_EvaluatesRightOperand()
+    {
+        var (result, messages) = RunCountingMessages(Library.TrueXorMessage);
+        Assert.AreEqual(false, result); // true xor true = false
+        Assert.AreEqual(1, messages, "true does NOT decide 'xor' (true xor X is not X); the right operand must be evaluated.");
+    }
+
+    [TestMethod]
+    public void FalseXorMessage_EvaluatesRightOperand()
+    {
+        var (result, messages) = RunCountingMessages(Library.FalseXorMessage);
+        Assert.AreEqual(true, result); // false xor true = true
+        Assert.AreEqual(1, messages, "false does NOT decide 'xor' (false xor X is X); the right operand must be evaluated.");
+    }
+
+    /// <summary>
+    /// A null CONSTANT on either side of <c>xor</c> makes the whole expression null at build
+    /// time, erasing the other operand and its side effects — the xor analogue of
+    /// <c>X and false</c>.
+    /// </summary>
+    [TestMethod]
+    public void XorNullConstant_CollapsesAndErasesTheOtherOperand()
+    {
+        var (result, messages) = RunCountingMessages(Library.XorNullConstCollapses);
+        Assert.IsNull(result);
+        Assert.AreEqual(0, messages, "X xor null folds to null at build time; X must not be evaluated.");
+    }
+
     /// <summary>
     /// A guarded <c>and</c> inside the TEST of a conditional with simple branches: the emitter
     /// must not classify that conditional as an inline ternary, because the guard's
@@ -228,7 +319,7 @@ public class ShortCircuitLogicCqlTest
         var messages = 0;
         context.MessageReceived += (_, e) =>
         {
-            if (e.Code == "ShortCircuitLogicTest.RightEvaluated")
+            if (e.Code == "LogicTest.RightEvaluated")
                 messages++;
         };
         Assert.AreEqual(1, Library.GuardInConditionalTest(context));
@@ -438,7 +529,7 @@ public class ShortCircuitLogicCqlTest
     private static string GenerateFixtureCSharp(ElmToolkitConfig config)
     {
         LibrarySet librarySet = new();
-        librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input/ELM/HL7"), "ShortCircuitLogicTest", "1.0.0");
+        librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input/ELM/HL7"), "LogicTest", "1.0.0");
 
         return new ElmToolkit(config: config)
             .AddElmLibraries(librarySet)

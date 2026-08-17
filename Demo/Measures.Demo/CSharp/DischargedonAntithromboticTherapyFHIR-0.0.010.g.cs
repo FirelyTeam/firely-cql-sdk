@@ -136,7 +136,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         bool? c_(MedicationRequest NoAntithromboticDischarge) {
             FhirBoolean e_ = NoAntithromboticDischarge?.DoNotPerformElement;
             bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
-            bool? g_ = context.Operators.IsTrue(f_);
+            bool? g_ = (bool?)(/* CQL 'is true' */ f_ is true);
             bool? h_;
             // CQL 'and' (82:11-85:7): right operand skipped when left is false
             if (g_ is false)
@@ -289,68 +289,67 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         bool? c_(MedicationRequest Pharmacological) {
             FhirBoolean e_ = Pharmacological?.DoNotPerformElement;
             bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
-            bool? g_ = context.Operators.IsTrue(f_);
-            bool? h_ = !g_;
-            bool? i_;
+            bool? g_ = !((bool?)(/* CQL 'is true' */ f_ is true));
+            bool? h_;
             // CQL 'and' (95:11-99:7): right operand skipped when left is false
+            if (g_ is false)
+            {
+                h_ = false;
+            }
+            else
+            {
+                List<CodeableConcept> j_ = Pharmacological?.Category;
+
+                bool? k_(CodeableConcept C) {
+                    CqlConcept m_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
+                    CqlCode n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
+                    CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
+                    bool? p_ = context.Operators.Equivalent(m_, o_);
+                    // CQL 'or' (97:11-98:63): right operand skipped when left is true
+                    if (p_ is true)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        CqlCode q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
+                        CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
+                        bool? s_ = context.Operators.Equivalent(m_, r_);
+                        return p_ | s_;
+                    }
+                }
+
+                bool? l_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)j_, k_);
+                h_ = g_ & l_;
+            }
+            bool? i_;
+            // CQL 'and' (95:11-100:61): right operand skipped when left is false
             if (h_ is false)
             {
                 i_ = false;
             }
             else
             {
-                List<CodeableConcept> k_ = Pharmacological?.Category;
-
-                bool? l_(CodeableConcept C) {
-                    CqlConcept n_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
-                    CqlCode o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
-                    CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-                    bool? q_ = context.Operators.Equivalent(n_, p_);
-                    // CQL 'or' (97:11-98:63): right operand skipped when left is true
-                    if (q_ is true)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        CqlCode r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
-                        CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
-                        bool? t_ = context.Operators.Equivalent(n_, s_);
-                        return q_ | t_;
-                    }
-                }
-
-                bool? m_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)k_, l_);
-                i_ = h_ & m_;
-            }
-            bool? j_;
-            // CQL 'and' (95:11-100:61): right operand skipped when left is false
-            if (i_ is false)
-            {
-                j_ = false;
-            }
-            else
-            {
-                Code<MedicationRequest.MedicationrequestStatus> u_ = Pharmacological?.StatusElement;
-                string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-                string[] w_ = [
+                Code<MedicationRequest.MedicationrequestStatus> t_ = Pharmacological?.StatusElement;
+                string u_ = FHIRHelpers_4_0_001.Instance.ToString(context, t_);
+                string[] v_ = [
                     "active",
                     "completed",
                 ];
-                bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
-                j_ = i_ & x_;
+                bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
+                i_ = h_ & w_;
             }
             // CQL 'and' (95:5-101:42): right operand skipped when left is false
-            if (j_ is false)
+            if (i_ is false)
             {
                 return false;
             }
             else
             {
-                Code<MedicationRequest.MedicationRequestIntent> y_ = Pharmacological?.IntentElement;
-                string z_ = FHIRHelpers_4_0_001.Instance.ToString(context, y_);
-                bool? aa_ = context.Operators.Equal(z_, "order");
-                return j_ & aa_;
+                Code<MedicationRequest.MedicationRequestIntent> x_ = Pharmacological?.IntentElement;
+                string y_ = FHIRHelpers_4_0_001.Instance.ToString(context, x_);
+                bool? z_ = context.Operators.Equal(y_, "order");
+                return i_ & z_;
             }
         }
 
@@ -447,68 +446,67 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         bool? c_(MedicationRequest Antithrombotic) {
             FhirBoolean e_ = Antithrombotic?.DoNotPerformElement;
             bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
-            bool? g_ = context.Operators.IsTrue(f_);
-            bool? h_ = !g_;
-            bool? i_;
+            bool? g_ = !((bool?)(/* CQL 'is true' */ f_ is true));
+            bool? h_;
             // CQL 'and' (72:11-76:7): right operand skipped when left is false
+            if (g_ is false)
+            {
+                h_ = false;
+            }
+            else
+            {
+                List<CodeableConcept> j_ = Antithrombotic?.Category;
+
+                bool? k_(CodeableConcept C) {
+                    CqlConcept m_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
+                    CqlCode n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
+                    CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
+                    bool? p_ = context.Operators.Equivalent(m_, o_);
+                    // CQL 'or' (74:11-75:63): right operand skipped when left is true
+                    if (p_ is true)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        CqlCode q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
+                        CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
+                        bool? s_ = context.Operators.Equivalent(m_, r_);
+                        return p_ | s_;
+                    }
+                }
+
+                bool? l_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)j_, k_);
+                h_ = g_ & l_;
+            }
+            bool? i_;
+            // CQL 'and' (72:11-77:60): right operand skipped when left is false
             if (h_ is false)
             {
                 i_ = false;
             }
             else
             {
-                List<CodeableConcept> k_ = Antithrombotic?.Category;
-
-                bool? l_(CodeableConcept C) {
-                    CqlConcept n_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
-                    CqlCode o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
-                    CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-                    bool? q_ = context.Operators.Equivalent(n_, p_);
-                    // CQL 'or' (74:11-75:63): right operand skipped when left is true
-                    if (q_ is true)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        CqlCode r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
-                        CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
-                        bool? t_ = context.Operators.Equivalent(n_, s_);
-                        return q_ | t_;
-                    }
-                }
-
-                bool? m_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)k_, l_);
-                i_ = h_ & m_;
-            }
-            bool? j_;
-            // CQL 'and' (72:11-77:60): right operand skipped when left is false
-            if (i_ is false)
-            {
-                j_ = false;
-            }
-            else
-            {
-                Code<MedicationRequest.MedicationrequestStatus> u_ = Antithrombotic?.StatusElement;
-                string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-                string[] w_ = [
+                Code<MedicationRequest.MedicationrequestStatus> t_ = Antithrombotic?.StatusElement;
+                string u_ = FHIRHelpers_4_0_001.Instance.ToString(context, t_);
+                string[] v_ = [
                     "active",
                     "completed",
                 ];
-                bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
-                j_ = i_ & x_;
+                bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
+                i_ = h_ & w_;
             }
             // CQL 'and' (72:5-78:41): right operand skipped when left is false
-            if (j_ is false)
+            if (i_ is false)
             {
                 return false;
             }
             else
             {
-                Code<MedicationRequest.MedicationRequestIntent> y_ = Antithrombotic?.IntentElement;
-                string z_ = FHIRHelpers_4_0_001.Instance.ToString(context, y_);
-                bool? aa_ = context.Operators.Equal(z_, "order");
-                return j_ & aa_;
+                Code<MedicationRequest.MedicationRequestIntent> x_ = Antithrombotic?.IntentElement;
+                string y_ = FHIRHelpers_4_0_001.Instance.ToString(context, x_);
+                bool? z_ = context.Operators.Equal(y_, "order");
+                return i_ & z_;
             }
         }
 

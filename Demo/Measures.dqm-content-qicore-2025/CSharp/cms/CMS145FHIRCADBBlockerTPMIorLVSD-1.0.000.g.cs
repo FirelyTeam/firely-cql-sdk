@@ -1030,36 +1030,35 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 {
                     FhirBoolean u_ = Order?.DoNotPerformElement;
                     bool? v_ = u_?.Value;
-                    bool? w_ = context.Operators.IsTrue(v_);
-                    return j_ & !w_;
+                    return j_ & (!((bool?)(/* CQL 'is true' (396:15-396:32) */ v_ is true)));
                 }
             }
             else if (Order is MedicationRequest)
             {
-                FhirDateTime x_ = Order?.AuthoredOnElement;
-                CqlDateTime y_ = context.Operators.Convert<CqlDateTime>(x_);
-                Period z_ = Visit?.Period;
-                CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
-                bool? ab_ = context.Operators.In<CqlDateTime>(y_, aa_, "day");
+                FhirDateTime w_ = Order?.AuthoredOnElement;
+                CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
+                Period y_ = Visit?.Period;
+                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
+                bool? aa_ = context.Operators.In<CqlDateTime>(x_, z_, "day");
                 // CQL 'and' (397:51-398:109): right operand skipped when left is false
-                if (ab_ is false)
+                if (aa_ is false)
                 {
                     return false;
                 }
                 else
                 {
-                    Code<MedicationRequest.MedicationRequestIntent> ac_ = Order?.IntentElement;
-                    MedicationRequest.MedicationRequestIntent? ad_ = ac_?.Value;
-                    string ae_ = context.Operators.Convert<string>(ad_);
-                    string[] af_ = [
+                    Code<MedicationRequest.MedicationRequestIntent> ab_ = Order?.IntentElement;
+                    MedicationRequest.MedicationRequestIntent? ac_ = ab_?.Value;
+                    string ad_ = context.Operators.Convert<string>(ac_);
+                    string[] ae_ = [
                         "order",
                         "original-order",
                         "reflex-order",
                         "filler-order",
                         "instance-order",
                     ];
-                    bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
-                    return ab_ & ag_;
+                    bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                    return aa_ & af_;
                 }
             }
             else

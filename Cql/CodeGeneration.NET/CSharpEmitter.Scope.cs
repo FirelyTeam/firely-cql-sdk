@@ -200,7 +200,10 @@ internal partial class CSharpEmitter
                 memo.TryGetValue(child, out var atom) ? atom : memo[child] = Linearize(child)!;
 
             var printed = _emitter.PrintShallow(node, child => Child(child));
-            var keyPrinted = _emitter.PrintShallow(node, child => Child(child) with { Code = Child(child).KeyCode });
+            // Origin tags are excluded from the KEY rendering, for the same reason the inline
+            // conditional excludes them: a tag embeds a CQL source span, so two structurally
+            // identical subexpressions written at different spans would never deduplicate.
+            var keyPrinted = _emitter.PrintShallow(node, child => Child(child) with { Code = Child(child).KeyCode }, includeOriginTags: false);
             return (printed, keyPrinted);
         }
 

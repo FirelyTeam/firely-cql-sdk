@@ -70,7 +70,10 @@ internal partial class CSharpEmitter
     /// Prints a compound node one level deep: children are rendered via
     /// <paramref name="child"/> (which linearizes them to simple expressions first).
     /// </summary>
-    private string PrintShallow(CodeExpression node, Func<CodeExpression, Atom> child) =>
+    /// <param name="includeOriginTags">When <see langword="false"/>, origin tags are omitted —
+    /// see <see cref="PrintFullyInline"/>: a tag embeds a CQL source span, so leaving it in a
+    /// dedup key would stop two structurally identical subexpressions from deduplicating.</param>
+    private string PrintShallow(CodeExpression node, Func<CodeExpression, Atom> child, bool includeOriginTags = true) =>
         node switch
         {
             CodeInvoke call => PrintInvoke(call, child),
@@ -78,7 +81,7 @@ internal partial class CSharpEmitter
             CodeProperty property => PrintProperty(property, child),
             CodeCast cast => PrintCast(cast, child),
             CodeTypeIs typeIs => PrintTypeIs(typeIs, child),
-            CodeBinary binary => PrintBinary(binary, child),
+            CodeBinary binary => PrintBinary(binary, child, includeOriginTags),
             CodeUnary unary => PrintUnary(unary, child),
             CodeNew @new => PrintNew(@new, child),
             CodeMemberInit memberInit => PrintMemberInit(memberInit, child),
@@ -205,7 +208,7 @@ internal partial class CSharpEmitter
                 "An if-chain cannot print as an inline expression; this subtree should not have been classified inline-only."),
             CodeLet => throw new NotSupportedException(
                 "A let-binding cannot print as an inline expression; this subtree should not have been classified inline-only."),
-            _ => PrintShallow(node, child => new Atom(PrintFullyInline(child, includeOriginTags), child)),
+            _ => PrintShallow(node, child => new Atom(PrintFullyInline(child, includeOriginTags), child), includeOriginTags),
         };
     }
 
@@ -389,8 +392,16 @@ internal partial class CSharpEmitter
         return $"{operand} is {typeName}";
     }
 
-    private string PrintBinary(CodeBinary binary, Func<CodeExpression, Atom> child)
+    private string PrintBinary(CodeBinary binary, Func<CodeExpression, Atom> child, bool includeOriginTags = true)
     {
+        // A natively-lowered operator names the CQL it came from, the same way the guarded forms
+        // do (block-commented, since it sits inside an expression). Coalesce is excluded: its
+        // folds below return a CHILD's code verbatim, and prefixing a tag onto an operand that
+        // survives alone would attach this operator's span to a different expression.
+        var originPrefix = includeOriginTags && binary.OriginTag is { } tag && binary.Op != CodeBinaryOp.Coalesce
+            ? $"/* {tag} */ "
+            : "";
+
         var leftExpression = binary.Left;
 
         if (binary.Op == CodeBinaryOp.Coalesce)
@@ -451,7 +462,7 @@ internal partial class CSharpEmitter
             // directly. Keyed on the IR node (a bool-valued constant), not on the printed
             // text, so a right operand that merely PRINTS as "true"/"false" (e.g. a folded
             // is-null comparison) cannot switch a lifted == into a pattern match.
-            CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool b } && binary.Left.Type == typeof(bool?) => $"{left} is {(b ? "true" : "false")}",
+            CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool b } && binary.Left.Type == typeof(bool?) => $"{originPrefix}{left} is {(b ? "true" : "false")}",
             CodeBinaryOp.Equal => $"{left} == {right}",
             CodeBinaryOp.NotEqual => $"{left} != {right}",
             CodeBinaryOp.Coalesce => $"{left} ?? {right}",
@@ -461,8 +472,9 @@ internal partial class CSharpEmitter
             // writer output to stay byte-identical with), and C#'s & and | bind looser than
             // == but tighter than ?? — an unparenthesized right operand that printed as a
             // coalesce ("a & x ?? y") would silently re-associate to "(a & x) ?? y".
-            CodeBinaryOp.BoolAnd => $"{left} & {right.ParenthesizeIfNeeded()}",
-            CodeBinaryOp.BoolOr => $"{left} | {right.ParenthesizeIfNeeded()}",
+            CodeBinaryOp.BoolAnd => $"{originPrefix}{left} & {right.ParenthesizeIfNeeded()}",
+            CodeBinaryOp.BoolOr => $"{originPrefix}{left} | {right.ParenthesizeIfNeeded()}",
+            CodeBinaryOp.BoolXor => $"{originPrefix}{left} ^ {right.ParenthesizeIfNeeded()}",
             _ => throw new NotSupportedException($"Don't know how to print binary operator {binary.Op}."),
         };
     }
