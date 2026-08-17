@@ -70,6 +70,8 @@ internal partial class CSharpEmitter
     /// Prints a compound node one level deep: children are rendered via
     /// <paramref name="child"/> (which linearizes them to simple expressions first).
     /// </summary>
+    /// <param name="node">The compound node to print.</param>
+    /// <param name="child">Renders a child node, linearizing it to a simple expression first.</param>
     /// <param name="includeOriginTags">When <see langword="false"/>, origin tags are omitted —
     /// see <see cref="PrintFullyInline"/>: a tag embeds a CQL source span, so leaving it in a
     /// dedup key would stop two structurally identical subexpressions from deduplicating.</param>
@@ -189,6 +191,7 @@ internal partial class CSharpEmitter
     /// included. Used for "simple" conditionals, which the old pipeline returned unvisited
     /// so their whole subtree (the test included, however complex) printed inline.
     /// </summary>
+    /// <param name="node">The root of the subtree to print inline.</param>
     /// <param name="includeOriginTags">When <see langword="false"/>, every origin tag in the
     /// subtree is omitted. Used for dedup keys: a tag names a CQL source span, so leaving it in
     /// would make two structurally identical subexpressions written at different spans key
@@ -402,6 +405,32 @@ internal partial class CSharpEmitter
             ? $"/* {tag} */ "
             : "";
 
+        // A short-circuit operator's RIGHT operand is printed fully inline, deliberately bypassing
+        // the child linearizer: linearizing it could hoist part of it into a statement above the
+        // expression, which would evaluate it unconditionally and destroy the skip. Linearize has
+        // already diverted any right operand that has no inline form to the branching guard, so
+        // PrintFullyInline cannot fail here.
+        if (CodeBinary.ShortCircuits(binary.Op))
+        {
+            // The right operand's CqlBoolean conversion is dropped: overload resolution for the
+            // user-defined operator backing && / || applies an implicit conversion there, and the
+            // skip is unaffected (a skipped operand is not converted either). The LEFT operand
+            // keeps its conversion — see UnwrapCqlBooleanConversion for why it cannot be dropped.
+            //
+            // The discarded cast's own parentheses were silently providing precedence safety, so
+            // that has to be replaced: FormatShortCircuit parenthesizes the whole expression but
+            // not the operands, and a right operand binding looser than && would regroup —
+            // `x && a ?? b` parses as `(x && a) ?? b`.
+            var rightOperand = ParenthesizeShortCircuitOperand(
+                PrintFullyInline(UnwrapCqlBooleanConversion(binary.Right), includeOriginTags));
+
+            return FormatShortCircuit(
+                binary.Op,
+                child(binary.Left).Code,
+                rightOperand,
+                includeOriginTags ? binary.OriginTag : null);
+        }
+
         var leftExpression = binary.Left;
 
         if (binary.Op == CodeBinaryOp.Coalesce)
@@ -475,8 +504,76 @@ internal partial class CSharpEmitter
             CodeBinaryOp.BoolAnd => $"{originPrefix}{left} & {right.ParenthesizeIfNeeded()}",
             CodeBinaryOp.BoolOr => $"{originPrefix}{left} | {right.ParenthesizeIfNeeded()}",
             CodeBinaryOp.BoolXor => $"{originPrefix}{left} ^ {right.ParenthesizeIfNeeded()}",
+            // BOTH operands parenthesize, unlike the lifted ops above: && and || have different
+            // precedences from each other, so a mixed nest (implies is `!l || r`, which may then
+            // become an operand of &&) regroups silently without them.
+            CodeBinaryOp.CqlAndAlso => $"{originPrefix}{left.ParenthesizeIfNeeded()} && {right.ParenthesizeIfNeeded()}",
+            CodeBinaryOp.CqlOrElse => $"{originPrefix}{left.ParenthesizeIfNeeded()} || {right.ParenthesizeIfNeeded()}",
             _ => throw new NotSupportedException($"Don't know how to print binary operator {binary.Op}."),
         };
+    }
+
+    /// <summary>
+    /// A short-circuit operator's printed form, shared by the inline path and the path that moves
+    /// the right operand into a local function, so the two cannot drift apart.
+    ///
+    /// <para>The operator LEADS its continuation line, matching the ternary format: with one operand
+    /// per line the reader can see which operand may be skipped, and a chain reads as a column of
+    /// conditions rather than one long line.</para>
+    ///
+    /// <para>The whole expression is parenthesized, which also settles precedence — <c>&amp;&amp;</c>
+    /// and <c>||</c> bind differently, and <c>implies</c> is <c>!l || r</c> that may itself become an
+    /// operand of <c>&amp;&amp;</c>, so a mixed nest would regroup silently. Because every one of
+    /// these self-parenthesizes, the operands need no parens of their own.</para>
+    /// </summary>
+    internal string FormatShortCircuit(CodeBinaryOp op, string left, string right, string? originTag)
+    {
+        var @operator = op is CodeBinaryOp.CqlAndAlso or CodeBinaryOp.AndAlso ? "&&" : "||";
+        var originPrefix = originTag is null ? "" : $"/* {originTag} */ ";
+
+        var isb = new IndentedStringBuilder();
+        isb.Append("(");
+        isb.AppendLine(left);
+        using (isb.Indent())
+            isb.Append($"{@operator} {right})");
+        return $"{originPrefix}{isb}";
+    }
+
+    /// <summary>
+    /// Parenthesizes a short-circuit operator's right operand only when it could regroup, judged by
+    /// whether it contains whitespace at parenthesis depth ZERO.
+    ///
+    /// <para>That is a proxy for "has a top-level operator or keyword", and an exact one for the
+    /// shapes reachable here: every operator that binds looser than <c>&amp;&amp;</c> is printed
+    /// spaced (<c>a ?? b</c>, <c>x is true</c>, <c>y as T</c>, <c>c ? t : f</c>), while everything
+    /// that binds tighter is not (<c>f_()</c>, <c>this.Def(context)</c>, <c>!x</c>, <c>a_</c>) — a
+    /// call's or a cast's own internal spacing sits inside its parentheses, at depth one or more.
+    /// An already-parenthesized term likewise opens at index 0, so its interior never counts.</para>
+    ///
+    /// <para>Deliberately not <see cref="StringExtensions.ParenthesizeIfNeeded"/>, whose
+    /// starts-with-<c>(</c> XOR ends-with-<c>)</c> rule wraps every method call — correct, but it
+    /// would put redundant parentheses on all ~478 of these operands, which is the noise this
+    /// change exists to remove.</para>
+    /// </summary>
+    private static string ParenthesizeShortCircuitOperand(string term)
+    {
+        term = term.Trim();
+
+        var depth = 0;
+        foreach (var c in term)
+        {
+            switch (c)
+            {
+                case '(': depth++; break;
+                case ')': depth--; break;
+                default:
+                    if (depth <= 0 && char.IsWhiteSpace(c))
+                        return $"({term})";
+                    break;
+            }
+        }
+
+        return term;
     }
 
     private string PrintUnary(CodeUnary unary, Func<CodeExpression, Atom> child) =>

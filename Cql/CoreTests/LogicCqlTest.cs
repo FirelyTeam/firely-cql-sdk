@@ -454,22 +454,36 @@ public class LogicCqlTest
     {
         var generated = LogicTestFixture.DefaultCSharp;
 
-        StringAssert.Contains(generated, "// CQL 'and' (", "Expected origin-tagged 'and' guards.");
-        // The inline-ternary guard form, pinned on its SHAPE rather than on a `/* CQL 'and' (`
-        // substring: guard-free merges now carry that tag too, so the substring alone no longer
-        // distinguishes the ternary (AndNotY) from an ordinary merge.
+        // and/or/implies short-circuit as EXPRESSIONS over CqlBoolean, so their tags are inline
+        // block comments and there is no guard statement to find.
+        // Line-spanning: the operator leads its own continuation line, so these patterns must
+        // cross a newline (hence [\s\S] rather than .).
         StringAssert.Matches(
-            ExtractComputeMethod(generated, "AndNotY"),
-            new System.Text.RegularExpressions.Regex(@"/\* CQL 'and' \([^)]*\) \*/ \(\w+ is false\s*\r?\n\s*\? false\s*\r?\n\s*: "),
-            "Expected AndNotY to keep the inline-ternary guard form with its block-comment tag.");
-        StringAssert.Contains(generated, "// CQL 'or' (", "Expected origin-tagged 'or' guards.");
-        StringAssert.Contains(generated, "// CQL 'implies' (", "Expected origin-tagged 'implies' guards.");
+            generated,
+            new System.Text.RegularExpressions.Regex(@"/\* CQL 'and' \([^)]*\) \*/[\s\S]{0,400}?&&"),
+            "Expected 'and' to lower to a CqlBoolean && expression carrying its origin tag.");
+        StringAssert.Matches(
+            generated,
+            new System.Text.RegularExpressions.Regex(@"/\* CQL 'or' \([^)]*\) \*/[\s\S]{0,400}?\|\|"),
+            "Expected 'or' to lower to a CqlBoolean || expression carrying its origin tag.");
+        StringAssert.Matches(
+            generated,
+            new System.Text.RegularExpressions.Regex(@"/\* CQL 'implies' \([^)]*\) \*/ \(\(CqlBoolean\)!\w+[\s\S]{0,200}?\|\|"),
+            "Expected 'implies' to lower to !left || right over CqlBoolean.");
+        StringAssert.Contains(generated, "(CqlBoolean)", "Expected the CqlBoolean conversions that make && / || available.");
+
+        // xor keeps the branching guard: its deciding value is null, and C# has no ^^ to
+        // short-circuit with.
         StringAssert.Contains(generated, "// CQL 'xor' (", "Expected origin-tagged 'xor' guards.");
         StringAssert.Contains(generated, "/* CQL 'is true' (", "Expected the 'is true' pattern's inline origin tag.");
         StringAssert.Contains(generated, "/* CQL 'is false' (", "Expected the 'is false' pattern's inline origin tag.");
-        StringAssert.Contains(generated, "right operand skipped when left is false", "Expected the 'and'/'implies' guard explanation.");
-        StringAssert.Contains(generated, "right operand skipped when left is true", "Expected the 'or' guard explanation.");
+        // Only xor still carries the "…skipped when…" detail: it explains branching control flow,
+        // and xor is the only operator that still emits any. and/or/implies short-circuit as
+        // expressions, where the inline tag alone is the traceability.
         StringAssert.Contains(generated, "right operand skipped when left is null", "Expected the 'xor' guard explanation — null is xor's deciding value.");
+        Assert.IsFalse(
+            generated.Contains("right operand skipped when left is false"),
+            "and/implies no longer branch, so the guard explanation must be gone with the guard.");
 
         // The native forms themselves, so a regression to an operator call cannot hide behind a
         // surviving origin comment. Anchored on the tag immediately followed by the pattern:
@@ -500,36 +514,97 @@ public class LogicCqlTest
     }
 
     /// <summary>
-    /// An emitted guard is always an <c>if</c>/<c>else</c> chain — in tail position (every
-    /// branch returns, as in the truth-table defines) as well as in assign form (the branches
-    /// assign a result local, like the guard inside <c>GuardInConditionalTest</c> that produces
-    /// a value for an if-test). There is no guard-clause variant: the assign form needs the
-    /// <c>else</c> to guarantee exactly one branch runs, and the tail form matches it.
-    /// <para>Both assertions match the guard's OWN <c>if</c>/<c>else</c>, anchored on its origin
-    /// comment. Counting <c>else</c> keywords over the whole method cannot fail here: the
-    /// assign-form fixture also contains the CQL <c>if</c>'s own else, which would keep the
-    /// count above zero even if the guard stopped emitting one.</para>
+    /// and/or/implies no longer emit ANY branching: over <c>CqlBoolean</c> they are expressions, so
+    /// a guard statement in one of their methods would mean the expression form had regressed.
+    /// <c>xor</c> is the exception and keeps its <c>if</c>/<c>else</c> — its deciding value is
+    /// <see langword="null"/> and C# has no <c>^^</c> to short-circuit with — so it is pinned here
+    /// as the one remaining guarded operator.
     /// </summary>
     [TestMethod]
-    public void GeneratedCSharp_GuardChainsKeepElseBlocks()
+    public void GeneratedCSharp_ShortCircuitsAsExpressions_ExceptXor()
     {
         var generated = LogicTestFixture.DefaultCSharp;
 
-        StringAssert.Matches(
-            ExtractComputeMethod(generated, "TrueAndTrue_Compute"),
-            GuardFollowedByElse("return false;"),
-            "A tail-position guard must keep its else block.");
+        foreach (var method in new[] { "TrueAndTrue_Compute", "TrueOrTrue_Compute", "NullImpliesTrue_Compute" })
+        {
+            var body = ExtractComputeMethod(generated, method);
+            StringAssert.Contains(body, "(CqlBoolean)", $"{method} must lower through CqlBoolean.");
+            Assert.IsFalse(
+                body.Contains("if ("),
+                $"{method} must short-circuit as an expression; a guard statement means the expression form regressed.");
+        }
 
+        // xor's guard: origin comment naming null as the deciding value, the null test, the
+        // deciding branch, then else.
         StringAssert.Matches(
-            ExtractComputeMethod(generated, "GuardInConditionalTest_Compute"),
-            GuardFollowedByElse(@"\w+ = false;"),
-            "An assign-form guard must keep its else block.");
+            ExtractComputeMethod(generated, "NullXorMessage_Compute"),
+            new System.Text.RegularExpressions.Regex(
+                @"// CQL 'xor' \([^)]*\): right operand skipped when left is null\s*\r?\n\s*if \(\w+ is null\)\s*\r?\n\s*\{\s*\r?\n\s*return null as bool\?;\s*\r?\n\s*\}\s*\r?\n\s*else\b"),
+            "xor must keep its branching guard, since null is its deciding value and C# has no ^^.");
     }
 
-    /// <summary>The guard's own if/else: origin comment, <c>if (x is false)</c>, the deciding
-    /// branch (<paramref name="decidingStatement"/>), its closing brace, then <c>else</c>.</summary>
-    private static System.Text.RegularExpressions.Regex GuardFollowedByElse(string decidingStatement) =>
-        new($@"// CQL 'and' \([^)]*\): right operand skipped when left is false\s*\r?\n\s*if \(\w+ is false\)\s*\r?\n\s*\{{\s*\r?\n\s*{decidingStatement}\s*\r?\n\s*\}}\s*\r?\n\s*else\b");
+    /// <summary>
+    /// A <c>bool?</c>-declared body does not re-cast its <see cref="CqlBoolean"/> result: the
+    /// conversion is implicit at the <c>return</c>, so <c>return (bool?)(…)</c> at the root is
+    /// pure noise and must not come back.
+    ///
+    /// <para>Pinned at BOTH levels, because they are separate emitter paths that regressed
+    /// independently while this was built: a definition body
+    /// (<c>EmitBodyBlock</c>/<c>TryEmitExpressionBody</c>) and a hoisted local function
+    /// (<c>HoistLocalFunction</c>). Correctness is already guaranteed by the corpus compiling
+    /// at all — this only guards the readability, which nothing else would catch.</para>
+    ///
+    /// <para>The complementary half — that the conversion SURVIVES where it is load-bearing —
+    /// is what <c>NullXorMessage_Compute</c> above still asserts via its <c>?? false</c> guard.</para>
+    /// </summary>
+    [TestMethod]
+    public void GeneratedCSharp_DoesNotReCastCqlBooleanAtBodyRoot()
+    {
+        var generated = LogicTestFixture.DefaultCSharp;
+
+        foreach (var method in new[] { "TrueAndTrue_Compute", "TrueOrTrue_Compute", "NullImpliesTrue_Compute" })
+        {
+            var body = ExtractComputeMethod(generated, method);
+            StringAssert.Contains(body, "(CqlBoolean)", $"{method} must still lower through CqlBoolean.");
+            Assert.IsFalse(
+                body.Contains("return (bool?)("),
+                $"{method} re-casts its CqlBoolean result to bool?; the root conversion is implicit at the return.");
+        }
+
+        // A local function declared bool? must likewise return its CqlBoolean body uncast. Any
+        // corpus method is fine for this — it is the emitter path, not the CQL, being pinned.
+        Assert.IsFalse(
+            System.Text.RegularExpressions.Regex.IsMatch(generated, @"bool\? \w+_\([^)]*\)[^;]*\{[^}]*return \(bool\?\)\(/\* CQL '(and|or|implies)'"),
+            "A bool?-declared local function re-casts its CqlBoolean result; the conversion is implicit at its return.");
+    }
+
+    /// <summary>
+    /// The conversion is emitted on the LEFT operand only. The asymmetry is not cosmetic and is the
+    /// reason to pin it: C# synthesises <c>&amp;&amp;</c>/<c>||</c> from the LEFT operand's own
+    /// <c>operator true</c>/<c>operator false</c>, so a <c>bool?</c> left operand has no
+    /// <c>&amp;&amp;</c> at all and its conversion is load-bearing — while the right operand gets
+    /// one for free from overload resolution on the underlying <c>&amp;</c>/<c>|</c>.
+    ///
+    /// <para>Dropping the right one cannot weaken the skip, since a skipped operand is never
+    /// converted either; the <c>Message()</c> evidence tests above are what actually demonstrate
+    /// that, and they are unchanged.</para>
+    /// </summary>
+    [TestMethod]
+    public void GeneratedCSharp_ConvertsOnlyTheLeftShortCircuitOperand()
+    {
+        var generated = LogicTestFixture.DefaultCSharp;
+
+        Assert.IsFalse(
+            System.Text.RegularExpressions.Regex.IsMatch(generated, @"(&&|\|\|) \(CqlBoolean\)"),
+            "A right operand carries a redundant (CqlBoolean) conversion; overload resolution supplies it implicitly.");
+
+        // The left one must still be there — its absence would not compile, but asserting it here
+        // states the asymmetry rather than leaving it to be rediscovered.
+        StringAssert.Contains(
+            ExtractComputeMethod(generated, "TrueAndTrue_Compute"),
+            "((CqlBoolean)",
+            "The left operand must keep its conversion; without it the operator has no && to synthesise.");
+    }
 
     private static string ExtractComputeMethod(string code, string methodName)
     {

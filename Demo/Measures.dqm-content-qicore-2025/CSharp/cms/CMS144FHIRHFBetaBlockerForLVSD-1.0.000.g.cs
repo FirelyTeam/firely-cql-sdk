@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS144FHIRHFBetaBlockerForLVSD", "1.0.000")]
 public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISingleton<CMS144FHIRHFBetaBlockerForLVSD_1_0_000>
 {
@@ -148,17 +148,15 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_Compute(CqlContext context)
     {
         bool? a_ = this.Initial_Population(context);
-        // CQL 'and' (37:3-38:95): right operand skipped when left is false
-        if (a_ is false)
-        {
-            return false;
+
+        CqlBoolean b_() {
+            IEnumerable<Encounter> c_ = AHAOverall_4_1_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
+            bool? d_ = context.Operators.Exists<Encounter>(c_);
+            return d_;
         }
-        else
-        {
-            IEnumerable<Encounter> b_ = AHAOverall_4_1_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
-            bool? c_ = context.Operators.Exists<Encounter>(b_);
-            return a_ & c_;
-        }
+
+        return /* CQL 'and' (37:3-38:95) */ ((CqlBoolean)a_
+            && b_());
     }
 
 
@@ -171,38 +169,10 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = AHAOverall_4_1_000.Instance.Has_Heart_Transplant(context);
-        bool? b_;
-        // CQL 'or' (41:3-42:47): right operand skipped when left is true
-        if (a_ is true)
-        {
-            b_ = true;
-        }
-        else
-        {
-            bool? d_ = AHAOverall_4_1_000.Instance.Has_Heart_Transplant_Complications(context);
-            b_ = a_ | d_;
-        }
-        bool? c_;
-        // CQL 'or' (41:3-43:47): right operand skipped when left is true
-        if (b_ is true)
-        {
-            c_ = true;
-        }
-        else
-        {
-            bool? e_ = AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device(context);
-            c_ = b_ | e_;
-        }
-        // CQL 'or' (41:3-44:61): right operand skipped when left is true
-        if (c_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            bool? f_ = AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device_Complications(context);
-            return c_ | f_;
-        }
+        return /* CQL 'or' (41:3-44:61) */ (/* CQL 'or' (41:3-43:47) */ (/* CQL 'or' (41:3-42:47) */ ((CqlBoolean)a_
+            || AHAOverall_4_1_000.Instance.Has_Heart_Transplant_Complications(context))
+            || AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device(context))
+            || AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device_Complications(context));
     }
 
 
@@ -246,19 +216,17 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                 IEnumerable<string> n_ = context.Operators.Split((string)m_, "/");
                 string o_ = context.Operators.Last<string>(n_);
                 bool? p_ = context.Operators.Equal(l_, o_);
-                // CQL 'and': right operand skipped when left is false
-                if (p_ is false)
-                {
-                    return false;
+
+                CqlBoolean q_() {
+                    CodeableConcept r_ = M?.Code;
+                    CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
+                    CqlValueSet t_ = this.Beta_Blocker_Therapy_for_LVSD(context);
+                    bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
+                    return u_;
                 }
-                else
-                {
-                    CodeableConcept q_ = M?.Code;
-                    CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                    CqlValueSet s_ = this.Beta_Blocker_Therapy_for_LVSD(context);
-                    bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
-                    return p_ & t_;
-                }
+
+                return /* CQL 'and' */ ((CqlBoolean)p_
+                    && q_());
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -271,8 +239,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(c_, e_);
 
         bool? g_(MedicationRequest ActiveBetaBlocker) {
-            bool? u_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ActiveBetaBlocker);
-            return u_;
+            bool? v_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ActiveBetaBlocker);
+            return v_;
         }
 
         bool? h_ = context.Operators.WhereAny<MedicationRequest>(f_, g_);
@@ -289,16 +257,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     private bool? Numerator_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Beta_Blocker_Therapy_for_LVSD_Ordered(context);
-        // CQL 'or' (47:3-48:58): right operand skipped when left is true
-        if (a_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            bool? b_ = this.Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(context);
-            return a_ | b_;
-        }
+        return /* CQL 'or' (47:3-48:58) */ ((CqlBoolean)a_
+            || this.Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(context));
     }
 
 
@@ -327,88 +287,79 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
             CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
             bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, (string)default);
-            bool? q_;
-            // CQL 'and' (130:13-131:67): right operand skipped when left is false
-            if (p_ is false)
-            {
-                q_ = false;
-            }
-            else
-            {
-                Code<ObservationStatus> s_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.StatusElement;
-                ObservationStatus? t_ = s_?.Value;
-                string u_ = context.Operators.Convert<string>(t_);
-                string[] v_ = [
+
+            CqlBoolean q_() {
+                Code<ObservationStatus> t_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.StatusElement;
+                ObservationStatus? u_ = t_?.Value;
+                string v_ = context.Operators.Convert<string>(u_);
+                string[] w_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
-                q_ = p_ & w_;
+                bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
+                return x_;
             }
-            bool? r_;
-            // CQL 'and' (130:13-132:39): right operand skipped when left is false
-            if (q_ is false)
-            {
-                r_ = false;
-            }
-            else
-            {
-                DataType x_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Value;
-                CqlQuantity y_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, x_ as Quantity);
-                CqlQuantity z_ = context.Operators.Quantity(50m, "/min");
-                bool? aa_ = context.Operators.Less(y_, z_);
-                r_ = q_ & aa_;
-            }
-            // CQL 'and' (130:7-133:44): right operand skipped when left is false
-            if (r_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                IEnumerable<Observation> ab_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate"));
 
-                bool? ac_(Observation MostRecentPriorHeartRate) {
-                    Period al_ = tuple_fufpmqdratbglhghdwfuubanf?.ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> am_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, al_);
-                    DataType an_ = MostRecentPriorHeartRate?.Effective;
-                    object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                    CqlInterval<CqlDateTime> ap_ = QICoreCommon_4_0_000.Instance.toInterval(context, ao_);
-                    bool? aq_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(am_, ap_, (string)default);
-                    // CQL 'and' (126:11-127:103): right operand skipped when left is false
-                    if (aq_ is false)
-                    {
-                        return false;
+
+            CqlBoolean r_() {
+                DataType y_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Value;
+                CqlQuantity z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_ as Quantity);
+                CqlQuantity aa_ = context.Operators.Quantity(50m, "/min");
+                bool? ab_ = context.Operators.Less(z_, aa_);
+                return ab_;
+            }
+
+
+            CqlBoolean s_() {
+                IEnumerable<Observation> ac_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate"));
+
+                bool? ad_(Observation MostRecentPriorHeartRate) {
+                    Period am_ = tuple_fufpmqdratbglhghdwfuubanf?.ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, am_);
+                    DataType ao_ = MostRecentPriorHeartRate?.Effective;
+                    object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
+                    CqlInterval<CqlDateTime> aq_ = QICoreCommon_4_0_000.Instance.toInterval(context, ap_);
+                    bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(an_, aq_, (string)default);
+
+                    CqlBoolean as_() {
+                        DataType at_ = MostRecentPriorHeartRate?.Effective;
+                        object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
+                        CqlInterval<CqlDateTime> av_ = QICoreCommon_4_0_000.Instance.toInterval(context, au_);
+                        DataType aw_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Effective;
+                        object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
+                        CqlInterval<CqlDateTime> ay_ = QICoreCommon_4_0_000.Instance.toInterval(context, ax_);
+                        bool? az_ = context.Operators.Before(av_, ay_, (string)default);
+                        return az_;
                     }
-                    else
-                    {
-                        DataType ar_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Effective;
-                        object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                        CqlInterval<CqlDateTime> at_ = QICoreCommon_4_0_000.Instance.toInterval(context, as_);
-                        bool? au_ = context.Operators.Before(ap_, at_, (string)default);
-                        return aq_ & au_;
-                    }
+
+                    return /* CQL 'and' (126:11-127:103) */ ((CqlBoolean)ar_
+                        && as_());
                 }
 
-                IEnumerable<Observation> ad_ = context.Operators.Where<Observation>(ab_, ac_);
+                IEnumerable<Observation> ae_ = context.Operators.Where<Observation>(ac_, ad_);
 
-                object ae_(Observation @this) {
-                    DataType av_ = @this?.Effective;
-                    object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                    CqlInterval<CqlDateTime> ax_ = QICoreCommon_4_0_000.Instance.toInterval(context, aw_);
-                    CqlDateTime ay_ = context.Operators.Start(ax_);
-                    return ay_;
+                object af_(Observation @this) {
+                    DataType ba_ = @this?.Effective;
+                    object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
+                    CqlInterval<CqlDateTime> bc_ = QICoreCommon_4_0_000.Instance.toInterval(context, bb_);
+                    CqlDateTime bd_ = context.Operators.Start(bc_);
+                    return bd_;
                 }
 
-                IEnumerable<Observation> af_ = context.Operators.SortBy<Observation>(ad_, ae_, System.ComponentModel.ListSortDirection.Ascending);
-                Observation ag_ = context.Operators.Last<Observation>(af_);
-                DataType ah_ = ag_?.Value;
-                CqlQuantity ai_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ah_ as Quantity);
-                CqlQuantity aj_ = context.Operators.Quantity(50m, "/min");
-                bool? ak_ = context.Operators.Less(ai_, aj_);
-                return r_ & ak_;
+                IEnumerable<Observation> ag_ = context.Operators.SortBy<Observation>(ae_, af_, System.ComponentModel.ListSortDirection.Ascending);
+                Observation ah_ = context.Operators.Last<Observation>(ag_);
+                DataType ai_ = ah_?.Value;
+                CqlQuantity aj_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ai_ as Quantity);
+                CqlQuantity ak_ = context.Operators.Quantity(50m, "/min");
+                bool? al_ = context.Operators.Less(aj_, ak_);
+                return al_;
             }
+
+            return /* CQL 'and' (130:7-133:44) */ (/* CQL 'and' (130:13-132:39) */ (/* CQL 'and' (130:13-131:67) */ ((CqlBoolean)p_
+                && q_())
+                && r_())
+                && s_());
         }
 
         IEnumerable<(CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?> f_ = context.Operators.SelectWhere<ValueTuple<Observation, Encounter>, (CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?>(c_, d_, e_);
@@ -452,31 +403,30 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             List<CodeableConcept> o_ = NoBetaBlockerOrdered?.ReasonCode;
 
             CqlConcept p_(CodeableConcept @this) {
-                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return t_;
+                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return u_;
             }
 
             IEnumerable<CqlConcept> q_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)o_, p_);
             CqlValueSet r_ = this.Medical_Reason(context);
             bool? s_ = context.Operators.ConceptsInValueSet(q_, r_);
-            // CQL 'or' (174:7-176:7): right operand skipped when left is true
-            if (s_ is true)
-            {
-                return true;
-            }
-            else
-            {
 
-                CqlConcept u_(CodeableConcept @this) {
-                    CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                    return y_;
+            CqlBoolean t_() {
+                List<CodeableConcept> v_ = NoBetaBlockerOrdered?.ReasonCode;
+
+                CqlConcept w_(CodeableConcept @this) {
+                    CqlConcept aa_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                    return aa_;
                 }
 
-                IEnumerable<CqlConcept> v_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)o_, u_);
-                CqlValueSet w_ = this.Patient_Reason(context);
-                bool? x_ = context.Operators.ConceptsInValueSet(v_, w_);
-                return s_ | x_;
+                IEnumerable<CqlConcept> x_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)v_, w_);
+                CqlValueSet y_ = this.Patient_Reason(context);
+                bool? z_ = context.Operators.ConceptsInValueSet(x_, y_);
+                return z_;
             }
+
+            return /* CQL 'or' (174:7-176:7) */ ((CqlBoolean)s_
+                || t_());
         }
 
         bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
@@ -490,32 +440,29 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     {
         CodeableConcept a_ = allergyIntolerance?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
-        bool? c_ = !((bool?)(b_ is null));
-        // CQL 'implies' (185:3-187:3): right operand skipped when left is false
-        if (c_ is false)
-        {
-            return true;
-        }
-        else
-        {
-            CqlCode d_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
-            CqlConcept e_ = context.Operators.ConvertCodeToConcept(d_);
-            bool? f_ = context.Operators.Equivalent(b_, e_);
-            bool? g_;
-            // CQL 'or' (185:61-187:3): right operand skipped when left is true
-            if (f_ is true)
-            {
-                g_ = true;
+
+        CqlBoolean c_() {
+            CodeableConcept d_ = allergyIntolerance?.VerificationStatus;
+            CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
+            CqlCode f_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
+            CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
+            bool? h_ = context.Operators.Equivalent(e_, g_);
+
+            CqlBoolean i_() {
+                CodeableConcept j_ = allergyIntolerance?.VerificationStatus;
+                CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
+                CqlCode l_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
+                CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
+                bool? n_ = context.Operators.Equivalent(k_, m_);
+                return n_;
             }
-            else
-            {
-                CqlCode h_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
-                CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
-                bool? j_ = context.Operators.Equivalent(b_, i_);
-                g_ = f_ | j_;
-            }
-            return !c_ | g_;
+
+            return /* CQL 'or' (185:61-187:3) */ ((CqlBoolean)h_
+                || i_());
         }
+
+        return /* CQL 'implies' (185:3-187:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
+            || c_());
     }
 
 
@@ -534,16 +481,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? e_(Condition ArrhythmiaAlias) {
             bool? g_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, ArrhythmiaAlias);
-            // CQL 'and' (147:7-148:42): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                bool? h_ = AHAOverall_4_1_000.Instance.isVerified(context, ArrhythmiaAlias);
-                return g_ & h_;
-            }
+            return /* CQL 'and' (147:7-148:42) */ ((CqlBoolean)g_
+                && AHAOverall_4_1_000.Instance.isVerified(context, ArrhythmiaAlias));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -566,16 +505,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? e_(Condition HypotensionAlias) {
             bool? g_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, HypotensionAlias);
-            // CQL 'and' (93:7-94:43): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                bool? h_ = AHAOverall_4_1_000.Instance.isVerified(context, HypotensionAlias);
-                return g_ & h_;
-            }
+            return /* CQL 'and' (93:7-94:43) */ ((CqlBoolean)g_
+                && AHAOverall_4_1_000.Instance.isVerified(context, HypotensionAlias));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -598,16 +529,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? e_(Condition AsthmaAlias) {
             bool? g_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, AsthmaAlias);
-            // CQL 'and' (154:7-155:38): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                bool? h_ = AHAOverall_4_1_000.Instance.isVerified(context, AsthmaAlias);
-                return g_ & h_;
-            }
+            return /* CQL 'and' (154:7-155:38) */ ((CqlBoolean)g_
+                && AHAOverall_4_1_000.Instance.isVerified(context, AsthmaAlias));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -635,16 +558,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? j_(Condition BetaBlockerAllergyOrIntoleranceDiagnosis) {
             bool? l_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, BetaBlockerAllergyOrIntoleranceDiagnosis);
-            // CQL 'and' (110:7-111:67): right operand skipped when left is false
-            if (l_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                bool? m_ = AHAOverall_4_1_000.Instance.isVerified(context, BetaBlockerAllergyOrIntoleranceDiagnosis);
-                return l_ & m_;
-            }
+            return /* CQL 'and' (110:7-111:67) */ ((CqlBoolean)l_
+                && AHAOverall_4_1_000.Instance.isVerified(context, BetaBlockerAllergyOrIntoleranceDiagnosis));
         }
 
         bool? k_ = context.Operators.WhereAny<Condition>(i_, j_);
@@ -667,16 +582,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? e_(Condition BradycardiaAlias) {
             bool? g_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, BradycardiaAlias);
-            // CQL 'and' (117:7-118:43): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                bool? h_ = AHAOverall_4_1_000.Instance.isVerified(context, BradycardiaAlias);
-                return g_ & h_;
-            }
+            return /* CQL 'and' (117:7-118:43) */ ((CqlBoolean)g_
+                && AHAOverall_4_1_000.Instance.isVerified(context, BradycardiaAlias));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -701,16 +608,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? g_(AllergyIntolerance BetaBlockerAllergyIntolerance) {
             bool? i_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, BetaBlockerAllergyIntolerance);
-            // CQL 'and' (140:7-141:56): right operand skipped when left is false
-            if (i_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                bool? j_ = this.isVerified(context, BetaBlockerAllergyIntolerance);
-                return i_ & j_;
-            }
+            return /* CQL 'and' (140:7-141:56) */ ((CqlBoolean)i_
+                && this.isVerified(context, BetaBlockerAllergyIntolerance));
         }
 
         bool? h_ = context.Operators.WhereAny<AllergyIntolerance>(f_, g_);
@@ -733,16 +632,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? e_(Condition AtrioventricularBlockAlias) {
             bool? g_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, AtrioventricularBlockAlias);
-            // CQL 'and' (161:7-162:53): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                bool? h_ = AHAOverall_4_1_000.Instance.isVerified(context, AtrioventricularBlockAlias);
-                return g_ & h_;
-            }
+            return /* CQL 'and' (161:7-162:53) */ ((CqlBoolean)g_
+                && AHAOverall_4_1_000.Instance.isVerified(context, AtrioventricularBlockAlias));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -765,16 +656,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
 
         bool? e_(Condition CardiacPacerDiagnosis) {
             bool? g_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, CardiacPacerDiagnosis);
-            // CQL 'and' (100:7-101:48): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                bool? h_ = AHAOverall_4_1_000.Instance.isVerified(context, CardiacPacerDiagnosis);
-                return g_ & h_;
-            }
+            return /* CQL 'and' (100:7-101:48) */ ((CqlBoolean)g_
+                && AHAOverall_4_1_000.Instance.isVerified(context, CardiacPacerDiagnosis));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -870,27 +753,9 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     private bool? Atrioventricular_Block_without_Cardiac_Pacer_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Atrioventricular_Block_Diagnosis(context);
-        bool? b_;
-        // CQL 'and' (74:3-75:52): right operand skipped when left is false
-        if (a_ is false)
-        {
-            b_ = false;
-        }
-        else
-        {
-            bool? c_ = this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ(context);
-            b_ = a_ & !c_;
-        }
-        // CQL 'and' (74:3-76:48): right operand skipped when left is false
-        if (b_ is false)
-        {
-            return false;
-        }
-        else
-        {
-            bool? d_ = this.Has_Cardiac_Pacer_Device_Implanted(context);
-            return b_ & !d_;
-        }
+        return /* CQL 'and' (74:3-76:48) */ (/* CQL 'and' (74:3-75:52) */ ((CqlBoolean)a_
+            && !(this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ(context)))
+            && !(this.Has_Cardiac_Pacer_Device_Implanted(context)));
     }
 
 
@@ -903,93 +768,15 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
         bool? a_ = this.Has_Consecutive_Heart_Rates_Less_than_50(context);
-        bool? b_;
-        // CQL 'or' (51:3-52:77): right operand skipped when left is true
-        if (a_ is true)
-        {
-            b_ = true;
-        }
-        else
-        {
-            bool? i_ = this.Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(context);
-            b_ = a_ | i_;
-        }
-        bool? c_;
-        // CQL 'or' (51:3-53:33): right operand skipped when left is true
-        if (b_ is true)
-        {
-            c_ = true;
-        }
-        else
-        {
-            bool? j_ = this.Has_Arrhythmia_Diagnosis(context);
-            c_ = b_ | j_;
-        }
-        bool? d_;
-        // CQL 'or' (51:3-54:34): right operand skipped when left is true
-        if (c_ is true)
-        {
-            d_ = true;
-        }
-        else
-        {
-            bool? k_ = this.Has_Hypotension_Diagnosis(context);
-            d_ = c_ | k_;
-        }
-        bool? e_;
-        // CQL 'or' (51:3-55:29): right operand skipped when left is true
-        if (d_ is true)
-        {
-            e_ = true;
-        }
-        else
-        {
-            bool? l_ = this.Has_Asthma_Diagnosis(context);
-            e_ = d_ | l_;
-        }
-        bool? f_;
-        // CQL 'or' (51:3-56:72): right operand skipped when left is true
-        if (e_ is true)
-        {
-            f_ = true;
-        }
-        else
-        {
-            bool? m_ = this.Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy(context);
-            f_ = e_ | m_;
-        }
-        bool? g_;
-        // CQL 'or' (51:3-57:34): right operand skipped when left is true
-        if (f_ is true)
-        {
-            g_ = true;
-        }
-        else
-        {
-            bool? n_ = this.Has_Bradycardia_Diagnosis(context);
-            g_ = f_ | n_;
-        }
-        bool? h_;
-        // CQL 'or' (51:3-58:70): right operand skipped when left is true
-        if (g_ is true)
-        {
-            h_ = true;
-        }
-        else
-        {
-            bool? o_ = this.Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient(context);
-            h_ = g_ | o_;
-        }
-        // CQL 'or' (51:3-59:53): right operand skipped when left is true
-        if (h_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            bool? p_ = this.Atrioventricular_Block_without_Cardiac_Pacer(context);
-            return h_ | p_;
-        }
+        return /* CQL 'or' (51:3-59:53) */ (/* CQL 'or' (51:3-58:70) */ (/* CQL 'or' (51:3-57:34) */ (/* CQL 'or' (51:3-56:72) */ (/* CQL 'or' (51:3-55:29) */ (/* CQL 'or' (51:3-54:34) */ (/* CQL 'or' (51:3-53:33) */ (/* CQL 'or' (51:3-52:77) */ ((CqlBoolean)a_
+            || this.Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(context))
+            || this.Has_Arrhythmia_Diagnosis(context))
+            || this.Has_Hypotension_Diagnosis(context))
+            || this.Has_Asthma_Diagnosis(context))
+            || this.Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy(context))
+            || this.Has_Bradycardia_Diagnosis(context))
+            || this.Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient(context))
+            || this.Atrioventricular_Block_without_Cardiac_Pacer(context));
     }
 
 

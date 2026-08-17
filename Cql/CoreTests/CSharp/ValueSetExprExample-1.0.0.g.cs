@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("ValueSetExprExample", "1.0.0")]
 public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetExprExample_1_0_0>
 {
@@ -85,12 +85,11 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         }
         else
         {
-            string d_ = this.ChosenSubCategory(context);
-            bool? e_ = context.Operators.Equal(d_, "2");
-            if (e_ ?? false)
+            bool? d_ = context.Operators.Equal(a_, "2");
+            if (d_ ?? false)
             {
-                CqlValueSet f_ = this.ValueSet_A_2(context);
-                return f_;
+                CqlValueSet e_ = this.ValueSet_A_2(context);
+                return e_;
             }
             else
             {
@@ -117,12 +116,11 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         }
         else
         {
-            string d_ = this.ChosenSubCategory(context);
-            bool? e_ = context.Operators.Equal(d_, "2");
-            if (e_ ?? false)
+            bool? d_ = context.Operators.Equal(a_, "2");
+            if (d_ ?? false)
             {
-                CqlValueSet f_ = this.ValueSet_B_2(context);
-                return f_;
+                CqlValueSet e_ = this.ValueSet_B_2(context);
+                return e_;
             }
             else
             {
@@ -149,10 +147,9 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         }
         else
         {
-            CqlCode d_ = this.ChosenCode(context);
-            CqlValueSet e_ = this.ValueSetB(context);
-            bool? f_ = context.Operators.CodeInValueSet(d_, e_);
-            if (f_ ?? false)
+            CqlValueSet d_ = this.ValueSetB(context);
+            bool? e_ = context.Operators.CodeInValueSet(a_, d_);
+            if (e_ ?? false)
             {
                 return "b";
             }

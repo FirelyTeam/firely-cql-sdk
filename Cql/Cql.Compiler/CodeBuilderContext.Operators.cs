@@ -426,7 +426,6 @@ partial class CodeBuilderContext
         var right = TranslateBoolArg(rightElement);
 
         var originTag = OriginTagFor("implies", implies.locator);
-        const string originDetail = "right operand skipped when left is false";
 
         if (TryGetBoolConstant(left, out var leftConstant))
         {
@@ -445,36 +444,17 @@ partial class CodeBuilderContext
         if (IsEvaluatedValue(right))
             return ImpliesMerge(left, right, originTag);
 
-        // Same non-nullable-left shortcut as and/or: a left operand that cannot be null decides
-        // by itself, so no local and no merge — where control falls through, left is true, and
-        // true implies X is X.
-        if (left is CodeCast { Operand: { } nonNullableLeft }
-            && nonNullableLeft.Type == typeof(bool)
-            && IsFreeToRepeat(nonNullableLeft))
-        {
-            return new CodeConditional(
-                new CodeUnary(CodeUnaryOp.Not, nonNullableLeft),
-                NullableBoolConstant(true),
-                right,
-                typeof(bool?),
-                originTag,
-                originDetail);
-        }
-
-        var local = new CodeLocal(typeof(bool?));
-        var guard = new CodeBinary(CodeBinaryOp.Equal, local, new CodeConstant(false, typeof(bool?)));
-        var conditional = new CodeConditional(
-            guard,
-            NullableBoolConstant(true),
-            // No tag on the inner merge: the conditional above it already carries the tag and
-            // detail, and double-tagging would print the same span twice — once as the guard's
-            // line comment and again inside its else. Matches and/or/xor, whose guarded merges
-            // are likewise untagged.
-            ImpliesMerge(local, right, originTag: null),
-            typeof(bool?),
-            originTag,
-            originDetail);
-        return new CodeLet(local, left, conditional);
+        // `!left || right` IS Kleene implication, and over CqlBoolean it short-circuits on exactly
+        // the operand the spec permits skipping: || skips when its left side is definitely true,
+        // and `!left` is definitely true precisely when left is false. So the skip rule the spec
+        // states — "implies may use short-circuit evaluation in the case that the first operand
+        // evaluates to false" — is the language's, not the emitter's.
+        return AsNullableBool(
+            new CodeBinary(
+                CodeBinaryOp.CqlOrElse,
+                AsCqlBoolean(new CodeUnary(CodeUnaryOp.Not, left)),
+                AsCqlBoolean(right),
+                originTag));
     }
 
     /// <summary>
@@ -583,6 +563,48 @@ partial class CodeBuilderContext
             ? $"CQL '{cqlName}' ({locator})"
             : $"CQL '{cqlName}'";
 
+    /// <summary>
+    /// The operand as a <see cref="CqlBoolean"/>, which is what makes <c>&amp;&amp;</c>/<c>||</c>
+    /// available: C# builds those from a type's own <c>operator false</c>/<c>operator true</c>, and
+    /// <c>bool?</c> has none and cannot be given any (extension operators are accepted as
+    /// declarations but the compiler will not use them to synthesise <c>&amp;&amp;</c>).
+    /// <para>Steps over an intervening <c>(bool?)</c> cast, because converting to
+    /// <see cref="CqlBoolean"/> does not need the nullable hop. Two shapes reach here: the operand
+    /// is ALREADY a <see cref="CqlBoolean"/> (a nested chain, which would otherwise round-trip
+    /// through <c>bool?</c> at every level — <c>a &amp;&amp; b &amp;&amp; c</c>, not
+    /// <c>(CqlBoolean)(bool?)(a &amp;&amp; b) &amp;&amp; c</c>), or it is a plain <c>bool</c> from a
+    /// pattern such as <c>x is null</c>, which converts to <see cref="CqlBoolean"/> directly —
+    /// <c>(CqlBoolean)(b_ is null)</c>, not <c>(CqlBoolean)((bool?)(b_ is null))</c>.</para>
+    /// </summary>
+    private static CodeExpression AsCqlBoolean(CodeExpression operand)
+    {
+        if (operand.Type == typeof(CqlBoolean))
+            return operand;
+
+        if (operand is CodeCast { Type: var castType, Operand: { } inner }
+            && castType == typeof(bool?)
+            && inner.Type is var innerType
+            && (innerType == typeof(CqlBoolean) || innerType == typeof(bool)))
+        {
+            return innerType == typeof(CqlBoolean)
+                       ? inner
+                       : new CodeCast(inner, typeof(CqlBoolean), CodeCastKind.Cast);
+        }
+
+        return new CodeCast(operand, typeof(CqlBoolean), CodeCastKind.Cast);
+    }
+
+    /// <summary>
+    /// A <see cref="CqlBoolean"/>-typed expression back as <c>bool?</c>, which is what every other
+    /// part of the IR — definition signatures, bindings, <c>ICqlOperators</c> arguments — expects.
+    /// An explicit cast rather than a silent conversion: the IR's type rules are reflection-based
+    /// and do not know about user-defined implicit conversions, so the conversion has to be a node.
+    /// </summary>
+    private static CodeExpression AsNullableBool(CodeExpression operand) =>
+        operand.Type == typeof(bool?)
+            ? operand
+            : new CodeCast(operand, typeof(bool?), CodeCastKind.Cast);
+
     /// <summary>Negation with the same constant folding <see cref="Not"/> applies — a folded
     /// <c>!true</c> must not print as a non-nullable bool literal (see HonestBoolOperand).</summary>
     private static CodeExpression NotOperand(CodeExpression operand) =>
@@ -647,53 +669,20 @@ partial class CodeBuilderContext
         }
 
         // A right operand that is already an evaluated value costs nothing to re-read, so
-        // the combine emits without a guard: x_ & y_.
+        // the combine emits without a guard: x_ & y_. Keeps the lifted operator rather than the
+        // short-circuit one, since there is nothing to skip and `&`/`|` read more plainly.
         if (IsEvaluatedValue(right))
             return new CodeBinary(op, left, HonestBoolOperand(right), originTag);
-        var originDetail = $"right operand skipped when left is {(decidingValue ? "true" : "false")}";
 
-        // A left operand whose UNDERLYING type is non-nullable bool cannot evaluate to null, so
-        // it decides on its own and needs neither a local nor a merge: test it directly, and let
-        // the non-deciding branch BE the right operand. Where control reaches that branch the
-        // left operand is known to be !deciding, and !deciding is the identity for the operator
-        // (false or X = X, true and X = X), so `left op right` there would only re-read a value
-        // whose contribution is nothing. Soundness rests on the TYPE, not on a list of node
-        // shapes: a bool? left operand may be null, and null decides nothing, which is exactly
-        // why the guarded form below must keep the merge.
-        // ...and only when repeating it is free. The test prints fully inline, so anything the
-        // right operand derives from the same receiver re-derives it instead of reading a shared
-        // local — measured at +14 accessor calls (Start/End/SingletonFrom/LateBoundProperty)
-        // across the corpora when calls were allowed here. Property chains stay eligible: they
-        // are side-effect free and cost nothing worth a local.
-        if (left is CodeCast { Operand: { } nonNullableLeft }
-            && nonNullableLeft.Type == typeof(bool)
-            && IsFreeToRepeat(nonNullableLeft))
-        {
-            return new CodeConditional(
-                decidingValue ? nonNullableLeft : new CodeUnary(CodeUnaryOp.Not, nonNullableLeft),
-                NullableBoolConstant(decidingValue),
-                right,
-                typeof(bool?),
-                originTag,
-                originDetail);
-        }
-
-        // let a = left; a == deciding ? deciding : a <op> right
-        // The left operand binds to a local once (both the guard and the combine read it),
-        // and the conditional keeps the right operand inside the non-deciding branch. The
-        // emitter prints this as a lazy ternary or an if/else block — either form
-        // short-circuits without allocating (contrast the Lazy<bool?> overloads, which cost
-        // a Lazy plus a closure per operand).
-        var local = new CodeLocal(typeof(bool?));
-        var guard = new CodeBinary(CodeBinaryOp.Equal, local, new CodeConstant(decidingValue, typeof(bool?)));
-        var conditional = new CodeConditional(
-            guard,
-            new CodeConstant(decidingValue, typeof(bool?)),
-            new CodeBinary(op, local, right),
-            typeof(bool?),
-            originTag,
-            originDetail);
-        return new CodeLet(local, left, conditional);
+        // Otherwise the right operand must not be evaluated when the left one decides, and over
+        // CqlBoolean that is an EXPRESSION: `left && right`. C# synthesises && from the type's own
+        // operator false plus &, so the skip condition is "definitely false" — which means a null
+        // left operand never short-circuits, exactly as CQL requires, without the emitter having to
+        // arrange it. Replaces the let-plus-guard-conditional this used to build, and with it the
+        // if/else statement nesting that dominated the generated output.
+        var shortCircuitOp = decidingValue ? CodeBinaryOp.CqlOrElse : CodeBinaryOp.CqlAndAlso;
+        return AsNullableBool(
+            new CodeBinary(shortCircuitOp, AsCqlBoolean(left), AsCqlBoolean(right), originTag));
     }
 
     private CodeExpression TranslateBoolArg(object element)

@@ -48,6 +48,13 @@ internal static class CodeTypeRules
     /// </summary>
     public static bool HasCSharpConversion(Type from, Type to)
     {
+        // User-defined conversions are matched on the operator's DECLARED signature, so they must
+        // be checked before any nullability unwrapping: a type declaring
+        // `implicit operator bool?` converts to bool? exactly, and the unwrapped comparison
+        // (… -> bool) would miss it.
+        if (HasConversionOperator(from, from, to) || HasConversionOperator(to, from, to))
+            return true;
+
         from = Nullable.GetUnderlyingType(from) ?? from;
         to = Nullable.GetUnderlyingType(to) ?? to;
 
@@ -63,13 +70,14 @@ internal static class CodeTypeRules
         if ((IsNumericOrChar(from) || from.IsEnum) && (IsNumericOrChar(to) || to.IsEnum))
             return true;
 
-        static bool HasConversionOperator(Type declaring, Type from, Type to) =>
-            declaring.GetMethods()
-                     .Any(m => m is { IsStatic: true, Name: "op_Implicit" or "op_Explicit" }
-                            && m.ReturnType == to
-                            && m.GetParameters() is [{ ParameterType: var p }] && p == from);
         return HasConversionOperator(from, from, to) || HasConversionOperator(to, from, to);
     }
+
+    private static bool HasConversionOperator(Type declaring, Type from, Type to) =>
+        declaring.GetMethods()
+                 .Any(m => m is { IsStatic: true, Name: "op_Implicit" or "op_Explicit" }
+                        && m.ReturnType == to
+                        && m.GetParameters() is [{ ParameterType: var p }] && p == from);
 
     /// <summary>
     /// Validates that <paramref name="argument"/> can be passed to a parameter of type

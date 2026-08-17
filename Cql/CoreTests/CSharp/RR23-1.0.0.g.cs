@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
@@ -170,42 +170,40 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             CqlCode g_ = this.Tiny_Umbrella(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
             bool? i_ = context.Operators.Equivalent(f_, h_);
-            // CQL 'and' (47:7-48:140): right operand skipped when left is false
-            if (i_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                Condition j_ = this.Latest_injury_due_to_falling_rock(context);
-                Condition[] k_ = [
-                    j_,
+
+            CqlBoolean j_() {
+                Condition k_ = this.Latest_injury_due_to_falling_rock(context);
+                Condition[] l_ = [
+                    k_,
                 ];
 
-                bool? l_(Condition C) {
-                    DataType o_ = C?.Onset;
-                    object p_ = context.Operators.LateBoundProperty<object>(o_, "value");
-                    DataType q_ = SD?.Occurrence;
-                    CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-                    CqlQuantity s_ = context.Operators.Quantity(7m, "days");
-                    CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-                    CqlInterval<CqlDateTime> u_ = context.Operators.Interval(t_, r_, true, false);
-                    bool? v_ = context.Operators.In<CqlDateTime>(p_ as CqlDateTime, u_, (string)default);
-                    // CQL 'and' (48:52-48:126): right operand skipped when left is false
-                    if (v_ is false)
-                    {
-                        return false;
+                bool? m_(Condition C) {
+                    DataType p_ = C?.Onset;
+                    object q_ = context.Operators.LateBoundProperty<object>(p_, "value");
+                    DataType r_ = SD?.Occurrence;
+                    CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
+                    CqlQuantity t_ = context.Operators.Quantity(7m, "days");
+                    CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+                    CqlInterval<CqlDateTime> v_ = context.Operators.Interval(u_, s_, true, false);
+                    bool? w_ = context.Operators.In<CqlDateTime>(q_ as CqlDateTime, v_, (string)default);
+
+                    CqlBoolean x_() {
+                        DataType y_ = SD?.Occurrence;
+                        CqlDateTime z_ = context.Operators.LateBoundProperty<CqlDateTime>(y_, "value");
+                        return !((bool?)(z_ is null));
                     }
-                    else
-                    {
-                        return v_ & (!((bool?)(r_ is null)));
-                    }
+
+                    return /* CQL 'and' (48:52-48:126) */ ((CqlBoolean)w_
+                        && x_());
                 }
 
-                IEnumerable<Condition> m_ = context.Operators.Where<Condition>((IEnumerable<Condition>)k_, l_);
-                Condition n_ = context.Operators.SingletonFrom<Condition>(m_);
-                return i_ & (!((bool?)(n_ is null)));
+                IEnumerable<Condition> n_ = context.Operators.Where<Condition>((IEnumerable<Condition>)l_, m_);
+                Condition o_ = context.Operators.SingletonFrom<Condition>(n_);
+                return !((bool?)(o_ is null));
             }
+
+            return /* CQL 'and' (47:7-48:140) */ ((CqlBoolean)i_
+                && j_());
         }
 
         IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_, b_);

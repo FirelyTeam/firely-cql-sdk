@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Compiler.CodeModel;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -178,6 +179,24 @@ internal partial class CSharpEmitter
                 case CodeLet let:
                     return LinearizeLet(let, tailPosition);
 
+                // A short-circuit operator's right operand cannot be hoisted into a statement — that
+                // would evaluate it unconditionally and destroy the skip — so it has to print
+                // inline. When it is too big for that, or has no inline form at all (a let, an
+                // if-chain), it moves into a zero-argument LOCAL FUNCTION instead and the operand
+                // becomes a call to it: `left && f_()`. Statements live in the function body, one
+                // per line, and the call still only happens when the operator does not skip.
+                //
+                // A local function that is only ever CALLED (never converted to a delegate) does
+                // not allocate: Roslyn gives it a struct closure passed by ref. So this keeps the
+                // allocation-free property that motivated the whole lowering, unlike the
+                // Lazy<bool?> overloads it replaced.
+                //
+                // The condition is stated in full rather than relying on case order — these two
+                // cases must not depend on their position in the switch.
+                case CodeBinary shortCircuit when CodeBinary.ShortCircuits(shortCircuit.Op)
+                                                 && !PrintsInlineAsShortCircuitOperand(shortCircuit.Right):
+                    return LinearizeShortCircuitCallingRightOperand(shortCircuit);
+
                 // Pass-through composites: printed inline over their (spine-linearized)
                 // children instead of being hoisted into a local. This mirrors the old
                 // SimplifyExpressionsVisitor's dispatch exactly — Constant/Parameter/New/
@@ -189,6 +208,8 @@ internal partial class CSharpEmitter
                     or CodeNew
                     or CodeThrow
                     or CodeUnary:
+                case CodeBinary shortCircuit when CodeBinary.ShortCircuits(shortCircuit.Op)
+                                                  && PrintsInlineAsShortCircuitOperand(shortCircuit.Right):
                 case CodeBinary passThrough when CodeBinary.PrintsInlineOverChildren(passThrough.Op):
                 {
                     var (printed, keyPrinted) = PrintBoth(node);
@@ -256,7 +277,13 @@ internal partial class CSharpEmitter
             return atom;
         }
 
-        private Atom HoistLocalFunction(CodeLambda lambda)
+        /// <param name="lambda">The body and parameters to emit as a local function.</param>
+        /// <param name="declaredReturnType">Overrides the return type the function is DECLARED with,
+        /// where the body's own type converts to it implicitly. Used for a short-circuit operand,
+        /// whose function returns <see cref="CqlBoolean"/> over a <c>bool?</c> body: the implicit
+        /// conversion happens at the <c>return</c>, so neither the body nor the call site needs a
+        /// cast.</param>
+        private Atom HoistLocalFunction(CodeLambda lambda, Type? declaredReturnType = null)
         {
             // The function's own name is allocated now (it participates in this scope's
             // naming sequence), but its interior renders deferred — see _statements.
@@ -271,11 +298,13 @@ internal partial class CSharpEmitter
                 // an enclosing local turns it into captured closure state — an allocation the
                 // guard form exists to avoid.
                 var nested = CreateNested(lambda.Parameters);
-                var result = nested.Linearize(lambda.Body, tailPosition: true);
+                var result = nested.Linearize(BodyWithoutRootBoolConversion(lambda), tailPosition: true);
 
                 var parameterList = string.Join(", ",
                     lambda.Parameters.Select(p => $"{_emitter._typeToCSharpConverter.ToCSharp(p.Type)} {_emitter._assignedNames[p]}"));
-                var returnType = _emitter._typeToCSharpConverter.ToCSharp(lambda.Body.Type);
+                // Deliberately lambda.Body.Type, NOT the unwrapped body's: the declared type must
+                // stay bool? so only the printed body loses the conversion.
+                var returnType = _emitter._typeToCSharpConverter.ToCSharp(declaredReturnType ?? lambda.Body.Type);
 
                 // A body that linearizes without hoisting any statement prints expression-
                 // bodied ("=> expr;"), matching the old writer's BuildLambdaOperator, which
@@ -418,6 +447,48 @@ internal partial class CSharpEmitter
 
         private Atom? LinearizeIfChain(CodeIfChain chain, bool tailPosition) =>
             LinearizeConditionalStatements(chain.Type, chain.Cases, chain.Else, tailPosition);
+
+        /// <summary>
+        /// Whether a short-circuit operator's right operand is small enough, and simple enough, to
+        /// print inline. It cannot be hoisted, so inline is the only alternative to a local
+        /// function — and an operand that hoists several spine nodes would print as one enormous
+        /// line (measured at 2,139 characters before this budget existed).
+        /// <para>The budget is the same "one hoist-worth of complexity" rule
+        /// <see cref="ConditionPrintsInline"/> applies to chain conditions, so the two places that
+        /// choose between inline and statement form agree.</para>
+        /// </summary>
+        private static bool PrintsInlineAsShortCircuitOperand(CodeExpression right) =>
+            !ContainsStatementShape(right) && CountSpineNodes(right) <= 1;
+
+        /// <summary>
+        /// A short-circuit operator whose right operand is too big to inline: the operand moves into
+        /// a zero-argument local function and the operand position becomes a CALL to it, so
+        /// evaluation still happens only when the operator does not skip.
+        /// </summary>
+        private Atom LinearizeShortCircuitCallingRightOperand(CodeBinary node)
+        {
+            // The left operand is always evaluated, so hoisting it is free and desirable.
+            var left = Linearize(node.Left)!;
+
+            // The function is DECLARED to return CqlBoolean while its body stays the plain bool?
+            // expression, so the conversion happens implicitly at the `return` and nothing needs a
+            // cast: neither the body (`return t_;`) nor the call site (`f_()`). Returning bool?
+            // instead would produce `return (bool?)((CqlBoolean)t_);` in the body AND
+            // `(CqlBoolean)f_()` at the call site — three conversions to move one value through
+            // unchanged.
+            //
+            // CqlBoolean, NOT CqlBoolean?: && is not lifted over nullable types, so a nullable
+            // return would leave the call site unable to short-circuit at all — which is the whole
+            // reason this type exists. CqlBoolean already carries its own null.
+            var body = UnwrapCqlBooleanConversion(node.Right);
+            var function = HoistLocalFunction(new CodeLambda([], body), declaredReturnType: typeof(CqlBoolean));
+            var right = $"{function.Code}()";
+
+            return new Atom(
+                _emitter.FormatShortCircuit(node.Op, left.Code, right, node.OriginTag),
+                _emitter.FormatShortCircuit(node.Op, left.KeyCode, right, originTag: null),
+                node);
+        }
 
         /// <summary>
         /// Binds the let's value to its local exactly once, then linearizes the body. The

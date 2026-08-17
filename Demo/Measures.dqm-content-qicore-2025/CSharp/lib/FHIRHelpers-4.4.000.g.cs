@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("FHIRHelpers", "4.4.000")]
 public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_000>
 {
@@ -194,52 +194,44 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
         }
         else
         {
-            bool? b_;
-            // CQL 'or' (54:14-54:91): right operand skipped when left is true
-            if (quantity?.SystemElement is null)
+            FhirUri b_ = quantity?.SystemElement;
+
+            CqlBoolean c_() {
+                FhirUri e_ = quantity?.SystemElement;
+                string f_ = e_?.Value;
+                bool? g_ = context.Operators.Equal(f_, "http://unitsofmeasure.org");
+                return g_;
+            }
+
+
+            CqlBoolean d_() {
+                FhirUri h_ = quantity?.SystemElement;
+                string i_ = h_?.Value;
+                bool? j_ = context.Operators.Equal(i_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
+                return j_;
+            }
+
+            if (((bool?)(/* CQL 'or' (54:14-55:92) */ (/* CQL 'or' (54:14-54:91) */ ((CqlBoolean)(b_ is null)
+                || c_())
+                || d_()))) ?? false)
             {
-                b_ = true;
+                FhirDecimal k_ = quantity?.ValueElement;
+                decimal? l_ = k_?.Value;
+                Code m_ = quantity?.CodeElement;
+                string n_ = m_?.Value;
+                FhirString o_ = quantity?.UnitElement;
+                string p_ = o_?.Value;
+                string q_ = this.ToCalendarUnit(context, (n_ ?? p_) ?? "1");
+                return new CqlQuantity(l_, q_);
             }
             else
             {
-                FhirUri d_ = quantity?.SystemElement;
-                string e_ = d_?.Value;
-                bool? f_ = context.Operators.Equal(e_, "http://unitsofmeasure.org");
-                b_ = f_;
-            }
-            bool? c_;
-            // CQL 'or' (54:14-55:92): right operand skipped when left is true
-            if (b_ is true)
-            {
-                c_ = true;
-            }
-            else
-            {
-                FhirUri g_ = quantity?.SystemElement;
-                string h_ = g_?.Value;
-                bool? i_ = context.Operators.Equal(h_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
-                c_ = b_ | i_;
-            }
-            if (c_ ?? false)
-            {
-                FhirDecimal j_ = quantity?.ValueElement;
-                decimal? k_ = j_?.Value;
-                Code l_ = quantity?.CodeElement;
-                string m_ = l_?.Value;
-                FhirString n_ = quantity?.UnitElement;
-                string o_ = n_?.Value;
-                string p_ = this.ToCalendarUnit(context, (m_ ?? o_) ?? "1");
-                return new CqlQuantity(k_, p_);
-            }
-            else
-            {
-                FhirString q_ = quantity?.UnitElement;
-                string r_ = q_?.Value;
-                string s_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", r_ ?? "");
-                string t_ = context.Operators.Concatenate(s_ ?? "", " (");
-                FhirUri u_ = quantity?.SystemElement;
-                string v_ = u_?.Value;
-                string w_ = context.Operators.Concatenate(t_ ?? "", v_ ?? "");
+                FhirString r_ = quantity?.UnitElement;
+                string s_ = r_?.Value;
+                string t_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", s_ ?? "");
+                string u_ = context.Operators.Concatenate(t_ ?? "", " (");
+                string v_ = b_?.Value;
+                string w_ = context.Operators.Concatenate(u_ ?? "", v_ ?? "");
                 string x_ = context.Operators.Concatenate(w_ ?? "", "|");
                 Code y_ = quantity?.CodeElement;
                 string z_ = y_?.Value;
@@ -268,52 +260,44 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
         }
         else
         {
-            bool? a_;
-            // CQL 'or' (74:14-74:91): right operand skipped when left is true
-            if (quantity?.SystemElement is null)
+            FhirUri a_ = quantity?.SystemElement;
+
+            CqlBoolean b_() {
+                FhirUri d_ = quantity?.SystemElement;
+                string e_ = d_?.Value;
+                bool? f_ = context.Operators.Equal(e_, "http://unitsofmeasure.org");
+                return f_;
+            }
+
+
+            CqlBoolean c_() {
+                FhirUri g_ = quantity?.SystemElement;
+                string h_ = g_?.Value;
+                bool? i_ = context.Operators.Equal(h_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
+                return i_;
+            }
+
+            if (((bool?)(/* CQL 'or' (74:14-75:92) */ (/* CQL 'or' (74:14-74:91) */ ((CqlBoolean)(a_ is null)
+                || b_())
+                || c_()))) ?? false)
             {
-                a_ = true;
+                FhirDecimal j_ = quantity?.ValueElement;
+                decimal? k_ = j_?.Value;
+                Code l_ = quantity?.CodeElement;
+                string m_ = l_?.Value;
+                FhirString n_ = quantity?.UnitElement;
+                string o_ = n_?.Value;
+                string p_ = this.ToCalendarUnit(context, (m_ ?? o_) ?? "1");
+                return new CqlQuantity(k_, p_);
             }
             else
             {
-                FhirUri c_ = quantity?.SystemElement;
-                string d_ = c_?.Value;
-                bool? e_ = context.Operators.Equal(d_, "http://unitsofmeasure.org");
-                a_ = e_;
-            }
-            bool? b_;
-            // CQL 'or' (74:14-75:92): right operand skipped when left is true
-            if (a_ is true)
-            {
-                b_ = true;
-            }
-            else
-            {
-                FhirUri f_ = quantity?.SystemElement;
-                string g_ = f_?.Value;
-                bool? h_ = context.Operators.Equal(g_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
-                b_ = a_ | h_;
-            }
-            if (b_ ?? false)
-            {
-                FhirDecimal i_ = quantity?.ValueElement;
-                decimal? j_ = i_?.Value;
-                Code k_ = quantity?.CodeElement;
-                string l_ = k_?.Value;
-                FhirString m_ = quantity?.UnitElement;
-                string n_ = m_?.Value;
-                string o_ = this.ToCalendarUnit(context, (l_ ?? n_) ?? "1");
-                return new CqlQuantity(j_, o_);
-            }
-            else
-            {
-                FhirString p_ = quantity?.UnitElement;
-                string q_ = p_?.Value;
-                string r_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", q_ ?? "");
-                string s_ = context.Operators.Concatenate(r_ ?? "", " (");
-                FhirUri t_ = quantity?.SystemElement;
-                string u_ = t_?.Value;
-                string v_ = context.Operators.Concatenate(s_ ?? "", u_ ?? "");
+                FhirString q_ = quantity?.UnitElement;
+                string r_ = q_?.Value;
+                string s_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", r_ ?? "");
+                string t_ = context.Operators.Concatenate(s_ ?? "", " (");
+                string u_ = a_?.Value;
+                string v_ = context.Operators.Concatenate(t_ ?? "", u_ ?? "");
                 string w_ = context.Operators.Concatenate(v_ ?? "", "|");
                 Code x_ = quantity?.CodeElement;
                 string y_ = x_?.Value;
