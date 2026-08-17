@@ -421,30 +421,24 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 12);
-        // CQL 'and' (64:3-67:5): right operand skipped when left is false
-        if (i_ is false)
-        {
-            return false;
-        }
-        else
-        {
-            IEnumerable<Encounter> j_ = this.Qualifying_Visit_During_Measurement_Period(context);
-            int? k_ = context.Operators.Count<Encounter>(j_);
-            bool? l_ = context.Operators.GreaterOrEqual(k_, 2);
-            bool? m_;
-            // CQL 'or' (65:9-67:5): right operand skipped when left is true
-            if (l_ is true)
-            {
-                m_ = true;
+
+        bool? j_() {
+            IEnumerable<Encounter> k_ = this.Qualifying_Visit_During_Measurement_Period(context);
+            int? l_ = context.Operators.Count<Encounter>(k_);
+            bool? m_ = context.Operators.GreaterOrEqual(l_, 2);
+
+            bool? n_() {
+                IEnumerable<Encounter> o_ = this.Preventive_Visit_During_Measurement_Period(context);
+                bool? p_ = context.Operators.Exists<Encounter>(o_);
+                return (bool?)((CqlBoolean)p_);
             }
-            else
-            {
-                IEnumerable<Encounter> n_ = this.Preventive_Visit_During_Measurement_Period(context);
-                bool? o_ = context.Operators.Exists<Encounter>(n_);
-                m_ = l_ | o_;
-            }
-            return i_ & m_;
+
+            return (bool?)(/* CQL 'or' (65:9-67:5) */ ((CqlBoolean)m_
+                || (CqlBoolean)n_()));
         }
+
+        return (bool?)(/* CQL 'and' (64:3-67:5) */ ((CqlBoolean)i_
+            && (CqlBoolean)j_()));
     }
 
 
@@ -520,16 +514,8 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_2_Compute(CqlContext context)
     {
         bool? a_ = this.Initial_Population(context);
-        // CQL 'and' (57:3-58:78): right operand skipped when left is false
-        if (a_ is false)
-        {
-            return false;
-        }
-        else
-        {
-            Observation b_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context);
-            return a_ & (!((bool?)(b_ is null)));
-        }
+        return (bool?)(/* CQL 'and' (57:3-58:78) */ ((CqlBoolean)a_
+            && (CqlBoolean)(!((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null)))));
     }
 
 
@@ -605,17 +591,8 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     private bool? Numerator_1_Compute(CqlContext context)
     {
         Observation a_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User(context);
-        bool? b_ = !((bool?)(a_ is null));
-        // CQL 'or' (70:3-71:77): right operand skipped when left is true
-        if (b_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            Observation c_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context);
-            return b_ | (!((bool?)(c_ is null)));
-        }
+        return (bool?)(/* CQL 'or' (70:3-71:77) */ ((CqlBoolean)(!((bool?)(a_ is null)))
+            || (CqlBoolean)(!((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null)))));
     }
 
 
@@ -725,19 +702,17 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 IEnumerable<string> o_ = context.Operators.Split((string)n_, "/");
                 string p_ = context.Operators.Last<string>(o_);
                 bool? q_ = context.Operators.Equal(m_, p_);
-                // CQL 'and': right operand skipped when left is false
-                if (q_ is false)
-                {
-                    return false;
+
+                bool? r_() {
+                    CodeableConcept s_ = M?.Code;
+                    CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                    CqlValueSet u_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
+                    bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                    return (bool?)((CqlBoolean)v_);
                 }
-                else
-                {
-                    CodeableConcept r_ = M?.Code;
-                    CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
-                    CqlValueSet t_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
-                    bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
-                    return q_ & u_;
-                }
+
+                return (bool?)(/* CQL 'and' */ ((CqlBoolean)q_
+                    && (CqlBoolean)r_()));
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -751,46 +726,42 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> g_ = Status_1_15_000.Instance.isMedicationOrder(context, f_);
 
         bool? h_(MedicationRequest CessationPharmacotherapyOrdered) {
-            FhirDateTime v_ = CessationPharmacotherapyOrdered?.AuthoredOnElement;
-            CqlDateTime w_ = context.Operators.Convert<CqlDateTime>(v_);
-            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
-            CqlDateTime y_ = context.Operators.Start(x_);
-            CqlQuantity z_ = context.Operators.Quantity(6m, "months");
-            CqlDateTime aa_ = context.Operators.Subtract(y_, z_);
-            CqlDateTime ab_ = context.Operators.End(x_);
-            CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(aa_, ab_, true, true);
-            bool? ad_ = context.Operators.In<CqlDateTime>(w_, ac_, "day");
-            // CQL 'and' (107:5-111:7): right operand skipped when left is false
-            if (ad_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                IEnumerable<Task> ae_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
+            FhirDateTime w_ = CessationPharmacotherapyOrdered?.AuthoredOnElement;
+            CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
+            CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            CqlQuantity aa_ = context.Operators.Quantity(6m, "months");
+            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
+            CqlDateTime ac_ = context.Operators.End(y_);
+            CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(ab_, ac_, true, true);
+            bool? ae_ = context.Operators.In<CqlDateTime>(x_, ad_, "day");
 
-                bool? af_(Task TaskReject) {
-                    ResourceReference ah_ = TaskReject?.Focus;
-                    bool? ai_ = QICoreCommon_4_0_000.Instance.references(context, ah_, CessationPharmacotherapyOrdered);
-                    // CQL 'and' (109:11-110:43): right operand skipped when left is false
-                    if (ai_ is false)
-                    {
-                        return false;
+            bool? af_() {
+                IEnumerable<Task> ag_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
+
+                bool? ah_(Task TaskReject) {
+                    ResourceReference aj_ = TaskReject?.Focus;
+                    bool? ak_ = QICoreCommon_4_0_000.Instance.references(context, aj_, CessationPharmacotherapyOrdered);
+
+                    bool? al_() {
+                        CodeableConcept am_ = TaskReject?.Code;
+                        CqlConcept an_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, am_);
+                        CqlCode ao_ = this.fulfill(context);
+                        CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
+                        bool? aq_ = context.Operators.Equivalent(an_, ap_);
+                        return (bool?)((CqlBoolean)aq_);
                     }
-                    else
-                    {
-                        CodeableConcept aj_ = TaskReject?.Code;
-                        CqlConcept ak_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aj_);
-                        CqlCode al_ = this.fulfill(context);
-                        CqlConcept am_ = context.Operators.ConvertCodeToConcept(al_);
-                        bool? an_ = context.Operators.Equivalent(ak_, am_);
-                        return ai_ & an_;
-                    }
+
+                    return (bool?)(/* CQL 'and' (109:11-110:43) */ ((CqlBoolean)ak_
+                        && (CqlBoolean)al_()));
                 }
 
-                bool? ag_ = context.Operators.WhereAny<Task>(ae_, af_);
-                return ad_ & !ag_;
+                bool? ai_ = context.Operators.WhereAny<Task>(ag_, ah_);
+                return (bool?)((CqlBoolean)!ai_);
             }
+
+            return (bool?)(/* CQL 'and' (107:5-111:7) */ ((CqlBoolean)ae_
+                && (CqlBoolean)af_()));
         }
 
         IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
@@ -817,19 +788,17 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 IEnumerable<string> o_ = context.Operators.Split((string)n_, "/");
                 string p_ = context.Operators.Last<string>(o_);
                 bool? q_ = context.Operators.Equal(m_, p_);
-                // CQL 'and': right operand skipped when left is false
-                if (q_ is false)
-                {
-                    return false;
+
+                bool? r_() {
+                    CodeableConcept s_ = M?.Code;
+                    CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                    CqlValueSet u_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
+                    bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                    return (bool?)((CqlBoolean)v_);
                 }
-                else
-                {
-                    CodeableConcept r_ = M?.Code;
-                    CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
-                    CqlValueSet t_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
-                    bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
-                    return q_ & u_;
-                }
+
+                return (bool?)(/* CQL 'and' */ ((CqlBoolean)q_
+                    && (CqlBoolean)r_()));
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -843,22 +812,22 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> g_ = Status_1_15_000.Instance.isMedicationActive(context, f_);
 
         bool? h_(MedicationRequest TakingCessationPharmacotherapy) {
-            CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
-            CqlDateTime w_ = context.Operators.Start(v_);
-            CqlQuantity x_ = context.Operators.Quantity(6m, "months");
-            CqlDateTime y_ = context.Operators.Subtract(w_, x_);
-            CqlDateTime z_ = context.Operators.End(v_);
-            CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(y_, z_, true, true);
-            CqlInterval<CqlDate> ab_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, TakingCessationPharmacotherapy);
-            CqlDate ac_ = ab_?.low;
-            CqlDateTime ad_ = context.Operators.ConvertDateToDateTime(ac_);
-            CqlDate ae_ = ab_?.high;
-            CqlDateTime af_ = context.Operators.ConvertDateToDateTime(ae_);
-            bool? ag_ = ab_?.lowClosed;
-            bool? ah_ = ab_?.highClosed;
-            CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ad_, af_, ag_, ah_);
-            bool? aj_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aa_, ai_, "day");
-            return aj_;
+            CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
+            CqlDateTime x_ = context.Operators.Start(w_);
+            CqlQuantity y_ = context.Operators.Quantity(6m, "months");
+            CqlDateTime z_ = context.Operators.Subtract(x_, y_);
+            CqlDateTime aa_ = context.Operators.End(w_);
+            CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(z_, aa_, true, true);
+            CqlInterval<CqlDate> ac_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, TakingCessationPharmacotherapy);
+            CqlDate ad_ = ac_?.low;
+            CqlDateTime ae_ = context.Operators.ConvertDateToDateTime(ad_);
+            CqlDate af_ = ac_?.high;
+            CqlDateTime ag_ = context.Operators.ConvertDateToDateTime(af_);
+            bool? ah_ = ac_?.lowClosed;
+            bool? ai_ = ac_?.highClosed;
+            CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ae_, ag_, ah_, ai_);
+            bool? ak_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ab_, aj_, "day");
+            return ak_;
         }
 
         IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
@@ -876,29 +845,23 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     {
         IEnumerable<object> a_ = this.Tobacco_Cessation_Counseling_Given(context);
         bool? b_ = context.Operators.Exists<object>(a_);
-        bool? c_;
-        // CQL 'or' (74:3-75:57): right operand skipped when left is true
-        if (b_ is true)
-        {
-            c_ = true;
+
+        bool? c_() {
+            IEnumerable<MedicationRequest> e_ = this.Tobacco_Cessation_Pharmacotherapy_Ordered(context);
+            bool? f_ = context.Operators.Exists<MedicationRequest>(e_);
+            return (bool?)((CqlBoolean)f_);
         }
-        else
-        {
-            IEnumerable<MedicationRequest> d_ = this.Tobacco_Cessation_Pharmacotherapy_Ordered(context);
-            bool? e_ = context.Operators.Exists<MedicationRequest>(d_);
-            c_ = b_ | e_;
+
+
+        bool? d_() {
+            IEnumerable<MedicationRequest> g_ = this.Active_Pharmacotherapy_for_Tobacco_Cessation(context);
+            bool? h_ = context.Operators.Exists<MedicationRequest>(g_);
+            return (bool?)((CqlBoolean)h_);
         }
-        // CQL 'or' (74:3-76:60): right operand skipped when left is true
-        if (c_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            IEnumerable<MedicationRequest> f_ = this.Active_Pharmacotherapy_for_Tobacco_Cessation(context);
-            bool? g_ = context.Operators.Exists<MedicationRequest>(f_);
-            return c_ | g_;
-        }
+
+        return (bool?)(/* CQL 'or' (74:3-76:60) */ (/* CQL 'or' (74:3-75:57) */ ((CqlBoolean)b_
+            || (CqlBoolean)c_())
+            || (CqlBoolean)d_()));
     }
 
 
@@ -911,54 +874,38 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     private bool? Numerator_3_Compute(CqlContext context)
     {
         Observation a_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User(context);
-        bool? b_ = !((bool?)(a_ is null));
-        // CQL 'or' (79:3-85:5): right operand skipped when left is true
-        if (b_ is true)
-        {
-            return true;
-        }
-        else
-        {
+
+        bool? b_() {
             Observation c_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context);
-            bool? d_ = !((bool?)(c_ is null));
-            bool? e_;
-            // CQL 'and' (80:8-85:5): right operand skipped when left is false
-            if (d_ is false)
-            {
-                e_ = false;
+
+            bool? d_() {
+                IEnumerable<object> e_ = this.Tobacco_Cessation_Counseling_Given(context);
+                bool? f_ = context.Operators.Exists<object>(e_);
+
+                bool? g_() {
+                    IEnumerable<MedicationRequest> i_ = this.Tobacco_Cessation_Pharmacotherapy_Ordered(context);
+                    bool? j_ = context.Operators.Exists<MedicationRequest>(i_);
+                    return (bool?)((CqlBoolean)j_);
+                }
+
+
+                bool? h_() {
+                    IEnumerable<MedicationRequest> k_ = this.Active_Pharmacotherapy_for_Tobacco_Cessation(context);
+                    bool? l_ = context.Operators.Exists<MedicationRequest>(k_);
+                    return (bool?)((CqlBoolean)l_);
+                }
+
+                return (bool?)(/* CQL 'or' (81:13-84:9) */ (/* CQL 'or' (81:15-82:65) */ ((CqlBoolean)f_
+                    || (CqlBoolean)g_())
+                    || (CqlBoolean)h_()));
             }
-            else
-            {
-                IEnumerable<object> f_ = this.Tobacco_Cessation_Counseling_Given(context);
-                bool? g_ = context.Operators.Exists<object>(f_);
-                bool? h_;
-                // CQL 'or' (81:15-82:65): right operand skipped when left is true
-                if (g_ is true)
-                {
-                    h_ = true;
-                }
-                else
-                {
-                    IEnumerable<MedicationRequest> j_ = this.Tobacco_Cessation_Pharmacotherapy_Ordered(context);
-                    bool? k_ = context.Operators.Exists<MedicationRequest>(j_);
-                    h_ = g_ | k_;
-                }
-                bool? i_;
-                // CQL 'or' (81:13-84:9): right operand skipped when left is true
-                if (h_ is true)
-                {
-                    i_ = true;
-                }
-                else
-                {
-                    IEnumerable<MedicationRequest> l_ = this.Active_Pharmacotherapy_for_Tobacco_Cessation(context);
-                    bool? m_ = context.Operators.Exists<MedicationRequest>(l_);
-                    i_ = h_ | m_;
-                }
-                e_ = d_ & i_;
-            }
-            return b_ | e_;
+
+            return (bool?)(/* CQL 'and' (80:8-85:5) */ ((CqlBoolean)(!((bool?)(c_ is null)))
+                && (CqlBoolean)d_()));
         }
+
+        return (bool?)(/* CQL 'or' (79:3-85:5) */ ((CqlBoolean)(!((bool?)(a_ is null)))
+            || (CqlBoolean)b_()));
     }
 
 

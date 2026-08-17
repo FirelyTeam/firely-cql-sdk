@@ -268,19 +268,17 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             Code<Encounter.EncounterStatus> h_ = TelehealthEncounter?.StatusElement;
             string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
             bool? j_ = context.Operators.Equal(i_, "finished");
-            // CQL 'and' (74:13-75:104): right operand skipped when left is false
-            if (j_ is false)
-            {
-                return false;
+
+            bool? k_() {
+                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+                Period m_ = TelehealthEncounter?.Period;
+                CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, m_);
+                bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, (string)default);
+                return (bool?)((CqlBoolean)o_);
             }
-            else
-            {
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                Period l_ = TelehealthEncounter?.Period;
-                CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, l_);
-                bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, (string)default);
-                return j_ & n_;
-            }
+
+            return (bool?)(/* CQL 'and' (74:13-75:104) */ ((CqlBoolean)j_
+                && (CqlBoolean)k_()));
         }
 
         IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
@@ -326,19 +324,17 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(51, 75, true, false);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        // CQL 'and' (83:3-86:5): right operand skipped when left is false
-        if (j_ is false)
-        {
-            return false;
+
+        bool? k_() {
+            IEnumerable<Encounter> l_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
+            IEnumerable<Encounter> m_ = this.Telehealth_Services(context);
+            IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(l_, m_);
+            bool? o_ = context.Operators.Exists<Encounter>(n_);
+            return (bool?)((CqlBoolean)o_);
         }
-        else
-        {
-            IEnumerable<Encounter> k_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
-            IEnumerable<Encounter> l_ = this.Telehealth_Services(context);
-            IEnumerable<Encounter> m_ = context.Operators.Union<Encounter>(k_, l_);
-            bool? n_ = context.Operators.Exists<Encounter>(m_);
-            return j_ & n_;
-        }
+
+        return (bool?)(/* CQL 'and' (83:3-86:5) */ ((CqlBoolean)j_
+            && (CqlBoolean)k_()));
     }
 
 
@@ -395,21 +391,19 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             Code<EventStatus> e_ = Colectomy?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
-            // CQL 'and' (110:13-112:41): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
+
+            bool? h_() {
+                DataType i_ = Colectomy?.Performed;
+                CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
+                CqlDateTime k_ = context.Operators.End(j_);
+                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+                CqlDateTime m_ = context.Operators.End(l_);
+                bool? n_ = context.Operators.SameOrBefore(k_, m_, (string)default);
+                return (bool?)((CqlBoolean)n_);
             }
-            else
-            {
-                DataType h_ = Colectomy?.Performed;
-                CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, h_);
-                CqlDateTime j_ = context.Operators.End(i_);
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                CqlDateTime l_ = context.Operators.End(k_);
-                bool? m_ = context.Operators.SameOrBefore(j_, l_, (string)default);
-                return g_ & m_;
-            }
+
+            return (bool?)(/* CQL 'and' (110:13-112:41) */ ((CqlBoolean)g_
+                && (CqlBoolean)h_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -451,93 +445,49 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
-        bool? b_;
-        // CQL 'or' (93:3-94:42): right operand skipped when left is true
-        if (a_ is true)
-        {
-            b_ = true;
+
+        bool? b_() {
+            IEnumerable<Condition> f_ = this.Malignant_Neoplasm(context);
+            bool? g_ = context.Operators.Exists<Condition>(f_);
+            return (bool?)((CqlBoolean)g_);
         }
-        else
-        {
-            IEnumerable<Condition> g_ = this.Malignant_Neoplasm(context);
-            bool? h_ = context.Operators.Exists<Condition>(g_);
-            b_ = a_ | h_;
+
+
+        bool? c_() {
+            IEnumerable<Procedure> h_ = this.Total_Colectomy_Performed(context);
+            bool? i_ = context.Operators.Exists<Procedure>(h_);
+            return (bool?)((CqlBoolean)i_);
         }
-        bool? c_;
-        // CQL 'or' (93:3-95:49): right operand skipped when left is true
-        if (b_ is true)
-        {
-            c_ = true;
+
+
+        bool? d_() {
+            IEnumerable<Condition> j_ = this.Total_Colectomy_Condition(context);
+            bool? k_ = context.Operators.Exists<Condition>(j_);
+            return (bool?)((CqlBoolean)k_);
         }
-        else
-        {
-            IEnumerable<Procedure> i_ = this.Total_Colectomy_Performed(context);
-            bool? j_ = context.Operators.Exists<Procedure>(i_);
-            c_ = b_ | j_;
+
+
+        bool? e_() {
+            Patient l_ = this.Patient(context);
+            Date m_ = l_?.BirthDateElement;
+            string n_ = m_?.Value;
+            CqlDate o_ = context.Operators.ConvertStringToDate(n_);
+            CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
+            CqlDateTime q_ = context.Operators.Start(p_);
+            CqlDate r_ = context.Operators.DateFrom(q_);
+            int? s_ = context.Operators.CalculateAgeAt(o_, r_, "year");
+            bool? t_ = context.Operators.GreaterOrEqual(s_, 65);
+            return (bool?)(/* CQL 'and' (98:16-100:13) */ ((CqlBoolean)t_
+                && (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context))));
         }
-        bool? d_;
-        // CQL 'or' (93:3-96:49): right operand skipped when left is true
-        if (c_ is true)
-        {
-            d_ = true;
-        }
-        else
-        {
-            IEnumerable<Condition> k_ = this.Total_Colectomy_Condition(context);
-            bool? l_ = context.Operators.Exists<Condition>(k_);
-            d_ = c_ | l_;
-        }
-        bool? e_;
-        // CQL 'or' (93:3-97:92): right operand skipped when left is true
-        if (d_ is true)
-        {
-            e_ = true;
-        }
-        else
-        {
-            bool? m_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
-            e_ = d_ | m_;
-        }
-        bool? f_;
-        // CQL 'or' (93:3-100:13): right operand skipped when left is true
-        if (e_ is true)
-        {
-            f_ = true;
-        }
-        else
-        {
-            Patient n_ = this.Patient(context);
-            Date o_ = n_?.BirthDateElement;
-            string p_ = o_?.Value;
-            CqlDate q_ = context.Operators.ConvertStringToDate(p_);
-            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-            CqlDateTime s_ = context.Operators.Start(r_);
-            CqlDate t_ = context.Operators.DateFrom(s_);
-            int? u_ = context.Operators.CalculateAgeAt(q_, t_, "year");
-            bool? v_ = context.Operators.GreaterOrEqual(u_, 65);
-            bool? w_;
-            // CQL 'and' (98:16-100:13): right operand skipped when left is false
-            if (v_ is false)
-            {
-                w_ = false;
-            }
-            else
-            {
-                bool? x_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context);
-                w_ = v_ & x_;
-            }
-            f_ = e_ | w_;
-        }
-        // CQL 'or' (93:3-101:73): right operand skipped when left is true
-        if (f_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            bool? y_ = PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
-            return f_ | y_;
-        }
+
+        return (bool?)(/* CQL 'or' (93:3-101:73) */ (/* CQL 'or' (93:3-100:13) */ (/* CQL 'or' (93:3-97:92) */ (/* CQL 'or' (93:3-96:49) */ (/* CQL 'or' (93:3-95:49) */ (/* CQL 'or' (93:3-94:42) */ ((CqlBoolean)a_
+            || (CqlBoolean)b_())
+            || (CqlBoolean)c_())
+            || (CqlBoolean)d_())
+            || (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)))
+            || (CqlBoolean)e_())
+            || (CqlBoolean)(PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context))));
     }
 
 
@@ -656,14 +606,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 "corrected",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            bool? i_;
-            // CQL 'and' (137:19-139:83): right operand skipped when left is false
-            if (h_ is false)
-            {
-                i_ = false;
-            }
-            else
-            {
+
+            bool? i_() {
                 List<CodeableConcept> k_ = FecalOccult?.Category;
 
                 bool? l_(CodeableConcept FecalOccultCategory) {
@@ -702,32 +646,22 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
 
                 bool? m_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)k_, l_);
-                i_ = h_ & m_;
+                return (bool?)((CqlBoolean)m_);
             }
-            bool? j_;
-            // CQL 'and' (137:19-140:47): right operand skipped when left is false
-            if (i_ is false)
-            {
-                j_ = false;
+
+
+            bool? j_() {
+                DataType aa_ = FecalOccult?.Effective;
+                CqlDateTime ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, aa_);
+                CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
+                bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, (string)default);
+                return (bool?)((CqlBoolean)ad_);
             }
-            else
-            {
-                DataType aa_ = FecalOccult?.Value;
-                j_ = i_ & (!((bool?)(aa_ is null)));
-            }
-            // CQL 'and' (137:13-141:87): right operand skipped when left is false
-            if (j_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType ab_ = FecalOccult?.Effective;
-                CqlDateTime ac_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, ab_);
-                CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
-                bool? ae_ = context.Operators.In<CqlDateTime>(ac_, ad_, (string)default);
-                return j_ & ae_;
-            }
+
+            return (bool?)(/* CQL 'and' (137:13-141:87) */ (/* CQL 'and' (137:19-140:47) */ (/* CQL 'and' (137:19-139:83) */ ((CqlBoolean)h_
+                && (CqlBoolean)i_())
+                && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
+                && (CqlBoolean)j_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -755,14 +689,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 "corrected",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            bool? i_;
-            // CQL 'and' (146:19-148:83): right operand skipped when left is false
-            if (h_ is false)
-            {
-                i_ = false;
-            }
-            else
-            {
+
+            bool? i_() {
                 List<CodeableConcept> k_ = FecalOccult?.Category;
 
                 bool? l_(CodeableConcept FecalOccultCategory) {
@@ -801,32 +729,22 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
 
                 bool? m_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)k_, l_);
-                i_ = h_ & m_;
+                return (bool?)((CqlBoolean)m_);
             }
-            bool? j_;
-            // CQL 'and' (146:19-149:47): right operand skipped when left is false
-            if (i_ is false)
-            {
-                j_ = false;
+
+
+            bool? j_() {
+                DataType aa_ = FecalOccult?.Effective;
+                CqlDateTime ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, aa_);
+                CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
+                bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, "day");
+                return (bool?)((CqlBoolean)ad_);
             }
-            else
-            {
-                DataType aa_ = FecalOccult?.Value;
-                j_ = i_ & (!((bool?)(aa_ is null)));
-            }
-            // CQL 'and' (146:13-150:94): right operand skipped when left is false
-            if (j_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType ab_ = FecalOccult?.Effective;
-                CqlDateTime ac_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, ab_);
-                CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
-                bool? ae_ = context.Operators.In<CqlDateTime>(ac_, ad_, "day");
-                return j_ & ae_;
-            }
+
+            return (bool?)(/* CQL 'and' (146:13-150:94) */ (/* CQL 'and' (146:19-149:47) */ (/* CQL 'and' (146:19-148:83) */ ((CqlBoolean)h_
+                && (CqlBoolean)i_())
+                && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
+                && (CqlBoolean)j_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -884,30 +802,18 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             }
 
             bool? g_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)e_, f_);
-            bool? h_;
-            // CQL 'and' (159:15-161:47): right operand skipped when left is false
-            if (g_ is false)
-            {
-                h_ = false;
+
+            bool? h_() {
+                DataType v_ = FecalOccult?.Effective;
+                CqlDateTime w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, v_);
+                CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+                bool? y_ = context.Operators.In<CqlDateTime>(w_, x_, "day");
+                return (bool?)((CqlBoolean)y_);
             }
-            else
-            {
-                DataType v_ = FecalOccult?.Value;
-                h_ = g_ & (!((bool?)(v_ is null)));
-            }
-            // CQL 'and' (156:13-162:94): right operand skipped when left is false
-            if (h_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType w_ = FecalOccult?.Effective;
-                CqlDateTime x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, w_);
-                CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
-                bool? z_ = context.Operators.In<CqlDateTime>(x_, y_, "day");
-                return h_ & z_;
-            }
+
+            return (bool?)(/* CQL 'and' (156:13-162:94) */ (/* CQL 'and' (159:15-161:47) */ ((CqlBoolean)g_
+                && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
+                && (CqlBoolean)h_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -935,31 +841,18 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 "corrected",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            bool? i_ = !h_;
-            bool? j_;
-            // CQL 'and' (167:19-170:47): right operand skipped when left is false
-            if (i_ is false)
-            {
-                j_ = false;
+
+            bool? i_() {
+                DataType j_ = FecalOccult?.Effective;
+                CqlDateTime k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, j_);
+                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+                bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
+                return (bool?)((CqlBoolean)m_);
             }
-            else
-            {
-                DataType k_ = FecalOccult?.Value;
-                j_ = i_ & (!((bool?)(k_ is null)));
-            }
-            // CQL 'and' (167:13-171:94): right operand skipped when left is false
-            if (j_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType l_ = FecalOccult?.Effective;
-                CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, l_);
-                CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-                bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
-                return j_ & o_;
-            }
+
+            return (bool?)(/* CQL 'and' (167:13-171:94) */ (/* CQL 'and' (167:19-170:47) */ ((CqlBoolean)!h_
+                && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
+                && (CqlBoolean)i_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -987,80 +880,80 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             CqlDateTime l_ = context.Operators.Subtract(j_, k_);
             CqlInterval<CqlDateTime> m_ = context.Operators.Interval(l_, j_, true, true);
             bool? n_ = context.Operators.In<CqlDateTime>(h_, m_, (string)default);
-            // CQL 'and' (179:5-180:33): right operand skipped when left is false
-            if (n_ is false)
-            {
-                return false;
+
+            bool? o_() {
+                CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
+                CqlDateTime q_ = context.Operators.End(p_);
+                return (bool?)((CqlBoolean)(!((bool?)(q_ is null))));
             }
-            else
-            {
-                return n_ & (!((bool?)(j_ is null)));
-            }
+
+            return (bool?)(/* CQL 'and' (179:5-180:33) */ ((CqlBoolean)n_
+                && (CqlBoolean)o_()));
         }
 
 
         (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? d_(Observation FitDNA) {
-            DataType o_ = FitDNA?.Effective;
-            CqlDateTime p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, o_);
-            DataType q_ = FitDNA?.Value;
-            IEnumerable<Coding> r_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(q_, "coding");
+            DataType r_ = FitDNA?.Effective;
+            CqlDateTime s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, r_);
+            DataType t_ = FitDNA?.Value;
+            IEnumerable<Coding> u_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(t_, "coding");
 
-            bool? s_(Coding @this) {
-                FhirString ai_ = @this?.DisplayElement;
-                return !((bool?)(ai_ is null));
+            bool? v_(Coding @this) {
+                FhirString al_ = @this?.DisplayElement;
+                return !((bool?)(al_ is null));
             }
 
 
-            FhirString t_(Coding @this) {
-                FhirString aj_ = @this?.DisplayElement;
-                return aj_;
+            FhirString w_(Coding @this) {
+                FhirString am_ = @this?.DisplayElement;
+                return am_;
             }
 
-            IEnumerable<FhirString> u_ = context.Operators.WhereSelect<Coding, FhirString>(r_, s_, t_);
-            List<CodeableConcept> v_ = FitDNA?.Category;
+            IEnumerable<FhirString> x_ = context.Operators.WhereSelect<Coding, FhirString>(u_, v_, w_);
+            List<CodeableConcept> y_ = FitDNA?.Category;
 
-            bool? w_(CodeableConcept @this) {
-                List<Coding> ak_ = @this?.Coding;
-                return !((bool?)(ak_ is null));
-            }
-
-
-            List<Coding> x_(CodeableConcept @this) {
-                List<Coding> al_ = @this?.Coding;
-                return al_;
-            }
-
-            IEnumerable<List<Coding>> y_ = context.Operators.WhereSelect<CodeableConcept, List<Coding>>((IEnumerable<CodeableConcept>)v_, w_, x_);
-            IEnumerable<Coding> z_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)y_);
-
-            bool? aa_(Coding @this) {
-                Code am_ = @this?.CodeElement;
-                return !((bool?)(am_ is null));
+            bool? z_(CodeableConcept @this) {
+                List<Coding> an_ = @this?.Coding;
+                return !((bool?)(an_ is null));
             }
 
 
-            Code ab_(Coding @this) {
-                Code an_ = @this?.CodeElement;
-                return an_;
+            List<Coding> aa_(CodeableConcept @this) {
+                List<Coding> ao_ = @this?.Coding;
+                return ao_;
             }
 
-            IEnumerable<Code> ac_ = context.Operators.WhereSelect<Coding, Code>(z_, aa_, ab_);
+            IEnumerable<List<Coding>> ab_ = context.Operators.WhereSelect<CodeableConcept, List<Coding>>((IEnumerable<CodeableConcept>)y_, z_, aa_);
+            IEnumerable<Coding> ac_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ab_);
 
-            bool? ad_(Code @this) {
-                string ao_ = @this?.Value;
-                return !((bool?)(ao_ is null));
+            bool? ad_(Coding @this) {
+                Code ap_ = @this?.CodeElement;
+                return !((bool?)(ap_ is null));
             }
 
 
-            string ae_(Code @this) {
-                string ap_ = @this?.Value;
-                return ap_;
+            Code ae_(Coding @this) {
+                Code aq_ = @this?.CodeElement;
+                return aq_;
             }
 
-            IEnumerable<string> af_ = context.Operators.WhereSelect<Code, string>(ac_, ad_, ae_);
-            Code<ObservationStatus> ag_ = FitDNA?.StatusElement;
-            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ah_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, p_, u_, af_, ag_);
-            return ah_;
+            IEnumerable<Code> af_ = context.Operators.WhereSelect<Coding, Code>(ac_, ad_, ae_);
+
+            bool? ag_(Code @this) {
+                string ar_ = @this?.Value;
+                return !((bool?)(ar_ is null));
+            }
+
+
+            string ah_(Code @this) {
+                string as_ = @this?.Value;
+                return as_;
+            }
+
+            IEnumerable<string> ai_ = context.Operators.WhereSelect<Code, string>(af_, ag_, ah_);
+            Code<ObservationStatus> aj_ = FitDNA?.StatusElement;
+            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ak_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, s_, x_, ai_, aj_);
+            return ak_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> e_ = context.Operators.WhereSelect<Observation, (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(b_, c_, d_);
@@ -1089,14 +982,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 "corrected",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            bool? i_;
-            // CQL 'and' (191:19-193:78): right operand skipped when left is false
-            if (h_ is false)
-            {
-                i_ = false;
-            }
-            else
-            {
+
+            bool? i_() {
                 List<CodeableConcept> k_ = FitDNA?.Category;
 
                 bool? l_(CodeableConcept FitDNACategory) {
@@ -1135,46 +1022,34 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
 
                 bool? m_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)k_, l_);
-                i_ = h_ & m_;
+                return (bool?)((CqlBoolean)m_);
             }
-            bool? j_;
-            // CQL 'and' (191:19-194:42): right operand skipped when left is false
-            if (i_ is false)
-            {
-                j_ = false;
-            }
-            else
-            {
-                DataType aa_ = FitDNA?.Value;
-                j_ = i_ & (!((bool?)(aa_ is null)));
-            }
-            // CQL 'and' (191:13-196:41): right operand skipped when left is false
-            if (j_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType ab_ = FitDNA?.Effective;
-                CqlDateTime ac_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, ab_);
-                CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
-                CqlDateTime ae_ = context.Operators.End(ad_);
-                CqlQuantity af_ = context.Operators.Quantity(3m, "years");
-                CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
-                CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ag_, ae_, true, true);
-                bool? ai_ = context.Operators.In<CqlDateTime>(ac_, ah_, (string)default);
-                bool? aj_;
-                // CQL 'and' (195:19-196:41): right operand skipped when left is false
-                if (ai_ is false)
-                {
-                    aj_ = false;
+
+
+            bool? j_() {
+                DataType aa_ = FitDNA?.Effective;
+                CqlDateTime ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, aa_);
+                CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
+                CqlDateTime ad_ = context.Operators.End(ac_);
+                CqlQuantity ae_ = context.Operators.Quantity(3m, "years");
+                CqlDateTime af_ = context.Operators.Subtract(ad_, ae_);
+                CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(af_, ad_, true, true);
+                bool? ah_ = context.Operators.In<CqlDateTime>(ab_, ag_, (string)default);
+
+                bool? ai_() {
+                    CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
+                    CqlDateTime ak_ = context.Operators.End(aj_);
+                    return (bool?)((CqlBoolean)(!((bool?)(ak_ is null))));
                 }
-                else
-                {
-                    aj_ = ai_ & (!((bool?)(ae_ is null)));
-                }
-                return j_ & aj_;
+
+                return (bool?)(/* CQL 'and' (195:19-196:41) */ ((CqlBoolean)ah_
+                    && (CqlBoolean)ai_()));
             }
+
+            return (bool?)(/* CQL 'and' (191:13-196:41) */ (/* CQL 'and' (191:19-194:42) */ (/* CQL 'and' (191:19-193:78) */ ((CqlBoolean)h_
+                && (CqlBoolean)i_())
+                && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
+                && (CqlBoolean)j_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1202,14 +1077,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 "corrected",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            bool? i_;
-            // CQL 'and' (201:19-203:78): right operand skipped when left is false
-            if (h_ is false)
-            {
-                i_ = false;
-            }
-            else
-            {
+
+            bool? i_() {
                 List<CodeableConcept> k_ = FitDNA?.Category;
 
                 bool? l_(CodeableConcept FitDNACategory) {
@@ -1248,46 +1117,34 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 }
 
                 bool? m_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)k_, l_);
-                i_ = h_ & m_;
+                return (bool?)((CqlBoolean)m_);
             }
-            bool? j_;
-            // CQL 'and' (201:19-204:42): right operand skipped when left is false
-            if (i_ is false)
-            {
-                j_ = false;
-            }
-            else
-            {
-                DataType aa_ = FitDNA?.Value;
-                j_ = i_ & (!((bool?)(aa_ is null)));
-            }
-            // CQL 'and' (201:13-206:48): right operand skipped when left is false
-            if (j_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType ab_ = FitDNA?.Effective;
-                CqlDateTime ac_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, ab_);
-                CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
-                CqlDateTime ae_ = context.Operators.End(ad_);
-                CqlQuantity af_ = context.Operators.Quantity(3m, "years");
-                CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
-                CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ag_, ae_, true, true);
-                bool? ai_ = context.Operators.In<CqlDateTime>(ac_, ah_, "day");
-                bool? aj_;
-                // CQL 'and' (205:19-206:48): right operand skipped when left is false
-                if (ai_ is false)
-                {
-                    aj_ = false;
+
+
+            bool? j_() {
+                DataType aa_ = FitDNA?.Effective;
+                CqlDateTime ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, aa_);
+                CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
+                CqlDateTime ad_ = context.Operators.End(ac_);
+                CqlQuantity ae_ = context.Operators.Quantity(3m, "years");
+                CqlDateTime af_ = context.Operators.Subtract(ad_, ae_);
+                CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(af_, ad_, true, true);
+                bool? ah_ = context.Operators.In<CqlDateTime>(ab_, ag_, "day");
+
+                bool? ai_() {
+                    CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
+                    CqlDateTime ak_ = context.Operators.End(aj_);
+                    return (bool?)((CqlBoolean)(!((bool?)(ak_ is null))));
                 }
-                else
-                {
-                    aj_ = ai_ & (!((bool?)(ae_ is null)));
-                }
-                return j_ & aj_;
+
+                return (bool?)(/* CQL 'and' (205:19-206:48) */ ((CqlBoolean)ah_
+                    && (CqlBoolean)ai_()));
             }
+
+            return (bool?)(/* CQL 'and' (201:13-206:48) */ (/* CQL 'and' (201:19-204:42) */ (/* CQL 'and' (201:19-203:78) */ ((CqlBoolean)h_
+                && (CqlBoolean)i_())
+                && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
+                && (CqlBoolean)j_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1345,44 +1202,30 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             }
 
             bool? g_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)e_, f_);
-            bool? h_;
-            // CQL 'and' (215:15-217:42): right operand skipped when left is false
-            if (g_ is false)
-            {
-                h_ = false;
-            }
-            else
-            {
-                DataType v_ = FitDNA?.Value;
-                h_ = g_ & (!((bool?)(v_ is null)));
-            }
-            // CQL 'and' (212:13-219:48): right operand skipped when left is false
-            if (h_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType w_ = FitDNA?.Effective;
-                CqlDateTime x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, w_);
-                CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
-                CqlDateTime z_ = context.Operators.End(y_);
-                CqlQuantity aa_ = context.Operators.Quantity(3m, "years");
-                CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-                CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(ab_, z_, true, true);
-                bool? ad_ = context.Operators.In<CqlDateTime>(x_, ac_, "day");
-                bool? ae_;
-                // CQL 'and' (218:19-219:48): right operand skipped when left is false
-                if (ad_ is false)
-                {
-                    ae_ = false;
+
+            bool? h_() {
+                DataType v_ = FitDNA?.Effective;
+                CqlDateTime w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, v_);
+                CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+                CqlDateTime y_ = context.Operators.End(x_);
+                CqlQuantity z_ = context.Operators.Quantity(3m, "years");
+                CqlDateTime aa_ = context.Operators.Subtract(y_, z_);
+                CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(aa_, y_, true, true);
+                bool? ac_ = context.Operators.In<CqlDateTime>(w_, ab_, "day");
+
+                bool? ad_() {
+                    CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
+                    CqlDateTime af_ = context.Operators.End(ae_);
+                    return (bool?)((CqlBoolean)(!((bool?)(af_ is null))));
                 }
-                else
-                {
-                    ae_ = ad_ & (!((bool?)(z_ is null)));
-                }
-                return h_ & ae_;
+
+                return (bool?)(/* CQL 'and' (218:19-219:48) */ ((CqlBoolean)ac_
+                    && (CqlBoolean)ad_()));
             }
+
+            return (bool?)(/* CQL 'and' (212:13-219:48) */ (/* CQL 'and' (215:15-217:42) */ ((CqlBoolean)g_
+                && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
+                && (CqlBoolean)h_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1410,45 +1253,30 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 "corrected",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            bool? i_ = !h_;
-            bool? j_;
-            // CQL 'and' (224:19-227:42): right operand skipped when left is false
-            if (i_ is false)
-            {
-                j_ = false;
-            }
-            else
-            {
-                DataType k_ = FitDNA?.Value;
-                j_ = i_ & (!((bool?)(k_ is null)));
-            }
-            // CQL 'and' (224:13-229:48): right operand skipped when left is false
-            if (j_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType l_ = FitDNA?.Effective;
-                CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, l_);
-                CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-                CqlDateTime o_ = context.Operators.End(n_);
-                CqlQuantity p_ = context.Operators.Quantity(3m, "years");
-                CqlDateTime q_ = context.Operators.Subtract(o_, p_);
-                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(q_, o_, true, true);
-                bool? s_ = context.Operators.In<CqlDateTime>(m_, r_, "day");
-                bool? t_;
-                // CQL 'and' (228:19-229:48): right operand skipped when left is false
-                if (s_ is false)
-                {
-                    t_ = false;
+
+            bool? i_() {
+                DataType j_ = FitDNA?.Effective;
+                CqlDateTime k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, j_);
+                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+                CqlDateTime m_ = context.Operators.End(l_);
+                CqlQuantity n_ = context.Operators.Quantity(3m, "years");
+                CqlDateTime o_ = context.Operators.Subtract(m_, n_);
+                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, true);
+                bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, "day");
+
+                bool? r_() {
+                    CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
+                    CqlDateTime t_ = context.Operators.End(s_);
+                    return (bool?)((CqlBoolean)(!((bool?)(t_ is null))));
                 }
-                else
-                {
-                    t_ = s_ & (!((bool?)(o_ is null)));
-                }
-                return j_ & t_;
+
+                return (bool?)(/* CQL 'and' (228:19-229:48) */ ((CqlBoolean)q_
+                    && (CqlBoolean)r_()));
             }
+
+            return (bool?)(/* CQL 'and' (224:13-229:48) */ (/* CQL 'and' (224:19-227:42) */ ((CqlBoolean)!h_
+                && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
+                && (CqlBoolean)i_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1477,22 +1305,22 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             CqlDateTime m_ = context.Operators.Subtract(k_, l_);
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(m_, k_, true, true);
             bool? o_ = context.Operators.In<CqlDateTime>(i_, n_, (string)default);
-            // CQL 'and' (238:13-239:41): right operand skipped when left is false
-            if (o_ is false)
-            {
-                return false;
+
+            bool? p_() {
+                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
+                CqlDateTime r_ = context.Operators.End(q_);
+                return (bool?)((CqlBoolean)(!((bool?)(r_ is null))));
             }
-            else
-            {
-                return o_ & (!((bool?)(k_ is null)));
-            }
+
+            return (bool?)(/* CQL 'and' (238:13-239:41) */ ((CqlBoolean)o_
+                && (CqlBoolean)p_()));
         }
 
 
         CqlDateTime d_(Observation Colonography) {
-            DataType p_ = Colonography?.Effective;
-            CqlDateTime q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, p_);
-            return q_;
+            DataType s_ = Colonography?.Effective;
+            CqlDateTime t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, s_);
+            return t_;
         }
 
         IEnumerable<CqlDateTime> e_ = context.Operators.WhereSelect<Observation, CqlDateTime>(b_, c_, d_);
@@ -1522,34 +1350,30 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 "appended",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            // CQL 'and' (244:13-246:41): right operand skipped when left is false
-            if (h_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType i_ = Colonography?.Effective;
-                CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
-                CqlDateTime k_ = context.Operators.End(j_);
-                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-                CqlDateTime m_ = context.Operators.End(l_);
-                CqlQuantity n_ = context.Operators.Quantity(5m, "years");
-                CqlDateTime o_ = context.Operators.Subtract(m_, n_);
-                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, true);
-                bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
-                bool? r_;
-                // CQL 'and' (245:19-246:41): right operand skipped when left is false
-                if (q_ is false)
-                {
-                    r_ = false;
+
+            bool? i_() {
+                DataType j_ = Colonography?.Effective;
+                CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, j_);
+                CqlDateTime l_ = context.Operators.End(k_);
+                CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
+                CqlDateTime n_ = context.Operators.End(m_);
+                CqlQuantity o_ = context.Operators.Quantity(5m, "years");
+                CqlDateTime p_ = context.Operators.Subtract(n_, o_);
+                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, true);
+                bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
+
+                bool? s_() {
+                    CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
+                    CqlDateTime u_ = context.Operators.End(t_);
+                    return (bool?)((CqlBoolean)(!((bool?)(u_ is null))));
                 }
-                else
-                {
-                    r_ = q_ & (!((bool?)(m_ is null)));
-                }
-                return h_ & r_;
+
+                return (bool?)(/* CQL 'and' (245:19-246:41) */ ((CqlBoolean)r_
+                    && (CqlBoolean)s_()));
             }
+
+            return (bool?)(/* CQL 'and' (244:13-246:41) */ ((CqlBoolean)h_
+                && (CqlBoolean)i_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1578,14 +1402,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 "appended",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            bool? i_ = !h_;
-            // CQL 'and' (251:13-253:41): right operand skipped when left is false
-            if (i_ is false)
-            {
-                return false;
-            }
-            else
-            {
+
+            bool? i_() {
                 DataType j_ = Colonography?.Effective;
                 CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, j_);
                 CqlDateTime l_ = context.Operators.End(k_);
@@ -1595,18 +1413,19 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, true);
                 bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
-                bool? s_;
-                // CQL 'and' (252:19-253:41): right operand skipped when left is false
-                if (r_ is false)
-                {
-                    s_ = false;
+
+                bool? s_() {
+                    CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
+                    CqlDateTime u_ = context.Operators.End(t_);
+                    return (bool?)((CqlBoolean)(!((bool?)(u_ is null))));
                 }
-                else
-                {
-                    s_ = r_ & (!((bool?)(n_ is null)));
-                }
-                return i_ & s_;
+
+                return (bool?)(/* CQL 'and' (252:19-253:41) */ ((CqlBoolean)r_
+                    && (CqlBoolean)s_()));
             }
+
+            return (bool?)(/* CQL 'and' (251:13-253:41) */ ((CqlBoolean)!h_
+                && (CqlBoolean)i_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1635,22 +1454,22 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             CqlDateTime m_ = context.Operators.Subtract(k_, l_);
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(m_, k_, true, true);
             bool? o_ = context.Operators.In<CqlDateTime>(i_, n_, (string)default);
-            // CQL 'and' (262:5-263:33): right operand skipped when left is false
-            if (o_ is false)
-            {
-                return false;
+
+            bool? p_() {
+                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
+                CqlDateTime r_ = context.Operators.End(q_);
+                return (bool?)((CqlBoolean)(!((bool?)(r_ is null))));
             }
-            else
-            {
-                return o_ & (!((bool?)(k_ is null)));
-            }
+
+            return (bool?)(/* CQL 'and' (262:5-263:33) */ ((CqlBoolean)o_
+                && (CqlBoolean)p_()));
         }
 
 
         CqlDateTime d_(Procedure FlexibleSigmoidoscopy) {
-            DataType p_ = FlexibleSigmoidoscopy?.Performed;
-            CqlDateTime q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, p_);
-            return q_;
+            DataType s_ = FlexibleSigmoidoscopy?.Performed;
+            CqlDateTime t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, s_);
+            return t_;
         }
 
         IEnumerable<CqlDateTime> e_ = context.Operators.WhereSelect<Procedure, CqlDateTime>(b_, c_, d_);
@@ -1674,34 +1493,30 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             Code<EventStatus> e_ = FlexibleSigmoidoscopy?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
-            // CQL 'and' (268:13-270:41): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType h_ = FlexibleSigmoidoscopy?.Performed;
-                CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, h_);
-                CqlDateTime j_ = context.Operators.End(i_);
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                CqlDateTime l_ = context.Operators.End(k_);
-                CqlQuantity m_ = context.Operators.Quantity(5m, "years");
-                CqlDateTime n_ = context.Operators.Subtract(l_, m_);
-                CqlInterval<CqlDateTime> o_ = context.Operators.Interval(n_, l_, true, true);
-                bool? p_ = context.Operators.In<CqlDateTime>(j_, o_, (string)default);
-                bool? q_;
-                // CQL 'and' (269:19-270:41): right operand skipped when left is false
-                if (p_ is false)
-                {
-                    q_ = false;
+
+            bool? h_() {
+                DataType i_ = FlexibleSigmoidoscopy?.Performed;
+                CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
+                CqlDateTime k_ = context.Operators.End(j_);
+                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+                CqlDateTime m_ = context.Operators.End(l_);
+                CqlQuantity n_ = context.Operators.Quantity(5m, "years");
+                CqlDateTime o_ = context.Operators.Subtract(m_, n_);
+                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, true);
+                bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
+
+                bool? r_() {
+                    CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
+                    CqlDateTime t_ = context.Operators.End(s_);
+                    return (bool?)((CqlBoolean)(!((bool?)(t_ is null))));
                 }
-                else
-                {
-                    q_ = p_ & (!((bool?)(l_ is null)));
-                }
-                return g_ & q_;
+
+                return (bool?)(/* CQL 'and' (269:19-270:41) */ ((CqlBoolean)q_
+                    && (CqlBoolean)r_()));
             }
+
+            return (bool?)(/* CQL 'and' (268:13-270:41) */ ((CqlBoolean)g_
+                && (CqlBoolean)h_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1724,14 +1539,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             Code<EventStatus> e_ = FlexibleSigmoidoscopy?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
-            bool? h_ = !g_;
-            // CQL 'and' (275:13-277:41): right operand skipped when left is false
-            if (h_ is false)
-            {
-                return false;
-            }
-            else
-            {
+
+            bool? h_() {
                 DataType i_ = FlexibleSigmoidoscopy?.Performed;
                 CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
                 CqlDateTime k_ = context.Operators.End(j_);
@@ -1741,18 +1550,19 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, true);
                 bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
-                bool? r_;
-                // CQL 'and' (276:19-277:41): right operand skipped when left is false
-                if (q_ is false)
-                {
-                    r_ = false;
+
+                bool? r_() {
+                    CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
+                    CqlDateTime t_ = context.Operators.End(s_);
+                    return (bool?)((CqlBoolean)(!((bool?)(t_ is null))));
                 }
-                else
-                {
-                    r_ = q_ & (!((bool?)(m_ is null)));
-                }
-                return h_ & r_;
+
+                return (bool?)(/* CQL 'and' (276:19-277:41) */ ((CqlBoolean)q_
+                    && (CqlBoolean)r_()));
             }
+
+            return (bool?)(/* CQL 'and' (275:13-277:41) */ ((CqlBoolean)!g_
+                && (CqlBoolean)h_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1781,22 +1591,22 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             CqlDateTime m_ = context.Operators.Subtract(k_, l_);
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(m_, k_, true, true);
             bool? o_ = context.Operators.In<CqlDateTime>(i_, n_, (string)default);
-            // CQL 'and' (286:5-287:33): right operand skipped when left is false
-            if (o_ is false)
-            {
-                return false;
+
+            bool? p_() {
+                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
+                CqlDateTime r_ = context.Operators.End(q_);
+                return (bool?)((CqlBoolean)(!((bool?)(r_ is null))));
             }
-            else
-            {
-                return o_ & (!((bool?)(k_ is null)));
-            }
+
+            return (bool?)(/* CQL 'and' (286:5-287:33) */ ((CqlBoolean)o_
+                && (CqlBoolean)p_()));
         }
 
 
         CqlDateTime d_(Procedure Colonoscopy) {
-            DataType p_ = Colonoscopy?.Performed;
-            CqlDateTime q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, p_);
-            return q_;
+            DataType s_ = Colonoscopy?.Performed;
+            CqlDateTime t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, s_);
+            return t_;
         }
 
         IEnumerable<CqlDateTime> e_ = context.Operators.WhereSelect<Procedure, CqlDateTime>(b_, c_, d_);
@@ -1820,34 +1630,30 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             Code<EventStatus> e_ = Colonoscopy?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
-            // CQL 'and' (292:13-294:41): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType h_ = Colonoscopy?.Performed;
-                CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, h_);
-                CqlDateTime j_ = context.Operators.End(i_);
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                CqlDateTime l_ = context.Operators.End(k_);
-                CqlQuantity m_ = context.Operators.Quantity(10m, "years");
-                CqlDateTime n_ = context.Operators.Subtract(l_, m_);
-                CqlInterval<CqlDateTime> o_ = context.Operators.Interval(n_, l_, true, true);
-                bool? p_ = context.Operators.In<CqlDateTime>(j_, o_, (string)default);
-                bool? q_;
-                // CQL 'and' (293:19-294:41): right operand skipped when left is false
-                if (p_ is false)
-                {
-                    q_ = false;
+
+            bool? h_() {
+                DataType i_ = Colonoscopy?.Performed;
+                CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
+                CqlDateTime k_ = context.Operators.End(j_);
+                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+                CqlDateTime m_ = context.Operators.End(l_);
+                CqlQuantity n_ = context.Operators.Quantity(10m, "years");
+                CqlDateTime o_ = context.Operators.Subtract(m_, n_);
+                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, true);
+                bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
+
+                bool? r_() {
+                    CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
+                    CqlDateTime t_ = context.Operators.End(s_);
+                    return (bool?)((CqlBoolean)(!((bool?)(t_ is null))));
                 }
-                else
-                {
-                    q_ = p_ & (!((bool?)(l_ is null)));
-                }
-                return g_ & q_;
+
+                return (bool?)(/* CQL 'and' (293:19-294:41) */ ((CqlBoolean)q_
+                    && (CqlBoolean)r_()));
             }
+
+            return (bool?)(/* CQL 'and' (292:13-294:41) */ ((CqlBoolean)g_
+                && (CqlBoolean)h_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1870,14 +1676,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             Code<EventStatus> e_ = Colonoscopy?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
-            bool? h_ = !g_;
-            // CQL 'and' (299:13-301:41): right operand skipped when left is false
-            if (h_ is false)
-            {
-                return false;
-            }
-            else
-            {
+
+            bool? h_() {
                 DataType i_ = Colonoscopy?.Performed;
                 CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
                 CqlDateTime k_ = context.Operators.End(j_);
@@ -1887,18 +1687,19 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, true);
                 bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
-                bool? r_;
-                // CQL 'and' (300:19-301:41): right operand skipped when left is false
-                if (q_ is false)
-                {
-                    r_ = false;
+
+                bool? r_() {
+                    CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
+                    CqlDateTime t_ = context.Operators.End(s_);
+                    return (bool?)((CqlBoolean)(!((bool?)(t_ is null))));
                 }
-                else
-                {
-                    r_ = q_ & (!((bool?)(m_ is null)));
-                }
-                return h_ & r_;
+
+                return (bool?)(/* CQL 'and' (300:19-301:41) */ ((CqlBoolean)q_
+                    && (CqlBoolean)r_()));
             }
+
+            return (bool?)(/* CQL 'and' (299:13-301:41) */ ((CqlBoolean)!g_
+                && (CqlBoolean)h_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1916,53 +1717,39 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
     {
         IEnumerable<Procedure> a_ = this.Colonoscopy_Performed(context);
         bool? b_ = context.Operators.Exists<Procedure>(a_);
-        bool? c_;
-        // CQL 'or' (304:3-305:57): right operand skipped when left is true
-        if (b_ is true)
-        {
-            c_ = true;
+
+        bool? c_() {
+            IEnumerable<Observation> g_ = this.Fecal_Occult_Blood_Test_Performed(context);
+            bool? h_ = context.Operators.Exists<Observation>(g_);
+            return (bool?)((CqlBoolean)h_);
         }
-        else
-        {
-            IEnumerable<Observation> f_ = this.Fecal_Occult_Blood_Test_Performed(context);
-            bool? g_ = context.Operators.Exists<Observation>(f_);
-            c_ = b_ | g_;
+
+
+        bool? d_() {
+            IEnumerable<Procedure> i_ = this.Flexible_Sigmoidoscopy_Performed(context);
+            bool? j_ = context.Operators.Exists<Procedure>(i_);
+            return (bool?)((CqlBoolean)j_);
         }
-        bool? d_;
-        // CQL 'or' (304:3-306:56): right operand skipped when left is true
-        if (c_ is true)
-        {
-            d_ = true;
+
+
+        bool? e_() {
+            IEnumerable<Observation> k_ = this.Fecal_Immunochemical_Test_DNA_Performed(context);
+            bool? l_ = context.Operators.Exists<Observation>(k_);
+            return (bool?)((CqlBoolean)l_);
         }
-        else
-        {
-            IEnumerable<Procedure> h_ = this.Flexible_Sigmoidoscopy_Performed(context);
-            bool? i_ = context.Operators.Exists<Procedure>(h_);
-            d_ = c_ | i_;
+
+
+        bool? f_() {
+            IEnumerable<Observation> m_ = this.CT_Colonography_Performed(context);
+            bool? n_ = context.Operators.Exists<Observation>(m_);
+            return (bool?)((CqlBoolean)n_);
         }
-        bool? e_;
-        // CQL 'or' (304:3-307:63): right operand skipped when left is true
-        if (d_ is true)
-        {
-            e_ = true;
-        }
-        else
-        {
-            IEnumerable<Observation> j_ = this.Fecal_Immunochemical_Test_DNA_Performed(context);
-            bool? k_ = context.Operators.Exists<Observation>(j_);
-            e_ = d_ | k_;
-        }
-        // CQL 'or' (304:3-308:49): right operand skipped when left is true
-        if (e_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            IEnumerable<Observation> l_ = this.CT_Colonography_Performed(context);
-            bool? m_ = context.Operators.Exists<Observation>(l_);
-            return e_ | m_;
-        }
+
+        return (bool?)(/* CQL 'or' (304:3-308:49) */ (/* CQL 'or' (304:3-307:63) */ (/* CQL 'or' (304:3-306:56) */ (/* CQL 'or' (304:3-305:57) */ ((CqlBoolean)b_
+            || (CqlBoolean)c_())
+            || (CqlBoolean)d_())
+            || (CqlBoolean)e_())
+            || (CqlBoolean)f_()));
     }
 
 
@@ -1975,38 +1762,10 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
     private bool? Final_Numerator_Population_Compute(CqlContext context)
     {
         bool? a_ = this.Numerator(context);
-        bool? b_;
-        // CQL 'and' (312:3-313:26): right operand skipped when left is false
-        if (a_ is false)
-        {
-            b_ = false;
-        }
-        else
-        {
-            bool? d_ = this.Initial_Population(context);
-            b_ = a_ & d_;
-        }
-        bool? c_;
-        // CQL 'and' (312:3-314:19): right operand skipped when left is false
-        if (b_ is false)
-        {
-            c_ = false;
-        }
-        else
-        {
-            bool? e_ = this.Denominator(context);
-            c_ = b_ & e_;
-        }
-        // CQL 'and' (312:3-315:34): right operand skipped when left is false
-        if (c_ is false)
-        {
-            return false;
-        }
-        else
-        {
-            bool? f_ = this.Denominator_Exclusions(context);
-            return c_ & !f_;
-        }
+        return (bool?)(/* CQL 'and' (312:3-315:34) */ (/* CQL 'and' (312:3-314:19) */ (/* CQL 'and' (312:3-313:26) */ ((CqlBoolean)a_
+            && (CqlBoolean)(this.Initial_Population(context)))
+            && (CqlBoolean)(this.Denominator(context)))
+            && (CqlBoolean)(!(this.Denominator_Exclusions(context)))));
     }
 
 

@@ -87,58 +87,51 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
         bool? a_(Condition C) {
             CodeableConcept c_ = C?.VerificationStatus;
             CqlConcept d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
-            bool? e_ = !((bool?)(d_ is null));
-            // CQL 'implies' (25:5-30:7): right operand skipped when left is false
-            if (e_ is false)
-            {
-                return true;
+
+            bool? e_() {
+                CodeableConcept f_ = C?.VerificationStatus;
+                CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, f_);
+                CqlCode h_ = this.confirmed(context);
+                CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+                bool? j_ = context.Operators.Equivalent(g_, i_);
+
+                bool? k_() {
+                    CodeableConcept n_ = C?.VerificationStatus;
+                    CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
+                    CqlCode p_ = this.unconfirmed(context);
+                    CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+                    bool? r_ = context.Operators.Equivalent(o_, q_);
+                    return (bool?)((CqlBoolean)r_);
+                }
+
+
+                bool? l_() {
+                    CodeableConcept s_ = C?.VerificationStatus;
+                    CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                    CqlCode u_ = this.provisional(context);
+                    CqlConcept v_ = context.Operators.ConvertCodeToConcept(u_);
+                    bool? w_ = context.Operators.Equivalent(t_, v_);
+                    return (bool?)((CqlBoolean)w_);
+                }
+
+
+                bool? m_() {
+                    CodeableConcept x_ = C?.VerificationStatus;
+                    CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
+                    CqlCode z_ = this.differential(context);
+                    CqlConcept aa_ = context.Operators.ConvertCodeToConcept(z_);
+                    bool? ab_ = context.Operators.Equivalent(y_, aa_);
+                    return (bool?)((CqlBoolean)ab_);
+                }
+
+                return (bool?)(/* CQL 'or' (26:7-30:7) */ (/* CQL 'or' (26:8-28:47) */ (/* CQL 'or' (26:8-27:47) */ ((CqlBoolean)j_
+                    || (CqlBoolean)k_())
+                    || (CqlBoolean)l_())
+                    || (CqlBoolean)m_()));
             }
-            else
-            {
-                CqlCode f_ = this.confirmed(context);
-                CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
-                bool? h_ = context.Operators.Equivalent(d_, g_);
-                bool? i_;
-                // CQL 'or' (26:8-27:47): right operand skipped when left is true
-                if (h_ is true)
-                {
-                    i_ = true;
-                }
-                else
-                {
-                    CqlCode l_ = this.unconfirmed(context);
-                    CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
-                    bool? n_ = context.Operators.Equivalent(d_, m_);
-                    i_ = h_ | n_;
-                }
-                bool? j_;
-                // CQL 'or' (26:8-28:47): right operand skipped when left is true
-                if (i_ is true)
-                {
-                    j_ = true;
-                }
-                else
-                {
-                    CqlCode o_ = this.provisional(context);
-                    CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-                    bool? q_ = context.Operators.Equivalent(d_, p_);
-                    j_ = i_ | q_;
-                }
-                bool? k_;
-                // CQL 'or' (26:7-30:7): right operand skipped when left is true
-                if (j_ is true)
-                {
-                    k_ = true;
-                }
-                else
-                {
-                    CqlCode r_ = this.differential(context);
-                    CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
-                    bool? t_ = context.Operators.Equivalent(d_, s_);
-                    k_ = j_ | t_;
-                }
-                return !e_ | k_;
-            }
+
+            return (bool?)(/* CQL 'implies' (25:5-30:7) */ ((CqlBoolean)(!(!((bool?)(d_ is null))))
+                || (CqlBoolean)e_()));
         }
 
         IEnumerable<Condition> b_ = context.Operators.Where<Condition>(conditions, a_);
@@ -182,27 +175,25 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "completed",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            // CQL 'and' (40:5-41:99): right operand skipped when left is false
-            if (h_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                Code<RequestIntent> i_ = D?.IntentElement;
-                RequestIntent? j_ = i_?.Value;
-                Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
-                string l_ = context.Operators.Convert<string>(k_);
-                string[] m_ = [
+
+            bool? i_() {
+                Code<RequestIntent> j_ = D?.IntentElement;
+                RequestIntent? k_ = j_?.Value;
+                Code<RequestIntent> l_ = context.Operators.Convert<Code<RequestIntent>>(k_);
+                string m_ = context.Operators.Convert<string>(l_);
+                string[] n_ = [
                     "order",
                     "original-order",
                     "reflex-order",
                     "filler-order",
                     "instance-order",
                 ];
-                bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-                return h_ & n_;
+                bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
+                return (bool?)((CqlBoolean)o_);
             }
+
+            return (bool?)(/* CQL 'and' (40:5-41:99) */ ((CqlBoolean)h_
+                && (CqlBoolean)i_()));
         }
 
         IEnumerable<DeviceRequest> b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
@@ -224,27 +215,25 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "completed",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            // CQL 'and' (46:5-47:99): right operand skipped when left is false
-            if (h_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                Code<RequestIntent> i_ = S?.IntentElement;
-                RequestIntent? j_ = i_?.Value;
-                Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
-                string l_ = context.Operators.Convert<string>(k_);
-                string[] m_ = [
+
+            bool? i_() {
+                Code<RequestIntent> j_ = S?.IntentElement;
+                RequestIntent? k_ = j_?.Value;
+                Code<RequestIntent> l_ = context.Operators.Convert<Code<RequestIntent>>(k_);
+                string m_ = context.Operators.Convert<string>(l_);
+                string[] n_ = [
                     "order",
                     "original-order",
                     "reflex-order",
                     "filler-order",
                     "instance-order",
                 ];
-                bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-                return h_ & n_;
+                bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
+                return (bool?)((CqlBoolean)o_);
             }
+
+            return (bool?)(/* CQL 'and' (46:5-47:99) */ ((CqlBoolean)h_
+                && (CqlBoolean)i_()));
         }
 
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
@@ -266,27 +255,25 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "completed",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            // CQL 'and' (52:5-53:99): right operand skipped when left is false
-            if (h_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                Code<RequestIntent> i_ = S?.IntentElement;
-                RequestIntent? j_ = i_?.Value;
-                Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
-                string l_ = context.Operators.Convert<string>(k_);
-                string[] m_ = [
+
+            bool? i_() {
+                Code<RequestIntent> j_ = S?.IntentElement;
+                RequestIntent? k_ = j_?.Value;
+                Code<RequestIntent> l_ = context.Operators.Convert<Code<RequestIntent>>(k_);
+                string m_ = context.Operators.Convert<string>(l_);
+                string[] n_ = [
                     "order",
                     "original-order",
                     "reflex-order",
                     "filler-order",
                     "instance-order",
                 ];
-                bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-                return h_ & n_;
+                bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
+                return (bool?)((CqlBoolean)o_);
             }
+
+            return (bool?)(/* CQL 'and' (52:5-53:99) */ ((CqlBoolean)h_
+                && (CqlBoolean)i_()));
         }
 
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
@@ -308,27 +295,25 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "completed",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            // CQL 'and' (58:5-59:99): right operand skipped when left is false
-            if (h_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                Code<RequestIntent> i_ = S?.IntentElement;
-                RequestIntent? j_ = i_?.Value;
-                Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
-                string l_ = context.Operators.Convert<string>(k_);
-                string[] m_ = [
+
+            bool? i_() {
+                Code<RequestIntent> j_ = S?.IntentElement;
+                RequestIntent? k_ = j_?.Value;
+                Code<RequestIntent> l_ = context.Operators.Convert<Code<RequestIntent>>(k_);
+                string m_ = context.Operators.Convert<string>(l_);
+                string[] n_ = [
                     "order",
                     "original-order",
                     "reflex-order",
                     "filler-order",
                     "instance-order",
                 ];
-                bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
-                return h_ & n_;
+                bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
+                return (bool?)((CqlBoolean)o_);
             }
+
+            return (bool?)(/* CQL 'and' (58:5-59:99) */ ((CqlBoolean)h_
+                && (CqlBoolean)i_()));
         }
 
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
@@ -350,32 +335,30 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "corrected",
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
-            // CQL 'and' (64:5-67:5): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                List<CodeableConcept> h_ = O?.Category;
 
-                CqlConcept i_(CodeableConcept @this) {
-                    CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                    return m_;
+            bool? h_() {
+                List<CodeableConcept> i_ = O?.Category;
+
+                CqlConcept j_(CodeableConcept @this) {
+                    CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                    return n_;
                 }
 
 
-                bool? j_(CqlConcept ObservationCategory) {
-                    CqlCode n_ = this.imaging(context);
-                    CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
-                    bool? p_ = context.Operators.Equivalent(ObservationCategory, o_);
-                    return p_;
+                bool? k_(CqlConcept ObservationCategory) {
+                    CqlCode o_ = this.imaging(context);
+                    CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+                    bool? q_ = context.Operators.Equivalent(ObservationCategory, p_);
+                    return q_;
                 }
 
-                IEnumerable<CqlConcept> k_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_, j_);
-                bool? l_ = context.Operators.Exists<CqlConcept>(k_);
-                return g_ & l_;
+                IEnumerable<CqlConcept> l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_, k_);
+                bool? m_ = context.Operators.Exists<CqlConcept>(l_);
+                return (bool?)((CqlBoolean)m_);
             }
+
+            return (bool?)(/* CQL 'and' (64:5-67:5) */ ((CqlBoolean)g_
+                && (CqlBoolean)h_()));
         }
 
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
@@ -482,26 +465,24 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             MedicationRequest.MedicationrequestStatus? d_ = c_?.Value;
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equal(e_, "active");
-            // CQL 'and' (98:5-99:99): right operand skipped when left is false
-            if (f_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                Code<MedicationRequest.MedicationRequestIntent> g_ = M?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? h_ = g_?.Value;
-                string i_ = context.Operators.Convert<string>(h_);
-                string[] j_ = [
+
+            bool? g_() {
+                Code<MedicationRequest.MedicationRequestIntent> h_ = M?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
+                string j_ = context.Operators.Convert<string>(i_);
+                string[] k_ = [
                     "order",
                     "original-order",
                     "reflex-order",
                     "filler-order",
                     "instance-order",
                 ];
-                bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
-                return f_ & k_;
+                bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
+                return (bool?)((CqlBoolean)l_);
             }
+
+            return (bool?)(/* CQL 'and' (98:5-99:99) */ ((CqlBoolean)f_
+                && (CqlBoolean)g_()));
         }
 
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
@@ -544,26 +525,24 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "completed",
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
-            // CQL 'and' (109:5-110:97): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                Code<MedicationRequest.MedicationRequestIntent> h_ = M?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
-                string j_ = context.Operators.Convert<string>(i_);
-                string[] k_ = [
+
+            bool? h_() {
+                Code<MedicationRequest.MedicationRequestIntent> i_ = M?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? j_ = i_?.Value;
+                string k_ = context.Operators.Convert<string>(j_);
+                string[] l_ = [
                     "order",
                     "original-order",
                     "reflex-order",
                     "filler-order",
                     "instance-order",
                 ];
-                bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
-                return g_ & l_;
+                bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
+                return (bool?)((CqlBoolean)m_);
             }
+
+            return (bool?)(/* CQL 'and' (109:5-110:97) */ ((CqlBoolean)g_
+                && (CqlBoolean)h_()));
         }
 
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
@@ -585,32 +564,30 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "corrected",
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
-            // CQL 'and' (115:5-118:7): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                List<CodeableConcept> h_ = O?.Category;
 
-                CqlConcept i_(CodeableConcept @this) {
-                    CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                    return m_;
+            bool? h_() {
+                List<CodeableConcept> i_ = O?.Category;
+
+                CqlConcept j_(CodeableConcept @this) {
+                    CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                    return n_;
                 }
 
 
-                bool? j_(CqlConcept ObservationCategory) {
-                    CqlCode n_ = this.exam(context);
-                    CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
-                    bool? p_ = context.Operators.Equivalent(ObservationCategory, o_);
-                    return p_;
+                bool? k_(CqlConcept ObservationCategory) {
+                    CqlCode o_ = this.exam(context);
+                    CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+                    bool? q_ = context.Operators.Equivalent(ObservationCategory, p_);
+                    return q_;
                 }
 
-                IEnumerable<CqlConcept> k_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_, j_);
-                bool? l_ = context.Operators.Exists<CqlConcept>(k_);
-                return g_ & l_;
+                IEnumerable<CqlConcept> l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_, k_);
+                bool? m_ = context.Operators.Exists<CqlConcept>(l_);
+                return (bool?)((CqlBoolean)m_);
             }
+
+            return (bool?)(/* CQL 'and' (115:5-118:7) */ ((CqlBoolean)g_
+                && (CqlBoolean)h_()));
         }
 
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);

@@ -107,17 +107,15 @@ public partial class CMS75FHIRChildrenDentalDecay_1_0_000 : ILibrary, ISingleton
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(1, 20, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        // CQL 'and' (20:3-21:42): right operand skipped when left is false
-        if (j_ is false)
-        {
-            return false;
+
+        bool? k_() {
+            IEnumerable<Encounter> l_ = this.Qualifying_Encounters(context);
+            bool? m_ = context.Operators.Exists<Encounter>(l_);
+            return (bool?)((CqlBoolean)m_);
         }
-        else
-        {
-            IEnumerable<Encounter> k_ = this.Qualifying_Encounters(context);
-            bool? l_ = context.Operators.Exists<Encounter>(k_);
-            return j_ & l_;
-        }
+
+        return (bool?)(/* CQL 'and' (20:3-21:42) */ ((CqlBoolean)j_
+            && (CqlBoolean)k_()));
     }
 
 

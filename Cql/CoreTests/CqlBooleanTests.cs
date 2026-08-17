@@ -146,6 +146,33 @@ public class CqlBooleanTests
         Assert.AreEqual("null", CqlBoolean.Null.ToString());
     }
 
+    /// <summary>
+    /// <c>CqlBoolean?</c> converts implicitly to <c>bool?</c> as well, and safely: the compiler
+    /// lifts the user-defined conversion for a nullable source, so a <c>CqlBoolean?</c> with no
+    /// value yields <c>bool?</c> null rather than throwing on <c>.Value</c>. Pinned because it is
+    /// not obvious from the operator's signature — the operator's target is already
+    /// <c>bool?</c>, which is not the shape the ordinary lifting rule describes — and because the
+    /// unsafe alternative would fail only at runtime.
+    /// <para>Both kinds of absence collapse to the same answer, which is what CQL wants: a
+    /// <c>CqlBoolean?</c> holding no value, and one holding <see cref="CqlBoolean.Null"/>, are both
+    /// simply unknown.</para>
+    /// </summary>
+    [TestMethod]
+    public void NullableCqlBoolean_ConvertsToNullableBool()
+    {
+        CqlBoolean? noValue = null;
+        bool? fromNoValue = noValue;
+        Assert.IsNull(fromNoValue, "a CqlBoolean? with no value must convert to a null bool?, not throw.");
+
+        CqlBoolean? nullValue = CqlBoolean.Null;
+        bool? fromNullValue = nullValue;
+        Assert.IsNull(fromNullValue);
+
+        CqlBoolean? trueValue = CqlBoolean.True;
+        bool? fromTrueValue = trueValue;
+        Assert.AreEqual(true, fromTrueValue);
+    }
+
     /// <summary>The default value of the struct is the unknown value, not false.</summary>
     [TestMethod]
     public void Default_IsNull()

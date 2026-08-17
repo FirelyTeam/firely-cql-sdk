@@ -119,19 +119,17 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 
         bool? b_(Encounter E) {
             Coding d_ = E?.Class;
-            bool? e_ = !((bool?)(d_ is null));
-            // CQL 'and' (34:5-35:64): right operand skipped when left is false
-            if (e_ is false)
-            {
-                return false;
+
+            bool? e_() {
+                Coding f_ = E?.Class;
+                CqlCode g_ = FHIRHelpers_4_0_001.Instance.ToCode(context, f_);
+                CqlCode h_ = NCQATerminology_1_0_0.Instance.@virtual(context);
+                bool? i_ = context.Operators.Equivalent(g_, h_);
+                return (bool?)((CqlBoolean)i_);
             }
-            else
-            {
-                CqlCode f_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
-                CqlCode g_ = NCQATerminology_1_0_0.Instance.@virtual(context);
-                bool? h_ = context.Operators.Equivalent(f_, g_);
-                return e_ & h_;
-            }
+
+            return (bool?)(/* CQL 'and' (34:5-35:64) */ ((CqlBoolean)(!((bool?)(d_ is null)))
+                && (CqlBoolean)e_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -146,31 +144,27 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 
         bool? b_(Encounter E) {
             Coding d_ = E?.Class;
-            bool? e_ = !((bool?)(d_ is null));
-            // CQL 'and' (39:5-42:7): right operand skipped when left is false
-            if (e_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                CqlCode f_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
-                CqlCode g_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
-                bool? h_ = context.Operators.Equivalent(f_, g_);
-                bool? i_;
-                // CQL 'or' (40:11-42:7): right operand skipped when left is true
-                if (h_ is true)
-                {
-                    i_ = true;
+
+            bool? e_() {
+                Coding f_ = E?.Class;
+                CqlCode g_ = FHIRHelpers_4_0_001.Instance.ToCode(context, f_);
+                CqlCode h_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
+                bool? i_ = context.Operators.Equivalent(g_, h_);
+
+                bool? j_() {
+                    Coding k_ = E?.Class;
+                    CqlCode l_ = FHIRHelpers_4_0_001.Instance.ToCode(context, k_);
+                    CqlCode m_ = NCQATerminology_1_0_0.Instance.home_health(context);
+                    bool? n_ = context.Operators.Equivalent(l_, m_);
+                    return (bool?)((CqlBoolean)n_);
                 }
-                else
-                {
-                    CqlCode j_ = NCQATerminology_1_0_0.Instance.home_health(context);
-                    bool? k_ = context.Operators.Equivalent(f_, j_);
-                    i_ = h_ | k_;
-                }
-                return e_ & i_;
+
+                return (bool?)(/* CQL 'or' (40:11-42:7) */ ((CqlBoolean)i_
+                    || (CqlBoolean)j_()));
             }
+
+            return (bool?)(/* CQL 'and' (39:5-42:7) */ ((CqlBoolean)(!((bool?)(d_ is null)))
+                && (CqlBoolean)e_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -185,19 +179,17 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 
         bool? b_(Encounter E) {
             Coding d_ = E?.Class;
-            bool? e_ = !((bool?)(d_ is null));
-            // CQL 'and' (46:5-47:67): right operand skipped when left is false
-            if (e_ is false)
-            {
-                return false;
+
+            bool? e_() {
+                Coding f_ = E?.Class;
+                CqlCode g_ = FHIRHelpers_4_0_001.Instance.ToCode(context, f_);
+                CqlCode h_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
+                bool? i_ = context.Operators.Equivalent(g_, h_);
+                return (bool?)((CqlBoolean)i_);
             }
-            else
-            {
-                CqlCode f_ = FHIRHelpers_4_0_001.Instance.ToCode(context, d_);
-                CqlCode g_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
-                bool? h_ = context.Operators.Equivalent(f_, g_);
-                return e_ & h_;
-            }
+
+            return (bool?)(/* CQL 'and' (46:5-47:67) */ ((CqlBoolean)(!((bool?)(d_ is null)))
+                && (CqlBoolean)e_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);

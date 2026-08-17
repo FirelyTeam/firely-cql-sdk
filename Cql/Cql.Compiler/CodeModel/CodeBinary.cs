@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Primitives;
+
 namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
@@ -42,6 +44,20 @@ internal enum CodeBinaryOp
     /// over a null one), <c>^</c> is an ordinary null-propagating lifted operator: null if
     /// either operand is null. That is exactly what CQL's xor specifies.</summary>
     BoolXor,
+
+    /// <summary>
+    /// <c>a &amp;&amp; b</c> over <see cref="CqlBoolean"/> operands — CQL's <c>and</c>, WITH the
+    /// short-circuit. <c>bool?</c> cannot carry these: C# synthesises <c>&amp;&amp;</c> from a
+    /// type's own <c>operator false</c> plus <c>&amp;</c>, and those cannot be lifted over
+    /// <see cref="Nullable{T}"/>. Over <see cref="CqlBoolean"/> the skip is the language's:
+    /// <c>operator false</c> means "definitely false", so a null left operand never
+    /// short-circuits — which is precisely CQL's rule.
+    /// </summary>
+    CqlAndAlso,
+
+    /// <summary><c>a || b</c> over <see cref="CqlBoolean"/> operands — CQL's <c>or</c>, skipping
+    /// on a definitely-true left operand. See <see cref="CqlAndAlso"/>.</summary>
+    CqlOrElse,
 }
 
 /// <summary>
@@ -63,7 +79,18 @@ internal sealed class CodeBinary : CodeExpression
             or CodeBinaryOp.Coalesce
             or CodeBinaryOp.BoolAnd
             or CodeBinaryOp.BoolOr
-            or CodeBinaryOp.BoolXor;
+            or CodeBinaryOp.BoolXor
+            or CodeBinaryOp.CqlAndAlso
+            or CodeBinaryOp.CqlOrElse;
+
+    /// <summary>
+    /// Whether the operator short-circuits, i.e. whether its right operand may go unevaluated.
+    /// Load-bearing for the emitter: the right operand of one of these must NOT be hoisted into a
+    /// statement above the expression, since that would evaluate it unconditionally and defeat the
+    /// whole point.
+    /// </summary>
+    public static bool ShortCircuits(CodeBinaryOp op) =>
+        op is CodeBinaryOp.CqlAndAlso or CodeBinaryOp.CqlOrElse or CodeBinaryOp.AndAlso or CodeBinaryOp.OrElse;
 
     public CodeBinary(CodeBinaryOp op, CodeExpression left, CodeExpression right, string? originTag = null)
     {
@@ -75,12 +102,31 @@ internal sealed class CodeBinary : CodeExpression
             CodeBinaryOp.Equal or CodeBinaryOp.NotEqual => typeof(bool),
             CodeBinaryOp.OrElse or CodeBinaryOp.AndAlso => ValidateLogical(op, left, right),
             CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr or CodeBinaryOp.BoolXor => ValidateLiftedLogical(op, left, right),
+            CodeBinaryOp.CqlAndAlso or CodeBinaryOp.CqlOrElse => ValidateCqlBoolean(op, left, right),
             _ => throw new ArgumentException($"Unknown binary operator {op}.")
         };
 
         Op = op;
         Left = left;
         Right = right;
+    }
+
+    /// <summary>
+    /// Both operands must already BE <see cref="CqlBoolean"/> — the builder inserts the conversion,
+    /// rather than this node implying one, so the conversion is visible in the IR and a
+    /// <c>bool?</c> operand that slipped through fails loudly here instead of printing as C# that
+    /// silently has no short-circuit.
+    /// </summary>
+    private static Type ValidateCqlBoolean(CodeBinaryOp op, CodeExpression left, CodeExpression right)
+    {
+        if (left.Type != typeof(CqlBoolean) || right.Type != typeof(CqlBoolean))
+        {
+            throw new ArgumentException(
+                $"Operands of {op} must be {nameof(CqlBoolean)}, got {left.Type} and {right.Type}. " +
+                $"Wrap them with the builder's CqlBoolean conversion first.");
+        }
+
+        return typeof(CqlBoolean);
     }
 
     private static Type ValidateCoalesce(CodeExpression left, CodeExpression right)

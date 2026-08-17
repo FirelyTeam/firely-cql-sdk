@@ -196,19 +196,17 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             Code<Encounter.EncounterStatus> t_ = ValidEncounter?.StatusElement;
             string u_ = FHIRHelpers_4_0_001.Instance.ToString(context, t_);
             bool? v_ = context.Operators.Equal(u_, "finished");
-            // CQL 'and' (55:15-56:69): right operand skipped when left is false
-            if (v_ is false)
-            {
-                return false;
+
+            bool? w_() {
+                CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+                Period y_ = ValidEncounter?.Period;
+                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, y_);
+                bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, (string)default);
+                return (bool?)((CqlBoolean)aa_);
             }
-            else
-            {
-                CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
-                Period x_ = ValidEncounter?.Period;
-                CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, x_);
-                bool? z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, y_, (string)default);
-                return v_ & z_;
-            }
+
+            return (bool?)(/* CQL 'and' (55:15-56:69) */ ((CqlBoolean)v_
+                && (CqlBoolean)w_()));
         }
 
         IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
@@ -234,30 +232,25 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(23, 64, true, false);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        bool? k_;
-        // CQL 'and' (44:3-45:43): right operand skipped when left is false
-        if (j_ is false)
-        {
-            k_ = false;
+
+        bool? k_() {
+            Patient m_ = this.Patient(context);
+            Code<AdministrativeGender> n_ = m_?.GenderElement;
+            string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
+            bool? p_ = context.Operators.Equal(o_, "female");
+            return (bool?)((CqlBoolean)p_);
         }
-        else
-        {
-            Code<AdministrativeGender> l_ = a_?.GenderElement;
-            string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
-            bool? n_ = context.Operators.Equal(m_, "female");
-            k_ = j_ & n_;
+
+
+        bool? l_() {
+            IEnumerable<Encounter> q_ = this.Qualifying_Encounters(context);
+            bool? r_ = context.Operators.Exists<Encounter>(q_);
+            return (bool?)((CqlBoolean)r_);
         }
-        // CQL 'and' (44:3-46:48): right operand skipped when left is false
-        if (k_ is false)
-        {
-            return false;
-        }
-        else
-        {
-            IEnumerable<Encounter> o_ = this.Qualifying_Encounters(context);
-            bool? p_ = context.Operators.Exists<Encounter>(o_);
-            return k_ & p_;
-        }
+
+        return (bool?)(/* CQL 'and' (44:3-46:48) */ (/* CQL 'and' (44:3-45:43) */ ((CqlBoolean)j_
+            && (CqlBoolean)k_())
+            && (CqlBoolean)l_()));
     }
 
 
@@ -289,21 +282,19 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             Code<EventStatus> j_ = NoCervixProcedure?.StatusElement;
             string k_ = FHIRHelpers_4_0_001.Instance.ToString(context, j_);
             bool? l_ = context.Operators.Equal(k_, "completed");
-            // CQL 'and' (72:17-74:45): right operand skipped when left is false
-            if (l_ is false)
-            {
-                return false;
+
+            bool? m_() {
+                DataType n_ = NoCervixProcedure?.Performed;
+                CqlInterval<CqlDateTime> o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, n_);
+                CqlDateTime p_ = context.Operators.End(o_);
+                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
+                CqlDateTime r_ = context.Operators.End(q_);
+                bool? s_ = context.Operators.SameOrBefore(p_, r_, (string)default);
+                return (bool?)((CqlBoolean)s_);
             }
-            else
-            {
-                DataType m_ = NoCervixProcedure?.Performed;
-                CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, m_);
-                CqlDateTime o_ = context.Operators.End(n_);
-                CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-                CqlDateTime q_ = context.Operators.End(p_);
-                bool? r_ = context.Operators.SameOrBefore(o_, q_, (string)default);
-                return l_ & r_;
-            }
+
+            return (bool?)(/* CQL 'and' (72:17-74:45) */ ((CqlBoolean)l_
+                && (CqlBoolean)m_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -311,12 +302,12 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
         bool? g_(Condition NoCervixDiagnosis) {
-            CqlInterval<CqlDateTime> s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, NoCervixDiagnosis);
-            CqlDateTime t_ = context.Operators.Start(s_);
-            CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
-            CqlDateTime v_ = context.Operators.End(u_);
-            bool? w_ = context.Operators.SameOrBefore(t_, v_, (string)default);
-            return w_;
+            CqlInterval<CqlDateTime> t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, NoCervixDiagnosis);
+            CqlDateTime u_ = context.Operators.Start(t_);
+            CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
+            CqlDateTime w_ = context.Operators.End(v_);
+            bool? x_ = context.Operators.SameOrBefore(u_, w_, (string)default);
+            return x_;
         }
 
         IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
@@ -334,28 +325,16 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
-        bool? b_;
-        // CQL 'or' (62:3-63:43): right operand skipped when left is true
-        if (a_ is true)
-        {
-            b_ = true;
-        }
-        else
-        {
+
+        bool? b_() {
             IEnumerable<object> c_ = this.Absence_of_Cervix(context);
             bool? d_ = context.Operators.Exists<object>(c_);
-            b_ = a_ | d_;
+            return (bool?)((CqlBoolean)d_);
         }
-        // CQL 'or' (62:3-64:75): right operand skipped when left is true
-        if (b_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            bool? e_ = PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
-            return b_ | e_;
-        }
+
+        return (bool?)(/* CQL 'or' (62:3-64:75) */ (/* CQL 'or' (62:3-63:43) */ ((CqlBoolean)a_
+            || (CqlBoolean)b_())
+            || (CqlBoolean)(PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context))));
     }
 
 
@@ -379,14 +358,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 "corrected",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            bool? i_;
-            // CQL 'and' (83:11-86:7): right operand skipped when left is false
-            if (h_ is false)
-            {
-                i_ = false;
-            }
-            else
-            {
+
+            bool? i_() {
                 List<CodeableConcept> k_ = CervicalCytology?.Category;
 
                 bool? l_(CodeableConcept CervicalCytologyCategory) {
@@ -398,16 +371,11 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 }
 
                 bool? m_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)k_, l_);
-                i_ = h_ & m_;
+                return (bool?)((CqlBoolean)m_);
             }
-            bool? j_;
-            // CQL 'and' (83:11-87:113): right operand skipped when left is false
-            if (i_ is false)
-            {
-                j_ = false;
-            }
-            else
-            {
+
+
+            bool? j_() {
                 DataType r_ = CervicalCytology?.Effective;
                 CqlDateTime s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, r_);
                 CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
@@ -416,28 +384,21 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlDateTime w_ = context.Operators.Subtract(u_, v_);
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(w_, u_, true, true);
                 bool? y_ = context.Operators.In<CqlDateTime>(s_, x_, (string)default);
-                bool? z_;
-                // CQL 'and' (87:11-87:113): right operand skipped when left is false
-                if (y_ is false)
-                {
-                    z_ = false;
+
+                bool? z_() {
+                    CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
+                    CqlDateTime ab_ = context.Operators.End(aa_);
+                    return (bool?)((CqlBoolean)(!((bool?)(ab_ is null))));
                 }
-                else
-                {
-                    z_ = y_ & (!((bool?)(u_ is null)));
-                }
-                j_ = i_ & z_;
+
+                return (bool?)(/* CQL 'and' (87:11-87:113) */ ((CqlBoolean)y_
+                    && (CqlBoolean)z_()));
             }
-            // CQL 'and' (83:5-88:44): right operand skipped when left is false
-            if (j_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType aa_ = CervicalCytology?.Value;
-                return j_ & (!((bool?)(aa_ is null)));
-            }
+
+            return (bool?)(/* CQL 'and' (83:5-88:44) */ (/* CQL 'and' (83:11-87:113) */ (/* CQL 'and' (83:11-86:7) */ ((CqlBoolean)h_
+                && (CqlBoolean)i_())
+                && (CqlBoolean)j_())
+                && (CqlBoolean)(!((bool?)(CervicalCytology?.Value is null)))));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -465,14 +426,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 "corrected",
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
-            bool? i_;
-            // CQL 'and' (100:11-103:7): right operand skipped when left is false
-            if (h_ is false)
-            {
-                i_ = false;
-            }
-            else
-            {
+
+            bool? i_() {
                 List<CodeableConcept> l_ = HPVTest?.Category;
 
                 bool? m_(CodeableConcept HPVTestCategory) {
@@ -484,16 +439,11 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 }
 
                 bool? n_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)l_, m_);
-                i_ = h_ & n_;
+                return (bool?)((CqlBoolean)n_);
             }
-            bool? j_;
-            // CQL 'and' (100:11-104:94): right operand skipped when left is false
-            if (i_ is false)
-            {
-                j_ = false;
-            }
-            else
-            {
+
+
+            bool? j_() {
                 Patient s_ = this.Patient(context);
                 Date t_ = s_?.BirthDateElement;
                 string u_ = t_?.Value;
@@ -504,16 +454,11 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlDate z_ = context.Operators.DateFrom(y_);
                 int? aa_ = context.Operators.CalculateAgeAt(v_, z_, "year");
                 bool? ab_ = context.Operators.GreaterOrEqual(aa_, 30);
-                j_ = i_ & ab_;
+                return (bool?)((CqlBoolean)ab_);
             }
-            bool? k_;
-            // CQL 'and' (100:11-105:104): right operand skipped when left is false
-            if (j_ is false)
-            {
-                k_ = false;
-            }
-            else
-            {
+
+
+            bool? k_() {
                 DataType ac_ = HPVTest?.Effective;
                 CqlDateTime ad_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, ac_);
                 CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
@@ -522,28 +467,22 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlDateTime ah_ = context.Operators.Subtract(af_, ag_);
                 CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ah_, af_, true, true);
                 bool? aj_ = context.Operators.In<CqlDateTime>(ad_, ai_, (string)default);
-                bool? ak_;
-                // CQL 'and' (105:11-105:104): right operand skipped when left is false
-                if (aj_ is false)
-                {
-                    ak_ = false;
+
+                bool? ak_() {
+                    CqlInterval<CqlDateTime> al_ = this.Measurement_Period(context);
+                    CqlDateTime am_ = context.Operators.End(al_);
+                    return (bool?)((CqlBoolean)(!((bool?)(am_ is null))));
                 }
-                else
-                {
-                    ak_ = aj_ & (!((bool?)(af_ is null)));
-                }
-                k_ = j_ & ak_;
+
+                return (bool?)(/* CQL 'and' (105:11-105:104) */ ((CqlBoolean)aj_
+                    && (CqlBoolean)ak_()));
             }
-            // CQL 'and' (100:5-106:35): right operand skipped when left is false
-            if (k_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType al_ = HPVTest?.Value;
-                return k_ & (!((bool?)(al_ is null)));
-            }
+
+            return (bool?)(/* CQL 'and' (100:5-106:35) */ (/* CQL 'and' (100:11-105:104) */ (/* CQL 'and' (100:11-104:94) */ (/* CQL 'and' (100:11-103:7) */ ((CqlBoolean)h_
+                && (CqlBoolean)i_())
+                && (CqlBoolean)j_())
+                && (CqlBoolean)k_())
+                && (CqlBoolean)(!((bool?)(HPVTest?.Value is null)))));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -561,17 +500,15 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     {
         IEnumerable<Observation> a_ = this.Cervical_Cytology_Within_3_Years(context);
         bool? b_ = context.Operators.Exists<Observation>(a_);
-        // CQL 'or' (67:3-68:76): right operand skipped when left is true
-        if (b_ is true)
-        {
-            return true;
+
+        bool? c_() {
+            IEnumerable<Observation> d_ = this.HPV_Test_Within_5_Years_for_Women_Age_30_and_Older(context);
+            bool? e_ = context.Operators.Exists<Observation>(d_);
+            return (bool?)((CqlBoolean)e_);
         }
-        else
-        {
-            IEnumerable<Observation> c_ = this.HPV_Test_Within_5_Years_for_Women_Age_30_and_Older(context);
-            bool? d_ = context.Operators.Exists<Observation>(c_);
-            return b_ | d_;
-        }
+
+        return (bool?)(/* CQL 'or' (67:3-68:76) */ ((CqlBoolean)b_
+            || (CqlBoolean)c_()));
     }
 
 
@@ -629,55 +566,31 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         bool? c_(Observation CervicalCytology) {
             bool? e_ = this.isComplete(context, CervicalCytology);
-            bool? f_;
-            // CQL 'and' (93:11-94:45): right operand skipped when left is false
-            if (e_ is false)
-            {
-                f_ = false;
-            }
-            else
-            {
-                bool? h_ = this.isLaboratoryTest(context, CervicalCytology);
-                f_ = e_ & h_;
-            }
-            bool? g_;
-            // CQL 'and' (93:11-95:102): right operand skipped when left is false
-            if (f_ is false)
-            {
-                g_ = false;
-            }
-            else
-            {
-                DataType i_ = CervicalCytology?.Effective;
-                CqlDateTime j_ = this.latest(context, i_);
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                CqlDateTime l_ = context.Operators.End(k_);
-                CqlQuantity m_ = context.Operators.Quantity(3m, "years");
-                CqlDateTime n_ = context.Operators.Subtract(l_, m_);
-                CqlInterval<CqlDateTime> o_ = context.Operators.Interval(n_, l_, true, true);
-                bool? p_ = context.Operators.In<CqlDateTime>(j_, o_, (string)default);
-                bool? q_;
-                // CQL 'and' (95:11-95:102): right operand skipped when left is false
-                if (p_ is false)
-                {
-                    q_ = false;
+
+            bool? f_() {
+                DataType g_ = CervicalCytology?.Effective;
+                CqlDateTime h_ = this.latest(context, g_);
+                CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
+                CqlDateTime j_ = context.Operators.End(i_);
+                CqlQuantity k_ = context.Operators.Quantity(3m, "years");
+                CqlDateTime l_ = context.Operators.Subtract(j_, k_);
+                CqlInterval<CqlDateTime> m_ = context.Operators.Interval(l_, j_, true, true);
+                bool? n_ = context.Operators.In<CqlDateTime>(h_, m_, (string)default);
+
+                bool? o_() {
+                    CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
+                    CqlDateTime q_ = context.Operators.End(p_);
+                    return (bool?)((CqlBoolean)(!((bool?)(q_ is null))));
                 }
-                else
-                {
-                    q_ = p_ & (!((bool?)(l_ is null)));
-                }
-                g_ = f_ & q_;
+
+                return (bool?)(/* CQL 'and' (95:11-95:102) */ ((CqlBoolean)n_
+                    && (CqlBoolean)o_()));
             }
-            // CQL 'and' (93:5-96:44): right operand skipped when left is false
-            if (g_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType r_ = CervicalCytology?.Value;
-                return g_ & (!((bool?)(r_ is null)));
-            }
+
+            return (bool?)(/* CQL 'and' (93:5-96:44) */ (/* CQL 'and' (93:11-95:102) */ (/* CQL 'and' (93:11-94:45) */ ((CqlBoolean)e_
+                && (CqlBoolean)(this.isLaboratoryTest(context, CervicalCytology)))
+                && (CqlBoolean)f_())
+                && (CqlBoolean)(!((bool?)(CervicalCytology?.Value is null)))));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -706,75 +619,47 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         bool? c_(Observation HPVTest) {
             bool? e_ = this.isComplete(context, HPVTest);
-            bool? f_;
-            // CQL 'and' (110:11-111:36): right operand skipped when left is false
-            if (e_ is false)
-            {
-                f_ = false;
+
+            bool? f_() {
+                Patient h_ = this.Patient(context);
+                Date i_ = h_?.BirthDateElement;
+                string j_ = i_?.Value;
+                CqlDate k_ = context.Operators.ConvertStringToDate(j_);
+                DataType l_ = HPVTest?.Effective;
+                CqlInterval<CqlDateTime> m_ = this.toInterval(context, l_);
+                CqlDateTime n_ = context.Operators.Start(m_);
+                CqlDate o_ = context.Operators.DateFrom(n_);
+                int? p_ = context.Operators.CalculateAgeAt(k_, o_, "year");
+                bool? q_ = context.Operators.GreaterOrEqual(p_, 30);
+                return (bool?)((CqlBoolean)q_);
             }
-            else
-            {
-                bool? i_ = this.isLaboratoryTest(context, HPVTest);
-                f_ = e_ & i_;
-            }
-            bool? g_;
-            // CQL 'and' (110:11-112:79): right operand skipped when left is false
-            if (f_ is false)
-            {
-                g_ = false;
-            }
-            else
-            {
-                Patient j_ = this.Patient(context);
-                Date k_ = j_?.BirthDateElement;
-                string l_ = k_?.Value;
-                CqlDate m_ = context.Operators.ConvertStringToDate(l_);
-                DataType n_ = HPVTest?.Effective;
-                CqlInterval<CqlDateTime> o_ = this.toInterval(context, n_);
-                CqlDateTime p_ = context.Operators.Start(o_);
-                CqlDate q_ = context.Operators.DateFrom(p_);
-                int? r_ = context.Operators.CalculateAgeAt(m_, q_, "year");
-                bool? s_ = context.Operators.GreaterOrEqual(r_, 30);
-                g_ = f_ & s_;
-            }
-            bool? h_;
-            // CQL 'and' (110:11-113:93): right operand skipped when left is false
-            if (g_ is false)
-            {
-                h_ = false;
-            }
-            else
-            {
-                DataType t_ = HPVTest?.Effective;
-                CqlDateTime u_ = this.latest(context, t_);
-                CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
-                CqlDateTime w_ = context.Operators.End(v_);
-                CqlQuantity x_ = context.Operators.Quantity(5m, "years");
-                CqlDateTime y_ = context.Operators.Subtract(w_, x_);
-                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(y_, w_, true, true);
-                bool? aa_ = context.Operators.In<CqlDateTime>(u_, z_, (string)default);
-                bool? ab_;
-                // CQL 'and' (113:11-113:93): right operand skipped when left is false
-                if (aa_ is false)
-                {
-                    ab_ = false;
+
+
+            bool? g_() {
+                DataType r_ = HPVTest?.Effective;
+                CqlDateTime s_ = this.latest(context, r_);
+                CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
+                CqlDateTime u_ = context.Operators.End(t_);
+                CqlQuantity v_ = context.Operators.Quantity(5m, "years");
+                CqlDateTime w_ = context.Operators.Subtract(u_, v_);
+                CqlInterval<CqlDateTime> x_ = context.Operators.Interval(w_, u_, true, true);
+                bool? y_ = context.Operators.In<CqlDateTime>(s_, x_, (string)default);
+
+                bool? z_() {
+                    CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
+                    CqlDateTime ab_ = context.Operators.End(aa_);
+                    return (bool?)((CqlBoolean)(!((bool?)(ab_ is null))));
                 }
-                else
-                {
-                    ab_ = aa_ & (!((bool?)(w_ is null)));
-                }
-                h_ = g_ & ab_;
+
+                return (bool?)(/* CQL 'and' (113:11-113:93) */ ((CqlBoolean)y_
+                    && (CqlBoolean)z_()));
             }
-            // CQL 'and' (110:5-114:35): right operand skipped when left is false
-            if (h_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType ac_ = HPVTest?.Value;
-                return h_ & (!((bool?)(ac_ is null)));
-            }
+
+            return (bool?)(/* CQL 'and' (110:5-114:35) */ (/* CQL 'and' (110:11-113:93) */ (/* CQL 'and' (110:11-112:79) */ (/* CQL 'and' (110:11-111:36) */ ((CqlBoolean)e_
+                && (CqlBoolean)(this.isLaboratoryTest(context, HPVTest)))
+                && (CqlBoolean)f_())
+                && (CqlBoolean)g_())
+                && (CqlBoolean)(!((bool?)(HPVTest?.Value is null)))));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);

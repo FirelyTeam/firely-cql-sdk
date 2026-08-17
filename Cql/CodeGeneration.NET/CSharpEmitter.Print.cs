@@ -402,6 +402,20 @@ internal partial class CSharpEmitter
             ? $"/* {tag} */ "
             : "";
 
+        // A short-circuit operator's RIGHT operand is printed fully inline, deliberately bypassing
+        // the child linearizer: linearizing it could hoist part of it into a statement above the
+        // expression, which would evaluate it unconditionally and destroy the skip. Linearize has
+        // already diverted any right operand that has no inline form to the branching guard, so
+        // PrintFullyInline cannot fail here.
+        if (CodeBinary.ShortCircuits(binary.Op))
+        {
+            return FormatShortCircuit(
+                binary.Op,
+                child(binary.Left).Code,
+                PrintFullyInline(binary.Right, includeOriginTags),
+                includeOriginTags ? binary.OriginTag : null);
+        }
+
         var leftExpression = binary.Left;
 
         if (binary.Op == CodeBinaryOp.Coalesce)
@@ -475,8 +489,39 @@ internal partial class CSharpEmitter
             CodeBinaryOp.BoolAnd => $"{originPrefix}{left} & {right.ParenthesizeIfNeeded()}",
             CodeBinaryOp.BoolOr => $"{originPrefix}{left} | {right.ParenthesizeIfNeeded()}",
             CodeBinaryOp.BoolXor => $"{originPrefix}{left} ^ {right.ParenthesizeIfNeeded()}",
+            // BOTH operands parenthesize, unlike the lifted ops above: && and || have different
+            // precedences from each other, so a mixed nest (implies is `!l || r`, which may then
+            // become an operand of &&) regroups silently without them.
+            CodeBinaryOp.CqlAndAlso => $"{originPrefix}{left.ParenthesizeIfNeeded()} && {right.ParenthesizeIfNeeded()}",
+            CodeBinaryOp.CqlOrElse => $"{originPrefix}{left.ParenthesizeIfNeeded()} || {right.ParenthesizeIfNeeded()}",
             _ => throw new NotSupportedException($"Don't know how to print binary operator {binary.Op}."),
         };
+    }
+
+    /// <summary>
+    /// A short-circuit operator's printed form, shared by the inline path and the path that moves
+    /// the right operand into a local function, so the two cannot drift apart.
+    ///
+    /// <para>The operator LEADS its continuation line, matching the ternary format: with one operand
+    /// per line the reader can see which operand may be skipped, and a chain reads as a column of
+    /// conditions rather than one long line.</para>
+    ///
+    /// <para>The whole expression is parenthesized, which also settles precedence — <c>&amp;&amp;</c>
+    /// and <c>||</c> bind differently, and <c>implies</c> is <c>!l || r</c> that may itself become an
+    /// operand of <c>&amp;&amp;</c>, so a mixed nest would regroup silently. Because every one of
+    /// these self-parenthesizes, the operands need no parens of their own.</para>
+    /// </summary>
+    internal string FormatShortCircuit(CodeBinaryOp op, string left, string right, string? originTag)
+    {
+        var @operator = op is CodeBinaryOp.CqlAndAlso or CodeBinaryOp.AndAlso ? "&&" : "||";
+        var originPrefix = originTag is null ? "" : $"/* {originTag} */ ";
+
+        var isb = new IndentedStringBuilder();
+        isb.Append("(");
+        isb.AppendLine(left);
+        using (isb.Indent())
+            isb.Append($"{@operator} {right})");
+        return $"{originPrefix}{isb}";
     }
 
     private string PrintUnary(CodeUnary unary, Func<CodeExpression, Atom> child) =>

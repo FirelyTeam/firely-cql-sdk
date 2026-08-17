@@ -128,19 +128,17 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 IEnumerable<string> p_ = context.Operators.Split(o_, "/");
                 string q_ = context.Operators.Last<string>(p_);
                 bool? r_ = context.Operators.Equal(m_, q_);
-                // CQL 'and': right operand skipped when left is false
-                if (r_ is false)
-                {
-                    return false;
+
+                bool? s_() {
+                    CodeableConcept t_ = M?.Code;
+                    CqlConcept u_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, t_);
+                    CqlValueSet v_ = this.Dementia_Medications(context);
+                    bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
+                    return (bool?)((CqlBoolean)w_);
                 }
-                else
-                {
-                    CodeableConcept s_ = M?.Code;
-                    CqlConcept t_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, s_);
-                    CqlValueSet u_ = this.Dementia_Medications(context);
-                    bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                    return r_ & v_;
-                }
+
+                return (bool?)(/* CQL 'and' */ ((CqlBoolean)r_
+                    && (CqlBoolean)s_()));
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -151,39 +149,33 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
 
         bool? g_(MedicationRequest DementiaMed) {
-            Code<MedicationRequest.MedicationrequestStatus> w_ = DementiaMed?.StatusElement;
-            string x_ = FHIRHelpers_4_0_001.Instance.ToString(context, w_);
-            bool? y_ = context.Operators.Equal(x_, "active");
-            bool? z_;
-            // CQL 'and' (29:23-30:50): right operand skipped when left is false
-            if (y_ is false)
-            {
-                z_ = false;
+            Code<MedicationRequest.MedicationrequestStatus> x_ = DementiaMed?.StatusElement;
+            string y_ = FHIRHelpers_4_0_001.Instance.ToString(context, x_);
+            bool? z_ = context.Operators.Equal(y_, "active");
+
+            bool? aa_() {
+                Code<MedicationRequest.MedicationRequestIntent> ac_ = DementiaMed?.IntentElement;
+                string ad_ = FHIRHelpers_4_0_001.Instance.ToString(context, ac_);
+                bool? ae_ = context.Operators.Equal(ad_, "order");
+                return (bool?)((CqlBoolean)ae_);
             }
-            else
-            {
-                Code<MedicationRequest.MedicationRequestIntent> aa_ = DementiaMed?.IntentElement;
-                string ab_ = FHIRHelpers_4_0_001.Instance.ToString(context, aa_);
-                bool? ac_ = context.Operators.Equal(ab_, "order");
-                z_ = y_ & ac_;
+
+
+            bool? ab_() {
+                CqlInterval<CqlDateTime> af_ = CumulativeMedicationDurationFHIR4_1_0_000.Instance.MedicationPeriod(context, DementiaMed);
+                CqlInterval<CqlDateTime> ag_ = this.Measurement_Period(context);
+                CqlDateTime ah_ = context.Operators.Start(ag_);
+                CqlQuantity ai_ = context.Operators.Quantity(1m, "year");
+                CqlDateTime aj_ = context.Operators.Subtract(ah_, ai_);
+                CqlDateTime ak_ = context.Operators.End(ag_);
+                CqlInterval<CqlDateTime> al_ = context.Operators.Interval(aj_, ak_, true, true);
+                bool? am_ = context.Operators.Overlaps(af_, al_, (string)default);
+                return (bool?)((CqlBoolean)am_);
             }
-            // CQL 'and' (29:17-32:46): right operand skipped when left is false
-            if (z_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                CqlInterval<CqlDateTime> ad_ = CumulativeMedicationDurationFHIR4_1_0_000.Instance.MedicationPeriod(context, DementiaMed);
-                CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
-                CqlDateTime af_ = context.Operators.Start(ae_);
-                CqlQuantity ag_ = context.Operators.Quantity(1m, "year");
-                CqlDateTime ah_ = context.Operators.Subtract(af_, ag_);
-                CqlDateTime ai_ = context.Operators.End(ae_);
-                CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ah_, ai_, true, true);
-                bool? ak_ = context.Operators.Overlaps(ad_, aj_, (string)default);
-                return z_ & ak_;
-            }
+
+            return (bool?)(/* CQL 'and' (29:17-32:46) */ (/* CQL 'and' (29:23-30:50) */ ((CqlBoolean)z_
+                && (CqlBoolean)aa_())
+                && (CqlBoolean)ab_()));
         }
 
         IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
@@ -209,28 +201,26 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             Code<Encounter.EncounterStatus> j_ = LongTermFacilityEncounter?.StatusElement;
             string k_ = FHIRHelpers_4_0_001.Instance.ToString(context, j_);
             bool? l_ = context.Operators.Equal(k_, "finished");
-            // CQL 'and' (37:17-38:116): right operand skipped when left is false
-            if (l_ is false)
-            {
-                return false;
+
+            bool? m_() {
+                Period n_ = LongTermFacilityEncounter?.Period;
+                CqlInterval<CqlDateTime> o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, n_);
+                CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
+                bool? q_ = context.Operators.Overlaps(o_, p_, (string)default);
+                return (bool?)((CqlBoolean)q_);
             }
-            else
-            {
-                Period m_ = LongTermFacilityEncounter?.Period;
-                CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, m_);
-                CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
-                bool? p_ = context.Operators.Overlaps(n_, o_, (string)default);
-                return l_ & p_;
-            }
+
+            return (bool?)(/* CQL 'and' (37:17-38:116) */ ((CqlBoolean)l_
+                && (CqlBoolean)m_()));
         }
 
 
         CqlInterval<CqlDateTime> g_(Encounter LongTermFacilityEncounter) {
-            Period q_ = LongTermFacilityEncounter?.Period;
-            CqlInterval<CqlDateTime> r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, q_);
-            CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-            CqlInterval<CqlDateTime> t_ = context.Operators.Intersect<CqlDateTime>(r_, s_);
-            return t_;
+            Period r_ = LongTermFacilityEncounter?.Period;
+            CqlInterval<CqlDateTime> s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, r_);
+            CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
+            CqlInterval<CqlDateTime> u_ = context.Operators.Intersect<CqlDateTime>(s_, t_);
+            return u_;
         }
 
         IEnumerable<CqlInterval<CqlDateTime>> h_ = context.Operators.WhereSelect<Encounter, CqlInterval<CqlDateTime>>(e_, f_, g_);
@@ -275,34 +265,30 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             bool? u_(Condition AdvancedIllnessDiagnosis) {
                 IEnumerable<Condition> w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.EncounterDiagnosis(context, OutpatientEncounter);
                 bool? x_ = context.Operators.In<Condition>(AdvancedIllnessDiagnosis, w_);
-                // CQL 'and' (84:29-86:47): right operand skipped when left is false
-                if (x_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    Period y_ = OutpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, y_);
-                    CqlDateTime aa_ = context.Operators.Start(z_);
-                    CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
-                    CqlDateTime ac_ = context.Operators.End(ab_);
-                    CqlQuantity ad_ = context.Operators.Quantity(2m, "years");
-                    CqlDateTime ae_ = context.Operators.Subtract(ac_, ad_);
-                    CqlInterval<CqlDateTime> af_ = context.Operators.Interval(ae_, ac_, true, true);
-                    bool? ag_ = context.Operators.In<CqlDateTime>(aa_, af_, (string)default);
-                    bool? ah_;
-                    // CQL 'and' (85:25-86:47): right operand skipped when left is false
-                    if (ag_ is false)
-                    {
-                        ah_ = false;
+
+                bool? y_() {
+                    Period z_ = OutpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> aa_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, z_);
+                    CqlDateTime ab_ = context.Operators.Start(aa_);
+                    CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
+                    CqlDateTime ad_ = context.Operators.End(ac_);
+                    CqlQuantity ae_ = context.Operators.Quantity(2m, "years");
+                    CqlDateTime af_ = context.Operators.Subtract(ad_, ae_);
+                    CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(af_, ad_, true, true);
+                    bool? ah_ = context.Operators.In<CqlDateTime>(ab_, ag_, (string)default);
+
+                    bool? ai_() {
+                        CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
+                        CqlDateTime ak_ = context.Operators.End(aj_);
+                        return (bool?)((CqlBoolean)(!((bool?)(ak_ is null))));
                     }
-                    else
-                    {
-                        ah_ = ag_ & (!((bool?)(ac_ is null)));
-                    }
-                    return x_ & ah_;
+
+                    return (bool?)(/* CQL 'and' (85:25-86:47) */ ((CqlBoolean)ah_
+                        && (CqlBoolean)ai_()));
                 }
+
+                return (bool?)(/* CQL 'and' (84:29-86:47) */ ((CqlBoolean)x_
+                    && (CqlBoolean)y_()));
             }
 
             bool? v_ = context.Operators.WhereAny<Condition>(t_, u_);
@@ -390,15 +376,8 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             CqlDateTime m_ = context.Operators.Add(j_, k_);
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(l_, m_, true, true);
             bool? o_ = context.Operators.In<CqlDateTime>(i_, n_, (string)default);
-            // CQL 'and' (57:17-58:69): right operand skipped when left is false
-            if (o_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                return o_ & (!((bool?)(j_ is null)));
-            }
+            return (bool?)(/* CQL 'and' (57:17-58:69) */ ((CqlBoolean)o_
+                && (CqlBoolean)(!((bool?)((context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2)) is null)))));
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?> e_ = context.Operators.SelectWhere<ValueTuple<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>, (CqlTupleMetadata, CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?>(b_, c_, d_);
@@ -468,34 +447,30 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             bool? l_(Condition AdvancedIllnessDiagnosis) {
                 IEnumerable<Condition> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.EncounterDiagnosis(context, InpatientEncounter);
                 bool? o_ = context.Operators.In<Condition>(AdvancedIllnessDiagnosis, n_);
-                // CQL 'and' (73:29-75:47): right operand skipped when left is false
-                if (o_ is false)
-                {
-                    return false;
-                }
-                else
-                {
-                    Period p_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, p_);
-                    CqlDateTime r_ = context.Operators.Start(q_);
-                    CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                    CqlDateTime t_ = context.Operators.End(s_);
-                    CqlQuantity u_ = context.Operators.Quantity(2m, "years");
-                    CqlDateTime v_ = context.Operators.Subtract(t_, u_);
-                    CqlInterval<CqlDateTime> w_ = context.Operators.Interval(v_, t_, true, true);
-                    bool? x_ = context.Operators.In<CqlDateTime>(r_, w_, (string)default);
-                    bool? y_;
-                    // CQL 'and' (74:25-75:47): right operand skipped when left is false
-                    if (x_ is false)
-                    {
-                        y_ = false;
+
+                bool? p_() {
+                    Period q_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, q_);
+                    CqlDateTime s_ = context.Operators.Start(r_);
+                    CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
+                    CqlDateTime u_ = context.Operators.End(t_);
+                    CqlQuantity v_ = context.Operators.Quantity(2m, "years");
+                    CqlDateTime w_ = context.Operators.Subtract(u_, v_);
+                    CqlInterval<CqlDateTime> x_ = context.Operators.Interval(w_, u_, true, true);
+                    bool? y_ = context.Operators.In<CqlDateTime>(s_, x_, (string)default);
+
+                    bool? z_() {
+                        CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
+                        CqlDateTime ab_ = context.Operators.End(aa_);
+                        return (bool?)((CqlBoolean)(!((bool?)(ab_ is null))));
                     }
-                    else
-                    {
-                        y_ = x_ & (!((bool?)(t_ is null)));
-                    }
-                    return o_ & y_;
+
+                    return (bool?)(/* CQL 'and' (74:25-75:47) */ ((CqlBoolean)y_
+                        && (CqlBoolean)z_()));
                 }
+
+                return (bool?)(/* CQL 'and' (73:29-75:47) */ ((CqlBoolean)o_
+                    && (CqlBoolean)p_()));
             }
 
             bool? m_ = context.Operators.WhereAny<Condition>(k_, l_);
@@ -520,172 +495,147 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
         IEnumerable<DeviceRequest> c_ = context.Operators.Union<DeviceRequest>(b_, b_);
 
         bool? d_(DeviceRequest FrailtyDeviceOrder) {
-            Code<RequestStatus> i_ = FrailtyDeviceOrder?.StatusElement;
-            string j_ = FHIRHelpers_4_0_001.Instance.ToString(context, i_);
-            string[] k_ = [
+            Code<RequestStatus> j_ = FrailtyDeviceOrder?.StatusElement;
+            string k_ = FHIRHelpers_4_0_001.Instance.ToString(context, j_);
+            string[] l_ = [
                 "active",
                 "on-hold",
                 "completed",
             ];
-            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
-            bool? m_;
-            // CQL 'and' (110:23-111:57): right operand skipped when left is false
-            if (l_ is false)
-            {
-                m_ = false;
+            bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
+
+            bool? n_() {
+                Code<RequestIntent> p_ = FrailtyDeviceOrder?.IntentElement;
+                string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_);
+                bool? r_ = context.Operators.Equal(q_, "order");
+                return (bool?)((CqlBoolean)r_);
             }
-            else
-            {
-                Code<RequestIntent> n_ = FrailtyDeviceOrder?.IntentElement;
-                string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
-                bool? p_ = context.Operators.Equal(o_, "order");
-                m_ = l_ & p_;
+
+
+            bool? o_() {
+                CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
+                FhirDateTime t_ = FrailtyDeviceOrder?.AuthoredOnElement;
+                CqlInterval<CqlDateTime> u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, t_);
+                bool? v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(s_, u_, (string)default);
+                return (bool?)((CqlBoolean)v_);
             }
-            // CQL 'and' (110:17-112:111): right operand skipped when left is false
-            if (m_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-                FhirDateTime r_ = FrailtyDeviceOrder?.AuthoredOnElement;
-                CqlInterval<CqlDateTime> s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, r_);
-                bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, (string)default);
-                return m_ & t_;
-            }
+
+            return (bool?)(/* CQL 'and' (110:17-112:111) */ (/* CQL 'and' (110:23-111:57) */ ((CqlBoolean)m_
+                && (CqlBoolean)n_())
+                && (CqlBoolean)o_()));
         }
 
         bool? e_ = context.Operators.WhereAny<DeviceRequest>(c_, d_);
-        bool? f_;
-        // CQL 'or' (109:3-117:15): right operand skipped when left is true
-        if (e_ is true)
-        {
-            f_ = true;
-        }
-        else
-        {
-            IEnumerable<Observation> u_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
-            bool? v_(Observation FrailtyDeviceApplied) {
-                Code<ObservationStatus> x_ = FrailtyDeviceApplied?.StatusElement;
-                string y_ = FHIRHelpers_4_0_001.Instance.ToString(context, x_);
-                string[] z_ = [
+        bool? f_() {
+            CqlValueSet w_ = this.Frailty_Device(context);
+            IEnumerable<Observation> x_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, w_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+
+            bool? y_(Observation FrailtyDeviceApplied) {
+                Code<ObservationStatus> aa_ = FrailtyDeviceApplied?.StatusElement;
+                string ab_ = FHIRHelpers_4_0_001.Instance.ToString(context, aa_);
+                string[] ac_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
-                // CQL 'and' (115:19-116:116): right operand skipped when left is false
-                if (aa_ is false)
-                {
-                    return false;
+                bool? ad_ = context.Operators.In<string>(ab_, (IEnumerable<string>)ac_);
+
+                bool? ae_() {
+                    DataType af_ = FrailtyDeviceApplied?.Effective;
+                    CqlInterval<CqlDateTime> ag_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, af_);
+                    CqlInterval<CqlDateTime> ah_ = this.Measurement_Period(context);
+                    bool? ai_ = context.Operators.Overlaps(ag_, ah_, (string)default);
+                    return (bool?)((CqlBoolean)ai_);
                 }
-                else
-                {
-                    DataType ab_ = FrailtyDeviceApplied?.Effective;
-                    CqlInterval<CqlDateTime> ac_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ab_);
-                    CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
-                    bool? ae_ = context.Operators.Overlaps(ac_, ad_, (string)default);
-                    return aa_ & ae_;
-                }
+
+                return (bool?)(/* CQL 'and' (115:19-116:116) */ ((CqlBoolean)ad_
+                    && (CqlBoolean)ae_()));
             }
 
-            bool? w_ = context.Operators.WhereAny<Observation>(u_, v_);
-            f_ = e_ | w_;
+            bool? z_ = context.Operators.WhereAny<Observation>(x_, y_);
+            return (bool?)((CqlBoolean)z_);
         }
-        bool? g_;
-        // CQL 'or' (109:3-120:13): right operand skipped when left is true
-        if (f_ is true)
-        {
-            g_ = true;
-        }
-        else
-        {
-            CqlValueSet af_ = this.Frailty_Diagnosis(context);
-            IEnumerable<Condition> ag_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, af_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
-            bool? ah_(Condition FrailtyDiagnosis) {
-                CqlInterval<CqlDateTime> aj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, FrailtyDiagnosis);
-                CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
-                bool? al_ = context.Operators.Overlaps(aj_, ak_, (string)default);
-                return al_;
+
+        bool? g_() {
+            CqlValueSet aj_ = this.Frailty_Diagnosis(context);
+            IEnumerable<Condition> ak_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+
+            bool? al_(Condition FrailtyDiagnosis) {
+                CqlInterval<CqlDateTime> an_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, FrailtyDiagnosis);
+                CqlInterval<CqlDateTime> ao_ = this.Measurement_Period(context);
+                bool? ap_ = context.Operators.Overlaps(an_, ao_, (string)default);
+                return ap_;
             }
 
-            bool? ai_ = context.Operators.WhereAny<Condition>(ag_, ah_);
-            g_ = f_ | ai_;
+            bool? am_ = context.Operators.WhereAny<Condition>(ak_, al_);
+            return (bool?)((CqlBoolean)am_);
         }
-        bool? h_;
-        // CQL 'or' (109:3-124:15): right operand skipped when left is true
-        if (g_ is true)
-        {
-            h_ = true;
-        }
-        else
-        {
-            CqlValueSet am_ = this.Frailty_Encounter(context);
-            IEnumerable<Encounter> an_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
-            bool? ao_(Encounter FrailtyEncounter) {
-                Code<Encounter.EncounterStatus> aq_ = FrailtyEncounter?.StatusElement;
-                string ar_ = FHIRHelpers_4_0_001.Instance.ToString(context, aq_);
-                bool? as_ = context.Operators.Equal(ar_, "finished");
-                // CQL 'and' (122:19-123:109): right operand skipped when left is false
-                if (as_ is false)
-                {
-                    return false;
+
+        bool? h_() {
+            CqlValueSet aq_ = this.Frailty_Encounter(context);
+            IEnumerable<Encounter> ar_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aq_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+
+            bool? as_(Encounter FrailtyEncounter) {
+                Code<Encounter.EncounterStatus> au_ = FrailtyEncounter?.StatusElement;
+                string av_ = FHIRHelpers_4_0_001.Instance.ToString(context, au_);
+                bool? aw_ = context.Operators.Equal(av_, "finished");
+
+                bool? ax_() {
+                    Period ay_ = FrailtyEncounter?.Period;
+                    CqlInterval<CqlDateTime> az_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ay_);
+                    CqlInterval<CqlDateTime> ba_ = this.Measurement_Period(context);
+                    bool? bb_ = context.Operators.Overlaps(az_, ba_, (string)default);
+                    return (bool?)((CqlBoolean)bb_);
                 }
-                else
-                {
-                    Period at_ = FrailtyEncounter?.Period;
-                    CqlInterval<CqlDateTime> au_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, at_);
-                    CqlInterval<CqlDateTime> av_ = this.Measurement_Period(context);
-                    bool? aw_ = context.Operators.Overlaps(au_, av_, (string)default);
-                    return as_ & aw_;
-                }
+
+                return (bool?)(/* CQL 'and' (122:19-123:109) */ ((CqlBoolean)aw_
+                    && (CqlBoolean)ax_()));
             }
 
-            bool? ap_ = context.Operators.WhereAny<Encounter>(an_, ao_);
-            h_ = g_ | ap_;
+            bool? at_ = context.Operators.WhereAny<Encounter>(ar_, as_);
+            return (bool?)((CqlBoolean)at_);
         }
-        // CQL 'or' (109:3-128:15): right operand skipped when left is true
-        if (h_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            CqlValueSet ax_ = this.Frailty_Symptom(context);
-            IEnumerable<Observation> ay_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ax_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
-            bool? az_(Observation FrailtySymptom) {
-                Code<ObservationStatus> bb_ = FrailtySymptom?.StatusElement;
-                string bc_ = FHIRHelpers_4_0_001.Instance.ToString(context, bb_);
-                string[] bd_ = [
+
+        bool? i_() {
+            CqlValueSet bc_ = this.Frailty_Symptom(context);
+            IEnumerable<Observation> bd_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, bc_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+
+            bool? be_(Observation FrailtySymptom) {
+                Code<ObservationStatus> bg_ = FrailtySymptom?.StatusElement;
+                string bh_ = FHIRHelpers_4_0_001.Instance.ToString(context, bg_);
+                string[] bi_ = [
                     "preliminary",
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? be_ = context.Operators.In<string>(bc_, (IEnumerable<string>)bd_);
-                // CQL 'and' (126:19-127:110): right operand skipped when left is false
-                if (be_ is false)
-                {
-                    return false;
+                bool? bj_ = context.Operators.In<string>(bh_, (IEnumerable<string>)bi_);
+
+                bool? bk_() {
+                    DataType bl_ = FrailtySymptom?.Effective;
+                    CqlInterval<CqlDateTime> bm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bl_);
+                    CqlInterval<CqlDateTime> bn_ = this.Measurement_Period(context);
+                    bool? bo_ = context.Operators.Overlaps(bm_, bn_, (string)default);
+                    return (bool?)((CqlBoolean)bo_);
                 }
-                else
-                {
-                    DataType bf_ = FrailtySymptom?.Effective;
-                    CqlInterval<CqlDateTime> bg_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bf_);
-                    CqlInterval<CqlDateTime> bh_ = this.Measurement_Period(context);
-                    bool? bi_ = context.Operators.Overlaps(bg_, bh_, (string)default);
-                    return be_ & bi_;
-                }
+
+                return (bool?)(/* CQL 'and' (126:19-127:110) */ ((CqlBoolean)bj_
+                    && (CqlBoolean)bk_()));
             }
 
-            bool? ba_ = context.Operators.WhereAny<Observation>(ay_, az_);
-            return h_ | ba_;
+            bool? bf_ = context.Operators.WhereAny<Observation>(bd_, be_);
+            return (bool?)((CqlBoolean)bf_);
         }
+
+        return (bool?)(/* CQL 'or' (109:3-128:15) */ (/* CQL 'or' (109:3-124:15) */ (/* CQL 'or' (109:3-120:13) */ (/* CQL 'or' (109:3-117:15) */ ((CqlBoolean)e_
+            || (CqlBoolean)f_())
+            || (CqlBoolean)g_())
+            || (CqlBoolean)h_())
+            || (CqlBoolean)i_()));
     }
 
 
@@ -707,74 +657,48 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(65, 79, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        bool? k_;
-        // CQL 'and' (89:5-90:55): right operand skipped when left is false
-        if (j_ is false)
-        {
-            k_ = false;
-        }
-        else
-        {
-            bool? m_ = this.Has_Criteria_Indicating_Frailty(context);
-            k_ = j_ & m_;
-        }
-        bool? l_;
-        // CQL 'and' (89:3-95:15): right operand skipped when left is false
-        if (k_ is false)
-        {
-            l_ = false;
-        }
-        else
-        {
-            IEnumerable<Encounter> n_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service(context);
-            bool? o_ = context.Operators.Exists<Encounter>(n_);
-            bool? p_;
-            // CQL 'or' (91:25-92:79): right operand skipped when left is true
-            if (o_ is true)
-            {
-                p_ = true;
+
+        bool? k_() {
+            IEnumerable<Encounter> m_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service(context);
+            bool? n_ = context.Operators.Exists<Encounter>(m_);
+
+            bool? o_() {
+                IEnumerable<Encounter> q_ = this.Inpatient_Encounter_with_Advanced_Illness(context);
+                bool? r_ = context.Operators.Exists<Encounter>(q_);
+                return (bool?)((CqlBoolean)r_);
             }
-            else
-            {
-                IEnumerable<Encounter> r_ = this.Inpatient_Encounter_with_Advanced_Illness(context);
-                bool? s_ = context.Operators.Exists<Encounter>(r_);
-                p_ = o_ | s_;
+
+
+            bool? p_() {
+                IEnumerable<MedicationRequest> s_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period(context);
+                bool? t_ = context.Operators.Exists<MedicationRequest>(s_);
+                return (bool?)((CqlBoolean)t_);
             }
-            bool? q_;
-            // CQL 'or' (91:23-94:19): right operand skipped when left is true
-            if (p_ is true)
-            {
-                q_ = true;
-            }
-            else
-            {
-                IEnumerable<MedicationRequest> t_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period(context);
-                bool? u_ = context.Operators.Exists<MedicationRequest>(t_);
-                q_ = p_ | u_;
-            }
-            l_ = k_ & q_;
+
+            return (bool?)(/* CQL 'or' (91:23-94:19) */ (/* CQL 'or' (91:25-92:79) */ ((CqlBoolean)n_
+                || (CqlBoolean)o_())
+                || (CqlBoolean)p_()));
         }
-        // CQL 'or' (89:3-98:17): right operand skipped when left is true
-        if (l_ is true)
-        {
-            return true;
+
+
+        bool? l_() {
+            Patient u_ = this.Patient(context);
+            Date v_ = u_?.BirthDateElement;
+            string w_ = v_?.Value;
+            CqlDate x_ = context.Operators.ConvertStringToDate(w_);
+            CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            CqlDate aa_ = context.Operators.DateFrom(z_);
+            int? ab_ = context.Operators.CalculateAgeAt(x_, aa_, "year");
+            bool? ac_ = context.Operators.GreaterOrEqual(ab_, 80);
+            return (bool?)(/* CQL 'and' (96:20-98:17) */ ((CqlBoolean)ac_
+                && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context))));
         }
-        else
-        {
-            bool? v_ = context.Operators.GreaterOrEqual(h_, 80);
-            bool? w_;
-            // CQL 'and' (96:20-98:17): right operand skipped when left is false
-            if (v_ is false)
-            {
-                w_ = false;
-            }
-            else
-            {
-                bool? x_ = this.Has_Criteria_Indicating_Frailty(context);
-                w_ = v_ & x_;
-            }
-            return l_ | w_;
-        }
+
+        return (bool?)(/* CQL 'or' (89:3-98:17) */ (/* CQL 'and' (89:3-95:15) */ (/* CQL 'and' (89:5-90:55) */ ((CqlBoolean)j_
+            && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)))
+            && (CqlBoolean)k_())
+            || (CqlBoolean)l_()));
     }
 
 
@@ -795,52 +719,32 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 65);
-        bool? j_;
-        // CQL 'and' (101:3-102:53): right operand skipped when left is false
-        if (i_ is false)
-        {
-            j_ = false;
-        }
-        else
-        {
-            bool? k_ = this.Has_Criteria_Indicating_Frailty(context);
-            j_ = i_ & k_;
-        }
-        // CQL 'and' (101:3-106:17): right operand skipped when left is false
-        if (j_ is false)
-        {
-            return false;
-        }
-        else
-        {
-            IEnumerable<Encounter> l_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service(context);
-            bool? m_ = context.Operators.Exists<Encounter>(l_);
-            bool? n_;
-            // CQL 'or' (103:23-104:77): right operand skipped when left is true
-            if (m_ is true)
-            {
-                n_ = true;
+
+        bool? j_() {
+            IEnumerable<Encounter> k_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service(context);
+            bool? l_ = context.Operators.Exists<Encounter>(k_);
+
+            bool? m_() {
+                IEnumerable<Encounter> o_ = this.Inpatient_Encounter_with_Advanced_Illness(context);
+                bool? p_ = context.Operators.Exists<Encounter>(o_);
+                return (bool?)((CqlBoolean)p_);
             }
-            else
-            {
-                IEnumerable<Encounter> p_ = this.Inpatient_Encounter_with_Advanced_Illness(context);
-                bool? q_ = context.Operators.Exists<Encounter>(p_);
-                n_ = m_ | q_;
+
+
+            bool? n_() {
+                IEnumerable<MedicationRequest> q_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period(context);
+                bool? r_ = context.Operators.Exists<MedicationRequest>(q_);
+                return (bool?)((CqlBoolean)r_);
             }
-            bool? o_;
-            // CQL 'or' (103:21-106:17): right operand skipped when left is true
-            if (n_ is true)
-            {
-                o_ = true;
-            }
-            else
-            {
-                IEnumerable<MedicationRequest> r_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period(context);
-                bool? s_ = context.Operators.Exists<MedicationRequest>(r_);
-                o_ = n_ | s_;
-            }
-            return j_ & o_;
+
+            return (bool?)(/* CQL 'or' (103:21-106:17) */ (/* CQL 'or' (103:23-104:77) */ ((CqlBoolean)l_
+                || (CqlBoolean)m_())
+                || (CqlBoolean)n_()));
         }
+
+        return (bool?)(/* CQL 'and' (101:3-106:17) */ (/* CQL 'and' (101:3-102:53) */ ((CqlBoolean)i_
+            && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)))
+            && (CqlBoolean)j_()));
     }
 
 

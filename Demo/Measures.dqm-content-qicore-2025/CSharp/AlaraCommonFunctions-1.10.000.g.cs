@@ -152,243 +152,177 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         decimal? b_ = context.Operators.ConvertIntegerToDecimal(64);
         decimal? c_ = context.Operators.ConvertIntegerToDecimal(598);
         bool? d_ = this.qualifies(context, Result, a_, b_, c_);
-        bool? e_;
-        // CQL 'or' (33:3-34:67): right operand skipped when left is true
-        if (d_ is true)
-        {
-            e_ = true;
+
+        bool? e_() {
+            CqlCode v_ = this.Abdomen_and_Pelvis_Routine_Dose(context);
+            decimal? w_ = context.Operators.ConvertIntegerToDecimal(29);
+            decimal? x_ = context.Operators.ConvertIntegerToDecimal(644);
+            bool? y_ = this.qualifies(context, Result, v_, w_, x_);
+            return (bool?)((CqlBoolean)y_);
         }
-        else
-        {
-            CqlCode u_ = this.Abdomen_and_Pelvis_Routine_Dose(context);
-            decimal? v_ = context.Operators.ConvertIntegerToDecimal(29);
-            decimal? w_ = context.Operators.ConvertIntegerToDecimal(644);
-            bool? x_ = this.qualifies(context, Result, u_, v_, w_);
-            e_ = d_ | x_;
+
+
+        bool? f_() {
+            CqlCode z_ = this.Abdomen_and_Pelvis_High_Dose(context);
+            decimal? aa_ = context.Operators.ConvertIntegerToDecimal(29);
+            decimal? ab_ = context.Operators.ConvertIntegerToDecimal(1260);
+            bool? ac_ = this.qualifies(context, Result, z_, aa_, ab_);
+            return (bool?)((CqlBoolean)ac_);
         }
-        bool? f_;
-        // CQL 'or' (33:3-35:65): right operand skipped when left is true
-        if (e_ is true)
-        {
-            f_ = true;
+
+
+        bool? g_() {
+            CqlCode ad_ = this.Cardiac_Low_Dose(context);
+            decimal? ae_ = context.Operators.ConvertIntegerToDecimal(55);
+            decimal? af_ = context.Operators.ConvertIntegerToDecimal(93);
+            bool? ag_ = this.qualifies(context, Result, ad_, ae_, af_);
+            return (bool?)((CqlBoolean)ag_);
         }
-        else
-        {
-            CqlCode y_ = this.Abdomen_and_Pelvis_High_Dose(context);
-            decimal? z_ = context.Operators.ConvertIntegerToDecimal(29);
-            decimal? aa_ = context.Operators.ConvertIntegerToDecimal(1260);
-            bool? ab_ = this.qualifies(context, Result, y_, z_, aa_);
-            f_ = e_ | ab_;
+
+
+        bool? h_() {
+            CqlCode ah_ = this.Cardiac_Routine_Dose(context);
+            decimal? ai_ = context.Operators.ConvertIntegerToDecimal(32);
+            decimal? aj_ = context.Operators.ConvertIntegerToDecimal(576);
+            bool? ak_ = this.qualifies(context, Result, ah_, ai_, aj_);
+            return (bool?)((CqlBoolean)ak_);
         }
-        bool? g_;
-        // CQL 'or' (33:3-36:51): right operand skipped when left is true
-        if (f_ is true)
-        {
-            g_ = true;
+
+
+        bool? i_() {
+            CqlCode al_ = this.Chest_Low_Dose(context);
+            decimal? am_ = context.Operators.ConvertIntegerToDecimal(55);
+            decimal? an_ = context.Operators.ConvertIntegerToDecimal(377);
+            bool? ao_ = this.qualifies(context, Result, al_, am_, an_);
+            return (bool?)((CqlBoolean)ao_);
         }
-        else
-        {
-            CqlCode ac_ = this.Cardiac_Low_Dose(context);
-            decimal? ad_ = context.Operators.ConvertIntegerToDecimal(55);
-            decimal? ae_ = context.Operators.ConvertIntegerToDecimal(93);
-            bool? af_ = this.qualifies(context, Result, ac_, ad_, ae_);
-            g_ = f_ | af_;
+
+
+        bool? j_() {
+            CqlCode ap_ = this.Chest_Routine_Dose(context);
+            decimal? aq_ = context.Operators.ConvertIntegerToDecimal(49);
+            decimal? ar_ = context.Operators.ConvertIntegerToDecimal(377);
+            bool? as_ = this.qualifies(context, Result, ap_, aq_, ar_);
+            return (bool?)((CqlBoolean)as_);
         }
-        bool? h_;
-        // CQL 'or' (33:3-37:56): right operand skipped when left is true
-        if (g_ is true)
-        {
-            h_ = true;
+
+
+        bool? k_() {
+            CqlCode at_ = this.Cardiac_High_Dose_or_Chest_High_Dose(context);
+            decimal? au_ = context.Operators.ConvertIntegerToDecimal(49);
+            decimal? av_ = context.Operators.ConvertIntegerToDecimal(1282);
+            bool? aw_ = this.qualifies(context, Result, at_, au_, av_);
+            return (bool?)((CqlBoolean)aw_);
         }
-        else
-        {
-            CqlCode ag_ = this.Cardiac_Routine_Dose(context);
-            decimal? ah_ = context.Operators.ConvertIntegerToDecimal(32);
-            decimal? ai_ = context.Operators.ConvertIntegerToDecimal(576);
-            bool? aj_ = this.qualifies(context, Result, ag_, ah_, ai_);
-            h_ = g_ | aj_;
+
+
+        bool? l_() {
+            CqlCode ax_ = this.Head_Low_Dose(context);
+            decimal? ay_ = context.Operators.ConvertIntegerToDecimal(115);
+            decimal? az_ = context.Operators.ConvertIntegerToDecimal(582);
+            bool? ba_ = this.qualifies(context, Result, ax_, ay_, az_);
+            return (bool?)((CqlBoolean)ba_);
         }
-        bool? i_;
-        // CQL 'or' (33:3-38:50): right operand skipped when left is true
-        if (h_ is true)
-        {
-            i_ = true;
+
+
+        bool? m_() {
+            CqlCode bb_ = this.Head_Routine_Dose(context);
+            decimal? bc_ = context.Operators.ConvertIntegerToDecimal(115);
+            decimal? bd_ = context.Operators.ConvertIntegerToDecimal(1025);
+            bool? be_ = this.qualifies(context, Result, bb_, bc_, bd_);
+            return (bool?)((CqlBoolean)be_);
         }
-        else
-        {
-            CqlCode ak_ = this.Chest_Low_Dose(context);
-            decimal? al_ = context.Operators.ConvertIntegerToDecimal(55);
-            decimal? am_ = context.Operators.ConvertIntegerToDecimal(377);
-            bool? an_ = this.qualifies(context, Result, ak_, al_, am_);
-            i_ = h_ | an_;
+
+
+        bool? n_() {
+            CqlCode bf_ = this.Head_High_Dose(context);
+            decimal? bg_ = context.Operators.ConvertIntegerToDecimal(115);
+            decimal? bh_ = context.Operators.ConvertIntegerToDecimal(1832);
+            bool? bi_ = this.qualifies(context, Result, bf_, bg_, bh_);
+            return (bool?)((CqlBoolean)bi_);
         }
-        bool? j_;
-        // CQL 'or' (33:3-39:54): right operand skipped when left is true
-        if (i_ is true)
-        {
-            j_ = true;
+
+
+        bool? o_() {
+            CqlCode bj_ = this.Extremity(context);
+            decimal? bk_ = context.Operators.ConvertIntegerToDecimal(73);
+            decimal? bl_ = context.Operators.ConvertIntegerToDecimal(320);
+            bool? bm_ = this.qualifies(context, Result, bj_, bk_, bl_);
+            return (bool?)((CqlBoolean)bm_);
         }
-        else
-        {
-            CqlCode ao_ = this.Chest_Routine_Dose(context);
-            decimal? ap_ = context.Operators.ConvertIntegerToDecimal(49);
-            decimal? aq_ = context.Operators.ConvertIntegerToDecimal(377);
-            bool? ar_ = this.qualifies(context, Result, ao_, ap_, aq_);
-            j_ = i_ | ar_;
+
+
+        bool? p_() {
+            CqlCode bn_ = this.Neck_or_Cervical_Spine(context);
+            decimal? bo_ = context.Operators.ConvertIntegerToDecimal(25);
+            decimal? bp_ = context.Operators.ConvertIntegerToDecimal(1260);
+            bool? bq_ = this.qualifies(context, Result, bn_, bo_, bp_);
+            return (bool?)((CqlBoolean)bq_);
         }
-        bool? k_;
-        // CQL 'or' (33:3-40:73): right operand skipped when left is true
-        if (j_ is true)
-        {
-            k_ = true;
+
+
+        bool? q_() {
+            CqlCode br_ = this.Thoracic_or_Lumbar_Spine(context);
+            decimal? bs_ = context.Operators.ConvertIntegerToDecimal(25);
+            decimal? bt_ = context.Operators.ConvertIntegerToDecimal(1260);
+            bool? bu_ = this.qualifies(context, Result, br_, bs_, bt_);
+            return (bool?)((CqlBoolean)bu_);
         }
-        else
-        {
-            CqlCode as_ = this.Cardiac_High_Dose_or_Chest_High_Dose(context);
-            decimal? at_ = context.Operators.ConvertIntegerToDecimal(49);
-            decimal? au_ = context.Operators.ConvertIntegerToDecimal(1282);
-            bool? av_ = this.qualifies(context, Result, as_, at_, au_);
-            k_ = j_ | av_;
+
+
+        bool? r_() {
+            CqlCode bv_ = this.Simultaneous_Chest_and_Abdomen_and_Pelvis(context);
+            decimal? bw_ = context.Operators.ConvertIntegerToDecimal(29);
+            decimal? bx_ = context.Operators.ConvertIntegerToDecimal(1637);
+            bool? by_ = this.qualifies(context, Result, bv_, bw_, bx_);
+            return (bool?)((CqlBoolean)by_);
         }
-        bool? l_;
-        // CQL 'or' (33:3-41:50): right operand skipped when left is true
-        if (k_ is true)
-        {
-            l_ = true;
+
+
+        bool? s_() {
+            CqlCode bz_ = this.Simultaneous_Thoracic_and_Lumbar_Spine(context);
+            decimal? ca_ = context.Operators.ConvertIntegerToDecimal(25);
+            decimal? cb_ = context.Operators.ConvertIntegerToDecimal(2520);
+            bool? cc_ = this.qualifies(context, Result, bz_, ca_, cb_);
+            return (bool?)((CqlBoolean)cc_);
         }
-        else
-        {
-            CqlCode aw_ = this.Head_Low_Dose(context);
-            decimal? ax_ = context.Operators.ConvertIntegerToDecimal(115);
-            decimal? ay_ = context.Operators.ConvertIntegerToDecimal(582);
-            bool? az_ = this.qualifies(context, Result, aw_, ax_, ay_);
-            l_ = k_ | az_;
+
+
+        bool? t_() {
+            CqlCode cd_ = this.Simultaneous_Head_and_Neck_Routine_Dose(context);
+            decimal? ce_ = context.Operators.ConvertIntegerToDecimal(25);
+            decimal? cf_ = context.Operators.ConvertIntegerToDecimal(2285);
+            bool? cg_ = this.qualifies(context, Result, cd_, ce_, cf_);
+            return (bool?)((CqlBoolean)cg_);
         }
-        bool? m_;
-        // CQL 'or' (33:3-42:55): right operand skipped when left is true
-        if (l_ is true)
-        {
-            m_ = true;
+
+
+        bool? u_() {
+            CqlCode ch_ = this.Simultaneous_Head_and_Neck_High_Dose(context);
+            decimal? ci_ = context.Operators.ConvertIntegerToDecimal(25);
+            decimal? cj_ = context.Operators.ConvertIntegerToDecimal(3092);
+            bool? ck_ = this.qualifies(context, Result, ch_, ci_, cj_);
+            return (bool?)((CqlBoolean)ck_);
         }
-        else
-        {
-            CqlCode ba_ = this.Head_Routine_Dose(context);
-            decimal? bb_ = context.Operators.ConvertIntegerToDecimal(115);
-            decimal? bc_ = context.Operators.ConvertIntegerToDecimal(1025);
-            bool? bd_ = this.qualifies(context, Result, ba_, bb_, bc_);
-            m_ = l_ | bd_;
-        }
-        bool? n_;
-        // CQL 'or' (33:3-43:52): right operand skipped when left is true
-        if (m_ is true)
-        {
-            n_ = true;
-        }
-        else
-        {
-            CqlCode be_ = this.Head_High_Dose(context);
-            decimal? bf_ = context.Operators.ConvertIntegerToDecimal(115);
-            decimal? bg_ = context.Operators.ConvertIntegerToDecimal(1832);
-            bool? bh_ = this.qualifies(context, Result, be_, bf_, bg_);
-            n_ = m_ | bh_;
-        }
-        bool? o_;
-        // CQL 'or' (33:3-44:45): right operand skipped when left is true
-        if (n_ is true)
-        {
-            o_ = true;
-        }
-        else
-        {
-            CqlCode bi_ = this.Extremity(context);
-            decimal? bj_ = context.Operators.ConvertIntegerToDecimal(73);
-            decimal? bk_ = context.Operators.ConvertIntegerToDecimal(320);
-            bool? bl_ = this.qualifies(context, Result, bi_, bj_, bk_);
-            o_ = n_ | bl_;
-        }
-        bool? p_;
-        // CQL 'or' (33:3-45:59): right operand skipped when left is true
-        if (o_ is true)
-        {
-            p_ = true;
-        }
-        else
-        {
-            CqlCode bm_ = this.Neck_or_Cervical_Spine(context);
-            decimal? bn_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? bo_ = context.Operators.ConvertIntegerToDecimal(1260);
-            bool? bp_ = this.qualifies(context, Result, bm_, bn_, bo_);
-            p_ = o_ | bp_;
-        }
-        bool? q_;
-        // CQL 'or' (33:3-46:61): right operand skipped when left is true
-        if (p_ is true)
-        {
-            q_ = true;
-        }
-        else
-        {
-            CqlCode bq_ = this.Thoracic_or_Lumbar_Spine(context);
-            decimal? br_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? bs_ = context.Operators.ConvertIntegerToDecimal(1260);
-            bool? bt_ = this.qualifies(context, Result, bq_, br_, bs_);
-            q_ = p_ | bt_;
-        }
-        bool? r_;
-        // CQL 'or' (33:3-47:78): right operand skipped when left is true
-        if (q_ is true)
-        {
-            r_ = true;
-        }
-        else
-        {
-            CqlCode bu_ = this.Simultaneous_Chest_and_Abdomen_and_Pelvis(context);
-            decimal? bv_ = context.Operators.ConvertIntegerToDecimal(29);
-            decimal? bw_ = context.Operators.ConvertIntegerToDecimal(1637);
-            bool? bx_ = this.qualifies(context, Result, bu_, bv_, bw_);
-            r_ = q_ | bx_;
-        }
-        bool? s_;
-        // CQL 'or' (33:3-48:75): right operand skipped when left is true
-        if (r_ is true)
-        {
-            s_ = true;
-        }
-        else
-        {
-            CqlCode by_ = this.Simultaneous_Thoracic_and_Lumbar_Spine(context);
-            decimal? bz_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? ca_ = context.Operators.ConvertIntegerToDecimal(2520);
-            bool? cb_ = this.qualifies(context, Result, by_, bz_, ca_);
-            s_ = r_ | cb_;
-        }
-        bool? t_;
-        // CQL 'or' (33:3-49:76): right operand skipped when left is true
-        if (s_ is true)
-        {
-            t_ = true;
-        }
-        else
-        {
-            CqlCode cc_ = this.Simultaneous_Head_and_Neck_Routine_Dose(context);
-            decimal? cd_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? ce_ = context.Operators.ConvertIntegerToDecimal(2285);
-            bool? cf_ = this.qualifies(context, Result, cc_, cd_, ce_);
-            t_ = s_ | cf_;
-        }
-        // CQL 'or' (33:3-50:73): right operand skipped when left is true
-        if (t_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            CqlCode cg_ = this.Simultaneous_Head_and_Neck_High_Dose(context);
-            decimal? ch_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? ci_ = context.Operators.ConvertIntegerToDecimal(3092);
-            bool? cj_ = this.qualifies(context, Result, cg_, ch_, ci_);
-            return t_ | cj_;
-        }
+
+        return (bool?)(/* CQL 'or' (33:3-50:73) */ (/* CQL 'or' (33:3-49:76) */ (/* CQL 'or' (33:3-48:75) */ (/* CQL 'or' (33:3-47:78) */ (/* CQL 'or' (33:3-46:61) */ (/* CQL 'or' (33:3-45:59) */ (/* CQL 'or' (33:3-44:45) */ (/* CQL 'or' (33:3-43:52) */ (/* CQL 'or' (33:3-42:55) */ (/* CQL 'or' (33:3-41:50) */ (/* CQL 'or' (33:3-40:73) */ (/* CQL 'or' (33:3-39:54) */ (/* CQL 'or' (33:3-38:50) */ (/* CQL 'or' (33:3-37:56) */ (/* CQL 'or' (33:3-36:51) */ (/* CQL 'or' (33:3-35:65) */ (/* CQL 'or' (33:3-34:67) */ ((CqlBoolean)d_
+            || (CqlBoolean)e_())
+            || (CqlBoolean)f_())
+            || (CqlBoolean)g_())
+            || (CqlBoolean)h_())
+            || (CqlBoolean)i_())
+            || (CqlBoolean)j_())
+            || (CqlBoolean)k_())
+            || (CqlBoolean)l_())
+            || (CqlBoolean)m_())
+            || (CqlBoolean)n_())
+            || (CqlBoolean)o_())
+            || (CqlBoolean)p_())
+            || (CqlBoolean)q_())
+            || (CqlBoolean)r_())
+            || (CqlBoolean)s_())
+            || (CqlBoolean)t_())
+            || (CqlBoolean)u_()));
     }
 
 
@@ -399,29 +333,23 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         object b_ = FHIRHelpers_4_4_000.Instance.ToValue(context, a_);
         CqlConcept c_ = context.Operators.ConvertCodeToConcept(code);
         bool? d_ = context.Operators.Equivalent(b_ as CqlConcept, c_);
-        // CQL 'and' (79:3-82:5): right operand skipped when left is false
-        if (d_ is false)
-        {
-            return false;
-        }
-        else
-        {
-            decimal? e_ = this.globalNoiseValue(context, Result);
-            bool? f_ = context.Operators.GreaterOrEqual(e_, noiseThreshold);
-            bool? g_;
-            // CQL 'or' (80:9-82:5): right operand skipped when left is true
-            if (f_ is true)
-            {
-                g_ = true;
+
+        bool? e_() {
+            decimal? f_ = this.globalNoiseValue(context, Result);
+            bool? g_ = context.Operators.GreaterOrEqual(f_, noiseThreshold);
+
+            bool? h_() {
+                decimal? i_ = this.sizeAdjustedValue(context, Result);
+                bool? j_ = context.Operators.GreaterOrEqual(i_, sizeDoseThreshold);
+                return (bool?)((CqlBoolean)j_);
             }
-            else
-            {
-                decimal? h_ = this.sizeAdjustedValue(context, Result);
-                bool? i_ = context.Operators.GreaterOrEqual(h_, sizeDoseThreshold);
-                g_ = f_ | i_;
-            }
-            return d_ & g_;
+
+            return (bool?)(/* CQL 'or' (80:9-82:5) */ ((CqlBoolean)g_
+                || (CqlBoolean)h_()));
         }
+
+        return (bool?)(/* CQL 'and' (79:3-82:5) */ ((CqlBoolean)d_
+            && (CqlBoolean)e_()));
     }
 
 
@@ -440,42 +368,36 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "corrected",
             ];
             bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
-            bool? l_;
-            // CQL 'and' (96:13-97:49): right operand skipped when left is false
-            if (k_ is false)
-            {
-                l_ = false;
+
+            bool? l_() {
+                CodeableConcept n_ = C?.Code;
+                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
+                CqlCode p_ = this.Calculated_CT_global_noise(context);
+                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+                bool? r_ = context.Operators.Equivalent(o_, q_);
+                return (bool?)((CqlBoolean)r_);
             }
-            else
-            {
-                CodeableConcept m_ = C?.Code;
-                CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
-                CqlCode o_ = this.Calculated_CT_global_noise(context);
-                CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-                bool? q_ = context.Operators.Equivalent(n_, p_);
-                l_ = k_ & q_;
+
+
+            bool? m_() {
+                DataType s_ = C?.Value;
+                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                string u_ = (t_ as CqlQuantity)?.unit;
+                bool? v_ = context.Operators.Equal(u_, "[hnsf'U]");
+                return (bool?)((CqlBoolean)v_);
             }
-            // CQL 'and' (96:7-98:54): right operand skipped when left is false
-            if (l_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType r_ = C?.Value;
-                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                string t_ = (s_ as CqlQuantity)?.unit;
-                bool? u_ = context.Operators.Equal(t_, "[hnsf'U]");
-                return l_ & u_;
-            }
+
+            return (bool?)(/* CQL 'and' (96:7-98:54) */ (/* CQL 'and' (96:13-97:49) */ ((CqlBoolean)k_
+                && (CqlBoolean)l_())
+                && (CqlBoolean)m_()));
         }
 
 
         decimal? c_(Observation.ComponentComponent C) {
-            DataType v_ = C?.Value;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            decimal? x_ = (w_ as CqlQuantity)?.value;
-            return x_;
+            DataType w_ = C?.Value;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            decimal? y_ = (x_ as CqlQuantity)?.value;
+            return y_;
         }
 
         IEnumerable<decimal?> d_ = context.Operators.WhereSelect<Observation.ComponentComponent, decimal?>((IEnumerable<Observation.ComponentComponent>)a_, b_, c_);
@@ -500,42 +422,36 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "corrected",
             ];
             bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
-            bool? l_;
-            // CQL 'and' (112:13-113:55): right operand skipped when left is false
-            if (k_ is false)
-            {
-                l_ = false;
+
+            bool? l_() {
+                CodeableConcept n_ = C?.Code;
+                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
+                CqlCode p_ = this.Calculated_CT_size_adjusted_dose(context);
+                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+                bool? r_ = context.Operators.Equivalent(o_, q_);
+                return (bool?)((CqlBoolean)r_);
             }
-            else
-            {
-                CodeableConcept m_ = C?.Code;
-                CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
-                CqlCode o_ = this.Calculated_CT_size_adjusted_dose(context);
-                CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-                bool? q_ = context.Operators.Equivalent(n_, p_);
-                l_ = k_ & q_;
+
+
+            bool? m_() {
+                DataType s_ = C?.Value;
+                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                string u_ = (t_ as CqlQuantity)?.unit;
+                bool? v_ = context.Operators.Equal(u_, "mGy.cm");
+                return (bool?)((CqlBoolean)v_);
             }
-            // CQL 'and' (112:7-114:51): right operand skipped when left is false
-            if (l_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType r_ = C?.Value;
-                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                string t_ = (s_ as CqlQuantity)?.unit;
-                bool? u_ = context.Operators.Equal(t_, "mGy.cm");
-                return l_ & u_;
-            }
+
+            return (bool?)(/* CQL 'and' (112:7-114:51) */ (/* CQL 'and' (112:13-113:55) */ ((CqlBoolean)k_
+                && (CqlBoolean)l_())
+                && (CqlBoolean)m_()));
         }
 
 
         decimal? c_(Observation.ComponentComponent C) {
-            DataType v_ = C?.Value;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            decimal? x_ = (w_ as CqlQuantity)?.value;
-            return x_;
+            DataType w_ = C?.Value;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            decimal? y_ = (x_ as CqlQuantity)?.value;
+            return y_;
         }
 
         IEnumerable<decimal?> d_ = context.Operators.WhereSelect<Observation.ComponentComponent, decimal?>((IEnumerable<Observation.ComponentComponent>)a_, b_, c_);
@@ -552,243 +468,177 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         decimal? b_ = context.Operators.ConvertIntegerToDecimal(64);
         decimal? c_ = context.Operators.ConvertIntegerToDecimal(598);
         bool? d_ = this.qualifies(context, Result, a_, b_, c_);
-        bool? e_;
-        // CQL 'or' (53:3-54:67): right operand skipped when left is true
-        if (d_ is true)
-        {
-            e_ = true;
+
+        bool? e_() {
+            CqlCode v_ = this.Abdomen_and_Pelvis_Routine_Dose(context);
+            decimal? w_ = context.Operators.ConvertIntegerToDecimal(29);
+            decimal? x_ = context.Operators.ConvertIntegerToDecimal(644);
+            bool? y_ = this.qualifies(context, Result, v_, w_, x_);
+            return (bool?)((CqlBoolean)y_);
         }
-        else
-        {
-            CqlCode u_ = this.Abdomen_and_Pelvis_Routine_Dose(context);
-            decimal? v_ = context.Operators.ConvertIntegerToDecimal(29);
-            decimal? w_ = context.Operators.ConvertIntegerToDecimal(644);
-            bool? x_ = this.qualifies(context, Result, u_, v_, w_);
-            e_ = d_ | x_;
+
+
+        bool? f_() {
+            CqlCode z_ = this.Abdomen_and_Pelvis_High_Dose(context);
+            decimal? aa_ = context.Operators.ConvertIntegerToDecimal(29);
+            decimal? ab_ = context.Operators.ConvertIntegerToDecimal(1260);
+            bool? ac_ = this.qualifies(context, Result, z_, aa_, ab_);
+            return (bool?)((CqlBoolean)ac_);
         }
-        bool? f_;
-        // CQL 'or' (53:3-55:65): right operand skipped when left is true
-        if (e_ is true)
-        {
-            f_ = true;
+
+
+        bool? g_() {
+            CqlCode ad_ = this.Cardiac_Low_Dose(context);
+            decimal? ae_ = context.Operators.ConvertIntegerToDecimal(55);
+            decimal? af_ = context.Operators.ConvertIntegerToDecimal(93);
+            bool? ag_ = this.qualifies(context, Result, ad_, ae_, af_);
+            return (bool?)((CqlBoolean)ag_);
         }
-        else
-        {
-            CqlCode y_ = this.Abdomen_and_Pelvis_High_Dose(context);
-            decimal? z_ = context.Operators.ConvertIntegerToDecimal(29);
-            decimal? aa_ = context.Operators.ConvertIntegerToDecimal(1260);
-            bool? ab_ = this.qualifies(context, Result, y_, z_, aa_);
-            f_ = e_ | ab_;
+
+
+        bool? h_() {
+            CqlCode ah_ = this.Cardiac_Routine_Dose(context);
+            decimal? ai_ = context.Operators.ConvertIntegerToDecimal(32);
+            decimal? aj_ = context.Operators.ConvertIntegerToDecimal(576);
+            bool? ak_ = this.qualifies(context, Result, ah_, ai_, aj_);
+            return (bool?)((CqlBoolean)ak_);
         }
-        bool? g_;
-        // CQL 'or' (53:3-56:51): right operand skipped when left is true
-        if (f_ is true)
-        {
-            g_ = true;
+
+
+        bool? i_() {
+            CqlCode al_ = this.Chest_Low_Dose(context);
+            decimal? am_ = context.Operators.ConvertIntegerToDecimal(55);
+            decimal? an_ = context.Operators.ConvertIntegerToDecimal(377);
+            bool? ao_ = this.qualifies(context, Result, al_, am_, an_);
+            return (bool?)((CqlBoolean)ao_);
         }
-        else
-        {
-            CqlCode ac_ = this.Cardiac_Low_Dose(context);
-            decimal? ad_ = context.Operators.ConvertIntegerToDecimal(55);
-            decimal? ae_ = context.Operators.ConvertIntegerToDecimal(93);
-            bool? af_ = this.qualifies(context, Result, ac_, ad_, ae_);
-            g_ = f_ | af_;
+
+
+        bool? j_() {
+            CqlCode ap_ = this.Chest_Routine_Dose(context);
+            decimal? aq_ = context.Operators.ConvertIntegerToDecimal(49);
+            decimal? ar_ = context.Operators.ConvertIntegerToDecimal(377);
+            bool? as_ = this.qualifies(context, Result, ap_, aq_, ar_);
+            return (bool?)((CqlBoolean)as_);
         }
-        bool? h_;
-        // CQL 'or' (53:3-57:56): right operand skipped when left is true
-        if (g_ is true)
-        {
-            h_ = true;
+
+
+        bool? k_() {
+            CqlCode at_ = this.Cardiac_High_Dose_or_Chest_High_Dose(context);
+            decimal? au_ = context.Operators.ConvertIntegerToDecimal(49);
+            decimal? av_ = context.Operators.ConvertIntegerToDecimal(1282);
+            bool? aw_ = this.qualifies(context, Result, at_, au_, av_);
+            return (bool?)((CqlBoolean)aw_);
         }
-        else
-        {
-            CqlCode ag_ = this.Cardiac_Routine_Dose(context);
-            decimal? ah_ = context.Operators.ConvertIntegerToDecimal(32);
-            decimal? ai_ = context.Operators.ConvertIntegerToDecimal(576);
-            bool? aj_ = this.qualifies(context, Result, ag_, ah_, ai_);
-            h_ = g_ | aj_;
+
+
+        bool? l_() {
+            CqlCode ax_ = this.Head_Low_Dose(context);
+            decimal? ay_ = context.Operators.ConvertIntegerToDecimal(115);
+            decimal? az_ = context.Operators.ConvertIntegerToDecimal(582);
+            bool? ba_ = this.qualifies(context, Result, ax_, ay_, az_);
+            return (bool?)((CqlBoolean)ba_);
         }
-        bool? i_;
-        // CQL 'or' (53:3-58:50): right operand skipped when left is true
-        if (h_ is true)
-        {
-            i_ = true;
+
+
+        bool? m_() {
+            CqlCode bb_ = this.Head_Routine_Dose(context);
+            decimal? bc_ = context.Operators.ConvertIntegerToDecimal(115);
+            decimal? bd_ = context.Operators.ConvertIntegerToDecimal(1025);
+            bool? be_ = this.qualifies(context, Result, bb_, bc_, bd_);
+            return (bool?)((CqlBoolean)be_);
         }
-        else
-        {
-            CqlCode ak_ = this.Chest_Low_Dose(context);
-            decimal? al_ = context.Operators.ConvertIntegerToDecimal(55);
-            decimal? am_ = context.Operators.ConvertIntegerToDecimal(377);
-            bool? an_ = this.qualifies(context, Result, ak_, al_, am_);
-            i_ = h_ | an_;
+
+
+        bool? n_() {
+            CqlCode bf_ = this.Head_High_Dose(context);
+            decimal? bg_ = context.Operators.ConvertIntegerToDecimal(115);
+            decimal? bh_ = context.Operators.ConvertIntegerToDecimal(1832);
+            bool? bi_ = this.qualifies(context, Result, bf_, bg_, bh_);
+            return (bool?)((CqlBoolean)bi_);
         }
-        bool? j_;
-        // CQL 'or' (53:3-59:54): right operand skipped when left is true
-        if (i_ is true)
-        {
-            j_ = true;
+
+
+        bool? o_() {
+            CqlCode bj_ = this.Extremity(context);
+            decimal? bk_ = context.Operators.ConvertIntegerToDecimal(73);
+            decimal? bl_ = context.Operators.ConvertIntegerToDecimal(320);
+            bool? bm_ = this.qualifies(context, Result, bj_, bk_, bl_);
+            return (bool?)((CqlBoolean)bm_);
         }
-        else
-        {
-            CqlCode ao_ = this.Chest_Routine_Dose(context);
-            decimal? ap_ = context.Operators.ConvertIntegerToDecimal(49);
-            decimal? aq_ = context.Operators.ConvertIntegerToDecimal(377);
-            bool? ar_ = this.qualifies(context, Result, ao_, ap_, aq_);
-            j_ = i_ | ar_;
+
+
+        bool? p_() {
+            CqlCode bn_ = this.Neck_or_Cervical_Spine(context);
+            decimal? bo_ = context.Operators.ConvertIntegerToDecimal(25);
+            decimal? bp_ = context.Operators.ConvertIntegerToDecimal(1260);
+            bool? bq_ = this.qualifies(context, Result, bn_, bo_, bp_);
+            return (bool?)((CqlBoolean)bq_);
         }
-        bool? k_;
-        // CQL 'or' (53:3-60:73): right operand skipped when left is true
-        if (j_ is true)
-        {
-            k_ = true;
+
+
+        bool? q_() {
+            CqlCode br_ = this.Thoracic_or_Lumbar_Spine(context);
+            decimal? bs_ = context.Operators.ConvertIntegerToDecimal(25);
+            decimal? bt_ = context.Operators.ConvertIntegerToDecimal(1260);
+            bool? bu_ = this.qualifies(context, Result, br_, bs_, bt_);
+            return (bool?)((CqlBoolean)bu_);
         }
-        else
-        {
-            CqlCode as_ = this.Cardiac_High_Dose_or_Chest_High_Dose(context);
-            decimal? at_ = context.Operators.ConvertIntegerToDecimal(49);
-            decimal? au_ = context.Operators.ConvertIntegerToDecimal(1282);
-            bool? av_ = this.qualifies(context, Result, as_, at_, au_);
-            k_ = j_ | av_;
+
+
+        bool? r_() {
+            CqlCode bv_ = this.Simultaneous_Chest_and_Abdomen_and_Pelvis(context);
+            decimal? bw_ = context.Operators.ConvertIntegerToDecimal(29);
+            decimal? bx_ = context.Operators.ConvertIntegerToDecimal(1637);
+            bool? by_ = this.qualifies(context, Result, bv_, bw_, bx_);
+            return (bool?)((CqlBoolean)by_);
         }
-        bool? l_;
-        // CQL 'or' (53:3-61:50): right operand skipped when left is true
-        if (k_ is true)
-        {
-            l_ = true;
+
+
+        bool? s_() {
+            CqlCode bz_ = this.Simultaneous_Thoracic_and_Lumbar_Spine(context);
+            decimal? ca_ = context.Operators.ConvertIntegerToDecimal(25);
+            decimal? cb_ = context.Operators.ConvertIntegerToDecimal(2520);
+            bool? cc_ = this.qualifies(context, Result, bz_, ca_, cb_);
+            return (bool?)((CqlBoolean)cc_);
         }
-        else
-        {
-            CqlCode aw_ = this.Head_Low_Dose(context);
-            decimal? ax_ = context.Operators.ConvertIntegerToDecimal(115);
-            decimal? ay_ = context.Operators.ConvertIntegerToDecimal(582);
-            bool? az_ = this.qualifies(context, Result, aw_, ax_, ay_);
-            l_ = k_ | az_;
+
+
+        bool? t_() {
+            CqlCode cd_ = this.Simultaneous_Head_and_Neck_Routine_Dose(context);
+            decimal? ce_ = context.Operators.ConvertIntegerToDecimal(25);
+            decimal? cf_ = context.Operators.ConvertIntegerToDecimal(2285);
+            bool? cg_ = this.qualifies(context, Result, cd_, ce_, cf_);
+            return (bool?)((CqlBoolean)cg_);
         }
-        bool? m_;
-        // CQL 'or' (53:3-62:55): right operand skipped when left is true
-        if (l_ is true)
-        {
-            m_ = true;
+
+
+        bool? u_() {
+            CqlCode ch_ = this.Simultaneous_Head_and_Neck_High_Dose(context);
+            decimal? ci_ = context.Operators.ConvertIntegerToDecimal(25);
+            decimal? cj_ = context.Operators.ConvertIntegerToDecimal(3092);
+            bool? ck_ = this.qualifies(context, Result, ch_, ci_, cj_);
+            return (bool?)((CqlBoolean)ck_);
         }
-        else
-        {
-            CqlCode ba_ = this.Head_Routine_Dose(context);
-            decimal? bb_ = context.Operators.ConvertIntegerToDecimal(115);
-            decimal? bc_ = context.Operators.ConvertIntegerToDecimal(1025);
-            bool? bd_ = this.qualifies(context, Result, ba_, bb_, bc_);
-            m_ = l_ | bd_;
-        }
-        bool? n_;
-        // CQL 'or' (53:3-63:52): right operand skipped when left is true
-        if (m_ is true)
-        {
-            n_ = true;
-        }
-        else
-        {
-            CqlCode be_ = this.Head_High_Dose(context);
-            decimal? bf_ = context.Operators.ConvertIntegerToDecimal(115);
-            decimal? bg_ = context.Operators.ConvertIntegerToDecimal(1832);
-            bool? bh_ = this.qualifies(context, Result, be_, bf_, bg_);
-            n_ = m_ | bh_;
-        }
-        bool? o_;
-        // CQL 'or' (53:3-64:45): right operand skipped when left is true
-        if (n_ is true)
-        {
-            o_ = true;
-        }
-        else
-        {
-            CqlCode bi_ = this.Extremity(context);
-            decimal? bj_ = context.Operators.ConvertIntegerToDecimal(73);
-            decimal? bk_ = context.Operators.ConvertIntegerToDecimal(320);
-            bool? bl_ = this.qualifies(context, Result, bi_, bj_, bk_);
-            o_ = n_ | bl_;
-        }
-        bool? p_;
-        // CQL 'or' (53:3-65:59): right operand skipped when left is true
-        if (o_ is true)
-        {
-            p_ = true;
-        }
-        else
-        {
-            CqlCode bm_ = this.Neck_or_Cervical_Spine(context);
-            decimal? bn_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? bo_ = context.Operators.ConvertIntegerToDecimal(1260);
-            bool? bp_ = this.qualifies(context, Result, bm_, bn_, bo_);
-            p_ = o_ | bp_;
-        }
-        bool? q_;
-        // CQL 'or' (53:3-66:61): right operand skipped when left is true
-        if (p_ is true)
-        {
-            q_ = true;
-        }
-        else
-        {
-            CqlCode bq_ = this.Thoracic_or_Lumbar_Spine(context);
-            decimal? br_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? bs_ = context.Operators.ConvertIntegerToDecimal(1260);
-            bool? bt_ = this.qualifies(context, Result, bq_, br_, bs_);
-            q_ = p_ | bt_;
-        }
-        bool? r_;
-        // CQL 'or' (53:3-67:78): right operand skipped when left is true
-        if (q_ is true)
-        {
-            r_ = true;
-        }
-        else
-        {
-            CqlCode bu_ = this.Simultaneous_Chest_and_Abdomen_and_Pelvis(context);
-            decimal? bv_ = context.Operators.ConvertIntegerToDecimal(29);
-            decimal? bw_ = context.Operators.ConvertIntegerToDecimal(1637);
-            bool? bx_ = this.qualifies(context, Result, bu_, bv_, bw_);
-            r_ = q_ | bx_;
-        }
-        bool? s_;
-        // CQL 'or' (53:3-68:75): right operand skipped when left is true
-        if (r_ is true)
-        {
-            s_ = true;
-        }
-        else
-        {
-            CqlCode by_ = this.Simultaneous_Thoracic_and_Lumbar_Spine(context);
-            decimal? bz_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? ca_ = context.Operators.ConvertIntegerToDecimal(2520);
-            bool? cb_ = this.qualifies(context, Result, by_, bz_, ca_);
-            s_ = r_ | cb_;
-        }
-        bool? t_;
-        // CQL 'or' (53:3-69:76): right operand skipped when left is true
-        if (s_ is true)
-        {
-            t_ = true;
-        }
-        else
-        {
-            CqlCode cc_ = this.Simultaneous_Head_and_Neck_Routine_Dose(context);
-            decimal? cd_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? ce_ = context.Operators.ConvertIntegerToDecimal(2285);
-            bool? cf_ = this.qualifies(context, Result, cc_, cd_, ce_);
-            t_ = s_ | cf_;
-        }
-        // CQL 'or' (53:3-70:73): right operand skipped when left is true
-        if (t_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            CqlCode cg_ = this.Simultaneous_Head_and_Neck_High_Dose(context);
-            decimal? ch_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? ci_ = context.Operators.ConvertIntegerToDecimal(3092);
-            bool? cj_ = this.qualifies(context, Result, cg_, ch_, ci_);
-            return t_ | cj_;
-        }
+
+        return (bool?)(/* CQL 'or' (53:3-70:73) */ (/* CQL 'or' (53:3-69:76) */ (/* CQL 'or' (53:3-68:75) */ (/* CQL 'or' (53:3-67:78) */ (/* CQL 'or' (53:3-66:61) */ (/* CQL 'or' (53:3-65:59) */ (/* CQL 'or' (53:3-64:45) */ (/* CQL 'or' (53:3-63:52) */ (/* CQL 'or' (53:3-62:55) */ (/* CQL 'or' (53:3-61:50) */ (/* CQL 'or' (53:3-60:73) */ (/* CQL 'or' (53:3-59:54) */ (/* CQL 'or' (53:3-58:50) */ (/* CQL 'or' (53:3-57:56) */ (/* CQL 'or' (53:3-56:51) */ (/* CQL 'or' (53:3-55:65) */ (/* CQL 'or' (53:3-54:67) */ ((CqlBoolean)d_
+            || (CqlBoolean)e_())
+            || (CqlBoolean)f_())
+            || (CqlBoolean)g_())
+            || (CqlBoolean)h_())
+            || (CqlBoolean)i_())
+            || (CqlBoolean)j_())
+            || (CqlBoolean)k_())
+            || (CqlBoolean)l_())
+            || (CqlBoolean)m_())
+            || (CqlBoolean)n_())
+            || (CqlBoolean)o_())
+            || (CqlBoolean)p_())
+            || (CqlBoolean)q_())
+            || (CqlBoolean)r_())
+            || (CqlBoolean)s_())
+            || (CqlBoolean)t_())
+            || (CqlBoolean)u_()));
     }
 
 
@@ -799,29 +649,23 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         object b_ = FHIRHelpers_4_4_000.Instance.ToValue(context, a_);
         CqlConcept c_ = context.Operators.ConvertCodeToConcept(code);
         bool? d_ = context.Operators.Equivalent(b_ as CqlConcept, c_);
-        // CQL 'and' (73:3-76:5): right operand skipped when left is false
-        if (d_ is false)
-        {
-            return false;
-        }
-        else
-        {
-            decimal? e_ = this.Global_Noise_Value(context, Result);
-            bool? f_ = context.Operators.GreaterOrEqual(e_, noiseThreshold);
-            bool? g_;
-            // CQL 'or' (74:9-76:5): right operand skipped when left is true
-            if (f_ is true)
-            {
-                g_ = true;
+
+        bool? e_() {
+            decimal? f_ = this.Global_Noise_Value(context, Result);
+            bool? g_ = context.Operators.GreaterOrEqual(f_, noiseThreshold);
+
+            bool? h_() {
+                decimal? i_ = this.Size_Adjusted_Value(context, Result);
+                bool? j_ = context.Operators.GreaterOrEqual(i_, sizeDoseThreshold);
+                return (bool?)((CqlBoolean)j_);
             }
-            else
-            {
-                decimal? h_ = this.Size_Adjusted_Value(context, Result);
-                bool? i_ = context.Operators.GreaterOrEqual(h_, sizeDoseThreshold);
-                g_ = f_ | i_;
-            }
-            return d_ & g_;
+
+            return (bool?)(/* CQL 'or' (74:9-76:5) */ ((CqlBoolean)g_
+                || (CqlBoolean)h_()));
         }
+
+        return (bool?)(/* CQL 'and' (73:3-76:5) */ ((CqlBoolean)d_
+            && (CqlBoolean)e_()));
     }
 
 
@@ -840,42 +684,36 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "corrected",
             ];
             bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
-            bool? l_;
-            // CQL 'and' (87:13-88:49): right operand skipped when left is false
-            if (k_ is false)
-            {
-                l_ = false;
+
+            bool? l_() {
+                CodeableConcept n_ = C?.Code;
+                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
+                CqlCode p_ = this.Calculated_CT_global_noise(context);
+                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+                bool? r_ = context.Operators.Equivalent(o_, q_);
+                return (bool?)((CqlBoolean)r_);
             }
-            else
-            {
-                CodeableConcept m_ = C?.Code;
-                CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
-                CqlCode o_ = this.Calculated_CT_global_noise(context);
-                CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-                bool? q_ = context.Operators.Equivalent(n_, p_);
-                l_ = k_ & q_;
+
+
+            bool? m_() {
+                DataType s_ = C?.Value;
+                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                string u_ = (t_ as CqlQuantity)?.unit;
+                bool? v_ = context.Operators.Equal(u_, "[hnsf'U]");
+                return (bool?)((CqlBoolean)v_);
             }
-            // CQL 'and' (87:7-89:54): right operand skipped when left is false
-            if (l_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType r_ = C?.Value;
-                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                string t_ = (s_ as CqlQuantity)?.unit;
-                bool? u_ = context.Operators.Equal(t_, "[hnsf'U]");
-                return l_ & u_;
-            }
+
+            return (bool?)(/* CQL 'and' (87:7-89:54) */ (/* CQL 'and' (87:13-88:49) */ ((CqlBoolean)k_
+                && (CqlBoolean)l_())
+                && (CqlBoolean)m_()));
         }
 
 
         decimal? c_(Observation.ComponentComponent C) {
-            DataType v_ = C?.Value;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            decimal? x_ = (w_ as CqlQuantity)?.value;
-            return x_;
+            DataType w_ = C?.Value;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            decimal? y_ = (x_ as CqlQuantity)?.value;
+            return y_;
         }
 
         IEnumerable<decimal?> d_ = context.Operators.WhereSelect<Observation.ComponentComponent, decimal?>((IEnumerable<Observation.ComponentComponent>)a_, b_, c_);
@@ -900,42 +738,36 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "corrected",
             ];
             bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
-            bool? l_;
-            // CQL 'and' (104:13-105:55): right operand skipped when left is false
-            if (k_ is false)
-            {
-                l_ = false;
+
+            bool? l_() {
+                CodeableConcept n_ = C?.Code;
+                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
+                CqlCode p_ = this.Calculated_CT_size_adjusted_dose(context);
+                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
+                bool? r_ = context.Operators.Equivalent(o_, q_);
+                return (bool?)((CqlBoolean)r_);
             }
-            else
-            {
-                CodeableConcept m_ = C?.Code;
-                CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
-                CqlCode o_ = this.Calculated_CT_size_adjusted_dose(context);
-                CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-                bool? q_ = context.Operators.Equivalent(n_, p_);
-                l_ = k_ & q_;
+
+
+            bool? m_() {
+                DataType s_ = C?.Value;
+                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                string u_ = (t_ as CqlQuantity)?.unit;
+                bool? v_ = context.Operators.Equal(u_, "mGy.cm");
+                return (bool?)((CqlBoolean)v_);
             }
-            // CQL 'and' (104:7-106:51): right operand skipped when left is false
-            if (l_ is false)
-            {
-                return false;
-            }
-            else
-            {
-                DataType r_ = C?.Value;
-                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                string t_ = (s_ as CqlQuantity)?.unit;
-                bool? u_ = context.Operators.Equal(t_, "mGy.cm");
-                return l_ & u_;
-            }
+
+            return (bool?)(/* CQL 'and' (104:7-106:51) */ (/* CQL 'and' (104:13-105:55) */ ((CqlBoolean)k_
+                && (CqlBoolean)l_())
+                && (CqlBoolean)m_()));
         }
 
 
         decimal? c_(Observation.ComponentComponent C) {
-            DataType v_ = C?.Value;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            decimal? x_ = (w_ as CqlQuantity)?.value;
-            return x_;
+            DataType w_ = C?.Value;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            decimal? y_ = (x_ as CqlQuantity)?.value;
+            return y_;
         }
 
         IEnumerable<decimal?> d_ = context.Operators.WhereSelect<Observation.ComponentComponent, decimal?>((IEnumerable<Observation.ComponentComponent>)a_, b_, c_);

@@ -419,31 +419,29 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         CqlCode c_ = this.active(context);
         CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
         bool? e_ = context.Operators.Equivalent(b_, d_);
-        bool? f_;
-        // CQL 'or' (112:3-113:46): right operand skipped when left is true
-        if (e_ is true)
-        {
-            f_ = true;
-        }
-        else
-        {
-            CqlCode g_ = this.recurrence(context);
-            CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(b_, h_);
-            f_ = e_ | i_;
-        }
-        // CQL 'or' (112:3-114:43): right operand skipped when left is true
-        if (f_ is true)
-        {
-            return true;
-        }
-        else
-        {
-            CqlCode j_ = this.relapse(context);
+
+        bool? f_() {
+            CodeableConcept h_ = condition?.ClinicalStatus;
+            CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
+            CqlCode j_ = this.recurrence(context);
             CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-            bool? l_ = context.Operators.Equivalent(b_, k_);
-            return f_ | l_;
+            bool? l_ = context.Operators.Equivalent(i_, k_);
+            return (bool?)((CqlBoolean)l_);
         }
+
+
+        bool? g_() {
+            CodeableConcept m_ = condition?.ClinicalStatus;
+            CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
+            CqlCode o_ = this.relapse(context);
+            CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+            bool? q_ = context.Operators.Equivalent(n_, p_);
+            return (bool?)((CqlBoolean)q_);
+        }
+
+        return (bool?)(/* CQL 'or' (112:3-114:43) */ (/* CQL 'or' (112:3-113:46) */ ((CqlBoolean)e_
+            || (CqlBoolean)f_())
+            || (CqlBoolean)g_()));
     }
 
 
@@ -1139,75 +1137,71 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         CqlCode c_ = this.active(context);
         CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
         bool? e_ = context.Operators.Equivalent(b_, d_);
-        bool? f_;
-        // CQL 'or' (435:4-436:44): right operand skipped when left is true
-        if (e_ is true)
+
+        bool? f_() {
+            CodeableConcept h_ = condition?.ClinicalStatus;
+            CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
+            CqlCode j_ = this.recurrence(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(i_, k_);
+            return (bool?)((CqlBoolean)l_);
+        }
+
+
+        bool? g_() {
+            CodeableConcept m_ = condition?.ClinicalStatus;
+            CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
+            CqlCode o_ = this.relapse(context);
+            CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+            bool? q_ = context.Operators.Equivalent(n_, p_);
+            return (bool?)((CqlBoolean)q_);
+        }
+
+        if (((bool?)(/* CQL 'or' (435:4-437:41) */ (/* CQL 'or' (435:4-436:44) */ ((CqlBoolean)e_
+            || (CqlBoolean)f_())
+            || (CqlBoolean)g_()))) ?? false)
         {
-            f_ = true;
+            DataType r_ = condition?.Onset;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            CqlInterval<CqlDateTime> t_ = this.ToInterval(context, s_);
+            CqlDateTime u_ = context.Operators.Start(t_);
+            CqlInterval<CqlDateTime> v_ = this.ToAbatementInterval(context, condition);
+            CqlDateTime w_ = context.Operators.End(v_);
+            CqlInterval<CqlDateTime> x_ = context.Operators.Interval(u_, w_, true, true);
+            return x_;
         }
         else
         {
-            CqlCode h_ = this.recurrence(context);
-            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
-            bool? j_ = context.Operators.Equivalent(b_, i_);
-            f_ = e_ | j_;
-        }
-        bool? g_;
-        // CQL 'or' (435:4-437:41): right operand skipped when left is true
-        if (f_ is true)
-        {
-            g_ = true;
-        }
-        else
-        {
-            CqlCode k_ = this.relapse(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(b_, l_);
-            g_ = f_ | m_;
-        }
-        if (g_ ?? false)
-        {
-            DataType n_ = condition?.Onset;
-            object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-            CqlInterval<CqlDateTime> p_ = this.ToInterval(context, o_);
-            CqlDateTime q_ = context.Operators.Start(p_);
-            CqlInterval<CqlDateTime> r_ = this.ToAbatementInterval(context, condition);
-            CqlDateTime s_ = context.Operators.End(r_);
-            CqlInterval<CqlDateTime> t_ = context.Operators.Interval(q_, s_, true, true);
-            return t_;
-        }
-        else
-        {
-            CqlInterval<CqlDateTime> u_ = this.ToAbatementInterval(context, condition);
-            CqlDateTime v_ = context.Operators.End(u_);
-            CqlDateTime[] w_ = [
-                v_,
+            CqlInterval<CqlDateTime> y_ = this.ToAbatementInterval(context, condition);
+            CqlDateTime z_ = context.Operators.End(y_);
+            CqlDateTime[] aa_ = [
+                z_,
             ];
 
-            CqlInterval<CqlDateTime> x_(CqlDateTime abatementDate) {
+            CqlInterval<CqlDateTime> ab_(CqlDateTime abatementDate) {
                 if (abatementDate is null)
                 {
-                    DataType aa_ = condition?.Onset;
-                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    CqlInterval<CqlDateTime> ac_ = this.ToInterval(context, ab_);
-                    CqlDateTime ad_ = context.Operators.Start(ac_);
-                    CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(ad_, abatementDate, true, false);
-                    return ae_;
+                    DataType ae_ = condition?.Onset;
+                    object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
+                    CqlInterval<CqlDateTime> ag_ = this.ToInterval(context, af_);
+                    CqlDateTime ah_ = context.Operators.Start(ag_);
+                    CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ah_, abatementDate, true, false);
+                    return ai_;
                 }
                 else
                 {
-                    DataType af_ = condition?.Onset;
-                    object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                    CqlInterval<CqlDateTime> ah_ = this.ToInterval(context, ag_);
-                    CqlDateTime ai_ = context.Operators.Start(ah_);
-                    CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ai_, abatementDate, true, true);
-                    return aj_;
+                    DataType aj_ = condition?.Onset;
+                    object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                    CqlInterval<CqlDateTime> al_ = this.ToInterval(context, ak_);
+                    CqlDateTime am_ = context.Operators.Start(al_);
+                    CqlInterval<CqlDateTime> an_ = context.Operators.Interval(am_, abatementDate, true, true);
+                    return an_;
                 }
             }
 
-            IEnumerable<CqlInterval<CqlDateTime>> y_ = context.Operators.SelectDistinct<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)w_, x_);
-            CqlInterval<CqlDateTime> z_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(y_);
-            return z_;
+            IEnumerable<CqlInterval<CqlDateTime>> ac_ = context.Operators.SelectDistinct<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)aa_, ab_);
+            CqlInterval<CqlDateTime> ad_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(ac_);
+            return ad_;
         }
     }
 
@@ -1222,75 +1216,71 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         CqlCode c_ = this.active(context);
         CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
         bool? e_ = context.Operators.Equivalent(b_, d_);
-        bool? f_;
-        // CQL 'or' (453:4-454:44): right operand skipped when left is true
-        if (e_ is true)
+
+        bool? f_() {
+            CodeableConcept h_ = condition?.ClinicalStatus;
+            CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
+            CqlCode j_ = this.recurrence(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(i_, k_);
+            return (bool?)((CqlBoolean)l_);
+        }
+
+
+        bool? g_() {
+            CodeableConcept m_ = condition?.ClinicalStatus;
+            CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
+            CqlCode o_ = this.relapse(context);
+            CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+            bool? q_ = context.Operators.Equivalent(n_, p_);
+            return (bool?)((CqlBoolean)q_);
+        }
+
+        if (((bool?)(/* CQL 'or' (453:4-455:41) */ (/* CQL 'or' (453:4-454:44) */ ((CqlBoolean)e_
+            || (CqlBoolean)f_())
+            || (CqlBoolean)g_()))) ?? false)
         {
-            f_ = true;
+            DataType r_ = condition?.Onset;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            CqlInterval<CqlDateTime> t_ = this.toInterval(context, s_);
+            CqlDateTime u_ = context.Operators.Start(t_);
+            CqlInterval<CqlDateTime> v_ = this.abatementInterval(context, condition);
+            CqlDateTime w_ = context.Operators.End(v_);
+            CqlInterval<CqlDateTime> x_ = context.Operators.Interval(u_, w_, true, true);
+            return x_;
         }
         else
         {
-            CqlCode h_ = this.recurrence(context);
-            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
-            bool? j_ = context.Operators.Equivalent(b_, i_);
-            f_ = e_ | j_;
-        }
-        bool? g_;
-        // CQL 'or' (453:4-455:41): right operand skipped when left is true
-        if (f_ is true)
-        {
-            g_ = true;
-        }
-        else
-        {
-            CqlCode k_ = this.relapse(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(b_, l_);
-            g_ = f_ | m_;
-        }
-        if (g_ ?? false)
-        {
-            DataType n_ = condition?.Onset;
-            object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-            CqlInterval<CqlDateTime> p_ = this.toInterval(context, o_);
-            CqlDateTime q_ = context.Operators.Start(p_);
-            CqlInterval<CqlDateTime> r_ = this.abatementInterval(context, condition);
-            CqlDateTime s_ = context.Operators.End(r_);
-            CqlInterval<CqlDateTime> t_ = context.Operators.Interval(q_, s_, true, true);
-            return t_;
-        }
-        else
-        {
-            CqlInterval<CqlDateTime> u_ = this.abatementInterval(context, condition);
-            CqlDateTime v_ = context.Operators.End(u_);
-            CqlDateTime[] w_ = [
-                v_,
+            CqlInterval<CqlDateTime> y_ = this.abatementInterval(context, condition);
+            CqlDateTime z_ = context.Operators.End(y_);
+            CqlDateTime[] aa_ = [
+                z_,
             ];
 
-            CqlInterval<CqlDateTime> x_(CqlDateTime abatementDate) {
+            CqlInterval<CqlDateTime> ab_(CqlDateTime abatementDate) {
                 if (abatementDate is null)
                 {
-                    DataType aa_ = condition?.Onset;
-                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    CqlInterval<CqlDateTime> ac_ = this.toInterval(context, ab_);
-                    CqlDateTime ad_ = context.Operators.Start(ac_);
-                    CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(ad_, abatementDate, true, false);
-                    return ae_;
+                    DataType ae_ = condition?.Onset;
+                    object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
+                    CqlInterval<CqlDateTime> ag_ = this.toInterval(context, af_);
+                    CqlDateTime ah_ = context.Operators.Start(ag_);
+                    CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ah_, abatementDate, true, false);
+                    return ai_;
                 }
                 else
                 {
-                    DataType af_ = condition?.Onset;
-                    object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                    CqlInterval<CqlDateTime> ah_ = this.toInterval(context, ag_);
-                    CqlDateTime ai_ = context.Operators.Start(ah_);
-                    CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ai_, abatementDate, true, true);
-                    return aj_;
+                    DataType aj_ = condition?.Onset;
+                    object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                    CqlInterval<CqlDateTime> al_ = this.toInterval(context, ak_);
+                    CqlDateTime am_ = context.Operators.Start(al_);
+                    CqlInterval<CqlDateTime> an_ = context.Operators.Interval(am_, abatementDate, true, true);
+                    return an_;
                 }
             }
 
-            IEnumerable<CqlInterval<CqlDateTime>> y_ = context.Operators.SelectDistinct<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)w_, x_);
-            CqlInterval<CqlDateTime> z_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(y_);
-            return z_;
+            IEnumerable<CqlInterval<CqlDateTime>> ac_ = context.Operators.SelectDistinct<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)aa_, ab_);
+            CqlInterval<CqlDateTime> ad_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(ac_);
+            return ad_;
         }
     }
 
@@ -1403,20 +1393,16 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     public bool? HasStart(CqlContext context, CqlInterval<CqlDateTime> period)
     {
         CqlDateTime a_ = context.Operators.Start(period);
-        bool? b_ = (bool?)(a_ is null);
-        bool? c_;
-        // CQL 'or' (528:7-530:3): right operand skipped when left is true
-        if (b_ is true)
-        {
-            c_ = true;
-        }
-        else
-        {
+
+        bool? b_() {
+            CqlDateTime c_ = context.Operators.Start(period);
             CqlDateTime d_ = context.Operators.MinValue<CqlDateTime>();
-            bool? e_ = context.Operators.Equal(a_, d_);
-            c_ = b_ | e_;
+            bool? e_ = context.Operators.Equal(c_, d_);
+            return (bool?)((CqlBoolean)e_);
         }
-        return !c_;
+
+        return !((bool?)(/* CQL 'or' (528:7-530:3) */ ((CqlBoolean)((bool?)(a_ is null))
+            || (CqlBoolean)b_())));
     }
 
 
@@ -1425,20 +1411,16 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     public bool? hasStart(CqlContext context, CqlInterval<CqlDateTime> period)
     {
         CqlDateTime a_ = context.Operators.Start(period);
-        bool? b_ = (bool?)(a_ is null);
-        bool? c_;
-        // CQL 'or' (537:7-539:3): right operand skipped when left is true
-        if (b_ is true)
-        {
-            c_ = true;
-        }
-        else
-        {
+
+        bool? b_() {
+            CqlDateTime c_ = context.Operators.Start(period);
             CqlDateTime d_ = context.Operators.MinValue<CqlDateTime>();
-            bool? e_ = context.Operators.Equal(a_, d_);
-            c_ = b_ | e_;
+            bool? e_ = context.Operators.Equal(c_, d_);
+            return (bool?)((CqlBoolean)e_);
         }
-        return !c_;
+
+        return !((bool?)(/* CQL 'or' (537:7-539:3) */ ((CqlBoolean)((bool?)(a_ is null))
+            || (CqlBoolean)b_())));
     }
 
 
@@ -1448,20 +1430,16 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     public bool? HasEnd(CqlContext context, CqlInterval<CqlDateTime> period)
     {
         CqlDateTime a_ = context.Operators.End(period);
-        bool? b_ = (bool?)(a_ is null);
-        bool? c_;
-        // CQL 'or' (547:7-550:3): right operand skipped when left is true
-        if (b_ is true)
-        {
-            c_ = true;
-        }
-        else
-        {
+
+        bool? b_() {
+            CqlDateTime c_ = context.Operators.End(period);
             CqlDateTime d_ = context.Operators.MaxValue<CqlDateTime>();
-            bool? e_ = context.Operators.Equal(a_, d_);
-            c_ = b_ | e_;
+            bool? e_ = context.Operators.Equal(c_, d_);
+            return (bool?)((CqlBoolean)e_);
         }
-        return !c_;
+
+        return !((bool?)(/* CQL 'or' (547:7-550:3) */ ((CqlBoolean)((bool?)(a_ is null))
+            || (CqlBoolean)b_())));
     }
 
 
@@ -1470,20 +1448,16 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     public bool? hasEnd(CqlContext context, CqlInterval<CqlDateTime> period)
     {
         CqlDateTime a_ = context.Operators.End(period);
-        bool? b_ = (bool?)(a_ is null);
-        bool? c_;
-        // CQL 'or' (557:7-560:3): right operand skipped when left is true
-        if (b_ is true)
-        {
-            c_ = true;
-        }
-        else
-        {
+
+        bool? b_() {
+            CqlDateTime c_ = context.Operators.End(period);
             CqlDateTime d_ = context.Operators.MaxValue<CqlDateTime>();
-            bool? e_ = context.Operators.Equal(a_, d_);
-            c_ = b_ | e_;
+            bool? e_ = context.Operators.Equal(c_, d_);
+            return (bool?)((CqlBoolean)e_);
         }
-        return !c_;
+
+        return !((bool?)(/* CQL 'or' (557:7-560:3) */ ((CqlBoolean)((bool?)(a_ is null))
+            || (CqlBoolean)b_())));
     }
 
 

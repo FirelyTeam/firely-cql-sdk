@@ -141,17 +141,15 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     {
         IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
         bool? b_ = context.Operators.Exists<Condition>(a_);
-        // CQL 'or' (33:5-33:57): right operand skipped when left is true
-        if (b_ is true)
-        {
-            return true;
+
+        bool? c_() {
+            IEnumerable<ServiceRequest> d_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
+            bool? e_ = context.Operators.Exists<ServiceRequest>(d_);
+            return (bool?)((CqlBoolean)e_);
         }
-        else
-        {
-            IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
-            bool? d_ = context.Operators.Exists<ServiceRequest>(c_);
-            return b_ | d_;
-        }
+
+        return (bool?)(/* CQL 'or' (33:5-33:57) */ ((CqlBoolean)b_
+            || (CqlBoolean)c_()));
     }
 
 

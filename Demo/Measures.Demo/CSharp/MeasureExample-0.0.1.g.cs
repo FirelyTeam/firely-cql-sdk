@@ -74,16 +74,8 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     private bool? Denominator_Compute(CqlContext context)
     {
         bool? a_ = this.Initial_population(context);
-        // CQL 'and' (28:2-29:20): right operand skipped when left is false
-        if (a_ is false)
-        {
-            return false;
-        }
-        else
-        {
-            bool? b_ = this.Exclusion(context);
-            return a_ & !b_;
-        }
+        return (bool?)(/* CQL 'and' (28:2-29:20) */ ((CqlBoolean)a_
+            && (CqlBoolean)(!(this.Exclusion(context)))));
     }
 
 
