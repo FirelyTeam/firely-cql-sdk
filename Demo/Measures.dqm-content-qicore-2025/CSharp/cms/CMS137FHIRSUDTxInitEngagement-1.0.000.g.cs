@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS137FHIRSUDTxInitEngagement", "1.0.000")]
 public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleton<CMS137FHIRSUDTxInitEngagement_1_0_000>
 {
@@ -542,7 +542,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         }
 
         return /* CQL 'and' (34:3-36:58) */ (/* CQL 'and' (34:3-35:65) */ ((CqlBoolean)i_
-            && (CqlBoolean)(!((bool?)((this.First_SUD_Episode_During_Measurement_Period(context)) is null))))
+            && !((bool?)((this.First_SUD_Episode_During_Measurement_Period(context)) is null)))
             && j_());
     }
 
@@ -1132,11 +1132,11 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDate> ax_ = context.Operators.Interval(InitiationTreatmentDate, aw_, false, true);
                     bool? ay_ = context.Operators.In<CqlDate>(au_, ax_, (string)default);
                     return /* CQL 'and' (151:16-151:107) */ ((CqlBoolean)ay_
-                        && (CqlBoolean)(!((bool?)(InitiationTreatmentDate is null))));
+                        && !((bool?)(InitiationTreatmentDate is null)));
                 }
 
                 return /* CQL 'or' (150:21-151:107) */ (/* CQL 'and' (150:21-150:128) */ ((CqlBoolean)aj_
-                    && (CqlBoolean)(!((bool?)(InitiationTreatmentDate is null))))
+                    && !((bool?)(InitiationTreatmentDate is null)))
                     || ak_());
             }
 
@@ -1200,7 +1200,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                 CqlInterval<CqlDate> ca_ = context.Operators.Interval(InitiationTreatmentDate, bz_, false, true);
                 bool? cb_ = context.Operators.In<CqlDate>(bx_, ca_, (string)default);
                 return /* CQL 'and' (158:23-158:130) */ ((CqlBoolean)cb_
-                    && (CqlBoolean)(!((bool?)(InitiationTreatmentDate is null))));
+                    && !((bool?)(InitiationTreatmentDate is null)));
             }
 
             bool? bs_ = context.Operators.WhereAny<CqlDate>((IEnumerable<CqlDate>)bq_, br_);
@@ -1278,7 +1278,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                 CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitiationTreatmentDate, aq_, false, true);
                 bool? as_ = context.Operators.In<CqlDate>(ao_, ar_, (string)default);
                 return /* CQL 'and' (172:21-172:129) */ ((CqlBoolean)as_
-                    && (CqlBoolean)(!((bool?)(InitiationTreatmentDate is null))));
+                    && !((bool?)(InitiationTreatmentDate is null)));
             }
 
             bool? aj_ = context.Operators.WhereAny<CqlDate>((IEnumerable<CqlDate>)ah_, ai_);
@@ -1344,7 +1344,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                 CqlInterval<CqlDate> bg_ = context.Operators.Interval(InitiationTreatmentDate, bf_, false, true);
                 bool? bh_ = context.Operators.In<CqlDate>(bd_, bg_, (string)default);
                 return /* CQL 'and' (178:23-178:131) */ ((CqlBoolean)bh_
-                    && (CqlBoolean)(!((bool?)(InitiationTreatmentDate is null))));
+                    && !((bool?)(InitiationTreatmentDate is null)));
             }
 
             bool? az_ = context.Operators.WhereAny<CqlDate>((IEnumerable<CqlDate>)ax_, ay_);
@@ -1368,7 +1368,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
     {
         bool? a_ = this.Has_Treatment_Engagement_With_Long_Acting_Medication(context);
         return /* CQL 'or' (164:3-165:106) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Has_Two_or_More_Treatment_Engagements_With_Short_Acting_Medication_or_Non_Medication_Intervention(context)));
+            || this.Has_Two_or_More_Treatment_Engagements_With_Short_Acting_Medication_or_Non_Medication_Intervention(context));
     }
 
 

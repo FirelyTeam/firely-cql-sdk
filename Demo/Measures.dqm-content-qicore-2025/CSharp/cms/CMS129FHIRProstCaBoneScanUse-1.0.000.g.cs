@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS129FHIRProstCaBoneScanUse", "1.0.000")]
 public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton<CMS129FHIRProstCaBoneScanUse_1_0_000>
 {
@@ -261,7 +261,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             bool? g_ = context.Operators.Overlaps(e_, f_, "day");
             return /* CQL 'and' (133:5-134:39) */ ((CqlBoolean)g_
-                && (CqlBoolean)(this.isVerified(context, ProstateCancer as Condition)));
+                && this.isVerified(context, ProstateCancer as Condition));
         }
 
         IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
@@ -757,10 +757,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     {
         bool? a_ = this.Initial_Population(context);
         return /* CQL 'and' (49:3-53:42) */ (/* CQL 'and' (49:3-52:44) */ (/* CQL 'and' (49:3-51:79) */ (/* CQL 'and' (49:3-50:86) */ ((CqlBoolean)a_
-            && (CqlBoolean)(!((bool?)((this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context)) is null))))
-            && (CqlBoolean)(!((bool?)((this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context)) is null))))
-            && (CqlBoolean)(this.Most_Recent_PSA_Test_Result_is_Low(context)))
-            && (CqlBoolean)(this.Most_Recent_Gleason_Score_is_Low(context)));
+            && !((bool?)((this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context)) is null)))
+            && !((bool?)((this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context)) is null)))
+            && this.Most_Recent_PSA_Test_Result_is_Low(context))
+            && this.Most_Recent_Gleason_Score_is_Low(context));
     }
 
 
@@ -862,7 +862,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 CqlDateTime m_ = context.Operators.Start(l_);
                 bool? n_ = context.Operators.After(k_, m_, (string)default);
                 return /* CQL 'and' (78:19-79:47) */ ((CqlBoolean)n_
-                    && (CqlBoolean)(this.isVerified(context, ProstateCancerPain)));
+                    && this.isVerified(context, ProstateCancerPain));
             }
 
             bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
@@ -986,8 +986,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     {
         bool? a_ = this.Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(context);
         return /* CQL 'or' (59:3-61:61) */ (/* CQL 'or' (59:3-60:70) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(context)))
-            || (CqlBoolean)(this.Has_Bone_Scan_Study_Performed_with_Documented_Reason(context)));
+            || this.Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(context))
+            || this.Has_Bone_Scan_Study_Performed_with_Documented_Reason(context));
     }
 
 

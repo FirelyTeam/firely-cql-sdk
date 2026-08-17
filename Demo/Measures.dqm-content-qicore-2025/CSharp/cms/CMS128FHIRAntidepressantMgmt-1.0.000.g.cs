@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS128FHIRAntidepressantMgmt", "1.0.000")]
 public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton<CMS128FHIRAntidepressantMgmt_1_0_000>
 {
@@ -258,7 +258,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlInterval<CqlDate> q_ = context.Operators.Interval(o_, p_, true, true);
                 bool? r_ = context.Operators.In<CqlDate>(l_, q_, (string)default);
                 return /* CQL 'and' (44:13-44:94) */ ((CqlBoolean)r_
-                    && (CqlBoolean)(!((bool?)((this.IPSD(context)) is null))));
+                    && !((bool?)((this.IPSD(context)) is null)));
             }
 
             return /* CQL 'and' (43:7-44:94) */ ((CqlBoolean)(!((bool?)(h_ is null)))
@@ -321,7 +321,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             CqlInterval<CqlDate> ao_ = context.Operators.Interval(am_, an_, true, true);
             bool? ap_ = context.Operators.In<CqlDate>(aj_, ao_, (string)default);
             return /* CQL 'and' (74:5-74:75) */ ((CqlBoolean)ap_
-                && (CqlBoolean)(!((bool?)((this.IPSD(context)) is null))));
+                && !((bool?)((this.IPSD(context)) is null)));
         }
 
         IEnumerable<Encounter> af_ = context.Operators.Where<Encounter>(ad_, ae_);
@@ -354,7 +354,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
         }
 
         return /* CQL 'and' (32:3-34:38) */ (/* CQL 'and' (32:3-33:49) */ ((CqlBoolean)i_
-            && (CqlBoolean)(this.Has_IPSD_and_Major_Depression_Diagnosis(context)))
+            && this.Has_IPSD_and_Major_Depression_Diagnosis(context))
             && j_());
     }
 

@@ -105,6 +105,25 @@ internal partial class CSharpEmitter
             : lambda.Body;
 
     /// <summary>
+    /// The expression under an inbound <see cref="CqlBoolean"/> conversion the builder added.
+    ///
+    /// <para>Redundant in every position that can absorb the conversion implicitly, of which there
+    /// are two: a local function's body, whose <c>return</c> converts into a
+    /// <see cref="CqlBoolean"/>-declared signature; and a short-circuit operator's RIGHT operand,
+    /// because overload resolution for the user-defined <c>&amp;</c>/<c>|</c> backing
+    /// <c>&amp;&amp;</c>/<c>||</c> applies an implicit conversion to that operand.</para>
+    ///
+    /// <para>Not the LEFT operand, which is not a matter of taste: C# synthesises
+    /// <c>&amp;&amp;</c>/<c>||</c> from the left operand's own <c>operator true</c>/
+    /// <c>operator false</c>, so a <c>bool?</c> left operand has no <c>&amp;&amp;</c> at all and its
+    /// conversion is load-bearing.</para>
+    /// </summary>
+    private static CodeExpression UnwrapCqlBooleanConversion(CodeExpression node) =>
+        node is CodeCast { Type: var castType, Operand: { } inner } && castType == typeof(CqlBoolean)
+            ? inner
+            : node;
+
+    /// <summary>
     /// Emits the body of a definition as a single C# expression when it linearizes without
     /// hoisting any statements (e.g. a constant body), for the scaffolding writer's
     /// expression-bodied (<c>=> expr;</c>) member form. Returns <see langword="null"/> when

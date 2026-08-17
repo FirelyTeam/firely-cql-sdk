@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS1188FHIRHIVSTITesting", "1.0.000")]
 public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS1188FHIRHIVSTITesting_1_0_000>
 {
@@ -253,7 +253,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
             CqlDateTime j_ = context.Operators.End(i_);
             bool? k_ = context.Operators.SameOrBefore(h_, j_, "day");
             return /* CQL 'and' (62:5-63:30) */ ((CqlBoolean)k_
-                && (CqlBoolean)(this.isVerified(context, HIVDx)));
+                && this.isVerified(context, HIVDx));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -279,8 +279,8 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 13);
         return /* CQL 'and' (34:3-36:60) */ (/* CQL 'and' (34:3-35:60) */ ((CqlBoolean)i_
-            && (CqlBoolean)(this.Has_Qualifying_Encounter_During_Measurement_Period(context)))
-            && (CqlBoolean)(this.Has_HIV_Diagnosis_Before_End_of_Measurement_Period(context)));
+            && this.Has_Qualifying_Encounter_During_Measurement_Period(context))
+            && this.Has_HIV_Diagnosis_Before_End_of_Measurement_Period(context));
     }
 
 
@@ -526,8 +526,8 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     {
         bool? a_ = this.Has_Chlamydia_Testing(context);
         return /* CQL 'and' (39:3-41:30) */ (/* CQL 'and' (39:3-40:31) */ ((CqlBoolean)a_
-            && (CqlBoolean)(this.Has_Gonorrhea_Testing(context)))
-            && (CqlBoolean)(this.Has_Syphilis_Testing(context)));
+            && this.Has_Gonorrhea_Testing(context))
+            && this.Has_Syphilis_Testing(context));
     }
 
 

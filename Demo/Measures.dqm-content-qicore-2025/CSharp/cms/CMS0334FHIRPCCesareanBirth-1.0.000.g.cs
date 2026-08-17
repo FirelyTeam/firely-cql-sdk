@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS0334FHIRPCCesareanBirth", "1.0.000")]
 public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<CMS0334FHIRPCCesareanBirth_1_0_000>
 {
@@ -215,7 +215,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             }
 
             return /* CQL 'and' (54:5-58:7) */ (/* CQL 'and' (54:11-55:21) */ ((CqlBoolean)((bool?)(d_ is null))
-                && (CqlBoolean)((bool?)((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null)))
+                && (bool?)((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null))
                 && e_());
         }
 
@@ -354,7 +354,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 CqlInterval<CqlDateTime> y_ = context.Operators.Interval(x_, v_, true, false);
                 bool? z_ = context.Operators.In<CqlDateTime>(u_, y_, (string)default);
                 return /* CQL 'and' (131:13-131:98) */ ((CqlBoolean)z_
-                    && (CqlBoolean)(!((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null))));
+                    && !((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null)));
             }
 
             return /* CQL 'and' (129:7-131:98) */ (/* CQL 'and' (129:13-130:65) */ ((CqlBoolean)(!((bool?)(l_ is null)))
@@ -467,7 +467,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             }
 
             return /* CQL 'and' (153:7-155:36) */ (/* CQL 'and' (153:13-154:64) */ (/* CQL 'and' (153:13-153:97) */ ((CqlBoolean)q_
-                && (CqlBoolean)(!((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null))))
+                && !((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null)))
                 && r_())
                 && s_());
         }
@@ -577,7 +577,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             }
 
             return /* CQL 'and' (137:7-139:42) */ (/* CQL 'and' (137:13-138:70) */ (/* CQL 'and' (137:13-137:103) */ ((CqlBoolean)q_
-                && (CqlBoolean)(!((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null))))
+                && !((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null)))
                 && r_())
                 && s_());
         }
@@ -687,7 +687,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             }
 
             return /* CQL 'and' (145:7-147:39) */ (/* CQL 'and' (145:13-146:67) */ (/* CQL 'and' (145:13-145:100) */ ((CqlBoolean)q_
-                && (CqlBoolean)(!((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null))))
+                && !((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null)))
                 && r_())
                 && s_());
         }

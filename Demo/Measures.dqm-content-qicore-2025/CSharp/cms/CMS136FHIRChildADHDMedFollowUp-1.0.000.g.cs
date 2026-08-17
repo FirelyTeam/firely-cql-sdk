@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS136FHIRChildADHDMedFollowUp", "1.0.000")]
 public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISingleton<CMS136FHIRChildADHDMedFollowUp_1_0_000>
 {
@@ -989,7 +989,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             CqlInterval<CqlDate> k_ = context.Operators.Interval(h_, j_, false, true);
             bool? l_ = context.Operators.In<CqlDate>(g_, k_, "day");
             return /* CQL 'and' (113:5-113:104) */ ((CqlBoolean)l_
-                && (CqlBoolean)(!((bool?)((this.IPSD(context)) is null))));
+                && !((bool?)((this.IPSD(context)) is null)));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1045,7 +1045,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         return /* CQL 'and' (49:3-55:85) */ (/* CQL 'and' (49:3-54:75) */ (/* CQL 'and' (49:3-53:37) */ (/* CQL 'and' (49:3-52:11) */ ((CqlBoolean)i_
             && j_())
             && k_())
-            && (CqlBoolean)(!((bool?)((this.First_ADHD_Medication_Prescribed_During_Intake_Period(context)) is null))))
+            && !((bool?)((this.First_ADHD_Medication_Prescribed_During_Intake_Period(context)) is null)))
             && l_());
     }
 
@@ -1206,7 +1206,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             CqlInterval<CqlDate> l_ = context.Operators.Interval(i_, k_, false, true);
             bool? m_ = context.Operators.In<CqlDate>(h_, l_, "day");
             return /* CQL 'and' (137:5-137:114) */ ((CqlBoolean)m_
-                && (CqlBoolean)(!((bool?)((this.IPSD(context)) is null))));
+                && !((bool?)((this.IPSD(context)) is null)));
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -1869,7 +1869,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             CqlInterval<CqlDate> k_ = context.Operators.Interval(h_, j_, false, true);
             bool? l_ = context.Operators.In<CqlDate>(g_, k_, "day");
             return /* CQL 'and' (175:5-175:105) */ ((CqlBoolean)l_
-                && (CqlBoolean)(!((bool?)((this.IPSD(context)) is null))));
+                && !((bool?)((this.IPSD(context)) is null)));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1925,8 +1925,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         return /* CQL 'and' (158:3-165:103) */ (/* CQL 'and' (158:3-164:83) */ (/* CQL 'and' (158:3-163:75) */ (/* CQL 'and' (158:3-162:37) */ (/* CQL 'and' (158:3-161:11) */ ((CqlBoolean)i_
             && j_())
             && k_())
-            && (CqlBoolean)(!((bool?)((this.First_ADHD_Medication_Prescribed_During_Intake_Period(context)) is null))))
-            && (CqlBoolean)(this.Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days(context)))
+            && !((bool?)((this.First_ADHD_Medication_Prescribed_During_Intake_Period(context)) is null)))
+            && this.Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days(context))
             && l_());
     }
 
@@ -2062,8 +2062,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 bool? g_(CqlDate Encounter1) {
                     IEnumerable<CqlDate> i_ = this.Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(context);
                     bool? j_(CqlDate Encounter2) => /* CQL 'and' (271:25-273:44) */ (/* CQL 'and' (271:25-272:42) */ ((CqlBoolean)(!((bool?)(Encounter1 is null)))
-                        && (CqlBoolean)(!((bool?)(Encounter2 is null))))
-                        && (CqlBoolean)(!(context.Operators.Equivalent(Encounter1, Encounter2))));
+                        && !((bool?)(Encounter2 is null)))
+                        && !(context.Operators.Equivalent(Encounter1, Encounter2)));
                     bool? k_ = context.Operators.WhereAny<CqlDate>(i_, j_);
                     return k_;
                 }

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("AdvancedIllnessandFrailtyExclusionECQMFHIR4", "5.17.000")]
 public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILibrary, ISingleton<AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000>
 {
@@ -377,7 +377,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(l_, m_, true, true);
             bool? o_ = context.Operators.In<CqlDateTime>(i_, n_, (string)default);
             return /* CQL 'and' (57:17-58:69) */ ((CqlBoolean)o_
-                && (CqlBoolean)(!((bool?)((context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2)) is null))));
+                && !((bool?)((context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2)) is null)));
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?> e_ = context.Operators.SelectWhere<ValueTuple<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>, (CqlTupleMetadata, CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?>(b_, c_, d_);
@@ -692,11 +692,11 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             int? ab_ = context.Operators.CalculateAgeAt(x_, aa_, "year");
             bool? ac_ = context.Operators.GreaterOrEqual(ab_, 80);
             return /* CQL 'and' (96:20-98:17) */ ((CqlBoolean)ac_
-                && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)));
+                && this.Has_Criteria_Indicating_Frailty(context));
         }
 
         return /* CQL 'or' (89:3-98:17) */ (/* CQL 'and' (89:3-95:15) */ (/* CQL 'and' (89:5-90:55) */ ((CqlBoolean)j_
-            && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)))
+            && this.Has_Criteria_Indicating_Frailty(context))
             && k_())
             || l_());
     }
@@ -743,7 +743,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
         }
 
         return /* CQL 'and' (101:3-106:17) */ (/* CQL 'and' (101:3-102:53) */ ((CqlBoolean)i_
-            && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)))
+            && this.Has_Criteria_Indicating_Frailty(context))
             && j_());
     }
 

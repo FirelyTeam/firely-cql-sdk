@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS145FHIRCADBBlockerTPMIorLVSD", "1.0.000")]
 public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingleton<CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000>
 {
@@ -546,7 +546,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 return /* CQL 'and' (110:17-112:47) */ (/* CQL 'and' (110:17-111:61) */ (/* CQL 'and' (110:17-110:134) */ ((CqlBoolean)r_
                     && s_())
                     && t_())
-                    && (CqlBoolean)(AHAOverall_4_1_000.Instance.isVerified(context, MyocardialInfarction)));
+                    && AHAOverall_4_1_000.Instance.isVerified(context, MyocardialInfarction));
             }
 
             bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
@@ -712,8 +712,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     {
         bool? a_ = this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI(context);
         return /* CQL 'and' (53:3-55:91) */ (/* CQL 'and' (53:3-54:95) */ ((CqlBoolean)a_
-            && (CqlBoolean)(!(this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI(context))))
-            && (CqlBoolean)(!(this.Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI(context))));
+            && !(this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI(context)))
+            && !(this.Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI(context)));
     }
 
 
@@ -1124,7 +1124,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     {
         bool? a_ = this.Has_Beta_Blocker_Therapy_for_LVSD_Ordered(context);
         return /* CQL 'or' (80:3-81:58) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(context)));
+            || this.Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(context));
     }
 
 
@@ -1279,7 +1279,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     {
         bool? a_ = this.Has_Beta_Blocker_Therapy_Ordered(context);
         return /* CQL 'or' (84:3-85:49) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Is_Currently_Taking_Beta_Blocker_Therapy(context)));
+            || this.Is_Currently_Taking_Beta_Blocker_Therapy(context));
     }
 
 
@@ -1479,8 +1479,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     {
         bool? a_ = this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
         return /* CQL 'and' (119:3-121:117) */ (/* CQL 'and' (119:3-120:121) */ ((CqlBoolean)a_
-            && (CqlBoolean)(!(this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))))
-            && (CqlBoolean)(!(this.Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))));
+            && !(this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)))
+            && !(this.Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)));
     }
 
 
@@ -2083,14 +2083,14 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     {
         bool? a_ = this.Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
         return /* CQL 'or' (290:3-298:126) */ (/* CQL 'or' (290:3-297:77) */ (/* CQL 'or' (290:3-296:141) */ (/* CQL 'or' (290:3-295:139) */ (/* CQL 'or' (290:3-294:118) */ (/* CQL 'or' (290:3-293:93) */ (/* CQL 'or' (290:3-292:93) */ (/* CQL 'or' (290:3-291:88) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)))
-            || (CqlBoolean)(this.Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)))
-            || (CqlBoolean)(this.Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)))
-            || (CqlBoolean)(this.Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)))
-            || (CqlBoolean)(this.Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)))
-            || (CqlBoolean)(this.Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)))
-            || (CqlBoolean)(this.Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(context)))
-            || (CqlBoolean)(this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer(context)));
+            || this.Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
+            || this.Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
+            || this.Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
+            || this.Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
+            || this.Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
+            || this.Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
+            || this.Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(context))
+            || this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer(context));
     }
 
 
@@ -2199,14 +2199,14 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     {
         bool? a_ = this.Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI(context);
         return /* CQL 'or' (301:3-309:100) */ (/* CQL 'or' (301:3-308:76) */ (/* CQL 'or' (301:3-307:115) */ (/* CQL 'or' (301:3-306:113) */ (/* CQL 'or' (301:3-305:92) */ (/* CQL 'or' (301:3-304:67) */ (/* CQL 'or' (301:3-303:67) */ (/* CQL 'or' (301:3-302:62) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI(context)))
-            || (CqlBoolean)(this.Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI(context)))
-            || (CqlBoolean)(this.Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI(context)))
-            || (CqlBoolean)(this.Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI(context)))
-            || (CqlBoolean)(this.Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI(context)))
-            || (CqlBoolean)(this.Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI(context)))
-            || (CqlBoolean)(this.Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy(context)))
-            || (CqlBoolean)(this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer(context)));
+            || this.Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
+            || this.Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
+            || this.Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
+            || this.Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
+            || this.Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
+            || this.Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
+            || this.Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy(context))
+            || this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer(context));
     }
 
 

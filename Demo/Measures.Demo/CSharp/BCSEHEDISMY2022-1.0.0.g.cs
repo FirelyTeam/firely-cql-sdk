@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("BCSEHEDISMY2022", "1.0.0")]
 public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY2022_1_0_0>
 {
@@ -253,7 +253,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
         return /* CQL 'and' (34:3-38:46) */ (/* CQL 'and' (34:3-37:39) */ ((CqlBoolean)j_
             && k_())
-            && (CqlBoolean)(this.Enrolled_During_Participation_Period(context)));
+            && this.Enrolled_During_Participation_Period(context));
     }
 
 
@@ -620,8 +620,8 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         }
 
         return /* CQL 'or' (66:3-69:83) */ (/* CQL 'or' (66:3-68:96) */ (/* CQL 'or' (66:3-67:29) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Mastectomy_Exclusion(context)))
-            || (CqlBoolean)(NCQAAdvancedIllnessandFrailty_1_0_0.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)))
+            || this.Mastectomy_Exclusion(context))
+            || NCQAAdvancedIllnessandFrailty_1_0_0.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context))
             || b_());
     }
 

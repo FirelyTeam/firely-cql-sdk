@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS1154ScreeningPrediabetesFHIR", "1.0.000")]
 public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingleton<CMS1154ScreeningPrediabetesFHIR_1_0_000>
 {
@@ -376,7 +376,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
         return /* CQL 'and' (104:3-107:62) */ (/* CQL 'or' (104:3-106:3) */ ((CqlBoolean)b_
             || c_())
-            && (CqlBoolean)((bool?)(/* CQL 'is true' (107:9-107:62) */ (this.Aged_35_to_70_at_Start_of_Measurement_Period(context)) is true)));
+            && (bool?)(/* CQL 'is true' (107:9-107:62) */ (this.Aged_35_to_70_at_Start_of_Measurement_Period(context)) is true));
     }
 
 
@@ -468,7 +468,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlQuantity d_ = context.Operators.Quantity(25m, "kg/m2");
         bool? e_ = context.Operators.GreaterOrEqual(c_, d_);
         return /* CQL 'and' (89:3-90:30) */ ((CqlBoolean)e_
-            && (CqlBoolean)(this.Patient_is_not_Asian(context)));
+            && this.Patient_is_not_Asian(context));
     }
 
 
@@ -486,7 +486,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlQuantity d_ = context.Operators.Quantity(23m, "kg/m2");
         bool? e_ = context.Operators.GreaterOrEqual(c_, d_);
         return /* CQL 'and' (85:3-86:26) */ ((CqlBoolean)e_
-            && (CqlBoolean)(this.Patient_is_Asian(context)));
+            && this.Patient_is_Asian(context));
     }
 
 
@@ -503,7 +503,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlBoolean b_() {
             bool? c_ = this.Most_Recent_BMI_Equal_to_or_Greater_Than_25_and_Is_Not_Asian(context);
             return /* CQL 'or' (94:9-96:5) */ ((CqlBoolean)c_
-                || (CqlBoolean)(this.Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian(context)));
+                || this.Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian(context));
         }
 
         return /* CQL 'and' (93:3-96:5) */ ((CqlBoolean)a_
@@ -789,7 +789,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             || c_())
             || d_())
             || e_())
-            || (CqlBoolean)(this.Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period(context)));
+            || this.Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period(context));
     }
 
 

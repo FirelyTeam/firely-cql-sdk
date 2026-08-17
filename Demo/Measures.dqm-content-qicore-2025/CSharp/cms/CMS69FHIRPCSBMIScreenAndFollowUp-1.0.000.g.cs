@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS69FHIRPCSBMIScreenAndFollowUp", "1.0.000")]
 public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000>
 {
@@ -303,8 +303,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
         return /* CQL 'or' (45:3-47:46) */ (/* CQL 'or' (45:3-46:69) */ ((CqlBoolean)a_
-            || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context)))
-            || (CqlBoolean)(this.Is_Pregnant_During_Measurement_Period(context)));
+            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))
+            || this.Is_Pregnant_During_Measurement_Period(context));
     }
 
 
@@ -1123,7 +1123,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
 
         return /* CQL 'or' (50:3-52:23) */ (/* CQL 'or' (50:3-51:46) */ ((CqlBoolean)b_
             || c_())
-            || (CqlBoolean)(this.Has_Normal_BMI(context)));
+            || this.Has_Normal_BMI(context));
     }
 
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR", "0.0.015")]
 public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibrary, ISingleton<DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015>
 {
@@ -400,8 +400,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     {
         bool? a_ = this.Has_Most_Recent_HbA1c_Without_Result(context);
         return /* CQL 'or' (51:3-53:63) */ (/* CQL 'or' (51:3-52:71) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Has_Most_Recent_Elevated_HbA1c(context)))
-            || (CqlBoolean)(this.Has_No_Record_Of_HbA1c(context)));
+            || this.Has_Most_Recent_Elevated_HbA1c(context))
+            || this.Has_No_Record_Of_HbA1c(context));
     }
 
 
@@ -426,13 +426,13 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             int? j_ = context.Operators.CalculateAgeAt(f_, i_, "year");
             bool? k_ = context.Operators.GreaterOrEqual(j_, 65);
             return /* CQL 'and' (91:34-92:110) */ ((CqlBoolean)k_
-                && (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context)));
+                && AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context));
         }
 
         return /* CQL 'or' (89:3-93:93) */ (/* CQL 'or' (89:3-92:110) */ (/* CQL 'or' (89:3-90:112) */ ((CqlBoolean)a_
-            || (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)))
+            || AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context))
             || b_())
-            || (CqlBoolean)(PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context)));
+            || PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context));
     }
 
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS71FHIRSTKAnticoagAFFlutter", "1.0.000")]
 public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleton<CMS71FHIRSTKAnticoagAFFlutter_1_0_000>
 {
@@ -679,7 +679,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 CqlBoolean ae_() {
                     bool? am_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAnticoagulant as MedicationRequest);
                     return /* CQL 'or' (97:13-99:9) */ ((CqlBoolean)am_
-                        || (CqlBoolean)(QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAnticoagulant as MedicationRequest)));
+                        || QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAnticoagulant as MedicationRequest));
                 }
 
 
@@ -775,7 +775,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             CqlBoolean t_() {
                 bool? ad_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAnticoagulant as MedicationRequest);
                 return /* CQL 'or' (116:13-118:9) */ ((CqlBoolean)ad_
-                    || (CqlBoolean)(QICoreCommon_4_0_000.Instance.isDischarge(context, NoAnticoagulant as MedicationRequest)));
+                    || QICoreCommon_4_0_000.Instance.isDischarge(context, NoAnticoagulant as MedicationRequest));
             }
 
 

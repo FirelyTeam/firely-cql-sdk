@@ -409,10 +409,22 @@ internal partial class CSharpEmitter
         // PrintFullyInline cannot fail here.
         if (CodeBinary.ShortCircuits(binary.Op))
         {
+            // The right operand's CqlBoolean conversion is dropped: overload resolution for the
+            // user-defined operator backing && / || applies an implicit conversion there, and the
+            // skip is unaffected (a skipped operand is not converted either). The LEFT operand
+            // keeps its conversion — see UnwrapCqlBooleanConversion for why it cannot be dropped.
+            //
+            // The discarded cast's own parentheses were silently providing precedence safety, so
+            // that has to be replaced: FormatShortCircuit parenthesizes the whole expression but
+            // not the operands, and a right operand binding looser than && would regroup —
+            // `x && a ?? b` parses as `(x && a) ?? b`.
+            var rightOperand = ParenthesizeShortCircuitOperand(
+                PrintFullyInline(UnwrapCqlBooleanConversion(binary.Right), includeOriginTags));
+
             return FormatShortCircuit(
                 binary.Op,
                 child(binary.Left).Code,
-                PrintFullyInline(binary.Right, includeOriginTags),
+                rightOperand,
                 includeOriginTags ? binary.OriginTag : null);
         }
 
@@ -522,6 +534,43 @@ internal partial class CSharpEmitter
         using (isb.Indent())
             isb.Append($"{@operator} {right})");
         return $"{originPrefix}{isb}";
+    }
+
+    /// <summary>
+    /// Parenthesizes a short-circuit operator's right operand only when it could regroup, judged by
+    /// whether it contains whitespace at parenthesis depth ZERO.
+    ///
+    /// <para>That is a proxy for "has a top-level operator or keyword", and an exact one for the
+    /// shapes reachable here: every operator that binds looser than <c>&amp;&amp;</c> is printed
+    /// spaced (<c>a ?? b</c>, <c>x is true</c>, <c>y as T</c>, <c>c ? t : f</c>), while everything
+    /// that binds tighter is not (<c>f_()</c>, <c>this.Def(context)</c>, <c>!x</c>, <c>a_</c>) — a
+    /// call's or a cast's own internal spacing sits inside its parentheses, at depth one or more.
+    /// An already-parenthesized term likewise opens at index 0, so its interior never counts.</para>
+    ///
+    /// <para>Deliberately not <see cref="StringExtensions.ParenthesizeIfNeeded"/>, whose
+    /// starts-with-<c>(</c> XOR ends-with-<c>)</c> rule wraps every method call — correct, but it
+    /// would put redundant parentheses on all ~478 of these operands, which is the noise this
+    /// change exists to remove.</para>
+    /// </summary>
+    private static string ParenthesizeShortCircuitOperand(string term)
+    {
+        term = term.Trim();
+
+        var depth = 0;
+        foreach (var c in term)
+        {
+            switch (c)
+            {
+                case '(': depth++; break;
+                case ')': depth--; break;
+                default:
+                    if (depth <= 0 && char.IsWhiteSpace(c))
+                        return $"({term})";
+                    break;
+            }
+        }
+
+        return term;
     }
 
     private string PrintUnary(CodeUnary unary, Func<CodeExpression, Atom> child) =>

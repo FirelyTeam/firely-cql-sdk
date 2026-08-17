@@ -448,25 +448,6 @@ internal partial class CSharpEmitter
             LinearizeConditionalStatements(chain.Type, chain.Cases, chain.Else, tailPosition);
 
         /// <summary>
-        /// Binds the let's value to its local exactly once, then linearizes the body. The
-        /// binding must survive any number of references from the body — including from
-        /// positions that print fully inline, which would otherwise re-print (re-evaluate)
-        /// the value expression — so any value whose linearized atom is not already a plain
-        /// variable or constant reference is forced into a hoisted local, even shapes
-        /// (a coalesce, a property access, a simple ternary) that Linearize normally
-        /// passes through inline.
-        /// </summary>
-        /// <summary>
-        /// The expression under a <see cref="CqlBoolean"/> conversion the builder added, so a local
-        /// function's body can be the plain <c>bool?</c> expression and let the conversion happen
-        /// implicitly at its <c>return</c>.
-        /// </summary>
-        private static CodeExpression UnwrapCqlBooleanConversion(CodeExpression node) =>
-            node is CodeCast { Type: var castType, Operand: { } inner } && castType == typeof(CqlBoolean)
-                ? inner
-                : node;
-
-        /// <summary>
         /// Whether a short-circuit operator's right operand is small enough, and simple enough, to
         /// print inline. It cannot be hoisted, so inline is the only alternative to a local
         /// function — and an operand that hoists several spine nodes would print as one enormous
@@ -508,6 +489,15 @@ internal partial class CSharpEmitter
                 node);
         }
 
+        /// <summary>
+        /// Binds the let's value to its local exactly once, then linearizes the body. The
+        /// binding must survive any number of references from the body — including from
+        /// positions that print fully inline, which would otherwise re-print (re-evaluate)
+        /// the value expression — so any value whose linearized atom is not already a plain
+        /// variable or constant reference is forced into a hoisted local, even shapes
+        /// (a coalesce, a property access, a simple ternary) that Linearize normally
+        /// passes through inline.
+        /// </summary>
         private Atom? LinearizeLet(CodeLet let, bool tailPosition)
         {
             var valueAtom = Linearize(let.Value)!;

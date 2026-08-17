@@ -13,7 +13,7 @@
   destroying the skip. Such functions are only ever called, never converted to a delegate, so
   Roslyn gives them a struct closure passed by `ref` and they do not allocate — preserving the
   property that ruled out the `Lazy<bool?>` runtime overloads. (#1514)
-- `GeneratorToolVersion` is now **5.3.1.0**. Previously generated libraries keep working unchanged:
+- `GeneratorToolVersion` is now **5.3.2.0**. Previously generated libraries keep working unchanged:
   the invoker toolkit accepts any version in `[5.1.0.0, 5.4.0.0)`. (#1514)
 
 ## Other
@@ -25,3 +25,10 @@
   `?? false`, a lifted `!`, and the null patterns each genuinely require a `bool?` and have no
   implicit conversion to fall back on. Declared signatures are unchanged, so this is a readability
   change only — it is the reason for the patch-level `GeneratorToolVersion` bump. (#1514)
+- A short-circuit operator's **right** operand no longer carries a `(CqlBoolean)` conversion either
+  (478 sites): overload resolution for the underlying `&`/`|` applies it implicitly, and a skipped
+  operand is never converted, so the skip is unaffected. The **left** operand keeps its conversion,
+  and that asymmetry is load-bearing rather than cosmetic — C# synthesises `&&`/`||` from the left
+  operand's own `operator true`/`operator false`, so a `bool?` left operand has no `&&` at all.
+  Right operands that bind looser than `&&` (an `is` pattern, a coalesce — 9 sites) are now
+  parenthesised explicitly, having previously relied on the discarded cast's parentheses. (#1514)

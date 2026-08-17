@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("AHAOverall", "4.1.000")]
 public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_000>
 {
@@ -274,7 +274,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                 bool? o_ = context.Operators.Overlaps(l_, n_, "day");
                 return /* CQL 'and' (44:17-45:39) */ ((CqlBoolean)o_
-                    && (CqlBoolean)(this.isVerified(context, HeartFailure)));
+                    && this.isVerified(context, HeartFailure));
             }
 
             bool? k_ = context.Operators.WhereAny<Condition>(i_, j_);
@@ -289,7 +289,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
             bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, r_, "day");
             return /* CQL 'and' (46:5-47:53) */ ((CqlBoolean)s_
-                && (CqlBoolean)(this.isEncounterFinished(context, QualifyingEncounter)));
+                && this.isEncounterFinished(context, QualifyingEncounter));
         }
 
         IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
@@ -608,7 +608,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
             bool? g_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(d_, f_, "day");
             return /* CQL 'and' (102:5-103:48) */ ((CqlBoolean)g_
-                && (CqlBoolean)(this.isEncounterFinished(context, ValidEncounter)));
+                && this.isEncounterFinished(context, ValidEncounter));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -917,7 +917,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
             bool? g_ = context.Operators.Overlaps(d_, f_, "day");
             return /* CQL 'and' (211:7-212:36) */ ((CqlBoolean)g_
-                && (CqlBoolean)(this.isVerified(context, Condition)));
+                && this.isVerified(context, Condition));
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -938,7 +938,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
             bool? g_ = context.Operators.OverlapsAfter(d_, f_, "day");
             return /* CQL 'and' (221:7-222:36) */ ((CqlBoolean)g_
-                && (CqlBoolean)(this.isVerified(context, Condition)));
+                && this.isVerified(context, Condition));
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -1031,7 +1031,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
             bool? m_ = context.Operators.OverlapsAfter(j_, l_, "day");
             return /* CQL 'and' (241:7-242:45) */ ((CqlBoolean)m_
-                && (CqlBoolean)(this.isVerified(context, AllergyIntolerance)));
+                && this.isVerified(context, AllergyIntolerance));
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);

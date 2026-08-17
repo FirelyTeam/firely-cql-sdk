@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("Exam130FHIR", "0.0.003")]
 public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_003>
 {
@@ -478,16 +478,16 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             int? s_ = context.Operators.CalculateAgeAt(o_, r_, "year");
             bool? t_ = context.Operators.GreaterOrEqual(s_, 65);
             return /* CQL 'and' (98:16-100:13) */ ((CqlBoolean)t_
-                && (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context)));
+                && AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context));
         }
 
         return /* CQL 'or' (93:3-101:73) */ (/* CQL 'or' (93:3-100:13) */ (/* CQL 'or' (93:3-97:92) */ (/* CQL 'or' (93:3-96:49) */ (/* CQL 'or' (93:3-95:49) */ (/* CQL 'or' (93:3-94:42) */ ((CqlBoolean)a_
             || b_())
             || c_())
             || d_())
-            || (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)))
+            || AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context))
             || e_())
-            || (CqlBoolean)(PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context)));
+            || PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context));
     }
 
 
@@ -660,7 +660,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
             return /* CQL 'and' (137:13-141:87) */ (/* CQL 'and' (137:19-140:47) */ (/* CQL 'and' (137:19-139:83) */ ((CqlBoolean)h_
                 && i_())
-                && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
+                && !((bool?)(FecalOccult?.Value is null)))
                 && j_());
         }
 
@@ -743,7 +743,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
             return /* CQL 'and' (146:13-150:94) */ (/* CQL 'and' (146:19-149:47) */ (/* CQL 'and' (146:19-148:83) */ ((CqlBoolean)h_
                 && i_())
-                && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
+                && !((bool?)(FecalOccult?.Value is null)))
                 && j_());
         }
 
@@ -812,7 +812,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             }
 
             return /* CQL 'and' (156:13-162:94) */ (/* CQL 'and' (159:15-161:47) */ ((CqlBoolean)g_
-                && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
+                && !((bool?)(FecalOccult?.Value is null)))
                 && h_());
         }
 
@@ -851,7 +851,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             }
 
             return /* CQL 'and' (167:13-171:94) */ (/* CQL 'and' (167:19-170:47) */ ((CqlBoolean)!h_
-                && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
+                && !((bool?)(FecalOccult?.Value is null)))
                 && i_());
         }
 
@@ -1048,7 +1048,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
             return /* CQL 'and' (191:13-196:41) */ (/* CQL 'and' (191:19-194:42) */ (/* CQL 'and' (191:19-193:78) */ ((CqlBoolean)h_
                 && i_())
-                && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
+                && !((bool?)(FitDNA?.Value is null)))
                 && j_());
         }
 
@@ -1143,7 +1143,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
             return /* CQL 'and' (201:13-206:48) */ (/* CQL 'and' (201:19-204:42) */ (/* CQL 'and' (201:19-203:78) */ ((CqlBoolean)h_
                 && i_())
-                && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
+                && !((bool?)(FitDNA?.Value is null)))
                 && j_());
         }
 
@@ -1224,7 +1224,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             }
 
             return /* CQL 'and' (212:13-219:48) */ (/* CQL 'and' (215:15-217:42) */ ((CqlBoolean)g_
-                && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
+                && !((bool?)(FitDNA?.Value is null)))
                 && h_());
         }
 
@@ -1275,7 +1275,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             }
 
             return /* CQL 'and' (224:13-229:48) */ (/* CQL 'and' (224:19-227:42) */ ((CqlBoolean)!h_
-                && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
+                && !((bool?)(FitDNA?.Value is null)))
                 && i_());
         }
 
@@ -1763,9 +1763,9 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
     {
         bool? a_ = this.Numerator(context);
         return /* CQL 'and' (312:3-315:34) */ (/* CQL 'and' (312:3-314:19) */ (/* CQL 'and' (312:3-313:26) */ ((CqlBoolean)a_
-            && (CqlBoolean)(this.Initial_Population(context)))
-            && (CqlBoolean)(this.Denominator(context)))
-            && (CqlBoolean)(!(this.Denominator_Exclusions(context))));
+            && this.Initial_Population(context))
+            && this.Denominator(context))
+            && !(this.Denominator_Exclusions(context)));
     }
 
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS771FHIRUrinarySymptomScoreBPH", "1.0.000")]
 public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingleton<CMS771FHIRUrinarySymptomScoreBPH_1_0_000>
 {
@@ -245,7 +245,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, true);
             bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
             return /* CQL 'and' (146:7-147:60) */ ((CqlBoolean)r_
-                && (CqlBoolean)(this.verificationStatusIsNotInvalid(context, NewBPHDiagnosis)));
+                && this.verificationStatusIsNotInvalid(context, NewBPHDiagnosis));
         }
 
         IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
@@ -287,8 +287,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     {
         bool? a_ = this.Patient_is_Male(context);
         return /* CQL 'and' (30:3-32:38) */ (/* CQL 'and' (30:3-31:34) */ ((CqlBoolean)a_
-            && (CqlBoolean)(this.Has_Qualifying_Encounter(context)))
-            && (CqlBoolean)(this.Has_Qualifying_BPH_Diagnosis(context)));
+            && this.Has_Qualifying_Encounter(context))
+            && this.Has_Qualifying_BPH_Diagnosis(context));
     }
 
 
@@ -689,8 +689,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     {
         bool? a_ = this.Initial_Population(context);
         return /* CQL 'and' (35:3-37:86) */ (/* CQL 'and' (35:3-36:86) */ ((CqlBoolean)a_
-            && (CqlBoolean)(!((bool?)((this.Urinary_Symptom_Score_Within_1_Month_After_Initial_BPH_Diagnosis(context)) is null))))
-            && (CqlBoolean)(!((bool?)((this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(context)) is null))));
+            && !((bool?)((this.Urinary_Symptom_Score_Within_1_Month_After_Initial_BPH_Diagnosis(context)) is null)))
+            && !((bool?)((this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(context)) is null)));
     }
 
 
@@ -945,7 +945,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         IEnumerable<Condition> a_ = this.Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment(context);
         bool? b_ = context.Operators.Exists<Condition>(a_);
         return /* CQL 'or' (113:3-114:120) */ ((CqlBoolean)b_
-            || (CqlBoolean)(this.BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment(context)));
+            || this.BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment(context));
     }
 
 
@@ -960,8 +960,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         IEnumerable<Condition> a_ = this.Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis(context);
         bool? b_ = context.Operators.Exists<Condition>(a_);
         return /* CQL 'or' (40:3-42:129) */ (/* CQL 'or' (40:3-41:111) */ ((CqlBoolean)b_
-            || (CqlBoolean)(!((bool?)((this.Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization(context)) is null))))
-            || (CqlBoolean)(this.Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment(context)));
+            || !((bool?)((this.Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization(context)) is null)))
+            || this.Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment(context));
     }
 
 

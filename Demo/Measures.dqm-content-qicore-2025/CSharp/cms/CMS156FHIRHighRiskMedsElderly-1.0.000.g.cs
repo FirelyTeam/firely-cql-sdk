@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS156FHIRHighRiskMedsElderly", "1.0.000")]
 public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleton<CMS156FHIRHighRiskMedsElderly_1_0_000>
 {
@@ -451,7 +451,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
         return /* CQL 'or' (111:3-112:69) */ ((CqlBoolean)a_
-            || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context)));
+            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context));
     }
 
 
@@ -1668,8 +1668,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> a_ = this.Same_High_Risk_Medications_Ordered_on_Different_Days(context);
         bool? b_ = context.Operators.Exists<MedicationRequest>(a_);
         return /* CQL 'or' (115:3-117:63) */ (/* CQL 'or' (115:3-116:58) */ ((CqlBoolean)b_
-            || (CqlBoolean)(this.Two_High_Risk_Medications_with_Prolonged_Duration(context)))
-            || (CqlBoolean)(this.High_Risk_Medications_with_Average_Daily_Dose_Criteria(context)));
+            || this.Two_High_Risk_Medications_with_Prolonged_Duration(context))
+            || this.High_Risk_Medications_with_Average_Daily_Dose_Criteria(context));
     }
 
 
@@ -2099,7 +2099,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         CqlBoolean b_() {
             bool? c_ = this.Numerator_1(context);
             return /* CQL 'and' (231:8-233:5) */ ((CqlBoolean)c_
-                && (CqlBoolean)(!(this.Numerator_2(context))));
+                && !(this.Numerator_2(context)));
         }
 
         return /* CQL 'or' (230:3-233:5) */ ((CqlBoolean)a_

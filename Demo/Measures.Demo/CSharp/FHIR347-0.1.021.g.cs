@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("FHIR347", "0.1.021")]
 public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
 {
@@ -593,7 +593,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
         }
 
         return /* CQL 'and' (165:3-169:51) */ (/* CQL 'and' (165:3-168:60) */ (/* CQL 'and' (165:3-167:82) */ (/* CQL 'and' (165:3-166:32) */ ((CqlBoolean)i_
-            && (CqlBoolean)(this.Has_Diabetes_Diagnosis(context)))
+            && this.Has_Diabetes_Diagnosis(context))
             && j_())
             && k_())
             && l_());
@@ -936,11 +936,11 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
     {
         bool? a_ = this.Has_Allergy_to_Statin(context);
         return /* CQL 'or' (105:3-110:43) */ (/* CQL 'or' (105:3-109:31) */ (/* CQL 'or' (105:3-108:50) */ (/* CQL 'or' (105:3-107:53) */ (/* CQL 'or' (105:3-106:67) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care(context)))
-            || (CqlBoolean)(this.Has_Hepatitis_or_Liver_Disease_Diagnosis(context)))
-            || (CqlBoolean)(this.Has_Statin_Associated_Muscle_Symptoms(context)))
-            || (CqlBoolean)(this.Has_ESRD_Diagnosis(context)))
-            || (CqlBoolean)(this.Has_Adverse_Reaction_to_Statin(context)));
+            || this.Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care(context))
+            || this.Has_Hepatitis_or_Liver_Disease_Diagnosis(context))
+            || this.Has_Statin_Associated_Muscle_Symptoms(context))
+            || this.Has_ESRD_Diagnosis(context))
+            || this.Has_Adverse_Reaction_to_Statin(context));
     }
 
 

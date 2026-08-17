@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS117FHIRChildImmunStatus", "1.0.000")]
 public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<CMS117FHIRChildImmunStatus_1_0_000>
 {
@@ -617,11 +617,11 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
         return /* CQL 'or' (104:3-109:28) */ (/* CQL 'or' (104:3-108:65) */ (/* CQL 'or' (104:3-107:16) */ (/* CQL 'or' (104:3-106:29) */ (/* CQL 'or' (104:3-105:45) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Has_Severe_Combined_Immunodeficiency(context)))
-            || (CqlBoolean)(this.Has_Immunodeficiency(context)))
-            || (CqlBoolean)(this.Has_HIV(context)))
-            || (CqlBoolean)(this.Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia(context)))
-            || (CqlBoolean)(this.Has_Intussusception(context)));
+            || this.Has_Severe_Combined_Immunodeficiency(context))
+            || this.Has_Immunodeficiency(context))
+            || this.Has_HIV(context))
+            || this.Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia(context))
+            || this.Has_Intussusception(context));
     }
 
 
@@ -2713,7 +2713,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             }
 
             return /* CQL 'or' (180:9-183:5) */ (/* CQL 'or' (180:11-181:74) */ ((CqlBoolean)bn_
-                || (CqlBoolean)(this.Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination(context)))
+                || this.Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination(context))
                 || bo_());
         }
 

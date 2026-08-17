@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS90FHIRFSAforHeartFailure", "1.0.000")]
 public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<CMS90FHIRFSAforHeartFailure_1_0_000>
 {
@@ -2164,15 +2164,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
     {
         bool? a_ = this.Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments(context);
         return /* CQL 'or' (87:3-96:82) */ (/* CQL 'or' (87:3-95:83) */ (/* CQL 'or' (87:3-94:72) */ (/* CQL 'or' (87:3-93:71) */ (/* CQL 'or' (87:3-92:81) */ (/* CQL 'or' (87:3-91:78) */ (/* CQL 'or' (87:3-90:81) */ (/* CQL 'or' (87:3-89:78) */ (/* CQL 'or' (87:3-88:74) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments(context)))
-            || (CqlBoolean)(this.Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(context)))
-            || (CqlBoolean)(this.Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(context)))
-            || (CqlBoolean)(this.Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments(context)))
-            || (CqlBoolean)(this.Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments(context)))
-            || (CqlBoolean)(this.Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments(context)))
-            || (CqlBoolean)(this.Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments(context)))
-            || (CqlBoolean)(this.Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments(context)))
-            || (CqlBoolean)(this.Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments(context)));
+            || this.Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments(context))
+            || this.Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(context))
+            || this.Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(context))
+            || this.Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments(context))
+            || this.Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments(context))
+            || this.Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments(context))
+            || this.Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments(context))
+            || this.Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments(context))
+            || this.Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments(context));
     }
 
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS1017FHIRHHFI", "1.0.000")]
 public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRHHFI_1_0_000>
 {
@@ -1097,7 +1097,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
                 return /* CQL 'and' (151:17-158:103) */ (/* CQL 'and' (151:17-157:42) */ (/* CQL 'and' (151:17-156:9) */ ((CqlBoolean)ac_
                     && ad_())
-                    && (CqlBoolean)(QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest)))
+                    && QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest))
                     && ae_());
             }
 
@@ -1300,7 +1300,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
                 return /* CQL 'and' (169:17-176:106) */ (/* CQL 'and' (169:17-175:45) */ (/* CQL 'and' (169:17-174:9) */ ((CqlBoolean)ac_
                     && ad_())
-                    && (CqlBoolean)(QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest)))
+                    && QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest))
                     && ae_());
             }
 
@@ -1426,7 +1426,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
                 return /* CQL 'and' (181:17-188:94) */ (/* CQL 'and' (181:17-187:33) */ (/* CQL 'and' (181:17-186:9) */ ((CqlBoolean)ac_
                     && ad_())
-                    && (CqlBoolean)(QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest)))
+                    && QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest))
                     && ae_());
             }
 
@@ -1552,7 +1552,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
                 return /* CQL 'and' (193:17-200:95) */ (/* CQL 'and' (193:17-199:34) */ (/* CQL 'and' (193:17-198:9) */ ((CqlBoolean)ac_
                     && ad_())
-                    && (CqlBoolean)(QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest)))
+                    && QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest))
                     && ae_());
             }
 
@@ -1678,7 +1678,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
                 return /* CQL 'and' (205:17-212:100) */ (/* CQL 'and' (205:17-211:39) */ (/* CQL 'and' (205:17-210:9) */ ((CqlBoolean)ac_
                     && ad_())
-                    && (CqlBoolean)(QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest)))
+                    && QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest))
                     && ae_());
             }
 
@@ -1804,7 +1804,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
                 return /* CQL 'and' (217:17-224:98) */ (/* CQL 'and' (217:17-223:37) */ (/* CQL 'and' (217:17-222:9) */ ((CqlBoolean)ac_
                     && ad_())
-                    && (CqlBoolean)(QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest)))
+                    && QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest))
                     && ae_());
             }
 

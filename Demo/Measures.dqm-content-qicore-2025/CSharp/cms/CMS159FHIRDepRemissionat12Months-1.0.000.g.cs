@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS159FHIRDepRemissionat12Months", "1.0.000")]
 public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingleton<CMS159FHIRDepRemissionat12Months_1_0_000>
 {
@@ -768,7 +768,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> et_ = context.Operators.Interval(ep_, es_, true, true);
                 bool? eu_ = context.Operators.Overlaps(en_, et_, "day");
                 return /* CQL 'and' (143:9-144:49) */ ((CqlBoolean)eu_
-                    && (CqlBoolean)(this.isVerified(context, HospiceCareDiagnosis)));
+                    && this.isVerified(context, HospiceCareDiagnosis));
             }
 
             bool? em_ = context.Operators.WhereAny<Condition>(ek_, el_);
@@ -843,7 +843,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ag_, aj_, true, true);
                 bool? al_ = context.Operators.Overlaps(ae_, ak_, "day");
                 return /* CQL 'and' (162:9-163:48) */ ((CqlBoolean)al_
-                    && (CqlBoolean)(this.isVerified(context, PalliativeDiagnosis)));
+                    && this.isVerified(context, PalliativeDiagnosis));
             }
 
             bool? ad_ = context.Operators.WhereAny<Condition>(ab_, ac_);
@@ -1016,7 +1016,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             CqlDateTime z_ = context.Operators.ConvertDateToDateTime(y_);
             bool? aa_ = context.Operators.SameOrBefore(w_, z_, "day");
             return /* CQL 'and' (103:7-104:56) */ ((CqlBoolean)aa_
-                && (CqlBoolean)(this.isVerified(context, MentalHealthDisorderDiagnoses)));
+                && this.isVerified(context, MentalHealthDisorderDiagnoses));
         }
 
         bool? u_ = context.Operators.WhereAny<Condition>(s_, t_);
@@ -1034,9 +1034,9 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     {
         bool? a_ = this.Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period(context);
         return /* CQL 'or' (48:3-51:45) */ (/* CQL 'or' (48:3-50:24) */ (/* CQL 'or' (48:3-49:77) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period(context)))
-            || (CqlBoolean)(this.Patient_Expired(context)))
-            || (CqlBoolean)(this.Has_Mental_Health_Disorder_Diagnoses(context)));
+            || this.Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period(context))
+            || this.Patient_Expired(context))
+            || this.Has_Mental_Health_Disorder_Diagnoses(context));
     }
 
 

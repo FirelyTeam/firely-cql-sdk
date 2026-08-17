@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS506FHIRSafeUseofOpioids", "1.0.000")]
 public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<CMS506FHIRSafeUseofOpioids_1_0_000>
 {
@@ -206,7 +206,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             }
 
             return /* CQL 'and' (59:5-63:117) */ (/* CQL 'and' (59:11-62:63) */ (/* CQL 'or' (59:11-61:5) */ ((CqlBoolean)v_
-                || (CqlBoolean)(QICoreCommon_4_0_000.Instance.isDischarge(context, OpioidMedications as MedicationRequest)))
+                || QICoreCommon_4_0_000.Instance.isDischarge(context, OpioidMedications as MedicationRequest))
                 && w_())
                 && x_());
         }
@@ -289,7 +289,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             }
 
             return /* CQL 'and' (51:5-55:116) */ (/* CQL 'and' (51:11-54:62) */ (/* CQL 'or' (51:11-53:5) */ ((CqlBoolean)v_
-                || (CqlBoolean)(QICoreCommon_4_0_000.Instance.isDischarge(context, BenzoMedications as MedicationRequest)))
+                || QICoreCommon_4_0_000.Instance.isDischarge(context, BenzoMedications as MedicationRequest))
                 && w_())
                 && x_());
         }
@@ -617,7 +617,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
             }
 
             return /* CQL 'and' (133:5-137:119) */ (/* CQL 'and' (133:11-136:65) */ (/* CQL 'or' (133:11-135:5) */ ((CqlBoolean)v_
-                || (CqlBoolean)(QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeMedication as MedicationRequest)))
+                || QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeMedication as MedicationRequest))
                 && w_())
                 && x_());
         }
@@ -734,7 +734,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
 
                 return /* CQL 'and' (126:21-128:34) */ (/* CQL 'and' (126:21-127:79) */ ((CqlBoolean)an_
                     && ao_())
-                    && (CqlBoolean)(this.isVerified(context, OUD as Condition)));
+                    && this.isVerified(context, OUD as Condition));
             }
 
             bool? aj_ = context.Operators.WhereAny<Condition>(ah_, ai_);
@@ -814,7 +814,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                 bool? p_ = context.Operators.Overlaps(m_, o_, "day");
                 return /* CQL 'and' (97:9-98:39) */ ((CqlBoolean)p_
-                    && (CqlBoolean)(this.isVerified(context, CancerPain as Condition)));
+                    && this.isVerified(context, CancerPain as Condition));
             }
 
             bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
@@ -836,7 +836,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                     CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, x_);
                     bool? z_ = context.Operators.Overlaps(w_, y_, "day");
                     return /* CQL 'and' (102:11-103:48) */ ((CqlBoolean)z_
-                        && (CqlBoolean)(this.isVerified(context, SickleCellDisease as Condition)));
+                        && this.isVerified(context, SickleCellDisease as Condition));
                 }
 
                 bool? v_ = context.Operators.WhereAny<Condition>(t_, u_);

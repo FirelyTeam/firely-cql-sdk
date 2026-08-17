@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("HybridHWMFHIR", "0.102.005")]
 public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHIR_0_102_005>
 {
@@ -345,7 +345,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 return /* CQL 'and' (120:7-122:32) */ (/* CQL 'and' (120:13-121:60) */ (/* CQL 'and' (120:13-120:232) */ ((CqlBoolean)(!((bool?)(af_ is null)))
                     && ag_())
                     && ah_())
-                    && (CqlBoolean)(!((bool?)(Exam?.Value is null))));
+                    && !((bool?)(Exam?.Value is null)));
             }
 
             IEnumerable<Observation> k_ = context.Operators.Where<Observation>(ExamList, j_);
@@ -402,7 +402,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 return /* CQL 'and' (120:7-122:32) */ (/* CQL 'and' (120:13-121:60) */ (/* CQL 'and' (120:13-120:232) */ ((CqlBoolean)(!((bool?)(bd_ is null)))
                     && be_())
                     && bf_())
-                    && (CqlBoolean)(!((bool?)(Exam?.Value is null))));
+                    && !((bool?)(Exam?.Value is null)));
             }
 
             IEnumerable<Observation> u_ = context.Operators.Where<Observation>(ExamList, t_);
@@ -475,7 +475,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 return /* CQL 'and' (112:7-113:85) */ (/* CQL 'and' (112:13-113:59) */ (/* CQL 'and' (112:13-112:149) */ ((CqlBoolean)(!((bool?)(ac_ is null)))
                     && ad_())
                     && ae_())
-                    && (CqlBoolean)(!((bool?)(Lab?.Value is null))));
+                    && !((bool?)(Lab?.Value is null)));
             }
 
             IEnumerable<Observation> k_ = context.Operators.Where<Observation>(LabList, j_);
@@ -526,7 +526,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 return /* CQL 'and' (112:7-113:85) */ (/* CQL 'and' (112:13-113:59) */ (/* CQL 'and' (112:13-112:149) */ ((CqlBoolean)(!((bool?)(au_ is null)))
                     && av_())
                     && aw_())
-                    && (CqlBoolean)(!((bool?)(Lab?.Value is null))));
+                    && !((bool?)(Lab?.Value is null)));
             }
 
             IEnumerable<Observation> u_ = context.Operators.Where<Observation>(LabList, t_);

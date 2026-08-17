@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS1173FHIRDiagnosticDelayVTE", "1.0.000")]
 public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleton<CMS1173FHIRDiagnosticDelayVTE_1_0_000>
 {
@@ -918,7 +918,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> eb_ = context.Operators.Interval(dz_, ea_, true, true);
                     bool? ec_ = context.Operators.Overlaps(du_, eb_, "day");
                     return /* CQL 'and' (148:11-149:51) */ ((CqlBoolean)ec_
-                        && (CqlBoolean)(this.isVerified(context, HospiceCareDiagnosis as Condition)));
+                        && this.isVerified(context, HospiceCareDiagnosis as Condition));
                 }
 
                 bool? dt_ = context.Operators.WhereAny<Condition>(dr_, ds_);
@@ -941,7 +941,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> eo_ = context.Operators.Interval(em_, en_, true, true);
                     bool? ep_ = context.Operators.Overlaps(eh_, eo_, "day");
                     return /* CQL 'and' (152:11-153:49) */ ((CqlBoolean)ep_
-                        && (CqlBoolean)(this.isVerified(context, HospiceCareConcern as Condition)));
+                        && this.isVerified(context, HospiceCareConcern as Condition));
                 }
 
                 bool? eg_ = context.Operators.WhereAny<Condition>(ee_, ef_);
@@ -1024,7 +1024,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(am_, an_, true, true);
                     bool? ap_ = context.Operators.Overlaps(ah_, ao_, "day");
                     return /* CQL 'and' (165:11-166:54) */ ((CqlBoolean)ap_
-                        && (CqlBoolean)(this.isVerified(context, PalliativeCareDiagnosis as Condition)));
+                        && this.isVerified(context, PalliativeCareDiagnosis as Condition));
                 }
 
                 bool? ag_ = context.Operators.WhereAny<Condition>(ae_, af_);
@@ -1047,7 +1047,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> bb_ = context.Operators.Interval(az_, ba_, true, true);
                     bool? bc_ = context.Operators.Overlaps(au_, bb_, "day");
                     return /* CQL 'and' (169:11-170:52) */ ((CqlBoolean)bc_
-                        && (CqlBoolean)(this.isVerified(context, PalliativeCareConcern as Condition)));
+                        && this.isVerified(context, PalliativeCareConcern as Condition));
                 }
 
                 bool? at_ = context.Operators.WhereAny<Condition>(ar_, as_);

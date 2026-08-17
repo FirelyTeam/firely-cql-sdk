@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS347FHIRStatinPreventionTxCVD", "1.0.000")]
 public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingleton<CMS347FHIRStatinPreventionTxCVD_1_0_000>
 {
@@ -308,7 +308,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlDateTime al_ = context.Operators.End(ak_);
             bool? am_ = context.Operators.SameOrBefore(aj_, al_, "day");
             return /* CQL 'and' (116:7-117:41) */ ((CqlBoolean)am_
-                && (CqlBoolean)(this.isVerified(context, ASCVDDiagnosis as Condition)));
+                && this.isVerified(context, ASCVDDiagnosis as Condition));
         }
 
         IEnumerable<Condition> t_ = context.Operators.Where<Condition>(r_, s_);
@@ -558,7 +558,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlDateTime h_ = context.Operators.End(g_);
             bool? i_ = context.Operators.SameOrBefore(f_, h_, "day");
             return /* CQL 'and' (176:7-177:47) */ ((CqlBoolean)i_
-                && (CqlBoolean)(this.isVerified(context, Hypercholesterolemia as Condition)));
+                && this.isVerified(context, Hypercholesterolemia as Condition));
         }
 
         IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
@@ -634,7 +634,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             bool? g_ = context.Operators.Overlaps(e_, f_, "day");
             return /* CQL 'and' (140:7-141:44) */ ((CqlBoolean)g_
-                && (CqlBoolean)(this.isVerified(context, DiabetesDiagnosis as Condition)));
+                && this.isVerified(context, DiabetesDiagnosis as Condition));
         }
 
         bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
@@ -684,7 +684,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         }
 
         return /* CQL 'and' (204:3-209:5) */ (/* CQL 'and' (204:3-205:32) */ ((CqlBoolean)j_
-            && (CqlBoolean)(this.Has_Diabetes_Diagnosis(context)))
+            && this.Has_Diabetes_Diagnosis(context))
             && k_());
     }
 
@@ -804,11 +804,11 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             return !((bool?)(/* CQL 'or' (214:13-218:5) */ (/* CQL 'or' (214:15-216:59) */ (/* CQL 'or' (214:15-215:50) */ ((CqlBoolean)m_
                 || n_())
                 || o_())
-                || (CqlBoolean)(this.Has_Diabetes_Diagnosis(context)))));
+                || this.Has_Diabetes_Diagnosis(context))));
         }
 
         return /* CQL 'and' (212:3-218:5) */ (/* CQL 'and' (212:3-213:35) */ ((CqlBoolean)j_
-            && (CqlBoolean)(this.Ten_Year_CVD_Risk_is_High(context)))
+            && this.Ten_Year_CVD_Risk_is_High(context))
             && k_());
     }
 
@@ -909,7 +909,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
             bool? n_ = context.Operators.Overlaps(l_, m_, "day");
             return /* CQL 'and' (91:7-92:45) */ ((CqlBoolean)n_
-                && (CqlBoolean)(this.isVerified(context, ExclusionDiagnosis)));
+                && this.isVerified(context, ExclusionDiagnosis));
         }
 
         bool? k_ = context.Operators.WhereAny<Condition>(i_, j_);
@@ -975,7 +975,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             bool? m_ = context.Operators.Overlaps(k_, l_, "day");
             return /* CQL 'and' (154:7-155:48) */ ((CqlBoolean)m_
-                && (CqlBoolean)(this.isVerified(context, HepatitisLiverDisease as Condition)));
+                && this.isVerified(context, HepatitisLiverDisease as Condition));
         }
 
         bool? j_ = context.Operators.WhereAny<Condition>(h_, i_);
@@ -999,7 +999,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             bool? g_ = context.Operators.Overlaps(e_, f_, "day");
             return /* CQL 'and' (170:7-171:46) */ ((CqlBoolean)g_
-                && (CqlBoolean)(this.isVerified(context, StatinMuscleSymptom as Condition)));
+                && this.isVerified(context, StatinMuscleSymptom as Condition));
         }
 
         bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
@@ -1023,7 +1023,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             bool? g_ = context.Operators.Overlaps(e_, f_, "day");
             return /* CQL 'and' (146:7-147:31) */ ((CqlBoolean)g_
-                && (CqlBoolean)(this.isVerified(context, ESRD as Condition)));
+                && this.isVerified(context, ESRD as Condition));
         }
 
         bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
@@ -1138,13 +1138,13 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     {
         bool? a_ = this.Has_Allergy_to_Statin(context);
         return /* CQL 'or' (96:3-103:59) */ (/* CQL 'or' (96:3-102:39) */ (/* CQL 'or' (96:3-101:27) */ (/* CQL 'or' (96:3-100:46) */ (/* CQL 'or' (96:3-99:49) */ (/* CQL 'or' (96:3-98:69) */ (/* CQL 'or' (96:3-97:37) */ ((CqlBoolean)a_
-            || (CqlBoolean)(Hospice_6_18_000.Instance.Has_Hospice_Services(context)))
-            || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context)))
-            || (CqlBoolean)(this.Has_Hepatitis_or_Liver_Disease_Diagnosis(context)))
-            || (CqlBoolean)(this.Has_Statin_Associated_Muscle_Symptoms(context)))
-            || (CqlBoolean)(this.Has_ESRD_Diagnosis(context)))
-            || (CqlBoolean)(this.Has_Adverse_Reaction_to_Statin(context)))
-            || (CqlBoolean)(this.Has_Medical_Reason_for_Not_Ordering_Statin_Therapy(context)));
+            || Hospice_6_18_000.Instance.Has_Hospice_Services(context))
+            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))
+            || this.Has_Hepatitis_or_Liver_Disease_Diagnosis(context))
+            || this.Has_Statin_Associated_Muscle_Symptoms(context))
+            || this.Has_ESRD_Diagnosis(context))
+            || this.Has_Adverse_Reaction_to_Statin(context))
+            || this.Has_Medical_Reason_for_Not_Ordering_Statin_Therapy(context));
     }
 
 

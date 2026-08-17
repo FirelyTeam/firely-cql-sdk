@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS996FHIRAptTxforSTEMI", "2.0.000")]
 public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS996FHIRAptTxforSTEMI_2_0_000>
 {
@@ -2118,7 +2118,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ah_, aj_, false, true);
                     bool? al_ = context.Operators.In<CqlDateTime>(ag_, ak_, (string)default);
                     return /* CQL 'and' (274:13-274:141) */ ((CqlBoolean)al_
-                        && (CqlBoolean)(!((bool?)((this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI)) is null))));
+                        && !((bool?)((this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI)) is null)));
                 }
 
                 return /* CQL 'and' (273:17-274:141) */ ((CqlBoolean)ab_
@@ -2202,7 +2202,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 }
 
                 return /* CQL 'and' (302:17-303:36) */ (/* CQL 'and' (302:17-302:130) */ ((CqlBoolean)o_
-                    && (CqlBoolean)(!((bool?)((this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI)) is null))))
+                    && !((bool?)((this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI)) is null)))
                     && p_());
             }
 
@@ -2313,7 +2313,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             }
 
             return /* CQL 'and' (170:5-171:96) */ (/* CQL 'and' (170:11-170:141) */ ((CqlBoolean)i_
-                && (CqlBoolean)(!((bool?)((this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI)) is null))))
+                && !((bool?)((this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI)) is null)))
                 && j_());
         }
 

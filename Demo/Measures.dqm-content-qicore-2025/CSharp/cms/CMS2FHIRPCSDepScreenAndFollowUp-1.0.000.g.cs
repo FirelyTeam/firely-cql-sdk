@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS2FHIRPCSDepScreenAndFollowUp", "1.0.000")]
 public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS2FHIRPCSDepScreenAndFollowUp_1_0_000>
 {
@@ -1330,7 +1330,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
 
                 return /* CQL 'or' (53:13-57:9) */ (/* CQL 'or' (53:15-55:57) */ (/* CQL 'or' (53:15-54:99) */ ((CqlBoolean)k_
                     || l_())
-                    || (CqlBoolean)(this.Has_Most_Recent_Adult_Screening_Negative(context)))
+                    || this.Has_Most_Recent_Adult_Screening_Negative(context))
                     || m_());
             }
 
@@ -1701,11 +1701,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             IEnumerable<Observation> d_ = this.Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression(context);
             bool? e_ = context.Operators.Exists<Observation>(d_);
             return /* CQL 'and' (69:8-71:5) */ ((CqlBoolean)e_
-                && (CqlBoolean)(!(this.Has_Adult_Depression_Screening(context))));
+                && !(this.Has_Adult_Depression_Screening(context)));
         }
 
         return /* CQL 'or' (66:3-71:5) */ (/* CQL 'and' (66:3-68:3) */ ((CqlBoolean)b_
-            && (CqlBoolean)(!(this.Has_Adolescent_Depression_Screening(context))))
+            && !(this.Has_Adolescent_Depression_Screening(context)))
             || c_());
     }
 

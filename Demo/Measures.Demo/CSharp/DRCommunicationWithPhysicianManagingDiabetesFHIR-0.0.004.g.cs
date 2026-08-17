@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.0.004")]
 public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : ILibrary, ISingleton<DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004>
 {
@@ -689,7 +689,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             ];
             bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
             return /* CQL 'and' (92:11-93:47) */ ((CqlBoolean)r_
-                && (CqlBoolean)(!((bool?)(MacularExam?.Value is null))));
+                && !((bool?)(MacularExam?.Value is null)));
         }
 
         IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);

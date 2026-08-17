@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS349FHIRHIVScreening", "1.1.000")]
 public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS349FHIRHIVScreening_1_1_000>
 {
@@ -365,7 +365,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
             CqlDateTime j_ = context.Operators.Start(i_);
             bool? k_ = context.Operators.Before(h_, j_, "day");
             return /* CQL 'and' (39:7-40:39) */ ((CqlBoolean)k_
-                && (CqlBoolean)(this.isVerified(context, HIVDiagnosis)));
+                && this.isVerified(context, HIVDiagnosis));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);

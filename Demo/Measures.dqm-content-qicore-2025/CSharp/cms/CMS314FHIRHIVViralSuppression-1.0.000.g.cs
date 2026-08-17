@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS314FHIRHIVViralSuppression", "1.0.000")]
 public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleton<CMS314FHIRHIVViralSuppression_1_0_000>
 {
@@ -206,7 +206,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
             CqlDateTime l_ = context.Operators.Add(j_, k_);
             bool? m_ = context.Operators.Before(h_, l_, "day");
             return /* CQL 'and' (39:5-40:30) */ ((CqlBoolean)m_
-                && (CqlBoolean)(this.isVerified(context, HIVDx)));
+                && this.isVerified(context, HIVDx));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -292,7 +292,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
     {
         bool? a_ = this.Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period(context);
         return /* CQL 'and' (43:3-44:78) */ ((CqlBoolean)a_
-            && (CqlBoolean)(this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period(context)));
+            && this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period(context));
     }
 
 

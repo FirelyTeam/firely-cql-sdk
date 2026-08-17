@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS1157FHIRHIVRetention", "1.0.000")]
 public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1157FHIRHIVRetention_1_0_000>
 {
@@ -183,7 +183,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
             CqlDateTime l_ = context.Operators.Add(j_, k_);
             bool? m_ = context.Operators.SameOrBefore(h_, l_, "day");
             return /* CQL 'and' (62:7-63:32) */ ((CqlBoolean)m_
-                && (CqlBoolean)(this.isVerified(context, HIVDx)));
+                && this.isVerified(context, HIVDx));
         }
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -259,7 +259,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
     {
         bool? a_ = this.Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period(context);
         return /* CQL 'and' (29:3-30:78) */ ((CqlBoolean)a_
-            && (CqlBoolean)(this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period(context)));
+            && this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period(context));
     }
 
 
@@ -351,7 +351,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 return /* CQL 'and' (53:19-56:41) */ (/* CQL 'and' (53:19-55:107) */ (/* CQL 'and' (53:19-54:48) */ ((CqlBoolean)ar_
                     && as_())
                     && at_())
-                    && (CqlBoolean)(this.isVerified(context, HIVDiagnosis)));
+                    && this.isVerified(context, HIVDiagnosis));
             }
 
             bool? an_ = context.Operators.WhereAny<Condition>(al_, am_);
@@ -494,7 +494,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
     {
         bool? a_ = this.Has_One_Encounter_With_HIV_and_One_Viral_Load_Test_At_Least_90_Days_Apart(context);
         return /* CQL 'or' (36:3-37:59) */ ((CqlBoolean)a_
-            || (CqlBoolean)(this.Has_Two_Encounters_With_HIV_At_Least_90_Days_Apart(context)));
+            || this.Has_Two_Encounters_With_HIV_At_Least_90_Days_Apart(context));
     }
 
 

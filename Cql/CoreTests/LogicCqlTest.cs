@@ -578,6 +578,34 @@ public class LogicCqlTest
             "A bool?-declared local function re-casts its CqlBoolean result; the conversion is implicit at its return.");
     }
 
+    /// <summary>
+    /// The conversion is emitted on the LEFT operand only. The asymmetry is not cosmetic and is the
+    /// reason to pin it: C# synthesises <c>&amp;&amp;</c>/<c>||</c> from the LEFT operand's own
+    /// <c>operator true</c>/<c>operator false</c>, so a <c>bool?</c> left operand has no
+    /// <c>&amp;&amp;</c> at all and its conversion is load-bearing — while the right operand gets
+    /// one for free from overload resolution on the underlying <c>&amp;</c>/<c>|</c>.
+    ///
+    /// <para>Dropping the right one cannot weaken the skip, since a skipped operand is never
+    /// converted either; the <c>Message()</c> evidence tests above are what actually demonstrate
+    /// that, and they are unchanged.</para>
+    /// </summary>
+    [TestMethod]
+    public void GeneratedCSharp_ConvertsOnlyTheLeftShortCircuitOperand()
+    {
+        var generated = LogicTestFixture.DefaultCSharp;
+
+        Assert.IsFalse(
+            System.Text.RegularExpressions.Regex.IsMatch(generated, @"(&&|\|\|) \(CqlBoolean\)"),
+            "A right operand carries a redundant (CqlBoolean) conversion; overload resolution supplies it implicitly.");
+
+        // The left one must still be there — its absence would not compile, but asserting it here
+        // states the asymmetry rather than leaving it to be rediscovered.
+        StringAssert.Contains(
+            ExtractComputeMethod(generated, "TrueAndTrue_Compute"),
+            "((CqlBoolean)",
+            "The left operand must keep its conversion; without it the operator has no && to synthesise.");
+    }
+
     private static string ExtractComputeMethod(string code, string methodName)
     {
         // Anchor on the DEFINITION ("name(") — the GetOrCompute wrapper references the method

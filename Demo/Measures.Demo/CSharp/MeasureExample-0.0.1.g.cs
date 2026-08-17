@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("MeasureExample", "0.0.1")]
 public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_0_0_1>
 {
@@ -75,7 +75,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     {
         bool? a_ = this.Initial_population(context);
         return /* CQL 'and' (28:2-29:20) */ ((CqlBoolean)a_
-            && (CqlBoolean)(!(this.Exclusion(context))));
+            && !(this.Exclusion(context)));
     }
 
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS986FHIRMalnutritionScore", "1.0.000")]
 public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<CMS986FHIRMalnutritionScore_1_0_000>
 {
@@ -1193,7 +1193,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             bool? g_ = context.Operators.Overlaps(e_, f_, (string)default);
             return /* CQL 'and' (231:5-232:46) */ ((CqlBoolean)g_
-                && (CqlBoolean)(this.isVerified(context, MalnutritionDiagnosis as Condition)));
+                && this.isVerified(context, MalnutritionDiagnosis as Condition));
         }
 
         IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);

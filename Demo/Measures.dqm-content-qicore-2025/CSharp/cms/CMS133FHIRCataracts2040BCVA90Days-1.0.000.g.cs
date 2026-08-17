@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS133FHIRCataracts2040BCVA90Days", "1.0.000")]
 public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISingleton<CMS133FHIRCataracts2040BCVA90Days_1_0_000>
 {
@@ -846,7 +846,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 CqlInterval<CqlDateTime> jv_ = QICoreCommon_4_0_000.Instance.toInterval(context, ju_);
                 bool? jw_ = context.Operators.OverlapsBefore(jt_, jv_, "day");
                 return /* CQL 'and' (260:17-261:44) */ ((CqlBoolean)jw_
-                    && (CqlBoolean)(this.isVerified(context, ComorbidDiagnosis)));
+                    && this.isVerified(context, ComorbidDiagnosis));
             }
 
             bool? js_ = context.Operators.WhereAny<Condition>(jq_, jr_);

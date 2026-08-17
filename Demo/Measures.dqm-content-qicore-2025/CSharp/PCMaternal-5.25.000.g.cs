@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("PCMaternal", "5.25.000")]
 public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_000>
 {
@@ -661,7 +661,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 CqlInterval<CqlDateTime> y_ = context.Operators.Interval(x_, v_, true, true);
                 bool? z_ = context.Operators.In<CqlDateTime>(u_, y_, (string)default);
                 return /* CQL 'and' (74:13-74:123) */ ((CqlBoolean)z_
-                    && (CqlBoolean)(!((bool?)((this.lastTimeOfDelivery(context, TheEncounter)) is null))));
+                    && !((bool?)((this.lastTimeOfDelivery(context, TheEncounter)) is null)));
             }
 
             return /* CQL 'and' (72:7-74:123) */ (/* CQL 'and' (72:13-73:81) */ ((CqlBoolean)(!((bool?)((l_ as CqlDateTime) is null)))
@@ -875,7 +875,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
             }
 
             return /* CQL 'or' (81:64-87:52) */ (/* CQL 'and' (82:3-84:76) */ (/* CQL 'and' (82:4-83:47) */ (/* CQL 'and' (82:4-82:77) */ ((CqlBoolean)p_
-                && (CqlBoolean)(!((bool?)((this.lastTimeOfDelivery(context, TheEncounter)) is null))))
+                && !((bool?)((this.lastTimeOfDelivery(context, TheEncounter)) is null)))
                 && q_())
                 && r_())
                 || s_());

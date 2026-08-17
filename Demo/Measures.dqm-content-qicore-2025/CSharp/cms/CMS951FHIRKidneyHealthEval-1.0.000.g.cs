@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS951FHIRKidneyHealthEval", "1.0.000")]
 public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<CMS951FHIRKidneyHealthEval_1_0_000>
 {
@@ -294,8 +294,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         CqlInterval<int?> i_ = context.Operators.Interval(18, 85, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
         return /* CQL 'and' (45:3-47:56) */ (/* CQL 'and' (45:3-46:66) */ ((CqlBoolean)j_
-            && (CqlBoolean)(this.Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period(context)))
-            && (CqlBoolean)(this.Has_Outpatient_Visit_During_Measurement_Period(context)));
+            && this.Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period(context))
+            && this.Has_Outpatient_Visit_During_Measurement_Period(context));
     }
 
 
@@ -382,8 +382,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     {
         bool? a_ = this.Has_CKD_Stage_5_Or_ESRD_Diagnosis_Overlaps_Measurement_Period(context);
         return /* CQL 'or' (53:3-55:69) */ (/* CQL 'or' (53:3-54:37) */ ((CqlBoolean)a_
-            || (CqlBoolean)(Hospice_6_18_000.Instance.Has_Hospice_Services(context)))
-            || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context)));
+            || Hospice_6_18_000.Instance.Has_Hospice_Services(context))
+            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context));
     }
 
 
@@ -651,7 +651,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         CqlBoolean b_() {
             bool? c_ = this.Has_Urine_Albumin_Creatinine_Ratio_Test_Performed_During_Measurement_Period(context);
             return /* CQL 'or' (96:9-98:5) */ ((CqlBoolean)c_
-                || (CqlBoolean)(this.Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart(context)));
+                || this.Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart(context));
         }
 
         return /* CQL 'and' (95:3-98:5) */ ((CqlBoolean)a_

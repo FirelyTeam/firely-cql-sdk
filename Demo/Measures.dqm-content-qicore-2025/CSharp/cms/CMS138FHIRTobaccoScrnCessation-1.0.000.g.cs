@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS138FHIRTobaccoScrnCessation", "1.0.000")]
 public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISingleton<CMS138FHIRTobaccoScrnCessation_1_0_000>
 {
@@ -515,7 +515,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     {
         bool? a_ = this.Initial_Population(context);
         return /* CQL 'and' (57:3-58:78) */ ((CqlBoolean)a_
-            && (CqlBoolean)(!((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null))));
+            && !((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null)));
     }
 
 
@@ -592,7 +592,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     {
         Observation a_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User(context);
         return /* CQL 'or' (70:3-71:77) */ ((CqlBoolean)(!((bool?)(a_ is null)))
-            || (CqlBoolean)(!((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null))));
+            || !((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null)));
     }
 
 

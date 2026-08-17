@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS153FHIRChlamydiaScreening", "1.0.000")]
 public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton<CMS153FHIRChlamydiaScreening_1_0_000>
 {
@@ -528,7 +528,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
         bool? e_ = context.Operators.WhereAny<ServiceRequest>(c_, d_);
         return /* CQL 'or' (112:3-115:75) */ ((CqlBoolean)e_
-            || (CqlBoolean)(this.Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy(context)));
+            || this.Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy(context));
     }
 
 
@@ -680,12 +680,12 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         CqlBoolean m_() {
             bool? ab_ = this.Has_Assessments_Identifying_Sexual_Activity(context);
             return /* CQL 'or' (64:9-71:5) */ (/* CQL 'or' (64:11-69:67) */ (/* CQL 'or' (64:11-68:65) */ (/* CQL 'or' (64:11-67:54) */ (/* CQL 'or' (64:11-66:53) */ (/* CQL 'or' (64:11-65:58) */ ((CqlBoolean)ab_
-                || (CqlBoolean)(this.Has_Diagnoses_Identifying_Sexual_Activity(context)))
-                || (CqlBoolean)(this.Has_Active_Contraceptive_Medications(context)))
-                || (CqlBoolean)(this.Has_Ordered_Contraceptive_Medications(context)))
-                || (CqlBoolean)(this.Has_Laboratory_Tests_Identifying_Sexual_Activity(context)))
-                || (CqlBoolean)(this.Has_Diagnostic_Studies_Identifying_Sexual_Activity(context)))
-                || (CqlBoolean)(this.Has_Procedures_Identifying_Sexual_Activity(context)));
+                || this.Has_Diagnoses_Identifying_Sexual_Activity(context))
+                || this.Has_Active_Contraceptive_Medications(context))
+                || this.Has_Ordered_Contraceptive_Medications(context))
+                || this.Has_Laboratory_Tests_Identifying_Sexual_Activity(context))
+                || this.Has_Diagnostic_Studies_Identifying_Sexual_Activity(context))
+                || this.Has_Procedures_Identifying_Sexual_Activity(context));
         }
 
         return /* CQL 'and' (59:3-71:5) */ (/* CQL 'and' (59:3-63:42) */ (/* CQL 'and' (59:3-62:33) */ ((CqlBoolean)j_
@@ -864,13 +864,13 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         CqlBoolean b_() {
             bool? c_ = this.Has_Pregnancy_Test_Exclusion(context);
             return /* CQL 'and' (130:8-138:5) */ (/* CQL 'and' (130:10-136:72) */ (/* CQL 'and' (130:10-135:88) */ (/* CQL 'and' (130:10-134:59) */ (/* CQL 'and' (130:10-133:58) */ (/* CQL 'and' (130:10-132:63) */ (/* CQL 'and' (130:10-131:65) */ ((CqlBoolean)c_
-                && (CqlBoolean)(!(this.Has_Assessments_Identifying_Sexual_Activity(context))))
-                && (CqlBoolean)(!(this.Has_Diagnoses_Identifying_Sexual_Activity(context))))
-                && (CqlBoolean)(!(this.Has_Active_Contraceptive_Medications(context))))
-                && (CqlBoolean)(!(this.Has_Ordered_Contraceptive_Medications(context))))
-                && (CqlBoolean)(!(this.Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy(context))))
-                && (CqlBoolean)(!(this.Has_Diagnostic_Studies_Identifying_Sexual_Activity(context))))
-                && (CqlBoolean)(!(this.Has_Procedures_Identifying_Sexual_Activity(context))));
+                && !(this.Has_Assessments_Identifying_Sexual_Activity(context)))
+                && !(this.Has_Diagnoses_Identifying_Sexual_Activity(context)))
+                && !(this.Has_Active_Contraceptive_Medications(context)))
+                && !(this.Has_Ordered_Contraceptive_Medications(context)))
+                && !(this.Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy(context)))
+                && !(this.Has_Diagnostic_Studies_Identifying_Sexual_Activity(context)))
+                && !(this.Has_Procedures_Identifying_Sexual_Activity(context)));
         }
 
         return /* CQL 'or' (129:3-138:5) */ ((CqlBoolean)a_

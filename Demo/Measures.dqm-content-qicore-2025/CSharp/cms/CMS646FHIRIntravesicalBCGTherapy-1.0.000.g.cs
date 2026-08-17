@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS646FHIRIntravesicalBCGTherapy", "1.0.000")]
 public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingleton<CMS646FHIRIntravesicalBCGTherapy_1_0_000>
 {
@@ -284,7 +284,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
             return /* CQL 'and' (149:5-152:38) */ (/* CQL 'or' (149:11-151:5) */ ((CqlBoolean)k_
                 || l_())
-                && (CqlBoolean)(this.isVerified(context, BladderCancer)));
+                && this.isVerified(context, BladderCancer));
         }
 
         IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
@@ -648,7 +648,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     {
         bool? a_ = this.Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG(context);
         return /* CQL 'and' (39:3-40:34) */ ((CqlBoolean)a_
-            && (CqlBoolean)(this.Has_Qualifying_Encounter(context)));
+            && this.Has_Qualifying_Encounter(context));
     }
 
 
@@ -1898,8 +1898,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         return /* CQL 'or' (46:3-50:76) */ (/* CQL 'or' (46:3-49:90) */ (/* CQL 'or' (46:3-48:31) */ (/* CQL 'or' (46:3-47:39) */ ((CqlBoolean)b_
             || c_())
             || d_())
-            || (CqlBoolean)(this.Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging(context)))
-            || (CqlBoolean)(this.Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging(context)));
+            || this.Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging(context))
+            || this.Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging(context));
     }
 
 

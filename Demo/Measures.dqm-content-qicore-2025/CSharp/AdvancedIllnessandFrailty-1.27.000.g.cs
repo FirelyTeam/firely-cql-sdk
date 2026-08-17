@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("AdvancedIllnessandFrailty", "1.27.000")]
 public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<AdvancedIllnessandFrailty_1_27_000>
 {
@@ -347,11 +347,11 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
         CqlBoolean j_() {
             bool? k_ = this.Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period(context);
             return /* CQL 'or' (31:9-33:5) */ ((CqlBoolean)k_
-                || (CqlBoolean)(this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(context)));
+                || this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(context));
         }
 
         return /* CQL 'and' (29:4-33:5) */ (/* CQL 'and' (29:4-30:41) */ ((CqlBoolean)i_
-            && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)))
+            && this.Has_Criteria_Indicating_Frailty(context))
             && j_());
     }
 
@@ -378,7 +378,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
         CqlBoolean k_() {
             bool? m_ = this.Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period(context);
             return /* CQL 'or' (38:11-40:7) */ ((CqlBoolean)m_
-                || (CqlBoolean)(this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(context)));
+                || this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(context));
         }
 
 
@@ -393,11 +393,11 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             int? u_ = context.Operators.CalculateAgeAt(q_, t_, "year");
             bool? v_ = context.Operators.GreaterOrEqual(u_, 81);
             return /* CQL 'and' (42:8-44:5) */ ((CqlBoolean)v_
-                && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)));
+                && this.Has_Criteria_Indicating_Frailty(context));
         }
 
         return /* CQL 'or' (36:3-44:5) */ (/* CQL 'and' (36:3-41:3) */ (/* CQL 'and' (36:5-37:43) */ ((CqlBoolean)j_
-            && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)))
+            && this.Has_Criteria_Indicating_Frailty(context))
             && k_())
             || l_());
     }
