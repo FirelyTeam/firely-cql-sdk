@@ -427,42 +427,28 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                     bool t_ = s_ is CqlDateTime;
                     if (t_)
                     {
-                        DataType u_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                        o_ = v_ as CqlDateTime;
+                        o_ = s_ as CqlDateTime;
                     }
                     else
                     {
-                        DataType w_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                        bool y_ = x_ is CqlQuantity;
-                        if (y_)
+                        bool u_ = s_ is CqlQuantity;
+                        if (u_)
                         {
-                            DataType z_ = SuicideRiskAssessmentProcedure?.Performed;
-                            object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                            o_ = aa_ as CqlQuantity;
+                            o_ = s_ as CqlQuantity;
                         }
                         else
                         {
-                            DataType ab_ = SuicideRiskAssessmentProcedure?.Performed;
-                            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                            bool ad_ = ac_ is CqlInterval<CqlDateTime>;
-                            if (ad_)
+                            bool v_ = s_ is CqlInterval<CqlDateTime>;
+                            if (v_)
                             {
-                                DataType ae_ = SuicideRiskAssessmentProcedure?.Performed;
-                                object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                                o_ = af_ as CqlInterval<CqlDateTime>;
+                                o_ = s_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
-                                DataType ag_ = SuicideRiskAssessmentProcedure?.Performed;
-                                object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                                bool ai_ = ah_ is CqlInterval<CqlQuantity>;
-                                if (ai_)
+                                bool w_ = s_ is CqlInterval<CqlQuantity>;
+                                if (w_)
                                 {
-                                    DataType aj_ = SuicideRiskAssessmentProcedure?.Performed;
-                                    object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                                    o_ = ak_ as CqlInterval<CqlQuantity>;
+                                    o_ = s_ as CqlInterval<CqlQuantity>;
                                 }
                                 else
                                 {

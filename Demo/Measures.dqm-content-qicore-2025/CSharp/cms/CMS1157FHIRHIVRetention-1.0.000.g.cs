@@ -163,7 +163,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 bool? r_ = context.Operators.Equivalent(b_, q_);
                 i_ = h_ | r_;
             }
-            return /* CQL 'implies' (96:3-100:3) */ !c_ | i_;
+            return !c_ | i_;
         }
     }
 

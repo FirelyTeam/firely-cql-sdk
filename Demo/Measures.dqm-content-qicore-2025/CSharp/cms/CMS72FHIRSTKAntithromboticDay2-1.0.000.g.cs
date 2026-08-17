@@ -156,42 +156,28 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 bool y_ = x_ is CqlDateTime;
                 if (y_)
                 {
-                    object z_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    g_ = aa_ as CqlDateTime;
+                    g_ = x_ as CqlDateTime;
                 }
                 else
                 {
-                    object ab_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                    object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    bool ad_ = ac_ is CqlQuantity;
-                    if (ad_)
+                    bool z_ = x_ is CqlQuantity;
+                    if (z_)
                     {
-                        object ae_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        g_ = af_ as CqlQuantity;
+                        g_ = x_ as CqlQuantity;
                     }
                     else
                     {
-                        object ag_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        bool ai_ = ah_ is CqlInterval<CqlDateTime>;
-                        if (ai_)
+                        bool aa_ = x_ is CqlInterval<CqlDateTime>;
+                        if (aa_)
                         {
-                            object aj_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                            g_ = ak_ as CqlInterval<CqlDateTime>;
+                            g_ = x_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            object al_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                            object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                            bool an_ = am_ is CqlInterval<CqlQuantity>;
-                            if (an_)
+                            bool ab_ = x_ is CqlInterval<CqlQuantity>;
+                            if (ab_)
                             {
-                                object ao_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                                object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                                g_ = ap_ as CqlInterval<CqlQuantity>;
+                                g_ = x_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -341,53 +327,40 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 bool r_ = q_ is CqlDateTime;
                 if (r_)
                 {
-                    object s_ = ThrombolyticTherapy?.effective;
-                    g_ = s_ as CqlDateTime;
+                    g_ = q_ as CqlDateTime;
                 }
                 else
                 {
-                    object t_ = ThrombolyticTherapy?.effective;
-                    bool u_ = t_ is CqlDateTime;
-                    if (u_)
+                    if (r_)
                     {
-                        object v_ = ThrombolyticTherapy?.effective;
-                        g_ = v_ as CqlDateTime;
+                        g_ = q_ as CqlDateTime;
                     }
                     else
                     {
-                        object w_ = ThrombolyticTherapy?.effective;
-                        bool x_ = w_ is CqlQuantity;
-                        if (x_)
+                        bool s_ = q_ is CqlQuantity;
+                        if (s_)
                         {
-                            object y_ = ThrombolyticTherapy?.effective;
-                            g_ = y_ as CqlQuantity;
+                            g_ = q_ as CqlQuantity;
                         }
                         else
                         {
-                            object z_ = ThrombolyticTherapy?.effective;
-                            bool aa_ = z_ is CqlInterval<CqlDateTime>;
-                            if (aa_)
+                            bool t_ = q_ is CqlInterval<CqlDateTime>;
+                            if (t_)
                             {
-                                object ab_ = ThrombolyticTherapy?.effective;
-                                g_ = ab_ as CqlInterval<CqlDateTime>;
+                                g_ = q_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
-                                object ac_ = ThrombolyticTherapy?.effective;
-                                bool ad_ = ac_ is CqlInterval<CqlDateTime>;
-                                if (ad_)
+                                if (t_)
                                 {
-                                    object ae_ = ThrombolyticTherapy?.effective;
-                                    g_ = ae_ as CqlInterval<CqlDateTime>;
+                                    g_ = q_ as CqlInterval<CqlDateTime>;
                                 }
                                 else
                                 {
-                                    object af_ = ThrombolyticTherapy?.effective;
-                                    bool ag_ = af_ is CqlInterval<CqlQuantity>;
-                                    if (ag_)
+                                    bool u_ = q_ is CqlInterval<CqlQuantity>;
+                                    if (u_)
                                     {
-                                        object ah_ = ThrombolyticTherapy?.effective;
-                                        g_ = ah_ as CqlInterval<CqlQuantity>;
+                                        g_ = q_ as CqlInterval<CqlQuantity>;
                                     }
                                     else
                                     {
@@ -506,7 +479,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                         bool? aa_ = context.Operators.Equivalent(s_, z_);
                         x_ = w_ & !aa_;
                     }
-                    return /* CQL 'implies' (80:9-83:9) */ !o_ | x_;
+                    return !o_ | x_;
                 }
             }
 

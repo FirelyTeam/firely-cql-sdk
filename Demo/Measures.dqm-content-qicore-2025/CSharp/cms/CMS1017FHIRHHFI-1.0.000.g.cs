@@ -1134,8 +1134,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                             bool at_ = as_ is Resource;
                             if (at_)
                             {
-                                Patient au_ = this.Patient(context);
-                                ap_ = (au_ as Resource).IdElement;
+                                ap_ = (as_ as Resource).IdElement;
                             }
                             else
                             {
@@ -1157,8 +1156,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 }
                 else
                 {
-                    bool? av_ = QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest);
-                    ad_ = ac_ & av_;
+                    bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest);
+                    ad_ = ac_ & au_;
                 }
                 // CQL 'and' (151:17-158:103): right operand skipped when left is false
                 if (ad_ is false)
@@ -1167,18 +1166,18 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 }
                 else
                 {
-                    CqlInterval<CqlDate> aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, Anticoagulants);
-                    CqlDate ax_ = aw_?.low;
-                    CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                    CqlDate az_ = aw_?.high;
-                    CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
-                    bool? bb_ = aw_?.lowClosed;
-                    bool? bc_ = aw_?.highClosed;
-                    CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
-                    Period be_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
-                    bool? bg_ = context.Operators.OverlapsBefore(bd_, bf_, "day");
-                    return ad_ & bg_;
+                    CqlInterval<CqlDate> av_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, Anticoagulants);
+                    CqlDate aw_ = av_?.low;
+                    CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
+                    CqlDate ay_ = av_?.high;
+                    CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
+                    bool? ba_ = av_?.lowClosed;
+                    bool? bb_ = av_?.highClosed;
+                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, az_, ba_, bb_);
+                    Period bd_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
+                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, "day");
+                    return ad_ & bf_;
                 }
             }
 
@@ -1365,8 +1364,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                             bool at_ = as_ is Resource;
                             if (at_)
                             {
-                                Patient au_ = this.Patient(context);
-                                ap_ = (au_ as Resource).IdElement;
+                                ap_ = (as_ as Resource).IdElement;
                             }
                             else
                             {
@@ -1388,8 +1386,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 }
                 else
                 {
-                    bool? av_ = QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest);
-                    ad_ = ac_ & av_;
+                    bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest);
+                    ad_ = ac_ & au_;
                 }
                 // CQL 'and' (169:17-176:106): right operand skipped when left is false
                 if (ad_ is false)
@@ -1398,18 +1396,18 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 }
                 else
                 {
-                    CqlInterval<CqlDate> aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AntidepressantMed);
-                    CqlDate ax_ = aw_?.low;
-                    CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                    CqlDate az_ = aw_?.high;
-                    CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
-                    bool? bb_ = aw_?.lowClosed;
-                    bool? bc_ = aw_?.highClosed;
-                    CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
-                    Period be_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
-                    bool? bg_ = context.Operators.OverlapsBefore(bd_, bf_, "day");
-                    return ad_ & bg_;
+                    CqlInterval<CqlDate> av_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AntidepressantMed);
+                    CqlDate aw_ = av_?.low;
+                    CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
+                    CqlDate ay_ = av_?.high;
+                    CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
+                    bool? ba_ = av_?.lowClosed;
+                    bool? bb_ = av_?.highClosed;
+                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, az_, ba_, bb_);
+                    Period bd_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
+                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, "day");
+                    return ad_ & bf_;
                 }
             }
 
@@ -1515,8 +1513,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                             bool at_ = as_ is Resource;
                             if (at_)
                             {
-                                Patient au_ = this.Patient(context);
-                                ap_ = (au_ as Resource).IdElement;
+                                ap_ = (as_ as Resource).IdElement;
                             }
                             else
                             {
@@ -1538,8 +1535,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 }
                 else
                 {
-                    bool? av_ = QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest);
-                    ad_ = ac_ & av_;
+                    bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest);
+                    ad_ = ac_ & au_;
                 }
                 // CQL 'and' (181:17-188:94): right operand skipped when left is false
                 if (ad_ is false)
@@ -1548,18 +1545,18 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 }
                 else
                 {
-                    CqlInterval<CqlDate> aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, BPMed);
-                    CqlDate ax_ = aw_?.low;
-                    CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                    CqlDate az_ = aw_?.high;
-                    CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
-                    bool? bb_ = aw_?.lowClosed;
-                    bool? bc_ = aw_?.highClosed;
-                    CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
-                    Period be_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
-                    bool? bg_ = context.Operators.OverlapsBefore(bd_, bf_, "day");
-                    return ad_ & bg_;
+                    CqlInterval<CqlDate> av_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, BPMed);
+                    CqlDate aw_ = av_?.low;
+                    CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
+                    CqlDate ay_ = av_?.high;
+                    CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
+                    bool? ba_ = av_?.lowClosed;
+                    bool? bb_ = av_?.highClosed;
+                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, az_, ba_, bb_);
+                    Period bd_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
+                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, "day");
+                    return ad_ & bf_;
                 }
             }
 
@@ -1665,8 +1662,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                             bool at_ = as_ is Resource;
                             if (at_)
                             {
-                                Patient au_ = this.Patient(context);
-                                ap_ = (au_ as Resource).IdElement;
+                                ap_ = (as_ as Resource).IdElement;
                             }
                             else
                             {
@@ -1688,8 +1684,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 }
                 else
                 {
-                    bool? av_ = QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest);
-                    ad_ = ac_ & av_;
+                    bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest);
+                    ad_ = ac_ & au_;
                 }
                 // CQL 'and' (193:17-200:95): right operand skipped when left is false
                 if (ad_ is false)
@@ -1698,18 +1694,18 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 }
                 else
                 {
-                    CqlInterval<CqlDate> aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, CNSMed);
-                    CqlDate ax_ = aw_?.low;
-                    CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                    CqlDate az_ = aw_?.high;
-                    CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
-                    bool? bb_ = aw_?.lowClosed;
-                    bool? bc_ = aw_?.highClosed;
-                    CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
-                    Period be_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
-                    bool? bg_ = context.Operators.OverlapsBefore(bd_, bf_, "day");
-                    return ad_ & bg_;
+                    CqlInterval<CqlDate> av_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, CNSMed);
+                    CqlDate aw_ = av_?.low;
+                    CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
+                    CqlDate ay_ = av_?.high;
+                    CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
+                    bool? ba_ = av_?.lowClosed;
+                    bool? bb_ = av_?.highClosed;
+                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, az_, ba_, bb_);
+                    Period bd_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
+                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, "day");
+                    return ad_ & bf_;
                 }
             }
 
@@ -1815,8 +1811,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                             bool at_ = as_ is Resource;
                             if (at_)
                             {
-                                Patient au_ = this.Patient(context);
-                                ap_ = (au_ as Resource).IdElement;
+                                ap_ = (as_ as Resource).IdElement;
                             }
                             else
                             {
@@ -1838,8 +1833,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 }
                 else
                 {
-                    bool? av_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest);
-                    ad_ = ac_ & av_;
+                    bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest);
+                    ad_ = ac_ & au_;
                 }
                 // CQL 'and' (205:17-212:100): right operand skipped when left is false
                 if (ad_ is false)
@@ -1848,18 +1843,18 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 }
                 else
                 {
-                    CqlInterval<CqlDate> aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DiureticMed);
-                    CqlDate ax_ = aw_?.low;
-                    CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                    CqlDate az_ = aw_?.high;
-                    CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
-                    bool? bb_ = aw_?.lowClosed;
-                    bool? bc_ = aw_?.highClosed;
-                    CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
-                    Period be_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
-                    bool? bg_ = context.Operators.OverlapsBefore(bd_, bf_, "day");
-                    return ad_ & bg_;
+                    CqlInterval<CqlDate> av_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DiureticMed);
+                    CqlDate aw_ = av_?.low;
+                    CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
+                    CqlDate ay_ = av_?.high;
+                    CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
+                    bool? ba_ = av_?.lowClosed;
+                    bool? bb_ = av_?.highClosed;
+                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, az_, ba_, bb_);
+                    Period bd_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
+                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, "day");
+                    return ad_ & bf_;
                 }
             }
 
@@ -1965,8 +1960,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                             bool at_ = as_ is Resource;
                             if (at_)
                             {
-                                Patient au_ = this.Patient(context);
-                                ap_ = (au_ as Resource).IdElement;
+                                ap_ = (as_ as Resource).IdElement;
                             }
                             else
                             {
@@ -1988,8 +1982,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 }
                 else
                 {
-                    bool? av_ = QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest);
-                    ad_ = ac_ & av_;
+                    bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest);
+                    ad_ = ac_ & au_;
                 }
                 // CQL 'and' (217:17-224:98): right operand skipped when left is false
                 if (ad_ is false)
@@ -1998,18 +1992,18 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 }
                 else
                 {
-                    CqlInterval<CqlDate> aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OpioidMed);
-                    CqlDate ax_ = aw_?.low;
-                    CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                    CqlDate az_ = aw_?.high;
-                    CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
-                    bool? bb_ = aw_?.lowClosed;
-                    bool? bc_ = aw_?.highClosed;
-                    CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
-                    Period be_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
-                    bool? bg_ = context.Operators.OverlapsBefore(bd_, bf_, "day");
-                    return ad_ & bg_;
+                    CqlInterval<CqlDate> av_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OpioidMed);
+                    CqlDate aw_ = av_?.low;
+                    CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
+                    CqlDate ay_ = av_?.high;
+                    CqlDateTime az_ = context.Operators.ConvertDateToDateTime(ay_);
+                    bool? ba_ = av_?.lowClosed;
+                    bool? bb_ = av_?.highClosed;
+                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ax_, az_, ba_, bb_);
+                    Period bd_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
+                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, "day");
+                    return ad_ & bf_;
                 }
             }
 

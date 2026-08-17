@@ -53,8 +53,11 @@ The binder/emitter know every operand type statically. Where a native C# constru
   5.3.0.0), which also short-circuits `and`, `or`, `implies` and `xor`: C#'s lifted operators on
   `bool?` **are** Kleene three-valued logic, so none of those members appear in any regenerated
   corpus. Each decides on a different value — `false` for `and`/`implies`, `true` for `or`, and
-  `null` for `xor`, whose null row is the constant one. The whole logical and nullological family
-  is now lowered; nothing remains open in this bullet.
+  `null` for `xor`, whose null row is the constant one. `implies` was tracked separately as
+  [#1571](https://github.com/FirelyTeam/firely-cql-sdk/issues/1571) and closed by that PR. What
+  remains in this bullet is the **list** `Coalesce<T>(IEnumerable<T>)` overload, still bound and
+  called (the scalar form already emits `??`) — see the
+  [operator ledger](generated-code-operator-ledger.md).
 - `Operators.Equal` on primitives → `==` (lifted equality matches CQL for non-null; CQL's
   null-propagating equality needs the `HasValue` guard below).
 - Comparisons (`Greater[OrEqual]`, `Less[OrEqual]`) on `int?/long?/decimal?`: NOT a direct

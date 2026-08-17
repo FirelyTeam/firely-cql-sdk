@@ -466,7 +466,11 @@ partial class CodeBuilderContext
         var conditional = new CodeConditional(
             guard,
             NullableBoolConstant(true),
-            ImpliesMerge(local, right, originTag),
+            // No tag on the inner merge: the conditional above it already carries the tag and
+            // detail, and double-tagging would print the same span twice — once as the guard's
+            // line comment and again inside its else. Matches and/or/xor, whose guarded merges
+            // are likewise untagged.
+            ImpliesMerge(local, right, originTag: null),
             typeof(bool?),
             originTag,
             originDetail);
@@ -586,8 +590,10 @@ partial class CodeBuilderContext
             ? NullableBoolConstant(constant is null ? null : !constant)
             : new CodeUnary(CodeUnaryOp.Not, operand);
 
-    /// <summary><c>!left | right</c> — Kleene implication over C#'s lifted operators.</summary>
-    private static CodeExpression ImpliesMerge(CodeExpression left, CodeExpression right, string originTag) =>
+    /// <summary><c>!left | right</c> — Kleene implication over C#'s lifted operators. Pass
+    /// <paramref name="originTag"/> only where the merge stands alone; inside a guard the
+    /// conditional already carries the tag.</summary>
+    private static CodeExpression ImpliesMerge(CodeExpression left, CodeExpression right, string? originTag) =>
         new CodeBinary(
             CodeBinaryOp.BoolOr,
             new CodeUnary(CodeUnaryOp.Not, HonestBoolOperand(left)),

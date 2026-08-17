@@ -231,7 +231,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 bool? r_ = context.Operators.Equivalent(b_, q_);
                 i_ = h_ | r_;
             }
-            return /* CQL 'implies' (92:3-96:3) */ !c_ | i_;
+            return !c_ | i_;
         }
     }
 

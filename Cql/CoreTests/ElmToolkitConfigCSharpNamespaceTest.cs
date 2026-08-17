@@ -17,9 +17,11 @@ namespace CoreTests;
 /// <summary>
 /// Coverage for <see cref="ElmToolkitConfig.CSharpNamespace"/>, the toolkit setting behind the
 /// Packager CLI's <c>--cs-namespace</c> option and the <c>Elm:CSharpNamespace</c> configuration
-/// key. Kept in its own class rather than riding along in an operator-lowering fixture, so that
-/// deleting or repointing a CQL fixture cannot silently drop the only coverage of a
-/// consumer-facing config option.
+/// key. Kept in its own class rather than riding along in the operator-lowering tests, so that a
+/// reader looking for this setting's coverage finds it by name.
+/// <para>It still generates from the shared <see cref="LogicTestFixture"/>, since the setting is
+/// library-agnostic and any fixture would do — the coupling is to that helper, not to the logical
+/// operator tests.</para>
 /// </summary>
 [TestClass]
 [TestCategory("UnitTest")]
@@ -33,36 +35,27 @@ public class ElmToolkitConfigCSharpNamespaceTest
     [TestMethod]
     public void CSharpNamespace_WrapsGeneratedCode()
     {
-        StringAssert.Contains(
-            Generate(new ElmToolkitConfig(CSharpNamespace: "My.Ns")),
-            "namespace My.Ns;", "a namespace set in the config must be emitted.");
+        // All three cases go through the same declaration-anchored rule, positive included: a bare
+        // "namespace My.Ns;" substring search would pass on the very hazard the anchoring exists
+        // for — the words appearing inside a generated comment or string literal.
+        Assert.AreEqual(
+            "namespace My.Ns;",
+            NamespaceDeclaration(LogicTestFixture.Generate(new ElmToolkitConfig(CSharpNamespace: "My.Ns"))),
+            "a namespace set in the config must be emitted as a file-scoped declaration.");
 
-        // Anchored on the file-scoped declaration rather than the bare word "namespace", which
-        // could appear in any generated comment or string literal.
-        Assert.IsFalse(
-            ContainsNamespaceDeclaration(Generate(ElmToolkitConfig.Default)),
+        Assert.IsNull(
+            NamespaceDeclaration(LogicTestFixture.DefaultCSharp),
             "the default (null) must emit namespace-less code.");
 
-        Assert.IsFalse(
-            ContainsNamespaceDeclaration(Generate(new ElmToolkitConfig(CSharpNamespace: ""))),
+        Assert.IsNull(
+            NamespaceDeclaration(LogicTestFixture.Generate(new ElmToolkitConfig(CSharpNamespace: ""))),
             "an empty value (JSON null binds as \"\") must emit namespace-less code.");
     }
 
-    private static bool ContainsNamespaceDeclaration(string generated) =>
+    /// <summary>The generated file's namespace declaration, or null when it has none.</summary>
+    private static string? NamespaceDeclaration(string generated) =>
         generated
             .Split('\n')
-            .Any(line => line.TrimStart().StartsWith("namespace ", StringComparison.Ordinal));
-
-    private static string Generate(ElmToolkitConfig config)
-    {
-        LibrarySet librarySet = new();
-        librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input/ELM/HL7"), "LogicTest", "1.0.0");
-
-        return new ElmToolkit(config: config)
-            .AddElmLibraries(librarySet)
-            .CompileToAssemblies()
-            .GetElmToCSharpResults()
-            .Single()
-            .cSharp;
-    }
+            .Select(line => line.Trim())
+            .FirstOrDefault(line => line.StartsWith("namespace ", StringComparison.Ordinal));
 }

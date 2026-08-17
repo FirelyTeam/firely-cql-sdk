@@ -644,42 +644,28 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             bool z_ = y_ is CqlDateTime;
             if (z_)
             {
-                DataType aa_ = TobaccoCessationCounseling?.Performed;
-                object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                u_ = ab_ as CqlDateTime;
+                u_ = y_ as CqlDateTime;
             }
             else
             {
-                DataType ac_ = TobaccoCessationCounseling?.Performed;
-                object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                bool ae_ = ad_ is CqlQuantity;
-                if (ae_)
+                bool aa_ = y_ is CqlQuantity;
+                if (aa_)
                 {
-                    DataType af_ = TobaccoCessationCounseling?.Performed;
-                    object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                    u_ = ag_ as CqlQuantity;
+                    u_ = y_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType ah_ = TobaccoCessationCounseling?.Performed;
-                    object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                    bool aj_ = ai_ is CqlInterval<CqlDateTime>;
-                    if (aj_)
+                    bool ab_ = y_ is CqlInterval<CqlDateTime>;
+                    if (ab_)
                     {
-                        DataType ak_ = TobaccoCessationCounseling?.Performed;
-                        object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        u_ = al_ as CqlInterval<CqlDateTime>;
+                        u_ = y_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType am_ = TobaccoCessationCounseling?.Performed;
-                        object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                        bool ao_ = an_ is CqlInterval<CqlQuantity>;
-                        if (ao_)
+                        bool ac_ = y_ is CqlInterval<CqlQuantity>;
+                        if (ac_)
                         {
-                            DataType ap_ = TobaccoCessationCounseling?.Performed;
-                            object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                            u_ = aq_ as CqlInterval<CqlQuantity>;
+                            u_ = y_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -702,16 +688,16 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<Condition> k_ = Status_1_15_000.Instance.verified(context, j_);
 
         bool? l_(Condition TobaccoCounseling) {
-            CqlInterval<CqlDateTime> ar_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, TobaccoCounseling);
-            CqlDateTime as_ = context.Operators.Start(ar_);
-            CqlInterval<CqlDateTime> at_ = this.Measurement_Period(context);
-            CqlDateTime au_ = context.Operators.Start(at_);
-            CqlQuantity av_ = context.Operators.Quantity(6m, "months");
-            CqlDateTime aw_ = context.Operators.Subtract(au_, av_);
-            CqlDateTime ax_ = context.Operators.End(at_);
-            CqlInterval<CqlDateTime> ay_ = context.Operators.Interval(aw_, ax_, true, true);
-            bool? az_ = context.Operators.In<CqlDateTime>(as_, ay_, "day");
-            return az_;
+            CqlInterval<CqlDateTime> ad_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, TobaccoCounseling);
+            CqlDateTime ae_ = context.Operators.Start(ad_);
+            CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
+            CqlDateTime ag_ = context.Operators.Start(af_);
+            CqlQuantity ah_ = context.Operators.Quantity(6m, "months");
+            CqlDateTime ai_ = context.Operators.Subtract(ag_, ah_);
+            CqlDateTime aj_ = context.Operators.End(af_);
+            CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ai_, aj_, true, true);
+            bool? al_ = context.Operators.In<CqlDateTime>(ae_, ak_, "day");
+            return al_;
         }
 
         IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);

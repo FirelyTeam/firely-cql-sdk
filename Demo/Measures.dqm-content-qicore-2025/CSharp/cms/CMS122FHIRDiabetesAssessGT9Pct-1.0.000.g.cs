@@ -497,31 +497,20 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             bool p_ = o_ is CqlDateTime;
             if (p_)
             {
-                DataType q_ = GlycemicStatus?.Effective;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                j_ = r_ as CqlDateTime;
+                j_ = o_ as CqlDateTime;
             }
             else
             {
-                DataType s_ = GlycemicStatus?.Effective;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                bool u_ = t_ is CqlDateTime;
-                if (u_)
+                if (p_)
                 {
-                    DataType v_ = GlycemicStatus?.Effective;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    j_ = w_ as CqlDateTime;
+                    j_ = o_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType x_ = GlycemicStatus?.Effective;
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    bool z_ = y_ is CqlInterval<CqlDateTime>;
-                    if (z_)
+                    bool q_ = o_ is CqlInterval<CqlDateTime>;
+                    if (q_)
                     {
-                        DataType aa_ = GlycemicStatus?.Effective;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        j_ = ab_ as CqlInterval<CqlDateTime>;
+                        j_ = o_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -557,31 +546,20 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             bool k_ = j_ is CqlDateTime;
             if (k_)
             {
-                DataType l_ = QualifyingGlycemicStatus?.Effective;
-                object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-                f_ = m_ as CqlDateTime;
+                f_ = j_ as CqlDateTime;
             }
             else
             {
-                DataType n_ = QualifyingGlycemicStatus?.Effective;
-                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-                bool p_ = o_ is CqlDateTime;
-                if (p_)
+                if (k_)
                 {
-                    DataType q_ = QualifyingGlycemicStatus?.Effective;
-                    object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                    f_ = r_ as CqlDateTime;
+                    f_ = j_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType s_ = QualifyingGlycemicStatus?.Effective;
-                    object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                    bool u_ = t_ is CqlInterval<CqlDateTime>;
-                    if (u_)
+                    bool l_ = j_ is CqlInterval<CqlDateTime>;
+                    if (l_)
                     {
-                        DataType v_ = QualifyingGlycemicStatus?.Effective;
-                        object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                        f_ = w_ as CqlInterval<CqlDateTime>;
+                        f_ = j_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -618,31 +596,20 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             bool q_ = p_ is CqlDateTime;
             if (q_)
             {
-                DataType r_ = QualifyingGlycemicStatus?.Effective;
-                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                j_ = s_ as CqlDateTime;
+                j_ = p_ as CqlDateTime;
             }
             else
             {
-                DataType t_ = QualifyingGlycemicStatus?.Effective;
-                object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                bool v_ = u_ is CqlDateTime;
-                if (v_)
+                if (q_)
                 {
-                    DataType w_ = QualifyingGlycemicStatus?.Effective;
-                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                    j_ = x_ as CqlDateTime;
+                    j_ = p_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType y_ = QualifyingGlycemicStatus?.Effective;
-                    object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    bool aa_ = z_ is CqlInterval<CqlDateTime>;
-                    if (aa_)
+                    bool r_ = p_ is CqlInterval<CqlDateTime>;
+                    if (r_)
                     {
-                        DataType ab_ = QualifyingGlycemicStatus?.Effective;
-                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        j_ = ac_ as CqlInterval<CqlDateTime>;
+                        j_ = p_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -659,18 +626,18 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
 
 
         (CqlTupleMetadata, CqlQuantity QualifyingGlycemicStatusValue, Observation QualifyingGlycemicStatus)? c_(Observation QualifyingGlycemicStatus) {
-            DataType ad_ = QualifyingGlycemicStatus?.Value;
-            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-            (CqlTupleMetadata, CqlQuantity QualifyingGlycemicStatusValue, Observation QualifyingGlycemicStatus)? af_ = (CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF, ae_ as CqlQuantity, QualifyingGlycemicStatus);
-            return af_;
+            DataType s_ = QualifyingGlycemicStatus?.Value;
+            object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+            (CqlTupleMetadata, CqlQuantity QualifyingGlycemicStatusValue, Observation QualifyingGlycemicStatus)? u_ = (CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF, t_ as CqlQuantity, QualifyingGlycemicStatus);
+            return u_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlQuantity QualifyingGlycemicStatusValue, Observation QualifyingGlycemicStatus)?> d_ = context.Operators.WhereSelect<Observation, (CqlTupleMetadata, CqlQuantity QualifyingGlycemicStatusValue, Observation QualifyingGlycemicStatus)?>(a_, b_, c_);
         IEnumerable<(CqlTupleMetadata, CqlQuantity QualifyingGlycemicStatusValue, Observation QualifyingGlycemicStatus)?> e_ = context.Operators.Distinct<(CqlTupleMetadata, CqlQuantity QualifyingGlycemicStatusValue, Observation QualifyingGlycemicStatus)?>(d_);
 
         object f_((CqlTupleMetadata, CqlQuantity QualifyingGlycemicStatusValue, Observation QualifyingGlycemicStatus)? @this) {
-            CqlQuantity ag_ = @this?.QualifyingGlycemicStatusValue;
-            return ag_;
+            CqlQuantity v_ = @this?.QualifyingGlycemicStatusValue;
+            return v_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlQuantity QualifyingGlycemicStatusValue, Observation QualifyingGlycemicStatus)?> g_ = context.Operators.SortBy<(CqlTupleMetadata, CqlQuantity QualifyingGlycemicStatusValue, Observation QualifyingGlycemicStatus)?>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);

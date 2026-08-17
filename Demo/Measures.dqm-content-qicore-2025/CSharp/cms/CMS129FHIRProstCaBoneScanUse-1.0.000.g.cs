@@ -247,7 +247,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 bool? r_ = context.Operators.Equivalent(b_, q_);
                 i_ = h_ | r_;
             }
-            return /* CQL 'implies' (143:3-147:3) */ !c_ | i_;
+            return !c_ | i_;
         }
     }
 
@@ -316,42 +316,28 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             bool o_ = n_ is CqlDateTime;
             if (o_)
             {
-                DataType p_ = ProstateCancerTreatment?.Performed;
-                object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
-                h_ = q_ as CqlDateTime;
+                h_ = n_ as CqlDateTime;
             }
             else
             {
-                DataType r_ = ProstateCancerTreatment?.Performed;
-                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                bool t_ = s_ is CqlQuantity;
-                if (t_)
+                bool p_ = n_ is CqlQuantity;
+                if (p_)
                 {
-                    DataType u_ = ProstateCancerTreatment?.Performed;
-                    object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    h_ = v_ as CqlQuantity;
+                    h_ = n_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType w_ = ProstateCancerTreatment?.Performed;
-                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                    bool y_ = x_ is CqlInterval<CqlDateTime>;
-                    if (y_)
+                    bool q_ = n_ is CqlInterval<CqlDateTime>;
+                    if (q_)
                     {
-                        DataType z_ = ProstateCancerTreatment?.Performed;
-                        object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        h_ = aa_ as CqlInterval<CqlDateTime>;
+                        h_ = n_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType ab_ = ProstateCancerTreatment?.Performed;
-                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        bool ad_ = ac_ is CqlInterval<CqlQuantity>;
-                        if (ad_)
+                        bool r_ = n_ is CqlInterval<CqlQuantity>;
+                        if (r_)
                         {
-                            DataType ae_ = ProstateCancerTreatment?.Performed;
-                            object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                            h_ = af_ as CqlInterval<CqlQuantity>;
+                            h_ = n_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -371,70 +357,56 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             }
             else
             {
-                Code<EventStatus> ag_ = ProstateCancerTreatment?.StatusElement;
-                EventStatus? ah_ = ag_?.Value;
-                string ai_ = context.Operators.Convert<string>(ah_);
-                bool? aj_ = context.Operators.Equal(ai_, "completed");
-                return l_ & aj_;
+                Code<EventStatus> s_ = ProstateCancerTreatment?.StatusElement;
+                EventStatus? t_ = s_?.Value;
+                string u_ = context.Operators.Convert<string>(t_);
+                bool? v_ = context.Operators.Equal(u_, "completed");
+                return l_ & v_;
             }
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 
         object e_(Procedure @this) {
-            object ak_;
-            DataType an_ = @this?.Performed;
-            object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-            bool ap_ = ao_ is CqlDateTime;
-            if (ap_)
+            object w_;
+            DataType z_ = @this?.Performed;
+            object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+            bool ab_ = aa_ is CqlDateTime;
+            if (ab_)
             {
-                DataType aq_ = @this?.Performed;
-                object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                ak_ = ar_ as CqlDateTime;
+                w_ = aa_ as CqlDateTime;
             }
             else
             {
-                DataType as_ = @this?.Performed;
-                object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
-                bool au_ = at_ is CqlQuantity;
-                if (au_)
+                bool ac_ = aa_ is CqlQuantity;
+                if (ac_)
                 {
-                    DataType av_ = @this?.Performed;
-                    object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                    ak_ = aw_ as CqlQuantity;
+                    w_ = aa_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType ax_ = @this?.Performed;
-                    object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
-                    bool az_ = ay_ is CqlInterval<CqlDateTime>;
-                    if (az_)
+                    bool ad_ = aa_ is CqlInterval<CqlDateTime>;
+                    if (ad_)
                     {
-                        DataType ba_ = @this?.Performed;
-                        object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                        ak_ = bb_ as CqlInterval<CqlDateTime>;
+                        w_ = aa_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType bc_ = @this?.Performed;
-                        object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
-                        bool be_ = bd_ is CqlInterval<CqlQuantity>;
-                        if (be_)
+                        bool ae_ = aa_ is CqlInterval<CqlQuantity>;
+                        if (ae_)
                         {
-                            DataType bf_ = @this?.Performed;
-                            object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
-                            ak_ = bg_ as CqlInterval<CqlQuantity>;
+                            w_ = aa_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
-                            ak_ = null;
+                            w_ = null;
                         }
                     }
                 }
             }
-            CqlInterval<CqlDateTime> al_ = QICoreCommon_4_0_000.Instance.toInterval(context, ak_);
-            CqlDateTime am_ = context.Operators.Start(al_);
-            return am_;
+            CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
+            CqlDateTime y_ = context.Operators.Start(x_);
+            return y_;
         }
 
         IEnumerable<Procedure> f_ = context.Operators.SortBy<Procedure>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
@@ -472,42 +444,28 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 bool aa_ = z_ is CqlDateTime;
                 if (aa_)
                 {
-                    DataType ab_ = FirstProstateCancerTreatment?.Performed;
-                    object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    u_ = ac_ as CqlDateTime;
+                    u_ = z_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ad_ = FirstProstateCancerTreatment?.Performed;
-                    object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                    bool af_ = ae_ is CqlQuantity;
-                    if (af_)
+                    bool ab_ = z_ is CqlQuantity;
+                    if (ab_)
                     {
-                        DataType ag_ = FirstProstateCancerTreatment?.Performed;
-                        object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        u_ = ah_ as CqlQuantity;
+                        u_ = z_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType ai_ = FirstProstateCancerTreatment?.Performed;
-                        object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                        bool ak_ = aj_ is CqlInterval<CqlDateTime>;
-                        if (ak_)
+                        bool ac_ = z_ is CqlInterval<CqlDateTime>;
+                        if (ac_)
                         {
-                            DataType al_ = FirstProstateCancerTreatment?.Performed;
-                            object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                            u_ = am_ as CqlInterval<CqlDateTime>;
+                            u_ = z_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType an_ = FirstProstateCancerTreatment?.Performed;
-                            object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                            bool ap_ = ao_ is CqlInterval<CqlQuantity>;
-                            if (ap_)
+                            bool ad_ = z_ is CqlInterval<CqlQuantity>;
+                            if (ad_)
                             {
-                                DataType aq_ = FirstProstateCancerTreatment?.Performed;
-                                object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                                u_ = ar_ as CqlInterval<CqlQuantity>;
+                                u_ = z_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -526,16 +484,16 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 }
                 else
                 {
-                    Code<ObservationStatus> as_ = ProstateCancerStaging?.StatusElement;
-                    ObservationStatus? at_ = as_?.Value;
-                    string au_ = context.Operators.Convert<string>(at_);
-                    string[] av_ = [
+                    Code<ObservationStatus> ae_ = ProstateCancerStaging?.StatusElement;
+                    ObservationStatus? af_ = ae_?.Value;
+                    string ag_ = context.Operators.Convert<string>(af_);
+                    string[] ah_ = [
                         "final",
                         "amended",
                         "corrected",
                     ];
-                    bool? aw_ = context.Operators.In<string>(au_, (IEnumerable<string>)av_);
-                    return x_ & aw_;
+                    bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
+                    return x_ & ai_;
                 }
             }
 
@@ -546,11 +504,11 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 
         object f_(Observation @this) {
-            DataType ax_ = @this?.Effective;
-            object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
-            CqlInterval<CqlDateTime> az_ = QICoreCommon_4_0_000.Instance.toInterval(context, ay_);
-            CqlDateTime ba_ = context.Operators.Start(az_);
-            return ba_;
+            DataType aj_ = @this?.Effective;
+            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_4_0_000.Instance.toInterval(context, ak_);
+            CqlDateTime am_ = context.Operators.Start(al_);
+            return am_;
         }
 
         IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -560,48 +518,48 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         ];
 
         bool? j_(Observation LastProstateCancerStaging) {
-            DataType bb_ = LastProstateCancerStaging?.Value;
-            object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-            CqlCode bd_ = this.American_Joint_Committee_on_Cancer_cT1a__qualifier_value_(context);
-            CqlConcept be_ = context.Operators.ConvertCodeToConcept(bd_);
-            bool? bf_ = context.Operators.Equivalent(bc_ as CqlConcept, be_);
-            bool? bg_;
+            DataType an_ = LastProstateCancerStaging?.Value;
+            object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
+            CqlCode ap_ = this.American_Joint_Committee_on_Cancer_cT1a__qualifier_value_(context);
+            CqlConcept aq_ = context.Operators.ConvertCodeToConcept(ap_);
+            bool? ar_ = context.Operators.Equivalent(ao_ as CqlConcept, aq_);
+            bool? as_;
             // CQL 'or' (125:13-126:104): right operand skipped when left is true
-            if (bf_ is true)
+            if (ar_ is true)
             {
-                bg_ = true;
+                as_ = true;
             }
             else
             {
-                CqlCode bi_ = this.American_Joint_Committee_on_Cancer_cT1b__qualifier_value_(context);
-                CqlConcept bj_ = context.Operators.ConvertCodeToConcept(bi_);
-                bool? bk_ = context.Operators.Equivalent(bc_ as CqlConcept, bj_);
-                bg_ = bf_ | bk_;
+                CqlCode au_ = this.American_Joint_Committee_on_Cancer_cT1b__qualifier_value_(context);
+                CqlConcept av_ = context.Operators.ConvertCodeToConcept(au_);
+                bool? aw_ = context.Operators.Equivalent(ao_ as CqlConcept, av_);
+                as_ = ar_ | aw_;
             }
-            bool? bh_;
+            bool? at_;
             // CQL 'or' (125:13-127:104): right operand skipped when left is true
-            if (bg_ is true)
+            if (as_ is true)
             {
-                bh_ = true;
+                at_ = true;
             }
             else
             {
-                CqlCode bl_ = this.American_Joint_Committee_on_Cancer_cT1c__qualifier_value_(context);
-                CqlConcept bm_ = context.Operators.ConvertCodeToConcept(bl_);
-                bool? bn_ = context.Operators.Equivalent(bc_ as CqlConcept, bm_);
-                bh_ = bg_ | bn_;
+                CqlCode ax_ = this.American_Joint_Committee_on_Cancer_cT1c__qualifier_value_(context);
+                CqlConcept ay_ = context.Operators.ConvertCodeToConcept(ax_);
+                bool? az_ = context.Operators.Equivalent(ao_ as CqlConcept, ay_);
+                at_ = as_ | az_;
             }
             // CQL 'or' (125:5-129:5): right operand skipped when left is true
-            if (bh_ is true)
+            if (at_ is true)
             {
                 return true;
             }
             else
             {
-                CqlCode bo_ = this.American_Joint_Committee_on_Cancer_cT2a__qualifier_value_(context);
-                CqlConcept bp_ = context.Operators.ConvertCodeToConcept(bo_);
-                bool? bq_ = context.Operators.Equivalent(bc_ as CqlConcept, bp_);
-                return bh_ | bq_;
+                CqlCode ba_ = this.American_Joint_Committee_on_Cancer_cT2a__qualifier_value_(context);
+                CqlConcept bb_ = context.Operators.ConvertCodeToConcept(ba_);
+                bool? bc_ = context.Operators.Equivalent(ao_ as CqlConcept, bb_);
+                return at_ | bc_;
             }
         }
 
@@ -640,12 +598,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 }
                 else
                 {
-                    DataType y_ = PSATest?.Effective;
-                    object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.toInterval(context, z_);
-                    CqlDateTime ab_ = context.Operators.Start(aa_);
-                    CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(ab_, ab_, true, true);
-                    p_ = ac_;
+                    CqlInterval<CqlDateTime> y_ = context.Operators.Interval(x_, x_, true, true);
+                    p_ = y_;
                 }
                 DataType q_ = MostRecentProstateCancerStaging?.Effective;
                 object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
@@ -658,16 +612,16 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 }
                 else
                 {
-                    Code<ObservationStatus> ad_ = PSATest?.StatusElement;
-                    ObservationStatus? ae_ = ad_?.Value;
-                    string af_ = context.Operators.Convert<string>(ae_);
-                    string[] ag_ = [
+                    Code<ObservationStatus> z_ = PSATest?.StatusElement;
+                    ObservationStatus? aa_ = z_?.Value;
+                    string ab_ = context.Operators.Convert<string>(aa_);
+                    string[] ac_ = [
                         "final",
                         "amended",
                         "corrected",
                     ];
-                    bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
-                    return t_ & ah_;
+                    bool? ad_ = context.Operators.In<string>(ab_, (IEnumerable<string>)ac_);
+                    return t_ & ad_;
                 }
             }
 
@@ -678,11 +632,11 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
         object e_(Observation @this) {
-            DataType ai_ = @this?.Effective;
-            object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-            CqlInterval<CqlDateTime> ak_ = QICoreCommon_4_0_000.Instance.toInterval(context, aj_);
-            CqlDateTime al_ = context.Operators.Start(ak_);
-            return al_;
+            DataType ae_ = @this?.Effective;
+            object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
+            CqlInterval<CqlDateTime> ag_ = QICoreCommon_4_0_000.Instance.toInterval(context, af_);
+            CqlDateTime ah_ = context.Operators.Start(ag_);
+            return ah_;
         }
 
         IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
@@ -692,11 +646,11 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         ];
 
         bool? i_(Observation LastPSATest) {
-            DataType am_ = LastPSATest?.Value;
-            object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-            CqlQuantity ao_ = context.Operators.Quantity(10m, "ng/mL");
-            bool? ap_ = context.Operators.Less(an_ as CqlQuantity, ao_);
-            return ap_;
+            DataType ai_ = LastPSATest?.Value;
+            object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+            CqlQuantity ak_ = context.Operators.Quantity(10m, "ng/mL");
+            bool? al_ = context.Operators.Less(aj_ as CqlQuantity, ak_);
+            return al_;
         }
 
         IEnumerable<bool?> j_ = context.Operators.SelectDistinct<Observation, bool?>((IEnumerable<Observation>)h_, i_);
@@ -734,42 +688,28 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 bool aa_ = z_ is CqlDateTime;
                 if (aa_)
                 {
-                    DataType ab_ = FirstProstateCancerTreatment?.Performed;
-                    object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    u_ = ac_ as CqlDateTime;
+                    u_ = z_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ad_ = FirstProstateCancerTreatment?.Performed;
-                    object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                    bool af_ = ae_ is CqlQuantity;
-                    if (af_)
+                    bool ab_ = z_ is CqlQuantity;
+                    if (ab_)
                     {
-                        DataType ag_ = FirstProstateCancerTreatment?.Performed;
-                        object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        u_ = ah_ as CqlQuantity;
+                        u_ = z_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType ai_ = FirstProstateCancerTreatment?.Performed;
-                        object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                        bool ak_ = aj_ is CqlInterval<CqlDateTime>;
-                        if (ak_)
+                        bool ac_ = z_ is CqlInterval<CqlDateTime>;
+                        if (ac_)
                         {
-                            DataType al_ = FirstProstateCancerTreatment?.Performed;
-                            object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                            u_ = am_ as CqlInterval<CqlDateTime>;
+                            u_ = z_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType an_ = FirstProstateCancerTreatment?.Performed;
-                            object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                            bool ap_ = ao_ is CqlInterval<CqlQuantity>;
-                            if (ap_)
+                            bool ad_ = z_ is CqlInterval<CqlQuantity>;
+                            if (ad_)
                             {
-                                DataType aq_ = FirstProstateCancerTreatment?.Performed;
-                                object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                                u_ = ar_ as CqlInterval<CqlQuantity>;
+                                u_ = z_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -788,16 +728,16 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 }
                 else
                 {
-                    Code<ObservationStatus> as_ = GleasonScore?.StatusElement;
-                    ObservationStatus? at_ = as_?.Value;
-                    string au_ = context.Operators.Convert<string>(at_);
-                    string[] av_ = [
+                    Code<ObservationStatus> ae_ = GleasonScore?.StatusElement;
+                    ObservationStatus? af_ = ae_?.Value;
+                    string ag_ = context.Operators.Convert<string>(af_);
+                    string[] ah_ = [
                         "final",
                         "amended",
                         "corrected",
                     ];
-                    bool? aw_ = context.Operators.In<string>(au_, (IEnumerable<string>)av_);
-                    return x_ & aw_;
+                    bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
+                    return x_ & ai_;
                 }
             }
 
@@ -808,11 +748,11 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 
         object f_(Observation @this) {
-            DataType ax_ = @this?.Effective;
-            object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
-            CqlInterval<CqlDateTime> az_ = QICoreCommon_4_0_000.Instance.toInterval(context, ay_);
-            CqlDateTime ba_ = context.Operators.Start(az_);
-            return ba_;
+            DataType aj_ = @this?.Effective;
+            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_4_0_000.Instance.toInterval(context, ak_);
+            CqlDateTime am_ = context.Operators.Start(al_);
+            return am_;
         }
 
         IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -822,10 +762,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         ];
 
         bool? j_(Observation LastGleasonScore) {
-            DataType bb_ = LastGleasonScore?.Value;
-            object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-            bool? bd_ = context.Operators.LessOrEqual(bc_ as int?, 6);
-            return bd_;
+            DataType an_ = LastGleasonScore?.Value;
+            object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
+            bool? ap_ = context.Operators.LessOrEqual(ao_ as int?, 6);
+            return ap_;
         }
 
         IEnumerable<bool?> k_ = context.Operators.SelectDistinct<Observation, bool?>((IEnumerable<Observation>)i_, j_);
@@ -1030,42 +970,28 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 bool p_ = o_ is CqlDateTime;
                 if (p_)
                 {
-                    DataType q_ = SalvageTherapy?.Performed;
-                    object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                    h_ = r_ as CqlDateTime;
+                    h_ = o_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType s_ = SalvageTherapy?.Performed;
-                    object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                    bool u_ = t_ is CqlQuantity;
-                    if (u_)
+                    bool q_ = o_ is CqlQuantity;
+                    if (q_)
                     {
-                        DataType v_ = SalvageTherapy?.Performed;
-                        object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                        h_ = w_ as CqlQuantity;
+                        h_ = o_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType x_ = SalvageTherapy?.Performed;
-                        object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                        bool z_ = y_ is CqlInterval<CqlDateTime>;
-                        if (z_)
+                        bool r_ = o_ is CqlInterval<CqlDateTime>;
+                        if (r_)
                         {
-                            DataType aa_ = SalvageTherapy?.Performed;
-                            object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                            h_ = ab_ as CqlInterval<CqlDateTime>;
+                            h_ = o_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType ac_ = SalvageTherapy?.Performed;
-                            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                            bool ae_ = ad_ is CqlInterval<CqlQuantity>;
-                            if (ae_)
+                            bool s_ = o_ is CqlInterval<CqlQuantity>;
+                            if (s_)
                             {
-                                DataType af_ = SalvageTherapy?.Performed;
-                                object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                                h_ = ag_ as CqlInterval<CqlQuantity>;
+                                h_ = o_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -1086,11 +1012,11 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 }
                 else
                 {
-                    Code<EventStatus> ah_ = SalvageTherapy?.StatusElement;
-                    EventStatus? ai_ = ah_?.Value;
-                    string aj_ = context.Operators.Convert<string>(ai_);
-                    bool? ak_ = context.Operators.Equal(aj_, "completed");
-                    return m_ & ak_;
+                    Code<EventStatus> t_ = SalvageTherapy?.StatusElement;
+                    EventStatus? u_ = t_?.Value;
+                    string v_ = context.Operators.Convert<string>(u_);
+                    bool? w_ = context.Operators.Equal(v_, "completed");
+                    return m_ & w_;
                 }
             }
 

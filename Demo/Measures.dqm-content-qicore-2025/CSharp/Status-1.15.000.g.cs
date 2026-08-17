@@ -137,7 +137,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                     bool? t_ = context.Operators.Equivalent(d_, s_);
                     k_ = j_ | t_;
                 }
-                return /* CQL 'implies' (25:5-30:7) */ !e_ | k_;
+                return !e_ | k_;
             }
         }
 

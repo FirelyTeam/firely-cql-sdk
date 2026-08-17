@@ -452,10 +452,16 @@ public class LogicCqlTest
     [TestMethod]
     public void GeneratedCSharp_UsesGuardedNativeOperators()
     {
-        var generated = GenerateFixtureCSharp(ElmToolkitConfig.Default);
+        var generated = LogicTestFixture.DefaultCSharp;
 
         StringAssert.Contains(generated, "// CQL 'and' (", "Expected origin-tagged 'and' guards.");
-        StringAssert.Contains(generated, "/* CQL 'and' (", "Expected the inline-ternary guard form (AndNotY) with its block-comment tag.");
+        // The inline-ternary guard form, pinned on its SHAPE rather than on a `/* CQL 'and' (`
+        // substring: guard-free merges now carry that tag too, so the substring alone no longer
+        // distinguishes the ternary (AndNotY) from an ordinary merge.
+        StringAssert.Matches(
+            ExtractComputeMethod(generated, "AndNotY"),
+            new System.Text.RegularExpressions.Regex(@"/\* CQL 'and' \([^)]*\) \*/ \(\w+ is false\s*\r?\n\s*\? false\s*\r?\n\s*: "),
+            "Expected AndNotY to keep the inline-ternary guard form with its block-comment tag.");
         StringAssert.Contains(generated, "// CQL 'or' (", "Expected origin-tagged 'or' guards.");
         StringAssert.Contains(generated, "// CQL 'implies' (", "Expected origin-tagged 'implies' guards.");
         StringAssert.Contains(generated, "// CQL 'xor' (", "Expected origin-tagged 'xor' guards.");
@@ -466,10 +472,19 @@ public class LogicCqlTest
         StringAssert.Contains(generated, "right operand skipped when left is null", "Expected the 'xor' guard explanation — null is xor's deciding value.");
 
         // The native forms themselves, so a regression to an operator call cannot hide behind a
-        // surviving origin comment.
-        StringAssert.Contains(generated, " is true)", "Expected the 'is true' constant pattern.");
-        StringAssert.Contains(generated, " is false)", "Expected the 'is false' constant pattern.");
-        StringAssert.Contains(generated, " ^ ", "Expected xor to lower to the lifted ^ operator.");
+        // surviving origin comment. Anchored on the tag immediately followed by the pattern:
+        // a bare " is true)" would also match every `or` guard's own test, and " is false)" every
+        // `and`/`implies` guard's, which is most of the fixture.
+        StringAssert.Contains(generated, "(/* CQL 'is true' (", "Expected the 'is true' lowering to emit the tag inline before its pattern.");
+        StringAssert.Contains(generated, "(/* CQL 'is false' (", "Expected the 'is false' lowering to emit the tag inline before its pattern.");
+        StringAssert.Matches(
+            generated,
+            new System.Text.RegularExpressions.Regex(@"/\* CQL 'is true' \([^)]*\) \*/ \w+ is true"),
+            "Expected 'is true' to lower to the constant pattern over its operand.");
+        StringAssert.Matches(
+            generated,
+            new System.Text.RegularExpressions.Regex(@"\w+ \^ \w+"),
+            "Expected xor to lower to the lifted ^ operator over two operands.");
 
         foreach (var call in new[]
                  {
@@ -498,7 +513,7 @@ public class LogicCqlTest
     [TestMethod]
     public void GeneratedCSharp_GuardChainsKeepElseBlocks()
     {
-        var generated = GenerateFixtureCSharp(ElmToolkitConfig.Default);
+        var generated = LogicTestFixture.DefaultCSharp;
 
         StringAssert.Matches(
             ExtractComputeMethod(generated, "TrueAndTrue_Compute"),
@@ -527,16 +542,4 @@ public class LogicCqlTest
         return end < 0 ? code[start..] : code[start..end];
     }
 
-    private static string GenerateFixtureCSharp(ElmToolkitConfig config)
-    {
-        LibrarySet librarySet = new();
-        librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input/ELM/HL7"), "LogicTest", "1.0.0");
-
-        return new ElmToolkit(config: config)
-            .AddElmLibraries(librarySet)
-            .CompileToAssemblies()
-            .GetElmToCSharpResults()
-            .Single()
-            .cSharp;
-    }
 }

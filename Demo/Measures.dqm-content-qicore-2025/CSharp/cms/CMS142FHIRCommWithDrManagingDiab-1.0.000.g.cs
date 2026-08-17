@@ -301,7 +301,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 bool? r_ = context.Operators.Equivalent(b_, q_);
                 i_ = h_ | r_;
             }
-            return /* CQL 'implies' (148:3-152:3) */ !c_ | i_;
+            return !c_ | i_;
         }
     }
 

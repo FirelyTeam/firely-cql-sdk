@@ -276,7 +276,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 bool? r_ = context.Operators.Equivalent(b_, q_);
                 i_ = h_ | r_;
             }
-            return /* CQL 'implies' (250:3-254:3) */ !c_ | i_;
+            return !c_ | i_;
         }
     }
 
@@ -346,42 +346,28 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             bool aw_ = av_ is CqlDateTime;
             if (aw_)
             {
-                DataType ax_ = ASCVDProcedure?.Performed;
-                object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
-                ao_ = ay_ as CqlDateTime;
+                ao_ = av_ as CqlDateTime;
             }
             else
             {
-                DataType az_ = ASCVDProcedure?.Performed;
-                object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                bool bb_ = ba_ is CqlQuantity;
-                if (bb_)
+                bool ax_ = av_ is CqlQuantity;
+                if (ax_)
                 {
-                    DataType bc_ = ASCVDProcedure?.Performed;
-                    object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
-                    ao_ = bd_ as CqlQuantity;
+                    ao_ = av_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType be_ = ASCVDProcedure?.Performed;
-                    object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                    bool bg_ = bf_ is CqlInterval<CqlDateTime>;
-                    if (bg_)
+                    bool ay_ = av_ is CqlInterval<CqlDateTime>;
+                    if (ay_)
                     {
-                        DataType bh_ = ASCVDProcedure?.Performed;
-                        object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                        ao_ = bi_ as CqlInterval<CqlDateTime>;
+                        ao_ = av_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType bj_ = ASCVDProcedure?.Performed;
-                        object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                        bool bl_ = bk_ is CqlInterval<CqlQuantity>;
-                        if (bl_)
+                        bool az_ = av_ is CqlInterval<CqlQuantity>;
+                        if (az_)
                         {
-                            DataType bm_ = ASCVDProcedure?.Performed;
-                            object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
-                            ao_ = bn_ as CqlInterval<CqlQuantity>;
+                            ao_ = av_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -402,11 +388,11 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             }
             else
             {
-                Code<EventStatus> bo_ = ASCVDProcedure?.StatusElement;
-                EventStatus? bp_ = bo_?.Value;
-                string bq_ = context.Operators.Convert<string>(bp_);
-                bool? br_ = context.Operators.Equal(bq_, "completed");
-                return at_ & br_;
+                Code<EventStatus> ba_ = ASCVDProcedure?.StatusElement;
+                EventStatus? bb_ = ba_?.Value;
+                string bc_ = context.Operators.Convert<string>(bb_);
+                bool? bd_ = context.Operators.Equal(bc_, "completed");
+                return at_ & bd_;
             }
         }
 

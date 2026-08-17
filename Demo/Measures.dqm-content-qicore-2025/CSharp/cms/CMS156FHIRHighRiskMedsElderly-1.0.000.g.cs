@@ -1442,9 +1442,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 CqlConcept w_ = CQMCommon_4_1_000.Instance.getMedicationCode(context, Order);
                 CqlQuantity x_ = this.medicationStrengthPerUnit(context, w_);
                 CqlQuantity y_ = context.Operators.Multiply(v_, x_);
-                decimal? z_ = this.medicationRequestPeriodInDays(context, Order);
-                CqlQuantity aa_ = context.Operators.Divide(y_, new CqlQuantity(z_, "d"));
-                return aa_;
+                CqlQuantity z_ = context.Operators.Divide(y_, new CqlQuantity(e_, "d"));
+                return z_;
             }
             else
             {

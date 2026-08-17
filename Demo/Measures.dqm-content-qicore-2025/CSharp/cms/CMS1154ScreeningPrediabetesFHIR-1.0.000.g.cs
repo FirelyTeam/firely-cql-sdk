@@ -216,7 +216,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
                     bool? t_ = context.Operators.Equivalent(d_, s_);
                     k_ = j_ | t_;
                 }
-                return /* CQL 'implies' (42:5-46:5) */ !e_ | k_;
+                return !e_ | k_;
             }
         }
 

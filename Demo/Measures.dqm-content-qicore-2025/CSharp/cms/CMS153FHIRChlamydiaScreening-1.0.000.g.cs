@@ -309,10 +309,8 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                    CqlDateTime t_ = context.Operators.End(s_);
-                    CqlInterval<CqlDateTime> u_ = context.Operators.Interval(t_, t_, true, true);
-                    o_ = u_;
+                    CqlInterval<CqlDateTime> s_ = context.Operators.Interval(r_, r_, true, true);
+                    o_ = s_;
                 }
                 bool? p_ = context.Operators.SameOrBefore(n_, o_, (string)default);
                 return k_ & p_;
@@ -594,42 +592,28 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             bool l_ = k_ is CqlDateTime;
             if (l_)
             {
-                DataType m_ = ProceduresForSexualActivity?.Performed;
-                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                g_ = n_ as CqlDateTime;
+                g_ = k_ as CqlDateTime;
             }
             else
             {
-                DataType o_ = ProceduresForSexualActivity?.Performed;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                bool q_ = p_ is CqlQuantity;
-                if (q_)
+                bool m_ = k_ is CqlQuantity;
+                if (m_)
                 {
-                    DataType r_ = ProceduresForSexualActivity?.Performed;
-                    object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                    g_ = s_ as CqlQuantity;
+                    g_ = k_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType t_ = ProceduresForSexualActivity?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    bool v_ = u_ is CqlInterval<CqlDateTime>;
-                    if (v_)
+                    bool n_ = k_ is CqlInterval<CqlDateTime>;
+                    if (n_)
                     {
-                        DataType w_ = ProceduresForSexualActivity?.Performed;
-                        object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                        g_ = x_ as CqlInterval<CqlDateTime>;
+                        g_ = k_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType y_ = ProceduresForSexualActivity?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        bool aa_ = z_ is CqlInterval<CqlQuantity>;
-                        if (aa_)
+                        bool o_ = k_ is CqlInterval<CqlQuantity>;
+                        if (o_)
                         {
-                            DataType ab_ = ProceduresForSexualActivity?.Performed;
-                            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                            g_ = ac_ as CqlInterval<CqlQuantity>;
+                            g_ = k_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -1066,31 +1050,20 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             bool l_ = k_ is CqlDateTime;
             if (l_)
             {
-                DataType m_ = ChlamydiaTest?.Effective;
-                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                f_ = n_ as CqlDateTime;
+                f_ = k_ as CqlDateTime;
             }
             else
             {
-                DataType o_ = ChlamydiaTest?.Effective;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                bool q_ = p_ is CqlDateTime;
-                if (q_)
+                if (l_)
                 {
-                    DataType r_ = ChlamydiaTest?.Effective;
-                    object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                    f_ = s_ as CqlDateTime;
+                    f_ = k_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType t_ = ChlamydiaTest?.Effective;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    bool v_ = u_ is CqlInterval<CqlDateTime>;
-                    if (v_)
+                    bool m_ = k_ is CqlInterval<CqlDateTime>;
+                    if (m_)
                     {
-                        DataType w_ = ChlamydiaTest?.Effective;
-                        object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                        f_ = x_ as CqlInterval<CqlDateTime>;
+                        f_ = k_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1108,9 +1081,9 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             }
             else
             {
-                DataType y_ = ChlamydiaTest?.Value;
-                object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                return i_ & (!((bool?)(z_ is null)));
+                DataType n_ = ChlamydiaTest?.Value;
+                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+                return i_ & (!((bool?)(o_ is null)));
             }
         }
 

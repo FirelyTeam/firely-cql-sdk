@@ -560,42 +560,28 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool w_ = v_ is CqlDateTime;
                 if (w_)
                 {
-                    object x_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    g_ = y_ as CqlDateTime;
+                    g_ = v_ as CqlDateTime;
                 }
                 else
                 {
-                    object z_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    bool ab_ = aa_ is CqlQuantity;
-                    if (ab_)
+                    bool x_ = v_ is CqlQuantity;
+                    if (x_)
                     {
-                        object ac_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        g_ = ad_ as CqlQuantity;
+                        g_ = v_ as CqlQuantity;
                     }
                     else
                     {
-                        object ae_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlInterval<CqlDateTime>;
-                        if (ag_)
+                        bool y_ = v_ is CqlInterval<CqlDateTime>;
+                        if (y_)
                         {
-                            object ah_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                            g_ = ai_ as CqlInterval<CqlDateTime>;
+                            g_ = v_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            object aj_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                            bool al_ = ak_ is CqlInterval<CqlQuantity>;
-                            if (al_)
+                            bool z_ = v_ is CqlInterval<CqlQuantity>;
+                            if (z_)
                             {
-                                object am_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                                object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                                g_ = an_ as CqlInterval<CqlQuantity>;
+                                g_ = v_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -668,42 +654,28 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
-                    DataType aa_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlDateTime;
+                    q_ = y_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ac_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlQuantity;
-                    if (ae_)
+                    bool aa_ = y_ is CqlQuantity;
+                    if (aa_)
                     {
-                        DataType af_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlQuantity;
+                        q_ = y_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType ah_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        bool aj_ = ai_ is CqlInterval<CqlDateTime>;
-                        if (aj_)
+                        bool ab_ = y_ is CqlInterval<CqlDateTime>;
+                        if (ab_)
                         {
-                            DataType ak_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                            q_ = al_ as CqlInterval<CqlDateTime>;
+                            q_ = y_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType am_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                            object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                            bool ao_ = an_ is CqlInterval<CqlQuantity>;
-                            if (ao_)
+                            bool ac_ = y_ is CqlInterval<CqlQuantity>;
+                            if (ac_)
                             {
-                                DataType ap_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                                object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                                q_ = aq_ as CqlInterval<CqlQuantity>;
+                                q_ = y_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -727,281 +699,211 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             }
             else
             {
-                object ar_;
-                object bu_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
-                object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                bool bw_ = bv_ is CqlDateTime;
-                if (bw_)
+                object ad_;
+                object bg_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
+                object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
+                bool bi_ = bh_ is CqlDateTime;
+                if (bi_)
                 {
-                    object bx_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
-                    object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    ar_ = by_ as CqlDateTime;
+                    ad_ = bh_ as CqlDateTime;
                 }
                 else
                 {
-                    object bz_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
-                    object ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
-                    bool cb_ = ca_ is CqlQuantity;
+                    bool bj_ = bh_ is CqlQuantity;
+                    if (bj_)
+                    {
+                        ad_ = bh_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bk_ = bh_ is CqlInterval<CqlDateTime>;
+                        if (bk_)
+                        {
+                            ad_ = bh_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool bl_ = bh_ is CqlInterval<CqlQuantity>;
+                            if (bl_)
+                            {
+                                ad_ = bh_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ad_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> ae_ = QICoreCommon_4_0_000.Instance.toInterval(context, ad_);
+                CqlDateTime af_ = context.Operators.Start(ae_);
+                object ag_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "authoredOn");
+                CqlDateTime ah_ = context.Operators.LateBoundProperty<CqlDateTime>(ag_, "value");
+                object ai_;
+                DataType bm_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
+                object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
+                bool bo_ = bn_ is CqlDateTime;
+                if (bo_)
+                {
+                    ai_ = bn_ as CqlDateTime;
+                }
+                else
+                {
+                    bool bp_ = bn_ is CqlQuantity;
+                    if (bp_)
+                    {
+                        ai_ = bn_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bq_ = bn_ is CqlInterval<CqlDateTime>;
+                        if (bq_)
+                        {
+                            ai_ = bn_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool br_ = bn_ is CqlInterval<CqlQuantity>;
+                            if (br_)
+                            {
+                                ai_ = bn_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ai_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> aj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ai_);
+                CqlDateTime ak_ = context.Operators.End(aj_);
+                CqlInterval<CqlDate> al_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ak_);
+                CqlDate am_ = al_?.low;
+                CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+                object ao_;
+                DataType bs_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
+                object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
+                bool bu_ = bt_ is CqlDateTime;
+                if (bu_)
+                {
+                    ao_ = bt_ as CqlDateTime;
+                }
+                else
+                {
+                    bool bv_ = bt_ is CqlQuantity;
+                    if (bv_)
+                    {
+                        ao_ = bt_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bw_ = bt_ is CqlInterval<CqlDateTime>;
+                        if (bw_)
+                        {
+                            ao_ = bt_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool bx_ = bt_ is CqlInterval<CqlQuantity>;
+                            if (bx_)
+                            {
+                                ao_ = bt_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ao_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> ap_ = QICoreCommon_4_0_000.Instance.toInterval(context, ao_);
+                CqlDateTime aq_ = context.Operators.End(ap_);
+                CqlInterval<CqlDate> ar_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, aq_);
+                CqlDate as_ = ar_?.high;
+                CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
+                object au_;
+                DataType by_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
+                object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
+                bool ca_ = bz_ is CqlDateTime;
+                if (ca_)
+                {
+                    au_ = bz_ as CqlDateTime;
+                }
+                else
+                {
+                    bool cb_ = bz_ is CqlQuantity;
                     if (cb_)
                     {
-                        object cc_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
-                        object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
-                        ar_ = cd_ as CqlQuantity;
+                        au_ = bz_ as CqlQuantity;
                     }
                     else
                     {
-                        object ce_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
-                        object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                        bool cg_ = cf_ is CqlInterval<CqlDateTime>;
-                        if (cg_)
+                        bool cc_ = bz_ is CqlInterval<CqlDateTime>;
+                        if (cc_)
                         {
-                            object ch_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
-                            object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                            ar_ = ci_ as CqlInterval<CqlDateTime>;
+                            au_ = bz_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            object cj_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
-                            object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                            bool cl_ = ck_ is CqlInterval<CqlQuantity>;
-                            if (cl_)
+                            bool cd_ = bz_ is CqlInterval<CqlQuantity>;
+                            if (cd_)
                             {
-                                object cm_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "performed");
-                                object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
-                                ar_ = cn_ as CqlInterval<CqlQuantity>;
+                                au_ = bz_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                ar_ = null;
+                                au_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> as_ = QICoreCommon_4_0_000.Instance.toInterval(context, ar_);
-                CqlDateTime at_ = context.Operators.Start(as_);
-                object au_ = context.Operators.LateBoundProperty<object>(tuple_gdefgctjcxpzbyfpuogejrgou?.ComfortMeasure, "authoredOn");
-                CqlDateTime av_ = context.Operators.LateBoundProperty<CqlDateTime>(au_, "value");
-                object aw_;
-                DataType co_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
-                bool cq_ = cp_ is CqlDateTime;
-                if (cq_)
+                CqlInterval<CqlDateTime> av_ = QICoreCommon_4_0_000.Instance.toInterval(context, au_);
+                CqlDateTime aw_ = context.Operators.End(av_);
+                CqlInterval<CqlDate> ax_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, aw_);
+                bool? ay_ = ax_?.lowClosed;
+                object az_;
+                DataType ce_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
+                object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
+                bool cg_ = cf_ is CqlDateTime;
+                if (cg_)
                 {
-                    DataType cr_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                    object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                    aw_ = cs_ as CqlDateTime;
+                    az_ = cf_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ct_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                    object cu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ct_);
-                    bool cv_ = cu_ is CqlQuantity;
-                    if (cv_)
+                    bool ch_ = cf_ is CqlQuantity;
+                    if (ch_)
                     {
-                        DataType cw_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                        object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
-                        aw_ = cx_ as CqlQuantity;
+                        az_ = cf_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType cy_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                        object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-                        bool da_ = cz_ is CqlInterval<CqlDateTime>;
-                        if (da_)
+                        bool ci_ = cf_ is CqlInterval<CqlDateTime>;
+                        if (ci_)
                         {
-                            DataType db_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                            object dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
-                            aw_ = dc_ as CqlInterval<CqlDateTime>;
+                            az_ = cf_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType dd_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                            object de_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dd_);
-                            bool df_ = de_ is CqlInterval<CqlQuantity>;
-                            if (df_)
+                            bool cj_ = cf_ is CqlInterval<CqlQuantity>;
+                            if (cj_)
                             {
-                                DataType dg_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                                object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                                aw_ = dh_ as CqlInterval<CqlQuantity>;
+                                az_ = cf_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                aw_ = null;
+                                az_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> ax_ = QICoreCommon_4_0_000.Instance.toInterval(context, aw_);
-                CqlDateTime ay_ = context.Operators.End(ax_);
-                CqlInterval<CqlDate> az_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ay_);
-                CqlDate ba_ = az_?.low;
-                CqlDateTime bb_ = context.Operators.ConvertDateToDateTime(ba_);
-                object bc_;
-                DataType di_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                object dj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, di_);
-                bool dk_ = dj_ is CqlDateTime;
-                if (dk_)
-                {
-                    DataType dl_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                    object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
-                    bc_ = dm_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType dn_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                    object do_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dn_);
-                    bool dp_ = do_ is CqlQuantity;
-                    if (dp_)
-                    {
-                        DataType dq_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                        object dr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dq_);
-                        bc_ = dr_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType ds_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                        object dt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ds_);
-                        bool du_ = dt_ is CqlInterval<CqlDateTime>;
-                        if (du_)
-                        {
-                            DataType dv_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                            object dw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dv_);
-                            bc_ = dw_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType dx_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                            object dy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dx_);
-                            bool dz_ = dy_ is CqlInterval<CqlQuantity>;
-                            if (dz_)
-                            {
-                                DataType ea_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                                object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-                                bc_ = eb_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                bc_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bd_ = QICoreCommon_4_0_000.Instance.toInterval(context, bc_);
-                CqlDateTime be_ = context.Operators.End(bd_);
-                CqlInterval<CqlDate> bf_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, be_);
-                CqlDate bg_ = bf_?.high;
-                CqlDateTime bh_ = context.Operators.ConvertDateToDateTime(bg_);
-                object bi_;
-                DataType ec_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                object ed_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ec_);
-                bool ee_ = ed_ is CqlDateTime;
-                if (ee_)
-                {
-                    DataType ef_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                    object eg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ef_);
-                    bi_ = eg_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType eh_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                    object ei_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eh_);
-                    bool ej_ = ei_ is CqlQuantity;
-                    if (ej_)
-                    {
-                        DataType ek_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                        object el_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ek_);
-                        bi_ = el_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType em_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                        object en_ = FHIRHelpers_4_4_000.Instance.ToValue(context, em_);
-                        bool eo_ = en_ is CqlInterval<CqlDateTime>;
-                        if (eo_)
-                        {
-                            DataType ep_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                            object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
-                            bi_ = eq_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType er_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                            object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                            bool et_ = es_ is CqlInterval<CqlQuantity>;
-                            if (et_)
-                            {
-                                DataType eu_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                                object ev_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eu_);
-                                bi_ = ev_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                bi_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bj_ = QICoreCommon_4_0_000.Instance.toInterval(context, bi_);
-                CqlDateTime bk_ = context.Operators.End(bj_);
-                CqlInterval<CqlDate> bl_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bk_);
-                bool? bm_ = bl_?.lowClosed;
-                object bn_;
-                DataType ew_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                object ex_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ew_);
-                bool ey_ = ex_ is CqlDateTime;
-                if (ey_)
-                {
-                    DataType ez_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                    object fa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ez_);
-                    bn_ = fa_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType fb_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                    object fc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fb_);
-                    bool fd_ = fc_ is CqlQuantity;
-                    if (fd_)
-                    {
-                        DataType fe_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                        object ff_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fe_);
-                        bn_ = ff_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType fg_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                        object fh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fg_);
-                        bool fi_ = fh_ is CqlInterval<CqlDateTime>;
-                        if (fi_)
-                        {
-                            DataType fj_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                            object fk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fj_);
-                            bn_ = fk_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType fl_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                            object fm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fl_);
-                            bool fn_ = fm_ is CqlInterval<CqlQuantity>;
-                            if (fn_)
-                            {
-                                DataType fo_ = tuple_gdefgctjcxpzbyfpuogejrgou?.AnesthesiaProcedure?.Performed;
-                                object fp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fo_);
-                                bn_ = fp_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                bn_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bo_ = QICoreCommon_4_0_000.Instance.toInterval(context, bn_);
-                CqlDateTime bp_ = context.Operators.End(bo_);
-                CqlInterval<CqlDate> bq_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bp_);
-                bool? br_ = bq_?.highClosed;
-                CqlInterval<CqlDateTime> bs_ = context.Operators.Interval(bb_, bh_, bm_, br_);
-                bool? bt_ = context.Operators.In<CqlDateTime>(at_ ?? av_, bs_, "day");
-                return p_ & bt_;
+                CqlInterval<CqlDateTime> ba_ = QICoreCommon_4_0_000.Instance.toInterval(context, az_);
+                CqlDateTime bb_ = context.Operators.End(ba_);
+                CqlInterval<CqlDate> bc_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bb_);
+                bool? bd_ = bc_?.highClosed;
+                CqlInterval<CqlDateTime> be_ = context.Operators.Interval(an_, at_, ay_, bd_);
+                bool? bf_ = context.Operators.In<CqlDateTime>(af_ ?? ah_, be_, "day");
+                return p_ & bf_;
             }
         }
 
@@ -1318,42 +1220,28 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ai_ = ah_ is CqlDateTime;
                 if (ai_)
                 {
-                    object aj_ = context.Operators.LateBoundProperty<object>(VTEProphylaxis, "performed");
-                    object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    t_ = ak_ as CqlDateTime;
+                    t_ = ah_ as CqlDateTime;
                 }
                 else
                 {
-                    object al_ = context.Operators.LateBoundProperty<object>(VTEProphylaxis, "performed");
-                    object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                    bool an_ = am_ is CqlQuantity;
-                    if (an_)
+                    bool aj_ = ah_ is CqlQuantity;
+                    if (aj_)
                     {
-                        object ao_ = context.Operators.LateBoundProperty<object>(VTEProphylaxis, "performed");
-                        object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        t_ = ap_ as CqlQuantity;
+                        t_ = ah_ as CqlQuantity;
                     }
                     else
                     {
-                        object aq_ = context.Operators.LateBoundProperty<object>(VTEProphylaxis, "performed");
-                        object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                        bool as_ = ar_ is CqlInterval<CqlDateTime>;
-                        if (as_)
+                        bool ak_ = ah_ is CqlInterval<CqlDateTime>;
+                        if (ak_)
                         {
-                            object at_ = context.Operators.LateBoundProperty<object>(VTEProphylaxis, "performed");
-                            object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                            t_ = au_ as CqlInterval<CqlDateTime>;
+                            t_ = ah_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            object av_ = context.Operators.LateBoundProperty<object>(VTEProphylaxis, "performed");
-                            object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                            bool ax_ = aw_ is CqlInterval<CqlQuantity>;
-                            if (ax_)
+                            bool al_ = ah_ is CqlInterval<CqlQuantity>;
+                            if (al_)
                             {
-                                object ay_ = context.Operators.LateBoundProperty<object>(VTEProphylaxis, "performed");
-                                object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                                t_ = az_ as CqlInterval<CqlQuantity>;
+                                t_ = ah_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -1388,365 +1276,281 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<ValueTuple<Encounter, Procedure, object>> g_ = context.Operators.CrossJoin<Encounter, Procedure, object>(a_, e_, f_);
 
         (CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, object VTEProphylaxis)? h_(ValueTuple<Encounter, Procedure, object> _valueTuple) {
-            (CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, object VTEProphylaxis)? ba_ = (CqlTupleMetadata_CGYAgYdKXUHcFINAPjMZNihh, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
-            return ba_;
+            (CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, object VTEProphylaxis)? am_ = (CqlTupleMetadata_CGYAgYdKXUHcFINAPjMZNihh, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            return am_;
         }
 
 
         bool? i_((CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, object VTEProphylaxis)? tuple_drnlhywkgwmzdeyzybtiilbhf) {
-            Code<EventStatus> bb_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.StatusElement;
-            EventStatus? bc_ = bb_?.Value;
-            string bd_ = context.Operators.Convert<string>(bc_);
-            bool? be_ = context.Operators.Equal(bd_, "completed");
-            bool? bf_;
+            Code<EventStatus> an_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.StatusElement;
+            EventStatus? ao_ = an_?.Value;
+            string ap_ = context.Operators.Convert<string>(ao_);
+            bool? aq_ = context.Operators.Equal(ap_, "completed");
+            bool? ar_;
             // CQL 'and' (167:15-168:125): right operand skipped when left is false
-            if (be_ is false)
+            if (aq_ is false)
             {
-                bf_ = false;
+                ar_ = false;
             }
             else
             {
-                object bg_;
-                DataType bn_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                bool bp_ = bo_ is CqlDateTime;
-                if (bp_)
+                object as_;
+                DataType az_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
+                object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
+                bool bb_ = ba_ is CqlDateTime;
+                if (bb_)
                 {
-                    DataType bq_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                    object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
-                    bg_ = br_ as CqlDateTime;
+                    as_ = ba_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType bs_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                    object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                    bool bu_ = bt_ is CqlQuantity;
-                    if (bu_)
+                    bool bc_ = ba_ is CqlQuantity;
+                    if (bc_)
                     {
-                        DataType bv_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                        object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                        bg_ = bw_ as CqlQuantity;
+                        as_ = ba_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType bx_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                        object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                        bool bz_ = by_ is CqlInterval<CqlDateTime>;
-                        if (bz_)
+                        bool bd_ = ba_ is CqlInterval<CqlDateTime>;
+                        if (bd_)
                         {
-                            DataType ca_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                            object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                            bg_ = cb_ as CqlInterval<CqlDateTime>;
+                            as_ = ba_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType cc_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                            object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
-                            bool ce_ = cd_ is CqlInterval<CqlQuantity>;
-                            if (ce_)
+                            bool be_ = ba_ is CqlInterval<CqlQuantity>;
+                            if (be_)
                             {
-                                DataType cf_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                                object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                                bg_ = cg_ as CqlInterval<CqlQuantity>;
+                                as_ = ba_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                bg_ = null;
+                                as_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> bh_ = QICoreCommon_4_0_000.Instance.toInterval(context, bg_);
-                CqlDateTime bi_ = context.Operators.End(bh_);
-                CqlDateTime bj_ = this.startOfFirstICU(context, tuple_drnlhywkgwmzdeyzybtiilbhf?.QualifyingEncounterICU);
-                CqlQuantity bk_ = context.Operators.Quantity(1m, "day");
-                CqlDateTime bl_ = context.Operators.Add(bj_, bk_);
-                bool? bm_ = context.Operators.SameAs(bi_, bl_, "day");
-                bf_ = be_ & bm_;
+                CqlInterval<CqlDateTime> at_ = QICoreCommon_4_0_000.Instance.toInterval(context, as_);
+                CqlDateTime au_ = context.Operators.End(at_);
+                CqlDateTime av_ = this.startOfFirstICU(context, tuple_drnlhywkgwmzdeyzybtiilbhf?.QualifyingEncounterICU);
+                CqlQuantity aw_ = context.Operators.Quantity(1m, "day");
+                CqlDateTime ax_ = context.Operators.Add(av_, aw_);
+                bool? ay_ = context.Operators.SameAs(au_, ax_, "day");
+                ar_ = aq_ & ay_;
             }
             // CQL 'and' (167:9-169:207): right operand skipped when left is false
-            if (bf_ is false)
+            if (ar_ is false)
             {
                 return false;
             }
             else
             {
-                object ch_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "effective");
-                object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                CqlInterval<CqlDateTime> cj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ci_);
-                object ck_;
-                object dl_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
-                object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
-                bool dn_ = dm_ is CqlDateTime;
-                if (dn_)
+                object bf_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "effective");
+                object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
+                CqlInterval<CqlDateTime> bh_ = QICoreCommon_4_0_000.Instance.toInterval(context, bg_);
+                object bi_;
+                object cj_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
+                object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
+                bool cl_ = ck_ is CqlDateTime;
+                if (cl_)
                 {
-                    object do_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
-                    object dp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, do_);
-                    ck_ = dp_ as CqlDateTime;
+                    bi_ = ck_ as CqlDateTime;
                 }
                 else
                 {
-                    object dq_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
-                    object dr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dq_);
-                    bool ds_ = dr_ is CqlQuantity;
-                    if (ds_)
+                    bool cm_ = ck_ is CqlQuantity;
+                    if (cm_)
                     {
-                        object dt_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
-                        object du_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dt_);
-                        ck_ = du_ as CqlQuantity;
+                        bi_ = ck_ as CqlQuantity;
                     }
                     else
                     {
-                        object dv_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
-                        object dw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dv_);
-                        bool dx_ = dw_ is CqlInterval<CqlDateTime>;
-                        if (dx_)
+                        bool cn_ = ck_ is CqlInterval<CqlDateTime>;
+                        if (cn_)
                         {
-                            object dy_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
-                            object dz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dy_);
-                            ck_ = dz_ as CqlInterval<CqlDateTime>;
+                            bi_ = ck_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            object ea_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
-                            object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-                            bool ec_ = eb_ is CqlInterval<CqlQuantity>;
-                            if (ec_)
+                            bool co_ = ck_ is CqlInterval<CqlQuantity>;
+                            if (co_)
                             {
-                                object ed_ = context.Operators.LateBoundProperty<object>(tuple_drnlhywkgwmzdeyzybtiilbhf?.VTEProphylaxis, "performed");
-                                object ee_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ed_);
-                                ck_ = ee_ as CqlInterval<CqlQuantity>;
+                                bi_ = ck_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                ck_ = null;
+                                bi_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> cl_ = QICoreCommon_4_0_000.Instance.toInterval(context, ck_);
-                CqlDateTime cm_ = context.Operators.Start(cj_ ?? cl_);
-                object cn_;
-                DataType ef_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                object eg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ef_);
-                bool eh_ = eg_ is CqlDateTime;
-                if (eh_)
+                CqlInterval<CqlDateTime> bj_ = QICoreCommon_4_0_000.Instance.toInterval(context, bi_);
+                CqlDateTime bk_ = context.Operators.Start(bh_ ?? bj_);
+                object bl_;
+                DataType cp_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
+                object cq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cp_);
+                bool cr_ = cq_ is CqlDateTime;
+                if (cr_)
                 {
-                    DataType ei_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                    object ej_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ei_);
-                    cn_ = ej_ as CqlDateTime;
+                    bl_ = cq_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ek_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                    object el_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ek_);
-                    bool em_ = el_ is CqlQuantity;
-                    if (em_)
+                    bool cs_ = cq_ is CqlQuantity;
+                    if (cs_)
                     {
-                        DataType en_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                        object eo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, en_);
-                        cn_ = eo_ as CqlQuantity;
+                        bl_ = cq_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType ep_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                        object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
-                        bool er_ = eq_ is CqlInterval<CqlDateTime>;
-                        if (er_)
+                        bool ct_ = cq_ is CqlInterval<CqlDateTime>;
+                        if (ct_)
                         {
-                            DataType es_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                            object et_ = FHIRHelpers_4_4_000.Instance.ToValue(context, es_);
-                            cn_ = et_ as CqlInterval<CqlDateTime>;
+                            bl_ = cq_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType eu_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                            object ev_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eu_);
-                            bool ew_ = ev_ is CqlInterval<CqlQuantity>;
-                            if (ew_)
+                            bool cu_ = cq_ is CqlInterval<CqlQuantity>;
+                            if (cu_)
                             {
-                                DataType ex_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                                object ey_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ex_);
-                                cn_ = ey_ as CqlInterval<CqlQuantity>;
+                                bl_ = cq_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                cn_ = null;
+                                bl_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> co_ = QICoreCommon_4_0_000.Instance.toInterval(context, cn_);
-                CqlDateTime cp_ = context.Operators.End(co_);
-                CqlInterval<CqlDate> cq_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, cp_);
-                CqlDate cr_ = cq_?.low;
-                CqlDateTime cs_ = context.Operators.ConvertDateToDateTime(cr_);
-                object ct_;
-                DataType ez_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                object fa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ez_);
-                bool fb_ = fa_ is CqlDateTime;
-                if (fb_)
+                CqlInterval<CqlDateTime> bm_ = QICoreCommon_4_0_000.Instance.toInterval(context, bl_);
+                CqlDateTime bn_ = context.Operators.End(bm_);
+                CqlInterval<CqlDate> bo_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bn_);
+                CqlDate bp_ = bo_?.low;
+                CqlDateTime bq_ = context.Operators.ConvertDateToDateTime(bp_);
+                object br_;
+                DataType cv_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
+                object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
+                bool cx_ = cw_ is CqlDateTime;
+                if (cx_)
                 {
-                    DataType fc_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                    object fd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fc_);
-                    ct_ = fd_ as CqlDateTime;
+                    br_ = cw_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType fe_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                    object ff_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fe_);
-                    bool fg_ = ff_ is CqlQuantity;
-                    if (fg_)
+                    bool cy_ = cw_ is CqlQuantity;
+                    if (cy_)
                     {
-                        DataType fh_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                        object fi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fh_);
-                        ct_ = fi_ as CqlQuantity;
+                        br_ = cw_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType fj_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                        object fk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fj_);
-                        bool fl_ = fk_ is CqlInterval<CqlDateTime>;
-                        if (fl_)
+                        bool cz_ = cw_ is CqlInterval<CqlDateTime>;
+                        if (cz_)
                         {
-                            DataType fm_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                            object fn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fm_);
-                            ct_ = fn_ as CqlInterval<CqlDateTime>;
+                            br_ = cw_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType fo_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                            object fp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fo_);
-                            bool fq_ = fp_ is CqlInterval<CqlQuantity>;
-                            if (fq_)
+                            bool da_ = cw_ is CqlInterval<CqlQuantity>;
+                            if (da_)
                             {
-                                DataType fr_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                                object fs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fr_);
-                                ct_ = fs_ as CqlInterval<CqlQuantity>;
+                                br_ = cw_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                ct_ = null;
+                                br_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> cu_ = QICoreCommon_4_0_000.Instance.toInterval(context, ct_);
-                CqlDateTime cv_ = context.Operators.End(cu_);
-                CqlInterval<CqlDate> cw_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, cv_);
-                CqlDate cx_ = cw_?.high;
-                CqlDateTime cy_ = context.Operators.ConvertDateToDateTime(cx_);
-                object cz_;
-                DataType ft_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                object fu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ft_);
-                bool fv_ = fu_ is CqlDateTime;
-                if (fv_)
+                CqlInterval<CqlDateTime> bs_ = QICoreCommon_4_0_000.Instance.toInterval(context, br_);
+                CqlDateTime bt_ = context.Operators.End(bs_);
+                CqlInterval<CqlDate> bu_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bt_);
+                CqlDate bv_ = bu_?.high;
+                CqlDateTime bw_ = context.Operators.ConvertDateToDateTime(bv_);
+                object bx_;
+                DataType db_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
+                object dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
+                bool dd_ = dc_ is CqlDateTime;
+                if (dd_)
                 {
-                    DataType fw_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                    object fx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fw_);
-                    cz_ = fx_ as CqlDateTime;
+                    bx_ = dc_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType fy_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                    object fz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fy_);
-                    bool ga_ = fz_ is CqlQuantity;
-                    if (ga_)
+                    bool de_ = dc_ is CqlQuantity;
+                    if (de_)
                     {
-                        DataType gb_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                        object gc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gb_);
-                        cz_ = gc_ as CqlQuantity;
+                        bx_ = dc_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType gd_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                        object ge_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gd_);
-                        bool gf_ = ge_ is CqlInterval<CqlDateTime>;
-                        if (gf_)
+                        bool df_ = dc_ is CqlInterval<CqlDateTime>;
+                        if (df_)
                         {
-                            DataType gg_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                            object gh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gg_);
-                            cz_ = gh_ as CqlInterval<CqlDateTime>;
+                            bx_ = dc_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType gi_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                            object gj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gi_);
-                            bool gk_ = gj_ is CqlInterval<CqlQuantity>;
-                            if (gk_)
+                            bool dg_ = dc_ is CqlInterval<CqlQuantity>;
+                            if (dg_)
                             {
-                                DataType gl_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                                object gm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gl_);
-                                cz_ = gm_ as CqlInterval<CqlQuantity>;
+                                bx_ = dc_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                cz_ = null;
+                                bx_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> da_ = QICoreCommon_4_0_000.Instance.toInterval(context, cz_);
-                CqlDateTime db_ = context.Operators.End(da_);
-                CqlInterval<CqlDate> dc_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, db_);
-                bool? dd_ = dc_?.lowClosed;
-                object de_;
-                DataType gn_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                object go_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gn_);
-                bool gp_ = go_ is CqlDateTime;
-                if (gp_)
+                CqlInterval<CqlDateTime> by_ = QICoreCommon_4_0_000.Instance.toInterval(context, bx_);
+                CqlDateTime bz_ = context.Operators.End(by_);
+                CqlInterval<CqlDate> ca_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bz_);
+                bool? cb_ = ca_?.lowClosed;
+                object cc_;
+                DataType dh_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
+                object di_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dh_);
+                bool dj_ = di_ is CqlDateTime;
+                if (dj_)
                 {
-                    DataType gq_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                    object gr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gq_);
-                    de_ = gr_ as CqlDateTime;
+                    cc_ = di_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType gs_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                    object gt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gs_);
-                    bool gu_ = gt_ is CqlQuantity;
-                    if (gu_)
+                    bool dk_ = di_ is CqlQuantity;
+                    if (dk_)
                     {
-                        DataType gv_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                        object gw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gv_);
-                        de_ = gw_ as CqlQuantity;
+                        cc_ = di_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType gx_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                        object gy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gx_);
-                        bool gz_ = gy_ is CqlInterval<CqlDateTime>;
-                        if (gz_)
+                        bool dl_ = di_ is CqlInterval<CqlDateTime>;
+                        if (dl_)
                         {
-                            DataType ha_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                            object hb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ha_);
-                            de_ = hb_ as CqlInterval<CqlDateTime>;
+                            cc_ = di_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType hc_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                            object hd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hc_);
-                            bool he_ = hd_ is CqlInterval<CqlQuantity>;
-                            if (he_)
+                            bool dm_ = di_ is CqlInterval<CqlQuantity>;
+                            if (dm_)
                             {
-                                DataType hf_ = tuple_drnlhywkgwmzdeyzybtiilbhf?.AnesthesiaProcedure?.Performed;
-                                object hg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hf_);
-                                de_ = hg_ as CqlInterval<CqlQuantity>;
+                                cc_ = di_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                de_ = null;
+                                cc_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> df_ = QICoreCommon_4_0_000.Instance.toInterval(context, de_);
-                CqlDateTime dg_ = context.Operators.End(df_);
-                CqlInterval<CqlDate> dh_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, dg_);
-                bool? di_ = dh_?.highClosed;
-                CqlInterval<CqlDateTime> dj_ = context.Operators.Interval(cs_, cy_, dd_, di_);
-                bool? dk_ = context.Operators.In<CqlDateTime>(cm_, dj_, "day");
-                return bf_ & dk_;
+                CqlInterval<CqlDateTime> cd_ = QICoreCommon_4_0_000.Instance.toInterval(context, cc_);
+                CqlDateTime ce_ = context.Operators.End(cd_);
+                CqlInterval<CqlDate> cf_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ce_);
+                bool? cg_ = cf_?.highClosed;
+                CqlInterval<CqlDateTime> ch_ = context.Operators.Interval(bq_, bw_, cb_, cg_);
+                bool? ci_ = context.Operators.In<CqlDateTime>(bk_, ch_, "day");
+                return ar_ & ci_;
             }
         }
 
@@ -1916,42 +1720,28 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ck_ = cj_ is CqlDateTime;
                 if (ck_)
                 {
-                    DataType cl_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                    object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                    cb_ = cm_ as CqlDateTime;
+                    cb_ = cj_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType cn_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                    object co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-                    bool cp_ = co_ is CqlQuantity;
-                    if (cp_)
+                    bool cl_ = cj_ is CqlQuantity;
+                    if (cl_)
                     {
-                        DataType cq_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                        object cr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cq_);
-                        cb_ = cr_ as CqlQuantity;
+                        cb_ = cj_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType cs_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                        object ct_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
-                        bool cu_ = ct_ is CqlInterval<CqlDateTime>;
-                        if (cu_)
+                        bool cm_ = cj_ is CqlInterval<CqlDateTime>;
+                        if (cm_)
                         {
-                            DataType cv_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                            object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
-                            cb_ = cw_ as CqlInterval<CqlDateTime>;
+                            cb_ = cj_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType cx_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                            object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
-                            bool cz_ = cy_ is CqlInterval<CqlQuantity>;
-                            if (cz_)
+                            bool cn_ = cj_ is CqlInterval<CqlQuantity>;
+                            if (cn_)
                             {
-                                DataType da_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                                object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-                                cb_ = db_ as CqlInterval<CqlQuantity>;
+                                cb_ = cj_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -1975,231 +1765,175 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             }
             else
             {
-                DataType dc_ = tuple_elrfucfgncrbdgahdtkitiyzu?.FactorXaMedication?.Effective;
-                object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                CqlInterval<CqlDateTime> de_ = QICoreCommon_4_0_000.Instance.toInterval(context, dd_);
-                CqlDateTime df_ = context.Operators.Start(de_);
-                object dg_;
-                DataType ee_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                object ef_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ee_);
-                bool eg_ = ef_ is CqlDateTime;
-                if (eg_)
+                DataType co_ = tuple_elrfucfgncrbdgahdtkitiyzu?.FactorXaMedication?.Effective;
+                object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
+                CqlInterval<CqlDateTime> cq_ = QICoreCommon_4_0_000.Instance.toInterval(context, cp_);
+                CqlDateTime cr_ = context.Operators.Start(cq_);
+                object cs_;
+                DataType dq_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
+                object dr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dq_);
+                bool ds_ = dr_ is CqlDateTime;
+                if (ds_)
                 {
-                    DataType eh_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                    object ei_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eh_);
-                    dg_ = ei_ as CqlDateTime;
+                    cs_ = dr_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ej_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                    object ek_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ej_);
-                    bool el_ = ek_ is CqlQuantity;
+                    bool dt_ = dr_ is CqlQuantity;
+                    if (dt_)
+                    {
+                        cs_ = dr_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool du_ = dr_ is CqlInterval<CqlDateTime>;
+                        if (du_)
+                        {
+                            cs_ = dr_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool dv_ = dr_ is CqlInterval<CqlQuantity>;
+                            if (dv_)
+                            {
+                                cs_ = dr_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                cs_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> ct_ = QICoreCommon_4_0_000.Instance.toInterval(context, cs_);
+                CqlDateTime cu_ = context.Operators.End(ct_);
+                CqlInterval<CqlDate> cv_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, cu_);
+                CqlDate cw_ = cv_?.low;
+                CqlDateTime cx_ = context.Operators.ConvertDateToDateTime(cw_);
+                object cy_;
+                DataType dw_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
+                object dx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dw_);
+                bool dy_ = dx_ is CqlDateTime;
+                if (dy_)
+                {
+                    cy_ = dx_ as CqlDateTime;
+                }
+                else
+                {
+                    bool dz_ = dx_ is CqlQuantity;
+                    if (dz_)
+                    {
+                        cy_ = dx_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool ea_ = dx_ is CqlInterval<CqlDateTime>;
+                        if (ea_)
+                        {
+                            cy_ = dx_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool eb_ = dx_ is CqlInterval<CqlQuantity>;
+                            if (eb_)
+                            {
+                                cy_ = dx_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                cy_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> cz_ = QICoreCommon_4_0_000.Instance.toInterval(context, cy_);
+                CqlDateTime da_ = context.Operators.End(cz_);
+                CqlInterval<CqlDate> db_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, da_);
+                CqlDate dc_ = db_?.high;
+                CqlDateTime dd_ = context.Operators.ConvertDateToDateTime(dc_);
+                object de_;
+                DataType ec_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
+                object ed_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ec_);
+                bool ee_ = ed_ is CqlDateTime;
+                if (ee_)
+                {
+                    de_ = ed_ as CqlDateTime;
+                }
+                else
+                {
+                    bool ef_ = ed_ is CqlQuantity;
+                    if (ef_)
+                    {
+                        de_ = ed_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool eg_ = ed_ is CqlInterval<CqlDateTime>;
+                        if (eg_)
+                        {
+                            de_ = ed_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool eh_ = ed_ is CqlInterval<CqlQuantity>;
+                            if (eh_)
+                            {
+                                de_ = ed_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                de_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> df_ = QICoreCommon_4_0_000.Instance.toInterval(context, de_);
+                CqlDateTime dg_ = context.Operators.End(df_);
+                CqlInterval<CqlDate> dh_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, dg_);
+                bool? di_ = dh_?.lowClosed;
+                object dj_;
+                DataType ei_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
+                object ej_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ei_);
+                bool ek_ = ej_ is CqlDateTime;
+                if (ek_)
+                {
+                    dj_ = ej_ as CqlDateTime;
+                }
+                else
+                {
+                    bool el_ = ej_ is CqlQuantity;
                     if (el_)
                     {
-                        DataType em_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                        object en_ = FHIRHelpers_4_4_000.Instance.ToValue(context, em_);
-                        dg_ = en_ as CqlQuantity;
+                        dj_ = ej_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType eo_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                        object ep_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eo_);
-                        bool eq_ = ep_ is CqlInterval<CqlDateTime>;
-                        if (eq_)
+                        bool em_ = ej_ is CqlInterval<CqlDateTime>;
+                        if (em_)
                         {
-                            DataType er_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                            object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                            dg_ = es_ as CqlInterval<CqlDateTime>;
+                            dj_ = ej_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType et_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                            object eu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, et_);
-                            bool ev_ = eu_ is CqlInterval<CqlQuantity>;
-                            if (ev_)
+                            bool en_ = ej_ is CqlInterval<CqlQuantity>;
+                            if (en_)
                             {
-                                DataType ew_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                                object ex_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ew_);
-                                dg_ = ex_ as CqlInterval<CqlQuantity>;
+                                dj_ = ej_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                dg_ = null;
+                                dj_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> dh_ = QICoreCommon_4_0_000.Instance.toInterval(context, dg_);
-                CqlDateTime di_ = context.Operators.End(dh_);
-                CqlInterval<CqlDate> dj_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, di_);
-                CqlDate dk_ = dj_?.low;
-                CqlDateTime dl_ = context.Operators.ConvertDateToDateTime(dk_);
-                object dm_;
-                DataType ey_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                object ez_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ey_);
-                bool fa_ = ez_ is CqlDateTime;
-                if (fa_)
-                {
-                    DataType fb_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                    object fc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fb_);
-                    dm_ = fc_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType fd_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                    object fe_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fd_);
-                    bool ff_ = fe_ is CqlQuantity;
-                    if (ff_)
-                    {
-                        DataType fg_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                        object fh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fg_);
-                        dm_ = fh_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType fi_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                        object fj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fi_);
-                        bool fk_ = fj_ is CqlInterval<CqlDateTime>;
-                        if (fk_)
-                        {
-                            DataType fl_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                            object fm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fl_);
-                            dm_ = fm_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType fn_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                            object fo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fn_);
-                            bool fp_ = fo_ is CqlInterval<CqlQuantity>;
-                            if (fp_)
-                            {
-                                DataType fq_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                                object fr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fq_);
-                                dm_ = fr_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                dm_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> dn_ = QICoreCommon_4_0_000.Instance.toInterval(context, dm_);
-                CqlDateTime do_ = context.Operators.End(dn_);
-                CqlInterval<CqlDate> dp_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, do_);
-                CqlDate dq_ = dp_?.high;
-                CqlDateTime dr_ = context.Operators.ConvertDateToDateTime(dq_);
-                object ds_;
-                DataType fs_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                object ft_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fs_);
-                bool fu_ = ft_ is CqlDateTime;
-                if (fu_)
-                {
-                    DataType fv_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                    object fw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fv_);
-                    ds_ = fw_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType fx_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                    object fy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fx_);
-                    bool fz_ = fy_ is CqlQuantity;
-                    if (fz_)
-                    {
-                        DataType ga_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                        object gb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ga_);
-                        ds_ = gb_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType gc_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                        object gd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gc_);
-                        bool ge_ = gd_ is CqlInterval<CqlDateTime>;
-                        if (ge_)
-                        {
-                            DataType gf_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                            object gg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gf_);
-                            ds_ = gg_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType gh_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                            object gi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gh_);
-                            bool gj_ = gi_ is CqlInterval<CqlQuantity>;
-                            if (gj_)
-                            {
-                                DataType gk_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                                object gl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gk_);
-                                ds_ = gl_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                ds_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> dt_ = QICoreCommon_4_0_000.Instance.toInterval(context, ds_);
-                CqlDateTime du_ = context.Operators.End(dt_);
-                CqlInterval<CqlDate> dv_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, du_);
-                bool? dw_ = dv_?.lowClosed;
-                object dx_;
-                DataType gm_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                object gn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gm_);
-                bool go_ = gn_ is CqlDateTime;
-                if (go_)
-                {
-                    DataType gp_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                    object gq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gp_);
-                    dx_ = gq_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType gr_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                    object gs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gr_);
-                    bool gt_ = gs_ is CqlQuantity;
-                    if (gt_)
-                    {
-                        DataType gu_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                        object gv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gu_);
-                        dx_ = gv_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType gw_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                        object gx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gw_);
-                        bool gy_ = gx_ is CqlInterval<CqlDateTime>;
-                        if (gy_)
-                        {
-                            DataType gz_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                            object ha_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gz_);
-                            dx_ = ha_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType hb_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                            object hc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hb_);
-                            bool hd_ = hc_ is CqlInterval<CqlQuantity>;
-                            if (hd_)
-                            {
-                                DataType he_ = tuple_elrfucfgncrbdgahdtkitiyzu?.AnesthesiaProcedure?.Performed;
-                                object hf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, he_);
-                                dx_ = hf_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                dx_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> dy_ = QICoreCommon_4_0_000.Instance.toInterval(context, dx_);
-                CqlDateTime dz_ = context.Operators.End(dy_);
-                CqlInterval<CqlDate> ea_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, dz_);
-                bool? eb_ = ea_?.highClosed;
-                CqlInterval<CqlDateTime> ec_ = context.Operators.Interval(dl_, dr_, dw_, eb_);
-                bool? ed_ = context.Operators.In<CqlDateTime>(df_, ec_, "day");
-                return bw_ & ed_;
+                CqlInterval<CqlDateTime> dk_ = QICoreCommon_4_0_000.Instance.toInterval(context, dj_);
+                CqlDateTime dl_ = context.Operators.End(dk_);
+                CqlInterval<CqlDate> dm_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, dl_);
+                bool? dn_ = dm_?.highClosed;
+                CqlInterval<CqlDateTime> do_ = context.Operators.Interval(cx_, dd_, di_, dn_);
+                bool? dp_ = context.Operators.In<CqlDateTime>(cr_, do_, "day");
+                return bw_ & dp_;
             }
         }
 
@@ -2271,7 +2005,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                         bool? ag_ = context.Operators.SameOrBefore(ac_, af_, (string)default);
                         v_ = u_ & ag_;
                     }
-                    return /* CQL 'implies' (193:19-196:110) */ !p_ | v_;
+                    return !p_ | v_;
                 }
             }
 
@@ -2385,16 +2119,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                         }
                         else
                         {
-                            Period bw_ = QualifyingEncounterICU?.Period;
-                            CqlInterval<CqlDateTime> bx_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bw_);
-                            CqlDateTime by_ = context.Operators.Start(bx_);
-                            CqlInterval<CqlDateTime> bz_ = context.Operators.Interval(by_, by_, true, true);
-                            br_ = bz_;
+                            CqlInterval<CqlDateTime> bw_ = context.Operators.Interval(bv_, bv_, true, true);
+                            br_ = bw_;
                         }
                         bool? bs_ = context.Operators.Before(bq_, br_, (string)default);
                         bk_ = bj_ & bs_;
                     }
-                    return /* CQL 'implies' (203:21-210:95) */ !au_ | bk_;
+                    return !au_ | bk_;
                 }
             }
 
@@ -2443,42 +2174,28 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     bool x_ = w_ is CqlDateTime;
                     if (x_)
                     {
-                        DataType y_ = HipKneeProcedure?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        o_ = z_ as CqlDateTime;
+                        o_ = w_ as CqlDateTime;
                     }
                     else
                     {
-                        DataType aa_ = HipKneeProcedure?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlQuantity;
-                        if (ac_)
+                        bool y_ = w_ is CqlQuantity;
+                        if (y_)
                         {
-                            DataType ad_ = HipKneeProcedure?.Performed;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            o_ = ae_ as CqlQuantity;
+                            o_ = w_ as CqlQuantity;
                         }
                         else
                         {
-                            DataType af_ = HipKneeProcedure?.Performed;
-                            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                            bool ah_ = ag_ is CqlInterval<CqlDateTime>;
-                            if (ah_)
+                            bool z_ = w_ is CqlInterval<CqlDateTime>;
+                            if (z_)
                             {
-                                DataType ai_ = HipKneeProcedure?.Performed;
-                                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                                o_ = aj_ as CqlInterval<CqlDateTime>;
+                                o_ = w_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
-                                DataType ak_ = HipKneeProcedure?.Performed;
-                                object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                                bool am_ = al_ is CqlInterval<CqlQuantity>;
-                                if (am_)
+                                bool aa_ = w_ is CqlInterval<CqlQuantity>;
+                                if (aa_)
                                 {
-                                    DataType an_ = HipKneeProcedure?.Performed;
-                                    object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                                    o_ = ao_ as CqlInterval<CqlQuantity>;
+                                    o_ = w_ as CqlInterval<CqlQuantity>;
                                 }
                                 else
                                 {
@@ -2553,31 +2270,20 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             bool bd_ = bc_ is CqlDateTime;
             if (bd_)
             {
-                DataType be_ = VTERiskAssessment?.Effective;
-                object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                ay_ = bf_ as CqlDateTime;
+                ay_ = bc_ as CqlDateTime;
             }
             else
             {
-                DataType bg_ = VTERiskAssessment?.Effective;
-                object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                bool bi_ = bh_ is CqlDateTime;
-                if (bi_)
+                if (bd_)
                 {
-                    DataType bj_ = VTERiskAssessment?.Effective;
-                    object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                    ay_ = bk_ as CqlDateTime;
+                    ay_ = bc_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType bl_ = VTERiskAssessment?.Effective;
-                    object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    bool bn_ = bm_ is CqlInterval<CqlDateTime>;
-                    if (bn_)
+                    bool be_ = bc_ is CqlInterval<CqlDateTime>;
+                    if (be_)
                     {
-                        DataType bo_ = VTERiskAssessment?.Effective;
-                        object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
-                        ay_ = bp_ as CqlInterval<CqlDateTime>;
+                        ay_ = bc_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -2596,39 +2302,39 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<Observation> i_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
         bool? j_(Observation INRLabTest) {
-            DataType bq_ = INRLabTest?.Value;
-            object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
-            CqlQuantity bs_ = context.Operators.ConvertDecimalToQuantity(3.0m);
-            bool? bt_ = context.Operators.Greater(br_ as CqlQuantity, bs_);
+            DataType bf_ = INRLabTest?.Value;
+            object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
+            CqlQuantity bh_ = context.Operators.ConvertDecimalToQuantity(3.0m);
+            bool? bi_ = context.Operators.Greater(bg_ as CqlQuantity, bh_);
             // CQL 'and' (234:9-235:70): right operand skipped when left is false
-            if (bt_ is false)
+            if (bi_ is false)
             {
                 return false;
             }
             else
             {
-                Code<ObservationStatus> bu_ = INRLabTest?.StatusElement;
-                ObservationStatus? bv_ = bu_?.Value;
-                string bw_ = context.Operators.Convert<string>(bv_);
-                string[] bx_ = [
+                Code<ObservationStatus> bj_ = INRLabTest?.StatusElement;
+                ObservationStatus? bk_ = bj_?.Value;
+                string bl_ = context.Operators.Convert<string>(bk_);
+                string[] bm_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? by_ = context.Operators.In<string>(bw_, (IEnumerable<string>)bx_);
-                return bt_ & by_;
+                bool? bn_ = context.Operators.In<string>(bl_, (IEnumerable<string>)bm_);
+                return bi_ & bn_;
             }
         }
 
 
         (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)? k_(Observation INRLabTest) {
-            Id bz_ = INRLabTest?.IdElement;
-            string ca_ = bz_?.Value;
-            Instant cb_ = INRLabTest?.IssuedElement;
-            DateTimeOffset? cc_ = cb_?.Value;
-            CqlDateTime cd_ = context.Operators.Convert<CqlDateTime>(cc_);
-            (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)? ce_ = (CqlTupleMetadata_DMAfXNhTfZDWOGdfEceXbfaSJ, ca_, cd_);
-            return ce_;
+            Id bo_ = INRLabTest?.IdElement;
+            string bp_ = bo_?.Value;
+            Instant bq_ = INRLabTest?.IssuedElement;
+            DateTimeOffset? br_ = bq_?.Value;
+            CqlDateTime bs_ = context.Operators.Convert<CqlDateTime>(br_);
+            (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)? bt_ = (CqlTupleMetadata_DMAfXNhTfZDWOGdfEceXbfaSJ, bp_, bs_);
+            return bt_;
         }
 
         IEnumerable<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?> l_ = context.Operators.WhereSelect<Observation, (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?>(i_, j_, k_);
@@ -2637,31 +2343,31 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<MedicationAdministration> o_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 
         bool? p_(MedicationAdministration MR) {
-            IEnumerable<Medication> cf_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> bu_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? cg_(Medication M) {
-                object ci_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object cj_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> ck_ = context.Operators.Split((string)cj_, "/");
-                string cl_ = context.Operators.Last<string>(ck_);
-                bool? cm_ = context.Operators.Equal(ci_, cl_);
+            bool? bv_(Medication M) {
+                object bx_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object by_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> bz_ = context.Operators.Split((string)by_, "/");
+                string ca_ = context.Operators.Last<string>(bz_);
+                bool? cb_ = context.Operators.Equal(bx_, ca_);
                 // CQL 'and': right operand skipped when left is false
-                if (cm_ is false)
+                if (cb_ is false)
                 {
                     return false;
                 }
                 else
                 {
-                    CodeableConcept cn_ = M?.Code;
-                    CqlConcept co_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cn_);
-                    CqlValueSet cp_ = this.Unfractionated_Heparin(context);
-                    bool? cq_ = context.Operators.ConceptInValueSet(co_, cp_);
-                    return cm_ & cq_;
+                    CodeableConcept cc_ = M?.Code;
+                    CqlConcept cd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cc_);
+                    CqlValueSet ce_ = this.Unfractionated_Heparin(context);
+                    bool? cf_ = context.Operators.ConceptInValueSet(cd_, ce_);
+                    return cb_ & cf_;
                 }
             }
 
-            bool? ch_ = context.Operators.WhereAny<Medication>(cf_, cg_);
-            return ch_;
+            bool? bw_ = context.Operators.WhereAny<Medication>(bu_, bv_);
+            return bw_;
         }
 
         IEnumerable<MedicationAdministration> q_ = context.Operators.Where<MedicationAdministration>(o_, p_);
@@ -2670,42 +2376,42 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<MedicationAdministration> t_ = context.Operators.Union<MedicationAdministration>(q_, s_);
 
         bool? u_(MedicationAdministration UnfractionatedHeparin) {
-            MedicationAdministration.DosageComponent cr_ = UnfractionatedHeparin?.Dosage;
-            CodeableConcept cs_ = cr_?.Route;
-            CqlConcept ct_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cs_);
-            CqlValueSet cu_ = this.Intravenous_route(context);
-            bool? cv_ = context.Operators.ConceptInValueSet(ct_, cu_);
-            return cv_;
+            MedicationAdministration.DosageComponent cg_ = UnfractionatedHeparin?.Dosage;
+            CodeableConcept ch_ = cg_?.Route;
+            CqlConcept ci_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ch_);
+            CqlValueSet cj_ = this.Intravenous_route(context);
+            bool? ck_ = context.Operators.ConceptInValueSet(ci_, cj_);
+            return ck_;
         }
 
         IEnumerable<MedicationAdministration> v_ = context.Operators.Where<MedicationAdministration>(t_, u_);
 
         bool? w_(MedicationAdministration MR) {
-            IEnumerable<Medication> cw_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> cl_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? cx_(Medication M) {
-                object cz_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object da_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> db_ = context.Operators.Split((string)da_, "/");
-                string dc_ = context.Operators.Last<string>(db_);
-                bool? dd_ = context.Operators.Equal(cz_, dc_);
+            bool? cm_(Medication M) {
+                object co_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object cp_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> cq_ = context.Operators.Split((string)cp_, "/");
+                string cr_ = context.Operators.Last<string>(cq_);
+                bool? cs_ = context.Operators.Equal(co_, cr_);
                 // CQL 'and': right operand skipped when left is false
-                if (dd_ is false)
+                if (cs_ is false)
                 {
                     return false;
                 }
                 else
                 {
-                    CodeableConcept de_ = M?.Code;
-                    CqlConcept df_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, de_);
-                    CqlValueSet dg_ = this.Direct_Thrombin_Inhibitor(context);
-                    bool? dh_ = context.Operators.ConceptInValueSet(df_, dg_);
-                    return dd_ & dh_;
+                    CodeableConcept ct_ = M?.Code;
+                    CqlConcept cu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ct_);
+                    CqlValueSet cv_ = this.Direct_Thrombin_Inhibitor(context);
+                    bool? cw_ = context.Operators.ConceptInValueSet(cu_, cv_);
+                    return cs_ & cw_;
                 }
             }
 
-            bool? cy_ = context.Operators.WhereAny<Medication>(cw_, cx_);
-            return cy_;
+            bool? cn_ = context.Operators.WhereAny<Medication>(cl_, cm_);
+            return cn_;
         }
 
         IEnumerable<MedicationAdministration> x_ = context.Operators.Where<MedicationAdministration>(o_, w_);
@@ -2715,31 +2421,31 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<MedicationAdministration> ab_ = context.Operators.Union<MedicationAdministration>(v_, aa_);
 
         bool? ac_(MedicationAdministration MR) {
-            IEnumerable<Medication> di_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> cx_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? dj_(Medication M) {
-                object dl_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object dm_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> dn_ = context.Operators.Split((string)dm_, "/");
-                string do_ = context.Operators.Last<string>(dn_);
-                bool? dp_ = context.Operators.Equal(dl_, do_);
+            bool? cy_(Medication M) {
+                object da_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object db_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> dc_ = context.Operators.Split((string)db_, "/");
+                string dd_ = context.Operators.Last<string>(dc_);
+                bool? de_ = context.Operators.Equal(da_, dd_);
                 // CQL 'and': right operand skipped when left is false
-                if (dp_ is false)
+                if (de_ is false)
                 {
                     return false;
                 }
                 else
                 {
-                    CodeableConcept dq_ = M?.Code;
-                    CqlConcept dr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dq_);
-                    CqlValueSet ds_ = this.Glycoprotein_IIb_IIIa_Inhibitors(context);
-                    bool? dt_ = context.Operators.ConceptInValueSet(dr_, ds_);
-                    return dp_ & dt_;
+                    CodeableConcept df_ = M?.Code;
+                    CqlConcept dg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, df_);
+                    CqlValueSet dh_ = this.Glycoprotein_IIb_IIIa_Inhibitors(context);
+                    bool? di_ = context.Operators.ConceptInValueSet(dg_, dh_);
+                    return de_ & di_;
                 }
             }
 
-            bool? dk_ = context.Operators.WhereAny<Medication>(di_, dj_);
-            return dk_;
+            bool? cz_ = context.Operators.WhereAny<Medication>(cx_, cy_);
+            return cz_;
         }
 
         IEnumerable<MedicationAdministration> ad_ = context.Operators.Where<MedicationAdministration>(o_, ac_);
@@ -2749,23 +2455,23 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<MedicationAdministration> ah_ = context.Operators.Union<MedicationAdministration>(ab_, ag_);
 
         bool? ai_(MedicationAdministration AnticoagulantMedication) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> du_ = AnticoagulantMedication?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? dv_ = du_?.Value;
-            string dw_ = context.Operators.Convert<string>(dv_);
-            bool? dx_ = context.Operators.Equal(dw_, "completed");
-            return dx_;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> dj_ = AnticoagulantMedication?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? dk_ = dj_?.Value;
+            string dl_ = context.Operators.Convert<string>(dk_);
+            bool? dm_ = context.Operators.Equal(dl_, "completed");
+            return dm_;
         }
 
 
         (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)? aj_(MedicationAdministration AnticoagulantMedication) {
-            Id dy_ = AnticoagulantMedication?.IdElement;
-            string dz_ = dy_?.Value;
-            DataType ea_ = AnticoagulantMedication?.Effective;
-            object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-            CqlInterval<CqlDateTime> ec_ = QICoreCommon_4_0_000.Instance.toInterval(context, eb_);
-            CqlDateTime ed_ = context.Operators.Start(ec_);
-            (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)? ee_ = (CqlTupleMetadata_DMAfXNhTfZDWOGdfEceXbfaSJ, dz_, ed_);
-            return ee_;
+            Id dn_ = AnticoagulantMedication?.IdElement;
+            string do_ = dn_?.Value;
+            DataType dp_ = AnticoagulantMedication?.Effective;
+            object dq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dp_);
+            CqlInterval<CqlDateTime> dr_ = QICoreCommon_4_0_000.Instance.toInterval(context, dq_);
+            CqlDateTime ds_ = context.Operators.Start(dr_);
+            (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)? dt_ = (CqlTupleMetadata_DMAfXNhTfZDWOGdfEceXbfaSJ, do_, ds_);
+            return dt_;
         }
 
         IEnumerable<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?> ak_ = context.Operators.WhereSelect<MedicationAdministration, (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?>(ah_, ai_, aj_);
@@ -2850,42 +2556,28 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
-                    DataType aa_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlDateTime;
+                    q_ = y_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ac_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlQuantity;
-                    if (ae_)
+                    bool aa_ = y_ is CqlQuantity;
+                    if (aa_)
                     {
-                        DataType af_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlQuantity;
+                        q_ = y_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType ah_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        bool aj_ = ai_ is CqlInterval<CqlDateTime>;
-                        if (aj_)
+                        bool ab_ = y_ is CqlInterval<CqlDateTime>;
+                        if (ab_)
                         {
-                            DataType ak_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                            q_ = al_ as CqlInterval<CqlDateTime>;
+                            q_ = y_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType am_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                            object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                            bool ao_ = an_ is CqlInterval<CqlQuantity>;
-                            if (ao_)
+                            bool ac_ = y_ is CqlInterval<CqlQuantity>;
+                            if (ac_)
                             {
-                                DataType ap_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                                object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                                q_ = aq_ as CqlInterval<CqlQuantity>;
+                                q_ = y_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -2909,228 +2601,172 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             }
             else
             {
-                CqlDateTime ar_ = tuple_cchfidtccovheihiyjcdnfkbm?.LowRiskForVTE?.LowRiskDatetime;
-                object as_;
-                DataType bq_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
-                bool bs_ = br_ is CqlDateTime;
-                if (bs_)
+                CqlDateTime ad_ = tuple_cchfidtccovheihiyjcdnfkbm?.LowRiskForVTE?.LowRiskDatetime;
+                object ae_;
+                DataType bc_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
+                object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
+                bool be_ = bd_ is CqlDateTime;
+                if (be_)
                 {
-                    DataType bt_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                    object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                    as_ = bu_ as CqlDateTime;
+                    ae_ = bd_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType bv_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                    object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    bool bx_ = bw_ is CqlQuantity;
+                    bool bf_ = bd_ is CqlQuantity;
+                    if (bf_)
+                    {
+                        ae_ = bd_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bg_ = bd_ is CqlInterval<CqlDateTime>;
+                        if (bg_)
+                        {
+                            ae_ = bd_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool bh_ = bd_ is CqlInterval<CqlQuantity>;
+                            if (bh_)
+                            {
+                                ae_ = bd_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ae_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> af_ = QICoreCommon_4_0_000.Instance.toInterval(context, ae_);
+                CqlDateTime ag_ = context.Operators.End(af_);
+                CqlInterval<CqlDate> ah_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ag_);
+                CqlDate ai_ = ah_?.low;
+                CqlDateTime aj_ = context.Operators.ConvertDateToDateTime(ai_);
+                object ak_;
+                DataType bi_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
+                object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
+                bool bk_ = bj_ is CqlDateTime;
+                if (bk_)
+                {
+                    ak_ = bj_ as CqlDateTime;
+                }
+                else
+                {
+                    bool bl_ = bj_ is CqlQuantity;
+                    if (bl_)
+                    {
+                        ak_ = bj_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bm_ = bj_ is CqlInterval<CqlDateTime>;
+                        if (bm_)
+                        {
+                            ak_ = bj_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool bn_ = bj_ is CqlInterval<CqlQuantity>;
+                            if (bn_)
+                            {
+                                ak_ = bj_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ak_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> al_ = QICoreCommon_4_0_000.Instance.toInterval(context, ak_);
+                CqlDateTime am_ = context.Operators.End(al_);
+                CqlInterval<CqlDate> an_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, am_);
+                CqlDate ao_ = an_?.high;
+                CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(ao_);
+                object aq_;
+                DataType bo_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
+                object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
+                bool bq_ = bp_ is CqlDateTime;
+                if (bq_)
+                {
+                    aq_ = bp_ as CqlDateTime;
+                }
+                else
+                {
+                    bool br_ = bp_ is CqlQuantity;
+                    if (br_)
+                    {
+                        aq_ = bp_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bs_ = bp_ is CqlInterval<CqlDateTime>;
+                        if (bs_)
+                        {
+                            aq_ = bp_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool bt_ = bp_ is CqlInterval<CqlQuantity>;
+                            if (bt_)
+                            {
+                                aq_ = bp_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                aq_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> ar_ = QICoreCommon_4_0_000.Instance.toInterval(context, aq_);
+                CqlDateTime as_ = context.Operators.End(ar_);
+                CqlInterval<CqlDate> at_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, as_);
+                bool? au_ = at_?.lowClosed;
+                object av_;
+                DataType bu_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
+                object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
+                bool bw_ = bv_ is CqlDateTime;
+                if (bw_)
+                {
+                    av_ = bv_ as CqlDateTime;
+                }
+                else
+                {
+                    bool bx_ = bv_ is CqlQuantity;
                     if (bx_)
                     {
-                        DataType by_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                        object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                        as_ = bz_ as CqlQuantity;
+                        av_ = bv_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType ca_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                        object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                        bool cc_ = cb_ is CqlInterval<CqlDateTime>;
-                        if (cc_)
+                        bool by_ = bv_ is CqlInterval<CqlDateTime>;
+                        if (by_)
                         {
-                            DataType cd_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                            object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                            as_ = ce_ as CqlInterval<CqlDateTime>;
+                            av_ = bv_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType cf_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                            object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                            bool ch_ = cg_ is CqlInterval<CqlQuantity>;
-                            if (ch_)
+                            bool bz_ = bv_ is CqlInterval<CqlQuantity>;
+                            if (bz_)
                             {
-                                DataType ci_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                                object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                                as_ = cj_ as CqlInterval<CqlQuantity>;
+                                av_ = bv_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                as_ = null;
+                                av_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> at_ = QICoreCommon_4_0_000.Instance.toInterval(context, as_);
-                CqlDateTime au_ = context.Operators.End(at_);
-                CqlInterval<CqlDate> av_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, au_);
-                CqlDate aw_ = av_?.low;
-                CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
-                object ay_;
-                DataType ck_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
-                bool cm_ = cl_ is CqlDateTime;
-                if (cm_)
-                {
-                    DataType cn_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                    object co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-                    ay_ = co_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType cp_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                    object cq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cp_);
-                    bool cr_ = cq_ is CqlQuantity;
-                    if (cr_)
-                    {
-                        DataType cs_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                        object ct_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
-                        ay_ = ct_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType cu_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                        object cv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cu_);
-                        bool cw_ = cv_ is CqlInterval<CqlDateTime>;
-                        if (cw_)
-                        {
-                            DataType cx_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                            object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
-                            ay_ = cy_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType cz_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                            object da_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cz_);
-                            bool db_ = da_ is CqlInterval<CqlQuantity>;
-                            if (db_)
-                            {
-                                DataType dc_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                                object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                                ay_ = dd_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                ay_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> az_ = QICoreCommon_4_0_000.Instance.toInterval(context, ay_);
-                CqlDateTime ba_ = context.Operators.End(az_);
-                CqlInterval<CqlDate> bb_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ba_);
-                CqlDate bc_ = bb_?.high;
-                CqlDateTime bd_ = context.Operators.ConvertDateToDateTime(bc_);
-                object be_;
-                DataType de_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
-                bool dg_ = df_ is CqlDateTime;
-                if (dg_)
-                {
-                    DataType dh_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                    object di_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dh_);
-                    be_ = di_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType dj_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                    object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                    bool dl_ = dk_ is CqlQuantity;
-                    if (dl_)
-                    {
-                        DataType dm_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                        object dn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dm_);
-                        be_ = dn_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType do_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                        object dp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, do_);
-                        bool dq_ = dp_ is CqlInterval<CqlDateTime>;
-                        if (dq_)
-                        {
-                            DataType dr_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                            object ds_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dr_);
-                            be_ = ds_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType dt_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                            object du_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dt_);
-                            bool dv_ = du_ is CqlInterval<CqlQuantity>;
-                            if (dv_)
-                            {
-                                DataType dw_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                                object dx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dw_);
-                                be_ = dx_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                be_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bf_ = QICoreCommon_4_0_000.Instance.toInterval(context, be_);
-                CqlDateTime bg_ = context.Operators.End(bf_);
-                CqlInterval<CqlDate> bh_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bg_);
-                bool? bi_ = bh_?.lowClosed;
-                object bj_;
-                DataType dy_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                object dz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dy_);
-                bool ea_ = dz_ is CqlDateTime;
-                if (ea_)
-                {
-                    DataType eb_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                    object ec_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eb_);
-                    bj_ = ec_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType ed_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                    object ee_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ed_);
-                    bool ef_ = ee_ is CqlQuantity;
-                    if (ef_)
-                    {
-                        DataType eg_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                        object eh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eg_);
-                        bj_ = eh_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType ei_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                        object ej_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ei_);
-                        bool ek_ = ej_ is CqlInterval<CqlDateTime>;
-                        if (ek_)
-                        {
-                            DataType el_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                            object em_ = FHIRHelpers_4_4_000.Instance.ToValue(context, el_);
-                            bj_ = em_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType en_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                            object eo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, en_);
-                            bool ep_ = eo_ is CqlInterval<CqlQuantity>;
-                            if (ep_)
-                            {
-                                DataType eq_ = tuple_cchfidtccovheihiyjcdnfkbm?.AnesthesiaProcedure?.Performed;
-                                object er_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eq_);
-                                bj_ = er_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                bj_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bk_ = QICoreCommon_4_0_000.Instance.toInterval(context, bj_);
-                CqlDateTime bl_ = context.Operators.End(bk_);
-                CqlInterval<CqlDate> bm_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bl_);
-                bool? bn_ = bm_?.highClosed;
-                CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(ax_, bd_, bi_, bn_);
-                bool? bp_ = context.Operators.In<CqlDateTime>(ar_, bo_, "day");
-                return p_ & bp_;
+                CqlInterval<CqlDateTime> aw_ = QICoreCommon_4_0_000.Instance.toInterval(context, av_);
+                CqlDateTime ax_ = context.Operators.End(aw_);
+                CqlInterval<CqlDate> ay_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ax_);
+                bool? az_ = ay_?.highClosed;
+                CqlInterval<CqlDateTime> ba_ = context.Operators.Interval(aj_, ap_, au_, az_);
+                bool? bb_ = context.Operators.In<CqlDateTime>(ad_, ba_, "day");
+                return p_ & bb_;
             }
         }
 
@@ -3904,42 +3540,28 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ad_ = ac_ is CqlDateTime;
                 if (ad_)
                 {
-                    DataType ae_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                    object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                    u_ = af_ as CqlDateTime;
+                    u_ = ac_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ag_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                    object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                    bool ai_ = ah_ is CqlQuantity;
-                    if (ai_)
+                    bool ae_ = ac_ is CqlQuantity;
+                    if (ae_)
                     {
-                        DataType aj_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        u_ = ak_ as CqlQuantity;
+                        u_ = ac_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType al_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                        object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        bool an_ = am_ is CqlInterval<CqlDateTime>;
-                        if (an_)
+                        bool af_ = ac_ is CqlInterval<CqlDateTime>;
+                        if (af_)
                         {
-                            DataType ao_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                            object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                            u_ = ap_ as CqlInterval<CqlDateTime>;
+                            u_ = ac_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType aq_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                            object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                            bool as_ = ar_ is CqlInterval<CqlQuantity>;
-                            if (as_)
+                            bool ag_ = ac_ is CqlInterval<CqlQuantity>;
+                            if (ag_)
                             {
-                                DataType at_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                                object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                                u_ = au_ as CqlInterval<CqlQuantity>;
+                                u_ = ac_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -3963,228 +3585,172 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             }
             else
             {
-                CqlDateTime av_ = tuple_fpgtpszgoyfdaobujrgcsedde?.NoVTEMedication?.authoredOn;
-                object aw_;
-                DataType bu_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                bool bw_ = bv_ is CqlDateTime;
-                if (bw_)
+                CqlDateTime ah_ = tuple_fpgtpszgoyfdaobujrgcsedde?.NoVTEMedication?.authoredOn;
+                object ai_;
+                DataType bg_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
+                object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
+                bool bi_ = bh_ is CqlDateTime;
+                if (bi_)
                 {
-                    DataType bx_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                    object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    aw_ = by_ as CqlDateTime;
+                    ai_ = bh_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType bz_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                    object ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
-                    bool cb_ = ca_ is CqlQuantity;
+                    bool bj_ = bh_ is CqlQuantity;
+                    if (bj_)
+                    {
+                        ai_ = bh_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bk_ = bh_ is CqlInterval<CqlDateTime>;
+                        if (bk_)
+                        {
+                            ai_ = bh_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool bl_ = bh_ is CqlInterval<CqlQuantity>;
+                            if (bl_)
+                            {
+                                ai_ = bh_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ai_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> aj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ai_);
+                CqlDateTime ak_ = context.Operators.End(aj_);
+                CqlInterval<CqlDate> al_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ak_);
+                CqlDate am_ = al_?.low;
+                CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+                object ao_;
+                DataType bm_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
+                object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
+                bool bo_ = bn_ is CqlDateTime;
+                if (bo_)
+                {
+                    ao_ = bn_ as CqlDateTime;
+                }
+                else
+                {
+                    bool bp_ = bn_ is CqlQuantity;
+                    if (bp_)
+                    {
+                        ao_ = bn_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bq_ = bn_ is CqlInterval<CqlDateTime>;
+                        if (bq_)
+                        {
+                            ao_ = bn_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool br_ = bn_ is CqlInterval<CqlQuantity>;
+                            if (br_)
+                            {
+                                ao_ = bn_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ao_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> ap_ = QICoreCommon_4_0_000.Instance.toInterval(context, ao_);
+                CqlDateTime aq_ = context.Operators.End(ap_);
+                CqlInterval<CqlDate> ar_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, aq_);
+                CqlDate as_ = ar_?.high;
+                CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
+                object au_;
+                DataType bs_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
+                object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
+                bool bu_ = bt_ is CqlDateTime;
+                if (bu_)
+                {
+                    au_ = bt_ as CqlDateTime;
+                }
+                else
+                {
+                    bool bv_ = bt_ is CqlQuantity;
+                    if (bv_)
+                    {
+                        au_ = bt_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bw_ = bt_ is CqlInterval<CqlDateTime>;
+                        if (bw_)
+                        {
+                            au_ = bt_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool bx_ = bt_ is CqlInterval<CqlQuantity>;
+                            if (bx_)
+                            {
+                                au_ = bt_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                au_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> av_ = QICoreCommon_4_0_000.Instance.toInterval(context, au_);
+                CqlDateTime aw_ = context.Operators.End(av_);
+                CqlInterval<CqlDate> ax_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, aw_);
+                bool? ay_ = ax_?.lowClosed;
+                object az_;
+                DataType by_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
+                object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
+                bool ca_ = bz_ is CqlDateTime;
+                if (ca_)
+                {
+                    az_ = bz_ as CqlDateTime;
+                }
+                else
+                {
+                    bool cb_ = bz_ is CqlQuantity;
                     if (cb_)
                     {
-                        DataType cc_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                        object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
-                        aw_ = cd_ as CqlQuantity;
+                        az_ = bz_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType ce_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                        object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                        bool cg_ = cf_ is CqlInterval<CqlDateTime>;
-                        if (cg_)
+                        bool cc_ = bz_ is CqlInterval<CqlDateTime>;
+                        if (cc_)
                         {
-                            DataType ch_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                            object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                            aw_ = ci_ as CqlInterval<CqlDateTime>;
+                            az_ = bz_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType cj_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                            object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                            bool cl_ = ck_ is CqlInterval<CqlQuantity>;
-                            if (cl_)
+                            bool cd_ = bz_ is CqlInterval<CqlQuantity>;
+                            if (cd_)
                             {
-                                DataType cm_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                                object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
-                                aw_ = cn_ as CqlInterval<CqlQuantity>;
+                                az_ = bz_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                aw_ = null;
+                                az_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> ax_ = QICoreCommon_4_0_000.Instance.toInterval(context, aw_);
-                CqlDateTime ay_ = context.Operators.End(ax_);
-                CqlInterval<CqlDate> az_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ay_);
-                CqlDate ba_ = az_?.low;
-                CqlDateTime bb_ = context.Operators.ConvertDateToDateTime(ba_);
-                object bc_;
-                DataType co_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
-                bool cq_ = cp_ is CqlDateTime;
-                if (cq_)
-                {
-                    DataType cr_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                    object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                    bc_ = cs_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType ct_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                    object cu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ct_);
-                    bool cv_ = cu_ is CqlQuantity;
-                    if (cv_)
-                    {
-                        DataType cw_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                        object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
-                        bc_ = cx_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType cy_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                        object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-                        bool da_ = cz_ is CqlInterval<CqlDateTime>;
-                        if (da_)
-                        {
-                            DataType db_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                            object dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
-                            bc_ = dc_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType dd_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                            object de_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dd_);
-                            bool df_ = de_ is CqlInterval<CqlQuantity>;
-                            if (df_)
-                            {
-                                DataType dg_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                                object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                                bc_ = dh_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                bc_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bd_ = QICoreCommon_4_0_000.Instance.toInterval(context, bc_);
-                CqlDateTime be_ = context.Operators.End(bd_);
-                CqlInterval<CqlDate> bf_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, be_);
-                CqlDate bg_ = bf_?.high;
-                CqlDateTime bh_ = context.Operators.ConvertDateToDateTime(bg_);
-                object bi_;
-                DataType di_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                object dj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, di_);
-                bool dk_ = dj_ is CqlDateTime;
-                if (dk_)
-                {
-                    DataType dl_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                    object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
-                    bi_ = dm_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType dn_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                    object do_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dn_);
-                    bool dp_ = do_ is CqlQuantity;
-                    if (dp_)
-                    {
-                        DataType dq_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                        object dr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dq_);
-                        bi_ = dr_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType ds_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                        object dt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ds_);
-                        bool du_ = dt_ is CqlInterval<CqlDateTime>;
-                        if (du_)
-                        {
-                            DataType dv_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                            object dw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dv_);
-                            bi_ = dw_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType dx_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                            object dy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dx_);
-                            bool dz_ = dy_ is CqlInterval<CqlQuantity>;
-                            if (dz_)
-                            {
-                                DataType ea_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                                object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-                                bi_ = eb_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                bi_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bj_ = QICoreCommon_4_0_000.Instance.toInterval(context, bi_);
-                CqlDateTime bk_ = context.Operators.End(bj_);
-                CqlInterval<CqlDate> bl_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bk_);
-                bool? bm_ = bl_?.lowClosed;
-                object bn_;
-                DataType ec_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                object ed_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ec_);
-                bool ee_ = ed_ is CqlDateTime;
-                if (ee_)
-                {
-                    DataType ef_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                    object eg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ef_);
-                    bn_ = eg_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType eh_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                    object ei_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eh_);
-                    bool ej_ = ei_ is CqlQuantity;
-                    if (ej_)
-                    {
-                        DataType ek_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                        object el_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ek_);
-                        bn_ = el_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType em_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                        object en_ = FHIRHelpers_4_4_000.Instance.ToValue(context, em_);
-                        bool eo_ = en_ is CqlInterval<CqlDateTime>;
-                        if (eo_)
-                        {
-                            DataType ep_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                            object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
-                            bn_ = eq_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType er_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                            object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                            bool et_ = es_ is CqlInterval<CqlQuantity>;
-                            if (et_)
-                            {
-                                DataType eu_ = tuple_fpgtpszgoyfdaobujrgcsedde?.AnesthesiaProcedure?.Performed;
-                                object ev_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eu_);
-                                bn_ = ev_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                bn_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bo_ = QICoreCommon_4_0_000.Instance.toInterval(context, bn_);
-                CqlDateTime bp_ = context.Operators.End(bo_);
-                CqlInterval<CqlDate> bq_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bp_);
-                bool? br_ = bq_?.highClosed;
-                CqlInterval<CqlDateTime> bs_ = context.Operators.Interval(bb_, bh_, bm_, br_);
-                bool? bt_ = context.Operators.In<CqlDateTime>(av_, bs_, "day");
-                return p_ & bt_;
+                CqlInterval<CqlDateTime> ba_ = QICoreCommon_4_0_000.Instance.toInterval(context, az_);
+                CqlDateTime bb_ = context.Operators.End(ba_);
+                CqlInterval<CqlDate> bc_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bb_);
+                bool? bd_ = bc_?.highClosed;
+                CqlInterval<CqlDateTime> be_ = context.Operators.Interval(an_, at_, ay_, bd_);
+                bool? bf_ = context.Operators.In<CqlDateTime>(ah_, be_, "day");
+                return p_ & bf_;
             }
         }
 
@@ -4247,42 +3813,28 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool ad_ = ac_ is CqlDateTime;
                 if (ad_)
                 {
-                    DataType ae_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                    object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                    u_ = af_ as CqlDateTime;
+                    u_ = ac_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ag_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                    object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                    bool ai_ = ah_ is CqlQuantity;
-                    if (ai_)
+                    bool ae_ = ac_ is CqlQuantity;
+                    if (ae_)
                     {
-                        DataType aj_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        u_ = ak_ as CqlQuantity;
+                        u_ = ac_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType al_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                        object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        bool an_ = am_ is CqlInterval<CqlDateTime>;
-                        if (an_)
+                        bool af_ = ac_ is CqlInterval<CqlDateTime>;
+                        if (af_)
                         {
-                            DataType ao_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                            object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                            u_ = ap_ as CqlInterval<CqlDateTime>;
+                            u_ = ac_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType aq_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                            object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                            bool as_ = ar_ is CqlInterval<CqlQuantity>;
-                            if (as_)
+                            bool ag_ = ac_ is CqlInterval<CqlQuantity>;
+                            if (ag_)
                             {
-                                DataType at_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                                object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                                u_ = au_ as CqlInterval<CqlQuantity>;
+                                u_ = ac_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -4306,228 +3858,172 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             }
             else
             {
-                CqlDateTime av_ = tuple_fnrkedfurymcjidjkbtaenork?.NoVTEDevice?.authoredOn;
-                object aw_;
-                DataType bu_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                bool bw_ = bv_ is CqlDateTime;
-                if (bw_)
+                CqlDateTime ah_ = tuple_fnrkedfurymcjidjkbtaenork?.NoVTEDevice?.authoredOn;
+                object ai_;
+                DataType bg_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
+                object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
+                bool bi_ = bh_ is CqlDateTime;
+                if (bi_)
                 {
-                    DataType bx_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                    object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                    aw_ = by_ as CqlDateTime;
+                    ai_ = bh_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType bz_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                    object ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
-                    bool cb_ = ca_ is CqlQuantity;
+                    bool bj_ = bh_ is CqlQuantity;
+                    if (bj_)
+                    {
+                        ai_ = bh_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bk_ = bh_ is CqlInterval<CqlDateTime>;
+                        if (bk_)
+                        {
+                            ai_ = bh_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool bl_ = bh_ is CqlInterval<CqlQuantity>;
+                            if (bl_)
+                            {
+                                ai_ = bh_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ai_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> aj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ai_);
+                CqlDateTime ak_ = context.Operators.End(aj_);
+                CqlInterval<CqlDate> al_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ak_);
+                CqlDate am_ = al_?.low;
+                CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+                object ao_;
+                DataType bm_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
+                object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
+                bool bo_ = bn_ is CqlDateTime;
+                if (bo_)
+                {
+                    ao_ = bn_ as CqlDateTime;
+                }
+                else
+                {
+                    bool bp_ = bn_ is CqlQuantity;
+                    if (bp_)
+                    {
+                        ao_ = bn_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bq_ = bn_ is CqlInterval<CqlDateTime>;
+                        if (bq_)
+                        {
+                            ao_ = bn_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool br_ = bn_ is CqlInterval<CqlQuantity>;
+                            if (br_)
+                            {
+                                ao_ = bn_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ao_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> ap_ = QICoreCommon_4_0_000.Instance.toInterval(context, ao_);
+                CqlDateTime aq_ = context.Operators.End(ap_);
+                CqlInterval<CqlDate> ar_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, aq_);
+                CqlDate as_ = ar_?.high;
+                CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
+                object au_;
+                DataType bs_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
+                object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
+                bool bu_ = bt_ is CqlDateTime;
+                if (bu_)
+                {
+                    au_ = bt_ as CqlDateTime;
+                }
+                else
+                {
+                    bool bv_ = bt_ is CqlQuantity;
+                    if (bv_)
+                    {
+                        au_ = bt_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bw_ = bt_ is CqlInterval<CqlDateTime>;
+                        if (bw_)
+                        {
+                            au_ = bt_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool bx_ = bt_ is CqlInterval<CqlQuantity>;
+                            if (bx_)
+                            {
+                                au_ = bt_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                au_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> av_ = QICoreCommon_4_0_000.Instance.toInterval(context, au_);
+                CqlDateTime aw_ = context.Operators.End(av_);
+                CqlInterval<CqlDate> ax_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, aw_);
+                bool? ay_ = ax_?.lowClosed;
+                object az_;
+                DataType by_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
+                object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
+                bool ca_ = bz_ is CqlDateTime;
+                if (ca_)
+                {
+                    az_ = bz_ as CqlDateTime;
+                }
+                else
+                {
+                    bool cb_ = bz_ is CqlQuantity;
                     if (cb_)
                     {
-                        DataType cc_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                        object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
-                        aw_ = cd_ as CqlQuantity;
+                        az_ = bz_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType ce_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                        object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                        bool cg_ = cf_ is CqlInterval<CqlDateTime>;
-                        if (cg_)
+                        bool cc_ = bz_ is CqlInterval<CqlDateTime>;
+                        if (cc_)
                         {
-                            DataType ch_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                            object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                            aw_ = ci_ as CqlInterval<CqlDateTime>;
+                            az_ = bz_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType cj_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                            object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                            bool cl_ = ck_ is CqlInterval<CqlQuantity>;
-                            if (cl_)
+                            bool cd_ = bz_ is CqlInterval<CqlQuantity>;
+                            if (cd_)
                             {
-                                DataType cm_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                                object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
-                                aw_ = cn_ as CqlInterval<CqlQuantity>;
+                                az_ = bz_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                aw_ = null;
+                                az_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> ax_ = QICoreCommon_4_0_000.Instance.toInterval(context, aw_);
-                CqlDateTime ay_ = context.Operators.End(ax_);
-                CqlInterval<CqlDate> az_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ay_);
-                CqlDate ba_ = az_?.low;
-                CqlDateTime bb_ = context.Operators.ConvertDateToDateTime(ba_);
-                object bc_;
-                DataType co_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
-                bool cq_ = cp_ is CqlDateTime;
-                if (cq_)
-                {
-                    DataType cr_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                    object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                    bc_ = cs_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType ct_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                    object cu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ct_);
-                    bool cv_ = cu_ is CqlQuantity;
-                    if (cv_)
-                    {
-                        DataType cw_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                        object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
-                        bc_ = cx_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType cy_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                        object cz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cy_);
-                        bool da_ = cz_ is CqlInterval<CqlDateTime>;
-                        if (da_)
-                        {
-                            DataType db_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                            object dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
-                            bc_ = dc_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType dd_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                            object de_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dd_);
-                            bool df_ = de_ is CqlInterval<CqlQuantity>;
-                            if (df_)
-                            {
-                                DataType dg_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                                object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                                bc_ = dh_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                bc_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bd_ = QICoreCommon_4_0_000.Instance.toInterval(context, bc_);
-                CqlDateTime be_ = context.Operators.End(bd_);
-                CqlInterval<CqlDate> bf_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, be_);
-                CqlDate bg_ = bf_?.high;
-                CqlDateTime bh_ = context.Operators.ConvertDateToDateTime(bg_);
-                object bi_;
-                DataType di_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                object dj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, di_);
-                bool dk_ = dj_ is CqlDateTime;
-                if (dk_)
-                {
-                    DataType dl_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                    object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
-                    bi_ = dm_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType dn_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                    object do_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dn_);
-                    bool dp_ = do_ is CqlQuantity;
-                    if (dp_)
-                    {
-                        DataType dq_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                        object dr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dq_);
-                        bi_ = dr_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType ds_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                        object dt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ds_);
-                        bool du_ = dt_ is CqlInterval<CqlDateTime>;
-                        if (du_)
-                        {
-                            DataType dv_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                            object dw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dv_);
-                            bi_ = dw_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType dx_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                            object dy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dx_);
-                            bool dz_ = dy_ is CqlInterval<CqlQuantity>;
-                            if (dz_)
-                            {
-                                DataType ea_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                                object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
-                                bi_ = eb_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                bi_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bj_ = QICoreCommon_4_0_000.Instance.toInterval(context, bi_);
-                CqlDateTime bk_ = context.Operators.End(bj_);
-                CqlInterval<CqlDate> bl_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bk_);
-                bool? bm_ = bl_?.lowClosed;
-                object bn_;
-                DataType ec_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                object ed_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ec_);
-                bool ee_ = ed_ is CqlDateTime;
-                if (ee_)
-                {
-                    DataType ef_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                    object eg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ef_);
-                    bn_ = eg_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType eh_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                    object ei_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eh_);
-                    bool ej_ = ei_ is CqlQuantity;
-                    if (ej_)
-                    {
-                        DataType ek_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                        object el_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ek_);
-                        bn_ = el_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType em_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                        object en_ = FHIRHelpers_4_4_000.Instance.ToValue(context, em_);
-                        bool eo_ = en_ is CqlInterval<CqlDateTime>;
-                        if (eo_)
-                        {
-                            DataType ep_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                            object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
-                            bn_ = eq_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType er_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                            object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
-                            bool et_ = es_ is CqlInterval<CqlQuantity>;
-                            if (et_)
-                            {
-                                DataType eu_ = tuple_fnrkedfurymcjidjkbtaenork?.AnesthesiaProcedure?.Performed;
-                                object ev_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eu_);
-                                bn_ = ev_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                bn_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bo_ = QICoreCommon_4_0_000.Instance.toInterval(context, bn_);
-                CqlDateTime bp_ = context.Operators.End(bo_);
-                CqlInterval<CqlDate> bq_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bp_);
-                bool? br_ = bq_?.highClosed;
-                CqlInterval<CqlDateTime> bs_ = context.Operators.Interval(bb_, bh_, bm_, br_);
-                bool? bt_ = context.Operators.In<CqlDateTime>(av_, bs_, "day");
-                return p_ & bt_;
+                CqlInterval<CqlDateTime> ba_ = QICoreCommon_4_0_000.Instance.toInterval(context, az_);
+                CqlDateTime bb_ = context.Operators.End(ba_);
+                CqlInterval<CqlDate> bc_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bb_);
+                bool? bd_ = bc_?.highClosed;
+                CqlInterval<CqlDateTime> be_ = context.Operators.Interval(an_, at_, ay_, bd_);
+                bool? bf_ = context.Operators.In<CqlDateTime>(ah_, be_, "day");
+                return p_ & bf_;
             }
         }
 
@@ -4667,42 +4163,28 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
-                    DataType aa_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    q_ = ab_ as CqlDateTime;
+                    q_ = y_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ac_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlQuantity;
-                    if (ae_)
+                    bool aa_ = y_ is CqlQuantity;
+                    if (aa_)
                     {
-                        DataType af_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        q_ = ag_ as CqlQuantity;
+                        q_ = y_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType ah_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        bool aj_ = ai_ is CqlInterval<CqlDateTime>;
-                        if (aj_)
+                        bool ab_ = y_ is CqlInterval<CqlDateTime>;
+                        if (ab_)
                         {
-                            DataType ak_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                            q_ = al_ as CqlInterval<CqlDateTime>;
+                            q_ = y_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType am_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                            object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                            bool ao_ = an_ is CqlInterval<CqlQuantity>;
-                            if (ao_)
+                            bool ac_ = y_ is CqlInterval<CqlQuantity>;
+                            if (ac_)
                             {
-                                DataType ap_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                                object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                                q_ = aq_ as CqlInterval<CqlQuantity>;
+                                q_ = y_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -4726,228 +4208,172 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
             }
             else
             {
-                CqlDateTime ar_ = context.Operators.LateBoundProperty<CqlDateTime>(tuple_bvgardhyjgbgfxidntuflexa?.PatientRefusal, "authoredOn");
-                object as_;
-                DataType bq_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
-                bool bs_ = br_ is CqlDateTime;
-                if (bs_)
+                CqlDateTime ad_ = context.Operators.LateBoundProperty<CqlDateTime>(tuple_bvgardhyjgbgfxidntuflexa?.PatientRefusal, "authoredOn");
+                object ae_;
+                DataType bc_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
+                object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
+                bool be_ = bd_ is CqlDateTime;
+                if (be_)
                 {
-                    DataType bt_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                    object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                    as_ = bu_ as CqlDateTime;
+                    ae_ = bd_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType bv_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                    object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    bool bx_ = bw_ is CqlQuantity;
+                    bool bf_ = bd_ is CqlQuantity;
+                    if (bf_)
+                    {
+                        ae_ = bd_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bg_ = bd_ is CqlInterval<CqlDateTime>;
+                        if (bg_)
+                        {
+                            ae_ = bd_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool bh_ = bd_ is CqlInterval<CqlQuantity>;
+                            if (bh_)
+                            {
+                                ae_ = bd_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ae_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> af_ = QICoreCommon_4_0_000.Instance.toInterval(context, ae_);
+                CqlDateTime ag_ = context.Operators.End(af_);
+                CqlInterval<CqlDate> ah_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ag_);
+                CqlDate ai_ = ah_?.low;
+                CqlDateTime aj_ = context.Operators.ConvertDateToDateTime(ai_);
+                object ak_;
+                DataType bi_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
+                object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
+                bool bk_ = bj_ is CqlDateTime;
+                if (bk_)
+                {
+                    ak_ = bj_ as CqlDateTime;
+                }
+                else
+                {
+                    bool bl_ = bj_ is CqlQuantity;
+                    if (bl_)
+                    {
+                        ak_ = bj_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bm_ = bj_ is CqlInterval<CqlDateTime>;
+                        if (bm_)
+                        {
+                            ak_ = bj_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool bn_ = bj_ is CqlInterval<CqlQuantity>;
+                            if (bn_)
+                            {
+                                ak_ = bj_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                ak_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> al_ = QICoreCommon_4_0_000.Instance.toInterval(context, ak_);
+                CqlDateTime am_ = context.Operators.End(al_);
+                CqlInterval<CqlDate> an_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, am_);
+                CqlDate ao_ = an_?.high;
+                CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(ao_);
+                object aq_;
+                DataType bo_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
+                object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
+                bool bq_ = bp_ is CqlDateTime;
+                if (bq_)
+                {
+                    aq_ = bp_ as CqlDateTime;
+                }
+                else
+                {
+                    bool br_ = bp_ is CqlQuantity;
+                    if (br_)
+                    {
+                        aq_ = bp_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool bs_ = bp_ is CqlInterval<CqlDateTime>;
+                        if (bs_)
+                        {
+                            aq_ = bp_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool bt_ = bp_ is CqlInterval<CqlQuantity>;
+                            if (bt_)
+                            {
+                                aq_ = bp_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                aq_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> ar_ = QICoreCommon_4_0_000.Instance.toInterval(context, aq_);
+                CqlDateTime as_ = context.Operators.End(ar_);
+                CqlInterval<CqlDate> at_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, as_);
+                bool? au_ = at_?.lowClosed;
+                object av_;
+                DataType bu_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
+                object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
+                bool bw_ = bv_ is CqlDateTime;
+                if (bw_)
+                {
+                    av_ = bv_ as CqlDateTime;
+                }
+                else
+                {
+                    bool bx_ = bv_ is CqlQuantity;
                     if (bx_)
                     {
-                        DataType by_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                        object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
-                        as_ = bz_ as CqlQuantity;
+                        av_ = bv_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType ca_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                        object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                        bool cc_ = cb_ is CqlInterval<CqlDateTime>;
-                        if (cc_)
+                        bool by_ = bv_ is CqlInterval<CqlDateTime>;
+                        if (by_)
                         {
-                            DataType cd_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                            object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                            as_ = ce_ as CqlInterval<CqlDateTime>;
+                            av_ = bv_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType cf_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                            object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                            bool ch_ = cg_ is CqlInterval<CqlQuantity>;
-                            if (ch_)
+                            bool bz_ = bv_ is CqlInterval<CqlQuantity>;
+                            if (bz_)
                             {
-                                DataType ci_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                                object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                                as_ = cj_ as CqlInterval<CqlQuantity>;
+                                av_ = bv_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                as_ = null;
+                                av_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> at_ = QICoreCommon_4_0_000.Instance.toInterval(context, as_);
-                CqlDateTime au_ = context.Operators.End(at_);
-                CqlInterval<CqlDate> av_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, au_);
-                CqlDate aw_ = av_?.low;
-                CqlDateTime ax_ = context.Operators.ConvertDateToDateTime(aw_);
-                object ay_;
-                DataType ck_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
-                bool cm_ = cl_ is CqlDateTime;
-                if (cm_)
-                {
-                    DataType cn_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                    object co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-                    ay_ = co_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType cp_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                    object cq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cp_);
-                    bool cr_ = cq_ is CqlQuantity;
-                    if (cr_)
-                    {
-                        DataType cs_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                        object ct_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
-                        ay_ = ct_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType cu_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                        object cv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cu_);
-                        bool cw_ = cv_ is CqlInterval<CqlDateTime>;
-                        if (cw_)
-                        {
-                            DataType cx_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                            object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
-                            ay_ = cy_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType cz_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                            object da_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cz_);
-                            bool db_ = da_ is CqlInterval<CqlQuantity>;
-                            if (db_)
-                            {
-                                DataType dc_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                                object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                                ay_ = dd_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                ay_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> az_ = QICoreCommon_4_0_000.Instance.toInterval(context, ay_);
-                CqlDateTime ba_ = context.Operators.End(az_);
-                CqlInterval<CqlDate> bb_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ba_);
-                CqlDate bc_ = bb_?.high;
-                CqlDateTime bd_ = context.Operators.ConvertDateToDateTime(bc_);
-                object be_;
-                DataType de_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
-                bool dg_ = df_ is CqlDateTime;
-                if (dg_)
-                {
-                    DataType dh_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                    object di_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dh_);
-                    be_ = di_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType dj_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                    object dk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dj_);
-                    bool dl_ = dk_ is CqlQuantity;
-                    if (dl_)
-                    {
-                        DataType dm_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                        object dn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dm_);
-                        be_ = dn_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType do_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                        object dp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, do_);
-                        bool dq_ = dp_ is CqlInterval<CqlDateTime>;
-                        if (dq_)
-                        {
-                            DataType dr_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                            object ds_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dr_);
-                            be_ = ds_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType dt_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                            object du_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dt_);
-                            bool dv_ = du_ is CqlInterval<CqlQuantity>;
-                            if (dv_)
-                            {
-                                DataType dw_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                                object dx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dw_);
-                                be_ = dx_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                be_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bf_ = QICoreCommon_4_0_000.Instance.toInterval(context, be_);
-                CqlDateTime bg_ = context.Operators.End(bf_);
-                CqlInterval<CqlDate> bh_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bg_);
-                bool? bi_ = bh_?.lowClosed;
-                object bj_;
-                DataType dy_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                object dz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dy_);
-                bool ea_ = dz_ is CqlDateTime;
-                if (ea_)
-                {
-                    DataType eb_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                    object ec_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eb_);
-                    bj_ = ec_ as CqlDateTime;
-                }
-                else
-                {
-                    DataType ed_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                    object ee_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ed_);
-                    bool ef_ = ee_ is CqlQuantity;
-                    if (ef_)
-                    {
-                        DataType eg_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                        object eh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eg_);
-                        bj_ = eh_ as CqlQuantity;
-                    }
-                    else
-                    {
-                        DataType ei_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                        object ej_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ei_);
-                        bool ek_ = ej_ is CqlInterval<CqlDateTime>;
-                        if (ek_)
-                        {
-                            DataType el_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                            object em_ = FHIRHelpers_4_4_000.Instance.ToValue(context, el_);
-                            bj_ = em_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            DataType en_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                            object eo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, en_);
-                            bool ep_ = eo_ is CqlInterval<CqlQuantity>;
-                            if (ep_)
-                            {
-                                DataType eq_ = tuple_bvgardhyjgbgfxidntuflexa?.AnesthesiaProcedure?.Performed;
-                                object er_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eq_);
-                                bj_ = er_ as CqlInterval<CqlQuantity>;
-                            }
-                            else
-                            {
-                                bj_ = null;
-                            }
-                        }
-                    }
-                }
-                CqlInterval<CqlDateTime> bk_ = QICoreCommon_4_0_000.Instance.toInterval(context, bj_);
-                CqlDateTime bl_ = context.Operators.End(bk_);
-                CqlInterval<CqlDate> bm_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, bl_);
-                bool? bn_ = bm_?.highClosed;
-                CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(ax_, bd_, bi_, bn_);
-                bool? bp_ = context.Operators.In<CqlDateTime>(ar_, bo_, "day");
-                return p_ & bp_;
+                CqlInterval<CqlDateTime> aw_ = QICoreCommon_4_0_000.Instance.toInterval(context, av_);
+                CqlDateTime ax_ = context.Operators.End(aw_);
+                CqlInterval<CqlDate> ay_ = TJCOverall_8_25_000.Instance.calendarDayOfOrDayAfter(context, ax_);
+                bool? az_ = ay_?.highClosed;
+                CqlInterval<CqlDateTime> ba_ = context.Operators.Interval(aj_, ap_, au_, az_);
+                bool? bb_ = context.Operators.In<CqlDateTime>(ad_, ba_, "day");
+                return p_ & bb_;
             }
         }
 

@@ -220,7 +220,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                         bool? u_ = context.Operators.Equivalent(k_, t_);
                         r_ = q_ & !u_;
                     }
-                    m_ = /* CQL 'implies' (64:11-67:7) */ !l_ | r_;
+                    m_ = !l_ | r_;
                 }
                 return i_ & m_;
             }
@@ -397,7 +397,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                         bool? z_ = context.Operators.Equivalent(p_, y_);
                         w_ = v_ & !z_;
                     }
-                    r_ = /* CQL 'implies' (77:11-80:7) */ !q_ | w_;
+                    r_ = !q_ | w_;
                 }
                 return n_ & r_;
             }

@@ -268,42 +268,28 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             bool n_ = m_ is CqlDateTime;
             if (n_)
             {
-                DataType o_ = UnilateralMastectomyRightPerformed?.Performed;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                f_ = p_ as CqlDateTime;
+                f_ = m_ as CqlDateTime;
             }
             else
             {
-                DataType q_ = UnilateralMastectomyRightPerformed?.Performed;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlQuantity;
-                if (s_)
+                bool o_ = m_ is CqlQuantity;
+                if (o_)
                 {
-                    DataType t_ = UnilateralMastectomyRightPerformed?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    f_ = u_ as CqlQuantity;
+                    f_ = m_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType v_ = UnilateralMastectomyRightPerformed?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlInterval<CqlDateTime>;
-                    if (x_)
+                    bool p_ = m_ is CqlInterval<CqlDateTime>;
+                    if (p_)
                     {
-                        DataType y_ = UnilateralMastectomyRightPerformed?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        f_ = z_ as CqlInterval<CqlDateTime>;
+                        f_ = m_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType aa_ = UnilateralMastectomyRightPerformed?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlInterval<CqlQuantity>;
-                        if (ac_)
+                        bool q_ = m_ is CqlInterval<CqlQuantity>;
+                        if (q_)
                         {
-                            DataType ad_ = UnilateralMastectomyRightPerformed?.Performed;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            f_ = ae_ as CqlInterval<CqlQuantity>;
+                            f_ = m_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -400,42 +386,28 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             bool n_ = m_ is CqlDateTime;
             if (n_)
             {
-                DataType o_ = UnilateralMastectomyLeftPerformed?.Performed;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                f_ = p_ as CqlDateTime;
+                f_ = m_ as CqlDateTime;
             }
             else
             {
-                DataType q_ = UnilateralMastectomyLeftPerformed?.Performed;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlQuantity;
-                if (s_)
+                bool o_ = m_ is CqlQuantity;
+                if (o_)
                 {
-                    DataType t_ = UnilateralMastectomyLeftPerformed?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    f_ = u_ as CqlQuantity;
+                    f_ = m_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType v_ = UnilateralMastectomyLeftPerformed?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlInterval<CqlDateTime>;
-                    if (x_)
+                    bool p_ = m_ is CqlInterval<CqlDateTime>;
+                    if (p_)
                     {
-                        DataType y_ = UnilateralMastectomyLeftPerformed?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        f_ = z_ as CqlInterval<CqlDateTime>;
+                        f_ = m_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType aa_ = UnilateralMastectomyLeftPerformed?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlInterval<CqlQuantity>;
-                        if (ac_)
+                        bool q_ = m_ is CqlInterval<CqlQuantity>;
+                        if (q_)
                         {
-                            DataType ad_ = UnilateralMastectomyLeftPerformed?.Performed;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            f_ = ae_ as CqlInterval<CqlQuantity>;
+                            f_ = m_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -504,42 +476,28 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             bool n_ = m_ is CqlDateTime;
             if (n_)
             {
-                DataType o_ = BilateralMastectomyPerformed?.Performed;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                f_ = p_ as CqlDateTime;
+                f_ = m_ as CqlDateTime;
             }
             else
             {
-                DataType q_ = BilateralMastectomyPerformed?.Performed;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlQuantity;
-                if (s_)
+                bool o_ = m_ is CqlQuantity;
+                if (o_)
                 {
-                    DataType t_ = BilateralMastectomyPerformed?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    f_ = u_ as CqlQuantity;
+                    f_ = m_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType v_ = BilateralMastectomyPerformed?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlInterval<CqlDateTime>;
-                    if (x_)
+                    bool p_ = m_ is CqlInterval<CqlDateTime>;
+                    if (p_)
                     {
-                        DataType y_ = BilateralMastectomyPerformed?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        f_ = z_ as CqlInterval<CqlDateTime>;
+                        f_ = m_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType aa_ = BilateralMastectomyPerformed?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlInterval<CqlQuantity>;
-                        if (ac_)
+                        bool q_ = m_ is CqlInterval<CqlQuantity>;
+                        if (q_)
                         {
-                            DataType ad_ = BilateralMastectomyPerformed?.Performed;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            f_ = ae_ as CqlInterval<CqlQuantity>;
+                            f_ = m_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {

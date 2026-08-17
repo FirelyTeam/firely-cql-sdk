@@ -71,45 +71,36 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
             }
             else
             {
-                Code<Quantity.QuantityComparator> g_ = quantity?.ComparatorElement;
-                Quantity.QuantityComparator? h_ = g_?.Value;
-                string i_ = context.Operators.Convert<string>(h_);
-                bool? j_ = context.Operators.Equal(i_, "<=");
-                if (j_ ?? false)
+                bool? g_ = context.Operators.Equal(c_, "<=");
+                if (g_ ?? false)
                 {
-                    CqlQuantity k_ = this.ToQuantityIgnoringComparator(context, quantity);
-                    CqlInterval<CqlQuantity> l_ = context.Operators.Interval(default, k_, true, true);
-                    return l_;
+                    CqlQuantity h_ = this.ToQuantityIgnoringComparator(context, quantity);
+                    CqlInterval<CqlQuantity> i_ = context.Operators.Interval(default, h_, true, true);
+                    return i_;
                 }
                 else
                 {
-                    Code<Quantity.QuantityComparator> m_ = quantity?.ComparatorElement;
-                    Quantity.QuantityComparator? n_ = m_?.Value;
-                    string o_ = context.Operators.Convert<string>(n_);
-                    bool? p_ = context.Operators.Equal(o_, ">=");
-                    if (p_ ?? false)
+                    bool? j_ = context.Operators.Equal(c_, ">=");
+                    if (j_ ?? false)
                     {
-                        CqlQuantity q_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> r_ = context.Operators.Interval(q_, default, true, true);
-                        return r_;
+                        CqlQuantity k_ = this.ToQuantityIgnoringComparator(context, quantity);
+                        CqlInterval<CqlQuantity> l_ = context.Operators.Interval(k_, default, true, true);
+                        return l_;
                     }
                     else
                     {
-                        Code<Quantity.QuantityComparator> s_ = quantity?.ComparatorElement;
-                        Quantity.QuantityComparator? t_ = s_?.Value;
-                        string u_ = context.Operators.Convert<string>(t_);
-                        bool? v_ = context.Operators.Equal(u_, ">");
-                        if (v_ ?? false)
+                        bool? m_ = context.Operators.Equal(c_, ">");
+                        if (m_ ?? false)
                         {
-                            CqlQuantity w_ = this.ToQuantityIgnoringComparator(context, quantity);
-                            CqlInterval<CqlQuantity> x_ = context.Operators.Interval(w_, default, false, true);
-                            return x_;
+                            CqlQuantity n_ = this.ToQuantityIgnoringComparator(context, quantity);
+                            CqlInterval<CqlQuantity> o_ = context.Operators.Interval(n_, default, false, true);
+                            return o_;
                         }
                         else
                         {
-                            CqlQuantity y_ = this.ToQuantity(context, quantity);
-                            CqlInterval<CqlQuantity> z_ = context.Operators.Interval(y_, y_, true, true);
-                            return z_;
+                            CqlQuantity p_ = this.ToQuantity(context, quantity);
+                            CqlInterval<CqlQuantity> q_ = context.Operators.Interval(p_, p_, true, true);
+                            return q_;
                         }
                     }
                 }

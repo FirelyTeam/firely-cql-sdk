@@ -31,16 +31,33 @@ internal partial class CSharpEmitter
         private readonly List<Func<string>> _statements = [];
         private readonly Dictionary<string, Atom> _dedup = [];
 
-        // Dedup entries of an ENCLOSING scope whose locals are already declared textually
-        // above this scope's block, so this scope may reuse them instead of recomputing the
-        // same value. Lookup only — a new hoist always lands in _dedup, never here. Null for
-        // the root scope and for a hoisted local function's body (see HoistLocalFunction).
-        private readonly IReadOnlyDictionary<string, Atom>? _inheritedDedup;
+        // Dedup entries of ENCLOSING scopes whose locals are already declared textually above
+        // this scope's block, so this scope may reuse them instead of recomputing the same
+        // value. Lookup only — a new hoist always lands in _dedup, never here. Null for the
+        // root scope and for a hoisted local function's body (see HoistLocalFunction).
+        private readonly VisibleDedup? _inheritedDedup;
+
+        /// <summary>
+        /// Lookup-only view of what an enclosing scope had hoisted at the moment a deferred render
+        /// was queued. Each level freezes a copy of its OWN entries and chains by reference to the
+        /// already-frozen level outside it, so visibility reaches all the way out without copying
+        /// the whole table at every nesting level (a scope nest of depth d over n entries would
+        /// otherwise cost O(d·n) per emission path).
+        /// <para>The per-level copy is what makes it a snapshot rather than a live view, and that
+        /// is load-bearing: entries its scope hoists AFTER the render is queued are declared
+        /// textually BELOW it, so reusing one from inside a branch would be a
+        /// use-before-declaration.</para>
+        /// </summary>
+        private sealed class VisibleDedup(Dictionary<string, Atom> frozen, VisibleDedup? outer)
+        {
+            public bool TryGetValue(string key, out Atom atom) =>
+                frozen.TryGetValue(key, out atom!) || (outer is not null && outer.TryGetValue(key, out atom));
+        }
 
         private Scope(
             CSharpEmitter emitter,
             VariableNameGenerator names,
-            IReadOnlyDictionary<string, Atom>? inheritedDedup = null)
+            VisibleDedup? inheritedDedup = null)
         {
             _emitter = emitter;
             _names = names;
@@ -59,7 +76,7 @@ internal partial class CSharpEmitter
 
         private Scope CreateNested(
             IReadOnlyList<CodeLocal> parameters,
-            IReadOnlyDictionary<string, Atom>? inheritedDedup = null)
+            VisibleDedup? inheritedDedup = null)
         {
             var nested = new Scope(
                 _emitter,
@@ -171,8 +188,8 @@ internal partial class CSharpEmitter
                     or CodeCast
                     or CodeNew
                     or CodeThrow
-                    or CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr or CodeBinaryOp.BoolXor }
                     or CodeUnary:
+                case CodeBinary passThrough when CodeBinary.PrintsInlineOverChildren(passThrough.Op):
                 {
                     var (printed, keyPrinted) = PrintBoth(node);
                     return new Atom(printed, keyPrinted, node);
@@ -355,7 +372,7 @@ internal partial class CSharpEmitter
                 CodeCast c => IsInlineOnly(c.Operand),
                 CodeNew n => n.Arguments.All(IsInlineOnly),
                 CodeThrow t => IsInlineOnly(t.Exception),
-                CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr or CodeBinaryOp.BoolXor } b =>
+                CodeBinary b when CodeBinary.PrintsInlineOverChildren(b.Op) =>
                     IsInlineOnly(b.Left) && IsInlineOnly(b.Right),
                 CodeUnary u => IsInlineOnly(u.Operand),
                 CodeConditional nested =>
@@ -465,27 +482,11 @@ internal partial class CSharpEmitter
             bool tailPosition,
             string? originComment = null)
         {
-            // Snapshot NOW, at queue time, not when the chain renders: everything this scope
-            // has hoisted so far is declared above the chain and therefore in scope inside
-            // every branch and test block, but anything it hoists AFTER the chain is declared
-            // BELOW it, and reusing one of those from inside a branch would be a
-            // use-before-declaration.
-            //
-            // Seeded from what this scope itself inherited, so visibility passes all the way
-            // DOWN a nest of chains rather than one level: an ancestor's locals are declared
-            // above the chain that encloses this block, so they are just as visible here. Copying
-            // only _dedup would make a guard nested two levels deep recompute what the outermost
-            // scope had already hoisted — which is what the residual duplicated retrieves were.
-            var visibleDedup = _inheritedDedup is null
-                ? new Dictionary<string, Atom>(_dedup)
-                : new Dictionary<string, Atom>(_inheritedDedup);
-            if (_inheritedDedup is not null)
-            {
-                // This scope's own hoists win: a nearer declaration shadows nothing, but it is
-                // the one whose name is guaranteed still in scope at the deepest level.
-                foreach (var (key, atom) in _dedup)
-                    visibleDedup[key] = atom;
-            }
+            // Freeze what this scope has hoisted SO FAR, and chain to what it inherited itself, so
+            // a branch sees every enclosing local rather than only its immediate parent's: those
+            // are all declared textually above this chain. See VisibleDedup for why the snapshot
+            // (rather than a live view) is the load-bearing part.
+            var visibleDedup = new VisibleDedup(new Dictionary<string, Atom>(_dedup), _inheritedDedup);
 
             if (tailPosition)
             {
@@ -514,7 +515,7 @@ internal partial class CSharpEmitter
             string? resultName,
             IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
             CodeExpression @else,
-            IReadOnlyDictionary<string, Atom> visibleDedup)
+            VisibleDedup visibleDedup)
         {
             var isb = new IndentedStringBuilder();
             EmitChainLevel(isb, resultName, cases, 0, @else, visibleDedup);
@@ -527,7 +528,7 @@ internal partial class CSharpEmitter
             IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
             int start,
             CodeExpression @else,
-            IReadOnlyDictionary<string, Atom> visibleDedup)
+            VisibleDedup visibleDedup)
         {
             // Both forms print an if/else chain. The assign form needs one — its branches
             // assign and fall through, so the else is what guarantees exactly one of them
@@ -551,6 +552,12 @@ internal partial class CSharpEmitter
                     var atom = testScope.Linearize(when)!;
                     testScope.WriteStatements(isb);
                     test = atom.Code;
+
+                    // Those statements print at THIS level, above every branch of the chain, so
+                    // the branches may reuse them: a condition that hoists
+                    // `DateTimeComponentFrom(x, "month")` and a branch that needs the same value
+                    // would otherwise compute it twice.
+                    visibleDedup = new VisibleDedup(new Dictionary<string, Atom>(testScope._dedup), visibleDedup);
                 }
                 else
                 {
@@ -599,7 +606,7 @@ internal partial class CSharpEmitter
                 CodeCast c => CountSpineNodes(c.Operand),
                 CodeNew n => n.Arguments.Sum(CountSpineNodes),
                 CodeThrow t => CountSpineNodes(t.Exception),
-                CodeBinary { Op: CodeBinaryOp.Equal or CodeBinaryOp.NotEqual or CodeBinaryOp.Coalesce or CodeBinaryOp.BoolAnd or CodeBinaryOp.BoolOr or CodeBinaryOp.BoolXor } b =>
+                CodeBinary b when CodeBinary.PrintsInlineOverChildren(b.Op) =>
                     CountSpineNodes(b.Left) + CountSpineNodes(b.Right),
                 CodeUnary u => CountSpineNodes(u.Operand),
                 // A conditional containing a statement-shaped node anywhere (test included)
@@ -647,7 +654,7 @@ internal partial class CSharpEmitter
             IndentedStringBuilder isb,
             string? resultName,
             CodeExpression value,
-            IReadOnlyDictionary<string, Atom> visibleDedup)
+            VisibleDedup visibleDedup)
         {
             isb.AppendLine("{");
             using (isb.Indent())

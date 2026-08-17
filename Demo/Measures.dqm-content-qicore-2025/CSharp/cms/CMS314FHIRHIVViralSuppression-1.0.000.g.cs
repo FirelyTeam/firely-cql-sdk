@@ -186,7 +186,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                 bool? r_ = context.Operators.Equivalent(b_, q_);
                 i_ = h_ | r_;
             }
-            return /* CQL 'implies' (76:3-80:3) */ !c_ | i_;
+            return !c_ | i_;
         }
     }
 
@@ -368,31 +368,20 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                 bool s_ = r_ is CqlDateTime;
                 if (s_)
                 {
-                    DataType t_ = ViralLoad?.Effective;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    m_ = u_ as CqlDateTime;
+                    m_ = r_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType v_ = ViralLoad?.Effective;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlDateTime;
-                    if (x_)
+                    if (s_)
                     {
-                        DataType y_ = ViralLoad?.Effective;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        m_ = z_ as CqlDateTime;
+                        m_ = r_ as CqlDateTime;
                     }
                     else
                     {
-                        DataType aa_ = ViralLoad?.Effective;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlInterval<CqlDateTime>;
-                        if (ac_)
+                        bool t_ = r_ is CqlInterval<CqlDateTime>;
+                        if (t_)
                         {
-                            DataType ad_ = ViralLoad?.Effective;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            m_ = ae_ as CqlInterval<CqlDateTime>;
+                            m_ = r_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -410,46 +399,35 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
         object e_(Observation @this) {
-            object af_;
-            DataType ah_ = @this?.Effective;
-            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-            bool aj_ = ai_ is CqlDateTime;
-            if (aj_)
+            object u_;
+            DataType w_ = @this?.Effective;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            bool y_ = x_ is CqlDateTime;
+            if (y_)
             {
-                DataType ak_ = @this?.Effective;
-                object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                af_ = al_ as CqlDateTime;
+                u_ = x_ as CqlDateTime;
             }
             else
             {
-                DataType am_ = @this?.Effective;
-                object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                bool ao_ = an_ is CqlDateTime;
-                if (ao_)
+                if (y_)
                 {
-                    DataType ap_ = @this?.Effective;
-                    object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                    af_ = aq_ as CqlDateTime;
+                    u_ = x_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ar_ = @this?.Effective;
-                    object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-                    bool at_ = as_ is CqlInterval<CqlDateTime>;
-                    if (at_)
+                    bool z_ = x_ is CqlInterval<CqlDateTime>;
+                    if (z_)
                     {
-                        DataType au_ = @this?.Effective;
-                        object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        af_ = av_ as CqlInterval<CqlDateTime>;
+                        u_ = x_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        af_ = null;
+                        u_ = null;
                     }
                 }
             }
-            CqlDateTime ag_ = QICoreCommon_4_0_000.Instance.earliest(context, af_);
-            return ag_;
+            CqlDateTime v_ = QICoreCommon_4_0_000.Instance.earliest(context, u_);
+            return v_;
         }
 
         IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);

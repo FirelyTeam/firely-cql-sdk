@@ -317,7 +317,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 bool? r_ = context.Operators.Equivalent(b_, q_);
                 i_ = h_ | r_;
             }
-            return /* CQL 'implies' (408:3-412:3) */ !c_ | i_;
+            return !c_ | i_;
         }
     }
 
@@ -346,10 +346,8 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypertension as Condition);
-                    CqlDateTime o_ = context.Operators.Start(n_);
-                    CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, o_, true, true);
-                    h_ = p_;
+                    CqlInterval<CqlDateTime> n_ = context.Operators.Interval(m_, m_, true, true);
+                    h_ = n_;
                 }
                 Period i_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
@@ -361,8 +359,8 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 }
                 else
                 {
-                    bool? q_ = this.isVerified(context, Hypertension as Condition);
-                    return k_ & q_;
+                    bool? o_ = this.isVerified(context, Hypertension as Condition);
+                    return k_ & o_;
                 }
             }
 

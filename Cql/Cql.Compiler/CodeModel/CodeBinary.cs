@@ -49,6 +49,22 @@ internal enum CodeBinaryOp
 /// </summary>
 internal sealed class CodeBinary : CodeExpression
 {
+    /// <summary>
+    /// Whether the emitter prints this operator inline over its (linearized) children instead of
+    /// hoisting the node itself into a local. Defined here, once, because the emitter needs the
+    /// same answer in three separate structural walks — the linearize dispatch, the inline-only
+    /// classification and the spine-node count — and a set spelled out three times is a set that
+    /// drifts: <see cref="CodeBinaryOp.BoolXor"/> was added to the enum and to the printer but
+    /// missed all three, so a lowered <c>xor</c> silently lost its inline form.
+    /// </summary>
+    public static bool PrintsInlineOverChildren(CodeBinaryOp op) =>
+        op is CodeBinaryOp.Equal
+            or CodeBinaryOp.NotEqual
+            or CodeBinaryOp.Coalesce
+            or CodeBinaryOp.BoolAnd
+            or CodeBinaryOp.BoolOr
+            or CodeBinaryOp.BoolXor;
+
     public CodeBinary(CodeBinaryOp op, CodeExpression left, CodeExpression right, string? originTag = null)
     {
         OriginTag = originTag;

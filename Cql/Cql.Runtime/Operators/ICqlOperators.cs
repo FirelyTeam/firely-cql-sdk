@@ -309,10 +309,7 @@ namespace Hl7.Cql.Operators
         /// reference implementation the lowering is tested against — see
         /// <c>docs/generated-code-operator-ledger.md</c> for the retirement policy.</remarks>
         bool?                                    Implies(bool? left, bool? right);
-        /// <remarks>No code generator version has ever emitted calls to the
-        /// <see cref="Lazy{T}"/> overloads; the short-circuit lowering (#1514) made them
-        /// redundant before they were ever bound. See
-        /// <c>docs/generated-code-operator-ledger.md</c>.</remarks>
+        /// <inheritdoc cref="And(bool?, Lazy{bool?})" path="/remarks"/>
         bool?                                    Implies(Lazy<bool?> left, Lazy<bool?> right);
         bool?                                    In<T>(T? t, CqlInterval<T>? interval,string? precision);
         bool?                                    In<T>(T? element, IEnumerable<T?>? argument);
@@ -353,15 +350,14 @@ namespace Hl7.Cql.Operators
         /// <para><strong>Important</strong>: Although the CQL specification states this operator returns non-nullable Boolean,
         /// the interface uses <c>bool?</c> for consistency with the binding system. The implementation always returns
         /// a non-null value (true or false), which is then boxed to <c>bool?</c>. If the argument is null, returns false.</para>
+        /// <para>As of code generator 5.3.0.0, generated C# no longer calls this method: CQL
+        /// <c>is false</c> lowers to the <c>is false</c> constant pattern, which produces the
+        /// non-nullable <c>bool</c> the paragraph above describes (#1514). It remains on this
+        /// interface for libraries generated before 5.3.0.0 and as the reference implementation the
+        /// lowering is tested against — see <c>docs/generated-code-operator-ledger.md</c> for the
+        /// retirement policy.</para>
         /// </remarks>
         /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#isfalse">CQL Specification §9.B - IsFalse</seealso>
-        /// <remarks>As of code generator 5.3.0.0, generated C# no longer calls this method: CQL
-        /// <c>is false</c> lowers to the <c>is false</c> constant pattern (#1514). Note this
-        /// member returns <c>bool?</c> for operator-binding uniformity even though it never
-        /// returns null (spec §9.B); the lowering produces a non-nullable <c>bool</c>. It remains
-        /// on this interface for libraries generated before 5.3.0.0 and as the reference
-        /// implementation the lowering is tested against — see
-        /// <c>docs/generated-code-operator-ledger.md</c> for the retirement policy.</remarks>
         bool?                                    IsFalse(bool? b);
 
         /// <summary>
@@ -394,15 +390,14 @@ namespace Hl7.Cql.Operators
         /// <para><strong>Important</strong>: Although the CQL specification states this operator returns non-nullable Boolean,
         /// the interface uses <c>bool?</c> for consistency with the binding system. The implementation always returns
         /// a non-null value (true or false), which is then boxed to <c>bool?</c>. If the argument is null, returns false.</para>
+        /// <para>As of code generator 5.3.0.0, generated C# no longer calls this method: CQL
+        /// <c>is true</c> lowers to the <c>is true</c> constant pattern, which produces the
+        /// non-nullable <c>bool</c> the paragraph above describes (#1514). It remains on this
+        /// interface for libraries generated before 5.3.0.0 and as the reference implementation the
+        /// lowering is tested against — see <c>docs/generated-code-operator-ledger.md</c> for the
+        /// retirement policy.</para>
         /// </remarks>
         /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#istrue">CQL Specification §9.B - IsTrue</seealso>
-        /// <remarks>As of code generator 5.3.0.0, generated C# no longer calls this method: CQL
-        /// <c>is true</c> lowers to the <c>is true</c> constant pattern (#1514). Note this member
-        /// returns <c>bool?</c> for operator-binding uniformity even though it never returns null
-        /// (spec §9.B); the lowering produces a non-nullable <c>bool</c>. It remains on this
-        /// interface for libraries generated before 5.3.0.0 and as the reference implementation
-        /// the lowering is tested against — see
-        /// <c>docs/generated-code-operator-ledger.md</c> for the retirement policy.</remarks>
         bool?                                    IsTrue(bool? b);
         T?                                       Last<T>(IEnumerable<T> enumerable);
         int?                                     LastPositionOf(string? argument, string? pattern);
@@ -657,7 +652,7 @@ namespace Hl7.Cql.Operators
         /// implementation the lowering is tested against — see
         /// <c>docs/generated-code-operator-ledger.md</c> for the retirement policy.</remarks>
         bool?                                    Xor(bool? left, bool? right);
-        /// <inheritdoc cref="Implies(Lazy{bool?}, Lazy{bool?})" path="/remarks"/>
+        /// <inheritdoc cref="And(bool?, Lazy{bool?})" path="/remarks"/>
         bool?                                    Xor(Lazy<bool?> left, Lazy<bool?> right);
 
         // @formatter on

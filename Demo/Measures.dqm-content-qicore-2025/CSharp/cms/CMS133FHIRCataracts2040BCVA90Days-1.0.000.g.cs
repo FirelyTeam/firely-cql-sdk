@@ -325,42 +325,28 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
             bool l_ = k_ is CqlDateTime;
             if (l_)
             {
-                DataType m_ = CataractSurgery?.Performed;
-                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                f_ = n_ as CqlDateTime;
+                f_ = k_ as CqlDateTime;
             }
             else
             {
-                DataType o_ = CataractSurgery?.Performed;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                bool q_ = p_ is CqlQuantity;
-                if (q_)
+                bool m_ = k_ is CqlQuantity;
+                if (m_)
                 {
-                    DataType r_ = CataractSurgery?.Performed;
-                    object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                    f_ = s_ as CqlQuantity;
+                    f_ = k_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType t_ = CataractSurgery?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    bool v_ = u_ is CqlInterval<CqlDateTime>;
-                    if (v_)
+                    bool n_ = k_ is CqlInterval<CqlDateTime>;
+                    if (n_)
                     {
-                        DataType w_ = CataractSurgery?.Performed;
-                        object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                        f_ = x_ as CqlInterval<CqlDateTime>;
+                        f_ = k_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType y_ = CataractSurgery?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        bool aa_ = z_ is CqlInterval<CqlQuantity>;
-                        if (aa_)
+                        bool o_ = k_ is CqlInterval<CqlQuantity>;
+                        if (o_)
                         {
-                            DataType ab_ = CataractSurgery?.Performed;
-                            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                            f_ = ac_ as CqlInterval<CqlQuantity>;
+                            f_ = k_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -379,63 +365,49 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
             }
             else
             {
-                object ad_;
-                DataType ak_ = CataractSurgery?.Performed;
-                object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                bool am_ = al_ is CqlDateTime;
-                if (am_)
+                object p_;
+                DataType w_ = CataractSurgery?.Performed;
+                object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                bool y_ = x_ is CqlDateTime;
+                if (y_)
                 {
-                    DataType an_ = CataractSurgery?.Performed;
-                    object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                    ad_ = ao_ as CqlDateTime;
+                    p_ = x_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ap_ = CataractSurgery?.Performed;
-                    object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                    bool ar_ = aq_ is CqlQuantity;
-                    if (ar_)
+                    bool z_ = x_ is CqlQuantity;
+                    if (z_)
                     {
-                        DataType as_ = CataractSurgery?.Performed;
-                        object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
-                        ad_ = at_ as CqlQuantity;
+                        p_ = x_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType au_ = CataractSurgery?.Performed;
-                        object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                        bool aw_ = av_ is CqlInterval<CqlDateTime>;
-                        if (aw_)
+                        bool aa_ = x_ is CqlInterval<CqlDateTime>;
+                        if (aa_)
                         {
-                            DataType ax_ = CataractSurgery?.Performed;
-                            object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
-                            ad_ = ay_ as CqlInterval<CqlDateTime>;
+                            p_ = x_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType az_ = CataractSurgery?.Performed;
-                            object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                            bool bb_ = ba_ is CqlInterval<CqlQuantity>;
-                            if (bb_)
+                            bool ab_ = x_ is CqlInterval<CqlQuantity>;
+                            if (ab_)
                             {
-                                DataType bc_ = CataractSurgery?.Performed;
-                                object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
-                                ad_ = bd_ as CqlInterval<CqlQuantity>;
+                                p_ = x_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                ad_ = null;
+                                p_ = null;
                             }
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> ae_ = QICoreCommon_4_0_000.Instance.toInterval(context, ad_);
-                CqlDateTime af_ = context.Operators.Start(ae_);
-                CqlDateTime ag_ = context.Operators.End(e_);
-                CqlQuantity ah_ = context.Operators.Quantity(92m, "days");
-                CqlDateTime ai_ = context.Operators.Subtract(ag_, ah_);
-                bool? aj_ = context.Operators.SameOrBefore(af_, ai_, "day");
-                i_ = h_ & aj_;
+                CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_);
+                CqlDateTime r_ = context.Operators.Start(q_);
+                CqlDateTime s_ = context.Operators.End(e_);
+                CqlQuantity t_ = context.Operators.Quantity(92m, "days");
+                CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+                bool? v_ = context.Operators.SameOrBefore(r_, u_, "day");
+                i_ = h_ & v_;
             }
             // CQL 'and' (86:5-88:46): right operand skipped when left is false
             if (i_ is false)
@@ -444,11 +416,11 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
             }
             else
             {
-                Code<EventStatus> be_ = CataractSurgery?.StatusElement;
-                EventStatus? bf_ = be_?.Value;
-                string bg_ = context.Operators.Convert<string>(bf_);
-                bool? bh_ = context.Operators.Equal(bg_, "completed");
-                return i_ & bh_;
+                Code<EventStatus> ac_ = CataractSurgery?.StatusElement;
+                EventStatus? ad_ = ac_?.Value;
+                string ae_ = context.Operators.Convert<string>(ad_);
+                bool? af_ = context.Operators.Equal(ae_, "completed");
+                return i_ & af_;
             }
         }
 
@@ -554,7 +526,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 bool? r_ = context.Operators.Equivalent(b_, q_);
                 i_ = h_ | r_;
             }
-            return /* CQL 'implies' (277:3-281:3) */ !c_ | i_;
+            return !c_ | i_;
         }
     }
 
@@ -853,42 +825,28 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 bool jz_ = jy_ is CqlDateTime;
                 if (jz_)
                 {
-                    DataType ka_ = CataractSurgeryPerformed?.Performed;
-                    object kb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ka_);
-                    ju_ = kb_ as CqlDateTime;
+                    ju_ = jy_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType kc_ = CataractSurgeryPerformed?.Performed;
-                    object kd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kc_);
-                    bool ke_ = kd_ is CqlQuantity;
-                    if (ke_)
+                    bool ka_ = jy_ is CqlQuantity;
+                    if (ka_)
                     {
-                        DataType kf_ = CataractSurgeryPerformed?.Performed;
-                        object kg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kf_);
-                        ju_ = kg_ as CqlQuantity;
+                        ju_ = jy_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType kh_ = CataractSurgeryPerformed?.Performed;
-                        object ki_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kh_);
-                        bool kj_ = ki_ is CqlInterval<CqlDateTime>;
-                        if (kj_)
+                        bool kb_ = jy_ is CqlInterval<CqlDateTime>;
+                        if (kb_)
                         {
-                            DataType kk_ = CataractSurgeryPerformed?.Performed;
-                            object kl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kk_);
-                            ju_ = kl_ as CqlInterval<CqlDateTime>;
+                            ju_ = jy_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType km_ = CataractSurgeryPerformed?.Performed;
-                            object kn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, km_);
-                            bool ko_ = kn_ is CqlInterval<CqlQuantity>;
-                            if (ko_)
+                            bool kc_ = jy_ is CqlInterval<CqlQuantity>;
+                            if (kc_)
                             {
-                                DataType kp_ = CataractSurgeryPerformed?.Performed;
-                                object kq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kp_);
-                                ju_ = kq_ as CqlInterval<CqlQuantity>;
+                                ju_ = jy_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -906,8 +864,8 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 }
                 else
                 {
-                    bool? kr_ = this.isVerified(context, ComorbidDiagnosis);
-                    return jw_ & kr_;
+                    bool? kd_ = this.isVerified(context, ComorbidDiagnosis);
+                    return jw_ & kd_;
                 }
             }
 
@@ -962,42 +920,28 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 bool ad_ = ac_ is CqlDateTime;
                 if (ad_)
                 {
-                    DataType ae_ = CataractSurgeryPerformed?.Performed;
-                    object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                    p_ = af_ as CqlDateTime;
+                    p_ = ac_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ag_ = CataractSurgeryPerformed?.Performed;
-                    object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                    bool ai_ = ah_ is CqlQuantity;
-                    if (ai_)
+                    bool ae_ = ac_ is CqlQuantity;
+                    if (ae_)
                     {
-                        DataType aj_ = CataractSurgeryPerformed?.Performed;
-                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        p_ = ak_ as CqlQuantity;
+                        p_ = ac_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType al_ = CataractSurgeryPerformed?.Performed;
-                        object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        bool an_ = am_ is CqlInterval<CqlDateTime>;
-                        if (an_)
+                        bool af_ = ac_ is CqlInterval<CqlDateTime>;
+                        if (af_)
                         {
-                            DataType ao_ = CataractSurgeryPerformed?.Performed;
-                            object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                            p_ = ap_ as CqlInterval<CqlDateTime>;
+                            p_ = ac_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType aq_ = CataractSurgeryPerformed?.Performed;
-                            object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                            bool as_ = ar_ is CqlInterval<CqlQuantity>;
-                            if (as_)
+                            bool ag_ = ac_ is CqlInterval<CqlQuantity>;
+                            if (ag_)
                             {
-                                DataType at_ = CataractSurgeryPerformed?.Performed;
-                                object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                                p_ = au_ as CqlInterval<CqlQuantity>;
+                                p_ = ac_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -1009,47 +953,33 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_);
                 CqlDateTime r_ = context.Operators.End(q_);
                 object s_;
-                DataType av_ = CataractSurgeryPerformed?.Performed;
-                object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                bool ax_ = aw_ is CqlDateTime;
-                if (ax_)
+                DataType ah_ = CataractSurgeryPerformed?.Performed;
+                object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                bool aj_ = ai_ is CqlDateTime;
+                if (aj_)
                 {
-                    DataType ay_ = CataractSurgeryPerformed?.Performed;
-                    object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                    s_ = az_ as CqlDateTime;
+                    s_ = ai_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ba_ = CataractSurgeryPerformed?.Performed;
-                    object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                    bool bc_ = bb_ is CqlQuantity;
-                    if (bc_)
+                    bool ak_ = ai_ is CqlQuantity;
+                    if (ak_)
                     {
-                        DataType bd_ = CataractSurgeryPerformed?.Performed;
-                        object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                        s_ = be_ as CqlQuantity;
+                        s_ = ai_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType bf_ = CataractSurgeryPerformed?.Performed;
-                        object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
-                        bool bh_ = bg_ is CqlInterval<CqlDateTime>;
-                        if (bh_)
+                        bool al_ = ai_ is CqlInterval<CqlDateTime>;
+                        if (al_)
                         {
-                            DataType bi_ = CataractSurgeryPerformed?.Performed;
-                            object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
-                            s_ = bj_ as CqlInterval<CqlDateTime>;
+                            s_ = ai_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType bk_ = CataractSurgeryPerformed?.Performed;
-                            object bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                            bool bm_ = bl_ is CqlInterval<CqlQuantity>;
-                            if (bm_)
+                            bool am_ = ai_ is CqlInterval<CqlQuantity>;
+                            if (am_)
                             {
-                                DataType bn_ = CataractSurgeryPerformed?.Performed;
-                                object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                                s_ = bo_ as CqlInterval<CqlQuantity>;
+                                s_ = ai_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -1072,59 +1002,45 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 }
                 else
                 {
-                    object bp_;
-                    DataType bs_ = CataractSurgeryPerformed?.Performed;
-                    object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                    bool bu_ = bt_ is CqlDateTime;
-                    if (bu_)
+                    object an_;
+                    DataType aq_ = CataractSurgeryPerformed?.Performed;
+                    object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
+                    bool as_ = ar_ is CqlDateTime;
+                    if (as_)
                     {
-                        DataType bv_ = CataractSurgeryPerformed?.Performed;
-                        object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                        bp_ = bw_ as CqlDateTime;
+                        an_ = ar_ as CqlDateTime;
                     }
                     else
                     {
-                        DataType bx_ = CataractSurgeryPerformed?.Performed;
-                        object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                        bool bz_ = by_ is CqlQuantity;
-                        if (bz_)
+                        bool at_ = ar_ is CqlQuantity;
+                        if (at_)
                         {
-                            DataType ca_ = CataractSurgeryPerformed?.Performed;
-                            object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                            bp_ = cb_ as CqlQuantity;
+                            an_ = ar_ as CqlQuantity;
                         }
                         else
                         {
-                            DataType cc_ = CataractSurgeryPerformed?.Performed;
-                            object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
-                            bool ce_ = cd_ is CqlInterval<CqlDateTime>;
-                            if (ce_)
+                            bool au_ = ar_ is CqlInterval<CqlDateTime>;
+                            if (au_)
                             {
-                                DataType cf_ = CataractSurgeryPerformed?.Performed;
-                                object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                                bp_ = cg_ as CqlInterval<CqlDateTime>;
+                                an_ = ar_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
-                                DataType ch_ = CataractSurgeryPerformed?.Performed;
-                                object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                                bool cj_ = ci_ is CqlInterval<CqlQuantity>;
-                                if (cj_)
+                                bool av_ = ar_ is CqlInterval<CqlQuantity>;
+                                if (av_)
                                 {
-                                    DataType ck_ = CataractSurgeryPerformed?.Performed;
-                                    object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
-                                    bp_ = cl_ as CqlInterval<CqlQuantity>;
+                                    an_ = ar_ as CqlInterval<CqlQuantity>;
                                 }
                                 else
                                 {
-                                    bp_ = null;
+                                    an_ = null;
                                 }
                             }
                         }
                     }
-                    CqlInterval<CqlDateTime> bq_ = QICoreCommon_4_0_000.Instance.toInterval(context, bp_);
-                    CqlDateTime br_ = context.Operators.End(bq_);
-                    z_ = y_ & (!((bool?)(br_ is null)));
+                    CqlInterval<CqlDateTime> ao_ = QICoreCommon_4_0_000.Instance.toInterval(context, an_);
+                    CqlDateTime ap_ = context.Operators.End(ao_);
+                    z_ = y_ & (!((bool?)(ap_ is null)));
                 }
                 bool? aa_;
                 // CQL 'and' (267:17-268:83): right operand skipped when left is false
@@ -1134,16 +1050,16 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 }
                 else
                 {
-                    Code<ObservationStatus> cm_ = VisualAcuityExamPerformed?.StatusElement;
-                    ObservationStatus? cn_ = cm_?.Value;
-                    string co_ = context.Operators.Convert<string>(cn_);
-                    string[] cp_ = [
+                    Code<ObservationStatus> aw_ = VisualAcuityExamPerformed?.StatusElement;
+                    ObservationStatus? ax_ = aw_?.Value;
+                    string ay_ = context.Operators.Convert<string>(ax_);
+                    string[] az_ = [
                         "final",
                         "amended",
                         "corrected",
                     ];
-                    bool? cq_ = context.Operators.In<string>(co_, (IEnumerable<string>)cp_);
-                    aa_ = z_ & cq_;
+                    bool? ba_ = context.Operators.In<string>(ay_, (IEnumerable<string>)az_);
+                    aa_ = z_ & ba_;
                 }
                 // CQL 'and' (267:17-269:89): right operand skipped when left is false
                 if (aa_ is false)
@@ -1152,11 +1068,11 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 }
                 else
                 {
-                    DataType cr_ = VisualAcuityExamPerformed?.Value;
-                    object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                    CqlValueSet ct_ = this.Visual_Acuity_20_40_or_Better(context);
-                    bool? cu_ = context.Operators.ConceptInValueSet(cs_ as CqlConcept, ct_);
-                    return aa_ & cu_;
+                    DataType bb_ = VisualAcuityExamPerformed?.Value;
+                    object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
+                    CqlValueSet bd_ = this.Visual_Acuity_20_40_or_Better(context);
+                    bool? be_ = context.Operators.ConceptInValueSet(bc_ as CqlConcept, bd_);
+                    return aa_ & be_;
                 }
             }
 

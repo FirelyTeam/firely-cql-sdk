@@ -364,7 +364,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                 bool? r_ = context.Operators.Equivalent(b_, q_);
                 i_ = h_ | r_;
             }
-            return /* CQL 'implies' (87:3-91:3) */ !c_ | i_;
+            return !c_ | i_;
         }
     }
 
