@@ -1,1 +1,20 @@
 #nullable enable
+Hl7.Cql.Primitives.CqlBoolean
+Hl7.Cql.Primitives.CqlBoolean.CqlBoolean() -> void
+Hl7.Cql.Primitives.CqlBoolean.Equals(Hl7.Cql.Primitives.CqlBoolean other) -> bool
+Hl7.Cql.Primitives.CqlBoolean.HasValue.get -> bool
+override Hl7.Cql.Primitives.CqlBoolean.Equals(object? obj) -> bool
+override Hl7.Cql.Primitives.CqlBoolean.GetHashCode() -> int
+override Hl7.Cql.Primitives.CqlBoolean.ToString() -> string!
+static Hl7.Cql.Primitives.CqlBoolean.implicit operator Hl7.Cql.Primitives.CqlBoolean(bool value) -> Hl7.Cql.Primitives.CqlBoolean
+static Hl7.Cql.Primitives.CqlBoolean.implicit operator Hl7.Cql.Primitives.CqlBoolean(bool? value) -> Hl7.Cql.Primitives.CqlBoolean
+static Hl7.Cql.Primitives.CqlBoolean.implicit operator bool?(Hl7.Cql.Primitives.CqlBoolean value) -> bool?
+static Hl7.Cql.Primitives.CqlBoolean.operator !(Hl7.Cql.Primitives.CqlBoolean value) -> Hl7.Cql.Primitives.CqlBoolean
+static Hl7.Cql.Primitives.CqlBoolean.operator &(Hl7.Cql.Primitives.CqlBoolean left, Hl7.Cql.Primitives.CqlBoolean right) -> Hl7.Cql.Primitives.CqlBoolean
+static Hl7.Cql.Primitives.CqlBoolean.operator ^(Hl7.Cql.Primitives.CqlBoolean left, Hl7.Cql.Primitives.CqlBoolean right) -> Hl7.Cql.Primitives.CqlBoolean
+static Hl7.Cql.Primitives.CqlBoolean.operator false(Hl7.Cql.Primitives.CqlBoolean value) -> bool
+static Hl7.Cql.Primitives.CqlBoolean.operator true(Hl7.Cql.Primitives.CqlBoolean value) -> bool
+static Hl7.Cql.Primitives.CqlBoolean.operator |(Hl7.Cql.Primitives.CqlBoolean left, Hl7.Cql.Primitives.CqlBoolean right) -> Hl7.Cql.Primitives.CqlBoolean
+static readonly Hl7.Cql.Primitives.CqlBoolean.False -> Hl7.Cql.Primitives.CqlBoolean
+static readonly Hl7.Cql.Primitives.CqlBoolean.Null -> Hl7.Cql.Primitives.CqlBoolean
+static readonly Hl7.Cql.Primitives.CqlBoolean.True -> Hl7.Cql.Primitives.CqlBoolean
