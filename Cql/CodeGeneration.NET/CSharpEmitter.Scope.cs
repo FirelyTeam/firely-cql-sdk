@@ -417,12 +417,19 @@ internal partial class CSharpEmitter
             // Locals resolve by reference identity through the emitter-wide name map, so
             // nested branch scopes see the binding. CAUTION: the binding is a single mutable
             // slot. Re-linearizing the SAME CodeLet instance is safe only when every read of
-            // the binding happens after the rebind that produced it — true for eager bodies
-            // and for sequential renders that re-run LinearizeLet themselves, but NOT for a
-            // deferred chain render whose body was bound earlier and whose read happens after
-            // a different scope rebound the local (a builder currently never shares CodeLet
-            // instances; query-let splicing could — see the follow-up issue from #1565's
-            // review before introducing sharing).
+            // the binding happens after the rebind that produced it — true for eager bodies,
+            // for sequential renders that re-run LinearizeLet themselves, and for a repeat
+            // within one scope (dedup hands back the same atom, so the rebind is a no-op) —
+            // but NOT for a deferred chain render queued before another scope rebound the
+            // local, which would then print a name declared inside that other scope (CS0103).
+            //
+            // Sharing needs no code change to become reachable, so do not rely on "the builder
+            // makes a fresh CodeLet per ELM node" as protection: CodeBuilderContext.Query.cs
+            // translates a query let's expression ONCE and splices that instance at every
+            // QueryLetRef, so `let f: (X and Y) ... where f ... return f` shares this guard's
+            // CodeLet across both references. What keeps it latent is only that no corpus
+            // writes a query let over an and/or — CQL input, not SDK code, is all it takes.
+            // Design options (occurrence-scoped bindings, cloning on splice) are in #1566.
             _emitter._assignedNames[let.Local] = valueAtom.Code;
             return Linearize(let.Body, tailPosition);
         }
