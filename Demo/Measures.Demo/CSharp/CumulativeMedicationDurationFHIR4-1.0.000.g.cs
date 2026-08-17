@@ -544,7 +544,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, i_ as Period);
             CqlDateTime k_ = context.Operators.End(j_);
 
-            bool? l_() {
+            CqlBoolean l_() {
                 List<Dosage> m_ = R?.DosageInstruction;
                 Dosage n_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)m_);
                 Timing o_ = n_?.Timing;
@@ -554,11 +554,11 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 CqlDateTime s_ = context.Operators.End(r_);
                 CqlDateTime t_ = context.Operators.MaxValue<CqlDateTime>();
                 bool? u_ = context.Operators.Equal(s_, t_);
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
             if ((!((bool?)(/* CQL 'or' (177:14-177:84) */ ((CqlBoolean)((bool?)(k_ is null))
-                || (CqlBoolean)l_())))) ?? false)
+                || l_())))) ?? false)
             {
                 CqlDateTime v_ = context.Operators.Start(j_);
                 MedicationRequest.DispenseRequestComponent w_ = R?.DispenseRequest;
@@ -697,15 +697,15 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, e_ as Period);
             CqlDateTime g_ = context.Operators.Start(f_);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 DataType i_ = Administration?.Medication;
                 CqlConcept j_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, i_ as CodeableConcept);
                 CqlQuantity k_ = this.TherapeuticDuration(context, j_);
-                return (bool?)((CqlBoolean)(!((bool?)(k_ is null))));
+                return !((bool?)(k_ is null));
             }
 
             if (((bool?)(/* CQL 'and' (312:10-312:66) */ ((CqlBoolean)(!((bool?)(g_ is null)))
-                && (CqlBoolean)h_()))) ?? false)
+                && h_()))) ?? false)
             {
                 DataType l_ = Administration?.Medication;
                 CqlConcept m_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, l_ as CodeableConcept);

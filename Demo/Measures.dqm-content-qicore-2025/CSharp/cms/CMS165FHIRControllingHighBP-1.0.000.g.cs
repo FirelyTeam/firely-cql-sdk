@@ -168,22 +168,22 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
         CqlInterval<int?> i_ = context.Operators.Interval(18, 85, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
-        bool? k_() {
+        CqlBoolean k_() {
             IEnumerable<Condition> m_ = this.Essential_Hypertension_Diagnosis(context);
             bool? n_ = context.Operators.Exists<Condition>(m_);
-            return (bool?)((CqlBoolean)n_);
+            return n_;
         }
 
 
-        bool? l_() {
+        CqlBoolean l_() {
             IEnumerable<Encounter> o_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
             bool? p_ = context.Operators.Exists<Encounter>(o_);
-            return (bool?)((CqlBoolean)p_);
+            return p_;
         }
 
         return (bool?)(/* CQL 'and' (36:3-40:64) */ (/* CQL 'and' (36:3-39:49) */ ((CqlBoolean)j_
-            && (CqlBoolean)k_())
-            && (CqlBoolean)l_()));
+            && k_())
+            && l_()));
     }
 
 
@@ -343,30 +343,30 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
 
-        bool? b_() {
+        CqlBoolean b_() {
             IEnumerable<Condition> e_ = this.Pregnancy_or_Renal_Diagnosis(context);
             bool? f_ = context.Operators.Exists<Condition>(e_);
-            return (bool?)((CqlBoolean)f_);
+            return f_;
         }
 
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Procedure> g_ = this.End_Stage_Renal_Disease_Procedures(context);
             bool? h_ = context.Operators.Exists<Procedure>(g_);
-            return (bool?)((CqlBoolean)h_);
+            return h_;
         }
 
 
-        bool? d_() {
+        CqlBoolean d_() {
             IEnumerable<Encounter> i_ = this.End_Stage_Renal_Disease_Encounter(context);
             bool? j_ = context.Operators.Exists<Encounter>(i_);
-            return (bool?)((CqlBoolean)j_);
+            return j_;
         }
 
         return (bool?)(/* CQL 'or' (52:3-58:69) */ (/* CQL 'or' (52:3-57:74) */ (/* CQL 'or' (52:3-56:105) */ (/* CQL 'or' (52:3-55:53) */ (/* CQL 'or' (52:3-54:54) */ (/* CQL 'or' (52:3-53:48) */ ((CqlBoolean)a_
-            || (CqlBoolean)b_())
-            || (CqlBoolean)c_())
-            || (CqlBoolean)d_())
+            || b_())
+            || c_())
+            || d_())
             || (CqlBoolean)(AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(context)))
             || (CqlBoolean)(AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context)))
             || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))));
@@ -456,17 +456,17 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             ];
             bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
 
-            bool? aj_() {
+            CqlBoolean aj_() {
                 DataType ak_ = BloodPressure?.Effective;
                 object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                 CqlDateTime am_ = QICoreCommon_4_0_000.Instance.latest(context, al_);
                 CqlInterval<CqlDateTime> an_ = this.Measurement_Period(context);
                 bool? ao_ = context.Operators.In<CqlDateTime>(am_, an_, "day");
-                return (bool?)((CqlBoolean)ao_);
+                return ao_;
             }
 
             return (bool?)(/* CQL 'and' (121:9-122:83) */ ((CqlBoolean)!ai_
-                && (CqlBoolean)aj_()));
+                && aj_()));
         }
 
         IEnumerable<Observation> h_ = context.Operators.Where<Observation>(b_, g_);

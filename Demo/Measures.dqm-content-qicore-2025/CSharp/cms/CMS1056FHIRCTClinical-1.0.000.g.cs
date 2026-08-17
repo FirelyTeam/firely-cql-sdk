@@ -150,18 +150,18 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
             ];
             bool? j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
 
-            bool? k_() {
+            CqlBoolean k_() {
                 DataType m_ = CTScanResult?.Effective;
                 object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
                 CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
                 CqlDateTime p_ = context.Operators.End(o_);
                 CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
                 bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
-                return (bool?)((CqlBoolean)r_);
+                return r_;
             }
 
 
-            bool? l_() {
+            CqlBoolean l_() {
                 Patient s_ = this.Patient(context);
                 Date t_ = s_?.BirthDateElement;
                 string u_ = t_?.Value;
@@ -171,12 +171,12 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
                 CqlDate y_ = context.Operators.DateFrom(x_);
                 int? z_ = context.Operators.CalculateAgeAt(v_, y_, "year");
                 bool? aa_ = context.Operators.GreaterOrEqual(z_, 18);
-                return (bool?)((CqlBoolean)aa_);
+                return aa_;
             }
 
             return (bool?)(/* CQL 'and' (35:5-37:73) */ (/* CQL 'and' (35:11-36:87) */ ((CqlBoolean)j_
-                && (CqlBoolean)k_())
-                && (CqlBoolean)l_()));
+                && k_())
+                && l_()));
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -197,15 +197,15 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
         bool? b_(Observation CTScan) {
             decimal? d_ = AlaraCommonFunctions_1_10_000.Instance.globalNoiseValue(context, CTScan);
 
-            bool? e_() {
+            CqlBoolean e_() {
                 DataType f_ = CTScan?.Value;
                 object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-                return (bool?)((CqlBoolean)(!((bool?)(g_ is null))));
+                return !((bool?)(g_ is null));
             }
 
             return (bool?)(/* CQL 'and' (41:5-43:34) */ (/* CQL 'and' (41:11-42:50) */ ((CqlBoolean)(!((bool?)(d_ is null)))
                 && (CqlBoolean)(!((bool?)((AlaraCommonFunctions_1_10_000.Instance.sizeAdjustedValue(context, CTScan)) is null))))
-                && (CqlBoolean)e_()));
+                && e_()));
         }
 
         IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);

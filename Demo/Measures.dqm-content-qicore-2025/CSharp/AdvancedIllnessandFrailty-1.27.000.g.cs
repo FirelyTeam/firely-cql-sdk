@@ -134,7 +134,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
 
         bool? f_ = context.Operators.WhereAny<DeviceRequest>(d_, e_);
 
-        bool? g_() {
+        CqlBoolean g_() {
             CqlCode p_ = this.Medical_equipment_used(context);
             IEnumerable<CqlCode> q_ = context.Operators.ToList<CqlCode>(p_);
             IEnumerable<Observation> r_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, q_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -146,26 +146,26 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                 CqlValueSet x_ = this.Frailty_Device(context);
                 bool? y_ = context.Operators.ConceptInValueSet(w_ as CqlConcept, x_);
 
-                bool? z_() {
+                CqlBoolean z_() {
                     DataType aa_ = EquipmentUsed?.Effective;
                     object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                     CqlInterval<CqlDateTime> ac_ = QICoreCommon_4_0_000.Instance.toInterval(context, ab_);
                     CqlDateTime ad_ = context.Operators.End(ac_);
                     CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
                     bool? af_ = context.Operators.In<CqlDateTime>(ad_, ae_, "day");
-                    return (bool?)((CqlBoolean)af_);
+                    return af_;
                 }
 
                 return (bool?)(/* CQL 'and' (51:9-52:88) */ ((CqlBoolean)y_
-                    && (CqlBoolean)z_()));
+                    && z_()));
             }
 
             bool? u_ = context.Operators.WhereAny<Observation>(s_, t_);
-            return (bool?)((CqlBoolean)u_);
+            return u_;
         }
 
 
-        bool? h_() {
+        CqlBoolean h_() {
             CqlValueSet ag_ = this.Frailty_Diagnosis(context);
             IEnumerable<Condition> ah_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> ai_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -180,11 +180,11 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             }
 
             bool? am_ = context.Operators.WhereAny<Condition>(ak_, al_);
-            return (bool?)((CqlBoolean)am_);
+            return am_;
         }
 
 
-        bool? i_() {
+        CqlBoolean i_() {
             CqlValueSet aq_ = this.Frailty_Encounter(context);
             IEnumerable<Encounter> ar_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             IEnumerable<Encounter> as_ = Status_1_15_000.Instance.isEncounterPerformed(context, ar_);
@@ -198,11 +198,11 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             }
 
             bool? au_ = context.Operators.WhereAny<Encounter>(as_, at_);
-            return (bool?)((CqlBoolean)au_);
+            return au_;
         }
 
 
-        bool? j_() {
+        CqlBoolean j_() {
             CqlValueSet az_ = this.Frailty_Symptom(context);
             IEnumerable<Observation> ba_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, az_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation"));
             IEnumerable<Observation> bb_ = Status_1_15_000.Instance.isSymptom(context, ba_);
@@ -217,14 +217,14 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             }
 
             bool? bd_ = context.Operators.WhereAny<Observation>(bb_, bc_);
-            return (bool?)((CqlBoolean)bd_);
+            return bd_;
         }
 
         return (bool?)(/* CQL 'or' (47:3-63:5) */ (/* CQL 'or' (47:3-60:5) */ (/* CQL 'or' (47:3-57:5) */ (/* CQL 'or' (47:3-53:5) */ ((CqlBoolean)f_
-            || (CqlBoolean)g_())
-            || (CqlBoolean)h_())
-            || (CqlBoolean)i_())
-            || (CqlBoolean)j_()));
+            || g_())
+            || h_())
+            || i_())
+            || j_()));
     }
 
 
@@ -280,16 +280,16 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                 string p_ = context.Operators.Last<string>(o_);
                 bool? q_ = context.Operators.Equal(m_, p_);
 
-                bool? r_() {
+                CqlBoolean r_() {
                     CodeableConcept s_ = M?.Code;
                     CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                     CqlValueSet u_ = this.Dementia_Medications(context);
                     bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                    return (bool?)((CqlBoolean)v_);
+                    return v_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)q_
-                    && (CqlBoolean)r_()));
+                    && r_()));
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -344,15 +344,15 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 66);
 
-        bool? j_() {
+        CqlBoolean j_() {
             bool? k_ = this.Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period(context);
-            return (bool?)(/* CQL 'or' (31:9-33:5) */ ((CqlBoolean)k_
-                || (CqlBoolean)(this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(context))));
+            return /* CQL 'or' (31:9-33:5) */ ((CqlBoolean)k_
+                || (CqlBoolean)(this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(context)));
         }
 
         return (bool?)(/* CQL 'and' (29:4-33:5) */ (/* CQL 'and' (29:4-30:41) */ ((CqlBoolean)i_
             && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)))
-            && (CqlBoolean)j_()));
+            && j_()));
     }
 
 
@@ -375,14 +375,14 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
         CqlInterval<int?> i_ = context.Operators.Interval(66, 80, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
-        bool? k_() {
+        CqlBoolean k_() {
             bool? m_ = this.Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period(context);
-            return (bool?)(/* CQL 'or' (38:11-40:7) */ ((CqlBoolean)m_
-                || (CqlBoolean)(this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(context))));
+            return /* CQL 'or' (38:11-40:7) */ ((CqlBoolean)m_
+                || (CqlBoolean)(this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(context)));
         }
 
 
-        bool? l_() {
+        CqlBoolean l_() {
             Patient n_ = this.Patient(context);
             Date o_ = n_?.BirthDateElement;
             string p_ = o_?.Value;
@@ -392,14 +392,14 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             CqlDate t_ = context.Operators.DateFrom(s_);
             int? u_ = context.Operators.CalculateAgeAt(q_, t_, "year");
             bool? v_ = context.Operators.GreaterOrEqual(u_, 81);
-            return (bool?)(/* CQL 'and' (42:8-44:5) */ ((CqlBoolean)v_
-                && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context))));
+            return /* CQL 'and' (42:8-44:5) */ ((CqlBoolean)v_
+                && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)));
         }
 
         return (bool?)(/* CQL 'or' (36:3-44:5) */ (/* CQL 'and' (36:3-41:3) */ (/* CQL 'and' (36:5-37:43) */ ((CqlBoolean)j_
             && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)))
-            && (CqlBoolean)k_())
-            || (CqlBoolean)l_()));
+            && k_())
+            || l_()));
     }
 
 
@@ -421,7 +421,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 66);
 
-        bool? j_() {
+        CqlBoolean j_() {
             CqlCode k_ = this.Housing_status(context);
             IEnumerable<CqlCode> l_ = context.Operators.ToList<CqlCode>(k_);
             IEnumerable<Observation> m_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, l_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -465,11 +465,11 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
 
             IEnumerable<Observation> v_ = context.Operators.Where<Observation>((IEnumerable<Observation>)t_, u_);
             Observation w_ = context.Operators.SingletonFrom<Observation>(v_);
-            return (bool?)((CqlBoolean)(!((bool?)(w_ is null))));
+            return !((bool?)(w_ is null));
         }
 
         return (bool?)(/* CQL 'and' (77:3-87:17) */ ((CqlBoolean)i_
-            && (CqlBoolean)j_()));
+            && j_()));
     }
 
 

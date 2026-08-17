@@ -130,7 +130,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         CqlInterval<int?> i_ = context.Operators.Interval(42, 74, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
-        bool? k_() {
+        CqlBoolean k_() {
             List<Extension> m_;
             Patient s_ = this.Patient(context);
             bool t_ = s_ is DomainResource;
@@ -159,19 +159,19 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             IEnumerable<DataType> p_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)m_, n_, o_);
             DataType q_ = context.Operators.SingletonFrom<DataType>(p_);
             bool? r_ = context.Operators.Equal(q_, "248152002");
-            return (bool?)((CqlBoolean)r_);
+            return r_;
         }
 
 
-        bool? l_() {
+        CqlBoolean l_() {
             IEnumerable<Encounter> y_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
             bool? z_ = context.Operators.Exists<Encounter>(y_);
-            return (bool?)((CqlBoolean)z_);
+            return z_;
         }
 
         return (bool?)(/* CQL 'and' (34:3-38:64) */ (/* CQL 'and' (34:3-37:33) */ ((CqlBoolean)j_
-            && (CqlBoolean)k_())
-            && (CqlBoolean)l_()));
+            && k_())
+            && l_()));
     }
 
 
@@ -524,54 +524,54 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
 
-        bool? b_() {
+        CqlBoolean b_() {
             IEnumerable<Condition> e_ = this.Right_Mastectomy_Diagnosis(context);
             bool? f_ = context.Operators.Exists<Condition>(e_);
 
-            bool? g_() {
+            CqlBoolean g_() {
                 IEnumerable<Procedure> i_ = this.Right_Mastectomy_Procedure(context);
                 bool? j_ = context.Operators.Exists<Procedure>(i_);
-                return (bool?)((CqlBoolean)j_);
+                return j_;
             }
 
 
-            bool? h_() {
+            CqlBoolean h_() {
                 IEnumerable<Condition> k_ = this.Left_Mastectomy_Diagnosis(context);
                 bool? l_ = context.Operators.Exists<Condition>(k_);
 
-                bool? m_() {
+                CqlBoolean m_() {
                     IEnumerable<Procedure> n_ = this.Left_Mastectomy_Procedure(context);
                     bool? o_ = context.Operators.Exists<Procedure>(n_);
-                    return (bool?)((CqlBoolean)o_);
+                    return o_;
                 }
 
-                return (bool?)(/* CQL 'or' (48:13-50:9) */ ((CqlBoolean)l_
-                    || (CqlBoolean)m_()));
+                return /* CQL 'or' (48:13-50:9) */ ((CqlBoolean)l_
+                    || m_());
             }
 
-            return (bool?)(/* CQL 'and' (45:8-51:5) */ (/* CQL 'or' (45:10-47:7) */ ((CqlBoolean)f_
-                || (CqlBoolean)g_())
-                && (CqlBoolean)h_()));
+            return /* CQL 'and' (45:8-51:5) */ (/* CQL 'or' (45:10-47:7) */ ((CqlBoolean)f_
+                || g_())
+                && h_());
         }
 
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Condition> p_ = this.Bilateral_Mastectomy_Diagnosis(context);
             bool? q_ = context.Operators.Exists<Condition>(p_);
-            return (bool?)((CqlBoolean)q_);
+            return q_;
         }
 
 
-        bool? d_() {
+        CqlBoolean d_() {
             IEnumerable<Procedure> r_ = this.Bilateral_Mastectomy_Procedure(context);
             bool? s_ = context.Operators.Exists<Procedure>(r_);
-            return (bool?)((CqlBoolean)s_);
+            return s_;
         }
 
         return (bool?)(/* CQL 'or' (44:3-56:69) */ (/* CQL 'or' (44:3-55:74) */ (/* CQL 'or' (44:3-54:73) */ (/* CQL 'or' (44:3-53:46) */ (/* CQL 'or' (44:3-52:46) */ (/* CQL 'or' (44:3-51:5) */ ((CqlBoolean)a_
-            || (CqlBoolean)b_())
-            || (CqlBoolean)c_())
-            || (CqlBoolean)d_())
+            || b_())
+            || c_())
+            || d_())
             || (CqlBoolean)(AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context)))
             || (CqlBoolean)(AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context)))
             || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))));

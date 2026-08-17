@@ -166,16 +166,16 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
             Code<Encounter.EncounterStatus> v_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(u_);
             bool? w_ = context.Operators.Equal(v_, "finished");
 
-            bool? x_() {
+            CqlBoolean x_() {
                 CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
                 Period z_ = ValidEncounter?.Period;
                 CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
                 bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, "day");
-                return (bool?)((CqlBoolean)ab_);
+                return ab_;
             }
 
             return (bool?)(/* CQL 'and' (62:7-63:68) */ ((CqlBoolean)w_
-                && (CqlBoolean)x_()));
+                && x_()));
         }
 
         bool? s_ = context.Operators.WhereAny<Encounter>(q_, r_);
@@ -288,16 +288,16 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
             ];
             bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
 
-            bool? n_() {
+            CqlBoolean n_() {
                 Code<RequestIntent> p_ = ReferralOrder?.IntentElement;
                 RequestIntent? q_ = p_?.Value;
                 Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
                 bool? s_ = context.Operators.Equal(r_, "order");
-                return (bool?)((CqlBoolean)s_);
+                return s_;
             }
 
 
-            bool? o_() {
+            CqlBoolean o_() {
                 FhirDateTime t_ = ReferralOrder?.AuthoredOnElement;
                 CqlDateTime u_ = context.Operators.Convert<CqlDateTime>(t_);
                 CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
@@ -307,12 +307,12 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 CqlDateTime z_ = context.Operators.ConvertDateToDateTime(y_);
                 CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(w_, z_, true, true);
                 bool? ab_ = context.Operators.In<CqlDateTime>(u_, aa_, "day");
-                return (bool?)((CqlBoolean)ab_);
+                return ab_;
             }
 
             return (bool?)(/* CQL 'and' (80:7-82:145) */ (/* CQL 'and' (80:13-81:42) */ ((CqlBoolean)m_
-                && (CqlBoolean)n_())
-                && (CqlBoolean)o_()));
+                && n_())
+                && o_()));
         }
 
         IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
@@ -431,57 +431,57 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 ResourceReference j_ = ConsultantReportObtained?.Focus;
                 bool? k_ = QICoreCommon_4_0_000.Instance.references(context, j_, FirstReferral);
 
-                bool? l_() {
+                CqlBoolean l_() {
                     List<ResourceReference> q_ = ConsultantReportObtained?.BasedOn;
                     bool? r_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)q_, FirstReferral);
-                    return (bool?)((CqlBoolean)r_);
+                    return r_;
                 }
 
 
-                bool? m_() {
+                CqlBoolean m_() {
                     Period s_ = ConsultantReportObtained?.ExecutionPeriod;
                     CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, s_);
                     CqlDateTime u_ = context.Operators.End(t_);
                     FhirDateTime v_ = FirstReferral?.AuthoredOnElement;
                     CqlDateTime w_ = context.Operators.Convert<CqlDateTime>(v_);
                     bool? x_ = context.Operators.After(u_, w_, (string)default);
-                    return (bool?)((CqlBoolean)x_);
+                    return x_;
                 }
 
 
-                bool? n_() {
+                CqlBoolean n_() {
                     Period y_ = ConsultantReportObtained?.ExecutionPeriod;
                     CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
                     CqlDateTime aa_ = context.Operators.End(z_);
                     CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
                     bool? ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, "day");
-                    return (bool?)((CqlBoolean)ac_);
+                    return ac_;
                 }
 
 
-                bool? o_() {
+                CqlBoolean o_() {
                     Code<Task.TaskStatus> ad_ = ConsultantReportObtained?.StatusElement;
                     Task.TaskStatus? ae_ = ad_?.Value;
                     string af_ = context.Operators.Convert<string>(ae_);
                     bool? ag_ = context.Operators.Equal(af_, "completed");
-                    return (bool?)((CqlBoolean)ag_);
+                    return ag_;
                 }
 
 
-                bool? p_() {
+                CqlBoolean p_() {
                     CodeableConcept ah_ = ConsultantReportObtained?.ReasonCode;
                     CqlConcept ai_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ah_);
                     CqlValueSet aj_ = this.Consultant_Report(context);
                     bool? ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
-                    return (bool?)((CqlBoolean)ak_);
+                    return ak_;
                 }
 
                 return (bool?)(/* CQL 'and' (94:19-100:72) */ (/* CQL 'and' (94:19-99:59) */ (/* CQL 'and' (94:19-98:94) */ (/* CQL 'and' (94:19-97:90) */ (/* CQL 'or' (94:19-96:9) */ ((CqlBoolean)k_
-                    || (CqlBoolean)l_())
-                    && (CqlBoolean)m_())
-                    && (CqlBoolean)n_())
-                    && (CqlBoolean)o_())
-                    && (CqlBoolean)p_()));
+                    || l_())
+                    && m_())
+                    && n_())
+                    && o_())
+                    && p_()));
             }
 
             bool? i_ = context.Operators.WhereAny<ServiceRequest>((IEnumerable<ServiceRequest>)g_, h_);

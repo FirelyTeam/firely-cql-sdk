@@ -257,14 +257,14 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 65);
 
-        bool? j_() {
+        CqlBoolean j_() {
             IEnumerable<Encounter> k_ = this.Qualifying_Encounter(context);
             bool? l_ = context.Operators.Exists<Encounter>(k_);
-            return (bool?)((CqlBoolean)l_);
+            return l_;
         }
 
         return (bool?)(/* CQL 'and' (46:3-47:37) */ ((CqlBoolean)i_
-            && (CqlBoolean)j_()));
+            && j_()));
     }
 
 

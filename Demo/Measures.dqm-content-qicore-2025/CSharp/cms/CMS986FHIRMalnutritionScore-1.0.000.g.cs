@@ -178,7 +178,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
 
-            bool? j_() {
+            CqlBoolean j_() {
                 Patient m_ = this.Patient(context);
                 Date n_ = m_?.BirthDateElement;
                 string o_ = n_?.Value;
@@ -189,33 +189,33 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 CqlDate t_ = context.Operators.DateFrom(s_);
                 int? u_ = context.Operators.CalculateAgeAt(p_, t_, "year");
                 bool? v_ = context.Operators.GreaterOrEqual(u_, 18);
-                return (bool?)((CqlBoolean)v_);
+                return v_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 Period w_ = EncounterInpatient?.Period;
                 CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
                 CqlDateTime y_ = context.Operators.Start(x_);
                 CqlDateTime z_ = context.Operators.End(x_);
                 int? aa_ = context.Operators.DurationBetween(y_, z_, "hour");
                 bool? ab_ = context.Operators.GreaterOrEqual(aa_, 24);
-                return (bool?)((CqlBoolean)ab_);
+                return ab_;
             }
 
 
-            bool? l_() {
+            CqlBoolean l_() {
                 Code<Encounter.EncounterStatus> ac_ = EncounterInpatient?.StatusElement;
                 Encounter.EncounterStatus? ad_ = ac_?.Value;
                 Code<Encounter.EncounterStatus> ae_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ad_);
                 bool? af_ = context.Operators.Equal(ae_, "finished");
-                return (bool?)((CqlBoolean)af_);
+                return af_;
             }
 
             return (bool?)(/* CQL 'and' (47:5-50:48) */ (/* CQL 'and' (47:11-49:66) */ (/* CQL 'and' (47:11-48:74) */ ((CqlBoolean)i_
-                && (CqlBoolean)j_())
-                && (CqlBoolean)k_())
-                && (CqlBoolean)l_()));
+                && j_())
+                && k_())
+                && l_()));
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -283,7 +283,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             ];
             bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
 
-            bool? s_() {
+            CqlBoolean s_() {
                 Code<RequestIntent> t_ = HospiceStatusOrder?.IntentElement;
                 RequestIntent? u_ = t_?.Value;
                 Code<RequestIntent> v_ = context.Operators.Convert<Code<RequestIntent>>(u_);
@@ -296,11 +296,11 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     "instance-order",
                 ];
                 bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
-                return (bool?)((CqlBoolean)y_);
+                return y_;
             }
 
             return (bool?)(/* CQL 'and' (80:7-81:120) */ ((CqlBoolean)r_
-                && (CqlBoolean)s_()));
+                && s_()));
         }
 
 
@@ -442,7 +442,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             ];
             bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
 
-            bool? s_() {
+            CqlBoolean s_() {
                 Code<RequestIntent> t_ = DietitianReferralOrder?.IntentElement;
                 RequestIntent? u_ = t_?.Value;
                 Code<RequestIntent> v_ = context.Operators.Convert<Code<RequestIntent>>(u_);
@@ -455,11 +455,11 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     "instance-order",
                 ];
                 bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
-                return (bool?)((CqlBoolean)y_);
+                return y_;
             }
 
             return (bool?)(/* CQL 'and' (115:7-116:124) */ ((CqlBoolean)r_
-                && (CqlBoolean)s_()));
+                && s_()));
         }
 
 
@@ -588,27 +588,27 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 ];
                 bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
 
-                bool? m_() {
+                CqlBoolean m_() {
                     CqlInterval<CqlDateTime> o_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
                     DataType p_ = MalnutritionRiskScreening?.Effective;
                     object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                     CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
                     bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, (string)default);
-                    return (bool?)((CqlBoolean)s_);
+                    return s_;
                 }
 
 
-                bool? n_() {
+                CqlBoolean n_() {
                     DataType t_ = MalnutritionRiskScreening?.Value;
                     object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                     CqlValueSet v_ = this.Malnutrition_Screening_Finding_of_Not_At_Risk_Result(context);
                     bool? w_ = context.Operators.ConceptInValueSet(u_ as CqlConcept, v_);
-                    return (bool?)((CqlBoolean)w_);
+                    return w_;
                 }
 
                 return (bool?)(/* CQL 'and' (140:17-142:116) */ (/* CQL 'and' (140:17-141:124) */ ((CqlBoolean)l_
-                    && (CqlBoolean)m_())
-                    && (CqlBoolean)n_()));
+                    && m_())
+                    && n_()));
             }
 
             bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -645,27 +645,27 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 ];
                 bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
 
-                bool? m_() {
+                CqlBoolean m_() {
                     CqlInterval<CqlDateTime> o_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
                     DataType p_ = MalnutritionRiskScreening?.Effective;
                     object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                     CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
                     bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, (string)default);
-                    return (bool?)((CqlBoolean)s_);
+                    return s_;
                 }
 
 
-                bool? n_() {
+                CqlBoolean n_() {
                     DataType t_ = MalnutritionRiskScreening?.Value;
                     object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                     CqlValueSet v_ = this.Malnutrition_Screening_Finding_of_At_Risk_Result(context);
                     bool? w_ = context.Operators.ConceptInValueSet(u_ as CqlConcept, v_);
-                    return (bool?)((CqlBoolean)w_);
+                    return w_;
                 }
 
                 return (bool?)(/* CQL 'and' (151:17-153:112) */ (/* CQL 'and' (151:17-152:124) */ ((CqlBoolean)l_
-                    && (CqlBoolean)m_())
-                    && (CqlBoolean)n_()));
+                    && m_())
+                    && n_()));
             }
 
             bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -754,25 +754,25 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             ];
             bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
 
-            bool? m_() {
+            CqlBoolean m_() {
                 CqlInterval<CqlDateTime> o_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
                 DataType p_ = NutritionAssessment?.Effective;
                 object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                 CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
                 bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, (string)default);
-                return (bool?)((CqlBoolean)s_);
+                return s_;
             }
 
 
-            bool? n_() {
+            CqlBoolean n_() {
                 DataType t_ = NutritionAssessment?.Value;
                 object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                return (bool?)((CqlBoolean)(!((bool?)(u_ is null))));
+                return !((bool?)(u_ is null));
             }
 
             return (bool?)(/* CQL 'and' (184:7-186:49) */ (/* CQL 'and' (184:13-185:114) */ ((CqlBoolean)l_
-                && (CqlBoolean)m_())
-                && (CqlBoolean)n_()));
+                && m_())
+                && n_()));
         }
 
 
@@ -840,46 +840,46 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 ];
                 bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
 
-                bool? m_() {
+                CqlBoolean m_() {
                     CqlInterval<CqlDateTime> p_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
                     DataType q_ = NutritionAssessment?.Effective;
                     object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                     CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
                     bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, s_, (string)default);
-                    return (bool?)((CqlBoolean)t_);
+                    return t_;
                 }
 
 
-                bool? n_() {
+                CqlBoolean n_() {
                     DataType u_ = NutritionAssessment?.Value;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                     CqlValueSet w_ = this.Nutrition_Assessment_Status_Finding_of_Well_Nourished_or_Not_Malnourished_or_Mildly_Malnourished(context);
                     bool? x_ = context.Operators.ConceptInValueSet(v_ as CqlConcept, w_);
 
-                    bool? y_() {
+                    CqlBoolean y_() {
                         DataType aa_ = NutritionAssessment?.Value;
                         object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                         CqlValueSet ac_ = this.Nutrition_Assessment_Status_Finding_of_Moderately_Malnourished(context);
                         bool? ad_ = context.Operators.ConceptInValueSet(ab_ as CqlConcept, ac_);
-                        return (bool?)((CqlBoolean)ad_);
+                        return ad_;
                     }
 
 
-                    bool? z_() {
+                    CqlBoolean z_() {
                         DataType ae_ = NutritionAssessment?.Value;
                         object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
                         CqlValueSet ag_ = this.Nutrition_Assessment_Status_Finding_of_Severely_Malnourished(context);
                         bool? ah_ = context.Operators.ConceptInValueSet(af_ as CqlConcept, ag_);
-                        return (bool?)((CqlBoolean)ah_);
+                        return ah_;
                     }
 
-                    return (bool?)(/* CQL 'or' (195:15-198:11) */ (/* CQL 'or' (195:17-196:125) */ ((CqlBoolean)x_
-                        || (CqlBoolean)y_())
-                        || (CqlBoolean)z_()));
+                    return /* CQL 'or' (195:15-198:11) */ (/* CQL 'or' (195:17-196:125) */ ((CqlBoolean)x_
+                        || y_())
+                        || z_());
                 }
 
 
-                bool? o_() {
+                CqlBoolean o_() {
                     object ai_;
                     DataType am_ = NutritionAssessment?.Effective;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
@@ -910,13 +910,13 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     CqlDateTime aj_ = QICoreCommon_4_0_000.Instance.latest(context, ai_);
                     CqlDateTime ak_ = this.Last_Nutrition_Assessment_Day_During_Encounter(context, QualifyingEncounter);
                     bool? al_ = context.Operators.SameAs(aj_, ak_, "day");
-                    return (bool?)((CqlBoolean)al_);
+                    return al_;
                 }
 
                 return (bool?)(/* CQL 'and' (193:17-200:7) */ (/* CQL 'and' (193:19-198:11) */ (/* CQL 'and' (193:19-194:120) */ ((CqlBoolean)l_
-                    && (CqlBoolean)m_())
-                    && (CqlBoolean)n_())
-                    && (CqlBoolean)o_()));
+                    && m_())
+                    && n_())
+                    && o_()));
             }
 
             bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -953,36 +953,36 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 ];
                 bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
 
-                bool? m_() {
+                CqlBoolean m_() {
                     CqlInterval<CqlDateTime> p_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
                     DataType q_ = NutritionAssessment?.Effective;
                     object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                     CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
                     bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, s_, (string)default);
-                    return (bool?)((CqlBoolean)t_);
+                    return t_;
                 }
 
 
-                bool? n_() {
+                CqlBoolean n_() {
                     DataType u_ = NutritionAssessment?.Value;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                     CqlValueSet w_ = this.Nutrition_Assessment_Status_Finding_of_Moderately_Malnourished(context);
                     bool? x_ = context.Operators.ConceptInValueSet(v_ as CqlConcept, w_);
 
-                    bool? y_() {
+                    CqlBoolean y_() {
                         DataType z_ = NutritionAssessment?.Value;
                         object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
                         CqlValueSet ab_ = this.Nutrition_Assessment_Status_Finding_of_Severely_Malnourished(context);
                         bool? ac_ = context.Operators.ConceptInValueSet(aa_ as CqlConcept, ab_);
-                        return (bool?)((CqlBoolean)ac_);
+                        return ac_;
                     }
 
-                    return (bool?)(/* CQL 'or' (207:13-209:9) */ ((CqlBoolean)x_
-                        || (CqlBoolean)y_()));
+                    return /* CQL 'or' (207:13-209:9) */ ((CqlBoolean)x_
+                        || y_());
                 }
 
 
-                bool? o_() {
+                CqlBoolean o_() {
                     object ad_;
                     DataType ah_ = NutritionAssessment?.Effective;
                     object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
@@ -1013,13 +1013,13 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     CqlDateTime ae_ = QICoreCommon_4_0_000.Instance.latest(context, ad_);
                     CqlDateTime af_ = this.Last_Nutrition_Assessment_Day_During_Encounter(context, QualifyingEncounter);
                     bool? ag_ = context.Operators.SameAs(ae_, af_, "day");
-                    return (bool?)((CqlBoolean)ag_);
+                    return ag_;
                 }
 
                 return (bool?)(/* CQL 'and' (205:17-210:134) */ (/* CQL 'and' (205:17-209:9) */ (/* CQL 'and' (205:17-206:118) */ ((CqlBoolean)l_
-                    && (CqlBoolean)m_())
-                    && (CqlBoolean)n_())
-                    && (CqlBoolean)o_()));
+                    && m_())
+                    && n_())
+                    && o_()));
             }
 
             bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -1056,26 +1056,26 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 ];
                 bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
 
-                bool? m_() {
+                CqlBoolean m_() {
                     CqlInterval<CqlDateTime> p_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
                     DataType q_ = NutritionAssessment?.Effective;
                     object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                     CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
                     bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, s_, (string)default);
-                    return (bool?)((CqlBoolean)t_);
+                    return t_;
                 }
 
 
-                bool? n_() {
+                CqlBoolean n_() {
                     DataType u_ = NutritionAssessment?.Value;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                     CqlValueSet w_ = this.Nutrition_Assessment_Status_Finding_of_Well_Nourished_or_Not_Malnourished_or_Mildly_Malnourished(context);
                     bool? x_ = context.Operators.ConceptInValueSet(v_ as CqlConcept, w_);
-                    return (bool?)((CqlBoolean)x_);
+                    return x_;
                 }
 
 
-                bool? o_() {
+                CqlBoolean o_() {
                     object y_;
                     DataType ac_ = NutritionAssessment?.Effective;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
@@ -1106,13 +1106,13 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     CqlDateTime z_ = QICoreCommon_4_0_000.Instance.latest(context, y_);
                     CqlDateTime aa_ = this.Last_Nutrition_Assessment_Day_During_Encounter(context, QualifyingEncounter);
                     bool? ab_ = context.Operators.SameAs(z_, aa_, "day");
-                    return (bool?)((CqlBoolean)ab_);
+                    return ab_;
                 }
 
                 return (bool?)(/* CQL 'and' (215:17-219:7) */ (/* CQL 'and' (215:19-217:156) */ (/* CQL 'and' (215:19-216:120) */ ((CqlBoolean)l_
-                    && (CqlBoolean)m_())
-                    && (CqlBoolean)n_())
-                    && (CqlBoolean)o_()));
+                    && m_())
+                    && n_())
+                    && o_()));
             }
 
             bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -1130,50 +1130,50 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             CodeableConcept d_ = condition?.VerificationStatus;
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
             bool? h_ = context.Operators.Equivalent(e_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 CodeableConcept l_ = condition?.VerificationStatus;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
                 CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
                 CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
                 bool? p_ = context.Operators.Equivalent(m_, o_);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 CodeableConcept q_ = condition?.VerificationStatus;
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
                 CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
                 bool? u_ = context.Operators.Equivalent(r_, t_);
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 CodeableConcept v_ = condition?.VerificationStatus;
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
                 bool? z_ = context.Operators.Equivalent(w_, y_);
-                return (bool?)((CqlBoolean)z_);
+                return z_;
             }
 
-            return (bool?)(/* CQL 'or' (240:52-244:3) */ (/* CQL 'or' (240:54-242:66) */ (/* CQL 'or' (240:54-241:66) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_())
-                || (CqlBoolean)j_())
-                || (CqlBoolean)k_()));
+            return /* CQL 'or' (240:52-244:3) */ (/* CQL 'or' (240:54-242:66) */ (/* CQL 'or' (240:54-241:66) */ ((CqlBoolean)h_
+                || i_())
+                || j_())
+                || k_());
         }
 
         return (bool?)(/* CQL 'implies' (240:3-244:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || (CqlBoolean)c_()));
+            || c_()));
     }
 
 
@@ -1223,7 +1223,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             CqlValueSet g_ = this.Malnutrition_Diagnosis(context);
             bool? h_ = context.Operators.ConceptsInValueSet(f_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 IEnumerable<Condition> k_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, QualifyingEncounter);
                 IEnumerable<Condition> l_ = Status_1_15_000.Instance.verified(context, k_);
 
@@ -1243,11 +1243,11 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<CqlConcept> o_ = context.Operators.WhereSelect<Condition, CqlConcept>(l_, m_, n_);
                 CqlValueSet p_ = this.Malnutrition_Diagnosis(context);
                 bool? q_ = context.Operators.ConceptsInValueSet(o_, p_);
-                return (bool?)((CqlBoolean)q_);
+                return q_;
             }
 
             return (bool?)(/* CQL 'or' (236:5-237:97) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_()));
+                || i_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1310,17 +1310,17 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 ];
                 bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
 
-                bool? m_() {
+                CqlBoolean m_() {
                     DataType n_ = NutritionCarePlan?.Performed;
                     object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
                     CqlDateTime p_ = QICoreCommon_4_0_000.Instance.earliest(context, o_);
                     CqlInterval<CqlDateTime> q_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
                     bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, (string)default);
-                    return (bool?)((CqlBoolean)r_);
+                    return r_;
                 }
 
                 return (bool?)(/* CQL 'and' (249:17-250:114) */ ((CqlBoolean)l_
-                    && (CqlBoolean)m_()));
+                    && m_()));
             }
 
             bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -1476,60 +1476,60 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
         IEnumerable<Encounter> a_ = this.Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral(context);
         bool? b_ = context.Operators.Contains<Encounter>(a_, QualifyingEncounter);
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Encounter> e_ = this.Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk(context);
             bool? f_ = context.Operators.Contains<Encounter>(e_, QualifyingEncounter);
-            return (bool?)((CqlBoolean)f_);
+            return f_;
         }
 
 
-        bool? d_() {
+        CqlBoolean d_() {
             IEnumerable<Encounter> g_ = this.Encounters_with_Dietitian_Referral(context);
             bool? h_ = context.Operators.Contains<Encounter>(g_, QualifyingEncounter);
-            return (bool?)((CqlBoolean)!h_);
+            return !h_;
         }
 
         if (((bool?)(/* CQL 'and' (279:6-281:81) */ (/* CQL 'and' (279:6-280:94) */ ((CqlBoolean)b_
-            && (CqlBoolean)c_())
-            && (CqlBoolean)d_()))) ?? false)
+            && c_())
+            && d_()))) ?? false)
         {
             return 1;
         }
         else
         {
 
-            bool? i_() {
+            CqlBoolean i_() {
                 IEnumerable<Encounter> m_ = this.Encounters_with_Malnutrition_Risk_Screening_At_Risk(context);
                 bool? n_ = context.Operators.Contains<Encounter>(m_, QualifyingEncounter);
-                return (bool?)((CqlBoolean)n_);
+                return n_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 IEnumerable<Encounter> o_ = this.Encounters_with_Dietitian_Referral(context);
                 bool? p_ = context.Operators.Contains<Encounter>(o_, QualifyingEncounter);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 IEnumerable<Encounter> q_ = this.Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished(context);
                 bool? r_ = context.Operators.Contains<Encounter>(q_, QualifyingEncounter);
-                return (bool?)((CqlBoolean)r_);
+                return r_;
             }
 
 
-            bool? l_() {
+            CqlBoolean l_() {
                 IEnumerable<Encounter> s_ = this.Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status(context);
                 bool? t_ = context.Operators.Contains<Encounter>(s_, QualifyingEncounter);
-                return (bool?)((CqlBoolean)!t_);
+                return !t_;
             }
 
             if (((bool?)(/* CQL 'or' (282:13-287:115) */ (/* CQL 'and' (282:13-286:123) */ (/* CQL 'or' (282:13-285:3) */ (/* CQL 'and' (282:15-283:92) */ ((CqlBoolean)b_
-                && (CqlBoolean)i_())
-                || (CqlBoolean)j_())
-                && (CqlBoolean)k_())
-                || (CqlBoolean)l_()))) ?? false)
+                && i_())
+                || j_())
+                && k_())
+                || l_()))) ?? false)
             {
                 return 2;
             }

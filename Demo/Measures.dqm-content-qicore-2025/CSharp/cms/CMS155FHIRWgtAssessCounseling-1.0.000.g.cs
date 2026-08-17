@@ -210,14 +210,14 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
         CqlInterval<int?> i_ = context.Operators.Interval(3, 17, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
-        bool? k_() {
+        CqlBoolean k_() {
             IEnumerable<Encounter> l_ = this.Qualifying_Encounters(context);
             bool? m_ = context.Operators.Exists<Encounter>(l_);
-            return (bool?)((CqlBoolean)m_);
+            return m_;
         }
 
         return (bool?)(/* CQL 'and' (40:3-43:38) */ ((CqlBoolean)j_
-            && (CqlBoolean)k_()));
+            && k_()));
     }
 
 
@@ -270,14 +270,14 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
 
-        bool? b_() {
+        CqlBoolean b_() {
             IEnumerable<Condition> c_ = this.Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(context);
             bool? d_ = context.Operators.Exists<Condition>(c_);
-            return (bool?)((CqlBoolean)d_);
+            return d_;
         }
 
         return (bool?)(/* CQL 'or' (49:3-50:69) */ ((CqlBoolean)a_
-            || (CqlBoolean)b_()));
+            || b_()));
     }
 
 
@@ -299,14 +299,14 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
             bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 
-            bool? j_() {
+            CqlBoolean j_() {
                 DataType k_ = BMIPercentile?.Value;
                 CqlQuantity l_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, k_ as Quantity);
-                return (bool?)((CqlBoolean)(!((bool?)(l_ is null))));
+                return !((bool?)(l_ is null));
             }
 
             return (bool?)(/* CQL 'and' (104:5-105:41) */ ((CqlBoolean)i_
-                && (CqlBoolean)j_()));
+                && j_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -332,14 +332,14 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
             bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 
-            bool? j_() {
+            CqlBoolean j_() {
                 DataType k_ = HeightExam?.Value;
                 CqlQuantity l_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, k_ as Quantity);
-                return (bool?)((CqlBoolean)(!((bool?)(l_ is null))));
+                return !((bool?)(l_ is null));
             }
 
             return (bool?)(/* CQL 'and' (94:5-95:38) */ ((CqlBoolean)i_
-                && (CqlBoolean)j_()));
+                && j_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -365,14 +365,14 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
             bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 
-            bool? j_() {
+            CqlBoolean j_() {
                 DataType k_ = WeightExam?.Value;
                 CqlQuantity l_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, k_ as Quantity);
-                return (bool?)((CqlBoolean)(!((bool?)(l_ is null))));
+                return !((bool?)(l_ is null));
             }
 
             return (bool?)(/* CQL 'and' (99:5-100:38) */ ((CqlBoolean)i_
-                && (CqlBoolean)j_()));
+                && j_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -391,22 +391,22 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
         IEnumerable<Observation> a_ = this.BMI_Percentile_in_Measurement_Period(context);
         bool? b_ = context.Operators.Exists<Observation>(a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Observation> e_ = this.Height_in_Measurement_Period(context);
             bool? f_ = context.Operators.Exists<Observation>(e_);
-            return (bool?)((CqlBoolean)f_);
+            return f_;
         }
 
 
-        bool? d_() {
+        CqlBoolean d_() {
             IEnumerable<Observation> g_ = this.Weight_in_Measurement_Period(context);
             bool? h_ = context.Operators.Exists<Observation>(g_);
-            return (bool?)((CqlBoolean)h_);
+            return h_;
         }
 
         return (bool?)(/* CQL 'and' (59:3-61:45) */ (/* CQL 'and' (59:3-60:45) */ ((CqlBoolean)b_
-            && (CqlBoolean)c_())
-            && (CqlBoolean)d_()));
+            && c_())
+            && d_()));
     }
 
 

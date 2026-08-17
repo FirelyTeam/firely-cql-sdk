@@ -197,15 +197,15 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, aa_);
             bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, (string)default);
 
-            bool? ad_() {
+            CqlBoolean ad_() {
                 Code<Encounter.EncounterStatus> ae_ = ValidEncounter?.StatusElement;
                 string af_ = FHIRHelpers_4_0_001.Instance.ToString(context, ae_);
                 bool? ag_ = context.Operators.Equal(af_, "finished");
-                return (bool?)((CqlBoolean)ag_);
+                return ag_;
             }
 
             return (bool?)(/* CQL 'and' (55:15-56:54) */ ((CqlBoolean)ac_
-                && (CqlBoolean)ad_()));
+                && ad_()));
         }
 
         IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
@@ -231,7 +231,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "month");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 6);
 
-        bool? j_() {
+        CqlBoolean j_() {
             Patient l_ = this.Patient(context);
             Date m_ = l_?.BirthDateElement;
             string n_ = m_?.Value;
@@ -241,19 +241,19 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             CqlDate r_ = context.Operators.DateFrom(q_);
             int? s_ = context.Operators.CalculateAgeAt(o_, r_, "year");
             bool? t_ = context.Operators.Less(s_, 20);
-            return (bool?)((CqlBoolean)t_);
+            return t_;
         }
 
 
-        bool? k_() {
+        CqlBoolean k_() {
             IEnumerable<Encounter> u_ = this.Qualifying_Encounters(context);
             bool? v_ = context.Operators.Exists<Encounter>(u_);
-            return (bool?)((CqlBoolean)v_);
+            return v_;
         }
 
         return (bool?)(/* CQL 'and' (74:3-77:52) */ (/* CQL 'and' (74:3-75:81) */ ((CqlBoolean)i_
-            && (CqlBoolean)j_())
-            && (CqlBoolean)k_()));
+            && j_())
+            && k_()));
     }
 
 
@@ -301,7 +301,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "month");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 6);
 
-        bool? j_() {
+        CqlBoolean j_() {
             Patient k_ = this.Patient(context);
             Date l_ = k_?.BirthDateElement;
             string m_ = l_?.Value;
@@ -311,11 +311,11 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             CqlDate q_ = context.Operators.DateFrom(p_);
             int? r_ = context.Operators.CalculateAgeAt(n_, q_, "year");
             bool? s_ = context.Operators.LessOrEqual(r_, 4);
-            return (bool?)((CqlBoolean)s_);
+            return s_;
         }
 
         return (bool?)(/* CQL 'and' (59:3-60:81) */ ((CqlBoolean)i_
-            && (CqlBoolean)j_()));
+            && j_()));
     }
 
 
@@ -380,15 +380,15 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             CqlInterval<CqlDateTime> g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, f_);
             bool? h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, (string)default);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Code<EventStatus> j_ = FluorideApplication?.StatusElement;
                 string k_ = FHIRHelpers_4_0_001.Instance.ToString(context, j_);
                 bool? l_ = context.Operators.Equal(k_, "completed");
-                return (bool?)((CqlBoolean)l_);
+                return l_;
             }
 
             return (bool?)(/* CQL 'and' (70:17-71:62) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         bool? d_ = context.Operators.WhereAny<Procedure>(b_, c_);

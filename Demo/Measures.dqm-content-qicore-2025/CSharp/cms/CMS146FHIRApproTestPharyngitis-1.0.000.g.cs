@@ -317,16 +317,16 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                     string s_ = context.Operators.Last<string>(r_);
                     bool? t_ = context.Operators.Equal(p_, s_);
 
-                    bool? u_() {
+                    CqlBoolean u_() {
                         CodeableConcept v_ = M?.Code;
                         CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                         CqlValueSet x_ = this.Antibiotic_Medications_for_Pharyngitis(context);
                         bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
-                        return (bool?)((CqlBoolean)y_);
+                        return y_;
                     }
 
                     return (bool?)(/* CQL 'and' */ ((CqlBoolean)t_
-                        && (CqlBoolean)u_()));
+                        && u_()));
                 }
 
                 bool? o_ = context.Operators.WhereAny<Medication>(m_, n_);
@@ -351,14 +351,14 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ag_, ae_, true, true);
                 bool? ai_ = context.Operators.In<CqlDateTime>(ac_, ah_, "day");
 
-                bool? aj_() {
+                CqlBoolean aj_() {
                     FhirDateTime ak_ = AntibioticOrdered?.AuthoredOnElement;
                     CqlDateTime al_ = context.Operators.Convert<CqlDateTime>(ak_);
-                    return (bool?)((CqlBoolean)(!((bool?)(al_ is null))));
+                    return !((bool?)(al_ is null));
                 }
 
                 return (bool?)(/* CQL 'and' (82:17-82:128) */ ((CqlBoolean)ai_
-                    && (CqlBoolean)aj_()));
+                    && aj_()));
             }
 
             bool? l_ = context.Operators.WhereAny<MedicationRequest>(j_, k_);
@@ -518,16 +518,16 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 string aj_ = context.Operators.Last<string>(ai_);
                 bool? ak_ = context.Operators.Equal(ag_, aj_);
 
-                bool? al_() {
+                CqlBoolean al_() {
                     CodeableConcept am_ = M?.Code;
                     CqlConcept an_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, am_);
                     CqlValueSet ao_ = this.Antibiotic_Medications_for_Pharyngitis(context);
                     bool? ap_ = context.Operators.ConceptInValueSet(an_, ao_);
-                    return (bool?)((CqlBoolean)ap_);
+                    return ap_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)ak_
-                    && (CqlBoolean)al_()));
+                    && al_()));
             }
 
             bool? af_ = context.Operators.WhereAny<Medication>(ad_, ae_);

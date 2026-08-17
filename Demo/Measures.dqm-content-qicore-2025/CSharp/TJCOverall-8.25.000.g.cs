@@ -108,17 +108,17 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
             bool? n_ = context.Operators.GreaterOrEqual(m_, 18);
 
-            bool? o_() {
+            CqlBoolean o_() {
                 Period p_ = NonElectiveEncounter?.Period;
                 CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                 CqlDateTime r_ = context.Operators.End(q_);
                 CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
                 bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
-                return (bool?)((CqlBoolean)t_);
+                return t_;
             }
 
             return (bool?)(/* CQL 'and' (25:9-26:80) */ ((CqlBoolean)n_
-                && (CqlBoolean)o_()));
+                && o_()));
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -164,50 +164,50 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             CqlValueSet g_ = this.Discharge_To_Acute_Care_Facility(context);
             bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Encounter.HospitalizationComponent m_ = IschemicStrokeEncounter?.Hospitalization;
                 CodeableConcept n_ = m_?.DischargeDisposition;
                 CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
                 CqlValueSet p_ = this.Left_Against_Medical_Advice(context);
                 bool? q_ = context.Operators.ConceptInValueSet(o_, p_);
-                return (bool?)((CqlBoolean)q_);
+                return q_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 Encounter.HospitalizationComponent r_ = IschemicStrokeEncounter?.Hospitalization;
                 CodeableConcept s_ = r_?.DischargeDisposition;
                 CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                 CqlValueSet u_ = this.Patient_Expired(context);
                 bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                return (bool?)((CqlBoolean)v_);
+                return v_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 Encounter.HospitalizationComponent w_ = IschemicStrokeEncounter?.Hospitalization;
                 CodeableConcept x_ = w_?.DischargeDisposition;
                 CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
                 CqlValueSet z_ = this.Discharged_to_Home_for_Hospice_Care(context);
                 bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
-                return (bool?)((CqlBoolean)aa_);
+                return aa_;
             }
 
 
-            bool? l_() {
+            CqlBoolean l_() {
                 Encounter.HospitalizationComponent ab_ = IschemicStrokeEncounter?.Hospitalization;
                 CodeableConcept ac_ = ab_?.DischargeDisposition;
                 CqlConcept ad_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ac_);
                 CqlValueSet ae_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
                 bool? af_ = context.Operators.ConceptInValueSet(ad_, ae_);
-                return (bool?)((CqlBoolean)af_);
+                return af_;
             }
 
             return (bool?)(/* CQL 'or' (35:4-39:71) */ (/* CQL 'or' (35:11-38:55) */ (/* CQL 'or' (35:11-37:35) */ (/* CQL 'or' (35:11-36:47) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_())
-                || (CqlBoolean)j_())
-                || (CqlBoolean)k_())
-                || (CqlBoolean)l_()));
+                || i_())
+                || j_())
+                || k_())
+                || l_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -238,7 +238,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             ];
             bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
 
-            bool? o_() {
+            CqlBoolean o_() {
                 Code<RequestIntent> p_ = ComfortCare?.IntentElement;
                 RequestIntent? q_ = p_?.Value;
                 Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
@@ -251,11 +251,11 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                     "instance-order",
                 ];
                 bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
             return (bool?)(/* CQL 'and' (48:5-49:111) */ ((CqlBoolean)n_
-                && (CqlBoolean)o_()));
+                && o_()));
         }
 
         IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);

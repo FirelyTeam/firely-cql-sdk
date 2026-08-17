@@ -88,32 +88,32 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
             bool? h_ = context.Operators.Equal(g_, "male");
 
-            bool? i_() {
+            CqlBoolean i_() {
                 FhirBoolean l_ = P?.ActiveElement;
                 bool? m_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, l_);
-                return (bool?)((CqlBoolean)((bool?)(/* CQL 'is true' (19:11-19:26) */ m_ is true)));
+                return (bool?)(/* CQL 'is true' (19:11-19:26) */ m_ is true);
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 DataType n_ = P?.Deceased;
                 bool? o_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, n_ as FhirBoolean);
-                return (bool?)((CqlBoolean)!o_);
+                return !o_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 CodeableConcept p_ = P?.MaritalStatus;
                 CqlConcept q_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, p_);
                 CqlValueSet r_ = this.Marital_Status(context);
                 bool? s_ = context.Operators.ConceptInValueSet(q_, r_);
-                return (bool?)((CqlBoolean)s_);
+                return s_;
             }
 
             return (bool?)(/* CQL 'and' (18:5-21:45) */ (/* CQL 'and' (18:11-20:25) */ (/* CQL 'and' (18:11-19:26) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_())
-                && (CqlBoolean)j_())
-                && (CqlBoolean)k_()));
+                && i_())
+                && j_())
+                && k_()));
         }
 
         IEnumerable<Patient> d_ = context.Operators.Where<Patient>((IEnumerable<Patient>)b_, c_);

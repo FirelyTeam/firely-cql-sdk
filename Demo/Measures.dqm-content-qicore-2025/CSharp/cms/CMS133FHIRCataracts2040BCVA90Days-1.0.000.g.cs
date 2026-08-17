@@ -358,7 +358,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
             CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_);
             bool? h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, "day");
 
-            bool? i_() {
+            CqlBoolean i_() {
                 object q_;
                 DataType y_ = CataractSurgery?.Performed;
                 object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
@@ -402,21 +402,21 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 CqlQuantity v_ = context.Operators.Quantity(92m, "days");
                 CqlDateTime w_ = context.Operators.Subtract(u_, v_);
                 bool? x_ = context.Operators.SameOrBefore(s_, w_, "day");
-                return (bool?)((CqlBoolean)x_);
+                return x_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 Code<EventStatus> ae_ = CataractSurgery?.StatusElement;
                 EventStatus? af_ = ae_?.Value;
                 string ag_ = context.Operators.Convert<string>(af_);
                 bool? ah_ = context.Operators.Equal(ag_, "completed");
-                return (bool?)((CqlBoolean)ah_);
+                return ah_;
             }
 
             return (bool?)(/* CQL 'and' (86:5-88:46) */ (/* CQL 'and' (86:11-87:115) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_())
-                && (CqlBoolean)j_()));
+                && i_())
+                && j_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -472,50 +472,50 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             CodeableConcept d_ = condition?.VerificationStatus;
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
             bool? h_ = context.Operators.Equivalent(e_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 CodeableConcept l_ = condition?.VerificationStatus;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
                 CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
                 CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
                 bool? p_ = context.Operators.Equivalent(m_, o_);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 CodeableConcept q_ = condition?.VerificationStatus;
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
                 CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
                 bool? u_ = context.Operators.Equivalent(r_, t_);
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 CodeableConcept v_ = condition?.VerificationStatus;
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
                 bool? z_ = context.Operators.Equivalent(w_, y_);
-                return (bool?)((CqlBoolean)z_);
+                return z_;
             }
 
-            return (bool?)(/* CQL 'or' (277:52-281:3) */ (/* CQL 'or' (277:54-279:66) */ (/* CQL 'or' (277:54-278:66) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_())
-                || (CqlBoolean)j_())
-                || (CqlBoolean)k_()));
+            return /* CQL 'or' (277:52-281:3) */ (/* CQL 'or' (277:54-279:66) */ (/* CQL 'or' (277:54-278:66) */ ((CqlBoolean)h_
+                || i_())
+                || j_())
+                || k_());
         }
 
         return (bool?)(/* CQL 'implies' (277:3-281:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || (CqlBoolean)c_()));
+            || c_()));
     }
 
 
@@ -975,7 +975,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(r_, w_, false, true);
                 bool? y_ = context.Operators.In<CqlDateTime>(o_, x_, "day");
 
-                bool? z_() {
+                CqlBoolean z_() {
                     object ao_;
                     DataType ar_ = CataractSurgeryPerformed?.Performed;
                     object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
@@ -1014,11 +1014,11 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                     }
                     CqlInterval<CqlDateTime> ap_ = QICoreCommon_4_0_000.Instance.toInterval(context, ao_);
                     CqlDateTime aq_ = context.Operators.End(ap_);
-                    return (bool?)((CqlBoolean)(!((bool?)(aq_ is null))));
+                    return !((bool?)(aq_ is null));
                 }
 
 
-                bool? aa_() {
+                CqlBoolean aa_() {
                     Code<ObservationStatus> ax_ = VisualAcuityExamPerformed?.StatusElement;
                     ObservationStatus? ay_ = ax_?.Value;
                     string az_ = context.Operators.Convert<string>(ay_);
@@ -1028,22 +1028,22 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                         "corrected",
                     ];
                     bool? bb_ = context.Operators.In<string>(az_, (IEnumerable<string>)ba_);
-                    return (bool?)((CqlBoolean)bb_);
+                    return bb_;
                 }
 
 
-                bool? ab_() {
+                CqlBoolean ab_() {
                     DataType bc_ = VisualAcuityExamPerformed?.Value;
                     object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
                     CqlValueSet be_ = this.Visual_Acuity_20_40_or_Better(context);
                     bool? bf_ = context.Operators.ConceptInValueSet(bd_ as CqlConcept, be_);
-                    return (bool?)((CqlBoolean)bf_);
+                    return bf_;
                 }
 
                 return (bool?)(/* CQL 'and' (267:17-269:89) */ (/* CQL 'and' (267:17-268:83) */ (/* CQL 'and' (267:17-267:152) */ ((CqlBoolean)y_
-                    && (CqlBoolean)z_())
-                    && (CqlBoolean)aa_())
-                    && (CqlBoolean)ab_()));
+                    && z_())
+                    && aa_())
+                    && ab_()));
             }
 
             bool? k_ = context.Operators.WhereAny<Observation>(i_, j_);

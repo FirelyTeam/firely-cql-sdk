@@ -101,16 +101,16 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
             string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
             bool? s_ = context.Operators.Equal(r_, "finished");
 
-            bool? t_() {
+            CqlBoolean t_() {
                 CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
                 Period v_ = ValidEncounter?.Period;
                 CqlInterval<CqlDateTime> w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, v_);
                 bool? x_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, w_, (string)default);
-                return (bool?)((CqlBoolean)x_);
+                return x_;
             }
 
             return (bool?)(/* CQL 'and' (26:19-27:100) */ ((CqlBoolean)s_
-                && (CqlBoolean)t_()));
+                && t_()));
         }
 
         IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);

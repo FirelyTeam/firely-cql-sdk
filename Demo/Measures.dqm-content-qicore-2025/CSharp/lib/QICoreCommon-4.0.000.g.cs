@@ -420,28 +420,28 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
         bool? e_ = context.Operators.Equivalent(b_, d_);
 
-        bool? f_() {
+        CqlBoolean f_() {
             CodeableConcept h_ = condition?.ClinicalStatus;
             CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
             CqlCode j_ = this.recurrence(context);
             CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
             bool? l_ = context.Operators.Equivalent(i_, k_);
-            return (bool?)((CqlBoolean)l_);
+            return l_;
         }
 
 
-        bool? g_() {
+        CqlBoolean g_() {
             CodeableConcept m_ = condition?.ClinicalStatus;
             CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
             CqlCode o_ = this.relapse(context);
             CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
             bool? q_ = context.Operators.Equivalent(n_, p_);
-            return (bool?)((CqlBoolean)q_);
+            return q_;
         }
 
         return (bool?)(/* CQL 'or' (112:3-114:43) */ (/* CQL 'or' (112:3-113:46) */ ((CqlBoolean)e_
-            || (CqlBoolean)f_())
-            || (CqlBoolean)g_()));
+            || f_())
+            || g_()));
     }
 
 
@@ -1138,28 +1138,28 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
         bool? e_ = context.Operators.Equivalent(b_, d_);
 
-        bool? f_() {
+        CqlBoolean f_() {
             CodeableConcept h_ = condition?.ClinicalStatus;
             CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
             CqlCode j_ = this.recurrence(context);
             CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
             bool? l_ = context.Operators.Equivalent(i_, k_);
-            return (bool?)((CqlBoolean)l_);
+            return l_;
         }
 
 
-        bool? g_() {
+        CqlBoolean g_() {
             CodeableConcept m_ = condition?.ClinicalStatus;
             CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
             CqlCode o_ = this.relapse(context);
             CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
             bool? q_ = context.Operators.Equivalent(n_, p_);
-            return (bool?)((CqlBoolean)q_);
+            return q_;
         }
 
         if (((bool?)(/* CQL 'or' (435:4-437:41) */ (/* CQL 'or' (435:4-436:44) */ ((CqlBoolean)e_
-            || (CqlBoolean)f_())
-            || (CqlBoolean)g_()))) ?? false)
+            || f_())
+            || g_()))) ?? false)
         {
             DataType r_ = condition?.Onset;
             object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
@@ -1217,28 +1217,28 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
         bool? e_ = context.Operators.Equivalent(b_, d_);
 
-        bool? f_() {
+        CqlBoolean f_() {
             CodeableConcept h_ = condition?.ClinicalStatus;
             CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
             CqlCode j_ = this.recurrence(context);
             CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
             bool? l_ = context.Operators.Equivalent(i_, k_);
-            return (bool?)((CqlBoolean)l_);
+            return l_;
         }
 
 
-        bool? g_() {
+        CqlBoolean g_() {
             CodeableConcept m_ = condition?.ClinicalStatus;
             CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
             CqlCode o_ = this.relapse(context);
             CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
             bool? q_ = context.Operators.Equivalent(n_, p_);
-            return (bool?)((CqlBoolean)q_);
+            return q_;
         }
 
         if (((bool?)(/* CQL 'or' (453:4-455:41) */ (/* CQL 'or' (453:4-454:44) */ ((CqlBoolean)e_
-            || (CqlBoolean)f_())
-            || (CqlBoolean)g_()))) ?? false)
+            || f_())
+            || g_()))) ?? false)
         {
             DataType r_ = condition?.Onset;
             object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
@@ -1394,15 +1394,15 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         CqlDateTime a_ = context.Operators.Start(period);
 
-        bool? b_() {
+        CqlBoolean b_() {
             CqlDateTime c_ = context.Operators.Start(period);
             CqlDateTime d_ = context.Operators.MinValue<CqlDateTime>();
             bool? e_ = context.Operators.Equal(c_, d_);
-            return (bool?)((CqlBoolean)e_);
+            return e_;
         }
 
         return !((bool?)(/* CQL 'or' (528:7-530:3) */ ((CqlBoolean)((bool?)(a_ is null))
-            || (CqlBoolean)b_())));
+            || b_())));
     }
 
 
@@ -1412,15 +1412,15 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         CqlDateTime a_ = context.Operators.Start(period);
 
-        bool? b_() {
+        CqlBoolean b_() {
             CqlDateTime c_ = context.Operators.Start(period);
             CqlDateTime d_ = context.Operators.MinValue<CqlDateTime>();
             bool? e_ = context.Operators.Equal(c_, d_);
-            return (bool?)((CqlBoolean)e_);
+            return e_;
         }
 
         return !((bool?)(/* CQL 'or' (537:7-539:3) */ ((CqlBoolean)((bool?)(a_ is null))
-            || (CqlBoolean)b_())));
+            || b_())));
     }
 
 
@@ -1431,15 +1431,15 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         CqlDateTime a_ = context.Operators.End(period);
 
-        bool? b_() {
+        CqlBoolean b_() {
             CqlDateTime c_ = context.Operators.End(period);
             CqlDateTime d_ = context.Operators.MaxValue<CqlDateTime>();
             bool? e_ = context.Operators.Equal(c_, d_);
-            return (bool?)((CqlBoolean)e_);
+            return e_;
         }
 
         return !((bool?)(/* CQL 'or' (547:7-550:3) */ ((CqlBoolean)((bool?)(a_ is null))
-            || (CqlBoolean)b_())));
+            || b_())));
     }
 
 
@@ -1449,15 +1449,15 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         CqlDateTime a_ = context.Operators.End(period);
 
-        bool? b_() {
+        CqlBoolean b_() {
             CqlDateTime c_ = context.Operators.End(period);
             CqlDateTime d_ = context.Operators.MaxValue<CqlDateTime>();
             bool? e_ = context.Operators.Equal(c_, d_);
-            return (bool?)((CqlBoolean)e_);
+            return e_;
         }
 
         return !((bool?)(/* CQL 'or' (557:7-560:3) */ ((CqlBoolean)((bool?)(a_ is null))
-            || (CqlBoolean)b_())));
+            || b_())));
     }
 
 

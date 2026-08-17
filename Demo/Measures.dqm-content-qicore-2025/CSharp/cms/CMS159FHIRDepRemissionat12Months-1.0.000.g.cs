@@ -184,7 +184,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
             bool? g_ = context.Operators.Greater(f_ as int?, 9);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 Code<ObservationStatus> i_ = DepressionAssessment?.StatusElement;
                 ObservationStatus? j_ = i_?.Value;
                 string k_ = context.Operators.Convert<string>(j_);
@@ -194,11 +194,11 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     "corrected",
                 ];
                 bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'and' (77:5-78:76) */ ((CqlBoolean)g_
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -212,50 +212,50 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             CodeableConcept d_ = condition?.VerificationStatus;
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
             bool? h_ = context.Operators.Equivalent(e_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 CodeableConcept l_ = condition?.VerificationStatus;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
                 CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
                 CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
                 bool? p_ = context.Operators.Equivalent(m_, o_);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 CodeableConcept q_ = condition?.VerificationStatus;
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
                 CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
                 bool? u_ = context.Operators.Equivalent(r_, t_);
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 CodeableConcept v_ = condition?.VerificationStatus;
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
                 bool? z_ = context.Operators.Equivalent(w_, y_);
-                return (bool?)((CqlBoolean)z_);
+                return z_;
             }
 
-            return (bool?)(/* CQL 'or' (175:52-179:3) */ (/* CQL 'or' (175:54-177:66) */ (/* CQL 'or' (175:54-176:66) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_())
-                || (CqlBoolean)j_())
-                || (CqlBoolean)k_()));
+            return /* CQL 'or' (175:52-179:3) */ (/* CQL 'or' (175:54-177:66) */ (/* CQL 'or' (175:54-176:66) */ ((CqlBoolean)h_
+                || i_())
+                || j_())
+                || k_());
         }
 
         return (bool?)(/* CQL 'implies' (175:3-179:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || (CqlBoolean)c_()));
+            || c_()));
     }
 
 
@@ -326,27 +326,27 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Depression);
                 bool? k_ = context.Operators.Overlaps(i_, j_, (string)default);
 
-                bool? l_() {
+                CqlBoolean l_() {
                     Period n_ = ValidEncounter?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.End(o_);
                     CqlInterval<CqlDateTime> q_ = this.Denominator_Identification_Period(context);
                     bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
-                    return (bool?)((CqlBoolean)r_);
+                    return r_;
                 }
 
 
-                bool? m_() {
+                CqlBoolean m_() {
                     Code<Encounter.EncounterStatus> s_ = ValidEncounter?.StatusElement;
                     Encounter.EncounterStatus? t_ = s_?.Value;
                     Code<Encounter.EncounterStatus> u_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(t_);
                     bool? v_ = context.Operators.Equal(u_, "finished");
-                    return (bool?)((CqlBoolean)v_);
+                    return v_;
                 }
 
                 return (bool?)(/* CQL 'and' (90:17-92:46) */ (/* CQL 'and' (90:17-91:88) */ ((CqlBoolean)k_
-                    && (CqlBoolean)l_())
-                    && (CqlBoolean)m_()));
+                    && l_())
+                    && m_()));
             }
 
             bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
@@ -495,18 +495,18 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
             bool? o_ = context.Operators.Equivalent(l_, n_);
 
-            bool? p_() {
+            CqlBoolean p_() {
                 Encounter.HospitalizationComponent s_ = InpatientEncounter?.Hospitalization;
                 CodeableConcept t_ = s_?.DischargeDisposition;
                 CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
                 CqlCode v_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_(context);
                 CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
                 bool? x_ = context.Operators.Equivalent(u_, w_);
-                return (bool?)((CqlBoolean)x_);
+                return x_;
             }
 
 
-            bool? q_() {
+            CqlBoolean q_() {
                 Period y_ = InpatientEncounter?.Period;
                 CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
                 CqlDateTime aa_ = context.Operators.End(z_);
@@ -517,27 +517,27 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlDateTime af_ = context.Operators.ConvertDateToDateTime(ae_);
                 CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ac_, af_, true, true);
                 bool? ah_ = context.Operators.In<CqlDateTime>(aa_, ag_, "day");
-                return (bool?)((CqlBoolean)ah_);
+                return ah_;
             }
 
 
-            bool? r_() {
+            CqlBoolean r_() {
                 Code<Encounter.EncounterStatus> ai_ = InpatientEncounter?.StatusElement;
                 Encounter.EncounterStatus? aj_ = ai_?.Value;
                 Code<Encounter.EncounterStatus> ak_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(aj_);
                 bool? al_ = context.Operators.Equal(ak_, "finished");
-                return (bool?)((CqlBoolean)al_);
+                return al_;
             }
 
             return (bool?)(/* CQL 'and' (117:7-121:50) */ (/* CQL 'and' (117:13-120:147) */ (/* CQL 'or' (117:13-119:7) */ ((CqlBoolean)o_
-                || (CqlBoolean)p_())
-                && (CqlBoolean)q_())
-                && (CqlBoolean)r_()));
+                || p_())
+                && q_())
+                && r_()));
         }
 
         bool? d_ = context.Operators.WhereAny<Encounter>(b_, c_);
 
-        bool? e_() {
+        CqlBoolean e_() {
             CqlValueSet am_ = this.Hospice_Encounter(context);
             IEnumerable<Encounter> an_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -552,7 +552,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> ax_ = context.Operators.Interval(at_, aw_, true, true);
                 bool? ay_ = context.Operators.Overlaps(ar_, ax_, "day");
 
-                bool? az_() {
+                CqlBoolean az_() {
                     Code<Encounter.EncounterStatus> ba_ = HospiceEncounter?.StatusElement;
                     Encounter.EncounterStatus? bb_ = ba_?.Value;
                     Code<Encounter.EncounterStatus> bc_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(bb_);
@@ -563,19 +563,19 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                         "unknown",
                     ];
                     bool? bf_ = context.Operators.In<string>(bd_, (IEnumerable<string>)be_);
-                    return (bool?)((CqlBoolean)!bf_);
+                    return !bf_;
                 }
 
                 return (bool?)(/* CQL 'and' (124:9-125:95) */ ((CqlBoolean)ay_
-                    && (CqlBoolean)az_()));
+                    && az_()));
             }
 
             bool? ap_ = context.Operators.WhereAny<Encounter>(an_, ao_);
-            return (bool?)((CqlBoolean)ap_);
+            return ap_;
         }
 
 
-        bool? f_() {
+        CqlBoolean f_() {
             CqlCode bg_ = this.Hospice_care__Minimum_Data_Set_(context);
             IEnumerable<CqlCode> bh_ = context.Operators.ToList<CqlCode>(bg_);
             IEnumerable<Observation> bi_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, bh_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -587,7 +587,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlConcept bo_ = context.Operators.ConvertCodeToConcept(bn_);
                 bool? bp_ = context.Operators.Equivalent(bm_ as CqlConcept, bo_);
 
-                bool? bq_() {
+                CqlBoolean bq_() {
                     DataType bs_ = HospiceAssessment?.Effective;
                     object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
                     CqlInterval<CqlDateTime> bu_ = QICoreCommon_4_0_000.Instance.toInterval(context, bt_);
@@ -598,11 +598,11 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     CqlDateTime bz_ = context.Operators.ConvertDateToDateTime(by_);
                     CqlInterval<CqlDateTime> ca_ = context.Operators.Interval(bw_, bz_, true, true);
                     bool? cb_ = context.Operators.Overlaps(bu_, ca_, "day");
-                    return (bool?)((CqlBoolean)cb_);
+                    return cb_;
                 }
 
 
-                bool? br_() {
+                CqlBoolean br_() {
                     Code<ObservationStatus> cc_ = HospiceAssessment?.StatusElement;
                     ObservationStatus? cd_ = cc_?.Value;
                     string ce_ = context.Operators.Convert<string>(cd_);
@@ -612,20 +612,20 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                         "corrected",
                     ];
                     bool? cg_ = context.Operators.In<string>(ce_, (IEnumerable<string>)cf_);
-                    return (bool?)((CqlBoolean)cg_);
+                    return cg_;
                 }
 
                 return (bool?)(/* CQL 'and' (128:9-130:77) */ (/* CQL 'and' (128:15-129:163) */ ((CqlBoolean)bp_
-                    && (CqlBoolean)bq_())
-                    && (CqlBoolean)br_()));
+                    && bq_())
+                    && br_()));
             }
 
             bool? bk_ = context.Operators.WhereAny<Observation>(bi_, bj_);
-            return (bool?)((CqlBoolean)bk_);
+            return bk_;
         }
 
 
-        bool? g_() {
+        CqlBoolean g_() {
             CqlValueSet ch_ = this.Hospice_Care_Ambulatory(context);
             IEnumerable<ServiceRequest> ci_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, ch_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 
@@ -640,7 +640,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> cs_ = context.Operators.Interval(co_, cr_, true, true);
                 bool? ct_ = context.Operators.In<CqlDateTime>(cm_, cs_, "day");
 
-                bool? cu_() {
+                CqlBoolean cu_() {
                     Code<RequestStatus> cw_ = HospiceOrder?.StatusElement;
                     RequestStatus? cx_ = cw_?.Value;
                     Code<RequestStatus> cy_ = context.Operators.Convert<Code<RequestStatus>>(cx_);
@@ -650,11 +650,11 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                         "completed",
                     ];
                     bool? db_ = context.Operators.In<string>(cz_, (IEnumerable<string>)da_);
-                    return (bool?)((CqlBoolean)db_);
+                    return db_;
                 }
 
 
-                bool? cv_() {
+                CqlBoolean cv_() {
                     Code<RequestIntent> dc_ = HospiceOrder?.IntentElement;
                     RequestIntent? dd_ = dc_?.Value;
                     Code<RequestIntent> de_ = context.Operators.Convert<Code<RequestIntent>>(dd_);
@@ -667,20 +667,20 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                         "instance-order",
                     ];
                     bool? dh_ = context.Operators.In<string>(df_, (IEnumerable<string>)dg_);
-                    return (bool?)((CqlBoolean)dh_);
+                    return dh_;
                 }
 
                 return (bool?)(/* CQL 'and' (133:9-135:116) */ (/* CQL 'and' (133:15-134:62) */ ((CqlBoolean)ct_
-                    && (CqlBoolean)cu_())
-                    && (CqlBoolean)cv_()));
+                    && cu_())
+                    && cv_()));
             }
 
             bool? ck_ = context.Operators.WhereAny<ServiceRequest>(ci_, cj_);
-            return (bool?)((CqlBoolean)ck_);
+            return ck_;
         }
 
 
-        bool? h_() {
+        CqlBoolean h_() {
             CqlValueSet di_ = this.Hospice_Care_Ambulatory(context);
             IEnumerable<Procedure> dj_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, di_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
@@ -730,7 +730,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> dt_ = context.Operators.Interval(dp_, ds_, true, true);
                 bool? du_ = context.Operators.Overlaps(dn_, dt_, "day");
 
-                bool? dv_() {
+                CqlBoolean dv_() {
                     Code<EventStatus> ec_ = HospicePerformed?.StatusElement;
                     EventStatus? ed_ = ec_?.Value;
                     string ee_ = context.Operators.Convert<string>(ed_);
@@ -740,19 +740,19 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                         "unknown",
                     ];
                     bool? eg_ = context.Operators.In<string>(ee_, (IEnumerable<string>)ef_);
-                    return (bool?)((CqlBoolean)!eg_);
+                    return !eg_;
                 }
 
                 return (bool?)(/* CQL 'and' (138:9-139:94) */ ((CqlBoolean)du_
-                    && (CqlBoolean)dv_()));
+                    && dv_()));
             }
 
             bool? dl_ = context.Operators.WhereAny<Procedure>(dj_, dk_);
-            return (bool?)((CqlBoolean)dl_);
+            return dl_;
         }
 
 
-        bool? i_() {
+        CqlBoolean i_() {
             CqlValueSet eh_ = this.Hospice_Diagnosis(context);
             IEnumerable<Condition> ei_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, eh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> ej_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, eh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -772,15 +772,15 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             }
 
             bool? em_ = context.Operators.WhereAny<Condition>(ek_, el_);
-            return (bool?)((CqlBoolean)em_);
+            return em_;
         }
 
         return (bool?)(/* CQL 'or' (116:3-145:5) */ (/* CQL 'or' (116:3-140:5) */ (/* CQL 'or' (116:3-136:5) */ (/* CQL 'or' (116:3-131:5) */ (/* CQL 'or' (116:3-126:5) */ ((CqlBoolean)d_
-            || (CqlBoolean)e_())
-            || (CqlBoolean)f_())
-            || (CqlBoolean)g_())
-            || (CqlBoolean)h_())
-            || (CqlBoolean)i_()));
+            || e_())
+            || f_())
+            || g_())
+            || h_())
+            || i_()));
     }
 
 
@@ -808,7 +808,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             CqlInterval<CqlDateTime> q_ = context.Operators.Interval(m_, p_, true, true);
             bool? r_ = context.Operators.Overlaps(k_, q_, "day");
 
-            bool? s_() {
+            CqlBoolean s_() {
                 Code<ObservationStatus> t_ = PalliativeAssessment?.StatusElement;
                 ObservationStatus? u_ = t_?.Value;
                 string v_ = context.Operators.Convert<string>(u_);
@@ -818,16 +818,16 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     "corrected",
                 ];
                 bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
-                return (bool?)((CqlBoolean)x_);
+                return x_;
             }
 
             return (bool?)(/* CQL 'and' (157:7-158:78) */ ((CqlBoolean)r_
-                && (CqlBoolean)s_()));
+                && s_()));
         }
 
         bool? e_ = context.Operators.WhereAny<Observation>(c_, d_);
 
-        bool? f_() {
+        CqlBoolean f_() {
             CqlValueSet y_ = this.Palliative_Care_Diagnosis(context);
             IEnumerable<Condition> z_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> aa_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -847,11 +847,11 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             }
 
             bool? ad_ = context.Operators.WhereAny<Condition>(ab_, ac_);
-            return (bool?)((CqlBoolean)ad_);
+            return ad_;
         }
 
 
-        bool? g_() {
+        CqlBoolean g_() {
             CqlValueSet am_ = this.Palliative_Care_Encounter(context);
             IEnumerable<Encounter> an_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -866,24 +866,24 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> ax_ = context.Operators.Interval(at_, aw_, true, true);
                 bool? ay_ = context.Operators.Overlaps(ar_, ax_, "day");
 
-                bool? az_() {
+                CqlBoolean az_() {
                     Code<Encounter.EncounterStatus> ba_ = PalliativeEncounter?.StatusElement;
                     Encounter.EncounterStatus? bb_ = ba_?.Value;
                     Code<Encounter.EncounterStatus> bc_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(bb_);
                     bool? bd_ = context.Operators.Equal(bc_, "finished");
-                    return (bool?)((CqlBoolean)bd_);
+                    return bd_;
                 }
 
                 return (bool?)(/* CQL 'and' (166:9-167:53) */ ((CqlBoolean)ay_
-                    && (CqlBoolean)az_()));
+                    && az_()));
             }
 
             bool? ap_ = context.Operators.WhereAny<Encounter>(an_, ao_);
-            return (bool?)((CqlBoolean)ap_);
+            return ap_;
         }
 
 
-        bool? h_() {
+        CqlBoolean h_() {
             CqlValueSet be_ = this.Palliative_Care_Intervention(context);
             IEnumerable<Procedure> bf_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, be_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
@@ -933,7 +933,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> bp_ = context.Operators.Interval(bl_, bo_, true, true);
                 bool? bq_ = context.Operators.Overlaps(bj_, bp_, "day");
 
-                bool? br_() {
+                CqlBoolean br_() {
                     Code<EventStatus> by_ = PalliativeIntervention?.StatusElement;
                     EventStatus? bz_ = by_?.Value;
                     string ca_ = context.Operators.Convert<string>(bz_);
@@ -943,21 +943,21 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                         "unknown",
                     ];
                     bool? cc_ = context.Operators.In<string>(ca_, (IEnumerable<string>)cb_);
-                    return (bool?)((CqlBoolean)!cc_);
+                    return !cc_;
                 }
 
                 return (bool?)(/* CQL 'and' (170:9-171:100) */ ((CqlBoolean)bq_
-                    && (CqlBoolean)br_()));
+                    && br_()));
             }
 
             bool? bh_ = context.Operators.WhereAny<Procedure>(bf_, bg_);
-            return (bool?)((CqlBoolean)bh_);
+            return bh_;
         }
 
         return (bool?)(/* CQL 'or' (156:3-172:5) */ (/* CQL 'or' (156:3-168:5) */ (/* CQL 'or' (156:3-164:5) */ ((CqlBoolean)e_
-            || (CqlBoolean)f_())
-            || (CqlBoolean)g_())
-            || (CqlBoolean)h_()));
+            || f_())
+            || g_())
+            || h_()));
     }
 
 
@@ -1066,7 +1066,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             CqlInterval<CqlDateTime> v_ = context.Operators.Interval(q_, s_, t_, u_);
             bool? w_ = context.Operators.In<CqlDateTime>(n_, v_, "day");
 
-            bool? x_() {
+            CqlBoolean x_() {
                 Code<ObservationStatus> y_ = DepressionAssessment?.StatusElement;
                 ObservationStatus? z_ = y_?.Value;
                 string aa_ = context.Operators.Convert<string>(z_);
@@ -1076,11 +1076,11 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     "corrected",
                 ];
                 bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
-                return (bool?)((CqlBoolean)ac_);
+                return ac_;
             }
 
             return (bool?)(/* CQL 'and' (55:7-56:78) */ ((CqlBoolean)w_
-                && (CqlBoolean)x_()));
+                && x_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);

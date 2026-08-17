@@ -108,14 +108,14 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         int? f_ = context.Operators.CalculateAgeAt(c_, e_, "year");
         bool? g_ = context.Operators.GreaterOrEqual(f_, 16);
 
-        bool? h_() {
+        CqlBoolean h_() {
             IEnumerable<Condition> i_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
             bool? j_ = context.Operators.Exists<Condition>(i_);
-            return (bool?)((CqlBoolean)j_);
+            return j_;
         }
 
         return (bool?)(/* CQL 'and' (32:2-32:117) */ ((CqlBoolean)g_
-            && (CqlBoolean)h_()));
+            && h_()));
     }
 
 
@@ -208,7 +208,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             CqlCode f_ = this.Tiny_Umbrella(context);
             bool? g_ = context.Operators.Equivalent(e_, f_);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 Condition i_ = this.Latest_injury_due_to_falling_rock(context);
                 Condition[] j_ = [
                     i_,
@@ -229,11 +229,11 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
                 IEnumerable<Condition> l_ = context.Operators.Where<Condition>((IEnumerable<Condition>)j_, k_);
                 Condition m_ = context.Operators.SingletonFrom<Condition>(l_);
-                return (bool?)((CqlBoolean)(!((bool?)(m_ is null))));
+                return !((bool?)(m_ is null));
             }
 
             return (bool?)(/* CQL 'and' (68:6-69:141) */ ((CqlBoolean)g_
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_, b_);

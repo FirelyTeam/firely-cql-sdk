@@ -177,27 +177,27 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
             bool? n_ = context.Operators.GreaterOrEqual(m_, 18);
 
-            bool? o_() {
+            CqlBoolean o_() {
                 Period q_ = InpatientEncounter?.Period;
                 CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
                 CqlDateTime s_ = context.Operators.End(r_);
                 CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
                 bool? u_ = context.Operators.In<CqlDateTime>(s_, t_, "day");
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
 
-            bool? p_() {
+            CqlBoolean p_() {
                 Code<Encounter.EncounterStatus> v_ = InpatientEncounter?.StatusElement;
                 Encounter.EncounterStatus? w_ = v_?.Value;
                 Code<Encounter.EncounterStatus> x_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(w_);
                 bool? y_ = context.Operators.Equal(x_, "finished");
-                return (bool?)((CqlBoolean)y_);
+                return y_;
             }
 
             return (bool?)(/* CQL 'and' (55:5-57:48) */ (/* CQL 'and' (55:11-56:75) */ ((CqlBoolean)n_
-                && (CqlBoolean)o_())
-                && (CqlBoolean)p_()));
+                && o_())
+                && p_()));
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -266,42 +266,40 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
         ];
         bool? e_ = context.Operators.In<string>(c_, (IEnumerable<string>)d_);
 
-        bool? f_() {
+        CqlBoolean f_() {
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             DataType i_ = observation?.Effective;
             object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
             bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, (string)default);
-            return (bool?)((CqlBoolean)l_);
+            return l_;
         }
 
 
-        bool? g_() {
-            bool? m_;
+        CqlBoolean g_() {
             if (observation is Observation)
             {
-                DataType n_ = (observation as Observation)?.Value;
-                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-                bool? p_ = context.Operators.ConceptInValueSet(o_ as CqlConcept, vset);
-                m_ = p_;
+                DataType m_ = (observation as Observation)?.Value;
+                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+                bool? o_ = context.Operators.ConceptInValueSet(n_ as CqlConcept, vset);
+                return o_;
             }
             else if (observation is Observation)
             {
-                DataType q_ = (observation as Observation)?.Value;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool? s_ = context.Operators.ConceptInValueSet(r_ as CqlConcept, vset);
-                m_ = s_;
+                DataType p_ = (observation as Observation)?.Value;
+                object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+                bool? r_ = context.Operators.ConceptInValueSet(q_ as CqlConcept, vset);
+                return r_;
             }
             else
             {
-                m_ = default;
+                return default;
             }
-            return (bool?)((CqlBoolean)m_);
         }
 
         return (bool?)(/* CQL 'and' (136:3-141:19) */ (/* CQL 'and' (136:3-137:72) */ ((CqlBoolean)e_
-            && (CqlBoolean)f_())
-            && (CqlBoolean)g_()));
+            && f_())
+            && g_()));
     }
 
 

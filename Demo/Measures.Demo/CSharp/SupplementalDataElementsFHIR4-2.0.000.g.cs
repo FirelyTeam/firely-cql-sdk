@@ -94,15 +94,15 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
             bool? s_ = context.Operators.Equal(r_, "ombCategory");
 
-            bool? t_() {
+            CqlBoolean t_() {
                 FhirUri u_ = E?.UrlElement;
                 string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
                 bool? w_ = context.Operators.Equal(v_, "detailed");
-                return (bool?)((CqlBoolean)w_);
+                return w_;
             }
 
             return (bool?)(/* CQL 'or' (25:7-26:29) */ ((CqlBoolean)s_
-                || (CqlBoolean)t_()));
+                || t_()));
         }
 
 
@@ -182,15 +182,15 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
             bool? s_ = context.Operators.Equal(r_, "ombCategory");
 
-            bool? t_() {
+            CqlBoolean t_() {
                 FhirUri u_ = E?.UrlElement;
                 string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
                 bool? w_ = context.Operators.Equal(v_, "detailed");
-                return (bool?)((CqlBoolean)w_);
+                return w_;
             }
 
             return (bool?)(/* CQL 'or' (42:7-43:29) */ ((CqlBoolean)s_
-                || (CqlBoolean)t_()));
+                || t_()));
         }
 
 

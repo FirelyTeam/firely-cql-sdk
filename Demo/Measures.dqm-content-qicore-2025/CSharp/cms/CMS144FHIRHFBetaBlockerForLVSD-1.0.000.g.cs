@@ -149,14 +149,14 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     {
         bool? a_ = this.Initial_Population(context);
 
-        bool? b_() {
+        CqlBoolean b_() {
             IEnumerable<Encounter> c_ = AHAOverall_4_1_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
             bool? d_ = context.Operators.Exists<Encounter>(c_);
-            return (bool?)((CqlBoolean)d_);
+            return d_;
         }
 
         return (bool?)(/* CQL 'and' (37:3-38:95) */ ((CqlBoolean)a_
-            && (CqlBoolean)b_()));
+            && b_()));
     }
 
 
@@ -217,16 +217,16 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                 string o_ = context.Operators.Last<string>(n_);
                 bool? p_ = context.Operators.Equal(l_, o_);
 
-                bool? q_() {
+                CqlBoolean q_() {
                     CodeableConcept r_ = M?.Code;
                     CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
                     CqlValueSet t_ = this.Beta_Blocker_Therapy_for_LVSD(context);
                     bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
-                    return (bool?)((CqlBoolean)u_);
+                    return u_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)p_
-                    && (CqlBoolean)q_()));
+                    && q_()));
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -288,7 +288,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
             bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, (string)default);
 
-            bool? q_() {
+            CqlBoolean q_() {
                 Code<ObservationStatus> t_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.StatusElement;
                 ObservationStatus? u_ = t_?.Value;
                 string v_ = context.Operators.Convert<string>(u_);
@@ -298,20 +298,20 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                     "corrected",
                 ];
                 bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
-                return (bool?)((CqlBoolean)x_);
+                return x_;
             }
 
 
-            bool? r_() {
+            CqlBoolean r_() {
                 DataType y_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Value;
                 CqlQuantity z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_ as Quantity);
                 CqlQuantity aa_ = context.Operators.Quantity(50m, "/min");
                 bool? ab_ = context.Operators.Less(z_, aa_);
-                return (bool?)((CqlBoolean)ab_);
+                return ab_;
             }
 
 
-            bool? s_() {
+            CqlBoolean s_() {
                 IEnumerable<Observation> ac_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate"));
 
                 bool? ad_(Observation MostRecentPriorHeartRate) {
@@ -322,7 +322,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                     CqlInterval<CqlDateTime> aq_ = QICoreCommon_4_0_000.Instance.toInterval(context, ap_);
                     bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(an_, aq_, (string)default);
 
-                    bool? as_() {
+                    CqlBoolean as_() {
                         DataType at_ = MostRecentPriorHeartRate?.Effective;
                         object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
                         CqlInterval<CqlDateTime> av_ = QICoreCommon_4_0_000.Instance.toInterval(context, au_);
@@ -330,11 +330,11 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                         object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
                         CqlInterval<CqlDateTime> ay_ = QICoreCommon_4_0_000.Instance.toInterval(context, ax_);
                         bool? az_ = context.Operators.Before(av_, ay_, (string)default);
-                        return (bool?)((CqlBoolean)az_);
+                        return az_;
                     }
 
                     return (bool?)(/* CQL 'and' (126:11-127:103) */ ((CqlBoolean)ar_
-                        && (CqlBoolean)as_()));
+                        && as_()));
                 }
 
                 IEnumerable<Observation> ae_ = context.Operators.Where<Observation>(ac_, ad_);
@@ -353,13 +353,13 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                 CqlQuantity aj_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ai_ as Quantity);
                 CqlQuantity ak_ = context.Operators.Quantity(50m, "/min");
                 bool? al_ = context.Operators.Less(aj_, ak_);
-                return (bool?)((CqlBoolean)al_);
+                return al_;
             }
 
             return (bool?)(/* CQL 'and' (130:7-133:44) */ (/* CQL 'and' (130:13-132:39) */ (/* CQL 'and' (130:13-131:67) */ ((CqlBoolean)p_
-                && (CqlBoolean)q_())
-                && (CqlBoolean)r_())
-                && (CqlBoolean)s_()));
+                && q_())
+                && r_())
+                && s_()));
         }
 
         IEnumerable<(CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?> f_ = context.Operators.SelectWhere<ValueTuple<Observation, Encounter>, (CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?>(c_, d_, e_);
@@ -411,7 +411,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             CqlValueSet r_ = this.Medical_Reason(context);
             bool? s_ = context.Operators.ConceptsInValueSet(q_, r_);
 
-            bool? t_() {
+            CqlBoolean t_() {
                 List<CodeableConcept> v_ = NoBetaBlockerOrdered?.ReasonCode;
 
                 CqlConcept w_(CodeableConcept @this) {
@@ -422,11 +422,11 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                 IEnumerable<CqlConcept> x_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)v_, w_);
                 CqlValueSet y_ = this.Patient_Reason(context);
                 bool? z_ = context.Operators.ConceptsInValueSet(x_, y_);
-                return (bool?)((CqlBoolean)z_);
+                return z_;
             }
 
             return (bool?)(/* CQL 'or' (174:7-176:7) */ ((CqlBoolean)s_
-                || (CqlBoolean)t_()));
+                || t_()));
         }
 
         bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
@@ -441,28 +441,28 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         CodeableConcept a_ = allergyIntolerance?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             CodeableConcept d_ = allergyIntolerance?.VerificationStatus;
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
             bool? h_ = context.Operators.Equivalent(e_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 CodeableConcept j_ = allergyIntolerance?.VerificationStatus;
                 CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
                 CqlCode l_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
                 CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
                 bool? n_ = context.Operators.Equivalent(k_, m_);
-                return (bool?)((CqlBoolean)n_);
+                return n_;
             }
 
-            return (bool?)(/* CQL 'or' (185:61-187:3) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_()));
+            return /* CQL 'or' (185:61-187:3) */ ((CqlBoolean)h_
+                || i_());
         }
 
         return (bool?)(/* CQL 'implies' (185:3-187:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || (CqlBoolean)c_()));
+            || c_()));
     }
 
 

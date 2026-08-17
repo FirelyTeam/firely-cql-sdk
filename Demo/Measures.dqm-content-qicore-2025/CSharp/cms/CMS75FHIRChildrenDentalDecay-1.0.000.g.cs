@@ -108,14 +108,14 @@ public partial class CMS75FHIRChildrenDentalDecay_1_0_000 : ILibrary, ISingleton
         CqlInterval<int?> i_ = context.Operators.Interval(1, 20, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
-        bool? k_() {
+        CqlBoolean k_() {
             IEnumerable<Encounter> l_ = this.Qualifying_Encounters(context);
             bool? m_ = context.Operators.Exists<Encounter>(l_);
-            return (bool?)((CqlBoolean)m_);
+            return m_;
         }
 
         return (bool?)(/* CQL 'and' (20:3-21:42) */ ((CqlBoolean)j_
-            && (CqlBoolean)k_()));
+            && k_()));
     }
 
 

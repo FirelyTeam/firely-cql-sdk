@@ -187,26 +187,26 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
 
-            bool? j_() {
+            CqlBoolean j_() {
                 Code<Encounter.EncounterStatus> l_ = ValidEncounter?.StatusElement;
                 Encounter.EncounterStatus? m_ = l_?.Value;
                 Code<Encounter.EncounterStatus> n_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(m_);
                 bool? o_ = context.Operators.Equivalent(n_, "finished");
-                return (bool?)((CqlBoolean)o_);
+                return o_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 Coding p_ = ValidEncounter?.Class;
                 CqlCode q_ = FHIRHelpers_4_4_000.Instance.ToCode(context, p_);
                 CqlCode r_ = this.@virtual(context);
                 bool? s_ = context.Operators.Equivalent(q_, r_);
-                return (bool?)((CqlBoolean)!s_);
+                return !s_;
             }
 
             return (bool?)(/* CQL 'and' (145:5-147:43) */ (/* CQL 'and' (145:11-146:44) */ ((CqlBoolean)i_
-                && (CqlBoolean)j_())
-                && (CqlBoolean)k_()));
+                && j_())
+                && k_()));
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -262,50 +262,50 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             CodeableConcept d_ = condition?.VerificationStatus;
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
             bool? h_ = context.Operators.Equivalent(e_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 CodeableConcept l_ = condition?.VerificationStatus;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
                 CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
                 CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
                 bool? p_ = context.Operators.Equivalent(m_, o_);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 CodeableConcept q_ = condition?.VerificationStatus;
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
                 CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
                 bool? u_ = context.Operators.Equivalent(r_, t_);
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 CodeableConcept v_ = condition?.VerificationStatus;
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
                 bool? z_ = context.Operators.Equivalent(w_, y_);
-                return (bool?)((CqlBoolean)z_);
+                return z_;
             }
 
-            return (bool?)(/* CQL 'or' (408:52-412:3) */ (/* CQL 'or' (408:54-410:66) */ (/* CQL 'or' (408:54-409:66) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_())
-                || (CqlBoolean)j_())
-                || (CqlBoolean)k_()));
+            return /* CQL 'or' (408:52-412:3) */ (/* CQL 'or' (408:54-410:66) */ (/* CQL 'or' (408:54-409:66) */ ((CqlBoolean)h_
+                || i_())
+                || j_())
+                || k_());
         }
 
         return (bool?)(/* CQL 'implies' (408:3-412:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || (CqlBoolean)c_()));
+            || c_()));
     }
 
 
@@ -374,7 +374,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
                 bool? aa_ = context.Operators.In<CqlDateTime>(x_, z_, "day");
 
-                bool? ab_() {
+                CqlBoolean ab_() {
                     Code<ObservationStatus> ac_ = BloodPressure?.StatusElement;
                     ObservationStatus? ad_ = ac_?.Value;
                     string ae_ = context.Operators.Convert<string>(ad_);
@@ -384,11 +384,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         "corrected",
                     ];
                     bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
-                    return (bool?)((CqlBoolean)ag_);
+                    return ag_;
                 }
 
                 return (bool?)(/* CQL 'and' (164:9-165:73) */ ((CqlBoolean)aa_
-                    && (CqlBoolean)ab_()));
+                    && ab_()));
             }
 
             IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
@@ -423,7 +423,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlQuantity> r_ = context.Operators.Interval(p_, q_, true, false);
             bool? s_ = context.Operators.In<CqlQuantity>(o_ as CqlQuantity, r_, (string)default);
 
-            bool? t_() {
+            CqlBoolean t_() {
                 IEnumerable<Observation> aq_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                 bool? ar_(Observation BloodPressure) {
@@ -435,7 +435,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> bl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bk_);
                     bool? bm_ = context.Operators.In<CqlDateTime>(bj_, bl_, "day");
 
-                    bool? bn_() {
+                    CqlBoolean bn_() {
                         Code<ObservationStatus> bo_ = BloodPressure?.StatusElement;
                         ObservationStatus? bp_ = bo_?.Value;
                         string bq_ = context.Operators.Convert<string>(bp_);
@@ -445,11 +445,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                             "corrected",
                         ];
                         bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
-                        return (bool?)((CqlBoolean)bs_);
+                        return bs_;
                     }
 
                     return (bool?)(/* CQL 'and' (164:9-165:73) */ ((CqlBoolean)bm_
-                        && (CqlBoolean)bn_()));
+                        && bn_()));
                 }
 
                 IEnumerable<Observation> as_ = context.Operators.Where<Observation>(aq_, ar_);
@@ -483,11 +483,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlQuantity bd_ = context.Operators.Quantity(80m, "mm[Hg]");
                 CqlInterval<CqlQuantity> be_ = context.Operators.Interval(bc_, bd_, true, false);
                 bool? bf_ = context.Operators.In<CqlQuantity>(bb_ as CqlQuantity, be_, (string)default);
-                return (bool?)((CqlBoolean)bf_);
+                return bf_;
             }
 
             return (bool?)(/* CQL 'and' (168:5-175:51) */ ((CqlBoolean)s_
-                && (CqlBoolean)t_()));
+                && t_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -517,7 +517,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
                 bool? aa_ = context.Operators.In<CqlDateTime>(x_, z_, "day");
 
-                bool? ab_() {
+                CqlBoolean ab_() {
                     Code<ObservationStatus> ac_ = BloodPressure?.StatusElement;
                     ObservationStatus? ad_ = ac_?.Value;
                     string ae_ = context.Operators.Convert<string>(ad_);
@@ -527,11 +527,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         "corrected",
                     ];
                     bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
-                    return (bool?)((CqlBoolean)ag_);
+                    return ag_;
                 }
 
                 return (bool?)(/* CQL 'and' (180:9-181:73) */ ((CqlBoolean)aa_
-                    && (CqlBoolean)ab_()));
+                    && ab_()));
             }
 
             IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
@@ -566,7 +566,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlQuantity> r_ = context.Operators.Interval(p_, q_, true, true);
             bool? s_ = context.Operators.In<CqlQuantity>(o_ as CqlQuantity, r_, (string)default);
 
-            bool? t_() {
+            CqlBoolean t_() {
                 IEnumerable<Observation> aq_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                 bool? ar_(Observation BloodPressure) {
@@ -578,7 +578,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> bl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bk_);
                     bool? bm_ = context.Operators.In<CqlDateTime>(bj_, bl_, "day");
 
-                    bool? bn_() {
+                    CqlBoolean bn_() {
                         Code<ObservationStatus> bo_ = BloodPressure?.StatusElement;
                         ObservationStatus? bp_ = bo_?.Value;
                         string bq_ = context.Operators.Convert<string>(bp_);
@@ -588,11 +588,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                             "corrected",
                         ];
                         bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
-                        return (bool?)((CqlBoolean)bs_);
+                        return bs_;
                     }
 
                     return (bool?)(/* CQL 'and' (180:9-181:73) */ ((CqlBoolean)bm_
-                        && (CqlBoolean)bn_()));
+                        && bn_()));
                 }
 
                 IEnumerable<Observation> as_ = context.Operators.Where<Observation>(aq_, ar_);
@@ -626,11 +626,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlQuantity bd_ = context.Operators.Quantity(80m, "mm[Hg]");
                 CqlInterval<CqlQuantity> be_ = context.Operators.Interval(bc_, bd_, true, false);
                 bool? bf_ = context.Operators.In<CqlQuantity>(bb_ as CqlQuantity, be_, (string)default);
-                return (bool?)((CqlBoolean)bf_);
+                return bf_;
             }
 
             return (bool?)(/* CQL 'and' (184:5-192:5) */ ((CqlBoolean)s_
-                && (CqlBoolean)t_()));
+                && t_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -729,7 +729,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             CqlValueSet h_ = this.Finding_of_Elevated_Blood_Pressure_or_Hypertension(context);
             bool? i_ = context.Operators.ConceptsInValueSet(g_, h_);
 
-            bool? j_() {
+            CqlBoolean j_() {
                 Code<RequestIntent> l_ = Referral?.IntentElement;
                 RequestIntent? m_ = l_?.Value;
                 Code<RequestIntent> n_ = context.Operators.Convert<Code<RequestIntent>>(m_);
@@ -742,11 +742,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     "instance-order",
                 ];
                 bool? q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
-                return (bool?)((CqlBoolean)q_);
+                return q_;
             }
 
             return (bool?)(/* CQL 'and' (118:5-119:108) */ ((CqlBoolean)i_
-                && (CqlBoolean)j_()));
+                && j_()));
         }
 
         IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
@@ -848,15 +848,15 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(ab_, z_, true, true);
                 bool? ad_ = context.Operators.In<CqlDateTime>(w_, ac_, (string)default);
 
-                bool? ae_() {
+                CqlBoolean ae_() {
                     Period ag_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ag_);
                     CqlDateTime ai_ = context.Operators.Start(ah_);
-                    return (bool?)((CqlBoolean)(!((bool?)(ai_ is null))));
+                    return !((bool?)(ai_ is null));
                 }
 
 
-                bool? af_() {
+                CqlBoolean af_() {
                     Code<ObservationStatus> aj_ = BloodPressure?.StatusElement;
                     ObservationStatus? ak_ = aj_?.Value;
                     string al_ = context.Operators.Convert<string>(ak_);
@@ -866,12 +866,12 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         "corrected",
                     ];
                     bool? an_ = context.Operators.In<string>(al_, (IEnumerable<string>)am_);
-                    return (bool?)((CqlBoolean)an_);
+                    return an_;
                 }
 
                 return (bool?)(/* CQL 'and' (285:11-286:75) */ (/* CQL 'and' (285:17-285:121) */ ((CqlBoolean)ad_
-                    && (CqlBoolean)ae_())
-                    && (CqlBoolean)af_()));
+                    && ae_())
+                    && af_()));
             }
 
             IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
@@ -904,7 +904,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             CqlQuantity p_ = context.Operators.Quantity(0m, "mm[Hg]");
             bool? q_ = context.Operators.Greater(o_ as CqlQuantity, p_);
 
-            bool? r_() {
+            CqlBoolean r_() {
                 IEnumerable<Observation> ax_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                 bool? ay_(Observation BloodPressure) {
@@ -920,15 +920,15 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> bu_ = context.Operators.Interval(bt_, br_, true, true);
                     bool? bv_ = context.Operators.In<CqlDateTime>(bo_, bu_, (string)default);
 
-                    bool? bw_() {
+                    CqlBoolean bw_() {
                         Period by_ = QualifyingEncounter?.Period;
                         CqlInterval<CqlDateTime> bz_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, by_);
                         CqlDateTime ca_ = context.Operators.Start(bz_);
-                        return (bool?)((CqlBoolean)(!((bool?)(ca_ is null))));
+                        return !((bool?)(ca_ is null));
                     }
 
 
-                    bool? bx_() {
+                    CqlBoolean bx_() {
                         Code<ObservationStatus> cb_ = BloodPressure?.StatusElement;
                         ObservationStatus? cc_ = cb_?.Value;
                         string cd_ = context.Operators.Convert<string>(cc_);
@@ -938,12 +938,12 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                             "corrected",
                         ];
                         bool? cf_ = context.Operators.In<string>(cd_, (IEnumerable<string>)ce_);
-                        return (bool?)((CqlBoolean)cf_);
+                        return cf_;
                     }
 
                     return (bool?)(/* CQL 'and' (285:11-286:75) */ (/* CQL 'and' (285:17-285:121) */ ((CqlBoolean)bv_
-                        && (CqlBoolean)bw_())
-                        && (CqlBoolean)bx_()));
+                        && bw_())
+                        && bx_()));
                 }
 
                 IEnumerable<Observation> az_ = context.Operators.Where<Observation>(ax_, ay_);
@@ -975,11 +975,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
                 CqlQuantity bj_ = context.Operators.Quantity(0m, "mm[Hg]");
                 bool? bk_ = context.Operators.Greater(bi_ as CqlQuantity, bj_);
-                return (bool?)((CqlBoolean)bk_);
+                return bk_;
             }
 
 
-            bool? s_() {
+            CqlBoolean s_() {
                 IEnumerable<Observation> cp_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                 bool? cq_(Observation BloodPressure) {
@@ -995,15 +995,15 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> dn_ = context.Operators.Interval(dm_, dk_, true, true);
                     bool? do_ = context.Operators.In<CqlDateTime>(dh_, dn_, (string)default);
 
-                    bool? dp_() {
+                    CqlBoolean dp_() {
                         Period dr_ = QualifyingEncounter?.Period;
                         CqlInterval<CqlDateTime> ds_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dr_);
                         CqlDateTime dt_ = context.Operators.Start(ds_);
-                        return (bool?)((CqlBoolean)(!((bool?)(dt_ is null))));
+                        return !((bool?)(dt_ is null));
                     }
 
 
-                    bool? dq_() {
+                    CqlBoolean dq_() {
                         Code<ObservationStatus> du_ = BloodPressure?.StatusElement;
                         ObservationStatus? dv_ = du_?.Value;
                         string dw_ = context.Operators.Convert<string>(dv_);
@@ -1013,12 +1013,12 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                             "corrected",
                         ];
                         bool? dy_ = context.Operators.In<string>(dw_, (IEnumerable<string>)dx_);
-                        return (bool?)((CqlBoolean)dy_);
+                        return dy_;
                     }
 
                     return (bool?)(/* CQL 'and' (285:11-286:75) */ (/* CQL 'and' (285:17-285:121) */ ((CqlBoolean)do_
-                        && (CqlBoolean)dp_())
-                        && (CqlBoolean)dq_()));
+                        && dp_())
+                        && dq_()));
                 }
 
                 IEnumerable<Observation> cr_ = context.Operators.Where<Observation>(cp_, cq_);
@@ -1051,7 +1051,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlQuantity db_ = context.Operators.Quantity(130m, "mm[Hg]");
                 bool? dc_ = context.Operators.GreaterOrEqual(da_ as CqlQuantity, db_);
 
-                bool? dd_() {
+                CqlBoolean dd_() {
                     IEnumerable<Observation> ei_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                     bool? ej_(Observation BloodPressure) {
@@ -1067,15 +1067,15 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         CqlInterval<CqlDateTime> ff_ = context.Operators.Interval(fe_, fc_, true, true);
                         bool? fg_ = context.Operators.In<CqlDateTime>(ez_, ff_, (string)default);
 
-                        bool? fh_() {
+                        CqlBoolean fh_() {
                             Period fj_ = QualifyingEncounter?.Period;
                             CqlInterval<CqlDateTime> fk_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fj_);
                             CqlDateTime fl_ = context.Operators.Start(fk_);
-                            return (bool?)((CqlBoolean)(!((bool?)(fl_ is null))));
+                            return !((bool?)(fl_ is null));
                         }
 
 
-                        bool? fi_() {
+                        CqlBoolean fi_() {
                             Code<ObservationStatus> fm_ = BloodPressure?.StatusElement;
                             ObservationStatus? fn_ = fm_?.Value;
                             string fo_ = context.Operators.Convert<string>(fn_);
@@ -1085,12 +1085,12 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                                 "corrected",
                             ];
                             bool? fq_ = context.Operators.In<string>(fo_, (IEnumerable<string>)fp_);
-                            return (bool?)((CqlBoolean)fq_);
+                            return fq_;
                         }
 
                         return (bool?)(/* CQL 'and' (285:11-286:75) */ (/* CQL 'and' (285:17-285:121) */ ((CqlBoolean)fg_
-                            && (CqlBoolean)fh_())
-                            && (CqlBoolean)fi_()));
+                            && fh_())
+                            && fi_()));
                     }
 
                     IEnumerable<Observation> ek_ = context.Operators.Where<Observation>(ei_, ej_);
@@ -1122,16 +1122,16 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     object et_ = FHIRHelpers_4_4_000.Instance.ToValue(context, es_);
                     CqlQuantity eu_ = context.Operators.Quantity(80m, "mm[Hg]");
                     bool? ev_ = context.Operators.GreaterOrEqual(et_ as CqlQuantity, eu_);
-                    return (bool?)((CqlBoolean)ev_);
+                    return ev_;
                 }
 
-                return (bool?)(/* CQL 'or' (297:15-305:11) */ ((CqlBoolean)dc_
-                    || (CqlBoolean)dd_()));
+                return /* CQL 'or' (297:15-305:11) */ ((CqlBoolean)dc_
+                    || dd_());
             }
 
             return (bool?)(/* CQL 'and' (289:7-306:7) */ (/* CQL 'and' (289:15-296:30) */ ((CqlBoolean)q_
-                && (CqlBoolean)r_())
-                && (CqlBoolean)s_()));
+                && r_())
+                && s_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1161,7 +1161,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
                 bool? ab_ = context.Operators.In<CqlDateTime>(y_, aa_, "day");
 
-                bool? ac_() {
+                CqlBoolean ac_() {
                     Code<ObservationStatus> ad_ = BloodPressure?.StatusElement;
                     ObservationStatus? ae_ = ad_?.Value;
                     string af_ = context.Operators.Convert<string>(ae_);
@@ -1171,11 +1171,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         "corrected",
                     ];
                     bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
-                    return (bool?)((CqlBoolean)ah_);
+                    return ah_;
                 }
 
                 return (bool?)(/* CQL 'and' (256:11-257:75) */ ((CqlBoolean)ab_
-                    && (CqlBoolean)ac_()));
+                    && ac_()));
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -1208,7 +1208,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             CqlQuantity r_ = context.Operators.Quantity(0m, "mm[Hg]");
             bool? s_ = context.Operators.Greater(q_ as CqlQuantity, r_);
 
-            bool? t_() {
+            CqlBoolean t_() {
                 IEnumerable<Observation> ar_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                 bool? as_(Observation BloodPressure) {
@@ -1220,7 +1220,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> bk_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bj_);
                     bool? bl_ = context.Operators.In<CqlDateTime>(bi_, bk_, "day");
 
-                    bool? bm_() {
+                    CqlBoolean bm_() {
                         Code<ObservationStatus> bn_ = BloodPressure?.StatusElement;
                         ObservationStatus? bo_ = bn_?.Value;
                         string bp_ = context.Operators.Convert<string>(bo_);
@@ -1230,11 +1230,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                             "corrected",
                         ];
                         bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string>)bq_);
-                        return (bool?)((CqlBoolean)br_);
+                        return br_;
                     }
 
                     return (bool?)(/* CQL 'and' (256:11-257:75) */ ((CqlBoolean)bl_
-                        && (CqlBoolean)bm_()));
+                        && bm_()));
                 }
 
                 IEnumerable<Observation> at_ = context.Operators.Where<Observation>(ar_, as_);
@@ -1266,11 +1266,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
                 CqlQuantity bd_ = context.Operators.Quantity(0m, "mm[Hg]");
                 bool? be_ = context.Operators.Greater(bc_ as CqlQuantity, bd_);
-                return (bool?)((CqlBoolean)be_);
+                return be_;
             }
 
 
-            bool? u_() {
+            CqlBoolean u_() {
                 IEnumerable<Observation> cb_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                 bool? cc_(Observation BloodPressure) {
@@ -1282,7 +1282,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> cv_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cu_);
                     bool? cw_ = context.Operators.In<CqlDateTime>(ct_, cv_, "day");
 
-                    bool? cx_() {
+                    CqlBoolean cx_() {
                         Code<ObservationStatus> cy_ = BloodPressure?.StatusElement;
                         ObservationStatus? cz_ = cy_?.Value;
                         string da_ = context.Operators.Convert<string>(cz_);
@@ -1292,11 +1292,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                             "corrected",
                         ];
                         bool? dc_ = context.Operators.In<string>(da_, (IEnumerable<string>)db_);
-                        return (bool?)((CqlBoolean)dc_);
+                        return dc_;
                     }
 
                     return (bool?)(/* CQL 'and' (256:11-257:75) */ ((CqlBoolean)cw_
-                        && (CqlBoolean)cx_()));
+                        && cx_()));
                 }
 
                 IEnumerable<Observation> cd_ = context.Operators.Where<Observation>(cb_, cc_);
@@ -1329,7 +1329,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlQuantity cn_ = context.Operators.Quantity(130m, "mm[Hg]");
                 bool? co_ = context.Operators.GreaterOrEqual(cm_ as CqlQuantity, cn_);
 
-                bool? cp_() {
+                CqlBoolean cp_() {
                     IEnumerable<Observation> dm_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                     bool? dn_(Observation BloodPressure) {
@@ -1341,7 +1341,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         CqlInterval<CqlDateTime> ef_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ee_);
                         bool? eg_ = context.Operators.In<CqlDateTime>(ed_, ef_, "day");
 
-                        bool? eh_() {
+                        CqlBoolean eh_() {
                             Code<ObservationStatus> ei_ = BloodPressure?.StatusElement;
                             ObservationStatus? ej_ = ei_?.Value;
                             string ek_ = context.Operators.Convert<string>(ej_);
@@ -1351,11 +1351,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                                 "corrected",
                             ];
                             bool? em_ = context.Operators.In<string>(ek_, (IEnumerable<string>)el_);
-                            return (bool?)((CqlBoolean)em_);
+                            return em_;
                         }
 
                         return (bool?)(/* CQL 'and' (256:11-257:75) */ ((CqlBoolean)eg_
-                            && (CqlBoolean)eh_()));
+                            && eh_()));
                     }
 
                     IEnumerable<Observation> do_ = context.Operators.Where<Observation>(dm_, dn_);
@@ -1387,16 +1387,16 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     object dx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dw_);
                     CqlQuantity dy_ = context.Operators.Quantity(80m, "mm[Hg]");
                     bool? dz_ = context.Operators.GreaterOrEqual(dx_ as CqlQuantity, dy_);
-                    return (bool?)((CqlBoolean)dz_);
+                    return dz_;
                 }
 
-                return (bool?)(/* CQL 'or' (269:15-277:11) */ ((CqlBoolean)co_
-                    || (CqlBoolean)cp_()));
+                return /* CQL 'or' (269:15-277:11) */ ((CqlBoolean)co_
+                    || cp_());
             }
 
             return (bool?)(/* CQL 'and' (260:7-278:7) */ (/* CQL 'and' (260:15-268:9) */ ((CqlBoolean)s_
-                && (CqlBoolean)t_())
-                && (CqlBoolean)u_()));
+                && t_())
+                && u_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1426,16 +1426,16 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
 
-                bool? n_() {
+                CqlBoolean n_() {
                     FhirDateTime p_ = NonPharmInterventionsHTN?.AuthoredOnElement;
                     CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
                     CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
                     bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
-                    return (bool?)((CqlBoolean)s_);
+                    return s_;
                 }
 
 
-                bool? o_() {
+                CqlBoolean o_() {
                     Code<RequestIntent> t_ = FourWeekRescreen?.IntentElement;
                     RequestIntent? u_ = t_?.Value;
                     Code<RequestIntent> v_ = context.Operators.Convert<Code<RequestIntent>>(u_);
@@ -1448,12 +1448,12 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         "instance-order",
                     ];
                     bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
-                    return (bool?)((CqlBoolean)y_);
+                    return y_;
                 }
 
                 return (bool?)(/* CQL 'and' (110:19-112:120) */ (/* CQL 'and' (110:19-111:84) */ ((CqlBoolean)m_
-                    && (CqlBoolean)n_())
-                    && (CqlBoolean)o_()));
+                    && n_())
+                    && o_()));
             }
 
             bool? i_ = context.Operators.WhereAny<ServiceRequest>(g_, h_);
@@ -1520,7 +1520,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ab_);
                 bool? ad_ = context.Operators.In<CqlDateTime>(aa_, ac_, "day");
 
-                bool? ae_() {
+                CqlBoolean ae_() {
                     Code<ObservationStatus> af_ = BloodPressure?.StatusElement;
                     ObservationStatus? ag_ = af_?.Value;
                     string ah_ = context.Operators.Convert<string>(ag_);
@@ -1530,11 +1530,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         "corrected",
                     ];
                     bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
-                    return (bool?)((CqlBoolean)aj_);
+                    return aj_;
                 }
 
                 return (bool?)(/* CQL 'and' (226:13-227:77) */ ((CqlBoolean)ad_
-                    && (CqlBoolean)ae_()));
+                    && ae_()));
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -1569,7 +1569,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlQuantity> t_ = context.Operators.Interval(r_, s_, true, true);
             bool? u_ = context.Operators.In<CqlQuantity>(q_ as CqlQuantity, t_, (string)default);
 
-            bool? v_() {
+            CqlBoolean v_() {
                 IEnumerable<Observation> at_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                 bool? au_(Observation BloodPressure) {
@@ -1581,7 +1581,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> bo_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bn_);
                     bool? bp_ = context.Operators.In<CqlDateTime>(bm_, bo_, "day");
 
-                    bool? bq_() {
+                    CqlBoolean bq_() {
                         Code<ObservationStatus> br_ = BloodPressure?.StatusElement;
                         ObservationStatus? bs_ = br_?.Value;
                         string bt_ = context.Operators.Convert<string>(bs_);
@@ -1591,11 +1591,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                             "corrected",
                         ];
                         bool? bv_ = context.Operators.In<string>(bt_, (IEnumerable<string>)bu_);
-                        return (bool?)((CqlBoolean)bv_);
+                        return bv_;
                     }
 
                     return (bool?)(/* CQL 'and' (226:13-227:77) */ ((CqlBoolean)bp_
-                        && (CqlBoolean)bq_()));
+                        && bq_()));
                 }
 
                 IEnumerable<Observation> av_ = context.Operators.Where<Observation>(at_, au_);
@@ -1629,11 +1629,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlQuantity bg_ = context.Operators.Quantity(89m, "mm[Hg]");
                 CqlInterval<CqlQuantity> bh_ = context.Operators.Interval(bf_, bg_, true, true);
                 bool? bi_ = context.Operators.In<CqlQuantity>(be_ as CqlQuantity, bh_, (string)default);
-                return (bool?)((CqlBoolean)bi_);
+                return bi_;
             }
 
 
-            bool? w_() {
+            CqlBoolean w_() {
                 IEnumerable<Observation> cf_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                 bool? cg_(Observation BloodPressure) {
@@ -1645,7 +1645,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> cz_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cy_);
                     bool? da_ = context.Operators.In<CqlDateTime>(cx_, cz_, "day");
 
-                    bool? db_() {
+                    CqlBoolean db_() {
                         Code<ObservationStatus> dc_ = BloodPressure?.StatusElement;
                         ObservationStatus? dd_ = dc_?.Value;
                         string de_ = context.Operators.Convert<string>(dd_);
@@ -1655,11 +1655,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                             "corrected",
                         ];
                         bool? dg_ = context.Operators.In<string>(de_, (IEnumerable<string>)df_);
-                        return (bool?)((CqlBoolean)dg_);
+                        return dg_;
                     }
 
                     return (bool?)(/* CQL 'and' (226:13-227:77) */ ((CqlBoolean)da_
-                        && (CqlBoolean)db_()));
+                        && db_()));
                 }
 
                 IEnumerable<Observation> ch_ = context.Operators.Where<Observation>(cf_, cg_);
@@ -1692,7 +1692,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlQuantity cr_ = context.Operators.Quantity(140m, "mm[Hg]");
                 bool? cs_ = context.Operators.GreaterOrEqual(cq_ as CqlQuantity, cr_);
 
-                bool? ct_() {
+                CqlBoolean ct_() {
                     IEnumerable<Observation> dq_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                     bool? dr_(Observation BloodPressure) {
@@ -1704,7 +1704,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         CqlInterval<CqlDateTime> ej_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ei_);
                         bool? ek_ = context.Operators.In<CqlDateTime>(eh_, ej_, "day");
 
-                        bool? el_() {
+                        CqlBoolean el_() {
                             Code<ObservationStatus> em_ = BloodPressure?.StatusElement;
                             ObservationStatus? en_ = em_?.Value;
                             string eo_ = context.Operators.Convert<string>(en_);
@@ -1714,11 +1714,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                                 "corrected",
                             ];
                             bool? eq_ = context.Operators.In<string>(eo_, (IEnumerable<string>)ep_);
-                            return (bool?)((CqlBoolean)eq_);
+                            return eq_;
                         }
 
                         return (bool?)(/* CQL 'and' (226:13-227:77) */ ((CqlBoolean)ek_
-                            && (CqlBoolean)el_()));
+                            && el_()));
                     }
 
                     IEnumerable<Observation> ds_ = context.Operators.Where<Observation>(dq_, dr_);
@@ -1750,16 +1750,16 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     object eb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ea_);
                     CqlQuantity ec_ = context.Operators.Quantity(90m, "mm[Hg]");
                     bool? ed_ = context.Operators.GreaterOrEqual(eb_ as CqlQuantity, ec_);
-                    return (bool?)((CqlBoolean)ed_);
+                    return ed_;
                 }
 
-                return (bool?)((CqlBoolean)(!((bool?)(/* CQL 'or' (239:21-247:13) */ ((CqlBoolean)cs_
-                    || (CqlBoolean)ct_())))));
+                return !((bool?)(/* CQL 'or' (239:21-247:13) */ ((CqlBoolean)cs_
+                    || ct_())));
             }
 
             return (bool?)(/* CQL 'and' (230:9-248:9) */ (/* CQL 'or' (230:17-238:11) */ ((CqlBoolean)u_
-                || (CqlBoolean)v_())
-                && (CqlBoolean)w_()));
+                || v_())
+                && w_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1828,16 +1828,16 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
 
-                bool? m_() {
+                CqlBoolean m_() {
                     FhirDateTime n_ = LabECGIntervention?.AuthoredOnElement;
                     CqlDateTime o_ = context.Operators.Convert<CqlDateTime>(n_);
                     CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                     bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, "day");
-                    return (bool?)((CqlBoolean)q_);
+                    return q_;
                 }
 
                 return (bool?)(/* CQL 'and' (138:17-139:76) */ ((CqlBoolean)l_
-                    && (CqlBoolean)m_()));
+                    && m_()));
             }
 
             bool? h_ = context.Operators.WhereAny<ServiceRequest>(f_, g_);
@@ -1938,7 +1938,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
                 bool? ab_ = context.Operators.In<CqlDateTime>(y_, aa_, "day");
 
-                bool? ac_() {
+                CqlBoolean ac_() {
                     Code<ObservationStatus> ad_ = BloodPressure?.StatusElement;
                     ObservationStatus? ae_ = ad_?.Value;
                     string af_ = context.Operators.Convert<string>(ae_);
@@ -1948,11 +1948,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         "corrected",
                     ];
                     bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
-                    return (bool?)((CqlBoolean)ah_);
+                    return ah_;
                 }
 
                 return (bool?)(/* CQL 'and' (197:13-198:77) */ ((CqlBoolean)ab_
-                    && (CqlBoolean)ac_()));
+                    && ac_()));
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -1985,7 +1985,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             CqlQuantity r_ = context.Operators.Quantity(0m, "mm[Hg]");
             bool? s_ = context.Operators.Greater(q_ as CqlQuantity, r_);
 
-            bool? t_() {
+            CqlBoolean t_() {
                 IEnumerable<Observation> ar_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                 bool? as_(Observation BloodPressure) {
@@ -1997,7 +1997,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> bk_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bj_);
                     bool? bl_ = context.Operators.In<CqlDateTime>(bi_, bk_, "day");
 
-                    bool? bm_() {
+                    CqlBoolean bm_() {
                         Code<ObservationStatus> bn_ = BloodPressure?.StatusElement;
                         ObservationStatus? bo_ = bn_?.Value;
                         string bp_ = context.Operators.Convert<string>(bo_);
@@ -2007,11 +2007,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                             "corrected",
                         ];
                         bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string>)bq_);
-                        return (bool?)((CqlBoolean)br_);
+                        return br_;
                     }
 
                     return (bool?)(/* CQL 'and' (197:13-198:77) */ ((CqlBoolean)bl_
-                        && (CqlBoolean)bm_()));
+                        && bm_()));
                 }
 
                 IEnumerable<Observation> at_ = context.Operators.Where<Observation>(ar_, as_);
@@ -2043,11 +2043,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
                 CqlQuantity bd_ = context.Operators.Quantity(0m, "mm[Hg]");
                 bool? be_ = context.Operators.Greater(bc_ as CqlQuantity, bd_);
-                return (bool?)((CqlBoolean)be_);
+                return be_;
             }
 
 
-            bool? u_() {
+            CqlBoolean u_() {
                 IEnumerable<Observation> cb_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                 bool? cc_(Observation BloodPressure) {
@@ -2059,7 +2059,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> cv_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cu_);
                     bool? cw_ = context.Operators.In<CqlDateTime>(ct_, cv_, "day");
 
-                    bool? cx_() {
+                    CqlBoolean cx_() {
                         Code<ObservationStatus> cy_ = BloodPressure?.StatusElement;
                         ObservationStatus? cz_ = cy_?.Value;
                         string da_ = context.Operators.Convert<string>(cz_);
@@ -2069,11 +2069,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                             "corrected",
                         ];
                         bool? dc_ = context.Operators.In<string>(da_, (IEnumerable<string>)db_);
-                        return (bool?)((CqlBoolean)dc_);
+                        return dc_;
                     }
 
                     return (bool?)(/* CQL 'and' (197:13-198:77) */ ((CqlBoolean)cw_
-                        && (CqlBoolean)cx_()));
+                        && cx_()));
                 }
 
                 IEnumerable<Observation> cd_ = context.Operators.Where<Observation>(cb_, cc_);
@@ -2106,7 +2106,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlQuantity cn_ = context.Operators.Quantity(140m, "mm[Hg]");
                 bool? co_ = context.Operators.GreaterOrEqual(cm_ as CqlQuantity, cn_);
 
-                bool? cp_() {
+                CqlBoolean cp_() {
                     IEnumerable<Observation> dm_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
 
                     bool? dn_(Observation BloodPressure) {
@@ -2118,7 +2118,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         CqlInterval<CqlDateTime> ef_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ee_);
                         bool? eg_ = context.Operators.In<CqlDateTime>(ed_, ef_, "day");
 
-                        bool? eh_() {
+                        CqlBoolean eh_() {
                             Code<ObservationStatus> ei_ = BloodPressure?.StatusElement;
                             ObservationStatus? ej_ = ei_?.Value;
                             string ek_ = context.Operators.Convert<string>(ej_);
@@ -2128,11 +2128,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                                 "corrected",
                             ];
                             bool? em_ = context.Operators.In<string>(ek_, (IEnumerable<string>)el_);
-                            return (bool?)((CqlBoolean)em_);
+                            return em_;
                         }
 
                         return (bool?)(/* CQL 'and' (197:13-198:77) */ ((CqlBoolean)eg_
-                            && (CqlBoolean)eh_()));
+                            && eh_()));
                     }
 
                     IEnumerable<Observation> do_ = context.Operators.Where<Observation>(dm_, dn_);
@@ -2164,16 +2164,16 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     object dx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dw_);
                     CqlQuantity dy_ = context.Operators.Quantity(90m, "mm[Hg]");
                     bool? dz_ = context.Operators.GreaterOrEqual(dx_ as CqlQuantity, dy_);
-                    return (bool?)((CqlBoolean)dz_);
+                    return dz_;
                 }
 
-                return (bool?)(/* CQL 'or' (209:17-217:13) */ ((CqlBoolean)co_
-                    || (CqlBoolean)cp_()));
+                return /* CQL 'or' (209:17-217:13) */ ((CqlBoolean)co_
+                    || cp_());
             }
 
             return (bool?)(/* CQL 'and' (201:9-218:9) */ (/* CQL 'and' (201:17-208:32) */ ((CqlBoolean)s_
-                && (CqlBoolean)t_())
-                && (CqlBoolean)u_()));
+                && t_())
+                && u_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -2203,16 +2203,16 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
                 bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
 
-                bool? p_() {
+                CqlBoolean p_() {
                     FhirDateTime s_ = ECGLabTest?.AuthoredOnElement;
                     CqlDateTime t_ = context.Operators.Convert<CqlDateTime>(s_);
                     CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
                     bool? v_ = context.Operators.In<CqlDateTime>(t_, u_, "day");
-                    return (bool?)((CqlBoolean)v_);
+                    return v_;
                 }
 
 
-                bool? q_() {
+                CqlBoolean q_() {
                     Code<RequestIntent> w_ = WeeksRescreen?.IntentElement;
                     RequestIntent? x_ = w_?.Value;
                     Code<RequestIntent> y_ = context.Operators.Convert<Code<RequestIntent>>(x_);
@@ -2225,11 +2225,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         "instance-order",
                     ];
                     bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
-                    return (bool?)((CqlBoolean)ab_);
+                    return ab_;
                 }
 
 
-                bool? r_() {
+                CqlBoolean r_() {
                     Code<RequestIntent> ac_ = ECGLabTest?.IntentElement;
                     RequestIntent? ad_ = ac_?.Value;
                     Code<RequestIntent> ae_ = context.Operators.Convert<Code<RequestIntent>>(ad_);
@@ -2242,13 +2242,13 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         "instance-order",
                     ];
                     bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
-                    return (bool?)((CqlBoolean)ah_);
+                    return ah_;
                 }
 
                 return (bool?)(/* CQL 'and' (124:19-127:114) */ (/* CQL 'and' (124:19-126:117) */ (/* CQL 'and' (124:19-125:70) */ ((CqlBoolean)o_
-                    && (CqlBoolean)p_())
-                    && (CqlBoolean)q_())
-                    && (CqlBoolean)r_()));
+                    && p_())
+                    && q_())
+                    && r_()));
             }
 
             bool? k_ = context.Operators.WhereAny<ServiceRequest>(i_, j_);
@@ -2287,16 +2287,16 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     string bd_ = context.Operators.Last<string>(bc_);
                     bool? be_ = context.Operators.Equal(ba_, bd_);
 
-                    bool? bf_() {
+                    CqlBoolean bf_() {
                         CodeableConcept bg_ = M?.Code;
                         CqlConcept bh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bg_);
                         CqlValueSet bi_ = this.Pharmacologic_Therapy_for_Hypertension(context);
                         bool? bj_ = context.Operators.ConceptInValueSet(bh_, bi_);
-                        return (bool?)((CqlBoolean)bj_);
+                        return bj_;
                     }
 
                     return (bool?)(/* CQL 'and' */ ((CqlBoolean)be_
-                        && (CqlBoolean)bf_()));
+                        && bf_()));
                 }
 
                 bool? az_ = context.Operators.WhereAny<Medication>(ax_, ay_);
@@ -2314,7 +2314,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> bm_ = this.Measurement_Period(context);
                 bool? bn_ = context.Operators.In<CqlDateTime>(bl_, bm_, "day");
 
-                bool? bo_() {
+                CqlBoolean bo_() {
                     Code<MedicationRequest.MedicationrequestStatus> bp_ = Medications?.StatusElement;
                     MedicationRequest.MedicationrequestStatus? bq_ = bp_?.Value;
                     string br_ = context.Operators.Convert<string>(bq_);
@@ -2323,11 +2323,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         "completed",
                     ];
                     bool? bt_ = context.Operators.In<string>(br_, (IEnumerable<string>)bs_);
-                    return (bool?)((CqlBoolean)bt_);
+                    return bt_;
                 }
 
                 return (bool?)(/* CQL 'and' (131:19-132:61) */ ((CqlBoolean)bn_
-                    && (CqlBoolean)bo_()));
+                    && bo_()));
             }
 
             bool? aw_ = context.Operators.WhereAny<MedicationRequest>(au_, av_);
@@ -2441,7 +2441,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
                 bool? v_ = context.Operators.In<CqlDateTime>(s_, u_, "day");
 
-                bool? w_() {
+                CqlBoolean w_() {
 
                     bool? x_(Extension @this) {
                         FhirUri af_ = @this?.UrlElement;
@@ -2464,7 +2464,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlValueSet ac_ = this.Patient_Declined(context);
                     bool? ad_ = context.Operators.ConceptInValueSet(ab_, ac_);
 
-                    bool? ae_() {
+                    CqlBoolean ae_() {
 
                         bool? aj_(Extension @this) {
                             FhirUri aq_ = @this?.UrlElement;
@@ -2486,15 +2486,15 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         CqlConcept an_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, am_ as CodeableConcept);
                         CqlValueSet ao_ = this.Medical_Reason(context);
                         bool? ap_ = context.Operators.ConceptInValueSet(an_, ao_);
-                        return (bool?)((CqlBoolean)ap_);
+                        return ap_;
                     }
 
-                    return (bool?)(/* CQL 'or' (324:13-326:9) */ ((CqlBoolean)ad_
-                        || (CqlBoolean)ae_()));
+                    return /* CQL 'or' (324:13-326:9) */ ((CqlBoolean)ad_
+                        || ae_());
                 }
 
                 return (bool?)(/* CQL 'and' (323:17-326:9) */ ((CqlBoolean)v_
-                    && (CqlBoolean)w_()));
+                    && w_()));
             }
 
             bool? p_ = context.Operators.WhereAny<Observation>(n_, o_);
@@ -2546,7 +2546,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             ];
             bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
 
-            bool? ab_() {
+            CqlBoolean ab_() {
 
                 bool? ac_(Extension @this) {
                     FhirUri aj_ = @this?.UrlElement;
@@ -2568,11 +2568,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlConcept ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, af_ as CodeableConcept);
                 CqlValueSet ah_ = this.Patient_Declined(context);
                 bool? ai_ = context.Operators.ConceptInValueSet(ag_, ah_);
-                return (bool?)((CqlBoolean)ai_);
+                return ai_;
             }
 
             return (bool?)(/* CQL 'and' (315:5-316:66) */ ((CqlBoolean)aa_
-                && (CqlBoolean)ab_()));
+                && ab_()));
         }
 
         IEnumerable<ServiceRequest> u_ = context.Operators.Where<ServiceRequest>(s_, t_);
@@ -2612,7 +2612,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             ];
             bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
 
-            bool? t_() {
+            CqlBoolean t_() {
 
                 bool? u_(Extension @this) {
                     FhirUri ab_ = @this?.UrlElement;
@@ -2634,11 +2634,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_ as CodeableConcept);
                 CqlValueSet z_ = this.Patient_Declined(context);
                 bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
-                return (bool?)((CqlBoolean)aa_);
+                return aa_;
             }
 
             return (bool?)(/* CQL 'and' (387:5-388:59) */ ((CqlBoolean)s_
-                && (CqlBoolean)t_()));
+                && t_()));
         }
 
         IEnumerable<ServiceRequest> m_ = context.Operators.Where<ServiceRequest>(k_, l_);
@@ -2674,7 +2674,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             ];
             bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
 
-            bool? t_() {
+            CqlBoolean t_() {
 
                 bool? u_(Extension @this) {
                     FhirUri ab_ = @this?.UrlElement;
@@ -2696,11 +2696,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_ as CodeableConcept);
                 CqlValueSet z_ = this.Patient_Declined(context);
                 bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
-                return (bool?)((CqlBoolean)aa_);
+                return aa_;
             }
 
             return (bool?)(/* CQL 'and' (364:7-365:84) */ ((CqlBoolean)s_
-                && (CqlBoolean)t_()));
+                && t_()));
         }
 
         IEnumerable<ServiceRequest> i_ = context.Operators.Where<ServiceRequest>(g_, h_);
@@ -2740,7 +2740,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             ];
             bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
 
-            bool? z_() {
+            CqlBoolean z_() {
 
                 bool? aa_(Extension @this) {
                     FhirUri ah_ = @this?.UrlElement;
@@ -2762,11 +2762,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlConcept ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ad_ as CodeableConcept);
                 CqlValueSet af_ = this.Patient_Declined(context);
                 bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
-                return (bool?)((CqlBoolean)ag_);
+                return ag_;
             }
 
             return (bool?)(/* CQL 'and' (373:9-374:91) */ ((CqlBoolean)y_
-                && (CqlBoolean)z_()));
+                && z_()));
         }
 
         IEnumerable<ServiceRequest> i_ = context.Operators.Where<ServiceRequest>(g_, h_);
@@ -2822,7 +2822,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ag_);
                 bool? ai_ = context.Operators.In<CqlDateTime>(af_, ah_, "day");
 
-                bool? aj_() {
+                CqlBoolean aj_() {
                     Code<RequestStatus> al_ = ElevatedBPDeclinedInterventions?.StatusElement;
                     RequestStatus? am_ = al_?.Value;
                     Code<RequestStatus> an_ = context.Operators.Convert<Code<RequestStatus>>(am_);
@@ -2833,11 +2833,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         "on-hold",
                     ];
                     bool? aq_ = context.Operators.In<string>(ao_, (IEnumerable<string>)ap_);
-                    return (bool?)((CqlBoolean)aq_);
+                    return aq_;
                 }
 
 
-                bool? ak_() {
+                CqlBoolean ak_() {
 
                     bool? ar_(Extension @this) {
                         FhirUri ay_ = @this?.UrlElement;
@@ -2859,12 +2859,12 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlConcept av_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, au_ as CodeableConcept);
                     CqlValueSet aw_ = this.Patient_Declined(context);
                     bool? ax_ = context.Operators.ConceptInValueSet(av_, aw_);
-                    return (bool?)((CqlBoolean)ax_);
+                    return ax_;
                 }
 
                 return (bool?)(/* CQL 'and' (332:21-334:83) */ (/* CQL 'and' (332:21-333:94) */ ((CqlBoolean)ai_
-                    && (CqlBoolean)aj_())
-                    && (CqlBoolean)ak_()));
+                    && aj_())
+                    && ak_()));
             }
 
             bool? ad_ = context.Operators.WhereAny<ServiceRequest>(ab_, ac_);
@@ -2909,7 +2909,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> bw_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bv_);
                 bool? bx_ = context.Operators.In<CqlDateTime>(bu_, bw_, "day");
 
-                bool? by_() {
+                CqlBoolean by_() {
                     Code<RequestStatus> ca_ = FirstHTNDeclinedInterventions?.StatusElement;
                     RequestStatus? cb_ = ca_?.Value;
                     Code<RequestStatus> cc_ = context.Operators.Convert<Code<RequestStatus>>(cb_);
@@ -2920,11 +2920,11 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         "on-hold",
                     ];
                     bool? cf_ = context.Operators.In<string>(cd_, (IEnumerable<string>)ce_);
-                    return (bool?)((CqlBoolean)cf_);
+                    return cf_;
                 }
 
 
-                bool? bz_() {
+                CqlBoolean bz_() {
 
                     bool? cg_(Extension @this) {
                         FhirUri cn_ = @this?.UrlElement;
@@ -2946,12 +2946,12 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlConcept ck_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cj_ as CodeableConcept);
                     CqlValueSet cl_ = this.Patient_Declined(context);
                     bool? cm_ = context.Operators.ConceptInValueSet(ck_, cl_);
-                    return (bool?)((CqlBoolean)cm_);
+                    return cm_;
                 }
 
                 return (bool?)(/* CQL 'and' (343:23-345:83) */ (/* CQL 'and' (343:23-344:94) */ ((CqlBoolean)bx_
-                    && (CqlBoolean)by_())
-                    && (CqlBoolean)bz_()));
+                    && by_())
+                    && bz_()));
             }
 
             bool? bs_ = context.Operators.WhereAny<ServiceRequest>(bq_, br_);

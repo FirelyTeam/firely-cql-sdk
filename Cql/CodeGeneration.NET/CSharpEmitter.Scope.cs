@@ -277,7 +277,12 @@ internal partial class CSharpEmitter
             return atom;
         }
 
-        private Atom HoistLocalFunction(CodeLambda lambda)
+        /// <param name="declaredReturnType">Overrides the return type the function is DECLARED with,
+        /// where the body's own type converts to it implicitly. Used for a short-circuit operand,
+        /// whose function returns <see cref="CqlBoolean"/> over a <c>bool?</c> body: the implicit
+        /// conversion happens at the <c>return</c>, so neither the body nor the call site needs a
+        /// cast.</param>
+        private Atom HoistLocalFunction(CodeLambda lambda, Type? declaredReturnType = null)
         {
             // The function's own name is allocated now (it participates in this scope's
             // naming sequence), but its interior renders deferred — see _statements.
@@ -296,7 +301,7 @@ internal partial class CSharpEmitter
 
                 var parameterList = string.Join(", ",
                     lambda.Parameters.Select(p => $"{_emitter._typeToCSharpConverter.ToCSharp(p.Type)} {_emitter._assignedNames[p]}"));
-                var returnType = _emitter._typeToCSharpConverter.ToCSharp(lambda.Body.Type);
+                var returnType = _emitter._typeToCSharpConverter.ToCSharp(declaredReturnType ?? lambda.Body.Type);
 
                 // A body that linearizes without hoisting any statement prints expression-
                 // bodied ("=> expr;"), matching the old writer's BuildLambdaOperator, which
@@ -450,6 +455,16 @@ internal partial class CSharpEmitter
         /// passes through inline.
         /// </summary>
         /// <summary>
+        /// The expression under a <see cref="CqlBoolean"/> conversion the builder added, so a local
+        /// function's body can be the plain <c>bool?</c> expression and let the conversion happen
+        /// implicitly at its <c>return</c>.
+        /// </summary>
+        private static CodeExpression UnwrapCqlBooleanConversion(CodeExpression node) =>
+            node is CodeCast { Type: var castType, Operand: { } inner } && castType == typeof(CqlBoolean)
+                ? inner
+                : node;
+
+        /// <summary>
         /// Whether a short-circuit operator's right operand is small enough, and simple enough, to
         /// print inline. It cannot be hoisted, so inline is the only alternative to a local
         /// function — and an operand that hoists several spine nodes would print as one enormous
@@ -471,15 +486,19 @@ internal partial class CSharpEmitter
             // The left operand is always evaluated, so hoisting it is free and desirable.
             var left = Linearize(node.Left)!;
 
-            // The function returns bool? — the type the rest of the IR speaks — and the call site
-            // converts back to CqlBoolean with the same implicit operator used everywhere here.
-            var body = node.Right.Type == typeof(bool?)
-                ? node.Right
-                : new CodeCast(node.Right, typeof(bool?), CodeCastKind.Cast);
-            var function = HoistLocalFunction(new CodeLambda([], body));
-
-            var cqlBooleanType = _emitter._typeToCSharpConverter.ToCSharp(typeof(CqlBoolean));
-            var right = $"({cqlBooleanType}){function.Code}()";
+            // The function is DECLARED to return CqlBoolean while its body stays the plain bool?
+            // expression, so the conversion happens implicitly at the `return` and nothing needs a
+            // cast: neither the body (`return t_;`) nor the call site (`f_()`). Returning bool?
+            // instead would produce `return (bool?)((CqlBoolean)t_);` in the body AND
+            // `(CqlBoolean)f_()` at the call site — three conversions to move one value through
+            // unchanged.
+            //
+            // CqlBoolean, NOT CqlBoolean?: && is not lifted over nullable types, so a nullable
+            // return would leave the call site unable to short-circuit at all — which is the whole
+            // reason this type exists. CqlBoolean already carries its own null.
+            var body = UnwrapCqlBooleanConversion(node.Right);
+            var function = HoistLocalFunction(new CodeLambda([], body), declaredReturnType: typeof(CqlBoolean));
+            var right = $"{function.Code}()";
 
             return new Atom(
                 _emitter.FormatShortCircuit(node.Op, left.Code, right, node.OriginTag),

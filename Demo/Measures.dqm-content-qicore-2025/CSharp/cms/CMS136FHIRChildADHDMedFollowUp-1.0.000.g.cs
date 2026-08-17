@@ -246,16 +246,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string br_ = context.Operators.Last<string>(bq_);
                 bool? bs_ = context.Operators.Equal(bo_, br_);
 
-                bool? bt_() {
+                CqlBoolean bt_() {
                     CodeableConcept bu_ = M?.Code;
                     CqlConcept bv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bu_);
                     CqlValueSet bw_ = this.Atomoxetine(context);
                     bool? bx_ = context.Operators.ConceptInValueSet(bv_, bw_);
-                    return (bool?)((CqlBoolean)bx_);
+                    return bx_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)bs_
-                    && (CqlBoolean)bt_()));
+                    && bt_()));
             }
 
             bool? bn_ = context.Operators.WhereAny<Medication>(bl_, bm_);
@@ -277,16 +277,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string ce_ = context.Operators.Last<string>(cd_);
                 bool? cf_ = context.Operators.Equal(cb_, ce_);
 
-                bool? cg_() {
+                CqlBoolean cg_() {
                     CodeableConcept ch_ = M?.Code;
                     CqlConcept ci_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ch_);
                     CqlValueSet cj_ = this.Clonidine(context);
                     bool? ck_ = context.Operators.ConceptInValueSet(ci_, cj_);
-                    return (bool?)((CqlBoolean)ck_);
+                    return ck_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)cf_
-                    && (CqlBoolean)cg_()));
+                    && cg_()));
             }
 
             bool? ca_ = context.Operators.WhereAny<Medication>(by_, bz_);
@@ -309,16 +309,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string cr_ = context.Operators.Last<string>(cq_);
                 bool? cs_ = context.Operators.Equal(co_, cr_);
 
-                bool? ct_() {
+                CqlBoolean ct_() {
                     CodeableConcept cu_ = M?.Code;
                     CqlConcept cv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cu_);
                     CqlValueSet cw_ = this.Dexmethylphenidate(context);
                     bool? cx_ = context.Operators.ConceptInValueSet(cv_, cw_);
-                    return (bool?)((CqlBoolean)cx_);
+                    return cx_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)cs_
-                    && (CqlBoolean)ct_()));
+                    && ct_()));
             }
 
             bool? cn_ = context.Operators.WhereAny<Medication>(cl_, cm_);
@@ -341,16 +341,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string de_ = context.Operators.Last<string>(dd_);
                 bool? df_ = context.Operators.Equal(db_, de_);
 
-                bool? dg_() {
+                CqlBoolean dg_() {
                     CodeableConcept dh_ = M?.Code;
                     CqlConcept di_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dh_);
                     CqlValueSet dj_ = this.Dextroamphetamine(context);
                     bool? dk_ = context.Operators.ConceptInValueSet(di_, dj_);
-                    return (bool?)((CqlBoolean)dk_);
+                    return dk_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)df_
-                    && (CqlBoolean)dg_()));
+                    && dg_()));
             }
 
             bool? da_ = context.Operators.WhereAny<Medication>(cy_, cz_);
@@ -373,16 +373,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string dr_ = context.Operators.Last<string>(dq_);
                 bool? ds_ = context.Operators.Equal(do_, dr_);
 
-                bool? dt_() {
+                CqlBoolean dt_() {
                     CodeableConcept du_ = M?.Code;
                     CqlConcept dv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, du_);
                     CqlValueSet dw_ = this.Lisdexamfetamine(context);
                     bool? dx_ = context.Operators.ConceptInValueSet(dv_, dw_);
-                    return (bool?)((CqlBoolean)dx_);
+                    return dx_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)ds_
-                    && (CqlBoolean)dt_()));
+                    && dt_()));
             }
 
             bool? dn_ = context.Operators.WhereAny<Medication>(dl_, dm_);
@@ -405,17 +405,17 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string ee_ = context.Operators.Last<string>(ed_);
                 bool? ef_ = context.Operators.Equal(eb_, ee_);
 
-                bool? eg_() {
+                CqlBoolean eg_() {
                     CodeableConcept eh_ = M?.Code;
                     CqlConcept ei_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, eh_);
                     CqlCode ej_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
                     CqlConcept ek_ = context.Operators.ConvertCodeToConcept(ej_);
                     bool? el_ = context.Operators.Equivalent(ei_, ek_);
-                    return (bool?)((CqlBoolean)el_);
+                    return el_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)ef_
-                    && (CqlBoolean)eg_()));
+                    && eg_()));
             }
 
             bool? ea_ = context.Operators.WhereAny<Medication>(dy_, dz_);
@@ -439,16 +439,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string es_ = context.Operators.Last<string>(er_);
                 bool? et_ = context.Operators.Equal(ep_, es_);
 
-                bool? eu_() {
+                CqlBoolean eu_() {
                     CodeableConcept ev_ = M?.Code;
                     CqlConcept ew_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ev_);
                     CqlValueSet ex_ = this.Methylphenidate(context);
                     bool? ey_ = context.Operators.ConceptInValueSet(ew_, ex_);
-                    return (bool?)((CqlBoolean)ey_);
+                    return ey_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)et_
-                    && (CqlBoolean)eu_()));
+                    && eu_()));
             }
 
             bool? eo_ = context.Operators.WhereAny<Medication>(em_, en_);
@@ -471,16 +471,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string ff_ = context.Operators.Last<string>(fe_);
                 bool? fg_ = context.Operators.Equal(fc_, ff_);
 
-                bool? fh_() {
+                CqlBoolean fh_() {
                     CodeableConcept fi_ = M?.Code;
                     CqlConcept fj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fi_);
                     CqlValueSet fk_ = this.Guanfacine_Medications(context);
                     bool? fl_ = context.Operators.ConceptInValueSet(fj_, fk_);
-                    return (bool?)((CqlBoolean)fl_);
+                    return fl_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)fg_
-                    && (CqlBoolean)fh_()));
+                    && fh_()));
             }
 
             bool? fb_ = context.Operators.WhereAny<Medication>(ez_, fa_);
@@ -503,16 +503,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string fs_ = context.Operators.Last<string>(fr_);
                 bool? ft_ = context.Operators.Equal(fp_, fs_);
 
-                bool? fu_() {
+                CqlBoolean fu_() {
                     CodeableConcept fv_ = M?.Code;
                     CqlConcept fw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fv_);
                     CqlValueSet fx_ = this.Viloxazine(context);
                     bool? fy_ = context.Operators.ConceptInValueSet(fw_, fx_);
-                    return (bool?)((CqlBoolean)fy_);
+                    return fy_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)ft_
-                    && (CqlBoolean)fu_()));
+                    && fu_()));
             }
 
             bool? fo_ = context.Operators.WhereAny<Medication>(fm_, fn_);
@@ -550,16 +550,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     string iq_ = context.Operators.Last<string>(ip_);
                     bool? ir_ = context.Operators.Equal(in_, iq_);
 
-                    bool? is_() {
+                    CqlBoolean is_() {
                         CodeableConcept it_ = M?.Code;
                         CqlConcept iu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, it_);
                         CqlValueSet iv_ = this.Atomoxetine(context);
                         bool? iw_ = context.Operators.ConceptInValueSet(iu_, iv_);
-                        return (bool?)((CqlBoolean)iw_);
+                        return iw_;
                     }
 
                     return (bool?)(/* CQL 'and' */ ((CqlBoolean)ir_
-                        && (CqlBoolean)is_()));
+                        && is_()));
                 }
 
                 bool? im_ = context.Operators.WhereAny<Medication>(ik_, il_);
@@ -581,16 +581,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     string jd_ = context.Operators.Last<string>(jc_);
                     bool? je_ = context.Operators.Equal(ja_, jd_);
 
-                    bool? jf_() {
+                    CqlBoolean jf_() {
                         CodeableConcept jg_ = M?.Code;
                         CqlConcept jh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jg_);
                         CqlValueSet ji_ = this.Clonidine(context);
                         bool? jj_ = context.Operators.ConceptInValueSet(jh_, ji_);
-                        return (bool?)((CqlBoolean)jj_);
+                        return jj_;
                     }
 
                     return (bool?)(/* CQL 'and' */ ((CqlBoolean)je_
-                        && (CqlBoolean)jf_()));
+                        && jf_()));
                 }
 
                 bool? iz_ = context.Operators.WhereAny<Medication>(ix_, iy_);
@@ -613,16 +613,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     string jq_ = context.Operators.Last<string>(jp_);
                     bool? jr_ = context.Operators.Equal(jn_, jq_);
 
-                    bool? js_() {
+                    CqlBoolean js_() {
                         CodeableConcept jt_ = M?.Code;
                         CqlConcept ju_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jt_);
                         CqlValueSet jv_ = this.Dexmethylphenidate(context);
                         bool? jw_ = context.Operators.ConceptInValueSet(ju_, jv_);
-                        return (bool?)((CqlBoolean)jw_);
+                        return jw_;
                     }
 
                     return (bool?)(/* CQL 'and' */ ((CqlBoolean)jr_
-                        && (CqlBoolean)js_()));
+                        && js_()));
                 }
 
                 bool? jm_ = context.Operators.WhereAny<Medication>(jk_, jl_);
@@ -645,16 +645,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     string kd_ = context.Operators.Last<string>(kc_);
                     bool? ke_ = context.Operators.Equal(ka_, kd_);
 
-                    bool? kf_() {
+                    CqlBoolean kf_() {
                         CodeableConcept kg_ = M?.Code;
                         CqlConcept kh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kg_);
                         CqlValueSet ki_ = this.Dextroamphetamine(context);
                         bool? kj_ = context.Operators.ConceptInValueSet(kh_, ki_);
-                        return (bool?)((CqlBoolean)kj_);
+                        return kj_;
                     }
 
                     return (bool?)(/* CQL 'and' */ ((CqlBoolean)ke_
-                        && (CqlBoolean)kf_()));
+                        && kf_()));
                 }
 
                 bool? jz_ = context.Operators.WhereAny<Medication>(jx_, jy_);
@@ -677,16 +677,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     string kq_ = context.Operators.Last<string>(kp_);
                     bool? kr_ = context.Operators.Equal(kn_, kq_);
 
-                    bool? ks_() {
+                    CqlBoolean ks_() {
                         CodeableConcept kt_ = M?.Code;
                         CqlConcept ku_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kt_);
                         CqlValueSet kv_ = this.Lisdexamfetamine(context);
                         bool? kw_ = context.Operators.ConceptInValueSet(ku_, kv_);
-                        return (bool?)((CqlBoolean)kw_);
+                        return kw_;
                     }
 
                     return (bool?)(/* CQL 'and' */ ((CqlBoolean)kr_
-                        && (CqlBoolean)ks_()));
+                        && ks_()));
                 }
 
                 bool? km_ = context.Operators.WhereAny<Medication>(kk_, kl_);
@@ -709,17 +709,17 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     string ld_ = context.Operators.Last<string>(lc_);
                     bool? le_ = context.Operators.Equal(la_, ld_);
 
-                    bool? lf_() {
+                    CqlBoolean lf_() {
                         CodeableConcept lg_ = M?.Code;
                         CqlConcept lh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lg_);
                         CqlCode li_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
                         CqlConcept lj_ = context.Operators.ConvertCodeToConcept(li_);
                         bool? lk_ = context.Operators.Equivalent(lh_, lj_);
-                        return (bool?)((CqlBoolean)lk_);
+                        return lk_;
                     }
 
                     return (bool?)(/* CQL 'and' */ ((CqlBoolean)le_
-                        && (CqlBoolean)lf_()));
+                        && lf_()));
                 }
 
                 bool? kz_ = context.Operators.WhereAny<Medication>(kx_, ky_);
@@ -743,16 +743,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     string lr_ = context.Operators.Last<string>(lq_);
                     bool? ls_ = context.Operators.Equal(lo_, lr_);
 
-                    bool? lt_() {
+                    CqlBoolean lt_() {
                         CodeableConcept lu_ = M?.Code;
                         CqlConcept lv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lu_);
                         CqlValueSet lw_ = this.Methylphenidate(context);
                         bool? lx_ = context.Operators.ConceptInValueSet(lv_, lw_);
-                        return (bool?)((CqlBoolean)lx_);
+                        return lx_;
                     }
 
                     return (bool?)(/* CQL 'and' */ ((CqlBoolean)ls_
-                        && (CqlBoolean)lt_()));
+                        && lt_()));
                 }
 
                 bool? ln_ = context.Operators.WhereAny<Medication>(ll_, lm_);
@@ -775,16 +775,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     string me_ = context.Operators.Last<string>(md_);
                     bool? mf_ = context.Operators.Equal(mb_, me_);
 
-                    bool? mg_() {
+                    CqlBoolean mg_() {
                         CodeableConcept mh_ = M?.Code;
                         CqlConcept mi_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mh_);
                         CqlValueSet mj_ = this.Guanfacine_Medications(context);
                         bool? mk_ = context.Operators.ConceptInValueSet(mi_, mj_);
-                        return (bool?)((CqlBoolean)mk_);
+                        return mk_;
                     }
 
                     return (bool?)(/* CQL 'and' */ ((CqlBoolean)mf_
-                        && (CqlBoolean)mg_()));
+                        && mg_()));
                 }
 
                 bool? ma_ = context.Operators.WhereAny<Medication>(ly_, lz_);
@@ -807,16 +807,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     string mr_ = context.Operators.Last<string>(mq_);
                     bool? ms_ = context.Operators.Equal(mo_, mr_);
 
-                    bool? mt_() {
+                    CqlBoolean mt_() {
                         CodeableConcept mu_ = M?.Code;
                         CqlConcept mv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mu_);
                         CqlValueSet mw_ = this.Viloxazine(context);
                         bool? mx_ = context.Operators.ConceptInValueSet(mv_, mw_);
-                        return (bool?)((CqlBoolean)mx_);
+                        return mx_;
                     }
 
                     return (bool?)(/* CQL 'and' */ ((CqlBoolean)ms_
-                        && (CqlBoolean)mt_()));
+                        && mt_()));
                 }
 
                 bool? mn_ = context.Operators.WhereAny<Medication>(ml_, mm_);
@@ -1015,7 +1015,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 6);
 
-        bool? j_() {
+        CqlBoolean j_() {
             Patient m_ = this.Patient(context);
             Date n_ = m_?.BirthDateElement;
             string o_ = n_?.Value;
@@ -1025,28 +1025,28 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             CqlDate s_ = context.Operators.DateFrom(r_);
             int? t_ = context.Operators.CalculateAgeAt(p_, s_, "year");
             bool? u_ = context.Operators.LessOrEqual(t_, 12);
-            return (bool?)((CqlBoolean)u_);
+            return u_;
         }
 
 
-        bool? k_() {
+        CqlBoolean k_() {
             IEnumerable<Encounter> v_ = this.Qualifying_Encounter(context);
             bool? w_ = context.Operators.Exists<Encounter>(v_);
-            return (bool?)((CqlBoolean)w_);
+            return w_;
         }
 
 
-        bool? l_() {
+        CqlBoolean l_() {
             IEnumerable<Encounter> x_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase(context);
             bool? y_ = context.Operators.Exists<Encounter>(x_);
-            return (bool?)((CqlBoolean)!y_);
+            return !y_;
         }
 
         return (bool?)(/* CQL 'and' (49:3-55:85) */ (/* CQL 'and' (49:3-54:75) */ (/* CQL 'and' (49:3-53:37) */ (/* CQL 'and' (49:3-52:11) */ ((CqlBoolean)i_
-            && (CqlBoolean)j_())
-            && (CqlBoolean)k_())
+            && j_())
+            && k_())
             && (CqlBoolean)(!((bool?)((this.First_ADHD_Medication_Prescribed_During_Intake_Period(context)) is null))))
-            && (CqlBoolean)l_()));
+            && l_()));
     }
 
 
@@ -1101,14 +1101,14 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
 
-        bool? b_() {
+        CqlBoolean b_() {
             IEnumerable<Condition> c_ = this.Narcolepsy_Exclusion(context);
             bool? d_ = context.Operators.Exists<Condition>(c_);
-            return (bool?)((CqlBoolean)d_);
+            return d_;
         }
 
         return (bool?)(/* CQL 'or' (123:3-124:36) */ ((CqlBoolean)a_
-            || (CqlBoolean)b_()));
+            || b_()));
     }
 
 
@@ -1248,16 +1248,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string eo_ = context.Operators.Last<string>(en_);
                 bool? ep_ = context.Operators.Equal(el_, eo_);
 
-                bool? eq_() {
+                CqlBoolean eq_() {
                     CodeableConcept er_ = M?.Code;
                     CqlConcept es_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, er_);
                     CqlValueSet et_ = this.Atomoxetine(context);
                     bool? eu_ = context.Operators.ConceptInValueSet(es_, et_);
-                    return (bool?)((CqlBoolean)eu_);
+                    return eu_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)ep_
-                    && (CqlBoolean)eq_()));
+                    && eq_()));
             }
 
             bool? ek_ = context.Operators.WhereAny<Medication>(ei_, ej_);
@@ -1310,16 +1310,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string fh_ = context.Operators.Last<string>(fg_);
                 bool? fi_ = context.Operators.Equal(fe_, fh_);
 
-                bool? fj_() {
+                CqlBoolean fj_() {
                     CodeableConcept fk_ = M?.Code;
                     CqlConcept fl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fk_);
                     CqlValueSet fm_ = this.Clonidine(context);
                     bool? fn_ = context.Operators.ConceptInValueSet(fl_, fm_);
-                    return (bool?)((CqlBoolean)fn_);
+                    return fn_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)fi_
-                    && (CqlBoolean)fj_()));
+                    && fj_()));
             }
 
             bool? fd_ = context.Operators.WhereAny<Medication>(fb_, fc_);
@@ -1373,16 +1373,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string ga_ = context.Operators.Last<string>(fz_);
                 bool? gb_ = context.Operators.Equal(fx_, ga_);
 
-                bool? gc_() {
+                CqlBoolean gc_() {
                     CodeableConcept gd_ = M?.Code;
                     CqlConcept ge_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gd_);
                     CqlValueSet gf_ = this.Dexmethylphenidate(context);
                     bool? gg_ = context.Operators.ConceptInValueSet(ge_, gf_);
-                    return (bool?)((CqlBoolean)gg_);
+                    return gg_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)gb_
-                    && (CqlBoolean)gc_()));
+                    && gc_()));
             }
 
             bool? fw_ = context.Operators.WhereAny<Medication>(fu_, fv_);
@@ -1435,16 +1435,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string gt_ = context.Operators.Last<string>(gs_);
                 bool? gu_ = context.Operators.Equal(gq_, gt_);
 
-                bool? gv_() {
+                CqlBoolean gv_() {
                     CodeableConcept gw_ = M?.Code;
                     CqlConcept gx_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gw_);
                     CqlValueSet gy_ = this.Dextroamphetamine(context);
                     bool? gz_ = context.Operators.ConceptInValueSet(gx_, gy_);
-                    return (bool?)((CqlBoolean)gz_);
+                    return gz_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)gu_
-                    && (CqlBoolean)gv_()));
+                    && gv_()));
             }
 
             bool? gp_ = context.Operators.WhereAny<Medication>(gn_, go_);
@@ -1499,16 +1499,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string hm_ = context.Operators.Last<string>(hl_);
                 bool? hn_ = context.Operators.Equal(hj_, hm_);
 
-                bool? ho_() {
+                CqlBoolean ho_() {
                     CodeableConcept hp_ = M?.Code;
                     CqlConcept hq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hp_);
                     CqlValueSet hr_ = this.Lisdexamfetamine(context);
                     bool? hs_ = context.Operators.ConceptInValueSet(hq_, hr_);
-                    return (bool?)((CqlBoolean)hs_);
+                    return hs_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)hn_
-                    && (CqlBoolean)ho_()));
+                    && ho_()));
             }
 
             bool? hi_ = context.Operators.WhereAny<Medication>(hg_, hh_);
@@ -1561,16 +1561,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string if_ = context.Operators.Last<string>(ie_);
                 bool? ig_ = context.Operators.Equal(ic_, if_);
 
-                bool? ih_() {
+                CqlBoolean ih_() {
                     CodeableConcept ii_ = M?.Code;
                     CqlConcept ij_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ii_);
                     CqlValueSet ik_ = this.Methylphenidate(context);
                     bool? il_ = context.Operators.ConceptInValueSet(ij_, ik_);
-                    return (bool?)((CqlBoolean)il_);
+                    return il_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)ig_
-                    && (CqlBoolean)ih_()));
+                    && ih_()));
             }
 
             bool? ib_ = context.Operators.WhereAny<Medication>(hz_, ia_);
@@ -1625,16 +1625,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string iy_ = context.Operators.Last<string>(ix_);
                 bool? iz_ = context.Operators.Equal(iv_, iy_);
 
-                bool? ja_() {
+                CqlBoolean ja_() {
                     CodeableConcept jb_ = M?.Code;
                     CqlConcept jc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jb_);
                     CqlValueSet jd_ = this.Guanfacine_Medications(context);
                     bool? je_ = context.Operators.ConceptInValueSet(jc_, jd_);
-                    return (bool?)((CqlBoolean)je_);
+                    return je_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)iz_
-                    && (CqlBoolean)ja_()));
+                    && ja_()));
             }
 
             bool? iu_ = context.Operators.WhereAny<Medication>(is_, it_);
@@ -1687,17 +1687,17 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string jr_ = context.Operators.Last<string>(jq_);
                 bool? js_ = context.Operators.Equal(jo_, jr_);
 
-                bool? jt_() {
+                CqlBoolean jt_() {
                     CodeableConcept ju_ = M?.Code;
                     CqlConcept jv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ju_);
                     CqlCode jw_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
                     CqlConcept jx_ = context.Operators.ConvertCodeToConcept(jw_);
                     bool? jy_ = context.Operators.Equivalent(jv_, jx_);
-                    return (bool?)((CqlBoolean)jy_);
+                    return jy_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)js_
-                    && (CqlBoolean)jt_()));
+                    && jt_()));
             }
 
             bool? jn_ = context.Operators.WhereAny<Medication>(jl_, jm_);
@@ -1753,16 +1753,16 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 string kl_ = context.Operators.Last<string>(kk_);
                 bool? km_ = context.Operators.Equal(ki_, kl_);
 
-                bool? kn_() {
+                CqlBoolean kn_() {
                     CodeableConcept ko_ = M?.Code;
                     CqlConcept kp_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ko_);
                     CqlValueSet kq_ = this.Viloxazine(context);
                     bool? kr_ = context.Operators.ConceptInValueSet(kp_, kq_);
-                    return (bool?)((CqlBoolean)kr_);
+                    return kr_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)km_
-                    && (CqlBoolean)kn_()));
+                    && kn_()));
             }
 
             bool? kh_ = context.Operators.WhereAny<Medication>(kf_, kg_);
@@ -1895,7 +1895,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 6);
 
-        bool? j_() {
+        CqlBoolean j_() {
             Patient m_ = this.Patient(context);
             Date n_ = m_?.BirthDateElement;
             string o_ = n_?.Value;
@@ -1905,29 +1905,29 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             CqlDate s_ = context.Operators.DateFrom(r_);
             int? t_ = context.Operators.CalculateAgeAt(p_, s_, "year");
             bool? u_ = context.Operators.LessOrEqual(t_, 12);
-            return (bool?)((CqlBoolean)u_);
+            return u_;
         }
 
 
-        bool? k_() {
+        CqlBoolean k_() {
             IEnumerable<Encounter> v_ = this.Qualifying_Encounter(context);
             bool? w_ = context.Operators.Exists<Encounter>(v_);
-            return (bool?)((CqlBoolean)w_);
+            return w_;
         }
 
 
-        bool? l_() {
+        CqlBoolean l_() {
             IEnumerable<Encounter> x_ = this.Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase(context);
             bool? y_ = context.Operators.Exists<Encounter>(x_);
-            return (bool?)((CqlBoolean)!y_);
+            return !y_;
         }
 
         return (bool?)(/* CQL 'and' (158:3-165:103) */ (/* CQL 'and' (158:3-164:83) */ (/* CQL 'and' (158:3-163:75) */ (/* CQL 'and' (158:3-162:37) */ (/* CQL 'and' (158:3-161:11) */ ((CqlBoolean)i_
-            && (CqlBoolean)j_())
-            && (CqlBoolean)k_())
+            && j_())
+            && k_())
             && (CqlBoolean)(!((bool?)((this.First_ADHD_Medication_Prescribed_During_Intake_Period(context)) is null))))
             && (CqlBoolean)(this.Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days(context)))
-            && (CqlBoolean)l_()));
+            && l_()));
     }
 
 
@@ -2053,10 +2053,10 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> a_ = this.Encounter_During_Initiation_Phase(context);
         bool? b_ = context.Operators.Exists<Encounter>(a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             bool? d_ = this.Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase(context);
 
-            bool? e_() {
+            CqlBoolean e_() {
                 IEnumerable<CqlDate> f_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(context);
 
                 bool? g_(CqlDate Encounter1) {
@@ -2069,15 +2069,15 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 }
 
                 bool? h_ = context.Operators.WhereAny<CqlDate>(f_, g_);
-                return (bool?)((CqlBoolean)h_);
+                return h_;
             }
 
-            return (bool?)(/* CQL 'or' (268:9-275:5) */ ((CqlBoolean)d_
-                || (CqlBoolean)e_()));
+            return /* CQL 'or' (268:9-275:5) */ ((CqlBoolean)d_
+                || e_());
         }
 
         return (bool?)(/* CQL 'and' (267:3-275:5) */ ((CqlBoolean)b_
-            && (CqlBoolean)c_()));
+            && c_()));
     }
 
 

@@ -157,17 +157,17 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "finished");
 
-            bool? h_() {
+            CqlBoolean h_() {
                 Period i_ = EncounterInpatient?.Period;
                 CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, i_);
                 CqlDateTime k_ = context.Operators.End(j_);
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, (string)default);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'and' (40:19-41:90) */ ((CqlBoolean)g_
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -226,16 +226,16 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 string q_ = context.Operators.Last<string>(p_);
                 bool? r_ = context.Operators.Equal(m_, q_);
 
-                bool? s_() {
+                CqlBoolean s_() {
                     CodeableConcept t_ = M?.Code;
                     CqlConcept u_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, t_);
                     CqlValueSet v_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
                     bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                    return (bool?)((CqlBoolean)w_);
+                    return w_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)r_
-                    && (CqlBoolean)s_()));
+                    && s_()));
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -250,15 +250,15 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             string y_ = FHIRHelpers_4_0_001.Instance.ToString(context, x_);
             bool? z_ = context.Operators.Equal(y_, "completed");
 
-            bool? aa_() {
+            CqlBoolean aa_() {
                 Code<MedicationAdministration.MedicationAdministrationStatusCodes> ab_ = HypoMedication?.StatusElement;
                 string ac_ = FHIRHelpers_4_0_001.Instance.ToString(context, ab_);
                 bool? ad_ = context.Operators.Equal(ac_, "not-done");
-                return (bool?)((CqlBoolean)!ad_);
+                return !ad_;
             }
 
             return (bool?)(/* CQL 'and' (63:5-64:45) */ ((CqlBoolean)z_
-                && (CqlBoolean)aa_()));
+                && aa_()));
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
@@ -352,44 +352,44 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                     CqlInterval<CqlDateTime> w_ = context.Operators.Interval(v_, t_, true, true);
                     bool? x_ = context.Operators.In<CqlDateTime>(q_, w_, (string)default);
 
-                    bool? y_() {
+                    CqlBoolean y_() {
                         DataType ac_ = BloodGlucoseLab?.Effective;
                         CqlInterval<CqlDateTime> ad_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ac_);
                         CqlDateTime ae_ = context.Operators.Start(ad_);
-                        return (bool?)((CqlBoolean)(!((bool?)(ae_ is null))));
+                        return !((bool?)(ae_ is null));
                     }
 
 
-                    bool? z_() {
+                    CqlBoolean z_() {
                         Code<ObservationStatus> af_ = BloodGlucoseLab?.StatusElement;
                         string ag_ = FHIRHelpers_4_0_001.Instance.ToString(context, af_);
                         bool? ah_ = context.Operators.Equal(ag_, "final");
-                        return (bool?)((CqlBoolean)ah_);
+                        return ah_;
                     }
 
 
-                    bool? aa_() {
+                    CqlBoolean aa_() {
                         Code<ObservationStatus> ai_ = BloodGlucoseLab?.StatusElement;
                         string aj_ = FHIRHelpers_4_0_001.Instance.ToString(context, ai_);
                         bool? ak_ = context.Operators.Equal(aj_, "cancelled");
-                        return (bool?)((CqlBoolean)!ak_);
+                        return !ak_;
                     }
 
 
-                    bool? ab_() {
+                    CqlBoolean ab_() {
                         DataType al_ = HypoglycemicMeds?.Effective;
                         CqlInterval<CqlDateTime> am_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, al_);
                         CqlDateTime an_ = context.Operators.Start(am_);
                         CqlInterval<CqlDateTime> ao_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
                         bool? ap_ = context.Operators.In<CqlDateTime>(an_, ao_, (string)default);
-                        return (bool?)((CqlBoolean)ap_);
+                        return ap_;
                     }
 
                     return (bool?)(/* CQL 'and' (70:21-73:152) */ (/* CQL 'and' (70:21-72:53) */ (/* CQL 'and' (70:21-71:48) */ (/* CQL 'and' (70:21-70:182) */ ((CqlBoolean)x_
-                        && (CqlBoolean)y_())
-                        && (CqlBoolean)z_())
-                        && (CqlBoolean)aa_())
-                        && (CqlBoolean)ab_()));
+                        && y_())
+                        && z_())
+                        && aa_())
+                        && ab_()));
                 }
 
                 bool? n_ = context.Operators.WhereAny<MedicationAdministration>(l_, m_);
@@ -409,7 +409,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                     CqlInterval<CqlDateTime> ax_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
                     bool? ay_ = context.Operators.In<CqlDateTime>(aw_, ax_, (string)default);
 
-                    bool? az_() {
+                    CqlBoolean az_() {
                         DataType bd_ = FollowupBloodGlucoseLab?.Effective;
                         CqlInterval<CqlDateTime> be_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bd_);
                         CqlDateTime bf_ = context.Operators.Start(be_);
@@ -421,47 +421,47 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         CqlInterval<CqlDateTime> bl_ = context.Operators.Interval(bi_, bk_, false, true);
                         bool? bm_ = context.Operators.In<CqlDateTime>(bf_, bl_, (string)default);
 
-                        bool? bn_() {
+                        CqlBoolean bn_() {
                             DataType bo_ = BloodGlucoseLab?.Effective;
                             CqlInterval<CqlDateTime> bp_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bo_);
                             CqlDateTime bq_ = context.Operators.Start(bp_);
-                            return (bool?)((CqlBoolean)(!((bool?)(bq_ is null))));
+                            return !((bool?)(bq_ is null));
                         }
 
-                        return (bool?)(/* CQL 'and' (76:17-76:179) */ ((CqlBoolean)bm_
-                            && (CqlBoolean)bn_()));
+                        return /* CQL 'and' (76:17-76:179) */ ((CqlBoolean)bm_
+                            && bn_());
                     }
 
 
-                    bool? ba_() {
+                    CqlBoolean ba_() {
                         Code<ObservationStatus> br_ = FollowupBloodGlucoseLab?.StatusElement;
                         string bs_ = FHIRHelpers_4_0_001.Instance.ToString(context, br_);
                         bool? bt_ = context.Operators.Equal(bs_, "final");
-                        return (bool?)((CqlBoolean)bt_);
+                        return bt_;
                     }
 
 
-                    bool? bb_() {
+                    CqlBoolean bb_() {
                         Code<ObservationStatus> bu_ = FollowupBloodGlucoseLab?.StatusElement;
                         string bv_ = FHIRHelpers_4_0_001.Instance.ToString(context, bu_);
                         bool? bw_ = context.Operators.Equal(bv_, "cancelled");
-                        return (bool?)((CqlBoolean)!bw_);
+                        return !bw_;
                     }
 
 
-                    bool? bc_() {
+                    CqlBoolean bc_() {
                         DataType bx_ = FollowupBloodGlucoseLab?.Value;
                         CqlQuantity by_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, bx_ as Quantity);
                         CqlQuantity bz_ = context.Operators.Quantity(80m, "mg/dL");
                         bool? ca_ = context.Operators.Greater(by_, bz_);
-                        return (bool?)((CqlBoolean)ca_);
+                        return ca_;
                     }
 
                     return (bool?)(/* CQL 'and' (75:21-79:58) */ (/* CQL 'and' (75:21-78:61) */ (/* CQL 'and' (75:21-77:56) */ (/* CQL 'and' (75:21-76:179) */ ((CqlBoolean)ay_
-                        && (CqlBoolean)az_())
-                        && (CqlBoolean)ba_())
-                        && (CqlBoolean)bb_())
-                        && (CqlBoolean)bc_()));
+                        && az_())
+                        && ba_())
+                        && bb_())
+                        && bc_()));
                 }
 
                 bool? at_ = context.Operators.WhereAny<Observation>(ar_, as_);
@@ -477,16 +477,16 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 CqlInterval<CqlDateTime> ce_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
                 bool? cf_ = context.Operators.In<CqlDateTime>(cd_, ce_, (string)default);
 
-                bool? cg_() {
+                CqlBoolean cg_() {
                     DataType ch_ = BloodGlucoseLab?.Value;
                     CqlQuantity ci_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ch_ as Quantity);
                     CqlQuantity cj_ = context.Operators.Quantity(40m, "mg/dL");
                     bool? ck_ = context.Operators.Less(ci_, cj_);
-                    return (bool?)((CqlBoolean)ck_);
+                    return ck_;
                 }
 
                 return (bool?)(/* CQL 'and' (80:9-81:48) */ ((CqlBoolean)cf_
-                    && (CqlBoolean)cg_()));
+                    && cg_()));
             }
 
             bool? k_ = context.Operators.WhereAny<Observation>(i_, j_);

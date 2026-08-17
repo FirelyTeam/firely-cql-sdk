@@ -155,14 +155,14 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
         CqlInterval<int?> i_ = context.Operators.Interval(46, 75, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
-        bool? k_() {
+        CqlBoolean k_() {
             IEnumerable<Encounter> l_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
             bool? m_ = context.Operators.Exists<Encounter>(l_);
-            return (bool?)((CqlBoolean)m_);
+            return m_;
         }
 
         return (bool?)(/* CQL 'and' (40:3-43:64) */ ((CqlBoolean)j_
-            && (CqlBoolean)k_()));
+            && k_()));
     }
 
 
@@ -279,22 +279,22 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
 
-        bool? b_() {
+        CqlBoolean b_() {
             IEnumerable<Condition> d_ = this.Malignant_Neoplasm(context);
             bool? e_ = context.Operators.Exists<Condition>(d_);
-            return (bool?)((CqlBoolean)e_);
+            return e_;
         }
 
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Procedure> f_ = this.Total_Colectomy_Performed(context);
             bool? g_ = context.Operators.Exists<Procedure>(f_);
-            return (bool?)((CqlBoolean)g_);
+            return g_;
         }
 
         return (bool?)(/* CQL 'or' (49:3-54:69) */ (/* CQL 'or' (49:3-53:74) */ (/* CQL 'or' (49:3-52:73) */ (/* CQL 'or' (49:3-51:41) */ (/* CQL 'or' (49:3-50:34) */ ((CqlBoolean)a_
-            || (CqlBoolean)b_())
-            || (CqlBoolean)c_())
+            || b_())
+            || c_())
             || (CqlBoolean)(AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context)))
             || (CqlBoolean)(AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context)))
             || (CqlBoolean)(PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))));
@@ -317,7 +317,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             DataType f_ = FecalOccultResult?.Value;
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 object i_;
                 DataType m_ = FecalOccultResult?.Effective;
                 object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
@@ -348,11 +348,11 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 CqlDateTime j_ = QICoreCommon_4_0_000.Instance.latest(context, i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
-                return (bool?)((CqlBoolean)l_);
+                return l_;
             }
 
             return (bool?)(/* CQL 'and' (65:5-66:83) */ ((CqlBoolean)(!((bool?)(g_ is null)))
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -376,7 +376,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             DataType f_ = sDNATest?.Value;
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 object i_;
                 DataType r_ = sDNATest?.Effective;
                 object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
@@ -412,11 +412,11 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 CqlDateTime o_ = context.Operators.End(k_);
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(n_, o_, true, true);
                 bool? q_ = context.Operators.In<CqlDateTime>(j_, p_, "day");
-                return (bool?)((CqlBoolean)q_);
+                return q_;
             }
 
             return (bool?)(/* CQL 'and' (102:5-103:132) */ ((CqlBoolean)(!((bool?)(g_ is null)))
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -599,38 +599,38 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
         IEnumerable<Observation> a_ = this.Fecal_Occult_Blood_Test_Performed(context);
         bool? b_ = context.Operators.Exists<Observation>(a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Observation> g_ = this.Stool_DNA_with_FIT_Test_Performed(context);
             bool? h_ = context.Operators.Exists<Observation>(g_);
-            return (bool?)((CqlBoolean)h_);
+            return h_;
         }
 
 
-        bool? d_() {
+        CqlBoolean d_() {
             IEnumerable<Procedure> i_ = this.Flexible_Sigmoidoscopy_Performed(context);
             bool? j_ = context.Operators.Exists<Procedure>(i_);
-            return (bool?)((CqlBoolean)j_);
+            return j_;
         }
 
 
-        bool? e_() {
+        CqlBoolean e_() {
             IEnumerable<Observation> k_ = this.CT_Colonography_Performed(context);
             bool? l_ = context.Operators.Exists<Observation>(k_);
-            return (bool?)((CqlBoolean)l_);
+            return l_;
         }
 
 
-        bool? f_() {
+        CqlBoolean f_() {
             IEnumerable<Procedure> m_ = this.Colonoscopy_Performed(context);
             bool? n_ = context.Operators.Exists<Procedure>(m_);
-            return (bool?)((CqlBoolean)n_);
+            return n_;
         }
 
         return (bool?)(/* CQL 'or' (57:3-61:37) */ (/* CQL 'or' (57:3-60:41) */ (/* CQL 'or' (57:3-59:48) */ (/* CQL 'or' (57:3-58:49) */ ((CqlBoolean)b_
-            || (CqlBoolean)c_())
-            || (CqlBoolean)d_())
-            || (CqlBoolean)e_())
-            || (CqlBoolean)f_()));
+            || c_())
+            || d_())
+            || e_())
+            || f_()));
     }
 
 

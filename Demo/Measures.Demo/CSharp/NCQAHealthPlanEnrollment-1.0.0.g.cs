@@ -144,14 +144,14 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
             int? n_ = GapsInEnrollment?.Interval_Count;
             bool? o_ = context.Operators.LessOrEqual(n_, 1);
 
-            bool? p_() {
+            CqlBoolean p_() {
                 int? q_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
                 bool? r_ = context.Operators.LessOrEqual(q_, AllowedGapDays);
-                return (bool?)((CqlBoolean)r_);
+                return r_;
             }
 
             return (bool?)(/* CQL 'and' (48:12-51:5) */ (/* CQL 'and' (48:14-49:79) */ ((CqlBoolean)o_
-                && (CqlBoolean)p_())
+                && p_())
                 && (CqlBoolean)(this.Anchor_Date_Criteria(context, Coverage, AnchorDate, participationPeriod))));
         }
 
@@ -174,24 +174,24 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
                 CqlCode j_ = NCQATerminology_1_0_0.Instance.managed_care_policy(context);
                 bool? k_ = context.Operators.Equivalent(i_, j_);
 
-                bool? l_() {
+                CqlBoolean l_() {
                     CqlCode n_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
                     CqlCode o_ = NCQATerminology_1_0_0.Instance.retiree_health_program(context);
                     bool? p_ = context.Operators.Equivalent(n_, o_);
-                    return (bool?)((CqlBoolean)p_);
+                    return p_;
                 }
 
 
-                bool? m_() {
+                CqlBoolean m_() {
                     CqlCode q_ = FHIRHelpers_4_0_001.Instance.ToCode(context, cTypeCoding);
                     CqlCode r_ = NCQATerminology_1_0_0.Instance.subsidized_health_program(context);
                     bool? s_ = context.Operators.Equivalent(q_, r_);
-                    return (bool?)((CqlBoolean)s_);
+                    return s_;
                 }
 
                 return (bool?)(/* CQL 'or' (56:7-59:7) */ (/* CQL 'or' (56:15-57:86) */ ((CqlBoolean)k_
-                    || (CqlBoolean)l_())
-                    || (CqlBoolean)m_()));
+                    || l_())
+                    || m_()));
             }
 
             bool? h_ = context.Operators.WhereAny<Coding>((IEnumerable<Coding>)f_, g_);
@@ -303,14 +303,14 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
             int? n_ = GapsInEnrollment?.Interval_Count;
             bool? o_ = context.Operators.LessOrEqual(n_, 1);
 
-            bool? p_() {
+            CqlBoolean p_() {
                 int? q_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
                 bool? r_ = context.Operators.LessOrEqual(q_, AllowedGapDays);
-                return (bool?)((CqlBoolean)r_);
+                return r_;
             }
 
             return (bool?)(/* CQL 'and' (64:12-67:5) */ (/* CQL 'and' (64:14-65:79) */ ((CqlBoolean)o_
-                && (CqlBoolean)p_())
+                && p_())
                 && (CqlBoolean)(this.Anchor_Date_Criteria(context, PharmCoverage, AnchorDate, participationPeriod))));
         }
 
@@ -374,14 +374,14 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
             int? n_ = GapsInEnrollment?.Interval_Count;
             bool? o_ = context.Operators.LessOrEqual(n_, 1);
 
-            bool? p_() {
+            CqlBoolean p_() {
                 int? q_ = GapsInEnrollment?.Total_Days_In_Longest_Interval;
                 bool? r_ = context.Operators.LessOrEqual(q_, AllowedGapDays);
-                return (bool?)((CqlBoolean)r_);
+                return r_;
             }
 
             return (bool?)(/* CQL 'and' (78:12-81:5) */ (/* CQL 'and' (78:14-79:79) */ ((CqlBoolean)o_
-                && (CqlBoolean)p_())
+                && p_())
                 && (CqlBoolean)(this.Anchor_Date_Criteria(context, MHCoverage, AnchorDate, participationPeriod))));
         }
 

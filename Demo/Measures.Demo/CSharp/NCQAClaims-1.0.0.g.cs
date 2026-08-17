@@ -41,17 +41,17 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             CqlCode f_ = NCQATerminology_1_0_0.Instance.Professional(context);
             bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 CodeableConcept i_ = MedicalClaim?.Type;
                 CqlConcept j_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, i_);
                 IReadOnlyList<CqlCode> k_ = j_?.codes;
                 CqlCode l_ = NCQATerminology_1_0_0.Instance.Institutional(context);
                 bool? m_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)k_, l_);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'or' (14:5-16:5) */ ((CqlBoolean)g_
-                || (CqlBoolean)h_()));
+                || h_()));
         }
 
         IEnumerable<Claim> b_ = context.Operators.Where<Claim>(claim, a_);
@@ -88,17 +88,17 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
             CqlCode f_ = NCQATerminology_1_0_0.Instance.Professional(context);
             bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 CodeableConcept i_ = MedicalResponse?.Type;
                 CqlConcept j_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, i_);
                 IReadOnlyList<CqlCode> k_ = j_?.codes;
                 CqlCode l_ = NCQATerminology_1_0_0.Instance.Institutional(context);
                 bool? m_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)k_, l_);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'or' (24:5-26:5) */ ((CqlBoolean)g_
-                || (CqlBoolean)h_()));
+                || h_()));
         }
 
         IEnumerable<ClaimResponse> b_ = context.Operators.Where<ClaimResponse>(claimResponse, a_);
@@ -174,7 +174,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
                         bool? ae_ = context.Operators.WhereAny<CqlCode>((IEnumerable<CqlCode>)ac_, ad_);
 
-                        bool? af_() {
+                        CqlBoolean af_() {
                             DataType aj_ = ItemOnLine?.Location;
                             CqlConcept ak_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, aj_ as CodeableConcept);
                             IReadOnlyList<CqlCode> al_ = ak_?.codes;
@@ -187,11 +187,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             }
 
                             bool? an_ = context.Operators.WhereAny<CqlCode>((IEnumerable<CqlCode>)al_, am_);
-                            return (bool?)((CqlBoolean)an_);
+                            return an_;
                         }
 
                         return (bool?)(/* CQL 'and' (45:11-51:11) */ ((CqlBoolean)ae_
-                            && (CqlBoolean)af_()));
+                            && af_()));
                     }
 
                     IEnumerable<Claim.ItemComponent> z_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)x_, y_);
@@ -297,7 +297,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
                         bool? ab_ = context.Operators.WhereAny<CqlCode>((IEnumerable<CqlCode>)z_, aa_);
 
-                        bool? ac_() {
+                        CqlBoolean ac_() {
                             List<Claim.ProcedureComponent> ag_ = ClaimofInterest?.Procedure;
 
                             bool? ah_(Claim.ProcedureComponent @this) {
@@ -338,11 +338,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
                             IEnumerable<Coding> aq_ = context.Operators.SelectWhere<object, Coding>(an_, ao_, ap_);
                             bool? ar_ = context.Operators.Exists<Coding>(aq_);
-                            return (bool?)((CqlBoolean)ar_);
+                            return ar_;
                         }
 
                         return (bool?)(/* CQL 'or' (74:11-79:13) */ ((CqlBoolean)ab_
-                            || (CqlBoolean)ac_()));
+                            || ac_()));
                     }
 
                     IEnumerable<Claim.ItemComponent> w_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)u_, v_);
@@ -869,7 +869,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             IEnumerable<Coding> bo_ = context.Operators.SelectWhere<object, Coding>(bl_, bm_, bn_);
                             bool? bp_ = context.Operators.Exists<Coding>(bo_);
 
-                            bool? bq_() {
+                            CqlBoolean bq_() {
                                 List<Claim.ItemComponent> bz_ = ItemOnLine?.Item;
 
                                 bool? ca_(Claim.ItemComponent @this) {
@@ -908,11 +908,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                 }
 
                                 bool? ci_ = context.Operators.WhereAny<Coding>(cg_, ch_);
-                                return (bool?)((CqlBoolean)ci_);
+                                return ci_;
                             }
 
                             return (bool?)(/* CQL 'or' (173:13-179:13) */ ((CqlBoolean)bp_
-                                || (CqlBoolean)bq_()));
+                                || bq_()));
                         }
 
                         IEnumerable<Claim> bc_ = context.Operators.Where<Claim>((IEnumerable<Claim>)ba_, bb_);
@@ -1046,7 +1046,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
                         bool? ak_ = context.Operators.WhereAny<Coding>(ai_, aj_);
 
-                        bool? al_() {
+                        CqlBoolean al_() {
                             List<Claim.ProcedureComponent> au_ = ItemOnLine?.Procedure;
 
                             bool? av_(Claim.ProcedureComponent @this) {
@@ -1087,11 +1087,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
                             IEnumerable<Coding> be_ = context.Operators.SelectWhere<object, Coding>(bb_, bc_, bd_);
                             bool? bf_ = context.Operators.Exists<Coding>(be_);
-                            return (bool?)((CqlBoolean)bf_);
+                            return bf_;
                         }
 
                         return (bool?)(/* CQL 'or' (204:11-209:13) */ ((CqlBoolean)ak_
-                            || (CqlBoolean)al_()));
+                            || al_()));
                     }
 
                     IEnumerable<Claim> z_ = context.Operators.Where<Claim>((IEnumerable<Claim>)x_, y_);
@@ -1131,7 +1131,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                     int? cj_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, ci_);
                                     bool? ck_ = context.Operators.Equal(cj_, 1);
 
-                                    bool? cl_() {
+                                    CqlBoolean cl_() {
                                         DataType cm_ = RightDiagnosis?.Diagnosis;
                                         IEnumerable<Coding> cn_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(cm_, "coding");
 
@@ -1144,11 +1144,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                         }
 
                                         bool? cp_ = context.Operators.WhereAny<Coding>(cn_, co_);
-                                        return (bool?)((CqlBoolean)cp_);
+                                        return cp_;
                                     }
 
                                     return (bool?)(/* CQL 'and' (217:19-220:21) */ ((CqlBoolean)ck_
-                                        && (CqlBoolean)cl_()));
+                                        && cl_()));
                                 }
 
                                 bool? cg_ = context.Operators.WhereAny<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)ce_, cf_);
@@ -1249,7 +1249,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         int? x_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, w_);
                         bool? y_ = context.Operators.Equal(x_, 1);
 
-                        bool? z_() {
+                        CqlBoolean z_() {
                             DataType aa_ = RightDiagnosis?.Diagnosis;
                             IEnumerable<Coding> ab_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(aa_, "coding");
 
@@ -1262,11 +1262,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             }
 
                             bool? ad_ = context.Operators.WhereAny<Coding>(ab_, ac_);
-                            return (bool?)((CqlBoolean)ad_);
+                            return ad_;
                         }
 
                         return (bool?)(/* CQL 'and' (244:13-247:15) */ ((CqlBoolean)y_
-                            && (CqlBoolean)z_()));
+                            && z_()));
                     }
 
                     bool? u_ = context.Operators.WhereAny<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)s_, t_);
@@ -1423,17 +1423,17 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             string af_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ae_);
                             bool? ag_ = context.Operators.Equal(aa_, af_);
 
-                            bool? ah_() {
+                            CqlBoolean ah_() {
                                 PositiveInt ak_ = medClaimLineItem?.SequenceElement;
                                 Integer al_ = context.Operators.Convert<Integer>(ak_);
                                 PositiveInt am_ = pClaimLineItem?.ItemSequenceElement;
                                 Integer an_ = context.Operators.Convert<Integer>(am_);
                                 bool? ao_ = context.Operators.Equal(al_, an_);
-                                return (bool?)((CqlBoolean)ao_);
+                                return ao_;
                             }
 
                             return (bool?)(/* CQL 'and' (313:29-314:79) */ ((CqlBoolean)ag_
-                                && (CqlBoolean)ah_()));
+                                && ah_()));
                         }
 
                         bool? y_ = context.Operators.WhereAny<ClaimResponse.ItemComponent>(w_, x_);
@@ -1607,7 +1607,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
                     bool? af_ = context.Operators.WhereAny<Coding>(ad_, ae_);
 
-                    bool? ag_() {
+                    CqlBoolean ag_() {
                         List<ClaimResponse.AdjudicationComponent> ao_ = ResponseItem?.Adjudication;
 
                         bool? ap_(ClaimResponse.AdjudicationComponent @this) {
@@ -1632,11 +1632,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         }
 
                         bool? at_ = context.Operators.WhereAny<Money>(ar_, as_);
-                        return (bool?)((CqlBoolean)at_);
+                        return at_;
                     }
 
                     return (bool?)(/* CQL 'and' (434:13-440:13) */ ((CqlBoolean)af_
-                        && (CqlBoolean)ag_()));
+                        && ag_()));
                 }
 
                 IEnumerable<ClaimResponse.ItemComponent> u_ = context.Operators.Where<ClaimResponse.ItemComponent>((IEnumerable<ClaimResponse.ItemComponent>)s_, t_);
@@ -1696,7 +1696,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
             bool? n_ = context.Operators.WhereAny<Coding>(l_, m_);
 
-            bool? o_() {
+            CqlBoolean o_() {
                 List<Claim.DiagnosisComponent> v_ = AllClaims?.Diagnosis;
 
                 bool? w_(Claim.DiagnosisComponent @this) {
@@ -1735,11 +1735,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
                 IEnumerable<Coding> af_ = context.Operators.SelectWhere<object, Coding>(ac_, ad_, ae_);
                 bool? ag_ = context.Operators.Exists<Coding>(af_);
-                return (bool?)((CqlBoolean)ag_);
+                return ag_;
             }
 
             return (bool?)(/* CQL 'and' (446:5-451:7) */ ((CqlBoolean)n_
-                && (CqlBoolean)o_()));
+                && o_()));
         }
 
 
@@ -1843,17 +1843,17 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             string af_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ae_);
                             bool? ag_ = context.Operators.Equal(aa_, af_);
 
-                            bool? ah_() {
+                            CqlBoolean ah_() {
                                 PositiveInt ak_ = medClaimLineItem?.SequenceElement;
                                 Integer al_ = context.Operators.Convert<Integer>(ak_);
                                 PositiveInt am_ = pClaimLineItem?.ItemSequenceElement;
                                 Integer an_ = context.Operators.Convert<Integer>(am_);
                                 bool? ao_ = context.Operators.Equal(al_, an_);
-                                return (bool?)((CqlBoolean)ao_);
+                                return ao_;
                             }
 
                             return (bool?)(/* CQL 'and' (342:29-343:79) */ ((CqlBoolean)ag_
-                                && (CqlBoolean)ah_()));
+                                && ah_()));
                         }
 
                         bool? y_ = context.Operators.WhereAny<ClaimResponse.ItemComponent>(w_, x_);
@@ -1999,7 +1999,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
             bool? n_ = context.Operators.WhereAny<Coding>(l_, m_);
 
-            bool? o_() {
+            CqlBoolean o_() {
                 List<Claim.DiagnosisComponent> v_ = AllClaims?.Diagnosis;
 
                 bool? w_(Claim.DiagnosisComponent @this) {
@@ -2038,11 +2038,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
                 IEnumerable<Coding> af_ = context.Operators.SelectWhere<object, Coding>(ac_, ad_, ae_);
                 bool? ag_ = context.Operators.Exists<Coding>(af_);
-                return (bool?)((CqlBoolean)ag_);
+                return ag_;
             }
 
             return (bool?)(/* CQL 'or' (464:5-469:7) */ ((CqlBoolean)n_
-                || (CqlBoolean)o_()));
+                || o_()));
         }
 
 
@@ -2181,17 +2181,17 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             string af_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ae_);
                             bool? ag_ = context.Operators.Equal(aa_, af_);
 
-                            bool? ah_() {
+                            CqlBoolean ah_() {
                                 PositiveInt ak_ = medClaimLineItem?.SequenceElement;
                                 Integer al_ = context.Operators.Convert<Integer>(ak_);
                                 PositiveInt am_ = pClaimLineItem?.ItemSequenceElement;
                                 Integer an_ = context.Operators.Convert<Integer>(am_);
                                 bool? ao_ = context.Operators.Equal(al_, an_);
-                                return (bool?)((CqlBoolean)ao_);
+                                return ao_;
                             }
 
                             return (bool?)(/* CQL 'and' (371:29-372:79) */ ((CqlBoolean)ag_
-                                && (CqlBoolean)ah_()));
+                                && ah_()));
                         }
 
                         bool? y_ = context.Operators.WhereAny<ClaimResponse.ItemComponent>(w_, x_);
@@ -2450,17 +2450,17 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             string af_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ae_);
                             bool? ag_ = context.Operators.Equal(aa_, af_);
 
-                            bool? ah_() {
+                            CqlBoolean ah_() {
                                 PositiveInt ak_ = medClaimLineItem?.SequenceElement;
                                 Integer al_ = context.Operators.Convert<Integer>(ak_);
                                 PositiveInt am_ = pClaimLineItem?.ItemSequenceElement;
                                 Integer an_ = context.Operators.Convert<Integer>(am_);
                                 bool? ao_ = context.Operators.Equal(al_, an_);
-                                return (bool?)((CqlBoolean)ao_);
+                                return ao_;
                             }
 
                             return (bool?)(/* CQL 'and' (400:29-401:79) */ ((CqlBoolean)ag_
-                                && (CqlBoolean)ah_()));
+                                && ah_()));
                         }
 
                         bool? y_ = context.Operators.WhereAny<ClaimResponse.ItemComponent>(w_, x_);
@@ -2756,7 +2756,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
                     bool? ag_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ae_, af_);
 
-                    bool? ah_() {
+                    CqlBoolean ah_() {
                         CodeableConcept aq_ = c?.SubType;
                         List<Coding> ar_ = aq_?.Coding;
 
@@ -2769,11 +2769,11 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         }
 
                         bool? at_ = context.Operators.WhereAny<Coding>((IEnumerable<Coding>)ar_, as_);
-                        return (bool?)((CqlBoolean)at_);
+                        return at_;
                     }
 
                     return (bool?)(/* CQL 'or' (535:11-541:13) */ ((CqlBoolean)ag_
-                        || (CqlBoolean)ah_()));
+                        || ah_()));
                 }
 
                 IEnumerable<Claim> ad_ = context.Operators.Where<Claim>(ab_, ac_);
@@ -2958,25 +2958,25 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         string bz_ = by_?.Value;
                         bool? ca_ = context.Operators.Equal(bz_, "http://hl7.org/fhir/sid/us-npi");
 
-                        bool? cb_() {
+                        CqlBoolean cb_() {
                             CodeableConcept cd_ = l?.Type;
                             CqlConcept ce_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, cd_);
                             CqlCode cf_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
                             CqlConcept cg_ = context.Operators.ConvertCodeToConcept(cf_);
                             bool? ch_ = context.Operators.Equivalent(ce_, cg_);
-                            return (bool?)((CqlBoolean)ch_);
+                            return ch_;
                         }
 
 
-                        bool? cc_() {
+                        CqlBoolean cc_() {
                             FhirString ci_ = l?.ValueElement;
                             string cj_ = ci_?.Value;
-                            return (bool?)((CqlBoolean)(!((bool?)(cj_ is null))));
+                            return !((bool?)(cj_ is null));
                         }
 
                         return (bool?)(/* CQL 'and' (579:19-581:49) */ (/* CQL 'and' (579:25-580:73) */ ((CqlBoolean)ca_
-                            && (CqlBoolean)cb_())
-                            && (CqlBoolean)cc_()));
+                            && cb_())
+                            && cc_()));
                     }
 
 
@@ -2993,25 +2993,25 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         string cm_ = cl_?.Value;
                         bool? cn_ = context.Operators.Equal(cm_, "http://hl7.org/fhir/sid/us-npi");
 
-                        bool? co_() {
+                        CqlBoolean co_() {
                             CodeableConcept cq_ = l?.Type;
                             CqlConcept cr_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, cq_);
                             CqlCode cs_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
                             CqlConcept ct_ = context.Operators.ConvertCodeToConcept(cs_);
                             bool? cu_ = context.Operators.Equivalent(cr_, ct_);
-                            return (bool?)((CqlBoolean)cu_);
+                            return cu_;
                         }
 
 
-                        bool? cp_() {
+                        CqlBoolean cp_() {
                             FhirString cv_ = l?.ValueElement;
                             string cw_ = cv_?.Value;
-                            return (bool?)((CqlBoolean)((bool?)(cw_ is null)));
+                            return (bool?)(cw_ is null);
                         }
 
                         return (bool?)(/* CQL 'and' (585:19-587:45) */ (/* CQL 'and' (585:25-586:73) */ ((CqlBoolean)cn_
-                            && (CqlBoolean)co_())
-                            && (CqlBoolean)cp_()));
+                            && co_())
+                            && cp_()));
                     }
 
                     Identifier bv_(Identifier l) => l;
@@ -3241,25 +3241,25 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         string cb_ = ca_?.Value;
                         bool? cc_ = context.Operators.Equal(cb_, "http://hl7.org/fhir/sid/us-npi");
 
-                        bool? cd_() {
+                        CqlBoolean cd_() {
                             CodeableConcept cf_ = l?.Type;
                             CqlConcept cg_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, cf_);
                             CqlCode ch_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
                             CqlConcept ci_ = context.Operators.ConvertCodeToConcept(ch_);
                             bool? cj_ = context.Operators.Equivalent(cg_, ci_);
-                            return (bool?)((CqlBoolean)cj_);
+                            return cj_;
                         }
 
 
-                        bool? ce_() {
+                        CqlBoolean ce_() {
                             FhirString ck_ = l?.ValueElement;
                             string cl_ = ck_?.Value;
-                            return (bool?)((CqlBoolean)(!((bool?)(cl_ is null))));
+                            return !((bool?)(cl_ is null));
                         }
 
                         return (bool?)(/* CQL 'and' (635:19-637:49) */ (/* CQL 'and' (635:25-636:73) */ ((CqlBoolean)cc_
-                            && (CqlBoolean)cd_())
-                            && (CqlBoolean)ce_()));
+                            && cd_())
+                            && ce_()));
                     }
 
 
@@ -3276,25 +3276,25 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         string co_ = cn_?.Value;
                         bool? cp_ = context.Operators.Equal(co_, "http://hl7.org/fhir/sid/us-npi");
 
-                        bool? cq_() {
+                        CqlBoolean cq_() {
                             CodeableConcept cs_ = l?.Type;
                             CqlConcept ct_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, cs_);
                             CqlCode cu_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
                             CqlConcept cv_ = context.Operators.ConvertCodeToConcept(cu_);
                             bool? cw_ = context.Operators.Equivalent(ct_, cv_);
-                            return (bool?)((CqlBoolean)cw_);
+                            return cw_;
                         }
 
 
-                        bool? cr_() {
+                        CqlBoolean cr_() {
                             FhirString cx_ = l?.ValueElement;
                             string cy_ = cx_?.Value;
-                            return (bool?)((CqlBoolean)((bool?)(cy_ is null)));
+                            return (bool?)(cy_ is null);
                         }
 
                         return (bool?)(/* CQL 'and' (641:19-643:45) */ (/* CQL 'and' (641:25-642:73) */ ((CqlBoolean)cp_
-                            && (CqlBoolean)cq_())
-                            && (CqlBoolean)cr_()));
+                            && cq_())
+                            && cr_()));
                     }
 
                     Identifier bx_(Identifier l) => l;

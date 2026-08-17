@@ -95,16 +95,16 @@ public partial class DevDays_2025_0_0 : ILibrary, ISingleton<DevDays_2025_0_0>
 
             bool? g_ = context.Operators.WhereAny<Coding>((IEnumerable<Coding>)e_, f_);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 DataType l_ = c?.Onset;
                 CqlDateTime m_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, l_ as FhirDateTime);
                 CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
                 bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, (string)default);
-                return (bool?)((CqlBoolean)o_);
+                return o_;
             }
 
             return (bool?)(/* CQL 'and' (18:2-20:37) */ ((CqlBoolean)g_
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
@@ -135,16 +135,16 @@ public partial class DevDays_2025_0_0 : ILibrary, ISingleton<DevDays_2025_0_0>
 
             bool? g_ = context.Operators.WhereAny<Coding>((IEnumerable<Coding>)e_, f_);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 DataType l_ = c?.Onset;
                 CqlDateTime m_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, l_ as FhirDateTime);
                 CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
                 bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, (string)default);
-                return (bool?)((CqlBoolean)o_);
+                return o_;
             }
 
             return (bool?)(/* CQL 'and' (24:2-26:37) */ ((CqlBoolean)g_
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);

@@ -100,7 +100,7 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
             string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
             bool? i_ = context.Operators.Equal(h_, "finished");
 
-            bool? j_() {
+            CqlBoolean j_() {
                 Encounter.HospitalizationComponent l_ = DischargeHospice?.Hospitalization;
                 CodeableConcept m_ = l_?.DischargeDisposition;
                 CqlConcept n_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, m_);
@@ -108,38 +108,38 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                 CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
                 bool? q_ = context.Operators.Equivalent(n_, p_);
 
-                bool? r_() {
+                CqlBoolean r_() {
                     Encounter.HospitalizationComponent s_ = DischargeHospice?.Hospitalization;
                     CodeableConcept t_ = s_?.DischargeDisposition;
                     CqlConcept u_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, t_);
                     CqlCode v_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_(context);
                     CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
                     bool? x_ = context.Operators.Equivalent(u_, w_);
-                    return (bool?)((CqlBoolean)x_);
+                    return x_;
                 }
 
-                return (bool?)(/* CQL 'or' (24:23-27:19) */ ((CqlBoolean)q_
-                    || (CqlBoolean)r_()));
+                return /* CQL 'or' (24:23-27:19) */ ((CqlBoolean)q_
+                    || r_());
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 Period y_ = DischargeHospice?.Period;
                 CqlInterval<CqlDateTime> z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, y_);
                 CqlDateTime aa_ = context.Operators.End(z_);
                 CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
                 bool? ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, (string)default);
-                return (bool?)((CqlBoolean)ac_);
+                return ac_;
             }
 
             return (bool?)(/* CQL 'and' (23:16-28:105) */ (/* CQL 'and' (23:22-27:19) */ ((CqlBoolean)i_
-                && (CqlBoolean)j_())
-                && (CqlBoolean)k_()));
+                && j_())
+                && k_()));
         }
 
         bool? d_ = context.Operators.WhereAny<Encounter>(b_, c_);
 
-        bool? e_() {
+        CqlBoolean e_() {
             CqlValueSet ad_ = this.Hospice_care_ambulatory(context);
             IEnumerable<ServiceRequest> ae_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
 
@@ -152,33 +152,33 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                 ];
                 bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
 
-                bool? al_() {
+                CqlBoolean al_() {
                     Code<RequestIntent> an_ = HospiceOrder?.IntentElement;
                     string ao_ = FHIRHelpers_4_0_001.Instance.ToString(context, an_);
                     bool? ap_ = context.Operators.Equal(ao_, "order");
-                    return (bool?)((CqlBoolean)ap_);
+                    return ap_;
                 }
 
 
-                bool? am_() {
+                CqlBoolean am_() {
                     CqlInterval<CqlDateTime> aq_ = this.Measurement_Period(context);
                     FhirDateTime ar_ = HospiceOrder?.AuthoredOnElement;
                     CqlInterval<CqlDateTime> as_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ar_);
                     bool? at_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aq_, as_, (string)default);
-                    return (bool?)((CqlBoolean)at_);
+                    return at_;
                 }
 
                 return (bool?)(/* CQL 'and' (32:21-34:108) */ (/* CQL 'and' (32:27-33:53) */ ((CqlBoolean)ak_
-                    && (CqlBoolean)al_())
-                    && (CqlBoolean)am_()));
+                    && al_())
+                    && am_()));
             }
 
             bool? ag_ = context.Operators.WhereAny<ServiceRequest>(ae_, af_);
-            return (bool?)((CqlBoolean)ag_);
+            return ag_;
         }
 
 
-        bool? f_() {
+        CqlBoolean f_() {
             CqlValueSet au_ = this.Hospice_care_ambulatory(context);
             IEnumerable<Procedure> av_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, au_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 
@@ -187,25 +187,25 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                 string az_ = FHIRHelpers_4_0_001.Instance.ToString(context, ay_);
                 bool? ba_ = context.Operators.Equal(az_, "completed");
 
-                bool? bb_() {
+                CqlBoolean bb_() {
                     DataType bc_ = HospicePerformed?.Performed;
                     CqlInterval<CqlDateTime> bd_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bc_);
                     CqlInterval<CqlDateTime> be_ = this.Measurement_Period(context);
                     bool? bf_ = context.Operators.Overlaps(bd_, be_, (string)default);
-                    return (bool?)((CqlBoolean)bf_);
+                    return bf_;
                 }
 
                 return (bool?)(/* CQL 'and' (38:21-39:111) */ ((CqlBoolean)ba_
-                    && (CqlBoolean)bb_()));
+                    && bb_()));
             }
 
             bool? ax_ = context.Operators.WhereAny<Procedure>(av_, aw_);
-            return (bool?)((CqlBoolean)ax_);
+            return ax_;
         }
 
         return (bool?)(/* CQL 'or' (21:3-40:17) */ (/* CQL 'or' (21:3-35:17) */ ((CqlBoolean)d_
-            || (CqlBoolean)e_())
-            || (CqlBoolean)f_()));
+            || e_())
+            || f_()));
     }
 
 

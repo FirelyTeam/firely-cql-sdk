@@ -151,16 +151,16 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             Code<Encounter.EncounterStatus> g_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(f_);
             bool? h_ = context.Operators.Equal(g_, "finished");
 
-            bool? i_() {
+            CqlBoolean i_() {
                 CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
                 Period k_ = ValidEncounter?.Period;
                 CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, k_);
                 bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, "day");
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'and' (37:5-38:66) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -218,16 +218,16 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                 CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, m_);
                 bool? o_ = context.Operators.In<CqlDateTime>(l_, n_, (string)default);
 
-                bool? p_() {
+                CqlBoolean p_() {
                     Code<EventStatus> q_ = MedicationsDocumented?.StatusElement;
                     EventStatus? r_ = q_?.Value;
                     string s_ = context.Operators.Convert<string>(r_);
                     bool? t_ = context.Operators.Equal(s_, "completed");
-                    return (bool?)((CqlBoolean)t_);
+                    return t_;
                 }
 
                 return (bool?)(/* CQL 'and' (46:17-47:54) */ ((CqlBoolean)o_
-                    && (CqlBoolean)p_()));
+                    && p_()));
             }
 
             bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
@@ -279,16 +279,16 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                 CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, o_);
                 bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, (string)default);
 
-                bool? r_() {
+                CqlBoolean r_() {
                     Code<EventStatus> x_ = MedicationsNotDocumented?.StatusElement;
                     EventStatus? y_ = x_?.Value;
                     string z_ = context.Operators.Convert<string>(y_);
                     bool? aa_ = context.Operators.Equal(z_, "not-done");
-                    return (bool?)((CqlBoolean)aa_);
+                    return aa_;
                 }
 
 
-                bool? s_() {
+                CqlBoolean s_() {
                     List<CodeableConcept> ab_ = MedicationsNotDocumented?.ReasonCode;
 
                     CqlConcept ac_(CodeableConcept @this) {
@@ -299,12 +299,12 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                     IEnumerable<CqlConcept> ad_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ab_, ac_);
                     CqlValueSet ae_ = this.Medical_Reason(context);
                     bool? af_ = context.Operators.ConceptsInValueSet(ad_, ae_);
-                    return (bool?)((CqlBoolean)af_);
+                    return af_;
                 }
 
                 return (bool?)(/* CQL 'and' (52:17-54:67) */ (/* CQL 'and' (52:17-53:56) */ ((CqlBoolean)q_
-                    && (CqlBoolean)r_())
-                    && (CqlBoolean)s_()));
+                    && r_())
+                    && s_()));
             }
 
             bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);

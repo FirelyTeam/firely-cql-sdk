@@ -380,14 +380,14 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
         CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
-        bool? k_() {
+        CqlBoolean k_() {
             IEnumerable<Encounter> m_ = this.Qualifying_Encounters(context);
             bool? n_ = context.Operators.Exists<Encounter>(m_);
-            return (bool?)((CqlBoolean)n_);
+            return n_;
         }
 
 
-        bool? l_() {
+        CqlBoolean l_() {
             CqlValueSet o_ = this.Diabetes(context);
             IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             Condition q_(Condition X) => X as Condition;
@@ -402,12 +402,12 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             }
 
             bool? u_ = context.Operators.WhereAny<Condition>(s_, t_);
-            return (bool?)((CqlBoolean)u_);
+            return u_;
         }
 
         return (bool?)(/* CQL 'and' (52:3-58:5) */ (/* CQL 'and' (52:3-55:38) */ ((CqlBoolean)j_
-            && (CqlBoolean)k_())
-            && (CqlBoolean)l_()));
+            && k_())
+            && l_()));
     }
 
 
@@ -623,15 +623,15 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
     {
         Observation a_ = this.Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day(context);
 
-        bool? b_() {
+        CqlBoolean b_() {
             Observation c_ = this.Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day(context);
             DataType d_ = c_?.Value;
             object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
-            return (bool?)((CqlBoolean)((bool?)(e_ is null)));
+            return (bool?)(e_ is null);
         }
 
         return (bool?)(/* CQL 'and' (133:3-134:84) */ ((CqlBoolean)(!((bool?)(a_ is null)))
-            && (CqlBoolean)b_()));
+            && b_()));
     }
 
 

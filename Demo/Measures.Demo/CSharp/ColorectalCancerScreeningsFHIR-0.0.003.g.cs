@@ -269,16 +269,16 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
             bool? j_ = context.Operators.Equal(i_, "finished");
 
-            bool? k_() {
+            CqlBoolean k_() {
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 Period m_ = TelehealthEncounter?.Period;
                 CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, m_);
                 bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, (string)default);
-                return (bool?)((CqlBoolean)o_);
+                return o_;
             }
 
             return (bool?)(/* CQL 'and' (74:13-75:104) */ ((CqlBoolean)j_
-                && (CqlBoolean)k_()));
+                && k_()));
         }
 
         IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
@@ -325,16 +325,16 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
         CqlInterval<int?> i_ = context.Operators.Interval(51, 75, true, false);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
-        bool? k_() {
+        CqlBoolean k_() {
             IEnumerable<Encounter> l_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
             IEnumerable<Encounter> m_ = this.Telehealth_Services(context);
             IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(l_, m_);
             bool? o_ = context.Operators.Exists<Encounter>(n_);
-            return (bool?)((CqlBoolean)o_);
+            return o_;
         }
 
         return (bool?)(/* CQL 'and' (83:3-86:5) */ ((CqlBoolean)j_
-            && (CqlBoolean)k_()));
+            && k_()));
     }
 
 
@@ -392,18 +392,18 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
 
-            bool? h_() {
+            CqlBoolean h_() {
                 DataType i_ = Colectomy?.Performed;
                 CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
                 CqlDateTime k_ = context.Operators.End(j_);
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 CqlDateTime m_ = context.Operators.End(l_);
                 bool? n_ = context.Operators.SameOrBefore(k_, m_, (string)default);
-                return (bool?)((CqlBoolean)n_);
+                return n_;
             }
 
             return (bool?)(/* CQL 'and' (110:13-112:41) */ ((CqlBoolean)g_
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -446,28 +446,28 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
     {
         bool? a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
 
-        bool? b_() {
+        CqlBoolean b_() {
             IEnumerable<Condition> f_ = this.Malignant_Neoplasm(context);
             bool? g_ = context.Operators.Exists<Condition>(f_);
-            return (bool?)((CqlBoolean)g_);
+            return g_;
         }
 
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Procedure> h_ = this.Total_Colectomy_Performed(context);
             bool? i_ = context.Operators.Exists<Procedure>(h_);
-            return (bool?)((CqlBoolean)i_);
+            return i_;
         }
 
 
-        bool? d_() {
+        CqlBoolean d_() {
             IEnumerable<Condition> j_ = this.Total_Colectomy_Condition(context);
             bool? k_ = context.Operators.Exists<Condition>(j_);
-            return (bool?)((CqlBoolean)k_);
+            return k_;
         }
 
 
-        bool? e_() {
+        CqlBoolean e_() {
             Patient l_ = this.Patient(context);
             Date m_ = l_?.BirthDateElement;
             string n_ = m_?.Value;
@@ -477,16 +477,16 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             CqlDate r_ = context.Operators.DateFrom(q_);
             int? s_ = context.Operators.CalculateAgeAt(o_, r_, "year");
             bool? t_ = context.Operators.GreaterOrEqual(s_, 65);
-            return (bool?)(/* CQL 'and' (98:16-100:13) */ ((CqlBoolean)t_
-                && (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context))));
+            return /* CQL 'and' (98:16-100:13) */ ((CqlBoolean)t_
+                && (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context)));
         }
 
         return (bool?)(/* CQL 'or' (93:3-101:73) */ (/* CQL 'or' (93:3-100:13) */ (/* CQL 'or' (93:3-97:92) */ (/* CQL 'or' (93:3-96:49) */ (/* CQL 'or' (93:3-95:49) */ (/* CQL 'or' (93:3-94:42) */ ((CqlBoolean)a_
-            || (CqlBoolean)b_())
-            || (CqlBoolean)c_())
-            || (CqlBoolean)d_())
+            || b_())
+            || c_())
+            || d_())
             || (CqlBoolean)(AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)))
-            || (CqlBoolean)e_())
+            || e_())
             || (CqlBoolean)(PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context))));
     }
 
@@ -607,7 +607,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 List<CodeableConcept> k_ = FecalOccult?.Category;
 
                 bool? l_(CodeableConcept FecalOccultCategory) {
@@ -646,22 +646,22 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 }
 
                 bool? m_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)k_, l_);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 DataType aa_ = FecalOccult?.Effective;
                 CqlDateTime ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, aa_);
                 CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
                 bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, (string)default);
-                return (bool?)((CqlBoolean)ad_);
+                return ad_;
             }
 
             return (bool?)(/* CQL 'and' (137:13-141:87) */ (/* CQL 'and' (137:19-140:47) */ (/* CQL 'and' (137:19-139:83) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_())
+                && i_())
                 && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
-                && (CqlBoolean)j_()));
+                && j_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -690,7 +690,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 List<CodeableConcept> k_ = FecalOccult?.Category;
 
                 bool? l_(CodeableConcept FecalOccultCategory) {
@@ -729,22 +729,22 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 }
 
                 bool? m_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)k_, l_);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 DataType aa_ = FecalOccult?.Effective;
                 CqlDateTime ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, aa_);
                 CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
                 bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, "day");
-                return (bool?)((CqlBoolean)ad_);
+                return ad_;
             }
 
             return (bool?)(/* CQL 'and' (146:13-150:94) */ (/* CQL 'and' (146:19-149:47) */ (/* CQL 'and' (146:19-148:83) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_())
+                && i_())
                 && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
-                && (CqlBoolean)j_()));
+                && j_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -803,17 +803,17 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
 
             bool? g_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)e_, f_);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 DataType v_ = FecalOccult?.Effective;
                 CqlDateTime w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, v_);
                 CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
                 bool? y_ = context.Operators.In<CqlDateTime>(w_, x_, "day");
-                return (bool?)((CqlBoolean)y_);
+                return y_;
             }
 
             return (bool?)(/* CQL 'and' (156:13-162:94) */ (/* CQL 'and' (159:15-161:47) */ ((CqlBoolean)g_
                 && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -842,17 +842,17 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 DataType j_ = FecalOccult?.Effective;
                 CqlDateTime k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, j_);
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'and' (167:13-171:94) */ (/* CQL 'and' (167:19-170:47) */ ((CqlBoolean)!h_
                 && (CqlBoolean)(!((bool?)(FecalOccult?.Value is null))))
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -881,14 +881,14 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             CqlInterval<CqlDateTime> m_ = context.Operators.Interval(l_, j_, true, true);
             bool? n_ = context.Operators.In<CqlDateTime>(h_, m_, (string)default);
 
-            bool? o_() {
+            CqlBoolean o_() {
                 CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                 CqlDateTime q_ = context.Operators.End(p_);
-                return (bool?)((CqlBoolean)(!((bool?)(q_ is null))));
+                return !((bool?)(q_ is null));
             }
 
             return (bool?)(/* CQL 'and' (179:5-180:33) */ ((CqlBoolean)n_
-                && (CqlBoolean)o_()));
+                && o_()));
         }
 
 
@@ -983,7 +983,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 List<CodeableConcept> k_ = FitDNA?.Category;
 
                 bool? l_(CodeableConcept FitDNACategory) {
@@ -1022,11 +1022,11 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 }
 
                 bool? m_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)k_, l_);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 DataType aa_ = FitDNA?.Effective;
                 CqlDateTime ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, aa_);
                 CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
@@ -1036,20 +1036,20 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(af_, ad_, true, true);
                 bool? ah_ = context.Operators.In<CqlDateTime>(ab_, ag_, (string)default);
 
-                bool? ai_() {
+                CqlBoolean ai_() {
                     CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
                     CqlDateTime ak_ = context.Operators.End(aj_);
-                    return (bool?)((CqlBoolean)(!((bool?)(ak_ is null))));
+                    return !((bool?)(ak_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (195:19-196:41) */ ((CqlBoolean)ah_
-                    && (CqlBoolean)ai_()));
+                return /* CQL 'and' (195:19-196:41) */ ((CqlBoolean)ah_
+                    && ai_());
             }
 
             return (bool?)(/* CQL 'and' (191:13-196:41) */ (/* CQL 'and' (191:19-194:42) */ (/* CQL 'and' (191:19-193:78) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_())
+                && i_())
                 && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
-                && (CqlBoolean)j_()));
+                && j_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1078,7 +1078,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 List<CodeableConcept> k_ = FitDNA?.Category;
 
                 bool? l_(CodeableConcept FitDNACategory) {
@@ -1117,11 +1117,11 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 }
 
                 bool? m_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)k_, l_);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 DataType aa_ = FitDNA?.Effective;
                 CqlDateTime ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, aa_);
                 CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
@@ -1131,20 +1131,20 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(af_, ad_, true, true);
                 bool? ah_ = context.Operators.In<CqlDateTime>(ab_, ag_, "day");
 
-                bool? ai_() {
+                CqlBoolean ai_() {
                     CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
                     CqlDateTime ak_ = context.Operators.End(aj_);
-                    return (bool?)((CqlBoolean)(!((bool?)(ak_ is null))));
+                    return !((bool?)(ak_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (205:19-206:48) */ ((CqlBoolean)ah_
-                    && (CqlBoolean)ai_()));
+                return /* CQL 'and' (205:19-206:48) */ ((CqlBoolean)ah_
+                    && ai_());
             }
 
             return (bool?)(/* CQL 'and' (201:13-206:48) */ (/* CQL 'and' (201:19-204:42) */ (/* CQL 'and' (201:19-203:78) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_())
+                && i_())
                 && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
-                && (CqlBoolean)j_()));
+                && j_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1203,7 +1203,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
 
             bool? g_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)e_, f_);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 DataType v_ = FitDNA?.Effective;
                 CqlDateTime w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, v_);
                 CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
@@ -1213,19 +1213,19 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(aa_, y_, true, true);
                 bool? ac_ = context.Operators.In<CqlDateTime>(w_, ab_, "day");
 
-                bool? ad_() {
+                CqlBoolean ad_() {
                     CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
                     CqlDateTime af_ = context.Operators.End(ae_);
-                    return (bool?)((CqlBoolean)(!((bool?)(af_ is null))));
+                    return !((bool?)(af_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (218:19-219:48) */ ((CqlBoolean)ac_
-                    && (CqlBoolean)ad_()));
+                return /* CQL 'and' (218:19-219:48) */ ((CqlBoolean)ac_
+                    && ad_());
             }
 
             return (bool?)(/* CQL 'and' (212:13-219:48) */ (/* CQL 'and' (215:15-217:42) */ ((CqlBoolean)g_
                 && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1254,7 +1254,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 DataType j_ = FitDNA?.Effective;
                 CqlDateTime k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, j_);
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
@@ -1264,19 +1264,19 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, true);
                 bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, "day");
 
-                bool? r_() {
+                CqlBoolean r_() {
                     CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
                     CqlDateTime t_ = context.Operators.End(s_);
-                    return (bool?)((CqlBoolean)(!((bool?)(t_ is null))));
+                    return !((bool?)(t_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (228:19-229:48) */ ((CqlBoolean)q_
-                    && (CqlBoolean)r_()));
+                return /* CQL 'and' (228:19-229:48) */ ((CqlBoolean)q_
+                    && r_());
             }
 
             return (bool?)(/* CQL 'and' (224:13-229:48) */ (/* CQL 'and' (224:19-227:42) */ ((CqlBoolean)!h_
                 && (CqlBoolean)(!((bool?)(FitDNA?.Value is null))))
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1306,14 +1306,14 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(m_, k_, true, true);
             bool? o_ = context.Operators.In<CqlDateTime>(i_, n_, (string)default);
 
-            bool? p_() {
+            CqlBoolean p_() {
                 CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
                 CqlDateTime r_ = context.Operators.End(q_);
-                return (bool?)((CqlBoolean)(!((bool?)(r_ is null))));
+                return !((bool?)(r_ is null));
             }
 
             return (bool?)(/* CQL 'and' (238:13-239:41) */ ((CqlBoolean)o_
-                && (CqlBoolean)p_()));
+                && p_()));
         }
 
 
@@ -1351,7 +1351,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 DataType j_ = Colonography?.Effective;
                 CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, j_);
                 CqlDateTime l_ = context.Operators.End(k_);
@@ -1362,18 +1362,18 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, true);
                 bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
 
-                bool? s_() {
+                CqlBoolean s_() {
                     CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
                     CqlDateTime u_ = context.Operators.End(t_);
-                    return (bool?)((CqlBoolean)(!((bool?)(u_ is null))));
+                    return !((bool?)(u_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (245:19-246:41) */ ((CqlBoolean)r_
-                    && (CqlBoolean)s_()));
+                return /* CQL 'and' (245:19-246:41) */ ((CqlBoolean)r_
+                    && s_());
             }
 
             return (bool?)(/* CQL 'and' (244:13-246:41) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1403,7 +1403,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 DataType j_ = Colonography?.Effective;
                 CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, j_);
                 CqlDateTime l_ = context.Operators.End(k_);
@@ -1414,18 +1414,18 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, true);
                 bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
 
-                bool? s_() {
+                CqlBoolean s_() {
                     CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
                     CqlDateTime u_ = context.Operators.End(t_);
-                    return (bool?)((CqlBoolean)(!((bool?)(u_ is null))));
+                    return !((bool?)(u_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (252:19-253:41) */ ((CqlBoolean)r_
-                    && (CqlBoolean)s_()));
+                return /* CQL 'and' (252:19-253:41) */ ((CqlBoolean)r_
+                    && s_());
             }
 
             return (bool?)(/* CQL 'and' (251:13-253:41) */ ((CqlBoolean)!h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -1455,14 +1455,14 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(m_, k_, true, true);
             bool? o_ = context.Operators.In<CqlDateTime>(i_, n_, (string)default);
 
-            bool? p_() {
+            CqlBoolean p_() {
                 CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
                 CqlDateTime r_ = context.Operators.End(q_);
-                return (bool?)((CqlBoolean)(!((bool?)(r_ is null))));
+                return !((bool?)(r_ is null));
             }
 
             return (bool?)(/* CQL 'and' (262:5-263:33) */ ((CqlBoolean)o_
-                && (CqlBoolean)p_()));
+                && p_()));
         }
 
 
@@ -1494,7 +1494,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
 
-            bool? h_() {
+            CqlBoolean h_() {
                 DataType i_ = FlexibleSigmoidoscopy?.Performed;
                 CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
                 CqlDateTime k_ = context.Operators.End(j_);
@@ -1505,18 +1505,18 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, true);
                 bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
 
-                bool? r_() {
+                CqlBoolean r_() {
                     CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
                     CqlDateTime t_ = context.Operators.End(s_);
-                    return (bool?)((CqlBoolean)(!((bool?)(t_ is null))));
+                    return !((bool?)(t_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (269:19-270:41) */ ((CqlBoolean)q_
-                    && (CqlBoolean)r_()));
+                return /* CQL 'and' (269:19-270:41) */ ((CqlBoolean)q_
+                    && r_());
             }
 
             return (bool?)(/* CQL 'and' (268:13-270:41) */ ((CqlBoolean)g_
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1540,7 +1540,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
 
-            bool? h_() {
+            CqlBoolean h_() {
                 DataType i_ = FlexibleSigmoidoscopy?.Performed;
                 CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
                 CqlDateTime k_ = context.Operators.End(j_);
@@ -1551,18 +1551,18 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, true);
                 bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
 
-                bool? r_() {
+                CqlBoolean r_() {
                     CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
                     CqlDateTime t_ = context.Operators.End(s_);
-                    return (bool?)((CqlBoolean)(!((bool?)(t_ is null))));
+                    return !((bool?)(t_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (276:19-277:41) */ ((CqlBoolean)q_
-                    && (CqlBoolean)r_()));
+                return /* CQL 'and' (276:19-277:41) */ ((CqlBoolean)q_
+                    && r_());
             }
 
             return (bool?)(/* CQL 'and' (275:13-277:41) */ ((CqlBoolean)!g_
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1592,14 +1592,14 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(m_, k_, true, true);
             bool? o_ = context.Operators.In<CqlDateTime>(i_, n_, (string)default);
 
-            bool? p_() {
+            CqlBoolean p_() {
                 CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
                 CqlDateTime r_ = context.Operators.End(q_);
-                return (bool?)((CqlBoolean)(!((bool?)(r_ is null))));
+                return !((bool?)(r_ is null));
             }
 
             return (bool?)(/* CQL 'and' (286:5-287:33) */ ((CqlBoolean)o_
-                && (CqlBoolean)p_()));
+                && p_()));
         }
 
 
@@ -1631,7 +1631,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
 
-            bool? h_() {
+            CqlBoolean h_() {
                 DataType i_ = Colonoscopy?.Performed;
                 CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
                 CqlDateTime k_ = context.Operators.End(j_);
@@ -1642,18 +1642,18 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, true);
                 bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
 
-                bool? r_() {
+                CqlBoolean r_() {
                     CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
                     CqlDateTime t_ = context.Operators.End(s_);
-                    return (bool?)((CqlBoolean)(!((bool?)(t_ is null))));
+                    return !((bool?)(t_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (293:19-294:41) */ ((CqlBoolean)q_
-                    && (CqlBoolean)r_()));
+                return /* CQL 'and' (293:19-294:41) */ ((CqlBoolean)q_
+                    && r_());
             }
 
             return (bool?)(/* CQL 'and' (292:13-294:41) */ ((CqlBoolean)g_
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1677,7 +1677,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
             bool? g_ = context.Operators.Equal(f_, "completed");
 
-            bool? h_() {
+            CqlBoolean h_() {
                 DataType i_ = Colonoscopy?.Performed;
                 CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
                 CqlDateTime k_ = context.Operators.End(j_);
@@ -1688,18 +1688,18 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, true);
                 bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
 
-                bool? r_() {
+                CqlBoolean r_() {
                     CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
                     CqlDateTime t_ = context.Operators.End(s_);
-                    return (bool?)((CqlBoolean)(!((bool?)(t_ is null))));
+                    return !((bool?)(t_ is null));
                 }
 
-                return (bool?)(/* CQL 'and' (300:19-301:41) */ ((CqlBoolean)q_
-                    && (CqlBoolean)r_()));
+                return /* CQL 'and' (300:19-301:41) */ ((CqlBoolean)q_
+                    && r_());
             }
 
             return (bool?)(/* CQL 'and' (299:13-301:41) */ ((CqlBoolean)!g_
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1718,38 +1718,38 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
         IEnumerable<Procedure> a_ = this.Colonoscopy_Performed(context);
         bool? b_ = context.Operators.Exists<Procedure>(a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Observation> g_ = this.Fecal_Occult_Blood_Test_Performed(context);
             bool? h_ = context.Operators.Exists<Observation>(g_);
-            return (bool?)((CqlBoolean)h_);
+            return h_;
         }
 
 
-        bool? d_() {
+        CqlBoolean d_() {
             IEnumerable<Procedure> i_ = this.Flexible_Sigmoidoscopy_Performed(context);
             bool? j_ = context.Operators.Exists<Procedure>(i_);
-            return (bool?)((CqlBoolean)j_);
+            return j_;
         }
 
 
-        bool? e_() {
+        CqlBoolean e_() {
             IEnumerable<Observation> k_ = this.Fecal_Immunochemical_Test_DNA_Performed(context);
             bool? l_ = context.Operators.Exists<Observation>(k_);
-            return (bool?)((CqlBoolean)l_);
+            return l_;
         }
 
 
-        bool? f_() {
+        CqlBoolean f_() {
             IEnumerable<Observation> m_ = this.CT_Colonography_Performed(context);
             bool? n_ = context.Operators.Exists<Observation>(m_);
-            return (bool?)((CqlBoolean)n_);
+            return n_;
         }
 
         return (bool?)(/* CQL 'or' (304:3-308:49) */ (/* CQL 'or' (304:3-307:63) */ (/* CQL 'or' (304:3-306:56) */ (/* CQL 'or' (304:3-305:57) */ ((CqlBoolean)b_
-            || (CqlBoolean)c_())
-            || (CqlBoolean)d_())
-            || (CqlBoolean)e_())
-            || (CqlBoolean)f_()));
+            || c_())
+            || d_())
+            || e_())
+            || f_()));
     }
 
 

@@ -127,34 +127,34 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
             CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
             bool? p_ = context.Operators.Equivalent(m_, o_);
 
-            bool? q_() {
+            CqlBoolean q_() {
                 Encounter.HospitalizationComponent s_ = InpatientEncounter?.Hospitalization;
                 CodeableConcept t_ = s_?.DischargeDisposition;
                 CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
                 CqlCode v_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_(context);
                 CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
                 bool? x_ = context.Operators.Equivalent(u_, w_);
-                return (bool?)((CqlBoolean)x_);
+                return x_;
             }
 
 
-            bool? r_() {
+            CqlBoolean r_() {
                 Period y_ = InpatientEncounter?.Period;
                 CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
                 CqlDateTime aa_ = context.Operators.End(z_);
                 CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
                 bool? ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, "day");
-                return (bool?)((CqlBoolean)ac_);
+                return ac_;
             }
 
             return (bool?)(/* CQL 'and' (28:7-31:77) */ (/* CQL 'or' (28:13-30:7) */ ((CqlBoolean)p_
-                || (CqlBoolean)q_())
-                && (CqlBoolean)r_()));
+                || q_())
+                && r_()));
         }
 
         bool? e_ = context.Operators.WhereAny<Encounter>(c_, d_);
 
-        bool? f_() {
+        CqlBoolean f_() {
             CqlValueSet ad_ = this.Hospice_Encounter(context);
             IEnumerable<Encounter> ae_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             IEnumerable<Encounter> af_ = Status_1_15_000.Instance.isEncounterPerformed(context, ae_);
@@ -168,11 +168,11 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
             }
 
             bool? ah_ = context.Operators.WhereAny<Encounter>(af_, ag_);
-            return (bool?)((CqlBoolean)ah_);
+            return ah_;
         }
 
 
-        bool? g_() {
+        CqlBoolean g_() {
             CqlCode am_ = this.Hospice_care__Minimum_Data_Set_(context);
             IEnumerable<CqlCode> an_ = context.Operators.ToList<CqlCode>(am_);
             IEnumerable<Observation> ao_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, an_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -185,25 +185,25 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 CqlConcept av_ = context.Operators.ConvertCodeToConcept(au_);
                 bool? aw_ = context.Operators.Equivalent(at_ as CqlConcept, av_);
 
-                bool? ax_() {
+                CqlBoolean ax_() {
                     DataType ay_ = HospiceAssessment?.Effective;
                     object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
                     CqlInterval<CqlDateTime> ba_ = QICoreCommon_4_0_000.Instance.toInterval(context, az_);
                     CqlInterval<CqlDateTime> bb_ = this.Measurement_Period(context);
                     bool? bc_ = context.Operators.Overlaps(ba_, bb_, "day");
-                    return (bool?)((CqlBoolean)bc_);
+                    return bc_;
                 }
 
                 return (bool?)(/* CQL 'and' (37:9-38:91) */ ((CqlBoolean)aw_
-                    && (CqlBoolean)ax_()));
+                    && ax_()));
             }
 
             bool? ar_ = context.Operators.WhereAny<Observation>(ap_, aq_);
-            return (bool?)((CqlBoolean)ar_);
+            return ar_;
         }
 
 
-        bool? h_() {
+        CqlBoolean h_() {
             CqlValueSet bd_ = this.Hospice_Care_Ambulatory(context);
             IEnumerable<ServiceRequest> be_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, bd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
             IEnumerable<ServiceRequest> bf_ = Status_1_15_000.Instance.isInterventionOrder(context, be_);
@@ -217,11 +217,11 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
             }
 
             bool? bh_ = context.Operators.WhereAny<ServiceRequest>(bf_, bg_);
-            return (bool?)((CqlBoolean)bh_);
+            return bh_;
         }
 
 
-        bool? i_() {
+        CqlBoolean i_() {
             CqlValueSet bm_ = this.Hospice_Care_Ambulatory(context);
             IEnumerable<Procedure> bn_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, bm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
             IEnumerable<Procedure> bo_ = Status_1_15_000.Instance.isInterventionPerformed(context, bn_);
@@ -270,11 +270,11 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
             }
 
             bool? bq_ = context.Operators.WhereAny<Procedure>(bo_, bp_);
-            return (bool?)((CqlBoolean)bq_);
+            return bq_;
         }
 
 
-        bool? j_() {
+        CqlBoolean j_() {
             CqlValueSet cb_ = this.Hospice_Diagnosis(context);
             IEnumerable<Condition> cc_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, cb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> cd_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, cb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -289,15 +289,15 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
             }
 
             bool? ch_ = context.Operators.WhereAny<Condition>(cf_, cg_);
-            return (bool?)((CqlBoolean)ch_);
+            return ch_;
         }
 
         return (bool?)(/* CQL 'or' (27:3-49:5) */ (/* CQL 'or' (27:3-45:5) */ (/* CQL 'or' (27:3-42:5) */ (/* CQL 'or' (27:3-39:5) */ (/* CQL 'or' (27:3-35:5) */ ((CqlBoolean)e_
-            || (CqlBoolean)f_())
-            || (CqlBoolean)g_())
-            || (CqlBoolean)h_())
-            || (CqlBoolean)i_())
-            || (CqlBoolean)j_()));
+            || f_())
+            || g_())
+            || h_())
+            || i_())
+            || j_()));
     }
 
 

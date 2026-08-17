@@ -231,15 +231,15 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, r_);
             bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, (string)default);
 
-            bool? u_() {
+            CqlBoolean u_() {
                 Code<Encounter.EncounterStatus> v_ = QualifyingEncounter?.StatusElement;
                 string w_ = FHIRHelpers_4_0_001.Instance.ToString(context, v_);
                 bool? x_ = context.Operators.Equal(w_, "finished");
-                return (bool?)((CqlBoolean)x_);
+                return x_;
             }
 
             return (bool?)(/* CQL 'and' (79:11-80:57) */ ((CqlBoolean)t_
-                && (CqlBoolean)u_()));
+                && u_()));
         }
 
         IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
@@ -268,16 +268,16 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
                 bool? l_ = context.Operators.Equivalent(i_, k_);
 
-                bool? m_() {
+                CqlBoolean m_() {
                     CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, DiabeticRetinopathy);
                     Period o_ = ValidQualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, o_);
                     bool? q_ = context.Operators.Overlaps(n_, p_, (string)default);
-                    return (bool?)((CqlBoolean)q_);
+                    return q_;
                 }
 
                 return (bool?)(/* CQL 'and' (70:23-71:106) */ ((CqlBoolean)l_
-                    && (CqlBoolean)m_()));
+                    && m_()));
             }
 
             bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
@@ -373,35 +373,35 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
             bool? w_ = context.Operators.Equal(v_, "not-done");
 
-            bool? x_() {
+            CqlBoolean x_() {
                 Extension z_ = this.GetModifierExtension(context, LevelOfSeverityNotCommunicated, "qicore-notDone");
                 DataType aa_ = z_?.Value;
                 bool? ab_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, aa_ as FhirBoolean);
-                return (bool?)((CqlBoolean)((bool?)(/* CQL 'is true' (110:11-110:96) */ ab_ is true)));
+                return (bool?)(/* CQL 'is true' (110:11-110:96) */ ab_ is true);
             }
 
 
-            bool? y_() {
+            CqlBoolean y_() {
                 CodeableConcept ac_ = LevelOfSeverityNotCommunicated?.StatusReason;
                 CqlConcept ad_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ac_);
                 CqlValueSet ae_ = this.Medical_Reason(context);
                 bool? af_ = context.Operators.ConceptInValueSet(ad_, ae_);
 
-                bool? ag_() {
+                CqlBoolean ag_() {
                     CodeableConcept ah_ = LevelOfSeverityNotCommunicated?.StatusReason;
                     CqlConcept ai_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ah_);
                     CqlValueSet aj_ = this.Patient_Reason(context);
                     bool? ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
-                    return (bool?)((CqlBoolean)ak_);
+                    return ak_;
                 }
 
-                return (bool?)(/* CQL 'or' (111:11-113:7) */ ((CqlBoolean)af_
-                    || (CqlBoolean)ag_()));
+                return /* CQL 'or' (111:11-113:7) */ ((CqlBoolean)af_
+                    || ag_());
             }
 
             return (bool?)(/* CQL 'and' (109:5-113:7) */ (/* CQL 'and' (109:11-110:96) */ ((CqlBoolean)w_
-                && (CqlBoolean)x_())
-                && (CqlBoolean)y_()));
+                && x_())
+                && y_()));
         }
 
         IEnumerable<Communication> g_ = context.Operators.Where<Communication>(e_, f_);
@@ -465,35 +465,35 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             string w_ = FHIRHelpers_4_0_001.Instance.ToString(context, v_);
             bool? x_ = context.Operators.Equal(w_, "not-done");
 
-            bool? y_() {
+            CqlBoolean y_() {
                 Extension aa_ = this.GetModifierExtension(context, MacularEdemaAbsentNotCommunicated, "qicore-notDone");
                 DataType ab_ = aa_?.Value;
                 bool? ac_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, ab_ as FhirBoolean);
-                return (bool?)((CqlBoolean)((bool?)(/* CQL 'is true' (100:11-100:99) */ ac_ is true)));
+                return (bool?)(/* CQL 'is true' (100:11-100:99) */ ac_ is true);
             }
 
 
-            bool? z_() {
+            CqlBoolean z_() {
                 CodeableConcept ad_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
                 CqlConcept ae_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ad_);
                 CqlValueSet af_ = this.Medical_Reason(context);
                 bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
 
-                bool? ah_() {
+                CqlBoolean ah_() {
                     CodeableConcept ai_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
                     CqlConcept aj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ai_);
                     CqlValueSet ak_ = this.Patient_Reason(context);
                     bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
-                    return (bool?)((CqlBoolean)al_);
+                    return al_;
                 }
 
-                return (bool?)(/* CQL 'or' (101:11-103:7) */ ((CqlBoolean)ag_
-                    || (CqlBoolean)ah_()));
+                return /* CQL 'or' (101:11-103:7) */ ((CqlBoolean)ag_
+                    || ah_());
             }
 
             return (bool?)(/* CQL 'and' (99:5-103:7) */ (/* CQL 'and' (99:11-100:99) */ ((CqlBoolean)x_
-                && (CqlBoolean)y_())
-                && (CqlBoolean)z_()));
+                && y_())
+                && z_()));
         }
 
         IEnumerable<Communication> h_ = context.Operators.Where<Communication>(f_, g_);
@@ -556,35 +556,35 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
             string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
             bool? w_ = context.Operators.Equal(v_, "not-done");
 
-            bool? x_() {
+            CqlBoolean x_() {
                 Extension z_ = this.GetModifierExtension(context, MacularEdemaPresentNotCommunicated, "qicore-notDone");
                 DataType aa_ = z_?.Value;
                 bool? ab_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, aa_ as FhirBoolean);
-                return (bool?)((CqlBoolean)((bool?)(/* CQL 'is true' (120:11-120:100) */ ab_ is true)));
+                return (bool?)(/* CQL 'is true' (120:11-120:100) */ ab_ is true);
             }
 
 
-            bool? y_() {
+            CqlBoolean y_() {
                 CodeableConcept ac_ = MacularEdemaPresentNotCommunicated?.StatusReason;
                 CqlConcept ad_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ac_);
                 CqlValueSet ae_ = this.Medical_Reason(context);
                 bool? af_ = context.Operators.ConceptInValueSet(ad_, ae_);
 
-                bool? ag_() {
+                CqlBoolean ag_() {
                     CodeableConcept ah_ = MacularEdemaPresentNotCommunicated?.StatusReason;
                     CqlConcept ai_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ah_);
                     CqlValueSet aj_ = this.Patient_Reason(context);
                     bool? ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
-                    return (bool?)((CqlBoolean)ak_);
+                    return ak_;
                 }
 
-                return (bool?)(/* CQL 'or' (121:11-123:7) */ ((CqlBoolean)af_
-                    || (CqlBoolean)ag_()));
+                return /* CQL 'or' (121:11-123:7) */ ((CqlBoolean)af_
+                    || ag_());
             }
 
             return (bool?)(/* CQL 'and' (119:5-123:7) */ (/* CQL 'and' (119:11-120:100) */ ((CqlBoolean)w_
-                && (CqlBoolean)x_())
-                && (CqlBoolean)y_()));
+                && x_())
+                && y_()));
         }
 
         IEnumerable<Communication> g_ = context.Operators.Where<Communication>(e_, f_);
@@ -603,22 +603,22 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
         IEnumerable<Communication> a_ = this.Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy(context);
         bool? b_ = context.Operators.Exists<Communication>(a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Communication> e_ = this.Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema(context);
             bool? f_ = context.Operators.Exists<Communication>(e_);
-            return (bool?)((CqlBoolean)f_);
+            return f_;
         }
 
 
-        bool? d_() {
+        CqlBoolean d_() {
             IEnumerable<Communication> g_ = this.Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema(context);
             bool? h_ = context.Operators.Exists<Communication>(g_);
-            return (bool?)((CqlBoolean)h_);
+            return h_;
         }
 
         return (bool?)(/* CQL 'or' (49:3-51:95) */ (/* CQL 'or' (49:3-50:94) */ ((CqlBoolean)b_
-            || (CqlBoolean)c_())
-            || (CqlBoolean)d_()));
+            || c_())
+            || d_()));
     }
 
 
@@ -639,14 +639,14 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
         int? g_ = context.Operators.CalculateAgeAt(d_, f_, "year");
         bool? h_ = context.Operators.GreaterOrEqual(g_, 18);
 
-        bool? i_() {
+        CqlBoolean i_() {
             IEnumerable<Encounter> j_ = this.Diabetic_Retinopathy_Encounter(context);
             bool? k_ = context.Operators.Exists<Encounter>(j_);
-            return (bool?)((CqlBoolean)k_);
+            return k_;
         }
 
         return (bool?)(/* CQL 'and' (64:3-65:53) */ ((CqlBoolean)h_
-            && (CqlBoolean)i_()));
+            && i_()));
     }
 
 
@@ -707,14 +707,14 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     {
         bool? a_ = this.Initial_Population(context);
 
-        bool? b_() {
+        CqlBoolean b_() {
             IEnumerable<Observation> c_ = this.Macular_Exam_Performed(context);
             bool? d_ = context.Operators.Exists<Observation>(c_);
-            return (bool?)((CqlBoolean)d_);
+            return d_;
         }
 
         return (bool?)(/* CQL 'and' (54:3-55:45) */ ((CqlBoolean)a_
-            && (CqlBoolean)b_()));
+            && b_()));
     }
 
 
@@ -859,22 +859,22 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
         IEnumerable<Communication> a_ = this.Level_of_Severity_of_Retinopathy_Findings_Communicated(context);
         bool? b_ = context.Operators.Exists<Communication>(a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Communication> d_ = this.Macular_Edema_Absence_Communicated(context);
             bool? e_ = context.Operators.Exists<Communication>(d_);
 
-            bool? f_() {
+            CqlBoolean f_() {
                 IEnumerable<Communication> g_ = this.Macular_Edema_Presence_Communicated(context);
                 bool? h_ = context.Operators.Exists<Communication>(g_);
-                return (bool?)((CqlBoolean)h_);
+                return h_;
             }
 
-            return (bool?)(/* CQL 'or' (59:15-61:11) */ ((CqlBoolean)e_
-                || (CqlBoolean)f_()));
+            return /* CQL 'or' (59:15-61:11) */ ((CqlBoolean)e_
+                || f_());
         }
 
         return (bool?)(/* CQL 'and' (58:3-61:11) */ ((CqlBoolean)b_
-            && (CqlBoolean)c_()));
+            && c_()));
     }
 
 
@@ -889,22 +889,22 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
         IEnumerable<Communication> a_ = this.Level_of_Severity_of_Retinopathy_Findings_Communicated(context);
         bool? b_ = context.Operators.Exists<Communication>(a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Communication> d_ = this.Macular_Edema_Absence_Communicated(context);
             bool? e_ = context.Operators.Exists<Communication>(d_);
 
-            bool? f_() {
+            CqlBoolean f_() {
                 IEnumerable<Communication> g_ = this.Macular_Edema_Presence_Communicated(context);
                 bool? h_ = context.Operators.Exists<Communication>(g_);
-                return (bool?)((CqlBoolean)h_);
+                return h_;
             }
 
-            return (bool?)(/* CQL 'or' (84:15-86:11) */ ((CqlBoolean)e_
-                || (CqlBoolean)f_()));
+            return /* CQL 'or' (84:15-86:11) */ ((CqlBoolean)e_
+                || f_());
         }
 
         return (bool?)(/* CQL 'and' (83:3-86:11) */ ((CqlBoolean)b_
-            && (CqlBoolean)c_()));
+            && c_()));
     }
 
 

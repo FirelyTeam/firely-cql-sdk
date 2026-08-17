@@ -422,23 +422,23 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 12);
 
-        bool? j_() {
+        CqlBoolean j_() {
             IEnumerable<Encounter> k_ = this.Qualifying_Visit_During_Measurement_Period(context);
             int? l_ = context.Operators.Count<Encounter>(k_);
             bool? m_ = context.Operators.GreaterOrEqual(l_, 2);
 
-            bool? n_() {
+            CqlBoolean n_() {
                 IEnumerable<Encounter> o_ = this.Preventive_Visit_During_Measurement_Period(context);
                 bool? p_ = context.Operators.Exists<Encounter>(o_);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
-            return (bool?)(/* CQL 'or' (65:9-67:5) */ ((CqlBoolean)m_
-                || (CqlBoolean)n_()));
+            return /* CQL 'or' (65:9-67:5) */ ((CqlBoolean)m_
+                || n_());
         }
 
         return (bool?)(/* CQL 'and' (64:3-67:5) */ ((CqlBoolean)i_
-            && (CqlBoolean)j_()));
+            && j_()));
     }
 
 
@@ -703,16 +703,16 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 string p_ = context.Operators.Last<string>(o_);
                 bool? q_ = context.Operators.Equal(m_, p_);
 
-                bool? r_() {
+                CqlBoolean r_() {
                     CodeableConcept s_ = M?.Code;
                     CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                     CqlValueSet u_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
                     bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                    return (bool?)((CqlBoolean)v_);
+                    return v_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)q_
-                    && (CqlBoolean)r_()));
+                    && r_()));
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -736,32 +736,32 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(ab_, ac_, true, true);
             bool? ae_ = context.Operators.In<CqlDateTime>(x_, ad_, "day");
 
-            bool? af_() {
+            CqlBoolean af_() {
                 IEnumerable<Task> ag_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
                 bool? ah_(Task TaskReject) {
                     ResourceReference aj_ = TaskReject?.Focus;
                     bool? ak_ = QICoreCommon_4_0_000.Instance.references(context, aj_, CessationPharmacotherapyOrdered);
 
-                    bool? al_() {
+                    CqlBoolean al_() {
                         CodeableConcept am_ = TaskReject?.Code;
                         CqlConcept an_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, am_);
                         CqlCode ao_ = this.fulfill(context);
                         CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
                         bool? aq_ = context.Operators.Equivalent(an_, ap_);
-                        return (bool?)((CqlBoolean)aq_);
+                        return aq_;
                     }
 
                     return (bool?)(/* CQL 'and' (109:11-110:43) */ ((CqlBoolean)ak_
-                        && (CqlBoolean)al_()));
+                        && al_()));
                 }
 
                 bool? ai_ = context.Operators.WhereAny<Task>(ag_, ah_);
-                return (bool?)((CqlBoolean)!ai_);
+                return !ai_;
             }
 
             return (bool?)(/* CQL 'and' (107:5-111:7) */ ((CqlBoolean)ae_
-                && (CqlBoolean)af_()));
+                && af_()));
         }
 
         IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
@@ -789,16 +789,16 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 string p_ = context.Operators.Last<string>(o_);
                 bool? q_ = context.Operators.Equal(m_, p_);
 
-                bool? r_() {
+                CqlBoolean r_() {
                     CodeableConcept s_ = M?.Code;
                     CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                     CqlValueSet u_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
                     bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                    return (bool?)((CqlBoolean)v_);
+                    return v_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)q_
-                    && (CqlBoolean)r_()));
+                    && r_()));
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -846,22 +846,22 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<object> a_ = this.Tobacco_Cessation_Counseling_Given(context);
         bool? b_ = context.Operators.Exists<object>(a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<MedicationRequest> e_ = this.Tobacco_Cessation_Pharmacotherapy_Ordered(context);
             bool? f_ = context.Operators.Exists<MedicationRequest>(e_);
-            return (bool?)((CqlBoolean)f_);
+            return f_;
         }
 
 
-        bool? d_() {
+        CqlBoolean d_() {
             IEnumerable<MedicationRequest> g_ = this.Active_Pharmacotherapy_for_Tobacco_Cessation(context);
             bool? h_ = context.Operators.Exists<MedicationRequest>(g_);
-            return (bool?)((CqlBoolean)h_);
+            return h_;
         }
 
         return (bool?)(/* CQL 'or' (74:3-76:60) */ (/* CQL 'or' (74:3-75:57) */ ((CqlBoolean)b_
-            || (CqlBoolean)c_())
-            || (CqlBoolean)d_()));
+            || c_())
+            || d_()));
     }
 
 
@@ -875,37 +875,37 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     {
         Observation a_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User(context);
 
-        bool? b_() {
+        CqlBoolean b_() {
             Observation c_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context);
 
-            bool? d_() {
+            CqlBoolean d_() {
                 IEnumerable<object> e_ = this.Tobacco_Cessation_Counseling_Given(context);
                 bool? f_ = context.Operators.Exists<object>(e_);
 
-                bool? g_() {
+                CqlBoolean g_() {
                     IEnumerable<MedicationRequest> i_ = this.Tobacco_Cessation_Pharmacotherapy_Ordered(context);
                     bool? j_ = context.Operators.Exists<MedicationRequest>(i_);
-                    return (bool?)((CqlBoolean)j_);
+                    return j_;
                 }
 
 
-                bool? h_() {
+                CqlBoolean h_() {
                     IEnumerable<MedicationRequest> k_ = this.Active_Pharmacotherapy_for_Tobacco_Cessation(context);
                     bool? l_ = context.Operators.Exists<MedicationRequest>(k_);
-                    return (bool?)((CqlBoolean)l_);
+                    return l_;
                 }
 
-                return (bool?)(/* CQL 'or' (81:13-84:9) */ (/* CQL 'or' (81:15-82:65) */ ((CqlBoolean)f_
-                    || (CqlBoolean)g_())
-                    || (CqlBoolean)h_()));
+                return /* CQL 'or' (81:13-84:9) */ (/* CQL 'or' (81:15-82:65) */ ((CqlBoolean)f_
+                    || g_())
+                    || h_());
             }
 
-            return (bool?)(/* CQL 'and' (80:8-85:5) */ ((CqlBoolean)(!((bool?)(c_ is null)))
-                && (CqlBoolean)d_()));
+            return /* CQL 'and' (80:8-85:5) */ ((CqlBoolean)(!((bool?)(c_ is null)))
+                && d_());
         }
 
         return (bool?)(/* CQL 'or' (79:3-85:5) */ ((CqlBoolean)(!((bool?)(a_ is null)))
-            || (CqlBoolean)b_()));
+            || b_()));
     }
 
 

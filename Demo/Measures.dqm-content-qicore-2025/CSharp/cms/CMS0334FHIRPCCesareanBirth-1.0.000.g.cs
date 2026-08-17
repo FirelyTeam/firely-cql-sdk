@@ -147,15 +147,15 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
         bool? b_(Encounter DeliveryEncounter) {
             int? d_ = PCMaternal_5_25_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
 
-            bool? e_() {
+            CqlBoolean e_() {
                 CqlQuantity f_ = PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
                 CqlQuantity g_ = context.Operators.Quantity(37m, "weeks");
                 bool? h_ = context.Operators.GreaterOrEqual(f_, g_);
-                return (bool?)((CqlBoolean)h_);
+                return h_;
             }
 
             return (bool?)(/* CQL 'and' (42:5-43:71) */ ((CqlBoolean)((bool?)(d_ is null))
-                && (CqlBoolean)e_()));
+                && e_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -176,7 +176,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
         bool? b_(Encounter DeliveryEncounter) {
             int? d_ = PCMaternal_5_25_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
 
-            bool? e_() {
+            CqlBoolean e_() {
                 List<CodeableConcept> f_ = DeliveryEncounter?.ReasonCode;
 
                 CqlConcept g_(CodeableConcept @this) {
@@ -188,7 +188,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 CqlValueSet i_ = this._37_to_42_Plus_Weeks_Gestation(context);
                 bool? j_ = context.Operators.ConceptsInValueSet(h_, i_);
 
-                bool? k_() {
+                CqlBoolean k_() {
                     IEnumerable<Condition> m_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, DeliveryEncounter);
 
                     bool? n_(Condition @this) {
@@ -207,16 +207,16 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     IEnumerable<CqlConcept> p_ = context.Operators.WhereSelect<Condition, CqlConcept>(m_, n_, o_);
                     CqlValueSet q_ = this._37_to_42_Plus_Weeks_Gestation(context);
                     bool? r_ = context.Operators.ConceptsInValueSet(p_, q_);
-                    return (bool?)((CqlBoolean)r_);
+                    return r_;
                 }
 
-                return (bool?)(/* CQL 'or' (56:11-58:7) */ ((CqlBoolean)j_
-                    || (CqlBoolean)k_()));
+                return /* CQL 'or' (56:11-58:7) */ ((CqlBoolean)j_
+                    || k_());
             }
 
             return (bool?)(/* CQL 'and' (54:5-58:7) */ (/* CQL 'and' (54:11-55:21) */ ((CqlBoolean)((bool?)(d_ is null))
                 && (CqlBoolean)((bool?)((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null)))
-                && (CqlBoolean)e_()));
+                && e_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -263,7 +263,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             CqlValueSet g_ = this.Delivery_of_Singleton(context);
             bool? h_ = context.Operators.ConceptsInValueSet(f_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 IEnumerable<Condition> k_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, DeliveryEncounter);
 
                 bool? l_(Condition @this) {
@@ -282,11 +282,11 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 IEnumerable<CqlConcept> n_ = context.Operators.WhereSelect<Condition, CqlConcept>(k_, l_, m_);
                 CqlValueSet o_ = this.Delivery_of_Singleton(context);
                 bool? p_ = context.Operators.ConceptsInValueSet(n_, o_);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
             return (bool?)(/* CQL 'or' (124:5-125:81) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_()));
+                || i_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -305,7 +305,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             DataType k_ = Gravida?.Value;
             object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
 
-            bool? m_() {
+            CqlBoolean m_() {
                 Code<ObservationStatus> o_ = Gravida?.StatusElement;
                 ObservationStatus? p_ = o_?.Value;
                 string q_ = context.Operators.Convert<string>(p_);
@@ -315,11 +315,11 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     "corrected",
                 ];
                 bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
-                return (bool?)((CqlBoolean)s_);
+                return s_;
             }
 
 
-            bool? n_() {
+            CqlBoolean n_() {
                 object t_;
                 DataType aa_ = Gravida?.Effective;
                 object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
@@ -353,13 +353,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime x_ = context.Operators.Subtract(v_, w_);
                 CqlInterval<CqlDateTime> y_ = context.Operators.Interval(x_, v_, true, false);
                 bool? z_ = context.Operators.In<CqlDateTime>(u_, y_, (string)default);
-                return (bool?)(/* CQL 'and' (131:13-131:98) */ ((CqlBoolean)z_
-                    && (CqlBoolean)(!((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null)))));
+                return /* CQL 'and' (131:13-131:98) */ ((CqlBoolean)z_
+                    && (CqlBoolean)(!((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null))));
             }
 
             return (bool?)(/* CQL 'and' (129:7-131:98) */ (/* CQL 'and' (129:13-130:65) */ ((CqlBoolean)(!((bool?)(l_ is null)))
-                && (CqlBoolean)m_())
-                && (CqlBoolean)n_()));
+                && m_())
+                && n_()));
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -446,7 +446,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, false);
             bool? q_ = context.Operators.In<CqlDateTime>(l_, p_, (string)default);
 
-            bool? r_() {
+            CqlBoolean r_() {
                 Code<ObservationStatus> x_ = Parity?.StatusElement;
                 ObservationStatus? y_ = x_?.Value;
                 string z_ = context.Operators.Convert<string>(y_);
@@ -456,20 +456,20 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     "corrected",
                 ];
                 bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
-                return (bool?)((CqlBoolean)ab_);
+                return ab_;
             }
 
 
-            bool? s_() {
+            CqlBoolean s_() {
                 DataType ac_ = Parity?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return (bool?)((CqlBoolean)(!((bool?)(ad_ is null))));
+                return !((bool?)(ad_ is null));
             }
 
             return (bool?)(/* CQL 'and' (153:7-155:36) */ (/* CQL 'and' (153:13-154:64) */ (/* CQL 'and' (153:13-153:97) */ ((CqlBoolean)q_
                 && (CqlBoolean)(!((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null))))
-                && (CqlBoolean)r_())
-                && (CqlBoolean)s_()));
+                && r_())
+                && s_()));
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -556,7 +556,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, false);
             bool? q_ = context.Operators.In<CqlDateTime>(l_, p_, (string)default);
 
-            bool? r_() {
+            CqlBoolean r_() {
                 Code<ObservationStatus> x_ = PretermBirth?.StatusElement;
                 ObservationStatus? y_ = x_?.Value;
                 string z_ = context.Operators.Convert<string>(y_);
@@ -566,20 +566,20 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     "corrected",
                 ];
                 bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
-                return (bool?)((CqlBoolean)ab_);
+                return ab_;
             }
 
 
-            bool? s_() {
+            CqlBoolean s_() {
                 DataType ac_ = PretermBirth?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return (bool?)((CqlBoolean)(!((bool?)(ad_ is null))));
+                return !((bool?)(ad_ is null));
             }
 
             return (bool?)(/* CQL 'and' (137:7-139:42) */ (/* CQL 'and' (137:13-138:70) */ (/* CQL 'and' (137:13-137:103) */ ((CqlBoolean)q_
                 && (CqlBoolean)(!((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null))))
-                && (CqlBoolean)r_())
-                && (CqlBoolean)s_()));
+                && r_())
+                && s_()));
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -666,7 +666,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             CqlInterval<CqlDateTime> p_ = context.Operators.Interval(o_, m_, true, false);
             bool? q_ = context.Operators.In<CqlDateTime>(l_, p_, (string)default);
 
-            bool? r_() {
+            CqlBoolean r_() {
                 Code<ObservationStatus> x_ = TermBirth?.StatusElement;
                 ObservationStatus? y_ = x_?.Value;
                 string z_ = context.Operators.Convert<string>(y_);
@@ -676,20 +676,20 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     "corrected",
                 ];
                 bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
-                return (bool?)((CqlBoolean)ab_);
+                return ab_;
             }
 
 
-            bool? s_() {
+            CqlBoolean s_() {
                 DataType ac_ = TermBirth?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return (bool?)((CqlBoolean)(!((bool?)(ad_ is null))));
+                return !((bool?)(ad_ is null));
             }
 
             return (bool?)(/* CQL 'and' (145:7-147:39) */ (/* CQL 'and' (145:13-146:67) */ (/* CQL 'and' (145:13-145:100) */ ((CqlBoolean)q_
                 && (CqlBoolean)(!((bool?)((PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter)) is null))))
-                && (CqlBoolean)r_())
-                && (CqlBoolean)s_()));
+                && r_())
+                && s_()));
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -750,30 +750,30 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             int? f_ = this.lastGravida(context, SingletonEncounterGE37Weeks);
             bool? g_ = context.Operators.Equal(f_, 1);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 int? j_ = this.lastParity(context, SingletonEncounterGE37Weeks);
                 bool? k_ = context.Operators.Equal(j_, 0);
-                return (bool?)((CqlBoolean)k_);
+                return k_;
             }
 
 
-            bool? i_() {
+            CqlBoolean i_() {
                 int? l_ = this.lastHistoryPretermBirth(context, SingletonEncounterGE37Weeks);
                 bool? m_ = context.Operators.Equal(l_, 0);
 
-                bool? n_() {
+                CqlBoolean n_() {
                     int? o_ = this.lastHistoryTermBirth(context, SingletonEncounterGE37Weeks);
                     bool? p_ = context.Operators.Equal(o_, 0);
-                    return (bool?)((CqlBoolean)p_);
+                    return p_;
                 }
 
-                return (bool?)(/* CQL 'and' (106:12-108:9) */ ((CqlBoolean)m_
-                    && (CqlBoolean)n_()));
+                return /* CQL 'and' (106:12-108:9) */ ((CqlBoolean)m_
+                    && n_());
             }
 
             return (bool?)(/* CQL 'or' (104:5-109:5) */ (/* CQL 'or' (104:13-105:61) */ ((CqlBoolean)g_
-                || (CqlBoolean)h_())
-                || (CqlBoolean)i_()));
+                || h_())
+                || i_()));
         }
 
         IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
@@ -828,7 +828,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime v_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
                 bool? w_ = context.Operators.SameOrBefore(u_, v_, (string)default);
 
-                bool? x_() {
+                CqlBoolean x_() {
                     Code<ObservationStatus> ac_ = AbnormalPresentation?.StatusElement;
                     ObservationStatus? ad_ = ac_?.Value;
                     string ae_ = context.Operators.Convert<string>(ad_);
@@ -838,11 +838,11 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                         "corrected",
                     ];
                     bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
-                    return (bool?)((CqlBoolean)ag_);
+                    return ag_;
                 }
 
                 return (bool?)(/* CQL 'and' (114:9-115:80) */ ((CqlBoolean)w_
-                    && (CqlBoolean)x_()));
+                    && x_()));
             }
 
             IEnumerable<Observation> m_ = context.Operators.Where<Observation>(k_, l_);
@@ -919,7 +919,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime aw_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
                     bool? ax_ = context.Operators.SameOrBefore(av_, aw_, (string)default);
 
-                    bool? ay_() {
+                    CqlBoolean ay_() {
                         Code<ObservationStatus> bd_ = AbnormalPresentation?.StatusElement;
                         ObservationStatus? be_ = bd_?.Value;
                         string bf_ = context.Operators.Convert<string>(be_);
@@ -929,11 +929,11 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             "corrected",
                         ];
                         bool? bh_ = context.Operators.In<string>(bf_, (IEnumerable<string>)bg_);
-                        return (bool?)((CqlBoolean)bh_);
+                        return bh_;
                     }
 
                     return (bool?)(/* CQL 'and' (114:9-115:80) */ ((CqlBoolean)ax_
-                        && (CqlBoolean)ay_()));
+                        && ay_()));
                 }
 
                 IEnumerable<Observation> ao_ = context.Operators.Where<Observation>(k_, an_);
@@ -1011,7 +1011,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime by_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
                     bool? bz_ = context.Operators.SameOrBefore(bx_, by_, (string)default);
 
-                    bool? ca_() {
+                    CqlBoolean ca_() {
                         Code<ObservationStatus> cf_ = AbnormalPresentation?.StatusElement;
                         ObservationStatus? cg_ = cf_?.Value;
                         string ch_ = context.Operators.Convert<string>(cg_);
@@ -1021,11 +1021,11 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             "corrected",
                         ];
                         bool? cj_ = context.Operators.In<string>(ch_, (IEnumerable<string>)ci_);
-                        return (bool?)((CqlBoolean)cj_);
+                        return cj_;
                     }
 
                     return (bool?)(/* CQL 'and' (114:9-115:80) */ ((CqlBoolean)bz_
-                        && (CqlBoolean)ca_()));
+                        && ca_()));
                 }
 
                 IEnumerable<Observation> bp_ = context.Operators.Where<Observation>(k_, bo_);
@@ -1102,7 +1102,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                         CqlDateTime cz_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
                         bool? da_ = context.Operators.SameOrBefore(cy_, cz_, (string)default);
 
-                        bool? db_() {
+                        CqlBoolean db_() {
                             Code<ObservationStatus> dg_ = AbnormalPresentation?.StatusElement;
                             ObservationStatus? dh_ = dg_?.Value;
                             string di_ = context.Operators.Convert<string>(dh_);
@@ -1112,11 +1112,11 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                                 "corrected",
                             ];
                             bool? dk_ = context.Operators.In<string>(di_, (IEnumerable<string>)dj_);
-                            return (bool?)((CqlBoolean)dk_);
+                            return dk_;
                         }
 
                         return (bool?)(/* CQL 'and' (114:9-115:80) */ ((CqlBoolean)da_
-                            && (CqlBoolean)db_()));
+                            && db_()));
                     }
 
                     IEnumerable<Observation> cr_ = context.Operators.Where<Observation>(k_, cq_);
@@ -1194,7 +1194,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                         CqlDateTime eb_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
                         bool? ec_ = context.Operators.SameOrBefore(ea_, eb_, (string)default);
 
-                        bool? ed_() {
+                        CqlBoolean ed_() {
                             Code<ObservationStatus> ei_ = AbnormalPresentation?.StatusElement;
                             ObservationStatus? ej_ = ei_?.Value;
                             string ek_ = context.Operators.Convert<string>(ej_);
@@ -1204,11 +1204,11 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                                 "corrected",
                             ];
                             bool? em_ = context.Operators.In<string>(ek_, (IEnumerable<string>)el_);
-                            return (bool?)((CqlBoolean)em_);
+                            return em_;
                         }
 
                         return (bool?)(/* CQL 'and' (114:9-115:80) */ ((CqlBoolean)ec_
-                            && (CqlBoolean)ed_()));
+                            && ed_()));
                     }
 
                     IEnumerable<Observation> ds_ = context.Operators.Where<Observation>(k_, dr_);
@@ -1285,7 +1285,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                             CqlDateTime fc_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
                             bool? fd_ = context.Operators.SameOrBefore(fb_, fc_, (string)default);
 
-                            bool? fe_() {
+                            CqlBoolean fe_() {
                                 Code<ObservationStatus> fj_ = AbnormalPresentation?.StatusElement;
                                 ObservationStatus? fk_ = fj_?.Value;
                                 string fl_ = context.Operators.Convert<string>(fk_);
@@ -1295,11 +1295,11 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                                     "corrected",
                                 ];
                                 bool? fn_ = context.Operators.In<string>(fl_, (IEnumerable<string>)fm_);
-                                return (bool?)((CqlBoolean)fn_);
+                                return fn_;
                             }
 
                             return (bool?)(/* CQL 'and' (114:9-115:80) */ ((CqlBoolean)fd_
-                                && (CqlBoolean)fe_()));
+                                && fe_()));
                         }
 
                         IEnumerable<Observation> eu_ = context.Operators.Where<Observation>(k_, et_);
@@ -1352,7 +1352,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             CqlInterval<CqlDateTime> f_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, ThirtySevenWeeksPlusEncounter);
             bool? g_ = context.Operators.In<CqlDateTime>(e_, f_, (string)default);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 IEnumerable<Condition> fu_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, ThirtySevenWeeksPlusEncounter);
 
                 bool? fv_(Condition @this) {
@@ -1371,11 +1371,11 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 IEnumerable<CqlConcept> fx_ = context.Operators.WhereSelect<Condition, CqlConcept>(fu_, fv_, fw_);
                 CqlValueSet fy_ = this.Abnormal_Presentation(context);
                 bool? fz_ = context.Operators.ConceptsInValueSet(fx_, fy_);
-                return (bool?)((CqlBoolean)fz_);
+                return fz_;
             }
 
 
-            bool? i_() {
+            CqlBoolean i_() {
                 List<CodeableConcept> ge_ = ThirtySevenWeeksPlusEncounter?.ReasonCode;
 
                 CqlConcept gf_(CodeableConcept @this) {
@@ -1386,12 +1386,12 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 IEnumerable<CqlConcept> gg_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ge_, gf_);
                 CqlValueSet gh_ = this.Abnormal_Presentation(context);
                 bool? gi_ = context.Operators.ConceptsInValueSet(gg_, gh_);
-                return (bool?)((CqlBoolean)gi_);
+                return gi_;
             }
 
             return (bool?)(/* CQL 'or' (118:5-120:76) */ (/* CQL 'or' (118:11-119:93) */ ((CqlBoolean)g_
-                || (CqlBoolean)h_())
-                || (CqlBoolean)i_()));
+                || h_())
+                || i_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1429,7 +1429,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             CqlValueSet h_ = this.Placenta_Accreta_Spectrum_Previa_or_Vasa_Previa(context);
             bool? i_ = context.Operators.ConceptsInValueSet(g_, h_);
 
-            bool? j_() {
+            CqlBoolean j_() {
                 IEnumerable<Condition> q_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, ThirtySevenWeeksPlusEncounter);
 
                 bool? r_(Condition @this) {
@@ -1448,11 +1448,11 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 IEnumerable<CqlConcept> t_ = context.Operators.WhereSelect<Condition, CqlConcept>(q_, r_, s_);
                 CqlValueSet u_ = this.Genital_Herpes(context);
                 bool? v_ = context.Operators.ConceptsInValueSet(t_, u_);
-                return (bool?)((CqlBoolean)v_);
+                return v_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 List<CodeableConcept> aa_ = ThirtySevenWeeksPlusEncounter?.ReasonCode;
 
                 CqlConcept ab_(CodeableConcept @this) {
@@ -1463,11 +1463,11 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 IEnumerable<CqlConcept> ac_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)aa_, ab_);
                 CqlValueSet ad_ = this.Genital_Herpes(context);
                 bool? ae_ = context.Operators.ConceptsInValueSet(ac_, ad_);
-                return (bool?)((CqlBoolean)ae_);
+                return ae_;
             }
 
 
-            bool? l_() {
+            CqlBoolean l_() {
                 List<CodeableConcept> ag_ = ThirtySevenWeeksPlusEncounter?.ReasonCode;
 
                 CqlConcept ah_(CodeableConcept @this) {
@@ -1478,13 +1478,13 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 IEnumerable<CqlConcept> ai_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ag_, ah_);
                 CqlValueSet aj_ = this.Placenta_Accreta_Spectrum_Previa_or_Vasa_Previa(context);
                 bool? ak_ = context.Operators.ConceptsInValueSet(ai_, aj_);
-                return (bool?)((CqlBoolean)ak_);
+                return ak_;
             }
 
             return (bool?)(/* CQL 'or' (95:5-99:5) */ (/* CQL 'or' (95:13-97:71) */ (/* CQL 'or' (95:13-96:88) */ ((CqlBoolean)i_
-                || (CqlBoolean)j_())
-                || (CqlBoolean)k_())
-                || (CqlBoolean)l_()));
+                || j_())
+                || k_())
+                || l_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1601,16 +1601,16 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
                 bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, (string)default);
 
-                bool? l_() {
+                CqlBoolean l_() {
                     Code<EventStatus> s_ = CSection?.StatusElement;
                     EventStatus? t_ = s_?.Value;
                     string u_ = context.Operators.Convert<string>(t_);
                     bool? v_ = context.Operators.Equal(u_, "completed");
-                    return (bool?)((CqlBoolean)v_);
+                    return v_;
                 }
 
                 return (bool?)(/* CQL 'and' (90:17-91:41) */ ((CqlBoolean)k_
-                    && (CqlBoolean)l_()));
+                    && l_()));
             }
 
             bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);

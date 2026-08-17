@@ -196,24 +196,24 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
         {
             FhirUri b_ = quantity?.SystemElement;
 
-            bool? c_() {
+            CqlBoolean c_() {
                 FhirUri e_ = quantity?.SystemElement;
                 string f_ = e_?.Value;
                 bool? g_ = context.Operators.Equal(f_, "http://unitsofmeasure.org");
-                return (bool?)((CqlBoolean)g_);
+                return g_;
             }
 
 
-            bool? d_() {
+            CqlBoolean d_() {
                 FhirUri h_ = quantity?.SystemElement;
                 string i_ = h_?.Value;
                 bool? j_ = context.Operators.Equal(i_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
-                return (bool?)((CqlBoolean)j_);
+                return j_;
             }
 
             if (((bool?)(/* CQL 'or' (54:14-55:92) */ (/* CQL 'or' (54:14-54:91) */ ((CqlBoolean)((bool?)(b_ is null))
-                || (CqlBoolean)c_())
-                || (CqlBoolean)d_()))) ?? false)
+                || c_())
+                || d_()))) ?? false)
             {
                 FhirDecimal k_ = quantity?.ValueElement;
                 decimal? l_ = k_?.Value;
@@ -262,24 +262,24 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
         {
             FhirUri a_ = quantity?.SystemElement;
 
-            bool? b_() {
+            CqlBoolean b_() {
                 FhirUri d_ = quantity?.SystemElement;
                 string e_ = d_?.Value;
                 bool? f_ = context.Operators.Equal(e_, "http://unitsofmeasure.org");
-                return (bool?)((CqlBoolean)f_);
+                return f_;
             }
 
 
-            bool? c_() {
+            CqlBoolean c_() {
                 FhirUri g_ = quantity?.SystemElement;
                 string h_ = g_?.Value;
                 bool? i_ = context.Operators.Equal(h_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
-                return (bool?)((CqlBoolean)i_);
+                return i_;
             }
 
             if (((bool?)(/* CQL 'or' (74:14-75:92) */ (/* CQL 'or' (74:14-74:91) */ ((CqlBoolean)((bool?)(a_ is null))
-                || (CqlBoolean)b_())
-                || (CqlBoolean)c_()))) ?? false)
+                || b_())
+                || c_()))) ?? false)
             {
                 FhirDecimal j_ = quantity?.ValueElement;
                 decimal? k_ = j_?.Value;

@@ -189,7 +189,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         CqlInterval<CqlDate> i_ = context.Operators.Interval(f_, h_, true, true);
         bool? j_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, d_, i_, 0);
 
-        bool? k_() {
+        CqlBoolean k_() {
             IEnumerable<Coverage> m_ = this.Member_Coverage(context);
             CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
             CqlDateTime o_ = context.Operators.End(n_);
@@ -201,11 +201,11 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             CqlDate u_ = context.Operators.Subtract(p_, s_);
             CqlInterval<CqlDate> v_ = context.Operators.Interval(t_, u_, true, true);
             bool? w_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, m_, p_, v_, 45);
-            return (bool?)((CqlBoolean)w_);
+            return w_;
         }
 
 
-        bool? l_() {
+        CqlBoolean l_() {
             IEnumerable<Coverage> x_ = this.Member_Coverage(context);
             CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
             CqlDateTime z_ = context.Operators.End(y_);
@@ -214,12 +214,12 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             CqlDate ac_ = context.Operators.DateFrom(ab_);
             CqlInterval<CqlDate> ad_ = context.Operators.Interval(ac_, aa_, true, true);
             bool? ae_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, x_, aa_, ad_, 45);
-            return (bool?)((CqlBoolean)ae_);
+            return ae_;
         }
 
         return (bool?)(/* CQL 'and' (41:3-49:38) */ (/* CQL 'and' (41:3-46:47) */ ((CqlBoolean)j_
-            && (CqlBoolean)k_())
-            && (CqlBoolean)l_()));
+            && k_())
+            && l_()));
     }
 
 
@@ -242,17 +242,17 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         CqlInterval<int?> i_ = context.Operators.Interval(52, 74, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
-        bool? k_() {
+        CqlBoolean k_() {
             Patient l_ = this.Patient(context);
             Code<AdministrativeGender> m_ = l_?.GenderElement;
             AdministrativeGender? n_ = m_?.Value;
             string o_ = context.Operators.Convert<string>(n_);
             bool? p_ = context.Operators.Equal(o_, "female");
-            return (bool?)((CqlBoolean)p_);
+            return p_;
         }
 
         return (bool?)(/* CQL 'and' (34:3-38:46) */ (/* CQL 'and' (34:3-37:39) */ ((CqlBoolean)j_
-            && (CqlBoolean)k_())
+            && k_())
             && (CqlBoolean)(this.Enrolled_During_Participation_Period(context))));
     }
 
@@ -560,46 +560,46 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         IEnumerable<Condition> a_ = this.Right_Mastectomy_Diagnosis(context);
         bool? b_ = context.Operators.Exists<Condition>(a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Procedure> g_ = this.Right_Mastectomy_Procedure(context);
             bool? h_ = context.Operators.Exists<Procedure>(g_);
-            return (bool?)((CqlBoolean)h_);
+            return h_;
         }
 
 
-        bool? d_() {
+        CqlBoolean d_() {
             IEnumerable<Condition> i_ = this.Left_Mastectomy_Diagnosis(context);
             bool? j_ = context.Operators.Exists<Condition>(i_);
 
-            bool? k_() {
+            CqlBoolean k_() {
                 IEnumerable<Procedure> l_ = this.Left_Mastectomy_Procedure(context);
                 bool? m_ = context.Operators.Exists<Procedure>(l_);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
-            return (bool?)(/* CQL 'or' (75:11-77:7) */ ((CqlBoolean)j_
-                || (CqlBoolean)k_()));
+            return /* CQL 'or' (75:11-77:7) */ ((CqlBoolean)j_
+                || k_());
         }
 
 
-        bool? e_() {
+        CqlBoolean e_() {
             IEnumerable<Condition> n_ = this.Bilateral_Mastectomy_Diagnosis(context);
             bool? o_ = context.Operators.Exists<Condition>(n_);
-            return (bool?)((CqlBoolean)o_);
+            return o_;
         }
 
 
-        bool? f_() {
+        CqlBoolean f_() {
             IEnumerable<Procedure> p_ = this.Bilateral_Mastectomy_Procedure(context);
             bool? q_ = context.Operators.Exists<Procedure>(p_);
-            return (bool?)((CqlBoolean)q_);
+            return q_;
         }
 
         return (bool?)(/* CQL 'or' (72:3-80:46) */ (/* CQL 'or' (72:3-79:46) */ (/* CQL 'and' (72:3-78:3) */ (/* CQL 'or' (72:5-74:5) */ ((CqlBoolean)b_
-            || (CqlBoolean)c_())
-            && (CqlBoolean)d_())
-            || (CqlBoolean)e_())
-            || (CqlBoolean)f_()));
+            || c_())
+            && d_())
+            || e_())
+            || f_()));
     }
 
 
@@ -613,16 +613,16 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     {
         bool? a_ = NCQAHospice_1_0_0.Instance.Hospice_Intervention_or_Encounter(context);
 
-        bool? b_() {
+        CqlBoolean b_() {
             CqlInterval<CqlDateTime> c_ = this.Measurement_Period(context);
             bool? d_ = NCQAPalliativeCare_1_0_0.Instance.Palliative_Care_Overlapping_Period(context, c_);
-            return (bool?)((CqlBoolean)d_);
+            return d_;
         }
 
         return (bool?)(/* CQL 'or' (66:3-69:83) */ (/* CQL 'or' (66:3-68:96) */ (/* CQL 'or' (66:3-67:29) */ ((CqlBoolean)a_
             || (CqlBoolean)(this.Mastectomy_Exclusion(context)))
             || (CqlBoolean)(NCQAAdvancedIllnessandFrailty_1_0_0.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)))
-            || (CqlBoolean)b_()));
+            || b_()));
     }
 
 

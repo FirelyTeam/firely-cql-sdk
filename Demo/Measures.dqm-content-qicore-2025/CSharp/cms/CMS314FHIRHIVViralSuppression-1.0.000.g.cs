@@ -137,50 +137,50 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             CodeableConcept d_ = condition?.VerificationStatus;
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
             bool? h_ = context.Operators.Equivalent(e_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 CodeableConcept l_ = condition?.VerificationStatus;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
                 CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
                 CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
                 bool? p_ = context.Operators.Equivalent(m_, o_);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 CodeableConcept q_ = condition?.VerificationStatus;
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
                 CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
                 bool? u_ = context.Operators.Equivalent(r_, t_);
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 CodeableConcept v_ = condition?.VerificationStatus;
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
                 bool? z_ = context.Operators.Equivalent(w_, y_);
-                return (bool?)((CqlBoolean)z_);
+                return z_;
             }
 
-            return (bool?)(/* CQL 'or' (76:52-80:3) */ (/* CQL 'or' (76:54-78:66) */ (/* CQL 'or' (76:54-77:66) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_())
-                || (CqlBoolean)j_())
-                || (CqlBoolean)k_()));
+            return /* CQL 'or' (76:52-80:3) */ (/* CQL 'or' (76:54-78:66) */ (/* CQL 'or' (76:54-77:66) */ ((CqlBoolean)h_
+                || i_())
+                || j_())
+                || k_());
         }
 
         return (bool?)(/* CQL 'implies' (76:3-80:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || (CqlBoolean)c_()));
+            || c_()));
     }
 
 
@@ -265,16 +265,16 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
             CqlInterval<CqlDateTime> ao_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, an_);
             bool? ap_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(am_, ao_, "day");
 
-            bool? aq_() {
+            CqlBoolean aq_() {
                 Code<Encounter.EncounterStatus> ar_ = QualifyingEncounter?.StatusElement;
                 Encounter.EncounterStatus? as_ = ar_?.Value;
                 Code<Encounter.EncounterStatus> at_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(as_);
                 bool? au_ = context.Operators.Equal(at_, "finished");
-                return (bool?)((CqlBoolean)au_);
+                return au_;
             }
 
             return (bool?)(/* CQL 'and' (67:5-68:49) */ ((CqlBoolean)ap_
-                && (CqlBoolean)aq_()));
+                && aq_()));
         }
 
         bool? ah_ = context.Operators.WhereAny<Encounter>(af_, ag_);
@@ -331,7 +331,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
             ];
             bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
 
-            bool? m_() {
+            CqlBoolean m_() {
                 object n_;
                 DataType r_ = ViralLoad?.Effective;
                 object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
@@ -362,11 +362,11 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                 CqlDateTime o_ = QICoreCommon_4_0_000.Instance.latest(context, n_);
                 CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                 bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, "day");
-                return (bool?)((CqlBoolean)q_);
+                return q_;
             }
 
             return (bool?)(/* CQL 'and' (48:7-49:75) */ ((CqlBoolean)l_
-                && (CqlBoolean)m_()));
+                && m_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -423,30 +423,30 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
         CqlQuantity d_ = context.Operators.Quantity(200m, "{copies}/mL");
         bool? e_ = context.Operators.Less(c_ as CqlQuantity, d_);
 
-        bool? f_() {
+        CqlBoolean f_() {
             Observation h_ = this.Most_Recent_Viral_Load_Test_During_Measurement_Period(context);
             DataType i_ = h_?.Value;
             object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
             CqlCode k_ = this.Below_threshold_level__qualifier_value_(context);
             CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
             bool? m_ = context.Operators.Equivalent(j_ as CqlConcept, l_);
-            return (bool?)((CqlBoolean)m_);
+            return m_;
         }
 
 
-        bool? g_() {
+        CqlBoolean g_() {
             Observation n_ = this.Most_Recent_Viral_Load_Test_During_Measurement_Period(context);
             DataType o_ = n_?.Value;
             object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
             CqlCode q_ = this.Not_detected__qualifier_value_(context);
             CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
             bool? s_ = context.Operators.Equivalent(p_ as CqlConcept, r_);
-            return (bool?)((CqlBoolean)s_);
+            return s_;
         }
 
         return (bool?)(/* CQL 'or' (71:3-73:103) */ (/* CQL 'or' (71:3-72:112) */ ((CqlBoolean)e_
-            || (CqlBoolean)f_())
-            || (CqlBoolean)g_()));
+            || f_())
+            || g_()));
     }
 
 

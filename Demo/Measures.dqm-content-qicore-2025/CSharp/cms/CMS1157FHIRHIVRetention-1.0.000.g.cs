@@ -114,50 +114,50 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             CodeableConcept d_ = condition?.VerificationStatus;
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
             bool? h_ = context.Operators.Equivalent(e_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 CodeableConcept l_ = condition?.VerificationStatus;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
                 CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
                 CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
                 bool? p_ = context.Operators.Equivalent(m_, o_);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 CodeableConcept q_ = condition?.VerificationStatus;
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
                 CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
                 bool? u_ = context.Operators.Equivalent(r_, t_);
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 CodeableConcept v_ = condition?.VerificationStatus;
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
                 bool? z_ = context.Operators.Equivalent(w_, y_);
-                return (bool?)((CqlBoolean)z_);
+                return z_;
             }
 
-            return (bool?)(/* CQL 'or' (96:52-100:3) */ (/* CQL 'or' (96:54-98:66) */ (/* CQL 'or' (96:54-97:66) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_())
-                || (CqlBoolean)j_())
-                || (CqlBoolean)k_()));
+            return /* CQL 'or' (96:52-100:3) */ (/* CQL 'or' (96:54-98:66) */ (/* CQL 'or' (96:54-97:66) */ ((CqlBoolean)h_
+                || i_())
+                || j_())
+                || k_());
         }
 
         return (bool?)(/* CQL 'implies' (96:3-100:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || (CqlBoolean)c_()));
+            || c_()));
     }
 
 
@@ -329,28 +329,28 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ap_);
                 bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, "day");
 
-                bool? as_() {
+                CqlBoolean as_() {
                     Code<Encounter.EncounterStatus> au_ = ValidEncounter?.StatusElement;
                     Encounter.EncounterStatus? av_ = au_?.Value;
                     Code<Encounter.EncounterStatus> aw_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(av_);
                     bool? ax_ = context.Operators.Equal(aw_, "finished");
-                    return (bool?)((CqlBoolean)ax_);
+                    return ax_;
                 }
 
 
-                bool? at_() {
+                CqlBoolean at_() {
                     CqlInterval<CqlDateTime> ay_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDiagnosis);
                     CqlDateTime az_ = context.Operators.Start(ay_);
                     Period ba_ = ValidEncounter?.Period;
                     CqlInterval<CqlDateTime> bb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ba_);
                     CqlDateTime bc_ = context.Operators.Start(bb_);
                     bool? bd_ = context.Operators.SameOrBefore(az_, bc_, "day");
-                    return (bool?)((CqlBoolean)bd_);
+                    return bd_;
                 }
 
                 return (bool?)(/* CQL 'and' (53:19-56:41) */ (/* CQL 'and' (53:19-55:107) */ (/* CQL 'and' (53:19-54:48) */ ((CqlBoolean)ar_
-                    && (CqlBoolean)as_())
-                    && (CqlBoolean)at_())
+                    && as_())
+                    && at_())
                     && (CqlBoolean)(this.isVerified(context, HIVDiagnosis))));
             }
 
@@ -388,17 +388,17 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 ];
                 bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
 
-                bool? m_() {
+                CqlBoolean m_() {
                     CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
                     DataType p_ = ViralLoadTest?.Effective;
                     object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                     CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
                     bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, "day");
-                    return (bool?)((CqlBoolean)s_);
+                    return s_;
                 }
 
 
-                bool? n_() {
+                CqlBoolean n_() {
                     DataType t_ = ViralLoadTest?.Effective;
                     object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                     CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_);
@@ -410,7 +410,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                     CqlDateTime ab_ = context.Operators.Add(z_, aa_);
                     bool? ac_ = context.Operators.SameOrAfter(w_, ab_, "day");
 
-                    bool? ad_() {
+                    CqlBoolean ad_() {
                         Period ae_ = EncounterWithHIV?.Period;
                         CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ae_);
                         CqlDateTime ag_ = context.Operators.Start(af_);
@@ -421,16 +421,16 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                         CqlQuantity al_ = context.Operators.Quantity(90m, "days");
                         CqlDateTime am_ = context.Operators.Add(ak_, al_);
                         bool? an_ = context.Operators.SameOrAfter(ag_, am_, "day");
-                        return (bool?)((CqlBoolean)an_);
+                        return an_;
                     }
 
-                    return (bool?)(/* CQL 'or' (71:13-73:9) */ ((CqlBoolean)ac_
-                        || (CqlBoolean)ad_()));
+                    return /* CQL 'or' (71:13-73:9) */ ((CqlBoolean)ac_
+                        || ad_());
                 }
 
                 return (bool?)(/* CQL 'and' (69:17-73:9) */ (/* CQL 'and' (69:17-70:85) */ ((CqlBoolean)l_
-                    && (CqlBoolean)m_())
-                    && (CqlBoolean)n_()));
+                    && m_())
+                    && n_()));
             }
 
             bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -458,7 +458,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
             bool? e_(Encounter AnotherEncounterWithHIV) {
                 bool? g_ = context.Operators.Equivalent(EncounterWithHIV, AnotherEncounterWithHIV);
 
-                bool? h_() {
+                CqlBoolean h_() {
                     Period i_ = AnotherEncounterWithHIV?.Period;
                     CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
                     CqlDateTime k_ = context.Operators.Start(j_);
@@ -468,11 +468,11 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                     CqlQuantity o_ = context.Operators.Quantity(90m, "days");
                     CqlDateTime p_ = context.Operators.Add(n_, o_);
                     bool? q_ = context.Operators.SameOrAfter(k_, p_, "day");
-                    return (bool?)((CqlBoolean)q_);
+                    return q_;
                 }
 
                 return (bool?)(/* CQL 'and' (92:17-93:109) */ ((CqlBoolean)!g_
-                    && (CqlBoolean)h_()));
+                    && h_()));
             }
 
             bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);

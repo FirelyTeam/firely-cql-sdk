@@ -155,26 +155,26 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, f_);
             bool? h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, "day");
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Coding k_ = BMIEncounter?.Class;
                 CqlCode l_ = FHIRHelpers_4_4_000.Instance.ToCode(context, k_);
                 CqlCode m_ = this.@virtual(context);
                 bool? n_ = context.Operators.Equivalent(l_, m_);
-                return (bool?)((CqlBoolean)!n_);
+                return !n_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 Code<Encounter.EncounterStatus> o_ = BMIEncounter?.StatusElement;
                 Encounter.EncounterStatus? p_ = o_?.Value;
                 Code<Encounter.EncounterStatus> q_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(p_);
                 bool? r_ = context.Operators.Equal(q_, "finished");
-                return (bool?)((CqlBoolean)r_);
+                return r_;
             }
 
             return (bool?)(/* CQL 'and' (175:5-177:42) */ (/* CQL 'and' (175:11-176:41) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_())
-                && (CqlBoolean)j_()));
+                && i_())
+                && j_()));
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -246,7 +246,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
 
         bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
 
-        bool? g_() {
+        CqlBoolean g_() {
             IEnumerable<Observation> k_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-pregnancystatus"));
 
             bool? l_(Observation PregnantObservation) {
@@ -256,7 +256,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
                 bool? r_ = context.Operators.Overlaps(p_, q_, "day");
 
-                bool? s_() {
+                CqlBoolean s_() {
                     Code<ObservationStatus> u_ = PregnantObservation?.StatusElement;
                     ObservationStatus? v_ = u_?.Value;
                     Code<ObservationStatus> w_ = context.Operators.Convert<Code<ObservationStatus>>(v_);
@@ -267,29 +267,29 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                         "corrected",
                     ];
                     bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
-                    return (bool?)((CqlBoolean)z_);
+                    return z_;
                 }
 
 
-                bool? t_() {
+                CqlBoolean t_() {
                     DataType aa_ = PregnantObservation?.Value;
                     CqlConcept ab_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aa_ as CodeableConcept);
                     CqlValueSet ac_ = this.Pregnancy_or_Other_Related_Diagnoses(context);
                     bool? ad_ = context.Operators.ConceptInValueSet(ab_, ac_);
-                    return (bool?)((CqlBoolean)ad_);
+                    return ad_;
                 }
 
                 return (bool?)(/* CQL 'and' (168:9-170:85) */ (/* CQL 'and' (168:15-169:79) */ ((CqlBoolean)r_
-                    && (CqlBoolean)s_())
-                    && (CqlBoolean)t_()));
+                    && s_())
+                    && t_()));
             }
 
             bool? m_ = context.Operators.WhereAny<Observation>(k_, l_);
-            return (bool?)((CqlBoolean)m_);
+            return m_;
         }
 
         return (bool?)(/* CQL 'or' (163:3-171:5) */ ((CqlBoolean)f_
-            || (CqlBoolean)g_()));
+            || g_()));
     }
 
 
@@ -325,17 +325,17 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             CqlQuantity g_ = context.Operators.Quantity(0m, "kg/m2");
             bool? h_ = context.Operators.Greater(f_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
                 DataType k_ = BMI?.Effective;
                 object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
                 CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_);
                 bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, m_, "day");
-                return (bool?)((CqlBoolean)n_);
+                return n_;
             }
 
             return (bool?)(/* CQL 'and' (60:5-61:73) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -391,16 +391,16 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 string u_ = context.Operators.Last<string>(t_);
                 bool? v_ = context.Operators.Equal(r_, u_);
 
-                bool? w_() {
+                CqlBoolean w_() {
                     CodeableConcept x_ = M?.Code;
                     CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
                     CqlValueSet z_ = this.Medications_for_Above_Normal_BMI(context);
                     bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
-                    return (bool?)((CqlBoolean)aa_);
+                    return aa_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)v_
-                    && (CqlBoolean)w_()));
+                    && w_()));
             }
 
             bool? q_ = context.Operators.WhereAny<Medication>(o_, p_);
@@ -432,7 +432,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             CqlValueSet ah_ = this.Overweight_or_Obese(context);
             bool? ai_ = context.Operators.ConceptsInValueSet((IEnumerable<CqlConcept>)ag_, ah_);
 
-            bool? aj_() {
+            CqlBoolean aj_() {
                 CqlValueSet al_ = this.Overweight_or_Obese(context);
                 IEnumerable<Condition> am_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> an_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -448,11 +448,11 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 }
 
                 bool? aq_ = context.Operators.WhereAny<Condition>(ao_, ap_);
-                return (bool?)((CqlBoolean)aq_);
+                return aq_;
             }
 
             return (bool?)(/* CQL 'or' (90:7-94:9) */ ((CqlBoolean)ai_
-                || (CqlBoolean)aj_()));
+                || aj_()));
         }
 
         IEnumerable<object> n_ = context.Operators.Where<object>(l_, m_);
@@ -483,7 +483,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             CqlValueSet h_ = this.Overweight_or_Obese(context);
             bool? i_ = context.Operators.ConceptsInValueSet(g_, h_);
 
-            bool? j_() {
+            CqlBoolean j_() {
                 CqlValueSet l_ = this.Overweight_or_Obese(context);
                 IEnumerable<Condition> m_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -530,7 +530,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     CqlDateTime t_ = context.Operators.Start(s_);
                     bool? u_ = context.Operators.SameOrBefore(q_, t_, "day");
 
-                    bool? v_() {
+                    CqlBoolean v_() {
                         CqlInterval<CqlDateTime> ac_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OverweightObese as Condition);
                         CqlDateTime ad_ = context.Operators.End(ac_);
                         object ae_;
@@ -572,19 +572,19 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                         CqlInterval<CqlDateTime> af_ = QICoreCommon_4_0_000.Instance.toInterval(context, ae_);
                         CqlDateTime ag_ = context.Operators.Start(af_);
                         bool? ah_ = context.Operators.Before(ad_, ag_, "day");
-                        return (bool?)((CqlBoolean)!ah_);
+                        return !ah_;
                     }
 
                     return (bool?)(/* CQL 'and' (101:13-102:144) */ ((CqlBoolean)u_
-                        && (CqlBoolean)v_()));
+                        && v_()));
                 }
 
                 bool? o_ = context.Operators.WhereAny<Condition>(m_, n_);
-                return (bool?)((CqlBoolean)o_);
+                return o_;
             }
 
             return (bool?)(/* CQL 'or' (99:7-103:9) */ ((CqlBoolean)i_
-                || (CqlBoolean)j_()));
+                || j_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -711,16 +711,16 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 string u_ = context.Operators.Last<string>(t_);
                 bool? v_ = context.Operators.Equal(r_, u_);
 
-                bool? w_() {
+                CqlBoolean w_() {
                     CodeableConcept x_ = M?.Code;
                     CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
                     CqlValueSet z_ = this.Medications_for_Below_Normal_BMI(context);
                     bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
-                    return (bool?)((CqlBoolean)aa_);
+                    return aa_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)v_
-                    && (CqlBoolean)w_()));
+                    && w_()));
             }
 
             bool? q_ = context.Operators.WhereAny<Medication>(o_, p_);
@@ -752,7 +752,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             CqlValueSet ah_ = this.Underweight(context);
             bool? ai_ = context.Operators.ConceptsInValueSet((IEnumerable<CqlConcept>)ag_, ah_);
 
-            bool? aj_() {
+            CqlBoolean aj_() {
                 CqlValueSet al_ = this.Underweight(context);
                 IEnumerable<Condition> am_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> an_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -765,24 +765,24 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     CqlDateTime au_ = context.Operators.LateBoundProperty<CqlDateTime>(at_, "value");
                     bool? av_ = context.Operators.SameOrBefore(as_, au_, "day");
 
-                    bool? aw_() {
+                    CqlBoolean aw_() {
                         object ax_ = context.Operators.LateBoundProperty<object>(LowInterventionsOrdered, "authoredOn");
                         CqlDateTime ay_ = context.Operators.LateBoundProperty<CqlDateTime>(ax_, "value");
                         CqlInterval<CqlDateTime> az_ = this.Measurement_Period(context);
                         bool? ba_ = context.Operators.In<CqlDateTime>(ay_, az_, "day");
-                        return (bool?)((CqlBoolean)ba_);
+                        return ba_;
                     }
 
                     return (bool?)(/* CQL 'and' (121:13-122:87) */ ((CqlBoolean)av_
-                        && (CqlBoolean)aw_()));
+                        && aw_()));
                 }
 
                 bool? aq_ = context.Operators.WhereAny<Condition>(ao_, ap_);
-                return (bool?)((CqlBoolean)aq_);
+                return aq_;
             }
 
             return (bool?)(/* CQL 'or' (118:7-123:9) */ ((CqlBoolean)ai_
-                || (CqlBoolean)aj_()));
+                || aj_()));
         }
 
         IEnumerable<object> n_ = context.Operators.Where<object>(l_, m_);
@@ -813,23 +813,23 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             CqlValueSet h_ = this.Underweight(context);
             bool? i_ = context.Operators.ConceptsInValueSet(g_, h_);
 
-            bool? j_() {
+            CqlBoolean j_() {
                 Code<EventStatus> m_ = LowInterventionsPerformed?.StatusElement;
                 EventStatus? n_ = m_?.Value;
                 string o_ = context.Operators.Convert<string>(n_);
                 bool? p_ = context.Operators.Equal(o_, "completed");
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 CqlValueSet q_ = this.Underweight(context);
                 IEnumerable<Condition> r_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
                 bool? s_(Condition UnderweightDiagnosis) {
                     bool? u_ = QICoreCommon_4_0_000.Instance.isHealthConcern(context, UnderweightDiagnosis as Condition);
 
-                    bool? v_() {
+                    CqlBoolean v_() {
                         CqlInterval<CqlDateTime> y_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UnderweightDiagnosis as Condition);
                         CqlDateTime z_ = context.Operators.Start(y_);
                         object aa_;
@@ -871,11 +871,11 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                         CqlInterval<CqlDateTime> ab_ = QICoreCommon_4_0_000.Instance.toInterval(context, aa_);
                         CqlDateTime ac_ = context.Operators.Start(ab_);
                         bool? ad_ = context.Operators.SameOrBefore(z_, ac_, "day");
-                        return (bool?)((CqlBoolean)ad_);
+                        return ad_;
                     }
 
 
-                    bool? w_() {
+                    CqlBoolean w_() {
                         CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
                         object al_;
                         DataType ao_ = LowInterventionsPerformed?.Performed;
@@ -915,11 +915,11 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                         }
                         CqlInterval<CqlDateTime> am_ = QICoreCommon_4_0_000.Instance.toInterval(context, al_);
                         bool? an_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ak_, am_, "day");
-                        return (bool?)((CqlBoolean)an_);
+                        return an_;
                     }
 
 
-                    bool? x_() {
+                    CqlBoolean x_() {
                         CqlInterval<CqlDateTime> au_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UnderweightDiagnosis as Condition);
                         CqlDateTime av_ = context.Operators.End(au_);
                         object aw_;
@@ -961,22 +961,22 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                         CqlInterval<CqlDateTime> ax_ = QICoreCommon_4_0_000.Instance.toInterval(context, aw_);
                         CqlDateTime ay_ = context.Operators.Start(ax_);
                         bool? az_ = context.Operators.Before(av_, ay_, "day");
-                        return (bool?)((CqlBoolean)!az_);
+                        return !az_;
                     }
 
                     return (bool?)(/* CQL 'and' (131:13-134:148) */ (/* CQL 'and' (131:19-133:103) */ (/* CQL 'and' (131:19-132:148) */ ((CqlBoolean)u_
-                        && (CqlBoolean)v_())
-                        && (CqlBoolean)w_())
-                        && (CqlBoolean)x_()));
+                        && v_())
+                        && w_())
+                        && x_()));
                 }
 
                 bool? t_ = context.Operators.WhereAny<Condition>(r_, s_);
-                return (bool?)((CqlBoolean)t_);
+                return t_;
             }
 
             return (bool?)(/* CQL 'or' (128:7-135:9) */ (/* CQL 'and' (128:13-129:58) */ ((CqlBoolean)i_
-                && (CqlBoolean)j_())
-                || (CqlBoolean)k_()));
+                && j_())
+                || k_()));
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1071,36 +1071,36 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             CqlQuantity g_ = context.Operators.Quantity(18.5m, "kg/m2");
             bool? h_ = context.Operators.GreaterOrEqual(f_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 DataType j_ = BMI?.Value;
                 CqlQuantity k_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, j_ as Quantity);
                 CqlQuantity l_ = context.Operators.Quantity(25m, "kg/m2");
                 bool? m_ = context.Operators.Less(k_, l_);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'and' (73:7-74:34) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         bool? c_ = context.Operators.WhereAny<Observation>(a_, b_);
 
-        bool? d_() {
+        CqlBoolean d_() {
             IEnumerable<Observation> n_ = this.Documented_High_BMI_During_Measurement_Period(context);
             bool? o_ = context.Operators.Exists<Observation>(n_);
 
-            bool? p_() {
+            CqlBoolean p_() {
                 IEnumerable<Observation> q_ = this.Documented_Low_BMI_During_Measurement_Period(context);
                 bool? r_ = context.Operators.Exists<Observation>(q_);
-                return (bool?)((CqlBoolean)r_);
+                return r_;
             }
 
-            return (bool?)((CqlBoolean)(!((bool?)(/* CQL 'or' (76:13-78:5) */ ((CqlBoolean)o_
-                || (CqlBoolean)p_())))));
+            return !((bool?)(/* CQL 'or' (76:13-78:5) */ ((CqlBoolean)o_
+                || p_())));
         }
 
         return (bool?)(/* CQL 'and' (72:3-78:5) */ ((CqlBoolean)c_
-            && (CqlBoolean)d_()));
+            && d_()));
     }
 
 
@@ -1115,14 +1115,14 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         IEnumerable<Observation> a_ = this.High_BMI_And_Follow_Up_Provided(context);
         bool? b_ = context.Operators.Exists<Observation>(a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Observation> d_ = this.Low_BMI_And_Follow_Up_Provided(context);
             bool? e_ = context.Operators.Exists<Observation>(d_);
-            return (bool?)((CqlBoolean)e_);
+            return e_;
         }
 
         return (bool?)(/* CQL 'or' (50:3-52:23) */ (/* CQL 'or' (50:3-51:46) */ ((CqlBoolean)b_
-            || (CqlBoolean)c_())
+            || c_())
             || (CqlBoolean)(this.Has_Normal_BMI(context))));
     }
 
@@ -1172,7 +1172,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             Code<RequestStatus> am_ = context.Operators.Convert<Code<RequestStatus>>(al_);
             bool? an_ = context.Operators.Equivalent(am_, "completed");
 
-            bool? ao_() {
+            CqlBoolean ao_() {
 
                 bool? ap_(Extension @this) {
                     FhirUri aw_ = @this?.UrlElement;
@@ -1194,11 +1194,11 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 CqlConcept at_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, as_ as CodeableConcept);
                 CqlValueSet au_ = this.Medical_Reason(context);
                 bool? av_ = context.Operators.ConceptInValueSet(at_, au_);
-                return (bool?)((CqlBoolean)av_);
+                return av_;
             }
 
             return (bool?)(/* CQL 'and' (151:7-152:59) */ ((CqlBoolean)an_
-                && (CqlBoolean)ao_()));
+                && ao_()));
         }
 
         IEnumerable<ServiceRequest> o_ = context.Operators.Where<ServiceRequest>(m_, n_);
@@ -1235,7 +1235,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             string bl_ = context.Operators.Convert<string>(bk_);
             bool? bm_ = context.Operators.Equivalent(bl_, "completed");
 
-            bool? bn_() {
+            CqlBoolean bn_() {
                 List<CodeableConcept> bo_ = NoBMIFollowUp?.ReasonCode;
 
                 CqlConcept bp_(CodeableConcept @this) {
@@ -1246,11 +1246,11 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 IEnumerable<CqlConcept> bq_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bo_, bp_);
                 CqlValueSet br_ = this.Medical_Reason(context);
                 bool? bs_ = context.Operators.ConceptsInValueSet(bq_, br_);
-                return (bool?)((CqlBoolean)bs_);
+                return bs_;
             }
 
             return (bool?)(/* CQL 'and' (158:9-159:58) */ ((CqlBoolean)bm_
-                && (CqlBoolean)bn_()));
+                && bn_()));
         }
 
         IEnumerable<MedicationRequest> z_ = context.Operators.Where<MedicationRequest>(x_, y_);
@@ -1315,7 +1315,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             CqlValueSet x_ = this.Patient_Declined(context);
             bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
 
-            bool? z_() {
+            CqlBoolean z_() {
 
                 bool? ae_(Extension @this) {
                     FhirUri al_ = @this?.UrlElement;
@@ -1337,11 +1337,11 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 CqlConcept ai_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ah_ as CodeableConcept);
                 CqlValueSet aj_ = this.Medical_Reason(context);
                 bool? ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
-                return (bool?)((CqlBoolean)ak_);
+                return ak_;
             }
 
             return (bool?)(/* CQL 'or' (110:5-112:5) */ ((CqlBoolean)y_
-                || (CqlBoolean)z_()));
+                || z_()));
         }
 
         IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
@@ -1360,14 +1360,14 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         IEnumerable<object> a_ = this.Medical_Reason_For_Not_Documenting_A_Follow_Up_Plan_For_Low_Or_High_BMI(context);
         bool? b_ = context.Operators.Exists<object>(a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             IEnumerable<Observation> d_ = this.Medical_Reason_Or_Patient_Reason_For_Not_Performing_BMI_Exam(context);
             bool? e_ = context.Operators.Exists<Observation>(d_);
-            return (bool?)((CqlBoolean)e_);
+            return e_;
         }
 
         return (bool?)(/* CQL 'or' (55:3-56:76) */ ((CqlBoolean)b_
-            || (CqlBoolean)c_()));
+            || c_()));
     }
 
 

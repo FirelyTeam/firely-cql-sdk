@@ -77,7 +77,7 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
 
         bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
 
-        bool? e_() {
+        CqlBoolean e_() {
             CqlValueSet u_ = this.Palliative_Care_Encounter(context);
             IEnumerable<Encounter> v_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, u_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
             IEnumerable<Encounter> w_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, v_);
@@ -100,11 +100,11 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             }
 
             bool? y_ = context.Operators.WhereAny<Encounter>(w_, x_);
-            return (bool?)((CqlBoolean)y_);
+            return y_;
         }
 
 
-        bool? f_() {
+        CqlBoolean f_() {
             CqlValueSet am_ = this.Palliative_Care_Intervention(context);
             IEnumerable<Procedure> an_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
             IEnumerable<Procedure> ao_ = NCQAStatus_1_0_0.Instance.Completed_or_Ongoing_Procedure(context, an_);
@@ -127,11 +127,11 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             }
 
             bool? aq_ = context.Operators.WhereAny<Procedure>(ao_, ap_);
-            return (bool?)((CqlBoolean)aq_);
+            return aq_;
         }
 
 
-        bool? g_() {
+        CqlBoolean g_() {
             CqlCode be_ = this.Encounter_for_palliative_care(context);
             IEnumerable<CqlCode> bf_ = context.Operators.ToList<CqlCode>(be_);
             IEnumerable<Condition> bg_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, bf_, "http://hl7.org/fhir/StructureDefinition/Condition"));
@@ -154,13 +154,13 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             }
 
             bool? bj_ = context.Operators.WhereAny<Condition>(bh_, bi_);
-            return (bool?)((CqlBoolean)bj_);
+            return bj_;
         }
 
         return (bool?)(/* CQL 'or' (18:3-37:5) */ (/* CQL 'or' (18:3-32:5) */ (/* CQL 'or' (18:3-27:5) */ ((CqlBoolean)d_
-            || (CqlBoolean)e_())
-            || (CqlBoolean)f_())
-            || (CqlBoolean)g_()));
+            || e_())
+            || f_())
+            || g_()));
     }
 
 

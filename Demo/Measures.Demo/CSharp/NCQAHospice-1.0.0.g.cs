@@ -83,7 +83,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
 
         bool? e_ = context.Operators.WhereAny<Procedure>(c_, d_);
 
-        bool? f_() {
+        CqlBoolean f_() {
             CqlValueSet k_ = this.Hospice_Encounter(context);
             IEnumerable<Encounter> l_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
             IEnumerable<Encounter> m_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, l_);
@@ -97,11 +97,11 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
             }
 
             bool? o_ = context.Operators.WhereAny<Encounter>(m_, n_);
-            return (bool?)((CqlBoolean)o_);
+            return o_;
         }
 
         return (bool?)(/* CQL 'or' (17:1-22:1) */ ((CqlBoolean)e_
-            || (CqlBoolean)f_()));
+            || f_()));
     }
 
 

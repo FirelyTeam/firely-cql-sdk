@@ -160,50 +160,50 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             CodeableConcept d_ = condition?.VerificationStatus;
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
             bool? h_ = context.Operators.Equivalent(e_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 CodeableConcept l_ = condition?.VerificationStatus;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
                 CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
                 CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
                 bool? p_ = context.Operators.Equivalent(m_, o_);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 CodeableConcept q_ = condition?.VerificationStatus;
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
                 CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
                 bool? u_ = context.Operators.Equivalent(r_, t_);
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 CodeableConcept v_ = condition?.VerificationStatus;
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
                 bool? z_ = context.Operators.Equivalent(w_, y_);
-                return (bool?)((CqlBoolean)z_);
+                return z_;
             }
 
-            return (bool?)(/* CQL 'or' (166:52-170:3) */ (/* CQL 'or' (166:54-168:66) */ (/* CQL 'or' (166:54-167:66) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_())
-                || (CqlBoolean)j_())
-                || (CqlBoolean)k_()));
+            return /* CQL 'or' (166:52-170:3) */ (/* CQL 'or' (166:54-168:66) */ (/* CQL 'or' (166:54-167:66) */ ((CqlBoolean)h_
+                || i_())
+                || j_())
+                || k_());
         }
 
         return (bool?)(/* CQL 'implies' (166:3-170:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || (CqlBoolean)c_()));
+            || c_()));
     }
 
 
@@ -214,28 +214,28 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         CodeableConcept a_ = AllergyIntolerance?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             CodeableConcept d_ = AllergyIntolerance?.VerificationStatus;
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
             bool? h_ = context.Operators.Equivalent(e_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 CodeableConcept j_ = AllergyIntolerance?.VerificationStatus;
                 CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
                 CqlCode l_ = QICoreCommon_4_0_000.Instance.allergy_unconfirmed(context);
                 CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
                 bool? n_ = context.Operators.Equivalent(k_, m_);
-                return (bool?)((CqlBoolean)n_);
+                return n_;
             }
 
-            return (bool?)(/* CQL 'or' (249:61-251:3) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_()));
+            return /* CQL 'or' (249:61-251:3) */ ((CqlBoolean)h_
+                || i_());
         }
 
         return (bool?)(/* CQL 'implies' (249:3-251:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || (CqlBoolean)c_()));
+            || c_()));
     }
 
 
@@ -315,7 +315,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlQuantity v_ = context.Operators.Quantity(40m, "%");
             bool? w_ = context.Operators.LessOrEqual(u_ as CqlQuantity, v_);
 
-            bool? x_() {
+            CqlBoolean x_() {
                 Code<ObservationStatus> y_ = EjectionFraction?.StatusElement;
                 ObservationStatus? z_ = y_?.Value;
                 string aa_ = context.Operators.Convert<string>(z_);
@@ -325,11 +325,11 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     "corrected",
                 ];
                 bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
-                return (bool?)((CqlBoolean)ac_);
+                return ac_;
             }
 
             return (bool?)(/* CQL 'and' (134:7-135:74) */ ((CqlBoolean)w_
-                && (CqlBoolean)x_()));
+                && x_()));
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -715,7 +715,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 18);
 
-        bool? j_() {
+        CqlBoolean j_() {
             IEnumerable<Encounter> l_ = this.Qualifying_Outpatient_Encounter_During_Measurement_Period(context);
 
             bool? m_(Encounter Encounter1) {
@@ -735,19 +735,19 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             }
 
             bool? n_ = context.Operators.WhereAny<Encounter>(l_, m_);
-            return (bool?)((CqlBoolean)n_);
+            return n_;
         }
 
 
-        bool? k_() {
+        CqlBoolean k_() {
             IEnumerable<Encounter> w_ = this.Heart_Failure_Outpatient_Encounter(context);
             bool? x_ = context.Operators.Exists<Encounter>(w_);
-            return (bool?)((CqlBoolean)x_);
+            return x_;
         }
 
         return (bool?)(/* CQL 'and' (154:3-159:51) */ (/* CQL 'and' (154:3-158:5) */ ((CqlBoolean)i_
-            && (CqlBoolean)j_())
-            && (CqlBoolean)k_()));
+            && j_())
+            && k_()));
     }
 
 
@@ -764,7 +764,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, f_);
             bool? h_ = context.Operators.In<CqlDateTime>(e_, g_, "day");
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Code<MedicationRequest.MedicationrequestStatus> l_ = MedicationRequest?.StatusElement;
                 MedicationRequest.MedicationrequestStatus? m_ = l_?.Value;
                 string n_ = context.Operators.Convert<string>(m_);
@@ -773,11 +773,11 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     "completed",
                 ];
                 bool? p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 Code<MedicationRequest.MedicationRequestIntent> q_ = MedicationRequest?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? r_ = q_?.Value;
                 string s_ = context.Operators.Convert<string>(r_);
@@ -789,38 +789,38 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     "instance-order",
                 ];
                 bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 IEnumerable<Task> v_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
                 bool? w_(Task TaskReject) {
                     ResourceReference y_ = TaskReject?.Focus;
                     bool? z_ = QICoreCommon_4_0_000.Instance.references(context, y_, MedicationRequest);
 
-                    bool? aa_() {
+                    CqlBoolean aa_() {
                         CodeableConcept ab_ = TaskReject?.Code;
                         CqlConcept ac_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ab_);
                         CqlCode ad_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
                         CqlConcept ae_ = context.Operators.ConvertCodeToConcept(ad_);
                         bool? af_ = context.Operators.Equivalent(ac_, ae_);
-                        return (bool?)((CqlBoolean)af_);
+                        return af_;
                     }
 
                     return (bool?)(/* CQL 'and' (187:13-188:58) */ ((CqlBoolean)z_
-                        && (CqlBoolean)aa_()));
+                        && aa_()));
                 }
 
                 bool? x_ = context.Operators.WhereAny<Task>(v_, w_);
-                return (bool?)((CqlBoolean)!x_);
+                return !x_;
             }
 
             return (bool?)(/* CQL 'and' (183:7-189:9) */ (/* CQL 'and' (183:13-185:119) */ (/* CQL 'and' (183:13-184:65) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_())
-                && (CqlBoolean)j_())
-                && (CqlBoolean)k_()));
+                && i_())
+                && j_())
+                && k_()));
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -841,7 +841,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, f_);
             bool? h_ = context.Operators.In<CqlDateTime>(e_, g_, "day");
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Code<MedicationRequest.MedicationrequestStatus> l_ = MedicationRequest?.StatusElement;
                 MedicationRequest.MedicationrequestStatus? m_ = l_?.Value;
                 string n_ = context.Operators.Convert<string>(m_);
@@ -850,11 +850,11 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     "active",
                 ];
                 bool? p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 Code<MedicationRequest.MedicationRequestIntent> q_ = MedicationRequest?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? r_ = q_?.Value;
                 string s_ = context.Operators.Convert<string>(r_);
@@ -866,38 +866,38 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     "instance-order",
                 ];
                 bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 IEnumerable<Task> v_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
                 bool? w_(Task TaskReject) {
                     ResourceReference y_ = TaskReject?.Focus;
                     bool? z_ = QICoreCommon_4_0_000.Instance.references(context, y_, MedicationRequest);
 
-                    bool? aa_() {
+                    CqlBoolean aa_() {
                         CodeableConcept ab_ = TaskReject?.Code;
                         CqlConcept ac_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ab_);
                         CqlCode ad_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
                         CqlConcept ae_ = context.Operators.ConvertCodeToConcept(ad_);
                         bool? af_ = context.Operators.Equivalent(ac_, ae_);
-                        return (bool?)((CqlBoolean)af_);
+                        return af_;
                     }
 
                     return (bool?)(/* CQL 'and' (201:13-202:58) */ ((CqlBoolean)z_
-                        && (CqlBoolean)aa_()));
+                        && aa_()));
                 }
 
                 bool? x_ = context.Operators.WhereAny<Task>(v_, w_);
-                return (bool?)((CqlBoolean)!x_);
+                return !x_;
             }
 
             return (bool?)(/* CQL 'and' (197:7-203:9) */ (/* CQL 'and' (197:13-199:119) */ (/* CQL 'and' (197:13-198:65) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_())
-                && (CqlBoolean)j_())
-                && (CqlBoolean)k_()));
+                && i_())
+                && j_())
+                && k_()));
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -995,16 +995,16 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, f_);
             bool? h_ = context.Operators.OverlapsAfter(e_, g_, "day");
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Code<EventStatus> p_ = Procedure?.StatusElement;
                 EventStatus? q_ = p_?.Value;
                 string r_ = context.Operators.Convert<string>(q_);
                 bool? s_ = context.Operators.Equal(r_, "completed");
-                return (bool?)((CqlBoolean)s_);
+                return s_;
             }
 
             return (bool?)(/* CQL 'and' (231:7-232:42) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -1111,7 +1111,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
             bool? v_ = context.Operators.OverlapsAfter(s_, u_, "day");
 
-            bool? w_() {
+            CqlBoolean w_() {
                 Code<MedicationRequest.MedicationrequestStatus> al_ = MedicationRequest?.StatusElement;
                 MedicationRequest.MedicationrequestStatus? am_ = al_?.Value;
                 string an_ = context.Operators.Convert<string>(am_);
@@ -1120,11 +1120,11 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     "completed",
                 ];
                 bool? ap_ = context.Operators.In<string>(an_, (IEnumerable<string>)ao_);
-                return (bool?)((CqlBoolean)ap_);
+                return ap_;
             }
 
 
-            bool? x_() {
+            CqlBoolean x_() {
                 Code<MedicationRequest.MedicationRequestIntent> aq_ = MedicationRequest?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ar_ = aq_?.Value;
                 string as_ = context.Operators.Convert<string>(ar_);
@@ -1136,38 +1136,38 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     "instance-order",
                 ];
                 bool? au_ = context.Operators.In<string>(as_, (IEnumerable<string>)at_);
-                return (bool?)((CqlBoolean)au_);
+                return au_;
             }
 
 
-            bool? y_() {
+            CqlBoolean y_() {
                 IEnumerable<Task> av_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
                 bool? aw_(Task TaskReject) {
                     ResourceReference ay_ = TaskReject?.Focus;
                     bool? az_ = QICoreCommon_4_0_000.Instance.references(context, ay_, MedicationRequest);
 
-                    bool? ba_() {
+                    CqlBoolean ba_() {
                         CodeableConcept bb_ = TaskReject?.Code;
                         CqlConcept bc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bb_);
                         CqlCode bd_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
                         CqlConcept be_ = context.Operators.ConvertCodeToConcept(bd_);
                         bool? bf_ = context.Operators.Equivalent(bc_, be_);
-                        return (bool?)((CqlBoolean)bf_);
+                        return bf_;
                     }
 
                     return (bool?)(/* CQL 'and' (267:13-268:58) */ ((CqlBoolean)az_
-                        && (CqlBoolean)ba_()));
+                        && ba_()));
                 }
 
                 bool? ax_ = context.Operators.WhereAny<Task>(av_, aw_);
-                return (bool?)((CqlBoolean)!ax_);
+                return !ax_;
             }
 
             return (bool?)(/* CQL 'and' (259:7-269:9) */ (/* CQL 'and' (259:13-265:119) */ (/* CQL 'and' (259:13-264:65) */ ((CqlBoolean)v_
-                && (CqlBoolean)w_())
-                && (CqlBoolean)x_())
-                && (CqlBoolean)y_()));
+                && w_())
+                && x_())
+                && y_()));
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
@@ -1190,7 +1190,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
             bool? i_ = context.Operators.OverlapsAfter(f_, h_, "day");
 
-            bool? j_() {
+            CqlBoolean j_() {
                 Code<ObservationStatus> k_ = HeartRateObservation?.StatusElement;
                 ObservationStatus? l_ = k_?.Value;
                 string m_ = context.Operators.Convert<string>(l_);
@@ -1200,11 +1200,11 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     "corrected",
                 ];
                 bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
-                return (bool?)((CqlBoolean)o_);
+                return o_;
             }
 
             return (bool?)(/* CQL 'and' (278:7-279:78) */ ((CqlBoolean)i_
-                && (CqlBoolean)j_()));
+                && j_()));
         }
 
         bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);

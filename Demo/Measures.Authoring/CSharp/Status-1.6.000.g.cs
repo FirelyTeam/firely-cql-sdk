@@ -91,7 +91,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 List<CodeableConcept> j_ = O?.Category;
 
                 CqlConcept k_(CodeableConcept @this) {
@@ -109,11 +109,11 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
                 IEnumerable<CqlConcept> m_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_, l_);
                 bool? n_ = context.Operators.Exists<CqlConcept>(m_);
-                return (bool?)((CqlBoolean)n_);
+                return n_;
             }
 
             return (bool?)(/* CQL 'and' (24:5-27:7) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
@@ -137,7 +137,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 List<CodeableConcept> j_ = O?.Category;
 
                 CqlConcept k_(CodeableConcept @this) {
@@ -155,11 +155,11 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
                 IEnumerable<CqlConcept> m_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_, l_);
                 bool? n_ = context.Operators.Exists<CqlConcept>(m_);
-                return (bool?)((CqlBoolean)n_);
+                return n_;
             }
 
             return (bool?)(/* CQL 'and' (32:5-35:7) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
@@ -218,16 +218,16 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Code<RequestIntent> j_ = D?.IntentElement;
                 RequestIntent? k_ = j_?.Value;
                 Code<RequestIntent> l_ = context.Operators.Convert<Code<RequestIntent>>(k_);
                 bool? m_ = context.Operators.Equal(l_, "order");
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'and' (50:5-51:28) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<DeviceRequest> b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
@@ -250,16 +250,16 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Code<RequestIntent> j_ = D?.IntentElement;
                 RequestIntent? k_ = j_?.Value;
                 Code<RequestIntent> l_ = context.Operators.Convert<Code<RequestIntent>>(k_);
                 bool? m_ = context.Operators.Equal(l_, "order");
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'and' (55:5-56:28) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<DeviceRequest> b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
@@ -282,16 +282,16 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Code<RequestIntent> j_ = S?.IntentElement;
                 RequestIntent? k_ = j_?.Value;
                 Code<RequestIntent> l_ = context.Operators.Convert<Code<RequestIntent>>(k_);
                 bool? m_ = context.Operators.Equal(l_, "order");
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'and' (63:5-64:28) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
@@ -314,16 +314,16 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Code<RequestIntent> j_ = S?.IntentElement;
                 RequestIntent? k_ = j_?.Value;
                 Code<RequestIntent> l_ = context.Operators.Convert<Code<RequestIntent>>(k_);
                 bool? m_ = context.Operators.Equal(l_, "order");
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'and' (68:5-69:28) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
@@ -346,16 +346,16 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Code<RequestIntent> j_ = S?.IntentElement;
                 RequestIntent? k_ = j_?.Value;
                 Code<RequestIntent> l_ = context.Operators.Convert<Code<RequestIntent>>(k_);
                 bool? m_ = context.Operators.Equal(l_, "order");
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'and' (73:5-74:28) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
@@ -378,16 +378,16 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Code<RequestIntent> j_ = S?.IntentElement;
                 RequestIntent? k_ = j_?.Value;
                 Code<RequestIntent> l_ = context.Operators.Convert<Code<RequestIntent>>(k_);
                 bool? m_ = context.Operators.Equal(l_, "order");
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
             return (bool?)(/* CQL 'and' (78:5-79:28) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
@@ -592,7 +592,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 List<CodeableConcept> j_ = O?.Category;
 
                 CqlConcept k_(CodeableConcept @this) {
@@ -610,11 +610,11 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
                 IEnumerable<CqlConcept> m_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_, l_);
                 bool? n_ = context.Operators.Exists<CqlConcept>(m_);
-                return (bool?)((CqlBoolean)n_);
+                return n_;
             }
 
             return (bool?)(/* CQL 'and' (134:5-137:7) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
@@ -638,7 +638,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 List<CodeableConcept> j_ = O?.Category;
 
                 CqlConcept k_(CodeableConcept @this) {
@@ -656,11 +656,11 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
                 IEnumerable<CqlConcept> m_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_, l_);
                 bool? n_ = context.Operators.Exists<CqlConcept>(m_);
-                return (bool?)((CqlBoolean)n_);
+                return n_;
             }
 
             return (bool?)(/* CQL 'and' (141:5-144:7) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
@@ -678,16 +678,16 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equal(e_, "active");
 
-            bool? g_() {
+            CqlBoolean g_() {
                 Code<MedicationRequest.MedicationRequestIntent> h_ = M?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
                 string j_ = context.Operators.Convert<string>(i_);
                 bool? k_ = context.Operators.Equal(j_, "order");
-                return (bool?)((CqlBoolean)k_);
+                return k_;
             }
 
             return (bool?)(/* CQL 'and' (149:5-150:28) */ ((CqlBoolean)f_
-                && (CqlBoolean)g_()));
+                && g_()));
         }
 
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
@@ -705,16 +705,16 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equal(e_, "active");
 
-            bool? g_() {
+            CqlBoolean g_() {
                 Code<MedicationRequest.MedicationRequestIntent> h_ = M?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
                 string j_ = context.Operators.Convert<string>(i_);
                 bool? k_ = context.Operators.Equal(j_, "order");
-                return (bool?)((CqlBoolean)k_);
+                return k_;
             }
 
             return (bool?)(/* CQL 'and' (154:5-155:28) */ ((CqlBoolean)f_
-                && (CqlBoolean)g_()));
+                && g_()));
         }
 
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
@@ -782,16 +782,16 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 Code<MedicationRequest.MedicationRequestIntent> i_ = M?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? j_ = i_?.Value;
                 string k_ = context.Operators.Convert<string>(j_);
                 bool? l_ = context.Operators.Equal(k_, "order");
-                return (bool?)((CqlBoolean)l_);
+                return l_;
             }
 
             return (bool?)(/* CQL 'and' (169:5-170:28) */ ((CqlBoolean)g_
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
@@ -813,16 +813,16 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
 
-            bool? h_() {
+            CqlBoolean h_() {
                 Code<MedicationRequest.MedicationRequestIntent> i_ = M?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? j_ = i_?.Value;
                 string k_ = context.Operators.Convert<string>(j_);
                 bool? l_ = context.Operators.Equal(k_, "order");
-                return (bool?)((CqlBoolean)l_);
+                return l_;
             }
 
             return (bool?)(/* CQL 'and' (174:5-175:28) */ ((CqlBoolean)g_
-                && (CqlBoolean)h_()));
+                && h_()));
         }
 
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
@@ -846,7 +846,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 List<CodeableConcept> j_ = O?.Category;
 
                 CqlConcept k_(CodeableConcept @this) {
@@ -864,11 +864,11 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
                 IEnumerable<CqlConcept> m_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_, l_);
                 bool? n_ = context.Operators.Exists<CqlConcept>(m_);
-                return (bool?)((CqlBoolean)n_);
+                return n_;
             }
 
             return (bool?)(/* CQL 'and' (180:5-183:7) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
@@ -892,7 +892,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 List<CodeableConcept> j_ = O?.Category;
 
                 CqlConcept k_(CodeableConcept @this) {
@@ -910,11 +910,11 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
                 IEnumerable<CqlConcept> m_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_, l_);
                 bool? n_ = context.Operators.Exists<CqlConcept>(m_);
-                return (bool?)((CqlBoolean)n_);
+                return n_;
             }
 
             return (bool?)(/* CQL 'and' (187:5-190:7) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);

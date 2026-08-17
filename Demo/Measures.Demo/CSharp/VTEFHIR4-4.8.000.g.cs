@@ -98,17 +98,17 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
             CqlValueSet l_ = this.Intensive_Care_Unit(context);
             bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
 
-            bool? n_() {
+            CqlBoolean n_() {
                 Period p_ = Encounter?.Period;
                 CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, p_);
                 Period r_ = HospitalLocation?.Period;
                 CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, r_);
                 bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, (string)default);
-                return (bool?)((CqlBoolean)t_);
+                return t_;
             }
 
             return (bool?)(/* CQL 'and' (23:6-24:57) */ ((CqlBoolean)m_
-                && (CqlBoolean)n_()));
+                && n_()));
         }
 
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);

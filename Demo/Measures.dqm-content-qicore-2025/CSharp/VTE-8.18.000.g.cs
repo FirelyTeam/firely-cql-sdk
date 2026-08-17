@@ -91,7 +91,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
             IEnumerable<CqlConcept> h_ = context.Operators.WhereSelect<Condition, CqlConcept>(e_, f_, g_);
             bool? i_ = context.Operators.ConceptsInValueSet(h_, DiagnosisValueSet);
 
-            bool? j_() {
+            CqlBoolean j_() {
                 List<CodeableConcept> o_ = E?.ReasonCode;
 
                 CqlConcept p_(CodeableConcept @this) {
@@ -101,11 +101,11 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 
                 IEnumerable<CqlConcept> q_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)o_, p_);
                 bool? r_ = context.Operators.ConceptsInValueSet(q_, DiagnosisValueSet);
-                return (bool?)((CqlBoolean)r_);
+                return r_;
             }
 
             return (bool?)(/* CQL 'or' (42:13-43:43) */ ((CqlBoolean)i_
-                || (CqlBoolean)j_()));
+                || j_()));
         }
 
         IEnumerable<bool?> c_ = context.Operators.SelectDistinct<Encounter, bool?>((IEnumerable<Encounter>)a_, b_);
@@ -128,22 +128,22 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
             CqlValueSet d_ = this.Obstetrical_or_Pregnancy_Related_Conditions(context);
             bool? e_ = this.hasEncDiagnosisOf(context, InpatientEncounter, d_);
 
-            bool? f_() {
+            CqlBoolean f_() {
                 CqlValueSet h_ = this.Venous_Thromboembolism(context);
                 bool? i_ = this.hasEncDiagnosisOf(context, InpatientEncounter, h_);
-                return (bool?)((CqlBoolean)i_);
+                return i_;
             }
 
 
-            bool? g_() {
+            CqlBoolean g_() {
                 CqlValueSet j_ = this.Obstetrics_VTE(context);
                 bool? k_ = this.hasEncDiagnosisOf(context, InpatientEncounter, j_);
-                return (bool?)((CqlBoolean)k_);
+                return k_;
             }
 
             return !((bool?)(/* CQL 'or' (25:13-28:13) */ (/* CQL 'or' (25:14-26:78) */ ((CqlBoolean)e_
-                || (CqlBoolean)f_())
-                || (CqlBoolean)g_())));
+                || f_())
+                || g_())));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -223,7 +223,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             bool? h_ = context.Operators.ConceptInValueSet(g_ as CqlConcept, DiagnosisValueSet);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
                 bool? k_(Procedure P) {
@@ -241,11 +241,11 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
                 CodeableConcept n_ = m_?.Code;
                 CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
                 bool? p_ = context.Operators.ConceptInValueSet(o_, DiagnosisValueSet);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
             return (bool?)(/* CQL 'or' (51:13-52:39) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_()));
+                || i_()));
         }
 
         IEnumerable<bool?> c_ = context.Operators.SelectDistinct<Encounter, bool?>((IEnumerable<Encounter>)a_, b_);

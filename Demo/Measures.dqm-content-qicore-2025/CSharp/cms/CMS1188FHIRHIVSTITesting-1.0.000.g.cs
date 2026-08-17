@@ -163,16 +163,16 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
             CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
             bool? al_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ai_, ak_, "day");
 
-            bool? am_() {
+            CqlBoolean am_() {
                 Code<Encounter.EncounterStatus> an_ = QualifyingEncounter?.StatusElement;
                 Encounter.EncounterStatus? ao_ = an_?.Value;
                 Code<Encounter.EncounterStatus> ap_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ao_);
                 bool? aq_ = context.Operators.Equal(ap_, "finished");
-                return (bool?)((CqlBoolean)aq_);
+                return aq_;
             }
 
             return (bool?)(/* CQL 'and' (55:7-56:51) */ ((CqlBoolean)al_
-                && (CqlBoolean)am_()));
+                && am_()));
         }
 
         bool? ah_ = context.Operators.WhereAny<Encounter>(af_, ag_);
@@ -186,50 +186,50 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
 
-        bool? c_() {
+        CqlBoolean c_() {
             CodeableConcept d_ = condition?.VerificationStatus;
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
             bool? h_ = context.Operators.Equivalent(e_, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 CodeableConcept l_ = condition?.VerificationStatus;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
                 CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
                 CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
                 bool? p_ = context.Operators.Equivalent(m_, o_);
-                return (bool?)((CqlBoolean)p_);
+                return p_;
             }
 
 
-            bool? j_() {
+            CqlBoolean j_() {
                 CodeableConcept q_ = condition?.VerificationStatus;
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
                 CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
                 bool? u_ = context.Operators.Equivalent(r_, t_);
-                return (bool?)((CqlBoolean)u_);
+                return u_;
             }
 
 
-            bool? k_() {
+            CqlBoolean k_() {
                 CodeableConcept v_ = condition?.VerificationStatus;
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
                 bool? z_ = context.Operators.Equivalent(w_, y_);
-                return (bool?)((CqlBoolean)z_);
+                return z_;
             }
 
-            return (bool?)(/* CQL 'or' (84:52-88:3) */ (/* CQL 'or' (84:54-86:66) */ (/* CQL 'or' (84:54-85:66) */ ((CqlBoolean)h_
-                || (CqlBoolean)i_())
-                || (CqlBoolean)j_())
-                || (CqlBoolean)k_()));
+            return /* CQL 'or' (84:52-88:3) */ (/* CQL 'or' (84:54-86:66) */ (/* CQL 'or' (84:54-85:66) */ ((CqlBoolean)h_
+                || i_())
+                || j_())
+                || k_());
         }
 
         return (bool?)(/* CQL 'implies' (84:3-88:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || (CqlBoolean)c_()));
+            || c_()));
     }
 
 
@@ -312,7 +312,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
             DataType e_ = ChlamydiaTest?.Value;
             object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
 
-            bool? g_() {
+            CqlBoolean g_() {
                 Code<ObservationStatus> i_ = ChlamydiaTest?.StatusElement;
                 ObservationStatus? j_ = i_?.Value;
                 string k_ = context.Operators.Convert<string>(j_);
@@ -322,11 +322,11 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
                     "corrected",
                 ];
                 bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
 
-            bool? h_() {
+            CqlBoolean h_() {
                 object n_;
                 DataType r_ = ChlamydiaTest?.Effective;
                 object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
@@ -357,12 +357,12 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
                 CqlDateTime o_ = QICoreCommon_4_0_000.Instance.latest(context, n_);
                 CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                 bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, "day");
-                return (bool?)((CqlBoolean)q_);
+                return q_;
             }
 
             return (bool?)(/* CQL 'and' (67:5-69:79) */ (/* CQL 'and' (67:11-68:69) */ ((CqlBoolean)(!((bool?)(f_ is null)))
-                && (CqlBoolean)g_())
-                && (CqlBoolean)h_()));
+                && g_())
+                && h_()));
         }
 
         bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -385,7 +385,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
             DataType e_ = GonorrheaTest?.Value;
             object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
 
-            bool? g_() {
+            CqlBoolean g_() {
                 Code<ObservationStatus> i_ = GonorrheaTest?.StatusElement;
                 ObservationStatus? j_ = i_?.Value;
                 string k_ = context.Operators.Convert<string>(j_);
@@ -395,11 +395,11 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
                     "corrected",
                 ];
                 bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
 
-            bool? h_() {
+            CqlBoolean h_() {
                 object n_;
                 DataType r_ = GonorrheaTest?.Effective;
                 object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
@@ -430,12 +430,12 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
                 CqlDateTime o_ = QICoreCommon_4_0_000.Instance.latest(context, n_);
                 CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                 bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, "day");
-                return (bool?)((CqlBoolean)q_);
+                return q_;
             }
 
             return (bool?)(/* CQL 'and' (73:5-75:79) */ (/* CQL 'and' (73:11-74:69) */ ((CqlBoolean)(!((bool?)(f_ is null)))
-                && (CqlBoolean)g_())
-                && (CqlBoolean)h_()));
+                && g_())
+                && h_()));
         }
 
         bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -458,7 +458,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
             DataType e_ = SyphilisTest?.Value;
             object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
 
-            bool? g_() {
+            CqlBoolean g_() {
                 Code<ObservationStatus> i_ = SyphilisTest?.StatusElement;
                 ObservationStatus? j_ = i_?.Value;
                 string k_ = context.Operators.Convert<string>(j_);
@@ -468,11 +468,11 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
                     "corrected",
                 ];
                 bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
-                return (bool?)((CqlBoolean)m_);
+                return m_;
             }
 
 
-            bool? h_() {
+            CqlBoolean h_() {
                 object n_;
                 DataType r_ = SyphilisTest?.Effective;
                 object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
@@ -503,12 +503,12 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
                 CqlDateTime o_ = QICoreCommon_4_0_000.Instance.latest(context, n_);
                 CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                 bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, "day");
-                return (bool?)((CqlBoolean)q_);
+                return q_;
             }
 
             return (bool?)(/* CQL 'and' (79:5-81:78) */ (/* CQL 'and' (79:11-80:68) */ ((CqlBoolean)(!((bool?)(f_ is null)))
-                && (CqlBoolean)g_())
-                && (CqlBoolean)h_()));
+                && g_())
+                && h_()));
         }
 
         bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);

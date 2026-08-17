@@ -323,16 +323,16 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
             bool? r_ = context.Operators.In<CqlDateTime>(o_, q_, "day");
 
-            bool? s_() {
+            CqlBoolean s_() {
                 CqlInterval<CqlDateTime> t_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, tuple_figmirinmncaavfkbmahdktce?.URI);
                 Period u_ = tuple_figmirinmncaavfkbmahdktce?.QualifyingEncounters?.Period;
                 CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
                 bool? w_ = context.Operators.OverlapsBefore(t_, v_, (string)default);
-                return (bool?)((CqlBoolean)w_);
+                return w_;
             }
 
             return (bool?)(/* CQL 'or' (78:5-79:79) */ ((CqlBoolean)r_
-                || (CqlBoolean)s_()));
+                || s_()));
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?> j_ = context.Operators.SelectWhere<ValueTuple<Encounter, Condition>, (CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?>(g_, h_, i_);
@@ -436,16 +436,16 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 string ap_ = context.Operators.Last<string>(ao_);
                 bool? aq_ = context.Operators.Equal(am_, ap_);
 
-                bool? ar_() {
+                CqlBoolean ar_() {
                     CodeableConcept as_ = M?.Code;
                     CqlConcept at_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, as_);
                     CqlValueSet au_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
                     bool? av_ = context.Operators.ConceptInValueSet(at_, au_);
-                    return (bool?)((CqlBoolean)av_);
+                    return av_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)aq_
-                    && (CqlBoolean)ar_()));
+                    && ar_()));
             }
 
             bool? al_ = context.Operators.WhereAny<Medication>(aj_, ak_);
@@ -501,16 +501,16 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                     string u_ = context.Operators.Last<string>(t_);
                     bool? v_ = context.Operators.Equal(r_, u_);
 
-                    bool? w_() {
+                    CqlBoolean w_() {
                         CodeableConcept x_ = M?.Code;
                         CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
                         CqlValueSet z_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
                         bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
-                        return (bool?)((CqlBoolean)aa_);
+                        return aa_;
                     }
 
                     return (bool?)(/* CQL 'and' */ ((CqlBoolean)v_
-                        && (CqlBoolean)w_()));
+                        && w_()));
                 }
 
                 bool? q_ = context.Operators.WhereAny<Medication>(o_, p_);
@@ -534,15 +534,15 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(af_, ah_, true, true);
                 bool? aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, (string)default);
 
-                bool? ak_() {
+                CqlBoolean ak_() {
                     Period al_ = EncounterWithURI?.Period;
                     CqlInterval<CqlDateTime> am_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, al_);
                     CqlDateTime an_ = context.Operators.Start(am_);
-                    return (bool?)((CqlBoolean)(!((bool?)(an_ is null))));
+                    return !((bool?)(an_ is null));
                 }
 
                 return (bool?)(/* CQL 'and' (107:17-107:104) */ ((CqlBoolean)aj_
-                    && (CqlBoolean)ak_()));
+                    && ak_()));
             }
 
             bool? n_ = context.Operators.WhereAny<MedicationRequest>(l_, m_);
@@ -577,7 +577,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             int? m_ = context.Operators.CalculateAgeAt(i_, l_, "month");
             bool? n_ = context.Operators.GreaterOrEqual(m_, 3);
 
-            bool? o_() {
+            CqlBoolean o_() {
                 Patient p_ = this.Patient(context);
                 Date q_ = p_?.BirthDateElement;
                 string r_ = q_?.Value;
@@ -587,11 +587,11 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 CqlDate v_ = context.Operators.DateFrom(u_);
                 int? w_ = context.Operators.CalculateAgeAt(s_, v_, "year");
                 bool? x_ = context.Operators.LessOrEqual(w_, 17);
-                return (bool?)((CqlBoolean)x_);
+                return x_;
             }
 
             return (bool?)(/* CQL 'and' (112:5-113:69) */ ((CqlBoolean)n_
-                && (CqlBoolean)o_()));
+                && o_()));
         }
 
         Encounter c_(Encounter EncounterWithURI) => EncounterWithURI;

@@ -126,7 +126,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
         bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
 
-        bool? e_() {
+        CqlBoolean e_() {
             CqlValueSet l_ = this.Frailty_Diagnosis(context);
             IEnumerable<Condition> m_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
             IEnumerable<Condition> n_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, m_);
@@ -139,11 +139,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             }
 
             bool? p_ = context.Operators.WhereAny<Condition>(n_, o_);
-            return (bool?)((CqlBoolean)p_);
+            return p_;
         }
 
 
-        bool? f_() {
+        CqlBoolean f_() {
             CqlValueSet t_ = this.Frailty_Encounter(context);
             IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
             IEnumerable<Encounter> v_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, u_);
@@ -157,11 +157,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             }
 
             bool? x_ = context.Operators.WhereAny<Encounter>(v_, w_);
-            return (bool?)((CqlBoolean)x_);
+            return x_;
         }
 
 
-        bool? g_() {
+        CqlBoolean g_() {
             CqlValueSet ac_ = this.Frailty_Symptom(context);
             IEnumerable<Observation> ad_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ac_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
@@ -174,13 +174,13 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             }
 
             bool? af_ = context.Operators.WhereAny<Observation>(ad_, ae_);
-            return (bool?)((CqlBoolean)af_);
+            return af_;
         }
 
         return (bool?)(/* CQL 'or' (58:3-69:5) */ (/* CQL 'or' (58:3-66:5) */ (/* CQL 'or' (58:3-63:5) */ ((CqlBoolean)d_
-            || (CqlBoolean)e_())
-            || (CqlBoolean)f_())
-            || (CqlBoolean)g_()));
+            || e_())
+            || f_())
+            || g_()));
     }
 
 
@@ -216,7 +216,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             IEnumerable<Condition> x_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, w_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
             bool? y_ = NCQAEncounter_1_0_0.Instance.Encounter_Has_Diagnosis(context, OutpatientEncounter, x_);
 
-            bool? z_() {
+            CqlBoolean z_() {
                 Period aa_ = OutpatientEncounter?.Period;
                 CqlInterval<CqlDateTime> ab_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, aa_);
                 CqlDateTime ac_ = context.Operators.Start(ab_);
@@ -230,11 +230,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 CqlDate ak_ = context.Operators.DateFrom(aj_);
                 CqlInterval<CqlDate> al_ = context.Operators.Interval(ai_, ak_, true, true);
                 bool? am_ = context.Operators.In<CqlDate>(ad_, al_, (string)default);
-                return (bool?)((CqlBoolean)am_);
+                return am_;
             }
 
             return (bool?)(/* CQL 'and' (96:5-98:34) */ ((CqlBoolean)y_
-                && (CqlBoolean)z_()));
+                && z_()));
         }
 
 
@@ -375,7 +375,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
             bool? h_ = NCQAEncounter_1_0_0.Instance.Encounter_Has_Diagnosis(context, InpatientEncounter, g_);
 
-            bool? i_() {
+            CqlBoolean i_() {
                 Period j_ = InpatientEncounter?.Period;
                 CqlInterval<CqlDateTime> k_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, j_);
                 CqlDateTime l_ = context.Operators.Start(k_);
@@ -389,11 +389,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 CqlDate t_ = context.Operators.DateFrom(s_);
                 CqlInterval<CqlDate> u_ = context.Operators.Interval(r_, t_, true, true);
                 bool? v_ = context.Operators.In<CqlDate>(m_, u_, (string)default);
-                return (bool?)((CqlBoolean)v_);
+                return v_;
             }
 
             return (bool?)(/* CQL 'and' (116:7-118:36) */ ((CqlBoolean)h_
-                && (CqlBoolean)i_()));
+                && i_()));
         }
 
         bool? e_ = context.Operators.WhereAny<Encounter>(c_, d_);
@@ -461,16 +461,16 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 string r_ = context.Operators.Last<string>(q_);
                 bool? s_ = context.Operators.Equal(n_, r_);
 
-                bool? t_() {
+                CqlBoolean t_() {
                     CodeableConcept u_ = M?.Code;
                     CqlConcept v_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, u_);
                     CqlValueSet w_ = this.Dementia_Medications(context);
                     bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
-                    return (bool?)((CqlBoolean)x_);
+                    return x_;
                 }
 
                 return (bool?)(/* CQL 'and' */ ((CqlBoolean)s_
-                    && (CqlBoolean)t_()));
+                    && t_()));
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -522,16 +522,16 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         CqlInterval<int?> i_ = context.Operators.Interval(66, 80, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
-        bool? k_() {
+        CqlBoolean k_() {
             bool? m_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service(context);
-            return (bool?)(/* CQL 'or' (34:11-38:7) */ (/* CQL 'or' (34:13-36:62) */ (/* CQL 'or' (34:13-35:62) */ ((CqlBoolean)m_
+            return /* CQL 'or' (34:11-38:7) */ (/* CQL 'or' (34:13-36:62) */ (/* CQL 'or' (34:13-35:62) */ ((CqlBoolean)m_
                 || (CqlBoolean)(this.Acute_Inpatient_Encounter_with_Advanced_Illness(context)))
                 || (CqlBoolean)(this.Acute_Inpatient_Discharge_with_Advanced_Illness(context)))
-                || (CqlBoolean)(this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period(context))));
+                || (CqlBoolean)(this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period(context)));
         }
 
 
-        bool? l_() {
+        CqlBoolean l_() {
             Patient n_ = this.Patient(context);
             Date o_ = n_?.BirthDateElement;
             string p_ = o_?.Value;
@@ -541,14 +541,14 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             CqlDate t_ = context.Operators.DateFrom(s_);
             int? u_ = context.Operators.CalculateAgeAt(q_, t_, "year");
             bool? v_ = context.Operators.GreaterOrEqual(u_, 81);
-            return (bool?)(/* CQL 'and' (40:8-44:5) */ ((CqlBoolean)v_
-                && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context))));
+            return /* CQL 'and' (40:8-44:5) */ ((CqlBoolean)v_
+                && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)));
         }
 
         return (bool?)(/* CQL 'or' (30:3-44:5) */ (/* CQL 'and' (30:3-39:3) */ (/* CQL 'and' (30:5-33:43) */ ((CqlBoolean)j_
             && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)))
-            && (CqlBoolean)k_())
-            || (CqlBoolean)l_()));
+            && k_())
+            || l_()));
     }
 
 
@@ -570,17 +570,17 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         bool? i_ = context.Operators.GreaterOrEqual(h_, 66);
 
-        bool? j_() {
+        CqlBoolean j_() {
             bool? k_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service(context);
-            return (bool?)(/* CQL 'or' (51:9-55:5) */ (/* CQL 'or' (51:11-53:60) */ (/* CQL 'or' (51:11-52:60) */ ((CqlBoolean)k_
+            return /* CQL 'or' (51:9-55:5) */ (/* CQL 'or' (51:11-53:60) */ (/* CQL 'or' (51:11-52:60) */ ((CqlBoolean)k_
                 || (CqlBoolean)(this.Acute_Inpatient_Encounter_with_Advanced_Illness(context)))
                 || (CqlBoolean)(this.Acute_Inpatient_Discharge_with_Advanced_Illness(context)))
-                || (CqlBoolean)(this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period(context))));
+                || (CqlBoolean)(this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period(context)));
         }
 
         return (bool?)(/* CQL 'and' (47:3-55:5) */ (/* CQL 'and' (47:3-50:41) */ ((CqlBoolean)i_
             && (CqlBoolean)(this.Has_Criteria_Indicating_Frailty(context)))
-            && (CqlBoolean)j_()));
+            && j_()));
     }
 
 

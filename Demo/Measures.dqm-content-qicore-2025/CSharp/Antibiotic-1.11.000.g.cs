@@ -98,15 +98,15 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
                 CqlInterval<CqlDateTime> n_ = context.Operators.Interval(k_, m_, true, true);
                 bool? o_ = context.Operators.In<CqlDateTime>(h_, n_, "day");
 
-                bool? p_() {
+                CqlBoolean p_() {
                     Period q_ = episode?.Period;
                     CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
                     CqlDateTime s_ = context.Operators.Start(r_);
-                    return (bool?)((CqlBoolean)(!((bool?)(s_ is null))));
+                    return !((bool?)(s_ is null));
                 }
 
                 return (bool?)(/* CQL 'and' (22:19-22:119) */ ((CqlBoolean)o_
-                    && (CqlBoolean)p_()));
+                    && p_()));
             }
 
             bool? f_ = context.Operators.WhereAny<Condition>(competingConditions, e_);

@@ -107,7 +107,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
 
         bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
 
-        bool? g_() {
+        CqlBoolean g_() {
             CqlValueSet o_ = this.Palliative_Care_Diagnosis(context);
             IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -122,11 +122,11 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
             }
 
             bool? u_ = context.Operators.WhereAny<Condition>(s_, t_);
-            return (bool?)((CqlBoolean)u_);
+            return u_;
         }
 
 
-        bool? h_() {
+        CqlBoolean h_() {
             CqlValueSet y_ = this.Palliative_Care_Encounter(context);
             IEnumerable<Encounter> z_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             IEnumerable<Encounter> aa_ = Status_1_15_000.Instance.isEncounterPerformed(context, z_);
@@ -140,11 +140,11 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
             }
 
             bool? ac_ = context.Operators.WhereAny<Encounter>(aa_, ab_);
-            return (bool?)((CqlBoolean)ac_);
+            return ac_;
         }
 
 
-        bool? i_() {
+        CqlBoolean i_() {
             CqlValueSet ah_ = this.Palliative_Care_Intervention(context);
             IEnumerable<Procedure> ai_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, ah_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
             IEnumerable<Procedure> aj_ = Status_1_15_000.Instance.isInterventionPerformed(context, ai_);
@@ -193,13 +193,13 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
             }
 
             bool? al_ = context.Operators.WhereAny<Procedure>(aj_, ak_);
-            return (bool?)((CqlBoolean)al_);
+            return al_;
         }
 
         return (bool?)(/* CQL 'or' (22:3-34:5) */ (/* CQL 'or' (22:3-31:5) */ (/* CQL 'or' (22:3-28:5) */ ((CqlBoolean)f_
-            || (CqlBoolean)g_())
-            || (CqlBoolean)h_())
-            || (CqlBoolean)i_()));
+            || g_())
+            || h_())
+            || i_()));
     }
 
 

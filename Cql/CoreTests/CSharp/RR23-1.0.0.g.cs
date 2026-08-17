@@ -171,7 +171,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
             bool? i_ = context.Operators.Equivalent(f_, h_);
 
-            bool? j_() {
+            CqlBoolean j_() {
                 Condition k_ = this.Latest_injury_due_to_falling_rock(context);
                 Condition[] l_ = [
                     k_,
@@ -187,23 +187,23 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     CqlInterval<CqlDateTime> v_ = context.Operators.Interval(u_, s_, true, false);
                     bool? w_ = context.Operators.In<CqlDateTime>(q_ as CqlDateTime, v_, (string)default);
 
-                    bool? x_() {
+                    CqlBoolean x_() {
                         DataType y_ = SD?.Occurrence;
                         CqlDateTime z_ = context.Operators.LateBoundProperty<CqlDateTime>(y_, "value");
-                        return (bool?)((CqlBoolean)(!((bool?)(z_ is null))));
+                        return !((bool?)(z_ is null));
                     }
 
                     return (bool?)(/* CQL 'and' (48:52-48:126) */ ((CqlBoolean)w_
-                        && (CqlBoolean)x_()));
+                        && x_()));
                 }
 
                 IEnumerable<Condition> n_ = context.Operators.Where<Condition>((IEnumerable<Condition>)l_, m_);
                 Condition o_ = context.Operators.SingletonFrom<Condition>(n_);
-                return (bool?)((CqlBoolean)(!((bool?)(o_ is null))));
+                return !((bool?)(o_ is null));
             }
 
             return (bool?)(/* CQL 'and' (47:7-48:140) */ ((CqlBoolean)i_
-                && (CqlBoolean)j_()));
+                && j_()));
         }
 
         IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_, b_);
