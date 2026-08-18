@@ -28,7 +28,6 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Invocation" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Elm" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="Hl7.Cql.MultiPackager" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 	<!-- Debug configuration InternalsVisibleTo without public key -->
