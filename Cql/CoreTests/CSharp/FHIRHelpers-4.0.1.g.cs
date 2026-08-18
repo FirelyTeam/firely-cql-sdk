@@ -177,7 +177,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
         {
             return default;
         }
-        else if ((!((bool?)(quantity?.ComparatorElement is null))) ?? false)
+        else if (((bool?)(!((bool?)(quantity?.ComparatorElement is null)))) ?? false)
         {
             object a_ = context.Operators.Message<object>((object)null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported", "Error", "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.");
             return a_ as CqlQuantity;

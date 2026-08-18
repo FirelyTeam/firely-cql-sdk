@@ -234,7 +234,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
             CqlBoolean g_ = context.Operators.WhereAny<CqlInterval<CqlDate>>(e_, f_);
             return g_;
         }
-        else if ((!(context.Operators.In<CqlDate>(AnchorDate, participationPeriod, (string)default))) ?? false)
+        else if (((bool?)(!(context.Operators.In<CqlDate>(AnchorDate, participationPeriod, (string)default)))) ?? false)
         {
 
             bool? k_(Coverage @this) {

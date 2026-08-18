@@ -557,8 +557,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 return u_;
             }
 
-            if ((!((bool?)((CqlBoolean)(k_ is null)
-                /* CQL 'or' (177:14-177:84) */ || l_()))) ?? false)
+            if (((bool?)(!((bool?)((CqlBoolean)(k_ is null)
+                /* CQL 'or' (177:14-177:84) */ || l_())))) ?? false)
             {
                 CqlDateTime v_ = context.Operators.Start(j_);
                 MedicationRequest.DispenseRequestComponent w_ = R?.DispenseRequest;

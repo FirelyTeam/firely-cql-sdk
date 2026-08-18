@@ -307,7 +307,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         IEnumerable<CqlDate> a_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
         IEnumerable<CqlDate> b_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
         IEnumerable<CqlDate> c_ = context.Operators.Union<CqlDate>(a_, b_);
-        if ((!((bool?)(c_ is null))) ?? false)
+        if (((bool?)(!((bool?)(c_ is null)))) ?? false)
         {
             return c_;
         }

@@ -75,7 +75,20 @@ internal partial class CSharpEmitter
     /// cheap to get wrong is not worth a few cosmetic casts.</para>
     /// </summary>
     private bool DenotesCqlBoolean(Atom atom) =>
-        CodeTypeRules.IsCqlBoolean(atom.Type) || IsCqlBooleanLocal(atom);
+        CodeTypeRules.IsCqlBoolean(atom.Type)
+        || IsCqlBooleanLocal(atom)
+        || (atom.Node is CodeUnary { Op: CodeUnaryOp.Not, Operand: CodeLocal negated }
+            && _cqlBooleanLocals.Contains(negated));
+
+    /// <summary>
+    /// <paramref name="code"/> made safe to hang a member access off. A bare identifier needs
+    /// nothing; anything else must be parenthesized, and here that is a CORRECTNESS requirement
+    /// rather than tidiness: <c>!e_.IsTrue</c> parses as <c>!(e_.IsTrue)</c>, which disagrees with
+    /// <c>(!e_).IsTrue</c> for exactly the unknown value — <c>Null</c> gives <see langword="true"/>
+    /// the first way and <see langword="false"/> the second.
+    /// </summary>
+    private static string MemberReceiver(string code) =>
+        System.Text.RegularExpressions.Regex.IsMatch(code, @"^\w+$") ? code : $"({code})";
 
     /// <summary>
     /// A reference to <paramref name="atom"/> in a position that genuinely needs <c>bool?</c>,
@@ -99,8 +112,19 @@ internal partial class CSharpEmitter
     /// rewrite nor this cast, and a bare <c>?? false</c> over a <see cref="CqlBoolean"/> is CS0019.
     /// Sharing one predicate makes the two exhaustive by construction.
     /// </remarks>
+    /// <remarks>
+    /// Also casts unconditionally for a NEGATION, which is deliberately conservative. Whether
+    /// <c>!x</c> prints as a <see cref="CqlBoolean"/> depends on how its operand printed, and finding
+    /// that out means linearizing the operand — which cannot be done from here: each
+    /// <c>PrintBoth</c> has its OWN memo, so linearizing a grandchild from this level hoists it a
+    /// second time and leaves the first copy unreferenced (CS8321, observed twice). A redundant
+    /// <c>(bool?)</c> over something already <c>bool?</c> is legal and harmless; a missing one is
+    /// CS0019, so the asymmetry is worth paying.
+    /// </remarks>
     private string AsNullableBool(Atom atom, string printed) =>
-        DenotesCqlBoolean(atom) ? $"((bool?){printed})" : printed;
+        DenotesCqlBoolean(atom) || atom.Node is CodeUnary { Op: CodeUnaryOp.Not }
+            ? $"((bool?){printed})"
+            : printed;
 
     /// <param name="typeToCSharpConverter">Renders .NET types as C# type syntax.</param>
     /// <param name="namingConventions">The generated-class naming conventions the printed

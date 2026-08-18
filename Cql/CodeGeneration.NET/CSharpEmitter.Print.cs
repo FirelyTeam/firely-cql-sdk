@@ -534,8 +534,8 @@ internal partial class CSharpEmitter
             // constant pattern form) and keeps the value from round-tripping through bool? just to
             // be tested. Applies to any CqlBoolean-valued operand, a whole logical chain included —
             // not only a local.
-            CodeBinaryOp.Equal when right is "null" or "default" && DenotesCqlBoolean(leftAtom) => $"{left}.{nameof(CqlBoolean.IsNull)}",
-            CodeBinaryOp.NotEqual when right is "null" or "default" && DenotesCqlBoolean(leftAtom) => $"{left}.{nameof(CqlBoolean.IsNotNull)}",
+            CodeBinaryOp.Equal when right is "null" or "default" && DenotesCqlBoolean(leftAtom) => $"{MemberReceiver(left)}.{nameof(CqlBoolean.IsNull)}",
+            CodeBinaryOp.NotEqual when right is "null" or "default" && DenotesCqlBoolean(leftAtom) => $"{MemberReceiver(left)}.{nameof(CqlBoolean.IsNotNull)}",
             CodeBinaryOp.Equal when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is null",
             CodeBinaryOp.NotEqual when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is not null",
             // The short-circuit guards print as constant patterns: same lowering as the
@@ -547,14 +547,14 @@ internal partial class CSharpEmitter
             // Same again for `is true`/`is false`: IsTrue/IsFalse ARE those patterns, and are total
             // in the same way CQL's operators are (null yields false, never null).
             CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool tf } && DenotesCqlBoolean(leftAtom) =>
-                $"{originPrefix}{left}.{(tf ? nameof(CqlBoolean.IsTrue) : nameof(CqlBoolean.IsFalse))}",
+                $"{originPrefix}{MemberReceiver(left)}.{(tf ? nameof(CqlBoolean.IsTrue) : nameof(CqlBoolean.IsFalse))}",
             CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool b } && CodeTypeRules.IsNullableBool(binary.Left.Type) => $"{originPrefix}{left} is {(b ? "true" : "false")}",
             CodeBinaryOp.Equal => $"{left} == {right}",
             CodeBinaryOp.NotEqual => $"{left} != {right}",
             // `x ?? false` is asking "is it definitely true", which IsTrue answers without leaving
             // the type. Any other right operand means the result must stay nullable, so that is the
             // one case still converting back.
-            CodeBinaryOp.Coalesce when right is "false" && DenotesCqlBoolean(leftAtom) => $"{left}.{nameof(CqlBoolean.IsTrue)}",
+            CodeBinaryOp.Coalesce when right is "false" && DenotesCqlBoolean(leftAtom) => $"{MemberReceiver(left)}.{nameof(CqlBoolean.IsTrue)}",
             CodeBinaryOp.Coalesce => $"{AsNullableBool(leftAtom, left)} ?? {right}",
             CodeBinaryOp.OrElse => $"{left} || {right}",
             CodeBinaryOp.AndAlso => $"{left} && {right}",
@@ -711,11 +711,11 @@ internal partial class CSharpEmitter
         return binary.Op switch
         {
             CodeBinaryOp.Equal when rightCode is "null" or "default" && DenotesCqlBoolean(testedAtom) =>
-                $"{tested}.{nameof(CqlBoolean.IsNotNull)}",
+                $"{MemberReceiver(tested)}.{nameof(CqlBoolean.IsNotNull)}",
             CodeBinaryOp.NotEqual when rightCode is "null" or "default" && DenotesCqlBoolean(testedAtom) =>
-                $"{tested}.{nameof(CqlBoolean.IsNull)}",
+                $"{MemberReceiver(tested)}.{nameof(CqlBoolean.IsNull)}",
             CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool b } && DenotesCqlBoolean(testedAtom) =>
-                $"{tested}.{(b ? nameof(CqlBoolean.IsNotTrue) : nameof(CqlBoolean.IsNotFalse))}",
+                $"{MemberReceiver(tested)}.{(b ? nameof(CqlBoolean.IsNotTrue) : nameof(CqlBoolean.IsNotFalse))}",
             // A reference (or any non-CqlBoolean) null check: `!(x is null)` IS `x is not null`.
             CodeBinaryOp.Equal when rightCode is "null" or "default" => $"{NullPatternOperand(testedAtom, tested)} is not null",
             CodeBinaryOp.NotEqual when rightCode is "null" or "default" => $"{NullPatternOperand(testedAtom, tested)} is null",

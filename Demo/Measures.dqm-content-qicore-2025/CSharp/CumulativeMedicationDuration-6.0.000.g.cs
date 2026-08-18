@@ -1233,7 +1233,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
     [CqlFunctionDefinition("Quantity")]
     public CqlQuantity Quantity(CqlContext context, decimal? value, string unit) =>
-    ((!((bool?)(value is null))) ?? false
+    (((bool?)(!((bool?)(value is null)))) ?? false
         ? new CqlQuantity(value, unit)
         : default);
 
@@ -1782,7 +1782,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
     [CqlFunctionDefinition("CumulativeDuration")]
     public int? CumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
     {
-        if ((!((bool?)(Intervals is null))) ?? false)
+        if (((bool?)(!((bool?)(Intervals is null)))) ?? false)
         {
             IEnumerable<CqlInterval<CqlDate>> a_ = context.Operators.Collapse(Intervals, "day");
 
@@ -1808,7 +1808,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
     [CqlFunctionDefinition("cumulativeDuration")]
     public int? cumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
     {
-        if ((!((bool?)(Intervals is null))) ?? false)
+        if (((bool?)(!((bool?)(Intervals is null)))) ?? false)
         {
             IEnumerable<CqlInterval<CqlDate>> a_ = context.Operators.Collapse(Intervals, "day");
 

@@ -610,7 +610,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 
                         (CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)? ak_(Claim.ItemComponent i) {
                             CqlInterval<CqlDateTime> az_;
-                            if ((!((bool?)(i?.Quantity is null))) ?? false)
+                            if (((bool?)(!((bool?)(i?.Quantity is null)))) ?? false)
                             {
                                 CqlInterval<CqlDateTime> bb_;
                                 DataType bc_ = i?.Serviced;
@@ -925,7 +925,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     ];
 
                     (CqlTupleMetadata, Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ax_((CqlTupleMetadata, Claim ProcedureItems)? HeaderDefinition) {
-                        if ((!((bool?)(HeaderDefinition?.ProcedureItems is null))) ?? false)
+                        if (((bool?)(!((bool?)(HeaderDefinition?.ProcedureItems is null)))) ?? false)
                         {
                             Claim cr_ = HeaderDefinition?.ProcedureItems;
                             List<Claim.ItemComponent> cs_ = cr_?.Item;
@@ -1285,7 +1285,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                 IEnumerable<Claim> ai_ = LineItemDefinition?.LineItems;
 
                 (CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? aj_(Claim ClaimWithDiagnosis) {
-                    if ((!((bool?)(ClaimWithDiagnosis is null))) ?? false)
+                    if (((bool?)(!((bool?)(ClaimWithDiagnosis is null)))) ?? false)
                     {
                         IEnumerable<Claim> an_ = LineItemDefinition?.LineItems;
 
@@ -2553,7 +2553,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     IEnumerable<Claim.ItemComponent> bo_ = context.Operators.Flatten<Claim.ItemComponent>(bn_);
 
                     CqlInterval<CqlDate> bp_(Claim.ItemComponent i) {
-                        if ((!((bool?)(i?.Quantity is null))) ?? false)
+                        if (((bool?)(!((bool?)(i?.Quantity is null)))) ?? false)
                         {
                             DataType ca_ = i?.Serviced;
                             CqlInterval<CqlDateTime> cb_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ca_);
