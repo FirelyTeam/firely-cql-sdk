@@ -14,23 +14,47 @@
   reach out to an enclosing local — that would turn it into captured closure state and allocate — so
   a subexpression the enclosing scope already computed is emitted again inside the function.
 
-  The per-operator table below was measured against the *guarded* shape this change originally
-  emitted; the guards were subsequently replaced by `&&`/`||` expressions (see
-  [1574-cqlboolean-lowering.md](1574-cqlboolean-lowering.md)), which removed the sibling-branch
-  duplication but kept the local-function duplication. The direction and the order of magnitude
-  still hold, the exact figures no longer do. Counted over the checked-in corpora, excluding the new
-  test fixture: eight operators ended up with **more** calls (55 in total: `ConvertIntegerToDecimal`
-  199 → 225, `ConvertDateToDateTime` 268 → 283, `DateFrom` 498 → 503, `LateBoundProperty`
-  603 → 607, `Exists` +2, and `Convert`/`Equivalent`/`Interval` +1 each) and eight with **fewer**
-  (75 in total: `Start` 1189 → 1176, `Subtract`/`Multiply`/`End`/`ConvertIntegerToQuantity` −10
-  each, `Add`/`Quantity` −8, `Count` −6). Net, excluding the operators this change eliminates
-  outright: 20 fewer calls.
+  Measured across every checked-in generated corpus, `develop` against this branch as it now stands
+  (emitted **call sites**, not runtime executions):
 
-  Two facts that are not order-of-magnitude claims and do still hold exactly: `Operators.Retrieve<`
-  lands at its previous count, so no additional FHIR retrieve is emitted anywhere, and no
-  `Message()` call site is duplicated in any library — the repeats are conversions and property
-  reads. Generated code grows by **7,126 net lines** across 153 files as this branch stands, of which
-  roughly 1.1k is the new test fixture rather than shipped library code. (#1514)
+  | call | develop | now | delta |
+  |---|---|---|---|
+  | `FHIRHelpers…ToValue` | 4,159 | 1,315 | **−2,844** |
+  | `Operators.And` | 2,092 | 0 | −2,092 |
+  | `Operators.Not` | 958 | 0 | −958 |
+  | `Operators.Or` | 739 | 0 | −739 |
+  | `Operators.LateBoundProperty` | 603 | 459 | −144 |
+  | `Operators.Implies` | 37 | 0 | −37 |
+  | `Operators.IsTrue` | 9 | 0 | −9 |
+  | `FHIRHelpers…ToInterval` | 1,446 | 1,714 | **+268** |
+  | `FHIRHelpers…ToConcept` | 580 | 761 | +181 |
+  | `Operators.Start` | 1,189 | 1,329 | +140 |
+  | `Operators.End` | 794 | 863 | +69 |
+  | `Operators.Retrieve` | 2,307 | 2,335 | **+28** |
+  | `Operators.ConvertIntegerToDecimal` | 199 | 225 | +26 |
+  | | | **net** | **−6,020** |
+
+  The two directions have different causes. The large decreases are the operators this change
+  lowers natively (`And`/`Or`/`Not`/`Implies`/`IsTrue` become C# operators and disappear as calls),
+  plus **`ToValue` losing 2,844 call sites to a dedup fix**: a branch scope used to recompute
+  whatever its enclosing scope had already hoisted, so `ToValue(context, x?.Performed)` was emitted
+  once above an `if` and identically again inside it. Branch scopes now reuse the enclosing local.
+  That fix came out of review feedback on this PR.
+
+  The increases are the local-function cost: a right operand too large to inline moves into a
+  hoisted function whose body deliberately does not reach an enclosing local, so a subexpression the
+  enclosing scope already has is emitted again inside it.
+
+  **Correcting an earlier claim in this fragment:** it previously stated that `Operators.Retrieve<`
+  landed at exactly its previous count and that no additional FHIR retrieve was emitted anywhere.
+  That was true of the interim guarded shape and is **no longer true** — it is +28 sites across 8
+  files, concentrated in two (+14 each). Most of the added sites sit inside local functions, whose
+  bodies run only when the operator does not skip, so this is not necessarily +28 retrieves at run
+  time; but the emitted count did move and the previous wording overstated the guarantee. No
+  `Message()` call site is duplicated in any library.
+
+  Generated code grows by **7,126 net lines** across 153 files, of which roughly 1.1k is the new
+  test fixture rather than shipped library code. (#1514)
 - `xor` now short-circuits too — on a **null** left operand, which makes it the odd one out.
   Its null row is constant ("if either or both arguments are null, the result is null"), so a null
   left operand decides the result and the right operand is skipped; a `true` or `false` left
