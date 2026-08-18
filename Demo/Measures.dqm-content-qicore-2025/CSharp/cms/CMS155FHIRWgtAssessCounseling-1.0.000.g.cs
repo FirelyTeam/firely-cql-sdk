@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS155FHIRWgtAssessCounseling", "1.0.000")]
 public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleton<CMS155FHIRWgtAssessCounseling_1_0_000>
 {
@@ -182,7 +182,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
             Period y_ = ValidEncounters?.Period;
             CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
-            bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
+            CqlBoolean aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
             return aa_;
         }
 
@@ -208,15 +208,15 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(3, 17, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
         CqlBoolean k_() {
             IEnumerable<Encounter> l_ = this.Qualifying_Encounters(context);
-            bool? m_ = context.Operators.Exists<Encounter>(l_);
+            CqlBoolean m_ = context.Operators.Exists<Encounter>(l_);
             return m_;
         }
 
-        return /* CQL 'and' (40:3-43:38) */ ((CqlBoolean)j_
+        return /* CQL 'and' (40:3-43:38) */ (j_
             && k_());
     }
 
@@ -229,7 +229,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -251,7 +251,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
         bool? f_(Condition PregnancyDiag) {
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyDiag);
             CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
-            bool? j_ = context.Operators.Overlaps(h_, i_, (string)default);
+            CqlBoolean j_ = context.Operators.Overlaps(h_, i_, (string)default);
             return j_;
         }
 
@@ -268,15 +268,15 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
-        bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+        CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
 
         CqlBoolean b_() {
             IEnumerable<Condition> c_ = this.Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(context);
-            bool? d_ = context.Operators.Exists<Condition>(c_);
+            CqlBoolean d_ = context.Operators.Exists<Condition>(c_);
             return d_;
         }
 
-        return /* CQL 'or' (49:3-50:69) */ ((CqlBoolean)a_
+        return /* CQL 'or' (49:3-50:69) */ (a_
             || b_());
     }
 
@@ -297,7 +297,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             DataType f_ = BMIPercentile?.Effective;
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
-            bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
+            CqlBoolean i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 
             CqlBoolean j_() {
                 DataType k_ = BMIPercentile?.Value;
@@ -305,7 +305,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 return !((bool?)(l_ is null));
             }
 
-            return /* CQL 'and' (104:5-105:41) */ ((CqlBoolean)i_
+            return /* CQL 'and' (104:5-105:41) */ (i_
                 && j_());
         }
 
@@ -330,7 +330,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             DataType f_ = HeightExam?.Effective;
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
-            bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
+            CqlBoolean i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 
             CqlBoolean j_() {
                 DataType k_ = HeightExam?.Value;
@@ -338,7 +338,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 return !((bool?)(l_ is null));
             }
 
-            return /* CQL 'and' (94:5-95:38) */ ((CqlBoolean)i_
+            return /* CQL 'and' (94:5-95:38) */ (i_
                 && j_());
         }
 
@@ -363,7 +363,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             DataType f_ = WeightExam?.Effective;
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
-            bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
+            CqlBoolean i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 
             CqlBoolean j_() {
                 DataType k_ = WeightExam?.Value;
@@ -371,7 +371,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 return !((bool?)(l_ is null));
             }
 
-            return /* CQL 'and' (99:5-100:38) */ ((CqlBoolean)i_
+            return /* CQL 'and' (99:5-100:38) */ (i_
                 && j_());
         }
 
@@ -389,22 +389,22 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     private bool? Numerator_1_Compute(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.BMI_Percentile_in_Measurement_Period(context);
-        bool? b_ = context.Operators.Exists<Observation>(a_);
+        CqlBoolean b_ = context.Operators.Exists<Observation>(a_);
 
         CqlBoolean c_() {
             IEnumerable<Observation> e_ = this.Height_in_Measurement_Period(context);
-            bool? f_ = context.Operators.Exists<Observation>(e_);
+            CqlBoolean f_ = context.Operators.Exists<Observation>(e_);
             return f_;
         }
 
 
         CqlBoolean d_() {
             IEnumerable<Observation> g_ = this.Weight_in_Measurement_Period(context);
-            bool? h_ = context.Operators.Exists<Observation>(g_);
+            CqlBoolean h_ = context.Operators.Exists<Observation>(g_);
             return h_;
         }
 
-        return /* CQL 'and' (59:3-61:45) */ (/* CQL 'and' (59:3-60:45) */ ((CqlBoolean)b_
+        return /* CQL 'and' (59:3-61:45) */ (/* CQL 'and' (59:3-60:45) */ (b_
             && c_())
             && d_());
     }
@@ -461,11 +461,11 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 }
             }
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
-            bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+            CqlBoolean i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
             return i_;
         }
 
-        bool? e_ = context.Operators.WhereAny<Procedure>(c_, d_);
+        CqlBoolean e_ = context.Operators.WhereAny<Procedure>(c_, d_);
         return e_;
     }
 
@@ -521,11 +521,11 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 }
             }
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
-            bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+            CqlBoolean i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
             return i_;
         }
 
-        bool? e_ = context.Operators.WhereAny<Procedure>(c_, d_);
+        CqlBoolean e_ = context.Operators.WhereAny<Procedure>(c_, d_);
         return e_;
     }
 
@@ -547,7 +547,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(3, 11, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
         return j_;
     }
 
@@ -569,7 +569,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(12, 17, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
         return j_;
     }
 

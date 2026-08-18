@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("TJCOverall", "8.25.000")]
 public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_000>
 {
@@ -106,18 +106,18 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             CqlDateTime k_ = context.Operators.Start(j_);
             CqlDate l_ = context.Operators.DateFrom(k_);
             int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
-            bool? n_ = context.Operators.GreaterOrEqual(m_, 18);
+            CqlBoolean n_ = context.Operators.GreaterOrEqual(m_, 18);
 
             CqlBoolean o_() {
                 Period p_ = NonElectiveEncounter?.Period;
                 CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                 CqlDateTime r_ = context.Operators.End(q_);
                 CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
+                CqlBoolean t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
                 return t_;
             }
 
-            return /* CQL 'and' (25:9-26:80) */ ((CqlBoolean)n_
+            return /* CQL 'and' (25:9-26:80) */ (n_
                 && o_());
         }
 
@@ -138,7 +138,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
 
         bool? b_(Encounter NonElectiveEncounterWithAge) {
             CqlValueSet d_ = this.Ischemic_Stroke(context);
-            bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, NonElectiveEncounterWithAge, d_);
+            CqlBoolean e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, NonElectiveEncounterWithAge, d_);
             return e_;
         }
 
@@ -162,14 +162,14 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             CodeableConcept e_ = d_?.DischargeDisposition;
             CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
             CqlValueSet g_ = this.Discharge_To_Acute_Care_Facility(context);
-            bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
+            CqlBoolean h_ = context.Operators.ConceptInValueSet(f_, g_);
 
             CqlBoolean i_() {
                 Encounter.HospitalizationComponent m_ = IschemicStrokeEncounter?.Hospitalization;
                 CodeableConcept n_ = m_?.DischargeDisposition;
                 CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
                 CqlValueSet p_ = this.Left_Against_Medical_Advice(context);
-                bool? q_ = context.Operators.ConceptInValueSet(o_, p_);
+                CqlBoolean q_ = context.Operators.ConceptInValueSet(o_, p_);
                 return q_;
             }
 
@@ -179,7 +179,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 CodeableConcept s_ = r_?.DischargeDisposition;
                 CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                 CqlValueSet u_ = this.Patient_Expired(context);
-                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                CqlBoolean v_ = context.Operators.ConceptInValueSet(t_, u_);
                 return v_;
             }
 
@@ -189,7 +189,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 CodeableConcept x_ = w_?.DischargeDisposition;
                 CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
                 CqlValueSet z_ = this.Discharged_to_Home_for_Hospice_Care(context);
-                bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
+                CqlBoolean aa_ = context.Operators.ConceptInValueSet(y_, z_);
                 return aa_;
             }
 
@@ -199,11 +199,11 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 CodeableConcept ac_ = ab_?.DischargeDisposition;
                 CqlConcept ad_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ac_);
                 CqlValueSet ae_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care(context);
-                bool? af_ = context.Operators.ConceptInValueSet(ad_, ae_);
+                CqlBoolean af_ = context.Operators.ConceptInValueSet(ad_, ae_);
                 return af_;
             }
 
-            return /* CQL 'or' (35:4-39:71) */ (/* CQL 'or' (35:11-38:55) */ (/* CQL 'or' (35:11-37:35) */ (/* CQL 'or' (35:11-36:47) */ ((CqlBoolean)h_
+            return /* CQL 'or' (35:4-39:71) */ (/* CQL 'or' (35:11-38:55) */ (/* CQL 'or' (35:11-37:35) */ (/* CQL 'or' (35:11-36:47) */ (h_
                 || i_())
                 || j_())
                 || k_())
@@ -236,7 +236,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 "completed",
                 "on-hold",
             ];
-            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            CqlBoolean n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
 
             CqlBoolean o_() {
                 Code<RequestIntent> p_ = ComfortCare?.IntentElement;
@@ -250,11 +250,11 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                     "filler-order",
                     "instance-order",
                 ];
-                bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
+                CqlBoolean u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
                 return u_;
             }
 
-            return /* CQL 'and' (48:5-49:111) */ ((CqlBoolean)n_
+            return /* CQL 'and' (48:5-49:111) */ (n_
                 && o_());
         }
 
@@ -269,7 +269,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 "completed",
                 "in-progress",
             ];
-            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
+            CqlBoolean z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
             return z_;
         }
 
@@ -334,11 +334,11 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 object j_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
                 CqlDateTime k_ = context.Operators.LateBoundProperty<CqlDateTime>(j_, "value");
                 CqlInterval<CqlDateTime> l_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, IschemicStrokeEncounter);
-                bool? m_ = context.Operators.In<CqlDateTime>(i_ ?? k_, l_, (string)default);
+                CqlBoolean m_ = context.Operators.In<CqlDateTime>(i_ ?? k_, l_, (string)default);
                 return m_;
             }
 
-            bool? f_ = context.Operators.WhereAny<object>(d_, e_);
+            CqlBoolean f_ = context.Operators.WhereAny<object>(d_, e_);
             return f_;
         }
 

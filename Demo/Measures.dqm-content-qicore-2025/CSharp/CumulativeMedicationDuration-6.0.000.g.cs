@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CumulativeMedicationDuration", "6.0.000")]
 public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton<CumulativeMedicationDuration_6_0_000>
 {
@@ -289,8 +289,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
     public decimal? ToDaily(CqlContext context, int? frequency, CqlQuantity period)
     {
         string a_ = period?.unit;
-        bool? b_ = context.Operators.Equal(a_, "h");
-        if (b_ ?? false)
+        CqlBoolean b_ = context.Operators.Equal(a_, "h");
+        if (b_.IsTrue)
         {
             decimal? c_ = context.Operators.ConvertIntegerToDecimal(frequency);
             decimal? d_ = period?.value;
@@ -300,8 +300,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
         }
         else
         {
-            bool? g_ = context.Operators.Equal(a_, "min");
-            if (g_ ?? false)
+            CqlBoolean g_ = context.Operators.Equal(a_, "min");
+            if (g_.IsTrue)
             {
                 decimal? h_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? i_ = period?.value;
@@ -313,8 +313,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             }
             else
             {
-                bool? n_ = context.Operators.Equal(a_, "s");
-                if (n_ ?? false)
+                CqlBoolean n_ = context.Operators.Equal(a_, "s");
+                if (n_.IsTrue)
                 {
                     decimal? o_ = context.Operators.ConvertIntegerToDecimal(frequency);
                     decimal? p_ = period?.value;
@@ -327,8 +327,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                 }
                 else
                 {
-                    bool? v_ = context.Operators.Equal(a_, "d");
-                    if (v_ ?? false)
+                    CqlBoolean v_ = context.Operators.Equal(a_, "d");
+                    if (v_.IsTrue)
                     {
                         decimal? w_ = context.Operators.ConvertIntegerToDecimal(frequency);
                         decimal? x_ = period?.value;
@@ -340,8 +340,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                     }
                     else
                     {
-                        bool? ac_ = context.Operators.Equal(a_, "wk");
-                        if (ac_ ?? false)
+                        CqlBoolean ac_ = context.Operators.Equal(a_, "wk");
+                        if (ac_.IsTrue)
                         {
                             decimal? ad_ = context.Operators.ConvertIntegerToDecimal(frequency);
                             decimal? ae_ = period?.value;
@@ -354,8 +354,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                         }
                         else
                         {
-                            bool? ak_ = context.Operators.Equal(a_, "mo");
-                            if (ak_ ?? false)
+                            CqlBoolean ak_ = context.Operators.Equal(a_, "mo");
+                            if (ak_.IsTrue)
                             {
                                 decimal? al_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                 decimal? am_ = period?.value;
@@ -368,8 +368,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                             }
                             else
                             {
-                                bool? as_ = context.Operators.Equal(a_, "a");
-                                if (as_ ?? false)
+                                CqlBoolean as_ = context.Operators.Equal(a_, "a");
+                                if (as_.IsTrue)
                                 {
                                     decimal? at_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                     decimal? au_ = period?.value;
@@ -382,8 +382,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                 }
                                 else
                                 {
-                                    bool? ba_ = context.Operators.Equal(a_, "hour");
-                                    if (ba_ ?? false)
+                                    CqlBoolean ba_ = context.Operators.Equal(a_, "hour");
+                                    if (ba_.IsTrue)
                                     {
                                         decimal? bb_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                         decimal? bc_ = period?.value;
@@ -393,8 +393,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                     }
                                     else
                                     {
-                                        bool? bf_ = context.Operators.Equal(a_, "minute");
-                                        if (bf_ ?? false)
+                                        CqlBoolean bf_ = context.Operators.Equal(a_, "minute");
+                                        if (bf_.IsTrue)
                                         {
                                             decimal? bg_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                             decimal? bh_ = period?.value;
@@ -406,8 +406,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                         }
                                         else
                                         {
-                                            bool? bm_ = context.Operators.Equal(a_, "second");
-                                            if (bm_ ?? false)
+                                            CqlBoolean bm_ = context.Operators.Equal(a_, "second");
+                                            if (bm_.IsTrue)
                                             {
                                                 decimal? bn_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                 decimal? bo_ = period?.value;
@@ -420,8 +420,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                             }
                                             else
                                             {
-                                                bool? bu_ = context.Operators.Equal(a_, "day");
-                                                if (bu_ ?? false)
+                                                CqlBoolean bu_ = context.Operators.Equal(a_, "day");
+                                                if (bu_.IsTrue)
                                                 {
                                                     decimal? bv_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                     decimal? bw_ = period?.value;
@@ -433,8 +433,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                 }
                                                 else
                                                 {
-                                                    bool? cb_ = context.Operators.Equal(a_, "week");
-                                                    if (cb_ ?? false)
+                                                    CqlBoolean cb_ = context.Operators.Equal(a_, "week");
+                                                    if (cb_.IsTrue)
                                                     {
                                                         decimal? cc_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                         decimal? cd_ = period?.value;
@@ -447,8 +447,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                     }
                                                     else
                                                     {
-                                                        bool? cj_ = context.Operators.Equal(a_, "month");
-                                                        if (cj_ ?? false)
+                                                        CqlBoolean cj_ = context.Operators.Equal(a_, "month");
+                                                        if (cj_.IsTrue)
                                                         {
                                                             decimal? ck_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                             decimal? cl_ = period?.value;
@@ -461,8 +461,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                         }
                                                         else
                                                         {
-                                                            bool? cr_ = context.Operators.Equal(a_, "year");
-                                                            if (cr_ ?? false)
+                                                            CqlBoolean cr_ = context.Operators.Equal(a_, "year");
+                                                            if (cr_.IsTrue)
                                                             {
                                                                 decimal? cs_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                 decimal? ct_ = period?.value;
@@ -475,8 +475,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                             }
                                                             else
                                                             {
-                                                                bool? cz_ = context.Operators.Equal(a_, "hours");
-                                                                if (cz_ ?? false)
+                                                                CqlBoolean cz_ = context.Operators.Equal(a_, "hours");
+                                                                if (cz_.IsTrue)
                                                                 {
                                                                     decimal? da_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                     decimal? db_ = period?.value;
@@ -486,8 +486,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                 }
                                                                 else
                                                                 {
-                                                                    bool? de_ = context.Operators.Equal(a_, "minutes");
-                                                                    if (de_ ?? false)
+                                                                    CqlBoolean de_ = context.Operators.Equal(a_, "minutes");
+                                                                    if (de_.IsTrue)
                                                                     {
                                                                         decimal? df_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                         decimal? dg_ = period?.value;
@@ -499,8 +499,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                     }
                                                                     else
                                                                     {
-                                                                        bool? dl_ = context.Operators.Equal(a_, "seconds");
-                                                                        if (dl_ ?? false)
+                                                                        CqlBoolean dl_ = context.Operators.Equal(a_, "seconds");
+                                                                        if (dl_.IsTrue)
                                                                         {
                                                                             decimal? dm_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                             decimal? dn_ = period?.value;
@@ -513,8 +513,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                         }
                                                                         else
                                                                         {
-                                                                            bool? dt_ = context.Operators.Equal(a_, "days");
-                                                                            if (dt_ ?? false)
+                                                                            CqlBoolean dt_ = context.Operators.Equal(a_, "days");
+                                                                            if (dt_.IsTrue)
                                                                             {
                                                                                 decimal? du_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                                 decimal? dv_ = period?.value;
@@ -526,8 +526,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                             }
                                                                             else
                                                                             {
-                                                                                bool? ea_ = context.Operators.Equal(a_, "weeks");
-                                                                                if (ea_ ?? false)
+                                                                                CqlBoolean ea_ = context.Operators.Equal(a_, "weeks");
+                                                                                if (ea_.IsTrue)
                                                                                 {
                                                                                     decimal? eb_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                                     decimal? ec_ = period?.value;
@@ -540,8 +540,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                                 }
                                                                                 else
                                                                                 {
-                                                                                    bool? ei_ = context.Operators.Equal(a_, "months");
-                                                                                    if (ei_ ?? false)
+                                                                                    CqlBoolean ei_ = context.Operators.Equal(a_, "months");
+                                                                                    if (ei_.IsTrue)
                                                                                     {
                                                                                         decimal? ej_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                                         decimal? ek_ = period?.value;
@@ -554,8 +554,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                                     }
                                                                                     else
                                                                                     {
-                                                                                        bool? eq_ = context.Operators.Equal(a_, "years");
-                                                                                        if (eq_ ?? false)
+                                                                                        CqlBoolean eq_ = context.Operators.Equal(a_, "years");
+                                                                                        if (eq_.IsTrue)
                                                                                         {
                                                                                             decimal? er_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                                             decimal? es_ = period?.value;
@@ -600,8 +600,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
     public decimal? ToDaily(CqlContext context, CqlCode frequency)
     {
         CqlCode a_ = this.HS(context);
-        bool? b_ = context.Operators.Equivalent(frequency, a_);
-        if (b_ ?? false)
+        CqlBoolean b_ = context.Operators.Equivalent(frequency, a_);
+        if (b_.IsTrue)
         {
             decimal? c_ = context.Operators.ConvertIntegerToDecimal(1);
             return c_;
@@ -609,8 +609,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
         else
         {
             CqlCode d_ = this.WAKE(context);
-            bool? e_ = context.Operators.Equivalent(frequency, d_);
-            if (e_ ?? false)
+            CqlBoolean e_ = context.Operators.Equivalent(frequency, d_);
+            if (e_.IsTrue)
             {
                 decimal? f_ = context.Operators.ConvertIntegerToDecimal(1);
                 return f_;
@@ -618,8 +618,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             else
             {
                 CqlCode g_ = this.C(context);
-                bool? h_ = context.Operators.Equivalent(frequency, g_);
-                if (h_ ?? false)
+                CqlBoolean h_ = context.Operators.Equivalent(frequency, g_);
+                if (h_.IsTrue)
                 {
                     decimal? i_ = context.Operators.ConvertIntegerToDecimal(3);
                     return i_;
@@ -627,8 +627,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                 else
                 {
                     CqlCode j_ = this.CM(context);
-                    bool? k_ = context.Operators.Equivalent(frequency, j_);
-                    if (k_ ?? false)
+                    CqlBoolean k_ = context.Operators.Equivalent(frequency, j_);
+                    if (k_.IsTrue)
                     {
                         decimal? l_ = context.Operators.ConvertIntegerToDecimal(1);
                         return l_;
@@ -636,8 +636,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                     else
                     {
                         CqlCode m_ = this.CD(context);
-                        bool? n_ = context.Operators.Equivalent(frequency, m_);
-                        if (n_ ?? false)
+                        CqlBoolean n_ = context.Operators.Equivalent(frequency, m_);
+                        if (n_.IsTrue)
                         {
                             decimal? o_ = context.Operators.ConvertIntegerToDecimal(1);
                             return o_;
@@ -645,8 +645,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                         else
                         {
                             CqlCode p_ = this.CV(context);
-                            bool? q_ = context.Operators.Equivalent(frequency, p_);
-                            if (q_ ?? false)
+                            CqlBoolean q_ = context.Operators.Equivalent(frequency, p_);
+                            if (q_.IsTrue)
                             {
                                 decimal? r_ = context.Operators.ConvertIntegerToDecimal(1);
                                 return r_;
@@ -654,8 +654,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                             else
                             {
                                 CqlCode s_ = this.AC(context);
-                                bool? t_ = context.Operators.Equivalent(frequency, s_);
-                                if (t_ ?? false)
+                                CqlBoolean t_ = context.Operators.Equivalent(frequency, s_);
+                                if (t_.IsTrue)
                                 {
                                     decimal? u_ = context.Operators.ConvertIntegerToDecimal(3);
                                     return u_;
@@ -663,8 +663,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                 else
                                 {
                                     CqlCode v_ = this.ACM(context);
-                                    bool? w_ = context.Operators.Equivalent(frequency, v_);
-                                    if (w_ ?? false)
+                                    CqlBoolean w_ = context.Operators.Equivalent(frequency, v_);
+                                    if (w_.IsTrue)
                                     {
                                         decimal? x_ = context.Operators.ConvertIntegerToDecimal(1);
                                         return x_;
@@ -672,8 +672,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                     else
                                     {
                                         CqlCode y_ = this.ACD(context);
-                                        bool? z_ = context.Operators.Equivalent(frequency, y_);
-                                        if (z_ ?? false)
+                                        CqlBoolean z_ = context.Operators.Equivalent(frequency, y_);
+                                        if (z_.IsTrue)
                                         {
                                             decimal? aa_ = context.Operators.ConvertIntegerToDecimal(1);
                                             return aa_;
@@ -681,8 +681,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                         else
                                         {
                                             CqlCode ab_ = this.ACV(context);
-                                            bool? ac_ = context.Operators.Equivalent(frequency, ab_);
-                                            if (ac_ ?? false)
+                                            CqlBoolean ac_ = context.Operators.Equivalent(frequency, ab_);
+                                            if (ac_.IsTrue)
                                             {
                                                 decimal? ad_ = context.Operators.ConvertIntegerToDecimal(1);
                                                 return ad_;
@@ -690,8 +690,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                             else
                                             {
                                                 CqlCode ae_ = this.PC(context);
-                                                bool? af_ = context.Operators.Equivalent(frequency, ae_);
-                                                if (af_ ?? false)
+                                                CqlBoolean af_ = context.Operators.Equivalent(frequency, ae_);
+                                                if (af_.IsTrue)
                                                 {
                                                     decimal? ag_ = context.Operators.ConvertIntegerToDecimal(3);
                                                     return ag_;
@@ -699,8 +699,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                 else
                                                 {
                                                     CqlCode ah_ = this.PCM(context);
-                                                    bool? ai_ = context.Operators.Equivalent(frequency, ah_);
-                                                    if (ai_ ?? false)
+                                                    CqlBoolean ai_ = context.Operators.Equivalent(frequency, ah_);
+                                                    if (ai_.IsTrue)
                                                     {
                                                         decimal? aj_ = context.Operators.ConvertIntegerToDecimal(1);
                                                         return aj_;
@@ -708,8 +708,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                     else
                                                     {
                                                         CqlCode ak_ = this.PCD(context);
-                                                        bool? al_ = context.Operators.Equivalent(frequency, ak_);
-                                                        if (al_ ?? false)
+                                                        CqlBoolean al_ = context.Operators.Equivalent(frequency, ak_);
+                                                        if (al_.IsTrue)
                                                         {
                                                             decimal? am_ = context.Operators.ConvertIntegerToDecimal(1);
                                                             return am_;
@@ -717,8 +717,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                         else
                                                         {
                                                             CqlCode an_ = this.PCV(context);
-                                                            bool? ao_ = context.Operators.Equivalent(frequency, an_);
-                                                            if (ao_ ?? false)
+                                                            CqlBoolean ao_ = context.Operators.Equivalent(frequency, an_);
+                                                            if (ao_.IsTrue)
                                                             {
                                                                 decimal? ap_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                 return ap_;
@@ -726,8 +726,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                             else
                                                             {
                                                                 CqlCode aq_ = this.MORN(context);
-                                                                bool? ar_ = context.Operators.Equivalent(frequency, aq_);
-                                                                if (ar_ ?? false)
+                                                                CqlBoolean ar_ = context.Operators.Equivalent(frequency, aq_);
+                                                                if (ar_.IsTrue)
                                                                 {
                                                                     decimal? as_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                     return as_;
@@ -735,8 +735,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                 else
                                                                 {
                                                                     CqlCode at_ = this.MORN_early(context);
-                                                                    bool? au_ = context.Operators.Equivalent(frequency, at_);
-                                                                    if (au_ ?? false)
+                                                                    CqlBoolean au_ = context.Operators.Equivalent(frequency, at_);
+                                                                    if (au_.IsTrue)
                                                                     {
                                                                         decimal? av_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                         return av_;
@@ -744,8 +744,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                     else
                                                                     {
                                                                         CqlCode aw_ = this.MORN_late(context);
-                                                                        bool? ax_ = context.Operators.Equivalent(frequency, aw_);
-                                                                        if (ax_ ?? false)
+                                                                        CqlBoolean ax_ = context.Operators.Equivalent(frequency, aw_);
+                                                                        if (ax_.IsTrue)
                                                                         {
                                                                             decimal? ay_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                             return ay_;
@@ -753,8 +753,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                         else
                                                                         {
                                                                             CqlCode az_ = this.NOON(context);
-                                                                            bool? ba_ = context.Operators.Equivalent(frequency, az_);
-                                                                            if (ba_ ?? false)
+                                                                            CqlBoolean ba_ = context.Operators.Equivalent(frequency, az_);
+                                                                            if (ba_.IsTrue)
                                                                             {
                                                                                 decimal? bb_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                                 return bb_;
@@ -762,8 +762,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                             else
                                                                             {
                                                                                 CqlCode bc_ = this.AFT(context);
-                                                                                bool? bd_ = context.Operators.Equivalent(frequency, bc_);
-                                                                                if (bd_ ?? false)
+                                                                                CqlBoolean bd_ = context.Operators.Equivalent(frequency, bc_);
+                                                                                if (bd_.IsTrue)
                                                                                 {
                                                                                     decimal? be_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                                     return be_;
@@ -771,8 +771,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                                 else
                                                                                 {
                                                                                     CqlCode bf_ = this.AFT_early(context);
-                                                                                    bool? bg_ = context.Operators.Equivalent(frequency, bf_);
-                                                                                    if (bg_ ?? false)
+                                                                                    CqlBoolean bg_ = context.Operators.Equivalent(frequency, bf_);
+                                                                                    if (bg_.IsTrue)
                                                                                     {
                                                                                         decimal? bh_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                                         return bh_;
@@ -780,8 +780,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                                     else
                                                                                     {
                                                                                         CqlCode bi_ = this.AFT_late(context);
-                                                                                        bool? bj_ = context.Operators.Equivalent(frequency, bi_);
-                                                                                        if (bj_ ?? false)
+                                                                                        CqlBoolean bj_ = context.Operators.Equivalent(frequency, bi_);
+                                                                                        if (bj_.IsTrue)
                                                                                         {
                                                                                             decimal? bk_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                                             return bk_;
@@ -789,8 +789,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                                         else
                                                                                         {
                                                                                             CqlCode bl_ = this.EVE(context);
-                                                                                            bool? bm_ = context.Operators.Equivalent(frequency, bl_);
-                                                                                            if (bm_ ?? false)
+                                                                                            CqlBoolean bm_ = context.Operators.Equivalent(frequency, bl_);
+                                                                                            if (bm_.IsTrue)
                                                                                             {
                                                                                                 decimal? bn_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                                                 return bn_;
@@ -798,8 +798,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                                             else
                                                                                             {
                                                                                                 CqlCode bo_ = this.EVE_early(context);
-                                                                                                bool? bp_ = context.Operators.Equivalent(frequency, bo_);
-                                                                                                if (bp_ ?? false)
+                                                                                                CqlBoolean bp_ = context.Operators.Equivalent(frequency, bo_);
+                                                                                                if (bp_.IsTrue)
                                                                                                 {
                                                                                                     decimal? bq_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                                                     return bq_;
@@ -807,8 +807,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                                                 else
                                                                                                 {
                                                                                                     CqlCode br_ = this.EVE_late(context);
-                                                                                                    bool? bs_ = context.Operators.Equivalent(frequency, br_);
-                                                                                                    if (bs_ ?? false)
+                                                                                                    CqlBoolean bs_ = context.Operators.Equivalent(frequency, br_);
+                                                                                                    if (bs_.IsTrue)
                                                                                                     {
                                                                                                         decimal? bt_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                                                         return bt_;
@@ -816,8 +816,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                                                     else
                                                                                                     {
                                                                                                         CqlCode bu_ = this.NIGHT(context);
-                                                                                                        bool? bv_ = context.Operators.Equivalent(frequency, bu_);
-                                                                                                        if (bv_ ?? false)
+                                                                                                        CqlBoolean bv_ = context.Operators.Equivalent(frequency, bu_);
+                                                                                                        if (bv_.IsTrue)
                                                                                                         {
                                                                                                             decimal? bw_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                                                             return bw_;
@@ -825,8 +825,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                                                         else
                                                                                                         {
                                                                                                             CqlCode bx_ = this.PHS(context);
-                                                                                                            bool? by_ = context.Operators.Equivalent(frequency, bx_);
-                                                                                                            if (by_ ?? false)
+                                                                                                            CqlBoolean by_ = context.Operators.Equivalent(frequency, bx_);
+                                                                                                            if (by_.IsTrue)
                                                                                                             {
                                                                                                                 decimal? bz_ = context.Operators.ConvertIntegerToDecimal(1);
                                                                                                                 return bz_;
@@ -834,168 +834,168 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                                                             else
                                                                                                             {
                                                                                                                 CqlCode ca_ = this.Once_daily__qualifier_value_(context);
-                                                                                                                bool? cb_ = context.Operators.Equivalent(frequency, ca_);
-                                                                                                                if (cb_ ?? false)
+                                                                                                                CqlBoolean cb_ = context.Operators.Equivalent(frequency, ca_);
+                                                                                                                if (cb_.IsTrue)
                                                                                                                 {
                                                                                                                     return 1.0m;
                                                                                                                 }
                                                                                                                 else
                                                                                                                 {
                                                                                                                     CqlCode cc_ = this.Twice_a_day__qualifier_value_(context);
-                                                                                                                    bool? cd_ = context.Operators.Equivalent(frequency, cc_);
-                                                                                                                    if (cd_ ?? false)
+                                                                                                                    CqlBoolean cd_ = context.Operators.Equivalent(frequency, cc_);
+                                                                                                                    if (cd_.IsTrue)
                                                                                                                     {
                                                                                                                         return 2.0m;
                                                                                                                     }
                                                                                                                     else
                                                                                                                     {
                                                                                                                         CqlCode ce_ = this.Three_times_daily__qualifier_value_(context);
-                                                                                                                        bool? cf_ = context.Operators.Equivalent(frequency, ce_);
-                                                                                                                        if (cf_ ?? false)
+                                                                                                                        CqlBoolean cf_ = context.Operators.Equivalent(frequency, ce_);
+                                                                                                                        if (cf_.IsTrue)
                                                                                                                         {
                                                                                                                             return 3.0m;
                                                                                                                         }
                                                                                                                         else
                                                                                                                         {
                                                                                                                             CqlCode cg_ = this.Four_times_daily__qualifier_value_(context);
-                                                                                                                            bool? ch_ = context.Operators.Equivalent(frequency, cg_);
-                                                                                                                            if (ch_ ?? false)
+                                                                                                                            CqlBoolean ch_ = context.Operators.Equivalent(frequency, cg_);
+                                                                                                                            if (ch_.IsTrue)
                                                                                                                             {
                                                                                                                                 return 4.0m;
                                                                                                                             }
                                                                                                                             else
                                                                                                                             {
                                                                                                                                 CqlCode ci_ = this.Every_twenty_four_hours__qualifier_value_(context);
-                                                                                                                                bool? cj_ = context.Operators.Equivalent(frequency, ci_);
-                                                                                                                                if (cj_ ?? false)
+                                                                                                                                CqlBoolean cj_ = context.Operators.Equivalent(frequency, ci_);
+                                                                                                                                if (cj_.IsTrue)
                                                                                                                                 {
                                                                                                                                     return 1.0m;
                                                                                                                                 }
                                                                                                                                 else
                                                                                                                                 {
                                                                                                                                     CqlCode ck_ = this.Every_twelve_hours__qualifier_value_(context);
-                                                                                                                                    bool? cl_ = context.Operators.Equivalent(frequency, ck_);
-                                                                                                                                    if (cl_ ?? false)
+                                                                                                                                    CqlBoolean cl_ = context.Operators.Equivalent(frequency, ck_);
+                                                                                                                                    if (cl_.IsTrue)
                                                                                                                                     {
                                                                                                                                         return 2.0m;
                                                                                                                                     }
                                                                                                                                     else
                                                                                                                                     {
                                                                                                                                         CqlCode cm_ = this.Every_thirty_six_hours__qualifier_value_(context);
-                                                                                                                                        bool? cn_ = context.Operators.Equivalent(frequency, cm_);
-                                                                                                                                        if (cn_ ?? false)
+                                                                                                                                        CqlBoolean cn_ = context.Operators.Equivalent(frequency, cm_);
+                                                                                                                                        if (cn_.IsTrue)
                                                                                                                                         {
                                                                                                                                             return 0.67m;
                                                                                                                                         }
                                                                                                                                         else
                                                                                                                                         {
                                                                                                                                             CqlCode co_ = this.Every_eight_hours__qualifier_value_(context);
-                                                                                                                                            bool? cp_ = context.Operators.Equivalent(frequency, co_);
-                                                                                                                                            if (cp_ ?? false)
+                                                                                                                                            CqlBoolean cp_ = context.Operators.Equivalent(frequency, co_);
+                                                                                                                                            if (cp_.IsTrue)
                                                                                                                                             {
                                                                                                                                                 return 3.0m;
                                                                                                                                             }
                                                                                                                                             else
                                                                                                                                             {
                                                                                                                                                 CqlCode cq_ = this.Every_four_hours__qualifier_value_(context);
-                                                                                                                                                bool? cr_ = context.Operators.Equivalent(frequency, cq_);
-                                                                                                                                                if (cr_ ?? false)
+                                                                                                                                                CqlBoolean cr_ = context.Operators.Equivalent(frequency, cq_);
+                                                                                                                                                if (cr_.IsTrue)
                                                                                                                                                 {
                                                                                                                                                     return 6.0m;
                                                                                                                                                 }
                                                                                                                                                 else
                                                                                                                                                 {
                                                                                                                                                     CqlCode cs_ = this.Every_six_hours__qualifier_value_(context);
-                                                                                                                                                    bool? ct_ = context.Operators.Equivalent(frequency, cs_);
-                                                                                                                                                    if (ct_ ?? false)
+                                                                                                                                                    CqlBoolean ct_ = context.Operators.Equivalent(frequency, cs_);
+                                                                                                                                                    if (ct_.IsTrue)
                                                                                                                                                     {
                                                                                                                                                         return 4.0m;
                                                                                                                                                     }
                                                                                                                                                     else
                                                                                                                                                     {
                                                                                                                                                         CqlCode cu_ = this.Every_seventy_two_hours__qualifier_value_(context);
-                                                                                                                                                        bool? cv_ = context.Operators.Equivalent(frequency, cu_);
-                                                                                                                                                        if (cv_ ?? false)
+                                                                                                                                                        CqlBoolean cv_ = context.Operators.Equivalent(frequency, cu_);
+                                                                                                                                                        if (cv_.IsTrue)
                                                                                                                                                         {
                                                                                                                                                             return 0.33m;
                                                                                                                                                         }
                                                                                                                                                         else
                                                                                                                                                         {
                                                                                                                                                             CqlCode cw_ = this.Every_forty_eight_hours__qualifier_value_(context);
-                                                                                                                                                            bool? cx_ = context.Operators.Equivalent(frequency, cw_);
-                                                                                                                                                            if (cx_ ?? false)
+                                                                                                                                                            CqlBoolean cx_ = context.Operators.Equivalent(frequency, cw_);
+                                                                                                                                                            if (cx_.IsTrue)
                                                                                                                                                             {
                                                                                                                                                                 return 0.5m;
                                                                                                                                                             }
                                                                                                                                                             else
                                                                                                                                                             {
                                                                                                                                                                 CqlCode cy_ = this.Every_eight_to_twelve_hours__qualifier_value_(context);
-                                                                                                                                                                bool? cz_ = context.Operators.Equivalent(frequency, cy_);
-                                                                                                                                                                if (cz_ ?? false)
+                                                                                                                                                                CqlBoolean cz_ = context.Operators.Equivalent(frequency, cy_);
+                                                                                                                                                                if (cz_.IsTrue)
                                                                                                                                                                 {
                                                                                                                                                                     return 3.0m;
                                                                                                                                                                 }
                                                                                                                                                                 else
                                                                                                                                                                 {
                                                                                                                                                                     CqlCode da_ = this.Every_six_to_eight_hours__qualifier_value_(context);
-                                                                                                                                                                    bool? db_ = context.Operators.Equivalent(frequency, da_);
-                                                                                                                                                                    if (db_ ?? false)
+                                                                                                                                                                    CqlBoolean db_ = context.Operators.Equivalent(frequency, da_);
+                                                                                                                                                                    if (db_.IsTrue)
                                                                                                                                                                     {
                                                                                                                                                                         return 4.0m;
                                                                                                                                                                     }
                                                                                                                                                                     else
                                                                                                                                                                     {
                                                                                                                                                                         CqlCode dc_ = this.Every_three_to_four_hours__qualifier_value_(context);
-                                                                                                                                                                        bool? dd_ = context.Operators.Equivalent(frequency, dc_);
-                                                                                                                                                                        if (dd_ ?? false)
+                                                                                                                                                                        CqlBoolean dd_ = context.Operators.Equivalent(frequency, dc_);
+                                                                                                                                                                        if (dd_.IsTrue)
                                                                                                                                                                         {
                                                                                                                                                                             return 8.0m;
                                                                                                                                                                         }
                                                                                                                                                                         else
                                                                                                                                                                         {
                                                                                                                                                                             CqlCode de_ = this.Every_three_to_six_hours__qualifier_value_(context);
-                                                                                                                                                                            bool? df_ = context.Operators.Equivalent(frequency, de_);
-                                                                                                                                                                            if (df_ ?? false)
+                                                                                                                                                                            CqlBoolean df_ = context.Operators.Equivalent(frequency, de_);
+                                                                                                                                                                            if (df_.IsTrue)
                                                                                                                                                                             {
                                                                                                                                                                                 return 8.0m;
                                                                                                                                                                             }
                                                                                                                                                                             else
                                                                                                                                                                             {
                                                                                                                                                                                 CqlCode dg_ = this.Every_two_to_four_hours__qualifier_value_(context);
-                                                                                                                                                                                bool? dh_ = context.Operators.Equivalent(frequency, dg_);
-                                                                                                                                                                                if (dh_ ?? false)
+                                                                                                                                                                                CqlBoolean dh_ = context.Operators.Equivalent(frequency, dg_);
+                                                                                                                                                                                if (dh_.IsTrue)
                                                                                                                                                                                 {
                                                                                                                                                                                     return 12.0m;
                                                                                                                                                                                 }
                                                                                                                                                                                 else
                                                                                                                                                                                 {
                                                                                                                                                                                     CqlCode di_ = this.One_to_four_times_a_day__qualifier_value_(context);
-                                                                                                                                                                                    bool? dj_ = context.Operators.Equivalent(frequency, di_);
-                                                                                                                                                                                    if (dj_ ?? false)
+                                                                                                                                                                                    CqlBoolean dj_ = context.Operators.Equivalent(frequency, di_);
+                                                                                                                                                                                    if (dj_.IsTrue)
                                                                                                                                                                                     {
                                                                                                                                                                                         return 4.0m;
                                                                                                                                                                                     }
                                                                                                                                                                                     else
                                                                                                                                                                                     {
                                                                                                                                                                                         CqlCode dk_ = this.One_to_three_times_a_day__qualifier_value_(context);
-                                                                                                                                                                                        bool? dl_ = context.Operators.Equivalent(frequency, dk_);
-                                                                                                                                                                                        if (dl_ ?? false)
+                                                                                                                                                                                        CqlBoolean dl_ = context.Operators.Equivalent(frequency, dk_);
+                                                                                                                                                                                        if (dl_.IsTrue)
                                                                                                                                                                                         {
                                                                                                                                                                                             return 3.0m;
                                                                                                                                                                                         }
                                                                                                                                                                                         else
                                                                                                                                                                                         {
                                                                                                                                                                                             CqlCode dm_ = this.One_to_two_times_a_day__qualifier_value_(context);
-                                                                                                                                                                                            bool? dn_ = context.Operators.Equivalent(frequency, dm_);
-                                                                                                                                                                                            if (dn_ ?? false)
+                                                                                                                                                                                            CqlBoolean dn_ = context.Operators.Equivalent(frequency, dm_);
+                                                                                                                                                                                            if (dn_.IsTrue)
                                                                                                                                                                                             {
                                                                                                                                                                                                 return 2.0m;
                                                                                                                                                                                             }
                                                                                                                                                                                             else
                                                                                                                                                                                             {
                                                                                                                                                                                                 CqlCode do_ = this.Two_to_four_times_a_day__qualifier_value_(context);
-                                                                                                                                                                                                bool? dp_ = context.Operators.Equivalent(frequency, do_);
-                                                                                                                                                                                                if (dp_ ?? false)
+                                                                                                                                                                                                CqlBoolean dp_ = context.Operators.Equivalent(frequency, do_);
+                                                                                                                                                                                                if (dp_.IsTrue)
                                                                                                                                                                                                 {
                                                                                                                                                                                                     return 4.0m;
                                                                                                                                                                                                 }
@@ -1963,7 +1963,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
         bool? a_(object M) {
             bool l_ = M is MedicationRequest;
-            return l_ as bool?;
+            return l_;
         }
 
 
@@ -1977,7 +1977,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
         bool? e_(object M) {
             bool n_ = M is MedicationDispense;
-            return n_ as bool?;
+            return n_;
         }
 
 
@@ -2001,7 +2001,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
         bool? a_(object M) {
             bool l_ = M is MedicationRequest;
-            return l_ as bool?;
+            return l_;
         }
 
 
@@ -2015,7 +2015,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
         bool? e_(object M) {
             bool n_ = M is MedicationDispense;
-            return n_ as bool?;
+            return n_;
         }
 
 

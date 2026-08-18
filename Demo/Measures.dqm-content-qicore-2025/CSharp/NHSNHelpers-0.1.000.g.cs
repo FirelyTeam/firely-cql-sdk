@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("NHSNHelpers", "0.1.000")]
 public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_000>
 {
@@ -127,7 +127,7 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
             FhirString h_ = reference?.ReferenceElement;
             string i_ = FHIRHelpers_4_4_000.Instance.ToString(context, h_);
             string j_ = this.GetId(context, i_);
-            bool? k_ = context.Operators.Equal(g_, j_);
+            CqlBoolean k_ = context.Operators.Equal(g_, j_);
             return k_;
         }
 

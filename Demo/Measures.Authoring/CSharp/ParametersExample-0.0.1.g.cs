@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
 public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersExample_0_0_1>
 {
@@ -86,18 +86,18 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
         bool? c_(Patient P) {
             Code<AdministrativeGender> f_ = P?.GenderElement;
             string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
-            bool? h_ = context.Operators.Equal(g_, "male");
+            CqlBoolean h_ = context.Operators.Equal(g_, "male");
 
             CqlBoolean i_() {
                 FhirBoolean l_ = P?.ActiveElement;
-                bool? m_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, l_);
-                return /* CQL 'is true' (19:11-19:26) */ m_ is true;
+                CqlBoolean m_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, l_);
+                return /* CQL 'is true' (19:11-19:26) */ m_.IsTrue;
             }
 
 
             CqlBoolean j_() {
                 DataType n_ = P?.Deceased;
-                bool? o_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, n_ as FhirBoolean);
+                CqlBoolean o_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, n_ as FhirBoolean);
                 return !o_;
             }
 
@@ -106,11 +106,11 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
                 CodeableConcept p_ = P?.MaritalStatus;
                 CqlConcept q_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, p_);
                 CqlValueSet r_ = this.Marital_Status(context);
-                bool? s_ = context.Operators.ConceptInValueSet(q_, r_);
+                CqlBoolean s_ = context.Operators.ConceptInValueSet(q_, r_);
                 return s_;
             }
 
-            return /* CQL 'and' (18:5-21:45) */ (/* CQL 'and' (18:11-20:25) */ (/* CQL 'and' (18:11-19:26) */ ((CqlBoolean)h_
+            return /* CQL 'and' (18:5-21:45) */ (/* CQL 'and' (18:11-20:25) */ (/* CQL 'and' (18:11-19:26) */ (h_
                 && i_())
                 && j_())
                 && k_());
@@ -162,7 +162,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     {
         int? a_ = this.Patient_Age_in_Years(context);
         int? b_ = this.AgeThreshold(context);
-        bool? c_ = context.Operators.Greater(a_, b_);
+        CqlBoolean c_ = context.Operators.Greater(a_, b_);
         return c_;
     }
 

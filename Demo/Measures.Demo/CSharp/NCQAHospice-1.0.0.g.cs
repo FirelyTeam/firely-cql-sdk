@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("NCQAHospice", "1.0.0")]
 public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
 {
@@ -77,11 +77,11 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
             DataType g_ = HospiceInt?.Performed;
             CqlInterval<CqlDateTime> h_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, g_);
             CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
-            bool? j_ = context.Operators.Overlaps(h_, i_, (string)default);
+            CqlBoolean j_ = context.Operators.Overlaps(h_, i_, (string)default);
             return j_;
         }
 
-        bool? e_ = context.Operators.WhereAny<Procedure>(c_, d_);
+        CqlBoolean e_ = context.Operators.WhereAny<Procedure>(c_, d_);
 
         CqlBoolean f_() {
             CqlValueSet k_ = this.Hospice_Encounter(context);
@@ -92,15 +92,15 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
                 Period p_ = HospiceEnc?.Period;
                 CqlInterval<CqlDateTime> q_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, p_);
                 CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-                bool? s_ = context.Operators.Overlaps(q_, r_, (string)default);
+                CqlBoolean s_ = context.Operators.Overlaps(q_, r_, (string)default);
                 return s_;
             }
 
-            bool? o_ = context.Operators.WhereAny<Encounter>(m_, n_);
+            CqlBoolean o_ = context.Operators.WhereAny<Encounter>(m_, n_);
             return o_;
         }
 
-        return /* CQL 'or' (17:1-22:1) */ ((CqlBoolean)e_
+        return /* CQL 'or' (17:1-22:1) */ (e_
             || f_());
     }
 

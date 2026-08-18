@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("SupplementalDataElements", "3.4.000")]
 public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<SupplementalDataElements_3_4_000>
 {
@@ -75,7 +75,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         bool? b_(Extension @this) {
             FhirUri k_ = @this?.UrlElement;
             string l_ = FHIRHelpers_4_3_000.Instance.ToString(context, k_);
-            bool? m_ = context.Operators.Equal(l_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+            CqlBoolean m_ = context.Operators.Equal(l_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
             return m_;
         }
 
@@ -90,7 +90,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             bool? n_(Extension @this) {
                 FhirUri af_ = @this?.UrlElement;
                 string ag_ = FHIRHelpers_4_3_000.Instance.ToString(context, af_);
-                bool? ah_ = context.Operators.Equal(ag_, "ombCategory");
+                CqlBoolean ah_ = context.Operators.Equal(ag_, "ombCategory");
                 return ah_;
             }
 
@@ -112,7 +112,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             bool? t_(Extension @this) {
                 FhirUri aj_ = @this?.UrlElement;
                 string ak_ = FHIRHelpers_4_3_000.Instance.ToString(context, aj_);
-                bool? al_ = context.Operators.Equal(ak_, "detailed");
+                CqlBoolean al_ = context.Operators.Equal(ak_, "detailed");
                 return al_;
             }
 
@@ -137,7 +137,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             bool? z_(Extension @this) {
                 FhirUri ao_ = @this?.UrlElement;
                 string ap_ = FHIRHelpers_4_3_000.Instance.ToString(context, ao_);
-                bool? aq_ = context.Operators.Equal(ap_, "text");
+                CqlBoolean aq_ = context.Operators.Equal(ap_, "text");
                 return aq_;
             }
 
@@ -210,7 +210,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         bool? b_(Extension @this) {
             FhirUri k_ = @this?.UrlElement;
             string l_ = FHIRHelpers_4_3_000.Instance.ToString(context, k_);
-            bool? m_ = context.Operators.Equal(l_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+            CqlBoolean m_ = context.Operators.Equal(l_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
             return m_;
         }
 
@@ -225,7 +225,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             bool? n_(Extension @this) {
                 FhirUri ae_ = @this?.UrlElement;
                 string af_ = FHIRHelpers_4_3_000.Instance.ToString(context, ae_);
-                bool? ag_ = context.Operators.Equal(af_, "ombCategory");
+                CqlBoolean ag_ = context.Operators.Equal(af_, "ombCategory");
                 return ag_;
             }
 
@@ -249,7 +249,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             bool? s_(Extension @this) {
                 FhirUri aj_ = @this?.UrlElement;
                 string ak_ = FHIRHelpers_4_3_000.Instance.ToString(context, aj_);
-                bool? al_ = context.Operators.Equal(ak_, "detailed");
+                CqlBoolean al_ = context.Operators.Equal(ak_, "detailed");
                 return al_;
             }
 
@@ -274,7 +274,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             bool? y_(Extension @this) {
                 FhirUri ao_ = @this?.UrlElement;
                 string ap_ = FHIRHelpers_4_3_000.Instance.ToString(context, ao_);
-                bool? aq_ = context.Operators.Equal(ap_, "text");
+                CqlBoolean aq_ = context.Operators.Equal(ap_, "text");
                 return aq_;
             }
 
@@ -311,15 +311,15 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         Code<AdministrativeGender> b_ = a_?.GenderElement;
         AdministrativeGender? c_ = b_?.Value;
         string d_ = context.Operators.Convert<string>(c_);
-        bool? e_ = context.Operators.Equal(d_, "male");
-        if (e_ ?? false)
+        CqlBoolean e_ = context.Operators.Equal(d_, "male");
+        if (e_.IsTrue)
         {
             return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", default, "Male");
         }
         else
         {
-            bool? f_ = context.Operators.Equal(d_, "female");
-            if (f_ ?? false)
+            CqlBoolean f_ = context.Operators.Equal(d_, "female");
+            if (f_.IsTrue)
             {
                 return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", default, "Female");
             }

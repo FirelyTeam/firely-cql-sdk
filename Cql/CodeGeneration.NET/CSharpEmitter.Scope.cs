@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -247,7 +247,18 @@ internal partial class CSharpEmitter
 
         private Atom Hoist(string code, string keyCode, CodeExpression node)
         {
-            var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(node.Type);
+            // A CQL Boolean local is DECLARED CqlBoolean, so a chain of logic reads as
+            // `a_ && b_` instead of `(CqlBoolean)a_ && (CqlBoolean)b_`. The node's own type stays
+            // bool? — see _cqlBooleanLocals for why that separation is required rather than
+            // cosmetic — so this is the one place printed type and IR type diverge by design.
+            //
+            // Only bool?, never bool: a non-nullable bool local is a C# type-test result
+            // (`x is CqlInterval<CqlDate>`), not a CQL Boolean, and retyping those would change
+            // what the pattern-matching code around them means.
+            var isCqlBoolean = node.Type == typeof(bool?);
+            var typeSyntax = isCqlBoolean
+                                 ? _emitter._typeToCSharpConverter.ToCSharp(typeof(CqlBoolean))
+                                 : _emitter._typeToCSharpConverter.ToCSharp(node.Type);
             var dedupKey = $"{keyCode}::{typeSyntax}";
             // A duplicate reuses the original's local — name, key identity and all. (The old
             // pipeline allocated a fresh name for the duplicate before the deduper removed its
@@ -269,6 +280,9 @@ internal partial class CSharpEmitter
             var local = new CodeLocal(node.Type);
             var name = AllocateName(null);
             _emitter._assignedNames[local] = name;
+            if (isCqlBoolean)
+                _emitter._cqlBooleanLocals.Add(local);
+                _emitter._cqlBooleanNames.Add(name);
             var statement = $"{typeSyntax} {name} = {code};";
             _statements.Add(() => statement);
 
@@ -528,6 +542,14 @@ internal partial class CSharpEmitter
             // writes a query let over an and/or — CQL input, not SDK code, is all it takes.
             // Design options (occurrence-scoped bindings, cloning on splice) are in #1566.
             _emitter._assignedNames[let.Local] = valueAtom.Code;
+
+            // The let's local is a DIFFERENT CodeLocal instance that merely resolves to the same
+            // printed name, so it needs the CqlBoolean-declared marker propagated onto it —
+            // otherwise a reader of the binding (xor's `is null` guard is the one in the corpora)
+            // would print a null pattern against a CqlBoolean and fail with CS9135.
+            if (valueAtom.Node is CodeLocal valueLocal && _emitter._cqlBooleanLocals.Contains(valueLocal))
+                _emitter._cqlBooleanLocals.Add(let.Local);
+
             return Linearize(let.Body, tailPosition);
         }
 

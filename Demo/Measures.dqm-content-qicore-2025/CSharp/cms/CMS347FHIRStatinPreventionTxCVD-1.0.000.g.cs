@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS347FHIRStatinPreventionTxCVD", "1.0.000")]
 public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingleton<CMS347FHIRStatinPreventionTxCVD_1_0_000>
 {
@@ -232,14 +232,14 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
-            bool? h_ = context.Operators.Equivalent(e_, g_);
+            CqlBoolean h_ = context.Operators.Equivalent(e_, g_);
 
             CqlBoolean i_() {
                 CodeableConcept l_ = condition?.VerificationStatus;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
                 CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
                 CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
-                bool? p_ = context.Operators.Equivalent(m_, o_);
+                CqlBoolean p_ = context.Operators.Equivalent(m_, o_);
                 return p_;
             }
 
@@ -249,7 +249,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
                 CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
-                bool? u_ = context.Operators.Equivalent(r_, t_);
+                CqlBoolean u_ = context.Operators.Equivalent(r_, t_);
                 return u_;
             }
 
@@ -259,11 +259,11 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
-                bool? z_ = context.Operators.Equivalent(w_, y_);
+                CqlBoolean z_ = context.Operators.Equivalent(w_, y_);
                 return z_;
             }
 
-            return /* CQL 'or' (250:52-254:3) */ (/* CQL 'or' (250:54-252:66) */ (/* CQL 'or' (250:54-251:66) */ ((CqlBoolean)h_
+            return /* CQL 'or' (250:52-254:3) */ (/* CQL 'or' (250:54-252:66) */ (/* CQL 'or' (250:54-251:66) */ (h_
                 || i_())
                 || j_())
                 || k_());
@@ -306,8 +306,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlDateTime aj_ = context.Operators.Start(ai_);
             CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
             CqlDateTime al_ = context.Operators.End(ak_);
-            bool? am_ = context.Operators.SameOrBefore(aj_, al_, "day");
-            return /* CQL 'and' (116:7-117:41) */ ((CqlBoolean)am_
+            CqlBoolean am_ = context.Operators.SameOrBefore(aj_, al_, "day");
+            return /* CQL 'and' (116:7-117:41) */ (am_
                 && this.isVerified(context, ASCVDDiagnosis as Condition));
         }
 
@@ -365,17 +365,17 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlDateTime ap_ = context.Operators.Start(ao_);
             CqlInterval<CqlDateTime> aq_ = this.Measurement_Period(context);
             CqlDateTime ar_ = context.Operators.End(aq_);
-            bool? as_ = context.Operators.SameOrBefore(ap_, ar_, "day");
+            CqlBoolean as_ = context.Operators.SameOrBefore(ap_, ar_, "day");
 
             CqlBoolean at_() {
                 Code<EventStatus> ba_ = ASCVDProcedure?.StatusElement;
                 EventStatus? bb_ = ba_?.Value;
                 string bc_ = context.Operators.Convert<string>(bb_);
-                bool? bd_ = context.Operators.Equal(bc_, "completed");
+                CqlBoolean bd_ = context.Operators.Equal(bc_, "completed");
                 return bd_;
             }
 
-            return /* CQL 'and' (123:9-124:49) */ ((CqlBoolean)as_
+            return /* CQL 'and' (123:9-124:49) */ (as_
                 && at_());
         }
 
@@ -424,17 +424,17 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
             Period ad_ = QualifyingEncounter?.Period;
             CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
-            bool? af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ac_, ae_, "day");
+            CqlBoolean af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ac_, ae_, "day");
 
             CqlBoolean ag_() {
                 Code<Encounter.EncounterStatus> ah_ = QualifyingEncounter?.StatusElement;
                 Encounter.EncounterStatus? ai_ = ah_?.Value;
                 Code<Encounter.EncounterStatus> aj_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ai_);
-                bool? ak_ = context.Operators.Equal(aj_, "finished");
+                CqlBoolean ak_ = context.Operators.Equal(aj_, "finished");
                 return ak_;
             }
 
-            return /* CQL 'and' (230:5-231:49) */ ((CqlBoolean)af_
+            return /* CQL 'and' (230:5-231:49) */ (af_
                 && ag_());
         }
 
@@ -452,15 +452,15 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     private bool? Initial_Population_1_Compute(CqlContext context)
     {
         IEnumerable<object> a_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period(context);
-        bool? b_ = context.Operators.Exists<object>(a_);
+        CqlBoolean b_ = context.Operators.Exists<object>(a_);
 
         CqlBoolean c_() {
             IEnumerable<Encounter> d_ = this.Qualifying_Encounter_During_Day_of_Measurement_Period(context);
-            bool? e_ = context.Operators.Exists<Encounter>(d_);
+            CqlBoolean e_ = context.Operators.Exists<Encounter>(d_);
             return e_;
         }
 
-        return /* CQL 'and' (59:3-60:70) */ ((CqlBoolean)b_
+        return /* CQL 'and' (59:3-60:70) */ (b_
             && c_());
     }
 
@@ -482,7 +482,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(20, 75, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
         return j_;
     }
 
@@ -502,7 +502,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             DataType e_ = LDL190?.Value;
             object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
             CqlQuantity g_ = context.Operators.Quantity(190m, "mg/dL");
-            bool? h_ = context.Operators.GreaterOrEqual(f_ as CqlQuantity, g_);
+            CqlBoolean h_ = context.Operators.GreaterOrEqual(f_ as CqlQuantity, g_);
 
             CqlBoolean i_() {
                 DataType k_ = LDL190?.Effective;
@@ -511,7 +511,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 CqlDateTime n_ = context.Operators.Start(m_);
                 CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
                 CqlDateTime p_ = context.Operators.End(o_);
-                bool? q_ = context.Operators.SameOrBefore(n_, p_, "day");
+                CqlBoolean q_ = context.Operators.SameOrBefore(n_, p_, "day");
                 return q_;
             }
 
@@ -526,11 +526,11 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                     "corrected",
                     "appended",
                 ];
-                bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
+                CqlBoolean v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
                 return v_;
             }
 
-            return /* CQL 'and' (182:5-184:74) */ (/* CQL 'and' (182:11-183:96) */ ((CqlBoolean)h_
+            return /* CQL 'and' (182:5-184:74) */ (/* CQL 'and' (182:11-183:96) */ (h_
                 && i_())
                 && j_());
         }
@@ -556,8 +556,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
             CqlDateTime h_ = context.Operators.End(g_);
-            bool? i_ = context.Operators.SameOrBefore(f_, h_, "day");
-            return /* CQL 'and' (176:7-177:47) */ ((CqlBoolean)i_
+            CqlBoolean i_ = context.Operators.SameOrBefore(f_, h_, "day");
+            return /* CQL 'and' (176:7-177:47) */ (i_
                 && this.isVerified(context, Hypercholesterolemia as Condition));
         }
 
@@ -574,24 +574,24 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     private bool? Patients_Aged_20_to_75_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD_Compute(CqlContext context)
     {
-        bool? a_ = this.Patients_Aged_20_to_75_at_Start_of_Measurement_Period(context);
+        CqlBoolean a_ = this.Patients_Aged_20_to_75_at_Start_of_Measurement_Period(context);
 
         CqlBoolean b_() {
             IEnumerable<Observation> d_ = this.LDL_Result_Greater_Than_or_Equal_To_190(context);
             IEnumerable<Condition> e_ = this.Hypercholesterolemia_Diagnosis(context);
             IEnumerable<object> f_ = context.Operators.Union<object>(d_ as IEnumerable<object>, e_ as IEnumerable<object>);
-            bool? g_ = context.Operators.Exists<object>(f_);
+            CqlBoolean g_ = context.Operators.Exists<object>(f_);
             return g_;
         }
 
 
         CqlBoolean c_() {
             IEnumerable<object> h_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period(context);
-            bool? i_ = context.Operators.Exists<object>(h_);
+            CqlBoolean i_ = context.Operators.Exists<object>(h_);
             return !i_;
         }
 
-        return /* CQL 'and' (194:3-198:86) */ (/* CQL 'and' (194:3-197:5) */ ((CqlBoolean)a_
+        return /* CQL 'and' (194:3-198:86) */ (/* CQL 'and' (194:3-197:5) */ (a_
             && b_())
             && c_());
     }
@@ -605,15 +605,15 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     private bool? Initial_Population_2_Compute(CqlContext context)
     {
-        bool? a_ = this.Patients_Aged_20_to_75_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD(context);
+        CqlBoolean a_ = this.Patients_Aged_20_to_75_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD(context);
 
         CqlBoolean b_() {
             IEnumerable<Encounter> c_ = this.Qualifying_Encounter_During_Day_of_Measurement_Period(context);
-            bool? d_ = context.Operators.Exists<Encounter>(c_);
+            CqlBoolean d_ = context.Operators.Exists<Encounter>(c_);
             return d_;
         }
 
-        return /* CQL 'and' (63:3-64:70) */ ((CqlBoolean)a_
+        return /* CQL 'and' (63:3-64:70) */ (a_
             && b_());
     }
 
@@ -632,12 +632,12 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         bool? c_(Condition DiabetesDiagnosis) {
             CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis as Condition);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
-            bool? g_ = context.Operators.Overlaps(e_, f_, "day");
-            return /* CQL 'and' (140:7-141:44) */ ((CqlBoolean)g_
+            CqlBoolean g_ = context.Operators.Overlaps(e_, f_, "day");
+            return /* CQL 'and' (140:7-141:44) */ (g_
                 && this.isVerified(context, DiabetesDiagnosis as Condition));
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -659,31 +659,31 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(40, 75, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
         CqlBoolean k_() {
             IEnumerable<object> l_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period(context);
-            bool? m_ = context.Operators.Exists<object>(l_);
+            CqlBoolean m_ = context.Operators.Exists<object>(l_);
 
             CqlBoolean n_() {
                 IEnumerable<Observation> p_ = this.LDL_Result_Greater_Than_or_Equal_To_190(context);
-                bool? q_ = context.Operators.Exists<Observation>(p_);
+                CqlBoolean q_ = context.Operators.Exists<Observation>(p_);
                 return !q_;
             }
 
 
             CqlBoolean o_() {
                 IEnumerable<Condition> r_ = this.Hypercholesterolemia_Diagnosis(context);
-                bool? s_ = context.Operators.Exists<Condition>(r_);
+                CqlBoolean s_ = context.Operators.Exists<Condition>(r_);
                 return !s_;
             }
 
-            return /* CQL 'and' (206:9-209:5) */ (/* CQL 'and' (206:11-207:64) */ ((CqlBoolean)!m_
+            return /* CQL 'and' (206:9-209:5) */ (/* CQL 'and' (206:11-207:64) */ (!m_
                 && n_())
                 && o_());
         }
 
-        return /* CQL 'and' (204:3-209:5) */ (/* CQL 'and' (204:3-205:32) */ ((CqlBoolean)j_
+        return /* CQL 'and' (204:3-209:5) */ (/* CQL 'and' (204:3-205:32) */ (j_
             && this.Has_Diabetes_Diagnosis(context))
             && k_());
     }
@@ -697,15 +697,15 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     private bool? Initial_Population_3_Compute(CqlContext context)
     {
-        bool? a_ = this.Patients_Aged_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia(context);
+        CqlBoolean a_ = this.Patients_Aged_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia(context);
 
         CqlBoolean b_() {
             IEnumerable<Encounter> c_ = this.Qualifying_Encounter_During_Day_of_Measurement_Period(context);
-            bool? d_ = context.Operators.Exists<Encounter>(c_);
+            CqlBoolean d_ = context.Operators.Exists<Encounter>(c_);
             return d_;
         }
 
-        return /* CQL 'and' (67:3-68:70) */ ((CqlBoolean)a_
+        return /* CQL 'and' (67:3-68:70) */ (a_
             && b_());
     }
 
@@ -730,14 +730,14 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             DataType j_ = AtRiskCVD?.Value;
             object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
             CqlQuantity l_ = context.Operators.Quantity(20m, "%");
-            bool? m_ = context.Operators.GreaterOrEqual(k_ as CqlQuantity, l_);
+            CqlBoolean m_ = context.Operators.GreaterOrEqual(k_ as CqlQuantity, l_);
 
             CqlBoolean n_() {
                 CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                 DataType q_ = AtRiskCVD?.Effective;
                 object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                 CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
-                bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, s_, "day");
+                CqlBoolean t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, s_, "day");
                 return t_;
             }
 
@@ -751,16 +751,16 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
+                CqlBoolean y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
                 return y_;
             }
 
-            return /* CQL 'and' (244:7-246:67) */ (/* CQL 'and' (244:13-245:81) */ ((CqlBoolean)m_
+            return /* CQL 'and' (244:7-246:67) */ (/* CQL 'and' (244:13-245:81) */ (m_
                 && n_())
                 && o_());
         }
 
-        bool? i_ = context.Operators.WhereAny<Observation>(g_, h_);
+        CqlBoolean i_ = context.Operators.WhereAny<Observation>(g_, h_);
         return i_;
     }
 
@@ -782,32 +782,32 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(40, 75, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
         CqlBoolean k_() {
             IEnumerable<object> l_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period(context);
-            bool? m_ = context.Operators.Exists<object>(l_);
+            CqlBoolean m_ = context.Operators.Exists<object>(l_);
 
             CqlBoolean n_() {
                 IEnumerable<Condition> p_ = this.Hypercholesterolemia_Diagnosis(context);
-                bool? q_ = context.Operators.Exists<Condition>(p_);
+                CqlBoolean q_ = context.Operators.Exists<Condition>(p_);
                 return q_;
             }
 
 
             CqlBoolean o_() {
                 IEnumerable<Observation> r_ = this.LDL_Result_Greater_Than_or_Equal_To_190(context);
-                bool? s_ = context.Operators.Exists<Observation>(r_);
+                CqlBoolean s_ = context.Operators.Exists<Observation>(r_);
                 return s_;
             }
 
-            return !((bool?)(/* CQL 'or' (214:13-218:5) */ (/* CQL 'or' (214:15-216:59) */ (/* CQL 'or' (214:15-215:50) */ ((CqlBoolean)m_
+            return !((bool?)(/* CQL 'or' (214:13-218:5) */ (/* CQL 'or' (214:15-216:59) */ (/* CQL 'or' (214:15-215:50) */ (m_
                 || n_())
                 || o_())
                 || this.Has_Diabetes_Diagnosis(context))));
         }
 
-        return /* CQL 'and' (212:3-218:5) */ (/* CQL 'and' (212:3-213:35) */ ((CqlBoolean)j_
+        return /* CQL 'and' (212:3-218:5) */ (/* CQL 'and' (212:3-213:35) */ (j_
             && this.Ten_Year_CVD_Risk_is_High(context))
             && k_());
     }
@@ -821,15 +821,15 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     private bool? Initial_Population_4_Compute(CqlContext context)
     {
-        bool? a_ = this.Patients_Age_40_to_75_Years_and_have_a_10_Year_CVD_Risk_of_High_without_ASCVD_and_High_LDL_and_Diabetes(context);
+        CqlBoolean a_ = this.Patients_Age_40_to_75_Years_and_have_a_10_Year_CVD_Risk_of_High_without_ASCVD_and_High_LDL_and_Diabetes(context);
 
         CqlBoolean b_() {
             IEnumerable<Encounter> c_ = this.Qualifying_Encounter_During_Day_of_Measurement_Period(context);
-            bool? d_ = context.Operators.Exists<Encounter>(c_);
+            CqlBoolean d_ = context.Operators.Exists<Encounter>(c_);
             return d_;
         }
 
-        return /* CQL 'and' (71:3-72:70) */ ((CqlBoolean)a_
+        return /* CQL 'and' (71:3-72:70) */ (a_
             && b_());
     }
 
@@ -842,7 +842,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     private bool? Denominator_1_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population_1(context);
+        CqlBoolean a_ = this.Initial_Population_1(context);
         return a_;
     }
 
@@ -855,7 +855,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     private bool? Denominator_2_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population_2(context);
+        CqlBoolean a_ = this.Initial_Population_2(context);
         return a_;
     }
 
@@ -868,7 +868,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     private bool? Denominator_3_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population_3(context);
+        CqlBoolean a_ = this.Initial_Population_3(context);
         return a_;
     }
 
@@ -881,7 +881,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     private bool? Denominator_4_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population_4(context);
+        CqlBoolean a_ = this.Initial_Population_4(context);
         return a_;
     }
 
@@ -907,12 +907,12 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         bool? j_(Condition ExclusionDiagnosis) {
             CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ExclusionDiagnosis);
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
-            bool? n_ = context.Operators.Overlaps(l_, m_, "day");
-            return /* CQL 'and' (91:7-92:45) */ ((CqlBoolean)n_
+            CqlBoolean n_ = context.Operators.Overlaps(l_, m_, "day");
+            return /* CQL 'and' (91:7-92:45) */ (n_
                 && this.isVerified(context, ExclusionDiagnosis));
         }
 
-        bool? k_ = context.Operators.WhereAny<Condition>(i_, j_);
+        CqlBoolean k_ = context.Operators.WhereAny<Condition>(i_, j_);
         return k_;
     }
 
@@ -933,22 +933,22 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
             CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
-            bool? i_ = context.Operators.Overlaps(g_, h_, "day");
+            CqlBoolean i_ = context.Operators.Overlaps(g_, h_, "day");
 
             CqlBoolean j_() {
                 CodeableConcept k_ = StatinAllergy?.ClinicalStatus;
                 CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_);
                 CqlCode m_ = QICoreCommon_4_0_000.Instance.allergy_active(context);
                 CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
-                bool? o_ = context.Operators.Equivalent(l_, n_);
+                CqlBoolean o_ = context.Operators.Equivalent(l_, n_);
                 return o_;
             }
 
-            return /* CQL 'and' (134:7-135:72) */ ((CqlBoolean)i_
+            return /* CQL 'and' (134:7-135:72) */ (i_
                 && j_());
         }
 
-        bool? d_ = context.Operators.WhereAny<AllergyIntolerance>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<AllergyIntolerance>(b_, c_);
         return d_;
     }
 
@@ -973,12 +973,12 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         bool? i_(Condition HepatitisLiverDisease) {
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HepatitisLiverDisease as Condition);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-            bool? m_ = context.Operators.Overlaps(k_, l_, "day");
-            return /* CQL 'and' (154:7-155:48) */ ((CqlBoolean)m_
+            CqlBoolean m_ = context.Operators.Overlaps(k_, l_, "day");
+            return /* CQL 'and' (154:7-155:48) */ (m_
                 && this.isVerified(context, HepatitisLiverDisease as Condition));
         }
 
-        bool? j_ = context.Operators.WhereAny<Condition>(h_, i_);
+        CqlBoolean j_ = context.Operators.WhereAny<Condition>(h_, i_);
         return j_;
     }
 
@@ -997,12 +997,12 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         bool? c_(Condition StatinMuscleSymptom) {
             CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, StatinMuscleSymptom as Condition);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
-            bool? g_ = context.Operators.Overlaps(e_, f_, "day");
-            return /* CQL 'and' (170:7-171:46) */ ((CqlBoolean)g_
+            CqlBoolean g_ = context.Operators.Overlaps(e_, f_, "day");
+            return /* CQL 'and' (170:7-171:46) */ (g_
                 && this.isVerified(context, StatinMuscleSymptom as Condition));
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -1021,12 +1021,12 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         bool? c_(Condition ESRD) {
             CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ESRD as Condition);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
-            bool? g_ = context.Operators.Overlaps(e_, f_, "day");
-            return /* CQL 'and' (146:7-147:31) */ ((CqlBoolean)g_
+            CqlBoolean g_ = context.Operators.Overlaps(e_, f_, "day");
+            return /* CQL 'and' (146:7-147:31) */ (g_
                 && this.isVerified(context, ESRD as Condition));
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -1048,11 +1048,11 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             FhirDateTime g_ = StatinReaction?.RecordedDateElement;
             CqlDateTime h_ = context.Operators.Convert<CqlDateTime>(g_);
             CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
-            bool? j_ = context.Operators.In<CqlDateTime>(f_ ?? h_, i_, "day");
+            CqlBoolean j_ = context.Operators.In<CqlDateTime>(f_ ?? h_, i_, "day");
             return j_;
         }
 
-        bool? d_ = context.Operators.WhereAny<AdverseEvent>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<AdverseEvent>(b_, c_);
         return d_;
     }
 
@@ -1085,7 +1085,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 CqlDateTime r_ = context.Operators.Convert<CqlDateTime>(q_);
                 Period s_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, s_);
-                bool? u_ = context.Operators.In<CqlDateTime>(r_, t_, "day");
+                CqlBoolean u_ = context.Operators.In<CqlDateTime>(r_, t_, "day");
 
                 CqlBoolean v_() {
                     Code<MedicationRequest.MedicationrequestStatus> x_ = NoStatinTherapyOrdered?.StatusElement;
@@ -1095,7 +1095,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                         "active",
                         "completed",
                     ];
-                    bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
+                    CqlBoolean ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
                     return ab_;
                 }
 
@@ -1110,20 +1110,20 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
                     IEnumerable<CqlConcept> ae_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ac_, ad_);
                     CqlValueSet af_ = this.Medical_Reason(context);
-                    bool? ag_ = context.Operators.ConceptsInValueSet(ae_, af_);
+                    CqlBoolean ag_ = context.Operators.ConceptsInValueSet(ae_, af_);
                     return ag_;
                 }
 
-                return /* CQL 'and' (163:19-165:67) */ (/* CQL 'and' (163:19-164:72) */ ((CqlBoolean)u_
+                return /* CQL 'and' (163:19-165:67) */ (/* CQL 'and' (163:19-164:72) */ (u_
                     && v_())
                     && w_());
             }
 
-            bool? p_ = context.Operators.WhereAny<Encounter>(n_, o_);
+            CqlBoolean p_ = context.Operators.WhereAny<Encounter>(n_, o_);
             return p_;
         }
 
-        bool? m_ = context.Operators.WhereAny<MedicationRequest>(k_, l_);
+        CqlBoolean m_ = context.Operators.WhereAny<MedicationRequest>(k_, l_);
         return m_;
     }
 
@@ -1136,8 +1136,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_Allergy_to_Statin(context);
-        return /* CQL 'or' (96:3-103:59) */ (/* CQL 'or' (96:3-102:39) */ (/* CQL 'or' (96:3-101:27) */ (/* CQL 'or' (96:3-100:46) */ (/* CQL 'or' (96:3-99:49) */ (/* CQL 'or' (96:3-98:69) */ (/* CQL 'or' (96:3-97:37) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_Allergy_to_Statin(context);
+        return /* CQL 'or' (96:3-103:59) */ (/* CQL 'or' (96:3-102:39) */ (/* CQL 'or' (96:3-101:27) */ (/* CQL 'or' (96:3-100:46) */ (/* CQL 'or' (96:3-99:49) */ (/* CQL 'or' (96:3-98:69) */ (/* CQL 'or' (96:3-97:37) */ (a_
             || Hospice_6_18_000.Instance.Has_Hospice_Services(context))
             || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))
             || this.Has_Hepatitis_or_Liver_Disease_Diagnosis(context))
@@ -1166,21 +1166,21 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 object y_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> z_ = context.Operators.Split((string)y_, "/");
                 string aa_ = context.Operators.Last<string>(z_);
-                bool? ab_ = context.Operators.Equal(x_, aa_);
+                CqlBoolean ab_ = context.Operators.Equal(x_, aa_);
 
                 CqlBoolean ac_() {
                     CodeableConcept ad_ = M?.Code;
                     CqlConcept ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ad_);
                     CqlValueSet af_ = this.Low_Intensity_Statin_Therapy(context);
-                    bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
+                    CqlBoolean ag_ = context.Operators.ConceptInValueSet(ae_, af_);
                     return ag_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)ab_
+                return /* CQL 'and' */ (ab_
                     && ac_());
             }
 
-            bool? w_ = context.Operators.WhereAny<Medication>(u_, v_);
+            CqlBoolean w_ = context.Operators.WhereAny<Medication>(u_, v_);
             return w_;
         }
 
@@ -1197,21 +1197,21 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 object al_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> am_ = context.Operators.Split((string)al_, "/");
                 string an_ = context.Operators.Last<string>(am_);
-                bool? ao_ = context.Operators.Equal(ak_, an_);
+                CqlBoolean ao_ = context.Operators.Equal(ak_, an_);
 
                 CqlBoolean ap_() {
                     CodeableConcept aq_ = M?.Code;
                     CqlConcept ar_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aq_);
                     CqlValueSet as_ = this.Moderate_Intensity_Statin_Therapy(context);
-                    bool? at_ = context.Operators.ConceptInValueSet(ar_, as_);
+                    CqlBoolean at_ = context.Operators.ConceptInValueSet(ar_, as_);
                     return at_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)ao_
+                return /* CQL 'and' */ (ao_
                     && ap_());
             }
 
-            bool? aj_ = context.Operators.WhereAny<Medication>(ah_, ai_);
+            CqlBoolean aj_ = context.Operators.WhereAny<Medication>(ah_, ai_);
             return aj_;
         }
 
@@ -1229,21 +1229,21 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 object ay_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> az_ = context.Operators.Split((string)ay_, "/");
                 string ba_ = context.Operators.Last<string>(az_);
-                bool? bb_ = context.Operators.Equal(ax_, ba_);
+                CqlBoolean bb_ = context.Operators.Equal(ax_, ba_);
 
                 CqlBoolean bc_() {
                     CodeableConcept bd_ = M?.Code;
                     CqlConcept be_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bd_);
                     CqlValueSet bf_ = this.High_Intensity_Statin_Therapy(context);
-                    bool? bg_ = context.Operators.ConceptInValueSet(be_, bf_);
+                    CqlBoolean bg_ = context.Operators.ConceptInValueSet(be_, bf_);
                     return bg_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)bb_
+                return /* CQL 'and' */ (bb_
                     && bc_());
             }
 
-            bool? aw_ = context.Operators.WhereAny<Medication>(au_, av_);
+            CqlBoolean aw_ = context.Operators.WhereAny<Medication>(au_, av_);
             return aw_;
         }
 
@@ -1257,7 +1257,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             FhirDateTime bh_ = StatinRequest?.AuthoredOnElement;
             CqlDateTime bi_ = context.Operators.Convert<CqlDateTime>(bh_);
             CqlInterval<CqlDateTime> bj_ = this.Measurement_Period(context);
-            bool? bk_ = context.Operators.In<CqlDateTime>(bi_, bj_, "day");
+            CqlBoolean bk_ = context.Operators.In<CqlDateTime>(bi_, bj_, "day");
 
             CqlBoolean bl_() {
                 Code<MedicationRequest.MedicationrequestStatus> bn_ = StatinRequest?.StatusElement;
@@ -1267,7 +1267,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                     "active",
                     "completed",
                 ];
-                bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string>)bq_);
+                CqlBoolean br_ = context.Operators.In<string>(bp_, (IEnumerable<string>)bq_);
                 return br_;
             }
 
@@ -1283,11 +1283,11 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                     "filter-order",
                     "instance-order",
                 ];
-                bool? bw_ = context.Operators.In<string>(bu_, (IEnumerable<string>)bv_);
+                CqlBoolean bw_ = context.Operators.In<string>(bu_, (IEnumerable<string>)bv_);
                 return bw_;
             }
 
-            return /* CQL 'and' (237:5-239:113) */ (/* CQL 'and' (237:11-238:59) */ ((CqlBoolean)bk_
+            return /* CQL 'and' (237:5-239:113) */ (/* CQL 'and' (237:11-238:59) */ (bk_
                 && bl_())
                 && bm_());
         }
@@ -1315,21 +1315,21 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 object y_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> z_ = context.Operators.Split((string)y_, "/");
                 string aa_ = context.Operators.Last<string>(z_);
-                bool? ab_ = context.Operators.Equal(x_, aa_);
+                CqlBoolean ab_ = context.Operators.Equal(x_, aa_);
 
                 CqlBoolean ac_() {
                     CodeableConcept ad_ = M?.Code;
                     CqlConcept ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ad_);
                     CqlValueSet af_ = this.Low_Intensity_Statin_Therapy(context);
-                    bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
+                    CqlBoolean ag_ = context.Operators.ConceptInValueSet(ae_, af_);
                     return ag_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)ab_
+                return /* CQL 'and' */ (ab_
                     && ac_());
             }
 
-            bool? w_ = context.Operators.WhereAny<Medication>(u_, v_);
+            CqlBoolean w_ = context.Operators.WhereAny<Medication>(u_, v_);
             return w_;
         }
 
@@ -1346,21 +1346,21 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 object al_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> am_ = context.Operators.Split((string)al_, "/");
                 string an_ = context.Operators.Last<string>(am_);
-                bool? ao_ = context.Operators.Equal(ak_, an_);
+                CqlBoolean ao_ = context.Operators.Equal(ak_, an_);
 
                 CqlBoolean ap_() {
                     CodeableConcept aq_ = M?.Code;
                     CqlConcept ar_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aq_);
                     CqlValueSet as_ = this.Moderate_Intensity_Statin_Therapy(context);
-                    bool? at_ = context.Operators.ConceptInValueSet(ar_, as_);
+                    CqlBoolean at_ = context.Operators.ConceptInValueSet(ar_, as_);
                     return at_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)ao_
+                return /* CQL 'and' */ (ao_
                     && ap_());
             }
 
-            bool? aj_ = context.Operators.WhereAny<Medication>(ah_, ai_);
+            CqlBoolean aj_ = context.Operators.WhereAny<Medication>(ah_, ai_);
             return aj_;
         }
 
@@ -1378,21 +1378,21 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 object ay_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> az_ = context.Operators.Split((string)ay_, "/");
                 string ba_ = context.Operators.Last<string>(az_);
-                bool? bb_ = context.Operators.Equal(ax_, ba_);
+                CqlBoolean bb_ = context.Operators.Equal(ax_, ba_);
 
                 CqlBoolean bc_() {
                     CodeableConcept bd_ = M?.Code;
                     CqlConcept be_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bd_);
                     CqlValueSet bf_ = this.High_Intensity_Statin_Therapy(context);
-                    bool? bg_ = context.Operators.ConceptInValueSet(be_, bf_);
+                    CqlBoolean bg_ = context.Operators.ConceptInValueSet(be_, bf_);
                     return bg_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)bb_
+                return /* CQL 'and' */ (bb_
                     && bc_());
             }
 
-            bool? aw_ = context.Operators.WhereAny<Medication>(au_, av_);
+            CqlBoolean aw_ = context.Operators.WhereAny<Medication>(au_, av_);
             return aw_;
         }
 
@@ -1408,11 +1408,11 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlDateTime bj_ = context.Operators.ConvertDateToDateTime(bi_);
             CqlDate bk_ = bh_?.high;
             CqlDateTime bl_ = context.Operators.ConvertDateToDateTime(bk_);
-            bool? bm_ = bh_?.lowClosed;
-            bool? bn_ = bh_?.highClosed;
+            CqlBoolean bm_ = bh_?.lowClosed;
+            CqlBoolean bn_ = bh_?.highClosed;
             CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(bj_, bl_, bm_, bn_);
             CqlInterval<CqlDateTime> bp_ = this.Measurement_Period(context);
-            bool? bq_ = context.Operators.Overlaps(bo_, bp_, "day");
+            CqlBoolean bq_ = context.Operators.Overlaps(bo_, bp_, "day");
 
             CqlBoolean br_() {
                 Code<MedicationRequest.MedicationrequestStatus> bs_ = ActiveStatin?.StatusElement;
@@ -1422,11 +1422,11 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                     "active",
                     "completed",
                 ];
-                bool? bw_ = context.Operators.In<string>(bu_, (IEnumerable<string>)bv_);
+                CqlBoolean bw_ = context.Operators.In<string>(bu_, (IEnumerable<string>)bv_);
                 return bw_;
             }
 
-            return /* CQL 'and' (190:5-191:58) */ ((CqlBoolean)bq_
+            return /* CQL 'and' (190:5-191:58) */ (bq_
                 && br_());
         }
 
@@ -1444,15 +1444,15 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     private bool? Numerator_Compute(CqlContext context)
     {
         IEnumerable<MedicationRequest> a_ = this.Statin_Therapy_Ordered_during_Measurement_Period(context);
-        bool? b_ = context.Operators.Exists<MedicationRequest>(a_);
+        CqlBoolean b_ = context.Operators.Exists<MedicationRequest>(a_);
 
         CqlBoolean c_() {
             IEnumerable<MedicationRequest> d_ = this.Medication_Active_during_the_Measurement_Period(context);
-            bool? e_ = context.Operators.Exists<MedicationRequest>(d_);
+            CqlBoolean e_ = context.Operators.Exists<MedicationRequest>(d_);
             return e_;
         }
 
-        return /* CQL 'or' (106:3-107:63) */ ((CqlBoolean)b_
+        return /* CQL 'or' (106:3-107:63) */ (b_
             || c_());
     }
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("PalliativeCareFHIR", "0.6.000")]
 public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<PalliativeCareFHIR_0_6_000>
 {
@@ -109,7 +109,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                 "amended",
                 "corrected",
             ];
-            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
+            CqlBoolean k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
 
             CqlBoolean l_() {
                 List<CodeableConcept> n_ = PalliativeAssessment?.Category;
@@ -118,11 +118,11 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                     CqlCode q_ = this.survey(context);
                     CqlConcept r_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, PalliativeAssessmentCategory);
                     IReadOnlyList<CqlCode> s_ = r_?.codes;
-                    bool? t_ = context.Operators.In<CqlCode>(q_, (IEnumerable<CqlCode>)s_);
+                    CqlBoolean t_ = context.Operators.In<CqlCode>(q_, (IEnumerable<CqlCode>)s_);
                     return t_;
                 }
 
-                bool? p_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)n_, o_);
+                CqlBoolean p_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)n_, o_);
                 return p_;
             }
 
@@ -131,16 +131,16 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                 DataType u_ = PalliativeAssessment?.Effective;
                 CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, u_);
                 CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
-                bool? x_ = context.Operators.Overlaps(v_, w_, (string)default);
+                CqlBoolean x_ = context.Operators.Overlaps(v_, w_, (string)default);
                 return x_;
             }
 
-            return /* CQL 'and' (23:15-27:112) */ (/* CQL 'and' (23:21-26:17) */ ((CqlBoolean)k_
+            return /* CQL 'and' (23:15-27:112) */ (/* CQL 'and' (23:21-26:17) */ (k_
                 && l_())
                 && m_());
         }
 
-        bool? e_ = context.Operators.WhereAny<Observation>(c_, d_);
+        CqlBoolean e_ = context.Operators.WhereAny<Observation>(c_, d_);
 
         CqlBoolean f_() {
             CqlValueSet y_ = this.Palliative_Care_Encounter(context);
@@ -149,21 +149,21 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
             bool? aa_(Encounter PalliativeEncounter) {
                 Code<Encounter.EncounterStatus> ac_ = PalliativeEncounter?.StatusElement;
                 string ad_ = FHIRHelpers_4_0_001.Instance.ToString(context, ac_);
-                bool? ae_ = context.Operators.Equal(ad_, "finished");
+                CqlBoolean ae_ = context.Operators.Equal(ad_, "finished");
 
                 CqlBoolean af_() {
                     Period ag_ = PalliativeEncounter?.Period;
                     CqlInterval<CqlDateTime> ah_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ag_);
                     CqlInterval<CqlDateTime> ai_ = this.Measurement_Period(context);
-                    bool? aj_ = context.Operators.Overlaps(ah_, ai_, (string)default);
+                    CqlBoolean aj_ = context.Operators.Overlaps(ah_, ai_, (string)default);
                     return aj_;
                 }
 
-                return /* CQL 'and' (30:17-31:110) */ ((CqlBoolean)ae_
+                return /* CQL 'and' (30:17-31:110) */ (ae_
                     && af_());
             }
 
-            bool? ab_ = context.Operators.WhereAny<Encounter>(z_, aa_);
+            CqlBoolean ab_ = context.Operators.WhereAny<Encounter>(z_, aa_);
             return ab_;
         }
 
@@ -179,25 +179,25 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                     "completed",
                     "in-progress",
                 ];
-                bool? ar_ = context.Operators.In<string>(ap_, (IEnumerable<string>)aq_);
+                CqlBoolean ar_ = context.Operators.In<string>(ap_, (IEnumerable<string>)aq_);
 
                 CqlBoolean as_() {
                     DataType at_ = PalliativeIntervention?.Performed;
                     CqlInterval<CqlDateTime> au_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, at_);
                     CqlInterval<CqlDateTime> av_ = this.Measurement_Period(context);
-                    bool? aw_ = context.Operators.Overlaps(au_, av_, (string)default);
+                    CqlBoolean aw_ = context.Operators.Overlaps(au_, av_, (string)default);
                     return aw_;
                 }
 
-                return /* CQL 'and' (34:17-35:116) */ ((CqlBoolean)ar_
+                return /* CQL 'and' (34:17-35:116) */ (ar_
                     && as_());
             }
 
-            bool? an_ = context.Operators.WhereAny<Procedure>(al_, am_);
+            CqlBoolean an_ = context.Operators.WhereAny<Procedure>(al_, am_);
             return an_;
         }
 
-        return /* CQL 'or' (22:3-36:13) */ (/* CQL 'or' (22:3-32:13) */ ((CqlBoolean)e_
+        return /* CQL 'or' (22:3-36:13) */ (/* CQL 'or' (22:3-32:13) */ (e_
             || f_())
             || g_());
     }

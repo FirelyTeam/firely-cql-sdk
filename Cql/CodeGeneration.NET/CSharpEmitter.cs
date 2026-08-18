@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -38,6 +38,61 @@ internal partial class CSharpEmitter
 
     private readonly Dictionary<CodeLocal, string> _assignedNames = new(ReferenceEqualityComparer.Instance);
 
+    /// <summary>
+    /// Hoisted locals whose IR type is <c>bool?</c> but which are DECLARED
+    /// <see cref="CqlBoolean"/>, so that a chain of CQL logic reads as
+    /// <c>a_ &amp;&amp; b_</c> rather than <c>(CqlBoolean)a_ &amp;&amp; (CqlBoolean)b_</c>.
+    ///
+    /// <para>The IR type is deliberately left alone: the operator binder matches
+    /// <c>ICqlOperators</c> overloads on it by reflection, and a <c>CqlBoolean</c> there cannot bind
+    /// to a <c>bool?</c> parameter — a query predicate's <c>Func&lt;T, bool?&gt;</c> being the case
+    /// that proves it. So this is a PRINTING decision only, and the printed type and the node type
+    /// diverge for exactly these locals. <see cref="AsNullableBool"/> is what repays that
+    /// divergence wherever the printed context needs a real <c>bool?</c>.</para>
+    /// </summary>
+    private readonly HashSet<CodeLocal> _cqlBooleanLocals = new(ReferenceEqualityComparer.Instance);
+
+    /// <summary>Whether <paramref name="atom"/> denotes a local this emitter declared
+    /// <see cref="CqlBoolean"/>, so the printed contexts below can stay in that type.</summary>
+    private bool IsCqlBooleanLocal(Atom atom) =>
+        atom.Node is CodeLocal local && _cqlBooleanLocals.Contains(local);
+
+    /// <summary>The printed names of the <see cref="_cqlBooleanLocals"/>, so a conversion can be
+    /// recognised as redundant from the CODE it wraps rather than from the IR node.</summary>
+    private readonly HashSet<string> _cqlBooleanNames = [];
+
+    /// <summary>
+    /// Whether <paramref name="code"/> already denotes a <see cref="CqlBoolean"/>: a declared local,
+    /// or a negation of one, since <see cref="CqlBoolean"/>'s own <c>operator !</c> returns
+    /// <see cref="CqlBoolean"/>. Either way a surrounding conversion to it is redundant.
+    ///
+    /// <para>Matched on the printed name deliberately. The IR node is not enough: <c>implies</c>
+    /// builds its <c>!left</c> around the ORIGINAL operand expression, and the local only appears
+    /// when the child linearizes — so the node under the negation is not a
+    /// <see cref="CodeLocal"/> even though the text is. Names are unique within one emission
+    /// (allocated from a single sequence), so matching them cannot cross-talk.</para>
+    /// </summary>
+    private bool PrintsAsCqlBoolean(string code) =>
+        _cqlBooleanNames.Contains(code.TrimStart('!'));
+
+    /// <summary>
+    /// A reference to <paramref name="atom"/> in a position that genuinely needs <c>bool?</c>,
+    /// casting back when it denotes a <see cref="CqlBoolean"/>-declared local.
+    ///
+    /// <para>Deliberately a LAST resort. The three shapes that used to force it —
+    /// <c>?? false</c> and the <c>is true</c>/<c>is false</c>/<c>is null</c> patterns — are now
+    /// answered inside the type by <see cref="CqlBoolean.IsTrue"/>, <see cref="CqlBoolean.IsFalse"/>
+    /// and <see cref="CqlBoolean.HasValue"/>, which return the plain <see cref="bool"/> a branch
+    /// condition actually wants. What is left for this is a coalesce whose right operand is not the
+    /// constant <c>false</c>, where the result must genuinely stay nullable.</para>
+    ///
+    /// <para><paramref name="printed"/> is passed in rather than read off the atom so the caller's
+    /// parenthesization is preserved — dropping it turned <c>(x as CqlDateTime) ?? false</c> into a
+    /// mis-grouped expression and 1,652 compile errors.</para>
+    /// </summary>
+    private string AsNullableBool(Atom atom, string printed) =>
+        IsCqlBooleanLocal(atom) ? $"((bool?){printed})" : printed;
+
     /// <param name="typeToCSharpConverter">Renders .NET types as C# type syntax.</param>
     /// <param name="namingConventions">The generated-class naming conventions the printed
     /// bodies must agree with (see <see cref="ICSharpNamingConventions"/>); provided by the
@@ -60,6 +115,8 @@ internal partial class CSharpEmitter
         // Naming is scoped to one definition body: each emission starts fresh, so earlier
         // emissions can neither cause collisions nor grow the maps without bound.
         _assignedNames.Clear();
+        _cqlBooleanLocals.Clear();
+        _cqlBooleanNames.Clear();
 
         var scope = Scope.CreateRoot(this, lambda.Parameters);
         var result = scope.Linearize(BodyWithoutRootBoolConversion(lambda), tailPosition: true);
@@ -100,7 +157,9 @@ internal partial class CSharpEmitter
     private static CodeExpression BodyWithoutRootBoolConversion(CodeLambda lambda) =>
         lambda.Body is CodeCast { Type: var castType, Operand: { Type: var operandType } inner }
         && castType == typeof(bool?)
-        && operandType == typeof(CqlBoolean)
+        // bool as well as CqlBoolean: both convert to bool? implicitly at the return, so the cast is
+        // redundant either way. The bool case is what IsTrue/IsFalse produce.
+        && (operandType == typeof(CqlBoolean) || operandType == typeof(bool))
             ? inner
             : lambda.Body;
 
@@ -134,6 +193,8 @@ internal partial class CSharpEmitter
     public string? TryEmitExpressionBody(CodeLambda lambda)
     {
         _assignedNames.Clear();
+        _cqlBooleanLocals.Clear();
+        _cqlBooleanNames.Clear();
 
         var scope = Scope.CreateRoot(this, lambda.Parameters);
         var result = scope.Linearize(BodyWithoutRootBoolConversion(lambda), tailPosition: true);

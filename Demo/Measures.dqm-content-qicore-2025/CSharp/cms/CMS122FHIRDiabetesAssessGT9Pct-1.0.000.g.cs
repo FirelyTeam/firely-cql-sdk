@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS122FHIRDiabetesAssessGT9Pct", "1.0.000")]
 public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISingleton<CMS122FHIRDiabetesAssessGT9Pct_1_0_000>
 {
@@ -236,12 +236,12 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             bool? ap_(CqlConcept T) {
                 CqlCode at_ = this.Medical_nutrition_therapy__initial_assessment_and_intervention__individual__face_to_face_with_the_patient__each_15_minutes(context);
                 CqlConcept au_ = context.Operators.ConvertCodeToConcept(at_);
-                bool? av_ = context.Operators.Equivalent(T, au_);
+                CqlBoolean av_ = context.Operators.Equivalent(T, au_);
                 return av_;
             }
 
             IEnumerable<CqlConcept> aq_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)an_, ao_, ap_);
-            bool? ar_ = context.Operators.Exists<CqlConcept>(aq_);
+            CqlBoolean ar_ = context.Operators.Exists<CqlConcept>(aq_);
             return ar_;
         }
 
@@ -259,12 +259,12 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             bool? ay_(CqlConcept T) {
                 CqlCode bc_ = this.Medical_nutrition_therapy__re_assessment_and_intervention__individual__face_to_face_with_the_patient__each_15_minutes(context);
                 CqlConcept bd_ = context.Operators.ConvertCodeToConcept(bc_);
-                bool? be_ = context.Operators.Equivalent(T, bd_);
+                CqlBoolean be_ = context.Operators.Equivalent(T, bd_);
                 return be_;
             }
 
             IEnumerable<CqlConcept> az_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)aw_, ax_, ay_);
-            bool? ba_ = context.Operators.Exists<CqlConcept>(az_);
+            CqlBoolean ba_ = context.Operators.Exists<CqlConcept>(az_);
             return ba_;
         }
 
@@ -284,12 +284,12 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             bool? bh_(CqlConcept T) {
                 CqlCode bl_ = this.Medical_nutrition_therapy__group__2_or_more_individual_s____each_30_minutes(context);
                 CqlConcept bm_ = context.Operators.ConvertCodeToConcept(bl_);
-                bool? bn_ = context.Operators.Equivalent(T, bm_);
+                CqlBoolean bn_ = context.Operators.Equivalent(T, bm_);
                 return bn_;
             }
 
             IEnumerable<CqlConcept> bi_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bf_, bg_, bh_);
-            bool? bj_ = context.Operators.Exists<CqlConcept>(bi_);
+            CqlBoolean bj_ = context.Operators.Exists<CqlConcept>(bi_);
             return bj_;
         }
 
@@ -307,12 +307,12 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             bool? bq_(CqlConcept T) {
                 CqlCode bu_ = this.Medical_nutrition_therapy__reassessment_and_subsequent_intervention_s__following_second_referral_in_same_year_for_change_in_diagnosis__medical_condition_or_treatment_regimen__including_additional_hours_needed_for_renal_disease___individual__face_to_face_with_the_patient__each_15_minutes(context);
                 CqlConcept bv_ = context.Operators.ConvertCodeToConcept(bu_);
-                bool? bw_ = context.Operators.Equivalent(T, bv_);
+                CqlBoolean bw_ = context.Operators.Equivalent(T, bv_);
                 return bw_;
             }
 
             IEnumerable<CqlConcept> br_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bo_, bp_, bq_);
-            bool? bs_ = context.Operators.Exists<CqlConcept>(br_);
+            CqlBoolean bs_ = context.Operators.Exists<CqlConcept>(br_);
             return bs_;
         }
 
@@ -332,12 +332,12 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             bool? bz_(CqlConcept T) {
                 CqlCode cd_ = this.Medical_nutrition_therapy__reassessment_and_subsequent_intervention_s__following_second_referral_in_same_year_for_change_in_diagnosis__medical_condition__or_treatment_regimen__including_additional_hours_needed_for_renal_disease___group__2_or_more_individuals___each_30_minutes(context);
                 CqlConcept ce_ = context.Operators.ConvertCodeToConcept(cd_);
-                bool? cf_ = context.Operators.Equivalent(T, ce_);
+                CqlBoolean cf_ = context.Operators.Equivalent(T, ce_);
                 return cf_;
             }
 
             IEnumerable<CqlConcept> ca_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bx_, by_, bz_);
-            bool? cb_ = context.Operators.Exists<CqlConcept>(ca_);
+            CqlBoolean cb_ = context.Operators.Exists<CqlConcept>(ca_);
             return cb_;
         }
 
@@ -352,7 +352,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             CqlInterval<CqlDateTime> cg_ = this.Measurement_Period(context);
             Period ch_ = ValidEncounters?.Period;
             CqlInterval<CqlDateTime> ci_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ch_);
-            bool? cj_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(cg_, ci_, "day");
+            CqlBoolean cj_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(cg_, ci_, "day");
             return cj_;
         }
 
@@ -378,11 +378,11 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
         CqlBoolean k_() {
             IEnumerable<Encounter> m_ = this.Qualifying_Encounters(context);
-            bool? n_ = context.Operators.Exists<Encounter>(m_);
+            CqlBoolean n_ = context.Operators.Exists<Encounter>(m_);
             return n_;
         }
 
@@ -397,15 +397,15 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             bool? t_(Condition DiabetesDiagnosis) {
                 CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
                 CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
-                bool? x_ = context.Operators.Overlaps(v_, w_, "day");
+                CqlBoolean x_ = context.Operators.Overlaps(v_, w_, "day");
                 return x_;
             }
 
-            bool? u_ = context.Operators.WhereAny<Condition>(s_, t_);
+            CqlBoolean u_ = context.Operators.WhereAny<Condition>(s_, t_);
             return u_;
         }
 
-        return /* CQL 'and' (52:3-58:5) */ (/* CQL 'and' (52:3-55:38) */ ((CqlBoolean)j_
+        return /* CQL 'and' (52:3-58:5) */ (/* CQL 'and' (52:3-55:38) */ (j_
             && k_())
             && l_());
     }
@@ -419,7 +419,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -432,8 +432,8 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
-        bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        return /* CQL 'or' (64:3-67:69) */ (/* CQL 'or' (64:3-66:73) */ (/* CQL 'or' (64:3-65:74) */ ((CqlBoolean)a_
+        CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+        return /* CQL 'or' (64:3-67:69) */ (/* CQL 'or' (64:3-66:73) */ (/* CQL 'or' (64:3-65:74) */ (a_
             || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context))
             || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context))
             || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context));
@@ -486,7 +486,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             }
             CqlDateTime k_ = QICoreCommon_4_0_000.Instance.latest(context, j_);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-            bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
+            CqlBoolean m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
             return m_;
         }
 
@@ -586,7 +586,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             CqlDateTime k_ = QICoreCommon_4_0_000.Instance.latest(context, j_);
             CqlDate l_ = this.Most_Recent_Glycemic_Status_Date(context);
             CqlDateTime m_ = context.Operators.ConvertDateToDateTime(l_);
-            bool? n_ = context.Operators.SameAs(k_, m_, "day");
+            CqlBoolean n_ = context.Operators.SameAs(k_, m_, "day");
             return n_;
         }
 
@@ -647,7 +647,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
         DataType b_ = a_?.Value;
         object c_ = FHIRHelpers_4_4_000.Instance.ToValue(context, b_);
         CqlQuantity d_ = context.Operators.Quantity(9m, "%");
-        bool? e_ = context.Operators.Greater(c_ as CqlQuantity, d_);
+        CqlBoolean e_ = context.Operators.Greater(c_ as CqlQuantity, d_);
         return e_;
     }
 
@@ -661,7 +661,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
     private bool? Has_No_Record_Of_Glycemic_Status_Assessment_Compute(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Glycemic_Status_Assessment(context);
-        bool? b_ = context.Operators.Exists<Observation>(a_);
+        CqlBoolean b_ = context.Operators.Exists<Observation>(a_);
         return !b_;
     }
 
@@ -674,8 +674,8 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
 
     private bool? Numerator_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_Most_Recent_Glycemic_Status_Assessment_Without_Result(context);
-        return /* CQL 'or' (70:3-72:52) */ (/* CQL 'or' (70:3-71:60) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_Most_Recent_Glycemic_Status_Assessment_Without_Result(context);
+        return /* CQL 'or' (70:3-72:52) */ (/* CQL 'or' (70:3-71:60) */ (a_
             || this.Has_Most_Recent_Elevated_Glycemic_Status_Assessment(context))
             || this.Has_No_Record_Of_Glycemic_Status_Assessment(context));
     }

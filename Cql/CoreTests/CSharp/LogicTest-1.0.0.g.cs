@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("LogicTest", "1.0.0")]
 public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 {
@@ -56,8 +56,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueAndTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return /* CQL 'and' (14:23-14:45) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'and' (14:23-14:45) */ (a_
             && this.TrueDef(context));
     }
 
@@ -70,8 +70,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueAndFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return /* CQL 'and' (15:24-15:47) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'and' (15:24-15:47) */ (a_
             && this.FalseDef(context));
     }
 
@@ -84,8 +84,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueAndNull_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return /* CQL 'and' (16:23-16:45) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'and' (16:23-16:45) */ (a_
             && this.NullDef(context));
     }
 
@@ -98,8 +98,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseAndTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return /* CQL 'and' (17:24-17:47) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'and' (17:24-17:47) */ (a_
             && this.TrueDef(context));
     }
 
@@ -112,8 +112,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseAndFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return /* CQL 'and' (18:25-18:49) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'and' (18:25-18:49) */ (a_
             && this.FalseDef(context));
     }
 
@@ -126,8 +126,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseAndNull_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return /* CQL 'and' (19:24-19:47) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'and' (19:24-19:47) */ (a_
             && this.NullDef(context));
     }
 
@@ -140,8 +140,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullAndTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return /* CQL 'and' (20:23-20:45) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'and' (20:23-20:45) */ (a_
             && this.TrueDef(context));
     }
 
@@ -154,8 +154,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullAndFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return /* CQL 'and' (21:24-21:47) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'and' (21:24-21:47) */ (a_
             && this.FalseDef(context));
     }
 
@@ -168,8 +168,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullAndNull_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return /* CQL 'and' (22:23-22:45) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'and' (22:23-22:45) */ (a_
             && this.NullDef(context));
     }
 
@@ -182,8 +182,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueOrTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return /* CQL 'or' (26:22-26:43) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'or' (26:22-26:43) */ (a_
             || this.TrueDef(context));
     }
 
@@ -196,8 +196,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueOrFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return /* CQL 'or' (27:23-27:45) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'or' (27:23-27:45) */ (a_
             || this.FalseDef(context));
     }
 
@@ -210,8 +210,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueOrNull_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return /* CQL 'or' (28:22-28:43) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'or' (28:22-28:43) */ (a_
             || this.NullDef(context));
     }
 
@@ -224,8 +224,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseOrTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return /* CQL 'or' (29:23-29:45) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'or' (29:23-29:45) */ (a_
             || this.TrueDef(context));
     }
 
@@ -238,8 +238,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseOrFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return /* CQL 'or' (30:24-30:47) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'or' (30:24-30:47) */ (a_
             || this.FalseDef(context));
     }
 
@@ -252,8 +252,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseOrNull_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return /* CQL 'or' (31:23-31:45) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'or' (31:23-31:45) */ (a_
             || this.NullDef(context));
     }
 
@@ -266,8 +266,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullOrTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return /* CQL 'or' (32:22-32:43) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'or' (32:22-32:43) */ (a_
             || this.TrueDef(context));
     }
 
@@ -280,8 +280,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullOrFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return /* CQL 'or' (33:23-33:45) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'or' (33:23-33:45) */ (a_
             || this.FalseDef(context));
     }
 
@@ -294,8 +294,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullOrNull_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return /* CQL 'or' (34:22-34:43) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'or' (34:22-34:43) */ (a_
             || this.NullDef(context));
     }
 
@@ -308,7 +308,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NotTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
+        CqlBoolean a_ = this.TrueDef(context);
         return !a_;
     }
 
@@ -321,7 +321,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NotFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
+        CqlBoolean a_ = this.FalseDef(context);
         return !a_;
     }
 
@@ -334,7 +334,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NotNull_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
+        CqlBoolean a_ = this.NullDef(context);
         return !a_;
     }
 
@@ -347,8 +347,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueImpliesTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return /* CQL 'implies' (47:27-47:53) */ ((CqlBoolean)!a_
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'implies' (47:27-47:53) */ (!a_
             || this.TrueDef(context));
     }
 
@@ -361,8 +361,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueImpliesFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return /* CQL 'implies' (48:28-48:55) */ ((CqlBoolean)!a_
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'implies' (48:28-48:55) */ (!a_
             || this.FalseDef(context));
     }
 
@@ -375,8 +375,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueImpliesNull_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return /* CQL 'implies' (49:27-49:53) */ ((CqlBoolean)!a_
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'implies' (49:27-49:53) */ (!a_
             || this.NullDef(context));
     }
 
@@ -389,8 +389,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseImpliesTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return /* CQL 'implies' (50:28-50:55) */ ((CqlBoolean)!a_
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'implies' (50:28-50:55) */ (!a_
             || this.TrueDef(context));
     }
 
@@ -403,8 +403,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseImpliesFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return /* CQL 'implies' (51:29-51:57) */ ((CqlBoolean)!a_
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'implies' (51:29-51:57) */ (!a_
             || this.FalseDef(context));
     }
 
@@ -417,8 +417,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseImpliesNull_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return /* CQL 'implies' (52:28-52:55) */ ((CqlBoolean)!a_
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'implies' (52:28-52:55) */ (!a_
             || this.NullDef(context));
     }
 
@@ -431,8 +431,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullImpliesTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return /* CQL 'implies' (53:27-53:53) */ ((CqlBoolean)!a_
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'implies' (53:27-53:53) */ (!a_
             || this.TrueDef(context));
     }
 
@@ -445,8 +445,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullImpliesFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return /* CQL 'implies' (54:28-54:55) */ ((CqlBoolean)!a_
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'implies' (54:28-54:55) */ (!a_
             || this.FalseDef(context));
     }
 
@@ -459,8 +459,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullImpliesNull_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return /* CQL 'implies' (55:27-55:53) */ ((CqlBoolean)!a_
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'implies' (55:27-55:53) */ (!a_
             || this.NullDef(context));
     }
 
@@ -473,9 +473,9 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueXorTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
+        CqlBoolean a_ = this.TrueDef(context);
         // CQL 'xor' (61:23-61:45): right operand skipped when left is null
-        if (a_ is null)
+        if (!a_.HasValue)
         {
             return null as bool?;
         }
@@ -494,15 +494,15 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueXorFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
+        CqlBoolean a_ = this.TrueDef(context);
         // CQL 'xor' (62:24-62:47): right operand skipped when left is null
-        if (a_ is null)
+        if (!a_.HasValue)
         {
             return null as bool?;
         }
         else
         {
-            bool? b_ = this.FalseDef(context);
+            CqlBoolean b_ = this.FalseDef(context);
             return a_ ^ b_;
         }
     }
@@ -516,15 +516,15 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueXorNull_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
+        CqlBoolean a_ = this.TrueDef(context);
         // CQL 'xor' (63:23-63:45): right operand skipped when left is null
-        if (a_ is null)
+        if (!a_.HasValue)
         {
             return null as bool?;
         }
         else
         {
-            bool? b_ = this.NullDef(context);
+            CqlBoolean b_ = this.NullDef(context);
             return a_ ^ b_;
         }
     }
@@ -538,15 +538,15 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseXorTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
+        CqlBoolean a_ = this.FalseDef(context);
         // CQL 'xor' (64:24-64:47): right operand skipped when left is null
-        if (a_ is null)
+        if (!a_.HasValue)
         {
             return null as bool?;
         }
         else
         {
-            bool? b_ = this.TrueDef(context);
+            CqlBoolean b_ = this.TrueDef(context);
             return a_ ^ b_;
         }
     }
@@ -560,9 +560,9 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseXorFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
+        CqlBoolean a_ = this.FalseDef(context);
         // CQL 'xor' (65:25-65:49): right operand skipped when left is null
-        if (a_ is null)
+        if (!a_.HasValue)
         {
             return null as bool?;
         }
@@ -581,15 +581,15 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseXorNull_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
+        CqlBoolean a_ = this.FalseDef(context);
         // CQL 'xor' (66:24-66:47): right operand skipped when left is null
-        if (a_ is null)
+        if (!a_.HasValue)
         {
             return null as bool?;
         }
         else
         {
-            bool? b_ = this.NullDef(context);
+            CqlBoolean b_ = this.NullDef(context);
             return a_ ^ b_;
         }
     }
@@ -603,15 +603,15 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullXorTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
+        CqlBoolean a_ = this.NullDef(context);
         // CQL 'xor' (67:23-67:45): right operand skipped when left is null
-        if (a_ is null)
+        if (!a_.HasValue)
         {
             return null as bool?;
         }
         else
         {
-            bool? b_ = this.TrueDef(context);
+            CqlBoolean b_ = this.TrueDef(context);
             return a_ ^ b_;
         }
     }
@@ -625,15 +625,15 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullXorFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
+        CqlBoolean a_ = this.NullDef(context);
         // CQL 'xor' (68:24-68:47): right operand skipped when left is null
-        if (a_ is null)
+        if (!a_.HasValue)
         {
             return null as bool?;
         }
         else
         {
-            bool? b_ = this.FalseDef(context);
+            CqlBoolean b_ = this.FalseDef(context);
             return a_ ^ b_;
         }
     }
@@ -647,9 +647,9 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullXorNull_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
+        CqlBoolean a_ = this.NullDef(context);
         // CQL 'xor' (69:23-69:45): right operand skipped when left is null
-        if (a_ is null)
+        if (!a_.HasValue)
         {
             return null as bool?;
         }
@@ -668,8 +668,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? IsTrueOfTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return (bool?)(/* CQL 'is true' (74:24-74:40) */ a_ is true);
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'is true' (74:24-74:40) */ a_.IsTrue;
     }
 
 
@@ -681,8 +681,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? IsTrueOfFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return (bool?)(/* CQL 'is true' (75:25-75:42) */ a_ is true);
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'is true' (75:25-75:42) */ a_.IsTrue;
     }
 
 
@@ -694,8 +694,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? IsTrueOfNull_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return (bool?)(/* CQL 'is true' (76:24-76:40) */ a_ is true);
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'is true' (76:24-76:40) */ a_.IsTrue;
     }
 
 
@@ -707,8 +707,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? IsFalseOfTrue_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return (bool?)(/* CQL 'is false' (77:25-77:42) */ a_ is false);
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'is false' (77:25-77:42) */ a_.IsFalse;
     }
 
 
@@ -720,8 +720,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? IsFalseOfFalse_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return (bool?)(/* CQL 'is false' (78:26-78:44) */ a_ is false);
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'is false' (78:26-78:44) */ a_.IsFalse;
     }
 
 
@@ -733,8 +733,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? IsFalseOfNull_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return (bool?)(/* CQL 'is false' (79:25-79:42) */ a_ is false);
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'is false' (79:25-79:42) */ a_.IsFalse;
     }
 
 
@@ -746,7 +746,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? MessageTrue_Compute(CqlContext context)
     {
-        bool? a_ = context.Operators.Message<bool?>(true, "LogicTest.RightEvaluated", "Trace", "right operand was evaluated");
+        CqlBoolean a_ = context.Operators.Message<bool?>(true, "LogicTest.RightEvaluated", "Trace", "right operand was evaluated");
         return a_;
     }
 
@@ -759,8 +759,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseAndMessage_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return /* CQL 'and' (87:27-87:54) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'and' (87:27-87:54) */ (a_
             && this.MessageTrue(context));
     }
 
@@ -773,8 +773,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullAndMessage_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return /* CQL 'and' (88:26-88:52) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'and' (88:26-88:52) */ (a_
             && this.MessageTrue(context));
     }
 
@@ -787,8 +787,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueOrMessage_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return /* CQL 'or' (89:25-89:50) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'or' (89:25-89:50) */ (a_
             || this.MessageTrue(context));
     }
 
@@ -801,8 +801,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullOrMessage_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return /* CQL 'or' (90:25-90:50) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'or' (90:25-90:50) */ (a_
             || this.MessageTrue(context));
     }
 
@@ -815,8 +815,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseImpliesMessage_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
-        return /* CQL 'implies' (96:31-96:62) */ ((CqlBoolean)!a_
+        CqlBoolean a_ = this.FalseDef(context);
+        return /* CQL 'implies' (96:31-96:62) */ (!a_
             || this.MessageTrue(context));
     }
 
@@ -829,8 +829,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueImpliesMessage_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
-        return /* CQL 'implies' (97:30-97:60) */ ((CqlBoolean)!a_
+        CqlBoolean a_ = this.TrueDef(context);
+        return /* CQL 'implies' (97:30-97:60) */ (!a_
             || this.MessageTrue(context));
     }
 
@@ -843,8 +843,8 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullImpliesMessage_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
-        return /* CQL 'implies' (98:30-98:60) */ ((CqlBoolean)!a_
+        CqlBoolean a_ = this.NullDef(context);
+        return /* CQL 'implies' (98:30-98:60) */ (!a_
             || this.MessageTrue(context));
     }
 
@@ -857,15 +857,15 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullXorMessage_Compute(CqlContext context)
     {
-        bool? a_ = this.NullDef(context);
+        CqlBoolean a_ = this.NullDef(context);
         // CQL 'xor' (102:26-102:52): right operand skipped when left is null
-        if (a_ is null)
+        if (!a_.HasValue)
         {
             return null as bool?;
         }
         else
         {
-            bool? b_ = this.MessageTrue(context);
+            CqlBoolean b_ = this.MessageTrue(context);
             return a_ ^ b_;
         }
     }
@@ -879,15 +879,15 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? TrueXorMessage_Compute(CqlContext context)
     {
-        bool? a_ = this.TrueDef(context);
+        CqlBoolean a_ = this.TrueDef(context);
         // CQL 'xor' (103:26-103:52): right operand skipped when left is null
-        if (a_ is null)
+        if (!a_.HasValue)
         {
             return null as bool?;
         }
         else
         {
-            bool? b_ = this.MessageTrue(context);
+            CqlBoolean b_ = this.MessageTrue(context);
             return a_ ^ b_;
         }
     }
@@ -901,15 +901,15 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? FalseXorMessage_Compute(CqlContext context)
     {
-        bool? a_ = this.FalseDef(context);
+        CqlBoolean a_ = this.FalseDef(context);
         // CQL 'xor' (104:27-104:54): right operand skipped when left is null
-        if (a_ is null)
+        if (!a_.HasValue)
         {
             return null as bool?;
         }
         else
         {
-            bool? b_ = this.MessageTrue(context);
+            CqlBoolean b_ = this.MessageTrue(context);
             return a_ ^ b_;
         }
     }
@@ -1018,7 +1018,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? AndTrueKeepsLeft_Compute(CqlContext context)
     {
-        bool? a_ = this.MessageTrue(context);
+        CqlBoolean a_ = this.MessageTrue(context);
         return a_;
     }
 
@@ -1031,7 +1031,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? OrFalseKeepsLeft_Compute(CqlContext context)
     {
-        bool? a_ = this.MessageTrue(context);
+        CqlBoolean a_ = this.MessageTrue(context);
         return a_;
     }
 
@@ -1044,7 +1044,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 
     private bool? NullConstAndMessage_Compute(CqlContext context)
     {
-        bool? a_ = this.MessageTrue(context);
+        CqlBoolean a_ = this.MessageTrue(context);
         return /* CQL 'and' (151:31-151:65) */ (null as bool?) & a_;
     }
 
@@ -1078,15 +1078,15 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
             ];
 
             bool? e_(int? B) {
-                bool? g_ = context.Operators.Equal(A, B);
+                CqlBoolean g_ = context.Operators.Equal(A, B);
                 return g_;
             }
 
-            bool? f_ = context.Operators.WhereAny<int?>((IEnumerable<int?>)d_, e_);
+            CqlBoolean f_ = context.Operators.WhereAny<int?>((IEnumerable<int?>)d_, e_);
             return !f_;
         }
 
-        bool? c_ = context.Operators.WhereAny<int?>((IEnumerable<int?>)a_, b_);
+        CqlBoolean c_ = context.Operators.WhereAny<int?>((IEnumerable<int?>)a_, b_);
         return c_;
     }
 

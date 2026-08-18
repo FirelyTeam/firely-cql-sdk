@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS149FHIRDementiaCognitiveAssess", "1.0.000")]
 public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISingleton<CMS149FHIRDementiaCognitiveAssess_1_0_000>
 {
@@ -155,17 +155,17 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
             Period ad_ = EncounterAssessCognition?.Period;
             CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
-            bool? af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ac_, ae_, "day");
+            CqlBoolean af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ac_, ae_, "day");
 
             CqlBoolean ag_() {
                 Code<Encounter.EncounterStatus> ah_ = EncounterAssessCognition?.StatusElement;
                 Encounter.EncounterStatus? ai_ = ah_?.Value;
                 Code<Encounter.EncounterStatus> aj_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ai_);
-                bool? ak_ = context.Operators.Equivalent(aj_, "finished");
+                CqlBoolean ak_ = context.Operators.Equivalent(aj_, "finished");
                 return ak_;
             }
 
-            return /* CQL 'and' (81:5-82:54) */ ((CqlBoolean)af_
+            return /* CQL 'and' (81:5-82:54) */ (af_
                 && ag_());
         }
 
@@ -185,14 +185,14 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
-            bool? h_ = context.Operators.Equivalent(e_, g_);
+            CqlBoolean h_ = context.Operators.Equivalent(e_, g_);
 
             CqlBoolean i_() {
                 CodeableConcept l_ = condition?.VerificationStatus;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
                 CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
                 CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
-                bool? p_ = context.Operators.Equivalent(m_, o_);
+                CqlBoolean p_ = context.Operators.Equivalent(m_, o_);
                 return p_;
             }
 
@@ -202,7 +202,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
                 CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
-                bool? u_ = context.Operators.Equivalent(r_, t_);
+                CqlBoolean u_ = context.Operators.Equivalent(r_, t_);
                 return u_;
             }
 
@@ -212,11 +212,11 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
-                bool? z_ = context.Operators.Equivalent(w_, y_);
+                CqlBoolean z_ = context.Operators.Equivalent(w_, y_);
                 return z_;
             }
 
-            return /* CQL 'or' (92:52-96:3) */ (/* CQL 'or' (92:54-94:66) */ (/* CQL 'or' (92:54-93:66) */ ((CqlBoolean)h_
+            return /* CQL 'or' (92:52-96:3) */ (/* CQL 'or' (92:54-94:66) */ (/* CQL 'or' (92:54-93:66) */ (h_
                 || i_())
                 || j_())
                 || k_());
@@ -247,13 +247,13 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
                 Period k_ = EncounterAssessCognition?.Period;
                 CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, "day");
+                CqlBoolean m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, "day");
 
                 CqlBoolean n_() {
                     CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Dementia);
                     Period q_ = EncounterAssessCognition?.Period;
                     CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
-                    bool? s_ = context.Operators.Overlaps(p_, r_, "day");
+                    CqlBoolean s_ = context.Operators.Overlaps(p_, r_, "day");
                     return s_;
                 }
 
@@ -269,7 +269,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                         CqlDateTime z_ = context.Operators.End(y_);
                         CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
                         CqlDateTime ab_ = context.Operators.End(aa_);
-                        bool? ac_ = context.Operators.After(z_, ab_, "day");
+                        CqlBoolean ac_ = context.Operators.After(z_, ab_, "day");
                         return ac_;
                     }
 
@@ -277,13 +277,13 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                         || v_());
                 }
 
-                return /* CQL 'and' (64:17-69:35) */ (/* CQL 'and' (64:17-68:9) */ (/* CQL 'and' (64:17-65:91) */ ((CqlBoolean)m_
+                return /* CQL 'and' (64:17-69:35) */ (/* CQL 'and' (64:17-68:9) */ (/* CQL 'and' (64:17-65:91) */ (m_
                     && n_())
                     && o_())
                     && this.isVerified(context, Dementia));
             }
 
-            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Condition>(g_, h_);
             return i_;
         }
 
@@ -309,17 +309,17 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
             Period h_ = ValidEncounter?.Period;
             CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
-            bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
+            CqlBoolean j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
 
             CqlBoolean k_() {
                 Code<Encounter.EncounterStatus> l_ = ValidEncounter?.StatusElement;
                 Encounter.EncounterStatus? m_ = l_?.Value;
                 Code<Encounter.EncounterStatus> n_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(m_);
-                bool? o_ = context.Operators.Equal(n_, "finished");
+                CqlBoolean o_ = context.Operators.Equal(n_, "finished");
                 return o_;
             }
 
-            return /* CQL 'and' (101:5-102:44) */ ((CqlBoolean)j_
+            return /* CQL 'and' (101:5-102:44) */ (j_
                 && k_());
         }
 
@@ -337,16 +337,16 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
     private bool? Initial_Population_Compute(CqlContext context)
     {
         IEnumerable<Encounter> a_ = this.Dementia_Encounter_During_Measurement_Period(context);
-        bool? b_ = context.Operators.Exists<Encounter>(a_);
+        CqlBoolean b_ = context.Operators.Exists<Encounter>(a_);
 
         CqlBoolean c_() {
             IEnumerable<Encounter> d_ = this.Qualifying_Encounter_During_Measurement_Period(context);
             int? e_ = context.Operators.Count<Encounter>(d_);
-            bool? f_ = context.Operators.GreaterOrEqual(e_, 2);
+            CqlBoolean f_ = context.Operators.GreaterOrEqual(e_, 2);
             return f_;
         }
 
-        return /* CQL 'and' (37:3-38:72) */ ((CqlBoolean)b_
+        return /* CQL 'and' (37:3-38:72) */ (b_
             && c_());
     }
 
@@ -359,7 +359,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -392,7 +392,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 CqlQuantity t_ = context.Operators.Quantity(12m, "months");
                 CqlDateTime u_ = context.Operators.Subtract(s_, t_);
                 CqlInterval<CqlDateTime> v_ = context.Operators.Interval(u_, s_, true, true);
-                bool? w_ = context.Operators.In<CqlDateTime>(p_, v_, "day");
+                CqlBoolean w_ = context.Operators.In<CqlDateTime>(p_, v_, "day");
 
                 CqlBoolean x_() {
                     Period y_ = EncounterDementia?.Period;
@@ -401,11 +401,11 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                     return !((bool?)(aa_ is null));
                 }
 
-                return /* CQL 'and' (56:17-56:137) */ ((CqlBoolean)w_
+                return /* CQL 'and' (56:17-56:137) */ (w_
                     && x_());
             }
 
-            bool? l_ = context.Operators.WhereAny<Encounter>(j_, k_);
+            CqlBoolean l_ = context.Operators.WhereAny<Encounter>(j_, k_);
             return l_;
         }
 
@@ -424,7 +424,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                     "amended",
                     "corrected",
                 ];
-                bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
+                CqlBoolean ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
                 return ai_;
             }
 
@@ -446,7 +446,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
     private bool? Numerator_Compute(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods(context);
-        bool? b_ = context.Operators.Exists<Observation>(a_);
+        CqlBoolean b_ = context.Operators.Exists<Observation>(a_);
         return b_;
     }
 
@@ -474,11 +474,11 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 CqlDateTime o_ = context.Operators.Convert<CqlDateTime>(n_);
                 Period p_ = EncounterDementia?.Period;
                 CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
-                bool? r_ = context.Operators.In<CqlDateTime>(o_, q_, "day");
+                CqlBoolean r_ = context.Operators.In<CqlDateTime>(o_, q_, "day");
                 return r_;
             }
 
-            bool? l_ = context.Operators.WhereAny<Encounter>(j_, k_);
+            CqlBoolean l_ = context.Operators.WhereAny<Encounter>(j_, k_);
             return l_;
         }
 
@@ -489,7 +489,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             bool? s_(Extension @this) {
                 FhirUri z_ = @this?.UrlElement;
                 string aa_ = FHIRHelpers_4_4_000.Instance.ToString(context, z_);
-                bool? ab_ = context.Operators.Equal(aa_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                CqlBoolean ab_ = context.Operators.Equal(aa_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
                 return ab_;
             }
 
@@ -505,7 +505,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             object v_ = context.Operators.SingletonFrom<object>(u_);
             CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_ as CodeableConcept);
             CqlValueSet x_ = this.Patient_Reason(context);
-            bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+            CqlBoolean y_ = context.Operators.ConceptInValueSet(w_, x_);
             return y_;
         }
 
@@ -523,7 +523,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods(context);
-        bool? b_ = context.Operators.Exists<Observation>(a_);
+        CqlBoolean b_ = context.Operators.Exists<Observation>(a_);
         return b_;
     }
 

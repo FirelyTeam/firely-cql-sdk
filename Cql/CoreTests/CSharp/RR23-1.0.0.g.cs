@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
@@ -115,10 +115,10 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             CqlDateTime i_ = context.Operators.ConvertDateToDateTime(h_);
             CqlDate j_ = ((CqlInterval<CqlDate>)g_)?.high;
             CqlDateTime k_ = context.Operators.ConvertDateToDateTime(j_);
-            bool? l_ = ((CqlInterval<CqlDate>)g_)?.lowClosed;
-            bool? m_ = ((CqlInterval<CqlDate>)g_)?.highClosed;
+            CqlBoolean l_ = ((CqlInterval<CqlDate>)g_)?.lowClosed;
+            CqlBoolean m_ = ((CqlInterval<CqlDate>)g_)?.highClosed;
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(i_, k_, l_, m_);
-            bool? o_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, n_, (string)default);
+            CqlBoolean o_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, n_, (string)default);
             return o_;
         }
 
@@ -169,7 +169,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             CqlConcept f_ = FHIRHelpers_4_0_1.Instance.ToConcept(context, e_ as CodeableConcept);
             CqlCode g_ = this.Tiny_Umbrella(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(f_, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(f_, h_);
 
             CqlBoolean j_() {
                 Condition k_ = this.Latest_injury_due_to_falling_rock(context);
@@ -185,7 +185,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     CqlQuantity t_ = context.Operators.Quantity(7m, "days");
                     CqlDateTime u_ = context.Operators.Subtract(s_, t_);
                     CqlInterval<CqlDateTime> v_ = context.Operators.Interval(u_, s_, true, false);
-                    bool? w_ = context.Operators.In<CqlDateTime>(q_ as CqlDateTime, v_, (string)default);
+                    CqlBoolean w_ = context.Operators.In<CqlDateTime>(q_ as CqlDateTime, v_, (string)default);
 
                     CqlBoolean x_() {
                         DataType y_ = SD?.Occurrence;
@@ -193,7 +193,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                         return !((bool?)(z_ is null));
                     }
 
-                    return /* CQL 'and' (48:52-48:126) */ ((CqlBoolean)w_
+                    return /* CQL 'and' (48:52-48:126) */ (w_
                         && x_());
                 }
 
@@ -202,7 +202,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                 return !((bool?)(o_ is null));
             }
 
-            return /* CQL 'and' (47:7-48:140) */ ((CqlBoolean)i_
+            return /* CQL 'and' (47:7-48:140) */ (i_
                 && j_());
         }
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS177FHIRChildMDDSuicideAssmt", "1.0.000")]
 public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISingleton<CMS177FHIRChildMDDSuicideAssmt_1_0_000>
 {
@@ -198,13 +198,13 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             Code<Encounter.EncounterStatus> z_ = ValidEncounter?.StatusElement;
             Encounter.EncounterStatus? aa_ = z_?.Value;
             Code<Encounter.EncounterStatus> ab_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(aa_);
-            bool? ac_ = context.Operators.Equal(ab_, "finished");
+            CqlBoolean ac_ = context.Operators.Equal(ab_, "finished");
 
             CqlBoolean ad_() {
                 CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
                 Period ag_ = ValidEncounter?.Period;
                 CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ag_);
-                bool? ai_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(af_, ah_, "day");
+                CqlBoolean ai_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(af_, ah_, "day");
                 return ai_;
             }
 
@@ -215,7 +215,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
                 bool? al_(Condition MDDConditionProb) {
                     List<ResourceReference> as_ = ValidEncounter?.ReasonReference;
-                    bool? at_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)as_, MDDConditionProb);
+                    CqlBoolean at_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)as_, MDDConditionProb);
                     return at_;
                 }
 
@@ -224,17 +224,17 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
                 bool? ao_(Condition MDDEncDx) {
                     List<ResourceReference> au_ = ValidEncounter?.ReasonReference;
-                    bool? av_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)au_, MDDEncDx);
+                    CqlBoolean av_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)au_, MDDEncDx);
                     return av_;
                 }
 
                 IEnumerable<Condition> ap_ = context.Operators.Where<Condition>(an_, ao_);
                 IEnumerable<Condition> aq_ = context.Operators.Union<Condition>(am_ as IEnumerable<Condition>, ap_ as IEnumerable<Condition>);
-                bool? ar_ = context.Operators.Exists<Condition>(aq_);
+                CqlBoolean ar_ = context.Operators.Exists<Condition>(aq_);
                 return ar_;
             }
 
-            return /* CQL 'and' (80:5-88:7) */ (/* CQL 'and' (80:11-81:66) */ ((CqlBoolean)ac_
+            return /* CQL 'and' (80:5-88:7) */ (/* CQL 'and' (80:11-81:66) */ (ac_
                 && ad_())
                 && ae_());
         }
@@ -280,13 +280,13 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             Code<Encounter.EncounterStatus> z_ = ValidEncounter?.StatusElement;
             Encounter.EncounterStatus? aa_ = z_?.Value;
             Code<Encounter.EncounterStatus> ab_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(aa_);
-            bool? ac_ = context.Operators.Equal(ab_, "finished");
+            CqlBoolean ac_ = context.Operators.Equal(ab_, "finished");
 
             CqlBoolean ad_() {
                 CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
                 Period ag_ = ValidEncounter?.Period;
                 CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ag_);
-                bool? ai_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(af_, ah_, "day");
+                CqlBoolean ai_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(af_, ah_, "day");
                 return ai_;
             }
 
@@ -301,11 +301,11 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
                 IEnumerable<CqlConcept> al_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)aj_, ak_);
                 CqlValueSet am_ = this.Major_Depressive_Disorder_Active(context);
-                bool? an_ = context.Operators.ConceptsInValueSet(al_, am_);
+                CqlBoolean an_ = context.Operators.ConceptsInValueSet(al_, am_);
                 return an_;
             }
 
-            return /* CQL 'and' (99:5-101:77) */ (/* CQL 'and' (99:11-100:66) */ ((CqlBoolean)ac_
+            return /* CQL 'and' (99:5-101:77) */ (/* CQL 'and' (99:11-100:66) */ (ac_
                 && ad_())
                 && ae_());
         }
@@ -349,7 +349,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             CqlDateTime i_ = context.Operators.Start(h_);
             CqlDate j_ = context.Operators.DateFrom(i_);
             int? k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-            bool? l_ = context.Operators.GreaterOrEqual(k_, 6);
+            CqlBoolean l_ = context.Operators.GreaterOrEqual(k_, 6);
 
             CqlBoolean m_() {
                 Patient n_ = this.Patient(context);
@@ -360,11 +360,11 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                 CqlDateTime s_ = context.Operators.Start(r_);
                 CqlDate t_ = context.Operators.DateFrom(s_);
                 int? u_ = context.Operators.CalculateAgeAt(q_, t_, "year");
-                bool? v_ = context.Operators.LessOrEqual(u_, 16);
+                CqlBoolean v_ = context.Operators.LessOrEqual(u_, 16);
                 return v_;
             }
 
-            return /* CQL 'and' (43:5-45:5) */ ((CqlBoolean)l_
+            return /* CQL 'and' (43:5-45:5) */ (l_
                 && m_());
         }
 
@@ -405,7 +405,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                 Code<EventStatus> i_ = SuicideRiskAssessmentProcedure?.StatusElement;
                 EventStatus? j_ = i_?.Value;
                 string k_ = context.Operators.Convert<string>(j_);
-                bool? l_ = context.Operators.Equal(k_, "completed");
+                CqlBoolean l_ = context.Operators.Equal(k_, "completed");
 
                 CqlBoolean m_() {
                     Period n_ = MDDEncounter?.Period;
@@ -447,15 +447,15 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                         }
                     }
                     CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_);
-                    bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, (string)default);
+                    CqlBoolean r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, (string)default);
                     return r_;
                 }
 
-                return /* CQL 'and' (57:17-58:94) */ ((CqlBoolean)l_
+                return /* CQL 'and' (57:17-58:94) */ (l_
                     && m_());
             }
 
-            bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
+            CqlBoolean h_ = context.Operators.WhereAny<Procedure>(f_, g_);
             return h_;
         }
 
@@ -487,7 +487,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                 DataType m_ = ObservationSuicideRiskAssmt?.Effective;
                 object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
                 CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-                bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, (string)default);
+                CqlBoolean p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, (string)default);
 
                 CqlBoolean q_() {
                     Code<ObservationStatus> r_ = ObservationSuicideRiskAssmt?.StatusElement;
@@ -498,15 +498,15 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                         "corrected",
                         "amended",
                     ];
-                    bool? v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
+                    CqlBoolean v_ = context.Operators.In<string>(t_, (IEnumerable<string>)u_);
                     return v_;
                 }
 
-                return /* CQL 'and' (64:17-65:85) */ ((CqlBoolean)p_
+                return /* CQL 'and' (64:17-65:85) */ (p_
                     && q_());
             }
 
-            bool? j_ = context.Operators.WhereAny<Observation>(h_, i_);
+            CqlBoolean j_ = context.Operators.WhereAny<Observation>(h_, i_);
             return j_;
         }
 

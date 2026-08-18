@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS139FHIRFallRiskScreening", "1.0.000")]
 public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<CMS139FHIRFallRiskScreening_1_0_000>
 {
@@ -230,7 +230,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<
             CqlInterval<CqlDateTime> av_ = this.Measurement_Period(context);
             Period aw_ = ValidEncounter?.Period;
             CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aw_);
-            bool? ay_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ax_, "day");
+            CqlBoolean ay_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ax_, "day");
             return ay_;
         }
 
@@ -255,15 +255,15 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<
         CqlDateTime f_ = context.Operators.Start(e_);
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        bool? i_ = context.Operators.GreaterOrEqual(h_, 65);
+        CqlBoolean i_ = context.Operators.GreaterOrEqual(h_, 65);
 
         CqlBoolean j_() {
             IEnumerable<Encounter> k_ = this.Qualifying_Encounter(context);
-            bool? l_ = context.Operators.Exists<Encounter>(k_);
+            CqlBoolean l_ = context.Operators.Exists<Encounter>(k_);
             return l_;
         }
 
-        return /* CQL 'and' (46:3-47:37) */ ((CqlBoolean)i_
+        return /* CQL 'and' (46:3-47:37) */ (i_
             && j_());
     }
 
@@ -276,7 +276,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -289,7 +289,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
-        bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+        CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
         return a_;
     }
 
@@ -311,11 +311,11 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<
             DataType g_ = FallsScreening?.Effective;
             object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
-            bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
+            CqlBoolean j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
             return j_;
         }
 
-        bool? e_ = context.Operators.WhereAny<Observation>(c_, d_);
+        CqlBoolean e_ = context.Operators.WhereAny<Observation>(c_, d_);
         return e_;
     }
 

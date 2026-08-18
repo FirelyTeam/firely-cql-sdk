@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("NCQAAdvancedIllnessandFrailty", "1.0.0")]
 public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<NCQAAdvancedIllnessandFrailty_1_0_0>
 {
@@ -120,11 +120,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             DataType h_ = FrailtyDeviceApplied?.Effective;
             CqlInterval<CqlDateTime> i_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, h_);
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            bool? k_ = context.Operators.Overlaps(i_, j_, (string)default);
+            CqlBoolean k_ = context.Operators.Overlaps(i_, j_, (string)default);
             return k_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Observation>(b_, c_);
 
         CqlBoolean e_() {
             CqlValueSet l_ = this.Frailty_Diagnosis(context);
@@ -134,11 +134,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             bool? o_(Condition FrailtyDiagnosis) {
                 CqlInterval<CqlDateTime> q_ = NCQAFHIRBase_1_0_0.Instance.Prevalence_Period(context, FrailtyDiagnosis);
                 CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-                bool? s_ = context.Operators.Overlaps(q_, r_, (string)default);
+                CqlBoolean s_ = context.Operators.Overlaps(q_, r_, (string)default);
                 return s_;
             }
 
-            bool? p_ = context.Operators.WhereAny<Condition>(n_, o_);
+            CqlBoolean p_ = context.Operators.WhereAny<Condition>(n_, o_);
             return p_;
         }
 
@@ -152,11 +152,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 Period y_ = FrailtyEncounter?.Period;
                 CqlInterval<CqlDateTime> z_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, y_);
                 CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
-                bool? ab_ = context.Operators.Overlaps(z_, aa_, (string)default);
+                CqlBoolean ab_ = context.Operators.Overlaps(z_, aa_, (string)default);
                 return ab_;
             }
 
-            bool? x_ = context.Operators.WhereAny<Encounter>(v_, w_);
+            CqlBoolean x_ = context.Operators.WhereAny<Encounter>(v_, w_);
             return x_;
         }
 
@@ -169,15 +169,15 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 DataType ag_ = FrailtySymptom?.Effective;
                 CqlInterval<CqlDateTime> ah_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ag_);
                 CqlInterval<CqlDateTime> ai_ = this.Measurement_Period(context);
-                bool? aj_ = context.Operators.Overlaps(ah_, ai_, (string)default);
+                CqlBoolean aj_ = context.Operators.Overlaps(ah_, ai_, (string)default);
                 return aj_;
             }
 
-            bool? af_ = context.Operators.WhereAny<Observation>(ad_, ae_);
+            CqlBoolean af_ = context.Operators.WhereAny<Observation>(ad_, ae_);
             return af_;
         }
 
-        return /* CQL 'or' (58:3-69:5) */ (/* CQL 'or' (58:3-66:5) */ (/* CQL 'or' (58:3-63:5) */ ((CqlBoolean)d_
+        return /* CQL 'or' (58:3-69:5) */ (/* CQL 'or' (58:3-66:5) */ (/* CQL 'or' (58:3-63:5) */ (d_
             || e_())
             || f_())
             || g_());
@@ -214,7 +214,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         bool? s_(Encounter OutpatientEncounter) {
             CqlValueSet w_ = this.Advanced_Illness(context);
             IEnumerable<Condition> x_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, w_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-            bool? y_ = NCQAEncounter_1_0_0.Instance.Encounter_Has_Diagnosis(context, OutpatientEncounter, x_);
+            CqlBoolean y_ = NCQAEncounter_1_0_0.Instance.Encounter_Has_Diagnosis(context, OutpatientEncounter, x_);
 
             CqlBoolean z_() {
                 Period aa_ = OutpatientEncounter?.Period;
@@ -229,11 +229,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 CqlDateTime aj_ = context.Operators.End(ae_);
                 CqlDate ak_ = context.Operators.DateFrom(aj_);
                 CqlInterval<CqlDate> al_ = context.Operators.Interval(ai_, ak_, true, true);
-                bool? am_ = context.Operators.In<CqlDate>(ad_, al_, (string)default);
+                CqlBoolean am_ = context.Operators.In<CqlDate>(ad_, al_, (string)default);
                 return am_;
             }
 
-            return /* CQL 'and' (96:5-98:34) */ ((CqlBoolean)y_
+            return /* CQL 'and' (96:5-98:34) */ (y_
                 && z_());
         }
 
@@ -279,7 +279,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             CqlDateTime s_ = context.Operators.End(n_);
             CqlDate t_ = context.Operators.DateFrom(s_);
             CqlInterval<CqlDate> u_ = context.Operators.Interval(r_, t_, true, true);
-            bool? v_ = context.Operators.In<CqlDate>(m_, u_, (string)default);
+            CqlBoolean v_ = context.Operators.In<CqlDate>(m_, u_, (string)default);
             return v_;
         }
 
@@ -346,14 +346,14 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         bool? d_((CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? tuple_cmsergtjgkisksqucnzwkeggv) {
             CqlQuantity j_ = context.Operators.Quantity(1m, "day");
             CqlDate k_ = context.Operators.Add(tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit1, j_);
-            bool? l_ = context.Operators.SameOrAfter(tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit2, k_, (string)default);
+            CqlBoolean l_ = context.Operators.SameOrAfter(tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit2, k_, (string)default);
             return l_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?> e_ = context.Operators.SelectWhere<ValueTuple<CqlDate, CqlDate>, (CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?>(b_, c_, d_);
         CqlDate f_((CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? tuple_cmsergtjgkisksqucnzwkeggv) => tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit1;
         IEnumerable<CqlDate> g_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?, CqlDate>(e_, f_);
-        bool? h_ = context.Operators.Exists<CqlDate>(g_);
+        CqlBoolean h_ = context.Operators.Exists<CqlDate>(g_);
         return h_;
     }
 
@@ -373,7 +373,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         bool? d_(Encounter InpatientEncounter) {
             CqlValueSet f_ = this.Advanced_Illness(context);
             IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-            bool? h_ = NCQAEncounter_1_0_0.Instance.Encounter_Has_Diagnosis(context, InpatientEncounter, g_);
+            CqlBoolean h_ = NCQAEncounter_1_0_0.Instance.Encounter_Has_Diagnosis(context, InpatientEncounter, g_);
 
             CqlBoolean i_() {
                 Period j_ = InpatientEncounter?.Period;
@@ -388,15 +388,15 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 CqlDateTime s_ = context.Operators.End(n_);
                 CqlDate t_ = context.Operators.DateFrom(s_);
                 CqlInterval<CqlDate> u_ = context.Operators.Interval(r_, t_, true, true);
-                bool? v_ = context.Operators.In<CqlDate>(m_, u_, (string)default);
+                CqlBoolean v_ = context.Operators.In<CqlDate>(m_, u_, (string)default);
                 return v_;
             }
 
-            return /* CQL 'and' (116:7-118:36) */ ((CqlBoolean)h_
+            return /* CQL 'and' (116:7-118:36) */ (h_
                 && i_());
         }
 
-        bool? e_ = context.Operators.WhereAny<Encounter>(c_, d_);
+        CqlBoolean e_ = context.Operators.WhereAny<Encounter>(c_, d_);
         return e_;
     }
 
@@ -428,11 +428,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             CqlDateTime q_ = context.Operators.End(l_);
             CqlDate r_ = context.Operators.DateFrom(q_);
             CqlInterval<CqlDate> s_ = context.Operators.Interval(p_, r_, true, true);
-            bool? t_ = context.Operators.In<CqlDate>(k_, s_, (string)default);
+            CqlBoolean t_ = context.Operators.In<CqlDate>(k_, s_, (string)default);
             return t_;
         }
 
-        bool? i_ = context.Operators.WhereAny<CqlInterval<CqlDateTime>>(g_, h_);
+        CqlBoolean i_ = context.Operators.WhereAny<CqlInterval<CqlDateTime>>(g_, h_);
         return i_;
     }
 
@@ -459,21 +459,21 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 string p_ = FHIRHelpers_4_0_001.Instance.ToString(context, o_ as FhirString);
                 IEnumerable<string> q_ = context.Operators.Split(p_, "/");
                 string r_ = context.Operators.Last<string>(q_);
-                bool? s_ = context.Operators.Equal(n_, r_);
+                CqlBoolean s_ = context.Operators.Equal(n_, r_);
 
                 CqlBoolean t_() {
                     CodeableConcept u_ = M?.Code;
                     CqlConcept v_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, u_);
                     CqlValueSet w_ = this.Dementia_Medications(context);
-                    bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                    CqlBoolean x_ = context.Operators.ConceptInValueSet(v_, w_);
                     return x_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)s_
+                return /* CQL 'and' */ (s_
                     && t_());
             }
 
-            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            CqlBoolean l_ = context.Operators.WhereAny<Medication>(j_, k_);
             return l_;
         }
 
@@ -494,11 +494,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             CqlDateTime ah_ = context.Operators.End(ac_);
             CqlDate ai_ = context.Operators.DateFrom(ah_);
             CqlInterval<CqlDate> aj_ = context.Operators.Interval(ag_, ai_, true, true);
-            bool? ak_ = context.Operators.In<CqlDate>(ab_, aj_, (string)default);
+            CqlBoolean ak_ = context.Operators.In<CqlDate>(ab_, aj_, (string)default);
             return ak_;
         }
 
-        bool? i_ = context.Operators.WhereAny<MedicationDispense>(g_, h_);
+        CqlBoolean i_ = context.Operators.WhereAny<MedicationDispense>(g_, h_);
         return i_;
     }
 
@@ -520,11 +520,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(66, 80, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
         CqlBoolean k_() {
-            bool? m_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service(context);
-            return /* CQL 'or' (34:11-38:7) */ (/* CQL 'or' (34:13-36:62) */ (/* CQL 'or' (34:13-35:62) */ ((CqlBoolean)m_
+            CqlBoolean m_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service(context);
+            return /* CQL 'or' (34:11-38:7) */ (/* CQL 'or' (34:13-36:62) */ (/* CQL 'or' (34:13-35:62) */ (m_
                 || this.Acute_Inpatient_Encounter_with_Advanced_Illness(context))
                 || this.Acute_Inpatient_Discharge_with_Advanced_Illness(context))
                 || this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period(context));
@@ -540,12 +540,12 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             CqlDateTime s_ = context.Operators.End(r_);
             CqlDate t_ = context.Operators.DateFrom(s_);
             int? u_ = context.Operators.CalculateAgeAt(q_, t_, "year");
-            bool? v_ = context.Operators.GreaterOrEqual(u_, 81);
-            return /* CQL 'and' (40:8-44:5) */ ((CqlBoolean)v_
+            CqlBoolean v_ = context.Operators.GreaterOrEqual(u_, 81);
+            return /* CQL 'and' (40:8-44:5) */ (v_
                 && this.Has_Criteria_Indicating_Frailty(context));
         }
 
-        return /* CQL 'or' (30:3-44:5) */ (/* CQL 'and' (30:3-39:3) */ (/* CQL 'and' (30:5-33:43) */ ((CqlBoolean)j_
+        return /* CQL 'or' (30:3-44:5) */ (/* CQL 'and' (30:3-39:3) */ (/* CQL 'and' (30:5-33:43) */ (j_
             && this.Has_Criteria_Indicating_Frailty(context))
             && k_())
             || l_());
@@ -568,17 +568,17 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         CqlDateTime f_ = context.Operators.End(e_);
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        bool? i_ = context.Operators.GreaterOrEqual(h_, 66);
+        CqlBoolean i_ = context.Operators.GreaterOrEqual(h_, 66);
 
         CqlBoolean j_() {
-            bool? k_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service(context);
-            return /* CQL 'or' (51:9-55:5) */ (/* CQL 'or' (51:11-53:60) */ (/* CQL 'or' (51:11-52:60) */ ((CqlBoolean)k_
+            CqlBoolean k_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service(context);
+            return /* CQL 'or' (51:9-55:5) */ (/* CQL 'or' (51:11-53:60) */ (/* CQL 'or' (51:11-52:60) */ (k_
                 || this.Acute_Inpatient_Encounter_with_Advanced_Illness(context))
                 || this.Acute_Inpatient_Discharge_with_Advanced_Illness(context))
                 || this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period(context));
         }
 
-        return /* CQL 'and' (47:3-55:5) */ (/* CQL 'and' (47:3-50:41) */ ((CqlBoolean)i_
+        return /* CQL 'and' (47:3-55:5) */ (/* CQL 'and' (47:3-50:41) */ (i_
             && this.Has_Criteria_Indicating_Frailty(context))
             && j_());
     }

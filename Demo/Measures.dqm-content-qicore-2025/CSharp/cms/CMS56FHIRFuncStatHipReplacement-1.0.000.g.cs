@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS56FHIRFuncStatHipReplacement", "1.0.000")]
 public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingleton<CMS56FHIRFuncStatHipReplacement_1_0_000>
 {
@@ -291,12 +291,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             bool? u_(CqlConcept T) {
                 CqlCode y_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure(context);
                 CqlConcept z_ = context.Operators.ConvertCodeToConcept(y_);
-                bool? aa_ = context.Operators.Equivalent(T, z_);
+                CqlBoolean aa_ = context.Operators.Equivalent(T, z_);
                 return aa_;
             }
 
             IEnumerable<CqlConcept> v_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)s_, t_, u_);
-            bool? w_ = context.Operators.Exists<CqlConcept>(v_);
+            CqlBoolean w_ = context.Operators.Exists<CqlConcept>(v_);
             return w_;
         }
 
@@ -317,11 +317,11 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(ab_, ad_, true, true);
             Period af_ = ValidEncounters?.Period;
             CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, af_);
-            bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ae_, ag_, "day");
+            CqlBoolean ah_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ae_, ag_, "day");
             return ah_;
         }
 
-        bool? r_ = context.Operators.WhereAny<Encounter>(p_, q_);
+        CqlBoolean r_ = context.Operators.WhereAny<Encounter>(p_, q_);
         return r_;
     }
 
@@ -416,7 +416,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime i_ = this.November_1_Two_Years_Prior_to_the_Measurement_Period(context);
             CqlDateTime j_ = this.October_31_Year_Prior_to_the_Measurement_Period(context);
             CqlInterval<CqlDateTime> k_ = context.Operators.Interval(i_, j_, true, true);
-            bool? l_ = context.Operators.In<CqlDateTime>(h_, k_, "day");
+            CqlBoolean l_ = context.Operators.In<CqlDateTime>(h_, k_, "day");
             return l_;
         }
 
@@ -433,11 +433,11 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_Qualifying_Encounter(context);
+        CqlBoolean a_ = this.Has_Qualifying_Encounter(context);
 
         CqlBoolean b_() {
             IEnumerable<Procedure> d_ = this.Total_Hip_Arthroplasty_Procedure(context);
-            bool? e_ = context.Operators.Exists<Procedure>(d_);
+            CqlBoolean e_ = context.Operators.Exists<Procedure>(d_);
             return e_;
         }
 
@@ -451,11 +451,11 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime k_ = context.Operators.Start(j_);
             CqlDate l_ = context.Operators.DateFrom(k_);
             int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-            bool? n_ = context.Operators.GreaterOrEqual(m_, 19);
+            CqlBoolean n_ = context.Operators.GreaterOrEqual(m_, 19);
             return n_;
         }
 
-        return /* CQL 'and' (60:3-62:67) */ (/* CQL 'and' (60:3-61:53) */ ((CqlBoolean)a_
+        return /* CQL 'and' (60:3-62:67) */ (/* CQL 'and' (60:3-61:53) */ (a_
             && b_())
             && c_());
     }
@@ -469,7 +469,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -491,11 +491,11 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         bool? f_(Condition Dementia) {
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Dementia);
             CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
-            bool? j_ = context.Operators.Overlaps(h_, i_, "day");
+            CqlBoolean j_ = context.Operators.Overlaps(h_, i_, "day");
             return j_;
         }
 
-        bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
+        CqlBoolean g_ = context.Operators.WhereAny<Condition>(e_, f_);
         return g_;
     }
 
@@ -513,14 +513,14 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
-            bool? h_ = context.Operators.Equivalent(e_, g_);
+            CqlBoolean h_ = context.Operators.Equivalent(e_, g_);
 
             CqlBoolean i_() {
                 CodeableConcept l_ = condition?.VerificationStatus;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
                 CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
                 CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
-                bool? p_ = context.Operators.Equivalent(m_, o_);
+                CqlBoolean p_ = context.Operators.Equivalent(m_, o_);
                 return p_;
             }
 
@@ -530,7 +530,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
                 CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
-                bool? u_ = context.Operators.Equivalent(r_, t_);
+                CqlBoolean u_ = context.Operators.Equivalent(r_, t_);
                 return u_;
             }
 
@@ -540,11 +540,11 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
-                bool? z_ = context.Operators.Equivalent(w_, y_);
+                CqlBoolean z_ = context.Operators.Equivalent(w_, y_);
                 return z_;
             }
 
-            return /* CQL 'or' (277:52-281:3) */ (/* CQL 'or' (277:54-279:66) */ (/* CQL 'or' (277:54-278:66) */ ((CqlBoolean)h_
+            return /* CQL 'or' (277:52-281:3) */ (/* CQL 'or' (277:54-279:66) */ (/* CQL 'or' (277:54-278:66) */ (h_
                 || i_())
                 || j_())
                 || k_());
@@ -653,7 +653,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
                 CqlDateTime s_ = context.Operators.Start(r_);
                 CqlInterval<CqlDateTime> t_ = context.Operators.Interval(p_, s_, true, true);
-                bool? u_ = context.Operators.In<CqlDateTime>(k_, t_, (string)default);
+                CqlBoolean u_ = context.Operators.In<CqlDateTime>(k_, t_, (string)default);
 
                 CqlBoolean v_() {
                     object ai_;
@@ -697,16 +697,16 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     return !((bool?)(ak_ is null));
                 }
 
-                return /* CQL 'and' (114:19-115:46) */ (/* CQL 'and' (114:19-114:142) */ ((CqlBoolean)u_
+                return /* CQL 'and' (114:19-115:46) */ (/* CQL 'and' (114:19-114:142) */ (u_
                     && v_())
                     && this.isVerified(context, LowerBodyFracture));
             }
 
-            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Condition>(g_, h_);
             return i_;
         }
 
-        bool? c_ = context.Operators.WhereAny<Procedure>(a_, b_);
+        CqlBoolean c_ = context.Operators.WhereAny<Procedure>(a_, b_);
         return c_;
     }
 
@@ -801,15 +801,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     }
                 }
                 CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_);
-                bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, "day");
+                CqlBoolean m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, "day");
                 return m_;
             }
 
-            bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
+            CqlBoolean h_ = context.Operators.WhereAny<Procedure>(f_, g_);
             return h_;
         }
 
-        bool? e_ = context.Operators.WhereAny<Procedure>(c_, d_);
+        CqlBoolean e_ = context.Operators.WhereAny<Procedure>(c_, d_);
         return e_;
     }
 
@@ -904,15 +904,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     }
                 }
                 CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_);
-                bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, "day");
+                CqlBoolean m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, "day");
                 return m_;
             }
 
-            bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
+            CqlBoolean h_ = context.Operators.WhereAny<Procedure>(f_, g_);
             return h_;
         }
 
-        bool? c_ = context.Operators.WhereAny<Procedure>(a_, b_);
+        CqlBoolean c_ = context.Operators.WhereAny<Procedure>(a_, b_);
         return c_;
     }
 
@@ -972,16 +972,16 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     }
                 }
                 CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_);
-                bool? m_ = context.Operators.Overlaps(j_, l_, "day");
-                return /* CQL 'and' (134:19-135:46) */ ((CqlBoolean)m_
+                CqlBoolean m_ = context.Operators.Overlaps(j_, l_, "day");
+                return /* CQL 'and' (134:19-135:46) */ (m_
                     && this.isVerified(context, MalignantNeoplasm));
             }
 
-            bool? i_ = context.Operators.WhereAny<Procedure>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Procedure>(g_, h_);
             return i_;
         }
 
-        bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
+        CqlBoolean f_ = context.Operators.WhereAny<Condition>(d_, e_);
         return f_;
     }
 
@@ -1041,16 +1041,16 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     }
                 }
                 CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_);
-                bool? m_ = context.Operators.Overlaps(j_, l_, "day");
-                return /* CQL 'and' (142:19-143:52) */ ((CqlBoolean)m_
+                CqlBoolean m_ = context.Operators.Overlaps(j_, l_, "day");
+                return /* CQL 'and' (142:19-143:52) */ (m_
                     && this.isVerified(context, MechanicalComplications));
             }
 
-            bool? i_ = context.Operators.WhereAny<Procedure>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Procedure>(g_, h_);
             return i_;
         }
 
-        bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
+        CqlBoolean f_ = context.Operators.WhereAny<Condition>(d_, e_);
         return f_;
     }
 
@@ -1075,7 +1075,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 string j_ = i_?.Value;
                 Id k_ = ElectiveTHAProcedure?.IdElement;
                 string l_ = k_?.Value;
-                bool? m_ = context.Operators.Equivalent(j_, l_);
+                CqlBoolean m_ = context.Operators.Equivalent(j_, l_);
 
                 CqlBoolean n_() {
                     object o_;
@@ -1196,19 +1196,19 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     CqlDateTime y_ = context.Operators.Start(x_);
                     CqlDateTime z_ = context.Operators.Add(y_, u_);
                     CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(v_, z_, true, true);
-                    bool? ab_ = context.Operators.In<CqlDateTime>(q_, aa_, "day");
+                    CqlBoolean ab_ = context.Operators.In<CqlDateTime>(q_, aa_, "day");
                     return ab_;
                 }
 
-                return /* CQL 'and' (149:19-150:213) */ ((CqlBoolean)!m_
+                return /* CQL 'and' (149:19-150:213) */ (!m_
                     && n_());
             }
 
-            bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
+            CqlBoolean h_ = context.Operators.WhereAny<Procedure>(f_, g_);
             return h_;
         }
 
-        bool? c_ = context.Operators.WhereAny<Procedure>(a_, b_);
+        CqlBoolean c_ = context.Operators.WhereAny<Procedure>(a_, b_);
         return c_;
     }
 
@@ -1309,11 +1309,11 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlQuantity p_ = context.Operators.Quantity(300m, "days");
             CqlDate q_ = context.Operators.Add(o_, p_);
             CqlInterval<CqlDate> r_ = context.Operators.Interval(k_, q_, true, true);
-            bool? s_ = context.Operators.In<CqlDate>(g_, r_, "day");
+            CqlBoolean s_ = context.Operators.In<CqlDate>(g_, r_, "day");
             return s_;
         }
 
-        bool? c_ = context.Operators.WhereAny<Procedure>(a_, b_);
+        CqlBoolean c_ = context.Operators.WhereAny<Procedure>(a_, b_);
         return c_;
     }
 
@@ -1326,8 +1326,8 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
-        bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        return /* CQL 'or' (95:3-103:51) */ (/* CQL 'or' (95:3-102:76) */ (/* CQL 'or' (95:3-101:36) */ (/* CQL 'or' (95:3-100:62) */ (/* CQL 'or' (95:3-99:100) */ (/* CQL 'or' (95:3-98:47) */ (/* CQL 'or' (95:3-97:71) */ (/* CQL 'or' (95:3-96:40) */ ((CqlBoolean)a_
+        CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+        return /* CQL 'or' (95:3-103:51) */ (/* CQL 'or' (95:3-102:76) */ (/* CQL 'or' (95:3-101:36) */ (/* CQL 'or' (95:3-100:62) */ (/* CQL 'or' (95:3-99:100) */ (/* CQL 'or' (95:3-98:47) */ (/* CQL 'or' (95:3-97:71) */ (/* CQL 'or' (95:3-96:40) */ (a_
             || this.Has_Severe_Cognitive_Impairment(context))
             || this.Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures(context))
             || this.Has_Partial_Hip_Arthroplasty_Procedure(context))
@@ -1386,7 +1386,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> ai_ = QICoreCommon_4_0_000.Instance.toInterval(context, ah_);
             CqlDateTime aj_ = context.Operators.Start(ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
-            bool? al_ = context.Operators.SameAs(af_, ak_, "day");
+            CqlBoolean al_ = context.Operators.SameAs(af_, ak_, "day");
 
             CqlBoolean am_() {
                 DataType au_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSport as Observation)?.Value;
@@ -1406,7 +1406,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> bd_ = QICoreCommon_4_0_000.Instance.toInterval(context, bc_);
                 CqlDateTime be_ = context.Operators.Start(bd_);
                 CqlDate bf_ = context.Operators.DateFrom(be_);
-                bool? bg_ = context.Operators.SameAs(ba_, bf_, "day");
+                CqlBoolean bg_ = context.Operators.SameAs(ba_, bf_, "day");
                 return bg_;
             }
 
@@ -1429,7 +1429,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> bq_ = QICoreCommon_4_0_000.Instance.toInterval(context, bp_);
                 CqlDateTime br_ = context.Operators.Start(bq_);
                 CqlDate bs_ = context.Operators.DateFrom(br_);
-                bool? bt_ = context.Operators.SameAs(bn_, bs_, "day");
+                CqlBoolean bt_ = context.Operators.SameAs(bn_, bs_, "day");
                 return bt_;
             }
 
@@ -1452,7 +1452,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> cd_ = QICoreCommon_4_0_000.Instance.toInterval(context, cc_);
                 CqlDateTime ce_ = context.Operators.Start(cd_);
                 CqlDate cf_ = context.Operators.DateFrom(ce_);
-                bool? cg_ = context.Operators.SameAs(ca_, cf_, "day");
+                CqlBoolean cg_ = context.Operators.SameAs(ca_, cf_, "day");
                 return cg_;
             }
 
@@ -1470,7 +1470,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return !((bool?)(ck_ is null));
             }
 
-            return /* CQL 'and' (185:5-193:81) */ (/* CQL 'and' (185:11-192:74) */ (/* CQL 'and' (185:11-191:54) */ (/* CQL 'and' (185:11-190:78) */ (/* CQL 'and' (185:11-189:58) */ (/* CQL 'and' (185:11-188:83) */ (/* CQL 'and' (185:11-187:63) */ (/* CQL 'and' (185:11-186:75) */ ((CqlBoolean)al_
+            return /* CQL 'and' (185:5-193:81) */ (/* CQL 'and' (185:11-192:74) */ (/* CQL 'and' (185:11-191:54) */ (/* CQL 'and' (185:11-190:78) */ (/* CQL 'and' (185:11-189:58) */ (/* CQL 'and' (185:11-188:83) */ (/* CQL 'and' (185:11-187:63) */ (/* CQL 'and' (185:11-186:75) */ (al_
                 && am_())
                 && an_())
                 && ao_())
@@ -1588,12 +1588,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDate v_ = context.Operators.Add(InitialHipAssessmentHOOS, u_);
                 CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
-                bool? y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
-                return /* CQL 'and' (168:19-168:93) */ ((CqlBoolean)y_
+                CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
+                return /* CQL 'and' (168:19-168:93) */ (y_
                     && !((bool?)(InitialHipAssessmentHOOS is null)));
             }
 
-            bool? r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
+            CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
             return r_;
         }
 
@@ -1612,15 +1612,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlQuantity ai_ = context.Operators.Quantity(425m, "days");
                 CqlDate aj_ = context.Operators.Add(af_, ai_);
                 CqlInterval<CqlDate> ak_ = context.Operators.Interval(ah_, aj_, true, true);
-                bool? al_ = context.Operators.In<CqlDate>(ad_, ak_, "day");
+                CqlBoolean al_ = context.Operators.In<CqlDate>(ad_, ak_, "day");
                 return al_;
             }
 
-            bool? ab_ = context.Operators.WhereAny<CqlDate>(z_, aa_);
+            CqlBoolean ab_ = context.Operators.WhereAny<CqlDate>(z_, aa_);
             return ab_;
         }
 
-        bool? g_ = context.Operators.WhereAny<CqlInterval<CqlDateTime>>(e_, f_);
+        CqlBoolean g_ = context.Operators.WhereAny<CqlInterval<CqlDateTime>>(e_, f_);
         return g_;
     }
 
@@ -1723,12 +1723,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDate v_ = context.Operators.Add(InitialHipAssessment, u_);
                 CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
-                bool? y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
-                return /* CQL 'and' (200:19-200:89) */ ((CqlBoolean)y_
+                CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
+                return /* CQL 'and' (200:19-200:89) */ (y_
                     && !((bool?)(InitialHipAssessment is null)));
             }
 
-            bool? r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
+            CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
             return r_;
         }
 
@@ -1747,15 +1747,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlQuantity ai_ = context.Operators.Quantity(425m, "days");
                 CqlDate aj_ = context.Operators.Add(af_, ai_);
                 CqlInterval<CqlDate> ak_ = context.Operators.Interval(ah_, aj_, true, true);
-                bool? al_ = context.Operators.In<CqlDate>(ad_, ak_, "day");
+                CqlBoolean al_ = context.Operators.In<CqlDate>(ad_, ak_, "day");
                 return al_;
             }
 
-            bool? ab_ = context.Operators.WhereAny<CqlDate>(z_, aa_);
+            CqlBoolean ab_ = context.Operators.WhereAny<CqlDate>(z_, aa_);
             return ab_;
         }
 
-        bool? g_ = context.Operators.WhereAny<CqlInterval<CqlDateTime>>(e_, f_);
+        CqlBoolean g_ = context.Operators.WhereAny<CqlInterval<CqlDateTime>>(e_, f_);
         return g_;
     }
 
@@ -1795,7 +1795,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.toInterval(context, v_);
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
-            bool? z_ = context.Operators.SameAs(t_, y_, "day");
+            CqlBoolean z_ = context.Operators.SameAs(t_, y_, "day");
 
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore as Observation)?.Value;
@@ -1810,7 +1810,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (225:5-227:85) */ (/* CQL 'and' (225:11-226:87) */ ((CqlBoolean)z_
+            return /* CQL 'and' (225:5-227:85) */ (/* CQL 'and' (225:11-226:87) */ (z_
                 && aa_())
                 && ab_());
         }
@@ -1904,12 +1904,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDate v_ = context.Operators.Add(InitialHipAssessmentPROMIS10, u_);
                 CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
-                bool? y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
-                return /* CQL 'and' (214:19-214:97) */ ((CqlBoolean)y_
+                CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
+                return /* CQL 'and' (214:19-214:97) */ (y_
                     && !((bool?)(InitialHipAssessmentPROMIS10 is null)));
             }
 
-            bool? r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
+            CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
             return r_;
         }
 
@@ -1928,15 +1928,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlQuantity ai_ = context.Operators.Quantity(425m, "days");
                 CqlDate aj_ = context.Operators.Add(af_, ai_);
                 CqlInterval<CqlDate> ak_ = context.Operators.Interval(ah_, aj_, true, true);
-                bool? al_ = context.Operators.In<CqlDate>(ad_, ak_, "day");
+                CqlBoolean al_ = context.Operators.In<CqlDate>(ad_, ak_, "day");
                 return al_;
             }
 
-            bool? ab_ = context.Operators.WhereAny<CqlDate>(z_, aa_);
+            CqlBoolean ab_ = context.Operators.WhereAny<CqlDate>(z_, aa_);
             return ab_;
         }
 
-        bool? g_ = context.Operators.WhereAny<CqlInterval<CqlDateTime>>(e_, f_);
+        CqlBoolean g_ = context.Operators.WhereAny<CqlInterval<CqlDateTime>>(e_, f_);
         return g_;
     }
 
@@ -1976,7 +1976,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.toInterval(context, v_);
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
-            bool? z_ = context.Operators.SameAs(t_, y_, "day");
+            CqlBoolean z_ = context.Operators.SameAs(t_, y_, "day");
 
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
@@ -1991,7 +1991,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (245:5-247:88) */ (/* CQL 'and' (245:11-246:86) */ ((CqlBoolean)z_
+            return /* CQL 'and' (245:5-247:88) */ (/* CQL 'and' (245:11-246:86) */ (z_
                 && aa_())
                 && ab_());
         }
@@ -2085,12 +2085,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDate v_ = context.Operators.Add(InitialHipAssessmentOblique, u_);
                 CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
-                bool? y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
-                return /* CQL 'and' (234:19-234:96) */ ((CqlBoolean)y_
+                CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
+                return /* CQL 'and' (234:19-234:96) */ (y_
                     && !((bool?)(InitialHipAssessmentOblique is null)));
             }
 
-            bool? r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
+            CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
             return r_;
         }
 
@@ -2109,15 +2109,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlQuantity ai_ = context.Operators.Quantity(425m, "days");
                 CqlDate aj_ = context.Operators.Add(af_, ai_);
                 CqlInterval<CqlDate> ak_ = context.Operators.Interval(ah_, aj_, true, true);
-                bool? al_ = context.Operators.In<CqlDate>(ad_, ak_, "day");
+                CqlBoolean al_ = context.Operators.In<CqlDate>(ad_, ak_, "day");
                 return al_;
             }
 
-            bool? ab_ = context.Operators.WhereAny<CqlDate>(z_, aa_);
+            CqlBoolean ab_ = context.Operators.WhereAny<CqlDate>(z_, aa_);
             return ab_;
         }
 
-        bool? g_ = context.Operators.WhereAny<CqlInterval<CqlDateTime>>(e_, f_);
+        CqlBoolean g_ = context.Operators.WhereAny<CqlInterval<CqlDateTime>>(e_, f_);
         return g_;
     }
 
@@ -2157,7 +2157,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.toInterval(context, v_);
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
-            bool? z_ = context.Operators.SameAs(t_, y_, "day");
+            CqlBoolean z_ = context.Operators.SameAs(t_, y_, "day");
 
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
@@ -2172,7 +2172,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (265:5-267:88) */ (/* CQL 'and' (265:11-266:86) */ ((CqlBoolean)z_
+            return /* CQL 'and' (265:5-267:88) */ (/* CQL 'and' (265:11-266:86) */ (z_
                 && aa_())
                 && ab_());
         }
@@ -2266,12 +2266,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDate v_ = context.Operators.Add(InitialHipAssessmentOrthogonal, u_);
                 CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
-                bool? y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
-                return /* CQL 'and' (254:19-254:99) */ ((CqlBoolean)y_
+                CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
+                return /* CQL 'and' (254:19-254:99) */ (y_
                     && !((bool?)(InitialHipAssessmentOrthogonal is null)));
             }
 
-            bool? r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
+            CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
             return r_;
         }
 
@@ -2290,15 +2290,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlQuantity ai_ = context.Operators.Quantity(425m, "days");
                 CqlDate aj_ = context.Operators.Add(af_, ai_);
                 CqlInterval<CqlDate> ak_ = context.Operators.Interval(ah_, aj_, true, true);
-                bool? al_ = context.Operators.In<CqlDate>(ad_, ak_, "day");
+                CqlBoolean al_ = context.Operators.In<CqlDate>(ad_, ak_, "day");
                 return al_;
             }
 
-            bool? ab_ = context.Operators.WhereAny<CqlDate>(z_, aa_);
+            CqlBoolean ab_ = context.Operators.WhereAny<CqlDate>(z_, aa_);
             return ab_;
         }
 
-        bool? g_ = context.Operators.WhereAny<CqlInterval<CqlDateTime>>(e_, f_);
+        CqlBoolean g_ = context.Operators.WhereAny<CqlInterval<CqlDateTime>>(e_, f_);
         return g_;
     }
 
@@ -2311,8 +2311,8 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
     private bool? Numerator_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments(context);
-        return /* CQL 'or' (158:3-162:75) */ (/* CQL 'or' (158:3-161:72) */ (/* CQL 'or' (158:3-160:68) */ (/* CQL 'or' (158:3-159:66) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments(context);
+        return /* CQL 'or' (158:3-162:75) */ (/* CQL 'or' (158:3-161:72) */ (/* CQL 'or' (158:3-160:68) */ (/* CQL 'or' (158:3-159:66) */ (a_
             || this.Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments(context))
             || this.Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments(context))
             || this.Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(context))

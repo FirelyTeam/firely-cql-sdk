@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("PalliativeCare", "1.18.000")]
 public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCare_1_18_000>
 {
@@ -101,11 +101,11 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
             object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
             CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_);
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
-            bool? n_ = context.Operators.Overlaps(l_, m_, "day");
+            CqlBoolean n_ = context.Operators.Overlaps(l_, m_, "day");
             return n_;
         }
 
-        bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
+        CqlBoolean f_ = context.Operators.WhereAny<Observation>(d_, e_);
 
         CqlBoolean g_() {
             CqlValueSet o_ = this.Palliative_Care_Diagnosis(context);
@@ -117,11 +117,11 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
             bool? t_(Condition PalliativeDiagnosis) {
                 CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PalliativeDiagnosis);
                 CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
-                bool? x_ = context.Operators.Overlaps(v_, w_, "day");
+                CqlBoolean x_ = context.Operators.Overlaps(v_, w_, "day");
                 return x_;
             }
 
-            bool? u_ = context.Operators.WhereAny<Condition>(s_, t_);
+            CqlBoolean u_ = context.Operators.WhereAny<Condition>(s_, t_);
             return u_;
         }
 
@@ -135,11 +135,11 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
                 Period ad_ = PalliativeEncounter?.Period;
                 CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
                 CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
-                bool? ag_ = context.Operators.Overlaps(ae_, af_, "day");
+                CqlBoolean ag_ = context.Operators.Overlaps(ae_, af_, "day");
                 return ag_;
             }
 
-            bool? ac_ = context.Operators.WhereAny<Encounter>(aa_, ab_);
+            CqlBoolean ac_ = context.Operators.WhereAny<Encounter>(aa_, ab_);
             return ac_;
         }
 
@@ -188,15 +188,15 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
                 }
                 CqlInterval<CqlDateTime> an_ = QICoreCommon_4_0_000.Instance.toInterval(context, am_);
                 CqlInterval<CqlDateTime> ao_ = this.Measurement_Period(context);
-                bool? ap_ = context.Operators.Overlaps(an_, ao_, "day");
+                CqlBoolean ap_ = context.Operators.Overlaps(an_, ao_, "day");
                 return ap_;
             }
 
-            bool? al_ = context.Operators.WhereAny<Procedure>(aj_, ak_);
+            CqlBoolean al_ = context.Operators.WhereAny<Procedure>(aj_, ak_);
             return al_;
         }
 
-        return /* CQL 'or' (22:3-34:5) */ (/* CQL 'or' (22:3-31:5) */ (/* CQL 'or' (22:3-28:5) */ ((CqlBoolean)f_
+        return /* CQL 'or' (22:3-34:5) */ (/* CQL 'or' (22:3-31:5) */ (/* CQL 'or' (22:3-28:5) */ (f_
             || g_())
             || h_())
             || i_());

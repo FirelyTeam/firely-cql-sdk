@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.0.010")]
 public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, ISingleton<DischargedonAntithromboticTherapyFHIR_0_0_010>
 {
@@ -135,7 +135,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
         bool? c_(MedicationRequest NoAntithromboticDischarge) {
             FhirBoolean e_ = NoAntithromboticDischarge?.DoNotPerformElement;
-            bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
+            CqlBoolean f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
 
             CqlBoolean g_() {
                 List<CodeableConcept> k_ = NoAntithromboticDischarge?.ReasonCode;
@@ -147,7 +147,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
                 IEnumerable<CqlConcept> m_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)k_, l_);
                 CqlValueSet n_ = this.Medical_Reason(context);
-                bool? o_ = context.Operators.ConceptsInValueSet(m_, n_);
+                CqlBoolean o_ = context.Operators.ConceptsInValueSet(m_, n_);
 
                 CqlBoolean p_() {
                     List<CodeableConcept> r_ = NoAntithromboticDischarge?.ReasonCode;
@@ -159,11 +159,11 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
                     IEnumerable<CqlConcept> t_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)r_, s_);
                     CqlValueSet u_ = this.Patient_Refusal(context);
-                    bool? v_ = context.Operators.ConceptsInValueSet(t_, u_);
+                    CqlBoolean v_ = context.Operators.ConceptsInValueSet(t_, u_);
                     return v_;
                 }
 
-                return /* CQL 'or' (83:11-85:7) */ ((CqlBoolean)o_
+                return /* CQL 'or' (83:11-85:7) */ (o_
                     || p_());
             }
 
@@ -175,21 +175,21 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                     CqlConcept aa_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
                     CqlCode ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
                     CqlConcept ac_ = context.Operators.ConvertCodeToConcept(ab_);
-                    bool? ad_ = context.Operators.Equivalent(aa_, ac_);
+                    CqlBoolean ad_ = context.Operators.Equivalent(aa_, ac_);
 
                     CqlBoolean ae_() {
                         CqlConcept af_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
                         CqlCode ag_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
                         CqlConcept ah_ = context.Operators.ConvertCodeToConcept(ag_);
-                        bool? ai_ = context.Operators.Equivalent(af_, ah_);
+                        CqlBoolean ai_ = context.Operators.Equivalent(af_, ah_);
                         return ai_;
                     }
 
-                    return /* CQL 'or' (87:11-88:63) */ ((CqlBoolean)ad_
+                    return /* CQL 'or' (87:11-88:63) */ (ad_
                         || ae_());
                 }
 
-                bool? z_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)x_, y_);
+                CqlBoolean z_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)x_, y_);
                 return z_;
             }
 
@@ -201,7 +201,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                     "completed",
                     "cancelled",
                 ];
-                bool? am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
+                CqlBoolean am_ = context.Operators.In<string>(ak_, (IEnumerable<string>)al_);
                 return am_;
             }
 
@@ -209,11 +209,11 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             CqlBoolean j_() {
                 Code<MedicationRequest.MedicationRequestIntent> an_ = NoAntithromboticDischarge?.IntentElement;
                 string ao_ = FHIRHelpers_4_0_001.Instance.ToString(context, an_);
-                bool? ap_ = context.Operators.Equal(ao_, "order");
+                CqlBoolean ap_ = context.Operators.Equal(ao_, "order");
                 return ap_;
             }
 
-            return /* CQL 'and' (82:5-91:52) */ (/* CQL 'and' (82:11-90:74) */ (/* CQL 'and' (82:11-89:7) */ (/* CQL 'and' (82:11-85:7) */ ((CqlBoolean)(/* CQL 'is true' (82:11-82:56) */ f_ is true)
+            return /* CQL 'and' (82:5-91:52) */ (/* CQL 'and' (82:11-90:74) */ (/* CQL 'and' (82:11-89:7) */ (/* CQL 'and' (82:11-85:7) */ ((CqlBoolean)(/* CQL 'is true' (82:11-82:56) */ f_.IsTrue)
                 && g_())
                 && h_())
                 && i_())
@@ -243,11 +243,11 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 CqlDateTime h_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, g_);
                 Period i_ = IschemicStrokeEncounter?.Period;
                 CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, i_);
-                bool? k_ = context.Operators.In<CqlDateTime>(h_, j_, (string)default);
+                CqlBoolean k_ = context.Operators.In<CqlDateTime>(h_, j_, (string)default);
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+            CqlBoolean f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
             return f_;
         }
 
@@ -269,7 +269,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
         bool? c_(MedicationRequest Pharmacological) {
             FhirBoolean e_ = Pharmacological?.DoNotPerformElement;
-            bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
+            CqlBoolean f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
 
             CqlBoolean g_() {
                 List<CodeableConcept> j_ = Pharmacological?.Category;
@@ -278,21 +278,21 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                     CqlConcept m_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
                     CqlCode n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
                     CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
-                    bool? p_ = context.Operators.Equivalent(m_, o_);
+                    CqlBoolean p_ = context.Operators.Equivalent(m_, o_);
 
                     CqlBoolean q_() {
                         CqlConcept r_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
                         CqlCode s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
                         CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
-                        bool? u_ = context.Operators.Equivalent(r_, t_);
+                        CqlBoolean u_ = context.Operators.Equivalent(r_, t_);
                         return u_;
                     }
 
-                    return /* CQL 'or' (97:11-98:63) */ ((CqlBoolean)p_
+                    return /* CQL 'or' (97:11-98:63) */ (p_
                         || q_());
                 }
 
-                bool? l_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)j_, k_);
+                CqlBoolean l_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)j_, k_);
                 return l_;
             }
 
@@ -304,7 +304,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                     "active",
                     "completed",
                 ];
-                bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
+                CqlBoolean y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
                 return y_;
             }
 
@@ -312,11 +312,11 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             CqlBoolean i_() {
                 Code<MedicationRequest.MedicationRequestIntent> z_ = Pharmacological?.IntentElement;
                 string aa_ = FHIRHelpers_4_0_001.Instance.ToString(context, z_);
-                bool? ab_ = context.Operators.Equal(aa_, "order");
+                CqlBoolean ab_ = context.Operators.Equal(aa_, "order");
                 return ab_;
             }
 
-            return /* CQL 'and' (95:5-101:42) */ (/* CQL 'and' (95:11-100:61) */ (/* CQL 'and' (95:11-99:7) */ ((CqlBoolean)(!((bool?)(/* CQL 'is true' (95:11-95:50) */ f_ is true)))
+            return /* CQL 'and' (95:5-101:42) */ (/* CQL 'and' (95:11-100:61) */ (/* CQL 'and' (95:11-99:7) */ ((CqlBoolean)(!((bool?)(/* CQL 'is true' (95:11-95:50) */ f_.IsTrue)))
                 && g_())
                 && h_())
                 && i_());
@@ -345,11 +345,11 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 CqlDateTime h_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, g_);
                 Period i_ = IschemicStrokeEncounter?.Period;
                 CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, i_);
-                bool? k_ = context.Operators.In<CqlDateTime>(h_, j_, (string)default);
+                CqlBoolean k_ = context.Operators.In<CqlDateTime>(h_, j_, (string)default);
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+            CqlBoolean f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
             return f_;
         }
 
@@ -414,7 +414,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
         bool? c_(MedicationRequest Antithrombotic) {
             FhirBoolean e_ = Antithrombotic?.DoNotPerformElement;
-            bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
+            CqlBoolean f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
 
             CqlBoolean g_() {
                 List<CodeableConcept> j_ = Antithrombotic?.Category;
@@ -423,21 +423,21 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                     CqlConcept m_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
                     CqlCode n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
                     CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
-                    bool? p_ = context.Operators.Equivalent(m_, o_);
+                    CqlBoolean p_ = context.Operators.Equivalent(m_, o_);
 
                     CqlBoolean q_() {
                         CqlConcept r_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
                         CqlCode s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
                         CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
-                        bool? u_ = context.Operators.Equivalent(r_, t_);
+                        CqlBoolean u_ = context.Operators.Equivalent(r_, t_);
                         return u_;
                     }
 
-                    return /* CQL 'or' (74:11-75:63) */ ((CqlBoolean)p_
+                    return /* CQL 'or' (74:11-75:63) */ (p_
                         || q_());
                 }
 
-                bool? l_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)j_, k_);
+                CqlBoolean l_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)j_, k_);
                 return l_;
             }
 
@@ -449,7 +449,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                     "active",
                     "completed",
                 ];
-                bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
+                CqlBoolean y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
                 return y_;
             }
 
@@ -457,11 +457,11 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             CqlBoolean i_() {
                 Code<MedicationRequest.MedicationRequestIntent> z_ = Antithrombotic?.IntentElement;
                 string aa_ = FHIRHelpers_4_0_001.Instance.ToString(context, z_);
-                bool? ab_ = context.Operators.Equal(aa_, "order");
+                CqlBoolean ab_ = context.Operators.Equal(aa_, "order");
                 return ab_;
             }
 
-            return /* CQL 'and' (72:5-78:41) */ (/* CQL 'and' (72:11-77:60) */ (/* CQL 'and' (72:11-76:7) */ ((CqlBoolean)(!((bool?)(/* CQL 'is true' (72:11-72:49) */ f_ is true)))
+            return /* CQL 'and' (72:5-78:41) */ (/* CQL 'and' (72:11-77:60) */ (/* CQL 'and' (72:11-76:7) */ ((CqlBoolean)(!((bool?)(/* CQL 'is true' (72:11-72:49) */ f_.IsTrue)))
                 && g_())
                 && h_())
                 && i_());
@@ -490,11 +490,11 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 CqlDateTime h_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, g_);
                 Period i_ = IschemicStrokeEncounter?.Period;
                 CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, i_);
-                bool? k_ = context.Operators.In<CqlDateTime>(h_, j_, (string)default);
+                CqlBoolean k_ = context.Operators.In<CqlDateTime>(h_, j_, (string)default);
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+            CqlBoolean f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
             return f_;
         }
 

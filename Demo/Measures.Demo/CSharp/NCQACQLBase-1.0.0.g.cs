@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("NCQACQLBase", "1.0.0")]
 public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 {
@@ -29,8 +29,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
         else
         {
             int? b_ = context.Operators.Count<CqlInterval<CqlDate>>(intervals);
-            bool? c_ = context.Operators.Equal(b_, 0);
-            if (c_ ?? false)
+            CqlBoolean c_ = context.Operators.Equal(b_, 0);
+            if (c_.IsTrue)
             {
                 CqlInterval<CqlDate>[] d_ = [];
                 return d_ as IEnumerable<CqlInterval<CqlDate>>;
@@ -86,8 +86,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
         else
         {
             int? b_ = context.Operators.Count<CqlInterval<CqlDateTime>>(intervals);
-            bool? c_ = context.Operators.Equal(b_, 0);
-            if (c_ ?? false)
+            CqlBoolean c_ = context.Operators.Equal(b_, 0);
+            if (c_.IsTrue)
             {
                 CqlInterval<CqlDateTime>[] d_ = [];
                 return d_ as IEnumerable<CqlInterval<CqlDateTime>>;
@@ -143,8 +143,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
         else
         {
             int? b_ = context.Operators.Count<CqlInterval<CqlDate>>(intervals);
-            bool? c_ = context.Operators.Equal(b_, 0);
-            if (c_ ?? false)
+            CqlBoolean c_ = context.Operators.Equal(b_, 0);
+            if (c_.IsTrue)
             {
                 CqlInterval<CqlDate>[] d_ = [];
                 return d_ as IEnumerable<CqlInterval<CqlDate>>;
@@ -155,12 +155,12 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 bool? e_(CqlInterval<CqlDate> I) {
 
                     bool? h_(CqlInterval<CqlDate> J) {
-                        bool? k_ = context.Operators.IntervalProperlyIncludesInterval<CqlDate>(J, I, (string)default);
+                        CqlBoolean k_ = context.Operators.IntervalProperlyIncludesInterval<CqlDate>(J, I, (string)default);
                         return k_;
                     }
 
                     IEnumerable<bool?> i_ = context.Operators.SelectDistinct<CqlInterval<CqlDate>, bool?>(intervals, h_);
-                    bool? j_ = context.Operators.AnyTrue(i_);
+                    CqlBoolean j_ = context.Operators.AnyTrue(i_);
                     return !j_;
                 }
 
@@ -183,8 +183,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
         else
         {
             int? b_ = context.Operators.Count<CqlInterval<CqlDateTime>>(intervals);
-            bool? c_ = context.Operators.Equal(b_, 0);
-            if (c_ ?? false)
+            CqlBoolean c_ = context.Operators.Equal(b_, 0);
+            if (c_.IsTrue)
             {
                 CqlInterval<CqlDateTime>[] d_ = [];
                 return d_ as IEnumerable<CqlInterval<CqlDateTime>>;
@@ -195,12 +195,12 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 bool? e_(CqlInterval<CqlDateTime> I) {
 
                     bool? h_(CqlInterval<CqlDateTime> J) {
-                        bool? k_ = context.Operators.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, (string)default);
+                        CqlBoolean k_ = context.Operators.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, (string)default);
                         return k_;
                     }
 
                     IEnumerable<bool?> i_ = context.Operators.SelectDistinct<CqlInterval<CqlDateTime>, bool?>(intervals, h_);
-                    bool? j_ = context.Operators.AnyTrue(i_);
+                    CqlBoolean j_ = context.Operators.AnyTrue(i_);
                     return !j_;
                 }
 
@@ -257,8 +257,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             IEnumerable<CqlInterval<CqlDate>> g_;
             IEnumerable<CqlInterval<CqlDate>> n_ = variableDeclarations?.sortedCoverings;
             int? o_ = context.Operators.Count<CqlInterval<CqlDate>>(n_);
-            bool? p_ = context.Operators.Equal(o_, 0);
-            if (p_ ?? false)
+            CqlBoolean p_ = context.Operators.Equal(o_, 0);
+            if (p_.IsTrue)
             {
                 CqlInterval<CqlDate>[] q_ = [
                     baseInterval,
@@ -271,8 +271,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 CqlInterval<CqlDate> r_(CqlInterval<CqlDate> sortedCovering) {
                     IEnumerable<CqlInterval<CqlDate>> t_ = variableDeclarations?.sortedCoverings;
                     int? u_ = context.Operators.IndexOf<CqlInterval<CqlDate>>(t_, sortedCovering);
-                    bool? v_ = context.Operators.Equal(u_, 0);
-                    if (v_ ?? false)
+                    CqlBoolean v_ = context.Operators.Equal(u_, 0);
+                    if (v_.IsTrue)
                     {
                         CqlDate w_ = context.Operators.Start(baseInterval);
                         CqlDate x_ = context.Operators.Start(sortedCovering);
@@ -300,8 +300,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             IEnumerable<CqlInterval<CqlDate>> h_;
             IEnumerable<CqlInterval<CqlDate>> ai_ = variableDeclarations?.sortedCoverings;
             int? aj_ = context.Operators.Count<CqlInterval<CqlDate>>(ai_);
-            bool? ak_ = context.Operators.Equal(aj_, 0);
-            if (ak_ ?? false)
+            CqlBoolean ak_ = context.Operators.Equal(aj_, 0);
+            if (ak_.IsTrue)
             {
                 CqlInterval<CqlDate>[] al_ = [];
                 h_ = al_ as IEnumerable<CqlInterval<CqlDate>>;
@@ -356,8 +356,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             IEnumerable<CqlInterval<CqlDateTime>> g_;
             IEnumerable<CqlInterval<CqlDateTime>> n_ = variableDeclarations?.sortedCoverings;
             int? o_ = context.Operators.Count<CqlInterval<CqlDateTime>>(n_);
-            bool? p_ = context.Operators.Equal(o_, 0);
-            if (p_ ?? false)
+            CqlBoolean p_ = context.Operators.Equal(o_, 0);
+            if (p_.IsTrue)
             {
                 CqlInterval<CqlDateTime>[] q_ = [
                     baseInterval,
@@ -370,8 +370,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 CqlInterval<CqlDateTime> r_(CqlInterval<CqlDateTime> sortedCovering) {
                     IEnumerable<CqlInterval<CqlDateTime>> t_ = variableDeclarations?.sortedCoverings;
                     int? u_ = context.Operators.IndexOf<CqlInterval<CqlDateTime>>(t_, sortedCovering);
-                    bool? v_ = context.Operators.Equal(u_, 0);
-                    if (v_ ?? false)
+                    CqlBoolean v_ = context.Operators.Equal(u_, 0);
+                    if (v_.IsTrue)
                     {
                         CqlDateTime w_ = context.Operators.Start(baseInterval);
                         CqlDateTime x_ = context.Operators.Start(sortedCovering);
@@ -399,8 +399,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             IEnumerable<CqlInterval<CqlDateTime>> h_;
             IEnumerable<CqlInterval<CqlDateTime>> ai_ = variableDeclarations?.sortedCoverings;
             int? aj_ = context.Operators.Count<CqlInterval<CqlDateTime>>(ai_);
-            bool? ak_ = context.Operators.Equal(aj_, 0);
-            if (ak_ ?? false)
+            CqlBoolean ak_ = context.Operators.Equal(aj_, 0);
+            if (ak_.IsTrue)
             {
                 CqlInterval<CqlDateTime>[] al_ = [];
                 h_ = al_ as IEnumerable<CqlInterval<CqlDateTime>>;
@@ -447,8 +447,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
     {
         int? a_ = context.Operators.Count<CqlInterval<CqlDate>>(collapsedIntervals);
         int? b_;
-        bool? f_ = context.Operators.Equal(a_, 0);
-        if (f_ ?? false)
+        CqlBoolean f_ = context.Operators.Equal(a_, 0);
+        if (f_.IsTrue)
         {
             b_ = 0;
         }
@@ -473,8 +473,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             b_ = i_;
         }
         CqlInterval<CqlDate> c_;
-        bool? p_ = context.Operators.Equal(a_, 0);
-        if (p_ ?? false)
+        CqlBoolean p_ = context.Operators.Equal(a_, 0);
+        if (p_.IsTrue)
         {
             c_ = null as CqlInterval<CqlDate>;
         }
@@ -508,8 +508,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             c_ = v_;
         }
         int? d_;
-        bool? ae_ = context.Operators.Equal(a_, 0);
-        if (ae_ ?? false)
+        CqlBoolean ae_ = context.Operators.Equal(a_, 0);
+        if (ae_.IsTrue)
         {
             d_ = 0;
         }
@@ -787,8 +787,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
     {
         int? a_ = context.Operators.Count<CqlInterval<CqlDateTime>>(collapsedIntervals);
         int? b_;
-        bool? f_ = context.Operators.Equal(a_, 0);
-        if (f_ ?? false)
+        CqlBoolean f_ = context.Operators.Equal(a_, 0);
+        if (f_.IsTrue)
         {
             b_ = 0;
         }
@@ -814,8 +814,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             b_ = i_;
         }
         CqlInterval<CqlDateTime> c_;
-        bool? q_ = context.Operators.Equal(a_, 0);
-        if (q_ ?? false)
+        CqlBoolean q_ = context.Operators.Equal(a_, 0);
+        if (q_.IsTrue)
         {
             c_ = null as CqlInterval<CqlDateTime>;
         }
@@ -850,8 +850,8 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             c_ = w_;
         }
         int? d_;
-        bool? ag_ = context.Operators.Equal(a_, 0);
-        if (ag_ ?? false)
+        CqlBoolean ag_ = context.Operators.Equal(a_, 0);
+        if (ag_.IsTrue)
         {
             d_ = 0;
         }

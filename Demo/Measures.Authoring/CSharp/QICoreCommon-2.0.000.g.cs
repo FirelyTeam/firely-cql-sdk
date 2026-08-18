@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("QICoreCommon", "2.0.000")]
 public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_0_000>
 {
@@ -413,14 +413,14 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         CqlConcept b_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, a_);
         CqlCode c_ = this.active(context);
         CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
-        bool? e_ = context.Operators.Equivalent(b_, d_);
+        CqlBoolean e_ = context.Operators.Equivalent(b_, d_);
 
         CqlBoolean f_() {
             CodeableConcept h_ = condition?.ClinicalStatus;
             CqlConcept i_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, h_);
             CqlCode j_ = this.recurrence(context);
             CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-            bool? l_ = context.Operators.Equivalent(i_, k_);
+            CqlBoolean l_ = context.Operators.Equivalent(i_, k_);
             return l_;
         }
 
@@ -430,11 +430,11 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept n_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, m_);
             CqlCode o_ = this.relapse(context);
             CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-            bool? q_ = context.Operators.Equivalent(n_, p_);
+            CqlBoolean q_ = context.Operators.Equivalent(n_, p_);
             return q_;
         }
 
-        return /* CQL 'or' (115:3-117:43) */ (/* CQL 'or' (115:3-116:46) */ ((CqlBoolean)e_
+        return /* CQL 'or' (115:3-117:43) */ (/* CQL 'or' (115:3-116:46) */ (e_
             || f_())
             || g_());
     }
@@ -454,12 +454,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
 
         bool? c_(CqlConcept C) {
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(category);
-            bool? h_ = context.Operators.Equivalent(C, g_);
+            CqlBoolean h_ = context.Operators.Equivalent(C, g_);
             return h_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -478,12 +478,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
 
         bool? c_(CqlConcept C) {
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(category);
-            bool? h_ = context.Operators.Equivalent(C, g_);
+            CqlBoolean h_ = context.Operators.Equivalent(C, g_);
             return h_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -503,12 +503,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.problem_list_item(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -528,12 +528,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.encounter_diagnosis(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -553,12 +553,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.health_concern(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -578,12 +578,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.social_history(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -603,12 +603,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.vital_signs(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -628,12 +628,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.imaging(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -653,12 +653,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.laboratory(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -678,12 +678,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.procedure(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -703,12 +703,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.survey(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -728,12 +728,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.exam(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -753,12 +753,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.therapy(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -778,12 +778,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.activity(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -803,12 +803,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.clinical_test(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -828,12 +828,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.Community(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -853,12 +853,12 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? c_(CqlConcept C) {
             CqlCode g_ = this.Discharge(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(C, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(C, h_);
             return i_;
         }
 
         IEnumerable<CqlConcept> d_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_, c_);
-        bool? e_ = context.Operators.Exists<CqlConcept>(d_);
+        CqlBoolean e_ = context.Operators.Exists<CqlConcept>(d_);
         return e_;
     }
 
@@ -871,7 +871,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? a_(Extension E) {
             FhirUri f_ = E?.UrlElement;
             string g_ = f_?.Value;
-            bool? h_ = context.Operators.Equal(g_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
+            CqlBoolean h_ = context.Operators.Equal(g_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
             return h_;
         }
 
@@ -886,7 +886,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             ? (IEnumerable<Extension>)((deviceRequest as DomainResource).ModifierExtension)
             : default), a_, b_);
         IEnumerable<bool?> d_ = context.Operators.Distinct<bool?>(c_);
-        bool? e_ = context.Operators.SingletonFrom<bool?>(d_);
+        CqlBoolean e_ = context.Operators.SingletonFrom<bool?>(d_);
         return e_;
     }
 
@@ -1157,14 +1157,14 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         CqlConcept b_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, a_);
         CqlCode c_ = this.active(context);
         CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
-        bool? e_ = context.Operators.Equivalent(b_, d_);
+        CqlBoolean e_ = context.Operators.Equivalent(b_, d_);
 
         CqlBoolean f_() {
             CodeableConcept h_ = condition?.ClinicalStatus;
             CqlConcept i_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, h_);
             CqlCode j_ = this.recurrence(context);
             CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-            bool? l_ = context.Operators.Equivalent(i_, k_);
+            CqlBoolean l_ = context.Operators.Equivalent(i_, k_);
             return l_;
         }
 
@@ -1174,11 +1174,11 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept n_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, m_);
             CqlCode o_ = this.relapse(context);
             CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-            bool? q_ = context.Operators.Equivalent(n_, p_);
+            CqlBoolean q_ = context.Operators.Equivalent(n_, p_);
             return q_;
         }
 
-        if (((bool?)(/* CQL 'or' (413:4-415:41) */ (/* CQL 'or' (413:4-414:44) */ ((CqlBoolean)e_
+        if (((bool?)(/* CQL 'or' (413:4-415:41) */ (/* CQL 'or' (413:4-414:44) */ (e_
             || f_())
             || g_()))) ?? false)
         {
@@ -1236,14 +1236,14 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         CqlConcept b_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, a_);
         CqlCode c_ = this.active(context);
         CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
-        bool? e_ = context.Operators.Equivalent(b_, d_);
+        CqlBoolean e_ = context.Operators.Equivalent(b_, d_);
 
         CqlBoolean f_() {
             CodeableConcept h_ = condition?.ClinicalStatus;
             CqlConcept i_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, h_);
             CqlCode j_ = this.recurrence(context);
             CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-            bool? l_ = context.Operators.Equivalent(i_, k_);
+            CqlBoolean l_ = context.Operators.Equivalent(i_, k_);
             return l_;
         }
 
@@ -1253,11 +1253,11 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept n_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, m_);
             CqlCode o_ = this.relapse(context);
             CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-            bool? q_ = context.Operators.Equivalent(n_, p_);
+            CqlBoolean q_ = context.Operators.Equivalent(n_, p_);
             return q_;
         }
 
-        if (((bool?)(/* CQL 'or' (431:4-433:41) */ (/* CQL 'or' (431:4-432:44) */ ((CqlBoolean)e_
+        if (((bool?)(/* CQL 'or' (431:4-433:41) */ (/* CQL 'or' (431:4-432:44) */ (e_
             || f_())
             || g_()))) ?? false)
         {
@@ -1339,7 +1339,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         CqlBoolean b_() {
             CqlDateTime c_ = context.Operators.Start(period);
             CqlDateTime d_ = context.Operators.MinValue<CqlDateTime>();
-            bool? e_ = context.Operators.Equal(c_, d_);
+            CqlBoolean e_ = context.Operators.Equal(c_, d_);
             return e_;
         }
 
@@ -1357,7 +1357,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         CqlBoolean b_() {
             CqlDateTime c_ = context.Operators.Start(period);
             CqlDateTime d_ = context.Operators.MinValue<CqlDateTime>();
-            bool? e_ = context.Operators.Equal(c_, d_);
+            CqlBoolean e_ = context.Operators.Equal(c_, d_);
             return e_;
         }
 
@@ -1376,7 +1376,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         CqlBoolean b_() {
             CqlDateTime c_ = context.Operators.End(period);
             CqlDateTime d_ = context.Operators.MaxValue<CqlDateTime>();
-            bool? e_ = context.Operators.Equal(c_, d_);
+            CqlBoolean e_ = context.Operators.Equal(c_, d_);
             return e_;
         }
 
@@ -1394,7 +1394,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         CqlBoolean b_() {
             CqlDateTime c_ = context.Operators.End(period);
             CqlDateTime d_ = context.Operators.MaxValue<CqlDateTime>();
-            bool? e_ = context.Operators.Equal(c_, d_);
+            CqlBoolean e_ = context.Operators.Equal(c_, d_);
             return e_;
         }
 
@@ -1581,8 +1581,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlDateTime j_;
             CqlDateTime m_ = context.Operators.End(Period);
             int? n_ = context.Operators.DurationBetween(i_, m_, "hour");
-            bool? o_ = context.Operators.Less(n_, 24);
-            if (o_ ?? false)
+            CqlBoolean o_ = context.Operators.Less(n_, 24);
+            if (o_.IsTrue)
             {
                 j_ = i_;
             }
@@ -1619,8 +1619,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlDateTime j_;
             CqlDateTime m_ = context.Operators.End(Period);
             int? n_ = context.Operators.DurationBetween(i_, m_, "hour");
-            bool? o_ = context.Operators.Less(n_, 24);
-            if (o_ ?? false)
+            CqlBoolean o_ = context.Operators.Less(n_, 24);
+            if (o_.IsTrue)
             {
                 j_ = i_;
             }

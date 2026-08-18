@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CqlBooleanTest", "1.0.000")]
 public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTest_1_0_000>
 {
@@ -26,8 +26,8 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     private bool? SomethingTrueEqualsTrue_Compute(CqlContext context)
     {
-        bool? a_ = context.Operators.Equal(1, 1);
-        bool? b_ = context.Operators.Equal(a_, true);
+        CqlBoolean a_ = context.Operators.Equal(1, 1);
+        CqlBoolean b_ = context.Operators.Equal((bool?)a_, true);
         return b_;
     }
 

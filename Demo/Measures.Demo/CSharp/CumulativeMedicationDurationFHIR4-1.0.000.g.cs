@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CumulativeMedicationDurationFHIR4", "1.0.000")]
 public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISingleton<CumulativeMedicationDurationFHIR4_1_0_000>
 {
@@ -201,8 +201,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     public decimal? ToDaily(CqlContext context, int? frequency, CqlQuantity period)
     {
         string a_ = period?.unit;
-        bool? b_ = context.Operators.Equal(a_, "h");
-        if (b_ ?? false)
+        CqlBoolean b_ = context.Operators.Equal(a_, "h");
+        if (b_.IsTrue)
         {
             decimal? c_ = context.Operators.ConvertIntegerToDecimal(frequency);
             decimal? d_ = period?.value;
@@ -212,8 +212,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
         }
         else
         {
-            bool? g_ = context.Operators.Equal(a_, "min");
-            if (g_ ?? false)
+            CqlBoolean g_ = context.Operators.Equal(a_, "min");
+            if (g_.IsTrue)
             {
                 decimal? h_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? i_ = period?.value;
@@ -225,8 +225,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             }
             else
             {
-                bool? n_ = context.Operators.Equal(a_, "s");
-                if (n_ ?? false)
+                CqlBoolean n_ = context.Operators.Equal(a_, "s");
+                if (n_.IsTrue)
                 {
                     decimal? o_ = context.Operators.ConvertIntegerToDecimal(frequency);
                     decimal? p_ = period?.value;
@@ -239,8 +239,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 }
                 else
                 {
-                    bool? v_ = context.Operators.Equal(a_, "d");
-                    if (v_ ?? false)
+                    CqlBoolean v_ = context.Operators.Equal(a_, "d");
+                    if (v_.IsTrue)
                     {
                         decimal? w_ = context.Operators.ConvertIntegerToDecimal(frequency);
                         decimal? x_ = period?.value;
@@ -252,8 +252,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                     }
                     else
                     {
-                        bool? ac_ = context.Operators.Equal(a_, "wk");
-                        if (ac_ ?? false)
+                        CqlBoolean ac_ = context.Operators.Equal(a_, "wk");
+                        if (ac_.IsTrue)
                         {
                             decimal? ad_ = context.Operators.ConvertIntegerToDecimal(frequency);
                             decimal? ae_ = period?.value;
@@ -266,8 +266,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                         }
                         else
                         {
-                            bool? ak_ = context.Operators.Equal(a_, "mo");
-                            if (ak_ ?? false)
+                            CqlBoolean ak_ = context.Operators.Equal(a_, "mo");
+                            if (ak_.IsTrue)
                             {
                                 decimal? al_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                 decimal? am_ = period?.value;
@@ -280,8 +280,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                             }
                             else
                             {
-                                bool? as_ = context.Operators.Equal(a_, "a");
-                                if (as_ ?? false)
+                                CqlBoolean as_ = context.Operators.Equal(a_, "a");
+                                if (as_.IsTrue)
                                 {
                                     decimal? at_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                     decimal? au_ = period?.value;
@@ -294,8 +294,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                 }
                                 else
                                 {
-                                    bool? ba_ = context.Operators.Equal(a_, "hour");
-                                    if (ba_ ?? false)
+                                    CqlBoolean ba_ = context.Operators.Equal(a_, "hour");
+                                    if (ba_.IsTrue)
                                     {
                                         decimal? bb_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                         decimal? bc_ = period?.value;
@@ -305,8 +305,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                     }
                                     else
                                     {
-                                        bool? bf_ = context.Operators.Equal(a_, "minute");
-                                        if (bf_ ?? false)
+                                        CqlBoolean bf_ = context.Operators.Equal(a_, "minute");
+                                        if (bf_.IsTrue)
                                         {
                                             decimal? bg_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                             decimal? bh_ = period?.value;
@@ -318,8 +318,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                         }
                                         else
                                         {
-                                            bool? bm_ = context.Operators.Equal(a_, "second");
-                                            if (bm_ ?? false)
+                                            CqlBoolean bm_ = context.Operators.Equal(a_, "second");
+                                            if (bm_.IsTrue)
                                             {
                                                 decimal? bn_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                 decimal? bo_ = period?.value;
@@ -332,8 +332,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                             }
                                             else
                                             {
-                                                bool? bu_ = context.Operators.Equal(a_, "day");
-                                                if (bu_ ?? false)
+                                                CqlBoolean bu_ = context.Operators.Equal(a_, "day");
+                                                if (bu_.IsTrue)
                                                 {
                                                     decimal? bv_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                     decimal? bw_ = period?.value;
@@ -345,8 +345,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                                 }
                                                 else
                                                 {
-                                                    bool? cb_ = context.Operators.Equal(a_, "week");
-                                                    if (cb_ ?? false)
+                                                    CqlBoolean cb_ = context.Operators.Equal(a_, "week");
+                                                    if (cb_.IsTrue)
                                                     {
                                                         decimal? cc_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                         decimal? cd_ = period?.value;
@@ -359,8 +359,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                                     }
                                                     else
                                                     {
-                                                        bool? cj_ = context.Operators.Equal(a_, "month");
-                                                        if (cj_ ?? false)
+                                                        CqlBoolean cj_ = context.Operators.Equal(a_, "month");
+                                                        if (cj_.IsTrue)
                                                         {
                                                             decimal? ck_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                             decimal? cl_ = period?.value;
@@ -373,8 +373,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                                         }
                                                         else
                                                         {
-                                                            bool? cr_ = context.Operators.Equal(a_, "year");
-                                                            if (cr_ ?? false)
+                                                            CqlBoolean cr_ = context.Operators.Equal(a_, "year");
+                                                            if (cr_.IsTrue)
                                                             {
                                                                 decimal? cs_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                 decimal? ct_ = period?.value;
@@ -387,8 +387,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                                             }
                                                             else
                                                             {
-                                                                bool? cz_ = context.Operators.Equal(a_, "hours");
-                                                                if (cz_ ?? false)
+                                                                CqlBoolean cz_ = context.Operators.Equal(a_, "hours");
+                                                                if (cz_.IsTrue)
                                                                 {
                                                                     decimal? da_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                     decimal? db_ = period?.value;
@@ -398,8 +398,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                                                 }
                                                                 else
                                                                 {
-                                                                    bool? de_ = context.Operators.Equal(a_, "minutes");
-                                                                    if (de_ ?? false)
+                                                                    CqlBoolean de_ = context.Operators.Equal(a_, "minutes");
+                                                                    if (de_.IsTrue)
                                                                     {
                                                                         decimal? df_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                         decimal? dg_ = period?.value;
@@ -411,8 +411,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                                                     }
                                                                     else
                                                                     {
-                                                                        bool? dl_ = context.Operators.Equal(a_, "seconds");
-                                                                        if (dl_ ?? false)
+                                                                        CqlBoolean dl_ = context.Operators.Equal(a_, "seconds");
+                                                                        if (dl_.IsTrue)
                                                                         {
                                                                             decimal? dm_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                             decimal? dn_ = period?.value;
@@ -425,8 +425,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                                                         }
                                                                         else
                                                                         {
-                                                                            bool? dt_ = context.Operators.Equal(a_, "days");
-                                                                            if (dt_ ?? false)
+                                                                            CqlBoolean dt_ = context.Operators.Equal(a_, "days");
+                                                                            if (dt_.IsTrue)
                                                                             {
                                                                                 decimal? du_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                                 decimal? dv_ = period?.value;
@@ -438,8 +438,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                                                             }
                                                                             else
                                                                             {
-                                                                                bool? ea_ = context.Operators.Equal(a_, "weeks");
-                                                                                if (ea_ ?? false)
+                                                                                CqlBoolean ea_ = context.Operators.Equal(a_, "weeks");
+                                                                                if (ea_.IsTrue)
                                                                                 {
                                                                                     decimal? eb_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                                     decimal? ec_ = period?.value;
@@ -452,8 +452,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                                                                 }
                                                                                 else
                                                                                 {
-                                                                                    bool? ei_ = context.Operators.Equal(a_, "months");
-                                                                                    if (ei_ ?? false)
+                                                                                    CqlBoolean ei_ = context.Operators.Equal(a_, "months");
+                                                                                    if (ei_.IsTrue)
                                                                                     {
                                                                                         decimal? ej_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                                         decimal? ek_ = period?.value;
@@ -466,8 +466,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                                                                     }
                                                                                     else
                                                                                     {
-                                                                                        bool? eq_ = context.Operators.Equal(a_, "years");
-                                                                                        if (eq_ ?? false)
+                                                                                        CqlBoolean eq_ = context.Operators.Equal(a_, "years");
+                                                                                        if (eq_.IsTrue)
                                                                                         {
                                                                                             decimal? er_ = context.Operators.ConvertIntegerToDecimal(frequency);
                                                                                             decimal? es_ = period?.value;
@@ -512,8 +512,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     public decimal? ToDaily(CqlContext context, CqlCode frequency)
     {
         CqlCode a_ = this.C(context);
-        bool? b_ = context.Operators.Equal(frequency, a_);
-        if (b_ ?? false)
+        CqlBoolean b_ = context.Operators.Equal(frequency, a_);
+        if (b_.IsTrue)
         {
             return 3.0m;
         }
@@ -553,7 +553,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, q_ as Period);
                 CqlDateTime s_ = context.Operators.End(r_);
                 CqlDateTime t_ = context.Operators.MaxValue<CqlDateTime>();
-                bool? u_ = context.Operators.Equal(s_, t_);
+                CqlBoolean u_ = context.Operators.Equal(s_, t_);
                 return u_;
             }
 
@@ -817,7 +817,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
         bool? a_(object M) {
             bool l_ = M is MedicationRequest;
-            return l_ as bool?;
+            return l_;
         }
 
 
@@ -831,7 +831,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
         bool? e_(object M) {
             bool n_ = M is MedicationDispense;
-            return /* CQL 'or' (378:13-378:74) */ ((CqlBoolean)n_
+            return /* CQL 'or' (378:13-378:74) */ (n_
                 || (M is MedicationAdministration));
         }
 

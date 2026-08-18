@@ -3,6 +3,8 @@ Hl7.Cql.Primitives.CqlBoolean
 Hl7.Cql.Primitives.CqlBoolean.CqlBoolean() -> void
 Hl7.Cql.Primitives.CqlBoolean.Equals(Hl7.Cql.Primitives.CqlBoolean other) -> bool
 Hl7.Cql.Primitives.CqlBoolean.HasValue.get -> bool
+Hl7.Cql.Primitives.CqlBoolean.IsFalse.get -> bool
+Hl7.Cql.Primitives.CqlBoolean.IsTrue.get -> bool
 override Hl7.Cql.Primitives.CqlBoolean.Equals(object? obj) -> bool
 override Hl7.Cql.Primitives.CqlBoolean.GetHashCode() -> int
 override Hl7.Cql.Primitives.CqlBoolean.ToString() -> string!

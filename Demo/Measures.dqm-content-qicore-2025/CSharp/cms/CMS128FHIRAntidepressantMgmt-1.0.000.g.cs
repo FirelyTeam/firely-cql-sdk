@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS128FHIRAntidepressantMgmt", "1.0.000")]
 public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton<CMS128FHIRAntidepressantMgmt_1_0_000>
 {
@@ -172,21 +172,21 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 object t_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> u_ = context.Operators.Split((string)t_, "/");
                 string v_ = context.Operators.Last<string>(u_);
-                bool? w_ = context.Operators.Equal(s_, v_);
+                CqlBoolean w_ = context.Operators.Equal(s_, v_);
 
                 CqlBoolean x_() {
                     CodeableConcept y_ = M?.Code;
                     CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
                     CqlValueSet aa_ = this.Antidepressant_Medication(context);
-                    bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
+                    CqlBoolean ab_ = context.Operators.ConceptInValueSet(z_, aa_);
                     return ab_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)w_
+                return /* CQL 'and' */ (w_
                     && x_());
             }
 
-            bool? r_ = context.Operators.WhereAny<Medication>(p_, q_);
+            CqlBoolean r_ = context.Operators.WhereAny<Medication>(p_, q_);
             return r_;
         }
 
@@ -201,7 +201,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             CqlDate ad_ = context.Operators.Start(ac_);
             CqlDateTime ae_ = context.Operators.ConvertDateToDateTime(ad_);
             CqlInterval<CqlDateTime> af_ = this.Intake_Period(context);
-            bool? ag_ = context.Operators.In<CqlDateTime>(ae_, af_, "day");
+            CqlBoolean ag_ = context.Operators.In<CqlDateTime>(ae_, af_, "day");
             return ag_;
         }
 
@@ -256,8 +256,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlDate o_ = context.Operators.Subtract(m_, n_);
                 CqlDate p_ = context.Operators.Add(m_, n_);
                 CqlInterval<CqlDate> q_ = context.Operators.Interval(o_, p_, true, true);
-                bool? r_ = context.Operators.In<CqlDate>(l_, q_, (string)default);
-                return /* CQL 'and' (44:13-44:94) */ ((CqlBoolean)r_
+                CqlBoolean r_ = context.Operators.In<CqlDate>(l_, q_, (string)default);
+                return /* CQL 'and' (44:13-44:94) */ (r_
                     && !((bool?)((this.IPSD(context)) is null)));
             }
 
@@ -265,7 +265,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 && i_());
         }
 
-        bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
+        CqlBoolean g_ = context.Operators.WhereAny<Condition>(e_, f_);
         return g_;
     }
 
@@ -319,8 +319,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             CqlDate am_ = context.Operators.Subtract(ak_, al_);
             CqlDate an_ = context.Operators.Add(ak_, al_);
             CqlInterval<CqlDate> ao_ = context.Operators.Interval(am_, an_, true, true);
-            bool? ap_ = context.Operators.In<CqlDate>(aj_, ao_, (string)default);
-            return /* CQL 'and' (74:5-74:75) */ ((CqlBoolean)ap_
+            CqlBoolean ap_ = context.Operators.In<CqlDate>(aj_, ao_, (string)default);
+            return /* CQL 'and' (74:5-74:75) */ (ap_
                 && !((bool?)((this.IPSD(context)) is null)));
         }
 
@@ -345,15 +345,15 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
         CqlDateTime f_ = context.Operators.ConvertDateToDateTime(e_);
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        bool? i_ = context.Operators.GreaterOrEqual(h_, 18);
+        CqlBoolean i_ = context.Operators.GreaterOrEqual(h_, 18);
 
         CqlBoolean j_() {
             IEnumerable<Encounter> k_ = this.Qualifying_Encounters(context);
-            bool? l_ = context.Operators.Exists<Encounter>(k_);
+            CqlBoolean l_ = context.Operators.Exists<Encounter>(k_);
             return l_;
         }
 
-        return /* CQL 'and' (32:3-34:38) */ (/* CQL 'and' (32:3-33:49) */ ((CqlBoolean)i_
+        return /* CQL 'and' (32:3-34:38) */ (/* CQL 'and' (32:3-33:49) */ (i_
             && this.Has_IPSD_and_Major_Depression_Diagnosis(context))
             && j_());
     }
@@ -367,7 +367,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -380,7 +380,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
-        bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+        CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
 
         CqlBoolean b_() {
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -393,21 +393,21 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                     IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
                     string r_ = context.Operators.Last<string>(q_);
-                    bool? s_ = context.Operators.Equal(o_, r_);
+                    CqlBoolean s_ = context.Operators.Equal(o_, r_);
 
                     CqlBoolean t_() {
                         CodeableConcept u_ = M?.Code;
                         CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
                         CqlValueSet w_ = this.Antidepressant_Medication(context);
-                        bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                        CqlBoolean x_ = context.Operators.ConceptInValueSet(v_, w_);
                         return x_;
                     }
 
-                    return /* CQL 'and' */ ((CqlBoolean)s_
+                    return /* CQL 'and' */ (s_
                         && t_());
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
                 return n_;
             }
 
@@ -426,15 +426,15 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     CqlDateTime ac_ = context.Operators.ConvertDateToDateTime(ab_);
                     CqlDate ad_ = aa_?.high;
                     CqlDateTime ae_ = context.Operators.ConvertDateToDateTime(ad_);
-                    bool? af_ = aa_?.lowClosed;
-                    bool? ag_ = aa_?.highClosed;
+                    CqlBoolean af_ = aa_?.lowClosed;
+                    CqlBoolean ag_ = aa_?.highClosed;
                     CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ac_, ae_, af_, ag_);
                     CqlInterval<CqlDate> ai_ = CQMCommon_4_1_000.Instance.ToDateInterval(context, ah_);
                     CqlDate aj_ = this.IPSD(context);
                     CqlQuantity ak_ = context.Operators.Quantity(105m, "days");
                     CqlDate al_ = context.Operators.Subtract(aj_, ak_);
                     CqlInterval<CqlDate> am_ = context.Operators.Interval(al_, aj_, true, false);
-                    bool? an_ = context.Operators.Overlaps(ai_, am_, (string)default);
+                    CqlBoolean an_ = context.Operators.Overlaps(ai_, am_, (string)default);
                     return an_;
                 }
 
@@ -442,11 +442,11 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     && z_());
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
+            CqlBoolean k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
             return k_;
         }
 
-        return /* CQL 'or' (80:3-84:5) */ ((CqlBoolean)a_
+        return /* CQL 'or' (80:3-84:5) */ (a_
             || b_());
     }
 
@@ -469,21 +469,21 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 object n_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> o_ = context.Operators.Split((string)n_, "/");
                 string p_ = context.Operators.Last<string>(o_);
-                bool? q_ = context.Operators.Equal(m_, p_);
+                CqlBoolean q_ = context.Operators.Equal(m_, p_);
 
                 CqlBoolean r_() {
                     CodeableConcept s_ = M?.Code;
                     CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                     CqlValueSet u_ = this.Antidepressant_Medication(context);
-                    bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                    CqlBoolean v_ = context.Operators.ConceptInValueSet(t_, u_);
                     return v_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)q_
+                return /* CQL 'and' */ (q_
                     && r_());
             }
 
-            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            CqlBoolean l_ = context.Operators.WhereAny<Medication>(j_, k_);
             return l_;
         }
 
@@ -518,7 +518,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     {
         IEnumerable<CqlInterval<CqlDate>> a_ = this.Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD(context);
         int? b_ = CumulativeMedicationDuration_6_0_000.Instance.cumulativeDuration(context, a_);
-        bool? c_ = context.Operators.GreaterOrEqual(b_, 84);
+        CqlBoolean c_ = context.Operators.GreaterOrEqual(b_, 84);
         return c_;
     }
 
@@ -531,7 +531,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     private bool? Numerator_1_Compute(CqlContext context)
     {
-        bool? a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days(context);
+        CqlBoolean a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days(context);
         return a_;
     }
 
@@ -554,21 +554,21 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 object n_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> o_ = context.Operators.Split((string)n_, "/");
                 string p_ = context.Operators.Last<string>(o_);
-                bool? q_ = context.Operators.Equal(m_, p_);
+                CqlBoolean q_ = context.Operators.Equal(m_, p_);
 
                 CqlBoolean r_() {
                     CodeableConcept s_ = M?.Code;
                     CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                     CqlValueSet u_ = this.Antidepressant_Medication(context);
-                    bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                    CqlBoolean v_ = context.Operators.ConceptInValueSet(t_, u_);
                     return v_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)q_
+                return /* CQL 'and' */ (q_
                     && r_());
             }
 
-            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            CqlBoolean l_ = context.Operators.WhereAny<Medication>(j_, k_);
             return l_;
         }
 
@@ -603,7 +603,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     {
         IEnumerable<CqlInterval<CqlDate>> a_ = this.Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD(context);
         int? b_ = CumulativeMedicationDuration_6_0_000.Instance.cumulativeDuration(context, a_);
-        bool? c_ = context.Operators.GreaterOrEqual(b_, 180);
+        CqlBoolean c_ = context.Operators.GreaterOrEqual(b_, 180);
         return c_;
     }
 
@@ -616,7 +616,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     private bool? Numerator_2_Compute(CqlContext context)
     {
-        bool? a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days(context);
+        CqlBoolean a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days(context);
         return a_;
     }
 

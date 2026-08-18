@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("FHIRHelpers", "4.4.000")]
 public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_000>
 {
@@ -62,8 +62,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
             Code<Quantity.QuantityComparator> a_ = quantity?.ComparatorElement;
             Quantity.QuantityComparator? b_ = a_?.Value;
             string c_ = context.Operators.Convert<string>(b_);
-            bool? d_ = context.Operators.Equal(c_, "<");
-            if (d_ ?? false)
+            CqlBoolean d_ = context.Operators.Equal(c_, "<");
+            if (d_.IsTrue)
             {
                 CqlQuantity e_ = this.ToQuantityIgnoringComparator(context, quantity);
                 CqlInterval<CqlQuantity> f_ = context.Operators.Interval(default, e_, true, false);
@@ -71,8 +71,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
             }
             else
             {
-                bool? g_ = context.Operators.Equal(c_, "<=");
-                if (g_ ?? false)
+                CqlBoolean g_ = context.Operators.Equal(c_, "<=");
+                if (g_.IsTrue)
                 {
                     CqlQuantity h_ = this.ToQuantityIgnoringComparator(context, quantity);
                     CqlInterval<CqlQuantity> i_ = context.Operators.Interval(default, h_, true, true);
@@ -80,8 +80,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
                 }
                 else
                 {
-                    bool? j_ = context.Operators.Equal(c_, ">=");
-                    if (j_ ?? false)
+                    CqlBoolean j_ = context.Operators.Equal(c_, ">=");
+                    if (j_.IsTrue)
                     {
                         CqlQuantity k_ = this.ToQuantityIgnoringComparator(context, quantity);
                         CqlInterval<CqlQuantity> l_ = context.Operators.Interval(k_, default, true, true);
@@ -89,8 +89,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
                     }
                     else
                     {
-                        bool? m_ = context.Operators.Equal(c_, ">");
-                        if (m_ ?? false)
+                        CqlBoolean m_ = context.Operators.Equal(c_, ">");
+                        if (m_.IsTrue)
                         {
                             CqlQuantity n_ = this.ToQuantityIgnoringComparator(context, quantity);
                             CqlInterval<CqlQuantity> o_ = context.Operators.Interval(n_, default, false, true);
@@ -199,7 +199,7 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
             CqlBoolean c_() {
                 FhirUri e_ = quantity?.SystemElement;
                 string f_ = e_?.Value;
-                bool? g_ = context.Operators.Equal(f_, "http://unitsofmeasure.org");
+                CqlBoolean g_ = context.Operators.Equal(f_, "http://unitsofmeasure.org");
                 return g_;
             }
 
@@ -207,7 +207,7 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
             CqlBoolean d_() {
                 FhirUri h_ = quantity?.SystemElement;
                 string i_ = h_?.Value;
-                bool? j_ = context.Operators.Equal(i_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
+                CqlBoolean j_ = context.Operators.Equal(i_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
                 return j_;
             }
 
@@ -265,7 +265,7 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
             CqlBoolean b_() {
                 FhirUri d_ = quantity?.SystemElement;
                 string e_ = d_?.Value;
-                bool? f_ = context.Operators.Equal(e_, "http://unitsofmeasure.org");
+                CqlBoolean f_ = context.Operators.Equal(e_, "http://unitsofmeasure.org");
                 return f_;
             }
 
@@ -273,7 +273,7 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
             CqlBoolean c_() {
                 FhirUri g_ = quantity?.SystemElement;
                 string h_ = g_?.Value;
-                bool? i_ = context.Operators.Equal(h_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
+                CqlBoolean i_ = context.Operators.Equal(h_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
                 return i_;
             }
 
@@ -422,8 +422,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
         }
         else if (value is FhirBoolean)
         {
-            bool? c_ = (value as FhirBoolean)?.Value;
-            return c_;
+            CqlBoolean c_ = (value as FhirBoolean)?.Value;
+            return (bool?)c_;
         }
         else if (value is Canonical)
         {
@@ -2652,7 +2652,7 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlFunctionDefinition("ToBoolean")]
     public bool? ToBoolean(CqlContext context, FhirBoolean value)
     {
-        bool? a_ = value?.Value;
+        CqlBoolean a_ = value?.Value;
         return a_;
     }
 

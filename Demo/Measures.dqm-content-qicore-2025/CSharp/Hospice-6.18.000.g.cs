@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("Hospice", "6.18.000")]
 public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
 {
@@ -125,7 +125,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
             CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
             CqlCode n_ = this.Discharge_to_home_for_hospice_care__procedure_(context);
             CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
-            bool? p_ = context.Operators.Equivalent(m_, o_);
+            CqlBoolean p_ = context.Operators.Equivalent(m_, o_);
 
             CqlBoolean q_() {
                 Encounter.HospitalizationComponent s_ = InpatientEncounter?.Hospitalization;
@@ -133,7 +133,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
                 CqlCode v_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_(context);
                 CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-                bool? x_ = context.Operators.Equivalent(u_, w_);
+                CqlBoolean x_ = context.Operators.Equivalent(u_, w_);
                 return x_;
             }
 
@@ -143,16 +143,16 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
                 CqlDateTime aa_ = context.Operators.End(z_);
                 CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
-                bool? ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, "day");
+                CqlBoolean ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, "day");
                 return ac_;
             }
 
-            return /* CQL 'and' (28:7-31:77) */ (/* CQL 'or' (28:13-30:7) */ ((CqlBoolean)p_
+            return /* CQL 'and' (28:7-31:77) */ (/* CQL 'or' (28:13-30:7) */ (p_
                 || q_())
                 && r_());
         }
 
-        bool? e_ = context.Operators.WhereAny<Encounter>(c_, d_);
+        CqlBoolean e_ = context.Operators.WhereAny<Encounter>(c_, d_);
 
         CqlBoolean f_() {
             CqlValueSet ad_ = this.Hospice_Encounter(context);
@@ -163,11 +163,11 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 Period ai_ = HospiceEncounter?.Period;
                 CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ai_);
                 CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
-                bool? al_ = context.Operators.Overlaps(aj_, ak_, "day");
+                CqlBoolean al_ = context.Operators.Overlaps(aj_, ak_, "day");
                 return al_;
             }
 
-            bool? ah_ = context.Operators.WhereAny<Encounter>(af_, ag_);
+            CqlBoolean ah_ = context.Operators.WhereAny<Encounter>(af_, ag_);
             return ah_;
         }
 
@@ -183,22 +183,22 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
                 CqlCode au_ = this.Yes__qualifier_value_(context);
                 CqlConcept av_ = context.Operators.ConvertCodeToConcept(au_);
-                bool? aw_ = context.Operators.Equivalent(at_ as CqlConcept, av_);
+                CqlBoolean aw_ = context.Operators.Equivalent(at_ as CqlConcept, av_);
 
                 CqlBoolean ax_() {
                     DataType ay_ = HospiceAssessment?.Effective;
                     object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
                     CqlInterval<CqlDateTime> ba_ = QICoreCommon_4_0_000.Instance.toInterval(context, az_);
                     CqlInterval<CqlDateTime> bb_ = this.Measurement_Period(context);
-                    bool? bc_ = context.Operators.Overlaps(ba_, bb_, "day");
+                    CqlBoolean bc_ = context.Operators.Overlaps(ba_, bb_, "day");
                     return bc_;
                 }
 
-                return /* CQL 'and' (37:9-38:91) */ ((CqlBoolean)aw_
+                return /* CQL 'and' (37:9-38:91) */ (aw_
                     && ax_());
             }
 
-            bool? ar_ = context.Operators.WhereAny<Observation>(ap_, aq_);
+            CqlBoolean ar_ = context.Operators.WhereAny<Observation>(ap_, aq_);
             return ar_;
         }
 
@@ -212,11 +212,11 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 FhirDateTime bi_ = HospiceOrder?.AuthoredOnElement;
                 CqlDateTime bj_ = context.Operators.Convert<CqlDateTime>(bi_);
                 CqlInterval<CqlDateTime> bk_ = this.Measurement_Period(context);
-                bool? bl_ = context.Operators.In<CqlDateTime>(bj_, bk_, "day");
+                CqlBoolean bl_ = context.Operators.In<CqlDateTime>(bj_, bk_, "day");
                 return bl_;
             }
 
-            bool? bh_ = context.Operators.WhereAny<ServiceRequest>(bf_, bg_);
+            CqlBoolean bh_ = context.Operators.WhereAny<ServiceRequest>(bf_, bg_);
             return bh_;
         }
 
@@ -265,11 +265,11 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 }
                 CqlInterval<CqlDateTime> bs_ = QICoreCommon_4_0_000.Instance.toInterval(context, br_);
                 CqlInterval<CqlDateTime> bt_ = this.Measurement_Period(context);
-                bool? bu_ = context.Operators.Overlaps(bs_, bt_, "day");
+                CqlBoolean bu_ = context.Operators.Overlaps(bs_, bt_, "day");
                 return bu_;
             }
 
-            bool? bq_ = context.Operators.WhereAny<Procedure>(bo_, bp_);
+            CqlBoolean bq_ = context.Operators.WhereAny<Procedure>(bo_, bp_);
             return bq_;
         }
 
@@ -284,15 +284,15 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
             bool? cg_(Condition HospiceCareDiagnosis) {
                 CqlInterval<CqlDateTime> ci_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HospiceCareDiagnosis);
                 CqlInterval<CqlDateTime> cj_ = this.Measurement_Period(context);
-                bool? ck_ = context.Operators.Overlaps(ci_, cj_, "day");
+                CqlBoolean ck_ = context.Operators.Overlaps(ci_, cj_, "day");
                 return ck_;
             }
 
-            bool? ch_ = context.Operators.WhereAny<Condition>(cf_, cg_);
+            CqlBoolean ch_ = context.Operators.WhereAny<Condition>(cf_, cg_);
             return ch_;
         }
 
-        return /* CQL 'or' (27:3-49:5) */ (/* CQL 'or' (27:3-45:5) */ (/* CQL 'or' (27:3-42:5) */ (/* CQL 'or' (27:3-39:5) */ (/* CQL 'or' (27:3-35:5) */ ((CqlBoolean)e_
+        return /* CQL 'or' (27:3-49:5) */ (/* CQL 'or' (27:3-45:5) */ (/* CQL 'or' (27:3-42:5) */ (/* CQL 'or' (27:3-39:5) */ (/* CQL 'or' (27:3-35:5) */ (e_
             || f_())
             || g_())
             || h_())

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS138FHIRTobaccoScrnCessation", "1.0.000")]
 public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISingleton<CMS138FHIRTobaccoScrnCessation_1_0_000>
 {
@@ -227,12 +227,12 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             bool? as_(CqlConcept T) {
                 CqlCode aw_ = this.Health_behavior_intervention__individual__face_to_face__initial_30_minutes(context);
                 CqlConcept ax_ = context.Operators.ConvertCodeToConcept(aw_);
-                bool? ay_ = context.Operators.Equivalent(T, ax_);
+                CqlBoolean ay_ = context.Operators.Equivalent(T, ax_);
                 return ay_;
             }
 
             IEnumerable<CqlConcept> at_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)aq_, ar_, as_);
-            bool? au_ = context.Operators.Exists<CqlConcept>(at_);
+            CqlBoolean au_ = context.Operators.Exists<CqlConcept>(at_);
             return au_;
         }
 
@@ -250,12 +250,12 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             bool? bb_(CqlConcept T) {
                 CqlCode bf_ = this.Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(context);
                 CqlConcept bg_ = context.Operators.ConvertCodeToConcept(bf_);
-                bool? bh_ = context.Operators.Equivalent(T, bg_);
+                CqlBoolean bh_ = context.Operators.Equivalent(T, bg_);
                 return bh_;
             }
 
             IEnumerable<CqlConcept> bc_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)az_, ba_, bb_);
-            bool? bd_ = context.Operators.Exists<CqlConcept>(bc_);
+            CqlBoolean bd_ = context.Operators.Exists<CqlConcept>(bc_);
             return bd_;
         }
 
@@ -300,7 +300,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             CqlInterval<CqlDateTime> bi_ = this.Measurement_Period(context);
             Period bj_ = OfficeBasedEncounter?.Period;
             CqlInterval<CqlDateTime> bk_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bj_);
-            bool? bl_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bi_, bk_, "day");
+            CqlBoolean bl_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bi_, bk_, "day");
             return bl_;
         }
 
@@ -350,12 +350,12 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             bool? aj_(CqlConcept T) {
                 CqlCode an_ = this.Unlisted_preventive_medicine_service(context);
                 CqlConcept ao_ = context.Operators.ConvertCodeToConcept(an_);
-                bool? ap_ = context.Operators.Equivalent(T, ao_);
+                CqlBoolean ap_ = context.Operators.Equivalent(T, ao_);
                 return ap_;
             }
 
             IEnumerable<CqlConcept> ak_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ah_, ai_, aj_);
-            bool? al_ = context.Operators.Exists<CqlConcept>(ak_);
+            CqlBoolean al_ = context.Operators.Exists<CqlConcept>(ak_);
             return al_;
         }
 
@@ -375,12 +375,12 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             bool? as_(CqlConcept T) {
                 CqlCode aw_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure(context);
                 CqlConcept ax_ = context.Operators.ConvertCodeToConcept(aw_);
-                bool? ay_ = context.Operators.Equivalent(T, ax_);
+                CqlBoolean ay_ = context.Operators.Equivalent(T, ax_);
                 return ay_;
             }
 
             IEnumerable<CqlConcept> at_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)aq_, ar_, as_);
-            bool? au_ = context.Operators.Exists<CqlConcept>(at_);
+            CqlBoolean au_ = context.Operators.Exists<CqlConcept>(at_);
             return au_;
         }
 
@@ -395,7 +395,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             CqlInterval<CqlDateTime> az_ = this.Measurement_Period(context);
             Period ba_ = PreventiveEncounter?.Period;
             CqlInterval<CqlDateTime> bb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ba_);
-            bool? bc_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(az_, bb_, "day");
+            CqlBoolean bc_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(az_, bb_, "day");
             return bc_;
         }
 
@@ -420,24 +420,24 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         CqlDateTime f_ = context.Operators.Start(e_);
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        bool? i_ = context.Operators.GreaterOrEqual(h_, 12);
+        CqlBoolean i_ = context.Operators.GreaterOrEqual(h_, 12);
 
         CqlBoolean j_() {
             IEnumerable<Encounter> k_ = this.Qualifying_Visit_During_Measurement_Period(context);
             int? l_ = context.Operators.Count<Encounter>(k_);
-            bool? m_ = context.Operators.GreaterOrEqual(l_, 2);
+            CqlBoolean m_ = context.Operators.GreaterOrEqual(l_, 2);
 
             CqlBoolean n_() {
                 IEnumerable<Encounter> o_ = this.Preventive_Visit_During_Measurement_Period(context);
-                bool? p_ = context.Operators.Exists<Encounter>(o_);
+                CqlBoolean p_ = context.Operators.Exists<Encounter>(o_);
                 return p_;
             }
 
-            return /* CQL 'or' (65:9-67:5) */ ((CqlBoolean)m_
+            return /* CQL 'or' (65:9-67:5) */ (m_
                 || n_());
         }
 
-        return /* CQL 'and' (64:3-67:5) */ ((CqlBoolean)i_
+        return /* CQL 'and' (64:3-67:5) */ (i_
             && j_());
     }
 
@@ -450,7 +450,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     private bool? Denominator_1_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -471,7 +471,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             DataType m_ = TobaccoUseScreening?.Effective;
             CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
             CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
+            CqlBoolean p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
             return p_;
         }
 
@@ -495,7 +495,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             DataType u_ = MostRecentTobaccoUseScreening?.Value;
             object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
             CqlValueSet w_ = this.Tobacco_User(context);
-            bool? x_ = context.Operators.ConceptInValueSet(v_ as CqlConcept, w_);
+            CqlBoolean x_ = context.Operators.ConceptInValueSet(v_ as CqlConcept, w_);
             return x_;
         }
 
@@ -513,8 +513,8 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     private bool? Denominator_2_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
-        return /* CQL 'and' (57:3-58:78) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Initial_Population(context);
+        return /* CQL 'and' (57:3-58:78) */ (a_
             && !((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null)));
     }
 
@@ -527,7 +527,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     private bool? Denominator_3_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -548,7 +548,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             DataType m_ = TobaccoUseScreening?.Effective;
             CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
             CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
+            CqlBoolean p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
             return p_;
         }
 
@@ -572,7 +572,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             DataType u_ = MostRecentTobaccoUseScreening?.Value;
             object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
             CqlValueSet w_ = this.Tobacco_Non_User(context);
-            bool? x_ = context.Operators.ConceptInValueSet(v_ as CqlConcept, w_);
+            CqlBoolean x_ = context.Operators.ConceptInValueSet(v_ as CqlConcept, w_);
             return x_;
         }
 
@@ -652,7 +652,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 }
             }
             CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_);
-            bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, "day");
+            CqlBoolean w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, "day");
             return w_;
         }
 
@@ -673,7 +673,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             CqlDateTime ai_ = context.Operators.Subtract(ag_, ah_);
             CqlDateTime aj_ = context.Operators.End(af_);
             CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ai_, aj_, true, true);
-            bool? al_ = context.Operators.In<CqlDateTime>(ae_, ak_, "day");
+            CqlBoolean al_ = context.Operators.In<CqlDateTime>(ae_, ak_, "day");
             return al_;
         }
 
@@ -701,21 +701,21 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 object n_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> o_ = context.Operators.Split((string)n_, "/");
                 string p_ = context.Operators.Last<string>(o_);
-                bool? q_ = context.Operators.Equal(m_, p_);
+                CqlBoolean q_ = context.Operators.Equal(m_, p_);
 
                 CqlBoolean r_() {
                     CodeableConcept s_ = M?.Code;
                     CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                     CqlValueSet u_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
-                    bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                    CqlBoolean v_ = context.Operators.ConceptInValueSet(t_, u_);
                     return v_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)q_
+                return /* CQL 'and' */ (q_
                     && r_());
             }
 
-            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            CqlBoolean l_ = context.Operators.WhereAny<Medication>(j_, k_);
             return l_;
         }
 
@@ -734,33 +734,33 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
             CqlDateTime ac_ = context.Operators.End(y_);
             CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(ab_, ac_, true, true);
-            bool? ae_ = context.Operators.In<CqlDateTime>(x_, ad_, "day");
+            CqlBoolean ae_ = context.Operators.In<CqlDateTime>(x_, ad_, "day");
 
             CqlBoolean af_() {
                 IEnumerable<Task> ag_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
                 bool? ah_(Task TaskReject) {
                     ResourceReference aj_ = TaskReject?.Focus;
-                    bool? ak_ = QICoreCommon_4_0_000.Instance.references(context, aj_, CessationPharmacotherapyOrdered);
+                    CqlBoolean ak_ = QICoreCommon_4_0_000.Instance.references(context, aj_, CessationPharmacotherapyOrdered);
 
                     CqlBoolean al_() {
                         CodeableConcept am_ = TaskReject?.Code;
                         CqlConcept an_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, am_);
                         CqlCode ao_ = this.fulfill(context);
                         CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
-                        bool? aq_ = context.Operators.Equivalent(an_, ap_);
+                        CqlBoolean aq_ = context.Operators.Equivalent(an_, ap_);
                         return aq_;
                     }
 
-                    return /* CQL 'and' (109:11-110:43) */ ((CqlBoolean)ak_
+                    return /* CQL 'and' (109:11-110:43) */ (ak_
                         && al_());
                 }
 
-                bool? ai_ = context.Operators.WhereAny<Task>(ag_, ah_);
+                CqlBoolean ai_ = context.Operators.WhereAny<Task>(ag_, ah_);
                 return !ai_;
             }
 
-            return /* CQL 'and' (107:5-111:7) */ ((CqlBoolean)ae_
+            return /* CQL 'and' (107:5-111:7) */ (ae_
                 && af_());
         }
 
@@ -787,21 +787,21 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 object n_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> o_ = context.Operators.Split((string)n_, "/");
                 string p_ = context.Operators.Last<string>(o_);
-                bool? q_ = context.Operators.Equal(m_, p_);
+                CqlBoolean q_ = context.Operators.Equal(m_, p_);
 
                 CqlBoolean r_() {
                     CodeableConcept s_ = M?.Code;
                     CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                     CqlValueSet u_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
-                    bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                    CqlBoolean v_ = context.Operators.ConceptInValueSet(t_, u_);
                     return v_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)q_
+                return /* CQL 'and' */ (q_
                     && r_());
             }
 
-            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            CqlBoolean l_ = context.Operators.WhereAny<Medication>(j_, k_);
             return l_;
         }
 
@@ -823,10 +823,10 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             CqlDateTime ae_ = context.Operators.ConvertDateToDateTime(ad_);
             CqlDate af_ = ac_?.high;
             CqlDateTime ag_ = context.Operators.ConvertDateToDateTime(af_);
-            bool? ah_ = ac_?.lowClosed;
-            bool? ai_ = ac_?.highClosed;
+            CqlBoolean ah_ = ac_?.lowClosed;
+            CqlBoolean ai_ = ac_?.highClosed;
             CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ae_, ag_, ah_, ai_);
-            bool? ak_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ab_, aj_, "day");
+            CqlBoolean ak_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ab_, aj_, "day");
             return ak_;
         }
 
@@ -844,22 +844,22 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     private bool? Numerator_2_Compute(CqlContext context)
     {
         IEnumerable<object> a_ = this.Tobacco_Cessation_Counseling_Given(context);
-        bool? b_ = context.Operators.Exists<object>(a_);
+        CqlBoolean b_ = context.Operators.Exists<object>(a_);
 
         CqlBoolean c_() {
             IEnumerable<MedicationRequest> e_ = this.Tobacco_Cessation_Pharmacotherapy_Ordered(context);
-            bool? f_ = context.Operators.Exists<MedicationRequest>(e_);
+            CqlBoolean f_ = context.Operators.Exists<MedicationRequest>(e_);
             return f_;
         }
 
 
         CqlBoolean d_() {
             IEnumerable<MedicationRequest> g_ = this.Active_Pharmacotherapy_for_Tobacco_Cessation(context);
-            bool? h_ = context.Operators.Exists<MedicationRequest>(g_);
+            CqlBoolean h_ = context.Operators.Exists<MedicationRequest>(g_);
             return h_;
         }
 
-        return /* CQL 'or' (74:3-76:60) */ (/* CQL 'or' (74:3-75:57) */ ((CqlBoolean)b_
+        return /* CQL 'or' (74:3-76:60) */ (/* CQL 'or' (74:3-75:57) */ (b_
             || c_())
             || d_());
     }
@@ -880,22 +880,22 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
             CqlBoolean d_() {
                 IEnumerable<object> e_ = this.Tobacco_Cessation_Counseling_Given(context);
-                bool? f_ = context.Operators.Exists<object>(e_);
+                CqlBoolean f_ = context.Operators.Exists<object>(e_);
 
                 CqlBoolean g_() {
                     IEnumerable<MedicationRequest> i_ = this.Tobacco_Cessation_Pharmacotherapy_Ordered(context);
-                    bool? j_ = context.Operators.Exists<MedicationRequest>(i_);
+                    CqlBoolean j_ = context.Operators.Exists<MedicationRequest>(i_);
                     return j_;
                 }
 
 
                 CqlBoolean h_() {
                     IEnumerable<MedicationRequest> k_ = this.Active_Pharmacotherapy_for_Tobacco_Cessation(context);
-                    bool? l_ = context.Operators.Exists<MedicationRequest>(k_);
+                    CqlBoolean l_ = context.Operators.Exists<MedicationRequest>(k_);
                     return l_;
                 }
 
-                return /* CQL 'or' (81:13-84:9) */ (/* CQL 'or' (81:15-82:65) */ ((CqlBoolean)f_
+                return /* CQL 'or' (81:13-84:9) */ (/* CQL 'or' (81:15-82:65) */ (f_
                     || g_())
                     || h_());
             }
@@ -917,7 +917,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
-        bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+        CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
         return a_;
     }
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("SupplementalDataElements", "5.1.000")]
 public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<SupplementalDataElements_5_1_000>
 {
@@ -98,7 +98,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
         bool? b_(Extension @this) {
             FhirUri k_ = @this?.UrlElement;
             string l_ = FHIRHelpers_4_4_000.Instance.ToString(context, k_);
-            bool? m_ = context.Operators.Equal(l_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+            CqlBoolean m_ = context.Operators.Equal(l_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
             return m_;
         }
 
@@ -113,7 +113,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
             bool? n_(Extension @this) {
                 FhirUri af_ = @this?.UrlElement;
                 string ag_ = FHIRHelpers_4_4_000.Instance.ToString(context, af_);
-                bool? ah_ = context.Operators.Equal(ag_, "ombCategory");
+                CqlBoolean ah_ = context.Operators.Equal(ag_, "ombCategory");
                 return ah_;
             }
 
@@ -135,7 +135,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
             bool? t_(Extension @this) {
                 FhirUri aj_ = @this?.UrlElement;
                 string ak_ = FHIRHelpers_4_4_000.Instance.ToString(context, aj_);
-                bool? al_ = context.Operators.Equal(ak_, "detailed");
+                CqlBoolean al_ = context.Operators.Equal(ak_, "detailed");
                 return al_;
             }
 
@@ -160,7 +160,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
             bool? z_(Extension @this) {
                 FhirUri ao_ = @this?.UrlElement;
                 string ap_ = FHIRHelpers_4_4_000.Instance.ToString(context, ao_);
-                bool? aq_ = context.Operators.Equal(ap_, "text");
+                CqlBoolean aq_ = context.Operators.Equal(ap_, "text");
                 return aq_;
             }
 
@@ -233,7 +233,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
         bool? b_(Extension @this) {
             FhirUri k_ = @this?.UrlElement;
             string l_ = FHIRHelpers_4_4_000.Instance.ToString(context, k_);
-            bool? m_ = context.Operators.Equal(l_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+            CqlBoolean m_ = context.Operators.Equal(l_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
             return m_;
         }
 
@@ -248,7 +248,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
             bool? n_(Extension @this) {
                 FhirUri ae_ = @this?.UrlElement;
                 string af_ = FHIRHelpers_4_4_000.Instance.ToString(context, ae_);
-                bool? ag_ = context.Operators.Equal(af_, "ombCategory");
+                CqlBoolean ag_ = context.Operators.Equal(af_, "ombCategory");
                 return ag_;
             }
 
@@ -272,7 +272,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
             bool? s_(Extension @this) {
                 FhirUri aj_ = @this?.UrlElement;
                 string ak_ = FHIRHelpers_4_4_000.Instance.ToString(context, aj_);
-                bool? al_ = context.Operators.Equal(ak_, "detailed");
+                CqlBoolean al_ = context.Operators.Equal(ak_, "detailed");
                 return al_;
             }
 
@@ -297,7 +297,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
             bool? y_(Extension @this) {
                 FhirUri ao_ = @this?.UrlElement;
                 string ap_ = FHIRHelpers_4_4_000.Instance.ToString(context, ao_);
-                bool? aq_ = context.Operators.Equal(ap_, "text");
+                CqlBoolean aq_ = context.Operators.Equal(ap_, "text");
                 return aq_;
             }
 
@@ -345,7 +345,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
         bool? b_(Extension @this) {
             FhirUri i_ = @this?.UrlElement;
             string j_ = FHIRHelpers_4_4_000.Instance.ToString(context, i_);
-            bool? k_ = context.Operators.Equal(j_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+            CqlBoolean k_ = context.Operators.Equal(j_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
             return k_;
         }
 
@@ -357,8 +357,8 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
 
         IEnumerable<DataType> d_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)a_, b_, c_);
         DataType e_ = context.Operators.SingletonFrom<DataType>(d_);
-        bool? f_ = context.Operators.Equal(e_, "248153007");
-        if (f_ ?? false)
+        CqlBoolean f_ = context.Operators.Equal(e_, "248153007");
+        if (f_.IsTrue)
         {
             CqlCode m_ = this.Male__finding_(context);
             return m_;
@@ -380,7 +380,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
             bool? o_(Extension @this) {
                 FhirUri v_ = @this?.UrlElement;
                 string w_ = FHIRHelpers_4_4_000.Instance.ToString(context, v_);
-                bool? x_ = context.Operators.Equal(w_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+                CqlBoolean x_ = context.Operators.Equal(w_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
                 return x_;
             }
 
@@ -392,8 +392,8 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
 
             IEnumerable<DataType> q_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)n_, o_, p_);
             DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
-            bool? s_ = context.Operators.Equal(r_, "248152002");
-            if (s_ ?? false)
+            CqlBoolean s_ = context.Operators.Equal(r_, "248152002");
+            if (s_.IsTrue)
             {
                 CqlCode z_ = this.Female__finding_(context);
                 return z_;

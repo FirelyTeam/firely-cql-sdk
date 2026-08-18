@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("PCMaternal", "5.25.000")]
 public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_000>
 {
@@ -117,7 +117,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
             CqlDate k_ = context.Operators.DateFrom(j_);
             int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
             CqlInterval<int?> m_ = context.Operators.Interval(8, 65, true, false);
-            bool? n_ = context.Operators.In<int?>(l_, m_, (string)default);
+            CqlBoolean n_ = context.Operators.In<int?>(l_, m_, (string)default);
             return n_;
         }
 
@@ -154,7 +154,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     CqlQuantity bn_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime bo_ = context.Operators.Subtract(bm_, bn_);
                     CqlInterval<CqlDateTime> bp_ = context.Operators.Interval(bo_, bm_, true, true);
-                    bool? bq_ = context.Operators.In<CqlDateTime>(bj_, bp_, (string)default);
+                    CqlBoolean bq_ = context.Operators.In<CqlDateTime>(bj_, bp_, (string)default);
 
                     CqlBoolean br_() {
                         Period bt_ = Visit?.Period;
@@ -168,11 +168,11 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                         Code<Encounter.EncounterStatus> bw_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? bx_ = bw_?.Value;
                         Code<Encounter.EncounterStatus> by_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(bx_);
-                        bool? bz_ = context.Operators.Equal(by_, "finished");
+                        CqlBoolean bz_ = context.Operators.Equal(by_, "finished");
                         return bz_;
                     }
 
-                    return /* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ ((CqlBoolean)bq_
+                    return /* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ (bq_
                         && br_())
                         && bs_());
                 }
@@ -207,7 +207,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     CqlQuantity cj_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime ck_ = context.Operators.Subtract(ci_, cj_);
                     CqlInterval<CqlDateTime> cl_ = context.Operators.Interval(ck_, ci_, true, true);
-                    bool? cm_ = context.Operators.In<CqlDateTime>(cf_, cl_, (string)default);
+                    CqlBoolean cm_ = context.Operators.In<CqlDateTime>(cf_, cl_, (string)default);
 
                     CqlBoolean cn_() {
                         Period cp_ = Visit?.Period;
@@ -221,11 +221,11 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                         Code<Encounter.EncounterStatus> cs_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? ct_ = cs_?.Value;
                         Code<Encounter.EncounterStatus> cu_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ct_);
-                        bool? cv_ = context.Operators.Equal(cu_, "finished");
+                        CqlBoolean cv_ = context.Operators.Equal(cu_, "finished");
                         return cv_;
                     }
 
-                    return /* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ ((CqlBoolean)cm_
+                    return /* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ (cm_
                         && cn_())
                         && co_());
                 }
@@ -245,7 +245,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 CqlInterval<CqlDateTime> bb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ba_);
                 CqlDateTime bc_ = context.Operators.Start(bb_);
                 CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(au_, bc_ ?? as_, true, true);
-                bool? be_ = context.Operators.In<CqlDateTime>(af_, bd_, (string)default);
+                CqlBoolean be_ = context.Operators.In<CqlDateTime>(af_, bd_, (string)default);
 
                 CqlBoolean bf_() {
                     CqlValueSet cz_ = this.Observation_Services(context);
@@ -261,7 +261,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                         CqlQuantity ds_ = context.Operators.Quantity(1m, "hour");
                         CqlDateTime dt_ = context.Operators.Subtract(dr_, ds_);
                         CqlInterval<CqlDateTime> du_ = context.Operators.Interval(dt_, dr_, true, true);
-                        bool? dv_ = context.Operators.In<CqlDateTime>(do_, du_, (string)default);
+                        CqlBoolean dv_ = context.Operators.In<CqlDateTime>(do_, du_, (string)default);
 
                         CqlBoolean dw_() {
                             Period dy_ = Visit?.Period;
@@ -275,11 +275,11 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                             Code<Encounter.EncounterStatus> eb_ = LastObs?.StatusElement;
                             Encounter.EncounterStatus? ec_ = eb_?.Value;
                             Code<Encounter.EncounterStatus> ed_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ec_);
-                            bool? ee_ = context.Operators.Equal(ed_, "finished");
+                            CqlBoolean ee_ = context.Operators.Equal(ed_, "finished");
                             return ee_;
                         }
 
-                        return /* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ ((CqlBoolean)dv_
+                        return /* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ (dv_
                             && dw_())
                             && dx_());
                     }
@@ -309,11 +309,11 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     Code<Encounter.EncounterStatus> ei_ = LastEDOBTriage?.StatusElement;
                     Encounter.EncounterStatus? ej_ = ei_?.Value;
                     Code<Encounter.EncounterStatus> ek_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ej_);
-                    bool? el_ = context.Operators.Equal(ek_, "finished");
+                    CqlBoolean el_ = context.Operators.Equal(ek_, "finished");
                     return el_;
                 }
 
-                return /* CQL 'and' (60:9-61:48) */ (/* CQL 'and' (60:15-60:79) */ ((CqlBoolean)be_
+                return /* CQL 'and' (60:9-61:48) */ (/* CQL 'and' (60:15-60:79) */ (be_
                     && bf_())
                     && bg_());
             }
@@ -345,7 +345,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 CqlQuantity ev_ = context.Operators.Quantity(1m, "hour");
                 CqlDateTime ew_ = context.Operators.Subtract(eu_, ev_);
                 CqlInterval<CqlDateTime> ex_ = context.Operators.Interval(ew_, eu_, true, true);
-                bool? ey_ = context.Operators.In<CqlDateTime>(er_, ex_, (string)default);
+                CqlBoolean ey_ = context.Operators.In<CqlDateTime>(er_, ex_, (string)default);
 
                 CqlBoolean ez_() {
                     Period fb_ = Visit?.Period;
@@ -359,11 +359,11 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     Code<Encounter.EncounterStatus> fe_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? ff_ = fe_?.Value;
                     Code<Encounter.EncounterStatus> fg_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ff_);
-                    bool? fh_ = context.Operators.Equal(fg_, "finished");
+                    CqlBoolean fh_ = context.Operators.Equal(fg_, "finished");
                     return fh_;
                 }
 
-                return /* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ ((CqlBoolean)ey_
+                return /* CQL 'and' (53:9-54:41) */ (/* CQL 'and' (53:15-53:83) */ (ey_
                     && ez_())
                     && fa_());
             }
@@ -414,7 +414,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 Code<EventStatus> h_ = DeliveryProcedure?.StatusElement;
                 EventStatus? i_ = h_?.Value;
                 string j_ = context.Operators.Convert<string>(i_);
-                bool? k_ = context.Operators.Equal(j_, "completed");
+                CqlBoolean k_ = context.Operators.Equal(j_, "completed");
 
                 CqlBoolean l_() {
                     object m_;
@@ -456,15 +456,15 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
                     CqlDateTime o_ = context.Operators.Start(n_);
                     CqlInterval<CqlDateTime> p_ = this.hospitalizationWithEDOBTriageObservation(context, EncounterWithAge);
-                    bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, (string)default);
+                    CqlBoolean q_ = context.Operators.In<CqlDateTime>(o_, p_, (string)default);
                     return q_;
                 }
 
-                return /* CQL 'and' (27:27-28:138) */ ((CqlBoolean)k_
+                return /* CQL 'and' (27:27-28:138) */ (k_
                     && l_());
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            CqlBoolean g_ = context.Operators.WhereAny<Procedure>(e_, f_);
             return g_;
         }
 
@@ -505,7 +505,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     "amended",
                     "corrected",
                 ];
-                bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
+                CqlBoolean t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
                 return t_;
             }
 
@@ -540,7 +540,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 }
                 CqlDateTime v_ = QICoreCommon_4_0_000.Instance.earliest(context, u_);
                 CqlInterval<CqlDateTime> w_ = this.hospitalizationWithEDOBTriageObservation(context, TheEncounter);
-                bool? x_ = context.Operators.In<CqlDateTime>(v_, w_, (string)default);
+                CqlBoolean x_ = context.Operators.In<CqlDateTime>(v_, w_, (string)default);
                 return x_;
             }
 
@@ -549,7 +549,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 DataType ac_ = TimeOfDelivery?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
                 CqlInterval<CqlDateTime> ae_ = this.hospitalizationWithEDOBTriageObservation(context, TheEncounter);
-                bool? af_ = context.Operators.In<CqlDateTime>(ad_ as CqlDateTime, ae_, (string)default);
+                CqlBoolean af_ = context.Operators.In<CqlDateTime>(ad_ as CqlDateTime, ae_, (string)default);
                 return af_;
             }
 
@@ -621,7 +621,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     "amended",
                     "corrected",
                 ];
-                bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
+                CqlBoolean s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
                 return s_;
             }
 
@@ -659,8 +659,8 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 CqlQuantity w_ = context.Operators.Quantity(42m, "weeks");
                 CqlDateTime x_ = context.Operators.Subtract(v_, w_);
                 CqlInterval<CqlDateTime> y_ = context.Operators.Interval(x_, v_, true, true);
-                bool? z_ = context.Operators.In<CqlDateTime>(u_, y_, (string)default);
-                return /* CQL 'and' (74:13-74:123) */ ((CqlBoolean)z_
+                CqlBoolean z_ = context.Operators.In<CqlDateTime>(u_, y_, (string)default);
+                return /* CQL 'and' (74:13-74:123) */ (z_
                     && !((bool?)((this.lastTimeOfDelivery(context, TheEncounter)) is null)));
             }
 
@@ -773,7 +773,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
             CqlQuantity m_ = context.Operators.Quantity(24m, "hours");
             CqlDateTime n_ = context.Operators.Subtract(l_, m_);
             CqlInterval<CqlDateTime> o_ = context.Operators.Interval(n_, l_, true, true);
-            bool? p_ = context.Operators.In<CqlDateTime>(k_, o_, (string)default);
+            CqlBoolean p_ = context.Operators.In<CqlDateTime>(k_, o_, (string)default);
 
             CqlBoolean q_() {
                 DataType x_ = EstimatedGestationalAge?.Value;
@@ -791,7 +791,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     "amended",
                     "corrected",
                 ];
-                bool? ad_ = context.Operators.In<string>(ab_, (IEnumerable<string>)ac_);
+                CqlBoolean ad_ = context.Operators.In<string>(ab_, (IEnumerable<string>)ac_);
                 return ad_;
             }
 
@@ -826,7 +826,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 }
                 CqlDateTime af_ = QICoreCommon_4_0_000.Instance.earliest(context, ae_);
                 CqlDateTime ag_ = this.lastTimeOfDelivery(context, TheEncounter);
-                bool? ah_ = context.Operators.SameAs(af_, ag_, "day");
+                CqlBoolean ah_ = context.Operators.SameAs(af_, ag_, "day");
 
                 CqlBoolean ai_() {
                     object ao_;
@@ -858,7 +858,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     }
                     CqlDateTime ap_ = QICoreCommon_4_0_000.Instance.earliest(context, ao_);
                     CqlInterval<CqlDateTime> aq_ = this.hospitalizationWithEDOBTriageObservation(context, TheEncounter);
-                    bool? ar_ = context.Operators.In<CqlDateTime>(ap_, aq_, (string)default);
+                    CqlBoolean ar_ = context.Operators.In<CqlDateTime>(ap_, aq_, (string)default);
                     return ar_;
                 }
 
@@ -869,12 +869,12 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     return !((bool?)(ax_ is null));
                 }
 
-                return /* CQL 'and' (85:7-87:52) */ (/* CQL 'and' (85:8-86:82) */ ((CqlBoolean)ah_
+                return /* CQL 'and' (85:7-87:52) */ (/* CQL 'and' (85:8-86:82) */ (ah_
                     && ai_())
                     && aj_());
             }
 
-            return /* CQL 'or' (81:64-87:52) */ (/* CQL 'and' (82:3-84:76) */ (/* CQL 'and' (82:4-83:47) */ (/* CQL 'and' (82:4-82:77) */ ((CqlBoolean)p_
+            return /* CQL 'or' (81:64-87:52) */ (/* CQL 'and' (82:3-84:76) */ (/* CQL 'and' (82:4-83:47) */ (/* CQL 'and' (82:4-82:77) */ (p_
                 && !((bool?)((this.lastTimeOfDelivery(context, TheEncounter)) is null)))
                 && q_())
                 && r_())

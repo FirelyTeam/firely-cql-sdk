@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("BreastCancerScreeningsFHIR", "0.0.009")]
 public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<BreastCancerScreeningsFHIR_0_0_009>
 {
@@ -173,17 +173,17 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
         bool? f_(Encounter TelehealthEncounter) {
             Code<Encounter.EncounterStatus> h_ = TelehealthEncounter?.StatusElement;
             string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
-            bool? j_ = context.Operators.Equal(i_, "finished");
+            CqlBoolean j_ = context.Operators.Equal(i_, "finished");
 
             CqlBoolean k_() {
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 Period m_ = TelehealthEncounter?.Period;
                 CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, m_);
-                bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, (string)default);
+                CqlBoolean o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, (string)default);
                 return o_;
             }
 
-            return /* CQL 'and' (50:19-51:110) */ ((CqlBoolean)j_
+            return /* CQL 'and' (50:19-51:110) */ (j_
                 && k_());
         }
 
@@ -229,13 +229,13 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(51, 74, true, false);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
         CqlBoolean k_() {
             Patient m_ = this.Patient(context);
             Code<AdministrativeGender> n_ = m_?.GenderElement;
             string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
-            bool? p_ = context.Operators.Equal(o_, "female");
+            CqlBoolean p_ = context.Operators.Equal(o_, "female");
             return p_;
         }
 
@@ -244,11 +244,11 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
             IEnumerable<Encounter> q_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
             IEnumerable<Encounter> r_ = this.Telehealth_Services(context);
             IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(q_, r_);
-            bool? t_ = context.Operators.Exists<Encounter>(s_);
+            CqlBoolean t_ = context.Operators.Exists<Encounter>(s_);
             return t_;
         }
 
-        return /* CQL 'and' (58:3-62:19) */ (/* CQL 'and' (58:3-59:47) */ ((CqlBoolean)j_
+        return /* CQL 'and' (58:3-62:19) */ (/* CQL 'and' (58:3-59:47) */ (j_
             && k_())
             && l_());
     }
@@ -262,7 +262,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -290,7 +290,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
 
             IEnumerable<CqlConcept> l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
             CqlValueSet m_ = this.Right(context);
-            bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
+            CqlBoolean n_ = context.Operators.ConceptsInValueSet(l_, m_);
             return n_;
         }
 
@@ -302,7 +302,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
             CqlDateTime q_ = context.Operators.Start(p_);
             CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
             CqlDateTime s_ = context.Operators.End(r_);
-            bool? t_ = context.Operators.SameOrBefore(q_, s_, (string)default);
+            CqlBoolean t_ = context.Operators.SameOrBefore(q_, s_, (string)default);
             return t_;
         }
 
@@ -325,7 +325,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
         bool? c_(Procedure UnilateralMastectomyRightPerformed) {
             Code<EventStatus> e_ = UnilateralMastectomyRightPerformed?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
-            bool? g_ = context.Operators.Equal(f_, "completed");
+            CqlBoolean g_ = context.Operators.Equal(f_, "completed");
 
             CqlBoolean h_() {
                 DataType i_ = UnilateralMastectomyRightPerformed?.Performed;
@@ -333,11 +333,11 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime k_ = context.Operators.End(j_);
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 CqlDateTime m_ = context.Operators.End(l_);
-                bool? n_ = context.Operators.SameOrBefore(k_, m_, (string)default);
+                CqlBoolean n_ = context.Operators.SameOrBefore(k_, m_, (string)default);
                 return n_;
             }
 
-            return /* CQL 'and' (154:19-156:47) */ ((CqlBoolean)g_
+            return /* CQL 'and' (154:19-156:47) */ (g_
                 && h_());
         }
 
@@ -369,7 +369,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
 
             IEnumerable<CqlConcept> l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
             CqlValueSet m_ = this.Left(context);
-            bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
+            CqlBoolean n_ = context.Operators.ConceptsInValueSet(l_, m_);
             return n_;
         }
 
@@ -381,7 +381,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
             CqlDateTime q_ = context.Operators.Start(p_);
             CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
             CqlDateTime s_ = context.Operators.End(r_);
-            bool? t_ = context.Operators.SameOrBefore(q_, s_, (string)default);
+            CqlBoolean t_ = context.Operators.SameOrBefore(q_, s_, (string)default);
             return t_;
         }
 
@@ -404,7 +404,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
         bool? c_(Procedure UnilateralMastectomyLeftPerformed) {
             Code<EventStatus> e_ = UnilateralMastectomyLeftPerformed?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
-            bool? g_ = context.Operators.Equal(f_, "completed");
+            CqlBoolean g_ = context.Operators.Equal(f_, "completed");
 
             CqlBoolean h_() {
                 DataType i_ = UnilateralMastectomyLeftPerformed?.Performed;
@@ -412,11 +412,11 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime k_ = context.Operators.End(j_);
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 CqlDateTime m_ = context.Operators.End(l_);
-                bool? n_ = context.Operators.SameOrBefore(k_, m_, (string)default);
+                CqlBoolean n_ = context.Operators.SameOrBefore(k_, m_, (string)default);
                 return n_;
             }
 
-            return /* CQL 'and' (168:19-170:47) */ ((CqlBoolean)g_
+            return /* CQL 'and' (168:19-170:47) */ (g_
                 && h_());
         }
 
@@ -441,7 +441,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
             CqlDateTime h_ = context.Operators.End(g_);
-            bool? i_ = context.Operators.SameOrBefore(f_, h_, (string)default);
+            CqlBoolean i_ = context.Operators.SameOrBefore(f_, h_, (string)default);
             return i_;
         }
 
@@ -464,7 +464,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
         bool? c_(Procedure BilateralMastectomyPerformed) {
             Code<EventStatus> e_ = BilateralMastectomyPerformed?.StatusElement;
             string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
-            bool? g_ = context.Operators.Equal(f_, "completed");
+            CqlBoolean g_ = context.Operators.Equal(f_, "completed");
 
             CqlBoolean h_() {
                 DataType i_ = BilateralMastectomyPerformed?.Performed;
@@ -472,11 +472,11 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime k_ = context.Operators.End(j_);
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 CqlDateTime m_ = context.Operators.End(l_);
-                bool? n_ = context.Operators.SameOrBefore(k_, m_, (string)default);
+                CqlBoolean n_ = context.Operators.SameOrBefore(k_, m_, (string)default);
                 return n_;
             }
 
-            return /* CQL 'and' (179:19-181:47) */ ((CqlBoolean)g_
+            return /* CQL 'and' (179:19-181:47) */ (g_
                 && h_());
         }
 
@@ -493,34 +493,34 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
-        bool? a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
+        CqlBoolean a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
 
         CqlBoolean b_() {
             IEnumerable<Condition> f_ = this.Right_Mastectomy_Diagnosis(context);
-            bool? g_ = context.Operators.Exists<Condition>(f_);
+            CqlBoolean g_ = context.Operators.Exists<Condition>(f_);
 
             CqlBoolean h_() {
                 IEnumerable<Procedure> j_ = this.Right_Mastectomy_Procedure(context);
-                bool? k_ = context.Operators.Exists<Procedure>(j_);
+                CqlBoolean k_ = context.Operators.Exists<Procedure>(j_);
                 return k_;
             }
 
 
             CqlBoolean i_() {
                 IEnumerable<Condition> l_ = this.Left_Mastectomy_Diagnosis(context);
-                bool? m_ = context.Operators.Exists<Condition>(l_);
+                CqlBoolean m_ = context.Operators.Exists<Condition>(l_);
 
                 CqlBoolean n_() {
                     IEnumerable<Procedure> o_ = this.Left_Mastectomy_Procedure(context);
-                    bool? p_ = context.Operators.Exists<Procedure>(o_);
+                    CqlBoolean p_ = context.Operators.Exists<Procedure>(o_);
                     return p_;
                 }
 
-                return /* CQL 'or' (72:29-74:25) */ ((CqlBoolean)m_
+                return /* CQL 'or' (72:29-74:25) */ (m_
                     || n_());
             }
 
-            return /* CQL 'and' (69:24-75:21) */ (/* CQL 'or' (69:26-71:23) */ ((CqlBoolean)g_
+            return /* CQL 'and' (69:24-75:21) */ (/* CQL 'or' (69:26-71:23) */ (g_
                 || h_())
                 && i_());
         }
@@ -528,14 +528,14 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
 
         CqlBoolean c_() {
             IEnumerable<Condition> q_ = this.Bilateral_Mastectomy_Diagnosis(context);
-            bool? r_ = context.Operators.Exists<Condition>(q_);
+            CqlBoolean r_ = context.Operators.Exists<Condition>(q_);
             return r_;
         }
 
 
         CqlBoolean d_() {
             IEnumerable<Procedure> s_ = this.Bilateral_Mastectomy_Procedure(context);
-            bool? t_ = context.Operators.Exists<Procedure>(s_);
+            CqlBoolean t_ = context.Operators.Exists<Procedure>(s_);
             return t_;
         }
 
@@ -549,12 +549,12 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
             CqlDateTime z_ = context.Operators.Start(y_);
             CqlDate aa_ = context.Operators.DateFrom(z_);
             int? ab_ = context.Operators.CalculateAgeAt(x_, aa_, "year");
-            bool? ac_ = context.Operators.GreaterOrEqual(ab_, 65);
-            return /* CQL 'and' (79:24-81:21) */ ((CqlBoolean)ac_
+            CqlBoolean ac_ = context.Operators.GreaterOrEqual(ab_, 65);
+            return /* CQL 'and' (79:24-81:21) */ (ac_
                 && AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context));
         }
 
-        return /* CQL 'or' (68:3-83:17) */ (/* CQL 'or' (68:5-81:21) */ (/* CQL 'or' (68:5-78:104) */ (/* CQL 'or' (68:5-77:62) */ (/* CQL 'or' (68:5-76:62) */ (/* CQL 'or' (68:5-75:21) */ ((CqlBoolean)a_
+        return /* CQL 'or' (68:3-83:17) */ (/* CQL 'or' (68:5-81:21) */ (/* CQL 'or' (68:5-78:104) */ (/* CQL 'or' (68:5-77:62) */ (/* CQL 'or' (68:5-76:62) */ (/* CQL 'or' (68:5-75:21) */ (a_
             || b_())
             || c_())
             || d_())
@@ -584,7 +584,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 "corrected",
                 "appended",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            CqlBoolean h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
             CqlBoolean i_() {
                 DataType j_ = Mammogram?.Effective;
@@ -595,7 +595,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlQuantity o_ = context.Operators.Quantity(27m, "months");
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, true);
-                bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
+                CqlBoolean r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
 
                 CqlBoolean s_() {
                     CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
@@ -603,15 +603,15 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     return !((bool?)(u_ is null));
                 }
 
-                return /* CQL 'and' (112:27-114:23) */ ((CqlBoolean)r_
+                return /* CQL 'and' (112:27-114:23) */ (r_
                     && s_());
             }
 
-            return /* CQL 'and' (111:21-114:23) */ ((CqlBoolean)h_
+            return /* CQL 'and' (111:21-114:23) */ (h_
                 && i_());
         }
 
-        bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Observation>(b_, c_);
         return d_;
     }
 
@@ -636,7 +636,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 "corrected",
                 "appended",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            CqlBoolean h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
             CqlBoolean i_() {
                 DataType j_ = Mammogram?.Effective;
@@ -647,7 +647,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlQuantity o_ = context.Operators.Quantity(27m, "months");
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, true);
-                bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
+                CqlBoolean r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
 
                 CqlBoolean s_() {
                     CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
@@ -655,15 +655,15 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     return !((bool?)(u_ is null));
                 }
 
-                return /* CQL 'and' (130:27-132:23) */ ((CqlBoolean)r_
+                return /* CQL 'and' (130:27-132:23) */ (r_
                     && s_());
             }
 
-            return /* CQL 'and' (129:21-132:23) */ ((CqlBoolean)h_
+            return /* CQL 'and' (129:21-132:23) */ (h_
                 && i_());
         }
 
-        bool? d_ = context.Operators.WhereAny<DiagnosticReport>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<DiagnosticReport>(b_, c_);
         return d_;
     }
 
@@ -676,8 +676,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
 
     private bool? Numerator_Compute(CqlContext context)
     {
-        bool? a_ = this.Observation_with_status(context);
-        return /* CQL 'or' (98:3-99:38) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Observation_with_status(context);
+        return /* CQL 'or' (98:3-99:38) */ (a_
             || this.Diagnostic_Report_with_status(context));
     }
 
@@ -690,8 +690,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
 
     private bool? Final_Numerator_Population_Compute(CqlContext context)
     {
-        bool? a_ = this.Numerator(context);
-        return /* CQL 'and' (103:3-106:34) */ (/* CQL 'and' (103:3-105:19) */ (/* CQL 'and' (103:3-104:26) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Numerator(context);
+        return /* CQL 'and' (103:3-106:34) */ (/* CQL 'and' (103:3-105:19) */ (/* CQL 'and' (103:3-104:26) */ (a_
             && this.Initial_Population(context))
             && this.Denominator(context))
             && !(this.Denominator_Exclusions(context)));
@@ -718,7 +718,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 "corrected",
                 "appended",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            CqlBoolean h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
             CqlBoolean i_() {
                 DataType j_ = Mammogram?.Effective;
@@ -729,7 +729,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlQuantity o_ = context.Operators.Quantity(27m, "months");
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, true);
-                bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
+                CqlBoolean r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
 
                 CqlBoolean s_() {
                     CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
@@ -737,15 +737,15 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     return !((bool?)(u_ is null));
                 }
 
-                return /* CQL 'and' (121:27-123:23) */ ((CqlBoolean)r_
+                return /* CQL 'and' (121:27-123:23) */ (r_
                     && s_());
             }
 
-            return /* CQL 'and' (120:21-123:23) */ ((CqlBoolean)!h_
+            return /* CQL 'and' (120:21-123:23) */ (!h_
                 && i_());
         }
 
-        bool? d_ = context.Operators.WhereAny<Observation>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Observation>(b_, c_);
         return d_;
     }
 
@@ -770,7 +770,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 "corrected",
                 "appended",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            CqlBoolean h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
 
             CqlBoolean i_() {
                 DataType j_ = Mammogram?.Effective;
@@ -781,7 +781,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlQuantity o_ = context.Operators.Quantity(27m, "months");
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, true);
-                bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
+                CqlBoolean r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
 
                 CqlBoolean s_() {
                     CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
@@ -789,15 +789,15 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     return !((bool?)(u_ is null));
                 }
 
-                return /* CQL 'and' (139:27-141:23) */ ((CqlBoolean)r_
+                return /* CQL 'and' (139:27-141:23) */ (r_
                     && s_());
             }
 
-            return /* CQL 'and' (138:21-141:23) */ ((CqlBoolean)!h_
+            return /* CQL 'and' (138:21-141:23) */ (!h_
                 && i_());
         }
 
-        bool? d_ = context.Operators.WhereAny<DiagnosticReport>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<DiagnosticReport>(b_, c_);
         return d_;
     }
 

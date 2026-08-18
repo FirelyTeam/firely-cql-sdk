@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("Antibiotic", "1.11.000")]
 public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_000>
 {
@@ -66,11 +66,11 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
                 CqlQuantity n_ = context.Operators.Quantity(1m, "year");
                 CqlDate o_ = context.Operators.Subtract(m_, n_);
                 CqlInterval<CqlDate> p_ = context.Operators.Interval(o_, m_, true, true);
-                bool? q_ = context.Operators.In<CqlDate>(i_, p_, (string)default);
+                CqlBoolean q_ = context.Operators.In<CqlDate>(i_, p_, (string)default);
                 return q_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Condition>(comorbidConditions, e_);
+            CqlBoolean f_ = context.Operators.WhereAny<Condition>(comorbidConditions, e_);
             return f_;
         }
 
@@ -96,7 +96,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
                 CqlQuantity l_ = context.Operators.Quantity(3m, "days");
                 CqlDateTime m_ = context.Operators.Add(k_, l_);
                 CqlInterval<CqlDateTime> n_ = context.Operators.Interval(k_, m_, true, true);
-                bool? o_ = context.Operators.In<CqlDateTime>(h_, n_, "day");
+                CqlBoolean o_ = context.Operators.In<CqlDateTime>(h_, n_, "day");
 
                 CqlBoolean p_() {
                     Period q_ = episode?.Period;
@@ -105,11 +105,11 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
                     return !((bool?)(s_ is null));
                 }
 
-                return /* CQL 'and' (22:19-22:119) */ ((CqlBoolean)o_
+                return /* CQL 'and' (22:19-22:119) */ (o_
                     && p_());
             }
 
-            bool? f_ = context.Operators.WhereAny<Condition>(competingConditions, e_);
+            CqlBoolean f_ = context.Operators.WhereAny<Condition>(competingConditions, e_);
             return f_;
         }
 
@@ -137,11 +137,11 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
                 CqlQuantity l_ = context.Operators.Quantity(1m, "day");
                 CqlDate m_ = context.Operators.Subtract(i_, l_);
                 CqlInterval<CqlDate> n_ = context.Operators.Interval(k_, m_, true, true);
-                bool? o_ = context.Operators.Overlaps(e_, n_, "day");
+                CqlBoolean o_ = context.Operators.Overlaps(e_, n_, "day");
                 return o_;
             }
 
-            bool? d_ = context.Operators.WhereAny<MedicationRequest>(antibioticMedications, c_);
+            CqlBoolean d_ = context.Operators.WhereAny<MedicationRequest>(antibioticMedications, c_);
             return d_;
         }
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("TestRetrieve", "1.0.1")]
 public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_1>
 {
@@ -140,15 +140,15 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     private bool? SexuallyActive_Compute(CqlContext context)
     {
         IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? b_ = context.Operators.Exists<Condition>(a_);
+        CqlBoolean b_ = context.Operators.Exists<Condition>(a_);
 
         CqlBoolean c_() {
             IEnumerable<ServiceRequest> d_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
-            bool? e_ = context.Operators.Exists<ServiceRequest>(d_);
+            CqlBoolean e_ = context.Operators.Exists<ServiceRequest>(d_);
             return e_;
         }
 
-        return /* CQL 'or' (33:5-33:57) */ ((CqlBoolean)b_
+        return /* CQL 'or' (33:5-33:57) */ (b_
             || c_());
     }
 

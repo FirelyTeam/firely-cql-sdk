@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS1264FHIRECATREHQR", "1.0.000")]
 public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264FHIRECATREHQR_1_0_000>
 {
@@ -133,17 +133,17 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
             CqlDateTime g_ = context.Operators.End(f_);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
-            bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
+            CqlBoolean i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
 
             CqlBoolean j_() {
                 Code<Encounter.EncounterStatus> k_ = EDEvalManagementVisit?.StatusElement;
                 Encounter.EncounterStatus? l_ = k_?.Value;
                 Code<Encounter.EncounterStatus> m_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(l_);
-                bool? n_ = context.Operators.Equal(m_, "finished");
+                CqlBoolean n_ = context.Operators.Equal(m_, "finished");
                 return n_;
             }
 
-            return /* CQL 'and' (92:5-93:51) */ ((CqlBoolean)i_
+            return /* CQL 'and' (92:5-93:51) */ (i_
                 && j_());
         }
 
@@ -168,7 +168,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
             CqlDateTime g_ = context.Operators.End(f_);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
-            bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
+            CqlBoolean i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
 
             CqlBoolean j_() {
                 Code<Encounter.EncounterStatus> k_ = EDTriage?.StatusElement;
@@ -179,11 +179,11 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     "finished",
                     "triaged",
                 ];
-                bool? p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
+                CqlBoolean p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
                 return p_;
             }
 
-            return /* CQL 'and' (122:5-123:54) */ ((CqlBoolean)i_
+            return /* CQL 'and' (122:5-123:54) */ (i_
                 && j_());
         }
 
@@ -210,14 +210,14 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
                 Period i_ = EDEvalManagementinMP?.Period;
                 CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                bool? k_ = context.Operators.OverlapsBefore(h_, j_, (string)default);
+                CqlBoolean k_ = context.Operators.OverlapsBefore(h_, j_, (string)default);
 
                 CqlBoolean l_() {
                     Period o_ = EDEvalManagementinMP?.Period;
                     CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
                     Period q_ = EDTriageinMP?.Period;
                     CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
-                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, r_, (string)default);
+                    CqlBoolean s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, r_, (string)default);
                     return s_;
                 }
 
@@ -227,7 +227,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
                     Period v_ = EDEvalManagementinMP?.Period;
                     CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, v_);
-                    bool? x_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, w_, (string)default);
+                    CqlBoolean x_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, w_, (string)default);
                     return x_;
                 }
 
@@ -242,7 +242,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     CqlQuantity ae_ = context.Operators.Quantity(120m, "minutes");
                     CqlDateTime af_ = context.Operators.Subtract(ad_, ae_);
                     CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(af_, ad_, true, false);
-                    bool? ah_ = context.Operators.In<CqlDateTime>(aa_, ag_, (string)default);
+                    CqlBoolean ah_ = context.Operators.In<CqlDateTime>(aa_, ag_, (string)default);
 
                     CqlBoolean ai_() {
                         Period aj_ = EDEvalManagementinMP?.Period;
@@ -251,17 +251,17 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                         return !((bool?)(al_ is null));
                     }
 
-                    return /* CQL 'and' (131:16-131:107) */ ((CqlBoolean)ah_
+                    return /* CQL 'and' (131:16-131:107) */ (ah_
                         && ai_());
                 }
 
-                return /* CQL 'or' (128:9-132:9) */ (/* CQL 'or' (128:17-130:73) */ (/* CQL 'or' (128:17-129:73) */ ((CqlBoolean)k_
+                return /* CQL 'or' (128:9-132:9) */ (/* CQL 'or' (128:17-130:73) */ (/* CQL 'or' (128:17-129:73) */ (k_
                     || l_())
                     || m_())
                     || n_());
             }
 
-            bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
+            CqlBoolean f_ = context.Operators.WhereAny<Encounter>(d_, e_);
             return !f_;
         }
 
@@ -330,12 +330,12 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
 
             bool? r_(CqlConcept LocationType) {
                 CqlValueSet x_ = this.Emergency_Department_Location(context);
-                bool? y_ = context.Operators.ConceptInValueSet(LocationType, x_);
+                CqlBoolean y_ = context.Operators.ConceptInValueSet(LocationType, x_);
 
                 CqlBoolean z_() {
                     CqlCode ab_ = this.Emergency_room(context);
                     CqlConcept ac_ = context.Operators.ConvertCodeToConcept(ab_);
-                    bool? ad_ = context.Operators.Equivalent(LocationType, ac_);
+                    CqlBoolean ad_ = context.Operators.Equivalent(LocationType, ac_);
                     return ad_;
                 }
 
@@ -343,17 +343,17 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 CqlBoolean aa_() {
                     CqlCode ae_ = this.Emergency_trauma_unit(context);
                     CqlConcept af_ = context.Operators.ConvertCodeToConcept(ae_);
-                    bool? ag_ = context.Operators.Equivalent(LocationType, af_);
+                    CqlBoolean ag_ = context.Operators.Equivalent(LocationType, af_);
                     return ag_;
                 }
 
-                return /* CQL 'or' (155:11-158:11) */ (/* CQL 'or' (155:17-156:48) */ ((CqlBoolean)y_
+                return /* CQL 'or' (155:11-158:11) */ (/* CQL 'or' (155:17-156:48) */ (y_
                     || z_())
                     || aa_());
             }
 
             IEnumerable<CqlConcept> s_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)p_, q_, r_);
-            bool? t_ = context.Operators.Exists<CqlConcept>(s_);
+            CqlBoolean t_ = context.Operators.Exists<CqlConcept>(s_);
 
             CqlBoolean u_() {
                 Period ah_ = Location?.Period;
@@ -373,7 +373,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 CqlQuantity aq_ = context.Operators.Quantity(120m, "minutes");
                 CqlDateTime ar_ = context.Operators.Subtract(ap_, aq_);
                 CqlInterval<CqlDateTime> as_ = context.Operators.Interval(ar_, ap_, true, false);
-                bool? at_ = context.Operators.In<CqlDateTime>(am_, as_, (string)default);
+                CqlBoolean at_ = context.Operators.In<CqlDateTime>(am_, as_, (string)default);
 
                 CqlBoolean au_() {
                     Period ay_ = EDEncounter?.Period;
@@ -388,7 +388,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     CqlInterval<CqlDateTime> bc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bb_);
                     Period bd_ = EDEncounter?.Period;
                     CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
-                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, (string)default);
+                    CqlBoolean bf_ = context.Operators.OverlapsBefore(bc_, be_, (string)default);
                     return bf_;
                 }
 
@@ -398,7 +398,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     CqlInterval<CqlDateTime> bh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bg_);
                     Period bi_ = Location?.Period;
                     CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bi_);
-                    bool? bk_ = context.Operators.OverlapsBefore(bh_, bj_, (string)default);
+                    CqlBoolean bk_ = context.Operators.OverlapsBefore(bh_, bj_, (string)default);
                     return bk_;
                 }
 
@@ -410,18 +410,18 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     Period bo_ = EDEncounter?.Period;
                     CqlInterval<CqlDateTime> bp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bo_);
                     CqlDateTime bq_ = context.Operators.Start(bp_);
-                    bool? br_ = context.Operators.SameAs(bn_, bq_, (string)default);
+                    CqlBoolean br_ = context.Operators.SameAs(bn_, bq_, (string)default);
                     return br_;
                 }
 
-                return /* CQL 'or' (161:12-165:9) */ (/* CQL 'or' (161:13-163:65) */ (/* CQL 'or' (161:13-162:65) */ (/* CQL 'and' (161:13-161:87) */ ((CqlBoolean)at_
+                return /* CQL 'or' (161:12-165:9) */ (/* CQL 'or' (161:13-163:65) */ (/* CQL 'or' (161:13-162:65) */ (/* CQL 'and' (161:13-161:87) */ (at_
                     && au_())
                     || av_())
                     || aw_())
                     || ax_());
             }
 
-            return /* CQL 'and' (154:7-165:9) */ (/* CQL 'and' (154:13-160:48) */ ((CqlBoolean)t_
+            return /* CQL 'and' (154:7-165:9) */ (/* CQL 'and' (154:13-160:48) */ (t_
                 && u_())
                 && v_());
         }
@@ -460,14 +460,14 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
                 Period i_ = EDEncounter?.Period;
                 CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                bool? k_ = context.Operators.OverlapsBefore(h_, j_, (string)default);
+                CqlBoolean k_ = context.Operators.OverlapsBefore(h_, j_, (string)default);
 
                 CqlBoolean l_() {
                     Period o_ = EDEncounter?.Period;
                     CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
                     Period q_ = EDTriageinMP?.Period;
                     CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
-                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, r_, (string)default);
+                    CqlBoolean s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, r_, (string)default);
                     return s_;
                 }
 
@@ -477,7 +477,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
                     Period v_ = EDEncounter?.Period;
                     CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, v_);
-                    bool? x_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, w_, (string)default);
+                    CqlBoolean x_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, w_, (string)default);
                     return x_;
                 }
 
@@ -492,7 +492,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     CqlQuantity ae_ = context.Operators.Quantity(120m, "minutes");
                     CqlDateTime af_ = context.Operators.Subtract(ad_, ae_);
                     CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(af_, ad_, true, false);
-                    bool? ah_ = context.Operators.In<CqlDateTime>(aa_, ag_, (string)default);
+                    CqlBoolean ah_ = context.Operators.In<CqlDateTime>(aa_, ag_, (string)default);
 
                     CqlBoolean ai_() {
                         Period aj_ = EDEncounter?.Period;
@@ -501,17 +501,17 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                         return !((bool?)(al_ is null));
                     }
 
-                    return /* CQL 'and' (141:14-141:96) */ ((CqlBoolean)ah_
+                    return /* CQL 'and' (141:14-141:96) */ (ah_
                         && ai_());
                 }
 
-                return /* CQL 'or' (138:17-142:7) */ (/* CQL 'or' (138:19-140:62) */ (/* CQL 'or' (138:19-139:62) */ ((CqlBoolean)k_
+                return /* CQL 'or' (138:17-142:7) */ (/* CQL 'or' (138:19-140:62) */ (/* CQL 'or' (138:19-139:62) */ (k_
                     || l_())
                     || m_())
                     || n_());
             }
 
-            bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
+            CqlBoolean f_ = context.Operators.WhereAny<Encounter>(d_, e_);
             return f_;
         }
 
@@ -552,7 +552,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
 
             IEnumerable<CqlConcept> l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
             CqlValueSet m_ = this.Emergency_Department_Treatment_Location(context);
-            bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
+            CqlBoolean n_ = context.Operators.ConceptsInValueSet(l_, m_);
 
             CqlBoolean o_() {
                 Period q_ = Location?.Period;
@@ -561,7 +561,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 return !((bool?)(s_ is null));
             }
 
-            return /* CQL 'and' (192:7-193:48) */ ((CqlBoolean)n_
+            return /* CQL 'and' (192:7-193:48) */ (n_
                 && o_());
         }
 
@@ -596,7 +596,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             CqlDateTime e_ = this.edTreatmentRoomTimeArrivalTime(context, EDEvalManagementinMP);
             CqlQuantity f_ = context.Operators.Quantity(61m, "minutes");
             CqlDateTime g_ = context.Operators.Subtract(e_, f_);
-            bool? h_ = context.Operators.SameOrBefore(d_, g_, (string)default);
+            CqlBoolean h_ = context.Operators.SameOrBefore(d_, g_, (string)default);
             return h_;
         }
 
@@ -621,7 +621,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
             CqlCode g_ = this.Patient_left_without_being_seen__finding_(context);
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-            bool? i_ = context.Operators.Equivalent(f_, h_);
+            CqlBoolean i_ = context.Operators.Equivalent(f_, h_);
             return i_;
         }
 
@@ -641,13 +641,13 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
             Period k_ = EDEncounter?.Period;
             CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-            bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
+            CqlBoolean m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
 
             CqlBoolean n_() {
                 Code<RequestIntent> p_ = TransferOrder?.IntentElement;
                 RequestIntent? q_ = p_?.Value;
                 Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
-                bool? s_ = context.Operators.Equal(r_, "order");
+                CqlBoolean s_ = context.Operators.Equal(r_, "order");
                 return s_;
             }
 
@@ -661,11 +661,11 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     "active",
                     "completed",
                 ];
-                bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
+                CqlBoolean y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
                 return y_;
             }
 
-            return /* CQL 'and' (200:7-202:61) */ (/* CQL 'and' (200:13-201:42) */ ((CqlBoolean)m_
+            return /* CQL 'and' (200:7-202:61) */ (/* CQL 'and' (200:13-201:42) */ (m_
                 && n_())
                 && o_());
         }
@@ -717,12 +717,12 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
 
             bool? r_(CqlConcept LocationType) {
                 CqlValueSet x_ = this.Emergency_Department_Location(context);
-                bool? y_ = context.Operators.ConceptInValueSet(LocationType, x_);
+                CqlBoolean y_ = context.Operators.ConceptInValueSet(LocationType, x_);
 
                 CqlBoolean z_() {
                     CqlCode ab_ = this.Emergency_room(context);
                     CqlConcept ac_ = context.Operators.ConvertCodeToConcept(ab_);
-                    bool? ad_ = context.Operators.Equivalent(LocationType, ac_);
+                    CqlBoolean ad_ = context.Operators.Equivalent(LocationType, ac_);
                     return ad_;
                 }
 
@@ -730,17 +730,17 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 CqlBoolean aa_() {
                     CqlCode ae_ = this.Emergency_trauma_unit(context);
                     CqlConcept af_ = context.Operators.ConvertCodeToConcept(ae_);
-                    bool? ag_ = context.Operators.Equivalent(LocationType, af_);
+                    CqlBoolean ag_ = context.Operators.Equivalent(LocationType, af_);
                     return ag_;
                 }
 
-                return /* CQL 'or' (173:11-176:11) */ (/* CQL 'or' (173:17-174:48) */ ((CqlBoolean)y_
+                return /* CQL 'or' (173:11-176:11) */ (/* CQL 'or' (173:17-174:48) */ (y_
                     || z_())
                     || aa_());
             }
 
             IEnumerable<CqlConcept> s_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)p_, q_, r_);
-            bool? t_ = context.Operators.Exists<CqlConcept>(s_);
+            CqlBoolean t_ = context.Operators.Exists<CqlConcept>(s_);
 
             CqlBoolean u_() {
                 Period ah_ = Location?.Period;
@@ -760,7 +760,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 CqlQuantity aq_ = context.Operators.Quantity(120m, "minutes");
                 CqlDateTime ar_ = context.Operators.Subtract(ap_, aq_);
                 CqlInterval<CqlDateTime> as_ = context.Operators.Interval(ar_, ap_, true, false);
-                bool? at_ = context.Operators.In<CqlDateTime>(am_, as_, (string)default);
+                CqlBoolean at_ = context.Operators.In<CqlDateTime>(am_, as_, (string)default);
 
                 CqlBoolean au_() {
                     Period ay_ = EDEncounter?.Period;
@@ -775,7 +775,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     CqlInterval<CqlDateTime> bc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bb_);
                     Period bd_ = EDEncounter?.Period;
                     CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
-                    bool? bf_ = context.Operators.OverlapsBefore(bc_, be_, (string)default);
+                    CqlBoolean bf_ = context.Operators.OverlapsBefore(bc_, be_, (string)default);
                     return bf_;
                 }
 
@@ -785,7 +785,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     CqlInterval<CqlDateTime> bh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bg_);
                     Period bi_ = Location?.Period;
                     CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bi_);
-                    bool? bk_ = context.Operators.OverlapsBefore(bh_, bj_, (string)default);
+                    CqlBoolean bk_ = context.Operators.OverlapsBefore(bh_, bj_, (string)default);
                     return bk_;
                 }
 
@@ -797,18 +797,18 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     Period bo_ = EDEncounter?.Period;
                     CqlInterval<CqlDateTime> bp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bo_);
                     CqlDateTime bq_ = context.Operators.Start(bp_);
-                    bool? br_ = context.Operators.SameAs(bn_, bq_, (string)default);
+                    CqlBoolean br_ = context.Operators.SameAs(bn_, bq_, (string)default);
                     return br_;
                 }
 
-                return /* CQL 'or' (180:12-184:9) */ (/* CQL 'or' (180:13-182:65) */ (/* CQL 'or' (180:13-181:65) */ (/* CQL 'and' (180:13-180:87) */ ((CqlBoolean)at_
+                return /* CQL 'or' (180:12-184:9) */ (/* CQL 'or' (180:13-182:65) */ (/* CQL 'or' (180:13-181:65) */ (/* CQL 'and' (180:13-180:87) */ (at_
                     && au_())
                     || av_())
                     || aw_())
                     || ax_());
             }
 
-            return /* CQL 'and' (172:7-184:9) */ (/* CQL 'and' (172:13-179:42) */ ((CqlBoolean)t_
+            return /* CQL 'and' (172:7-184:9) */ (/* CQL 'and' (172:13-179:42) */ (t_
                 && u_())
                 && v_());
         }
@@ -844,7 +844,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             CqlDateTime e_ = this.edDepartureTime(context, EDEncounter);
             CqlQuantity f_ = context.Operators.Quantity(241m, "minutes");
             CqlDateTime g_ = context.Operators.Subtract(e_, f_);
-            bool? h_ = context.Operators.SameOrBefore(d_, g_, (string)default);
+            CqlBoolean h_ = context.Operators.SameOrBefore(d_, g_, (string)default);
             return h_;
         }
 
@@ -872,21 +872,21 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
                 Period j_ = EDObsEncounter?.Period;
                 CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
-                bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(i_, k_, (string)default);
+                CqlBoolean l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(i_, k_, (string)default);
 
                 CqlBoolean m_() {
                     Code<Encounter.EncounterStatus> n_ = EDObsEncounter?.StatusElement;
                     Encounter.EncounterStatus? o_ = n_?.Value;
                     Code<Encounter.EncounterStatus> p_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(o_);
-                    bool? q_ = context.Operators.Equal(p_, "finished");
+                    CqlBoolean q_ = context.Operators.Equal(p_, "finished");
                     return q_;
                 }
 
-                return /* CQL 'and' (117:17-118:46) */ ((CqlBoolean)l_
+                return /* CQL 'and' (117:17-118:46) */ (l_
                     && m_());
             }
 
-            bool? g_ = context.Operators.WhereAny<Encounter>(e_, f_);
+            CqlBoolean g_ = context.Operators.WhereAny<Encounter>(e_, f_);
             return g_;
         }
 
@@ -913,11 +913,11 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
                 Period i_ = EDObs?.Period;
                 CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, (string)default);
+                CqlBoolean k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, (string)default);
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
+            CqlBoolean f_ = context.Operators.WhereAny<Encounter>(d_, e_);
             return !f_;
         }
 
@@ -941,7 +941,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             CqlDateTime e_ = this.edDepartureTime(context, EDEncounter);
             CqlQuantity f_ = context.Operators.Quantity(481m, "minutes");
             CqlDateTime g_ = context.Operators.Subtract(e_, f_);
-            bool? h_ = context.Operators.SameOrBefore(d_, g_, (string)default);
+            CqlBoolean h_ = context.Operators.SameOrBefore(d_, g_, (string)default);
             return h_;
         }
 
@@ -968,11 +968,11 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
                 Period i_ = EDObs?.Period;
                 CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, (string)default);
+                CqlBoolean k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, (string)default);
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
+            CqlBoolean f_ = context.Operators.WhereAny<Encounter>(d_, e_);
             return !f_;
         }
 
@@ -1020,7 +1020,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlDate k_ = context.Operators.DateFrom(j_);
             int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
-            bool? m_ = context.Operators.Less(l_, 18);
+            CqlBoolean m_ = context.Operators.Less(l_, 18);
             return m_;
         }
 
@@ -1041,7 +1041,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
 
         bool? b_(Encounter PediatricEDEncounters) {
             CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
-            bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, PediatricEDEncounters, d_);
+            CqlBoolean e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, PediatricEDEncounters, d_);
             return !e_;
         }
 
@@ -1070,7 +1070,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlDate k_ = context.Operators.DateFrom(j_);
             int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
-            bool? m_ = context.Operators.GreaterOrEqual(l_, 18);
+            CqlBoolean m_ = context.Operators.GreaterOrEqual(l_, 18);
             return m_;
         }
 
@@ -1091,7 +1091,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
 
         bool? b_(Encounter AdultEDEncounters) {
             CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
-            bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, AdultEDEncounters, d_);
+            CqlBoolean e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, AdultEDEncounters, d_);
             return !e_;
         }
 
@@ -1112,7 +1112,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
 
         bool? b_(Encounter PediatricEDEncounters) {
             CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
-            bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, PediatricEDEncounters, d_);
+            CqlBoolean e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, PediatricEDEncounters, d_);
             return e_;
         }
 
@@ -1133,7 +1133,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
 
         bool? b_(Encounter AdultEDEncounters) {
             CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
-            bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, AdultEDEncounters, d_);
+            CqlBoolean e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, AdultEDEncounters, d_);
             return e_;
         }
 

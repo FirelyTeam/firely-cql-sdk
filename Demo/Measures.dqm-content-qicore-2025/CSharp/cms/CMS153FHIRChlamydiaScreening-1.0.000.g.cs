@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS153FHIRChlamydiaScreening", "1.0.000")]
 public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton<CMS153FHIRChlamydiaScreening_1_0_000>
 {
@@ -262,7 +262,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
             Period ab_ = ValidEncounters?.Period;
             CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ab_);
-            bool? ad_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aa_, ac_, "day");
+            CqlBoolean ad_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aa_, ac_, "day");
             return ad_;
         }
 
@@ -289,7 +289,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlCode i_ = this.Yes__qualifier_value_(context);
             CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
-            bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
+            CqlBoolean k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
 
             CqlBoolean l_() {
                 DataType m_ = SexualActivityAssessment?.Effective;
@@ -307,15 +307,15 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     CqlInterval<CqlDateTime> t_ = context.Operators.Interval(s_, s_, true, true);
                     p_ = t_;
                 }
-                bool? q_ = context.Operators.SameOrBefore(o_, p_, (string)default);
+                CqlBoolean q_ = context.Operators.SameOrBefore(o_, p_, (string)default);
                 return q_;
             }
 
-            return /* CQL 'and' (170:7-171:102) */ ((CqlBoolean)k_
+            return /* CQL 'and' (170:7-171:102) */ (k_
                 && l_());
         }
 
-        bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
+        CqlBoolean f_ = context.Operators.WhereAny<Observation>(d_, e_);
         return f_;
     }
 
@@ -347,11 +347,11 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         bool? p_(Condition SexualActivityDiagnosis) {
             CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, SexualActivityDiagnosis);
             CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-            bool? t_ = context.Operators.Overlaps(r_, s_, (string)default);
+            CqlBoolean t_ = context.Operators.Overlaps(r_, s_, (string)default);
             return t_;
         }
 
-        bool? q_ = context.Operators.WhereAny<Condition>(o_, p_);
+        CqlBoolean q_ = context.Operators.WhereAny<Condition>(o_, p_);
         return q_;
     }
 
@@ -374,21 +374,21 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 object n_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> o_ = context.Operators.Split((string)n_, "/");
                 string p_ = context.Operators.Last<string>(o_);
-                bool? q_ = context.Operators.Equal(m_, p_);
+                CqlBoolean q_ = context.Operators.Equal(m_, p_);
 
                 CqlBoolean r_() {
                     CodeableConcept s_ = M?.Code;
                     CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                     CqlValueSet u_ = this.Contraceptive_Medications(context);
-                    bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                    CqlBoolean v_ = context.Operators.ConceptInValueSet(t_, u_);
                     return v_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)q_
+                return /* CQL 'and' */ (q_
                     && r_());
             }
 
-            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            CqlBoolean l_ = context.Operators.WhereAny<Medication>(j_, k_);
             return l_;
         }
 
@@ -404,15 +404,15 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             CqlDateTime y_ = context.Operators.ConvertDateToDateTime(x_);
             CqlDate z_ = w_?.high;
             CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
-            bool? ab_ = w_?.lowClosed;
-            bool? ac_ = w_?.highClosed;
+            CqlBoolean ab_ = w_?.lowClosed;
+            CqlBoolean ac_ = w_?.highClosed;
             CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(y_, aa_, ab_, ac_);
             CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
-            bool? af_ = context.Operators.Overlaps(ad_, ae_, (string)default);
+            CqlBoolean af_ = context.Operators.Overlaps(ad_, ae_, (string)default);
             return af_;
         }
 
-        bool? i_ = context.Operators.WhereAny<MedicationRequest>(g_, h_);
+        CqlBoolean i_ = context.Operators.WhereAny<MedicationRequest>(g_, h_);
         return i_;
     }
 
@@ -435,21 +435,21 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 object n_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> o_ = context.Operators.Split((string)n_, "/");
                 string p_ = context.Operators.Last<string>(o_);
-                bool? q_ = context.Operators.Equal(m_, p_);
+                CqlBoolean q_ = context.Operators.Equal(m_, p_);
 
                 CqlBoolean r_() {
                     CodeableConcept s_ = M?.Code;
                     CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                     CqlValueSet u_ = this.Contraceptive_Medications(context);
-                    bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                    CqlBoolean v_ = context.Operators.ConceptInValueSet(t_, u_);
                     return v_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)q_
+                return /* CQL 'and' */ (q_
                     && r_());
             }
 
-            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            CqlBoolean l_ = context.Operators.WhereAny<Medication>(j_, k_);
             return l_;
         }
 
@@ -464,11 +464,11 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             FhirDateTime x_ = OrderedContraceptives?.AuthoredOnElement;
             CqlDateTime y_ = context.Operators.Convert<CqlDateTime>(x_);
             CqlInterval<CqlDateTime> z_ = QICoreCommon_4_0_000.Instance.toInterval(context, y_);
-            bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, "day");
+            CqlBoolean aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, "day");
             return aa_;
         }
 
-        bool? i_ = context.Operators.WhereAny<MedicationRequest>(g_, h_);
+        CqlBoolean i_ = context.Operators.WhereAny<MedicationRequest>(g_, h_);
         return i_;
     }
 
@@ -496,11 +496,11 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             FhirDateTime m_ = LabOrders?.AuthoredOnElement;
             CqlDateTime n_ = context.Operators.Convert<CqlDateTime>(m_);
             CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
+            CqlBoolean p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
             return p_;
         }
 
-        bool? k_ = context.Operators.WhereAny<ServiceRequest>(i_, j_);
+        CqlBoolean k_ = context.Operators.WhereAny<ServiceRequest>(i_, j_);
         return k_;
     }
 
@@ -522,12 +522,12 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             FhirDateTime g_ = PregnancyTest?.AuthoredOnElement;
             CqlDateTime h_ = context.Operators.Convert<CqlDateTime>(g_);
             CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
-            bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
+            CqlBoolean j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
             return j_;
         }
 
-        bool? e_ = context.Operators.WhereAny<ServiceRequest>(c_, d_);
-        return /* CQL 'or' (112:3-115:75) */ ((CqlBoolean)e_
+        CqlBoolean e_ = context.Operators.WhereAny<ServiceRequest>(c_, d_);
+        return /* CQL 'or' (112:3-115:75) */ (e_
             || this.Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy(context));
     }
 
@@ -549,11 +549,11 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             FhirDateTime g_ = SexualActivityDiagnostics?.AuthoredOnElement;
             CqlDateTime h_ = context.Operators.Convert<CqlDateTime>(g_);
             CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
-            bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
+            CqlBoolean j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
             return j_;
         }
 
-        bool? e_ = context.Operators.WhereAny<ServiceRequest>(c_, d_);
+        CqlBoolean e_ = context.Operators.WhereAny<ServiceRequest>(c_, d_);
         return e_;
     }
 
@@ -609,11 +609,11 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 }
             }
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
-            bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+            CqlBoolean i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
             return i_;
         }
 
-        bool? e_ = context.Operators.WhereAny<Procedure>(c_, d_);
+        CqlBoolean e_ = context.Operators.WhereAny<Procedure>(c_, d_);
         return e_;
     }
 
@@ -635,7 +635,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(16, 24, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
         CqlBoolean k_() {
             List<Extension> n_;
@@ -653,7 +653,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             bool? o_(Extension @this) {
                 FhirUri v_ = @this?.UrlElement;
                 string w_ = FHIRHelpers_4_4_000.Instance.ToString(context, v_);
-                bool? x_ = context.Operators.Equal(w_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+                CqlBoolean x_ = context.Operators.Equal(w_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
                 return x_;
             }
 
@@ -665,21 +665,21 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
             IEnumerable<DataType> q_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)n_, o_, p_);
             DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
-            bool? s_ = context.Operators.Equal(r_, "248152002");
+            CqlBoolean s_ = context.Operators.Equal(r_, "248152002");
             return s_;
         }
 
 
         CqlBoolean l_() {
             IEnumerable<Encounter> z_ = this.Qualifying_Encounters(context);
-            bool? aa_ = context.Operators.Exists<Encounter>(z_);
+            CqlBoolean aa_ = context.Operators.Exists<Encounter>(z_);
             return aa_;
         }
 
 
         CqlBoolean m_() {
-            bool? ab_ = this.Has_Assessments_Identifying_Sexual_Activity(context);
-            return /* CQL 'or' (64:9-71:5) */ (/* CQL 'or' (64:11-69:67) */ (/* CQL 'or' (64:11-68:65) */ (/* CQL 'or' (64:11-67:54) */ (/* CQL 'or' (64:11-66:53) */ (/* CQL 'or' (64:11-65:58) */ ((CqlBoolean)ab_
+            CqlBoolean ab_ = this.Has_Assessments_Identifying_Sexual_Activity(context);
+            return /* CQL 'or' (64:9-71:5) */ (/* CQL 'or' (64:11-69:67) */ (/* CQL 'or' (64:11-68:65) */ (/* CQL 'or' (64:11-67:54) */ (/* CQL 'or' (64:11-66:53) */ (/* CQL 'or' (64:11-65:58) */ (ab_
                 || this.Has_Diagnoses_Identifying_Sexual_Activity(context))
                 || this.Has_Active_Contraceptive_Medications(context))
                 || this.Has_Ordered_Contraceptive_Medications(context))
@@ -688,7 +688,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 || this.Has_Procedures_Identifying_Sexual_Activity(context));
         }
 
-        return /* CQL 'and' (59:3-71:5) */ (/* CQL 'and' (59:3-63:42) */ (/* CQL 'and' (59:3-62:33) */ ((CqlBoolean)j_
+        return /* CQL 'and' (59:3-71:5) */ (/* CQL 'and' (59:3-63:42) */ (/* CQL 'and' (59:3-62:33) */ (j_
             && k_())
             && l_())
             && m_());
@@ -703,7 +703,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -737,7 +737,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 CqlQuantity aa_ = context.Operators.Quantity(6m, "days");
                 CqlDateTime ab_ = context.Operators.Add(z_, aa_);
                 CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(z_, ab_, true, true);
-                bool? ad_ = context.Operators.In<CqlDateTime>(v_, ac_, "day");
+                CqlBoolean ad_ = context.Operators.In<CqlDateTime>(v_, ac_, "day");
 
                 CqlBoolean ae_() {
                     FhirDateTime af_ = PregnancyTest?.AuthoredOnElement;
@@ -747,11 +747,11 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     return !((bool?)(ai_ is null));
                 }
 
-                return /* CQL 'and' (143:21-143:136) */ ((CqlBoolean)ad_
+                return /* CQL 'and' (143:21-143:136) */ (ad_
                     && ae_());
             }
 
-            bool? r_ = context.Operators.WhereAny<ServiceRequest>(p_, q_);
+            CqlBoolean r_ = context.Operators.WhereAny<ServiceRequest>(p_, q_);
             return r_;
         }
 
@@ -762,7 +762,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             FhirDateTime ak_ = PregnancyTest?.AuthoredOnElement;
             CqlDateTime al_ = context.Operators.Convert<CqlDateTime>(ak_);
             CqlInterval<CqlDateTime> am_ = QICoreCommon_4_0_000.Instance.toInterval(context, al_);
-            bool? an_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aj_, am_, (string)default);
+            CqlBoolean an_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aj_, am_, (string)default);
             return an_;
         }
 
@@ -779,21 +779,21 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     object bb_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                     IEnumerable<string> bc_ = context.Operators.Split((string)bb_, "/");
                     string bd_ = context.Operators.Last<string>(bc_);
-                    bool? be_ = context.Operators.Equal(ba_, bd_);
+                    CqlBoolean be_ = context.Operators.Equal(ba_, bd_);
 
                     CqlBoolean bf_() {
                         CodeableConcept bg_ = M?.Code;
                         CqlConcept bh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bg_);
                         CqlValueSet bi_ = this.Isotretinoin(context);
-                        bool? bj_ = context.Operators.ConceptInValueSet(bh_, bi_);
+                        CqlBoolean bj_ = context.Operators.ConceptInValueSet(bh_, bi_);
                         return bj_;
                     }
 
-                    return /* CQL 'and' */ ((CqlBoolean)be_
+                    return /* CQL 'and' */ (be_
                         && bf_());
                 }
 
-                bool? az_ = context.Operators.WhereAny<Medication>(ax_, ay_);
+                CqlBoolean az_ = context.Operators.WhereAny<Medication>(ax_, ay_);
                 return az_;
             }
 
@@ -815,7 +815,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 CqlQuantity bs_ = context.Operators.Quantity(6m, "days");
                 CqlDateTime bt_ = context.Operators.Add(br_, bs_);
                 CqlInterval<CqlDateTime> bu_ = context.Operators.Interval(br_, bt_, true, true);
-                bool? bv_ = context.Operators.In<CqlDateTime>(bn_, bu_, "day");
+                CqlBoolean bv_ = context.Operators.In<CqlDateTime>(bn_, bu_, "day");
 
                 CqlBoolean bw_() {
                     FhirDateTime bx_ = PregnancyTestOrder?.AuthoredOnElement;
@@ -825,11 +825,11 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     return !((bool?)(ca_ is null));
                 }
 
-                return /* CQL 'and' (148:21-148:145) */ ((CqlBoolean)bv_
+                return /* CQL 'and' (148:21-148:145) */ (bv_
                     && bw_());
             }
 
-            bool? aw_ = context.Operators.WhereAny<MedicationRequest>(au_, av_);
+            CqlBoolean aw_ = context.Operators.WhereAny<MedicationRequest>(au_, av_);
             return aw_;
         }
 
@@ -840,13 +840,13 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             FhirDateTime cc_ = PregnancyTestOrder?.AuthoredOnElement;
             CqlDateTime cd_ = context.Operators.Convert<CqlDateTime>(cc_);
             CqlInterval<CqlDateTime> ce_ = QICoreCommon_4_0_000.Instance.toInterval(context, cd_);
-            bool? cf_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(cb_, ce_, (string)default);
+            CqlBoolean cf_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(cb_, ce_, (string)default);
             return cf_;
         }
 
         IEnumerable<ServiceRequest> k_ = context.Operators.Where<ServiceRequest>(i_, j_);
         IEnumerable<ServiceRequest> l_ = context.Operators.Union<ServiceRequest>(g_, k_);
-        bool? m_ = context.Operators.Exists<ServiceRequest>(l_);
+        CqlBoolean m_ = context.Operators.Exists<ServiceRequest>(l_);
         return m_;
     }
 
@@ -859,11 +859,11 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
-        bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+        CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
 
         CqlBoolean b_() {
-            bool? c_ = this.Has_Pregnancy_Test_Exclusion(context);
-            return /* CQL 'and' (130:8-138:5) */ (/* CQL 'and' (130:10-136:72) */ (/* CQL 'and' (130:10-135:88) */ (/* CQL 'and' (130:10-134:59) */ (/* CQL 'and' (130:10-133:58) */ (/* CQL 'and' (130:10-132:63) */ (/* CQL 'and' (130:10-131:65) */ ((CqlBoolean)c_
+            CqlBoolean c_ = this.Has_Pregnancy_Test_Exclusion(context);
+            return /* CQL 'and' (130:8-138:5) */ (/* CQL 'and' (130:10-136:72) */ (/* CQL 'and' (130:10-135:88) */ (/* CQL 'and' (130:10-134:59) */ (/* CQL 'and' (130:10-133:58) */ (/* CQL 'and' (130:10-132:63) */ (/* CQL 'and' (130:10-131:65) */ (c_
                 && !(this.Has_Assessments_Identifying_Sexual_Activity(context)))
                 && !(this.Has_Diagnoses_Identifying_Sexual_Activity(context)))
                 && !(this.Has_Active_Contraceptive_Medications(context)))
@@ -873,7 +873,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 && !(this.Has_Procedures_Identifying_Sexual_Activity(context)));
         }
 
-        return /* CQL 'or' (129:3-138:5) */ ((CqlBoolean)a_
+        return /* CQL 'or' (129:3-138:5) */ (a_
             || b_());
     }
 
@@ -920,7 +920,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             }
             CqlDateTime g_ = QICoreCommon_4_0_000.Instance.latest(context, f_);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
-            bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
+            CqlBoolean i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
 
             CqlBoolean j_() {
                 DataType o_ = ChlamydiaTest?.Value;
@@ -928,11 +928,11 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 return !((bool?)(p_ is null));
             }
 
-            return /* CQL 'and' (154:7-155:43) */ ((CqlBoolean)i_
+            return /* CQL 'and' (154:7-155:43) */ (i_
                 && j_());
         }
 
-        bool? e_ = context.Operators.WhereAny<Observation>(c_, d_);
+        CqlBoolean e_ = context.Operators.WhereAny<Observation>(c_, d_);
         return e_;
     }
 
@@ -954,7 +954,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(16, 20, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
         return j_;
     }
 
@@ -976,7 +976,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(21, 24, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
         return j_;
     }
 

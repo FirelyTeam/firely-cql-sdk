@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS146FHIRApproTestPharyngitis", "1.0.000")]
 public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISingleton<CMS146FHIRApproTestPharyngitis_1_0_000>
 {
@@ -249,12 +249,12 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
             bool? av_(CqlConcept T) {
                 CqlCode az_ = this.Unlisted_preventive_medicine_service(context);
                 CqlConcept ba_ = context.Operators.ConvertCodeToConcept(az_);
-                bool? bb_ = context.Operators.Equivalent(T, ba_);
+                CqlBoolean bb_ = context.Operators.Equivalent(T, ba_);
                 return bb_;
             }
 
             IEnumerable<CqlConcept> aw_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)at_, au_, av_);
-            bool? ax_ = context.Operators.Exists<CqlConcept>(aw_);
+            CqlBoolean ax_ = context.Operators.Exists<CqlConcept>(aw_);
             return ax_;
         }
 
@@ -285,7 +285,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
             CqlQuantity bi_ = context.Operators.Quantity(3m, "days");
             CqlDateTime bj_ = context.Operators.Subtract(bh_, bi_);
             CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(bg_, bj_, true, true);
-            bool? bl_ = context.Operators.In<CqlDateTime>(be_, bk_, "day");
+            CqlBoolean bl_ = context.Operators.In<CqlDateTime>(be_, bk_, "day");
             return bl_;
         }
 
@@ -315,21 +315,21 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                     object q_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                     IEnumerable<string> r_ = context.Operators.Split((string)q_, "/");
                     string s_ = context.Operators.Last<string>(r_);
-                    bool? t_ = context.Operators.Equal(p_, s_);
+                    CqlBoolean t_ = context.Operators.Equal(p_, s_);
 
                     CqlBoolean u_() {
                         CodeableConcept v_ = M?.Code;
                         CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                         CqlValueSet x_ = this.Antibiotic_Medications_for_Pharyngitis(context);
-                        bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+                        CqlBoolean y_ = context.Operators.ConceptInValueSet(w_, x_);
                         return y_;
                     }
 
-                    return /* CQL 'and' */ ((CqlBoolean)t_
+                    return /* CQL 'and' */ (t_
                         && u_());
                 }
 
-                bool? o_ = context.Operators.WhereAny<Medication>(m_, n_);
+                CqlBoolean o_ = context.Operators.WhereAny<Medication>(m_, n_);
                 return o_;
             }
 
@@ -349,7 +349,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 CqlQuantity af_ = context.Operators.Quantity(3m, "days");
                 CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
                 CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ag_, ae_, true, true);
-                bool? ai_ = context.Operators.In<CqlDateTime>(ac_, ah_, "day");
+                CqlBoolean ai_ = context.Operators.In<CqlDateTime>(ac_, ah_, "day");
 
                 CqlBoolean aj_() {
                     FhirDateTime ak_ = AntibioticOrdered?.AuthoredOnElement;
@@ -357,11 +357,11 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                     return !((bool?)(al_ is null));
                 }
 
-                return /* CQL 'and' (82:17-82:128) */ ((CqlBoolean)ai_
+                return /* CQL 'and' (82:17-82:128) */ (ai_
                     && aj_());
             }
 
-            bool? l_ = context.Operators.WhereAny<MedicationRequest>(j_, k_);
+            CqlBoolean l_ = context.Operators.WhereAny<MedicationRequest>(j_, k_);
             return l_;
         }
 
@@ -413,7 +413,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
             CqlDateTime k_ = context.Operators.Start(j_);
             Period l_ = tuple_ypyxedbbcqbdavhxvckuwmfh?.VisitWithAntibiotic?.Period;
             CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-            bool? n_ = context.Operators.In<CqlDateTime>(k_, m_, "day");
+            CqlBoolean n_ = context.Operators.In<CqlDateTime>(k_, m_, "day");
             return n_;
         }
 
@@ -443,7 +443,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
             CqlDateTime k_ = context.Operators.Start(j_);
             CqlDate l_ = context.Operators.DateFrom(k_);
             int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-            bool? n_ = context.Operators.GreaterOrEqual(m_, 3);
+            CqlBoolean n_ = context.Operators.GreaterOrEqual(m_, 3);
             return n_;
         }
 
@@ -478,7 +478,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> a_ = this.Initial_Population(context);
 
         bool? b_(Encounter EligibleEncounters) {
-            bool? d_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+            CqlBoolean d_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             return d_;
         }
 
@@ -516,21 +516,21 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 object ah_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                 IEnumerable<string> ai_ = context.Operators.Split((string)ah_, "/");
                 string aj_ = context.Operators.Last<string>(ai_);
-                bool? ak_ = context.Operators.Equal(ag_, aj_);
+                CqlBoolean ak_ = context.Operators.Equal(ag_, aj_);
 
                 CqlBoolean al_() {
                     CodeableConcept am_ = M?.Code;
                     CqlConcept an_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, am_);
                     CqlValueSet ao_ = this.Antibiotic_Medications_for_Pharyngitis(context);
-                    bool? ap_ = context.Operators.ConceptInValueSet(an_, ao_);
+                    CqlBoolean ap_ = context.Operators.ConceptInValueSet(an_, ao_);
                     return ap_;
                 }
 
-                return /* CQL 'and' */ ((CqlBoolean)ak_
+                return /* CQL 'and' */ (ak_
                     && al_());
             }
 
-            bool? af_ = context.Operators.WhereAny<Medication>(ad_, ae_);
+            CqlBoolean af_ = context.Operators.WhereAny<Medication>(ad_, ae_);
             return af_;
         }
 
@@ -607,7 +607,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
             CqlDateTime r_ = context.Operators.Subtract(p_, q_);
             CqlDateTime s_ = context.Operators.Add(p_, q_);
             CqlInterval<CqlDateTime> t_ = context.Operators.Interval(r_, s_, true, true);
-            bool? u_ = context.Operators.In<CqlDateTime>(m_, t_, "day");
+            CqlBoolean u_ = context.Operators.In<CqlDateTime>(m_, t_, "day");
             return u_;
         }
 
@@ -638,7 +638,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
             CqlDate l_ = context.Operators.DateFrom(k_);
             int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
             CqlInterval<int?> n_ = context.Operators.Interval(3, 17, true, true);
-            bool? o_ = context.Operators.In<int?>(m_, n_, (string)default);
+            CqlBoolean o_ = context.Operators.In<int?>(m_, n_, (string)default);
             return o_;
         }
 
@@ -669,7 +669,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
             CqlDate l_ = context.Operators.DateFrom(k_);
             int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
             CqlInterval<int?> n_ = context.Operators.Interval(18, 64, true, true);
-            bool? o_ = context.Operators.In<int?>(m_, n_, (string)default);
+            CqlBoolean o_ = context.Operators.In<int?>(m_, n_, (string)default);
             return o_;
         }
 
@@ -699,7 +699,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
             CqlDateTime k_ = context.Operators.Start(j_);
             CqlDate l_ = context.Operators.DateFrom(k_);
             int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-            bool? n_ = context.Operators.GreaterOrEqual(m_, 65);
+            CqlBoolean n_ = context.Operators.GreaterOrEqual(m_, 65);
             return n_;
         }
 

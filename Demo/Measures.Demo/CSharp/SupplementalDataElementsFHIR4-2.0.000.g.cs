@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
 public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleton<SupplementalDataElementsFHIR4_2_0_000>
 {
@@ -75,7 +75,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         bool? b_(Extension Extension) {
             FhirUri m_ = Extension?.UrlElement;
             string n_ = FHIRHelpers_4_0_001.Instance.ToString(context, m_);
-            bool? o_ = context.Operators.Equal(n_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+            CqlBoolean o_ = context.Operators.Equal(n_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
             return o_;
         }
 
@@ -92,16 +92,16 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         bool? g_(Extension E) {
             FhirUri q_ = E?.UrlElement;
             string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
-            bool? s_ = context.Operators.Equal(r_, "ombCategory");
+            CqlBoolean s_ = context.Operators.Equal(r_, "ombCategory");
 
             CqlBoolean t_() {
                 FhirUri u_ = E?.UrlElement;
                 string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-                bool? w_ = context.Operators.Equal(v_, "detailed");
+                CqlBoolean w_ = context.Operators.Equal(v_, "detailed");
                 return w_;
             }
 
-            return /* CQL 'or' (25:7-26:29) */ ((CqlBoolean)s_
+            return /* CQL 'or' (25:7-26:29) */ (s_
                 || t_());
         }
 
@@ -163,7 +163,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         bool? b_(Extension Extension) {
             FhirUri m_ = Extension?.UrlElement;
             string n_ = FHIRHelpers_4_0_001.Instance.ToString(context, m_);
-            bool? o_ = context.Operators.Equal(n_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+            CqlBoolean o_ = context.Operators.Equal(n_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
             return o_;
         }
 
@@ -180,16 +180,16 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         bool? g_(Extension E) {
             FhirUri q_ = E?.UrlElement;
             string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
-            bool? s_ = context.Operators.Equal(r_, "ombCategory");
+            CqlBoolean s_ = context.Operators.Equal(r_, "ombCategory");
 
             CqlBoolean t_() {
                 FhirUri u_ = E?.UrlElement;
                 string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-                bool? w_ = context.Operators.Equal(v_, "detailed");
+                CqlBoolean w_ = context.Operators.Equal(v_, "detailed");
                 return w_;
             }
 
-            return /* CQL 'or' (42:7-43:29) */ ((CqlBoolean)s_
+            return /* CQL 'or' (42:7-43:29) */ (s_
                 || t_());
         }
 
@@ -216,15 +216,15 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         Patient a_ = this.Patient(context);
         Code<AdministrativeGender> b_ = a_?.GenderElement;
         string c_ = FHIRHelpers_4_0_001.Instance.ToString(context, b_);
-        bool? d_ = context.Operators.Equal(c_, "male");
-        if (d_ ?? false)
+        CqlBoolean d_ = context.Operators.Equal(c_, "male");
+        if (d_.IsTrue)
         {
             return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", default, "Male");
         }
         else
         {
-            bool? e_ = context.Operators.Equal(c_, "female");
-            if (e_ ?? false)
+            CqlBoolean e_ = context.Operators.Equal(c_, "female");
+            if (e_.IsTrue)
             {
                 return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", default, "Female");
             }

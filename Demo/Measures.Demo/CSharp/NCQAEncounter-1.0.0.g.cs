@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("NCQAEncounter", "1.0.0")]
 public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_0_0>
 {
@@ -38,16 +38,16 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
                 string l_ = FHIRHelpers_4_0_001.Instance.ToString(context, k_);
                 string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, CRef);
                 string n_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, m_);
-                bool? o_ = context.Operators.Equal(l_, n_);
+                CqlBoolean o_ = context.Operators.Equal(l_, n_);
                 return o_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Condition>(Conditions, i_);
+            CqlBoolean j_ = context.Operators.WhereAny<Condition>(Conditions, i_);
             return j_;
         }
 
         IEnumerable<bool?> e_ = context.Operators.SelectDistinct<FhirString, bool?>(c_, d_);
-        bool? f_ = context.Operators.AnyTrue(e_);
+        CqlBoolean f_ = context.Operators.AnyTrue(e_);
         return f_;
     }
 
@@ -61,7 +61,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
             PositiveInt i_ = D?.RankElement;
             Integer j_ = context.Operators.Convert<Integer>(i_);
             int? k_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, j_);
-            bool? l_ = context.Operators.Equal(k_, 1);
+            CqlBoolean l_ = context.Operators.Equal(k_, 1);
             return l_;
         }
 
@@ -80,16 +80,16 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
                 FhirString r_ = q_?.ReferenceElement;
                 string s_ = FHIRHelpers_4_0_001.Instance.ToString(context, r_);
                 string t_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, s_);
-                bool? u_ = context.Operators.Equal(p_, t_);
+                CqlBoolean u_ = context.Operators.Equal(p_, t_);
                 return u_;
             }
 
-            bool? n_ = context.Operators.WhereAny<Condition>(Conditions, m_);
+            CqlBoolean n_ = context.Operators.WhereAny<Condition>(Conditions, m_);
             return n_;
         }
 
         IEnumerable<bool?> g_ = context.Operators.SelectDistinct<Encounter.DiagnosisComponent, bool?>((IEnumerable<Encounter.DiagnosisComponent>)e_, f_);
-        bool? h_ = context.Operators.SingletonFrom<bool?>(g_);
+        CqlBoolean h_ = context.Operators.SingletonFrom<bool?>(g_);
         return h_;
     }
 
@@ -103,11 +103,11 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
             Period d_ = EncounterPeriod?.Period;
             CqlInterval<CqlDateTime> e_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, d_);
             CqlDateTime f_ = context.Operators.End(e_);
-            bool? g_ = context.Operators.In<CqlDateTime>(f_, timeperiod, (string)default);
+            CqlBoolean g_ = context.Operators.In<CqlDateTime>(f_, timeperiod, (string)default);
             return g_;
         }
 
-        bool? c_ = context.Operators.WhereAny<Encounter>(a_, b_);
+        CqlBoolean c_ = context.Operators.WhereAny<Encounter>(a_, b_);
         return c_;
     }
 
@@ -124,7 +124,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
                 Coding f_ = E?.Class;
                 CqlCode g_ = FHIRHelpers_4_0_001.Instance.ToCode(context, f_);
                 CqlCode h_ = NCQATerminology_1_0_0.Instance.@virtual(context);
-                bool? i_ = context.Operators.Equivalent(g_, h_);
+                CqlBoolean i_ = context.Operators.Equivalent(g_, h_);
                 return i_;
             }
 
@@ -149,17 +149,17 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
                 Coding f_ = E?.Class;
                 CqlCode g_ = FHIRHelpers_4_0_001.Instance.ToCode(context, f_);
                 CqlCode h_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
-                bool? i_ = context.Operators.Equivalent(g_, h_);
+                CqlBoolean i_ = context.Operators.Equivalent(g_, h_);
 
                 CqlBoolean j_() {
                     Coding k_ = E?.Class;
                     CqlCode l_ = FHIRHelpers_4_0_001.Instance.ToCode(context, k_);
                     CqlCode m_ = NCQATerminology_1_0_0.Instance.home_health(context);
-                    bool? n_ = context.Operators.Equivalent(l_, m_);
+                    CqlBoolean n_ = context.Operators.Equivalent(l_, m_);
                     return n_;
                 }
 
-                return /* CQL 'or' (40:11-42:7) */ ((CqlBoolean)i_
+                return /* CQL 'or' (40:11-42:7) */ (i_
                     || j_());
             }
 
@@ -184,7 +184,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
                 Coding f_ = E?.Class;
                 CqlCode g_ = FHIRHelpers_4_0_001.Instance.ToCode(context, f_);
                 CqlCode h_ = NCQATerminology_1_0_0.Instance.ambulatory(context);
-                bool? i_ = context.Operators.Equivalent(g_, h_);
+                CqlBoolean i_ = context.Operators.Equivalent(g_, h_);
                 return i_;
             }
 

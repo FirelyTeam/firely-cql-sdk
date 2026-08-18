@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("AdultOutpatientEncountersFHIR4", "2.2.000")]
 public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISingleton<AdultOutpatientEncountersFHIR4_2_2_000>
 {
@@ -99,17 +99,17 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
         bool? o_(Encounter ValidEncounter) {
             Code<Encounter.EncounterStatus> q_ = ValidEncounter?.StatusElement;
             string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
-            bool? s_ = context.Operators.Equal(r_, "finished");
+            CqlBoolean s_ = context.Operators.Equal(r_, "finished");
 
             CqlBoolean t_() {
                 CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
                 Period v_ = ValidEncounter?.Period;
                 CqlInterval<CqlDateTime> w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, v_);
-                bool? x_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, w_, (string)default);
+                CqlBoolean x_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, w_, (string)default);
                 return x_;
             }
 
-            return /* CQL 'and' (26:19-27:100) */ ((CqlBoolean)s_
+            return /* CQL 'and' (26:19-27:100) */ (s_
                 && t_());
         }
 

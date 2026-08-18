@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS165FHIRControllingHighBP", "1.0.000")]
 public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<CMS165FHIRControllingHighBP_1_0_000>
 {
@@ -140,7 +140,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             CqlQuantity k_ = context.Operators.Quantity(6m, "months");
             CqlDateTime l_ = context.Operators.Add(j_, k_);
             CqlInterval<CqlDateTime> m_ = context.Operators.Interval(j_, l_, true, false);
-            bool? n_ = context.Operators.Overlaps(h_, m_, (string)default);
+            CqlBoolean n_ = context.Operators.Overlaps(h_, m_, (string)default);
             return n_;
         }
 
@@ -166,22 +166,22 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(18, 85, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
         CqlBoolean k_() {
             IEnumerable<Condition> m_ = this.Essential_Hypertension_Diagnosis(context);
-            bool? n_ = context.Operators.Exists<Condition>(m_);
+            CqlBoolean n_ = context.Operators.Exists<Condition>(m_);
             return n_;
         }
 
 
         CqlBoolean l_() {
             IEnumerable<Encounter> o_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
-            bool? p_ = context.Operators.Exists<Encounter>(o_);
+            CqlBoolean p_ = context.Operators.Exists<Encounter>(o_);
             return p_;
         }
 
-        return /* CQL 'and' (36:3-40:64) */ (/* CQL 'and' (36:3-39:49) */ ((CqlBoolean)j_
+        return /* CQL 'and' (36:3-40:64) */ (/* CQL 'and' (36:3-39:49) */ (j_
             && k_())
             && l_());
     }
@@ -195,7 +195,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -232,7 +232,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
         bool? u_(Condition PregnancyESRDDiagnosis) {
             CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyESRDDiagnosis);
             CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
-            bool? y_ = context.Operators.Overlaps(w_, x_, (string)default);
+            CqlBoolean y_ = context.Operators.Overlaps(w_, x_, (string)default);
             return y_;
         }
 
@@ -297,7 +297,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             CqlDateTime k_ = context.Operators.End(j_);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             CqlDateTime m_ = context.Operators.End(l_);
-            bool? n_ = context.Operators.SameOrBefore(k_, m_, (string)default);
+            CqlBoolean n_ = context.Operators.SameOrBefore(k_, m_, (string)default);
             return n_;
         }
 
@@ -324,7 +324,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             CqlDateTime h_ = context.Operators.Start(g_);
             CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
             CqlDateTime j_ = context.Operators.End(i_);
-            bool? k_ = context.Operators.SameOrBefore(h_, j_, (string)default);
+            CqlBoolean k_ = context.Operators.SameOrBefore(h_, j_, (string)default);
             return k_;
         }
 
@@ -341,29 +341,29 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
-        bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+        CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
 
         CqlBoolean b_() {
             IEnumerable<Condition> e_ = this.Pregnancy_or_Renal_Diagnosis(context);
-            bool? f_ = context.Operators.Exists<Condition>(e_);
+            CqlBoolean f_ = context.Operators.Exists<Condition>(e_);
             return f_;
         }
 
 
         CqlBoolean c_() {
             IEnumerable<Procedure> g_ = this.End_Stage_Renal_Disease_Procedures(context);
-            bool? h_ = context.Operators.Exists<Procedure>(g_);
+            CqlBoolean h_ = context.Operators.Exists<Procedure>(g_);
             return h_;
         }
 
 
         CqlBoolean d_() {
             IEnumerable<Encounter> i_ = this.End_Stage_Renal_Disease_Encounter(context);
-            bool? j_ = context.Operators.Exists<Encounter>(i_);
+            CqlBoolean j_ = context.Operators.Exists<Encounter>(i_);
             return j_;
         }
 
-        return /* CQL 'or' (52:3-58:69) */ (/* CQL 'or' (52:3-57:74) */ (/* CQL 'or' (52:3-56:105) */ (/* CQL 'or' (52:3-55:53) */ (/* CQL 'or' (52:3-54:54) */ (/* CQL 'or' (52:3-53:48) */ ((CqlBoolean)a_
+        return /* CQL 'or' (52:3-58:69) */ (/* CQL 'or' (52:3-57:74) */ (/* CQL 'or' (52:3-56:105) */ (/* CQL 'or' (52:3-55:53) */ (/* CQL 'or' (52:3-54:54) */ (/* CQL 'or' (52:3-53:48) */ (a_
             || b_())
             || c_())
             || d_())
@@ -384,7 +384,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             FhirString g_ = reference?.ReferenceElement;
             string h_ = g_?.Value;
             string i_ = QICoreCommon_4_0_000.Instance.getId(context, h_);
-            bool? j_ = context.Operators.Equal(f_, i_);
+            CqlBoolean j_ = context.Operators.Equal(f_, i_);
             return j_;
         }
 
@@ -419,11 +419,11 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 CqlDateTime t_ = QICoreCommon_4_0_000.Instance.latest(context, s_);
                 Period u_ = DisqualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
-                bool? w_ = context.Operators.In<CqlDateTime>(t_, v_, "day");
+                CqlBoolean w_ = context.Operators.In<CqlDateTime>(t_, v_, "day");
                 return w_;
             }
 
-            bool? q_ = context.Operators.WhereAny<Encounter>(o_, p_);
+            CqlBoolean q_ = context.Operators.WhereAny<Encounter>(o_, p_);
             return !q_;
         }
 
@@ -434,7 +434,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
             CqlDateTime z_ = QICoreCommon_4_0_000.Instance.latest(context, y_);
             CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
-            bool? ab_ = context.Operators.In<CqlDateTime>(z_, aa_, "day");
+            CqlBoolean ab_ = context.Operators.In<CqlDateTime>(z_, aa_, "day");
             return ab_;
         }
 
@@ -454,18 +454,18 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 "PRENC",
                 "SS",
             ];
-            bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
+            CqlBoolean ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
 
             CqlBoolean aj_() {
                 DataType ak_ = BloodPressure?.Effective;
                 object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                 CqlDateTime am_ = QICoreCommon_4_0_000.Instance.latest(context, al_);
                 CqlInterval<CqlDateTime> an_ = this.Measurement_Period(context);
-                bool? ao_ = context.Operators.In<CqlDateTime>(am_, an_, "day");
+                CqlBoolean ao_ = context.Operators.In<CqlDateTime>(am_, an_, "day");
                 return ao_;
             }
 
-            return /* CQL 'and' (121:9-122:83) */ ((CqlBoolean)!ai_
+            return /* CQL 'and' (121:9-122:83) */ (!ai_
                 && aj_());
         }
 
@@ -529,7 +529,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             CqlDateTime j_ = QICoreCommon_4_0_000.Instance.latest(context, i_);
             CqlDate k_ = this.Most_Recent_Blood_Pressure_Day(context);
             CqlDateTime l_ = context.Operators.ConvertDateToDateTime(k_);
-            bool? m_ = context.Operators.SameAs(j_, l_, "day");
+            CqlBoolean m_ = context.Operators.SameAs(j_, l_, "day");
             return m_;
         }
 
@@ -542,7 +542,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
                 CqlCode v_ = this.Systolic_blood_pressure(context);
                 CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-                bool? x_ = context.Operators.Equivalent(u_, w_);
+                CqlBoolean x_ = context.Operators.Equivalent(u_, w_);
                 return x_;
             }
 
@@ -577,7 +577,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     {
         CqlQuantity a_ = this.Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day(context);
         CqlQuantity b_ = context.Operators.Quantity(140m, "mm[Hg]");
-        bool? c_ = context.Operators.Less(a_, b_);
+        CqlBoolean c_ = context.Operators.Less(a_, b_);
         return c_;
     }
 
@@ -598,7 +598,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             CqlDateTime j_ = QICoreCommon_4_0_000.Instance.latest(context, i_);
             CqlDate k_ = this.Most_Recent_Blood_Pressure_Day(context);
             CqlDateTime l_ = context.Operators.ConvertDateToDateTime(k_);
-            bool? m_ = context.Operators.SameAs(j_, l_, "day");
+            CqlBoolean m_ = context.Operators.SameAs(j_, l_, "day");
             return m_;
         }
 
@@ -611,7 +611,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
                 CqlCode v_ = this.Diastolic_blood_pressure(context);
                 CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-                bool? x_ = context.Operators.Equivalent(u_, w_);
+                CqlBoolean x_ = context.Operators.Equivalent(u_, w_);
                 return x_;
             }
 
@@ -646,7 +646,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     {
         CqlQuantity a_ = this.Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day(context);
         CqlQuantity b_ = context.Operators.Quantity(90m, "mm[Hg]");
-        bool? c_ = context.Operators.Less(a_, b_);
+        CqlBoolean c_ = context.Operators.Less(a_, b_);
         return c_;
     }
 
@@ -659,8 +659,8 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
 
     private bool? Numerator_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_Systolic_Blood_Pressure_Less_Than_140(context);
-        return /* CQL 'and' (83:3-84:51) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_Systolic_Blood_Pressure_Less_Than_140(context);
+        return /* CQL 'and' (83:3-84:51) */ (a_
             && this.Has_Diastolic_Blood_Pressure_Less_Than_90(context));
     }
 

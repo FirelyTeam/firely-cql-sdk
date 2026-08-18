@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -115,11 +115,25 @@ internal partial class CSharpEmitter
         var parameters = call.Method.GetParameters();
         var arguments = string.Join(", ", call.Arguments.Select((a, i) =>
         {
-            var code = child(a).Code;
+            var atom = child(a);
+            var code = atom.Code;
             // Null/default arguments carry a cast to the parameter type so overload intent
             // stays visible — the old writer's BuildArguments rule.
             if (a is CodeConstant { Value: null } or CodeDefault && code is "null" or "default")
                 return $"({_typeToCSharpConverter.ToCSharp(parameters[i].ParameterType)}){code}";
+
+            // A CqlBoolean-declared local has to convert back before reaching any parameter that is
+            // not itself bool?. The case that matters is an `object` parameter: that is a BOXING
+            // conversion, and boxing never applies a user-defined conversion, so the callee would
+            // receive a boxed CqlBoolean where it expects a boxed bool? — code that compiles and
+            // then throws inside the comparers at run time.
+            if (i < parameters.Length
+                && IsCqlBooleanLocal(atom)
+                && parameters[i].ParameterType != typeof(bool?))
+            {
+                return $"(bool?){code}";
+            }
+
             return code;
         }));
         return $"{target}{(call.NullConditional ? "?." : ".")}{methodName}({arguments})";
@@ -345,9 +359,28 @@ internal partial class CSharpEmitter
         // time. That survival was a visitor-ordering accident, kept only for golden parity
         // and removed with the post-migration quirk cleanup.)
         if (cast.Type == typeof(object))
-            return child(cast.Operand).Code;
+        {
+            var boxed = child(cast.Operand);
+
+            // ...with one exception: a CqlBoolean-declared local has to become bool? BEFORE it is
+            // boxed. Boxing carries the operand's OWN type and never applies a user-defined
+            // conversion, so dropping the cast here would hand a boxed CqlBoolean to a callee
+            // expecting a boxed bool? — which compiles, then throws inside the comparers.
+            return IsCqlBooleanLocal(boxed) ? $"(bool?){boxed.Code}" : boxed.Code;
+        }
 
         var atom = child(cast.Operand);
+
+        // The builder wraps every logical operand in a conversion to CqlBoolean, keyed on the IR
+        // type. When the operand turns out to be a local this emitter DECLARED as CqlBoolean, that
+        // conversion is already done and the cast token is noise — this is what makes a chain read
+        // as `a_ && b_` rather than `(CqlBoolean)a_ && (CqlBoolean)b_`.
+        // Also for `!local`: CqlBoolean's own operator ! returns CqlBoolean, so a negated boolean
+        // local is already in the type and the conversion around it is noise too. This is what
+        // `implies` lowers through, so without it every implies keeps a cast.
+        if (cast.Type == typeof(CqlBoolean) && PrintsAsCqlBoolean(atom.Code))
+            return atom.Code;
+
         var operand = atom.Code.ParenthesizeIfNeeded();
         var typeName = _typeToCSharpConverter.ToCSharp(cast.Type);
 
@@ -483,6 +516,11 @@ internal partial class CSharpEmitter
             CodeBinaryOp.Equal when right is "null" or "default" && binary.Left is CodeConstant { Value: null } => "true",
             // "default" rewrites to "null" in patterns: a default literal is not a legal
             // pattern (CS8505) — the old writer's rule.
+            // A CqlBoolean-declared local answers these inside the type, which both avoids CS9135
+            // (a struct has no constant pattern form) and keeps the value from round-tripping
+            // through bool? just to be tested.
+            CodeBinaryOp.Equal when right is "null" or "default" && IsCqlBooleanLocal(leftAtom) => $"!{leftAtom.Code}.{nameof(CqlBoolean.HasValue)}",
+            CodeBinaryOp.NotEqual when right is "null" or "default" && IsCqlBooleanLocal(leftAtom) => $"{leftAtom.Code}.{nameof(CqlBoolean.HasValue)}",
             CodeBinaryOp.Equal when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is null",
             CodeBinaryOp.NotEqual when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is not null",
             // The short-circuit guards print as constant patterns: same lowering as the
@@ -491,10 +529,18 @@ internal partial class CSharpEmitter
             // directly. Keyed on the IR node (a bool-valued constant), not on the printed
             // text, so a right operand that merely PRINTS as "true"/"false" (e.g. a folded
             // is-null comparison) cannot switch a lifted == into a pattern match.
+            // Same again for `is true`/`is false`: IsTrue/IsFalse ARE those patterns, and are total
+            // in the same way CQL's operators are (null yields false, never null).
+            CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool tf } && IsCqlBooleanLocal(leftAtom) =>
+                $"{originPrefix}{leftAtom.Code}.{(tf ? nameof(CqlBoolean.IsTrue) : nameof(CqlBoolean.IsFalse))}",
             CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool b } && binary.Left.Type == typeof(bool?) => $"{originPrefix}{left} is {(b ? "true" : "false")}",
             CodeBinaryOp.Equal => $"{left} == {right}",
             CodeBinaryOp.NotEqual => $"{left} != {right}",
-            CodeBinaryOp.Coalesce => $"{left} ?? {right}",
+            // `x ?? false` is asking "is it definitely true", which IsTrue answers without leaving
+            // the type. Any other right operand means the result must stay nullable, so that is the
+            // one case still converting back.
+            CodeBinaryOp.Coalesce when right is "false" && IsCqlBooleanLocal(leftAtom) => $"{leftAtom.Code}.{nameof(CqlBoolean.IsTrue)}",
+            CodeBinaryOp.Coalesce => $"{AsNullableBool(leftAtom, left)} ?? {right}",
             CodeBinaryOp.OrElse => $"{left} || {right}",
             CodeBinaryOp.AndAlso => $"{left} && {right}",
             // Unlike the ops above, BOTH operands parenthesize: these ops are new (no old

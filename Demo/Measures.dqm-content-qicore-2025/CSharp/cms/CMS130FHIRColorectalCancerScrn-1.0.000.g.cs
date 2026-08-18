@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS130FHIRColorectalCancerScrn", "1.0.000")]
 public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISingleton<CMS130FHIRColorectalCancerScrn_1_0_000>
 {
@@ -153,15 +153,15 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(46, 75, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
         CqlBoolean k_() {
             IEnumerable<Encounter> l_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
-            bool? m_ = context.Operators.Exists<Encounter>(l_);
+            CqlBoolean m_ = context.Operators.Exists<Encounter>(l_);
             return m_;
         }
 
-        return /* CQL 'and' (40:3-43:64) */ ((CqlBoolean)j_
+        return /* CQL 'and' (40:3-43:64) */ (j_
             && k_());
     }
 
@@ -174,7 +174,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -198,7 +198,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             CqlDateTime i_ = context.Operators.Start(h_);
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
             CqlDateTime k_ = context.Operators.End(j_);
-            bool? l_ = context.Operators.SameOrBefore(i_, k_, "day");
+            CqlBoolean l_ = context.Operators.SameOrBefore(i_, k_, "day");
             return l_;
         }
 
@@ -260,7 +260,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             CqlDateTime h_ = context.Operators.End(g_);
             CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
             CqlDateTime j_ = context.Operators.End(i_);
-            bool? k_ = context.Operators.SameOrBefore(h_, j_, "day");
+            CqlBoolean k_ = context.Operators.SameOrBefore(h_, j_, "day");
             return k_;
         }
 
@@ -277,22 +277,22 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
-        bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+        CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
 
         CqlBoolean b_() {
             IEnumerable<Condition> d_ = this.Malignant_Neoplasm(context);
-            bool? e_ = context.Operators.Exists<Condition>(d_);
+            CqlBoolean e_ = context.Operators.Exists<Condition>(d_);
             return e_;
         }
 
 
         CqlBoolean c_() {
             IEnumerable<Procedure> f_ = this.Total_Colectomy_Performed(context);
-            bool? g_ = context.Operators.Exists<Procedure>(f_);
+            CqlBoolean g_ = context.Operators.Exists<Procedure>(f_);
             return g_;
         }
 
-        return /* CQL 'or' (49:3-54:69) */ (/* CQL 'or' (49:3-53:74) */ (/* CQL 'or' (49:3-52:73) */ (/* CQL 'or' (49:3-51:41) */ (/* CQL 'or' (49:3-50:34) */ ((CqlBoolean)a_
+        return /* CQL 'or' (49:3-54:69) */ (/* CQL 'or' (49:3-53:74) */ (/* CQL 'or' (49:3-52:73) */ (/* CQL 'or' (49:3-51:41) */ (/* CQL 'or' (49:3-50:34) */ (a_
             || b_())
             || c_())
             || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context))
@@ -347,7 +347,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 }
                 CqlDateTime j_ = QICoreCommon_4_0_000.Instance.latest(context, i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
+                CqlBoolean l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
                 return l_;
             }
 
@@ -411,7 +411,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 CqlDateTime n_ = context.Operators.Subtract(l_, m_);
                 CqlDateTime o_ = context.Operators.End(k_);
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(n_, o_, true, true);
-                bool? q_ = context.Operators.In<CqlDateTime>(j_, p_, "day");
+                CqlBoolean q_ = context.Operators.In<CqlDateTime>(j_, p_, "day");
                 return q_;
             }
 
@@ -481,7 +481,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             CqlDateTime l_ = context.Operators.Subtract(j_, k_);
             CqlDateTime m_ = context.Operators.End(i_);
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(l_, m_, true, true);
-            bool? o_ = context.Operators.In<CqlDateTime>(h_, n_, "day");
+            CqlBoolean o_ = context.Operators.In<CqlDateTime>(h_, n_, "day");
             return o_;
         }
 
@@ -513,7 +513,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             CqlDateTime m_ = context.Operators.Subtract(k_, l_);
             CqlDateTime n_ = context.Operators.End(j_);
             CqlInterval<CqlDateTime> o_ = context.Operators.Interval(m_, n_, true, true);
-            bool? p_ = context.Operators.In<CqlDateTime>(i_, o_, "day");
+            CqlBoolean p_ = context.Operators.In<CqlDateTime>(i_, o_, "day");
             return p_;
         }
 
@@ -579,7 +579,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             CqlDateTime l_ = context.Operators.Subtract(j_, k_);
             CqlDateTime m_ = context.Operators.End(i_);
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(l_, m_, true, true);
-            bool? o_ = context.Operators.In<CqlDateTime>(h_, n_, "day");
+            CqlBoolean o_ = context.Operators.In<CqlDateTime>(h_, n_, "day");
             return o_;
         }
 
@@ -597,36 +597,36 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
     private bool? Numerator_Compute(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Fecal_Occult_Blood_Test_Performed(context);
-        bool? b_ = context.Operators.Exists<Observation>(a_);
+        CqlBoolean b_ = context.Operators.Exists<Observation>(a_);
 
         CqlBoolean c_() {
             IEnumerable<Observation> g_ = this.Stool_DNA_with_FIT_Test_Performed(context);
-            bool? h_ = context.Operators.Exists<Observation>(g_);
+            CqlBoolean h_ = context.Operators.Exists<Observation>(g_);
             return h_;
         }
 
 
         CqlBoolean d_() {
             IEnumerable<Procedure> i_ = this.Flexible_Sigmoidoscopy_Performed(context);
-            bool? j_ = context.Operators.Exists<Procedure>(i_);
+            CqlBoolean j_ = context.Operators.Exists<Procedure>(i_);
             return j_;
         }
 
 
         CqlBoolean e_() {
             IEnumerable<Observation> k_ = this.CT_Colonography_Performed(context);
-            bool? l_ = context.Operators.Exists<Observation>(k_);
+            CqlBoolean l_ = context.Operators.Exists<Observation>(k_);
             return l_;
         }
 
 
         CqlBoolean f_() {
             IEnumerable<Procedure> m_ = this.Colonoscopy_Performed(context);
-            bool? n_ = context.Operators.Exists<Procedure>(m_);
+            CqlBoolean n_ = context.Operators.Exists<Procedure>(m_);
             return n_;
         }
 
-        return /* CQL 'or' (57:3-61:37) */ (/* CQL 'or' (57:3-60:41) */ (/* CQL 'or' (57:3-59:48) */ (/* CQL 'or' (57:3-58:49) */ ((CqlBoolean)b_
+        return /* CQL 'or' (57:3-61:37) */ (/* CQL 'or' (57:3-60:41) */ (/* CQL 'or' (57:3-59:48) */ (/* CQL 'or' (57:3-58:49) */ (b_
             || c_())
             || d_())
             || e_())
@@ -651,7 +651,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(46, 49, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
         return j_;
     }
 
@@ -673,7 +673,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(50, 75, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
         return j_;
     }
 

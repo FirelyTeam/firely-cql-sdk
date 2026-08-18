@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS50FHIRReceiptofSpecialistReport", "1.0.000")]
 public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISingleton<CMS50FHIRReceiptofSpecialistReport_1_0_000>
 {
@@ -164,21 +164,21 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
             Code<Encounter.EncounterStatus> t_ = ValidEncounter?.StatusElement;
             Encounter.EncounterStatus? u_ = t_?.Value;
             Code<Encounter.EncounterStatus> v_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(u_);
-            bool? w_ = context.Operators.Equal(v_, "finished");
+            CqlBoolean w_ = context.Operators.Equal(v_, "finished");
 
             CqlBoolean x_() {
                 CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
                 Period z_ = ValidEncounter?.Period;
                 CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
-                bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, "day");
+                CqlBoolean ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, "day");
                 return ab_;
             }
 
-            return /* CQL 'and' (62:7-63:68) */ ((CqlBoolean)w_
+            return /* CQL 'and' (62:7-63:68) */ (w_
                 && x_());
         }
 
-        bool? s_ = context.Operators.WhereAny<Encounter>(q_, r_);
+        CqlBoolean s_ = context.Operators.WhereAny<Encounter>(q_, r_);
         return s_;
     }
 
@@ -257,11 +257,11 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 }
             }
             CqlInterval<CqlDateTime> ae_ = QICoreCommon_4_0_000.Instance.toInterval(context, ad_);
-            bool? af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ac_, ae_, "day");
+            CqlBoolean af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ac_, ae_, "day");
             return af_;
         }
 
-        bool? ab_ = context.Operators.WhereAny<Procedure>(z_, aa_);
+        CqlBoolean ab_ = context.Operators.WhereAny<Procedure>(z_, aa_);
         return ab_;
     }
 
@@ -286,13 +286,13 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 "active",
                 "completed",
             ];
-            bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
+            CqlBoolean m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
 
             CqlBoolean n_() {
                 Code<RequestIntent> p_ = ReferralOrder?.IntentElement;
                 RequestIntent? q_ = p_?.Value;
                 Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
-                bool? s_ = context.Operators.Equal(r_, "order");
+                CqlBoolean s_ = context.Operators.Equal(r_, "order");
                 return s_;
             }
 
@@ -306,11 +306,11 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 CqlDate y_ = context.Operators.Date(x_, 10, 31);
                 CqlDateTime z_ = context.Operators.ConvertDateToDateTime(y_);
                 CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(w_, z_, true, true);
-                bool? ab_ = context.Operators.In<CqlDateTime>(u_, aa_, "day");
+                CqlBoolean ab_ = context.Operators.In<CqlDateTime>(u_, aa_, "day");
                 return ab_;
             }
 
-            return /* CQL 'and' (80:7-82:145) */ (/* CQL 'and' (80:13-81:42) */ ((CqlBoolean)m_
+            return /* CQL 'and' (80:7-82:145) */ (/* CQL 'and' (80:13-81:42) */ (m_
                 && n_())
                 && o_());
         }
@@ -337,8 +337,8 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_Encounter_during_Measurement_Period(context);
-        return /* CQL 'and' (50:3-53:81) */ (/* CQL 'or' (50:3-52:3) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_Encounter_during_Measurement_Period(context);
+        return /* CQL 'and' (50:3-53:81) */ (/* CQL 'or' (50:3-52:3) */ (a_
             || this.Has_Intervention_during_Measurement_Period(context))
             && !((bool?)((this.First_Referral_during_First_10_Months_of_Measurement_Period(context)) is null)));
     }
@@ -352,7 +352,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -429,11 +429,11 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
             bool? h_(ServiceRequest FirstReferral) {
                 ResourceReference j_ = ConsultantReportObtained?.Focus;
-                bool? k_ = QICoreCommon_4_0_000.Instance.references(context, j_, FirstReferral);
+                CqlBoolean k_ = QICoreCommon_4_0_000.Instance.references(context, j_, FirstReferral);
 
                 CqlBoolean l_() {
                     List<ResourceReference> q_ = ConsultantReportObtained?.BasedOn;
-                    bool? r_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)q_, FirstReferral);
+                    CqlBoolean r_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)q_, FirstReferral);
                     return r_;
                 }
 
@@ -444,7 +444,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                     CqlDateTime u_ = context.Operators.End(t_);
                     FhirDateTime v_ = FirstReferral?.AuthoredOnElement;
                     CqlDateTime w_ = context.Operators.Convert<CqlDateTime>(v_);
-                    bool? x_ = context.Operators.After(u_, w_, (string)default);
+                    CqlBoolean x_ = context.Operators.After(u_, w_, (string)default);
                     return x_;
                 }
 
@@ -454,7 +454,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                     CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
                     CqlDateTime aa_ = context.Operators.End(z_);
                     CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
-                    bool? ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, "day");
+                    CqlBoolean ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, "day");
                     return ac_;
                 }
 
@@ -463,7 +463,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                     Code<Task.TaskStatus> ad_ = ConsultantReportObtained?.StatusElement;
                     Task.TaskStatus? ae_ = ad_?.Value;
                     string af_ = context.Operators.Convert<string>(ae_);
-                    bool? ag_ = context.Operators.Equal(af_, "completed");
+                    CqlBoolean ag_ = context.Operators.Equal(af_, "completed");
                     return ag_;
                 }
 
@@ -472,11 +472,11 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                     CodeableConcept ah_ = ConsultantReportObtained?.ReasonCode;
                     CqlConcept ai_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ah_);
                     CqlValueSet aj_ = this.Consultant_Report(context);
-                    bool? ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
+                    CqlBoolean ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
                     return ak_;
                 }
 
-                return /* CQL 'and' (94:19-100:72) */ (/* CQL 'and' (94:19-99:59) */ (/* CQL 'and' (94:19-98:94) */ (/* CQL 'and' (94:19-97:90) */ (/* CQL 'or' (94:19-96:9) */ ((CqlBoolean)k_
+                return /* CQL 'and' (94:19-100:72) */ (/* CQL 'and' (94:19-99:59) */ (/* CQL 'and' (94:19-98:94) */ (/* CQL 'and' (94:19-97:90) */ (/* CQL 'or' (94:19-96:9) */ (k_
                     || l_())
                     && m_())
                     && n_())
@@ -484,11 +484,11 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                     && p_());
             }
 
-            bool? i_ = context.Operators.WhereAny<ServiceRequest>((IEnumerable<ServiceRequest>)g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<ServiceRequest>((IEnumerable<ServiceRequest>)g_, h_);
             return i_;
         }
 
-        bool? e_ = context.Operators.WhereAny<Task>(c_, d_);
+        CqlBoolean e_ = context.Operators.WhereAny<Task>(c_, d_);
         return e_;
     }
 
@@ -501,7 +501,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     private bool? Numerator_Compute(CqlContext context)
     {
-        bool? a_ = this.Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop(context);
+        CqlBoolean a_ = this.Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop(context);
         return a_;
     }
 

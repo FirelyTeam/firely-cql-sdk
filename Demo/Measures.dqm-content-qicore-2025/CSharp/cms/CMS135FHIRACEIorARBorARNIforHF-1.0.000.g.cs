@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS135FHIRACEIorARBorARNIforHF", "1.0.000")]
 public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISingleton<CMS135FHIRACEIorARBorARNIforHF_1_0_000>
 {
@@ -129,7 +129,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
-        bool? a_ = AHAOverall_4_1_000.Instance.Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period(context);
+        CqlBoolean a_ = AHAOverall_4_1_000.Instance.Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period(context);
         return a_;
     }
 
@@ -142,15 +142,15 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
 
         CqlBoolean b_() {
             IEnumerable<Encounter> c_ = AHAOverall_4_1_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
-            bool? d_ = context.Operators.Exists<Encounter>(c_);
+            CqlBoolean d_ = context.Operators.Exists<Encounter>(c_);
             return d_;
         }
 
-        return /* CQL 'and' (35:3-36:95) */ ((CqlBoolean)a_
+        return /* CQL 'and' (35:3-36:95) */ (a_
             && b_());
     }
 
@@ -163,8 +163,8 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
-        bool? a_ = AHAOverall_4_1_000.Instance.Has_Heart_Transplant(context);
-        return /* CQL 'or' (39:3-42:61) */ (/* CQL 'or' (39:3-41:47) */ (/* CQL 'or' (39:3-40:47) */ ((CqlBoolean)a_
+        CqlBoolean a_ = AHAOverall_4_1_000.Instance.Has_Heart_Transplant(context);
+        return /* CQL 'or' (39:3-42:61) */ (/* CQL 'or' (39:3-41:47) */ (/* CQL 'or' (39:3-40:47) */ (a_
             || AHAOverall_4_1_000.Instance.Has_Heart_Transplant_Complications(context))
             || AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device(context))
             || AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device_Complications(context));
@@ -183,11 +183,11 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
         bool? c_(MedicationRequest ACEIOrARBOrARNIOrdered) {
-            bool? e_ = AHAOverall_4_1_000.Instance.isOrderedDuringHeartFailureOutpatientEncounter(context, ACEIOrARBOrARNIOrdered);
+            CqlBoolean e_ = AHAOverall_4_1_000.Instance.isOrderedDuringHeartFailureOutpatientEncounter(context, ACEIOrARBOrARNIOrdered);
             return e_;
         }
 
-        bool? d_ = context.Operators.WhereAny<MedicationRequest>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<MedicationRequest>(b_, c_);
         return d_;
     }
 
@@ -204,11 +204,11 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
         bool? c_(MedicationRequest ActiveACEIOrARBOrARNI) {
-            bool? e_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ActiveACEIOrARBOrARNI);
+            CqlBoolean e_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ActiveACEIOrARBOrARNI);
             return e_;
         }
 
-        bool? d_ = context.Operators.WhereAny<MedicationRequest>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<MedicationRequest>(b_, c_);
         return d_;
     }
 
@@ -221,8 +221,8 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
 
     private bool? Numerator_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_ACEI_or_ARB_or_ARNI_Ordered(context);
-        return /* CQL 'or' (45:3-46:48) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_ACEI_or_ARB_or_ARNI_Ordered(context);
+        return /* CQL 'or' (45:3-46:48) */ (a_
             || this.Is_Currently_Taking_ACEI_or_ARB_or_ARNI(context));
     }
 
@@ -239,7 +239,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
 
         bool? c_(MedicationRequest NoACEIOrARBOrARNIOrdered) {
-            bool? e_ = AHAOverall_4_1_000.Instance.isMedicationNotRequestedOrderedDuringHeartFailureOutpatientEncounter(context, NoACEIOrARBOrARNIOrdered);
+            CqlBoolean e_ = AHAOverall_4_1_000.Instance.isMedicationNotRequestedOrderedDuringHeartFailureOutpatientEncounter(context, NoACEIOrARBOrARNIOrdered);
 
             CqlBoolean f_() {
                 List<CodeableConcept> g_ = NoACEIOrARBOrARNIOrdered?.ReasonCode;
@@ -251,7 +251,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
 
                 IEnumerable<CqlConcept> i_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)g_, h_);
                 CqlValueSet j_ = this.Medical_Reason(context);
-                bool? k_ = context.Operators.ConceptsInValueSet(i_, j_);
+                CqlBoolean k_ = context.Operators.ConceptsInValueSet(i_, j_);
 
                 CqlBoolean l_() {
                     List<CodeableConcept> o_ = NoACEIOrARBOrARNIOrdered?.ReasonCode;
@@ -263,7 +263,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
 
                     IEnumerable<CqlConcept> q_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)o_, p_);
                     CqlValueSet r_ = this.Patient_Reason(context);
-                    bool? s_ = context.Operators.ConceptsInValueSet(q_, r_);
+                    CqlBoolean s_ = context.Operators.ConceptsInValueSet(q_, r_);
                     return s_;
                 }
 
@@ -278,20 +278,20 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
 
                     IEnumerable<CqlConcept> w_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)u_, v_);
                     CqlValueSet x_ = this.Patient_Reason_for_ACE_Inhibitor_or_ARB_Decline(context);
-                    bool? y_ = context.Operators.ConceptsInValueSet(w_, x_);
+                    CqlBoolean y_ = context.Operators.ConceptsInValueSet(w_, x_);
                     return y_;
                 }
 
-                return /* CQL 'or' (113:13-116:9) */ (/* CQL 'or' (113:15-114:70) */ ((CqlBoolean)k_
+                return /* CQL 'or' (113:13-116:9) */ (/* CQL 'or' (113:15-114:70) */ (k_
                     || l_())
                     || m_());
             }
 
-            return /* CQL 'and' (112:7-116:9) */ ((CqlBoolean)e_
+            return /* CQL 'and' (112:7-116:9) */ (e_
                 && f_());
         }
 
-        bool? d_ = context.Operators.WhereAny<MedicationRequest>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<MedicationRequest>(b_, c_);
         return d_;
     }
 
@@ -320,11 +320,11 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
         IEnumerable<AllergyIntolerance> n_ = context.Operators.Union<AllergyIntolerance>(f_, m_);
 
         bool? o_(AllergyIntolerance ACEIOrARBOrARNIAllergyIntolerance) {
-            bool? q_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ACEIOrARBOrARNIAllergyIntolerance);
+            CqlBoolean q_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ACEIOrARBOrARNIAllergyIntolerance);
             return q_;
         }
 
-        bool? p_ = context.Operators.WhereAny<AllergyIntolerance>(n_, o_);
+        CqlBoolean p_ = context.Operators.WhereAny<AllergyIntolerance>(n_, o_);
         return p_;
     }
 
@@ -348,11 +348,11 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
         IEnumerable<Condition> i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
 
         bool? j_(Condition ACEIOrARBAllergyOrIntoleranceDiagnosis) {
-            bool? l_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ACEIOrARBAllergyOrIntoleranceDiagnosis);
+            CqlBoolean l_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ACEIOrARBAllergyOrIntoleranceDiagnosis);
             return l_;
         }
 
-        bool? k_ = context.Operators.WhereAny<Condition>(i_, j_);
+        CqlBoolean k_ = context.Operators.WhereAny<Condition>(i_, j_);
         return k_;
     }
 
@@ -382,7 +382,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                 CqlQuantity p_ = context.Operators.Quantity(9m, "months");
                 CqlDateTime q_ = context.Operators.Subtract(o_, p_);
                 CqlInterval<CqlDateTime> r_ = context.Operators.Interval(q_, o_, true, true);
-                bool? s_ = context.Operators.In<CqlDateTime>(l_, r_, (string)default);
+                CqlBoolean s_ = context.Operators.In<CqlDateTime>(l_, r_, (string)default);
 
                 CqlBoolean t_() {
                     Period u_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
@@ -391,16 +391,16 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                     return !((bool?)(w_ is null));
                 }
 
-                return /* CQL 'and' (93:19-94:47) */ (/* CQL 'and' (93:19-93:154) */ ((CqlBoolean)s_
+                return /* CQL 'and' (93:19-94:47) */ (/* CQL 'and' (93:19-93:154) */ (s_
                     && t_())
                     && AHAOverall_4_1_000.Instance.isVerified(context, PregnancyDiagnosis));
             }
 
-            bool? j_ = context.Operators.WhereAny<Encounter>(h_, i_);
+            CqlBoolean j_ = context.Operators.WhereAny<Encounter>(h_, i_);
             return j_;
         }
 
-        bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
+        CqlBoolean f_ = context.Operators.WhereAny<Condition>(d_, e_);
 
         CqlBoolean g_() {
             IEnumerable<Observation> x_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-pregnancystatus"));
@@ -419,7 +419,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                     CqlQuantity ak_ = context.Operators.Quantity(9m, "months");
                     CqlDateTime al_ = context.Operators.Subtract(aj_, ak_);
                     CqlInterval<CqlDateTime> am_ = context.Operators.Interval(al_, aj_, true, true);
-                    bool? an_ = context.Operators.In<CqlDateTime>(ag_, am_, (string)default);
+                    CqlBoolean an_ = context.Operators.In<CqlDateTime>(ag_, am_, (string)default);
 
                     CqlBoolean ao_() {
                         Period aq_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
@@ -433,7 +433,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                         DataType at_ = PregnantObservation?.Value;
                         CqlConcept au_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, at_ as CodeableConcept);
                         CqlValueSet av_ = this.Pregnancy(context);
-                        bool? aw_ = context.Operators.ConceptInValueSet(au_, av_);
+                        CqlBoolean aw_ = context.Operators.ConceptInValueSet(au_, av_);
 
                         CqlBoolean ax_() {
                             Code<ObservationStatus> ay_ = PregnantObservation?.StatusElement;
@@ -445,28 +445,28 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                                 "amended",
                                 "corrected",
                             ];
-                            bool? bd_ = context.Operators.In<string>(bb_, (IEnumerable<string>)bc_);
+                            CqlBoolean bd_ = context.Operators.In<string>(bb_, (IEnumerable<string>)bc_);
                             return bd_;
                         }
 
-                        return /* CQL 'and' (99:17-101:13) */ ((CqlBoolean)aw_
+                        return /* CQL 'and' (99:17-101:13) */ (aw_
                             && ax_());
                     }
 
-                    return /* CQL 'and' (98:21-101:13) */ (/* CQL 'and' (98:21-98:159) */ ((CqlBoolean)an_
+                    return /* CQL 'and' (98:21-101:13) */ (/* CQL 'and' (98:21-98:159) */ (an_
                         && ao_())
                         && ap_());
                 }
 
-                bool? ac_ = context.Operators.WhereAny<Encounter>(aa_, ab_);
+                CqlBoolean ac_ = context.Operators.WhereAny<Encounter>(aa_, ab_);
                 return ac_;
             }
 
-            bool? z_ = context.Operators.WhereAny<Observation>(x_, y_);
+            CqlBoolean z_ = context.Operators.WhereAny<Observation>(x_, y_);
             return z_;
         }
 
-        return /* CQL 'or' (90:3-102:5) */ ((CqlBoolean)f_
+        return /* CQL 'or' (90:3-102:5) */ (f_
             || g_());
     }
 
@@ -486,11 +486,11 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
         IEnumerable<Condition> e_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
         bool? f_(Condition RenalFailureDueToACEI) {
-            bool? h_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, RenalFailureDueToACEI);
+            CqlBoolean h_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, RenalFailureDueToACEI);
             return h_;
         }
 
-        bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
+        CqlBoolean g_ = context.Operators.WhereAny<Condition>(e_, f_);
         return g_;
     }
 
@@ -503,8 +503,8 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
 
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_Medical_or_Patient_Reason_for_Not_Ordering_ACEI_or_ARB_or_ARNI(context);
-        return /* CQL 'or' (49:3-53:51) */ (/* CQL 'or' (49:3-52:35) */ (/* CQL 'or' (49:3-51:63) */ (/* CQL 'or' (49:3-50:69) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_Medical_or_Patient_Reason_for_Not_Ordering_ACEI_or_ARB_or_ARNI(context);
+        return /* CQL 'or' (49:3-53:51) */ (/* CQL 'or' (49:3-52:35) */ (/* CQL 'or' (49:3-51:63) */ (/* CQL 'or' (49:3-50:69) */ (a_
             || this.Has_Allergy_or_Intolerance_to_ACEI_or_ARB_or_ARNI_Ingredient(context))
             || this.Has_Diagnosis_of_Allergy_or_Intolerance_to_ACEI_or_ARB(context))
             || this.Has_Diagnosis_of_Pregnancy(context))

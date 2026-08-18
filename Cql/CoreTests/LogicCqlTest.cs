@@ -468,9 +468,14 @@ public class LogicCqlTest
             "Expected 'or' to lower to a CqlBoolean || expression carrying its origin tag.");
         StringAssert.Matches(
             generated,
-            new System.Text.RegularExpressions.Regex(@"/\* CQL 'implies' \([^)]*\) \*/ \(\(CqlBoolean\)!\w+[\s\S]{0,200}?\|\|"),
+            new System.Text.RegularExpressions.Regex(@"/\* CQL 'implies' \([^)]*\) \*/ \(!\w+[\s\S]{0,200}?\|\|"),
             "Expected 'implies' to lower to !left || right over CqlBoolean.");
-        StringAssert.Contains(generated, "(CqlBoolean)", "Expected the CqlBoolean conversions that make && / || available.");
+        // Boolean locals are DECLARED CqlBoolean, which is what removes the per-operand conversions
+        // — so the type's presence is pinned on the declaration, not on a cast.
+        StringAssert.Matches(
+            generated,
+            new System.Text.RegularExpressions.Regex(@"\bCqlBoolean \w+_ = "),
+            "Expected boolean locals to be declared CqlBoolean.");
 
         // xor keeps the branching guard: its deciding value is null, and C# has no ^^ to
         // short-circuit with.
@@ -489,12 +494,16 @@ public class LogicCqlTest
         // surviving origin comment. Anchored on the tag immediately followed by the pattern:
         // a bare " is true)" would also match every `or` guard's own test, and " is false)" every
         // `and`/`implies` guard's, which is most of the fixture.
-        StringAssert.Contains(generated, "(/* CQL 'is true' (", "Expected the 'is true' lowering to emit the tag inline before its pattern.");
-        StringAssert.Contains(generated, "(/* CQL 'is false' (", "Expected the 'is false' lowering to emit the tag inline before its pattern.");
+        // IsTrue/IsFalse ARE the `is true`/`is false` patterns, asked on the CqlBoolean itself so the
+        // value never leaves the type to be tested — a struct has no constant pattern anyway (CS9135).
         StringAssert.Matches(
             generated,
-            new System.Text.RegularExpressions.Regex(@"/\* CQL 'is true' \([^)]*\) \*/ \w+ is true"),
-            "Expected 'is true' to lower to the constant pattern over its operand.");
+            new System.Text.RegularExpressions.Regex(@"/\* CQL 'is true' \([^)]*\) \*/ \w+\.IsTrue"),
+            "Expected 'is true' to lower to IsTrue on its operand.");
+        StringAssert.Matches(
+            generated,
+            new System.Text.RegularExpressions.Regex(@"/\* CQL 'is false' \([^)]*\) \*/ \w+\.IsFalse"),
+            "Expected 'is false' to lower to IsFalse on its operand.");
         StringAssert.Matches(
             generated,
             new System.Text.RegularExpressions.Regex(@"\w+ \^ \w+"),
@@ -528,18 +537,22 @@ public class LogicCqlTest
         foreach (var method in new[] { "TrueAndTrue_Compute", "TrueOrTrue_Compute", "NullImpliesTrue_Compute" })
         {
             var body = ExtractComputeMethod(generated, method);
-            StringAssert.Contains(body, "(CqlBoolean)", $"{method} must lower through CqlBoolean.");
+            StringAssert.Matches(
+                body,
+                new System.Text.RegularExpressions.Regex(@"\bCqlBoolean \w+_ = "),
+                $"{method} must lower through CqlBoolean, declared on the local.");
             Assert.IsFalse(
                 body.Contains("if ("),
                 $"{method} must short-circuit as an expression; a guard statement means the expression form regressed.");
         }
 
         // xor's guard: origin comment naming null as the deciding value, the null test, the
-        // deciding branch, then else.
+        // deciding branch, then else. The test is `!x.HasValue` rather than `x is null`, because a
+        // CqlBoolean is a non-nullable struct and has no null pattern (CS9135).
         StringAssert.Matches(
             ExtractComputeMethod(generated, "NullXorMessage_Compute"),
             new System.Text.RegularExpressions.Regex(
-                @"// CQL 'xor' \([^)]*\): right operand skipped when left is null\s*\r?\n\s*if \(\w+ is null\)\s*\r?\n\s*\{\s*\r?\n\s*return null as bool\?;\s*\r?\n\s*\}\s*\r?\n\s*else\b"),
+                @"// CQL 'xor' \([^)]*\): right operand skipped when left is null\s*\r?\n\s*if \(!\w+\.HasValue\)\s*\r?\n\s*\{\s*\r?\n\s*return null as bool\?;\s*\r?\n\s*\}\s*\r?\n\s*else\b"),
             "xor must keep its branching guard, since null is its deciding value and C# has no ^^.");
     }
 
@@ -565,7 +578,10 @@ public class LogicCqlTest
         foreach (var method in new[] { "TrueAndTrue_Compute", "TrueOrTrue_Compute", "NullImpliesTrue_Compute" })
         {
             var body = ExtractComputeMethod(generated, method);
-            StringAssert.Contains(body, "(CqlBoolean)", $"{method} must still lower through CqlBoolean.");
+            StringAssert.Matches(
+                body,
+                new System.Text.RegularExpressions.Regex(@"\bCqlBoolean \w+_ = "),
+                $"{method} must still lower through CqlBoolean.");
             Assert.IsFalse(
                 body.Contains("return (bool?)("),
                 $"{method} re-casts its CqlBoolean result to bool?; the root conversion is implicit at the return.");
@@ -579,31 +595,53 @@ public class LogicCqlTest
     }
 
     /// <summary>
-    /// The conversion is emitted on the LEFT operand only. The asymmetry is not cosmetic and is the
-    /// reason to pin it: C# synthesises <c>&amp;&amp;</c>/<c>||</c> from the LEFT operand's own
-    /// <c>operator true</c>/<c>operator false</c>, so a <c>bool?</c> left operand has no
-    /// <c>&amp;&amp;</c> at all and its conversion is load-bearing — while the right operand gets
-    /// one for free from overload resolution on the underlying <c>&amp;</c>/<c>|</c>.
+    /// Boolean locals are DECLARED <see cref="CqlBoolean"/>, so a logical chain needs no per-operand
+    /// conversion on either side — the whole point of typing the locals rather than casting at each
+    /// use. Neither operand of a short-circuit may carry one.
     ///
-    /// <para>Dropping the right one cannot weaken the skip, since a skipped operand is never
-    /// converted either; the <c>Message()</c> evidence tests above are what actually demonstrate
-    /// that, and they are unchanged.</para>
+    /// <para>The three-valued questions are asked inside the type too, so the value never
+    /// round-trips through <c>bool?</c> just to be tested: <c>IsTrue</c> replaces <c>?? false</c>
+    /// and <c>HasValue</c> replaces the <c>is null</c> pattern, which a
+    /// <see cref="CqlBoolean"/> cannot have anyway (CS9135).</para>
+    ///
+    /// <para>Not pinned here, because a runtime test covers it far better: a
+    /// <see cref="CqlBoolean"/> local reaching an <c>object</c> parameter must be converted FIRST,
+    /// since boxing carries the operand's own type and never applies a user-defined conversion.
+    /// <c>CqlBooleanTest.SomethingTrueEqualsTrue_ShouldBeTrue</c> is what catches that — it threw
+    /// inside the comparers when this change first landed, which is how the rule was found.</para>
     /// </summary>
     [TestMethod]
-    public void GeneratedCSharp_ConvertsOnlyTheLeftShortCircuitOperand()
+    public void GeneratedCSharp_NeedsNoPerOperandConversion()
     {
         var generated = LogicTestFixture.DefaultCSharp;
 
         Assert.IsFalse(
             System.Text.RegularExpressions.Regex.IsMatch(generated, @"(&&|\|\|) \(CqlBoolean\)"),
-            "A right operand carries a redundant (CqlBoolean) conversion; overload resolution supplies it implicitly.");
+            "A right operand carries a redundant (CqlBoolean) conversion.");
 
-        // The left one must still be there — its absence would not compile, but asserting it here
-        // states the asymmetry rather than leaving it to be rediscovered.
-        StringAssert.Contains(
-            ExtractComputeMethod(generated, "TrueAndTrue_Compute"),
-            "((CqlBoolean)",
-            "The left operand must keep its conversion; without it the operator has no && to synthesise.");
+        // A conversion on a LOCAL is what must be gone. It legitimately survives on two other
+        // shapes, which are not locals and cannot be retyped: a method PARAMETER, whose type is
+        // part of the signature and stays bool?, and an inline expression that was never hoisted.
+        var localOperandConversions = System.Text.RegularExpressions.Regex.Matches(generated, @"\(\(CqlBoolean\)(\w+)\b")
+            .Select(m => m.Groups[1].Value)
+            .Where(name => System.Text.RegularExpressions.Regex.IsMatch(generated, $@"\bCqlBoolean {System.Text.RegularExpressions.Regex.Escape(name)} = "))
+            .ToList();
+        Assert.AreEqual(
+            0,
+            localOperandConversions.Count,
+            $"A CqlBoolean-declared local still carries a conversion: {string.Join(", ", localOperandConversions)}.");
+
+        var body = ExtractComputeMethod(generated, "TrueAndTrue_Compute");
+        StringAssert.Matches(
+            body,
+            new System.Text.RegularExpressions.Regex(@"\bCqlBoolean \w+_ = [\s\S]*?\w+_\s*\r?\n\s*&&"),
+            "Expected a CqlBoolean local used directly as the left operand, with no conversion between them.");
+
+        // The truthiness and null questions stay inside the type.
+        StringAssert.Contains(generated, ".IsTrue", "Expected `?? false` to be asked as IsTrue on the CqlBoolean.");
+        Assert.IsFalse(
+            System.Text.RegularExpressions.Regex.IsMatch(generated, @"\(\(bool\?\)\w+_\) \?\? false"),
+            "A CqlBoolean local is converted back to bool? just to coalesce; IsTrue answers that in the type.");
     }
 
     private static string ExtractComputeMethod(string code, string methodName)

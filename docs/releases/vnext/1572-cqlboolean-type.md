@@ -20,3 +20,7 @@
   Note that omitting these operators would not have avoided the question: `a == b` compiled anyway,
   resolving silently through the implicit `bool?` conversion on both sides and answering `true` for
   two nulls. Declaring them replaces an accidental answer with the specified one. (#1514)
+- `CqlBoolean.IsTrue`, `IsFalse` and `HasValue` let a three-valued value be *tested* without leaving
+  the type. `IsTrue`/`IsFalse` are CQL's `is true`/`is false` — total, so `Null` yields `false` for
+  both, and they are therefore not each other's negation. They return `bool`, which is what a branch
+  condition needs, so `x.IsTrue` replaces what used to be written `(bool?)x ?? false`. (#1514)

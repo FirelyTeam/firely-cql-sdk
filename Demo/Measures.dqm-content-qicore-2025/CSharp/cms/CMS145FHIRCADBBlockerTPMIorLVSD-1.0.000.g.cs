@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS145FHIRCADBBlockerTPMIorLVSD", "1.0.000")]
 public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingleton<CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000>
 {
@@ -216,17 +216,17 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
             Period u_ = ValidEncounter?.Period;
             CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
-            bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, "day");
+            CqlBoolean w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, "day");
 
             CqlBoolean x_() {
                 Code<Encounter.EncounterStatus> y_ = ValidEncounter?.StatusElement;
                 Encounter.EncounterStatus? z_ = y_?.Value;
                 Code<Encounter.EncounterStatus> aa_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(z_);
-                bool? ab_ = context.Operators.Equal(aa_, "finished");
+                CqlBoolean ab_ = context.Operators.Equal(aa_, "finished");
                 return ab_;
             }
 
-            return /* CQL 'and' (217:5-218:44) */ ((CqlBoolean)w_
+            return /* CQL 'and' (217:5-218:44) */ (w_
                 && x_());
         }
 
@@ -262,17 +262,17 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
             Period r_ = QualifyingEncounter?.Period;
             CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, "day");
+            CqlBoolean t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, "day");
 
             CqlBoolean u_() {
                 Code<Encounter.EncounterStatus> v_ = QualifyingEncounter?.StatusElement;
                 Encounter.EncounterStatus? w_ = v_?.Value;
                 Code<Encounter.EncounterStatus> x_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(w_);
-                bool? y_ = context.Operators.Equal(x_, "finished");
+                CqlBoolean y_ = context.Operators.Equal(x_, "finished");
                 return y_;
             }
 
-            return /* CQL 'and' (207:5-208:49) */ ((CqlBoolean)t_
+            return /* CQL 'and' (207:5-208:49) */ (t_
                 && u_());
         }
 
@@ -286,12 +286,12 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     {
 
         bool? a_(Encounter Visit) {
-            bool? d_ = this.overlapsDayOfEncounter(context, Diagnosis, Visit);
+            CqlBoolean d_ = this.overlapsDayOfEncounter(context, Diagnosis, Visit);
             return d_;
         }
 
         IEnumerable<bool?> b_ = context.Operators.SelectDistinct<Encounter, bool?>(EncounterList, a_);
-        bool? c_ = context.Operators.AnyTrue(b_);
+        CqlBoolean c_ = context.Operators.AnyTrue(b_);
         return c_;
     }
 
@@ -304,7 +304,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
         ];
 
         bool? b_(Encounter Visit) {
-            bool? g_ = AHAOverall_4_1_000.Instance.isVerified(context, Diagnosis as Condition);
+            CqlBoolean g_ = AHAOverall_4_1_000.Instance.isVerified(context, Diagnosis as Condition);
             return g_;
         }
 
@@ -313,13 +313,13 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Diagnosis as Condition);
             Period i_ = Visit?.Period;
             CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-            bool? k_ = context.Operators.Overlaps(h_, j_, "day");
+            CqlBoolean k_ = context.Operators.Overlaps(h_, j_, "day");
             return k_;
         }
 
         IEnumerable<bool?> d_ = context.Operators.WhereSelect<Encounter, bool?>((IEnumerable<Encounter>)a_, b_, c_);
         IEnumerable<bool?> e_ = context.Operators.Distinct<bool?>(d_);
-        bool? f_ = context.Operators.SingletonFrom<bool?>(e_);
+        CqlBoolean f_ = context.Operators.SingletonFrom<bool?>(e_);
         return f_;
     }
 
@@ -341,11 +341,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
 
             bool? h_(Condition CoronaryArteryDisease) {
-                bool? j_ = this.overlapsDayOfEncounter(context, CoronaryArteryDisease as Condition, ValidQualifyingEncounter);
+                CqlBoolean j_ = this.overlapsDayOfEncounter(context, CoronaryArteryDisease as Condition, ValidQualifyingEncounter);
                 return j_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Condition>(g_, h_);
             return i_;
         }
 
@@ -410,21 +410,21 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 Period k_ = ValidQualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
                 CqlDateTime m_ = context.Operators.End(l_);
-                bool? n_ = context.Operators.Before(j_, m_, (string)default);
+                CqlBoolean n_ = context.Operators.Before(j_, m_, (string)default);
 
                 CqlBoolean o_() {
                     Code<EventStatus> v_ = CardiacSurgeryProcedure?.StatusElement;
                     EventStatus? w_ = v_?.Value;
                     string x_ = context.Operators.Convert<string>(w_);
-                    bool? y_ = context.Operators.Equal(x_, "completed");
+                    CqlBoolean y_ = context.Operators.Equal(x_, "completed");
                     return y_;
                 }
 
-                return /* CQL 'and' (355:17-356:56) */ ((CqlBoolean)n_
+                return /* CQL 'and' (355:17-356:56) */ (n_
                     && o_());
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            CqlBoolean g_ = context.Operators.WhereAny<Procedure>(e_, f_);
             return g_;
         }
 
@@ -464,7 +464,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
         CqlDateTime f_ = context.Operators.Start(e_);
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        bool? i_ = context.Operators.GreaterOrEqual(h_, 18);
+        CqlBoolean i_ = context.Operators.GreaterOrEqual(h_, 18);
 
         CqlBoolean j_() {
             IEnumerable<Encounter> l_ = this.Qualifying_Encounter_During_Measurement_Period(context);
@@ -477,26 +477,26 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     string s_ = r_?.Value;
                     Id t_ = Encounter1?.IdElement;
                     string u_ = t_?.Value;
-                    bool? v_ = context.Operators.Equivalent(s_, u_);
+                    CqlBoolean v_ = context.Operators.Equivalent(s_, u_);
                     return !v_;
                 }
 
-                bool? q_ = context.Operators.WhereAny<Encounter>(o_, p_);
+                CqlBoolean q_ = context.Operators.WhereAny<Encounter>(o_, p_);
                 return q_;
             }
 
-            bool? n_ = context.Operators.WhereAny<Encounter>(l_, m_);
+            CqlBoolean n_ = context.Operators.WhereAny<Encounter>(l_, m_);
             return n_;
         }
 
 
         CqlBoolean k_() {
             IEnumerable<Encounter> w_ = this.Qualifying_CAD_Encounter(context);
-            bool? x_ = context.Operators.Exists<Encounter>(w_);
+            CqlBoolean x_ = context.Operators.Exists<Encounter>(w_);
             return x_;
         }
 
-        return /* CQL 'and' (340:3-345:41) */ (/* CQL 'and' (340:3-344:5) */ ((CqlBoolean)i_
+        return /* CQL 'and' (340:3-345:41) */ (/* CQL 'and' (340:3-344:5) */ (i_
             && j_())
             && k_());
     }
@@ -527,7 +527,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 CqlQuantity o_ = context.Operators.Quantity(3m, "years");
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(p_, n_, true, false);
-                bool? r_ = context.Operators.In<CqlDateTime>(k_, q_, "day");
+                CqlBoolean r_ = context.Operators.In<CqlDateTime>(k_, q_, "day");
 
                 CqlBoolean s_() {
                     Period u_ = EncounterWithCADProxy?.Period;
@@ -539,17 +539,17 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
                 CqlBoolean t_() {
                     IEnumerable<object> x_ = AHAOverall_4_1_000.Instance.Moderate_or_Severe_LVSD_Findings(context);
-                    bool? y_ = context.Operators.Exists<object>(x_);
+                    CqlBoolean y_ = context.Operators.Exists<object>(x_);
                     return !y_;
                 }
 
-                return /* CQL 'and' (110:17-112:47) */ (/* CQL 'and' (110:17-111:61) */ (/* CQL 'and' (110:17-110:134) */ ((CqlBoolean)r_
+                return /* CQL 'and' (110:17-112:47) */ (/* CQL 'and' (110:17-111:61) */ (/* CQL 'and' (110:17-110:134) */ (r_
                     && s_())
                     && t_())
                     && AHAOverall_4_1_000.Instance.isVerified(context, MyocardialInfarction));
             }
 
-            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Condition>(g_, h_);
             return i_;
         }
 
@@ -566,15 +566,15 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     private bool? Denominator_2_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
 
         CqlBoolean b_() {
             IEnumerable<Encounter> c_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
-            bool? d_ = context.Operators.Exists<Encounter>(c_);
+            CqlBoolean d_ = context.Operators.Exists<Encounter>(c_);
             return d_;
         }
 
-        return /* CQL 'and' (49:3-50:54) */ ((CqlBoolean)a_
+        return /* CQL 'and' (49:3-50:54) */ (a_
             && b_());
     }
 
@@ -592,11 +592,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(Condition AtrioventricularBlockDiagnosis) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
-            bool? f_ = this.overlapsDayOfEncounter(context, AtrioventricularBlockDiagnosis, e_);
+            CqlBoolean f_ = this.overlapsDayOfEncounter(context, AtrioventricularBlockDiagnosis, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -614,11 +614,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(Condition CardiacPacerDiagnosis) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
-            bool? f_ = this.overlapsDayOfEncounter(context, CardiacPacerDiagnosis, e_);
+            CqlBoolean f_ = this.overlapsDayOfEncounter(context, CardiacPacerDiagnosis, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -679,25 +679,25 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 Period k_ = CADEncounterMI?.Period;
                 CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
                 CqlDateTime m_ = context.Operators.End(l_);
-                bool? n_ = context.Operators.Before(j_, m_, (string)default);
+                CqlBoolean n_ = context.Operators.Before(j_, m_, (string)default);
 
                 CqlBoolean o_() {
                     Code<EventStatus> v_ = ImplantedCardiacPacer?.StatusElement;
                     EventStatus? w_ = v_?.Value;
                     string x_ = context.Operators.Convert<string>(w_);
-                    bool? y_ = context.Operators.Equal(x_, "completed");
+                    CqlBoolean y_ = context.Operators.Equal(x_, "completed");
                     return y_;
                 }
 
-                return /* CQL 'and' (102:19-103:56) */ ((CqlBoolean)n_
+                return /* CQL 'and' (102:19-103:56) */ (n_
                     && o_());
             }
 
-            bool? g_ = context.Operators.WhereAny<Encounter>(e_, f_);
+            CqlBoolean g_ = context.Operators.WhereAny<Encounter>(e_, f_);
             return g_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Procedure>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Procedure>(b_, c_);
         return d_;
     }
 
@@ -710,8 +710,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     private bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI(context);
-        return /* CQL 'and' (53:3-55:91) */ (/* CQL 'and' (53:3-54:95) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI(context);
+        return /* CQL 'and' (53:3-55:91) */ (/* CQL 'and' (53:3-54:95) */ (a_
             && !(this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI(context)))
             && !(this.Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI(context)));
     }
@@ -743,7 +743,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             DataType m_ = tuple_ezawxthbubhdjanfnawxfxgjj?.HeartRateExam?.Effective;
             object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
             CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, (string)default);
+            CqlBoolean p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, (string)default);
 
             CqlBoolean q_() {
                 Code<ObservationStatus> t_ = tuple_ezawxthbubhdjanfnawxfxgjj?.HeartRateExam?.StatusElement;
@@ -754,7 +754,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
+                CqlBoolean x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
                 return x_;
             }
 
@@ -763,7 +763,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 DataType y_ = tuple_ezawxthbubhdjanfnawxfxgjj?.HeartRateExam?.Value;
                 CqlQuantity z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_ as Quantity);
                 CqlQuantity aa_ = context.Operators.Quantity(50m, "/min");
-                bool? ab_ = context.Operators.Less(z_, aa_);
+                CqlBoolean ab_ = context.Operators.Less(z_, aa_);
                 return ab_;
             }
 
@@ -777,7 +777,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     DataType ao_ = MostRecentPriorHeartRateExam?.Effective;
                     object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
                     CqlInterval<CqlDateTime> aq_ = QICoreCommon_4_0_000.Instance.toInterval(context, ap_);
-                    bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(an_, aq_, (string)default);
+                    CqlBoolean ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(an_, aq_, (string)default);
 
                     CqlBoolean as_() {
                         Code<ObservationStatus> au_ = MostRecentPriorHeartRateExam?.StatusElement;
@@ -788,7 +788,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                             "amended",
                             "corrected",
                         ];
-                        bool? ay_ = context.Operators.In<string>(aw_, (IEnumerable<string>)ax_);
+                        CqlBoolean ay_ = context.Operators.In<string>(aw_, (IEnumerable<string>)ax_);
                         return ay_;
                     }
 
@@ -800,11 +800,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         DataType bc_ = tuple_ezawxthbubhdjanfnawxfxgjj?.HeartRateExam?.Effective;
                         object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
                         CqlInterval<CqlDateTime> be_ = QICoreCommon_4_0_000.Instance.toInterval(context, bd_);
-                        bool? bf_ = context.Operators.Before(bb_, be_, (string)default);
+                        CqlBoolean bf_ = context.Operators.Before(bb_, be_, (string)default);
                         return bf_;
                     }
 
-                    return /* CQL 'and' (68:11-70:111) */ (/* CQL 'and' (68:17-69:90) */ ((CqlBoolean)ar_
+                    return /* CQL 'and' (68:11-70:111) */ (/* CQL 'and' (68:17-69:90) */ (ar_
                         && as_())
                         && at_());
                 }
@@ -824,11 +824,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 DataType ai_ = ah_?.Value;
                 CqlQuantity aj_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ai_ as Quantity);
                 CqlQuantity ak_ = context.Operators.Quantity(50m, "/min");
-                bool? al_ = context.Operators.Less(aj_, ak_);
+                CqlBoolean al_ = context.Operators.Less(aj_, ak_);
                 return al_;
             }
 
-            return /* CQL 'and' (73:7-76:48) */ (/* CQL 'and' (73:13-75:43) */ (/* CQL 'and' (73:13-74:71) */ ((CqlBoolean)p_
+            return /* CQL 'and' (73:7-76:48) */ (/* CQL 'and' (73:13-75:43) */ (/* CQL 'and' (73:13-74:71) */ (p_
                 && q_())
                 && r_())
                 && s_());
@@ -842,7 +842,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
         }
 
         IEnumerable<(CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterMI)?> h_ = context.Operators.SelectDistinct<(CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterMI)?, (CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterMI)?>(f_, g_);
-        bool? i_ = context.Operators.Exists<(CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterMI)?>(h_);
+        CqlBoolean i_ = context.Operators.Exists<(CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterMI)?>(h_);
         return i_;
     }
 
@@ -869,11 +869,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 Period l_ = EncounterWithCADProxy?.Period;
                 CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
                 CqlDateTime n_ = context.Operators.End(m_);
-                bool? o_ = context.Operators.Before(k_, n_, (string)default);
+                CqlBoolean o_ = context.Operators.Before(k_, n_, (string)default);
                 return o_;
             }
 
-            bool? f_ = context.Operators.WhereAny<object>(d_, e_);
+            CqlBoolean f_ = context.Operators.WhereAny<object>(d_, e_);
             return f_;
         }
 
@@ -893,7 +893,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 CqlDateTime e_ = context.Operators.Convert<CqlDateTime>(d_);
                 Period f_ = Visit?.Period;
                 CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, f_);
-                bool? h_ = context.Operators.In<CqlDateTime>(e_, g_, "day");
+                CqlBoolean h_ = context.Operators.In<CqlDateTime>(e_, g_, "day");
 
                 CqlBoolean i_() {
                     Code<MedicationRequest.MedicationrequestStatus> l_ = Order?.StatusElement;
@@ -903,7 +903,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         "active",
                         "completed",
                     ];
-                    bool? p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
+                    CqlBoolean p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
                     return p_;
                 }
 
@@ -919,18 +919,18 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         "filler-order",
                         "instance-order",
                     ];
-                    bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
+                    CqlBoolean u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
                     return u_;
                 }
 
 
                 CqlBoolean k_() {
                     FhirBoolean v_ = Order?.DoNotPerformElement;
-                    bool? w_ = v_?.Value;
-                    return !((bool?)(/* CQL 'is true' (396:15-396:44) */ w_ is true));
+                    CqlBoolean w_ = v_?.Value;
+                    return !((bool?)(/* CQL 'is true' (396:15-396:44) */ w_.IsTrue));
                 }
 
-                return (bool?)(/* CQL 'and' (393:46-396:44) */ (/* CQL 'and' (393:46-395:109) */ (/* CQL 'and' (393:46-394:55) */ ((CqlBoolean)h_
+                return (bool?)(/* CQL 'and' (393:46-396:44) */ (/* CQL 'and' (393:46-395:109) */ (/* CQL 'and' (393:46-394:55) */ (h_
                     && i_())
                     && j_())
                     && k_()));
@@ -941,7 +941,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 CqlDateTime y_ = context.Operators.Convert<CqlDateTime>(x_);
                 Period z_ = Visit?.Period;
                 CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
-                bool? ab_ = context.Operators.In<CqlDateTime>(y_, aa_, "day");
+                CqlBoolean ab_ = context.Operators.In<CqlDateTime>(y_, aa_, "day");
 
                 CqlBoolean ac_() {
                     Code<MedicationRequest.MedicationRequestIntent> ad_ = Order?.IntentElement;
@@ -954,11 +954,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         "filler-order",
                         "instance-order",
                     ];
-                    bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
+                    CqlBoolean ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
                     return ah_;
                 }
 
-                return (bool?)(/* CQL 'and' (397:51-398:109) */ ((CqlBoolean)ab_
+                return (bool?)(/* CQL 'and' (397:51-398:109) */ (ab_
                     && ac_()));
             }
             else
@@ -968,7 +968,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
         }
 
         IEnumerable<bool?> b_ = context.Operators.SelectDistinct<Encounter, bool?>(EncounterList, a_);
-        bool? c_ = context.Operators.AnyTrue(b_);
+        CqlBoolean c_ = context.Operators.AnyTrue(b_);
         return c_;
     }
 
@@ -986,11 +986,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(MedicationRequest BetaBlockerForLVSDOrdered) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-            bool? f_ = this.authoredDuringDayOfEncounter(context, BetaBlockerForLVSDOrdered as MedicationRequest, e_);
+            CqlBoolean f_ = this.authoredDuringDayOfEncounter(context, BetaBlockerForLVSDOrdered as MedicationRequest, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<MedicationRequest>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<MedicationRequest>(b_, c_);
         return d_;
     }
 
@@ -1070,11 +1070,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> y_ = context.Operators.First<CqlInterval<CqlDateTime>>(x_);
                 Period z_ = CADEncounterModerateOrSevereLVSD?.Period;
                 CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
-                bool? ab_ = context.Operators.OverlapsAfter(y_, aa_, "day");
+                CqlBoolean ab_ = context.Operators.OverlapsAfter(y_, aa_, "day");
                 return ab_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Encounter>(g_, h_);
             return i_;
         }
 
@@ -1088,7 +1088,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 "active",
                 "completed",
             ];
-            bool? aq_ = context.Operators.In<string>(ao_, (IEnumerable<string>)ap_);
+            CqlBoolean aq_ = context.Operators.In<string>(ao_, (IEnumerable<string>)ap_);
 
             CqlBoolean ar_() {
                 Code<MedicationRequest.MedicationRequestIntent> as_ = ActiveBetaBlockerForLVSD?.IntentElement;
@@ -1101,15 +1101,15 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     "filler-order",
                     "instance-order",
                 ];
-                bool? aw_ = context.Operators.In<string>(au_, (IEnumerable<string>)av_);
+                CqlBoolean aw_ = context.Operators.In<string>(au_, (IEnumerable<string>)av_);
                 return aw_;
             }
 
-            return /* CQL 'and' (197:7-198:126) */ ((CqlBoolean)aq_
+            return /* CQL 'and' (197:7-198:126) */ (aq_
                 && ar_());
         }
 
-        bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+        CqlBoolean f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
         return f_;
     }
 
@@ -1122,8 +1122,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     private bool? Numerator_1_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_Beta_Blocker_Therapy_for_LVSD_Ordered(context);
-        return /* CQL 'or' (80:3-81:58) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_Beta_Blocker_Therapy_for_LVSD_Ordered(context);
+        return /* CQL 'or' (80:3-81:58) */ (a_
             || this.Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(context));
     }
 
@@ -1141,11 +1141,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(MedicationRequest BetaBlockerOrdered) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
-            bool? f_ = this.authoredDuringDayOfEncounter(context, BetaBlockerOrdered as MedicationRequest, e_);
+            CqlBoolean f_ = this.authoredDuringDayOfEncounter(context, BetaBlockerOrdered as MedicationRequest, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<MedicationRequest>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<MedicationRequest>(b_, c_);
         return d_;
     }
 
@@ -1225,11 +1225,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> y_ = context.Operators.First<CqlInterval<CqlDateTime>>(x_);
                 Period z_ = CADEncounterMI?.Period;
                 CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
-                bool? ab_ = context.Operators.OverlapsAfter(y_, aa_, "day");
+                CqlBoolean ab_ = context.Operators.OverlapsAfter(y_, aa_, "day");
                 return ab_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Encounter>(g_, h_);
             return i_;
         }
 
@@ -1243,7 +1243,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 "active",
                 "completed",
             ];
-            bool? aq_ = context.Operators.In<string>(ao_, (IEnumerable<string>)ap_);
+            CqlBoolean aq_ = context.Operators.In<string>(ao_, (IEnumerable<string>)ap_);
 
             CqlBoolean ar_() {
                 Code<MedicationRequest.MedicationRequestIntent> as_ = ActiveBetaBlocker?.IntentElement;
@@ -1256,15 +1256,15 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     "filler-order",
                     "instance-order",
                 ];
-                bool? aw_ = context.Operators.In<string>(au_, (IEnumerable<string>)av_);
+                CqlBoolean aw_ = context.Operators.In<string>(au_, (IEnumerable<string>)av_);
                 return aw_;
             }
 
-            return /* CQL 'and' (185:7-186:119) */ ((CqlBoolean)aq_
+            return /* CQL 'and' (185:7-186:119) */ (aq_
                 && ar_());
         }
 
-        bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+        CqlBoolean f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
         return f_;
     }
 
@@ -1277,8 +1277,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     private bool? Numerator_2_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_Beta_Blocker_Therapy_Ordered(context);
-        return /* CQL 'or' (84:3-85:49) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_Beta_Blocker_Therapy_Ordered(context);
+        return /* CQL 'or' (84:3-85:49) */ (a_
             || this.Is_Currently_Taking_Beta_Blocker_Therapy(context));
     }
 
@@ -1343,15 +1343,15 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     private bool? Denominator_1_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
 
         CqlBoolean b_() {
             IEnumerable<Encounter> c_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-            bool? d_ = context.Operators.Exists<Encounter>(c_);
+            CqlBoolean d_ = context.Operators.Exists<Encounter>(c_);
             return d_;
         }
 
-        return /* CQL 'and' (115:3-116:80) */ ((CqlBoolean)a_
+        return /* CQL 'and' (115:3-116:80) */ (a_
             && b_());
     }
 
@@ -1369,11 +1369,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(Condition AtrioventricularBlock) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-            bool? f_ = this.overlapsDayOfEncounter(context, AtrioventricularBlock, e_);
+            CqlBoolean f_ = this.overlapsDayOfEncounter(context, AtrioventricularBlock, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -1391,11 +1391,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(Condition CardiacPacerDiagnosis) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-            bool? f_ = this.overlapsDayOfEncounter(context, CardiacPacerDiagnosis, e_);
+            CqlBoolean f_ = this.overlapsDayOfEncounter(context, CardiacPacerDiagnosis, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -1456,15 +1456,15 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 Period k_ = CADEncounterModerateOrSevereLVSD?.Period;
                 CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
                 CqlDateTime m_ = context.Operators.End(l_);
-                bool? n_ = context.Operators.Before(j_, m_, (string)default);
+                CqlBoolean n_ = context.Operators.Before(j_, m_, (string)default);
                 return n_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Encounter>(e_, f_);
+            CqlBoolean g_ = context.Operators.WhereAny<Encounter>(e_, f_);
             return g_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Procedure>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Procedure>(b_, c_);
         return d_;
     }
 
@@ -1477,8 +1477,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     private bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-        return /* CQL 'and' (119:3-121:117) */ (/* CQL 'and' (119:3-120:121) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
+        return /* CQL 'and' (119:3-121:117) */ (/* CQL 'and' (119:3-120:121) */ (a_
             && !(this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)))
             && !(this.Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)));
     }
@@ -1510,7 +1510,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             DataType m_ = tuple_dyeiilrxycxwhkhdhbjdnjgdc?.HeartRateExam?.Effective;
             object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
             CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, (string)default);
+            CqlBoolean p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, (string)default);
 
             CqlBoolean q_() {
                 Code<ObservationStatus> t_ = tuple_dyeiilrxycxwhkhdhbjdnjgdc?.HeartRateExam?.StatusElement;
@@ -1521,7 +1521,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
+                CqlBoolean x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
                 return x_;
             }
 
@@ -1530,7 +1530,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 DataType y_ = tuple_dyeiilrxycxwhkhdhbjdnjgdc?.HeartRateExam?.Value;
                 CqlQuantity z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_ as Quantity);
                 CqlQuantity aa_ = context.Operators.Quantity(50m, "/min");
-                bool? ab_ = context.Operators.Less(z_, aa_);
+                CqlBoolean ab_ = context.Operators.Less(z_, aa_);
                 return ab_;
             }
 
@@ -1544,7 +1544,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     DataType ao_ = MostRecentPriorHeartRateExam?.Effective;
                     object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
                     CqlInterval<CqlDateTime> aq_ = QICoreCommon_4_0_000.Instance.toInterval(context, ap_);
-                    bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(an_, aq_, (string)default);
+                    CqlBoolean ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(an_, aq_, (string)default);
 
                     CqlBoolean as_() {
                         Code<ObservationStatus> au_ = MostRecentPriorHeartRateExam?.StatusElement;
@@ -1555,7 +1555,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                             "amended",
                             "corrected",
                         ];
-                        bool? ay_ = context.Operators.In<string>(aw_, (IEnumerable<string>)ax_);
+                        CqlBoolean ay_ = context.Operators.In<string>(aw_, (IEnumerable<string>)ax_);
                         return ay_;
                     }
 
@@ -1567,11 +1567,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         DataType bc_ = tuple_dyeiilrxycxwhkhdhbjdnjgdc?.HeartRateExam?.Effective;
                         object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
                         CqlInterval<CqlDateTime> be_ = QICoreCommon_4_0_000.Instance.toInterval(context, bd_);
-                        bool? bf_ = context.Operators.Before(bb_, be_, (string)default);
+                        CqlBoolean bf_ = context.Operators.Before(bb_, be_, (string)default);
                         return bf_;
                     }
 
-                    return /* CQL 'and' (134:11-136:111) */ (/* CQL 'and' (134:17-135:90) */ ((CqlBoolean)ar_
+                    return /* CQL 'and' (134:11-136:111) */ (/* CQL 'and' (134:17-135:90) */ (ar_
                         && as_())
                         && at_());
                 }
@@ -1591,11 +1591,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 DataType ai_ = ah_?.Value;
                 CqlQuantity aj_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ai_ as Quantity);
                 CqlQuantity ak_ = context.Operators.Quantity(50m, "/min");
-                bool? al_ = context.Operators.Less(aj_, ak_);
+                CqlBoolean al_ = context.Operators.Less(aj_, ak_);
                 return al_;
             }
 
-            return /* CQL 'and' (139:7-142:48) */ (/* CQL 'and' (139:13-141:43) */ (/* CQL 'and' (139:13-140:71) */ ((CqlBoolean)p_
+            return /* CQL 'and' (139:7-142:48) */ (/* CQL 'and' (139:13-141:43) */ (/* CQL 'and' (139:13-140:71) */ (p_
                 && q_())
                 && r_())
                 && s_());
@@ -1609,7 +1609,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
         }
 
         IEnumerable<(CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterModerateOrSevereLVSD)?> h_ = context.Operators.SelectDistinct<(CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterModerateOrSevereLVSD)?, (CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterModerateOrSevereLVSD)?>(f_, g_);
-        bool? i_ = context.Operators.Exists<(CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterModerateOrSevereLVSD)?>(h_);
+        CqlBoolean i_ = context.Operators.Exists<(CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterModerateOrSevereLVSD)?>(h_);
         return i_;
     }
 
@@ -1630,7 +1630,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> j_ = context.Operators.Interval(g_, i_, true, true);
                 Period k_ = Visit?.Period;
                 CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                bool? m_ = context.Operators.OverlapsAfter(j_, l_, "day");
+                CqlBoolean m_ = context.Operators.OverlapsAfter(j_, l_, "day");
 
                 CqlBoolean n_() {
                     object p_ = context.Operators.LateBoundProperty<object>(Event, "clinicalStatus");
@@ -1641,7 +1641,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_ as CodeableConcept);
                         CqlCode u_ = QICoreCommon_4_0_000.Instance.allergy_active(context);
                         CqlConcept v_ = context.Operators.ConvertCodeToConcept(u_);
-                        bool? w_ = context.Operators.Equivalent(t_, v_);
+                        CqlBoolean w_ = context.Operators.Equivalent(t_, v_);
                         return w_;
                     }
 
@@ -1659,7 +1659,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         CqlConcept ab_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aa_ as CodeableConcept);
                         CqlCode ac_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
                         CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
-                        bool? ae_ = context.Operators.Equivalent(ab_, ad_);
+                        CqlBoolean ae_ = context.Operators.Equivalent(ab_, ad_);
                         return ae_;
                     }
 
@@ -1667,23 +1667,23 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         || z_());
                 }
 
-                return (bool?)(/* CQL 'and' (376:47-382:11) */ (/* CQL 'and' (376:47-379:11) */ ((CqlBoolean)m_
+                return (bool?)(/* CQL 'and' (376:47-382:11) */ (/* CQL 'and' (376:47-379:11) */ (m_
                     && n_())
                     && o_()));
             }
             else if (Event is Condition)
             {
-                bool? af_ = AHAOverall_4_1_000.Instance.isVerified(context, Event as AllergyIntolerance);
+                CqlBoolean af_ = AHAOverall_4_1_000.Instance.isVerified(context, Event as AllergyIntolerance);
 
                 CqlBoolean ag_() {
                     CqlInterval<CqlDateTime> ah_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, (Event as Condition) as Condition);
                     Period ai_ = Visit?.Period;
                     CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ai_);
-                    bool? ak_ = context.Operators.OverlapsAfter(ah_, aj_, "day");
+                    CqlBoolean ak_ = context.Operators.OverlapsAfter(ah_, aj_, "day");
                     return ak_;
                 }
 
-                return (bool?)(/* CQL 'and' (383:60-384:75) */ ((CqlBoolean)af_
+                return (bool?)(/* CQL 'and' (383:60-384:75) */ (af_
                     && ag_()));
             }
             else
@@ -1693,7 +1693,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
         }
 
         IEnumerable<bool?> b_ = context.Operators.SelectDistinct<Encounter, bool?>(EncounterList, a_);
-        bool? c_ = context.Operators.AnyTrue(b_);
+        CqlBoolean c_ = context.Operators.AnyTrue(b_);
         return c_;
     }
 
@@ -1715,11 +1715,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? g_(AllergyIntolerance BetaBlockerAllergyIntolerance) {
             IEnumerable<Encounter> i_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
-            bool? j_ = this.overlapsAfterDayOfEncounter(context, BetaBlockerAllergyIntolerance, i_);
+            CqlBoolean j_ = this.overlapsAfterDayOfEncounter(context, BetaBlockerAllergyIntolerance, i_);
             return j_;
         }
 
-        bool? h_ = context.Operators.WhereAny<AllergyIntolerance>(f_, g_);
+        CqlBoolean h_ = context.Operators.WhereAny<AllergyIntolerance>(f_, g_);
         return h_;
     }
 
@@ -1737,11 +1737,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(Condition ArrhythmiaDiagnosis) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-            bool? f_ = this.overlapsDayOfEncounter(context, ArrhythmiaDiagnosis, e_);
+            CqlBoolean f_ = this.overlapsDayOfEncounter(context, ArrhythmiaDiagnosis, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -1759,11 +1759,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(Condition ArrhythmiaDiagnosis) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
-            bool? f_ = this.overlapsDayOfEncounter(context, ArrhythmiaDiagnosis, e_);
+            CqlBoolean f_ = this.overlapsDayOfEncounter(context, ArrhythmiaDiagnosis, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -1781,11 +1781,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(Condition AsthmaDiagnosis) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-            bool? f_ = this.overlapsDayOfEncounter(context, AsthmaDiagnosis, e_);
+            CqlBoolean f_ = this.overlapsDayOfEncounter(context, AsthmaDiagnosis, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -1803,11 +1803,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(Condition AsthmaDiagnosis) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
-            bool? f_ = this.overlapsDayOfEncounter(context, AsthmaDiagnosis, e_);
+            CqlBoolean f_ = this.overlapsDayOfEncounter(context, AsthmaDiagnosis, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -1825,11 +1825,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(Condition BradycardiaDiagnosis) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-            bool? f_ = this.overlapsDayOfEncounter(context, BradycardiaDiagnosis, e_);
+            CqlBoolean f_ = this.overlapsDayOfEncounter(context, BradycardiaDiagnosis, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -1847,11 +1847,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(Condition BradycardiaDiagnosis) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
-            bool? f_ = this.overlapsDayOfEncounter(context, BradycardiaDiagnosis, e_);
+            CqlBoolean f_ = this.overlapsDayOfEncounter(context, BradycardiaDiagnosis, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -1872,11 +1872,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? f_(Condition BetaBlockerAllergyOrIntoleranceDiagnosis) {
             IEnumerable<Encounter> h_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-            bool? i_ = this.overlapsAfterDayOfEncounter(context, BetaBlockerAllergyOrIntoleranceDiagnosis, h_);
+            CqlBoolean i_ = this.overlapsAfterDayOfEncounter(context, BetaBlockerAllergyOrIntoleranceDiagnosis, h_);
             return i_;
         }
 
-        bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
+        CqlBoolean g_ = context.Operators.WhereAny<Condition>(e_, f_);
         return g_;
     }
 
@@ -1897,11 +1897,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? f_(Condition BetaBlockerAllergyOrIntoleranceDiagnosis) {
             IEnumerable<Encounter> h_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
-            bool? i_ = this.overlapsAfterDayOfEncounter(context, BetaBlockerAllergyOrIntoleranceDiagnosis, h_);
+            CqlBoolean i_ = this.overlapsAfterDayOfEncounter(context, BetaBlockerAllergyOrIntoleranceDiagnosis, h_);
             return i_;
         }
 
-        bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
+        CqlBoolean g_ = context.Operators.WhereAny<Condition>(e_, f_);
         return g_;
     }
 
@@ -1919,11 +1919,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(Condition HypotensionDiagnosis) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-            bool? f_ = this.overlapsDayOfEncounter(context, HypotensionDiagnosis, e_);
+            CqlBoolean f_ = this.overlapsDayOfEncounter(context, HypotensionDiagnosis, e_);
             return f_;
         }
 
-        bool? d_ = context.Operators.WhereAny<Condition>(b_, c_);
+        CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
         return d_;
     }
 
@@ -1943,11 +1943,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? e_(Condition HypotensionDiagnosis) {
             IEnumerable<Encounter> g_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
-            bool? h_ = this.overlapsDayOfEncounter(context, HypotensionDiagnosis as Condition, g_);
+            CqlBoolean h_ = this.overlapsDayOfEncounter(context, HypotensionDiagnosis as Condition, g_);
             return h_;
         }
 
-        bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
+        CqlBoolean f_ = context.Operators.WhereAny<Condition>(d_, e_);
         return f_;
     }
 
@@ -1969,11 +1969,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? g_(AllergyIntolerance BetaBlockerAllergyIntolerance) {
             IEnumerable<Encounter> i_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-            bool? j_ = this.overlapsAfterDayOfEncounter(context, BetaBlockerAllergyIntolerance, i_);
+            CqlBoolean j_ = this.overlapsAfterDayOfEncounter(context, BetaBlockerAllergyIntolerance, i_);
             return j_;
         }
 
-        bool? h_ = context.Operators.WhereAny<AllergyIntolerance>(f_, g_);
+        CqlBoolean h_ = context.Operators.WhereAny<AllergyIntolerance>(f_, g_);
         return h_;
     }
 
@@ -1997,11 +1997,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 CqlDateTime k_ = context.Operators.Convert<CqlDateTime>(j_);
                 Period l_ = LVSDVisit?.Period;
                 CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                bool? n_ = context.Operators.In<CqlDateTime>(k_, m_, "day");
+                CqlBoolean n_ = context.Operators.In<CqlDateTime>(k_, m_, "day");
                 return n_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Encounter>(g_, h_);
             return i_;
         }
 
@@ -2015,7 +2015,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 "active",
                 "completed",
             ];
-            bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
+            CqlBoolean s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
 
             CqlBoolean t_() {
                 Code<MedicationRequest.MedicationRequestIntent> v_ = NoBetaBlockerForLVSDOrdered?.IntentElement;
@@ -2028,7 +2028,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     "filler-order",
                     "instance-order",
                 ];
-                bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
+                CqlBoolean z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
                 return z_;
             }
 
@@ -2043,7 +2043,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
                 IEnumerable<CqlConcept> ac_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)aa_, ab_);
                 CqlValueSet ad_ = this.Medical_Reason(context);
-                bool? ae_ = context.Operators.ConceptsInValueSet(ac_, ad_);
+                CqlBoolean ae_ = context.Operators.ConceptsInValueSet(ac_, ad_);
 
                 CqlBoolean af_() {
                     List<CodeableConcept> ah_ = NoBetaBlockerForLVSDOrdered?.ReasonCode;
@@ -2055,20 +2055,20 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
                     IEnumerable<CqlConcept> aj_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ah_, ai_);
                     CqlValueSet ak_ = this.Patient_Reason(context);
-                    bool? al_ = context.Operators.ConceptsInValueSet(aj_, ak_);
+                    CqlBoolean al_ = context.Operators.ConceptsInValueSet(aj_, ak_);
                     return al_;
                 }
 
-                return /* CQL 'or' (323:13-325:9) */ ((CqlBoolean)ae_
+                return /* CQL 'or' (323:13-325:9) */ (ae_
                     || af_());
             }
 
-            return /* CQL 'and' (321:7-325:9) */ (/* CQL 'and' (321:13-322:129) */ ((CqlBoolean)s_
+            return /* CQL 'and' (321:7-325:9) */ (/* CQL 'and' (321:13-322:129) */ (s_
                 && t_())
                 && u_());
         }
 
-        bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+        CqlBoolean f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
         return f_;
     }
 
@@ -2081,8 +2081,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     private bool? Denominator_Exceptions_1_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-        return /* CQL 'or' (290:3-298:126) */ (/* CQL 'or' (290:3-297:77) */ (/* CQL 'or' (290:3-296:141) */ (/* CQL 'or' (290:3-295:139) */ (/* CQL 'or' (290:3-294:118) */ (/* CQL 'or' (290:3-293:93) */ (/* CQL 'or' (290:3-292:93) */ (/* CQL 'or' (290:3-291:88) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
+        return /* CQL 'or' (290:3-298:126) */ (/* CQL 'or' (290:3-297:77) */ (/* CQL 'or' (290:3-296:141) */ (/* CQL 'or' (290:3-295:139) */ (/* CQL 'or' (290:3-294:118) */ (/* CQL 'or' (290:3-293:93) */ (/* CQL 'or' (290:3-292:93) */ (/* CQL 'or' (290:3-291:88) */ (a_
             || this.Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
             || this.Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
             || this.Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
@@ -2113,11 +2113,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 CqlDateTime k_ = context.Operators.Convert<CqlDateTime>(j_);
                 Period l_ = PriorMIVisit?.Period;
                 CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                bool? n_ = context.Operators.In<CqlDateTime>(k_, m_, "day");
+                CqlBoolean n_ = context.Operators.In<CqlDateTime>(k_, m_, "day");
                 return n_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Encounter>(g_, h_);
             return i_;
         }
 
@@ -2131,7 +2131,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 "active",
                 "completed",
             ];
-            bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
+            CqlBoolean s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
 
             CqlBoolean t_() {
                 Code<MedicationRequest.MedicationRequestIntent> v_ = NoBetaBlockerForLVSDOrdered?.IntentElement;
@@ -2144,7 +2144,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     "filler-order",
                     "instance-order",
                 ];
-                bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
+                CqlBoolean z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
                 return z_;
             }
 
@@ -2159,7 +2159,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
                 IEnumerable<CqlConcept> ac_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)aa_, ab_);
                 CqlValueSet ad_ = this.Medical_Reason(context);
-                bool? ae_ = context.Operators.ConceptsInValueSet(ac_, ad_);
+                CqlBoolean ae_ = context.Operators.ConceptsInValueSet(ac_, ad_);
 
                 CqlBoolean af_() {
                     List<CodeableConcept> ah_ = NoBetaBlockerForLVSDOrdered?.ReasonCode;
@@ -2171,20 +2171,20 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
                     IEnumerable<CqlConcept> aj_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ah_, ai_);
                     CqlValueSet ak_ = this.Patient_Reason(context);
-                    bool? al_ = context.Operators.ConceptsInValueSet(aj_, ak_);
+                    CqlBoolean al_ = context.Operators.ConceptsInValueSet(aj_, ak_);
                     return al_;
                 }
 
-                return /* CQL 'or' (334:13-336:9) */ ((CqlBoolean)ae_
+                return /* CQL 'or' (334:13-336:9) */ (ae_
                     || af_());
             }
 
-            return /* CQL 'and' (332:7-336:9) */ (/* CQL 'and' (332:13-333:129) */ ((CqlBoolean)s_
+            return /* CQL 'and' (332:7-336:9) */ (/* CQL 'and' (332:13-333:129) */ (s_
                 && t_())
                 && u_());
         }
 
-        bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+        CqlBoolean f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
         return f_;
     }
 
@@ -2197,8 +2197,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     private bool? Denominator_Exceptions_2_Compute(CqlContext context)
     {
-        bool? a_ = this.Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI(context);
-        return /* CQL 'or' (301:3-309:100) */ (/* CQL 'or' (301:3-308:76) */ (/* CQL 'or' (301:3-307:115) */ (/* CQL 'or' (301:3-306:113) */ (/* CQL 'or' (301:3-305:92) */ (/* CQL 'or' (301:3-304:67) */ (/* CQL 'or' (301:3-303:67) */ (/* CQL 'or' (301:3-302:62) */ ((CqlBoolean)a_
+        CqlBoolean a_ = this.Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI(context);
+        return /* CQL 'or' (301:3-309:100) */ (/* CQL 'or' (301:3-308:76) */ (/* CQL 'or' (301:3-307:115) */ (/* CQL 'or' (301:3-306:113) */ (/* CQL 'or' (301:3-305:92) */ (/* CQL 'or' (301:3-304:67) */ (/* CQL 'or' (301:3-303:67) */ (/* CQL 'or' (301:3-302:62) */ (a_
             || this.Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
             || this.Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
             || this.Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI(context))

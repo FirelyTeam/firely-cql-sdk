@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("SafeUseofOpioidsConcurrentPrescribingFHIR", "0.0.012")]
 public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrary, ISingleton<SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012>
 {
@@ -123,16 +123,16 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlDate k_ = context.Operators.DateFrom(j_);
             int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
-            bool? m_ = context.Operators.GreaterOrEqual(l_, 18);
+            CqlBoolean m_ = context.Operators.GreaterOrEqual(l_, 18);
 
             CqlBoolean n_() {
                 Code<Encounter.EncounterStatus> o_ = EncounterInpatient?.StatusElement;
                 string p_ = FHIRHelpers_4_0_001.Instance.ToString(context, o_);
-                bool? q_ = context.Operators.Equal(p_, "finished");
+                CqlBoolean q_ = context.Operators.Equal(p_, "finished");
                 return q_;
             }
 
-            return /* CQL 'and' (31:28-32:71) */ ((CqlBoolean)m_
+            return /* CQL 'and' (31:28-32:71) */ (m_
                 && n_());
         }
 
@@ -166,21 +166,21 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     string z_ = FHIRHelpers_4_0_001.Instance.ToString(context, y_ as FhirString);
                     IEnumerable<string> aa_ = context.Operators.Split(z_, "/");
                     string ab_ = context.Operators.Last<string>(aa_);
-                    bool? ac_ = context.Operators.Equal(x_, ab_);
+                    CqlBoolean ac_ = context.Operators.Equal(x_, ab_);
 
                     CqlBoolean ad_() {
                         CodeableConcept ae_ = M?.Code;
                         CqlConcept af_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ae_);
                         CqlValueSet ag_ = this.Schedule_II__and__III_Opioid_Medications(context);
-                        bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
+                        CqlBoolean ah_ = context.Operators.ConceptInValueSet(af_, ag_);
                         return ah_;
                     }
 
-                    return /* CQL 'and' */ ((CqlBoolean)ac_
+                    return /* CQL 'and' */ (ac_
                         && ad_());
                 }
 
-                bool? v_ = context.Operators.WhereAny<Medication>(t_, u_);
+                CqlBoolean v_ = context.Operators.WhereAny<Medication>(t_, u_);
                 return v_;
             }
 
@@ -199,21 +199,21 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     string ao_ = FHIRHelpers_4_0_001.Instance.ToString(context, an_ as FhirString);
                     IEnumerable<string> ap_ = context.Operators.Split(ao_, "/");
                     string aq_ = context.Operators.Last<string>(ap_);
-                    bool? ar_ = context.Operators.Equal(am_, aq_);
+                    CqlBoolean ar_ = context.Operators.Equal(am_, aq_);
 
                     CqlBoolean as_() {
                         CodeableConcept at_ = M?.Code;
                         CqlConcept au_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, at_);
                         CqlValueSet av_ = this.Schedule_IV_Benzodiazepines(context);
-                        bool? aw_ = context.Operators.ConceptInValueSet(au_, av_);
+                        CqlBoolean aw_ = context.Operators.ConceptInValueSet(au_, av_);
                         return aw_;
                     }
 
-                    return /* CQL 'and' */ ((CqlBoolean)ar_
+                    return /* CQL 'and' */ (ar_
                         && as_());
                 }
 
-                bool? ak_ = context.Operators.WhereAny<Medication>(ai_, aj_);
+                CqlBoolean ak_ = context.Operators.WhereAny<Medication>(ai_, aj_);
                 return ak_;
             }
 
@@ -227,11 +227,11 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     CqlConcept ba_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
                     CqlCode bb_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
                     CqlConcept bc_ = context.Operators.ConvertCodeToConcept(bb_);
-                    bool? bd_ = context.Operators.Equivalent(ba_, bc_);
+                    CqlBoolean bd_ = context.Operators.Equivalent(ba_, bc_);
                     return bd_;
                 }
 
-                bool? az_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)ax_, ay_);
+                CqlBoolean az_ = context.Operators.WhereAny<CodeableConcept>((IEnumerable<CodeableConcept>)ax_, ay_);
                 return az_;
             }
 
@@ -243,12 +243,12 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 CqlDateTime bf_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, be_);
                 Period bg_ = InpatientEncounter?.Period;
                 CqlInterval<CqlDateTime> bh_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bg_);
-                bool? bi_ = context.Operators.In<CqlDateTime>(bf_, bh_, (string)default);
+                CqlBoolean bi_ = context.Operators.In<CqlDateTime>(bf_, bh_, (string)default);
 
                 CqlBoolean bj_() {
                     Code<MedicationRequest.MedicationrequestStatus> bl_ = OpioidOrBenzodiazepineDischargeMedication?.StatusElement;
                     string bm_ = FHIRHelpers_4_0_001.Instance.ToString(context, bl_);
-                    bool? bn_ = context.Operators.Equal(bm_, "active");
+                    CqlBoolean bn_ = context.Operators.Equal(bm_, "active");
                     return bn_;
                 }
 
@@ -256,16 +256,16 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 CqlBoolean bk_() {
                     Code<MedicationRequest.MedicationRequestIntent> bo_ = OpioidOrBenzodiazepineDischargeMedication?.IntentElement;
                     string bp_ = FHIRHelpers_4_0_001.Instance.ToString(context, bo_);
-                    bool? bq_ = context.Operators.Equal(bp_, "plan");
+                    CqlBoolean bq_ = context.Operators.Equal(bp_, "plan");
                     return bq_;
                 }
 
-                return /* CQL 'and' (51:39-52:143) */ (/* CQL 'and' (51:39-52:80) */ ((CqlBoolean)bi_
+                return /* CQL 'and' (51:39-52:143) */ (/* CQL 'and' (51:39-52:80) */ (bi_
                     && bj_())
                     && bk_());
             }
 
-            bool? s_ = context.Operators.WhereAny<MedicationRequest>(q_, r_);
+            CqlBoolean s_ = context.Operators.WhereAny<MedicationRequest>(q_, r_);
             return s_;
         }
 
@@ -358,7 +358,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 CqlDateTime r_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, q_);
                 Period s_ = InpatientEncounter?.Period;
                 CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, s_);
-                bool? u_ = context.Operators.In<CqlDateTime>(r_, t_, (string)default);
+                CqlBoolean u_ = context.Operators.In<CqlDateTime>(r_, t_, (string)default);
                 return u_;
             }
 
@@ -371,7 +371,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
             IEnumerable<object> m_ = context.Operators.WhereSelect<MedicationRequest, object>(j_, k_, l_);
             IEnumerable<object> n_ = context.Operators.Distinct<object>(m_);
             int? o_ = context.Operators.Count<object>(n_);
-            bool? p_ = context.Operators.GreaterOrEqual(o_, 2);
+            CqlBoolean p_ = context.Operators.GreaterOrEqual(o_, 2);
             return p_;
         }
 
@@ -386,11 +386,11 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 CqlDateTime ab_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, aa_);
                 Period ac_ = InpatientEncounter?.Period;
                 CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ac_);
-                bool? ae_ = context.Operators.In<CqlDateTime>(ab_, ad_, (string)default);
+                CqlBoolean ae_ = context.Operators.In<CqlDateTime>(ab_, ad_, (string)default);
                 return ae_;
             }
 
-            bool? z_ = context.Operators.WhereAny<MedicationRequest>(x_, y_);
+            CqlBoolean z_ = context.Operators.WhereAny<MedicationRequest>(x_, y_);
             return z_;
         }
 
@@ -405,11 +405,11 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 CqlDateTime ak_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, aj_);
                 Period al_ = InpatientEncounter?.Period;
                 CqlInterval<CqlDateTime> am_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, al_);
-                bool? an_ = context.Operators.In<CqlDateTime>(ak_, am_, (string)default);
+                CqlBoolean an_ = context.Operators.In<CqlDateTime>(ak_, am_, (string)default);
                 return an_;
             }
 
-            bool? ai_ = context.Operators.WhereAny<MedicationRequest>(ag_, ah_);
+            CqlBoolean ai_ = context.Operators.WhereAny<MedicationRequest>(ag_, ah_);
             return ai_;
         }
 
@@ -437,11 +437,11 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Cancer);
                 Period n_ = InpatientEncounter?.Period;
                 CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
-                bool? p_ = context.Operators.Overlaps(m_, o_, (string)default);
+                CqlBoolean p_ = context.Operators.Overlaps(m_, o_, (string)default);
                 return p_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Condition>(g_, h_);
 
             CqlBoolean j_() {
                 CqlValueSet q_ = this.Palliative_or_Hospice_Care(context);
@@ -452,20 +452,20 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     CqlDateTime v_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, u_);
                     Period w_ = InpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, w_);
-                    bool? y_ = context.Operators.In<CqlDateTime>(v_, x_, (string)default);
+                    CqlBoolean y_ = context.Operators.In<CqlDateTime>(v_, x_, (string)default);
 
                     CqlBoolean z_() {
                         Code<RequestIntent> aa_ = PalliativeOrHospiceCareOrder?.IntentElement;
                         string ab_ = FHIRHelpers_4_0_001.Instance.ToString(context, aa_);
-                        bool? ac_ = context.Operators.Equal(ab_, "order");
+                        CqlBoolean ac_ = context.Operators.Equal(ab_, "order");
                         return ac_;
                     }
 
-                    return /* CQL 'and' (78:33-79:81) */ ((CqlBoolean)y_
+                    return /* CQL 'and' (78:33-79:81) */ (y_
                         && z_());
                 }
 
-                bool? t_ = context.Operators.WhereAny<ServiceRequest>(r_, s_);
+                CqlBoolean t_ = context.Operators.WhereAny<ServiceRequest>(r_, s_);
                 return t_;
             }
 
@@ -479,11 +479,11 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     CqlInterval<CqlDateTime> ai_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ah_);
                     Period aj_ = InpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, aj_);
-                    bool? al_ = context.Operators.Overlaps(ai_, ak_, (string)default);
+                    CqlBoolean al_ = context.Operators.Overlaps(ai_, ak_, (string)default);
                     return al_;
                 }
 
-                bool? ag_ = context.Operators.WhereAny<Procedure>(ae_, af_);
+                CqlBoolean ag_ = context.Operators.WhereAny<Procedure>(ae_, af_);
                 return ag_;
             }
 
@@ -496,14 +496,14 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     CodeableConcept aq_ = ap_?.DischargeDisposition;
                     CqlConcept ar_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, aq_);
                     CqlValueSet as_ = this.Discharge_To_Acute_Care_Facility(context);
-                    bool? at_ = context.Operators.ConceptInValueSet(ar_, as_);
+                    CqlBoolean at_ = context.Operators.ConceptInValueSet(ar_, as_);
 
                     CqlBoolean au_() {
                         Encounter.HospitalizationComponent aw_ = InpatientEncounter?.Hospitalization;
                         CodeableConcept ax_ = aw_?.DischargeDisposition;
                         CqlConcept ay_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ax_);
                         CqlValueSet az_ = this.Hospice_Care_Referral_or_Admission(context);
-                        bool? ba_ = context.Operators.ConceptInValueSet(ay_, az_);
+                        CqlBoolean ba_ = context.Operators.ConceptInValueSet(ay_, az_);
                         return ba_;
                     }
 
@@ -513,20 +513,20 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         CodeableConcept bc_ = bb_?.DischargeDisposition;
                         CqlConcept bd_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, bc_);
                         CqlValueSet be_ = this.Patient_Expired(context);
-                        bool? bf_ = context.Operators.ConceptInValueSet(bd_, be_);
+                        CqlBoolean bf_ = context.Operators.ConceptInValueSet(bd_, be_);
                         return bf_;
                     }
 
-                    return /* CQL 'or' (85:33-87:113) */ (/* CQL 'or' (85:39-86:132) */ ((CqlBoolean)at_
+                    return /* CQL 'or' (85:33-87:113) */ (/* CQL 'or' (85:39-86:132) */ (at_
                         || au_())
                         || av_());
                 }
 
-                bool? ao_ = context.Operators.WhereAny<Encounter>(am_, an_);
+                CqlBoolean ao_ = context.Operators.WhereAny<Encounter>(am_, an_);
                 return ao_;
             }
 
-            return /* CQL 'or' (73:27-88:29) */ (/* CQL 'or' (73:33-83:29) */ (/* CQL 'or' (73:33-80:29) */ ((CqlBoolean)i_
+            return /* CQL 'or' (73:27-88:29) */ (/* CQL 'or' (73:33-83:29) */ (/* CQL 'or' (73:33-80:29) */ (i_
                 || j_())
                 || k_())
                 || l_());

@@ -61,6 +61,23 @@ public readonly struct CqlBoolean : IEquatable<CqlBoolean>
     /// <summary>Whether this is a known value rather than <see cref="Null"/>.</summary>
     public bool HasValue => _state != NullState;
 
+    /// <summary>
+    /// Whether this is DEFINITELY true — CQL's <c>is true</c>, which is total: a null argument
+    /// yields <see langword="false"/> rather than null (§4 Logical Specification).
+    ///
+    /// <para>This is the <see cref="bool"/> a branch condition needs, and it is why generated code
+    /// does not have to convert back to <c>bool?</c> to ask the question: <c>x.IsTrue</c> says
+    /// exactly what <c>(bool?)x ?? false</c> said, without leaving the type.</para>
+    /// </summary>
+    public bool IsTrue => _state == TrueState;
+
+    /// <summary>
+    /// Whether this is DEFINITELY false — CQL's <c>is false</c>, likewise total, so
+    /// <see cref="Null"/> yields <see langword="false"/>. Note this is NOT the negation of
+    /// <see cref="IsTrue"/>: both are <see langword="false"/> for <see cref="Null"/>.
+    /// </summary>
+    public bool IsFalse => _state == FalseState;
+
     /// <summary>Converts a <see cref="bool"/> to its CQL counterpart.</summary>
     /// <param name="value">The value to convert.</param>
     public static implicit operator CqlBoolean(bool value) => value ? True : False;

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
 public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<MultipleResourcesExample_0_0_1>
 {
@@ -81,7 +81,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
                 "final",
                 "amended",
             ];
-            bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
+            CqlBoolean i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
             return i_;
         }
 
@@ -105,7 +105,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
             CodeableConcept e_ = C?.ClinicalStatus;
             CqlConcept f_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, e_);
             CqlValueSet g_ = this.Condition_Clinical_Status(context);
-            bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
+            CqlBoolean h_ = context.Operators.ConceptInValueSet(f_, g_);
             return h_;
         }
 

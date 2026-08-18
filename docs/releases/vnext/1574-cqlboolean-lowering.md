@@ -13,8 +13,27 @@
   destroying the skip. Such functions are only ever called, never converted to a delegate, so
   Roslyn gives them a struct closure passed by `ref` and they do not allocate — preserving the
   property that ruled out the `Lazy<bool?>` runtime overloads. (#1514)
-- `GeneratorToolVersion` is now **5.3.3.0**. Previously generated libraries keep working unchanged:
-  the invoker toolkit accepts any version in `[5.1.0.0, 5.4.0.0)`. (#1514)
+- **Boolean locals in generated method bodies are now declared `CqlBoolean` rather than `bool?`**, so
+  CQL logic reads in one type throughout: `CqlBoolean a_ = …;` then `a_ && b_`, with no per-operand
+  conversion. Across the checked-in corpora that is 5,701 locals and **zero** remaining `bool?`
+  locals, and it removes the 1,809 `(CqlBoolean)` operand conversions the previous shape needed. The
+  three-valued questions are asked in the type too — `x.IsTrue` where `(bool?)x ?? false` used to be,
+  `!x.HasValue` where `x is null` used to be (a struct has no null pattern, CS9135).
+
+  **Generated method signatures are unchanged and remain `bool?`.** This is a printing decision: the
+  IR keeps modelling CQL `Boolean` as `bool?`, because the operator binder matches `ICqlOperators`
+  overloads on it by reflection and a `CqlBoolean` cannot bind to a `bool?` parameter — a query
+  predicate's `Func<T, bool?>` is the case that proves it. Exactly 132 conversions remain, on the two
+  shapes that are not locals and cannot be retyped: method parameters, whose type is part of the
+  signature, and inline expressions that were never hoisted.
+
+  One conversion back is mandatory and kept: a `CqlBoolean` reaching an `object` parameter is
+  converted **first** (5 sites), because boxing carries the operand's own type and never applies a
+  user-defined conversion — without it the callee receives a boxed `CqlBoolean` where it expects a
+  boxed `bool?`, which compiles and then throws inside the comparers. (#1514)
+- `GeneratorToolVersion` is now **5.3.4.0**. Previously generated libraries keep working unchanged:
+  the invoker toolkit accepts any version in `[5.1.0.0, 5.4.0.0)`. Patch rather than minor because
+  the generated API — every emitted signature — is unchanged; only method-body locals move. (#1514)
 
 ## Other
 

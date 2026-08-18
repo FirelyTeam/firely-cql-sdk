@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS143FHIRPOAGOpticNerveEval", "1.0.000")]
 public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton<CMS143FHIRPOAGOpticNerveEval_1_0_000>
 {
@@ -189,13 +189,13 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
             Period r_ = QualifyingEncounter?.Period;
             CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-            bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, "day");
+            CqlBoolean t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, "day");
 
             CqlBoolean u_() {
                 Code<Encounter.EncounterStatus> w_ = QualifyingEncounter?.StatusElement;
                 Encounter.EncounterStatus? x_ = w_?.Value;
                 Code<Encounter.EncounterStatus> y_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(x_);
-                bool? z_ = context.Operators.Equal(y_, "finished");
+                CqlBoolean z_ = context.Operators.Equal(y_, "finished");
                 return z_;
             }
 
@@ -204,11 +204,11 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 Coding aa_ = QualifyingEncounter?.Class;
                 CqlCode ab_ = FHIRHelpers_4_4_000.Instance.ToCode(context, aa_);
                 CqlCode ac_ = this.@virtual(context);
-                bool? ad_ = context.Operators.Equivalent(ab_, ac_);
+                CqlBoolean ad_ = context.Operators.Equivalent(ab_, ac_);
                 return !ad_;
             }
 
-            return /* CQL 'and' (53:5-55:48) */ (/* CQL 'and' (53:11-54:49) */ ((CqlBoolean)t_
+            return /* CQL 'and' (53:5-55:48) */ (/* CQL 'and' (53:11-54:49) */ (t_
                 && u_())
                 && v_());
         }
@@ -229,14 +229,14 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
             CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
             CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
-            bool? h_ = context.Operators.Equivalent(e_, g_);
+            CqlBoolean h_ = context.Operators.Equivalent(e_, g_);
 
             CqlBoolean i_() {
                 CodeableConcept l_ = condition?.VerificationStatus;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
                 CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
                 CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
-                bool? p_ = context.Operators.Equivalent(m_, o_);
+                CqlBoolean p_ = context.Operators.Equivalent(m_, o_);
                 return p_;
             }
 
@@ -246,7 +246,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
                 CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
-                bool? u_ = context.Operators.Equivalent(r_, t_);
+                CqlBoolean u_ = context.Operators.Equivalent(r_, t_);
                 return u_;
             }
 
@@ -256,11 +256,11 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
                 CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
-                bool? z_ = context.Operators.Equivalent(w_, y_);
+                CqlBoolean z_ = context.Operators.Equivalent(w_, y_);
                 return z_;
             }
 
-            return /* CQL 'or' (99:52-103:3) */ (/* CQL 'or' (99:54-101:66) */ (/* CQL 'or' (99:54-100:66) */ ((CqlBoolean)h_
+            return /* CQL 'or' (99:52-103:3) */ (/* CQL 'or' (99:54-101:66) */ (/* CQL 'or' (99:54-100:66) */ (h_
                 || i_())
                 || j_())
                 || k_());
@@ -291,12 +291,12 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PrimaryOpenAngleGlaucoma);
                 Period k_ = ValidQualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                bool? m_ = context.Operators.Overlaps(j_, l_, "day");
-                return /* CQL 'and' (65:17-66:51) */ ((CqlBoolean)m_
+                CqlBoolean m_ = context.Operators.Overlaps(j_, l_, "day");
+                return /* CQL 'and' (65:17-66:51) */ (m_
                     && this.isVerified(context, PrimaryOpenAngleGlaucoma));
             }
 
-            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Condition>(g_, h_);
             return i_;
         }
 
@@ -321,15 +321,15 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
         CqlDateTime f_ = context.Operators.Start(e_);
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        bool? i_ = context.Operators.GreaterOrEqual(h_, 18);
+        CqlBoolean i_ = context.Operators.GreaterOrEqual(h_, 18);
 
         CqlBoolean j_() {
             IEnumerable<Encounter> k_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
-            bool? l_ = context.Operators.Exists<Encounter>(k_);
+            CqlBoolean l_ = context.Operators.Exists<Encounter>(k_);
             return l_;
         }
 
-        return /* CQL 'and' (58:3-59:54) */ ((CqlBoolean)i_
+        return /* CQL 'and' (58:3-59:54) */ (i_
             && j_());
     }
 
@@ -342,7 +342,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     private bool? Denominator_Compute(CqlContext context)
     {
-        bool? a_ = this.Initial_Population(context);
+        CqlBoolean a_ = this.Initial_Population(context);
         return a_;
     }
 
@@ -368,11 +368,11 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 CqlDateTime m_ = context.Operators.Convert<CqlDateTime>(l_);
                 Period n_ = EncounterWithPOAG?.Period;
                 CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
-                bool? p_ = context.Operators.In<CqlDateTime>(m_, o_, "day");
+                CqlBoolean p_ = context.Operators.In<CqlDateTime>(m_, o_, "day");
                 return p_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Encounter>(h_, i_);
+            CqlBoolean j_ = context.Operators.WhereAny<Encounter>(h_, i_);
             return j_;
         }
 
@@ -383,7 +383,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             bool? q_(Extension @this) {
                 FhirUri x_ = @this?.UrlElement;
                 string y_ = FHIRHelpers_4_4_000.Instance.ToString(context, x_);
-                bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                CqlBoolean z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
                 return z_;
             }
 
@@ -399,7 +399,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             object t_ = context.Operators.SingletonFrom<object>(s_);
             CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_ as CodeableConcept);
             CqlValueSet v_ = this.Medical_Reason(context);
-            bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
+            CqlBoolean w_ = context.Operators.ConceptInValueSet(u_, v_);
             return w_;
         }
 
@@ -429,11 +429,11 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 CqlDateTime m_ = context.Operators.Convert<CqlDateTime>(l_);
                 Period n_ = EncounterWithPOAG?.Period;
                 CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
-                bool? p_ = context.Operators.In<CqlDateTime>(m_, o_, "day");
+                CqlBoolean p_ = context.Operators.In<CqlDateTime>(m_, o_, "day");
                 return p_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Encounter>(h_, i_);
+            CqlBoolean j_ = context.Operators.WhereAny<Encounter>(h_, i_);
             return j_;
         }
 
@@ -444,7 +444,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             bool? q_(Extension @this) {
                 FhirUri x_ = @this?.UrlElement;
                 string y_ = FHIRHelpers_4_4_000.Instance.ToString(context, x_);
-                bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                CqlBoolean z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
                 return z_;
             }
 
@@ -460,7 +460,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             object t_ = context.Operators.SingletonFrom<object>(s_);
             CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_ as CodeableConcept);
             CqlValueSet v_ = this.Medical_Reason(context);
-            bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
+            CqlBoolean w_ = context.Operators.ConceptInValueSet(u_, v_);
             return w_;
         }
 
@@ -478,15 +478,15 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio(context);
-        bool? b_ = context.Operators.Exists<Observation>(a_);
+        CqlBoolean b_ = context.Operators.Exists<Observation>(a_);
 
         CqlBoolean c_() {
             IEnumerable<Observation> d_ = this.Medical_Reason_for_Not_Performing_Optic_Disc_Exam(context);
-            bool? e_ = context.Operators.Exists<Observation>(d_);
+            CqlBoolean e_ = context.Operators.Exists<Observation>(d_);
             return e_;
         }
 
-        return /* CQL 'or' (44:3-45:65) */ ((CqlBoolean)b_
+        return /* CQL 'or' (44:3-45:65) */ (b_
             || c_());
     }
 
@@ -511,11 +511,11 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 DataType l_ = CupToDiscExamPerformed?.Effective;
                 object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
                 CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
-                bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, "day");
+                CqlBoolean o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, "day");
                 return o_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Encounter>(g_, h_);
             return i_;
         }
 
@@ -534,7 +534,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                     "amended",
                     "corrected",
                 ];
-                bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
+                CqlBoolean w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
                 return w_;
             }
 
@@ -567,11 +567,11 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 DataType l_ = OpticDiscExamPerformed?.Effective;
                 object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
                 CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
-                bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, "day");
+                CqlBoolean o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, "day");
                 return o_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            CqlBoolean i_ = context.Operators.WhereAny<Encounter>(g_, h_);
             return i_;
         }
 
@@ -590,7 +590,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                     "amended",
                     "corrected",
                 ];
-                bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
+                CqlBoolean w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
                 return w_;
             }
 
@@ -612,15 +612,15 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
     private bool? Numerator_Compute(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Cup_to_Disc_Ratio_Performed_with_Result(context);
-        bool? b_ = context.Operators.Exists<Observation>(a_);
+        CqlBoolean b_ = context.Operators.Exists<Observation>(a_);
 
         CqlBoolean c_() {
             IEnumerable<Observation> d_ = this.Optic_Disc_Exam_Performed_with_Result(context);
-            bool? e_ = context.Operators.Exists<Observation>(d_);
+            CqlBoolean e_ = context.Operators.Exists<Observation>(d_);
             return e_;
         }
 
-        return /* CQL 'and' (83:3-84:54) */ ((CqlBoolean)b_
+        return /* CQL 'and' (83:3-84:54) */ (b_
             && c_());
     }
 

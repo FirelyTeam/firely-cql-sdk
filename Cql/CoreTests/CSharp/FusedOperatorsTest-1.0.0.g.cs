@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("FusedOperatorsTest", "1.0.0")]
 public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperatorsTest_1_0_0>
 {
@@ -50,11 +50,11 @@ public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperat
         IEnumerable<int?> a_ = this.Numbers(context);
 
         bool? b_(int? N) {
-            bool? d_ = context.Operators.Greater(N, 4);
+            CqlBoolean d_ = context.Operators.Greater(N, 4);
             return d_;
         }
 
-        bool? c_ = context.Operators.WhereAny<int?>(a_, b_);
+        CqlBoolean c_ = context.Operators.WhereAny<int?>(a_, b_);
         return c_;
     }
 
@@ -71,7 +71,7 @@ public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperat
 
         bool? b_(int? N) {
             int? e_ = context.Operators.Modulo(N, 2);
-            bool? f_ = context.Operators.Equal(e_, 0);
+            CqlBoolean f_ = context.Operators.Equal(e_, 0);
             return f_;
         }
 
@@ -103,7 +103,7 @@ public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperat
 
 
         bool? c_(int? D) {
-            bool? f_ = context.Operators.Greater(D, 6);
+            CqlBoolean f_ = context.Operators.Greater(D, 6);
             return f_;
         }
 

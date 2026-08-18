@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
 [CqlLibrary("CMS1056FHIRCTClinical", "1.0.000")]
 public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS1056FHIRCTClinical_1_0_000>
 {
@@ -148,7 +148,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
                 "amended",
                 "corrected",
             ];
-            bool? j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
+            CqlBoolean j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
 
             CqlBoolean k_() {
                 DataType m_ = CTScanResult?.Effective;
@@ -156,7 +156,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
                 CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
                 CqlDateTime p_ = context.Operators.End(o_);
                 CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-                bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
+                CqlBoolean r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
                 return r_;
             }
 
@@ -170,11 +170,11 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
                 CqlDateTime x_ = context.Operators.Start(w_);
                 CqlDate y_ = context.Operators.DateFrom(x_);
                 int? z_ = context.Operators.CalculateAgeAt(v_, y_, "year");
-                bool? aa_ = context.Operators.GreaterOrEqual(z_, 18);
+                CqlBoolean aa_ = context.Operators.GreaterOrEqual(z_, 18);
                 return aa_;
             }
 
-            return /* CQL 'and' (35:5-37:73) */ (/* CQL 'and' (35:11-36:87) */ ((CqlBoolean)j_
+            return /* CQL 'and' (35:5-37:73) */ (/* CQL 'and' (35:11-36:87) */ (j_
                 && k_())
                 && l_());
         }
@@ -222,7 +222,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     private bool? Initial_Population_Compute(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Patients_with_Qualifying_CTScan(context);
-        bool? b_ = context.Operators.Exists<Observation>(a_);
+        CqlBoolean b_ = context.Operators.Exists<Observation>(a_);
         return b_;
     }
 
@@ -236,7 +236,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     private bool? Denominator_Compute(CqlContext context)
     {
         IEnumerable<Observation> a_ = this.Patients_with_Qualifying_CTScan_with_Values(context);
-        bool? b_ = context.Operators.Exists<Observation>(a_);
+        CqlBoolean b_ = context.Operators.Exists<Observation>(a_);
         return b_;
     }
 
@@ -256,11 +256,11 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
             object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
             IReadOnlyList<CqlCode> f_ = (e_ as CqlConcept)?.codes;
             CqlCode g_ = this.Full_Body(context);
-            bool? h_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)f_, g_);
+            CqlBoolean h_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)f_, g_);
             return h_;
         }
 
-        bool? c_ = context.Operators.WhereAny<Observation>(a_, b_);
+        CqlBoolean c_ = context.Operators.WhereAny<Observation>(a_, b_);
         return c_;
     }
 
@@ -276,11 +276,11 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
         IEnumerable<Observation> a_ = this.Patients_with_Qualifying_CTScan_with_Values(context);
 
         bool? b_(Observation CTScanWithValues) {
-            bool? d_ = AlaraCommonFunctions_1_10_000.Instance.ctScanQualifies(context, CTScanWithValues);
+            CqlBoolean d_ = AlaraCommonFunctions_1_10_000.Instance.ctScanQualifies(context, CTScanWithValues);
             return d_;
         }
 
-        bool? c_ = context.Operators.WhereAny<Observation>(a_, b_);
+        CqlBoolean c_ = context.Operators.WhereAny<Observation>(a_, b_);
         return c_;
     }
 
