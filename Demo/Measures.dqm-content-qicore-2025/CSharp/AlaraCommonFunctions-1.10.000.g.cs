@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.8.0")]
 [CqlLibrary("AlaraCommonFunctions", "1.10.000")]
 public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraCommonFunctions_1_10_000>
 {
@@ -152,177 +152,96 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         decimal? b_ = context.Operators.ConvertIntegerToDecimal(64);
         decimal? c_ = context.Operators.ConvertIntegerToDecimal(598);
         CqlBoolean d_ = this.qualifies(context, Result, a_, b_, c_);
-
-        CqlBoolean e_() {
-            CqlCode v_ = this.Abdomen_and_Pelvis_Routine_Dose(context);
-            decimal? w_ = context.Operators.ConvertIntegerToDecimal(29);
-            decimal? x_ = context.Operators.ConvertIntegerToDecimal(644);
-            CqlBoolean y_ = this.qualifies(context, Result, v_, w_, x_);
-            return y_;
-        }
-
-
-        CqlBoolean f_() {
-            CqlCode z_ = this.Abdomen_and_Pelvis_High_Dose(context);
-            decimal? aa_ = context.Operators.ConvertIntegerToDecimal(29);
-            decimal? ab_ = context.Operators.ConvertIntegerToDecimal(1260);
-            CqlBoolean ac_ = this.qualifies(context, Result, z_, aa_, ab_);
-            return ac_;
-        }
-
-
-        CqlBoolean g_() {
-            CqlCode ad_ = this.Cardiac_Low_Dose(context);
-            decimal? ae_ = context.Operators.ConvertIntegerToDecimal(55);
-            decimal? af_ = context.Operators.ConvertIntegerToDecimal(93);
-            CqlBoolean ag_ = this.qualifies(context, Result, ad_, ae_, af_);
-            return ag_;
-        }
-
-
-        CqlBoolean h_() {
-            CqlCode ah_ = this.Cardiac_Routine_Dose(context);
-            decimal? ai_ = context.Operators.ConvertIntegerToDecimal(32);
-            decimal? aj_ = context.Operators.ConvertIntegerToDecimal(576);
-            CqlBoolean ak_ = this.qualifies(context, Result, ah_, ai_, aj_);
-            return ak_;
-        }
-
-
-        CqlBoolean i_() {
-            CqlCode al_ = this.Chest_Low_Dose(context);
-            decimal? am_ = context.Operators.ConvertIntegerToDecimal(55);
-            decimal? an_ = context.Operators.ConvertIntegerToDecimal(377);
-            CqlBoolean ao_ = this.qualifies(context, Result, al_, am_, an_);
-            return ao_;
-        }
-
-
-        CqlBoolean j_() {
-            CqlCode ap_ = this.Chest_Routine_Dose(context);
-            decimal? aq_ = context.Operators.ConvertIntegerToDecimal(49);
-            decimal? ar_ = context.Operators.ConvertIntegerToDecimal(377);
-            CqlBoolean as_ = this.qualifies(context, Result, ap_, aq_, ar_);
-            return as_;
-        }
-
-
-        CqlBoolean k_() {
-            CqlCode at_ = this.Cardiac_High_Dose_or_Chest_High_Dose(context);
-            decimal? au_ = context.Operators.ConvertIntegerToDecimal(49);
-            decimal? av_ = context.Operators.ConvertIntegerToDecimal(1282);
-            CqlBoolean aw_ = this.qualifies(context, Result, at_, au_, av_);
-            return aw_;
-        }
-
-
-        CqlBoolean l_() {
-            CqlCode ax_ = this.Head_Low_Dose(context);
-            decimal? ay_ = context.Operators.ConvertIntegerToDecimal(115);
-            decimal? az_ = context.Operators.ConvertIntegerToDecimal(582);
-            CqlBoolean ba_ = this.qualifies(context, Result, ax_, ay_, az_);
-            return ba_;
-        }
-
-
-        CqlBoolean m_() {
-            CqlCode bb_ = this.Head_Routine_Dose(context);
-            decimal? bc_ = context.Operators.ConvertIntegerToDecimal(115);
-            decimal? bd_ = context.Operators.ConvertIntegerToDecimal(1025);
-            CqlBoolean be_ = this.qualifies(context, Result, bb_, bc_, bd_);
-            return be_;
-        }
-
-
-        CqlBoolean n_() {
-            CqlCode bf_ = this.Head_High_Dose(context);
-            decimal? bg_ = context.Operators.ConvertIntegerToDecimal(115);
-            decimal? bh_ = context.Operators.ConvertIntegerToDecimal(1832);
-            CqlBoolean bi_ = this.qualifies(context, Result, bf_, bg_, bh_);
-            return bi_;
-        }
-
-
-        CqlBoolean o_() {
-            CqlCode bj_ = this.Extremity(context);
-            decimal? bk_ = context.Operators.ConvertIntegerToDecimal(73);
-            decimal? bl_ = context.Operators.ConvertIntegerToDecimal(320);
-            CqlBoolean bm_ = this.qualifies(context, Result, bj_, bk_, bl_);
-            return bm_;
-        }
-
-
-        CqlBoolean p_() {
-            CqlCode bn_ = this.Neck_or_Cervical_Spine(context);
-            decimal? bo_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? bp_ = context.Operators.ConvertIntegerToDecimal(1260);
-            CqlBoolean bq_ = this.qualifies(context, Result, bn_, bo_, bp_);
-            return bq_;
-        }
-
-
-        CqlBoolean q_() {
-            CqlCode br_ = this.Thoracic_or_Lumbar_Spine(context);
-            decimal? bs_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? bt_ = context.Operators.ConvertIntegerToDecimal(1260);
-            CqlBoolean bu_ = this.qualifies(context, Result, br_, bs_, bt_);
-            return bu_;
-        }
-
-
-        CqlBoolean r_() {
-            CqlCode bv_ = this.Simultaneous_Chest_and_Abdomen_and_Pelvis(context);
-            decimal? bw_ = context.Operators.ConvertIntegerToDecimal(29);
-            decimal? bx_ = context.Operators.ConvertIntegerToDecimal(1637);
-            CqlBoolean by_ = this.qualifies(context, Result, bv_, bw_, bx_);
-            return by_;
-        }
-
-
-        CqlBoolean s_() {
-            CqlCode bz_ = this.Simultaneous_Thoracic_and_Lumbar_Spine(context);
-            decimal? ca_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? cb_ = context.Operators.ConvertIntegerToDecimal(2520);
-            CqlBoolean cc_ = this.qualifies(context, Result, bz_, ca_, cb_);
-            return cc_;
-        }
-
-
-        CqlBoolean t_() {
-            CqlCode cd_ = this.Simultaneous_Head_and_Neck_Routine_Dose(context);
-            decimal? ce_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? cf_ = context.Operators.ConvertIntegerToDecimal(2285);
-            CqlBoolean cg_ = this.qualifies(context, Result, cd_, ce_, cf_);
-            return cg_;
-        }
-
-
-        CqlBoolean u_() {
-            CqlCode ch_ = this.Simultaneous_Head_and_Neck_High_Dose(context);
-            decimal? ci_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? cj_ = context.Operators.ConvertIntegerToDecimal(3092);
-            CqlBoolean ck_ = this.qualifies(context, Result, ch_, ci_, cj_);
-            return ck_;
-        }
-
+        CqlCode e_ = this.Abdomen_and_Pelvis_Routine_Dose(context);
+        decimal? f_ = context.Operators.ConvertIntegerToDecimal(29);
+        decimal? g_ = context.Operators.ConvertIntegerToDecimal(644);
+        CqlBoolean h_ = this.qualifies(context, Result, e_, f_, g_);
+        CqlBoolean i_ = h_;
+        CqlCode j_ = this.Abdomen_and_Pelvis_High_Dose(context);
+        decimal? k_ = context.Operators.ConvertIntegerToDecimal(1260);
+        CqlBoolean l_ = this.qualifies(context, Result, j_, f_, k_);
+        CqlBoolean m_ = l_;
+        CqlCode n_ = this.Cardiac_Low_Dose(context);
+        decimal? o_ = context.Operators.ConvertIntegerToDecimal(55);
+        decimal? p_ = context.Operators.ConvertIntegerToDecimal(93);
+        CqlBoolean q_ = this.qualifies(context, Result, n_, o_, p_);
+        CqlBoolean r_ = q_;
+        CqlCode s_ = this.Cardiac_Routine_Dose(context);
+        decimal? t_ = context.Operators.ConvertIntegerToDecimal(32);
+        decimal? u_ = context.Operators.ConvertIntegerToDecimal(576);
+        CqlBoolean v_ = this.qualifies(context, Result, s_, t_, u_);
+        CqlBoolean w_ = v_;
+        CqlCode x_ = this.Chest_Low_Dose(context);
+        decimal? y_ = context.Operators.ConvertIntegerToDecimal(377);
+        CqlBoolean z_ = this.qualifies(context, Result, x_, o_, y_);
+        CqlBoolean aa_ = z_;
+        CqlCode ab_ = this.Chest_Routine_Dose(context);
+        decimal? ac_ = context.Operators.ConvertIntegerToDecimal(49);
+        CqlBoolean ad_ = this.qualifies(context, Result, ab_, ac_, y_);
+        CqlBoolean ae_ = ad_;
+        CqlCode af_ = this.Cardiac_High_Dose_or_Chest_High_Dose(context);
+        decimal? ag_ = context.Operators.ConvertIntegerToDecimal(1282);
+        CqlBoolean ah_ = this.qualifies(context, Result, af_, ac_, ag_);
+        CqlBoolean ai_ = ah_;
+        CqlCode aj_ = this.Head_Low_Dose(context);
+        decimal? ak_ = context.Operators.ConvertIntegerToDecimal(115);
+        decimal? al_ = context.Operators.ConvertIntegerToDecimal(582);
+        CqlBoolean am_ = this.qualifies(context, Result, aj_, ak_, al_);
+        CqlBoolean an_ = am_;
+        CqlCode ao_ = this.Head_Routine_Dose(context);
+        decimal? ap_ = context.Operators.ConvertIntegerToDecimal(1025);
+        CqlBoolean aq_ = this.qualifies(context, Result, ao_, ak_, ap_);
+        CqlBoolean ar_ = aq_;
+        CqlCode as_ = this.Head_High_Dose(context);
+        decimal? at_ = context.Operators.ConvertIntegerToDecimal(1832);
+        CqlBoolean au_ = this.qualifies(context, Result, as_, ak_, at_);
+        CqlBoolean av_ = au_;
+        CqlCode aw_ = this.Extremity(context);
+        decimal? ax_ = context.Operators.ConvertIntegerToDecimal(73);
+        decimal? ay_ = context.Operators.ConvertIntegerToDecimal(320);
+        CqlBoolean az_ = this.qualifies(context, Result, aw_, ax_, ay_);
+        CqlBoolean ba_ = az_;
+        CqlCode bb_ = this.Neck_or_Cervical_Spine(context);
+        decimal? bc_ = context.Operators.ConvertIntegerToDecimal(25);
+        CqlBoolean bd_ = this.qualifies(context, Result, bb_, bc_, k_);
+        CqlBoolean be_ = bd_;
+        CqlCode bf_ = this.Thoracic_or_Lumbar_Spine(context);
+        CqlBoolean bg_ = this.qualifies(context, Result, bf_, bc_, k_);
+        CqlBoolean bh_ = bg_;
+        CqlCode bi_ = this.Simultaneous_Chest_and_Abdomen_and_Pelvis(context);
+        decimal? bj_ = context.Operators.ConvertIntegerToDecimal(1637);
+        CqlBoolean bk_ = this.qualifies(context, Result, bi_, f_, bj_);
+        CqlBoolean bl_ = bk_;
+        CqlCode bm_ = this.Simultaneous_Thoracic_and_Lumbar_Spine(context);
+        decimal? bn_ = context.Operators.ConvertIntegerToDecimal(2520);
+        CqlBoolean bo_ = this.qualifies(context, Result, bm_, bc_, bn_);
+        CqlBoolean bp_ = bo_;
+        CqlCode bq_ = this.Simultaneous_Head_and_Neck_Routine_Dose(context);
+        decimal? br_ = context.Operators.ConvertIntegerToDecimal(2285);
+        CqlBoolean bs_ = this.qualifies(context, Result, bq_, bc_, br_);
+        CqlBoolean bt_ = bs_;
+        CqlCode bu_ = this.Simultaneous_Head_and_Neck_High_Dose(context);
+        decimal? bv_ = context.Operators.ConvertIntegerToDecimal(3092);
+        CqlBoolean bw_ = this.qualifies(context, Result, bu_, bc_, bv_);
+        CqlBoolean bx_ = bw_;
         return d_
-            /* CQL 'or' (33:3-34:67) */ || e_()
-            /* CQL 'or' (33:3-35:65) */ || f_()
-            /* CQL 'or' (33:3-36:51) */ || g_()
-            /* CQL 'or' (33:3-37:56) */ || h_()
-            /* CQL 'or' (33:3-38:50) */ || i_()
-            /* CQL 'or' (33:3-39:54) */ || j_()
-            /* CQL 'or' (33:3-40:73) */ || k_()
-            /* CQL 'or' (33:3-41:50) */ || l_()
-            /* CQL 'or' (33:3-42:55) */ || m_()
-            /* CQL 'or' (33:3-43:52) */ || n_()
-            /* CQL 'or' (33:3-44:45) */ || o_()
-            /* CQL 'or' (33:3-45:59) */ || p_()
-            /* CQL 'or' (33:3-46:61) */ || q_()
-            /* CQL 'or' (33:3-47:78) */ || r_()
-            /* CQL 'or' (33:3-48:75) */ || s_()
-            /* CQL 'or' (33:3-49:76) */ || t_()
-            /* CQL 'or' (33:3-50:73) */ || u_();
+            /* CQL 'or' (33:3-34:67) */ || i_
+            /* CQL 'or' (33:3-35:65) */ || m_
+            /* CQL 'or' (33:3-36:51) */ || r_
+            /* CQL 'or' (33:3-37:56) */ || w_
+            /* CQL 'or' (33:3-38:50) */ || aa_
+            /* CQL 'or' (33:3-39:54) */ || ae_
+            /* CQL 'or' (33:3-40:73) */ || ai_
+            /* CQL 'or' (33:3-41:50) */ || an_
+            /* CQL 'or' (33:3-42:55) */ || ar_
+            /* CQL 'or' (33:3-43:52) */ || av_
+            /* CQL 'or' (33:3-44:45) */ || ba_
+            /* CQL 'or' (33:3-45:59) */ || be_
+            /* CQL 'or' (33:3-46:61) */ || bh_
+            /* CQL 'or' (33:3-47:78) */ || bl_
+            /* CQL 'or' (33:3-48:75) */ || bp_
+            /* CQL 'or' (33:3-49:76) */ || bt_
+            /* CQL 'or' (33:3-50:73) */ || bx_;
     }
 
 
@@ -333,23 +252,15 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         object b_ = FHIRHelpers_4_4_000.Instance.ToValue(context, a_);
         CqlConcept c_ = context.Operators.ConvertCodeToConcept(code);
         CqlBoolean d_ = context.Operators.Equivalent(b_ as CqlConcept, c_);
-
-        CqlBoolean e_() {
-            decimal? f_ = this.globalNoiseValue(context, Result);
-            CqlBoolean g_ = context.Operators.GreaterOrEqual(f_, noiseThreshold);
-
-            CqlBoolean h_() {
-                decimal? i_ = this.sizeAdjustedValue(context, Result);
-                CqlBoolean j_ = context.Operators.GreaterOrEqual(i_, sizeDoseThreshold);
-                return j_;
-            }
-
-            return g_
-                /* CQL 'or' (80:9-82:5) */ || h_();
-        }
-
+        decimal? e_ = this.globalNoiseValue(context, Result);
+        CqlBoolean f_ = context.Operators.GreaterOrEqual(e_, noiseThreshold);
+        decimal? g_ = this.sizeAdjustedValue(context, Result);
+        CqlBoolean h_ = context.Operators.GreaterOrEqual(g_, sizeDoseThreshold);
+        CqlBoolean i_ = h_;
+        CqlBoolean j_ = f_
+            /* CQL 'or' (80:9-82:5) */ || i_;
         return d_
-            /* CQL 'and' (79:3-82:5) */ && e_();
+            /* CQL 'and' (79:3-82:5) */ && j_;
     }
 
 
@@ -368,28 +279,20 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "corrected",
             ];
             CqlBoolean k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
-
-            CqlBoolean l_() {
-                CodeableConcept n_ = C?.Code;
-                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
-                CqlCode p_ = this.Calculated_CT_global_noise(context);
-                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-                CqlBoolean r_ = context.Operators.Equivalent(o_, q_);
-                return r_;
-            }
-
-
-            CqlBoolean m_() {
-                DataType s_ = C?.Value;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                string u_ = (t_ as CqlQuantity)?.unit;
-                CqlBoolean v_ = context.Operators.Equal(u_, "[hnsf'U]");
-                return v_;
-            }
-
+            CodeableConcept l_ = C?.Code;
+            CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
+            CqlCode n_ = this.Calculated_CT_global_noise(context);
+            CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
+            CqlBoolean p_ = context.Operators.Equivalent(m_, o_);
+            CqlBoolean q_ = p_;
+            DataType r_ = C?.Value;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            string t_ = (s_ as CqlQuantity)?.unit;
+            CqlBoolean u_ = context.Operators.Equal(t_, "[hnsf'U]");
+            CqlBoolean v_ = u_;
             return k_
-                /* CQL 'and' (96:13-97:49) */ && l_()
-                /* CQL 'and' (96:7-98:54) */ && m_();
+                /* CQL 'and' (96:13-97:49) */ && q_
+                /* CQL 'and' (96:7-98:54) */ && v_;
         }
 
 
@@ -422,28 +325,20 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "corrected",
             ];
             CqlBoolean k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
-
-            CqlBoolean l_() {
-                CodeableConcept n_ = C?.Code;
-                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
-                CqlCode p_ = this.Calculated_CT_size_adjusted_dose(context);
-                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-                CqlBoolean r_ = context.Operators.Equivalent(o_, q_);
-                return r_;
-            }
-
-
-            CqlBoolean m_() {
-                DataType s_ = C?.Value;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                string u_ = (t_ as CqlQuantity)?.unit;
-                CqlBoolean v_ = context.Operators.Equal(u_, "mGy.cm");
-                return v_;
-            }
-
+            CodeableConcept l_ = C?.Code;
+            CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
+            CqlCode n_ = this.Calculated_CT_size_adjusted_dose(context);
+            CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
+            CqlBoolean p_ = context.Operators.Equivalent(m_, o_);
+            CqlBoolean q_ = p_;
+            DataType r_ = C?.Value;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            string t_ = (s_ as CqlQuantity)?.unit;
+            CqlBoolean u_ = context.Operators.Equal(t_, "mGy.cm");
+            CqlBoolean v_ = u_;
             return k_
-                /* CQL 'and' (112:13-113:55) */ && l_()
-                /* CQL 'and' (112:7-114:51) */ && m_();
+                /* CQL 'and' (112:13-113:55) */ && q_
+                /* CQL 'and' (112:7-114:51) */ && v_;
         }
 
 
@@ -468,177 +363,96 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         decimal? b_ = context.Operators.ConvertIntegerToDecimal(64);
         decimal? c_ = context.Operators.ConvertIntegerToDecimal(598);
         CqlBoolean d_ = this.qualifies(context, Result, a_, b_, c_);
-
-        CqlBoolean e_() {
-            CqlCode v_ = this.Abdomen_and_Pelvis_Routine_Dose(context);
-            decimal? w_ = context.Operators.ConvertIntegerToDecimal(29);
-            decimal? x_ = context.Operators.ConvertIntegerToDecimal(644);
-            CqlBoolean y_ = this.qualifies(context, Result, v_, w_, x_);
-            return y_;
-        }
-
-
-        CqlBoolean f_() {
-            CqlCode z_ = this.Abdomen_and_Pelvis_High_Dose(context);
-            decimal? aa_ = context.Operators.ConvertIntegerToDecimal(29);
-            decimal? ab_ = context.Operators.ConvertIntegerToDecimal(1260);
-            CqlBoolean ac_ = this.qualifies(context, Result, z_, aa_, ab_);
-            return ac_;
-        }
-
-
-        CqlBoolean g_() {
-            CqlCode ad_ = this.Cardiac_Low_Dose(context);
-            decimal? ae_ = context.Operators.ConvertIntegerToDecimal(55);
-            decimal? af_ = context.Operators.ConvertIntegerToDecimal(93);
-            CqlBoolean ag_ = this.qualifies(context, Result, ad_, ae_, af_);
-            return ag_;
-        }
-
-
-        CqlBoolean h_() {
-            CqlCode ah_ = this.Cardiac_Routine_Dose(context);
-            decimal? ai_ = context.Operators.ConvertIntegerToDecimal(32);
-            decimal? aj_ = context.Operators.ConvertIntegerToDecimal(576);
-            CqlBoolean ak_ = this.qualifies(context, Result, ah_, ai_, aj_);
-            return ak_;
-        }
-
-
-        CqlBoolean i_() {
-            CqlCode al_ = this.Chest_Low_Dose(context);
-            decimal? am_ = context.Operators.ConvertIntegerToDecimal(55);
-            decimal? an_ = context.Operators.ConvertIntegerToDecimal(377);
-            CqlBoolean ao_ = this.qualifies(context, Result, al_, am_, an_);
-            return ao_;
-        }
-
-
-        CqlBoolean j_() {
-            CqlCode ap_ = this.Chest_Routine_Dose(context);
-            decimal? aq_ = context.Operators.ConvertIntegerToDecimal(49);
-            decimal? ar_ = context.Operators.ConvertIntegerToDecimal(377);
-            CqlBoolean as_ = this.qualifies(context, Result, ap_, aq_, ar_);
-            return as_;
-        }
-
-
-        CqlBoolean k_() {
-            CqlCode at_ = this.Cardiac_High_Dose_or_Chest_High_Dose(context);
-            decimal? au_ = context.Operators.ConvertIntegerToDecimal(49);
-            decimal? av_ = context.Operators.ConvertIntegerToDecimal(1282);
-            CqlBoolean aw_ = this.qualifies(context, Result, at_, au_, av_);
-            return aw_;
-        }
-
-
-        CqlBoolean l_() {
-            CqlCode ax_ = this.Head_Low_Dose(context);
-            decimal? ay_ = context.Operators.ConvertIntegerToDecimal(115);
-            decimal? az_ = context.Operators.ConvertIntegerToDecimal(582);
-            CqlBoolean ba_ = this.qualifies(context, Result, ax_, ay_, az_);
-            return ba_;
-        }
-
-
-        CqlBoolean m_() {
-            CqlCode bb_ = this.Head_Routine_Dose(context);
-            decimal? bc_ = context.Operators.ConvertIntegerToDecimal(115);
-            decimal? bd_ = context.Operators.ConvertIntegerToDecimal(1025);
-            CqlBoolean be_ = this.qualifies(context, Result, bb_, bc_, bd_);
-            return be_;
-        }
-
-
-        CqlBoolean n_() {
-            CqlCode bf_ = this.Head_High_Dose(context);
-            decimal? bg_ = context.Operators.ConvertIntegerToDecimal(115);
-            decimal? bh_ = context.Operators.ConvertIntegerToDecimal(1832);
-            CqlBoolean bi_ = this.qualifies(context, Result, bf_, bg_, bh_);
-            return bi_;
-        }
-
-
-        CqlBoolean o_() {
-            CqlCode bj_ = this.Extremity(context);
-            decimal? bk_ = context.Operators.ConvertIntegerToDecimal(73);
-            decimal? bl_ = context.Operators.ConvertIntegerToDecimal(320);
-            CqlBoolean bm_ = this.qualifies(context, Result, bj_, bk_, bl_);
-            return bm_;
-        }
-
-
-        CqlBoolean p_() {
-            CqlCode bn_ = this.Neck_or_Cervical_Spine(context);
-            decimal? bo_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? bp_ = context.Operators.ConvertIntegerToDecimal(1260);
-            CqlBoolean bq_ = this.qualifies(context, Result, bn_, bo_, bp_);
-            return bq_;
-        }
-
-
-        CqlBoolean q_() {
-            CqlCode br_ = this.Thoracic_or_Lumbar_Spine(context);
-            decimal? bs_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? bt_ = context.Operators.ConvertIntegerToDecimal(1260);
-            CqlBoolean bu_ = this.qualifies(context, Result, br_, bs_, bt_);
-            return bu_;
-        }
-
-
-        CqlBoolean r_() {
-            CqlCode bv_ = this.Simultaneous_Chest_and_Abdomen_and_Pelvis(context);
-            decimal? bw_ = context.Operators.ConvertIntegerToDecimal(29);
-            decimal? bx_ = context.Operators.ConvertIntegerToDecimal(1637);
-            CqlBoolean by_ = this.qualifies(context, Result, bv_, bw_, bx_);
-            return by_;
-        }
-
-
-        CqlBoolean s_() {
-            CqlCode bz_ = this.Simultaneous_Thoracic_and_Lumbar_Spine(context);
-            decimal? ca_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? cb_ = context.Operators.ConvertIntegerToDecimal(2520);
-            CqlBoolean cc_ = this.qualifies(context, Result, bz_, ca_, cb_);
-            return cc_;
-        }
-
-
-        CqlBoolean t_() {
-            CqlCode cd_ = this.Simultaneous_Head_and_Neck_Routine_Dose(context);
-            decimal? ce_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? cf_ = context.Operators.ConvertIntegerToDecimal(2285);
-            CqlBoolean cg_ = this.qualifies(context, Result, cd_, ce_, cf_);
-            return cg_;
-        }
-
-
-        CqlBoolean u_() {
-            CqlCode ch_ = this.Simultaneous_Head_and_Neck_High_Dose(context);
-            decimal? ci_ = context.Operators.ConvertIntegerToDecimal(25);
-            decimal? cj_ = context.Operators.ConvertIntegerToDecimal(3092);
-            CqlBoolean ck_ = this.qualifies(context, Result, ch_, ci_, cj_);
-            return ck_;
-        }
-
+        CqlCode e_ = this.Abdomen_and_Pelvis_Routine_Dose(context);
+        decimal? f_ = context.Operators.ConvertIntegerToDecimal(29);
+        decimal? g_ = context.Operators.ConvertIntegerToDecimal(644);
+        CqlBoolean h_ = this.qualifies(context, Result, e_, f_, g_);
+        CqlBoolean i_ = h_;
+        CqlCode j_ = this.Abdomen_and_Pelvis_High_Dose(context);
+        decimal? k_ = context.Operators.ConvertIntegerToDecimal(1260);
+        CqlBoolean l_ = this.qualifies(context, Result, j_, f_, k_);
+        CqlBoolean m_ = l_;
+        CqlCode n_ = this.Cardiac_Low_Dose(context);
+        decimal? o_ = context.Operators.ConvertIntegerToDecimal(55);
+        decimal? p_ = context.Operators.ConvertIntegerToDecimal(93);
+        CqlBoolean q_ = this.qualifies(context, Result, n_, o_, p_);
+        CqlBoolean r_ = q_;
+        CqlCode s_ = this.Cardiac_Routine_Dose(context);
+        decimal? t_ = context.Operators.ConvertIntegerToDecimal(32);
+        decimal? u_ = context.Operators.ConvertIntegerToDecimal(576);
+        CqlBoolean v_ = this.qualifies(context, Result, s_, t_, u_);
+        CqlBoolean w_ = v_;
+        CqlCode x_ = this.Chest_Low_Dose(context);
+        decimal? y_ = context.Operators.ConvertIntegerToDecimal(377);
+        CqlBoolean z_ = this.qualifies(context, Result, x_, o_, y_);
+        CqlBoolean aa_ = z_;
+        CqlCode ab_ = this.Chest_Routine_Dose(context);
+        decimal? ac_ = context.Operators.ConvertIntegerToDecimal(49);
+        CqlBoolean ad_ = this.qualifies(context, Result, ab_, ac_, y_);
+        CqlBoolean ae_ = ad_;
+        CqlCode af_ = this.Cardiac_High_Dose_or_Chest_High_Dose(context);
+        decimal? ag_ = context.Operators.ConvertIntegerToDecimal(1282);
+        CqlBoolean ah_ = this.qualifies(context, Result, af_, ac_, ag_);
+        CqlBoolean ai_ = ah_;
+        CqlCode aj_ = this.Head_Low_Dose(context);
+        decimal? ak_ = context.Operators.ConvertIntegerToDecimal(115);
+        decimal? al_ = context.Operators.ConvertIntegerToDecimal(582);
+        CqlBoolean am_ = this.qualifies(context, Result, aj_, ak_, al_);
+        CqlBoolean an_ = am_;
+        CqlCode ao_ = this.Head_Routine_Dose(context);
+        decimal? ap_ = context.Operators.ConvertIntegerToDecimal(1025);
+        CqlBoolean aq_ = this.qualifies(context, Result, ao_, ak_, ap_);
+        CqlBoolean ar_ = aq_;
+        CqlCode as_ = this.Head_High_Dose(context);
+        decimal? at_ = context.Operators.ConvertIntegerToDecimal(1832);
+        CqlBoolean au_ = this.qualifies(context, Result, as_, ak_, at_);
+        CqlBoolean av_ = au_;
+        CqlCode aw_ = this.Extremity(context);
+        decimal? ax_ = context.Operators.ConvertIntegerToDecimal(73);
+        decimal? ay_ = context.Operators.ConvertIntegerToDecimal(320);
+        CqlBoolean az_ = this.qualifies(context, Result, aw_, ax_, ay_);
+        CqlBoolean ba_ = az_;
+        CqlCode bb_ = this.Neck_or_Cervical_Spine(context);
+        decimal? bc_ = context.Operators.ConvertIntegerToDecimal(25);
+        CqlBoolean bd_ = this.qualifies(context, Result, bb_, bc_, k_);
+        CqlBoolean be_ = bd_;
+        CqlCode bf_ = this.Thoracic_or_Lumbar_Spine(context);
+        CqlBoolean bg_ = this.qualifies(context, Result, bf_, bc_, k_);
+        CqlBoolean bh_ = bg_;
+        CqlCode bi_ = this.Simultaneous_Chest_and_Abdomen_and_Pelvis(context);
+        decimal? bj_ = context.Operators.ConvertIntegerToDecimal(1637);
+        CqlBoolean bk_ = this.qualifies(context, Result, bi_, f_, bj_);
+        CqlBoolean bl_ = bk_;
+        CqlCode bm_ = this.Simultaneous_Thoracic_and_Lumbar_Spine(context);
+        decimal? bn_ = context.Operators.ConvertIntegerToDecimal(2520);
+        CqlBoolean bo_ = this.qualifies(context, Result, bm_, bc_, bn_);
+        CqlBoolean bp_ = bo_;
+        CqlCode bq_ = this.Simultaneous_Head_and_Neck_Routine_Dose(context);
+        decimal? br_ = context.Operators.ConvertIntegerToDecimal(2285);
+        CqlBoolean bs_ = this.qualifies(context, Result, bq_, bc_, br_);
+        CqlBoolean bt_ = bs_;
+        CqlCode bu_ = this.Simultaneous_Head_and_Neck_High_Dose(context);
+        decimal? bv_ = context.Operators.ConvertIntegerToDecimal(3092);
+        CqlBoolean bw_ = this.qualifies(context, Result, bu_, bc_, bv_);
+        CqlBoolean bx_ = bw_;
         return d_
-            /* CQL 'or' (53:3-54:67) */ || e_()
-            /* CQL 'or' (53:3-55:65) */ || f_()
-            /* CQL 'or' (53:3-56:51) */ || g_()
-            /* CQL 'or' (53:3-57:56) */ || h_()
-            /* CQL 'or' (53:3-58:50) */ || i_()
-            /* CQL 'or' (53:3-59:54) */ || j_()
-            /* CQL 'or' (53:3-60:73) */ || k_()
-            /* CQL 'or' (53:3-61:50) */ || l_()
-            /* CQL 'or' (53:3-62:55) */ || m_()
-            /* CQL 'or' (53:3-63:52) */ || n_()
-            /* CQL 'or' (53:3-64:45) */ || o_()
-            /* CQL 'or' (53:3-65:59) */ || p_()
-            /* CQL 'or' (53:3-66:61) */ || q_()
-            /* CQL 'or' (53:3-67:78) */ || r_()
-            /* CQL 'or' (53:3-68:75) */ || s_()
-            /* CQL 'or' (53:3-69:76) */ || t_()
-            /* CQL 'or' (53:3-70:73) */ || u_();
+            /* CQL 'or' (53:3-54:67) */ || i_
+            /* CQL 'or' (53:3-55:65) */ || m_
+            /* CQL 'or' (53:3-56:51) */ || r_
+            /* CQL 'or' (53:3-57:56) */ || w_
+            /* CQL 'or' (53:3-58:50) */ || aa_
+            /* CQL 'or' (53:3-59:54) */ || ae_
+            /* CQL 'or' (53:3-60:73) */ || ai_
+            /* CQL 'or' (53:3-61:50) */ || an_
+            /* CQL 'or' (53:3-62:55) */ || ar_
+            /* CQL 'or' (53:3-63:52) */ || av_
+            /* CQL 'or' (53:3-64:45) */ || ba_
+            /* CQL 'or' (53:3-65:59) */ || be_
+            /* CQL 'or' (53:3-66:61) */ || bh_
+            /* CQL 'or' (53:3-67:78) */ || bl_
+            /* CQL 'or' (53:3-68:75) */ || bp_
+            /* CQL 'or' (53:3-69:76) */ || bt_
+            /* CQL 'or' (53:3-70:73) */ || bx_;
     }
 
 
@@ -649,23 +463,15 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         object b_ = FHIRHelpers_4_4_000.Instance.ToValue(context, a_);
         CqlConcept c_ = context.Operators.ConvertCodeToConcept(code);
         CqlBoolean d_ = context.Operators.Equivalent(b_ as CqlConcept, c_);
-
-        CqlBoolean e_() {
-            decimal? f_ = this.Global_Noise_Value(context, Result);
-            CqlBoolean g_ = context.Operators.GreaterOrEqual(f_, noiseThreshold);
-
-            CqlBoolean h_() {
-                decimal? i_ = this.Size_Adjusted_Value(context, Result);
-                CqlBoolean j_ = context.Operators.GreaterOrEqual(i_, sizeDoseThreshold);
-                return j_;
-            }
-
-            return g_
-                /* CQL 'or' (74:9-76:5) */ || h_();
-        }
-
+        decimal? e_ = this.Global_Noise_Value(context, Result);
+        CqlBoolean f_ = context.Operators.GreaterOrEqual(e_, noiseThreshold);
+        decimal? g_ = this.Size_Adjusted_Value(context, Result);
+        CqlBoolean h_ = context.Operators.GreaterOrEqual(g_, sizeDoseThreshold);
+        CqlBoolean i_ = h_;
+        CqlBoolean j_ = f_
+            /* CQL 'or' (74:9-76:5) */ || i_;
         return d_
-            /* CQL 'and' (73:3-76:5) */ && e_();
+            /* CQL 'and' (73:3-76:5) */ && j_;
     }
 
 
@@ -684,28 +490,20 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "corrected",
             ];
             CqlBoolean k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
-
-            CqlBoolean l_() {
-                CodeableConcept n_ = C?.Code;
-                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
-                CqlCode p_ = this.Calculated_CT_global_noise(context);
-                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-                CqlBoolean r_ = context.Operators.Equivalent(o_, q_);
-                return r_;
-            }
-
-
-            CqlBoolean m_() {
-                DataType s_ = C?.Value;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                string u_ = (t_ as CqlQuantity)?.unit;
-                CqlBoolean v_ = context.Operators.Equal(u_, "[hnsf'U]");
-                return v_;
-            }
-
+            CodeableConcept l_ = C?.Code;
+            CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
+            CqlCode n_ = this.Calculated_CT_global_noise(context);
+            CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
+            CqlBoolean p_ = context.Operators.Equivalent(m_, o_);
+            CqlBoolean q_ = p_;
+            DataType r_ = C?.Value;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            string t_ = (s_ as CqlQuantity)?.unit;
+            CqlBoolean u_ = context.Operators.Equal(t_, "[hnsf'U]");
+            CqlBoolean v_ = u_;
             return k_
-                /* CQL 'and' (87:13-88:49) */ && l_()
-                /* CQL 'and' (87:7-89:54) */ && m_();
+                /* CQL 'and' (87:13-88:49) */ && q_
+                /* CQL 'and' (87:7-89:54) */ && v_;
         }
 
 
@@ -738,28 +536,20 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "corrected",
             ];
             CqlBoolean k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
-
-            CqlBoolean l_() {
-                CodeableConcept n_ = C?.Code;
-                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
-                CqlCode p_ = this.Calculated_CT_size_adjusted_dose(context);
-                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-                CqlBoolean r_ = context.Operators.Equivalent(o_, q_);
-                return r_;
-            }
-
-
-            CqlBoolean m_() {
-                DataType s_ = C?.Value;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                string u_ = (t_ as CqlQuantity)?.unit;
-                CqlBoolean v_ = context.Operators.Equal(u_, "mGy.cm");
-                return v_;
-            }
-
+            CodeableConcept l_ = C?.Code;
+            CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
+            CqlCode n_ = this.Calculated_CT_size_adjusted_dose(context);
+            CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
+            CqlBoolean p_ = context.Operators.Equivalent(m_, o_);
+            CqlBoolean q_ = p_;
+            DataType r_ = C?.Value;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            string t_ = (s_ as CqlQuantity)?.unit;
+            CqlBoolean u_ = context.Operators.Equal(t_, "mGy.cm");
+            CqlBoolean v_ = u_;
             return k_
-                /* CQL 'and' (104:13-105:55) */ && l_()
-                /* CQL 'and' (104:7-106:51) */ && m_();
+                /* CQL 'and' (104:13-105:55) */ && q_
+                /* CQL 'and' (104:7-106:51) */ && v_;
         }
 
 

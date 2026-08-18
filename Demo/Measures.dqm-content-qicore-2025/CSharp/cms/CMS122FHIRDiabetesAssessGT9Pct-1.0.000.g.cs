@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.8.0")]
 [CqlLibrary("CMS122FHIRDiabetesAssessGT9Pct", "1.0.000")]
 public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISingleton<CMS122FHIRDiabetesAssessGT9Pct_1_0_000>
 {
@@ -379,35 +379,27 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, true);
         CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        IEnumerable<Encounter> k_ = this.Qualifying_Encounters(context);
+        CqlBoolean l_ = context.Operators.Exists<Encounter>(k_);
+        CqlBoolean m_ = l_;
+        CqlValueSet n_ = this.Diabetes(context);
+        IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        Condition p_(Condition X) => X as Condition;
+        IEnumerable<Condition> q_ = context.Operators.Select<Condition, Condition>(o_, p_);
+        IEnumerable<Condition> r_ = Status_1_15_000.Instance.verified(context, q_);
 
-        CqlBoolean k_() {
-            IEnumerable<Encounter> m_ = this.Qualifying_Encounters(context);
-            CqlBoolean n_ = context.Operators.Exists<Encounter>(m_);
-            return n_;
+        bool? s_(Condition DiabetesDiagnosis) {
+            CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
+            CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
+            CqlBoolean x_ = context.Operators.Overlaps(v_, w_, "day");
+            return x_;
         }
 
-
-        CqlBoolean l_() {
-            CqlValueSet o_ = this.Diabetes(context);
-            IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            Condition q_(Condition X) => X as Condition;
-            IEnumerable<Condition> r_ = context.Operators.Select<Condition, Condition>(p_, q_);
-            IEnumerable<Condition> s_ = Status_1_15_000.Instance.verified(context, r_);
-
-            bool? t_(Condition DiabetesDiagnosis) {
-                CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
-                CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
-                CqlBoolean x_ = context.Operators.Overlaps(v_, w_, "day");
-                return x_;
-            }
-
-            CqlBoolean u_ = context.Operators.WhereAny<Condition>(s_, t_);
-            return u_;
-        }
-
+        CqlBoolean t_ = context.Operators.WhereAny<Condition>(r_, s_);
+        CqlBoolean u_ = t_;
         return j_
-            /* CQL 'and' (52:3-55:38) */ && k_()
-            /* CQL 'and' (52:3-58:5) */ && l_();
+            /* CQL 'and' (52:3-55:38) */ && m_
+            /* CQL 'and' (52:3-58:5) */ && u_;
     }
 
 
@@ -622,16 +614,11 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
     private bool? Has_Most_Recent_Glycemic_Status_Assessment_Without_Result_Compute(CqlContext context)
     {
         Observation a_ = this.Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day(context);
-
-        CqlBoolean b_() {
-            Observation c_ = this.Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day(context);
-            DataType d_ = c_?.Value;
-            object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
-            return e_ is null;
-        }
-
+        DataType b_ = a_?.Value;
+        object c_ = FHIRHelpers_4_4_000.Instance.ToValue(context, b_);
+        CqlBoolean d_ = (CqlBoolean)(c_ is null);
         return (CqlBoolean)(a_ is not null)
-            /* CQL 'and' (133:3-134:84) */ && b_();
+            /* CQL 'and' (133:3-134:84) */ && d_;
     }
 
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.8.0")]
 [CqlLibrary("CumulativeMedicationDuration", "6.0.000")]
 public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton<CumulativeMedicationDuration_6_0_000>
 {
@@ -1080,143 +1080,95 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
             CqlDateTime s_ = context.Operators.Start(r_);
             CqlDate t_ = context.Operators.DateFrom(s_);
+            Duration u_ = p_?.ExpectedSupplyDuration;
+            CqlQuantity v_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, u_);
+            CqlQuantity w_ = context.Operators.ConvertQuantity(v_, "d");
+            decimal? x_ = w_?.value;
+            Quantity y_ = p_?.Quantity;
+            CqlQuantity z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_);
+            decimal? aa_ = z_?.value;
+            List<Dosage.DoseAndRateComponent> ab_ = f_?.DoseAndRate;
+            Dosage.DoseAndRateComponent ac_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)ab_);
+            DataType ad_ = ac_?.Dose;
+            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+            CqlQuantity af_ = context.Operators.End(ae_ as CqlInterval<CqlQuantity>);
+            decimal? ag_ = (af_ ?? ae_ as CqlQuantity)?.value;
+            PositiveInt ah_ = h_?.FrequencyMaxElement;
+            int? ai_ = ah_?.Value;
+            PositiveInt aj_ = h_?.FrequencyElement;
+            int? ak_ = aj_?.Value;
+            FhirDecimal al_ = h_?.PeriodElement;
+            decimal? am_ = al_?.Value;
+            Code<Timing.UnitsOfTime> an_ = h_?.PeriodUnitElement;
+            Timing.UnitsOfTime? ao_ = an_?.Value;
+            string ap_ = context.Operators.Convert<string>(ao_);
+            CqlQuantity aq_ = this.Quantity(context, am_, ap_);
+            decimal? ar_ = this.ToDaily(context, ai_ ?? ak_, aq_);
+            List<Time> as_ = h_?.TimeOfDayElement;
 
-            CqlBoolean u_() {
-                MedicationRequest.DispenseRequestComponent v_ = R?.DispenseRequest;
-                Duration w_ = v_?.ExpectedSupplyDuration;
-                CqlQuantity x_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, w_);
-                CqlQuantity y_ = context.Operators.ConvertQuantity(x_, "d");
-                decimal? z_ = y_?.value;
-                Quantity aa_ = v_?.Quantity;
-                CqlQuantity ab_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, aa_);
-                decimal? ac_ = ab_?.value;
-                List<Dosage> ad_ = R?.DosageInstruction;
-                Dosage ae_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)ad_);
-                List<Dosage.DoseAndRateComponent> af_ = ae_?.DoseAndRate;
-                Dosage.DoseAndRateComponent ag_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)af_);
-                DataType ah_ = ag_?.Dose;
-                object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                CqlQuantity aj_ = context.Operators.End(ai_ as CqlInterval<CqlQuantity>);
-                decimal? ak_ = (aj_ ?? ai_ as CqlQuantity)?.value;
-                Timing al_ = ae_?.Timing;
-                Timing.RepeatComponent am_ = al_?.Repeat;
-                PositiveInt an_ = am_?.FrequencyMaxElement;
-                int? ao_ = an_?.Value;
-                PositiveInt ap_ = am_?.FrequencyElement;
-                int? aq_ = ap_?.Value;
-                FhirDecimal ar_ = am_?.PeriodElement;
-                decimal? as_ = ar_?.Value;
-                Code<Timing.UnitsOfTime> at_ = am_?.PeriodUnitElement;
-                Timing.UnitsOfTime? au_ = at_?.Value;
-                string av_ = context.Operators.Convert<string>(au_);
-                CqlQuantity aw_ = this.Quantity(context, as_, av_);
-                decimal? ax_ = this.ToDaily(context, ao_ ?? aq_, aw_);
-                List<Time> ay_ = am_?.TimeOfDayElement;
-
-                string az_(Time @this) {
-                    string bm_ = @this?.Value;
-                    return bm_;
-                }
-
-                IEnumerable<string> ba_ = context.Operators.Select<Time, string>((IEnumerable<Time>)ay_, az_);
-
-                CqlTime bb_(string @string) {
-                    CqlTime bn_ = context.Operators.ConvertStringToTime(@string);
-                    return bn_;
-                }
-
-                IEnumerable<CqlTime> bc_ = context.Operators.Select<string, CqlTime>(ba_, bb_);
-                int? bd_ = context.Operators.Count<CqlTime>(bc_);
-                decimal? be_ = context.Operators.ConvertIntegerToDecimal(bd_);
-                decimal? bf_ = context.Operators.Multiply(ak_, (ax_ ?? be_) ?? 1.0m);
-                decimal? bg_ = context.Operators.Divide(ac_, bf_);
-                UnsignedInt bh_ = v_?.NumberOfRepeatsAllowedElement;
-                int? bi_ = bh_?.Value;
-                int? bj_ = context.Operators.Add(1, bi_ ?? 0);
-                decimal? bk_ = context.Operators.ConvertIntegerToDecimal(bj_);
-                decimal? bl_ = context.Operators.Multiply(z_ ?? bg_, bk_);
-                return bl_ is not null;
+            string at_(Time @this) {
+                string bh_ = @this?.Value;
+                return bh_;
             }
 
+            IEnumerable<string> au_ = context.Operators.Select<Time, string>((IEnumerable<Time>)as_, at_);
+
+            CqlTime av_(string @string) {
+                CqlTime bi_ = context.Operators.ConvertStringToTime(@string);
+                return bi_;
+            }
+
+            IEnumerable<CqlTime> aw_ = context.Operators.Select<string, CqlTime>(au_, av_);
+            int? ax_ = context.Operators.Count<CqlTime>(aw_);
+            decimal? ay_ = context.Operators.ConvertIntegerToDecimal(ax_);
+            decimal? az_ = context.Operators.Multiply(ag_, (ar_ ?? ay_) ?? 1.0m);
+            decimal? ba_ = context.Operators.Divide(aa_, az_);
+            UnsignedInt bb_ = p_?.NumberOfRepeatsAllowedElement;
+            int? bc_ = bb_?.Value;
+            int? bd_ = context.Operators.Add(1, bc_ ?? 0);
+            decimal? be_ = context.Operators.ConvertIntegerToDecimal(bd_);
+            decimal? bf_ = context.Operators.Multiply(x_ ?? ba_, be_);
+            CqlBoolean bg_ = (CqlBoolean)(bf_ is not null);
             if ((CqlBoolean)(((l_ ?? o_) ?? t_) is not null)
-                /* CQL 'and' (260:10-260:64) */ && u_())
+                /* CQL 'and' (260:10-260:64) */ && bg_)
             {
-                Duration bo_ = p_?.ExpectedSupplyDuration;
-                CqlQuantity bp_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bo_);
-                CqlQuantity bq_ = context.Operators.ConvertQuantity(bp_, "d");
-                decimal? br_ = bq_?.value;
-                Quantity bs_ = p_?.Quantity;
-                CqlQuantity bt_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bs_);
-                decimal? bu_ = bt_?.value;
-                List<Dosage.DoseAndRateComponent> bv_ = f_?.DoseAndRate;
-                Dosage.DoseAndRateComponent bw_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)bv_);
-                DataType bx_ = bw_?.Dose;
-                object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                CqlQuantity bz_ = context.Operators.End(by_ as CqlInterval<CqlQuantity>);
-                decimal? ca_ = (bz_ ?? by_ as CqlQuantity)?.value;
-                PositiveInt cb_ = h_?.FrequencyMaxElement;
-                int? cc_ = cb_?.Value;
-                PositiveInt cd_ = h_?.FrequencyElement;
-                int? ce_ = cd_?.Value;
-                FhirDecimal cf_ = h_?.PeriodElement;
-                decimal? cg_ = cf_?.Value;
-                Code<Timing.UnitsOfTime> ch_ = h_?.PeriodUnitElement;
-                Timing.UnitsOfTime? ci_ = ch_?.Value;
-                string cj_ = context.Operators.Convert<string>(ci_);
-                CqlQuantity ck_ = this.Quantity(context, cg_, cj_);
-                decimal? cl_ = this.ToDaily(context, cc_ ?? ce_, ck_);
-                List<Time> cm_ = h_?.TimeOfDayElement;
 
-                string cn_(Time @this) {
-                    string df_ = @this?.Value;
-                    return df_;
+                string bj_(Time @this) {
+                    string bx_ = @this?.Value;
+                    return bx_;
                 }
 
-                IEnumerable<string> co_ = context.Operators.Select<Time, string>((IEnumerable<Time>)cm_, cn_);
+                IEnumerable<string> bk_ = context.Operators.Select<Time, string>((IEnumerable<Time>)as_, bj_);
 
-                CqlTime cp_(string @string) {
-                    CqlTime dg_ = context.Operators.ConvertStringToTime(@string);
-                    return dg_;
+                CqlTime bl_(string @string) {
+                    CqlTime by_ = context.Operators.ConvertStringToTime(@string);
+                    return by_;
                 }
 
-                IEnumerable<CqlTime> cq_ = context.Operators.Select<string, CqlTime>(co_, cp_);
-                int? cr_ = context.Operators.Count<CqlTime>(cq_);
-                decimal? cs_ = context.Operators.ConvertIntegerToDecimal(cr_);
-                decimal? ct_ = context.Operators.Multiply(ca_, (cl_ ?? cs_) ?? 1.0m);
-                decimal? cu_ = context.Operators.Divide(bu_, ct_);
-                UnsignedInt cv_ = p_?.NumberOfRepeatsAllowedElement;
-                int? cw_ = cv_?.Value;
-                int? cx_ = context.Operators.Add(1, cw_ ?? 0);
-                decimal? cy_ = context.Operators.ConvertIntegerToDecimal(cx_);
-                decimal? cz_ = context.Operators.Multiply(br_ ?? cu_, cy_);
-                decimal? da_ = context.Operators.ConvertIntegerToDecimal(1);
-                decimal? db_ = context.Operators.Subtract(cz_, da_);
-                CqlQuantity dc_ = this.Quantity(context, db_, "day");
-                CqlDate dd_ = context.Operators.Add((l_ ?? o_) ?? t_, dc_);
-                CqlInterval<CqlDate> de_ = context.Operators.Interval((l_ ?? o_) ?? t_, dd_, true, true);
-                return de_;
+                IEnumerable<CqlTime> bm_ = context.Operators.Select<string, CqlTime>(bk_, bl_);
+                int? bn_ = context.Operators.Count<CqlTime>(bm_);
+                decimal? bo_ = context.Operators.ConvertIntegerToDecimal(bn_);
+                decimal? bp_ = context.Operators.Multiply(ag_, (ar_ ?? bo_) ?? 1.0m);
+                decimal? bq_ = context.Operators.Divide(aa_, bp_);
+                decimal? br_ = context.Operators.Multiply(x_ ?? bq_, be_);
+                decimal? bs_ = context.Operators.ConvertIntegerToDecimal(1);
+                decimal? bt_ = context.Operators.Subtract(br_, bs_);
+                CqlQuantity bu_ = this.Quantity(context, bt_, "day");
+                CqlDate bv_ = context.Operators.Add((l_ ?? o_) ?? t_, bu_);
+                CqlInterval<CqlDate> bw_ = context.Operators.Interval((l_ ?? o_) ?? t_, bv_, true, true);
+                return bw_;
             }
             else
             {
-
-                CqlBoolean dh_() {
-                    List<Dosage> di_ = R?.DosageInstruction;
-                    Dosage dj_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)di_);
-                    Timing dk_ = dj_?.Timing;
-                    Timing.RepeatComponent dl_ = dk_?.Repeat;
-                    DataType dm_ = dl_?.Bounds;
-                    object dn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dm_);
-                    CqlDateTime do_ = (dn_ as CqlInterval<CqlDateTime>)?.high;
-                    return do_ is not null;
-                }
-
+                CqlDateTime bz_ = (j_ as CqlInterval<CqlDateTime>)?.high;
+                CqlBoolean ca_ = (CqlBoolean)(bz_ is not null);
                 if ((CqlBoolean)(((l_ ?? o_) ?? t_) is not null)
-                    /* CQL 'and' (262:15-262:71) */ && dh_())
+                    /* CQL 'and' (262:15-262:71) */ && ca_)
                 {
-                    CqlDateTime dp_ = context.Operators.End(j_ as CqlInterval<CqlDateTime>);
-                    CqlDate dq_ = context.Operators.DateFrom(dp_);
-                    CqlInterval<CqlDate> dr_ = context.Operators.Interval((l_ ?? o_) ?? t_, dq_, true, true);
-                    return dr_;
+                    CqlDateTime cb_ = context.Operators.End(j_ as CqlInterval<CqlDateTime>);
+                    CqlDate cc_ = context.Operators.DateFrom(cb_);
+                    CqlInterval<CqlDate> cd_ = context.Operators.Interval((l_ ?? o_) ?? t_, cc_, true, true);
+                    return cd_;
                 }
                 else
                 {
@@ -1262,143 +1214,95 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
             CqlDateTime s_ = context.Operators.Start(r_);
             CqlDate t_ = context.Operators.DateFrom(s_);
+            Duration u_ = p_?.ExpectedSupplyDuration;
+            CqlQuantity v_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, u_);
+            CqlQuantity w_ = context.Operators.ConvertQuantity(v_, "d");
+            decimal? x_ = w_?.value;
+            Quantity y_ = p_?.Quantity;
+            CqlQuantity z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_);
+            decimal? aa_ = z_?.value;
+            List<Dosage.DoseAndRateComponent> ab_ = f_?.DoseAndRate;
+            Dosage.DoseAndRateComponent ac_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)ab_);
+            DataType ad_ = ac_?.Dose;
+            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+            CqlQuantity af_ = context.Operators.End(ae_ as CqlInterval<CqlQuantity>);
+            decimal? ag_ = (af_ ?? ae_ as CqlQuantity)?.value;
+            PositiveInt ah_ = h_?.FrequencyMaxElement;
+            int? ai_ = ah_?.Value;
+            PositiveInt aj_ = h_?.FrequencyElement;
+            int? ak_ = aj_?.Value;
+            FhirDecimal al_ = h_?.PeriodElement;
+            decimal? am_ = al_?.Value;
+            Code<Timing.UnitsOfTime> an_ = h_?.PeriodUnitElement;
+            Timing.UnitsOfTime? ao_ = an_?.Value;
+            string ap_ = context.Operators.Convert<string>(ao_);
+            CqlQuantity aq_ = this.Quantity(context, am_, ap_);
+            decimal? ar_ = this.ToDaily(context, ai_ ?? ak_, aq_);
+            List<Time> as_ = h_?.TimeOfDayElement;
 
-            CqlBoolean u_() {
-                MedicationRequest.DispenseRequestComponent v_ = R?.DispenseRequest;
-                Duration w_ = v_?.ExpectedSupplyDuration;
-                CqlQuantity x_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, w_);
-                CqlQuantity y_ = context.Operators.ConvertQuantity(x_, "d");
-                decimal? z_ = y_?.value;
-                Quantity aa_ = v_?.Quantity;
-                CqlQuantity ab_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, aa_);
-                decimal? ac_ = ab_?.value;
-                List<Dosage> ad_ = R?.DosageInstruction;
-                Dosage ae_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)ad_);
-                List<Dosage.DoseAndRateComponent> af_ = ae_?.DoseAndRate;
-                Dosage.DoseAndRateComponent ag_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)af_);
-                DataType ah_ = ag_?.Dose;
-                object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                CqlQuantity aj_ = context.Operators.End(ai_ as CqlInterval<CqlQuantity>);
-                decimal? ak_ = (aj_ ?? ai_ as CqlQuantity)?.value;
-                Timing al_ = ae_?.Timing;
-                Timing.RepeatComponent am_ = al_?.Repeat;
-                PositiveInt an_ = am_?.FrequencyMaxElement;
-                int? ao_ = an_?.Value;
-                PositiveInt ap_ = am_?.FrequencyElement;
-                int? aq_ = ap_?.Value;
-                FhirDecimal ar_ = am_?.PeriodElement;
-                decimal? as_ = ar_?.Value;
-                Code<Timing.UnitsOfTime> at_ = am_?.PeriodUnitElement;
-                Timing.UnitsOfTime? au_ = at_?.Value;
-                string av_ = context.Operators.Convert<string>(au_);
-                CqlQuantity aw_ = this.Quantity(context, as_, av_);
-                decimal? ax_ = this.ToDaily(context, ao_ ?? aq_, aw_);
-                List<Time> ay_ = am_?.TimeOfDayElement;
-
-                string az_(Time @this) {
-                    string bm_ = @this?.Value;
-                    return bm_;
-                }
-
-                IEnumerable<string> ba_ = context.Operators.Select<Time, string>((IEnumerable<Time>)ay_, az_);
-
-                CqlTime bb_(string @string) {
-                    CqlTime bn_ = context.Operators.ConvertStringToTime(@string);
-                    return bn_;
-                }
-
-                IEnumerable<CqlTime> bc_ = context.Operators.Select<string, CqlTime>(ba_, bb_);
-                int? bd_ = context.Operators.Count<CqlTime>(bc_);
-                decimal? be_ = context.Operators.ConvertIntegerToDecimal(bd_);
-                decimal? bf_ = context.Operators.Multiply(ak_, (ax_ ?? be_) ?? 1.0m);
-                decimal? bg_ = context.Operators.Divide(ac_, bf_);
-                UnsignedInt bh_ = v_?.NumberOfRepeatsAllowedElement;
-                int? bi_ = bh_?.Value;
-                int? bj_ = context.Operators.Add(1, bi_ ?? 0);
-                decimal? bk_ = context.Operators.ConvertIntegerToDecimal(bj_);
-                decimal? bl_ = context.Operators.Multiply(z_ ?? bg_, bk_);
-                return bl_ is not null;
+            string at_(Time @this) {
+                string bh_ = @this?.Value;
+                return bh_;
             }
 
+            IEnumerable<string> au_ = context.Operators.Select<Time, string>((IEnumerable<Time>)as_, at_);
+
+            CqlTime av_(string @string) {
+                CqlTime bi_ = context.Operators.ConvertStringToTime(@string);
+                return bi_;
+            }
+
+            IEnumerable<CqlTime> aw_ = context.Operators.Select<string, CqlTime>(au_, av_);
+            int? ax_ = context.Operators.Count<CqlTime>(aw_);
+            decimal? ay_ = context.Operators.ConvertIntegerToDecimal(ax_);
+            decimal? az_ = context.Operators.Multiply(ag_, (ar_ ?? ay_) ?? 1.0m);
+            decimal? ba_ = context.Operators.Divide(aa_, az_);
+            UnsignedInt bb_ = p_?.NumberOfRepeatsAllowedElement;
+            int? bc_ = bb_?.Value;
+            int? bd_ = context.Operators.Add(1, bc_ ?? 0);
+            decimal? be_ = context.Operators.ConvertIntegerToDecimal(bd_);
+            decimal? bf_ = context.Operators.Multiply(x_ ?? ba_, be_);
+            CqlBoolean bg_ = (CqlBoolean)(bf_ is not null);
             if ((CqlBoolean)(((l_ ?? o_) ?? t_) is not null)
-                /* CQL 'and' (291:10-291:64) */ && u_())
+                /* CQL 'and' (291:10-291:64) */ && bg_)
             {
-                Duration bo_ = p_?.ExpectedSupplyDuration;
-                CqlQuantity bp_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bo_);
-                CqlQuantity bq_ = context.Operators.ConvertQuantity(bp_, "d");
-                decimal? br_ = bq_?.value;
-                Quantity bs_ = p_?.Quantity;
-                CqlQuantity bt_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bs_);
-                decimal? bu_ = bt_?.value;
-                List<Dosage.DoseAndRateComponent> bv_ = f_?.DoseAndRate;
-                Dosage.DoseAndRateComponent bw_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)bv_);
-                DataType bx_ = bw_?.Dose;
-                object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                CqlQuantity bz_ = context.Operators.End(by_ as CqlInterval<CqlQuantity>);
-                decimal? ca_ = (bz_ ?? by_ as CqlQuantity)?.value;
-                PositiveInt cb_ = h_?.FrequencyMaxElement;
-                int? cc_ = cb_?.Value;
-                PositiveInt cd_ = h_?.FrequencyElement;
-                int? ce_ = cd_?.Value;
-                FhirDecimal cf_ = h_?.PeriodElement;
-                decimal? cg_ = cf_?.Value;
-                Code<Timing.UnitsOfTime> ch_ = h_?.PeriodUnitElement;
-                Timing.UnitsOfTime? ci_ = ch_?.Value;
-                string cj_ = context.Operators.Convert<string>(ci_);
-                CqlQuantity ck_ = this.Quantity(context, cg_, cj_);
-                decimal? cl_ = this.ToDaily(context, cc_ ?? ce_, ck_);
-                List<Time> cm_ = h_?.TimeOfDayElement;
 
-                string cn_(Time @this) {
-                    string df_ = @this?.Value;
-                    return df_;
+                string bj_(Time @this) {
+                    string bx_ = @this?.Value;
+                    return bx_;
                 }
 
-                IEnumerable<string> co_ = context.Operators.Select<Time, string>((IEnumerable<Time>)cm_, cn_);
+                IEnumerable<string> bk_ = context.Operators.Select<Time, string>((IEnumerable<Time>)as_, bj_);
 
-                CqlTime cp_(string @string) {
-                    CqlTime dg_ = context.Operators.ConvertStringToTime(@string);
-                    return dg_;
+                CqlTime bl_(string @string) {
+                    CqlTime by_ = context.Operators.ConvertStringToTime(@string);
+                    return by_;
                 }
 
-                IEnumerable<CqlTime> cq_ = context.Operators.Select<string, CqlTime>(co_, cp_);
-                int? cr_ = context.Operators.Count<CqlTime>(cq_);
-                decimal? cs_ = context.Operators.ConvertIntegerToDecimal(cr_);
-                decimal? ct_ = context.Operators.Multiply(ca_, (cl_ ?? cs_) ?? 1.0m);
-                decimal? cu_ = context.Operators.Divide(bu_, ct_);
-                UnsignedInt cv_ = p_?.NumberOfRepeatsAllowedElement;
-                int? cw_ = cv_?.Value;
-                int? cx_ = context.Operators.Add(1, cw_ ?? 0);
-                decimal? cy_ = context.Operators.ConvertIntegerToDecimal(cx_);
-                decimal? cz_ = context.Operators.Multiply(br_ ?? cu_, cy_);
-                decimal? da_ = context.Operators.ConvertIntegerToDecimal(1);
-                decimal? db_ = context.Operators.Subtract(cz_, da_);
-                CqlQuantity dc_ = this.Quantity(context, db_, "day");
-                CqlDate dd_ = context.Operators.Add((l_ ?? o_) ?? t_, dc_);
-                CqlInterval<CqlDate> de_ = context.Operators.Interval((l_ ?? o_) ?? t_, dd_, true, true);
-                return de_;
+                IEnumerable<CqlTime> bm_ = context.Operators.Select<string, CqlTime>(bk_, bl_);
+                int? bn_ = context.Operators.Count<CqlTime>(bm_);
+                decimal? bo_ = context.Operators.ConvertIntegerToDecimal(bn_);
+                decimal? bp_ = context.Operators.Multiply(ag_, (ar_ ?? bo_) ?? 1.0m);
+                decimal? bq_ = context.Operators.Divide(aa_, bp_);
+                decimal? br_ = context.Operators.Multiply(x_ ?? bq_, be_);
+                decimal? bs_ = context.Operators.ConvertIntegerToDecimal(1);
+                decimal? bt_ = context.Operators.Subtract(br_, bs_);
+                CqlQuantity bu_ = this.Quantity(context, bt_, "day");
+                CqlDate bv_ = context.Operators.Add((l_ ?? o_) ?? t_, bu_);
+                CqlInterval<CqlDate> bw_ = context.Operators.Interval((l_ ?? o_) ?? t_, bv_, true, true);
+                return bw_;
             }
             else
             {
-
-                CqlBoolean dh_() {
-                    List<Dosage> di_ = R?.DosageInstruction;
-                    Dosage dj_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)di_);
-                    Timing dk_ = dj_?.Timing;
-                    Timing.RepeatComponent dl_ = dk_?.Repeat;
-                    DataType dm_ = dl_?.Bounds;
-                    object dn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dm_);
-                    CqlDateTime do_ = (dn_ as CqlInterval<CqlDateTime>)?.high;
-                    return do_ is not null;
-                }
-
+                CqlDateTime bz_ = (j_ as CqlInterval<CqlDateTime>)?.high;
+                CqlBoolean ca_ = (CqlBoolean)(bz_ is not null);
                 if ((CqlBoolean)(((l_ ?? o_) ?? t_) is not null)
-                    /* CQL 'and' (293:15-293:71) */ && dh_())
+                    /* CQL 'and' (293:15-293:71) */ && ca_)
                 {
-                    CqlDateTime dp_ = context.Operators.End(j_ as CqlInterval<CqlDateTime>);
-                    CqlDate dq_ = context.Operators.DateFrom(dp_);
-                    CqlInterval<CqlDate> dr_ = context.Operators.Interval((l_ ?? o_) ?? t_, dq_, true, true);
-                    return dr_;
+                    CqlDateTime cb_ = context.Operators.End(j_ as CqlInterval<CqlDateTime>);
+                    CqlDate cc_ = context.Operators.DateFrom(cb_);
+                    CqlInterval<CqlDate> cd_ = context.Operators.Interval((l_ ?? o_) ?? t_, cc_, true, true);
+                    return cd_;
                 }
                 else
                 {
@@ -1427,114 +1331,81 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             FhirDateTime h_ = D?.WhenPreparedElement;
             CqlDateTime i_ = context.Operators.Convert<CqlDateTime>(h_);
             CqlDate j_ = context.Operators.DateFrom(i_);
+            Quantity k_ = D?.DaysSupply;
+            CqlQuantity l_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, k_);
+            CqlQuantity m_ = context.Operators.ConvertQuantity(l_, "d");
+            decimal? n_ = m_?.value;
+            Quantity o_ = D?.Quantity;
+            CqlQuantity p_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, o_);
+            decimal? q_ = p_?.value;
+            List<Dosage> r_ = D?.DosageInstruction;
+            Dosage s_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)r_);
+            List<Dosage.DoseAndRateComponent> t_ = s_?.DoseAndRate;
+            Dosage.DoseAndRateComponent u_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)t_);
+            DataType v_ = u_?.Dose;
+            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+            CqlQuantity x_ = context.Operators.End(w_ as CqlInterval<CqlQuantity>);
+            decimal? y_ = (x_ ?? w_ as CqlQuantity)?.value;
+            Timing z_ = s_?.Timing;
+            Timing.RepeatComponent aa_ = z_?.Repeat;
+            PositiveInt ab_ = aa_?.FrequencyMaxElement;
+            int? ac_ = ab_?.Value;
+            PositiveInt ad_ = aa_?.FrequencyElement;
+            int? ae_ = ad_?.Value;
+            FhirDecimal af_ = aa_?.PeriodElement;
+            decimal? ag_ = af_?.Value;
+            Code<Timing.UnitsOfTime> ah_ = aa_?.PeriodUnitElement;
+            Timing.UnitsOfTime? ai_ = ah_?.Value;
+            string aj_ = context.Operators.Convert<string>(ai_);
+            CqlQuantity ak_ = this.Quantity(context, ag_, aj_);
+            decimal? al_ = this.ToDaily(context, ac_ ?? ae_, ak_);
+            List<Time> am_ = aa_?.TimeOfDayElement;
 
-            CqlBoolean k_() {
-                Quantity l_ = D?.DaysSupply;
-                CqlQuantity m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_);
-                CqlQuantity n_ = context.Operators.ConvertQuantity(m_, "d");
-                decimal? o_ = n_?.value;
-                Quantity p_ = D?.Quantity;
-                CqlQuantity q_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, p_);
-                decimal? r_ = q_?.value;
-                List<Dosage> s_ = D?.DosageInstruction;
-                Dosage t_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)s_);
-                List<Dosage.DoseAndRateComponent> u_ = t_?.DoseAndRate;
-                Dosage.DoseAndRateComponent v_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)u_);
-                DataType w_ = v_?.Dose;
-                object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                CqlQuantity y_ = context.Operators.End(x_ as CqlInterval<CqlQuantity>);
-                decimal? z_ = (y_ ?? x_ as CqlQuantity)?.value;
-                Timing aa_ = t_?.Timing;
-                Timing.RepeatComponent ab_ = aa_?.Repeat;
-                PositiveInt ac_ = ab_?.FrequencyMaxElement;
-                int? ad_ = ac_?.Value;
-                PositiveInt ae_ = ab_?.FrequencyElement;
-                int? af_ = ae_?.Value;
-                FhirDecimal ag_ = ab_?.PeriodElement;
-                decimal? ah_ = ag_?.Value;
-                Code<Timing.UnitsOfTime> ai_ = ab_?.PeriodUnitElement;
-                Timing.UnitsOfTime? aj_ = ai_?.Value;
-                string ak_ = context.Operators.Convert<string>(aj_);
-                CqlQuantity al_ = this.Quantity(context, ah_, ak_);
-                decimal? am_ = this.ToDaily(context, ad_ ?? af_, al_);
-                List<Time> an_ = ab_?.TimeOfDayElement;
-
-                string ao_(Time @this) {
-                    string aw_ = @this?.Value;
-                    return aw_;
-                }
-
-                IEnumerable<string> ap_ = context.Operators.Select<Time, string>((IEnumerable<Time>)an_, ao_);
-
-                CqlTime aq_(string @string) {
-                    CqlTime ax_ = context.Operators.ConvertStringToTime(@string);
-                    return ax_;
-                }
-
-                IEnumerable<CqlTime> ar_ = context.Operators.Select<string, CqlTime>(ap_, aq_);
-                int? as_ = context.Operators.Count<CqlTime>(ar_);
-                decimal? at_ = context.Operators.ConvertIntegerToDecimal(as_);
-                decimal? au_ = context.Operators.Multiply(z_, (am_ ?? at_) ?? 1.0m);
-                decimal? av_ = context.Operators.Divide(r_, au_);
-                return (o_ ?? av_) is not null;
+            string an_(Time @this) {
+                string aw_ = @this?.Value;
+                return aw_;
             }
 
+            IEnumerable<string> ao_ = context.Operators.Select<Time, string>((IEnumerable<Time>)am_, an_);
+
+            CqlTime ap_(string @string) {
+                CqlTime ax_ = context.Operators.ConvertStringToTime(@string);
+                return ax_;
+            }
+
+            IEnumerable<CqlTime> aq_ = context.Operators.Select<string, CqlTime>(ao_, ap_);
+            int? ar_ = context.Operators.Count<CqlTime>(aq_);
+            decimal? as_ = context.Operators.ConvertIntegerToDecimal(ar_);
+            decimal? at_ = context.Operators.Multiply(y_, (al_ ?? as_) ?? 1.0m);
+            decimal? au_ = context.Operators.Divide(q_, at_);
+            CqlBoolean av_ = (CqlBoolean)((n_ ?? au_) is not null);
             if ((CqlBoolean)((g_ ?? j_) is not null)
-                /* CQL 'and' (387:10-387:64) */ && k_())
+                /* CQL 'and' (387:10-387:64) */ && av_)
             {
-                Quantity ay_ = D?.DaysSupply;
-                CqlQuantity az_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ay_);
-                CqlQuantity ba_ = context.Operators.ConvertQuantity(az_, "d");
-                decimal? bb_ = ba_?.value;
-                Quantity bc_ = D?.Quantity;
-                CqlQuantity bd_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bc_);
-                decimal? be_ = bd_?.value;
-                List<Dosage> bf_ = D?.DosageInstruction;
-                Dosage bg_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)bf_);
-                List<Dosage.DoseAndRateComponent> bh_ = bg_?.DoseAndRate;
-                Dosage.DoseAndRateComponent bi_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)bh_);
-                DataType bj_ = bi_?.Dose;
-                object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                CqlQuantity bl_ = context.Operators.End(bk_ as CqlInterval<CqlQuantity>);
-                decimal? bm_ = (bl_ ?? bk_ as CqlQuantity)?.value;
-                Timing bn_ = bg_?.Timing;
-                Timing.RepeatComponent bo_ = bn_?.Repeat;
-                PositiveInt bp_ = bo_?.FrequencyMaxElement;
-                int? bq_ = bp_?.Value;
-                PositiveInt br_ = bo_?.FrequencyElement;
-                int? bs_ = br_?.Value;
-                FhirDecimal bt_ = bo_?.PeriodElement;
-                decimal? bu_ = bt_?.Value;
-                Code<Timing.UnitsOfTime> bv_ = bo_?.PeriodUnitElement;
-                Timing.UnitsOfTime? bw_ = bv_?.Value;
-                string bx_ = context.Operators.Convert<string>(bw_);
-                CqlQuantity by_ = this.Quantity(context, bu_, bx_);
-                decimal? bz_ = this.ToDaily(context, bq_ ?? bs_, by_);
-                List<Time> ca_ = bo_?.TimeOfDayElement;
 
-                string cb_(Time @this) {
-                    string co_ = @this?.Value;
-                    return co_;
+                string ay_(Time @this) {
+                    string bl_ = @this?.Value;
+                    return bl_;
                 }
 
-                IEnumerable<string> cc_ = context.Operators.Select<Time, string>((IEnumerable<Time>)ca_, cb_);
+                IEnumerable<string> az_ = context.Operators.Select<Time, string>((IEnumerable<Time>)am_, ay_);
 
-                CqlTime cd_(string @string) {
-                    CqlTime cp_ = context.Operators.ConvertStringToTime(@string);
-                    return cp_;
+                CqlTime ba_(string @string) {
+                    CqlTime bm_ = context.Operators.ConvertStringToTime(@string);
+                    return bm_;
                 }
 
-                IEnumerable<CqlTime> ce_ = context.Operators.Select<string, CqlTime>(cc_, cd_);
-                int? cf_ = context.Operators.Count<CqlTime>(ce_);
-                decimal? cg_ = context.Operators.ConvertIntegerToDecimal(cf_);
-                decimal? ch_ = context.Operators.Multiply(bm_, (bz_ ?? cg_) ?? 1.0m);
-                decimal? ci_ = context.Operators.Divide(be_, ch_);
-                decimal? cj_ = context.Operators.ConvertIntegerToDecimal(1);
-                decimal? ck_ = context.Operators.Subtract(bb_ ?? ci_, cj_);
-                CqlQuantity cl_ = this.Quantity(context, ck_, "day");
-                CqlDate cm_ = context.Operators.Add(g_ ?? j_, cl_);
-                CqlInterval<CqlDate> cn_ = context.Operators.Interval(g_ ?? j_, cm_, true, true);
-                return cn_;
+                IEnumerable<CqlTime> bb_ = context.Operators.Select<string, CqlTime>(az_, ba_);
+                int? bc_ = context.Operators.Count<CqlTime>(bb_);
+                decimal? bd_ = context.Operators.ConvertIntegerToDecimal(bc_);
+                decimal? be_ = context.Operators.Multiply(y_, (al_ ?? bd_) ?? 1.0m);
+                decimal? bf_ = context.Operators.Divide(q_, be_);
+                decimal? bg_ = context.Operators.ConvertIntegerToDecimal(1);
+                decimal? bh_ = context.Operators.Subtract(n_ ?? bf_, bg_);
+                CqlQuantity bi_ = this.Quantity(context, bh_, "day");
+                CqlDate bj_ = context.Operators.Add(g_ ?? j_, bi_);
+                CqlInterval<CqlDate> bk_ = context.Operators.Interval(g_ ?? j_, bj_, true, true);
+                return bk_;
             }
             else
             {
@@ -1562,114 +1433,81 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             FhirDateTime h_ = D?.WhenPreparedElement;
             CqlDateTime i_ = context.Operators.Convert<CqlDateTime>(h_);
             CqlDate j_ = context.Operators.DateFrom(i_);
+            Quantity k_ = D?.DaysSupply;
+            CqlQuantity l_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, k_);
+            CqlQuantity m_ = context.Operators.ConvertQuantity(l_, "d");
+            decimal? n_ = m_?.value;
+            Quantity o_ = D?.Quantity;
+            CqlQuantity p_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, o_);
+            decimal? q_ = p_?.value;
+            List<Dosage> r_ = D?.DosageInstruction;
+            Dosage s_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)r_);
+            List<Dosage.DoseAndRateComponent> t_ = s_?.DoseAndRate;
+            Dosage.DoseAndRateComponent u_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)t_);
+            DataType v_ = u_?.Dose;
+            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+            CqlQuantity x_ = context.Operators.End(w_ as CqlInterval<CqlQuantity>);
+            decimal? y_ = (x_ ?? w_ as CqlQuantity)?.value;
+            Timing z_ = s_?.Timing;
+            Timing.RepeatComponent aa_ = z_?.Repeat;
+            PositiveInt ab_ = aa_?.FrequencyMaxElement;
+            int? ac_ = ab_?.Value;
+            PositiveInt ad_ = aa_?.FrequencyElement;
+            int? ae_ = ad_?.Value;
+            FhirDecimal af_ = aa_?.PeriodElement;
+            decimal? ag_ = af_?.Value;
+            Code<Timing.UnitsOfTime> ah_ = aa_?.PeriodUnitElement;
+            Timing.UnitsOfTime? ai_ = ah_?.Value;
+            string aj_ = context.Operators.Convert<string>(ai_);
+            CqlQuantity ak_ = this.Quantity(context, ag_, aj_);
+            decimal? al_ = this.ToDaily(context, ac_ ?? ae_, ak_);
+            List<Time> am_ = aa_?.TimeOfDayElement;
 
-            CqlBoolean k_() {
-                Quantity l_ = D?.DaysSupply;
-                CqlQuantity m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_);
-                CqlQuantity n_ = context.Operators.ConvertQuantity(m_, "d");
-                decimal? o_ = n_?.value;
-                Quantity p_ = D?.Quantity;
-                CqlQuantity q_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, p_);
-                decimal? r_ = q_?.value;
-                List<Dosage> s_ = D?.DosageInstruction;
-                Dosage t_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)s_);
-                List<Dosage.DoseAndRateComponent> u_ = t_?.DoseAndRate;
-                Dosage.DoseAndRateComponent v_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)u_);
-                DataType w_ = v_?.Dose;
-                object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                CqlQuantity y_ = context.Operators.End(x_ as CqlInterval<CqlQuantity>);
-                decimal? z_ = (y_ ?? x_ as CqlQuantity)?.value;
-                Timing aa_ = t_?.Timing;
-                Timing.RepeatComponent ab_ = aa_?.Repeat;
-                PositiveInt ac_ = ab_?.FrequencyMaxElement;
-                int? ad_ = ac_?.Value;
-                PositiveInt ae_ = ab_?.FrequencyElement;
-                int? af_ = ae_?.Value;
-                FhirDecimal ag_ = ab_?.PeriodElement;
-                decimal? ah_ = ag_?.Value;
-                Code<Timing.UnitsOfTime> ai_ = ab_?.PeriodUnitElement;
-                Timing.UnitsOfTime? aj_ = ai_?.Value;
-                string ak_ = context.Operators.Convert<string>(aj_);
-                CqlQuantity al_ = this.Quantity(context, ah_, ak_);
-                decimal? am_ = this.ToDaily(context, ad_ ?? af_, al_);
-                List<Time> an_ = ab_?.TimeOfDayElement;
-
-                string ao_(Time @this) {
-                    string aw_ = @this?.Value;
-                    return aw_;
-                }
-
-                IEnumerable<string> ap_ = context.Operators.Select<Time, string>((IEnumerable<Time>)an_, ao_);
-
-                CqlTime aq_(string @string) {
-                    CqlTime ax_ = context.Operators.ConvertStringToTime(@string);
-                    return ax_;
-                }
-
-                IEnumerable<CqlTime> ar_ = context.Operators.Select<string, CqlTime>(ap_, aq_);
-                int? as_ = context.Operators.Count<CqlTime>(ar_);
-                decimal? at_ = context.Operators.ConvertIntegerToDecimal(as_);
-                decimal? au_ = context.Operators.Multiply(z_, (am_ ?? at_) ?? 1.0m);
-                decimal? av_ = context.Operators.Divide(r_, au_);
-                return (o_ ?? av_) is not null;
+            string an_(Time @this) {
+                string aw_ = @this?.Value;
+                return aw_;
             }
 
+            IEnumerable<string> ao_ = context.Operators.Select<Time, string>((IEnumerable<Time>)am_, an_);
+
+            CqlTime ap_(string @string) {
+                CqlTime ax_ = context.Operators.ConvertStringToTime(@string);
+                return ax_;
+            }
+
+            IEnumerable<CqlTime> aq_ = context.Operators.Select<string, CqlTime>(ao_, ap_);
+            int? ar_ = context.Operators.Count<CqlTime>(aq_);
+            decimal? as_ = context.Operators.ConvertIntegerToDecimal(ar_);
+            decimal? at_ = context.Operators.Multiply(y_, (al_ ?? as_) ?? 1.0m);
+            decimal? au_ = context.Operators.Divide(q_, at_);
+            CqlBoolean av_ = (CqlBoolean)((n_ ?? au_) is not null);
             if ((CqlBoolean)((g_ ?? j_) is not null)
-                /* CQL 'and' (438:10-438:64) */ && k_())
+                /* CQL 'and' (438:10-438:64) */ && av_)
             {
-                Quantity ay_ = D?.DaysSupply;
-                CqlQuantity az_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ay_);
-                CqlQuantity ba_ = context.Operators.ConvertQuantity(az_, "d");
-                decimal? bb_ = ba_?.value;
-                Quantity bc_ = D?.Quantity;
-                CqlQuantity bd_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bc_);
-                decimal? be_ = bd_?.value;
-                List<Dosage> bf_ = D?.DosageInstruction;
-                Dosage bg_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)bf_);
-                List<Dosage.DoseAndRateComponent> bh_ = bg_?.DoseAndRate;
-                Dosage.DoseAndRateComponent bi_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)bh_);
-                DataType bj_ = bi_?.Dose;
-                object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                CqlQuantity bl_ = context.Operators.End(bk_ as CqlInterval<CqlQuantity>);
-                decimal? bm_ = (bl_ ?? bk_ as CqlQuantity)?.value;
-                Timing bn_ = bg_?.Timing;
-                Timing.RepeatComponent bo_ = bn_?.Repeat;
-                PositiveInt bp_ = bo_?.FrequencyMaxElement;
-                int? bq_ = bp_?.Value;
-                PositiveInt br_ = bo_?.FrequencyElement;
-                int? bs_ = br_?.Value;
-                FhirDecimal bt_ = bo_?.PeriodElement;
-                decimal? bu_ = bt_?.Value;
-                Code<Timing.UnitsOfTime> bv_ = bo_?.PeriodUnitElement;
-                Timing.UnitsOfTime? bw_ = bv_?.Value;
-                string bx_ = context.Operators.Convert<string>(bw_);
-                CqlQuantity by_ = this.Quantity(context, bu_, bx_);
-                decimal? bz_ = this.ToDaily(context, bq_ ?? bs_, by_);
-                List<Time> ca_ = bo_?.TimeOfDayElement;
 
-                string cb_(Time @this) {
-                    string co_ = @this?.Value;
-                    return co_;
+                string ay_(Time @this) {
+                    string bl_ = @this?.Value;
+                    return bl_;
                 }
 
-                IEnumerable<string> cc_ = context.Operators.Select<Time, string>((IEnumerable<Time>)ca_, cb_);
+                IEnumerable<string> az_ = context.Operators.Select<Time, string>((IEnumerable<Time>)am_, ay_);
 
-                CqlTime cd_(string @string) {
-                    CqlTime cp_ = context.Operators.ConvertStringToTime(@string);
-                    return cp_;
+                CqlTime ba_(string @string) {
+                    CqlTime bm_ = context.Operators.ConvertStringToTime(@string);
+                    return bm_;
                 }
 
-                IEnumerable<CqlTime> ce_ = context.Operators.Select<string, CqlTime>(cc_, cd_);
-                int? cf_ = context.Operators.Count<CqlTime>(ce_);
-                decimal? cg_ = context.Operators.ConvertIntegerToDecimal(cf_);
-                decimal? ch_ = context.Operators.Multiply(bm_, (bz_ ?? cg_) ?? 1.0m);
-                decimal? ci_ = context.Operators.Divide(be_, ch_);
-                decimal? cj_ = context.Operators.ConvertIntegerToDecimal(1);
-                decimal? ck_ = context.Operators.Subtract(bb_ ?? ci_, cj_);
-                CqlQuantity cl_ = this.Quantity(context, ck_, "day");
-                CqlDate cm_ = context.Operators.Add(g_ ?? j_, cl_);
-                CqlInterval<CqlDate> cn_ = context.Operators.Interval(g_ ?? j_, cm_, true, true);
-                return cn_;
+                IEnumerable<CqlTime> bb_ = context.Operators.Select<string, CqlTime>(az_, ba_);
+                int? bc_ = context.Operators.Count<CqlTime>(bb_);
+                decimal? bd_ = context.Operators.ConvertIntegerToDecimal(bc_);
+                decimal? be_ = context.Operators.Multiply(y_, (al_ ?? bd_) ?? 1.0m);
+                decimal? bf_ = context.Operators.Divide(q_, be_);
+                decimal? bg_ = context.Operators.ConvertIntegerToDecimal(1);
+                decimal? bh_ = context.Operators.Subtract(n_ ?? bf_, bg_);
+                CqlQuantity bi_ = this.Quantity(context, bh_, "day");
+                CqlDate bj_ = context.Operators.Add(g_ ?? j_, bi_);
+                CqlInterval<CqlDate> bk_ = context.Operators.Interval(g_ ?? j_, bj_, true, true);
+                return bk_;
             }
             else
             {
@@ -1703,25 +1541,18 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
             CqlDateTime g_ = context.Operators.Start(f_ as CqlInterval<CqlDateTime>);
             CqlDate h_ = context.Operators.DateFrom(g_);
-
-            CqlBoolean i_() {
-                DataType j_ = Administration?.Medication;
-                object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
-                CqlQuantity l_ = this.TherapeuticDuration(context, k_ as CqlConcept);
-                return l_ is not null;
-            }
-
+            DataType i_ = Administration?.Medication;
+            object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+            CqlQuantity k_ = this.TherapeuticDuration(context, j_ as CqlConcept);
+            CqlBoolean l_ = (CqlBoolean)(k_ is not null);
             if ((CqlBoolean)(h_ is not null)
-                /* CQL 'and' (475:10-475:66) */ && i_())
+                /* CQL 'and' (475:10-475:66) */ && l_)
             {
-                DataType m_ = Administration?.Medication;
-                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                CqlQuantity o_ = this.TherapeuticDuration(context, n_ as CqlConcept);
-                CqlDate p_ = context.Operators.Add(h_, o_);
-                CqlQuantity q_ = context.Operators.ConvertIntegerToQuantity(1);
-                CqlDate r_ = context.Operators.Subtract(p_, q_);
-                CqlInterval<CqlDate> s_ = context.Operators.Interval(h_, r_, true, true);
-                return s_;
+                CqlDate m_ = context.Operators.Add(h_, k_);
+                CqlQuantity n_ = context.Operators.ConvertIntegerToQuantity(1);
+                CqlDate o_ = context.Operators.Subtract(m_, n_);
+                CqlInterval<CqlDate> p_ = context.Operators.Interval(h_, o_, true, true);
+                return p_;
             }
             else
             {
@@ -1747,25 +1578,18 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
             CqlDateTime g_ = context.Operators.Start(f_ as CqlInterval<CqlDateTime>);
             CqlDate h_ = context.Operators.DateFrom(g_);
-
-            CqlBoolean i_() {
-                DataType j_ = Administration?.Medication;
-                object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
-                CqlQuantity l_ = this.TherapeuticDuration(context, k_ as CqlConcept);
-                return l_ is not null;
-            }
-
+            DataType i_ = Administration?.Medication;
+            object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+            CqlQuantity k_ = this.TherapeuticDuration(context, j_ as CqlConcept);
+            CqlBoolean l_ = (CqlBoolean)(k_ is not null);
             if ((CqlBoolean)(h_ is not null)
-                /* CQL 'and' (503:10-503:66) */ && i_())
+                /* CQL 'and' (503:10-503:66) */ && l_)
             {
-                DataType m_ = Administration?.Medication;
-                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                CqlQuantity o_ = this.TherapeuticDuration(context, n_ as CqlConcept);
-                CqlDate p_ = context.Operators.Add(h_, o_);
-                CqlQuantity q_ = context.Operators.ConvertIntegerToQuantity(1);
-                CqlDate r_ = context.Operators.Subtract(p_, q_);
-                CqlInterval<CqlDate> s_ = context.Operators.Interval(h_, r_, true, true);
-                return s_;
+                CqlDate m_ = context.Operators.Add(h_, k_);
+                CqlQuantity n_ = context.Operators.ConvertIntegerToQuantity(1);
+                CqlDate o_ = context.Operators.Subtract(m_, n_);
+                CqlInterval<CqlDate> p_ = context.Operators.Interval(h_, o_, true, true);
+                return p_;
             }
             else
             {

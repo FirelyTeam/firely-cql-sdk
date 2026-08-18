@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.8.0")]
 [CqlLibrary("CMS130FHIRColorectalCancerScrn", "1.0.000")]
 public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISingleton<CMS130FHIRColorectalCancerScrn_1_0_000>
 {
@@ -154,15 +154,11 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(46, 75, true, true);
         CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
-
-        CqlBoolean k_() {
-            IEnumerable<Encounter> l_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
-            CqlBoolean m_ = context.Operators.Exists<Encounter>(l_);
-            return m_;
-        }
-
+        IEnumerable<Encounter> k_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
+        CqlBoolean l_ = context.Operators.Exists<Encounter>(k_);
+        CqlBoolean m_ = l_;
         return j_
-            /* CQL 'and' (40:3-43:64) */ && k_();
+            /* CQL 'and' (40:3-43:64) */ && m_;
     }
 
 
@@ -278,23 +274,15 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-
-        CqlBoolean b_() {
-            IEnumerable<Condition> d_ = this.Malignant_Neoplasm(context);
-            CqlBoolean e_ = context.Operators.Exists<Condition>(d_);
-            return e_;
-        }
-
-
-        CqlBoolean c_() {
-            IEnumerable<Procedure> f_ = this.Total_Colectomy_Performed(context);
-            CqlBoolean g_ = context.Operators.Exists<Procedure>(f_);
-            return g_;
-        }
-
+        IEnumerable<Condition> b_ = this.Malignant_Neoplasm(context);
+        CqlBoolean c_ = context.Operators.Exists<Condition>(b_);
+        CqlBoolean d_ = c_;
+        IEnumerable<Procedure> e_ = this.Total_Colectomy_Performed(context);
+        CqlBoolean f_ = context.Operators.Exists<Procedure>(e_);
+        CqlBoolean g_ = f_;
         return a_
-            /* CQL 'or' (49:3-50:34) */ || b_()
-            /* CQL 'or' (49:3-51:41) */ || c_()
+            /* CQL 'or' (49:3-50:34) */ || d_
+            /* CQL 'or' (49:3-51:41) */ || g_
             /* CQL 'or' (49:3-52:73) */ || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context)
             /* CQL 'or' (49:3-53:74) */ || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context)
             /* CQL 'or' (49:3-54:69) */ || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
@@ -316,43 +304,39 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
         bool? d_(Observation FecalOccultResult) {
             DataType f_ = FecalOccultResult?.Value;
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-
-            CqlBoolean h_() {
-                object i_;
-                DataType m_ = FecalOccultResult?.Effective;
-                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                bool o_ = n_ is CqlDateTime;
+            object h_;
+            DataType m_ = FecalOccultResult?.Effective;
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+            bool o_ = n_ is CqlDateTime;
+            if (o_)
+            {
+                h_ = n_ as CqlDateTime;
+            }
+            else
+            {
                 if (o_)
                 {
-                    i_ = n_ as CqlDateTime;
+                    h_ = n_ as CqlDateTime;
                 }
                 else
                 {
-                    if (o_)
+                    bool p_ = n_ is CqlInterval<CqlDateTime>;
+                    if (p_)
                     {
-                        i_ = n_ as CqlDateTime;
+                        h_ = n_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        bool p_ = n_ is CqlInterval<CqlDateTime>;
-                        if (p_)
-                        {
-                            i_ = n_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            i_ = null;
-                        }
+                        h_ = null;
                     }
                 }
-                CqlDateTime j_ = QICoreCommon_4_0_000.Instance.latest(context, i_);
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                CqlBoolean l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
-                return l_;
             }
-
+            CqlDateTime i_ = QICoreCommon_4_0_000.Instance.latest(context, h_);
+            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
+            CqlBoolean k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
+            CqlBoolean l_ = k_;
             return (CqlBoolean)(g_ is not null)
-                /* CQL 'and' (65:5-66:83) */ && h_();
+                /* CQL 'and' (65:5-66:83) */ && l_;
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -375,48 +359,44 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
         bool? d_(Observation sDNATest) {
             DataType f_ = sDNATest?.Value;
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-
-            CqlBoolean h_() {
-                object i_;
-                DataType r_ = sDNATest?.Effective;
-                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                bool t_ = s_ is CqlDateTime;
+            object h_;
+            DataType r_ = sDNATest?.Effective;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            bool t_ = s_ is CqlDateTime;
+            if (t_)
+            {
+                h_ = s_ as CqlDateTime;
+            }
+            else
+            {
                 if (t_)
                 {
-                    i_ = s_ as CqlDateTime;
+                    h_ = s_ as CqlDateTime;
                 }
                 else
                 {
-                    if (t_)
+                    bool u_ = s_ is CqlInterval<CqlDateTime>;
+                    if (u_)
                     {
-                        i_ = s_ as CqlDateTime;
+                        h_ = s_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        bool u_ = s_ is CqlInterval<CqlDateTime>;
-                        if (u_)
-                        {
-                            i_ = s_ as CqlInterval<CqlDateTime>;
-                        }
-                        else
-                        {
-                            i_ = null;
-                        }
+                        h_ = null;
                     }
                 }
-                CqlDateTime j_ = QICoreCommon_4_0_000.Instance.latest(context, i_);
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                CqlDateTime l_ = context.Operators.Start(k_);
-                CqlQuantity m_ = context.Operators.Quantity(2m, "years");
-                CqlDateTime n_ = context.Operators.Subtract(l_, m_);
-                CqlDateTime o_ = context.Operators.End(k_);
-                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(n_, o_, true, true);
-                CqlBoolean q_ = context.Operators.In<CqlDateTime>(j_, p_, "day");
-                return q_;
             }
-
+            CqlDateTime i_ = QICoreCommon_4_0_000.Instance.latest(context, h_);
+            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
+            CqlDateTime k_ = context.Operators.Start(j_);
+            CqlQuantity l_ = context.Operators.Quantity(2m, "years");
+            CqlDateTime m_ = context.Operators.Subtract(k_, l_);
+            CqlDateTime n_ = context.Operators.End(j_);
+            CqlInterval<CqlDateTime> o_ = context.Operators.Interval(m_, n_, true, true);
+            CqlBoolean p_ = context.Operators.In<CqlDateTime>(i_, o_, "day");
+            CqlBoolean q_ = p_;
             return (CqlBoolean)(g_ is not null)
-                /* CQL 'and' (102:5-103:132) */ && h_();
+                /* CQL 'and' (102:5-103:132) */ && q_;
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -598,39 +578,23 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
     {
         IEnumerable<Observation> a_ = this.Fecal_Occult_Blood_Test_Performed(context);
         CqlBoolean b_ = context.Operators.Exists<Observation>(a_);
-
-        CqlBoolean c_() {
-            IEnumerable<Observation> g_ = this.Stool_DNA_with_FIT_Test_Performed(context);
-            CqlBoolean h_ = context.Operators.Exists<Observation>(g_);
-            return h_;
-        }
-
-
-        CqlBoolean d_() {
-            IEnumerable<Procedure> i_ = this.Flexible_Sigmoidoscopy_Performed(context);
-            CqlBoolean j_ = context.Operators.Exists<Procedure>(i_);
-            return j_;
-        }
-
-
-        CqlBoolean e_() {
-            IEnumerable<Observation> k_ = this.CT_Colonography_Performed(context);
-            CqlBoolean l_ = context.Operators.Exists<Observation>(k_);
-            return l_;
-        }
-
-
-        CqlBoolean f_() {
-            IEnumerable<Procedure> m_ = this.Colonoscopy_Performed(context);
-            CqlBoolean n_ = context.Operators.Exists<Procedure>(m_);
-            return n_;
-        }
-
+        IEnumerable<Observation> c_ = this.Stool_DNA_with_FIT_Test_Performed(context);
+        CqlBoolean d_ = context.Operators.Exists<Observation>(c_);
+        CqlBoolean e_ = d_;
+        IEnumerable<Procedure> f_ = this.Flexible_Sigmoidoscopy_Performed(context);
+        CqlBoolean g_ = context.Operators.Exists<Procedure>(f_);
+        CqlBoolean h_ = g_;
+        IEnumerable<Observation> i_ = this.CT_Colonography_Performed(context);
+        CqlBoolean j_ = context.Operators.Exists<Observation>(i_);
+        CqlBoolean k_ = j_;
+        IEnumerable<Procedure> l_ = this.Colonoscopy_Performed(context);
+        CqlBoolean m_ = context.Operators.Exists<Procedure>(l_);
+        CqlBoolean n_ = m_;
         return b_
-            /* CQL 'or' (57:3-58:49) */ || c_()
-            /* CQL 'or' (57:3-59:48) */ || d_()
-            /* CQL 'or' (57:3-60:41) */ || e_()
-            /* CQL 'or' (57:3-61:37) */ || f_();
+            /* CQL 'or' (57:3-58:49) */ || e_
+            /* CQL 'or' (57:3-59:48) */ || h_
+            /* CQL 'or' (57:3-60:41) */ || k_
+            /* CQL 'or' (57:3-61:37) */ || n_;
     }
 
 

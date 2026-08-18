@@ -195,7 +195,7 @@ internal partial class CSharpEmitter
                 // cases must not depend on their position in the switch.
                 case CodeBinary shortCircuit when CodeBinary.ShortCircuits(shortCircuit.Op)
                                                  && !PrintsInlineAsShortCircuitOperand(shortCircuit.Right):
-                    return LinearizeShortCircuitCallingRightOperand(shortCircuit);
+                    return LinearizeShortCircuitEvaluatingRightOperandEagerly(shortCircuit);
 
                 // Pass-through composites: printed inline over their (spine-linearized)
                 // children instead of being hoisted into a local. This mirrors the old
@@ -478,30 +478,38 @@ internal partial class CSharpEmitter
         /// a zero-argument local function and the operand position becomes a CALL to it, so
         /// evaluation still happens only when the operator does not skip.
         /// </summary>
-        private Atom LinearizeShortCircuitCallingRightOperand(CodeBinary node)
+        private Atom LinearizeShortCircuitEvaluatingRightOperandEagerly(CodeBinary node)
         {
             // The left operand is always evaluated, so hoisting it is free and desirable.
             var left = Linearize(node.Left)!;
 
-            // The function is DECLARED to return CqlBoolean while its body stays the plain bool?
-            // expression, so the conversion happens implicitly at the `return` and nothing needs a
-            // cast: neither the body (`return t_;`) nor the call site (`f_()`). Returning bool?
-            // instead would produce `return (bool?)((CqlBoolean)t_);` in the body AND
-            // `(CqlBoolean)f_()` at the call site — three conversions to move one value through
-            // unchanged.
+            // Eagerly, into THIS scope, rather than into a zero-argument local function.
             //
-            // CqlBoolean, NOT CqlBoolean?: && is not lifted over nullable types, so a nullable
-            // return would leave the call site unable to short-circuit at all — which is the whole
-            // reason this type exists. CqlBoolean already carries its own null.
-            var body = UnwrapCqlBooleanConversion(node.Right);
-            var function = HoistLocalFunction(new CodeLambda([], body), declaredReturnType: typeof(CqlBoolean));
-            var right = $"{function.Code}()";
+            // The skip is given up for these operands, deliberately. A local function gives the operand
+            // its own scope and therefore its own dedup table, so every subexpression the enclosing
+            // scope had already computed gets emitted a second time inside it — including retrieves, and
+            // including calls to other CQL functions that two sibling operands both need. Measured
+            // across the integration corpus that cost +22.7% runtime retrieves and ~7,000 generated
+            // lines, while the skip itself fired for roughly 2% of evaluations and produced no
+            // measurable wall-clock gain. One scope means one dedup table, which is what keeps the
+            // output non-redundant.
+            //
+            // Operands that print INLINE keep their skip and cost nothing, because they never leave this
+            // scope — see PrintsInlineAsShortCircuitOperand, which is what selects between the two.
+            var right = Linearize(node.Right)!;
+
+            // Force anything that is not already a plain reference into a local, so the operand position
+            // is a simple name rather than an expression that would be re-printed, and so the operator
+            // still reads as one flat chain.
+            if (right.Node is not (CodeLocal or CodeConstant or CodeContextParameter))
+                right = Hoist(right.Code, right.KeyCode, node.Right);
 
             return new Atom(
-                _emitter.FormatShortCircuit(node.Op, node.Left, left.Code, right, node.OriginTag),
-                _emitter.FormatShortCircuit(node.Op, node.Left, left.KeyCode, right, originTag: null),
+                _emitter.FormatShortCircuit(node.Op, node.Left, left.Code, right.Code, node.OriginTag),
+                _emitter.FormatShortCircuit(node.Op, node.Left, left.KeyCode, right.KeyCode, originTag: null),
                 node);
         }
+
 
         /// <summary>
         /// Binds the let's value to its local exactly once, then linearizes the body. The

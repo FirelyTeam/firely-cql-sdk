@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.8.0")]
 [CqlLibrary("CMS104FHIRSTKDCAntithrombotic", "1.0.000")]
 public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleton<CMS104FHIRSTKDCAntithrombotic_1_0_000>
 {
@@ -135,17 +135,13 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
                     string r_ = context.Operators.Last<string>(q_);
                     CqlBoolean s_ = context.Operators.Equal(o_, r_);
-
-                    CqlBoolean t_() {
-                        CodeableConcept u_ = M?.Code;
-                        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
-                        CqlValueSet w_ = this.Antithrombotic_Therapy_for_Ischemic_Stroke(context);
-                        CqlBoolean x_ = context.Operators.ConceptInValueSet(v_, w_);
-                        return x_;
-                    }
-
+                    CodeableConcept t_ = M?.Code;
+                    CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+                    CqlValueSet v_ = this.Antithrombotic_Therapy_for_Ischemic_Stroke(context);
+                    CqlBoolean w_ = context.Operators.ConceptInValueSet(u_, v_);
+                    CqlBoolean x_ = w_;
                     return s_
-                        /* CQL 'and' */ && t_();
+                        /* CQL 'and' */ && x_;
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -166,69 +162,49 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     "completed",
                 ];
                 CqlBoolean ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+                Code<MedicationRequest.MedicationRequestIntent> ad_ = DischargeAntithrombotic?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
+                string af_ = context.Operators.Convert<string>(ae_);
+                string[] ag_ = [
+                    "order",
+                    "original-order",
+                    "reflex-order",
+                    "filler-order",
+                    "instance-order",
+                ];
+                CqlBoolean ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
+                CqlBoolean ai_ = ah_;
+                CqlBoolean aj_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAntithrombotic as MedicationRequest);
+                CqlBoolean ak_ = aj_
+                    /* CQL 'or' (36:13-38:9) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAntithrombotic as MedicationRequest);
+                FhirDateTime al_ = DischargeAntithrombotic?.AuthoredOnElement;
+                CqlDateTime am_ = context.Operators.Convert<CqlDateTime>(al_);
+                Period an_ = IschemicStrokeEncounter?.Period;
+                CqlInterval<CqlDateTime> ao_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, an_);
+                CqlBoolean ap_ = context.Operators.In<CqlDateTime>(am_, ao_, (string)default);
+                CqlBoolean aq_ = ap_;
+                IEnumerable<Task> ar_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
-                CqlBoolean ad_() {
-                    Code<MedicationRequest.MedicationRequestIntent> ah_ = DischargeAntithrombotic?.IntentElement;
-                    MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
-                    string aj_ = context.Operators.Convert<string>(ai_);
-                    string[] ak_ = [
-                        "order",
-                        "original-order",
-                        "reflex-order",
-                        "filler-order",
-                        "instance-order",
-                    ];
-                    CqlBoolean al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
-                    return al_;
+                bool? as_(Task TaskReject) {
+                    ResourceReference av_ = TaskReject?.Focus;
+                    CqlBoolean aw_ = QICoreCommon_4_0_000.Instance.references(context, av_, DischargeAntithrombotic);
+                    CodeableConcept ax_ = TaskReject?.Code;
+                    CqlConcept ay_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ax_);
+                    CqlCode az_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
+                    CqlConcept ba_ = context.Operators.ConvertCodeToConcept(az_);
+                    CqlBoolean bb_ = context.Operators.Equivalent(ay_, ba_);
+                    CqlBoolean bc_ = bb_;
+                    return aw_
+                        /* CQL 'and' (41:13-42:58) */ && bc_;
                 }
 
-
-                CqlBoolean ae_() {
-                    CqlBoolean am_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAntithrombotic as MedicationRequest);
-                    return am_
-                        /* CQL 'or' (36:13-38:9) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAntithrombotic as MedicationRequest);
-                }
-
-
-                CqlBoolean af_() {
-                    FhirDateTime an_ = DischargeAntithrombotic?.AuthoredOnElement;
-                    CqlDateTime ao_ = context.Operators.Convert<CqlDateTime>(an_);
-                    Period ap_ = IschemicStrokeEncounter?.Period;
-                    CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ap_);
-                    CqlBoolean ar_ = context.Operators.In<CqlDateTime>(ao_, aq_, (string)default);
-                    return ar_;
-                }
-
-
-                CqlBoolean ag_() {
-                    IEnumerable<Task> as_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
-
-                    bool? at_(Task TaskReject) {
-                        ResourceReference av_ = TaskReject?.Focus;
-                        CqlBoolean aw_ = QICoreCommon_4_0_000.Instance.references(context, av_, DischargeAntithrombotic);
-
-                        CqlBoolean ax_() {
-                            CodeableConcept ay_ = TaskReject?.Code;
-                            CqlConcept az_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ay_);
-                            CqlCode ba_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
-                            CqlConcept bb_ = context.Operators.ConvertCodeToConcept(ba_);
-                            CqlBoolean bc_ = context.Operators.Equivalent(az_, bb_);
-                            return bc_;
-                        }
-
-                        return aw_
-                            /* CQL 'and' (41:13-42:58) */ && ax_();
-                    }
-
-                    CqlBoolean au_ = context.Operators.WhereAny<Task>(as_, at_);
-                    return !au_;
-                }
-
+                CqlBoolean at_ = context.Operators.WhereAny<Task>(ar_, as_);
+                CqlBoolean au_ = (CqlBoolean)!at_;
                 return ac_
-                    /* CQL 'and' (34:17-35:125) */ && ad_()
-                    /* CQL 'and' (34:17-38:9) */ && ae_()
-                    /* CQL 'and' (34:17-39:84) */ && af_()
-                    /* CQL 'and' (34:17-43:9) */ && ag_();
+                    /* CQL 'and' (34:17-35:125) */ && ai_
+                    /* CQL 'and' (34:17-38:9) */ && ak_
+                    /* CQL 'and' (34:17-39:84) */ && aq_
+                    /* CQL 'and' (34:17-43:9) */ && au_;
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -256,98 +232,77 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
             List<CodeableConcept> n_ = NoAntithromboticDischarge?.ReasonCode;
 
             CqlConcept o_(CodeableConcept @this) {
-                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return w_;
+                CqlConcept al_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return al_;
             }
 
             IEnumerable<CqlConcept> p_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)n_, o_);
             CqlValueSet q_ = this.Medical_Reason_For_Not_Providing_Treatment(context);
             CqlBoolean r_ = context.Operators.ConceptsInValueSet(p_, q_);
 
-            CqlBoolean s_() {
-                List<CodeableConcept> x_ = NoAntithromboticDischarge?.ReasonCode;
-
-                CqlConcept y_(CodeableConcept @this) {
-                    CqlConcept ac_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                    return ac_;
-                }
-
-                IEnumerable<CqlConcept> z_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)x_, y_);
-                CqlValueSet aa_ = this.Patient_Refusal(context);
-                CqlBoolean ab_ = context.Operators.ConceptsInValueSet(z_, aa_);
-                return ab_;
+            CqlConcept s_(CodeableConcept @this) {
+                CqlConcept am_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return am_;
             }
 
-
-            CqlBoolean t_() {
-                CqlBoolean ad_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAntithromboticDischarge as MedicationRequest);
-                return ad_
-                    /* CQL 'or' (59:13-61:9) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, NoAntithromboticDischarge as MedicationRequest);
-            }
-
-
-            CqlBoolean u_() {
-                Code<MedicationRequest.MedicationrequestStatus> ae_ = NoAntithromboticDischarge?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? af_ = ae_?.Value;
-                string ag_ = context.Operators.Convert<string>(af_);
-                string[] ah_ = [
-                    "active",
-                    "completed",
-                ];
-                CqlBoolean ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
-                return ai_;
-            }
-
-
-            CqlBoolean v_() {
-                Code<MedicationRequest.MedicationRequestIntent> aj_ = NoAntithromboticDischarge?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? ak_ = aj_?.Value;
-                string al_ = context.Operators.Convert<string>(ak_);
-                string[] am_ = [
-                    "order",
-                    "original-order",
-                    "reflex-order",
-                    "filler-order",
-                    "instance-order",
-                ];
-                CqlBoolean an_ = context.Operators.In<string>(al_, (IEnumerable<string>)am_);
-                return an_;
-            }
-
+            IEnumerable<CqlConcept> t_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)n_, s_);
+            CqlValueSet u_ = this.Patient_Refusal(context);
+            CqlBoolean v_ = context.Operators.ConceptsInValueSet(t_, u_);
+            CqlBoolean w_ = v_;
+            CqlBoolean x_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAntithromboticDischarge as MedicationRequest);
+            CqlBoolean y_ = x_
+                /* CQL 'or' (59:13-61:9) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, NoAntithromboticDischarge as MedicationRequest);
+            Code<MedicationRequest.MedicationrequestStatus> z_ = NoAntithromboticDischarge?.StatusElement;
+            MedicationRequest.MedicationrequestStatus? aa_ = z_?.Value;
+            string ab_ = context.Operators.Convert<string>(aa_);
+            string[] ac_ = [
+                "active",
+                "completed",
+            ];
+            CqlBoolean ad_ = context.Operators.In<string>(ab_, (IEnumerable<string>)ac_);
+            CqlBoolean ae_ = ad_;
+            Code<MedicationRequest.MedicationRequestIntent> af_ = NoAntithromboticDischarge?.IntentElement;
+            MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+            string ah_ = context.Operators.Convert<string>(ag_);
+            string[] ai_ = [
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
+            CqlBoolean aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
+            CqlBoolean ak_ = aj_;
             return (r_
-                /* CQL 'or' (56:13-58:7) */ || s_())
-                /* CQL 'and' (56:13-61:9) */ && t_()
-                /* CQL 'and' (56:13-62:73) */ && u_()
-                /* CQL 'and' (56:7-63:127) */ && v_();
+                /* CQL 'or' (56:13-58:7) */ || w_)
+                /* CQL 'and' (56:13-61:9) */ && y_
+                /* CQL 'and' (56:13-62:73) */ && ae_
+                /* CQL 'and' (56:7-63:127) */ && ak_;
         }
 
         IEnumerable<MedicationRequest> e_ = context.Operators.Where<MedicationRequest>(c_, d_);
         IEnumerable<MedicationRequest> f_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
         bool? g_(MedicationRequest MR) {
-            IEnumerable<Medication> ao_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> an_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? ap_(Medication M) {
-                object ar_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object as_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> at_ = context.Operators.Split((string)as_, "/");
-                string au_ = context.Operators.Last<string>(at_);
-                CqlBoolean av_ = context.Operators.Equal(ar_, au_);
-
-                CqlBoolean aw_() {
-                    CodeableConcept ax_ = M?.Code;
-                    CqlConcept ay_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ax_);
-                    CqlValueSet az_ = this.Antithrombotic_Therapy_for_Ischemic_Stroke(context);
-                    CqlBoolean ba_ = context.Operators.ConceptInValueSet(ay_, az_);
-                    return ba_;
-                }
-
-                return av_
-                    /* CQL 'and' */ && aw_();
+            bool? ao_(Medication M) {
+                object aq_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object ar_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> as_ = context.Operators.Split((string)ar_, "/");
+                string at_ = context.Operators.Last<string>(as_);
+                CqlBoolean au_ = context.Operators.Equal(aq_, at_);
+                CodeableConcept av_ = M?.Code;
+                CqlConcept aw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, av_);
+                CqlValueSet ax_ = this.Antithrombotic_Therapy_for_Ischemic_Stroke(context);
+                CqlBoolean ay_ = context.Operators.ConceptInValueSet(aw_, ax_);
+                CqlBoolean az_ = ay_;
+                return au_
+                    /* CQL 'and' */ && az_;
             }
 
-            CqlBoolean aq_ = context.Operators.WhereAny<Medication>(ao_, ap_);
-            return aq_;
+            CqlBoolean ap_ = context.Operators.WhereAny<Medication>(an_, ao_);
+            return ap_;
         }
 
         IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
@@ -355,61 +310,43 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> j_ = context.Operators.Union<MedicationRequest>(h_, i_);
 
         bool? k_(MedicationRequest MedReqAntithrombotic) {
-            IEnumerable<Task> bb_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
+            IEnumerable<Task> ba_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
-            bool? bc_(Task TaskReject) {
-                ResourceReference be_ = TaskReject?.Focus;
-                CqlBoolean bf_ = QICoreCommon_4_0_000.Instance.references(context, be_, MedReqAntithrombotic);
-
-                CqlBoolean bg_() {
-                    CodeableConcept bj_ = TaskReject?.StatusReason;
-                    CqlConcept bk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bj_);
-                    CqlValueSet bl_ = this.Medical_Reason_For_Not_Providing_Treatment(context);
-                    CqlBoolean bm_ = context.Operators.ConceptInValueSet(bk_, bl_);
-
-                    CqlBoolean bn_() {
-                        CodeableConcept bo_ = TaskReject?.StatusReason;
-                        CqlConcept bp_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bo_);
-                        CqlValueSet bq_ = this.Patient_Refusal(context);
-                        CqlBoolean br_ = context.Operators.ConceptInValueSet(bp_, bq_);
-                        return br_;
-                    }
-
-                    return bm_
-                        /* CQL 'or' (68:17-70:13) */ || bn_();
-                }
-
-
-                CqlBoolean bh_() {
-                    Code<MedicationRequest.MedicationrequestStatus> bs_ = MedReqAntithrombotic?.StatusElement;
-                    MedicationRequest.MedicationrequestStatus? bt_ = bs_?.Value;
-                    string bu_ = context.Operators.Convert<string>(bt_);
-                    string[] bv_ = [
-                        "active",
-                        "completed",
-                    ];
-                    CqlBoolean bw_ = context.Operators.In<string>(bu_, (IEnumerable<string>)bv_);
-                    return bw_;
-                }
-
-
-                CqlBoolean bi_() {
-                    CodeableConcept bx_ = TaskReject?.Code;
-                    CqlConcept by_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bx_);
-                    CqlCode bz_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
-                    CqlConcept ca_ = context.Operators.ConvertCodeToConcept(bz_);
-                    CqlBoolean cb_ = context.Operators.Equivalent(by_, ca_);
-                    return cb_;
-                }
-
-                return bf_
-                    /* CQL 'and' (67:21-70:13) */ && bg_()
-                    /* CQL 'and' (67:21-71:72) */ && bh_()
-                    /* CQL 'and' (67:21-72:56) */ && bi_();
+            bool? bb_(Task TaskReject) {
+                ResourceReference bd_ = TaskReject?.Focus;
+                CqlBoolean be_ = QICoreCommon_4_0_000.Instance.references(context, bd_, MedReqAntithrombotic);
+                CodeableConcept bf_ = TaskReject?.StatusReason;
+                CqlConcept bg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bf_);
+                CqlValueSet bh_ = this.Medical_Reason_For_Not_Providing_Treatment(context);
+                CqlBoolean bi_ = context.Operators.ConceptInValueSet(bg_, bh_);
+                CqlValueSet bj_ = this.Patient_Refusal(context);
+                CqlBoolean bk_ = context.Operators.ConceptInValueSet(bg_, bj_);
+                CqlBoolean bl_ = bk_;
+                CqlBoolean bm_ = bi_
+                    /* CQL 'or' (68:17-70:13) */ || bl_;
+                Code<MedicationRequest.MedicationrequestStatus> bn_ = MedReqAntithrombotic?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? bo_ = bn_?.Value;
+                string bp_ = context.Operators.Convert<string>(bo_);
+                string[] bq_ = [
+                    "active",
+                    "completed",
+                ];
+                CqlBoolean br_ = context.Operators.In<string>(bp_, (IEnumerable<string>)bq_);
+                CqlBoolean bs_ = br_;
+                CodeableConcept bt_ = TaskReject?.Code;
+                CqlConcept bu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bt_);
+                CqlCode bv_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
+                CqlConcept bw_ = context.Operators.ConvertCodeToConcept(bv_);
+                CqlBoolean bx_ = context.Operators.Equivalent(bu_, bw_);
+                CqlBoolean by_ = bx_;
+                return be_
+                    /* CQL 'and' (67:21-70:13) */ && bm_
+                    /* CQL 'and' (67:21-71:72) */ && bs_
+                    /* CQL 'and' (67:21-72:56) */ && by_;
             }
 
-            CqlBoolean bd_ = context.Operators.WhereAny<Task>(bb_, bc_);
-            return bd_;
+            CqlBoolean bc_ = context.Operators.WhereAny<Task>(ba_, bb_);
+            return bc_;
         }
 
         IEnumerable<MedicationRequest> l_ = context.Operators.Where<MedicationRequest>(j_, k_);
@@ -468,17 +405,13 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 IEnumerable<string> n_ = context.Operators.Split((string)m_, "/");
                 string o_ = context.Operators.Last<string>(n_);
                 CqlBoolean p_ = context.Operators.Equal(l_, o_);
-
-                CqlBoolean q_() {
-                    CodeableConcept r_ = M?.Code;
-                    CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
-                    CqlValueSet t_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy(context);
-                    CqlBoolean u_ = context.Operators.ConceptInValueSet(s_, t_);
-                    return u_;
-                }
-
+                CodeableConcept q_ = M?.Code;
+                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
+                CqlValueSet s_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy(context);
+                CqlBoolean t_ = context.Operators.ConceptInValueSet(r_, s_);
+                CqlBoolean u_ = t_;
                 return p_
-                    /* CQL 'and' */ && q_();
+                    /* CQL 'and' */ && u_;
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -492,39 +425,31 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
 
         bool? g_(MedicationRequest PharmacologicalContraindications) {
             CqlBoolean v_ = QICoreCommon_4_0_000.Instance.isCommunity(context, PharmacologicalContraindications as MedicationRequest);
-
-            CqlBoolean w_() {
-                Code<MedicationRequest.MedicationrequestStatus> y_ = PharmacologicalContraindications?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
-                string aa_ = context.Operators.Convert<string>(z_);
-                string[] ab_ = [
-                    "active",
-                    "completed",
-                ];
-                CqlBoolean ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
-                return ac_;
-            }
-
-
-            CqlBoolean x_() {
-                Code<MedicationRequest.MedicationRequestIntent> ad_ = PharmacologicalContraindications?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
-                string af_ = context.Operators.Convert<string>(ae_);
-                string[] ag_ = [
-                    "order",
-                    "original-order",
-                    "reflex-order",
-                    "filler-order",
-                    "instance-order",
-                ];
-                CqlBoolean ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
-                return ah_;
-            }
-
+            Code<MedicationRequest.MedicationrequestStatus> w_ = PharmacologicalContraindications?.StatusElement;
+            MedicationRequest.MedicationrequestStatus? x_ = w_?.Value;
+            string y_ = context.Operators.Convert<string>(x_);
+            string[] z_ = [
+                "active",
+                "completed",
+            ];
+            CqlBoolean aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
+            CqlBoolean ab_ = aa_;
+            Code<MedicationRequest.MedicationRequestIntent> ac_ = PharmacologicalContraindications?.IntentElement;
+            MedicationRequest.MedicationRequestIntent? ad_ = ac_?.Value;
+            string ae_ = context.Operators.Convert<string>(ad_);
+            string[] af_ = [
+                "order",
+                "original-order",
+                "reflex-order",
+                "filler-order",
+                "instance-order",
+            ];
+            CqlBoolean ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
+            CqlBoolean ah_ = ag_;
             return (v_
                 /* CQL 'or' (82:11-84:5) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, PharmacologicalContraindications as MedicationRequest))
-                /* CQL 'and' (82:11-85:78) */ && w_()
-                /* CQL 'and' (82:5-86:132) */ && x_();
+                /* CQL 'and' (82:11-85:78) */ && ab_
+                /* CQL 'and' (82:5-86:132) */ && ah_;
         }
 
         IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);

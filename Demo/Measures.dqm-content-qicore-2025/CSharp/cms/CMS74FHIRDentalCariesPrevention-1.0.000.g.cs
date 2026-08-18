@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.8.0")]
 [CqlLibrary("CMS74FHIRDentalCariesPrevention", "1.0.000")]
 public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingleton<CMS74FHIRDentalCariesPrevention_1_0_000>
 {
@@ -119,15 +119,11 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(1, 20, true, true);
         CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
-
-        CqlBoolean k_() {
-            IEnumerable<Encounter> l_ = this.Qualifying_Encounters(context);
-            CqlBoolean m_ = context.Operators.Exists<Encounter>(l_);
-            return m_;
-        }
-
+        IEnumerable<Encounter> k_ = this.Qualifying_Encounters(context);
+        CqlBoolean l_ = context.Operators.Exists<Encounter>(k_);
+        CqlBoolean m_ = l_;
         return j_
-            /* CQL 'and' (23:3-24:42) */ && k_();
+            /* CQL 'and' (23:3-24:42) */ && m_;
     }
 
 

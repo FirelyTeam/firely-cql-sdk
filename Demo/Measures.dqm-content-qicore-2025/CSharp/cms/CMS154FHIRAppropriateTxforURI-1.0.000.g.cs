@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.8.0")]
 [CqlLibrary("CMS154FHIRAppropriateTxforURI", "1.0.000")]
 public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleton<CMS154FHIRAppropriateTxforURI_1_0_000>
 {
@@ -322,17 +322,10 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             Period p_ = tuple_figmirinmncaavfkbmahdktce?.QualifyingEncounters?.Period;
             CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
             CqlBoolean r_ = context.Operators.In<CqlDateTime>(o_, q_, "day");
-
-            CqlBoolean s_() {
-                CqlInterval<CqlDateTime> t_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, tuple_figmirinmncaavfkbmahdktce?.URI);
-                Period u_ = tuple_figmirinmncaavfkbmahdktce?.QualifyingEncounters?.Period;
-                CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
-                CqlBoolean w_ = context.Operators.OverlapsBefore(t_, v_, (string)default);
-                return w_;
-            }
-
+            CqlBoolean s_ = context.Operators.OverlapsBefore(n_, q_, (string)default);
+            CqlBoolean t_ = s_;
             return r_
-                /* CQL 'or' (78:5-79:79) */ || s_();
+                /* CQL 'or' (78:5-79:79) */ || t_;
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?> j_ = context.Operators.SelectWhere<ValueTuple<Encounter, Condition>, (CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?>(g_, h_, i_);
@@ -435,17 +428,13 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 IEnumerable<string> ao_ = context.Operators.Split((string)an_, "/");
                 string ap_ = context.Operators.Last<string>(ao_);
                 CqlBoolean aq_ = context.Operators.Equal(am_, ap_);
-
-                CqlBoolean ar_() {
-                    CodeableConcept as_ = M?.Code;
-                    CqlConcept at_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, as_);
-                    CqlValueSet au_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
-                    CqlBoolean av_ = context.Operators.ConceptInValueSet(at_, au_);
-                    return av_;
-                }
-
+                CodeableConcept ar_ = M?.Code;
+                CqlConcept as_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ar_);
+                CqlValueSet at_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
+                CqlBoolean au_ = context.Operators.ConceptInValueSet(as_, at_);
+                CqlBoolean av_ = au_;
                 return aq_
-                    /* CQL 'and' */ && ar_();
+                    /* CQL 'and' */ && av_;
             }
 
             CqlBoolean al_ = context.Operators.WhereAny<Medication>(aj_, ak_);
@@ -500,17 +489,13 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                     IEnumerable<string> t_ = context.Operators.Split((string)s_, "/");
                     string u_ = context.Operators.Last<string>(t_);
                     CqlBoolean v_ = context.Operators.Equal(r_, u_);
-
-                    CqlBoolean w_() {
-                        CodeableConcept x_ = M?.Code;
-                        CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
-                        CqlValueSet z_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
-                        CqlBoolean aa_ = context.Operators.ConceptInValueSet(y_, z_);
-                        return aa_;
-                    }
-
+                    CodeableConcept w_ = M?.Code;
+                    CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
+                    CqlValueSet y_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
+                    CqlBoolean z_ = context.Operators.ConceptInValueSet(x_, y_);
+                    CqlBoolean aa_ = z_;
                     return v_
-                        /* CQL 'and' */ && w_();
+                        /* CQL 'and' */ && aa_;
                 }
 
                 CqlBoolean q_ = context.Operators.WhereAny<Medication>(o_, p_);
@@ -533,16 +518,9 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 CqlDateTime ah_ = context.Operators.Add(af_, ag_);
                 CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(af_, ah_, true, true);
                 CqlBoolean aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, (string)default);
-
-                CqlBoolean ak_() {
-                    Period al_ = EncounterWithURI?.Period;
-                    CqlInterval<CqlDateTime> am_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, al_);
-                    CqlDateTime an_ = context.Operators.Start(am_);
-                    return an_ is not null;
-                }
-
+                CqlBoolean ak_ = (CqlBoolean)(af_ is not null);
                 return aj_
-                    /* CQL 'and' (107:17-107:104) */ && ak_();
+                    /* CQL 'and' (107:17-107:104) */ && ak_;
             }
 
             CqlBoolean n_ = context.Operators.WhereAny<MedicationRequest>(l_, m_);
@@ -576,22 +554,11 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             CqlDate l_ = context.Operators.DateFrom(k_);
             int? m_ = context.Operators.CalculateAgeAt(i_, l_, "month");
             CqlBoolean n_ = context.Operators.GreaterOrEqual(m_, 3);
-
-            CqlBoolean o_() {
-                Patient p_ = this.Patient(context);
-                Date q_ = p_?.BirthDateElement;
-                string r_ = q_?.Value;
-                CqlDate s_ = context.Operators.ConvertStringToDate(r_);
-                CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
-                CqlDateTime u_ = context.Operators.Start(t_);
-                CqlDate v_ = context.Operators.DateFrom(u_);
-                int? w_ = context.Operators.CalculateAgeAt(s_, v_, "year");
-                CqlBoolean x_ = context.Operators.LessOrEqual(w_, 17);
-                return x_;
-            }
-
+            int? o_ = context.Operators.CalculateAgeAt(i_, l_, "year");
+            CqlBoolean p_ = context.Operators.LessOrEqual(o_, 17);
+            CqlBoolean q_ = p_;
             return n_
-                /* CQL 'and' (112:5-113:69) */ && o_();
+                /* CQL 'and' (112:5-113:69) */ && q_;
         }
 
         Encounter c_(Encounter EncounterWithURI) => EncounterWithURI;

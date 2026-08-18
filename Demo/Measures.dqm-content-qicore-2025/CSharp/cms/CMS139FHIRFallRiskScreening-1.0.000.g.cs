@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.8.0")]
 [CqlLibrary("CMS139FHIRFallRiskScreening", "1.0.000")]
 public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<CMS139FHIRFallRiskScreening_1_0_000>
 {
@@ -256,15 +256,11 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<
         CqlDate g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlBoolean i_ = context.Operators.GreaterOrEqual(h_, 65);
-
-        CqlBoolean j_() {
-            IEnumerable<Encounter> k_ = this.Qualifying_Encounter(context);
-            CqlBoolean l_ = context.Operators.Exists<Encounter>(k_);
-            return l_;
-        }
-
+        IEnumerable<Encounter> j_ = this.Qualifying_Encounter(context);
+        CqlBoolean k_ = context.Operators.Exists<Encounter>(j_);
+        CqlBoolean l_ = k_;
         return i_
-            /* CQL 'and' (46:3-47:37) */ && j_();
+            /* CQL 'and' (46:3-47:37) */ && l_;
     }
 
 

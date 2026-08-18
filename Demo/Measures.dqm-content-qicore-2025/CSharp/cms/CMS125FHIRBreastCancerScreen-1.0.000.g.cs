@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.8.0")]
 [CqlLibrary("CMS125FHIRBreastCancerScreen", "1.0.000")]
 public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton<CMS125FHIRBreastCancerScreen_1_0_000>
 {
@@ -129,49 +129,40 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(42, 74, true, true);
         CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        List<Extension> k_;
+        bool u_ = a_ is DomainResource;
+        if (u_)
+        {
+            k_ = (a_ as DomainResource).Extension;
+        }
+        else
+        {
+            k_ = default;
+        }
 
-        CqlBoolean k_() {
-            List<Extension> m_;
-            Patient s_ = this.Patient(context);
-            bool t_ = s_ is DomainResource;
-            if (t_)
-            {
-                m_ = (s_ as DomainResource).Extension;
-            }
-            else
-            {
-                m_ = default;
-            }
-
-            bool? n_(Extension @this) {
-                FhirUri u_ = @this?.UrlElement;
-                string v_ = FHIRHelpers_4_4_000.Instance.ToString(context, u_);
-                CqlBoolean w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-                return w_;
-            }
-
-
-            DataType o_(Extension @this) {
-                DataType x_ = @this?.Value;
-                return x_;
-            }
-
-            IEnumerable<DataType> p_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)m_, n_, o_);
-            DataType q_ = context.Operators.SingletonFrom<DataType>(p_);
-            CqlBoolean r_ = context.Operators.Equal(q_, "248152002");
-            return r_;
+        bool? l_(Extension @this) {
+            FhirUri v_ = @this?.UrlElement;
+            string w_ = FHIRHelpers_4_4_000.Instance.ToString(context, v_);
+            CqlBoolean x_ = context.Operators.Equal(w_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+            return x_;
         }
 
 
-        CqlBoolean l_() {
-            IEnumerable<Encounter> y_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
-            CqlBoolean z_ = context.Operators.Exists<Encounter>(y_);
-            return z_;
+        DataType m_(Extension @this) {
+            DataType y_ = @this?.Value;
+            return y_;
         }
 
+        IEnumerable<DataType> n_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)k_, l_, m_);
+        DataType o_ = context.Operators.SingletonFrom<DataType>(n_);
+        CqlBoolean p_ = context.Operators.Equal(o_, "248152002");
+        CqlBoolean q_ = p_;
+        IEnumerable<Encounter> r_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
+        CqlBoolean s_ = context.Operators.Exists<Encounter>(r_);
+        CqlBoolean t_ = s_;
         return j_
-            /* CQL 'and' (34:3-37:33) */ && k_()
-            /* CQL 'and' (34:3-38:64) */ && l_();
+            /* CQL 'and' (34:3-37:33) */ && q_
+            /* CQL 'and' (34:3-38:64) */ && t_;
     }
 
 
@@ -523,55 +514,31 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-
-        CqlBoolean b_() {
-            IEnumerable<Condition> e_ = this.Right_Mastectomy_Diagnosis(context);
-            CqlBoolean f_ = context.Operators.Exists<Condition>(e_);
-
-            CqlBoolean g_() {
-                IEnumerable<Procedure> i_ = this.Right_Mastectomy_Procedure(context);
-                CqlBoolean j_ = context.Operators.Exists<Procedure>(i_);
-                return j_;
-            }
-
-
-            CqlBoolean h_() {
-                IEnumerable<Condition> k_ = this.Left_Mastectomy_Diagnosis(context);
-                CqlBoolean l_ = context.Operators.Exists<Condition>(k_);
-
-                CqlBoolean m_() {
-                    IEnumerable<Procedure> n_ = this.Left_Mastectomy_Procedure(context);
-                    CqlBoolean o_ = context.Operators.Exists<Procedure>(n_);
-                    return o_;
-                }
-
-                return l_
-                    /* CQL 'or' (48:13-50:9) */ || m_();
-            }
-
-            return (f_
-                /* CQL 'or' (45:10-47:7) */ || g_())
-                /* CQL 'and' (45:8-51:5) */ && h_();
-        }
-
-
-        CqlBoolean c_() {
-            IEnumerable<Condition> p_ = this.Bilateral_Mastectomy_Diagnosis(context);
-            CqlBoolean q_ = context.Operators.Exists<Condition>(p_);
-            return q_;
-        }
-
-
-        CqlBoolean d_() {
-            IEnumerable<Procedure> r_ = this.Bilateral_Mastectomy_Procedure(context);
-            CqlBoolean s_ = context.Operators.Exists<Procedure>(r_);
-            return s_;
-        }
-
+        IEnumerable<Condition> b_ = this.Right_Mastectomy_Diagnosis(context);
+        CqlBoolean c_ = context.Operators.Exists<Condition>(b_);
+        IEnumerable<Procedure> d_ = this.Right_Mastectomy_Procedure(context);
+        CqlBoolean e_ = context.Operators.Exists<Procedure>(d_);
+        CqlBoolean f_ = e_;
+        IEnumerable<Condition> g_ = this.Left_Mastectomy_Diagnosis(context);
+        CqlBoolean h_ = context.Operators.Exists<Condition>(g_);
+        IEnumerable<Procedure> i_ = this.Left_Mastectomy_Procedure(context);
+        CqlBoolean j_ = context.Operators.Exists<Procedure>(i_);
+        CqlBoolean k_ = j_;
+        CqlBoolean l_ = h_
+            /* CQL 'or' (48:13-50:9) */ || k_;
+        CqlBoolean m_ = (c_
+            /* CQL 'or' (45:10-47:7) */ || f_)
+            /* CQL 'and' (45:8-51:5) */ && l_;
+        IEnumerable<Condition> n_ = this.Bilateral_Mastectomy_Diagnosis(context);
+        CqlBoolean o_ = context.Operators.Exists<Condition>(n_);
+        CqlBoolean p_ = o_;
+        IEnumerable<Procedure> q_ = this.Bilateral_Mastectomy_Procedure(context);
+        CqlBoolean r_ = context.Operators.Exists<Procedure>(q_);
+        CqlBoolean s_ = r_;
         return a_
-            /* CQL 'or' (44:3-51:5) */ || b_()
-            /* CQL 'or' (44:3-52:46) */ || c_()
-            /* CQL 'or' (44:3-53:46) */ || d_()
+            /* CQL 'or' (44:3-51:5) */ || m_
+            /* CQL 'or' (44:3-52:46) */ || p_
+            /* CQL 'or' (44:3-53:46) */ || s_
             /* CQL 'or' (44:3-54:73) */ || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context)
             /* CQL 'or' (44:3-55:74) */ || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context)
             /* CQL 'or' (44:3-56:69) */ || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);

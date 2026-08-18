@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.8.0")]
 [CqlLibrary("CMS56FHIRFuncStatHipReplacement", "1.0.000")]
 public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingleton<CMS56FHIRFuncStatHipReplacement_1_0_000>
 {
@@ -434,30 +434,22 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     private bool? Initial_Population_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Qualifying_Encounter(context);
-
-        CqlBoolean b_() {
-            IEnumerable<Procedure> d_ = this.Total_Hip_Arthroplasty_Procedure(context);
-            CqlBoolean e_ = context.Operators.Exists<Procedure>(d_);
-            return e_;
-        }
-
-
-        CqlBoolean c_() {
-            Patient f_ = this.Patient(context);
-            Date g_ = f_?.BirthDateElement;
-            string h_ = g_?.Value;
-            CqlDate i_ = context.Operators.ConvertStringToDate(h_);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            CqlDateTime k_ = context.Operators.Start(j_);
-            CqlDate l_ = context.Operators.DateFrom(k_);
-            int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
-            CqlBoolean n_ = context.Operators.GreaterOrEqual(m_, 19);
-            return n_;
-        }
-
+        IEnumerable<Procedure> b_ = this.Total_Hip_Arthroplasty_Procedure(context);
+        CqlBoolean c_ = context.Operators.Exists<Procedure>(b_);
+        CqlBoolean d_ = c_;
+        Patient e_ = this.Patient(context);
+        Date f_ = e_?.BirthDateElement;
+        string g_ = f_?.Value;
+        CqlDate h_ = context.Operators.ConvertStringToDate(g_);
+        CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
+        CqlDateTime j_ = context.Operators.Start(i_);
+        CqlDate k_ = context.Operators.DateFrom(j_);
+        int? l_ = context.Operators.CalculateAgeAt(h_, k_, "year");
+        CqlBoolean m_ = context.Operators.GreaterOrEqual(l_, 19);
+        CqlBoolean n_ = m_;
         return a_
-            /* CQL 'and' (60:3-61:53) */ && b_()
-            /* CQL 'and' (60:3-62:67) */ && c_();
+            /* CQL 'and' (60:3-61:53) */ && d_
+            /* CQL 'and' (60:3-62:67) */ && n_;
     }
 
 
@@ -507,51 +499,27 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     {
         CodeableConcept a_ = condition?.VerificationStatus;
         CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
-
-        CqlBoolean c_() {
-            CodeableConcept d_ = condition?.VerificationStatus;
-            CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_);
-            CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
-            CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
-            CqlBoolean h_ = context.Operators.Equivalent(e_, g_);
-
-            CqlBoolean i_() {
-                CodeableConcept l_ = condition?.VerificationStatus;
-                CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
-                CqlCode n_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-                CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
-                CqlBoolean p_ = context.Operators.Equivalent(m_, o_);
-                return p_;
-            }
-
-
-            CqlBoolean j_() {
-                CodeableConcept q_ = condition?.VerificationStatus;
-                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                CqlCode s_ = QICoreCommon_4_0_000.Instance.provisional(context);
-                CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
-                CqlBoolean u_ = context.Operators.Equivalent(r_, t_);
-                return u_;
-            }
-
-
-            CqlBoolean k_() {
-                CodeableConcept v_ = condition?.VerificationStatus;
-                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
-                CqlCode x_ = QICoreCommon_4_0_000.Instance.differential(context);
-                CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
-                CqlBoolean z_ = context.Operators.Equivalent(w_, y_);
-                return z_;
-            }
-
-            return h_
-                /* CQL 'or' (277:54-278:66) */ || i_()
-                /* CQL 'or' (277:54-279:66) */ || j_()
-                /* CQL 'or' (277:52-281:3) */ || k_();
-        }
-
+        CqlCode c_ = QICoreCommon_4_0_000.Instance.confirmed(context);
+        CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
+        CqlBoolean e_ = context.Operators.Equivalent(b_, d_);
+        CqlCode f_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
+        CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
+        CqlBoolean h_ = context.Operators.Equivalent(b_, g_);
+        CqlBoolean i_ = h_;
+        CqlCode j_ = QICoreCommon_4_0_000.Instance.provisional(context);
+        CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+        CqlBoolean l_ = context.Operators.Equivalent(b_, k_);
+        CqlBoolean m_ = l_;
+        CqlCode n_ = QICoreCommon_4_0_000.Instance.differential(context);
+        CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
+        CqlBoolean p_ = context.Operators.Equivalent(b_, o_);
+        CqlBoolean q_ = p_;
+        CqlBoolean r_ = e_
+            /* CQL 'or' (277:54-278:66) */ || i_
+            /* CQL 'or' (277:54-279:66) */ || m_
+            /* CQL 'or' (277:52-281:3) */ || q_;
         return (CqlBoolean)(b_ is null)
-            /* CQL 'implies' (277:3-281:3) */ || c_();
+            /* CQL 'implies' (277:3-281:3) */ || r_;
     }
 
 
@@ -575,33 +543,33 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LowerBodyFracture);
                 CqlDateTime k_ = context.Operators.Start(j_);
                 object l_;
-                DataType w_ = THAProcedure?.Performed;
-                object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                bool y_ = x_ is CqlDateTime;
-                if (y_)
+                DataType z_ = THAProcedure?.Performed;
+                object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                bool ab_ = aa_ is CqlDateTime;
+                if (ab_)
                 {
-                    l_ = x_ as CqlDateTime;
+                    l_ = aa_ as CqlDateTime;
                 }
                 else
                 {
-                    bool z_ = x_ is CqlQuantity;
-                    if (z_)
+                    bool ac_ = aa_ is CqlQuantity;
+                    if (ac_)
                     {
-                        l_ = x_ as CqlQuantity;
+                        l_ = aa_ as CqlQuantity;
                     }
                     else
                     {
-                        bool aa_ = x_ is CqlInterval<CqlDateTime>;
-                        if (aa_)
+                        bool ad_ = aa_ is CqlInterval<CqlDateTime>;
+                        if (ad_)
                         {
-                            l_ = x_ as CqlInterval<CqlDateTime>;
+                            l_ = aa_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            bool ab_ = x_ is CqlInterval<CqlQuantity>;
-                            if (ab_)
+                            bool ae_ = aa_ is CqlInterval<CqlQuantity>;
+                            if (ae_)
                             {
-                                l_ = x_ as CqlInterval<CqlQuantity>;
+                                l_ = aa_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -615,33 +583,33 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlQuantity o_ = context.Operators.Quantity(48m, "hours");
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 object q_;
-                DataType ac_ = THAProcedure?.Performed;
-                object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                bool ae_ = ad_ is CqlDateTime;
-                if (ae_)
+                DataType af_ = THAProcedure?.Performed;
+                object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                bool ah_ = ag_ is CqlDateTime;
+                if (ah_)
                 {
-                    q_ = ad_ as CqlDateTime;
+                    q_ = ag_ as CqlDateTime;
                 }
                 else
                 {
-                    bool af_ = ad_ is CqlQuantity;
-                    if (af_)
+                    bool ai_ = ag_ is CqlQuantity;
+                    if (ai_)
                     {
-                        q_ = ad_ as CqlQuantity;
+                        q_ = ag_ as CqlQuantity;
                     }
                     else
                     {
-                        bool ag_ = ad_ is CqlInterval<CqlDateTime>;
-                        if (ag_)
+                        bool aj_ = ag_ is CqlInterval<CqlDateTime>;
+                        if (aj_)
                         {
-                            q_ = ad_ as CqlInterval<CqlDateTime>;
+                            q_ = ag_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            bool ah_ = ad_ is CqlInterval<CqlQuantity>;
-                            if (ah_)
+                            bool ak_ = ag_ is CqlInterval<CqlQuantity>;
+                            if (ak_)
                             {
-                                q_ = ad_ as CqlInterval<CqlQuantity>;
+                                q_ = ag_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -654,51 +622,47 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDateTime s_ = context.Operators.Start(r_);
                 CqlInterval<CqlDateTime> t_ = context.Operators.Interval(p_, s_, true, true);
                 CqlBoolean u_ = context.Operators.In<CqlDateTime>(k_, t_, (string)default);
-
-                CqlBoolean v_() {
-                    object ai_;
-                    DataType al_ = THAProcedure?.Performed;
-                    object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                    bool an_ = am_ is CqlDateTime;
-                    if (an_)
+                object v_;
+                DataType al_ = THAProcedure?.Performed;
+                object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+                bool an_ = am_ is CqlDateTime;
+                if (an_)
+                {
+                    v_ = am_ as CqlDateTime;
+                }
+                else
+                {
+                    bool ao_ = am_ is CqlQuantity;
+                    if (ao_)
                     {
-                        ai_ = am_ as CqlDateTime;
+                        v_ = am_ as CqlQuantity;
                     }
                     else
                     {
-                        bool ao_ = am_ is CqlQuantity;
-                        if (ao_)
+                        bool ap_ = am_ is CqlInterval<CqlDateTime>;
+                        if (ap_)
                         {
-                            ai_ = am_ as CqlQuantity;
+                            v_ = am_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            bool ap_ = am_ is CqlInterval<CqlDateTime>;
-                            if (ap_)
+                            bool aq_ = am_ is CqlInterval<CqlQuantity>;
+                            if (aq_)
                             {
-                                ai_ = am_ as CqlInterval<CqlDateTime>;
+                                v_ = am_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
-                                bool aq_ = am_ is CqlInterval<CqlQuantity>;
-                                if (aq_)
-                                {
-                                    ai_ = am_ as CqlInterval<CqlQuantity>;
-                                }
-                                else
-                                {
-                                    ai_ = null;
-                                }
+                                v_ = null;
                             }
                         }
                     }
-                    CqlInterval<CqlDateTime> aj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ai_);
-                    CqlDateTime ak_ = context.Operators.Start(aj_);
-                    return ak_ is not null;
                 }
-
+                CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.toInterval(context, v_);
+                CqlDateTime x_ = context.Operators.Start(w_);
+                CqlBoolean y_ = (CqlBoolean)(x_ is not null);
                 return u_
-                    /* CQL 'and' (114:19-114:142) */ && v_()
+                    /* CQL 'and' (114:19-114:142) */ && y_
                     /* CQL 'and' (114:19-115:46) */ && this.isVerified(context, LowerBodyFracture);
             }
 
@@ -1076,132 +1040,128 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 Id k_ = ElectiveTHAProcedure?.IdElement;
                 string l_ = k_?.Value;
                 CqlBoolean m_ = context.Operators.Equivalent(j_, l_);
-
-                CqlBoolean n_() {
-                    object o_;
-                    DataType ac_ = ElectiveTHAProcedure?.Performed;
-                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlDateTime;
-                    if (ae_)
-                    {
-                        o_ = ad_ as CqlDateTime;
-                    }
-                    else
-                    {
-                        bool af_ = ad_ is CqlQuantity;
-                        if (af_)
-                        {
-                            o_ = ad_ as CqlQuantity;
-                        }
-                        else
-                        {
-                            bool ag_ = ad_ is CqlInterval<CqlDateTime>;
-                            if (ag_)
-                            {
-                                o_ = ad_ as CqlInterval<CqlDateTime>;
-                            }
-                            else
-                            {
-                                bool ah_ = ad_ is CqlInterval<CqlQuantity>;
-                                if (ah_)
-                                {
-                                    o_ = ad_ as CqlInterval<CqlQuantity>;
-                                }
-                                else
-                                {
-                                    o_ = null;
-                                }
-                            }
-                        }
-                    }
-                    CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
-                    CqlDateTime q_ = context.Operators.Start(p_);
-                    object r_;
-                    DataType ai_ = THAProcedure?.Performed;
-                    object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                    bool ak_ = aj_ is CqlDateTime;
-                    if (ak_)
-                    {
-                        r_ = aj_ as CqlDateTime;
-                    }
-                    else
-                    {
-                        bool al_ = aj_ is CqlQuantity;
-                        if (al_)
-                        {
-                            r_ = aj_ as CqlQuantity;
-                        }
-                        else
-                        {
-                            bool am_ = aj_ is CqlInterval<CqlDateTime>;
-                            if (am_)
-                            {
-                                r_ = aj_ as CqlInterval<CqlDateTime>;
-                            }
-                            else
-                            {
-                                bool an_ = aj_ is CqlInterval<CqlQuantity>;
-                                if (an_)
-                                {
-                                    r_ = aj_ as CqlInterval<CqlQuantity>;
-                                }
-                                else
-                                {
-                                    r_ = null;
-                                }
-                            }
-                        }
-                    }
-                    CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
-                    CqlDateTime t_ = context.Operators.Start(s_);
-                    CqlQuantity u_ = context.Operators.Quantity(1m, "year");
-                    CqlDateTime v_ = context.Operators.Subtract(t_, u_);
-                    object w_;
-                    DataType ao_ = THAProcedure?.Performed;
-                    object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    bool aq_ = ap_ is CqlDateTime;
-                    if (aq_)
-                    {
-                        w_ = ap_ as CqlDateTime;
-                    }
-                    else
-                    {
-                        bool ar_ = ap_ is CqlQuantity;
-                        if (ar_)
-                        {
-                            w_ = ap_ as CqlQuantity;
-                        }
-                        else
-                        {
-                            bool as_ = ap_ is CqlInterval<CqlDateTime>;
-                            if (as_)
-                            {
-                                w_ = ap_ as CqlInterval<CqlDateTime>;
-                            }
-                            else
-                            {
-                                bool at_ = ap_ is CqlInterval<CqlQuantity>;
-                                if (at_)
-                                {
-                                    w_ = ap_ as CqlInterval<CqlQuantity>;
-                                }
-                                else
-                                {
-                                    w_ = null;
-                                }
-                            }
-                        }
-                    }
-                    CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
-                    CqlDateTime y_ = context.Operators.Start(x_);
-                    CqlDateTime z_ = context.Operators.Add(y_, u_);
-                    CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(v_, z_, true, true);
-                    CqlBoolean ab_ = context.Operators.In<CqlDateTime>(q_, aa_, "day");
-                    return ab_;
+                object n_;
+                DataType ac_ = ElectiveTHAProcedure?.Performed;
+                object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                bool ae_ = ad_ is CqlDateTime;
+                if (ae_)
+                {
+                    n_ = ad_ as CqlDateTime;
                 }
-
+                else
+                {
+                    bool af_ = ad_ is CqlQuantity;
+                    if (af_)
+                    {
+                        n_ = ad_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool ag_ = ad_ is CqlInterval<CqlDateTime>;
+                        if (ag_)
+                        {
+                            n_ = ad_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool ah_ = ad_ is CqlInterval<CqlQuantity>;
+                            if (ah_)
+                            {
+                                n_ = ad_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                n_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
+                CqlDateTime p_ = context.Operators.Start(o_);
+                object q_;
+                DataType ai_ = THAProcedure?.Performed;
+                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+                bool ak_ = aj_ is CqlDateTime;
+                if (ak_)
+                {
+                    q_ = aj_ as CqlDateTime;
+                }
+                else
+                {
+                    bool al_ = aj_ is CqlQuantity;
+                    if (al_)
+                    {
+                        q_ = aj_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool am_ = aj_ is CqlInterval<CqlDateTime>;
+                        if (am_)
+                        {
+                            q_ = aj_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool an_ = aj_ is CqlInterval<CqlQuantity>;
+                            if (an_)
+                            {
+                                q_ = aj_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                q_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
+                CqlDateTime s_ = context.Operators.Start(r_);
+                CqlQuantity t_ = context.Operators.Quantity(1m, "year");
+                CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+                object v_;
+                DataType ao_ = THAProcedure?.Performed;
+                object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
+                bool aq_ = ap_ is CqlDateTime;
+                if (aq_)
+                {
+                    v_ = ap_ as CqlDateTime;
+                }
+                else
+                {
+                    bool ar_ = ap_ is CqlQuantity;
+                    if (ar_)
+                    {
+                        v_ = ap_ as CqlQuantity;
+                    }
+                    else
+                    {
+                        bool as_ = ap_ is CqlInterval<CqlDateTime>;
+                        if (as_)
+                        {
+                            v_ = ap_ as CqlInterval<CqlDateTime>;
+                        }
+                        else
+                        {
+                            bool at_ = ap_ is CqlInterval<CqlQuantity>;
+                            if (at_)
+                            {
+                                v_ = ap_ as CqlInterval<CqlQuantity>;
+                            }
+                            else
+                            {
+                                v_ = null;
+                            }
+                        }
+                    }
+                }
+                CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.toInterval(context, v_);
+                CqlDateTime x_ = context.Operators.Start(w_);
+                CqlDateTime y_ = context.Operators.Add(x_, t_);
+                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(u_, y_, true, true);
+                CqlBoolean aa_ = context.Operators.In<CqlDateTime>(p_, z_, "day");
+                CqlBoolean ab_ = aa_;
                 return (CqlBoolean)!m_
-                    /* CQL 'and' (149:19-150:213) */ && n_();
+                    /* CQL 'and' (149:19-150:213) */ && ab_;
             }
 
             CqlBoolean h_ = context.Operators.WhereAny<Procedure>(f_, g_);
@@ -1387,137 +1347,90 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime aj_ = context.Operators.Start(ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
             CqlBoolean al_ = context.Operators.SameAs(af_, ak_, "day");
-
-            CqlBoolean am_() {
-                DataType au_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSport as Observation)?.Value;
-                object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                return av_ is not null;
-            }
-
-
-            CqlBoolean an_() {
-                DataType aw_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality?.Effective;
-                object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                CqlInterval<CqlDateTime> ay_ = QICoreCommon_4_0_000.Instance.toInterval(context, ax_);
-                CqlDateTime az_ = context.Operators.Start(ay_);
-                CqlDate ba_ = context.Operators.DateFrom(az_);
-                DataType bb_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSActivityScore?.Effective;
-                object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                CqlInterval<CqlDateTime> bd_ = QICoreCommon_4_0_000.Instance.toInterval(context, bc_);
-                CqlDateTime be_ = context.Operators.Start(bd_);
-                CqlDate bf_ = context.Operators.DateFrom(be_);
-                CqlBoolean bg_ = context.Operators.SameAs(ba_, bf_, "day");
-                return bg_;
-            }
-
-
-            CqlBoolean ao_() {
-                DataType bh_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSActivityScore as Observation)?.Value;
-                object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                return bi_ is not null;
-            }
-
-
-            CqlBoolean ap_() {
-                DataType bj_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality?.Effective;
-                object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                CqlInterval<CqlDateTime> bl_ = QICoreCommon_4_0_000.Instance.toInterval(context, bk_);
-                CqlDateTime bm_ = context.Operators.Start(bl_);
-                CqlDate bn_ = context.Operators.DateFrom(bm_);
-                DataType bo_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSymptoms?.Effective;
-                object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
-                CqlInterval<CqlDateTime> bq_ = QICoreCommon_4_0_000.Instance.toInterval(context, bp_);
-                CqlDateTime br_ = context.Operators.Start(bq_);
-                CqlDate bs_ = context.Operators.DateFrom(br_);
-                CqlBoolean bt_ = context.Operators.SameAs(bn_, bs_, "day");
-                return bt_;
-            }
-
-
-            CqlBoolean aq_() {
-                DataType bu_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSymptoms as Observation)?.Value;
-                object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                return bv_ is not null;
-            }
-
-
-            CqlBoolean ar_() {
-                DataType bw_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality?.Effective;
-                object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                CqlInterval<CqlDateTime> by_ = QICoreCommon_4_0_000.Instance.toInterval(context, bx_);
-                CqlDateTime bz_ = context.Operators.Start(by_);
-                CqlDate ca_ = context.Operators.DateFrom(bz_);
-                DataType cb_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSPain?.Effective;
-                object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                CqlInterval<CqlDateTime> cd_ = QICoreCommon_4_0_000.Instance.toInterval(context, cc_);
-                CqlDateTime ce_ = context.Operators.Start(cd_);
-                CqlDate cf_ = context.Operators.DateFrom(ce_);
-                CqlBoolean cg_ = context.Operators.SameAs(ca_, cf_, "day");
-                return cg_;
-            }
-
-
-            CqlBoolean as_() {
-                DataType ch_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSPain as Observation)?.Value;
-                object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                return ci_ is not null;
-            }
-
-
-            CqlBoolean at_() {
-                DataType cj_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality as Observation)?.Value;
-                object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                return ck_ is not null;
-            }
-
+            DataType am_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSport as Observation)?.Value;
+            object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
+            CqlBoolean ao_ = (CqlBoolean)(an_ is not null);
+            DataType ap_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSActivityScore?.Effective;
+            object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
+            CqlInterval<CqlDateTime> ar_ = QICoreCommon_4_0_000.Instance.toInterval(context, aq_);
+            CqlDateTime as_ = context.Operators.Start(ar_);
+            CqlDate at_ = context.Operators.DateFrom(as_);
+            CqlBoolean au_ = context.Operators.SameAs(af_, at_, "day");
+            CqlBoolean av_ = au_;
+            DataType aw_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSActivityScore as Observation)?.Value;
+            object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
+            CqlBoolean ay_ = (CqlBoolean)(ax_ is not null);
+            DataType az_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSymptoms?.Effective;
+            object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
+            CqlInterval<CqlDateTime> bb_ = QICoreCommon_4_0_000.Instance.toInterval(context, ba_);
+            CqlDateTime bc_ = context.Operators.Start(bb_);
+            CqlDate bd_ = context.Operators.DateFrom(bc_);
+            CqlBoolean be_ = context.Operators.SameAs(af_, bd_, "day");
+            CqlBoolean bf_ = be_;
+            DataType bg_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSymptoms as Observation)?.Value;
+            object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
+            CqlBoolean bi_ = (CqlBoolean)(bh_ is not null);
+            DataType bj_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSPain?.Effective;
+            object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
+            CqlInterval<CqlDateTime> bl_ = QICoreCommon_4_0_000.Instance.toInterval(context, bk_);
+            CqlDateTime bm_ = context.Operators.Start(bl_);
+            CqlDate bn_ = context.Operators.DateFrom(bm_);
+            CqlBoolean bo_ = context.Operators.SameAs(af_, bn_, "day");
+            CqlBoolean bp_ = bo_;
+            DataType bq_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSPain as Observation)?.Value;
+            object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
+            CqlBoolean bs_ = (CqlBoolean)(br_ is not null);
+            DataType bt_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality as Observation)?.Value;
+            object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
+            CqlBoolean bv_ = (CqlBoolean)(bu_ is not null);
             return al_
-                /* CQL 'and' (185:11-186:75) */ && am_()
-                /* CQL 'and' (185:11-187:63) */ && an_()
-                /* CQL 'and' (185:11-188:83) */ && ao_()
-                /* CQL 'and' (185:11-189:58) */ && ap_()
-                /* CQL 'and' (185:11-190:78) */ && aq_()
-                /* CQL 'and' (185:11-191:54) */ && ar_()
-                /* CQL 'and' (185:11-192:74) */ && as_()
-                /* CQL 'and' (185:5-193:81) */ && at_();
+                /* CQL 'and' (185:11-186:75) */ && ao_
+                /* CQL 'and' (185:11-187:63) */ && av_
+                /* CQL 'and' (185:11-188:83) */ && ay_
+                /* CQL 'and' (185:11-189:58) */ && bf_
+                /* CQL 'and' (185:11-190:78) */ && bi_
+                /* CQL 'and' (185:11-191:54) */ && bp_
+                /* CQL 'and' (185:11-192:74) */ && bs_
+                /* CQL 'and' (185:5-193:81) */ && bv_;
         }
 
         IEnumerable<(CqlTupleMetadata, Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)?> x_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation, Observation, Observation, Observation>, (CqlTupleMetadata, Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)?>(u_, v_, w_);
 
         CqlDate y_((CqlTupleMetadata, Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)? tuple_eipfmazvhfscjijaofhicpvmb) {
-            DataType cl_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality?.Effective;
+            DataType bw_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality?.Effective;
+            object bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
+            CqlInterval<CqlDateTime> by_ = QICoreCommon_4_0_000.Instance.toInterval(context, bx_);
+            CqlDateTime bz_ = context.Operators.Start(by_);
+            CqlDate ca_ = context.Operators.DateFrom(bz_);
+            DataType cb_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSport?.Effective;
+            object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
+            CqlInterval<CqlDateTime> cd_ = QICoreCommon_4_0_000.Instance.toInterval(context, cc_);
+            CqlDateTime ce_ = context.Operators.Start(cd_);
+            CqlDate cf_ = context.Operators.DateFrom(ce_);
+            DataType cg_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSActivityScore?.Effective;
+            object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
+            CqlInterval<CqlDateTime> ci_ = QICoreCommon_4_0_000.Instance.toInterval(context, ch_);
+            CqlDateTime cj_ = context.Operators.Start(ci_);
+            CqlDate ck_ = context.Operators.DateFrom(cj_);
+            DataType cl_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSymptoms?.Effective;
             object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
             CqlInterval<CqlDateTime> cn_ = QICoreCommon_4_0_000.Instance.toInterval(context, cm_);
             CqlDateTime co_ = context.Operators.Start(cn_);
             CqlDate cp_ = context.Operators.DateFrom(co_);
-            DataType cq_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSport?.Effective;
+            DataType cq_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSPain?.Effective;
             object cr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cq_);
             CqlInterval<CqlDateTime> cs_ = QICoreCommon_4_0_000.Instance.toInterval(context, cr_);
             CqlDateTime ct_ = context.Operators.Start(cs_);
             CqlDate cu_ = context.Operators.DateFrom(ct_);
-            DataType cv_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSActivityScore?.Effective;
-            object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cv_);
-            CqlInterval<CqlDateTime> cx_ = QICoreCommon_4_0_000.Instance.toInterval(context, cw_);
-            CqlDateTime cy_ = context.Operators.Start(cx_);
-            CqlDate cz_ = context.Operators.DateFrom(cy_);
-            DataType da_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSymptoms?.Effective;
-            object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-            CqlInterval<CqlDateTime> dc_ = QICoreCommon_4_0_000.Instance.toInterval(context, db_);
-            CqlDateTime dd_ = context.Operators.Start(dc_);
-            CqlDate de_ = context.Operators.DateFrom(dd_);
-            DataType df_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSPain?.Effective;
-            object dg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, df_);
-            CqlInterval<CqlDateTime> dh_ = QICoreCommon_4_0_000.Instance.toInterval(context, dg_);
-            CqlDateTime di_ = context.Operators.Start(dh_);
-            CqlDate dj_ = context.Operators.DateFrom(di_);
-            CqlDate[] dk_ = [
+            CqlDate[] cv_ = [
+                ca_,
+                cf_,
+                ck_,
                 cp_,
                 cu_,
-                cz_,
-                de_,
-                dj_,
             ];
-            CqlDate dl_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)dk_);
-            return dl_;
+            CqlDate cw_ = context.Operators.Max<CqlDate>((IEnumerable<CqlDate>)cv_);
+            return cw_;
         }
 
         IEnumerable<CqlDate> z_ = context.Operators.SelectDistinct<(CqlTupleMetadata, Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)?, CqlDate>(x_, y_);
@@ -1796,23 +1709,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             CqlBoolean z_ = context.Operators.SameAs(t_, y_, "day");
-
-            CqlBoolean aa_() {
-                DataType ac_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore as Observation)?.Value;
-                object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return ad_ is not null;
-            }
-
-
-            CqlBoolean ab_() {
-                DataType ae_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore as Observation)?.Value;
-                object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return af_ is not null;
-            }
-
+            DataType aa_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore as Observation)?.Value;
+            object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+            CqlBoolean ac_ = (CqlBoolean)(ab_ is not null);
+            DataType ad_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore as Observation)?.Value;
+            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+            CqlBoolean af_ = (CqlBoolean)(ae_ is not null);
             return z_
-                /* CQL 'and' (225:11-226:87) */ && aa_()
-                /* CQL 'and' (225:5-227:85) */ && ab_();
+                /* CQL 'and' (225:11-226:87) */ && ac_
+                /* CQL 'and' (225:5-227:85) */ && af_;
         }
 
         IEnumerable<(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?>(i_, j_, k_);
@@ -1977,23 +1882,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             CqlBoolean z_ = context.Operators.SameAs(t_, y_, "day");
-
-            CqlBoolean aa_() {
-                DataType ac_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
-                object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return ad_ is not null;
-            }
-
-
-            CqlBoolean ab_() {
-                DataType ae_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment as Observation)?.Value;
-                object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return af_ is not null;
-            }
-
+            DataType aa_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
+            object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+            CqlBoolean ac_ = (CqlBoolean)(ab_ is not null);
+            DataType ad_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment as Observation)?.Value;
+            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+            CqlBoolean af_ = (CqlBoolean)(ae_ is not null);
             return z_
-                /* CQL 'and' (245:11-246:86) */ && aa_()
-                /* CQL 'and' (245:5-247:88) */ && ab_();
+                /* CQL 'and' (245:11-246:86) */ && ac_
+                /* CQL 'and' (245:5-247:88) */ && af_;
         }
 
         IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_, k_);
@@ -2158,23 +2055,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             CqlBoolean z_ = context.Operators.SameAs(t_, y_, "day");
-
-            CqlBoolean aa_() {
-                DataType ac_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
-                object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return ad_ is not null;
-            }
-
-
-            CqlBoolean ab_() {
-                DataType ae_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment as Observation)?.Value;
-                object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return af_ is not null;
-            }
-
+            DataType aa_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
+            object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+            CqlBoolean ac_ = (CqlBoolean)(ab_ is not null);
+            DataType ad_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment as Observation)?.Value;
+            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+            CqlBoolean af_ = (CqlBoolean)(ae_ is not null);
             return z_
-                /* CQL 'and' (265:11-266:86) */ && aa_()
-                /* CQL 'and' (265:5-267:88) */ && ab_();
+                /* CQL 'and' (265:11-266:86) */ && ac_
+                /* CQL 'and' (265:5-267:88) */ && af_;
         }
 
         IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_, k_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.8.0")]
 [CqlLibrary("CMS1056FHIRCTClinical", "1.0.000")]
 public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS1056FHIRCTClinical_1_0_000>
 {
@@ -149,34 +149,25 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
                 "corrected",
             ];
             CqlBoolean j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
-
-            CqlBoolean k_() {
-                DataType m_ = CTScanResult?.Effective;
-                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-                CqlDateTime p_ = context.Operators.End(o_);
-                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-                CqlBoolean r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
-                return r_;
-            }
-
-
-            CqlBoolean l_() {
-                Patient s_ = this.Patient(context);
-                Date t_ = s_?.BirthDateElement;
-                string u_ = t_?.Value;
-                CqlDate v_ = context.Operators.ConvertStringToDate(u_);
-                CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
-                CqlDateTime x_ = context.Operators.Start(w_);
-                CqlDate y_ = context.Operators.DateFrom(x_);
-                int? z_ = context.Operators.CalculateAgeAt(v_, y_, "year");
-                CqlBoolean aa_ = context.Operators.GreaterOrEqual(z_, 18);
-                return aa_;
-            }
-
+            DataType k_ = CTScanResult?.Effective;
+            object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
+            CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_);
+            CqlDateTime n_ = context.Operators.End(m_);
+            CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
+            CqlBoolean p_ = context.Operators.In<CqlDateTime>(n_, o_, "day");
+            CqlBoolean q_ = p_;
+            Patient r_ = this.Patient(context);
+            Date s_ = r_?.BirthDateElement;
+            string t_ = s_?.Value;
+            CqlDate u_ = context.Operators.ConvertStringToDate(t_);
+            CqlDateTime v_ = context.Operators.Start(o_);
+            CqlDate w_ = context.Operators.DateFrom(v_);
+            int? x_ = context.Operators.CalculateAgeAt(u_, w_, "year");
+            CqlBoolean y_ = context.Operators.GreaterOrEqual(x_, 18);
+            CqlBoolean z_ = y_;
             return j_
-                /* CQL 'and' (35:11-36:87) */ && k_()
-                /* CQL 'and' (35:5-37:73) */ && l_();
+                /* CQL 'and' (35:11-36:87) */ && q_
+                /* CQL 'and' (35:5-37:73) */ && z_;
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -196,16 +187,12 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
 
         bool? b_(Observation CTScan) {
             decimal? d_ = AlaraCommonFunctions_1_10_000.Instance.globalNoiseValue(context, CTScan);
-
-            CqlBoolean e_() {
-                DataType f_ = CTScan?.Value;
-                object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-                return g_ is not null;
-            }
-
+            DataType e_ = CTScan?.Value;
+            object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
+            CqlBoolean g_ = (CqlBoolean)(f_ is not null);
             return (CqlBoolean)(d_ is not null)
                 /* CQL 'and' (41:11-42:50) */ && ((AlaraCommonFunctions_1_10_000.Instance.sizeAdjustedValue(context, CTScan)) is not null)
-                /* CQL 'and' (41:5-43:34) */ && e_();
+                /* CQL 'and' (41:5-43:34) */ && g_;
         }
 
         IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.8.0")]
 [CqlLibrary("CMS951FHIRKidneyHealthEval", "1.0.000")]
 public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<CMS951FHIRKidneyHealthEval_1_0_000>
 {
@@ -185,37 +185,21 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             CqlBoolean i_ = context.Operators.OverlapsBefore(g_, h_, "day");
-
-            CqlBoolean j_() {
-                CodeableConcept k_ = DiabetesDiagnosis?.VerificationStatus;
-                CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_);
-
-                CqlBoolean m_() {
-                    CodeableConcept n_ = DiabetesDiagnosis?.VerificationStatus;
-                    CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
-                    CqlCode p_ = QICoreCommon_4_0_000.Instance.refuted(context);
-                    CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-                    CqlBoolean r_ = context.Operators.Equivalent(o_, q_);
-
-                    CqlBoolean s_() {
-                        CodeableConcept t_ = DiabetesDiagnosis?.VerificationStatus;
-                        CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                        CqlCode v_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-                        CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-                        CqlBoolean x_ = context.Operators.Equivalent(u_, w_);
-                        return !x_;
-                    }
-
-                    return (CqlBoolean)!r_
-                        /* CQL 'and' (64:70-66:9) */ && s_();
-                }
-
-                return (CqlBoolean)(l_ is null)
-                    /* CQL 'implies' (64:11-67:7) */ || m_();
-            }
-
+            CodeableConcept j_ = DiabetesDiagnosis?.VerificationStatus;
+            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
+            CqlCode l_ = QICoreCommon_4_0_000.Instance.refuted(context);
+            CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
+            CqlBoolean n_ = context.Operators.Equivalent(k_, m_);
+            CqlCode o_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+            CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+            CqlBoolean q_ = context.Operators.Equivalent(k_, p_);
+            CqlBoolean r_ = (CqlBoolean)!q_;
+            CqlBoolean s_ = (CqlBoolean)!n_
+                /* CQL 'and' (64:70-66:9) */ && r_;
+            CqlBoolean t_ = (CqlBoolean)(k_ is null)
+                /* CQL 'implies' (64:11-67:7) */ || s_;
             return i_
-                /* CQL 'and' (63:5-67:7) */ && j_();
+                /* CQL 'and' (63:5-67:7) */ && t_;
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -257,17 +241,13 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             Period x_ = ValidEncounter?.Period;
             CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, x_);
             CqlBoolean z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, y_, "day");
-
-            CqlBoolean aa_() {
-                Code<Encounter.EncounterStatus> ab_ = ValidEncounter?.StatusElement;
-                Encounter.EncounterStatus? ac_ = ab_?.Value;
-                Code<Encounter.EncounterStatus> ad_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ac_);
-                CqlBoolean ae_ = context.Operators.Equal(ad_, "finished");
-                return ae_;
-            }
-
+            Code<Encounter.EncounterStatus> aa_ = ValidEncounter?.StatusElement;
+            Encounter.EncounterStatus? ab_ = aa_?.Value;
+            Code<Encounter.EncounterStatus> ac_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ab_);
+            CqlBoolean ad_ = context.Operators.Equal(ac_, "finished");
+            CqlBoolean ae_ = ad_;
             return z_
-                /* CQL 'and' (90:7-91:46) */ && aa_();
+                /* CQL 'and' (90:7-91:46) */ && ae_;
         }
 
         CqlBoolean v_ = context.Operators.WhereAny<Encounter>(t_, u_);
@@ -334,37 +314,21 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, CKDOrESRD);
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
             CqlBoolean n_ = context.Operators.Overlaps(l_, m_, "day");
-
-            CqlBoolean o_() {
-                CodeableConcept p_ = CKDOrESRD?.VerificationStatus;
-                CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, p_);
-
-                CqlBoolean r_() {
-                    CodeableConcept s_ = CKDOrESRD?.VerificationStatus;
-                    CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                    CqlCode u_ = QICoreCommon_4_0_000.Instance.refuted(context);
-                    CqlConcept v_ = context.Operators.ConvertCodeToConcept(u_);
-                    CqlBoolean w_ = context.Operators.Equivalent(t_, v_);
-
-                    CqlBoolean x_() {
-                        CodeableConcept y_ = CKDOrESRD?.VerificationStatus;
-                        CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
-                        CqlCode aa_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
-                        CqlConcept ab_ = context.Operators.ConvertCodeToConcept(aa_);
-                        CqlBoolean ac_ = context.Operators.Equivalent(z_, ab_);
-                        return !ac_;
-                    }
-
-                    return (CqlBoolean)!w_
-                        /* CQL 'and' (77:62-79:9) */ && x_();
-                }
-
-                return (CqlBoolean)(q_ is null)
-                    /* CQL 'implies' (77:11-80:7) */ || r_();
-            }
-
+            CodeableConcept o_ = CKDOrESRD?.VerificationStatus;
+            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, o_);
+            CqlCode q_ = QICoreCommon_4_0_000.Instance.refuted(context);
+            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
+            CqlBoolean s_ = context.Operators.Equivalent(p_, r_);
+            CqlCode t_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
+            CqlConcept u_ = context.Operators.ConvertCodeToConcept(t_);
+            CqlBoolean v_ = context.Operators.Equivalent(p_, u_);
+            CqlBoolean w_ = (CqlBoolean)!v_;
+            CqlBoolean x_ = (CqlBoolean)!s_
+                /* CQL 'and' (77:62-79:9) */ && w_;
+            CqlBoolean y_ = (CqlBoolean)(p_ is null)
+                /* CQL 'implies' (77:11-80:7) */ || x_;
             return n_
-                /* CQL 'and' (76:5-80:7) */ && o_();
+                /* CQL 'and' (76:5-80:7) */ && y_;
         }
 
         CqlBoolean k_ = context.Operators.WhereAny<Condition>(i_, j_);
@@ -404,30 +368,22 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
             CqlBoolean i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
-
-            CqlBoolean j_() {
-                DataType l_ = eGFRTest?.Value;
-                object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-                return m_ is not null;
-            }
-
-
-            CqlBoolean k_() {
-                Code<ObservationStatus> n_ = eGFRTest?.StatusElement;
-                ObservationStatus? o_ = n_?.Value;
-                string p_ = context.Operators.Convert<string>(o_);
-                string[] q_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
-                CqlBoolean r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
-                return r_;
-            }
-
+            DataType j_ = eGFRTest?.Value;
+            object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
+            CqlBoolean l_ = (CqlBoolean)(k_ is not null);
+            Code<ObservationStatus> m_ = eGFRTest?.StatusElement;
+            ObservationStatus? n_ = m_?.Value;
+            string o_ = context.Operators.Convert<string>(n_);
+            string[] p_ = [
+                "final",
+                "amended",
+                "corrected",
+            ];
+            CqlBoolean q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
+            CqlBoolean r_ = q_;
             return i_
-                /* CQL 'and' (102:13-103:38) */ && j_()
-                /* CQL 'and' (102:7-104:66) */ && k_();
+                /* CQL 'and' (102:13-103:38) */ && l_
+                /* CQL 'and' (102:7-104:66) */ && r_;
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -452,41 +408,27 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
             CqlBoolean i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
-
-            CqlBoolean j_() {
-                Code<ObservationStatus> l_ = uACRTest?.StatusElement;
-                ObservationStatus? m_ = l_?.Value;
-                string n_ = context.Operators.Convert<string>(m_);
-                string[] o_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
-                CqlBoolean p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
-                return p_;
-            }
-
-
-            CqlBoolean k_() {
-                DataType q_ = uACRTest?.Value;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlQuantity;
-
-                CqlBoolean t_() {
-                    DataType u_ = uACRTest?.Value;
-                    object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    CqlValueSet w_ = this.Undetectable_Lab_Result_Value(context);
-                    CqlBoolean x_ = context.Operators.ConceptInValueSet(v_ as CqlConcept, w_);
-                    return x_;
-                }
-
-                return (CqlBoolean)s_
-                    /* CQL 'or' (111:13-113:9) */ || t_();
-            }
-
+            Code<ObservationStatus> j_ = uACRTest?.StatusElement;
+            ObservationStatus? k_ = j_?.Value;
+            string l_ = context.Operators.Convert<string>(k_);
+            string[] m_ = [
+                "final",
+                "amended",
+                "corrected",
+            ];
+            CqlBoolean n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            CqlBoolean o_ = n_;
+            DataType p_ = uACRTest?.Value;
+            object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+            bool r_ = q_ is CqlQuantity;
+            CqlValueSet s_ = this.Undetectable_Lab_Result_Value(context);
+            CqlBoolean t_ = context.Operators.ConceptInValueSet(q_ as CqlConcept, s_);
+            CqlBoolean u_ = t_;
+            CqlBoolean v_ = (CqlBoolean)r_
+                /* CQL 'or' (111:13-113:9) */ || u_;
             return i_
-                /* CQL 'and' (109:13-110:66) */ && j_()
-                /* CQL 'and' (109:7-113:9) */ && k_();
+                /* CQL 'and' (109:13-110:66) */ && o_
+                /* CQL 'and' (109:7-113:9) */ && v_;
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -511,30 +453,22 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
             CqlBoolean i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
-
-            CqlBoolean j_() {
-                DataType l_ = AlbuminTest?.Value;
-                object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-                return m_ is not null;
-            }
-
-
-            CqlBoolean k_() {
-                Code<ObservationStatus> n_ = AlbuminTest?.StatusElement;
-                ObservationStatus? o_ = n_?.Value;
-                string p_ = context.Operators.Convert<string>(o_);
-                string[] q_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
-                CqlBoolean r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
-                return r_;
-            }
-
+            DataType j_ = AlbuminTest?.Value;
+            object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
+            CqlBoolean l_ = (CqlBoolean)(k_ is not null);
+            Code<ObservationStatus> m_ = AlbuminTest?.StatusElement;
+            ObservationStatus? n_ = m_?.Value;
+            string o_ = context.Operators.Convert<string>(n_);
+            string[] p_ = [
+                "final",
+                "amended",
+                "corrected",
+            ];
+            CqlBoolean q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
+            CqlBoolean r_ = q_;
             return i_
-                /* CQL 'and' (127:11-128:39) */ && j_()
-                /* CQL 'and' (127:5-129:67) */ && k_();
+                /* CQL 'and' (127:11-128:39) */ && l_
+                /* CQL 'and' (127:5-129:67) */ && r_;
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -559,30 +493,22 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
             CqlBoolean i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
-
-            CqlBoolean j_() {
-                DataType l_ = CreatinineTest?.Value;
-                object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-                return m_ is not null;
-            }
-
-
-            CqlBoolean k_() {
-                Code<ObservationStatus> n_ = CreatinineTest?.StatusElement;
-                ObservationStatus? o_ = n_?.Value;
-                string p_ = context.Operators.Convert<string>(o_);
-                string[] q_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
-                CqlBoolean r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
-                return r_;
-            }
-
+            DataType j_ = CreatinineTest?.Value;
+            object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
+            CqlBoolean l_ = (CqlBoolean)(k_ is not null);
+            Code<ObservationStatus> m_ = CreatinineTest?.StatusElement;
+            ObservationStatus? n_ = m_?.Value;
+            string o_ = context.Operators.Convert<string>(n_);
+            string[] p_ = [
+                "final",
+                "amended",
+                "corrected",
+            ];
+            CqlBoolean q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
+            CqlBoolean r_ = q_;
             return i_
-                /* CQL 'and' (133:11-134:42) */ && j_()
-                /* CQL 'and' (133:5-135:70) */ && k_();
+                /* CQL 'and' (133:11-134:42) */ && l_
+                /* CQL 'and' (133:5-135:70) */ && r_;
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -647,15 +573,11 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     private bool? Kidney_Panel_Performed_During_Measurement_Period_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Estimated_Glomerular_Filtration_Rate_Performed_During_Measurement_Period(context);
-
-        CqlBoolean b_() {
-            CqlBoolean c_ = this.Has_Urine_Albumin_Creatinine_Ratio_Test_Performed_During_Measurement_Period(context);
-            return c_
-                /* CQL 'or' (96:9-98:5) */ || this.Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart(context);
-        }
-
+        CqlBoolean b_ = this.Has_Urine_Albumin_Creatinine_Ratio_Test_Performed_During_Measurement_Period(context);
+        CqlBoolean c_ = b_
+            /* CQL 'or' (96:9-98:5) */ || this.Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart(context);
         return a_
-            /* CQL 'and' (95:3-98:5) */ && b_();
+            /* CQL 'and' (95:3-98:5) */ && c_;
     }
 
 
