@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS131FHIRDiabetesEyeExam", "1.0.000")]
 public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CMS131FHIRDiabetesEyeExam_1_0_000>
 {
@@ -604,8 +604,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
                 /* CQL 'and' (138:8-140:5) */ && this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context);
         }
 
-        return a_
-            /* CQL 'and' (132:3-134:3) */ && this.Has_Right_Eye_Retinopathy(context)
+        return (a_
+            /* CQL 'and' (132:3-134:3) */ && this.Has_Right_Eye_Retinopathy(context))
             /* CQL 'or' (132:3-137:5) */ || b_()
             /* CQL 'or' (132:3-140:5) */ || c_();
     }
@@ -641,8 +641,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
                 /* CQL 'and' (74:8-76:5) */ && this.Retinal_Exam_in_Measurement_Period_or_Year_Prior(context);
         }
 
-        return a_
-            /* CQL 'and' (71:3-73:3) */ && this.Retinal_Exam_in_Measurement_Period(context)
+        return (a_
+            /* CQL 'and' (71:3-73:3) */ && this.Retinal_Exam_in_Measurement_Period(context))
             /* CQL 'or' (71:3-76:5) */ || b_()
             /* CQL 'or' (71:3-77:50) */ || this.Autonomous_Eye_Exam_in_Measurement_Period(context)
             /* CQL 'or' (71:3-78:83) */ || this.Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(context)

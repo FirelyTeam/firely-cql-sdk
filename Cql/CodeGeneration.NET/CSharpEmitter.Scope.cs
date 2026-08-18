@@ -498,8 +498,8 @@ internal partial class CSharpEmitter
             var right = $"{function.Code}()";
 
             return new Atom(
-                _emitter.FormatShortCircuit(node.Op, left.Code, right, node.OriginTag),
-                _emitter.FormatShortCircuit(node.Op, left.KeyCode, right, originTag: null),
+                _emitter.FormatShortCircuit(node.Op, node.Left, left.Code, right, node.OriginTag),
+                _emitter.FormatShortCircuit(node.Op, node.Left, left.KeyCode, right, originTag: null),
                 node);
         }
 

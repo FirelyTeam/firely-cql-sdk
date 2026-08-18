@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS646FHIRIntravesicalBCGTherapy", "1.0.000")]
 public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingleton<CMS646FHIRIntravesicalBCGTherapy_1_0_000>
 {
@@ -237,7 +237,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 /* CQL 'or' (216:52-220:3) */ || k_();
         }
 
-        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+        return (CqlBoolean)((bool?)(b_ is null))
             /* CQL 'implies' (216:3-220:3) */ || c_();
     }
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS50FHIRReceiptofSpecialistReport", "1.0.000")]
 public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISingleton<CMS50FHIRReceiptofSpecialistReport_1_0_000>
 {
@@ -476,8 +476,8 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                     return ak_;
                 }
 
-                return k_
-                    /* CQL 'or' (94:19-96:9) */ || l_()
+                return (k_
+                    /* CQL 'or' (94:19-96:9) */ || l_())
                     /* CQL 'and' (94:19-97:90) */ && m_()
                     /* CQL 'and' (94:19-98:94) */ && n_()
                     /* CQL 'and' (94:19-99:59) */ && o_()

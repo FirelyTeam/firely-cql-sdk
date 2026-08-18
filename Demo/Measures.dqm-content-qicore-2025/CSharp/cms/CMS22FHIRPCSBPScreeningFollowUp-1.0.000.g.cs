@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS22FHIRPCSBPScreeningFollowUp", "1.0.000")]
 public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingleton<CMS22FHIRPCSBPScreeningFollowUp_1_0_000>
 {
@@ -304,7 +304,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 /* CQL 'or' (408:52-412:3) */ || k_();
         }
 
-        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+        return (CqlBoolean)((bool?)(b_ is null))
             /* CQL 'implies' (408:3-412:3) */ || c_();
     }
 
@@ -1757,8 +1757,8 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     /* CQL 'or' (239:21-247:13) */ || ct_()));
             }
 
-            return u_
-                /* CQL 'or' (230:17-238:11) */ || v_()
+            return (u_
+                /* CQL 'or' (230:17-238:11) */ || v_())
                 /* CQL 'and' (230:9-248:9) */ && w_();
         }
 

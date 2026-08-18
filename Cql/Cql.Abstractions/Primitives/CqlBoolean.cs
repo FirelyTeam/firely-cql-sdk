@@ -78,6 +78,31 @@ public readonly struct CqlBoolean : IEquatable<CqlBoolean>
     /// </summary>
     public bool IsFalse => _state == FalseState;
 
+    /// <summary>Whether this is the unknown value. The complement of <see cref="HasValue"/>, named
+    /// for the question generated code actually asks, so a negation does not have to be printed.
+    /// </summary>
+    public bool IsNull => _state == NullState;
+
+    /// <summary>Whether this is a known value — the complement of <see cref="IsNull"/> and a synonym
+    /// of <see cref="HasValue"/>, so that a positive null test reads as one.</summary>
+    public bool IsNotNull => _state != NullState;
+
+    /// <summary>
+    /// Whether this is anything OTHER than definitely true, i.e. <see langword="false"/> or
+    /// <see cref="Null"/>. Exists so a negated test prints as one property rather than as
+    /// <c>!x.IsTrue</c>.
+    /// <para>Careful: this is the negation of <see cref="IsTrue"/>, which is NOT the same as
+    /// <see cref="IsFalse"/> — <see cref="Null"/> satisfies this and not that.</para>
+    /// </summary>
+    public bool IsNotTrue => _state != TrueState;
+
+    /// <summary>
+    /// Whether this is anything OTHER than definitely false, i.e. <see langword="true"/> or
+    /// <see cref="Null"/>. The negation of <see cref="IsFalse"/>, and likewise not the same as
+    /// <see cref="IsTrue"/>.
+    /// </summary>
+    public bool IsNotFalse => _state != FalseState;
+
     /// <summary>Converts a <see cref="bool"/> to its CQL counterpart.</summary>
     /// <param name="value">The value to convert.</param>
     public static implicit operator CqlBoolean(bool value) => value ? True : False;

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS2FHIRPCSDepScreenAndFollowUp", "1.0.000")]
 public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS2FHIRPCSDepScreenAndFollowUp_1_0_000>
 {
@@ -1359,8 +1359,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 /* CQL 'and' (59:8-63:5) */ && s_();
         }
 
-        return a_
-            /* CQL 'and' (47:3-51:3) */ && b_()
+        return (a_
+            /* CQL 'and' (47:3-51:3) */ && b_())
             /* CQL 'or' (47:3-58:5) */ || c_()
             /* CQL 'or' (47:3-63:5) */ || d_();
     }
@@ -1704,8 +1704,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 /* CQL 'and' (69:8-71:5) */ && !(this.Has_Adult_Depression_Screening(context));
         }
 
-        return b_
-            /* CQL 'and' (66:3-68:3) */ && !(this.Has_Adolescent_Depression_Screening(context))
+        return (b_
+            /* CQL 'and' (66:3-68:3) */ && !(this.Has_Adolescent_Depression_Screening(context)))
             /* CQL 'or' (66:3-71:5) */ || c_();
     }
 

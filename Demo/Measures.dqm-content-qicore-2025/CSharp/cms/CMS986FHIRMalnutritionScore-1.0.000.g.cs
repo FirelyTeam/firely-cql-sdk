@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS986FHIRMalnutritionScore", "1.0.000")]
 public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<CMS986FHIRMalnutritionScore_1_0_000>
 {
@@ -1172,7 +1172,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 /* CQL 'or' (240:52-244:3) */ || k_();
         }
 
-        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+        return (CqlBoolean)((bool?)(b_ is null))
             /* CQL 'implies' (240:3-244:3) */ || c_();
     }
 
@@ -1525,10 +1525,10 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return !t_;
             }
 
-            if (b_
-                /* CQL 'and' (282:15-283:92) */ && i_()
-                /* CQL 'or' (282:13-285:3) */ || j_()
-                /* CQL 'and' (282:13-286:123) */ && k_()
+            if ((((b_
+                /* CQL 'and' (282:15-283:92) */ && i_())
+                /* CQL 'or' (282:13-285:3) */ || j_())
+                /* CQL 'and' (282:13-286:123) */ && k_())
                 /* CQL 'or' (282:13-287:115) */ || l_())
             {
                 return 2;

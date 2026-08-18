@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS137FHIRSUDTxInitEngagement", "1.0.000")]
 public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleton<CMS137FHIRSUDTxInitEngagement_1_0_000>
 {
@@ -1135,8 +1135,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                         /* CQL 'and' (151:16-151:107) */ && !((bool?)(InitiationTreatmentDate is null));
                 }
 
-                return aj_
-                    /* CQL 'and' (150:21-150:128) */ && !((bool?)(InitiationTreatmentDate is null))
+                return (aj_
+                    /* CQL 'and' (150:21-150:128) */ && !((bool?)(InitiationTreatmentDate is null)))
                     /* CQL 'or' (150:21-151:107) */ || ak_();
             }
 

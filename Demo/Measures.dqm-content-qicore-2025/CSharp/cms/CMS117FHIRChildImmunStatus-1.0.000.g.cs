@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS117FHIRChildImmunStatus", "1.0.000")]
 public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<CMS117FHIRChildImmunStatus_1_0_000>
 {
@@ -1373,8 +1373,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                     /* CQL 'and' (315:12-322:9) */ && u_();
             }
 
-            return f_
-                /* CQL 'and' (307:13-314:7) */ && g_()
+            return (f_
+                /* CQL 'and' (307:13-314:7) */ && g_())
                 /* CQL 'or' (307:7-322:9) */ || h_();
         }
 
@@ -2250,8 +2250,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                     /* CQL 'and' (484:12-489:9) */ && u_();
             }
 
-            return f_
-                /* CQL 'and' (478:13-483:7) */ && g_()
+            return (f_
+                /* CQL 'and' (478:13-483:7) */ && g_())
                 /* CQL 'or' (478:7-489:9) */ || h_();
         }
 
@@ -2717,8 +2717,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 /* CQL 'or' (180:9-183:5) */ || bo_();
         }
 
-        return b_
-            /* CQL 'or' (147:3-149:3) */ || c_()
+        return (b_
+            /* CQL 'or' (147:3-149:3) */ || c_())
             /* CQL 'and' (147:3-152:5) */ && d_()
             /* CQL 'and' (147:3-159:5) */ && e_()
             /* CQL 'and' (147:3-162:5) */ && f_()

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("NCQAAdvancedIllnessandFrailty", "1.0.0")]
 public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<NCQAAdvancedIllnessandFrailty_1_0_0>
 {
@@ -545,9 +545,9 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 /* CQL 'and' (40:8-44:5) */ && this.Has_Criteria_Indicating_Frailty(context);
         }
 
-        return j_
+        return (j_
             /* CQL 'and' (30:5-33:43) */ && this.Has_Criteria_Indicating_Frailty(context)
-            /* CQL 'and' (30:3-39:3) */ && k_()
+            /* CQL 'and' (30:3-39:3) */ && k_())
             /* CQL 'or' (30:3-44:5) */ || l_();
     }
 

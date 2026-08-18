@@ -92,8 +92,15 @@ internal partial class CSharpEmitter
     /// parenthesization is preserved — dropping it turned <c>(x as CqlDateTime) ?? false</c> into a
     /// mis-grouped expression and 1,652 compile errors.</para>
     /// </summary>
+    /// <remarks>
+    /// The condition MUST be the same <see cref="DenotesCqlBoolean"/> the rewrites are gated on.
+    /// It used to be the narrower <see cref="IsCqlBooleanLocal"/>, which left a gap: anything that
+    /// printed as a <see cref="CqlBoolean"/> without satisfying the narrow test got neither the
+    /// rewrite nor this cast, and a bare <c>?? false</c> over a <see cref="CqlBoolean"/> is CS0019.
+    /// Sharing one predicate makes the two exhaustive by construction.
+    /// </remarks>
     private string AsNullableBool(Atom atom, string printed) =>
-        IsCqlBooleanLocal(atom) ? $"((bool?){printed})" : printed;
+        DenotesCqlBoolean(atom) ? $"((bool?){printed})" : printed;
 
     /// <param name="typeToCSharpConverter">Renders .NET types as C# type syntax.</param>
     /// <param name="namingConventions">The generated-class naming conventions the printed
@@ -155,6 +162,7 @@ internal partial class CSharpEmitter
     /// stay, because <c>?? false</c>, a lifted <c>!</c> and the null patterns each genuinely
     /// need a <c>bool?</c> and have no implicit conversion to fall back on (see #1514).</para>
     /// </summary>
+
     private static CodeExpression BodyWithoutRootBoolConversion(CodeLambda lambda) =>
         lambda.Body is CodeCast { Type: var castType, Operand: { Type: var operandType } inner }
         && CodeTypeRules.IsNullableBool(castType)

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS1173FHIRDiagnosticDelayVTE", "1.0.000")]
 public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleton<CMS1173FHIRDiagnosticDelayVTE_1_0_000>
 {
@@ -358,7 +358,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 /* CQL 'or' (202:52-206:3) */ || k_();
         }
 
-        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+        return (CqlBoolean)((bool?)(b_ is null))
             /* CQL 'implies' (202:3-206:3) */ || c_();
     }
 
@@ -578,8 +578,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                         /* CQL 'and' (108:14-108:86) */ && ao_();
                 }
 
-                return ab_
-                    /* CQL 'and' (107:13-107:86) */ && ac_()
+                return (ab_
+                    /* CQL 'and' (107:13-107:86) */ && ac_())
                     /* CQL 'or' (107:11-109:7) */ || ad_();
             }
 
@@ -740,8 +740,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     return aq_;
                 }
 
-                return s_
-                    /* CQL 'or' (127:15-129:9) */ || t_()
+                return (s_
+                    /* CQL 'or' (127:15-129:9) */ || t_())
                     /* CQL 'and' (127:15-130:87) */ && u_()
                     /* CQL 'and' (127:9-131:52) */ && v_();
             }

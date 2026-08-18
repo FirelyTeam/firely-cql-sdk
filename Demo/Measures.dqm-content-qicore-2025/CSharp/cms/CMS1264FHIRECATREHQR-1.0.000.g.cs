@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS1264FHIRECATREHQR", "1.0.000")]
 public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264FHIRECATREHQR_1_0_000>
 {
@@ -414,8 +414,8 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     return br_;
                 }
 
-                return at_
-                    /* CQL 'and' (161:13-161:87) */ && au_()
+                return (at_
+                    /* CQL 'and' (161:13-161:87) */ && au_())
                     /* CQL 'or' (161:13-162:65) */ || av_()
                     /* CQL 'or' (161:13-163:65) */ || aw_()
                     /* CQL 'or' (161:12-165:9) */ || ax_();
@@ -801,8 +801,8 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     return br_;
                 }
 
-                return at_
-                    /* CQL 'and' (180:13-180:87) */ && au_()
+                return (at_
+                    /* CQL 'and' (180:13-180:87) */ && au_())
                     /* CQL 'or' (180:13-181:65) */ || av_()
                     /* CQL 'or' (180:13-182:65) */ || aw_()
                     /* CQL 'or' (180:12-184:9) */ || ax_();

@@ -8,6 +8,8 @@
 
 #nullable enable
 
+using Hl7.Cql.Primitives;
+
 namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
@@ -29,8 +31,13 @@ internal sealed class CodeUnary : CodeExpression
     {
         Type = op switch
         {
-            CodeUnaryOp.Not when operand.Type == typeof(bool) || operand.Type == typeof(bool?) => operand.Type,
-            CodeUnaryOp.Not => throw new ArgumentException($"The operand of {op} must be bool or bool?, not {operand.Type}."),
+            // CqlBoolean as well as bool/bool?: it declares its own three-valued operator !, so a
+            // negation stays in the type instead of being forced out through bool? and coalesced
+            // back — `!(a || b)` rather than `(!((bool?)(a || b))) ?? false`.
+            CodeUnaryOp.Not when CodeTypeRules.IsPlainBool(operand.Type)
+                                 || CodeTypeRules.IsNullableBool(operand.Type)
+                                 || CodeTypeRules.IsCqlBoolean(operand.Type) => operand.Type,
+            CodeUnaryOp.Not => throw new ArgumentException($"The operand of {op} must be bool, bool? or {nameof(CqlBoolean)}, not {operand.Type}."),
             _ => throw new ArgumentException($"Unknown unary operator {op}."),
         };
 

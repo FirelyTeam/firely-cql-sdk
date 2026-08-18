@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS996FHIRAptTxforSTEMI", "2.0.000")]
 public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS996FHIRAptTxforSTEMI_2_0_000>
 {
@@ -515,7 +515,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             /* CQL 'or' (160:74-162:11) */ || w_();
                     }
 
-                    return (CqlBoolean)(!(!((bool?)(p_ is null))))
+                    return (CqlBoolean)((bool?)(p_ is null))
                         /* CQL 'implies' (160:13-163:9) */ || q_();
                 }
 
@@ -1023,9 +1023,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return as_;
                 }
 
-                return q_
-                    /* CQL 'and' (294:19-294:113) */ && r_()
-                    /* CQL 'or' (294:17-296:7) */ || s_()
+                return ((q_
+                    /* CQL 'and' (294:19-294:113) */ && r_())
+                    /* CQL 'or' (294:17-296:7) */ || s_())
                     /* CQL 'and' (294:17-297:45) */ && t_();
             }
 
@@ -1165,8 +1165,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return av_;
                 }
 
-                return p_
-                    /* CQL 'or' (286:17-288:7) */ || q_()
+                return (p_
+                    /* CQL 'or' (286:17-288:7) */ || q_())
                     /* CQL 'and' (286:17-289:48) */ && r_();
             }
 
@@ -1423,8 +1423,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return as_;
                 }
 
-                return s_
-                    /* CQL 'or' (205:17-207:11) */ || t_()
+                return (s_
+                    /* CQL 'or' (205:17-207:11) */ || t_())
                     /* CQL 'and' (205:17-208:90) */ && u_()
                     /* CQL 'and' (205:11-209:85) */ && v_();
             }
@@ -1873,8 +1873,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return aa_;
                 }
 
-                return l_
-                    /* CQL 'or' (257:17-259:7) */ || m_()
+                return (l_
+                    /* CQL 'or' (257:17-259:7) */ || m_())
                     /* CQL 'and' (257:17-260:54) */ && n_();
             }
 
@@ -1956,8 +1956,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return ae_;
                 }
 
-                return m_
-                    /* CQL 'or' (265:17-267:7) */ || n_()
+                return (m_
+                    /* CQL 'or' (265:17-267:7) */ || n_())
                     /* CQL 'and' (265:17-268:61) */ && o_();
             }
 
@@ -2030,9 +2030,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return !((bool?)(ac_ is null));
                 }
 
-                return q_
+                return (q_
                     /* CQL 'or' (320:17-321:48) */ || r_()
-                    /* CQL 'or' (320:16-323:11) */ || s_()
+                    /* CQL 'or' (320:16-323:11) */ || s_())
                     /* CQL 'and' (320:11-324:54) */ && t_();
             }
 
@@ -2258,9 +2258,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return !((bool?)(ac_ is null));
                 }
 
-                return q_
+                return (q_
                     /* CQL 'or' (333:17-334:48) */ || r_()
-                    /* CQL 'or' (333:16-336:11) */ || s_()
+                    /* CQL 'or' (333:16-336:11) */ || s_())
                     /* CQL 'and' (333:11-338:48) */ && t_();
             }
 

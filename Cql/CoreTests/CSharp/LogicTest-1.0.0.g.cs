@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("LogicTest", "1.0.0")]
 public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
 {
@@ -475,7 +475,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     {
         CqlBoolean a_ = this.TrueDef(context);
         // CQL 'xor' (61:23-61:45): right operand skipped when left is null
-        if (!a_.HasValue)
+        if (a_.IsNull)
         {
             return null as bool?;
         }
@@ -496,7 +496,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     {
         CqlBoolean a_ = this.TrueDef(context);
         // CQL 'xor' (62:24-62:47): right operand skipped when left is null
-        if (!a_.HasValue)
+        if (a_.IsNull)
         {
             return null as bool?;
         }
@@ -518,7 +518,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     {
         CqlBoolean a_ = this.TrueDef(context);
         // CQL 'xor' (63:23-63:45): right operand skipped when left is null
-        if (!a_.HasValue)
+        if (a_.IsNull)
         {
             return null as bool?;
         }
@@ -540,7 +540,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     {
         CqlBoolean a_ = this.FalseDef(context);
         // CQL 'xor' (64:24-64:47): right operand skipped when left is null
-        if (!a_.HasValue)
+        if (a_.IsNull)
         {
             return null as bool?;
         }
@@ -562,7 +562,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     {
         CqlBoolean a_ = this.FalseDef(context);
         // CQL 'xor' (65:25-65:49): right operand skipped when left is null
-        if (!a_.HasValue)
+        if (a_.IsNull)
         {
             return null as bool?;
         }
@@ -583,7 +583,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     {
         CqlBoolean a_ = this.FalseDef(context);
         // CQL 'xor' (66:24-66:47): right operand skipped when left is null
-        if (!a_.HasValue)
+        if (a_.IsNull)
         {
             return null as bool?;
         }
@@ -605,7 +605,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     {
         CqlBoolean a_ = this.NullDef(context);
         // CQL 'xor' (67:23-67:45): right operand skipped when left is null
-        if (!a_.HasValue)
+        if (a_.IsNull)
         {
             return null as bool?;
         }
@@ -627,7 +627,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     {
         CqlBoolean a_ = this.NullDef(context);
         // CQL 'xor' (68:24-68:47): right operand skipped when left is null
-        if (!a_.HasValue)
+        if (a_.IsNull)
         {
             return null as bool?;
         }
@@ -649,7 +649,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     {
         CqlBoolean a_ = this.NullDef(context);
         // CQL 'xor' (69:23-69:45): right operand skipped when left is null
-        if (!a_.HasValue)
+        if (a_.IsNull)
         {
             return null as bool?;
         }
@@ -859,7 +859,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     {
         CqlBoolean a_ = this.NullDef(context);
         // CQL 'xor' (102:26-102:52): right operand skipped when left is null
-        if (!a_.HasValue)
+        if (a_.IsNull)
         {
             return null as bool?;
         }
@@ -881,7 +881,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     {
         CqlBoolean a_ = this.TrueDef(context);
         // CQL 'xor' (103:26-103:52): right operand skipped when left is null
-        if (!a_.HasValue)
+        if (a_.IsNull)
         {
             return null as bool?;
         }
@@ -903,7 +903,7 @@ public partial class LogicTest_1_0_0 : ILibrary, ISingleton<LogicTest_1_0_0>
     {
         CqlBoolean a_ = this.FalseDef(context);
         // CQL 'xor' (104:27-104:54): right operand skipped when left is null
-        if (!a_.HasValue)
+        if (a_.IsNull)
         {
             return null as bool?;
         }

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS108FHIRVTEProphylaxis", "1.0.000")]
 public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS108FHIRVTEProphylaxis_1_0_000>
 {
@@ -2011,7 +2011,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                         /* CQL 'and' (210:77-213:107) */ && w_();
                 }
 
-                return (CqlBoolean)(!(!((bool?)(o_ is null))))
+                return (CqlBoolean)((bool?)(o_ is null))
                     /* CQL 'implies' (210:19-213:107) */ || p_();
             }
 
@@ -2111,9 +2111,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                         /* CQL 'and' (224:69-227:92) */ && br_();
                 }
 
-                return (CqlBoolean)(!((bool?)(au_
+                return (CqlBoolean)(!((bool?)((au_
                     /* CQL 'or' (220:23-221:71) */ || av_()
-                    /* CQL 'or' (220:21-223:11) */ || aw_()
+                    /* CQL 'or' (220:21-223:11) */ || aw_())
                     /* CQL 'and' (220:21-224:59) */ && ax_())))
                     /* CQL 'implies' (220:21-227:92) */ || ay_();
             }

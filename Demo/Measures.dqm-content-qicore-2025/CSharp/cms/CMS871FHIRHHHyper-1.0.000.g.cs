@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS871FHIRHHHyper", "1.0.000")]
 public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIRHHHyper_1_0_000>
 {
@@ -241,8 +241,8 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                     return af_;
                 }
 
-                return r_
-                    /* CQL 'or' (121:15-123:9) */ || s_()
+                return (r_
+                    /* CQL 'or' (121:15-123:9) */ || s_())
                     /* CQL 'and' (121:9-124:113) */ && t_();
             }
 
@@ -299,14 +299,14 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                         return bl_;
                     }
 
-                    return an_
+                    return (an_
                         /* CQL 'or' (127:74-128:80) */ || ao_()
                         /* CQL 'or' (127:74-129:80) */ || ap_()
-                        /* CQL 'or' (127:72-131:11) */ || aq_()
+                        /* CQL 'or' (127:72-131:11) */ || aq_())
                         /* CQL 'and' (127:72-132:113) */ && ar_();
                 }
 
-                return (CqlBoolean)(!(!((bool?)(ah_ is null))))
+                return (CqlBoolean)((bool?)(ah_ is null))
                     /* CQL 'implies' (127:11-132:113) */ || ai_();
             }
 

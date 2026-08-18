@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS506FHIRSafeUseofOpioids", "1.0.000")]
 public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<CMS506FHIRSafeUseofOpioids_1_0_000>
 {
@@ -205,8 +205,8 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 return ah_;
             }
 
-            return v_
-                /* CQL 'or' (59:11-61:5) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, OpioidMedications as MedicationRequest)
+            return (v_
+                /* CQL 'or' (59:11-61:5) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, OpioidMedications as MedicationRequest))
                 /* CQL 'and' (59:11-62:63) */ && w_()
                 /* CQL 'and' (59:5-63:117) */ && x_();
         }
@@ -288,8 +288,8 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 return ah_;
             }
 
-            return v_
-                /* CQL 'or' (51:11-53:5) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, BenzoMedications as MedicationRequest)
+            return (v_
+                /* CQL 'or' (51:11-53:5) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, BenzoMedications as MedicationRequest))
                 /* CQL 'and' (51:11-54:62) */ && w_()
                 /* CQL 'and' (51:5-55:116) */ && x_();
         }
@@ -539,7 +539,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 /* CQL 'or' (165:52-169:3) */ || k_();
         }
 
-        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+        return (CqlBoolean)((bool?)(b_ is null))
             /* CQL 'implies' (165:3-169:3) */ || c_();
     }
 
@@ -616,8 +616,8 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 return ah_;
             }
 
-            return v_
-                /* CQL 'or' (133:11-135:5) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeMedication as MedicationRequest)
+            return (v_
+                /* CQL 'or' (133:11-135:5) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeMedication as MedicationRequest))
                 /* CQL 'and' (133:11-136:65) */ && w_()
                 /* CQL 'and' (133:5-137:119) */ && x_();
         }

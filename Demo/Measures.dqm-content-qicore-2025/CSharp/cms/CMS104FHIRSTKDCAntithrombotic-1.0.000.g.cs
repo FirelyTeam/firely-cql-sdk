@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS104FHIRSTKDCAntithrombotic", "1.0.000")]
 public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleton<CMS104FHIRSTKDCAntithrombotic_1_0_000>
 {
@@ -314,8 +314,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return an_;
             }
 
-            return r_
-                /* CQL 'or' (56:13-58:7) */ || s_()
+            return (r_
+                /* CQL 'or' (56:13-58:7) */ || s_())
                 /* CQL 'and' (56:13-61:9) */ && t_()
                 /* CQL 'and' (56:13-62:73) */ && u_()
                 /* CQL 'and' (56:7-63:127) */ && v_();
@@ -521,8 +521,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return ah_;
             }
 
-            return v_
-                /* CQL 'or' (82:11-84:5) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, PharmacologicalContraindications as MedicationRequest)
+            return (v_
+                /* CQL 'or' (82:11-84:5) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, PharmacologicalContraindications as MedicationRequest))
                 /* CQL 'and' (82:11-85:78) */ && w_()
                 /* CQL 'and' (82:5-86:132) */ && x_();
         }

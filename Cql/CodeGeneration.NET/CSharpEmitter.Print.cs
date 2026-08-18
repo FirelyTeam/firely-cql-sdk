@@ -457,20 +457,10 @@ internal partial class CSharpEmitter
             var rightOperand = ParenthesizeShortCircuitOperand(
                 PrintFullyInline(UnwrapCqlBooleanConversion(binary.Right), includeOriginTags));
 
-            // A left operand that is a chain of the SAME operator composes without parentheses,
-            // because && and || are left-associative — that is what lets `a || b || c` print as one
-            // flat column instead of `((a || b) || c)`. A DIFFERENT operator must still be wrapped:
-            // && and || bind differently, so `(a || b) && c` would silently regroup without it.
-            var leftCode = child(binary.Left).Code;
-            if (UnwrapCqlBooleanConversion(binary.Left) is not CodeBinary { } leftChain
-                || leftChain.Op != binary.Op)
-            {
-                leftCode = ParenthesizeShortCircuitOperand(leftCode);
-            }
-
             return FormatShortCircuit(
                 binary.Op,
-                leftCode,
+                binary.Left,
+                child(binary.Left).Code,
                 rightOperand,
                 includeOriginTags ? binary.OriginTag : null);
         }
@@ -487,6 +477,15 @@ internal partial class CSharpEmitter
                     || (CodeTypeRules.IsNullableBool(leftCast.Type) && CodeTypeRules.IsCqlBoolean(leftCast.Operand.Type)))
                     ? leftCast.Operand
                     : SimplifyCoalesceLeft(binary.Left);
+
+            // NOTE: a negation's `(bool?)` conversion is deliberately NOT stripped here, even though
+            // it reads as noise — `(!((bool?)(x is null))) ?? false` would be nicer as
+            // `x is not null`. Doing it by rebuilding the node (`new CodeUnary(Not, inner)`) is what
+            // it appears to need, and that is a trap: PrintBoth prints every node TWICE, once for
+            // the output and once for the dedup key, so a freshly allocated node defeats the
+            // reference-keyed memo and its operand is linearized twice — which hoisted the operand's
+            // local function twice and left one copy unreferenced (CS8321). Any fix has to keep node
+            // identity stable, so it belongs in the builder rather than here.
 
             if (!CodeTypeRules.IsNullAssignable(leftExpression.Type))
                 return child(leftExpression).Code;
@@ -535,8 +534,8 @@ internal partial class CSharpEmitter
             // constant pattern form) and keeps the value from round-tripping through bool? just to
             // be tested. Applies to any CqlBoolean-valued operand, a whole logical chain included —
             // not only a local.
-            CodeBinaryOp.Equal when right is "null" or "default" && DenotesCqlBoolean(leftAtom) => $"!{left}.{nameof(CqlBoolean.HasValue)}",
-            CodeBinaryOp.NotEqual when right is "null" or "default" && DenotesCqlBoolean(leftAtom) => $"{left}.{nameof(CqlBoolean.HasValue)}",
+            CodeBinaryOp.Equal when right is "null" or "default" && DenotesCqlBoolean(leftAtom) => $"{left}.{nameof(CqlBoolean.IsNull)}",
+            CodeBinaryOp.NotEqual when right is "null" or "default" && DenotesCqlBoolean(leftAtom) => $"{left}.{nameof(CqlBoolean.IsNotNull)}",
             CodeBinaryOp.Equal when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is null",
             CodeBinaryOp.NotEqual when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is not null",
             // The short-circuit guards print as constant patterns: same lowering as the
@@ -594,10 +593,23 @@ internal partial class CSharpEmitter
     /// <see cref="StringExtensions.ParenthesizeIfNeeded"/> paths everywhere a chain is consumed as
     /// a whole.</para>
     /// </summary>
-    internal string FormatShortCircuit(CodeBinaryOp op, string left, string right, string? originTag)
+    internal string FormatShortCircuit(CodeBinaryOp op, CodeExpression leftNode, string left, string right, string? originTag)
     {
         var @operator = op is CodeBinaryOp.CqlAndAlso or CodeBinaryOp.AndAlso ? "&&" : "||";
         var originPrefix = originTag is null ? "" : $"/* {originTag} */ ";
+
+        // Parenthesizing the left operand is a CORRECTNESS obligation, not formatting, so it lives
+        // here rather than in the callers. It was a caller's job briefly and one of the two forgot:
+        // the path that moves a large right operand into a local function did not wrap, so
+        // `(p_ || q_()) && r_()` emitted as `p_ || q_() && r_()`. C# binds && tighter than ||, so
+        // that regroups to `p_ || (q_() && r_())` — it compiles, and silently computes something
+        // else. 63 sites across 38 generated files were wrong, and only evaluation parity against
+        // the integration corpus caught it.
+        //
+        // A chain of the SAME operator needs no parentheses (&& and || are left-associative), which
+        // is what keeps `a || b || c` flat.
+        if (UnwrapCqlBooleanConversion(leftNode) is not CodeBinary leftChain || leftChain.Op != op)
+            left = ParenthesizeShortCircuitOperand(left);
 
         var isb = new IndentedStringBuilder();
         isb.AppendLine(left);
@@ -646,9 +658,83 @@ internal partial class CSharpEmitter
     private string PrintUnary(CodeUnary unary, Func<CodeExpression, Atom> child) =>
         unary.Op switch
         {
+            // A negated test prints as the positively-named form rather than as `!`, which is what
+            // keeps a nested null check from reading as `(!((bool?)(x is null))) ?? false`.
+            CodeUnaryOp.Not when NegatedTest(unary.Operand, child) is { } negated => negated,
+            // Deliberately prints the operand AS TYPED, including a CqlBoolean-to-bool? conversion
+            // that looks redundant. Dropping it here would make the printed type diverge from the
+            // node type for an arbitrary expression, and every consumer that compensates for such a
+            // divergence keys on the node — so the result would be a bare `?? false` over a
+            // CqlBoolean (CS0019). The conversion is instead removed at the IR level, where the type
+            // travels with it: see the coalesce path in PrintBinary.
             CodeUnaryOp.Not => $"!{child(unary.Operand).Code.ParenthesizeIfNeeded()}",
             _ => throw new NotSupportedException($"Don't know how to print unary operator {unary.Op}."),
         };
+
+    /// <summary>
+    /// The positively-named form of a negated boolean test, or <see langword="null"/> when the
+    /// operand is not one of the recognised tests.
+    ///
+    /// <para>Two families. A <see cref="CqlBoolean"/> test negates into its own complement —
+    /// <c>IsNull</c>/<c>IsNotNull</c> and <c>IsTrue</c>/<c>IsNotTrue</c> — which is why those
+    /// properties exist in pairs. A reference null check negates into the <c>is not null</c>
+    /// pattern, and that one matters most: the operand is a plain <c>bool</c>, so the builder's
+    /// lifted <c>!</c> forced it through <c>bool?</c> and left the consuming condition to coalesce
+    /// it back.</para>
+    ///
+    /// <para>An intervening <c>bool</c>-to-<c>bool?</c> conversion is stepped over, since it exists
+    /// only to make the lifted <c>!</c> applicable and the negation is being expressed
+    /// differently here.</para>
+    /// </summary>
+    private string? NegatedTest(CodeExpression operand, Func<CodeExpression, Atom> child)
+    {
+        // NOTE: the `(bool?)` conversion the builder puts under a lifted `!` is deliberately NOT
+        // stepped over. Doing so makes the printed form bool-typed while the node stays bool?, and
+        // the coalesce that consumes the condition then emits `?? false` over a bool — CS0019, 72
+        // sites. Printed type has to keep matching node type here, so a negated null test still
+        // reads `!((bool?)(x is null))` rather than `x is not null`; folding that needs the builder
+        // to stop lifting in the first place.
+
+        // !!x is x. Reachable because `implies` negates its left operand, which may itself already
+        // be a negated test. Sound for three-valued logic too: Kleene negation is self-inverse
+        // (null stays null), and returning the inner node's own code keeps the type unchanged.
+        if (operand is CodeUnary { Op: CodeUnaryOp.Not, Operand: { } doubleNegated })
+            return child(doubleNegated).Code.ParenthesizeIfNeeded();
+
+        if (operand is not CodeBinary binary)
+            return null;
+
+        var testedAtom = child(binary.Left);
+        var tested = testedAtom.Code.ParenthesizeIfNeeded();
+        var rightCode = child(binary.Right).Code;
+
+        return binary.Op switch
+        {
+            CodeBinaryOp.Equal when rightCode is "null" or "default" && DenotesCqlBoolean(testedAtom) =>
+                $"{tested}.{nameof(CqlBoolean.IsNotNull)}",
+            CodeBinaryOp.NotEqual when rightCode is "null" or "default" && DenotesCqlBoolean(testedAtom) =>
+                $"{tested}.{nameof(CqlBoolean.IsNull)}",
+            CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool b } && DenotesCqlBoolean(testedAtom) =>
+                $"{tested}.{(b ? nameof(CqlBoolean.IsNotTrue) : nameof(CqlBoolean.IsNotFalse))}",
+            // A reference (or any non-CqlBoolean) null check: `!(x is null)` IS `x is not null`.
+            CodeBinaryOp.Equal when rightCode is "null" or "default" => $"{NullPatternOperand(testedAtom, tested)} is not null",
+            CodeBinaryOp.NotEqual when rightCode is "null" or "default" => $"{NullPatternOperand(testedAtom, tested)} is null",
+            _ => null,
+        };
+    }
+
+    /// <summary>
+    /// <paramref name="node"/> without a <c>bool</c>-to-<c>bool?</c> conversion around it. That
+    /// conversion exists only so the builder's LIFTED operators apply; wherever the lift is being
+    /// expressed differently — a folded negation, or a conversion straight to
+    /// <see cref="CqlBoolean"/>, which <c>bool</c> reaches in one step — it is pure noise.
+    /// </summary>
+    private static CodeExpression WithoutPlainBoolLift(CodeExpression node) =>
+        node is CodeCast { Kind: CodeCastKind.Cast, Type: var castType, Operand: { } inner }
+        && CodeTypeRules.IsNullableBool(castType)
+        && CodeTypeRules.IsPlainBool(inner.Type)
+            ? inner
+            : node;
 
     private static CodeExpression SimplifyCoalesceLeft(CodeExpression expression)
     {

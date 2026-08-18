@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("PCMaternal", "5.25.000")]
 public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_000>
 {
@@ -874,10 +874,10 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     /* CQL 'and' (85:7-87:52) */ && aj_();
             }
 
-            return p_
+            return (p_
                 /* CQL 'and' (82:4-82:77) */ && !((bool?)((this.lastTimeOfDelivery(context, TheEncounter)) is null))
                 /* CQL 'and' (82:4-83:47) */ && q_()
-                /* CQL 'and' (82:3-84:76) */ && r_()
+                /* CQL 'and' (82:3-84:76) */ && r_())
                 /* CQL 'or' (81:64-87:52) */ || s_();
         }
 

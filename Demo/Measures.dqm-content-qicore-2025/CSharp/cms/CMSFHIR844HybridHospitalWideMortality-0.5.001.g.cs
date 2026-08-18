@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMSFHIR844HybridHospitalWideMortality", "0.5.001")]
 public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, ISingleton<CMSFHIR844HybridHospitalWideMortality_0_5_001>
 {
@@ -1808,8 +1808,8 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     return av_;
                 }
 
-                return t_
-                    /* CQL 'or' (191:15-193:9) */ || u_()
+                return (t_
+                    /* CQL 'or' (191:15-193:9) */ || u_())
                     /* CQL 'and' (191:15-194:68) */ && v_()
                     /* CQL 'and' (191:9-195:49) */ && w_();
             }
@@ -1948,8 +1948,8 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                         return cz_;
                     }
 
-                    return br_
-                        /* CQL 'or' (203:17-205:11) */ || bs_()
+                    return (br_
+                        /* CQL 'or' (203:17-205:11) */ || bs_())
                         /* CQL 'and' (203:11-206:54) */ && bt_();
                 }
 

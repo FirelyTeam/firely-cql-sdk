@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS645FHIRBoneDensityPCADTherapy", "1.0.000")]
 public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingleton<CMS645FHIRBoneDensityPCADTherapy_1_0_000>
 {
@@ -625,7 +625,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 /* CQL 'or' (152:52-156:3) */ || k_();
         }
 
-        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+        return (CqlBoolean)((bool?)(b_ is null))
             /* CQL 'implies' (152:3-156:3) */ || c_();
     }
 
@@ -862,8 +862,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                         /* CQL 'and' (54:16-54:99) */ && ak_();
                 }
 
-                return x_
-                    /* CQL 'and' (53:21-53:110) */ && y_()
+                return (x_
+                    /* CQL 'and' (53:21-53:110) */ && y_())
                     /* CQL 'or' (53:21-54:99) */ || z_();
             }
 
@@ -943,8 +943,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                         /* CQL 'and' (61:18-61:117) */ && bz_();
                 }
 
-                return bk_
-                    /* CQL 'and' (60:23-60:128) */ && bl_()
+                return (bk_
+                    /* CQL 'and' (60:23-60:128) */ && bl_())
                     /* CQL 'or' (60:23-61:117) */ || bm_();
             }
 

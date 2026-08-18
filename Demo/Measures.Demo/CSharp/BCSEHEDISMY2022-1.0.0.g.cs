@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("BCSEHEDISMY2022", "1.0.0")]
 public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY2022_1_0_0>
 {
@@ -595,9 +595,9 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             return q_;
         }
 
-        return b_
-            /* CQL 'or' (72:5-74:5) */ || c_()
-            /* CQL 'and' (72:3-78:3) */ && d_()
+        return ((b_
+            /* CQL 'or' (72:5-74:5) */ || c_())
+            /* CQL 'and' (72:3-78:3) */ && d_())
             /* CQL 'or' (72:3-79:46) */ || e_()
             /* CQL 'or' (72:3-80:46) */ || f_();
     }

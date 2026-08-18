@@ -547,12 +547,12 @@ public class LogicCqlTest
         }
 
         // xor's guard: origin comment naming null as the deciding value, the null test, the
-        // deciding branch, then else. The test is `!x.HasValue` rather than `x is null`, because a
+        // deciding branch, then else. The test is `x.IsNull` rather than `x is null`, because a
         // CqlBoolean is a non-nullable struct and has no null pattern (CS9135).
         StringAssert.Matches(
             ExtractComputeMethod(generated, "NullXorMessage_Compute"),
             new System.Text.RegularExpressions.Regex(
-                @"// CQL 'xor' \([^)]*\): right operand skipped when left is null\s*\r?\n\s*if \(!\w+\.HasValue\)\s*\r?\n\s*\{\s*\r?\n\s*return null as bool\?;\s*\r?\n\s*\}\s*\r?\n\s*else\b"),
+                @"// CQL 'xor' \([^)]*\): right operand skipped when left is null\s*\r?\n\s*if \(\w+\.IsNull\)\s*\r?\n\s*\{\s*\r?\n\s*return null as bool\?;\s*\r?\n\s*\}\s*\r?\n\s*else\b"),
             "xor must keep its branching guard, since null is its deciding value and C# has no ^^.");
     }
 

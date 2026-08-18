@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("FusedOperatorsTest", "1.0.0")]
 public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperatorsTest_1_0_0>
 {

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS1017FHIRHHFI", "1.0.000")]
 public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRHHFI_1_0_000>
 {
@@ -547,8 +547,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         /* CQL 'or' (79:15-81:11) */ || s_();
                 }
 
-                return (CqlBoolean)(h_ is null)
-                    /* CQL 'or' (76:15-78:9) */ || i_()
+                return ((CqlBoolean)(h_ is null)
+                    /* CQL 'or' (76:15-78:9) */ || i_())
                     /* CQL 'and' (76:9-81:11) */ && j_();
             }
 
@@ -608,8 +608,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         /* CQL 'or' (68:15-70:11) */ || s_();
                 }
 
-                return (CqlBoolean)(h_ is null)
-                    /* CQL 'or' (65:15-67:9) */ || i_()
+                return ((CqlBoolean)(h_ is null)
+                    /* CQL 'or' (65:15-67:9) */ || i_())
                     /* CQL 'and' (65:9-70:11) */ && j_();
             }
 

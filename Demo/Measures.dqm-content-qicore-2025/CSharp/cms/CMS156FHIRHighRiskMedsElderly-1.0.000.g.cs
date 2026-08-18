@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
 [CqlLibrary("CMS156FHIRHighRiskMedsElderly", "1.0.000")]
 public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleton<CMS156FHIRHighRiskMedsElderly_1_0_000>
 {
@@ -568,8 +568,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                         /* CQL 'and' (257:12-262:9) */ && au_();
                 }
 
-                return l_
-                    /* CQL 'and' (250:17-252:7) */ && m_()
+                return (l_
+                    /* CQL 'and' (250:17-252:7) */ && m_())
                     /* CQL 'or' (250:17-256:9) */ || n_()
                     /* CQL 'or' (250:17-262:9) */ || o_();
             }
@@ -2080,8 +2080,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 /* CQL 'and' (163:8-172:5) */ && r_();
         }
 
-        return a_
-            /* CQL 'and' (156:3-162:3) */ && b_()
+        return (a_
+            /* CQL 'and' (156:3-162:3) */ && b_())
             /* CQL 'or' (156:3-172:5) */ || c_();
     }
 
