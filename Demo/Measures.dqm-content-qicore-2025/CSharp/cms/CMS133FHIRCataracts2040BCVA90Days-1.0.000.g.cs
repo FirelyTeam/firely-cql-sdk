@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS133FHIRCataracts2040BCVA90Days", "1.0.000")]
 public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISingleton<CMS133FHIRCataracts2040BCVA90Days_1_0_000>
 {
@@ -414,9 +414,9 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 return ah_;
             }
 
-            return /* CQL 'and' (86:5-88:46) */ (/* CQL 'and' (86:11-87:115) */ (h_
-                && i_())
-                && j_());
+            return h_
+                /* CQL 'and' (86:11-87:115) */ && i_()
+                /* CQL 'and' (86:5-88:46) */ && j_();
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -508,14 +508,14 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 return z_;
             }
 
-            return /* CQL 'or' (277:52-281:3) */ (/* CQL 'or' (277:54-279:66) */ (/* CQL 'or' (277:54-278:66) */ (h_
-                || i_())
-                || j_())
-                || k_());
+            return h_
+                /* CQL 'or' (277:54-278:66) */ || i_()
+                /* CQL 'or' (277:54-279:66) */ || j_()
+                /* CQL 'or' (277:52-281:3) */ || k_();
         }
 
-        return /* CQL 'implies' (277:3-281:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_());
+        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+            /* CQL 'implies' (277:3-281:3) */ || c_();
     }
 
 
@@ -845,8 +845,8 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 }
                 CqlInterval<CqlDateTime> jv_ = QICoreCommon_4_0_000.Instance.toInterval(context, ju_);
                 CqlBoolean jw_ = context.Operators.OverlapsBefore(jt_, jv_, "day");
-                return /* CQL 'and' (260:17-261:44) */ (jw_
-                    && this.isVerified(context, ComorbidDiagnosis));
+                return jw_
+                    /* CQL 'and' (260:17-261:44) */ && this.isVerified(context, ComorbidDiagnosis);
             }
 
             CqlBoolean js_ = context.Operators.WhereAny<Condition>(jq_, jr_);
@@ -1040,10 +1040,10 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                     return bf_;
                 }
 
-                return /* CQL 'and' (267:17-269:89) */ (/* CQL 'and' (267:17-268:83) */ (/* CQL 'and' (267:17-267:152) */ (y_
-                    && z_())
-                    && aa_())
-                    && ab_());
+                return y_
+                    /* CQL 'and' (267:17-267:152) */ && z_()
+                    /* CQL 'and' (267:17-268:83) */ && aa_()
+                    /* CQL 'and' (267:17-269:89) */ && ab_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<Observation>(i_, j_);

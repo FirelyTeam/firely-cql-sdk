@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS986FHIRMalnutritionScore", "1.0.000")]
 public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<CMS986FHIRMalnutritionScore_1_0_000>
 {
@@ -212,10 +212,10 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return af_;
             }
 
-            return /* CQL 'and' (47:5-50:48) */ (/* CQL 'and' (47:11-49:66) */ (/* CQL 'and' (47:11-48:74) */ (i_
-                && j_())
-                && k_())
-                && l_());
+            return i_
+                /* CQL 'and' (47:11-48:74) */ && j_()
+                /* CQL 'and' (47:11-49:66) */ && k_()
+                /* CQL 'and' (47:5-50:48) */ && l_();
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -299,8 +299,8 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return y_;
             }
 
-            return /* CQL 'and' (80:7-81:120) */ (r_
-                && s_());
+            return r_
+                /* CQL 'and' (80:7-81:120) */ && s_();
         }
 
 
@@ -458,8 +458,8 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return y_;
             }
 
-            return /* CQL 'and' (115:7-116:124) */ (r_
-                && s_());
+            return r_
+                /* CQL 'and' (115:7-116:124) */ && s_();
         }
 
 
@@ -606,9 +606,9 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     return w_;
                 }
 
-                return /* CQL 'and' (140:17-142:116) */ (/* CQL 'and' (140:17-141:124) */ (l_
-                    && m_())
-                    && n_());
+                return l_
+                    /* CQL 'and' (140:17-141:124) */ && m_()
+                    /* CQL 'and' (140:17-142:116) */ && n_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -663,9 +663,9 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     return w_;
                 }
 
-                return /* CQL 'and' (151:17-153:112) */ (/* CQL 'and' (151:17-152:124) */ (l_
-                    && m_())
-                    && n_());
+                return l_
+                    /* CQL 'and' (151:17-152:124) */ && m_()
+                    /* CQL 'and' (151:17-153:112) */ && n_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -770,9 +770,9 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return !((bool?)(u_ is null));
             }
 
-            return /* CQL 'and' (184:7-186:49) */ (/* CQL 'and' (184:13-185:114) */ (l_
-                && m_())
-                && n_());
+            return l_
+                /* CQL 'and' (184:13-185:114) */ && m_()
+                /* CQL 'and' (184:7-186:49) */ && n_();
         }
 
 
@@ -873,9 +873,9 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                         return ah_;
                     }
 
-                    return /* CQL 'or' (195:15-198:11) */ (/* CQL 'or' (195:17-196:125) */ (x_
-                        || y_())
-                        || z_());
+                    return x_
+                        /* CQL 'or' (195:17-196:125) */ || y_()
+                        /* CQL 'or' (195:15-198:11) */ || z_();
                 }
 
 
@@ -913,10 +913,10 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     return al_;
                 }
 
-                return /* CQL 'and' (193:17-200:7) */ (/* CQL 'and' (193:19-198:11) */ (/* CQL 'and' (193:19-194:120) */ (l_
-                    && m_())
-                    && n_())
-                    && o_());
+                return l_
+                    /* CQL 'and' (193:19-194:120) */ && m_()
+                    /* CQL 'and' (193:19-198:11) */ && n_()
+                    /* CQL 'and' (193:17-200:7) */ && o_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -977,8 +977,8 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                         return ac_;
                     }
 
-                    return /* CQL 'or' (207:13-209:9) */ (x_
-                        || y_());
+                    return x_
+                        /* CQL 'or' (207:13-209:9) */ || y_();
                 }
 
 
@@ -1016,10 +1016,10 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     return ag_;
                 }
 
-                return /* CQL 'and' (205:17-210:134) */ (/* CQL 'and' (205:17-209:9) */ (/* CQL 'and' (205:17-206:118) */ (l_
-                    && m_())
-                    && n_())
-                    && o_());
+                return l_
+                    /* CQL 'and' (205:17-206:118) */ && m_()
+                    /* CQL 'and' (205:17-209:9) */ && n_()
+                    /* CQL 'and' (205:17-210:134) */ && o_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -1109,10 +1109,10 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     return ab_;
                 }
 
-                return /* CQL 'and' (215:17-219:7) */ (/* CQL 'and' (215:19-217:156) */ (/* CQL 'and' (215:19-216:120) */ (l_
-                    && m_())
-                    && n_())
-                    && o_());
+                return l_
+                    /* CQL 'and' (215:19-216:120) */ && m_()
+                    /* CQL 'and' (215:19-217:156) */ && n_()
+                    /* CQL 'and' (215:17-219:7) */ && o_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Observation>(e_, f_);
@@ -1166,14 +1166,14 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return z_;
             }
 
-            return /* CQL 'or' (240:52-244:3) */ (/* CQL 'or' (240:54-242:66) */ (/* CQL 'or' (240:54-241:66) */ (h_
-                || i_())
-                || j_())
-                || k_());
+            return h_
+                /* CQL 'or' (240:54-241:66) */ || i_()
+                /* CQL 'or' (240:54-242:66) */ || j_()
+                /* CQL 'or' (240:52-244:3) */ || k_();
         }
 
-        return /* CQL 'implies' (240:3-244:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_());
+        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+            /* CQL 'implies' (240:3-244:3) */ || c_();
     }
 
 
@@ -1192,8 +1192,8 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MalnutritionDiagnosis as Condition);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             CqlBoolean g_ = context.Operators.Overlaps(e_, f_, (string)default);
-            return /* CQL 'and' (231:5-232:46) */ (g_
-                && this.isVerified(context, MalnutritionDiagnosis as Condition));
+            return g_
+                /* CQL 'and' (231:5-232:46) */ && this.isVerified(context, MalnutritionDiagnosis as Condition);
         }
 
         IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
@@ -1246,8 +1246,8 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return q_;
             }
 
-            return /* CQL 'or' (236:5-237:97) */ (h_
-                || i_());
+            return h_
+                /* CQL 'or' (236:5-237:97) */ || i_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1319,8 +1319,8 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     return r_;
                 }
 
-                return /* CQL 'and' (249:17-250:114) */ (l_
-                    && m_());
+                return l_
+                    /* CQL 'and' (249:17-250:114) */ && m_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -1489,9 +1489,9 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             return !h_;
         }
 
-        if (((bool?)(/* CQL 'and' (279:6-281:81) */ (/* CQL 'and' (279:6-280:94) */ (b_
-            && c_())
-            && d_()))) ?? false)
+        if (b_
+            /* CQL 'and' (279:6-280:94) */ && c_()
+            /* CQL 'and' (279:6-281:81) */ && d_())
         {
             return 1;
         }
@@ -1525,11 +1525,11 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return !t_;
             }
 
-            if (((bool?)(/* CQL 'or' (282:13-287:115) */ (/* CQL 'and' (282:13-286:123) */ (/* CQL 'or' (282:13-285:3) */ (/* CQL 'and' (282:15-283:92) */ (b_
-                && i_())
-                || j_())
-                && k_())
-                || l_()))) ?? false)
+            if (b_
+                /* CQL 'and' (282:15-283:92) */ && i_()
+                /* CQL 'or' (282:13-285:3) */ || j_()
+                /* CQL 'and' (282:13-286:123) */ && k_()
+                /* CQL 'or' (282:13-287:115) */ || l_())
             {
                 return 2;
             }

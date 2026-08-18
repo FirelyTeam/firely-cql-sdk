@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS74FHIRDentalCariesPrevention", "1.0.000")]
 public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingleton<CMS74FHIRDentalCariesPrevention_1_0_000>
 {
@@ -126,8 +126,8 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
             return m_;
         }
 
-        return /* CQL 'and' (23:3-24:42) */ (j_
-            && k_());
+        return j_
+            /* CQL 'and' (23:3-24:42) */ && k_();
     }
 
 

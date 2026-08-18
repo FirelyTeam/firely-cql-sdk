@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
 public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersExample_0_0_1>
 {
@@ -110,10 +110,10 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
                 return s_;
             }
 
-            return /* CQL 'and' (18:5-21:45) */ (/* CQL 'and' (18:11-20:25) */ (/* CQL 'and' (18:11-19:26) */ (h_
-                && i_())
-                && j_())
-                && k_());
+            return h_
+                /* CQL 'and' (18:11-19:26) */ && i_()
+                /* CQL 'and' (18:11-20:25) */ && j_()
+                /* CQL 'and' (18:5-21:45) */ && k_();
         }
 
         IEnumerable<Patient> d_ = context.Operators.Where<Patient>((IEnumerable<Patient>)b_, c_);

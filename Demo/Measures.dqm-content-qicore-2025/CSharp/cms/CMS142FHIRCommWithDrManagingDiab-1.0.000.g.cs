@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS142FHIRCommWithDrManagingDiab", "1.0.000")]
 public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingleton<CMS142FHIRCommWithDrManagingDiab_1_0_000>
 {
@@ -230,9 +230,9 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 return !ad_;
             }
 
-            return /* CQL 'and' (72:5-74:48) */ (/* CQL 'and' (72:11-73:49) */ (t_
-                && u_())
-                && v_());
+            return t_
+                /* CQL 'and' (72:11-73:49) */ && u_()
+                /* CQL 'and' (72:5-74:48) */ && v_();
         }
 
         IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
@@ -282,14 +282,14 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 return z_;
             }
 
-            return /* CQL 'or' (148:52-152:3) */ (/* CQL 'or' (148:54-150:66) */ (/* CQL 'or' (148:54-149:66) */ (h_
-                || i_())
-                || j_())
-                || k_());
+            return h_
+                /* CQL 'or' (148:54-149:66) */ || i_()
+                /* CQL 'or' (148:54-150:66) */ || j_()
+                /* CQL 'or' (148:52-152:3) */ || k_();
         }
 
-        return /* CQL 'implies' (148:3-152:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_());
+        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+            /* CQL 'implies' (148:3-152:3) */ || c_();
     }
 
 
@@ -314,8 +314,8 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 Period k_ = ValidQualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
                 CqlBoolean m_ = context.Operators.Overlaps(j_, l_, "day");
-                return /* CQL 'and' (80:17-81:46) */ (m_
-                    && this.isVerified(context, DiabeticRetinopathy));
+                return m_
+                    /* CQL 'and' (80:17-81:46) */ && this.isVerified(context, DiabeticRetinopathy);
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<Condition>(g_, h_);
@@ -351,8 +351,8 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             return l_;
         }
 
-        return /* CQL 'and' (48:3-49:47) */ (i_
-            && j_());
+        return i_
+            /* CQL 'and' (48:3-49:47) */ && j_();
     }
 
 
@@ -403,8 +403,8 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 return w_;
             }
 
-            return /* CQL 'and' (87:5-88:67) */ ((CqlBoolean)(!((bool?)(q_ is null)))
-                && r_());
+            return (CqlBoolean)(!((bool?)(q_ is null)))
+                /* CQL 'and' (87:5-88:67) */ && r_();
         }
 
         IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
@@ -428,8 +428,8 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             return d_;
         }
 
-        return /* CQL 'and' (52:3-53:39) */ (a_
-            && b_());
+        return a_
+            /* CQL 'and' (52:3-53:39) */ && b_();
     }
 
 
@@ -463,8 +463,8 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                     return t_;
                 }
 
-                return /* CQL 'and' (99:17-100:79) */ (o_
-                    && p_());
+                return o_
+                    /* CQL 'and' (99:17-100:79) */ && p_();
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<Encounter>(g_, h_);
@@ -516,8 +516,8 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                     return t_;
                 }
 
-                return /* CQL 'and' (106:17-107:82) */ (o_
-                    && p_());
+                return o_
+                    /* CQL 'and' (106:17-107:82) */ && p_();
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<Encounter>(g_, h_);
@@ -569,8 +569,8 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                     return t_;
                 }
 
-                return /* CQL 'and' (113:17-114:76) */ (o_
-                    && p_());
+                return o_
+                    /* CQL 'and' (113:17-114:76) */ && p_();
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<Encounter>(g_, h_);
@@ -613,12 +613,12 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 return h_;
             }
 
-            return /* CQL 'or' (57:9-59:5) */ (e_
-                || f_());
+            return e_
+                /* CQL 'or' (57:9-59:5) */ || f_();
         }
 
-        return /* CQL 'and' (56:3-59:5) */ (b_
-            && c_());
+        return b_
+            /* CQL 'and' (56:3-59:5) */ && c_();
     }
 
 
@@ -683,8 +683,8 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 return ae_;
             }
 
-            return /* CQL 'or' (121:5-123:5) */ (z_
-                || aa_());
+            return z_
+                /* CQL 'or' (121:5-123:5) */ || aa_();
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -753,8 +753,8 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 return ae_;
             }
 
-            return /* CQL 'or' (143:5-145:5) */ (z_
-                || aa_());
+            return z_
+                /* CQL 'or' (143:5-145:5) */ || aa_();
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -823,8 +823,8 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 return ae_;
             }
 
-            return /* CQL 'or' (129:5-131:5) */ (z_
-                || aa_());
+            return z_
+                /* CQL 'or' (129:5-131:5) */ || aa_();
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -856,9 +856,9 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             return h_;
         }
 
-        return /* CQL 'or' (62:3-64:89) */ (/* CQL 'or' (62:3-63:88) */ (b_
-            || c_())
-            || d_());
+        return b_
+            /* CQL 'or' (62:3-63:88) */ || c_()
+            /* CQL 'or' (62:3-64:89) */ || d_();
     }
 
 
@@ -883,12 +883,12 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 return h_;
             }
 
-            return /* CQL 'or' (92:9-94:5) */ (e_
-                || f_());
+            return e_
+                /* CQL 'or' (92:9-94:5) */ || f_();
         }
 
-        return /* CQL 'and' (91:3-94:5) */ (b_
-            && c_());
+        return b_
+            /* CQL 'and' (91:3-94:5) */ && c_();
     }
 
 

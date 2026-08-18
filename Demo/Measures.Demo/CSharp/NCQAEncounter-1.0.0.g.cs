@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("NCQAEncounter", "1.0.0")]
 public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_0_0>
 {
@@ -128,8 +128,8 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
                 return i_;
             }
 
-            return /* CQL 'and' (34:5-35:64) */ ((CqlBoolean)(!((bool?)(d_ is null)))
-                && e_());
+            return (CqlBoolean)(!((bool?)(d_ is null)))
+                /* CQL 'and' (34:5-35:64) */ && e_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -159,12 +159,12 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
                     return n_;
                 }
 
-                return /* CQL 'or' (40:11-42:7) */ (i_
-                    || j_());
+                return i_
+                    /* CQL 'or' (40:11-42:7) */ || j_();
             }
 
-            return /* CQL 'and' (39:5-42:7) */ ((CqlBoolean)(!((bool?)(d_ is null)))
-                && e_());
+            return (CqlBoolean)(!((bool?)(d_ is null)))
+                /* CQL 'and' (39:5-42:7) */ && e_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -188,8 +188,8 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
                 return i_;
             }
 
-            return /* CQL 'and' (46:5-47:67) */ ((CqlBoolean)(!((bool?)(d_ is null)))
-                && e_());
+            return (CqlBoolean)(!((bool?)(d_ is null)))
+                /* CQL 'and' (46:5-47:67) */ && e_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);

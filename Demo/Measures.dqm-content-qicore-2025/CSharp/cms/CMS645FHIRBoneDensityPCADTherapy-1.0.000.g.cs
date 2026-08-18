@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS645FHIRBoneDensityPCADTherapy", "1.0.000")]
 public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingleton<CMS645FHIRBoneDensityPCADTherapy_1_0_000>
 {
@@ -119,8 +119,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return m_;
             }
 
-            return /* CQL 'and' (136:7-137:43) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (136:7-137:43) */ && i_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Encounter>(b_, c_);
@@ -156,8 +156,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     return w_;
                 }
 
-                return /* CQL 'and' */ (r_
-                    && s_());
+                return r_
+                    /* CQL 'and' */ && s_();
             }
 
             CqlBoolean m_ = context.Operators.WhereAny<Medication>(k_, l_);
@@ -194,8 +194,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return ah_;
             }
 
-            return /* CQL 'and' (116:5-117:109) */ (ab_
-                && ac_());
+            return ab_
+                /* CQL 'and' (116:5-117:109) */ && ac_();
         }
 
 
@@ -398,8 +398,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     return w_;
                 }
 
-                return /* CQL 'and' */ (r_
-                    && s_());
+                return r_
+                    /* CQL 'and' */ && s_();
             }
 
             CqlBoolean m_ = context.Operators.WhereAny<Medication>(k_, l_);
@@ -436,8 +436,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return ah_;
             }
 
-            return /* CQL 'and' (130:5-131:108) */ (ab_
-                && ac_());
+            return ab_
+                /* CQL 'and' (130:5-131:108) */ && ac_();
         }
 
 
@@ -619,14 +619,14 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return z_;
             }
 
-            return /* CQL 'or' (152:52-156:3) */ (/* CQL 'or' (152:54-154:66) */ (/* CQL 'or' (152:54-153:66) */ (h_
-                || i_())
-                || j_())
-                || k_());
+            return h_
+                /* CQL 'or' (152:54-153:66) */ || i_()
+                /* CQL 'or' (152:54-154:66) */ || j_()
+                /* CQL 'or' (152:52-156:3) */ || k_();
         }
 
-        return /* CQL 'implies' (152:3-156:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_());
+        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+            /* CQL 'implies' (152:3-156:3) */ || c_();
     }
 
 
@@ -647,8 +647,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ProstateCancer);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             CqlBoolean i_ = context.Operators.Overlaps(g_, h_, "day");
-            return /* CQL 'and' (143:5-144:39) */ (i_
-                && this.isVerified(context, ProstateCancer));
+            return i_
+                /* CQL 'and' (143:5-144:39) */ && this.isVerified(context, ProstateCancer);
         }
 
         IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
@@ -687,8 +687,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     return u_;
                 }
 
-                return /* CQL 'and' (82:19-83:132) */ (l_
-                    && m_());
+                return l_
+                    /* CQL 'and' (82:19-83:132) */ && m_();
             }
 
             CqlBoolean j_ = context.Operators.WhereAny<Condition>(h_, i_);
@@ -762,10 +762,10 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     return ai_;
                 }
 
-                return /* CQL 'and' (90:17-93:48) */ (/* CQL 'and' (90:17-92:67) */ (/* CQL 'and' (90:17-91:149) */ (l_
-                    && m_())
-                    && n_())
-                    && o_());
+                return l_
+                    /* CQL 'and' (90:17-91:149) */ && m_()
+                    /* CQL 'and' (90:17-92:67) */ && n_()
+                    /* CQL 'and' (90:17-93:48) */ && o_();
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<CqlDateTime>((IEnumerable<CqlDateTime>)g_, h_);
@@ -793,8 +793,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             return d_;
         }
 
-        return /* CQL 'and' (25:3-26:108) */ (a_
-            && b_());
+        return a_
+            /* CQL 'and' (25:3-26:108) */ && b_();
     }
 
 
@@ -858,13 +858,13 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                         return !((bool?)(am_ is null));
                     }
 
-                    return /* CQL 'and' (54:16-54:99) */ (aj_
-                        && ak_());
+                    return aj_
+                        /* CQL 'and' (54:16-54:99) */ && ak_();
                 }
 
-                return /* CQL 'or' (53:21-54:99) */ (/* CQL 'and' (53:21-53:110) */ (x_
-                    && y_())
-                    || z_());
+                return x_
+                    /* CQL 'and' (53:21-53:110) */ && y_()
+                    /* CQL 'or' (53:21-54:99) */ || z_();
             }
 
             CqlBoolean p_ = context.Operators.WhereAny<ServiceRequest>(n_, o_);
@@ -892,8 +892,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return ax_;
             }
 
-            return /* CQL 'and' (55:9-56:42) */ (as_
-                && at_());
+            return as_
+                /* CQL 'and' (55:9-56:42) */ && at_();
         }
 
         IEnumerable<ServiceRequest> f_ = context.Operators.Where<ServiceRequest>(d_, e_);
@@ -939,13 +939,13 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                         return !((bool?)(cb_ is null));
                     }
 
-                    return /* CQL 'and' (61:18-61:117) */ (by_
-                        && bz_());
+                    return by_
+                        /* CQL 'and' (61:18-61:117) */ && bz_();
                 }
 
-                return /* CQL 'or' (60:23-61:117) */ (/* CQL 'and' (60:23-60:128) */ (bk_
-                    && bl_())
-                    || bm_());
+                return bk_
+                    /* CQL 'and' (60:23-60:128) */ && bl_()
+                    /* CQL 'or' (60:23-61:117) */ || bm_();
             }
 
             CqlBoolean ba_ = context.Operators.WhereAny<ServiceRequest>(ay_, az_);
@@ -1044,9 +1044,9 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     return aa_;
                 }
 
-                return /* CQL 'and' (69:17-70:62) */ (/* CQL 'and' (69:17-69:109) */ (p_
-                    && q_())
-                    && r_());
+                return p_
+                    /* CQL 'and' (69:17-69:109) */ && q_()
+                    /* CQL 'and' (69:17-70:62) */ && r_();
             }
 
             CqlBoolean h_ = context.Operators.WhereAny<ServiceRequest>(f_, g_);
@@ -1116,9 +1116,9 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     return ab_;
                 }
 
-                return /* CQL 'and' (75:17-76:64) */ (/* CQL 'and' (75:17-75:107) */ (q_
-                    && r_())
-                    && s_());
+                return q_
+                    /* CQL 'and' (75:17-75:107) */ && r_()
+                    /* CQL 'and' (75:17-76:64) */ && s_();
             }
 
             CqlBoolean h_ = context.Operators.WhereAny<ServiceRequest>(f_, g_);
@@ -1147,8 +1147,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             return e_;
         }
 
-        return /* CQL 'or' (35:3-36:73) */ (b_
-            || c_());
+        return b_
+            /* CQL 'or' (35:3-36:73) */ || c_();
     }
 
 

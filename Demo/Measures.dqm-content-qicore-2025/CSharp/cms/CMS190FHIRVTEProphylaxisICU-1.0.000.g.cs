@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS190FHIRVTEProphylaxisICU", "1.0.000")]
 public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<CMS190FHIRVTEProphylaxisICU_1_0_000>
 {
@@ -307,8 +307,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return t_;
                 }
 
-                return /* CQL 'and' (76:9-77:63) */ (m_
-                    && n_());
+                return m_
+                    /* CQL 'and' (76:9-77:63) */ && n_();
             }
 
             CqlBoolean f_ = context.Operators.WhereAny<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)d_, e_);
@@ -411,13 +411,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return w_;
             }
 
-            return /* CQL 'or' (92:5-98:80) */ (/* CQL 'or' (92:11-97:86) */ (/* CQL 'or' (92:11-96:87) */ (/* CQL 'or' (92:11-95:85) */ (/* CQL 'or' (92:11-94:82) */ (/* CQL 'or' (92:11-93:83) */ (e_
-                || f_())
-                || g_())
-                || h_())
-                || i_())
-                || j_())
-                || k_());
+            return e_
+                /* CQL 'or' (92:11-93:83) */ || f_()
+                /* CQL 'or' (92:11-94:82) */ || g_()
+                /* CQL 'or' (92:11-95:85) */ || h_()
+                /* CQL 'or' (92:11-96:87) */ || i_()
+                /* CQL 'or' (92:11-97:86) */ || j_()
+                /* CQL 'or' (92:5-98:80) */ || k_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -463,8 +463,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return u_;
             }
 
-            return /* CQL 'and' (107:7-108:67) */ (n_
-                && o_());
+            return n_
+                /* CQL 'and' (107:7-108:67) */ && o_();
         }
 
         IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
@@ -870,9 +870,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return bg_;
             }
 
-            return /* CQL 'and' (119:5-121:191) */ (/* CQL 'and' (119:11-120:121) */ (o_
-                && p_())
-                && q_());
+            return o_
+                /* CQL 'and' (119:11-120:121) */ && p_()
+                /* CQL 'and' (119:5-121:191) */ && q_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, object ComfortMeasure)?> h_ = context.Operators.SelectWhere<ValueTuple<Encounter, Procedure, object>, (CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, object ComfortMeasure)?>(e_, f_, g_);
@@ -929,8 +929,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return bl_;
                 }
 
-                return /* CQL 'and' */ (bg_
-                    && bh_());
+                return bg_
+                    /* CQL 'and' */ && bh_();
             }
 
             CqlBoolean bb_ = context.Operators.WhereAny<Medication>(az_, ba_);
@@ -957,8 +957,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return bv_;
             }
 
-            return /* CQL 'and' (137:7-138:62) */ (bp_
-                && bq_());
+            return bp_
+                /* CQL 'and' (137:7-138:62) */ && bq_();
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
@@ -981,8 +981,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return ci_;
                 }
 
-                return /* CQL 'and' */ (cd_
-                    && ce_());
+                return cd_
+                    /* CQL 'and' */ && ce_();
             }
 
             CqlBoolean by_ = context.Operators.WhereAny<Medication>(bw_, bx_);
@@ -1023,8 +1023,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return cz_;
                 }
 
-                return /* CQL 'and' */ (cu_
-                    && cv_());
+                return cu_
+                    /* CQL 'and' */ && cv_();
             }
 
             CqlBoolean cp_ = context.Operators.WhereAny<Medication>(cn_, co_);
@@ -1064,8 +1064,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return dq_;
                 }
 
-                return /* CQL 'and' */ (dl_
-                    && dm_());
+                return dl_
+                    /* CQL 'and' */ && dm_();
             }
 
             CqlBoolean dg_ = context.Operators.WhereAny<Medication>(de_, df_);
@@ -1107,8 +1107,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return eh_;
                 }
 
-                return /* CQL 'and' */ (ec_
-                    && ed_());
+                return ec_
+                    /* CQL 'and' */ && ed_();
             }
 
             CqlBoolean dx_ = context.Operators.WhereAny<Medication>(dv_, dw_);
@@ -1499,9 +1499,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return cj_;
             }
 
-            return /* CQL 'and' (167:9-169:207) */ (/* CQL 'and' (167:15-168:125) */ (aq_
-                && ar_())
-                && as_());
+            return aq_
+                /* CQL 'and' (167:15-168:125) */ && ar_()
+                /* CQL 'and' (167:9-169:207) */ && as_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, object VTEProphylaxis)?> j_ = context.Operators.SelectWhere<ValueTuple<Encounter, Procedure, object>, (CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, object VTEProphylaxis)?>(g_, h_, i_);
@@ -1543,8 +1543,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                         return am_;
                     }
 
-                    return /* CQL 'and' */ (ah_
-                        && ai_());
+                    return ah_
+                        /* CQL 'and' */ && ai_();
                 }
 
                 CqlBoolean ac_ = context.Operators.WhereAny<Medication>(aa_, ab_);
@@ -1580,8 +1580,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return bf_;
                 }
 
-                return /* CQL 'and' (176:19-177:149) */ (aq_
-                    && ar_());
+                return aq_
+                    /* CQL 'and' (176:19-177:149) */ && ar_();
             }
 
             CqlBoolean z_ = context.Operators.WhereAny<MedicationAdministration>(x_, y_);
@@ -1611,8 +1611,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return bs_;
                 }
 
-                return /* CQL 'and' */ (bn_
-                    && bo_());
+                return bn_
+                    /* CQL 'and' */ && bo_();
             }
 
             CqlBoolean bi_ = context.Operators.WhereAny<Medication>(bg_, bh_);
@@ -1865,10 +1865,10 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return dt_;
             }
 
-            return /* CQL 'and' (183:9-186:162) */ (/* CQL 'and' (183:15-185:125) */ (/* CQL 'and' (183:15-184:54) */ (bx_
-                && by_())
-                && bz_())
-                && ca_());
+            return bx_
+                /* CQL 'and' (183:15-184:54) */ && by_()
+                /* CQL 'and' (183:15-185:125) */ && bz_()
+                /* CQL 'and' (183:9-186:162) */ && ca_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, MedicationAdministration FactorXaMedication)?> o_ = context.Operators.SelectWhere<ValueTuple<Encounter, Procedure, MedicationAdministration>, (CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, MedicationAdministration FactorXaMedication)?>(l_, m_, n_);
@@ -1926,13 +1926,13 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                         return aj_;
                     }
 
-                    return /* CQL 'and' (193:77-196:110) */ (/* CQL 'and' (193:77-195:9) */ (!u_
-                        && v_())
-                        && w_());
+                    return (CqlBoolean)!u_
+                        /* CQL 'and' (193:77-195:9) */ && v_()
+                        /* CQL 'and' (193:77-196:110) */ && w_();
                 }
 
-                return /* CQL 'implies' (193:19-196:110) */ ((CqlBoolean)(!(!((bool?)(o_ is null))))
-                    || p_());
+                return (CqlBoolean)(!(!((bool?)(o_ is null))))
+                    /* CQL 'implies' (193:19-196:110) */ || p_();
             }
 
             CqlBoolean m_ = context.Operators.WhereAny<Condition>(k_, l_);
@@ -2026,16 +2026,16 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                         return cb_;
                     }
 
-                    return /* CQL 'and' (207:69-210:95) */ (/* CQL 'and' (207:69-209:11) */ (!bp_
-                        && bq_())
-                        && br_());
+                    return (CqlBoolean)!bp_
+                        /* CQL 'and' (207:69-209:11) */ && bq_()
+                        /* CQL 'and' (207:69-210:95) */ && br_();
                 }
 
-                return /* CQL 'implies' (203:21-210:95) */ ((CqlBoolean)(!((bool?)(/* CQL 'and' (203:21-207:59) */ (/* CQL 'or' (203:21-206:11) */ (/* CQL 'or' (203:23-204:71) */ (au_
-                    || av_())
-                    || aw_())
-                    && ax_()))))
-                    || ay_());
+                return (CqlBoolean)(!((bool?)(au_
+                    /* CQL 'or' (203:23-204:71) */ || av_()
+                    /* CQL 'or' (203:21-206:11) */ || aw_()
+                    /* CQL 'and' (203:21-207:59) */ && ax_())))
+                    /* CQL 'implies' (203:21-210:95) */ || ay_();
             }
 
             CqlBoolean ap_ = context.Operators.WhereAny<Condition>(an_, ao_);
@@ -2117,8 +2117,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return v_;
                 }
 
-                return /* CQL 'and' (217:17-218:110) */ (n_
-                    && o_());
+                return n_
+                    /* CQL 'and' (217:17-218:110) */ && o_();
             }
 
             CqlBoolean j_ = context.Operators.WhereAny<Procedure>(h_, i_);
@@ -2161,8 +2161,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return aw_;
             }
 
-            return /* CQL 'and' (226:7-227:75) */ (aq_
-                && ar_());
+            return aq_
+                /* CQL 'and' (226:7-227:75) */ && ar_();
         }
 
 
@@ -2225,8 +2225,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return bp_;
             }
 
-            return /* CQL 'and' (234:9-235:70) */ (bj_
-                && bk_());
+            return bj_
+                /* CQL 'and' (234:9-235:70) */ && bk_();
         }
 
 
@@ -2263,8 +2263,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return ci_;
                 }
 
-                return /* CQL 'and' */ (cd_
-                    && ce_());
+                return cd_
+                    /* CQL 'and' */ && ce_();
             }
 
             CqlBoolean by_ = context.Operators.WhereAny<Medication>(bw_, bx_);
@@ -2305,8 +2305,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return da_;
                 }
 
-                return /* CQL 'and' */ (cv_
-                    && cw_());
+                return cv_
+                    /* CQL 'and' */ && cw_();
             }
 
             CqlBoolean cq_ = context.Operators.WhereAny<Medication>(co_, cp_);
@@ -2337,8 +2337,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return dn_;
                 }
 
-                return /* CQL 'and' */ (di_
-                    && dj_());
+                return di_
+                    /* CQL 'and' */ && dj_();
             }
 
             CqlBoolean dd_ = context.Operators.WhereAny<Medication>(db_, dc_);
@@ -2656,9 +2656,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return bc_;
             }
 
-            return /* CQL 'and' (263:5-265:137) */ (/* CQL 'and' (263:11-264:121) */ (o_
-                && p_())
-                && q_());
+            return o_
+                /* CQL 'and' (263:11-264:121) */ && p_()
+                /* CQL 'and' (263:5-265:137) */ && q_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)? LowRiskForVTE)?> h_ = context.Operators.SelectWhere<ValueTuple<Encounter, Procedure, (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?>, (CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, (CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)? LowRiskForVTE)?>(e_, f_, g_);
@@ -2801,8 +2801,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return cz_;
             }
 
-            return /* CQL 'and' (299:9-300:67) */ (ct_
-                && cu_());
+            return ct_
+                /* CQL 'and' (299:9-300:67) */ && cu_();
         }
 
 
@@ -2846,8 +2846,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return dv_;
                 }
 
-                return /* CQL 'and' */ (dq_
-                    && dr_());
+                return dq_
+                    /* CQL 'and' */ && dr_();
             }
 
             CqlBoolean dl_ = context.Operators.WhereAny<Medication>(dj_, dk_);
@@ -2876,8 +2876,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return ei_;
                 }
 
-                return /* CQL 'and' */ (ed_
-                    && ee_());
+                return ed_
+                    /* CQL 'and' */ && ee_();
             }
 
             CqlBoolean dy_ = context.Operators.WhereAny<Medication>(dw_, dx_);
@@ -2907,8 +2907,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return ev_;
                 }
 
-                return /* CQL 'and' */ (eq_
-                    && er_());
+                return eq_
+                    /* CQL 'and' */ && er_();
             }
 
             CqlBoolean el_ = context.Operators.WhereAny<Medication>(ej_, ek_);
@@ -2938,8 +2938,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return fi_;
                 }
 
-                return /* CQL 'and' */ (fd_
-                    && fe_());
+                return fd_
+                    /* CQL 'and' */ && fe_();
             }
 
             CqlBoolean ey_ = context.Operators.WhereAny<Medication>(ew_, ex_);
@@ -2969,8 +2969,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return fv_;
                 }
 
-                return /* CQL 'and' */ (fq_
-                    && fr_());
+                return fq_
+                    /* CQL 'and' */ && fr_();
             }
 
             CqlBoolean fl_ = context.Operators.WhereAny<Medication>(fj_, fk_);
@@ -3012,9 +3012,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return gj_;
             }
 
-            return /* CQL 'and' (314:9-316:53) */ (/* CQL 'and' (314:15-315:45) */ (fy_
-                && fz_())
-                && ga_());
+            return fy_
+                /* CQL 'and' (314:15-315:45) */ && fz_()
+                /* CQL 'and' (314:9-316:53) */ && ga_();
         }
 
         IEnumerable<(CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)?> bt_ = context.Operators.SelectWhere<ValueTuple<MedicationRequest, Task>, (CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)?>(bq_, br_, bs_);
@@ -3071,8 +3071,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return t_;
                 }
 
-                return /* CQL 'and' (279:17-280:129) */ (i_
-                    && j_());
+                return i_
+                    /* CQL 'and' (279:17-280:129) */ && j_();
             }
 
             CqlBoolean f_ = context.Operators.WhereAny<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(d_, e_);
@@ -3220,10 +3220,10 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return cl_;
             }
 
-            return /* CQL 'and' (346:9-349:45) */ (/* CQL 'and' (346:15-348:54) */ (/* CQL 'and' (346:15-347:49) */ (bx_
-                && by_())
-                && bz_())
-                && ca_());
+            return bx_
+                /* CQL 'and' (346:15-347:49) */ && by_()
+                /* CQL 'and' (346:15-348:54) */ && bz_()
+                /* CQL 'and' (346:9-349:45) */ && ca_();
         }
 
         IEnumerable<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?> aa_ = context.Operators.SelectWhere<ValueTuple<ServiceRequest, Task>, (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?>(x_, y_, z_);
@@ -3334,8 +3334,8 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                     return t_;
                 }
 
-                return /* CQL 'and' (327:17-328:125) */ (i_
-                    && j_());
+                return i_
+                    /* CQL 'and' (327:17-328:125) */ && j_();
             }
 
             CqlBoolean f_ = context.Operators.WhereAny<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(d_, e_);
@@ -3597,10 +3597,10 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return bg_;
             }
 
-            return /* CQL 'and' (372:5-375:134) */ (/* CQL 'and' (372:11-374:121) */ (/* CQL 'and' (372:11-373:50) */ (n_
-                && o_())
-                && p_())
-                && q_());
+            return n_
+                /* CQL 'and' (372:11-373:50) */ && o_()
+                /* CQL 'and' (372:11-374:121) */ && p_()
+                /* CQL 'and' (372:5-375:134) */ && q_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? NoVTEMedication)?> h_ = context.Operators.SelectWhere<ValueTuple<Encounter, Procedure, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>, (CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? NoVTEMedication)?>(e_, f_, g_);
@@ -3860,10 +3860,10 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return bg_;
             }
 
-            return /* CQL 'and' (383:5-386:130) */ (/* CQL 'and' (383:11-385:121) */ (/* CQL 'and' (383:11-384:50) */ (n_
-                && o_())
-                && p_())
-                && q_());
+            return n_
+                /* CQL 'and' (383:11-384:50) */ && o_()
+                /* CQL 'and' (383:11-385:121) */ && p_()
+                /* CQL 'and' (383:5-386:130) */ && q_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? NoVTEDevice)?> h_ = context.Operators.SelectWhere<ValueTuple<Encounter, Procedure, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>, (CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? NoVTEDevice)?>(e_, f_, g_);
@@ -4205,9 +4205,9 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 return bc_;
             }
 
-            return /* CQL 'and' (403:5-405:133) */ (/* CQL 'and' (403:11-404:121) */ (o_
-                && p_())
-                && q_());
+            return o_
+                /* CQL 'and' (403:11-404:121) */ && p_()
+                /* CQL 'and' (403:5-405:133) */ && q_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, object PatientRefusal)?> h_ = context.Operators.SelectWhere<ValueTuple<Encounter, Procedure, object>, (CqlTupleMetadata, Encounter QualifyingEncounterICU, Procedure AnesthesiaProcedure, object PatientRefusal)?>(e_, f_, g_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS125FHIRBreastCancerScreen", "1.0.000")]
 public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton<CMS125FHIRBreastCancerScreen_1_0_000>
 {
@@ -169,9 +169,9 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             return z_;
         }
 
-        return /* CQL 'and' (34:3-38:64) */ (/* CQL 'and' (34:3-37:33) */ (j_
-            && k_())
-            && l_());
+        return j_
+            /* CQL 'and' (34:3-37:33) */ && k_()
+            /* CQL 'and' (34:3-38:64) */ && l_();
     }
 
 
@@ -545,13 +545,13 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
                     return o_;
                 }
 
-                return /* CQL 'or' (48:13-50:9) */ (l_
-                    || m_());
+                return l_
+                    /* CQL 'or' (48:13-50:9) */ || m_();
             }
 
-            return /* CQL 'and' (45:8-51:5) */ (/* CQL 'or' (45:10-47:7) */ (f_
-                || g_())
-                && h_());
+            return f_
+                /* CQL 'or' (45:10-47:7) */ || g_()
+                /* CQL 'and' (45:8-51:5) */ && h_();
         }
 
 
@@ -568,13 +568,13 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             return s_;
         }
 
-        return /* CQL 'or' (44:3-56:69) */ (/* CQL 'or' (44:3-55:74) */ (/* CQL 'or' (44:3-54:73) */ (/* CQL 'or' (44:3-53:46) */ (/* CQL 'or' (44:3-52:46) */ (/* CQL 'or' (44:3-51:5) */ (a_
-            || b_())
-            || c_())
-            || d_())
-            || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context))
-            || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context))
-            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context));
+        return a_
+            /* CQL 'or' (44:3-51:5) */ || b_()
+            /* CQL 'or' (44:3-52:46) */ || c_()
+            /* CQL 'or' (44:3-53:46) */ || d_()
+            /* CQL 'or' (44:3-54:73) */ || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context)
+            /* CQL 'or' (44:3-55:74) */ || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context)
+            /* CQL 'or' (44:3-56:69) */ || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
     }
 
 

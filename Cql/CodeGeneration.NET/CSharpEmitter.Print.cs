@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -129,7 +129,7 @@ internal partial class CSharpEmitter
             // then throws inside the comparers at run time.
             if (i < parameters.Length
                 && IsCqlBooleanLocal(atom)
-                && parameters[i].ParameterType != typeof(bool?))
+                && !CodeTypeRules.IsNullableBool(parameters[i].ParameterType))
             {
                 return $"(bool?){code}";
             }
@@ -378,7 +378,7 @@ internal partial class CSharpEmitter
         // Also for `!local`: CqlBoolean's own operator ! returns CqlBoolean, so a negated boolean
         // local is already in the type and the conversion around it is noise too. This is what
         // `implies` lowers through, so without it every implies keeps a cast.
-        if (cast.Type == typeof(CqlBoolean) && PrintsAsCqlBoolean(atom.Code))
+        if (CodeTypeRules.IsCqlBoolean(cast.Type) && DenotesCqlBoolean(atom))
             return atom.Code;
 
         var operand = atom.Code.ParenthesizeIfNeeded();
@@ -457,9 +457,20 @@ internal partial class CSharpEmitter
             var rightOperand = ParenthesizeShortCircuitOperand(
                 PrintFullyInline(UnwrapCqlBooleanConversion(binary.Right), includeOriginTags));
 
+            // A left operand that is a chain of the SAME operator composes without parentheses,
+            // because && and || are left-associative — that is what lets `a || b || c` print as one
+            // flat column instead of `((a || b) || c)`. A DIFFERENT operator must still be wrapped:
+            // && and || bind differently, so `(a || b) && c` would silently regroup without it.
+            var leftCode = child(binary.Left).Code;
+            if (UnwrapCqlBooleanConversion(binary.Left) is not CodeBinary { } leftChain
+                || leftChain.Op != binary.Op)
+            {
+                leftCode = ParenthesizeShortCircuitOperand(leftCode);
+            }
+
             return FormatShortCircuit(
                 binary.Op,
-                child(binary.Left).Code,
+                leftCode,
                 rightOperand,
                 includeOriginTags ? binary.OriginTag : null);
         }
@@ -469,7 +480,11 @@ internal partial class CSharpEmitter
         if (binary.Op == CodeBinaryOp.Coalesce)
         {
             leftExpression = binary.Left is CodeCast leftCast
-                && Nullable.GetUnderlyingType(leftCast.Type) == leftCast.Operand.Type
+                && (Nullable.GetUnderlyingType(leftCast.Type) == leftCast.Operand.Type
+                    // Also look through the builder's outbound CqlBoolean-to-bool? conversion, so a
+                    // whole logical chain can be asked `.IsTrue` instead of being converted back
+                    // only to be coalesced.
+                    || (CodeTypeRules.IsNullableBool(leftCast.Type) && CodeTypeRules.IsCqlBoolean(leftCast.Operand.Type)))
                     ? leftCast.Operand
                     : SimplifyCoalesceLeft(binary.Left);
 
@@ -516,11 +531,12 @@ internal partial class CSharpEmitter
             CodeBinaryOp.Equal when right is "null" or "default" && binary.Left is CodeConstant { Value: null } => "true",
             // "default" rewrites to "null" in patterns: a default literal is not a legal
             // pattern (CS8505) — the old writer's rule.
-            // A CqlBoolean-declared local answers these inside the type, which both avoids CS9135
-            // (a struct has no constant pattern form) and keeps the value from round-tripping
-            // through bool? just to be tested.
-            CodeBinaryOp.Equal when right is "null" or "default" && IsCqlBooleanLocal(leftAtom) => $"!{leftAtom.Code}.{nameof(CqlBoolean.HasValue)}",
-            CodeBinaryOp.NotEqual when right is "null" or "default" && IsCqlBooleanLocal(leftAtom) => $"{leftAtom.Code}.{nameof(CqlBoolean.HasValue)}",
+            // A CqlBoolean answers these inside the type, which both avoids CS9135 (a struct has no
+            // constant pattern form) and keeps the value from round-tripping through bool? just to
+            // be tested. Applies to any CqlBoolean-valued operand, a whole logical chain included —
+            // not only a local.
+            CodeBinaryOp.Equal when right is "null" or "default" && DenotesCqlBoolean(leftAtom) => $"!{left}.{nameof(CqlBoolean.HasValue)}",
+            CodeBinaryOp.NotEqual when right is "null" or "default" && DenotesCqlBoolean(leftAtom) => $"{left}.{nameof(CqlBoolean.HasValue)}",
             CodeBinaryOp.Equal when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is null",
             CodeBinaryOp.NotEqual when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is not null",
             // The short-circuit guards print as constant patterns: same lowering as the
@@ -531,15 +547,15 @@ internal partial class CSharpEmitter
             // is-null comparison) cannot switch a lifted == into a pattern match.
             // Same again for `is true`/`is false`: IsTrue/IsFalse ARE those patterns, and are total
             // in the same way CQL's operators are (null yields false, never null).
-            CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool tf } && IsCqlBooleanLocal(leftAtom) =>
-                $"{originPrefix}{leftAtom.Code}.{(tf ? nameof(CqlBoolean.IsTrue) : nameof(CqlBoolean.IsFalse))}",
-            CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool b } && binary.Left.Type == typeof(bool?) => $"{originPrefix}{left} is {(b ? "true" : "false")}",
+            CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool tf } && DenotesCqlBoolean(leftAtom) =>
+                $"{originPrefix}{left}.{(tf ? nameof(CqlBoolean.IsTrue) : nameof(CqlBoolean.IsFalse))}",
+            CodeBinaryOp.Equal when binary.Right is CodeConstant { Value: bool b } && CodeTypeRules.IsNullableBool(binary.Left.Type) => $"{originPrefix}{left} is {(b ? "true" : "false")}",
             CodeBinaryOp.Equal => $"{left} == {right}",
             CodeBinaryOp.NotEqual => $"{left} != {right}",
             // `x ?? false` is asking "is it definitely true", which IsTrue answers without leaving
             // the type. Any other right operand means the result must stay nullable, so that is the
             // one case still converting back.
-            CodeBinaryOp.Coalesce when right is "false" && IsCqlBooleanLocal(leftAtom) => $"{leftAtom.Code}.{nameof(CqlBoolean.IsTrue)}",
+            CodeBinaryOp.Coalesce when right is "false" && DenotesCqlBoolean(leftAtom) => $"{left}.{nameof(CqlBoolean.IsTrue)}",
             CodeBinaryOp.Coalesce => $"{AsNullableBool(leftAtom, left)} ?? {right}",
             CodeBinaryOp.OrElse => $"{left} || {right}",
             CodeBinaryOp.AndAlso => $"{left} && {right}",
@@ -565,12 +581,18 @@ internal partial class CSharpEmitter
     ///
     /// <para>The operator LEADS its continuation line, matching the ternary format: with one operand
     /// per line the reader can see which operand may be skipped, and a chain reads as a column of
-    /// conditions rather than one long line.</para>
+    /// conditions rather than one long line. The origin tag sits immediately left of the operator it
+    /// belongs to, so in a chain each line carries the CQL span of ITS operator rather than one tag
+    /// standing in front of the whole nest.</para>
     ///
-    /// <para>The whole expression is parenthesized, which also settles precedence — <c>&amp;&amp;</c>
-    /// and <c>||</c> bind differently, and <c>implies</c> is <c>!l || r</c> that may itself become an
-    /// operand of <c>&amp;&amp;</c>, so a mixed nest would regroup silently. Because every one of
-    /// these self-parenthesizes, the operands need no parens of their own.</para>
+    /// <para>Deliberately NOT self-parenthesized, which is what lets a chain of one operator print
+    /// flat — <c>a || b || c</c> rather than <c>((a || b) || c)</c>, since these are
+    /// left-associative. Precedence is instead settled by the callers, which wrap an operand
+    /// whenever it could regroup: a left operand of a DIFFERENT operator (see
+    /// <see cref="PrintBinary"/>), any right operand binding looser than <c>&amp;&amp;</c> (see
+    /// <see cref="ParenthesizeShortCircuitOperand"/>), and the ordinary
+    /// <see cref="StringExtensions.ParenthesizeIfNeeded"/> paths everywhere a chain is consumed as
+    /// a whole.</para>
     /// </summary>
     internal string FormatShortCircuit(CodeBinaryOp op, string left, string right, string? originTag)
     {
@@ -578,11 +600,10 @@ internal partial class CSharpEmitter
         var originPrefix = originTag is null ? "" : $"/* {originTag} */ ";
 
         var isb = new IndentedStringBuilder();
-        isb.Append("(");
         isb.AppendLine(left);
         using (isb.Indent())
-            isb.Append($"{@operator} {right})");
-        return $"{originPrefix}{isb}";
+            isb.Append($"{originPrefix}{@operator} {right}");
+        return isb;
     }
 
     /// <summary>

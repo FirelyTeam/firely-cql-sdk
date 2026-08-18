@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS155FHIRWgtAssessCounseling", "1.0.000")]
 public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleton<CMS155FHIRWgtAssessCounseling_1_0_000>
 {
@@ -216,8 +216,8 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             return m_;
         }
 
-        return /* CQL 'and' (40:3-43:38) */ (j_
-            && k_());
+        return j_
+            /* CQL 'and' (40:3-43:38) */ && k_();
     }
 
 
@@ -276,8 +276,8 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             return d_;
         }
 
-        return /* CQL 'or' (49:3-50:69) */ (a_
-            || b_());
+        return a_
+            /* CQL 'or' (49:3-50:69) */ || b_();
     }
 
 
@@ -305,8 +305,8 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 return !((bool?)(l_ is null));
             }
 
-            return /* CQL 'and' (104:5-105:41) */ (i_
-                && j_());
+            return i_
+                /* CQL 'and' (104:5-105:41) */ && j_();
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -338,8 +338,8 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 return !((bool?)(l_ is null));
             }
 
-            return /* CQL 'and' (94:5-95:38) */ (i_
-                && j_());
+            return i_
+                /* CQL 'and' (94:5-95:38) */ && j_();
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -371,8 +371,8 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 return !((bool?)(l_ is null));
             }
 
-            return /* CQL 'and' (99:5-100:38) */ (i_
-                && j_());
+            return i_
+                /* CQL 'and' (99:5-100:38) */ && j_();
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -404,9 +404,9 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             return h_;
         }
 
-        return /* CQL 'and' (59:3-61:45) */ (/* CQL 'and' (59:3-60:45) */ (b_
-            && c_())
-            && d_());
+        return b_
+            /* CQL 'and' (59:3-60:45) */ && c_()
+            /* CQL 'and' (59:3-61:45) */ && d_();
     }
 
 

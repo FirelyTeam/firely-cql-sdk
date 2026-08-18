@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("HospiceFHIR4", "2.3.000")]
 public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_3_000>
 {
@@ -118,8 +118,8 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                     return x_;
                 }
 
-                return /* CQL 'or' (24:23-27:19) */ (q_
-                    || r_());
+                return q_
+                    /* CQL 'or' (24:23-27:19) */ || r_();
             }
 
 
@@ -132,9 +132,9 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                 return ac_;
             }
 
-            return /* CQL 'and' (23:16-28:105) */ (/* CQL 'and' (23:22-27:19) */ (i_
-                && j_())
-                && k_());
+            return i_
+                /* CQL 'and' (23:22-27:19) */ && j_()
+                /* CQL 'and' (23:16-28:105) */ && k_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Encounter>(b_, c_);
@@ -168,9 +168,9 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                     return at_;
                 }
 
-                return /* CQL 'and' (32:21-34:108) */ (/* CQL 'and' (32:27-33:53) */ (ak_
-                    && al_())
-                    && am_());
+                return ak_
+                    /* CQL 'and' (32:27-33:53) */ && al_()
+                    /* CQL 'and' (32:21-34:108) */ && am_();
             }
 
             CqlBoolean ag_ = context.Operators.WhereAny<ServiceRequest>(ae_, af_);
@@ -195,17 +195,17 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                     return bf_;
                 }
 
-                return /* CQL 'and' (38:21-39:111) */ (ba_
-                    && bb_());
+                return ba_
+                    /* CQL 'and' (38:21-39:111) */ && bb_();
             }
 
             CqlBoolean ax_ = context.Operators.WhereAny<Procedure>(av_, aw_);
             return ax_;
         }
 
-        return /* CQL 'or' (21:3-40:17) */ (/* CQL 'or' (21:3-35:17) */ (d_
-            || e_())
-            || f_());
+        return d_
+            /* CQL 'or' (21:3-35:17) */ || e_()
+            /* CQL 'or' (21:3-40:17) */ || f_();
     }
 
 

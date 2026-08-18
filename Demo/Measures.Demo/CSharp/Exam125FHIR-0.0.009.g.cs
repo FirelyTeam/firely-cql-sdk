@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("Exam125FHIR", "0.0.009")]
 public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_009>
 {
@@ -183,8 +183,8 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                 return o_;
             }
 
-            return /* CQL 'and' (50:19-51:110) */ (j_
-                && k_());
+            return j_
+                /* CQL 'and' (50:19-51:110) */ && k_();
         }
 
         IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
@@ -248,9 +248,9 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
             return t_;
         }
 
-        return /* CQL 'and' (58:3-62:19) */ (/* CQL 'and' (58:3-59:47) */ (j_
-            && k_())
-            && l_());
+        return j_
+            /* CQL 'and' (58:3-59:47) */ && k_()
+            /* CQL 'and' (58:3-62:19) */ && l_();
     }
 
 
@@ -337,8 +337,8 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                 return n_;
             }
 
-            return /* CQL 'and' (154:19-156:47) */ (g_
-                && h_());
+            return g_
+                /* CQL 'and' (154:19-156:47) */ && h_();
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -416,8 +416,8 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                 return n_;
             }
 
-            return /* CQL 'and' (168:19-170:47) */ (g_
-                && h_());
+            return g_
+                /* CQL 'and' (168:19-170:47) */ && h_();
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -476,8 +476,8 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                 return n_;
             }
 
-            return /* CQL 'and' (179:19-181:47) */ (g_
-                && h_());
+            return g_
+                /* CQL 'and' (179:19-181:47) */ && h_();
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -516,13 +516,13 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                     return p_;
                 }
 
-                return /* CQL 'or' (72:29-74:25) */ (m_
-                    || n_());
+                return m_
+                    /* CQL 'or' (72:29-74:25) */ || n_();
             }
 
-            return /* CQL 'and' (69:24-75:21) */ (/* CQL 'or' (69:26-71:23) */ (g_
-                || h_())
-                && i_());
+            return g_
+                /* CQL 'or' (69:26-71:23) */ || h_()
+                /* CQL 'and' (69:24-75:21) */ && i_();
         }
 
 
@@ -550,17 +550,17 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
             CqlDate aa_ = context.Operators.DateFrom(z_);
             int? ab_ = context.Operators.CalculateAgeAt(x_, aa_, "year");
             CqlBoolean ac_ = context.Operators.GreaterOrEqual(ab_, 65);
-            return /* CQL 'and' (79:24-81:21) */ (ac_
-                && AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context));
+            return ac_
+                /* CQL 'and' (79:24-81:21) */ && AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context);
         }
 
-        return /* CQL 'or' (68:3-83:17) */ (/* CQL 'or' (68:5-81:21) */ (/* CQL 'or' (68:5-78:104) */ (/* CQL 'or' (68:5-77:62) */ (/* CQL 'or' (68:5-76:62) */ (/* CQL 'or' (68:5-75:21) */ (a_
-            || b_())
-            || c_())
-            || d_())
-            || AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context))
-            || e_())
-            || PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context));
+        return a_
+            /* CQL 'or' (68:5-75:21) */ || b_()
+            /* CQL 'or' (68:5-76:62) */ || c_()
+            /* CQL 'or' (68:5-77:62) */ || d_()
+            /* CQL 'or' (68:5-78:104) */ || AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)
+            /* CQL 'or' (68:5-81:21) */ || e_()
+            /* CQL 'or' (68:3-83:17) */ || PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
     }
 
 
@@ -603,12 +603,12 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                     return !((bool?)(u_ is null));
                 }
 
-                return /* CQL 'and' (112:27-114:23) */ (r_
-                    && s_());
+                return r_
+                    /* CQL 'and' (112:27-114:23) */ && s_();
             }
 
-            return /* CQL 'and' (111:21-114:23) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (111:21-114:23) */ && i_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -655,12 +655,12 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                     return !((bool?)(u_ is null));
                 }
 
-                return /* CQL 'and' (130:27-132:23) */ (r_
-                    && s_());
+                return r_
+                    /* CQL 'and' (130:27-132:23) */ && s_();
             }
 
-            return /* CQL 'and' (129:21-132:23) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (129:21-132:23) */ && i_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<DiagnosticReport>(b_, c_);
@@ -677,8 +677,8 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
     private bool? Numerator_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Observation_with_status(context);
-        return /* CQL 'or' (98:3-99:38) */ (a_
-            || this.Diagnostic_Report_with_status(context));
+        return a_
+            /* CQL 'or' (98:3-99:38) */ || this.Diagnostic_Report_with_status(context);
     }
 
 
@@ -691,10 +691,10 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
     private bool? Final_Numerator_Population_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Numerator(context);
-        return /* CQL 'and' (103:3-106:34) */ (/* CQL 'and' (103:3-105:19) */ (/* CQL 'and' (103:3-104:26) */ (a_
-            && this.Initial_Population(context))
-            && this.Denominator(context))
-            && !(this.Denominator_Exclusions(context)));
+        return a_
+            /* CQL 'and' (103:3-104:26) */ && this.Initial_Population(context)
+            /* CQL 'and' (103:3-105:19) */ && this.Denominator(context)
+            /* CQL 'and' (103:3-106:34) */ && !(this.Denominator_Exclusions(context));
     }
 
 
@@ -737,12 +737,12 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                     return !((bool?)(u_ is null));
                 }
 
-                return /* CQL 'and' (121:27-123:23) */ (r_
-                    && s_());
+                return r_
+                    /* CQL 'and' (121:27-123:23) */ && s_();
             }
 
-            return /* CQL 'and' (120:21-123:23) */ (!h_
-                && i_());
+            return (CqlBoolean)!h_
+                /* CQL 'and' (120:21-123:23) */ && i_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -789,12 +789,12 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
                     return !((bool?)(u_ is null));
                 }
 
-                return /* CQL 'and' (139:27-141:23) */ (r_
-                    && s_());
+                return r_
+                    /* CQL 'and' (139:27-141:23) */ && s_();
             }
 
-            return /* CQL 'and' (138:21-141:23) */ (!h_
-                && i_());
+            return (CqlBoolean)!h_
+                /* CQL 'and' (138:21-141:23) */ && i_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<DiagnosticReport>(b_, c_);

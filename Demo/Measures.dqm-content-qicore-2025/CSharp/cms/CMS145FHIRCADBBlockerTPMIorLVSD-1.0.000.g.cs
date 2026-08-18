@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS145FHIRCADBBlockerTPMIorLVSD", "1.0.000")]
 public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingleton<CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000>
 {
@@ -226,8 +226,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 return ab_;
             }
 
-            return /* CQL 'and' (217:5-218:44) */ (w_
-                && x_());
+            return w_
+                /* CQL 'and' (217:5-218:44) */ && x_();
         }
 
         IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
@@ -272,8 +272,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 return y_;
             }
 
-            return /* CQL 'and' (207:5-208:49) */ (t_
-                && u_());
+            return t_
+                /* CQL 'and' (207:5-208:49) */ && u_();
         }
 
         IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
@@ -420,8 +420,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     return y_;
                 }
 
-                return /* CQL 'and' (355:17-356:56) */ (n_
-                    && o_());
+                return n_
+                    /* CQL 'and' (355:17-356:56) */ && o_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -496,9 +496,9 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             return x_;
         }
 
-        return /* CQL 'and' (340:3-345:41) */ (/* CQL 'and' (340:3-344:5) */ (i_
-            && j_())
-            && k_());
+        return i_
+            /* CQL 'and' (340:3-344:5) */ && j_()
+            /* CQL 'and' (340:3-345:41) */ && k_();
     }
 
 
@@ -543,10 +543,10 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     return !y_;
                 }
 
-                return /* CQL 'and' (110:17-112:47) */ (/* CQL 'and' (110:17-111:61) */ (/* CQL 'and' (110:17-110:134) */ (r_
-                    && s_())
-                    && t_())
-                    && AHAOverall_4_1_000.Instance.isVerified(context, MyocardialInfarction));
+                return r_
+                    /* CQL 'and' (110:17-110:134) */ && s_()
+                    /* CQL 'and' (110:17-111:61) */ && t_()
+                    /* CQL 'and' (110:17-112:47) */ && AHAOverall_4_1_000.Instance.isVerified(context, MyocardialInfarction);
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<Condition>(g_, h_);
@@ -574,8 +574,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             return d_;
         }
 
-        return /* CQL 'and' (49:3-50:54) */ (a_
-            && b_());
+        return a_
+            /* CQL 'and' (49:3-50:54) */ && b_();
     }
 
 
@@ -689,8 +689,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     return y_;
                 }
 
-                return /* CQL 'and' (102:19-103:56) */ (n_
-                    && o_());
+                return n_
+                    /* CQL 'and' (102:19-103:56) */ && o_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Encounter>(e_, f_);
@@ -711,9 +711,9 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     private bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI(context);
-        return /* CQL 'and' (53:3-55:91) */ (/* CQL 'and' (53:3-54:95) */ (a_
-            && !(this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI(context)))
-            && !(this.Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI(context)));
+        return a_
+            /* CQL 'and' (53:3-54:95) */ && !(this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
+            /* CQL 'and' (53:3-55:91) */ && !(this.Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI(context));
     }
 
 
@@ -804,9 +804,9 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         return bf_;
                     }
 
-                    return /* CQL 'and' (68:11-70:111) */ (/* CQL 'and' (68:17-69:90) */ (ar_
-                        && as_())
-                        && at_());
+                    return ar_
+                        /* CQL 'and' (68:17-69:90) */ && as_()
+                        /* CQL 'and' (68:11-70:111) */ && at_();
                 }
 
                 IEnumerable<Observation> ae_ = context.Operators.Where<Observation>(ac_, ad_);
@@ -828,10 +828,10 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 return al_;
             }
 
-            return /* CQL 'and' (73:7-76:48) */ (/* CQL 'and' (73:13-75:43) */ (/* CQL 'and' (73:13-74:71) */ (p_
-                && q_())
-                && r_())
-                && s_());
+            return p_
+                /* CQL 'and' (73:13-74:71) */ && q_()
+                /* CQL 'and' (73:13-75:43) */ && r_()
+                /* CQL 'and' (73:7-76:48) */ && s_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterMI)?> f_ = context.Operators.SelectWhere<ValueTuple<Observation, Encounter>, (CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterMI)?>(c_, d_, e_);
@@ -930,10 +930,10 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     return !((bool?)(/* CQL 'is true' (396:15-396:44) */ w_.IsTrue));
                 }
 
-                return (bool?)(/* CQL 'and' (393:46-396:44) */ (/* CQL 'and' (393:46-395:109) */ (/* CQL 'and' (393:46-394:55) */ (h_
-                    && i_())
-                    && j_())
-                    && k_()));
+                return (bool?)(h_
+                    /* CQL 'and' (393:46-394:55) */ && i_()
+                    /* CQL 'and' (393:46-395:109) */ && j_()
+                    /* CQL 'and' (393:46-396:44) */ && k_());
             }
             else if (Order is MedicationRequest)
             {
@@ -958,8 +958,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     return ah_;
                 }
 
-                return (bool?)(/* CQL 'and' (397:51-398:109) */ (ab_
-                    && ac_()));
+                return (bool?)(ab_
+                    /* CQL 'and' (397:51-398:109) */ && ac_());
             }
             else
             {
@@ -1105,8 +1105,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 return aw_;
             }
 
-            return /* CQL 'and' (197:7-198:126) */ (aq_
-                && ar_());
+            return aq_
+                /* CQL 'and' (197:7-198:126) */ && ar_();
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
@@ -1123,8 +1123,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     private bool? Numerator_1_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Beta_Blocker_Therapy_for_LVSD_Ordered(context);
-        return /* CQL 'or' (80:3-81:58) */ (a_
-            || this.Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(context));
+        return a_
+            /* CQL 'or' (80:3-81:58) */ || this.Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(context);
     }
 
 
@@ -1260,8 +1260,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 return aw_;
             }
 
-            return /* CQL 'and' (185:7-186:119) */ (aq_
-                && ar_());
+            return aq_
+                /* CQL 'and' (185:7-186:119) */ && ar_();
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
@@ -1278,8 +1278,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     private bool? Numerator_2_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Beta_Blocker_Therapy_Ordered(context);
-        return /* CQL 'or' (84:3-85:49) */ (a_
-            || this.Is_Currently_Taking_Beta_Blocker_Therapy(context));
+        return a_
+            /* CQL 'or' (84:3-85:49) */ || this.Is_Currently_Taking_Beta_Blocker_Therapy(context);
     }
 
 
@@ -1351,8 +1351,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             return d_;
         }
 
-        return /* CQL 'and' (115:3-116:80) */ (a_
-            && b_());
+        return a_
+            /* CQL 'and' (115:3-116:80) */ && b_();
     }
 
 
@@ -1478,9 +1478,9 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     private bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-        return /* CQL 'and' (119:3-121:117) */ (/* CQL 'and' (119:3-120:121) */ (a_
-            && !(this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)))
-            && !(this.Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)));
+        return a_
+            /* CQL 'and' (119:3-120:121) */ && !(this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
+            /* CQL 'and' (119:3-121:117) */ && !(this.Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context));
     }
 
 
@@ -1571,9 +1571,9 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         return bf_;
                     }
 
-                    return /* CQL 'and' (134:11-136:111) */ (/* CQL 'and' (134:17-135:90) */ (ar_
-                        && as_())
-                        && at_());
+                    return ar_
+                        /* CQL 'and' (134:17-135:90) */ && as_()
+                        /* CQL 'and' (134:11-136:111) */ && at_();
                 }
 
                 IEnumerable<Observation> ae_ = context.Operators.Where<Observation>(ac_, ad_);
@@ -1595,10 +1595,10 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 return al_;
             }
 
-            return /* CQL 'and' (139:7-142:48) */ (/* CQL 'and' (139:13-141:43) */ (/* CQL 'and' (139:13-140:71) */ (p_
-                && q_())
-                && r_())
-                && s_());
+            return p_
+                /* CQL 'and' (139:13-140:71) */ && q_()
+                /* CQL 'and' (139:13-141:43) */ && r_()
+                /* CQL 'and' (139:7-142:48) */ && s_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterModerateOrSevereLVSD)?> f_ = context.Operators.SelectWhere<ValueTuple<Observation, Encounter>, (CqlTupleMetadata, Observation HeartRateExam, Encounter CADEncounterModerateOrSevereLVSD)?>(c_, d_, e_);
@@ -1645,8 +1645,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         return w_;
                     }
 
-                    return /* CQL 'or' (377:14-379:11) */ ((CqlBoolean)(q_ is null)
-                        || r_());
+                    return (CqlBoolean)(q_ is null)
+                        /* CQL 'or' (377:14-379:11) */ || r_();
                 }
 
 
@@ -1663,13 +1663,13 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                         return ae_;
                     }
 
-                    return /* CQL 'or' (380:14-382:11) */ ((CqlBoolean)(y_ is null)
-                        || z_());
+                    return (CqlBoolean)(y_ is null)
+                        /* CQL 'or' (380:14-382:11) */ || z_();
                 }
 
-                return (bool?)(/* CQL 'and' (376:47-382:11) */ (/* CQL 'and' (376:47-379:11) */ (m_
-                    && n_())
-                    && o_()));
+                return (bool?)(m_
+                    /* CQL 'and' (376:47-379:11) */ && n_()
+                    /* CQL 'and' (376:47-382:11) */ && o_());
             }
             else if (Event is Condition)
             {
@@ -1683,8 +1683,8 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     return ak_;
                 }
 
-                return (bool?)(/* CQL 'and' (383:60-384:75) */ (af_
-                    && ag_()));
+                return (bool?)(af_
+                    /* CQL 'and' (383:60-384:75) */ && ag_());
             }
             else
             {
@@ -2059,13 +2059,13 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     return al_;
                 }
 
-                return /* CQL 'or' (323:13-325:9) */ (ae_
-                    || af_());
+                return ae_
+                    /* CQL 'or' (323:13-325:9) */ || af_();
             }
 
-            return /* CQL 'and' (321:7-325:9) */ (/* CQL 'and' (321:13-322:129) */ (s_
-                && t_())
-                && u_());
+            return s_
+                /* CQL 'and' (321:13-322:129) */ && t_()
+                /* CQL 'and' (321:7-325:9) */ && u_();
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
@@ -2082,15 +2082,15 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     private bool? Denominator_Exceptions_1_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-        return /* CQL 'or' (290:3-298:126) */ (/* CQL 'or' (290:3-297:77) */ (/* CQL 'or' (290:3-296:141) */ (/* CQL 'or' (290:3-295:139) */ (/* CQL 'or' (290:3-294:118) */ (/* CQL 'or' (290:3-293:93) */ (/* CQL 'or' (290:3-292:93) */ (/* CQL 'or' (290:3-291:88) */ (a_
-            || this.Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
-            || this.Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
-            || this.Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
-            || this.Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
-            || this.Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
-            || this.Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context))
-            || this.Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(context))
-            || this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer(context));
+        return a_
+            /* CQL 'or' (290:3-291:88) */ || this.Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)
+            /* CQL 'or' (290:3-292:93) */ || this.Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)
+            /* CQL 'or' (290:3-293:93) */ || this.Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)
+            /* CQL 'or' (290:3-294:118) */ || this.Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)
+            /* CQL 'or' (290:3-295:139) */ || this.Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)
+            /* CQL 'or' (290:3-296:141) */ || this.Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context)
+            /* CQL 'or' (290:3-297:77) */ || this.Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(context)
+            /* CQL 'or' (290:3-298:126) */ || this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer(context);
     }
 
 
@@ -2175,13 +2175,13 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     return al_;
                 }
 
-                return /* CQL 'or' (334:13-336:9) */ (ae_
-                    || af_());
+                return ae_
+                    /* CQL 'or' (334:13-336:9) */ || af_();
             }
 
-            return /* CQL 'and' (332:7-336:9) */ (/* CQL 'and' (332:13-333:129) */ (s_
-                && t_())
-                && u_());
+            return s_
+                /* CQL 'and' (332:13-333:129) */ && t_()
+                /* CQL 'and' (332:7-336:9) */ && u_();
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
@@ -2198,15 +2198,15 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     private bool? Denominator_Exceptions_2_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI(context);
-        return /* CQL 'or' (301:3-309:100) */ (/* CQL 'or' (301:3-308:76) */ (/* CQL 'or' (301:3-307:115) */ (/* CQL 'or' (301:3-306:113) */ (/* CQL 'or' (301:3-305:92) */ (/* CQL 'or' (301:3-304:67) */ (/* CQL 'or' (301:3-303:67) */ (/* CQL 'or' (301:3-302:62) */ (a_
-            || this.Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
-            || this.Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
-            || this.Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
-            || this.Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
-            || this.Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
-            || this.Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI(context))
-            || this.Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy(context))
-            || this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer(context));
+        return a_
+            /* CQL 'or' (301:3-302:62) */ || this.Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI(context)
+            /* CQL 'or' (301:3-303:67) */ || this.Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI(context)
+            /* CQL 'or' (301:3-304:67) */ || this.Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI(context)
+            /* CQL 'or' (301:3-305:92) */ || this.Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI(context)
+            /* CQL 'or' (301:3-306:113) */ || this.Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI(context)
+            /* CQL 'or' (301:3-307:115) */ || this.Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI(context)
+            /* CQL 'or' (301:3-308:76) */ || this.Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy(context)
+            /* CQL 'or' (301:3-309:100) */ || this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer(context);
     }
 
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("AlaraCommonFunctions", "1.10.000")]
 public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraCommonFunctions_1_10_000>
 {
@@ -305,24 +305,24 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             return ck_;
         }
 
-        return /* CQL 'or' (33:3-50:73) */ (/* CQL 'or' (33:3-49:76) */ (/* CQL 'or' (33:3-48:75) */ (/* CQL 'or' (33:3-47:78) */ (/* CQL 'or' (33:3-46:61) */ (/* CQL 'or' (33:3-45:59) */ (/* CQL 'or' (33:3-44:45) */ (/* CQL 'or' (33:3-43:52) */ (/* CQL 'or' (33:3-42:55) */ (/* CQL 'or' (33:3-41:50) */ (/* CQL 'or' (33:3-40:73) */ (/* CQL 'or' (33:3-39:54) */ (/* CQL 'or' (33:3-38:50) */ (/* CQL 'or' (33:3-37:56) */ (/* CQL 'or' (33:3-36:51) */ (/* CQL 'or' (33:3-35:65) */ (/* CQL 'or' (33:3-34:67) */ (d_
-            || e_())
-            || f_())
-            || g_())
-            || h_())
-            || i_())
-            || j_())
-            || k_())
-            || l_())
-            || m_())
-            || n_())
-            || o_())
-            || p_())
-            || q_())
-            || r_())
-            || s_())
-            || t_())
-            || u_());
+        return d_
+            /* CQL 'or' (33:3-34:67) */ || e_()
+            /* CQL 'or' (33:3-35:65) */ || f_()
+            /* CQL 'or' (33:3-36:51) */ || g_()
+            /* CQL 'or' (33:3-37:56) */ || h_()
+            /* CQL 'or' (33:3-38:50) */ || i_()
+            /* CQL 'or' (33:3-39:54) */ || j_()
+            /* CQL 'or' (33:3-40:73) */ || k_()
+            /* CQL 'or' (33:3-41:50) */ || l_()
+            /* CQL 'or' (33:3-42:55) */ || m_()
+            /* CQL 'or' (33:3-43:52) */ || n_()
+            /* CQL 'or' (33:3-44:45) */ || o_()
+            /* CQL 'or' (33:3-45:59) */ || p_()
+            /* CQL 'or' (33:3-46:61) */ || q_()
+            /* CQL 'or' (33:3-47:78) */ || r_()
+            /* CQL 'or' (33:3-48:75) */ || s_()
+            /* CQL 'or' (33:3-49:76) */ || t_()
+            /* CQL 'or' (33:3-50:73) */ || u_();
     }
 
 
@@ -344,12 +344,12 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 return j_;
             }
 
-            return /* CQL 'or' (80:9-82:5) */ (g_
-                || h_());
+            return g_
+                /* CQL 'or' (80:9-82:5) */ || h_();
         }
 
-        return /* CQL 'and' (79:3-82:5) */ (d_
-            && e_());
+        return d_
+            /* CQL 'and' (79:3-82:5) */ && e_();
     }
 
 
@@ -387,9 +387,9 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 return v_;
             }
 
-            return /* CQL 'and' (96:7-98:54) */ (/* CQL 'and' (96:13-97:49) */ (k_
-                && l_())
-                && m_());
+            return k_
+                /* CQL 'and' (96:13-97:49) */ && l_()
+                /* CQL 'and' (96:7-98:54) */ && m_();
         }
 
 
@@ -441,9 +441,9 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 return v_;
             }
 
-            return /* CQL 'and' (112:7-114:51) */ (/* CQL 'and' (112:13-113:55) */ (k_
-                && l_())
-                && m_());
+            return k_
+                /* CQL 'and' (112:13-113:55) */ && l_()
+                /* CQL 'and' (112:7-114:51) */ && m_();
         }
 
 
@@ -621,24 +621,24 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             return ck_;
         }
 
-        return /* CQL 'or' (53:3-70:73) */ (/* CQL 'or' (53:3-69:76) */ (/* CQL 'or' (53:3-68:75) */ (/* CQL 'or' (53:3-67:78) */ (/* CQL 'or' (53:3-66:61) */ (/* CQL 'or' (53:3-65:59) */ (/* CQL 'or' (53:3-64:45) */ (/* CQL 'or' (53:3-63:52) */ (/* CQL 'or' (53:3-62:55) */ (/* CQL 'or' (53:3-61:50) */ (/* CQL 'or' (53:3-60:73) */ (/* CQL 'or' (53:3-59:54) */ (/* CQL 'or' (53:3-58:50) */ (/* CQL 'or' (53:3-57:56) */ (/* CQL 'or' (53:3-56:51) */ (/* CQL 'or' (53:3-55:65) */ (/* CQL 'or' (53:3-54:67) */ (d_
-            || e_())
-            || f_())
-            || g_())
-            || h_())
-            || i_())
-            || j_())
-            || k_())
-            || l_())
-            || m_())
-            || n_())
-            || o_())
-            || p_())
-            || q_())
-            || r_())
-            || s_())
-            || t_())
-            || u_());
+        return d_
+            /* CQL 'or' (53:3-54:67) */ || e_()
+            /* CQL 'or' (53:3-55:65) */ || f_()
+            /* CQL 'or' (53:3-56:51) */ || g_()
+            /* CQL 'or' (53:3-57:56) */ || h_()
+            /* CQL 'or' (53:3-58:50) */ || i_()
+            /* CQL 'or' (53:3-59:54) */ || j_()
+            /* CQL 'or' (53:3-60:73) */ || k_()
+            /* CQL 'or' (53:3-61:50) */ || l_()
+            /* CQL 'or' (53:3-62:55) */ || m_()
+            /* CQL 'or' (53:3-63:52) */ || n_()
+            /* CQL 'or' (53:3-64:45) */ || o_()
+            /* CQL 'or' (53:3-65:59) */ || p_()
+            /* CQL 'or' (53:3-66:61) */ || q_()
+            /* CQL 'or' (53:3-67:78) */ || r_()
+            /* CQL 'or' (53:3-68:75) */ || s_()
+            /* CQL 'or' (53:3-69:76) */ || t_()
+            /* CQL 'or' (53:3-70:73) */ || u_();
     }
 
 
@@ -660,12 +660,12 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 return j_;
             }
 
-            return /* CQL 'or' (74:9-76:5) */ (g_
-                || h_());
+            return g_
+                /* CQL 'or' (74:9-76:5) */ || h_();
         }
 
-        return /* CQL 'and' (73:3-76:5) */ (d_
-            && e_());
+        return d_
+            /* CQL 'and' (73:3-76:5) */ && e_();
     }
 
 
@@ -703,9 +703,9 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 return v_;
             }
 
-            return /* CQL 'and' (87:7-89:54) */ (/* CQL 'and' (87:13-88:49) */ (k_
-                && l_())
-                && m_());
+            return k_
+                /* CQL 'and' (87:13-88:49) */ && l_()
+                /* CQL 'and' (87:7-89:54) */ && m_();
         }
 
 
@@ -757,9 +757,9 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 return v_;
             }
 
-            return /* CQL 'and' (104:7-106:51) */ (/* CQL 'and' (104:13-105:55) */ (k_
-                && l_())
-                && m_());
+            return k_
+                /* CQL 'and' (104:13-105:55) */ && l_()
+                /* CQL 'and' (104:7-106:51) */ && m_();
         }
 
 

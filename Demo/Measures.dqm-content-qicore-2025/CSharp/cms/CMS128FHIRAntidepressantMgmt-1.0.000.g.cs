@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS128FHIRAntidepressantMgmt", "1.0.000")]
 public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton<CMS128FHIRAntidepressantMgmt_1_0_000>
 {
@@ -182,8 +182,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     return ab_;
                 }
 
-                return /* CQL 'and' */ (w_
-                    && x_());
+                return w_
+                    /* CQL 'and' */ && x_();
             }
 
             CqlBoolean r_ = context.Operators.WhereAny<Medication>(p_, q_);
@@ -257,12 +257,12 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlDate p_ = context.Operators.Add(m_, n_);
                 CqlInterval<CqlDate> q_ = context.Operators.Interval(o_, p_, true, true);
                 CqlBoolean r_ = context.Operators.In<CqlDate>(l_, q_, (string)default);
-                return /* CQL 'and' (44:13-44:94) */ (r_
-                    && !((bool?)((this.IPSD(context)) is null)));
+                return r_
+                    /* CQL 'and' (44:13-44:94) */ && !((bool?)((this.IPSD(context)) is null));
             }
 
-            return /* CQL 'and' (43:7-44:94) */ ((CqlBoolean)(!((bool?)(h_ is null)))
-                && i_());
+            return (CqlBoolean)(!((bool?)(h_ is null)))
+                /* CQL 'and' (43:7-44:94) */ && i_();
         }
 
         CqlBoolean g_ = context.Operators.WhereAny<Condition>(e_, f_);
@@ -320,8 +320,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             CqlDate an_ = context.Operators.Add(ak_, al_);
             CqlInterval<CqlDate> ao_ = context.Operators.Interval(am_, an_, true, true);
             CqlBoolean ap_ = context.Operators.In<CqlDate>(aj_, ao_, (string)default);
-            return /* CQL 'and' (74:5-74:75) */ (ap_
-                && !((bool?)((this.IPSD(context)) is null)));
+            return ap_
+                /* CQL 'and' (74:5-74:75) */ && !((bool?)((this.IPSD(context)) is null));
         }
 
         IEnumerable<Encounter> af_ = context.Operators.Where<Encounter>(ad_, ae_);
@@ -353,9 +353,9 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             return l_;
         }
 
-        return /* CQL 'and' (32:3-34:38) */ (/* CQL 'and' (32:3-33:49) */ (i_
-            && this.Has_IPSD_and_Major_Depression_Diagnosis(context))
-            && j_());
+        return i_
+            /* CQL 'and' (32:3-33:49) */ && this.Has_IPSD_and_Major_Depression_Diagnosis(context)
+            /* CQL 'and' (32:3-34:38) */ && j_();
     }
 
 
@@ -403,8 +403,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                         return x_;
                     }
 
-                    return /* CQL 'and' */ (s_
-                        && t_());
+                    return s_
+                        /* CQL 'and' */ && t_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -438,16 +438,16 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     return an_;
                 }
 
-                return /* CQL 'and' (82:9-83:137) */ ((CqlBoolean)(!((bool?)(y_ is null)))
-                    && z_());
+                return (CqlBoolean)(!((bool?)(y_ is null)))
+                    /* CQL 'and' (82:9-83:137) */ && z_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
             return k_;
         }
 
-        return /* CQL 'or' (80:3-84:5) */ (a_
-            || b_());
+        return a_
+            /* CQL 'or' (80:3-84:5) */ || b_();
     }
 
 
@@ -479,8 +479,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     return v_;
                 }
 
-                return /* CQL 'and' */ (q_
-                    && r_());
+                return q_
+                    /* CQL 'and' */ && r_();
             }
 
             CqlBoolean l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -564,8 +564,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     return v_;
                 }
 
-                return /* CQL 'and' */ (q_
-                    && r_());
+                return q_
+                    /* CQL 'and' */ && r_();
             }
 
             CqlBoolean l_ = context.Operators.WhereAny<Medication>(j_, k_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR", "0.0.015")]
 public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibrary, ISingleton<DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015>
 {
@@ -195,8 +195,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 return l_;
             }
 
-            return /* CQL 'and' (72:37-73:127) */ (g_
-                && h_());
+            return g_
+                /* CQL 'and' (72:37-73:127) */ && h_();
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -247,9 +247,9 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             return t_;
         }
 
-        return /* CQL 'and' (63:3-68:41) */ (/* CQL 'and' (63:3-65:62) */ (j_
-            && k_())
-            && l_());
+        return j_
+            /* CQL 'and' (63:3-65:62) */ && k_()
+            /* CQL 'and' (63:3-68:41) */ && l_();
     }
 
 
@@ -295,8 +295,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 return p_;
             }
 
-            return /* CQL 'and' (83:41-84:112) */ (k_
-                && l_());
+            return k_
+                /* CQL 'and' (83:41-84:112) */ && l_();
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -330,8 +330,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             return d_ is null;
         }
 
-        return /* CQL 'and' (59:3-60:69) */ ((CqlBoolean)(!((bool?)(a_ is null)))
-            && b_());
+        return (CqlBoolean)(!((bool?)(a_ is null)))
+            /* CQL 'and' (59:3-60:69) */ && b_();
     }
 
 
@@ -381,8 +381,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 return m_;
             }
 
-            return /* CQL 'and' (77:41-78:109) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (77:41-78:109) */ && i_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -399,9 +399,9 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     private bool? Numerator_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Most_Recent_HbA1c_Without_Result(context);
-        return /* CQL 'or' (51:3-53:63) */ (/* CQL 'or' (51:3-52:71) */ (a_
-            || this.Has_Most_Recent_Elevated_HbA1c(context))
-            || this.Has_No_Record_Of_HbA1c(context));
+        return a_
+            /* CQL 'or' (51:3-52:71) */ || this.Has_Most_Recent_Elevated_HbA1c(context)
+            /* CQL 'or' (51:3-53:63) */ || this.Has_No_Record_Of_HbA1c(context);
     }
 
 
@@ -425,14 +425,14 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             CqlDate i_ = context.Operators.DateFrom(h_);
             int? j_ = context.Operators.CalculateAgeAt(f_, i_, "year");
             CqlBoolean k_ = context.Operators.GreaterOrEqual(j_, 65);
-            return /* CQL 'and' (91:34-92:110) */ (k_
-                && AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context));
+            return k_
+                /* CQL 'and' (91:34-92:110) */ && AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context);
         }
 
-        return /* CQL 'or' (89:3-93:93) */ (/* CQL 'or' (89:3-92:110) */ (/* CQL 'or' (89:3-90:112) */ (a_
-            || AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context))
-            || b_())
-            || PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context));
+        return a_
+            /* CQL 'or' (89:3-90:112) */ || AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)
+            /* CQL 'or' (89:3-92:110) */ || b_()
+            /* CQL 'or' (89:3-93:93) */ || PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
     }
 
 

@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Primitives;
+
 namespace Hl7.Cql.Compiler.CodeModel;
 
 /// <summary>
@@ -15,6 +17,28 @@ namespace Hl7.Cql.Compiler.CodeModel;
 /// </summary>
 internal static class CodeTypeRules
 {
+    /// <summary>
+    /// CQL's <c>Boolean</c> as the IR models it. This is the type the operator binder matches
+    /// <c>ICqlOperators</c> overloads against and the type every generated signature uses, so it
+    /// stays the IR's answer even where the emitter PRINTS <see cref="IsCqlBoolean"/> instead.
+    /// </summary>
+    /// <param name="type">The type to test.</param>
+    public static bool IsNullableBool(Type type) => type == typeof(bool?);
+
+    /// <summary>
+    /// The three-valued Boolean the emitter prints CQL logic over, because <c>bool?</c> cannot
+    /// short-circuit. Deliberately distinct from <see cref="IsNullableBool"/>: the two are freely
+    /// interconvertible, but only one of them has <c>&amp;&amp;</c>, and only the other can be
+    /// boxed or bound to a <c>bool?</c> parameter.
+    /// </summary>
+    /// <param name="type">The type to test.</param>
+    public static bool IsCqlBoolean(Type type) => type == typeof(CqlBoolean);
+
+    /// <summary>Whether <paramref name="type"/> is a plain, non-nullable <see cref="bool"/> — what a
+    /// C# pattern or a <c>HasValue</c>/<c>IsTrue</c> test yields, as opposed to a CQL Boolean.</summary>
+    /// <param name="type">The type to test.</param>
+    public static bool IsPlainBool(Type type) => type == typeof(bool);
+
     /// <summary>
     /// Determines whether an expression of type <paramref name="from"/> can be used where a
     /// value of type <paramref name="to"/> is expected without an explicit cast, i.e. via an

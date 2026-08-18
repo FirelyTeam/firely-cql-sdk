@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS1206FHIRCTOQR", "1.0.000")]
 public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ISingleton<CMS1206FHIRCTOQR_1_0_000>
 {
@@ -130,9 +130,9 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ISingleton<CMS1206FHIR
                 return aa_;
             }
 
-            return /* CQL 'and' (52:5-54:69) */ (/* CQL 'and' (52:11-53:87) */ (j_
-                && k_())
-                && l_());
+            return j_
+                /* CQL 'and' (52:11-53:87) */ && k_()
+                /* CQL 'and' (52:5-54:69) */ && l_();
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -181,9 +181,9 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ISingleton<CMS1206FHIR
                     return y_;
                 }
 
-                return /* CQL 'and' (46:17-48:92) */ (/* CQL 'and' (46:17-47:77) */ (k_
-                    && l_())
-                    && m_());
+                return k_
+                    /* CQL 'and' (46:17-47:77) */ && l_()
+                    /* CQL 'and' (46:17-48:92) */ && m_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Encounter>(e_, f_);
@@ -214,9 +214,9 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ISingleton<CMS1206FHIR
                 return !((bool?)(g_ is null));
             }
 
-            return /* CQL 'and' (39:5-41:34) */ (/* CQL 'and' (39:11-40:50) */ ((CqlBoolean)(!((bool?)(d_ is null)))
-                && !((bool?)((AlaraCommonFunctions_1_10_000.Instance.sizeAdjustedValue(context, CTScan)) is null)))
-                && e_());
+            return (CqlBoolean)(!((bool?)(d_ is null)))
+                /* CQL 'and' (39:11-40:50) */ && !((bool?)((AlaraCommonFunctions_1_10_000.Instance.sizeAdjustedValue(context, CTScan)) is null))
+                /* CQL 'and' (39:5-41:34) */ && e_();
         }
 
         IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);

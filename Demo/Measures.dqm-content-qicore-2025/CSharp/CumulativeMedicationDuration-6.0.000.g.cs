@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CumulativeMedicationDuration", "6.0.000")]
 public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton<CumulativeMedicationDuration_6_0_000>
 {
@@ -1138,8 +1138,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                 return !((bool?)(bl_ is null));
             }
 
-            if (((bool?)(/* CQL 'and' (260:10-260:64) */ ((CqlBoolean)(!((bool?)(((l_ ?? o_) ?? t_) is null)))
-                && u_()))) ?? false)
+            if ((CqlBoolean)(!((bool?)(((l_ ?? o_) ?? t_) is null)))
+                /* CQL 'and' (260:10-260:64) */ && u_())
             {
                 Duration bo_ = p_?.ExpectedSupplyDuration;
                 CqlQuantity bp_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bo_);
@@ -1210,8 +1210,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                     return !((bool?)(do_ is null));
                 }
 
-                if (((bool?)(/* CQL 'and' (262:15-262:71) */ ((CqlBoolean)(!((bool?)(((l_ ?? o_) ?? t_) is null)))
-                    && dh_()))) ?? false)
+                if ((CqlBoolean)(!((bool?)(((l_ ?? o_) ?? t_) is null)))
+                    /* CQL 'and' (262:15-262:71) */ && dh_())
                 {
                     CqlDateTime dp_ = context.Operators.End(j_ as CqlInterval<CqlDateTime>);
                     CqlDate dq_ = context.Operators.DateFrom(dp_);
@@ -1320,8 +1320,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                 return !((bool?)(bl_ is null));
             }
 
-            if (((bool?)(/* CQL 'and' (291:10-291:64) */ ((CqlBoolean)(!((bool?)(((l_ ?? o_) ?? t_) is null)))
-                && u_()))) ?? false)
+            if ((CqlBoolean)(!((bool?)(((l_ ?? o_) ?? t_) is null)))
+                /* CQL 'and' (291:10-291:64) */ && u_())
             {
                 Duration bo_ = p_?.ExpectedSupplyDuration;
                 CqlQuantity bp_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bo_);
@@ -1392,8 +1392,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                     return !((bool?)(do_ is null));
                 }
 
-                if (((bool?)(/* CQL 'and' (293:15-293:71) */ ((CqlBoolean)(!((bool?)(((l_ ?? o_) ?? t_) is null)))
-                    && dh_()))) ?? false)
+                if ((CqlBoolean)(!((bool?)(((l_ ?? o_) ?? t_) is null)))
+                    /* CQL 'and' (293:15-293:71) */ && dh_())
                 {
                     CqlDateTime dp_ = context.Operators.End(j_ as CqlInterval<CqlDateTime>);
                     CqlDate dq_ = context.Operators.DateFrom(dp_);
@@ -1479,8 +1479,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                 return !((bool?)((o_ ?? av_) is null));
             }
 
-            if (((bool?)(/* CQL 'and' (387:10-387:64) */ ((CqlBoolean)(!((bool?)((g_ ?? j_) is null)))
-                && k_()))) ?? false)
+            if ((CqlBoolean)(!((bool?)((g_ ?? j_) is null)))
+                /* CQL 'and' (387:10-387:64) */ && k_())
             {
                 Quantity ay_ = D?.DaysSupply;
                 CqlQuantity az_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ay_);
@@ -1614,8 +1614,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                 return !((bool?)((o_ ?? av_) is null));
             }
 
-            if (((bool?)(/* CQL 'and' (438:10-438:64) */ ((CqlBoolean)(!((bool?)((g_ ?? j_) is null)))
-                && k_()))) ?? false)
+            if ((CqlBoolean)(!((bool?)((g_ ?? j_) is null)))
+                /* CQL 'and' (438:10-438:64) */ && k_())
             {
                 Quantity ay_ = D?.DaysSupply;
                 CqlQuantity az_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ay_);
@@ -1711,8 +1711,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                 return !((bool?)(l_ is null));
             }
 
-            if (((bool?)(/* CQL 'and' (475:10-475:66) */ ((CqlBoolean)(!((bool?)(h_ is null)))
-                && i_()))) ?? false)
+            if ((CqlBoolean)(!((bool?)(h_ is null)))
+                /* CQL 'and' (475:10-475:66) */ && i_())
             {
                 DataType m_ = Administration?.Medication;
                 object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
@@ -1755,8 +1755,8 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                 return !((bool?)(l_ is null));
             }
 
-            if (((bool?)(/* CQL 'and' (503:10-503:66) */ ((CqlBoolean)(!((bool?)(h_ is null)))
-                && i_()))) ?? false)
+            if ((CqlBoolean)(!((bool?)(h_ is null)))
+                /* CQL 'and' (503:10-503:66) */ && i_())
             {
                 DataType m_ = Administration?.Medication;
                 object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);

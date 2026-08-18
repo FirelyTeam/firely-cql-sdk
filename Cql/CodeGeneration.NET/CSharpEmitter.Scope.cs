@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -255,7 +255,7 @@ internal partial class CSharpEmitter
             // Only bool?, never bool: a non-nullable bool local is a C# type-test result
             // (`x is CqlInterval<CqlDate>`), not a CQL Boolean, and retyping those would change
             // what the pattern-matching code around them means.
-            var isCqlBoolean = node.Type == typeof(bool?);
+            var isCqlBoolean = CodeTypeRules.IsNullableBool(node.Type);
             var typeSyntax = isCqlBoolean
                                  ? _emitter._typeToCSharpConverter.ToCSharp(typeof(CqlBoolean))
                                  : _emitter._typeToCSharpConverter.ToCSharp(node.Type);
@@ -282,7 +282,6 @@ internal partial class CSharpEmitter
             _emitter._assignedNames[local] = name;
             if (isCqlBoolean)
                 _emitter._cqlBooleanLocals.Add(local);
-                _emitter._cqlBooleanNames.Add(name);
             var statement = $"{typeSyntax} {name} = {code};";
             _statements.Add(() => statement);
 

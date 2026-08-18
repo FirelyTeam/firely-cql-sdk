@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS137FHIRSUDTxInitEngagement", "1.0.000")]
 public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleton<CMS137FHIRSUDTxInitEngagement_1_0_000>
 {
@@ -196,9 +196,9 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     return ah_;
                 }
 
-                return /* CQL 'and' (41:19-44:37) */ (/* CQL 'and' (41:19-42:84) */ (t_
-                    && u_())
-                    && v_());
+                return t_
+                    /* CQL 'and' (41:19-42:84) */ && u_()
+                    /* CQL 'and' (41:19-44:37) */ && v_();
             }
 
             CqlBoolean p_ = context.Operators.WhereAny<Condition>(n_, o_);
@@ -333,8 +333,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     return !((bool?)(bn_ is null));
                 }
 
-                return /* CQL 'and' (70:19-70:135) */ (bc_
-                    && bd_());
+                return bc_
+                    /* CQL 'and' (70:19-70:135) */ && bd_();
             }
 
             CqlBoolean ap_ = context.Operators.WhereAny<Encounter>((IEnumerable<Encounter>)an_, ao_);
@@ -399,8 +399,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     return !((bool?)(ct_ is null));
                 }
 
-                return /* CQL 'and' (76:21-76:120) */ (co_
-                    && cp_());
+                return co_
+                    /* CQL 'and' (76:21-76:120) */ && cp_();
             }
 
             CqlBoolean cb_ = context.Operators.WhereAny<Encounter>((IEnumerable<Encounter>)bz_, ca_);
@@ -429,8 +429,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     return dg_;
                 }
 
-                return /* CQL 'and' */ (db_
-                    && dc_());
+                return db_
+                    /* CQL 'and' */ && dc_();
             }
 
             CqlBoolean cw_ = context.Operators.WhereAny<Medication>(cu_, cv_);
@@ -460,8 +460,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     return dt_;
                 }
 
-                return /* CQL 'and' */ (do_
-                    && dp_());
+                return do_
+                    /* CQL 'and' */ && dp_();
             }
 
             CqlBoolean dj_ = context.Operators.WhereAny<Medication>(dh_, di_);
@@ -503,8 +503,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     return !((bool?)(eo_ is null));
                 }
 
-                return /* CQL 'and' (82:21-82:116) */ (ej_
-                    && ek_());
+                return ej_
+                    /* CQL 'and' (82:21-82:116) */ && ek_();
             }
 
             CqlBoolean dx_ = context.Operators.WhereAny<Encounter>((IEnumerable<Encounter>)dv_, dw_);
@@ -541,9 +541,9 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             return !l_;
         }
 
-        return /* CQL 'and' (34:3-36:58) */ (/* CQL 'and' (34:3-35:65) */ (i_
-            && !((bool?)((this.First_SUD_Episode_During_Measurement_Period(context)) is null)))
-            && j_());
+        return i_
+            /* CQL 'and' (34:3-35:65) */ && !((bool?)((this.First_SUD_Episode_During_Measurement_Period(context)) is null))
+            /* CQL 'and' (34:3-36:58) */ && j_();
     }
 
 
@@ -696,8 +696,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     return !aj_;
                 }
 
-                return /* CQL 'and' (104:19-105:65) */ (x_
-                    && y_());
+                return x_
+                    /* CQL 'and' (104:19-105:65) */ && y_();
             }
 
             CqlBoolean l_ = context.Operators.WhereAny<Encounter>((IEnumerable<Encounter>)j_, k_);
@@ -779,8 +779,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     return !bp_;
                 }
 
-                return /* CQL 'and' (111:21-112:67) */ (bj_
-                    && bk_());
+                return bj_
+                    /* CQL 'and' (111:21-112:67) */ && bk_();
             }
 
             CqlBoolean ax_ = context.Operators.WhereAny<Encounter>((IEnumerable<Encounter>)av_, aw_);
@@ -830,8 +830,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     return am_;
                 }
 
-                return /* CQL 'and' */ (ah_
-                    && ai_());
+                return ah_
+                    /* CQL 'and' */ && ai_();
             }
 
             CqlBoolean ac_ = context.Operators.WhereAny<Medication>(aa_, ab_);
@@ -861,8 +861,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     return az_;
                 }
 
-                return /* CQL 'and' */ (au_
-                    && av_());
+                return au_
+                    /* CQL 'and' */ && av_();
             }
 
             CqlBoolean ap_ = context.Operators.WhereAny<Medication>(an_, ao_);
@@ -1049,8 +1049,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             return e_;
         }
 
-        return /* CQL 'or' (97:3-98:64) */ (b_
-            || c_());
+        return b_
+            /* CQL 'or' (97:3-98:64) */ || c_();
     }
 
 
@@ -1131,13 +1131,13 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlDate aw_ = context.Operators.Add(InitiationTreatmentDate, av_);
                     CqlInterval<CqlDate> ax_ = context.Operators.Interval(InitiationTreatmentDate, aw_, false, true);
                     CqlBoolean ay_ = context.Operators.In<CqlDate>(au_, ax_, (string)default);
-                    return /* CQL 'and' (151:16-151:107) */ (ay_
-                        && !((bool?)(InitiationTreatmentDate is null)));
+                    return ay_
+                        /* CQL 'and' (151:16-151:107) */ && !((bool?)(InitiationTreatmentDate is null));
                 }
 
-                return /* CQL 'or' (150:21-151:107) */ (/* CQL 'and' (150:21-150:128) */ (aj_
-                    && !((bool?)(InitiationTreatmentDate is null)))
-                    || ak_());
+                return aj_
+                    /* CQL 'and' (150:21-150:128) */ && !((bool?)(InitiationTreatmentDate is null))
+                    /* CQL 'or' (150:21-151:107) */ || ak_();
             }
 
             CqlBoolean ab_ = context.Operators.WhereAny<CqlDate>((IEnumerable<CqlDate>)z_, aa_);
@@ -1166,8 +1166,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     return bl_;
                 }
 
-                return /* CQL 'and' */ (bg_
-                    && bh_());
+                return bg_
+                    /* CQL 'and' */ && bh_();
             }
 
             CqlBoolean bb_ = context.Operators.WhereAny<Medication>(az_, ba_);
@@ -1199,8 +1199,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                 CqlDate bz_ = context.Operators.Add(InitiationTreatmentDate, by_);
                 CqlInterval<CqlDate> ca_ = context.Operators.Interval(InitiationTreatmentDate, bz_, false, true);
                 CqlBoolean cb_ = context.Operators.In<CqlDate>(bx_, ca_, (string)default);
-                return /* CQL 'and' (158:23-158:130) */ (cb_
-                    && !((bool?)(InitiationTreatmentDate is null)));
+                return cb_
+                    /* CQL 'and' (158:23-158:130) */ && !((bool?)(InitiationTreatmentDate is null));
             }
 
             CqlBoolean bs_ = context.Operators.WhereAny<CqlDate>((IEnumerable<CqlDate>)bq_, br_);
@@ -1244,8 +1244,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     return ac_;
                 }
 
-                return /* CQL 'and' */ (x_
-                    && y_());
+                return x_
+                    /* CQL 'and' */ && y_();
             }
 
             CqlBoolean s_ = context.Operators.WhereAny<Medication>(q_, r_);
@@ -1277,8 +1277,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                 CqlDate aq_ = context.Operators.Add(InitiationTreatmentDate, ap_);
                 CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitiationTreatmentDate, aq_, false, true);
                 CqlBoolean as_ = context.Operators.In<CqlDate>(ao_, ar_, (string)default);
-                return /* CQL 'and' (172:21-172:129) */ (as_
-                    && !((bool?)(InitiationTreatmentDate is null)));
+                return as_
+                    /* CQL 'and' (172:21-172:129) */ && !((bool?)(InitiationTreatmentDate is null));
             }
 
             CqlBoolean aj_ = context.Operators.WhereAny<CqlDate>((IEnumerable<CqlDate>)ah_, ai_);
@@ -1343,8 +1343,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                 CqlDate bf_ = context.Operators.Add(InitiationTreatmentDate, be_);
                 CqlInterval<CqlDate> bg_ = context.Operators.Interval(InitiationTreatmentDate, bf_, false, true);
                 CqlBoolean bh_ = context.Operators.In<CqlDate>(bd_, bg_, (string)default);
-                return /* CQL 'and' (178:23-178:131) */ (bh_
-                    && !((bool?)(InitiationTreatmentDate is null)));
+                return bh_
+                    /* CQL 'and' (178:23-178:131) */ && !((bool?)(InitiationTreatmentDate is null));
             }
 
             CqlBoolean az_ = context.Operators.WhereAny<CqlDate>((IEnumerable<CqlDate>)ax_, ay_);
@@ -1367,8 +1367,8 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
     private bool? Numerator_2_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Treatment_Engagement_With_Long_Acting_Medication(context);
-        return /* CQL 'or' (164:3-165:106) */ (a_
-            || this.Has_Two_or_More_Treatment_Engagements_With_Short_Acting_Medication_or_Non_Medication_Intervention(context));
+        return a_
+            /* CQL 'or' (164:3-165:106) */ || this.Has_Two_or_More_Treatment_Engagements_With_Short_Acting_Medication_or_Non_Medication_Intervention(context);
     }
 
 

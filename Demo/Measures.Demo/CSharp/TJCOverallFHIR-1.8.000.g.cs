@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("TJCOverallFHIR", "1.8.000")]
 public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHIR_1_8_000>
 {
@@ -152,8 +152,8 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                 return n_;
             }
 
-            return /* CQL 'and' (61:21-62:92) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (61:21-62:92) */ && i_();
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -187,8 +187,8 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                 return n_;
             }
 
-            return /* CQL 'or' (42:23-43:100) */ (h_
-                || i_());
+            return h_
+                /* CQL 'or' (42:23-43:100) */ || i_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -311,11 +311,11 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                 return af_;
             }
 
-            return /* CQL 'or' (51:21-55:141) */ (/* CQL 'or' (51:27-54:125) */ (/* CQL 'or' (51:27-53:105) */ (/* CQL 'or' (51:27-52:117) */ (h_
-                || i_())
-                || j_())
-                || k_())
-                || l_());
+            return h_
+                /* CQL 'or' (51:27-52:117) */ || i_()
+                /* CQL 'or' (51:27-53:105) */ || j_()
+                /* CQL 'or' (51:27-54:125) */ || k_()
+                /* CQL 'or' (51:21-55:141) */ || l_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS156FHIRHighRiskMedsElderly", "1.0.000")]
 public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleton<CMS156FHIRHighRiskMedsElderly_1_0_000>
 {
@@ -423,8 +423,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             return l_;
         }
 
-        return /* CQL 'and' (82:3-85:38) */ (i_
-            && j_());
+        return i_
+            /* CQL 'and' (82:3-85:38) */ && j_();
     }
 
 
@@ -450,8 +450,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        return /* CQL 'or' (111:3-112:69) */ (a_
-            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context));
+        return a_
+            /* CQL 'or' (111:3-112:69) */ || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
     }
 
 
@@ -504,9 +504,9 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                         return aj_;
                     }
 
-                    return /* CQL 'and' (253:12-256:9) */ (/* CQL 'and' (253:14-254:71) */ (!z_
-                        && aa_())
-                        && ab_());
+                    return (CqlBoolean)!z_
+                        /* CQL 'and' (253:14-254:71) */ && aa_()
+                        /* CQL 'and' (253:12-256:9) */ && ab_();
                 }
 
 
@@ -561,17 +561,17 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                         return br_;
                     }
 
-                    return /* CQL 'and' (257:12-262:9) */ (/* CQL 'and' (257:14-260:97) */ (/* CQL 'and' (257:14-259:146) */ (/* CQL 'and' (257:14-258:71) */ (aq_
-                        && ar_())
-                        && as_())
-                        && at_())
-                        && au_());
+                    return aq_
+                        /* CQL 'and' (257:14-258:71) */ && ar_()
+                        /* CQL 'and' (257:14-259:146) */ && as_()
+                        /* CQL 'and' (257:14-260:97) */ && at_()
+                        /* CQL 'and' (257:12-262:9) */ && au_();
                 }
 
-                return /* CQL 'or' (250:17-262:9) */ (/* CQL 'or' (250:17-256:9) */ (/* CQL 'and' (250:17-252:7) */ (l_
-                    && m_())
-                    || n_())
-                    || o_());
+                return l_
+                    /* CQL 'and' (250:17-252:7) */ && m_()
+                    /* CQL 'or' (250:17-256:9) */ || n_()
+                    /* CQL 'or' (250:17-262:9) */ || o_();
             }
 
             CqlBoolean h_ = context.Operators.WhereAny<MedicationRequest>(f_, g_);
@@ -613,8 +613,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return ej_;
                 }
 
-                return /* CQL 'and' */ (ee_
-                    && ef_());
+                return ee_
+                    /* CQL 'and' */ && ef_();
             }
 
             CqlBoolean dz_ = context.Operators.WhereAny<Medication>(dx_, dy_);
@@ -645,8 +645,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return ew_;
                 }
 
-                return /* CQL 'and' */ (er_
-                    && es_());
+                return er_
+                    /* CQL 'and' */ && es_();
             }
 
             CqlBoolean em_ = context.Operators.WhereAny<Medication>(ek_, el_);
@@ -678,8 +678,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return fj_;
                 }
 
-                return /* CQL 'and' */ (fe_
-                    && ff_());
+                return fe_
+                    /* CQL 'and' */ && ff_();
             }
 
             CqlBoolean ez_ = context.Operators.WhereAny<Medication>(ex_, ey_);
@@ -710,8 +710,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return fw_;
                 }
 
-                return /* CQL 'and' */ (fr_
-                    && fs_());
+                return fr_
+                    /* CQL 'and' */ && fs_();
             }
 
             CqlBoolean fm_ = context.Operators.WhereAny<Medication>(fk_, fl_);
@@ -744,8 +744,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return gj_;
                 }
 
-                return /* CQL 'and' */ (ge_
-                    && gf_());
+                return ge_
+                    /* CQL 'and' */ && gf_();
             }
 
             CqlBoolean fz_ = context.Operators.WhereAny<Medication>(fx_, fy_);
@@ -776,8 +776,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return gw_;
                 }
 
-                return /* CQL 'and' */ (gr_
-                    && gs_());
+                return gr_
+                    /* CQL 'and' */ && gs_();
             }
 
             CqlBoolean gm_ = context.Operators.WhereAny<Medication>(gk_, gl_);
@@ -810,8 +810,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return hj_;
                 }
 
-                return /* CQL 'and' */ (he_
-                    && hf_());
+                return he_
+                    /* CQL 'and' */ && hf_();
             }
 
             CqlBoolean gz_ = context.Operators.WhereAny<Medication>(gx_, gy_);
@@ -842,8 +842,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return hw_;
                 }
 
-                return /* CQL 'and' */ (hr_
-                    && hs_());
+                return hr_
+                    /* CQL 'and' */ && hs_();
             }
 
             CqlBoolean hm_ = context.Operators.WhereAny<Medication>(hk_, hl_);
@@ -877,8 +877,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return ik_;
                 }
 
-                return /* CQL 'and' */ (ie_
-                    && if_());
+                return ie_
+                    /* CQL 'and' */ && if_();
             }
 
             CqlBoolean hz_ = context.Operators.WhereAny<Medication>(hx_, hy_);
@@ -910,8 +910,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return ix_;
                 }
 
-                return /* CQL 'and' */ (is_
-                    && it_());
+                return is_
+                    /* CQL 'and' */ && it_();
             }
 
             CqlBoolean in_ = context.Operators.WhereAny<Medication>(il_, im_);
@@ -944,8 +944,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return jk_;
                 }
 
-                return /* CQL 'and' */ (jf_
-                    && jg_());
+                return jf_
+                    /* CQL 'and' */ && jg_();
             }
 
             CqlBoolean ja_ = context.Operators.WhereAny<Medication>(iy_, iz_);
@@ -976,8 +976,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return jx_;
                 }
 
-                return /* CQL 'and' */ (js_
-                    && jt_());
+                return js_
+                    /* CQL 'and' */ && jt_();
             }
 
             CqlBoolean jn_ = context.Operators.WhereAny<Medication>(jl_, jm_);
@@ -1010,8 +1010,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return kk_;
                 }
 
-                return /* CQL 'and' */ (kf_
-                    && kg_());
+                return kf_
+                    /* CQL 'and' */ && kg_();
             }
 
             CqlBoolean ka_ = context.Operators.WhereAny<Medication>(jy_, jz_);
@@ -1042,8 +1042,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return kx_;
                 }
 
-                return /* CQL 'and' */ (ks_
-                    && kt_());
+                return ks_
+                    /* CQL 'and' */ && kt_();
             }
 
             CqlBoolean kn_ = context.Operators.WhereAny<Medication>(kl_, km_);
@@ -1076,8 +1076,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return lk_;
                 }
 
-                return /* CQL 'and' */ (lf_
-                    && lg_());
+                return lf_
+                    /* CQL 'and' */ && lg_();
             }
 
             CqlBoolean la_ = context.Operators.WhereAny<Medication>(ky_, kz_);
@@ -1108,8 +1108,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return lx_;
                 }
 
-                return /* CQL 'and' */ (ls_
-                    && lt_());
+                return ls_
+                    /* CQL 'and' */ && lt_();
             }
 
             CqlBoolean ln_ = context.Operators.WhereAny<Medication>(ll_, lm_);
@@ -1142,8 +1142,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return mk_;
                 }
 
-                return /* CQL 'and' */ (mf_
-                    && mg_());
+                return mf_
+                    /* CQL 'and' */ && mg_();
             }
 
             CqlBoolean ma_ = context.Operators.WhereAny<Medication>(ly_, lz_);
@@ -1174,8 +1174,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return mx_;
                 }
 
-                return /* CQL 'and' */ (ms_
-                    && mt_());
+                return ms_
+                    /* CQL 'and' */ && mt_();
             }
 
             CqlBoolean mn_ = context.Operators.WhereAny<Medication>(ml_, mm_);
@@ -1291,8 +1291,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return y_;
                 }
 
-                return /* CQL 'and' */ (t_
-                    && u_());
+                return t_
+                    /* CQL 'and' */ && u_();
             }
 
             CqlBoolean o_ = context.Operators.WhereAny<Medication>(m_, n_);
@@ -1349,16 +1349,16 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                         return u_;
                     }
 
-                    return /* CQL 'and' (311:14-313:11) */ (o_
-                        && p_());
+                    return o_
+                        /* CQL 'and' (311:14-313:11) */ && p_();
                 }
 
-                return /* CQL 'or' (310:11-314:7) */ (j_
-                    || k_());
+                return j_
+                    /* CQL 'or' (310:11-314:7) */ || k_();
             }
 
-            if (((bool?)(/* CQL 'and' (309:15-314:7) */ ((CqlBoolean)(!((bool?)(e_ is null)))
-                && f_()))) ?? false)
+            if ((CqlBoolean)(!((bool?)(e_ is null)))
+                /* CQL 'and' (309:15-314:7) */ && f_())
             {
                 MedicationRequest.DispenseRequestComponent v_ = Order?.DispenseRequest;
                 Quantity w_ = v_?.Quantity;
@@ -1581,8 +1581,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return x_;
                 }
 
-                return /* CQL 'and' */ (s_
-                    && t_());
+                return s_
+                    /* CQL 'and' */ && t_();
             }
 
             CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1626,8 +1626,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                         return ax_;
                     }
 
-                    return /* CQL 'and' */ (as_
-                        && at_());
+                    return as_
+                        /* CQL 'and' */ && at_();
                 }
 
                 CqlBoolean an_ = context.Operators.WhereAny<Medication>(al_, am_);
@@ -1652,8 +1652,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             return ak_;
         }
 
-        return /* CQL 'or' (146:3-153:5) */ (j_
-            || k_());
+        return j_
+            /* CQL 'or' (146:3-153:5) */ || k_();
     }
 
 
@@ -1667,9 +1667,9 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     {
         IEnumerable<MedicationRequest> a_ = this.Same_High_Risk_Medications_Ordered_on_Different_Days(context);
         CqlBoolean b_ = context.Operators.Exists<MedicationRequest>(a_);
-        return /* CQL 'or' (115:3-117:63) */ (/* CQL 'or' (115:3-116:58) */ (b_
-            || this.Two_High_Risk_Medications_with_Prolonged_Duration(context))
-            || this.High_Risk_Medications_with_Average_Daily_Dose_Criteria(context));
+        return b_
+            /* CQL 'or' (115:3-116:58) */ || this.Two_High_Risk_Medications_with_Prolonged_Duration(context)
+            /* CQL 'or' (115:3-117:63) */ || this.High_Risk_Medications_with_Average_Daily_Dose_Criteria(context);
     }
 
 
@@ -1701,8 +1701,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return u_;
                 }
 
-                return /* CQL 'and' */ (p_
-                    && q_());
+                return p_
+                    /* CQL 'and' */ && q_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -1781,8 +1781,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return z_;
                 }
 
-                return /* CQL 'and' */ (u_
-                    && v_());
+                return u_
+                    /* CQL 'and' */ && v_();
             }
 
             CqlBoolean p_ = context.Operators.WhereAny<Medication>(n_, o_);
@@ -1846,8 +1846,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return u_;
                 }
 
-                return /* CQL 'and' */ (p_
-                    && q_());
+                return p_
+                    /* CQL 'and' */ && q_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -1977,8 +1977,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     return z_;
                 }
 
-                return /* CQL 'and' */ (u_
-                    && v_());
+                return u_
+                    /* CQL 'and' */ && v_();
             }
 
             CqlBoolean p_ = context.Operators.WhereAny<Medication>(n_, o_);
@@ -2076,13 +2076,13 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return !ac_;
             }
 
-            return /* CQL 'and' (163:8-172:5) */ (q_
-                && r_());
+            return q_
+                /* CQL 'and' (163:8-172:5) */ && r_();
         }
 
-        return /* CQL 'or' (156:3-172:5) */ (/* CQL 'and' (156:3-162:3) */ (a_
-            && b_())
-            || c_());
+        return a_
+            /* CQL 'and' (156:3-162:3) */ && b_()
+            /* CQL 'or' (156:3-172:5) */ || c_();
     }
 
 
@@ -2098,12 +2098,12 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
         CqlBoolean b_() {
             CqlBoolean c_ = this.Numerator_1(context);
-            return /* CQL 'and' (231:8-233:5) */ (c_
-                && !(this.Numerator_2(context)));
+            return c_
+                /* CQL 'and' (231:8-233:5) */ && !(this.Numerator_2(context));
         }
 
-        return /* CQL 'or' (230:3-233:5) */ (a_
-            || b_());
+        return a_
+            /* CQL 'or' (230:3-233:5) */ || b_();
     }
 
 

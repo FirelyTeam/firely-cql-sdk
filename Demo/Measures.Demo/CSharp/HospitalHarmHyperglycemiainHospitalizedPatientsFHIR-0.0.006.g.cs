@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR", "0.0.006")]
 public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006 : ILibrary, ISingleton<HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006>
 {
@@ -235,8 +235,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                     return t_;
                 }
 
-                return /* CQL 'and' (100:21-101:133) */ (n_
-                    && o_());
+                return n_
+                    /* CQL 'and' (100:21-101:133) */ && o_();
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<Condition>(g_, h_);
@@ -288,8 +288,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                     return ab_;
                 }
 
-                return /* CQL 'and' */ (w_
-                    && x_());
+                return w_
+                    /* CQL 'and' */ && x_();
             }
 
             CqlBoolean p_ = context.Operators.WhereAny<Medication>(n_, o_);
@@ -319,8 +319,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                 return ak_;
             }
 
-            return /* CQL 'and' (120:13-121:139) */ (af_
-                && ag_());
+            return af_
+                /* CQL 'and' (120:13-121:139) */ && ag_();
         }
 
         IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)?> k_ = context.Operators.SelectWhere<ValueTuple<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, MedicationAdministration>, (CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)?>(h_, i_, j_);
@@ -371,9 +371,9 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                     return v_;
                 }
 
-                return /* CQL 'and' (130:17-132:48) */ (/* CQL 'and' (130:17-131:44) */ (m_
-                    && n_())
-                    && o_());
+                return m_
+                    /* CQL 'and' (130:17-131:44) */ && n_()
+                    /* CQL 'and' (130:17-132:48) */ && o_();
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<Observation>(g_, h_);
@@ -564,9 +564,9 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                         return ag_;
                     }
 
-                    return /* CQL 'and' (145:17-147:90) */ (/* CQL 'and' (145:23-146:58) */ (w_
-                        && x_())
-                        && y_());
+                    return w_
+                        /* CQL 'and' (145:23-146:58) */ && x_()
+                        /* CQL 'and' (145:17-147:90) */ && y_();
                 }
 
                 CqlBoolean o_ = context.Operators.WhereAny<Observation>(m_, n_);
@@ -593,9 +593,9 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                         return at_;
                     }
 
-                    return /* CQL 'and' (150:17-152:90) */ (/* CQL 'and' (150:23-151:59) */ (aj_
-                        && ak_())
-                        && al_());
+                    return aj_
+                        /* CQL 'and' (150:23-151:59) */ && ak_()
+                        /* CQL 'and' (150:17-152:90) */ && al_();
                 }
 
                 CqlBoolean q_ = context.Operators.WhereAny<Observation>(m_, p_);
@@ -613,8 +613,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                         return bb_;
                     }
 
-                    return /* CQL 'and' (155:17-156:90) */ (aw_
-                        && ax_());
+                    return aw_
+                        /* CQL 'and' (155:17-156:90) */ && ax_();
                 }
 
                 CqlBoolean s_ = context.Operators.WhereAny<Observation>(m_, r_);
@@ -681,13 +681,13 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                         return ae_;
                     }
 
-                    return /* CQL 'and' (78:24-81:21) */ (/* CQL 'and' (78:26-79:109) */ (s_
-                        && t_())
-                        && u_());
+                    return s_
+                        /* CQL 'and' (78:26-79:109) */ && t_()
+                        /* CQL 'and' (78:24-81:21) */ && u_();
                 }
 
-                (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)? r_ = (CqlTupleMetadata_FNeERNKXWKJeEjWXREHDLePdY, n_, o_, (bool?)(/* CQL 'or' (77:40-82:17) */ (p_
-                    || q_())));
+                (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)? r_ = (CqlTupleMetadata_FNeERNKXWKJeEjWXREHDLePdY, n_, o_, (bool?)(p_
+                    /* CQL 'or' (77:40-82:17) */ || q_()));
                 return r_;
             }
 

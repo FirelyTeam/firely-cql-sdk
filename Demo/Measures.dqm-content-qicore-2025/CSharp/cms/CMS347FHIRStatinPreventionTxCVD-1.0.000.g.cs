@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS347FHIRStatinPreventionTxCVD", "1.0.000")]
 public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingleton<CMS347FHIRStatinPreventionTxCVD_1_0_000>
 {
@@ -263,14 +263,14 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return z_;
             }
 
-            return /* CQL 'or' (250:52-254:3) */ (/* CQL 'or' (250:54-252:66) */ (/* CQL 'or' (250:54-251:66) */ (h_
-                || i_())
-                || j_())
-                || k_());
+            return h_
+                /* CQL 'or' (250:54-251:66) */ || i_()
+                /* CQL 'or' (250:54-252:66) */ || j_()
+                /* CQL 'or' (250:52-254:3) */ || k_();
         }
 
-        return /* CQL 'implies' (250:3-254:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_());
+        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+            /* CQL 'implies' (250:3-254:3) */ || c_();
     }
 
 
@@ -307,8 +307,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
             CqlDateTime al_ = context.Operators.End(ak_);
             CqlBoolean am_ = context.Operators.SameOrBefore(aj_, al_, "day");
-            return /* CQL 'and' (116:7-117:41) */ (am_
-                && this.isVerified(context, ASCVDDiagnosis as Condition));
+            return am_
+                /* CQL 'and' (116:7-117:41) */ && this.isVerified(context, ASCVDDiagnosis as Condition);
         }
 
         IEnumerable<Condition> t_ = context.Operators.Where<Condition>(r_, s_);
@@ -375,8 +375,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return bd_;
             }
 
-            return /* CQL 'and' (123:9-124:49) */ (as_
-                && at_());
+            return as_
+                /* CQL 'and' (123:9-124:49) */ && at_();
         }
 
         IEnumerable<Procedure> ag_ = context.Operators.Where<Procedure>(ae_, af_);
@@ -434,8 +434,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return ak_;
             }
 
-            return /* CQL 'and' (230:5-231:49) */ (af_
-                && ag_());
+            return af_
+                /* CQL 'and' (230:5-231:49) */ && ag_();
         }
 
         IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
@@ -460,8 +460,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             return e_;
         }
 
-        return /* CQL 'and' (59:3-60:70) */ (b_
-            && c_());
+        return b_
+            /* CQL 'and' (59:3-60:70) */ && c_();
     }
 
 
@@ -530,9 +530,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return v_;
             }
 
-            return /* CQL 'and' (182:5-184:74) */ (/* CQL 'and' (182:11-183:96) */ (h_
-                && i_())
-                && j_());
+            return h_
+                /* CQL 'and' (182:11-183:96) */ && i_()
+                /* CQL 'and' (182:5-184:74) */ && j_();
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -557,8 +557,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
             CqlDateTime h_ = context.Operators.End(g_);
             CqlBoolean i_ = context.Operators.SameOrBefore(f_, h_, "day");
-            return /* CQL 'and' (176:7-177:47) */ (i_
-                && this.isVerified(context, Hypercholesterolemia as Condition));
+            return i_
+                /* CQL 'and' (176:7-177:47) */ && this.isVerified(context, Hypercholesterolemia as Condition);
         }
 
         IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
@@ -591,9 +591,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             return !i_;
         }
 
-        return /* CQL 'and' (194:3-198:86) */ (/* CQL 'and' (194:3-197:5) */ (a_
-            && b_())
-            && c_());
+        return a_
+            /* CQL 'and' (194:3-197:5) */ && b_()
+            /* CQL 'and' (194:3-198:86) */ && c_();
     }
 
 
@@ -613,8 +613,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             return d_;
         }
 
-        return /* CQL 'and' (63:3-64:70) */ (a_
-            && b_());
+        return a_
+            /* CQL 'and' (63:3-64:70) */ && b_();
     }
 
 
@@ -633,8 +633,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis as Condition);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             CqlBoolean g_ = context.Operators.Overlaps(e_, f_, "day");
-            return /* CQL 'and' (140:7-141:44) */ (g_
-                && this.isVerified(context, DiabetesDiagnosis as Condition));
+            return g_
+                /* CQL 'and' (140:7-141:44) */ && this.isVerified(context, DiabetesDiagnosis as Condition);
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
@@ -678,14 +678,14 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return !s_;
             }
 
-            return /* CQL 'and' (206:9-209:5) */ (/* CQL 'and' (206:11-207:64) */ (!m_
-                && n_())
-                && o_());
+            return (CqlBoolean)!m_
+                /* CQL 'and' (206:11-207:64) */ && n_()
+                /* CQL 'and' (206:9-209:5) */ && o_();
         }
 
-        return /* CQL 'and' (204:3-209:5) */ (/* CQL 'and' (204:3-205:32) */ (j_
-            && this.Has_Diabetes_Diagnosis(context))
-            && k_());
+        return j_
+            /* CQL 'and' (204:3-205:32) */ && this.Has_Diabetes_Diagnosis(context)
+            /* CQL 'and' (204:3-209:5) */ && k_();
     }
 
 
@@ -705,8 +705,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             return d_;
         }
 
-        return /* CQL 'and' (67:3-68:70) */ (a_
-            && b_());
+        return a_
+            /* CQL 'and' (67:3-68:70) */ && b_();
     }
 
 
@@ -755,9 +755,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return y_;
             }
 
-            return /* CQL 'and' (244:7-246:67) */ (/* CQL 'and' (244:13-245:81) */ (m_
-                && n_())
-                && o_());
+            return m_
+                /* CQL 'and' (244:13-245:81) */ && n_()
+                /* CQL 'and' (244:7-246:67) */ && o_();
         }
 
         CqlBoolean i_ = context.Operators.WhereAny<Observation>(g_, h_);
@@ -801,15 +801,15 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return s_;
             }
 
-            return !((bool?)(/* CQL 'or' (214:13-218:5) */ (/* CQL 'or' (214:15-216:59) */ (/* CQL 'or' (214:15-215:50) */ (m_
-                || n_())
-                || o_())
-                || this.Has_Diabetes_Diagnosis(context))));
+            return !((bool?)(m_
+                /* CQL 'or' (214:15-215:50) */ || n_()
+                /* CQL 'or' (214:15-216:59) */ || o_()
+                /* CQL 'or' (214:13-218:5) */ || this.Has_Diabetes_Diagnosis(context)));
         }
 
-        return /* CQL 'and' (212:3-218:5) */ (/* CQL 'and' (212:3-213:35) */ (j_
-            && this.Ten_Year_CVD_Risk_is_High(context))
-            && k_());
+        return j_
+            /* CQL 'and' (212:3-213:35) */ && this.Ten_Year_CVD_Risk_is_High(context)
+            /* CQL 'and' (212:3-218:5) */ && k_();
     }
 
 
@@ -829,8 +829,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             return d_;
         }
 
-        return /* CQL 'and' (71:3-72:70) */ (a_
-            && b_());
+        return a_
+            /* CQL 'and' (71:3-72:70) */ && b_();
     }
 
 
@@ -908,8 +908,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ExclusionDiagnosis);
             CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
             CqlBoolean n_ = context.Operators.Overlaps(l_, m_, "day");
-            return /* CQL 'and' (91:7-92:45) */ (n_
-                && this.isVerified(context, ExclusionDiagnosis));
+            return n_
+                /* CQL 'and' (91:7-92:45) */ && this.isVerified(context, ExclusionDiagnosis);
         }
 
         CqlBoolean k_ = context.Operators.WhereAny<Condition>(i_, j_);
@@ -944,8 +944,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return o_;
             }
 
-            return /* CQL 'and' (134:7-135:72) */ (i_
-                && j_());
+            return i_
+                /* CQL 'and' (134:7-135:72) */ && j_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<AllergyIntolerance>(b_, c_);
@@ -974,8 +974,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HepatitisLiverDisease as Condition);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             CqlBoolean m_ = context.Operators.Overlaps(k_, l_, "day");
-            return /* CQL 'and' (154:7-155:48) */ (m_
-                && this.isVerified(context, HepatitisLiverDisease as Condition));
+            return m_
+                /* CQL 'and' (154:7-155:48) */ && this.isVerified(context, HepatitisLiverDisease as Condition);
         }
 
         CqlBoolean j_ = context.Operators.WhereAny<Condition>(h_, i_);
@@ -998,8 +998,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, StatinMuscleSymptom as Condition);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             CqlBoolean g_ = context.Operators.Overlaps(e_, f_, "day");
-            return /* CQL 'and' (170:7-171:46) */ (g_
-                && this.isVerified(context, StatinMuscleSymptom as Condition));
+            return g_
+                /* CQL 'and' (170:7-171:46) */ && this.isVerified(context, StatinMuscleSymptom as Condition);
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
@@ -1022,8 +1022,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ESRD as Condition);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             CqlBoolean g_ = context.Operators.Overlaps(e_, f_, "day");
-            return /* CQL 'and' (146:7-147:31) */ (g_
-                && this.isVerified(context, ESRD as Condition));
+            return g_
+                /* CQL 'and' (146:7-147:31) */ && this.isVerified(context, ESRD as Condition);
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Condition>(b_, c_);
@@ -1114,9 +1114,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                     return ag_;
                 }
 
-                return /* CQL 'and' (163:19-165:67) */ (/* CQL 'and' (163:19-164:72) */ (u_
-                    && v_())
-                    && w_());
+                return u_
+                    /* CQL 'and' (163:19-164:72) */ && v_()
+                    /* CQL 'and' (163:19-165:67) */ && w_();
             }
 
             CqlBoolean p_ = context.Operators.WhereAny<Encounter>(n_, o_);
@@ -1137,14 +1137,14 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Allergy_to_Statin(context);
-        return /* CQL 'or' (96:3-103:59) */ (/* CQL 'or' (96:3-102:39) */ (/* CQL 'or' (96:3-101:27) */ (/* CQL 'or' (96:3-100:46) */ (/* CQL 'or' (96:3-99:49) */ (/* CQL 'or' (96:3-98:69) */ (/* CQL 'or' (96:3-97:37) */ (a_
-            || Hospice_6_18_000.Instance.Has_Hospice_Services(context))
-            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))
-            || this.Has_Hepatitis_or_Liver_Disease_Diagnosis(context))
-            || this.Has_Statin_Associated_Muscle_Symptoms(context))
-            || this.Has_ESRD_Diagnosis(context))
-            || this.Has_Adverse_Reaction_to_Statin(context))
-            || this.Has_Medical_Reason_for_Not_Ordering_Statin_Therapy(context));
+        return a_
+            /* CQL 'or' (96:3-97:37) */ || Hospice_6_18_000.Instance.Has_Hospice_Services(context)
+            /* CQL 'or' (96:3-98:69) */ || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context)
+            /* CQL 'or' (96:3-99:49) */ || this.Has_Hepatitis_or_Liver_Disease_Diagnosis(context)
+            /* CQL 'or' (96:3-100:46) */ || this.Has_Statin_Associated_Muscle_Symptoms(context)
+            /* CQL 'or' (96:3-101:27) */ || this.Has_ESRD_Diagnosis(context)
+            /* CQL 'or' (96:3-102:39) */ || this.Has_Adverse_Reaction_to_Statin(context)
+            /* CQL 'or' (96:3-103:59) */ || this.Has_Medical_Reason_for_Not_Ordering_Statin_Therapy(context);
     }
 
 
@@ -1176,8 +1176,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                     return ag_;
                 }
 
-                return /* CQL 'and' */ (ab_
-                    && ac_());
+                return ab_
+                    /* CQL 'and' */ && ac_();
             }
 
             CqlBoolean w_ = context.Operators.WhereAny<Medication>(u_, v_);
@@ -1207,8 +1207,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                     return at_;
                 }
 
-                return /* CQL 'and' */ (ao_
-                    && ap_());
+                return ao_
+                    /* CQL 'and' */ && ap_();
             }
 
             CqlBoolean aj_ = context.Operators.WhereAny<Medication>(ah_, ai_);
@@ -1239,8 +1239,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                     return bg_;
                 }
 
-                return /* CQL 'and' */ (bb_
-                    && bc_());
+                return bb_
+                    /* CQL 'and' */ && bc_();
             }
 
             CqlBoolean aw_ = context.Operators.WhereAny<Medication>(au_, av_);
@@ -1287,9 +1287,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return bw_;
             }
 
-            return /* CQL 'and' (237:5-239:113) */ (/* CQL 'and' (237:11-238:59) */ (bk_
-                && bl_())
-                && bm_());
+            return bk_
+                /* CQL 'and' (237:11-238:59) */ && bl_()
+                /* CQL 'and' (237:5-239:113) */ && bm_();
         }
 
         IEnumerable<MedicationRequest> t_ = context.Operators.Where<MedicationRequest>(r_, s_);
@@ -1325,8 +1325,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                     return ag_;
                 }
 
-                return /* CQL 'and' */ (ab_
-                    && ac_());
+                return ab_
+                    /* CQL 'and' */ && ac_();
             }
 
             CqlBoolean w_ = context.Operators.WhereAny<Medication>(u_, v_);
@@ -1356,8 +1356,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                     return at_;
                 }
 
-                return /* CQL 'and' */ (ao_
-                    && ap_());
+                return ao_
+                    /* CQL 'and' */ && ap_();
             }
 
             CqlBoolean aj_ = context.Operators.WhereAny<Medication>(ah_, ai_);
@@ -1388,8 +1388,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                     return bg_;
                 }
 
-                return /* CQL 'and' */ (bb_
-                    && bc_());
+                return bb_
+                    /* CQL 'and' */ && bc_();
             }
 
             CqlBoolean aw_ = context.Operators.WhereAny<Medication>(au_, av_);
@@ -1426,8 +1426,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return bw_;
             }
 
-            return /* CQL 'and' (190:5-191:58) */ (bq_
-                && br_());
+            return bq_
+                /* CQL 'and' (190:5-191:58) */ && br_();
         }
 
         IEnumerable<MedicationRequest> t_ = context.Operators.Where<MedicationRequest>(r_, s_);
@@ -1452,8 +1452,8 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             return e_;
         }
 
-        return /* CQL 'or' (106:3-107:63) */ (b_
-            || c_());
+        return b_
+            /* CQL 'or' (106:3-107:63) */ || c_();
     }
 
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS1173FHIRDiagnosticDelayVTE", "1.0.000")]
 public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleton<CMS1173FHIRDiagnosticDelayVTE_1_0_000>
 {
@@ -192,8 +192,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 return y_;
             }
 
-            return /* CQL 'and' (66:5-67:127) */ (n_
-                && o_());
+            return n_
+                /* CQL 'and' (66:5-67:127) */ && o_();
         }
 
         IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
@@ -249,16 +249,16 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                         return r_;
                     }
 
-                    return /* CQL 'and' (87:11-88:72) */ (o_
-                        && p_());
+                    return o_
+                        /* CQL 'and' (87:11-88:72) */ && p_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Condition>(l_, m_);
                 return n_;
             }
 
-            return /* CQL 'or' (85:5-89:7) */ (h_
-                || i_());
+            return h_
+                /* CQL 'or' (85:5-89:7) */ || i_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -300,8 +300,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 return v_;
             }
 
-            return /* CQL 'and' (72:5-73:124) */ (k_
-                && l_());
+            return k_
+                /* CQL 'and' (72:5-73:124) */ && l_();
         }
 
         IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
@@ -352,14 +352,14 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 return z_;
             }
 
-            return /* CQL 'or' (202:52-206:3) */ (/* CQL 'or' (202:54-204:66) */ (/* CQL 'or' (202:54-203:66) */ (h_
-                || i_())
-                || j_())
-                || k_());
+            return h_
+                /* CQL 'or' (202:54-203:66) */ || i_()
+                /* CQL 'or' (202:54-204:66) */ || j_()
+                /* CQL 'or' (202:52-206:3) */ || k_();
         }
 
-        return /* CQL 'implies' (202:3-206:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_());
+        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+            /* CQL 'implies' (202:3-206:3) */ || c_();
     }
 
 
@@ -398,16 +398,16 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                         return r_;
                     }
 
-                    return /* CQL 'and' (79:11-80:80) */ (o_
-                        && p_());
+                    return o_
+                        /* CQL 'and' (79:11-80:80) */ && p_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Condition>(l_, m_);
                 return n_;
             }
 
-            return /* CQL 'or' (77:5-81:7) */ (h_
-                || i_());
+            return h_
+                /* CQL 'or' (77:5-81:7) */ || i_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -472,8 +472,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     return u_;
                 }
 
-                return /* CQL 'and' */ (p_
-                    && q_());
+                return p_
+                    /* CQL 'and' */ && q_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -503,8 +503,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 return ae_;
             }
 
-            return /* CQL 'and' (97:5-98:40) */ (z_
-                && aa_());
+            return z_
+                /* CQL 'and' (97:5-98:40) */ && aa_();
         }
 
         IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
@@ -574,13 +574,13 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                         return !((bool?)(aq_ is null));
                     }
 
-                    return /* CQL 'and' (108:14-108:86) */ (an_
-                        && ao_());
+                    return an_
+                        /* CQL 'and' (108:14-108:86) */ && ao_();
                 }
 
-                return /* CQL 'or' (107:11-109:7) */ (/* CQL 'and' (107:13-107:86) */ (ab_
-                    && ac_())
-                    || ad_());
+                return ab_
+                    /* CQL 'and' (107:13-107:86) */ && ac_()
+                    /* CQL 'or' (107:11-109:7) */ || ad_();
             }
 
 
@@ -601,13 +601,13 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     return !((bool?)(bc_ is null));
                 }
 
-                return /* CQL 'and' (110:11-110:80) */ (az_
-                    && ba_());
+                return az_
+                    /* CQL 'and' (110:11-110:80) */ && ba_();
             }
 
-            return /* CQL 'and' (106:5-110:80) */ (/* CQL 'and' (106:11-109:7) */ (r_
-                && s_())
-                && t_());
+            return r_
+                /* CQL 'and' (106:11-109:7) */ && s_()
+                /* CQL 'and' (106:5-110:80) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter VTEEncounter, Encounter IndexPCP, DiagnosticReport VTEStudy, MedicationRequest AntiCoagulantOrdered)?> h_ = context.Operators.SelectWhere<ValueTuple<Encounter, Encounter, DiagnosticReport, MedicationRequest>, (CqlTupleMetadata, Encounter VTEEncounter, Encounter IndexPCP, DiagnosticReport VTEStudy, MedicationRequest AntiCoagulantOrdered)?>(e_, f_, g_);
@@ -740,10 +740,10 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     return aq_;
                 }
 
-                return /* CQL 'and' (127:9-131:52) */ (/* CQL 'and' (127:15-130:87) */ (/* CQL 'or' (127:15-129:9) */ (s_
-                    || t_())
-                    && u_())
-                    && v_());
+                return s_
+                    /* CQL 'or' (127:15-129:9) */ || t_()
+                    /* CQL 'and' (127:15-130:87) */ && u_()
+                    /* CQL 'and' (127:9-131:52) */ && v_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Encounter>(e_, f_);
@@ -798,8 +798,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                         return ca_;
                     }
 
-                    return /* CQL 'and' (137:11-138:103) */ (bo_
-                        && bp_());
+                    return bo_
+                        /* CQL 'and' (137:11-138:103) */ && bp_();
                 }
 
                 CqlBoolean bj_ = context.Operators.WhereAny<Observation>(bh_, bi_);
@@ -836,8 +836,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                         return cv_;
                     }
 
-                    return /* CQL 'and' (141:11-142:64) */ (co_
-                        && cp_());
+                    return co_
+                        /* CQL 'and' (141:11-142:64) */ && cp_();
                 }
 
                 CqlBoolean ce_ = context.Operators.WhereAny<ServiceRequest>(cc_, cd_);
@@ -917,8 +917,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     CqlDateTime ea_ = context.Operators.End(dw_);
                     CqlInterval<CqlDateTime> eb_ = context.Operators.Interval(dz_, ea_, true, true);
                     CqlBoolean ec_ = context.Operators.Overlaps(du_, eb_, "day");
-                    return /* CQL 'and' (148:11-149:51) */ (ec_
-                        && this.isVerified(context, HospiceCareDiagnosis as Condition));
+                    return ec_
+                        /* CQL 'and' (148:11-149:51) */ && this.isVerified(context, HospiceCareDiagnosis as Condition);
                 }
 
                 CqlBoolean dt_ = context.Operators.WhereAny<Condition>(dr_, ds_);
@@ -940,21 +940,21 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     CqlDateTime en_ = context.Operators.End(ej_);
                     CqlInterval<CqlDateTime> eo_ = context.Operators.Interval(em_, en_, true, true);
                     CqlBoolean ep_ = context.Operators.Overlaps(eh_, eo_, "day");
-                    return /* CQL 'and' (152:11-153:49) */ (ep_
-                        && this.isVerified(context, HospiceCareConcern as Condition));
+                    return ep_
+                        /* CQL 'and' (152:11-153:49) */ && this.isVerified(context, HospiceCareConcern as Condition);
                 }
 
                 CqlBoolean eg_ = context.Operators.WhereAny<Condition>(ee_, ef_);
                 return eg_;
             }
 
-            return /* CQL 'or' (126:5-154:7) */ (/* CQL 'or' (126:11-150:7) */ (/* CQL 'or' (126:11-146:7) */ (/* CQL 'or' (126:11-143:7) */ (/* CQL 'or' (126:11-139:7) */ (/* CQL 'or' (126:11-135:7) */ (g_
-                || h_())
-                || i_())
-                || j_())
-                || k_())
-                || l_())
-                || m_());
+            return g_
+                /* CQL 'or' (126:11-135:7) */ || h_()
+                /* CQL 'or' (126:11-139:7) */ || i_()
+                /* CQL 'or' (126:11-143:7) */ || j_()
+                /* CQL 'or' (126:11-146:7) */ || k_()
+                /* CQL 'or' (126:11-150:7) */ || l_()
+                /* CQL 'or' (126:5-154:7) */ || m_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1003,8 +1003,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     return ac_;
                 }
 
-                return /* CQL 'and' (161:9-162:80) */ (w_
-                    && x_());
+                return w_
+                    /* CQL 'and' (161:9-162:80) */ && x_();
             }
 
             CqlBoolean h_ = context.Operators.WhereAny<Observation>(f_, g_);
@@ -1023,8 +1023,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     CqlDateTime an_ = context.Operators.End(aj_);
                     CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(am_, an_, true, true);
                     CqlBoolean ap_ = context.Operators.Overlaps(ah_, ao_, "day");
-                    return /* CQL 'and' (165:11-166:54) */ (ap_
-                        && this.isVerified(context, PalliativeCareDiagnosis as Condition));
+                    return ap_
+                        /* CQL 'and' (165:11-166:54) */ && this.isVerified(context, PalliativeCareDiagnosis as Condition);
                 }
 
                 CqlBoolean ag_ = context.Operators.WhereAny<Condition>(ae_, af_);
@@ -1046,8 +1046,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     CqlDateTime ba_ = context.Operators.End(aw_);
                     CqlInterval<CqlDateTime> bb_ = context.Operators.Interval(az_, ba_, true, true);
                     CqlBoolean bc_ = context.Operators.Overlaps(au_, bb_, "day");
-                    return /* CQL 'and' (169:11-170:52) */ (bc_
-                        && this.isVerified(context, PalliativeCareConcern as Condition));
+                    return bc_
+                        /* CQL 'and' (169:11-170:52) */ && this.isVerified(context, PalliativeCareConcern as Condition);
                 }
 
                 CqlBoolean at_ = context.Operators.WhereAny<Condition>(ar_, as_);
@@ -1135,11 +1135,11 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 return bu_;
             }
 
-            return /* CQL 'or' (160:5-177:7) */ (/* CQL 'or' (160:11-174:7) */ (/* CQL 'or' (160:11-171:7) */ (/* CQL 'or' (160:11-167:7) */ (h_
-                || i_())
-                || j_())
-                || k_())
-                || l_());
+            return h_
+                /* CQL 'or' (160:11-167:7) */ || i_()
+                /* CQL 'or' (160:11-171:7) */ || j_()
+                /* CQL 'or' (160:11-174:7) */ || k_()
+                /* CQL 'or' (160:5-177:7) */ || l_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1179,8 +1179,8 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     return !((bool?)(t_ is null));
                 }
 
-                return /* CQL 'and' (182:17-182:110) */ (p_
-                    && q_());
+                return p_
+                    /* CQL 'and' (182:17-182:110) */ && q_();
             }
 
             CqlBoolean f_ = context.Operators.WhereAny<Encounter>(d_, e_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("Hospice", "6.18.000")]
 public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
 {
@@ -147,9 +147,9 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 return ac_;
             }
 
-            return /* CQL 'and' (28:7-31:77) */ (/* CQL 'or' (28:13-30:7) */ (p_
-                || q_())
-                && r_());
+            return p_
+                /* CQL 'or' (28:13-30:7) */ || q_()
+                /* CQL 'and' (28:7-31:77) */ && r_();
         }
 
         CqlBoolean e_ = context.Operators.WhereAny<Encounter>(c_, d_);
@@ -194,8 +194,8 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                     return bc_;
                 }
 
-                return /* CQL 'and' (37:9-38:91) */ (aw_
-                    && ax_());
+                return aw_
+                    /* CQL 'and' (37:9-38:91) */ && ax_();
             }
 
             CqlBoolean ar_ = context.Operators.WhereAny<Observation>(ap_, aq_);
@@ -292,12 +292,12 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
             return ch_;
         }
 
-        return /* CQL 'or' (27:3-49:5) */ (/* CQL 'or' (27:3-45:5) */ (/* CQL 'or' (27:3-42:5) */ (/* CQL 'or' (27:3-39:5) */ (/* CQL 'or' (27:3-35:5) */ (e_
-            || f_())
-            || g_())
-            || h_())
-            || i_())
-            || j_());
+        return e_
+            /* CQL 'or' (27:3-35:5) */ || f_()
+            /* CQL 'or' (27:3-39:5) */ || g_()
+            /* CQL 'or' (27:3-42:5) */ || h_()
+            /* CQL 'or' (27:3-45:5) */ || i_()
+            /* CQL 'or' (27:3-49:5) */ || j_();
     }
 
 

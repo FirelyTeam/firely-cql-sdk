@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS131FHIRDiabetesEyeExam", "1.0.000")]
 public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CMS131FHIRDiabetesEyeExam_1_0_000>
 {
@@ -234,9 +234,9 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             return u_;
         }
 
-        return /* CQL 'and' (41:3-47:5) */ (/* CQL 'and' (41:3-44:42) */ (j_
-            && k_())
-            && l_());
+        return j_
+            /* CQL 'and' (41:3-44:42) */ && k_()
+            /* CQL 'and' (41:3-47:5) */ && l_();
     }
 
 
@@ -291,11 +291,11 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        return /* CQL 'or' (64:3-68:34) */ (/* CQL 'or' (64:3-67:69) */ (/* CQL 'or' (64:3-66:74) */ (/* CQL 'or' (64:3-65:73) */ (a_
-            || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context))
-            || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context))
-            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))
-            || this.Bilateral_Absence_of_Eyes(context));
+        return a_
+            /* CQL 'or' (64:3-65:73) */ || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context)
+            /* CQL 'or' (64:3-66:74) */ || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context)
+            /* CQL 'or' (64:3-67:69) */ || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context)
+            /* CQL 'or' (64:3-68:34) */ || this.Bilateral_Absence_of_Eyes(context);
     }
 
 
@@ -410,8 +410,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
                 return p_;
             }
 
-            return /* CQL 'and' (83:5-84:87) */ (j_
-                && k_());
+            return j_
+                /* CQL 'and' (83:5-84:87) */ && k_();
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<Observation>(d_, e_);
@@ -447,8 +447,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
                 return p_;
             }
 
-            return /* CQL 'and' (113:5-114:88) */ (j_
-                && k_());
+            return j_
+                /* CQL 'and' (113:5-114:88) */ && k_();
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<Observation>(d_, e_);
@@ -484,8 +484,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
                 return p_;
             }
 
-            return /* CQL 'and' (123:5-124:89) */ (j_
-                && k_());
+            return j_
+                /* CQL 'and' (123:5-124:89) */ && k_();
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<Observation>(d_, e_);
@@ -528,8 +528,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
                 return w_;
             }
 
-            return /* CQL 'and' (118:5-119:157) */ (k_
-                && l_());
+            return k_
+                /* CQL 'and' (118:5-119:157) */ && l_();
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<Observation>(d_, e_);
@@ -572,8 +572,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
                 return w_;
             }
 
-            return /* CQL 'and' (108:5-109:156) */ (k_
-                && l_());
+            return k_
+                /* CQL 'and' (108:5-109:156) */ && l_();
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<Observation>(d_, e_);
@@ -593,21 +593,21 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
         CqlBoolean b_() {
             CqlBoolean d_ = this.Has_Left_Eye_Retinopathy(context);
-            return /* CQL 'and' (135:8-137:5) */ (d_
-                && this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context));
+            return d_
+                /* CQL 'and' (135:8-137:5) */ && this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context);
         }
 
 
         CqlBoolean c_() {
             CqlBoolean e_ = this.Has_Right_Eye_Retinopathy(context);
-            return /* CQL 'and' (138:8-140:5) */ (e_
-                && this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context));
+            return e_
+                /* CQL 'and' (138:8-140:5) */ && this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context);
         }
 
-        return /* CQL 'or' (132:3-140:5) */ (/* CQL 'or' (132:3-137:5) */ (/* CQL 'and' (132:3-134:3) */ (a_
-            && this.Has_Right_Eye_Retinopathy(context))
-            || b_())
-            || c_());
+        return a_
+            /* CQL 'and' (132:3-134:3) */ && this.Has_Right_Eye_Retinopathy(context)
+            /* CQL 'or' (132:3-137:5) */ || b_()
+            /* CQL 'or' (132:3-140:5) */ || c_();
     }
 
 
@@ -620,8 +620,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
     private bool? Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context);
-        return /* CQL 'and' (127:3-129:3) */ (a_
-            && this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context));
+        return a_
+            /* CQL 'and' (127:3-129:3) */ && this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context);
     }
 
 
@@ -637,16 +637,16 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
         CqlBoolean b_() {
             CqlBoolean c_ = this.Diabetic_Retinopathy_Overlapping_Measurement_Period(context);
-            return /* CQL 'and' (74:8-76:5) */ (!c_
-                && this.Retinal_Exam_in_Measurement_Period_or_Year_Prior(context));
+            return (CqlBoolean)!c_
+                /* CQL 'and' (74:8-76:5) */ && this.Retinal_Exam_in_Measurement_Period_or_Year_Prior(context);
         }
 
-        return /* CQL 'or' (71:3-79:78) */ (/* CQL 'or' (71:3-78:83) */ (/* CQL 'or' (71:3-77:50) */ (/* CQL 'or' (71:3-76:5) */ (/* CQL 'and' (71:3-73:3) */ (a_
-            && this.Retinal_Exam_in_Measurement_Period(context))
-            || b_())
-            || this.Autonomous_Eye_Exam_in_Measurement_Period(context))
-            || this.Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(context))
-            || this.Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior(context));
+        return a_
+            /* CQL 'and' (71:3-73:3) */ && this.Retinal_Exam_in_Measurement_Period(context)
+            /* CQL 'or' (71:3-76:5) */ || b_()
+            /* CQL 'or' (71:3-77:50) */ || this.Autonomous_Eye_Exam_in_Measurement_Period(context)
+            /* CQL 'or' (71:3-78:83) */ || this.Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(context)
+            /* CQL 'or' (71:3-79:78) */ || this.Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior(context);
     }
 
 

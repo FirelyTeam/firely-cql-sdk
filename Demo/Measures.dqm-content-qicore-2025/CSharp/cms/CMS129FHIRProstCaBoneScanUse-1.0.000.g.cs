@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS129FHIRProstCaBoneScanUse", "1.0.000")]
 public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton<CMS129FHIRProstCaBoneScanUse_1_0_000>
 {
@@ -234,14 +234,14 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 return z_;
             }
 
-            return /* CQL 'or' (143:52-147:3) */ (/* CQL 'or' (143:54-145:66) */ (/* CQL 'or' (143:54-144:66) */ (h_
-                || i_())
-                || j_())
-                || k_());
+            return h_
+                /* CQL 'or' (143:54-144:66) */ || i_()
+                /* CQL 'or' (143:54-145:66) */ || j_()
+                /* CQL 'or' (143:52-147:3) */ || k_();
         }
 
-        return /* CQL 'implies' (143:3-147:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_());
+        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+            /* CQL 'implies' (143:3-147:3) */ || c_();
     }
 
 
@@ -260,8 +260,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ProstateCancer as Condition);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             CqlBoolean g_ = context.Operators.Overlaps(e_, f_, "day");
-            return /* CQL 'and' (133:5-134:39) */ (g_
-                && this.isVerified(context, ProstateCancer as Condition));
+            return g_
+                /* CQL 'and' (133:5-134:39) */ && this.isVerified(context, ProstateCancer as Condition);
         }
 
         IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
@@ -344,8 +344,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 return w_;
             }
 
-            return /* CQL 'and' (84:7-85:56) */ (l_
-                && m_());
+            return l_
+                /* CQL 'and' (84:7-85:56) */ && m_();
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -474,8 +474,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     return aj_;
                 }
 
-                return /* CQL 'and' (121:19-122:81) */ (x_
-                    && y_());
+                return x_
+                    /* CQL 'and' (121:19-122:81) */ && y_();
             }
 
             CqlBoolean p_ = context.Operators.WhereAny<Procedure>((IEnumerable<Procedure>)n_, o_);
@@ -534,10 +534,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 return bk_;
             }
 
-            return /* CQL 'or' (125:5-129:5) */ (/* CQL 'or' (125:13-127:104) */ (/* CQL 'or' (125:13-126:104) */ (as_
-                || at_())
-                || au_())
-                || av_());
+            return as_
+                /* CQL 'or' (125:13-126:104) */ || at_()
+                /* CQL 'or' (125:13-127:104) */ || au_()
+                /* CQL 'or' (125:5-129:5) */ || av_();
         }
 
         IEnumerable<Observation> k_ = context.Operators.Where<Observation>((IEnumerable<Observation>)i_, j_);
@@ -596,8 +596,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     return ae_;
                 }
 
-                return /* CQL 'and' (92:19-93:67) */ (t_
-                    && u_());
+                return t_
+                    /* CQL 'and' (92:19-93:67) */ && u_();
             }
 
             CqlBoolean o_ = context.Operators.WhereAny<Observation>((IEnumerable<Observation>)m_, n_);
@@ -710,8 +710,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     return aj_;
                 }
 
-                return /* CQL 'and' (108:19-109:72) */ (x_
-                    && y_());
+                return x_
+                    /* CQL 'and' (108:19-109:72) */ && y_();
             }
 
             CqlBoolean p_ = context.Operators.WhereAny<Procedure>((IEnumerable<Procedure>)n_, o_);
@@ -756,11 +756,11 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     private bool? Denominator_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Initial_Population(context);
-        return /* CQL 'and' (49:3-53:42) */ (/* CQL 'and' (49:3-52:44) */ (/* CQL 'and' (49:3-51:79) */ (/* CQL 'and' (49:3-50:86) */ (a_
-            && !((bool?)((this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context)) is null)))
-            && !((bool?)((this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context)) is null)))
-            && this.Most_Recent_PSA_Test_Result_is_Low(context))
-            && this.Most_Recent_Gleason_Score_is_Low(context));
+        return a_
+            /* CQL 'and' (49:3-50:86) */ && !((bool?)((this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context)) is null))
+            /* CQL 'and' (49:3-51:79) */ && !((bool?)((this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context)) is null))
+            /* CQL 'and' (49:3-52:44) */ && this.Most_Recent_PSA_Test_Result_is_Low(context)
+            /* CQL 'and' (49:3-53:42) */ && this.Most_Recent_Gleason_Score_is_Low(context);
     }
 
 
@@ -816,8 +816,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 return ab_;
             }
 
-            return /* CQL 'and' (67:5-68:64) */ (v_
-                && w_());
+            return v_
+                /* CQL 'and' (67:5-68:64) */ && w_();
         }
 
         IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
@@ -861,8 +861,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveProstateCancer as Condition);
                 CqlDateTime m_ = context.Operators.Start(l_);
                 CqlBoolean n_ = context.Operators.After(k_, m_, (string)default);
-                return /* CQL 'and' (78:19-79:47) */ (n_
-                    && this.isVerified(context, ProstateCancerPain));
+                return n_
+                    /* CQL 'and' (78:19-79:47) */ && this.isVerified(context, ProstateCancerPain);
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<Condition>(g_, h_);
@@ -939,8 +939,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     return x_;
                 }
 
-                return /* CQL 'and' (101:19-102:49) */ (m_
-                    && n_());
+                return m_
+                    /* CQL 'and' (101:19-102:49) */ && n_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Condition>(e_, f_);
@@ -985,9 +985,9 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(context);
-        return /* CQL 'or' (59:3-61:61) */ (/* CQL 'or' (59:3-60:70) */ (a_
-            || this.Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(context))
-            || this.Has_Bone_Scan_Study_Performed_with_Documented_Reason(context));
+        return a_
+            /* CQL 'or' (59:3-60:70) */ || this.Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(context)
+            /* CQL 'or' (59:3-61:61) */ || this.Has_Bone_Scan_Study_Performed_with_Documented_Reason(context);
     }
 
 

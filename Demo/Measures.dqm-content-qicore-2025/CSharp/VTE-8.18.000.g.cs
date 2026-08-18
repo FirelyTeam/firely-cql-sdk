@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("VTE", "8.18.000")]
 public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 {
@@ -104,8 +104,8 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
                 return r_;
             }
 
-            return /* CQL 'or' (42:13-43:43) */ (i_
-                || j_());
+            return i_
+                /* CQL 'or' (42:13-43:43) */ || j_();
         }
 
         IEnumerable<bool?> c_ = context.Operators.SelectDistinct<Encounter, bool?>((IEnumerable<Encounter>)a_, b_);
@@ -141,9 +141,9 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
                 return k_;
             }
 
-            return !((bool?)(/* CQL 'or' (25:13-28:13) */ (/* CQL 'or' (25:14-26:78) */ (e_
-                || f_())
-                || g_())));
+            return !((bool?)(e_
+                /* CQL 'or' (25:14-26:78) */ || f_()
+                /* CQL 'or' (25:13-28:13) */ || g_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -244,8 +244,8 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
                 return p_;
             }
 
-            return /* CQL 'or' (51:13-52:39) */ (h_
-                || i_());
+            return h_
+                /* CQL 'or' (51:13-52:39) */ || i_();
         }
 
         IEnumerable<bool?> c_ = context.Operators.SelectDistinct<Encounter, bool?>((IEnumerable<Encounter>)a_, b_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS135FHIRACEIorARBorARNIforHF", "1.0.000")]
 public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISingleton<CMS135FHIRACEIorARBorARNIforHF_1_0_000>
 {
@@ -150,8 +150,8 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
             return d_;
         }
 
-        return /* CQL 'and' (35:3-36:95) */ (a_
-            && b_());
+        return a_
+            /* CQL 'and' (35:3-36:95) */ && b_();
     }
 
 
@@ -164,10 +164,10 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         CqlBoolean a_ = AHAOverall_4_1_000.Instance.Has_Heart_Transplant(context);
-        return /* CQL 'or' (39:3-42:61) */ (/* CQL 'or' (39:3-41:47) */ (/* CQL 'or' (39:3-40:47) */ (a_
-            || AHAOverall_4_1_000.Instance.Has_Heart_Transplant_Complications(context))
-            || AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device(context))
-            || AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device_Complications(context));
+        return a_
+            /* CQL 'or' (39:3-40:47) */ || AHAOverall_4_1_000.Instance.Has_Heart_Transplant_Complications(context)
+            /* CQL 'or' (39:3-41:47) */ || AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device(context)
+            /* CQL 'or' (39:3-42:61) */ || AHAOverall_4_1_000.Instance.Has_Left_Ventricular_Assist_Device_Complications(context);
     }
 
 
@@ -222,8 +222,8 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
     private bool? Numerator_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_ACEI_or_ARB_or_ARNI_Ordered(context);
-        return /* CQL 'or' (45:3-46:48) */ (a_
-            || this.Is_Currently_Taking_ACEI_or_ARB_or_ARNI(context));
+        return a_
+            /* CQL 'or' (45:3-46:48) */ || this.Is_Currently_Taking_ACEI_or_ARB_or_ARNI(context);
     }
 
 
@@ -282,13 +282,13 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                     return y_;
                 }
 
-                return /* CQL 'or' (113:13-116:9) */ (/* CQL 'or' (113:15-114:70) */ (k_
-                    || l_())
-                    || m_());
+                return k_
+                    /* CQL 'or' (113:15-114:70) */ || l_()
+                    /* CQL 'or' (113:13-116:9) */ || m_();
             }
 
-            return /* CQL 'and' (112:7-116:9) */ (e_
-                && f_());
+            return e_
+                /* CQL 'and' (112:7-116:9) */ && f_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<MedicationRequest>(b_, c_);
@@ -391,9 +391,9 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                     return !((bool?)(w_ is null));
                 }
 
-                return /* CQL 'and' (93:19-94:47) */ (/* CQL 'and' (93:19-93:154) */ (s_
-                    && t_())
-                    && AHAOverall_4_1_000.Instance.isVerified(context, PregnancyDiagnosis));
+                return s_
+                    /* CQL 'and' (93:19-93:154) */ && t_()
+                    /* CQL 'and' (93:19-94:47) */ && AHAOverall_4_1_000.Instance.isVerified(context, PregnancyDiagnosis);
             }
 
             CqlBoolean j_ = context.Operators.WhereAny<Encounter>(h_, i_);
@@ -449,13 +449,13 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                             return bd_;
                         }
 
-                        return /* CQL 'and' (99:17-101:13) */ (aw_
-                            && ax_());
+                        return aw_
+                            /* CQL 'and' (99:17-101:13) */ && ax_();
                     }
 
-                    return /* CQL 'and' (98:21-101:13) */ (/* CQL 'and' (98:21-98:159) */ (an_
-                        && ao_())
-                        && ap_());
+                    return an_
+                        /* CQL 'and' (98:21-98:159) */ && ao_()
+                        /* CQL 'and' (98:21-101:13) */ && ap_();
                 }
 
                 CqlBoolean ac_ = context.Operators.WhereAny<Encounter>(aa_, ab_);
@@ -466,8 +466,8 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
             return z_;
         }
 
-        return /* CQL 'or' (90:3-102:5) */ (f_
-            || g_());
+        return f_
+            /* CQL 'or' (90:3-102:5) */ || g_();
     }
 
 
@@ -504,11 +504,11 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Medical_or_Patient_Reason_for_Not_Ordering_ACEI_or_ARB_or_ARNI(context);
-        return /* CQL 'or' (49:3-53:51) */ (/* CQL 'or' (49:3-52:35) */ (/* CQL 'or' (49:3-51:63) */ (/* CQL 'or' (49:3-50:69) */ (a_
-            || this.Has_Allergy_or_Intolerance_to_ACEI_or_ARB_or_ARNI_Ingredient(context))
-            || this.Has_Diagnosis_of_Allergy_or_Intolerance_to_ACEI_or_ARB(context))
-            || this.Has_Diagnosis_of_Pregnancy(context))
-            || this.Has_Diagnosis_of_Renal_Failure_Due_to_ACEI(context));
+        return a_
+            /* CQL 'or' (49:3-50:69) */ || this.Has_Allergy_or_Intolerance_to_ACEI_or_ARB_or_ARNI_Ingredient(context)
+            /* CQL 'or' (49:3-51:63) */ || this.Has_Diagnosis_of_Allergy_or_Intolerance_to_ACEI_or_ARB(context)
+            /* CQL 'or' (49:3-52:35) */ || this.Has_Diagnosis_of_Pregnancy(context)
+            /* CQL 'or' (49:3-53:51) */ || this.Has_Diagnosis_of_Renal_Failure_Due_to_ACEI(context);
     }
 
 

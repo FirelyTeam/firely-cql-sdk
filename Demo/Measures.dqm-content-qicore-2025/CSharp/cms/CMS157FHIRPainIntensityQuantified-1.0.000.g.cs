@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS157FHIRPainIntensityQuantified", "1.0.000")]
 public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISingleton<CMS157FHIRPainIntensityQuantified_1_0_000>
 {
@@ -167,8 +167,8 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 return y_;
             }
 
-            return /* CQL 'and' (40:5-41:70) */ (m_
-                && n_());
+            return m_
+                /* CQL 'and' (40:5-41:70) */ && n_();
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -262,8 +262,8 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                     return !((bool?)(at_ is null));
                 }
 
-                return /* CQL 'and' (52:11-52:144) */ (aj_
-                    && ak_());
+                return aj_
+                    /* CQL 'and' (52:11-52:144) */ && ak_();
             }
 
 
@@ -321,8 +321,8 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                     return !((bool?)(bn_ is null));
                 }
 
-                return /* CQL 'and' (53:11-53:142) */ (bd_
-                    && be_());
+                return bd_
+                    /* CQL 'and' (53:11-53:142) */ && be_();
             }
 
 
@@ -423,12 +423,12 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 return cm_;
             }
 
-            return /* CQL 'and' (51:5-56:61) */ (/* CQL 'and' (51:11-55:83) */ (/* CQL 'and' (51:11-54:120) */ (/* CQL 'and' (51:11-53:142) */ (/* CQL 'and' (51:11-52:144) */ (u_
-                && v_())
-                && w_())
-                && x_())
-                && y_())
-                && z_());
+            return u_
+                /* CQL 'and' (51:11-52:144) */ && v_()
+                /* CQL 'and' (51:11-53:142) */ && w_()
+                /* CQL 'and' (51:11-54:120) */ && x_()
+                /* CQL 'and' (51:11-55:83) */ && y_()
+                /* CQL 'and' (51:5-56:61) */ && z_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition CancerDx)?> n_ = context.Operators.SelectWhere<ValueTuple<Encounter, Procedure, Procedure, Condition>, (CqlTupleMetadata, Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition CancerDx)?>(k_, l_, m_);
@@ -509,8 +509,8 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 return y_;
             }
 
-            return /* CQL 'and' (69:5-70:58) */ (t_
-                && u_());
+            return t_
+                /* CQL 'and' (69:5-70:58) */ && u_();
         }
 
         IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
@@ -650,8 +650,8 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                         return !((bool?)(ad_ is null));
                     }
 
-                    return (bool?)(/* CQL 'and' (78:16-78:132) */ (z_
-                        && aa_()));
+                    return (bool?)(z_
+                        /* CQL 'and' (78:16-78:132) */ && aa_());
                 }
                 else
                 {

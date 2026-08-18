@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS143FHIRPOAGOpticNerveEval", "1.0.000")]
 public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton<CMS143FHIRPOAGOpticNerveEval_1_0_000>
 {
@@ -208,9 +208,9 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 return !ad_;
             }
 
-            return /* CQL 'and' (53:5-55:48) */ (/* CQL 'and' (53:11-54:49) */ (t_
-                && u_())
-                && v_());
+            return t_
+                /* CQL 'and' (53:11-54:49) */ && u_()
+                /* CQL 'and' (53:5-55:48) */ && v_();
         }
 
         IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
@@ -260,14 +260,14 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 return z_;
             }
 
-            return /* CQL 'or' (99:52-103:3) */ (/* CQL 'or' (99:54-101:66) */ (/* CQL 'or' (99:54-100:66) */ (h_
-                || i_())
-                || j_())
-                || k_());
+            return h_
+                /* CQL 'or' (99:54-100:66) */ || i_()
+                /* CQL 'or' (99:54-101:66) */ || j_()
+                /* CQL 'or' (99:52-103:3) */ || k_();
         }
 
-        return /* CQL 'implies' (99:3-103:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_());
+        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+            /* CQL 'implies' (99:3-103:3) */ || c_();
     }
 
 
@@ -292,8 +292,8 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 Period k_ = ValidQualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
                 CqlBoolean m_ = context.Operators.Overlaps(j_, l_, "day");
-                return /* CQL 'and' (65:17-66:51) */ (m_
-                    && this.isVerified(context, PrimaryOpenAngleGlaucoma));
+                return m_
+                    /* CQL 'and' (65:17-66:51) */ && this.isVerified(context, PrimaryOpenAngleGlaucoma);
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<Condition>(g_, h_);
@@ -329,8 +329,8 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             return l_;
         }
 
-        return /* CQL 'and' (58:3-59:54) */ (i_
-            && j_());
+        return i_
+            /* CQL 'and' (58:3-59:54) */ && j_();
     }
 
 
@@ -486,8 +486,8 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             return e_;
         }
 
-        return /* CQL 'or' (44:3-45:65) */ (b_
-            || c_());
+        return b_
+            /* CQL 'or' (44:3-45:65) */ || c_();
     }
 
 
@@ -538,8 +538,8 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 return w_;
             }
 
-            return /* CQL 'and' (72:5-73:78) */ ((CqlBoolean)(!((bool?)(q_ is null)))
-                && r_());
+            return (CqlBoolean)(!((bool?)(q_ is null)))
+                /* CQL 'and' (72:5-73:78) */ && r_();
         }
 
         IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
@@ -594,8 +594,8 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 return w_;
             }
 
-            return /* CQL 'and' (79:5-80:78) */ ((CqlBoolean)(!((bool?)(q_ is null)))
-                && r_());
+            return (CqlBoolean)(!((bool?)(q_ is null)))
+                /* CQL 'and' (79:5-80:78) */ && r_();
         }
 
         IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
@@ -620,8 +620,8 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
             return e_;
         }
 
-        return /* CQL 'and' (83:3-84:54) */ (b_
-            && c_());
+        return b_
+            /* CQL 'and' (83:3-84:54) */ && c_();
     }
 
 

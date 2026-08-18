@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS2FHIRPCSDepScreenAndFollowUp", "1.0.000")]
 public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS2FHIRPCSDepScreenAndFollowUp_1_0_000>
 {
@@ -195,8 +195,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return s_;
             }
 
-            return /* CQL 'and' (212:5-213:49) */ (n_
-                && o_());
+            return n_
+                /* CQL 'and' (212:5-213:49) */ && o_();
         }
 
         IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
@@ -220,8 +220,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             return d_;
         }
 
-        return /* CQL 'and' (37:3-38:67) */ (a_
-            && b_());
+        return a_
+            /* CQL 'and' (37:3-38:67) */ && b_();
     }
 
 
@@ -363,10 +363,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     return ai_;
                 }
 
-                return /* CQL 'and' (157:19-159:89) */ (/* CQL 'and' (157:19-158:61) */ (/* CQL 'and' (157:19-157:142) */ (v_
-                    && w_())
-                    && x_())
-                    && y_());
+                return v_
+                    /* CQL 'and' (157:19-157:142) */ && w_()
+                    /* CQL 'and' (157:19-158:61) */ && x_()
+                    /* CQL 'and' (157:19-159:89) */ && y_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<Encounter>(i_, j_);
@@ -445,8 +445,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     return ae_;
                 }
 
-                return /* CQL 'and' */ (z_
-                    && aa_());
+                return z_
+                    /* CQL 'and' */ && aa_();
             }
 
             CqlBoolean u_ = context.Operators.WhereAny<Medication>(s_, t_);
@@ -539,12 +539,12 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     return cd_;
                 }
 
-                return /* CQL 'and' (76:21-80:119) */ (/* CQL 'and' (76:21-79:65) */ (/* CQL 'and' (76:21-78:111) */ (/* CQL 'and' (76:21-77:121) */ (/* CQL 'and' (76:21-76:169) */ (at_
-                    && au_())
-                    && av_())
-                    && aw_())
-                    && ax_())
-                    && ay_());
+                return at_
+                    /* CQL 'and' (76:21-76:169) */ && au_()
+                    /* CQL 'and' (76:21-77:121) */ && av_()
+                    /* CQL 'and' (76:21-78:111) */ && aw_()
+                    /* CQL 'and' (76:21-79:65) */ && ax_()
+                    /* CQL 'and' (76:21-80:119) */ && ay_();
             }
 
             CqlBoolean ah_ = context.Operators.WhereAny<Encounter>(af_, ag_);
@@ -701,12 +701,12 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                         return !((bool?)(bh_ is null));
                     }
 
-                    return /* CQL 'and' (171:14-171:124) */ (bd_
-                        && be_());
+                    return bd_
+                        /* CQL 'and' (171:14-171:124) */ && be_();
                 }
 
-                return /* CQL 'or' (170:11-172:7) */ (an_
-                    || ao_());
+                return an_
+                    /* CQL 'or' (170:11-172:7) */ || ao_();
             }
 
 
@@ -756,11 +756,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return bo_;
             }
 
-            return /* CQL 'and' (168:5-173:168) */ (/* CQL 'and' (168:11-172:7) */ (/* CQL 'and' (168:11-169:80) */ (/* CQL 'and' (168:11-168:134) */ (v_
-                && w_())
-                && x_())
-                && y_())
-                && z_());
+            return v_
+                /* CQL 'and' (168:11-168:134) */ && w_()
+                /* CQL 'and' (168:11-169:80) */ && x_()
+                /* CQL 'and' (168:11-172:7) */ && y_()
+                /* CQL 'and' (168:5-173:168) */ && z_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?> h_ = context.Operators.SelectWhere<ValueTuple<Observation, object, Encounter>, (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>(e_, f_, g_);
@@ -852,10 +852,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     return ai_;
                 }
 
-                return /* CQL 'and' (178:19-180:84) */ (/* CQL 'and' (178:19-179:56) */ (/* CQL 'and' (178:19-178:137) */ (v_
-                    && w_())
-                    && x_())
-                    && y_());
+                return v_
+                    /* CQL 'and' (178:19-178:137) */ && w_()
+                    /* CQL 'and' (178:19-179:56) */ && x_()
+                    /* CQL 'and' (178:19-180:84) */ && y_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<Encounter>(i_, j_);
@@ -934,8 +934,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     return ae_;
                 }
 
-                return /* CQL 'and' */ (z_
-                    && aa_());
+                return z_
+                    /* CQL 'and' */ && aa_();
             }
 
             CqlBoolean u_ = context.Operators.WhereAny<Medication>(s_, t_);
@@ -1028,12 +1028,12 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     return cd_;
                 }
 
-                return /* CQL 'and' (93:21-97:114) */ (/* CQL 'and' (93:21-96:60) */ (/* CQL 'and' (93:21-95:106) */ (/* CQL 'and' (93:21-94:116) */ (/* CQL 'and' (93:21-93:164) */ (at_
-                    && au_())
-                    && av_())
-                    && aw_())
-                    && ax_())
-                    && ay_());
+                return at_
+                    /* CQL 'and' (93:21-93:164) */ && au_()
+                    /* CQL 'and' (93:21-94:116) */ && av_()
+                    /* CQL 'and' (93:21-95:106) */ && aw_()
+                    /* CQL 'and' (93:21-96:60) */ && ax_()
+                    /* CQL 'and' (93:21-97:114) */ && ay_();
             }
 
             CqlBoolean ah_ = context.Operators.WhereAny<Encounter>(af_, ag_);
@@ -1190,12 +1190,12 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                         return !((bool?)(bh_ is null));
                     }
 
-                    return /* CQL 'and' (192:14-192:119) */ (bd_
-                        && be_());
+                    return bd_
+                        /* CQL 'and' (192:14-192:119) */ && be_();
                 }
 
-                return /* CQL 'or' (191:11-193:7) */ (an_
-                    || ao_());
+                return an_
+                    /* CQL 'or' (191:11-193:7) */ || ao_();
             }
 
 
@@ -1245,11 +1245,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return bo_;
             }
 
-            return /* CQL 'and' (189:5-194:158) */ (/* CQL 'and' (189:11-193:7) */ (/* CQL 'and' (189:11-190:75) */ (/* CQL 'and' (189:11-189:129) */ (v_
-                && w_())
-                && x_())
-                && y_())
-                && z_());
+            return v_
+                /* CQL 'and' (189:11-189:129) */ && w_()
+                /* CQL 'and' (189:11-190:75) */ && x_()
+                /* CQL 'and' (189:11-193:7) */ && y_()
+                /* CQL 'and' (189:5-194:158) */ && z_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?> h_ = context.Operators.SelectWhere<ValueTuple<Observation, object, Encounter>, (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>(e_, f_, g_);
@@ -1304,8 +1304,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return h_;
             }
 
-            return /* CQL 'or' (48:11-50:7) */ (e_
-                || f_());
+            return e_
+                /* CQL 'or' (48:11-50:7) */ || f_();
         }
 
 
@@ -1328,14 +1328,14 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     return q_;
                 }
 
-                return /* CQL 'or' (53:13-57:9) */ (/* CQL 'or' (53:15-55:57) */ (/* CQL 'or' (53:15-54:99) */ (k_
-                    || l_())
-                    || this.Has_Most_Recent_Adult_Screening_Negative(context))
-                    || m_());
+                return k_
+                    /* CQL 'or' (53:15-54:99) */ || l_()
+                    /* CQL 'or' (53:15-55:57) */ || this.Has_Most_Recent_Adult_Screening_Negative(context)
+                    /* CQL 'or' (53:13-57:9) */ || m_();
             }
 
-            return /* CQL 'and' (52:8-58:5) */ (i_
-                && j_());
+            return i_
+                /* CQL 'and' (52:8-58:5) */ && j_();
         }
 
 
@@ -1351,18 +1351,18 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     return w_;
                 }
 
-                return /* CQL 'or' (60:13-62:9) */ (t_
-                    || u_());
+                return t_
+                    /* CQL 'or' (60:13-62:9) */ || u_();
             }
 
-            return /* CQL 'and' (59:8-63:5) */ (r_
-                && s_());
+            return r_
+                /* CQL 'and' (59:8-63:5) */ && s_();
         }
 
-        return /* CQL 'or' (47:3-63:5) */ (/* CQL 'or' (47:3-58:5) */ (/* CQL 'and' (47:3-51:3) */ (a_
-            && b_())
-            || c_())
-            || d_());
+        return a_
+            /* CQL 'and' (47:3-51:3) */ && b_()
+            /* CQL 'or' (47:3-58:5) */ || c_()
+            /* CQL 'or' (47:3-63:5) */ || d_();
     }
 
 
@@ -1446,8 +1446,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return aj_;
             }
 
-            return /* CQL 'or' (142:5-144:5) */ (x_
-                || y_());
+            return x_
+                /* CQL 'or' (142:5-144:5) */ || y_();
         }
 
         IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
@@ -1511,10 +1511,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     return af_;
                 }
 
-                return /* CQL 'and' (110:19-112:79) */ (/* CQL 'and' (110:19-111:51) */ (/* CQL 'and' (110:19-110:134) */ (s_
-                    && t_())
-                    && u_())
-                    && v_());
+                return s_
+                    /* CQL 'and' (110:19-110:134) */ && t_()
+                    /* CQL 'and' (110:19-111:51) */ && u_()
+                    /* CQL 'and' (110:19-112:79) */ && v_();
             }
 
             CqlBoolean h_ = context.Operators.WhereAny<Encounter>(f_, g_);
@@ -1606,8 +1606,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return aj_;
             }
 
-            return /* CQL 'or' (150:5-152:5) */ (x_
-                || y_());
+            return x_
+                /* CQL 'or' (150:5-152:5) */ || y_();
         }
 
         IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
@@ -1671,10 +1671,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     return af_;
                 }
 
-                return /* CQL 'and' (118:19-120:74) */ (/* CQL 'and' (118:19-119:46) */ (/* CQL 'and' (118:19-118:129) */ (s_
-                    && t_())
-                    && u_())
-                    && v_());
+                return s_
+                    /* CQL 'and' (118:19-118:129) */ && t_()
+                    /* CQL 'and' (118:19-119:46) */ && u_()
+                    /* CQL 'and' (118:19-120:74) */ && v_();
             }
 
             CqlBoolean h_ = context.Operators.WhereAny<Encounter>(f_, g_);
@@ -1700,13 +1700,13 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         CqlBoolean c_() {
             IEnumerable<Observation> d_ = this.Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression(context);
             CqlBoolean e_ = context.Operators.Exists<Observation>(d_);
-            return /* CQL 'and' (69:8-71:5) */ (e_
-                && !(this.Has_Adult_Depression_Screening(context)));
+            return e_
+                /* CQL 'and' (69:8-71:5) */ && !(this.Has_Adult_Depression_Screening(context));
         }
 
-        return /* CQL 'or' (66:3-71:5) */ (/* CQL 'and' (66:3-68:3) */ (b_
-            && !(this.Has_Adolescent_Depression_Screening(context)))
-            || c_());
+        return b_
+            /* CQL 'and' (66:3-68:3) */ && !(this.Has_Adolescent_Depression_Screening(context))
+            /* CQL 'or' (66:3-71:5) */ || c_();
     }
 
 

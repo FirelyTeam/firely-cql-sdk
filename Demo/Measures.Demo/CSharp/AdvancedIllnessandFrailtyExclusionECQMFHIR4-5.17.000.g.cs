@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("AdvancedIllnessandFrailtyExclusionECQMFHIR4", "5.17.000")]
 public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILibrary, ISingleton<AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000>
 {
@@ -137,8 +137,8 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                     return w_;
                 }
 
-                return /* CQL 'and' */ (r_
-                    && s_());
+                return r_
+                    /* CQL 'and' */ && s_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -173,9 +173,9 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 return am_;
             }
 
-            return /* CQL 'and' (29:17-32:46) */ (/* CQL 'and' (29:23-30:50) */ (z_
-                && aa_())
-                && ab_());
+            return z_
+                /* CQL 'and' (29:23-30:50) */ && aa_()
+                /* CQL 'and' (29:17-32:46) */ && ab_();
         }
 
         IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
@@ -210,8 +210,8 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 return q_;
             }
 
-            return /* CQL 'and' (37:17-38:116) */ (l_
-                && m_());
+            return l_
+                /* CQL 'and' (37:17-38:116) */ && m_();
         }
 
 
@@ -283,12 +283,12 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                         return !((bool?)(ak_ is null));
                     }
 
-                    return /* CQL 'and' (85:25-86:47) */ (ah_
-                        && ai_());
+                    return ah_
+                        /* CQL 'and' (85:25-86:47) */ && ai_();
                 }
 
-                return /* CQL 'and' (84:29-86:47) */ (x_
-                    && y_());
+                return x_
+                    /* CQL 'and' (84:29-86:47) */ && y_();
             }
 
             CqlBoolean v_ = context.Operators.WhereAny<Condition>(t_, u_);
@@ -376,8 +376,8 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             CqlDateTime m_ = context.Operators.Add(j_, k_);
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(l_, m_, true, true);
             CqlBoolean o_ = context.Operators.In<CqlDateTime>(i_, n_, (string)default);
-            return /* CQL 'and' (57:17-58:69) */ (o_
-                && !((bool?)((context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2)) is null)));
+            return o_
+                /* CQL 'and' (57:17-58:69) */ && !((bool?)((context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2)) is null));
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?> e_ = context.Operators.SelectWhere<ValueTuple<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>, (CqlTupleMetadata, CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?>(b_, c_, d_);
@@ -465,12 +465,12 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                         return !((bool?)(ab_ is null));
                     }
 
-                    return /* CQL 'and' (74:25-75:47) */ (y_
-                        && z_());
+                    return y_
+                        /* CQL 'and' (74:25-75:47) */ && z_();
                 }
 
-                return /* CQL 'and' (73:29-75:47) */ (o_
-                    && p_());
+                return o_
+                    /* CQL 'and' (73:29-75:47) */ && p_();
             }
 
             CqlBoolean m_ = context.Operators.WhereAny<Condition>(k_, l_);
@@ -520,9 +520,9 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 return v_;
             }
 
-            return /* CQL 'and' (110:17-112:111) */ (/* CQL 'and' (110:23-111:57) */ (m_
-                && n_())
-                && o_());
+            return m_
+                /* CQL 'and' (110:23-111:57) */ && n_()
+                /* CQL 'and' (110:17-112:111) */ && o_();
         }
 
         CqlBoolean e_ = context.Operators.WhereAny<DeviceRequest>(c_, d_);
@@ -549,8 +549,8 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                     return ai_;
                 }
 
-                return /* CQL 'and' (115:19-116:116) */ (ad_
-                    && ae_());
+                return ad_
+                    /* CQL 'and' (115:19-116:116) */ && ae_();
             }
 
             CqlBoolean z_ = context.Operators.WhereAny<Observation>(x_, y_);
@@ -591,8 +591,8 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                     return bb_;
                 }
 
-                return /* CQL 'and' (122:19-123:109) */ (aw_
-                    && ax_());
+                return aw_
+                    /* CQL 'and' (122:19-123:109) */ && ax_();
             }
 
             CqlBoolean at_ = context.Operators.WhereAny<Encounter>(ar_, as_);
@@ -623,19 +623,19 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                     return bo_;
                 }
 
-                return /* CQL 'and' (126:19-127:110) */ (bj_
-                    && bk_());
+                return bj_
+                    /* CQL 'and' (126:19-127:110) */ && bk_();
             }
 
             CqlBoolean bf_ = context.Operators.WhereAny<Observation>(bd_, be_);
             return bf_;
         }
 
-        return /* CQL 'or' (109:3-128:15) */ (/* CQL 'or' (109:3-124:15) */ (/* CQL 'or' (109:3-120:13) */ (/* CQL 'or' (109:3-117:15) */ (e_
-            || f_())
-            || g_())
-            || h_())
-            || i_());
+        return e_
+            /* CQL 'or' (109:3-117:15) */ || f_()
+            /* CQL 'or' (109:3-120:13) */ || g_()
+            /* CQL 'or' (109:3-124:15) */ || h_()
+            /* CQL 'or' (109:3-128:15) */ || i_();
     }
 
 
@@ -675,9 +675,9 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 return t_;
             }
 
-            return /* CQL 'or' (91:23-94:19) */ (/* CQL 'or' (91:25-92:79) */ (n_
-                || o_())
-                || p_());
+            return n_
+                /* CQL 'or' (91:25-92:79) */ || o_()
+                /* CQL 'or' (91:23-94:19) */ || p_();
         }
 
 
@@ -691,14 +691,14 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             CqlDate aa_ = context.Operators.DateFrom(z_);
             int? ab_ = context.Operators.CalculateAgeAt(x_, aa_, "year");
             CqlBoolean ac_ = context.Operators.GreaterOrEqual(ab_, 80);
-            return /* CQL 'and' (96:20-98:17) */ (ac_
-                && this.Has_Criteria_Indicating_Frailty(context));
+            return ac_
+                /* CQL 'and' (96:20-98:17) */ && this.Has_Criteria_Indicating_Frailty(context);
         }
 
-        return /* CQL 'or' (89:3-98:17) */ (/* CQL 'and' (89:3-95:15) */ (/* CQL 'and' (89:5-90:55) */ (j_
-            && this.Has_Criteria_Indicating_Frailty(context))
-            && k_())
-            || l_());
+        return j_
+            /* CQL 'and' (89:5-90:55) */ && this.Has_Criteria_Indicating_Frailty(context)
+            /* CQL 'and' (89:3-95:15) */ && k_()
+            /* CQL 'or' (89:3-98:17) */ || l_();
     }
 
 
@@ -737,14 +737,14 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 return r_;
             }
 
-            return /* CQL 'or' (103:21-106:17) */ (/* CQL 'or' (103:23-104:77) */ (l_
-                || m_())
-                || n_());
+            return l_
+                /* CQL 'or' (103:23-104:77) */ || m_()
+                /* CQL 'or' (103:21-106:17) */ || n_();
         }
 
-        return /* CQL 'and' (101:3-106:17) */ (/* CQL 'and' (101:3-102:53) */ (i_
-            && this.Has_Criteria_Indicating_Frailty(context))
-            && j_());
+        return i_
+            /* CQL 'and' (101:3-102:53) */ && this.Has_Criteria_Indicating_Frailty(context)
+            /* CQL 'and' (101:3-106:17) */ && j_();
     }
 
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("NCQAHospice", "1.0.0")]
 public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
 {
@@ -100,8 +100,8 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
             return o_;
         }
 
-        return /* CQL 'or' (17:1-22:1) */ (e_
-            || f_());
+        return e_
+            /* CQL 'or' (17:1-22:1) */ || f_();
     }
 
 

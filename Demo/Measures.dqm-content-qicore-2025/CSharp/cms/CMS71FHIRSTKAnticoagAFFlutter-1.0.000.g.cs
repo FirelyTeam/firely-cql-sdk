@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS71FHIRSTKAnticoagAFFlutter", "1.0.000")]
 public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleton<CMS71FHIRSTKAnticoagAFFlutter_1_0_000>
 {
@@ -179,8 +179,8 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     return ab_;
                 }
 
-                return /* CQL 'and' (38:11-39:118) */ (t_
-                    && u_());
+                return t_
+                    /* CQL 'and' (38:11-39:118) */ && u_();
             }
 
             CqlBoolean p_ = context.Operators.WhereAny<Procedure>(n_, o_);
@@ -226,13 +226,13 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                         return bi_;
                     }
 
-                    return /* CQL 'and' (44:84-47:114) */ (/* CQL 'and' (44:84-46:11) */ (!at_
-                        && au_())
-                        && av_());
+                    return (CqlBoolean)!at_
+                        /* CQL 'and' (44:84-46:11) */ && au_()
+                        /* CQL 'and' (44:84-47:114) */ && av_();
                 }
 
-                return /* CQL 'implies' (44:21-47:114) */ ((CqlBoolean)(!(!((bool?)(an_ is null))))
-                    || ao_());
+                return (CqlBoolean)(!(!((bool?)(an_ is null))))
+                    /* CQL 'implies' (44:21-47:114) */ || ao_();
             }
 
             CqlBoolean al_ = context.Operators.WhereAny<Condition>(aj_, ak_);
@@ -293,8 +293,8 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     return by_;
                 }
 
-                return /* CQL 'and' (51:21-52:115) */ (br_
-                    && bs_());
+                return br_
+                    /* CQL 'and' (51:21-52:115) */ && bs_();
             }
 
             CqlBoolean bm_ = context.Operators.WhereAny<Observation>(bk_, bl_);
@@ -340,13 +340,13 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                         return dd_;
                     }
 
-                    return /* CQL 'and' (56:87-59:117) */ (/* CQL 'and' (56:87-58:11) */ (!co_
-                        && cp_())
-                        && cq_());
+                    return (CqlBoolean)!co_
+                        /* CQL 'and' (56:87-58:11) */ && cp_()
+                        /* CQL 'and' (56:87-59:117) */ && cq_();
                 }
 
-                return /* CQL 'implies' (56:21-59:117) */ ((CqlBoolean)(!(!((bool?)(ci_ is null))))
-                    || cj_());
+                return (CqlBoolean)(!(!((bool?)(ci_ is null))))
+                    /* CQL 'implies' (56:21-59:117) */ || cj_();
             }
 
             CqlBoolean cg_ = context.Operators.WhereAny<Condition>(ce_, cf_);
@@ -407,13 +407,13 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                         return ag_;
                     }
 
-                    return /* CQL 'and' (65:84-68:118) */ (/* CQL 'and' (65:84-67:9) */ (!r_
-                        && s_())
-                        && t_());
+                    return (CqlBoolean)!r_
+                        /* CQL 'and' (65:84-67:9) */ && s_()
+                        /* CQL 'and' (65:84-68:118) */ && t_();
                 }
 
-                return /* CQL 'implies' (65:19-68:118) */ ((CqlBoolean)(!(!((bool?)(l_ is null))))
-                    || m_());
+                return (CqlBoolean)(!(!((bool?)(l_ is null))))
+                    /* CQL 'implies' (65:19-68:118) */ || m_();
             }
 
             CqlBoolean j_ = context.Operators.WhereAny<Condition>(h_, i_);
@@ -588,15 +588,15 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     return am_;
                 }
 
-                return /* CQL 'or' (78:13-83:9) */ (/* CQL 'or' (78:15-81:102) */ (/* CQL 'or' (78:15-80:82) */ (/* CQL 'or' (78:15-79:94) */ (o_
-                    || p_())
-                    || q_())
-                    || r_())
-                    || s_());
+                return o_
+                    /* CQL 'or' (78:15-79:94) */ || p_()
+                    /* CQL 'or' (78:15-80:82) */ || q_()
+                    /* CQL 'or' (78:15-81:102) */ || r_()
+                    /* CQL 'or' (78:13-83:9) */ || s_();
             }
 
-            return /* CQL 'and' (77:7-83:9) */ (i_
-                && j_());
+            return i_
+                /* CQL 'and' (77:7-83:9) */ && j_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -637,8 +637,8 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                         return x_;
                     }
 
-                    return /* CQL 'and' */ (s_
-                        && t_());
+                    return s_
+                        /* CQL 'and' */ && t_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -678,8 +678,8 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
 
                 CqlBoolean ae_() {
                     CqlBoolean am_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAnticoagulant as MedicationRequest);
-                    return /* CQL 'or' (97:13-99:9) */ (am_
-                        || QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAnticoagulant as MedicationRequest));
+                    return am_
+                        /* CQL 'or' (97:13-99:9) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAnticoagulant as MedicationRequest);
                 }
 
 
@@ -709,19 +709,19 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                             return bc_;
                         }
 
-                        return /* CQL 'and' (102:13-103:58) */ (aw_
-                            && ax_());
+                        return aw_
+                            /* CQL 'and' (102:13-103:58) */ && ax_();
                     }
 
                     CqlBoolean au_ = context.Operators.WhereAny<Task>(as_, at_);
                     return !au_;
                 }
 
-                return /* CQL 'and' (95:17-104:9) */ (/* CQL 'and' (95:17-100:69) */ (/* CQL 'and' (95:17-99:9) */ (/* CQL 'and' (95:17-96:124) */ (ac_
-                    && ad_())
-                    && ae_())
-                    && af_())
-                    && ag_());
+                return ac_
+                    /* CQL 'and' (95:17-96:124) */ && ad_()
+                    /* CQL 'and' (95:17-99:9) */ && ae_()
+                    /* CQL 'and' (95:17-100:69) */ && af_()
+                    /* CQL 'and' (95:17-104:9) */ && ag_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -774,8 +774,8 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
 
             CqlBoolean t_() {
                 CqlBoolean ad_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAnticoagulant as MedicationRequest);
-                return /* CQL 'or' (116:13-118:9) */ (ad_
-                    || QICoreCommon_4_0_000.Instance.isDischarge(context, NoAnticoagulant as MedicationRequest));
+                return ad_
+                    /* CQL 'or' (116:13-118:9) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, NoAnticoagulant as MedicationRequest);
             }
 
 
@@ -807,11 +807,11 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 return an_;
             }
 
-            return /* CQL 'and' (113:7-120:117) */ (/* CQL 'and' (113:13-119:63) */ (/* CQL 'and' (113:13-118:9) */ (/* CQL 'or' (113:13-115:7) */ (r_
-                || s_())
-                && t_())
-                && u_())
-                && v_());
+            return r_
+                /* CQL 'or' (113:13-115:7) */ || s_()
+                /* CQL 'and' (113:13-118:9) */ && t_()
+                /* CQL 'and' (113:13-119:63) */ && u_()
+                /* CQL 'and' (113:7-120:117) */ && v_();
         }
 
         IEnumerable<MedicationRequest> e_ = context.Operators.Where<MedicationRequest>(c_, d_);
@@ -835,8 +835,8 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     return ba_;
                 }
 
-                return /* CQL 'and' */ (av_
-                    && aw_());
+                return av_
+                    /* CQL 'and' */ && aw_();
             }
 
             CqlBoolean aq_ = context.Operators.WhereAny<Medication>(ao_, ap_);
@@ -868,8 +868,8 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                         return br_;
                     }
 
-                    return /* CQL 'or' (125:17-127:13) */ (bm_
-                        || bn_());
+                    return bm_
+                        /* CQL 'or' (125:17-127:13) */ || bn_();
                 }
 
 
@@ -895,10 +895,10 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     return cb_;
                 }
 
-                return /* CQL 'and' (124:21-129:56) */ (/* CQL 'and' (124:21-128:71) */ (/* CQL 'and' (124:21-127:13) */ (bf_
-                    && bg_())
-                    && bh_())
-                    && bi_());
+                return bf_
+                    /* CQL 'and' (124:21-127:13) */ && bg_()
+                    /* CQL 'and' (124:21-128:71) */ && bh_()
+                    /* CQL 'and' (124:21-129:56) */ && bi_();
             }
 
             CqlBoolean bd_ = context.Operators.WhereAny<Task>(bb_, bc_);

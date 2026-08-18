@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS69FHIRPCSBMIScreenAndFollowUp", "1.0.000")]
 public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000>
 {
@@ -172,9 +172,9 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return r_;
             }
 
-            return /* CQL 'and' (175:5-177:42) */ (/* CQL 'and' (175:11-176:41) */ (h_
-                && i_())
-                && j_());
+            return h_
+                /* CQL 'and' (175:11-176:41) */ && i_()
+                /* CQL 'and' (175:5-177:42) */ && j_();
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -279,17 +279,17 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     return ad_;
                 }
 
-                return /* CQL 'and' (168:9-170:85) */ (/* CQL 'and' (168:15-169:79) */ (r_
-                    && s_())
-                    && t_());
+                return r_
+                    /* CQL 'and' (168:15-169:79) */ && s_()
+                    /* CQL 'and' (168:9-170:85) */ && t_();
             }
 
             CqlBoolean m_ = context.Operators.WhereAny<Observation>(k_, l_);
             return m_;
         }
 
-        return /* CQL 'or' (163:3-171:5) */ (f_
-            || g_());
+        return f_
+            /* CQL 'or' (163:3-171:5) */ || g_();
     }
 
 
@@ -302,9 +302,9 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        return /* CQL 'or' (45:3-47:46) */ (/* CQL 'or' (45:3-46:69) */ (a_
-            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context))
-            || this.Is_Pregnant_During_Measurement_Period(context));
+        return a_
+            /* CQL 'or' (45:3-46:69) */ || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context)
+            /* CQL 'or' (45:3-47:46) */ || this.Is_Pregnant_During_Measurement_Period(context);
     }
 
 
@@ -334,8 +334,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return n_;
             }
 
-            return /* CQL 'and' (60:5-61:73) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (60:5-61:73) */ && i_();
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -399,8 +399,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     return aa_;
                 }
 
-                return /* CQL 'and' */ (v_
-                    && w_());
+                return v_
+                    /* CQL 'and' */ && w_();
             }
 
             CqlBoolean q_ = context.Operators.WhereAny<Medication>(o_, p_);
@@ -451,8 +451,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return aq_;
             }
 
-            return /* CQL 'or' (90:7-94:9) */ (ai_
-                || aj_());
+            return ai_
+                /* CQL 'or' (90:7-94:9) */ || aj_();
         }
 
         IEnumerable<object> n_ = context.Operators.Where<object>(l_, m_);
@@ -575,16 +575,16 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                         return !ah_;
                     }
 
-                    return /* CQL 'and' (101:13-102:144) */ (u_
-                        && v_());
+                    return u_
+                        /* CQL 'and' (101:13-102:144) */ && v_();
                 }
 
                 CqlBoolean o_ = context.Operators.WhereAny<Condition>(m_, n_);
                 return o_;
             }
 
-            return /* CQL 'or' (99:7-103:9) */ (i_
-                || j_());
+            return i_
+                /* CQL 'or' (99:7-103:9) */ || j_();
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -719,8 +719,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     return aa_;
                 }
 
-                return /* CQL 'and' */ (v_
-                    && w_());
+                return v_
+                    /* CQL 'and' */ && w_();
             }
 
             CqlBoolean q_ = context.Operators.WhereAny<Medication>(o_, p_);
@@ -773,16 +773,16 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                         return ba_;
                     }
 
-                    return /* CQL 'and' (121:13-122:87) */ (av_
-                        && aw_());
+                    return av_
+                        /* CQL 'and' (121:13-122:87) */ && aw_();
                 }
 
                 CqlBoolean aq_ = context.Operators.WhereAny<Condition>(ao_, ap_);
                 return aq_;
             }
 
-            return /* CQL 'or' (118:7-123:9) */ (ai_
-                || aj_());
+            return ai_
+                /* CQL 'or' (118:7-123:9) */ || aj_();
         }
 
         IEnumerable<object> n_ = context.Operators.Where<object>(l_, m_);
@@ -964,19 +964,19 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                         return !az_;
                     }
 
-                    return /* CQL 'and' (131:13-134:148) */ (/* CQL 'and' (131:19-133:103) */ (/* CQL 'and' (131:19-132:148) */ (u_
-                        && v_())
-                        && w_())
-                        && x_());
+                    return u_
+                        /* CQL 'and' (131:19-132:148) */ && v_()
+                        /* CQL 'and' (131:19-133:103) */ && w_()
+                        /* CQL 'and' (131:13-134:148) */ && x_();
                 }
 
                 CqlBoolean t_ = context.Operators.WhereAny<Condition>(r_, s_);
                 return t_;
             }
 
-            return /* CQL 'or' (128:7-135:9) */ (/* CQL 'and' (128:13-129:58) */ (i_
-                && j_())
-                || k_());
+            return i_
+                /* CQL 'and' (128:13-129:58) */ && j_()
+                /* CQL 'or' (128:7-135:9) */ || k_();
         }
 
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
@@ -1079,8 +1079,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return m_;
             }
 
-            return /* CQL 'and' (73:7-74:34) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (73:7-74:34) */ && i_();
         }
 
         CqlBoolean c_ = context.Operators.WhereAny<Observation>(a_, b_);
@@ -1095,12 +1095,12 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return r_;
             }
 
-            return !((bool?)(/* CQL 'or' (76:13-78:5) */ (o_
-                || p_())));
+            return !((bool?)(o_
+                /* CQL 'or' (76:13-78:5) */ || p_()));
         }
 
-        return /* CQL 'and' (72:3-78:5) */ (c_
-            && d_());
+        return c_
+            /* CQL 'and' (72:3-78:5) */ && d_();
     }
 
 
@@ -1121,9 +1121,9 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             return e_;
         }
 
-        return /* CQL 'or' (50:3-52:23) */ (/* CQL 'or' (50:3-51:46) */ (b_
-            || c_())
-            || this.Has_Normal_BMI(context));
+        return b_
+            /* CQL 'or' (50:3-51:46) */ || c_()
+            /* CQL 'or' (50:3-52:23) */ || this.Has_Normal_BMI(context);
     }
 
 
@@ -1197,8 +1197,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return av_;
             }
 
-            return /* CQL 'and' (151:7-152:59) */ (an_
-                && ao_());
+            return an_
+                /* CQL 'and' (151:7-152:59) */ && ao_();
         }
 
         IEnumerable<ServiceRequest> o_ = context.Operators.Where<ServiceRequest>(m_, n_);
@@ -1249,8 +1249,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return bs_;
             }
 
-            return /* CQL 'and' (158:9-159:58) */ (bm_
-                && bn_());
+            return bm_
+                /* CQL 'and' (158:9-159:58) */ && bn_();
         }
 
         IEnumerable<MedicationRequest> z_ = context.Operators.Where<MedicationRequest>(x_, y_);
@@ -1340,8 +1340,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return ak_;
             }
 
-            return /* CQL 'or' (110:5-112:5) */ (y_
-                || z_());
+            return y_
+                /* CQL 'or' (110:5-112:5) */ || z_();
         }
 
         IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
@@ -1366,8 +1366,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             return e_;
         }
 
-        return /* CQL 'or' (55:3-56:76) */ (b_
-            || c_());
+        return b_
+            /* CQL 'or' (55:3-56:76) */ || c_();
     }
 
 

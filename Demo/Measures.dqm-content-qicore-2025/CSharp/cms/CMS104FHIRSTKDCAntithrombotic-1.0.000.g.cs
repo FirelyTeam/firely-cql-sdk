@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS104FHIRSTKDCAntithrombotic", "1.0.000")]
 public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleton<CMS104FHIRSTKDCAntithrombotic_1_0_000>
 {
@@ -144,8 +144,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                         return x_;
                     }
 
-                    return /* CQL 'and' */ (s_
-                        && t_());
+                    return s_
+                        /* CQL 'and' */ && t_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -185,8 +185,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
 
                 CqlBoolean ae_() {
                     CqlBoolean am_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAntithrombotic as MedicationRequest);
-                    return /* CQL 'or' (36:13-38:9) */ (am_
-                        || QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAntithrombotic as MedicationRequest));
+                    return am_
+                        /* CQL 'or' (36:13-38:9) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAntithrombotic as MedicationRequest);
                 }
 
 
@@ -216,19 +216,19 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                             return bc_;
                         }
 
-                        return /* CQL 'and' (41:13-42:58) */ (aw_
-                            && ax_());
+                        return aw_
+                            /* CQL 'and' (41:13-42:58) */ && ax_();
                     }
 
                     CqlBoolean au_ = context.Operators.WhereAny<Task>(as_, at_);
                     return !au_;
                 }
 
-                return /* CQL 'and' (34:17-43:9) */ (/* CQL 'and' (34:17-39:84) */ (/* CQL 'and' (34:17-38:9) */ (/* CQL 'and' (34:17-35:125) */ (ac_
-                    && ad_())
-                    && ae_())
-                    && af_())
-                    && ag_());
+                return ac_
+                    /* CQL 'and' (34:17-35:125) */ && ad_()
+                    /* CQL 'and' (34:17-38:9) */ && ae_()
+                    /* CQL 'and' (34:17-39:84) */ && af_()
+                    /* CQL 'and' (34:17-43:9) */ && ag_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -281,8 +281,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
 
             CqlBoolean t_() {
                 CqlBoolean ad_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAntithromboticDischarge as MedicationRequest);
-                return /* CQL 'or' (59:13-61:9) */ (ad_
-                    || QICoreCommon_4_0_000.Instance.isDischarge(context, NoAntithromboticDischarge as MedicationRequest));
+                return ad_
+                    /* CQL 'or' (59:13-61:9) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, NoAntithromboticDischarge as MedicationRequest);
             }
 
 
@@ -314,11 +314,11 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return an_;
             }
 
-            return /* CQL 'and' (56:7-63:127) */ (/* CQL 'and' (56:13-62:73) */ (/* CQL 'and' (56:13-61:9) */ (/* CQL 'or' (56:13-58:7) */ (r_
-                || s_())
-                && t_())
-                && u_())
-                && v_());
+            return r_
+                /* CQL 'or' (56:13-58:7) */ || s_()
+                /* CQL 'and' (56:13-61:9) */ && t_()
+                /* CQL 'and' (56:13-62:73) */ && u_()
+                /* CQL 'and' (56:7-63:127) */ && v_();
         }
 
         IEnumerable<MedicationRequest> e_ = context.Operators.Where<MedicationRequest>(c_, d_);
@@ -342,8 +342,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     return ba_;
                 }
 
-                return /* CQL 'and' */ (av_
-                    && aw_());
+                return av_
+                    /* CQL 'and' */ && aw_();
             }
 
             CqlBoolean aq_ = context.Operators.WhereAny<Medication>(ao_, ap_);
@@ -375,8 +375,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                         return br_;
                     }
 
-                    return /* CQL 'or' (68:17-70:13) */ (bm_
-                        || bn_());
+                    return bm_
+                        /* CQL 'or' (68:17-70:13) */ || bn_();
                 }
 
 
@@ -402,10 +402,10 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     return cb_;
                 }
 
-                return /* CQL 'and' (67:21-72:56) */ (/* CQL 'and' (67:21-71:72) */ (/* CQL 'and' (67:21-70:13) */ (bf_
-                    && bg_())
-                    && bh_())
-                    && bi_());
+                return bf_
+                    /* CQL 'and' (67:21-70:13) */ && bg_()
+                    /* CQL 'and' (67:21-71:72) */ && bh_()
+                    /* CQL 'and' (67:21-72:56) */ && bi_();
             }
 
             CqlBoolean bd_ = context.Operators.WhereAny<Task>(bb_, bc_);
@@ -477,8 +477,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     return u_;
                 }
 
-                return /* CQL 'and' */ (p_
-                    && q_());
+                return p_
+                    /* CQL 'and' */ && q_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -521,10 +521,10 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return ah_;
             }
 
-            return /* CQL 'and' (82:5-86:132) */ (/* CQL 'and' (82:11-85:78) */ (/* CQL 'or' (82:11-84:5) */ (v_
-                || QICoreCommon_4_0_000.Instance.isDischarge(context, PharmacologicalContraindications as MedicationRequest))
-                && w_())
-                && x_());
+            return v_
+                /* CQL 'or' (82:11-84:5) */ || QICoreCommon_4_0_000.Instance.isDischarge(context, PharmacologicalContraindications as MedicationRequest)
+                /* CQL 'and' (82:11-85:78) */ && w_()
+                /* CQL 'and' (82:5-86:132) */ && x_();
         }
 
         IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);

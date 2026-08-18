@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS124FHIRCervicalCancerScreen", "1.0.000")]
 public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISingleton<CMS124FHIRCervicalCancerScreen_1_0_000>
 {
@@ -212,9 +212,9 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
             return z_;
         }
 
-        return /* CQL 'and' (33:3-37:38) */ (/* CQL 'and' (33:3-36:33) */ (j_
-            && k_())
-            && l_());
+        return j_
+            /* CQL 'and' (33:3-36:33) */ && k_()
+            /* CQL 'and' (33:3-37:38) */ && l_();
     }
 
 
@@ -326,9 +326,9 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
             return d_;
         }
 
-        return /* CQL 'or' (53:3-55:69) */ (/* CQL 'or' (53:3-54:33) */ (a_
-            || b_())
-            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context));
+        return a_
+            /* CQL 'or' (53:3-54:33) */ || b_()
+            /* CQL 'or' (53:3-55:69) */ || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
     }
 
 
@@ -387,8 +387,8 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 return !((bool?)(u_ is null));
             }
 
-            return /* CQL 'and' (73:5-74:44) */ (n_
-                && o_());
+            return n_
+                /* CQL 'and' (73:5-74:44) */ && o_();
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -491,9 +491,9 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 return !((bool?)(ai_ is null));
             }
 
-            return /* CQL 'and' (78:5-80:35) */ (/* CQL 'and' (78:11-79:131) */ (n_
-                && o_())
-                && p_());
+            return n_
+                /* CQL 'and' (78:11-79:131) */ && o_()
+                /* CQL 'and' (78:5-80:35) */ && p_();
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -518,8 +518,8 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
             return e_;
         }
 
-        return /* CQL 'or' (58:3-59:66) */ (b_
-            || c_());
+        return b_
+            /* CQL 'or' (58:3-59:66) */ || c_();
     }
 
 

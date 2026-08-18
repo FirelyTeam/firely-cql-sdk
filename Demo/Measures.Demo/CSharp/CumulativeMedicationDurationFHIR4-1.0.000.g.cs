@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CumulativeMedicationDurationFHIR4", "1.0.000")]
 public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISingleton<CumulativeMedicationDurationFHIR4_1_0_000>
 {
@@ -557,8 +557,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 return u_;
             }
 
-            if ((!((bool?)(/* CQL 'or' (177:14-177:84) */ ((CqlBoolean)(k_ is null)
-                || l_())))) ?? false)
+            if ((!((bool?)((CqlBoolean)(k_ is null)
+                /* CQL 'or' (177:14-177:84) */ || l_()))) ?? false)
             {
                 CqlDateTime v_ = context.Operators.Start(j_);
                 MedicationRequest.DispenseRequestComponent w_ = R?.DispenseRequest;
@@ -704,8 +704,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 return !((bool?)(k_ is null));
             }
 
-            if (((bool?)(/* CQL 'and' (312:10-312:66) */ ((CqlBoolean)(!((bool?)(g_ is null)))
-                && h_()))) ?? false)
+            if ((CqlBoolean)(!((bool?)(g_ is null)))
+                /* CQL 'and' (312:10-312:66) */ && h_())
             {
                 DataType l_ = Administration?.Medication;
                 CqlConcept m_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, l_ as CodeableConcept);
@@ -831,8 +831,8 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
         bool? e_(object M) {
             bool n_ = M is MedicationDispense;
-            return /* CQL 'or' (378:13-378:74) */ (n_
-                || (M is MedicationAdministration));
+            return (CqlBoolean)n_
+                /* CQL 'or' (378:13-378:74) */ || (M is MedicationAdministration);
         }
 
 

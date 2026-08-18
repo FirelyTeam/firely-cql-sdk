@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("QICoreCommon", "4.0.000")]
 public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_0_000>
 {
@@ -439,9 +439,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             return q_;
         }
 
-        return /* CQL 'or' (112:3-114:43) */ (/* CQL 'or' (112:3-113:46) */ (e_
-            || f_())
-            || g_());
+        return e_
+            /* CQL 'or' (112:3-113:46) */ || f_()
+            /* CQL 'or' (112:3-114:43) */ || g_();
     }
 
 
@@ -1157,9 +1157,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             return q_;
         }
 
-        if (((bool?)(/* CQL 'or' (435:4-437:41) */ (/* CQL 'or' (435:4-436:44) */ (e_
-            || f_())
-            || g_()))) ?? false)
+        if (e_
+            /* CQL 'or' (435:4-436:44) */ || f_()
+            /* CQL 'or' (435:4-437:41) */ || g_())
         {
             DataType r_ = condition?.Onset;
             object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
@@ -1236,9 +1236,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             return q_;
         }
 
-        if (((bool?)(/* CQL 'or' (453:4-455:41) */ (/* CQL 'or' (453:4-454:44) */ (e_
-            || f_())
-            || g_()))) ?? false)
+        if (e_
+            /* CQL 'or' (453:4-454:44) */ || f_()
+            /* CQL 'or' (453:4-455:41) */ || g_())
         {
             DataType r_ = condition?.Onset;
             object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
@@ -1401,8 +1401,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             return e_;
         }
 
-        return !((bool?)(/* CQL 'or' (528:7-530:3) */ ((CqlBoolean)(a_ is null)
-            || b_())));
+        return !((bool?)((CqlBoolean)(a_ is null)
+            /* CQL 'or' (528:7-530:3) */ || b_()));
     }
 
 
@@ -1419,8 +1419,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             return e_;
         }
 
-        return !((bool?)(/* CQL 'or' (537:7-539:3) */ ((CqlBoolean)(a_ is null)
-            || b_())));
+        return !((bool?)((CqlBoolean)(a_ is null)
+            /* CQL 'or' (537:7-539:3) */ || b_()));
     }
 
 
@@ -1438,8 +1438,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             return e_;
         }
 
-        return !((bool?)(/* CQL 'or' (547:7-550:3) */ ((CqlBoolean)(a_ is null)
-            || b_())));
+        return !((bool?)((CqlBoolean)(a_ is null)
+            /* CQL 'or' (547:7-550:3) */ || b_()));
     }
 
 
@@ -1456,8 +1456,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             return e_;
         }
 
-        return !((bool?)(/* CQL 'or' (557:7-560:3) */ ((CqlBoolean)(a_ is null)
-            || b_())));
+        return !((bool?)((CqlBoolean)(a_ is null)
+            /* CQL 'or' (557:7-560:3) */ || b_()));
     }
 
 

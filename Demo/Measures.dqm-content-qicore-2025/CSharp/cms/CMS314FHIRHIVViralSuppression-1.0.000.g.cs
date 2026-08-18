@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS314FHIRHIVViralSuppression", "1.0.000")]
 public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleton<CMS314FHIRHIVViralSuppression_1_0_000>
 {
@@ -173,14 +173,14 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                 return z_;
             }
 
-            return /* CQL 'or' (76:52-80:3) */ (/* CQL 'or' (76:54-78:66) */ (/* CQL 'or' (76:54-77:66) */ (h_
-                || i_())
-                || j_())
-                || k_());
+            return h_
+                /* CQL 'or' (76:54-77:66) */ || i_()
+                /* CQL 'or' (76:54-78:66) */ || j_()
+                /* CQL 'or' (76:52-80:3) */ || k_();
         }
 
-        return /* CQL 'implies' (76:3-80:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_());
+        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+            /* CQL 'implies' (76:3-80:3) */ || c_();
     }
 
 
@@ -205,8 +205,8 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
             CqlQuantity k_ = context.Operators.Quantity(90m, "days");
             CqlDateTime l_ = context.Operators.Add(j_, k_);
             CqlBoolean m_ = context.Operators.Before(h_, l_, "day");
-            return /* CQL 'and' (39:5-40:30) */ (m_
-                && this.isVerified(context, HIVDx));
+            return m_
+                /* CQL 'and' (39:5-40:30) */ && this.isVerified(context, HIVDx);
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -273,8 +273,8 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                 return au_;
             }
 
-            return /* CQL 'and' (67:5-68:49) */ (ap_
-                && aq_());
+            return ap_
+                /* CQL 'and' (67:5-68:49) */ && aq_();
         }
 
         CqlBoolean ah_ = context.Operators.WhereAny<Encounter>(af_, ag_);
@@ -291,8 +291,8 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
     private bool? Initial_Population_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period(context);
-        return /* CQL 'and' (43:3-44:78) */ (a_
-            && this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period(context));
+        return a_
+            /* CQL 'and' (43:3-44:78) */ && this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period(context);
     }
 
 
@@ -365,8 +365,8 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                 return q_;
             }
 
-            return /* CQL 'and' (48:7-49:75) */ (l_
-                && m_());
+            return l_
+                /* CQL 'and' (48:7-49:75) */ && m_();
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -444,9 +444,9 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
             return s_;
         }
 
-        return /* CQL 'or' (71:3-73:103) */ (/* CQL 'or' (71:3-72:112) */ (e_
-            || f_())
-            || g_());
+        return e_
+            /* CQL 'or' (71:3-72:112) */ || f_()
+            /* CQL 'or' (71:3-73:103) */ || g_();
     }
 
 

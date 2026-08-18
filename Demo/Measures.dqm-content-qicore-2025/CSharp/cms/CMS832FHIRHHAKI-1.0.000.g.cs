@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS832FHIRHHAKI", "1.0.000")]
 public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHHAKI_1_0_000>
 {
@@ -280,11 +280,11 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return ax_;
             }
 
-            return /* CQL 'and' (66:5-70:94) */ (/* CQL 'and' (66:11-69:74) */ (/* CQL 'and' (66:11-68:48) */ (/* CQL 'and' (66:11-67:75) */ (p_
-                && q_())
-                && r_())
-                && s_())
-                && t_());
+            return p_
+                /* CQL 'and' (66:11-67:75) */ && q_()
+                /* CQL 'and' (66:11-68:48) */ && r_()
+                /* CQL 'and' (66:11-69:74) */ && s_()
+                /* CQL 'and' (66:5-70:94) */ && t_();
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -368,9 +368,9 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return af_;
             }
 
-            return /* CQL 'and' (78:5-80:70) */ (/* CQL 'and' (78:11-79:118) */ ((CqlBoolean)(!((bool?)((l_ as CqlQuantity) is null)))
-                && m_())
-                && n_());
+            return (CqlBoolean)(!((bool?)((l_ as CqlQuantity) is null)))
+                /* CQL 'and' (78:11-79:118) */ && m_()
+                /* CQL 'and' (78:5-80:70) */ && n_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter Encounter48Hours, Observation CreatinineTest)?> g_ = context.Operators.SelectWhere<ValueTuple<Encounter, Observation>, (CqlTupleMetadata, Encounter Encounter48Hours, Observation CreatinineTest)?>(d_, e_, f_);
@@ -424,8 +424,8 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return p_;
             }
 
-            return !((bool?)(/* CQL 'or' (85:15-87:5) */ (h_
-                || i_())));
+            return !((bool?)(h_
+                /* CQL 'or' (85:15-87:5) */ || i_()));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -556,10 +556,10 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return aj_;
             }
 
-            return /* CQL 'and' (282:5-285:70) */ (/* CQL 'and' (282:11-284:109) */ (/* CQL 'and' (282:11-283:204) */ ((CqlBoolean)(!((bool?)((h_ as CqlQuantity) is null)))
-                && i_())
-                && j_())
-                && k_());
+            return (CqlBoolean)(!((bool?)((h_ as CqlQuantity) is null)))
+                /* CQL 'and' (282:11-283:204) */ && i_()
+                /* CQL 'and' (282:11-284:109) */ && j_()
+                /* CQL 'and' (282:5-285:70) */ && k_();
         }
 
         Observation d_(Observation CreatinineTest) => CreatinineTest;
@@ -695,8 +695,8 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return r_;
             }
 
-            return /* CQL 'and' (303:9-304:188) */ (j_
-                && k_());
+            return j_
+                /* CQL 'and' (303:9-304:188) */ && k_();
         }
 
         IEnumerable<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?> c_ = context.Operators.Where<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?>(a_, b_);
@@ -807,12 +807,12 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return am_;
             }
 
-            return /* CQL 'and' (233:5-238:60) */ (/* CQL 'and' (233:11-237:48) */ (/* CQL 'and' (233:11-236:32) */ (/* CQL 'and' (233:11-235:76) */ (/* CQL 'and' (233:11-234:47) */ (p_
-                && QICoreCommon_4_0_000.Instance.isLaboratory(context, tuple_ccccqpjvqogtctjhtilehkfoj?.CreatinineTestByTime as Observation))
-                && q_())
-                && r_())
-                && s_())
-                && t_());
+            return p_
+                /* CQL 'and' (233:11-234:47) */ && QICoreCommon_4_0_000.Instance.isLaboratory(context, tuple_ccccqpjvqogtctjhtilehkfoj?.CreatinineTestByTime as Observation)
+                /* CQL 'and' (233:11-235:76) */ && q_()
+                /* CQL 'and' (233:11-236:32) */ && r_()
+                /* CQL 'and' (233:11-237:48) */ && s_()
+                /* CQL 'and' (233:5-238:60) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation CreatinineTestByTime)?> g_ = context.Operators.SelectWhere<ValueTuple<Encounter, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, Observation CreatinineTestByTime)?>(d_, e_, f_);
@@ -942,8 +942,8 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return r_;
             }
 
-            return /* CQL 'and' (319:11-320:189) */ (j_
-                && k_());
+            return j_
+                /* CQL 'and' (319:11-320:189) */ && k_();
         }
 
         IEnumerable<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?> c_ = context.Operators.Where<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?>(a_, b_);
@@ -985,8 +985,8 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return h_;
             }
 
-            return /* CQL 'and' (104:5-105:60) */ ((CqlBoolean)(!((bool?)(d_ is null)))
-                && e_());
+            return (CqlBoolean)(!((bool?)(d_ is null)))
+                /* CQL 'and' (104:5-105:60) */ && e_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1086,8 +1086,8 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return h_;
             }
 
-            return /* CQL 'and' (99:5-100:62) */ ((CqlBoolean)(!((bool?)(d_ is null)))
-                && e_());
+            return (CqlBoolean)(!((bool?)(d_ is null)))
+                /* CQL 'and' (99:5-100:62) */ && e_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1458,16 +1458,16 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return !dc_;
             }
 
-            return /* CQL 'and' (119:5-128:73) */ (/* CQL 'and' (119:11-127:150) */ (/* CQL 'and' (119:11-126:80) */ (/* CQL 'and' (119:11-125:145) */ (/* CQL 'and' (119:11-124:75) */ (/* CQL 'and' (119:11-123:135) */ (/* CQL 'and' (119:11-122:96) */ (/* CQL 'and' (119:11-121:130) */ (/* CQL 'and' (119:11-120:85) */ (o_
-                && p_())
-                && q_())
-                && r_())
-                && s_())
-                && t_())
-                && u_())
-                && v_())
-                && w_())
-                && x_());
+            return o_
+                /* CQL 'and' (119:11-120:85) */ && p_()
+                /* CQL 'and' (119:11-121:130) */ && q_()
+                /* CQL 'and' (119:11-122:96) */ && r_()
+                /* CQL 'and' (119:11-123:135) */ && s_()
+                /* CQL 'and' (119:11-124:75) */ && t_()
+                /* CQL 'and' (119:11-125:145) */ && u_()
+                /* CQL 'and' (119:11-126:80) */ && v_()
+                /* CQL 'and' (119:11-127:150) */ && w_()
+                /* CQL 'and' (119:5-128:73) */ && x_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation IndexCreatinineLabResult, Observation SubsequentCreatinineLabResult)?> g_ = context.Operators.SelectWhere<ValueTuple<Encounter, Observation, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, Observation IndexCreatinineLabResult, Observation SubsequentCreatinineLabResult)?>(d_, e_, f_);
@@ -1850,16 +1850,16 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return !dd_;
             }
 
-            return /* CQL 'and' (139:5-148:73) */ (/* CQL 'and' (139:11-147:145) */ (/* CQL 'and' (139:11-146:80) */ (/* CQL 'and' (139:11-145:150) */ (/* CQL 'and' (139:11-144:75) */ (/* CQL 'and' (139:11-143:135) */ (/* CQL 'and' (139:11-142:125) */ (/* CQL 'and' (139:11-141:130) */ (/* CQL 'and' (139:11-140:85) */ (o_
-                && p_())
-                && q_())
-                && r_())
-                && s_())
-                && t_())
-                && u_())
-                && v_())
-                && w_())
-                && x_());
+            return o_
+                /* CQL 'and' (139:11-140:85) */ && p_()
+                /* CQL 'and' (139:11-141:130) */ && q_()
+                /* CQL 'and' (139:11-142:125) */ && r_()
+                /* CQL 'and' (139:11-143:135) */ && s_()
+                /* CQL 'and' (139:11-144:75) */ && t_()
+                /* CQL 'and' (139:11-145:150) */ && u_()
+                /* CQL 'and' (139:11-146:80) */ && v_()
+                /* CQL 'and' (139:11-147:145) */ && w_()
+                /* CQL 'and' (139:5-148:73) */ && x_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation IndexCreatinineLabResult, Observation SubsequentCreatinineLabResult)?> g_ = context.Operators.SelectWhere<ValueTuple<Encounter, Observation, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, Observation IndexCreatinineLabResult, Observation SubsequentCreatinineLabResult)?>(d_, e_, f_);
@@ -2002,9 +2002,9 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return aj_;
             }
 
-            return /* CQL 'and' (163:5-165:87) */ (/* CQL 'and' (163:11-164:157) */ (n_
-                && o_())
-                && p_());
+            return n_
+                /* CQL 'and' (163:11-164:157) */ && o_()
+                /* CQL 'and' (163:5-165:87) */ && p_();
         }
 
         IEnumerable<(CqlTupleMetadata, Procedure Dialysis, Encounter QualifyingEncounter)?> g_ = context.Operators.SelectWhere<ValueTuple<Procedure, Encounter>, (CqlTupleMetadata, Procedure Dialysis, Encounter QualifyingEncounter)?>(d_, e_, f_);
@@ -2310,8 +2310,8 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                     return !((bool?)(br_ is null));
                 }
 
-                return /* CQL 'and' (269:11-269:76) */ (bc_
-                    && bd_());
+                return bc_
+                    /* CQL 'and' (269:11-269:76) */ && bd_();
             }
 
 
@@ -2425,16 +2425,16 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return cv_;
             }
 
-            return /* CQL 'and' (263:5-272:69) */ (/* CQL 'and' (263:11-271:149) */ (/* CQL 'and' (263:11-270:68) */ (/* CQL 'and' (263:11-269:76) */ (/* CQL 'and' (263:11-268:94) */ (/* CQL 'and' (263:11-267:89) */ (/* CQL 'and' (263:11-266:91) */ (/* CQL 'and' (263:11-265:74) */ (/* CQL 'and' (263:11-264:73) */ (n_
-                && o_())
-                && p_())
-                && q_())
-                && r_())
-                && s_())
-                && t_())
-                && u_())
-                && v_())
-                && w_());
+            return n_
+                /* CQL 'and' (263:11-264:73) */ && o_()
+                /* CQL 'and' (263:11-265:74) */ && p_()
+                /* CQL 'and' (263:11-266:91) */ && q_()
+                /* CQL 'and' (263:11-267:89) */ && r_()
+                /* CQL 'and' (263:11-268:94) */ && s_()
+                /* CQL 'and' (263:11-269:76) */ && t_()
+                /* CQL 'and' (263:11-270:68) */ && u_()
+                /* CQL 'and' (263:11-271:149) */ && v_()
+                /* CQL 'and' (263:5-272:69) */ && w_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HighCreatinineTest, Observation LowCreatinineTest)?> g_ = context.Operators.SelectWhere<ValueTuple<Encounter, Observation, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, Observation HighCreatinineTest, Observation LowCreatinineTest)?>(d_, e_, f_);
@@ -2647,8 +2647,8 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                     return !((bool?)(bs_ is null));
                 }
 
-                return /* CQL 'and' (182:11-182:76) */ (bd_
-                    && be_());
+                return bd_
+                    /* CQL 'and' (182:11-182:76) */ && be_();
             }
 
 
@@ -2762,16 +2762,16 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return cw_;
             }
 
-            return /* CQL 'and' (176:5-185:69) */ (/* CQL 'and' (176:11-184:149) */ (/* CQL 'and' (176:11-183:68) */ (/* CQL 'and' (176:11-182:76) */ (/* CQL 'and' (176:11-181:93) */ (/* CQL 'and' (176:11-180:97) */ (/* CQL 'and' (176:11-179:99) */ (/* CQL 'and' (176:11-178:74) */ (/* CQL 'and' (176:11-177:73) */ (n_
-                && o_())
-                && p_())
-                && q_())
-                && r_())
-                && s_())
-                && t_())
-                && u_())
-                && v_())
-                && w_());
+            return n_
+                /* CQL 'and' (176:11-177:73) */ && o_()
+                /* CQL 'and' (176:11-178:74) */ && p_()
+                /* CQL 'and' (176:11-179:99) */ && q_()
+                /* CQL 'and' (176:11-180:97) */ && r_()
+                /* CQL 'and' (176:11-181:93) */ && s_()
+                /* CQL 'and' (176:11-182:76) */ && t_()
+                /* CQL 'and' (176:11-183:68) */ && u_()
+                /* CQL 'and' (176:11-184:149) */ && v_()
+                /* CQL 'and' (176:5-185:69) */ && w_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter EncounterWithHighCreatinine, Observation HighCreatinineTest, Observation LowCreatinineTest)?> g_ = context.Operators.SelectWhere<ValueTuple<Encounter, Observation, Observation>, (CqlTupleMetadata, Encounter EncounterWithHighCreatinine, Observation HighCreatinineTest, Observation LowCreatinineTest)?>(d_, e_, f_);
@@ -2856,8 +2856,8 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return p_;
             }
 
-            return /* CQL 'or' (194:5-196:5) */ (h_
-                || i_());
+            return h_
+                /* CQL 'or' (194:5-196:5) */ || i_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -2929,8 +2929,8 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                     return q_;
                 }
 
-                return /* CQL 'and' (201:17-202:124) */ (k_
-                    && l_());
+                return k_
+                    /* CQL 'and' (201:17-202:124) */ && l_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -3084,9 +3084,9 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return aq_;
             }
 
-            return /* CQL 'and' (216:5-218:39) */ (/* CQL 'and' (216:11-217:87) */ (t_
-                && u_())
-                && v_());
+            return t_
+                /* CQL 'and' (216:11-217:87) */ && u_()
+                /* CQL 'and' (216:5-218:39) */ && v_();
         }
 
         IEnumerable<(CqlTupleMetadata, Procedure Dialysis, Encounter QualifyingEncounter)?> g_ = context.Operators.SelectWhere<ValueTuple<Procedure, Encounter>, (CqlTupleMetadata, Procedure Dialysis, Encounter QualifyingEncounter)?>(d_, e_, f_);
@@ -3297,25 +3297,25 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                                 return aw_;
                             }
 
-                            return /* CQL 'and' (385:17-386:89) */ (aj_
-                                && ak_());
+                            return aj_
+                                /* CQL 'and' (385:17-386:89) */ && ak_();
                         }
 
                         CqlBoolean ab_ = context.Operators.WhereAny<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)z_, aa_);
                         return ab_;
                     }
 
-                    return /* CQL 'and' (383:11-387:13) */ (x_
-                        && y_());
+                    return x_
+                        /* CQL 'and' (383:11-387:13) */ && y_();
                 }
 
                 CqlBoolean v_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)t_, u_);
                 return v_;
             }
 
-            return /* CQL 'and' (380:5-388:7) */ (/* CQL 'and' (380:11-381:27) */ (m_
-                && n_())
-                && o_());
+            return m_
+                /* CQL 'and' (380:11-381:27) */ && n_()
+                /* CQL 'and' (380:5-388:7) */ && o_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Claim clm)?> f_ = context.Operators.SelectWhere<ValueTuple<Encounter, Claim>, (CqlTupleMetadata, Encounter QualifyingEncounter, Claim clm)?>(c_, d_, e_);
@@ -3348,8 +3348,8 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return !((bool?)(p_ is null));
             }
 
-            return /* CQL 'and' (427:7-428:45) */ (m_
-                && n_());
+            return m_
+                /* CQL 'and' (427:7-428:45) */ && n_();
         }
 
         IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
@@ -3410,8 +3410,8 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return !((bool?)(p_ is null));
             }
 
-            return /* CQL 'and' (434:7-435:46) */ (m_
-                && n_());
+            return m_
+                /* CQL 'and' (434:7-435:46) */ && n_();
         }
 
         IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
@@ -3542,8 +3542,8 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return !((bool?)(p_ is null));
             }
 
-            return /* CQL 'and' (420:7-421:46) */ (m_
-                && n_());
+            return m_
+                /* CQL 'and' (420:7-421:46) */ && n_();
         }
 
         IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS136FHIRChildADHDMedFollowUp", "1.0.000")]
 public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISingleton<CMS136FHIRChildADHDMedFollowUp_1_0_000>
 {
@@ -254,8 +254,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return bx_;
                 }
 
-                return /* CQL 'and' */ (bs_
-                    && bt_());
+                return bs_
+                    /* CQL 'and' */ && bt_();
             }
 
             CqlBoolean bn_ = context.Operators.WhereAny<Medication>(bl_, bm_);
@@ -285,8 +285,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return ck_;
                 }
 
-                return /* CQL 'and' */ (cf_
-                    && cg_());
+                return cf_
+                    /* CQL 'and' */ && cg_();
             }
 
             CqlBoolean ca_ = context.Operators.WhereAny<Medication>(by_, bz_);
@@ -317,8 +317,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return cx_;
                 }
 
-                return /* CQL 'and' */ (cs_
-                    && ct_());
+                return cs_
+                    /* CQL 'and' */ && ct_();
             }
 
             CqlBoolean cn_ = context.Operators.WhereAny<Medication>(cl_, cm_);
@@ -349,8 +349,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return dk_;
                 }
 
-                return /* CQL 'and' */ (df_
-                    && dg_());
+                return df_
+                    /* CQL 'and' */ && dg_();
             }
 
             CqlBoolean da_ = context.Operators.WhereAny<Medication>(cy_, cz_);
@@ -381,8 +381,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return dx_;
                 }
 
-                return /* CQL 'and' */ (ds_
-                    && dt_());
+                return ds_
+                    /* CQL 'and' */ && dt_();
             }
 
             CqlBoolean dn_ = context.Operators.WhereAny<Medication>(dl_, dm_);
@@ -414,8 +414,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return el_;
                 }
 
-                return /* CQL 'and' */ (ef_
-                    && eg_());
+                return ef_
+                    /* CQL 'and' */ && eg_();
             }
 
             CqlBoolean ea_ = context.Operators.WhereAny<Medication>(dy_, dz_);
@@ -447,8 +447,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return ey_;
                 }
 
-                return /* CQL 'and' */ (et_
-                    && eu_());
+                return et_
+                    /* CQL 'and' */ && eu_();
             }
 
             CqlBoolean eo_ = context.Operators.WhereAny<Medication>(em_, en_);
@@ -479,8 +479,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return fl_;
                 }
 
-                return /* CQL 'and' */ (fg_
-                    && fh_());
+                return fg_
+                    /* CQL 'and' */ && fh_();
             }
 
             CqlBoolean fb_ = context.Operators.WhereAny<Medication>(ez_, fa_);
@@ -511,8 +511,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return fy_;
                 }
 
-                return /* CQL 'and' */ (ft_
-                    && fu_());
+                return ft_
+                    /* CQL 'and' */ && fu_();
             }
 
             CqlBoolean fo_ = context.Operators.WhereAny<Medication>(fm_, fn_);
@@ -558,8 +558,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                         return iw_;
                     }
 
-                    return /* CQL 'and' */ (ir_
-                        && is_());
+                    return ir_
+                        /* CQL 'and' */ && is_();
                 }
 
                 CqlBoolean im_ = context.Operators.WhereAny<Medication>(ik_, il_);
@@ -589,8 +589,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                         return jj_;
                     }
 
-                    return /* CQL 'and' */ (je_
-                        && jf_());
+                    return je_
+                        /* CQL 'and' */ && jf_();
                 }
 
                 CqlBoolean iz_ = context.Operators.WhereAny<Medication>(ix_, iy_);
@@ -621,8 +621,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                         return jw_;
                     }
 
-                    return /* CQL 'and' */ (jr_
-                        && js_());
+                    return jr_
+                        /* CQL 'and' */ && js_();
                 }
 
                 CqlBoolean jm_ = context.Operators.WhereAny<Medication>(jk_, jl_);
@@ -653,8 +653,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                         return kj_;
                     }
 
-                    return /* CQL 'and' */ (ke_
-                        && kf_());
+                    return ke_
+                        /* CQL 'and' */ && kf_();
                 }
 
                 CqlBoolean jz_ = context.Operators.WhereAny<Medication>(jx_, jy_);
@@ -685,8 +685,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                         return kw_;
                     }
 
-                    return /* CQL 'and' */ (kr_
-                        && ks_());
+                    return kr_
+                        /* CQL 'and' */ && ks_();
                 }
 
                 CqlBoolean km_ = context.Operators.WhereAny<Medication>(kk_, kl_);
@@ -718,8 +718,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                         return lk_;
                     }
 
-                    return /* CQL 'and' */ (le_
-                        && lf_());
+                    return le_
+                        /* CQL 'and' */ && lf_();
                 }
 
                 CqlBoolean kz_ = context.Operators.WhereAny<Medication>(kx_, ky_);
@@ -751,8 +751,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                         return lx_;
                     }
 
-                    return /* CQL 'and' */ (ls_
-                        && lt_());
+                    return ls_
+                        /* CQL 'and' */ && lt_();
                 }
 
                 CqlBoolean ln_ = context.Operators.WhereAny<Medication>(ll_, lm_);
@@ -783,8 +783,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                         return mk_;
                     }
 
-                    return /* CQL 'and' */ (mf_
-                        && mg_());
+                    return mf_
+                        /* CQL 'and' */ && mg_();
                 }
 
                 CqlBoolean ma_ = context.Operators.WhereAny<Medication>(ly_, lz_);
@@ -815,8 +815,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                         return mx_;
                     }
 
-                    return /* CQL 'and' */ (ms_
-                        && mt_());
+                    return ms_
+                        /* CQL 'and' */ && mt_();
                 }
 
                 CqlBoolean mn_ = context.Operators.WhereAny<Medication>(ml_, mm_);
@@ -988,8 +988,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             CqlDate j_ = context.Operators.Add(h_, i_);
             CqlInterval<CqlDate> k_ = context.Operators.Interval(h_, j_, false, true);
             CqlBoolean l_ = context.Operators.In<CqlDate>(g_, k_, "day");
-            return /* CQL 'and' (113:5-113:104) */ (l_
-                && !((bool?)((this.IPSD(context)) is null)));
+            return l_
+                /* CQL 'and' (113:5-113:104) */ && !((bool?)((this.IPSD(context)) is null));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1042,11 +1042,11 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return !y_;
         }
 
-        return /* CQL 'and' (49:3-55:85) */ (/* CQL 'and' (49:3-54:75) */ (/* CQL 'and' (49:3-53:37) */ (/* CQL 'and' (49:3-52:11) */ (i_
-            && j_())
-            && k_())
-            && !((bool?)((this.First_ADHD_Medication_Prescribed_During_Intake_Period(context)) is null)))
-            && l_());
+        return i_
+            /* CQL 'and' (49:3-52:11) */ && j_()
+            /* CQL 'and' (49:3-53:37) */ && k_()
+            /* CQL 'and' (49:3-54:75) */ && !((bool?)((this.First_ADHD_Medication_Prescribed_During_Intake_Period(context)) is null))
+            /* CQL 'and' (49:3-55:85) */ && l_();
     }
 
 
@@ -1107,8 +1107,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return d_;
         }
 
-        return /* CQL 'or' (123:3-124:36) */ (a_
-            || b_());
+        return a_
+            /* CQL 'or' (123:3-124:36) */ || b_();
     }
 
 
@@ -1205,8 +1205,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             CqlDate k_ = context.Operators.Add(i_, j_);
             CqlInterval<CqlDate> l_ = context.Operators.Interval(i_, k_, false, true);
             CqlBoolean m_ = context.Operators.In<CqlDate>(h_, l_, "day");
-            return /* CQL 'and' (137:5-137:114) */ (m_
-                && !((bool?)((this.IPSD(context)) is null)));
+            return m_
+                /* CQL 'and' (137:5-137:114) */ && !((bool?)((this.IPSD(context)) is null));
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -1256,8 +1256,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return eu_;
                 }
 
-                return /* CQL 'and' */ (ep_
-                    && eq_());
+                return ep_
+                    /* CQL 'and' */ && eq_();
             }
 
             CqlBoolean ek_ = context.Operators.WhereAny<Medication>(ei_, ej_);
@@ -1318,8 +1318,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return fn_;
                 }
 
-                return /* CQL 'and' */ (fi_
-                    && fj_());
+                return fi_
+                    /* CQL 'and' */ && fj_();
             }
 
             CqlBoolean fd_ = context.Operators.WhereAny<Medication>(fb_, fc_);
@@ -1381,8 +1381,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return gg_;
                 }
 
-                return /* CQL 'and' */ (gb_
-                    && gc_());
+                return gb_
+                    /* CQL 'and' */ && gc_();
             }
 
             CqlBoolean fw_ = context.Operators.WhereAny<Medication>(fu_, fv_);
@@ -1443,8 +1443,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return gz_;
                 }
 
-                return /* CQL 'and' */ (gu_
-                    && gv_());
+                return gu_
+                    /* CQL 'and' */ && gv_();
             }
 
             CqlBoolean gp_ = context.Operators.WhereAny<Medication>(gn_, go_);
@@ -1507,8 +1507,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return hs_;
                 }
 
-                return /* CQL 'and' */ (hn_
-                    && ho_());
+                return hn_
+                    /* CQL 'and' */ && ho_();
             }
 
             CqlBoolean hi_ = context.Operators.WhereAny<Medication>(hg_, hh_);
@@ -1569,8 +1569,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return il_;
                 }
 
-                return /* CQL 'and' */ (ig_
-                    && ih_());
+                return ig_
+                    /* CQL 'and' */ && ih_();
             }
 
             CqlBoolean ib_ = context.Operators.WhereAny<Medication>(hz_, ia_);
@@ -1633,8 +1633,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return je_;
                 }
 
-                return /* CQL 'and' */ (iz_
-                    && ja_());
+                return iz_
+                    /* CQL 'and' */ && ja_();
             }
 
             CqlBoolean iu_ = context.Operators.WhereAny<Medication>(is_, it_);
@@ -1696,8 +1696,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return jy_;
                 }
 
-                return /* CQL 'and' */ (js_
-                    && jt_());
+                return js_
+                    /* CQL 'and' */ && jt_();
             }
 
             CqlBoolean jn_ = context.Operators.WhereAny<Medication>(jl_, jm_);
@@ -1761,8 +1761,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return kr_;
                 }
 
-                return /* CQL 'and' */ (km_
-                    && kn_());
+                return km_
+                    /* CQL 'and' */ && kn_();
             }
 
             CqlBoolean kh_ = context.Operators.WhereAny<Medication>(kf_, kg_);
@@ -1868,8 +1868,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             CqlDate j_ = context.Operators.Add(h_, i_);
             CqlInterval<CqlDate> k_ = context.Operators.Interval(h_, j_, false, true);
             CqlBoolean l_ = context.Operators.In<CqlDate>(g_, k_, "day");
-            return /* CQL 'and' (175:5-175:105) */ (l_
-                && !((bool?)((this.IPSD(context)) is null)));
+            return l_
+                /* CQL 'and' (175:5-175:105) */ && !((bool?)((this.IPSD(context)) is null));
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1922,12 +1922,12 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return !y_;
         }
 
-        return /* CQL 'and' (158:3-165:103) */ (/* CQL 'and' (158:3-164:83) */ (/* CQL 'and' (158:3-163:75) */ (/* CQL 'and' (158:3-162:37) */ (/* CQL 'and' (158:3-161:11) */ (i_
-            && j_())
-            && k_())
-            && !((bool?)((this.First_ADHD_Medication_Prescribed_During_Intake_Period(context)) is null)))
-            && this.Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days(context))
-            && l_());
+        return i_
+            /* CQL 'and' (158:3-161:11) */ && j_()
+            /* CQL 'and' (158:3-162:37) */ && k_()
+            /* CQL 'and' (158:3-163:75) */ && !((bool?)((this.First_ADHD_Medication_Prescribed_During_Intake_Period(context)) is null))
+            /* CQL 'and' (158:3-164:83) */ && this.Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days(context)
+            /* CQL 'and' (158:3-165:103) */ && l_();
     }
 
 
@@ -2061,9 +2061,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
                 bool? g_(CqlDate Encounter1) {
                     IEnumerable<CqlDate> i_ = this.Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(context);
-                    bool? j_(CqlDate Encounter2) => /* CQL 'and' (271:25-273:44) */ (/* CQL 'and' (271:25-272:42) */ ((CqlBoolean)(!((bool?)(Encounter1 is null)))
-                        && !((bool?)(Encounter2 is null)))
-                        && !(context.Operators.Equivalent(Encounter1, Encounter2)));
+                    bool? j_(CqlDate Encounter2) => (CqlBoolean)(!((bool?)(Encounter1 is null)))
+                        /* CQL 'and' (271:25-272:42) */ && !((bool?)(Encounter2 is null))
+                        /* CQL 'and' (271:25-273:44) */ && !(context.Operators.Equivalent(Encounter1, Encounter2));
                     CqlBoolean k_ = context.Operators.WhereAny<CqlDate>(i_, j_);
                     return k_;
                 }
@@ -2072,12 +2072,12 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return h_;
             }
 
-            return /* CQL 'or' (268:9-275:5) */ (d_
-                || e_());
+            return d_
+                /* CQL 'or' (268:9-275:5) */ || e_();
         }
 
-        return /* CQL 'and' (267:3-275:5) */ (b_
-            && c_());
+        return b_
+            /* CQL 'and' (267:3-275:5) */ && c_();
     }
 
 

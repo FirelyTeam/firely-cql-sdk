@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS1056FHIRCTClinical", "1.0.000")]
 public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS1056FHIRCTClinical_1_0_000>
 {
@@ -174,9 +174,9 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
                 return aa_;
             }
 
-            return /* CQL 'and' (35:5-37:73) */ (/* CQL 'and' (35:11-36:87) */ (j_
-                && k_())
-                && l_());
+            return j_
+                /* CQL 'and' (35:11-36:87) */ && k_()
+                /* CQL 'and' (35:5-37:73) */ && l_();
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
@@ -203,9 +203,9 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
                 return !((bool?)(g_ is null));
             }
 
-            return /* CQL 'and' (41:5-43:34) */ (/* CQL 'and' (41:11-42:50) */ ((CqlBoolean)(!((bool?)(d_ is null)))
-                && !((bool?)((AlaraCommonFunctions_1_10_000.Instance.sizeAdjustedValue(context, CTScan)) is null)))
-                && e_());
+            return (CqlBoolean)(!((bool?)(d_ is null)))
+                /* CQL 'and' (41:11-42:50) */ && !((bool?)((AlaraCommonFunctions_1_10_000.Instance.sizeAdjustedValue(context, CTScan)) is null))
+                /* CQL 'and' (41:5-43:34) */ && e_();
         }
 
         IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);

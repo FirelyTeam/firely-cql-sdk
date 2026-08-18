@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
 public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleton<SupplementalDataElementsFHIR4_2_0_000>
 {
@@ -101,8 +101,8 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
                 return w_;
             }
 
-            return /* CQL 'or' (25:7-26:29) */ (s_
-                || t_());
+            return s_
+                /* CQL 'or' (25:7-26:29) */ || t_();
         }
 
 
@@ -189,8 +189,8 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
                 return w_;
             }
 
-            return /* CQL 'or' (42:7-43:29) */ (s_
-                || t_());
+            return s_
+                /* CQL 'or' (42:7-43:29) */ || t_();
         }
 
 

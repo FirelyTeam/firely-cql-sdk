@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS159FHIRDepRemissionat12Months", "1.0.000")]
 public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingleton<CMS159FHIRDepRemissionat12Months_1_0_000>
 {
@@ -197,8 +197,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 return m_;
             }
 
-            return /* CQL 'and' (77:5-78:76) */ (g_
-                && h_());
+            return g_
+                /* CQL 'and' (77:5-78:76) */ && h_();
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -248,14 +248,14 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 return z_;
             }
 
-            return /* CQL 'or' (175:52-179:3) */ (/* CQL 'or' (175:54-177:66) */ (/* CQL 'or' (175:54-176:66) */ (h_
-                || i_())
-                || j_())
-                || k_());
+            return h_
+                /* CQL 'or' (175:54-176:66) */ || i_()
+                /* CQL 'or' (175:54-177:66) */ || j_()
+                /* CQL 'or' (175:52-179:3) */ || k_();
         }
 
-        return /* CQL 'implies' (175:3-179:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_());
+        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+            /* CQL 'implies' (175:3-179:3) */ || c_();
     }
 
 
@@ -344,9 +344,9 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     return v_;
                 }
 
-                return /* CQL 'and' (90:17-92:46) */ (/* CQL 'and' (90:17-91:88) */ (k_
-                    && l_())
-                    && m_());
+                return k_
+                    /* CQL 'and' (90:17-91:88) */ && l_()
+                    /* CQL 'and' (90:17-92:46) */ && m_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Condition>(e_, f_);
@@ -529,10 +529,10 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 return al_;
             }
 
-            return /* CQL 'and' (117:7-121:50) */ (/* CQL 'and' (117:13-120:147) */ (/* CQL 'or' (117:13-119:7) */ (o_
-                || p_())
-                && q_())
-                && r_());
+            return o_
+                /* CQL 'or' (117:13-119:7) */ || p_()
+                /* CQL 'and' (117:13-120:147) */ && q_()
+                /* CQL 'and' (117:7-121:50) */ && r_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Encounter>(b_, c_);
@@ -566,8 +566,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     return !bf_;
                 }
 
-                return /* CQL 'and' (124:9-125:95) */ (ay_
-                    && az_());
+                return ay_
+                    /* CQL 'and' (124:9-125:95) */ && az_();
             }
 
             CqlBoolean ap_ = context.Operators.WhereAny<Encounter>(an_, ao_);
@@ -615,9 +615,9 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     return cg_;
                 }
 
-                return /* CQL 'and' (128:9-130:77) */ (/* CQL 'and' (128:15-129:163) */ (bp_
-                    && bq_())
-                    && br_());
+                return bp_
+                    /* CQL 'and' (128:15-129:163) */ && bq_()
+                    /* CQL 'and' (128:9-130:77) */ && br_();
             }
 
             CqlBoolean bk_ = context.Operators.WhereAny<Observation>(bi_, bj_);
@@ -670,9 +670,9 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     return dh_;
                 }
 
-                return /* CQL 'and' (133:9-135:116) */ (/* CQL 'and' (133:15-134:62) */ (ct_
-                    && cu_())
-                    && cv_());
+                return ct_
+                    /* CQL 'and' (133:15-134:62) */ && cu_()
+                    /* CQL 'and' (133:9-135:116) */ && cv_();
             }
 
             CqlBoolean ck_ = context.Operators.WhereAny<ServiceRequest>(ci_, cj_);
@@ -743,8 +743,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     return !eg_;
                 }
 
-                return /* CQL 'and' (138:9-139:94) */ (du_
-                    && dv_());
+                return du_
+                    /* CQL 'and' (138:9-139:94) */ && dv_();
             }
 
             CqlBoolean dl_ = context.Operators.WhereAny<Procedure>(dj_, dk_);
@@ -767,20 +767,20 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlDateTime es_ = context.Operators.ConvertDateToDateTime(er_);
                 CqlInterval<CqlDateTime> et_ = context.Operators.Interval(ep_, es_, true, true);
                 CqlBoolean eu_ = context.Operators.Overlaps(en_, et_, "day");
-                return /* CQL 'and' (143:9-144:49) */ (eu_
-                    && this.isVerified(context, HospiceCareDiagnosis));
+                return eu_
+                    /* CQL 'and' (143:9-144:49) */ && this.isVerified(context, HospiceCareDiagnosis);
             }
 
             CqlBoolean em_ = context.Operators.WhereAny<Condition>(ek_, el_);
             return em_;
         }
 
-        return /* CQL 'or' (116:3-145:5) */ (/* CQL 'or' (116:3-140:5) */ (/* CQL 'or' (116:3-136:5) */ (/* CQL 'or' (116:3-131:5) */ (/* CQL 'or' (116:3-126:5) */ (d_
-            || e_())
-            || f_())
-            || g_())
-            || h_())
-            || i_());
+        return d_
+            /* CQL 'or' (116:3-126:5) */ || e_()
+            /* CQL 'or' (116:3-131:5) */ || f_()
+            /* CQL 'or' (116:3-136:5) */ || g_()
+            /* CQL 'or' (116:3-140:5) */ || h_()
+            /* CQL 'or' (116:3-145:5) */ || i_();
     }
 
 
@@ -821,8 +821,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 return x_;
             }
 
-            return /* CQL 'and' (157:7-158:78) */ (r_
-                && s_());
+            return r_
+                /* CQL 'and' (157:7-158:78) */ && s_();
         }
 
         CqlBoolean e_ = context.Operators.WhereAny<Observation>(c_, d_);
@@ -842,8 +842,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlDateTime aj_ = context.Operators.ConvertDateToDateTime(ai_);
                 CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ag_, aj_, true, true);
                 CqlBoolean al_ = context.Operators.Overlaps(ae_, ak_, "day");
-                return /* CQL 'and' (162:9-163:48) */ (al_
-                    && this.isVerified(context, PalliativeDiagnosis));
+                return al_
+                    /* CQL 'and' (162:9-163:48) */ && this.isVerified(context, PalliativeDiagnosis);
             }
 
             CqlBoolean ad_ = context.Operators.WhereAny<Condition>(ab_, ac_);
@@ -874,8 +874,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     return bd_;
                 }
 
-                return /* CQL 'and' (166:9-167:53) */ (ay_
-                    && az_());
+                return ay_
+                    /* CQL 'and' (166:9-167:53) */ && az_();
             }
 
             CqlBoolean ap_ = context.Operators.WhereAny<Encounter>(an_, ao_);
@@ -946,18 +946,18 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     return !cc_;
                 }
 
-                return /* CQL 'and' (170:9-171:100) */ (bq_
-                    && br_());
+                return bq_
+                    /* CQL 'and' (170:9-171:100) */ && br_();
             }
 
             CqlBoolean bh_ = context.Operators.WhereAny<Procedure>(bf_, bg_);
             return bh_;
         }
 
-        return /* CQL 'or' (156:3-172:5) */ (/* CQL 'or' (156:3-168:5) */ (/* CQL 'or' (156:3-164:5) */ (e_
-            || f_())
-            || g_())
-            || h_());
+        return e_
+            /* CQL 'or' (156:3-164:5) */ || f_()
+            /* CQL 'or' (156:3-168:5) */ || g_()
+            /* CQL 'or' (156:3-172:5) */ || h_();
     }
 
 
@@ -1015,8 +1015,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             CqlDate y_ = context.Operators.End(x_);
             CqlDateTime z_ = context.Operators.ConvertDateToDateTime(y_);
             CqlBoolean aa_ = context.Operators.SameOrBefore(w_, z_, "day");
-            return /* CQL 'and' (103:7-104:56) */ (aa_
-                && this.isVerified(context, MentalHealthDisorderDiagnoses));
+            return aa_
+                /* CQL 'and' (103:7-104:56) */ && this.isVerified(context, MentalHealthDisorderDiagnoses);
         }
 
         CqlBoolean u_ = context.Operators.WhereAny<Condition>(s_, t_);
@@ -1033,10 +1033,10 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period(context);
-        return /* CQL 'or' (48:3-51:45) */ (/* CQL 'or' (48:3-50:24) */ (/* CQL 'or' (48:3-49:77) */ (a_
-            || this.Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period(context))
-            || this.Patient_Expired(context))
-            || this.Has_Mental_Health_Disorder_Diagnoses(context));
+        return a_
+            /* CQL 'or' (48:3-49:77) */ || this.Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period(context)
+            /* CQL 'or' (48:3-50:24) */ || this.Patient_Expired(context)
+            /* CQL 'or' (48:3-51:45) */ || this.Has_Mental_Health_Disorder_Diagnoses(context);
     }
 
 
@@ -1079,8 +1079,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 return ac_;
             }
 
-            return /* CQL 'and' (55:7-56:78) */ (w_
-                && x_());
+            return w_
+                /* CQL 'and' (55:7-56:78) */ && x_();
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);

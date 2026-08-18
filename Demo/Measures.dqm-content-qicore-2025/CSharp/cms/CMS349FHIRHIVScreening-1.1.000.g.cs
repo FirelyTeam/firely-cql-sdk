@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS349FHIRHIVScreening", "1.1.000")]
 public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS349FHIRHIVScreening_1_1_000>
 {
@@ -139,8 +139,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                 return y_;
             }
 
-            return /* CQL 'and' (52:5-53:39) */ (t_
-                && u_());
+            return t_
+                /* CQL 'and' (52:5-53:39) */ && u_();
         }
 
         IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
@@ -173,8 +173,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
             return m_;
         }
 
-        return /* CQL 'and' (27:3-28:38) */ (j_
-            && k_());
+        return j_
+            /* CQL 'and' (27:3-28:38) */ && k_();
     }
 
 
@@ -262,15 +262,15 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                     return at_;
                 }
 
-                return /* CQL 'or' (64:11-67:7) */ (/* CQL 'or' (64:13-65:39) */ (aj_
-                    || ak_())
-                    || al_());
+                return aj_
+                    /* CQL 'or' (64:13-65:39) */ || ak_()
+                    /* CQL 'or' (64:11-67:7) */ || al_();
             }
 
-            return /* CQL 'and' (61:5-67:7) */ (/* CQL 'and' (61:11-63:91) */ (/* CQL 'and' (61:11-62:93) */ ((CqlBoolean)(!((bool?)(j_ is null)))
-                && k_())
-                && l_())
-                && m_());
+            return (CqlBoolean)(!((bool?)(j_ is null)))
+                /* CQL 'and' (61:11-62:93) */ && k_()
+                /* CQL 'and' (61:11-63:91) */ && l_()
+                /* CQL 'and' (61:5-67:7) */ && m_();
         }
 
         CqlBoolean h_ = context.Operators.WhereAny<Observation>(f_, g_);
@@ -334,14 +334,14 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                 return z_;
             }
 
-            return /* CQL 'or' (87:52-91:3) */ (/* CQL 'or' (87:54-89:66) */ (/* CQL 'or' (87:54-88:66) */ (h_
-                || i_())
-                || j_())
-                || k_());
+            return h_
+                /* CQL 'or' (87:54-88:66) */ || i_()
+                /* CQL 'or' (87:54-89:66) */ || j_()
+                /* CQL 'or' (87:52-91:3) */ || k_();
         }
 
-        return /* CQL 'implies' (87:3-91:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_());
+        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+            /* CQL 'implies' (87:3-91:3) */ || c_();
     }
 
 
@@ -364,8 +364,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
             CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlBoolean k_ = context.Operators.Before(h_, j_, "day");
-            return /* CQL 'and' (39:7-40:39) */ (k_
-                && this.isVerified(context, HIVDiagnosis));
+            return k_
+                /* CQL 'and' (39:7-40:39) */ && this.isVerified(context, HIVDiagnosis);
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<Condition>(d_, e_);

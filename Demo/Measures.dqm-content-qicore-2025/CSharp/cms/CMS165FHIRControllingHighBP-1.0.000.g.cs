@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS165FHIRControllingHighBP", "1.0.000")]
 public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<CMS165FHIRControllingHighBP_1_0_000>
 {
@@ -181,9 +181,9 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             return p_;
         }
 
-        return /* CQL 'and' (36:3-40:64) */ (/* CQL 'and' (36:3-39:49) */ (j_
-            && k_())
-            && l_());
+        return j_
+            /* CQL 'and' (36:3-39:49) */ && k_()
+            /* CQL 'and' (36:3-40:64) */ && l_();
     }
 
 
@@ -363,13 +363,13 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             return j_;
         }
 
-        return /* CQL 'or' (52:3-58:69) */ (/* CQL 'or' (52:3-57:74) */ (/* CQL 'or' (52:3-56:105) */ (/* CQL 'or' (52:3-55:53) */ (/* CQL 'or' (52:3-54:54) */ (/* CQL 'or' (52:3-53:48) */ (a_
-            || b_())
-            || c_())
-            || d_())
-            || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(context))
-            || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context))
-            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context));
+        return a_
+            /* CQL 'or' (52:3-53:48) */ || b_()
+            /* CQL 'or' (52:3-54:54) */ || c_()
+            /* CQL 'or' (52:3-55:53) */ || d_()
+            /* CQL 'or' (52:3-56:105) */ || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(context)
+            /* CQL 'or' (52:3-57:74) */ || AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context)
+            /* CQL 'or' (52:3-58:69) */ || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
     }
 
 
@@ -465,8 +465,8 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 return ao_;
             }
 
-            return /* CQL 'and' (121:9-122:83) */ (!ai_
-                && aj_());
+            return (CqlBoolean)!ai_
+                /* CQL 'and' (121:9-122:83) */ && aj_();
         }
 
         IEnumerable<Observation> h_ = context.Operators.Where<Observation>(b_, g_);
@@ -660,8 +660,8 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     private bool? Numerator_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Systolic_Blood_Pressure_Less_Than_140(context);
-        return /* CQL 'and' (83:3-84:51) */ (a_
-            && this.Has_Diastolic_Blood_Pressure_Less_Than_90(context));
+        return a_
+            /* CQL 'and' (83:3-84:51) */ && this.Has_Diastolic_Blood_Pressure_Less_Than_90(context);
     }
 
 

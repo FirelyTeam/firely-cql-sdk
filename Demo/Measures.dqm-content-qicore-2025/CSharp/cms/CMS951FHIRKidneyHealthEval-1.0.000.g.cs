@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS951FHIRKidneyHealthEval", "1.0.000")]
 public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<CMS951FHIRKidneyHealthEval_1_0_000>
 {
@@ -206,16 +206,16 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                         return !x_;
                     }
 
-                    return /* CQL 'and' (64:70-66:9) */ (!r_
-                        && s_());
+                    return (CqlBoolean)!r_
+                        /* CQL 'and' (64:70-66:9) */ && s_();
                 }
 
-                return /* CQL 'implies' (64:11-67:7) */ ((CqlBoolean)(!(!((bool?)(l_ is null))))
-                    || m_());
+                return (CqlBoolean)(!(!((bool?)(l_ is null))))
+                    /* CQL 'implies' (64:11-67:7) */ || m_();
             }
 
-            return /* CQL 'and' (63:5-67:7) */ (i_
-                && j_());
+            return i_
+                /* CQL 'and' (63:5-67:7) */ && j_();
         }
 
         CqlBoolean f_ = context.Operators.WhereAny<Condition>(d_, e_);
@@ -266,8 +266,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 return ae_;
             }
 
-            return /* CQL 'and' (90:7-91:46) */ (z_
-                && aa_());
+            return z_
+                /* CQL 'and' (90:7-91:46) */ && aa_();
         }
 
         CqlBoolean v_ = context.Operators.WhereAny<Encounter>(t_, u_);
@@ -293,9 +293,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(18, 85, true, true);
         CqlBoolean j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        return /* CQL 'and' (45:3-47:56) */ (/* CQL 'and' (45:3-46:66) */ (j_
-            && this.Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period(context))
-            && this.Has_Outpatient_Visit_During_Measurement_Period(context));
+        return j_
+            /* CQL 'and' (45:3-46:66) */ && this.Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period(context)
+            /* CQL 'and' (45:3-47:56) */ && this.Has_Outpatient_Visit_During_Measurement_Period(context);
     }
 
 
@@ -355,16 +355,16 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                         return !ac_;
                     }
 
-                    return /* CQL 'and' (77:62-79:9) */ (!w_
-                        && x_());
+                    return (CqlBoolean)!w_
+                        /* CQL 'and' (77:62-79:9) */ && x_();
                 }
 
-                return /* CQL 'implies' (77:11-80:7) */ ((CqlBoolean)(!(!((bool?)(q_ is null))))
-                    || r_());
+                return (CqlBoolean)(!(!((bool?)(q_ is null))))
+                    /* CQL 'implies' (77:11-80:7) */ || r_();
             }
 
-            return /* CQL 'and' (76:5-80:7) */ (n_
-                && o_());
+            return n_
+                /* CQL 'and' (76:5-80:7) */ && o_();
         }
 
         CqlBoolean k_ = context.Operators.WhereAny<Condition>(i_, j_);
@@ -381,9 +381,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_CKD_Stage_5_Or_ESRD_Diagnosis_Overlaps_Measurement_Period(context);
-        return /* CQL 'or' (53:3-55:69) */ (/* CQL 'or' (53:3-54:37) */ (a_
-            || Hospice_6_18_000.Instance.Has_Hospice_Services(context))
-            || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context));
+        return a_
+            /* CQL 'or' (53:3-54:37) */ || Hospice_6_18_000.Instance.Has_Hospice_Services(context)
+            /* CQL 'or' (53:3-55:69) */ || PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
     }
 
 
@@ -425,9 +425,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 return r_;
             }
 
-            return /* CQL 'and' (102:7-104:66) */ (/* CQL 'and' (102:13-103:38) */ (i_
-                && j_())
-                && k_());
+            return i_
+                /* CQL 'and' (102:13-103:38) */ && j_()
+                /* CQL 'and' (102:7-104:66) */ && k_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -480,13 +480,13 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     return x_;
                 }
 
-                return /* CQL 'or' (111:13-113:9) */ (s_
-                    || t_());
+                return (CqlBoolean)s_
+                    /* CQL 'or' (111:13-113:9) */ || t_();
             }
 
-            return /* CQL 'and' (109:7-113:9) */ (/* CQL 'and' (109:13-110:66) */ (i_
-                && j_())
-                && k_());
+            return i_
+                /* CQL 'and' (109:13-110:66) */ && j_()
+                /* CQL 'and' (109:7-113:9) */ && k_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Observation>(b_, c_);
@@ -532,9 +532,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 return r_;
             }
 
-            return /* CQL 'and' (127:5-129:67) */ (/* CQL 'and' (127:11-128:39) */ (i_
-                && j_())
-                && k_());
+            return i_
+                /* CQL 'and' (127:11-128:39) */ && j_()
+                /* CQL 'and' (127:5-129:67) */ && k_();
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -580,9 +580,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 return r_;
             }
 
-            return /* CQL 'and' (133:5-135:70) */ (/* CQL 'and' (133:11-134:42) */ (i_
-                && j_())
-                && k_());
+            return i_
+                /* CQL 'and' (133:11-134:42) */ && j_()
+                /* CQL 'and' (133:5-135:70) */ && k_();
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -650,12 +650,12 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
         CqlBoolean b_() {
             CqlBoolean c_ = this.Has_Urine_Albumin_Creatinine_Ratio_Test_Performed_During_Measurement_Period(context);
-            return /* CQL 'or' (96:9-98:5) */ (c_
-                || this.Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart(context));
+            return c_
+                /* CQL 'or' (96:9-98:5) */ || this.Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart(context);
         }
 
-        return /* CQL 'and' (95:3-98:5) */ (a_
-            && b_());
+        return a_
+            /* CQL 'and' (95:3-98:5) */ && b_();
     }
 
 

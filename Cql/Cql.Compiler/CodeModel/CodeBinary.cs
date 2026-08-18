@@ -119,7 +119,7 @@ internal sealed class CodeBinary : CodeExpression
     /// </summary>
     private static Type ValidateCqlBoolean(CodeBinaryOp op, CodeExpression left, CodeExpression right)
     {
-        if (left.Type != typeof(CqlBoolean) || right.Type != typeof(CqlBoolean))
+        if (!CodeTypeRules.IsCqlBoolean(left.Type) || !CodeTypeRules.IsCqlBoolean(right.Type))
         {
             throw new ArgumentException(
                 $"Operands of {op} must be {nameof(CqlBoolean)}, got {left.Type} and {right.Type}. " +

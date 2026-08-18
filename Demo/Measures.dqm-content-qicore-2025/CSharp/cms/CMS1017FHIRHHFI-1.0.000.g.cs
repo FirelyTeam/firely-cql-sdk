@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS1017FHIRHHFI", "1.0.000")]
 public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRHHFI_1_0_000>
 {
@@ -206,8 +206,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return q_;
             }
 
-            return /* CQL 'and' (49:5-50:74) */ (f_
-                && g_());
+            return f_
+                /* CQL 'and' (49:5-50:74) */ && g_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -312,8 +312,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return p_;
             }
 
-            return /* CQL 'or' (94:5-95:73) */ (h_
-                || i_());
+            return h_
+                /* CQL 'or' (94:5-95:73) */ || i_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -402,9 +402,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return s_;
             }
 
-            return /* CQL 'and' (300:7-304:9) */ (/* CQL 'and' (300:13-301:27) */ (j_
-                && k_())
-                && l_());
+            return j_
+                /* CQL 'and' (300:13-301:27) */ && k_()
+                /* CQL 'and' (300:7-304:9) */ && l_();
         }
 
 
@@ -433,8 +433,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         return al_;
                     }
 
-                    return /* CQL 'and' (307:13-308:51) */ (ae_
-                        && af_());
+                    return ae_
+                        /* CQL 'and' (307:13-308:51) */ && af_();
                 }
 
                 CqlBoolean aa_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)y_, z_);
@@ -451,8 +451,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         return at_;
                     }
 
-                    return /* CQL 'or' (310:15-312:11) */ ((CqlBoolean)(ao_ is null)
-                        || ap_());
+                    return (CqlBoolean)(ao_ is null)
+                        /* CQL 'or' (310:15-312:11) */ || ap_();
                 }
 
 
@@ -463,9 +463,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return aw_;
                 }
 
-                return /* CQL 'and' (306:9-313:46) */ (/* CQL 'and' (306:15-312:11) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (306:15-312:11) */ && ab_()
+                    /* CQL 'and' (306:9-313:46) */ && ac_();
             }
 
             IEnumerable<Claim.DiagnosisComponent> x_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)v_, w_);
@@ -543,13 +543,13 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         return z_;
                     }
 
-                    return /* CQL 'or' (79:15-81:11) */ (r_
-                        || s_());
+                    return r_
+                        /* CQL 'or' (79:15-81:11) */ || s_();
                 }
 
-                return /* CQL 'and' (76:9-81:11) */ (/* CQL 'or' (76:15-78:9) */ ((CqlBoolean)(h_ is null)
-                    || i_())
-                    && j_());
+                return (CqlBoolean)(h_ is null)
+                    /* CQL 'or' (76:15-78:9) */ || i_()
+                    /* CQL 'and' (76:9-81:11) */ && j_();
             }
 
             CqlBoolean f_ = context.Operators.WhereAny<Claim.DiagnosisComponent>(d_, e_);
@@ -604,13 +604,13 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         return z_;
                     }
 
-                    return /* CQL 'or' (68:15-70:11) */ (r_
-                        || s_());
+                    return r_
+                        /* CQL 'or' (68:15-70:11) */ || s_();
                 }
 
-                return /* CQL 'and' (65:9-70:11) */ (/* CQL 'or' (65:15-67:9) */ ((CqlBoolean)(h_ is null)
-                    || i_())
-                    && j_());
+                return (CqlBoolean)(h_ is null)
+                    /* CQL 'or' (65:15-67:9) */ || i_()
+                    /* CQL 'and' (65:9-70:11) */ && j_();
             }
 
             CqlBoolean f_ = context.Operators.WhereAny<Claim.DiagnosisComponent>(d_, e_);
@@ -726,9 +726,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return w_;
                 }
 
-                return /* CQL 'and' (116:17-118:61) */ (/* CQL 'and' (116:17-117:33) */ (n_
-                    && o_())
-                    && p_());
+                return n_
+                    /* CQL 'and' (116:17-117:33) */ && o_()
+                    /* CQL 'and' (116:17-118:61) */ && p_();
             }
 
             CqlBoolean h_ = context.Operators.WhereAny<Encounter>(f_, g_);
@@ -791,9 +791,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return aq_;
                 }
 
-                return /* CQL 'and' (125:9-129:11) */ (/* CQL 'and' (125:15-126:29) */ (ah_
-                    && ai_())
-                    && aj_());
+                return ah_
+                    /* CQL 'and' (125:15-126:29) */ && ai_()
+                    /* CQL 'and' (125:9-129:11) */ && aj_();
             }
 
             IEnumerable<Claim> h_ = context.Operators.Where<Claim>(f_, g_);
@@ -840,9 +840,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return bh_;
                 }
 
-                return /* CQL 'and' (125:9-129:11) */ (/* CQL 'and' (125:15-126:29) */ (ay_
-                    && az_())
-                    && ba_());
+                return ay_
+                    /* CQL 'and' (125:15-126:29) */ && az_()
+                    /* CQL 'and' (125:9-129:11) */ && ba_();
             }
 
             IEnumerable<Claim> n_ = context.Operators.Where<Claim>(f_, m_);
@@ -904,9 +904,9 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return cc_;
                 }
 
-                return /* CQL 'and' (125:9-129:11) */ (/* CQL 'and' (125:15-126:29) */ (bt_
-                    && bu_())
-                    && bv_());
+                return bt_
+                    /* CQL 'and' (125:15-126:29) */ && bu_()
+                    /* CQL 'and' (125:9-129:11) */ && bv_();
             }
 
             IEnumerable<Claim> w_ = context.Operators.Where<Claim>(f_, v_);
@@ -939,8 +939,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return cp_;
                 }
 
-                return /* CQL 'or' (139:9-140:102) */ (ck_
-                    || cl_());
+                return ck_
+                    /* CQL 'or' (139:9-140:102) */ || cl_();
             }
 
             IEnumerable<Claim.DiagnosisComponent> ac_ = context.Operators.Where<Claim.DiagnosisComponent>(aa_, ab_);
@@ -975,8 +975,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return j_;
             }
 
-            return /* CQL 'or' (145:5-146:127) */ (f_
-                || g_());
+            return f_
+                /* CQL 'or' (145:5-146:127) */ || g_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1015,8 +1015,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         return x_;
                     }
 
-                    return /* CQL 'and' */ (s_
-                        && t_());
+                    return s_
+                        /* CQL 'and' */ && t_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1071,12 +1071,12 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                             return av_;
                         }
 
-                        return /* CQL 'and' (153:16-155:13) */ (an_
-                            && ao_());
+                        return an_
+                            /* CQL 'and' (153:16-155:13) */ && ao_();
                     }
 
-                    return /* CQL 'or' (152:13-156:9) */ (ai_
-                        || aj_());
+                    return ai_
+                        /* CQL 'or' (152:13-156:9) */ || aj_();
                 }
 
 
@@ -1095,10 +1095,10 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return bi_;
                 }
 
-                return /* CQL 'and' (151:17-158:103) */ (/* CQL 'and' (151:17-157:42) */ (/* CQL 'and' (151:17-156:9) */ (ac_
-                    && ad_())
-                    && QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest))
-                    && ae_());
+                return ac_
+                    /* CQL 'and' (151:17-156:9) */ && ad_()
+                    /* CQL 'and' (151:17-157:42) */ && QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest)
+                    /* CQL 'and' (151:17-158:103) */ && ae_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1141,8 +1141,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         return x_;
                     }
 
-                    return /* CQL 'and' */ (s_
-                        && t_());
+                    return s_
+                        /* CQL 'and' */ && t_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1174,8 +1174,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return aj_;
                 }
 
-                return /* CQL 'and' (163:17-164:67) */ (ad_
-                    && ae_());
+                return ad_
+                    /* CQL 'and' (163:17-164:67) */ && ae_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<MedicationAdministration>(i_, j_);
@@ -1218,8 +1218,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         return x_;
                     }
 
-                    return /* CQL 'and' */ (s_
-                        && t_());
+                    return s_
+                        /* CQL 'and' */ && t_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1274,12 +1274,12 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                             return av_;
                         }
 
-                        return /* CQL 'and' (171:16-173:13) */ (an_
-                            && ao_());
+                        return an_
+                            /* CQL 'and' (171:16-173:13) */ && ao_();
                     }
 
-                    return /* CQL 'or' (170:13-174:9) */ (ai_
-                        || aj_());
+                    return ai_
+                        /* CQL 'or' (170:13-174:9) */ || aj_();
                 }
 
 
@@ -1298,10 +1298,10 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return bi_;
                 }
 
-                return /* CQL 'and' (169:17-176:106) */ (/* CQL 'and' (169:17-175:45) */ (/* CQL 'and' (169:17-174:9) */ (ac_
-                    && ad_())
-                    && QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest))
-                    && ae_());
+                return ac_
+                    /* CQL 'and' (169:17-174:9) */ && ad_()
+                    /* CQL 'and' (169:17-175:45) */ && QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest)
+                    /* CQL 'and' (169:17-176:106) */ && ae_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1344,8 +1344,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         return x_;
                     }
 
-                    return /* CQL 'and' */ (s_
-                        && t_());
+                    return s_
+                        /* CQL 'and' */ && t_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1400,12 +1400,12 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                             return av_;
                         }
 
-                        return /* CQL 'and' (183:16-185:13) */ (an_
-                            && ao_());
+                        return an_
+                            /* CQL 'and' (183:16-185:13) */ && ao_();
                     }
 
-                    return /* CQL 'or' (182:13-186:9) */ (ai_
-                        || aj_());
+                    return ai_
+                        /* CQL 'or' (182:13-186:9) */ || aj_();
                 }
 
 
@@ -1424,10 +1424,10 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return bi_;
                 }
 
-                return /* CQL 'and' (181:17-188:94) */ (/* CQL 'and' (181:17-187:33) */ (/* CQL 'and' (181:17-186:9) */ (ac_
-                    && ad_())
-                    && QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest))
-                    && ae_());
+                return ac_
+                    /* CQL 'and' (181:17-186:9) */ && ad_()
+                    /* CQL 'and' (181:17-187:33) */ && QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest)
+                    /* CQL 'and' (181:17-188:94) */ && ae_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1470,8 +1470,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         return x_;
                     }
 
-                    return /* CQL 'and' */ (s_
-                        && t_());
+                    return s_
+                        /* CQL 'and' */ && t_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1526,12 +1526,12 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                             return av_;
                         }
 
-                        return /* CQL 'and' (195:16-197:13) */ (an_
-                            && ao_());
+                        return an_
+                            /* CQL 'and' (195:16-197:13) */ && ao_();
                     }
 
-                    return /* CQL 'or' (194:13-198:9) */ (ai_
-                        || aj_());
+                    return ai_
+                        /* CQL 'or' (194:13-198:9) */ || aj_();
                 }
 
 
@@ -1550,10 +1550,10 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return bi_;
                 }
 
-                return /* CQL 'and' (193:17-200:95) */ (/* CQL 'and' (193:17-199:34) */ (/* CQL 'and' (193:17-198:9) */ (ac_
-                    && ad_())
-                    && QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest))
-                    && ae_());
+                return ac_
+                    /* CQL 'and' (193:17-198:9) */ && ad_()
+                    /* CQL 'and' (193:17-199:34) */ && QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest)
+                    /* CQL 'and' (193:17-200:95) */ && ae_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1596,8 +1596,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         return x_;
                     }
 
-                    return /* CQL 'and' */ (s_
-                        && t_());
+                    return s_
+                        /* CQL 'and' */ && t_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1652,12 +1652,12 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                             return av_;
                         }
 
-                        return /* CQL 'and' (207:16-209:13) */ (an_
-                            && ao_());
+                        return an_
+                            /* CQL 'and' (207:16-209:13) */ && ao_();
                     }
 
-                    return /* CQL 'or' (206:13-210:9) */ (ai_
-                        || aj_());
+                    return ai_
+                        /* CQL 'or' (206:13-210:9) */ || aj_();
                 }
 
 
@@ -1676,10 +1676,10 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return bi_;
                 }
 
-                return /* CQL 'and' (205:17-212:100) */ (/* CQL 'and' (205:17-211:39) */ (/* CQL 'and' (205:17-210:9) */ (ac_
-                    && ad_())
-                    && QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest))
-                    && ae_());
+                return ac_
+                    /* CQL 'and' (205:17-210:9) */ && ad_()
+                    /* CQL 'and' (205:17-211:39) */ && QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest)
+                    /* CQL 'and' (205:17-212:100) */ && ae_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1722,8 +1722,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         return x_;
                     }
 
-                    return /* CQL 'and' */ (s_
-                        && t_());
+                    return s_
+                        /* CQL 'and' */ && t_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1778,12 +1778,12 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                             return av_;
                         }
 
-                        return /* CQL 'and' (219:16-221:13) */ (an_
-                            && ao_());
+                        return an_
+                            /* CQL 'and' (219:16-221:13) */ && ao_();
                     }
 
-                    return /* CQL 'or' (218:13-222:9) */ (ai_
-                        || aj_());
+                    return ai_
+                        /* CQL 'or' (218:13-222:9) */ || aj_();
                 }
 
 
@@ -1802,10 +1802,10 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return bi_;
                 }
 
-                return /* CQL 'and' (217:17-224:98) */ (/* CQL 'and' (217:17-223:37) */ (/* CQL 'and' (217:17-222:9) */ (ac_
-                    && ad_())
-                    && QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest))
-                    && ae_());
+                return ac_
+                    /* CQL 'and' (217:17-222:9) */ && ad_()
+                    /* CQL 'and' (217:17-223:37) */ && QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest)
+                    /* CQL 'and' (217:17-224:98) */ && ae_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);

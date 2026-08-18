@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS117FHIRChildImmunStatus", "1.0.000")]
 public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<CMS117FHIRChildImmunStatus_1_0_000>
 {
@@ -409,8 +409,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return l_;
         }
 
-        return /* CQL 'and' (80:3-83:42) */ (i_
-            && j_());
+        return i_
+            /* CQL 'and' (80:3-83:42) */ && j_();
     }
 
 
@@ -616,12 +616,12 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        return /* CQL 'or' (104:3-109:28) */ (/* CQL 'or' (104:3-108:65) */ (/* CQL 'or' (104:3-107:16) */ (/* CQL 'or' (104:3-106:29) */ (/* CQL 'or' (104:3-105:45) */ (a_
-            || this.Has_Severe_Combined_Immunodeficiency(context))
-            || this.Has_Immunodeficiency(context))
-            || this.Has_HIV(context))
-            || this.Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia(context))
-            || this.Has_Intussusception(context));
+        return a_
+            /* CQL 'or' (104:3-105:45) */ || this.Has_Severe_Combined_Immunodeficiency(context)
+            /* CQL 'or' (104:3-106:29) */ || this.Has_Immunodeficiency(context)
+            /* CQL 'or' (104:3-107:16) */ || this.Has_HIV(context)
+            /* CQL 'or' (104:3-108:65) */ || this.Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia(context)
+            /* CQL 'or' (104:3-109:28) */ || this.Has_Intussusception(context);
     }
 
 
@@ -765,9 +765,9 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 return ak_;
             }
 
-            return /* CQL 'and' (212:5-214:106) */ (/* CQL 'and' (212:11-213:106) */ (q_
-                && r_())
-                && s_());
+            return q_
+                /* CQL 'and' (212:11-213:106) */ && r_()
+                /* CQL 'and' (212:5-214:106) */ && s_();
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)?> e_ = context.Operators.SelectWhere<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, (CqlTupleMetadata, CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)?>(b_, c_, d_);
@@ -914,8 +914,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 return aa_;
             }
 
-            return /* CQL 'and' (253:5-254:111) */ (q_
-                && r_());
+            return q_
+                /* CQL 'and' (253:5-254:111) */ && r_();
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?> e_ = context.Operators.SelectWhere<ValueTuple<CqlDate, CqlDate, CqlDate>, (CqlTupleMetadata, CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?>(b_, c_, d_);
@@ -1369,13 +1369,13 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                     return aa_;
                 }
 
-                return /* CQL 'and' (315:12-322:9) */ ((CqlBoolean)(/* CQL 'is false' (315:14-315:33) */ t_.IsFalse)
-                    && u_());
+                return (CqlBoolean)(/* CQL 'is false' (315:14-315:33) */ t_.IsFalse)
+                    /* CQL 'and' (315:12-322:9) */ && u_();
             }
 
-            return /* CQL 'or' (307:7-322:9) */ (/* CQL 'and' (307:13-314:7) */ (f_
-                && g_())
-                || h_());
+            return f_
+                /* CQL 'and' (307:13-314:7) */ && g_()
+                /* CQL 'or' (307:7-322:9) */ || h_();
         }
 
         CqlBoolean c_ = context.Operators.WhereAny<CqlDate>(a_, b_);
@@ -1516,8 +1516,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 return aa_;
             }
 
-            return /* CQL 'and' (371:5-372:121) */ (q_
-                && r_());
+            return q_
+                /* CQL 'and' (371:5-372:121) */ && r_();
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?> e_ = context.Operators.SelectWhere<ValueTuple<CqlDate, CqlDate, CqlDate>, (CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?>(b_, c_, d_);
@@ -1636,9 +1636,9 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 return al_;
             }
 
-            return /* CQL 'and' (390:5-392:114) */ (/* CQL 'and' (390:11-391:114) */ (r_
-                && s_())
-                && t_());
+            return r_
+                /* CQL 'and' (390:11-391:114) */ && s_()
+                /* CQL 'and' (390:5-392:114) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?> f_ = context.Operators.SelectWhere<ValueTuple<CqlDate, CqlDate, CqlDate>, (CqlTupleMetadata, CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?>(c_, d_, e_);
@@ -1904,9 +1904,9 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 return ak_;
             }
 
-            return /* CQL 'and' (430:5-432:125) */ (/* CQL 'and' (430:11-431:125) */ (q_
-                && r_())
-                && s_());
+            return q_
+                /* CQL 'and' (430:11-431:125) */ && r_()
+                /* CQL 'and' (430:5-432:125) */ && s_();
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?> e_ = context.Operators.SelectWhere<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, (CqlTupleMetadata, CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?>(b_, c_, d_);
@@ -2246,13 +2246,13 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                     return aa_;
                 }
 
-                return /* CQL 'and' (484:12-489:9) */ ((CqlBoolean)(/* CQL 'is false' (484:14-484:34) */ t_.IsFalse)
-                    && u_());
+                return (CqlBoolean)(/* CQL 'is false' (484:14-484:34) */ t_.IsFalse)
+                    /* CQL 'and' (484:12-489:9) */ && u_();
             }
 
-            return /* CQL 'or' (478:7-489:9) */ (/* CQL 'and' (478:13-483:7) */ (f_
-                && g_())
-                || h_());
+            return f_
+                /* CQL 'and' (478:13-483:7) */ && g_()
+                /* CQL 'or' (478:7-489:9) */ || h_();
         }
 
         CqlBoolean c_ = context.Operators.WhereAny<CqlDate>(a_, b_);
@@ -2500,8 +2500,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return e_;
         }
 
-        return /* CQL 'and' (549:3-550:54) */ (b_
-            && c_());
+        return b_
+            /* CQL 'and' (549:3-550:54) */ && c_();
     }
 
 
@@ -2562,8 +2562,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 return s_;
             }
 
-            return /* CQL 'or' (150:9-152:5) */ (p_
-                || q_());
+            return p_
+                /* CQL 'or' (150:9-152:5) */ || q_();
         }
 
 
@@ -2595,14 +2595,14 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                     return ag_;
                 }
 
-                return /* CQL 'and' (155:12-158:9) */ (/* CQL 'and' (155:14-156:45) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (155:14-156:45) */ && ab_()
+                    /* CQL 'and' (155:12-158:9) */ && ac_();
             }
 
-            return /* CQL 'or' (153:9-159:5) */ (/* CQL 'or' (153:11-154:58) */ (u_
-                || v_())
-                || w_());
+            return u_
+                /* CQL 'or' (153:11-154:58) */ || v_()
+                /* CQL 'or' (153:9-159:5) */ || w_();
         }
 
 
@@ -2615,8 +2615,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 return ak_;
             }
 
-            return /* CQL 'or' (160:9-162:5) */ (ah_
-                || ai_());
+            return ah_
+                /* CQL 'or' (160:9-162:5) */ || ai_();
         }
 
 
@@ -2634,12 +2634,12 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                     return as_;
                 }
 
-                return /* CQL 'or' (164:12-166:9) */ (ap_
-                    || aq_());
+                return ap_
+                    /* CQL 'or' (164:12-166:9) */ || aq_();
             }
 
-            return /* CQL 'or' (163:9-167:5) */ (am_
-                || an_());
+            return am_
+                /* CQL 'or' (163:9-167:5) */ || an_();
         }
 
 
@@ -2653,8 +2653,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 return ax_;
             }
 
-            return /* CQL 'or' (168:9-170:5) */ (au_
-                || av_());
+            return au_
+                /* CQL 'or' (168:9-170:5) */ || av_();
         }
 
 
@@ -2668,8 +2668,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 return bc_;
             }
 
-            return /* CQL 'or' (171:9-173:5) */ (az_
-                || ba_());
+            return az_
+                /* CQL 'or' (171:9-173:5) */ || ba_();
         }
 
 
@@ -2683,8 +2683,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 return bh_;
             }
 
-            return /* CQL 'or' (174:9-176:5) */ (be_
-                || bf_());
+            return be_
+                /* CQL 'or' (174:9-176:5) */ || bf_();
         }
 
 
@@ -2697,8 +2697,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 return bl_;
             }
 
-            return /* CQL 'or' (177:9-179:5) */ (bi_
-                || bj_());
+            return bi_
+                /* CQL 'or' (177:9-179:5) */ || bj_();
         }
 
 
@@ -2712,22 +2712,22 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 return bq_;
             }
 
-            return /* CQL 'or' (180:9-183:5) */ (/* CQL 'or' (180:11-181:74) */ (bn_
-                || this.Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination(context))
-                || bo_());
+            return bn_
+                /* CQL 'or' (180:11-181:74) */ || this.Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination(context)
+                /* CQL 'or' (180:9-183:5) */ || bo_();
         }
 
-        return /* CQL 'and' (147:3-183:5) */ (/* CQL 'and' (147:3-179:5) */ (/* CQL 'and' (147:3-176:5) */ (/* CQL 'and' (147:3-173:5) */ (/* CQL 'and' (147:3-170:5) */ (/* CQL 'and' (147:3-167:5) */ (/* CQL 'and' (147:3-162:5) */ (/* CQL 'and' (147:3-159:5) */ (/* CQL 'and' (147:3-152:5) */ (/* CQL 'or' (147:3-149:3) */ (b_
-            || c_())
-            && d_())
-            && e_())
-            && f_())
-            && g_())
-            && h_())
-            && i_())
-            && j_())
-            && k_())
-            && l_());
+        return b_
+            /* CQL 'or' (147:3-149:3) */ || c_()
+            /* CQL 'and' (147:3-152:5) */ && d_()
+            /* CQL 'and' (147:3-159:5) */ && e_()
+            /* CQL 'and' (147:3-162:5) */ && f_()
+            /* CQL 'and' (147:3-167:5) */ && g_()
+            /* CQL 'and' (147:3-170:5) */ && h_()
+            /* CQL 'and' (147:3-173:5) */ && i_()
+            /* CQL 'and' (147:3-176:5) */ && j_()
+            /* CQL 'and' (147:3-179:5) */ && k_()
+            /* CQL 'and' (147:3-183:5) */ && l_();
     }
 
 

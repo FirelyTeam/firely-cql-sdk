@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CQMCommon", "4.1.000")]
 public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 {
@@ -226,8 +226,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 return n_;
             }
 
-            return /* CQL 'and' (46:5-47:75) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (46:5-47:75) */ && i_();
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -305,12 +305,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     return !((bool?)(z_ is null));
                 }
 
-                return /* CQL 'and' (80:13-80:88) */ (v_
-                    && w_());
+                return v_
+                    /* CQL 'and' (80:13-80:88) */ && w_();
             }
 
-            return /* CQL 'and' (79:7-80:88) */ (k_
-                && l_());
+            return k_
+                /* CQL 'and' (79:7-80:88) */ && l_();
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -360,12 +360,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     return !((bool?)(z_ is null));
                 }
 
-                return /* CQL 'and' (91:13-91:88) */ (v_
-                    && w_());
+                return v_
+                    /* CQL 'and' (91:13-91:88) */ && w_();
             }
 
-            return /* CQL 'and' (90:7-91:88) */ (k_
-                && l_());
+            return k_
+                /* CQL 'and' (90:7-91:88) */ && l_();
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -816,12 +816,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     return !((bool?)(ei_ is null));
                                 }
 
-                                return /* CQL 'and' (241:15-241:83) */ (ee_
-                                    && ef_());
+                                return ee_
+                                    /* CQL 'and' (241:15-241:83) */ && ef_();
                             }
 
-                            return /* CQL 'and' (240:6-241:83) */ (dt_
-                                && du_());
+                            return dt_
+                                /* CQL 'and' (240:6-241:83) */ && du_();
                         }
 
                         IEnumerable<Encounter> ct_ = context.Operators.Where<Encounter>(cr_, cs_);
@@ -869,12 +869,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     return !((bool?)(fe_ is null));
                                 }
 
-                                return /* CQL 'and' (241:15-241:83) */ (fa_
-                                    && fb_());
+                                return fa_
+                                    /* CQL 'and' (241:15-241:83) */ && fb_();
                             }
 
-                            return /* CQL 'and' (240:6-241:83) */ (ep_
-                                && eq_());
+                            return ep_
+                                /* CQL 'and' (240:6-241:83) */ && eq_();
                         }
 
                         IEnumerable<Encounter> dg_ = context.Operators.Where<Encounter>(cr_, df_);
@@ -923,12 +923,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         return !((bool?)(gn_ is null));
                                     }
 
-                                    return /* CQL 'and' (241:15-241:83) */ (gj_
-                                        && gk_());
+                                    return gj_
+                                        /* CQL 'and' (241:15-241:83) */ && gk_();
                                 }
 
-                                return /* CQL 'and' (240:6-241:83) */ (fy_
-                                    && fz_());
+                                return fy_
+                                    /* CQL 'and' (240:6-241:83) */ && fz_();
                             }
 
                             IEnumerable<Encounter> fl_ = context.Operators.Where<Encounter>(fj_, fk_);
@@ -951,12 +951,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             return !((bool?)((fr_ ?? fu_) is null));
                         }
 
-                        return /* CQL 'and' (247:15-247:71) */ (do_
-                            && dp_());
+                        return do_
+                            /* CQL 'and' (247:15-247:71) */ && dp_();
                     }
 
-                    return /* CQL 'and' (246:6-247:71) */ (cl_
-                        && cm_());
+                    return cl_
+                        /* CQL 'and' (246:6-247:71) */ && cm_();
                 }
 
                 IEnumerable<Encounter> at_ = context.Operators.Where<Encounter>(ar_, as_);
@@ -1001,12 +1001,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             return !((bool?)(hm_ is null));
                         }
 
-                        return /* CQL 'and' (241:15-241:83) */ (hi_
-                            && hj_());
+                        return hi_
+                            /* CQL 'and' (241:15-241:83) */ && hj_();
                     }
 
-                    return /* CQL 'and' (240:6-241:83) */ (gx_
-                        && gy_());
+                    return gx_
+                        /* CQL 'and' (240:6-241:83) */ && gy_();
                 }
 
                 IEnumerable<Encounter> bd_ = context.Operators.Where<Encounter>(bb_, bc_);
@@ -1067,12 +1067,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     return !((bool?)(jq_ is null));
                                 }
 
-                                return /* CQL 'and' (241:15-241:83) */ (jm_
-                                    && jn_());
+                                return jm_
+                                    /* CQL 'and' (241:15-241:83) */ && jn_();
                             }
 
-                            return /* CQL 'and' (240:6-241:83) */ (jb_
-                                && jc_());
+                            return jb_
+                                /* CQL 'and' (240:6-241:83) */ && jc_();
                         }
 
                         IEnumerable<Encounter> ib_ = context.Operators.Where<Encounter>(hz_, ia_);
@@ -1120,12 +1120,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     return !((bool?)(km_ is null));
                                 }
 
-                                return /* CQL 'and' (241:15-241:83) */ (ki_
-                                    && kj_());
+                                return ki_
+                                    /* CQL 'and' (241:15-241:83) */ && kj_();
                             }
 
-                            return /* CQL 'and' (240:6-241:83) */ (jx_
-                                && jy_());
+                            return jx_
+                                /* CQL 'and' (240:6-241:83) */ && jy_();
                         }
 
                         IEnumerable<Encounter> io_ = context.Operators.Where<Encounter>(hz_, in_);
@@ -1174,12 +1174,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         return !((bool?)(lv_ is null));
                                     }
 
-                                    return /* CQL 'and' (241:15-241:83) */ (lr_
-                                        && ls_());
+                                    return lr_
+                                        /* CQL 'and' (241:15-241:83) */ && ls_();
                                 }
 
-                                return /* CQL 'and' (240:6-241:83) */ (lg_
-                                    && lh_());
+                                return lg_
+                                    /* CQL 'and' (240:6-241:83) */ && lh_();
                             }
 
                             IEnumerable<Encounter> kt_ = context.Operators.Where<Encounter>(kr_, ks_);
@@ -1202,12 +1202,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             return !((bool?)((kz_ ?? lc_) is null));
                         }
 
-                        return /* CQL 'and' (247:15-247:71) */ (iw_
-                            && ix_());
+                        return iw_
+                            /* CQL 'and' (247:15-247:71) */ && ix_();
                     }
 
-                    return /* CQL 'and' (246:6-247:71) */ (ht_
-                        && hu_());
+                    return ht_
+                        /* CQL 'and' (246:6-247:71) */ && hu_();
                 }
 
                 IEnumerable<Encounter> bq_ = context.Operators.Where<Encounter>(ar_, bp_);
@@ -1250,12 +1250,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             return !((bool?)(mu_ is null));
                         }
 
-                        return /* CQL 'and' (241:15-241:83) */ (mq_
-                            && mr_());
+                        return mq_
+                            /* CQL 'and' (241:15-241:83) */ && mr_();
                     }
 
-                    return /* CQL 'and' (240:6-241:83) */ (mf_
-                        && mg_());
+                    return mf_
+                        /* CQL 'and' (240:6-241:83) */ && mg_();
                 }
 
                 IEnumerable<Encounter> by_ = context.Operators.Where<Encounter>(bb_, bx_);
@@ -1317,12 +1317,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         return !((bool?)(pv_ is null));
                                     }
 
-                                    return /* CQL 'and' (241:15-241:83) */ (pr_
-                                        && ps_());
+                                    return pr_
+                                        /* CQL 'and' (241:15-241:83) */ && ps_();
                                 }
 
-                                return /* CQL 'and' (240:6-241:83) */ (pg_
-                                    && ph_());
+                                return pg_
+                                    /* CQL 'and' (240:6-241:83) */ && ph_();
                             }
 
                             IEnumerable<Encounter> og_ = context.Operators.Where<Encounter>(oe_, of_);
@@ -1370,12 +1370,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         return !((bool?)(qr_ is null));
                                     }
 
-                                    return /* CQL 'and' (241:15-241:83) */ (qn_
-                                        && qo_());
+                                    return qn_
+                                        /* CQL 'and' (241:15-241:83) */ && qo_();
                                 }
 
-                                return /* CQL 'and' (240:6-241:83) */ (qc_
-                                    && qd_());
+                                return qc_
+                                    /* CQL 'and' (240:6-241:83) */ && qd_();
                             }
 
                             IEnumerable<Encounter> ot_ = context.Operators.Where<Encounter>(oe_, os_);
@@ -1424,12 +1424,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                             return !((bool?)(sa_ is null));
                                         }
 
-                                        return /* CQL 'and' (241:15-241:83) */ (rw_
-                                            && rx_());
+                                        return rw_
+                                            /* CQL 'and' (241:15-241:83) */ && rx_();
                                     }
 
-                                    return /* CQL 'and' (240:6-241:83) */ (rl_
-                                        && rm_());
+                                    return rl_
+                                        /* CQL 'and' (240:6-241:83) */ && rm_();
                                 }
 
                                 IEnumerable<Encounter> qy_ = context.Operators.Where<Encounter>(qw_, qx_);
@@ -1452,12 +1452,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 return !((bool?)((re_ ?? rh_) is null));
                             }
 
-                            return /* CQL 'and' (247:15-247:71) */ (pb_
-                                && pc_());
+                            return pb_
+                                /* CQL 'and' (247:15-247:71) */ && pc_();
                         }
 
-                        return /* CQL 'and' (246:6-247:71) */ (ny_
-                            && nz_());
+                        return ny_
+                            /* CQL 'and' (246:6-247:71) */ && nz_();
                     }
 
                     IEnumerable<Encounter> nb_ = context.Operators.Where<Encounter>(mz_, na_);
@@ -1502,12 +1502,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 return !((bool?)(sz_ is null));
                             }
 
-                            return /* CQL 'and' (241:15-241:83) */ (sv_
-                                && sw_());
+                            return sv_
+                                /* CQL 'and' (241:15-241:83) */ && sw_();
                         }
 
-                        return /* CQL 'and' (240:6-241:83) */ (sk_
-                            && sl_());
+                        return sk_
+                            /* CQL 'and' (240:6-241:83) */ && sl_();
                     }
 
                     IEnumerable<Encounter> nl_ = context.Operators.Where<Encounter>(nj_, nk_);
@@ -1530,8 +1530,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     return !((bool?)((nh_ ?? nr_ ?? nu_) is null));
                 }
 
-                return /* CQL 'and' (252:6-252:81) */ (cg_
-                    && ch_());
+                return cg_
+                    /* CQL 'and' (252:6-252:81) */ && ch_();
             }
 
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
@@ -1589,12 +1589,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 return !((bool?)(vg_ is null));
                             }
 
-                            return /* CQL 'and' (241:15-241:83) */ (vc_
-                                && vd_());
+                            return vc_
+                                /* CQL 'and' (241:15-241:83) */ && vd_();
                         }
 
-                        return /* CQL 'and' (240:6-241:83) */ (ur_
-                            && us_());
+                        return ur_
+                            /* CQL 'and' (240:6-241:83) */ && us_();
                     }
 
                     IEnumerable<Encounter> tr_ = context.Operators.Where<Encounter>(tp_, tq_);
@@ -1642,12 +1642,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 return !((bool?)(wc_ is null));
                             }
 
-                            return /* CQL 'and' (241:15-241:83) */ (vy_
-                                && vz_());
+                            return vy_
+                                /* CQL 'and' (241:15-241:83) */ && vz_();
                         }
 
-                        return /* CQL 'and' (240:6-241:83) */ (vn_
-                            && vo_());
+                        return vn_
+                            /* CQL 'and' (240:6-241:83) */ && vo_();
                     }
 
                     IEnumerable<Encounter> ue_ = context.Operators.Where<Encounter>(tp_, ud_);
@@ -1696,12 +1696,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     return !((bool?)(xl_ is null));
                                 }
 
-                                return /* CQL 'and' (241:15-241:83) */ (xh_
-                                    && xi_());
+                                return xh_
+                                    /* CQL 'and' (241:15-241:83) */ && xi_();
                             }
 
-                            return /* CQL 'and' (240:6-241:83) */ (ww_
-                                && wx_());
+                            return ww_
+                                /* CQL 'and' (240:6-241:83) */ && wx_();
                         }
 
                         IEnumerable<Encounter> wj_ = context.Operators.Where<Encounter>(wh_, wi_);
@@ -1724,12 +1724,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return !((bool?)((wp_ ?? ws_) is null));
                     }
 
-                    return /* CQL 'and' (247:15-247:71) */ (um_
-                        && un_());
+                    return um_
+                        /* CQL 'and' (247:15-247:71) */ && un_();
                 }
 
-                return /* CQL 'and' (246:6-247:71) */ (tj_
-                    && tk_());
+                return tj_
+                    /* CQL 'and' (246:6-247:71) */ && tk_();
             }
 
             IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
@@ -1774,12 +1774,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return !((bool?)(yk_ is null));
                     }
 
-                    return /* CQL 'and' (241:15-241:83) */ (yg_
-                        && yh_());
+                    return yg_
+                        /* CQL 'and' (241:15-241:83) */ && yh_();
                 }
 
-                return /* CQL 'and' (240:6-241:83) */ (xv_
-                    && xw_());
+                return xv_
+                    /* CQL 'and' (240:6-241:83) */ && xw_();
             }
 
             IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
@@ -1867,12 +1867,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     return !((bool?)(ei_ is null));
                                 }
 
-                                return /* CQL 'and' (264:15-264:83) */ (ee_
-                                    && ef_());
+                                return ee_
+                                    /* CQL 'and' (264:15-264:83) */ && ef_();
                             }
 
-                            return /* CQL 'and' (263:6-264:83) */ (dt_
-                                && du_());
+                            return dt_
+                                /* CQL 'and' (263:6-264:83) */ && du_();
                         }
 
                         IEnumerable<Encounter> ct_ = context.Operators.Where<Encounter>(cr_, cs_);
@@ -1920,12 +1920,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     return !((bool?)(fe_ is null));
                                 }
 
-                                return /* CQL 'and' (264:15-264:83) */ (fa_
-                                    && fb_());
+                                return fa_
+                                    /* CQL 'and' (264:15-264:83) */ && fb_();
                             }
 
-                            return /* CQL 'and' (263:6-264:83) */ (ep_
-                                && eq_());
+                            return ep_
+                                /* CQL 'and' (263:6-264:83) */ && eq_();
                         }
 
                         IEnumerable<Encounter> dg_ = context.Operators.Where<Encounter>(cr_, df_);
@@ -1974,12 +1974,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         return !((bool?)(gn_ is null));
                                     }
 
-                                    return /* CQL 'and' (264:15-264:83) */ (gj_
-                                        && gk_());
+                                    return gj_
+                                        /* CQL 'and' (264:15-264:83) */ && gk_();
                                 }
 
-                                return /* CQL 'and' (263:6-264:83) */ (fy_
-                                    && fz_());
+                                return fy_
+                                    /* CQL 'and' (263:6-264:83) */ && fz_();
                             }
 
                             IEnumerable<Encounter> fl_ = context.Operators.Where<Encounter>(fj_, fk_);
@@ -2002,12 +2002,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             return !((bool?)((fr_ ?? fu_) is null));
                         }
 
-                        return /* CQL 'and' (270:15-270:71) */ (do_
-                            && dp_());
+                        return do_
+                            /* CQL 'and' (270:15-270:71) */ && dp_();
                     }
 
-                    return /* CQL 'and' (269:6-270:71) */ (cl_
-                        && cm_());
+                    return cl_
+                        /* CQL 'and' (269:6-270:71) */ && cm_();
                 }
 
                 IEnumerable<Encounter> at_ = context.Operators.Where<Encounter>(ar_, as_);
@@ -2052,12 +2052,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             return !((bool?)(hm_ is null));
                         }
 
-                        return /* CQL 'and' (264:15-264:83) */ (hi_
-                            && hj_());
+                        return hi_
+                            /* CQL 'and' (264:15-264:83) */ && hj_();
                     }
 
-                    return /* CQL 'and' (263:6-264:83) */ (gx_
-                        && gy_());
+                    return gx_
+                        /* CQL 'and' (263:6-264:83) */ && gy_();
                 }
 
                 IEnumerable<Encounter> bd_ = context.Operators.Where<Encounter>(bb_, bc_);
@@ -2118,12 +2118,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     return !((bool?)(jq_ is null));
                                 }
 
-                                return /* CQL 'and' (264:15-264:83) */ (jm_
-                                    && jn_());
+                                return jm_
+                                    /* CQL 'and' (264:15-264:83) */ && jn_();
                             }
 
-                            return /* CQL 'and' (263:6-264:83) */ (jb_
-                                && jc_());
+                            return jb_
+                                /* CQL 'and' (263:6-264:83) */ && jc_();
                         }
 
                         IEnumerable<Encounter> ib_ = context.Operators.Where<Encounter>(hz_, ia_);
@@ -2171,12 +2171,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     return !((bool?)(km_ is null));
                                 }
 
-                                return /* CQL 'and' (264:15-264:83) */ (ki_
-                                    && kj_());
+                                return ki_
+                                    /* CQL 'and' (264:15-264:83) */ && kj_();
                             }
 
-                            return /* CQL 'and' (263:6-264:83) */ (jx_
-                                && jy_());
+                            return jx_
+                                /* CQL 'and' (263:6-264:83) */ && jy_();
                         }
 
                         IEnumerable<Encounter> io_ = context.Operators.Where<Encounter>(hz_, in_);
@@ -2225,12 +2225,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         return !((bool?)(lv_ is null));
                                     }
 
-                                    return /* CQL 'and' (264:15-264:83) */ (lr_
-                                        && ls_());
+                                    return lr_
+                                        /* CQL 'and' (264:15-264:83) */ && ls_();
                                 }
 
-                                return /* CQL 'and' (263:6-264:83) */ (lg_
-                                    && lh_());
+                                return lg_
+                                    /* CQL 'and' (263:6-264:83) */ && lh_();
                             }
 
                             IEnumerable<Encounter> kt_ = context.Operators.Where<Encounter>(kr_, ks_);
@@ -2253,12 +2253,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             return !((bool?)((kz_ ?? lc_) is null));
                         }
 
-                        return /* CQL 'and' (270:15-270:71) */ (iw_
-                            && ix_());
+                        return iw_
+                            /* CQL 'and' (270:15-270:71) */ && ix_();
                     }
 
-                    return /* CQL 'and' (269:6-270:71) */ (ht_
-                        && hu_());
+                    return ht_
+                        /* CQL 'and' (269:6-270:71) */ && hu_();
                 }
 
                 IEnumerable<Encounter> bq_ = context.Operators.Where<Encounter>(ar_, bp_);
@@ -2301,12 +2301,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             return !((bool?)(mu_ is null));
                         }
 
-                        return /* CQL 'and' (264:15-264:83) */ (mq_
-                            && mr_());
+                        return mq_
+                            /* CQL 'and' (264:15-264:83) */ && mr_();
                     }
 
-                    return /* CQL 'and' (263:6-264:83) */ (mf_
-                        && mg_());
+                    return mf_
+                        /* CQL 'and' (263:6-264:83) */ && mg_();
                 }
 
                 IEnumerable<Encounter> by_ = context.Operators.Where<Encounter>(bb_, bx_);
@@ -2368,12 +2368,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         return !((bool?)(pv_ is null));
                                     }
 
-                                    return /* CQL 'and' (264:15-264:83) */ (pr_
-                                        && ps_());
+                                    return pr_
+                                        /* CQL 'and' (264:15-264:83) */ && ps_();
                                 }
 
-                                return /* CQL 'and' (263:6-264:83) */ (pg_
-                                    && ph_());
+                                return pg_
+                                    /* CQL 'and' (263:6-264:83) */ && ph_();
                             }
 
                             IEnumerable<Encounter> og_ = context.Operators.Where<Encounter>(oe_, of_);
@@ -2421,12 +2421,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         return !((bool?)(qr_ is null));
                                     }
 
-                                    return /* CQL 'and' (264:15-264:83) */ (qn_
-                                        && qo_());
+                                    return qn_
+                                        /* CQL 'and' (264:15-264:83) */ && qo_();
                                 }
 
-                                return /* CQL 'and' (263:6-264:83) */ (qc_
-                                    && qd_());
+                                return qc_
+                                    /* CQL 'and' (263:6-264:83) */ && qd_();
                             }
 
                             IEnumerable<Encounter> ot_ = context.Operators.Where<Encounter>(oe_, os_);
@@ -2475,12 +2475,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                             return !((bool?)(sa_ is null));
                                         }
 
-                                        return /* CQL 'and' (264:15-264:83) */ (rw_
-                                            && rx_());
+                                        return rw_
+                                            /* CQL 'and' (264:15-264:83) */ && rx_();
                                     }
 
-                                    return /* CQL 'and' (263:6-264:83) */ (rl_
-                                        && rm_());
+                                    return rl_
+                                        /* CQL 'and' (263:6-264:83) */ && rm_();
                                 }
 
                                 IEnumerable<Encounter> qy_ = context.Operators.Where<Encounter>(qw_, qx_);
@@ -2503,12 +2503,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 return !((bool?)((re_ ?? rh_) is null));
                             }
 
-                            return /* CQL 'and' (270:15-270:71) */ (pb_
-                                && pc_());
+                            return pb_
+                                /* CQL 'and' (270:15-270:71) */ && pc_();
                         }
 
-                        return /* CQL 'and' (269:6-270:71) */ (ny_
-                            && nz_());
+                        return ny_
+                            /* CQL 'and' (269:6-270:71) */ && nz_();
                     }
 
                     IEnumerable<Encounter> nb_ = context.Operators.Where<Encounter>(mz_, na_);
@@ -2553,12 +2553,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 return !((bool?)(sz_ is null));
                             }
 
-                            return /* CQL 'and' (264:15-264:83) */ (sv_
-                                && sw_());
+                            return sv_
+                                /* CQL 'and' (264:15-264:83) */ && sw_();
                         }
 
-                        return /* CQL 'and' (263:6-264:83) */ (sk_
-                            && sl_());
+                        return sk_
+                            /* CQL 'and' (263:6-264:83) */ && sl_();
                     }
 
                     IEnumerable<Encounter> nl_ = context.Operators.Where<Encounter>(nj_, nk_);
@@ -2581,8 +2581,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     return !((bool?)((nh_ ?? nr_ ?? nu_) is null));
                 }
 
-                return /* CQL 'and' (275:6-275:81) */ (cg_
-                    && ch_());
+                return cg_
+                    /* CQL 'and' (275:6-275:81) */ && ch_();
             }
 
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
@@ -2640,12 +2640,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 return !((bool?)(vg_ is null));
                             }
 
-                            return /* CQL 'and' (264:15-264:83) */ (vc_
-                                && vd_());
+                            return vc_
+                                /* CQL 'and' (264:15-264:83) */ && vd_();
                         }
 
-                        return /* CQL 'and' (263:6-264:83) */ (ur_
-                            && us_());
+                        return ur_
+                            /* CQL 'and' (263:6-264:83) */ && us_();
                     }
 
                     IEnumerable<Encounter> tr_ = context.Operators.Where<Encounter>(tp_, tq_);
@@ -2693,12 +2693,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 return !((bool?)(wc_ is null));
                             }
 
-                            return /* CQL 'and' (264:15-264:83) */ (vy_
-                                && vz_());
+                            return vy_
+                                /* CQL 'and' (264:15-264:83) */ && vz_();
                         }
 
-                        return /* CQL 'and' (263:6-264:83) */ (vn_
-                            && vo_());
+                        return vn_
+                            /* CQL 'and' (263:6-264:83) */ && vo_();
                     }
 
                     IEnumerable<Encounter> ue_ = context.Operators.Where<Encounter>(tp_, ud_);
@@ -2747,12 +2747,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     return !((bool?)(xl_ is null));
                                 }
 
-                                return /* CQL 'and' (264:15-264:83) */ (xh_
-                                    && xi_());
+                                return xh_
+                                    /* CQL 'and' (264:15-264:83) */ && xi_();
                             }
 
-                            return /* CQL 'and' (263:6-264:83) */ (ww_
-                                && wx_());
+                            return ww_
+                                /* CQL 'and' (263:6-264:83) */ && wx_();
                         }
 
                         IEnumerable<Encounter> wj_ = context.Operators.Where<Encounter>(wh_, wi_);
@@ -2775,12 +2775,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return !((bool?)((wp_ ?? ws_) is null));
                     }
 
-                    return /* CQL 'and' (270:15-270:71) */ (um_
-                        && un_());
+                    return um_
+                        /* CQL 'and' (270:15-270:71) */ && un_();
                 }
 
-                return /* CQL 'and' (269:6-270:71) */ (tj_
-                    && tk_());
+                return tj_
+                    /* CQL 'and' (269:6-270:71) */ && tk_();
             }
 
             IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
@@ -2825,12 +2825,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return !((bool?)(yk_ is null));
                     }
 
-                    return /* CQL 'and' (264:15-264:83) */ (yg_
-                        && yh_());
+                    return yg_
+                        /* CQL 'and' (264:15-264:83) */ && yh_();
                 }
 
-                return /* CQL 'and' (263:6-264:83) */ (xv_
-                    && xw_());
+                return xv_
+                    /* CQL 'and' (263:6-264:83) */ && xw_();
             }
 
             IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
@@ -2912,12 +2912,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 return !((bool?)(cd_ is null));
                             }
 
-                            return /* CQL 'and' (288:17-288:85) */ (bz_
-                                && ca_());
+                            return bz_
+                                /* CQL 'and' (288:17-288:85) */ && ca_();
                         }
 
-                        return /* CQL 'and' (287:7-288:85) */ (bo_
-                            && bp_());
+                        return bo_
+                            /* CQL 'and' (287:7-288:85) */ && bp_();
                     }
 
                     IEnumerable<Encounter> ao_ = context.Operators.Where<Encounter>(am_, an_);
@@ -2965,12 +2965,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 return !((bool?)(cz_ is null));
                             }
 
-                            return /* CQL 'and' (288:17-288:85) */ (cv_
-                                && cw_());
+                            return cv_
+                                /* CQL 'and' (288:17-288:85) */ && cw_();
                         }
 
-                        return /* CQL 'and' (287:7-288:85) */ (ck_
-                            && cl_());
+                        return ck_
+                            /* CQL 'and' (287:7-288:85) */ && cl_();
                     }
 
                     IEnumerable<Encounter> bb_ = context.Operators.Where<Encounter>(am_, ba_);
@@ -3019,12 +3019,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     return !((bool?)(ei_ is null));
                                 }
 
-                                return /* CQL 'and' (288:17-288:85) */ (ee_
-                                    && ef_());
+                                return ee_
+                                    /* CQL 'and' (288:17-288:85) */ && ef_();
                             }
 
-                            return /* CQL 'and' (287:7-288:85) */ (dt_
-                                && du_());
+                            return dt_
+                                /* CQL 'and' (287:7-288:85) */ && du_();
                         }
 
                         IEnumerable<Encounter> dg_ = context.Operators.Where<Encounter>(de_, df_);
@@ -3047,12 +3047,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return !((bool?)((dm_ ?? dp_) is null));
                     }
 
-                    return /* CQL 'and' (294:17-294:73) */ (bj_
-                        && bk_());
+                    return bj_
+                        /* CQL 'and' (294:17-294:73) */ && bk_();
                 }
 
-                return /* CQL 'and' (293:7-294:73) */ (ag_
-                    && ah_());
+                return ag_
+                    /* CQL 'and' (293:7-294:73) */ && ah_();
             }
 
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
@@ -3097,12 +3097,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return !((bool?)(fh_ is null));
                     }
 
-                    return /* CQL 'and' (288:17-288:85) */ (fd_
-                        && fe_());
+                    return fd_
+                        /* CQL 'and' (288:17-288:85) */ && fe_();
                 }
 
-                return /* CQL 'and' (287:7-288:85) */ (es_
-                    && et_());
+                return es_
+                    /* CQL 'and' (287:7-288:85) */ && et_();
             }
 
             IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
@@ -3183,12 +3183,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 return !((bool?)(cd_ is null));
                             }
 
-                            return /* CQL 'and' (306:17-306:85) */ (bz_
-                                && ca_());
+                            return bz_
+                                /* CQL 'and' (306:17-306:85) */ && ca_();
                         }
 
-                        return /* CQL 'and' (305:7-306:85) */ (bo_
-                            && bp_());
+                        return bo_
+                            /* CQL 'and' (305:7-306:85) */ && bp_();
                     }
 
                     IEnumerable<Encounter> ao_ = context.Operators.Where<Encounter>(am_, an_);
@@ -3236,12 +3236,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 return !((bool?)(cz_ is null));
                             }
 
-                            return /* CQL 'and' (306:17-306:85) */ (cv_
-                                && cw_());
+                            return cv_
+                                /* CQL 'and' (306:17-306:85) */ && cw_();
                         }
 
-                        return /* CQL 'and' (305:7-306:85) */ (ck_
-                            && cl_());
+                        return ck_
+                            /* CQL 'and' (305:7-306:85) */ && cl_();
                     }
 
                     IEnumerable<Encounter> bb_ = context.Operators.Where<Encounter>(am_, ba_);
@@ -3290,12 +3290,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     return !((bool?)(ei_ is null));
                                 }
 
-                                return /* CQL 'and' (306:17-306:85) */ (ee_
-                                    && ef_());
+                                return ee_
+                                    /* CQL 'and' (306:17-306:85) */ && ef_();
                             }
 
-                            return /* CQL 'and' (305:7-306:85) */ (dt_
-                                && du_());
+                            return dt_
+                                /* CQL 'and' (305:7-306:85) */ && du_();
                         }
 
                         IEnumerable<Encounter> dg_ = context.Operators.Where<Encounter>(de_, df_);
@@ -3318,12 +3318,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return !((bool?)((dm_ ?? dp_) is null));
                     }
 
-                    return /* CQL 'and' (312:17-312:73) */ (bj_
-                        && bk_());
+                    return bj_
+                        /* CQL 'and' (312:17-312:73) */ && bk_();
                 }
 
-                return /* CQL 'and' (311:7-312:73) */ (ag_
-                    && ah_());
+                return ag_
+                    /* CQL 'and' (311:7-312:73) */ && ah_();
             }
 
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
@@ -3368,12 +3368,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return !((bool?)(fh_ is null));
                     }
 
-                    return /* CQL 'and' (306:17-306:85) */ (fd_
-                        && fe_());
+                    return fd_
+                        /* CQL 'and' (306:17-306:85) */ && fe_();
                 }
 
-                return /* CQL 'and' (305:7-306:85) */ (es_
-                    && et_());
+                return es_
+                    /* CQL 'and' (305:7-306:85) */ && et_();
             }
 
             IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
@@ -3455,8 +3455,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 return t_;
             }
 
-            return /* CQL 'and' (336:6-337:57) */ (m_
-                && n_());
+            return m_
+                /* CQL 'and' (336:6-337:57) */ && n_();
         }
 
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
@@ -3503,8 +3503,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 return t_;
             }
 
-            return /* CQL 'and' (346:6-347:57) */ (m_
-                && n_());
+            return m_
+                /* CQL 'and' (346:6-347:57) */ && n_();
         }
 
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
@@ -3644,8 +3644,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 return o_;
             }
 
-            return /* CQL 'and' (386:25-386:62) */ (i_
-                && j_());
+            return i_
+                /* CQL 'and' (386:25-386:62) */ && j_();
         }
 
 
@@ -3741,9 +3741,9 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     return z_;
                 }
 
-                return /* CQL 'and' (406:25-406:123) */ (/* CQL 'and' (406:31-406:69) */ (q_
-                    && r_())
-                    && s_());
+                return q_
+                    /* CQL 'and' (406:31-406:69) */ && r_()
+                    /* CQL 'and' (406:25-406:123) */ && s_();
             }
 
             IEnumerable<Claim> g_ = context.Operators.Where<Claim>(e_, f_);
@@ -3795,9 +3795,9 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return bg_;
                     }
 
-                    return /* CQL 'and' (406:25-406:123) */ (/* CQL 'and' (406:31-406:69) */ (ax_
-                        && ay_())
-                        && az_());
+                    return ax_
+                        /* CQL 'and' (406:31-406:69) */ && ay_()
+                        /* CQL 'and' (406:25-406:123) */ && az_();
                 }
 
                 IEnumerable<Claim> ai_ = context.Operators.Where<Claim>(ag_, ah_);
@@ -3890,8 +3890,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 return o_;
             }
 
-            return /* CQL 'or' (417:13-418:54) */ (h_
-                || i_());
+            return h_
+                /* CQL 'or' (417:13-418:54) */ || i_();
         }
 
         IEnumerable<bool?> d_ = context.Operators.SelectDistinct<Claim.DiagnosisComponent, bool?>((IEnumerable<Claim.DiagnosisComponent>)b_, c_);
@@ -3927,12 +3927,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     return q_;
                 }
 
-                return /* CQL 'or' (428:14-431:10) */ (j_
-                    || k_());
+                return j_
+                    /* CQL 'or' (428:14-431:10) */ || k_();
             }
 
-            return /* CQL 'and' (427:8-431:10) */ (f_
-                && g_());
+            return f_
+                /* CQL 'and' (427:8-431:10) */ && g_();
         }
 
         CqlBoolean c_ = context.Operators.WhereAny<Claim.DiagnosisComponent>(a_, b_);
@@ -4059,9 +4059,9 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     return aa_;
                 }
 
-                return /* CQL 'and' (476:26-476:124) */ (/* CQL 'and' (476:32-476:70) */ (r_
-                    && s_())
-                    && t_());
+                return r_
+                    /* CQL 'and' (476:32-476:70) */ && s_()
+                    /* CQL 'and' (476:26-476:124) */ && t_();
             }
 
             IEnumerable<Claim> g_ = context.Operators.Where<Claim>(e_, f_);
@@ -4113,9 +4113,9 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return bi_;
                     }
 
-                    return /* CQL 'and' (476:26-476:124) */ (/* CQL 'and' (476:32-476:70) */ (az_
-                        && ba_())
-                        && bb_());
+                    return az_
+                        /* CQL 'and' (476:32-476:70) */ && ba_()
+                        /* CQL 'and' (476:26-476:124) */ && bb_();
                 }
 
                 IEnumerable<Claim> aj_ = context.Operators.Where<Claim>(ah_, ai_);
@@ -4185,8 +4185,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     return cb_;
                 }
 
-                return /* CQL 'and' (478:59-478:150) */ (au_
-                    && av_());
+                return au_
+                    /* CQL 'and' (478:59-478:150) */ && av_();
             }
 
             IEnumerable<Claim.ProcedureComponent> m_ = context.Operators.Where<Claim.ProcedureComponent>(k_, l_);

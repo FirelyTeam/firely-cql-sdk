@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS56FHIRFuncStatHipReplacement", "1.0.000")]
 public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingleton<CMS56FHIRFuncStatHipReplacement_1_0_000>
 {
@@ -455,9 +455,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             return n_;
         }
 
-        return /* CQL 'and' (60:3-62:67) */ (/* CQL 'and' (60:3-61:53) */ (a_
-            && b_())
-            && c_());
+        return a_
+            /* CQL 'and' (60:3-61:53) */ && b_()
+            /* CQL 'and' (60:3-62:67) */ && c_();
     }
 
 
@@ -544,14 +544,14 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return z_;
             }
 
-            return /* CQL 'or' (277:52-281:3) */ (/* CQL 'or' (277:54-279:66) */ (/* CQL 'or' (277:54-278:66) */ (h_
-                || i_())
-                || j_())
-                || k_());
+            return h_
+                /* CQL 'or' (277:54-278:66) */ || i_()
+                /* CQL 'or' (277:54-279:66) */ || j_()
+                /* CQL 'or' (277:52-281:3) */ || k_();
         }
 
-        return /* CQL 'implies' (277:3-281:3) */ ((CqlBoolean)(!(!((bool?)(b_ is null))))
-            || c_());
+        return (CqlBoolean)(!(!((bool?)(b_ is null))))
+            /* CQL 'implies' (277:3-281:3) */ || c_();
     }
 
 
@@ -697,9 +697,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     return !((bool?)(ak_ is null));
                 }
 
-                return /* CQL 'and' (114:19-115:46) */ (/* CQL 'and' (114:19-114:142) */ (u_
-                    && v_())
-                    && this.isVerified(context, LowerBodyFracture));
+                return u_
+                    /* CQL 'and' (114:19-114:142) */ && v_()
+                    /* CQL 'and' (114:19-115:46) */ && this.isVerified(context, LowerBodyFracture);
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<Condition>(g_, h_);
@@ -973,8 +973,8 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 }
                 CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_);
                 CqlBoolean m_ = context.Operators.Overlaps(j_, l_, "day");
-                return /* CQL 'and' (134:19-135:46) */ (m_
-                    && this.isVerified(context, MalignantNeoplasm));
+                return m_
+                    /* CQL 'and' (134:19-135:46) */ && this.isVerified(context, MalignantNeoplasm);
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<Procedure>(g_, h_);
@@ -1042,8 +1042,8 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 }
                 CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_);
                 CqlBoolean m_ = context.Operators.Overlaps(j_, l_, "day");
-                return /* CQL 'and' (142:19-143:52) */ (m_
-                    && this.isVerified(context, MechanicalComplications));
+                return m_
+                    /* CQL 'and' (142:19-143:52) */ && this.isVerified(context, MechanicalComplications);
             }
 
             CqlBoolean i_ = context.Operators.WhereAny<Procedure>(g_, h_);
@@ -1200,8 +1200,8 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     return ab_;
                 }
 
-                return /* CQL 'and' (149:19-150:213) */ (!m_
-                    && n_());
+                return (CqlBoolean)!m_
+                    /* CQL 'and' (149:19-150:213) */ && n_();
             }
 
             CqlBoolean h_ = context.Operators.WhereAny<Procedure>(f_, g_);
@@ -1327,15 +1327,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         CqlBoolean a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        return /* CQL 'or' (95:3-103:51) */ (/* CQL 'or' (95:3-102:76) */ (/* CQL 'or' (95:3-101:36) */ (/* CQL 'or' (95:3-100:62) */ (/* CQL 'or' (95:3-99:100) */ (/* CQL 'or' (95:3-98:47) */ (/* CQL 'or' (95:3-97:71) */ (/* CQL 'or' (95:3-96:40) */ (a_
-            || this.Has_Severe_Cognitive_Impairment(context))
-            || this.Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures(context))
-            || this.Has_Partial_Hip_Arthroplasty_Procedure(context))
-            || this.Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure(context))
-            || this.Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs(context))
-            || this.Has_Mechanical_Complication(context))
-            || this.Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed(context))
-            || this.Death_Within_300_Days_of_the_THA_Procedure(context));
+        return a_
+            /* CQL 'or' (95:3-96:40) */ || this.Has_Severe_Cognitive_Impairment(context)
+            /* CQL 'or' (95:3-97:71) */ || this.Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures(context)
+            /* CQL 'or' (95:3-98:47) */ || this.Has_Partial_Hip_Arthroplasty_Procedure(context)
+            /* CQL 'or' (95:3-99:100) */ || this.Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure(context)
+            /* CQL 'or' (95:3-100:62) */ || this.Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs(context)
+            /* CQL 'or' (95:3-101:36) */ || this.Has_Mechanical_Complication(context)
+            /* CQL 'or' (95:3-102:76) */ || this.Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed(context)
+            /* CQL 'or' (95:3-103:51) */ || this.Death_Within_300_Days_of_the_THA_Procedure(context);
     }
 
 
@@ -1470,15 +1470,15 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return !((bool?)(ck_ is null));
             }
 
-            return /* CQL 'and' (185:5-193:81) */ (/* CQL 'and' (185:11-192:74) */ (/* CQL 'and' (185:11-191:54) */ (/* CQL 'and' (185:11-190:78) */ (/* CQL 'and' (185:11-189:58) */ (/* CQL 'and' (185:11-188:83) */ (/* CQL 'and' (185:11-187:63) */ (/* CQL 'and' (185:11-186:75) */ (al_
-                && am_())
-                && an_())
-                && ao_())
-                && ap_())
-                && aq_())
-                && ar_())
-                && as_())
-                && at_());
+            return al_
+                /* CQL 'and' (185:11-186:75) */ && am_()
+                /* CQL 'and' (185:11-187:63) */ && an_()
+                /* CQL 'and' (185:11-188:83) */ && ao_()
+                /* CQL 'and' (185:11-189:58) */ && ap_()
+                /* CQL 'and' (185:11-190:78) */ && aq_()
+                /* CQL 'and' (185:11-191:54) */ && ar_()
+                /* CQL 'and' (185:11-192:74) */ && as_()
+                /* CQL 'and' (185:5-193:81) */ && at_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)?> x_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation, Observation, Observation, Observation>, (CqlTupleMetadata, Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)?>(u_, v_, w_);
@@ -1589,8 +1589,8 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                 CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
-                return /* CQL 'and' (168:19-168:93) */ (y_
-                    && !((bool?)(InitialHipAssessmentHOOS is null)));
+                return y_
+                    /* CQL 'and' (168:19-168:93) */ && !((bool?)(InitialHipAssessmentHOOS is null));
             }
 
             CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
@@ -1724,8 +1724,8 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                 CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
-                return /* CQL 'and' (200:19-200:89) */ (y_
-                    && !((bool?)(InitialHipAssessment is null)));
+                return y_
+                    /* CQL 'and' (200:19-200:89) */ && !((bool?)(InitialHipAssessment is null));
             }
 
             CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
@@ -1810,9 +1810,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (225:5-227:85) */ (/* CQL 'and' (225:11-226:87) */ (z_
-                && aa_())
-                && ab_());
+            return z_
+                /* CQL 'and' (225:11-226:87) */ && aa_()
+                /* CQL 'and' (225:5-227:85) */ && ab_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?>(i_, j_, k_);
@@ -1905,8 +1905,8 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                 CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
-                return /* CQL 'and' (214:19-214:97) */ (y_
-                    && !((bool?)(InitialHipAssessmentPROMIS10 is null)));
+                return y_
+                    /* CQL 'and' (214:19-214:97) */ && !((bool?)(InitialHipAssessmentPROMIS10 is null));
             }
 
             CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
@@ -1991,9 +1991,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (245:5-247:88) */ (/* CQL 'and' (245:11-246:86) */ (z_
-                && aa_())
-                && ab_());
+            return z_
+                /* CQL 'and' (245:11-246:86) */ && aa_()
+                /* CQL 'and' (245:5-247:88) */ && ab_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_, k_);
@@ -2086,8 +2086,8 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                 CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
-                return /* CQL 'and' (234:19-234:96) */ (y_
-                    && !((bool?)(InitialHipAssessmentOblique is null)));
+                return y_
+                    /* CQL 'and' (234:19-234:96) */ && !((bool?)(InitialHipAssessmentOblique is null));
             }
 
             CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
@@ -2172,9 +2172,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (265:5-267:88) */ (/* CQL 'and' (265:11-266:86) */ (z_
-                && aa_())
-                && ab_());
+            return z_
+                /* CQL 'and' (265:11-266:86) */ && aa_()
+                /* CQL 'and' (265:5-267:88) */ && ab_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_, k_);
@@ -2267,8 +2267,8 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                 CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
-                return /* CQL 'and' (254:19-254:99) */ (y_
-                    && !((bool?)(InitialHipAssessmentOrthogonal is null)));
+                return y_
+                    /* CQL 'and' (254:19-254:99) */ && !((bool?)(InitialHipAssessmentOrthogonal is null));
             }
 
             CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
@@ -2312,11 +2312,11 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     private bool? Numerator_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments(context);
-        return /* CQL 'or' (158:3-162:75) */ (/* CQL 'or' (158:3-161:72) */ (/* CQL 'or' (158:3-160:68) */ (/* CQL 'or' (158:3-159:66) */ (a_
-            || this.Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments(context))
-            || this.Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments(context))
-            || this.Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(context))
-            || this.Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(context));
+        return a_
+            /* CQL 'or' (158:3-159:66) */ || this.Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments(context)
+            /* CQL 'or' (158:3-160:68) */ || this.Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments(context)
+            /* CQL 'or' (158:3-161:72) */ || this.Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(context)
+            /* CQL 'or' (158:3-162:75) */ || this.Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(context);
     }
 
 

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -57,23 +57,25 @@ internal partial class CSharpEmitter
     private bool IsCqlBooleanLocal(Atom atom) =>
         atom.Node is CodeLocal local && _cqlBooleanLocals.Contains(local);
 
-    /// <summary>The printed names of the <see cref="_cqlBooleanLocals"/>, so a conversion can be
-    /// recognised as redundant from the CODE it wraps rather than from the IR node.</summary>
-    private readonly HashSet<string> _cqlBooleanNames = [];
-
     /// <summary>
-    /// Whether <paramref name="code"/> already denotes a <see cref="CqlBoolean"/>: a declared local,
-    /// or a negation of one, since <see cref="CqlBoolean"/>'s own <c>operator !</c> returns
-    /// <see cref="CqlBoolean"/>. Either way a surrounding conversion to it is redundant.
+    /// Whether <paramref name="atom"/> already denotes a <see cref="CqlBoolean"/> value: either its
+    /// own IR type is one (a short-circuit chain, whose node type genuinely is
+    /// <see cref="CqlBoolean"/>), or it is a local this emitter declared as one.
     ///
-    /// <para>Matched on the printed name deliberately. The IR node is not enough: <c>implies</c>
-    /// builds its <c>!left</c> around the ORIGINAL operand expression, and the local only appears
-    /// when the child linearizes — so the node under the negation is not a
-    /// <see cref="CodeLocal"/> even though the text is. Names are unique within one emission
-    /// (allocated from a single sequence), so matching them cannot cross-talk.</para>
+    /// <para>This is what lets the three-valued questions be asked of a whole EXPRESSION and not
+    /// only of a local — <c>(a_ || b_()).IsTrue</c> rather than
+    /// <c>((bool?)(a_ || b_())) ?? false</c>.</para>
+    ///
+    /// <para>Identity and IR type ONLY, never the printed name. An earlier attempt matched names, to
+    /// catch <c>implies</c>' <c>!a_</c> (whose node is a <see cref="CodeUnary"/> over the original
+    /// expression rather than over the local). Names are allocated from one sequence per emission,
+    /// but a deferred local-function body renders in its own scope, so a name can belong to an
+    /// unrelated local by the time the match runs — it rewrote <c>b_ is null</c> on a
+    /// <c>FhirUri</c> into <c>!b_.HasValue</c>. The compiler caught it; a soundness rule this
+    /// cheap to get wrong is not worth a few cosmetic casts.</para>
     /// </summary>
-    private bool PrintsAsCqlBoolean(string code) =>
-        _cqlBooleanNames.Contains(code.TrimStart('!'));
+    private bool DenotesCqlBoolean(Atom atom) =>
+        CodeTypeRules.IsCqlBoolean(atom.Type) || IsCqlBooleanLocal(atom);
 
     /// <summary>
     /// A reference to <paramref name="atom"/> in a position that genuinely needs <c>bool?</c>,
@@ -116,7 +118,6 @@ internal partial class CSharpEmitter
         // emissions can neither cause collisions nor grow the maps without bound.
         _assignedNames.Clear();
         _cqlBooleanLocals.Clear();
-        _cqlBooleanNames.Clear();
 
         var scope = Scope.CreateRoot(this, lambda.Parameters);
         var result = scope.Linearize(BodyWithoutRootBoolConversion(lambda), tailPosition: true);
@@ -156,10 +157,10 @@ internal partial class CSharpEmitter
     /// </summary>
     private static CodeExpression BodyWithoutRootBoolConversion(CodeLambda lambda) =>
         lambda.Body is CodeCast { Type: var castType, Operand: { Type: var operandType } inner }
-        && castType == typeof(bool?)
+        && CodeTypeRules.IsNullableBool(castType)
         // bool as well as CqlBoolean: both convert to bool? implicitly at the return, so the cast is
         // redundant either way. The bool case is what IsTrue/IsFalse produce.
-        && (operandType == typeof(CqlBoolean) || operandType == typeof(bool))
+        && (CodeTypeRules.IsCqlBoolean(operandType) || CodeTypeRules.IsPlainBool(operandType))
             ? inner
             : lambda.Body;
 
@@ -178,7 +179,7 @@ internal partial class CSharpEmitter
     /// conversion is load-bearing.</para>
     /// </summary>
     private static CodeExpression UnwrapCqlBooleanConversion(CodeExpression node) =>
-        node is CodeCast { Type: var castType, Operand: { } inner } && castType == typeof(CqlBoolean)
+        node is CodeCast { Type: var castType, Operand: { } inner } && CodeTypeRules.IsCqlBoolean(castType)
             ? inner
             : node;
 
@@ -194,7 +195,6 @@ internal partial class CSharpEmitter
     {
         _assignedNames.Clear();
         _cqlBooleanLocals.Clear();
-        _cqlBooleanNames.Clear();
 
         var scope = Scope.CreateRoot(this, lambda.Parameters);
         var result = scope.Linearize(BodyWithoutRootBoolConversion(lambda), tailPosition: true);

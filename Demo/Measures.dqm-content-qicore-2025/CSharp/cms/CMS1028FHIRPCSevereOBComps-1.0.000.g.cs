@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS1028FHIRPCSevereOBComps", "1.0.000")]
 public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<CMS1028FHIRPCSevereOBComps_1_0_000>
 {
@@ -449,8 +449,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return h_;
             }
 
-            return /* CQL 'and' (177:5-178:75) */ ((CqlBoolean)(d_ is null)
-                && e_());
+            return (CqlBoolean)(d_ is null)
+                /* CQL 'and' (177:5-178:75) */ && e_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -505,13 +505,13 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return r_;
                 }
 
-                return /* CQL 'or' (220:11-222:7) */ (j_
-                    || k_());
+                return j_
+                    /* CQL 'or' (220:11-222:7) */ || k_();
             }
 
-            return /* CQL 'and' (218:5-222:7) */ (/* CQL 'and' (218:11-219:67) */ ((CqlBoolean)(d_ is null)
-                && ((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null))
-                && e_());
+            return (CqlBoolean)(d_ is null)
+                /* CQL 'and' (218:11-219:67) */ && ((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null)
+                /* CQL 'and' (218:5-222:7) */ && e_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -605,16 +605,16 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                         return u_;
                     }
 
-                    return /* CQL 'and' (233:13-234:140) */ (o_
-                        && p_());
+                    return o_
+                        /* CQL 'and' (233:13-234:140) */ && p_();
                 }
 
                 CqlBoolean k_ = context.Operators.WhereAny<Procedure>(i_, j_);
                 return k_;
             }
 
-            return /* CQL 'or' (231:5-236:7) */ (f_
-                || g_());
+            return f_
+                /* CQL 'or' (231:5-236:7) */ || g_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -710,8 +710,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return q_;
                 }
 
-                return /* CQL 'and' (409:17-410:137) */ (k_
-                    && l_());
+                return k_
+                    /* CQL 'and' (409:17-410:137) */ && l_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -804,8 +804,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return q_;
                 }
 
-                return /* CQL 'and' (209:17-210:133) */ (k_
-                    && l_());
+                return k_
+                    /* CQL 'and' (209:17-210:133) */ && l_();
             }
 
             CqlBoolean g_ = context.Operators.WhereAny<Procedure>(e_, f_);
@@ -900,8 +900,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return p_;
                 }
 
-                return /* CQL 'and' (195:17-196:144) */ (j_
-                    && k_());
+                return j_
+                    /* CQL 'and' (195:17-196:144) */ && k_();
             }
 
             CqlBoolean f_ = context.Operators.WhereAny<Procedure>(d_, e_);
@@ -968,13 +968,13 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return ag_;
                 }
 
-                return /* CQL 'or' (151:13-153:9) */ (ad_
-                    || ae_());
+                return ad_
+                    /* CQL 'or' (151:13-153:9) */ || ae_();
             }
 
-            return /* CQL 'and' (148:7-153:9) */ (/* CQL 'or' (148:13-150:7) */ (o_
-                || p_())
-                && q_());
+            return o_
+                /* CQL 'or' (148:13-150:7) */ || p_()
+                /* CQL 'and' (148:7-153:9) */ && q_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -1089,8 +1089,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return v_;
                 }
 
-                return /* CQL 'and' (112:7-113:119) */ (p_
-                    && q_());
+                return p_
+                    /* CQL 'and' (112:7-113:119) */ && q_();
             }
 
             CqlBoolean l_ = context.Operators.WhereAny<Procedure>(j_, k_);
@@ -1324,8 +1324,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return w_;
                 }
 
-                return /* CQL 'or' (122:9-123:88) */ (q_
-                    || r_());
+                return q_
+                    /* CQL 'or' (122:9-123:88) */ || r_();
             }
 
 
@@ -1405,8 +1405,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return q_;
             }
 
-            return /* CQL 'and' (536:5-537:120) */ (k_
-                && l_());
+            return k_
+                /* CQL 'and' (536:5-537:120) */ && l_();
         }
 
         IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
@@ -1657,13 +1657,13 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return ag_;
                 }
 
-                return /* CQL 'or' (253:13-255:9) */ (ad_
-                    || ae_());
+                return ad_
+                    /* CQL 'or' (253:13-255:9) */ || ae_();
             }
 
-            return /* CQL 'and' (250:7-255:9) */ (/* CQL 'or' (250:13-252:7) */ (o_
-                || p_())
-                && q_());
+            return o_
+                /* CQL 'or' (250:13-252:7) */ || p_()
+                /* CQL 'and' (250:7-255:9) */ && q_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -2192,8 +2192,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return j_;
             }
 
-            return /* CQL 'or' (354:5-355:139) */ (f_
-                || g_());
+            return f_
+                /* CQL 'or' (354:5-355:139) */ || g_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -2385,16 +2385,16 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                         return s_;
                     }
 
-                    return /* CQL 'and' (391:17-393:13) */ (o_
-                        && p_());
+                    return o_
+                        /* CQL 'and' (391:17-393:13) */ && p_();
                 }
 
-                return /* CQL 'and' (390:12-394:9) */ ((CqlBoolean)(k_ is null)
-                    && l_());
+                return (CqlBoolean)(k_ is null)
+                    /* CQL 'and' (390:12-394:9) */ && l_();
             }
 
-            return /* CQL 'or' (389:7-394:9) */ (i_
-                || j_());
+            return i_
+                /* CQL 'or' (389:7-394:9) */ || j_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -2418,9 +2418,9 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return x_;
             }
 
-            return /* CQL 'and' (399:9-403:11) */ (/* CQL 'and' (399:15-400:25) */ ((CqlBoolean)(t_ is null)
-                && ((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null))
-                && u_());
+            return (CqlBoolean)(t_ is null)
+                /* CQL 'and' (399:15-400:25) */ && ((PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter)) is null)
+                /* CQL 'and' (399:9-403:11) */ && u_();
         }
 
         IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(a_, d_);
@@ -2477,9 +2477,9 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return !((bool?)(ap_ is null));
                 }
 
-                return /* CQL 'and' (421:9-423:42) */ (/* CQL 'and' (421:15-422:70) */ (ag_
-                    && ah_())
-                    && ai_());
+                return ag_
+                    /* CQL 'and' (421:15-422:70) */ && ah_()
+                    /* CQL 'and' (421:9-423:42) */ && ai_();
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -2529,9 +2529,9 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return !((bool?)(bm_ is null));
                 }
 
-                return /* CQL 'and' (421:9-423:42) */ (/* CQL 'and' (421:15-422:70) */ (bd_
-                    && be_())
-                    && bf_());
+                return bd_
+                    /* CQL 'and' (421:15-422:70) */ && be_()
+                    /* CQL 'and' (421:9-423:42) */ && bf_();
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -2606,9 +2606,9 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return !((bool?)(ap_ is null));
                 }
 
-                return /* CQL 'and' (441:9-443:35) */ (/* CQL 'and' (441:15-442:63) */ (ag_
-                    && ah_())
-                    && ai_());
+                return ag_
+                    /* CQL 'and' (441:15-442:63) */ && ah_()
+                    /* CQL 'and' (441:9-443:35) */ && ai_();
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -2658,9 +2658,9 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return !((bool?)(bm_ is null));
                 }
 
-                return /* CQL 'and' (441:9-443:35) */ (/* CQL 'and' (441:15-442:63) */ (bd_
-                    && be_())
-                    && bf_());
+                return bd_
+                    /* CQL 'and' (441:15-442:63) */ && be_()
+                    /* CQL 'and' (441:9-443:35) */ && bf_();
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -2727,8 +2727,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return al_;
                 }
 
-                return /* CQL 'and' (463:9-464:69) */ (af_
-                    && ag_());
+                return af_
+                    /* CQL 'and' (463:9-464:69) */ && ag_();
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -2770,8 +2770,8 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return be_;
                 }
 
-                return /* CQL 'and' (463:9-464:69) */ (ay_
-                    && az_());
+                return ay_
+                    /* CQL 'and' (463:9-464:69) */ && az_();
             }
 
             IEnumerable<Observation> o_ = context.Operators.Where<Observation>(f_, n_);
@@ -2858,9 +2858,9 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return !((bool?)(au_ is null));
                 }
 
-                return /* CQL 'and' (484:9-486:44) */ (/* CQL 'and' (484:15-485:62) */ (aj_
-                    && ak_())
-                    && al_());
+                return aj_
+                    /* CQL 'and' (484:15-485:62) */ && ak_()
+                    /* CQL 'and' (484:9-486:44) */ && al_();
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -2942,9 +2942,9 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return !((bool?)(cd_ is null));
                 }
 
-                return /* CQL 'and' (484:9-486:44) */ (/* CQL 'and' (484:15-485:62) */ (bs_
-                    && bt_())
-                    && bu_());
+                return bs_
+                    /* CQL 'and' (484:15-485:62) */ && bt_()
+                    /* CQL 'and' (484:9-486:44) */ && bu_();
             }
 
             IEnumerable<Observation> s_ = context.Operators.Where<Observation>(f_, r_);

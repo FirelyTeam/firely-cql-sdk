@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("BCSEHEDISMY2022", "1.0.0")]
 public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY2022_1_0_0>
 {
@@ -217,9 +217,9 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             return ae_;
         }
 
-        return /* CQL 'and' (41:3-49:38) */ (/* CQL 'and' (41:3-46:47) */ (j_
-            && k_())
-            && l_());
+        return j_
+            /* CQL 'and' (41:3-46:47) */ && k_()
+            /* CQL 'and' (41:3-49:38) */ && l_();
     }
 
 
@@ -251,9 +251,9 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             return p_;
         }
 
-        return /* CQL 'and' (34:3-38:46) */ (/* CQL 'and' (34:3-37:39) */ (j_
-            && k_())
-            && this.Enrolled_During_Participation_Period(context));
+        return j_
+            /* CQL 'and' (34:3-37:39) */ && k_()
+            /* CQL 'and' (34:3-38:46) */ && this.Enrolled_During_Participation_Period(context);
     }
 
 
@@ -577,8 +577,8 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
                 return m_;
             }
 
-            return /* CQL 'or' (75:11-77:7) */ (j_
-                || k_());
+            return j_
+                /* CQL 'or' (75:11-77:7) */ || k_();
         }
 
 
@@ -595,11 +595,11 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             return q_;
         }
 
-        return /* CQL 'or' (72:3-80:46) */ (/* CQL 'or' (72:3-79:46) */ (/* CQL 'and' (72:3-78:3) */ (/* CQL 'or' (72:5-74:5) */ (b_
-            || c_())
-            && d_())
-            || e_())
-            || f_());
+        return b_
+            /* CQL 'or' (72:5-74:5) */ || c_()
+            /* CQL 'and' (72:3-78:3) */ && d_()
+            /* CQL 'or' (72:3-79:46) */ || e_()
+            /* CQL 'or' (72:3-80:46) */ || f_();
     }
 
 
@@ -619,10 +619,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             return d_;
         }
 
-        return /* CQL 'or' (66:3-69:83) */ (/* CQL 'or' (66:3-68:96) */ (/* CQL 'or' (66:3-67:29) */ (a_
-            || this.Mastectomy_Exclusion(context))
-            || NCQAAdvancedIllnessandFrailty_1_0_0.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context))
-            || b_());
+        return a_
+            /* CQL 'or' (66:3-67:29) */ || this.Mastectomy_Exclusion(context)
+            /* CQL 'or' (66:3-68:96) */ || NCQAAdvancedIllnessandFrailty_1_0_0.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context)
+            /* CQL 'or' (66:3-69:83) */ || b_();
     }
 
 

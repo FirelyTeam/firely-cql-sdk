@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("Status", "1.15.000")]
 public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
 {
@@ -124,14 +124,14 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                     return ab_;
                 }
 
-                return /* CQL 'or' (26:7-30:7) */ (/* CQL 'or' (26:8-28:47) */ (/* CQL 'or' (26:8-27:47) */ (j_
-                    || k_())
-                    || l_())
-                    || m_());
+                return j_
+                    /* CQL 'or' (26:8-27:47) */ || k_()
+                    /* CQL 'or' (26:8-28:47) */ || l_()
+                    /* CQL 'or' (26:7-30:7) */ || m_();
             }
 
-            return /* CQL 'implies' (25:5-30:7) */ ((CqlBoolean)(!(!((bool?)(d_ is null))))
-                || e_());
+            return (CqlBoolean)(!(!((bool?)(d_ is null))))
+                /* CQL 'implies' (25:5-30:7) */ || e_();
         }
 
         IEnumerable<Condition> b_ = context.Operators.Where<Condition>(conditions, a_);
@@ -192,8 +192,8 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 return o_;
             }
 
-            return /* CQL 'and' (40:5-41:99) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (40:5-41:99) */ && i_();
         }
 
         IEnumerable<DeviceRequest> b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
@@ -232,8 +232,8 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 return o_;
             }
 
-            return /* CQL 'and' (46:5-47:99) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (46:5-47:99) */ && i_();
         }
 
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
@@ -272,8 +272,8 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 return o_;
             }
 
-            return /* CQL 'and' (52:5-53:99) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (52:5-53:99) */ && i_();
         }
 
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
@@ -312,8 +312,8 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 return o_;
             }
 
-            return /* CQL 'and' (58:5-59:99) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (58:5-59:99) */ && i_();
         }
 
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
@@ -357,8 +357,8 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 return m_;
             }
 
-            return /* CQL 'and' (64:5-67:5) */ (g_
-                && h_());
+            return g_
+                /* CQL 'and' (64:5-67:5) */ && h_();
         }
 
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
@@ -481,8 +481,8 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 return l_;
             }
 
-            return /* CQL 'and' (98:5-99:99) */ (f_
-                && g_());
+            return f_
+                /* CQL 'and' (98:5-99:99) */ && g_();
         }
 
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
@@ -541,8 +541,8 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 return m_;
             }
 
-            return /* CQL 'and' (109:5-110:97) */ (g_
-                && h_());
+            return g_
+                /* CQL 'and' (109:5-110:97) */ && h_();
         }
 
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
@@ -586,8 +586,8 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 return m_;
             }
 
-            return /* CQL 'and' (115:5-118:7) */ (g_
-                && h_());
+            return g_
+                /* CQL 'and' (115:5-118:7) */ && h_();
         }
 
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);

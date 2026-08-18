@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("HospitalHarmSevereHypoglycemiaFHIR", "0.0.012")]
 public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISingleton<HospitalHarmSevereHypoglycemiaFHIR_0_0_012>
 {
@@ -166,8 +166,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 return m_;
             }
 
-            return /* CQL 'and' (40:19-41:90) */ (g_
-                && h_());
+            return g_
+                /* CQL 'and' (40:19-41:90) */ && h_();
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -234,8 +234,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                     return w_;
                 }
 
-                return /* CQL 'and' */ (r_
-                    && s_());
+                return r_
+                    /* CQL 'and' */ && s_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -257,8 +257,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 return !ad_;
             }
 
-            return /* CQL 'and' (63:5-64:45) */ (z_
-                && aa_());
+            return z_
+                /* CQL 'and' (63:5-64:45) */ && aa_();
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
@@ -385,11 +385,11 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         return ap_;
                     }
 
-                    return /* CQL 'and' (70:21-73:152) */ (/* CQL 'and' (70:21-72:53) */ (/* CQL 'and' (70:21-71:48) */ (/* CQL 'and' (70:21-70:182) */ (x_
-                        && y_())
-                        && z_())
-                        && aa_())
-                        && ab_());
+                    return x_
+                        /* CQL 'and' (70:21-70:182) */ && y_()
+                        /* CQL 'and' (70:21-71:48) */ && z_()
+                        /* CQL 'and' (70:21-72:53) */ && aa_()
+                        /* CQL 'and' (70:21-73:152) */ && ab_();
                 }
 
                 CqlBoolean n_ = context.Operators.WhereAny<MedicationAdministration>(l_, m_);
@@ -428,8 +428,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                             return !((bool?)(bq_ is null));
                         }
 
-                        return /* CQL 'and' (76:17-76:179) */ (bm_
-                            && bn_());
+                        return bm_
+                            /* CQL 'and' (76:17-76:179) */ && bn_();
                     }
 
 
@@ -457,11 +457,11 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         return ca_;
                     }
 
-                    return /* CQL 'and' (75:21-79:58) */ (/* CQL 'and' (75:21-78:61) */ (/* CQL 'and' (75:21-77:56) */ (/* CQL 'and' (75:21-76:179) */ (ay_
-                        && az_())
-                        && ba_())
-                        && bb_())
-                        && bc_());
+                    return ay_
+                        /* CQL 'and' (75:21-76:179) */ && az_()
+                        /* CQL 'and' (75:21-77:56) */ && ba_()
+                        /* CQL 'and' (75:21-78:61) */ && bb_()
+                        /* CQL 'and' (75:21-79:58) */ && bc_();
                 }
 
                 CqlBoolean at_ = context.Operators.WhereAny<Observation>(ar_, as_);
@@ -485,8 +485,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                     return ck_;
                 }
 
-                return /* CQL 'and' (80:9-81:48) */ (cf_
-                    && cg_());
+                return cf_
+                    /* CQL 'and' (80:9-81:48) */ && cg_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<Observation>(i_, j_);

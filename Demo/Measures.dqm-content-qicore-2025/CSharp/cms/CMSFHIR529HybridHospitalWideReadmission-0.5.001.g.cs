@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMSFHIR529HybridHospitalWideReadmission", "0.5.001")]
 public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary, ISingleton<CMSFHIR529HybridHospitalWideReadmission_0_5_001>
 {
@@ -182,10 +182,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return aj_;
                 }
 
-                return /* CQL 'and' (40:17-43:77) */ (/* CQL 'and' (40:17-42:76) */ (/* CQL 'and' (40:17-41:50) */ (n_
-                    && o_())
-                    && p_())
-                    && q_());
+                return n_
+                    /* CQL 'and' (40:17-41:50) */ && o_()
+                    /* CQL 'and' (40:17-42:76) */ && p_()
+                    /* CQL 'and' (40:17-43:77) */ && q_();
             }
 
             CqlBoolean k_ = context.Operators.WhereAny<Coverage>(i_, j_);
@@ -252,9 +252,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(aj_ is null));
                 }
 
-                return /* CQL 'and' (48:9-50:43) */ (/* CQL 'and' (48:15-49:71) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (48:15-49:71) */ && ab_()
+                    /* CQL 'and' (48:9-50:43) */ && ac_();
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -298,9 +298,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(ba_ is null));
                 }
 
-                return /* CQL 'and' (48:9-50:43) */ (/* CQL 'and' (48:15-49:71) */ (ar_
-                    && as_())
-                    && at_());
+                return ar_
+                    /* CQL 'and' (48:15-49:71) */ && as_()
+                    /* CQL 'and' (48:9-50:43) */ && at_();
             }
 
             IEnumerable<Observation> o_ = context.Operators.Where<Observation>(f_, n_);
@@ -368,9 +368,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(aj_ is null));
                 }
 
-                return /* CQL 'and' (62:9-64:41) */ (/* CQL 'and' (62:15-63:69) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (62:15-63:69) */ && ab_()
+                    /* CQL 'and' (62:9-64:41) */ && ac_();
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -414,9 +414,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(ba_ is null));
                 }
 
-                return /* CQL 'and' (62:9-64:41) */ (/* CQL 'and' (62:15-63:69) */ (ar_
-                    && as_())
-                    && at_());
+                return ar_
+                    /* CQL 'and' (62:15-63:69) */ && as_()
+                    /* CQL 'and' (62:9-64:41) */ && at_();
             }
 
             IEnumerable<Observation> o_ = context.Operators.Where<Observation>(f_, n_);
@@ -485,9 +485,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(ak_ is null));
                 }
 
-                return /* CQL 'and' (76:9-78:44) */ (/* CQL 'and' (76:15-77:72) */ (ab_
-                    && ac_())
-                    && ad_());
+                return ab_
+                    /* CQL 'and' (76:15-77:72) */ && ac_()
+                    /* CQL 'and' (76:9-78:44) */ && ad_();
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -531,9 +531,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(bb_ is null));
                 }
 
-                return /* CQL 'and' (76:9-78:44) */ (/* CQL 'and' (76:15-77:72) */ (as_
-                    && at_())
-                    && au_());
+                return as_
+                    /* CQL 'and' (76:15-77:72) */ && at_()
+                    /* CQL 'and' (76:9-78:44) */ && au_();
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -601,9 +601,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(aj_ is null));
                 }
 
-                return /* CQL 'and' (90:9-92:44) */ (/* CQL 'and' (90:15-91:72) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (90:15-91:72) */ && ab_()
+                    /* CQL 'and' (90:9-92:44) */ && ac_();
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -647,9 +647,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(ba_ is null));
                 }
 
-                return /* CQL 'and' (90:9-92:44) */ (/* CQL 'and' (90:15-91:72) */ (ar_
-                    && as_())
-                    && at_());
+                return ar_
+                    /* CQL 'and' (90:15-91:72) */ && as_()
+                    /* CQL 'and' (90:9-92:44) */ && at_();
             }
 
             IEnumerable<Observation> o_ = context.Operators.Where<Observation>(f_, n_);
@@ -731,9 +731,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(ao_ is null));
                 }
 
-                return /* CQL 'and' (104:9-106:44) */ (/* CQL 'and' (104:15-105:62) */ (ad_
-                    && ae_())
-                    && af_());
+                return ad_
+                    /* CQL 'and' (104:15-105:62) */ && ae_()
+                    /* CQL 'and' (104:9-106:44) */ && af_();
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -809,9 +809,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(bs_ is null));
                 }
 
-                return /* CQL 'and' (104:9-106:44) */ (/* CQL 'and' (104:15-105:62) */ (bh_
-                    && bi_())
-                    && bj_());
+                return bh_
+                    /* CQL 'and' (104:15-105:62) */ && bi_()
+                    /* CQL 'and' (104:9-106:44) */ && bj_();
             }
 
             IEnumerable<Observation> r_ = context.Operators.Where<Observation>(f_, q_);
@@ -905,9 +905,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(an_ is null));
                 }
 
-                return /* CQL 'and' (120:9-122:46) */ (/* CQL 'and' (120:15-121:74) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (120:15-121:74) */ && ab_()
+                    /* CQL 'and' (120:9-122:46) */ && ac_();
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -977,9 +977,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(bi_ is null));
                 }
 
-                return /* CQL 'and' (120:9-122:46) */ (/* CQL 'and' (120:15-121:74) */ (av_
-                    && aw_())
-                    && ax_());
+                return av_
+                    /* CQL 'and' (120:15-121:74) */ && aw_()
+                    /* CQL 'and' (120:9-122:46) */ && ax_();
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -1074,9 +1074,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(an_ is null));
                 }
 
-                return /* CQL 'and' (134:9-136:45) */ (/* CQL 'and' (134:15-135:73) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (134:15-135:73) */ && ab_()
+                    /* CQL 'and' (134:9-136:45) */ && ac_();
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -1146,9 +1146,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(bi_ is null));
                 }
 
-                return /* CQL 'and' (134:9-136:45) */ (/* CQL 'and' (134:15-135:73) */ (av_
-                    && aw_())
-                    && ax_());
+                return av_
+                    /* CQL 'and' (134:15-135:73) */ && aw_()
+                    /* CQL 'and' (134:9-136:45) */ && ax_();
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -1243,9 +1243,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(an_ is null));
                 }
 
-                return /* CQL 'and' (148:9-150:42) */ (/* CQL 'and' (148:15-149:70) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (148:15-149:70) */ && ab_()
+                    /* CQL 'and' (148:9-150:42) */ && ac_();
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -1315,9 +1315,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(bi_ is null));
                 }
 
-                return /* CQL 'and' (148:9-150:42) */ (/* CQL 'and' (148:15-149:70) */ (av_
-                    && aw_())
-                    && ax_());
+                return av_
+                    /* CQL 'and' (148:15-149:70) */ && aw_()
+                    /* CQL 'and' (148:9-150:42) */ && ax_();
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -1412,9 +1412,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(an_ is null));
                 }
 
-                return /* CQL 'and' (162:9-164:45) */ (/* CQL 'and' (162:15-163:73) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (162:15-163:73) */ && ab_()
+                    /* CQL 'and' (162:9-164:45) */ && ac_();
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -1484,9 +1484,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(bi_ is null));
                 }
 
-                return /* CQL 'and' (162:9-164:45) */ (/* CQL 'and' (162:15-163:73) */ (av_
-                    && aw_())
-                    && ax_());
+                return av_
+                    /* CQL 'and' (162:15-163:73) */ && aw_()
+                    /* CQL 'and' (162:9-164:45) */ && ax_();
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -1581,9 +1581,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(an_ is null));
                 }
 
-                return /* CQL 'and' (176:9-178:44) */ (/* CQL 'and' (176:15-177:72) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (176:15-177:72) */ && ab_()
+                    /* CQL 'and' (176:9-178:44) */ && ac_();
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -1653,9 +1653,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(bi_ is null));
                 }
 
-                return /* CQL 'and' (176:9-178:44) */ (/* CQL 'and' (176:15-177:72) */ (av_
-                    && aw_())
-                    && ax_());
+                return av_
+                    /* CQL 'and' (176:15-177:72) */ && aw_()
+                    /* CQL 'and' (176:9-178:44) */ && ax_();
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -1750,9 +1750,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(an_ is null));
                 }
 
-                return /* CQL 'and' (190:9-192:41) */ (/* CQL 'and' (190:15-191:69) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (190:15-191:69) */ && ab_()
+                    /* CQL 'and' (190:9-192:41) */ && ac_();
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -1822,9 +1822,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(bi_ is null));
                 }
 
-                return /* CQL 'and' (190:9-192:41) */ (/* CQL 'and' (190:15-191:69) */ (av_
-                    && aw_())
-                    && ax_());
+                return av_
+                    /* CQL 'and' (190:15-191:69) */ && aw_()
+                    /* CQL 'and' (190:9-192:41) */ && ax_();
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -1919,9 +1919,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(an_ is null));
                 }
 
-                return /* CQL 'and' (204:9-206:49) */ (/* CQL 'and' (204:15-205:77) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (204:15-205:77) */ && ab_()
+                    /* CQL 'and' (204:9-206:49) */ && ac_();
             }
 
             IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
@@ -1991,9 +1991,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(bi_ is null));
                 }
 
-                return /* CQL 'and' (204:9-206:49) */ (/* CQL 'and' (204:15-205:77) */ (av_
-                    && aw_())
-                    && ax_());
+                return av_
+                    /* CQL 'and' (204:15-205:77) */ && aw_()
+                    /* CQL 'and' (204:9-206:49) */ && ax_();
             }
 
             IEnumerable<Observation> p_ = context.Operators.Where<Observation>(g_, o_);
@@ -2062,9 +2062,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(aj_ is null));
                 }
 
-                return /* CQL 'and' (218:9-220:42) */ (/* CQL 'and' (218:15-219:70) */ (aa_
-                    && ab_())
-                    && ac_());
+                return aa_
+                    /* CQL 'and' (218:15-219:70) */ && ab_()
+                    /* CQL 'and' (218:9-220:42) */ && ac_();
             }
 
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
@@ -2108,9 +2108,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return !((bool?)(ba_ is null));
                 }
 
-                return /* CQL 'and' (218:9-220:42) */ (/* CQL 'and' (218:15-219:70) */ (ar_
-                    && as_())
-                    && at_());
+                return ar_
+                    /* CQL 'and' (218:15-219:70) */ && as_()
+                    /* CQL 'and' (218:9-220:42) */ && at_();
             }
 
             IEnumerable<Observation> o_ = context.Operators.Where<Observation>(f_, n_);
@@ -2181,8 +2181,8 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         return !((bool?)(al_ is null));
                     }
 
-                    return /* CQL 'and' (234:16-234:123) */ (ag_
-                        && ah_());
+                    return ag_
+                        /* CQL 'and' (234:16-234:123) */ && ah_();
                 }
 
 
@@ -2208,10 +2208,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return av_;
                 }
 
-                return /* CQL 'and' (233:9-237:49) */ (/* CQL 'and' (233:15-236:68) */ (/* CQL 'or' (233:15-235:9) */ (t_
-                    || u_())
-                    && v_())
-                    && w_());
+                return t_
+                    /* CQL 'or' (233:15-235:9) */ || u_()
+                    /* CQL 'and' (233:15-236:68) */ && v_()
+                    /* CQL 'and' (233:9-237:49) */ && w_();
             }
 
 
@@ -2335,8 +2335,8 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                             return !((bool?)(cv_ is null));
                         }
 
-                        return /* CQL 'and' (246:18-246:138) */ (ck_
-                            && cl_());
+                        return ck_
+                            /* CQL 'and' (246:18-246:138) */ && cl_();
                     }
 
 
@@ -2348,9 +2348,9 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         return cz_;
                     }
 
-                    return /* CQL 'and' (245:11-248:54) */ (/* CQL 'or' (245:17-247:11) */ (br_
-                        || bs_())
-                        && bt_());
+                    return br_
+                        /* CQL 'or' (245:17-247:11) */ || bs_()
+                        /* CQL 'and' (245:11-248:54) */ && bt_();
                 }
 
 
@@ -2410,8 +2410,8 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 return bk_;
             }
 
-            return /* CQL 'or' (231:5-255:7) */ (m_
-                || n_());
+            return m_
+                /* CQL 'or' (231:5-255:7) */ || n_();
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("FHIRHelpers", "4.0.1")]
 public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
 {
@@ -201,9 +201,9 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 return j_;
             }
 
-            if (((bool?)(/* CQL 'or' (35:14-36:92) */ (/* CQL 'or' (35:14-35:91) */ ((CqlBoolean)(b_ is null)
-                || c_())
-                || d_()))) ?? false)
+            if ((CqlBoolean)(b_ is null)
+                /* CQL 'or' (35:14-35:91) */ || c_()
+                /* CQL 'or' (35:14-36:92) */ || d_())
             {
                 FhirDecimal k_ = quantity?.ValueElement;
                 decimal? l_ = k_?.Value;
@@ -264,9 +264,9 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 return i_;
             }
 
-            if (((bool?)(/* CQL 'or' (46:14-47:92) */ (/* CQL 'or' (46:14-46:91) */ ((CqlBoolean)(a_ is null)
-                || b_())
-                || c_()))) ?? false)
+            if ((CqlBoolean)(a_ is null)
+                /* CQL 'or' (46:14-46:91) */ || b_()
+                /* CQL 'or' (46:14-47:92) */ || c_())
             {
                 FhirDecimal j_ = quantity?.ValueElement;
                 decimal? k_ = j_?.Value;

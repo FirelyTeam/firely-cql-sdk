@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR", "0.0.008")]
 public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008 : ILibrary, ISingleton<PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008>
 {
@@ -204,8 +204,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                 return ag_;
             }
 
-            return /* CQL 'and' (55:15-56:54) */ (ac_
-                && ad_());
+            return ac_
+                /* CQL 'and' (55:15-56:54) */ && ad_();
         }
 
         IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
@@ -251,9 +251,9 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             return v_;
         }
 
-        return /* CQL 'and' (74:3-77:52) */ (/* CQL 'and' (74:3-75:81) */ (i_
-            && j_())
-            && k_());
+        return i_
+            /* CQL 'and' (74:3-75:81) */ && j_()
+            /* CQL 'and' (74:3-77:52) */ && k_();
     }
 
 
@@ -314,8 +314,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             return s_;
         }
 
-        return /* CQL 'and' (59:3-60:81) */ (i_
-            && j_());
+        return i_
+            /* CQL 'and' (59:3-60:81) */ && j_();
     }
 
 
@@ -387,8 +387,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                 return l_;
             }
 
-            return /* CQL 'and' (70:17-71:62) */ (h_
-                && i_());
+            return h_
+                /* CQL 'and' (70:17-71:62) */ && i_();
         }
 
         CqlBoolean d_ = context.Operators.WhereAny<Procedure>(b_, c_);

@@ -578,15 +578,15 @@ partial class CodeBuilderContext
     /// </summary>
     private static CodeExpression AsCqlBoolean(CodeExpression operand)
     {
-        if (operand.Type == typeof(CqlBoolean))
+        if (CodeTypeRules.IsCqlBoolean(operand.Type))
             return operand;
 
         if (operand is CodeCast { Type: var castType, Operand: { } inner }
-            && castType == typeof(bool?)
+            && CodeTypeRules.IsNullableBool(castType)
             && inner.Type is var innerType
-            && (innerType == typeof(CqlBoolean) || innerType == typeof(bool)))
+            && (CodeTypeRules.IsCqlBoolean(innerType) || CodeTypeRules.IsPlainBool(innerType)))
         {
-            return innerType == typeof(CqlBoolean)
+            return CodeTypeRules.IsCqlBoolean(innerType)
                        ? inner
                        : new CodeCast(inner, typeof(CqlBoolean), CodeCastKind.Cast);
         }
@@ -601,7 +601,7 @@ partial class CodeBuilderContext
     /// and do not know about user-defined implicit conversions, so the conversion has to be a node.
     /// </summary>
     private static CodeExpression AsNullableBool(CodeExpression operand) =>
-        operand.Type == typeof(bool?)
+        CodeTypeRules.IsNullableBool(operand.Type)
             ? operand
             : new CodeCast(operand, typeof(bool?), CodeCastKind.Cast);
 

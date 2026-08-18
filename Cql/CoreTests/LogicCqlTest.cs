@@ -460,15 +460,15 @@ public class LogicCqlTest
         // cross a newline (hence [\s\S] rather than .).
         StringAssert.Matches(
             generated,
-            new System.Text.RegularExpressions.Regex(@"/\* CQL 'and' \([^)]*\) \*/[\s\S]{0,400}?&&"),
+            new System.Text.RegularExpressions.Regex(@"/\* CQL 'and' \([^)]*\) \*/ &&"),
             "Expected 'and' to lower to a CqlBoolean && expression carrying its origin tag.");
         StringAssert.Matches(
             generated,
-            new System.Text.RegularExpressions.Regex(@"/\* CQL 'or' \([^)]*\) \*/[\s\S]{0,400}?\|\|"),
+            new System.Text.RegularExpressions.Regex(@"/\* CQL 'or' \([^)]*\) \*/ \|\|"),
             "Expected 'or' to lower to a CqlBoolean || expression carrying its origin tag.");
         StringAssert.Matches(
             generated,
-            new System.Text.RegularExpressions.Regex(@"/\* CQL 'implies' \([^)]*\) \*/ \(!\w+[\s\S]{0,200}?\|\|"),
+            new System.Text.RegularExpressions.Regex(@"!\w+\s*\r?\n\s*/\* CQL 'implies' \([^)]*\) \*/ \|\|"),
             "Expected 'implies' to lower to !left || right over CqlBoolean.");
         // Boolean locals are DECLARED CqlBoolean, which is what removes the per-operand conversions
         // — so the type's presence is pinned on the declaration, not on a cast.
@@ -634,7 +634,7 @@ public class LogicCqlTest
         var body = ExtractComputeMethod(generated, "TrueAndTrue_Compute");
         StringAssert.Matches(
             body,
-            new System.Text.RegularExpressions.Regex(@"\bCqlBoolean \w+_ = [\s\S]*?\w+_\s*\r?\n\s*&&"),
+            new System.Text.RegularExpressions.Regex(@"\bCqlBoolean (\w+_) = [\s\S]*?\1\s*\r?\n\s*/\* CQL 'and' \([^)]*\) \*/ &&"),
             "Expected a CqlBoolean local used directly as the left operand, with no conversion between them.");
 
         // The truthiness and null questions stay inside the type.

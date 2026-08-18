@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("CMS90FHIRFSAforHeartFailure", "1.0.000")]
 public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<CMS90FHIRFSAforHeartFailure_1_0_000>
 {
@@ -396,9 +396,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             return w_;
         }
 
-        return /* CQL 'and' (67:3-73:118) */ (/* CQL 'and' (67:3-72:5) */ (i_
-            && j_())
-            && k_());
+        return i_
+            /* CQL 'and' (67:3-72:5) */ && j_()
+            /* CQL 'and' (67:3-73:118) */ && k_();
     }
 
 
@@ -444,8 +444,8 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             return j_;
         }
 
-        return /* CQL 'or' (79:3-84:5) */ (a_
-            || b_());
+        return a_
+            /* CQL 'or' (79:3-84:5) */ || b_();
     }
 
 
@@ -499,9 +499,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (128:5-130:87) */ (/* CQL 'and' (128:11-129:85) */ (z_
-                && aa_())
-                && ab_());
+            return z_
+                /* CQL 'and' (128:11-129:85) */ && aa_()
+                /* CQL 'and' (128:5-130:87) */ && ab_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?>(i_, j_, k_);
@@ -565,8 +565,8 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     return !((bool?)(af_ is null));
                 }
 
-                return /* CQL 'and' (117:13-117:97) */ (ab_
-                    && ac_());
+                return ab_
+                    /* CQL 'and' (117:13-117:97) */ && ac_();
             }
 
 
@@ -584,9 +584,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return ap_;
             }
 
-            return /* CQL 'and' (116:7-118:148) */ (/* CQL 'and' (116:13-117:97) */ (r_
-                && s_())
-                && t_());
+            return r_
+                /* CQL 'and' (116:13-117:97) */ && s_()
+                /* CQL 'and' (116:7-118:148) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?> f_ = context.Operators.SelectWhere<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?>(c_, d_, e_);
@@ -782,19 +782,19 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return !((bool?)(dw_ is null));
             }
 
-            return /* CQL 'and' (160:5-172:41) */ (/* CQL 'and' (160:11-171:43) */ (/* CQL 'and' (160:11-170:59) */ (/* CQL 'and' (160:11-169:46) */ (/* CQL 'and' (160:11-168:62) */ (/* CQL 'and' (160:11-167:43) */ (/* CQL 'and' (160:11-166:59) */ (/* CQL 'and' (160:11-165:40) */ (/* CQL 'and' (160:11-164:56) */ (/* CQL 'and' (160:11-163:44) */ (/* CQL 'and' (160:11-162:60) */ (/* CQL 'and' (160:11-161:47) */ (at_
-                && au_())
-                && av_())
-                && aw_())
-                && ax_())
-                && ay_())
-                && az_())
-                && ba_())
-                && bb_())
-                && bc_())
-                && bd_())
-                && be_())
-                && bf_());
+            return at_
+                /* CQL 'and' (160:11-161:47) */ && au_()
+                /* CQL 'and' (160:11-162:60) */ && av_()
+                /* CQL 'and' (160:11-163:44) */ && aw_()
+                /* CQL 'and' (160:11-164:56) */ && ax_()
+                /* CQL 'and' (160:11-165:40) */ && ay_()
+                /* CQL 'and' (160:11-166:59) */ && az_()
+                /* CQL 'and' (160:11-167:43) */ && ba_()
+                /* CQL 'and' (160:11-168:62) */ && bb_()
+                /* CQL 'and' (160:11-169:46) */ && bc_()
+                /* CQL 'and' (160:11-170:59) */ && bd_()
+                /* CQL 'and' (160:11-171:43) */ && be_()
+                /* CQL 'and' (160:5-172:41) */ && bf_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?> af_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation>, (CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?>(ac_, ad_, ae_);
@@ -858,8 +858,8 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     return !((bool?)(af_ is null));
                 }
 
-                return /* CQL 'and' (139:13-139:97) */ (ab_
-                    && ac_());
+                return ab_
+                    /* CQL 'and' (139:13-139:97) */ && ac_();
             }
 
 
@@ -877,9 +877,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return ap_;
             }
 
-            return /* CQL 'and' (138:7-140:148) */ (/* CQL 'and' (138:13-139:97) */ (r_
-                && s_())
-                && t_());
+            return r_
+                /* CQL 'and' (138:13-139:97) */ && s_()
+                /* CQL 'and' (138:7-140:148) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?> f_ = context.Operators.SelectWhere<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?>(c_, d_, e_);
@@ -940,9 +940,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (192:5-194:88) */ (/* CQL 'and' (192:11-193:86) */ (z_
-                && aa_())
-                && ab_());
+            return z_
+                /* CQL 'and' (192:11-193:86) */ && aa_()
+                /* CQL 'and' (192:5-194:88) */ && ab_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_, k_);
@@ -1006,8 +1006,8 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     return !((bool?)(af_ is null));
                 }
 
-                return /* CQL 'and' (181:13-181:100) */ (ab_
-                    && ac_());
+                return ab_
+                    /* CQL 'and' (181:13-181:100) */ && ac_();
             }
 
 
@@ -1025,9 +1025,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return ap_;
             }
 
-            return /* CQL 'and' (180:7-182:157) */ (/* CQL 'and' (180:13-181:100) */ (r_
-                && s_())
-                && t_());
+            return r_
+                /* CQL 'and' (180:13-181:100) */ && s_()
+                /* CQL 'and' (180:7-182:157) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?> f_ = context.Operators.SelectWhere<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?>(c_, d_, e_);
@@ -1088,9 +1088,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (214:5-216:88) */ (/* CQL 'and' (214:11-215:86) */ (z_
-                && aa_())
-                && ab_());
+            return z_
+                /* CQL 'and' (214:11-215:86) */ && aa_()
+                /* CQL 'and' (214:5-216:88) */ && ab_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_, k_);
@@ -1154,8 +1154,8 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     return !((bool?)(af_ is null));
                 }
 
-                return /* CQL 'and' (203:13-203:103) */ (ab_
-                    && ac_());
+                return ab_
+                    /* CQL 'and' (203:13-203:103) */ && ac_();
             }
 
 
@@ -1173,9 +1173,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return ap_;
             }
 
-            return /* CQL 'and' (202:7-204:166) */ (/* CQL 'and' (202:13-203:103) */ (r_
-                && s_())
-                && t_());
+            return r_
+                /* CQL 'and' (202:13-203:103) */ && s_()
+                /* CQL 'and' (202:7-204:166) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?> f_ = context.Operators.SelectWhere<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?>(c_, d_, e_);
@@ -1236,9 +1236,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (236:5-238:88) */ (/* CQL 'and' (236:11-237:86) */ (z_
-                && aa_())
-                && ab_());
+            return z_
+                /* CQL 'and' (236:11-237:86) */ && aa_()
+                /* CQL 'and' (236:5-238:88) */ && ab_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(i_, j_, k_);
@@ -1302,8 +1302,8 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     return !((bool?)(af_ is null));
                 }
 
-                return /* CQL 'and' (225:13-225:100) */ (ab_
-                    && ac_());
+                return ab_
+                    /* CQL 'and' (225:13-225:100) */ && ac_();
             }
 
 
@@ -1321,9 +1321,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return ap_;
             }
 
-            return /* CQL 'and' (224:7-226:157) */ (/* CQL 'and' (224:13-225:100) */ (r_
-                && s_())
-                && t_());
+            return r_
+                /* CQL 'and' (224:13-225:100) */ && s_()
+                /* CQL 'and' (224:7-226:157) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?> f_ = context.Operators.SelectWhere<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?>(c_, d_, e_);
@@ -1384,9 +1384,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (258:5-260:88) */ (/* CQL 'and' (258:11-259:86) */ (z_
-                && aa_())
-                && ab_());
+            return z_
+                /* CQL 'and' (258:11-259:86) */ && aa_()
+                /* CQL 'and' (258:5-260:88) */ && ab_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(i_, j_, k_);
@@ -1450,8 +1450,8 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     return !((bool?)(af_ is null));
                 }
 
-                return /* CQL 'and' (247:13-247:103) */ (ab_
-                    && ac_());
+                return ab_
+                    /* CQL 'and' (247:13-247:103) */ && ac_();
             }
 
 
@@ -1469,9 +1469,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return ap_;
             }
 
-            return /* CQL 'and' (246:7-248:166) */ (/* CQL 'and' (246:13-247:103) */ (r_
-                && s_())
-                && t_());
+            return r_
+                /* CQL 'and' (246:13-247:103) */ && s_()
+                /* CQL 'and' (246:7-248:166) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?> f_ = context.Operators.SelectWhere<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?>(c_, d_, e_);
@@ -1532,9 +1532,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (280:5-282:80) */ (/* CQL 'and' (280:11-281:79) */ (z_
-                && aa_())
-                && ab_());
+            return z_
+                /* CQL 'and' (280:11-281:79) */ && aa_()
+                /* CQL 'and' (280:5-282:80) */ && ab_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)?>(i_, j_, k_);
@@ -1598,8 +1598,8 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     return !((bool?)(af_ is null));
                 }
 
-                return /* CQL 'and' (269:13-269:94) */ (ab_
-                    && ac_());
+                return ab_
+                    /* CQL 'and' (269:13-269:94) */ && ac_();
             }
 
 
@@ -1617,9 +1617,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return ap_;
             }
 
-            return /* CQL 'and' (268:7-270:139) */ (/* CQL 'and' (268:13-269:94) */ (r_
-                && s_())
-                && t_());
+            return r_
+                /* CQL 'and' (268:13-269:94) */ && s_()
+                /* CQL 'and' (268:7-270:139) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?> f_ = context.Operators.SelectWhere<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?>(c_, d_, e_);
@@ -1680,9 +1680,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return !((bool?)(af_ is null));
             }
 
-            return /* CQL 'and' (302:5-304:79) */ (/* CQL 'and' (302:11-303:76) */ (z_
-                && aa_())
-                && ab_());
+            return z_
+                /* CQL 'and' (302:11-303:76) */ && aa_()
+                /* CQL 'and' (302:5-304:79) */ && ab_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)?> l_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)?>(i_, j_, k_);
@@ -1746,8 +1746,8 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     return !((bool?)(af_ is null));
                 }
 
-                return /* CQL 'and' (291:13-291:95) */ (ab_
-                    && ac_());
+                return ab_
+                    /* CQL 'and' (291:13-291:95) */ && ac_();
             }
 
 
@@ -1765,9 +1765,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return ap_;
             }
 
-            return /* CQL 'and' (290:7-292:142) */ (/* CQL 'and' (290:13-291:95) */ (r_
-                && s_())
-                && t_());
+            return r_
+                /* CQL 'and' (290:13-291:95) */ && s_()
+                /* CQL 'and' (290:7-292:142) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?> f_ = context.Operators.SelectWhere<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?>(c_, d_, e_);
@@ -1936,17 +1936,17 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return !((bool?)(dd_ is null));
             }
 
-            return /* CQL 'and' (332:5-342:81) */ (/* CQL 'and' (332:11-341:82) */ (/* CQL 'and' (332:11-340:62) */ (/* CQL 'and' (332:11-339:84) */ (/* CQL 'and' (332:11-338:64) */ (/* CQL 'and' (332:11-337:78) */ (/* CQL 'and' (332:11-336:58) */ (/* CQL 'and' (332:11-335:82) */ (/* CQL 'and' (332:11-334:62) */ (/* CQL 'and' (332:11-333:86) */ (ap_
-                && aq_())
-                && ar_())
-                && as_())
-                && at_())
-                && au_())
-                && av_())
-                && aw_())
-                && ax_())
-                && ay_())
-                && az_());
+            return ap_
+                /* CQL 'and' (332:11-333:86) */ && aq_()
+                /* CQL 'and' (332:11-334:62) */ && ar_()
+                /* CQL 'and' (332:11-335:82) */ && as_()
+                /* CQL 'and' (332:11-336:58) */ && at_()
+                /* CQL 'and' (332:11-337:78) */ && au_()
+                /* CQL 'and' (332:11-338:64) */ && av_()
+                /* CQL 'and' (332:11-339:84) */ && aw_()
+                /* CQL 'and' (332:11-340:62) */ && ax_()
+                /* CQL 'and' (332:11-341:82) */ && ay_()
+                /* CQL 'and' (332:5-342:81) */ && az_();
         }
 
         IEnumerable<(CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?> ab_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation>, (CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?>(y_, z_, aa_);
@@ -2010,8 +2010,8 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     return !((bool?)(af_ is null));
                 }
 
-                return /* CQL 'and' (313:13-313:103) */ (ab_
-                    && ac_());
+                return ab_
+                    /* CQL 'and' (313:13-313:103) */ && ac_();
             }
 
 
@@ -2029,9 +2029,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return ap_;
             }
 
-            return /* CQL 'and' (312:7-314:166) */ (/* CQL 'and' (312:13-313:103) */ (r_
-                && s_())
-                && t_());
+            return r_
+                /* CQL 'and' (312:13-313:103) */ && s_()
+                /* CQL 'and' (312:7-314:166) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?> f_ = context.Operators.SelectWhere<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?>(c_, d_, e_);
@@ -2122,8 +2122,8 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     return !((bool?)(af_ is null));
                 }
 
-                return /* CQL 'and' (356:13-356:99) */ (ab_
-                    && ac_());
+                return ab_
+                    /* CQL 'and' (356:13-356:99) */ && ac_();
             }
 
 
@@ -2141,9 +2141,9 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return ap_;
             }
 
-            return /* CQL 'and' (355:7-357:154) */ (/* CQL 'and' (355:13-356:99) */ (r_
-                && s_())
-                && t_());
+            return r_
+                /* CQL 'and' (355:13-356:99) */ && s_()
+                /* CQL 'and' (355:7-357:154) */ && t_();
         }
 
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?> f_ = context.Operators.SelectWhere<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?>(c_, d_, e_);
@@ -2163,16 +2163,16 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
     private bool? Numerator_Compute(CqlContext context)
     {
         CqlBoolean a_ = this.Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments(context);
-        return /* CQL 'or' (87:3-96:82) */ (/* CQL 'or' (87:3-95:83) */ (/* CQL 'or' (87:3-94:72) */ (/* CQL 'or' (87:3-93:71) */ (/* CQL 'or' (87:3-92:81) */ (/* CQL 'or' (87:3-91:78) */ (/* CQL 'or' (87:3-90:81) */ (/* CQL 'or' (87:3-89:78) */ (/* CQL 'or' (87:3-88:74) */ (a_
-            || this.Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments(context))
-            || this.Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(context))
-            || this.Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(context))
-            || this.Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments(context))
-            || this.Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments(context))
-            || this.Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments(context))
-            || this.Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments(context))
-            || this.Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments(context))
-            || this.Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments(context));
+        return a_
+            /* CQL 'or' (87:3-88:74) */ || this.Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments(context)
+            /* CQL 'or' (87:3-89:78) */ || this.Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(context)
+            /* CQL 'or' (87:3-90:81) */ || this.Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(context)
+            /* CQL 'or' (87:3-91:78) */ || this.Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments(context)
+            /* CQL 'or' (87:3-92:81) */ || this.Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments(context)
+            /* CQL 'or' (87:3-93:71) */ || this.Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments(context)
+            /* CQL 'or' (87:3-94:72) */ || this.Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments(context)
+            /* CQL 'or' (87:3-95:83) */ || this.Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments(context)
+            /* CQL 'or' (87:3-96:82) */ || this.Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments(context);
     }
 
 

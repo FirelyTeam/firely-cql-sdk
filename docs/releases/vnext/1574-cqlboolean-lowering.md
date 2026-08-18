@@ -31,7 +31,25 @@
   converted **first** (5 sites), because boxing carries the operand's own type and never applies a
   user-defined conversion — without it the callee receives a boxed `CqlBoolean` where it expects a
   boxed `bool?`, which compiles and then throws inside the comparers. (#1514)
-- `GeneratorToolVersion` is now **5.3.4.0**. Previously generated libraries keep working unchanged:
+- A chain of the same logical operator now prints **flat**, with each operator carrying its own CQL
+  span immediately to its left:
+
+  ```csharp
+  if ((CqlBoolean)(b_ is null)
+      /* CQL 'or' (35:14-35:91) */ || c_()
+      /* CQL 'or' (35:14-36:92) */ || d_())
+  ```
+
+  Previously each level of the nest parenthesized itself and put its tag in front of the whole
+  expression, so a three-operand chain read as `/* tag */ (/* tag */ ((x || y) || z))`. `&&` and
+  `||` are left-associative, so a same-operator chain needs no inner parentheses; an operand of a
+  *different* operator is still wrapped, since `(a || b) && c` would otherwise regroup silently.
+
+  The truthiness test also folds away where the operand is a whole chain rather than a local:
+  `if (chain)` uses `CqlBoolean`'s `operator true`, which is exactly what `?? false` meant, so
+  neither the conversion nor the coalesce is emitted. 51 `?? false` remain, on operands that are not
+  CQL Booleans. (#1514)
+- `GeneratorToolVersion` is now **5.3.5.0**. Previously generated libraries keep working unchanged:
   the invoker toolkit accepts any version in `[5.1.0.0, 5.4.0.0)`. Patch rather than minor because
   the generated API — every emitted signature — is unchanged; only method-body locals move. (#1514)
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.5.0")]
 [CqlLibrary("Antibiotic", "1.11.000")]
 public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_000>
 {
@@ -105,8 +105,8 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
                     return !((bool?)(s_ is null));
                 }
 
-                return /* CQL 'and' (22:19-22:119) */ (o_
-                    && p_());
+                return o_
+                    /* CQL 'and' (22:19-22:119) */ && p_();
             }
 
             CqlBoolean f_ = context.Operators.WhereAny<Condition>(competingConditions, e_);
