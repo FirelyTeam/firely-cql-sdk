@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using System.Runtime.CompilerServices;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
@@ -20,10 +21,120 @@ namespace Hl7.Cql.Fhir;
 /// <summary>
 /// Implementation of <see cref="IValueSetDictionary"/> that uses a <see cref="IResourceResolver"/> as a terminology source.
 /// </summary>
-/// <remarks>Aggresively caches the loaded valuesets to improve performance.</remarks>
+/// <remarks>
+/// <para>
+/// Aggressively caches the loaded valuesets to improve performance, in two layers.
+/// </para>
+/// <para>
+/// The first layer is per-source: a dictionary from canonical to facade, which is what every query
+/// method looks in. It alone determines what this source answers.
+/// </para>
+/// <para>
+/// The second layer is process-wide: a memo of facades keyed on the
+/// <see cref="ValueSet.ExpansionComponent"/> a valueset carries. Building a facade is a pure function
+/// of that expansion - nothing else about the valueset feeds into it - so two sources handed the same
+/// component can share the result instead of each materializing and hashing every code in it again.
+/// The memo only ever hits when the resolver returns the same expansion object again: a host with an
+/// instance-stable resolver (a conformance cache, for instance) hits it on every request, while a host
+/// without one loses nothing, since a fresh instance carries a fresh expansion and simply builds the
+/// way it always did. Entries are held under weak keys, so they live exactly as long as the host keeps
+/// the expansion alive - the memo needs no bounds and no invalidation of its own.
+/// </para>
+/// <para>
+/// Being a process-wide static under weak keys, rather than a cache the host configures and injects, is
+/// what buys that inherited invalidation. An entry lives exactly as long as the resolver keeps the
+/// expansion it was keyed on alive, so when a host's conformance cache evicts or replaces a valueset,
+/// the expansion arriving in its place misses the memo and the entry built from the old one dies with
+/// the object it hung on: there is nothing to wire up, nothing to clear, and no state in which a stale
+/// facade is served for a canonical. A host that wants lifetime and scoping under its own control does
+/// not need the memo to offer them - it can seed each source through
+/// <see cref="Add(string, IEnumerable{CqlCode})"/> with a facade it holds onto, which reuses the hashed
+/// contents rather than rebuilding them (see <see cref="InMemoryValueSet"/>) - at the price of owning
+/// the invalidation that such a lifetime brings with it.
+/// </para>
+/// <para>
+/// Keying on the expansion rather than on the valueset instance is what makes the contract tractable,
+/// and that contract is:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// A memoized facade is a snapshot of the expansion as it looked when the facade was built from it.
+/// </item>
+/// <item>
+/// <em>Replacing</em> <see cref="ValueSet.Expansion"/> on a retained instance is honored: the
+/// replacement is a different key, so the next <see cref="Add(ValueSet)"/> builds a facade from it.
+/// Handing out a copy of the whole valueset (the FHIR SDK's <c>DeepCopy</c>) works for the same reason.
+/// </item>
+/// <item>
+/// Editing an expansion <em>in place</em> after a facade was successfully built from it - appending to
+/// <c>Contains</c>, moving <c>Total</c> - is not observed, because the key did not change and the
+/// facade built from it is retained. That is not an assumption this class invents: a resolver that
+/// hands the same expansion to many consumers already forbids editing it, since every consumer, cache
+/// or no cache, would be looking at whatever the last writer left behind.
+/// </item>
+/// <item>
+/// Editing an expansion after a build <em>failed</em> on it - a partial expansion completed after the
+/// fact - is honored, because a failed build retains nothing: the entry is evicted and the next
+/// attempt reads the expansion afresh (see <see cref="GetOrBuildMemoized"/>).
+/// </item>
+/// </list>
+/// <para>
+/// A valueset that arrives without an expansion is expanded here instead, and that expansion depends
+/// on the CodeSystems and valuesets this source's resolver can reach - things the valueset alone does
+/// not determine - so its facade stays in the per-source layer only. The expander writes what it
+/// computed into the caller's instance, which is the one edit to a resolved valueset the SDK performs
+/// on its own; a later <see cref="Add(ValueSet)"/> of that same instance therefore does see an
+/// expansion and does take the memo path, keyed on the component just written. That adds no staleness
+/// beyond the in-place mutation itself, which already leaves every source handed that instance looking
+/// at the same frozen expansion.
+/// </para>
+/// </remarks>
 public class ValueSetSource : IValueSetDictionary
 {
     private static readonly IEqualityComparer<CqlCode> OrdinalIgnoreCaseEqualityComparer = CqlCodeCqlComparer.OrdinalIgnoreCase.ToEqualityComparer();
+
+    /// <summary>
+    /// The process-wide, second cache layer described in the remarks on this class: the facade built
+    /// from the <see cref="ValueSet.ExpansionComponent"/> a resolved valueset carries, memoized against
+    /// that component under a weak key.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// The value is a <see cref="Lazy{T}"/> rather than the facade itself because
+    /// <see cref="ConditionalWeakTable{TKey,TValue}.GetValue"/> does not serialize its factory: under
+    /// contention it may run the factory on several threads and keep one result (see the note on
+    /// <c>LibrarySetInvokerPoolKey.GetOrComputeContentHash</c>). Racing the factory is fine when it is
+    /// cheap and pure, but this factory is the expensive materialization the memo exists to avoid, so
+    /// the table races only on creating the wrapper and every caller then joins the single build
+    /// inside the one retained <see cref="Lazy{T}"/>.
+    /// </para>
+    /// <para>
+    /// What that wrapper holds is a <see cref="Task{TResult}"/>, started with <c>Task.Run</c>, so the
+    /// racers that lose await the build instead of blocking a thread on it.
+    /// <see cref="Add(ValueSet)"/> is reached from <c>Parallel.ForEachAsync</c> and from a server's
+    /// request path, where a cold valueset would otherwise park every racer but one on a pool thread and
+    /// have the pool inject more to replace them. The price is one <c>Task.Run</c> per cold build, paid
+    /// once per expansion; the lazy's own lock is held only long enough to start that task.
+    /// </para>
+    /// <para>
+    /// The factory closes over the valueset the expansion was reached through - it needs its
+    /// <see cref="ValueSet.Url"/> for error messages - and hence over the key itself, since the
+    /// valueset holds the expansion. Inside a <see cref="ConditionalWeakTable{TKey,TValue}"/> that is
+    /// harmless: the table links a value to its key through a <c>DependentHandle</c>, so an entry whose
+    /// key is unreachable from outside the table is collected no matter what its value points at. The
+    /// closure does not outlive the build either: a <see cref="Lazy{T}"/> drops its factory once it has
+    /// produced its value, and a task drops its delegate once it settles - both so that holding the
+    /// cached object alive does not also hold its closure alive - which leaves an entry that is the
+    /// facade and no path back to the source that happened to build it.
+    /// </para>
+    /// </remarks>
+    private static readonly ConditionalWeakTable<ValueSet.ExpansionComponent, Lazy<Task<InMemoryValueSet>>> FacadesByExpansion = new();
+
+    /// <summary>
+    /// Counts calls to <see cref="BuildFromExpansion"/>, so tests can pin that racing sources run the
+    /// build exactly once rather than merely agreeing on one result.
+    /// </summary>
+    internal static int BuildFromExpansionCount;
 
     private readonly ConcurrentDictionary<CqlCode, CqlCode> _internHash;
 
@@ -89,22 +200,93 @@ public class ValueSetSource : IValueSetDictionary
 
         async Task<InMemoryValueSet> build(ValueSet vs)
         {
-            if (!vs.HasExpansion)
-            {
-                var expander = BuildExpander();
-                await expander.ExpandAsync(vs).ConfigureAwait(false);
-            }
+            // An expansion that arrives with the valueset determines the facade completely, so the
+            // build is a pure function of that expansion and can be memoized against it.
+            if (vs.HasExpansion)
+                return await GetOrBuildMemoized(vs).ConfigureAwait(false);
 
-            // A cached value set answers membership questions definitively, so a partial
-            // expansion must not be cached: it would turn "this page does not contain the
-            // code" into "this value set does not contain the code". An expansion we build
-            // ourselves is always complete (the expander throws otherwise); one that arrived
-            // with the resource may be a page of a larger result.
-            EnsureCompleteExpansion(vs);
+            // Without an expansion we have to compute one, and what that yields depends on the
+            // CodeSystems and valuesets this source's resolver can reach. The memo key cannot see any
+            // of that, so this facade stays private to this source.
+            var expander = BuildExpander();
+            await expander.ExpandAsync(vs).ConfigureAwait(false);
 
-            var codes = ToCodes(vs.Expansion!.Contains);
-            return new InMemoryValueSet(codes);
+            return BuildFromExpansion(vs);
         }
+    }
+
+    /// <summary>
+    /// Returns the memoized facade for the expansion carried by <paramref name="vs"/>, building it
+    /// exactly once per <see cref="ValueSet.ExpansionComponent"/> across all sources.
+    /// </summary>
+    /// <remarks>
+    /// Only reached where <see cref="ValueSet.HasExpansion"/> holds, which is exactly where
+    /// <see cref="ValueSet.Expansion"/> - the key - is non-null. Sources racing on the same expansion
+    /// meet inside one retained <see cref="Lazy{T}"/> (see the remarks on
+    /// <see cref="FacadesByExpansion"/>), so exactly one of them runs the build and the others await its
+    /// task. A build that fails - a partial expansion - must not stick, though: the
+    /// <see cref="Lazy{T}"/> retains the faulted task just as surely as it would have retained a thrown
+    /// exception, so the entry is dropped from the table on failure and the next attempt starts fresh.
+    /// Concurrent awaiters of the failed build still observe its fault, which is correct - they were
+    /// asking about the same expansion in the same state.
+    /// </remarks>
+    private async Task<InMemoryValueSet> GetOrBuildMemoized(ValueSet vs)
+    {
+        var expansion = vs.Expansion!;
+
+        // The factory keeps vs, not just the expansion, so a partial expansion can name the valueset it
+        // came from in its error message. Task.Run is spelled out in full because Hl7.Fhir.Model, which
+        // this file has in scope, carries a Task resource of its own.
+        var lazyFacade = FacadesByExpansion.GetValue(
+            expansion,
+            _ => new Lazy<Task<InMemoryValueSet>>(() => System.Threading.Tasks.Task.Run(() => BuildFromExpansion(vs))));
+
+        try
+        {
+            return await lazyFacade.Value.ConfigureAwait(false);
+        }
+        catch
+        {
+            // Another thread may already have replaced the failed entry with a fresh one; evicting
+            // that would throw away a good build. Only drop the wrapper that actually failed.
+            if (FacadesByExpansion.TryGetValue(expansion, out var current) && ReferenceEquals(current, lazyFacade))
+                FacadesByExpansion.Remove(expansion);
+            throw;
+        }
+    }
+
+    /// <summary>
+    /// Builds the immutable facade for a <see cref="ValueSet"/> that holds an expansion.
+    /// </summary>
+    /// <remarks>
+    /// The codes are interned into this source's table (see <see cref="Intern"/>), so a memoized facade
+    /// can hand out <see cref="CqlCode"/> instances owned by whichever source happened to build it
+    /// first. Membership <em>through <see cref="IValueSetFacade"/></em> is decided by a comparer and
+    /// never by reference, so a shared facade answers those queries exactly as a private one would.
+    /// Interning is not equally inert on the <see cref="IEnumerable{T}"/> surface:
+    /// <see cref="CqlCode"/> is a record, so LINQ over the facade compares ordinal and case-sensitively,
+    /// while the intern table uses <see cref="CqlCodeCqlComparer.OrdinalIgnoreCase"/> - interning has
+    /// been collapsing case-variant codes into one object, and a memoized facade no longer interns into
+    /// the source that reads it. What it does mean is that two facades held by one source need not
+    /// intern into the same table, so the same code reached through two of its valuesets is not
+    /// guaranteed to be one object; compare codes with a comparer, never by reference.
+    /// The codes are materialized here rather than left as a deferred query, so the facade that comes
+    /// out holds a reference neither to this source nor to <paramref name="vs"/> - it is the snapshot of
+    /// the expansion that the memo hands to every later caller, not a window onto it.
+    /// </remarks>
+    private InMemoryValueSet BuildFromExpansion(ValueSet vs)
+    {
+        Interlocked.Increment(ref BuildFromExpansionCount);
+
+        // A cached value set answers membership questions definitively, so a partial
+        // expansion must not be cached: it would turn "this page does not contain the
+        // code" into "this value set does not contain the code". An expansion we build
+        // ourselves is always complete (the expander throws otherwise); one that arrived
+        // with the resource may be a page of a larger result.
+        EnsureCompleteExpansion(vs);
+
+        var codes = ToCodes(vs.Expansion!.Contains).ToList();
+        return new InMemoryValueSet(codes);
     }
 
     /// <summary>
@@ -142,17 +324,19 @@ public class ValueSetSource : IValueSetDictionary
         var expansion = vs.Expansion;
         if (expansion is null) return;
 
-        var present = CountConcepts(expansion.Contains);
-
         if (expansion.Offset is > 0)
             throw new InvalidOperationException(
                 $"ValueSet '{vs.Url}' carries a partial expansion (offset {expansion.Offset}); " +
                 "only a completely expanded value set can be cached.");
 
-        if (expansion.Total is { } total && total > present)
-            throw new InvalidOperationException(
-                $"ValueSet '{vs.Url}' carries a partial expansion ({present} of {total} concepts); " +
-                "only a completely expanded value set can be cached.");
+        if (expansion.Total is { } total)
+        {
+            var present = CountConcepts(expansion.Contains);
+            if (total > present)
+                throw new InvalidOperationException(
+                    $"ValueSet '{vs.Url}' carries a partial expansion ({present} of {total} concepts); " +
+                    "only a completely expanded value set can be cached.");
+        }
     }
 
     private static int CountConcepts(IEnumerable<ValueSet.ContainsComponent>? contains) =>
