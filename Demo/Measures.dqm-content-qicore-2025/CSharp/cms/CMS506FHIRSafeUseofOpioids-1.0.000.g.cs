@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS506FHIRSafeUseofOpioids", "1.0.000")]
 public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<CMS506FHIRSafeUseofOpioids_1_0_000>
 {
@@ -465,7 +465,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 bool? l_(Condition @this) {
                     CodeableConcept q_ = @this?.Code;
                     CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                    return !((bool?)(r_ is null));
+                    return r_ is not null;
                 }
 
 
@@ -539,7 +539,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 /* CQL 'or' (165:52-169:3) */ || k_();
         }
 
-        return (CqlBoolean)((bool?)(b_ is null))
+        return (CqlBoolean)(b_ is null)
             /* CQL 'implies' (165:3-169:3) */ || c_();
     }
 

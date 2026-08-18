@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS137FHIRSUDTxInitEngagement", "1.0.000")]
 public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleton<CMS137FHIRSUDTxInitEngagement_1_0_000>
 {
@@ -330,7 +330,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> bl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bk_);
                     CqlDateTime bm_ = context.Operators.Start(bl_);
                     CqlDate bn_ = context.Operators.DateFrom(bm_);
-                    return !((bool?)(bn_ is null));
+                    return bn_ is not null;
                 }
 
                 return bc_
@@ -352,7 +352,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             bool? bp_(Condition @this) {
                 CodeableConcept bu_ = @this?.Code;
                 CqlConcept bv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bu_);
-                return !((bool?)(bv_ is null));
+                return bv_ is not null;
             }
 
 
@@ -396,7 +396,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> cr_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cq_);
                     CqlDateTime cs_ = context.Operators.Start(cr_);
                     CqlDate ct_ = context.Operators.DateFrom(cs_);
-                    return !((bool?)(ct_ is null));
+                    return ct_ is not null;
                 }
 
                 return co_
@@ -500,7 +500,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> em_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, el_);
                     CqlDateTime en_ = context.Operators.Start(em_);
                     CqlDate eo_ = context.Operators.DateFrom(en_);
-                    return !((bool?)(eo_ is null));
+                    return eo_ is not null;
                 }
 
                 return ej_
@@ -542,7 +542,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         }
 
         return i_
-            /* CQL 'and' (34:3-35:65) */ && !((bool?)((this.First_SUD_Episode_During_Measurement_Period(context)) is null))
+            /* CQL 'and' (34:3-35:65) */ && ((this.First_SUD_Episode_During_Measurement_Period(context)) is not null)
             /* CQL 'and' (34:3-36:58) */ && j_();
     }
 
@@ -600,7 +600,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             bool? q_(Condition @this) {
                 CodeableConcept v_ = @this?.Code;
                 CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
-                return !((bool?)(w_ is null));
+                return w_ is not null;
             }
 
 
@@ -1132,11 +1132,11 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDate> ax_ = context.Operators.Interval(InitiationTreatmentDate, aw_, false, true);
                     CqlBoolean ay_ = context.Operators.In<CqlDate>(au_, ax_, (string)default);
                     return ay_
-                        /* CQL 'and' (151:16-151:107) */ && !((bool?)(InitiationTreatmentDate is null));
+                        /* CQL 'and' (151:16-151:107) */ && (InitiationTreatmentDate is not null);
                 }
 
                 return (aj_
-                    /* CQL 'and' (150:21-150:128) */ && !((bool?)(InitiationTreatmentDate is null)))
+                    /* CQL 'and' (150:21-150:128) */ && (InitiationTreatmentDate is not null))
                     /* CQL 'or' (150:21-151:107) */ || ak_();
             }
 
@@ -1200,7 +1200,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                 CqlInterval<CqlDate> ca_ = context.Operators.Interval(InitiationTreatmentDate, bz_, false, true);
                 CqlBoolean cb_ = context.Operators.In<CqlDate>(bx_, ca_, (string)default);
                 return cb_
-                    /* CQL 'and' (158:23-158:130) */ && !((bool?)(InitiationTreatmentDate is null));
+                    /* CQL 'and' (158:23-158:130) */ && (InitiationTreatmentDate is not null);
             }
 
             CqlBoolean bs_ = context.Operators.WhereAny<CqlDate>((IEnumerable<CqlDate>)bq_, br_);
@@ -1278,7 +1278,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                 CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitiationTreatmentDate, aq_, false, true);
                 CqlBoolean as_ = context.Operators.In<CqlDate>(ao_, ar_, (string)default);
                 return as_
-                    /* CQL 'and' (172:21-172:129) */ && !((bool?)(InitiationTreatmentDate is null));
+                    /* CQL 'and' (172:21-172:129) */ && (InitiationTreatmentDate is not null);
             }
 
             CqlBoolean aj_ = context.Operators.WhereAny<CqlDate>((IEnumerable<CqlDate>)ah_, ai_);
@@ -1344,7 +1344,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                 CqlInterval<CqlDate> bg_ = context.Operators.Interval(InitiationTreatmentDate, bf_, false, true);
                 CqlBoolean bh_ = context.Operators.In<CqlDate>(bd_, bg_, (string)default);
                 return bh_
-                    /* CQL 'and' (178:23-178:131) */ && !((bool?)(InitiationTreatmentDate is null));
+                    /* CQL 'and' (178:23-178:131) */ && (InitiationTreatmentDate is not null);
             }
 
             CqlBoolean az_ = context.Operators.WhereAny<CqlDate>((IEnumerable<CqlDate>)ax_, ay_);

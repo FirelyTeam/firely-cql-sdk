@@ -26,5 +26,5 @@ internal partial class LibrarySetCSharpCodeGenerator
     /// Also, it is important to ensure the library invoker toolkit is updated to support the new version,
     /// for this you need to update the LibraryInvoker.SupportsVersion method, or create a new version of the LibraryInvoker.
     /// </remarks>
-    internal const string GeneratorToolVersion = "5.3.6.0";
+    internal const string GeneratorToolVersion = "5.3.7.0";
 }

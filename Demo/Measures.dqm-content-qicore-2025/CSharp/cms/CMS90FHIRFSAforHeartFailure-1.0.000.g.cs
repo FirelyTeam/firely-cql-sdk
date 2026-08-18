@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS90FHIRFSAforHeartFailure", "1.0.000")]
 public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<CMS90FHIRFSAforHeartFailure_1_0_000>
 {
@@ -489,14 +489,14 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore as Observation)?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return !((bool?)(ad_ is null));
+                return ad_ is not null;
             }
 
 
             CqlBoolean ab_() {
                 DataType ae_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore as Observation)?.Value;
                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return !((bool?)(af_ is null));
+                return af_ is not null;
             }
 
             return z_
@@ -562,7 +562,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     Period ad_ = tuple_dzhwgxhmbfavmzfaszbeksohj?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
                     CqlDateTime af_ = context.Operators.End(ae_);
-                    return !((bool?)(af_ is null));
+                    return af_ is not null;
                 }
 
                 return ab_
@@ -657,7 +657,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean au_() {
                 DataType bg_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29SocialRoles?.Value;
                 object bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
-                return !((bool?)(bh_ is null));
+                return bh_ is not null;
             }
 
 
@@ -680,7 +680,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean aw_() {
                 DataType bt_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Physical?.Value;
                 object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                return !((bool?)(bu_ is null));
+                return bu_ is not null;
             }
 
 
@@ -703,7 +703,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean ay_() {
                 DataType cg_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Pain?.Value;
                 object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                return !((bool?)(ch_ is null));
+                return ch_ is not null;
             }
 
 
@@ -726,7 +726,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean ba_() {
                 DataType ct_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Fatigue?.Value;
                 object cu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ct_);
-                return !((bool?)(cu_ is null));
+                return cu_ is not null;
             }
 
 
@@ -749,7 +749,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean bc_() {
                 DataType dg_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Depression?.Value;
                 object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                return !((bool?)(dh_ is null));
+                return dh_ is not null;
             }
 
 
@@ -772,14 +772,14 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean be_() {
                 DataType dt_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Anxiety?.Value;
                 object du_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dt_);
-                return !((bool?)(du_ is null));
+                return du_ is not null;
             }
 
 
             CqlBoolean bf_() {
                 DataType dv_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Sleep?.Value;
                 object dw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dv_);
-                return !((bool?)(dw_ is null));
+                return dw_ is not null;
             }
 
             return at_
@@ -855,7 +855,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     Period ad_ = tuple_kmpntxjuhkpbcwgftqigieao?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
                     CqlDateTime af_ = context.Operators.End(ae_);
-                    return !((bool?)(af_ is null));
+                    return af_ is not null;
                 }
 
                 return ab_
@@ -930,14 +930,14 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return !((bool?)(ad_ is null));
+                return ad_ is not null;
             }
 
 
             CqlBoolean ab_() {
                 DataType ae_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment as Observation)?.Value;
                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return !((bool?)(af_ is null));
+                return af_ is not null;
             }
 
             return z_
@@ -1003,7 +1003,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     Period ad_ = tuple_fppktdiagiekhptnsbacpswh?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
                     CqlDateTime af_ = context.Operators.End(ae_);
-                    return !((bool?)(af_ is null));
+                    return af_ is not null;
                 }
 
                 return ab_
@@ -1078,14 +1078,14 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return !((bool?)(ad_ is null));
+                return ad_ is not null;
             }
 
 
             CqlBoolean ab_() {
                 DataType ae_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment as Observation)?.Value;
                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return !((bool?)(af_ is null));
+                return af_ is not null;
             }
 
             return z_
@@ -1151,7 +1151,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     Period ad_ = tuple_fansvmjaedmvsdoyrozxdlsai?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
                     CqlDateTime af_ = context.Operators.End(ae_);
-                    return !((bool?)(af_ is null));
+                    return af_ is not null;
                 }
 
                 return ab_
@@ -1226,14 +1226,14 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment as Observation)?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return !((bool?)(ad_ is null));
+                return ad_ is not null;
             }
 
 
             CqlBoolean ab_() {
                 DataType ae_ = (tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment as Observation)?.Value;
                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return !((bool?)(af_ is null));
+                return af_ is not null;
             }
 
             return z_
@@ -1299,7 +1299,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     Period ad_ = tuple_elxicyhrdpyzpqyjphdifbiga?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
                     CqlDateTime af_ = context.Operators.End(ae_);
-                    return !((bool?)(af_ is null));
+                    return af_ is not null;
                 }
 
                 return ab_
@@ -1374,14 +1374,14 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment as Observation)?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return !((bool?)(ad_ is null));
+                return ad_ is not null;
             }
 
 
             CqlBoolean ab_() {
                 DataType ae_ = (tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment as Observation)?.Value;
                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return !((bool?)(af_ is null));
+                return af_ is not null;
             }
 
             return z_
@@ -1447,7 +1447,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     Period ad_ = tuple_fucqujadjizabihdffformht?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
                     CqlDateTime af_ = context.Operators.End(ae_);
-                    return !((bool?)(af_ is null));
+                    return af_ is not null;
                 }
 
                 return ab_
@@ -1522,14 +1522,14 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQPhysical as Observation)?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return !((bool?)(ad_ is null));
+                return ad_ is not null;
             }
 
 
             CqlBoolean ab_() {
                 DataType ae_ = (tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQEmotional as Observation)?.Value;
                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return !((bool?)(af_ is null));
+                return af_ is not null;
             }
 
             return z_
@@ -1595,7 +1595,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     Period ad_ = tuple_ncdawctnmbfmtibmihsfbaig?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
                     CqlDateTime af_ = context.Operators.End(ae_);
-                    return !((bool?)(af_ is null));
+                    return af_ is not null;
                 }
 
                 return ab_
@@ -1670,14 +1670,14 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Item as Observation)?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return !((bool?)(ad_ is null));
+                return ad_ is not null;
             }
 
 
             CqlBoolean ab_() {
                 DataType ae_ = (tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Summary as Observation)?.Value;
                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return !((bool?)(af_ is null));
+                return af_ is not null;
             }
 
             return z_
@@ -1743,7 +1743,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     Period ad_ = tuple_eoahgtwwdfqijhcjzqnvidvuo?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
                     CqlDateTime af_ = context.Operators.End(ae_);
-                    return !((bool?)(af_ is null));
+                    return af_ is not null;
                 }
 
                 return ab_
@@ -1834,7 +1834,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean aq_() {
                 DataType ba_ = (tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptomStability as Observation)?.Value;
                 object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                return !((bool?)(bb_ is null));
+                return bb_ is not null;
             }
 
 
@@ -1857,7 +1857,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean as_() {
                 DataType bn_ = (tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSelfEfficacy as Observation)?.Value;
                 object bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                return !((bool?)(bo_ is null));
+                return bo_ is not null;
             }
 
 
@@ -1880,7 +1880,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean au_() {
                 DataType ca_ = (tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptoms as Observation)?.Value;
                 object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                return !((bool?)(cb_ is null));
+                return cb_ is not null;
             }
 
 
@@ -1903,7 +1903,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean aw_() {
                 DataType cn_ = (tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQPhysicalLimits as Observation)?.Value;
                 object co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-                return !((bool?)(co_ is null));
+                return co_ is not null;
             }
 
 
@@ -1926,14 +1926,14 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlBoolean ay_() {
                 DataType da_ = (tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSocialLimits as Observation)?.Value;
                 object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-                return !((bool?)(db_ is null));
+                return db_ is not null;
             }
 
 
             CqlBoolean az_() {
                 DataType dc_ = (tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQLifeQuality as Observation)?.Value;
                 object dd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dc_);
-                return !((bool?)(dd_ is null));
+                return dd_ is not null;
             }
 
             return ap_
@@ -2007,7 +2007,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     Period ad_ = tuple_hrluhbcfcsvnvrrnjajahdcea?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
                     CqlDateTime af_ = context.Operators.End(ae_);
-                    return !((bool?)(af_ is null));
+                    return af_ is not null;
                 }
 
                 return ab_
@@ -2058,7 +2058,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
         bool? e_(Observation KCCQSummaryScore) {
             DataType i_ = (KCCQSummaryScore as Observation)?.Value;
             object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
-            return !((bool?)(j_ is null));
+            return j_ is not null;
         }
 
 
@@ -2119,7 +2119,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     Period ad_ = tuple_dgrojeekdvizsvyisepdjhjgj?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
                     CqlDateTime af_ = context.Operators.End(ae_);
-                    return !((bool?)(af_ is null));
+                    return af_ is not null;
                 }
 
                 return ab_

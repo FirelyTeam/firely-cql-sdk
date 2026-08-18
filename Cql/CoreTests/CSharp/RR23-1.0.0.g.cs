@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
@@ -190,7 +190,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     CqlBoolean x_() {
                         DataType y_ = SD?.Occurrence;
                         CqlDateTime z_ = context.Operators.LateBoundProperty<CqlDateTime>(y_, "value");
-                        return !((bool?)(z_ is null));
+                        return z_ is not null;
                     }
 
                     return w_
@@ -199,7 +199,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
                 IEnumerable<Condition> n_ = context.Operators.Where<Condition>((IEnumerable<Condition>)l_, m_);
                 Condition o_ = context.Operators.SingletonFrom<Condition>(n_);
-                return !((bool?)(o_ is null));
+                return o_ is not null;
             }
 
             return i_

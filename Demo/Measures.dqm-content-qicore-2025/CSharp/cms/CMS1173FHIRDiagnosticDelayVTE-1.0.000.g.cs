@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS1173FHIRDiagnosticDelayVTE", "1.0.000")]
 public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleton<CMS1173FHIRDiagnosticDelayVTE_1_0_000>
 {
@@ -358,7 +358,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 /* CQL 'or' (202:52-206:3) */ || k_();
         }
 
-        return (CqlBoolean)((bool?)(b_ is null))
+        return (CqlBoolean)(b_ is null)
             /* CQL 'implies' (202:3-206:3) */ || c_();
     }
 
@@ -554,7 +554,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 CqlBoolean ac_() {
                     DataType ae_ = tuple_bundjkpliiuyymiejivrqjjcd?.VTEStudy?.Effective;
                     object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                    return !((bool?)(af_ is null));
+                    return af_ is not null;
                 }
 
 
@@ -571,7 +571,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     CqlBoolean ao_() {
                         DataType ap_ = tuple_bundjkpliiuyymiejivrqjjcd?.VTEStudy?.Effective;
                         object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        return !((bool?)(aq_ is null));
+                        return aq_ is not null;
                     }
 
                     return an_
@@ -598,7 +598,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 CqlBoolean ba_() {
                     DataType bb_ = tuple_bundjkpliiuyymiejivrqjjcd?.VTEStudy?.Effective;
                     object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
-                    return !((bool?)(bc_ is null));
+                    return bc_ is not null;
                 }
 
                 return az_
@@ -1176,7 +1176,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                     Period r_ = CurrentQualifiedVTE?.Period;
                     CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                     CqlDateTime t_ = context.Operators.Start(s_);
-                    return !((bool?)(t_ is null));
+                    return t_ is not null;
                 }
 
                 return p_

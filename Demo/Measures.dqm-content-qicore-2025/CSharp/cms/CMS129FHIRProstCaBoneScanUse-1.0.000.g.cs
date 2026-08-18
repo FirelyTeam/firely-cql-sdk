@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS129FHIRProstCaBoneScanUse", "1.0.000")]
 public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton<CMS129FHIRProstCaBoneScanUse_1_0_000>
 {
@@ -240,7 +240,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 /* CQL 'or' (143:52-147:3) */ || k_();
         }
 
-        return (CqlBoolean)((bool?)(b_ is null))
+        return (CqlBoolean)(b_ is null)
             /* CQL 'implies' (143:3-147:3) */ || c_();
     }
 
@@ -757,8 +757,8 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     {
         CqlBoolean a_ = this.Initial_Population(context);
         return a_
-            /* CQL 'and' (49:3-50:86) */ && !((bool?)((this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context)) is null))
-            /* CQL 'and' (49:3-51:79) */ && !((bool?)((this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context)) is null))
+            /* CQL 'and' (49:3-50:86) */ && ((this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context)) is not null)
+            /* CQL 'and' (49:3-51:79) */ && ((this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context)) is not null)
             /* CQL 'and' (49:3-52:44) */ && this.Most_Recent_PSA_Test_Result_is_Low(context)
             /* CQL 'and' (49:3-53:42) */ && this.Most_Recent_Gleason_Score_is_Low(context);
     }

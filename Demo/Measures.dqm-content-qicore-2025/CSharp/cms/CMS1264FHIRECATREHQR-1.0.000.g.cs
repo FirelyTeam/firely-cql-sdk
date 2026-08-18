@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS1264FHIRECATREHQR", "1.0.000")]
 public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264FHIRECATREHQR_1_0_000>
 {
@@ -248,7 +248,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                         Period aj_ = EDEvalManagementinMP?.Period;
                         CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
                         CqlDateTime al_ = context.Operators.Start(ak_);
-                        return !((bool?)(al_ is null));
+                        return al_ is not null;
                     }
 
                     return ah_
@@ -305,7 +305,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
 
         bool? b_(Encounter @this) {
             List<Encounter.LocationComponent> l_ = @this?.Location;
-            return !((bool?)(l_ is null));
+            return l_ is not null;
         }
 
 
@@ -359,7 +359,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 Period ah_ = Location?.Period;
                 CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ah_);
                 CqlDateTime aj_ = context.Operators.Start(ai_);
-                return !((bool?)(aj_ is null));
+                return aj_ is not null;
             }
 
 
@@ -379,7 +379,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     Period ay_ = EDEncounter?.Period;
                     CqlInterval<CqlDateTime> az_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ay_);
                     CqlDateTime ba_ = context.Operators.Start(az_);
-                    return !((bool?)(ba_ is null));
+                    return ba_ is not null;
                 }
 
 
@@ -498,7 +498,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                         Period aj_ = EDEncounter?.Period;
                         CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
                         CqlDateTime al_ = context.Operators.Start(ak_);
-                        return !((bool?)(al_ is null));
+                        return al_ is not null;
                     }
 
                     return ah_
@@ -558,7 +558,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 Period q_ = Location?.Period;
                 CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
                 CqlDateTime s_ = context.Operators.Start(r_);
-                return !((bool?)(s_ is null));
+                return s_ is not null;
             }
 
             return n_
@@ -692,7 +692,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
 
         bool? b_(Encounter @this) {
             List<Encounter.LocationComponent> l_ = @this?.Location;
-            return !((bool?)(l_ is null));
+            return l_ is not null;
         }
 
 
@@ -746,7 +746,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                 Period ah_ = Location?.Period;
                 CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ah_);
                 CqlDateTime aj_ = context.Operators.End(ai_);
-                return !((bool?)(aj_ is null));
+                return aj_ is not null;
             }
 
 
@@ -766,7 +766,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
                     Period ay_ = EDEncounter?.Period;
                     CqlInterval<CqlDateTime> az_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ay_);
                     CqlDateTime ba_ = context.Operators.Start(az_);
-                    return !((bool?)(ba_ is null));
+                    return ba_ is not null;
                 }
 
 

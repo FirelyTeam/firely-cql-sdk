@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("AHAOverall", "4.1.000")]
 public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_000>
 {
@@ -202,7 +202,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 /* CQL 'or' (166:52-170:3) */ || k_();
         }
 
-        return (CqlBoolean)((bool?)(b_ is null))
+        return (CqlBoolean)(b_ is null)
             /* CQL 'implies' (166:3-170:3) */ || c_();
     }
 
@@ -234,7 +234,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 /* CQL 'or' (249:61-251:3) */ || i_();
         }
 
-        return (CqlBoolean)((bool?)(b_ is null))
+        return (CqlBoolean)(b_ is null)
             /* CQL 'implies' (249:3-251:3) */ || c_();
     }
 
@@ -1051,7 +1051,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
 
             bool? e_(Dosage @this) {
                 Timing z_ = @this?.Timing;
-                return !((bool?)(z_ is null));
+                return z_ is not null;
             }
 
 
@@ -1064,7 +1064,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
 
             bool? h_(Timing @this) {
                 Timing.RepeatComponent ab_ = @this?.Repeat;
-                return !((bool?)(ab_ is null));
+                return ab_ is not null;
             }
 
 
@@ -1078,7 +1078,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             bool? k_(Timing.RepeatComponent @this) {
                 DataType ad_ = @this?.Bounds;
                 object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                return !((bool?)(ae_ is null));
+                return ae_ is not null;
             }
 
 

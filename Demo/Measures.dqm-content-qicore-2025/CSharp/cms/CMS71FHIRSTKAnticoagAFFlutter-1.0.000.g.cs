@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS71FHIRSTKAnticoagAFFlutter", "1.0.000")]
 public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleton<CMS71FHIRSTKAnticoagAFFlutter_1_0_000>
 {
@@ -231,7 +231,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                         /* CQL 'and' (44:84-47:114) */ && av_();
                 }
 
-                return (CqlBoolean)((bool?)(an_ is null))
+                return (CqlBoolean)(an_ is null)
                     /* CQL 'implies' (44:21-47:114) */ || ao_();
             }
 
@@ -345,7 +345,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                         /* CQL 'and' (56:87-59:117) */ && cq_();
                 }
 
-                return (CqlBoolean)((bool?)(ci_ is null))
+                return (CqlBoolean)(ci_ is null)
                     /* CQL 'implies' (56:21-59:117) */ || cj_();
             }
 
@@ -412,7 +412,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                         /* CQL 'and' (65:84-68:118) */ && t_();
                 }
 
-                return (CqlBoolean)((bool?)(l_ is null))
+                return (CqlBoolean)(l_ is null)
                     /* CQL 'implies' (65:19-68:118) */ || m_();
             }
 

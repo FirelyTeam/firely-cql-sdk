@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS153FHIRChlamydiaScreening", "1.0.000")]
 public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton<CMS153FHIRChlamydiaScreening_1_0_000>
 {
@@ -744,7 +744,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     CqlDateTime ag_ = context.Operators.Convert<CqlDateTime>(af_);
                     CqlInterval<CqlDateTime> ah_ = QICoreCommon_4_0_000.Instance.toInterval(context, ag_);
                     CqlDateTime ai_ = context.Operators.End(ah_);
-                    return !((bool?)(ai_ is null));
+                    return ai_ is not null;
                 }
 
                 return ad_
@@ -822,7 +822,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     CqlDateTime by_ = context.Operators.Convert<CqlDateTime>(bx_);
                     CqlInterval<CqlDateTime> bz_ = QICoreCommon_4_0_000.Instance.toInterval(context, by_);
                     CqlDateTime ca_ = context.Operators.End(bz_);
-                    return !((bool?)(ca_ is null));
+                    return ca_ is not null;
                 }
 
                 return bv_
@@ -925,7 +925,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             CqlBoolean j_() {
                 DataType o_ = ChlamydiaTest?.Value;
                 object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                return !((bool?)(p_ is null));
+                return p_ is not null;
             }
 
             return i_

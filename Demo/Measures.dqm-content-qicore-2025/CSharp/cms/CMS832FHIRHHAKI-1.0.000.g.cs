@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS832FHIRHHAKI", "1.0.000")]
 public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHHAKI_1_0_000>
 {
@@ -368,7 +368,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return af_;
             }
 
-            return (CqlBoolean)(!((bool?)((l_ as CqlQuantity) is null)))
+            return (CqlBoolean)((l_ as CqlQuantity) is not null)
                 /* CQL 'and' (78:11-79:118) */ && m_()
                 /* CQL 'and' (78:5-80:70) */ && n_();
         }
@@ -408,7 +408,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool? l_(Condition @this) {
                     CodeableConcept q_ = @this?.Code;
                     CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                    return !((bool?)(r_ is null));
+                    return r_ is not null;
                 }
 
 
@@ -556,7 +556,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return aj_;
             }
 
-            return (CqlBoolean)(!((bool?)((h_ as CqlQuantity) is null)))
+            return (CqlBoolean)((h_ as CqlQuantity) is not null)
                 /* CQL 'and' (282:11-283:204) */ && i_()
                 /* CQL 'and' (282:11-284:109) */ && j_()
                 /* CQL 'and' (282:5-285:70) */ && k_();
@@ -703,7 +703,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
 
         bool? d_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
             CqlQuantity s_ = @this?.CrLabResult;
-            return !((bool?)(s_ is null));
+            return s_ is not null;
         }
 
 
@@ -795,7 +795,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
             CqlBoolean s_() {
                 DataType ah_ = tuple_ccccqpjvqogtctjhtilehkfoj?.CreatinineTestByTime?.Value;
                 object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                return !((bool?)(ai_ is null));
+                return ai_ is not null;
             }
 
 
@@ -950,7 +950,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
 
         bool? d_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
             CqlDateTime s_ = @this?.CrLabTime;
-            return !((bool?)(s_ is null));
+            return s_ is not null;
         }
 
 
@@ -985,7 +985,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return h_;
             }
 
-            return (CqlBoolean)(!((bool?)(d_ is null)))
+            return (CqlBoolean)(d_ is not null)
                 /* CQL 'and' (104:5-105:60) */ && e_();
         }
 
@@ -1086,7 +1086,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 return h_;
             }
 
-            return (CqlBoolean)(!((bool?)(d_ is null)))
+            return (CqlBoolean)(d_ is not null)
                 /* CQL 'and' (99:5-100:62) */ && e_();
         }
 
@@ -1128,7 +1128,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
 
         bool? d_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
             CqlQuantity k_ = @this?.CrLabResult;
-            return !((bool?)(k_ is null));
+            return k_ is not null;
         }
 
 
@@ -1519,7 +1519,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
 
         bool? d_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
             CqlDateTime k_ = @this?.CrLabTime;
-            return !((bool?)(k_ is null));
+            return k_ is not null;
         }
 
 
@@ -2083,7 +2083,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
 
         bool? d_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
             CqlQuantity k_ = @this?.CrLabResult;
-            return !((bool?)(k_ is null));
+            return k_ is not null;
         }
 
 
@@ -2307,7 +2307,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                         }
                     }
                     CqlDateTime br_ = QICoreCommon_4_0_000.Instance.earliest(context, bq_);
-                    return !((bool?)(br_ is null));
+                    return br_ is not null;
                 }
 
                 return bc_
@@ -2644,7 +2644,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                         }
                     }
                     CqlDateTime bs_ = QICoreCommon_4_0_000.Instance.earliest(context, br_);
-                    return !((bool?)(bs_ is null));
+                    return bs_ is not null;
                 }
 
                 return bd_
@@ -2840,7 +2840,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 bool? l_(Condition @this) {
                     CodeableConcept q_ = @this?.Code;
                     CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                    return !((bool?)(r_ is null));
+                    return r_ is not null;
                 }
 
 
@@ -3269,7 +3269,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                                 }
 
                                 IEnumerable<int?> an_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)al_, am_);
-                                return !((bool?)(an_ is null));
+                                return an_ is not null;
                             }
 
 
@@ -3345,7 +3345,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
             CqlBoolean n_() {
                 DataType o_ = FirstHeartBeats?.Value;
                 CqlQuantity p_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, o_ as Quantity);
-                return !((bool?)(p_ is null));
+                return p_ is not null;
             }
 
             return m_
@@ -3407,7 +3407,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
             CqlBoolean n_() {
                 DataType o_ = FirstRespiration?.Value;
                 CqlQuantity p_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, o_ as Quantity);
-                return !((bool?)(p_ is null));
+                return p_ is not null;
             }
 
             return m_
@@ -3539,7 +3539,7 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
             CqlBoolean n_() {
                 DataType o_ = FirstTemperature?.Value;
                 CqlQuantity p_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, o_ as Quantity);
-                return !((bool?)(p_ is null));
+                return p_ is not null;
             }
 
             return m_

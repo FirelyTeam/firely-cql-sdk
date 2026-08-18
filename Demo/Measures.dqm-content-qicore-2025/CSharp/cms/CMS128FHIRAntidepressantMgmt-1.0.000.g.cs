@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS128FHIRAntidepressantMgmt", "1.0.000")]
 public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton<CMS128FHIRAntidepressantMgmt_1_0_000>
 {
@@ -258,10 +258,10 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlInterval<CqlDate> q_ = context.Operators.Interval(o_, p_, true, true);
                 CqlBoolean r_ = context.Operators.In<CqlDate>(l_, q_, (string)default);
                 return r_
-                    /* CQL 'and' (44:13-44:94) */ && !((bool?)((this.IPSD(context)) is null));
+                    /* CQL 'and' (44:13-44:94) */ && ((this.IPSD(context)) is not null);
             }
 
-            return (CqlBoolean)(!((bool?)(h_ is null)))
+            return (CqlBoolean)(h_ is not null)
                 /* CQL 'and' (43:7-44:94) */ && i_();
         }
 
@@ -321,7 +321,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             CqlInterval<CqlDate> ao_ = context.Operators.Interval(am_, an_, true, true);
             CqlBoolean ap_ = context.Operators.In<CqlDate>(aj_, ao_, (string)default);
             return ap_
-                /* CQL 'and' (74:5-74:75) */ && !((bool?)((this.IPSD(context)) is null));
+                /* CQL 'and' (74:5-74:75) */ && ((this.IPSD(context)) is not null);
         }
 
         IEnumerable<Encounter> af_ = context.Operators.Where<Encounter>(ad_, ae_);
@@ -438,7 +438,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     return an_;
                 }
 
-                return (CqlBoolean)(!((bool?)(y_ is null)))
+                return (CqlBoolean)(y_ is not null)
                     /* CQL 'and' (82:9-83:137) */ && z_();
             }
 

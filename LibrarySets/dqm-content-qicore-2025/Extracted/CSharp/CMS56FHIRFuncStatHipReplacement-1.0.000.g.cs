@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS56FHIRFuncStatHipReplacement", "1.0.000")]
 public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingleton<CMS56FHIRFuncStatHipReplacement_1_0_000>
 {
@@ -550,7 +550,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 /* CQL 'or' (277:52-281:3) */ || k_();
         }
 
-        return (CqlBoolean)((bool?)(b_ is null))
+        return (CqlBoolean)(b_ is null)
             /* CQL 'implies' (277:3-281:3) */ || c_();
     }
 
@@ -694,7 +694,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     }
                     CqlInterval<CqlDateTime> aj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ai_);
                     CqlDateTime ak_ = context.Operators.Start(aj_);
-                    return !((bool?)(ak_ is null));
+                    return ak_ is not null;
                 }
 
                 return u_
@@ -1391,7 +1391,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlBoolean am_() {
                 DataType au_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSport as Observation)?.Value;
                 object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                return !((bool?)(av_ is null));
+                return av_ is not null;
             }
 
 
@@ -1414,7 +1414,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlBoolean ao_() {
                 DataType bh_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSActivityScore as Observation)?.Value;
                 object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                return !((bool?)(bi_ is null));
+                return bi_ is not null;
             }
 
 
@@ -1437,7 +1437,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlBoolean aq_() {
                 DataType bu_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSymptoms as Observation)?.Value;
                 object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                return !((bool?)(bv_ is null));
+                return bv_ is not null;
             }
 
 
@@ -1460,14 +1460,14 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlBoolean as_() {
                 DataType ch_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSPain as Observation)?.Value;
                 object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                return !((bool?)(ci_ is null));
+                return ci_ is not null;
             }
 
 
             CqlBoolean at_() {
                 DataType cj_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality as Observation)?.Value;
                 object ck_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cj_);
-                return !((bool?)(ck_ is null));
+                return ck_ is not null;
             }
 
             return al_
@@ -1590,7 +1590,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                 CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
                 return y_
-                    /* CQL 'and' (168:19-168:93) */ && !((bool?)(InitialHipAssessmentHOOS is null));
+                    /* CQL 'and' (168:19-168:93) */ && (InitialHipAssessmentHOOS is not null);
             }
 
             CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
@@ -1641,7 +1641,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         bool? e_(Observation HOOSJr) {
             DataType i_ = (HOOSJr as Observation)?.Value;
             object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
-            return !((bool?)(j_ is null));
+            return j_ is not null;
         }
 
 
@@ -1725,7 +1725,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                 CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
                 return y_
-                    /* CQL 'and' (200:19-200:89) */ && !((bool?)(InitialHipAssessment is null));
+                    /* CQL 'and' (200:19-200:89) */ && (InitialHipAssessment is not null);
             }
 
             CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
@@ -1800,14 +1800,14 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore as Observation)?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return !((bool?)(ad_ is null));
+                return ad_ is not null;
             }
 
 
             CqlBoolean ab_() {
                 DataType ae_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore as Observation)?.Value;
                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return !((bool?)(af_ is null));
+                return af_ is not null;
             }
 
             return z_
@@ -1906,7 +1906,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                 CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
                 return y_
-                    /* CQL 'and' (214:19-214:97) */ && !((bool?)(InitialHipAssessmentPROMIS10 is null));
+                    /* CQL 'and' (214:19-214:97) */ && (InitialHipAssessmentPROMIS10 is not null);
             }
 
             CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
@@ -1981,14 +1981,14 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return !((bool?)(ad_ is null));
+                return ad_ is not null;
             }
 
 
             CqlBoolean ab_() {
                 DataType ae_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment as Observation)?.Value;
                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return !((bool?)(af_ is null));
+                return af_ is not null;
             }
 
             return z_
@@ -2087,7 +2087,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                 CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
                 return y_
-                    /* CQL 'and' (234:19-234:96) */ && !((bool?)(InitialHipAssessmentOblique is null));
+                    /* CQL 'and' (234:19-234:96) */ && (InitialHipAssessmentOblique is not null);
             }
 
             CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);
@@ -2162,14 +2162,14 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlBoolean aa_() {
                 DataType ac_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
                 object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                return !((bool?)(ad_ is null));
+                return ad_ is not null;
             }
 
 
             CqlBoolean ab_() {
                 DataType ae_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment as Observation)?.Value;
                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                return !((bool?)(af_ is null));
+                return af_ is not null;
             }
 
             return z_
@@ -2268,7 +2268,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                 CqlBoolean y_ = context.Operators.In<CqlDateTime>(s_, x_, "day");
                 return y_
-                    /* CQL 'and' (254:19-254:99) */ && !((bool?)(InitialHipAssessmentOrthogonal is null));
+                    /* CQL 'and' (254:19-254:99) */ && (InitialHipAssessmentOrthogonal is not null);
             }
 
             CqlBoolean r_ = context.Operators.WhereAny<CqlDate>(p_, q_);

@@ -390,18 +390,9 @@ partial class CodeBuilderContext
     protected CodeExpression Or(Or or) =>
         ShortCircuitBinary(or, CodeBinaryOp.BoolOr, decidingValue: true, cqlName: "or");
 
-    protected CodeExpression Not(Not not)
-    {
-        var operand = TranslateBoolArg(not.operand
-            ?? throw this.NewExpressionBuildingException("Not has no operand."));
-
-        // not <constant> folds — and MUST fold, see HonestBoolOperand: `!true` would print
-        // as a non-nullable bool while the IR type says bool?.
-        if (TryGetBoolConstant(operand, out var constant))
-            return NullableBoolConstant(constant is null ? null : !constant);
-
-        return new CodeUnary(CodeUnaryOp.Not, operand);
-    }
+    protected CodeExpression Not(Not not) =>
+        NotOperand(TranslateBoolArg(not.operand
+            ?? throw this.NewExpressionBuildingException("Not has no operand.")));
 
     /// <summary>
     /// Lowers <c>implies</c> to the same guarded shape as and/or, with two differences that keep
@@ -452,7 +443,7 @@ partial class CodeBuilderContext
         return AsNullableBool(
             new CodeBinary(
                 CodeBinaryOp.CqlOrElse,
-                AsCqlBoolean(new CodeUnary(CodeUnaryOp.Not, left)),
+                AsCqlBoolean(NotOperand(left)),
                 AsCqlBoolean(right),
                 originTag));
     }
@@ -605,20 +596,104 @@ partial class CodeBuilderContext
             ? operand
             : new CodeCast(operand, typeof(bool?), CodeCastKind.Cast);
 
-    /// <summary>Negation with the same constant folding <see cref="Not"/> applies — a folded
-    /// <c>!true</c> must not print as a non-nullable bool literal (see HonestBoolOperand).</summary>
+    /// <summary>
+    /// The complement of a lifted null test — <c>x != null</c> for <c>not(IsNull(x))</c>, and the
+    /// mirror for a double negation — or <see langword="null"/> when the operand is not one.
+    ///
+    /// <para><see cref="IsNull"/> builds a plain <see cref="bool"/> comparison, which
+    /// <see cref="TranslateBoolArg"/> then lifts to <c>bool?</c> so that the lifted <c>!</c>
+    /// applies. Four conversions and a coalesce then express one null check —
+    /// <c>((bool?)(!((bool?)(x is null)))) ?? false</c> — where <c>!(x is null)</c> simply IS
+    /// <c>x is not null</c>, a total <see cref="bool"/> with nothing to negate three-valuedly
+    /// (#1576).</para>
+    ///
+    /// <para>Complementing the OPERATOR is what removes the negation without removing the type:
+    /// <see cref="CodeBinaryOp.Equal"/> and <see cref="CodeBinaryOp.NotEqual"/> are
+    /// <see cref="bool"/>-typed, so the printer's existing arm renders this as <c>x is not null</c>
+    /// with no new printing code, and the two places that can absorb the remaining lift already
+    /// do — a coalesce looks through a <c>bool</c>-to-<c>bool?</c> cast and then returns its left
+    /// operand alone (non-nullable, nothing to coalesce), and a lambda root drops the same cast
+    /// because <c>return</c> converts implicitly. Doing this from the printer was tried twice and
+    /// cannot work: dropping the conversion there makes the printed type diverge from the node type,
+    /// and every consumer that compensates keys on the NODE (72 × CS0019); rebuilding the node there
+    /// defeats the reference-keyed memo, since <c>PrintBoth</c> prints each node twice and a fresh
+    /// allocation gets linearized twice, hoisting the operand's local function twice and leaving one
+    /// copy unreferenced (CS8321).</para>
+    ///
+    /// <para>The result is deliberately lifted BACK to <c>bool?</c> rather than handed on as the
+    /// <see cref="bool"/> it now is. A predicate reaching <see cref="ICqlOperators"/> is a method
+    /// group, whose delegate conversion requires the return type to match <c>Func&lt;T, bool?&gt;</c>
+    /// exactly, and an ELM <c>Not</c> without a <c>resultTypeSpecifier</c> gets no lift from
+    /// <c>ConvertToResultType</c> to restore it — <c>where not (X is null)</c> then fails to bind at
+    /// all (<c>No suitable method could be bound from: Where&lt;T&gt;(IEnumerable&lt;T&gt;,
+    /// Func&lt;T, bool&gt;)</c>, 7 libraries). Keeping the node's type exactly what it was also
+    /// means no consumer sees a different type than before this fold existed.</para>
+    ///
+    /// <para>Deliberately narrow. <c>Not</c> also serves <c>implies</c> and <c>xor</c> over arbitrary
+    /// operands, where there is no complement to name, so this matches ONLY the shape
+    /// <see cref="IsNull"/> produces: a <c>bool</c>-to-<c>bool?</c> lift over an equality against a
+    /// null constant. A constant tested operand is excluded because <c>IsNull(&lt;constant&gt;)</c>
+    /// has no legal pattern form — <c>1 is null</c> is CS0037 — which is why the printer folds those
+    /// to a literal on the <see cref="CodeBinaryOp.Equal"/> arm and has no such fold on the
+    /// <see cref="CodeBinaryOp.NotEqual"/> one.</para>
+    /// </summary>
+    private static CodeExpression? ComplementOfNullTest(CodeExpression operand)
+    {
+        if (operand is not CodeCast { Kind: CodeCastKind.Cast, Type: var castType, Operand: CodeBinary test }
+            || !CodeTypeRules.IsNullableBool(castType)
+            || !CodeTypeRules.IsPlainBool(test.Type))
+            return null;
+
+        // The tested side must be something a null pattern can be written against, and the right
+        // side must be the null constant IsNull compares to — `x == true` (IsTrue's lowering) and
+        // the short-circuit guards are Equal too, and complementing those means something else.
+        if (test.Left is CodeConstant or CodeDefault
+            || test.Right is not (CodeConstant { Value: null } or CodeDefault))
+            return null;
+
+        var complement = test.Op switch
+        {
+            CodeBinaryOp.Equal    => CodeBinaryOp.NotEqual,
+            CodeBinaryOp.NotEqual => CodeBinaryOp.Equal,   // reachable via not(not(IsNull(x)))
+            _                     => (CodeBinaryOp?)null,
+        };
+
+        return complement is { } op
+                   ? AsNullableBool(new CodeBinary(op, test.Left, test.Right))
+                   : null;
+    }
+
+    /// <summary>
+    /// THE negation used by every lowering here — ELM <c>not</c>, <c>implies</c>' <c>!left</c> and
+    /// <c>xor</c>'s constant folds — so that the two shapes a bare <c>CodeUnary</c> gets wrong
+    /// cannot come back through one caller and not another. Both are <c>bool?</c>-typed on the way
+    /// out, so this substitutes for <c>new CodeUnary(Not, …)</c> everywhere.
+    /// <list type="number">
+    /// <item>A CONSTANT operand must fold: a folded <c>!true</c> would otherwise print as a
+    /// non-nullable bool literal while the IR type says <c>bool?</c> (see HonestBoolOperand).</item>
+    /// <item>A null TEST is complemented rather than negated — see
+    /// <see cref="ComplementOfNullTest"/>. Routing <c>implies</c> through here is what keeps
+    /// <c>(not (X is null)) implies Y</c> emitting <c>X is null</c> for its left operand instead of
+    /// re-negating the complement into <c>!(X is not null)</c>.</item>
+    /// </list>
+    /// </summary>
     private static CodeExpression NotOperand(CodeExpression operand) =>
         TryGetBoolConstant(operand, out var constant)
             ? NullableBoolConstant(constant is null ? null : !constant)
-            : new CodeUnary(CodeUnaryOp.Not, operand);
+            : ComplementOfNullTest(operand) ?? new CodeUnary(CodeUnaryOp.Not, operand);
 
     /// <summary><c>!left | right</c> — Kleene implication over C#'s lifted operators. Pass
     /// <paramref name="originTag"/> only where the merge stands alone; inside a guard the
-    /// conditional already carries the tag.</summary>
+    /// conditional already carries the tag.
+    /// <para>The left operand is negated BEFORE being made honest, and the order is load-bearing:
+    /// <see cref="NotOperand"/> folds a constant operand back to a bare <c>bool?</c> constant, which
+    /// undoes an <see cref="HonestBoolOperand"/> applied first and leaves a bare <c>default</c> as
+    /// the operand of <c>|</c> — CS8310, which is the whole reason HonestBoolOperand exists.
+    /// <c>null implies X</c> is the case that reaches it.</para></summary>
     private static CodeExpression ImpliesMerge(CodeExpression left, CodeExpression right, string? originTag) =>
         new CodeBinary(
             CodeBinaryOp.BoolOr,
-            new CodeUnary(CodeUnaryOp.Not, HonestBoolOperand(left)),
+            HonestBoolOperand(NotOperand(left)),
             HonestBoolOperand(right),
             originTag);
 

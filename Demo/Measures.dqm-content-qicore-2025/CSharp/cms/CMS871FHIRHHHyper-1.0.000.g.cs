@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS871FHIRHHHyper", "1.0.000")]
 public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIRHHHyper_1_0_000>
 {
@@ -306,7 +306,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                         /* CQL 'and' (127:72-132:113) */ && ar_();
                 }
 
-                return (CqlBoolean)((bool?)(ah_ is null))
+                return (CqlBoolean)(ah_ is null)
                     /* CQL 'implies' (127:11-132:113) */ || ai_();
             }
 
@@ -1130,7 +1130,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 string k_ = (@this is Resource
                     ? (@this as Resource).IdElement
                     : default)?.Value;
-                return !((bool?)(k_ is null));
+                return k_ is not null;
             }
 
 
@@ -1499,7 +1499,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             string g_ = (@this is Resource
                 ? (@this as Resource).IdElement
                 : default)?.Value;
-            return !((bool?)(g_ is null));
+            return g_ is not null;
         }
 
 
@@ -1565,7 +1565,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             string g_ = (@this is Resource
                 ? (@this as Resource).IdElement
                 : default)?.Value;
-            return !((bool?)(g_ is null));
+            return g_ is not null;
         }
 
 

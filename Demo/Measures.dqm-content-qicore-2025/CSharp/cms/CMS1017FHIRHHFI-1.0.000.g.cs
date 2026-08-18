@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS1017FHIRHHFI", "1.0.000")]
 public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRHHFI_1_0_000>
 {
@@ -296,7 +296,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? l_(Condition @this) {
                     CodeableConcept q_ = @this?.Code;
                     CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                    return !((bool?)(r_ is null));
+                    return r_ is not null;
                 }
 
 
@@ -709,7 +709,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 CqlBoolean o_() {
                     DataType q_ = BMI?.Value;
                     CqlQuantity r_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, q_ as Quantity);
-                    return !((bool?)(r_ is null));
+                    return r_ is not null;
                 }
 
 
@@ -800,7 +800,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
             bool? i_(Claim @this) {
                 List<Claim.DiagnosisComponent> at_ = @this?.Diagnosis;
-                return !((bool?)(at_ is null));
+                return at_ is not null;
             }
 
 
@@ -849,7 +849,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
             bool? o_(Claim @this) {
                 List<Claim.DiagnosisComponent> bk_ = @this?.Diagnosis;
-                return !((bool?)(bk_ is null));
+                return bk_ is not null;
             }
 
 
@@ -864,7 +864,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             bool? s_(Claim.DiagnosisComponent @this) {
                 PositiveInt bm_ = @this?.SequenceElement;
                 int? bn_ = bm_?.Value;
-                return !((bool?)(bn_ is null));
+                return bn_ is not null;
             }
 
 
@@ -913,7 +913,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
             bool? x_(Claim @this) {
                 List<Claim.DiagnosisComponent> cf_ = @this?.Diagnosis;
-                return !((bool?)(cf_ is null));
+                return cf_ is not null;
             }
 
 
@@ -2097,7 +2097,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             bool? e_(Condition @this) {
                 CodeableConcept j_ = @this?.Code;
                 CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
-                return !((bool?)(k_ is null));
+                return k_ is not null;
             }
 
 

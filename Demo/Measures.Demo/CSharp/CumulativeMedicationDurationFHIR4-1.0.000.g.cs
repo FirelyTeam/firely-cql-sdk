@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CumulativeMedicationDurationFHIR4", "1.0.000")]
 public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISingleton<CumulativeMedicationDurationFHIR4_1_0_000>
 {
@@ -701,10 +701,10 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 DataType i_ = Administration?.Medication;
                 CqlConcept j_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, i_ as CodeableConcept);
                 CqlQuantity k_ = this.TherapeuticDuration(context, j_);
-                return !((bool?)(k_ is null));
+                return k_ is not null;
             }
 
-            if ((CqlBoolean)(!((bool?)(g_ is null)))
+            if ((CqlBoolean)(g_ is not null)
                 /* CQL 'and' (312:10-312:66) */ && h_())
             {
                 DataType l_ = Administration?.Medication;

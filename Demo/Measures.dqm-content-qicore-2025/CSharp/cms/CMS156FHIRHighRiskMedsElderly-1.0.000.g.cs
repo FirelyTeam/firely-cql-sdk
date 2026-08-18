@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS156FHIRHighRiskMedsElderly", "1.0.000")]
 public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleton<CMS156FHIRHighRiskMedsElderly_1_0_000>
 {
@@ -1357,7 +1357,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                     /* CQL 'or' (310:11-314:7) */ || k_();
             }
 
-            if ((CqlBoolean)(!((bool?)(e_ is null)))
+            if ((CqlBoolean)(e_ is not null)
                 /* CQL 'and' (309:15-314:7) */ && f_())
             {
                 MedicationRequest.DispenseRequestComponent v_ = Order?.DispenseRequest;

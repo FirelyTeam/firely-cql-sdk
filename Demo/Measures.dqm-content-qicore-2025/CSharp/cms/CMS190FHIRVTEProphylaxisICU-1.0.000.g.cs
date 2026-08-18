@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS190FHIRVTEProphylaxisICU", "1.0.000")]
 public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<CMS190FHIRVTEProphylaxisICU_1_0_000>
 {
@@ -1931,7 +1931,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                         /* CQL 'and' (193:77-196:110) */ && w_();
                 }
 
-                return (CqlBoolean)((bool?)(o_ is null))
+                return (CqlBoolean)(o_ is null)
                     /* CQL 'implies' (193:19-196:110) */ || p_();
             }
 
@@ -1984,7 +1984,7 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
                 CqlBoolean ax_() {
                     CodeableConcept bj_ = VTEDiagnosis?.VerificationStatus;
                     CqlConcept bk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bj_);
-                    return !((bool?)(bk_ is null));
+                    return bk_ is not null;
                 }
 
 

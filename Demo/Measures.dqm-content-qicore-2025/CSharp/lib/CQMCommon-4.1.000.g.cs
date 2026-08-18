@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CQMCommon", "4.1.000")]
 public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 {
@@ -302,7 +302,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     Period x_ = TheEncounter?.Period;
                     CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, x_);
                     CqlDateTime z_ = context.Operators.Start(y_);
-                    return !((bool?)(z_ is null));
+                    return z_ is not null;
                 }
 
                 return v_
@@ -357,7 +357,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     Period x_ = TheEncounter?.Period;
                     CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, x_);
                     CqlDateTime z_ = context.Operators.Start(y_);
-                    return !((bool?)(z_ is null));
+                    return z_ is not null;
                 }
 
                 return v_
@@ -813,7 +813,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     Period eg_ = Visit?.Period;
                                     CqlInterval<CqlDateTime> eh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, eg_);
                                     CqlDateTime ei_ = context.Operators.Start(eh_);
-                                    return !((bool?)(ei_ is null));
+                                    return ei_ is not null;
                                 }
 
                                 return ee_
@@ -866,7 +866,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     Period fc_ = Visit?.Period;
                                     CqlInterval<CqlDateTime> fd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fc_);
                                     CqlDateTime fe_ = context.Operators.Start(fd_);
-                                    return !((bool?)(fe_ is null));
+                                    return fe_ is not null;
                                 }
 
                                 return fa_
@@ -920,7 +920,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         Period gl_ = Visit?.Period;
                                         CqlInterval<CqlDateTime> gm_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, gl_);
                                         CqlDateTime gn_ = context.Operators.Start(gm_);
-                                        return !((bool?)(gn_ is null));
+                                        return gn_ is not null;
                                     }
 
                                     return gj_
@@ -948,7 +948,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             Period fs_ = Visit?.Period;
                             CqlInterval<CqlDateTime> ft_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fs_);
                             CqlDateTime fu_ = context.Operators.Start(ft_);
-                            return !((bool?)((fr_ ?? fu_) is null));
+                            return (fr_ ?? fu_) is not null;
                         }
 
                         return do_
@@ -998,7 +998,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             Period hk_ = Visit?.Period;
                             CqlInterval<CqlDateTime> hl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, hk_);
                             CqlDateTime hm_ = context.Operators.Start(hl_);
-                            return !((bool?)(hm_ is null));
+                            return hm_ is not null;
                         }
 
                         return hi_
@@ -1064,7 +1064,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     Period jo_ = Visit?.Period;
                                     CqlInterval<CqlDateTime> jp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, jo_);
                                     CqlDateTime jq_ = context.Operators.Start(jp_);
-                                    return !((bool?)(jq_ is null));
+                                    return jq_ is not null;
                                 }
 
                                 return jm_
@@ -1117,7 +1117,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     Period kk_ = Visit?.Period;
                                     CqlInterval<CqlDateTime> kl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, kk_);
                                     CqlDateTime km_ = context.Operators.Start(kl_);
-                                    return !((bool?)(km_ is null));
+                                    return km_ is not null;
                                 }
 
                                 return ki_
@@ -1171,7 +1171,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         Period lt_ = Visit?.Period;
                                         CqlInterval<CqlDateTime> lu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, lt_);
                                         CqlDateTime lv_ = context.Operators.Start(lu_);
-                                        return !((bool?)(lv_ is null));
+                                        return lv_ is not null;
                                     }
 
                                     return lr_
@@ -1199,7 +1199,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             Period la_ = Visit?.Period;
                             CqlInterval<CqlDateTime> lb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, la_);
                             CqlDateTime lc_ = context.Operators.Start(lb_);
-                            return !((bool?)((kz_ ?? lc_) is null));
+                            return (kz_ ?? lc_) is not null;
                         }
 
                         return iw_
@@ -1247,7 +1247,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             Period ms_ = Visit?.Period;
                             CqlInterval<CqlDateTime> mt_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ms_);
                             CqlDateTime mu_ = context.Operators.Start(mt_);
-                            return !((bool?)(mu_ is null));
+                            return mu_ is not null;
                         }
 
                         return mq_
@@ -1314,7 +1314,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         Period pt_ = Visit?.Period;
                                         CqlInterval<CqlDateTime> pu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, pt_);
                                         CqlDateTime pv_ = context.Operators.Start(pu_);
-                                        return !((bool?)(pv_ is null));
+                                        return pv_ is not null;
                                     }
 
                                     return pr_
@@ -1367,7 +1367,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         Period qp_ = Visit?.Period;
                                         CqlInterval<CqlDateTime> qq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, qp_);
                                         CqlDateTime qr_ = context.Operators.Start(qq_);
-                                        return !((bool?)(qr_ is null));
+                                        return qr_ is not null;
                                     }
 
                                     return qn_
@@ -1421,7 +1421,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                             Period ry_ = Visit?.Period;
                                             CqlInterval<CqlDateTime> rz_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ry_);
                                             CqlDateTime sa_ = context.Operators.Start(rz_);
-                                            return !((bool?)(sa_ is null));
+                                            return sa_ is not null;
                                         }
 
                                         return rw_
@@ -1449,7 +1449,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 Period rf_ = Visit?.Period;
                                 CqlInterval<CqlDateTime> rg_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, rf_);
                                 CqlDateTime rh_ = context.Operators.Start(rg_);
-                                return !((bool?)((re_ ?? rh_) is null));
+                                return (re_ ?? rh_) is not null;
                             }
 
                             return pb_
@@ -1499,7 +1499,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 Period sx_ = Visit?.Period;
                                 CqlInterval<CqlDateTime> sy_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, sx_);
                                 CqlDateTime sz_ = context.Operators.Start(sy_);
-                                return !((bool?)(sz_ is null));
+                                return sz_ is not null;
                             }
 
                             return sv_
@@ -1527,7 +1527,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     Period ns_ = Visit?.Period;
                     CqlInterval<CqlDateTime> nt_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ns_);
                     CqlDateTime nu_ = context.Operators.Start(nt_);
-                    return !((bool?)((nh_ ?? nr_ ?? nu_) is null));
+                    return (nh_ ?? nr_ ?? nu_) is not null;
                 }
 
                 return cg_
@@ -1586,7 +1586,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 Period ve_ = Visit?.Period;
                                 CqlInterval<CqlDateTime> vf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ve_);
                                 CqlDateTime vg_ = context.Operators.Start(vf_);
-                                return !((bool?)(vg_ is null));
+                                return vg_ is not null;
                             }
 
                             return vc_
@@ -1639,7 +1639,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 Period wa_ = Visit?.Period;
                                 CqlInterval<CqlDateTime> wb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, wa_);
                                 CqlDateTime wc_ = context.Operators.Start(wb_);
-                                return !((bool?)(wc_ is null));
+                                return wc_ is not null;
                             }
 
                             return vy_
@@ -1693,7 +1693,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     Period xj_ = Visit?.Period;
                                     CqlInterval<CqlDateTime> xk_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, xj_);
                                     CqlDateTime xl_ = context.Operators.Start(xk_);
-                                    return !((bool?)(xl_ is null));
+                                    return xl_ is not null;
                                 }
 
                                 return xh_
@@ -1721,7 +1721,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         Period wq_ = Visit?.Period;
                         CqlInterval<CqlDateTime> wr_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, wq_);
                         CqlDateTime ws_ = context.Operators.Start(wr_);
-                        return !((bool?)((wp_ ?? ws_) is null));
+                        return (wp_ ?? ws_) is not null;
                     }
 
                     return um_
@@ -1771,7 +1771,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         Period yi_ = Visit?.Period;
                         CqlInterval<CqlDateTime> yj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, yi_);
                         CqlDateTime yk_ = context.Operators.Start(yj_);
-                        return !((bool?)(yk_ is null));
+                        return yk_ is not null;
                     }
 
                     return yg_
@@ -1864,7 +1864,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     Period eg_ = Visit?.Period;
                                     CqlInterval<CqlDateTime> eh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, eg_);
                                     CqlDateTime ei_ = context.Operators.Start(eh_);
-                                    return !((bool?)(ei_ is null));
+                                    return ei_ is not null;
                                 }
 
                                 return ee_
@@ -1917,7 +1917,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     Period fc_ = Visit?.Period;
                                     CqlInterval<CqlDateTime> fd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fc_);
                                     CqlDateTime fe_ = context.Operators.Start(fd_);
-                                    return !((bool?)(fe_ is null));
+                                    return fe_ is not null;
                                 }
 
                                 return fa_
@@ -1971,7 +1971,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         Period gl_ = Visit?.Period;
                                         CqlInterval<CqlDateTime> gm_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, gl_);
                                         CqlDateTime gn_ = context.Operators.Start(gm_);
-                                        return !((bool?)(gn_ is null));
+                                        return gn_ is not null;
                                     }
 
                                     return gj_
@@ -1999,7 +1999,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             Period fs_ = Visit?.Period;
                             CqlInterval<CqlDateTime> ft_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fs_);
                             CqlDateTime fu_ = context.Operators.Start(ft_);
-                            return !((bool?)((fr_ ?? fu_) is null));
+                            return (fr_ ?? fu_) is not null;
                         }
 
                         return do_
@@ -2049,7 +2049,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             Period hk_ = Visit?.Period;
                             CqlInterval<CqlDateTime> hl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, hk_);
                             CqlDateTime hm_ = context.Operators.Start(hl_);
-                            return !((bool?)(hm_ is null));
+                            return hm_ is not null;
                         }
 
                         return hi_
@@ -2115,7 +2115,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     Period jo_ = Visit?.Period;
                                     CqlInterval<CqlDateTime> jp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, jo_);
                                     CqlDateTime jq_ = context.Operators.Start(jp_);
-                                    return !((bool?)(jq_ is null));
+                                    return jq_ is not null;
                                 }
 
                                 return jm_
@@ -2168,7 +2168,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     Period kk_ = Visit?.Period;
                                     CqlInterval<CqlDateTime> kl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, kk_);
                                     CqlDateTime km_ = context.Operators.Start(kl_);
-                                    return !((bool?)(km_ is null));
+                                    return km_ is not null;
                                 }
 
                                 return ki_
@@ -2222,7 +2222,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         Period lt_ = Visit?.Period;
                                         CqlInterval<CqlDateTime> lu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, lt_);
                                         CqlDateTime lv_ = context.Operators.Start(lu_);
-                                        return !((bool?)(lv_ is null));
+                                        return lv_ is not null;
                                     }
 
                                     return lr_
@@ -2250,7 +2250,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             Period la_ = Visit?.Period;
                             CqlInterval<CqlDateTime> lb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, la_);
                             CqlDateTime lc_ = context.Operators.Start(lb_);
-                            return !((bool?)((kz_ ?? lc_) is null));
+                            return (kz_ ?? lc_) is not null;
                         }
 
                         return iw_
@@ -2298,7 +2298,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                             Period ms_ = Visit?.Period;
                             CqlInterval<CqlDateTime> mt_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ms_);
                             CqlDateTime mu_ = context.Operators.Start(mt_);
-                            return !((bool?)(mu_ is null));
+                            return mu_ is not null;
                         }
 
                         return mq_
@@ -2365,7 +2365,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         Period pt_ = Visit?.Period;
                                         CqlInterval<CqlDateTime> pu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, pt_);
                                         CqlDateTime pv_ = context.Operators.Start(pu_);
-                                        return !((bool?)(pv_ is null));
+                                        return pv_ is not null;
                                     }
 
                                     return pr_
@@ -2418,7 +2418,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                         Period qp_ = Visit?.Period;
                                         CqlInterval<CqlDateTime> qq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, qp_);
                                         CqlDateTime qr_ = context.Operators.Start(qq_);
-                                        return !((bool?)(qr_ is null));
+                                        return qr_ is not null;
                                     }
 
                                     return qn_
@@ -2472,7 +2472,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                             Period ry_ = Visit?.Period;
                                             CqlInterval<CqlDateTime> rz_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ry_);
                                             CqlDateTime sa_ = context.Operators.Start(rz_);
-                                            return !((bool?)(sa_ is null));
+                                            return sa_ is not null;
                                         }
 
                                         return rw_
@@ -2500,7 +2500,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 Period rf_ = Visit?.Period;
                                 CqlInterval<CqlDateTime> rg_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, rf_);
                                 CqlDateTime rh_ = context.Operators.Start(rg_);
-                                return !((bool?)((re_ ?? rh_) is null));
+                                return (re_ ?? rh_) is not null;
                             }
 
                             return pb_
@@ -2550,7 +2550,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 Period sx_ = Visit?.Period;
                                 CqlInterval<CqlDateTime> sy_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, sx_);
                                 CqlDateTime sz_ = context.Operators.Start(sy_);
-                                return !((bool?)(sz_ is null));
+                                return sz_ is not null;
                             }
 
                             return sv_
@@ -2578,7 +2578,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     Period ns_ = Visit?.Period;
                     CqlInterval<CqlDateTime> nt_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ns_);
                     CqlDateTime nu_ = context.Operators.Start(nt_);
-                    return !((bool?)((nh_ ?? nr_ ?? nu_) is null));
+                    return (nh_ ?? nr_ ?? nu_) is not null;
                 }
 
                 return cg_
@@ -2637,7 +2637,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 Period ve_ = Visit?.Period;
                                 CqlInterval<CqlDateTime> vf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ve_);
                                 CqlDateTime vg_ = context.Operators.Start(vf_);
-                                return !((bool?)(vg_ is null));
+                                return vg_ is not null;
                             }
 
                             return vc_
@@ -2690,7 +2690,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 Period wa_ = Visit?.Period;
                                 CqlInterval<CqlDateTime> wb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, wa_);
                                 CqlDateTime wc_ = context.Operators.Start(wb_);
-                                return !((bool?)(wc_ is null));
+                                return wc_ is not null;
                             }
 
                             return vy_
@@ -2744,7 +2744,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     Period xj_ = Visit?.Period;
                                     CqlInterval<CqlDateTime> xk_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, xj_);
                                     CqlDateTime xl_ = context.Operators.Start(xk_);
-                                    return !((bool?)(xl_ is null));
+                                    return xl_ is not null;
                                 }
 
                                 return xh_
@@ -2772,7 +2772,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         Period wq_ = Visit?.Period;
                         CqlInterval<CqlDateTime> wr_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, wq_);
                         CqlDateTime ws_ = context.Operators.Start(wr_);
-                        return !((bool?)((wp_ ?? ws_) is null));
+                        return (wp_ ?? ws_) is not null;
                     }
 
                     return um_
@@ -2822,7 +2822,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         Period yi_ = Visit?.Period;
                         CqlInterval<CqlDateTime> yj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, yi_);
                         CqlDateTime yk_ = context.Operators.Start(yj_);
-                        return !((bool?)(yk_ is null));
+                        return yk_ is not null;
                     }
 
                     return yg_
@@ -2909,7 +2909,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 Period cb_ = Visit?.Period;
                                 CqlInterval<CqlDateTime> cc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cb_);
                                 CqlDateTime cd_ = context.Operators.Start(cc_);
-                                return !((bool?)(cd_ is null));
+                                return cd_ is not null;
                             }
 
                             return bz_
@@ -2962,7 +2962,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 Period cx_ = Visit?.Period;
                                 CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cx_);
                                 CqlDateTime cz_ = context.Operators.Start(cy_);
-                                return !((bool?)(cz_ is null));
+                                return cz_ is not null;
                             }
 
                             return cv_
@@ -3016,7 +3016,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     Period eg_ = Visit?.Period;
                                     CqlInterval<CqlDateTime> eh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, eg_);
                                     CqlDateTime ei_ = context.Operators.Start(eh_);
-                                    return !((bool?)(ei_ is null));
+                                    return ei_ is not null;
                                 }
 
                                 return ee_
@@ -3044,7 +3044,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         Period dn_ = Visit?.Period;
                         CqlInterval<CqlDateTime> do_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dn_);
                         CqlDateTime dp_ = context.Operators.Start(do_);
-                        return !((bool?)((dm_ ?? dp_) is null));
+                        return (dm_ ?? dp_) is not null;
                     }
 
                     return bj_
@@ -3094,7 +3094,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         Period ff_ = Visit?.Period;
                         CqlInterval<CqlDateTime> fg_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ff_);
                         CqlDateTime fh_ = context.Operators.Start(fg_);
-                        return !((bool?)(fh_ is null));
+                        return fh_ is not null;
                     }
 
                     return fd_
@@ -3180,7 +3180,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 Period cb_ = Visit?.Period;
                                 CqlInterval<CqlDateTime> cc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cb_);
                                 CqlDateTime cd_ = context.Operators.Start(cc_);
-                                return !((bool?)(cd_ is null));
+                                return cd_ is not null;
                             }
 
                             return bz_
@@ -3233,7 +3233,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                 Period cx_ = Visit?.Period;
                                 CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cx_);
                                 CqlDateTime cz_ = context.Operators.Start(cy_);
-                                return !((bool?)(cz_ is null));
+                                return cz_ is not null;
                             }
 
                             return cv_
@@ -3287,7 +3287,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                                     Period eg_ = Visit?.Period;
                                     CqlInterval<CqlDateTime> eh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, eg_);
                                     CqlDateTime ei_ = context.Operators.Start(eh_);
-                                    return !((bool?)(ei_ is null));
+                                    return ei_ is not null;
                                 }
 
                                 return ee_
@@ -3315,7 +3315,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         Period dn_ = Visit?.Period;
                         CqlInterval<CqlDateTime> do_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dn_);
                         CqlDateTime dp_ = context.Operators.Start(do_);
-                        return !((bool?)((dm_ ?? dp_) is null));
+                        return (dm_ ?? dp_) is not null;
                     }
 
                     return bj_
@@ -3365,7 +3365,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         Period ff_ = Visit?.Period;
                         CqlInterval<CqlDateTime> fg_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ff_);
                         CqlDateTime fh_ = context.Operators.Start(fg_);
-                        return !((bool?)(fh_ is null));
+                        return fh_ is not null;
                     }
 
                     return fd_
@@ -3750,7 +3750,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
             bool? h_(Claim @this) {
                 List<Claim.DiagnosisComponent> ac_ = @this?.Diagnosis;
-                return !((bool?)(ac_ is null));
+                return ac_ is not null;
             }
 
 
@@ -3804,7 +3804,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
                 bool? aj_(Claim @this) {
                     List<Claim.ItemComponent> bj_ = @this?.Item;
-                    return !((bool?)(bj_ is null));
+                    return bj_ is not null;
                 }
 
 
@@ -3833,7 +3833,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     }
 
                     IEnumerable<int?> bp_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)bn_, bo_);
-                    return !((bool?)(bp_ is null));
+                    return bp_ is not null;
                 }
 
 
@@ -4068,7 +4068,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
             bool? h_(Claim @this) {
                 List<Claim.ProcedureComponent> ad_ = @this?.Procedure;
-                return !((bool?)(ad_ is null));
+                return ad_ is not null;
             }
 
 
@@ -4122,7 +4122,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
                 bool? ak_(Claim @this) {
                     List<Claim.ItemComponent> bl_ = @this?.Item;
-                    return !((bool?)(bl_ is null));
+                    return bl_ is not null;
                 }
 
 
@@ -4151,7 +4151,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     }
 
                     IEnumerable<int?> br_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)bp_, bq_);
-                    return !((bool?)(br_ is null));
+                    return br_ is not null;
                 }
 
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS130FHIRColorectalCancerScrn", "1.0.000")]
 public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISingleton<CMS130FHIRColorectalCancerScrn_1_0_000>
 {
@@ -351,7 +351,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 return l_;
             }
 
-            return (CqlBoolean)(!((bool?)(g_ is null)))
+            return (CqlBoolean)(g_ is not null)
                 /* CQL 'and' (65:5-66:83) */ && h_();
         }
 
@@ -415,7 +415,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 return q_;
             }
 
-            return (CqlBoolean)(!((bool?)(g_ is null)))
+            return (CqlBoolean)(g_ is not null)
                 /* CQL 'and' (102:5-103:132) */ && h_();
         }
 

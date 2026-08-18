@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("HybridHWMFHIR", "0.102.005")]
 public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHIR_0_102_005>
 {
@@ -342,10 +342,10 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     return ax_;
                 }
 
-                return (CqlBoolean)(!((bool?)(af_ is null)))
+                return (CqlBoolean)(af_ is not null)
                     /* CQL 'and' (120:13-120:232) */ && ag_()
                     /* CQL 'and' (120:13-121:60) */ && ah_()
-                    /* CQL 'and' (120:7-122:32) */ && !((bool?)(Exam?.Value is null));
+                    /* CQL 'and' (120:7-122:32) */ && (Exam?.Value is not null);
             }
 
             IEnumerable<Observation> k_ = context.Operators.Where<Observation>(ExamList, j_);
@@ -399,10 +399,10 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     return bv_;
                 }
 
-                return (CqlBoolean)(!((bool?)(bd_ is null)))
+                return (CqlBoolean)(bd_ is not null)
                     /* CQL 'and' (120:13-120:232) */ && be_()
                     /* CQL 'and' (120:13-121:60) */ && bf_()
-                    /* CQL 'and' (120:7-122:32) */ && !((bool?)(Exam?.Value is null));
+                    /* CQL 'and' (120:7-122:32) */ && (Exam?.Value is not null);
             }
 
             IEnumerable<Observation> u_ = context.Operators.Where<Observation>(ExamList, t_);
@@ -472,10 +472,10 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     return as_;
                 }
 
-                return (CqlBoolean)(!((bool?)(ac_ is null)))
+                return (CqlBoolean)(ac_ is not null)
                     /* CQL 'and' (112:13-112:149) */ && ad_()
                     /* CQL 'and' (112:13-113:59) */ && ae_()
-                    /* CQL 'and' (112:7-113:85) */ && !((bool?)(Lab?.Value is null));
+                    /* CQL 'and' (112:7-113:85) */ && (Lab?.Value is not null);
             }
 
             IEnumerable<Observation> k_ = context.Operators.Where<Observation>(LabList, j_);
@@ -523,10 +523,10 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     return bk_;
                 }
 
-                return (CqlBoolean)(!((bool?)(au_ is null)))
+                return (CqlBoolean)(au_ is not null)
                     /* CQL 'and' (112:13-112:149) */ && av_()
                     /* CQL 'and' (112:13-113:59) */ && aw_()
-                    /* CQL 'and' (112:7-113:85) */ && !((bool?)(Lab?.Value is null));
+                    /* CQL 'and' (112:7-113:85) */ && (Lab?.Value is not null);
             }
 
             IEnumerable<Observation> u_ = context.Operators.Where<Observation>(LabList, t_);
@@ -674,7 +674,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                         Period br_ = Visit?.Period;
                         CqlInterval<CqlDateTime> bs_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, br_);
                         CqlDateTime bt_ = context.Operators.Start(bs_);
-                        return !((bool?)(bt_ is null));
+                        return bt_ is not null;
                     }
 
                     return bp_
@@ -717,7 +717,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                         Period ci_ = Visit?.Period;
                         CqlInterval<CqlDateTime> cj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ci_);
                         CqlDateTime ck_ = context.Operators.Start(cj_);
-                        return !((bool?)(ck_ is null));
+                        return ck_ is not null;
                     }
 
                     return cg_
@@ -761,7 +761,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                             Period dm_ = Visit?.Period;
                             CqlInterval<CqlDateTime> dn_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dm_);
                             CqlDateTime do_ = context.Operators.Start(dn_);
-                            return !((bool?)(do_ is null));
+                            return do_ is not null;
                         }
 
                         return dk_
@@ -785,7 +785,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     Period cy_ = Visit?.Period;
                     CqlInterval<CqlDateTime> cz_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cy_);
                     CqlDateTime da_ = context.Operators.Start(cz_);
-                    return !((bool?)((cx_ ?? da_) is null));
+                    return (cx_ ?? da_) is not null;
                 }
 
                 return be_
@@ -825,7 +825,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     Period eg_ = Visit?.Period;
                     CqlInterval<CqlDateTime> eh_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, eg_);
                     CqlDateTime ei_ = context.Operators.Start(eh_);
-                    return !((bool?)(ei_ is null));
+                    return ei_ is not null;
                 }
 
                 return ee_

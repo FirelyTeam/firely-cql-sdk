@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS145FHIRCADBBlockerTPMIorLVSD", "1.0.000")]
 public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingleton<CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000>
 {
@@ -533,7 +533,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     Period u_ = EncounterWithCADProxy?.Period;
                     CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
                     CqlDateTime w_ = context.Operators.Start(v_);
-                    return !((bool?)(w_ is null));
+                    return w_ is not null;
                 }
 
 
@@ -1014,7 +1014,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
                 bool? k_(Dosage @this) {
                     Timing ac_ = @this?.Timing;
-                    return !((bool?)(ac_ is null));
+                    return ac_ is not null;
                 }
 
 
@@ -1027,7 +1027,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
                 bool? n_(Timing @this) {
                     Timing.RepeatComponent ae_ = @this?.Repeat;
-                    return !((bool?)(ae_ is null));
+                    return ae_ is not null;
                 }
 
 
@@ -1041,7 +1041,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 bool? q_(Timing.RepeatComponent @this) {
                     DataType ag_ = @this?.Bounds;
                     object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                    return !((bool?)(ah_ is null));
+                    return ah_ is not null;
                 }
 
 
@@ -1169,7 +1169,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
                 bool? k_(Dosage @this) {
                     Timing ac_ = @this?.Timing;
-                    return !((bool?)(ac_ is null));
+                    return ac_ is not null;
                 }
 
 
@@ -1182,7 +1182,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
                 bool? n_(Timing @this) {
                     Timing.RepeatComponent ae_ = @this?.Repeat;
-                    return !((bool?)(ae_ is null));
+                    return ae_ is not null;
                 }
 
 
@@ -1196,7 +1196,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 bool? q_(Timing.RepeatComponent @this) {
                     DataType ag_ = @this?.Bounds;
                     object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                    return !((bool?)(ah_ is null));
+                    return ah_ is not null;
                 }
 
 

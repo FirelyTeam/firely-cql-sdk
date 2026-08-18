@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("NCQAHealthPlanEnrollment", "1.0.0")]
 public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAHealthPlanEnrollment_1_0_0>
 {
@@ -70,7 +70,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
             CqlInterval<CqlDate> m_ = context.Operators.Interval(k_, l_, true, true);
             CqlBoolean n_ = context.Operators.In<CqlDate>(h_, m_, (string)default);
             return n_
-                /* CQL 'and' (24:5-25:55) */ && !((bool?)((context.Operators.Start(tuple_banhuzxcqbuklngedwddhjyv?.Coverage2)) is null));
+                /* CQL 'and' (24:5-25:55) */ && ((context.Operators.Start(tuple_banhuzxcqbuklngedwddhjyv?.Coverage2)) is not null);
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?> d_ = context.Operators.SelectWhere<ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>>, (CqlTupleMetadata, CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)?>(a_, b_, c_);
@@ -124,7 +124,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
         bool? c_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this) {
             IEnumerable<CqlInterval<CqlDate>> l_ = @this?.CollapsedFinal;
-            return !((bool?)(l_ is null));
+            return l_ is not null;
         }
 
 
@@ -199,7 +199,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         }
 
         IEnumerable<Coverage> b_ = context.Operators.Where<Coverage>(Coverage, a_);
-        bool? c_(Coverage HPCoverageResource) => !((bool?)(HPCoverageResource is null));
+        bool? c_(Coverage HPCoverageResource) => HPCoverageResource is not null;
         IEnumerable<Coverage> d_ = context.Operators.Where<Coverage>(b_, c_);
         return d_;
     }
@@ -214,7 +214,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
             bool? b_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this) {
                 IEnumerable<CqlInterval<CqlDate>> h_ = @this?.CollapsedFinal;
-                return !((bool?)(h_ is null));
+                return h_ is not null;
             }
 
 
@@ -239,7 +239,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
             bool? k_(Coverage @this) {
                 Period p_ = @this?.Period;
-                return !((bool?)(p_ is null));
+                return p_ is not null;
             }
 
 
@@ -283,7 +283,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
         bool? c_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this) {
             IEnumerable<CqlInterval<CqlDate>> l_ = @this?.CollapsedFinal;
-            return !((bool?)(l_ is null));
+            return l_ is not null;
         }
 
 
@@ -340,7 +340,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         }
 
         IEnumerable<Coverage> b_ = context.Operators.Where<Coverage>(Coverage, a_);
-        bool? c_(Coverage pharmacyCoverageResource) => !((bool?)(pharmacyCoverageResource is null));
+        bool? c_(Coverage pharmacyCoverageResource) => pharmacyCoverageResource is not null;
         IEnumerable<Coverage> d_ = context.Operators.Where<Coverage>(b_, c_);
         return d_;
     }
@@ -354,7 +354,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
         bool? c_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this) {
             IEnumerable<CqlInterval<CqlDate>> l_ = @this?.CollapsedFinal;
-            return !((bool?)(l_ is null));
+            return l_ is not null;
         }
 
 
@@ -411,7 +411,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         }
 
         IEnumerable<Coverage> b_ = context.Operators.Where<Coverage>(Coverage, a_);
-        bool? c_(Coverage mentalHealthCoverageResource) => !((bool?)(mentalHealthCoverageResource is null));
+        bool? c_(Coverage mentalHealthCoverageResource) => mentalHealthCoverageResource is not null;
         IEnumerable<Coverage> d_ = context.Operators.Where<Coverage>(b_, c_);
         return d_;
     }

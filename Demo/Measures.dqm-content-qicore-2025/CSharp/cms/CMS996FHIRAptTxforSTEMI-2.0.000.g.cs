@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS996FHIRAptTxforSTEMI", "2.0.000")]
 public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS996FHIRAptTxforSTEMI_2_0_000>
 {
@@ -404,7 +404,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool? s_(Condition @this) {
                         CodeableConcept y_ = @this?.Code;
                         CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
-                        return !((bool?)(z_ is null));
+                        return z_ is not null;
                     }
 
 
@@ -515,7 +515,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             /* CQL 'or' (160:74-162:11) */ || w_();
                     }
 
-                    return (CqlBoolean)((bool?)(p_ is null))
+                    return (CqlBoolean)(p_ is null)
                         /* CQL 'implies' (160:13-163:9) */ || q_();
                 }
 
@@ -730,7 +730,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         Period at_ = EDwithSTEMI?.Period;
                         CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, at_);
                         CqlDateTime av_ = context.Operators.Start(au_);
-                        return !((bool?)(av_ is null));
+                        return av_ is not null;
                     }
 
                     return ar_
@@ -880,7 +880,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         Period ba_ = EDwithSTEMI?.Period;
                         CqlInterval<CqlDateTime> bb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ba_);
                         CqlDateTime bc_ = context.Operators.Start(bb_);
-                        return !((bool?)(bc_ is null));
+                        return bc_ is not null;
                     }
 
                     return ay_
@@ -965,7 +965,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     Period aa_ = EDwithSTEMI?.Period;
                     CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aa_);
                     CqlDateTime ac_ = context.Operators.Start(ab_);
-                    return !((bool?)(ac_ is null));
+                    return ac_ is not null;
                 }
 
 
@@ -1149,7 +1149,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         Period ap_ = EDwithSTEMI?.Period;
                         CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ap_);
                         CqlDateTime ar_ = context.Operators.Start(aq_);
-                        return !((bool?)(ar_ is null));
+                        return ar_ is not null;
                     }
 
                     return ah_
@@ -1289,7 +1289,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     Period z_ = EDwithSTEMI?.Period;
                     CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
                     CqlDateTime ab_ = context.Operators.Start(aa_);
-                    return !((bool?)(ab_ is null));
+                    return ab_ is not null;
                 }
 
 
@@ -1539,7 +1539,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         Period dl_ = EDwSTEMI?.Period;
                         CqlInterval<CqlDateTime> dm_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dl_);
                         CqlDateTime dn_ = context.Operators.Start(dm_);
-                        return !((bool?)(dn_ is null));
+                        return dn_ is not null;
                     }
 
                     return dj_
@@ -2027,7 +2027,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     Period aa_ = EDLocation?.Period;
                     CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aa_);
                     CqlDateTime ac_ = context.Operators.Start(ab_);
-                    return !((bool?)(ac_ is null));
+                    return ac_ is not null;
                 }
 
                 return (q_
@@ -2118,7 +2118,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ah_, aj_, false, true);
                     CqlBoolean al_ = context.Operators.In<CqlDateTime>(ag_, ak_, (string)default);
                     return al_
-                        /* CQL 'and' (274:13-274:141) */ && !((bool?)((this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI)) is null));
+                        /* CQL 'and' (274:13-274:141) */ && ((this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI)) is not null);
                 }
 
                 return ab_
@@ -2202,7 +2202,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 }
 
                 return o_
-                    /* CQL 'and' (302:17-302:130) */ && !((bool?)((this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI)) is null))
+                    /* CQL 'and' (302:17-302:130) */ && ((this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI)) is not null)
                     /* CQL 'and' (302:17-303:36) */ && p_();
             }
 
@@ -2255,7 +2255,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     Period aa_ = EDLocation?.Period;
                     CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aa_);
                     CqlDateTime ac_ = context.Operators.End(ab_);
-                    return !((bool?)(ac_ is null));
+                    return ac_ is not null;
                 }
 
                 return (q_
@@ -2313,7 +2313,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             }
 
             return i_
-                /* CQL 'and' (170:11-170:141) */ && !((bool?)((this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI)) is null))
+                /* CQL 'and' (170:11-170:141) */ && ((this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI)) is not null)
                 /* CQL 'and' (170:5-171:96) */ && j_();
         }
 

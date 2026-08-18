@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS124FHIRCervicalCancerScreen", "1.0.000")]
 public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISingleton<CMS124FHIRCervicalCancerScreen_1_0_000>
 {
@@ -384,7 +384,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
             CqlBoolean o_() {
                 DataType t_ = CervicalCytology?.Value;
                 object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                return !((bool?)(u_ is null));
+                return u_ is not null;
             }
 
             return n_
@@ -488,7 +488,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
             CqlBoolean p_() {
                 DataType ah_ = HPVTest?.Value;
                 object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                return !((bool?)(ai_ is null));
+                return ai_ is not null;
             }
 
             return n_

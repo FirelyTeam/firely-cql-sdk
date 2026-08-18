@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS646FHIRIntravesicalBCGTherapy", "1.0.000")]
 public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingleton<CMS646FHIRIntravesicalBCGTherapy_1_0_000>
 {
@@ -237,7 +237,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 /* CQL 'or' (216:52-220:3) */ || k_();
         }
 
-        return (CqlBoolean)((bool?)(b_ is null))
+        return (CqlBoolean)(b_ is null)
             /* CQL 'implies' (216:3-220:3) */ || c_();
     }
 
@@ -584,7 +584,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 return ah_;
             }
 
-            return (CqlBoolean)(!((bool?)(d_ is null)))
+            return (CqlBoolean)(d_ is not null)
                 /* CQL 'and' (178:13-183:9) */ && e_()
                 /* CQL 'and' (178:7-184:76) */ && f_();
         }
@@ -897,7 +897,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                 bool? ac_(Dosage @this) {
                     Timing be_ = @this?.Timing;
-                    return !((bool?)(be_ is null));
+                    return be_ is not null;
                 }
 
 
@@ -936,7 +936,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                 bool? ak_(Dosage @this) {
                     Timing bp_ = @this?.Timing;
-                    return !((bool?)(bp_ is null));
+                    return bp_ is not null;
                 }
 
 
@@ -949,7 +949,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                 bool? an_(Timing @this) {
                     Timing.RepeatComponent br_ = @this?.Repeat;
-                    return !((bool?)(br_ is null));
+                    return br_ is not null;
                 }
 
 
@@ -963,7 +963,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 bool? aq_(Timing.RepeatComponent @this) {
                     DataType bt_ = @this?.Bounds;
                     object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                    return !((bool?)(bu_ is null));
+                    return bu_ is not null;
                 }
 
 
@@ -1242,7 +1242,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     }
                     CqlInterval<CqlDateTime> ar_ = QICoreCommon_4_0_000.Instance.toInterval(context, aq_);
                     CqlDateTime as_ = context.Operators.Start(ar_);
-                    return !((bool?)(as_ is null));
+                    return as_ is not null;
                 }
 
                 return w_
@@ -1459,7 +1459,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                 bool? al_(Dosage @this) {
                     Timing bm_ = @this?.Timing;
-                    return !((bool?)(bm_ is null));
+                    return bm_ is not null;
                 }
 
 
@@ -1472,7 +1472,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                 bool? ao_(Timing @this) {
                     Timing.RepeatComponent bo_ = @this?.Repeat;
-                    return !((bool?)(bo_ is null));
+                    return bo_ is not null;
                 }
 
 
@@ -1486,7 +1486,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 bool? ar_(Timing.RepeatComponent @this) {
                     DataType bq_ = @this?.Bounds;
                     object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
-                    return !((bool?)(br_ is null));
+                    return br_ is not null;
                 }
 
 
@@ -1634,7 +1634,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     }
                     CqlInterval<CqlDateTime> cj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ci_);
                     CqlDateTime ck_ = context.Operators.Start(cj_);
-                    return !((bool?)(ck_ is null));
+                    return ck_ is not null;
                 }
 
                 return bk_
@@ -1839,7 +1839,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     }
                     CqlInterval<CqlDateTime> em_ = QICoreCommon_4_0_000.Instance.toInterval(context, el_);
                     CqlDateTime en_ = context.Operators.Start(em_);
-                    return !((bool?)(en_ is null));
+                    return en_ is not null;
                 }
 
                 return dr_
@@ -2062,7 +2062,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     }
                     CqlInterval<CqlDateTime> at_ = QICoreCommon_4_0_000.Instance.toInterval(context, as_);
                     CqlDateTime au_ = context.Operators.Start(at_);
-                    return !((bool?)(au_ is null));
+                    return au_ is not null;
                 }
 
                 return aa_
@@ -2280,7 +2280,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     }
                     CqlInterval<CqlDateTime> bh_ = QICoreCommon_4_0_000.Instance.toInterval(context, bg_);
                     CqlDateTime bi_ = context.Operators.Start(bh_);
-                    return !((bool?)(bi_ is null));
+                    return bi_ is not null;
                 }
 
 
@@ -2342,7 +2342,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     private bool? Numerator_Compute(CqlContext context)
     {
         MedicationAdministration a_ = this.First_BCG_Administered(context);
-        return !((bool?)(a_ is null));
+        return a_ is not null;
     }
 
 

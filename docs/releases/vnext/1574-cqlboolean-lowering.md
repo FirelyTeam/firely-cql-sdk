@@ -49,9 +49,30 @@
   `if (chain)` uses `CqlBoolean`'s `operator true`, which is exactly what `?? false` meant, so
   neither the conversion nor the coalesce is emitted. 51 `?? false` remain, on operands that are not
   CQL Booleans. (#1514)
-- `GeneratorToolVersion` is now **5.3.5.0**. Previously generated libraries keep working unchanged:
+- A **negated null test** now emits the null pattern's complement instead of a three-valued negation
+  of it: `quantity?.ComparatorElement is not null`, where the previous shape spent four conversions
+  and a coalesce on the same question.
+
+  ```csharp
+  // before
+  else if (((bool?)(!((bool?)(quantity?.ComparatorElement is null)))) ?? false)
+  // after
+  else if (quantity?.ComparatorElement is not null)
+  ```
+
+  `x is null` is already a plain `bool` — there is no CQL Boolean in a null test at all — so the
+  `(bool?)` lift existed only to make the *lifted* `!` applicable, and the consuming condition then
+  had to coalesce the result back down. Complementing the comparison instead (`==` → `!=`) removes
+  both, because `!(x is null)` **is** `x is not null`. Across the checked-in corpora that takes
+  lifted negations from 775 to **26**, `(bool?)` conversions from 841 to **48**, and `?? false` from
+  51 to **40**. `not` over anything that genuinely is three-valued is unaffected and still
+  emits the lifted `!`. The same fold applies to `implies`, whose left operand is negated a second
+  time, so `(not (X is null)) implies Y` emits `X is null` rather than re-negating the complement.
+  (#1576)
+- `GeneratorToolVersion` is now **5.3.7.0**. Previously generated libraries keep working unchanged:
   the invoker toolkit accepts any version in `[5.1.0.0, 5.4.0.0)`. Patch rather than minor because
-  the generated API — every emitted signature — is unchanged; only method-body locals move. (#1514)
+  the generated API — every emitted signature — is unchanged; only method-body locals move. (#1514,
+  #1576)
 
 ## Other
 

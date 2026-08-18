@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS349FHIRHIVScreening", "1.1.000")]
 public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS349FHIRHIVScreening_1_1_000>
 {
@@ -267,7 +267,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                     /* CQL 'or' (64:11-67:7) */ || al_();
             }
 
-            return (CqlBoolean)(!((bool?)(j_ is null)))
+            return (CqlBoolean)(j_ is not null)
                 /* CQL 'and' (61:11-62:93) */ && k_()
                 /* CQL 'and' (61:11-63:91) */ && l_()
                 /* CQL 'and' (61:5-67:7) */ && m_();
@@ -340,7 +340,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                 /* CQL 'or' (87:52-91:3) */ || k_();
         }
 
-        return (CqlBoolean)((bool?)(b_ is null))
+        return (CqlBoolean)(b_ is null)
             /* CQL 'implies' (87:3-91:3) */ || c_();
     }
 

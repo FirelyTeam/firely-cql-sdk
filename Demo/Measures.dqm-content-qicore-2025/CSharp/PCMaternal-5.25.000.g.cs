@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("PCMaternal", "5.25.000")]
 public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_000>
 {
@@ -160,7 +160,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                         Period bt_ = Visit?.Period;
                         CqlInterval<CqlDateTime> bu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bt_);
                         CqlDateTime bv_ = context.Operators.Start(bu_);
-                        return !((bool?)(bv_ is null));
+                        return bv_ is not null;
                     }
 
 
@@ -213,7 +213,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                         Period cp_ = Visit?.Period;
                         CqlInterval<CqlDateTime> cq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cp_);
                         CqlDateTime cr_ = context.Operators.Start(cq_);
-                        return !((bool?)(cr_ is null));
+                        return cr_ is not null;
                     }
 
 
@@ -267,7 +267,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                             Period dy_ = Visit?.Period;
                             CqlInterval<CqlDateTime> dz_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dy_);
                             CqlDateTime ea_ = context.Operators.Start(dz_);
-                            return !((bool?)(ea_ is null));
+                            return ea_ is not null;
                         }
 
 
@@ -301,7 +301,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     Period dj_ = Visit?.Period;
                     CqlInterval<CqlDateTime> dk_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dj_);
                     CqlDateTime dl_ = context.Operators.Start(dk_);
-                    return !((bool?)((di_ ?? dl_) is null));
+                    return (di_ ?? dl_) is not null;
                 }
 
 
@@ -351,7 +351,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     Period fb_ = Visit?.Period;
                     CqlInterval<CqlDateTime> fc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fb_);
                     CqlDateTime fd_ = context.Operators.Start(fc_);
-                    return !((bool?)(fd_ is null));
+                    return fd_ is not null;
                 }
 
 
@@ -553,7 +553,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 return af_;
             }
 
-            return (CqlBoolean)(!((bool?)((l_ as CqlDateTime) is null)))
+            return (CqlBoolean)((l_ as CqlDateTime) is not null)
                 /* CQL 'and' (93:13-94:72) */ && m_()
                 /* CQL 'and' (93:13-95:112) */ && n_()
                 /* CQL 'and' (93:7-96:107) */ && o_();
@@ -661,10 +661,10 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 CqlInterval<CqlDateTime> y_ = context.Operators.Interval(x_, v_, true, true);
                 CqlBoolean z_ = context.Operators.In<CqlDateTime>(u_, y_, (string)default);
                 return z_
-                    /* CQL 'and' (74:13-74:123) */ && !((bool?)((this.lastTimeOfDelivery(context, TheEncounter)) is null));
+                    /* CQL 'and' (74:13-74:123) */ && ((this.lastTimeOfDelivery(context, TheEncounter)) is not null);
             }
 
-            return (CqlBoolean)(!((bool?)((l_ as CqlDateTime) is null)))
+            return (CqlBoolean)((l_ as CqlDateTime) is not null)
                 /* CQL 'and' (72:13-73:81) */ && m_()
                 /* CQL 'and' (72:7-74:123) */ && n_();
         }
@@ -778,7 +778,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
             CqlBoolean q_() {
                 DataType x_ = EstimatedGestationalAge?.Value;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                return !((bool?)(y_ is null));
+                return y_ is not null;
             }
 
 
@@ -866,7 +866,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 CqlBoolean aj_() {
                     DataType aw_ = EstimatedGestationalAge?.Value;
                     object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
-                    return !((bool?)(ax_ is null));
+                    return ax_ is not null;
                 }
 
                 return ah_
@@ -875,7 +875,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
             }
 
             return (p_
-                /* CQL 'and' (82:4-82:77) */ && !((bool?)((this.lastTimeOfDelivery(context, TheEncounter)) is null))
+                /* CQL 'and' (82:4-82:77) */ && ((this.lastTimeOfDelivery(context, TheEncounter)) is not null)
                 /* CQL 'and' (82:4-83:47) */ && q_()
                 /* CQL 'and' (82:3-84:76) */ && r_())
                 /* CQL 'or' (81:64-87:52) */ || s_();

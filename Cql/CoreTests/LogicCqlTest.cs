@@ -11,6 +11,9 @@
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.CqlToElm;
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 
@@ -642,6 +645,85 @@ public class LogicCqlTest
         Assert.IsFalse(
             System.Text.RegularExpressions.Regex.IsMatch(generated, @"\(\(bool\?\)\w+_\) \?\? false"),
             "A CqlBoolean local is converted back to bool? just to coalesce; IsTrue answers that in the type.");
+    }
+
+    /// <summary>
+    /// <c>not (X is null)</c> emits the null pattern's COMPLEMENT rather than a three-valued
+    /// negation of it (#1576): <c>X is not null</c>, with no <c>(bool?)</c> lift to make the lifted
+    /// <c>!</c> applicable and no <c>?? false</c> to bring the result back down. The complement is a
+    /// total <see cref="bool"/> — there is no CQL Boolean anywhere in a null test — so all four
+    /// conversions the old shape needed are simply unnecessary.
+    ///
+    /// <para>The three cases pinned here are the three that broke while this was implemented, each
+    /// in its own way:</para>
+    /// <list type="number">
+    /// <item>the plain condition, where the emitted form is the point;</item>
+    /// <item><c>(not (X is null)) implies Y</c>, where <c>implies</c> negates its left operand AGAIN
+    /// and must produce <c>X is null</c> — re-negating the complement into
+    /// <c>!((bool?)(X is not null))</c> is worse than what it replaced;</item>
+    /// <item><c>where not (X is null)</c>, where the predicate reaches
+    /// <c>ICqlOperators.Where</c> as a METHOD GROUP whose delegate conversion needs the return type
+    /// to match <c>Func&lt;T, bool?&gt;</c> exactly — a <see cref="bool"/>-returning predicate does
+    /// not bind at all, and the failure is a build error rather than an ugly emission.</item>
+    /// </list>
+    /// Generation is the assertion for (3): binding happens during it, so reaching the C# at all is
+    /// what proves the predicate still binds.
+    /// </summary>
+    [TestMethod]
+    public void GeneratedCSharp_NegatedNullTest_EmitsTheComplementPattern()
+    {
+        var generated = GenerateFromCql("""
+            library NegatedNullTest version '1.0.0'
+
+            define Thing: null as System.String
+
+            define NotNull: if not (Thing is null) then 1 else 2
+
+            define NotNullImplies: (not (Thing is null)) implies (Thing = 'x')
+
+            define WhereNotNull: ({ Thing }) T where not (T is null)
+            """);
+
+        StringAssert.Contains(
+            ExtractComputeMethod(generated, "NotNull"),
+            "is not null",
+            "Expected `not (X is null)` to emit the `is not null` pattern.");
+
+        // The lift and the coalesce are what the complement makes unnecessary — neither may appear
+        // anywhere in this library, whose every Boolean is a null test.
+        Assert.IsFalse(
+            generated.Contains("!((bool?)"),
+            "A negated null test still lifts to bool? so the lifted `!` applies; the complement needs no lift.");
+        Assert.IsFalse(
+            generated.Contains("?? false"),
+            "A negated null test is still coalesced back down; `is not null` is already a total bool.");
+
+        // implies negates its left operand a second time, which must land back on `is null` rather
+        // than negate the complement.
+        var implies = ExtractComputeMethod(generated, "NotNullImplies");
+        StringAssert.Contains(
+            implies,
+            "is null",
+            "Expected `(not (X is null)) implies Y` to emit `X is null` for its negated left operand.");
+        Assert.IsFalse(
+            System.Text.RegularExpressions.Regex.IsMatch(implies, @"!\(*\w[^;]*is not null"),
+            "implies re-negated the complement instead of folding back to the plain null test.");
+    }
+
+    /// <summary>The C# generated from inline CQL, for shape assertions that need a construct the
+    /// checked-in <c>LogicTest</c> fixture does not contain.</summary>
+    private static string GenerateFromCql(string cql)
+    {
+        var cqlToolkit = new CqlToolkit(config: new CqlToolkitConfig([CqlModel.ElmR1, CqlModel.Fhir401]))
+                         .AddCqlLibraries([CqlLibraryString.Parse(cql)])
+                         .TranslateToElm();
+
+        return new ElmToolkit()
+               .AddElmLibraries([cqlToolkit.GetCqlToolkitResults().First().elmLibrary])
+               .CompileToAssemblies()
+               .GetElmToCSharpResults()
+               .Single()
+               .cSharp;
     }
 
     private static string ExtractComputeMethod(string code, string methodName)

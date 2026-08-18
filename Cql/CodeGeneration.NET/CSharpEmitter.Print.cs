@@ -478,14 +478,16 @@ internal partial class CSharpEmitter
                     ? leftCast.Operand
                     : SimplifyCoalesceLeft(binary.Left);
 
-            // NOTE: a negation's `(bool?)` conversion is deliberately NOT stripped here, even though
-            // it reads as noise — `(!((bool?)(x is null))) ?? false` would be nicer as
-            // `x is not null`. Doing it by rebuilding the node (`new CodeUnary(Not, inner)`) is what
-            // it appears to need, and that is a trap: PrintBoth prints every node TWICE, once for
-            // the output and once for the dedup key, so a freshly allocated node defeats the
+            // NOTE: a negated null test arrives here as a `bool`-typed Equal/NotEqual under that
+            // same `bool` -> `bool?` cast, NOT as a CodeUnary — the builder complements the
+            // comparison instead of negating it (#1576, ComplementOfNullTest), so the unwrap above
+            // exposes a non-nullable left operand and the early return below drops the `?? false`
+            // outright: `x is not null`, not `(!((bool?)(x is null))) ?? false`. That fold has to be
+            // the builder's. Doing it here by rebuilding the node (`new CodeUnary(Not, inner)`) is
+            // what it appears to need, and that is a trap: PrintBoth prints every node TWICE, once
+            // for the output and once for the dedup key, so a freshly allocated node defeats the
             // reference-keyed memo and its operand is linearized twice — which hoisted the operand's
-            // local function twice and left one copy unreferenced (CS8321). Any fix has to keep node
-            // identity stable, so it belongs in the builder rather than here.
+            // local function twice and left one copy unreferenced (CS8321).
 
             if (!CodeTypeRules.IsNullAssignable(leftExpression.Type))
                 return child(leftExpression).Code;
@@ -691,9 +693,10 @@ internal partial class CSharpEmitter
         // NOTE: the `(bool?)` conversion the builder puts under a lifted `!` is deliberately NOT
         // stepped over. Doing so makes the printed form bool-typed while the node stays bool?, and
         // the coalesce that consumes the condition then emits `?? false` over a bool — CS0019, 72
-        // sites. Printed type has to keep matching node type here, so a negated null test still
-        // reads `!((bool?)(x is null))` rather than `x is not null`; folding that needs the builder
-        // to stop lifting in the first place.
+        // sites. Printed type has to keep matching node type here. A negated null test therefore
+        // never reaches this method at all: the builder complements the comparison rather than
+        // wrapping it in a `!` (#1576, ComplementOfNullTest), which is what makes `x is not null`
+        // reachable — the type travels with the node, so nothing diverges.
 
         // !!x is x. Reachable because `implies` negates its left operand, which may itself already
         // be a negated test. Sound for three-valued logic too: Kleene negation is self-inverse
@@ -722,19 +725,6 @@ internal partial class CSharpEmitter
             _ => null,
         };
     }
-
-    /// <summary>
-    /// <paramref name="node"/> without a <c>bool</c>-to-<c>bool?</c> conversion around it. That
-    /// conversion exists only so the builder's LIFTED operators apply; wherever the lift is being
-    /// expressed differently — a folded negation, or a conversion straight to
-    /// <see cref="CqlBoolean"/>, which <c>bool</c> reaches in one step — it is pure noise.
-    /// </summary>
-    private static CodeExpression WithoutPlainBoolLift(CodeExpression node) =>
-        node is CodeCast { Kind: CodeCastKind.Cast, Type: var castType, Operand: { } inner }
-        && CodeTypeRules.IsNullableBool(castType)
-        && CodeTypeRules.IsPlainBool(inner.Type)
-            ? inner
-            : node;
 
     private static CodeExpression SimplifyCoalesceLeft(CodeExpression expression)
     {

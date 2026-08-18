@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("Status", "1.15.000")]
 public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
 {
@@ -130,7 +130,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                     /* CQL 'or' (26:7-30:7) */ || m_();
             }
 
-            return (CqlBoolean)((bool?)(d_ is null))
+            return (CqlBoolean)(d_ is null)
                 /* CQL 'implies' (25:5-30:7) */ || e_();
         }
 

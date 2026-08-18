@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS1056FHIRCTClinical", "1.0.000")]
 public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS1056FHIRCTClinical_1_0_000>
 {
@@ -200,11 +200,11 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
             CqlBoolean e_() {
                 DataType f_ = CTScan?.Value;
                 object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-                return !((bool?)(g_ is null));
+                return g_ is not null;
             }
 
-            return (CqlBoolean)(!((bool?)(d_ is null)))
-                /* CQL 'and' (41:11-42:50) */ && !((bool?)((AlaraCommonFunctions_1_10_000.Instance.sizeAdjustedValue(context, CTScan)) is null))
+            return (CqlBoolean)(d_ is not null)
+                /* CQL 'and' (41:11-42:50) */ && ((AlaraCommonFunctions_1_10_000.Instance.sizeAdjustedValue(context, CTScan)) is not null)
                 /* CQL 'and' (41:5-43:34) */ && e_();
         }
 

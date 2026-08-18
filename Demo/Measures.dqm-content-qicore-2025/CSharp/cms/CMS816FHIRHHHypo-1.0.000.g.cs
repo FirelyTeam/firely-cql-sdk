@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS816FHIRHHHypo", "1.0.000")]
 public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRHHHypo_1_0_000>
 {
@@ -405,7 +405,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
                         }
                     }
                     CqlDateTime bb_ = QICoreCommon_4_0_000.Instance.earliest(context, ba_);
-                    return !((bool?)(bb_ is null));
+                    return bb_ is not null;
                 }
 
                 return aq_
@@ -564,7 +564,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
                     }
                 }
                 CqlDateTime ao_ = QICoreCommon_4_0_000.Instance.earliest(context, an_);
-                return !((bool?)(ao_ is null));
+                return ao_ is not null;
             }
 
 
@@ -705,7 +705,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
                 string k_ = (@this is Resource
                     ? (@this as Resource).IdElement
                     : default)?.Value;
-                return !((bool?)(k_ is null));
+                return k_ is not null;
             }
 
 

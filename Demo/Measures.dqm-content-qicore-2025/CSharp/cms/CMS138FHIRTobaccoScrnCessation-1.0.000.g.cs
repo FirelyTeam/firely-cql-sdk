@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS138FHIRTobaccoScrnCessation", "1.0.000")]
 public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISingleton<CMS138FHIRTobaccoScrnCessation_1_0_000>
 {
@@ -515,7 +515,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     {
         CqlBoolean a_ = this.Initial_Population(context);
         return a_
-            /* CQL 'and' (57:3-58:78) */ && !((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null));
+            /* CQL 'and' (57:3-58:78) */ && ((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is not null);
     }
 
 
@@ -591,8 +591,8 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     private bool? Numerator_1_Compute(CqlContext context)
     {
         Observation a_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User(context);
-        return (CqlBoolean)(!((bool?)(a_ is null)))
-            /* CQL 'or' (70:3-71:77) */ || !((bool?)((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is null));
+        return (CqlBoolean)(a_ is not null)
+            /* CQL 'or' (70:3-71:77) */ || ((this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context)) is not null);
     }
 
 
@@ -900,11 +900,11 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                     /* CQL 'or' (81:13-84:9) */ || h_();
             }
 
-            return (CqlBoolean)(!((bool?)(c_ is null)))
+            return (CqlBoolean)(c_ is not null)
                 /* CQL 'and' (80:8-85:5) */ && d_();
         }
 
-        return (CqlBoolean)(!((bool?)(a_ is null)))
+        return (CqlBoolean)(a_ is not null)
             /* CQL 'or' (79:3-85:5) */ || b_();
     }
 

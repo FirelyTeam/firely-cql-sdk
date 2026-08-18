@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS1188FHIRHIVSTITesting", "1.0.000")]
 public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS1188FHIRHIVSTITesting_1_0_000>
 {
@@ -228,7 +228,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
                 /* CQL 'or' (84:52-88:3) */ || k_();
         }
 
-        return (CqlBoolean)((bool?)(b_ is null))
+        return (CqlBoolean)(b_ is null)
             /* CQL 'implies' (84:3-88:3) */ || c_();
     }
 
@@ -360,7 +360,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
                 return q_;
             }
 
-            return (CqlBoolean)(!((bool?)(f_ is null)))
+            return (CqlBoolean)(f_ is not null)
                 /* CQL 'and' (67:11-68:69) */ && g_()
                 /* CQL 'and' (67:5-69:79) */ && h_();
         }
@@ -433,7 +433,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
                 return q_;
             }
 
-            return (CqlBoolean)(!((bool?)(f_ is null)))
+            return (CqlBoolean)(f_ is not null)
                 /* CQL 'and' (73:11-74:69) */ && g_()
                 /* CQL 'and' (73:5-75:79) */ && h_();
         }
@@ -506,7 +506,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
                 return q_;
             }
 
-            return (CqlBoolean)(!((bool?)(f_ is null)))
+            return (CqlBoolean)(f_ is not null)
                 /* CQL 'and' (79:11-80:68) */ && g_()
                 /* CQL 'and' (79:5-81:78) */ && h_();
         }

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
@@ -224,12 +224,12 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     CqlInterval<CqlDateTime> t_ = context.Operators.Interval(s_, q_, true, false);
                     CqlBoolean u_ = context.Operators.In<CqlDateTime>(o_, t_, (string)default);
                     return u_
-                        /* CQL 'and' (69:51-69:127) */ && !((bool?)((SD?.Occurrence as FhirDateTime) is null));
+                        /* CQL 'and' (69:51-69:127) */ && ((SD?.Occurrence as FhirDateTime) is not null);
                 }
 
                 IEnumerable<Condition> l_ = context.Operators.Where<Condition>((IEnumerable<Condition>)j_, k_);
                 Condition m_ = context.Operators.SingletonFrom<Condition>(l_);
-                return !((bool?)(m_ is null));
+                return m_ is not null;
             }
 
             return g_

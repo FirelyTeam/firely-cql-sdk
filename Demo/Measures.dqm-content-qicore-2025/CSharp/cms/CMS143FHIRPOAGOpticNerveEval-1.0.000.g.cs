@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS143FHIRPOAGOpticNerveEval", "1.0.000")]
 public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton<CMS143FHIRPOAGOpticNerveEval_1_0_000>
 {
@@ -266,7 +266,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 /* CQL 'or' (99:52-103:3) */ || k_();
         }
 
-        return (CqlBoolean)((bool?)(b_ is null))
+        return (CqlBoolean)(b_ is null)
             /* CQL 'implies' (99:3-103:3) */ || c_();
     }
 
@@ -538,7 +538,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 return w_;
             }
 
-            return (CqlBoolean)(!((bool?)(q_ is null)))
+            return (CqlBoolean)(q_ is not null)
                 /* CQL 'and' (72:5-73:78) */ && r_();
         }
 
@@ -594,7 +594,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 return w_;
             }
 
-            return (CqlBoolean)(!((bool?)(q_ is null)))
+            return (CqlBoolean)(q_ is not null)
                 /* CQL 'and' (79:5-80:78) */ && r_();
         }
 

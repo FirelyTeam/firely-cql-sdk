@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CervicalCancerScreeningFHIR", "0.0.005")]
 public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<CervicalCancerScreeningFHIR_0_0_005>
 {
@@ -388,7 +388,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlBoolean z_() {
                     CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
                     CqlDateTime ab_ = context.Operators.End(aa_);
-                    return !((bool?)(ab_ is null));
+                    return ab_ is not null;
                 }
 
                 return y_
@@ -398,7 +398,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             return h_
                 /* CQL 'and' (83:11-86:7) */ && i_()
                 /* CQL 'and' (83:11-87:113) */ && j_()
-                /* CQL 'and' (83:5-88:44) */ && !((bool?)(CervicalCytology?.Value is null));
+                /* CQL 'and' (83:5-88:44) */ && (CervicalCytology?.Value is not null);
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -471,7 +471,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlBoolean ak_() {
                     CqlInterval<CqlDateTime> al_ = this.Measurement_Period(context);
                     CqlDateTime am_ = context.Operators.End(al_);
-                    return !((bool?)(am_ is null));
+                    return am_ is not null;
                 }
 
                 return aj_
@@ -482,7 +482,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 /* CQL 'and' (100:11-103:7) */ && i_()
                 /* CQL 'and' (100:11-104:94) */ && j_()
                 /* CQL 'and' (100:11-105:104) */ && k_()
-                /* CQL 'and' (100:5-106:35) */ && !((bool?)(HPVTest?.Value is null));
+                /* CQL 'and' (100:5-106:35) */ && (HPVTest?.Value is not null);
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -580,7 +580,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlBoolean o_() {
                     CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                     CqlDateTime q_ = context.Operators.End(p_);
-                    return !((bool?)(q_ is null));
+                    return q_ is not null;
                 }
 
                 return n_
@@ -590,7 +590,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             return e_
                 /* CQL 'and' (93:11-94:45) */ && this.isLaboratoryTest(context, CervicalCytology)
                 /* CQL 'and' (93:11-95:102) */ && f_()
-                /* CQL 'and' (93:5-96:44) */ && !((bool?)(CervicalCytology?.Value is null));
+                /* CQL 'and' (93:5-96:44) */ && (CervicalCytology?.Value is not null);
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -648,7 +648,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlBoolean z_() {
                     CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
                     CqlDateTime ab_ = context.Operators.End(aa_);
-                    return !((bool?)(ab_ is null));
+                    return ab_ is not null;
                 }
 
                 return y_
@@ -659,7 +659,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 /* CQL 'and' (110:11-111:36) */ && this.isLaboratoryTest(context, HPVTest)
                 /* CQL 'and' (110:11-112:79) */ && f_()
                 /* CQL 'and' (110:11-113:93) */ && g_()
-                /* CQL 'and' (110:5-114:35) */ && !((bool?)(HPVTest?.Value is null));
+                /* CQL 'and' (110:5-114:35) */ && (HPVTest?.Value is not null);
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);

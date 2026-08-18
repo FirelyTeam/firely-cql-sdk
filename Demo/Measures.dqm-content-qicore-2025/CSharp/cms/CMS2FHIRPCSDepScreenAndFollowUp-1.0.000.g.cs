@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS2FHIRPCSDepScreenAndFollowUp", "1.0.000")]
 public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS2FHIRPCSDepScreenAndFollowUp_1_0_000>
 {
@@ -339,14 +339,14 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     Period z_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
                     CqlDateTime ab_ = context.Operators.Start(aa_);
-                    return !((bool?)(ab_ is null));
+                    return ab_ is not null;
                 }
 
 
                 CqlBoolean x_() {
                     DataType ac_ = AdolescentDepressionScreening?.Value;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    return !((bool?)(ad_ is null));
+                    return ad_ is not null;
                 }
 
 
@@ -413,7 +413,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>((IEnumerable<Observation>)b_, c_);
         Observation e_ = context.Operators.SingletonFrom<Observation>(d_);
-        return !((bool?)(e_ is null));
+        return e_ is not null;
     }
 
 
@@ -479,7 +479,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     Period az_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> ba_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, az_);
                     CqlDateTime bb_ = context.Operators.Start(ba_);
-                    return !((bool?)(bb_ is null));
+                    return bb_ is not null;
                 }
 
 
@@ -626,7 +626,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 Period aa_ = tuple_ewmohjtdtinujhphqjvbwmmhh?.QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aa_);
                 CqlDateTime ac_ = context.Operators.Start(ab_);
-                return !((bool?)(ac_ is null));
+                return ac_ is not null;
             }
 
 
@@ -698,7 +698,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                         Period bf_ = tuple_ewmohjtdtinujhphqjvbwmmhh?.QualifyingEncounter?.Period;
                         CqlInterval<CqlDateTime> bg_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bf_);
                         CqlDateTime bh_ = context.Operators.End(bg_);
-                        return !((bool?)(bh_ is null));
+                        return bh_ is not null;
                     }
 
                     return bd_
@@ -828,14 +828,14 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     Period z_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
                     CqlDateTime ab_ = context.Operators.Start(aa_);
-                    return !((bool?)(ab_ is null));
+                    return ab_ is not null;
                 }
 
 
                 CqlBoolean x_() {
                     DataType ac_ = AdultDepressionScreening?.Value;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    return !((bool?)(ad_ is null));
+                    return ad_ is not null;
                 }
 
 
@@ -902,7 +902,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>((IEnumerable<Observation>)b_, c_);
         Observation e_ = context.Operators.SingletonFrom<Observation>(d_);
-        return !((bool?)(e_ is null));
+        return e_ is not null;
     }
 
 
@@ -968,7 +968,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     Period az_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> ba_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, az_);
                     CqlDateTime bb_ = context.Operators.Start(ba_);
-                    return !((bool?)(bb_ is null));
+                    return bb_ is not null;
                 }
 
 
@@ -1115,7 +1115,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 Period aa_ = tuple_cgtoaqsajoehgwcararimqzsa?.QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aa_);
                 CqlDateTime ac_ = context.Operators.Start(ab_);
-                return !((bool?)(ac_ is null));
+                return ac_ is not null;
             }
 
 
@@ -1187,7 +1187,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                         Period bf_ = tuple_cgtoaqsajoehgwcararimqzsa?.QualifyingEncounter?.Period;
                         CqlInterval<CqlDateTime> bg_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bf_);
                         CqlDateTime bh_ = context.Operators.End(bg_);
-                        return !((bool?)(bh_ is null));
+                        return bh_ is not null;
                     }
 
                     return bd_
@@ -1487,14 +1487,14 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     Period w_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
                     CqlDateTime y_ = context.Operators.Start(x_);
-                    return !((bool?)(y_ is null));
+                    return y_ is not null;
                 }
 
 
                 CqlBoolean u_() {
                     DataType z_ = AdolescentScreening?.Value;
                     object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    return !((bool?)(aa_ is null));
+                    return aa_ is not null;
                 }
 
 
@@ -1647,14 +1647,14 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     Period w_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
                     CqlDateTime y_ = context.Operators.Start(x_);
-                    return !((bool?)(y_ is null));
+                    return y_ is not null;
                 }
 
 
                 CqlBoolean u_() {
                     DataType z_ = AdultScreening?.Value;
                     object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    return !((bool?)(aa_ is null));
+                    return aa_ is not null;
                 }
 
 

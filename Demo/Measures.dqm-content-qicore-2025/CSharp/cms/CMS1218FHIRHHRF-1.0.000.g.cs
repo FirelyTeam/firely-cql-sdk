@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS1218FHIRHHRF", "1.0.000")]
 public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRHHRF_1_0_000>
 {
@@ -285,7 +285,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             CqlBoolean j_() {
                 CodeableConcept q_ = ElectiveEncounter?.Priority;
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                return !((bool?)(r_ is null));
+                return r_ is not null;
             }
 
 
@@ -337,7 +337,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                                 Period bd_ = ElectiveEncounter?.Period;
                                 CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
                                 CqlDateTime bf_ = context.Operators.Start(be_);
-                                return !((bool?)(bf_ is null));
+                                return bf_ is not null;
                             }
 
                             return bb_
@@ -423,7 +423,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 bool? l_(Condition @this) {
                     CodeableConcept q_ = @this?.Code;
                     CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                    return !((bool?)(r_ is null));
+                    return r_ is not null;
                 }
 
 
@@ -492,7 +492,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     CqlBoolean ab_() {
                         CqlInterval<CqlDateTime> ac_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservationAndOutpatientSurgeryService(context, ElectiveEncounter);
                         CqlDateTime ad_ = context.Operators.Start(ac_);
-                        return !((bool?)(ad_ is null));
+                        return ad_ is not null;
                     }
 
                     return aa_
@@ -567,7 +567,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 bool? l_(Condition @this) {
                     CodeableConcept q_ = @this?.Code;
                     CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                    return !((bool?)(r_ is null));
+                    return r_ is not null;
                 }
 
 
@@ -933,7 +933,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 bool? l_(Condition @this) {
                     CodeableConcept q_ = @this?.Code;
                     CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                    return !((bool?)(r_ is null));
+                    return r_ is not null;
                 }
 
 
@@ -1111,7 +1111,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                         }
                         CqlInterval<CqlDateTime> au_ = QICoreCommon_4_0_000.Instance.toInterval(context, at_);
                         CqlDateTime av_ = context.Operators.Start(au_);
-                        return !((bool?)(av_ is null));
+                        return av_ is not null;
                     }
 
                     return ad_
@@ -1281,7 +1281,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                         }
                         CqlInterval<CqlDateTime> cw_ = QICoreCommon_4_0_000.Instance.toInterval(context, cv_);
                         CqlDateTime cx_ = context.Operators.Start(cw_);
-                        return !((bool?)(cx_ is null));
+                        return cx_ is not null;
                     }
 
                     return cf_
@@ -1464,7 +1464,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                         }
                         CqlInterval<CqlDateTime> as_ = QICoreCommon_4_0_000.Instance.toInterval(context, ar_);
                         CqlDateTime at_ = context.Operators.Start(as_);
-                        return !((bool?)(at_ is null));
+                        return at_ is not null;
                     }
 
                     return ab_
@@ -2085,7 +2085,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             }
             CqlInterval<CqlDateTime> aj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ai_);
             CqlDateTime ak_ = context.Operators.End(aj_);
-            return !((bool?)(ak_ is null));
+            return ak_ is not null;
         }
 
         return m_
@@ -2576,7 +2576,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                         string ay_ = (@this is Resource
                             ? (@this as Resource).IdElement
                             : default)?.Value;
-                        return !((bool?)(ay_ is null));
+                        return ay_ is not null;
                     }
 
 
@@ -3596,7 +3596,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                         string as_ = (@this is Resource
                             ? (@this as Resource).IdElement
                             : default)?.Value;
-                        return !((bool?)(as_ is null));
+                        return as_ is not null;
                     }
 
 
@@ -3619,7 +3619,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                             string bb_ = (@this is Resource
                                 ? (@this as Resource).IdElement
                                 : default)?.Value;
-                            return !((bool?)(bb_ is null));
+                            return bb_ is not null;
                         }
 
 
@@ -3925,7 +3925,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                         }
                         CqlInterval<CqlDateTime> bt_ = QICoreCommon_4_0_000.Instance.toInterval(context, bs_);
                         CqlDateTime bu_ = context.Operators.End(bt_);
-                        return !((bool?)(bu_ is null));
+                        return bu_ is not null;
                     }
 
                     return aw_
@@ -3940,7 +3940,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                         string cj_ = (@this is Resource
                             ? (@this as Resource).IdElement
                             : default)?.Value;
-                        return !((bool?)(cj_ is null));
+                        return cj_ is not null;
                     }
 
 
@@ -4042,7 +4042,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
 
             bool? h_(Claim @this) {
                 List<Claim.DiagnosisComponent> ac_ = @this?.Diagnosis;
-                return !((bool?)(ac_ is null));
+                return ac_ is not null;
             }
 
 
@@ -4096,7 +4096,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
 
                 bool? aj_(Claim @this) {
                     List<Claim.ItemComponent> bk_ = @this?.Item;
-                    return !((bool?)(bk_ is null));
+                    return bk_ is not null;
                 }
 
 
@@ -4125,7 +4125,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                     }
 
                     IEnumerable<int?> bq_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)bo_, bp_);
-                    return !((bool?)(bq_ is null));
+                    return bq_ is not null;
                 }
 
 
@@ -4148,7 +4148,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 CqlBoolean au_() {
                     CodeableConcept bw_ = D?.OnAdmission;
                     CqlConcept bx_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bw_);
-                    return !((bool?)(bx_ is null));
+                    return bx_ is not null;
                 }
 
                 return at_
@@ -4268,7 +4268,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 CqlBoolean o_() {
                     DataType q_ = BMI?.Value;
                     CqlQuantity r_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, q_ as Quantity);
-                    return !((bool?)(r_ is null));
+                    return r_ is not null;
                 }
 
 
@@ -4354,7 +4354,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
 
             bool? i_(Claim @this) {
                 List<Claim.ProcedureComponent> ag_ = @this?.Procedure;
-                return !((bool?)(ag_ is null));
+                return ag_ is not null;
             }
 
 
@@ -4378,7 +4378,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             bool? o_(Claim.ProcedureComponent @this) {
                 PositiveInt al_ = @this?.SequenceElement;
                 int? am_ = al_?.Value;
-                return !((bool?)(am_ is null));
+                return am_ is not null;
             }
 
 
@@ -4573,7 +4573,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         CqlInterval<CqlDateTime> d_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservationAndOutpatientSurgeryService(context, encounter);
         CqlBoolean e_ = context.Operators.In<CqlDateTime>(c_, d_, (string)default);
         return e_
-            /* CQL 'and' (704:3-705:36) */ && !((bool?)(((IEnumerable<ResourceReference>)procedure?.PartOf) is null));
+            /* CQL 'and' (704:3-705:36) */ && (((IEnumerable<ResourceReference>)procedure?.PartOf) is not null);
     }
 
 
@@ -4614,7 +4614,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         CqlBoolean e_() {
             DataType j_ = observation?.Value;
             object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
-            return !((bool?)(k_ is null));
+            return k_ is not null;
         }
 
         return d_
@@ -5100,7 +5100,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             CqlBoolean o_() {
                 DataType v_ = FirstBodyMass?.Value;
                 CqlQuantity w_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, v_ as Quantity);
-                return !((bool?)(w_ is null));
+                return w_ is not null;
             }
 
             return m_
@@ -5179,7 +5179,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             CqlBoolean q_() {
                 DataType w_ = FirstTemperature?.Value;
                 CqlQuantity x_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, w_ as Quantity);
-                return !((bool?)(x_ is null));
+                return x_ is not null;
             }
 
             return o_
@@ -5428,7 +5428,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             CqlBoolean q_() {
                 DataType w_ = FirstHeartBeats?.Value;
                 CqlQuantity x_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, w_ as Quantity);
-                return !((bool?)(x_ is null));
+                return x_ is not null;
             }
 
             return o_
@@ -5932,7 +5932,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             CqlBoolean q_() {
                 DataType w_ = FirstRespiration?.Value;
                 CqlQuantity x_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, w_ as Quantity);
-                return !((bool?)(x_ is null));
+                return x_ is not null;
             }
 
             return o_
@@ -6283,7 +6283,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             string l_ = context.Operators.Convert<string>(k_);
             CqlBoolean m_ = context.Operators.Equal(l_, "completed");
             return m_
-                /* CQL 'and' (459:11-460:63) */ && !((bool?)((this.rank(context, tuple_bbumigfyezrerewminccecat?.TheProcedure, tuple_bbumigfyezrerewminccecat?.QualifyingEncounter)) is null))
+                /* CQL 'and' (459:11-460:63) */ && ((this.rank(context, tuple_bbumigfyezrerewminccecat?.TheProcedure, tuple_bbumigfyezrerewminccecat?.QualifyingEncounter)) is not null)
                 /* CQL 'and' (459:5-461:74) */ && this.startsDuringHospitalization(context, tuple_bbumigfyezrerewminccecat?.TheProcedure, tuple_bbumigfyezrerewminccecat?.QualifyingEncounter);
         }
 

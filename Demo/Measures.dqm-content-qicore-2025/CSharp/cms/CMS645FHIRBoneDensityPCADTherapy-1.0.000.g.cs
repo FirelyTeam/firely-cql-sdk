@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS645FHIRBoneDensityPCADTherapy", "1.0.000")]
 public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingleton<CMS645FHIRBoneDensityPCADTherapy_1_0_000>
 {
@@ -204,7 +204,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
             bool? aj_(Dosage @this) {
                 Timing by_ = @this?.Timing;
-                return !((bool?)(by_ is null));
+                return by_ is not null;
             }
 
 
@@ -242,7 +242,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
             bool? aq_(Dosage @this) {
                 Timing cj_ = @this?.Timing;
-                return !((bool?)(cj_ is null));
+                return cj_ is not null;
             }
 
 
@@ -255,7 +255,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
             bool? at_(Timing @this) {
                 Timing.RepeatComponent cl_ = @this?.Repeat;
-                return !((bool?)(cl_ is null));
+                return cl_ is not null;
             }
 
 
@@ -269,7 +269,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             bool? aw_(Timing.RepeatComponent @this) {
                 DataType cn_ = @this?.Bounds;
                 object co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-                return !((bool?)(co_ is null));
+                return co_ is not null;
             }
 
 
@@ -300,7 +300,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
             bool? bg_(Dosage @this) {
                 Timing ct_ = @this?.Timing;
-                return !((bool?)(ct_ is null));
+                return ct_ is not null;
             }
 
 
@@ -313,7 +313,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
             bool? bj_(Timing @this) {
                 Timing.RepeatComponent cv_ = @this?.Repeat;
-                return !((bool?)(cv_ is null));
+                return cv_ is not null;
             }
 
 
@@ -327,7 +327,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             bool? bm_(Timing.RepeatComponent @this) {
                 DataType cx_ = @this?.Bounds;
                 object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
-                return !((bool?)(cy_ is null));
+                return cy_ is not null;
             }
 
 
@@ -448,7 +448,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
             bool? al_(Dosage @this) {
                 Timing bt_ = @this?.Timing;
-                return !((bool?)(bt_ is null));
+                return bt_ is not null;
             }
 
 
@@ -461,7 +461,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
             bool? ao_(Timing @this) {
                 Timing.RepeatComponent bv_ = @this?.Repeat;
-                return !((bool?)(bv_ is null));
+                return bv_ is not null;
             }
 
 
@@ -475,7 +475,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             bool? ar_(Timing.RepeatComponent @this) {
                 DataType bx_ = @this?.Bounds;
                 object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-                return !((bool?)(by_ is null));
+                return by_ is not null;
             }
 
 
@@ -506,7 +506,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
             bool? bb_(Dosage @this) {
                 Timing cd_ = @this?.Timing;
-                return !((bool?)(cd_ is null));
+                return cd_ is not null;
             }
 
 
@@ -519,7 +519,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
             bool? be_(Timing @this) {
                 Timing.RepeatComponent cf_ = @this?.Repeat;
-                return !((bool?)(cf_ is null));
+                return cf_ is not null;
             }
 
 
@@ -533,7 +533,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             bool? bh_(Timing.RepeatComponent @this) {
                 DataType ch_ = @this?.Bounds;
                 object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                return !((bool?)(ci_ is null));
+                return ci_ is not null;
             }
 
 
@@ -625,7 +625,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 /* CQL 'or' (152:52-156:3) */ || k_();
         }
 
-        return (CqlBoolean)((bool?)(b_ is null))
+        return (CqlBoolean)(b_ is null)
             /* CQL 'implies' (152:3-156:3) */ || c_();
     }
 
@@ -838,7 +838,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 CqlBoolean y_() {
                     FhirDateTime aa_ = OrderTwelveMonthsADT?.AuthoredOnElement;
                     CqlDateTime ab_ = context.Operators.Convert<CqlDateTime>(aa_);
-                    return !((bool?)(ab_ is null));
+                    return ab_ is not null;
                 }
 
 
@@ -855,7 +855,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     CqlBoolean ak_() {
                         FhirDateTime al_ = OrderTwelveMonthsADT?.AuthoredOnElement;
                         CqlDateTime am_ = context.Operators.Convert<CqlDateTime>(al_);
-                        return !((bool?)(am_ is null));
+                        return am_ is not null;
                     }
 
                     return aj_
@@ -917,7 +917,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 CqlBoolean bl_() {
                     FhirDateTime bn_ = OrderTwelveMonthsADT?.AuthoredOnElement;
                     CqlDateTime bo_ = context.Operators.Convert<CqlDateTime>(bn_);
-                    return !((bool?)(bo_ is null));
+                    return bo_ is not null;
                 }
 
 
@@ -936,7 +936,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     CqlBoolean bz_() {
                         FhirDateTime ca_ = OrderTwelveMonthsADT?.AuthoredOnElement;
                         CqlDateTime cb_ = context.Operators.Convert<CqlDateTime>(ca_);
-                        return !((bool?)(cb_ is null));
+                        return cb_ is not null;
                     }
 
                     return by_
@@ -1015,7 +1015,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 CqlBoolean q_() {
                     FhirDateTime s_ = OrderTwelveMonthsADT?.AuthoredOnElement;
                     CqlDateTime t_ = context.Operators.Convert<CqlDateTime>(s_);
-                    return !((bool?)(t_ is null));
+                    return t_ is not null;
                 }
 
 
@@ -1087,7 +1087,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 CqlBoolean r_() {
                     FhirDateTime t_ = OrderTwelveMonthsADT?.AuthoredOnElement;
                     CqlDateTime u_ = context.Operators.Convert<CqlDateTime>(t_);
-                    return !((bool?)(u_ is null));
+                    return u_ is not null;
                 }
 
 

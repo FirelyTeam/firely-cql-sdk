@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMSFHIR844HybridHospitalWideMortality", "0.5.001")]
 public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, ISingleton<CMSFHIR844HybridHospitalWideMortality_0_5_001>
 {
@@ -250,7 +250,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ac_() {
                     DataType ai_ = Temperature?.Value;
                     CqlQuantity aj_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ai_ as Quantity);
-                    return !((bool?)(aj_ is null));
+                    return aj_ is not null;
                 }
 
                 return aa_
@@ -296,7 +296,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean at_() {
                     DataType az_ = Temperature?.Value;
                     CqlQuantity ba_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, az_ as Quantity);
-                    return !((bool?)(ba_ is null));
+                    return ba_ is not null;
                 }
 
                 return ar_
@@ -366,7 +366,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ac_() {
                     DataType ai_ = HeartRate?.Value;
                     CqlQuantity aj_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ai_ as Quantity);
-                    return !((bool?)(aj_ is null));
+                    return aj_ is not null;
                 }
 
                 return aa_
@@ -412,7 +412,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean at_() {
                     DataType az_ = HeartRate?.Value;
                     CqlQuantity ba_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, az_ as Quantity);
-                    return !((bool?)(ba_ is null));
+                    return ba_ is not null;
                 }
 
                 return ar_
@@ -483,7 +483,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ad_() {
                     DataType aj_ = O2Saturation?.Value;
                     CqlQuantity ak_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, aj_ as Quantity);
-                    return !((bool?)(ak_ is null));
+                    return ak_ is not null;
                 }
 
                 return ab_
@@ -529,7 +529,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean au_() {
                     DataType ba_ = O2Saturation?.Value;
                     CqlQuantity bb_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ba_ as Quantity);
-                    return !((bool?)(bb_ is null));
+                    return bb_ is not null;
                 }
 
                 return as_
@@ -602,7 +602,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     bool? am_(Observation.ComponentComponent @this) {
                         DataType ap_ = @this?.Value;
                         object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                        return !((bool?)(aq_ is null));
+                        return aq_ is not null;
                     }
 
 
@@ -613,7 +613,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     }
 
                     IEnumerable<object> ao_ = context.Operators.WhereSelect<Observation.ComponentComponent, object>((IEnumerable<Observation.ComponentComponent>)al_, am_, an_);
-                    return !((bool?)(ao_ is null));
+                    return ao_ is not null;
                 }
 
                 return ad_
@@ -680,7 +680,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     bool? bq_(Observation.ComponentComponent @this) {
                         DataType bt_ = @this?.Value;
                         object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
-                        return !((bool?)(bu_ is null));
+                        return bu_ is not null;
                     }
 
 
@@ -691,7 +691,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     }
 
                     IEnumerable<object> bs_ = context.Operators.WhereSelect<Observation.ComponentComponent, object>((IEnumerable<Observation.ComponentComponent>)bp_, bq_, br_);
-                    return !((bool?)(bs_ is null));
+                    return bs_ is not null;
                 }
 
                 return bh_
@@ -787,7 +787,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ac_() {
                     DataType am_ = BicarbonateLab?.Value;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    return !((bool?)(an_ is null));
+                    return an_ is not null;
                 }
 
                 return aa_
@@ -859,7 +859,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ax_() {
                     DataType bh_ = BicarbonateLab?.Value;
                     object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                    return !((bool?)(bi_ is null));
+                    return bi_ is not null;
                 }
 
                 return av_
@@ -956,7 +956,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ac_() {
                     DataType am_ = CreatinineLab?.Value;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    return !((bool?)(an_ is null));
+                    return an_ is not null;
                 }
 
                 return aa_
@@ -1028,7 +1028,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ax_() {
                     DataType bh_ = CreatinineLab?.Value;
                     object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                    return !((bool?)(bi_ is null));
+                    return bi_ is not null;
                 }
 
                 return av_
@@ -1125,7 +1125,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ac_() {
                     DataType am_ = HematocritLab?.Value;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    return !((bool?)(an_ is null));
+                    return an_ is not null;
                 }
 
                 return aa_
@@ -1197,7 +1197,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ax_() {
                     DataType bh_ = HematocritLab?.Value;
                     object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                    return !((bool?)(bi_ is null));
+                    return bi_ is not null;
                 }
 
                 return av_
@@ -1294,7 +1294,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ac_() {
                     DataType am_ = PlateletLab?.Value;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    return !((bool?)(an_ is null));
+                    return an_ is not null;
                 }
 
                 return aa_
@@ -1366,7 +1366,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ax_() {
                     DataType bh_ = PlateletLab?.Value;
                     object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                    return !((bool?)(bi_ is null));
+                    return bi_ is not null;
                 }
 
                 return av_
@@ -1463,7 +1463,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ac_() {
                     DataType am_ = SodiumLab?.Value;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    return !((bool?)(an_ is null));
+                    return an_ is not null;
                 }
 
                 return aa_
@@ -1535,7 +1535,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ax_() {
                     DataType bh_ = SodiumLab?.Value;
                     object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                    return !((bool?)(bi_ is null));
+                    return bi_ is not null;
                 }
 
                 return av_
@@ -1632,7 +1632,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ac_() {
                     DataType am_ = WhiteBloodCellLab?.Value;
                     object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
-                    return !((bool?)(an_ is null));
+                    return an_ is not null;
                 }
 
                 return aa_
@@ -1704,7 +1704,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 CqlBoolean ax_() {
                     DataType bh_ = WhiteBloodCellLab?.Value;
                     object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                    return !((bool?)(bi_ is null));
+                    return bi_ is not null;
                 }
 
                 return av_
@@ -1778,7 +1778,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                         Period aj_ = ai_?.Period;
                         CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
                         CqlDateTime al_ = context.Operators.Start(ak_);
-                        return !((bool?)(al_ is null));
+                        return al_ is not null;
                     }
 
                     return ag_
@@ -1932,7 +1932,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                             Period ct_ = cs_?.Period;
                             CqlInterval<CqlDateTime> cu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ct_);
                             CqlDateTime cv_ = context.Operators.Start(cu_);
-                            return !((bool?)(cv_ is null));
+                            return cv_ is not null;
                         }
 
                         return ck_

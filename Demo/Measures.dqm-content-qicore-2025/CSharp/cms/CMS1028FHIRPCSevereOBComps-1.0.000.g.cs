@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS1028FHIRPCSevereOBComps", "1.0.000")]
 public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<CMS1028FHIRPCSevereOBComps_1_0_000>
 {
@@ -489,7 +489,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     bool? n_(Condition @this) {
                         CodeableConcept s_ = @this?.Code;
                         CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                        return !((bool?)(t_ is null));
+                        return t_ is not null;
                     }
 
 
@@ -941,7 +941,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 bool? t_(Condition @this) {
                     CodeableConcept y_ = @this?.Code;
                     CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
-                    return !((bool?)(z_ is null));
+                    return z_ is not null;
                 }
 
 
@@ -1630,7 +1630,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 bool? t_(Condition @this) {
                     CodeableConcept y_ = @this?.Code;
                     CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
-                    return !((bool?)(z_ is null));
+                    return z_ is not null;
                 }
 
 
@@ -2474,7 +2474,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 CqlBoolean ai_() {
                     DataType ao_ = Hematocrit?.Value;
                     object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    return !((bool?)(ap_ is null));
+                    return ap_ is not null;
                 }
 
                 return ag_
@@ -2526,7 +2526,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 CqlBoolean bf_() {
                     DataType bl_ = Hematocrit?.Value;
                     object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    return !((bool?)(bm_ is null));
+                    return bm_ is not null;
                 }
 
                 return bd_
@@ -2603,7 +2603,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 CqlBoolean ai_() {
                     DataType ao_ = WBC?.Value;
                     object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    return !((bool?)(ap_ is null));
+                    return ap_ is not null;
                 }
 
                 return ag_
@@ -2655,7 +2655,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 CqlBoolean bf_() {
                     DataType bl_ = WBC?.Value;
                     object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-                    return !((bool?)(bm_ is null));
+                    return bm_ is not null;
                 }
 
                 return bd_
@@ -2844,7 +2844,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     bool? as_(Observation.ComponentComponent @this) {
                         DataType av_ = @this?.Value;
                         object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                        return !((bool?)(aw_ is null));
+                        return aw_ is not null;
                     }
 
 
@@ -2855,7 +2855,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     }
 
                     IEnumerable<object> au_ = context.Operators.WhereSelect<Observation.ComponentComponent, object>((IEnumerable<Observation.ComponentComponent>)ar_, as_, at_);
-                    return !((bool?)(au_ is null));
+                    return au_ is not null;
                 }
 
                 return aj_
@@ -2928,7 +2928,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     bool? cb_(Observation.ComponentComponent @this) {
                         DataType ce_ = @this?.Value;
                         object cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
-                        return !((bool?)(cf_ is null));
+                        return cf_ is not null;
                     }
 
 
@@ -2939,7 +2939,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     }
 
                     IEnumerable<object> cd_ = context.Operators.WhereSelect<Observation.ComponentComponent, object>((IEnumerable<Observation.ComponentComponent>)ca_, cb_, cc_);
-                    return !((bool?)(cd_ is null));
+                    return cd_ is not null;
                 }
 
                 return bs_

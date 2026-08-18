@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("NCQAEncounter", "1.0.0")]
 public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_0_0>
 {
@@ -128,7 +128,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
                 return i_;
             }
 
-            return (CqlBoolean)(!((bool?)(d_ is null)))
+            return (CqlBoolean)(d_ is not null)
                 /* CQL 'and' (34:5-35:64) */ && e_();
         }
 
@@ -163,7 +163,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
                     /* CQL 'or' (40:11-42:7) */ || j_();
             }
 
-            return (CqlBoolean)(!((bool?)(d_ is null)))
+            return (CqlBoolean)(d_ is not null)
                 /* CQL 'and' (39:5-42:7) */ && e_();
         }
 
@@ -188,7 +188,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
                 return i_;
             }
 
-            return (CqlBoolean)(!((bool?)(d_ is null)))
+            return (CqlBoolean)(d_ is not null)
                 /* CQL 'and' (46:5-47:67) */ && e_();
         }
 

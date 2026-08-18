@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS50FHIRReceiptofSpecialistReport", "1.0.000")]
 public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISingleton<CMS50FHIRReceiptofSpecialistReport_1_0_000>
 {
@@ -340,7 +340,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
         CqlBoolean a_ = this.Has_Encounter_during_Measurement_Period(context);
         return (a_
             /* CQL 'or' (50:3-52:3) */ || this.Has_Intervention_during_Measurement_Period(context))
-            /* CQL 'and' (50:3-53:81) */ && !((bool?)((this.First_Referral_during_First_10_Months_of_Measurement_Period(context)) is null));
+            /* CQL 'and' (50:3-53:81) */ && ((this.First_Referral_during_First_10_Months_of_Measurement_Period(context)) is not null);
     }
 
 

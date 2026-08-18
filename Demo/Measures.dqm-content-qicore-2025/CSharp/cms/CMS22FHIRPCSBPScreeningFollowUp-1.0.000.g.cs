@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS22FHIRPCSBPScreeningFollowUp", "1.0.000")]
 public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingleton<CMS22FHIRPCSBPScreeningFollowUp_1_0_000>
 {
@@ -304,7 +304,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 /* CQL 'or' (408:52-412:3) */ || k_();
         }
 
-        return (CqlBoolean)((bool?)(b_ is null))
+        return (CqlBoolean)(b_ is null)
             /* CQL 'implies' (408:3-412:3) */ || c_();
     }
 
@@ -852,7 +852,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     Period ag_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ag_);
                     CqlDateTime ai_ = context.Operators.Start(ah_);
-                    return !((bool?)(ai_ is null));
+                    return ai_ is not null;
                 }
 
 
@@ -924,7 +924,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         Period by_ = QualifyingEncounter?.Period;
                         CqlInterval<CqlDateTime> bz_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, by_);
                         CqlDateTime ca_ = context.Operators.Start(bz_);
-                        return !((bool?)(ca_ is null));
+                        return ca_ is not null;
                     }
 
 
@@ -999,7 +999,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                         Period dr_ = QualifyingEncounter?.Period;
                         CqlInterval<CqlDateTime> ds_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dr_);
                         CqlDateTime dt_ = context.Operators.Start(ds_);
-                        return !((bool?)(dt_ is null));
+                        return dt_ is not null;
                     }
 
 
@@ -1071,7 +1071,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                             Period fj_ = QualifyingEncounter?.Period;
                             CqlInterval<CqlDateTime> fk_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fj_);
                             CqlDateTime fl_ = context.Operators.Start(fk_);
-                            return !((bool?)(fl_ is null));
+                            return fl_ is not null;
                         }
 
 

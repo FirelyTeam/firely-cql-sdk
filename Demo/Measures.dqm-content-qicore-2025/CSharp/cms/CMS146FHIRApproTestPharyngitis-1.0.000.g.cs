@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS146FHIRApproTestPharyngitis", "1.0.000")]
 public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISingleton<CMS146FHIRApproTestPharyngitis_1_0_000>
 {
@@ -354,7 +354,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 CqlBoolean aj_() {
                     FhirDateTime ak_ = AntibioticOrdered?.AuthoredOnElement;
                     CqlDateTime al_ = context.Operators.Convert<CqlDateTime>(ak_);
-                    return !((bool?)(al_ is null));
+                    return al_ is not null;
                 }
 
                 return ai_
@@ -569,7 +569,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         bool? d_(Observation GroupAStreptococcusTest) {
             DataType f_ = GroupAStreptococcusTest?.Value;
             object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-            return !((bool?)(g_ is null));
+            return g_ is not null;
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);

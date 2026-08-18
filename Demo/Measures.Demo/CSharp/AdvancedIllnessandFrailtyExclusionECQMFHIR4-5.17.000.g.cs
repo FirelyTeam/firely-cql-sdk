@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("AdvancedIllnessandFrailtyExclusionECQMFHIR4", "5.17.000")]
 public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILibrary, ISingleton<AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000>
 {
@@ -280,7 +280,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                     CqlBoolean ai_() {
                         CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
                         CqlDateTime ak_ = context.Operators.End(aj_);
-                        return !((bool?)(ak_ is null));
+                        return ak_ is not null;
                     }
 
                     return ah_
@@ -377,7 +377,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             CqlInterval<CqlDateTime> n_ = context.Operators.Interval(l_, m_, true, true);
             CqlBoolean o_ = context.Operators.In<CqlDateTime>(i_, n_, (string)default);
             return o_
-                /* CQL 'and' (57:17-58:69) */ && !((bool?)((context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2)) is null));
+                /* CQL 'and' (57:17-58:69) */ && ((context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2)) is not null);
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?> e_ = context.Operators.SelectWhere<ValueTuple<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>, (CqlTupleMetadata, CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?>(b_, c_, d_);
@@ -462,7 +462,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                     CqlBoolean z_() {
                         CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
                         CqlDateTime ab_ = context.Operators.End(aa_);
-                        return !((bool?)(ab_ is null));
+                        return ab_ is not null;
                     }
 
                     return y_

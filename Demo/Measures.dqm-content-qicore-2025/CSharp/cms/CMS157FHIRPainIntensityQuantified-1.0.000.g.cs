@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.7.0")]
 [CqlLibrary("CMS157FHIRPainIntensityQuantified", "1.0.000")]
 public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISingleton<CMS157FHIRPainIntensityQuantified_1_0_000>
 {
@@ -259,7 +259,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                     Period ar_ = tuple_eweddbdxxszcpujsdbltgdxcc?.FaceToFaceOrTelehealthEncounter?.Period;
                     CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ar_);
                     CqlDateTime at_ = context.Operators.End(as_);
-                    return !((bool?)(at_ is null));
+                    return at_ is not null;
                 }
 
                 return aj_
@@ -318,7 +318,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                     Period bl_ = tuple_eweddbdxxszcpujsdbltgdxcc?.FaceToFaceOrTelehealthEncounter?.Period;
                     CqlInterval<CqlDateTime> bm_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bl_);
                     CqlDateTime bn_ = context.Operators.End(bm_);
-                    return !((bool?)(bn_ is null));
+                    return bn_ is not null;
                 }
 
                 return bd_
@@ -558,7 +558,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
         bool? c_(Observation AssessedPain) {
             DataType e_ = AssessedPain?.Value;
             object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
-            return !((bool?)(f_ is null));
+            return f_ is not null;
         }
 
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
@@ -647,7 +647,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                         Period ab_ = RadiationManagementEncounter?.Period;
                         CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ab_);
                         CqlDateTime ad_ = context.Operators.Start(ac_);
-                        return !((bool?)(ad_ is null));
+                        return ad_ is not null;
                     }
 
                     return (bool?)(z_
