@@ -9,21 +9,28 @@
   effects of a skipped operand no longer occur: a runtime error it would have thrown no longer
   surfaces, and a `Message()` call inside it no longer raises `MessageReceived`. The CQL
   specification permits this (evaluation of logical operands is not prescribed). (#1514)
-- Evaluation counts move in **both** directions, so the change is not uniformly cheaper. A guarded
-  branch reuses values already computed above it, but two positions cannot: a hoisted local
-  function's body deliberately does not reach out to an enclosing local (that would turn it into
-  captured closure state), and sibling branches of a guard cannot share a local with each other.
-  A subexpression both branches need is therefore emitted in each. Counted over the checked-in
-  corpora — excluding the new test fixture this change adds, which is not part of any shipped
-  library — eight operators end up with **more** calls (55 in total: `ConvertIntegerToDecimal`
+- Evaluation counts move in **both** directions, so the change is not uniformly cheaper. A right
+  operand too large to inline moves into a hoisted local function whose body deliberately does not
+  reach out to an enclosing local — that would turn it into captured closure state and allocate — so
+  a subexpression the enclosing scope already computed is emitted again inside the function.
+
+  The per-operator table below was measured against the *guarded* shape this change originally
+  emitted; the guards were subsequently replaced by `&&`/`||` expressions (see
+  [1574-cqlboolean-lowering.md](1574-cqlboolean-lowering.md)), which removed the sibling-branch
+  duplication but kept the local-function duplication. The direction and the order of magnitude
+  still hold, the exact figures no longer do. Counted over the checked-in corpora, excluding the new
+  test fixture: eight operators ended up with **more** calls (55 in total: `ConvertIntegerToDecimal`
   199 → 225, `ConvertDateToDateTime` 268 → 283, `DateFrom` 498 → 503, `LateBoundProperty`
   603 → 607, `Exists` +2, and `Convert`/`Equivalent`/`Interval` +1 each) and eight with **fewer**
   (75 in total: `Start` 1189 → 1176, `Subtract`/`Multiply`/`End`/`ConvertIntegerToQuantity` −10
   each, `Add`/`Quantity` −8, `Count` −6). Net, excluding the operators this change eliminates
-  outright: 20 fewer calls. `Operators.Retrieve<` lands at exactly its previous count, so no
-  additional FHIR retrieve is emitted anywhere, and no `Message()` call site is duplicated in any
-  library — the repeats are conversions and property reads. Generated code does grow, roughly
-  24k net lines, for the same branching reason. (#1514)
+  outright: 20 fewer calls.
+
+  Two facts that are not order-of-magnitude claims and do still hold exactly: `Operators.Retrieve<`
+  lands at its previous count, so no additional FHIR retrieve is emitted anywhere, and no
+  `Message()` call site is duplicated in any library — the repeats are conversions and property
+  reads. Generated code grows by **7,126 net lines** across 153 files as this branch stands, of which
+  roughly 1.1k is the new test fixture rather than shipped library code. (#1514)
 - `xor` now short-circuits too — on a **null** left operand, which makes it the odd one out.
   Its null row is constant ("if either or both arguments are null, the result is null"), so a null
   left operand decides the result and the right operand is skipped; a `true` or `false` left

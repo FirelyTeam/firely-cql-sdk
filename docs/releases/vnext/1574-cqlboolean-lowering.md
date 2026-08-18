@@ -23,7 +23,7 @@
   **Generated method signatures are unchanged and remain `bool?`.** This is a printing decision: the
   IR keeps modelling CQL `Boolean` as `bool?`, because the operator binder matches `ICqlOperators`
   overloads on it by reflection and a `CqlBoolean` cannot bind to a `bool?` parameter — a query
-  predicate's `Func<T, bool?>` is the case that proves it. Exactly 132 conversions remain, on the two
+  predicate's `Func<T, bool?>` is the case that proves it. 178 conversions remain as this branch stands, on the two
   shapes that are not locals and cannot be retyped: method parameters, whose type is part of the
   signature, and inline expressions that were never hoisted.
 
@@ -47,7 +47,7 @@
 
   The truthiness test also folds away where the operand is a whole chain rather than a local:
   `if (chain)` uses `CqlBoolean`'s `operator true`, which is exactly what `?? false` meant, so
-  neither the conversion nor the coalesce is emitted. 51 `?? false` remain, on operands that are not
+  neither the conversion nor the coalesce is emitted. 40 `?? false` remain, on operands that are not
   CQL Booleans. (#1514)
 - A **negated null test** now emits the null pattern's complement instead of a three-valued negation
   of it: `quantity?.ComparatorElement is not null`, where the previous shape spent four conversions
@@ -79,7 +79,7 @@
 - A `CqlBoolean`-typed body no longer re-casts its result when the enclosing signature is already
   `bool?` — the conversion is implicit at the `return`, so the outer `(bool?)(…)` was pure noise.
   This removes 1,440 casts across the checked-in generated code, in both definition bodies and
-  `bool?`-declared local functions. The conversion is kept wherever it is load-bearing (78 sites):
+  `bool?`-declared local functions. The conversion is kept wherever it is load-bearing (48 sites as this branch stands):
   `?? false`, a lifted `!`, and the null patterns each genuinely require a `bool?` and have no
   implicit conversion to fall back on. Declared signatures are unchanged, so this is a readability
   change only — it is the reason for the patch-level `GeneratorToolVersion` bump. (#1514)
