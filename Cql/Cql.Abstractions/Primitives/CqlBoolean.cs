@@ -8,11 +8,17 @@
 
 #nullable enable
 
+using System.ComponentModel;
+
 namespace Hl7.Cql.Primitives;
 
 /// <summary>
-/// CQL's three-valued Boolean, as a value type that carries its own null state so that C#'s
-/// <c>&amp;&amp;</c> and <c>||</c> can be applied to it.
+/// Supports the C# that this SDK generates for CQL libraries. <b>This type is not intended to be
+/// used directly from your own code</b>, and nothing in a generated library's public surface exposes
+/// it — see the remarks.
+///
+/// <para>CQL's three-valued Boolean, as a value type that carries its own null state so that C#'s
+/// <c>&amp;&amp;</c> and <c>||</c> can be applied to it.</para>
 ///
 /// <para>This exists for one reason: <c>bool?</c> cannot short-circuit. C# defines
 /// <c>&amp;&amp;</c>/<c>||</c> only for <c>bool</c> and for types supplying <c>operator true</c>
@@ -38,6 +44,27 @@ namespace Hl7.Cql.Primitives;
 /// <para>The same shape as <c>System.Data.SqlTypes.SqlBoolean</c>, which does this for SQL's
 /// three-valued logic; CQL's tables (spec §9.B) are the same Kleene logic.</para>
 /// </summary>
+/// <remarks>
+/// <b>Why this is public at all.</b> It cannot be <see langword="internal"/>: generated code declares
+/// locals of this type and compiles into OTHER assemblies — the consuming project for checked-in
+/// <c>*.g.cs</c>, or an assembly named per library set when compiled in memory. <c>InternalsVisibleTo</c>
+/// must name each friend assembly up front, and that set is open-ended and chosen by the user, so
+/// <see langword="internal"/> would break every generated library. It is therefore a compiler-support
+/// type in the same sense as <c>System.Runtime.CompilerServices</c>'s builders: public because
+/// generated code names it, not because it is part of the API you call.
+///
+/// <para><b>You will not meet it by accident.</b> CQL's <c>Boolean</c> maps to <c>bool?</c> throughout
+/// the type system, the operator bindings and every generated signature, so this type appears only
+/// INSIDE generated method bodies. Calling a generated library never hands you one, and
+/// <see cref="EditorBrowsableAttribute"/> keeps it out of completion lists.</para>
+///
+/// <para>It also, deliberately, sits beside the <see cref="CqlPrimitiveTypeAttribute"/>-marked
+/// primitives (<c>CqlDate</c>, <c>CqlQuantity</c>, …) without being one. Those types ARE the canonical
+/// representation of their CQL type; this one is not, which is why the attribute is absent. Do not
+/// "fix" that inconsistency — adding the attribute would remap CQL <c>Boolean</c> away from
+/// <c>bool?</c> and break the operator binder.</para>
+/// </remarks>
+[EditorBrowsable(EditorBrowsableState.Never)]
 public readonly struct CqlBoolean : IEquatable<CqlBoolean>
 {
     // 0 = null, 1 = false, 2 = true. One byte, so no larger than bool? and never heap-allocated.
