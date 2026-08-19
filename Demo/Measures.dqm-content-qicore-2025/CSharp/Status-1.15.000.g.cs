@@ -1,5 +1,3 @@
-#nullable enable
-
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -69,613 +67,613 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
     #region Functions and Expressions (24)
 
     [CqlExpressionDefinition("Patient")]
-    public Patient? Patient(CqlContext context) =>
+    public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private const long _cacheIndex_Patient = 1021606727424411750L;
 
-    private Patient? Patient_Compute(CqlContext context)
+    private Patient Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient? b_ = context.Operators.SingletonFrom<Patient?>(a_);
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("verified")]
-    public IEnumerable<Condition?>? verified(CqlContext context, IEnumerable<Condition?>? conditions)
+    public IEnumerable<Condition> verified(CqlContext context, IEnumerable<Condition> conditions)
     {
 
-        bool? a_(Condition? C) {
-            CodeableConcept? c_ = C?.VerificationStatus;
-            CqlConcept? d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
+        bool? a_(Condition C) {
+            CodeableConcept c_ = C?.VerificationStatus;
+            CqlConcept d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
             bool? e_ = context.Operators.Not((bool?)(d_ is null));
-            CqlCode? f_ = this.confirmed(context);
-            CqlConcept? g_ = context.Operators.ConvertCodeToConcept(f_);
+            CqlCode f_ = this.confirmed(context);
+            CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
             bool? h_ = context.Operators.Equivalent(d_, g_);
-            CqlCode? i_ = this.unconfirmed(context);
-            CqlConcept? j_ = context.Operators.ConvertCodeToConcept(i_);
+            CqlCode i_ = this.unconfirmed(context);
+            CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
             bool? k_ = context.Operators.Equivalent(d_, j_);
             bool? l_ = context.Operators.Or(h_, k_);
-            CqlCode? m_ = this.provisional(context);
-            CqlConcept? n_ = context.Operators.ConvertCodeToConcept(m_);
+            CqlCode m_ = this.provisional(context);
+            CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
             bool? o_ = context.Operators.Equivalent(d_, n_);
             bool? p_ = context.Operators.Or(l_, o_);
-            CqlCode? q_ = this.differential(context);
-            CqlConcept? r_ = context.Operators.ConvertCodeToConcept(q_);
+            CqlCode q_ = this.differential(context);
+            CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
             bool? s_ = context.Operators.Equivalent(d_, r_);
             bool? t_ = context.Operators.Or(p_, s_);
             bool? u_ = context.Operators.Implies(e_, t_);
             return u_;
         }
 
-        IEnumerable<Condition?>? b_ = context.Operators.Where<Condition?>(conditions, a_);
+        IEnumerable<Condition> b_ = context.Operators.Where<Condition>(conditions, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isAssessmentPerformed")]
-    public IEnumerable<Observation?>? isAssessmentPerformed(CqlContext context, IEnumerable<Observation?>? Obs)
+    public IEnumerable<Observation> isAssessmentPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
 
-        bool? a_(Observation? O) {
-            Code<ObservationStatus>? c_ = O?.StatusElement;
+        bool? a_(Observation O) {
+            Code<ObservationStatus> c_ = O?.StatusElement;
             ObservationStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
-            string?[]? f_ = [
+            string e_ = context.Operators.Convert<string>(d_);
+            string[] f_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string?>(e_, (IEnumerable<string?>?)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
         }
 
-        IEnumerable<Observation?>? b_ = context.Operators.Where<Observation?>(Obs, a_);
+        IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isDeviceOrderPersonalUseDevices")]
-    public IEnumerable<DeviceRequest?>? isDeviceOrderPersonalUseDevices(CqlContext context, IEnumerable<DeviceRequest?>? DeviceRequest)
+    public IEnumerable<DeviceRequest> isDeviceOrderPersonalUseDevices(CqlContext context, IEnumerable<DeviceRequest> DeviceRequest)
     {
 
-        bool? a_(DeviceRequest? D) {
-            Code<RequestStatus>? c_ = D?.StatusElement;
+        bool? a_(DeviceRequest D) {
+            Code<RequestStatus> c_ = D?.StatusElement;
             RequestStatus? d_ = c_?.Value;
-            Code<RequestStatus>? e_ = context.Operators.Convert<Code<RequestStatus>?>(d_);
-            string? f_ = context.Operators.Convert<string?>(e_);
-            string?[]? g_ = [
+            Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
+            string f_ = context.Operators.Convert<string>(e_);
+            string[] g_ = [
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string?>(f_, (IEnumerable<string?>?)g_);
-            Code<RequestIntent>? i_ = D?.IntentElement;
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            Code<RequestIntent> i_ = D?.IntentElement;
             RequestIntent? j_ = i_?.Value;
-            Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>?>(j_);
-            string? l_ = context.Operators.Convert<string?>(k_);
-            string?[]? m_ = [
+            Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
+            string l_ = context.Operators.Convert<string>(k_);
+            string[] m_ = [
                 "order",
                 "original-order",
                 "reflex-order",
                 "filler-order",
                 "instance-order",
             ];
-            bool? n_ = context.Operators.In<string?>(l_, (IEnumerable<string?>?)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
         }
 
-        IEnumerable<DeviceRequest?>? b_ = context.Operators.Where<DeviceRequest?>(DeviceRequest, a_);
+        IEnumerable<DeviceRequest> b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isDiagnosticStudyOrder")]
-    public IEnumerable<ServiceRequest?>? isDiagnosticStudyOrder(CqlContext context, IEnumerable<ServiceRequest?>? ServiceRequest)
+    public IEnumerable<ServiceRequest> isDiagnosticStudyOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
     {
 
-        bool? a_(ServiceRequest? S) {
-            Code<RequestStatus>? c_ = S?.StatusElement;
+        bool? a_(ServiceRequest S) {
+            Code<RequestStatus> c_ = S?.StatusElement;
             RequestStatus? d_ = c_?.Value;
-            Code<RequestStatus>? e_ = context.Operators.Convert<Code<RequestStatus>?>(d_);
-            string? f_ = context.Operators.Convert<string?>(e_);
-            string?[]? g_ = [
+            Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
+            string f_ = context.Operators.Convert<string>(e_);
+            string[] g_ = [
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string?>(f_, (IEnumerable<string?>?)g_);
-            Code<RequestIntent>? i_ = S?.IntentElement;
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            Code<RequestIntent> i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
-            Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>?>(j_);
-            string? l_ = context.Operators.Convert<string?>(k_);
-            string?[]? m_ = [
+            Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
+            string l_ = context.Operators.Convert<string>(k_);
+            string[] m_ = [
                 "order",
                 "original-order",
                 "reflex-order",
                 "filler-order",
                 "instance-order",
             ];
-            bool? n_ = context.Operators.In<string?>(l_, (IEnumerable<string?>?)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
         }
 
-        IEnumerable<ServiceRequest?>? b_ = context.Operators.Where<ServiceRequest?>(ServiceRequest, a_);
+        IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isInterventionOrder")]
-    public IEnumerable<ServiceRequest?>? isInterventionOrder(CqlContext context, IEnumerable<ServiceRequest?>? ServiceRequest)
+    public IEnumerable<ServiceRequest> isInterventionOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
     {
 
-        bool? a_(ServiceRequest? S) {
-            Code<RequestStatus>? c_ = S?.StatusElement;
+        bool? a_(ServiceRequest S) {
+            Code<RequestStatus> c_ = S?.StatusElement;
             RequestStatus? d_ = c_?.Value;
-            Code<RequestStatus>? e_ = context.Operators.Convert<Code<RequestStatus>?>(d_);
-            string? f_ = context.Operators.Convert<string?>(e_);
-            string?[]? g_ = [
+            Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
+            string f_ = context.Operators.Convert<string>(e_);
+            string[] g_ = [
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string?>(f_, (IEnumerable<string?>?)g_);
-            Code<RequestIntent>? i_ = S?.IntentElement;
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            Code<RequestIntent> i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
-            Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>?>(j_);
-            string? l_ = context.Operators.Convert<string?>(k_);
-            string?[]? m_ = [
+            Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
+            string l_ = context.Operators.Convert<string>(k_);
+            string[] m_ = [
                 "order",
                 "original-order",
                 "reflex-order",
                 "filler-order",
                 "instance-order",
             ];
-            bool? n_ = context.Operators.In<string?>(l_, (IEnumerable<string?>?)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
         }
 
-        IEnumerable<ServiceRequest?>? b_ = context.Operators.Where<ServiceRequest?>(ServiceRequest, a_);
+        IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isLaboratoryTestOrder")]
-    public IEnumerable<ServiceRequest?>? isLaboratoryTestOrder(CqlContext context, IEnumerable<ServiceRequest?>? ServiceRequest)
+    public IEnumerable<ServiceRequest> isLaboratoryTestOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
     {
 
-        bool? a_(ServiceRequest? S) {
-            Code<RequestStatus>? c_ = S?.StatusElement;
+        bool? a_(ServiceRequest S) {
+            Code<RequestStatus> c_ = S?.StatusElement;
             RequestStatus? d_ = c_?.Value;
-            Code<RequestStatus>? e_ = context.Operators.Convert<Code<RequestStatus>?>(d_);
-            string? f_ = context.Operators.Convert<string?>(e_);
-            string?[]? g_ = [
+            Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
+            string f_ = context.Operators.Convert<string>(e_);
+            string[] g_ = [
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string?>(f_, (IEnumerable<string?>?)g_);
-            Code<RequestIntent>? i_ = S?.IntentElement;
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            Code<RequestIntent> i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
-            Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>?>(j_);
-            string? l_ = context.Operators.Convert<string?>(k_);
-            string?[]? m_ = [
+            Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
+            string l_ = context.Operators.Convert<string>(k_);
+            string[] m_ = [
                 "order",
                 "original-order",
                 "reflex-order",
                 "filler-order",
                 "instance-order",
             ];
-            bool? n_ = context.Operators.In<string?>(l_, (IEnumerable<string?>?)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
         }
 
-        IEnumerable<ServiceRequest?>? b_ = context.Operators.Where<ServiceRequest?>(ServiceRequest, a_);
+        IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isDiagnosticStudyPerformed")]
-    public IEnumerable<Observation?>? isDiagnosticStudyPerformed(CqlContext context, IEnumerable<Observation?>? Obs)
+    public IEnumerable<Observation> isDiagnosticStudyPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
 
-        bool? a_(Observation? O) {
-            Code<ObservationStatus>? c_ = O?.StatusElement;
+        bool? a_(Observation O) {
+            Code<ObservationStatus> c_ = O?.StatusElement;
             ObservationStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
-            string?[]? f_ = [
+            string e_ = context.Operators.Convert<string>(d_);
+            string[] f_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string?>(e_, (IEnumerable<string?>?)f_);
-            List<CodeableConcept>? h_ = O?.Category;
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            List<CodeableConcept> h_ = O?.Category;
 
-            CqlConcept? i_(CodeableConcept? @this) {
-                CqlConcept? n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept i_(CodeableConcept @this) {
+                CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return n_;
             }
 
 
-            bool? j_(CqlConcept? ObservationCategory) {
-                CqlCode? o_ = this.imaging(context);
-                CqlConcept? p_ = context.Operators.ConvertCodeToConcept(o_);
+            bool? j_(CqlConcept ObservationCategory) {
+                CqlCode o_ = this.imaging(context);
+                CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
                 bool? q_ = context.Operators.Equivalent(ObservationCategory, p_);
                 return q_;
             }
 
-            IEnumerable<CqlConcept?>? k_ = context.Operators.SelectWhere<CodeableConcept?, CqlConcept?>((IEnumerable<CodeableConcept?>?)h_, i_, j_);
-            bool? l_ = context.Operators.Exists<CqlConcept?>(k_!);
+            IEnumerable<CqlConcept> k_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_, j_);
+            bool? l_ = context.Operators.Exists<CqlConcept>(k_);
             bool? m_ = context.Operators.And(g_, l_);
             return m_;
         }
 
-        IEnumerable<Observation?>? b_ = context.Operators.Where<Observation?>(Obs, a_);
+        IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isEncounterPerformed")]
-    public IEnumerable<Encounter?>? isEncounterPerformed(CqlContext context, IEnumerable<Encounter?>? Enc)
+    public IEnumerable<Encounter> isEncounterPerformed(CqlContext context, IEnumerable<Encounter> Enc)
     {
 
-        bool? a_(Encounter? E) {
-            Code<Encounter.EncounterStatus>? c_ = E?.StatusElement;
+        bool? a_(Encounter E) {
+            Code<Encounter.EncounterStatus> c_ = E?.StatusElement;
             Encounter.EncounterStatus? d_ = c_?.Value;
-            Code<Encounter.EncounterStatus>? e_ = context.Operators.Convert<Code<Encounter.EncounterStatus>?>(d_);
+            Code<Encounter.EncounterStatus> e_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(d_);
             bool? f_ = context.Operators.Equal(e_, "finished");
             return f_;
         }
 
-        IEnumerable<Encounter?>? b_ = context.Operators.Where<Encounter?>(Enc, a_);
+        IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(Enc, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isImmunizationAdministered")]
-    public IEnumerable<Immunization?>? isImmunizationAdministered(CqlContext context, IEnumerable<Immunization?>? Immunization)
+    public IEnumerable<Immunization> isImmunizationAdministered(CqlContext context, IEnumerable<Immunization> Immunization)
     {
 
-        bool? a_(Immunization? I) {
-            Code<Immunization.ImmunizationStatusCodes>? c_ = I?.StatusElement;
+        bool? a_(Immunization I) {
+            Code<Immunization.ImmunizationStatusCodes> c_ = I?.StatusElement;
             Immunization.ImmunizationStatusCodes? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
+            string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
             return f_;
         }
 
-        IEnumerable<Immunization?>? b_ = context.Operators.Where<Immunization?>(Immunization, a_);
+        IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isInterventionPerformed")]
-    public IEnumerable<Procedure?>? isInterventionPerformed(CqlContext context, IEnumerable<Procedure?>? Proc)
+    public IEnumerable<Procedure> isInterventionPerformed(CqlContext context, IEnumerable<Procedure> Proc)
     {
 
-        bool? a_(Procedure? P) {
-            Code<EventStatus>? c_ = P?.StatusElement;
+        bool? a_(Procedure P) {
+            Code<EventStatus> c_ = P?.StatusElement;
             EventStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
+            string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
             return f_;
         }
 
-        IEnumerable<Procedure?>? b_ = context.Operators.Where<Procedure?>(Proc, a_);
+        IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isProcedurePerformed")]
-    public IEnumerable<Procedure?>? isProcedurePerformed(CqlContext context, IEnumerable<Procedure?>? Proc)
+    public IEnumerable<Procedure> isProcedurePerformed(CqlContext context, IEnumerable<Procedure> Proc)
     {
 
-        bool? a_(Procedure? P) {
-            Code<EventStatus>? c_ = P?.StatusElement;
+        bool? a_(Procedure P) {
+            Code<EventStatus> c_ = P?.StatusElement;
             EventStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
+            string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
             return f_;
         }
 
-        IEnumerable<Procedure?>? b_ = context.Operators.Where<Procedure?>(Proc, a_);
+        IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isLaboratoryTestPerformed")]
-    public IEnumerable<Observation?>? isLaboratoryTestPerformed(CqlContext context, IEnumerable<Observation?>? Obs)
+    public IEnumerable<Observation> isLaboratoryTestPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
 
-        bool? a_(Observation? O) {
-            Code<ObservationStatus>? c_ = O?.StatusElement;
+        bool? a_(Observation O) {
+            Code<ObservationStatus> c_ = O?.StatusElement;
             ObservationStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
-            string?[]? f_ = [
+            string e_ = context.Operators.Convert<string>(d_);
+            string[] f_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string?>(e_, (IEnumerable<string?>?)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
         }
 
-        IEnumerable<Observation?>? b_ = context.Operators.Where<Observation?>(Obs, a_);
+        IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isMedicationActive")]
-    public IEnumerable<MedicationRequest?>? isMedicationActive(CqlContext context, IEnumerable<MedicationRequest?>? MedicationRequest)
+    public IEnumerable<MedicationRequest> isMedicationActive(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
     {
 
-        bool? a_(MedicationRequest? M) {
-            Code<MedicationRequest.MedicationrequestStatus>? c_ = M?.StatusElement;
+        bool? a_(MedicationRequest M) {
+            Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
             MedicationRequest.MedicationrequestStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
+            string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equal(e_, "active");
-            Code<MedicationRequest.MedicationRequestIntent>? g_ = M?.IntentElement;
+            Code<MedicationRequest.MedicationRequestIntent> g_ = M?.IntentElement;
             MedicationRequest.MedicationRequestIntent? h_ = g_?.Value;
-            string? i_ = context.Operators.Convert<string?>(h_);
-            string?[]? j_ = [
+            string i_ = context.Operators.Convert<string>(h_);
+            string[] j_ = [
                 "order",
                 "original-order",
                 "reflex-order",
                 "filler-order",
                 "instance-order",
             ];
-            bool? k_ = context.Operators.In<string?>(i_, (IEnumerable<string?>?)j_);
+            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
             bool? l_ = context.Operators.And(f_, k_);
             return l_;
         }
 
-        IEnumerable<MedicationRequest?>? b_ = context.Operators.Where<MedicationRequest?>(MedicationRequest, a_);
+        IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isMedicationDispensed")]
-    public IEnumerable<MedicationDispense?>? isMedicationDispensed(CqlContext context, IEnumerable<MedicationDispense?>? Med)
+    public IEnumerable<MedicationDispense> isMedicationDispensed(CqlContext context, IEnumerable<MedicationDispense> Med)
     {
 
-        bool? a_(MedicationDispense? M) {
-            Code<MedicationDispense.MedicationDispenseStatusCodes>? c_ = M?.StatusElement;
+        bool? a_(MedicationDispense M) {
+            Code<MedicationDispense.MedicationDispenseStatusCodes> c_ = M?.StatusElement;
             MedicationDispense.MedicationDispenseStatusCodes? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
-            string?[]? f_ = [
+            string e_ = context.Operators.Convert<string>(d_);
+            string[] f_ = [
                 "completed",
                 "in-progress",
                 "on-hold",
             ];
-            bool? g_ = context.Operators.In<string?>(e_, (IEnumerable<string?>?)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
         }
 
-        IEnumerable<MedicationDispense?>? b_ = context.Operators.Where<MedicationDispense?>(Med, a_);
+        IEnumerable<MedicationDispense> b_ = context.Operators.Where<MedicationDispense>(Med, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isMedicationOrder")]
-    public IEnumerable<MedicationRequest?>? isMedicationOrder(CqlContext context, IEnumerable<MedicationRequest?>? MedicationRequest)
+    public IEnumerable<MedicationRequest> isMedicationOrder(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
     {
 
-        bool? a_(MedicationRequest? M) {
-            Code<MedicationRequest.MedicationrequestStatus>? c_ = M?.StatusElement;
+        bool? a_(MedicationRequest M) {
+            Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
             MedicationRequest.MedicationrequestStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
-            string?[]? f_ = [
+            string e_ = context.Operators.Convert<string>(d_);
+            string[] f_ = [
                 "active",
                 "completed",
             ];
-            bool? g_ = context.Operators.In<string?>(e_, (IEnumerable<string?>?)f_);
-            Code<MedicationRequest.MedicationRequestIntent>? h_ = M?.IntentElement;
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            Code<MedicationRequest.MedicationRequestIntent> h_ = M?.IntentElement;
             MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
-            string? j_ = context.Operators.Convert<string?>(i_);
-            string?[]? k_ = [
+            string j_ = context.Operators.Convert<string>(i_);
+            string[] k_ = [
                 "order",
                 "original-order",
                 "reflex-order",
                 "filler-order",
                 "instance-order",
             ];
-            bool? l_ = context.Operators.In<string?>(j_, (IEnumerable<string?>?)k_);
+            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
             bool? m_ = context.Operators.And(g_, l_);
             return m_;
         }
 
-        IEnumerable<MedicationRequest?>? b_ = context.Operators.Where<MedicationRequest?>(MedicationRequest, a_);
+        IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isPhysicalExamPerformed")]
-    public IEnumerable<Observation?>? isPhysicalExamPerformed(CqlContext context, IEnumerable<Observation?>? Obs)
+    public IEnumerable<Observation> isPhysicalExamPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
 
-        bool? a_(Observation? O) {
-            Code<ObservationStatus>? c_ = O?.StatusElement;
+        bool? a_(Observation O) {
+            Code<ObservationStatus> c_ = O?.StatusElement;
             ObservationStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
-            string?[]? f_ = [
+            string e_ = context.Operators.Convert<string>(d_);
+            string[] f_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string?>(e_, (IEnumerable<string?>?)f_);
-            List<CodeableConcept>? h_ = O?.Category;
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            List<CodeableConcept> h_ = O?.Category;
 
-            CqlConcept? i_(CodeableConcept? @this) {
-                CqlConcept? n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept i_(CodeableConcept @this) {
+                CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return n_;
             }
 
 
-            bool? j_(CqlConcept? ObservationCategory) {
-                CqlCode? o_ = this.exam(context);
-                CqlConcept? p_ = context.Operators.ConvertCodeToConcept(o_);
+            bool? j_(CqlConcept ObservationCategory) {
+                CqlCode o_ = this.exam(context);
+                CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
                 bool? q_ = context.Operators.Equivalent(ObservationCategory, p_);
                 return q_;
             }
 
-            IEnumerable<CqlConcept?>? k_ = context.Operators.SelectWhere<CodeableConcept?, CqlConcept?>((IEnumerable<CodeableConcept?>?)h_, i_, j_);
-            bool? l_ = context.Operators.Exists<CqlConcept?>(k_!);
+            IEnumerable<CqlConcept> k_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_, j_);
+            bool? l_ = context.Operators.Exists<CqlConcept>(k_);
             bool? m_ = context.Operators.And(g_, l_);
             return m_;
         }
 
-        IEnumerable<Observation?>? b_ = context.Operators.Where<Observation?>(Obs, a_);
+        IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isObservationBP")]
-    public IEnumerable<Observation?>? isObservationBP(CqlContext context, IEnumerable<Observation?>? Obs)
+    public IEnumerable<Observation> isObservationBP(CqlContext context, IEnumerable<Observation> Obs)
     {
 
-        bool? a_(Observation? O) {
-            Code<ObservationStatus>? c_ = O?.StatusElement;
+        bool? a_(Observation O) {
+            Code<ObservationStatus> c_ = O?.StatusElement;
             ObservationStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
-            string?[]? f_ = [
+            string e_ = context.Operators.Convert<string>(d_);
+            string[] f_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string?>(e_, (IEnumerable<string?>?)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
         }
 
-        IEnumerable<Observation?>? b_ = context.Operators.Where<Observation?>(Obs, a_);
+        IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isObservationBodyHeight")]
-    public IEnumerable<Observation?>? isObservationBodyHeight(CqlContext context, IEnumerable<Observation?>? Obs)
+    public IEnumerable<Observation> isObservationBodyHeight(CqlContext context, IEnumerable<Observation> Obs)
     {
 
-        bool? a_(Observation? O) {
-            Code<ObservationStatus>? c_ = O?.StatusElement;
+        bool? a_(Observation O) {
+            Code<ObservationStatus> c_ = O?.StatusElement;
             ObservationStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
-            string?[]? f_ = [
+            string e_ = context.Operators.Convert<string>(d_);
+            string[] f_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string?>(e_, (IEnumerable<string?>?)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
         }
 
-        IEnumerable<Observation?>? b_ = context.Operators.Where<Observation?>(Obs, a_);
+        IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isObservationBodyWeight")]
-    public IEnumerable<Observation?>? isObservationBodyWeight(CqlContext context, IEnumerable<Observation?>? Obs)
+    public IEnumerable<Observation> isObservationBodyWeight(CqlContext context, IEnumerable<Observation> Obs)
     {
 
-        bool? a_(Observation? O) {
-            Code<ObservationStatus>? c_ = O?.StatusElement;
+        bool? a_(Observation O) {
+            Code<ObservationStatus> c_ = O?.StatusElement;
             ObservationStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
-            string?[]? f_ = [
+            string e_ = context.Operators.Convert<string>(d_);
+            string[] f_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string?>(e_, (IEnumerable<string?>?)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
         }
 
-        IEnumerable<Observation?>? b_ = context.Operators.Where<Observation?>(Obs, a_);
+        IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isObservationBMI")]
-    public IEnumerable<Observation?>? isObservationBMI(CqlContext context, IEnumerable<Observation?>? Obs)
+    public IEnumerable<Observation> isObservationBMI(CqlContext context, IEnumerable<Observation> Obs)
     {
 
-        bool? a_(Observation? O) {
-            Code<ObservationStatus>? c_ = O?.StatusElement;
+        bool? a_(Observation O) {
+            Code<ObservationStatus> c_ = O?.StatusElement;
             ObservationStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
-            string?[]? f_ = [
+            string e_ = context.Operators.Convert<string>(d_);
+            string[] f_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string?>(e_, (IEnumerable<string?>?)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
         }
 
-        IEnumerable<Observation?>? b_ = context.Operators.Where<Observation?>(Obs, a_);
+        IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isObservationPediatricBMI")]
-    public IEnumerable<Observation?>? isObservationPediatricBMI(CqlContext context, IEnumerable<Observation?>? Obs)
+    public IEnumerable<Observation> isObservationPediatricBMI(CqlContext context, IEnumerable<Observation> Obs)
     {
 
-        bool? a_(Observation? O) {
-            Code<ObservationStatus>? c_ = O?.StatusElement;
+        bool? a_(Observation O) {
+            Code<ObservationStatus> c_ = O?.StatusElement;
             ObservationStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
-            string?[]? f_ = [
+            string e_ = context.Operators.Convert<string>(d_);
+            string[] f_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string?>(e_, (IEnumerable<string?>?)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
         }
 
-        IEnumerable<Observation?>? b_ = context.Operators.Where<Observation?>(Obs, a_);
+        IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isObservationSmokingStatus")]
-    public IEnumerable<Observation?>? isObservationSmokingStatus(CqlContext context, IEnumerable<Observation?>? Obs)
+    public IEnumerable<Observation> isObservationSmokingStatus(CqlContext context, IEnumerable<Observation> Obs)
     {
 
-        bool? a_(Observation? O) {
-            Code<ObservationStatus>? c_ = O?.StatusElement;
+        bool? a_(Observation O) {
+            Code<ObservationStatus> c_ = O?.StatusElement;
             ObservationStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
+            string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equal(e_, "final");
             return f_;
         }
 
-        IEnumerable<Observation?>? b_ = context.Operators.Where<Observation?>(Obs, a_);
+        IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
 
 
     [CqlFunctionDefinition("isSymptom")]
-    public IEnumerable<Observation?>? isSymptom(CqlContext context, IEnumerable<Observation?>? Obs)
+    public IEnumerable<Observation> isSymptom(CqlContext context, IEnumerable<Observation> Obs)
     {
 
-        bool? a_(Observation? O) {
-            Code<ObservationStatus>? c_ = O?.StatusElement;
+        bool? a_(Observation O) {
+            Code<ObservationStatus> c_ = O?.StatusElement;
             ObservationStatus? d_ = c_?.Value;
-            string? e_ = context.Operators.Convert<string?>(d_);
-            string?[]? f_ = [
+            string e_ = context.Operators.Convert<string>(d_);
+            string[] f_ = [
                 "preliminary",
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string?>(e_, (IEnumerable<string?>?)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
         }
 
-        IEnumerable<Observation?>? b_ = context.Operators.Where<Observation?>(Obs, a_);
+        IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
 

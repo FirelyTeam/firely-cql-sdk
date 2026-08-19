@@ -25,6 +25,12 @@
       // "CMS50FHIRReceiptofSpecialistReport.json"
 
     ],
+    "CSharpGenerating": {
+      // This corpus is not yet warning-clean under nullable reference types (#1564); until the
+      // generator's declaration nullability is consistent across emission positions, generate it
+      // null-oblivious so the project keeps building with TreatWarningsAsErrors.
+      "NullabilityEnabled": false
+    },
     // "DebugSymbolsFormat": "Embedded"
   },
   "Packaging": {

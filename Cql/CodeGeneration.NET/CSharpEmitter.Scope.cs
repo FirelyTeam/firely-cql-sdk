@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -356,7 +356,8 @@ internal partial class CSharpEmitter
             _statements.Add(() =>
             {
                 var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(resultType);
-                if (!resultType.IsValueType
+                if (_emitter._typeToCSharpConverter.NullabilityEnabled
+                    && !resultType.IsValueType
                     && !resultType.IsPointer
                     && !resultType.IsByRef
                     && !resultType.IsGenericParameter

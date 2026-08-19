@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -135,7 +135,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         using var servicesScope = _services.CreateScopedState();
 
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
-        var cSharpNamespace = Config.CSharpNamespace;
+        var cSharpNamespace = Config.CSharpGenerating.CSharpNamespace;
         var debugInformationFormat = Config.DebugSymbolsFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         ElmLibrary[] libraries = _artifactsById.Values.Select(selector: v => v.InputElmLibrary).ToArray();
@@ -211,7 +211,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                 cSharps.WithEach(t => _services.Logger.LogInformation("Compiling C# into .NET Assembly: {lib}", t.library.identifier)),
                 librarySet,
                 debugSymbolsFormat,
-                Config.AllowInvalidCSharp, errorStrategy => errorStrategy
+                Config.CSharpGenerating.AllowInvalidCSharp, errorStrategy => errorStrategy
                                                             .SetContinuation(BatchProcessExceptionContinuation)
                                                             .AddLoggerExceptionHandler(
                                                                 _services.Logger,

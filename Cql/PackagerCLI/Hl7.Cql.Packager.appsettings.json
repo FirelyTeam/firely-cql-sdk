@@ -1,4 +1,4 @@
-{
+﻿{
   "Logging": {
     "ConsoleLogLevel": "Information", // --console-log-level "Trace", "Debug", "Information", "Warning", "Error", "Critical" or "None"
     "FileLogLevel": "Information", // --file-log-level "Trace", "Debug", "Information", "Warning", "Error", "Critical" or "None"
@@ -19,10 +19,13 @@
     "ValidateLiterals": true
   },
   "Elm": {
-    "AllowInvalidCSharp": true,
     "JsonPretty": false, // --json-pretty
     "DebugSymbolsFormat": "None", // --debug-symbols : "None", "PortablePdb", "Embedded"
-    "CSharpNamespace": null, // --cs-namespace : The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries")
+    "CSharpGenerating": {
+      "NullabilityEnabled": true, // Emit "#nullable enable" and nullable annotations in generated C#
+      "CSharpNamespace": null, // --cs-namespace : The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries")
+      "AllowInvalidCSharp": true
+    },
     "SkipFiles": [
       // JSON Files that are skipped during the packaging process.
       // See the specific profile appsettings e.g. Hl7.Cql.Packager.appsettings.CMSMeasures.json

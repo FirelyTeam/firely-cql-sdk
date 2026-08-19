@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CodeGeneration.NET;
@@ -18,8 +19,16 @@ internal class TypeToCSharpConverter
     private readonly TypeCSharpFormat _asTargetCSharpFormat;
     private readonly bool _useCSharpValueTuples = true;
 
-    public TypeToCSharpConverter()
+    /// <summary>
+    /// When <see langword="false"/>, declarations render null-oblivious and the emitter suppresses
+    /// every nullable-specific construct (the <c>#nullable</c> directive, annotations and
+    /// null-forgiving operators).
+    /// </summary>
+    public bool NullabilityEnabled { get; }
+
+    public TypeToCSharpConverter(CSharpGeneratingConfig? cSharpGeneratingConfig = null)
     {
+        NullabilityEnabled = (cSharpGeneratingConfig ?? CSharpGeneratingConfig.Default).NullabilityEnabled;
         _typeCSharpFormat = new TypeCSharpFormat(UseKeywords: true, NoNamespaces: true, FormatName: FormatTypeNameAsTuple);
         _declarationCSharpFormat = _typeCSharpFormat with
         {
@@ -76,15 +85,16 @@ internal class TypeToCSharpConverter
     /// nullability, so generated declarations apply a blanket nullable annotation to
     /// reference types only.
     /// </summary>
-    public string ToCSharpDeclaration(Type type) => type.ToCSharpString(_declarationCSharpFormat);
+    public string ToCSharpDeclaration(Type type) =>
+        NullabilityEnabled ? type.ToCSharpString(_declarationCSharpFormat) : ToCSharp(type);
 
     /// <summary>
     /// Formats a type for an <c>as</c>-cast target: declaration-style generic/array element
     /// nullability, but without a top-level nullable-reference <c>?</c> (illegal in <c>as</c>
     /// targets, CS8651).
     /// </summary>
-    public string ToCSharpAsTarget(Type type)
-        => type.ToCSharpString(_asTargetCSharpFormat);
+    public string ToCSharpAsTarget(Type type) =>
+        NullabilityEnabled ? type.ToCSharpString(_asTargetCSharpFormat) : ToCSharp(type);
 
     public string GetMemberAccessNullabilityOperator(Type? type)
     {

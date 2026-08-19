@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Runtime;
@@ -62,8 +62,11 @@ partial class LibrarySetCSharpCodeGenerator
                     LibrarySetWriter.TupleMetadataBuilder,
                     LibraryName));
 
-            ISB.AppendLine("#nullable enable");
-            ISB.AppendLine();
+            if (LibrarySetWriter.TypeToCSharpConverter.NullabilityEnabled)
+            {
+                ISB.AppendLine("#nullable enable");
+                ISB.AppendLine();
+            }
             AppendUsings();
             AppendNamespaceFileScope();
             AppendClass();

@@ -1,5 +1,3 @@
-#nullable enable
-
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -103,18 +101,18 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     #region Parameters (1)
 
     [CqlParameterDefinition("Measurement Period")]
-    public CqlInterval<CqlDateTime?>? Measurement_Period(CqlContext context) =>
+    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private const long _cacheIndex_Measurement_Period = -8633000620496989027L;
 
-    private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
+    private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
-        CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS50FHIRReceiptofSpecialistReport-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime?>?)d_;
+        CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+        object d_ = context.ResolveParameter("CMS50FHIRReceiptofSpecialistReport-1.0.000", "Measurement Period", c_);
+        return (CqlInterval<CqlDateTime>)d_;
     }
 
 
@@ -123,15 +121,15 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     #region Functions and Expressions (12)
 
     [CqlExpressionDefinition("Patient")]
-    public Patient? Patient(CqlContext context) =>
+    public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private const long _cacheIndex_Patient = 993086970170150705L;
 
-    private Patient? Patient_Compute(CqlContext context)
+    private Patient Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient? b_ = context.Operators.SingletonFrom<Patient?>(a_);
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
         return b_;
     }
 
@@ -144,38 +142,38 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     private bool? Has_Encounter_during_Measurement_Period_Compute(CqlContext context)
     {
-        CqlValueSet? a_ = this.Office_Visit(context);
-        IEnumerable<Encounter?>? b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet? c_ = this.Ophthalmological_Services(context);
-        IEnumerable<Encounter?>? d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter?>? e_ = context.Operators.Union<Encounter?>(b_, d_);
-        CqlValueSet? f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
-        IEnumerable<Encounter?>? g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet? h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
-        IEnumerable<Encounter?>? i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter?>? j_ = context.Operators.Union<Encounter?>(g_, i_);
-        IEnumerable<Encounter?>? k_ = context.Operators.Union<Encounter?>(e_, j_);
-        CqlValueSet? l_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
-        IEnumerable<Encounter?>? m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet? n_ = this.Preventive_Care__Established_Office_Visit__0_to_17(context);
-        IEnumerable<Encounter?>? o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter?>? p_ = context.Operators.Union<Encounter?>(m_, o_);
-        IEnumerable<Encounter?>? q_ = context.Operators.Union<Encounter?>(k_, p_);
+        CqlValueSet a_ = this.Office_Visit(context);
+        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet c_ = this.Ophthalmological_Services(context);
+        IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
+        CqlValueSet f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
+        IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
+        IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
+        IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
+        CqlValueSet l_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
+        IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet n_ = this.Preventive_Care__Established_Office_Visit__0_to_17(context);
+        IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
+        IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 
-        bool? r_(Encounter? ValidEncounter) {
-            Code<Encounter.EncounterStatus>? t_ = ValidEncounter?.StatusElement;
+        bool? r_(Encounter ValidEncounter) {
+            Code<Encounter.EncounterStatus> t_ = ValidEncounter?.StatusElement;
             Encounter.EncounterStatus? u_ = t_?.Value;
-            Code<Encounter.EncounterStatus>? v_ = context.Operators.Convert<Code<Encounter.EncounterStatus>?>(u_);
+            Code<Encounter.EncounterStatus> v_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(u_);
             bool? w_ = context.Operators.Equal(v_, "finished");
-            CqlInterval<CqlDateTime?>? x_ = this.Measurement_Period(context);
-            Period? y_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime?>? z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
-            bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime?>(x_, z_, "day");
+            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+            Period y_ = ValidEncounter?.Period;
+            CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
+            bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
             bool? ab_ = context.Operators.And(w_, aa_);
             return ab_;
         }
 
-        bool? s_ = context.Operators.WhereAny<Encounter?>(q_, r_);
+        bool? s_ = context.Operators.WhereAny<Encounter>(q_, r_);
         return s_;
     }
 
@@ -188,77 +186,77 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     private bool? Has_Intervention_during_Measurement_Period_Compute(CqlContext context)
     {
-        CqlValueSet? a_ = this.Behavioral_Neuropsych_Assessment(context);
-        IEnumerable<Procedure?>? b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        CqlCode? c_ = this.Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(context);
-        IEnumerable<CqlCode?>? d_ = context.Operators.ToList<CqlCode?>(c_);
-        IEnumerable<Procedure?>? e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, d_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure?>? f_ = context.Operators.Union<Procedure?>(b_, e_);
-        CqlCode? g_ = this.Psychological_or_neuropsychological_test_administration_and_scoring_by_physician_or_other_qualified_health_care_professional__two_or_more_tests__any_method__first_30_minutes(context);
-        IEnumerable<CqlCode?>? h_ = context.Operators.ToList<CqlCode?>(g_);
-        IEnumerable<Procedure?>? i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        CqlCode? j_ = this.Psychological_or_neuropsychological_test_administration_and_scoring_by_technician__two_or_more_tests__any_method__first_30_minutes(context);
-        IEnumerable<CqlCode?>? k_ = context.Operators.ToList<CqlCode?>(j_);
-        IEnumerable<Procedure?>? l_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, k_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure?>? m_ = context.Operators.Union<Procedure?>(i_, l_);
-        IEnumerable<Procedure?>? n_ = context.Operators.Union<Procedure?>(f_, m_);
-        CqlCode? o_ = this.Psychotherapy_for_crisis__first_60_minutes(context);
-        IEnumerable<CqlCode?>? p_ = context.Operators.ToList<CqlCode?>(o_);
-        IEnumerable<Procedure?>? q_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, p_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        CqlValueSet? r_ = this.Psych_Visit_Diagnostic_Evaluation(context);
-        IEnumerable<Procedure?>? s_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure?>? t_ = context.Operators.Union<Procedure?>(q_, s_);
-        IEnumerable<Procedure?>? u_ = context.Operators.Union<Procedure?>(n_, t_);
-        CqlCode? v_ = this.Developmental_test_administration__including_assessment_of_fine_and_or_gross_motor__language__cognitive_level__social__memory_and_or_executive_functions_by_standardized_developmental_instruments_when_performed___by_physician_or_other_qualified_health_care_professional__with_interpretation_and_report__first_hour(context);
-        IEnumerable<CqlCode?>? w_ = context.Operators.ToList<CqlCode?>(v_);
-        IEnumerable<Procedure?>? x_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, w_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure?>? y_ = context.Operators.Union<Procedure?>(u_, x_);
-        IEnumerable<Procedure?>? z_ = Status_1_15_000.Instance.isProcedurePerformed(context, y_);
+        CqlValueSet a_ = this.Behavioral_Neuropsych_Assessment(context);
+        IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        CqlCode c_ = this.Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(context);
+        IEnumerable<CqlCode> d_ = context.Operators.ToList<CqlCode>(c_);
+        IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, d_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure> f_ = context.Operators.Union<Procedure>(b_, e_);
+        CqlCode g_ = this.Psychological_or_neuropsychological_test_administration_and_scoring_by_physician_or_other_qualified_health_care_professional__two_or_more_tests__any_method__first_30_minutes(context);
+        IEnumerable<CqlCode> h_ = context.Operators.ToList<CqlCode>(g_);
+        IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        CqlCode j_ = this.Psychological_or_neuropsychological_test_administration_and_scoring_by_technician__two_or_more_tests__any_method__first_30_minutes(context);
+        IEnumerable<CqlCode> k_ = context.Operators.ToList<CqlCode>(j_);
+        IEnumerable<Procedure> l_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, k_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure> m_ = context.Operators.Union<Procedure>(i_, l_);
+        IEnumerable<Procedure> n_ = context.Operators.Union<Procedure>(f_, m_);
+        CqlCode o_ = this.Psychotherapy_for_crisis__first_60_minutes(context);
+        IEnumerable<CqlCode> p_ = context.Operators.ToList<CqlCode>(o_);
+        IEnumerable<Procedure> q_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, p_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        CqlValueSet r_ = this.Psych_Visit_Diagnostic_Evaluation(context);
+        IEnumerable<Procedure> s_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure> t_ = context.Operators.Union<Procedure>(q_, s_);
+        IEnumerable<Procedure> u_ = context.Operators.Union<Procedure>(n_, t_);
+        CqlCode v_ = this.Developmental_test_administration__including_assessment_of_fine_and_or_gross_motor__language__cognitive_level__social__memory_and_or_executive_functions_by_standardized_developmental_instruments_when_performed___by_physician_or_other_qualified_health_care_professional__with_interpretation_and_report__first_hour(context);
+        IEnumerable<CqlCode> w_ = context.Operators.ToList<CqlCode>(v_);
+        IEnumerable<Procedure> x_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, w_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure> y_ = context.Operators.Union<Procedure>(u_, x_);
+        IEnumerable<Procedure> z_ = Status_1_15_000.Instance.isProcedurePerformed(context, y_);
 
-        bool? aa_(Procedure? ValidIntervention) {
-            CqlInterval<CqlDateTime?>? ac_ = this.Measurement_Period(context);
-            object? ad_;
-            DataType? ag_ = ValidIntervention?.Performed;
-            object? ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+        bool? aa_(Procedure ValidIntervention) {
+            CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
+            object ad_;
+            DataType ag_ = ValidIntervention?.Performed;
+            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
             bool ai_ = ah_ is CqlDateTime;
             if (ai_)
             {
-                DataType? aj_ = ValidIntervention?.Performed;
-                object? ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                DataType aj_ = ValidIntervention?.Performed;
+                object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
                 ad_ = ak_ as CqlDateTime;
             }
             else
             {
-                DataType? al_ = ValidIntervention?.Performed;
-                object? am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+                DataType al_ = ValidIntervention?.Performed;
+                object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
                 bool an_ = am_ is CqlQuantity;
                 if (an_)
                 {
-                    DataType? ao_ = ValidIntervention?.Performed;
-                    object? ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
+                    DataType ao_ = ValidIntervention?.Performed;
+                    object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
                     ad_ = ap_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType? aq_ = ValidIntervention?.Performed;
-                    object? ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
+                    DataType aq_ = ValidIntervention?.Performed;
+                    object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
                     bool as_ = ar_ is CqlInterval<CqlDateTime>;
                     if (as_)
                     {
-                        DataType? at_ = ValidIntervention?.Performed;
-                        object? au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        ad_ = au_ as CqlInterval<CqlDateTime?>;
+                        DataType at_ = ValidIntervention?.Performed;
+                        object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
+                        ad_ = au_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType? av_ = ValidIntervention?.Performed;
-                        object? aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
+                        DataType av_ = ValidIntervention?.Performed;
+                        object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
                         bool ax_ = aw_ is CqlInterval<CqlQuantity>;
                         if (ax_)
                         {
-                            DataType? ay_ = ValidIntervention?.Performed;
-                            object? az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                            ad_ = az_ as CqlInterval<CqlQuantity?>;
+                            DataType ay_ = ValidIntervention?.Performed;
+                            object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
+                            ad_ = az_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -267,65 +265,65 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                     }
                 }
             }
-            CqlInterval<CqlDateTime?>? ae_ = QICoreCommon_4_0_000.Instance.toInterval(context, ad_);
-            bool? af_ = context.Operators.IntervalIncludesInterval<CqlDateTime?>(ac_, ae_, "day");
+            CqlInterval<CqlDateTime> ae_ = QICoreCommon_4_0_000.Instance.toInterval(context, ad_);
+            bool? af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ac_, ae_, "day");
             return af_;
         }
 
-        bool? ab_ = context.Operators.WhereAny<Procedure?>(z_, aa_);
+        bool? ab_ = context.Operators.WhereAny<Procedure>(z_, aa_);
         return ab_;
     }
 
 
     [CqlExpressionDefinition("First Referral during First 10 Months of Measurement Period")]
-    public ServiceRequest? First_Referral_during_First_10_Months_of_Measurement_Period(CqlContext context) =>
+    public ServiceRequest First_Referral_during_First_10_Months_of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_First_Referral_during_First_10_Months_of_Measurement_Period, First_Referral_during_First_10_Months_of_Measurement_Period_Compute);
 
     private const long _cacheIndex_First_Referral_during_First_10_Months_of_Measurement_Period = -6349200580831879765L;
 
-    private ServiceRequest? First_Referral_during_First_10_Months_of_Measurement_Period_Compute(CqlContext context)
+    private ServiceRequest First_Referral_during_First_10_Months_of_Measurement_Period_Compute(CqlContext context)
     {
-        CqlValueSet? a_ = this.Referral(context);
-        IEnumerable<ServiceRequest?>? b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
+        CqlValueSet a_ = this.Referral(context);
+        IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 
-        bool? c_(ServiceRequest? ReferralOrder) {
-            Code<RequestStatus>? h_ = ReferralOrder?.StatusElement;
+        bool? c_(ServiceRequest ReferralOrder) {
+            Code<RequestStatus> h_ = ReferralOrder?.StatusElement;
             RequestStatus? i_ = h_?.Value;
-            Code<RequestStatus>? j_ = context.Operators.Convert<Code<RequestStatus>?>(i_);
-            string? k_ = context.Operators.Convert<string?>(j_);
-            string?[]? l_ = [
+            Code<RequestStatus> j_ = context.Operators.Convert<Code<RequestStatus>>(i_);
+            string k_ = context.Operators.Convert<string>(j_);
+            string[] l_ = [
                 "active",
                 "completed",
             ];
-            bool? m_ = context.Operators.In<string?>(k_, (IEnumerable<string?>?)l_);
-            Code<RequestIntent>? n_ = ReferralOrder?.IntentElement;
+            bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
+            Code<RequestIntent> n_ = ReferralOrder?.IntentElement;
             RequestIntent? o_ = n_?.Value;
-            Code<RequestIntent>? p_ = context.Operators.Convert<Code<RequestIntent>?>(o_);
+            Code<RequestIntent> p_ = context.Operators.Convert<Code<RequestIntent>>(o_);
             bool? q_ = context.Operators.Equal(p_, "order");
             bool? r_ = context.Operators.And(m_, q_);
-            FhirDateTime? s_ = ReferralOrder?.AuthoredOnElement;
-            CqlDateTime? t_ = context.Operators.Convert<CqlDateTime?>(s_);
-            CqlInterval<CqlDateTime?>? u_ = this.Measurement_Period(context);
-            CqlDateTime? v_ = context.Operators.Start(u_);
+            FhirDateTime s_ = ReferralOrder?.AuthoredOnElement;
+            CqlDateTime t_ = context.Operators.Convert<CqlDateTime>(s_);
+            CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
+            CqlDateTime v_ = context.Operators.Start(u_);
             int? w_ = context.Operators.DateTimeComponentFrom(v_, "year");
-            CqlDate? x_ = context.Operators.Date(w_, 10, 31);
-            CqlDateTime? y_ = context.Operators.ConvertDateToDateTime(x_);
-            CqlInterval<CqlDateTime?>? z_ = context.Operators.Interval(v_, y_, true, true);
-            bool? aa_ = context.Operators.In<CqlDateTime?>(t_, z_, "day");
+            CqlDate x_ = context.Operators.Date(w_, 10, 31);
+            CqlDateTime y_ = context.Operators.ConvertDateToDateTime(x_);
+            CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, true, true);
+            bool? aa_ = context.Operators.In<CqlDateTime>(t_, z_, "day");
             bool? ab_ = context.Operators.And(r_, aa_);
             return ab_;
         }
 
-        IEnumerable<ServiceRequest?>? d_ = context.Operators.Where<ServiceRequest?>(b_, c_);
+        IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
 
-        object e_(ServiceRequest? @this) {
-            FhirDateTime? ac_ = @this?.AuthoredOnElement;
-            CqlDateTime? ad_ = context.Operators.Convert<CqlDateTime?>(ac_);
+        object e_(ServiceRequest @this) {
+            FhirDateTime ac_ = @this?.AuthoredOnElement;
+            CqlDateTime ad_ = context.Operators.Convert<CqlDateTime>(ac_);
             return ad_!;
         }
 
-        IEnumerable<ServiceRequest?>? f_ = context.Operators.SortBy<ServiceRequest?>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
-        ServiceRequest? g_ = context.Operators.First<ServiceRequest?>(f_!);
+        IEnumerable<ServiceRequest> f_ = context.Operators.SortBy<ServiceRequest>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
+        ServiceRequest g_ = context.Operators.First<ServiceRequest>(f_);
         return g_;
     }
 
@@ -341,7 +339,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
         bool? a_ = this.Has_Encounter_during_Measurement_Period(context);
         bool? b_ = this.Has_Intervention_during_Measurement_Period(context);
         bool? c_ = context.Operators.Or(a_, b_);
-        ServiceRequest? d_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
+        ServiceRequest d_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
         bool? e_ = context.Operators.Not((bool?)(d_ is null));
         bool? f_ = context.Operators.And(c_, e_);
         return f_;
@@ -362,53 +360,53 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = -3766651685399998887L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = 2101280260375690497L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = 4493470933035843420L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Sex")]
-    public CqlCode? SDE_Sex(CqlContext context) =>
+    public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private const long _cacheIndex_SDE_Sex = -7763885849007845267L;
 
-    private CqlCode? SDE_Sex_Compute(CqlContext context)
+    private CqlCode SDE_Sex_Compute(CqlContext context)
     {
-        CqlCode? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
         return a_;
     }
 
@@ -421,50 +419,50 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     private bool? Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop_Compute(CqlContext context)
     {
-        CqlCode? a_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
-        IEnumerable<CqlCode?>? b_ = context.Operators.ToList<CqlCode?>(a_);
-        IEnumerable<Task?>? c_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-task"));
+        CqlCode a_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
+        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+        IEnumerable<Task> c_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-task"));
 
-        bool? d_(Task? ConsultantReportObtained) {
-            ServiceRequest? f_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
-            ServiceRequest?[]? g_ = [
+        bool? d_(Task ConsultantReportObtained) {
+            ServiceRequest f_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
+            ServiceRequest[] g_ = [
                 f_,
             ];
 
-            bool? h_(ServiceRequest? FirstReferral) {
-                ResourceReference? j_ = ConsultantReportObtained?.Focus;
+            bool? h_(ServiceRequest FirstReferral) {
+                ResourceReference j_ = ConsultantReportObtained?.Focus;
                 bool? k_ = QICoreCommon_4_0_000.Instance.references(context, j_, FirstReferral);
-                List<ResourceReference>? l_ = ConsultantReportObtained?.BasedOn;
-                bool? m_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference?>?)l_, FirstReferral);
+                List<ResourceReference> l_ = ConsultantReportObtained?.BasedOn;
+                bool? m_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)l_, FirstReferral);
                 bool? n_ = context.Operators.Or(k_, m_);
-                Period? o_ = ConsultantReportObtained?.ExecutionPeriod;
-                CqlInterval<CqlDateTime?>? p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
-                CqlDateTime? q_ = context.Operators.End(p_);
-                FhirDateTime? r_ = FirstReferral?.AuthoredOnElement;
-                CqlDateTime? s_ = context.Operators.Convert<CqlDateTime?>(r_);
-                bool? t_ = context.Operators.After(q_, s_, (string?)default);
+                Period o_ = ConsultantReportObtained?.ExecutionPeriod;
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
+                CqlDateTime q_ = context.Operators.End(p_);
+                FhirDateTime r_ = FirstReferral?.AuthoredOnElement;
+                CqlDateTime s_ = context.Operators.Convert<CqlDateTime>(r_);
+                bool? t_ = context.Operators.After(q_, s_, (string)default);
                 bool? u_ = context.Operators.And(n_, t_);
-                CqlInterval<CqlDateTime?>? v_ = this.Measurement_Period(context);
-                bool? w_ = context.Operators.In<CqlDateTime?>(q_, v_, "day");
+                CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
+                bool? w_ = context.Operators.In<CqlDateTime>(q_, v_, "day");
                 bool? x_ = context.Operators.And(u_, w_);
-                Code<Task.TaskStatus>? y_ = ConsultantReportObtained?.StatusElement;
+                Code<Task.TaskStatus> y_ = ConsultantReportObtained?.StatusElement;
                 Task.TaskStatus? z_ = y_?.Value;
-                string? aa_ = context.Operators.Convert<string?>(z_);
+                string aa_ = context.Operators.Convert<string>(z_);
                 bool? ab_ = context.Operators.Equal(aa_, "completed");
                 bool? ac_ = context.Operators.And(x_, ab_);
-                CodeableConcept? ad_ = ConsultantReportObtained?.ReasonCode;
-                CqlConcept? ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ad_);
-                CqlValueSet? af_ = this.Consultant_Report(context);
+                CodeableConcept ad_ = ConsultantReportObtained?.ReasonCode;
+                CqlConcept ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ad_);
+                CqlValueSet af_ = this.Consultant_Report(context);
                 bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
                 bool? ah_ = context.Operators.And(ac_, ag_);
                 return ah_;
             }
 
-            bool? i_ = context.Operators.WhereAny<ServiceRequest?>((IEnumerable<ServiceRequest?>?)g_, h_);
+            bool? i_ = context.Operators.WhereAny<ServiceRequest>((IEnumerable<ServiceRequest>)g_, h_);
             return i_;
         }
 
-        bool? e_ = context.Operators.WhereAny<Task?>(c_, d_);
+        bool? e_ = context.Operators.WhereAny<Task>(c_, d_);
         return e_;
     }
 

@@ -100,10 +100,56 @@ public class CSharpGenerationGoldenTests
         AssertNoCs86xxWarnings("RR23", LibrarySetsDirs.RR23.CSharpDir);
     }
 
-    private static Dictionary<string, string> GenerateWithToolkit(LibrarySet librarySet)
+    [TestMethod]
+    public void NullabilityDisabled_EmitsNullObliviousCSharp()
+    {
+        LibrarySet librarySet = new();
+        librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.CoreTests.Hl7ElmDir, "FHIRHelpers", "4.0.1");
+
+        var nullOblivious = GenerateWithToolkit(
+                librarySet,
+                new ElmToolkitConfig(CSharpGenerating: new CSharpGeneratingConfig(NullabilityEnabled: false)))
+            .Values
+            .First();
+
+        Assert.IsFalse(
+            nullOblivious.Contains("#nullable"),
+            "With NullabilityEnabled off, no '#nullable' directive should be emitted.");
+        Assert.IsFalse(
+            nullOblivious.Contains("CqlInterval<CqlDateTime>?"),
+            "With NullabilityEnabled off, reference-typed declarations should carry no annotation.");
+        Assert.IsFalse(
+            nullOblivious.Contains("context!"),
+            "With NullabilityEnabled off, no null-forgiving operator should be emitted.");
+
+        // The assertions above only catch the shapes we thought to name. Compiling the result
+        // outside a nullable context is the real invariant: any stray annotation is CS8669, which
+        // is how the first version of this switch leaked "FhirDateTime? a_ = period?.StartElement;"
+        // into a file with no '#nullable' directive.
+        AssertNoNullableDiagnostics(
+            "NullObliviousFhirHelpers",
+            [CSharpSyntaxTree.ParseText(nullOblivious)],
+            NullableContextOptions.Disable,
+            "null-oblivious generated C#");
+
+        // The same library with nullability on must be the inverse, so this pins the flag rather
+        // than a fixture that simply had nothing to annotate.
+        var annotated = GenerateWithToolkit(librarySet).Values.First();
+        StringAssert.Contains(annotated, "#nullable enable");
+        StringAssert.Contains(annotated, "CqlInterval<CqlDateTime?>?");
+    }
+
+    // Kept as a single-argument method so it still converts to the Func<LibrarySet, …> the
+    // golden-file helpers take.
+    private static Dictionary<string, string> GenerateWithToolkit(LibrarySet librarySet) =>
+        GenerateWithToolkit(librarySet, null);
+
+    private static Dictionary<string, string> GenerateWithToolkit(
+        LibrarySet librarySet,
+        ElmToolkitConfig? config)
     {
         var elmToolkit =
-            new ElmToolkit()
+            new ElmToolkit(config: config)
                 .AddElmLibraries(librarySet)
                 .CompileToAssemblies();
 
@@ -240,26 +286,41 @@ public class CSharpGenerationGoldenTests
         var gcsFiles = csharpDir.GetFiles("*.g.cs");
         Assert.AreNotEqual(0, gcsFiles.Length, $"No generated files found in {csharpDir.FullName}.");
 
-        var syntaxTrees = gcsFiles
-            .Select(f => CSharpSyntaxTree.ParseText(File.ReadAllText(f.FullName), path: f.FullName))
-            .ToArray();
+        AssertNoNullableDiagnostics(
+            assemblyName,
+            gcsFiles.Select(f => CSharpSyntaxTree.ParseText(File.ReadAllText(f.FullName), path: f.FullName)).ToArray(),
+            NullableContextOptions.Enable,
+            csharpDir.FullName);
+    }
 
+    /// <summary>
+    /// Compiles the given sources under <paramref name="nullableContextOptions"/> and asserts no
+    /// CS86xx diagnostic is reported. Scoped to the nullable family on purpose: compiling generated
+    /// code standalone also raises reference-resolution noise (CS1701, CS0436) that says nothing
+    /// about the emitted code.
+    /// </summary>
+    private static void AssertNoNullableDiagnostics(
+        string assemblyName,
+        SyntaxTree[] syntaxTrees,
+        NullableContextOptions nullableContextOptions,
+        string description)
+    {
         var compilation = CSharpCompilation.Create(
             assemblyName,
             syntaxTrees: syntaxTrees,
             references: GetCompilationReferences(),
             options: new CSharpCompilationOptions(
                 outputKind: OutputKind.DynamicallyLinkedLibrary,
-                nullableContextOptions: NullableContextOptions.Enable));
+                nullableContextOptions: nullableContextOptions));
 
-        var nullableWarnings = compilation.GetDiagnostics()
-            .Where(d => d.Severity == DiagnosticSeverity.Warning && d.Id.StartsWith("CS86", StringComparison.Ordinal))
+        var nullableDiagnostics = compilation.GetDiagnostics()
+            .Where(d => d.Severity >= DiagnosticSeverity.Warning && d.Id.StartsWith("CS86", StringComparison.Ordinal))
             .ToList();
 
         Assert.AreEqual(
             0,
-            nullableWarnings.Count,
-            $"Expected no CS86xx warnings in {csharpDir.FullName}. Found:{Environment.NewLine}{string.Join(Environment.NewLine, nullableWarnings.Take(200))}");
+            nullableDiagnostics.Count,
+            $"Expected no CS86xx diagnostics in {description} under {nullableContextOptions}. Found:{Environment.NewLine}{string.Join(Environment.NewLine, nullableDiagnostics.Take(200))}");
     }
 
     private static IEnumerable<MetadataReference> GetCompilationReferences()

@@ -1,6 +1,11 @@
 ﻿{
   "Elm": {
     "SkipFiles": [
-    ]
+    ],
+    "CSharpGenerating": {
+      // See the dqm-content-qicore-2025 profile: this corpus is not yet warning-clean under
+      // nullable reference types (#1564), so generate it null-oblivious for now.
+      "NullabilityEnabled": false
+    }
   }
 }

@@ -114,7 +114,8 @@ internal partial class CSharpEmitter
             var parameter = parameters[i];
             var code = child(a).Code;
             var parameterNullability = NullabilityInfoContext.Create(parameter);
-            if (!typeof(Delegate).IsAssignableFrom(parameter.ParameterType)
+            if (_typeToCSharpConverter.NullabilityEnabled
+                && !typeof(Delegate).IsAssignableFrom(parameter.ParameterType)
                 && RequiresNestedNotNull(parameterNullability)
                 && (a.Type.IsNullableValueType(out _) || !a.Type.IsValueType))
             {
@@ -134,8 +135,11 @@ internal partial class CSharpEmitter
         return $"{target}{(call.NullConditional ? "?." : ".")}{methodName}({arguments})";
     }
 
-    private static bool ShouldApplyNullForgivingOperator(ParameterInfo parameter, CodeExpression argument)
+    private bool ShouldApplyNullForgivingOperator(ParameterInfo parameter, CodeExpression argument)
     {
+        if (!_typeToCSharpConverter.NullabilityEnabled)
+            return false;
+
         if (argument is CodeLambda or CodeConstant or CodeDefault or CodeContextParameter)
             return false;
 
@@ -149,8 +153,11 @@ internal partial class CSharpEmitter
         return !argument.Type.IsValueType;
     }
 
-    private static bool ShouldApplyNullForgivingOperator(MemberInfo member, CodeExpression value)
+    private bool ShouldApplyNullForgivingOperator(MemberInfo member, CodeExpression value)
     {
+        if (!_typeToCSharpConverter.NullabilityEnabled)
+            return false;
+
         if (value is CodeLambda or CodeConstant or CodeDefault or CodeContextParameter)
             return false;
 
@@ -217,6 +224,11 @@ internal partial class CSharpEmitter
 
     internal string ToCSharpDeclaration(CodeExpression node)
     {
+        // This method appends its own nullable annotation below, so it has to honour the switch
+        // itself — ToCSharpDeclaration(Type) is not in the path that produces it.
+        if (!_typeToCSharpConverter.NullabilityEnabled)
+            return _typeToCSharpConverter.ToCSharp(node.Type);
+
         if (node is not CodeProperty property)
             return _typeToCSharpConverter.ToCSharpDeclaration(node.Type);
 
@@ -425,7 +437,8 @@ internal partial class CSharpEmitter
             ? $"default({_typeToCSharpConverter.ToCSharp(receiver.Type)})"
             : child(receiver).Code.ParenthesizeIfNeeded();
 
-        if (!property.NullConditional && receiver is CodeCast { Kind: CodeCastKind.As })
+        if (_typeToCSharpConverter.NullabilityEnabled
+            && !property.NullConditional && receiver is CodeCast { Kind: CodeCastKind.As })
             target = $"{target}!";
 
         // The old writer's GetMemberAccessNullabilityOperator: a plain (non-null-conditional)
@@ -667,7 +680,8 @@ internal partial class CSharpEmitter
         {
             var code = child(a).Code;
             var parameterNullability = NullabilityInfoContext.Create(parameters[i]);
-            if (!typeof(Delegate).IsAssignableFrom(parameters[i].ParameterType)
+            if (_typeToCSharpConverter.NullabilityEnabled
+                && !typeof(Delegate).IsAssignableFrom(parameters[i].ParameterType)
                 && RequiresNestedNotNull(parameterNullability)
                 && (a.Type.IsNullableValueType(out _) || !a.Type.IsValueType))
             {
