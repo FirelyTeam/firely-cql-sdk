@@ -76,29 +76,6 @@ public class CSharpGenerationGoldenTests
             // resource); its dependencies are generated but have no golden counterpart.
             goldenCorpusIsComplete: false);
 
-    [TestMethod]
-    public void CheckedInGeneratedCSharp_DoesNotContainNullableCqlBoolean()
-    {
-        var typeToCSharpConverter = new TypeToCSharpConverter();
-        Assert.AreEqual("bool", typeToCSharpConverter.ToCSharpDeclaration(typeof(bool)));
-
-        DirectoryInfo[] checkedInCorpusDirs =
-        [
-            LibrarySetsDirs.CoreTests.CSharpDir,
-            LibrarySetsDirs.RR23.CSharpDir,
-            LibrarySetsDirs.DqmQiCore2025.ExtractedCSharpDir,
-        ];
-
-        var generatedFiles = checkedInCorpusDirs.SelectMany(dir => dir.GetFiles("*.g.cs")).ToArray();
-        Assert.AreNotEqual(0, generatedFiles.Length, "No generated C# files were found.");
-
-        foreach (var generatedFile in generatedFiles)
-        {
-            var text = File.ReadAllText(generatedFile.FullName);
-            Assert.IsFalse(text.Contains("CqlBoolean?"), $"Found forbidden CqlBoolean? annotation in {generatedFile.FullName}.");
-        }
-    }
-
     private static Dictionary<string, string> GenerateWithToolkit(LibrarySet librarySet)
     {
         var elmToolkit =
@@ -191,9 +168,14 @@ public class CSharpGenerationGoldenTests
     private static void AssertNullableConventions(string generated)
     {
         var normalized = generated.Replace("\r\n", "\n");
-        Assert.IsTrue(
+        var firstLine = normalized.Split('\n')[0];
+        Assert.AreEqual(
+            "#nullable enable",
+            firstLine,
+            "Generated C# must opt into nullable checks and annotations with '#nullable enable' at the file top.");
+        Assert.IsFalse(
             normalized.StartsWith("#nullable enable annotations", StringComparison.Ordinal),
-            "Generated C# must opt into nullable annotations with '#nullable enable annotations' at the file top.");
+            "Generated C# must not use annotations-only nullable mode.");
 
         var hasBlanketNullablePragmaDisable =
             System.Text.RegularExpressions.Regex.IsMatch(

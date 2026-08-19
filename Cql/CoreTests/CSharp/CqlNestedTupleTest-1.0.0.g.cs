@@ -1,4 +1,4 @@
-#nullable enable annotations
+#nullable enable
 
 using System;
 using System.Linq;
@@ -21,15 +21,15 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
     #region Functions and Expressions (1)
 
     [CqlExpressionDefinition("Result")]
-    public (CqlTupleMetadata, (CqlTupleMetadata, string? result1, string? result2)? result, string? status)? Result(CqlContext context) =>
+    public (CqlTupleMetadata, string? status, (CqlTupleMetadata, string? result1, string? result2)? result)? Result(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Result, Result_Compute);
 
     private const long _cacheIndex_Result = -5211663732441812733L;
 
-    private (CqlTupleMetadata, (CqlTupleMetadata, string? result1, string? result2)? result, string? status)? Result_Compute(CqlContext context)
+    private (CqlTupleMetadata, string? status, (CqlTupleMetadata, string? result1, string? result2)? result)? Result_Compute(CqlContext context)
     {
         (CqlTupleMetadata, string? result1, string? result2)? a_ = (CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ, "some first result", "some second result");
-        (CqlTupleMetadata, (CqlTupleMetadata, string? result1, string? result2)? result, string? status)? b_ = (CqlTupleMetadata_EDCNVAaGTSjJYEdHbFSMjTdAe, a_, "success");
+        (CqlTupleMetadata, string? status, (CqlTupleMetadata, string? result1, string? result2)? result)? b_ = (CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY, "success", a_);
         return b_;
     }
 
@@ -54,9 +54,9 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
 
     #region CqlTupleMetadata Properties
 
-    private static CqlTupleMetadata CqlTupleMetadata_EDCNVAaGTSjJYEdHbFSMjTdAe = new(
-       [typeof((CqlTupleMetadata, string result1, string result2)?), typeof(string)],
-       ["result", "status"]);
+    private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
+       [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
+       ["status", "result"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ = new(
        [typeof(string), typeof(string)],

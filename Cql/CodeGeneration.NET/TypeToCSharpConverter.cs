@@ -73,6 +73,19 @@ internal class TypeToCSharpConverter
     /// </summary>
     public string ToCSharpDeclaration(Type type) => type.ToCSharpString(_declarationCSharpFormat);
 
+    /// <summary>
+    /// Formats a type for an <c>as</c>-cast target: declaration-style generic/array element
+    /// nullability, but without a top-level nullable-reference <c>?</c> (illegal in <c>as</c>
+    /// targets, CS8651).
+    /// </summary>
+    public string ToCSharpAsTarget(Type type)
+    {
+        var declaration = ToCSharpDeclaration(type);
+        if (!type.IsValueType && declaration.EndsWith("?", StringComparison.Ordinal))
+            return declaration[..^1];
+        return declaration;
+    }
+
     public string GetMemberAccessNullabilityOperator(Type? type)
     {
         if (type is null) return "";

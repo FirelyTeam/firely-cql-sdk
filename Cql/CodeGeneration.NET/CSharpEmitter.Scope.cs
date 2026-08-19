@@ -202,7 +202,10 @@ internal partial class CSharpEmitter
             var local = new CodeLocal(node.Type);
             var name = AllocateName(null);
             _emitter._assignedNames[local] = name;
-            var statement = $"{typeSyntax} {name} = {code};";
+            var initializer = node is CodeProperty && code is not ("null" or "default")
+                ? $"{code.ParenthesizeIfNeeded()}!"
+                : code;
+            var statement = $"{typeSyntax} {name} = {initializer};";
             _statements.Add(() => statement);
 
             var atom = new Atom(name, name, local);
@@ -225,7 +228,10 @@ internal partial class CSharpEmitter
 
                 var parameterList = string.Join(", ",
                     lambda.Parameters.Select(p => $"{_emitter._typeToCSharpConverter.ToCSharpDeclaration(p.Type)} {_emitter._assignedNames[p]}"));
-                var returnType = _emitter._typeToCSharpConverter.ToCSharpDeclaration(lambda.Body.Type);
+                var objectReturn = lambda.Body.Type == typeof(object);
+                var returnType = objectReturn
+                    ? _emitter._typeToCSharpConverter.ToCSharp(lambda.Body.Type)
+                    : _emitter._typeToCSharpConverter.ToCSharpDeclaration(lambda.Body.Type);
 
                 // A body that linearizes without hoisting any statement prints expression-
                 // bodied ("=> expr;"), matching the old writer's BuildLambdaOperator, which
@@ -235,7 +241,10 @@ internal partial class CSharpEmitter
                 // keyed on the body being a BlockExpression, so the expression-bodied form gets
                 // none of the surrounding blank lines either.
                 if (!nested.HasStatements && result is not null)
-                    return $"{returnType} {functionName}({parameterList}) => {result.Code};";
+                {
+                    var expressionBody = objectReturn ? $"{result.Code.ParenthesizeIfNeeded()}!" : result.Code;
+                    return $"{returnType} {functionName}({parameterList}) => {expressionBody};";
+                }
 
                 // Old format: blank line before the definition, opening brace on the
                 // signature line, blank line after (via the trailing newline).
@@ -246,7 +255,12 @@ internal partial class CSharpEmitter
                 {
                     nested.WriteStatements(isb);
                     if (result is not null)
-                        isb.AppendLine(TailStatement(result));
+                    {
+                        if (objectReturn && result.Node is not CodeThrow)
+                            isb.AppendLine($"return {result.Code.ParenthesizeIfNeeded()}!;");
+                        else
+                            isb.AppendLine(TailStatement(result));
+                    }
                 }
                 isb.AppendLine("}");
                 return isb;
@@ -481,9 +495,17 @@ internal partial class CSharpEmitter
                 var atom = branchScope.Linearize(value, tailPosition: resultName is null);
                 branchScope.WriteStatements(isb);
                 if (atom is not null)
-                    isb.AppendLine(resultName is null || atom.Node is CodeThrow
-                        ? TailStatement(atom)
-                        : $"{resultName} = {atom.Code};");
+                {
+                    if (resultName is null || atom.Node is CodeThrow)
+                        isb.AppendLine(TailStatement(atom));
+                    else
+                    {
+                        var assignmentCode = atom.Node is CodeProperty && atom.Code is not ("null" or "default")
+                            ? $"{atom.Code.ParenthesizeIfNeeded()}!"
+                            : atom.Code;
+                        isb.AppendLine($"{resultName} = {assignmentCode};");
+                    }
+                }
             }
             isb.AppendLine("}");
         }

@@ -1,4 +1,4 @@
-#nullable enable annotations
+#nullable enable
 
 using System;
 using System.Linq;
@@ -48,7 +48,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     private string? ChosenSubCategory_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1");
+        object? a_ = context.ResolveParameter("ValueSetExprExample-1.0.0"!, "ChosenSubCategory"!, "1");
         return (string?)a_;
     }
 
@@ -61,7 +61,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     private CqlCode? ChosenCode_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", default, default));
+        object? a_ = context.ResolveParameter("ValueSetExprExample-1.0.0"!, "ChosenCode"!, new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", default, default));
         return (CqlCode?)a_;
     }
 
@@ -79,7 +79,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     private CqlValueSet? ValueSetA_Compute(CqlContext context)
     {
         string? a_ = this.ChosenSubCategory(context);
-        bool? b_ = context.Operators.Equal(a_, "1");
+        bool? b_ = context!.Operators.Equal(a_, "1");
         if (b_ ?? false)
         {
             CqlValueSet? c_ = this.ValueSet_A_1(context);
@@ -88,7 +88,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         else
         {
             string? d_ = this.ChosenSubCategory(context);
-            bool? e_ = context.Operators.Equal(d_, "2");
+            bool? e_ = context!.Operators.Equal(d_, "2");
             if (e_ ?? false)
             {
                 CqlValueSet? f_ = this.ValueSet_A_2(context);
@@ -96,7 +96,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
             }
             else
             {
-                return null as CqlValueSet;
+                return default;
             }
         }
     }
@@ -111,7 +111,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     private CqlValueSet? ValueSetB_Compute(CqlContext context)
     {
         string? a_ = this.ChosenSubCategory(context);
-        bool? b_ = context.Operators.Equal(a_, "1");
+        bool? b_ = context!.Operators.Equal(a_, "1");
         if (b_ ?? false)
         {
             CqlValueSet? c_ = this.ValueSet_B_1(context);
@@ -120,7 +120,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         else
         {
             string? d_ = this.ChosenSubCategory(context);
-            bool? e_ = context.Operators.Equal(d_, "2");
+            bool? e_ = context!.Operators.Equal(d_, "2");
             if (e_ ?? false)
             {
                 CqlValueSet? f_ = this.ValueSet_B_2(context);
@@ -128,7 +128,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
             }
             else
             {
-                return null as CqlValueSet;
+                return default;
             }
         }
     }
@@ -144,7 +144,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     {
         CqlCode? a_ = this.ChosenCode(context);
         CqlValueSet? b_ = this.ValueSetA(context);
-        bool? c_ = context.Operators.CodeInValueSet(a_, b_);
+        bool? c_ = context!.Operators.CodeInValueSet(a_, b_);
         if (c_ ?? false)
         {
             return "a";
@@ -153,14 +153,14 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         {
             CqlCode? d_ = this.ChosenCode(context);
             CqlValueSet? e_ = this.ValueSetB(context);
-            bool? f_ = context.Operators.CodeInValueSet(d_, e_);
+            bool? f_ = context!.Operators.CodeInValueSet(d_, e_);
             if (f_ ?? false)
             {
                 return "b";
             }
             else
             {
-                return null as string;
+                return default;
             }
         }
     }

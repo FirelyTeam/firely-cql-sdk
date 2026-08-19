@@ -239,6 +239,9 @@ public class CSharpFormatterTests
         (Type type, string expected)[] testCases =
         [
             (typeof(string), "string?"),
+            (typeof(bool), "bool"),
+            (typeof(bool?), "bool?"),
+            (typeof(decimal), "decimal"),
             (typeof(int), "int"),
             (typeof(int?), "int?"),
             (typeof(object), "object?"),

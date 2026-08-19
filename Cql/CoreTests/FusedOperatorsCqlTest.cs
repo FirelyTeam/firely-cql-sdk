@@ -98,11 +98,11 @@ public class FusedOperatorsCqlTest
             .cSharp;
 
         foreach (var fused in new[] { "WhereAny", "WhereSelect", "SelectWhere", "SelectDistinct" })
-            StringAssert.Contains(generated, $"context.Operators.{fused}<", $"Expected a fused {fused} call.");
+            StringAssert.Contains(generated, $"context!.Operators.{fused}<", $"Expected a fused {fused} call.");
 
         foreach (var composed in new[] { "Where", "Select", "Exists", "Distinct" })
             Assert.IsFalse(
-                generated.Contains($"context.Operators.{composed}<"),
+                generated.Contains($"context!.Operators.{composed}<"),
                 $"An unfused {composed} call survived; every producer in this fixture is immediately consumed.");
     }
 }

@@ -16,6 +16,8 @@ namespace Hl7.Cql.CodeGeneration.NET;
 // fixed in #1311 (is-patterns, casts through object) are preserved here as well.
 internal partial class CSharpEmitter
 {
+    private static readonly NullabilityInfoContext NullabilityInfoContext = new();
+
     /// <summary>
     /// Prints a node that is a single token or literal and never needs hoisting.
     /// </summary>
@@ -103,20 +105,71 @@ internal partial class CSharpEmitter
             : _typeToCSharpConverter.ToCSharp(call.Method.DeclaringType!);
 
         var methodName = call.Method.IsGenericMethod
-            ? $"{call.Method.Name}<{string.Join(", ", call.Method.GetGenericArguments().Select(_typeToCSharpConverter.ToCSharp))}>"
+            ? $"{call.Method.Name}<{string.Join(", ", call.Method.GetGenericArguments().Select((t, i) => RenderGenericMethodTypeArgument(call.Method, i, t)))}>"
             : call.Method.Name;
 
         var parameters = call.Method.GetParameters();
         var arguments = string.Join(", ", call.Arguments.Select((a, i) =>
         {
+            var parameter = parameters[i];
             var code = child(a).Code;
+            if (ShouldApplyNullForgivingOperator(parameter, a))
+                code = $"{code.ParenthesizeIfNeeded()}!";
+
             // Null/default arguments carry a cast to the parameter type so overload intent
             // stays visible — the old writer's BuildArguments rule.
             if (a is CodeConstant { Value: null } or CodeDefault && code is "null" or "default")
-                return $"({_typeToCSharpConverter.ToCSharp(parameters[i].ParameterType)}){code}";
+                return $"({_typeToCSharpConverter.ToCSharpDeclaration(parameter.ParameterType)}){code}";
             return code;
         }));
         return $"{target}{(call.NullConditional ? "?." : ".")}{methodName}({arguments})";
+    }
+
+    private static bool ShouldApplyNullForgivingOperator(ParameterInfo parameter, CodeExpression argument)
+    {
+        if (argument is CodeLambda)
+            return false;
+
+        if (parameter.ParameterType.IsByRef || parameter.ParameterType.IsPointer)
+            return false;
+
+        var parameterNullability = NullabilityInfoContext.Create(parameter);
+        if (!RequiresNotNull(parameterNullability))
+            return false;
+
+        return argument.Type.IsNullableValueType(out _) || !argument.Type.IsValueType;
+    }
+
+    private static bool RequiresNotNull(System.Reflection.NullabilityInfo info)
+    {
+        if (info.ReadState == NullabilityState.NotNull)
+            return true;
+
+        if (info.ElementType is not null && RequiresNotNull(info.ElementType))
+            return true;
+
+        foreach (var genericTypeArgument in info.GenericTypeArguments)
+        {
+            if (RequiresNotNull(genericTypeArgument))
+                return true;
+        }
+
+        return false;
+    }
+
+    private string RenderGenericMethodTypeArgument(MethodInfo method, int index, Type typeArgument)
+    {
+        if (!method.IsGenericMethod)
+            return _typeToCSharpConverter.ToCSharp(typeArgument);
+
+        var definition = method.IsGenericMethodDefinition ? method : method.GetGenericMethodDefinition();
+        var genericParameter = definition.GetGenericArguments()[index];
+        var hasReferenceTypeConstraint =
+            (genericParameter.GenericParameterAttributes & GenericParameterAttributes.ReferenceTypeConstraint) != 0;
+
+        return hasReferenceTypeConstraint
+            ? _typeToCSharpConverter.ToCSharp(typeArgument)
+            : _typeToCSharpConverter.ToCSharpDeclaration(typeArgument);
     }
 
     /// <summary>
@@ -283,6 +336,11 @@ internal partial class CSharpEmitter
             ? $"default({_typeToCSharpConverter.ToCSharp(receiver.Type)})"
             : child(receiver).Code.ParenthesizeIfNeeded();
 
+        if (!property.NullConditional
+            && !receiver.Type.IsValueType
+            && !_typeToCSharpConverter.ShouldUseTupleType(receiver.Type))
+            target = $"{target}!";
+
         // The old writer's GetMemberAccessNullabilityOperator: a plain (non-null-conditional)
         // property access still prints "?." when the receiver's static type is a nullable
         // value type, OR a CQL tuple type — CQL tuples are represented as ordinary reference
@@ -328,7 +386,7 @@ internal partial class CSharpEmitter
         var operand = atom.Code.ParenthesizeIfNeeded();
 
         if (cast.Kind == CodeCastKind.As)
-            return $"{operand} as {_typeToCSharpConverter.ToCSharp(cast.Type)}";
+            return $"{operand} as {_typeToCSharpConverter.ToCSharpAsTarget(cast.Type)}";
 
         var typeName = _typeToCSharpConverter.ToCSharpDeclaration(cast.Type);
 
@@ -517,7 +575,14 @@ internal partial class CSharpEmitter
 
     private string PrintNew(CodeNew @new, Func<CodeExpression, Atom> child)
     {
-        var arguments = string.Join(", ", @new.Arguments.Select(a => child(a).Code));
+        var parameters = @new.Constructor.GetParameters();
+        var arguments = string.Join(", ", @new.Arguments.Select((a, i) =>
+        {
+            var code = child(a).Code;
+            if (ShouldApplyNullForgivingOperator(parameters[i], a))
+                code = $"{code.ParenthesizeIfNeeded()}!";
+            return code;
+        }));
         return $"new {_typeToCSharpConverter.ToCSharp(@new.Type)}({arguments})";
     }
 

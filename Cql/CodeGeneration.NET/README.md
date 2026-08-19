@@ -9,12 +9,12 @@ This package provides functionality to generate readable C# source code from the
 ## Key Features
 
 - **IR to C# Printing**: Transforms the typed IR (carrying `System.Type` on each node) into readable C# source code by direct string emission — no Roslyn syntax-tree construction
-- **Nullable-aware generated declarations**: Generated `*.g.cs` files emit `#nullable enable annotations` (annotation context on, warning context off). Because the IR stores `System.Type` (which cannot express reference-type nullability), declaration signatures use blanket `T?` annotations for reference types while preserving value-type behavior. A deliberate carve-out keeps generated value-set/code-system/code/concept definition members non-nullable where the generator constructs the value directly. `as`-casts stay unannotated because `as T?` is illegal in C# (CS8651).
+- **Nullable-aware generated declarations**: Generated `*.g.cs` files emit `#nullable enable` (full nullable checks + annotations). Because the IR stores `System.Type` (which cannot express reference-type nullability), declaration signatures use blanket `T?` annotations for reference types while preserving value-type behavior. A deliberate carve-out keeps generated value-set/code-system/code/concept definition members non-nullable where the generator constructs the value directly. `as`-casts stay unannotated because `as T?` is illegal in C# (CS8651).
 - **Code Formatting**: Generates well-formatted, readable C# code
 - **Roslyn Integration**: Uses Microsoft.CodeAnalysis.CSharp to compile already-generated C# source text into .NET assemblies
 - **Debugging Support**: Generated code includes debugging information, and debugging information is included in the .NET assemblies based on the DebugSymbolsFormat setting
 
-Design note for #1564: this package intentionally stays in annotations-only nullable mode. The earlier "warning-clean under full `#nullable enable`" criterion is superseded for this blanket-annotation design, because enabling warning context with blanket `T?` produces pervasive CS86xx flow warnings unless nullability is threaded through IR flow.
+Design note for #1564: generated code compiles under full nullable checking without blanket CS86xx suppression.
 
 ## Usage
 
