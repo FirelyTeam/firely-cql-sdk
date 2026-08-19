@@ -56,7 +56,9 @@ firely-cql-sdk/
 ```
 
 External submodule repositories:
-* `submodules/Firely.Cql.Sdk.Integration.Runner/` — integration test runner for CMS measures
+* `submodules/Firely.Cql.Sdk.Integration.Runner/` — integration test runner for CMS measures. A
+  **private** repository: `git submodule update` only succeeds if you have access, and the
+  `Cql-Sdk-All.sln` solution needs it, which is why `Cql-Sdk.slnf` is the recommended build.
 
 ## Building the SDK
 
