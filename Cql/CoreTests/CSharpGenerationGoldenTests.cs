@@ -108,7 +108,7 @@ public class CSharpGenerationGoldenTests
 
         var nullOblivious = GenerateWithToolkit(
                 librarySet,
-                new ElmToolkitConfig(CSharpGenerating: new CSharpGeneratingConfig(NullabilityEnabled: false)))
+                new ElmToolkitConfig(CSharp: new CSharpConfig(NullabilityEnabled: false)))
             .Values
             .First();
 

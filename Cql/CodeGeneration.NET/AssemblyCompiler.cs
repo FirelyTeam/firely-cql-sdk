@@ -65,9 +65,9 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private readonly bool _nullabilityEnabled;
 
-        public AssemblyCompiler(TypeResolver typeResolver, CSharpGeneratingConfig? cSharpGeneratingConfig = null)
+        public AssemblyCompiler(TypeResolver typeResolver, CSharpConfig? cSharpGeneratingConfig = null)
         {
-            _nullabilityEnabled = (cSharpGeneratingConfig ?? CSharpGeneratingConfig.Default).NullabilityEnabled;
+            _nullabilityEnabled = (cSharpGeneratingConfig ?? CSharpConfig.Default).NullabilityEnabled;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
                 {

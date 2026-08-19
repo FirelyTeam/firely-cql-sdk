@@ -21,20 +21,20 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// <see cref="InvalidOperationException"/> will be thrown during compilation if they are not found in customImplementations.
 /// The default value is <see langword="true"/>.
 /// </param>
-/// <param name="CSharpGenerating">
+/// <param name="CSharp">
 /// Settings that control the C# source the generator emits — nullability, namespace, and whether
-/// invalid C# is tolerated. See <see cref="CSharpGeneratingConfig"/>.
+/// invalid C# is tolerated. See <see cref="CSharpConfig"/>.
 /// </param>
 public record ElmToolkitConfig(
     DebugSymbolsFormat DebugSymbolsFormat = DebugSymbolsFormat.None,
     bool AllowScopeRedefinition = true,
     bool AllowUnresolvedExternals = true,
-    CSharpGeneratingConfig? CSharpGenerating = null)
+    CSharpConfig? CSharp = null)
 {
     /// <summary>
     /// Settings that control the C# source the generator emits.
     /// </summary>
-    public CSharpGeneratingConfig CSharpGenerating { get; init; } = CSharpGenerating ?? CSharpGeneratingConfig.Default;
+    public CSharpConfig CSharp { get; init; } = CSharp ?? CSharpConfig.Default;
 
     /// <summary>
     /// Gets the default configuration settings.

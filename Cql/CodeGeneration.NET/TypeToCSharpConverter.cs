@@ -26,9 +26,9 @@ internal class TypeToCSharpConverter
     /// </summary>
     public bool NullabilityEnabled { get; }
 
-    public TypeToCSharpConverter(CSharpGeneratingConfig? cSharpGeneratingConfig = null)
+    public TypeToCSharpConverter(CSharpConfig? cSharpGeneratingConfig = null)
     {
-        NullabilityEnabled = (cSharpGeneratingConfig ?? CSharpGeneratingConfig.Default).NullabilityEnabled;
+        NullabilityEnabled = (cSharpGeneratingConfig ?? CSharpConfig.Default).NullabilityEnabled;
         _typeCSharpFormat = new TypeCSharpFormat(UseKeywords: true, NoNamespaces: true, FormatName: FormatTypeNameAsTuple);
         _declarationCSharpFormat = _typeCSharpFormat with
         {

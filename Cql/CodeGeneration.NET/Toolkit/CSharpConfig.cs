@@ -19,20 +19,20 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// <see langword="false"/>, no <c>#nullable</c> directive is emitted and declarations are
 /// null-oblivious, which is how the generator behaved before nullable emission was added.
 /// </param>
-/// <param name="CSharpNamespace">The C# namespace to use for generated code. If <see langword="null"/> or empty, no namespace is generated.</param>
+/// <param name="Namespace">The C# namespace to use for generated code. If <see langword="null"/> or empty, no namespace is generated.</param>
 /// <param name="AllowInvalidCSharp">
 /// Gets a value indicating whether invalid C# code is allowed.
 /// Invalid C# code is code that does not compile.
 /// When <see langword="true"/>, the generated C# code may contain syntax errors or other issues that prevent it from compiling,
 /// but may be useful for debugging or testing purposes.
 /// </param>
-public record CSharpGeneratingConfig(
+public record CSharpConfig(
     bool NullabilityEnabled = true,
-    string? CSharpNamespace = null,
+    string? Namespace = null,
     bool AllowInvalidCSharp = false)
 {
     /// <summary>
     /// Gets the default configuration settings.
     /// </summary>
-    public static CSharpGeneratingConfig Default { get; } = new();
+    public static CSharpConfig Default { get; } = new();
 }

@@ -40,7 +40,7 @@ partial class Program
 
         // Generate binaries from the ELM libraries
         var allowInvalidCSharp = true;
-        var elmToolkitConfig = new ElmToolkitConfig(CSharpGenerating: new(AllowInvalidCSharp: allowInvalidCSharp));
+        var elmToolkitConfig = new ElmToolkitConfig(CSharp: new(AllowInvalidCSharp: allowInvalidCSharp));
         var elmToolkit = cqlToolkit.CreateElmToolkit(elmToolkitConfig);
         // elmToolkit.SetThrowEnumerationExceptions();
         elmToolkit.CompileToAssemblies();

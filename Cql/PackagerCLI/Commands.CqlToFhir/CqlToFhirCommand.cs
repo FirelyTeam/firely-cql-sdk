@@ -181,7 +181,7 @@ internal record CqlToFhirCommand
         (Measures, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.MeasuresOutDir)]),
         (FlattenDirHierarchy, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FlattenDirHierarchy)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
-        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpGenerating), nameof(CSharpGeneratingConfig.CSharpNamespace)]),
+        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharp), nameof(CSharpConfig.Namespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (MeasureGroupCodeSystem, [PackagingOptions.ConfigSection, nameof(PackagingOptions.MeasureGroupCodeSystem)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),

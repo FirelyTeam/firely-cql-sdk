@@ -56,7 +56,7 @@ public class PackagerCliCommandBindingTests
             var csNamespaceConfig =
                 capturedCqlCommand!
                     .GetConfigMapping()
-                    .Single(x => x.sectionPath.SequenceEqual([ElmOptions.ConfigSection, nameof(ElmOptions.CSharpGenerating), nameof(CSharpGeneratingConfig.CSharpNamespace)]));
+                    .Single(x => x.sectionPath.SequenceEqual([ElmOptions.ConfigSection, nameof(ElmOptions.CSharp), nameof(CSharpConfig.Namespace)]));
 
             csNamespaceConfig.value.Should().Be(namespaceValue);
         }
@@ -88,7 +88,7 @@ public class PackagerCliCommandBindingTests
             var csNamespaceConfig =
                 capturedElmCommand!
                     .GetConfigMapping()
-                    .Single(x => x.sectionPath.SequenceEqual([ElmOptions.ConfigSection, nameof(ElmOptions.CSharpGenerating), nameof(CSharpGeneratingConfig.CSharpNamespace)]));
+                    .Single(x => x.sectionPath.SequenceEqual([ElmOptions.ConfigSection, nameof(ElmOptions.CSharp), nameof(CSharpConfig.Namespace)]));
 
             csNamespaceConfig.value.Should().Be(namespaceValue);
         }
