@@ -7,6 +7,7 @@ Utility scripts for the Firely CQL SDK.
 - **condense_spec/** - CQL Specification HTML to Markdown converter
 - **mermaid/** - Mermaid diagram-to-SVG export scripts
 - **dqic_sync/** - Compares the vendored CQL conformance test suite against the official upstream suite
+- **vsac/** - Completes partial (paged) ValueSet expansions in a vendored corpus from VSAC
 - **XsdToCSharpConverter/** - XSD to C# code generation tool
 - **XsdToCSharpConverterTests/** - Tests for XSD converter
 
@@ -78,6 +79,27 @@ python3 tools/dqic_sync/compare_dqic_tests.py --report-path /tmp/dqic-report.md
 **Documentation:** See [tools/dqic_sync/README.md](dqic_sync/README.md) for complete details.
 
 **Created in:** [#1389](https://github.com/FirelyTeam/firely-cql-sdk/issues/1389)
+
+### vsac
+
+Replaces partial (paged) `ValueSet` expansions in a vendored corpus — `expansion.total` of 3608 with
+1000 concepts actually present — with complete ones fetched from VSAC's FHIR `$expand`, pinned to the
+version each local file declares. A page cannot answer membership, so the SDK rejects one; the
+upstream eCQM content repositories ship 20 such files, which silently disabled 1200
+integration-runner cases.
+
+**Location:** `tools/vsac/`
+
+**Usage:**
+```bash
+python3 tools/vsac/complete_expansions.py --dry-run
+python3 tools/vsac/complete_expansions.py --api-key-file <path-to-umls-key>
+```
+
+**Documentation:** See [tools/vsac/README.md](vsac/README.md) for complete details, including what
+the tool refuses to write and why a content re-sync reinstates the truncation.
+
+**Created in:** [#1562](https://github.com/FirelyTeam/firely-cql-sdk/issues/1562)
 
 ---
 

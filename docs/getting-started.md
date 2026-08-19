@@ -20,6 +20,25 @@ This repository contains deeply nested file paths that exceed Windows' default 2
 
 > **Note:** A system restart may be required after changing the Windows registry setting.
 
+### Repository tooling
+
+Building and using the SDK needs nothing but the .NET SDK (the projects target `net10.0`). The
+maintenance scripts under [tools/](../tools/README.md) and [LibrarySets/](../LibrarySets/) are a
+separate matter, and each brings its own toolchain — none of which is required to build, test or
+consume the SDK itself:
+
+| Needed for | Requirement |
+|---|---|
+| [tools/condense_spec/](../tools/condense_spec/README.md) — CQL/FHIR spec condensing<br>[tools/dqic_sync/](../tools/dqic_sync/README.md) — conformance-suite comparison<br>[tools/vsac/](../tools/vsac/README.md) — completing paged ValueSet expansions | **Python 3**, standard library only — no `pip install` step |
+| [tools/mermaid/](../tools/mermaid/README.md) — rendering diagrams to SVG | **Node.js** (the scripts call `npx -y @mermaid-js/mermaid-cli`, so nothing is installed globally) and **PowerShell** or bash, whichever half of the script pair you run |
+| [LibrarySets/sync-dqm-2025.ps1](../LibrarySets/sync-dqm-2025.ps1) — refreshing the CMS measure content | **PowerShell**, **git** and a **Java** runtime (it runs the `cql-to-elm` compiler) |
+| [tools/vsac/](../tools/vsac/README.md) specifically | a **UMLS API key** from <https://uts.nlm.nih.gov/uts/profile>, since VSAC's `$expand` requires authentication |
+| [tools/XsdToCSharpConverter/](../tools/XsdToCSharpConverter/README.md) — XSD to C# generation | nothing extra; it is a .NET project |
+
+Python was chosen for the scripts that parse or emit structured data — a JSON or XML tool wants a
+parser from its standard library rather than an indentation-shaped text assumption — and it is
+deliberately kept to the standard library so that "install Python 3" is the whole setup.
+
 ## Repository Structure
 
 ```
