@@ -38,9 +38,10 @@ Python was chosen for the scripts that parse or emit structured data — a JSON 
 parser from its standard library rather than an indentation-shaped text assumption — and it is
 deliberately kept to the standard library so that "install Python 3" is the whole setup.
 
-The integration runner submodule carries its own tooling with its own prerequisites, documented in
-that repository's README — including a Python script that completes paged VSAC value set expansions,
-which additionally needs a UMLS API key.
+The integration runner submodule is a **private** repository, so the rest of this note applies only if
+you have access to it. It carries its own tooling with its own prerequisites, documented in that
+repository's README — including a Python script that completes paged VSAC value set expansions, which
+additionally needs a UMLS API key.
 
 ## Repository Structure
 

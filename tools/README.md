@@ -84,9 +84,9 @@ python3 tools/dqic_sync/compare_dqic_tests.py --report-path /tmp/dqic-report.md
 ## Tooling that lives elsewhere
 
 **VSAC expansion completer** — replaces partial (paged) `ValueSet` expansions with complete ones
-fetched from VSAC's FHIR `$expand`. It lives in the integration runner repository, at
-`tools/vsac/complete_expansions.py` in `Firely.Cql.Sdk.Integration.Runner`, because the corpus it
-maintains lives there and the refresh runs as part of that repository's sync procedure. Created in
+fetched from VSAC's FHIR `$expand`. It lives at `tools/vsac/complete_expansions.py` in
+`Firely.Cql.Sdk.Integration.Runner`, a **private** repository, because the corpus it maintains lives
+there and the refresh runs as part of that repository's sync procedure. Created in
 [#1562](https://github.com/FirelyTeam/firely-cql-sdk/issues/1562).
 
 ---
