@@ -1,4 +1,4 @@
-#nullable enable annotations
+#nullable enable
 
 using System;
 using System.Linq;
@@ -40,10 +40,10 @@ public partial class CMS75FHIRChildrenDentalDecay_1_0_000 : ILibrary, ISingleton
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS75FHIRChildrenDentalDecay-1.0.000", "Measurement Period", c_);
+        CqlDateTime? a_ = context!.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime? b_ = context!.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlInterval<CqlDateTime?>? c_ = context!.Operators.Interval(a_, b_, true, false);
+        object? d_ = context.ResolveParameter("CMS75FHIRChildrenDentalDecay-1.0.000"!, ("Measurement Period")!, c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -60,8 +60,8 @@ public partial class CMS75FHIRChildrenDentalDecay_1_0_000 : ILibrary, ISingleton
 
     private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient? b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient?>? a_ = context!.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient? b_ = context!.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
@@ -75,18 +75,18 @@ public partial class CMS75FHIRChildrenDentalDecay_1_0_000 : ILibrary, ISingleton
     private IEnumerable<Encounter?>? Qualifying_Encounters_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Clinical_Oral_Evaluation(context);
-        IEnumerable<Encounter?>? b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? b_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         IEnumerable<Encounter?>? c_ = Status_1_15_000.Instance.isEncounterPerformed(context, b_);
 
         bool? d_(Encounter? ValidEncounter) {
             CqlInterval<CqlDateTime?>? f_ = this.Measurement_Period(context);
-            Period? g_ = ValidEncounter?.Period;
+            Period? g_ = ValidEncounter?.Period!;
             CqlInterval<CqlDateTime?>? h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
-            bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+            bool? i_ = context!.Operators.IntervalIncludesInterval<CqlDateTime?>(f_, h_, "day");
             return i_;
         }
 
-        IEnumerable<Encounter?>? e_ = context.Operators.Where<Encounter>(c_, d_);
+        IEnumerable<Encounter?>? e_ = context!.Operators.Where<Encounter?>(c_, d_);
         return e_;
     }
 
@@ -100,18 +100,18 @@ public partial class CMS75FHIRChildrenDentalDecay_1_0_000 : ILibrary, ISingleton
     private bool? Initial_Population_Compute(CqlContext context)
     {
         Patient? a_ = this.Patient(context);
-        Date? b_ = a_?.BirthDateElement;
-        string? c_ = b_?.Value;
-        CqlDate? d_ = context.Operators.ConvertStringToDate(c_);
+        Date? b_ = a_?.BirthDateElement!;
+        string? c_ = b_?.Value!;
+        CqlDate? d_ = context!.Operators.ConvertStringToDate(c_);
         CqlInterval<CqlDateTime?>? e_ = this.Measurement_Period(context);
-        CqlDateTime? f_ = context.Operators.Start(e_);
-        CqlDate? g_ = context.Operators.DateFrom(f_);
-        int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        CqlInterval<int?>? i_ = context.Operators.Interval(1, 20, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlDateTime? f_ = context!.Operators.Start(e_);
+        CqlDate? g_ = context!.Operators.DateFrom(f_);
+        int? h_ = context!.Operators.CalculateAgeAt(d_, g_, "year");
+        CqlInterval<int?>? i_ = context!.Operators.Interval(1, 20, true, true);
+        bool? j_ = context!.Operators.In<int?>(h_, i_, (string?)default);
         IEnumerable<Encounter?>? k_ = this.Qualifying_Encounters(context);
-        bool? l_ = context.Operators.Exists<Encounter>(k_);
-        bool? m_ = context.Operators.And(j_, l_);
+        bool? l_ = context!.Operators.Exists<Encounter?>(k_!);
+        bool? m_ = context!.Operators.And(j_, l_);
         return m_;
     }
 
@@ -151,18 +151,18 @@ public partial class CMS75FHIRChildrenDentalDecay_1_0_000 : ILibrary, ISingleton
     private bool? Numerator_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Dental_Caries(context);
-        IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
+        IEnumerable<Condition?>? b_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition?>? c_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition?>? d_ = context!.Operators.Union<Condition?>(b_ as IEnumerable<Condition?>, c_ as IEnumerable<Condition?>);
 
         bool? e_(Condition? DentalCaries) {
             CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DentalCaries);
             CqlInterval<CqlDateTime?>? h_ = this.Measurement_Period(context);
-            bool? i_ = context.Operators.Overlaps(g_, h_, "day");
+            bool? i_ = context!.Operators.Overlaps(g_!, h_!, "day");
             return i_;
         }
 
-        bool? f_ = context.Operators.WhereAny<Condition>(d_, e_);
+        bool? f_ = context!.Operators.WhereAny<Condition?>(d_, e_);
         return f_;
     }
 

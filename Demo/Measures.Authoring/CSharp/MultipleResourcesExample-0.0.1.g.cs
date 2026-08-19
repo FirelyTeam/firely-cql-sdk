@@ -1,4 +1,4 @@
-#nullable enable annotations
+#nullable enable
 
 using System;
 using System.Linq;
@@ -58,8 +58,8 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient? b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient?>? a_ = context!.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient? b_ = context!.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
@@ -73,21 +73,21 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     private IEnumerable<Observation?>? Smoking_status_observation_Compute(CqlContext context)
     {
         CqlCode? a_ = this.Tobacco_Smoking_Status(context);
-        IEnumerable<CqlCode?>? b_ = context.Operators.ToList<CqlCode>(a_);
-        IEnumerable<Observation?>? c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        IEnumerable<CqlCode?>? b_ = context!.Operators.ToList<CqlCode?>(a_);
+        IEnumerable<Observation?>? c_ = context!.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
         bool? d_(Observation? O) {
-            Code<ObservationStatus>? f_ = O?.StatusElement;
+            Code<ObservationStatus>? f_ = O?.StatusElement!;
             string? g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
             string?[]? h_ = [
                 "final",
                 "amended",
             ];
-            bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string?>?)h_);
+            bool? i_ = context!.Operators.In<string?>(g_, (IEnumerable<string?>?)h_);
             return i_;
         }
 
-        IEnumerable<Observation?>? e_ = context.Operators.Where<Observation>(c_, d_);
+        IEnumerable<Observation?>? e_ = context!.Operators.Where<Observation?>(c_, d_);
         return e_;
     }
 
@@ -101,17 +101,17 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     private IEnumerable<Condition?>? Lung_cancer_diagnosis_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Lung_Cancer(context);
-        IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        IEnumerable<Condition?>? b_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
         bool? c_(Condition? C) {
-            CodeableConcept? e_ = C?.ClinicalStatus;
+            CodeableConcept? e_ = C?.ClinicalStatus!;
             CqlConcept? f_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, e_);
             CqlValueSet? g_ = this.Condition_Clinical_Status(context);
-            bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
+            bool? h_ = context!.Operators.ConceptInValueSet(f_, g_);
             return h_;
         }
 
-        IEnumerable<Condition?>? d_ = context.Operators.Where<Condition>(b_, c_);
+        IEnumerable<Condition?>? d_ = context!.Operators.Where<Condition?>(b_, c_);
         return d_;
     }
 

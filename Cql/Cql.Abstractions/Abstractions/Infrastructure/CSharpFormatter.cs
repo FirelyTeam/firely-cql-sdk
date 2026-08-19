@@ -76,6 +76,7 @@ internal record TypeCSharpFormat(
     bool NoGenericTypeParameterNames = false, // e.g. IDictionary<,> instead of  IDictionary<TKey,TValue>
     bool UseRefOperator = false,              // e.g. int& instead of only int
     bool NullableReferenceTypes = false,      // e.g. string? instead of string
+    bool NoTopLevelNullableReferenceOperator = false,
     Func<Type, bool>? RendersItsOwnNullOperator = null, // types whose FormatName already appends '?'
     ListTokens? GenericArgumentTokens = null,
     ListTokens? ArrayTokens = null,
@@ -100,12 +101,18 @@ internal record TypeCSharpFormat(
 
     protected internal void WriteTo(
         Type type,
-        IBasicTextWriter textWriter)
+        IBasicTextWriter textWriter) =>
+        WriteTo(type, textWriter, isTopLevel: true);
+
+    private void WriteTo(
+        Type type,
+        IBasicTextWriter textWriter,
+        bool isTopLevel)
     {
         if (UseKeywords && type.GetCSharpKeyword() is { } keyword)
         {
             textWriter.Write(keyword);
-            WriteNullableReferenceOperator(type, textWriter);
+            WriteNullableReferenceOperator(type, textWriter, isTopLevel);
             return;
         }
 
@@ -123,7 +130,7 @@ internal record TypeCSharpFormat(
             // The declaring type appears purely as a name qualifier (A.Nested), so it never
             // carries a nullable annotation of its own.
             (NullableReferenceTypes ? this with { NullableReferenceTypes = false } : this)
-                .WriteTo(declaringType, textWriter);
+                .WriteTo(declaringType, textWriter, isTopLevel: false);
             textWriter.Write(NestedTypeSeparator);
             hideNamespaces = true; // Nested types are always in the same namespace.
         }
@@ -155,7 +162,7 @@ internal record TypeCSharpFormat(
         }
         else if (type.IsArray || type.IsByRef)
         {
-            WriteTo(type.GetElementType()!, textWriter);
+            WriteTo(type.GetElementType()!, textWriter, isTopLevel: false);
             if (UseRefOperator && type.IsByRef)
             {
                 textWriter.Write(RefOperator);
@@ -164,11 +171,11 @@ internal record TypeCSharpFormat(
         else if (!NoNullableOperator && type.IsValueType && type.IsNullableValueType(out var underlyingType))
         {
             isNullableValueType = true;
-            WriteTo(underlyingType, textWriter);
+            WriteTo(underlyingType, textWriter, isTopLevel: false);
         }
         else if (type.IsPointer)
         {
-            WriteTo(type.GetElementType()!, textWriter);
+            WriteTo(type.GetElementType()!, textWriter, isTopLevel: false);
         }
         else
         {
@@ -224,7 +231,7 @@ internal record TypeCSharpFormat(
                 {
                     if (first) first = false;
                     else textWriter.Write(GenericArgumentTokens.Separator);
-                    WriteTo(typeArg, textWriter);
+                    WriteTo(typeArg, textWriter, isTopLevel: false);
                 }
                 textWriter.Write(GenericArgumentTokens.CloseBracket);
             }
@@ -236,7 +243,7 @@ internal record TypeCSharpFormat(
 
         // Blanket nullable annotation for reference types, written last so it lands after any
         // array brackets and generic arguments.
-        WriteNullableReferenceOperator(type, textWriter);
+        WriteNullableReferenceOperator(type, textWriter, isTopLevel);
 
         return;
 
@@ -246,9 +253,13 @@ internal record TypeCSharpFormat(
 
     private void WriteNullableReferenceOperator(
         Type type,
-        IBasicTextWriter textWriter)
+        IBasicTextWriter textWriter,
+        bool isTopLevel)
     {
         if (!NullableReferenceTypes)
+            return;
+
+        if (isTopLevel && NoTopLevelNullableReferenceOperator)
             return;
 
         // Value types carry their own nullability (the NullOperator written above); pointers and

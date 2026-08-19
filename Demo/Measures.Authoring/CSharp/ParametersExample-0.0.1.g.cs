@@ -1,4 +1,4 @@
-#nullable enable annotations
+#nullable enable
 
 using System;
 using System.Linq;
@@ -36,7 +36,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     private int? AgeThreshold_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
+        object? a_ = context.ResolveParameter("ParametersExample-0.0.1"!, "AgeThreshold"!, 30);
         return (int?)a_;
     }
 
@@ -53,8 +53,8 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient? b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient?>? a_ = context!.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient? b_ = context!.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
@@ -67,7 +67,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     private CqlDate? CurrentDate_Compute(CqlContext context)
     {
-        CqlDate? a_ = context.Operators.Today();
+        CqlDate? a_ = context!.Operators.Today();
         return a_;
     }
 
@@ -86,27 +86,27 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
         ];
 
         bool? c_(Patient? P) {
-            Code<AdministrativeGender>? f_ = P?.GenderElement;
+            Code<AdministrativeGender>? f_ = P?.GenderElement!;
             string? g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
-            bool? h_ = context.Operators.Equal(g_, "male");
-            FhirBoolean? i_ = P?.ActiveElement;
+            bool? h_ = context!.Operators.Equal(g_, "male");
+            FhirBoolean? i_ = P?.ActiveElement!;
             bool? j_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, i_);
-            bool? k_ = context.Operators.IsTrue(j_);
-            bool? l_ = context.Operators.And(h_, k_);
-            DataType? m_ = P?.Deceased;
-            bool? n_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, m_ as FhirBoolean?);
-            bool? o_ = context.Operators.Not(n_);
-            bool? p_ = context.Operators.And(l_, o_);
-            CodeableConcept? q_ = P?.MaritalStatus;
+            bool? k_ = context!.Operators.IsTrue(j_);
+            bool? l_ = context!.Operators.And(h_, k_);
+            DataType? m_ = P?.Deceased!;
+            bool? n_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, m_ as FhirBoolean);
+            bool? o_ = context!.Operators.Not(n_);
+            bool? p_ = context!.Operators.And(l_, o_);
+            CodeableConcept? q_ = P?.MaritalStatus!;
             CqlConcept? r_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, q_);
             CqlValueSet? s_ = this.Marital_Status(context);
-            bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
-            bool? u_ = context.Operators.And(p_, t_);
+            bool? t_ = context!.Operators.ConceptInValueSet(r_, s_);
+            bool? u_ = context!.Operators.And(p_, t_);
             return u_;
         }
 
-        IEnumerable<Patient?>? d_ = context.Operators.Where<Patient>((IEnumerable<Patient?>?)b_, c_);
-        Patient? e_ = context.Operators.SingletonFrom<Patient>(d_);
+        IEnumerable<Patient?>? d_ = context!.Operators.Where<Patient?>((IEnumerable<Patient?>?)b_, c_);
+        Patient? e_ = context!.Operators.SingletonFrom<Patient?>(d_);
         return e_;
     }
 
@@ -120,7 +120,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     private Date? Patient_Birthdate_Compute(CqlContext context)
     {
         Patient? a_ = this.Patient_Filter(context);
-        Date? b_ = a_?.BirthDateElement;
+        Date? b_ = a_?.BirthDateElement!;
         return b_;
     }
 
@@ -136,7 +136,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
         Date? a_ = this.Patient_Birthdate(context);
         CqlDate? b_ = FHIRHelpers_4_3_000.Instance.ToDate(context, a_);
         CqlDate? c_ = this.CurrentDate(context);
-        int? d_ = context.Operators.DurationBetween(b_, c_, "year");
+        int? d_ = context!.Operators.DurationBetween(b_, c_, "year");
         return d_;
     }
 
@@ -151,7 +151,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     {
         int? a_ = this.Patient_Age_in_Years(context);
         int? b_ = this.AgeThreshold(context);
-        bool? c_ = context.Operators.Greater(a_, b_);
+        bool? c_ = context!.Operators.Greater(a_, b_);
         return c_;
     }
 

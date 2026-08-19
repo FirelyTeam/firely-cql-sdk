@@ -1,4 +1,4 @@
-#nullable enable annotations
+#nullable enable
 
 using System;
 using System.Linq;
@@ -52,10 +52,10 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS74FHIRDentalCariesPrevention-1.0.000", "Measurement Period", c_);
+        CqlDateTime? a_ = context!.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime? b_ = context!.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlInterval<CqlDateTime?>? c_ = context!.Operators.Interval(a_, b_, true, false);
+        object? d_ = context.ResolveParameter("CMS74FHIRDentalCariesPrevention-1.0.000"!, ("Measurement Period")!, c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -72,8 +72,8 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient? b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient?>? a_ = context!.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient? b_ = context!.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
@@ -87,18 +87,18 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     private IEnumerable<Encounter?>? Qualifying_Encounters_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Clinical_Oral_Evaluation(context);
-        IEnumerable<Encounter?>? b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? b_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         IEnumerable<Encounter?>? c_ = Status_1_15_000.Instance.isEncounterPerformed(context, b_);
 
         bool? d_(Encounter? ValidEncounter) {
             CqlInterval<CqlDateTime?>? f_ = this.Measurement_Period(context);
-            Period? g_ = ValidEncounter?.Period;
+            Period? g_ = ValidEncounter?.Period!;
             CqlInterval<CqlDateTime?>? h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
-            bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+            bool? i_ = context!.Operators.IntervalIncludesInterval<CqlDateTime?>(f_, h_, "day");
             return i_;
         }
 
-        IEnumerable<Encounter?>? e_ = context.Operators.Where<Encounter>(c_, d_);
+        IEnumerable<Encounter?>? e_ = context!.Operators.Where<Encounter?>(c_, d_);
         return e_;
     }
 
@@ -112,18 +112,18 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     private bool? Initial_Population_Compute(CqlContext context)
     {
         Patient? a_ = this.Patient(context);
-        Date? b_ = a_?.BirthDateElement;
-        string? c_ = b_?.Value;
-        CqlDate? d_ = context.Operators.ConvertStringToDate(c_);
+        Date? b_ = a_?.BirthDateElement!;
+        string? c_ = b_?.Value!;
+        CqlDate? d_ = context!.Operators.ConvertStringToDate(c_);
         CqlInterval<CqlDateTime?>? e_ = this.Measurement_Period(context);
-        CqlDateTime? f_ = context.Operators.Start(e_);
-        CqlDate? g_ = context.Operators.DateFrom(f_);
-        int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        CqlInterval<int?>? i_ = context.Operators.Interval(1, 20, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlDateTime? f_ = context!.Operators.Start(e_);
+        CqlDate? g_ = context!.Operators.DateFrom(f_);
+        int? h_ = context!.Operators.CalculateAgeAt(d_, g_, "year");
+        CqlInterval<int?>? i_ = context!.Operators.Interval(1, 20, true, true);
+        bool? j_ = context!.Operators.In<int?>(h_, i_, (string?)default);
         IEnumerable<Encounter?>? k_ = this.Qualifying_Encounters(context);
-        bool? l_ = context.Operators.Exists<Encounter>(k_);
-        bool? m_ = context.Operators.And(j_, l_);
+        bool? l_ = context!.Operators.Exists<Encounter?>(k_!);
+        bool? m_ = context!.Operators.And(j_, l_);
         return m_;
     }
 
@@ -163,52 +163,52 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     private bool? Numerator_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Fluoride_Varnish_Application_for_Children(context);
-        IEnumerable<Procedure?>? b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure?>? b_ = context!.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
         IEnumerable<Procedure?>? c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
 
         bool? d_(Procedure? FluorideApplication) {
             object? j_;
-            DataType? o_ = FluorideApplication?.Performed;
+            DataType? o_ = FluorideApplication?.Performed!;
             object? p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
             bool q_ = p_ is CqlDateTime;
             if (q_)
             {
-                DataType? r_ = FluorideApplication?.Performed;
+                DataType? r_ = FluorideApplication?.Performed!;
                 object? s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                j_ = s_ as CqlDateTime?;
+                j_ = s_ as CqlDateTime;
             }
             else
             {
-                DataType? t_ = FluorideApplication?.Performed;
+                DataType? t_ = FluorideApplication?.Performed!;
                 object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                 bool v_ = u_ is CqlQuantity;
                 if (v_)
                 {
-                    DataType? w_ = FluorideApplication?.Performed;
+                    DataType? w_ = FluorideApplication?.Performed!;
                     object? x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                    j_ = x_ as CqlQuantity?;
+                    j_ = x_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType? y_ = FluorideApplication?.Performed;
+                    DataType? y_ = FluorideApplication?.Performed!;
                     object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
                     bool aa_ = z_ is CqlInterval<CqlDateTime>;
                     if (aa_)
                     {
-                        DataType? ab_ = FluorideApplication?.Performed;
+                        DataType? ab_ = FluorideApplication?.Performed!;
                         object? ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                        j_ = ac_ as CqlInterval<CqlDateTime?>?;
+                        j_ = ac_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        DataType? ad_ = FluorideApplication?.Performed;
+                        DataType? ad_ = FluorideApplication?.Performed!;
                         object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
                         bool af_ = ae_ is CqlInterval<CqlQuantity>;
                         if (af_)
                         {
-                            DataType? ag_ = FluorideApplication?.Performed;
+                            DataType? ag_ = FluorideApplication?.Performed!;
                             object? ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                            j_ = ah_ as CqlInterval<CqlQuantity?>?;
+                            j_ = ah_ as CqlInterval<CqlQuantity?>;
                         }
                         else
                         {
@@ -218,56 +218,56 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
                 }
             }
             CqlInterval<CqlDateTime?>? k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
-            CqlDateTime? l_ = context.Operators.End(k_);
+            CqlDateTime? l_ = context!.Operators.End(k_);
             CqlInterval<CqlDateTime?>? m_ = this.Measurement_Period(context);
-            bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, "day");
+            bool? n_ = context!.Operators.In<CqlDateTime?>(l_, m_, "day");
             return n_;
         }
 
 
         CqlDate? e_(Procedure? FluorideApplication) {
             object? ai_;
-            DataType? am_ = FluorideApplication?.Performed;
+            DataType? am_ = FluorideApplication?.Performed!;
             object? an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
             bool ao_ = an_ is CqlDateTime;
             if (ao_)
             {
-                DataType? ap_ = FluorideApplication?.Performed;
+                DataType? ap_ = FluorideApplication?.Performed!;
                 object? aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                ai_ = aq_ as CqlDateTime?;
+                ai_ = aq_ as CqlDateTime;
             }
             else
             {
-                DataType? ar_ = FluorideApplication?.Performed;
+                DataType? ar_ = FluorideApplication?.Performed!;
                 object? as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
                 bool at_ = as_ is CqlQuantity;
                 if (at_)
                 {
-                    DataType? au_ = FluorideApplication?.Performed;
+                    DataType? au_ = FluorideApplication?.Performed!;
                     object? av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                    ai_ = av_ as CqlQuantity?;
+                    ai_ = av_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType? aw_ = FluorideApplication?.Performed;
+                    DataType? aw_ = FluorideApplication?.Performed!;
                     object? ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
                     bool ay_ = ax_ is CqlInterval<CqlDateTime>;
                     if (ay_)
                     {
-                        DataType? az_ = FluorideApplication?.Performed;
+                        DataType? az_ = FluorideApplication?.Performed!;
                         object? ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                        ai_ = ba_ as CqlInterval<CqlDateTime?>?;
+                        ai_ = ba_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        DataType? bb_ = FluorideApplication?.Performed;
+                        DataType? bb_ = FluorideApplication?.Performed!;
                         object? bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
                         bool bd_ = bc_ is CqlInterval<CqlQuantity>;
                         if (bd_)
                         {
-                            DataType? be_ = FluorideApplication?.Performed;
+                            DataType? be_ = FluorideApplication?.Performed!;
                             object? bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                            ai_ = bf_ as CqlInterval<CqlQuantity?>?;
+                            ai_ = bf_ as CqlInterval<CqlQuantity?>;
                         }
                         else
                         {
@@ -277,15 +277,15 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
                 }
             }
             CqlInterval<CqlDateTime?>? aj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ai_);
-            CqlDateTime? ak_ = context.Operators.End(aj_);
-            CqlDate? al_ = context.Operators.DateFrom(ak_);
+            CqlDateTime? ak_ = context!.Operators.End(aj_);
+            CqlDate? al_ = context!.Operators.DateFrom(ak_);
             return al_;
         }
 
-        IEnumerable<CqlDate?>? f_ = context.Operators.WhereSelect<Procedure, CqlDate>(c_, d_, e_);
-        IEnumerable<CqlDate?>? g_ = context.Operators.Distinct<CqlDate>(f_);
-        int? h_ = context.Operators.Count<CqlDate>(g_);
-        bool? i_ = context.Operators.GreaterOrEqual(h_, 2);
+        IEnumerable<CqlDate?>? f_ = context!.Operators.WhereSelect<Procedure?, CqlDate?>(c_, d_, e_);
+        IEnumerable<CqlDate?>? g_ = context!.Operators.Distinct<CqlDate?>(f_!);
+        int? h_ = context!.Operators.Count<CqlDate?>(g_);
+        bool? i_ = context!.Operators.GreaterOrEqual(h_, 2);
         return i_;
     }
 
@@ -299,15 +299,15 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     private bool? Stratification_1_Compute(CqlContext context)
     {
         Patient? a_ = this.Patient(context);
-        Date? b_ = a_?.BirthDateElement;
-        string? c_ = b_?.Value;
-        CqlDate? d_ = context.Operators.ConvertStringToDate(c_);
+        Date? b_ = a_?.BirthDateElement!;
+        string? c_ = b_?.Value!;
+        CqlDate? d_ = context!.Operators.ConvertStringToDate(c_);
         CqlInterval<CqlDateTime?>? e_ = this.Measurement_Period(context);
-        CqlDateTime? f_ = context.Operators.Start(e_);
-        CqlDate? g_ = context.Operators.DateFrom(f_);
-        int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        CqlInterval<int?>? i_ = context.Operators.Interval(1, 5, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlDateTime? f_ = context!.Operators.Start(e_);
+        CqlDate? g_ = context!.Operators.DateFrom(f_);
+        int? h_ = context!.Operators.CalculateAgeAt(d_, g_, "year");
+        CqlInterval<int?>? i_ = context!.Operators.Interval(1, 5, true, true);
+        bool? j_ = context!.Operators.In<int?>(h_, i_, (string?)default);
         return j_;
     }
 
@@ -321,15 +321,15 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     private bool? Stratification_2_Compute(CqlContext context)
     {
         Patient? a_ = this.Patient(context);
-        Date? b_ = a_?.BirthDateElement;
-        string? c_ = b_?.Value;
-        CqlDate? d_ = context.Operators.ConvertStringToDate(c_);
+        Date? b_ = a_?.BirthDateElement!;
+        string? c_ = b_?.Value!;
+        CqlDate? d_ = context!.Operators.ConvertStringToDate(c_);
         CqlInterval<CqlDateTime?>? e_ = this.Measurement_Period(context);
-        CqlDateTime? f_ = context.Operators.Start(e_);
-        CqlDate? g_ = context.Operators.DateFrom(f_);
-        int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        CqlInterval<int?>? i_ = context.Operators.Interval(6, 12, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlDateTime? f_ = context!.Operators.Start(e_);
+        CqlDate? g_ = context!.Operators.DateFrom(f_);
+        int? h_ = context!.Operators.CalculateAgeAt(d_, g_, "year");
+        CqlInterval<int?>? i_ = context!.Operators.Interval(6, 12, true, true);
+        bool? j_ = context!.Operators.In<int?>(h_, i_, (string?)default);
         return j_;
     }
 
@@ -343,15 +343,15 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     private bool? Stratification_3_Compute(CqlContext context)
     {
         Patient? a_ = this.Patient(context);
-        Date? b_ = a_?.BirthDateElement;
-        string? c_ = b_?.Value;
-        CqlDate? d_ = context.Operators.ConvertStringToDate(c_);
+        Date? b_ = a_?.BirthDateElement!;
+        string? c_ = b_?.Value!;
+        CqlDate? d_ = context!.Operators.ConvertStringToDate(c_);
         CqlInterval<CqlDateTime?>? e_ = this.Measurement_Period(context);
-        CqlDateTime? f_ = context.Operators.Start(e_);
-        CqlDate? g_ = context.Operators.DateFrom(f_);
-        int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        CqlInterval<int?>? i_ = context.Operators.Interval(13, 20, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlDateTime? f_ = context!.Operators.Start(e_);
+        CqlDate? g_ = context!.Operators.DateFrom(f_);
+        int? h_ = context!.Operators.CalculateAgeAt(d_, g_, "year");
+        CqlInterval<int?>? i_ = context!.Operators.Interval(13, 20, true, true);
+        bool? j_ = context!.Operators.In<int?>(h_, i_, (string?)default);
         return j_;
     }
 

@@ -15,6 +15,7 @@ internal class TypeToCSharpConverter
 {
     private readonly TypeCSharpFormat _typeCSharpFormat;
     private readonly TypeCSharpFormat _declarationCSharpFormat;
+    private readonly TypeCSharpFormat _asTargetCSharpFormat;
     private readonly bool _useCSharpValueTuples = true;
 
     public TypeToCSharpConverter()
@@ -27,6 +28,10 @@ internal class TypeToCSharpConverter
             // appends the '?' itself.
             RendersItsOwnNullOperator = ShouldUseTupleType,
             FormatName = FormatTypeNameAsDeclarationTuple,
+        };
+        _asTargetCSharpFormat = _declarationCSharpFormat with
+        {
+            NoTopLevelNullableReferenceOperator = true,
         };
     }
 
@@ -79,12 +84,7 @@ internal class TypeToCSharpConverter
     /// targets, CS8651).
     /// </summary>
     public string ToCSharpAsTarget(Type type)
-    {
-        var declaration = ToCSharpDeclaration(type);
-        if (!type.IsValueType && declaration.EndsWith("?", StringComparison.Ordinal))
-            return declaration[..^1];
-        return declaration;
-    }
+        => type.ToCSharpString(_asTargetCSharpFormat);
 
     public string GetMemberAccessNullabilityOperator(Type? type)
     {

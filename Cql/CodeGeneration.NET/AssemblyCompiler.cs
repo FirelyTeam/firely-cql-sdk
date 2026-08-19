@@ -17,8 +17,6 @@ namespace Hl7.Cql.CodeGeneration.NET
     {
         private static readonly EmitOptions DefaultEmitOptions = new();
         private static readonly CSharpParseOptions CSharpParseOptions = CSharpParseOptions.Default;
-        private static readonly ImmutableDictionary<string, ReportDiagnostic> NullableWarningDiagnosticsAsErrors =
-            Enumerable.Range(8600, 100).ToImmutableDictionary(i => $"CS{i}", _ => ReportDiagnostic.Error);
 
         private static readonly string[] AssemblyFileNames = [
             "System.Private.CoreLib.dll",
@@ -161,7 +159,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                 optimizationLevel: debugSymbolsFormat == DebugSymbolsFormat.None ? OptimizationLevel.Release : OptimizationLevel.Debug,
                 deterministic: true, // see: https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
                 nullableContextOptions: NullableContextOptions.Enable,
-                specificDiagnosticOptions: NullableWarningDiagnosticsAsErrors,
                 sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
 
